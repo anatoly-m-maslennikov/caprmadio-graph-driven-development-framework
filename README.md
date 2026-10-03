@@ -64,21 +64,20 @@ AI performs delegated work → the Operator retains authority → Evaluations ch
 
 ## Status
 
-The current released version is declared in [version.toml](version.toml). The framework foundation is under active development; this is not yet a complete production toolchain.
+The current framework version is declared in [version.toml](version.toml). The framework foundation is under active development; this is not yet a complete production toolchain.
 
 ## History
 
 Local development began on **13 July 2026 at 03:38 (UTC+4)** with the first project-content commit: `8c1c0ff` added the README. The first methodology documents followed at 03:39 (`1bbcef2`).
 
-The main changes since then:
+DSET Loops started with Domain → Spec + Eval/Test Plan → Implementation → Evaluation → Review → Reconciliation.
 
-- **DSET Loops:** the starting point was Domain → Spec + Eval/Test Plan → Implementation → Evaluation → Review → Reconciliation, supported by authoring and build rules.
-- **CARMADIO → CAPRMEDIO:** the base content roles took shape as CAP, RMED, I and O. Atom, Journal and Projection became distinct artifact forms.
-- **BSEED Atoms → Core Meta-Model:** bootstrap Atoms made the framework's rules explicit. BSEED became obsolete as this work moved into a self-applicable methodology model, with source Atoms and compiled Applicable Methodology.
-- **Explicit ontology and authority:** stable Atom identities, Entities, Subjects, typed relations and CCE clarified the graph. Files remained authoritative; `project_structure.toml` declared Scope Units, while folders and other views materialized that structure.
-- **Planning and execution:** objectives, tasks, epics and backlog stayed within P. O developed reusable Actions, Steps and Workflows; Journal records preserved change and execution history.
-- **A growing harness:** deterministic Atom-management, compilation and validation Tools were added. Tools, Prompts, Apps, MCP and Skills received separate responsibilities; graph services and orchestration remain under development.
-- **3 October 2026:** the first local workflow MCP was implemented and called from Codex, exposing the RMED Atoms Base Revise gather → check → fix workflow with structured results and Journal records.
+Selected version milestones from committed declarations:
+
+- **0.2.0 — 15 July 2026:** the executable DSET toolchain gained skill-policy specifications.
+- **0.3.0–0.3.1 — 15 July 2026:** layered work areas and bootstrap release preparation.
+- **0.3.11 — August 2026:** CARMADIO/CAPRMADIO evolved into CAPRMEDIO. The base CAP, RMED, I and O content roles took shape; Atom, Journal and Projection became distinct artifact forms. BSEED Atoms formalized the bootstrap model.
+- **0.4 — 3 October 2026:** BSEED gave way to the self-applicable Core Meta-Model and compiled Applicable Methodology. Stable Atom identities, Entities, Subjects, typed relations, CCE, explicit Scope Units, planning and reusable Workflows clarified the file-backed graph. Deterministic Tools and the first local RMED Atoms Base Revise MCP provided a working harness, with gather → check → fix, structured results and Journal records. The ontology/base model is explicitly separate from replaceable interfaces and Tools; graph services and orchestration remain under development.
 
 ## Thanks
 
