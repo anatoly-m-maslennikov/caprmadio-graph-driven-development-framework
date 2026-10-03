@@ -8,13 +8,25 @@ subjects:
     - "Atom/Carrier"
     - "Relation"
     - "Single Source of Truth"
-version: 2
-updated_at: "2026-09-22 23:02:20 +0000"
+version: 4
+updated_at: "2026-10-03 00:55:03 +0400"
 relations: {"relates_to": ["CA-R-117", "CA-R-118", "CA-R-1470"]}
+atom_id: "CA-R-1598"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
 # Summary
 
 Keep every Atom self-sufficient
+
+## Scope
+
+Atom Revisions and their applicable Properties.
 
 ## Claim
 
@@ -23,3 +35,5 @@ Keep every Atom self-sufficient
 - the applicable model determines which Properties are required, optional, **or** inapplicable; self-sufficiency does **not** invent missing Properties **or** permit an invalid value.
 - a Relation **to** another Atom remains declared **only** on its registered owning endpoint; the other endpoint **and** inverse views are resolved from that declaration, **not** independently copied.
 - self-sufficiency does **not** require copying the referenced Atom, governing model, **or** inherited Settings authority into this Atom.
+
+## Details

@@ -9,9 +9,18 @@ subjects:
     - "Lineage Impact Analysis"
     - "Operator"
     - "AI Agent"
-version: 4
+version: 6
 updated_at: "2026-09-21 00:57:42 +0000"
 relations: {"child_of":["CA-E-002"]}
+atom_id: "CA-O-058"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Assess revision impact through lineage
 

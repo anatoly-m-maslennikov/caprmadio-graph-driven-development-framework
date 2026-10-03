@@ -17,13 +17,14 @@ subjects:
     - "Atom/Content Role: Evaluation"
     - "Atom/Content Role: Delivery"
     - "Atom/Content Role: Implementation"
-version: 3
+version: 4
 updated_at: "2026-09-24 01:39:33 +0000"
 relations:
   relates_to:
     - CA-O-017
     - CA-O-018
     - CA-R-1559
+global_tier: 11
 ---
 # Summary
 

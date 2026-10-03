@@ -10,6 +10,7 @@ status: Active
 subjects:
   governs: "Atom/Claim/Target Scope Unit"
   depends_on:
+    - "Atom/Revision/Author"
     - "Atom/Claim"
     - "Atom/Scope"
     - "Atom/Subjects"
@@ -18,32 +19,39 @@ subjects:
     - "Operator"
     - "Relational Atom"
     - "Scope Unit"
-version: 2
-updated_at: "2026-09-23 21:40:21 +0000"
+version: 5
+updated_at: "2026-10-02 20:16:06 +0400"
 relations:
   evaluation_for:
-    - CA-D-477
     - CA-D-482
+    - CA-D-495
     - CA-R-1271
     - CA-R-1588
     - CA-R-1595
     - CA-R-1596
     - CA-R-922
     - CA-R-923
+global_tier: 11
 ---
 # Summary
 
-Validate Target Scope Unit and textual Claim Scope
+Validate Target Scope Unit **and** textual Claim Scope
+
+## Scope
+
+the distinction between an Atom's Claim Target Scope Unit **and** its textual applicability.
 
 ## Claim
 
 ### Claim checked
 
-**every** Atom resolves **`=1`** Claim Target Scope Unit; its Claim Scope remains applicability restrictions **in** the Claim text, **not** another structured target **or** metadata Property.
+**every** Atom resolves **`=1`** Claim Target Scope Unit; its Claim Scope remains applicability restrictions **in** the body sections registered by CA-D-495, including Scope for RMED, **not** another structural target **or** frontmatter Property.
+
+## Details
 
 ### Test case
 
-create a Current-scope Atom with its own Scope Unit explicitly carried as target **and** a Claim restricted **to** Python files; repeat with a composite restriction. create a permitted Demand with a different explicit target, a parent-owned Goal for its direct child, an Operator-owned Project Goal with an explicit Project target, **and** a Plan inside nested Hubs. **then** omit the internally required target even **when** filename **or** placement identifies its owner, provide two targets, use a Hub as a target, leave the target unresolved, encode Claim Scope as separate metadata, **or** infer a target **or** ownership change from the textual restriction alone.
+create a Current-scope Atom with its own Scope Unit explicitly carried as target **and** a Claim restricted **to** Python files; repeat with a composite restriction. for RMED, carry those restrictions **in** Scope **and** the qualified contribution **in** Claim. create a permitted Demand with a different explicit target, a parent-owned Goal for its direct child, an external Project Goal with its Author's registered Operator name **and** an explicit Project target, **and** a Plan inside nested Hubs. **then** omit the internally required target even **when** filename **or** placement identifies its owner, provide two targets, use a Hub as a target, leave the target unresolved, duplicate textual applicability **in** frontmatter, **or** infer a target **or** ownership change from the textual restriction alone.
 
 ### Acceptance criteria
 
@@ -51,4 +59,4 @@ valid targets resolve **to** **`=1`** Scope Unit. authoring defaults select **an
 
 ### Failure disposition
 
-report the affected Atom **and** target, ownership, **or** Claim-text distinction; preserve the source **until** an authorized correction is selected.
+report the affected Atom **and** target, ownership, **or** textual-applicability distinction; preserve the source **until** an authorized correction is selected.

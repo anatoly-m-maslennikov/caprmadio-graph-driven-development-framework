@@ -11,9 +11,17 @@ subjects:
     - "Atom/Content Role: Delivery"
     - "Scope Unit"
     - "Atom/Tier/Local Tier"
-version: 2
+version: 4
 updated_at: "2026-09-14 19:40:02 +0400"
 relations: {}
+content_role: "Concern"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "active"
+author: "Anatoly Maslennikov"
+type: "Question"
+global_tier: 11
 ---
 # How many R and D Atoms may govern one Entity?
 

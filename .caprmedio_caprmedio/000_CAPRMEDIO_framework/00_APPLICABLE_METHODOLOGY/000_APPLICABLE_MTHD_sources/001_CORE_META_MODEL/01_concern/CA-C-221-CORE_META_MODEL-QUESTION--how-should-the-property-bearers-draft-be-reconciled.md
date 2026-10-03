@@ -7,9 +7,18 @@ subjects:
     - "Project"
     - "Operator"
 priority: medium
-version: 4
+version: 6
 updated_at: "2026-09-22 20:07:50 +0000"
 relations: {}
+atom_id: "CA-C-221"
+content_role: "Concern"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "active"
+author: "Anatoly Maslennikov"
+type: "Question"
+global_tier: 11
 ---
 # How should the Property bearers draft be reconciled?
 

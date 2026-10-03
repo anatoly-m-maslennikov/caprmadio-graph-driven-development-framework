@@ -18,6 +18,7 @@ def candidates(
     report: dict[str, Any],
     names: set[str] | None,
     domains: dict[str, list[str]],
+    reference_records: list[dict[str, Any]] | None = None,
 ) -> list[tuple[Path, Any]]:
     selected: list[tuple[Path, Any]] = []
     selectors = request["selection"].get("atoms", [])
@@ -28,6 +29,8 @@ def candidates(
             report["selection"]["excluded"].append(record(str(path), {}, "Explicitly excluded."))
             continue
         parsed, metadata = read_candidate(reader, path)
+        if reference_records is not None:
+            reference_records.append(dict(path=path, metadata=metadata, parsed=parsed))
         indices = matching_selectors(str(path), metadata, selectors)
         if selectors and not indices:
             if isinstance(parsed, Exception) and any("atom_id" in s for s in selectors):
@@ -90,7 +93,12 @@ def resolve_matches(
 
 
 def apply_checks(
-    path: Path, parsed: Any, context: Any, reader: ReadContext, report: dict[str, Any]
+    path: Path,
+    parsed: Any,
+    context: Any,
+    reader: ReadContext,
+    report: dict[str, Any],
+    inputs: dict[str, Any] | None = None,
 ) -> None:
     assessment: dict[str, Any] = dict(
         path=str(path),
@@ -114,11 +122,15 @@ def apply_checks(
             report["coverage"]["gaps"].append(gap)
         return
     metadata = parsed.metadata
+    if "projection" not in metadata:
+        assessment["representation"] = "source"
     identity, version = metadata.get("atom_id"), metadata.get("version")
     assessment["atom_id"] = identity if isinstance(identity, str) and identity else None
     assessment["version"] = version if type(version) is int and version > 0 else None
     add_check(assessment, "carrier.parse", [], report, reader)
-    checks = deepcopy(validate_carrier(metadata, parsed.body, context))
+    supplied = dict(inputs or {})
+    supplied.update(path=path, parsed=parsed, reader=reader, assessment=assessment)
+    checks = deepcopy(validate_carrier(metadata, parsed.body, context, supplied))
     findings = checks["findings"]
     for finding in findings:
         finding["path"] = str(path)
@@ -130,6 +142,8 @@ def apply_checks(
     for gap in checks["gaps"]:
         gap["path"] = str(path)
         report["coverage"]["gaps"].append(gap)
+    if any(outcome["code"] == "projection.fidelity" for outcome in checks["outcomes"]):
+        return  # Source-bound adapter already performed (or explicitly withheld) this check.
     try:
         projection_failure = verify_projection(parsed, path, reader, assessment)
         if "projection" in metadata:

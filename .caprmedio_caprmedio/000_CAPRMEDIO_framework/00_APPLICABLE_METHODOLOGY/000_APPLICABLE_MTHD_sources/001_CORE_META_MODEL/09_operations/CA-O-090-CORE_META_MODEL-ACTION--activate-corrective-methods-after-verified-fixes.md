@@ -22,7 +22,7 @@ subjects:
     - "Operator"
     - "Autonomous Confidence Threshold"
     - "Spec"
-version: 3
+version: 4
 updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
@@ -32,6 +32,7 @@ relations:
     - CA-R-1591
     - CA-M-002
     - CA-M-262
+global_tier: 11
 ---
 # Summary
 

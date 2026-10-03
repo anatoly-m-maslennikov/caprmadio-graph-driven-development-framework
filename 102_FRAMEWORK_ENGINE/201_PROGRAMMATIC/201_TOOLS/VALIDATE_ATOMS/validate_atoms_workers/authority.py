@@ -117,6 +117,7 @@ def resolve_context(sources: list[Record]) -> AuthorityContext:
     # remove its source obligation, and unknown sources never vanish from coverage.
     registry: Record = json.loads(Path(__file__).with_name("registry.json").read_text())
     from .checks import ADAPTER_CODES
+    from .support_authority import support_sources
 
     grouped: dict[str, list[Record]] = {}
     for source in sources:
@@ -132,6 +133,12 @@ def resolve_context(sources: list[Record]) -> AuthorityContext:
         obligations.extend(items)
         gaps.extend(missing)
         domains.update(values)
+    # Support definitions are not automatically universal candidate obligations.
+    # Changed or ambiguous support sources still remain visibly unclassified.
+    for atom_id, entry in support_sources().items():
+        candidates = grouped.get(atom_id, [])
+        if len(candidates) == 1 and _verified(candidates[0], entry):
+            grouped.pop(atom_id)
     for atom_id, candidates in sorted(grouped.items()):
         bindings = sorted((s["binding"] for s in candidates), key=_binding_key)
         why = "Unclassified source obligations require review: " + atom_id + "."

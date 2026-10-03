@@ -10,13 +10,32 @@ subjects:
     - "Step"
     - "Implementation"
     - "Carrier"
-version: 3
-updated_at: "2026-09-21 00:57:42 +0000"
+version: 5
+updated_at: "2026-09-29 22:52:10 +0000"
 relations: {"evaluation_for": ["CA-R-1548", "CA-R-1549", "CA-R-1550", "CA-R-1339", "CA-R-1340", "CA-R-1343", "CA-R-1530", "CA-R-1569"]}
+atom_id: "CA-E-498"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate Specification, Change, and Implementation classification
+# Summary
+Validate Specification, Change, and Implementation classification
 
+## Scope
+classification of an Atom by its Content Role.
+
+## Claim
 the classification Evaluation **must** fail **if** an Atom's Content Role does **not** match its actual contribution under the Specification, Change, **and** Implementation definitions.
+
+- use the evaluated Atom's declared Content Role, complete Main Content, **and** applicable Specification, Change, **and** Implementation definitions as the input evidence.
+- compare the declared Content Role with the contribution expressed **in** that Main Content, using the following classification table.
+- report unresolved **when** required evidence is unavailable, unresolved, **or** contradictory; **otherwise**, report pass **if** the declared Content Role matches the observed contribution **and** fail **if** it does **not**.
+- identify the evaluated Atom **and** report the declared Content Role, relevant content excerpt, applicable definition, **and** comparison result.
 
 | Claim contribution | Expected classification |
 |---|---|
@@ -29,3 +48,5 @@ the classification Evaluation **must** fail **if** an Atom's Content Role does *
 | a current realization of accepted specification | Implementation |
 
 reusing the specified content's role as the specification's role **must** fail this check. a long-lived Concern **or** reusable Workflow **must not** fail merely because its lifetime is long.
+
+## Details

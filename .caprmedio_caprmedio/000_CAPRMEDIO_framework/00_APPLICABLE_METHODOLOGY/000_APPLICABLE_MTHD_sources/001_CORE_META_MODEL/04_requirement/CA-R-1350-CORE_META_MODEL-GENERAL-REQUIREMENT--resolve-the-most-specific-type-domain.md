@@ -4,10 +4,28 @@ subjects:
   depends_on:
     - "Subject Expression"
     - "Type"
-version: 7
-updated_at: "2026-09-10 03:38:57 +0400"
+version: 9
+updated_at: "2026-10-02 22:05:04 +0400"
 relations: {}
+atom_id: "CA-R-1350"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Resolve the Most-Specific Type Domain
+# Summary
+
+Resolve the Most-Specific Type Domain
+
+## Scope
+
+the most-specific applicable qualified Type Subject **and** the Entity occurrence's Type Property.
+
+## Claim
 
 the most-specific applicable qualified Type Subject **must** determine the allowed-value set of the Entity occurrence's Type Property.
+
+## Details

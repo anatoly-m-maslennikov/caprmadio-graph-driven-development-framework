@@ -15,24 +15,39 @@ subjects:
     - "Hub Atom"
     - "Scope Unit"
     - "Autonomous Confidence Threshold"
-version: 4
-updated_at: "2026-09-22 23:02:20 +0000"
+version: 7
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-R-1574", "CA-R-1575", "CA-R-1576", "CA-R-1577", "CA-R-1581", "CA-R-1599", "CA-R-1583", "CA-R-1584", "CA-R-1587", "CA-R-1588", "CA-R-1589", "CA-M-306", "CA-D-470"]}
+atom_id: "CA-E-501"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
 # Summary
 
 Validate common Plan authoring
 
+## Scope
+
+Plan authoring under the common model.
+
 ## Claim
 
 the Plan authoring Evaluation **must** reject **any** Plan that violates the common model.
+
+## Details
 
 ### cases
 
 - accept a standalone file-backed Plan, a file-backed Hub with decomposed work **and** an optional directory, **and** a Plan with both own work **and** decomposition. reject a folder-only Plan.
 - reject a Summary-only Plan with no own work **and** no decomposition; do **not** complete it by an empty all-of test.
-- require **=1** Claim **and** effective Author; require **=1** effective Assignee for own work, but **not** for a pure Hub.
-- require **`=1`** observable, decidable Definition of Done **in** **every** Plan Markdown file, including a pure Hub. reject its absence.
+- require **`=1`** intended work **or** outcome Claim **in** Objective **and** **`=1`** effective Author; require **`=1`** effective Assignee for own work, but **not** for a pure Hub.
+- require **`=1`** observable, decidable Definition of Done under `### Definition of Done` inside Details **in** **every** Plan Markdown file, including a pure Hub. reject its absence.
 - accept an atomic **or** explicitly grouped composite falsification expression; reject ambiguity **or** Details that introduce independent work **or** another completion claim.
 - mark Done **only** **when** own work is complete, **all** directly decomposed Plans are Done, **and** its falsification expression is false. reject Canceled **or** Archived decomposition as completed work.
 - change **only** the Label among Version, Objective, Epic, Task, **and** Subtask: authoring admission **and** completion **must** remain unchanged. reject treating those Labels as authoring Subtypes.

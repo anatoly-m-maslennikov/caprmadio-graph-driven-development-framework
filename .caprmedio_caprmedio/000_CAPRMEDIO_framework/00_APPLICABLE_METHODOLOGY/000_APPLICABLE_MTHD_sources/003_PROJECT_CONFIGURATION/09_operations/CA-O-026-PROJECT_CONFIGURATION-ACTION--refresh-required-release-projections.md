@@ -11,7 +11,7 @@ subjects:
     - "Applicable Methodology"
     - "Atom/Claim"
     - "Atom/Content Role: Delivery"
-version: 3
+version: 5
 updated_at: "2026-09-18 14:16:20 +0000"
 relations:
   relates_to:
@@ -19,6 +19,15 @@ relations:
     - "CA-O-010"
     - "CA-O-011"
     - "CA-R-1460"
+atom_id: "CA-O-026"
+content_role: "Operations"
+current_scope_unit: "PROJECT_CONFIGURATION"
+claim_target_scope_unit: "PROJECT_CONFIGURATION"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Refresh required release Projections
 

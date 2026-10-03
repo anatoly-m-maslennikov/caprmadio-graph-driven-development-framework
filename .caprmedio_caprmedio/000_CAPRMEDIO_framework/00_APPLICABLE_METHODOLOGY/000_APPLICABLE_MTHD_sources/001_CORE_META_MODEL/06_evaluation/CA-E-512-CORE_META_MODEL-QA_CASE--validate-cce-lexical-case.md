@@ -20,27 +20,34 @@ subjects:
     - "Governed Term"
     - "Markdown Atom Carrier/Main Content/CCE Operator"
     - "Scope Unit/Name"
-version: 2
-updated_at: "2026-09-23 21:40:21 +0000"
+version: 3
+updated_at: "2026-10-02 20:25:13 +0400"
 relations:
   evaluation_for:
     - CA-D-280
     - CA-M-229
     - CA-M-234
+global_tier: 11
 ---
 # Summary
 
 Validate CCE lexical case
 
+## Scope
+
+CCE Claims evaluated for lexical case and Markdown operator representation.
+
 ## Claim
 
 ### Claim checked
 
-**every** CCE Claim satisfies the lexical-case Method CA-M-229 **and** the Markdown operator representation specified by CA-D-280.
+**every** CCE Claim satisfies the lexical-case Method CA-M-229-CORE_META_MODEL--render-governed-terms-and-cce-operators-distinctly **and** the Markdown operator representation specified by CA-D-280-CORE_META_MODEL-DELIVERY--serialize-cce-operators-in-bold.
+
+## Details
 
 ### Test case
 
-- identify the tested CCE version, applicable CCE Operator Registry under CA-M-234, **and** exact Revisions of the checked authority. record the fixtures **and** their expected results.
+- identify the tested CCE version, applicable CCE Operator Registry under CA-M-234-CORE_META_MODEL--register-expandable-canonical-cce-operator-list, **and** exact Revisions of the checked authority. record the fixtures **and** their expected results.
 - create valid fixtures with ordinary English words at sentence **and** list-item starts. include ordinary words that are **not** named Terms.
 - create valid fixtures beginning with a Governed Term, a General Term, an exact Scope Unit Name, **and** an exact registered reference. preserve the case required for the token rather than changing it because of its sentence **or** list position.
 - use **every** registered word-form CCE Operator **in** a valid context at sentence-initial **and** sentence-internal positions **where** the applicable grammar admits that position. include whole multiword forms such as **must not**, **not in**, **is not empty**, **starts with**, **and** **ends with**.

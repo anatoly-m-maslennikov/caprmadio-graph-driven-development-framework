@@ -21,9 +21,18 @@ subjects:
     - "Operator"
     - "Applicable Methodology/Source Frontier Digest"
     - "Journal/Record"
-version: 8
+version: 10
 updated_at: "2026-09-18 14:16:20 +0000"
 relations: {}
+atom_id: "CA-O-011"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Workflow"
+global_tier: 11
 ---
 # Bind source reconciliation to Applicable Methodology
 

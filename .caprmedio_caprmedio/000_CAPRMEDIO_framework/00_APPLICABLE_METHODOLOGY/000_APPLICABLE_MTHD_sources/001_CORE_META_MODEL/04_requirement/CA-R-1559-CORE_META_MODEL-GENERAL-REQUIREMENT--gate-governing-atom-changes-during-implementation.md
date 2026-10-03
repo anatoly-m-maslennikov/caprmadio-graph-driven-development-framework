@@ -16,11 +16,27 @@ subjects:
     - "Atom/Content Role: Delivery"
     - "Project"
     - "Implementation Workflow"
-version: 3
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 5
+updated_at: "2026-10-03 00:22:56 +0400"
 relations: {"child_of":["CA-M-261"],"relates_to":["CA-R-1591","CA-R-1552","CA-R-1080","CA-M-262"]}
+atom_id: "CA-R-1559"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Gate governing Atom changes during implementation
+# Summary
+
+Gate governing Atom changes during implementation
+
+## Scope
+
+changes to governing RMED Atoms during implementation.
+
+## Claim
 
 authorization **to** change a governing RMED Atom during implementation **must** satisfy the following Actor policy:
 
@@ -31,3 +47,5 @@ authorization **to** change a governing RMED Atom during implementation **must**
 - a prohibition remains a prohibition; authorship **or** confidence **must not** create permission.
 - a missing **or** unresolved Author **must not** be treated as proof of AI authorship; apply the Author default under CA-R-1080.
 - an authorized RMED change establishes a new baseline under CA-M-262, **and** the applicable work **and** Evaluations **must** be resolved again against it.
+
+## Details

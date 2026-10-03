@@ -8,9 +8,12 @@ from .authority import AuthorityContext, Obligation, Record, diagnostic
 
 
 class Check:
-    def __init__(self, obligation: Obligation, context: AuthorityContext) -> None:
+    def __init__(
+        self, obligation: Obligation, context: AuthorityContext, inputs: Record | None = None
+    ) -> None:
         self.obligation = obligation
         self.context = context
+        self.inputs: Record = inputs or {}
         self.findings: list[Record] = []
         self.gaps: list[Record] = []
         self.applicable = True

@@ -3,10 +3,28 @@ subjects:
   governs: "Artifact"
   depends_on:
     - "Entity"
-version: 8
-updated_at: 2026-09-06 01:45:12 +0400
+version: 11
+updated_at: "2026-10-02 21:45:33 +0400"
 relations: {}
+atom_id: "CA-R-1262"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Keep Entity and Artifact Distinct
+# Summary
+
+Keep Entity and Artifact Distinct
+
+## Scope
+
+the distinction between Artifact and Entity.
+
+## Claim
 
 Artifact **must not** be equivalent **to** Entity.
+
+## Details

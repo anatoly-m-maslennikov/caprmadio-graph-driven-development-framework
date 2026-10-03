@@ -1,0 +1,119 @@
+[
+  {
+    "file": "valid.md",
+    "required_failed_checks": [],
+    "body_check": "passed"
+  },
+  {
+    "file": "valid-composite.md",
+    "required_failed_checks": [],
+    "body_check": "passed"
+  },
+  {
+    "file": "missing-scope.md",
+    "required_failed_checks": [
+      "properties"
+    ],
+    "required_blocked_checks": ["scope", "details", "governed_entity", "alignment", "summary"],
+    "body_check": "failed"
+  },
+  {
+    "file": "multiple-claims.md",
+    "required_failed_checks": [
+      "claim",
+      "governed_entity"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "details-widen-scope.md",
+    "required_failed_checks": [
+      "details"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "details-add-obligation.md",
+    "required_failed_checks": [
+      "details",
+      "governed_entity"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "wrong-governed-entity.md",
+    "required_failed_checks": [
+      "subjects",
+      "governed_entity"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "missing-prerequisite.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "retired-property.md",
+    "required_failed_checks": [
+      "properties"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "plain-operator.md",
+    "required_failed_checks": [
+      "cce"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "wrong-content-role.md",
+    "required_failed_checks": [
+      "content_role"
+    ],
+    "body_check": "passed"
+  },
+  {
+    "file": "summary-only-entity.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed",
+    "coverage_location": "Summary"
+  },
+  {
+    "file": "details-only-entity.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed",
+    "coverage_location": "Details"
+  },
+  {
+    "file": "table-only-entity.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed",
+    "coverage_location": "Details table"
+  },
+  {
+    "file": "extra-dependency.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed",
+    "coverage_location": "subjects"
+  },
+  {
+    "file": "duplicate-governs-dependency.md",
+    "required_failed_checks": [
+      "subjects"
+    ],
+    "body_check": "passed",
+    "coverage_location": "subjects"
+  }
+]

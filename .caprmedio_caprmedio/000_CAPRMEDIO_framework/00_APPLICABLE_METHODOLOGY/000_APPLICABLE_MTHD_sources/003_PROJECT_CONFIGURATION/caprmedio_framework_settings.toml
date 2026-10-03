@@ -15,3 +15,7 @@ semantics = "strict"
 [interaction]
 # Operator-selected instance default.
 reporting_mode = "silent"
+
+[rmed_review]
+# Operator-selected context threshold: use up to 90%, reserve 10% for handoff.
+context_headroom_fraction = 0.10

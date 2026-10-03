@@ -17,7 +17,7 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan"
     - "Operator"
     - "AI Agent"
-version: 1
+version: 2
 updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
@@ -25,6 +25,7 @@ relations:
     - CA-R-1559
     - CA-R-1591
     - CA-M-002
+global_tier: 11
 ---
 # Summary
 

@@ -10,13 +10,22 @@ subjects:
     - "Project Structure"
     - "Projection"
     - "Artifact/Carrier"
-version: 2
+version: 4
 updated_at: "2026-09-17 05:05:05 +0000"
 relations:
   child_of:
     - CA-R-1052
   relates_to:
     - CA-M-279
+atom_id: "CA-O-052"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Resolve Project and Framework Settings before derived structure
 

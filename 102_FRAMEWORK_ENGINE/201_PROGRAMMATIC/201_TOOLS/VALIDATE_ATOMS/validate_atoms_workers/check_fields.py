@@ -12,8 +12,13 @@ from .check_support import Check, _integer, _string, _strings
 
 def _common(metadata: Record, body: str, check: Check) -> None:
     del body
-    for field in ("content_role", "type", "current_scope_unit"):
+    for field in ("content_role", "current_scope_unit"):
         check.require(metadata, field, _string)
+    role = metadata.get("content_role")
+    if "type" in metadata:
+        check.require(metadata, "type", _string)
+    elif role not in ("Requirement", "Method", "Delivery"):
+        check.require(metadata, "type", _string)
     check.require(metadata, "global_tier", _integer)
     if metadata.get("type") == "Goal":
         check.gap("local_tier", "Project Goal admission is required to decide Local Tier presence.")

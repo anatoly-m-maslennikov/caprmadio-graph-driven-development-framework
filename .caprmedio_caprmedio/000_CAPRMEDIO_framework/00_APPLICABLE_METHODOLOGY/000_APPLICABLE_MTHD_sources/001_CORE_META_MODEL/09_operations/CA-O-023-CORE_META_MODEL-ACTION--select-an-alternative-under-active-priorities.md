@@ -1,5 +1,5 @@
 ---
-version: 3
+version: 5
 updated_at: "2026-09-17 02:26:06 +0000"
 relations:
   child_of:
@@ -15,6 +15,15 @@ subjects:
     - "Resolve Operator Priorities"
     - "Project/priority model application"
     - "Project/lexicographic selection"
+atom_id: "CA-O-023"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Select an alternative under active priorities
 

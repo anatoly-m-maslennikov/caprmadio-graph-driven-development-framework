@@ -9,13 +9,32 @@ subjects:
     - "Artifact/Revision"
     - "Journal"
     - "Operator"
-version: 3
-updated_at: "2026-09-21 00:57:42 +0000"
+version: 5
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-R-1525"]}
+atom_id: "CA-E-494"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate Workflow Run definition bindings
+# Summary
+
+Validate Workflow Run definition bindings
+
+## Scope
+
+a Workflow Run's declared definition bindings **and** revalidation evidence.
+
+## Claim
 
 the Evaluation **must** check a Workflow Run's declared definition bindings **and** revalidation evidence under CA-R-1525.
+
+## Details
 
 - a Run **and** its Step Runs identify their exact admitted Workflow graph, Step Atom, **and** Action Revisions: accept this binding evidence.
 - change, withdraw, **or** make a bound definition unavailable **before** another dispatch **or** recovery: require a pause for revalidation, **not** silent use of a different Revision.

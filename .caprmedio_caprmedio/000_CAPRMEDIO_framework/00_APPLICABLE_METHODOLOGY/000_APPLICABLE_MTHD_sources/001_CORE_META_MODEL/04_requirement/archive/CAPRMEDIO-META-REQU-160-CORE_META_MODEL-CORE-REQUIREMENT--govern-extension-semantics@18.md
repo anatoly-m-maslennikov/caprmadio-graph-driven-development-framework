@@ -1,0 +1,28 @@
+---
+subjects:
+  governs: "Extension"
+  depends_on:
+    - "Methodology Source"
+    - "Core Meta-Model"
+    - "Project Configuration"
+version: 18
+updated_at: "2026-09-17 13:15:34 +0000"
+relations:
+  child_of:
+    - CA-R-831-CORE-REQUIREMENT--add-reusable-capabilities-through-extensions
+    - CAPRMEDIO-REQU-686-CORE-REQUIREMENT--separate-core-extension-and-project-configuration-authority
+atom_id: "CAPRMEDIO-META-REQU-160"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Requirement"
+global_tier: 9
+---
+# Govern extension semantics
+
+an Extension **must** provide a reusable, independently governed, optional package of capability contributions. its authority **and** evolution remain distinct from Core Meta-Model **and** Project Configuration authority.
+
+this packaging requirement does **not** establish another Entity classification: the Extension definition **and** its permitted expansion boundary remain governed by CA-R-1217.

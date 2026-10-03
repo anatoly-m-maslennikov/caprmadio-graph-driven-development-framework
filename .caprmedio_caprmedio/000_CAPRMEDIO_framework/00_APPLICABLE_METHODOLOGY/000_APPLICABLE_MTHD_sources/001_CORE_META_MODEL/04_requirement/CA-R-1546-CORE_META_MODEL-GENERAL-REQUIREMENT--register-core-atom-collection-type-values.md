@@ -5,10 +5,28 @@ subjects:
     - "Atom Collection/Type"
     - "Atom Collection/Type: Ad Hoc"
     - "Atom/Content Role: Plan/Type: Plan/Label"
-version: 3
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 5
+updated_at: "2026-10-03 00:06:54 +0400"
 relations: {"relates_to": ["CA-R-1381", "CA-R-1576"]}
+atom_id: "CA-R-1546"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Register Core Atom Collection Type Values
+# Summary
+
+Register Core Atom Collection Type Values
+
+## Scope
+
+the Core contribution **to** allowed values of `Atom Collection/Type`.
+
+## Claim
 
 the Core contribution **to** allowed values of `Atom Collection/Type` **must** be (Ad Hoc); a Version, Objective, **or** Epic Label on a Plan **must not** create an independent Atom Collection Type.
+
+## Details

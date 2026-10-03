@@ -12,12 +12,21 @@ subjects:
     - "Confidence Threshold"
     - "Operator"
     - "AI Agent"
-version: 3
+version: 5
 updated_at: "2026-09-17 05:05:28 +0000"
 relations:
   child_of:
     - CA-M-115
     - CA-R-380
+atom_id: "CA-O-053"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Migrate Atoms to a current CCE version
 

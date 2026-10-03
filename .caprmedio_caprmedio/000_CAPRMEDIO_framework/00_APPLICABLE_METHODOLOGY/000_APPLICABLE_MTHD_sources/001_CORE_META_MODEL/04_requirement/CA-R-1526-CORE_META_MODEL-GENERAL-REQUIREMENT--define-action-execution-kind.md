@@ -6,13 +6,31 @@ subjects:
     - "AI Agent"
     - "Tool"
     - "Operator"
-version: 2
-updated_at: "2026-09-20 15:47:25 +0000"
+version: 4
+updated_at: "2026-10-03 00:06:54 +0400"
 relations: {"relates_to": ["CA-R-1452"]}
+atom_id: "CA-R-1526"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Define Action Execution Kind
+# Summary
+
+Define Action Execution Kind
+
+## Scope
+
+the distinction between execution by code **and** execution requiring AI Agent judgment for an Action's declared responsibility.
+
+## Claim
 
 Action Execution Kind **means** the distinction between execution by code **and** execution requiring AI Agent judgment for an Action's declared responsibility.
+
+## Details
 
 - Programmatic: code performs the Action according **to** its specified behavior, **without** delegating interpretation **or** judgment **to** an AI Agent. programmatic interaction with the Operator does **not** by itself make the Action Agentic.
 - Agentic: an AI Agent interprets the supplied context **and** instructions **to** perform the Action. the AI Agent **may** call Tools within its admitted authority.

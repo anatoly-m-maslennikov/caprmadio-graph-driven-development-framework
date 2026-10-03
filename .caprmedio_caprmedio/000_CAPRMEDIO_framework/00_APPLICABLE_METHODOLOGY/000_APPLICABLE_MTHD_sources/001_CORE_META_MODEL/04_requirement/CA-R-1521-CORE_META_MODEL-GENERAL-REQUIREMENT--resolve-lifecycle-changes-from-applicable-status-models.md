@@ -12,13 +12,31 @@ subjects:
     - "Scope Unit"
     - "Atom Collection"
     - "Carrier"
-version: 2
-updated_at: "2026-09-18 21:23:47 +0000"
+version: 4
+updated_at: "2026-10-03 00:01:51 +0400"
 relations: {"relates_to": ["CA-R-1519"]}
+atom_id: "CA-R-1521"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Resolve lifecycle changes from applicable Status models
+# Summary
+
+Resolve lifecycle changes from applicable Status models
+
+## Scope
+
+Workflows that change an Entity's Status.
+
+## Claim
 
 a Workflow for changing an Entity's Status **must** admit **any** requested Status allowed by that Entity's applicable status model **and** transition rules, rather than a fixed list built into the Workflow.
+
+## Details
 
 - resolve the model using the actual Entity kind **and**, for an Atom, its qualified Content Role **and** Type.
 - apply the same model-driven rule **to** a Scope Unit **or** Atom Collection **when** a status model is defined for it.

@@ -11,9 +11,18 @@ subjects:
     - "Workflow"
     - "Workflow Run"
     - "Operator"
-version: 3
-updated_at: "2026-09-18 21:51:53 +0000"
+version: 6
+updated_at: "2026-09-28 06:30:40 +0400"
 relations: {"relates_to": ["CA-R-1432", "CA-R-1464", "CA-M-303", "CA-R-1520"]}
+atom_id: "CA-O-067"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Assess Atom update identity
 
@@ -28,7 +37,7 @@ Assess Atom Update Identity **means** the reusable read-only Action that compare
 
 | Condition | Returned result |
 |---|---|
-| the applicable change class preserves identity | the admitted change class, target Revision, proposed result, **and** assessment evidence; no presumed authorization **or** persistence |
+| the applicable change class preserves identity | the admitted change class, proposed result, **and** assessment evidence; `carrier_only` **and** equivalent `refinement` retain the target Version while refreshing Updated At, while `semantic_revision` returns the next target Revision; no presumed authorization **or** persistence |
 | replacement is required, including **any** change of Summary value | replacement required, with the target Revision, proposed result, classification reason, **and** assessment evidence |
 | evidence **or** classification is uncertain | unresolved, with the missing evidence **or** required Operator decision; no presumed update **or** replacement approval |
 

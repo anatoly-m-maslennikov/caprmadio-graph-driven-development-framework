@@ -11,13 +11,32 @@ subjects:
     - "Atom Change Classification"
     - "Workflow Run"
     - "Operator"
-version: 3
-updated_at: "2026-09-18 21:51:53 +0000"
+version: 5
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-O-067", "CA-M-303", "CA-R-1432", "CA-R-1464", "CA-R-1520"]}
+atom_id: "CA-E-491"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate update-to-replacement routing
+# Summary
+
+Validate update-to-replacement routing
+
+## Scope
+
+an update Workflow's routing of CA-O-067 assessment results.
+
+## Claim
 
 the Evaluation **must** check that an update Workflow owns the routing of CA-O-067 assessment results under CA-M-303.
+
+## Details
 
 - call the assessment Action **without** a continuation binding: require a read-only classification result, **not** a selected next Step, ended Workflow Run, **or** dispatched successor.
 - supply a valid identity-preserving proposal: the caller follows its declared update path **and** remaining checks rather than treating assessment as completed persistence.

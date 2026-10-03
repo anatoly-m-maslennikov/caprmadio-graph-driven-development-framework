@@ -1,0 +1,275 @@
+# Authoritative Project Structure; Project identity is in Project Settings.
+# Reconstructed from Operator-approved evidence on 2026-09-26.
+# Explicit native bindings preserve existing source and delivery locations.
+# APPLICABLE_METHODOLOGY is a Scope Unit; its delivered Projection is not authority.
+# Its authority folder is separately declared and need not yet be materialized.
+# This restoration covers the recovered units, the ordered methodology branch,
+# and the Operator-confirmed PROMPTS unit at its existing native paths.
+# Additional descendant declarations are still being reconciled; do not infer them from folders.
+schema_version = 1
+
+[[scope_units]]
+scope_unit_name = "DISCOVER_TOOLS"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/DISCOVER_TOOLS"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/DISCOVER_TOOLS"
+
+[[scope_units]]
+scope_unit_name = "DISCOVER_OPERATIONS"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/DISCOVER_OPERATIONS"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/DISCOVER_OPERATIONS"
+
+[[scope_units]]
+scope_unit_name = "GET_EXECUTION_CONTEXT"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 3
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/GET_EXECUTION_CONTEXT"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GET_EXECUTION_CONTEXT"
+
+[[scope_units]]
+scope_unit_name = "GET_EXECUTION_STATUS"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 4
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/GET_EXECUTION_STATUS"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GET_EXECUTION_STATUS"
+
+[[scope_units]]
+scope_unit_name = "RESUME_EXECUTION_CONTEXT"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 5
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/RESUME_EXECUTION_CONTEXT"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RESUME_EXECUTION_CONTEXT"
+
+[[scope_units]]
+scope_unit_name = "WATCH_EXECUTION"
+parent = "TOOLS"
+scope_unit_type = "Unordered"
+scope_unit_label = "TOOL"
+structural_level = 4
+navigational_order_number = 6
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/WATCH_EXECUTION"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/WATCH_EXECUTION"
+
+[[scope_units]]
+scope_unit_name = "FRAMEWORK_METHODOLOGY"
+parent = "PROJECT"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 1
+local_order = 1
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY"
+delivery_path = "101_FRAMEWORK_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "METHODOLOGY_SOURCES"
+parent = "FRAMEWORK_METHODOLOGY"
+scope_unit_type = "Ordered"
+scope_unit_label = "SUPERLAYER"
+structural_level = 2
+local_order = 1
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "CORE_META_MODEL"
+parent = "METHODOLOGY_SOURCES"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 3
+local_order = 1
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "INSTALLED_EXTENSIONS"
+parent = "METHODOLOGY_SOURCES"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 3
+local_order = 2
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/002_INSTALLED_EXTENSIONS"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "PROJECT_CONFIGURATION"
+parent = "METHODOLOGY_SOURCES"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 3
+local_order = 3
+navigational_order_number = 3
+authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "APPLICABLE_METHODOLOGY"
+parent = "FRAMEWORK_METHODOLOGY"
+scope_unit_type = "Ordered"
+scope_unit_label = "SUPERLAYER"
+structural_level = 2
+local_order = 2
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/202_SUPERLAYER_2_APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+authority_mode = "strict"
+
+[[scope_units]]
+scope_unit_name = "FRAMEWORK_ENGINE"
+parent = "PROJECT"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 1
+local_order = 2
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE"
+delivery_path = "102_FRAMEWORK_ENGINE"
+
+[[scope_units]]
+scope_unit_name = "PROGRAMMATIC"
+parent = "FRAMEWORK_ENGINE"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 2
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC"
+
+[[scope_units]]
+scope_unit_name = "TOOLS"
+parent = "PROGRAMMATIC"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 3
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS"
+
+[[scope_units]]
+scope_unit_name = "APPS"
+parent = "PROGRAMMATIC"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 3
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS"
+
+[[scope_units]]
+scope_unit_name = "MCP"
+parent = "PROGRAMMATIC"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 3
+navigational_order_number = 3
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP"
+delivery_path = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP"
+
+[[scope_units]]
+scope_unit_name = "AGENTIC"
+parent = "FRAMEWORK_ENGINE"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 2
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC"
+delivery_path = "102_FRAMEWORK_ENGINE/202_AGENTIC"
+
+[[scope_units]]
+scope_unit_name = "SKILLS"
+parent = "AGENTIC"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 3
+navigational_order_number = 1
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS"
+delivery_path = "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS"
+
+[[scope_units]]
+scope_unit_name = "PROMPTS"
+parent = "AGENTIC"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 3
+navigational_order_number = 2
+authority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS"
+delivery_path = "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS"
+
+[[scope_units]]
+scope_unit_name = "OPERATOR_DOCUMENTATION"
+parent = "PROJECT"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 1
+local_order = 3
+navigational_order_number = 3
+authority_path = ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION"
+delivery_path = "103_OPERATOR_DOCUMENTATION"
+
+[[scope_units]]
+scope_unit_name = "CORE_EXTENSIONS"
+parent = "PROJECT"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 1
+local_order = 4
+navigational_order_number = 4
+authority_path = ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS"
+delivery_path = "104_CORE_EXTENSIONS"
+
+[[scope_units]]
+scope_unit_name = "RELEASES"
+parent = "PROJECT"
+scope_unit_type = "Ordered"
+scope_unit_label = "LAYER"
+structural_level = 1
+local_order = 5
+navigational_order_number = 5
+authority_path = ".caprmedio_caprmedio/105_LAYER_5_RELEASES"
+delivery_path = "105_RELEASES"
+
+[[scope_units]]
+scope_unit_name = "COMMUNITY_EXTENSIONS"
+parent = "PROJECT"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 1
+navigational_order_number = 10
+authority_path = ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS"
+delivery_path = "110_COMMUNITY_EXTENSIONS"
+
+[[scope_units]]
+scope_unit_name = "FIELD"
+parent = "PROJECT"
+scope_unit_type = "Unordered"
+scope_unit_label = "FEATURE"
+structural_level = 1
+navigational_order_number = 10
+authority_path = ".caprmedio_caprmedio/110_FEATURE_FIELD"
+delivery_path = "110_FIELD"

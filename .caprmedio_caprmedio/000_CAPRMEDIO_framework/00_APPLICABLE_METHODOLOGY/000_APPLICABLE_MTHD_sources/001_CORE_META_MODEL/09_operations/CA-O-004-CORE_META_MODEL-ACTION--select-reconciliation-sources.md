@@ -6,9 +6,18 @@ subjects:
     - "Projection/Type: Reconciled Projection"
     - "Artifact/Revision"
     - "Atom/Claim"
-version: 3
+version: 5
 updated_at: "2026-09-14 01:36:43 +0400"
 relations: {}
+atom_id: "CA-O-004"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Select reconciliation sources
 

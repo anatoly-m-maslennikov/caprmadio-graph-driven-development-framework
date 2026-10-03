@@ -480,6 +480,277 @@ def _git_show_bytes(root: Path, revision: str, relative: str) -> bytes | None:
     raise ToolError("git-command-failed", message.strip() or "cannot inspect Git carrier")
 
 
+def _recovery_event_ids(raw: Sequence[str]) -> list[str]:
+    event_ids = list(raw)
+    if not event_ids or any(not isinstance(event_id, str) or not HEX64.fullmatch(event_id) for event_id in event_ids):
+        raise ToolError("invalid-recovery", "recovery requires a non-empty list of full Journal event IDs")
+    if len(set(event_ids)) != len(event_ids):
+        raise ToolError("invalid-recovery", "recovery event IDs must be unique")
+    return event_ids
+
+
+def _recovery_commit(root: Path, revision: str) -> str:
+    if not isinstance(revision, str) or not HEX40.fullmatch(revision):
+        raise ToolError("invalid-recovery", "recovery requires a full committed Git SHA")
+    resolved = _git_text(root, "rev-parse", "--verify", f"{revision}^{{commit}}")
+    if resolved != revision:
+        raise ToolError("invalid-recovery", "recovery revision must be canonical and unambiguous")
+    checked = subprocess.run(
+        ["git", "-C", str(root), "merge-base", "--is-ancestor", revision, "HEAD"],
+        capture_output=True,
+        check=False,
+    )
+    if checked.returncode == 1:
+        raise ToolError("recovery-commit-not-ancestor", "recovery commit is not an ancestor of HEAD")
+    if checked.returncode != 0:
+        raise ToolError("git-command-failed", checked.stderr.decode("utf-8", errors="replace").strip() or "cannot verify recovery commit ancestry")
+    return resolved
+
+
+def _recovery_regular_file(root: Path, path: Path, field: str) -> tuple[Path, str]:
+    """Reject symlinks and escape before using historical recovery evidence."""
+    try:
+        relative = path.relative_to(root)
+    except ValueError as error:
+        raise ToolError("invalid-recovery-path", f"{field} lies outside the repository") from error
+    if path.is_symlink() or not path.is_file():
+        raise ToolError("invalid-recovery-path", f"{field} must be a regular file")
+    probe = root
+    for part in relative.parts:
+        probe = probe / part
+        if probe.is_symlink():
+            raise ToolError("invalid-recovery-path", f"{field} must not traverse a symlink")
+    try:
+        path.resolve(strict=True).relative_to(root.resolve(strict=True))
+    except (OSError, ValueError) as error:
+        raise ToolError("invalid-recovery-path", f"{field} escapes the repository") from error
+    return path, relative.as_posix()
+
+
+def _recovery_result_file(root: Path, relative: object) -> tuple[Path, str]:
+    if not isinstance(relative, str) or not relative:
+        raise ToolError("invalid-recovery", "completed Journal result has no safe carrier path")
+    candidate = Path(relative)
+    if candidate.is_absolute() or ".." in candidate.parts or candidate.as_posix() in {"", "."}:
+        raise ToolError("invalid-recovery-path", "completed Journal result path is unsafe")
+    return _recovery_regular_file(root, root / candidate, "completed Journal result carrier")
+
+
+def _recovery_rows_from_current_journal(root: Path, event_ids: Sequence[str]) -> dict[str, list[dict[str, Any]]]:
+    journal_root = root / configured_repository_paths(root).journal_root
+    if journal_root.is_symlink() or not journal_root.is_dir():
+        raise ToolError("invalid-recovery-path", "configured Work Journal root is unavailable or unsafe")
+    wanted = set(event_ids)
+    rows: dict[str, list[dict[str, Any]]] = {event_id: [] for event_id in event_ids}
+    for carrier in sorted(journal_root.rglob("*.ndjson")):
+        current, relative = _recovery_regular_file(root, carrier, "current Work Journal carrier")
+        for line_number, line in enumerate(current.read_bytes().splitlines(keepends=True), start=1):
+            if not line:
+                continue
+            try:
+                raw = json.loads(line)
+            except json.JSONDecodeError as error:
+                raise ToolError("journal-syntax-invalid", f"{relative}:{line_number} is not valid NDJSON") from error
+            if not isinstance(raw, Mapping) or raw.get("event_id") not in wanted:
+                continue
+            event = _validate_event(raw)
+            rows[str(event["event_id"])].append(
+                {"path": relative, "line": line_number, "bytes": line, "event": event}
+            )
+    return rows
+
+
+def _recovery_rows_from_commit(root: Path, revision: str, event_ids: Sequence[str]) -> dict[str, list[dict[str, Any]]]:
+    journal_root = configured_repository_paths(root).journal_root
+    wanted = set(event_ids)
+    rows: dict[str, list[dict[str, Any]]] = {event_id: [] for event_id in event_ids}
+    paths = [path for path in _git_text(root, "ls-tree", "-r", "--name-only", revision, "--", journal_root).splitlines() if path.endswith(".ndjson")]
+    for relative in paths:
+        data = _git_show_bytes(root, revision, relative)
+        if data is None:
+            raise ToolError("recovery-commit-mismatch", "committed Work Journal carrier disappeared during verification")
+        for line_number, line in enumerate(data.splitlines(keepends=True), start=1):
+            if not line:
+                continue
+            try:
+                raw = json.loads(line)
+            except json.JSONDecodeError as error:
+                raise ToolError("journal-syntax-invalid", f"{relative}:{line_number} is not valid NDJSON in recovery commit") from error
+            if not isinstance(raw, Mapping) or raw.get("event_id") not in wanted:
+                continue
+            event = _validate_event(raw)
+            rows[str(event["event_id"])].append(
+                {"path": relative, "line": line_number, "bytes": line, "event": event}
+            )
+    return rows
+
+
+def _recovery_live_lease(root: Path, action_id: str, event_ids: Sequence[str]) -> dict[str, Any] | None:
+    path = _lease_path(root)
+    if not path.exists():
+        return None
+    if path.is_symlink() or not path.is_file():
+        raise ToolError("lease-invalid", "recovery lease carrier is not a regular file")
+    try:
+        lease = _require_mapping(json.loads(path.read_text(encoding="utf-8")), "recovery lease")
+    except json.JSONDecodeError as error:
+        raise ToolError("lease-invalid", "recovery lease is not valid JSON") from error
+    required = {"schema_version", "status", "action_id", "lease_token", "context_id", "context_digest", "event_ids"}
+    if not required.issubset(lease) or lease.get("schema_version") != 1 or lease.get("status") != "active":
+        raise ToolError("lease-invalid", "recovery lease fingerprint is incomplete")
+    if lease.get("action_id") != action_id or not isinstance(lease.get("lease_token"), str) or not lease["lease_token"]:
+        raise ToolError("lease-not-live", "recovery lease does not belong to the requested action")
+    if not isinstance(lease.get("context_id"), str) or not HEX64.fullmatch(lease["context_id"]):
+        raise ToolError("lease-invalid", "recovery lease context_id is invalid")
+    if not isinstance(lease.get("context_digest"), str) or not HEX64.fullmatch(lease["context_digest"]):
+        raise ToolError("lease-invalid", "recovery lease context_digest is invalid")
+    if lease.get("event_ids") != list(event_ids):
+        raise ToolError("lease-event-mismatch", "recovery input must contain the exact full live lease event ID set")
+    return lease
+
+
+def _prove_committed_recovery(
+    root: Path,
+    *,
+    action_id: str,
+    event_ids: Sequence[str],
+    revision: str,
+    operator_approval: str,
+    lease: Mapping[str, Any],
+) -> dict[str, Any]:
+    current_rows = _recovery_rows_from_current_journal(root, event_ids)
+    committed_rows = _recovery_rows_from_commit(root, revision, event_ids)
+    evidence: list[dict[str, Any]] = []
+    result_paths: set[str] = set()
+    for event_id in event_ids:
+        current = current_rows[event_id]
+        committed = committed_rows[event_id]
+        if len(current) != 1 or len(committed) != 1:
+            raise ToolError("recovery-event-not-unique", "each requested event must occur exactly once in current and committed Work Journal evidence")
+        live_row, committed_row = current[0], committed[0]
+        if live_row["path"] != committed_row["path"] or live_row["bytes"] != committed_row["bytes"] or live_row["event"] != committed_row["event"]:
+            raise ToolError("recovery-journal-mismatch", "current Work Journal row does not exactly match the recovery commit")
+        event = _require_mapping(live_row["event"], "recovery Journal event")
+        if event.get("action_id") != action_id or event.get("event") != "completed":
+            raise ToolError("recovery-event-mismatch", "recovery evidence is not a completed event for the requested action")
+        result = _require_mapping(event.get("result"), "recovery Journal result")
+        if result.get("state") != "present" or not isinstance(result.get("sha256"), str) or not HEX64.fullmatch(result["sha256"]):
+            raise ToolError("recovery-result-invalid", "completed recovery result must name one present SHA-256 carrier")
+        carrier, relative = _recovery_result_file(root, result.get("path"))
+        if relative in result_paths:
+            raise ToolError("recovery-result-not-unique", "each recovery event must name a distinct result carrier")
+        result_paths.add(relative)
+        current_bytes = carrier.read_bytes()
+        committed_bytes = _git_show_bytes(root, revision, relative)
+        if committed_bytes is None or current_bytes != committed_bytes or _sha256(current_bytes) != result["sha256"]:
+            raise ToolError("recovery-result-mismatch", "current result carrier does not exactly match its committed Journal result")
+        evidence.append(
+            {
+                "event_id": event_id,
+                "event_digest": event["event_digest"],
+                "journal": {"path": live_row["path"], "line": live_row["line"], "sha256": _sha256(live_row["bytes"])},
+                "result": {"path": relative, "sha256": result["sha256"]},
+            }
+        )
+    proof = {
+        "schema_version": 1,
+        "kind": "committed-lease-recovery",
+        "action_id": action_id,
+        "operator_approval": operator_approval.strip(),
+        "committed_revision": revision,
+        "lease": dict(lease),
+        "event_ids": list(event_ids),
+        "events": evidence,
+    }
+    return {"schema_version": 1, "recovery_id": canonical_json_digest(proof), "proof": proof}
+
+
+def recover_committed_action(
+    root: Path,
+    *,
+    action_id: str,
+    event_ids: Sequence[str],
+    committed_revision: str,
+    operator_approval: str,
+    lease_token: str,
+    context_id: str,
+    context_digest: str,
+    apply: bool,
+) -> dict[str, Any]:
+    """Release only a historically committed action proven from live and Git evidence."""
+    root = repository_root(root)
+    if not isinstance(action_id, str) or not HEX64.fullmatch(action_id):
+        raise ToolError("invalid-recovery", "recovery action_id must be a full SHA-256 ID")
+    if not isinstance(operator_approval, str) or not operator_approval.strip():
+        raise ToolError("operator-approval-missing", "recover-committed requires explicit operator approval")
+    if not isinstance(lease_token, str) or not lease_token:
+        raise ToolError("invalid-recovery", "recover-committed requires the exact lease token")
+    if not isinstance(context_id, str) or not HEX64.fullmatch(context_id):
+        raise ToolError("invalid-recovery", "recover-committed requires the exact lease context ID")
+    if not isinstance(context_digest, str) or not HEX64.fullmatch(context_digest):
+        raise ToolError("invalid-recovery", "recover-committed requires the exact lease context digest")
+    event_ids = _recovery_event_ids(event_ids)
+    revision = _recovery_commit(root, committed_revision)
+    appender = _import_appender()
+    live_lease = _recovery_live_lease(root, action_id, event_ids)
+    try:
+        persisted = appender.read_committed_recovery(root, action_id)
+    except Exception as error:
+        if hasattr(error, "code"):
+            raise ToolError(str(error.code), str(error)) from error
+        raise ToolError("recovery-receipt-read-failed", str(error)) from error
+    if live_lease is None:
+        if persisted is None:
+            raise ToolError("lease-not-live", "recovery lease is absent and no committed recovery receipt exists")
+        lease = _require_mapping(persisted["proof"].get("lease"), "persisted recovery lease")
+    else:
+        lease = live_lease
+    if lease.get("lease_token") != lease_token or lease.get("context_id") != context_id or lease.get("context_digest") != context_digest:
+        raise ToolError("lease-fingerprint-mismatch", "recovery input does not exactly match the retained lease fingerprint")
+    recovery = _prove_committed_recovery(
+        root,
+        action_id=action_id,
+        event_ids=event_ids,
+        revision=revision,
+        operator_approval=operator_approval,
+        lease=lease,
+    )
+    if persisted is not None and persisted != recovery:
+        raise ToolError("recovery-conflict", "persisted committed recovery receipt differs from current verified proof")
+    result = {
+        "action_id": action_id,
+        "committed_revision": revision,
+        "event_ids": event_ids,
+        "recovery_id": recovery["recovery_id"],
+        "operator_approval": operator_approval.strip(),
+        "validation_results": [
+            {"name": "operator-approved-recovery", "ok": True},
+            {"name": "exact-lease-fingerprint", "ok": True},
+            {"name": "unique-current-and-committed-journal-events", "ok": True},
+            {"name": "current-result-carriers-match-commit", "ok": True},
+        ],
+    }
+    if not apply:
+        runtime_root = Path(configured_repository_paths(root).runtime_root).as_posix()
+        return {**result, "recovery_receipt": {"state": "predicted" if persisted is None else "persisted", "path": f"{runtime_root}/state/append_change_records/committed_recoveries/{action_id}.json"}}
+    def reverify() -> dict[str, Any]:
+        return _prove_committed_recovery(
+            root,
+            action_id=action_id,
+            event_ids=event_ids,
+            revision=revision,
+            operator_approval=operator_approval,
+            lease=lease,
+        )
+    try:
+        released = appender.release_verified_committed_recovery(root, recovery, verify_recovery=reverify)
+    except Exception as error:
+        if hasattr(error, "code"):
+            raise ToolError(str(error.code), str(error)) from error
+        raise ToolError("recovery-release-failed", str(error)) from error
+    return {**result, "recovery_receipt": released["recovery_receipt"], "lease": {"status": released["status"], "action_id": action_id}}
+
+
 def _parse_name_status(payload: bytes) -> list[dict[str, str | None]]:
     """Parse Git's NUL-delimited name-status output without losing renames."""
     tokens = payload.split(b"\0")
@@ -1431,6 +1702,10 @@ def describe() -> dict[str, Any]:
                 "required": ["action_id"],
                 "effect": "commit one resolved folder action with exact byte-relocated legacy Journal evidence",
             },
+            "recover_committed": {
+                "required": ["action_id", "event_ids", "committed_revision", "operator_approval", "lease_token", "context_id", "context_digest"],
+                "effect": "record verified historical evidence, then release one exact retained lease",
+            },
             "git_hook": {
                 "phases": ["pre-commit", "commit-msg", "post-commit"],
                 "effect": "evaluate staged or created Git state; only post-commit appends runtime observation evidence",
@@ -1463,6 +1738,15 @@ def _parser() -> argparse.ArgumentParser:
     retry_resolved = subcommands.add_parser("retry-resolved", help="commit one explicitly resolved action with byte-relocated Journal evidence")
     retry_resolved.add_argument("--action-id", required=True)
     retry_resolved.add_argument("--apply", action="store_true")
+    recover_committed = subcommands.add_parser("recover-committed", help="release one retained lease only after committed-evidence verification")
+    recover_committed.add_argument("--action-id", required=True)
+    recover_committed.add_argument("--event-id", action="append", required=True, dest="event_ids")
+    recover_committed.add_argument("--committed-revision", required=True)
+    recover_committed.add_argument("--operator-approval", required=True)
+    recover_committed.add_argument("--lease-token", required=True)
+    recover_committed.add_argument("--context-id", required=True)
+    recover_committed.add_argument("--context-digest", required=True)
+    recover_committed.add_argument("--apply", action="store_true")
     git_hook = subcommands.add_parser("git-hook", help="evaluate one installed Git Hook boundary")
     git_hook.add_argument("phase", choices=("pre-commit", "commit-msg", "post-commit"))
     git_hook.add_argument("message_file", nargs="?", help="Git-supplied commit message carrier for commit-msg")
@@ -1515,6 +1799,25 @@ def main(argv: Sequence[str] | None = None) -> int:
         mode = "apply" if args.apply else "dry-run"
         try:
             result = retry_resolved_action(Path(args.repository), args.action_id, apply=args.apply)
+        except (ToolError, ContextError) as error:
+            print(json.dumps(_envelope(ok=False, mode=mode, error=error), ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+            return 2
+        print(json.dumps(_envelope(ok=True, mode=mode, result=result), ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+        return 0
+    if args.command == "recover-committed":
+        mode = "apply" if args.apply else "dry-run"
+        try:
+            result = recover_committed_action(
+                Path(args.repository),
+                action_id=args.action_id,
+                event_ids=args.event_ids,
+                committed_revision=args.committed_revision,
+                operator_approval=args.operator_approval,
+                lease_token=args.lease_token,
+                context_id=args.context_id,
+                context_digest=args.context_digest,
+                apply=args.apply,
+            )
         except (ToolError, ContextError) as error:
             print(json.dumps(_envelope(ok=False, mode=mode, error=error), ensure_ascii=False, sort_keys=True, separators=(",", ":")))
             return 2

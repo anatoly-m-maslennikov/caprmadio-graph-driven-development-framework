@@ -10,6 +10,8 @@ from .read_io import ReadContext, LimitReached
 from .reporting import diagnostic, finish
 from .selection import structural_names
 from .settings import CEILINGS, resolve_limits
+from .reference_context import references
+from .check_operators import load_operators_registry
 
 
 def execute(request: dict[str, Any]) -> dict[str, Any]:
@@ -67,11 +69,28 @@ def assess(request: dict[str, Any], reader: ReadContext, report: dict[str, Any])
     report["coverage"]["gaps"].extend(context.gaps)
     structure = load_structure(request, reader, report)
     names = resolve_names(request, structure, report)
-    selected = candidates(request, reader, report, names, context.status_domains)
+    records: list[dict[str, Any]] = []
+    selected = candidates(request, reader, report, names, context.status_domains, records)
+    reference_records, complete = references(request, reader, records, sources)
+    if request.get("reference_roots") and not complete:
+        report["coverage"]["gaps"].append(
+            diagnostic(
+                "REFERENCE_CONTEXT_INCOMPLETE",
+                "Reference inventory is incomplete; independent carrier checks still run.",
+            )
+        )
+    inputs = dict(
+        request=request,
+        structure=structure,
+        sources=sources,
+        references=reference_records,
+        reference_complete=complete,
+        operators_registry=load_operators_registry(request, reader),
+    )
     report["selection"]["selected"] = [str(path) for path, _ in selected]
     for path, parsed in selected:
         reader.checkpoint()
-        apply_checks(path, parsed, context, reader, report)
+        apply_checks(path, parsed, context, reader, report, inputs)
     duplicate_sources(report, reader)
 
 

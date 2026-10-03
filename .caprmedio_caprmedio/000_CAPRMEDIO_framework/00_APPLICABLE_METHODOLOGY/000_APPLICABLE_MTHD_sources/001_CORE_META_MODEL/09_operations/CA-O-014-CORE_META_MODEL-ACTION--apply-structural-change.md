@@ -8,9 +8,18 @@ subjects:
     - "Carrier"
     - "Goal"
     - "Journal"
-version: 3
+version: 5
 updated_at: "2026-09-15 00:13:02 +0000"
 relations: {}
+atom_id: "CA-O-014"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Apply structural change
 

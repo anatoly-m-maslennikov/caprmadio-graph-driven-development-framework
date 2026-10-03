@@ -9,13 +9,31 @@ subjects:
     - "Artifact/Revision"
     - "Journal"
     - "Operator"
-version: 3
-updated_at: "2026-09-21 00:57:42 +0000"
-relations: {"relates_to": ["CA-R-1510", "CA-R-1511", "CA-R-1519", "CA-R-1520", "CAPRMEDIO-META-REQU-158"]}
+version: 6
+updated_at: "2026-10-03 00:06:54 +0400"
+relations: {"relates_to": ["CA-R-1510", "CA-R-1511", "CA-R-1519", "CA-R-1520", "CA-R-1720"]}
+atom_id: "CA-R-1525"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Bind Workflow Runs to exact definition Revisions
+# Summary
+
+Bind Workflow Runs to exact definition Revisions
+
+## Scope
+
+Workflow Runs **and** their exact definition Revisions admitted for execution.
+
+## Claim
 
 **every** Workflow Run **must** retain the exact Workflow graph Revision, referenced Step Atom Revisions, **and** referenced Action definition Revisions admitted for its execution.
+
+## Details
 
 - record references **to** those source Revisions **and** the actual binding used by **every** Step Run **in** the canonical Journal. do **not** create independently maintained copies of the definitions as another authority.
 - **before** dispatch **and** on recovery, check whether a bound definition has changed, been withdrawn, **or** become unavailable. a detected change pauses further dispatch for revalidation; the executor **must not** silently substitute the newest Revision **or** assume the old binding remains authorized.

@@ -8,12 +8,21 @@ subjects:
     - "Goal"
     - "Carrier"
     - "Artifact/Revision"
-version: 3
+version: 5
 updated_at: "2026-09-15 00:13:02 +0000"
 relations:
   relates_to:
     - "CA-M-291"
     - "CA-R-926"
+atom_id: "CA-O-012"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Prepare structural change
 

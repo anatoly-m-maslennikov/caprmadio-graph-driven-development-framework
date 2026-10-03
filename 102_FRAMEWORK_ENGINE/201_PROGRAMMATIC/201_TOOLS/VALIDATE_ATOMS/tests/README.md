@@ -56,7 +56,17 @@ settled Actor/Subject registry encoding. Good supported subchecks must retain
 an incomplete aggregate when those obligations are unresolved. The tests must
 not invent an admission schema or shrink the authority frontier to force green.
 
-The initial missing-command baseline failed before implementation. The current
-implementation passes 89 tests, including 25 golden request cases through both
-file and stdin invocation. Ruff and strict Mypy pass. This is passing evidence
-for the implemented slice, not completion of the full acceptance gate.
+The initial missing-command baseline failed before implementation. The original
+89-test slice included 25 golden request cases through file and stdin invocation.
+The expanded corpus adds exact supporting authority fixtures, positive/negative
+schema and domain cases, bounded reference resolution, revision ambiguity,
+projection/source coalescing, graph cycles, structure and placement, Plan override
+inheritance, and additional real CLI good/bad carrier tests. Fixtures are frozen
+under `tests/fixtures/`, not read from the live methodology. Source edits invalidate
+the corresponding pin rather than silently changing expected behavior.
+
+The CLI integration tests assert 49 supported adapters out of 51 known obligations
+under the exact inventory, while retaining the two Actor-identity gaps and an
+`incomplete` aggregate. They verify read-only fingerprints and coexistence of
+independent findings with unresolved context. This is evidence for the supported
+slice, not completion of the full acceptance gate.

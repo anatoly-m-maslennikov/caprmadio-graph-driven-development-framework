@@ -13,21 +13,24 @@ subjects:
     - "Relation/authority"
     - "Projection"
     - "Single Source of Truth"
-version: 20
-updated_at: "2026-09-22 23:02:20 +0000"
-relations: {"evaluation_for":["CA-R-806","CA-R-1246","CA-R-1437","CA-R-1472","CA-M-120","CAPRMEDIO-GOV-REQU-767","CA-R-1580","CA-R-807","CA-D-268","CA-R-1040","CA-D-483", "CA-D-466"]}
+version: 23
+updated_at: "2026-10-03 03:48:14 +0400"
+relations: {"evaluation_for":["CA-R-806","CA-R-1246","CA-R-1437","CA-R-1472","CA-M-120","CA-R-1676","CA-R-1580","CA-R-807","CA-D-268","CA-R-1040","CA-D-483", "CA-D-466"]}
+atom_id: "CAPRMEDIO-GOV-EVAL-005"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
 # Summary
 
 Canonical relation validity
 
-## Claim
-
-### Claim checked
-
-**every** registered Relation Kind accepts valid examples **in** its owning graph kind **and** rejects unknown **or** misplaced Relation Kinds, invalid source **or** target classes, invalid cardinality, ambiguous targets, **and** endpoint lifecycle states prohibited for that Relation Kind.
-
-### Applicable conditions
+## Scope
 
 - admit **`=1`** valid example of **every** registered relation kind.
 - reject an unknown relation kind.
@@ -53,6 +56,12 @@ Canonical relation validity
 - reject a cross-graph endpoint whose class **or** graph context is **not** admitted, even **when** both endpoints exist.
 - reject loss of owning graph qualification, silent foreign-node import, **or** a projected Relation treated as independently authored authority.
 - accept a source-traceable derived Relation **without** its own direct source declaration **only** **when** the governing Relation authority admits that derivation; reject its use **to** bypass an explicit-declaration requirement.
+
+## Claim
+
+**every** registered Relation Kind accepts valid examples **in** its owning graph kind **and** rejects unknown **or** misplaced Relation Kinds, invalid source **or** target classes, invalid cardinality, ambiguous targets, **and** endpoint lifecycle states prohibited for that Relation Kind.
+
+## Details
 
 ### Acceptance criteria
 

@@ -6,14 +6,32 @@ subjects:
     - "Applicable Methodology"
     - "Projection"
     - "Relation Kind/Metadata"
-version: 9
-updated_at: "2026-09-15 01:47:49 +0400"
+version: 11
+updated_at: "2026-10-02 21:35:09 +0400"
 relations: {}
+atom_id: "CA-R-1246"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Keep relation vocabularies graph-specific
+# Summary
+
+Keep relation vocabularies graph-specific
+
+## Scope
+
+Relation Kinds and their graph-qualified identities in CAPRMEDIO Graphs.
+
+## Claim
 
 **every** Relation Kind **must** belong **to** **`=1`** kind of CAPRMEDIO Graph **and** be admitted as native **only** **in** instances of that graph kind. instances of the same graph kind governed by the same Applicable Methodology **must** reuse the same Relation Kind authority.
 
 the owning graph kind **and** canonical name **must** determine the Relation Kind's graph-qualified identity. matching names **or** compatible endpoints **must not** make Relation Kinds from different graph kinds interchangeable.
 
 the owning graph kind determines a Relation Kind's authority, **not** a requirement that **all** endpoints occupy the same graph. admitted cross-graph endpoints **and** source references under CA-R-1472 retain that graph-qualified ownership. another graph **may** represent a source-traceable reference **or** view of the Relation **without** registering it as native.
+
+## Details

@@ -1,4 +1,4 @@
-"""Closed request models bound to CA-D-492@3."""
+"""Closed request models bound to CA-D-492@5."""
 
 from __future__ import annotations
 
@@ -96,6 +96,7 @@ class Request(RequestObject):
     selection: Selection
     action_binding: AtomBinding | None = None
     project_structure: FileBinding | None = None
+    operators_registry: FileBinding | None = None
     reference_roots: SetList[Path] = Field(default_factory=list)
     exclude_paths: SetList[Path] = Field(default_factory=list)
     limits: Limits = Field(default_factory=Limits)

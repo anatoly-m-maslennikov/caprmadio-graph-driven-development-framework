@@ -18,9 +18,18 @@ subjects:
     - "AI Agent"
     - "Autonomous Confidence Threshold"
     - "Projection/Type: Reconciled Projection"
-version: 5
+version: 7
 updated_at: "2026-09-18 14:16:20 +0000"
 relations: {}
+atom_id: "CA-O-010"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Workflow"
+global_tier: 11
 ---
 # Reconcile sources
 

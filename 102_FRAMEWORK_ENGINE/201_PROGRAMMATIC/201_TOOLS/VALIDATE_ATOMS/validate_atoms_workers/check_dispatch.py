@@ -18,6 +18,11 @@ from .check_fields import (
 )
 from .check_sections import _body, _plan_sections
 from .check_domains import _priority, _plan_override, _plan_relations, _domain_check
+from .check_schema_extended import ADAPTERS as SCHEMA_ADAPTERS
+from .check_graph_extended import ADAPTERS as GRAPH_ADAPTERS
+from .check_structure_extended import ADAPTERS as STRUCTURE_ADAPTERS
+from .check_context_extended import ADAPTERS as CONTEXT_ADAPTERS
+from .check_operators import author_membership
 
 
 ADAPTERS: dict[str, Callable[[Record, str, Check], None]] = {
@@ -25,6 +30,7 @@ ADAPTERS: dict[str, Callable[[Record, str, Check], None]] = {
     "frontmatter.version": _version,
     "frontmatter.updated_at": _updated,
     "frontmatter.author": _scalar,
+    "author.resolution": author_membership,
     "frontmatter.claim_target_scope_unit": _scalar,
     "frontmatter.status": _scalar,
     "frontmatter.atom_id": _identity,
@@ -54,13 +60,19 @@ for _code in (
     "domain.local_tier",
 ):
     ADAPTERS[_code] = _domain_check
+for _group in (SCHEMA_ADAPTERS, GRAPH_ADAPTERS, STRUCTURE_ADAPTERS, CONTEXT_ADAPTERS):
+    ADAPTERS.update(_group)
 ADAPTER_CODES = frozenset(ADAPTERS)
 
 
 def _execute(
-    obligation: Obligation, metadata: Record, body: str, context: AuthorityContext
+    obligation: Obligation,
+    metadata: Record,
+    body: str,
+    context: AuthorityContext,
+    inputs: Record | None = None,
 ) -> tuple[Record, list[Record], list[Record]]:
-    check = Check(obligation, context)
+    check = Check(obligation, context, inputs)
     if obligation.supported:
         ADAPTERS[obligation.code](metadata, body, check)
     state = "not_checked"
@@ -77,7 +89,7 @@ def _execute(
     record = {
         "code": obligation.code,
         "outcome": state,
-        "authority": obligation.authority,
+        "authority": check.obligation.authority,
         "reason": reason,
         "finding_indexes": [],
     }

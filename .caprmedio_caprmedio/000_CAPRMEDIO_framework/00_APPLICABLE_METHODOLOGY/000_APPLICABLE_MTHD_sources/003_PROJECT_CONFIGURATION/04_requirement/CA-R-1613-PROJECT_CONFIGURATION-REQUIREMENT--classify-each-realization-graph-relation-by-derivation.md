@@ -1,7 +1,6 @@
 ---
 atom_id: CA-R-1613
 content_role: Requirement
-type: Requirement
 current_scope_unit: PROJECT_CONFIGURATION
 claim_target_scope_unit: PROJECT_CONFIGURATION
 local_tier: Standard
@@ -14,18 +13,23 @@ subjects:
     - "Projection"
     - "Relation"
     - "Relation Derivation Class"
-version: 2
-updated_at: "2026-09-23 21:40:21 +0000"
+version: 4
+updated_at: "2026-10-03 00:55:03 +0400"
 relations:
   relates_to:
     - CA-R-1616
     - CA-R-1617
-    - CAPRMEDIO-META-REQU-097
-    - CAPRMEDIO-META-REQU-657
+    - CA-R-1687
+    - CA-R-1746
+global_tier: 11
 ---
 # Summary
 
 Classify each Realization Graph relation by derivation
+
+## Scope
+
+Represented Realization Graph Relations and their supported Relation Derivation Classes.
 
 ## Claim
 
@@ -34,3 +38,5 @@ Classify each Realization Graph relation by derivation
 - **when** the same Relation is source-declared, resolved, **or** observed, multiple classifications **may** coexist; they describe evidence origins, **not** mutually exclusive truth values.
 - a class identifies how the Relation was obtained. it does **not** prove that the Relation is required, correct, exhaustive, **or** currently applicable.
 - missing **or** conflicting derivation evidence remains an explicit unresolved diagnostic; an unsupported class **or** Relation **must not** be presented as established.
+
+## Details

@@ -8,6 +8,30 @@ from .authority import Record
 from .check_support import Check, _plan
 
 
+# Reviewed CA-D-479@6. The resolver admits these only for its exact source bytes.
+ROLE_SECTIONS = {
+    "Requirement": ("Scope", "Claim", "Details"),
+    "Method": ("Scope", "Claim", "Details"),
+    "Evaluation": ("Scope", "Claim", "Details"),
+    "Delivery": ("Scope", "Claim", "Details"),
+    "Analysis": ("Question", "Scope", "Approach", "Results", "TLDR"),
+    "Concern": ("Concern", "Evidences", "Blast radius"),
+    "Plan": ("Objective", "Details"),
+    "Operations": ("Operation", "Details"),
+}
+
+
+def role_sections(metadata: Record, check: Check) -> list[tuple[int, str]] | None:
+    role = metadata.get("content_role")
+    if not isinstance(role, str) or role not in ROLE_SECTIONS:
+        check.gap(
+            "content_role",
+            "Body layout needs a carried Content Role with a supported section contract.",
+        )
+        return None
+    return [(1, "Summary"), *((2, name) for name in ROLE_SECTIONS[role])]
+
+
 def _headings(body: str) -> list[tuple[int, str, int]]:
     headings: list[tuple[int, str, int]] = []
     fence: tuple[str, int] | None = None
@@ -46,7 +70,10 @@ def _sections(body: str, check: Check, required: list[tuple[int, str]]) -> None:
             positions.append(found[0])
     if positions != sorted(positions):
         check.fail("BODY_SECTION", "body", "Required body sections are out of order.")
-    if not properties or properties[0][:2] != (1, "Summary"):
+    # Missing/duplicate Summary already has a cardinality diagnostic. Placement
+    # is independently actionable only when exactly one Summary exists.
+    summaries = [row for row in properties if row[:2] == (1, "Summary")]
+    if len(summaries) == 1 and properties[0][:2] != (1, "Summary"):
         check.fail(
             "BODY_SECTION", "Summary", "Main Content must start with the literal # Summary heading."
         )
@@ -63,35 +90,56 @@ def _section_values(
         if (level, title) not in required:
             continue
         end = next(
-            (
-                row[2]
-                for row in properties[position + 1 :]
-                if row[0] <= level or (title == "Summary" and row[:2] == (2, "Claim"))
-            ),
+            (row[2] for row in properties[position + 1 :] if row[0] <= level or title == "Summary"),
             len(lines),
         )
-        if not any(line.strip() for line in lines[index + 1 : end]):
+        if title != "Details" and not any(line.strip() for line in lines[index + 1 : end]):
             check.fail("BODY_SECTION", title, "Body Property value is empty: " + title + ".")
 
 
 def _body(metadata: Record, body: str, check: Check) -> None:
-    del metadata
-    _sections(body, check, [(1, "Summary"), (2, "Claim")])
+    required = role_sections(metadata, check)
+    if required is not None:
+        _sections(body, check, required)
+
+
+def plan_definition(body: str, check: Check) -> None:
+    """CA-D-470@7: one nonempty level-three Property directly inside Details."""
+    headings = _headings(body)
+    matches = [row for row in headings if row[1] == "Definition of Done"]
+    if len(matches) != 1:
+        check.fail(
+            "BODY_SECTION",
+            "Definition of Done",
+            "Plan requires exactly one nested Definition of Done section.",
+        )
+    for level, _, index in matches:
+        parent = next(
+            (row for row in reversed(headings) if row[2] < index and row[0] < level), None
+        )
+        if level != 3 or parent is None or parent[:2] != (2, "Details"):
+            check.fail(
+                "BODY_SECTION",
+                "Definition of Done",
+                "Definition of Done must be a level-three section directly inside Details.",
+            )
+        end = next(
+            (row[2] for row in headings if row[2] > index and row[0] <= level),
+            len(body.splitlines()),
+        )
+        if not any(line.strip() for line in body.splitlines()[index + 1 : end]):
+            check.fail(
+                "BODY_SECTION",
+                "Definition of Done",
+                "Definition of Done must contain its own value.",
+            )
 
 
 def _plan_sections(metadata: Record, body: str, check: Check) -> None:
     if not _plan(metadata, check):
         return
-    required = [(1, "Summary"), (2, "Claim"), (2, "Definition of Done")]
+    required = [(1, "Summary"), (2, "Objective"), (2, "Details")]
     _sections(body, check, required)
-    properties = [(level, title, index) for level, title, index in _headings(body) if level <= 2]
-    details = [index for level, title, index in properties if (level, title) == (2, "Details")]
-    dod = [
-        index for level, title, index in properties if (level, title) == (2, "Definition of Done")
-    ]
-    if len(details) > 1 or (details and dod and details[0] < dod[0]):
-        check.fail(
-            "BODY_SECTION", "Details", "Details must occur at most once after Definition of Done."
-        )
-    for field in ("summary", "claim", "definition_of_done", "details", "scope"):
+    plan_definition(body, check)
+    for field in ("summary", "claim", "objective", "definition_of_done", "details", "scope"):
         check.forbid(metadata, field)

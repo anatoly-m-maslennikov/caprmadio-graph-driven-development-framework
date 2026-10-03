@@ -5,10 +5,28 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan"
     - "Condition Expression"
     - "Atom/Claim"
-version: 2
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 4
+updated_at: "2026-10-03 00:34:47 +0400"
 relations: {"relates_to": ["CA-M-123"]}
+atom_id: "CA-R-1581"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Define Plan Definition of Done
+# Summary
+
+Define Plan Definition of Done
+
+## Scope
+
+Plan Definitions of Done.
+
+## Claim
 
 a Plan Definition of Done **means** **=1** falsifying Condition Expression, atomic **or** explicitly composite, that evaluates the Plan Claim within its resolved Claim restrictions **and** target.
+
+## Details

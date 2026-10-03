@@ -29,7 +29,7 @@ subjects:
     - "Evaluation"
     - "Operator"
     - "Journal"
-version: 4
+version: 5
 updated_at: "2026-09-24 14:07:30 +0000"
 relations:
   relates_to:
@@ -45,6 +45,7 @@ relations:
     - CA-D-483
     - CA-E-379
     - CA-E-506
+global_tier: 11
 ---
 # Summary
 

@@ -20,13 +20,14 @@ subjects:
     - "Autonomous Confidence Threshold"
     - "Atom/Content Role: Evaluation"
     - "Atom/Content Role: Implementation"
-version: 10
+version: 11
 updated_at: "2026-09-24 01:39:33 +0000"
 relations:
   relates_to:
     - CA-R-1559
     - CA-R-1591
     - CA-M-295
+global_tier: 11
 ---
 # Summary
 

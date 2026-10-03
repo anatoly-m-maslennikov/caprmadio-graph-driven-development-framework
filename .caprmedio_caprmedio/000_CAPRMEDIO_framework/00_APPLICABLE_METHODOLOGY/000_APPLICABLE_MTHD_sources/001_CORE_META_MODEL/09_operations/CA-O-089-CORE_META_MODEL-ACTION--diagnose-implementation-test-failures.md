@@ -18,7 +18,7 @@ subjects:
     - "AI Agent"
     - "Operator"
     - "Spec"
-version: 2
+version: 3
 updated_at: "2026-09-24 01:39:33 +0000"
 relations:
   relates_to:
@@ -27,6 +27,7 @@ relations:
     - CA-O-024
     - CA-R-1559
     - CA-R-1591
+global_tier: 11
 ---
 # Summary
 

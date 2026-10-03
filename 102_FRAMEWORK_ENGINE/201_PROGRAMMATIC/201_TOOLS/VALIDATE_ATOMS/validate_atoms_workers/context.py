@@ -9,6 +9,7 @@ from .parsing import CarrierError, parse_carrier
 from .read_io import ReadContext
 from .reporting import diagnostic
 from .settings import bound_file
+from .support_authority import matching_pin
 
 
 def load_sources(
@@ -61,6 +62,9 @@ def load_source(
         raw = reader.read(path)
         parsed = parse_carrier(raw, path)
         metadata = parsed.metadata
+        # Exact installed support bindings can identify a legacy authority
+        # carrier. They do not repair its Status or any validation target.
+        supplied = supplied or matching_pin(raw, path)
         if metadata.get("status") not in ("Active", "active"):
             if metadata.get("status") is not None:
                 return None

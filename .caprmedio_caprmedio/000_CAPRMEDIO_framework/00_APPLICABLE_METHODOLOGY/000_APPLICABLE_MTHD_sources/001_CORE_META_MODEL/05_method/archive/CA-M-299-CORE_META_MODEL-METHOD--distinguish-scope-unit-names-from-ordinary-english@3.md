@@ -1,0 +1,21 @@
+---
+subjects:
+  governs: "Scope Unit/Name"
+  depends_on:
+    - "Scope Unit"
+    - "CCE"
+version: 3
+updated_at: "2026-09-17 12:50:16 +0000"
+relations: {}
+atom_id: "CA-M-299"
+content_role: "Method"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Method"
+---
+# Distinguish Scope Unit Names from Ordinary English
+
+**to** distinguish a Scope Unit reference from ordinary English, use its exact uppercase Scope Unit Name **to** denote the Scope Unit. an **otherwise** identical lowercase word retains its ordinary English meaning.

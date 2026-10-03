@@ -6,11 +6,27 @@ subjects:
     - "AI Agent"
     - "Scripted Migration"
     - "Target Set"
-version: 2
-updated_at: "2026-09-21 00:39:50 +0000"
+version: 4
+updated_at: "2026-10-03 00:22:56 +0400"
 relations: {}
+atom_id: "CA-R-1554"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Bound Scripted Migrations
+# Summary
+
+Bound Scripted Migrations
+
+## Scope
+
+AI Agent participation in Scripted Migrations.
+
+## Claim
 
 an AI Agent that performs a Scripted Migration **must** satisfy **all** of these participation conditions:
 
@@ -19,3 +35,5 @@ an AI Agent that performs a Scripted Migration **must** satisfy **all** of these
 - produce a reviewable change set.
 
 these conditions constrain the AI Agent's participation; they do **not** define the migration's Steps **or** Workflow control flow **or** grant additional mutation authority.
+
+## Details

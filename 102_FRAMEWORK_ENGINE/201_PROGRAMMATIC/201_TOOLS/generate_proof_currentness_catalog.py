@@ -204,7 +204,7 @@ def render(results: list[Result], frontier: str, updated_at: str) -> str:
         f"source_frontier_sha256: {frontier}",
         "relations:",
         "  child_of:",
-        "    - CAPRMEDIO-GOV-REQU-354--generate-proof-currentness-catalog",
+        "    - CA-R-1647--generate-proof-currentness-catalog",
         "---",
         "# Proof currentness Catalog",
         "",

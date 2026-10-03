@@ -28,3 +28,8 @@ max_file_bytes = 8388608
 max_total_read_bytes = 268435456
 timeout_seconds = 60
 max_findings = 10000
+
+[rmed_review]
+# Reserve this share of each worker's effective context capacity.
+# Operator/instance values may override; model capacity comes from runtime evidence.
+context_headroom_fraction = 0.30

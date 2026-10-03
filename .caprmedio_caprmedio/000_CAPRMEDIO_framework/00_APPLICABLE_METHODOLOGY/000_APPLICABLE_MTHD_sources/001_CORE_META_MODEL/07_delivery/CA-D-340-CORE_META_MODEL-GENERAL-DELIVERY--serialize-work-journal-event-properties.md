@@ -9,16 +9,31 @@ subjects:
     - "Artifact/Carrier"
     - "Project"
     - "Applicable Methodology"
-version: 9
-updated_at: "2026-09-16 21:24:29 +0000"
+version: 11
+updated_at: "2026-09-29 22:34:46 +0000"
 relations:
   relates_to:
     - CA-R-1491
+atom_id: "CA-D-340"
+content_role: "Delivery"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Serialize Work Journal Event Properties
+# Summary
+Serialize Work Journal Event Properties
 
+## Scope
+serialization of Work Journal Event Carrier records.
+
+## Claim
 **every** Work Journal Event Carrier record **must** serialize its Event identity, Action identity, Type value, action Kind, Author, timezone-qualified Occurred At, session provenance, **and** Structural Scope **in** its registered schema.
 
 - the Carrier **must** preserve recorded Project identifiers, filenames, paths, **and** other observed values exactly through safe encoding; those values **must not** be rewritten **to** satisfy current Atom naming **or** classification rules.
 - a recorded Atom ID, including a legacy **or** nonconforming ID, is payload data. its presence does **not** establish that the identified Atom conforms **to** Applicable Methodology.
-- event-format, required-field, event-identity, digest, **and** append-only integrity checks apply under CA-R-1491. current Project grammar **must not** become an additional payload-admission gate.
+- event-format, required-field, event-identity, digest, **and** append-only integrity checks apply under `CA-R-1491-CORE_META_MODEL-CORE-REQUIREMENT--keep-project-validation-out-of-journal-admission`. current Project grammar **must not** become an additional payload-admission gate.
+
+## Details

@@ -17,13 +17,14 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan"
     - "Workflow Run"
     - "Step Run"
-version: 2
+version: 3
 updated_at: "2026-09-24 01:39:33 +0000"
 relations:
   relates_to:
     - CA-O-089
     - CA-R-1527
     - CA-R-1525
+global_tier: 11
 ---
 # Summary
 

@@ -1,14 +1,12 @@
 ---
 atom_id: CA-D-493
 content_role: Delivery
-type: Delivery
 current_scope_unit: TOOLS
 claim_target_scope_unit: TOOLS
 local_tier: Standard
+global_tier: 11
 author: Anatoly Maslennikov
 status: Active
-cce_version: cce_1
-cce_form: serialization
 subjects:
   governs: "Tool/VALIDATE_ATOMS/Result"
   depends_on:
@@ -18,7 +16,7 @@ subjects:
     - "Atom/Revision"
     - "Evaluation"
 version: 3
-updated_at: "2026-09-24 14:07:30 +0000"
+updated_at: "2026-10-01 21:36:04 +0400"
 relations:
   delivery_for:
     - CA-R-1622
@@ -30,13 +28,17 @@ relations:
 
 Serialize Atom validator results
 
+## Scope
+
+the `VALIDATE_ATOMS` result JSON object and its assessment records.
+
 ## Claim
 
 a `VALIDATE_ATOMS` result **must** use the following closed JSON object, with **every** listed top-level key present.
 
 ### Common representations
 
-- String, Path, Integer, Digest, File Binding, **and** Atom Binding follow CA-D-492. missing facts use explicit null **only** where admitted below; never fill them from a filename **or** directory.
+- String, Path, Integer, Digest, File Binding, **and** Atom Binding follow CA-D-492-TOOLS-DELIVERY--serialize-atom-validator-requests. missing facts use explicit null **only** where admitted below; never fill them from a filename **or** directory.
 - a Span is null **or** an object with positive integer `start_line`, `start_column`, `end_line`, **and** `end_column`; positions are one-based Unicode code-point coordinates, end-exclusive. an unlocatable failure uses null, **not** invented coordinates.
 - a Diagnostic has required `code: String`, `severity: error | warning | info`, `path: Path or null`, `span: Span`, `property: String or null`, `authority: list of Atom Binding`, `reason: String`, **and** `evidence: String or null`. it carries bounded relevant evidence **only**, never secrets **or** complete unrelated files.
 - an Outcome has required `code: String`, `outcome: passed | failed | not_applicable | not_checked`, `authority: list of Atom Binding`, `reason: String`, **and** `finding_indexes: list of nonnegative Integer` pointing into the result's ordered findings. a failed mandatory check has **>=1** error finding; warnings **and** informational findings alone do **not** fail an Atom.
@@ -74,6 +76,8 @@ a `VALIDATE_ATOMS` result **must** use the following closed JSON object, with **
 ### Currentness, execution, and ordering
 
 - `currentness` has required `state: unchanged | changed | unverified` **and** `affected_inputs: list of File Binding`. membership changes are recorded through the affected inventory-root Path; unchanged requires membership **and** relevant content verification.
-- `execution` has required `limits: object`, `limit_sources: object`, `stopped_by: String or null`, `diagnostics: list of Diagnostic`, **and** `run_context: object`. effective limit names/values follow CA-D-492; limit_sources maps those names **to** `request`, `instance`, **or** `default`. unavailable pre-validation limits use empty objects. stopped_by is a limit key **or** null. run_context carries **only** admitted input identifiers; no generated timestamp **or** random ID is required.
+- `execution` has required `limits: object`, `limit_sources: object`, `stopped_by: String or null`, `diagnostics: list of Diagnostic`, **and** `run_context: object`. effective limit names/values follow CA-D-492-TOOLS-DELIVERY--serialize-atom-validator-requests; limit_sources maps those names **to** `request`, `instance`, **or** `default`. unavailable pre-validation limits use empty objects. stopped_by is a limit key **or** null. run_context carries **only** admitted input identifiers; no generated timestamp **or** random ID is required.
 - sort Carriers/selection lists by normalized absolute path; sort authority bindings by Atom ID, Version, path, **and** digest. sort diagnostics by path, span start/end, code, property, severity, **and** reason, with null before non-null values; deduplicate identical diagnostics. sort Outcomes by code **and** ordered authority bindings. use Unicode code-point order, **not** locale-dependent order. assign finding indexes **after** sorting.
 - map results **to** process exits: `valid = 0`, `invalid = 1`, `incomplete = 2`, `error = 3`. malformed requests return this same error envelope with available diagnostics, zero unexecuted counts, empty unexecuted lists, null unavailable bindings, **and** currentness unverified; do **not** fabricate assessments.
+
+## Details

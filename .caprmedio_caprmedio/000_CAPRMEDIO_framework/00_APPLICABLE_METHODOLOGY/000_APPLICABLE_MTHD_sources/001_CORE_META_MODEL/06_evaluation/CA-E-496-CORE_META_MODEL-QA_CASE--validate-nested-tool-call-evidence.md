@@ -9,13 +9,32 @@ subjects:
     - "Tool"
     - "Journal"
     - "Projection"
-version: 2
-updated_at: "2026-09-20 15:47:25 +0000"
+version: 4
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-R-1528", "CA-R-1511"]}
+atom_id: "CA-E-496"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate nested Tool-call evidence
+# Summary
+
+Validate nested Tool-call evidence
+
+## Scope
+
+Tool-call evidence within a Step Run.
+
+## Claim
 
 the Evaluation **must** check Tool-call evidence within a Step Run under CA-R-1528.
+
+## Details
 
 - an Agentic Action makes several Tool calls: require their actual parent Step Run, Tool identities, inputs **or** admitted protected references, results **or** errors, **and** distinguishing call evidence.
 - a repeated attempt uses the same Tool **and** inputs: preserve distinct attempt identities **without** claiming a second effect **when** its outcome is unknown.

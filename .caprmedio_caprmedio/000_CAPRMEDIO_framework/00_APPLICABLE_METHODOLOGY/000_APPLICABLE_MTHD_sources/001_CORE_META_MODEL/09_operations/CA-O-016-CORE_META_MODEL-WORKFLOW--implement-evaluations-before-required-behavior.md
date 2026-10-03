@@ -17,7 +17,7 @@ subjects:
     - "Step Run"
     - "Atom/Content Role: Plan/Type: Plan"
     - "Implementation Retry Control"
-version: 10
+version: 11
 updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
@@ -33,6 +33,7 @@ relations:
     - CA-O-096
     - CA-O-099
     - CA-O-098
+global_tier: 11
 ---
 # Summary
 

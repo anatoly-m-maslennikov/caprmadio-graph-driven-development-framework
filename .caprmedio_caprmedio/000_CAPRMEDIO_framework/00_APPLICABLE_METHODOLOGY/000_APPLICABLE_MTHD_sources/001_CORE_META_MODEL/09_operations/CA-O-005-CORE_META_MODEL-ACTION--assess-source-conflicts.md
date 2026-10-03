@@ -9,9 +9,18 @@ subjects:
     - "Atom/Revision/Updated At"
     - "Atom/Local Tier: Principle"
     - "Operator"
-version: 6
+version: 8
 updated_at: "2026-09-21 00:39:50 +0000"
 relations: {}
+atom_id: "CA-O-005"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Assess source conflicts
 

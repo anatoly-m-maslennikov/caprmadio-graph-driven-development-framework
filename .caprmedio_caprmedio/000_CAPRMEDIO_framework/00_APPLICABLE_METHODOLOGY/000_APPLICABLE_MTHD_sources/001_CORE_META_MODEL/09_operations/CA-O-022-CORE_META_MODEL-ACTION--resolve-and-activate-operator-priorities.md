@@ -1,5 +1,5 @@
 ---
-version: 4
+version: 6
 updated_at: "2026-09-17 02:26:06 +0000"
 relations:
   child_of:
@@ -13,6 +13,15 @@ subjects:
     - "Scope"
     - "CAPRMEDIO Framework Instance"
     - "Project/priority model application"
+atom_id: "CA-O-022"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Resolve and activate Operator priorities
 

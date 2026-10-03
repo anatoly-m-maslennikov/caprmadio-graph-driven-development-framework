@@ -16,13 +16,14 @@ subjects:
     - "Atom/Content Role: Method"
     - "Atom/Content Role: Implementation"
     - "Artifact/Revision"
-version: 4
+version: 5
 updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
     - CA-O-018
     - CA-O-089
     - CA-O-090
+global_tier: 11
 ---
 # Summary
 

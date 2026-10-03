@@ -407,29 +407,40 @@ class ReplacementPayloadTest(unittest.TestCase):
                 event[key] = None
                 self.assert_invalid(event, key)
 
-    def test_rejects_malformed_predecessor_ids(self) -> None:
+    def test_preserves_nonconforming_replacement_identities(self) -> None:
         invalid = (
-            "", " ", 224, True, [], {}, " CA-M-224", "CA-M-224 ", "ca-M-224",
-            "CA-X-224", "CA-M--224", "CA-M-", "CA-M-224@12", "CA-M-224.md",
+            "", " ", " CA-M-224", "CA-M-224 ", "ca-M-224", "CA-X-224",
+            "CA-M--224", "CA-M-", "CA-M-224@12", "CA-M-224.md",
             "CA-M-224-SCOPE--summary", "folder/CA-M-224", "CA-M-224\n",
-            "CAPRMEDIO-META-METH-224", "-M-224",
-            "CA--M-224", "CA---M-224", "CA_-M-224", "C--A-M-224",
+            "CAPRMEDIO-META-METH-224", "-M-224", "CA--M-224", "CA---M-224",
+            "CA_-M-224", "C--A-M-224",
         )
         for predecessor in invalid:
             with self.subTest(predecessor=predecessor):
                 event = self.event()
                 event["predecessor_atom_id"] = predecessor
-                self.assert_invalid(event, "predecessor_atom_id")
+                self.assertEqual(with_event_digest(event), validate_sealed_event(with_event_digest(event)))
 
-    def test_rejects_malformed_successor_arrays_and_ids(self) -> None:
+    def test_preserves_nonconforming_successor_arrays_and_ids(self) -> None:
         invalid = (
-            [], "CA-O-101", ("CA-O-101",), {}, [None], [False], [101], [[]], [{}],
-            [""], [" "], ["CA-O-101 "], ["CA-O-101.md"], ["folder/CA-O-101"],
+            [], [""], [" "], ["CA-O-101 "], ["CA-O-101.md"], ["folder/CA-O-101"],
             ["CA-O-101@1"], ["CA-O-101-SCOPE--summary"], ["CA-X-101"],
             ["CAPRMEDIO-META-METH-101"], ["CA-O-101", "CA-O-101"], ["CA-M-224"],
             ["CA--O-101"], ["CA---O-101"], ["CA_-O-101"], ["C--A-O-101"],
         )
         for successors in invalid:
+            with self.subTest(successors=successors):
+                event = self.event()
+                event["successor_atom_ids"] = successors
+                self.assertEqual(with_event_digest(event), validate_sealed_event(with_event_digest(event)))
+
+    def test_rejects_replacement_values_with_wrong_storage_types(self) -> None:
+        for predecessor in (None, 224, True, [], {}):
+            with self.subTest(predecessor=predecessor):
+                event = self.event()
+                event["predecessor_atom_id"] = predecessor
+                self.assert_invalid(event, "predecessor_atom_id")
+        for successors in (None, "CA-O-101", ("CA-O-101",), {}, [None], [False], [101], [[]], [{}]):
             with self.subTest(successors=successors):
                 event = self.event()
                 event["successor_atom_ids"] = successors
@@ -455,8 +466,23 @@ class ReplacementPayloadTest(unittest.TestCase):
         result["sha256"] = canonical_json_digest([{"path": "entry.txt", "sha256": sha("entry")}])
         self.assert_invalid(event, "replacement.*schema-v3 completed file MOVE")
 
+    def test_accepts_replacement_move_with_lifecycle_metadata_update(self) -> None:
+        event = self.event()
+        event["action_type"] = "MOVE+UPDATE"
+        event["result"]["sha256"] = sha("predecessor with Archived status and refreshed updated_at")
+        sealed = with_event_digest(event)
+        self.assertEqual(sealed, validate_sealed_event(sealed))
+        self.assertEqual(12, sealed["result"]["version"])
+
+    def test_replacement_move_update_preserves_nonconforming_placement(self) -> None:
+        event = self.event()
+        event["action_type"] = "MOVE+UPDATE"
+        event["result"]["path"] = f"active/{event['result']['filename']}"
+        sealed = with_event_digest(event)
+        self.assertEqual(sealed, validate_sealed_event(sealed))
+
     def test_rejects_each_non_move_action(self) -> None:
-        for action in ("ADD", "UPDATE", "MOVE+UPDATE", "REMOVE"):
+        for action in ("ADD", "UPDATE", "REMOVE"):
             with self.subTest(action=action):
                 event = self.event()
                 event["action_type"] = action
@@ -464,19 +490,21 @@ class ReplacementPayloadTest(unittest.TestCase):
                     event.pop("previous_result_event")
                 self.assert_invalid(event, "replacement.*schema-v3 completed file MOVE")
 
-    def test_requires_present_result_under_exact_archive_segment(self) -> None:
+    def test_preserves_nonconforming_result_state_and_placement(self) -> None:
         event = self.event()
         event["result"]["state"] = "removed"
         for key in ("path", "sha256"):
             event["result"].pop(key)
-        self.assert_invalid(event, "replacement.*present")
+        sealed = with_event_digest(event)
+        self.assertEqual(sealed, validate_sealed_event(sealed))
         for directory in ("active", "archived", "not-archive", "Archive"):
             with self.subTest(directory=directory):
                 event = self.event()
                 event["result"]["path"] = f"{directory}/{event['result']['filename']}"
-                self.assert_invalid(event, "replacement.*archive")
+                sealed = with_event_digest(event)
+                self.assertEqual(sealed, validate_sealed_event(sealed))
 
-    def test_binds_predecessor_to_exact_result_filename(self) -> None:
+    def test_preserves_filename_mismatched_replacement_identity(self) -> None:
         filenames = (
             "CA-M-225-SCOPE--summary@12.md", "CA-M-2240-SCOPE--summary@12.md",
             "NOT-CA-M-224-SCOPE--summary@12.md", "CA-M-224garbage@12.md",
@@ -486,9 +514,10 @@ class ReplacementPayloadTest(unittest.TestCase):
             with self.subTest(filename=filename):
                 event = self.event()
                 self.set_filename(event, filename)
-                self.assert_invalid(event, "replacement.*predecessor_atom_id")
+                sealed = with_event_digest(event)
+                self.assertEqual(sealed, validate_sealed_event(sealed))
 
-    def test_requires_exact_archive_suffix_and_version(self) -> None:
+    def test_preserves_nonconforming_archive_filename_suffix(self) -> None:
         filenames = (
             "CA-M-224-SCOPE--summary.md", "CA-M-224-SCOPE--summary@11.md",
             "CA-M-224-SCOPE--summary@012.md", "CA-M-224-SCOPE--summary@12.md.md",
@@ -498,15 +527,21 @@ class ReplacementPayloadTest(unittest.TestCase):
             with self.subTest(filename=filename):
                 event = self.event()
                 self.set_filename(event, filename)
-                self.assert_invalid(event, "replacement.*archive")
-        event = self.event()
-        event["result"]["version"] = True
-        self.assert_invalid(event, "replacement.*version")
+                sealed = with_event_digest(event)
+                self.assertEqual(sealed, validate_sealed_event(sealed))
 
-    def test_requires_result_path_basename_to_match_filename(self) -> None:
+    def test_rejects_result_version_with_non_integer_or_nonpositive_storage_value(self) -> None:
+        for version in (True, "12", None, 0, -1):
+            with self.subTest(version=version):
+                event = self.event()
+                event["result"]["version"] = version
+                self.assert_invalid(event, "result.version")
+
+    def test_preserves_result_path_filename_mismatch(self) -> None:
         event = self.event()
         event["result"]["path"] = ".caprmedio_caprmedio/05_method/archive/other@12.md"
-        self.assert_invalid(event, "replacement.*filename")
+        sealed = with_event_digest(event)
+        self.assertEqual(sealed, validate_sealed_event(sealed))
 
     def test_rejects_digest_tampering_after_successors_change(self) -> None:
         for successors in (["CA-O-103"], ["CA-O-102", "CA-O-101"]):

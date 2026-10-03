@@ -27,7 +27,7 @@ subjects:
     - "Atom/Content Role: Evaluation"
     - "Version"
     - "Autonomous Confidence Threshold"
-version: 3
+version: 6
 updated_at: "2026-09-18 14:16:20 +0000"
 relations:
   relates_to:
@@ -41,8 +41,17 @@ relations:
     - "CA-O-024"
     - "CA-O-026"
     - "CA-O-027"
-    - "CAPRMEDIO-META-REQU-102"
-    - "CAPRMEDIO-GOV-REQU-353"
+    - "CA-R-1692"
+    - "CA-R-1646"
+atom_id: "CA-O-025"
+content_role: "Operations"
+current_scope_unit: "PROJECT_CONFIGURATION"
+claim_target_scope_unit: "PROJECT_CONFIGURATION"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Workflow"
+global_tier: 11
 ---
 # Check release readiness when selected
 
@@ -94,5 +103,5 @@ the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513
 - reassessment **or** a new candidate does **not** silently reset a retry budget. **every** autonomous revisit requires an applicable accepted allowance; missing **or** exhausted allowance requires Operator disposition.
 - source corrections use CA-O-008's governed revision **or** replacement workflow. projected content **must not** become the correction target.
 - optional Atom consolidation is a separately authorized source change, **not** a mandatory release step.
-- record actual execution outcomes **in** the shared Journal. successful readiness is **not** release execution **and** does **not** freeze a Version under CAPRMEDIO-META-REQU-102.
+- record actual execution outcomes **in** the shared Journal. successful readiness is **not** release execution **and** does **not** freeze a Version under CA-R-1692.
 - this Workflow selects no Git branch, commit, tag, merge, publication, **or** universal Framework Instance workflow setting.

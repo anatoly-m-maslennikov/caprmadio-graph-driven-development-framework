@@ -14,7 +14,7 @@ subjects:
     - "Step"
     - "Workflow/Relation Kind: On Result"
     - "Check Atoms Step"
-version: 3
+version: 4
 updated_at: "2026-09-23 23:53:58 +0000"
 relations:
   relates_to:
@@ -22,6 +22,7 @@ relations:
     - CA-R-1513
     - CA-R-1519
     - CA-R-1570
+global_tier: 11
 ---
 # Summary
 

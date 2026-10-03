@@ -52,10 +52,6 @@ MAX_EVENTS_PER_PART = 100
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 AUTHOR_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$")
-# CA-D-378 numbered project-owned IDs only. Opaque legacy and external identity
-# forms require separate admission for replacement payloads, not filename fallback.
-# This bounded format guard does not establish prefix registration or live Atom authority.
-PROJECT_OWNED_ATOM_ID_RE = re.compile(r"[A-Z][A-Z0-9]*(?:[-_][A-Z0-9]+)*-[CAPRMEDIO]-[0-9]+")
 REPLACEMENT_FIELDS = frozenset({"predecessor_atom_id", "successor_atom_ids"})
 
 
@@ -307,7 +303,7 @@ def _validate_result(value: object, *, schema_version: int, subject_kind: str) -
         raise WorkJournalError("invalid-event", "result.filename must be one path-segment name")
     if schema_version == 2 and not filename.endswith(".md"):
         raise WorkJournalError("invalid-event", "schema-v2 result.filename must be a Markdown filename")
-    if not isinstance(version, int) or version < 1:
+    if type(version) is not int or version < 1:
         raise WorkJournalError("invalid-event", "result.version must be a positive integer")
     if {"before_path", "before_sha256", "action_message", "previous_result"} & set(value):
         raise WorkJournalError("invalid-event", "result contains forbidden duplicated prior state")
@@ -347,43 +343,6 @@ def _validate_result(value: object, *, schema_version: int, subject_kind: str) -
         raise WorkJournalError("invalid-event", "removed result has invalid fields")
 
 
-def _validate_replacement_ids(value: Mapping[str, Any]) -> str:
-    predecessor = value.get("predecessor_atom_id")
-    if not isinstance(predecessor, str) or not PROJECT_OWNED_ATOM_ID_RE.fullmatch(predecessor):
-        raise WorkJournalError("invalid-event", "predecessor_atom_id must be a canonical numbered project-owned Atom ID")
-    successors = value.get("successor_atom_ids")
-    if not isinstance(successors, list) or not successors:
-        raise WorkJournalError("invalid-event", "successor_atom_ids must be a non-empty array of Atom IDs")
-    if any(not isinstance(item, str) or not PROJECT_OWNED_ATOM_ID_RE.fullmatch(item) for item in successors):
-        raise WorkJournalError("invalid-event", "successor_atom_ids must contain only canonical numbered project-owned Atom IDs")
-    if len(set(successors)) != len(successors):
-        raise WorkJournalError("invalid-event", "successor_atom_ids must not contain duplicates")
-    if predecessor in successors:
-        raise WorkJournalError("invalid-event", "successor_atom_ids must not contain predecessor_atom_id")
-    return predecessor
-
-
-def _validate_replacement_result(result: Mapping[str, Any], predecessor: str) -> None:
-    if result["state"] != "present":
-        raise WorkJournalError("invalid-event", "replacement result must be present")
-    filename = result["filename"]
-    path = Path(result["path"])
-    if "archive" not in path.parts[:-1]:
-        raise WorkJournalError("invalid-event", "replacement result must be under an archive folder")
-    if path.name != filename:
-        raise WorkJournalError("invalid-event", "replacement result.path basename must equal result.filename")
-    version = result["version"]
-    if type(version) is not int or version < 1:
-        raise WorkJournalError("invalid-event", "replacement result.version must be a positive integer")
-    if filename.count("@") != 1 or not filename.endswith(f"@{version}.md"):
-        raise WorkJournalError("invalid-event", "replacement archive filename must end with exact @<result.version>.md")
-    # Match the declared identity at the canonical filename boundary; do not use
-    # atom_identifier's opaque legacy fallback to infer an ID from mutable text.
-    pattern = rf"(?:[0-9]+-)?{re.escape(predecessor)}(?:-[^/@\\\x00]+)?@{version}\.md"
-    if not re.fullmatch(pattern, filename):
-        raise WorkJournalError("invalid-event", "replacement filename must identify predecessor_atom_id")
-
-
 def _validate_replacement_payload(value: Mapping[str, Any]) -> None:
     present = REPLACEMENT_FIELDS & value.keys()
     if not present:
@@ -395,16 +354,54 @@ def _validate_replacement_payload(value: Mapping[str, Any]) -> None:
         or value["schema_version"] != 3
         or value["event"] != "completed"
         or value.get("subject_kind") != "file"
-        or value.get("action_type") != "MOVE"
+        or value.get("action_type") not in {"MOVE", "MOVE+UPDATE"}
     ):
-        raise WorkJournalError("invalid-event", "replacement payload requires a schema-v3 completed file MOVE event")
-    predecessor = _validate_replacement_ids(value)
-    _validate_replacement_result(value["result"], predecessor)
+        raise WorkJournalError("invalid-event", "replacement payload requires a schema-v3 completed file MOVE or MOVE+UPDATE event")
+    # CA-D-435 records the observed identity strings and their order exactly.
+    # Atom-ID grammar, successor semantics, and archive placement belong to
+    # CA-E-462, not Journal storage admission (CA-R-1491).
+    if not isinstance(value["predecessor_atom_id"], str):
+        raise WorkJournalError("invalid-event", "predecessor_atom_id must be a string")
+    successors = value["successor_atom_ids"]
+    if not isinstance(successors, list) or any(not isinstance(item, str) for item in successors):
+        raise WorkJournalError("invalid-event", "successor_atom_ids must be an array of strings")
+
+
+def _validate_workflow_event(value: dict[str, Any]) -> dict[str, Any]:
+    """Admit execution evidence to the same Journal, not a file-change fiction."""
+    expected = {'schema_version', 'kind', 'event_id', 'action_id', 'event', 'author',
+                'occurred_at', 'llm_session', 'structural_scope', 'workflow_run_id',
+                'workflow_name', 'step', 'outcome', 'report_path', 'details', 'event_digest'}
+    if set(value) != expected or value.get('schema_version') != 4:
+        raise WorkJournalError('invalid-event', 'workflow execution requires schema-v4 fields')
+    if value.get('kind') != 'workflow_execution' or value.get('event') not in EVENTS:
+        raise WorkJournalError('invalid-event', 'invalid workflow execution kind or event')
+    for field in ('event_id', 'action_id', 'author', 'occurred_at', 'structural_scope',
+                  'workflow_run_id', 'workflow_name', 'step', 'outcome', 'report_path'):
+        _require_string(value, field)
+    if not AUTHOR_RE.fullmatch(value['author']):
+        raise WorkJournalError('invalid-event', 'author must be a full GitHub username')
+    _validate_occurred_at(value['occurred_at'])
+    session = value['llm_session']
+    if not isinstance(session, dict) or set(session) != {'app', 'uuid'}:
+        raise WorkJournalError('invalid-event', 'llm_session must contain only app and uuid')
+    for field in ('app', 'uuid'):
+        _require_string(session, field)
+    path = Path(value['report_path'])
+    if path.is_absolute() or '..' in path.parts or not path.parts:
+        raise WorkJournalError('invalid-event', 'report_path must be repository-relative')
+    if not isinstance(value['details'], dict):
+        raise WorkJournalError('invalid-event', 'details must be an object')
+    if value['event_digest'] != event_digest(value):
+        raise WorkJournalError('invalid-event', 'event_digest does not match event')
+    return value
 
 
 def validate_sealed_event(event: Mapping[str, Any]) -> dict[str, Any]:
     """Validate an event already sealed by COMMIT_CONTEXT without re-resolution."""
     value = dict(event)
+    if value.get('schema_version') == 4 or value.get('kind') == 'workflow_execution':
+        return _validate_workflow_event(value)
     if {"action_message", "before_path", "before_sha256", "session_id", "session"} & set(value):
         raise WorkJournalError("invalid-event", "event contains forbidden duplicated provenance or prior state")
     schema_version = value.get("schema_version")

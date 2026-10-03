@@ -1,0 +1,632 @@
+{
+  "schema_version": 1,
+  "workflow": "CA-O-104",
+  "implementation_authority": {
+    "scope_unit": "PROMPTS",
+    "source_ids": [
+      "CA-R-1801",
+      "CA-R-1802",
+      "CA-M-317",
+      "CA-E-524",
+      "CA-D-509",
+      "CA-D-510",
+      "CA-R-1803",
+      "CA-D-511"
+    ]
+  },
+  "sources": [
+    {
+      "atom_id": "CA-M-233",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL--prefer-positive-normative-statements.md",
+      "sha256": "c377b64f94f41a68f97151370042bc08ec743ef7068ac723475acbe61b62e167"
+    },
+    {
+      "atom_id": "CA-R-1526",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1526-CORE_META_MODEL-GENERAL-REQUIREMENT--define-action-execution-kind.md",
+      "sha256": "2e3f06da63e0309d9f33a92630139ab5420678aa8ba42344f53976d4671b92e6"
+    },
+    {
+      "atom_id": "CA-R-1307",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1307-CORE_META_MODEL-CORE-REQUIREMENT--limit-artifact-activity-to-explicit-status-models.md",
+      "sha256": "89cf0cde999fac4e6c9697936637d05a39be30675f1f305caa9e029bd7154285"
+    },
+    {
+      "atom_id": "CA-R-1245",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "sha256": "fbfb35fcfff4feadfe7ec62e599e502a65eb0007108fe7947ca555d71abb0e54"
+    },
+    {
+      "atom_id": "CA-R-1248",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+      "sha256": "7dc7c6805b23dc758fdca38e2d50506b86c2035844b90a78612c1690f664aad5"
+    },
+    {
+      "atom_id": "CA-R-1436",
+      "version": 7,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE--define-is-allowed-value-of.md",
+      "sha256": "f14386a0191e847b6b0ef95d647ff8670b8fd37ad0944f004e5f41fde1d646ae"
+    },
+    {
+      "atom_id": "CA-R-1662",
+      "version": 26,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1662-PROJECT_CONFIGURATION-REQUIREMENT--register-type-values-for-evaluation-atoms.md",
+      "sha256": "0baa7e3d84c87db43509a6f9f3c5a2d3aa49a4b22e03e5dec1164f4a0763d91b"
+    },
+    {
+      "atom_id": "CA-D-256",
+      "version": 14,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-256-CORE_META_MODEL-CORE-DELIVERY--define-carries.md",
+      "sha256": "1cc8ccf565aaa36b83d71d8d89514cc85a94ace691281daca38f269342e6b9bd"
+    },
+    {
+      "atom_id": "CA-D-257",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-257-CORE_META_MODEL-CORE-DELIVERY--define-is-carried-by.md",
+      "sha256": "c98a25d70836de9a0cf6c3da781fb9e64e810fae5f47a4df734eeaa63d7a5682"
+    },
+    {
+      "atom_id": "CA-D-268",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+      "sha256": "2afc204f59d90286345c9f4b5f74f8fcf2b8b40b992ab5aca734b0ad53e46335"
+    },
+    {
+      "atom_id": "CA-D-269",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "sha256": "eea15e5b1c2411acdd552c8701da98ac34bab89a107ee05f28760eb1ce8eeac3"
+    },
+    {
+      "atom_id": "CA-D-270",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+      "sha256": "8322273a6938108a8889c01b74c7bfc600b01ba39bfaa0bd0c0c01cc7352a6a3"
+    },
+    {
+      "atom_id": "CA-D-274",
+      "version": 17,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md",
+      "sha256": "db4a0f0b1952dfd28ddabce2cfb3db1f3c53618fbc1d1b33ddfc5259a32d7d54"
+    },
+    {
+      "atom_id": "CA-D-276",
+      "version": 15,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md",
+      "sha256": "ea6013f935f9b465d4a6ea5afd80a20a44dbc4ab50db2d031f325510f4881b06"
+    },
+    {
+      "atom_id": "CA-D-283",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+      "sha256": "b4fcef9aac710426b5e27af779df4f6ab459fba9746c6a720abb3deb5ec1faf9"
+    },
+    {
+      "atom_id": "CA-R-1700",
+      "version": 21,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1700-CORE_META_MODEL-CORE-REQUIREMENT--admit-atoms-only-where-a-role-has-an-atomic-unit.md",
+      "sha256": "6df2206a5d6d534dead7d7d0a6994db1023345e515c40025a01004403cf25832"
+    },
+    {
+      "atom_id": "CA-D-280",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-280-CORE_META_MODEL-DELIVERY--serialize-cce-operators-in-bold.md",
+      "sha256": "1f4289f4d3c0e0b832b4017edf7dac48f505802c8e65daafe7383c8264f68849"
+    },
+    {
+      "atom_id": "CA-D-446",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-446-CORE_META_MODEL-CORE--give-every-non-draft-atom-revision-one-identifier.md",
+      "sha256": "6d956e10812bb5bbf9b5a671c58ce2639a26832e364a0446360a5514dbebb7e0"
+    },
+    {
+      "atom_id": "CA-D-478",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-478-CORE_META_MODEL-CORE-DELIVERY--store-every-atom-property-in-one-internal-location.md",
+      "sha256": "a40ad3683ecddd536e5b7eb6c044e8da15806ab44946fa1354c408ce5e966464"
+    },
+    {
+      "atom_id": "CA-D-479",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-479-CORE_META_MODEL-DELIVERY--use-stable-headings-for-atom-body-properties.md",
+      "sha256": "0819f8433cde89484e21a200466504a9fdcad31b58958c777a761637fbb45ff1"
+    },
+    {
+      "atom_id": "CA-D-480",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-480-CORE_META_MODEL--keep-atom-addresses-consistent-with-carried-properties.md",
+      "sha256": "b5bb0b3b11a8ac86964c39680b87158380d6c1da1c02173d0876957580ea6698"
+    },
+    {
+      "atom_id": "CA-D-482",
+      "version": 7,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-482-CORE_META_MODEL-DELIVERY--carry-the-resolved-claim-target-scope-unit.md",
+      "sha256": "234720c3b8aafb19a9befc3a934155959b49ec876897370b1ae16adf290e4065"
+    },
+    {
+      "atom_id": "CA-D-483",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-483-CORE_META_MODEL-DELIVERY--carry-atom-revision-status-in-frontmatter.md",
+      "sha256": "8a83fb3e21c84bc0b657fa61ada0b6d28c4dcef3ebdba070570009e538204de8"
+    },
+    {
+      "atom_id": "CA-D-494",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-494-CORE_META_MODEL-DELIVERY--store-operator-registry-in-project-root.md",
+      "sha256": "9da2650279e0efee42812c499286dc8b0f63fe8922c3aaa41e14ae441b6004d6"
+    },
+    {
+      "atom_id": "CA-D-495",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-495-CORE_META_MODEL-CORE-DELIVERY--carry-applicability-in-the-registered-body-sections.md",
+      "sha256": "60bb7faad37efa795acd0a730b8af40c6759fd29cbf435aa4ea1599902088234"
+    },
+    {
+      "atom_id": "CA-D-496",
+      "version": 7,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-496-CORE_META_MODEL--store-one-review-report-per-source-atom.md",
+      "sha256": "29708a515544e1acb402420264e5160c722dc386e435d84f4a821843b7d587ae"
+    },
+    {
+      "atom_id": "CA-D-497",
+      "version": 3,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-497-CORE_META_MODEL--encode-rmed-review-batch-limits.md",
+      "sha256": "1a689616605c762c43f95dbc5779b3203210c9b9df37d237c1579207e58a080e"
+    },
+    {
+      "atom_id": "CA-D-505",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-505-CORE_META_MODEL-CORE--define-the-entity-carrier-binding.md",
+      "sha256": "a8cea8b0ee7e5d0a1030c8871b110164eb6f7cc96425b7d1e2dcd935edef5ab3"
+    },
+    {
+      "atom_id": "CA-D-506",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-506-CORE_META_MODEL-CORE--give-every-non-ephemeral-entity-a-carrier.md",
+      "sha256": "8f1102676b3b04ec408c17a6a6995858030bd9b0df609cf9feb9f96fb829fae9"
+    },
+    {
+      "atom_id": "CA-D-507",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-507-CORE_META_MODEL-CORE--separate-entity-identity-from-carrier-format.md",
+      "sha256": "f972031598deeda63106bb92875fde04f7a34c27916d4a717a481286f1fb2a88"
+    },
+    {
+      "atom_id": "CA-E-246",
+      "version": 25,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+      "sha256": "6d5e65915b857be8e399aee9b32364dde2caa56ec6757bd8e69282b4ffee0098"
+    },
+    {
+      "atom_id": "CA-E-520",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-520-CORE_META_MODEL-EVALUATION_APPROACH--check-rmed-atom-coherence.md",
+      "sha256": "9e3cdee5027c3e24cb91e1ce9fe009dc281b499a49a45aaacea38f3ff59fcada"
+    },
+    {
+      "atom_id": "CA-M-113",
+      "version": 17,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL--write-claims-in-caprmedio-controlled-english.md",
+      "sha256": "81a512b270a42421edf5a5a3f576b334581e8b407b8acd1d4f7d3370f3f54e77"
+    },
+    {
+      "atom_id": "CA-M-125",
+      "version": 25,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL--assign-subjects-from-the-claim.md",
+      "sha256": "3c4a8960bac48476767cb4deda9a7771ea48b8fb303a1c6b85da2dc9a0f19e31"
+    },
+    {
+      "atom_id": "CA-M-229",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL--render-governed-terms-and-cce-operators-distinctly.md",
+      "sha256": "5c2a07ec7999cffffc142edcb4569622e74eda19f2b2f01ac1121a20c9891c84"
+    },
+    {
+      "atom_id": "CA-M-234",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL--register-expandable-canonical-cce-operator-list.md",
+      "sha256": "76e25a9c4bc88ecf5d9e44f7379ed4ba421e3248ae80583efef48ac2e43ad2c5"
+    },
+    {
+      "atom_id": "CA-M-235",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-235-CORE_META_MODEL--express-cardinality-with-comparison-operators-and-integer-literals.md",
+      "sha256": "738043ae13bf80391f1bd5ac62b179a7f68df6b6203474f322e78d8469f8456d"
+    },
+    {
+      "atom_id": "CA-M-236",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-236-CORE_META_MODEL--normalize-noncanonical-cce-operator-expressions.md",
+      "sha256": "11adc0ba64795bc0b33892dfed8ce46c24c93a3fcc364ba1179a2a84aaa096b9"
+    },
+    {
+      "atom_id": "CA-M-294",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-294-CORE_META_MODEL--use-simpler-words-without-losing-meaning.md",
+      "sha256": "f43b99c71608021b8e927996c4924fb1ece77c55346c73cbd82d1fc3a9407700"
+    },
+    {
+      "atom_id": "CA-M-299",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-299-CORE_META_MODEL--distinguish-scope-unit-names-from-ordinary-english.md",
+      "sha256": "bd094829b8aaf2e5bc69ea104346c8c7578a46002c1746ae7b1f22f1263dd9ba"
+    },
+    {
+      "atom_id": "CA-M-301",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-301-CORE_META_MODEL--make-atom-claims-easy-to-understand.md",
+      "sha256": "25e73b1f583546fad035eee4de17c43a3f5cf718220bc01e23c488bc984334c1"
+    },
+    {
+      "atom_id": "CA-M-308",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-308-CORE_META_MODEL-CORE--resolve-the-effective-cce-role-profile.md",
+      "sha256": "c0f47bd447cde321bc74e49045b16c8bfcdaac54709d5dd2c362f218d93aa0f0"
+    },
+    {
+      "atom_id": "CA-M-310",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-310-CORE_META_MODEL--write-requirement-claims-with-the-requirement-cce-profile.md",
+      "sha256": "6a98b05b39ffe429e7923a8caec113ab87a53878ee2abfd782ea6b62c3ca6f49"
+    },
+    {
+      "atom_id": "CA-M-311",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-311-CORE_META_MODEL--write-method-claims-with-the-method-cce-profile.md",
+      "sha256": "1c86977aded30c27f138f2631683150fdd93195ca1ff652a757f8ece6a2ac1cb"
+    },
+    {
+      "atom_id": "CA-M-312",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-312-CORE_META_MODEL--write-evaluation-claims-with-the-evaluation-cce-profile.md",
+      "sha256": "110ca561eac9dde519f6f7ee97c1e69b86125ef0a6eeb1d05a6021aca2716569"
+    },
+    {
+      "atom_id": "CA-M-313",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-313-CORE_META_MODEL-METHOD--write-delivery-claims-with-the-delivery-cce-profile.md",
+      "sha256": "570884157745cc3016065c683188b6b80ad0376bba2f76948c279562edc0f947"
+    },
+    {
+      "atom_id": "CA-O-028",
+      "version": 8,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-028-CORE_META_MODEL-WORKFLOW--resolve-rmedo-conflicts-without-leaving-gaps.md",
+      "sha256": "8d77cd7ef0fb27dbc68be5ed4a5fb358ef6e02895f2029039abcc7f0282bf8e3"
+    },
+    {
+      "atom_id": "CA-O-067",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-067-CORE_META_MODEL-ACTION--assess-atom-update-identity.md",
+      "sha256": "35535a2de252b17c1473690c2cbe11a5f47d01d5e1fea737e5441ea55007c1da"
+    },
+    {
+      "atom_id": "CA-O-104",
+      "version": 7,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-104-CORE_META_MODEL-WORKFLOW--review-and-repair-a-bounded-rmed-atom-batch.md",
+      "sha256": "69b78658e09e59b0fba749d0bd63a5e09105562b958f8f33d04bee55387f573a"
+    },
+    {
+      "atom_id": "CA-O-105",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-105-CORE_META_MODEL-ACTION--select-a-bounded-rmed-review-batch.md",
+      "sha256": "d2b70d597eea1c6a143f84bf78dd415472f52a9f3f39eb22b701015511357b4f"
+    },
+    {
+      "atom_id": "CA-O-106",
+      "version": 8,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-106-CORE_META_MODEL-ACTION--evaluate-rmed-atoms-one-by-one.md",
+      "sha256": "28a8db9853d189bd07a2f65e5b8aa68171366e0b6dcb552151eda55302ba25c0"
+    },
+    {
+      "atom_id": "CA-O-111",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-111-CORE_META_MODEL-ACTION--fix-confirmed-local-rmed-atom-issues.md",
+      "sha256": "67f669ff69967c4a8496e37be3836664639dc6c81d5fe0ff3f957b2d02ab7be1"
+    },
+    {
+      "atom_id": "CA-O-108",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-108-CORE_META_MODEL-STEP--select-the-rmed-review-batch.md",
+      "sha256": "741aa7ecef3eb1c00d0e70e2d72d77f42416e7062b29b7fe31e4ebdbc55bbee6"
+    },
+    {
+      "atom_id": "CA-O-109",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-109-CORE_META_MODEL-STEP--evaluate-the-selected-rmed-review-batch.md",
+      "sha256": "d6c0a6493598c54aa9aca3407301c85a91d0d6cd2129d13a51e1b32f12ec01b8"
+    },
+    {
+      "atom_id": "CA-O-110",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-110-CORE_META_MODEL-STEP--repair-the-evaluated-rmed-review-batch.md",
+      "sha256": "b988a4b68f6f34b78c17bc6a66cf9646c2c3b21c4ce45910e65d67f80f506ae5"
+    },
+    {
+      "atom_id": "CA-R-1200",
+      "version": 16,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1200-CORE_META_MODEL-CORE-REQUIREMENT--define-depends-on-subject-relation-kind.md",
+      "sha256": "baa339768dcb5ef82ea6ce07c2020b934f787e552fc3e08a37dbc85c0021aa1f"
+    },
+    {
+      "atom_id": "CA-R-1201",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-CORE_META_MODEL-CORE-REQUIREMENT--require-one-governed-subject-on-every-atom.md",
+      "sha256": "d56b4f7ba89613ab5247e72ec6aadf873b310463731b9269e80a498b2b8408d6"
+    },
+    {
+      "atom_id": "CA-R-1202",
+      "version": 14,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1202-CORE_META_MODEL-CORE-REQUIREMENT--resolve-every-direct-subject-target-once.md",
+      "sha256": "a92e1fc6be791e4fa7f5400efde58cd2d07e5b5e5d6f20a65125acb2ddb9de07"
+    },
+    {
+      "atom_id": "CA-R-1269",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1269-CORE_META_MODEL-CORE-REQUIREMENT--define-claim.md",
+      "sha256": "5f0d2a2425973d9fe2050cf172122c474633af5e17deb9b9e1327a86d1a564b7"
+    },
+    {
+      "atom_id": "CA-R-1270",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1270-CORE_META_MODEL-CORE-REQUIREMENT--permit-one-composite-claim-as-one-authority-unit.md",
+      "sha256": "45357611aae38085ff1382bff1ba7910512ceb9bac2514a6362858a60d9604f2"
+    },
+    {
+      "atom_id": "CA-R-1271",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1271-CORE_META_MODEL-GENERAL--permit-one-composite-claim-scope.md",
+      "sha256": "e40e3c7c67da096674fb6f23c534141816ef04a92bb6a4385d3312e0625c0ed6"
+    },
+    {
+      "atom_id": "CA-R-1273",
+      "version": 14,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1273-CORE_META_MODEL-CORE--keep-summary-source-faithful.md",
+      "sha256": "23232d955b8025b825cf0d990cf74feac12a0000a8a5af623c0e5893f416441a"
+    },
+    {
+      "atom_id": "CA-R-1275",
+      "version": 14,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-CORE_META_MODEL-CORE--define-subject.md",
+      "sha256": "0c73fdd60d70139ba4da4d14b1d2d7e29fda6531a99b2cebe55f82fdb459c0ec"
+    },
+    {
+      "atom_id": "CA-R-1280",
+      "version": 16,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1280-CORE_META_MODEL-CORE-REQUIREMENT--reference-every-prerequisite-subject-through-depends-on.md",
+      "sha256": "ad790cc863a074422541df4c627ae7489853672df4e1e65d53a50033286e6743"
+    },
+    {
+      "atom_id": "CA-R-1339",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1339-CORE_META_MODEL-CORE-REQUIREMENT--define-requirement-content-role.md",
+      "sha256": "8c0b6d76eb5023a58e9b830e744cc85c4d436bac9e1ec0cf8a0a7868ae174b63"
+    },
+    {
+      "atom_id": "CA-R-1340",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1340-CORE_META_MODEL-CORE-REQUIREMENT--define-method-content-role.md",
+      "sha256": "4758c73050eb598900b3164ef7dda1e252bce776670bfe192e203d82b6acd314"
+    },
+    {
+      "atom_id": "CA-R-1341",
+      "version": 10,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1341-CORE_META_MODEL-CORE-REQUIREMENT--define-evaluation-content-role.md",
+      "sha256": "d67d9303f02a51d6e1bdde8fa84f5c50d32477ec7a94d09b53ac2fd6b1d680c7"
+    },
+    {
+      "atom_id": "CA-R-1342",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1342-CORE_META_MODEL-CORE-REQUIREMENT--define-delivery-content-role.md",
+      "sha256": "b6df26c513024ef68bb89cb117cc6ea835e9c584a79a50b2f191dda40ab1d326"
+    },
+    {
+      "atom_id": "CA-R-1432",
+      "version": 9,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL--classify-admitted-atom-changes-by-semantic-effect.md",
+      "sha256": "74b7e6a47a421dd660cc905dd19bdb874b23ef2c2030473b5c3c694f5b9fa487"
+    },
+    {
+      "atom_id": "CA-R-1766",
+      "version": 18,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1766-CORE_META_MODEL-CORE--make-the-type-value-of-an-atom-identity-bearing.md",
+      "sha256": "693cf56a21f43b0e36cd07bfccb25332a6a29c529366131660cd7f29801d4ce8"
+    },
+    {
+      "atom_id": "CA-R-1464",
+      "version": 5,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1464-CORE_META_MODEL--keep-summary-fixed-for-atom-identity.md",
+      "sha256": "5ad1fc1b5e20641bf1455da8afd99276a0635b494074784e41af23de36e3dc88"
+    },
+    {
+      "atom_id": "CA-R-1465",
+      "version": 8,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1465-CORE_META_MODEL-CORE--define-summary-as-an-atom-property.md",
+      "sha256": "36b83d020dbfbeccde12bee2f5d83e2c8d42f7469072b5f2e95e3f17b08a260a"
+    },
+    {
+      "atom_id": "CA-R-1624",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1624-CORE_META_MODEL-CORE-REQUIREMENT--keep-details-within-the-primary-contribution.md",
+      "sha256": "d985c624f5c0b92010a3f1a670e2e12ef0d018aa221ce1052faab293060966cf"
+    },
+    {
+      "atom_id": "CA-D-284",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-284-CORE_META_MODEL-DELIVERY--serialize-filename-token-case.md",
+      "sha256": "e86d9f3632b1f9981a19d9dc5fb2897ed14e3b7e81ba7cb66eeb261788749a56"
+    },
+    {
+      "atom_id": "CA-D-302",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-302-CORE_META_MODEL-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+      "sha256": "6dafff118ee74ab5995cb2918584bcc4fa1c843de0bb306f06926f4169ed6bfb"
+    },
+    {
+      "atom_id": "CA-D-498",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-498-PROJECT_CONFIGURATION--use-full-scope-unit-names-in-filenames.md",
+      "sha256": "bcd795b427e1196adc5391aa977b4b9cff4d6675b709d3968f7444a6854c5c2c"
+    },
+    {
+      "atom_id": "CA-D-296",
+      "version": 13,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-296-CORE_META_MODEL--materialize-content-role-directories-on-first-artifact.md",
+      "sha256": "7c4f2e99149fb2d2f0e04207ce06be0b5ce2a056fab7520f19b860d0e13f93da"
+    },
+    {
+      "atom_id": "CA-D-324",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-324-PROJECT_CONFIGURATION-DELIVERY--register-project-current-scope-content-role-directories.md",
+      "sha256": "2c3ac3c7a0b8165c61bc24b51c27102ee68061fec1e26537118cddb5f1b0c97d"
+    },
+    {
+      "atom_id": "CA-D-451",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-451-CORE_META_MODEL-STANDARD--classify-folders-by-their-carrier-responsibility.md",
+      "sha256": "b213375c53de3490d767e8cdfde2f84cd5bea8392d5f4f515afda50610a87e67"
+    },
+    {
+      "atom_id": "CA-D-466",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-466-CORE_META_MODEL-STANDARD--place-carriers-by-applicable-status-delivery.md",
+      "sha256": "d3336f3ff4e75dbe2d02729c0442bdc59e102cbf12f73a0e5fd29539eaad6263"
+    },
+    {
+      "atom_id": "CA-R-1318",
+      "version": 11,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md",
+      "sha256": "b30f5d73b9c4aff8cfc69c228a2ed4759c9d260297162cea46d0f42b75dd6e6b"
+    },
+    {
+      "atom_id": "CA-R-1279",
+      "version": 12,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "sha256": "80e2ba7b9461cf5909891d3c7c2c2bcd12baccc161b7a86f7b977552a61666d5"
+    },
+    {
+      "atom_id": "CA-R-1799",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/04_requirement/CA-R-1799-CORE-REQUIREMENT--provide-capabilities-without-forcing-their-execution.md",
+      "sha256": "baebd5a10885cede9a4a6ed41e67372eb0f704e8ffae04f1dcd7cc3b91aed282"
+    },
+    {
+      "atom_id": "CA-R-1801",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/04_requirement/CA-R-1801-PROMPTS--provide-complete-local-rmed-review-capability.md",
+      "sha256": "5c129bb2d76730d10ffff91b6a70e5b7512cc8983d02b07c109abb78821022ad"
+    },
+    {
+      "atom_id": "CA-R-1802",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/04_requirement/CA-R-1802-PROMPTS--keep-review-completion-separate-from-applied-edits.md",
+      "sha256": "d834b610591f4d368a3d603a976ac0379cbeffaba04680bf989e96d66cc1d74b"
+    },
+    {
+      "atom_id": "CA-M-317",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/05_method/CA-M-317-PROMPTS--separate-content-assessment-from-heading-recognition.md",
+      "sha256": "b54377eb27c0b9d41dafb9918c512f6f21bf733c3689ce3041c39e74f8ee0dea"
+    },
+    {
+      "atom_id": "CA-E-524",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/06_evaluation/CA-E-524-PROMPTS-QA_CASE--verify-rmed-review-prompt-coverage-and-completion.md",
+      "sha256": "236515b826a624acb0a6c4de6cd24f599a6b665a3aba27e242bf8218486acc78"
+    },
+    {
+      "atom_id": "CA-D-509",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/07_delivery/CA-D-509-PROMPTS--store-the-rmed-review-prompt-package.md",
+      "sha256": "b25af7a1eb799f83654db5275365864bdf32b1b3e1ef384facedcb96b44f2375"
+    },
+    {
+      "atom_id": "CA-D-510",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/07_delivery/CA-D-510-PROMPTS--serialize-review-coverage-and-correction-outcomes-separately.md",
+      "sha256": "b9e9ca785d7c37780585ac3c8ad9ab229b0200077c66fd23f12ac5e1167d7bb9"
+    },
+    {
+      "atom_id": "CA-D-511",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/07_delivery/CA-D-511-PROMPTS--store-full-review-run-reports-in-markdown.md",
+      "sha256": "85e2144a52907f2e001c29510b30c10ac4714738faa1f3980f49c0ce1a51a2af"
+    },
+    {
+      "atom_id": "CA-R-1803",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/04_requirement/CA-R-1803-PROMPTS--provide-traceable-full-review-run-evidence.md",
+      "sha256": "56c560c56c2788f5510603fe329dd7a74ee785438af3820e00a5713cca659376"
+    }
+  ],
+  "settings": [
+    {
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
+      "sha256": "c13afc109aeeb68de67aef338e75e997d00a48cc34fdab4b12d149ee2bfce5b8"
+    },
+    {
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+      "sha256": "ffebca4931bd3b62a2c5027ff860829b1524db02c0a03ce2b136519f43ad61ce"
+    }
+  ],
+  "evaluators": {
+    "cce": [
+      "CA-E-520",
+      "CA-M-113",
+      "CA-M-233",
+      "CA-M-229",
+      "CA-M-234",
+      "CA-M-235",
+      "CA-M-236",
+      "CA-M-294",
+      "CA-M-299",
+      "CA-M-301",
+      "CA-M-308",
+      "CA-M-310",
+      "CA-M-311",
+      "CA-M-312",
+      "CA-M-313",
+      "CA-D-280"
+    ],
+    "properties": [
+      "CA-E-520",
+      "CA-D-268",
+      "CA-D-269",
+      "CA-D-270",
+      "CA-D-274",
+      "CA-D-276",
+      "CA-D-283",
+      "CA-R-1700",
+      "CA-D-478",
+      "CA-D-479",
+      "CA-D-482",
+      "CA-D-483",
+      "CA-D-495"
+    ],
+    "coherence": [
+      "CA-E-520",
+      "CA-R-1269",
+      "CA-R-1270",
+      "CA-R-1271",
+      "CA-R-1273",
+      "CA-R-1465",
+      "CA-R-1624",
+      "CA-D-495"
+    ]
+  },
+  "review_profile": "atom_local",
+  "report_contract": 6,
+  "excluded_checks": [
+    "subjects",
+    "governed_entity",
+    "alignment",
+    "content_role"
+  ],
+  "default_workflow": "gather_check_fix",
+  "default_report_format": "single_report",
+  "automatic_recheck": false,
+  "report_contract_scope": "optional historical contract-6 tools; not the default workflow"
+}

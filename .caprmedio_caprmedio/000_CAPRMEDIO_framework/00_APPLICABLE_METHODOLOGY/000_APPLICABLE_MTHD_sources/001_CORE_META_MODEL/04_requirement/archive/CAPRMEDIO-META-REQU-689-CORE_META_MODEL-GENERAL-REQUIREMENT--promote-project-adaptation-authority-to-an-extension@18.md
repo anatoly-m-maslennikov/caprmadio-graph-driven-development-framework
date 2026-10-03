@@ -1,0 +1,23 @@
+---
+subjects:
+  governs: "extension-model"
+  depends_on: []
+version: 18
+updated_at: "2026-09-10 07:24:21 +0400"
+relations:
+  child_of:
+    - CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics
+    - CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics
+    - CA-R-1058
+atom_id: "CAPRMEDIO-META-REQU-689"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Requirement"
+---
+# Promote Project Adaptation authority to an Extension
+
+an operator **may** promote a coherent reusable subset of Project Adaptation authority into a separately identified Extension while preserving exact source provenance **and** leaving the source Project Adaptation unchanged **until** explicit reconciliation.

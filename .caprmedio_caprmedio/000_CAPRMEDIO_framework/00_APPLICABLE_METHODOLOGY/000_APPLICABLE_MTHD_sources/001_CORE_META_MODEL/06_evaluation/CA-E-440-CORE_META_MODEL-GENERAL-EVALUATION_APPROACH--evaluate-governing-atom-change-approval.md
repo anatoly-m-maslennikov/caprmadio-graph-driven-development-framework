@@ -1,0 +1,43 @@
+---
+version: 14
+updated_at: "2026-10-02 20:03:51 +0400"
+relations: {"child_of":["CA-E-001"],"evaluation_for":["CA-R-1559","CA-R-1591","CA-R-1552","CA-R-1080"]}
+subjects:
+  governs: "AI Agent/authorization"
+  depends_on:
+    - "Atom/Revision/Author"
+    - "Operator"
+    - "AI Agent"
+    - "AI Agent/Confidence"
+    - "Atom/Content Role: Plan/Type: Plan/Autonomous Confidence Threshold"
+    - "Spec"
+    - "Atom"
+    - "Atom/Content Role: Evaluation"
+    - "Atom/Content Role: Plan/Type: Plan"
+    - "Atom/Content Role: Requirement"
+    - "Atom/Content Role: Method"
+    - "Atom/Content Role: Delivery"
+    - "Project"
+atom_id: "CA-E-440"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Evaluation Approach"
+global_tier: 10
+---
+# Summary
+
+Evaluate governing Atom change approval
+
+## Scope
+
+Governing Atom changes.
+
+## Claim
+
+the governing-Atom change Evaluation **must** return `fail` **if** an Operator-authored Atom changes **without** Operator approval, an AI-authored Atom changes autonomously below the Plan confidence threshold, a permission **or** additional Operator constraint is bypassed, the Author is changed **before** resolving the approval requirement, **or** an omitted **or** unresolved Author is assumed **to** be an AI Agent. it **must** also return `fail` **if** an authorized RMED change is reported against the old unchanged baseline **or** its affected work **and** Evaluations are **not** resolved again. AI authorship **and** sufficient confidence **must not** override an explicit prohibition.
+
+## Details

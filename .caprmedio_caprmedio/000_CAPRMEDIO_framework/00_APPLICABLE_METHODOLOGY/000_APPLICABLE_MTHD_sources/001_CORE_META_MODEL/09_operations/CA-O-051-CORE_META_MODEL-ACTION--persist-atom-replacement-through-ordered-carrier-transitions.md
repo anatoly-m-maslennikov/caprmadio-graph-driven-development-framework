@@ -8,9 +8,18 @@ subjects:
     - "Atom/Carrier"
     - "Journal"
     - "Artifact/Revision/Archive Carrier Basename"
-version: 3
-updated_at: "2026-09-17 05:03:20 +0000"
+version: 6
+updated_at: "2026-09-28 06:30:40 +0400"
 relations: {relates_to: [CA-R-1432, CA-R-807]}
+atom_id: "CA-O-051"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Persist Atom replacement through ordered Carrier transitions
 
@@ -18,5 +27,5 @@ Persist Atom Replacement **means** the reusable Action that persists **`=1`** ac
 
 1. persist the successor as Active **before** archiving the predecessor.
 2. archive the predecessor as one whole Carrier under CA-D-303 **and** record the corresponding replacement **in** the authoritative Journal with explicit predecessor **and** successor Atom IDs under CA-R-807.
-3. preserve the predecessor's content, identity, frontmatter, **and** Version exactly; change its basename **only** by adding the canonical `@<version>` Archive suffix under CA-D-289.
+3. preserve the predecessor's body, Summary, identity, Version, **and** every frontmatter value except its lifecycle `status` **and** `updated_at`; serialize `status: Archived` **and** refresh `updated_at` to the actual archive time. change its basename **only** by adding the canonical `@<version>` Archive suffix under CA-D-289.
 4. keep replacement history out of predecessor **and** successor Atom frontmatter; formal replacement relations **and** inverse navigation remain deferred under CA-R-807.

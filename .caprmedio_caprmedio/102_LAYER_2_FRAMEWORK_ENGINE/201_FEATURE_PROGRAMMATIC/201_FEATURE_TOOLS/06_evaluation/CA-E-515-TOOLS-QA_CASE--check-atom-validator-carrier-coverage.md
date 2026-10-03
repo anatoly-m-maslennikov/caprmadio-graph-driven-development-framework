@@ -5,13 +5,15 @@ type: QA Case
 current_scope_unit: TOOLS
 claim_target_scope_unit: TOOLS
 local_tier: Standard
+global_tier: 11
 author: Anatoly Maslennikov
 status: Active
-cce_version: cce_1
-cce_form: evaluation
 subjects:
   governs: "Tool/VALIDATE_ATOMS"
   depends_on:
+    - "Scope Unit"
+    - "Operator"
+    - "Atom/Revision/Author"
     - "Tool"
     - "Atom/Property"
     - "Atom/Frontmatter"
@@ -19,8 +21,8 @@ subjects:
     - "Atom/Summary"
     - "Relation"
     - "Evaluation"
-version: 5
-updated_at: "2026-09-24 14:16:19 +0000"
+version: 8
+updated_at: "2026-10-01 21:46:55 +0400"
 relations:
   evaluation_for:
     - CA-M-316
@@ -33,14 +35,18 @@ relations:
 
 Check Atom validator carrier coverage
 
+## Scope
+
+mechanical validation of Atom Carriers by `VALIDATE_ATOMS`.
+
 ## Claim
 
 the `VALIDATE_ATOMS` carrier coverage check **must** demonstrate faithful execution of applicable mechanical rules through end-to-end tests using mock Atom Carriers **without** replacing semantic review.
 
-- exercise the valid **and** invalid fixtures governed by CA-E-506, including explicit internal Properties, Draft identity exceptions, role-specific Statuses, body sections, fenced headings, duplicate YAML keys, unknown fields, missing values, **and** independently stored inverse Relations.
+- exercise the valid **and** invalid fixtures governed by CA-E-506-CORE_META_MODEL-QA_CASE--validate-self-sufficient-atom-carriers, including explicit internal Properties, Draft identity exceptions, role-specific Statuses, body sections, fenced headings, duplicate YAML keys, unknown fields, missing values, **and** independently stored inverse Relations.
 - add admitted extension Properties **and** previously unknown Scope Unit names: accept them **when** their applicable authority is supported; reject unsupported assumptions rather than hard-code Project contents.
 - remove a Property while retaining its filename token **or** expected folder: require a missing-internal-value finding. conflicting outward representations remain separate findings.
-- break **=1** candidate's YAML: require its failure **and** continued independent coverage, **not** omission. exclude a candidate explicitly: require its exclusion reason **and** accurate coverage.
+- break **`=1`** candidate's YAML: require its failure **and** continued independent coverage, **not** omission. exclude a candidate explicitly: require its exclusion reason **and** accurate coverage.
 - provide an unsupported governing rule **or** unresolved external reference context: require incomplete coverage, never a false pass.
 - a mechanically valid multi-Claim Atom **must not** be labeled semantically approved by this Tool.
 - invoke the real delivered command against isolated fixture Projects through its public JSON request/result interface. mock the input Atoms, reference context, **and** selected external boundaries, **not** the validator, rule checks, Relation resolution, **or** returned findings.
@@ -53,13 +59,23 @@ the `VALIDATE_ATOMS` carrier coverage check **must** demonstrate faithful execut
 
 ### Property contract regression cases
 
-- accept an otherwise conforming Atom lacking `cce_version`, `cce_form`, **and** `llm_session_ids`; reject **every** retired field individually **and** their combination under CA-D-478. none is a required-field finding **when** absent, **and** no value selects older authority.
-- supply a source-bound Property contract with **=1** missing adapter, a changed governing digest, a missing admission declaration, **and** incompatible declarations. require explicit incomplete coverage; removing a check from the executable bundle **must not** turn the same input into `valid`.
+- accept an otherwise conforming Atom lacking `cce_version`, `cce_form`, **and** `llm_session_ids`; reject **every** retired field individually **and** their combination under CA-D-478-CORE_META_MODEL-CORE-DELIVERY--store-every-atom-property-in-one-internal-location. none is a required-field finding **when** absent, **and** no value selects older authority.
+- supply a source-bound Property contract with **`=1`** missing adapter, a changed governing digest, a missing admission declaration, **and** incompatible declarations. require explicit incomplete coverage; removing a check from the executable bundle **must not** turn the same input into `valid`.
 - supply a rule bundle that contradicts its source binding **or** contains executable instructions. require safe rejection **without** executing the bundle **or** accepting it as new authority.
 
 ### Explicit Property encoding cases
 
-- test every common field encoding under CA-D-276 with a valid value, an absent required value, null, **and** each wrong YAML value kind. include non-integer Version, Boolean tiers, invalid timestamps, unregistered names, unknown role-specific Types, **and** forbidden Draft identity.
-- accept **=1** registered Operator name **in** `current_scope_unit` for an admitted Operator-owned Atom, with its separately carried target Scope Unit. reject an owner list even with **=1** item, multiple joined names, null, **and** an `operators` substitute. Author **and** owner remain independent.
+- test every common field encoding under CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter with a valid value, an absent required value, null, **and** each wrong YAML value kind. include non-integer Version, Boolean tiers, invalid timestamps, unregistered names, unknown role-specific Types, **and** forbidden Draft identity.
+- for an Atom established **to** be outside **every** Scope Unit, accept its Author's exact registered Operator name **in** `current_scope_unit`, with its separately carried target Scope Unit. reject a different registered name, a list even with **=1** item, multiple joined names, null, **and** an `operators` substitute. **if** external placement **or** registry context is unresolved, report incomplete coverage rather than treating an unknown Scope Unit name as external. an Atom inside a Scope Unit retains that Scope Unit **in** `current_scope_unit` independently of its Author.
 - exercise conditional Plan overrides, Concern Priority, generated Projection metadata, body-only Properties, **and** admitted extension fields. verify absent inherited overrides remain conforming **and** no body Property is silently recovered from a duplicate frontmatter copy.
 - remove a required source declaration for a recognized conditional Property: require an exact schema gap **and** incomplete coverage rather than an invented field contract.
+
+### Current body and Actor resolution cases
+
+- pass the exact role-specific layouts of CA-D-479-CORE_META_MODEL-DELIVERY--use-stable-headings-for-atom-body-properties, including empty optional Details content; fail missing, repeated, misordered, wrong-level, renamed, **and** empty required-value sections. fenced examples **must not** create headings **or** close sections.
+- pass a Plan with its Objective **and** a nonempty `### Definition of Done` inside Details. fail the retired Claim-based layout, a sibling Definition of Done, one nested inside another supporting subsection, duplicate definitions, **and** a missing definition. check Plan-model **and** Property-location adapters against the same layout.
+- pass Author names exactly present **in** a valid Operator registry; fail unknown names, case variants, whitespace variants, **and** role strings used instead of names. test missing **and** wrongly typed Authors, malformed TOML, missing fields, wrong types, duplicate names, empty registries, stale digests, unreadable files, **and** protected/out-of-bound paths. unavailable registry context produces `not_checked`, **not** false membership **or** an unregistered-name failure.
+- exercise the registry through the real CLI, retaining its digest **in** report context **and** unchanged input bytes. effective Plan Assignee resolution remains deferred; no test infers it from Author **or** requires it **to** pass.
+- expose **every** registered mechanical obligation **and** whether an adapter is installed **or** deferred. missing runtime evidence still produces `not_checked`; retaining that distinction **must not** hide a check from coverage.
+
+## Details

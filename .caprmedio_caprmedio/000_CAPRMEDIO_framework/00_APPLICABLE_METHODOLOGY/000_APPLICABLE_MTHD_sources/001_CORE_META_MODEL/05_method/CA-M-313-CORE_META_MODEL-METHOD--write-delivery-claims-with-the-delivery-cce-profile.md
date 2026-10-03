@@ -5,23 +5,44 @@ subjects:
     - "Atom/Content Role: Delivery"
     - "CCE Operator"
     - "Carrier"
+    - "Entity/Carrier"
     - "Atom/Claim"
-version: 2
-updated_at: "2026-09-22 18:51:52 +0400"
+    - "Atom/Subjects"
+    - "Relation Type"
+version: 5
+updated_at: "2026-09-28 22:47:05 +0000"
 relations:
   child_of:
     - CA-M-307
   relates_to:
     - CA-R-1342
+atom_id: "CA-M-313"
+content_role: "Method"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 11
 ---
-# Write Delivery Claims with the Delivery CCE Profile
+# Summary
 
-**to** write a Delivery Claim with the Delivery CCE Role Profile, the Author **must** perform **all** of:
+Write Delivery Claims with the Delivery CCE Profile
 
-1. state the primary contribution as what one Carrier stores **and** how the Carrier represents, places, releases, deploys, installs, migrates, **or** rolls back that content.
-2. identify the governed content, Carrier kind, representation, address **or** placement boundary, **and** applicable lifecycle condition explicitly.
-3. use modality, condition, temporal, quantification, logical, restriction, location predicate, other predicate, **and** comparison Operators as applicable **to** constrain representation **or** placement.
-4. use **means** **only** **when** defining the governed Delivery subject **or** one necessary Delivery-local representation.
-5. keep product behavior, reusable satisfaction procedure, evaluation result, implementation detail, **and** operational orchestration outside the Delivery primary contribution. reference their authority rather than reproducing it.
+## Scope
 
-a Delivery Claim governs the delivered Carrier boundary. it does **not** make the Carrier authoritative for meanings owned by another Atom.
+authoring Delivery Claims with the Delivery CCE Role Profile.
+
+## Claim
+
+a Delivery Claim **must** use the Delivery CCE Role Profile **to** express its Carrier contribution with the following authoring conventions:
+
+1. name the governed Carrier **or** Entity/Carrier binding **and** state its definition, classification, **or** constraint directly.
+2. include format, content, address, placement, **or** lifecycle conditions **when** they are relevant **to** that contribution.
+3. choose CCE Operators **to** express the applicable modality, conditions, quantities, **and** comparisons.
+4. use **means** for a definition; express a classification **or** binding through its admitted Relation Type.
+5. keep the Claim about the governed Subject; use references for separately governed contributions.
+
+## Details
+
+Carrier definitions **and** classifications need **only** the details relevant **to** their own contribution. they do **not** require an invented filename, format, **or** lifecycle condition.

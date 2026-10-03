@@ -111,14 +111,20 @@ class AuthorityChecksTest(unittest.TestCase):
         self.assertEqual(outcome(clean, "frontmatter.relations")["outcome"], "passed")
 
     def test_fenced_headings_do_not_create_body_properties(self) -> None:
-        valid = "# Summary\nA summary\n\n## Claim\nA claim\n```md\n## Claim\n```\n"
-        result = run_check(["CA-D-479"], {}, valid)
+        valid = "# Summary\nA summary\n\n## Scope\nA scope\n\n## Claim\nA claim\n```md\n## Claim\n```\n## Details\n"
+        result = run_check(["CA-D-479"], {"content_role": "Requirement"}, valid)
         self.assertEqual(outcome(result, "body.sections")["outcome"], "passed")
-        invalid = run_check(["CA-D-479"], {}, valid + "\n## Claim\nAgain\n")
+        invalid = run_check(
+            ["CA-D-479"], {"content_role": "Requirement"}, valid + "\n## Claim\nAgain\n"
+        )
         self.assertEqual(outcome(invalid, "body.sections")["outcome"], "failed")
 
     def test_empty_summary_is_not_filled_by_claim_content(self) -> None:
-        result = run_check(["CA-D-479"], {}, "# Summary\n\n## Claim\nA claim\n")
+        result = run_check(
+            ["CA-D-479"],
+            {"content_role": "Requirement"},
+            "# Summary\n\n## Claim\nA claim\n## Details\n",
+        )
         self.assertEqual(outcome(result, "body.sections")["outcome"], "failed")
 
     def test_unclassified_expansion_cannot_be_rejected_by_core_domain(self) -> None:
@@ -142,7 +148,7 @@ class AuthorityChecksTest(unittest.TestCase):
         self.assertEqual(outcome(result, "frontmatter.atom_id")["outcome"], "failed")
 
     def test_plan_sections_and_priority_are_conditional(self) -> None:
-        body = "# Summary\nWork\n## Claim\nDo work\n## Definition of Done\nResult exists\n## Details\nContext\n"
+        body = "# Summary\nWork\n## Objective\nDo work\n## Details\nContext\n### Definition of Done\nResult exists\n"
         result = run_check(
             ["CA-D-470", "CA-D-386"],
             {"content_role": "Plan", "type": "Plan", "priority": "high"},

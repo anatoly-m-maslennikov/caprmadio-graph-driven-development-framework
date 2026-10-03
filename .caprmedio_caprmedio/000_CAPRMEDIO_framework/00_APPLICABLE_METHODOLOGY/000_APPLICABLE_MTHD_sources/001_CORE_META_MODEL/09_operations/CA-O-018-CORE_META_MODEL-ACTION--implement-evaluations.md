@@ -17,12 +17,13 @@ subjects:
     - "Atom/Content Role: Delivery"
     - "Atom/Content Role: Requirement"
     - "Atom/Content Role: Implementation"
-version: 4
+version: 5
 updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
     - CA-O-017
     - CA-O-020
+global_tier: 11
 ---
 # Summary
 

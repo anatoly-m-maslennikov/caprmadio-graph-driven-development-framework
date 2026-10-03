@@ -7,17 +7,32 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan/Decomposition"
     - "Atom/Content Role: Plan/Type: Plan/Work Sequence Number"
     - "Hub Atom"
-version: 3
-updated_at: "2026-09-22 23:02:20 +0000"
+version: 5
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-R-1580", "CA-R-1583", "CA-R-1592", "CA-D-471", "CA-D-481"]}
+atom_id: "CA-E-504"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
 # Summary
 
 Validate Plan blocking and parallel readiness
 
+## Scope
+
+Plan blocking **and** parallel readiness.
+
 ## Claim
 
 the blocking Evaluation **must** reject a start **unless** **all** explicit blockers are Done **and** the applicable execution permissions hold.
+
+## Details
 
 - `A BLOCKS B`, `B BLOCKS C`: permit `A`, **then** `B`, **then** `C` **only** **after** the preceding Plan is Done.
 - `A BLOCKS C`, `B BLOCKS C`: allow `A` **and** `B` **to** be ready concurrently; `C` waits for both.

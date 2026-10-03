@@ -27,17 +27,24 @@ subjects:
     - "Atom/Revision"
     - "Concern"
 
-version: 2
-updated_at: "2026-09-23 15:59:19 +0000"
+version: 3
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-O-078", "CA-R-1483", "CA-R-976", "CA-R-981", "CA-R-983", "CA-D-300", "CA-D-380", "CA-D-442", "CA-D-444", "CA-D-445"], "relates_to": ["CA-E-469"]}
+global_tier: 11
 ---
 # Summary
 
 Validate Navigation Number Migration Evidence
 
+## Scope
+
+a navigation-migration result.
+
 ## Claim
 
 the Evaluation accepts a navigation-migration result **only** **if** it conforms **to** CA-O-078 **and** the identified Project Structure authority, preserves declared values **unless** an authorized change selects replacements, **and** distinguishes a ready candidate from unresolved **or** failed preparation.
+
+## Details
 
 ### Inputs and evidence
 

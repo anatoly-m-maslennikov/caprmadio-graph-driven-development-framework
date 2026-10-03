@@ -8,9 +8,18 @@ subjects:
     - "Atom/Summary"
     - "Carrier"
     - "Operator"
-version: 2
+version: 4
 updated_at: "2026-09-22 23:02:20 +0000"
 relations: {"relates_to": ["CA-R-1598", "CA-D-478", "CA-D-479", "CA-D-480", "CA-D-481", "CA-R-1464"]}
+atom_id: "CA-O-077"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Summary
 

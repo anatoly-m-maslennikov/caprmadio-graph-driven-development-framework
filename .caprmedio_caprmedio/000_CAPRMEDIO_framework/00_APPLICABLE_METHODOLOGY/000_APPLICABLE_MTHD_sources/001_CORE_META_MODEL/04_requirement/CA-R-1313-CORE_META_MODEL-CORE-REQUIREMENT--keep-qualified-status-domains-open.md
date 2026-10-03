@@ -4,10 +4,28 @@ subjects:
   depends_on:
     - "Extension"
     - "Project Configuration"
-version: 10
-updated_at: "2026-09-11 23:47:49 +0400"
+version: 12
+updated_at: "2026-10-02 21:52:05 +0400"
 relations: {}
+atom_id: "CA-R-1313"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Keep Qualified Status Domains Open
+# Summary
+
+Keep Qualified Status Domains Open
+
+## Scope
+
+qualified Status domains.
+
+## Claim
 
 an Extension **or** Project Configuration **may** add Status values **and** transition rules **only** under one exact complete qualified Artifact Type **or** Atom Content Role **and** Type path.
+
+## Details

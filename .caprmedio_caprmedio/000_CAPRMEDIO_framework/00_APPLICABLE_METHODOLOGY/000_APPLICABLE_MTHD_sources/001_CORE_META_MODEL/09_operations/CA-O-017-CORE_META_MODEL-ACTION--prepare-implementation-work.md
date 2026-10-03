@@ -24,7 +24,7 @@ subjects:
     - "Operator"
     - "Dependency Order Derivation"
     - "Scope Unit"
-version: 5
+version: 6
 updated_at: "2026-09-24 18:16:00 +0000"
 relations:
   relates_to:
@@ -37,6 +37,7 @@ relations:
     - CA-R-1591
     - CA-D-481
     - CA-R-1525
+global_tier: 11
 ---
 # Summary
 

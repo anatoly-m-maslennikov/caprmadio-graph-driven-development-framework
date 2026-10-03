@@ -24,7 +24,7 @@ import time
 import uuid
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Iterator, Mapping
+from typing import Any, Callable, Iterator, Mapping
 
 
 SCRIPT_PATH = Path(__file__).resolve()
@@ -844,7 +844,13 @@ def release_unconsumed_lease(root: Path, lease: Mapping[str, Any], *, acquired: 
             path.unlink()
 
 
-def release_verified_lease(root: Path, lease: Mapping[str, Any]) -> None:
+def release_verified_lease(
+    root: Path,
+    lease: Mapping[str, Any],
+    *,
+    expected_live_lease: Mapping[str, Any] | None = None,
+    verify_recovery: Callable[[], None] | None = None,
+) -> None:
     """Release the shared lease only after COMMIT_CHANGE_SET has verified it.
 
     This intentionally compares the active carrier's status, action, and token
@@ -855,6 +861,7 @@ def release_verified_lease(root: Path, lease: Mapping[str, Any]) -> None:
     expected_token = lease.get("lease_token")
     if not isinstance(expected_action, str) or not isinstance(expected_token, str):
         raise ToolError("invalid-lease", "lease must contain action_id and lease_token")
+    expected_fingerprint = dict(expected_live_lease) if expected_live_lease is not None else None
     with _lease_guard(root, create=True):
         path = _lease_path(root)
         if not path.exists():
@@ -866,6 +873,10 @@ def release_verified_lease(root: Path, lease: Mapping[str, Any]) -> None:
             or active.get("lease_token") != expected_token
         ):
             raise ToolError("lease-not-live", "repository lease does not match verified action and token")
+        if expected_fingerprint is not None and active != expected_fingerprint:
+            raise ToolError("lease-not-live", "repository lease differs from the verified recovery fingerprint")
+        if verify_recovery is not None:
+            verify_recovery()
     # The caller reaches this function only after complete commit verification.
     # Retire before freeing the action slot so a restarted Trigger never treats a
     # later operator Journal write as part of the completed pipeline transition.
@@ -881,7 +892,144 @@ def release_verified_lease(root: Path, lease: Mapping[str, Any]) -> None:
             or active.get("lease_token") != expected_token
         ):
             raise ToolError("lease-not-live", "repository lease changed before verified release")
+        if expected_fingerprint is not None and active != expected_fingerprint:
+            raise ToolError("lease-not-live", "repository lease changed before verified recovery release")
+        if verify_recovery is not None:
+            verify_recovery()
         path.unlink()
+
+
+def _committed_recovery_path(root: Path, action_id: str) -> Path:
+    _require_sha256(action_id, "recovery.action_id")
+    return _runtime_dir(root) / "committed_recoveries" / f"{action_id}.json"
+
+
+def _validated_committed_recovery(raw: object) -> dict[str, Any]:
+    recovery = _require_mapping(raw, "committed recovery")
+    if set(recovery) != {"schema_version", "recovery_id", "proof"}:
+        raise ToolError("invalid-recovery", "committed recovery must contain exactly schema_version, recovery_id, and proof")
+    if recovery["schema_version"] != 1:
+        raise ToolError("invalid-recovery", "committed recovery schema_version must be 1")
+    _require_sha256(recovery["recovery_id"], "recovery.recovery_id")
+    proof = _require_mapping(recovery["proof"], "recovery.proof")
+    required = {
+        "schema_version",
+        "kind",
+        "action_id",
+        "operator_approval",
+        "committed_revision",
+        "lease",
+        "event_ids",
+        "events",
+    }
+    if set(proof) != required:
+        raise ToolError("invalid-recovery", "committed recovery proof has an unexpected schema")
+    if proof["schema_version"] != 1 or proof["kind"] != "committed-lease-recovery":
+        raise ToolError("invalid-recovery", "committed recovery proof kind is invalid")
+    action_id = _require_sha256(proof["action_id"], "recovery.proof.action_id")
+    approval = proof["operator_approval"]
+    if not isinstance(approval, str) or not approval.strip():
+        raise ToolError("operator-approval-missing", "committed recovery requires explicit operator approval")
+    revision = proof["committed_revision"]
+    if not isinstance(revision, str) or not __import__("re").fullmatch(r"[0-9a-f]{40}", revision):
+        raise ToolError("invalid-recovery", "committed recovery revision must be a full Git SHA")
+    lease = _require_mapping(proof["lease"], "recovery.proof.lease")
+    required_lease = {"schema_version", "status", "action_id", "lease_token", "context_id", "context_digest", "event_ids"}
+    if not required_lease.issubset(lease) or lease.get("schema_version") != 1 or lease.get("status") != "active":
+        raise ToolError("invalid-recovery", "committed recovery lease fingerprint is invalid")
+    if lease.get("action_id") != action_id or not isinstance(lease.get("lease_token"), str) or not lease["lease_token"]:
+        raise ToolError("invalid-recovery", "committed recovery lease identity is invalid")
+    _require_sha256(lease.get("context_id"), "recovery.proof.lease.context_id")
+    _require_sha256(lease.get("context_digest"), "recovery.proof.lease.context_digest")
+    event_ids = proof["event_ids"]
+    if not isinstance(event_ids, list) or not event_ids or any(not isinstance(value, str) for value in event_ids):
+        raise ToolError("invalid-recovery", "committed recovery event_ids must be a non-empty list")
+    if len(set(event_ids)) != len(event_ids):
+        raise ToolError("invalid-recovery", "committed recovery event_ids must be unique")
+    for event_id in event_ids:
+        _require_sha256(event_id, "recovery.proof.event_ids")
+    if lease.get("event_ids") != event_ids:
+        raise ToolError("invalid-recovery", "committed recovery event_ids must equal the lease fingerprint")
+    events = proof["events"]
+    if not isinstance(events, list) or [item.get("event_id") if isinstance(item, Mapping) else None for item in events] != event_ids:
+        raise ToolError("invalid-recovery", "committed recovery event evidence must exactly match event_ids")
+    if canonical_json_digest(proof) != recovery["recovery_id"]:
+        raise ToolError("recovery-proof-mismatch", "committed recovery proof digest does not match its contents")
+    return {"schema_version": 1, "recovery_id": recovery["recovery_id"], "proof": proof}
+
+
+def read_committed_recovery(root: Path, action_id: str) -> dict[str, Any] | None:
+    """Return one durable recovery proof, never synthesizing a missing one."""
+    root = repository_root(root)
+    path = _committed_recovery_path(root, action_id)
+    if not path.exists():
+        return None
+    if path.is_symlink() or not path.is_file():
+        raise ToolError("invalid-runtime-state", "committed recovery receipt is not a regular file")
+    record = _read_json(path)
+    if set(record) != {"schema_version", "kind", "recovery", "recorded_at"}:
+        raise ToolError("invalid-runtime-state", "committed recovery receipt has an unexpected schema")
+    if record.get("schema_version") != 1 or record.get("kind") != "committed-lease-recovery" or not isinstance(record.get("recorded_at"), str):
+        raise ToolError("invalid-runtime-state", "committed recovery receipt is invalid")
+    return _validated_committed_recovery(record["recovery"])
+
+
+def release_verified_committed_recovery(
+    root: Path,
+    recovery: Mapping[str, Any],
+    *,
+    verify_recovery: Callable[[], Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Durably record one verified committed recovery before releasing its exact lease.
+
+    COMMIT_CHANGE_SET supplies the already-verified historical proof.  This
+    function owns the serialized runtime transition, so it cannot be used as
+    an unrecorded lease-unlink shortcut.
+    """
+    root = repository_root(root)
+    verified = _validated_committed_recovery(recovery)
+    proof = verified["proof"]
+    action_id = proof["action_id"]
+    expected_lease = _require_mapping(proof["lease"], "recovery.proof.lease")
+    path = _committed_recovery_path(root, action_id)
+    existing = read_committed_recovery(root, action_id)
+    if existing is not None and existing != verified:
+        raise ToolError("recovery-conflict", "existing committed recovery receipt differs from the verified proof")
+    with _lease_guard(root, create=True):
+        live_path = _lease_path(root)
+        if not live_path.exists():
+            if existing is not None:
+                return {"status": "already-released", "recovery_receipt": path.relative_to(root).as_posix()}
+            raise ToolError("lease-not-live", "repository lease is absent before committed recovery")
+        live = _read_json(live_path)
+        if live != expected_lease:
+            raise ToolError("lease-not-live", "repository lease differs from the verified recovery fingerprint")
+        if _validated_committed_recovery(verify_recovery()) != verified:
+            raise ToolError("recovery-proof-mismatch", "live committed recovery evidence changed before receipt persistence")
+        if existing is None:
+            _atomic_json(
+                path,
+                {
+                    "schema_version": 1,
+                    "kind": "committed-lease-recovery",
+                    "recovery": verified,
+                    "recorded_at": dt.datetime.now(dt.UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+                },
+            )
+    # The ordinary release path rechecks the complete fingerprint inside its
+    # own guards and retires any associated pipeline correlations first.
+    release_verified_lease(
+        root,
+        {"status": "active", "action_id": action_id, "lease_token": expected_lease["lease_token"]},
+        expected_live_lease=expected_lease,
+        verify_recovery=lambda: _verified_recovery_matches(verified, verify_recovery),
+    )
+    return {"status": "released", "recovery_receipt": path.relative_to(root).as_posix()}
+
+
+def _verified_recovery_matches(expected: Mapping[str, Any], reverify: Callable[[], Mapping[str, Any]]) -> None:
+    if _validated_committed_recovery(reverify()) != expected:
+        raise ToolError("recovery-proof-mismatch", "live committed recovery evidence changed before lease release")
 
 
 def _blocked_path(root: Path, action_id: str) -> Path:

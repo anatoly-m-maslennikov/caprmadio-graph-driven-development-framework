@@ -5,10 +5,28 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan"
     - "Atom/Claim"
     - "Atom/Carrier"
-version: 2
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 5
+updated_at: "2026-10-03 00:40:46 +0400"
 relations: {"relates_to": ["CA-R-1574", "CA-R-1581"]}
+atom_id: "CA-R-1586"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Define Plan Details
+# Summary
 
-Plan Details **means** optional non-Claim supporting information within the Plan Claim, its restrictions, **and** target, **without** an additional intended outcome **or** independent Definition of Done.
+Define Plan Details
+
+## Scope
+
+Plan Details within the Plan Objective, its restrictions, **and** target.
+
+## Claim
+
+Plan Details **means** supporting information within the Plan Objective, its restrictions, **and** target, **without** additional intended work **or** an independent outcome. the Plan's Definition of Done tests that same Objective; its presence inside Details does **not** introduce another Claim.
+
+## Details

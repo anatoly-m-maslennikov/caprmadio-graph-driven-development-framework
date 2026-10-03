@@ -9,21 +9,39 @@ subjects:
     - "Operator"
     - "Journal"
     - "Status"
-version: 2
-updated_at: "2026-09-18 21:23:47 +0000"
-relations: {"relates_to": ["CA-R-1510", "CA-R-1513", "CA-R-1519", "CAPRMEDIO-META-REQU-158"]}
+version: 5
+updated_at: "2026-10-03 00:01:28 +0400"
+relations: {"relates_to": ["CA-R-1510", "CA-R-1513", "CA-R-1519", "CA-R-1720"]}
+atom_id: "CA-R-1520"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "General"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 10
 ---
-# Return Workflow handoffs through terminal results
+# Summary
+
+Return Workflow handoffs through terminal results
+
+## Scope
+
+Workflow handoffs to another Workflow.
+
+## Claim
 
 **when** a Workflow declares a handoff **to** another Workflow, its Run **must** end with a terminal result sufficient for the executor **to** evaluate **and** start the continuation separately.
 
-## Handoff result
+## Details
+
+### Handoff result
 
 - identify the completed Run, the reason for handoff, **and** the continuation Workflow **or** the methodology rule that selects it.
 - provide the target identities **and** observed Revisions, required inputs **and** parameters, proposed changes, completed checks **and** their applicability, **and** a complete account of effects already performed, **if** **any**.
 - distinguish a requested continuation from an authorized, started, **or** completed continuation. an incomplete result **must not** trigger guessed execution.
 
-## Run boundary
+### Run boundary
 
 - the ending Run does **not** call the continuation Workflow, wait for it, **or** resume its own normal Steps afterward.
 - the executor retains the original request **and** the association between predecessor **and** successor Runs; it rechecks applicable authority **and** input freshness **before** starting the successor.

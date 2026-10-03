@@ -8,13 +8,32 @@ subjects:
     - "Workflow"
     - "Step Run"
     - "Operator"
-version: 2
-updated_at: "2026-09-20 15:47:25 +0000"
+version: 4
+updated_at: "2026-10-02 20:16:06 +0400"
 relations: {"evaluation_for": ["CA-R-1526", "CA-R-1527", "CA-R-1509"]}
+atom_id: "CA-E-495"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate Action kinds and Step contexts
+# Summary
+
+Validate Action kinds and Step contexts
+
+## Scope
+
+Action Execution Kind **and** Agentic Step Execution Context.
+
+## Claim
 
 the Evaluation **must** check that Action Execution Kind **and** Agentic Step Execution Context remain distinct **and** support reuse **without** duplicate definitions.
+
+## Details
 
 - a Programmatic Action interacts with the Operator through code **without** AI judgment: accept Programmatic classification.
 - code delegates the declared responsibility's judgment **to** an AI Agent: require Agentic classification rather than classifying by the surrounding code.

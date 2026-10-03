@@ -5,9 +5,18 @@ subjects:
     - "Action"
     - "Operator"
     - "Project"
-version: 3
+version: 5
 updated_at: "2026-09-21 00:57:42 +0000"
 relations: {"child_of":["CA-M-005"],"relates_to":["CA-R-1057"]}
+atom_id: "CA-O-065"
+content_role: "Operations"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Action"
+global_tier: 11
 ---
 # Screen short names for unintended readings
 

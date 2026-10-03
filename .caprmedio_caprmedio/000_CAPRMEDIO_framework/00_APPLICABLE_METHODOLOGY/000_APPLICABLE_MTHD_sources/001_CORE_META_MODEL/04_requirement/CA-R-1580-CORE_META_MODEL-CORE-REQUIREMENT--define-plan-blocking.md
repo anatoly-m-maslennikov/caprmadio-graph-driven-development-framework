@@ -8,11 +8,27 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan/Decomposition"
     - "Hub Atom"
     - "Subject Relation Kind: DEPENDS_ON"
-version: 2
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 4
+updated_at: "2026-10-03 00:34:47 +0400"
 relations: {"relates_to": ["CA-R-1583", "CA-D-471", "CA-R-1200"]}
+atom_id: "CA-R-1580"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 ---
-# Define Plan blocking
+# Summary
+
+Define Plan blocking
+
+## Scope
+
+Plan-blocking Relations in the Plan Graph.
+
+## Claim
 
 **in** the Plan Graph, `A BLOCKS B` **means** that Plan `B` **may** start **only** **after** Plan `A` is Done.
 
@@ -21,7 +37,9 @@ relations: {"relates_to": ["CA-R-1583", "CA-D-471", "CA-R-1200"]}
 - navigation order, a shared Hub, **and** `DECOMPOSES_INTO` do **not** establish `BLOCKS`.
 - an inverse lookup is derived from the same explicit fact, **not** separately authored; Subject DEPENDS_ON remains a different Relation Kind.
 
-## relation admission
+## Details
+
+### relation admission
 
 - owning graph kind: Plan Graph under CA-R-1593; endpoints are Plan Atom references **in** that graph, **not** native nodes of a different graph.
 - Status: the Relation Kind is Active; endpoint Plan Revisions use the admitted Plan Status model, **without** requiring every historical **or** pending endpoint **to** be Active.

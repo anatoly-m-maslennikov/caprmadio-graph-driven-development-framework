@@ -147,7 +147,7 @@ class IntegrationTests(unittest.TestCase):
             "claim_target_scope_unit: TEST\nauthor: Test Operator\n"
             'local_tier: Standard\nglobal_tier: 2\nupdated_at: "2026-09-24T00:00:00Z"\n'
             "subjects: {governs: Test Entity, depends_on: []}\nrelations: {}\n"
-            "---\n# Summary\n\nTest boundary\n\n## Claim\n\nthe value **must** be stable.\n"
+            "---\n# Summary\n\nTest boundary\n\n## Scope\n\nThe selected value.\n\n## Claim\n\nthe value **must** be stable.\n## Details\n"
         )
         report = self.run_tool()
         self.assertEqual(report["result"], "incomplete")

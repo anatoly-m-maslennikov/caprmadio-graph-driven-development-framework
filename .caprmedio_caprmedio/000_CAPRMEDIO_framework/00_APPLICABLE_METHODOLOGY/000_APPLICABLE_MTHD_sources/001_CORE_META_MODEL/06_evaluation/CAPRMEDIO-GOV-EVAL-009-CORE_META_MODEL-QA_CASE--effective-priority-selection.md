@@ -1,20 +1,29 @@
 ---
 subjects:
   governs: "evaluation"
-version: 16
-updated_at: "2026-09-22 14:41:44 +0000"
+version: 19
+updated_at: "2026-10-01 21:46:54 +0400"
 relations:
   evaluation_for:
     - "CA-D-386"
-    - "CAPRMEDIO-GOV-REQU-299"
+    - "CA-R-1629"
+atom_id: "CAPRMEDIO-GOV-EVAL-009"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Effective-priority selection
+# Summary
 
-## Claim checked
+Effective-priority selection
 
-conflict selection follows the admissible Operator-selected priority model **without** an implicit ancestry bonus **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.
+## Scope
 
-## Applicable conditions
+the following effective-priority selection conditions:
 
 1. accept stored priority **only** on Concern Atoms **and** reject it on **every** non-Concern Content Role Atom.
 2. accept **only** stored `high`, `medium`, **or** `low`.
@@ -25,10 +34,16 @@ conflict selection follows the admissible Operator-selected priority model **wit
 7. confirm `auto_by_effective_priority` selects **`=1`** unique eligible winner **and** asks on ties, incomparable scopes, uncertainty, **or** multiple winners.
 8. confirm unsatisfiable external obligations stop rather than auto-resolve.
 
-## Acceptance criteria
+## Claim
+
+conflict selection follows the admissible Operator-selected priority model **without** an implicit ancestry bonus **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.
+
+## Details
+
+### Acceptance criteria
 
 **every** comparison conforms **to** the selected priority model **without** an implicit ancestry bonus **and** never guesses through a non-unique **or** ineligible result. authority-tier precedence remains separate **and** unchanged.
 
-## Failure disposition
+### Failure disposition
 
 stop automatic selection, ask the Operator, **and** record a Concern for **any** incorrect priority **or** unauthorized winner.

@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -130,6 +131,35 @@ class CommitChangeSetTests(unittest.TestCase):
         commit_change_set._stage_subject(self.root, context)
         commit_change_set._stage_receipt_sidecars(self.root, events, appended["receipts"])
         return context
+
+    def committed_without_release(self) -> tuple[dict[str, object], dict[str, object]]:
+        """Model the historical crash after Git commit but before lease release."""
+        self.git("checkout", "--", self.subject)
+        added = "added.txt"
+        (self.root / added).write_text("new governed file\n", encoding="utf-8")
+        context = commit_change_set.gather_context(self.root, self.trigger(None, added, source_event_id="recovery-add"))
+        appender = commit_change_set._import_appender()
+        envelope = appender.run(self.root, {"context": context}, apply=True, wait_seconds=0)
+        self.assertTrue(envelope["ok"])
+        appended = envelope["result"]
+        events = context["predictions"]["journal_records"]
+        commit_change_set._stage_subject(self.root, context)
+        commit_change_set._stage_receipt_sidecars(self.root, events, appended["receipts"])
+        self.git("commit", "-qm", commit_change_set._render_message(context, events))
+        return context, json.loads((self.root / ".caprmedio_runtime/state/commit_change_set/lease.json").read_text(encoding="utf-8"))
+
+    def recovery_kwargs(self, context: dict[str, object], lease: dict[str, object], **overrides: object) -> dict[str, object]:
+        kwargs: dict[str, object] = {
+            "action_id": context["action_id"],
+            "event_ids": [event["event_id"] for event in context["predictions"]["journal_records"]],
+            "committed_revision": self.git("rev-parse", "HEAD").strip(),
+            "operator_approval": "operator approved recovery test",
+            "lease_token": lease["lease_token"],
+            "context_id": lease["context_id"],
+            "context_digest": lease["context_digest"],
+        }
+        kwargs.update(overrides)
+        return kwargs
 
     def test_e179_dry_run_is_fully_mutation_free(self) -> None:
         before = self.snapshot()
@@ -340,6 +370,90 @@ class CommitChangeSetTests(unittest.TestCase):
         )
         self.assertEqual("released", result["lease"]["status"])
         self.assertEqual([], self.git("diff", "--cached", "--name-only").splitlines())
+
+    def test_recover_committed_dry_run_is_mutation_free_then_records_and_releases(self) -> None:
+        context, lease = self.committed_without_release()
+        kwargs = self.recovery_kwargs(context, lease)
+        before = self.snapshot()
+        dry_run = commit_change_set.recover_committed_action(self.root, apply=False, **kwargs)
+        self.assertEqual(before, self.snapshot())
+        self.assertEqual("predicted", dry_run["recovery_receipt"]["state"])
+
+        applied = commit_change_set.recover_committed_action(self.root, apply=True, **kwargs)
+        self.assertEqual("released", applied["lease"]["status"])
+        self.assertFalse((self.root / ".caprmedio_runtime/state/commit_change_set/lease.json").exists())
+        receipt = self.root / applied["recovery_receipt"]
+        stored = json.loads(receipt.read_text(encoding="utf-8"))
+        self.assertEqual(lease, stored["recovery"]["proof"]["lease"])
+        replay = commit_change_set.recover_committed_action(self.root, apply=True, **kwargs)
+        self.assertEqual("already-released", replay["lease"]["status"])
+
+    def test_recover_committed_rejects_stale_result_without_runtime_mutation(self) -> None:
+        context, lease = self.committed_without_release()
+        (self.root / context["result"]["path"]).write_text("stale source\n", encoding="utf-8")
+        before = self.snapshot()
+        with self.assertRaises(commit_change_set.ToolError) as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease))
+        self.assertEqual("recovery-result-mismatch", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+
+    def test_recover_committed_rejects_stale_journal_without_runtime_mutation(self) -> None:
+        context, lease = self.committed_without_release()
+        journal = next((self.root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson"))
+        lines = journal.read_bytes().splitlines(keepends=True)
+        lines[-1] = b" " + lines[-1]
+        journal.write_bytes(b"".join(lines))
+        before = self.snapshot()
+        with self.assertRaises(commit_change_set.ToolError) as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease))
+        self.assertEqual("recovery-journal-mismatch", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+
+    def test_recover_committed_rejects_event_set_and_fingerprint_mismatch(self) -> None:
+        context, lease = self.committed_without_release()
+        wrong_event = "0" * 64
+        before = self.snapshot()
+        with self.assertRaisesRegex(commit_change_set.ToolError, "event ID set") as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease, event_ids=[wrong_event]))
+        self.assertEqual("lease-event-mismatch", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+        with self.assertRaisesRegex(commit_change_set.ToolError, "fingerprint") as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease, lease_token="wrong-token"))
+        self.assertEqual("lease-fingerprint-mismatch", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+
+    def test_recover_committed_rejects_nonancestor_or_missing_approval(self) -> None:
+        context, lease = self.committed_without_release()
+        orphan = self.git("commit-tree", "HEAD^{tree}", "-m", "orphan").strip()
+        before = self.snapshot()
+        with self.assertRaisesRegex(commit_change_set.ToolError, "not an ancestor") as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease, committed_revision=orphan))
+        self.assertEqual("recovery-commit-not-ancestor", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+        with self.assertRaisesRegex(commit_change_set.ToolError, "operator approval") as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **self.recovery_kwargs(context, lease, operator_approval=""))
+        self.assertEqual("operator-approval-missing", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
+
+    def test_recover_committed_rejects_tampered_receipt_and_preserves_lease_on_receipt_write_failure(self) -> None:
+        context, lease = self.committed_without_release()
+        kwargs = self.recovery_kwargs(context, lease)
+        appender = commit_change_set._import_appender()
+        with mock.patch.object(appender, "_atomic_json", side_effect=OSError("disk full")):
+            with self.assertRaisesRegex(commit_change_set.ToolError, "disk full") as captured:
+                commit_change_set.recover_committed_action(self.root, apply=True, **kwargs)
+        self.assertEqual("recovery-release-failed", captured.exception.code)
+        self.assertTrue((self.root / ".caprmedio_runtime/state/commit_change_set/lease.json").is_file())
+        receipt_path = self.root / ".caprmedio_runtime/state/append_change_records/committed_recoveries" / f"{context['action_id']}.json"
+        self.assertFalse(receipt_path.exists())
+
+        applied = commit_change_set.recover_committed_action(self.root, apply=True, **kwargs)
+        receipt_path.write_text("{}\n", encoding="utf-8")
+        before = self.snapshot()
+        with self.assertRaisesRegex(commit_change_set.ToolError, "receipt") as captured:
+            commit_change_set.recover_committed_action(self.root, apply=True, **kwargs)
+        self.assertEqual("invalid-runtime-state", captured.exception.code)
+        self.assertEqual(before, self.snapshot())
 
     def test_e211_pre_commit_rejects_atom_without_journal(self) -> None:
         self.git("add", self.subject)

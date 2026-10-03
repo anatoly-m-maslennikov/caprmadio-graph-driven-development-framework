@@ -1,6 +1,6 @@
 ---
-version: 10
-updated_at: "2026-09-05 23:00:00 +0400"
+version: 11
+updated_at: "2026-09-27 11:29:50 +0400"
 relations:
   child_of:
     - CA-M-003
@@ -14,6 +14,19 @@ cce_form: method
 llm_session_ids:
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
 ---
-# Keep only necessary and sufficient reusable project information
+# Summary
+
+Keep only necessary and sufficient reusable project information
+
+## Scope
+
+reusable Project information, including its methodology.
+
+## Claim
 
 **to** maintain reusable Project information, keep **only** the smallest information set sufficient **to** understand, govern, operate, **and** change the Project.
+
+## Details
+
+- for normative Project information, state applicable conditions **and** required behavior positively.
+- an explicit prohibition is necessary **only** **when** it prevents a real ambiguity **or** protects an important boundary.

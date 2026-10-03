@@ -8,13 +8,32 @@ subjects:
     - "Action"
     - "Operator"
     - "Artifact/Revision"
-version: 2
-updated_at: "2026-09-20 15:47:25 +0000"
-relations: {"evaluation_for": ["CA-R-1529", "CA-M-304"]}
+version: 4
+updated_at: "2026-10-02 20:16:06 +0400"
+relations: {"evaluation_for": ["CA-M-304", "CA-R-1789", "CA-R-1790", "CA-R-1791", "CA-R-1792", "CA-R-1793"]}
+atom_id: "CA-E-497"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 ---
-# Validate self-contained agentic invocations
+# Summary
+
+Validate self-contained agentic invocations
+
+## Scope
+
+an Agentic Step invocation from its supplied context.
+
+## Claim
 
 the Evaluation **must** check that an Agentic Step invocation can be understood **and** resumed from its supplied context **without** remembered Workflow procedure.
+
+## Details
 
 - remove earlier conversation from an Integrated session: the supplied invocation still identifies the requested Action, inputs, evidence, actual effects, authority boundaries, expected result, **and** return route.
 - supply the invocation **to** an Isolated context: require the same admitted responsibility **and** constraints rather than implicit access **to** the parent conversation.
