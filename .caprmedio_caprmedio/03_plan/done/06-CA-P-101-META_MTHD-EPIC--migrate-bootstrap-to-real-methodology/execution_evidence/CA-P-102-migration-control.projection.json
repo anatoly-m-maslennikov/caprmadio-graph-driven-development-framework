@@ -1,0 +1,532 @@
+{
+  "schema": "caprmedio.migration_frontier.migration_control.v1",
+  "task_atom_id": "CA-P-102",
+  "recorded_at": "2026-08-26T19:16:56+04:00",
+  "project_revision": "999b7712362b338a69aeda6536c43938837219ec",
+  "control_epic": {
+    "atom_id": "CA-P-101",
+    "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+    "final_carrier_disposition": "unresolved",
+    "disposition_owner": "CA-P-108"
+  },
+  "direct_task_carriers": [
+    {
+      "atom_id": "CA-P-102",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier.md",
+      "immediate_lifecycle_disposition": "done",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "immediate_lifecycle_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/done/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier.md"
+    },
+    {
+      "atom_id": "CA-P-103",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-engine-topology.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-112",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/03-CA-P-112-META_MTHD-TASK--reconcile-parent-owned-jobs-for-final-scope-units.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-104",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/04-CA-P-104-META_MTHD-TASK--reconcile-core-meta-model-authority.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-105",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/05-CA-P-105-META_MTHD-TASK--reconcile-installed-extensions-authority.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-106",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/06-CA-P-106-META_MTHD-TASK--reconcile-local-configuration-authority.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-107",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/07-CA-P-107-META_MTHD-TASK--define-deterministic-applicable-methodology-compilation.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-108",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/08-CA-P-108-META_MTHD-TASK--freeze-the-bootstrap-to-methodology-migration-map.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-109",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/09-CA-P-109-META_MTHD-TASK--migrate-authority-and-carriers-to-final-roots.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-110",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/10-CA-P-110-META_MTHD-TASK--compile-the-first-applicable-methodology.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-113",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/11-CA-P-113-META_MTHD-TASK--reconcile-framework-consumers-with-applicable-methodology.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-114",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/12-CA-P-114-META_MTHD-TASK--retire-mapped-obsolete-bootstrap-structures.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    },
+    {
+      "atom_id": "CA-P-111",
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/13-CA-P-111-META_MTHD-TASK--validate-final-methodology-cutover.md",
+      "immediate_lifecycle_disposition": "active",
+      "final_carrier_disposition": "unresolved",
+      "disposition_owner": "CA-P-108"
+    }
+  ],
+  "control_tree_entries": [
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "kind": "directory",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "entry_count": 17,
+      "state": "non_empty"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3540,
+      "sha256": "ee93bf1c0433bb2fb3c9585ee033edcf81928752528ee93e6b97f8d4d8e3dac4"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-engine-topology.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 4660,
+      "sha256": "0c070ca92932c612f2ac9413ea9147833ea0e68ccb1cc69b8e38f4c9a233816c"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/03-CA-P-112-META_MTHD-TASK--reconcile-parent-owned-jobs-for-final-scope-units.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2314,
+      "sha256": "f5df27d09d5e1b3ee0c54d2c99432f472b4607233dd0adfc023541334f69a0ba"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/04-CA-P-104-META_MTHD-TASK--reconcile-core-meta-model-authority.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2507,
+      "sha256": "f2bd92ea401d80c4cbdb37dd39e35b5fd144cddafa5449cdfbdd7d584e9a85d3"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/05-CA-P-105-META_MTHD-TASK--reconcile-installed-extensions-authority.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2078,
+      "sha256": "fd323acf96a9b97674be71b95fb1fe1bfeceb1bebdbbab4da5c195465cbc3000"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/06-CA-P-106-META_MTHD-TASK--reconcile-local-configuration-authority.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2331,
+      "sha256": "ee437cc9ac6f922571eae78a43000dcbd7d2829e5996ef2df63b9ec44866b746"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/07-CA-P-107-META_MTHD-TASK--define-deterministic-applicable-methodology-compilation.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3016,
+      "sha256": "05a31ff4506c36b0ad925c6e3853a06b822d51d463da71696f50473549f89e18"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/08-CA-P-108-META_MTHD-TASK--freeze-the-bootstrap-to-methodology-migration-map.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 5352,
+      "sha256": "8ab6424676566d65c4d66b578b1c76e369b3d8824ac33e13905b2e1e7eacb9f1"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/09-CA-P-109-META_MTHD-TASK--migrate-authority-and-carriers-to-final-roots.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2396,
+      "sha256": "7453fb3e3f6f99cd92a751cc19dae6adfb7138fc1ba14e954d41dab476abf8a9"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/10-CA-P-110-META_MTHD-TASK--compile-the-first-applicable-methodology.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2092,
+      "sha256": "9d3126075f000bbe63a34d73a883473e8c79d4af518aa082a8fa6001be459ab5"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/11-CA-P-113-META_MTHD-TASK--reconcile-framework-consumers-with-applicable-methodology.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2441,
+      "sha256": "3498c9f7391740a1a7c8655bfb4477bd739eef930c65f0d4e02522a20cf0c009"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/12-CA-P-114-META_MTHD-TASK--retire-mapped-obsolete-bootstrap-structures.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 1514,
+      "sha256": "711d45fd5afff8611e8b2d1944aa0bcd571c4b57cbceed3cd0e5194ce60e76a8"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/13-CA-P-111-META_MTHD-TASK--validate-final-methodology-cutover.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3736,
+      "sha256": "c2828e73b3aa3353becc435c33673ea5fd6f7e6390f6ea3ef057ef5947bf149d"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive",
+      "kind": "directory",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "entry_count": 28,
+      "state": "non_empty"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2331,
+      "sha256": "830a921db13a36583c265ed956ff106264764779cff1220335a13ac2dac77347"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2330,
+      "sha256": "f7f59837f678f3092083cc8ed519ec6c6efc0d148a8c2a1b9469e09fccae42f2"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier@3.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2962,
+      "sha256": "0332ec5c8eb3420f39791ccc65f2c5765be0fe3677ff65a1f99e87ef774a2c08"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/01-CA-P-102-META_MTHD-TASK--freeze-bootstrap-and-final-framework-frontier@4.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3033,
+      "sha256": "04e1a82db4a9bace9c481ff39a8838baeca389a12479e8ed750b133a8e8a0898"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-goal-topology@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2110,
+      "sha256": "cc4f37af20fe5b73c5208c2fdfe364f80a6890318e781ae7adccc3a69419d469"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-job-topology@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2106,
+      "sha256": "702e019fd2e1884f7c425d8041f1a1b1830884294fc3a90448efa927d26eff13"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-job-topology@3.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2525,
+      "sha256": "68419cdb56fafce135a711deaa2b96335d5e76ea925820bb28739ea17c14b9cc"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-job-topology@4.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2633,
+      "sha256": "23eb328f84991266c0bda394915cb620741df6fe4f07290c30d33ed74ab4f94c"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/02-CA-P-103-META_MTHD-TASK--establish-final-root-source-layer-and-job-topology@5.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3826,
+      "sha256": "3050a2408a2b5238ef9eb39e1de10d8607921f92eb6434e8c489e8b7641f32cc"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/03-CA-P-104-META_MTHD-TASK--reconcile-core-meta-model-authority@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 1825,
+      "sha256": "d0a949a629cfe42690da929c06932fa2516a60862c9d634d459f7453f330c448"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/03-CA-P-104-META_MTHD-TASK--reconcile-core-meta-model-authority@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2507,
+      "sha256": "46f481994cc104ceea7f1ffc556daad9075fa88c6fefda178eda65d77fd5fa44"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/04-CA-P-105-META_MTHD-TASK--reconcile-installed-extensions-authority@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 1704,
+      "sha256": "9625385d7560b252631493e88f96305bbd7ed316702a8d874789d8a5aace0578"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/05-CA-P-106-META_MTHD-TASK--reconcile-local-configuration-authority@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 1837,
+      "sha256": "d6c6bd4d715238368614c7e4845dbf92f5b33e86189e617b5335e54c192c90b8"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/05-CA-P-106-META_MTHD-TASK--reconcile-local-configuration-authority@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2199,
+      "sha256": "ccc989f9913dadb38fd67afaa8ea489e3d70f8f6f9993a45c03b0d3f5825a37f"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/06-CA-P-107-META_MTHD-TASK--compile-applicable-methodology-from-three-source-layers@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2144,
+      "sha256": "3b14ddbd60e397daf1324283fce892a1aaaba89a11b7b219dc731101a0a80315"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/06-CA-P-107-META_MTHD-TASK--define-deterministic-applicable-methodology-compilation@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2496,
+      "sha256": "2b17335a065f89009e5d07076b64b1d3c349a578439cae5a939cc4dd510126a4"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/07-CA-P-108-META_MTHD-TASK--freeze-the-bootstrap-to-methodology-migration-map@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2095,
+      "sha256": "3f25f3736cadf2c6380131bbe4ba5df8bee88f6f62002d9befb3c9045f78fd92"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/07-CA-P-108-META_MTHD-TASK--freeze-the-bootstrap-to-methodology-migration-map@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2495,
+      "sha256": "c4c01491fa9d96f2d3973e1c8a79a7c3e175d404a3165ef69454efad277fbdd9"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/07-CA-P-108-META_MTHD-TASK--freeze-the-bootstrap-to-methodology-migration-map@3.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 4323,
+      "sha256": "05d5eb9249d8d10a5a0d58fccfef98fb8a0fdddec42c8f2ff18f30944667f11c"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/08-CA-P-109-META_MTHD-TASK--migrate-authority-and-carriers-to-final-roots@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 1863,
+      "sha256": "00bac3b4c5dc62e15e1d3e41e368dc86ba1968518b502f516c171d3531a0a242"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/08-CA-P-109-META_MTHD-TASK--migrate-authority-and-carriers-to-final-roots@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2261,
+      "sha256": "4631e6e094f7d2c52bf1e27866b1c29a202f919ce77719420c59533891b23050"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/09-CA-P-110-META_MTHD-TASK--compile-applicable-methodology-and-reconcile-framework-consumers@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2973,
+      "sha256": "b6b7ff041e73c67c4c7660454e170f013dd34d23773eb24b264c0be90fa1e8c3"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/09-CA-P-110-META_MTHD-TASK--compile-applicable-methodology-and-reconcile-framework-consumers@3.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3217,
+      "sha256": "5db39327fcd14b1b5a48b4f199548da482f1da19202bc57798cee0bf5d34dbf0"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/09-CA-P-110-META_MTHD-TASK--reconcile-compilers-tools-journals-and-scoped-projections@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2448,
+      "sha256": "d511693cb05179ec5fb827d3e625fb77753dc97445d5599c9c7a2cba23f18c57"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/10-CA-P-111-META_MTHD-TASK--validate-cutover-and-retire-bootstrap-structure@1.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2174,
+      "sha256": "b42b00df27e0e0ed8fd616b2b1378aa3a7e0f8f587c2fbe32a42820470145b01"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/10-CA-P-111-META_MTHD-TASK--validate-cutover-and-retire-bootstrap-structure@2.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2510,
+      "sha256": "a79b0846a8852b34932af61c341736c02adf4d0d16517a0d6379a253243b70aa"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/10-CA-P-111-META_MTHD-TASK--validate-cutover-and-retire-bootstrap-structure@3.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 2527,
+      "sha256": "5d15f39eb05b7a2107cde94f6e7fcd158802e27e5a8bbb49f367f0caf98a0e22"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/archive/10-CA-P-111-META_MTHD-TASK--validate-cutover-and-retire-bootstrap-structure@4.md",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 3996,
+      "sha256": "184a7c895b085682a0fc16649d00791ba70b88d16f0fd35ce24dc36e2d674637"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/canceled",
+      "kind": "directory",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "entry_count": 0,
+      "state": "empty"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/done",
+      "kind": "directory",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "entry_count": 0,
+      "state": "empty"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence",
+      "kind": "directory",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "entry_count": 4,
+      "state": "non_empty"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-freeze-record.projection.json",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 8775,
+      "sha256": "bbfb972f70ca900864910ae9e79ec1174de3d381adab5e410378d23998847368"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-migration-control.projection.json",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 29258,
+      "sha256": "fab6316007e7c061ca9ccdb4c36d53d922aeeec830d6103ec9969cfbd2be8c2c"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-source-carriers.projection.json",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 5236853,
+      "sha256": "c6b747a058a1c4f8e8e3a1a7a8e530e30eaab8b174d02e32fb2686ceeb0792d7"
+    },
+    {
+      "observed_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-structural-directories.projection.json",
+      "kind": "file",
+      "final_disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "bytes": 815302,
+      "sha256": "5c62d1cee5dc835a99a9a1c85295bd17bb05ee9c310056342fa4e49f7dc7195c"
+    }
+  ],
+  "execution_evidence": [
+    {
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-source-carriers.projection.json",
+      "kind": "projection",
+      "sha256": "c6b747a058a1c4f8e8e3a1a7a8e530e30eaab8b174d02e32fb2686ceeb0792d7"
+    },
+    {
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-structural-directories.projection.json",
+      "kind": "projection",
+      "sha256": "5c62d1cee5dc835a99a9a1c85295bd17bb05ee9c310056342fa4e49f7dc7195c"
+    },
+    {
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-freeze-record.projection.json",
+      "kind": "projection",
+      "sha256": "bbfb972f70ca900864910ae9e79ec1174de3d381adab5e410378d23998847368"
+    },
+    {
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-102-migration-control.projection.json",
+      "kind": "projection",
+      "self_recorded": true
+    }
+  ],
+  "execution_evidence_final_carrier_disposition": "unresolved",
+  "execution_evidence_disposition_owner": "CA-P-108"
+}

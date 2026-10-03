@@ -1,0 +1,456 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "catalog_classification",
+  "generated_at": "2026-09-13T14:15:09+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_partial_stage",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-changed-source-map.projection.json",
+        "sha256": "db1b7f3527b76a06760f0a2676638c1b62a01d996fe0dcc49c827e96bcfea903"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-evaluation-boundaries-changed-source-map.projection.json",
+        "sha256": "96e511268d0429494a51b218a1382ddf87832a7ed62180152f9e679f1d588a0e"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1563,
+    "frontier_after": 1563,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-313",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "before_version": 20,
+      "before_sha256": "8d40cf47ab08593d8a59afc95bb77b07d2f873176d8238080ff23b18882cefc8",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "version": 21,
+      "sha256": "aac33428664403e87759f8a709867524a0d48aa7733b309a67f0a83a53bfc2ca",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection@20.md",
+      "archive_sha256": "8d40cf47ab08593d8a59afc95bb77b07d2f873176d8238080ff23b18882cefc8",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Retain the existing Catalog/Map/Hub Type admission and non-authority boundary, remove the obsolete mandatory Projection Content Role, and explicitly classify terminology-purpose lists/indexes as uses of Catalog rather than additional Types.",
+      "governs": "Projection/Type",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1325",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+      "before_version": 3,
+      "before_sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+      "version": 4,
+      "sha256": "e3bb6af64c984becd7308f1ffedc88070ff954858ecd0bb7882e3ab0f63b7f41",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology@3.md",
+      "archive_sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Assign the existing composite-Subject exclusion to the admitted Catalog Type with explicit terminology-list/diagnostic-index applicability; do not apply it to arbitrary Catalog content or admit a new entity alias.",
+      "governs": "Projection/Type: Catalog",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1455",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "before_version": 2,
+      "before_sha256": "fb5458fd7603cf2edf16187d35418f9c9decf03a288e0b52fc1c3155e61315ff",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "version": 3,
+      "sha256": "3a4e4d13ce6d6304c72aa3e0c0f28e70e0c8438336836df1e61f523a81e2326a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes@2.md",
+      "archive_sha256": "fb5458fd7603cf2edf16187d35418f9c9decf03a288e0b52fc1c3155e61315ff",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Assign the existing evidence/uncertainty rule to its admitted Catalog Type while preserving the complete diagnostic population, exact coverage, source context and no-invented-Term/Relation constraints.",
+      "governs": "Projection/Type: Catalog",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-M-114",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "before_version": 13,
+      "before_sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "version": 14,
+      "sha256": "05c9cf59bd73113ea314b365d12b963fdb3de5c1b0cc737b4cf6b0b8e0da34a2",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms@13.md",
+      "archive_sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Replace only the Projection prerequisite and scoped construction reference with Catalog; preserve governed-definition-only inclusion and all source checks. Existing governed derivation target and Method role remain deferred to the broader operational-role review.",
+      "governs": "Terminology Projection Derivation",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-444",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "before_version": 4,
+      "before_sha256": "483c66c4a819d4eca454e76f6b3d727b3e191697f9e55cb65d7bb5174a179c3e",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "version": 5,
+      "sha256": "1c6a6ef720c217e4c239eeee6fed8cdbb4f4df3b70cdd9b2f9f33b450effe9ff",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning@4.md",
+      "archive_sha256": "483c66c4a819d4eca454e76f6b3d727b3e191697f9e55cb65d7bb5174a179c3e",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Align the diagnostic governed target and Claim scope to Catalog while preserving fixtures, source/diagnostic result separation, and optional Terms Graph evidence. Restrict dictionary-only exclusion to governed-definition entries, not diagnostic evidence.",
+      "governs": "Projection/Type: Catalog",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 5,
+      "before_sha256": "e75e5a8ccb6b15193ec6bcfd0089787fbdb8c070feced18d957c6bb5c95dca5b",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "version": 6,
+      "sha256": "605666b5ab3ef404c4b8d4fd4a4f6877aaa98f0a3d3e3700c441398cc2d9c9a9",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@5.md",
+      "archive_sha256": "e75e5a8ccb6b15193ec6bcfd0089787fbdb8c070feced18d957c6bb5c95dca5b",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "delta": "Record the approved existing Catalog-use mapping, resolved terminology-use classification boundary, preserved population distinctions and remaining Active work."
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-catalog-classification-partial-stage.md",
+      "version": 1,
+      "sha256": "19554cdceb2f9ed276fba7914ed09a1bb2266f88e871cd8977ed0d2af057286b",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_transfers": [
+    {
+      "identity": "CA-R-1325",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+      "current_version": 3,
+      "current_sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+      "prior_reservation": {
+        "identity": "CA-R-1325",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+        "version": 3,
+        "sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-M-114",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "current_version": 13,
+      "current_sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+      "prior_reservation": {
+        "identity": "CA-M-114",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+        "version": 13,
+        "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-E-444",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "current_version": 3,
+      "current_sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "prior_reservation": {
+        "identity": "CA-E-444",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+        "version": 2,
+        "sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+        "content_mutation_owner": "CA-P-1080",
+        "family": "vocabulary_diagnostics"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    }
+  ],
+  "reservation_dispositions": [
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-313",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": {
+        "identity": "CAPRMEDIO-GOV-REQU-313",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+        "version": 20,
+        "sha256": "8d40cf47ab08593d8a59afc95bb77b07d2f873176d8238080ff23b18882cefc8",
+        "content_mutation_owner": null,
+        "family": "projection_and_traceability_context"
+      }
+    },
+    {
+      "identity": "CA-R-1325",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-R-1325",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+        "version": 3,
+        "sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      }
+    },
+    {
+      "identity": "CA-R-1455",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    },
+    {
+      "identity": "CA-M-114",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-M-114",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+        "version": 13,
+        "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      }
+    },
+    {
+      "identity": "CA-E-444",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-E-444",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+        "version": 2,
+        "sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+        "content_mutation_owner": "CA-P-1080",
+        "family": "vocabulary_diagnostics"
+      }
+    }
+  ],
+  "read_only_authority": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-113",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types.md",
+      "version": 11,
+      "sha256": "5102e534628f2ca07827de9afef9bf2cd08255d6263f5fcbf90d3c85eca3f972",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-657",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "version": 11,
+      "sha256": "95c5081e91f2de4a97c5a8ec8db11e8c3649a4a5074760ac32d3f44926290267",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1335",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "version": 7,
+      "sha256": "08350d693ec2b1966c097c5449e0abc5479f3bd599d80d86bbb0d84e397fc6d3",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1454",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "version": 2,
+      "sha256": "80c57bc3f4c15363ecee6700c72320594a1457fd17d4d251ad385e3396fc27b9",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-E-382",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "version": 13,
+      "sha256": "b36070637e5fcb2a55b7c3d49f288323031e8a9b7214025e619e0b9058b96de9",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1194",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "version": 7,
+      "sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1432",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "version": 1,
+      "sha256": "a482003778ea6770097e431d452b434650c5649e227e871d68b5e54fcae435c2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-274",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "version": 1,
+      "sha256": "19b46d69e939e50c0cea217b20a168b63daa55efb907da8cd8fa6ffec52288dd",
+      "scope_unit": "CORE_META_MODEL"
+    }
+  ],
+  "principles": [
+    {
+      "path": ".caprmedio_caprmedio/05_method/CA-M-002-PRINCIPLE-METHOD--dry-don-t-repeat-yourself.md",
+      "sha256": "4e226a535fd609afda76e010f39085bb9a19d30140464b28fa3cc5a6eede73c7"
+    },
+    {
+      "path": ".caprmedio_caprmedio/05_method/CA-M-005-PRINCIPLE-METHOD--add-complexity-only-when-necessary.md",
+      "sha256": "0488eb29c5f7f77fa5a6e08e9e985a87d488a484368b6565ea2dc04fadc9294d"
+    }
+  ],
+  "remaining_reserved_sources": [
+    "CAPRMEDIO-META-REQU-166",
+    "CAPRMEDIO-META-REQU-673",
+    "CA-R-1281",
+    "CA-R-1213",
+    "CA-R-1272",
+    "CA-R-1273",
+    "CA-R-1274",
+    "CA-R-626",
+    "CAPRMEDIO-META-REQU-620",
+    "CAPRMEDIO-META-REQU-627",
+    "CAPRMEDIO-META-REQU-123",
+    "CAPRMEDIO-GOV-REQU-354",
+    "CA-M-114",
+    "CA-M-116",
+    "CA-M-231",
+    "CA-R-1408",
+    "CA-R-1409"
+  ],
+  "remaining": {
+    "task_done": false,
+    "terminology_use_classification": "Approved existing Projection/Type: Catalog use; no new Terminology Projection Type, alias Entity, or purpose Property.",
+    "M114": "Catalog reference/body scope aligned; existing derivation target and Method role retained, broader operational-role review remains P985/P986; not fully normalized.",
+    "other_tasks_executed": []
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1086-catalog-classification-partial-stage",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations authorized"
+  },
+  "validation": {
+    "existing_source_revisions": 5,
+    "new_source_ids": 0,
+    "unrelated_admitted_sources_unchanged": 1558,
+    "drafts_unchanged": 53,
+    "other_tasks_unchanged": 115,
+    "task_status": "Active",
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "implementation_conformance_claimed": false
+  }
+}

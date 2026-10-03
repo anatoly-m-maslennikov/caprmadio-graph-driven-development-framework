@@ -1,0 +1,332 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1079",
+  "generated_at": "2026-09-13T03:29:18+04:00",
+  "status": "Done",
+  "changes": [
+    {
+      "identity": "CA-R-1435",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1435-CORE_META_MODEL-CORE-REQUIREMENT--define-narrower-than.md",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "version": 3,
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1435-CORE_META_MODEL-CORE-REQUIREMENT--define-narrower-than.md",
+      "before_version": 2,
+      "before_sha256": "59c9f95b9573e26b98b3f5ae94d45cc67b3e906666bb1d7a688743ff6cde589e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1435-CORE_META_MODEL-CORE-REQUIREMENT--define-narrower-than@2.md",
+      "archive_sha256": "59c9f95b9573e26b98b3f5ae94d45cc67b3e906666bb1d7a688743ff6cde589e",
+      "classification": "same_identity_authority_repair",
+      "rationale": "Make Term hierarchy definition domain-neutral without creating another referent identity, changing graph ownership, or borrowing Entity qualification relations.",
+      "sha256": "bc01b93c1f23faa5b18efb1760d45e817c7b699a929304ed20789b9ae3178233"
+    },
+    {
+      "identity": "CA-E-382",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "version": 11,
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "before_version": 10,
+      "before_sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph@10.md",
+      "archive_sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+      "classification": "same_identity_authority_repair",
+      "rationale": "Check source-backed Term hierarchy implication, including operational vocabulary, and complete traceable governed-only selection without fabricated edges or silently accepted definition gaps.",
+      "sha256": "4d29bf7bad708983cc9d4f5a97852be8064ac526c162e247bc3c02a5cc322f13"
+    },
+    {
+      "identity": "CA-R-1454",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "version": 1,
+      "before_path": null,
+      "before_version": null,
+      "before_sha256": null,
+      "archive_path": null,
+      "archive_sha256": null,
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "classification": "new_view_selection_requirement",
+      "rationale": "One independently adjustable selection/completeness rule for a governed-only Terms Graph view; reuses the generic Terms Graph and existing Term admission authority, with no new graph kind or Term identity.",
+      "identity_admission": "No R1454 in repository governed Markdown/JSON/NDJSON/TOML content or Git history filenames; previous assigned Requirement number R1453. General tier under R1431 because this specifies a derived set, not graph identity or concrete Carrier.",
+      "sha256": "32c6d2f4740c024cbf4bb9f3de4f03b11836fef3f0bb8917069b146ef35c646b"
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1079",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/02-CA-P-1079-TASK--reconcile-governed-terms-graph-authority.md",
+      "before_version": 2,
+      "before_sha256": "75bd7d535cd99cc3cc11150d5c697c6ee3b3183f5b1a71321016190bbae40dcd",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/done/02-CA-P-1079-TASK--reconcile-governed-terms-graph-authority.md",
+      "version": 3,
+      "sha256": "d8daada9d35b648edc0464890717553059b944fb2a38cd139a0124f90a96375a",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/02-CA-P-1079-TASK--reconcile-governed-terms-graph-authority@2.md",
+      "archive_sha256": "75bd7d535cd99cc3cc11150d5c697c6ee3b3183f5b1a71321016190bbae40dcd",
+      "action": "MOVE+UPDATE"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-governed-terms-graph-report.md",
+      "version": 1,
+      "sha256": "caf25c8f480fe32725c77449cc03267620d1ce61a628aef399109255acb028d3",
+      "action": "ADD"
+    }
+  ],
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      }
+    ],
+    "ownership_inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1078-derived-model-view-authority-inventory.projection.json",
+      "sha256": "d155a84576a56dd37b347e12634a0162b45e2470edb7468c9ba584c2253e70ea"
+    }
+  },
+  "validation": {
+    "task_dod_falsifier": false,
+    "before_source_count": 1559,
+    "after_source_count": 1560,
+    "before_core_count": 677,
+    "after_core_count": 678,
+    "unchanged_sources": 1557,
+    "changed_source_carriers": 2,
+    "new_source_carriers": 1,
+    "unchanged_reserved_sources": 14,
+    "excluded_drafts_unchanged": 53,
+    "prior_archives_unchanged": 8358,
+    "new_exact_archives": 3,
+    "prior_evidence_unchanged": 17,
+    "other_tasks_unchanged": 109,
+    "semantic_authority_fixtures": 26,
+    "generator_implementation_conformance_claimed": false,
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b"
+  },
+  "semantic_fixtures": [
+    {
+      "id": "F01",
+      "scenario": "Two uniquely defined Terms with an explicitly declared, definition-supported hierarchy edge.",
+      "reviewed_disposition": "Accept",
+      "authority": "R1435, R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F02",
+      "scenario": "Unrelated Terms have no observed Entity instances; a hierarchy edge is proposed from that absence.",
+      "reviewed_disposition": "Reject; absence is not implication evidence",
+      "authority": "R1435, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F03",
+      "scenario": "Synthetic Finder Term is explicitly defined as an Action with a finding contribution; an explicit Finder-to-Action edge is declared.",
+      "reviewed_disposition": "Accept without creating an Entity duplicate",
+      "authority": "R1435, R1248, R1452, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F04",
+      "scenario": "Synthetic Review Process is explicitly defined as a Process with a bounded review flow; its Term hierarchy edge to Process is declared.",
+      "reviewed_disposition": "Accept without creating an Entity duplicate",
+      "authority": "R1435, R1248, R1453, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F05",
+      "scenario": "Every observed A instance currently also satisfies B, but A and B definitions do not imply this.",
+      "reviewed_disposition": "Reject hierarchy admission",
+      "authority": "R1435, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F06",
+      "scenario": "Two active Definition Atoms give a displayed Term conflicting Project-specific meanings.",
+      "reviewed_disposition": "Reject; identify conflicting source definitions",
+      "authority": "R126, R1319, E382, E444",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F07",
+      "scenario": "A displayed Project-specific Term has no active Definition Atom.",
+      "reviewed_disposition": "Reject; report missing defining authority",
+      "authority": "R1319, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F08",
+      "scenario": "An ordinary English word has consistent general usage but no Project-specific definition.",
+      "reviewed_disposition": "Exclude from governed-only view; general usage remains valid",
+      "authority": "M114, E444, R1454",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F09",
+      "scenario": "A capitalized word occurs in Subjects but no defining Claim establishes Project-specific meaning.",
+      "reviewed_disposition": "Do not admit as a Governed Term",
+      "authority": "M114, E444",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F10",
+      "scenario": "A complete composite Subject Path is proposed as one vocabulary Term.",
+      "reviewed_disposition": "Reject that Term admission",
+      "authority": "R1325, M114, E444",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F11",
+      "scenario": "Definitions support an implication, but no source Atom declares its hierarchy edge.",
+      "reviewed_disposition": "Do not display an authored hierarchy edge",
+      "authority": "R1437, R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F12",
+      "scenario": "An Entity bearer edge or allowed-value admission edge is inserted as a Terms Graph relation.",
+      "reviewed_disposition": "Reject wrong graph-kind ownership",
+      "authority": "R1246, R1435, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F13",
+      "scenario": "A Term has two explicitly supported narrower-than parents and no cycle.",
+      "reviewed_disposition": "Accept; single-parent tree is not required",
+      "authority": "R1244, R1345, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F14",
+      "scenario": "The hierarchy contains a self-loop or a multi-node directed cycle.",
+      "reviewed_disposition": "Reject",
+      "authority": "R1345, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F15",
+      "scenario": "Source evidence establishes zero direct hierarchy parents for a uniquely defined Term.",
+      "reviewed_disposition": "Accept isolated Root Term",
+      "authority": "R1347, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F16",
+      "scenario": "Requested selection excludes a separately defined out-of-selection Term and its source facts.",
+      "reviewed_disposition": "Accept omission; no forced full-Project graph",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F17",
+      "scenario": "An eligible in-selection Term or eligible explicit in-selection edge is omitted.",
+      "reviewed_disposition": "Reject under-inclusion",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F18",
+      "scenario": "A displayed node or edge has no exact source Claim/revision trace.",
+      "reviewed_disposition": "Reject",
+      "authority": "R1454, R1437, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F19",
+      "scenario": "Two Atoms share Subjects; the display invents a Term hierarchy edge from that sharing.",
+      "reviewed_disposition": "Reject invented edge",
+      "authority": "R1435, R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F20",
+      "scenario": "A separately admitted expansion Relation Kind belongs to Terms Graph and satisfies its governing authority.",
+      "reviewed_disposition": "Do not reject merely for being an expansion",
+      "authority": "R1246, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F21",
+      "scenario": "The view acquires independent vocabulary authority or a new graph-kind identity merely because selection is governed-only.",
+      "reviewed_disposition": "Reject",
+      "authority": "R1335, R1454, R1437",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F22",
+      "scenario": "An outside-selection Definition Atom is silently imported to add its Term node.",
+      "reviewed_disposition": "Reject over-inclusion",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F23",
+      "scenario": "Both endpoint Terms are selected, but the displayed explicit edge is sourced outside selection.",
+      "reviewed_disposition": "Reject outside-selection edge",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F24",
+      "scenario": "An in-selection Relation declaration has an excluded endpoint; its edge is omitted.",
+      "reviewed_disposition": "Accept omission; edge is not eligible",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F25",
+      "scenario": "A parent is filtered out and its visible child is labeled canonical Root Term solely from display isolation.",
+      "reviewed_disposition": "Reject classification; retain known source classification or leave unresolved",
+      "authority": "R1347, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    },
+    {
+      "id": "F26",
+      "scenario": "A requested dependency closure is explicitly added to the declared source selection before derivation.",
+      "reviewed_disposition": "Evaluate that explicit selection; never silently enlarge it",
+      "authority": "R1454, E382",
+      "review": "PASS: determinate under current source authority; not an executable generator test"
+    }
+  ],
+  "journal": {
+    "action_id": "execute-ca-p-1079-reconcile-governed-terms-graph-authority",
+    "append_only": true,
+    "receipt_binding": "Exact sealed source/archive/evidence/Task/map events appended after final hashes; receipts returned separately. No historical author/time inferred."
+  },
+  "next_task": "CA-P-1080",
+  "deferred": [
+    "General vocabulary and unresolved-candidate indexes: P1080",
+    "Entity qualification: P1081",
+    "Subject backlinks: P1082",
+    "Composed navigation and registry: P1083",
+    "D Carriers: P1084",
+    "Graph sub-Epic closure: P1085",
+    "Operation flow schema: P980 after parent review",
+    "Temporal authority and bulk Carrier retirement: later assigned Tasks"
+  ]
+}

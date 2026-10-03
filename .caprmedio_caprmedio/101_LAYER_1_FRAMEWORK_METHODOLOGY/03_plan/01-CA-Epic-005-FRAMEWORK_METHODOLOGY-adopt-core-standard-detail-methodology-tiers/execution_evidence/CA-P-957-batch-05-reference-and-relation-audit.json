@@ -1,0 +1,712 @@
+{
+  "schema": "ca-p-957-reference-and-relation-audit/v1",
+  "non_authoritative": true,
+  "batch": "05",
+  "literal_basename_scan": {
+    "searched_markdown_files": 10176,
+    "references": [
+      {
+        "target_atom_id": "CA-R-1310",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1310-CORE_META_MODEL-CORE-REQUIREMENT--register-core-task-status-values.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1382-CORE_META_MODEL-CORE-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-980",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-980-CORE_META_MODEL-CORE-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+        "lines": [
+          18
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1367",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1367-CORE_META_MODEL-CORE-REQUIREMENT--limit-each-epic-to-one-objective.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1397",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1397-CORE_META_MODEL-CORE-REQUIREMENT--register-core-method-status-values.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-990",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-990-CORE_META_MODEL-CORE-REQUIREMENT--permit-standalone-task-atoms.md",
+        "lines": [
+          18
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1399",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1399-CORE_META_MODEL-CORE-REQUIREMENT--register-core-delivery-status-values.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1309",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1309-CORE_META_MODEL-CORE-REQUIREMENT--register-core-requirement-status-values.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1383-CORE_META_MODEL-CORE-REQUIREMENT--permit-nested-atom-collections.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1231",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1231-CORE_META_MODEL-CORE-REQUIREMENT--register-core-type-values-for-concern-atoms.md",
+        "lines": [
+          13
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1370",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1370-CORE_META_MODEL-CORE-REQUIREMENT--limit-each-task-to-one-direct-epic.md",
+        "lines": [
+          18
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1301",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1301-CORE_META_MODEL-CORE-REQUIREMENT--limit-epic-members-to-epics-and-tasks.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1045",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1045-CORE_META_MODEL-CORE-REQUIREMENT--restrict-autonomous-confidence-threshold-values.md",
+        "lines": [
+          15
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1081",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1081-CORE_META_MODEL-CORE-REQUIREMENT--default-task-assignee-to-an-ai-agent.md",
+        "lines": [
+          18
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1080",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1080-CORE_META_MODEL-CORE-REQUIREMENT--default-atom-revision-author-to-the-operator.md",
+        "lines": [
+          18
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1380",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1380-CORE_META_MODEL-CORE-REQUIREMENT--register-core-atom-collection-type-values.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1350",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1350-CORE_META_MODEL-CORE-REQUIREMENT--resolve-the-most-specific-type-domain.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1366",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1366-CORE_META_MODEL-CORE-REQUIREMENT--register-core-epic-status-values.md",
+        "lines": [
+          17
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1398",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1398-CORE_META_MODEL-CORE-REQUIREMENT--register-core-evaluation-status-values.md",
+        "lines": [
+          16
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      },
+      {
+        "target_atom_id": "CA-R-1232",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1232-CORE_META_MODEL-CORE-REQUIREMENT--register-core-type-values-for-analysis-atoms.md",
+        "lines": [
+          13
+        ],
+        "active_frontier_source": false,
+        "historical": false,
+        "generated": true
+      }
+    ]
+  },
+  "basename_disposition": "All20 affected Markdown references are generated Applicable Methodology source-path metadata; no active source full-basename rewrite is needed. Preserve generated files for later governed regeneration.",
+  "canonical_proposed_overlay": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "batch": "05",
+    "candidate_count": 21,
+    "checked_count": 35,
+    "diagnostic_count": 8,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-R-1045",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1045-CORE_META_MODEL-GENERAL-REQUIREMENT--restrict-autonomous-confidence-threshold-values.md",
+        "sha256": "d0b8ffe3e4ec950a9c32d145f3cf5d21450ede3d95aa8d699bdb2b13e7719cdc",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1080",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1080-CORE_META_MODEL-GENERAL-REQUIREMENT--default-atom-revision-author-to-the-operator.md",
+        "sha256": "3f5cd83e3e3fd1ba55cc89b4502fbdb84572935eb65f8b1e4642276853959e79",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1081",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1081-CORE_META_MODEL-GENERAL-REQUIREMENT--default-task-assignee-to-an-ai-agent.md",
+        "sha256": "7e88c55907b8d5e235c4988f753ce8d32c1de24e3a071e4a35d82a4218daf30b",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1231",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1231-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-type-values-for-concern-atoms.md",
+        "sha256": "b2c4cefe27fcfd3a93d788afedc168bc0359f4af8160e7e73042044118948303",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1232",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-type-values-for-analysis-atoms.md",
+        "sha256": "9e5266a58abb4567ca7031d5ada9ae1a6574351392cdbc019bcfee51cb46e7d2",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1301",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1301-CORE_META_MODEL-GENERAL-REQUIREMENT--limit-epic-members-to-epics-and-tasks.md",
+        "sha256": "3c80dafd3fb723222f2d8d16cb28e1d97d880e220cb6b0a2c40dceae60c0ac62",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1309",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md",
+        "sha256": "d68dfbcf59c2e8b9ecf9888882813d0bdec07ce3f2a4d12a7f7e3ce569403eed",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1310",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1310-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-task-status-values.md",
+        "sha256": "ccfd6c593431f28c58131e35d0e5aa805bcf02ecdd4a154bd6e178603eaeb159",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1350",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1350-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-the-most-specific-type-domain.md",
+        "sha256": "a54eac03c1f5e9be76615a93eb957ddbfa2fa4f850d1ae7b5ce20e126835cadd",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1366",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1366-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-epic-status-values.md",
+        "sha256": "91b53fb0707c1c3650dde16aaabf6977d66b51deacd3a4a77812de33d4c9ddba",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1367",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1367-CORE_META_MODEL-GENERAL-REQUIREMENT--limit-each-epic-to-one-objective.md",
+        "sha256": "90ab2261c1b4893b6b8ab12ef8b731458c2f6b91ab245d48a85a4318cf1bae00",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1370",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1370-CORE_META_MODEL-GENERAL-REQUIREMENT--limit-each-task-to-one-direct-epic.md",
+        "sha256": "0e572a7cc3a4468ff1eaa6b4e42eedcb368b08757b89c0c879d0a68d6c83ea2c",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1380",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1380-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-atom-collection-type-values.md",
+        "sha256": "7541f475f7ed5def3d4eba291b48fa7464c2a6756eb04e9ef9e70cf16a19e436",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1382-CORE_META_MODEL-GENERAL-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+        "sha256": "0339dd2f51e6ce19e79c73cf9895398810c014c24c85c8c3523db5ad825a6f56",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1383-CORE_META_MODEL-GENERAL-REQUIREMENT--permit-nested-atom-collections.md",
+        "sha256": "3b92cc98686598daec1c33486b9b315b3a1a16caaa26779d75950d7bbaa5ab49",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1397",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1397-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-method-status-values.md",
+        "sha256": "529aefab857cb0a2356d8db33b50ac3a8391fee24f27fbba7cd097d667b77a4f",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1398",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1398-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-evaluation-status-values.md",
+        "sha256": "e791db37d0f57fab2c2cb16c02d17aea87533e59f96ec49912ead95650d4f238",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1399",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1399-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-delivery-status-values.md",
+        "sha256": "ed38e559133346c2d442fced269e9858bf9ff6dddb17d983b68b98f856ad0c3a",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1430",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1430-CORE_META_MODEL-GENERAL-REQUIREMENT--select-authority-modes-through-framework-instance-settings.md",
+        "sha256": "3469e67e5effbc21c1695c3b201ee9f5b68922777bc030cd95ff57d6a23dfab3",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-980",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-GENERAL-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+        "sha256": "f70f5537cee92113db063355f9c342cce15c5d9c0c36ec3c14f08e6cc509d5cb",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-990",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-990-CORE_META_MODEL-GENERAL-REQUIREMENT--permit-standalone-task-atoms.md",
+        "sha256": "9515ae1c7679eb0d02221b76097a469f6f9b59ca3dd85c20bce3a565a8551de7",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-REQU-029",
+        "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-029-CORE-REQUIREMENT--govern-each-scope-by-authority-mode.md",
+        "sha256": "ff37f124ddf14f85236f674f657eda8c08cec0f33eaa39dd9171ad2501299062",
+        "planned_candidate": false,
+        "source_count": 3,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-029-CORE-REQUIREMENT--govern-each-scope-by-authority-mode.md"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-029-CORE-REQUIREMENT--govern-each-scope-by-authority-mode.md"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-REQU-710",
+        "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-710-REQUIREMENT--resolve-methodology-authority-modes-from-framework-instance-settings.md",
+        "sha256": "559184e2292b37ce9b5634dbe3fff7292c67cba13d0134bfe03b83625d3a7077",
+        "planned_candidate": false,
+        "source_count": 3,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-710-REQUIREMENT--resolve-methodology-authority-modes-from-framework-instance-settings.md"
+            }
+          },
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "replacement_of",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-710-REQUIREMENT--resolve-methodology-authority-modes-from-framework-instance-settings.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "replacement_of",
+              "target": "CAPRMEDIO-REQU-623--use-strict-authority-for-project-meta-and-gov"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-710-REQUIREMENT--resolve-methodology-authority-modes-from-framework-instance-settings.md"
+            }
+          },
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "replacement_of",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-710-REQUIREMENT--resolve-methodology-authority-modes-from-framework-instance-settings.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "replacement_of",
+              "target": "CAPRMEDIO-REQU-623--use-strict-authority-for-project-meta-and-gov"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-REQU-711",
+        "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-711-REQUIREMENT--use-the-configured-authority-mode-default.md",
+        "sha256": "39cbc3878e7b5094ed9c83389a8d06c0387ae690ca55f9ed291f728e4e686283",
+        "planned_candidate": false,
+        "source_count": 3,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-711-REQUIREMENT--use-the-configured-authority-mode-default.md"
+            }
+          },
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "replacement_of",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-711-REQUIREMENT--use-the-configured-authority-mode-default.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "replacement_of",
+              "target": "CAPRMEDIO-REQU-624--use-casual-authority-for-other-project-scopes"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "depends_on",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-711-REQUIREMENT--use-the-configured-authority-mode-default.md"
+            }
+          },
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "replacement_of",
+              "path": ".caprmedio_caprmedio/04_requirement/CAPRMEDIO-REQU-711-REQUIREMENT--use-the-configured-authority-mode-default.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "replacement_of",
+              "target": "CAPRMEDIO-REQU-624--use-casual-authority-for-other-project-scopes"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-268",
+        "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md",
+        "sha256": "348b3fa2ff5786e8b98fa09d1083b3c7179463de8f66dfeb7796d76d7b49c532",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-440",
+        "path": ".caprmedio_caprmedio/06_evaluation/CA-E-440-CORE-EVAL_APPROACH--evaluate-governing-atom-change-approval.md",
+        "sha256": "99394f592e5a174b6fa3ec1c772dca20c44861d892dd8b2f4f5df9c1481531d8",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-373",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-373-CORE_META_MODEL-REQUIREMENT--encode-project-scope-authority-modes-in-the-scope-unit-graph.md",
+        "sha256": "e2bed35591184a0708dc626582dd2353dc744ce20ec3209ad2049697c772e29d",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-424",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms.md",
+        "sha256": "83029cf2574cb158c8b61cda722f6ee66d31ea994aaf3c8d391ddef22a04f397",
+        "planned_candidate": false,
+        "source_count": 4,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-426",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment.md",
+        "sha256": "36853f4795c0f68a772dd8ba2336afb0314f26f1f1ca816f0e0f7bff103b4452",
+        "planned_candidate": false,
+        "source_count": 9,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-427",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity.md",
+        "sha256": "3f7f0a9bd9aa1890e5393d08a3cd876eb1dc74a56ab1f328cd96fbb738b98caa",
+        "planned_candidate": false,
+        "source_count": 8,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-430",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-430-CORE_META_MODEL-EVALUATION--validate-authoritative-framework-settings-artifact.md",
+        "sha256": "cceeecb15a98aaca34c5799650c8882d34a65f71c0dc18c5a42ddae94c47c27a",
+        "planned_candidate": false,
+        "source_count": 8,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-443",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-443-CORE_META_MODEL-QA_CASE--validate-confidence-threshold-precedence-and-inheritance.md",
+        "sha256": "9954cb8ed888cf773a5cc12a8658bafc0208653e55a3b05f25ebe9633aa9eadd",
+        "planned_candidate": false,
+        "source_count": 10,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-446",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-446-CORE_META_MODEL-EVALUATION--validate-settings-boundaries-and-observed-project-structure.md",
+        "sha256": "0c9a9721cf29bc8c869d3a057f99d2bd23f11bd7b32c27c432eb3ee06a3e5d02",
+        "planned_candidate": false,
+        "source_count": 12,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-447",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-447-CORE_META_MODEL-EVALUATION--validate-three-tier-boundaries-with-concrete-cases.md",
+        "sha256": "0c4fa02d975be7e9c8841944c494b68843490125583712f2f242447fa9a7fce6",
+        "planned_candidate": false,
+        "source_count": 29,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-372",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+        "sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747",
+        "planned_candidate": false,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "existing_diagnostics_disposition": "Eight diagnostics on four unchanged Project-owned inbound consumers are byte-for-byte preexisting under the unmodified graph; they concern unrelated unresolved relation kinds/replacement targets. Zero candidate diagnostics and zero new inbound diagnostics. Project Atoms are excluded; do not repair or conceal these defects.",
+  "tier_parent_semantics": "No new Requirement same-tier parent or upward less-abstract parent is introduced by this checkpoint. The retained direct parents remain Core; inbound Standard consumers of R1430/R1370 now resolve to General. No equality/inequality of complete Atom Scope is inferred solely from Subject spellings."
+}

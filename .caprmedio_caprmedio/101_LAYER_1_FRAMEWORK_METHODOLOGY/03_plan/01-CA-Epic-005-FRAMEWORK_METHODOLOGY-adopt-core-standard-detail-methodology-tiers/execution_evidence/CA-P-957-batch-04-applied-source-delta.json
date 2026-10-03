@@ -1,0 +1,1488 @@
+{
+  "schema": "ca-p-957-applied-batch/v1",
+  "non_authoritative": true,
+  "batch": "04",
+  "root_go": "Explicit root GO for frozen SHA 8c7b5d1b96a373f519ba6eff87b3062f0b8f8840f506182a61fe44ecfc1a4598 received before source mutation. Root reported 32 truthful observed-state baselines and 3 reused matching prior results. No invented Git or Journal history.",
+  "frozen_plan": "CA-P-957-batch-04-planned-source-delta.json",
+  "frozen_plan_sha256": "8c7b5d1b96a373f519ba6eff87b3062f0b8f8840f506182a61fe44ecfc1a4598",
+  "post_checkpoint_corrections": [
+    {"atom_id": "CA-R-997", "path": "CA-P-957-batch-04-post-checkpoint-R997-correction.json", "sha256": "0f1ea334bf3f0d0b01077ce6eb96222134c1f193cd7b8a9600af62922a18474b"}
+  ],
+  "existing": [
+    {
+      "atom_id": "CA-R-1204",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "before_version": 5,
+      "before_sha256": "2219e3f9b65b6f221dce48c4cf98cccf3337c00c916e4048cce59427031381ff",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "after_version": 6,
+      "after_sha256": "c7a6ce361c2c0fcbbf72ed035de42b12c880c7df30e2104546bbfa157f3b7157",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification@5.md",
+      "archive_sha256": "2219e3f9b65b6f221dce48c4cf98cccf3337c00c916e4048cce59427031381ff",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1245",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "before_version": 4,
+      "before_sha256": "387a0a89a14b82f9b8f5a745b9cf0128b83f9e416579c257a1b7c5a708b01613",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "after_version": 5,
+      "after_sha256": "1ce6a03053bf067ebc8d6ab2dc6663366ef42ed48ad82646df15eccdf9185a63",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon@4.md",
+      "archive_sha256": "387a0a89a14b82f9b8f5a745b9cf0128b83f9e416579c257a1b7c5a708b01613",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1297",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "before_version": 4,
+      "before_sha256": "af334e8a4d8f0536fd8b464f6db8f0de0382d4c405b661df424b6116950bff06",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1297-CORE_META_MODEL-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "after_version": 5,
+      "after_sha256": "f7187372c645788d7234a51bfac9c1a61db54803224bf73aa94ab3538d7bd22a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names@4.md",
+      "archive_sha256": "af334e8a4d8f0536fd8b464f6db8f0de0382d4c405b661df424b6116950bff06",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1304",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar.md",
+      "before_version": 5,
+      "before_sha256": "bf7697910a10af10ea3e10671d93e730ae2ddae666583c659d467d711b68afe3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1304-CORE_META_MODEL-REQUIREMENT--define-epic-identifier-grammar.md",
+      "after_version": 6,
+      "after_sha256": "a5f333a272ebda2e816161f3c6288477628058ebb2a643be9aec8e358c3e7993",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar@5.md",
+      "archive_sha256": "bf7697910a10af10ea3e10671d93e730ae2ddae666583c659d467d711b68afe3",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1305",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "before_version": 6,
+      "before_sha256": "16102f5571f006f341a12e89e9990ec2c3ccf8f77147361945d9449991272dc6",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1305-CORE_META_MODEL-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "after_version": 7,
+      "after_sha256": "9aefca394f8782ee0537e71ed2e475b13a761b03ba7e241e132ef9a5a378a7a5",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms@6.md",
+      "archive_sha256": "16102f5571f006f341a12e89e9990ec2c3ccf8f77147361945d9449991272dc6",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1322",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names.md",
+      "before_version": 3,
+      "before_sha256": "4621f7e20c5a16b5e7209f806c7f8506b5a2667ba9509c44bddff688d822f7e8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1322-CORE_META_MODEL-REQUIREMENT--capitalize-governed-term-names.md",
+      "after_version": 4,
+      "after_sha256": "69499e128e2202150040d144e605948e8dbeb98c99570f2abbb878e202b48ccd",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names@3.md",
+      "archive_sha256": "4621f7e20c5a16b5e7209f806c7f8506b5a2667ba9509c44bddff688d822f7e8",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1323",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names.md",
+      "before_version": 3,
+      "before_sha256": "d809256a1dbec3f3cd0454444e71e2e5e4a1bd9a1c07441e5da13bdfa95e6bc9",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1323-CORE_META_MODEL-REQUIREMENT--lowercase-general-term-names.md",
+      "after_version": 4,
+      "after_sha256": "f01904b62ce8f233442f38e1db01594e0467ac2f8daba9c4b4907a783997d7cc",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names@3.md",
+      "archive_sha256": "d809256a1dbec3f3cd0454444e71e2e5e4a1bd9a1c07441e5da13bdfa95e6bc9",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1324",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators.md",
+      "before_version": 3,
+      "before_sha256": "a948cc268db448ee1a01ee90f1a0900fa4237e60024c8614ae1d9ec252ee8f47",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1324-CORE_META_MODEL-REQUIREMENT--reserve-subject-expression-separators.md",
+      "after_version": 4,
+      "after_sha256": "383bacd50933fc66c65087f96c41a3a7d4e96d98e76178883e0627225889504d",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators@3.md",
+      "archive_sha256": "a948cc268db448ee1a01ee90f1a0900fa4237e60024c8614ae1d9ec252ee8f47",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1359",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set.md",
+      "before_version": 2,
+      "before_sha256": "614a1839c04673867e2362603c4755c8728e2be18718b7f008d4d39f67619f1a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1359-CORE_META_MODEL-REQUIREMENT--define-claim-value-set.md",
+      "after_version": 3,
+      "after_sha256": "0caae1c09ff1c43ddee8926a643ef935276a63b9eb11a12f926498a6b7e421e4",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set@2.md",
+      "archive_sha256": "614a1839c04673867e2362603c4755c8728e2be18718b7f008d4d39f67619f1a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1360",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "before_version": 2,
+      "before_sha256": "f20d9aebcdb36a013f8a3dd0c88005f697e58c5e8e3033da574d58d4972c77aa",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1360-CORE_META_MODEL-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "after_version": 3,
+      "after_sha256": "81e1e1fa2f5ca5d00bab8bf5527a66bf0ef0bd88235998369e569828b1ea112e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature@2.md",
+      "archive_sha256": "f20d9aebcdb36a013f8a3dd0c88005f697e58c5e8e3033da574d58d4972c77aa",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-1369",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "before_version": 3,
+      "before_sha256": "0045eed0c9511fa71c177695276376bcd84a0b8a07e185f44c964b0337e17fe5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1369-CORE_META_MODEL-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "after_version": 4,
+      "after_sha256": "78b1795e7df4e5f47d07b777b16b5bcb7ae2d08bc721b799280973a89d03d1f6",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier@3.md",
+      "archive_sha256": "0045eed0c9511fa71c177695276376bcd84a0b8a07e185f44c964b0337e17fe5",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-946",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "before_version": 14,
+      "before_sha256": "d6f5c0f108166d97b22513cb15046e095d2ca1b1fe595884340c63e9a51f5307",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-946-CORE_META_MODEL-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "after_version": 15,
+      "after_sha256": "8054cff0002104fc153dc7861aa8e5aeea884b4077102aaaedf2c4f765f584fd",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly@14.md",
+      "archive_sha256": "d6f5c0f108166d97b22513cb15046e095d2ca1b1fe595884340c63e9a51f5307",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-R-997",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers.md",
+      "before_version": 8,
+      "before_sha256": "040bf444ae7e167eb7b34470db038ca2b7260197d953abcb8789df7acd5ccf2e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md",
+      "after_version": 9,
+      "after_sha256": "51751283157ea53f84b0b23df50cfa34a4d6cbd13061d2d53ba3b34d3ae4418a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers@8.md",
+      "archive_sha256": "040bf444ae7e167eb7b34470db038ca2b7260197d953abcb8789df7acd5ccf2e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-111",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "before_version": 15,
+      "before_sha256": "93d38ad126ad901e04ce910b38538b7ff124c87ce183438c22722e3f60a53b9a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-CORE_META_MODEL-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "after_version": 16,
+      "after_sha256": "2745c9cac64187c7f8543e55efa0bc0548dcaf8f716a325009f72caa25291dca",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary@15.md",
+      "archive_sha256": "93d38ad126ad901e04ce910b38538b7ff124c87ce183438c22722e3f60a53b9a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-112",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language.md",
+      "before_version": 8,
+      "before_sha256": "05893c87eb62fa93cb39ff03ea83833550d81fb8bf4e0a9070607212911024c0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-112-CORE_META_MODEL-METHOD--use-english-as-the-project-language.md",
+      "after_version": 9,
+      "after_sha256": "186171045142b84ec23bebb3b657d6f7a40ccf417c4c3bfd592447d078d9e2df",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language@8.md",
+      "archive_sha256": "05893c87eb62fa93cb39ff03ea83833550d81fb8bf4e0a9070607212911024c0",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-113",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "before_version": 9,
+      "before_sha256": "40438ed6970e640a21b5f442f208a60d46fa5e2fb3d24be9ffe66e2e16172c69",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "after_version": 10,
+      "after_sha256": "4c985019bd72fc946511e7583943bcf8d8fe8c98c9c6e83b5589f79fbb8d21b0",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english@9.md",
+      "archive_sha256": "40438ed6970e640a21b5f442f208a60d46fa5e2fb3d24be9ffe66e2e16172c69",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-115",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "before_version": 13,
+      "before_sha256": "b03d3e4258ea3d4962c33aa1ff4838a60e1695d543c99ace5f9e386629df3e0a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-CORE_META_MODEL-METHOD--author-one-cce-claim-per-atom.md",
+      "after_version": 14,
+      "after_sha256": "844335d5822121ff93cf73d24c7928e335b32e375dbde93485945b1ccc3ad990",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom@13.md",
+      "archive_sha256": "b03d3e4258ea3d4962c33aa1ff4838a60e1695d543c99ace5f9e386629df3e0a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-119",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "before_version": 9,
+      "before_sha256": "190f0539d64215f2f995442637977c5b00aea24c9aac7738c820afa9eb125c64",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-CORE_META_MODEL-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "after_version": 10,
+      "after_sha256": "ce7d47aa3ffd6324cf8321da56f349c2d5e40054d15ff95808a578c9cb888abf",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version@9.md",
+      "archive_sha256": "190f0539d64215f2f995442637977c5b00aea24c9aac7738c820afa9eb125c64",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-121",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions.md",
+      "before_version": 9,
+      "before_sha256": "0851a67a730b4c705eb6189550010e3061ead76cd44c3c8d683ac08c05df482e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-121-CORE_META_MODEL-METHOD--evaluate-scope-expressions.md",
+      "after_version": 10,
+      "after_sha256": "857797434c4538051dacdca049209c1c533d936835427f38597ae23be2afa28d",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions@9.md",
+      "archive_sha256": "0851a67a730b4c705eb6189550010e3061ead76cd44c3c8d683ac08c05df482e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-122",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions.md",
+      "before_version": 7,
+      "before_sha256": "6c2d3defd80789b1e9bed437a2ffea6c967f9f75384174844a7144ab4b1d5876",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-122-CORE_META_MODEL-METHOD--evaluate-condition-expressions.md",
+      "after_version": 8,
+      "after_sha256": "6826e9c10691deea86e63ed59f9adb4ede9a97460c8650ba8d51e22864e02471",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions@7.md",
+      "archive_sha256": "6c2d3defd80789b1e9bed437a2ffea6c967f9f75384174844a7144ab4b1d5876",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-123",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done.md",
+      "before_version": 8,
+      "before_sha256": "28ec894e74d971fdb40acd451d9c03de23a87fa7d8c0aab7e268507ac9ef62cb",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-METHOD--write-definitions-of-done.md",
+      "after_version": 9,
+      "after_sha256": "f4e734f75e28eb94c9243b299a53208d3594f97f2fc779b03a5cd787511d767c",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done@8.md",
+      "archive_sha256": "28ec894e74d971fdb40acd451d9c03de23a87fa7d8c0aab7e268507ac9ef62cb",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-127",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership.md",
+      "before_version": 8,
+      "before_sha256": "85f51c3e853f0ddfb6f125084963f784bd4adc5471b6c234549ae5c371ccfd48",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-127-CORE_META_MODEL-METHOD--evaluate-set-valued-property-membership.md",
+      "after_version": 9,
+      "after_sha256": "261506929cb9ba79d8b917f3ae4ada283c26c79f1585528db218198b02a789e1",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership@8.md",
+      "archive_sha256": "85f51c3e853f0ddfb6f125084963f784bd4adc5471b6c234549ae5c371ccfd48",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-137",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-137-CORE_META_MODEL-CORE-METHOD--resolve-project-and-framework-settings-before-derived-structure.md",
+      "before_version": 16,
+      "before_sha256": "1f147a4da82df28c1632c4bd9b00f0f8187ea9d7bce2c55869aa34b1843c8920",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-137-CORE_META_MODEL-METHOD--resolve-project-and-framework-settings-before-derived-structure.md",
+      "after_version": 17,
+      "after_sha256": "91720fe9117a1594f49e5a0fd8abdfebc67bb54e32ecf2603d63eee66e260db7",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-137-CORE_META_MODEL-CORE-METHOD--resolve-project-and-framework-settings-before-derived-structure@16.md",
+      "archive_sha256": "1f147a4da82df28c1632c4bd9b00f0f8187ea9d7bce2c55869aa34b1843c8920",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-225",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "before_version": 7,
+      "before_sha256": "8310c345f7649192978a76f3c2564218def02e3e20f9925f9351318cc394ef1a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-CORE_META_MODEL-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "after_version": 8,
+      "after_sha256": "a65b0aca3f46228b94395a90a5385226d82a89226691f54d543a6ba1c58d00e0",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically@7.md",
+      "archive_sha256": "8310c345f7649192978a76f3c2564218def02e3e20f9925f9351318cc394ef1a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-228",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "before_version": 5,
+      "before_sha256": "4eb137e7e3bcf7b9a15f9fa8fc73f24eb0ab1bcd9674f11b529d1ad38a86deac",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "after_version": 6,
+      "after_sha256": "b31a50313532601f8a58e90fc9ca93e903a0d3e781ce8285d73be3f4d6811d7a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification@5.md",
+      "archive_sha256": "4eb137e7e3bcf7b9a15f9fa8fc73f24eb0ab1bcd9674f11b529d1ad38a86deac",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-229",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "before_version": 4,
+      "before_sha256": "488cf0ae72c482a8f20660266136f3597f884ee4940e7fb792d41af7f11b873c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "after_version": 5,
+      "after_sha256": "f249753fc43829e689e2557698af7396e23f6e55ab7fb42f4e0cdc30fdc306a3",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly@4.md",
+      "archive_sha256": "488cf0ae72c482a8f20660266136f3597f884ee4940e7fb792d41af7f11b873c",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-230",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "before_version": 5,
+      "before_sha256": "52ed3ae47b6476474bbb75e6d4441a1ac4547a69a7d429600e7e76ba7509ad3c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "after_version": 6,
+      "after_sha256": "0c7f7111f26e2d6452817dc3c7588efdf42952df3e00b925066d15000f4a687e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods@5.md",
+      "archive_sha256": "52ed3ae47b6476474bbb75e6d4441a1ac4547a69a7d429600e7e76ba7509ad3c",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-233",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements.md",
+      "before_version": 4,
+      "before_sha256": "858d927632e7f8d9620d8ce4ff45ee0810ba9251800b2e5fe75014069079a6fe",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL-METHOD--prefer-positive-normative-statements.md",
+      "after_version": 5,
+      "after_sha256": "0b65ce45aa2f703515b566215425333b1f108f03688dcf27ead0250f6c74070e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements@4.md",
+      "archive_sha256": "858d927632e7f8d9620d8ce4ff45ee0810ba9251800b2e5fe75014069079a6fe",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-234",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "before_version": 5,
+      "before_sha256": "64198b3dcac09a139b4b98621cab00ab8d292a3a36a195ed032c529a9857077e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "after_version": 6,
+      "after_sha256": "736b2c87fe6429c7d900962d632be46617ecf34c38e6faddd2b97dcc651170bc",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list@5.md",
+      "archive_sha256": "64198b3dcac09a139b4b98621cab00ab8d292a3a36a195ed032c529a9857077e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-236",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "before_version": 3,
+      "before_sha256": "eea5a347863282ec704c53374425957e0b5e3ee7b1ea4508879b4e2ec46d4e28",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-236-CORE_META_MODEL-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "after_version": 4,
+      "after_sha256": "cb546946bf15145d86cb886b472fa268ea6ff130d179d5a7d8d72c497f71ff9e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions@3.md",
+      "archive_sha256": "eea5a347863282ec704c53374425957e0b5e3ee7b1ea4508879b4e2ec46d4e28",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-237",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets.md",
+      "before_version": 3,
+      "before_sha256": "eb866bc5229597390ccbe243062876b7c1dd0b1742eac887a278a67c299841cd",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-237-CORE_META_MODEL-METHOD--author-claim-value-sets.md",
+      "after_version": 4,
+      "after_sha256": "595279b38bb4ccf84d458b4fd22016f273f568a720aa01778979b95ef60d572c",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets@3.md",
+      "archive_sha256": "eb866bc5229597390ccbe243062876b7c1dd0b1742eac887a278a67c299841cd",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-239",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "before_version": 3,
+      "before_sha256": "a3087833d082d95b29e5257cc7b4421d07a7397029f18804e6ee39dd28f805ea",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-239-CORE_META_MODEL-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "after_version": 4,
+      "after_sha256": "db45ab31428a7e598e7dcbe2415da001596ace8676de481dd050ed29580b18cf",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges@3.md",
+      "archive_sha256": "a3087833d082d95b29e5257cc7b4421d07a7397029f18804e6ee39dd28f805ea",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-240",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "before_version": 2,
+      "before_sha256": "ace03669f6da3655993ab0970c04030a79bac70851f01133cac82ba26aa397ba",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-240-CORE_META_MODEL-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "after_version": 3,
+      "after_sha256": "8a82cb9c39be7001d64c760a1b5c8c7ac370cb404be4316c733f21856c29d716",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite@2.md",
+      "archive_sha256": "ace03669f6da3655993ab0970c04030a79bac70851f01133cac82ba26aa397ba",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-241",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "before_version": 2,
+      "before_sha256": "60f97c5c2dcf78aa526ebbb4bd7ae41e0d3255fcecc9304e02840fb5886acfdf",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-241-CORE_META_MODEL-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "after_version": 3,
+      "after_sha256": "251028c93f568222c6b6684e3d57d8d82c7570396d38a0ffa537316b27ae9e4d",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite@2.md",
+      "archive_sha256": "60f97c5c2dcf78aa526ebbb4bd7ae41e0d3255fcecc9304e02840fb5886acfdf",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-242",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "before_version": 2,
+      "before_sha256": "4444387f2b2ff291c10f0f39c529202f2373008c1c00ef09eb033a48fa7c2958",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-242-CORE_META_MODEL-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "after_version": 3,
+      "after_sha256": "cfdcb220ae681f8f0282baa69f8b8426d59d3ed0b503d69606f306f7e9b39090",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names@2.md",
+      "archive_sha256": "4444387f2b2ff291c10f0f39c529202f2373008c1c00ef09eb033a48fa7c2958",
+      "body_preserved": true
+    }
+  ],
+  "additions": [],
+  "validation": "Observed 34 final Carriers exactly equal frozen proposed bytes and R997@9 exactly equal its separately approved unsealed-candidate correction. All35 Archives exactly equal prior bytes, old current paths absent, whole bodies preserved. Only R997 child_of R994/R995 removed under the bound correction; all other direct relations preserved.",
+  "provenance_status": "Final source provenance verified: all70 root-sealed current and Archive result paths, hashes and versions match observed files. Journal part4 rows62-100 and part5 rows1-31. No unsealed source candidate remains.",
+  "verified_source_journal_receipts": [
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 62,
+    "event_id": "c23945d323122a48cf14dfac1a2e6a757bec9f5ea0ae9ba5df3cc1dcf023b421",
+    "event_digest": "9bf2dac07a801cc968ad2902825fea3a38eec406e209af18de54a056abe52193",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification@5.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification@5.md",
+      "sha256": "2219e3f9b65b6f221dce48c4cf98cccf3337c00c916e4048cce59427031381ff",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 63,
+    "event_id": "12aed6419cfbacce0591be5dcb6b9c8fc334ae2ce185d0d58a1f4c3e5818c0cf",
+    "event_digest": "13dbd56f6b48ec61ec36947c651049324a6609206525332f4348eb4b439accb3",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1204-CORE_META_MODEL-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "sha256": "c7a6ce361c2c0fcbbf72ed035de42b12c880c7df30e2104546bbfa157f3b7157",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 64,
+    "event_id": "1eae67917e30fecea637f437899b5b7e0b76264fee704dc8ceda1cc89ea2449c",
+    "event_digest": "eade99ed646d6c8dd7df86c3da71e8099d4fd5232373af9eaf0daaa8cd796402",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon@4.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon@4.md",
+      "sha256": "387a0a89a14b82f9b8f5a745b9cf0128b83f9e416579c257a1b7c5a708b01613",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 65,
+    "event_id": "fe195c05b4c942bfeadc7ebb25c894a4164384284063932118708aaceeb1fe1d",
+    "event_digest": "ccf1d7b5904d32510d0d09d41e9b5b9581976252378ecc6d744dcd55a587a4ee",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "sha256": "1ce6a03053bf067ebc8d6ab2dc6663366ef42ed48ad82646df15eccdf9185a63",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 66,
+    "event_id": "c7a0dc3418d80f8069d014be733f887c01665644dad3f5e4fb6b2abc7db992fc",
+    "event_digest": "431328944b24570b8e999995ea407fb0c3b6aa56123f9c039ee8d15a3a3d97f3",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names@4.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names@4.md",
+      "sha256": "af334e8a4d8f0536fd8b464f6db8f0de0382d4c405b661df424b6116950bff06",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 67,
+    "event_id": "55856c974bb5268d662cc429cd04af1283826e34ac4dbd20c9847c6479ea91b3",
+    "event_digest": "cc7cbc254c94f43e3de3b2ddbff40d168311af5c94d4f711990dba62f277c286",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1297-CORE_META_MODEL-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1297-CORE_META_MODEL-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "sha256": "f7187372c645788d7234a51bfac9c1a61db54803224bf73aa94ab3538d7bd22a",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 68,
+    "event_id": "77963103f40ffc17a0e1a62f85e9560d0183a191cd898b03f457e05e77776924",
+    "event_digest": "f2d428fb4e15632f449bb4d93d35358e689f62b4c113ed9a7698feb52bb37207",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar@5.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar@5.md",
+      "sha256": "bf7697910a10af10ea3e10671d93e730ae2ddae666583c659d467d711b68afe3",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 69,
+    "event_id": "38c73f8c2052f427d67451ecc543185432c6a4764b1d9be4b3f8cae41c7ce12f",
+    "event_digest": "2cd2fe6cbf8da546d5851d2c19a27f8a9e94887a47cd4903d9290155d8207ea6",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1304-CORE_META_MODEL-REQUIREMENT--define-epic-identifier-grammar.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1304-CORE_META_MODEL-REQUIREMENT--define-epic-identifier-grammar.md",
+      "sha256": "a5f333a272ebda2e816161f3c6288477628058ebb2a643be9aec8e358c3e7993",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 70,
+    "event_id": "f2d3c609ebc6d58eca9022fd6a4133134a80a802caac4ffda4784df7e3dd53db",
+    "event_digest": "7b14194898601d42134a3792f004bafbd7fc0ddb3538155cb8d5557b2dc32f18",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms@6.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms@6.md",
+      "sha256": "16102f5571f006f341a12e89e9990ec2c3ccf8f77147361945d9449991272dc6",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 71,
+    "event_id": "8ba6d8a91ae83b648d55415b0169b8fab11fd84aa6ea7b524d33c579e08d1047",
+    "event_digest": "b99f119e2df81adf407ccc7648c64d096e869cb4b8cea171cdfcac503b11d65a",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1305-CORE_META_MODEL-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1305-CORE_META_MODEL-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "sha256": "9aefca394f8782ee0537e71ed2e475b13a761b03ba7e241e132ef9a5a378a7a5",
+      "state": "present",
+      "version": 7
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 72,
+    "event_id": "cb3986ef6cb4215c10eb4382fdf8131875d0fc281096473d44867f06cebdc0b4",
+    "event_digest": "dbd4d1dd5306f101f55305324f3699c79c3f4eb78802cdf6b4242cdb477006aa",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names@3.md",
+      "sha256": "4621f7e20c5a16b5e7209f806c7f8506b5a2667ba9509c44bddff688d822f7e8",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 73,
+    "event_id": "3e8eb71147d02fd4474f6bdbeddfd9b0d7fe850c748d4dba58b3ec0a35778a3c",
+    "event_digest": "2355a867283ae5a4cfc114177b7c0d8f61a15ddb3a67cfe172ffb4bdc44e4978",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1322-CORE_META_MODEL-REQUIREMENT--capitalize-governed-term-names.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1322-CORE_META_MODEL-REQUIREMENT--capitalize-governed-term-names.md",
+      "sha256": "69499e128e2202150040d144e605948e8dbeb98c99570f2abbb878e202b48ccd",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 74,
+    "event_id": "1f2cdf107cdf9c41ac424c7b56363072eace7818e6723c7d5714d001fbd2224c",
+    "event_digest": "94967e5dce0363199e31688f7ab23e632f5c090eb613ea3baa2f07a5caa56014",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names@3.md",
+      "sha256": "d809256a1dbec3f3cd0454444e71e2e5e4a1bd9a1c07441e5da13bdfa95e6bc9",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 75,
+    "event_id": "ba842921a9e18f80d670818919689fd31d94ae3ca0dac1a2e7735baaf2fdbe23",
+    "event_digest": "4510ca586d441943db038daee1e91bc6160ac1261c553c0868fc9eb1b391226d",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1323-CORE_META_MODEL-REQUIREMENT--lowercase-general-term-names.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1323-CORE_META_MODEL-REQUIREMENT--lowercase-general-term-names.md",
+      "sha256": "f01904b62ce8f233442f38e1db01594e0467ac2f8daba9c4b4907a783997d7cc",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 76,
+    "event_id": "84d5b729f270570764218e760b71bdc7c3a5bb45496dbff61abb6c49b2c33fbf",
+    "event_digest": "55c812868531a6289d0a96c27db9cee20c8e66d1bf55f0b7c5571a5e837fed9b",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators@3.md",
+      "sha256": "a948cc268db448ee1a01ee90f1a0900fa4237e60024c8614ae1d9ec252ee8f47",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 77,
+    "event_id": "169eab5ae8708f98f6c1d576485f7f6aa9a7f0161d53e2d1ea98f9e734a55b3d",
+    "event_digest": "f727b429e88e437d979994489a2d24f7472a6a3e8ccecd4e805b15f70ffb2ec9",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1324-CORE_META_MODEL-REQUIREMENT--reserve-subject-expression-separators.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1324-CORE_META_MODEL-REQUIREMENT--reserve-subject-expression-separators.md",
+      "sha256": "383bacd50933fc66c65087f96c41a3a7d4e96d98e76178883e0627225889504d",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 78,
+    "event_id": "136d5db9e058944cc85011049bbf463b91fe8a1edd9bb645dfde304f889ae70b",
+    "event_digest": "e92fad19d8d2ffa69e90d574ab8fef68667ab3b8efd33988cca2fe845f688725",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set@2.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set@2.md",
+      "sha256": "614a1839c04673867e2362603c4755c8728e2be18718b7f008d4d39f67619f1a",
+      "state": "present",
+      "version": 2
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 79,
+    "event_id": "a4906ef6de04a8c092bab00d52d53c4924bdad8e44f1a20d0f2ec016aae91748",
+    "event_digest": "d945627f90fa85fa9d8e2fe6f663988dd43a8a788e41a5270bb22240ad6d5502",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1359-CORE_META_MODEL-REQUIREMENT--define-claim-value-set.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1359-CORE_META_MODEL-REQUIREMENT--define-claim-value-set.md",
+      "sha256": "0caae1c09ff1c43ddee8926a643ef935276a63b9eb11a12f926498a6b7e421e4",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 80,
+    "event_id": "a694ddcbc69982620174437df18cdc089d370d073a558511e8def41fbe542462",
+    "event_digest": "bc72d8267c3dad55ab3d2079183616d47fd3b544f171503220b9384f914630a6",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature@2.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature@2.md",
+      "sha256": "f20d9aebcdb36a013f8a3dd0c88005f697e58c5e8e3033da574d58d4972c77aa",
+      "state": "present",
+      "version": 2
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 81,
+    "event_id": "75d4473b119ab175ec6475b55f9695b16f3dbb0d6514656f3a75feffb72a950f",
+    "event_digest": "686ff6970a1b90a664bae4f48fb0b35448a6943ac3747dc5102677e3aba31ac9",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1360-CORE_META_MODEL-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1360-CORE_META_MODEL-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "sha256": "81e1e1fa2f5ca5d00bab8bf5527a66bf0ef0bd88235998369e569828b1ea112e",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 82,
+    "event_id": "664471cd36d76463b554979398ff89c024b4c79164e3c34a0c3c24927f55e1ac",
+    "event_digest": "f8be6756f76cfe473ff062cd56e618801c10086f80a086806b029c8afe841254",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier@3.md",
+      "sha256": "0045eed0c9511fa71c177695276376bcd84a0b8a07e185f44c964b0337e17fe5",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 83,
+    "event_id": "4ae7ba90c28488e2ac6dfcd05790a265899dac38aa22ebd7bd6f428eb7aca232",
+    "event_digest": "02a4e07a5a0de5ca46ce6e6302d112abd3fa0032c9d8842f6b7bb6c63d0dd20a",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-1369-CORE_META_MODEL-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1369-CORE_META_MODEL-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "sha256": "78b1795e7df4e5f47d07b777b16b5bcb7ae2d08bc721b799280973a89d03d1f6",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 84,
+    "event_id": "315b47b3e4b7e7895c79e8d413a57396cfcef3d53136ebe5d595e8fb9538c228",
+    "event_digest": "c069341c7d6b6547dfc62cf7725bfbac907b830f1ea73b3e8ff5a05a9eed0707",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly@14.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly@14.md",
+      "sha256": "d6f5c0f108166d97b22513cb15046e095d2ca1b1fe595884340c63e9a51f5307",
+      "state": "present",
+      "version": 14
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 85,
+    "event_id": "d598d0eebd5892c98e6db8bd9e2d92e70fca131e3663864d53ee120574d8457c",
+    "event_digest": "f0b54f8e0ce911d0f5b6d5d90e9f0acc6d956775eda2639699678f7234147fe1",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-946-CORE_META_MODEL-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-946-CORE_META_MODEL-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "sha256": "8054cff0002104fc153dc7861aa8e5aeea884b4077102aaaedf2c4f765f584fd",
+      "state": "present",
+      "version": 15
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 86,
+    "event_id": "f24eb4ce65324be42ce493920ef24df9dc211307ad18adcb90571e10fbf49246",
+    "event_digest": "45164b0fb21e180ea13de3e102f1c9dfff956771b0f46cbab7a47be2d41df545",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers@8.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers@8.md",
+      "sha256": "040bf444ae7e167eb7b34470db038ca2b7260197d953abcb8789df7acd5ccf2e",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 87,
+    "event_id": "7711e1d8616066655f04ef0731b9255082b965464b089d6f16f4a98b96205dfb",
+    "event_digest": "dec26f77ab6f6fdcb16be1f80357832781ceb1acb178df457db6cac46ac63459",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md",
+      "sha256": "51751283157ea53f84b0b23df50cfa34a4d6cbd13061d2d53ba3b34d3ae4418a",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 88,
+    "event_id": "7e99c7348af0cb010783c229093c0cbe3d3e3b674ad6833fa32ac444c773f16f",
+    "event_digest": "dfbbf3a77d63e9d2d6817c7261fbe730ab3f77cdf2b00c2a0256a3eb4098a3ce",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary@15.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary@15.md",
+      "sha256": "93d38ad126ad901e04ce910b38538b7ff124c87ce183438c22722e3f60a53b9a",
+      "state": "present",
+      "version": 15
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 89,
+    "event_id": "ca1ca19c0f3f08b4e0c1b6ed99d6e41ae80be7a23609912db6f4674505d4471c",
+    "event_digest": "da592d3bcece96455d4764145d7387c290437f5d0329656563cccf40439562d5",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-111-CORE_META_MODEL-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-CORE_META_MODEL-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "sha256": "2745c9cac64187c7f8543e55efa0bc0548dcaf8f716a325009f72caa25291dca",
+      "state": "present",
+      "version": 16
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 90,
+    "event_id": "27b4dea663ec3a351318f7962ec1041af595430a9594e33e8c47dfd01b33af8d",
+    "event_digest": "996a415cde25e2fd8e3e7fa9439500080a1ca4a633dd5f8ee4926d779e137515",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language@8.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language@8.md",
+      "sha256": "05893c87eb62fa93cb39ff03ea83833550d81fb8bf4e0a9070607212911024c0",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 91,
+    "event_id": "3d5eabc567a7d23ee93f7842f2423d28879fba2c2c5a47d97a973b5727d50ce7",
+    "event_digest": "d501e0b9184faba7a2b17df74c53c7b442fa191163819db221590a872244f345",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-112-CORE_META_MODEL-METHOD--use-english-as-the-project-language.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-112-CORE_META_MODEL-METHOD--use-english-as-the-project-language.md",
+      "sha256": "186171045142b84ec23bebb3b657d6f7a40ccf417c4c3bfd592447d078d9e2df",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 92,
+    "event_id": "c3ed55310405391c2bef37d03c4267b50b74da1a1171d236b18b0da4d2c4abde",
+    "event_digest": "8afcd903ba06ce0616226e91da0b5b2dbb2bf1c2c4955ccf9becd05b1b442a6d",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english@9.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english@9.md",
+      "sha256": "40438ed6970e640a21b5f442f208a60d46fa5e2fb3d24be9ffe66e2e16172c69",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 93,
+    "event_id": "91d1f01398352c837ed3eaf0558b9e6d335d0c4fd0a9f316bbc727ea204a9b55",
+    "event_digest": "48f5be058dc4940a3d02c2dbd7c5dfb737cc6dfa0a6a2a4f739e5cdbedca573b",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-113-CORE_META_MODEL-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "sha256": "4c985019bd72fc946511e7583943bcf8d8fe8c98c9c6e83b5589f79fbb8d21b0",
+      "state": "present",
+      "version": 10
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 94,
+    "event_id": "07613932077f13a340a8e54a601cc417e5d4db8ac14f8b3d1a662a2a3109da59",
+    "event_digest": "83109daaeea780cf8941fe939acf7235e8ae963384c0f7c5998a8e8c691d4801",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom@13.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom@13.md",
+      "sha256": "b03d3e4258ea3d4962c33aa1ff4838a60e1695d543c99ace5f9e386629df3e0a",
+      "state": "present",
+      "version": 13
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 95,
+    "event_id": "bac7bff6876397c9a1c46d366bffcbe367e9f7ba89d02450edf02e68ad036f5a",
+    "event_digest": "e54505778d4a18d93aad8ee4caf6854bc0ab4db4a049df3205fae4c907d05dac",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-115-CORE_META_MODEL-METHOD--author-one-cce-claim-per-atom.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-CORE_META_MODEL-METHOD--author-one-cce-claim-per-atom.md",
+      "sha256": "844335d5822121ff93cf73d24c7928e335b32e375dbde93485945b1ccc3ad990",
+      "state": "present",
+      "version": 14
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 96,
+    "event_id": "74806a3fd97df03ad02072bf4ae1bc511a72369a4cfff0c02b421c394ff6318c",
+    "event_digest": "7ccc85db99ee811d79b79578ee8fbe82881ea0b15493431f16289b342c53445a",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version@9.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version@9.md",
+      "sha256": "190f0539d64215f2f995442637977c5b00aea24c9aac7738c820afa9eb125c64",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 97,
+    "event_id": "b22b4e6bddb8c10094eed1efaf21ba546bf0e3b71a6baa9ee751ee54352dc567",
+    "event_digest": "06ae1c596a1c46431fff39020fa9f33ba59df9993565dba3c00d656a9e94e4e0",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-119-CORE_META_MODEL-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-CORE_META_MODEL-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "sha256": "ce7d47aa3ffd6324cf8321da56f349c2d5e40054d15ff95808a578c9cb888abf",
+      "state": "present",
+      "version": 10
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 98,
+    "event_id": "04696d321c1cc5c7bce8ee380cd52a5e2e324fd7db7ac55ad4f28d556a43ca27",
+    "event_digest": "a08483380b0c21541d13a5f821835fd9dd837f62b02677927350f09fce741b62",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions@9.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions@9.md",
+      "sha256": "0851a67a730b4c705eb6189550010e3061ead76cd44c3c8d683ac08c05df482e",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 99,
+    "event_id": "a85b520d80bf01adb00b36a43ecbbe78d48c1cede59bafc649ec97775ed62206",
+    "event_digest": "712bf2dffaf1802a7a85b51f74df3537b24c8b862cccb7f2f5795a63bb1b2a0b",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-121-CORE_META_MODEL-METHOD--evaluate-scope-expressions.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-121-CORE_META_MODEL-METHOD--evaluate-scope-expressions.md",
+      "sha256": "857797434c4538051dacdca049209c1c533d936835427f38597ae23be2afa28d",
+      "state": "present",
+      "version": 10
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+    "line": 100,
+    "event_id": "68c11f6afd03f1c0bc851bddc5baf3b6e42d8ffe232650b3424a33a4b519cbef",
+    "event_digest": "bdafc3828e59c38c82316f4741a1fc6b49875deeaba65ff48b0a7304d97c534f",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions@7.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions@7.md",
+      "sha256": "6c2d3defd80789b1e9bed437a2ffea6c967f9f75384174844a7144ab4b1d5876",
+      "state": "present",
+      "version": 7
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 1,
+    "event_id": "07933f5648798a793f72575ec9bc591a2ddf29ce9271c868a21de56dc844687a",
+    "event_digest": "e4b79812869139180f043afa3f4532a009b1cd870048379a26afbe157e981fac",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-122-CORE_META_MODEL-METHOD--evaluate-condition-expressions.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-122-CORE_META_MODEL-METHOD--evaluate-condition-expressions.md",
+      "sha256": "6826e9c10691deea86e63ed59f9adb4ede9a97460c8650ba8d51e22864e02471",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 2,
+    "event_id": "c2ee538ea339d277b3c3eae6ad9d1bcaafd76bb7ed9e0608cd3095b4098c0406",
+    "event_digest": "04827b9dc5bea1855cebfeb78086e5aa04c21552f363318a40b2369e62c8dfab",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done@8.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done@8.md",
+      "sha256": "28ec894e74d971fdb40acd451d9c03de23a87fa7d8c0aab7e268507ac9ef62cb",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 3,
+    "event_id": "99a248b8d66210feaecbf235628e00fef27a2dd4061b07875e358fa0976b9bc1",
+    "event_digest": "c843f959f51fe36f572905693faa6a0b65dc45b235016cb12cfe680e3068835d",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-123-CORE_META_MODEL-METHOD--write-definitions-of-done.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-METHOD--write-definitions-of-done.md",
+      "sha256": "f4e734f75e28eb94c9243b299a53208d3594f97f2fc779b03a5cd787511d767c",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 4,
+    "event_id": "5086d12824d80949beb59aa647a8f74c82e7a7b1d433353e07b63908567bb2a6",
+    "event_digest": "ec869eb437c91c76b5a8ffb7a8ac1d52b303f28e36a2a85bd158a290505c00fb",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership@8.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership@8.md",
+      "sha256": "85f51c3e853f0ddfb6f125084963f784bd4adc5471b6c234549ae5c371ccfd48",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 5,
+    "event_id": "4476148cb808282d270fcb737c1ae84cd4ab2d3927bdf02bea9df37bf9a15598",
+    "event_digest": "2d94cde58cb505bb92721205c7e1f94152ee132d7b8410b92cf01899a0925884",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-127-CORE_META_MODEL-METHOD--evaluate-set-valued-property-membership.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-127-CORE_META_MODEL-METHOD--evaluate-set-valued-property-membership.md",
+      "sha256": "261506929cb9ba79d8b917f3ae4ada283c26c79f1585528db218198b02a789e1",
+      "state": "present",
+      "version": 9
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 6,
+    "event_id": "def1b344c167e35cbafb335b3cb06e08be8172eab60dd4caaeaa77e21e0d5d1d",
+    "event_digest": "e94fbba3891ad46b14838c08263f31a3f399d4a0f47d88f3cd5034516fc193a4",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-137-CORE_META_MODEL-CORE-METHOD--resolve-project-and-framework-settings-before-derived-structure@16.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-137-CORE_META_MODEL-CORE-METHOD--resolve-project-and-framework-settings-before-derived-structure@16.md",
+      "sha256": "1f147a4da82df28c1632c4bd9b00f0f8187ea9d7bce2c55869aa34b1843c8920",
+      "state": "present",
+      "version": 16
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 7,
+    "event_id": "08fe1ec44fb1fad797afd5c3b9badf73d2c3041d09abcb0501e0040cf97a8e28",
+    "event_digest": "d289cdf5fe0f745aca1f33dbed555ccd9efb83e5a447b19e25f2119b5b97a0df",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-137-CORE_META_MODEL-METHOD--resolve-project-and-framework-settings-before-derived-structure.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-137-CORE_META_MODEL-METHOD--resolve-project-and-framework-settings-before-derived-structure.md",
+      "sha256": "91720fe9117a1594f49e5a0fd8abdfebc67bb54e32ecf2603d63eee66e260db7",
+      "state": "present",
+      "version": 17
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 8,
+    "event_id": "76515c033a1998bb5783122492831973ff6ccfd5da85a69d35beefce54815be1",
+    "event_digest": "ef526a2ad8710619c76127a1a2272219911caa2cdfafe8521339de5103cd23bb",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically@7.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically@7.md",
+      "sha256": "8310c345f7649192978a76f3c2564218def02e3e20f9925f9351318cc394ef1a",
+      "state": "present",
+      "version": 7
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 9,
+    "event_id": "92db944948881511c58204de5c6bfa9eed8669979e84a320b840ee85799e29bd",
+    "event_digest": "3f106874d26687f2a32cba2e471b62784f81c021a885360ba25325cec62ab80f",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-225-CORE_META_MODEL-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-CORE_META_MODEL-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "sha256": "a65b0aca3f46228b94395a90a5385226d82a89226691f54d543a6ba1c58d00e0",
+      "state": "present",
+      "version": 8
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 10,
+    "event_id": "ed970e56910e0a6a28f28a4c36045b1bfd3eb371cbbacb08012961bb220738c9",
+    "event_digest": "338bc8025330c8d25ce79794af623a12eb236bc617fa3dad97d210835308e841",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification@5.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification@5.md",
+      "sha256": "4eb137e7e3bcf7b9a15f9fa8fc73f24eb0ab1bcd9674f11b529d1ad38a86deac",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 11,
+    "event_id": "1f67479dcc1426aa69d9d500c775d2a9560e01a0826adb4ffb39f73b02d288b7",
+    "event_digest": "6d65e956b18c47e953834d4c61b275d8083c8dbcf0786031cea00f69d992066f",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "sha256": "b31a50313532601f8a58e90fc9ca93e903a0d3e781ce8285d73be3f4d6811d7a",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 12,
+    "event_id": "b6d7d3d33e3b1c83de746fd7f02117dd45086e066716676a06e3dd26308e3e37",
+    "event_digest": "663e5fd515470cdecf3b108d0e9ec7f4711b8a12ce9a816684a00d0a17a98625",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly@4.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly@4.md",
+      "sha256": "488cf0ae72c482a8f20660266136f3597f884ee4940e7fb792d41af7f11b873c",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 13,
+    "event_id": "15f996d6924f45a0b5ff6618cc9c04c8dbe595931451620c05fdab82c976d261",
+    "event_digest": "ee36e27081540348c54a4f3dc3e8700d7f9175017caccd21d11b4fbf52001ea3",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-229-CORE_META_MODEL-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "sha256": "f249753fc43829e689e2557698af7396e23f6e55ab7fb42f4e0cdc30fdc306a3",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 14,
+    "event_id": "2af146acbd7b7464bbea6699f17dc33b5e9288154d7df23496aeb6cd32a23f6b",
+    "event_digest": "60d197e7788e8b904bcca4d72a13eadb2bc9a6683e6275f04e5e82d49c94f73d",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods@5.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods@5.md",
+      "sha256": "52ed3ae47b6476474bbb75e6d4441a1ac4547a69a7d429600e7e76ba7509ad3c",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 15,
+    "event_id": "77784689e8181857c91bb89a29c181ed712f95dc6b8ed68bc88dce37eba5ca41",
+    "event_digest": "06f9270aa8459f79b0f4e364f7512b3ea5678a90df5c2847ede362ad1b275fa7",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-230-CORE_META_MODEL-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "sha256": "0c7f7111f26e2d6452817dc3c7588efdf42952df3e00b925066d15000f4a687e",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 16,
+    "event_id": "af76c0f6ed39f5e7d6c5f3c616015dd734111e4193c839abc6f1f7a7f844e945",
+    "event_digest": "9d2851d8101ef1d30b57e460616cf05f6ca547e61566f1773cf68462ad5f73c1",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements@4.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements@4.md",
+      "sha256": "858d927632e7f8d9620d8ce4ff45ee0810ba9251800b2e5fe75014069079a6fe",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 17,
+    "event_id": "9b9aca4f433341b65e9718d39a5db1a18bf3b61ad7f227e01499c1b41beff396",
+    "event_digest": "972768798bd531d95a2ee48f2e24a127c6f913cf359fb67d9214e3488370246e",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-233-CORE_META_MODEL-METHOD--prefer-positive-normative-statements.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL-METHOD--prefer-positive-normative-statements.md",
+      "sha256": "0b65ce45aa2f703515b566215425333b1f108f03688dcf27ead0250f6c74070e",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 18,
+    "event_id": "b832f276f323378a8d606ec18a31adb3ba18ae6c2ff20437b34acd21e0116203",
+    "event_digest": "10adcd8b8366cfcbb8ee49e0ffc2830616365062c203b4660ae9aac9bb500e8a",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list@5.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list@5.md",
+      "sha256": "64198b3dcac09a139b4b98621cab00ab8d292a3a36a195ed032c529a9857077e",
+      "state": "present",
+      "version": 5
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 19,
+    "event_id": "753d5b4956d3e590e01416109938b0b712142289a4874e885f4298255cd79585",
+    "event_digest": "e16a9a6806a9205de1bc974131036ddad4b0a03f4263d4d238b393693715d22d",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-234-CORE_META_MODEL-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "sha256": "736b2c87fe6429c7d900962d632be46617ecf34c38e6faddd2b97dcc651170bc",
+      "state": "present",
+      "version": 6
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 20,
+    "event_id": "0d933f966872fb0f243e4e59be3c8e1063e73d2da65a993f88f92c732ef6a0c6",
+    "event_digest": "a574ef861bc9d7ae5ad2625269a79532f3cd39b638726bc2ff41b6a6a5df72e7",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions@3.md",
+      "sha256": "eea5a347863282ec704c53374425957e0b5e3ee7b1ea4508879b4e2ec46d4e28",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 21,
+    "event_id": "734306ad7f2d072a6cead0c9026440b2812011045d7636d3f935f1ed219ecd01",
+    "event_digest": "4684ad82cd69b3f095c7a9f2b59837fb48d3ec050a7ab6a4aaaa333e37df5dda",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-236-CORE_META_MODEL-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-236-CORE_META_MODEL-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "sha256": "cb546946bf15145d86cb886b472fa268ea6ff130d179d5a7d8d72c497f71ff9e",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 22,
+    "event_id": "d8edd57dda4b4ef7a656bd155313043607f9cf17c8ca8191c4f02a4afd042a99",
+    "event_digest": "b74fb0cd74c9263b69dd29d6a6bc8e8d9528163e8c8b78a8a64584e86ec774c5",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets@3.md",
+      "sha256": "eb866bc5229597390ccbe243062876b7c1dd0b1742eac887a278a67c299841cd",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 23,
+    "event_id": "b0d47a1e0571b8ff581830196da58ae92d0a6f8c79e70f9684512fa56064f0e5",
+    "event_digest": "1dbf3d77258f3846377c034d6b5913f7fd6280a229df94d148ab05c79f487959",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-237-CORE_META_MODEL-METHOD--author-claim-value-sets.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-237-CORE_META_MODEL-METHOD--author-claim-value-sets.md",
+      "sha256": "595279b38bb4ccf84d458b4fd22016f273f568a720aa01778979b95ef60d572c",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 24,
+    "event_id": "3ec6fb6b0faa791b4707381494e027d5b87b42934ffb984510815fa135ca5af9",
+    "event_digest": "77b58d0895d407837ea891acc3c6a5646abafd1155ade7fc93da968fc02083b7",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges@3.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges@3.md",
+      "sha256": "a3087833d082d95b29e5257cc7b4421d07a7397029f18804e6ee39dd28f805ea",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 25,
+    "event_id": "a0b91eb637f272530a69c752352ed1c0b3ce3090339988dbd1c3671d5c795d49",
+    "event_digest": "394984f270e70a86bbda48ea42808eacbd3e6daf7ac060ec293c8368ed358dee",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-239-CORE_META_MODEL-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-239-CORE_META_MODEL-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "sha256": "db45ab31428a7e598e7dcbe2415da001596ace8676de481dd050ed29580b18cf",
+      "state": "present",
+      "version": 4
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 26,
+    "event_id": "c2b8f6a37ab824fbd0ab38695dcddfcff3b3871d82e922794efb6d5bb68033ae",
+    "event_digest": "492e20f632324eb59fc77a8b37108cc9859a6306f97e0647841f86abfa0ed013",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite@2.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite@2.md",
+      "sha256": "ace03669f6da3655993ab0970c04030a79bac70851f01133cac82ba26aa397ba",
+      "state": "present",
+      "version": 2
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 27,
+    "event_id": "7c546cd5148fb32cbb27890995ff641c79dae592edcab60a295a5b8a8244eb36",
+    "event_digest": "01c31d93d7ce1a484f908b73d9b9d284f7048f55e89ec423a232513c6d4569b3",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-240-CORE_META_MODEL-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-240-CORE_META_MODEL-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "sha256": "8a82cb9c39be7001d64c760a1b5c8c7ac370cb404be4316c733f21856c29d716",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 28,
+    "event_id": "f3dc8dc79aef8593c9a2a2d0dbe1376ab13390a8455576a628f5a56750721d8c",
+    "event_digest": "ed0716aaac1e1d737c3a10b424bb41684c3fa0c376181a85147bd044b5b19a48",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite@2.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite@2.md",
+      "sha256": "60f97c5c2dcf78aa526ebbb4bd7ae41e0d3255fcecc9304e02840fb5886acfdf",
+      "state": "present",
+      "version": 2
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 29,
+    "event_id": "e55e7c7b31c84c9cb5c86f63992e613a0bda98fcfa712c1ab77c2f18e859834e",
+    "event_digest": "66889f24409bfac7e32975e609ef8c3fc8ec23eb196661984b160474af69b4b9",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-241-CORE_META_MODEL-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-241-CORE_META_MODEL-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "sha256": "251028c93f568222c6b6684e3d57d8d82c7570396d38a0ffa537316b27ae9e4d",
+      "state": "present",
+      "version": 3
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 30,
+    "event_id": "201307569d21d10eaa66f9ca25bfbd5614d2f56d8e9cbb4d67b0b0d23872a85e",
+    "event_digest": "2df697e8552774ad1e2600ce3ed968aedbbd32f7ea93b5f927a683e391db314d",
+    "action_type": "ADD",
+    "result": {
+      "filename": "CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names@2.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names@2.md",
+      "sha256": "4444387f2b2ff291c10f0f39c529202f2373008c1c00ef09eb033a48fa7c2958",
+      "state": "present",
+      "version": 2
+    }
+  },
+  {
+    "journal": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+    "line": 31,
+    "event_id": "d1200223486a484466b10c08dab81b3ec54989b997829f01211d3dbdd236c5d2",
+    "event_digest": "40d8a6083f347b4a5fa9c23a8dccf3467caae05a0fb6338b8ec198815bdb08b5",
+    "action_type": "MOVE+UPDATE",
+    "result": {
+      "filename": "CA-M-242-CORE_META_MODEL-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-242-CORE_META_MODEL-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "sha256": "cfdcb220ae681f8f0282baa69f8b8426d59d3ed0b503d69606f306f7e9b39090",
+      "state": "present",
+      "version": 3
+    }
+  }
+]
+}

@@ -1,0 +1,193 @@
+{
+  "counts": {
+    "active_atom_carriers": 664,
+    "duplicate_signature_groups": 0,
+    "eligible_single_statement_carriers": 417,
+    "inactive_directory_carriers_skipped": 3619,
+    "no_boolean_group_skipped": 392,
+    "nonboolean_parenthetical_group_skipped": 21,
+    "noncanonical_claim_shape_skipped": 247,
+    "restricted_boundary_exclusions": 9
+  },
+  "diagnostics": [
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-1213",
+        "atom_revision": 4,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-1213-MMODEL-CORE-REQUIREMENT--define-applicable-methodology-as-a-compiled-projection.md",
+        "carrier_sha256": "4cf607f25feb99b9ec336482ebdfcb19c2a581284ce93b1cab04158bfac24e98",
+        "source_expression": "(a non-authoritative Projection **and** a Relational Artifact)",
+        "statement_offset": {
+          "end": 101,
+          "start": 39
+        },
+        "value": "a non-authoritative Projection"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-1360",
+        "atom_revision": 1,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-1360-MMODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+        "carrier_sha256": "16f80fe03da3fc89ead9511effaf1c755767f0380c0a1f4ca8919869dfef07e9",
+        "source_expression": "(operand **and** operand [**and** operand ...])",
+        "statement_offset": {
+          "end": 238,
+          "start": 191
+        },
+        "value": "operand"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-1360",
+        "atom_revision": 1,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-1360-MMODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+        "carrier_sha256": "16f80fe03da3fc89ead9511effaf1c755767f0380c0a1f4ca8919869dfef07e9",
+        "source_expression": "(operand **or** operand [**or** operand ...])",
+        "statement_offset": {
+          "end": 286,
+          "start": 241
+        },
+        "value": "operand"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-1361",
+        "atom_revision": 1,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-1361-MMODEL-CORE-REQUIREMENT--define-scope-expression-canonical-signature.md",
+        "carrier_sha256": "6617f81705807a993c506002286a91a8a16ba01c964a24c7912c61e64888747e",
+        "source_expression": "(atom_id **or** atom_id [**or** atom_id ...])",
+        "statement_offset": {
+          "end": 265,
+          "start": 220
+        },
+        "value": "atom_id"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-1361",
+        "atom_revision": 1,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-1361-MMODEL-CORE-REQUIREMENT--define-scope-expression-canonical-signature.md",
+        "carrier_sha256": "6617f81705807a993c506002286a91a8a16ba01c964a24c7912c61e64888747e",
+        "source_expression": "(atom_id **and** atom_id [**and** atom_id ...])",
+        "statement_offset": {
+          "end": 320,
+          "start": 273
+        },
+        "value": "atom_id"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CA-R-950",
+        "atom_revision": 8,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CA-R-950-GOVERN-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes.md",
+        "carrier_sha256": "f31a7496622e5a61999e448548138fd8752bc5c0176bca9c35dca20f48a99982",
+        "source_expression": "(ancestor-to-descendant **or** descendant-to-ancestor)",
+        "statement_offset": {
+          "end": 135,
+          "start": 81
+        },
+        "value": "ancestor-to-descendant"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-383",
+        "atom_revision": 11,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-383--register-obsolete-project-names.md",
+        "carrier_sha256": "eca9610b3945ee54b2f5ccbb173de40970a17a2cae2599e2e44bd1cff7d70239",
+        "source_expression": "(Project Name **or** Obsolete Project Name)",
+        "statement_offset": {
+          "end": 289,
+          "start": 246
+        },
+        "value": "Project Name"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "atomic-predicate-invalid",
+      "details": {
+        "atom_id": "CAPRMEDIO-META-REQU-789",
+        "atom_revision": 6,
+        "carrier_path": "001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-789--permit-mixed-structural-child-kinds.md",
+        "carrier_sha256": "d8a071196842d32112b10118ed73d89b0738794eec91a38304e40ed31c60d153",
+        "source_expression": "(Layer **and** Feature)",
+        "statement_offset": {
+          "end": 48,
+          "start": 25
+        },
+        "value": "Layer"
+      },
+      "message": "Restricted Boolean grammar accepts only canonical `Subject Path: Value` Atomic Predicates",
+      "severity": "info"
+    },
+    {
+      "code": "operator-excluded",
+      "details": {
+        "atom_id": "CA-E-379",
+        "atom_revision": 6,
+        "carrier_path": "001_CORE_META_MODEL/06_evaluation/CA-E-379-MMODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+        "carrier_sha256": "d8dca0807d61e62b9ec5a4decdd53901c68e55ff994e524d1e5bc6853d431c3d",
+        "operator": "not",
+        "source_expression": "(CORE_META_MODEL **or** LOCAL_CONFIGURATION is omitted **or** an unselected **or** inactive Extension revision contributes **or** a selected Atom revision is **not** current **and** active **or** its Content Role is outside (REQUIREMENT, METHOD, EVALUATION, DELIVERY, OPERATIONS) **or** a selected Atom ID, exact source revision, authority owner, **or** Claim is changed **or** Claims are synthesized **or** merged **or** the conflict report omits a duplicate Atom identity, unresolved replacement, incompatible retained Candidate, **or** unresolved priority **or** **any** conflict is resolved **without** one unambiguous Operator approval **in** source authority bound to the exact conflict **and** source-frontier digest **or** **any** approval is stale, partial, missing, ambiguous, **or** mismatched **or** source order resolves a conflict **or** compilation uses LLM inference **or** the same resolved source frontier produces different Applicable Methodology membership)",
+        "statement_offset": {
+          "end": 1052,
+          "start": 75
+        }
+      },
+      "message": "Restricted canonical-signature grammar excludes this CCE Operator",
+      "severity": "info"
+    }
+  ],
+  "duplicate_signature_groups": [],
+  "mode": "report_only",
+  "restricted_grammar": {
+    "atomic_predicate": "Subject Path: Value",
+    "exclusions": [
+      "mixed **and** and **or** groups",
+      "all CCE Operators other than **and** and **or**",
+      "unrecognized bold tokens",
+      "unbalanced parentheses",
+      "unparseable prose and noncanonical Atomic Predicates"
+    ],
+    "group": "(operand **and** operand [**and** operand ...]) | (operand **or** operand [**or** operand ...])",
+    "operand": "atomic predicate | nested group with the same Boolean Operator",
+    "signature": {
+      "atomic_predicates": "sorted unique non-empty list",
+      "operator": "and | or"
+    }
+  },
+  "schema": "caprmedio.derive_cce_canonical_signatures.v1",
+  "signatures": [],
+  "source_folder": "/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+  "source_frontier": {
+    "active_atom_carrier_count": 664,
+    "sha256": "84aed491d8a4fa30c990be8939c33f74cb35990798ecac72490ea899fe3ed646"
+  },
+  "tool_id": "DERIVE_CCE_CANONICAL_SIGNATURES"
+}

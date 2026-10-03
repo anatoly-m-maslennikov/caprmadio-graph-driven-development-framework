@@ -1,0 +1,389 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "10",
+  "recorded_at": "2026-09-10 05:21:58 +0400",
+  "checkpoint": "Autonomous >=99% source execution under latest Operator override; exact preflight and canonical overlay required before source mutation.",
+  "existing": [
+    {
+      "atom_id": "CA-M-114",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "before_version": 11,
+      "before_sha256": "5643187b2f414b33750bc604aed1445f3ec09e16ffbf9d012cd80f4ee39c3a59",
+      "before_bytes_utf8": "---\natom_id: CA-M-114\nsubjects:\n  governs:\n    occurrent:\n      - Terminology Projection Derivation\n  depends_on:\n    continuant:\n      - \"Terminology Projection\"\n      - \"Generator\"\n      - \"Definition Atom\"\n      - \"Governed Term\"\n      - \"Project\"\n      - \"Atom/Claim\"\n      - \"Subject\"\n      - \"Subject Path\"\n      - \"Entity\"\n      - \"Term\"\ncce_version: cce_1\ncce_form: method\nversion: 11\nupdated_at: \"2026-09-09 02:44:46 +0400\"\nrelations: {}\n---\n# Derive Terminology Projection from Definition Atoms\n\n**to** build a Terminology Projection, the Generator **must** derive **every** Governed Term's name **and** Project-specific meaning from its active Definition Atom. obtain the name from the terminal Term **in** the GOVERNS Subject Path that references the defined Entity. include an entry **only** **when** the defining Claim establishes a Project-specific meaning; consistent use, capitalization, **or** occurrence **in** a Subject Path alone is insufficient. exclude words **and** phrases used **only** with their ordinary English meanings. retain the source reference **without** classifying the Subject connection **or** a complete composite Subject Path as a Term **or** creating independent vocabulary authority.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-114\nsubjects:\n  governs:\n    occurrent:\n      - Terminology Projection Derivation\n  depends_on:\n    continuant:\n      - \"Terminology Projection\"\n      - \"Generator\"\n      - \"Definition Atom\"\n      - \"Governed Term\"\n      - \"Project\"\n      - \"Atom/Claim\"\n      - \"Subject\"\n      - \"Subject Path\"\n      - \"Entity\"\n      - \"Term\"\ncce_version: cce_1\ncce_form: method\nversion: 12\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations: {}\n---\n# Derive Terminology Projection from Definition Atoms\n\n**to** build a Terminology Projection, the Generator **must** derive **every** Governed Term's name **and** Project-specific meaning from its active Definition Atom. obtain the name from the terminal Term **in** the GOVERNS Subject Path that references the defined Entity. include an entry **only** **when** the defining Claim establishes a Project-specific meaning; consistent use, capitalization, **or** occurrence **in** a Subject Path alone is insufficient. exclude words **and** phrases used **only** with their ordinary English meanings. retain the source reference **without** classifying the Subject connection **or** a complete composite Subject Path as a Term **or** creating independent vocabulary authority.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms@11.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Terminology Projection Derivation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-114",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-M-125",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim.md",
+      "before_version": 11,
+      "before_sha256": "12a6874cdb45a88292000d901e5b7919dd57cdc5ca55737bf2630b2d60354074",
+      "before_bytes_utf8": "---\natom_id: CA-M-125\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Subject Assignment\n  depends_on:\n    continuant:\n      - \"Atom/Claim\"\n      - \"Atom/Subjects\"\n      - \"Subject Path\"\n      - \"Subject/Relation Kind\"\n      - \"Subject/Temporal Form\"\n      - \"Author\"\n      - \"Entity\"\n      - \"Term\"\nversion: 11\nupdated_at: \"2026-09-09 02:44:46 +0400\"\nrelations: {}\n---\n# Assign Subjects from the Claim\n\n**to** assign an Atom's Subjects, the Author **must** perform **all** of:\n\n1. read the complete Claim.\n2. select the **`=1`** Entity that the Claim governs **and** reference its narrowest exact Subject Path.\n3. assign GOVERNS to that Subject.\n4. select **every** Entity that the Claim requires **without** governing it **and** assign DEPENDS_ON to its Subject.\n5. assign CONTINUANT **when** the relation presents its referenced Entity as persisting through time **and** assign OCCURRENT **when** the relation presents its referenced Entity as happening **or** unfolding through time.\n6. for a definition Claim, use the defined Term **in** the Subject Path that references the Entity being defined; the GOVERNS Subject is the connection **to** that Entity, **not** the word **or** phrase itself.\n7. include **every** prerequisite Entity **in** DEPENDS_ON.\n8. split the Atom **before** assignment **when** the Claim governs more than one Entity.\n9. record **every** distinct Subject exactly once.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-125\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Subject Assignment\n  depends_on:\n    continuant:\n      - \"Atom/Claim\"\n      - \"Atom/Subjects\"\n      - \"Subject Path\"\n      - \"Subject/Relation Kind\"\n      - \"Subject/Temporal Form\"\n      - \"Author\"\n      - \"Entity\"\n      - \"Term\"\nversion: 12\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations: {}\n---\n# Assign Subjects from the Claim\n\n**to** assign an Atom's Subjects, the Author **must** perform **all** of:\n\n1. read the complete Claim.\n2. select the **`=1`** Entity that the Claim governs **and** reference its narrowest exact Subject Path.\n3. assign GOVERNS to that Subject.\n4. select **every** Entity that the Claim requires **without** governing it **and** assign DEPENDS_ON to its Subject.\n5. assign CONTINUANT **when** the relation presents its referenced Entity as persisting through time **and** assign OCCURRENT **when** the relation presents its referenced Entity as happening **or** unfolding through time.\n6. for a definition Claim, use the defined Term **in** the Subject Path that references the Entity being defined; the GOVERNS Subject is the connection **to** that Entity, **not** the word **or** phrase itself.\n7. include **every** prerequisite Entity **in** DEPENDS_ON.\n8. split the Atom **before** assignment **when** the Claim governs more than one Entity.\n9. record **every** distinct Subject exactly once.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim@11.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Subject Assignment"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-125",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-M-135",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges.md",
+      "before_version": 11,
+      "before_sha256": "bc0a06f87358a9229c555b96a4d19f33b9bfe77924d5067f00edeef5a2c11d1d",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    continuant:\n      - provenance\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Exclude generated-only implementation edges\n\nCommit-provenance validation inspects **every** commit **in** the governed range. A commit contributes an implementation relation, implementation coverage, **or** semantic traceability edge **only** **when** it changes **`>=1`** non-generated governed path.\n\nA generated-only commit is an auditable refresh transaction. It retains its required provenance but cannot become an implementation input to the semantic graph that produced the generated carrier. A mixed commit participates because it includes a substantive governed change.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    continuant:\n      - provenance\nversion: 12\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Exclude generated-only implementation edges\n\nCommit-provenance validation inspects **every** commit **in** the governed range. A commit contributes an implementation relation, implementation coverage, **or** semantic traceability edge **only** **when** it changes **`>=1`** non-generated governed path.\n\nA generated-only commit is an auditable refresh transaction. It retains its required provenance but cannot become an implementation input to the semantic graph that produced the generated carrier. A mixed commit participates because it includes a substantive governed change.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "frontmatter",
+          "reason": "Remove the demonstrated inactive CA-R-1054 parent; no active target or substitute parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "provenance"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-135",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-M-224",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+      "before_version": 9,
+      "before_sha256": "ab8698ad7b93963eefa2f2bf6de007c6bf7a6dcfd3d78a22441035fe1f6f4c42",
+      "before_bytes_utf8": "---\natom_id: CA-M-224\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Applicable Methodology Compilation\n  depends_on:\n    continuant:\n      - Applicable Methodology/Sources\n      - Applicable Methodology\n      - Local Configuration\n      - Artifact/Revision\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Compile Applicable Methodology Deterministically\n\n**to** compile Applicable Methodology, the Compiler **must** perform **all** of:\n\n1. resolve the exact current source set from Local Configuration.\n2. require CORE_META_MODEL **and** LOCAL_CONFIGURATION **and** include **only** explicitly selected active Extension revisions.\n3. select **`=1`** current active revision of **every** retained source Atom whose Content Role is **in** (Requirement, Method, Evaluation, Delivery, Ops).\n4. preserve **every** selected Atom ID, exact source revision, authority owner, **and** Claim **without** synthesis **or** merge.\n5. detect **every** duplicate selected Atom identity, unresolved replacement, incompatible retained Candidate, **and** unresolved priority.\n6. calculate one deterministic digest of the exact selected source frontier.\n7. report the complete deterministic conflict set **before** changing Applicable Methodology membership.\n8. apply a conflict resolution **only** **if** source authority records one unambiguous Operator approval bound to that exact conflict **and** source-frontier digest.\n9. fail **without** changing Applicable Methodology membership **if** **any** conflict remains unresolved **or** **any** approval is stale, partial, missing, ambiguous, **or** mismatched.\n10. never use source order, Claim synthesis, Claim merge, **or** LLM inference to resolve a conflict.\n11. produce the same ordered Applicable Methodology membership from the same resolved source frontier.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-METHOD--compile-applicable-methodology-deterministically.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-224\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Applicable Methodology Compilation\n  depends_on:\n    continuant:\n      - Applicable Methodology/Sources\n      - Applicable Methodology\n      - Local Configuration\n      - Methodology Source\n      - Scope Unit\n      - Framework Instance Settings\n      - Extension\n      - Artifact/Revision\nversion: 10\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations: {}\n---\n# Compile Applicable Methodology Deterministically\n\n**to** compile Applicable Methodology, the Compiler **must** perform **all** of:\n\n1. resolve the exact current source set from the Methodology Source Scope Units, using Framework Instance Settings for current Extension activation and selected Extension revisions.\n2. require CORE_META_MODEL **and** LOCAL_CONFIGURATION **and** include **only** explicitly selected active Extension revisions.\n3. select **`=1`** current active revision of **every** retained source Atom whose Content Role is **in** (Requirement, Method, Evaluation, Delivery, Ops).\n4. preserve **every** selected Atom ID, exact source revision, authority owner, **and** Claim **without** synthesis **or** merge.\n5. detect **every** duplicate selected Atom identity, unresolved replacement, incompatible retained Candidate, **and** unresolved priority.\n6. calculate one deterministic digest of the exact selected source frontier.\n7. report the complete deterministic conflict set **before** changing Applicable Methodology membership.\n8. apply a conflict resolution **only** **if** source authority records one unambiguous Operator approval bound to that exact conflict **and** source-frontier digest.\n9. fail **without** changing Applicable Methodology membership **if** **any** conflict remains unresolved **or** **any** approval is stale, partial, missing, ambiguous, **or** mismatched.\n10. never use source order, Claim synthesis, Claim merge, **or** LLM inference to resolve a conflict.\n11. produce the same ordered Applicable Methodology membership from the same resolved source frontier.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically@9.md",
+      "exact_replacements": [
+        {
+          "before": "1. resolve the exact current source set from Local Configuration.",
+          "after": "1. resolve the exact current source set from the Methodology Source Scope Units, using Framework Instance Settings for current Extension activation and selected Extension revisions.",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1207 reserves current activation/selected revisions to Framework Instance Settings; Local Configuration retains expansion rules and remains mandatory under unchanged Step 2."
+        },
+        {
+          "before": "      - Local Configuration\n",
+          "after": "      - Local Configuration\n      - Methodology Source\n      - Scope Unit\n      - Framework Instance Settings\n      - Extension\n",
+          "count": 1,
+          "boundary": "subjects.depends_on",
+          "reason": "Declare the prerequisite Entities introduced by the exact source-selection binding repair."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "1. resolve the exact current source set from Local Configuration.",
+          "after": "1. resolve the exact current source set from the Methodology Source Scope Units, using Framework Instance Settings for current Extension activation and selected Extension revisions.",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1207 reserves current activation/selected revisions to Framework Instance Settings; Local Configuration retains expansion rules and remains mandatory under unchanged Step 2."
+        }
+      ],
+      "after_governs_subjects": [
+        "Applicable Methodology Compilation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-224",
+      "claim_change": "Exact root-resolved M224 source-owner binding; all other steps/guards retained."
+    },
+    {
+      "atom_id": "CA-M-231",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+      "before_version": 8,
+      "before_sha256": "4ecf2ddd51e668ca2537c2254b3f18affbf9c98cf98e6072216fdc7a41cff6bc",
+      "before_bytes_utf8": "---\natom_id: CA-M-231\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Navigation Projection Derivation\n  depends_on:\n    continuant:\n      - Claim\n      - Atom/Claim/Scope\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Derive Navigation Projections from the CCE Claim\n\n**to** derive an Atom's navigation Projections, the Generator **must** read the complete Claim **and** any Claim Scope, derive one concise source-faithful Summary, **and** derive **every** other requested Projection directly from the Claim **and** any Claim Scope rather than from the Summary.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-231\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Navigation Projection Derivation\n  depends_on:\n    continuant:\n      - Claim\n      - Atom/Claim/Scope\nversion: 9\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations: {}\n---\n# Derive Navigation Projections from the CCE Claim\n\n**to** derive an Atom's navigation Projections, the Generator **must** read the complete Claim **and** any Claim Scope, derive one concise source-faithful Summary, **and** derive **every** other requested Projection directly from the Claim **and** any Claim Scope rather than from the Summary.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Navigation Projection Derivation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-231",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-M-271",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-CORE-METHOD--resolve-confidence-thresholds-by-source-precedence.md",
+      "before_version": 1,
+      "before_sha256": "ab8c5b4eff51c9369fe7967350296f7c3b761b8ac92087327a1264893a345a14",
+      "before_bytes_utf8": "---\natom_id: CA-M-271\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - \"Confidence Threshold/resolution\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Operator\"\n      - \"Atom/Content Role: Plan/Type: Task\"\n      - \"Epic\"\n      - \"Framework Instance Settings\"\n      - \"Property\"\n      - \"AI Agent\"\nversion: 1\nupdated_at: \"2026-09-09 02:24:28 +0400\"\nrelations:\n  child_of:\n    - \"CA-R-1428\"\n---\n# Resolve confidence thresholds by source precedence\n\n**to** resolve an effective Confidence Threshold for a decision **or** action, an AI Agent **must** perform **all** of:\n\n1. identify the confidence decision **and** context **to** which the threshold applies.\n2. inspect applicable sources **in** this precedence: direct Operator input, an explicit value on the Task, the nearest enclosing Epic with an explicit value, **and** the Framework Instance Settings default. **when** an Epic omits the value, inspect its enclosing Epics from nearest **to** farthest.\n3. use the first applicable explicit value; **if** no source supplies a value **or** the selected source is invalid **or** ambiguous, **then** request Operator disposition **before** the affected autonomous action **without** inventing a value **or** silently selecting a lower-precedence source.\n4. apply direct Operator input **only** within its stated context; do **not** change unrelated decisions, Tasks, Epics, **or** Settings.\n5. do **not** copy an inherited value into a Task **or** Epic override. preserve an explicitly selected override as explicit **when** its value **`=`** the currently inherited value, because later changes **to** the inherited source **must not** silently change that explicit selection.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-METHOD--resolve-confidence-thresholds-by-source-precedence.md",
+      "proposed_version": 2,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-271\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - \"Confidence Threshold/resolution\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Operator\"\n      - \"Atom/Content Role: Plan/Type: Task\"\n      - \"Epic\"\n      - \"Framework Instance Settings\"\n      - \"Property\"\n      - \"AI Agent\"\nversion: 2\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  child_of:\n    - \"CA-R-1428\"\n---\n# Resolve confidence thresholds by source precedence\n\n**to** resolve an effective Confidence Threshold for a decision **or** action, an AI Agent **must** perform **all** of:\n\n1. identify the confidence decision **and** context **to** which the threshold applies.\n2. inspect applicable sources **in** this precedence: direct Operator input, an explicit value on the Task, the nearest enclosing Epic with an explicit value, **and** the Framework Instance Settings default. **when** an Epic omits the value, inspect its enclosing Epics from nearest **to** farthest.\n3. use the first applicable explicit value; **if** no source supplies a value **or** the selected source is invalid **or** ambiguous, **then** request Operator disposition **before** the affected autonomous action **without** inventing a value **or** silently selecting a lower-precedence source.\n4. apply direct Operator input **only** within its stated context; do **not** change unrelated decisions, Tasks, Epics, **or** Settings.\n5. do **not** copy an inherited value into a Task **or** Epic override. preserve an explicitly selected override as explicit **when** its value **`=`** the currently inherited value, because later changes **to** the inherited source **must not** silently change that explicit selection.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-271-CORE_META_MODEL-CORE-METHOD--resolve-confidence-thresholds-by-source-precedence@1.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Confidence Threshold/resolution"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-M-271",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-243",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom.md",
+      "before_version": 13,
+      "before_sha256": "1bf3bc7e69058aebf3b460df359a4cbc244b809388a1ad13ac2c049d230ce4f9",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - Demand Validation\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - Local Order\natom_id: CA-E-243\ncce_version: cce_1\ncce_form: evaluation\nversion: 13\nupdated_at: \"2026-09-09 21:33:29 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-932\n    - CA-R-933\n    - CA-R-916\n    - CA-R-944\n    - CA-R-1293\n---\n# Validate a Demand Atom\n\n## Claim checked\n\na Demand is owned by its Consumer **and** constrains **only** one Producer result authorized by the Consumer's accepted Goal.\n\n## Test case\n\ncreate valid Demand Atoms with Consumer **and** Producer Scope Unit references in permitted branches **and** with a later ordered sibling as Consumer **and** an earlier ordered sibling as Producer. **then** remove the Goal-authorized need for the Producer result, change ownership, target an ancestor, direct child, deeper descendant, **or** later ordered sibling, use equal Producer **and** Consumer Local Order, target two results, constrain Producer authority outside the selected result, fully define Producer Scope, **and** add a separate Demand-direction relation Kind.\n\n## Acceptance criteria\n\n**only** fixtures with Consumer ownership, a permitted direction, one exact Goal-authorized need for the Producer result, one exact Implementation result, **and** no additional direction relation pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Demand fact.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom.md",
+      "proposed_version": 14,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - Demand Validation\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - Local Order\natom_id: CA-E-243\ncce_version: cce_1\ncce_form: evaluation\nversion: 14\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-932\n    - CA-R-933\n    - CA-R-916\n    - CA-R-944\n    - CA-R-1293\n    - CA-R-934\n    - CA-R-954\n---\n# Validate a Demand Atom\n\n## Claim checked\n\na Demand is owned by its Consumer **and** constrains **only** one Producer result authorized by the Consumer's accepted Goal.\n\n## Test case\n\ncreate valid Demand Atoms with Consumer **and** Producer Scope Unit references in permitted branches **and** with a later ordered sibling as Consumer **and** an earlier ordered sibling as Producer. **then** remove the Goal-authorized need for the Producer result, change ownership, target an ancestor, direct child, deeper descendant, **or** later ordered sibling, use equal Producer **and** Consumer Local Order, target two results, constrain Producer authority outside the selected result, fully define Producer Scope, **and** add a separate Demand-direction relation Kind.\n\n## Acceptance criteria\n\n**only** fixtures with Consumer ownership, a permitted direction, one exact Goal-authorized need for the Producer result, one exact Implementation result, **and** no additional direction relation pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Demand fact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom@13.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-1293\n",
+          "after": "    - CA-R-1293\n    - CA-R-934\n    - CA-R-954\n",
+          "count": 1,
+          "boundary": "relations.evaluation_for",
+          "reason": "Bind the actually checked outside-result authority preservation and one Implementation result constraints; retain all existing checked targets."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Demand Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-243",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-402",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets.md",
+      "before_version": 2,
+      "before_sha256": "9c15440f19ab1f224f55c2afd3bc86e994a5a32d2e3a6449c5041f6c946fd5a0",
+      "before_bytes_utf8": "---\natom_id: CA-E-402\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Validation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Claim Value Set\n      - Property\n      - Subject Expression\n      - IS_ALLOWED_VALUE_OF\nversion: 2\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1359\n    - CA-M-237\n---\n# Reject Invalid Claim Value Sets\n\nthe Evaluation **must** reject a Claim Value Set **if** it identifies **`!=1`** Property, has **`=0`** values, repeats a value, uses one noncanonical value, has nonfinite **or** ordered semantics, **contains** one value **not** allowed by its Property, permits one value **to** be accepted, replaced, **or** retired independently, **or** parses `:` as Subject Expression syntax.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-EVALUATION--reject-invalid-claim-value-sets.md",
+      "proposed_version": 3,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-402\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Validation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Claim Value Set\n      - Property\n      - Subject Expression\n      - IS_ALLOWED_VALUE_OF\nversion: 3\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1359\n    - CA-M-237\n---\n# Reject Invalid Claim Value Sets\n\nthe Evaluation **must** reject a Claim Value Set **if** it identifies **`!=1`** Property, has **`=0`** values, repeats a value, uses one noncanonical value, has nonfinite **or** ordered semantics, **contains** one value **not** allowed by its Property, permits one value **to** be accepted, replaced, **or** retired independently, **or** parses `:` as Subject Expression syntax.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets@2.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Claim Value Set Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-402",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-403",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "before_version": 4,
+      "before_sha256": "885af24d0b441dcdc91e1ee5983b7b3b4d8a7b7b5d4c13e69f2dcaa9686ad3ea",
+      "before_bytes_utf8": "---\natom_id: CA-E-403\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Consolidation Candidate Evaluation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Scope\n      - Atom/Scope\n      - Atom/Claim/Governed Subject Set\n      - Atom/Claim/Scope\n      - Claim Value Set\n      - Property\n      - IS_ALLOWED_VALUE_OF\nversion: 4\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1358\n    - CA-R-1359\n---\n# Report Exact Claim Value-Set Consolidation Candidates\n\nthe Evaluation **must** report one Claim Value Set consolidation candidate **only** **if** **every** contributing active Atom has the same Atom Scope, Governed Subject Set, Claim Scope, Property, **and** exact qualifiers, has one mechanically parseable single-value Claim, **and** differs **only** by one unique value proven through IS_ALLOWED_VALUE_OF for that Property; it **must not** mutate, merge, archive, replace, compile, **or** change a Source Atom by another operation, use semantic **or** LLM inference, **or** cause Applicable Methodology compilation **to** fail.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "proposed_version": 5,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-403\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Consolidation Candidate Evaluation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Scope\n      - Atom/Scope\n      - Atom/Claim/Governed Subject Set\n      - Atom/Claim/Scope\n      - Claim Value Set\n      - Property\n      - IS_ALLOWED_VALUE_OF\nversion: 5\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1358\n    - CA-R-1359\n---\n# Report Exact Claim Value-Set Consolidation Candidates\n\nthe Evaluation **must** report one Claim Value Set consolidation candidate **only** **if** **every** contributing active Atom has the same Atom Scope, Governed Subject Set, Claim Scope, Property, **and** exact qualifiers, has one mechanically parseable single-value Claim, **and** differs **only** by one unique value proven through IS_ALLOWED_VALUE_OF for that Property; it **must not** mutate, merge, archive, replace, compile, **or** change a Source Atom by another operation, use semantic **or** LLM inference, **or** cause Applicable Methodology compilation **to** fail.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates@4.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Claim Value Set Consolidation Candidate Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-403",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-404",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations.md",
+      "before_version": 3,
+      "before_sha256": "0dc41bf4b68c35203100df2a9b1585389029771037037ea77c8e9371e040c1a2",
+      "before_bytes_utf8": "---\natom_id: CA-E-404\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Dependency Order Derivation Evaluation\n  depends_on:\n    continuant:\n      - Artifact\n      - DEPENDS_ON\n      - DERIVED_FROM\n      - Atom/Direct Relation Serialization\n      - Dependency Order Derivation\nversion: 3\nupdated_at: \"2026-09-09 21:33:29 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1026\n    - CA-R-915\n    - CA-D-268\n    - CA-D-272\n    - CA-M-239\n---\n# Reject Invalid Dependency-Order Derivations\n\nthe Evaluation **must** reject one derived Artifact dependency order **if** a relation endpoint is **not** an Artifact, one `relations.depends_on` target reference repeats, a permutation of target-list positions changes its direct-edge set **or** derived order, an edge is absent from `relations.depends_on`, `relations.derived_from` contributes an edge, **or** the direct dependency graph **contains** a cycle.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-EVALUATION--reject-invalid-dependency-order-derivations.md",
+      "proposed_version": 4,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-404\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Dependency Order Derivation Evaluation\n  depends_on:\n    continuant:\n      - Artifact\n      - DEPENDS_ON\n      - DERIVED_FROM\n      - Atom/Direct Relation Serialization\n      - Dependency Order Derivation\nversion: 4\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1026\n    - CA-R-915\n    - CA-D-268\n    - CA-D-272\n    - CA-M-239\n---\n# Reject Invalid Dependency-Order Derivations\n\nthe Evaluation **must** reject one derived Artifact dependency order **if** a relation endpoint is **not** an Artifact, one `relations.depends_on` target reference repeats, a permutation of target-list positions changes its direct-edge set **or** derived order, an edge is absent from `relations.depends_on`, `relations.derived_from` contributes an edge, **or** the direct dependency graph **contains** a cycle.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations@3.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Dependency Order Derivation Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-404",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-405",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+      "before_version": 2,
+      "before_sha256": "1525000bd12fbda68485f1fb4fc1217be13bec7dd538b7b01ce2ea58f7ce2d8d",
+      "before_bytes_utf8": "---\natom_id: CA-E-405\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Canonical Signature Derivation Validation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Claim/Canonical Signature\n      - CCE Operator\nversion: 2\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1360\n    - CA-M-240\n---\n# Validate Restricted CCE Canonical Signature Boundary\n\nthe Evaluation **must** reject a Canonical Signature derivation **if** it rewrites one source Claim, treats one Canonical Signature as authority, accepts mixed **and** **or** groups, rewrites negation, implication, **where**, **without**, temporal condition, quantifier, extension-defined CCE Operator, **or** unparseable prose, fails **to** flatten nested same-operator groups, retains duplicate atomic predicates, **or** yields different Canonical Signatures from Boolean groups that differ **only** by operand order.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+      "proposed_version": 3,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-405\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Canonical Signature Derivation Validation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Claim/Canonical Signature\n      - CCE Operator\nversion: 3\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1360\n    - CA-M-240\n---\n# Validate Restricted CCE Canonical Signature Boundary\n\nthe Evaluation **must** reject a Canonical Signature derivation **if** it rewrites one source Claim, treats one Canonical Signature as authority, accepts mixed **and** **or** groups, rewrites negation, implication, **where**, **without**, temporal condition, quantifier, extension-defined CCE Operator, **or** unparseable prose, fails **to** flatten nested same-operator groups, retains duplicate atomic predicates, **or** yields different Canonical Signatures from Boolean groups that differ **only** by operand order.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary@2.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Canonical Signature Derivation Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-405",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-407",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary.md",
+      "before_version": 2,
+      "before_sha256": "d9bdfad4ab20eef3eea89d7b63b2637daa89c9fed77a5ac3cb8ea50579465183",
+      "before_bytes_utf8": "---\natom_id: CA-E-407\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Canonical Scope Signature Derivation Validation\n  depends_on:\n    continuant:\n      - Scope Expression\n      - Scope Expression/Canonical Scope Signature\n      - Atom/Carrier\nversion: 2\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1361\n    - CA-M-241\n---\n# Validate Canonical Scope Signature Boundary\n\nthe Evaluation **must** reject a Canonical Scope Signature derivation **if** it rewrites one source Carrier, treats one Signature as authority **or** Claim equivalence, accepts mixed **and** **or** groups, **without**, **where**, **all**, **any** other CCE Operator, function, Entity-kind selector, descendant **or** dynamic selector, unresolved identity, changing source frontier, **or** unparseable prose, fails **to** flatten nested same-operator groups, retains duplicate exact Atom IDs, loses the distinction between **and** **and** **or**, **or** yields different Signatures from same-operator groups that differ **only** by operand order.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-EVALUATION--validate-canonical-scope-signature-boundary.md",
+      "proposed_version": 3,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-407\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Canonical Scope Signature Derivation Validation\n  depends_on:\n    continuant:\n      - Scope Expression\n      - Scope Expression/Canonical Scope Signature\n      - Atom/Carrier\nversion: 3\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1361\n    - CA-M-241\n---\n# Validate Canonical Scope Signature Boundary\n\nthe Evaluation **must** reject a Canonical Scope Signature derivation **if** it rewrites one source Carrier, treats one Signature as authority **or** Claim equivalence, accepts mixed **and** **or** groups, **without**, **where**, **all**, **any** other CCE Operator, function, Entity-kind selector, descendant **or** dynamic selector, unresolved identity, changing source frontier, **or** unparseable prose, fails **to** flatten nested same-operator groups, retains duplicate exact Atom IDs, loses the distinction between **and** **and** **or**, **or** yields different Signatures from same-operator groups that differ **only** by operand order.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary@2.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Canonical Scope Signature Derivation Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-407",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-424",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms.md",
+      "before_version": 5,
+      "before_sha256": "83029cf2574cb158c8b61cda722f6ee66d31ea994aaf3c8d391ddef22a04f397",
+      "before_bytes_utf8": "---\natom_id: CA-E-424\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Objective Atom Validation\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Plan/Type: Objective\"\n      - \"Atom/Content Role: Plan/Type: Objective/Carrier/Filename\"\n      - \"Atom/Content Role: Plan/Type: Objective/Carrier/Placement\"\n      - \"Atom Collection/Type: Epic/Objective\"\nversion: 5\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1365\n    - CA-R-1367\n    - CA-D-350\n    - CA-D-351\n---\n# Validate Objective Atoms\n\n## Claim checked\n\nan Objective Atom states one Epic-wide outcome for **`=1`** Epic, uses the canonical Objective filename, remains outside its target Epic Directory Carrier, **and** is the **`<=1`** Objective Atom for that Epic.\n\n## Test case\n\ncreate one valid Objective Atom in its Atom Scope's `03_plan` folder **and** one Epic with no Objective Atom. **then** create two Objective Atoms for one Epic, omit the target Epic, target multiple Epics, use a noncanonical filename, **and** move the Objective Atom Carrier into its target Epic Directory Carrier.\n\n## Acceptance criteria\n\n**only** the valid Objective Atom **and** the Epic with no Objective Atom pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Objective fact.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-EVALUATION--validate-objective-atoms.md",
+      "proposed_version": 6,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-424\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Objective Atom Validation\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Plan/Type: Objective\"\n      - \"Atom/Content Role: Plan/Type: Objective/Carrier/Filename\"\n      - \"Atom/Content Role: Plan/Type: Objective/Carrier/Placement\"\n      - \"Atom Collection/Type: Epic/Objective\"\nversion: 6\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1365\n    - CA-R-1367\n    - CA-D-350\n    - CA-D-351\n---\n# Validate Objective Atoms\n\n## Claim checked\n\nan Objective Atom states one Epic-wide outcome for **`=1`** Epic, uses the canonical Objective filename, remains outside its target Epic Directory Carrier, **and** is the **`<=1`** Objective Atom for that Epic.\n\n## Test case\n\ncreate one valid Objective Atom in its Atom Scope's `03_plan` folder **and** one Epic with no Objective Atom. **then** create two Objective Atoms for one Epic, omit the target Epic, target multiple Epics, use a noncanonical filename, **and** move the Objective Atom Carrier into its target Epic Directory Carrier.\n\n## Acceptance criteria\n\n**only** the valid Objective Atom **and** the Epic with no Objective Atom pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Objective fact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms@5.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Objective Atom Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-424",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-425",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications.md",
+      "before_version": 3,
+      "before_sha256": "bf6e101d4a02a99862743eeed5d20824c8b92ac046274406ece3897a0b3c8e20",
+      "before_bytes_utf8": "---\natom_id: CA-E-425\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Relational Atom Classification Validation\n  depends_on:\n    continuant:\n      - Relational Atom/Qualified Type\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\nversion: 3\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  evaluation_for:\n    - CA-R-923\n    - CA-R-924\n    - CA-R-747\n    - CA-R-1365\n---\n# Validate Relational Atom Classifications\n\n## Claim checked\n\n**every** Relational Atom **must** have **`=1`** qualified Type allowed by the Applicable Methodology, **and** the Core contribution **must** admit **only** Requirement/Goal, Requirement/Demand, **and** Plan/Objective.\n\n## Test case\n\ncreate one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, **and** one relational Plan/Objective Atom. **then** create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, **and** Ops qualified Types **without** an additional Applicable Methodology contribution.\n\n## Acceptance criteria\n\n**only** the Requirement/Goal, Requirement/Demand, **and** Plan/Objective fixtures pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Relational Atom qualified Type.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "proposed_version": 4,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-425\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Relational Atom Classification Validation\n  depends_on:\n    continuant:\n      - Relational Atom/Qualified Type\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\nversion: 4\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-923\n    - CA-R-924\n    - CA-R-747\n    - CA-R-1365\n---\n# Validate Relational Atom Classifications\n\n## Claim checked\n\n**every** Relational Atom **must** have **`=1`** qualified Type allowed by the Applicable Methodology, **and** the Core contribution **must** admit **only** Requirement/Goal, Requirement/Demand, **and** Plan/Objective.\n\n## Test case\n\ncreate one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, **and** one relational Plan/Objective Atom. **then** create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, **and** Ops qualified Types **without** an additional Applicable Methodology contribution.\n\n## Acceptance criteria\n\n**only** the Requirement/Goal, Requirement/Demand, **and** Plan/Objective fixtures pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Relational Atom qualified Type.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications@3.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Relational Atom Classification Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-425",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-426",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment.md",
+      "before_version": 5,
+      "before_sha256": "36853f4795c0f68a772dd8ba2336afb0314f26f1f1ca816f0e0f7bff103b4452",
+      "before_bytes_utf8": "---\natom_id: CA-E-426\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Epic Containment Validation\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic/Direct Membership\"\n      - \"Atom Collection/Type: Epic/Recursive Membership\"\n      - \"Atom/Content Role: Plan/Type: Task/Epic Membership\"\n      - Structural Entity/Direct Containment\n      - Structural Entity/Recursive Containment\n      - Artifact/Carrier Placement/Status Subdirectory\nversion: 5\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1300\n    - CA-R-1301\n    - CA-R-1302\n    - CA-R-1303\n    - CA-R-1370\n    - CA-D-264\n    - CA-D-265\n    - CA-D-266\n    - CA-D-352\n---\n# Validate Epic Containment\n\n## Claim checked\n\nthe containment of an Epic **must** derive from the nearest ancestor Directory Carrier; its direct members **must** be **only** Epics **and** Plan/Task Atoms; one Plan/Task Atom **must** have **`<=1`** direct Epic; recursive membership **must** derive by transitive closure; containment **must not** contain a cycle; Status subdirectories **must not** alter containment; **and** derived containment **must not** be persisted as independent relation declarations.\n\n## Test case\n\ncreate a standalone Epic, an Epic with one direct Plan/Task Atom, a Plan/Task Atom below the Epic's `done` Status subdirectory, **and** a nested Epic below the containing Epic's `cancelled` Status subdirectory. **then** place another Artifact Type directly in an Epic, give one Plan/Task Atom two direct Epic memberships, add an Epic containment cycle, derive recursive membership outside the direct-membership transitive closure, treat a Status subdirectory as a Directory Carrier, **and** persist `CONTAINS` **or** `IS_CONTAINED_BY` as independent relations.\n\n## Acceptance criteria\n\nthe valid fixtures derive the expected direct **and** recursive memberships. **all** invalid fixtures fail.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Epic containment fact.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-EVALUATION--validate-epic-containment.md",
+      "proposed_version": 6,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-426\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Epic Containment Validation\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic/Direct Membership\"\n      - \"Atom Collection/Type: Epic/Recursive Membership\"\n      - \"Atom/Content Role: Plan/Type: Task/Epic Membership\"\n      - Structural Entity/Direct Containment\n      - Structural Entity/Recursive Containment\n      - Artifact/Carrier Placement/Status Subdirectory\nversion: 6\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1300\n    - CA-R-1301\n    - CA-R-1302\n    - CA-R-1303\n    - CA-R-1370\n    - CA-D-264\n    - CA-D-265\n    - CA-D-266\n    - CA-D-352\n---\n# Validate Epic Containment\n\n## Claim checked\n\nthe containment of an Epic **must** derive from the nearest ancestor Directory Carrier; its direct members **must** be **only** Epics **and** Plan/Task Atoms; one Plan/Task Atom **must** have **`<=1`** direct Epic; recursive membership **must** derive by transitive closure; containment **must not** contain a cycle; Status subdirectories **must not** alter containment; **and** derived containment **must not** be persisted as independent relation declarations.\n\n## Test case\n\ncreate a standalone Epic, an Epic with one direct Plan/Task Atom, a Plan/Task Atom below the Epic's `done` Status subdirectory, **and** a nested Epic below the containing Epic's `cancelled` Status subdirectory. **then** place another Artifact Type directly in an Epic, give one Plan/Task Atom two direct Epic memberships, add an Epic containment cycle, derive recursive membership outside the direct-membership transitive closure, treat a Status subdirectory as a Directory Carrier, **and** persist `CONTAINS` **or** `IS_CONTAINED_BY` as independent relations.\n\n## Acceptance criteria\n\nthe valid fixtures derive the expected direct **and** recursive memberships. **all** invalid fixtures fail.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Epic containment fact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment@5.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Epic Containment Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-426",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-427",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity.md",
+      "before_version": 5,
+      "before_sha256": "3f7f0a9bd9aa1890e5393d08a3cd876eb1dc74a56ab1f328cd96fbb738b98caa",
+      "before_bytes_utf8": "---\natom_id: CA-E-427\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Epic Carrier and Identity Validation\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic/Identity\"\n      - \"Atom Collection/Type: Epic/Identifier\"\n      - \"Atom Collection/Type: Epic/Directory Carrier\"\n      - \"Atom Collection/Type: Epic/Directory Carrier/Name\"\n      - \"Atom Collection/Type: Epic/Status\"\n      - \"Artifact/Revision/Status: Archived\"\nversion: 5\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  evaluation_for:\n    - CA-R-1298\n    - CA-R-1299\n    - CA-R-1304\n    - CA-R-1366\n    - CA-R-1369\n    - CA-R-1419\n    - CA-D-293\n    - CA-D-295\n---\n# Validate Epic Carriers and Identity\n\n## Claim checked\n\n**every** Epic **must** be a Structural Entity with **`=1`** Directory Carrier, **`=1`** canonical Epic Identifier, **`=1`** canonical Directory Carrier name, **`=1`** Status allowed by its Epic Status domain, Status-qualified placement, **and** identity independent from member changes.\n\n## Test case\n\ncreate one valid Epic Revision for **every** allowed Epic Status; place the Active revision **in** its canonical current directory **and** place **every** other revision **in** its Status subdirectory; use canonical identifiers **and** Directory Carrier names; preserve Archived **only** for a prior revision **or** the final revision of a replaced, absorbed, **or** retired Epic; **and** add, remove, reorder, **and** change members **without** changing Epic identity. **then** create an Epic with **`!=1`** Directory Carriers, use malformed identifiers **or** names, use a Status outside its resolved domain, place a non-Active Epic outside its Status subdirectory, place an Active Epic inside a Status subdirectory, assign Archived to a current unreplaced Epic revision, **and** change Epic identity **after** a member change.\n\n## Acceptance criteria\n\n**all** valid fixtures preserve one Epic identity **and** pass. **all** invalid fixtures fail.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Epic Carrier, Identifier, Status, placement, **or** identity fact.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "proposed_version": 6,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-427\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Epic Carrier and Identity Validation\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic/Identity\"\n      - \"Atom Collection/Type: Epic/Identifier\"\n      - \"Atom Collection/Type: Epic/Directory Carrier\"\n      - \"Atom Collection/Type: Epic/Directory Carrier/Name\"\n      - \"Atom Collection/Type: Epic/Status\"\n      - \"Artifact/Revision/Status: Archived\"\nversion: 6\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1298\n    - CA-R-1299\n    - CA-R-1304\n    - CA-R-1366\n    - CA-R-1369\n    - CA-R-1419\n    - CA-D-293\n    - CA-D-295\n---\n# Validate Epic Carriers and Identity\n\n## Claim checked\n\n**every** Epic **must** be a Structural Entity with **`=1`** Directory Carrier, **`=1`** canonical Epic Identifier, **`=1`** canonical Directory Carrier name, **`=1`** Status allowed by its Epic Status domain, Status-qualified placement, **and** identity independent from member changes.\n\n## Test case\n\ncreate one valid Epic Revision for **every** allowed Epic Status; place the Active revision **in** its canonical current directory **and** place **every** other revision **in** its Status subdirectory; use canonical identifiers **and** Directory Carrier names; preserve Archived **only** for a prior revision **or** the final revision of a replaced, absorbed, **or** retired Epic; **and** add, remove, reorder, **and** change members **without** changing Epic identity. **then** create an Epic with **`!=1`** Directory Carriers, use malformed identifiers **or** names, use a Status outside its resolved domain, place a non-Active Epic outside its Status subdirectory, place an Active Epic inside a Status subdirectory, assign Archived to a current unreplaced Epic revision, **and** change Epic identity **after** a member change.\n\n## Acceptance criteria\n\n**all** valid fixtures preserve one Epic identity **and** pass. **all** invalid fixtures fail.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Epic Carrier, Identifier, Status, placement, **or** identity fact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity@5.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Epic Carrier and Identity Validation"
+      ],
+      "classification_record": "CA-P-957-batch-10-dispositions.json#CA-E-427",
+      "claim_change": "none"
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "Source-only execution; no Journal conformance or runtime closure claim.",
+    "M224 contains the root-resolved source-owner binding clarification; no compiler Tool or schema changes."
+  ]
+}

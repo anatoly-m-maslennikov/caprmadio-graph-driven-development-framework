@@ -1,0 +1,103 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-31T22:02:59+04:00",
+  "schema": "caprmedio.project_scope_unit_graph_projection_rebuild.execution.v2",
+  "task_atom_id": "CA-P-932",
+  "result": "registered_project_scope_unit_graph_projections_rebuilt",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-935",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/18-CA-P-935-TASK--complete-project-scope-unit-graph-generator-authority-coverage.md",
+    "dependency_execution_evidence": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/execution_evidence/CA-P-935-project-scope-unit-graph-generator-authority-coverage.projection.json"
+  },
+  "generation": {
+    "selected_installed_generator": ".caprmedio_install/releases/2e541306bdeefe3926c0ed502d462076274733cd2e94baea335ae8a7725bd2de/TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "selected_installed_generator_sha256": "88ab6552b5f26eeca27dd5f4f47a0edaa2664d2e03f10eb27e33dca4600a6dd4",
+    "canonical_source_generator": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "canonical_source_generator_sha256": "88ab6552b5f26eeca27dd5f4f47a0edaa2664d2e03f10eb27e33dca4600a6dd4",
+    "selected_release": "2e541306bdeefe3926c0ed502d462076274733cd2e94baea335ae8a7725bd2de",
+    "source_and_installed_execution_bytes_identical": true,
+    "hooks_changed": false
+  },
+  "registered_persistent_projections": [
+    {
+      "carrier_path": ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml",
+      "registration_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-343-DELIVERY--place-project-scope-unit-graph-projection.md",
+      "output_sha256": "ec479d0e44c043622409a3c3f54b1777055ec13fe9786f76f168948669d8b90e"
+    },
+    {
+      "carrier_path": ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml",
+      "registration_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-332-DELIVERY--place-project-scope-unit-graph-sources-projection.md",
+      "output_sha256": "28bdc81f7582ae751962230b54be979a5e78dbb7b75c1abf429e0bfb038d1ddc"
+    }
+  ],
+  "source_frontier": {
+    "configuration": {
+      "atom_id": "CAPRMEDIO-I-001",
+      "revision": 4,
+      "carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/caprmedio_framework_settings.toml",
+      "sha256": "78d6669cb1d13cd4098ba182144633e339eb08d16b72decb3d52853521e1b306",
+      "journal_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-30-part-1.ndjson",
+      "journal_line": 52,
+      "journal_event_id": "59613820628308f1ee20b996b6af1bc77dc04539e6e001e922b022474e5ec10c"
+    },
+    "admitted_contribution_count": 0,
+    "exact_source_binding_count": 250,
+    "exact_source_binding_digest_algorithm": "sha256(canonical JSON, sorted keys, compact UTF-8)",
+    "exact_source_binding_sha256": "262c40028ea96331fb7d6810d6559fcb29b890568777e72cd74713feafa09275"
+  },
+  "ca_r_626_coverage": {
+    "authority_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-626-GOVERN-REQUIREMENT--project-current-graph-state-without-owning-authority.md",
+    "authority_revision": 15,
+    "row_count": 13,
+    "fields_validated_for_every_row": [
+      "unit_name",
+      "project_boundary_position",
+      "type_value",
+      "child_composition",
+      "structural_level",
+      "unit_type_name",
+      "navigational_order_number",
+      "parent",
+      "authority_path",
+      "delivery_path"
+    ],
+    "local_order_validated_when_applicable": true,
+    "exact_directory_carrier_receipt_count": 13,
+    "active_delivery_atom_binding_count": 13,
+    "field_level_source_binding_count": 250,
+    "all_bindings_have_exact_revision_digest_and_journal_record": true
+  },
+  "validation": {
+    "toml_projections_valid": true,
+    "projection_schema_version": 3,
+    "both_projections_share_updated_at": "2026-08-31 21:04:47",
+    "generator_metadata_present_in_both_projections": true,
+    "lowercase_project_identity": "caprmedio",
+    "current_control_root": ".caprmedio_caprmedio",
+    "nearest_typed_parent_topology_valid": true,
+    "retired_paths_absent": true,
+    "jobs_absent": true,
+    "epics_absent": true,
+    "independent_authority_absent": true,
+    "focused_generator_tests": {
+      "command": "python3 -m unittest 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/tests/test_generate_project_graph_state.py -v",
+      "passed": 8,
+      "failed": 0
+    },
+    "git_diff_check_passed": true
+  },
+  "idempotence": {
+    "delete_both_then_regenerate": true,
+    "byte_identical_after_delete": true,
+    "repeated_regeneration_changed": false,
+    "output_set_digest_algorithm": "sha256(canonical JSON, sorted keys, compact UTF-8)",
+    "output_set_sha256": "df6d882688711a5d2d1305a2bd703334c58c23b57a4144665bf86ac45ca2c23e"
+  },
+  "task_lifecycle": {
+    "predecessor_active_sha256": "7d30297a28d8873b05383d1b65303a377fe47ad5ac3da35345a32ef14dd1133c",
+    "exact_archive_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/archive/19-CA-P-932-TASK--rebuild-registered-project-scope-unit-graph-projections@3.md",
+    "archive_sha256": "7d30297a28d8873b05383d1b65303a377fe47ad5ac3da35345a32ef14dd1133c",
+    "done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/19-CA-P-932-TASK--rebuild-registered-project-scope-unit-graph-projections.md"
+  },
+  "boundary": "Only the two registered persistent Project Scope Unit Graph Projections were rebuilt. Applicable Methodology, Tool source, installation, hooks, other Tasks, and on-demand views were unchanged."
+}

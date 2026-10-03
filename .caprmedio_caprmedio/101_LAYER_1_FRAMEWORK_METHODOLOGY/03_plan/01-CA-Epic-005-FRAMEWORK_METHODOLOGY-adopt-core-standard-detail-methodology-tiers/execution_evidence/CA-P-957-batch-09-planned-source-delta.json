@@ -1,0 +1,1170 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "09",
+  "recorded_at": "2026-09-10 05:08:55 +0400",
+  "checkpoint": "33 coordinated structural/syntax dispositions, including9 previously classified origins followed through exact direct-edge repairs; autonomous >=99% check/apply.",
+  "existing": [
+    {
+      "atom_id": "CA-R-1361",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-CORE_META_MODEL-CORE-REQUIREMENT--define-canonical-scope-signature.md",
+      "before_version": 3,
+      "before_sha256": "eafcc866c561de3fcbce68c2a0cd727cfceadd2e004e910e2a49c54f1d3216b7",
+      "before_bytes_utf8": "---\natom_id: CA-R-1361\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Scope Expression/Canonical Scope Signature\n  depends_on:\n    continuant:\n      - Scope Expression\n      - Atom/Claim/Scope\n      - Atom/Carrier\nversion: 3\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-999\n---\n# Define Canonical Scope Signature\n\na Canonical Scope Signature **means** one derived non-authoritative comparison value for **`=1`** parenthesized Scope Expression occurrence **only** **when** that occurrence has this restricted grammar: `scope_group ::= (atom_id **or** atom_id [**or** atom_id ...]) **or** (atom_id **and** atom_id [**and** atom_id ...])`; `atom_id ::= one exact Atom ID that resolves **`=1`** active Atom Carrier inside the selected source frontier`; canonicalization flattens nested same-operator groups, removes duplicate exact Atom IDs, sorts the remaining Atom IDs **in** canonical lexical order, preserves **or** **and** **and** distinction, **and** excludes mixed operators, **without**, **where**, **all**, **every** other CCE Operator, function, Entity-kind selector, descendant **or** dynamic selector, unresolved identity, changing source frontier, **or** unparseable prose.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-CORE_META_MODEL-REQUIREMENT--define-canonical-scope-signature.md",
+      "proposed_version": 4,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1361\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Scope Expression/Canonical Scope Signature\n  depends_on:\n    continuant:\n      - Scope Expression\n      - Atom/Claim/Scope\n      - Atom/Carrier\nversion: 4\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Canonical Scope Signature\n\na Canonical Scope Signature **means** one derived non-authoritative comparison value for **`=1`** parenthesized Scope Expression occurrence **only** **when** that occurrence has this restricted grammar: `scope_group ::= (atom_id **or** atom_id [**or** atom_id ...]) **or** (atom_id **and** atom_id [**and** atom_id ...])`; `atom_id ::= one exact Atom ID that resolves **`=1`** active Atom Carrier inside the selected source frontier`; canonicalization flattens nested same-operator groups, removes duplicate exact Atom IDs, sorts the remaining Atom IDs **in** canonical lexical order, preserves **or** **and** **and** distinction, **and** excludes mixed operators, **without**, **where**, **all**, **every** other CCE Operator, function, Entity-kind selector, descendant **or** dynamic selector, unresolved identity, changing source frontier, **or** unparseable prose.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1361-CORE_META_MODEL-CORE-REQUIREMENT--define-canonical-scope-signature@3.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-999\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Standard, parent Standard: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Expression/Canonical Scope Signature"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-1361",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-718",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-atom-claim-scope-from-structural-ownership.md",
+      "before_version": 10,
+      "before_sha256": "c9a6d75b74454783237417e0db551101e6865e3dcd451ddf85272ec78ea0bd05",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\n      - atom-boundary\natom_id: CA-R-718\ncce_version: cce_1\ncce_form: prohibition\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-045-CORE-REQUIREMENT--separate-graph-dimensions\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n---\n# Separate Atom Claim Scope from structural ownership\n\nan Atom's Claim Scope reference **must not**, by itself, establish an additional edge in the Scope Unit tree **or** alter structural-parent ownership.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-atom-claim-scope-from-structural-ownership.md",
+      "proposed_version": 11,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\n      - atom-boundary\natom_id: CA-R-718\ncce_version: cce_1\ncce_form: prohibition\nversion: 11\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-045-CORE-REQUIREMENT--separate-graph-dimensions\n---\n# Separate Atom Claim Scope from structural ownership\n\nan Atom's Claim Scope reference **must not**, by itself, establish an additional edge in the Scope Unit tree **or** alter structural-parent ownership.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-atom-claim-scope-from-structural-ownership@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-718",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-728",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-728-CORE_META_MODEL-CORE-REQUIREMENT--define-project-atom-id.md",
+      "before_version": 13,
+      "before_sha256": "691c5e1d8e34d5a12400fed4f2f6dbeec288604021e2cb497fe8e35482538f6f",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Project Atom ID\n  depends_on:\n    continuant:\n      - artifact-model\n      - Artifact/Identity\natom_id: CA-R-728\ncce_version: cce_1\ncce_form: definition\nversion: 13\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-098-CORE_META_MODEL-CORE-REQUIREMENT--scope-path-does-not-change-semantic-coordinates\n    - CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision\n---\n# Define Project Atom ID\n\nProject Atom ID **means** the immutable `<PROJECT_PREFIX>-<CONTENT_ROLE_LETTER>-<GLOBAL_NUMBER_WITHIN_CONTENT_ROLE>` identity of one accepted Project-owned Atom.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-728-CORE_META_MODEL-REQUIREMENT--define-project-atom-id.md",
+      "proposed_version": 14,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Project Atom ID\n  depends_on:\n    continuant:\n      - artifact-model\n      - Artifact/Identity\natom_id: CA-R-728\ncce_version: cce_1\ncce_form: definition\nversion: 14\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-098-CORE_META_MODEL-CORE-REQUIREMENT--scope-path-does-not-change-semantic-coordinates\n---\n# Define Project Atom ID\n\nProject Atom ID **means** the immutable `<PROJECT_PREFIX>-<CONTENT_ROLE_LETTER>-<GLOBAL_NUMBER_WITHIN_CONTENT_ROLE>` identity of one accepted Project-owned Atom.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-728-CORE_META_MODEL-CORE-REQUIREMENT--define-project-atom-id@13.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The declared exact target has only historical Archive Carriers, not an active authority endpoint; GOV767 requires Active RMED targets. No substitute parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Project Atom ID"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-728",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-732",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-CORE_META_MODEL-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+      "before_version": 11,
+      "before_sha256": "f7b11f12921601f387a9fb07f7f307147dd202bfdc3dd236ab22a0b9a3482b93",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - artifact-model\natom_id: CA-R-732\ncce_version: cce_1\ncce_form: obligation\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-728\n---\n# Number Project-owned Atoms within each Content role\n\n**every** identified Project-owned Atom **must** receive the next unreused number from the Project-wide sequence for its Content role.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-CORE_META_MODEL-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - artifact-model\natom_id: CA-R-732\ncce_version: cce_1\ncce_form: obligation\nversion: 12\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Number Project-owned Atoms within each Content role\n\n**every** identified Project-owned Atom **must** receive the next unreused number from the Project-wide sequence for its Content role.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-732-CORE_META_MODEL-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role@11.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-728\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Standard, parent Standard: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "artifact-model"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-732",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-737",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-737-CORE_META_MODEL-CORE-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix.md",
+      "before_version": 11,
+      "before_sha256": "930ccda42d4f874f1c52e75454e8dafb6e15b2c019357efd3a773e77a1748584",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - artifact-identity\n  depends_on:\n    continuant:\n      - artifact-model\natom_id: CA-R-737\ncce_version: cce_1\ncce_form: obligation\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-728\n---\n# Prefix every assigned Atom ID with the Project prefix\n\n**every** assigned Atom ID **must** begin with the registered uppercase Project identity prefix.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-737-CORE_META_MODEL-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - artifact-identity\n  depends_on:\n    continuant:\n      - artifact-model\natom_id: CA-R-737\ncce_version: cce_1\ncce_form: obligation\nversion: 12\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Prefix every assigned Atom ID with the Project prefix\n\n**every** assigned Atom ID **must** begin with the registered uppercase Project identity prefix.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-737-CORE_META_MODEL-CORE-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix@11.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-728\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Standard, parent Standard: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "artifact-identity"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-737",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-913",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md",
+      "before_version": 7,
+      "before_sha256": "1ac254982af34d30786e616fb8c5b54cc831572fe5091842a7c28ec66052c983",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Previous Unit\n  depends_on:\n    continuant:\n      - scope-topology\ncce_version: cce_1\ncce_form: definition\nversion: 7\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-712--define-ordered-unit-structural-kind\n    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order\n---\n# Define Previous Unit\n\n## CCE Claim\n\nPrevious Unit **means** the ordered peer Scope Unit with the nearest lower Local Order.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Previous Unit\n  depends_on:\n    continuant:\n      - scope-topology\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Previous Unit\n\n## CCE Claim\n\nPrevious Unit **means** the ordered peer Scope Unit with the nearest lower Local Order.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-712--define-ordered-unit-structural-kind\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The exact legacy Ordered-kind basename no longer resolves to an active Carrier; the active META712 Ordered authority is Core and cannot be a normative parent of CoreR913 either. Remove this obsolete typed-parent declaration, without inventing a substitute."
+        },
+        {
+          "before": "    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Previous Unit"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-913",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-928",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-928-CORE_META_MODEL-CORE-REQUIREMENT--omit-project-atom-id-from-external-goals.md",
+      "before_version": 11,
+      "before_sha256": "eecc3c42ce10d9af0522d547278c9f5fbd721566fe3a164166d800af63b14ba0",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal/Identity\"\n  depends_on:\n    continuant:\n      - Atom/Scope\n      - Atom/Identity\natom_id: CA-R-928\ncce_version: cce_1\ncce_form: prohibition\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-927\n    - CA-R-728\n---\n# Omit Project Atom ID from external Goals\n\na Goal Atom with no Scope Unit Atom Scope **must not** have a Project Atom ID.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-928-CORE_META_MODEL-CORE-REQUIREMENT--omit-project-atom-id-from-external-goals.md",
+      "proposed_version": 12,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal/Identity\"\n  depends_on:\n    continuant:\n      - Atom/Scope\n      - Atom/Identity\natom_id: CA-R-928\ncce_version: cce_1\ncce_form: prohibition\nversion: 12\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CA-R-927\n---\n# Omit Project Atom ID from external Goals\n\na Goal Atom with no Scope Unit Atom Scope **must not** have a Project Atom ID.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-928-CORE_META_MODEL-CORE-REQUIREMENT--omit-project-atom-id-from-external-goals@11.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-728\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Standard: The parent is lower in the admitted Core→General→Standard ordering. R879 defines child_of as normative ordering; no replacement parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Goal/Identity"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-928",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-960",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-960-CORE_META_MODEL-CORE-REQUIREMENT--define-child-composition.md",
+      "before_version": 7,
+      "before_sha256": "65b4ad2890db9e060052426696e73e8e0b07627997bb79ec1c87140b9f35bdfb",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Child Composition\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\n      - relation-model\natom_id: CA-R-960\ncce_version: cce_1\ncce_form: definition\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-714\n---\n# Define Child Composition\n\nChild Composition **means** the classification of one Scope Unit's direct children as **none**, LAYERS, FEATURES, **or** MIXED.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-960-CORE_META_MODEL-CORE-REQUIREMENT--define-child-composition.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Child Composition\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\n      - relation-model\natom_id: CA-R-960\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Child Composition\n\nChild Composition **means** the classification of one Scope Unit's direct children as **none**, LAYERS, FEATURES, **or** MIXED.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-960-CORE_META_MODEL-CORE-REQUIREMENT--define-child-composition@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-714\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Child Composition"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-960",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-961",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-961-CORE_META_MODEL-CORE-REQUIREMENT--define-project-boundary-position.md",
+      "before_version": 6,
+      "before_sha256": "e82ec262387eca37c405b0107750ec8c83c5f7d33e280f9674838b8abe925e8f",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Project Boundary Position\n  depends_on:\n    continuant:\n      - scope-topology\natom_id: CA-R-961\ncce_version: cce_1\ncce_form: definition\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-714\n---\n# Define Project Boundary Position\n\nProject Boundary Position **means** PROJECT for the Project Scope Unit **and** its descendant Scope Units **or** BOOTSTRAP_SEED for a Scope Unit outside the Project.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-961-CORE_META_MODEL-CORE-REQUIREMENT--define-project-boundary-position.md",
+      "proposed_version": 7,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Project Boundary Position\n  depends_on:\n    continuant:\n      - scope-topology\natom_id: CA-R-961\ncce_version: cce_1\ncce_form: definition\nversion: 7\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Project Boundary Position\n\nProject Boundary Position **means** PROJECT for the Project Scope Unit **and** its descendant Scope Units **or** BOOTSTRAP_SEED for a Scope Unit outside the Project.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-961-CORE_META_MODEL-CORE-REQUIREMENT--define-project-boundary-position@6.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-714\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Project Boundary Position"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-961",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-962",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-962-CORE_META_MODEL-CORE-REQUIREMENT--give-every-scope-unit-one-name.md",
+      "before_version": 7,
+      "before_sha256": "bff185aaadbcf360d082ced4a88278317093eba3f848c79e1c88a98c35fb2be9",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - Scope Unit\natom_id: CA-R-962\ncce_version: cce_1\ncce_form: cardinality\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Give Every Scope Unit One Name\n\n**every** Scope Unit **must** have **`=1`** authoritative Name.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-962-CORE_META_MODEL-CORE-REQUIREMENT--give-every-scope-unit-one-name.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - Scope Unit\natom_id: CA-R-962\ncce_version: cce_1\ncce_form: cardinality\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Give Every Scope Unit One Name\n\n**every** Scope Unit **must** have **`=1`** authoritative Name.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-962-CORE_META_MODEL-CORE-REQUIREMENT--give-every-scope-unit-one-name@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-708\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Name"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-962",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-963",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-963-CORE_META_MODEL-CORE-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens.md",
+      "before_version": 8,
+      "before_sha256": "d690c34a89c53b046f46b94a271513a837cd2511866ad39389710515286385ec",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\natom_id: CA-R-963\ncce_version: cce_1\ncce_form: obligation\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-962\n---\n# Encode Scope Unit Names as Uppercase Tokens\n\n**every** Scope Unit Name **must** consist of nonempty uppercase letter-or-digit word tokens joined by single underscores.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-963-CORE_META_MODEL-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\natom_id: CA-R-963\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CA-R-962\n---\n# Encode Scope Unit Names as Uppercase Tokens\n\n**every** Scope Unit Name **must** consist of nonempty uppercase letter-or-digit word tokens joined by single underscores.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-963-CORE_META_MODEL-CORE-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Name"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-963",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-964",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-964-CORE_META_MODEL-CORE-REQUIREMENT--define-unit-as-scope-unit-shorthand.md",
+      "before_version": 7,
+      "before_sha256": "ee8b78cef70fc4d68f5e38e21bfaf5957b204ca5b1fac70db77e56042ab51fb3",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Unit\n  depends_on:\n    continuant:\n      - semantics\n      - scope-topology\natom_id: CA-R-964\ncce_version: cce_1\ncce_form: definition\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Define Unit as Scope Unit shorthand\n\nUnit **means** Scope Unit **when** CAPRMEDIO uses Unit as a governed shorthand.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-964-CORE_META_MODEL-CORE-REQUIREMENT--define-unit-as-scope-unit-shorthand.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Unit\n  depends_on:\n    continuant:\n      - semantics\n      - scope-topology\natom_id: CA-R-964\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Unit as Scope Unit shorthand\n\nUnit **means** Scope Unit **when** CAPRMEDIO uses Unit as a governed shorthand.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-964-CORE_META_MODEL-CORE-REQUIREMENT--define-unit-as-scope-unit-shorthand@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-708\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Unit"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-964",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-969",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-969-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english.md",
+      "before_version": 8,
+      "before_sha256": "ae0e4528449059e0fa956f845f3f8bdada8d9fde884a682fd4f826d8d46b5bf5",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - CCE\natom_id: CA-R-969\ncce_version: cce_1\ncce_form: separation\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-963\n---\n# Distinguish Scope Unit Names from Ordinary English\n\nan exact uppercase Scope Unit Name **must** denote its Scope Unit, while an **otherwise** identical lowercase word **must** retain its ordinary English meaning.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-969-CORE_META_MODEL-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - CCE\natom_id: CA-R-969\ncce_version: cce_1\ncce_form: separation\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Distinguish Scope Unit Names from Ordinary English\n\nan exact uppercase Scope Unit Name **must** denote its Scope Unit, while an **otherwise** identical lowercase word **must** retain its ordinary English meaning.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-969-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english@8.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-963\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Standard, parent Standard: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Name"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-969",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-970",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-970-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-names-unique-within-the-project.md",
+      "before_version": 9,
+      "before_sha256": "78859d9efc8c8272a566811ca26848799ef3703ec312df4358c37d62e5f0f969",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - Project\natom_id: CA-R-970\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-962\n    - CAPRMEDIO-META-REQU-716\n---\n# Make Scope Unit Names Unique within the Project\n\n**every** Scope Unit Name **must** be unique within its Project.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-970-CORE_META_MODEL-GENERAL-REQUIREMENT--make-scope-unit-names-unique-within-the-project.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Name\n  depends_on:\n    continuant:\n      - Project\natom_id: CA-R-970\ncce_version: cce_1\ncce_form: obligation\nversion: 10\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CA-R-962\n    - CAPRMEDIO-META-REQU-716\n---\n# Make Scope Unit Names Unique within the Project\n\n**every** Scope Unit Name **must** be unique within its Project.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-970-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-names-unique-within-the-project@9.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Name"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-970",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-972",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-972-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit-label.md",
+      "before_version": 10,
+      "before_sha256": "94e56661e0220632d50eca054ce0714a8eb06dbdce6902f54d22b2578c9547f1",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit/Type\natom_id: CA-R-972\ncce_version: cce_1\ncce_form: definition\nversion: 10\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Define Scope Unit Label\n\na Scope Unit Label **means** an Operator-controlled navigation label that does **not** determine the Scope Unit Type.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-972-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit-label.md",
+      "proposed_version": 11,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit/Type\natom_id: CA-R-972\ncce_version: cce_1\ncce_form: definition\nversion: 11\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Scope Unit Label\n\na Scope Unit Label **means** an Operator-controlled navigation label that does **not** determine the Scope Unit Type.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-972-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit-label@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-708\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Label"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-972",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-976",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-976-CORE_META_MODEL-CORE-REQUIREMENT--separate-navigational-order-from-structural-relations.md",
+      "before_version": 9,
+      "before_sha256": "1e52c745cfa28181b0bbfc16d8f034f51d243d73e3cff735d305c800b7a14edb",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\natom_id: CA-R-976\ncce_version: cce_1\ncce_form: prohibition\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-978\n---\n# Separate Navigational Order from structural relations\n\na Navigational Order Number **must not** establish **or** change a Structural Coordinate, Structural parent, Structural child, Type value of a Scope Unit, Local Order, **or** dependency.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-976-CORE_META_MODEL-CORE-REQUIREMENT--separate-navigational-order-from-structural-relations.md",
+      "proposed_version": 10,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\natom_id: CA-R-976\ncce_version: cce_1\ncce_form: prohibition\nversion: 10\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Separate Navigational Order from structural relations\n\na Navigational Order Number **must not** establish **or** change a Structural Coordinate, Structural parent, Structural child, Type value of a Scope Unit, Local Order, **or** dependency.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-976-CORE_META_MODEL-CORE-REQUIREMENT--separate-navigational-order-from-structural-relations@9.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-978\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Standard: The parent is lower in the admitted Core→General→Standard ordering. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-976",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-978",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-978-CORE_META_MODEL-CORE-REQUIREMENT--define-navigational-order-number.md",
+      "before_version": 8,
+      "before_sha256": "c83178cbc53004d182cbe06fa617a4a48d407bc426efe02387ca02460338da2d",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Navigational Order Number\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit\natom_id: CA-R-978\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Define Navigational Order Number\n\na Navigational Order Number **means** an Operator-controlled decimal navigation label for one Scope Unit.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-978-CORE_META_MODEL-REQUIREMENT--define-navigational-order-number.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Navigational Order Number\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit\natom_id: CA-R-978\ncce_version: cce_1\ncce_form: definition\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Define Navigational Order Number\n\na Navigational Order Number **means** an Operator-controlled decimal navigation label for one Scope Unit.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-978-CORE_META_MODEL-CORE-REQUIREMENT--define-navigational-order-number@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Navigational Order Number"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-978",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-979",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-979-CORE_META_MODEL-CORE-REQUIREMENT--default-scope-units-to-unordered.md",
+      "before_version": 8,
+      "before_sha256": "586a718e88a66f8246277ab0dc6348b29b1bf10576d436e94b2f90b24ac01a63",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Type\natom_id: CA-R-979\ncce_version: cce_1\ncce_form: obligation\nversion: 8\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-709\n    - CAPRMEDIO-META-REQU-713\n---\n# Default Scope Units to Unordered\n\n**every** new Scope Unit **must** use Unordered as its default Type value.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-979-CORE_META_MODEL-GENERAL-REQUIREMENT--default-scope-units-to-unordered.md",
+      "proposed_version": 9,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Type\natom_id: CA-R-979\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-709\n    - CAPRMEDIO-META-REQU-713\n---\n# Default Scope Units to Unordered\n\n**every** new Scope Unit **must** use Unordered as its default Type value.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-979-CORE_META_MODEL-CORE-REQUIREMENT--default-scope-units-to-unordered@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Type"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-979",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-981",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-981-CORE_META_MODEL-CORE-REQUIREMENT--default-navigational-order-chronologically.md",
+      "before_version": 6,
+      "before_sha256": "04fdee0eee80a252e44be5f9cc5b3e600bf8b55f98a3421182e98e1da74e0e56",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\natom_id: CA-R-981\ncce_version: cce_1\ncce_form: obligation\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-978\n---\n# Default Navigational Order chronologically\n\n**every** non-Project Scope Unit **must** receive a default Navigational Order Number equal to its one-based chronological creation position among Scope Units created under the same parent **and** rendered with **`>=2`** digits.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-981-CORE_META_MODEL-REQUIREMENT--default-navigational-order-chronologically.md",
+      "proposed_version": 7,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\natom_id: CA-R-981\ncce_version: cce_1\ncce_form: obligation\nversion: 7\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Default Navigational Order chronologically\n\n**every** non-Project Scope Unit **must** receive a default Navigational Order Number equal to its one-based chronological creation position among Scope Units created under the same parent **and** rendered with **`>=2`** digits.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-981-CORE_META_MODEL-CORE-REQUIREMENT--default-navigational-order-chronologically@6.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-978\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Standard, parent Standard: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-981",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-982",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-982-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-scope-unit-label.md",
+      "before_version": 8,
+      "before_sha256": "f3bb34a3cf7d3256163f049d8d9c5f53ce73ae9e8d1783bfbdf2fc6a68b7b774",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit/Type\natom_id: CA-R-982\ncce_version: cce_1\ncce_form: permission\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-972\n---\n# Let the Operator Override Scope Unit Label\n\nthe Operator **may** replace the default Label independently for **every** Scope Unit **without** changing its Type.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-982-CORE_META_MODEL-GENERAL-REQUIREMENT--let-the-operator-override-scope-unit-label.md",
+      "proposed_version": 9,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - Operator\n      - Scope Unit/Type\natom_id: CA-R-982\ncce_version: cce_1\ncce_form: permission\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations:\n  child_of:\n    - CA-R-972\n---\n# Let the Operator Override Scope Unit Label\n\nthe Operator **may** replace the default Label independently for **every** Scope Unit **without** changing its Type.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-982-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-scope-unit-label@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Label"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-982",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-983",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-983-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-navigational-order-number.md",
+      "before_version": 7,
+      "before_sha256": "7928318542c8ac339d3c05f745a7e7b4175605845e4e39c35ede206a40710abc",
+      "before_bytes_utf8": "---\natom_id: CA-R-983\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Navigational Order Number\n  depends_on:\n    continuant:\n      - Operator\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-978\n    - CA-R-981\n---\n# Let the Operator Override Navigational Order Number\n\nthe Operator **may** replace the default Navigational Order Number independently for **every** non-Project Scope Unit.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-983-CORE_META_MODEL-GENERAL-REQUIREMENT--let-the-operator-override-navigational-order-number.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-983\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Navigational Order Number\n  depends_on:\n    continuant:\n      - Operator\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Let the Operator Override Navigational Order Number\n\nthe Operator **may** replace the default Navigational Order Number independently for **every** non-Project Scope Unit.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-983-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-navigational-order-number@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-978\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child General, parent Standard: The parent is lower in the admitted Core→General→Standard ordering. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "    - CA-R-981\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child General, parent Standard: The parent is lower in the admitted Core→General→Standard ordering. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Navigational Order Number"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-983",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-999",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-999-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-expression.md",
+      "before_version": 7,
+      "before_sha256": "54b486bc2091be9fe8efebc92a10fb3152eaad687887b1aad23db1231b8ae796",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Expression\n  depends_on:\n    continuant:\n      - Governed Entity\natom_id: CA-R-999\ncce_version: cce_1\ncce_form: definition\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Define Scope Expression\n\na Scope Expression **means** one deterministic expression that identifies Governed Entities through atomic references, explicit Atom IDs, parentheses, registered set **or** logical operators, **and** field predicates including **where**.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-999-CORE_META_MODEL-REQUIREMENT--define-scope-expression.md",
+      "proposed_version": 8,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Expression\n  depends_on:\n    continuant:\n      - Governed Entity\natom_id: CA-R-999\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Scope Expression\n\na Scope Expression **means** one deterministic expression that identifies Governed Entities through atomic references, explicit Atom IDs, parentheses, registered set **or** logical operators, **and** field predicates including **where**.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-999-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-expression@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Expression"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CA-R-999",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-714",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership.md",
+      "before_version": 9,
+      "before_sha256": "061ed46e97a97664adb3933bb2886beab4b4c726a571a9593939ad9beae2c8f4",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-714\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n---\n# Derive inverse structural ownership\n\nCAPRMEDIO **must** derive the inverse `structural_children` view from stored `structural_parent` relations **and** **must not** persist that inverse separately.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-714\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 10\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n---\n# Derive inverse structural ownership\n\nCAPRMEDIO **must** derive the inverse `structural_children` view from stored `structural_parent` relations **and** **must not** persist that inverse separately.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership@9.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n",
+          "after": "    - CAPRMEDIO-META-REQU-706\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Exact basename-to-verified-stable-ID preservation following retiering."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-GOV-REQU-714",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-706",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+      "before_version": 14,
+      "before_sha256": "2b12252229d611e93828c8e22d37d37402626a2d979216fb32f7a509079f8456",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-706\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - artifact-model\n      - authority\ncce_version: cce_1\ncce_form: obligation\nversion: 14\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-917\n---\n# Make Scope Unit ownership immediate and recursive\n\n**every** Scope Unit **must** own **only** its direct child Scope Units through the same recursive structural-parent relation.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+      "proposed_version": 15,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-706\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - artifact-model\n      - authority\ncce_version: cce_1\ncce_form: obligation\nversion: 15\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Make Scope Unit ownership immediate and recursive\n\n**every** Scope Unit **must** own **only** its direct child Scope Units through the same recursive structural-parent relation.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive@14.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-917\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The proposed tier placement introduces this invalid normative parent. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-706",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-708",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+      "before_version": 8,
+      "before_sha256": "80eb739f61bf347cbd6d1576dab73f69eb6d925c848449447370d2874bdb6f68",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-708\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit\n  depends_on:\n    continuant:\n      - Structural Entity\n      - Scope\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-917\n---\n# Define Scope Unit\n\na Scope Unit **means** a Structural Entity that owns **`=1`** Scope **and** **may** own direct child Scope Units.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-708\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit\n  depends_on:\n    continuant:\n      - Structural Entity\n      - Scope\ncce_version: cce_1\ncce_form: definition\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Scope Unit\n\na Scope Unit **means** a Structural Entity that owns **`=1`** Scope **and** **may** own direct child Scope Units.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit@8.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-917\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The proposed tier placement introduces this invalid normative parent. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-708",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-709",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+      "before_version": 12,
+      "before_sha256": "18440f4bd5d3dabdd11898a0f75766c6e553c5f003f9dbf443a39829f1962964",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-709\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Type\n  depends_on:\n    continuant:\n      - Scope Unit\n      - Type\ncce_version: cce_1\ncce_form: cardinality\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-708\n---\n# Register Ordered and Unordered as Type Values under Scope Unit\n\n**every** Scope Unit **must** have **`=1`** Type value **in** (Ordered, Unordered).\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-CORE-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+      "proposed_version": 13,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-709\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Type\n  depends_on:\n    continuant:\n      - Scope Unit\n      - Type\ncce_version: cce_1\ncce_form: cardinality\nversion: 13\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Register Ordered and Unordered as Type Values under Scope Unit\n\n**every** Scope Unit **must** have **`=1`** Type value **in** (Ordered, Unordered).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit@12.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-708\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Type"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-709",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-713",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+      "before_version": 12,
+      "before_sha256": "70c0fb5b989fee59327e718739b55e6467f44642cc95659db0c86e1eac3ac726",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-713\nsubjects:\n  governs:\n    continuant:\n      - \"Scope Unit/Type: Unordered\"\n  depends_on:\n    continuant:\n      - Local Order\ncce_version: cce_1\ncce_form: definition\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-709\n---\n# Define Unordered as a Type Value under Scope Unit\n\nthe Scope Unit Type value Unordered **means** the value whose bearer does **not** participate **in** a Local Order among sibling Scope Units.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-CORE-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+      "proposed_version": 13,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-713\nsubjects:\n  governs:\n    continuant:\n      - \"Scope Unit/Type: Unordered\"\n  depends_on:\n    continuant:\n      - Local Order\ncce_version: cce_1\ncce_form: definition\nversion: 13\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Unordered as a Type Value under Scope Unit\n\nthe Scope Unit Type value Unordered **means** the value whose bearer does **not** participate **in** a Local Order among sibling Scope Units.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit@12.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-709\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scope Unit/Type: Unordered"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-713",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-714",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md",
+      "before_version": 10,
+      "before_sha256": "a04d998ac160575122cac236ff87328df3561730661bed984b159010ddd7fc43",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-714\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\ncce_version: cce_1\ncce_form: separation\nversion: 10\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-917\n---\n# Coordinate Scope Units through three independent axes\n\n**every** Scope Unit **must** characterize Project Boundary Position, its Type value **when** applicable, **and** Child Composition independently.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-CORE-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md",
+      "proposed_version": 11,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-714\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - atom-boundary\ncce_version: cce_1\ncce_form: separation\nversion: 11\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Coordinate Scope Units through three independent axes\n\n**every** Scope Unit **must** characterize Project Boundary Position, its Type value **when** applicable, **and** Child Composition independently.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-REQUIREMENT--coordinate-scope-units-through-three-independent-axes@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-917\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The proposed tier placement introduces this invalid normative parent. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-714",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-715",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order.md",
+      "before_version": 9,
+      "before_sha256": "d8b0cec3b4fc6bb1ba8f13a216b14ad3b188f5cfe3102351aa38aed51b1c55aa",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-715\nsubjects:\n  governs:\n    continuant:\n      - Local Order\n  depends_on:\n    continuant:\n      - Scope Unit\n      - Scope Unit/Type\ncce_version: cce_1\ncce_form: definition\nversion: 9\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-712\n---\n# Define Local Order\n\nLocal Order **means** the dependency-relevant position of an Ordered Scope Unit among Ordered Scope Units with the same direct parent.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-CORE-REQUIREMENT--define-local-order.md",
+      "proposed_version": 10,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-715\nsubjects:\n  governs:\n    continuant:\n      - Local Order\n  depends_on:\n    continuant:\n      - Scope Unit\n      - Scope Unit/Type\ncce_version: cce_1\ncce_form: definition\nversion: 10\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Local Order\n\nLocal Order **means** the dependency-relevant position of an Ordered Scope Unit among Ordered Scope Units with the same direct parent.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order@9.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-712\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The proposed tier placement introduces this invalid normative parent. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Local Order"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-715",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-716",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-REQUIREMENT--define-structural-path.md",
+      "before_version": 8,
+      "before_sha256": "57a2744d38850278ef70bda0fb0b87f21657b1d222e170a57e3a4b8450bd1cfe",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-716\nsubjects:\n  governs:\n    continuant:\n      - Structural Path\n  depends_on:\n    continuant:\n      - layout\n      - scope-topology\ncce_version: cce_1\ncce_form: definition\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n---\n# Define Structural Path\n\nStructural Path **means** the ordered ancestry of Scope Unit identities from the first Scope Unit root to one target Scope Unit.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-CORE-REQUIREMENT--define-structural-path.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-716\nsubjects:\n  governs:\n    continuant:\n      - Structural Path\n  depends_on:\n    continuant:\n      - layout\n      - scope-topology\ncce_version: cce_1\ncce_form: definition\nversion: 9\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Define Structural Path\n\nStructural Path **means** the ordered ancestry of Scope Unit identities from the first Scope Unit root to one target Scope Unit.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-REQUIREMENT--define-structural-path@8.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-706\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Preexisting invalid normative parent; revised-Atom admission repair, not falsely a newly introduced defect. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Structural Path"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-716",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-720",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features.md",
+      "before_version": 8,
+      "before_sha256": "bd8ef91250d50a728d3c7f4183c9f944c72047e4d734dd7e4034be1498203542",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-720\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\ncce_version: cce_1\ncce_form: prohibition\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-713\n---\n# Omit Local Order from Features\n\nA Feature **must not** have a Local Order.\n",
+      "before_tier": "Standard",
+      "proposed_path": null,
+      "proposed_version": null,
+      "proposed_tier": null,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features@8.md",
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-720",
+      "successor": {
+        "atom_id": "CAPRMEDIO-META-REQU-713",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+        "version": 12,
+        "sha256": "70c0fb5b989fee59327e718739b55e6467f44642cc95659db0c86e1eac3ac726",
+        "complete_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-713\nsubjects:\n  governs:\n    continuant:\n      - \"Scope Unit/Type: Unordered\"\n  depends_on:\n    continuant:\n      - Local Order\ncce_version: cce_1\ncce_form: definition\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-709\n---\n# Define Unordered as a Type Value under Scope Unit\n\nthe Scope Unit Type value Unordered **means** the value whose bearer does **not** participate **in** a Local Order among sibling Scope Units.\n"
+      },
+      "effective_successor": {
+        "atom_id": "CAPRMEDIO-META-REQU-713",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-CORE-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+        "version": 13,
+        "claim_body": "\n# Define Unordered as a Type Value under Scope Unit\n\nthe Scope Unit Type value Unordered **means** the value whose bearer does **not** participate **in** a Local Order among sibling Scope Units.\n"
+      },
+      "retirement_reason": "Root resolved the legacy Feature binding to Unordered Scope Unit using META713, META715 and R972, not a freely chosen navigation Label. META715 defines Local Order as the position of an Ordered Scope Unit, so an Unordered bearer cannot have that position without violating META713. No extra Carrier-field absence requirement occurs in720. Preserve exact720 bytes in Archive and retain713's complete body."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-789",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-REQUIREMENT--permit-mixed-child-composition.md",
+      "before_version": 7,
+      "before_sha256": "4ff6594620531d5395b1caab6a39c28de975ed266e6cb086accbe23ec930dba9",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-789\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\ncce_version: cce_1\ncce_form: permission\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-960\n---\n# Permit mixed Child Composition\n\na Scope Unit **may** own (Layer **and** Feature) direct children **when** its Child Composition is MIXED.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-CORE-REQUIREMENT--permit-mixed-child-composition.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-789\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\ncce_version: cce_1\ncce_form: permission\nversion: 8\nupdated_at: \"2026-09-10 05:08:55 +0400\"\nrelations: {}\n---\n# Permit mixed Child Composition\n\na Scope Unit **may** own (Ordered Scope Units **and** Unordered Scope Units) as direct children **when** its Child Composition is MIXED.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-REQUIREMENT--permit-mixed-child-composition@7.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-960\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "The proposed tier placement introduces this invalid normative parent. Resulting child Core, parent Core: R829 makes Current-scope Requirements peers at one Local Tier. R879 defines child_of as normative ordering; no replacement parent."
+        },
+        {
+          "before": "  child_of:\n",
+          "after": "",
+          "count": 1,
+          "boundary": "empty child_of list"
+        },
+        {
+          "before": "relations:\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "empty relations mapping"
+        },
+        {
+          "before": "a Scope Unit **may** own (Layer **and** Feature) direct children **when** its Child Composition is MIXED.",
+          "after": "a Scope Unit **may** own (Ordered Scope Units **and** Unordered Scope Units) as direct children **when** its Child Composition is MIXED.",
+          "count": 1,
+          "reason": "Root-approved semantic binding: structural Types, not freely chosen Layer/Feature Labels; permission strength and MIXED value preserved.",
+          "boundary": "Claim: approved Label-to-Type binding repair"
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "a Scope Unit **may** own (Layer **and** Feature) direct children **when** its Child Composition is MIXED.",
+          "after": "a Scope Unit **may** own (Ordered Scope Units **and** Unordered Scope Units) as direct children **when** its Child Composition is MIXED.",
+          "count": 1,
+          "reason": "Root-approved semantic binding: structural Types, not freely chosen Layer/Feature Labels; permission strength and MIXED value preserved."
+        }
+      ],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-09-dispositions.json#CAPRMEDIO-META-REQU-789",
+      "claim_change": "Root-approved semantic binding: structural Types, not freely chosen Layer/Feature Labels; permission strength and MIXED value preserved."
+    }
+  ],
+  "additions": [],
+  "notes": "No source folder migration, invented parent, global coordinate uniqueness, inverse editable truth source, enum-label redesign or Journal conformance claim."
+}

@@ -1,0 +1,33 @@
+{
+  "task": "CA-P-958",
+  "purpose": "Exact external reference-only repair for Local GOV333 tier rename; body unchanged",
+  "timestamp": "2026-09-10 08:00:12 +0400",
+  "records": [
+    {
+      "atom_id": "CAPRMEDIO-METHODOLOGY-REQU-508",
+      "path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/04_requirement/CAPRMEDIO-METHODOLOGY-REQU-508-FRAMEWORK_METHODOLOGY-CORE-REQUIREMENT--route-natural-language-through-the-session-engine.md",
+      "archive_path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/04_requirement/archive/CAPRMEDIO-METHODOLOGY-REQU-508-FRAMEWORK_METHODOLOGY-CORE-REQUIREMENT--route-natural-language-through-the-session-engine@5.md",
+      "before_version": 5,
+      "after_version": 6,
+      "before_sha256": "812760c7d0f650f6c2d819eafda1428055790b65143d86620cf41c1802ce6816",
+      "after_sha256": "ff1527f00dc0b5e6ca4c8593562c57d602360d8fea9d92aa7d905f1db265960c",
+      "replaced_target": "CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree",
+      "canonical_target": "CAPRMEDIO-GOV-REQU-333",
+      "before_diagnostics": [],
+      "after_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-517",
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-517-SKILLS-REQUIREMENT--provide-a-deterministic-routing-engine.md",
+      "archive_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement/archive/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-517-SKILLS-REQUIREMENT--provide-a-deterministic-routing-engine@3.md",
+      "before_version": 3,
+      "after_version": 4,
+      "before_sha256": "2e8ac495853781f785f66dbed59929e817e35dcb7e07c774f4f47469083e7ad9",
+      "after_sha256": "d0778dbcf78c855aa4334b5f03dfdeb8cf9dfdcf6ea57d0f05b2e5fd29a27279",
+      "replaced_target": "CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree",
+      "canonical_target": "CAPRMEDIO-GOV-REQU-333",
+      "before_diagnostics": [],
+      "after_diagnostics": []
+    }
+  ]
+}

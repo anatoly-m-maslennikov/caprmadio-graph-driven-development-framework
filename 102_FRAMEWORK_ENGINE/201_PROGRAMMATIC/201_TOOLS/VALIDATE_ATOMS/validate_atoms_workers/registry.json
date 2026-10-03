@@ -1,0 +1,305 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed obligation inventory bound to exact source bytes. Adapter availability is resolved separately in code. This is implementation provenance, not independent methodology authority.",
+  "sources": {
+    "CA-D-276": {
+      "version": 15,
+      "sha256": "da9a3b11c123c9a4cf96838b2a03f19b613a750d02b2e62d9a02e402bf00c17f",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.common_encoding",
+        "property.admission",
+        "owner.resolution",
+        "model.domains",
+        "tier.resolution"
+      ]
+    },
+    "CA-D-269": {
+      "version": 12,
+      "sha256": "c929af9b0a28dc2bff8d0abfed880a742260c19a156e7bb4e82a5747d91c9b6c",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.subjects",
+        "subjects.resolution",
+        "subjects.migration"
+      ]
+    },
+    "CA-D-268": {
+      "version": 12,
+      "sha256": "b861498a4350d8eafd2a25bcc50987efe5dded879b752f2c10b61a308a9ae4b0",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.relations",
+        "relations.resolution"
+      ]
+    },
+    "CA-D-270": {
+      "version": 12,
+      "sha256": "8ee5e842a3830529fe66a0f71f3f7ce1131288f9e1f69a10691a531cdb3956e9",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.version",
+        "frontmatter.updated_at",
+        "frontmatter.updated_at_quoting"
+      ]
+    },
+    "CA-D-274": {
+      "version": 17,
+      "sha256": "1cf4c6154ce60cdbe4a94dfa35e6b3c774576993954134ad1c7da9ff0e158653",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.author",
+        "author.resolution"
+      ]
+    },
+    "CA-D-446": {
+      "version": 6,
+      "sha256": "fcbd2ca051caa3487c1085aa2082404198406de0e31ee8a3ac57cc51a7c88cac",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-446-CORE_META_MODEL-CORE-DELIVERY--give-every-non-draft-atom-revision-one-identifier.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.atom_id"
+      ]
+    },
+    "CA-D-478": {
+      "version": 5,
+      "sha256": "4ffa523b70d01da2985d93e5d051cb274df5ab1317d35056e623cc25aedf8663",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-478-CORE_META_MODEL-CORE-DELIVERY--store-every-atom-property-in-one-internal-location.md",
+      "required": true,
+      "obligations": [
+        "property.retired_fields",
+        "property.single_location"
+      ]
+    },
+    "CA-D-479": {
+      "version": 6,
+      "sha256": "d738b8e90e3cb7773c642e492feb986f00c71550455cfe7cc94a447b4284b9f2",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-479-CORE_META_MODEL-DELIVERY--use-stable-headings-for-atom-body-properties.md",
+      "required": true,
+      "obligations": [
+        "body.sections",
+        "body.additional_properties"
+      ]
+    },
+    "CA-D-480": {
+      "version": 4,
+      "sha256": "ab08a6ddf2ff075ff30386bb90107017a0cb542d0b7c3df2d05c2008170ef21b",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-480-CORE_META_MODEL-DELIVERY--keep-atom-addresses-consistent-with-carried-properties.md",
+      "required": true,
+      "obligations": [
+        "address.consistency"
+      ]
+    },
+    "CA-D-481": {
+      "version": 4,
+      "sha256": "2cbf78a2f7779dc0e773a3a982cbe21e08f0d8e38ea303f3e4f1648a89f1acf2",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-481-CORE_META_MODEL-DELIVERY--store-plan-decomposition-on-the-decomposing-plan.md",
+      "required": true,
+      "obligations": [
+        "plan.decomposition",
+        "plan.decomposition_resolution"
+      ]
+    },
+    "CA-D-482": {
+      "version": 7,
+      "sha256": "f4d53a9d486b3642c04c09253c67673a70fb37fb625807f47e50adebe05c1e8a",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-482-CORE_META_MODEL-DELIVERY--carry-the-resolved-claim-target-scope-unit.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.claim_target_scope_unit",
+        "target.resolution"
+      ]
+    },
+    "CA-D-483": {
+      "version": 5,
+      "sha256": "a4c7ee9a95c15efc5112d1956e9cd2daddd7838e1cd0dddbe657f26422e0edc2",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-483-CORE_META_MODEL-DELIVERY--carry-atom-revision-status-in-frontmatter.md",
+      "required": true,
+      "obligations": [
+        "frontmatter.status",
+        "status.resolution",
+        "status.placement"
+      ]
+    },
+    "CA-D-470": {
+      "version": 7,
+      "sha256": "b458276867cf49a3ad820ed3ce7f0ba163666bd7e7ddd77f4004c80321e3eda3",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-470-CORE_META_MODEL-DELIVERY--serialize-plan-file-sections.md",
+      "required": true,
+      "obligations": [
+        "plan.sections"
+      ]
+    },
+    "CA-D-471": {
+      "version": 5,
+      "sha256": "40892f6192bf6526ba69554cb345973503cdbb4961f1284caf1b329814e674ec",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-471-CORE_META_MODEL-DELIVERY--serialize-explicit-plan-blocking.md",
+      "required": true,
+      "obligations": [
+        "plan.blocking",
+        "plan.blocking_resolution"
+      ]
+    },
+    "CA-D-472": {
+      "version": 5,
+      "sha256": "b249e87abd68b2ddd11940e39ab48203c9e92056557e9a8e66b02ba6580e148f",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-472-CORE_META_MODEL-DELIVERY--serialize-explicit-plan-confidence-overrides.md",
+      "required": true,
+      "obligations": [
+        "plan.confidence_override",
+        "plan.override_selection"
+      ]
+    },
+    "CA-D-473": {
+      "version": 4,
+      "sha256": "e8a66d72c1f145376dae42f0307e37317ad6f50f7d953db5550c639bed086a11",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-473-CORE_META_MODEL-DELIVERY--serialize-explicit-plan-assignees.md",
+      "required": true,
+      "obligations": [
+        "plan.assignee",
+        "plan.assignee_resolution"
+      ]
+    },
+    "CA-D-386": {
+      "version": 8,
+      "sha256": "640baf0783b48b6508fbb168df54d21bb6d6c9cc5ced88d06e1d2c2479d54ed5",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-386-CORE_META_MODEL-DELIVERY--serialize-concern-priority.md",
+      "required": true,
+      "obligations": [
+        "concern.priority"
+      ]
+    },
+    "CA-D-305": {
+      "version": 10,
+      "sha256": "800869321898d98dde2ada4705450cd4a6c526c55af6505090c739c56392b759",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-305-CORE_META_MODEL-CORE-DELIVERY--carry-projected-atoms-without-new-identity.md",
+      "required": true,
+      "obligations": [
+        "projection.fidelity"
+      ]
+    },
+    "CA-D-447": {
+      "version": 8,
+      "sha256": "1f9a1088bf2f4e286215867ff7e716d8b97faedd1eafcb288979e05b0518b7ae",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-447-CORE_META_MODEL-DELIVERY--serialize-the-implementation-retry-limit-setting.md",
+      "required": true,
+      "obligations": [
+        "plan.retry_limit",
+        "plan.retry_domain"
+      ]
+    },
+    "CA-R-1283": {
+      "version": 13,
+      "sha256": "c051da31166b5caace04b3f341e966d7a85bab4f2e052cc5eb9201d110e3a66a",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1283-CORE_META_MODEL-CORE-REQUIREMENT--register-content-role-values.md",
+      "required": false,
+      "obligations": [
+        "domain.content_role"
+      ]
+    },
+    "CA-R-1231": {
+      "version": 14,
+      "sha256": "63ae0e976214856cf78111ce9e66fd379f4d856c262cf21b350fccb9c341e951",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1231-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-type-values-for-concern-atoms.md",
+      "required": false,
+      "obligations": [
+        "domain.type.concern"
+      ]
+    },
+    "CA-R-1232": {
+      "version": 14,
+      "sha256": "51b128bffbb1b9987d8fc45bb43694278ea7215dd23c935f07bb4f8df72305b0",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-type-values-for-analysis-atoms.md",
+      "required": false,
+      "obligations": [
+        "domain.type.analysis"
+      ]
+    },
+    "CA-R-1309": {
+      "version": 12,
+      "sha256": "4b47c171e8af7bf976f759e01191d3bc01f727b7e6ee82859f4a58f9bff0f514",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.requirement"
+      ]
+    },
+    "CA-R-1397": {
+      "version": 9,
+      "sha256": "52accf5188b4cfdf85ab673fe81ab797b7738db1320ac6c5e56d70d358fd762c",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1397-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-method-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.method"
+      ]
+    },
+    "CA-R-1398": {
+      "version": 9,
+      "sha256": "dc1dbb09dfb242f72e6f6df5a5bd212fadf674f29e5cfafcdccc130ae4db63b5",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1398-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-evaluation-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.evaluation"
+      ]
+    },
+    "CA-R-1399": {
+      "version": 9,
+      "sha256": "ec9ca7ed49e5873b43a03cfa5ff263f58983387c6b637bb6e00ef7666535c5c6",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1399-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-delivery-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.delivery"
+      ]
+    },
+    "CA-R-1539": {
+      "version": 4,
+      "sha256": "ba6276712b8deef4eca632fca79097427d045cd724931bd30197be7146acc491",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1539-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-plan-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.plan"
+      ]
+    },
+    "CA-R-1608": {
+      "version": 3,
+      "sha256": "5d2d7f27b439171b92153a81dcaaa4ce8499dde4e837e61902fe889fb24ca53e",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1608-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-concern-status-values.md",
+      "required": false,
+      "obligations": [
+        "domain.status.concern"
+      ]
+    },
+    "CA-R-1565": {
+      "version": 5,
+      "sha256": "4c087228a0a859505240e9dbe9f961c70ea6f0e42124f8cb1e20a2abedc3c2d1",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1565-CORE_META_MODEL-CORE-REQUIREMENT--admit-the-operations-atom-types.md",
+      "required": false,
+      "obligations": [
+        "domain.type.operations"
+      ]
+    },
+    "CA-R-1574": {
+      "version": 4,
+      "sha256": "e3a2d537057c541c4d7b4375ae0de39e176d689831fab03ebecf69adf6acc02e",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1574-CORE_META_MODEL-CORE-REQUIREMENT--define-the-common-plan-atom.md",
+      "required": false,
+      "obligations": [
+        "plan.model"
+      ]
+    },
+    "CA-R-155": {
+      "version": 30,
+      "sha256": "10d9430644c9540d4afd014ec301d58848d8883857ad7c1dc1e47e2118297f55",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-155-CORE_META_MODEL-CORE-REQUIREMENT--give-every-non-project-goal-atom-one-local-tier.md",
+      "required": false,
+      "obligations": [
+        "domain.local_tier"
+      ]
+    }
+  }
+}

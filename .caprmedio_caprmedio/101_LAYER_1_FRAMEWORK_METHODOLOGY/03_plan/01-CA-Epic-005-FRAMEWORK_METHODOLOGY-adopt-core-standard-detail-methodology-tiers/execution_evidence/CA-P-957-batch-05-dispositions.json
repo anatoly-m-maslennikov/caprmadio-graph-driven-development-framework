@@ -1,0 +1,1068 @@
+{
+  "schema": "ca-p-957-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "05",
+  "admitted_authority": [
+    "CA-R-1431@1",
+    "CA-M-272@1",
+    "CA-D-285@5",
+    "CA-M-273@1",
+    "CA-R-931@9"
+  ],
+  "scope": "21 representation-free shared policy Claims; independent complete-Claim review with two preserving realizations and a Core-preserving changed-contract countermodel per Atom. Countermodels are classification evidence, not approved new live policies.",
+  "records": [
+    {
+      "atom_id": "CA-R-1045",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the permitted semantic confidence percentages, not their serialization or the identity of a threshold.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An interactive selector permits exactly80,90,95,98,99 and resolves one effective value.",
+        "A noninteractive validator admits exactly the same integer set from an explicit or inherited source."
+      ],
+      "countermodel": "Replace98 with97 in the permitted set while retaining integer-percent threshold meaning, one effective threshold, source ownership and bounded confidence use. The admitted value contract changes, not those Core distinctions.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1045",
+      "filename_identity": "CA-R-1045",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1045-CORE_META_MODEL-CORE-REQUIREMENT--restrict-autonomous-confidence-threshold-values.md",
+      "source_version": 6,
+      "source_sha256": "aa5445e2aa6a95bdf51d706a3b8ff40540388e0770c2ceefad64011c875f3df5",
+      "governing_clause_normalized": "every Autonomous Confidence Threshold must equal one value in (80, 90, 95, 98, 99).",
+      "complete_body": "\n# Restrict Autonomous Confidence Threshold values\n\n**every** Autonomous Confidence Threshold **must** equal one value **in** (80, 90, 95, 98, 99).\n",
+      "governs_subjects": [
+        "Autonomous Confidence Threshold"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Autonomous Confidence Threshold"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1044"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1080",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the missing-Author fallback policy after the one-Author boundary is established.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An authoring form resolves an omitted Author to the admitting Operator before admission.",
+        "A read-time effective-property resolver derives that same admitting Operator without storing a duplicate override."
+      ],
+      "countermodel": "Require an explicit Author before admitting a Revision instead of supplying this fallback. Every admitted Revision still has one accountable Author; the default/admission contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1080",
+      "filename_identity": "CA-R-1080",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1080-CORE_META_MODEL-CORE-REQUIREMENT--default-atom-revision-author-to-the-operator.md",
+      "source_version": 7,
+      "source_sha256": "21875dff4607d15579a27c933e408e82586c9568adbe35c5de981ea988637a04",
+      "governing_clause_normalized": "if an Atom Revision has no explicit Author, then its effective Author must be the Operator who admits that Revision.",
+      "complete_body": "\n# Default Atom Revision Author to the Operator\n\n**if** an Atom Revision has no explicit Author, **then** its effective Author **must** be the Operator who admits that Revision.\n",
+      "governs_subjects": [
+        "Atom/Revision/Author"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Revision/Author"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1078"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1081",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the missing-Assignee fallback policy after Task and sole-assignee identity are established.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Task-authoring assistant selects one authorized AI Agent when no Assignee is explicit.",
+        "An execution dispatcher derives one authorized AI Agent as the omitted Task's effective Assignee."
+      ],
+      "countermodel": "Require an explicit Assignee, or use the authorized human Operator as the fallback, while retaining one effective Actor accountable for the same Task. Task identity and ownership remain intact but this default changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1081",
+      "filename_identity": "CA-R-1081",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1081-CORE_META_MODEL-CORE-REQUIREMENT--default-task-assignee-to-an-ai-agent.md",
+      "source_version": 6,
+      "source_sha256": "a7984300abe731de38c7ee6a94e9d74693486b8a608d80523c9bc4a8b2fac409",
+      "governing_clause_normalized": "if a Task Atom has no explicit Assignee, then its effective Assignee must be one AI Agent selected to execute that Task.",
+      "complete_body": "\n# Default Task Assignee to an AI Agent\n\n**if** a Task Atom has no explicit Assignee, **then** its effective Assignee **must** be one AI Agent selected to execute that Task.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Assignee"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Assignee"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1079"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1231",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the canonical source contribution to the Concern Type domain; it does not define Concern or the meanings of Question, Conflict and Problem.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An authoring validator checks Concern Type against the admitted three-value domain.",
+        "A graph-based qualified-domain resolver yields the same three canonical values for Concern Type."
+      ],
+      "countermodel": "Admit one separately defined compatible Concern subtype for a materially distinct concern disposition while preserving every existing Term definition, one Type slot/value and nonnormative Concern purpose. The reusable allowed-value contract changes; no existing Core meaning is redefined.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1231",
+      "filename_identity": "CA-R-1231",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1231-CORE_META_MODEL-CORE-REQUIREMENT--register-core-type-values-for-concern-atoms.md",
+      "source_version": 5,
+      "source_sha256": "208bf0959ac0251f87f6d173282bd21233cb2ed9ab8c6bbf0622c21bfb42a957",
+      "governing_clause_normalized": "the Core contribution to allowed values of Atom/Content Role: Concern/Type must be exactly (Question, Conflict, Problem).",
+      "complete_body": "\n# Register Core Type Values for Concern Atoms\n\nthe Core contribution to allowed values of `Atom/Content Role: Concern/Type` **must** be exactly (Question, Conflict, Problem).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Concern/Type"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Concern/Type"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1232",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the canonical source contribution to Analysis Type eligibility, independently of Analysis role identity and each Type definition.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An Analysis authoring selector offers exactly Analysis Report and Rationale.",
+        "A qualified-Type membership evaluator checks the same two-value source contribution."
+      ],
+      "countermodel": "Admit one separately defined compatible finding-oriented Analysis subtype while preserving nonnormative Analysis meaning, existing Report/Rationale definitions and one Type slot/value. This changes the admissible set, not the role or ownership boundary.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1232",
+      "filename_identity": "CA-R-1232",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-CORE_META_MODEL-CORE-REQUIREMENT--register-core-type-values-for-analysis-atoms.md",
+      "source_version": 5,
+      "source_sha256": "8cb28232287f0f7f561bbf500aec3e34a9150c8e44c18828c7560e69e7107da6",
+      "governing_clause_normalized": "the Core contribution to allowed values of Atom/Content Role: Analysis/Type must be exactly (Analysis Report, Rationale).",
+      "complete_body": "\n# Register Core Type Values for Analysis Atoms\n\nthe Core contribution to allowed values of `Atom/Content Role: Analysis/Type` **must** be exactly (Analysis Report, Rationale).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Analysis/Type"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Analysis/Type"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1301",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Sets the direct Epic membership policy over already-defined planning entities.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A directory-containment validator accepts only nested Epics and Plan/Task member Carriers.",
+        "A structured containment graph validator accepts exactly the same member kinds."
+      ],
+      "countermodel": "Restrict direct Epic membership to Plan/Task Atoms, excluding nested Epics. Each Epic still organizes Plan work, member identity remains independent and containment remains acyclic; the reusable membership contract is stricter.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1301",
+      "filename_identity": "CA-R-1301",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1301-CORE_META_MODEL-CORE-REQUIREMENT--limit-epic-members-to-epics-and-tasks.md",
+      "source_version": 7,
+      "source_sha256": "adfeefb4a025c5635a9fc89e1e8e5fef1bb664945cceda41eebf39b228c4d7aa",
+      "governing_clause_normalized": "the direct members of an Epic must be only Epics or Atoms with Content Role Plan and Type Task.",
+      "complete_body": "\n# Limit Epic Members to Epics and Tasks\n\nthe direct members of an Epic **must** be **only** Epics **or** Atoms with Content Role Plan **and** Type Task.\n",
+      "governs_subjects": [
+        "Atom Collection/Type: Epic/Direct Membership"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type: Epic/Direct Membership"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1309",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Sets the allowed Requirement Status domain; Status identity and required-outcome authority are defined separately.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Requirement authoring form validates the three Status values.",
+        "A type-qualified lifecycle validator resolves the same three-value domain from source authority."
+      ],
+      "countermodel": "Add a separately admitted inactive Suspended status with exact current-state meaning, preserving one current Status, history/currentness separation and Requirement Content Role. The allowed lifecycle states change without changing those Core boundaries.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1309",
+      "filename_identity": "CA-R-1309",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1309-CORE_META_MODEL-CORE-REQUIREMENT--register-core-requirement-status-values.md",
+      "source_version": 5,
+      "source_sha256": "c4c69453cc69d19fe48d4c407483179529d60c3792199e151ead83402a96f83d",
+      "governing_clause_normalized": "the Core allowed values of Requirement Status must be exactly (Draft, Active, Archived).",
+      "complete_body": "\n# Register Core Requirement Status Values\n\nthe Core allowed values of Requirement Status **must** be exactly (Draft, Active, Archived).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Requirement/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Requirement/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1310",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Sets the Task-specific allowed Status domain rather than defining Task identity or completion/cancellation meanings.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Task lifecycle form permits the five registered states.",
+        "A type-qualified state validator enforces the same five-value set independently of Carrier placement."
+      ],
+      "countermodel": "Add a separately defined Paused state for still-unfinished work, retaining one current Status and the existing Done, Cancelled and Archived meanings. This changes the admitted lifecycle contract without making an uncompleted Task Done.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1310",
+      "filename_identity": "CA-R-1310",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1310-CORE_META_MODEL-CORE-REQUIREMENT--register-core-task-status-values.md",
+      "source_version": 6,
+      "source_sha256": "3466dcfd6399697e6b69180dac609a91ce432b6798a32c8cd5dbd7c2648e3287",
+      "governing_clause_normalized": "the Core Task Status values must be exactly (Draft, Active, Done, Cancelled, Archived).",
+      "complete_body": "\n# Register Core Task Status Values\n\nthe Core Task Status values **must** be exactly (Draft, Active, Done, Cancelled, Archived).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1350",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies which applicable qualified Type domain wins; this is a shared domain-resolution policy over one Type property.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A resolver selects the most-specific qualified domain through semantic ancestry.",
+        "An authoring validator precomputes specificity and uses the same selected domain."
+      ],
+      "countermodel": "Use an explicitly declared domain-precedence policy instead of automatic specificity, while still selecting one applicable admitted Type domain and keeping one Type property/value and all Term meanings. The resolution contract changes without creating a second Type slot.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1350",
+      "filename_identity": "CA-R-1350",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1350-CORE_META_MODEL-CORE-REQUIREMENT--resolve-the-most-specific-type-domain.md",
+      "source_version": 2,
+      "source_sha256": "e1b1795bc7d4313245214b708092a01d18c8434dcf6033a854d803208c7ef416",
+      "governing_clause_normalized": "the most-specific applicable qualified Type Subject must determine the allowed-value set of the Entity occurrence's Type Property.",
+      "complete_body": "\n# Resolve the Most-Specific Type Domain\n\nthe most-specific applicable qualified Type Subject **must** determine the allowed-value set of the Entity occurrence's Type Property.\n",
+      "governs_subjects": [
+        "Entity/Type"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Entity/Type"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1366",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies Epic Status eligibility independently of Epic's planning and structural identity.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A planning UI offers exactly Draft, Active, Done, Cancelled and Archived.",
+        "A containment/lifecycle validator checks the same Epic-qualified status set."
+      ],
+      "countermodel": "Admit a separately defined Paused Epic status while preserving its member-independent identity, one current Status and existing completion/archival meanings. The lifecycle option set changes, not those identities.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1366",
+      "filename_identity": "CA-R-1366",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1366-CORE_META_MODEL-CORE-REQUIREMENT--register-core-epic-status-values.md",
+      "source_version": 5,
+      "source_sha256": "27db95a9d000aaad0b2aa4d49b157e8990e7c38b1996cc9b44413c401da9a2fe",
+      "governing_clause_normalized": "the Core allowed values of Epic Status must be exactly (Draft, Active, Done, Cancelled, Archived).",
+      "complete_body": "\n# Register Core Epic Status Values\n\nthe Core allowed values of Epic Status **must** be exactly (Draft, Active, Done, Cancelled, Archived).\n",
+      "governs_subjects": [
+        "Atom Collection/Type: Epic/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type: Epic/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1367",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Limits how many independently defined Objective Atoms may target one Epic; the number is a semantic cardinality policy.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An Objective-authoring validator counts other active Objectives with the exact Epic target.",
+        "A graph uniqueness constraint permits zero or one incoming Objective target connection for an Epic."
+      ],
+      "countermodel": "Permit two compatible independently governed Objective outcomes for an Epic. Each Objective still has one Claim and exactly one Epic target, with its own identity and owner; only the per-Epic admission bound changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1367",
+      "filename_identity": "CA-R-1367",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1367-CORE_META_MODEL-CORE-REQUIREMENT--limit-each-epic-to-one-objective.md",
+      "source_version": 3,
+      "source_sha256": "b77258f24789ba180566d119a390c1c5a15f7ae0d27c7702e8e9f13b24ebd3c9",
+      "governing_clause_normalized": "every Epic must be the Claim Scope of <=1 Objective Atom.",
+      "complete_body": "\n# Limit Each Epic to One Objective\n\n**every** Epic **must** be the Claim Scope of **`<=1`** Objective Atom.\n",
+      "governs_subjects": [
+        "Atom Collection/Type: Epic/Objective"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type: Epic/Objective"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1370",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Limits direct Epic membership count for one Task independently of Task identity and Claim Scope.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A containment validator counts direct Epic containers for each Task.",
+        "An authoring admission service rejects a second direct Epic membership for the same Task."
+      ],
+      "countermodel": "Permit the same Task to be referenced as a direct member of two noncyclic planning collections while retaining one Task identity, Claim, owner and Claim Scope. Suitable Carrier authority can represent the shared membership; the reusable cardinality contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1370",
+      "filename_identity": "CA-R-1370",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1370-CORE_META_MODEL-CORE-REQUIREMENT--limit-each-task-to-one-direct-epic.md",
+      "source_version": 4,
+      "source_sha256": "27bdcfb1536d33f82c56e290086ad38f9c64c85e07d38a2e9d726f8185c7266d",
+      "governing_clause_normalized": "every Atom with Content Role Plan and Type Task must be a direct member of <=1 Epic.",
+      "complete_body": "\n# Limit Each Task to One Direct Epic\n\n**every** Atom with Content Role Plan **and** Type Task **must** be a direct member of **`<=1`** Epic.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Epic Membership"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Epic Membership"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1380",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the canonical Atom Collection Type contribution, not Structural Entity or Collection identity.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An Atom Collection authoring form offers Epic and Ad Hoc.",
+        "A qualified-domain validator derives the same two-value canonical contribution."
+      ],
+      "countermodel": "Admit a separately defined compatible collection subtype with a materially distinct membership rule, while preserving no new Scope boundary, member-independent identity, and existing Epic/Ad Hoc meanings. The allowed-value contribution changes independently of those Core distinctions.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1380",
+      "filename_identity": "CA-R-1380",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1380-CORE_META_MODEL-CORE-REQUIREMENT--register-core-atom-collection-type-values.md",
+      "source_version": 2,
+      "source_sha256": "6ae47c231b575a0944e27c4663b929af81251430f8a7ac78c236efddfc135eba",
+      "governing_clause_normalized": "the Core contribution to allowed values of Atom Collection/Type must be exactly (Epic, Ad Hoc).",
+      "complete_body": "\n# Register Core Atom Collection Type Values\n\nthe Core contribution to allowed values of `Atom Collection/Type` **must** be exactly (Epic, Ad Hoc).\n",
+      "governs_subjects": [
+        "Atom Collection/Type"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1382",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Selects the default navigation Label for an already Ordered Scope Unit.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A navigation renderer emits Layer when no explicit label is selected.",
+        "An effective-property resolver supplies Layer as the Ordered Unit's missing Label."
+      ],
+      "countermodel": "Default Ordered Units to another Operator-approved navigation Label such as Group. The same Unit remains Ordered with the same parentage and authority; only its default label contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1382",
+      "filename_identity": "CA-R-1382",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1382-CORE_META_MODEL-CORE-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+      "source_version": 2,
+      "source_sha256": "2f8f60c18e10838ca1af72b94cecac77a968366b0a7f23bdb637064809de63c6",
+      "governing_clause_normalized": "every Ordered Scope Unit must use Layer as its default Label.",
+      "complete_body": "\n# Default Ordered Scope Unit Label to Layer\n\n**every** Ordered Scope Unit **must** use Layer as its default Label.\n",
+      "governs_subjects": [
+        "Scope Unit/Label"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Scope Unit/Label"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1383",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Permits nested Atom Collections without itself defining a Carrier nesting mechanism.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A graph authoring validator permits one Atom Collection to contain another without a cycle.",
+        "A containment admission service accepts nested collection records and derives their membership."
+      ],
+      "countermodel": "Require flat Atom Collections that directly group only Atoms. Collections remain Structural Entities without Scope boundaries, and Scope Unit recursion is unchanged; this nesting permission changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1383",
+      "filename_identity": "CA-R-1383",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1383-CORE_META_MODEL-CORE-REQUIREMENT--permit-nested-atom-collections.md",
+      "source_version": 3,
+      "source_sha256": "c2e48aa3d858bf79bfa66ba5a807d7a03016cea958f8514363c2db04cded3460",
+      "governing_clause_normalized": "an Atom Collection may directly contain another Atom Collection.",
+      "complete_body": "\n# Permit Nested Atom Collections\n\nan Atom Collection **may** directly contain another Atom Collection.\n",
+      "governs_subjects": [
+        "Atom Collection/Direct Containment"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Direct Containment"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1397",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the Method-qualified Status value set independently of reusable-Method identity.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Method authoring workflow admits exactly Draft, Active and Archived states.",
+        "A qualified lifecycle validator checks the same three-value Method domain."
+      ],
+      "countermodel": "Add a separately admitted inactive Suspended Method status while retaining one current Status, preserved history and the Method's reusable-way meaning. Only the lifecycle-domain contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1397",
+      "filename_identity": "CA-R-1397",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1397-CORE_META_MODEL-CORE-REQUIREMENT--register-core-method-status-values.md",
+      "source_version": 2,
+      "source_sha256": "d61a1d32fe703cbe93fcade46d0ff70cc190ec67c4b331ed53d1cf9d989846cc",
+      "governing_clause_normalized": "the Core allowed values of Method Status must be exactly (Draft, Active, Archived).",
+      "complete_body": "\n# Register Core Method Status Values\n\nthe Core allowed values of Method Status **must** be exactly (Draft, Active, Archived).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Method/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Method/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1398",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the Evaluation-qualified Status value set independently of falsifiable-check identity.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "An Evaluation editor validates the three permitted states before admission.",
+        "A qualified state validator derives and checks the same Evaluation domain."
+      ],
+      "countermodel": "Add a separately admitted inactive Suspended Evaluation status without changing the check's criterion, identity, one current Status or historical meaning. This changes the allowed lifecycle domain.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1398",
+      "filename_identity": "CA-R-1398",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1398-CORE_META_MODEL-CORE-REQUIREMENT--register-core-evaluation-status-values.md",
+      "source_version": 2,
+      "source_sha256": "2cd985e9e2eee30cb60e4aa06aaf667cf7b8fdb72d9b24e73680360797eab3a8",
+      "governing_clause_normalized": "the Core allowed values of Evaluation Status must be exactly (Draft, Active, Archived).",
+      "complete_body": "\n# Register Core Evaluation Status Values\n\nthe Core allowed values of Evaluation Status **must** be exactly (Draft, Active, Archived).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Evaluation/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Evaluation/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1399",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the Delivery-qualified Status value set independently of Carrier-governing Content Role.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Delivery authoring interface permits exactly Draft, Active and Archived.",
+        "A qualified state validator checks the same three-value Delivery domain."
+      ],
+      "countermodel": "Add a separately admitted inactive Suspended Delivery status while preserving one current Status, exact Carrier-governing Claim and history/currentness distinction. The permitted states change, not Delivery identity.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1399",
+      "filename_identity": "CA-R-1399",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1399-CORE_META_MODEL-CORE-REQUIREMENT--register-core-delivery-status-values.md",
+      "source_version": 2,
+      "source_sha256": "1224505e572eed4ff98861c6ec8498d725da8f2a0018cc97742d2fc833e13d10",
+      "governing_clause_normalized": "the Core allowed values of Delivery Status must be exactly (Draft, Active, Archived).",
+      "complete_body": "\n# Register Core Delivery Status Values\n\nthe Core allowed values of Delivery Status **must** be exactly (Draft, Active, Archived).\n",
+      "governs_subjects": [
+        "Atom/Content Role: Delivery/Status"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Delivery/Status"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-1430",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies default-plus-target-override selection of semantic authority modes through their Settings owner; it chooses no concrete serialization or realization.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A Settings resolver combines one default with explicitly selected per-Scope overrides.",
+        "A Settings authoring form stores selections and an effective-view evaluator resolves the same default/override contract."
+      ],
+      "countermodel": "Require an explicit mode selection for every affected target instead of supplying default inheritance, retaining the same Settings owner, strict/casual meanings and unchanged authority of active Atoms. This changes the shared selection contract, not Core authority.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1430",
+      "filename_identity": "CA-R-1430",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1430-CORE_META_MODEL-REQUIREMENT--select-authority-modes-through-framework-instance-settings.md",
+      "source_version": 1,
+      "source_sha256": "1b357c4a7cc6c37641d417ef0a5a69376d140b06c2969f1c6f2fc6cc508e67bf",
+      "governing_clause_normalized": "the Authority Mode for a Project or Scope Unit must be selected through Framework Instance Settings using a default and optional explicit target-specific overrides; the permitted values are strict and casual, and neither changes the authority of active Atoms.",
+      "complete_body": "\n# Select Authority Modes through Framework Instance Settings\n\nthe Authority Mode for a Project **or** Scope Unit **must** be selected through Framework Instance Settings using a default **and** optional explicit target-specific overrides; the permitted values are `strict` **and** `casual`, **and** neither changes the authority of active Atoms.\n",
+      "governs_subjects": [
+        "Framework Instance Settings/Authority Modes"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Framework Instance Settings/Authority Modes"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Standard",
+      "old_structural_rank": "2d+2",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1402"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-980",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies the default navigation Label for an already Unordered Scope Unit.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A navigation renderer emits Feature for an Unordered Unit with no override.",
+        "An effective-property resolver supplies Feature as the missing Label."
+      ],
+      "countermodel": "Default Unordered Units to an Operator-approved Label such as Group. The same Unit remains Unordered with unchanged ownership and authority; the default label contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-980",
+      "filename_identity": "CA-R-980",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-CORE-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+      "source_version": 8,
+      "source_sha256": "dbd4660acf1c0a6253c1a89d27fdac8113dbb988ffde7d55c9cdf6a393dddc06",
+      "governing_clause_normalized": "every Unordered Scope Unit must use Feature as its default Label.",
+      "complete_body": "\n# Default Unordered Scope Unit Label to Feature\n\n**every** Unordered Scope Unit **must** use Feature as its default Label.\n",
+      "governs_subjects": [
+        "Scope Unit/Label"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Scope Unit/Label"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-972"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    },
+    {
+      "atom_id": "CA-R-990",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Permits a Task to exist outside an Epic independently of its intended-result identity.",
+      "concrete_choice_test": "False: the complete Claim specifies an allowed semantic domain, default, permission, cardinality or resolution contract without choosing a Carrier format, syntax, algorithm or test specimen.",
+      "foundation_test": "False: the changed-contract countermodel preserves existing identity, owner, role, separation and conservation boundaries. This Claim adds an independently governable shared policy over those foundations.",
+      "preserving_realizations": [
+        "A top-level Plan authoring workflow admits a standalone Task.",
+        "A planning graph validator admits a Task with zero direct Epic containers."
+      ],
+      "countermodel": "Require every admitted Task to be placed in one Epic. The Task still has one intended result, owner, Claim Scope and completion condition; its optional-containment admission contract changes.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "05",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-990",
+      "filename_identity": "CA-R-990",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-990-CORE_META_MODEL-CORE-REQUIREMENT--permit-standalone-task-atoms.md",
+      "source_version": 9,
+      "source_sha256": "0e1f2e9cc1a35fdbbdfbc61b1a58d482e08058eca21080f7cd62598b18cf6349",
+      "governing_clause_normalized": "a Task Atom may exist without a containing Epic.",
+      "complete_body": "\n# Permit standalone Task Atoms\n\na Task Atom **may** exist **without** a containing Epic.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Epic Membership"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Epic Membership"
+        ],
+        "constraints": "Every explicit contextual boundary in the complete Claim is retained. 'Core contribution' in allowed-value registries describes the canonical source contribution, not an automatic Core Local Tier."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-989"
+        ]
+      },
+      "relation_impacts": "Complete active-frontier Requirement endpoint review finds no new same-tier or upward-to-less-abstract Requirement parent from this disjoint checkpoint. Existing declared relations and Claim body remain unchanged. Canonical proposed-byte endpoint diagnostics are checked separately; neither check assumes unequal Atom Scope from different Subject spellings.",
+      "disposition": "revise metadata and encode GENERAL Local Tier; preserve complete body and all direct relations"
+    }
+  ]
+}

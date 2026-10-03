@@ -1,0 +1,146 @@
+{
+  "schema": "ca-p-957-batch-audit/v1",
+  "non_authoritative": true,
+  "batch": "19",
+  "frozen_plan": "CA-P-957-batch-19-planned-source-delta.json",
+  "frozen_plan_sha256": "0fb091b5230dd2e1ee5c5cee2b4095926718ff82cbf971f21db315308b57e2f6",
+  "exact_preflight": "PASS;31 new origins,2 previously admitted Core pointer-only followups,2 Local reference-only revisions;16 exact revisions and19 unchanged records.",
+  "canonical_preflight": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "candidates": 16,
+    "checked": 21,
+    "existing_diagnostic_count": 9,
+    "new_candidate_diagnostics": 0,
+    "new_inbound_diagnostics": 0,
+    "records": [
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-302",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-310",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "relates_to",
+              "target": "CAPRMEDIO-GOV-REQU-309--use-direct-typed-relation-change-set-commit-messages"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-312",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-322",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-314",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-562",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-522--append-work-journal-events"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-523--reconcile-work-journal-coverage"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "binding_repairs": [
+    "GOV290 old DSET referent confirmed by README history; current CAPRMEDIO name and applicable Project authority Carrier roots replace only stale names. Full secret/identifier/incident policy and permission strengths remain. No secret files read.",
+    "GOV302 Concern-only priority qualifier follows GOV299; no settings selection or admission-threshold change.",
+    "GOV305 current activation belongs to Framework Instance Settings under R1402; inactive default and unknown-Type rejection preserved, actual prerequisite owner corrected.",
+    "GOV310 Atomic Artifact resolves to Atom under live R655/R918 and the already accepted R1053 domain allocation.",
+    "GOV340 Core promotion removes only the new same-tier Current Requirement parent to META158. Inactive R1054 parent references are removed only on independently revised origins; unchanged legacy relationships are preserved.",
+    "Core R1038/GOV322 and Local E006/GOV314 replace exact full basenames with unique stable IDs. All complete bodies and relation kinds are preserved; no Local tier classification.",
+    "Root's five Project pointer-only revisions are separately mapped in CA-P-957-external-project-reference-repairs-batch19.json."
+  ],
+  "limits": [
+    "Existing unknown relates_to and unresolved contextual/legacy targets remain explicitly separate from new tier/reference defects.",
+    "No formal replacement edges, Journal execution/events, Git history claims, production Tool/runtime changes or source-folder migration.",
+    "Countermodels are classification evidence only. Cached-copy witnesses require non-authoritative, non-independently-editable exact-source copies with retained refresh/inheritance behavior."
+  ]
+}

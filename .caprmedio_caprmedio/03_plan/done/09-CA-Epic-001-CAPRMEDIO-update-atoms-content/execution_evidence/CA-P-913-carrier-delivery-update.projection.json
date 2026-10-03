@@ -1,0 +1,38 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-913",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "frontier_amendment_sha256": "4d8104c26a4383050aeff2e993c3119996083e459e8fa8678ae15945c95c3aca",
+  "reconciliation_amendment_sha256": "a4186b137a89f72f69ae58b32536baeb13e338261d088aad20cfbe1906c187ed",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T23:35:00+04:00",
+  "delivery_authority": {
+    "atom_id_range": "CA-D-253..CA-D-343",
+    "active_atom_count": 91,
+    "frontier_sha256": "3a7634af6e8eb88e9b8dd3dbafe02994ba22a5906a9167abb16542c536e6b904",
+    "frontier_digest_basis": "sha256 of ascending atom_id, tab, carrier sha256, newline records",
+    "core_meta_model_atoms": "CA-D-253..CA-D-316, CA-D-329..CA-D-331, CA-D-333..CA-D-336, CA-D-338..CA-D-342",
+    "local_configuration_atoms": "CA-D-317..CA-D-328, CA-D-332, CA-D-337, CA-D-343"
+  },
+  "outcomes": [
+    "Carrier is a Base Entity governed by Delivery and is no longer modeled as Artifact/Carrier or another bearer-dependent Property.",
+    "CARRIES and IS_CARRIED_BY explicitly relate Carrier and exact Artifact Revision in opposite directions.",
+    "File Carrier, Directory Carrier, and Native Entity Carrier keep Carrier kind separate from Format, extension, and identity.",
+    "Every represented Folder is a Directory Carrier for one Relational Artifact; direct and recursive containment derive only from canonical nesting.",
+    "CONTAINS and IS_CONTAINED_BY are never persisted as independent relation declarations.",
+    "Frontmatter, main content, filenames, directories, status placement, Journal serialization, projected files, and materialization rules are Delivery authority.",
+    "Applicable Methodology uses projected RMEDO Atom File Carriers with exact source revision identity and repository-relative source Carrier paths; no monolithic JSON methodology or persistent Subject Index Carrier is permitted.",
+    "Concrete CAPRMEDIO roots and Project directories now live in Local Configuration Delivery authority."
+  ],
+  "legacy_reconciliation": {
+    "active_carrier_specific_revisions_archived": 103,
+    "carrier_content_removed_from_retained_semantic_atoms": 13,
+    "direct_non_delivery_governed_carrier_subjects": 0,
+    "persisted_contains_or_is_contained_by_fields": 0
+  },
+  "validation": {
+    "active_yaml_errors": 0,
+    "duplicate_active_atom_ids": 0,
+    "git_diff_check": "pass"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "caprmedio.ca_p_111.final_methodology_cutover.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-111",
+  "task_revision": 7,
+  "recorded_at": "2026-09-03T19:44:33+04:00",
+  "prerequisites": {
+    "CA-P-113": {
+      "status": "DONE",
+      "task_sha256": "ca86cdafc9bef6fab607904292d727676830b12c3697c624d7b82f9fae2e8f10",
+      "evidence_sha256": "e73acab293a057dc0084fa030029e9e8452abead013c7bc989701eb838a89156"
+    },
+    "CA-P-114": {
+      "status": "DONE",
+      "task_sha256": "3148572e778f6485b6de170c397f1ac47e16a0a2d8750e2cb48b013f46375eff",
+      "evidence_sha256": "2561eba1541a593e49887fcbfa5f11079600595b186d9bcfce35e367d449831d"
+    }
+  },
+  "ownership_roots": {
+    "framework_authority": ".caprmedio_framework",
+    "project_governed_carriers": ".caprmedio_caprmedio",
+    "durable_engine_installation": ".caprmedio_install",
+    "ephemeral_runtime_state": ".caprmedio_runtime",
+    "bootstrap_history": ".caprmedio_bseed"
+  },
+  "approved_redundant_engine_branch_migration": {
+    "source": ".caprmedio_caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE",
+    "carrier_count": 18,
+    "git_index_result": "18 byte-preserving renames at 100 percent similarity",
+    "targets": {
+      "CA-R-1184": "102_LAYER_2_FRAMEWORK_ENGINE/04_requirement",
+      "CA-R-1185": "102_LAYER_2_FRAMEWORK_ENGINE/04_requirement",
+      "CA-R-1186": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement",
+      "CA-R-1187": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/04_requirement",
+      "CA-R-1188": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP/04_requirement",
+      "CA-R-1189": "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement"
+    },
+    "archive_layout": "each archived revision preserves the matching relative canonical target",
+    "remaining_governed_carriers_at_source": 0
+  },
+  "retired_roots": {
+    "roots_with_zero_governed_carriers": [
+      ".caprmedio",
+      "001_FRAMEWORK_METHODOLOGY",
+      "002_FRAMEWORK_ENGINE",
+      "003_OPERATOR_DOCUMENTATION",
+      "004_CORE_EXTENSIONS",
+      "005_RELEASES",
+      "010_COMMUNITY_EXTENSIONS",
+      "010_FIELD",
+      ".caprmedio_caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE"
+    ],
+    "finder_metadata": "ignored",
+    "macos_empty_directory_residue": "CA-P-114 records 672 non-governed, host-only shells"
+  },
+  "root_delivery_topology": [
+    "101_FRAMEWORK_METHODOLOGY",
+    "102_FRAMEWORK_ENGINE",
+    "103_OPERATOR_DOCUMENTATION",
+    "104_CORE_EXTENSIONS",
+    "105_RELEASES",
+    "110_COMMUNITY_EXTENSIONS",
+    "110_FIELD"
+  ],
+  "project_scope_unit_graph": {
+    "scope_unit_count": 13,
+    "canonical_node_ids_only": true,
+    "source_atom_count": 664,
+    "repeat_output_digest_stable": true
+  },
+  "applicable_methodology": {
+    "structural_source_scope_units": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "eligible_active_atom_count": 664,
+    "selected_active_atom_count": 664,
+    "source_frontier_digest": "dc9e4f7eac620b3b30a7450218d6b6e6ff9aa6f56cf9a2e162743abca53fd981",
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "compiler_dry_run_repeat_stable": true,
+    "compiler_apply": "PASS",
+    "retrieval_complete": true,
+    "persistent_subject_index_created": false
+  },
+  "current_consumer_coordinates": {
+    "atom_read_source_and_installed": ".caprmedio_caprmedio",
+    "runtime_or_validator_resolves_legacy_project_coordinate": false,
+    "legacy_source_map_string": "historical inert metadata only; no current Engine consumer dereferences it"
+  },
+  "validation": {
+    "tool_suite_after_approved_carrier_migration": "53 passed, 0 failed in 438.854 seconds",
+    "post_migration_compiler_graph_and_retrieval": "PASS",
+    "git_index_rename_validation": "PASS",
+    "definition_of_done": "PASS"
+  },
+  "closure": {
+    "task_status": "DONE",
+    "epic_status": "DONE",
+    "condition": "all 14 direct CA-P-101 Tasks have Done placement and the final active authority frontier is reproducible",
+    "epic_carrier_move": {
+      "source": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "target": ".caprmedio_caprmedio/03_plan/done/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "governed_carriers_moved": 105,
+      "source_governed_carriers_after_move": 0,
+      "source_directory_residue": "empty, non-governed host shell after macOS denied directory rename"
+    }
+  }
+}

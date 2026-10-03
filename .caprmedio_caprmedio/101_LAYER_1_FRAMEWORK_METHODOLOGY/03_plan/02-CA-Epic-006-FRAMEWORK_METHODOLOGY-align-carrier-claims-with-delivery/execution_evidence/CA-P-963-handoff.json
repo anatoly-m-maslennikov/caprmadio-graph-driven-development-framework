@@ -1,0 +1,118 @@
+{
+  "task": "CA-P-963@2",
+  "next_task": "CA-P-964",
+  "result": "PASS",
+  "counts": {
+    "local_dispositions": 16,
+    "new_local_delivery_owners": 11,
+    "revised_local_owners": 14,
+    "retired_local_predecessors": 2,
+    "reused_local_owners": 1,
+    "reused_core_owners": 1,
+    "current_changed_atoms": 25,
+    "exact_archives": 16,
+    "operations": 27,
+    "current_sources": 714,
+    "current_core_sources": 655,
+    "current_local_sources": 59
+  },
+  "retired_identity_successors": {
+    "CAPRMEDIO-GOV-REQU-323": [
+      "CA-D-397"
+    ],
+    "CAPRMEDIO-GOV-REQU-676": [
+      "CA-D-398"
+    ]
+  },
+  "new_delivery_owners": [
+    {
+      "identity": "CA-D-396",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-396-LOCAL_CONFIGURATION-DELIVERY--serialize-structured-production-log-records.md",
+      "version": 1,
+      "sha256": "cac3c9853b786692f8ad00e178453b9d4cc5e9b864a9d045d67838a18fc0d9db"
+    },
+    {
+      "identity": "CA-D-406",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+      "version": 1,
+      "sha256": "279d9841dde65cc1b19f42bd991fa9e6d240e933c5fe94d134625bca51476bb8"
+    },
+    {
+      "identity": "CA-D-397",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-397-LOCAL_CONFIGURATION-DELIVERY--register-caprmedio-type-prefixes.md",
+      "version": 1,
+      "sha256": "aff0f8ef39ba12676b8e433e66cc0e9443f4192b55b303563dd442e9512982a7"
+    },
+    {
+      "identity": "CA-D-398",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-398-LOCAL_CONFIGURATION-DELIVERY--encode-configuration-surfaces-in-owning-atoms.md",
+      "version": 1,
+      "sha256": "a04340f2d42462a34d89154953fb1837d274101a946f0625ac099caa07f79133"
+    },
+    {
+      "identity": "CA-D-399",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+      "version": 1,
+      "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e"
+    },
+    {
+      "identity": "CA-D-400",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-400-LOCAL_CONFIGURATION-DELIVERY--serialize-evaluation-type-tokens.md",
+      "version": 1,
+      "sha256": "e794c4e0968abdd8c05a9b765c699dc50d14f7384522aa560d80c2b7b5346c01"
+    },
+    {
+      "identity": "CA-D-402",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-402-LOCAL_CONFIGURATION-DELIVERY--serialize-delivery-type-tokens.md",
+      "version": 1,
+      "sha256": "60c1dd8e9fe233492fd00e363355f75abe1e4261f8a1a1fbf2485c0f6936111a"
+    },
+    {
+      "identity": "CA-D-404",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+      "version": 1,
+      "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d"
+    },
+    {
+      "identity": "CA-D-401",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-401-LOCAL_CONFIGURATION-DELIVERY--serialize-concern-type-tokens.md",
+      "version": 1,
+      "sha256": "912e165708ad7f102c7f857df9244ed69ed52e74b50279d5fb6e00e0794b244a"
+    },
+    {
+      "identity": "CA-D-403",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-403-LOCAL_CONFIGURATION-DELIVERY--serialize-operations-type-tokens.md",
+      "version": 1,
+      "sha256": "56a49e59bcadc5b7525aec016c1095632789f62e19ee8c9a71fa204a4785d320"
+    },
+    {
+      "identity": "CA-D-405",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-405-LOCAL_CONFIGURATION-DELIVERY--exclude-completed-work-from-the-development-backlog-carrier.md",
+      "version": 1,
+      "sha256": "f75aebbb58d7806b1993310d9ec3840f9cb62c0e0035eb71a70ad12a9e14d558"
+    }
+  ],
+  "local962_consumers_current": [
+    {
+      "identity": "CAPRMEDIO-GOV-EVAL-006",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "version": 17,
+      "sha256": "96e0443061bb04e99dc2cdfa7fd40a9f7653ba9cdb6ffe9809e35604d304abd8"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-761",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--register-constraint-as-an-external-type-value-for-requirement-atoms.md",
+      "version": 13,
+      "sha256": "6d50fda566e2d33c777a8feec03482512b2e8d3135a3a33b67b395dc89cd0abe"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-762",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-external-implementation-method-as-a-type-value-for-method-atoms.md",
+      "version": 10,
+      "sha256": "4480fb10331b0a09c56be00b81458226450bcb4f8c092002a1d960e0ba86eab5"
+    }
+  ],
+  "required_reference_repairs_remaining": [],
+  "nonblocking_reconciliation": "GOV314 retains its Type-admission reference to R748. Historical, generated, installed and non-RMED mentions retain exact bytes; refer to CA-P-961 incoming-reference classification. Comprehensive reconciliation belongs to964.",
+  "boundary": "Root owns lifecycle. No Settings selection/default or source-owner migration, Journal, external Project authority, Tool/compiler/install/runtime, Projection rebuild, Git index/commit/push mutation."
+}

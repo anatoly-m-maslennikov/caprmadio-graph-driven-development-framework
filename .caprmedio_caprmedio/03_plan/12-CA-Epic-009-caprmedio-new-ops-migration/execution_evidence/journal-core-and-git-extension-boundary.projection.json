@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "Projection",
+  "authoritative": false,
+  "updated_at": "2026-09-14 06:21:07 +0400",
+  "purpose": "Source-only evidence for the accepted Journal Core and optional Git Extension boundary",
+  "decisions": [
+    "Journal / Event Log is one authoritative historical source",
+    "Artifact Change Log and Process Log are two derived Projection Types",
+    "Git mechanics belong to an optional Extension",
+    "Concrete Journal file/schema realization remains separate from Git"
+  ],
+  "boundaries": {
+    "tools_changed": false,
+    "installed_extensions_changed": false,
+    "applicable_methodology_rebuilt": false,
+    "journal_appended": false,
+    "git_index_changed": false,
+    "epic_completed": false
+  },
+  "changes": [
+    {
+      "id": "CAPRMEDIO-META-REQU-656",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form@10.md",
+      "version": 11,
+      "before_sha256": "ec10a4411c72aa1edd62d67fd11de24ba3940ab13dd4d424d4c1da4d53631664",
+      "after_sha256": "103ca247692ff2df17cbc66ceccca58521c653c6bec120065393665f16f334e7"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-158",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance@10.md",
+      "version": 11,
+      "before_sha256": "ad53e9ae06623263b134a8618781ad3b78c99f2382589557075144ef81955f4c",
+      "after_sha256": "5467e7d28885d8b5dfb872550b553829cd64a7cfa24247072fc3aceb1198d7c8"
+    },
+    {
+      "id": "CA-R-1463",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1463-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-log-views-from-the-shared-journal.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1463-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-log-views-from-the-shared-journal.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1463-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-log-views-from-the-shared-journal@1.md",
+      "version": 2,
+      "before_sha256": "a05014af8130f2bd1aae5adce223beb6a5f3dcbb9cdf9dd52155f8f35833f074",
+      "after_sha256": "db5e9a6781b1da1a008162a1781677fbf897f7172bee2ba0f7ffdcbb816fa1e7"
+    },
+    {
+      "id": "CA-R-1466",
+      "kind": "add",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1466-CORE_META_MODEL-CORE-REQUIREMENT--keep-git-integration-in-an-extension.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "d9c5aa1bac9c69e98cc1f615c2a55884d9c6a75217f7c734e4b81a4a9c121339"
+    },
+    {
+      "id": "CA-R-1467",
+      "kind": "add",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1467-CORE_META_MODEL-REQUIREMENT--define-artifact-change-log-projection.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "6569ffad9bfe92d96fbf0395c998e220db24e456cd13ca3c95d9871df531e591"
+    },
+    {
+      "id": "CA-R-1468",
+      "kind": "add",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1468-CORE_META_MODEL-REQUIREMENT--define-process-log-projection.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "69a120b9a4e382022da0e0fd4ee38ed1f4b98f51726490c852425e0a31233d5f"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-296",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits.md",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/201_FEATURE_GIT/04_requirement/CAPRMEDIO-GOV-REQU-296-GIT-REQUIREMENT--distinguish-internal-and-external-git-commits.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits@12.md",
+      "version": 13,
+      "before_sha256": "32215867c7b8c88c8227651c31ec3165d8fa259dfd30849c328c71e7dfc486c5",
+      "after_sha256": "e764799a9ca834439c5ecb5bf21a9ef2502d71037cab6c78b06c8a3b75118280"
+    },
+    {
+      "id": "CA-D-384",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-384-CORE_META_MODEL-DELIVERY--serialize-git-commit-type-tokens.md",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/201_FEATURE_GIT/07_delivery/CA-D-384-GIT-DELIVERY--serialize-git-commit-type-tokens.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-384-CORE_META_MODEL-DELIVERY--serialize-git-commit-type-tokens@1.md",
+      "version": 2,
+      "before_sha256": "dcf7145036f415a2d9c2a666335e69d4bc79abb3bffed00837ea30fc69dfd317",
+      "after_sha256": "2e0c9d5b8b0e23592b5975888a660b047b44c6cf0a47c93324e0fdd7594d486b"
+    },
+    {
+      "id": "CA-D-334",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-334-CORE_META_MODEL-DELIVERY--serialize-governed-change-commit-messages.md",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/201_FEATURE_GIT/07_delivery/CA-D-334-GIT-DELIVERY--serialize-governed-change-commit-messages.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-334-CORE_META_MODEL-DELIVERY--serialize-governed-change-commit-messages@6.md",
+      "version": 7,
+      "before_sha256": "acf9368e579ba67698e252b99f2b155a1fc75639ae6265e0ab5379a19a0e6d46",
+      "after_sha256": "f1cc3a094ef3f4cd464d45a0c7ed3d50cd52fad901cbdb040c87b8efde632691"
+    },
+    {
+      "id": "CA-D-335",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-335-CORE_META_MODEL-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/201_FEATURE_GIT/07_delivery/CA-D-335-GIT-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-335-CORE_META_MODEL-DELIVERY--mirror-governed-file-changes-in-journal-and-git@5.md",
+      "version": 6,
+      "before_sha256": "9963938e690661ace52dbc86d453f91903d0d9cbd0ba8458c155736eac4a61d6",
+      "after_sha256": "64e0f1641f809af471ae4d71e10ca63e61c7d0744ce5b76f11697edb2ce0f055"
+    },
+    {
+      "id": "CA-R-1469",
+      "kind": "add",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/04_requirement/CA-R-1469-CORE_EXTENSIONS-DEFINES_GOAL_FOR-GIT--provide-optional-git-integration.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "0cbb520682aaf2f66967c8d9cdc83cf4c320f5fad87057c99ed1e36540841688"
+    },
+    {
+      "id": "CA-D-436",
+      "kind": "add",
+      "after_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/201_FEATURE_GIT/07_delivery/CA-D-436-GIT-DELIVERY--bind-git-extension-delivery-place.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "ced984ae5c00d8a457e7f0a4418bb0e7193341746e2e19b9d8f8f66df0157cbf"
+    },
+    {
+      "id": "CA-D-339",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-the-shared-project-journal.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-339-PROJECT_CONFIGURATION-DELIVERY--serialize-the-shared-project-journal.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-the-shared-project-journal@7.md",
+      "version": 8,
+      "before_sha256": "cecf13944636bfe9ceaa14ef005c3dcccafad0348b893f9d06822efdd3fd1946",
+      "after_sha256": "c06c9f5404a245dfbb40ca62fbdeece21db748e9f8e8dab4ce0f16a1abe749ba"
+    },
+    {
+      "id": "CA-D-435",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-435-CORE_META_MODEL-DELIVERY--serialize-atom-replacement-event-references.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-435-PROJECT_CONFIGURATION-DELIVERY--serialize-atom-replacement-event-references.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-435-CORE_META_MODEL-DELIVERY--serialize-atom-replacement-event-references@1.md",
+      "version": 2,
+      "before_sha256": "dfe05088d910ab42dc3b90b457728266819f0797cc444e15565aeacb3e3c15c7",
+      "after_sha256": "08de31bb25dc69d4896529e8cb3b24f31b3dfd4e39bb29886c64225318d35e29"
+    },
+    {
+      "id": "CA-D-388",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-388-CORE_META_MODEL-DELIVERY--serialize-generated-data-stage-prefixes-and-formats.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-388-PROJECT_CONFIGURATION-DELIVERY--serialize-generated-data-stage-prefixes-and-formats.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-388-CORE_META_MODEL-DELIVERY--serialize-generated-data-stage-prefixes-and-formats@1.md",
+      "version": 2,
+      "before_sha256": "ca6db1ca0f80b6920bedd112629459f8ca30c9d9cd89f0c134a2f55a4f79703e",
+      "after_sha256": "ec4e6be4b94535cbfc2f4f7263eb66da3f83177d61ab6c244ff10162b4bbdcda"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-337",
+      "kind": "relocate",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stages.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-337-PROJECT_CONFIGURATION-REQUIREMENT--register-generated-data-stages.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stages@11.md",
+      "version": 12,
+      "before_sha256": "17f1dda398e6dd98c155cfe34c8afb49e6c32fe6482c6b46295dff8a369970e1",
+      "after_sha256": "bc9692db872a45b3b1f6c86f4e73d0fa392b4ad7bd85093cc21be816f4ce0f35"
+    },
+    {
+      "id": "CA-M-274",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions@1.md",
+      "version": 2,
+      "before_sha256": "19b46d69e939e50c0cea217b20a168b63daa55efb907da8cd8fa6ffec52288dd",
+      "after_sha256": "fa24b9c4f7778530bf71c365dc7b19352bf55f7056c33b7711b84c590323e01b"
+    },
+    {
+      "id": "CA-R-1432",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect@2.md",
+      "version": 3,
+      "before_sha256": "1c023c6aeaea425ef9e37537a647bfecfbd37091fe11ffe20b076fbd07a70c5d",
+      "after_sha256": "8f8553ecbb927d26246d40dd98511dbeb593ec08f451a8c4a88c3e3fb9a672b8"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-097",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-097-CORE_META_MODEL-CORE-REQUIREMENT--requirement-keep-provenance-separate-from-evidence.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-097-CORE_META_MODEL-CORE-REQUIREMENT--requirement-keep-provenance-separate-from-evidence.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-097-CORE_META_MODEL-CORE-REQUIREMENT--requirement-keep-provenance-separate-from-evidence@9.md",
+      "version": 10,
+      "before_sha256": "ae749ec9829d6520cb74988f4a7fba3b97aa4dccdb5e37cd48aeb0587921636e",
+      "after_sha256": "fb72a8f3dad515d801a858be1458e695a9e7f58a588267fb7642756b814256c8"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-099",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-099-CORE_META_MODEL-REQUIREMENT--requirement-close-every-constitutional-amendment.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-099-CORE_META_MODEL-REQUIREMENT--requirement-close-every-constitutional-amendment.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-099-CORE_META_MODEL-REQUIREMENT--requirement-close-every-constitutional-amendment@11.md",
+      "version": 12,
+      "before_sha256": "2551bc6392e54b2a5db495ceeda17a32dd534e093f4efcc7bc26ca1d23197efd",
+      "after_sha256": "fcba9520f99e707eab3f1904d1f658c857eca8fff95ef6b57eef015a85844331"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-105",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-105-CORE_META_MODEL-REQUIREMENT--preserve-implementation-traceability-in-the-shared-project-journal.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-105-CORE_META_MODEL-REQUIREMENT--preserve-implementation-traceability-in-the-shared-project-journal.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-105-CORE_META_MODEL-REQUIREMENT--preserve-implementation-traceability-in-the-shared-project-journal@8.md",
+      "version": 9,
+      "before_sha256": "c1db9cafaa3a86bb47fa2f88b326fa48ecc96e8c7c69fc48a7188ba97363341e",
+      "after_sha256": "858d0172d5e552e97f9bfeabb5eb360624bac1b0818872903471c5bd17733e15"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-107",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-107-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-107-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-107-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions@11.md",
+      "version": 12,
+      "before_sha256": "976a37978cbe4de54b4995f659bba52b0a5f7c5114a22bd1c60323d7a52a6d29",
+      "after_sha256": "6f75a0b2a9fac5e2d1d9d43286ce23442899e71d97cbf9cab6964d6cfe170106"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-340",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention@8.md",
+      "version": 9,
+      "before_sha256": "572e7aeb097fda08d2258798814caf67060e88035eeff0a3e654aa900b48821e",
+      "after_sha256": "48ae45b38ffe5d27e3f1b0caa5cd9052ad2e9d086222456552d447a8fab00f2e"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-351",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-CORE-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-CORE-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-CORE-REQUIREMENT--define-self-hosted-governance-origins@11.md",
+      "version": 12,
+      "before_sha256": "363291542c8219375a0b0fb93b0a33bb81b76c2a2c4ae4040a1a81d6a13d71c7",
+      "after_sha256": "158e844da1b896978fb91742207f30f10a195843589031d93246a4d18b17fa21"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-290",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-caprmedio.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-caprmedio.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-caprmedio@11.md",
+      "version": 12,
+      "before_sha256": "86d3b3d9914612ad874525663303e18292abcaa37a1b9d8b178ea56632e51892",
+      "after_sha256": "d0eaf13d8c6ed94ebabe46f9d4fd5299c3907cde003679fd9d48031c3c3c02d5"
+    },
+    {
+      "id": "CA-D-382",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-382-CORE_META_MODEL-DELIVERY--place-local-environment-injection-carriers.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-382-CORE_META_MODEL-DELIVERY--place-local-environment-injection-carriers.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-382-CORE_META_MODEL-DELIVERY--place-local-environment-injection-carriers@1.md",
+      "version": 2,
+      "before_sha256": "91315dcff7e1230312fdc88d36b8d9b596466470eff0ccaf2a7051c4229d3844",
+      "after_sha256": "26be98aed50121dd44c7c2cf9fa70f3fd8335dbee12c1dcc6a5f35d46f69ca32"
+    },
+    {
+      "id": "CA-M-135",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges@12.md",
+      "version": 13,
+      "before_sha256": "f23ba1bb07650686e88386179917b59076933a0297d5e6e35313b596e45e97ee",
+      "after_sha256": "e28bc0068bc4679de230065dce4050d11438b75114092da524f644a6a60b8776"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-EVAL-010",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary@10.md",
+      "version": 11,
+      "before_sha256": "959e372dcc849ddb0b2f12c30cbb34c54f97bd3b353f880f7b6b45a5cf89deb0",
+      "after_sha256": "d13d664788acd9ca7376bdfd68d54ef0c792e2be988b43682767f97de73ae09c"
+    },
+    {
+      "id": "CA-E-462",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-462-CORE_META_MODEL-EVALUATION--validate-atom-replacement-event-evidence.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-462-CORE_META_MODEL-EVALUATION--validate-atom-replacement-event-evidence.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-462-CORE_META_MODEL-EVALUATION--validate-atom-replacement-event-evidence@1.md",
+      "version": 2,
+      "before_sha256": "9dbc4f0f2b4b8424b3b284f88cf36070befc71d944bac01bafb2dca2d0a7db6f",
+      "after_sha256": "3739a57b2b4a339f55ca1f8d27476951acf0983d475d24e86190bad38ddf4c72"
+    },
+    {
+      "id": "CA-E-465",
+      "kind": "add",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-465-PROJECT_CONFIGURATION-EVALUATION--validate-replacement-event-schema-encoding.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "655239a2c00e080ac96109c7f1f39701bf33efbae47cda48014969a0d733733b"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-EVAL-003",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability@12.md",
+      "version": 13,
+      "before_sha256": "ab538c93cb7dccfbc85d689bfd44ff3f339e71d035910647ab6fd386c9daa9ca",
+      "after_sha256": "fe88080741095b84b0c08fd9e538f74977dfbd46303c2c083395f2675aaafef1"
+    },
+    {
+      "id": "CA-E-464",
+      "kind": "add",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-464-CORE_META_MODEL-EVALUATION--validate-journal-independence-from-git.md",
+      "version": 1,
+      "before_sha256": null,
+      "after_sha256": "7341b050a6c6e85d0fcb693369050f2ed8f6415bb6034231ba133c46ad5cf556"
+    },
+    {
+      "id": "CA-D-360",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts@4.md",
+      "version": 5,
+      "before_sha256": "5e74916c16cbecdce7e7e9f18a239a97643cb9759faee7f7624b3c36f71b2067",
+      "after_sha256": "ce21d394920df4aac9390278e06162b115d34d79ff79acb80b58e9be448c980e"
+    },
+    {
+      "id": "CA-D-365",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts@3.md",
+      "version": 4,
+      "before_sha256": "01889edd3489dc644f5285cc4947ca81bc1468458af40349f7596a441996b2cc",
+      "after_sha256": "9a77b0760ed32303fa9a381203e4b988833a3aef3be648b45123b951f3114bf3"
+    },
+    {
+      "id": "CA-E-458",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-458-CORE_META_MODEL-EVALUATION--validate-authoritative-framework-settings-artifact.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-458-CORE_META_MODEL-EVALUATION--validate-authoritative-framework-settings-artifact.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-458-CORE_META_MODEL-EVALUATION--validate-authoritative-framework-settings-artifact@6.md",
+      "version": 7,
+      "before_sha256": "cc5a8b21aac7d93b4a13afa47bb84048e4eb04942827d20b3d93107b1c9aec9f",
+      "after_sha256": "e7d18091f557759128930e46cbfe4cc559a108a02bfdf6fe1ffc54837d8973e4"
+    },
+    {
+      "id": "CA-E-459",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-459-CORE_META_MODEL-EVALUATION--validate-authoritative-project-settings-artifact.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-459-CORE_META_MODEL-EVALUATION--validate-authoritative-project-settings-artifact.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-459-CORE_META_MODEL-EVALUATION--validate-authoritative-project-settings-artifact@5.md",
+      "version": 6,
+      "before_sha256": "3e236fff2a733be8c9a52e20b8801acf5378b48470c7d28927cc9cb44ce14673",
+      "after_sha256": "a8f45968682e24f162baaebf2496cc9a61bc0d361bc4c793f508c5a6883fb3ee"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-090",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-090-CORE_META_MODEL-GENERAL-REQUIREMENT--propagate-atomic-revision-impact-through-lineage.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-090-CORE_META_MODEL-GENERAL-REQUIREMENT--propagate-atomic-revision-impact-through-lineage.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-090-CORE_META_MODEL-GENERAL-REQUIREMENT--propagate-atomic-revision-impact-through-lineage@13.md",
+      "version": 14,
+      "before_sha256": "dcdf8eaf0095123976da8987506fe97ed372635a0f5e4031765d50485565c6c5",
+      "after_sha256": "8298cea0559dae2e5e2533d8e71733cbd53d1788fe6e5335f4c4bad889d87866"
+    },
+    {
+      "id": "CAPRMEDIO-META-REQU-100",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-100-CORE_META_MODEL-CORE-REQUIREMENT--preserve-external-boundary-obligations.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-100-CORE_META_MODEL-CORE-REQUIREMENT--preserve-external-boundary-obligations.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-100-CORE_META_MODEL-CORE-REQUIREMENT--preserve-external-boundary-obligations@11.md",
+      "version": 12,
+      "before_sha256": "fa6f24a5d95dbe1617761ea27de7a34ab41acfb85de620cd22f5d8f0808acf2e",
+      "after_sha256": "344aa9d8cf19178228856fdcadcdbe4186cbc00c138862a057361930c9f485e8"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-302",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion@18.md",
+      "version": 19,
+      "before_sha256": "1c1b7b887d83d6205c1f22f23620ce27492bdf41efb474ee8160ada4e68754ac",
+      "after_sha256": "e8328a3dcfaed9a7b135e533ff1022bb0aaf84eb53bdec5818cac9ad3780356d"
+    },
+    {
+      "id": "CAPRMEDIO-GOV-REQU-310",
+      "kind": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions@11.md",
+      "version": 12,
+      "before_sha256": "68f0607787e9ab0b2fe75efddd028a28a46b85924de3ef3cb6bd06895ac5e6c3",
+      "after_sha256": "e977cdc5dc75aa6a1f89b6e34d74b1483580eac19f97f116122905e1ff15aa6d"
+    }
+  ],
+  "validation": {
+    "errors": [],
+    "revised": 25,
+    "moved": 8,
+    "new": 7,
+    "exact_archives": 33,
+    "untouched_files": 11633,
+    "untouched_digest": "da7236ee1b12e493c4f7bcecc20825c281b9ed55ab0995078c220b13fc809944",
+    "new_evaluation_targets_checked": [
+      "CA-D-435",
+      "CA-D-339",
+      "CA-R-1466",
+      "CAPRMEDIO-META-REQU-158",
+      "CA-R-1463",
+      "CA-R-1467",
+      "CA-R-1468"
+    ],
+    "core_realization_dependency_scan": "0 matches",
+    "guards_unchanged": true
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "kind": "non-authoritative plan change projection",
+  "updated_at": "2026-09-13 05:38:50 +0400",
+  "epic": "CA-Epic-016",
+  "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model",
+  "authorization": "Operator requested a new Epic with Tasks about Projections and Journals.",
+  "execution_status": "Planning only; no source or migration Task executed.",
+  "source_changes": [],
+  "sequence": [
+    "CA-P-1081",
+    "CA-P-1087",
+    "CA-P-1086",
+    "CA-P-1088",
+    "CA-P-1089",
+    "CA-P-1090",
+    "CA-P-1091",
+    "CA-P-1082",
+    "CA-P-1083",
+    "CA-P-1084",
+    "CA-P-1085",
+    "CA-P-980"
+  ],
+  "changes": [
+    {
+      "identity": "CA-P-1087",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/01-CA-P-1087-TASK--inventory-projection-and-journal-authority.md",
+      "version": 1,
+      "sha256": "872c1d3edbe9ead57bd43744dc3641dd4d9d956dd9b35ef87729341a2a12c85f",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1088",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/03-CA-P-1088-TASK--reconcile-journal-authority-and-records.md",
+      "version": 1,
+      "sha256": "6f339b80b0c7e1a14de20668d2d04222a044479fb42dc332b25d47943171f8d4",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1089",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/04-CA-P-1089-TASK--reconcile-projection-and-journal-graph-participation.md",
+      "version": 1,
+      "sha256": "103d466edcd4c6ec75784e7d7c024da49d44c0d1277d5ba472cd1cd811fca579",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1090",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/05-CA-P-1090-TASK--reconcile-general-projection-and-journal-carriers.md",
+      "version": 1,
+      "sha256": "10186551ab537aaafa4ee8b32d91019478c26d1bc923b63bb540f55820cc5bee",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1091",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/06-CA-P-1091-TASK--validate-projection-and-journal-model-and-handoff.md",
+      "version": 1,
+      "sha256": "2d8b9114f76481a4986455d35577ae88a6134f9d6c0bb6fb0a98b316b3b15af4",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1086",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/05-CA-P-1086-TASK--separate-source-authority-from-derived-projections@1.md",
+      "version": 1,
+      "sha256": "d7504db313f3f247a56f6d558eab3d0090c227758946bab76a7c3866bfdf9210",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 1,
+      "version": 2,
+      "before_sha256": "d7504db313f3f247a56f6d558eab3d0090c227758946bab76a7c3866bfdf9210",
+      "sha256": "becb1c6f819e0252bf88e565841dd44de36a14826496436fa9cf9b069264fa8e",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/05-CA-P-1086-TASK--separate-source-authority-from-derived-projections@1.md",
+      "action": "MOVE+UPDATE"
+    },
+    {
+      "identity": "CA-P-1082",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/06-CA-P-1082-TASK--define-derived-governing-and-dependent-atom-links@3.md",
+      "version": 3,
+      "sha256": "f141200faf2e1d04571b0508d2b5761ebb0b81dc8b39f1ec97acd80a15cec7b4",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-1082",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/06-CA-P-1082-TASK--define-derived-governing-and-dependent-atom-links.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/06-CA-P-1082-TASK--define-derived-governing-and-dependent-atom-links.md",
+      "before_version": 3,
+      "version": 4,
+      "before_sha256": "f141200faf2e1d04571b0508d2b5761ebb0b81dc8b39f1ec97acd80a15cec7b4",
+      "sha256": "7a8976ef57c59a9d9a951b60559583daa5e14c9e57e3668ceb1517805c4b09aa",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/06-CA-P-1082-TASK--define-derived-governing-and-dependent-atom-links@3.md",
+      "action": "UPDATE"
+    },
+    {
+      "identity": "CA-P-1084",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/08-CA-P-1084-TASK--specify-derived-model-view-carriers@2.md",
+      "version": 2,
+      "sha256": "d8027aedd44a43db8fba97bd34870188cbe057460e8fc287ce1a3005796ca57a",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-1084",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/08-CA-P-1084-TASK--specify-derived-model-view-carriers.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/08-CA-P-1084-TASK--specify-derived-model-view-carriers.md",
+      "before_version": 2,
+      "version": 3,
+      "before_sha256": "d8027aedd44a43db8fba97bd34870188cbe057460e8fc287ce1a3005796ca57a",
+      "sha256": "aa8fe6bca53bba2f14cca87eea8bf062a0ac1f82b99036c3ef9f030802b55fa6",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/08-CA-P-1084-TASK--specify-derived-model-view-carriers@2.md",
+      "action": "UPDATE"
+    },
+    {
+      "identity": "CA-P-1085",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/09-CA-P-1085-TASK--validate-derived-model-view-authority-and-handoff@3.md",
+      "version": 3,
+      "sha256": "6fc759e09dc048acc2f703f28a1790857da3026b30594b51ceeed845983b58f5",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-1085",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/09-CA-P-1085-TASK--validate-derived-model-view-authority-and-handoff.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/09-CA-P-1085-TASK--validate-derived-model-view-authority-and-handoff.md",
+      "before_version": 3,
+      "version": 4,
+      "before_sha256": "6fc759e09dc048acc2f703f28a1790857da3026b30594b51ceeed845983b58f5",
+      "sha256": "31cdcb7285d5f58c622604bb7e167086f8927e68116199b6c7f38ca600c294af",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/09-CA-P-1085-TASK--validate-derived-model-view-authority-and-handoff@3.md",
+      "action": "UPDATE"
+    },
+    {
+      "identity": "CA-P-983",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/09-CA-P-983-TASK--define-the-two-journal-responsibilities@1.md",
+      "version": 1,
+      "sha256": "5acc6aa5f1a56b7ee62d018f0f66b3a58ee7dcfe4db3512aeb8f5d844fdb2757",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-983",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "before_version": 1,
+      "version": 2,
+      "before_sha256": "5acc6aa5f1a56b7ee62d018f0f66b3a58ee7dcfe4db3512aeb8f5d844fdb2757",
+      "sha256": "b96c3f33f6b9a9eabe4105fa1497ed819eb9f28d657e6ac349b0b7c0d4a12a77",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/09-CA-P-983-TASK--define-the-two-journal-responsibilities@1.md",
+      "action": "UPDATE"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-Epic-016-plan-boundary-report.md",
+      "version": 1,
+      "sha256": "be0d72a6ac868fa9d9d4e6ff683b58ec9e5def81c38ee5d194f8aff79dddfb4c",
+      "action": "ADD"
+    }
+  ],
+  "unresolved": [
+    "Per-Entity R/D/M/E cardinalities",
+    "M232 commit-before-archive handling"
+  ],
+  "index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b"
+}

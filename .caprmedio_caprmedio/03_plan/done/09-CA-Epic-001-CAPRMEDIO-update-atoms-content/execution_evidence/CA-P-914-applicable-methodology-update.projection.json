@@ -1,0 +1,53 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-914",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T23:03:44+04:00",
+  "outcomes": {
+    "kept_without_change": [
+      "CA-R-1174",
+      "CA-R-1175",
+      "CA-R-1176",
+      "CA-R-1206",
+      "CA-R-1207",
+      "CA-R-1217",
+      "CA-R-1218",
+      "CA-R-1220",
+      "CA-R-1221",
+      "CA-R-1222",
+      "CA-R-1223",
+      "CA-R-1224",
+      "CA-R-1225",
+      "CA-R-1226",
+      "CA-R-1227"
+    ],
+    "updated": {
+      "CA-R-1213": "bc59fbb8a44445a253dabb8ef9873192fa2291d2bcef4db5823fe93d5502cc48",
+      "CA-R-1219": "4087887fb83060fddebe74ed583861b6a42c75db1a467e0e878bd0e0cd557e2c",
+      "CA-R-1228": "fc2463339cab1754df5b7eb6c17042f4a28038db75d6a5e68cf39fa763bdc50b",
+      "CA-M-224": "376af26733c0f730376ec8bd4f243819b37b80f99dab3ba85402977caed778f8",
+      "CA-M-225": "db59aa788008ba1e88941768890402e61b6d2fe93a87b3371294347e89e22979",
+      "CA-E-379": "8177bea45810b1db4a5ce71124887fc9d8217c7e876c965aa4629924a1318167"
+    },
+    "archived_for_delivery_replacement": {
+      "CA-R-1230": "0184a64ee5925f661515f5ca35784d012e1a650c64bcd33ae16efae63ee3450a"
+    },
+    "created": {
+      "CA-R-1314": "6e935d88c67add47708bd548a8a3128778088d141996ecc4523990dc08bede90",
+      "CA-R-1315": "3c4e20a471a599ffd712a0474b700f1d0208ef28dba6cfead575d944f02796dc",
+      "CA-R-1316": "9d971efa1fd07853f63780d88523b1c31249f3440711d566c68c3a97531e394f",
+      "CA-R-1317": "3f81cf63cc0c0ef522a9dcbd0f2872042843fd14a336f0699c2dae802ae51d7e"
+    }
+  },
+  "boundary_notes": [
+    "Applicable Methodology authority now governs exact source identities, membership, deterministic conflict detection, and Operator-approved resolution only.",
+    "Projected files, source Carrier paths, formats, concrete compilation folders, and persistent-index prohibition are deferred to CA-P-913 Delivery authority.",
+    "CORE_META_MODEL and LOCAL_CONFIGURATION remain named Scope Unit instances; CA-R-1295 already prohibits treating named Scope Units as subtypes."
+  ],
+  "validation": {
+    "active_yaml_errors": 0,
+    "duplicate_active_atom_ids": 0,
+    "git_diff_check": "pass"
+  }
+}

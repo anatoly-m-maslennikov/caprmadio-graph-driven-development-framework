@@ -1,0 +1,20 @@
+{
+  "schema": "caprmedio.atom_update_frontier.amendment.v1",
+  "task_atom_id": "CA-P-905",
+  "amendment_number": 1,
+  "base_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "reason": "CA-R-643 is direct one-Claim authority explicitly included by the Operator but omitted from the frozen frontier.",
+  "entries": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-643-SEMNTC-CORE-REQUIREMENT--give-each-governed-claim-one-authoritative-atom-owner.md",
+      "sha256": "09cbfd945ac31965da1959b229cfb4f481f7f2d90a43150974f7d99c2ba5c2ad",
+      "atom_id": "CA-R-643",
+      "lifecycle": "ACTIVE",
+      "h1": "Give each governed Claim one authoritative Atom owner",
+      "owner_topic": "ATOM_CLAIM_SCOPE_AND_SUMMARY",
+      "owner_task_atom_id": "CA-P-916",
+      "disposition": "UPDATE",
+      "selection_reason": "directly governed by the accepted one-Claim authority decision"
+    }
+  ]
+}

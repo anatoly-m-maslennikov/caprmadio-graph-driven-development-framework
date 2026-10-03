@@ -1,0 +1,43 @@
+{
+  "task": "CA-P-964@2",
+  "result": "PASS",
+  "checks": {
+    "all_91_operations_replayed_against_exact_bytes": true,
+    "all_61_prior_archives_exact": true,
+    "all_7_required_repairs_preceded_extraction_or_retirement": true,
+    "all_48_split_replace_dedupe_successor_sequences_valid": true,
+    "source_frontier_exactly_714_Core655_Local59": true,
+    "only_GOV314_reference_only_change_since963": true,
+    "GOV314_exact_prior_archive_and_current_receipts": true,
+    "GOV314_Claim_Subjects_unrelated_metadata_preserved": true,
+    "GOV314_only_mapped_reference_changed_and_collection_canonically_ordered": true,
+    "GOV314_revision_metadata_and_General_tier_preserved": true,
+    "no_new_unresolved_typed_target_since_before962_after_explicit_predecessor_lineage": true,
+    "no_new_per_relation_cycles_since_before962": true,
+    "CA_P_964_preserves_exact_semantic_edges_and_diagnostics": true,
+    "no_active_RMED_mention_of_14_retired_identities": true,
+    "all_27_fresh_active_mentions_have_contribution_specific_decisions": true,
+    "all_11_baseline_active_reference_decisions_preserved": true,
+    "git_index_unchanged": true
+  },
+  "source_changes_since963": [
+    "CAPRMEDIO-GOV-REQU-314"
+  ],
+  "counts": {
+    "sources": 714,
+    "operations_replayed": 91,
+    "exact_archives": 61,
+    "ordered_dispositions": 48,
+    "mandatory_reference_mappings": 7,
+    "fresh_active_mentions": 27,
+    "external_handoff_paths": 1199,
+    "unresolved_before962": 98,
+    "unresolved_before964": 98,
+    "unresolved_after964": 98,
+    "cycle_components_before962": 1,
+    "cycle_components_after964": 1
+  },
+  "index_sha256": "57190e4a096cc585704d68f44ed8f1744a2b3487c32643b5bb0da162a2d126c2",
+  "new_cycles": {},
+  "new_unresolved_targets": []
+}

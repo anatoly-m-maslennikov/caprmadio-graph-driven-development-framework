@@ -1,0 +1,133 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-31T22:13:44+04:00",
+  "schema": "caprmedio.updated_authority_application_closure.execution.v1",
+  "task_atom_id": "CA-P-927",
+  "result": "updated_authority_application_closure_validated",
+  "scope": {
+    "baseline_task": "CA-P-917",
+    "completed_task_range": [
+      "CA-P-917",
+      "CA-P-918",
+      "CA-P-919",
+      "CA-P-920",
+      "CA-P-921",
+      "CA-P-922",
+      "CA-P-923",
+      "CA-P-924",
+      "CA-P-925",
+      "CA-P-926",
+      "CA-P-928",
+      "CA-P-929",
+      "CA-P-930",
+      "CA-P-931",
+      "CA-P-932",
+      "CA-P-933",
+      "CA-P-934",
+      "CA-P-935"
+    ],
+    "baseline_entries": 2088,
+    "baseline_normalization_tasks": {
+      "CA-P-918": 4,
+      "CA-P-919": 563,
+      "CA-P-920": 64,
+      "CA-P-924": 600,
+      "CA-P-925": 821,
+      "CA-P-926": 36
+    },
+    "all_baseline_normalization_tasks_done": true,
+    "superseded_baseline_addresses": 21
+  },
+  "core_meta_model": {
+    "active_atom_count": 563,
+    "declared_terms": 120,
+    "definition_conflicts": 0,
+    "term_system_violations": 0,
+    "subtype_cycles": 0,
+    "invalid_dependency_cycles": 0,
+    "legacy_schema_atoms": 0,
+    "entity_graph_error_diagnostics": 0
+  },
+  "core_plus_local_configuration": {
+    "active_atom_count": 632,
+    "declared_terms": 130,
+    "definition_conflicts": 0,
+    "term_system_violations": 0,
+    "subtype_cycles": 0,
+    "invalid_dependency_cycles": 0,
+    "legacy_schema_atoms": 0,
+    "entity_graph_error_diagnostics": 0
+  },
+  "applicable_methodology": {
+    "source_frontier_digest": "1807df50a636b5be387f25452fb9dc4154a315c7413ec138732796b09edc1d39",
+    "selected_candidate_count": 632,
+    "eligible_candidate_count": 632,
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "diagnostic_count": 0,
+    "approval_result_count": 0,
+    "dry_run_can_apply": true,
+    "current_generated_tree_digest": "e3f669ef8ba3d2492eb6aecbb29f563462780cf84457135f576eebaac98968bd",
+    "planned_output_missing_count": 0,
+    "projection_provenance_mismatch_count": 0,
+    "source_snapshot_current": true,
+    "compiler_tests": {
+      "passed": 9,
+      "failed": 0
+    }
+  },
+  "project_scope_unit_graph": {
+    "project_identity": "caprmedio",
+    "framework_identity": "CAPRMEDIO",
+    "project_configuration": {
+      "revision": "CAPRMEDIO-I-001@4",
+      "sha256": "78d6669cb1d13cd4098ba182144633e339eb08d16b72decb3d52853521e1b306",
+      "journal_event_id": "59613820628308f1ee20b996b6af1bc77dc04539e6e001e922b022474e5ec10c"
+    },
+    "selected_installed_generator": ".caprmedio_install/releases/2e541306bdeefe3926c0ed502d462076274733cd2e94baea335ae8a7725bd2de/TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "canonical_generator": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "generator_sha256": "88ab6552b5f26eeca27dd5f4f47a0edaa2664d2e03f10eb27e33dca4600a6dd4",
+    "source_matches_install": true,
+    "installed_dry_run_changed": false,
+    "registered_projection_bytes_match_installed_generator": true,
+    "registered_projection_count": 2,
+    "scope_unit_rows": 13,
+    "directory_receipts": 13,
+    "delivery_atoms": 13,
+    "source_bindings": 250,
+    "source_binding_kinds": {
+      "project_configuration": 32,
+      "scope_unit_directory_carrier": 192,
+      "delivery_atom": 26
+    },
+    "required_row_field_missing_count": 0,
+    "feature_rows_with_local_order": 0,
+    "nearest_typed_parent_edges_valid": true,
+    "jobs_used_as_scope_unit_registry": false,
+    "epic_nodes_present": false,
+    "retired_paths_present": false,
+    "generator_tests": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "project": {
+    "term_system_violations": 0,
+    "subtype_cycles": 0,
+    "entity_graph_error_diagnostics": 0,
+    "entity_graph_info_diagnostics": 269,
+    "info_diagnostic_kind": "non-atom-markdown-skipped"
+  },
+  "epic_lifecycle": {
+    "done_task_count": 18,
+    "active_task_count_before_completion": 1,
+    "all_done_tasks_have_completion_evidence_surface": true,
+    "predecessor_active_carrier_sha256": "e674ca2060e270648c3fc877e26cf67dd1975fb1999e738a119fd51385759b01",
+    "predecessor_archive": "archive/20-CA-P-927-TASK--validate-updated-authority-application-closure@4.md",
+    "done_carrier": "done/20-CA-P-927-TASK--validate-updated-authority-application-closure.md"
+  },
+  "worktree": {
+    "git_diff_check": "pass",
+    "preexisting_dirty_carrier_preserved": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-30-part-1.ndjson"
+  }
+}

@@ -1,0 +1,1535 @@
+{
+  "task": "CA-P-964@2",
+  "basis": "Replay exact CA-P-960 bytes through all 91 CA-P-962/963 operations; read each successor and intermediate consumer Revision from current or exact Archive bytes.",
+  "mandatory_reference_order": [
+    {
+      "reference_id": 274,
+      "consumer": "CA-E-427",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "target_before": "CA-R-1304",
+      "targets_after": [
+        "CA-D-379"
+      ],
+      "relation": "evaluation_for",
+      "operation_sequence": 7,
+      "clause_mapping_rationale": "The check requires one canonical Epic Identifier and rejects malformed identifiers; that exact grammar moves wholly from R1304 to D379. Replace this evaluation_for target only after D379 is admitted, before retiring R1304.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-379",
+          "operation": "962:5",
+          "sha256_at_admission": "1481d89513b554b5a64ed70653055cf56f026932fb631d6474219c49b5717e8e"
+        }
+      ],
+      "consumer_repair_operation": "962:7",
+      "extraction_or_retirement_operation": "962:8",
+      "consumer_bytes_at_extraction": {
+        "identity": "CA-E-427",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+        "version": 7,
+        "sha256": "d720b69c35f25c1b64d994399bd57e7e2ed5e0fc598ad841f4aa6289c405404b"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 275,
+      "consumer": "CA-E-427",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "target_before": "CA-R-1369",
+      "targets_after": [
+        "CA-D-353"
+      ],
+      "relation": "evaluation_for",
+      "operation_sequence": 7,
+      "clause_mapping_rationale": "The check rejects !=1 Epic Directory Carriers. D353 must first include the stricter =1 Epic qualification, then replace R1369 in evaluation_for before retiring it. D263 inverse per-directory cardinality is not interchangeable.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-353",
+          "operation": "962:6",
+          "sha256_at_admission": "a00310fd905bab541d018da98c02dbb895504f2bd6d9d449bfd038c2df2c6a23"
+        }
+      ],
+      "consumer_repair_operation": "962:7",
+      "extraction_or_retirement_operation": "962:9",
+      "consumer_bytes_at_extraction": {
+        "identity": "CA-E-427",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+        "version": 7,
+        "sha256": "d720b69c35f25c1b64d994399bd57e7e2ed5e0fc598ad841f4aa6289c405404b"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 6437,
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "target_before": "CAPRMEDIO-GOV-REQU-294",
+      "targets_after": [
+        "CAPRMEDIO-GOV-REQU-294",
+        "CA-D-383"
+      ],
+      "relation": "evaluation_for",
+      "operation_sequence": 26,
+      "clause_mapping_rationale": "Conditions 1, 4, 6 and 7 load/parse Settings, test the two allowed reporting values, reject unknown keys where closed, and require deterministic settings. R294 preserves allowed behavior/values; D383 owns the extracted field path. Retain R294 and add D383 before extraction.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-383",
+          "operation": "962:24",
+          "sha256_at_admission": "52211511bdea1a31127f238e49c69f5c6a1707c893775363524e577e12934a64"
+        }
+      ],
+      "consumer_repair_operation": "962:26",
+      "extraction_or_retirement_operation": "962:27",
+      "consumer_bytes_at_extraction": {
+        "identity": "CAPRMEDIO-GOV-EVAL-006",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "version": 17,
+        "sha256": "96e0443061bb04e99dc2cdfa7fd40a9f7653ba9cdb6ffe9809e35604d304abd8"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 263,
+      "consumer": "CAPRMEDIO-GOV-EVAL-009",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "target_before": "CAPRMEDIO-GOV-REQU-299",
+      "targets_after": [
+        "CAPRMEDIO-GOV-REQU-299",
+        "CA-D-386"
+      ],
+      "relation": "evaluation_for",
+      "operation_sequence": 33,
+      "clause_mapping_rationale": "Applicable conditions 1–3 test stored priority eligibility, exact high/medium/low values, and rejection of highest/critical/deferred. Conditions 4–7 test the surviving R comparison and selection semantics. Retain R299 and add D386 to evaluation_for before extracting its Carrier clauses.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-386",
+          "operation": "962:32",
+          "sha256_at_admission": "70e7a0c36f425db2b1b93a9ae9f538aecb300c503b653e485a021777a197c1bf"
+        }
+      ],
+      "consumer_repair_operation": "962:33",
+      "extraction_or_retirement_operation": "962:34",
+      "consumer_bytes_at_extraction": {
+        "identity": "CAPRMEDIO-GOV-EVAL-009",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+        "version": 13,
+        "sha256": "492f0986a89c07db45d677ba2ae647cff2dffa2ee7f3dac68197eacafa372f0d"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 6438,
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "target_before": "CAPRMEDIO-GOV-REQU-302",
+      "targets_after": [
+        "CAPRMEDIO-GOV-REQU-302",
+        "CA-D-387"
+      ],
+      "relation": "evaluation_for",
+      "operation_sequence": 26,
+      "clause_mapping_rationale": "Conditions 1, 3, 6 and 7 load/parse Settings, test medium/high admission strictness, reject unknown keys where closed, and require deterministic settings. R302 preserves allowed strictness/default; D387 owns the extracted field. Retain R302 and add D387 before extraction.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-387",
+          "operation": "962:25",
+          "sha256_at_admission": "d912e75dc1ffec781cfc59fab69fdaf7d223ca92850a4eb98b08c49d6f6f569e"
+        }
+      ],
+      "consumer_repair_operation": "962:26",
+      "extraction_or_retirement_operation": "962:35",
+      "consumer_bytes_at_extraction": {
+        "identity": "CAPRMEDIO-GOV-EVAL-006",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "version": 17,
+        "sha256": "96e0443061bb04e99dc2cdfa7fd40a9f7653ba9cdb6ffe9809e35604d304abd8"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 6101,
+      "consumer": "CAPRMEDIO-GOV-REQU-761",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+      "target_before": "CAPRMEDIO-GOV-REQU-760",
+      "targets_after": [
+        "CA-D-393"
+      ],
+      "relation": "relates_to",
+      "operation_sequence": 49,
+      "clause_mapping_rationale": "Constraint explicitly uses the non-default external-name exception and is not derived from the default rule. D393 preserves that exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-393",
+          "operation": "962:48",
+          "sha256_at_admission": "c292f124d1f2ac91a3f615826d3428cbc23561d2d51d05a80982426a9e154d61"
+        }
+      ],
+      "consumer_repair_operation": "962:49",
+      "extraction_or_retirement_operation": "962:51",
+      "consumer_bytes_at_extraction": {
+        "identity": "CAPRMEDIO-GOV-REQU-761",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "version": 12,
+        "sha256": "e54069115da090d5940f974f0244aeccb4a3449a1f2a4edddaaa1f75ba6d816d"
+      },
+      "verified_from_replayed_bytes": true
+    },
+    {
+      "reference_id": 6430,
+      "consumer": "CAPRMEDIO-GOV-REQU-762",
+      "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+      "target_before": "CAPRMEDIO-GOV-REQU-760",
+      "targets_after": [
+        "CA-D-393"
+      ],
+      "relation": "relates_to",
+      "operation_sequence": 50,
+      "clause_mapping_rationale": "External Implementation Method uses the default external-name derivation context. D393 retains the external_<internal_type_name> rule, role-default qualification and explicit non-default exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+      "targets_verified_before_extraction_or_retirement": true,
+      "successor_operations": [
+        {
+          "identity": "CA-D-393",
+          "operation": "962:48",
+          "sha256_at_admission": "c292f124d1f2ac91a3f615826d3428cbc23561d2d51d05a80982426a9e154d61"
+        }
+      ],
+      "consumer_repair_operation": "962:50",
+      "extraction_or_retirement_operation": "962:51",
+      "consumer_bytes_at_extraction": {
+        "identity": "CAPRMEDIO-GOV-REQU-762",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "version": 9,
+        "sha256": "28fdd59de936753a9d0dd91c22d23cb225021cc936909f14da658bc26a6000e9"
+      },
+      "verified_from_replayed_bytes": true
+    }
+  ],
+  "all_extraction_retirement_order": [
+    {
+      "predecessor": "CA-R-1305",
+      "action": "replace",
+      "operation": "962:2",
+      "successors": [
+        {
+          "identity": "CA-D-378",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities.md",
+          "version": 1,
+          "sha256": "23e97824a8fe7bf608f5fa0cd6e4063008f8117110a1fb7f325232dc7b95276f",
+          "established_by": "962:1"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-737",
+      "action": "replace",
+      "operation": "962:3",
+      "successors": [
+        {
+          "identity": "CA-D-378",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities.md",
+          "version": 1,
+          "sha256": "23e97824a8fe7bf608f5fa0cd6e4063008f8117110a1fb7f325232dc7b95276f",
+          "established_by": "962:1"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-764",
+      "action": "replace",
+      "operation": "962:4",
+      "successors": [
+        {
+          "identity": "CA-D-378",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities.md",
+          "version": 1,
+          "sha256": "23e97824a8fe7bf608f5fa0cd6e4063008f8117110a1fb7f325232dc7b95276f",
+          "established_by": "962:1"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-1304",
+      "action": "replace",
+      "operation": "962:8",
+      "successors": [
+        {
+          "identity": "CA-D-379",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-379-CORE_META_MODEL-DELIVERY--serialize-epic-identifiers.md",
+          "version": 1,
+          "sha256": "1481d89513b554b5a64ed70653055cf56f026932fb631d6474219c49b5717e8e",
+          "established_by": "962:5"
+        }
+      ],
+      "required_reference_ids": [
+        274
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-1369",
+      "action": "replace",
+      "operation": "962:9",
+      "successors": [
+        {
+          "identity": "CA-D-353",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+          "version": 4,
+          "sha256": "a00310fd905bab541d018da98c02dbb895504f2bd6d9d449bfd038c2df2c6a23",
+          "established_by": "962:6"
+        }
+      ],
+      "required_reference_ids": [
+        275
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-728",
+      "action": "split",
+      "operation": "962:10",
+      "successors": [
+        {
+          "identity": "CA-D-378",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities.md",
+          "version": 1,
+          "sha256": "23e97824a8fe7bf608f5fa0cd6e4063008f8117110a1fb7f325232dc7b95276f",
+          "established_by": "962:1"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-165",
+      "action": "dedupe",
+      "operation": "962:13",
+      "successors": [
+        {
+          "identity": "CA-R-1415",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1415-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-version.md",
+          "version": 4,
+          "sha256": "f0b757c9f490835f1fa42f76cfd300913aeaa550aae4ffe404207c49a348a2a6",
+          "established_by": "962:11"
+        },
+        {
+          "identity": "CA-R-1416",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1416-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-updated-at.md",
+          "version": 4,
+          "sha256": "bac2ac83ab00a2478757799cb310f8fe5c80c25c286dd15b1b0117a33d77eb7b",
+          "established_by": "962:12"
+        },
+        {
+          "identity": "CA-D-270",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+          "version": 5,
+          "sha256": "1582889d0eb47298875f0b1dcbc8969a8d1e631cc5502e18397fa36f91572175",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-963",
+      "action": "replace",
+      "operation": "962:16",
+      "successors": [
+        {
+          "identity": "CA-M-275",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-275-CORE_META_MODEL-METHOD--format-scope-unit-names.md",
+          "version": 1,
+          "sha256": "44a7c9f6534c9b637db745607c4094e861517e4dbad43d368ea3a6c62ca34012",
+          "established_by": "962:15"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-978",
+      "action": "split",
+      "operation": "962:18",
+      "successors": [
+        {
+          "identity": "CA-D-380",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-380-CORE_META_MODEL-DELIVERY--serialize-navigational-order-numbers.md",
+          "version": 1,
+          "sha256": "d97a48bbd7e84918bce72912065be67c79e24f79c92c2f4a61d08b530a268761",
+          "established_by": "962:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-981",
+      "action": "split",
+      "operation": "962:19",
+      "successors": [
+        {
+          "identity": "CA-D-380",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-380-CORE_META_MODEL-DELIVERY--serialize-navigational-order-numbers.md",
+          "version": 1,
+          "sha256": "d97a48bbd7e84918bce72912065be67c79e24f79c92c2f4a61d08b530a268761",
+          "established_by": "962:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-997",
+      "action": "split",
+      "operation": "962:21",
+      "successors": [
+        {
+          "identity": "CA-D-381",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-381-CORE_META_MODEL-DELIVERY--serialize-work-sequence-numbers.md",
+          "version": 1,
+          "sha256": "940e0d61fe9ff0ef84c8804b34f812d7e692d19ff5a8729add0c11498a3146a3",
+          "established_by": "962:20"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-290",
+      "action": "split",
+      "operation": "962:23",
+      "successors": [
+        {
+          "identity": "CA-D-382",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-382-CORE_META_MODEL-DELIVERY--place-local-environment-injection-carriers.md",
+          "version": 1,
+          "sha256": "91315dcff7e1230312fdc88d36b8d9b596466470eff0ccaf2a7051c4229d3844",
+          "established_by": "962:22"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-294",
+      "action": "split",
+      "operation": "962:27",
+      "successors": [
+        {
+          "identity": "CA-D-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-383-CORE_META_MODEL-DELIVERY--serialize-interaction-reporting-mode.md",
+          "version": 1,
+          "sha256": "52211511bdea1a31127f238e49c69f5c6a1707c893775363524e577e12934a64",
+          "established_by": "962:24"
+        }
+      ],
+      "required_reference_ids": [
+        6437
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-296",
+      "action": "split",
+      "operation": "962:29",
+      "successors": [
+        {
+          "identity": "CA-D-384",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-384-CORE_META_MODEL-DELIVERY--serialize-git-commit-type-tokens.md",
+          "version": 1,
+          "sha256": "dcf7145036f415a2d9c2a666335e69d4bc79abb3bffed00837ea30fc69dfd317",
+          "established_by": "962:28"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-297",
+      "action": "replace",
+      "operation": "962:31",
+      "successors": [
+        {
+          "identity": "CA-D-385",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-385-CORE_META_MODEL-DELIVERY--show-one-structural-level-when-architecture-views-are-enabled.md",
+          "version": 1,
+          "sha256": "03e65976280d075ed9d0269a2b72b42a3967d467d90b8b8d66375b71e52077b0",
+          "established_by": "962:30"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-299",
+      "action": "split",
+      "operation": "962:34",
+      "successors": [
+        {
+          "identity": "CA-D-386",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-386-CORE_META_MODEL-DELIVERY--serialize-concern-priority.md",
+          "version": 1,
+          "sha256": "70e7a0c36f425db2b1b93a9ae9f538aecb300c503b653e485a021777a197c1bf",
+          "established_by": "962:32"
+        }
+      ],
+      "required_reference_ids": [
+        263
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-302",
+      "action": "split",
+      "operation": "962:35",
+      "successors": [
+        {
+          "identity": "CA-D-387",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-387-CORE_META_MODEL-DELIVERY--serialize-atomic-admission-strictness.md",
+          "version": 1,
+          "sha256": "d912e75dc1ffec781cfc59fab69fdaf7d223ca92850a4eb98b08c49d6f6f569e",
+          "established_by": "962:25"
+        }
+      ],
+      "required_reference_ids": [
+        6438
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-337",
+      "action": "split",
+      "operation": "962:37",
+      "successors": [
+        {
+          "identity": "CA-D-388",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-388-CORE_META_MODEL-DELIVERY--serialize-generated-data-stage-prefixes-and-formats.md",
+          "version": 1,
+          "sha256": "ca6db1ca0f80b6920bedd112629459f8ca30c9d9cd89f0c134a2f55a4f79703e",
+          "established_by": "962:36"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-353",
+      "action": "split",
+      "operation": "962:39",
+      "successors": [
+        {
+          "identity": "CA-D-329",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references.md",
+          "version": 6,
+          "sha256": "456172d42d182e6496128449ebdb9caeb234e4258a8d9a0f11996c23e16c364d",
+          "established_by": "962:38"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-355",
+      "action": "split",
+      "operation": "962:41",
+      "successors": [
+        {
+          "identity": "CA-D-389",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-389-CORE_META_MODEL-DELIVERY--serialize-analysis-type-tokens.md",
+          "version": 1,
+          "sha256": "3129e352ae8d2771767781f68a0fbc0565f73a717ab136fd6dfa99b0f389824f",
+          "established_by": "962:40"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-362",
+      "action": "replace",
+      "operation": "962:43",
+      "successors": [
+        {
+          "identity": "CA-D-390",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-390-CORE_META_MODEL-DELIVERY--configure-the-artifact-timestamp-timezone.md",
+          "version": 1,
+          "sha256": "11aa65aadd61bab19f3ee8e1975aae352fb48619db3c6e42d8ab0036137f342c",
+          "established_by": "962:42"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-373",
+      "action": "replace",
+      "operation": "962:45",
+      "successors": [
+        {
+          "identity": "CA-D-391",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-391-CORE_META_MODEL-DELIVERY--encode-project-scope-authority-modes-in-the-scope-unit-graph.md",
+          "version": 1,
+          "sha256": "fb07db4aeac8a27e62c562dac1b669f94db578ebef22688a2e7c71be92962b00",
+          "established_by": "962:44"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-383",
+      "action": "replace",
+      "operation": "962:47",
+      "successors": [
+        {
+          "identity": "CA-D-392",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-392-CORE_META_MODEL-DELIVERY--register-obsolete-project-names.md",
+          "version": 1,
+          "sha256": "aaa1d139126ee7192db8c8ef0aa1bb4a04dc600076e249cb38268c022a393841",
+          "established_by": "962:46"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-760",
+      "action": "replace",
+      "operation": "962:51",
+      "successors": [
+        {
+          "identity": "CA-D-393",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-393-CORE_META_MODEL-DELIVERY--derive-default-external-type-names.md",
+          "version": 1,
+          "sha256": "c292f124d1f2ac91a3f615826d3428cbc23561d2d51d05a80982426a9e154d61",
+          "established_by": "962:48"
+        }
+      ],
+      "required_reference_ids": [
+        6101,
+        6430
+      ],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-750",
+      "action": "split",
+      "operation": "962:52",
+      "successors": [
+        {
+          "identity": "CA-D-389",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-389-CORE_META_MODEL-DELIVERY--serialize-analysis-type-tokens.md",
+          "version": 1,
+          "sha256": "3129e352ae8d2771767781f68a0fbc0565f73a717ab136fd6dfa99b0f389824f",
+          "established_by": "962:40"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-086",
+      "action": "split",
+      "operation": "962:54",
+      "successors": [
+        {
+          "identity": "CA-D-394",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-394-CORE_META_MODEL-DELIVERY--bind-convenience-symlink-carriers-to-one-native-source.md",
+          "version": 1,
+          "sha256": "c4b1e1512cc6403edd026619a820de9a5ce3407d021a05b231bf74d73a7fc902",
+          "established_by": "962:53"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-098",
+      "action": "split",
+      "operation": "962:56",
+      "successors": [
+        {
+          "identity": "CA-D-395",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-395-CORE_META_MODEL-DELIVERY--serialize-ambient-project-scope-paths.md",
+          "version": 1,
+          "sha256": "fb95a6d64b11243b290b2bd615fa246b57d6f2ac79fd8a7e9d561546b20ff96e",
+          "established_by": "962:55"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-122",
+      "action": "split",
+      "operation": "962:59",
+      "successors": [
+        {
+          "identity": "CA-D-283",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+          "version": 6,
+          "sha256": "847f46a71bdba6939cecdf708bd197d1c4ca8ddd8880edaa7e0b558f1aaa5f3a",
+          "established_by": "962:58"
+        },
+        {
+          "identity": "CA-D-281",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-281-CORE_META_MODEL-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+          "version": 5,
+          "sha256": "884609bcc38ee82962121e8ad05e95e411a9bbe6f3bd459250c5b0ae4931e07e",
+          "established_by": "CA-P-960 baseline"
+        },
+        {
+          "identity": "CA-D-282",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-282-CORE_META_MODEL-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+          "version": 5,
+          "sha256": "75c24c4d92389b40d7b14e6b3eb7151a6068443181ba9122148e8ff23142b441",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-166",
+      "action": "split",
+      "operation": "962:60",
+      "successors": [
+        {
+          "identity": "CA-D-310",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-310-CORE_META_MODEL-DELIVERY--serialize-projection-updated-at.md",
+          "version": 5,
+          "sha256": "a4fadc0dabc2aadb59c41856b60b5a1074986d3d9e1a7f3ca19b31f45744b23e",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-174",
+      "action": "split",
+      "operation": "962:61",
+      "successors": [
+        {
+          "identity": "CA-D-268",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+          "version": 6,
+          "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-730",
+      "action": "split",
+      "operation": "962:62",
+      "successors": [
+        {
+          "identity": "CA-D-283",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+          "version": 6,
+          "sha256": "847f46a71bdba6939cecdf708bd197d1c4ca8ddd8880edaa7e0b558f1aaa5f3a",
+          "established_by": "962:58"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-381",
+      "action": "split",
+      "operation": "962:63",
+      "successors": [
+        {
+          "identity": "CA-D-268",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+          "version": 6,
+          "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-315",
+      "action": "split",
+      "operation": "963:3",
+      "successors": [
+        {
+          "identity": "CA-D-396",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-396-LOCAL_CONFIGURATION-DELIVERY--serialize-structured-production-log-records.md",
+          "version": 1,
+          "sha256": "cac3c9853b786692f8ad00e178453b9d4cc5e9b864a9d045d67838a18fc0d9db",
+          "established_by": "963:1"
+        },
+        {
+          "identity": "CA-D-406",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+          "version": 1,
+          "sha256": "279d9841dde65cc1b19f42bd991fa9e6d240e933c5fe94d134625bca51476bb8",
+          "established_by": "963:2"
+        },
+        {
+          "identity": "CA-D-328",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+          "version": 1,
+          "sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6",
+          "established_by": "CA-P-960 baseline"
+        },
+        {
+          "identity": "CA-D-339",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+          "version": 5,
+          "sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b",
+          "established_by": "CA-P-960 baseline"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-323",
+      "action": "replace",
+      "operation": "963:5",
+      "successors": [
+        {
+          "identity": "CA-D-397",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-397-LOCAL_CONFIGURATION-DELIVERY--register-caprmedio-type-prefixes.md",
+          "version": 1,
+          "sha256": "aff0f8ef39ba12676b8e433e66cc0e9443f4192b55b303563dd442e9512982a7",
+          "established_by": "963:4"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-676",
+      "action": "replace",
+      "operation": "963:7",
+      "successors": [
+        {
+          "identity": "CA-D-398",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-398-LOCAL_CONFIGURATION-DELIVERY--encode-configuration-surfaces-in-owning-atoms.md",
+          "version": 1,
+          "sha256": "a04340f2d42462a34d89154953fb1837d274101a946f0625ac099caa07f79133",
+          "established_by": "963:6"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-293",
+      "action": "split",
+      "operation": "963:9",
+      "successors": [
+        {
+          "identity": "CA-D-399",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+          "version": 1,
+          "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e",
+          "established_by": "963:8"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CA-R-825",
+      "action": "split",
+      "operation": "963:10",
+      "successors": [
+        {
+          "identity": "CA-D-399",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+          "version": 1,
+          "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e",
+          "established_by": "963:8"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-761",
+      "action": "split",
+      "operation": "963:11",
+      "successors": [
+        {
+          "identity": "CA-D-399",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+          "version": 1,
+          "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e",
+          "established_by": "963:8"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-748",
+      "action": "split",
+      "operation": "963:13",
+      "successors": [
+        {
+          "identity": "CA-D-400",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-400-LOCAL_CONFIGURATION-DELIVERY--serialize-evaluation-type-tokens.md",
+          "version": 1,
+          "sha256": "e794c4e0968abdd8c05a9b765c699dc50d14f7384522aa560d80c2b7b5346c01",
+          "established_by": "963:12"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "action": "split",
+      "operation": "963:14",
+      "successors": [
+        {
+          "identity": "CA-D-400",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-400-LOCAL_CONFIGURATION-DELIVERY--serialize-evaluation-type-tokens.md",
+          "version": 1,
+          "sha256": "e794c4e0968abdd8c05a9b765c699dc50d14f7384522aa560d80c2b7b5346c01",
+          "established_by": "963:12"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-751",
+      "action": "split",
+      "operation": "963:16",
+      "successors": [
+        {
+          "identity": "CA-D-402",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-402-LOCAL_CONFIGURATION-DELIVERY--serialize-delivery-type-tokens.md",
+          "version": 1,
+          "sha256": "60c1dd8e9fe233492fd00e363355f75abe1e4261f8a1a1fbf2485c0f6936111a",
+          "established_by": "963:15"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-754",
+      "action": "split",
+      "operation": "963:18",
+      "successors": [
+        {
+          "identity": "CA-D-404",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+          "version": 1,
+          "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d",
+          "established_by": "963:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-755",
+      "action": "split",
+      "operation": "963:19",
+      "successors": [
+        {
+          "identity": "CA-D-404",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+          "version": 1,
+          "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d",
+          "established_by": "963:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-762",
+      "action": "split",
+      "operation": "963:20",
+      "successors": [
+        {
+          "identity": "CA-D-404",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+          "version": 1,
+          "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d",
+          "established_by": "963:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-763",
+      "action": "split",
+      "operation": "963:21",
+      "successors": [
+        {
+          "identity": "CA-D-404",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+          "version": 1,
+          "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d",
+          "established_by": "963:17"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-749",
+      "action": "split",
+      "operation": "963:23",
+      "successors": [
+        {
+          "identity": "CA-D-401",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-401-LOCAL_CONFIGURATION-DELIVERY--serialize-concern-type-tokens.md",
+          "version": 1,
+          "sha256": "912e165708ad7f102c7f857df9244ed69ed52e74b50279d5fb6e00e0794b244a",
+          "established_by": "963:22"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-GOV-REQU-752",
+      "action": "split",
+      "operation": "963:25",
+      "successors": [
+        {
+          "identity": "CA-D-403",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-403-LOCAL_CONFIGURATION-DELIVERY--serialize-operations-type-tokens.md",
+          "version": 1,
+          "sha256": "56a49e59bcadc5b7525aec016c1095632789f62e19ee8c9a71fa204a4785d320",
+          "established_by": "963:24"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    },
+    {
+      "predecessor": "CAPRMEDIO-META-REQU-103",
+      "action": "split",
+      "operation": "963:27",
+      "successors": [
+        {
+          "identity": "CA-D-405",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-405-LOCAL_CONFIGURATION-DELIVERY--exclude-completed-work-from-the-development-backlog-carrier.md",
+          "version": 1,
+          "sha256": "f75aebbb58d7806b1993310d9ec3840f9cb62c0e0035eb71a70ad12a9e14d558",
+          "established_by": "963:26"
+        }
+      ],
+      "required_reference_ids": [],
+      "verified": true
+    }
+  ],
+  "archive_receipts": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1305-CORE_META_MODEL-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms@7.md",
+      "version": 7,
+      "sha256": "9aefca394f8782ee0537e71ed2e475b13a761b03ba7e241e132ef9a5a378a7a5",
+      "byte_exact": true,
+      "operation": "962:2",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-737-CORE_META_MODEL-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix@12.md",
+      "version": 12,
+      "sha256": "aeea4cc2b36f9a54a43591886f6e569a2090eb8f374ce3b51e9148bddf1c27ab",
+      "byte_exact": true,
+      "operation": "962:3",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-764-CORE_META_MODEL-REQUIREMENT--register-content-role-identity-letters@16.md",
+      "version": 16,
+      "sha256": "68a007cbba83a6ea5b4eba97b13b25454dc39bb9895bf583aa5d40152c87c885",
+      "byte_exact": true,
+      "operation": "962:4",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier@3.md",
+      "version": 3,
+      "sha256": "15296a9d396578a9fdd5ca54c4fe94f134913c28ffc25ea3973ac50ea1f1e845",
+      "byte_exact": true,
+      "operation": "962:6",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity@6.md",
+      "version": 6,
+      "sha256": "2f83beeaecf177e4f9e6fbd67f356ce535f3691183d70b48b946795c011da88f",
+      "byte_exact": true,
+      "operation": "962:7",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1304-CORE_META_MODEL-REQUIREMENT--define-epic-identifier-grammar@6.md",
+      "version": 6,
+      "sha256": "a5f333a272ebda2e816161f3c6288477628058ebb2a643be9aec8e358c3e7993",
+      "byte_exact": true,
+      "operation": "962:8",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1369-CORE_META_MODEL-REQUIREMENT--give-every-epic-one-directory-carrier@4.md",
+      "version": 4,
+      "sha256": "78b1795e7df4e5f47d07b777b16b5bcb7ae2d08bc721b799280973a89d03d1f6",
+      "byte_exact": true,
+      "operation": "962:9",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-728-CORE_META_MODEL-REQUIREMENT--define-project-atom-id@15.md",
+      "version": 15,
+      "sha256": "12624bf3bbac3912cb2c2a94247e7d79a8ca371f68506f02deea38fe02fa130c",
+      "byte_exact": true,
+      "operation": "962:10",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1415-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-version@3.md",
+      "version": 3,
+      "sha256": "17deb3870ecf03a283b0be671a1ac6454da9f5f86263b9c3fc748d19856a4597",
+      "byte_exact": true,
+      "operation": "962:11",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1416-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-updated-at@3.md",
+      "version": 3,
+      "sha256": "11b39efbb6ddb8144bcec2cd35fba497ee3693a162e262f7dc42a8fc4cda5648",
+      "byte_exact": true,
+      "operation": "962:12",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-165-CORE_META_MODEL-REQUIREMENT--give-every-atom-revision-version-and-updated-at@11.md",
+      "version": 11,
+      "sha256": "16caa7ef7a54f01cc3289adb79fc1e44a2d41b300b887b104e496ffa12b23a5c",
+      "byte_exact": true,
+      "operation": "962:13",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1372-CORE_META_MODEL-REQUIREMENT--derive-journal-revision-updated-at@3.md",
+      "version": 3,
+      "sha256": "be818921cc3f0974bccaa05219798105533fc8457aa41f9169f8d73795617f35",
+      "byte_exact": true,
+      "operation": "962:14",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-963-CORE_META_MODEL-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens@9.md",
+      "version": 9,
+      "sha256": "cbb14b504d8daef722988884c8d5dfa7598758825625129ba9c7450248f75161",
+      "byte_exact": true,
+      "operation": "962:16",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-978-CORE_META_MODEL-REQUIREMENT--define-navigational-order-number@9.md",
+      "version": 9,
+      "sha256": "9b2c8ca71fde9f9862d294c713b2d920900afd7e34902a282d7d4e85536b0b1d",
+      "byte_exact": true,
+      "operation": "962:18",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-981-CORE_META_MODEL-REQUIREMENT--default-navigational-order-chronologically@7.md",
+      "version": 7,
+      "sha256": "11cc79a6d9aadc12ee32104bccf48130065dff4cf27f6809519361565ae65db2",
+      "byte_exact": true,
+      "operation": "962:19",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers@9.md",
+      "version": 9,
+      "sha256": "51751283157ea53f84b0b23df50cfa34a4d6cbd13061d2d53ba3b34d3ae4418a",
+      "byte_exact": true,
+      "operation": "962:21",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset@10.md",
+      "version": 10,
+      "sha256": "2a0fa8389ba8fe7f6f6e5ebe972c5a9d421d873e841385912e7c2127ca31aaaf",
+      "byte_exact": true,
+      "operation": "962:23",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection@16.md",
+      "version": 16,
+      "sha256": "00f629d63836f91cbb62a3fceb4a529584fb273d7e5600a7d5daabb60daa9336",
+      "byte_exact": true,
+      "operation": "962:26",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode@13.md",
+      "version": 13,
+      "sha256": "0dfe40c47dde753c964519adf9c0f8a3df49f2db7d43e65062c36f0ea4696f6c",
+      "byte_exact": true,
+      "operation": "962:27",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits@9.md",
+      "version": 9,
+      "sha256": "8d82b7ccd637f1bef88ae24e05ff63383aaac38ad3105c638cbaafa7f7502fce",
+      "byte_exact": true,
+      "operation": "962:29",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-297-CORE_META_MODEL-REQUIREMENT--show-one-structural-level-when-architecture-views-are-enabled@10.md",
+      "version": 10,
+      "sha256": "970f3c8c920324d4832648c8d896dd31cb1d58d1a2e6182f39737e4db2f22e27",
+      "byte_exact": true,
+      "operation": "962:31",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection@12.md",
+      "version": 12,
+      "sha256": "aa214d47ff77c7e8f3db0927f3f01d060097bdee88975bbf9ec00f0e2f7bc49b",
+      "byte_exact": true,
+      "operation": "962:33",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection@15.md",
+      "version": 15,
+      "sha256": "91e9bfea56d9bdb736b305a87b56c7cfca881752491dabfd34a498b75f34bc94",
+      "byte_exact": true,
+      "operation": "962:34",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion@15.md",
+      "version": 15,
+      "sha256": "01b803174efb81b80c06dad49f3813d8fb9403dcd1ef5c1e067a1c944fd86465",
+      "byte_exact": true,
+      "operation": "962:35",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stage-prefixes@10.md",
+      "version": 10,
+      "sha256": "31c7ddaeb6fde0ac18448c0e98b7eb1d5fca557bd1969c7b77ff4276f7bde86e",
+      "byte_exact": true,
+      "operation": "962:37",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references@5.md",
+      "version": 5,
+      "sha256": "f1324c89a1570b48b3f724d0ef3c912966592928b1e2f6d1eec8bc35c78fabd6",
+      "byte_exact": true,
+      "operation": "962:38",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-353-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers@9.md",
+      "version": 9,
+      "sha256": "31371859085625ab582af82f6d6c4dffd43dea88c92f62d9127423704eea17c8",
+      "byte_exact": true,
+      "operation": "962:39",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes@11.md",
+      "version": 11,
+      "sha256": "f6b78330b27886a38a238cfd5b37a76e995d720bffb1b6d068a57627f02a5138",
+      "byte_exact": true,
+      "operation": "962:41",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-362-CORE_META_MODEL-REQUIREMENT--configure-the-artifact-timestamp-timezone@12.md",
+      "version": 12,
+      "sha256": "21057419e1d42ee180c6d8ad560627fdc30edbe250f8d13a212fe787f0362340",
+      "byte_exact": true,
+      "operation": "962:43",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-373-CORE_META_MODEL-REQUIREMENT--encode-project-scope-authority-modes-in-the-scope-unit-graph@14.md",
+      "version": 14,
+      "sha256": "e2bed35591184a0708dc626582dd2353dc744ce20ec3209ad2049697c772e29d",
+      "byte_exact": true,
+      "operation": "962:45",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-383-CORE_META_MODEL-REQUIREMENT--register-obsolete-project-names@14.md",
+      "version": 14,
+      "sha256": "f82a18be6f00eb74c540574344ac5b5680b91be2c489a96e3771d917994c8479",
+      "byte_exact": true,
+      "operation": "962:47",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint@11.md",
+      "version": 11,
+      "sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6",
+      "byte_exact": true,
+      "operation": "962:49",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type@8.md",
+      "version": 8,
+      "sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb",
+      "byte_exact": true,
+      "operation": "962:50",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-760-CORE_META_MODEL-REQUIREMENT--derive-default-external-type-names@12.md",
+      "version": 12,
+      "sha256": "f17b613affb524d1dd7a38e4f656c8f3c2710a837c215ee2fe57a400123a738d",
+      "byte_exact": true,
+      "operation": "962:51",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-750-CORE_META_MODEL-REQUIREMENT--register-rationale-as-a-type-value-for-analysis-atoms@13.md",
+      "version": 13,
+      "sha256": "05777cf9981607fbbfe22ae0ce0e4f79836b89a9335fb243e481e6cc8034cfe4",
+      "byte_exact": true,
+      "operation": "962:52",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting@11.md",
+      "version": 11,
+      "sha256": "16abd8f1474ce25d440115cf745e8c1d40ab7b844ea0bebb68a3100035b29856",
+      "byte_exact": true,
+      "operation": "962:54",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-098-CORE_META_MODEL-REQUIREMENT--scope-path-does-not-change-semantic-coordinates@15.md",
+      "version": 15,
+      "sha256": "7cc26d3535b0b4f36d116617128b852e79560575b8e4784031414c8e4d9efb57",
+      "byte_exact": true,
+      "operation": "962:56",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities@1.md",
+      "version": 1,
+      "sha256": "23e97824a8fe7bf608f5fa0cd6e4063008f8117110a1fb7f325232dc7b95276f",
+      "byte_exact": true,
+      "operation": "962:57",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames@5.md",
+      "version": 5,
+      "sha256": "ddde5a99c7b4f7fde3abfe52a1c56fb9087b4da194251931629782f1fe2a000b",
+      "byte_exact": true,
+      "operation": "962:58",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-122-CORE_META_MODEL-REQUIREMENT--keep-atom-identity-independent-of-its-mutable-summary@11.md",
+      "version": 11,
+      "sha256": "b0ba1f6b279ad1bf21b28c5e107b7972197423b7fa03bf597486ac8c8e0a778c",
+      "byte_exact": true,
+      "operation": "962:59",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-166-CORE_META_MODEL-REQUIREMENT--projections-have-updated-at@10.md",
+      "version": 10,
+      "sha256": "81799813802e6f993dc278f70177fda792d42d4fb99fe7370262299a0b8a0f33",
+      "byte_exact": true,
+      "operation": "962:60",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-174-CORE_META_MODEL-REQUIREMENT--separate-extension-ownership-from-application-bindings@9.md",
+      "version": 9,
+      "sha256": "ba89e8779128953c38b6c1f305ca2e25a2d261e80b69bcadaa0625eb8c2fce37",
+      "byte_exact": true,
+      "operation": "962:61",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-730-CORE_META_MODEL-REQUIREMENT--preserve-atom-id-across-scope-change@10.md",
+      "version": 10,
+      "sha256": "19e01bad960b6a0dcc32376c9d250ab0aecea3de579fbda222acac71e60872b9",
+      "byte_exact": true,
+      "operation": "962:62",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-381-CORE_META_MODEL-REQUIREMENT--register-feature-realization-relation-kind@13.md",
+      "version": 13,
+      "sha256": "191d897f2d173ba8d1e5f1d4cbd8b11f968e046adbc74ee6761494b433b0b0a9",
+      "byte_exact": true,
+      "operation": "962:63",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits@10.md",
+      "version": 10,
+      "sha256": "6dec3ffe2dcc2260fb3c78eba9963f3823f6d8ebf4129650db535dadca78eb71",
+      "byte_exact": true,
+      "operation": "962:64",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-315--production-logging-policies@7.md",
+      "version": 7,
+      "sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26",
+      "byte_exact": true,
+      "operation": "963:3",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes@17.md",
+      "version": 17,
+      "sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777",
+      "byte_exact": true,
+      "operation": "963:5",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms@15.md",
+      "version": 15,
+      "sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592",
+      "byte_exact": true,
+      "operation": "963:7",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations@11.md",
+      "version": 11,
+      "sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27",
+      "byte_exact": true,
+      "operation": "963:9",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type@11.md",
+      "version": 11,
+      "sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163",
+      "byte_exact": true,
+      "operation": "963:10",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint@12.md",
+      "version": 12,
+      "sha256": "e54069115da090d5940f974f0244aeccb4a3449a1f2a4edddaaa1f75ba6d816d",
+      "byte_exact": true,
+      "operation": "963:11",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@13.md",
+      "version": 13,
+      "sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e",
+      "byte_exact": true,
+      "operation": "963:13",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@10.md",
+      "version": 10,
+      "sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40",
+      "byte_exact": true,
+      "operation": "963:14",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-751--register-delivery-types@11.md",
+      "version": 11,
+      "sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502",
+      "byte_exact": true,
+      "operation": "963:16",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@9.md",
+      "version": 9,
+      "sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc",
+      "byte_exact": true,
+      "operation": "963:18",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@10.md",
+      "version": 10,
+      "sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a",
+      "byte_exact": true,
+      "operation": "963:19",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type@9.md",
+      "version": 9,
+      "sha256": "28fdd59de936753a9d0dd91c22d23cb225021cc936909f14da658bc26a6000e9",
+      "byte_exact": true,
+      "operation": "963:20",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type@9.md",
+      "version": 9,
+      "sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4",
+      "byte_exact": true,
+      "operation": "963:21",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@12.md",
+      "version": 12,
+      "sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6",
+      "byte_exact": true,
+      "operation": "963:23",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-752--register-ops-types@11.md",
+      "version": 11,
+      "sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2",
+      "byte_exact": true,
+      "operation": "963:25",
+      "byte_exact_against_replayed_before": true
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release@8.md",
+      "version": 8,
+      "sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d",
+      "byte_exact": true,
+      "operation": "963:27",
+      "byte_exact_against_replayed_before": true
+    }
+  ],
+  "known_corrected_intermediate_claim": "CA-D-378@1 contained lowercase Analysis a; CA-P-962:57 restored A in @2 and preserved @1. This is recorded, not concealed; no required incoming consumer repair depended on D378. All current owner semantic correctness remains subject to CA-P-965 final review."
+}

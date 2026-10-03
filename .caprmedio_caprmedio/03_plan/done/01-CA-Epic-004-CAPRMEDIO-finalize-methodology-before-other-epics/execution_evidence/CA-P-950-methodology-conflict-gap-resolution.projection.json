@@ -1,0 +1,174 @@
+{
+  "schema": "caprmedio.ca-p-950.methodology-conflict-gap-resolution.v1",
+  "artifact_form": "PROJECTION",
+  "authority": "NON_AUTHORITATIVE",
+  "task_atom_id": "CA-P-950",
+  "completed_at": "2026-09-03T23:06:01+04:00",
+  "predecessors": {
+    "ca_p_948_report": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-948-complete-methodology-conflict-and-gap-report.projection.json",
+      "sha256": "ab868f45d117022785393f6bb991a3de3e066895f66623f6051dac3947bede4e"
+    },
+    "ca_p_949_dispositions": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-949-methodology-conflict-dispositions.projection.json",
+      "sha256": "57cc5fb63bfc6d5273b2ff2a24ebab255b71926fd86dca0447cf958dbb287f16",
+      "operator_disposition_count": 0,
+      "source_authority_changed": false
+    }
+  },
+  "finding_dispositions": [
+    {
+      "finding_id": "CA-P-948-F-001",
+      "resolution_class": "mechanical",
+      "resolution": "the selected installed GENERATE_PROJECT_GRAPH_STATE Tool rebuilt both registered non-authoritative Scope Unit Projections.",
+      "affected_carriers": [
+        ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml",
+        ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml"
+      ],
+      "source_authority_changed": false,
+      "resolved": true
+    },
+    {
+      "finding_ids": [
+        "CA-P-948-I-001",
+        "CA-P-948-I-002",
+        "CA-P-948-I-003",
+        "CA-P-948-I-004"
+      ],
+      "resolution_class": "informational_permitted",
+      "resolution": "no repair is required by the applicable authority. The three permitted definition cycles, valid non-Term prerequisites, restricted CCE-signature boundary, and narrow claim-value candidate boundary remain explicitly classified as permitted."
+    }
+  ],
+  "project_scope_unit_graph_repair": {
+    "installed_generator": ".caprmedio_install/releases/9bc3a2fa78bea86fb0ca137f194dcb994bca091443e0a7bff84ebfd36e528e30/TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "canonical_generator_sha256": "ab634edf6b2903cb066f3bce058d66c0e52ca6df900b751949322f7a47137644",
+    "executed_generator_sha256": "ab634edf6b2903cb066f3bce058d66c0e52ca6df900b751949322f7a47137644",
+    "first_run": {
+      "apply": true,
+      "changed": true,
+      "scope_units": 13,
+      "methodology_source_atoms": 665
+    },
+    "second_run": {
+      "apply": false,
+      "changed": false,
+      "scope_units": 13,
+      "methodology_source_atoms": 665
+    },
+    "current_receipts": {
+      "source_scope_unit_count": 3,
+      "source_atom_count": 665,
+      "source_atom_unique_id_count": 665,
+      "source_atom_receipt_hashes_match_live_carriers": true,
+      "source_map_methodology_source_binding_count": 665,
+      "source_map_unique_output_count": 665,
+      "includes_ca_r_1375": true,
+      "ca_r_1375_source_scope_unit": "CORE_META_MODEL",
+      "ca_r_1375_version": 1,
+      "ca_r_1375_sha256": "7d9bb14c981a303502b1a0ccc7fb57f76610bfee6a79030e1f2f30520349832a",
+      "graph_source_frontier_digest": "965e490d5211a6094a4d37f9f09cde7760669bf11ad65586aae0016ac737abdd",
+      "graph_projection_sha256": "cea1326f2f97f3542dc81e78a0aa6525f9e891f1754ab832730367ed4166b92d",
+      "source_binding_projection_sha256": "6132ec553f37687ec533aeada891782a7668babc886f4d955474e36153f0f68b"
+    }
+  },
+  "fixed_point_evaluations": {
+    "compiler": {
+      "runs_byte_identical": true,
+      "report_sha256": "1745a742cd03c132d9309a5d4ef58a4551316d3105b96bddbe25089318d8f18e",
+      "source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+      "eligible_candidate_count": 665,
+      "selected_candidate_count": 665,
+      "conflict_count": 0,
+      "unresolved_conflict_count": 0,
+      "diagnostic_count": 0,
+      "can_apply": true,
+      "applicable_methodology_members": {
+        "expected": 665,
+        "actual": 665,
+        "missing": 0,
+        "orphan": 0,
+        "source_payload_mismatch": 0
+      }
+    },
+    "expansion_boundary": {
+      "core_only": {
+        "source_counts": {
+          "CORE_META_MODEL": 595,
+          "INSTALLED_EXTENSIONS": 0,
+          "LOCAL_CONFIGURATION": 0
+        },
+        "hard_violation_count": 0,
+        "stable_lineage_gap_count": 0
+      },
+      "core_extensions_local": {
+        "source_counts": {
+          "CORE_META_MODEL": 595,
+          "INSTALLED_EXTENSIONS": 0,
+          "LOCAL_CONFIGURATION": 70
+        },
+        "hard_violation_count": 0,
+        "stable_lineage_gap_count": 0
+      }
+    },
+    "entity_term_subject_graphs": {
+      "core": {
+        "active_atom_count": 595,
+        "term_system_violation_count": 0,
+        "definition_conflict_count": 0,
+        "permitted_definition_cycle_count": 3,
+        "depends_on_without_governs_count": 68
+      },
+      "core_extensions_local": {
+        "active_atom_count": 665,
+        "term_system_violation_count": 0,
+        "definition_conflict_count": 0,
+        "permitted_definition_cycle_count": 3,
+        "depends_on_without_governs_count": 76
+      }
+    },
+    "canonical_signatures": {
+      "core": {
+        "cce_duplicate_signature_group_count": 0,
+        "scope_duplicate_signature_group_count": 0,
+        "claim_value_set_candidate_group_count": 0
+      },
+      "core_extensions_local": {
+        "cce_duplicate_signature_group_count": 0,
+        "scope_duplicate_signature_group_count": 0,
+        "claim_value_set_candidate_group_count": 0
+      },
+      "permitted_information": {
+        "restricted_cce_boundary_exclusion_count": 9,
+        "unparseable_single_value_claims_are_report_only": true
+      }
+    },
+    "retrieval": {
+      "focused_test_status": "pass",
+      "permitted_non_term_prerequisites": "the registered retrieval boundary permits non-Term prerequisites under CA-R-1279, CA-R-1318, and CA-R-1319."
+    },
+    "focused_tests": {
+      "total": 53,
+      "passed": 53,
+      "suites": {
+        "Applicable Methodology compiler and expansion boundary": 13,
+        "Applicable Methodology retriever": 9,
+        "Entity Graph generator": 9,
+        "Project Scope Unit Graph generator": 8,
+        "CCE canonical signatures": 4,
+        "Scope canonical signatures": 4,
+        "claim value-set candidate detector": 6
+      }
+    }
+  },
+  "result": {
+    "remaining_true_finding_count": 0,
+    "remaining_operator_disposition_count": 0,
+    "source_authority_change_count": 0,
+    "reproducible_fixed_point": true,
+    "confidence": 99,
+    "excluded": [
+      ".DS_Store",
+      "macOS-protected empty directory shells"
+    ]
+  }
+}

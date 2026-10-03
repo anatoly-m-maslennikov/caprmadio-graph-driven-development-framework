@@ -1,0 +1,330 @@
+{
+  "schema": "ca-p-957-checkpoint-audit/v1",
+  "non_authoritative": true,
+  "batch": "06",
+  "canonical_proposed_overlay": {
+    "result": "PASS",
+    "batch": "06",
+    "candidate_count": 6,
+    "checked_count": 8,
+    "diagnostic_count": 0,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-R-1000",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope.md",
+        "sha256": "8684741a5cf2beaab33d8bac4a15cf611b118592e6e8c464a99bb486c8624759",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1212",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-CORE_META_MODEL-CORE-REQUIREMENT--define-definition-of-done-for-a-task.md",
+        "sha256": "29d256cfdc505f789a59e65c7ebdd7bf0bbeea80700296ddd0f82e5bf371ee46",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1214",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-CORE_META_MODEL-CORE-REQUIREMENT--define-task-details.md",
+        "sha256": "1a31fcfd05b3412714a02fa78392a47767f1abd40859963ee543543f9eec8ba9",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-124",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-METHOD--author-task-atoms.md",
+        "sha256": "b22baddb141c51cf4884b01e353ba8aaf43ec8e622eed4e0be6f85061ebebd4d",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-245",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms.md",
+        "sha256": "be89d573818326d837e52419a8aaf7a18aeb0a0f7df3ae0e63d02da9d497859d",
+        "planned_candidate": true,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-D-271",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+        "sha256": "15b7408a423b4b6f132fca7a377a41c15179481febe92d1a4db8f200d8b9e695",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-1005",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1005-CORE_META_MODEL-CORE-REQUIREMENT--define-task-done.md",
+        "sha256": "a65425689bb3619ff880b238ebd1a2ba6fcb1e07cb3c16809907f8cfd58b58e2",
+        "planned_candidate": false,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-123",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-METHOD--write-definitions-of-done.md",
+        "sha256": "f4e734f75e28eb94c9243b299a53208d3594f97f2fc779b03a5cd787511d767c",
+        "planned_candidate": false,
+        "source_count": 4,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "reference_scan": {
+    "markdown_files": 20382,
+    "errors": [
+      {
+        "path": ".caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224555+0400/caprmedio/000_caprmedio_framework/README.md",
+        "error": "[Errno 2] No such file or directory: '.caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224555+0400/caprmedio/000_caprmedio_framework/README.md'"
+      },
+      {
+        "path": ".caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224653+0400/caprmedio/000_caprmedio_framework/README.md",
+        "error": "[Errno 2] No such file or directory: '.caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224653+0400/caprmedio/000_caprmedio_framework/README.md'"
+      },
+      {
+        "path": ".caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224459+0400/caprmedio/000_caprmedio_framework/README.md",
+        "error": "[Errno 2] No such file or directory: '.caprmedio_runtime/history/migrations/migrate_to_six_framework_layers/20260818T224459+0400/caprmedio/000_caprmedio_framework/README.md'"
+      }
+    ],
+    "matches": [
+      {
+        "atom_id": "CA-M-124",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@6.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@2.md",
+        "line": 6,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@3.md",
+        "line": 8,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@4.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@5.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@1.md",
+        "line": 2,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@3.md",
+        "line": 12,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@6.md",
+        "line": 22,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@5.md",
+        "line": 20,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@4.md",
+        "line": 17,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms.md",
+        "line": 68,
+        "text": "- `CA-R-951-GOVERN-CORE-REQUIREMENT`, `CA-R-952-GOVERN-CORE-REQUIREMENT`, `CA-R-953-GOVERN-CORE-REQUIREMENT`, `CA-R-954-GOVERN-CORE-REQUIREMENT`, `CA-R-955-GOVERN-CORE-REQUIREMENT`, `CA-R-956-GOVERN-CORE-REQUIREMENT`"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059.md",
+        "line": 294,
+        "text": "209\tCA-R-955\t2921bdaf68a36d0f969bf7e39464dcc503fb5ca4166408edda79571e7f79ebab\tcompatible\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority@2.md",
+        "line": 44,
+        "text": "- `CA-R-949`, `CA-R-950`, `CA-R-951`, `CA-R-954`, `CA-R-955`, `CAPRMEDIO-GOV-REQU-310`"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation.md",
+        "line": 51,
+        "text": "- `CA-R-954`, `CA-R-955`, `CAPRMEDIO-GOV-REQU-310`, `CAPRMEDIO-GOV-REQU-312`, `CAPRMEDIO-GOV-REQU-325`, `CAPRMEDIO-GOV-REQU-377`"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority.md",
+        "line": 45,
+        "text": "- `CA-R-949`, `CA-R-950`, `CA-R-951`, `CA-R-954`, `CA-R-955`, `CAPRMEDIO-GOV-REQU-310`"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054.md",
+        "line": 51,
+        "text": "- `CA-R-954`, `CA-R-955`, `CAPRMEDIO-GOV-REQU-310`, `CAPRMEDIO-GOV-REQU-312`, `CAPRMEDIO-GOV-REQU-325`, `CAPRMEDIO-GOV-REQU-377`"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054.md",
+        "line": 158,
+        "text": "- `CA-R-955`: `compatible`; its Claim has one precise CCE interpretation and its navigation Projections add no meaning."
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@2.md",
+        "line": 279,
+        "text": "CA-R-955\tdb3f8ebee7a2f8499a664cb7add669826130cde559594d8d33ef06fe1633e3c8\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078.md",
+        "line": 281,
+        "text": "CA-R-955\tdb3f8ebee7a2f8499a664cb7add669826130cde559594d8d33ef06fe1633e3c8\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077.md",
+        "line": 282,
+        "text": "CA-R-955\tdb3f8ebee7a2f8499a664cb7add669826130cde559594d8d33ef06fe1633e3c8\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom.md",
+        "line": 22,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom.md",
+        "line": 22,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+        "line": 10,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@2.md",
+        "line": 6,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@3.md",
+        "line": 8,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-GOVERN-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@1.md",
+        "line": 2,
+        "text": "atom_id: CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@3.md",
+        "line": 12,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@5.md",
+        "line": 20,
+        "text": "    - CA-R-955"
+      },
+      {
+        "atom_id": "CA-R-955",
+        "path": ".caprmedio_runtime/ca-p-110-regeneration-SsVt8c/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-GOVERN-QA_CASE--validate-a-demand-atom@4.md",
+        "line": 17,
+        "text": "    - CA-R-955"
+      }
+    ],
+    "conclusion": "No live authoritative inbound reference to R955 or the renamed M124 basename requires repair. Matches are the retiring source's own identity, archived/DONE history, non-authoritative projections and runtime snapshots. Three dangling historical migration README symlinks could not be read and are outside active authority. Historical and generated references are intentionally untouched."
+  },
+  "semantic_relations": "Only R1000's same-tier Requirement normative parent R919 is removed. E245 receives five actual evaluation_for authorities. No Delivery relation ban or invented replacement parent is applied.",
+  "scope_binding": "The six exact Task/Scope paths become Task/Claim/Scope; whole bodies are byte-preserved. R1212, R1214 and D271 are explicit follow-up corrections, not rewritten old disposition history."
+}

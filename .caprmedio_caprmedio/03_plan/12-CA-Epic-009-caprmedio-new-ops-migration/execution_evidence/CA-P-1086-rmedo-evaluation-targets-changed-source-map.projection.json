@@ -1,0 +1,407 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "rmedo_evaluation_targets",
+  "generated_at": "2026-09-14T00:26:45+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_partial_stage",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-changed-source-map.projection.json",
+        "sha256": "db1b7f3527b76a06760f0a2676638c1b62a01d996fe0dcc49c827e96bcfea903"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-evaluation-boundaries-changed-source-map.projection.json",
+        "sha256": "96e511268d0429494a51b218a1382ddf87832a7ed62180152f9e679f1d588a0e"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-catalog-classification-changed-source-map.projection.json",
+        "sha256": "2ce75ae77e32a6805291b9915e99b56178e6a57a760a4337714c6b00bb40ccda"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-atom-subjects-graph-changed-source-map.projection.json",
+        "sha256": "60c54accd2ace34c00bd3c1ea92f361d377bdc2305d9e2b5416b7b48458886e1"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-derivation-materialization-changed-source-map.projection.json",
+        "sha256": "94eeb0ef8d46335836dacbadeaa40c784b6b10bf506541ae323bc95b154115e6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-reconciled-projection-changed-source-map.projection.json",
+        "sha256": "9d2ffb90e553bf657a5a9801a5ced769b62b292c77991303b78c1714a3a51caf"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1565,
+    "frontier_after": 1565,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CA-R-1018",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1018-CORE_META_MODEL-CORE-REQUIREMENT--register-evaluation-targets.md",
+      "before_version": 8,
+      "before_sha256": "d72a1687ab3301274a3571cd66cf0045106fe0e6e1e4349781a5500c4223a89f",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1018-CORE_META_MODEL-CORE-REQUIREMENT--register-evaluation-targets.md",
+      "version": 9,
+      "sha256": "cd1a2ffe0ee8f8f9839a51b8c392fb7490a2ef082b0d77095095282f7f02be08",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1018-CORE_META_MODEL-CORE-REQUIREMENT--register-evaluation-targets@8.md",
+      "archive_sha256": "d72a1687ab3301274a3571cd66cf0045106fe0e6e1e4349781a5500c4223a89f",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Apply explicit Operator RMEDO override to evaluation_for target Content Roles; preserve E ownership, checked-authority qualification and Standard/Core/General target cardinalities. No new self-evaluation or cycle policy.",
+      "governs": "Evaluation For Relation",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-447",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-447-CORE_META_MODEL-EVALUATION--validate-three-tier-boundaries-with-concrete-cases.md",
+      "before_version": 4,
+      "before_sha256": "c96b3a6176344bbf9e29cf12ee06c27b8a5e30a8ead860a3e90b08e311a75f87",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-447-CORE_META_MODEL-EVALUATION--validate-three-tier-boundaries-with-concrete-cases.md",
+      "version": 5,
+      "sha256": "acea3b4ee94ef102b5c7a74c24fafc90b177603312296ce9fccab458e61b3258",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-447-CORE_META_MODEL-EVALUATION--validate-three-tier-boundaries-with-concrete-cases@4.md",
+      "archive_sha256": "c96b3a6176344bbf9e29cf12ee06c27b8a5e30a8ead860a3e90b08e311a75f87",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Align only fixture 3 and its acceptance sentence with RMEDO: qualifying checked-authority E/O targets accepted without invented Er/Em/Ed membership, unresolved and invalid Concern targets rejected; all other content and frontmatter except version/time preserved.",
+      "governs": "Atom Tier Validation/concrete cases",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 9,
+      "before_sha256": "956c4a1ab9929ef54235a198cd4672f9639e7b06365b057c78068f146a13de9f",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "version": 10,
+      "sha256": "4d1715e140c16f54f67408b8c55d51919b8f7af003e8aa3c921d45a89b5e3ca9",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@9.md",
+      "archive_sha256": "956c4a1ab9929ef54235a198cd4672f9639e7b06365b057c78068f146a13de9f",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "delta": "Record the independent RMEDO Evaluation-target range expansion, unapplied extraction boundary, observed external index-baseline drift and Active status."
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-rmedo-evaluation-targets-partial-stage.md",
+      "version": 1,
+      "sha256": "1a99bf640b9a55df0d9fc2766a065342ff65bd64a2ee231ebb229825eb4a5ea1",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_transfers": [
+    {
+      "identity": "CA-R-1018",
+      "previous_content_mutation_owner": null,
+      "content_mutation_owner": "CA-P-1086",
+      "authority": "Latest explicit Operator approval expanding evaluation_for target Content Roles to RMEDO; standalone stage only."
+    },
+    {
+      "identity": "CA-E-447",
+      "previous_content_mutation_owner": null,
+      "content_mutation_owner": "CA-P-1086",
+      "authority": "Necessary immediate fixture consistency for explicit Operator RMEDO target-range expansion; only fixture 3 and matching acceptance clause."
+    }
+  ],
+  "reservation_dispositions": [],
+  "operator_authority": {
+    "decision": "Expand evaluation_for target Content Roles to RMEDO; apply R1018 independently of blocked M224 extraction.",
+    "new_ids_allocated": []
+  },
+  "index_baseline_transition": {
+    "previous_raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "current_raw_index_sha256": "531ff2c9ce3dc83934a4e02b11dcde7d571242cd45ecea1ccd6d20dfd4486c31",
+    "origin": "Observed external drift; no agent Git mutation",
+    "semantic_equivalence_asserted": false,
+    "authority": "Root directs preserving the current index bytes while applying this independent stage"
+  },
+  "read_only_authority": [
+    {
+      "identity": "CA-E-379",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-EVALUATION--validate-applicable-methodology-compilation.md",
+      "version": 11,
+      "sha256": "40b4140fd69e311aefa0c02e40a95f4a0c7db0651743990d0293c30e41f98117",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-265",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-265-CORE_META_MODEL-GENERAL-METHOD--derive-evaluation-groups-from-checked-authority.md",
+      "version": 3,
+      "sha256": "4ecace59ebccc85666b4b5d0aeee31de4837b6397c713e936eac7025c1ea2528",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1461",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1461-CORE_META_MODEL-CORE-REQUIREMENT--define-reconciled-projection.md",
+      "version": 1,
+      "sha256": "09f123ebe5b530758608e4ca76b7ddc6b85484bf2008fc2bb1e2cbfb4db99bb4",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1283",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1283-CORE_META_MODEL-CORE-REQUIREMENT--register-content-role-values.md",
+      "version": 4,
+      "sha256": "4ca4cf266b0010fd1037b2c05ddffc12f64c0ace9bf64d95c8ac90c9450bb1ce",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1341",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1341-CORE_META_MODEL-CORE-REQUIREMENT--define-evaluation-content-role.md",
+      "version": 3,
+      "sha256": "47b2a0e84e0a2e73348efceaa0b5ddfef57699dfdc15fc07d8fc80f470665cde",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1460",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1460-CORE_META_MODEL-CORE-REQUIREMENT--separate-projection-derivation-from-carrier-materialization.md",
+      "version": 1,
+      "sha256": "27e9cca862ab812f2fcf7386dfe97cd7c76fff7854cbc871b9b0edf3d4a7a356",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-224",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-METHOD--compile-applicable-methodology-deterministically.md",
+      "version": 12,
+      "sha256": "7e1fde6fe311e4f0911e145498a288f34586cdf6f289ca88457b2ddedc6ea3d2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1434",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1434-CORE_META_MODEL-CORE-REQUIREMENT--provide-reusable-methodology-compilation-authority.md",
+      "version": 2,
+      "sha256": "1518a198d0fde15a426961f16718549506f0f244791a3f00a2edf8190558639b",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1453",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1453-CORE_META_MODEL-CORE-REQUIREMENT--define-process.md",
+      "version": 1,
+      "sha256": "ab87432b165406c2f120f4d0a2e40fe63240d61b5ee4e588f9ada787ae5ff673",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1344",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1344-CORE_META_MODEL-CORE-REQUIREMENT--define-ops-content-role.md",
+      "version": 5,
+      "sha256": "11cced2e40eb6cab812cdc543c68243448aa28535cd9b2b5139dd8f08280ffdb",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-657",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "version": 11,
+      "sha256": "95c5081e91f2de4a97c5a8ec8db11e8c3649a4a5074760ac32d3f44926290267",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-166",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-166-CORE_META_MODEL-REQUIREMENT--projections-have-updated-at.md",
+      "version": 11,
+      "sha256": "8755265d66709fabe50e7b9c47a0c7f91919347a6f30415b413ca1827593a364",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-673",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-673-CORE_META_MODEL-CORE-REQUIREMENT--preserve-source-scope-in-derived-views.md",
+      "version": 8,
+      "sha256": "e59a33e5c2fb1dac44f35cc40c5df536623afccdeead9f5ce435b56943fb6791",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1342",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1342-CORE_META_MODEL-CORE-REQUIREMENT--define-delivery-content-role.md",
+      "version": 3,
+      "sha256": "c35164298c6ee1e814a69ffc45e2c598dd86ec124be2474bebb4dd475ba55412",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1406",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1406-CORE_META_MODEL-CORE-REQUIREMENT--keep-entity-identity-independent-of-graph-materialization.md",
+      "version": 2,
+      "sha256": "63b99a161cce31a81b17c4cadea98f84562ea09a574507de402e7b3aebb37f75",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-305",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-305-CORE_META_MODEL-CORE-DELIVERY--carry-projected-atoms-without-new-identity.md",
+      "version": 4,
+      "sha256": "8564e6d74202194fafd62c57f02f16b4919c1c7ccf711c86f82ed4f1b8703795",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-313",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-313-CORE_META_MODEL-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+      "version": 5,
+      "sha256": "fd5c7bfbcd1ee11d4eea70d615861f2fbcf5e85af8c22c22525069147b9c28d2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-306",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-306-CORE_META_MODEL-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+      "version": 5,
+      "sha256": "dcf87760aaf3bf095607c262d8347a6c40488922b8a2ec73d5477a8511bf15ad",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-253",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-CORE-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "version": 6,
+      "sha256": "490f1eb8121d6167bacb5f4b2dc6cbecf89c7daf6015207726fa46ee702dca55",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-309",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-309-CORE_META_MODEL-CORE-DELIVERY--bind-materialized-representations-to-regeneration-sources.md",
+      "version": 4,
+      "sha256": "999567622efad6347cb71e1340a50fbf5e5abafc9f8cffc517c1b4444cd41a02",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1314",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1314-CORE_META_MODEL-CORE-REQUIREMENT--preserve-source-atom-revision-identity-in-applicable-methodology.md",
+      "version": 5,
+      "sha256": "ab2a5392cb8d83d8e14498177e039fe79ea2af2a11076d4061babf7c8b7ee21c",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1315",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1315-CORE_META_MODEL-GENERAL-REQUIREMENT--select-only-current-active-rmedo-atom-revisions.md",
+      "version": 7,
+      "sha256": "42467b2f0b31790aca6fc1b697aadfff6c2214f1ed57b0d5a26b17d6f649045d",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1316",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1316-CORE_META_MODEL-CORE-REQUIREMENT--forbid-claim-synthesis-and-merge-during-compilation.md",
+      "version": 4,
+      "sha256": "802376cff802ffbf23d2fb5ba9cc47e9b20111808ea6eb01e9242a05a0f02cd8",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1317",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1317-CORE_META_MODEL-REQUIREMENT--fail-closed-on-unresolved-methodology-conflicts.md",
+      "version": 6,
+      "sha256": "dae6ae5bf98ff2e9866da6ea24452b3d759773f9c036374cffb2cf456729f06a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-925",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "version": 14,
+      "sha256": "6901434d29086a909cb110782edcaa6ce9609aae70a2ff5c237462b03d0b5098",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1432",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "version": 1,
+      "sha256": "a482003778ea6770097e431d452b434650c5649e227e871d68b5e54fcae435c2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-274",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "version": 1,
+      "sha256": "19b46d69e939e50c0cea217b20a168b63daa55efb907da8cd8fa6ffec52288dd",
+      "scope_unit": "CORE_META_MODEL"
+    }
+  ],
+  "remaining_reserved_sources": [
+    "CAPRMEDIO-META-REQU-166",
+    "CAPRMEDIO-META-REQU-673",
+    "CA-R-1272",
+    "CA-R-1273",
+    "CA-R-1274",
+    "CA-R-626",
+    "CAPRMEDIO-META-REQU-620",
+    "CAPRMEDIO-META-REQU-627",
+    "CAPRMEDIO-META-REQU-123",
+    "CAPRMEDIO-GOV-REQU-354",
+    "CA-M-114",
+    "CA-M-116",
+    "CA-M-231",
+    "CA-R-1408",
+    "CA-R-1409"
+  ],
+  "remaining": {
+    "task_done": false,
+    "Applicable_Methodology_Type": "Resolved as Projection/Type: Reconciled Projection.",
+    "Source_Reconciliation_Process": "Extraction source candidate exists but remains unapplied pending an admitted replacement-lineage Journal Carrier; M224 and E379 unchanged.",
+    "other_tasks_executed": []
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1086-rmedo-evaluation-targets-partial-stage",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations authorized"
+  },
+  "validation": {
+    "existing_source_revisions": 2,
+    "new_source_ids": 0,
+    "unrelated_admitted_sources_unchanged": 1563,
+    "drafts_unchanged": 53,
+    "other_tasks_unchanged": 115,
+    "task_status": "Active",
+    "raw_index_sha256": "531ff2c9ce3dc83934a4e02b11dcde7d571242cd45ecea1ccd6d20dfd4486c31",
+    "implementation_conformance_claimed": false
+  }
+}

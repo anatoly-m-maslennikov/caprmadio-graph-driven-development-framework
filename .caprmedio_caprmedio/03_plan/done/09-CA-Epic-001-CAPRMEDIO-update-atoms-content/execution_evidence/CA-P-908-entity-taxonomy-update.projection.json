@@ -1,0 +1,178 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-908",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T22:22:08+04:00",
+  "outcomes": [
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1191-MMODEL-CORE-REQUIREMENT--define-base-entity.md",
+      "source_sha256": "95579f37f53083e9c53b678fda966e51c1ef5fb929d1fbba12547ecefa7720d4",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1191-MMODEL-CORE-REQUIREMENT--define-base-entity.md",
+      "outcome_sha256": "a1815b085234277e3ad96b127666a9b51cf594ecd02574aa499cc07badefae3c"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1192-MMODEL-CORE-REQUIREMENT--define-dependent-entity.md",
+      "source_sha256": "2fa446909149ef60a806852d35d19264001dab586e7763bf0d97b33c433aa2ce",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1192-MMODEL-CORE-REQUIREMENT--define-dependent-entity.md",
+      "outcome_sha256": "5beb4cb1c61734ff3ee39612f61354d9ec318d62527889ad2746a0a654d1bda8"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1193-MMODEL-CORE-REQUIREMENT--define-property.md",
+      "source_sha256": "8d9577c550bad1744db006f02e69f92faead0fc418fa35369ce7337c1741dd48",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1193-MMODEL-CORE-REQUIREMENT--define-property.md",
+      "outcome_sha256": "324ee282be8284ed237e3f911bc466897f07071a161ed886928bdf820ac0b544"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-655-MMODEL-CORE-REQUIREMENT--define-atom-artifact-form.md",
+      "source_sha256": "af246aff32a203f62e483767ed1925143b990cd5a3da6eff1742f3b0ca334b30",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-655-MMODEL-CORE-REQUIREMENT--define-atom-artifact-form.md",
+      "outcome_sha256": "592eef24406c960c035320c699b19f074237e58d133f0f447130c1e7593ef74b"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-CORE-REQUIREMENT--govern-dependent-entity-criteria-through-the-dependent-entity.md",
+      "source_sha256": "d2895b8bc6e4efdf57cdfc21144dc5f46ef4fe4e0d818f3b2ecf70782c4e565e",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-CORE-REQUIREMENT--govern-dependent-entity-criteria-through-the-dependent-entity.md",
+      "outcome_sha256": "e34319181b2f1606ca8e34eefd36a670f285bd056ef3b981481597b03273aca5"
+    }
+  ],
+  "new_authority": [
+    {
+      "atom_id": "CA-R-1248",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-MMODEL-CORE-REQUIREMENT--define-entity.md",
+      "sha256": "24463ca112163c5b1206b973e80a0b55f24e493b43872f09479a7feac6348400"
+    },
+    {
+      "atom_id": "CA-R-1249",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1249-MMODEL-CORE-REQUIREMENT--classify-artifact-as-a-base-entity.md",
+      "sha256": "2bae8d57e1c747c7fbd8fc61d78fcf30740e6fc69acf8035fc0ad315d346033b"
+    },
+    {
+      "atom_id": "CA-R-1250",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1250-MMODEL-CORE-REQUIREMENT--classify-actor-as-a-base-entity.md",
+      "sha256": "235224564d43533a9b4813597c04ed17da4c3728b25b1a163483d56520e73865"
+    },
+    {
+      "atom_id": "CA-R-1251",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1251-MMODEL-CORE-REQUIREMENT--classify-property-as-a-dependent-entity.md",
+      "sha256": "f53a5abefcdaccfb202b5754d031c9aa4eb911de94d43563e154ba86f5e9c03d"
+    },
+    {
+      "atom_id": "CA-R-1252",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1252-MMODEL-CORE-REQUIREMENT--classify-atom-as-an-artifact.md",
+      "sha256": "747ac36b7570f5afb44ac379c85296431838b3ebb2b9fe0b1e62b7cf5e7d52b2"
+    },
+    {
+      "atom_id": "CA-R-1253",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1253-MMODEL-CORE-REQUIREMENT--classify-journal-as-an-artifact.md",
+      "sha256": "ad571c4cf95e1b4f0580d3fac2905842de41ca3dfca07f391312841e515b47c2"
+    },
+    {
+      "atom_id": "CA-R-1254",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1254-MMODEL-CORE-REQUIREMENT--classify-projection-as-an-artifact.md",
+      "sha256": "c9085d0f22a82dad9682d233ba7d077269bc2237ffc865ca74d08389c5d1944f"
+    },
+    {
+      "atom_id": "CA-R-1255",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1255-MMODEL-CORE-REQUIREMENT--classify-relational-artifact-as-an-artifact.md",
+      "sha256": "cd7b254d758b7e2a9bfc8454be6ffea2704335e6a8c3970c4e7f10ef489b6298"
+    },
+    {
+      "atom_id": "CA-R-1256",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1256-MMODEL-CORE-REQUIREMENT--classify-relational-atom-as-an-atom.md",
+      "sha256": "ac08fcd2bcadb66e634f158a56861ea800fc2cd53b38b86fa4a558ab329f01e1"
+    },
+    {
+      "atom_id": "CA-R-1257",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1257-MMODEL-CORE-REQUIREMENT--classify-scope-unit-as-a-relational-artifact.md",
+      "sha256": "a4d128c5d3deba297b4c3aa3f408fa4b11f5d2809b3cae5187e2875e0938bf43"
+    },
+    {
+      "atom_id": "CA-R-1258",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1258-MMODEL-CORE-REQUIREMENT--classify-epic-as-a-relational-artifact.md",
+      "sha256": "048ca88378074f2ff9c58efc5c8f8a0a11d8089a2ef335425b308b6837af3822"
+    },
+    {
+      "atom_id": "CA-R-1259",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1259-MMODEL-CORE-REQUIREMENT--permit-zero-or-more-properties-on-every-entity.md",
+      "sha256": "ac302abd8f15f7b08b91a88d677073b4693007e29ed49c1e1e79bf05e46f57f8"
+    },
+    {
+      "atom_id": "CA-R-1260",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1260-MMODEL-CORE-REQUIREMENT--give-every-property-occurrence-one-immediate-bearer.md",
+      "sha256": "24b23e6717717f41569528485908e00cc9aaf9713a6be379b5ba573a2c929aa3"
+    },
+    {
+      "atom_id": "CA-R-1261",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1261-MMODEL-CORE-REQUIREMENT--keep-the-core-entity-taxonomy-open.md",
+      "sha256": "99a370a88f221f13a6d95a2eecf6cd3e1b7cee27cfe321073272fadb2409838f"
+    },
+    {
+      "atom_id": "CA-R-1262",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1262-MMODEL-CORE-REQUIREMENT--keep-entity-and-artifact-distinct.md",
+      "sha256": "3fd2d92247e5df2804b00cbc7f461d7e75912e0e0dbc2b327e99c018de5aecee"
+    },
+    {
+      "atom_id": "CA-R-1263",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1263-MMODEL-CORE-REQUIREMENT--keep-relational-atoms-and-relational-artifacts-distinct.md",
+      "sha256": "027cd84892f8357c24d69605f1c7d789d7521518c67548d04996e3980e861ee6"
+    },
+    {
+      "atom_id": "CA-R-1264",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1264-MMODEL-CORE-REQUIREMENT--keep-scope-unit-outside-the-atom-taxonomy.md",
+      "sha256": "1be4cf3db04b5afa41e2c1a40d7e7105debccda3d276dc7ca5c146f8d5500eb8"
+    },
+    {
+      "atom_id": "CA-R-1265",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1265-MMODEL-CORE-REQUIREMENT--keep-epic-outside-the-atom-taxonomy.md",
+      "sha256": "6ff89533dc45820c4f32b2c6a022a44cb817c2de7990a64b70310a6ae3e685c3"
+    },
+    {
+      "atom_id": "CA-R-1266",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1266-MMODEL-CORE-REQUIREMENT--classify-base-entity-as-an-entity.md",
+      "sha256": "7a904d4409e183b965376bc639f5e94d8226009174d9a64ffaff213601e26039"
+    },
+    {
+      "atom_id": "CA-R-1267",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1267-MMODEL-CORE-REQUIREMENT--classify-dependent-entity-as-an-entity.md",
+      "sha256": "7cd49652adf34ef2b36c9227561e045a44f040e7a5edac61075b2b9e37a15542"
+    },
+    {
+      "atom_id": "CA-R-1268",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1268-MMODEL-CORE-REQUIREMENT--define-artifact.md",
+      "sha256": "bca6e99e8d12fc46cb8ba3c380e3a2d964d57bdfc59976d1f5d56208ded5e9f3"
+    }
+  ],
+  "preserved_revision_snapshots": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1191-MMODEL-CORE-REQUIREMENT--define-base-entity@1.md",
+      "sha256": "95579f37f53083e9c53b678fda966e51c1ef5fb929d1fbba12547ecefa7720d4"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1192-MMODEL-CORE-REQUIREMENT--define-dependent-entity@1.md",
+      "sha256": "2fa446909149ef60a806852d35d19264001dab586e7763bf0d97b33c433aa2ce"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1193-MMODEL-CORE-REQUIREMENT--define-property@1.md",
+      "sha256": "8d9577c550bad1744db006f02e69f92faead0fc418fa35369ce7337c1741dd48"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-655-MMODEL-CORE-REQUIREMENT--define-atom-artifact-form@10.md",
+      "sha256": "af246aff32a203f62e483767ed1925143b990cd5a3da6eff1742f3b0ca334b30"
+    }
+  ],
+  "validation": {
+    "active_yaml": "PASS",
+    "active_atom_id_uniqueness": "PASS",
+    "taxonomy_edge_count": 12,
+    "taxonomy_acyclic": "PASS",
+    "carrier_authority_excluded": true,
+    "git_diff_check": "PASS"
+  },
+  "execution_sha256": "3e4d7d908914ff100dc2bf1b4dd02001a44bac756073db1d849d0acb9df79568"
+}

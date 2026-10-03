@@ -1,0 +1,10 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "03",
+  "scope": "Unchanged-only classification evidence; no source or Archive mutations.",
+  "dispositions": "CA-P-957-batch-03-dispositions.json",
+  "existing": [],
+  "additions": [],
+  "requires_source_mutation_go": false
+}

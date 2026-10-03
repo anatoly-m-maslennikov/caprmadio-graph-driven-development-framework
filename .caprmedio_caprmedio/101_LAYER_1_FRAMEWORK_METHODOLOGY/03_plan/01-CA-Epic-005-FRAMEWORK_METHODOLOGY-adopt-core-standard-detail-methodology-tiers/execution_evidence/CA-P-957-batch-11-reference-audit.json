@@ -1,0 +1,431 @@
+{
+  "schema": "ca-p-957-reference-audit/v1",
+  "non_authoritative": true,
+  "batch": "11",
+  "canonical": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "batch": "11",
+    "candidate_count": 20,
+    "checked_count": 24,
+    "diagnostic_count": 2,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "new_candidate_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-M-106",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-GENERAL-METHOD--declare-methodology-expansion-mappings.md",
+        "sha256": "aa293677bb09b40bb8b190ee5d1653f82312cc573a581a9eb3d39b663b9898f0",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-130",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-CORE_META_MODEL-GENERAL-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+        "sha256": "262c06ec04c5d8a5b531452154250f9bae8d53700f73a201bbbe24e4f1afe729",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-134",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-134-CORE_META_MODEL-GENERAL-METHOD--bound-scripted-migrations.md",
+        "sha256": "06c9935e11d12458ba2c4d944d0773a155ffdfdd46ce628a7df1b0b7a692d760",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-249",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-GENERAL-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+        "sha256": "92e3ed0c67831f0e85d18fe08075a422ef3f7fa6dcc09f0b9feb9b8718fe000c",
+        "planned_candidate": true,
+        "source_count": 3,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-term-system-graphs.md",
+        "sha256": "aaeb5577379a708e767b651868561e8e6a2cf7263c27521a489e378a01699b3b",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-384",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-GENERAL-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+        "sha256": "713ecf53691d32090ac2d6068c949dac634ae6576630fd7ca2a49805243edf8e",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-386",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-GENERAL-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+        "sha256": "b5a962f35f9dfa8005ab6c1bad34c69b04df4d730ab440e16c46b693ead538c0",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-387",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-type-assignments.md",
+        "sha256": "9bc7b323d51e7f3a7a21e1f459c0882499cc96eada67351342a595dba52292ad",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-001",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-GENERAL-QA_CASE--relation-vocabulary-interpretability.md",
+        "sha256": "6b530014043256961156bfe63651dc50e0b46e996005a60136023efa4a51cdd1",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "check_of",
+              "target": "CAPRMEDIO-GOV-METH-006--canonical-artifact-relations"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-241",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md",
+        "sha256": "8e9e9ca3d350ef5286d233703e44e109a6ae86e887a716735959839edf72c980",
+        "planned_candidate": true,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-379",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-EVALUATION--validate-applicable-methodology-compilation.md",
+        "sha256": "3dbd25644ddf04bd9022e9b3f1cbea5e6c070760122edeb5958bd47e53a634f8",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+        "sha256": "2c9adc95b6d93e16474c8f1a31b387d029b7293c2da141d1170d4d4b56bd85bb",
+        "planned_candidate": true,
+        "source_count": 8,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-429",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+        "sha256": "32f0abfafff8cb77cfc61002607078a24d20d67b726ad32c3ba5c10fddde2e52",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-002",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md",
+        "sha256": "5edc36cc5d036fec5ce6358db2d8757b7e3de5fd00355d80e0ba0b08b8542ddf",
+        "planned_candidate": true,
+        "source_count": 4,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-003",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+        "sha256": "cead1fa419de058e828898914b65fe184f3c2d36a79dbb7f5c40a946026d90db",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "check_of",
+              "target": "CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-005",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+        "sha256": "1034484830a1d5094dbdb6b27c9599fac1955030a5c95556933b66dfdec4eaf2",
+        "planned_candidate": true,
+        "source_count": 6,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "check_of",
+              "target": "CAPRMEDIO-GOV-METH-006--canonical-artifact-relations"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-009",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+        "sha256": "aa214d47ff77c7e8f3db0927f3f01d060097bdee88975bbf9ec00f0e2f7bc49b",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-010",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+        "sha256": "959e372dcc849ddb0b2f12c30cbb34c54f97bd3b353f880f7b6b45a5cf89deb0",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-240",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+        "sha256": "77b6a971b4dc9b9051cf6a83c21d83f4657449a5355043e2581657a185995ae4",
+        "planned_candidate": true,
+        "source_count": 11,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-403",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-GENERAL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+        "sha256": "535648005b44ec45db989975da7241436e91857de68a5153a26120b0bfd3f5f7",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-268",
+        "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md",
+        "sha256": "348b3fa2ff5786e8b98fa09d1083b3c7179463de8f66dfeb7796d76d7b49c532",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-268-CORE-METHOD--gate-governing-atom-changes-during-implementation.md"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-269",
+        "path": ".caprmedio_caprmedio/05_method/CA-M-269-CORE-METHOD--retry-failed-implementation-three-times-by-default.md",
+        "sha256": "3827a970a7421719e97f5b8fca29f6106ee3b4bc68021a159ae34de2bd2fca49",
+        "planned_candidate": false,
+        "source_count": 4,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-269-CORE-METHOD--retry-failed-implementation-three-times-by-default.md"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_caprmedio/05_method/CA-M-269-CORE-METHOD--retry-failed-implementation-three-times-by-default.md"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-440",
+        "path": ".caprmedio_caprmedio/06_evaluation/CA-E-440-CORE-EVAL_APPROACH--evaluate-governing-atom-change-approval.md",
+        "sha256": "99394f592e5a174b6fa3ec1c772dca20c44861d892dd8b2f4f5df9c1481531d8",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-443",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-443-CORE_META_MODEL-QA_CASE--validate-confidence-threshold-precedence-and-inheritance.md",
+        "sha256": "9954cb8ed888cf773a5cc12a8658bafc0208653e55a3b05f25ebe9633aa9eadd",
+        "planned_candidate": false,
+        "source_count": 10,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "basename_scan": {
+    "scanned_markdown": 10320,
+    "matches": [
+      {
+        "atom_id": "CA-M-130",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-130-CORE_META_MODEL-CORE-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+        "line": 17
+      },
+      {
+        "atom_id": "CA-M-106",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings.md",
+        "line": 27
+      },
+      {
+        "atom_id": "CA-M-134",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-134-CORE_META_MODEL-CORE-METHOD--bound-scripted-migrations.md",
+        "line": 16
+      },
+      {
+        "atom_id": "CA-E-386",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-386-CORE_META_MODEL-CORE-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+        "line": 20
+      },
+      {
+        "atom_id": "CA-E-384",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-384-CORE_META_MODEL-CORE-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+        "line": 17
+      },
+      {
+        "atom_id": "CA-E-383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-383-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-subject-expressions.md",
+        "line": 18
+      },
+      {
+        "atom_id": "CA-E-429",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-429-CORE_META_MODEL-CORE-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+        "line": 18
+      },
+      {
+        "atom_id": "CA-E-249",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+        "line": 26
+      },
+      {
+        "atom_id": "CA-E-387",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-387-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-type-assignments.md",
+        "line": 18
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-001",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-QA_CASE--relation-vocabulary-interpretability.md",
+        "line": 21
+      },
+      {
+        "atom_id": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-382-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-term-system-graphs.md",
+        "line": 16
+      },
+      {
+        "atom_id": "CA-E-379",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-379-CORE_META_MODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+        "line": 18
+      }
+    ]
+  },
+  "semantic_tier_parent_check": "Only Methods/Evaluations are revised; Requirement-only parent constraints are not extended to them. Registered legacy check_of actual checked facts normalize to evaluation_for; no duplicate declaration is introduced.",
+  "limits": "Two existing inbound diagnostics remain; zero candidate/new inbound diagnostics. Legacy readiness/storage surfaces are not executed or migrated."
+}

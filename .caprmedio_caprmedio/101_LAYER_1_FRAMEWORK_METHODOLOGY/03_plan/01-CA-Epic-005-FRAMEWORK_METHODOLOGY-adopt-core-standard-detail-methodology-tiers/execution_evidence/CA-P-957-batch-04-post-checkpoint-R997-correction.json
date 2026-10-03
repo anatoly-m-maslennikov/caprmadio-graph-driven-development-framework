@@ -1,0 +1,37 @@
+{
+  "schema": "ca-p-957-open-transaction-correction/v1",
+  "non_authoritative": true,
+  "batch": "04",
+  "atom_id": "CA-R-997",
+  "frozen_plan": "CA-P-957-batch-04-planned-source-delta.json",
+  "frozen_plan_sha256": "8c7b5d1b96a373f519ba6eff87b3062f0b8f8840f506182a61fe44ecfc1a4598",
+  "frozen_proposal_status": "Historical exact tier-only proposal retained unchanged. R997 candidate needs direct-relation admission correction before its new revision is sealed.",
+  "operation": "correct_unsealed_revision_candidate",
+  "current_candidate_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md",
+  "current_candidate_version": 9,
+  "before_candidate_sha256": "91a82468a19417f604f57682feafd349b71dca3badef301865bd155464cfad32",
+  "before_candidate_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Work Sequence Number\n  depends_on:\n    occurrent:\n      - Work Sequence Validation\natom_id: CA-R-997\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 03:25:26 +0400\"\nrelations:\n  child_of:\n    - CA-R-991\n    - CA-R-992\n    - CA-R-994\n    - CA-R-995\n---\n# Validate Work Sequence Numbers\n\n**every** Work Sequence Number **must** be a unique positive decimal ordinal among the direct Epic **and** Task members of one local Plan container.\n",
+  "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md",
+  "proposed_version": 9,
+  "proposed_sha256": "51751283157ea53f84b0b23df50cfa34a4d6cbd13061d2d53ba3b34d3ae4418a",
+  "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Work Sequence Number\n  depends_on:\n    occurrent:\n      - Work Sequence Validation\natom_id: CA-R-997\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 03:25:26 +0400\"\nrelations:\n  child_of:\n    - CA-R-991\n    - CA-R-992\n---\n# Validate Work Sequence Numbers\n\n**every** Work Sequence Number **must** be a unique positive decimal ordinal among the direct Epic **and** Task members of one local Plan container.\n",
+  "prior_archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers@8.md",
+  "prior_archive_sha256": "040bf444ae7e167eb7b34470db038ca2b7260197d953abcb8789df7acd5ccf2e",
+  "root_transaction_direction": "Root confirmed that no result event for candidate R997@9 is sealed. Correct this still-open revision transaction without inventing an intermediate admitted Revision or Archive; wait for root GO.",
+  "reason": "Active Requirement R997 retains child_of references to R994 and R995, which resolve only to retired Archive Carriers. Active RMED-to-RMED references must target Active Atoms under CAPRMEDIO-GOV-REQU-767. Remove only those unavailable normative parents; preserve R991 and R992. This is an explicitly authorized inactive-target admission repair, not a new policy, substitute parent, or Claim rewrite.",
+  "removed_relations": {
+    "child_of": [
+      "CA-R-994",
+      "CA-R-995"
+    ]
+  },
+  "retained_relations": {
+    "child_of": [
+      "CA-R-991",
+      "CA-R-992"
+    ]
+  },
+  "preservation": "Complete Claim body, Subjects, Scope, owner, identity, proposed Standard tier, candidate version9, candidate updated_at, and exact prior R997@8 Archive unchanged.",
+  "history_limit": "Do not treat the original proposed bytes as an admitted authority revision or invent prior Journal history. Frozen proposal evidence remains recoverable.",
+  "requires_root_go": true
+}

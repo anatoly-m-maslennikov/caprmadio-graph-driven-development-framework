@@ -1,0 +1,45 @@
+---
+atom_id: CA-P-108
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs:
+    continuant:
+      - Methodology Migration Map
+    occurrent:
+      - Bootstrap Migration
+  depends_on:
+    occurrent:
+      - CA-P-115
+version: 8
+updated_at: 2026-08-27 04:05:09 +0400
+autonomous_confidence_threshold: 99
+relations: {}
+---
+# Freeze the Bootstrap-to-Methodology Migration Map
+
+**when** CA-P-115 is Done, **then** the Assignee **must** freeze one complete source-to-target disposition and carrier map for every governed item in the Bootstrap, .caprmedio, .caprmedio_install, and framework-consumer migration frontier.
+
+## Scope
+
+`((the exact frozen Carrier and structural directory frontiers from CA-P-102) union (the CA-P-102 migration-control Carrier manifest) union (every accepted successor, target ownership root, registered native Carrier Type exception, root Delivery directory, Project-owned authority directory, exact labelled FRAMEWORK_ENGINE authority and Delivery directory, exact CA-P-115 Core Meta-Model or Local Configuration classification, exact Project-history target, empty duplicate directory, target source Layer, reconciled Job, target Content-role folder, target filename, relation rewrite, predicted generated Projection, configuration entry, active Plan disposition, Journal boundary, and Tool, MCP, App, or Skill consumer required by CA-P-103 through CA-P-107, CA-P-112, and CA-P-115))`
+
+## Definition of Done
+
+the Task is **not done if** (any frozen Carrier or directory lacks exactly one retain, move, rename, replace, archive, cancel, done, or defer disposition **or** any CA-P-115 classified Bootstrap Atom lacks the exact disposition or target required by its classification evidence **or** CA-P-101, any direct Task Carrier, or its execution-evidence boundary lacks one exact final Carrier target outside the retiring .caprmedio root **or** any current root Delivery directory lacks an exact target among (101_FRAMEWORK_METHODOLOGY, 102_FRAMEWORK_ENGINE, 103_OPERATOR_DOCUMENTATION, 104_CORE_EXTENSIONS, 105_RELEASES, 110_COMMUNITY_EXTENSIONS, 110_FIELD) **or** any current direct Project-child authority directory lacks an exact target among (101_LAYER_1_FRAMEWORK_METHODOLOGY, 102_LAYER_2_FRAMEWORK_ENGINE, 103_LAYER_3_OPERATOR_DOCUMENTATION, 104_LAYER_4_CORE_EXTENSIONS, 105_LAYER_5_RELEASES, 110_FEATURE_COMMUNITY_EXTENSIONS, 110_FEATURE_FIELD) under .caprmedio_caprmedio **or** any PROGRAMMATIC, AGENTIC, TOOLS, APPS, MCP, or SKILLS authority or Delivery directory lacks one exact fully labelled target path derived from CA-P-103 **or** a bare Engine-descendant Unit Name is retained as a physical target where naming authority requires labels **or** any intentionally root-native Project Carrier lacks one exact registered native Carrier Type exception **or** SOFTWARE, AGENT_INTERFACE, 201_TOOLS, 202_APPS, 203_SKILLS, PROGRAMMATIC/APPS/MCP, the obsolete 101_PROJECT_LAYER_1_FRAMEWORK_METHODOLOGY directory shell, or _rename_probe lacks an explicit verified-empty retirement disposition **or** any frozen .caprmedio_install Carrier or directory lacks the exact RETAIN_IN_PLACE disposition at its frozen path **or** any reconciled Job lacks an exact owner, target Carrier, identity, and predecessor disposition **or** any active Bootstrap Plan lacks an exact disposition and successor mapping **or** any .caprmedio Carrier lacks exactly one framework, project, runtime, archive, or retirement target **or** any target collision exists **or** any Current Scope, Claim Scope, Subject, relation, Atom ID, Summary, version, archive path, or source frontier consequence is unresolved **or** the first Applicable Methodology compilation outputs are not predicted without materialization **or** byte-preserving Carrier moves are mixed with Claim revisions without separate dispositions **or** rollback cannot restore every pre-migration Carrier and directory state **or** the mapping mutates a governed source).
+
+## Details
+
+record exact source and target paths, Carrier content digests, and directory states. consume CA-P-115 as the only authority for the Bootstrap Atom Core Meta-Model or Local Configuration classification and Project-history target. map CA-P-101, every direct Task, and their evidence boundary to `.caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/` before retiring .caprmedio. map (001_FRAMEWORK_METHODOLOGY to 101_FRAMEWORK_METHODOLOGY), (002_FRAMEWORK_ENGINE to 102_FRAMEWORK_ENGINE), (003_OPERATOR_DOCUMENTATION to 103_OPERATOR_DOCUMENTATION), (004_CORE_EXTENSIONS to 104_CORE_EXTENSIONS), (005_RELEASES to 105_RELEASES), (010_COMMUNITY_EXTENSIONS to 110_COMMUNITY_EXTENSIONS), and (010_FIELD to 110_FIELD). map current direct Project-child authority directories to their .caprmedio_caprmedio targets without PROJECT in their names. derive and record the exact fully labelled authority and Delivery paths for PROGRAMMATIC, AGENTIC, TOOLS, APPS, MCP, and SKILLS from CA-P-103 rather than retaining their bare Unit Names as physical targets. bind every retained root-native Project Carrier to its exact registered native Carrier Type exception. retire only verified-empty alternative branches and directory shells. retain every `.caprmedio_install` Carrier and directory in place as the executable FRAMEWORK_ENGINE installation, including Tools, Apps, Skills, content-addressed releases, launchers, hooks, and the current-version manifest. map every reconciled Job to its final owner and Carrier. predict the first generated Applicable Methodology outputs without creating them. keep pure Carrier migration separate from governed Claim replacement. preserve all Plan lifecycle history and explicitly disposition obsolete Bootstrap carriers and the old .caprmedio ownership root. protect 000_APPLICABLE_MTHD_sources from generated-output cleanup.
+
+## Task Scope Resolution
+
+CA-P-115 resolves the 563 frozen normal Bootstrap Carrier classifications and their exact Core Meta-Model, Local Configuration, or ordinary Project-history targets. every `.caprmedio_install` Carrier and directory has disposition `RETAIN_IN_PLACE` at its frozen path because it is the executable FRAMEWORK_ENGINE installation rather than Framework authority or ephemeral runtime state. CA-P-101, its direct Tasks, and their control evidence map to `.caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/`, preserving Task, `done`, `archive`, and `execution_evidence` organization.
+
+## Completion Record
+
+PASS. [CA-P-108 migration map](execution_evidence/CA-P-108-migration-map.projection.json) maps all 16,172 frozen Carriers and all 2,681 frozen directories exactly once without mutating a governed source. it preserves the CA-P-102 Carrier and directory digests across CA-P-103 and CA-P-115 evidence, consumes all 2,869 CA-P-115 BSEED dispositions, maps all 2,153 `.caprmedio_install` Carriers and 818 directories to `RETAIN_IN_PLACE`, and records 50 frozen CA-P-101 control entries plus CA-P-115 successor control evidence at the accepted `.caprmedio_caprmedio` target. the map validates target uniqueness by source kind, fully labelled Engine targets, protected source-layer retention, and the absence of `.caprmedio_project` targets. it predicts the non-authoritative Applicable Methodology Projection and its GOVERNS and DEPENDS_ON indexes at their governed output directory without materializing them; their carrier filenames remain intentionally unassigned because the governing authority names no filename and CA-P-110 owns materialization.
+
+## Repair Record
+
+PASS. CA-P-109 preflight identified 102 missing frozen paths, 29 changed frozen paths, and 42 changed directory states. the repaired map records each file delta as an accepted CA-P-103, CA-P-104, CA-P-107, CA-P-112, or CA-P-115 lifecycle transition, or as an explicitly non-authoritative `.caprmedio_runtime` snapshot change. it adds 67 exact post-freeze successor mappings and re-freezes all affected directory currentness. `.caprmedio` now remains in place for BSEED history, Plans, evidence, and structure; `.caprmedio_caprmedio` is an independently created Project target root. no `.caprmedio_install` disposition changed, and no Carrier migration occurred.

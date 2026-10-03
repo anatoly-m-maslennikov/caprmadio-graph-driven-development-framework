@@ -1,0 +1,300 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-912",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T22:57:55+04:00",
+  "outcomes": [
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1032-GOVERN-REQUIREMENT--block-dependent-gates-until-lineage-impact-reaches-a-fixed-point.md",
+      "source_sha256": "539cbcc575558f7daa71f9dc960eff31beac355ec261d31d7d4ca8ff0516c84a",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1032-GOVERN-REQUIREMENT--block-dependent-gates-until-lineage-impact-reaches-a-fixed-point.md",
+      "outcome_sha256": "539cbcc575558f7daa71f9dc960eff31beac355ec261d31d7d4ca8ff0516c84a"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1051-SEMNTC-CORE-REQUIREMENT--separate-active-authority-from-preserved-history.md",
+      "source_sha256": "f3f28386d0f37efaaba4343561da905dd27565677528c90cfccd2dc30c624f99",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1051-SEMNTC-CORE-REQUIREMENT--separate-active-authority-from-preserved-history.md",
+      "outcome_sha256": "f3f28386d0f37efaaba4343561da905dd27565677528c90cfccd2dc30c624f99"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1053-GOVERN-REQUIREMENT--atomic-revision-change-classes.md",
+      "source_sha256": "8b30e627b93ab750e91519f11485291f4fe240b281dc815900143da918644bc3",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1053-GOVERN-REQUIREMENT--atomic-revision-change-classes.md",
+      "outcome_sha256": "8b30e627b93ab750e91519f11485291f4fe240b281dc815900143da918644bc3"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-MMODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "source_sha256": "ae2959626ec954e668af4a3ef3b62c223fc89a7fe3aec1f87937fa452ce63d46",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-MMODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "outcome_sha256": "ae2959626ec954e668af4a3ef3b62c223fc89a7fe3aec1f87937fa452ce63d46"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-GOVERN-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "source_sha256": "1fbaa9ee75d62886baa3de8a9dddcabb4056c6c2e9a5c69d819f3ac15969dade",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-GOVERN-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "outcome_sha256": "1fbaa9ee75d62886baa3de8a9dddcabb4056c6c2e9a5c69d819f3ac15969dade"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate.md",
+      "source_sha256": "b16f4c756d9160417bd4774d7f1b21f9b1f117e6e6ea8f59ebd88d7fa7452cbc",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate.md",
+      "outcome_sha256": "b16f4c756d9160417bd4774d7f1b21f9b1f117e6e6ea8f59ebd88d7fa7452cbc"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-363--place-concerns-by-lifecycle.md",
+      "source_sha256": "1bc038a9d1abfe6055d24fcff553aec7c8bc598040f3a74da05f337f63709eb8",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-363--place-concerns-by-lifecycle.md",
+      "outcome_sha256": "1bc038a9d1abfe6055d24fcff553aec7c8bc598040f3a74da05f337f63709eb8"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-364--place-analyses-by-lifecycle.md",
+      "source_sha256": "487316b598375dc85a92e852b4182074aeccacc9cd95d5ccecb933eccae36bda",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-364--place-analyses-by-lifecycle.md",
+      "outcome_sha256": "487316b598375dc85a92e852b4182074aeccacc9cd95d5ccecb933eccae36bda"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-365--place-plan-role-atoms-by-lifecycle.md",
+      "source_sha256": "7aa04621a56106e35613d5fe224033389a2acccf4cbd28aad32a828faae19c56",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-365--place-plan-role-atoms-by-lifecycle.md",
+      "outcome_sha256": "7aa04621a56106e35613d5fe224033389a2acccf4cbd28aad32a828faae19c56"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-368--place-ops-records-by-factual-admission.md",
+      "source_sha256": "b8f2edcb0af1f0124f5dc6d26a817040f93904815f0883047a388219039bc59b",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-368--place-ops-records-by-factual-admission.md",
+      "outcome_sha256": "b8f2edcb0af1f0124f5dc6d26a817040f93904815f0883047a388219039bc59b"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-768--validate-active-prmedo-relation-target-lifecycle.md",
+      "source_sha256": "c62dc5d91df81137f242053cac2d12c59a9face79b2dcda0414979c8ba86c8e8",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-768--validate-active-prmedo-relation-target-lifecycle.md",
+      "outcome_sha256": "c62dc5d91df81137f242053cac2d12c59a9face79b2dcda0414979c8ba86c8e8"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-090--propagate-atomic-revision-impact-through-lineage.md",
+      "source_sha256": "d57bfae1e8a42013d387232c356db9f105f93f424395da8ead932f7d1491c9c1",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-090--propagate-atomic-revision-impact-through-lineage.md",
+      "outcome_sha256": "d57bfae1e8a42013d387232c356db9f105f93f424395da8ead932f7d1491c9c1"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-105--preserve-implementation-traceability-in-journals.md",
+      "source_sha256": "b22d88d6a115f2390890cd33136fd482ebb2ba96797e8f3c258de23e74b34ac9",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-105--preserve-implementation-traceability-in-journals.md",
+      "outcome_sha256": "b22d88d6a115f2390890cd33136fd482ebb2ba96797e8f3c258de23e74b34ac9"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-107--bind-traceability-to-exact-claims-and-revisions.md",
+      "source_sha256": "66bf6f4803334d823f6ecc6db3b7823653ca5552864d8e402d303bbab97a6505",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-107--bind-traceability-to-exact-claims-and-revisions.md",
+      "outcome_sha256": "66bf6f4803334d823f6ecc6db3b7823653ca5552864d8e402d303bbab97a6505"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-108--evolve-authority-through-governed-history.md",
+      "source_sha256": "1919767b8120834767f588cfcf28c00d89074fe53f92935314fb98362a90c55f",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-108--evolve-authority-through-governed-history.md",
+      "outcome_sha256": "1919767b8120834767f588cfcf28c00d89074fe53f92935314fb98362a90c55f"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-110--bind-governed-transactions-to-stable-artifact-revisions.md",
+      "source_sha256": "4c2c4412ab449d0ac4491094cdc92aea1e6a85fec99d1c7d6f867a4df9fb2c42",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-110--bind-governed-transactions-to-stable-artifact-revisions.md",
+      "outcome_sha256": "4c2c4412ab449d0ac4491094cdc92aea1e6a85fec99d1c7d6f867a4df9fb2c42"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-115--use-implementation-record-as-a-projection.md",
+      "source_sha256": "73e09af562b0afe27938ae6f86f9e7b4a56c1385a6213a7b85f8e5fba44abbcf",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-115--use-implementation-record-as-a-projection.md",
+      "outcome_sha256": "73e09af562b0afe27938ae6f86f9e7b4a56c1385a6213a7b85f8e5fba44abbcf"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-123--provide-lineage-impact-projections.md",
+      "source_sha256": "67fdccca34a6d7f77acfeab52fa8ba8db92f3ffb2250253323aa55a80a900b09",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-123--provide-lineage-impact-projections.md",
+      "outcome_sha256": "67fdccca34a6d7f77acfeab52fa8ba8db92f3ffb2250253323aa55a80a900b09"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle.md",
+      "source_sha256": "fb7b0b6531e773e5228d99d1b4d33841605b1ef59efe5074aac76406706bcea6",
+      "disposition": "ARCHIVE_AS_CONFLICT_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle@12.md",
+      "outcome_sha256": "fb7b0b6531e773e5228d99d1b4d33841605b1ef59efe5074aac76406706bcea6"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158--make-journals-canonical-for-governed-provenance.md",
+      "source_sha256": "6248aeaffbbc0cb4650c578359250794757ea38fc77f3c9f7fbaec407b57a098",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158--make-journals-canonical-for-governed-provenance.md",
+      "outcome_sha256": "6248aeaffbbc0cb4650c578359250794757ea38fc77f3c9f7fbaec407b57a098"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-167--concerns-have-active-and-solved-states.md",
+      "source_sha256": "92185c52cd3c910dec29edae78cd2e85095ba59dd288d71b7867d9119081a5bc",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-167--concerns-have-active-and-solved-states.md",
+      "outcome_sha256": "92185c52cd3c910dec29edae78cd2e85095ba59dd288d71b7867d9119081a5bc"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-168--analyses-have-draft-and-done-states.md",
+      "source_sha256": "ae29355c5884e50c55e3ab3e62db5d0a2b81f2fe4c2ed9c3f6337dcb39accdc5",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-168--analyses-have-draft-and-done-states.md",
+      "outcome_sha256": "ae29355c5884e50c55e3ab3e62db5d0a2b81f2fe4c2ed9c3f6337dcb39accdc5"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-169--record-every-projection-rebuild-in-a-journal.md",
+      "source_sha256": "8572c0af3914f9a14aaa2ab4d159b4459bcf7dbbd0dbd8ec94af807ade3ec31f",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-169--record-every-projection-rebuild-in-a-journal.md",
+      "outcome_sha256": "8572c0af3914f9a14aaa2ab4d159b4459bcf7dbbd0dbd8ec94af807ade3ec31f"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-170--govern-ops-factual-admission-lifecycle.md",
+      "source_sha256": "feb27fba2475ef470763a5596d1d661d4de38f4c6f9533306d35d5cae8d8d4f7",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-170--govern-ops-factual-admission-lifecycle.md",
+      "outcome_sha256": "feb27fba2475ef470763a5596d1d661d4de38f4c6f9533306d35d5cae8d8d4f7"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-627--bind-every-project-scope-unit-graph-value-to-exact-sources.md",
+      "source_sha256": "89f914008a62023e2465a1b0406473239f1b0ae837de8698866322f0ea5d7c95",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-627--bind-every-project-scope-unit-graph-value-to-exact-sources.md",
+      "outcome_sha256": "89f914008a62023e2465a1b0406473239f1b0ae837de8698866322f0ea5d7c95"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-730--preserve-atom-id-across-scope-change.md",
+      "source_sha256": "817461b28fc127175effe3d364c2fcaa9ead43cead63089571f9e8b13f2b3d40",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-730--preserve-atom-id-across-scope-change.md",
+      "outcome_sha256": "817461b28fc127175effe3d364c2fcaa9ead43cead63089571f9e8b13f2b3d40"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-746--use-plan-role-type-lifecycles.md",
+      "source_sha256": "3d0e0e0c838d3126512b103ea29379ae469319e8f145c6843d36dd0b00cd61b0",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-746--use-plan-role-type-lifecycles.md",
+      "outcome_sha256": "b065d87ffe53553a2f10633025fa998b9bad0a22d979df903f08f75fcbd178f0"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-REQUIREMENT--define-realization-graph.md",
+      "source_sha256": "dd240ca6970eec1fc1f51442dd58397bc9bc02e81bd0ef7777015bd9f77ce694",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-REQUIREMENT--define-realization-graph.md",
+      "outcome_sha256": "dd240ca6970eec1fc1f51442dd58397bc9bc02e81bd0ef7777015bd9f77ce694"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-GOVERN-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "source_sha256": "2f9657ec006493392e2c409083b3a355a088e65c84c525fed9c66d421008f5f7",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-GOVERN-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "outcome_sha256": "2f9657ec006493392e2c409083b3a355a088e65c84c525fed9c66d421008f5f7"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-132-GOVERN-CORE-METHOD--govern-the-archive-based-atom-lifecycle.md",
+      "source_sha256": "fa5cd1b5097abb770301ba4b5e5dd6ad83c2ea8c9bb384336ec7dad6e4c5aaa6",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-132-GOVERN-CORE-METHOD--govern-the-archive-based-atom-lifecycle.md",
+      "outcome_sha256": "fa5cd1b5097abb770301ba4b5e5dd6ad83c2ea8c9bb384336ec7dad6e4c5aaa6"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--GOVERN-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "source_sha256": "0165b1e03ce3b478acbcc1bfbea6ca985e6fa74deb8487b69f9cdeb3a0efc566",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--GOVERN-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "outcome_sha256": "0165b1e03ce3b478acbcc1bfbea6ca985e6fa74deb8487b69f9cdeb3a0efc566"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-bootstrap-seed-revisions-explicitly.md",
+      "source_sha256": "9e92dab88eb3d82c275d3b7864afd5b899ba565b246035ec5f0d390dd0c9ab33",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-bootstrap-seed-revisions-explicitly.md",
+      "outcome_sha256": "9e92dab88eb3d82c275d3b7864afd5b899ba565b246035ec5f0d390dd0c9ab33"
+    }
+  ],
+  "new_authority": [
+    {
+      "atom_id": "CA-R-1306",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1306-MMODEL-CORE-REQUIREMENT--define-status-as-a-type-qualified-property.md",
+      "sha256": "597a3b5211aa6ee2910ae5b29e1efaaecc1319dad6502b3a960f7f6cf02ac47e"
+    },
+    {
+      "atom_id": "CA-R-1307",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1307-MMODEL-CORE-REQUIREMENT--give-every-governed-artifact-one-current-status.md",
+      "sha256": "de75225dcc871a1d6ca18716fca65342f9a8423943e4d11a894f69a82c7bd807"
+    },
+    {
+      "atom_id": "CA-R-1308",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1308-MMODEL-CORE-REQUIREMENT--resolve-status-domains-from-complete-entity-type-paths.md",
+      "sha256": "b9c327017106f2c1d2d1c5c2a89091a680d7a798f2fd201365a50c1e12961b2a"
+    },
+    {
+      "atom_id": "CA-R-1309",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1309-MMODEL-CORE-REQUIREMENT--register-core-status-values-for-spec-content-role-atoms.md",
+      "sha256": "9708f9dc05d9a4f2ef6da748dd4c2a9a3ea5e5e68d8ca190e52bf2498c23eb03"
+    },
+    {
+      "atom_id": "CA-R-1310",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1310-MMODEL-CORE-REQUIREMENT--register-core-task-status-values.md",
+      "sha256": "114da0abff69c8c58097c77a85e832702898e44a202ebe081721a6be996ff3a0"
+    },
+    {
+      "atom_id": "CA-R-1311",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1311-MMODEL-CORE-REQUIREMENT--keep-prior-status-transitions-in-the-journal.md",
+      "sha256": "f1c4a5b3c9450c7bd482e09e0439808f384e581b94964606b794dbddd0d6f8ea"
+    },
+    {
+      "atom_id": "CA-R-1312",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1312-MMODEL-CORE-REQUIREMENT--separate-governed-transitions-from-status-values.md",
+      "sha256": "b6f8ff747cb2f85a5742953c928f4d8272d59a50a5ffc511a2ce0ec97e1616e5"
+    },
+    {
+      "atom_id": "CA-R-1313",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1313-MMODEL-CORE-REQUIREMENT--keep-qualified-status-domains-open.md",
+      "sha256": "2d0e5472df015d1d6113773cf8344cf9991c343166b940d84dfd9090272b346c"
+    },
+    {
+      "atom_id": "CA-E-386",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-MMODEL-CORE-EVALUATION--validate-type-qualified-status.md",
+      "sha256": "483850da9a8620f63a9300ec4c20804ac44a7cc99b6933349b5ad5aab6b47590"
+    }
+  ],
+  "preserved_revision_snapshots": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-746--use-plan-role-type-lifecycles@6.md",
+      "sha256": "3d0e0e0c838d3126512b103ea29379ae469319e8f145c6843d36dd0b00cd61b0"
+    }
+  ],
+  "validation": {
+    "active_yaml": "PASS",
+    "active_atom_id_uniqueness": "PASS",
+    "global_status_domain_absent": "PASS",
+    "one_current_status_per_governed_artifact": "PASS",
+    "spec_content_role_core_status_values": "PASS",
+    "task_core_status_values": "PASS",
+    "type_qualified_domain_independence": "PASS",
+    "prior_status_transitions_journal_only": "PASS",
+    "second_revision_disposition_axis_absent": "PASS",
+    "carrier_status_key_and_folder_materialization_deferred_to_ca_p_913": true,
+    "git_diff_check": "PASS"
+  },
+  "execution_sha256": "63cbca9950cc5e17b85f5ec183d6b23ad9168d5bd9234d1293a32b6b1974bcb6"
+}

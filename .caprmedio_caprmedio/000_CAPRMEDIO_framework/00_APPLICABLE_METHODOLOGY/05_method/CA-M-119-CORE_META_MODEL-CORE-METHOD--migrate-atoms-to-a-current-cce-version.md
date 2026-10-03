@@ -1,0 +1,24 @@
+---
+subjects:
+  governs:
+    continuant:
+      - language
+  depends_on:
+    continuant:
+      - artifact-model
+      - lifecycle-traceability
+      - CCE
+cce_version: cce_1
+cce_form: method
+version: 8
+updated_at: 2026-09-06 01:45:12 +0400
+relations:
+  child_of:
+    - CA-M-115
+    - CA-R-380
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md
+---
+# Migrate Atoms to a current CCE version
+
+**to** migrate Atoms to a current CCE version, the Operator **or** Agent **must** convert one Atom at a time, preserve its lifecycle **and** identity, validate its one Claim **and** derived Projections, **and** request Operator disposition **when** semantic confidence is below 98 percent.

@@ -1,0 +1,655 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "case_id": "request_not_object",
+      "request": "requests/request_not_object.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_not_object.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_duplicate_key",
+      "request": "requests/request_duplicate_key.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_duplicate_key.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_non_finite",
+      "request": "requests/request_non_finite.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_non_finite.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_missing_required",
+      "request": "requests/request_missing_required.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_missing_required.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_unknown_top",
+      "request": "requests/request_unknown_top.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_unknown_top.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_schema_boolean",
+      "request": "requests/request_schema_boolean.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_schema_boolean.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_schema_unsupported",
+      "request": "requests/request_schema_unsupported.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_schema_unsupported.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_source_root_relative",
+      "request": "requests/request_source_root_relative.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_source_root_relative.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_duplicate_roots",
+      "request": "requests/request_duplicate_roots.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_duplicate_roots.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_null_selection",
+      "request": "requests/request_null_selection.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_null_selection.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_empty_selection",
+      "request": "requests/request_empty_selection.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_empty_selection.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_descendants_without_unit",
+      "request": "requests/request_descendants_without_unit.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_descendants_without_unit.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_boolean_tier",
+      "request": "requests/request_boolean_tier.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_boolean_tier.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_empty_statuses",
+      "request": "requests/request_empty_statuses.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_empty_statuses.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_selector_version_only",
+      "request": "requests/request_selector_version_only.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_selector_version_only.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_unknown_selector",
+      "request": "requests/request_unknown_selector.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_unknown_selector.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_null_version",
+      "request": "requests/request_null_version.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_null_version.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_boolean_limit",
+      "request": "requests/request_boolean_limit.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_boolean_limit.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_zero_limit",
+      "request": "requests/request_zero_limit.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_zero_limit.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_unknown_limit",
+      "request": "requests/request_unknown_limit.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_unknown_limit.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_bad_digest",
+      "request": "requests/request_bad_digest.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_bad_digest.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_unknown_methodology_key",
+      "request": "requests/request_unknown_methodology_key.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_unknown_methodology_key.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_invalid_action_version",
+      "request": "requests/request_invalid_action_version.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_invalid_action_version.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_unknown_run_context",
+      "request": "requests/request_unknown_run_context.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_unknown_run_context.json",
+      "expected_exit_code": 3
+    },
+    {
+      "case_id": "request_executable_bundle",
+      "request": "requests/request_executable_bundle.json",
+      "fixture_paths": [
+        "fixtures/context"
+      ],
+      "authority": [
+        {
+          "atom_id": "CA-D-492",
+          "version": 3,
+          "sha256": "ea2f846a911043cd1d8695cbfedbac755a5b0d59dc4bca7f5742c41781698317",
+          "path": "/__fixture__/context/governance/CA-D-492.md"
+        },
+        {
+          "atom_id": "CA-D-493",
+          "version": 3,
+          "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+          "path": "/__fixture__/context/governance/CA-D-493.md"
+        }
+      ],
+      "check_codes": [
+        "request.schema"
+      ],
+      "expected_report": "expected/request_executable_bundle.json",
+      "expected_exit_code": 3
+    }
+  ]
+}

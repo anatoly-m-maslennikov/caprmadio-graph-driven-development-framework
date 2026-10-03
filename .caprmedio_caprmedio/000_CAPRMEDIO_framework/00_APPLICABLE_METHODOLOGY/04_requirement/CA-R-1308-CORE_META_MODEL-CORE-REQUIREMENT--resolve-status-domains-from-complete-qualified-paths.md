@@ -1,0 +1,22 @@
+---
+atom_id: CA-R-1308
+cce_version: cce_1
+cce_form: prohibition
+subjects:
+  governs:
+    continuant:
+      - Artifact/Revision/Status
+  depends_on:
+    continuant:
+      - Artifact/Type
+      - Atom/Content Role
+      - Type
+version: 4
+updated_at: 2026-09-06 01:45:12 +0400
+relations: {}
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1308-CORE_META_MODEL-CORE-REQUIREMENT--resolve-status-domains-from-complete-qualified-paths.md
+---
+# Resolve Status Domains from Complete Qualified Paths
+
+a global Status value domain **must not** override the Status domain resolved from the complete qualified path of an Artifact Type **or** Atom Content Role **and** Type.

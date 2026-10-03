@@ -1,0 +1,177 @@
+[
+  {
+    "identity": "CA-D-396",
+    "body": "# Serialize Structured Production Log Records\n\n**every** structured production log record **must** include, **where** applicable:\n\n- UTC timestamp, severity, **and** a stable event name;\n- component, environment, **and** deployed version;\n- run, request, job, workflow, session, correlation, **or** trace identity;\n- relevant domain entity identity **and** lifecycle state;\n- outcome, duration, attempt number, **and** retry disposition;\n- stable error code **and** exception class for failures; **and**\n- a concise human-readable message with sanitized diagnostic context.\n",
+    "design_body_sha256": "19fff434720bfe5f9da8f232eb806cc1b20fa412731f52dd8156fba4f0da9974",
+    "actual_body_sha256": "19fff434720bfe5f9da8f232eb806cc1b20fa412731f52dd8156fba4f0da9974",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-406",
+    "body": "# Serialize Governed Workflow Journal Carriers\n\n**every** governed CAPRMEDIO workflow **or** local project-control Journal Carrier whose append-only NDJSON representation is **not** already governed by CA-D-328 **or** CA-D-339 **must** use append-only NDJSON **in** its applicable registered authoritative place. the CAPRMEDIO Project Work Journal follows CA-D-328; the Implementation Journal follows CA-D-339.\n",
+    "design_body_sha256": "466a031d9ff8059fbfe7d8b8bc1dd3a71d3757d54ee6cb7c58acfd30c2d6db49",
+    "actual_body_sha256": "466a031d9ff8059fbfe7d8b8bc1dd3a71d3757d54ee6cb7c58acfd30c2d6db49",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-315",
+    "body": "# Require production logging policies\n\n**every** production-relevant component **must** define a Logging Policy that supports its Evaluation Controls **and** is referenced by its Production Evaluation Checklist. the policy identifies the events **and** context required **to** understand normal operation, detect failure, correlate distributed work, **and** investigate real production issues.\n\n## Severity policy\n\nthe policy uses these four operational levels:\n\n| Level | Required meaning |\n|---|---|\n| `ERROR` | an operation failed, correctness **or** availability **may** be affected, **or** explicit retry **or** intervention is required |\n| `WARNING` | Behavior was unexpected **or** degraded but recovered, fell back, **or** remains within an accepted tolerance |\n| `INFO` | a material lifecycle, business, **or** operational milestone occurred, including start, stop, acceptance, state transition, completion, **or** summarized progress |\n| `DEBUG` | Sanitized internal state **or** decision detail is useful for bounded investigation but is unnecessary during normal production operation |\n\nan `ERROR` **or** `WARNING` record **must** be actionable: it identifies the failed **or** degraded condition, affected scope, expected operator **or** automated response, **and** whether retry is safe. High-frequency success, polling, **and** progress events **must not** create unbounded `INFO` noise; they are aggregated, sampled, **or** emitted as `DEBUG` **where** appropriate.\n\nproduction `DEBUG` logging is disabled by default. Temporary enablement **must** be scoped by component, subject, run, entity, **or** another bounded selector, have an automatic expiry, **and** preserve the same redaction rules as **every** other level.\n\n## Structured record policy\n\nthe Carrier content of structured production log records follows CA-D-396.\n\nLogs record material state transitions **and** boundary outcomes rather than **every** internal tick. an exception is emitted once at the boundary responsible for handling **or** escalating it; lower layers preserve structured context **without** duplicating the same stack trace at **every** call boundary.\n\n## Safety and lifecycle policy\n\nLogs **must** never contain passwords, API keys, access tokens, session secrets, cookies, private keys, complete credentials, **or** unredacted secret-bearing payloads. Personal, customer, **and** commercially sensitive data is omitted, masked, hashed, tokenized, **or** **otherwise** minimized according **to** the applicable boundary.\n\nthe policy defines retention, access, sampling, rotation, maximum size, back-pressure, unavailable-sink behavior, **and** disk-pressure behavior. Logging **must not** make the primary operation silently fail, **and** loss **or** suppression of required records **must** itself produce an observable failure signal.\n\nproduction logs use the deployment environment's governed logging sink. Governed CAPRMEDIO workflow **and** local project-control Journals are **not** a substitute for the production system's log platform.\n\nImportant health counters, thresholds, **and** service-level signals receive explicit monitors. a production evaluation decision **must not** depend solely on parsing free-form log prose.\n\n## Rationale\n\nLogs are production Ops records, but their required coverage, structure, severity, safety, **and** retention **must** be governed **before** failures occur. a component-specific policy provides that evaluation boundary while leaving the logger implementation **and** emitted records **in** their proper artifact roles.\n",
+    "design_body_sha256": "1b24d30d8885cb798d38cd346018f7a86aa903d053c98c7b38c18c2cf96f33c9",
+    "actual_body_sha256": "45211a2c2a9fcd38b46cecd2897d4493e08def1c16c0b0179d1e618fcbc4a896",
+    "diff": "--- admitted design\n+++ prepared source\n@@ -1,38 +1,38 @@\n # Require production logging policies\n \n-**every** production-relevant component **must** define a Logging Policy that supports its Evaluation Controls **and** is referenced by its Production Evaluation Checklist. The policy identifies the events **and** context required to understand normal operation, detect failure, correlate distributed work, **and** investigate real production issues.\n+**every** production-relevant component **must** define a Logging Policy that supports its Evaluation Controls **and** is referenced by its Production Evaluation Checklist. the policy identifies the events **and** context required **to** understand normal operation, detect failure, correlate distributed work, **and** investigate real production issues.\n \n ## Severity policy\n \n-The policy uses these four operational levels:\n+the policy uses these four operational levels:\n \n | Level | Required meaning |\n |---|---|\n-| `ERROR` | An operation failed, correctness **or** availability **may** be affected, **or** explicit retry **or** intervention is required |\n+| `ERROR` | an operation failed, correctness **or** availability **may** be affected, **or** explicit retry **or** intervention is required |\n | `WARNING` | Behavior was unexpected **or** degraded but recovered, fell back, **or** remains within an accepted tolerance |\n-| `INFO` | A material lifecycle, business, **or** operational milestone occurred, including start, stop, acceptance, state transition, completion, **or** summarized progress |\n+| `INFO` | a material lifecycle, business, **or** operational milestone occurred, including start, stop, acceptance, state transition, completion, **or** summarized progress |\n | `DEBUG` | Sanitized internal state **or** decision detail is useful for bounded investigation but is unnecessary during normal production operation |\n \n-An `ERROR` **or** `WARNING` record **must** be actionable: it identifies the failed **or** degraded condition, affected scope, expected operator **or** automated response, **and** whether retry is safe. High-frequency success, polling, **and** progress events **must not** create unbounded `INFO` noise; they are aggregated, sampled, **or** emitted as `DEBUG` **where** appropriate.\n+an `ERROR` **or** `WARNING` record **must** be actionable: it identifies the failed **or** degraded condition, affected scope, expected operator **or** automated response, **and** whether retry is safe. High-frequency success, polling, **and** progress events **must not** create unbounded `INFO` noise; they are aggregated, sampled, **or** emitted as `DEBUG` **where** appropriate.\n \n-Production `DEBUG` logging is disabled by default. Temporary enablement **must** be scoped by component, subject, run, entity, **or** another bounded selector, have an automatic expiry, **and** preserve the same redaction rules as **every** other level.\n+production `DEBUG` logging is disabled by default. Temporary enablement **must** be scoped by component, subject, run, entity, **or** another bounded selector, have an automatic expiry, **and** preserve the same redaction rules as **every** other level.\n \n ## Structured record policy\n \n the Carrier content of structured production log records follows CA-D-396.\n \n-Logs record material state transitions **and** boundary outcomes rather than **every** internal tick. An exception is emitted once at the boundary responsible for handling **or** escalating it; lower layers preserve structured context **without** duplicating the same stack trace at **every** call boundary.\n+Logs record material state transitions **and** boundary outcomes rather than **every** internal tick. an exception is emitted once at the boundary responsible for handling **or** escalating it; lower layers preserve structured context **without** duplicating the same stack trace at **every** call boundary.\n \n ## Safety and lifecycle policy\n \n-Logs **must** never contain passwords, API keys, access tokens, session secrets, cookies, private keys, complete credentials, **or** unredacted secret-bearing payloads. Personal, customer, **and** commercially sensitive data is omitted, masked, hashed, tokenized, **or** **otherwise** minimized according to the applicable boundary.\n+Logs **must** never contain passwords, API keys, access tokens, session secrets, cookies, private keys, complete credentials, **or** unredacted secret-bearing payloads. Personal, customer, **and** commercially sensitive data is omitted, masked, hashed, tokenized, **or** **otherwise** minimized according **to** the applicable boundary.\n \n-The policy defines retention, access, sampling, rotation, maximum size, back-pressure, unavailable-sink behavior, **and** disk-pressure behavior. Logging **must not** make the primary operation silently fail, **and** loss **or** suppression of required records **must** itself produce an observable failure signal.\n+the policy defines retention, access, sampling, rotation, maximum size, back-pressure, unavailable-sink behavior, **and** disk-pressure behavior. Logging **must not** make the primary operation silently fail, **and** loss **or** suppression of required records **must** itself produce an observable failure signal.\n \n-Production logs use the deployment environment's governed logging sink. Governed CAPRMEDIO workflow **and** local project-control Journals are **not** a substitute for the production system's log platform.\n+production logs use the deployment environment's governed logging sink. Governed CAPRMEDIO workflow **and** local project-control Journals are **not** a substitute for the production system's log platform.\n \n-Important health counters, thresholds, **and** service-level signals receive explicit monitors. A production evaluation decision **must not** depend solely on parsing free-form log prose.\n+Important health counters, thresholds, **and** service-level signals receive explicit monitors. a production evaluation decision **must not** depend solely on parsing free-form log prose.\n \n ## Rationale\n \n-Logs are production Ops records, but their required coverage, structure, severity, safety, **and** retention **must** be governed **before** failures occur. A component-specific policy provides that evaluation boundary while leaving the logger implementation **and** emitted records **in** their proper artifact roles.\n+Logs are production Ops records, but their required coverage, structure, severity, safety, **and** retention **must** be governed **before** failures occur. a component-specific policy provides that evaluation boundary while leaving the logger implementation **and** emitted records **in** their proper artifact roles.\n"
+  },
+  {
+    "identity": "CA-D-397",
+    "body": "# Register CAPRMEDIO Type prefixes\n\nthe following fixed lowercase prefixes **must** be registered **only** for the listed Type values under Artifact; Atom identities use class short names instead.\n\n| Artifact form | Type | Prefix |\n|---|---|---|\n| `projection` | `catalog` | `catl` |\n| `projection` | `map` | `maps` |\n| `projection` | `hub` | `hubs` |\n| `projection` | `implementation_record` | `irec` |\n| `journal` | `implementation_journal` | `ijrn` |\n",
+    "design_body_sha256": "7fdf1c34a212af6a7bd573d6568db127319adf8b9a1aecba97cd10d760bfcabd",
+    "actual_body_sha256": "7fdf1c34a212af6a7bd573d6568db127319adf8b9a1aecba97cd10d760bfcabd",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-398",
+    "body": "# Encode configuration surfaces in owning Atoms\n\nan owning Atom **may** carry its optional machine-readable contribution **to** the generated Project Scope Unit Graph under one top-level `project_scope_unit_graph` **or** `project_graph_state` YAML map **only** **when** it faithfully represents that Atom's own governed Claim. it **may** declare registered facts, allowed values, defaults, **or** structural contributions, but **must not** encode current Operator-selected Project identity, Atom prefix, Authority Mode values, **or** a `project_settings` contribution; Project initialization selections belong **only** **to** Project Settings, **and** Authority Mode selections belong **only** **to** Framework Instance Settings.\n",
+    "design_body_sha256": "8b3caaa3c5ad303093f14ddd8a91087153c6a78d84c8e2350a2c3667d3a8675a",
+    "actual_body_sha256": "8b3caaa3c5ad303093f14ddd8a91087153c6a78d84c8e2350a2c3667d3a8675a",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-399",
+    "body": "# Serialize Requirement Type Tokens\n\nConstraint **must** use Carrier token `constraint`; Boundary **must** use Carrier token `boundary`.\n",
+    "design_body_sha256": "788b654f81b94003a4a99cdb1c0d8c5c99cae88d125935fcb3ae773f3bf32668",
+    "actual_body_sha256": "788b654f81b94003a4a99cdb1c0d8c5c99cae88d125935fcb3ae773f3bf32668",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-400",
+    "body": "# Serialize Evaluation Type Tokens\n\nQA Case **must** use Carrier token `qa_case`; Evaluation Control **must** use Carrier token `evaluation_control`; Evaluation Approach **must** use Carrier token `evaluation_approach`.\n",
+    "design_body_sha256": "9d9c33e6b3dd917017d3896bcdbd0bd3e6d4bd738f8db19cb9a7d906f3f479a1",
+    "actual_body_sha256": "9d9c33e6b3dd917017d3896bcdbd0bd3e6d4bd738f8db19cb9a7d906f3f479a1",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-401",
+    "body": "# Serialize Concern Type Tokens\n\nQuestion **must** use Carrier token `question`; Problem **must** use Carrier token `problem`; Risk **must** use Carrier token `risk`; Opportunity **must** use Carrier token `opportunity`.\n",
+    "design_body_sha256": "e432b1c92a4c304062cb70ee7d610b8481a22961de93fb14875c017629bea937",
+    "actual_body_sha256": "e432b1c92a4c304062cb70ee7d610b8481a22961de93fb14875c017629bea937",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-402",
+    "body": "# Serialize Delivery Type Tokens\n\nRelease Definition **must** use Carrier token `release_definition`; Environment Definition **must** use Carrier token `environment_definition`.\n",
+    "design_body_sha256": "b719c4c63ff5e61342c86c00d97014e91491bd744417dc09cbcc31ff786967a8",
+    "actual_body_sha256": "b719c4c63ff5e61342c86c00d97014e91491bd744417dc09cbcc31ff786967a8",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-403",
+    "body": "# Serialize Operations Type Tokens\n\nRelease Record **must** use Carrier token `release_record`; Deployment Record **must** use Carrier token `deployment_record`; Environment State **must** use Carrier token `environment_state`; Health Record **must** use Carrier token `health_record`; Incident Record **must** use Carrier token `incident_record`.\n",
+    "design_body_sha256": "80a4d1d17e49540b84710469c6ae43398d6c0e765fe71630f0aeb2742ec978bf",
+    "actual_body_sha256": "80a4d1d17e49540b84710469c6ae43398d6c0e765fe71630f0aeb2742ec978bf",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-404",
+    "body": "# Serialize Method Type Tokens\n\nImplementation Method **must** use Carrier token `implementation_method`; Implementation Decision **must** use Carrier token `implementation_decision`; External Implementation Method **must** use Carrier token `external_implementation_method`; Method Binding **must** use Carrier token `method_binding`.\n",
+    "design_body_sha256": "b7da33a7eba8a8e68934c1f9b6957467cac80fb1141362b16dd9de95129fb893",
+    "actual_body_sha256": "b7da33a7eba8a8e68934c1f9b6957467cac80fb1141362b16dd9de95129fb893",
+    "diff": ""
+  },
+  {
+    "identity": "CA-R-293",
+    "body": "# Use Constraint only for external limitations\n\nan Author **must** use Constraint **only** for a limitation imposed from outside the Project choice boundary.\n",
+    "design_body_sha256": "ac13f70e8a705f04ee5be106c9686d4f28fca2823c42dc30debd35e59f4d90c0",
+    "actual_body_sha256": "ac13f70e8a705f04ee5be106c9686d4f28fca2823c42dc30debd35e59f4d90c0",
+    "diff": ""
+  },
+  {
+    "identity": "CA-R-825",
+    "body": "# Define Boundary as a Type Value for Requirement Atoms\n\nBoundary **means** the Type value under Content Role Requirement for one explicit current limit of the owning Scope Unit.\n",
+    "design_body_sha256": "9291f6afaee0f997d1b9d7c1352db0af8eaab6ad3c4dd6c9ee7d457afd138d7c",
+    "actual_body_sha256": "9291f6afaee0f997d1b9d7c1352db0af8eaab6ad3c4dd6c9ee7d457afd138d7c",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-761",
+    "body": "# Register Constraint as an External Type Value for Requirement Atoms\n\nConstraint **must** be registered as a non-default external value of `Atom/Content Role: Requirement/Type`; its explicit name is **not** derived from the default external Type naming rule.\n",
+    "design_body_sha256": "8621defdba95c610569b3157b071d89bdad17b2270d45e709ac85532e847d551",
+    "actual_body_sha256": "8621defdba95c610569b3157b071d89bdad17b2270d45e709ac85532e847d551",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-748",
+    "body": "# Register Type Values for Evaluation Atoms\n\nQA Case **and** Evaluation Control **must** be registered as internal values of `Atom/Content Role: Evaluation/Type`.\n",
+    "design_body_sha256": "c4fbdd35c07f1437e9530e726dc6904152b10fb33ac01f890d4d9594063f24a5",
+    "actual_body_sha256": "c4fbdd35c07f1437e9530e726dc6904152b10fb33ac01f890d4d9594063f24a5",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+    "body": "# Define Evaluation Approach as a Type Value for Evaluation Atoms\n\nEvaluation Approach **means** the internal Type value under Content Role Evaluation for one reusable, mechanism-neutral evaluation policy.\n",
+    "design_body_sha256": "e35b9a8b9a19d2514b642725177af28729a17248d0be553828b77166433c18a1",
+    "actual_body_sha256": "e35b9a8b9a19d2514b642725177af28729a17248d0be553828b77166433c18a1",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-751",
+    "body": "# Register Type Values for Delivery Atoms\n\nRelease Definition **and** Environment Definition **must** be registered as internal values of `Atom/Content Role: Delivery/Type`.\n",
+    "design_body_sha256": "328ffadf4f05ad9892fab68d23982d79fffb0dae2ff475c1599548ae97e48fde",
+    "actual_body_sha256": "328ffadf4f05ad9892fab68d23982d79fffb0dae2ff475c1599548ae97e48fde",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-754",
+    "body": "# Define Implementation Method as a Type Value for Method Atoms\n\nImplementation Method **means** the internal Type value under Content Role Method for one reusable implementation policy.\n",
+    "design_body_sha256": "3f393f9e54b2e0e0f61eefab3498cdab1be80557914439334869757ffa01e037",
+    "actual_body_sha256": "3f393f9e54b2e0e0f61eefab3498cdab1be80557914439334869757ffa01e037",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-755",
+    "body": "# Define Implementation Decision as a Type Value for Method Atoms\n\nImplementation Decision **means** the internal Type value under Content Role Method for one concrete implementation choice bounded **to** an explicit realization target.\n",
+    "design_body_sha256": "28d83dfcac6287dbbd7edcd8763c2af8ebd59a9cfaf15afea64a9043373b3f13",
+    "actual_body_sha256": "eb6c4ad987065be0eb474284d11f6ce41162f1b8310b86a83f97c155a88e6904",
+    "diff": "--- admitted design\n+++ prepared source\n@@ -1,3 +1,3 @@\n # Define Implementation Decision as a Type Value for Method Atoms\n \n-Implementation Decision **means** the internal Type value under Content Role Method for one concrete implementation choice bounded to an explicit realization target.\n+Implementation Decision **means** the internal Type value under Content Role Method for one concrete implementation choice bounded **to** an explicit realization target.\n"
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-762",
+    "body": "# Define External Implementation Method as a Type Value for Method Atoms\n\nExternal Implementation Method **means** the external Type value under Content Role Method for one reusable implementation policy whose meaning is owned by an identified external source revision.\n",
+    "design_body_sha256": "c05b12fbd82bfc26869546ac6e4cb193880d9e60d2e5983697555523fcd32c9d",
+    "actual_body_sha256": "c05b12fbd82bfc26869546ac6e4cb193880d9e60d2e5983697555523fcd32c9d",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-763",
+    "body": "# Define Method Binding as a Type Value for Method Atoms\n\nMethod Binding **means** the internal Type value under Content Role Method that governs how exact Method revisions apply **to** explicit targets **without** duplicating those Methods.\n",
+    "design_body_sha256": "4e9a336a7232b74b87979c686240307c0feb6aae743c45feda7bfcfaf9f7bc4c",
+    "actual_body_sha256": "9a867bdeb3b513ced1358112ddfaf64b7d9a40e9b8d9b3d684b0c0ac46e94ebc",
+    "diff": "--- admitted design\n+++ prepared source\n@@ -1,3 +1,3 @@\n # Define Method Binding as a Type Value for Method Atoms\n \n-Method Binding **means** the internal Type value under Content Role Method that governs how exact Method revisions apply to explicit targets **without** duplicating those Methods.\n+Method Binding **means** the internal Type value under Content Role Method that governs how exact Method revisions apply **to** explicit targets **without** duplicating those Methods.\n"
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-749",
+    "body": "# Register Type Values for Concern Atoms\n\nQuestion **and** Problem retain their canonical admission under CA-R-1231. Risk **and** Opportunity **must** be registered as additional internal values of `Atom/Content Role: Concern/Type`.\n",
+    "design_body_sha256": "022fc284d39fc05274df39cc15adfab4969bc5fd326404a1c11cc3dc5cbd11fd",
+    "actual_body_sha256": "022fc284d39fc05274df39cc15adfab4969bc5fd326404a1c11cc3dc5cbd11fd",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-GOV-REQU-752",
+    "body": "# Register Type Values for Operations Atoms\n\nRelease Record, Deployment Record, Environment State, Health Record, **and** Incident Record **must** be registered as internal values of `Atom/Content Role: Operations/Type`.\n",
+    "design_body_sha256": "0e2a7b8cf3a303bf2c127e2fc2f540059745bdcbe60f0f94c8e31b4a2fa8209a",
+    "actual_body_sha256": "0e2a7b8cf3a303bf2c127e2fc2f540059745bdcbe60f0f94c8e31b4a2fa8209a",
+    "diff": ""
+  },
+  {
+    "identity": "CA-D-405",
+    "body": "# Exclude Completed Work from the Development Backlog Carrier\n\nthe Development Backlog Carrier **must not** retain a completed-work section.\n",
+    "design_body_sha256": "0c1836fe404cba9b07eeda55f06f071166fc8eef6f920013dce85a08f0f9618f",
+    "actual_body_sha256": "0c1836fe404cba9b07eeda55f06f071166fc8eef6f920013dce85a08f0f9618f",
+    "diff": ""
+  },
+  {
+    "identity": "CAPRMEDIO-META-REQU-103",
+    "body": "# Requirement — Reconcile the Development Backlog after release\n\n**after** the Release Record is accepted, CAPRMEDIO reconciles the Development Backlog against its exact released manifest.\n\nCandidates whose promoted Atoms were fully delivered **in** that release are removed from the Development Backlog. Unfinished, partially delivered, excluded, **or** newly deferred candidates remain unscheduled **or** move **to** another target version. a candidate cannot be removed as shipped **unless** the released manifest accounts for its promoted Atoms.\n\nReconciliation appends Journal records **and** regenerates the Projection. Release Records, Plans under `done/`, **and** Git history preserve what shipped, what was executed, **and** how the planning allocation changed.\n\n## Primary claim\n\nRelease reconciliation removes fully shipped candidates from the Development Backlog **and** retains **or** reschedules **every** candidate **not** fully accounted for by the released manifest.\n",
+    "design_body_sha256": "e251e2e8dd2a35c6aa39107844c06e929377243ff182f4cab568e285a5d1b5de",
+    "actual_body_sha256": "a3fef8b8347272de06b0082864ccb3d04f8f33fec474a3ed1bb8f15717e37d6b",
+    "diff": "--- admitted design\n+++ prepared source\n@@ -2,7 +2,7 @@\n \n **after** the Release Record is accepted, CAPRMEDIO reconciles the Development Backlog against its exact released manifest.\n \n-Candidates whose promoted Atoms were fully delivered **in** that release are removed from the Development Backlog. Unfinished, partially delivered, excluded, **or** newly deferred candidates remain unscheduled **or** move to another target version. A candidate cannot be removed as shipped **unless** the released manifest accounts for its promoted Atoms.\n+Candidates whose promoted Atoms were fully delivered **in** that release are removed from the Development Backlog. Unfinished, partially delivered, excluded, **or** newly deferred candidates remain unscheduled **or** move **to** another target version. a candidate cannot be removed as shipped **unless** the released manifest accounts for its promoted Atoms.\n \n Reconciliation appends Journal records **and** regenerates the Projection. Release Records, Plans under `done/`, **and** Git history preserve what shipped, what was executed, **and** how the planning allocation changed.\n \n"
+  }
+]

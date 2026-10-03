@@ -1,0 +1,70 @@
+---
+cce_version: cce_1
+cce_form: concern_question
+subjects:
+  governs: "Atom"
+  depends_on:
+    - "Atom/Claim"
+    - "Artifact/Revision"
+    - "Project"
+    - "Operator"
+priority: medium
+version: 3
+updated_at: "2026-09-23 19:08:49 +0000"
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+relations: {"relates_to": ["CA-D-250", "CA-D-437", "CA-M-162"]}
+---
+# Summary
+
+How should the Python source/assets draft be reconciled?
+
+## Claim
+
+how should the identified Draft Atom be reconciled **with** active authority **and** Project Principles **without** losing useful information **or** promoting it?
+
+### Draft under review
+
+- prior Carrier, now archived: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/07_delivery/archive/CA-D--DELIVERY-FR_ENGN--provide-bounded-python-source-and-external-assets@1.md`.
+- inspected SHA-256: `56279919c0861f0a699796ff20d3d27676bcfa1ab6e72641a77b844a76304554`.
+- review point: 64 of 79; campaign `draft-review-8afeac79`.
+
+### Prior review finding
+
+> **Consolidate** — Method already owns source limits and static-data selection; retain only a missing carrier obligation at PROGRAMMATIC.
+>
+> Basis: `CA-M-162`, `CA-D-250`; I7,I8. Reviewer confidence: 99%.
+
+### Active authority cited by the review
+
+- `CA-M-162@14`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-162-PROGRAMMATIC-CORE-METHOD--ratchet-hand-authored-python-source-boundaries.md`; SHA-256 `f059d7c21b0eb66f9f4164049ea4a250d41a2f74efc89a3a5a43378b0b57cb2d`.
+- `CA-D-250@9`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/CA-D-250-PROGRAMMATIC-CORE-DELIVERY--provide-programmatic-software-carriers.md`; SHA-256 `0631b4211c0973f6f622e3a3b7ca956f17c67e2d442d3149958ff0f7c7d32520`.
+
+### Principles to apply
+
+- [CA-M-002](/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_caprmedio/05_method/CA-M-002-PRINCIPLE-METHOD--dry-don-t-repeat-yourself.md).
+- [CA-M-005](/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_caprmedio/05_method/CA-M-005-PRINCIPLE-METHOD--add-complexity-only-when-necessary.md).
+- [CA-M-006](/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_caprmedio/05_method/CA-M-006-PRINCIPLE-METHOD--keep-the-whole-project-coherent.md).
+- [CA-R-1490](/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_caprmedio/04_requirement/CA-R-1490-PRINCIPLE-REQUIREMENT--preserve-valuable-information.md).
+- [CA-E-001](/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_caprmedio/06_evaluation/CA-E-001-PRINCIPLE-EVALUATION--make-governed-commitments-and-results-checkable.md).
+
+### Resolution
+
+resolved for the approved group-11 repair. the Operator placed Python-specific details **in** PROGRAMMATIC. the old Engine Draft is archived; **any** replacement remains Draft **and** unpromoted.
+
+- replacement Draft: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/drafts/CA-D--PROGRAMMATIC-DELIVERY--separate-generated-outputs-from-hand-authored-software-sources.md`; Version 1; SHA-256 `b51322362a7af04a9341d2f270351dc0768ff3912a13815882e39b0fcdcf0b02`.
+- exact prior Draft: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/07_delivery/archive/CA-D--DELIVERY-FR_ENGN--provide-bounded-python-source-and-external-assets@1.md`; Version 1; SHA-256 `56279919c0861f0a699796ff20d3d27676bcfa1ab6e72641a77b844a76304554`.
+
+source-size thresholds, executable-unit exceptions, responsibility bounds, **and** TOML/JSON/YAML selection already belong **to** CA-M-162. the replacement keeps **only** the source/output placement boundary. it does **not** add a universal hard-size limit **or** a new format-selection policy.
+
+- DRY **and** coherence favor existing authority over repeated rules. the narrower replacements carry one independently replaceable Delivery contribution under CA-R-918 **and** CA-M-313.
+- changed Summaries start new Draft identities at Version 1 under CA-R-1464; no Atom IDs are allocated **and** no authoritative promotion occurs.
+- historical Engine placement remains **only** **in** the preserved archive **and** this review record. new technical proposals declare PROGRAMMATIC as their owning **and** target Scope Unit.
+- prior Questions **and** Drafts are preserved byte-for-byte. cited review findings remain historical evidence, **not** unresolved current decisions.
+- this repair changes no active Method, settings file, technical configuration, Tool, runtime, installed release, **or** Projection. it does **not** claim that those implementations already satisfy the Drafts.
+
+#### Active authority checked
+
+- `CA-D-250@9`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/CA-D-250-PROGRAMMATIC-CORE-DELIVERY--provide-programmatic-software-carriers.md`; SHA-256 `0631b4211c0973f6f622e3a3b7ca956f17c67e2d442d3149958ff0f7c7d32520`.
+- `CA-D-437@8`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/CA-D-437-PROGRAMMATIC-CORE-DELIVERY--materialize-the-project-temporary-boundary.md`; SHA-256 `6f36d43c22e9da8d595bdb80666aaad96d99412aec2e964c5cf698f2e79666d0`.
+- `CA-M-162@14`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-162-PROGRAMMATIC-CORE-METHOD--ratchet-hand-authored-python-source-boundaries.md`; SHA-256 `f059d7c21b0eb66f9f4164049ea4a250d41a2f74efc89a3a5a43378b0b57cb2d`.

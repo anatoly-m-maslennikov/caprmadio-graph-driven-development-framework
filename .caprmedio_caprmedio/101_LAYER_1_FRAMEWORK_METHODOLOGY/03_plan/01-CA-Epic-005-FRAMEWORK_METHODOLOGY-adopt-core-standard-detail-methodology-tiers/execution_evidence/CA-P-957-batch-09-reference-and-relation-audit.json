@@ -1,0 +1,769 @@
+{
+  "non_authoritative": true,
+  "batch": "09",
+  "canonical": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "batch": "09",
+    "candidate_count": 31,
+    "checked_count": 39,
+    "diagnostic_count": 1,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "new_candidate_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-R-1361",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-CORE_META_MODEL-REQUIREMENT--define-canonical-scope-signature.md",
+        "sha256": "91a1759d55015c74e0d6664ac435a4c9986d2453c06156216b3031b27af39b04",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-718",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-atom-claim-scope-from-structural-ownership.md",
+        "sha256": "c831b5b6a19a1145a0bb5a9c6cb7c002b817407e7884c82c8bfd4cbda1581ec6",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-728",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-728-CORE_META_MODEL-REQUIREMENT--define-project-atom-id.md",
+        "sha256": "4fe065c0d1ca06e00b38f6e03512953b86c99ea75c8f643da9c4c819a6bbec04",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-732",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-CORE_META_MODEL-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+        "sha256": "a03134ea5a072b60b5e780228e4bff5f706508ce638c25bc728e9b1b89a77191",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-737",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-737-CORE_META_MODEL-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix.md",
+        "sha256": "aeea4cc2b36f9a54a43591886f6e569a2090eb8f374ce3b51e9148bddf1c27ab",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-913",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md",
+        "sha256": "126872cbe60ffb6f00e823e4dd4c8b31b3ba909991d3d847794ea0145dd3b46d",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-712--define-ordered-unit-structural-kind"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-928",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-928-CORE_META_MODEL-CORE-REQUIREMENT--omit-project-atom-id-from-external-goals.md",
+        "sha256": "bd184f631e97af396a8bf238b903ce8967305513d0144c3ae27cf4edda8b131d",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-960",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-960-CORE_META_MODEL-CORE-REQUIREMENT--define-child-composition.md",
+        "sha256": "072b96903870df60eb48d8d1494556635f1f45c774b508116c8ffb479f762cc0",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-961",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-961-CORE_META_MODEL-CORE-REQUIREMENT--define-project-boundary-position.md",
+        "sha256": "6f96139b0e3792140302c4a0a1f459a53886b4ef9c987951a7e5061c84652ad3",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-962",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-962-CORE_META_MODEL-CORE-REQUIREMENT--give-every-scope-unit-one-name.md",
+        "sha256": "1527ee8282f0dcd9b882194c1d1a838d26989a1f39caa8c999fc43105bf8294f",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-963",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-963-CORE_META_MODEL-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens.md",
+        "sha256": "cbb14b504d8daef722988884c8d5dfa7598758825625129ba9c7450248f75161",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-964",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-964-CORE_META_MODEL-CORE-REQUIREMENT--define-unit-as-scope-unit-shorthand.md",
+        "sha256": "aa1e042b0e4ecf985ce36d0165e0177a5faec840e90318bc10794bee009ce012",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-969",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-969-CORE_META_MODEL-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english.md",
+        "sha256": "2096e5f68b9609d026ebb7fe105ddb41df6be186af1d41271e730786f346b2ab",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-970",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-970-CORE_META_MODEL-GENERAL-REQUIREMENT--make-scope-unit-names-unique-within-the-project.md",
+        "sha256": "b816ac22d07d835dbaa453d0c79b9d6c9a151926638345bd36a57f4812688d15",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-972",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-972-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit-label.md",
+        "sha256": "e7dbe40a53573e50ab16c3c2c0220be28797e0838511683c5e48fc98709e892e",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-976",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-976-CORE_META_MODEL-CORE-REQUIREMENT--separate-navigational-order-from-structural-relations.md",
+        "sha256": "3be29ea1c1b2d79ce4d9817f6fd9459109ffa1f2562addcfbeb83a6a6f26bfb4",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-978",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-978-CORE_META_MODEL-REQUIREMENT--define-navigational-order-number.md",
+        "sha256": "9b2c8ca71fde9f9862d294c713b2d920900afd7e34902a282d7d4e85536b0b1d",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-979",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-979-CORE_META_MODEL-GENERAL-REQUIREMENT--default-scope-units-to-unordered.md",
+        "sha256": "bbbce553c026584ce3b38c926f0363d2189bde8d8343c8dfd70aa526406dfd1e",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-981",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-981-CORE_META_MODEL-REQUIREMENT--default-navigational-order-chronologically.md",
+        "sha256": "11cc79a6d9aadc12ee32104bccf48130065dff4cf27f6809519361565ae65db2",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-982",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-982-CORE_META_MODEL-GENERAL-REQUIREMENT--let-the-operator-override-scope-unit-label.md",
+        "sha256": "2f00ae5f9eb3f2238b622b8c37c033f2fd3a6e311088046501e83d372a665eba",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-983",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-983-CORE_META_MODEL-GENERAL-REQUIREMENT--let-the-operator-override-navigational-order-number.md",
+        "sha256": "bc4e792b15f39786d6f9dde9b08e49cde925abefdde1b235cba811a95a2c6182",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-999",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-999-CORE_META_MODEL-REQUIREMENT--define-scope-expression.md",
+        "sha256": "b31cff0c8df8eb3253c8d67cf0485f60436c83a2baafc9b388f1eb7da7c6490a",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-714",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership.md",
+        "sha256": "60e8410632f0d04f189fcb4f7d34b8a78829279315f8b5aa188ef19f45b809d1",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+        "sha256": "99cb17c00bd1a9456c8cd6026eb512e0496e19bec7785257d724fcc7c441ae7e",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-708",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-unit.md",
+        "sha256": "eaba102eb28aa5880c3ef0f7b6eaed1cc914797c870f154fe5d2479b9a1724a7",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-709",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-CORE-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+        "sha256": "10aa11bec45a1e7bcfcbdf42019ab6e0a4647449037fe738991cd1b1458ec5f2",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-713",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-CORE-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+        "sha256": "93cc680ff8ba34dd6842f247c1891f2bc8f920030fe59ca2fcf2da0f8d9add49",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-714",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-CORE-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md",
+        "sha256": "c085630a866f85ee78355943ca2659a49ac2b724cfd3d14f8ce421cecb851f76",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-715",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-CORE-REQUIREMENT--define-local-order.md",
+        "sha256": "d82326f5e2dacba8670d1f805727c54e896228de4796f318d7eb4b40407f4a50",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-716",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-CORE-REQUIREMENT--define-structural-path.md",
+        "sha256": "98f586cf8d16856ce3ace5cd32211bc184e1d4e3419e830507e9cbbc8a0052d8",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-789",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-CORE-REQUIREMENT--permit-mixed-child-composition.md",
+        "sha256": "b57a5e18c1803fd69b461fb2b42b9830efb3e87601f6141a157467efc1ba0f9e",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-445",
+        "path": ".caprmedio_caprmedio/06_evaluation/CA-E-445-QA_CASE--validate-methodology-membership-in-the-project.md",
+        "sha256": "9b210fab779309a77d873e6490c986c5f61e073696079b387c1cd512abfa60bc",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-626",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-626-CORE_META_MODEL-REQUIREMENT--project-the-current-scope-unit-graph-without-owning-authority.md",
+        "sha256": "8a8620c4e967bbf23e730b3ffed8b24611f33cba165c620f1b9bd11f537b430a",
+        "planned_candidate": false,
+        "source_count": 3,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-843"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-843"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-915",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-915-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-order-derived-dependencies.md",
+        "sha256": "f66e9614233eb202d1b373cdcd3a7d53af51de4ae4a85d27fd0db80f16f3daa6",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-971",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-971-CORE_META_MODEL-CORE-REQUIREMENT--keep-readable-scope-unit-name-renderings-nonauthoritative.md",
+        "sha256": "3b2be189664548cd4ca662eff72f98bb24a9247845b9e83f411ab158bda4cd3a",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-R-980",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+        "sha256": "f70f5537cee92113db063355f9c342cce15c5d9c0c36ec3c14f08e6cc509d5cb",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-721",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-721-CORE_META_MODEL-REQUIREMENT--derive-structural-path.md",
+        "sha256": "41b906e63dd7f25b572c37f89ba8094366aeda03cc2135984fbc548a47cae883",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-407",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary.md",
+        "sha256": "d9bdfad4ab20eef3eea89d7b63b2637daa89c9fed77a5ac3cb8ea50579465183",
+        "planned_candidate": false,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-788",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order.md",
+        "sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "references": {
+    "scanned_markdown": 10273,
+    "matches": [
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/meta_methodology_entity_graph.projection.md",
+        "line": 176,
+        "text": "| Scope Unit and Project | `CAPRMEDIO-META-REQU-708` through `CAPRMEDIO-META-REQU-720`, `CA-R-913`, `CA-R-960` through `CA-R-984`, `CA-R-1169` through `CA-R-1172`, and current Project Configuration authority |"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059.md",
+        "line": 573,
+        "text": "488\tCAPRMEDIO-META-REQU-720\te446c4ac9a5b90fe6f0ff9c74dca32d7c56efd99670a56c795fee40daed06494\tcompatible\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/CAPRMEDIO-META-REQU-720--identify-unordered-units-without-local-order.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms.md",
+        "line": 115,
+        "text": "- `CAPRMEDIO-META-REQU-716`, `CAPRMEDIO-META-REQU-720`, `CAPRMEDIO-META-REQU-721`, `CAPRMEDIO-META-REQU-722`, `CAPRMEDIO-META-REQU-723`, `CAPRMEDIO-META-REQU-730`"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077.md",
+        "line": 561,
+        "text": "CAPRMEDIO-META-REQU-720\t6171ce5c1db1a689f4f141f31b87caf15e48ac62ebff14d9fca1a27bb622e4dd\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/CAPRMEDIO-META-REQU-720--identify-unordered-units-without-local-order.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078.md",
+        "line": 560,
+        "text": "CAPRMEDIO-META-REQU-720\t6171ce5c1db1a689f4f141f31b87caf15e48ac62ebff14d9fca1a27bb622e4dd\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/CAPRMEDIO-META-REQU-720--identify-unordered-units-without-local-order.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@2.md",
+        "line": 558,
+        "text": "CAPRMEDIO-META-REQU-720\t6171ce5c1db1a689f4f141f31b87caf15e48ac62ebff14d9fca1a27bb622e4dd\t.caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/CAPRMEDIO-META-REQU-720--identify-unordered-units-without-local-order.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-722-CORE_META_MODEL-REQUIREMENT--define-semantics-scope.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features.md",
+        "line": 2,
+        "text": "atom_id: CAPRMEDIO-META-REQU-720"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features.md",
+        "line": 15,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features.md"
+      },
+      {
+        "atom_id": "CA-R-982",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-982-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-scope-unit-label.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-982-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-scope-unit-label.md"
+      },
+      {
+        "atom_id": "CA-R-737",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-737-CORE_META_MODEL-CORE-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix.md",
+        "line": 18,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-737-CORE_META_MODEL-CORE-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix.md"
+      },
+      {
+        "atom_id": "CA-R-963",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-963-CORE_META_MODEL-CORE-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens.md",
+        "line": 15,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-963-CORE_META_MODEL-CORE-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CA-R-728",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-728-CORE_META_MODEL-CORE-REQUIREMENT--define-project-atom-id.md",
+        "line": 22,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-728-CORE_META_MODEL-CORE-REQUIREMENT--define-project-atom-id.md"
+      },
+      {
+        "atom_id": "CA-R-970",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-970-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-names-unique-within-the-project.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-970-CORE_META_MODEL-CORE-REQUIREMENT--make-scope-unit-names-unique-within-the-project.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-709",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md"
+      },
+      {
+        "atom_id": "CA-R-978",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-978-CORE_META_MODEL-CORE-REQUIREMENT--define-navigational-order-number.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-978-CORE_META_MODEL-CORE-REQUIREMENT--define-navigational-order-number.md"
+      },
+      {
+        "atom_id": "CA-R-732",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-732-CORE_META_MODEL-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+        "line": 15,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-CORE_META_MODEL-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-708",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md"
+      },
+      {
+        "atom_id": "CA-R-983",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-983-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-navigational-order-number.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-983-CORE_META_MODEL-CORE-REQUIREMENT--let-the-operator-override-navigational-order-number.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-721-CORE_META_MODEL-REQUIREMENT--define-metamodel-scope.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-716",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-REQUIREMENT--define-structural-path.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-716-CORE_META_MODEL-REQUIREMENT--define-structural-path.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-715",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md",
+        "line": 16,
+        "text": "    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-789",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-REQUIREMENT--permit-mixed-child-composition.md",
+        "line": 15,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-789-CORE_META_MODEL-REQUIREMENT--permit-mixed-child-composition.md"
+      },
+      {
+        "atom_id": "CA-R-999",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-999-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-expression.md",
+        "line": 16,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-999-CORE_META_MODEL-CORE-REQUIREMENT--define-scope-expression.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-structural-ownership-from-cross-unit-flow.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CA-R-969",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-969-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english.md",
+        "line": 18,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-969-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-scope-unit-names-from-ordinary-english.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-715",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order.md",
+        "line": 18,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation.md",
+        "line": 22,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-723-CORE_META_MODEL-REQUIREMENT--define-governance-scope.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-713",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md",
+        "line": 18,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-713-CORE_META_MODEL-REQUIREMENT--define-unordered-as-a-type-value-under-scope-unit.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-714",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md"
+      },
+      {
+        "atom_id": "CA-R-981",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-981-CORE_META_MODEL-CORE-REQUIREMENT--default-navigational-order-chronologically.md",
+        "line": 15,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-981-CORE_META_MODEL-CORE-REQUIREMENT--default-navigational-order-chronologically.md"
+      },
+      {
+        "atom_id": "CA-R-1361",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1361-CORE_META_MODEL-CORE-REQUIREMENT--define-canonical-scope-signature.md",
+        "line": 20,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-CORE_META_MODEL-CORE-REQUIREMENT--define-canonical-scope-signature.md"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-720-CORE_META_MODEL-REQUIREMENT--omit-local-order-from-features.md",
+        "line": 2,
+        "text": "atom_id: CAPRMEDIO-META-REQU-720"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-714-CORE_META_MODEL-REQUIREMENT--derive-inverse-structural-ownership.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-715",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md",
+        "line": 16,
+        "text": "    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-atom-claim-scope-from-structural-ownership.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-715",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit@6.md",
+        "line": 16,
+        "text": "    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership@9.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-721-CORE_META_MODEL-REQUIREMENT--define-metamodel-scope@9.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation@10.md",
+        "line": 19,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation@8.md",
+        "line": 22,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-722-CORE_META_MODEL-REQUIREMENT--define-semantics-scope@9.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-718-CORE_META_MODEL-CORE-REQUIREMENT--separate-structural-ownership-from-cross-unit-flow@9.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-721-CORE_META_MODEL-REQUIREMENT--define-metamodel-scope@8.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation@9.md",
+        "line": 19,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-722-CORE_META_MODEL-REQUIREMENT--define-semantics-scope@8.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-720",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-723--omit-structural-ordinals-from-unordered-unit-directories@3.md",
+        "line": 12,
+        "text": "    - CAPRMEDIO-META-REQU-720--identify-unordered-units-without-local-order"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-723-CORE_META_MODEL-REQUIREMENT--define-governance-scope@8.md",
+        "line": 20,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-706",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-723-CORE_META_MODEL-REQUIREMENT--define-governance-scope@9.md",
+        "line": 18,
+        "text": "    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive"
+      }
+    ]
+  },
+  "retirement_active_inbound": [],
+  "semantic_tier_check": "All newly invalid Requirement-parent consequences are included. Established preexisting same-tier peers on revised syntax Atoms are explicitly repaired under root's admission disposition; unrelated untouched defects and non-Requirement links remain. META720 has no active inbound reference; its exact whole prior Carrier is conserved, not assigned a fictitious replacement edge."
+}

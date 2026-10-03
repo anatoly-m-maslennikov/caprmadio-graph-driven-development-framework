@@ -1,0 +1,54 @@
+# This repository is not declared as a buildable or distributable Python package.
+# The framework release version remains canonical in version.toml.
+
+[tool.caprmedio.framework_engine_software]
+authority_atoms = ["CA-R-1047", "CA-M-110", "CA-E-250", "CA-D-250"]
+version_source = "version.toml"
+
+# The checked-in release workflow declares the same supported minor series.
+# Successful local or hosted runs remain separate execution evidence.
+supported_python = "==3.14.*"
+support_evidence = ".github/workflows/publish-release.yml:python-version=3.14"
+
+# The default runtime is deliberately standard-library-only.
+required_runtime_dependencies = []
+dependency_exception_delivery_root = ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery"
+dependency_exception_evaluation_root = ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation"
+exception_recording_rule = "Record each admitted third-party dependency or non-Python carrier in an active Delivery Atom under the delivery root, with its acceptance evidence in an active Evaluation Atom under the evaluation root."
+
+[tool.pytest.ini_options]
+# Keep pytest's disposable cache and atomic staging inside project temporary state.
+cache_dir = ".caprmedio_tmp/cache/pytest"
+
+[tool.uv]
+cache-dir = ".caprmedio_tmp/cache/uv"
+
+
+# Bounded runtime selection for VALIDATE_ATOMS (CA-M-316 and CA-M-286).
+[dependency-groups]
+validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
+validate-atoms-dev = ["ruff==0.16.8", "mypy==2.3.1", "types-PyYAML==6.0.12.20260906"]
+rmed-workflow-mcp = ["mcp==2.3.0", "PyYAML==6.0.3"]
+
+[tool.caprmedio.framework_engine_software.components.validate_atoms]
+authority_atoms = ["CA-R-1622", "CA-R-1623", "CA-M-316", "CA-M-286", "CA-D-491", "CA-D-492", "CA-D-493"]
+runtime_dependency_group = "validate-atoms"
+development_dependency_group = "validate-atoms-dev"
+source = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/VALIDATE_ATOMS"
+evaluation = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/VALIDATE_ATOMS/tests"
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "C901"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+files = ["102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/VALIDATE_ATOMS"]
+follow_imports = "silent"

@@ -1,0 +1,401 @@
+{
+  "task": "CA-P-964@2",
+  "all_source_RMED_paths": 714,
+  "all_parsed_external_RMED_paths": 809,
+  "external_RMED_unique_ids_in_graph": 781,
+  "active_authority_duplicate_identity_paths": {
+    "CA-M-228": [
+      {
+        "identity": "CA-M-228",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-228-PROGRAMMATIC-CORE-METHOD--adopt-current-python-idioms-only-for-declared-benefit.md",
+        "version": 2,
+        "sha256": "76951bfdf04743ab070874292a77e330338d855ad3b127b1911a5f5ea722bbd3"
+      },
+      {
+        "identity": "CA-M-228",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+        "version": 6,
+        "sha256": "b31a50313532601f8a58e90fc9ca93e903a0d3e781ce8285d73be3f4d6811d7a"
+      }
+    ],
+    "CA-M-229": [
+      {
+        "identity": "CA-M-229",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-229-PROGRAMMATIC-CORE-METHOD--declare-one-python-and-software-configuration-boundary.md",
+        "version": 4,
+        "sha256": "ee629d5a59e64efdb08c1de803f24653985dc9477cb22bd823dd16f3f5130d9e"
+      },
+      {
+        "identity": "CA-M-229",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+        "version": 5,
+        "sha256": "f249753fc43829e689e2557698af7396e23f6e55ab7fb42f4e0cdc30fdc306a3"
+      }
+    ],
+    "CA-M-230": [
+      {
+        "identity": "CA-M-230",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-230-PROGRAMMATIC-CORE-METHOD--use-ruff-for-python-formatting-linting-and-complexity.md",
+        "version": 2,
+        "sha256": "060d61811528d9df7f1ba12f646721ced442c8d28a49577131de4153144eaaba"
+      },
+      {
+        "identity": "CA-M-230",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-METHOD--define-registered-cce-operators-through-cce-methods.md",
+        "version": 6,
+        "sha256": "0c7f7111f26e2d6452817dc3c7588efdf42952df3e00b925066d15000f4a687e"
+      }
+    ],
+    "CA-M-231": [
+      {
+        "identity": "CA-M-231",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-231-PROGRAMMATIC-CORE-METHOD--use-mypy-for-static-python-type-checking.md",
+        "version": 2,
+        "sha256": "3bcdd00d2e13e2ad4d2db0c9d5b84d4412560b0fe63232bbc92c63269bdbb2e2"
+      },
+      {
+        "identity": "CA-M-231",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+        "version": 9,
+        "sha256": "f9895a0f22cbc0f70d560852b42c820e1be49732ada082efd536c963142f73f7"
+      }
+    ],
+    "CA-M-232": [
+      {
+        "identity": "CA-M-232",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-232-PROGRAMMATIC-CORE-METHOD--read-engine-settings-through-one-shared-boundary.md",
+        "version": 3,
+        "sha256": "a5e6f3a750e91a2647efee4dad582fefcbe46814982360608913b645a47f47d5"
+      },
+      {
+        "identity": "CA-M-232",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-subject-projection-from-current-atom-subjects.md",
+        "version": 5,
+        "sha256": "b2f761888cfc52ad85b912cc0b5355a0660d0bfa4f2107cdfca131a80cbceeb4"
+      }
+    ],
+    "CA-M-233": [
+      {
+        "identity": "CA-M-233",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-233-PROGRAMMATIC-CORE-METHOD--select-software-evaluation-techniques-by-failure-mode.md",
+        "version": 2,
+        "sha256": "cec1ee77d107ea8c1f2762267d5dd084b6cf9d036d6ea1f1cf72b61ccd8d8724"
+      },
+      {
+        "identity": "CA-M-233",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL-METHOD--prefer-positive-normative-statements.md",
+        "version": 5,
+        "sha256": "0b65ce45aa2f703515b566215425333b1f108f03688dcf27ead0250f6c74070e"
+      }
+    ],
+    "CA-M-234": [
+      {
+        "identity": "CA-M-234",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-234-PROGRAMMATIC-CORE-METHOD--validate-untrusted-structured-data-with-pydantic.md",
+        "version": 2,
+        "sha256": "eaf2872fb858c6db0f357fcc97eaff590e837b0823eb1f213abf53b96aee2669"
+      },
+      {
+        "identity": "CA-M-234",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL-METHOD--register-expandable-canonical-cce-operator-list.md",
+        "version": 6,
+        "sha256": "736b2c87fe6429c7d900962d632be46617ecf34c38e6faddd2b97dcc651170bc"
+      }
+    ],
+    "CA-E-382": [
+      {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-382-PROGRAMMATIC-CORE-QA_CASE--require-a-declared-benefit-for-one-new-python-idiom.md",
+        "version": 1,
+        "sha256": "16b4c286a850562e7b45e4f1445a99bbc2beb14caf42292065a92eb54307b3f8"
+      },
+      {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-term-system-graphs.md",
+        "version": 7,
+        "sha256": "aaeb5577379a708e767b651868561e8e6a2cf7263c27521a489e378a01699b3b"
+      }
+    ],
+    "CA-E-383": [
+      {
+        "identity": "CA-E-383",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-383-PROGRAMMATIC-CORE-QA_CASE--verify-one-python-technical-configuration-boundary.md",
+        "version": 1,
+        "sha256": "5a2c1e14184ed4fad7165e2d14d01d5f49645529974a39ea16b1b347d837a03f"
+      },
+      {
+        "identity": "CA-E-383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+        "version": 5,
+        "sha256": "2c9adc95b6d93e16474c8f1a31b387d029b7293c2da141d1170d4d4b56bd85bb"
+      }
+    ],
+    "CA-E-384": [
+      {
+        "identity": "CA-E-384",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-384-PROGRAMMATIC-CORE-QA_CASE--verify-changed-python-with-ruff.md",
+        "version": 1,
+        "sha256": "2df4aee22f13afd7aba90d0589a376b22d4a50cd35792fb811e0b7341619b97e"
+      },
+      {
+        "identity": "CA-E-384",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-GENERAL-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+        "version": 8,
+        "sha256": "713ecf53691d32090ac2d6068c949dac634ae6576630fd7ca2a49805243edf8e"
+      }
+    ],
+    "CA-E-386": [
+      {
+        "identity": "CA-E-386",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-386-PROGRAMMATIC-CORE-QA_CASE--use-one-settings-reader-across-engine-software.md",
+        "version": 1,
+        "sha256": "7357a4fc7b393a7c89479683af3fa468f73501596b08cb60c1fe403c1e8005a0"
+      },
+      {
+        "identity": "CA-E-386",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-GENERAL-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+        "version": 9,
+        "sha256": "b5a962f35f9dfa8005ab6c1bad34c69b04df4d730ab440e16c46b693ead538c0"
+      }
+    ],
+    "CA-E-387": [
+      {
+        "identity": "CA-E-387",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-387-PROGRAMMATIC-CORE-EVAL_APPROACH--evaluate-changed-python-targets-under-one-configuration.md",
+        "version": 1,
+        "sha256": "340b6f1b701c232f19161b1571580e077500fc4f81d66450769c66758a58bdff"
+      },
+      {
+        "identity": "CA-E-387",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-type-assignments.md",
+        "version": 3,
+        "sha256": "9bc7b323d51e7f3a7a21e1f459c0882499cc96eada67351342a595dba52292ad"
+      }
+    ],
+    "CA-R-1385": [
+      {
+        "identity": "CA-R-1385",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1385-TOOLS-REQUIREMENT--bound-commit-automation-with-an-explicit-autonomy-envelope.md",
+        "version": 1,
+        "sha256": "b7aa31a288f5c0b5e6d97a4426da25cdf2e52c747a6f8faf687356b5f01539c1"
+      },
+      {
+        "identity": "CA-R-1385",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1385-CORE_META_MODEL-GENERAL-REQUIREMENT--order-non-project-local-tiers.md",
+        "version": 3,
+        "sha256": "cd31a1a9ff89aeac48431d77a7626b1335b8a621edbe732f9ae6716154a7763b"
+      }
+    ],
+    "CA-R-1386": [
+      {
+        "identity": "CA-R-1386",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1386-TOOLS-REQUIREMENT--define-the-generate-entity-graph-tool-unit.md",
+        "version": 2,
+        "sha256": "9d3ccf56ec5bc6daea9481a3dc620b9f97cfa1da0e58d94704c77dabbc463538"
+      },
+      {
+        "identity": "CA-R-1386",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1386-CORE_META_MODEL-CORE-REQUIREMENT--restrict-principle-to-project-scope.md",
+        "version": 2,
+        "sha256": "3e5a9e67d3e21b51749979add67cd77b8a239e86b3db3532e1666339a87742cd"
+      }
+    ],
+    "CA-E-428": [
+      {
+        "identity": "CA-E-428",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-428-TOOLS-QA_CASE--admit-only-two-local-commit-action-kinds.md",
+        "version": 1,
+        "sha256": "2cac75a515cea206c4f332e0beea6bb3c1aba7f97fe480466814df0a318f782d"
+      },
+      {
+        "identity": "CA-E-428",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-428-CORE_META_MODEL-GENERAL-EVALUATION--validate-local-and-global-tiers.md",
+        "version": 3,
+        "sha256": "f501ca4872c014a88c225452bae65abe98712de68a2d334b338960194f472d68"
+      }
+    ],
+    "CA-E-429": [
+      {
+        "identity": "CA-E-429",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-429-TOOLS-QA_CASE--stop-commit-automation-at-every-envelope-bound.md",
+        "version": 1,
+        "sha256": "b8c12b81cb1b8ea19ad2db1990e871846fbf205bfb24fc62d0870ecf07f6350d"
+      },
+      {
+        "identity": "CA-E-429",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+        "version": 3,
+        "sha256": "32f0abfafff8cb77cfc61002607078a24d20d67b726ad32c3ba5c10fddde2e52"
+      }
+    ],
+    "CA-E-430": [
+      {
+        "identity": "CA-E-430",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-430-TOOLS-QA_CASE--control-pause-resume-narrowing-and-escalation-independently.md",
+        "version": 1,
+        "sha256": "2991bedf7f28ec0b3fef124e4bbcba7f3ee08981b85085aef576358c22bf16a5"
+      },
+      {
+        "identity": "CA-E-430",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-430-CORE_META_MODEL-EVALUATION--validate-authoritative-framework-settings-artifact.md",
+        "version": 4,
+        "sha256": "cceeecb15a98aaca34c5799650c8882d34a65f71c0dc18c5a42ddae94c47c27a"
+      }
+    ],
+    "CA-E-431": [
+      {
+        "identity": "CA-E-431",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-431-TOOLS-QA_CASE--preserve-independent-real-change-and-journal-commit-progress.md",
+        "version": 1,
+        "sha256": "50dd4e43c3b9896756c23ce4361323f7d831b8838166b5c31131ea9ae021d579"
+      },
+      {
+        "identity": "CA-E-431",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-431-CORE_META_MODEL-EVALUATION--validate-authoritative-project-settings-artifact.md",
+        "version": 3,
+        "sha256": "ee0ccd42d5c2ac99234834caf066885bb51aed8be0b014864970a91529ecff32"
+      }
+    ],
+    "CA-D-028": [
+      {
+        "identity": "CA-D-028",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/BULK_CHANGE/07_delivery/CA-D-028-BULK_CHANGE-DELIVERY--bind-bulk-change-delivery-place.md",
+        "version": 5,
+        "sha256": "770528ee9597ef83e556740014d9d8a434d8453069680387fb9fd01ee3e316b3"
+      },
+      {
+        "identity": "CA-D-028",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/CLOSE_ATOM/07_delivery/CA-D-028-CLOSE_ATOM-DELIVERY--deliver-close-atom-intent-doer.md",
+        "version": 5,
+        "sha256": "64143e9b9768be7cc638a3a3ffef3a4fe8d54cf7fcde12155d8866c091c97fa1"
+      }
+    ],
+    "CA-D-254": [
+      {
+        "identity": "CA-D-254",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/07_delivery/CA-D-254-COMPILE_APPLICABLE_METHODOLOGY-DELIVERY--bind-compiler-authority-and-delivery-places.md",
+        "version": 2,
+        "sha256": "302e7c29663b02c7a0e29ea8a594404f14666437bd9055e77fb484b4ea529817"
+      },
+      {
+        "identity": "CA-D-254",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-254-CORE_META_MODEL-CORE-DELIVERY--classify-carrier-as-a-primary-entity.md",
+        "version": 6,
+        "sha256": "efb9a54e5a10d56b82825373f17b46dd7cc1a275c3777bd3230fbb797955a647"
+      }
+    ],
+    "CA-R-1387": [
+      {
+        "identity": "CA-R-1387",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/GENERATE_ENTITY_GRAPH/04_requirement/CA-R-1387-GENERATE_ENTITY_GRAPH-CORE-REQUIREMENT--persist-reproducible-non-authoritative-entity-and-term-graph-projections.md",
+        "version": 2,
+        "sha256": "e6b70ab63c386417ab11cfabe97bad9e4dc77ec253c1a97976dff5827af2b4de"
+      },
+      {
+        "identity": "CA-R-1387",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1387-CORE_META_MODEL-CORE-REQUIREMENT--define-global-tier.md",
+        "version": 2,
+        "sha256": "88b25ddc80f8006630260def39381bcec8cae44d4e4933e2973654c4aabe8b65"
+      }
+    ],
+    "CA-D-354": [
+      {
+        "identity": "CA-D-354",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/GENERATE_ENTITY_GRAPH/07_delivery/CA-D-354-GENERATE_ENTITY_GRAPH-DELIVERY--bind-entity-graph-generator-authority-and-delivery-places.md",
+        "version": 2,
+        "sha256": "ec99d72b1fc59204afd9bc46ced98f9bfde7ebd65f89ebc9c1bc0b1ec48523ef"
+      },
+      {
+        "identity": "CA-D-354",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-354-CORE_META_MODEL-CORE-DELIVERY--classify-markdown-atom-carrier.md",
+        "version": 3,
+        "sha256": "2573450750a0ed663b54e30ad9eecb10ccd90166929be264c36ac9b4927f3350"
+      }
+    ],
+    "CA-D-027": [
+      {
+        "identity": "CA-D-027",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/GRAPH_CHECK/07_delivery/CA-D-027-GRAPH_CHECK-DELIVERY--bind-graph-check-delivery-place.md",
+        "version": 5,
+        "sha256": "33b469a2df8ee94700afb3bedc2f9fd27928f696ddaa97665cb7404bee951030"
+      },
+      {
+        "identity": "CA-D-027",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/REPLACE_ATOM/07_delivery/CA-D-027-REPLACE_ATOM-DELIVERY--deliver-replace-atom-intent-doer.md",
+        "version": 5,
+        "sha256": "2587612b57b5b0b933d7b0e3150d3dd9a4d08bcdb2bbf4334f6ab8dc5e14ef45"
+      }
+    ],
+    "CA-D-030": [
+      {
+        "identity": "CA-D-030",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/IMPLEMENTATION_INVENTORY/07_delivery/CA-D-030-IMPLEMENTATION_INVENTORY-DELIVERY--bind-implementation-inventory-delivery-place.md",
+        "version": 5,
+        "sha256": "528ff18ae130c31f6f785ae12e46278be3bb9ceaddca3c16d411c6a4e24708e5"
+      },
+      {
+        "identity": "CA-D-030",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/REBIND_ATOM_RELATIONS/07_delivery/CA-D-030-REBIND_ATOM_RELATIONS-RELEASE_DEFINITION--deliver-sealed-atom-relation-rebinding-doer.md",
+        "version": 5,
+        "sha256": "65f163ec3949071d7800b70a06c96ac2df773a06595e5bd7dbb202a15c3818ce"
+      }
+    ],
+    "CA-D-029": [
+      {
+        "identity": "CA-D-029",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/MIGRATE_ATOM_IDENTITY/07_delivery/CA-D-029-MIGRATE_ATOM_IDENTITY-RELEASE_DEFINITION--deliver-sealed-atom-identity-migration-doer.md",
+        "version": 5,
+        "sha256": "3b9c3e40656251101bcdff457204502c5e60deb1bbfbd45cedb31cab6ac34ae8"
+      },
+      {
+        "identity": "CA-D-029",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/PROJECTION_REBUILD/07_delivery/CA-D-029-PROJECTION_REBUILD-DELIVERY--bind-projection-rebuild-delivery-place.md",
+        "version": 5,
+        "sha256": "b65ca8f12ef47ba6fe1e2de992c5a9aa32164e6623446e0cfe1f69c35417487f"
+      }
+    ],
+    "CA-D-255": [
+      {
+        "identity": "CA-D-255",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/RETRIEVE_APPLICABLE_METHODOLOGY/07_delivery/CA-D-255-RETRIEVE_APPLICABLE_METHODOLOGY-DELIVERY--bind-retrieval-authority-and-delivery-places.md",
+        "version": 2,
+        "sha256": "9752ab6d03c24c3af357239b39c0e10ba88b03f01fee118fef8a05fb8dfe0155"
+      },
+      {
+        "identity": "CA-D-255",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-255-CORE_META_MODEL-CORE-DELIVERY--prohibit-bearer-dependent-carrier-modeling.md",
+        "version": 4,
+        "sha256": "2bab50532ed4a26d0362ee09e11ea8cd2e7596154b0a0b12a050f1d4487ccc7b"
+      }
+    ],
+    "CA-D-026": [
+      {
+        "identity": "CA-D-026",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/TARGET_SET/07_delivery/CA-D-026-TARGET_SET-DELIVERY--bind-target-set-delivery-place.md",
+        "version": 5,
+        "sha256": "aec08b568dd0cb652b6581e5ec7b6be3fa927a8465a613fd4d5f78f0c9111307"
+      },
+      {
+        "identity": "CA-D-026",
+        "path": ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS/07_delivery/CA-D-026-COMMUNITY_EXTENSIONS-DELIVERY--bind-community-extensions-delivery-place.md",
+        "version": 4,
+        "sha256": "589e3ecfb867d3eda20d9b107ab0c9b6609c48116270e219cc788cbb509bc8b6"
+      }
+    ],
+    "CA-M-242": [
+      {
+        "identity": "CA-M-242",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/05_method/CA-M-242-APPS-CORE-METHOD--register-the-agent-host-plugins-unit.md",
+        "version": 1,
+        "sha256": "1c48d5e7770493400ada7104114934a52b74a1ccffc0d018e3c5f257d5057011"
+      },
+      {
+        "identity": "CA-M-242",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-242-CORE_META_MODEL-METHOD--exclude-activity-labels-from-content-role-names.md",
+        "version": 3,
+        "sha256": "cfdcb220ae681f8f0282baa69f8b8426d59d3ed0b503d69606f306f7e9b39090"
+      }
+    ]
+  },
+  "graph_limit": "The identity graph uses one current record per duplicate external identity. These legacy duplicates are outside964 scope; the fresh text scan classifies every parsed path independently. CA-P-964 changes no resolved edge, so its zero edge/cycle delta is unaffected. This is not a repository-wide graph-health verdict."
+}

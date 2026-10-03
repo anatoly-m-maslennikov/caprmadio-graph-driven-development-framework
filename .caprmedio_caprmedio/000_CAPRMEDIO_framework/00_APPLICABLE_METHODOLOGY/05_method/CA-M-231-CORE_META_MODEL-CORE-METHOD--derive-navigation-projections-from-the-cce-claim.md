@@ -1,0 +1,21 @@
+---
+atom_id: CA-M-231
+cce_version: cce_1
+cce_form: method
+subjects:
+  governs:
+    occurrent:
+      - Navigation Projection Derivation
+  depends_on:
+    continuant:
+      - Claim
+      - Atom/Claim/Scope
+version: 8
+updated_at: 2026-09-06 01:45:12 +0400
+relations: {}
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim.md
+---
+# Derive Navigation Projections from the CCE Claim
+
+**to** derive an Atom's navigation Projections, the Generator **must** read the complete Claim **and** any Claim Scope, derive one concise source-faithful Summary, **and** derive **every** other requested Projection directly from the Claim **and** any Claim Scope rather than from the Summary.

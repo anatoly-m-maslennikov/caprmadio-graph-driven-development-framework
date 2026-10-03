@@ -1,0 +1,66 @@
+{
+  "schema": "caprmedio.ca_p_104.core_meta_model_reconciliation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-104",
+  "recorded_at": "2026-08-27T00:50:08+04:00",
+  "predecessor_evidence": [
+    "CA-P-102-freeze-record.projection.json",
+    "CA-P-103-target-topology.projection.json",
+    "CA-P-112-job-reconciliation.projection.json"
+  ],
+  "admitted_core_authority": {
+    "entity_and_subject_model": [
+      "CA-R-1190", "CA-R-1191", "CA-R-1192", "CA-R-1193", "CA-R-1194",
+      "CA-R-1195", "CA-R-1196", "CA-R-1197", "CA-R-1198", "CA-R-1199",
+      "CA-R-1200", "CA-R-1201", "CA-R-1202", "CA-R-1203", "CA-R-1204", "CA-R-1205"
+    ],
+    "extension_and_methodology_compilation_model": [
+      "CA-R-1206", "CA-R-1207", "CA-R-1213", "CA-R-1216", "CA-R-1217", "CA-R-1218", "CA-R-1219"
+    ],
+    "content_role_temporal_classification": ["CA-R-1208", "CA-R-1209", "CA-R-1210"],
+    "task_job_model": ["CA-R-989", "CA-R-1211", "CA-R-1212", "CA-R-1214", "CA-R-1215"]
+  },
+  "supersession": {
+    "CA-R-1001": ["CA-R-1211"],
+    "CA-R-1002": ["CA-R-1212"],
+    "CA-R-1003": ["CA-R-1214"],
+    "CA-R-1004": ["CA-R-1215"],
+    "CA-R-1012": ["CA-R-1190"],
+    "CA-R-1013": ["CA-R-1201"],
+    "CA-R-1084": ["CA-R-1198"],
+    "CA-R-1085": ["CA-R-1199"],
+    "CA-R-1086": ["CA-R-1200"],
+    "CA-R-1087": ["CA-R-1195"],
+    "CA-R-1088": ["CA-R-1196"],
+    "CA-R-1089": ["CA-R-1197"],
+    "CA-R-1090": ["CA-R-1195", "CA-R-1198", "CA-R-1208", "CA-R-1209", "CA-R-1210"],
+    "CA-R-1091": ["CA-R-1202"],
+    "CA-R-1092": ["CA-R-1203"]
+  },
+  "operator_decision": {
+    "content_role_temporal_classification": {
+      "CAPO": "OCCURRENT",
+      "RMED": "CONTINUANT",
+      "I": "NOT_APPLICABLE"
+    }
+  },
+  "boundary": {
+    "core": "general self-applicable Entity, Artifact, Carrier, Atom, subject, classification, Extension, Local Configuration, Methodology Source, and Applicable Methodology concepts",
+    "installed_extensions": "optional or CAPRMEDIO-specific authority remains for CA-P-105",
+    "local_configuration": "activation, priority, compatibility, replacement, and mode selection remain for CA-P-106",
+    "compilation_details": "the generic compiled-projection definition is Core; compiler behavior and materialization remain for later Tasks"
+  },
+  "direct_dependent_task_carriers_updated": [
+    "CA-R-989", "CA-M-123", "CA-M-124", "CA-R-1005", "CA-R-1008", "CA-R-1009", "CA-R-1011", "CA-E-245"
+  ],
+  "validation": {
+    "current_successor_ids": "CA-R-1190 through CA-R-1219",
+    "archived_predecessor_count": 15,
+    "one_current_owner_per_replaced_claim": true,
+    "independently_replaceable_task_claims_split": true,
+    "later_source_layer_authority_admitted_to_core": false,
+    "self_application_capabilities_present": true,
+    "confidence_percent": 99
+  }
+}

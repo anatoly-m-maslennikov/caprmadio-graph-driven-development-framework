@@ -1,0 +1,387 @@
+{
+  "schema": "ca-p-957-batch-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "18",
+  "recorded_at": "2026-09-10 07:24:21 +0400",
+  "checkpoint": "Bounded autonomous >=99% execution after exact source/archive and canonical-overlay checks; no Journal gate.",
+  "existing": [
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-079",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-079-CORE_META_MODEL-REQUIREMENT--requirement-scale-operational-mechanisms-to-risk.md",
+      "before_version": 8,
+      "before_sha256": "5c012c659dd108a5ce23413ca2b66056df09f1630a2f7e47cbadef6a23553182",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-079\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 8\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules\n---\n# Requirement — Scale operational mechanisms to risk\n\n## Primary claim\n\nCAPRMEDIO requires operational mechanisms to be proportional to explicit failure risk **and** a declared authoritative-state boundary. It never mandates one recovery **or** durability mechanism for **every** project.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-079-CORE_META_MODEL-GENERAL-REQUIREMENT--requirement-scale-operational-mechanisms-to-risk.md",
+      "proposed_version": 9,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-079\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 9\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules\n---\n# Requirement — Scale operational mechanisms to risk\n\n## Primary claim\n\nCAPRMEDIO requires operational mechanisms to be proportional to explicit failure risk **and** a declared authoritative-state boundary. It never mandates one recovery **or** durability mechanism for **every** project.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-079-CORE_META_MODEL-REQUIREMENT--requirement-scale-operational-mechanisms-to-risk@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-079",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-087",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-087-CORE_META_MODEL-REQUIREMENT--requirement-route-uncertain-input-through-exploration-mode.md",
+      "before_version": 8,
+      "before_sha256": "33dab0f9fcee99fe01dd817a25a3b1a5a775f7e1188037090226fc34fc8f29a1",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-087\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - development-flow\nversion: 8\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop\n---\n# Requirement — Route uncertain input through Exploration Mode\n\nExploration Mode permits brainstorming, discussion, research, analysis, comparison, terminology work, **and** structural modeling **without** creating **or** changing governed artifacts.\n\nCAPRMEDIO enters Exploration Mode **when** the operator's input primarily:\n\n- asks for information, explanation, comparison, critique, alternatives, **or** a recommendation; **or**\n- introduces an idea, explores it, **or** asks for feedback on it.\n\nAn explicit operator request to create **or** change governed state takes precedence over question-shaped wording. **otherwise**, Exploration Mode ends **only** **when** the operator explicitly accepts a conclusion **or** requests its promotion. CAPRMEDIO **then** emits **only** the minimum artifacts required to preserve the accepted meaning. A Projection **may** refresh **only** **after** its declared source Atoms exist.\n\nWhether a mode transition is announced is a downstream interaction-reporting choice **and** does **not** change this routing.\n\n## Primary claim\n\nQuestion **and** idea input stays non-persistent **in** Exploration Mode **until** explicit operator acceptance authorizes the minimum durable artifacts.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-087-CORE_META_MODEL-CORE-REQUIREMENT--requirement-route-uncertain-input-through-exploration-mode.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-087\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - development-flow\nversion: 9\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Requirement — Route uncertain input through Exploration Mode\n\nExploration Mode permits brainstorming, discussion, research, analysis, comparison, terminology work, **and** structural modeling **without** creating **or** changing governed artifacts.\n\nCAPRMEDIO enters Exploration Mode **when** the operator's input primarily:\n\n- asks for information, explanation, comparison, critique, alternatives, **or** a recommendation; **or**\n- introduces an idea, explores it, **or** asks for feedback on it.\n\nAn explicit operator request to create **or** change governed state takes precedence over question-shaped wording. **otherwise**, Exploration Mode ends **only** **when** the operator explicitly accepts a conclusion **or** requests its promotion. CAPRMEDIO **then** emits **only** the minimum artifacts required to preserve the accepted meaning. A Projection **may** refresh **only** **after** its declared source Atoms exist.\n\nWhether a mode transition is announced is a downstream interaction-reporting choice **and** does **not** change this routing.\n\n## Primary claim\n\nQuestion **and** idea input stays non-persistent **in** Exploration Mode **until** explicit operator acceptance authorizes the minimum durable artifacts.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-087-CORE_META_MODEL-REQUIREMENT--requirement-route-uncertain-input-through-exploration-mode@8.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "New Core placement makes two active Current CORE_META_MODEL Requirements same-tier authority peers under R829/R879; remove only this normative parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "development-flow"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-087",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-123",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-123-CORE_META_MODEL-REQUIREMENT--requirement-provide-lineage-impact-projections.md",
+      "before_version": 9,
+      "before_sha256": "3ccd013c5c0c1282bbebf6f51c1131710ed390202997d78a702142c7ba6ac1f0",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-123\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 9\nupdated_at: \"2026-09-10 06:29:38 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-090\n    - CAPRMEDIO-META-REQU-107-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n---\n# Requirement — Provide lineage-impact Projections\n\nCAPRMEDIO provides a non-authoritative lineage-impact Projection whenever an upstream Atom revision is changed, replaced, **or** archived. The Projection derives the reachable descendant set **without** modifying **or** retargeting **any** persisted relation.\n\nFor **every** affected descendant, the Projection identifies the exact earlier revision **in** its lineage, the upstream event that triggered review, **and** the current disposition: review required, update the existing Atom, create a new Atom, archive the Atom, **or** confirmed compatible **without** change. Unresolved descendants remain visible **until** disposition is recorded through governed history.\n\nThe Projection **may** group **and** prioritize work, but it cannot change an Atom, break a historical link, **or** establish compatibility merely by listing it.\n\n## Primary claim\n\nA changed, replaced, **or** archived ancestor produces a derived review surface for **every** affected descendant while historical lineage remains intact.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-123-CORE_META_MODEL-GENERAL-REQUIREMENT--requirement-provide-lineage-impact-projections.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-123\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 10\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-107-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n---\n# Requirement — Provide lineage-impact Projections\n\nCAPRMEDIO provides a non-authoritative lineage-impact Projection whenever an upstream Atom revision is changed, replaced, **or** archived. The Projection derives the reachable descendant set **without** modifying **or** retargeting **any** persisted relation.\n\nFor **every** affected descendant, the Projection identifies the exact earlier revision **in** its lineage, the upstream event that triggered review, **and** the current disposition: review required, update the existing Atom, create a new Atom, archive the Atom, **or** confirmed compatible **without** change. Unresolved descendants remain visible **until** disposition is recorded through governed history.\n\nThe Projection **may** group **and** prioritize work, but it cannot change an Atom, break a historical link, **or** establish compatibility merely by listing it.\n\n## Primary claim\n\nA changed, replaced, **or** archived ancestor produces a derived review surface for **every** affected descendant while historical lineage remains intact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-123-CORE_META_MODEL-REQUIREMENT--requirement-provide-lineage-impact-projections@9.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-090\n",
+          "after": "",
+          "count": 1,
+          "reason": "New General placement makes this active Current CORE_META_MODEL Requirement a peer of General META090 under R829/R879; retain active Core META107/META125 parents."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "lifecycle-traceability"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-123",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-164",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-164-CORE_META_MODEL-REQUIREMENT--review-external-analysis-before-project-adoption.md",
+      "before_version": 7,
+      "before_sha256": "daf3223ae4207f4d8795b780a9ad75c9127d9685014494bf5246debe32f36d45",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-164\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - semantics\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n---\n# Review external Analysis before project adoption\n\n**every** admitted external Analysis is reviewed by one internal Analysis **before** it can produce project-owned Concern, Plan, Requirement, Method, Evaluation, **or** Delivery Atoms. The external Analysis remains authoritative **only** for what its external source reported; the internal Analysis owns the project's interpretation **and** dispositions, **and** **every** resulting Atom owns its independently accepted meaning.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-164-CORE_META_MODEL-GENERAL-REQUIREMENT--review-external-analysis-before-project-adoption.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-164\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - semantics\nversion: 8\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n---\n# Review external Analysis before project adoption\n\n**every** admitted external Analysis is reviewed by one internal Analysis **before** it can produce project-owned Concern, Plan, Requirement, Method, Evaluation, **or** Delivery Atoms. The external Analysis remains authoritative **only** for what its external source reported; the internal Analysis owns the project's interpretation **and** dispositions, **and** **every** resulting Atom owns its independently accepted meaning.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-164-CORE_META_MODEL-REQUIREMENT--review-external-analysis-before-project-adoption@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "semantics"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-164",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-169",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-169-CORE_META_MODEL-REQUIREMENT--record-every-projection-rebuild-in-a-journal.md",
+      "before_version": 8,
+      "before_sha256": "1b653c4ea54b86c5dc5cee5b082b3497500500e08932b49f076d55da9c05b45f",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-169\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb4-e15e-78d1-9084-766bf6b0cd63\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-007-CORE-REQUIREMENT--full-minimal-traceability\n---\n# Record every Projection rebuild in a Journal\n\n**every** Projection rebuild attempt **must** produce append-only Journal provenance from its start through **`=1`** terminal outcome, binding the target Projection, exact source Atom revisions **and** Journal records, generator, configuration, **and** produced revision **when** successful. Programmatic generation **and** LLM generation are provenance facts **only**; the two generation forms grant the Projection no authority.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-169-CORE_META_MODEL-CORE-REQUIREMENT--record-every-projection-rebuild-in-a-journal.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-169\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 9\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb4-e15e-78d1-9084-766bf6b0cd63\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-007-CORE-REQUIREMENT--full-minimal-traceability\n---\n# Record every Projection rebuild in a Journal\n\n**every** Projection rebuild attempt **must** produce append-only Journal provenance from its start through **`=1`** terminal outcome, binding the target Projection, exact source Atom revisions **and** Journal records, generator, configuration, **and** produced revision **when** successful. Programmatic generation **and** LLM generation are provenance facts **only**; the two generation forms grant the Projection no authority.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-169-CORE_META_MODEL-REQUIREMENT--record-every-projection-rebuild-in-a-journal@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "lifecycle-traceability"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-169",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-173",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-173-CORE_META_MODEL-CORE-REQUIREMENT--target-the-narrowest-capable-improvement-owner.md",
+      "before_version": 8,
+      "before_sha256": "969b4b10961698d161a30c678a04dd0ebcb29c77892b20b517246b4cc9b60f22",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-173\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-052-CORE-REQUIREMENT--propose-improvement-cycles-only-on-operator-request\n---\n# Target the narrowest capable improvement owner\n\nAn improvement proposal **must** target the narrowest governed owner capable of resolving its evidence-backed cause.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-173-CORE_META_MODEL-GENERAL-REQUIREMENT--target-the-narrowest-capable-improvement-owner.md",
+      "proposed_version": 9,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-173\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 9\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-052-CORE-REQUIREMENT--propose-improvement-cycles-only-on-operator-request\n---\n# Target the narrowest capable improvement owner\n\nAn improvement proposal **must** target the narrowest governed owner capable of resolving its evidence-backed cause.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-173-CORE_META_MODEL-CORE-REQUIREMENT--target-the-narrowest-capable-improvement-owner@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-173",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-174",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-174-CORE_META_MODEL-REQUIREMENT--separate-extension-ownership-from-application-bindings.md",
+      "before_version": 8,
+      "before_sha256": "191064c1d804a5601f4d47ced720ea052635cefef2181b312a486c2c56dc0dc7",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-174\ncce_version: cce_1\ncce_form: separation\nsubjects:\n  governs:\n    continuant:\n      - extension-model\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n    - CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics\n---\n# Separate Extension ownership from application bindings\n\nAn Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-174-CORE_META_MODEL-REQUIREMENT--separate-extension-ownership-from-application-bindings.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-174\ncce_version: cce_1\ncce_form: separation\nsubjects:\n  governs:\n    continuant:\n      - extension-model\n  depends_on:\n    continuant:\n      - Framework Instance Settings\nversion: 9\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n    - CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics\n---\n# Separate Extension ownership from application bindings\n\nAn Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.\n\nThe application binding does **not** own **or** duplicate current Extension activation **or** selected Extension revision decisions; those decisions remain owned by the Framework Instance Settings Artifact under CA-R-1207 **and** CAPRMEDIO-META-REQU-163.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-174-CORE_META_MODEL-REQUIREMENT--separate-extension-ownership-from-application-bindings@8.md",
+      "exact_replacements": [
+        {
+          "before": "subjects:\n  governs:\n    continuant:\n      - extension-model\n",
+          "after": "subjects:\n  governs:\n    continuant:\n      - extension-model\n  depends_on:\n    continuant:\n      - Framework Instance Settings\n",
+          "count": 1,
+          "reason": "Declare the actual Settings prerequisite introduced by the bounded ownership clarification, without changing GOVERNS or the current source owner."
+        },
+        {
+          "before": "An Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.",
+          "after": "An Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.\n\nThe application binding does **not** own **or** duplicate current Extension activation **or** selected Extension revision decisions; those decisions remain owned by the Framework Instance Settings Artifact under CA-R-1207 **and** CAPRMEDIO-META-REQU-163.",
+          "count": 1,
+          "reason": "Clarify the existing application/target-binding versus Settings-owned activation/selected-revision boundary under live R1207/META163; no Settings values or authority policy change."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "An Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.",
+          "after": "An Extension is an owned capability package whose Governance origin is internal **or** external relative to the current project. An Extension application is a separate binding Atom whose typed frontmatter relations identify the applied Extension **and** target Scope Units.\n\nThe application binding does **not** own **or** duplicate current Extension activation **or** selected Extension revision decisions; those decisions remain owned by the Framework Instance Settings Artifact under CA-R-1207 **and** CAPRMEDIO-META-REQU-163.",
+          "count": 1,
+          "reason": "Clarify the existing application/target-binding versus Settings-owned activation/selected-revision boundary under live R1207/META163; no Settings values or authority policy change."
+        }
+      ],
+      "after_governs_subjects": [
+        "extension-model"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-174",
+      "claim_change": "bounded application-binding versus Settings ownership clarification"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-179",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-179-CORE_META_MODEL-REQUIREMENT--relate-self-improvement-stages-explicitly.md",
+      "before_version": 7,
+      "before_sha256": "9b0fd315cd68c622b30bed57555079470d90ad2759c58b64ae1e9dc9138a94c3",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-179\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - continuous-improvement\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-178-CORE_META_MODEL-CORE-REQUIREMENT--preserve-self-improvement-stage-meanings\n---\n# Relate self-improvement stages explicitly\n\n**every** persisted transition between self-improvement stages **must** be represented by a typed relation owned by the receiving artifact.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-179-CORE_META_MODEL-GENERAL-REQUIREMENT--relate-self-improvement-stages-explicitly.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-179\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - continuous-improvement\nversion: 8\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-178-CORE_META_MODEL-CORE-REQUIREMENT--preserve-self-improvement-stage-meanings\n---\n# Relate self-improvement stages explicitly\n\n**every** persisted transition between self-improvement stages **must** be represented by a typed relation owned by the receiving artifact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-179-CORE_META_MODEL-REQUIREMENT--relate-self-improvement-stages-explicitly@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "continuous-improvement"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-179",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-181",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels.md",
+      "before_version": 7,
+      "before_sha256": "ca8bb73c32cfd143d0f453956cc886fe972b8c5485fc45dc2be63289c7ac3f42",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-181\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-172-CORE_META_MODEL-CORE-REQUIREMENT--admit-only-necessary-structural-levels\n  resolution_of:\n    - CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized\n---\n# Require an irreducible ownership boundary for new structural levels\n\nCAPRMEDIO **may** admit a proposed structural level **only** **after** identifying **`>=1`** required ownership boundary that no existing structural level **or** relation can represent **without** violating single ownership, acyclicity, **or** semantic irreducibility.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-GENERAL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-181\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 8\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-172-CORE_META_MODEL-CORE-REQUIREMENT--admit-only-necessary-structural-levels\n  resolution_of:\n    - CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized\n---\n# Require an irreducible ownership boundary for new structural levels\n\nCAPRMEDIO **may** admit a proposed structural level **only** **after** identifying **`>=1`** required ownership boundary that no existing structural level **or** relation can represent **without** violating single ownership, acyclicity, **or** semantic irreducibility.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-181",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-638",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-638-CORE_META_MODEL-REQUIREMENT--define-concrete-recurrence-protection-as-evaluation.md",
+      "before_version": 7,
+      "before_sha256": "13e7f984feebaf8b1424bf1db8cbaa190b0207ff01670a95224139f584bd4893",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-638\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Recurrence Protection\n  depends_on:\n    occurrent:\n      - continuous-improvement\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-637-REQUIREMENT--establish-recurrence-protection\n---\n# Define concrete recurrence protection as Evaluation\n\n**every** concrete recurrence protection **must** be represented by an Evaluation Atom that defines one mechanism-neutral bounded check for the corrected failure class.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-638-CORE_META_MODEL-CORE-REQUIREMENT--define-concrete-recurrence-protection-as-evaluation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-638\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Recurrence Protection\n  depends_on:\n    occurrent:\n      - continuous-improvement\nversion: 8\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-637-REQUIREMENT--establish-recurrence-protection\n---\n# Define concrete recurrence protection as Evaluation\n\n**every** concrete recurrence protection **must** be represented by an Evaluation Atom that defines one mechanism-neutral bounded check for the corrected failure class.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-638-CORE_META_MODEL-REQUIREMENT--define-concrete-recurrence-protection-as-evaluation@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Recurrence Protection"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-638",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-639",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-639-CORE_META_MODEL-REQUIREMENT--realize-recurrence-evaluation-through-implementation.md",
+      "before_version": 7,
+      "before_sha256": "bd69614ac9da5bdaae84c1534d3e2d6b95df50be3a648873e8da9856a8ba3dd7",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-639\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - continuous-improvement\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification\n---\n# Realize recurrence Evaluation through Implementation\n\nImplementation **must** realize a recurrence Evaluation atom through an executable test, evaluation, monitor, alert, **or** other conforming mechanism.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-639-CORE_META_MODEL-GENERAL-REQUIREMENT--realize-recurrence-evaluation-through-implementation.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-639\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - continuous-improvement\nversion: 8\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification\n---\n# Realize recurrence Evaluation through Implementation\n\nImplementation **must** realize a recurrence Evaluation atom through an executable test, evaluation, monitor, alert, **or** other conforming mechanism.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-639-CORE_META_MODEL-REQUIREMENT--realize-recurrence-evaluation-through-implementation@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "continuous-improvement"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-639",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-689",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-689-CORE_META_MODEL-REQUIREMENT--promote-project-adaptation-authority-to-an-extension.md",
+      "before_version": 11,
+      "before_sha256": "f039bb3c44e515e198b2b7978377c776751a40ea5174c3a2e291e7a85bfb1abf",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-689\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - extension-model\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics\n    - CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics\n    - CA-R-1058\n---\n# Promote Project Adaptation authority to an Extension\n\nAn operator **may** promote a coherent reusable subset of Project Adaptation authority into a separately identified Extension while preserving exact source provenance **and** leaving the source Project Adaptation unchanged **until** explicit reconciliation.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-689-CORE_META_MODEL-GENERAL-REQUIREMENT--promote-project-adaptation-authority-to-an-extension.md",
+      "proposed_version": 12,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-689\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - extension-model\nversion: 12\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics\n    - CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics\n    - CA-R-1058\n---\n# Promote Project Adaptation authority to an Extension\n\nAn operator **may** promote a coherent reusable subset of Project Adaptation authority into a separately identified Extension while preserving exact source provenance **and** leaving the source Project Adaptation unchanged **until** explicit reconciliation.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-689-CORE_META_MODEL-REQUIREMENT--promote-project-adaptation-authority-to-an-extension@11.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "extension-model"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-689",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-773",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-773-CORE_META_MODEL-REQUIREMENT--place-concerns-at-the-narrowest-owning-scope.md",
+      "before_version": 6,
+      "before_sha256": "81facbebab3a74bcc38ec63aa2a86935fc6256526e8f4c35377d94c3782d8498",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-773\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - subject\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-157--narrowest-common-scope-ownership\n---\n# Place Concerns at the narrowest owning scope\n\nA Concern whose subject spans multiple Structural scopes belongs to their narrowest common ancestor.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-773-CORE_META_MODEL-GENERAL-REQUIREMENT--place-concerns-at-the-narrowest-owning-scope.md",
+      "proposed_version": 7,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-773\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - subject\nversion: 7\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nrelations: {}\n---\n# Place Concerns at the narrowest owning scope\n\nA Concern whose subject spans multiple Structural scopes belongs to their narrowest common ancestor.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-773-CORE_META_MODEL-REQUIREMENT--place-concerns-at-the-narrowest-owning-scope@6.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-157--narrowest-common-scope-ownership\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Remove only the demonstrated unresolved legacy normative parent during this revised Atom's admission; no substitute parent invented."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "subject"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-META-REQU-773",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-294",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+      "before_version": 12,
+      "before_sha256": "8c68c6b015c8386b2dc244f11b9e25e7df07f41e8b364b1baf802e40e5ffef50",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-294\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - interaction\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-META-REQU-087-CORE_META_MODEL-REQUIREMENT--requirement-route-uncertain-input-through-exploration-mode\n  child_of:\n    - CA-R-1054\n---\n# Configure interaction reporting mode\n\nthe Framework Instance Settings Artifact provides one framework-instance interaction reporting setting:\n\n```toml\n[interaction]\nreporting_mode = \"silent\" # silent | verbose\n```\n\nthe allowed values are exactly `silent` **and** `verbose`. the default is `silent`.\n\n**in** `silent` mode, CAPRMEDIO does **not** announce ordinary mode selection, workflow routing, skill chaining, **or** gate transitions. it answers exploratory input normally **and** reports **only** durable Artifacts **or** Project state that it created, updated, archived, committed, **or** **otherwise** changed.\n\n**in** `verbose` mode, CAPRMEDIO explicitly reports relevant workflow modes, mode transitions, selected skill chains, entry **and** exit gates, **and** planned **or** completed artifact operations.\n\nreporting mode changes presentation **only**. it never changes authorization, artifact creation, workflow routing, validation, **or** safety behavior. the two values **must** still report:\n\n- blockers **and** failed operations;\n- ambiguity that requires operator input;\n- permission **or** approval requests;\n- safety-critical information;\n- material deviations from the requested outcome.\n\nskills **and** Tools read this setting from the Framework Instance Settings Artifact. they do **not** maintain independent reporting defaults.\n\n## Rationale\n\nsilent reporting keeps ordinary CAPRMEDIO use natural **and** concise, while verbose reporting makes orchestration inspectable during adoption, debugging, audits, **and** methodology development. keeping the two behaviors behind one framework-instance setting prevents individual Skills from drifting into inconsistent interaction styles.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+      "proposed_version": 13,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-294\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - interaction\nversion: 13\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-META-REQU-087\n  child_of:\n    - CA-R-1054\n---\n# Configure interaction reporting mode\n\nthe Framework Instance Settings Artifact provides one framework-instance interaction reporting setting:\n\n```toml\n[interaction]\nreporting_mode = \"silent\" # silent | verbose\n```\n\nthe allowed values are exactly `silent` **and** `verbose`. the default is `silent`.\n\n**in** `silent` mode, CAPRMEDIO does **not** announce ordinary mode selection, workflow routing, skill chaining, **or** gate transitions. it answers exploratory input normally **and** reports **only** durable Artifacts **or** Project state that it created, updated, archived, committed, **or** **otherwise** changed.\n\n**in** `verbose` mode, CAPRMEDIO explicitly reports relevant workflow modes, mode transitions, selected skill chains, entry **and** exit gates, **and** planned **or** completed artifact operations.\n\nreporting mode changes presentation **only**. it never changes authorization, artifact creation, workflow routing, validation, **or** safety behavior. the two values **must** still report:\n\n- blockers **and** failed operations;\n- ambiguity that requires operator input;\n- permission **or** approval requests;\n- safety-critical information;\n- material deviations from the requested outcome.\n\nskills **and** Tools read this setting from the Framework Instance Settings Artifact. they do **not** maintain independent reporting defaults.\n\n## Rationale\n\nsilent reporting keeps ordinary CAPRMEDIO use natural **and** concise, while verbose reporting makes orchestration inspectable during adoption, debugging, audits, **and** methodology development. keeping the two behaviors behind one framework-instance setting prevents individual Skills from drifting into inconsistent interaction styles.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode@12.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-087-CORE_META_MODEL-REQUIREMENT--requirement-route-uncertain-input-through-exploration-mode\n",
+          "after": "    - CAPRMEDIO-META-REQU-087\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through its retiering basename change using its verified unique stable ID. No classification or broader relation cleanup of this pending GOV origin."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "interaction"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-GOV-REQU-294",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-355",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md",
+      "before_version": 10,
+      "before_sha256": "c04f7443ff6c2e507ebf36219f3582501019ed26080bac647e59c14bcb7d7799",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-355\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - external-boundary\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-164-CORE_META_MODEL-REQUIREMENT--review-external-analysis-before-project-adoption\n    - CA-R-1054\n  resolution_of:\n    - CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient\n---\n# Use external Analysis Atoms as review envelopes\n\nan external review **must** be imported as an `external_analysis_report` Atom whose governed envelope identifies its source, provenance, reviewed scope, original body, **and** native attachments **without** requiring a provider-specific finding schema. One internal Analysis derives from that Atom, records the project's finding-level interpretation **and** dispositions, **and** becomes the **only** Analysis source from which project-owned Concern, Plan, Requirement, Method, Evaluation, **or** Delivery Atoms are derived. **every** accepted disposition that changes project meaning **or** work is materialized **in** its owning CPRMAD Content role; rejected **or** non-actionable findings remain **only** **in** the internal Analysis.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md",
+      "proposed_version": 11,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-355\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - external-boundary\nversion: 11\nupdated_at: \"2026-09-10 07:24:21 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-164\n    - CA-R-1054\n  resolution_of:\n    - CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient\n---\n# Use external Analysis Atoms as review envelopes\n\nan external review **must** be imported as an `external_analysis_report` Atom whose governed envelope identifies its source, provenance, reviewed scope, original body, **and** native attachments **without** requiring a provider-specific finding schema. One internal Analysis derives from that Atom, records the project's finding-level interpretation **and** dispositions, **and** becomes the **only** Analysis source from which project-owned Concern, Plan, Requirement, Method, Evaluation, **or** Delivery Atoms are derived. **every** accepted disposition that changes project meaning **or** work is materialized **in** its owning CPRMAD Content role; rejected **or** non-actionable findings remain **only** **in** the internal Analysis.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-164-CORE_META_MODEL-REQUIREMENT--review-external-analysis-before-project-adoption\n",
+          "after": "    - CAPRMEDIO-META-REQU-164\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through its retiering basename change using its verified unique stable ID. No classification or broader relation cleanup of this pending GOV origin."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "external-boundary"
+      ],
+      "classification_record": "CA-P-957-batch-18-dispositions.json#CAPRMEDIO-GOV-REQU-355",
+      "claim_change": "none"
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "18 new origin dispositions plus2 still-pending GOV origins receiving reference-only repairs. The latter are not counted as completed classifications.",
+    "META169 Core after rejecting a General countermodel that still satisfied its whole-attempt terminal-outcome condition. Full provenance payload and generated-authority denial preserved.",
+    "META174 clarifies existing Settings-owned activation/selected revisions; no Settings values or source ownership changed.",
+    "Root's three Project reference-only repairs are separately mapped in CA-P-957-external-project-reference-repairs-batch18.json; not counted in620 origin classification or this source mutation batch.",
+    "Unchanged legacy and cross-context relation defects are explicit limits; no broad graph normalization, Journal/Git/runtime work or source-folder migration."
+  ]
+}

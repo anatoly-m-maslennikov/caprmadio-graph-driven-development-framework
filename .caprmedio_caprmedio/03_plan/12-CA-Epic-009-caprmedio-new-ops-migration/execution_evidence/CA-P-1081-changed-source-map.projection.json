@@ -1,0 +1,1321 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1081",
+  "generated_at": "2026-09-13T03:57:33+04:00",
+  "status": "Done",
+  "changes": [
+    {
+      "identity": "CA-E-383",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "version": 6,
+      "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "before_version": 5,
+      "before_sha256": "2c9adc95b6d93e16474c8f1a31b387d029b7293c2da141d1170d4d4b56bd85bb",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions@5.md",
+      "archive_sha256": "2c9adc95b6d93e16474c8f1a31b387d029b7293c2da141d1170d4d4b56bd85bb",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "classification": "same_identity_evaluation_correction",
+      "rationale": "Replace colon-as-assignment with admitted allowed-value qualification, retaining the existing Subject Expression checks."
+    },
+    {
+      "identity": "CA-E-449",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+      "version": 2,
+      "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+      "before_version": 1,
+      "before_sha256": "bb968d91224e78919a011366991381421868c73bf0aa3896bea4566fa5c00bd8",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph@1.md",
+      "archive_sha256": "bb968d91224e78919a011366991381421868c73bf0aa3896bea4566fa5c00bd8",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "classification": "same_identity_evaluation_extension",
+      "rationale": "Check selected Entity-view completeness, exact source identity and provenance, lawful sharing and filtering against the preserved native model authority."
+    },
+    {
+      "identity": "CA-R-1456",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+      "version": 1,
+      "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+      "before_path": null,
+      "before_version": null,
+      "before_sha256": null,
+      "archive_path": null,
+      "archive_sha256": null,
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "classification": "new_selected_view_requirement",
+      "rationale": "One independently adjustable selected-view constraint over existing Entity and Relation authority; generic R1438 remains unchanged.",
+      "identity_admission": "Next unused R identity after R1455; checked live governed source/Project/archive/Journal content and Git filename history before allocation. General tier follows R1431 derived-set criteria."
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1081",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/04-CA-P-1081-TASK--reconcile-entities-graph-authority.md",
+      "before_version": 2,
+      "before_sha256": "2d2c1818d382e7ca9ca57244733c6957e146fc3625d99e30af67a58d9fdf3bd7",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/done/04-CA-P-1081-TASK--reconcile-entities-graph-authority.md",
+      "version": 3,
+      "sha256": "7500adf95fd53fcb94416e5361fead3adf3c52c553cceafb882c889210dae333",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/04-CA-P-1081-TASK--reconcile-entities-graph-authority@2.md",
+      "archive_sha256": "2d2c1818d382e7ca9ca57244733c6957e146fc3625d99e30af67a58d9fdf3bd7",
+      "action": "MOVE+UPDATE"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-entities-graph-authority-report.md",
+      "version": 1,
+      "sha256": "646174d58e583c8b8c05af4aa3de231f4433ea07c2cbfe31fe7ebc42fce4af08",
+      "action": "ADD"
+    }
+  ],
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      }
+    ],
+    "ownership_inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1078-derived-model-view-authority-inventory.projection.json",
+      "sha256": "d155a84576a56dd37b347e12634a0162b45e2470edb7468c9ba584c2253e70ea"
+    }
+  },
+  "validation": {
+    "task_dod_falsifier": false,
+    "before_source_count": 1561,
+    "after_source_count": 1562,
+    "before_core_count": 679,
+    "after_core_count": 680,
+    "unchanged_sources": 1559,
+    "changed_source_carriers": 2,
+    "new_source_carriers": 1,
+    "unchanged_reserved_sources": 16,
+    "excluded_drafts_unchanged": 53,
+    "prior_archives_unchanged": 8363,
+    "new_exact_archives": 3,
+    "prior_evidence_unchanged": 21,
+    "other_tasks_unchanged": 109,
+    "enumerated_existing_repository_files": 11872,
+    "semantic_authority_fixtures": 34,
+    "generator_implementation_conformance_claimed": false,
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b"
+  },
+  "semantic_fixtures": [
+    {
+      "id": "F01",
+      "scenario": "Selected sources admit a Primary Entity, its qualified Property and a value, and explicitly declare valid bearer and allowed-value facts.",
+      "expected": "Accept all eligible nodes and facts with exact Claim and Revision provenance.",
+      "authority": [
+        "CA-R-1438",
+        "CA-R-1456",
+        "CA-R-1260",
+        "CA-R-1436",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1438",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+          "version": 1,
+          "sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-R-1260",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1260-CORE_META_MODEL-CORE-REQUIREMENT--define-is-borne-by.md",
+          "version": 6,
+          "sha256": "b80109297112e308a603b7a1157bbc5493cf3dc0d3d6c404f50915fc525c59fe",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "scenario": "A colon expression identifies a value admitted for the immediately preceding qualified Property; it asserts no occurrence assignment.",
+      "expected": "Accept allowed-value qualification without inferring assignment or cardinality.",
+      "authority": [
+        "CA-R-1245",
+        "CA-R-1436",
+        "CA-E-383",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1245",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md",
+          "version": 5,
+          "sha256": "1ce6a03053bf067ebc8d6ab2dc6663366ef42ed48ad82646df15eccdf9185a63",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+          "version": 6,
+          "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+          "claim_start_line": 32
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "scenario": "An evaluator requires a colon expression to assign a value to a particular Property occurrence.",
+      "expected": "Reject the assignment requirement; the registered relation expresses admission.",
+      "authority": [
+        "CA-R-1436",
+        "CA-E-383",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+          "version": 6,
+          "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+          "claim_start_line": 32
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "scenario": "A view infers Property cardinality from its allowed-value admission edges.",
+      "expected": "Reject; admission does not determine cardinality.",
+      "authority": [
+        "CA-R-1436",
+        "CA-E-383",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+          "version": 6,
+          "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+          "claim_start_line": 32
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "scenario": "A slash reverses the Dependent Entity to immediate-bearer direction or uses an invalid endpoint.",
+      "expected": "Reject invalid bearer qualification.",
+      "authority": [
+        "CA-R-1204",
+        "CA-R-1260",
+        "CA-E-383",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1204",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+          "version": 6,
+          "sha256": "c7a6ce361c2c0fcbbf72ed035de42b12c880c7df30e2104546bbfa157f3b7157",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-R-1260",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1260-CORE_META_MODEL-CORE-REQUIREMENT--define-is-borne-by.md",
+          "version": 6,
+          "sha256": "b80109297112e308a603b7a1157bbc5493cf3dc0d3d6c404f50915fc525c59fe",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-E-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+          "version": 6,
+          "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+          "claim_start_line": 32
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "scenario": "The source model assigns two immediate bearers to the same Dependent Entity occurrence.",
+      "expected": "Reject the source cardinality violation; sharing an allowed value is a separate relation.",
+      "authority": [
+        "CA-R-1192",
+        "CA-R-1260",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1192",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1192-CORE_META_MODEL-CORE-REQUIREMENT--define-dependent-entity.md",
+          "version": 5,
+          "sha256": "e0e054acbe591a97fc26b69658f6158acbdfcacbf023d4ab9dbeec581fe98fa8",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1260",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1260-CORE_META_MODEL-CORE-REQUIREMENT--define-is-borne-by.md",
+          "version": 6,
+          "sha256": "b80109297112e308a603b7a1157bbc5493cf3dc0d3d6c404f50915fc525c59fe",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "scenario": "A Primary Entity referenced by a Subject has one source IS_BORNE_BY parent.",
+      "expected": "Reject; a Primary Entity Subject has zero bearer parents.",
+      "authority": [
+        "CA-R-1191",
+        "CA-R-1351",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1191",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1191-CORE_META_MODEL-CORE-REQUIREMENT--define-primary-entity.md",
+          "version": 6,
+          "sha256": "b81fe5d35322e90d3b2c8b1c415cf319a461d0daebf4759a3c8183179956fea0",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1351",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1351-CORE_META_MODEL-CORE-REQUIREMENT--give-primary-entity-occurrences-no-bearer.md",
+          "version": 3,
+          "sha256": "bea77f637ecbf0b63e43062fb3643c91b271a310b90297fd6b05360864689d24",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F08",
+      "scenario": "Source authority admits the same value Entity independently for two qualified Property contexts.",
+      "expected": "Accept the shared value identity and both admitted relations; no tree constraint or duplicate node identity.",
+      "authority": [
+        "CA-R-1436",
+        "CA-R-1346",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1346",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1346-CORE_META_MODEL-GENERAL-REQUIREMENT--permit-reused-terms-in-qualified-value-domains.md",
+          "version": 4,
+          "sha256": "095eed594328a902e021b27698a146e79ff2f630d5d554138f76def0b22c165d",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F09",
+      "scenario": "A value admitted only for one Property context is added to a second context on that evidence alone.",
+      "expected": "Reject unsupported cross-context admission.",
+      "authority": [
+        "CA-R-1436",
+        "CA-R-1346",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1346",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1346-CORE_META_MODEL-GENERAL-REQUIREMENT--permit-reused-terms-in-qualified-value-domains.md",
+          "version": 4,
+          "sha256": "095eed594328a902e021b27698a146e79ff2f630d5d554138f76def0b22c165d",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "scenario": "Two qualified Dependent Entity occurrences use the same reusable Term under different bearers.",
+      "expected": "Preserve the two complete source paths and identities; do not merge by Term spelling.",
+      "authority": [
+        "CA-R-1247",
+        "CA-R-1194",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1247",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1247-CORE_META_MODEL-CORE-REQUIREMENT--identify-dependent-entity-occurrences-by-complete-subject-path.md",
+          "version": 4,
+          "sha256": "7e43b9e998e224c5f688e7147db8a406eba90efb4bf6c255d918d5abb793c3b7",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1194",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+          "version": 7,
+          "sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "scenario": "One Entity appears in two views and is assigned a new identity in the second view.",
+      "expected": "Reject identity duplication caused by materialization.",
+      "authority": [
+        "CA-R-1248",
+        "CA-R-1406",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1248",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+          "version": 6,
+          "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+          "claim_start_line": 15
+        },
+        {
+          "identity": "CA-R-1406",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1406-CORE_META_MODEL-CORE-REQUIREMENT--keep-entity-identity-independent-of-graph-materialization.md",
+          "version": 2,
+          "sha256": "63b99a161cce31a81b17c4cadea98f84562ea09a574507de402e7b3aebb37f75",
+          "claim_start_line": 20
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F12",
+      "scenario": "A refresh or deletion of a Graph Projection is treated as creating or deleting its Entity identities.",
+      "expected": "Reject; materialization does not control source Entity identity.",
+      "authority": [
+        "CA-R-1406",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1406",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1406-CORE_META_MODEL-CORE-REQUIREMENT--keep-entity-identity-independent-of-graph-materialization.md",
+          "version": 2,
+          "sha256": "63b99a161cce31a81b17c4cadea98f84562ea09a574507de402e7b3aebb37f75",
+          "claim_start_line": 20
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F13",
+      "scenario": "A reusable Term occurs at different ordinal positions in valid complete Subject Paths.",
+      "expected": "Accept; no global ordinal-position rule is introduced.",
+      "authority": [
+        "CA-R-1247",
+        "CA-R-1456",
+        "CA-E-383",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1247",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1247-CORE_META_MODEL-CORE-REQUIREMENT--identify-dependent-entity-occurrences-by-complete-subject-path.md",
+          "version": 4,
+          "sha256": "7e43b9e998e224c5f688e7147db8a406eba90efb4bf6c255d918d5abb793c3b7",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-383",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+          "version": 6,
+          "sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+          "claim_start_line": 32
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F14",
+      "scenario": "An Action identity is copied into the Entities Graph as an Entity node.",
+      "expected": "Reject; the Action remains its separate target identity.",
+      "authority": [
+        "CA-R-1248",
+        "CA-R-1452",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1248",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+          "version": 6,
+          "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+          "claim_start_line": 15
+        },
+        {
+          "identity": "CA-R-1452",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1452-CORE_META_MODEL-CORE-REQUIREMENT--define-action.md",
+          "version": 1,
+          "sha256": "fc2b5374e605a8ac57191300b8d0bfc9de0b9e2d4274429efce58d8fe0eda879",
+          "claim_start_line": 20
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F15",
+      "scenario": "A Process identity is copied into the Entities Graph because its Term appears in a Subject Expression.",
+      "expected": "Reject Entity duplication; Subject reference does not change target kind.",
+      "authority": [
+        "CA-R-1248",
+        "CA-R-1321",
+        "CA-R-1453",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1248",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+          "version": 6,
+          "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+          "claim_start_line": 15
+        },
+        {
+          "identity": "CA-R-1321",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression.md",
+          "version": 5,
+          "sha256": "8fa1cd22d539d0af9d53b9d436d8da660f6b34ce4693c3b65a5cf3db7518bcda",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-R-1453",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1453-CORE_META_MODEL-CORE-REQUIREMENT--define-process.md",
+          "version": 1,
+          "sha256": "ab87432b165406c2f120f4d0a2e40fe63240d61b5ee4e588f9ada787ae5ff673",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F16",
+      "scenario": "A Terms Graph Relation Kind or an unregistered Relation Kind is inserted into the Entities Graph.",
+      "expected": "Reject wrong graph ownership or unregistered relation admission.",
+      "authority": [
+        "CA-R-1246",
+        "CA-R-1438",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1246",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1246-CORE_META_MODEL-CORE-REQUIREMENT--keep-relation-vocabularies-graph-specific.md",
+          "version": 6,
+          "sha256": "9497ecab1ab9268222169ee8c2106fb371c2478b0c1ff0f57bb5f2dac3388e0a",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-R-1438",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+          "version": 1,
+          "sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F17",
+      "scenario": "Two Entity names co-occur in wording but no selected source declares a relation between them.",
+      "expected": "Do not invent a source Relation edge from co-occurrence.",
+      "authority": [
+        "CA-R-1437",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1437",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+          "version": 1,
+          "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F18",
+      "scenario": "The view shows BEARS as inverse navigation with an exact trace to its original IS_BORNE_BY source fact.",
+      "expected": "Accept the derived inverse navigation without creating another primitive fact.",
+      "authority": [
+        "CA-R-1243",
+        "CA-R-1437",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1243",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1243-CORE_META_MODEL-CORE-REQUIREMENT--derive-bears-as-the-inverse-of-is-borne-by.md",
+          "version": 5,
+          "sha256": "88a39073d3f579dd410c30875c0c7420e845e1783024b5a073bbb73ba5fef1de",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1437",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+          "version": 1,
+          "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F19",
+      "scenario": "BEARS is authored as a second primitive Relation Kind independently of IS_BORNE_BY.",
+      "expected": "Reject duplicate relation authority.",
+      "authority": [
+        "CA-R-1243",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1243",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1243-CORE_META_MODEL-CORE-REQUIREMENT--derive-bears-as-the-inverse-of-is-borne-by.md",
+          "version": 5,
+          "sha256": "88a39073d3f579dd410c30875c0c7420e845e1783024b5a073bbb73ba5fef1de",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F20",
+      "scenario": "A selected display omits an eligible Entity node or explicitly declared eligible edge.",
+      "expected": "Reject under-inclusion within the declared selection.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F21",
+      "scenario": "An outside-selection source is silently imported to supply a node or an edge between selected nodes.",
+      "expected": "Reject over-inclusion even when the endpoints otherwise qualify.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F22",
+      "scenario": "A selected relation declaration has an endpoint excluded by explicit display selection.",
+      "expected": "Omit the ineligible edge; the filtered view does not alter the source relation.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F23",
+      "scenario": "The declared hierarchy display selects bearer relations and omits allowed-value relations while preserving eligible source nodes and qualified identities.",
+      "expected": "Accept the explicit narrower view; do not label it the full combined graph.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F24",
+      "scenario": "An enriched graph with a value legitimately shared by two Property contexts is forced into a tree by dropping an eligible relation or duplicating identity.",
+      "expected": "Reject the forced tree and preserve legitimate sharing.",
+      "authority": [
+        "CA-R-1436",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1436",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1436-CORE_META_MODEL-CORE-REQUIREMENT--define-is-allowed-value-of.md",
+          "version": 1,
+          "sha256": "c9b6bd92da68104b330123e3429e53d47397f0a99756221f07dd76af59fcf2c2",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F25",
+      "scenario": "A displayed node or edge cites only a filename, without its exact governing Claim or Artifact Revision.",
+      "expected": "Reject incomplete source traceability.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F26",
+      "scenario": "Two source Atoms each govern the same Entity with one GOVERNS target per Atom.",
+      "expected": "Accept multiple governing Atoms; do not duplicate the Entity or invert the per-Atom cardinality rule.",
+      "authority": [
+        "CA-R-1201",
+        "CA-R-1248",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1201",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-CORE_META_MODEL-CORE-REQUIREMENT--require-one-governed-subject-on-every-atom.md",
+          "version": 8,
+          "sha256": "da4ea725da93719e82c19a607bc1768385ad1fdb5c103c2538391e23328ef81d",
+          "claim_start_line": 13
+        },
+        {
+          "identity": "CA-R-1248",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+          "version": 6,
+          "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+          "claim_start_line": 15
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F27",
+      "scenario": "A filtered view omits a bearer endpoint and concludes that the displayed Dependent Entity is a Primary Entity.",
+      "expected": "Reject inference from display omission; preserve source identity and actual source cardinality.",
+      "authority": [
+        "CA-R-1191",
+        "CA-R-1192",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1191",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1191-CORE_META_MODEL-CORE-REQUIREMENT--define-primary-entity.md",
+          "version": 6,
+          "sha256": "b81fe5d35322e90d3b2c8b1c415cf319a461d0daebf4759a3c8183179956fea0",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1192",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1192-CORE_META_MODEL-CORE-REQUIREMENT--define-dependent-entity.md",
+          "version": 5,
+          "sha256": "e0e054acbe591a97fc26b69658f6158acbdfcacbf023d4ab9dbeec581fe98fa8",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F28",
+      "scenario": "Selected evidence cannot establish the applicable bearer constraint, and the view keeps its exact available evidence and limitation visible.",
+      "expected": "Retain the source constraint as unresolved; the limited view does not prove unexamined model conformance.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F29",
+      "scenario": "A selected view changes its selection explicitly to include previously excluded source evidence and recomputes eligible nodes and edges.",
+      "expected": "Evaluate the declared expanded selection while preserving identities and exact provenance; no silent expansion is needed.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F30",
+      "scenario": "The selected view acquires a new graph-kind identity or independently maintained model authority solely because of its display selection.",
+      "expected": "Reject; R1438 remains the generic Entities Graph and source Atoms retain authority.",
+      "authority": [
+        "CA-R-1438",
+        "CA-R-1437",
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1438",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+          "version": 1,
+          "sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+          "claim_start_line": 19
+        },
+        {
+          "identity": "CA-R-1437",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+          "version": 1,
+          "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F31",
+      "scenario": "A valid relation from a selected source is displayed although the explicit display filter excludes that relation kind.",
+      "expected": "Reject failure of display selection even though source selection passes.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F32",
+      "scenario": "A node satisfies the explicit display filter but its admitting source is outside the requested source selection, and the node is displayed.",
+      "expected": "Reject failure of source selection even though display selection passes.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F33",
+      "scenario": "A displayed node or edge retains its exact Artifact Revision but lacks its exact governing source Claim.",
+      "expected": "Reject missing Claim provenance independently of valid Revision provenance.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F34",
+      "scenario": "A displayed node or edge identifies its exact governing source Claim but lacks its Artifact Revision.",
+      "expected": "Reject missing Revision provenance independently of valid Claim provenance.",
+      "authority": [
+        "CA-R-1456",
+        "CA-E-449"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable generator result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1456",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+          "claim_start_line": 29
+        },
+        {
+          "identity": "CA-E-449",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+          "version": 2,
+          "sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+          "claim_start_line": 43
+        }
+      ]
+    }
+  ],
+  "journal": {
+    "action_id": "execute-ca-p-1081-entities-graph-authority",
+    "append_only": true,
+    "receipt_binding": "Exact sealed source/archive/report/map/Task events append after root completion review; receipts returned separately. No historical author/time inferred."
+  },
+  "next_task": "CA-P-1082",
+  "deferred": [
+    "Subject backlinks: P1082",
+    "Composed navigation/registry: P1083",
+    "D Carriers: P1084",
+    "Sub-Epic closure: P1085",
+    "Operation flow schema: P980 after parent review",
+    "Temporal-axis retirement and bulk Carrier migration: later assigned Tasks"
+  ]
+}

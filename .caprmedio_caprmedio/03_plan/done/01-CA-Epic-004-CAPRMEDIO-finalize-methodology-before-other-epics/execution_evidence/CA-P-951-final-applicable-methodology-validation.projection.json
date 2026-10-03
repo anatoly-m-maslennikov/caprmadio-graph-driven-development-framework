@@ -1,0 +1,219 @@
+{
+  "schema": "caprmedio.ca-p-951.final-applicable-methodology-validation.v1",
+  "artifact_form": "PROJECTION",
+  "authority": "NON_AUTHORITATIVE",
+  "task_atom_id": "CA-P-951",
+  "completed_at": "2026-09-03T23:18:56+04:00",
+  "predecessor_evidence": {
+    "CA-P-944": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-944-methodology-finalization-frontier.projection.json",
+      "sha256": "9ca6010b5dbe654f5bb33b74766652d786b193fd9dc066c2323f904ec04e4ab8"
+    },
+    "CA-P-945": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-945-core-meta-model-self-application.projection.json",
+      "sha256": "c7981df3140461e730deed5497fc4231c96c919266520ce7a14e625026121a84"
+    },
+    "CA-P-946": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-946-combined-methodology-application.findings.json",
+      "sha256": "73ede71af55e7dcedd2b3856e06dcc6edab5d001146a75947caf433c44aa6510"
+    },
+    "CA-P-947": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-947-expansion-boundary-validation.projection.json",
+      "sha256": "6368e90da4436f43f95f770ccd126f8fba4868ddc2b61669ada0506d7eb34038"
+    },
+    "CA-P-948": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-948-complete-methodology-conflict-and-gap-report.projection.json",
+      "sha256": "ab868f45d117022785393f6bb991a3de3e066895f66623f6051dac3947bede4e"
+    },
+    "CA-P-949": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-949-methodology-conflict-dispositions.projection.json",
+      "sha256": "57cc5fb63bfc6d5273b2ff2a24ebab255b71926fd86dca0447cf958dbb287f16",
+      "operator_disposition_count": 0
+    },
+    "CA-P-950": {
+      "path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-950-methodology-conflict-gap-resolution.projection.json",
+      "sha256": "d1e3fb55b59aaa56b09a1690e83d0a310c03bf99b4b85b409b0c9767a0fe6f05",
+      "remaining_true_finding_count": 0
+    }
+  },
+  "source_frontier": {
+    "structural_source_scope_units": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "active_rmedo_atom_counts": {
+      "CORE_META_MODEL": 595,
+      "INSTALLED_EXTENSIONS": 0,
+      "LOCAL_CONFIGURATION": 70,
+      "total": 665
+    },
+    "compiler_source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+    "ca_r_1375_active": true,
+    "ca_r_1207_active_revision": 4,
+    "operator_conflict_dispositions": 0
+  },
+  "applicable_methodology_compilation": {
+    "dry_runs": {
+      "count": 2,
+      "byte_identical": true,
+      "report_sha256": "1745a742cd03c132d9309a5d4ef58a4551316d3105b96bddbe25089318d8f18e"
+    },
+    "selected_candidate_count": 665,
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "diagnostic_count": 0,
+    "atomic_apply": "APPLIED",
+    "generated_tree_digest": "c518ff6bcfb6d2ebfde541f1d2bd20da2ee5a30139ff4ad81d79fba5ae32ea6e",
+    "fresh_source_only_regeneration": {
+      "live_output_deleted": false,
+      "isolated_target_started_without_generated_roles": true,
+      "source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+      "generated_tree_digest": "c518ff6bcfb6d2ebfde541f1d2bd20da2ee5a30139ff4ad81d79fba5ae32ea6e",
+      "matches_live_generated_tree": true
+    }
+  },
+  "generated_projection_integrity": {
+    "allowed_content_roles": [
+      "REQUIREMENT",
+      "METHOD",
+      "EVALUATION",
+      "DELIVERY",
+      "OPERATIONS"
+    ],
+    "projected_atom_count": 665,
+    "role_counts": {
+      "REQUIREMENT": 504,
+      "METHOD": 33,
+      "EVALUATION": 28,
+      "DELIVERY": 100,
+      "OPERATIONS": 0
+    },
+    "missing_member_count": 0,
+    "orphan_member_count": 0,
+    "source_payload_mismatch_count": 0,
+    "identity_revision_claim_preserved": true,
+    "relative_source_path_missing_or_invalid_count": 0,
+    "contains_cap_or_inactive_lifecycle_atom": false
+  },
+  "fixed_points": {
+    "core_only": {
+      "can_conform": true,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "source_counts": {
+        "CORE_META_MODEL": 595,
+        "INSTALLED_EXTENSIONS": 0,
+        "LOCAL_CONFIGURATION": 0
+      }
+    },
+    "core_plus_local_configuration": {
+      "can_conform": true,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "source_counts": {
+        "CORE_META_MODEL": 595,
+        "INSTALLED_EXTENSIONS": 0,
+        "LOCAL_CONFIGURATION": 70
+      }
+    },
+    "core_plus_extensions_plus_local_configuration": {
+      "can_conform": true,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "source_counts": {
+        "CORE_META_MODEL": 595,
+        "INSTALLED_EXTENSIONS": 0,
+        "LOCAL_CONFIGURATION": 70
+      }
+    }
+  },
+  "graph_and_retrieval_validation": {
+    "entity_graph": {
+      "core": {
+        "declared_term_count": 130,
+        "definition_conflict_count": 0,
+        "term_system_violation_count": 0,
+        "permitted_definition_cycle_count": 3,
+        "depends_on_without_governs_count": 68
+      },
+      "combined": {
+        "declared_term_count": 141,
+        "definition_conflict_count": 0,
+        "term_system_violation_count": 0,
+        "permitted_definition_cycle_count": 3,
+        "depends_on_without_governs_count": 76
+      }
+    },
+    "canonical_signatures": {
+      "cce_duplicate_signature_group_count": 0,
+      "scope_duplicate_signature_group_count": 0,
+      "claim_value_set_candidate_group_count": 0,
+      "permitted_restricted_cce_boundary_exclusion_count": 9
+    },
+    "retrieval": {
+      "complete": true,
+      "selected_atom_count": 49,
+      "query_subjects": [
+        "Applicable Methodology",
+        "Methodology Source",
+        "Applicable Methodology/Conflict"
+      ]
+    },
+    "project_scope_unit_graph": {
+      "installed_tool_release": "95dc5e52680939670d355d1bf94b457c7508fe8d0a41a746bcf0dc6b684146e9",
+      "canonical_generator_sha256": "ab634edf6b2903cb066f3bce058d66c0e52ca6df900b751949322f7a47137644",
+      "installed_generator_matches_canonical": true,
+      "apply_changed": true,
+      "post_apply_dry_run_changed": false,
+      "scope_unit_count": 13,
+      "methodology_source_atom_count": 665,
+      "graph_projection_sha256": "f8fb3f7a640dc6d22a4345fa6c33ae23699c74685520dc52f07a72d07de01305",
+      "source_binding_projection_sha256": "c0c9062e1913b8d046b4ce29d5cee0b7c059cac800738c69f245cb79bff69ff7",
+      "apply_change_explanation": "the generated execution provenance changed from the prior installed release to the current byte-verified installed release; the immediate subsequent dry-run is unchanged"
+    }
+  },
+  "tool_and_test_validation": {
+    "installed_tool_release": {
+      "release": "95dc5e52680939670d355d1bf94b457c7508fe8d0a41a746bcf0dc6b684146e9",
+      "file_count": 67,
+      "source_matches_install": true,
+      "verified": true,
+      "hooks_installed": false,
+      "host_hooks_managed": false
+    },
+    "focused_methodology_tests": {
+      "total": 53,
+      "passed": 53,
+      "suites": {
+        "Applicable Methodology compiler": 9,
+        "expansion boundary validator": 4,
+        "Applicable Methodology retriever": 9,
+        "Entity Graph generator": 9,
+        "Project Scope Unit Graph generator": 8,
+        "CCE canonical signatures": 4,
+        "Scope canonical signatures": 4,
+        "claim value-set candidate detector": 6
+      }
+    },
+    "carrier_identity_revision_lifecycle_tests": {
+      "total": 19,
+      "passed": 19,
+      "suite": "atom operations"
+    }
+  },
+  "result": {
+    "remaining_true_finding_count": 0,
+    "remaining_conflict_count": 0,
+    "remaining_gap_count": 0,
+    "operator_approval_required": false,
+    "source_authority_changed_by_this_task": false,
+    "final_applicable_methodology_reproducible": true,
+    "excluded_non_governed_residue": [
+      ".DS_Store",
+      "macOS-protected empty directory shells",
+      "runtime test fixtures"
+    ],
+    "confidence": 99
+  }
+}

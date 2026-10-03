@@ -1,0 +1,20 @@
+---
+subjects:
+  governs: "Atom Carrier/Filename/Summary Slug"
+  depends_on:
+    - "Atom/Summary"
+version: 10
+updated_at: "2026-09-10 02:49:14 +0400"
+relations: {}
+atom_id: "CA-D-282"
+content_role: "Delivery"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Delivery"
+---
+# Serialize Filename Summary Slug from Summary
+
+**every** Atom filename Summary Slug **must** be the lowercase ASCII kebab-case serialization of the complete Atom Summary.

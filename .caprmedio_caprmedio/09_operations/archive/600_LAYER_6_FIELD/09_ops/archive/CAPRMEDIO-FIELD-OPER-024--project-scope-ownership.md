@@ -1,0 +1,52 @@
++++
+artifact_subtype = "run_record"
+version = 1
+updated_at = "2026-08-17 19:36:01"
+llm_session_ids = ["codex:019f591f-04f6-70f2-8de7-828b7cccc69d"]
++++
+
+# Project-scope ownership self-application — 2026-07-20
+
+## Proof identity
+
+- **Claim:** DSET defines and recursively applies narrowest-common-scope
+  ownership so project-level truth owns cross-child concerns without copying
+  child-owned detail.
+- **Intended use:** Support `CAPRMEDIO-GOV-REQU-390--project-scope-ownership`,
+  `CAPRMEDIO-INVARIANT-GOV-022`, `CAPRMEDIO-TEST-CASE-GOV-032`, and
+  `CAPRMEDIO-TASK-GOV-054`.
+- **Producer/performed work:** Main-session Requirement emission, compile-down,
+  DSET layer self-application, bootstrap refresh, and deterministic validation.
+- **LLM session IDs:**
+  - `codex:019f591f-04f6-70f2-8de7-828b7cccc69d`
+- **Evaluated revision:** `2a85b0d`.
+- **Observed:** 2026-07-20.
+- **Currentness:** current for the exact evaluated revision and this evidence-
+  only reconciliation commit.
+- **Reopen when:** the project/group/feature/layer ownership algorithm,
+  structural metadata, architecture templates, cross-child artifact boundary,
+  or applicable validator changes.
+- **Unsupported uses:** this proof does not claim executable feature-group or
+  feature allocation, qualitative reviewer agreement, hosted CI, or external-
+  adopter evidence.
+
+## Deterministic results
+
+| Boundary | Observation | Result |
+|---|---|---|
+| Atomic authority | Immutable `CAPRMEDIO-ATOMIC-RECORD-003` owns accepted `CAPRMEDIO-GOV-REQU-390--project-scope-ownership` with session provenance and rationale | Pass |
+| Ownership algorithm | Canonical specs and architecture governance require the narrowest common structural ancestor; importance, abstraction, and reuse do not promote a claim | Pass |
+| Global responsibilities | Cross-child outcomes/requirements, Contracts/shared semantics, end-to-end QA, cross-cutting policy, integration architecture, whole-project release/readiness, and cross-owner work have explicit ownership | Pass |
+| Anti-duplication | Parent artifacts link child-owned details and may not restate them as parallel truth | Pass |
+| Recursive DSET application | The root owns cross-layer concerns and the five layer hubs/spec fragments continue to own layer-local behavior | Pass |
+| Distribution | The materialized governance template and generated bootstrap bundle carry the same rule | Pass |
+| Canonical test gate | `TMPDIR=/tmp .venv/bin/python -m unittest discover -v` ran 158 tests in 94.121 seconds | Pass |
+| Static and structural gates | Ruff format/lint, strict mypy, DSET/rule validation, trace freshness, and diff hygiene | Pass |
+
+## Bounded limitation
+
+The current repository exercises the project-to-layer case. Feature-group and
+feature behavior is normatively specified and covered by reusable architecture
+templates, but executable feature/group allocation fixtures remain pending
+until those optional structural modes have runtime scaffolding. The qualitative
+`CAPRMEDIO-EVALUATION-CASE-GOV-022` reviewer-placement run also remains pending.

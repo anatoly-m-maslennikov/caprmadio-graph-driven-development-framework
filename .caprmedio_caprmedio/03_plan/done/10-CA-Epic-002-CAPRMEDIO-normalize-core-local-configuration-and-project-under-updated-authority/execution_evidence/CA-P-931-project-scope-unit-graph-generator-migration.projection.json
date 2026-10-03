@@ -1,0 +1,111 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-30T20:24:09+04:00",
+  "schema": "caprmedio.project_scope_unit_graph_generator_migration.execution.v1",
+  "task_atom_id": "CA-P-931",
+  "result": "project_scope_unit_graph_generator_migrated",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-930",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/13-CA-P-930-TASK--recompile-applicable-methodology-after-authority-repairs.md",
+    "dependency_predecessor_archive": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/archive/13-CA-P-930-TASK--recompile-applicable-methodology-after-authority-repairs@1.md"
+  },
+  "source_authority": {
+    "scope_unit_directory_grammar": "CA-D-297@3",
+    "epic_directory_grammar": "CA-D-293@3",
+    "local_order_rule": "CA-D-298@3",
+    "numeric_prefix_rule": "CA-D-300@3",
+    "project_configuration_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/caprmedio_framework_settings.toml",
+    "project_configuration_atom_id": "CAPRMEDIO-I-001",
+    "project_configuration_revision": 4,
+    "project_configuration_sha256": "78d6669cb1d13cd4098ba182144633e339eb08d16b72decb3d52853521e1b306",
+    "project_configuration_receipt": {
+      "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-30-part-1.ndjson",
+      "line": 52,
+      "event_id": "59613820628308f1ee20b996b6af1bc77dc04539e6e001e922b022474e5ec10c"
+    }
+  },
+  "implementation": {
+    "canonical_generator": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "canonical_generator_sha256": "da3df9189f2fd45892edcba7734995e8a7cf8bf2fc19134ed0d5d95ac9aa7538",
+    "control_root": ".caprmedio_caprmedio",
+    "project_identity": "caprmedio",
+    "scope_unit_registry_source": "active typed Scope Unit Directory Carriers",
+    "job_atom_registry_source": false,
+    "epic_directory_treated_as_scope_unit": false,
+    "parentage_rule": "nearest typed Scope Unit ancestor",
+    "structural_level_rule": "typed Scope Unit ancestor depth",
+    "numeric_prefix_allocation": "greatest current Structural Level determines Structural Level prefix width; remaining digits are Navigational Order Number",
+    "emitted_scope_unit_fields": [
+      "structural_level",
+      "navigational_order_number",
+      "local_order"
+    ],
+    "epic_scope_summary_separator": "one hyphen"
+  },
+  "current_topology": {
+    "active_typed_scope_unit_count": 13,
+    "greatest_structural_level": 3,
+    "structural_level_prefix_width": 1,
+    "node_ids": [
+      "101_LAYER_1_FRAMEWORK_METHODOLOGY",
+      "102_LAYER_2_FRAMEWORK_ENGINE",
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC",
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS",
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS",
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP",
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC",
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS",
+      "103_LAYER_3_OPERATOR_DOCUMENTATION",
+      "104_LAYER_4_CORE_EXTENSIONS",
+      "105_LAYER_5_RELEASES",
+      "110_FEATURE_COMMUNITY_EXTENSIONS",
+      "110_FEATURE_FIELD"
+    ],
+    "structural_level_by_node": {
+      "101_LAYER_1_FRAMEWORK_METHODOLOGY": 1,
+      "102_LAYER_2_FRAMEWORK_ENGINE": 1,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC": 2,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS": 3,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS": 3,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP": 3,
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC": 2,
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS": 3,
+      "103_LAYER_3_OPERATOR_DOCUMENTATION": 1,
+      "104_LAYER_4_CORE_EXTENSIONS": 1,
+      "105_LAYER_5_RELEASES": 1,
+      "110_FEATURE_COMMUNITY_EXTENSIONS": 1,
+      "110_FEATURE_FIELD": 1
+    },
+    "navigational_order_number_by_node": {
+      "101_LAYER_1_FRAMEWORK_METHODOLOGY": 1,
+      "102_LAYER_2_FRAMEWORK_ENGINE": 2,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC": 1,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS": 1,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS": 2,
+      "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP": 3,
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC": 2,
+      "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS": 1,
+      "103_LAYER_3_OPERATOR_DOCUMENTATION": 3,
+      "104_LAYER_4_CORE_EXTENSIONS": 4,
+      "105_LAYER_5_RELEASES": 5,
+      "110_FEATURE_COMMUNITY_EXTENSIONS": 10,
+      "110_FEATURE_FIELD": 10
+    }
+  },
+  "validation": {
+    "test_command": "python3 -m unittest 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/tests/test_generate_project_graph_state.py -v",
+    "tests_passed": 6,
+    "tests_failed": 0,
+    "dry_run": {
+      "command": "python3 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+      "scope_units": 13,
+      "admitted_contributions": 0,
+      "projection_changed": true,
+      "projection_apply_performed": false
+    },
+    "describe_mode_passed": true,
+    "source_has_retired_control_or_engine_dependency": false,
+    "git_diff_check_passed": true
+  },
+  "boundary": "CA-P-932 owns the registered Projection rebuild; neither Project Scope Unit Graph Projection was written."
+}

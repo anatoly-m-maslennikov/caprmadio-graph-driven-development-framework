@@ -1,0 +1,88 @@
+{
+  "schema": "caprmedio.ca_p_107.compiler_authority_repair.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-107",
+  "task_revision": 5,
+  "recorded_at": "2026-08-27T20:26:51+04:00",
+  "minimum_confidence_percent": 99,
+  "cause": "The four previous CA-P-107 authority Carriers claimed Atom IDs already issued by unrelated active Carriers in the migrated frontier and therefore were absent from the CA-P-108 and CA-P-109 mapped source set.",
+  "accepted_source_model": {
+    "structural_source_layers": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "contributing_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "installed_extensions": "empty and non-contributing"
+  },
+  "invalid_identity_archives": [
+    {
+      "claimed_atom_id": "CA-M-125",
+      "original_carrier_sha256": "0e1db5ebdd48091764bb8895ab98938fd467c00705e873e42eba4f4b62bbea39",
+      "collision_target": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-SEMNTC-CORE-METHOD--assign-subjects-from-the-claim.md",
+      "archive_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-107-invalid-carriers/invalid-identity--compile-applicable-methodology-deterministically.md",
+      "successor_atom_id": "CA-M-224"
+    },
+    {
+      "claimed_atom_id": "CA-M-126",
+      "original_carrier_sha256": "eda897ee41b0399514ab70113640a94e49c0309ac0a0775019743ea06b5ff4a6",
+      "collision_target": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-126-SEMNTC-CORE-METHOD--derive-the-subject-projection.md",
+      "archive_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-107-invalid-carriers/invalid-identity--retrieve-applicable-methodology-mechanically.md",
+      "successor_atom_id": "CA-M-225"
+    },
+    {
+      "claimed_atom_id": "CA-E-300",
+      "original_carrier_sha256": "6380dd277eac2030b8db0058bad3e0078577b20be5c878412d45d1dc77eb3f74",
+      "collision_target": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-300-TOOLS-QA_CASE--verify-design-asynchronous-commit-provenance-tool-topology.md",
+      "archive_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-107-invalid-carriers/invalid-identity--validate-applicable-methodology-compilation.md",
+      "successor_atom_id": "CA-E-379"
+    },
+    {
+      "claimed_atom_id": "CA-D-251",
+      "original_carrier_sha256": "c062dadf204ccbaf4bc8f636ea0c5aaba40937c4ea281a0cdf9ca43c2c9270f4",
+      "collision_target": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/CA-D-251-DELIVERY-PROGRAMMATIC--bind-programmatic-delivery-place.md",
+      "archive_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-107-invalid-carriers/invalid-identity--place-applicable-methodology-and-its-sources.md",
+      "successor_atom_id": "CA-D-253"
+    }
+  ],
+  "successor_authority_in_old_source_area": [
+    {
+      "atom_id": "CA-M-224",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/05_method/CA-M-224-MMODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+      "sha256": "660b3694eab865c2875a75525f36987eb10f0653aa28b64f5bd428dd7a1712d9"
+    },
+    {
+      "atom_id": "CA-M-225",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/05_method/CA-M-225-MMODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "sha256": "3091a7a389661a5913aaa41dd1314d8e485d65282a1f834d2ef1e2db5aada554"
+    },
+    {
+      "atom_id": "CA-E-379",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/06_evaluation/CA-E-379-MMODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+      "sha256": "650972c6abf43048aee7fa1bc515cee1c302616dfb8debbd2d21c3f32269d0b4"
+    },
+    {
+      "atom_id": "CA-D-253",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/07_delivery/CA-D-253-GOVERN-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "sha256": "91636bb69d0e0a8a4f780145295511759dcf5b78bde3c5220906d48547435054"
+    }
+  ],
+  "migration_disposition": {
+    "ca_p_108": "must map the four listed successor Carriers from the old source area",
+    "ca_p_109": "must migrate only the successors selected by the repaired CA-P-108 map",
+    "bypass_of_ca_p_108_or_ca_p_109": false,
+    "ca_p_110_compilation_performed": false
+  },
+  "validation": {
+    "new_atom_ids_globally_unused_before_issuance": true,
+    "old_source_paths_with_colliding_ids_removed": true,
+    "structural_layer_order_preserved": true,
+    "installed_extensions_non_contributing": true,
+    "final_applicable_methodology_output_created": false,
+    "confidence_percent": 99
+  }
+}

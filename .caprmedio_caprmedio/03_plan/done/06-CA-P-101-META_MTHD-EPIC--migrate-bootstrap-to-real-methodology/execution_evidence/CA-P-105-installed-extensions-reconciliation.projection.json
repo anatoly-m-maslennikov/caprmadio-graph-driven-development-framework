@@ -1,0 +1,70 @@
+{
+  "schema": "caprmedio.ca_p_105.installed_extensions_reconciliation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-105",
+  "recorded_at": "2026-08-27T01:17:55+04:00",
+  "minimum_confidence_percent": 99,
+  "predecessor_evidence": [
+    "CA-P-102-freeze-record.projection.json",
+    "CA-P-103-target-topology.projection.json",
+    "CA-P-112-job-reconciliation.projection.json",
+    "CA-P-104-core-meta-model-reconciliation.projection.json"
+  ],
+  "operator_decision": {
+    "applicable_methodology_inputs_for_this_migration": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "installed_extensions_catalog": "explicitly_empty",
+    "caprmedio_for_caprmedio": "not_created",
+    "caprmedio_specific_authority": "remains_project_local_configuration",
+    "future_extension_packaging": "requires_separate_operator_acceptance"
+  },
+  "catalog": {
+    "catalog_id": "INSTALLED_EXTENSIONS",
+    "candidate_count": 0,
+    "candidates": [],
+    "required_future_candidate_fields": [
+      "identity",
+      "version",
+      "author",
+      "source",
+      "source_version",
+      "origin",
+      "content_digest"
+    ],
+    "entry_authority": "CA-R-1220",
+    "empty_catalog_authority": "CA-R-1221"
+  },
+  "deferred_packaging": {
+    "authority": "CA-R-1222",
+    "current_boundary": "Project Local Configuration",
+    "created_extension_packages": []
+  },
+  "conflict_reconciliation": {
+    "active_caprmedio_for_caprmedio_carriers": [],
+    "active_caprmedio_application_carriers": [],
+    "result": "no active conflicting carrier remains"
+  },
+  "retained_compatible_authority": [
+    "CA-R-1206",
+    "CA-R-1207",
+    "CAPRMEDIO-META-REQU-161",
+    "CAPRMEDIO-META-REQU-174",
+    "CAPRMEDIO-META-REQU-700",
+    "CA-R-1149",
+    "CA-R-1150",
+    "CA-R-1151",
+    "CA-R-1152"
+  ],
+  "validation": {
+    "candidate_count_is_zero": true,
+    "future_candidate_metadata_is_governed": true,
+    "installation_does_not_activate": true,
+    "project_owned_resolution_is_outside_catalog": true,
+    "caprmedio_for_caprmedio_created": false,
+    "final_carriers_moved": false,
+    "confidence_percent": 99
+  }
+}

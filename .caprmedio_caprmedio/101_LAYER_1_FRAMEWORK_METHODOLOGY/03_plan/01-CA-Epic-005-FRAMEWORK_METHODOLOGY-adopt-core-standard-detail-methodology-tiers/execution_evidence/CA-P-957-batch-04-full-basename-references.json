@@ -1,0 +1,487 @@
+{
+  "searched_markdown_files": 10140,
+  "references": [
+    {
+      "target_atom_id": "CA-R-997",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers.md",
+      "lines": [
+        21
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-946",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "lines": [
+        21
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1323",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names.md",
+      "lines": [
+        13
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1297",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1304",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar.md",
+      "lines": [
+        13
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1245",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1360",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "lines": [
+        19
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1322",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names.md",
+      "lines": [
+        13
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1305",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1324",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1369",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1359",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-R-1204",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-113",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-230",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-119",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-123",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-225",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-241",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-112",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-229",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "lines": [
+        18
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-239",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "lines": [
+        22
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-111",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "lines": [
+        19
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-234",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-115",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "lines": [
+        19
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-121",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-242",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "lines": [
+        18
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-122",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions.md",
+      "lines": [
+        19
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-240",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "lines": [
+        20
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-228",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "lines": [
+        16
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-236",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-233",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements.md",
+      "lines": [
+        17
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-127",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership.md",
+      "lines": [
+        19
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    },
+    {
+      "target_atom_id": "CA-M-237",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets.md",
+      "lines": [
+        23
+      ],
+      "active_frontier_source": false,
+      "historical": false,
+      "generated": true,
+      "disposition": "Generated Applicable Methodology source Carrier path only; leave unchanged for later governed regeneration outside this source-only Task."
+    }
+  ],
+  "schema": "ca-p-957-full-basename-reference-audit/v1",
+  "non_authoritative": true,
+  "batch": "04",
+  "search": "Read-only literal old-basename search across every rg-discovered repository Markdown file, including hidden source, historical and generated surfaces; excludes .git.",
+  "active_requirement_endpoint_consequences": [
+    {
+      "child": "CA-R-1359",
+      "parent": "CA-R-1270",
+      "targetref": "CA-R-1270",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    },
+    {
+      "child": "CA-R-1360",
+      "parent": "CA-R-918",
+      "targetref": "CA-R-918",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    },
+    {
+      "child": "CA-R-946",
+      "parent": "CA-R-927",
+      "targetref": "CA-R-927",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    },
+    {
+      "child": "CA-R-946",
+      "parent": "CA-R-930",
+      "targetref": "CA-R-930",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    },
+    {
+      "child": "CA-R-997",
+      "parent": "CA-R-991",
+      "targetref": "CA-R-991",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    },
+    {
+      "child": "CA-R-997",
+      "parent": "CA-R-992",
+      "targetref": "CA-R-992",
+      "before": [
+        "Core",
+        "Core"
+      ],
+      "after": [
+        "Standard",
+        "Core"
+      ],
+      "direct": true,
+      "sameTier": false,
+      "parentNowStandard": false,
+      "disposition": "No new same-tier or upward-to-Standard Requirement-parent consequence. Preserve existing edge."
+    }
+  ]
+}

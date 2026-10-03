@@ -1,0 +1,508 @@
+{
+  "schema": "ca-p-957-batch-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "19",
+  "recorded_at": "2026-09-10 07:34:05 +0400",
+  "checkpoint": "Final bounded autonomous source batch; no Journal gate.",
+  "existing": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-290",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset.md",
+      "before_version": 9,
+      "before_sha256": "8da206479df474b0bc0794c77393263f257305b1f1a642c8d170dea5f93d8459",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-290\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - external-boundary\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Requirement — Exclude secrets from DSET\n\nDSET never stores, transmits, summarizes, **or** reproduces secret values. Secrets include passwords, API keys, access **or** refresh tokens, session cookies, private keys, signing **or** encryption keys, authentication certificates, one-time **or** recovery codes, **and** connection strings **or** URLs containing credentials.\n\nThe prohibition covers atomic **and** evergreen artifacts, settings, generated files, runtime traces, logs, prompts, checkpoints, Evaluation inputs **and** results, Test fixtures **and** snapshots, evidence, support bundles, issues, pull requests, commits, **and** release records. A secret **must** be redacted **before** **any** such surface enters DSET; encoding **or** encrypting a value does **not** make it ordinary DSET data.\n\nFor local development, secret values **may** be injected from a repository-local `.env` file outside `.caprmedio`. **every** real `.env` variant is ignored by Git **and** is excluded from DSET discovery. A tracked `.env.example` **may** contain variable names **and** unmistakable dummy placeholders **only**. Production **and** shared automation use the host's secret injection **or** a dedicated secret manager, **not** a committed file **or** DSET setting.\n\nEmail addresses, usernames, **and** account identifiers are identifiers rather than authenticators. They **may** appear **in** DSET **when** necessary **and** authorized, but **must** be minimized **and** treated as potentially personal data. **when** an identifier is mutable runtime configuration, its runtime value is supplied through the local environment carrier as well; DSET does **not** become the runtime owner merely because a human-readable artifact names it.\n\n**if** a secret reaches **any** durable **or** shared surface, stop propagation, revoke **or** rotate it immediately, **then** clean affected carriers **and** record the incident **without** reproducing the value. Deleting a current file is **not** sufficient remediation for a value already present **in** Git history **or** another replica.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-290\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - external-boundary\nversion: 10\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Requirement — Exclude secrets from CAPRMEDIO\n\nCAPRMEDIO never stores, transmits, summarizes, **or** reproduces secret values. Secrets include passwords, API keys, access **or** refresh tokens, session cookies, private keys, signing **or** encryption keys, authentication certificates, one-time **or** recovery codes, **and** connection strings **or** URLs containing credentials.\n\nThe prohibition covers atomic **and** evergreen artifacts, settings, generated files, runtime traces, logs, prompts, checkpoints, Evaluation inputs **and** results, Test fixtures **and** snapshots, evidence, support bundles, issues, pull requests, commits, **and** release records. A secret **must** be redacted **before** **any** such surface enters CAPRMEDIO; encoding **or** encrypting a value does **not** make it ordinary CAPRMEDIO data.\n\nFor local development, secret values **may** be injected from a repository-local `.env` file outside every applicable Project authority Carrier root. **every** real `.env` variant is ignored by Git **and** is excluded from CAPRMEDIO discovery. A tracked `.env.example` **may** contain variable names **and** unmistakable dummy placeholders **only**. Production **and** shared automation use the host's secret injection **or** a dedicated secret manager, **not** a committed file **or** CAPRMEDIO setting.\n\nEmail addresses, usernames, **and** account identifiers are identifiers rather than authenticators. They **may** appear **in** CAPRMEDIO **when** necessary **and** authorized, but **must** be minimized **and** treated as potentially personal data. **when** an identifier is mutable runtime configuration, its runtime value is supplied through the local environment carrier as well; CAPRMEDIO does **not** become the runtime owner merely because a human-readable artifact names it.\n\n**if** a secret reaches **any** durable **or** shared surface, stop propagation, revoke **or** rotate it immediately, **then** clean affected carriers **and** record the incident **without** reproducing the value. Deleting a current file is **not** sufficient remediation for a value already present **in** Git history **or** another replica.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset@9.md",
+      "exact_replacements": [
+        {
+          "before": "DSET",
+          "after": "CAPRMEDIO",
+          "count": 8,
+          "reason": "README history confirms DSET is the prior project name, not a separate governed system; preserve the existing protection-policy domain under its current name."
+        },
+        {
+          "before": "outside `.caprmedio`",
+          "after": "outside every applicable Project authority Carrier root",
+          "count": 1,
+          "reason": "Replace the obsolete single-folder boundary with the current applicable authority-Carrier boundary; no folder or secret file is accessed or changed."
+        },
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Remove the demonstrated retired/unresolved normative parent during this Atom's revision admission; no replacement parent."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "DSET",
+          "after": "CAPRMEDIO",
+          "count": 8,
+          "reason": "README history confirms DSET is the prior project name, not a separate governed system; preserve the existing protection-policy domain under its current name."
+        },
+        {
+          "before": "outside `.caprmedio`",
+          "after": "outside every applicable Project authority Carrier root",
+          "count": 1,
+          "reason": "Replace the obsolete single-folder boundary with the current applicable authority-Carrier boundary; no folder or secret file is accessed or changed."
+        }
+      ],
+      "after_governs_subjects": [
+        "external-boundary"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-290",
+      "claim_change": "bounded approved stale-referent/ownership/admission binding correction"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-302",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "before_version": 14,
+      "before_sha256": "f30835c50b4dc0d330f13af8b14f0960e7f09b7ce9dee03ce9104cfaf8237e42",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-302\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - lifecycle\nversion: 14\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n  child_of:\n    - CA-R-1054\n---\n# Gate atomic admission and promotion\n\nthe Framework Instance Settings Artifact selects `medium` **or** `high` through `artifacts.creation_strictness`; the default is `medium`.\n\n**at** medium strictness, CAPRMEDIO requires accepted authority, one primary Claim, one enabled Artifact Type, owning Scope, creation provenance, material relations, priority, **and** sufficient precision to establish a stable Artifact identity **and** initial committed Revision. optional non-authoritative context **may** remain explicitly unknown.\n\n**at** high strictness, CAPRMEDIO stops **before** emission while **any** material authority, definition, boundary, classification, Scope, lineage, Conflict, **or** Evaluation question remains ambiguous. it asks focused questions **until** the Atom meets the same one-primary-Claim identity standard.\n\nthe two levels assess one-step promotion eligibility. promotion is proposed **only** **when** the Claim applies unchanged at the broader enabled Scope **and** always requires explicit Operator acceptance.\n\nadmission does **not** prohibit later same-ID Revisions. **every** later change passes the atomic change-class gate; changing the primary Claim identity requires a replacement.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "proposed_version": 15,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-302\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - lifecycle\nversion: 15\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385\n---\n# Gate atomic admission and promotion\n\nthe Framework Instance Settings Artifact selects `medium` **or** `high` through `artifacts.creation_strictness`; the default is `medium`.\n\n**at** medium strictness, CAPRMEDIO requires accepted authority, one primary Claim, one enabled Artifact Type, owning Scope, creation provenance, material relations, priority for Concern Atoms **only**, **and** sufficient precision to establish a stable Artifact identity **and** initial committed Revision. optional non-authoritative context **may** remain explicitly unknown.\n\n**at** high strictness, CAPRMEDIO stops **before** emission while **any** material authority, definition, boundary, classification, Scope, lineage, Conflict, **or** Evaluation question remains ambiguous. it asks focused questions **until** the Atom meets the same one-primary-Claim identity standard.\n\nthe two levels assess one-step promotion eligibility. promotion is proposed **only** **when** the Claim applies unchanged at the broader enabled Scope **and** always requires explicit Operator acceptance.\n\nadmission does **not** prohibit later same-ID Revisions. **every** later change passes the atomic change-class gate; changing the primary Claim identity requires a replacement.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion@14.md",
+      "exact_replacements": [
+        {
+          "before": "creation provenance, material relations, priority, **and** sufficient precision",
+          "after": "creation provenance, material relations, priority for Concern Atoms **only**, **and** sufficient precision",
+          "count": 1,
+          "reason": "Qualify the existing admission priority requirement under GOV299's Concern-only stored priority rule; preserve all other medium/high admission and promotion guards."
+        },
+        {
+          "before": "  child_of:\n    - CA-R-1054\n",
+          "after": "",
+          "count": 1,
+          "reason": "Remove only the inactive normative-parent group; preserve contextual and historical relation declarations."
+        },
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-385\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "creation provenance, material relations, priority, **and** sufficient precision",
+          "after": "creation provenance, material relations, priority for Concern Atoms **only**, **and** sufficient precision",
+          "count": 1,
+          "reason": "Qualify the existing admission priority requirement under GOV299's Concern-only stored priority rule; preserve all other medium/high admission and promotion guards."
+        }
+      ],
+      "after_governs_subjects": [
+        "lifecycle"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-302",
+      "claim_change": "bounded approved stale-referent/ownership/admission binding correction"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-305",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation.md",
+      "before_version": 12,
+      "before_sha256": "83ba9a17d37d8bfc9e35588aaa6e832625ad94290908da9d928230d06c61f29c",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-305\ncce_version: cce_1\ncce_form: resolution\nsubjects:\n  governs:\n    continuant:\n      - Optional Projection/Activation\n  depends_on:\n    continuant:\n      - Local Configuration\n      - Projection\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Configure Optional Projection Activation\n\nLocal Configuration **must** resolve **every** registered optional Projection as active **or** inactive, with inactive as the default **and** an unknown Type value under Projection rejected.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation.md",
+      "proposed_version": 13,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-305\ncce_version: cce_1\ncce_form: resolution\nsubjects:\n  governs:\n    continuant:\n      - Optional Projection/Activation\n  depends_on:\n    continuant:\n      - Framework Instance Settings\n      - Projection\nversion: 13\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Configure Optional Projection Activation\n\nthe Framework Instance Settings Artifact **must** resolve **every** registered optional Projection as active **or** inactive, with inactive as the default **and** an unknown Type value under Projection rejected.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation@12.md",
+      "exact_replacements": [
+        {
+          "before": "      - Local Configuration\n",
+          "after": "      - Framework Instance Settings\n",
+          "count": 1,
+          "reason": "Correct the current-selection prerequisite owner to the existing Settings authority."
+        },
+        {
+          "before": "Local Configuration **must** resolve",
+          "after": "the Framework Instance Settings Artifact **must** resolve",
+          "count": 1,
+          "reason": "Current optional-Projection activation is a Settings-owned behavior choice under R1402, not a Local Configuration rule; preserve inactive default and unknown-Type rejection."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "Local Configuration **must** resolve",
+          "after": "the Framework Instance Settings Artifact **must** resolve",
+          "count": 1,
+          "reason": "Current optional-Projection activation is a Settings-owned behavior choice under R1402, not a Local Configuration rule; preserve inactive default and unknown-Type rejection."
+        }
+      ],
+      "after_governs_subjects": [
+        "Optional Projection/Activation"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-305",
+      "claim_change": "bounded approved stale-referent/ownership/admission binding correction"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-310",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "before_version": 10,
+      "before_sha256": "4d953bd71f999d5b0420c03bb69a6d88bb3f6a9786830ae3f67b6498bb593ef6",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-310\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: cardinality\nversion: 10\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CA-R-1054\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-309--use-direct-typed-relation-change-set-commit-messages\n---\n# Classify lineage impact with four dispositions\n\n**when** an Atomic Artifact receives a new committed Revision, **every** directly dependent child reached by the Impact Review **must** receive **`=1`** disposition from (`compatible`, `update_required`, `replacement_required`, `uncertain`).\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "proposed_version": 11,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-310\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: cardinality\nversion: 11\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-309--use-direct-typed-relation-change-set-commit-messages\n---\n# Classify lineage impact with four dispositions\n\n**when** an Atom receives a new committed Revision, **every** directly dependent child reached by the Impact Review **must** receive **`=1`** disposition from (`compatible`, `update_required`, `replacement_required`, `uncertain`).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions@10.md",
+      "exact_replacements": [
+        {
+          "before": "an Atomic Artifact",
+          "after": "an Atom",
+          "count": 1,
+          "reason": "Resolve the legacy phrase through live R655 and R918, consistently with the accepted R1053 allocation; no new target domain."
+        },
+        {
+          "before": "  child_of:\n    - CA-R-1054\n",
+          "after": "",
+          "count": 1,
+          "reason": "Remove only the inactive normative-parent group; preserve contextual and historical relation declarations."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "an Atomic Artifact",
+          "after": "an Atom",
+          "count": 1,
+          "reason": "Resolve the legacy phrase through live R655 and R918, consistently with the accepted R1053 allocation; no new target domain."
+        }
+      ],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-310",
+      "claim_change": "bounded approved stale-referent/ownership/admission binding correction"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-312",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+      "before_version": 10,
+      "before_sha256": "0c313fd0d17a98eed9378feb6acc58bc45960349ca0fde48191aefa49b7f9d0b",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-312\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 10\nupdated_at: \"2026-09-10 06:29:38 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CA-R-1054\n  relates_to:\n    - CAPRMEDIO-META-REQU-097\n    - CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions\n---\n# Record one Lineage Impact Analysis per changed atom revision\n\n**every** `refinement`, `semantic_revision`, **or** `replacement` of an admitted Atom **must** produce **`=1`** Lineage Impact Analysis Atom whose primary conclusion is the impact state of that exact changed parent Revision, while a `carrier_only` change **must** require lossless-recoding Verification instead.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+      "proposed_version": 11,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-312\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 11\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  relates_to:\n    - CAPRMEDIO-META-REQU-097\n    - CAPRMEDIO-GOV-REQU-310\n---\n# Record one Lineage Impact Analysis per changed atom revision\n\n**every** `refinement`, `semantic_revision`, **or** `replacement` of an admitted Atom **must** produce **`=1`** Lineage Impact Analysis Atom whose primary conclusion is the impact state of that exact changed parent Revision, while a `carrier_only` change **must** require lossless-recoding Verification instead.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision@10.md",
+      "exact_replacements": [
+        {
+          "before": "  child_of:\n    - CA-R-1054\n",
+          "after": "",
+          "count": 1,
+          "reason": "Remove only the inactive normative-parent group; preserve contextual and historical relation declarations."
+        },
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-310\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-312",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-313",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "before_version": 19,
+      "before_sha256": "c8521b4a8339a1c0561c3ba0e4430650ac657a8cc723a9a92eee4e35ce6aa8e4",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-313\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Projection/Type\n  depends_on:\n    continuant:\n      - Catalog\n      - Map\n      - Hub\n      - Atom/Content Role\nversion: 19\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Register Catalog, Map, and Hub as Type Values under Projection\n\nCatalog, Map, **and** Hub **must** be distinct Type values under Projection that **all** have **`=1`** Content Role **and** no authority over linked Artifact Claims.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "proposed_version": 20,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-313\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Projection/Type\n  depends_on:\n    continuant:\n      - Catalog\n      - Map\n      - Hub\n      - Atom/Content Role\nversion: 20\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Register Catalog, Map, and Hub as Type Values under Projection\n\nCatalog, Map, **and** Hub **must** be distinct Type values under Projection that **all** have **`=1`** Content Role **and** no authority over linked Artifact Claims.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection@19.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Projection/Type"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-313",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-339",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events.md",
+      "before_version": 14,
+      "before_sha256": "2acb46f2511533951d81e62d5712d4c07d8efd6d4a2ea54127546a8fb5f6680a",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-339\ncce_version: cce_1\ncce_form: registry\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Event/Type\n  depends_on:\n    continuant:\n      - Work Journal/Event\nversion: 14\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Register Type Values for Work Journal Events\n\nthe allowed values of `Work Journal/Event/Type` **must** be (Started, Progressed, Completed, Failed, Interrupted, Abandoned, Recovered).\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-GENERAL-REQUIREMENT--register-type-values-for-work-journal-events.md",
+      "proposed_version": 15,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-339\ncce_version: cce_1\ncce_form: registry\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Event/Type\n  depends_on:\n    continuant:\n      - Work Journal/Event\nversion: 15\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Register Type Values for Work Journal Events\n\nthe allowed values of `Work Journal/Event/Type` **must** be (Started, Progressed, Completed, Failed, Interrupted, Abandoned, Recovered).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events@14.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Work Journal/Event/Type"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-339",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-340",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "before_version": 7,
+      "before_sha256": "f5ffdf89a1ecce7fbe4c30d5e553fa1acc900cf97b33e1d42c61cb7fdfe4cd16",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-340\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - provenance\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--make-journals-canonical-for-governed-provenance\n---\n# Recover Work Journal coverage without invention\n\nWork Journal recovery **must** append a `recovered` event **only** for facts established by repository state, Git history, artifact movement, native targets, pull requests, **or** bounded session state; unresolved actor, time, intent, scope, **or** outcome **must** remain explicit uncertainty rather than fabricated history.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-340\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - provenance\nversion: 8\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Recover Work Journal coverage without invention\n\nWork Journal recovery **must** append a `recovered` event **only** for facts established by repository state, Git history, artifact movement, native targets, pull requests, **or** bounded session state; unresolved actor, time, intent, scope, **or** outcome **must** remain explicit uncertainty rather than fabricated history.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--make-journals-canonical-for-governed-provenance\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Core promotion makes GOV340 and META158 same-tier Current CORE_META_MODEL Requirement peers; remove only this normative parent under R829/R879."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "provenance"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-340",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-367",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-REQUIREMENT--journal-projection-rebuild-events.md",
+      "before_version": 9,
+      "before_sha256": "289f893fc9d4170fb6d063163384e2daaf37f279fbd9e7e6fcb3af824c905dc3",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-367\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    occurrent:\n      - Projection Rebuild\n  depends_on:\n    continuant:\n      - Work Journal/Action\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Journal Projection Rebuild Events\n\n**every** Projection Rebuild **must** be one Work Journal Action whose accepted terminal Event determines whether the rebuilt Projection becomes current.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-GENERAL-REQUIREMENT--journal-projection-rebuild-events.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-367\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    occurrent:\n      - Projection Rebuild\n  depends_on:\n    continuant:\n      - Work Journal/Action\nversion: 10\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Journal Projection Rebuild Events\n\n**every** Projection Rebuild **must** be one Work Journal Action whose accepted terminal Event determines whether the rebuilt Projection becomes current.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-REQUIREMENT--journal-projection-rebuild-events@9.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Projection Rebuild"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-367",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-371",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-REQUIREMENT--define-the-bounded-session-state-envelope.md",
+      "before_version": 10,
+      "before_sha256": "2d78a82494937e29494c6d2fe63651a5a51295af5c7127e3c82223827e809090",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-371\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Session-State Envelope\n  depends_on:\n    occurrent:\n      - runtime\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Define the bounded session-state envelope\n\nthe bounded session-state envelope **must** contain **only** routing invariants, current scope, applicable settings, compact session state, **and** references needed to load active authority on demand.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-GENERAL-REQUIREMENT--define-the-bounded-session-state-envelope.md",
+      "proposed_version": 11,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-371\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Session-State Envelope\n  depends_on:\n    occurrent:\n      - runtime\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 11\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Define the bounded session-state envelope\n\nthe bounded session-state envelope **must** contain **only** routing invariants, current scope, applicable settings, compact session state, **and** references needed to load active authority on demand.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-REQUIREMENT--define-the-bounded-session-state-envelope@10.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Remove the demonstrated retired/unresolved normative parent during this Atom's revision admission; no replacement parent."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Session-State Envelope"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-371",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-375",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-REQUIREMENT--configure-necessary-information-confidence-threshold.md",
+      "before_version": 13,
+      "before_sha256": "693df9c54a8f919aed070f7449be8e743552f5d56c96d4499bca8a3d43ae3ecd",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-375\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - \"Framework Instance Settings/Confidence/Necessary Information Threshold\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Framework Instance Settings\"\n      - \"Operator\"\nversion: 13\nupdated_at: \"2026-09-09 02:24:28 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-035-CORE-REQUIREMENT--identify-necessary-information-by-confidence\n---\n# Configure necessary-information confidence threshold\n\nthe necessary-information Confidence Threshold **must** have an Operator-configurable integer-percentage default **in** Framework Instance Settings.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-GENERAL-REQUIREMENT--configure-necessary-information-confidence-threshold.md",
+      "proposed_version": 14,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-375\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - \"Framework Instance Settings/Confidence/Necessary Information Threshold\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Framework Instance Settings\"\n      - \"Operator\"\nversion: 14\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-REQU-035-CORE-REQUIREMENT--identify-necessary-information-by-confidence\n---\n# Configure necessary-information confidence threshold\n\nthe necessary-information Confidence Threshold **must** have an Operator-configurable integer-percentage default **in** Framework Instance Settings.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-REQUIREMENT--configure-necessary-information-confidence-threshold@13.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Framework Instance Settings/Confidence/Necessary Information Threshold"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-375",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-385",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration.md",
+      "before_version": 15,
+      "before_sha256": "d4f32f5caf542d14da3fe898a9d911a6afdfc2c24820a7014dc8d55bf2680b7c",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-385\ncce_version: cce_1\ncce_form: resolution\nsubjects:\n  governs:\n    occurrent:\n      - Artifact Classification Resolution\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Local Configuration\n      - Scope Unit Graph\nversion: 15\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Resolve Artifact Classification from Authority and Configuration\n\nCAPRMEDIO **must** resolve **every** Artifact Content Role, Type, **and** semantic route from Applicable Methodology, Local Configuration, **and** current Scope Unit Graph context **and** **must** fail on an unknown, disabled, stale, multiply mapped, **or** ambiguous classification.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration.md",
+      "proposed_version": 16,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-385\ncce_version: cce_1\ncce_form: resolution\nsubjects:\n  governs:\n    occurrent:\n      - Artifact Classification Resolution\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Local Configuration\n      - Scope Unit Graph\nversion: 16\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations: {}\n---\n# Resolve Artifact Classification from Authority and Configuration\n\nCAPRMEDIO **must** resolve **every** Artifact Content Role, Type, **and** semantic route from Applicable Methodology, Local Configuration, **and** current Scope Unit Graph context **and** **must** fail on an unknown, disabled, stale, multiply mapped, **or** ambiguous classification.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration@15.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Artifact Classification Resolution"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-385",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-1038",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis.md",
+      "before_version": 6,
+      "before_sha256": "59d562d162f2dba0e9ab245f7e6b48e5970f914ecb05a7e636f3dd14ede8cf6b",
+      "before_bytes_utf8": "---\natom_id: CA-R-1038\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision\n---\n# Permit multiple child rows in one Lineage Impact Analysis\n\nONE Lineage Impact Analysis Atom **may** contain multiple child rows **when** **every** row supports its one primary conclusion that the changed parent Revision's Impact Review is complete **or** blocked.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis.md",
+      "proposed_version": 7,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1038\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 7\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-GOV-REQU-312\n---\n# Permit multiple child rows in one Lineage Impact Analysis\n\nONE Lineage Impact Analysis Atom **may** contain multiple child rows **when** **every** row supports its one primary conclusion that the changed parent Revision's Impact Review is complete **or** blocked.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis@6.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-312\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CA-R-1038",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-322",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "before_version": 14,
+      "before_sha256": "a60728382595991766c9a62f6678bf2bf7f147041e04b377378d0d1369f5f32a",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-322\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Projection/Type: Implementation Record\"\n  depends_on:\n    continuant:\n      - artifact-catalog\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - implementation_record\nversion: 14\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal\n---\n# Register the Implementation Record Projection\n\nImplementation Record **means** the internal Type value under Projection that presents current realization, coverage, source-to-target bindings, relevant provenance, **and** unresolved gaps derived from its declared source frontier.\n\nThe Projection declares the exact normative Atom, native-target, provenance, **and** **any** registered implementation-lineage frontier it represents. Regeneration replaces its rendered content **without** converting it into an Atom **or** granting it authority over the native project, normative specification, Ops evidence, **or** Verification.\n\nIts storage **and** retention policy is configured separately. A generated runtime copy **may** be disposable; a committed current view **may** be reviewable history. the two storage choices do **not** change the Projection's semantic role.\n\n## Rationale\n\nThe predecessor incorrectly bundled Change Plan **and** Implementation Record under one Implementation-role Projection rule. The split preserves the record while routing Change Plan to the new Plan Atom family.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "proposed_version": 15,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-322\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Projection/Type: Implementation Record\"\n  depends_on:\n    continuant:\n      - artifact-catalog\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - implementation_record\nversion: 15\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal\n---\n# Register the Implementation Record Projection\n\nImplementation Record **means** the internal Type value under Projection that presents current realization, coverage, source-to-target bindings, relevant provenance, **and** unresolved gaps derived from its declared source frontier.\n\nThe Projection declares the exact normative Atom, native-target, provenance, **and** **any** registered implementation-lineage frontier it represents. Regeneration replaces its rendered content **without** converting it into an Atom **or** granting it authority over the native project, normative specification, Ops evidence, **or** Verification.\n\nIts storage **and** retention policy is configured separately. A generated runtime copy **may** be disposable; a committed current view **may** be reviewable history. the two storage choices do **not** change the Projection's semantic role.\n\n## Rationale\n\nThe predecessor incorrectly bundled Change Plan **and** Implementation Record under one Implementation-role Projection rule. The split preserves the record while routing Change Plan to the new Plan Atom family.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection@14.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-313\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Projection/Type: Implementation Record"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-322",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "before_version": 10,
+      "before_sha256": "fc3a40c3e4e82fc54da5619e13ddc87fcd9dc1b34788abd0dd25700ad3fe5dee",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-314\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 10\nupdated_at: \"2026-09-10 04:26:29 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-094\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface\n    - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n---\n# Require production evaluation checklists\n\n**every** production-relevant component **or** governed scope **must** define a Production Evaluation Checklist **before** it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, **and** within its accepted operating boundaries during real work.\n\n**every** operational condition **or** invariant is owned by one `evaluation_control` Atom. The control identifies:\n\n- the Requirement, Demand For, Constraint, Method, **or** other governed claim being assured;\n- the production signal **and** authoritative data source;\n- the healthy condition, expected range, threshold, **or** failure predicate;\n- the evaluation window, cadence, **and** permitted detection delay;\n- the component, entity, lifecycle state, **or** workflow boundary to which it applies;\n- the accountable owner **and** escalation destination;\n- the alert, incident, investigation, degradation, rollback, **or** recovery action triggered by failure;\n- the diagnostic context required to investigate the condition;\n- the required Ops record **and** evidence-retention boundary; **and**\n- known blind spots, sampling limits, unavailable signals, **and** other evaluation limitations.\n\nA Production Evaluation Checklist is an Evaluation-role Catalog Projection over the applicable `evaluation_control` Atoms. It organizes **and** navigates those controls **without** absorbing, paraphrasing, **or** replacing their claims.\n\n**every** control distinguishes its governed meaning from its realization **and** results:\n\n- the Evaluation Control defines the production evaluation condition;\n- monitors, dashboards, alerts, health checks, **and** operational automation are Implementation;\n- metrics, logs, traces, alerts, incidents, **and** recorded check outcomes are Ops; **and**\n- a Concern Atom of Type `problem` records a material discrepancy requiring disposition.\n\nA Production Evaluation Checklist governs real production operation. It is **not** a QA Case, **and** passing pre-release Test **or** Evaluation implementations does **not** by itself satisfy the production-evaluation obligation.\n\n## Rationale\n\nPre-release QA demonstrates behavior under bounded conditions, while production evaluation **must** detect degradation, incorrect state, **and** supportability failures during actual operation. Atomic controls preserve independent lifecycle **and** replacement, while the checklist provides a navigable scope view **without** conflating definitions, implementations, **and** observations.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "proposed_version": 11,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-314\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 11\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-094\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface\n    - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types\n    - CAPRMEDIO-GOV-REQU-313\n---\n# Require production evaluation checklists\n\n**every** production-relevant component **or** governed scope **must** define a Production Evaluation Checklist **before** it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, **and** within its accepted operating boundaries during real work.\n\n**every** operational condition **or** invariant is owned by one `evaluation_control` Atom. The control identifies:\n\n- the Requirement, Demand For, Constraint, Method, **or** other governed claim being assured;\n- the production signal **and** authoritative data source;\n- the healthy condition, expected range, threshold, **or** failure predicate;\n- the evaluation window, cadence, **and** permitted detection delay;\n- the component, entity, lifecycle state, **or** workflow boundary to which it applies;\n- the accountable owner **and** escalation destination;\n- the alert, incident, investigation, degradation, rollback, **or** recovery action triggered by failure;\n- the diagnostic context required to investigate the condition;\n- the required Ops record **and** evidence-retention boundary; **and**\n- known blind spots, sampling limits, unavailable signals, **and** other evaluation limitations.\n\nA Production Evaluation Checklist is an Evaluation-role Catalog Projection over the applicable `evaluation_control` Atoms. It organizes **and** navigates those controls **without** absorbing, paraphrasing, **or** replacing their claims.\n\n**every** control distinguishes its governed meaning from its realization **and** results:\n\n- the Evaluation Control defines the production evaluation condition;\n- monitors, dashboards, alerts, health checks, **and** operational automation are Implementation;\n- metrics, logs, traces, alerts, incidents, **and** recorded check outcomes are Ops; **and**\n- a Concern Atom of Type `problem` records a material discrepancy requiring disposition.\n\nA Production Evaluation Checklist governs real production operation. It is **not** a QA Case, **and** passing pre-release Test **or** Evaluation implementations does **not** by itself satisfy the production-evaluation obligation.\n\n## Rationale\n\nPre-release QA demonstrates behavior under bounded conditions, while production evaluation **must** detect degradation, incorrect state, **and** supportability failures during actual operation. Atomic controls preserve independent lifecycle **and** replacement, while the checklist provides a navigable scope view **without** conflating definitions, implementations, **and** observations.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-313\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-REQU-314",
+      "claim_change": "none",
+      "cross_frontier_dependency_repair": true
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "before_version": 14,
+      "before_sha256": "54fb22f88167a2c38008abfcdf2f8c923d6d08a0118883ec8d1b43ad258bb801",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-006\ncce_version: cce_1\ncce_form: evaluation\nartifact_subtype: qa_case\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 14\nupdated_at: \"2026-09-09 23:04:14 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054\n---\n# Canonical Settings Selection\n\n## Claim checked\n\nthe Framework Instance Settings Artifact **and** Project Settings Artifact accept exactly their registered values, resolve deterministically, **and** fail closed on invalid **or** unknown selections; the generated Project Scope Unit Graph reproduces applicable Project Settings **without** becoming selection authority.\n\n## Applicable conditions\n\n1. resolve **and** load the exact current caprmedio_framework_settings Artifact **and** caprmedio_<project_name>_settings Artifact with documented defaults.\n2. accept **only** enabled catalog Types, subtypes, **and** Governance loci.\n3. accept **only** `medium` **or** `high` artifact creation strictness.\n4. accept **only** `silent` **or** `verbose` interaction reporting.\n5. validate initialization inputs against Project Settings field authority **and** Authority Modes against Framework Instance Settings field authority; do **not** hard-code this Project's selected values in the Evaluation.\n6. reject unknown keys **when** the governing schema marks their table closed.\n7. confirm a second parse produces identical effective settings **and** a regenerated Project Scope Unit Graph Projection binds to the same consumed Settings revisions.\n\n## Acceptance criteria\n\n**every** valid selection resolves deterministically **and** **every** invalid selection fails closed with the exact key **and** allowed values.\n\n## Failure disposition\n\nrecord a Concern naming the accepted invalid value, rejected valid value, **or** non-deterministic result **and** stop settings-schema readiness.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "proposed_version": 15,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-006\ncce_version: cce_1\ncce_form: evaluation\nartifact_subtype: qa_case\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 15\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054\n---\n# Canonical Settings Selection\n\n## Claim checked\n\nthe Framework Instance Settings Artifact **and** Project Settings Artifact accept exactly their registered values, resolve deterministically, **and** fail closed on invalid **or** unknown selections; the generated Project Scope Unit Graph reproduces applicable Project Settings **without** becoming selection authority.\n\n## Applicable conditions\n\n1. resolve **and** load the exact current caprmedio_framework_settings Artifact **and** caprmedio_<project_name>_settings Artifact with documented defaults.\n2. accept **only** enabled catalog Types, subtypes, **and** Governance loci.\n3. accept **only** `medium` **or** `high` artifact creation strictness.\n4. accept **only** `silent` **or** `verbose` interaction reporting.\n5. validate initialization inputs against Project Settings field authority **and** Authority Modes against Framework Instance Settings field authority; do **not** hard-code this Project's selected values in the Evaluation.\n6. reject unknown keys **when** the governing schema marks their table closed.\n7. confirm a second parse produces identical effective settings **and** a regenerated Project Scope Unit Graph Projection binds to the same consumed Settings revisions.\n\n## Acceptance criteria\n\n**every** valid selection resolves deterministically **and** **every** invalid selection fails closed with the exact key **and** allowed values.\n\n## Failure disposition\n\nrecord a Concern naming the accepted invalid value, rejected valid value, **or** non-deterministic result **and** stop settings-schema readiness.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection@14.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n",
+          "after": "    - CAPRMEDIO-GOV-REQU-385\n",
+          "count": 1,
+          "reason": "Preserve the exact existing target through retiering by replacing its full basename with its verified unique stable ID; no relation-kind or checked-predicate change."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-19-dispositions.json#CAPRMEDIO-GOV-EVAL-006",
+      "claim_change": "none",
+      "cross_frontier_dependency_repair": true
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "31 new origin dispositions:8 General,1 Core,22 Standard. Two Core and two Local dependent-pointer repairs are counted separately.",
+    "GOV290's coherent protection policy preserves all secret surfaces, identifier/authenticator separation and incident order; only stale current-system/root referents change. No secret files or selected environment values are read.",
+    "GOV302 preserves Concern-only priority under GOV299. GOV305 current optional-Projection activation is Settings-owned under R1402. GOV310's legacy Atomic Artifact phrase resolves to Atom under R655/R918.",
+    "GOV340 is Core fact-only history, not a concrete recovered-event codec. GOV313 is the independent General Projection Type catalog.",
+    "No Journal/Git/runtime/production Tool/selected-settings/source-folder changes; unchanged contextual and historical relation limitations remain explicit."
+  ]
+}

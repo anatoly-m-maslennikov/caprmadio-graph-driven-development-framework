@@ -1,0 +1,316 @@
+schema_version = 1
+scope = "atom_relations"
+inverse_storage = "derived_only"
+active_source_target_lifecycle = "active"
+active_source_target_global_tier = "target <= source"
+sources = [
+  "CA-R-806-REQUIREMENT-BSEED_GOVERNANCE--register-complete-relation-kind-metadata.md@5",
+  "CA-R-807-REQUIREMENT-BSEED_GOVERNANCE--store-replacement-as-direct-replaced-by.md@6",
+  "CA-R-808-REQUIREMENT-BSEED_GOVERNANCE--limit-active-direct-relations-to-upstream-or-same-tier.md@3",
+  "CAPRMEDIO-GOV-METH-006--canonical-artifact-relations.md@12",
+]
+
+[[relation_types]]
+direct_name = "analysis_of"
+inverse_name = "analyzed_by"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Analysis interprets its named subject without becoming that subject's authority or evidence."
+
+[[relation_types]]
+direct_name = "check_of"
+inverse_name = "checked_by"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "evaluation"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Evaluation checks its named claim, condition, invariant, or Delivery."
+
+[[relation_types]]
+direct_name = "child_of"
+inverse_name = "parent_of"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "hierarchical_authority"
+transitive = true
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A child narrows, decomposes, or specializes an active parent while both remain active."
+
+[[relation_types]]
+direct_name = "concern_about"
+inverse_name = "has_concern"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A Concern identifies the active artifact or Observation that it concerns."
+
+[[relation_types]]
+direct_name = "delivery_for"
+inverse_name = "has_delivery"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A Delivery defines the delivered form of its active Requirement or Method subjects."
+
+[[relation_types]]
+direct_name = "derived_from"
+inverse_name = "source_for"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Atom derives its governed content from a named active Analysis source."
+
+[[relation_types]]
+direct_name = "evaluation_for"
+inverse_name = "has_evaluation"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "evaluation"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Evaluation defines how its active Requirement or Method subjects are evaluated."
+
+[[relation_types]]
+direct_name = "evidence_for"
+inverse_name = "has_evidence"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "evidence"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Operations Evidence Atom supports its named active Evaluation or Implementation subject."
+
+[[relation_types]]
+direct_name = "implementation_of"
+inverse_name = "implemented_by"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "realization"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "An Implementation Atom realizes its named active specification subjects."
+
+[[relation_types]]
+direct_name = "method_for"
+inverse_name = "has_method"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A Method defines how its active Requirement subjects are satisfied."
+
+[[relation_types]]
+direct_name = "override_of"
+inverse_name = "overridden_by"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "scoped_authority"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "Narrower active authority replaces inherited active authority only inside its declared scope."
+
+[[relation_types]]
+direct_name = "projection_of"
+inverse_name = "has_projection"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "projection"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A Projection definition binds its declared output to an active source-Atom frontier."
+
+[[relation_types]]
+direct_name = "rationale_for"
+inverse_name = "has_rationale"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "traceability"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "active"
+exclusive_meaning = "A Rationale Analysis explains the selection of its active specification subjects."
+
+[[relation_types]]
+direct_name = "replaced_by"
+inverse_name = "replacement_of"
+declaration_carrier = "work_journal_event"
+source_lifecycles = ["archived"]
+target_lifecycles = ["active", "archived"]
+target_lifecycle_at_creation = "active"
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "replacement_lineage"
+transitive = true
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "deferred"
+exclusive_meaning = "Deferred: archival Journal events currently record explicit predecessor and successor Atom IDs without a formal replacement edge."
+
+[[relation_types]]
+direct_name = "resolution_of"
+inverse_name = "resolved_by"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "closure"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "deferred"
+exclusive_meaning = "Deferred: closure events currently carry supplied resolver and subject Atom IDs without a formal relation."
+
+[[relation_types]]
+direct_name = "solution_for"
+inverse_name = "has_solution"
+declaration_carrier = "atom_carrier"
+source_lifecycles = ["active"]
+target_lifecycles = ["active"]
+owner = "source"
+direct_direction = "source_to_target"
+upstream_endpoint = "target"
+source_classes = ["atom"]
+target_classes = ["atom"]
+cardinality = "one_to_many"
+authority_effect = "closure"
+transitive = false
+symmetric = false
+authority_modes = ["strict", "casual"]
+status = "deferred"
+exclusive_meaning = "Deferred: closure events currently carry supplied subject Atom IDs without a formal relation."

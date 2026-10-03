@@ -1,0 +1,32 @@
+---
+atom_id: "CA-R-1781"
+content_role: "Requirement"
+current_scope_unit: "PROJECT_CONFIGURATION"
+claim_target_scope_unit: "PROJECT_CONFIGURATION"
+local_tier: "Standard"
+global_tier: 11
+status: "Active"
+author: "Anatoly Maslennikov"
+subjects:
+  governs: "Implementation"
+  depends_on:
+    - "Logging Policy"
+version: 1
+updated_at: "2026-09-28 15:12:22 +0400"
+relations: {}
+---
+# Summary
+
+Bound high-frequency INFO logging
+
+## Scope
+
+logging Implementation for high-frequency success, polling, **and** progress events under production Logging Policies.
+
+## Claim
+
+logging Implementation **must** bound high-frequency success, polling, **and** progress events through aggregation, sampling, **or** emission as `DEBUG` **where** appropriate rather than creating unbounded `INFO` noise.
+
+## Details
+
+the alternatives bound repeated normal-event volume; the severity taxonomy separately classifies material operational milestones.

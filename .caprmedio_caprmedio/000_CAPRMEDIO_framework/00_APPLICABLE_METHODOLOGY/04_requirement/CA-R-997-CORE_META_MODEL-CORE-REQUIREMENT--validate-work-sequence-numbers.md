@@ -1,0 +1,25 @@
+---
+subjects:
+  governs:
+    continuant:
+      - Work Sequence Number
+  depends_on:
+    occurrent:
+      - Work Sequence Validation
+atom_id: CA-R-997
+cce_version: cce_1
+cce_form: obligation
+version: 8
+updated_at: 2026-09-06 01:45:12 +0400
+relations:
+  child_of:
+    - CA-R-991
+    - CA-R-992
+    - CA-R-994
+    - CA-R-995
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers.md
+---
+# Validate Work Sequence Numbers
+
+**every** Work Sequence Number **must** be a unique positive decimal ordinal among the direct Epic **and** Task members of one local Plan container.

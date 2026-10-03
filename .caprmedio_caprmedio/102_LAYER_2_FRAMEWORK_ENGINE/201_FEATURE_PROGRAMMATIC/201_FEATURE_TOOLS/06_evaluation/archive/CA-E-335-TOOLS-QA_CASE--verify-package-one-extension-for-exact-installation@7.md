@@ -1,0 +1,35 @@
+---
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  governs: "extension-packaging"
+  depends_on: []
+version: 7
+updated_at: "2026-09-16 23:48:40 +0000"
+relations:
+  evaluation_for:
+    - CA-M-217
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Verify package one extension for exact installation
+
+## Claim checked
+
+CA-M-217 produces a reproducible exactly versioned Extension package whose manifest exactly accounts for its package contents.
+
+## Applicable when
+
+Apply whenever Extension packaging, manifest, versioning, or package-content derivation changes.
+
+## Test case
+
+Package the same sealed Extension candidate twice, compare manifests and package digests, then compare each package inventory with its manifest without performing an installed-state operation.
+
+## Acceptance criteria
+
+Both builds have identical identity, exact version, manifest, and package digest; each package inventory matches its manifest exactly. Installation, uninstallation, update, downgrade, and installed-state verification are delegated to CA-M-252.
+
+## Failure disposition
+
+Reject the package and preserve candidate frontier, both builds, manifests, digests, package inventories, manifest comparisons, and delegation boundary.

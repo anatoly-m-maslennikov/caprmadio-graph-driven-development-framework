@@ -1,0 +1,4 @@
+interface:
+  display_name: "CA Project Settings"
+  short_description: "Regenerate CAPRMEDIO settings outputs from RMED"
+  default_prompt: "Use $ca-project-settings to regenerate the current Project Settings and Map Projections from active RMED authority."

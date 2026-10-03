@@ -1,0 +1,135 @@
+bindings:
+  artifact_timestamps:
+    timezone:
+      - CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone@3,2026-08-18 20:19:17
+  artifacts:
+    creation_strictness:
+      - CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate@3,2026-08-18 20:19:17
+    default_types:
+      analysis:
+        - CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53
+      evaluation:
+        - CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53
+      requirement:
+        - CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53
+    enabled_types:
+      - CAPRMEDIO-GOV-REQU-313--govern-catalog-map-and-hub-projections@5,2026-08-20 02:38:43
+      - CAPRMEDIO-GOV-REQU-322--register-implementation-record-projection@2,2026-08-18 20:19:17
+      - CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30
+      - CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-747--register-external-and-relational-atom-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-750--register-rationale-analysis-type@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-751--register-delivery-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-752--register-ops-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-753--register-plan-types@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53
+      - CAPRMEDIO-GOV-REQU-781--register-goal-requirement-type@1,2026-08-20 02:38:43
+      - CAPRMEDIO-GOV-REQU-783--register-project-definition-projection-type@1,2026-08-20 02:38:43
+      - CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53
+      - CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@1,2026-08-20 03:40:53
+      - CAPRMEDIO-R-798-REQUIREMENT-BSEED_GOVERNANCE--register-principle-types-across-rmedo@1,2026-08-20 05:09:11
+    identity:
+      project_prefix:
+        - CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17
+    routing:
+      enabled_governance_loci:
+        - CAPRMEDIO-META-REQU-127--define-three-governance-loci@2,2026-08-18 20:19:17
+  authority:
+    tiers:
+      default:
+        - CAPRMEDIO-R-799-REQUIREMENT-BSEED_GOVERNANCE--encode-rmedo-applicability-tiers@1,2026-08-20 05:09:11
+      ordered:
+        - CAPRMEDIO-META-REQU-155--classify-rmed-atoms-by-applicability-tier@7,2026-08-18 20:19:17
+  authority_modes:
+    default:
+      - CAPRMEDIO-REQU-711--use-casual-authority-below-project@1,2026-08-19 01:02:10
+    governance:
+      - CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10
+    metamodel:
+      - CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10
+    project:
+      - CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10
+    semantics:
+      - CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10
+  git:
+    commit_each_atom_edit:
+      - CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17
+    initialize_if_missing:
+      - CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17
+    required:
+      - CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17
+  governance_surfaces:
+    architecture_view:
+      - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+    project_overview:
+      - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+    relation_map:
+      - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+    requirement_catalog:
+      - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+    scope_hub:
+      - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+  interaction:
+    reporting_mode:
+      - CAPRMEDIO-GOV-REQU-294--interaction-reporting-mode-setting@2,2026-08-18 20:19:17
+  paths:
+    control_root:
+      - CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00
+    journal_root:
+      - CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30
+    runtime_root:
+      - CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00
+  project:
+    key:
+      - CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17
+    name:
+      - CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17
+    obsolete_names:
+      - CAPRMEDIO-GOV-REQU-383--register-obsolete-project-names@3,2026-08-18 20:19:17
+    repository_slug:
+      - CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17
+  schema_version:
+    - CAPRMEDIO-GOV-REQU-626--encode-project-settings-as-a-generated-toml-projection@2,2026-08-18 20:19:17
+generator: 02_FR_ENGN/TOOLS/generate_project_settings.py
+generator_sha256: a25ad0ef1865a65c721ac38e913a8986db9a469ace6d8412c9d8ef86bd57f98f
+schema_version: 1
+source_frontier:
+  - CAPRMEDIO-GOV-REQU-294--interaction-reporting-mode-setting@2,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate@3,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-313--govern-catalog-map-and-hub-projections@5,2026-08-20 02:38:43
+  - CAPRMEDIO-GOV-REQU-322--register-implementation-record-projection@2,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30
+  - CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00
+  - CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone@3,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-383--register-obsolete-project-names@3,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-626--encode-project-settings-as-a-generated-toml-projection@2,2026-08-18 20:19:17
+  - CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-747--register-external-and-relational-atom-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-750--register-rationale-analysis-type@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-751--register-delivery-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-752--register-ops-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-753--register-plan-types@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53
+  - CAPRMEDIO-GOV-REQU-781--register-goal-requirement-type@1,2026-08-20 02:38:43
+  - CAPRMEDIO-GOV-REQU-783--register-project-definition-projection-type@1,2026-08-20 02:38:43
+  - CAPRMEDIO-META-REQU-127--define-three-governance-loci@2,2026-08-18 20:19:17
+  - CAPRMEDIO-META-REQU-155--classify-rmed-atoms-by-applicability-tier@7,2026-08-18 20:19:17
+  - CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53
+  - CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@1,2026-08-20 03:40:53
+  - CAPRMEDIO-R-798-REQUIREMENT-BSEED_GOVERNANCE--register-principle-types-across-rmedo@1,2026-08-20 05:09:11
+  - CAPRMEDIO-R-799-REQUIREMENT-BSEED_GOVERNANCE--encode-rmedo-applicability-tiers@1,2026-08-20 05:09:11
+  - CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17
+  - CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10
+  - CAPRMEDIO-REQU-711--use-casual-authority-below-project@1,2026-08-19 01:02:10
+source_frontier_sha256: 46ff0fe1a14d0bfb28cb457f62b546f886a6a1401f099f5c3af39a55bb0b9405
+updated_at: 2026-08-20 05:09:33

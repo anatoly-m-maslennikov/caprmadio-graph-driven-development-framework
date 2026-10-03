@@ -1,0 +1,108 @@
+{
+  "schema": "caprmedio.ca_p_109.incremental_migration_execution.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-109",
+  "recorded_at": "2026-08-27T20:55:44+04:00",
+  "map": {
+    "schema": "caprmedio.ca_p_108.migration_map.v12",
+    "sha256": "0bc92f7d5220d3f6c8133ea990ad6d286c13ebfb5af837c35728e11c29550238"
+  },
+  "baseline_execution_evidence": {
+    "path": "CA-P-109-migration-execution.projection.json",
+    "sha256": "48056c93fc5d42523d3ef4b912b33e649e60521cd70d5f9eb52582482dcf7726",
+    "operation_count": 4785,
+    "status": "RETAINED_HISTORICAL_EXECUTION_EVIDENCE"
+  },
+  "selection": {
+    "reconciliation_kind": "CA_P_107_REPAIRED_AUTHORITY_SUCCESSOR",
+    "required_atom_ids": [
+      "CA-M-224",
+      "CA-M-225",
+      "CA-E-379",
+      "CA-D-253"
+    ],
+    "target_root": ".caprmedio_framework",
+    "target_layer": "001_CORE_META_MODEL"
+  },
+  "actual_operations": [
+    {
+      "action": "MOVE_BYTE_PRESERVING",
+      "atom_id": "CA-M-224",
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/05_method/CA-M-224-MMODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+      "target_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-MMODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+      "sha256": "660b3694eab865c2875a75525f36987eb10f0653aa28b64f5bd428dd7a1712d9",
+      "bytes": 2444
+    },
+    {
+      "action": "MOVE_BYTE_PRESERVING",
+      "atom_id": "CA-M-225",
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/05_method/CA-M-225-MMODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "target_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-MMODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "sha256": "3091a7a389661a5913aaa41dd1314d8e485d65282a1f834d2ef1e2db5aada554",
+      "bytes": 749
+    },
+    {
+      "action": "MOVE_BYTE_PRESERVING",
+      "atom_id": "CA-E-379",
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/06_evaluation/CA-E-379-MMODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+      "target_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-MMODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+      "sha256": "650972c6abf43048aee7fa1bc515cee1c302616dfb8debbd2d21c3f32269d0b4",
+      "bytes": 1400
+    },
+    {
+      "action": "MOVE_BYTE_PRESERVING",
+      "atom_id": "CA-D-253",
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/07_delivery/CA-D-253-GOVERN-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "target_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-GOVERN-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "sha256": "91636bb69d0e0a8a4f780145295511759dcf5b78bde3c5220906d48547435054",
+      "bytes": 674
+    }
+  ],
+  "transaction": {
+    "mode": "direct_per_file_os_replace",
+    "rollback": "reverse each completed move if a later move or its byte check fails",
+    "result": "PASS",
+    "operation_count": 4,
+    "target_collision_count": 0
+  },
+  "post_validation": {
+    "result": "PASS",
+    "incremental_exact_targets": 4,
+    "incremental_absent_sources": 4,
+    "existing_current_executable_targets": 30,
+    "frozen_exact_targets": 4526,
+    "accepted_currentness_records": 78,
+    "programmatic_current_revisions": 37,
+    "separately_mapped_current_or_archive_successors": 155,
+    "persistent_retained_carriers": 2442,
+    "post_freeze_retained_carriers": 2,
+    "retained_installation_carriers": 2153,
+    "ephemeral_runtime_entries_excluded_from_byte_currentness": 9077,
+    "verified_source_directory_shells": 578,
+    "unexpected_or_unmapped_source_shell_carriers": 0,
+    "installed_extensions_marker": {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/002_INSTALLED_EXTENSIONS/.gitkeep",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "ca_p_107_invalid_evidence": {
+      "path": "CA-P-107-deterministic-compilation-authority.projection.json",
+      "artifact_form": "projection",
+      "authority": "non_authoritative_execution_evidence",
+      "result": "RETAINED_AS_NON_ATOM_EVIDENCE"
+    },
+    "applicable_methodology_output_created": false,
+    "protected_roots": {
+      ".caprmedio_install": "RETAINED_IN_PLACE",
+      ".caprmedio_runtime": "EPHEMERAL_CURRENTNESS_EXCLUDED"
+    }
+  },
+  "idempotence": {
+    "second_application": "ALREADY_APPLIED_NO_WRITE_REQUIRED",
+    "required_source_count": 0,
+    "exact_target_count": 4,
+    "result": "PASS"
+  },
+  "unexpected_or_unmapped_mutations": 0
+}

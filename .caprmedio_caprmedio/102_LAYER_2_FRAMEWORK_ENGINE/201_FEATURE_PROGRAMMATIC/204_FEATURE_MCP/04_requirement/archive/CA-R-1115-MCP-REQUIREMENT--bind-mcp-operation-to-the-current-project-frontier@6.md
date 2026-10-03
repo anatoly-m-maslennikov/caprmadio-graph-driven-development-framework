@@ -1,0 +1,13 @@
+---
+subjects:
+  governs: "framework-engine-mcp"
+  depends_on: []
+version: 6
+updated_at: "2026-09-16 23:48:40 +0000"
+llm_session_ids:
+  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Bind MCP operation to the current project frontier
+
+Every MCP service instance and invocation must bind to exactly one resolved CAPRMEDIO project root, selected installed Tool release, current project-graph frontier, and generated MCP registry revision. Discovery and results must expose sufficient source and revision provenance to diagnose currentness; cross-project path escape, unresolved project identity, and invocation through a stale registry must fail explicitly.

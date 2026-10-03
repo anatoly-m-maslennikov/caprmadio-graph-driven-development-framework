@@ -1,0 +1,22 @@
+---
+atom_id: CAPRMEDIO-META-REQU-627
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs:
+    continuant:
+      - lifecycle-traceability
+version: 14
+updated_at: 2026-09-06 01:45:12 +0400
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  child_of:
+    - CA-R-1052
+    - CAPRMEDIO-REQU-007-CORE-REQUIREMENT--full-minimal-traceability
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-627-CORE_META_MODEL-REQUIREMENT--bind-every-project-scope-unit-graph-value-to-exact-sources.md
+---
+# Bind every Project Scope Unit Graph value to exact sources
+
+**every** value emitted into a Project Scope Unit Graph Projection **must** be computed from **and** bind to the exact Project Settings Artifact revision **and** digest, exact applicable authoritative source Artifact revisions **and** digests, **and** applicable Work Journal records. generation fails **when** a required source is missing, malformed, unresolved, ambiguous, stale, **or** contradictory.

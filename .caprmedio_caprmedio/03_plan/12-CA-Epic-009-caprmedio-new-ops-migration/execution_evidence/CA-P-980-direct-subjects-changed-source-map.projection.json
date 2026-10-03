@@ -1,0 +1,762 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-980",
+  "stage": "direct_subjects_partial",
+  "task_status": "Active",
+  "generated_at": "2026-09-13T02:05:21+04:00",
+  "baseline_git_commit": "2f3708e01d55adbd1cbed6108eca54bdeaab4dcb",
+  "source_state": "Current working tree derived from the immutable P976 freeze plus P977/P978/P979 maps; not HEAD.",
+  "admission_source": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+  "admission_frontier_sha256": "af8cbb03622f61b9367ca2e4a487e12af32b8261b1d5f692854f5ae4612b4373",
+  "input_frontier_count": 1559,
+  "input_frontier_digest": "096ffc924455670297b3b37b6e37734dc6049ac83c711c112684cb15303eb69f",
+  "preceding_task_change_maps": [
+    {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+      "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+    },
+    {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+      "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+    },
+    {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+      "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+    }
+  ],
+  "operator_decision": "Approved direct subjects.governs scalar and subjects.depends_on collection of canonical Entity/Action/Process target references, without intermediate Subject/Entity or Subject/Reference property or repeated target-kind field; exact approval: yes. continue.",
+  "changes": [
+    {
+      "identity": "CA-R-1014",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1014-CORE_META_MODEL-CORE-REQUIREMENT--resolve-atom-scope-contextually.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1014-CORE_META_MODEL-CORE-REQUIREMENT--resolve-atom-scope-contextually.md",
+      "before_version": 11,
+      "version": 12,
+      "before_sha256": "01e62f4f0afe0d2bb577c0db267790a61e33c67919e9e87e09e58e053fbb859b",
+      "sha256": "99792feccbded57dbf7b27d34908fd2f41f62a6f937781c8e764e770c5ba773a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1014-CORE_META_MODEL-CORE-REQUIREMENT--resolve-atom-scope-contextually@11.md",
+      "archive_sha256": "01e62f4f0afe0d2bb577c0db267790a61e33c67919e9e87e09e58e053fbb859b",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Use the direct Atom Governed Subject in Scope; remove proven dangling child_of R1013, retaining R919.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1194",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "fa55579a50c59c81536f961309a7da0a858dba9558fb07e96f52b6d01c114cfa",
+      "sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path@6.md",
+      "archive_sha256": "fa55579a50c59c81536f961309a7da0a858dba9558fb07e96f52b6d01c114cfa",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "previous_result_event": "73786013-7d9b-4994-8f9e-936505fe4bbb",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-09-part-1.ndjson",
+      "previous_result_line": 64
+    },
+    {
+      "identity": "CA-R-1198",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "33e55aaebfe8f2950c84f1e866aa76b8d40bd31d305ced0a39f5b8ba089a7dd0",
+      "sha256": "7d85f89bb0a621b185822937c44d069c3d38fac04a4273564fa7df92bffadd24",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects@6.md",
+      "archive_sha256": "33e55aaebfe8f2950c84f1e866aa76b8d40bd31d305ced0a39f5b8ba089a7dd0",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1199",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1199-CORE_META_MODEL-CORE-REQUIREMENT--define-governs-subject-relation-kind.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1199-CORE_META_MODEL-CORE-REQUIREMENT--define-governs-subject-relation-kind.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "b9c2960b9b18e72aa637820ebabcb602d55780ef20413422e46a660f978b56b5",
+      "sha256": "61a984d41b2d26c394d90aab712bf4baa0d632635ab2d2cea866bd02b448ca60",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1199-CORE_META_MODEL-CORE-REQUIREMENT--define-governs-subject-relation-kind@5.md",
+      "archive_sha256": "b9c2960b9b18e72aa637820ebabcb602d55780ef20413422e46a660f978b56b5",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1200",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1200-CORE_META_MODEL-CORE-REQUIREMENT--define-depends-on-subject-relation-kind.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1200-CORE_META_MODEL-CORE-REQUIREMENT--define-depends-on-subject-relation-kind.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "ba33eedfe5b35aa91c40169ac8d14ceb9605010948a074c7d7d35a5fd4bbe7fb",
+      "sha256": "5c8a304bd5e91cd2f85f0320689f34b38c40d40ce645d74ebc5b3bb0f16c07b5",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1200-CORE_META_MODEL-CORE-REQUIREMENT--define-depends-on-subject-relation-kind@6.md",
+      "archive_sha256": "ba33eedfe5b35aa91c40169ac8d14ceb9605010948a074c7d7d35a5fd4bbe7fb",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1201",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-CORE_META_MODEL-CORE-REQUIREMENT--require-one-governed-subject-on-every-atom.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-CORE_META_MODEL-CORE-REQUIREMENT--require-one-governed-subject-on-every-atom.md",
+      "before_version": 7,
+      "version": 8,
+      "before_sha256": "7be4249702673c32e0a2b49fda77b7d15fb30a6ed032841134f29af13e617d47",
+      "sha256": "da4ea725da93719e82c19a607bc1768385ad1fdb5c103c2538391e23328ef81d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1201-CORE_META_MODEL-CORE-REQUIREMENT--require-one-governed-subject-on-every-atom@7.md",
+      "archive_sha256": "7be4249702673c32e0a2b49fda77b7d15fb30a6ed032841134f29af13e617d47",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1202",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1202-CORE_META_MODEL-CORE-REQUIREMENT--require-one-entity-reference-on-every-subject.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1202-CORE_META_MODEL-CORE-REQUIREMENT--resolve-every-direct-subject-target-once.md",
+      "before_version": 7,
+      "version": 8,
+      "before_sha256": "94402156ecbc6953a6ddb03bd2eafe782ac7c46b242c1d958e6e20bbe38fb3e0",
+      "sha256": "59d9a2f0307e5a7de976625907135ff7cefdd52f317f2b9c2cdb712dc202c6e9",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1202-CORE_META_MODEL-CORE-REQUIREMENT--require-one-entity-reference-on-every-subject@7.md",
+      "archive_sha256": "94402156ecbc6953a6ddb03bd2eafe782ac7c46b242c1d958e6e20bbe38fb3e0",
+      "classification": "same_identity_move_update",
+      "status": "Active",
+      "rationale": "Preserve one-target resolution integrity on direct Subjects values; eliminate Subject/Entity locus without a replacement wrapper.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1203",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-entity-boundaries.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-subject-boundaries.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "bba96d5eecfb71e05dafb512c289e2fc349288df2d9db7123cfac376ec7bd46d",
+      "sha256": "728578aed28fa52ed7d866203c4374f7313ab2e6e37113ad09a1eccc54a5198f",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-entity-boundaries@5.md",
+      "archive_sha256": "bba96d5eecfb71e05dafb512c289e2fc349288df2d9db7123cfac376ec7bd46d",
+      "classification": "same_identity_move_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1248",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "0444c27630ac6bd831e9ff5ebdb58af41d0459b2f85570b3464879d07f289192",
+      "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity@5.md",
+      "archive_sha256": "0444c27630ac6bd831e9ff5ebdb58af41d0459b2f85570b3464879d07f289192",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Exclude only Action and Process identities from Entity; preserve Actor and Carrier classifications.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1275",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-as-a-dependent-entity.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "283cdd6b8d5dc3d57ccca84860d537fed3cec85956919b54759a633e7c457f1f",
+      "sha256": "35999d6bf00371ef5be73807943c80cca7a5cce8b13f04485b71b945d700c05f",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-as-a-dependent-entity@6.md",
+      "archive_sha256": "283cdd6b8d5dc3d57ccca84860d537fed3cec85956919b54759a633e7c457f1f",
+      "classification": "same_identity_move_update",
+      "status": "Active",
+      "rationale": "Define Subject as a referenced canonical target, with no independently identified link object.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1276",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1276-CORE_META_MODEL-CORE-REQUIREMENT--give-every-subject-one-relation-kind.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1276-CORE_META_MODEL-CORE-REQUIREMENT--type-every-direct-subject-reference.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "a4328afd5547c457784e82910d4db5c1621084a8f0b114deecb69f231342488f",
+      "sha256": "682a9fee852c4a5b55cc14b8f5dee1c1003ee4ff0b2f34a46968d1062f31d418",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1276-CORE_META_MODEL-CORE-REQUIREMENT--give-every-subject-one-relation-kind@5.md",
+      "archive_sha256": "a4328afd5547c457784e82910d4db5c1621084a8f0b114deecb69f231342488f",
+      "classification": "same_identity_move_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1278",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1278-CORE_META_MODEL-GENERAL-REQUIREMENT--allow-zero-or-more-dependency-subjects.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1278-CORE_META_MODEL-GENERAL-REQUIREMENT--allow-zero-or-more-dependency-subjects.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "bf16ba70496cc3d084c0257a8a47553b00a249331693353c290377eb95b970b4",
+      "sha256": "3fbee7dec3cfc2c52182e463aaa280a8cb35891b78ecab14eaeca9298307b3c5",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1278-CORE_META_MODEL-GENERAL-REQUIREMENT--allow-zero-or-more-dependency-subjects@5.md",
+      "archive_sha256": "bf16ba70496cc3d084c0257a8a47553b00a249331693353c290377eb95b970b4",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1279",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "0ee2b732a5ea36ef6e9b44a1f3a2676c09405953a0e62e7ccee72875d63f2d6a",
+      "sha256": "41df6af5cfbf5a1362225ccbc2cd96bcff99cad851fd03ea43f3c55f3d9efd92",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term@6.md",
+      "archive_sha256": "0ee2b732a5ea36ef6e9b44a1f3a2676c09405953a0e62e7ccee72875d63f2d6a",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "previous_result_event": "c87b9fa8-df30-4031-9351-3e69b286890d",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-09-part-1.ndjson",
+      "previous_result_line": 58
+    },
+    {
+      "identity": "CA-R-1280",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1280-CORE_META_MODEL-CORE-REQUIREMENT--reference-every-prerequisite-entity-through-depends-on.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1280-CORE_META_MODEL-CORE-REQUIREMENT--reference-every-prerequisite-subject-through-depends-on.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "8ffdc2790621703a767952797712164ba0ae719a761d675dec53035cbca21bf4",
+      "sha256": "9a65cbf35e896c7e68215ea16a9826d260caa2c1b79c5d996fc677c6bca021c1",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1280-CORE_META_MODEL-CORE-REQUIREMENT--reference-every-prerequisite-entity-through-depends-on@5.md",
+      "archive_sha256": "8ffdc2790621703a767952797712164ba0ae719a761d675dec53035cbca21bf4",
+      "classification": "same_identity_move_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-R-1321",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression.md",
+      "before_version": 4,
+      "version": 5,
+      "before_sha256": "ff6619d0d1596e1f5d3e752d0d2d172666ec698a17d56a1f1545bf0105c9c636",
+      "sha256": "8fa1cd22d539d0af9d53b9d436d8da660f6b34ce4693c3b65a5cf3db7518bcda",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression@4.md",
+      "archive_sha256": "ff6619d0d1596e1f5d3e752d0d2d172666ec698a17d56a1f1545bf0105c9c636",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "previous_result_event": "209f906c-12bd-4f52-9147-2f2b03094080",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-09-part-1.ndjson",
+      "previous_result_line": 61
+    },
+    {
+      "identity": "CA-R-1363",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject.md",
+      "before_version": 4,
+      "version": 5,
+      "before_sha256": "0951d064c60a96033e7dd91bb58ee64fdbb579ade7fef2a86894b4c7a19f15b3",
+      "sha256": "727cb5f72a0b368e0a744c1c626336225cc69b50c9c02faf2f22b994e8ef13d0",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject@4.md",
+      "archive_sha256": "0951d064c60a96033e7dd91bb58ee64fdbb579ade7fef2a86894b4c7a19f15b3",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Resolve direct GOVERNS target; retain existing R1195 temporal parent for the separately assigned P984 retirement.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-M-114",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "before_version": 12,
+      "version": 13,
+      "before_sha256": "a1849a544784a234a0171540465ef8421ea617235cc1f6a46de31b0a5b0f453c",
+      "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms@12.md",
+      "archive_sha256": "a1849a544784a234a0171540465ef8421ea617235cc1f6a46de31b0a5b0f453c",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-M-125",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "before_version": 13,
+      "version": 14,
+      "before_sha256": "79583eb11c4cc26601438fa979df8bea7d38563df43f3de33fd8a685a682857f",
+      "sha256": "0c3ac6e4f17304c7e0f2d84c57c14888e24019948291e1b0ff0c22740b2e015d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim@13.md",
+      "archive_sha256": "79583eb11c4cc26601438fa979df8bea7d38563df43f3de33fd8a685a682857f",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "previous_result_event": "conformance-evaluation-subjects-202609112254390400-002",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-11-part-6.ndjson",
+      "previous_result_line": 2
+    },
+    {
+      "identity": "CA-M-228",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "b31a50313532601f8a58e90fc9ca93e903a0d3e781ce8285d73be3f4d6811d7a",
+      "sha256": "256ebf747183404456fa747fb519d00737a83cb64483671da327cfb8fcf227cb",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification@6.md",
+      "archive_sha256": "b31a50313532601f8a58e90fc9ca93e903a0d3e781ce8285d73be3f4d6811d7a",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "previous_result_event": "1f67479dcc1426aa69d9d500c775d2a9560e01a0826adb4ffb39f73b02d288b7",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-5.ndjson",
+      "previous_result_line": 11
+    },
+    {
+      "identity": "CA-M-232",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-subject-projection-from-current-atom-subjects.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-subject-projection-from-current-atom-subjects.md",
+      "before_version": 5,
+      "version": 6,
+      "before_sha256": "b2f761888cfc52ad85b912cc0b5355a0660d0bfa4f2107cdfca131a80cbceeb4",
+      "sha256": "11537c4c616587f5ae9dee7908eeb38a34e0aa1a0585a438f1926a2bba9f90db",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-subject-projection-from-current-atom-subjects@5.md",
+      "archive_sha256": "b2f761888cfc52ad85b912cc0b5355a0660d0bfa4f2107cdfca131a80cbceeb4",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-E-240",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "before_version": 19,
+      "version": 20,
+      "before_sha256": "77b6a971b4dc9b9051cf6a83c21d83f4657449a5355043e2581657a185995ae4",
+      "sha256": "f3430c8fa211d9d669b07fb0807e2a7495ebf39a6f2e706ff46c43bfd16d7f58",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope@19.md",
+      "archive_sha256": "77b6a971b4dc9b9051cf6a83c21d83f4657449a5355043e2581657a185995ae4",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "predecessor_recovery": {
+        "required": true,
+        "basis": "Exact P976 frozen source bytes remain in the newly created archive; no exact prior-result event was found. Recovery will record current observation time with original author/time/intent unknown."
+      }
+    },
+    {
+      "identity": "CA-E-246",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+      "before_version": 11,
+      "version": 12,
+      "before_sha256": "1fc67e64de02c4254dcd6a8b4403545eb27803f1a9eda865885b39b3c60252fb",
+      "sha256": "85761441fcaf17158a743472c5576a7548f03df5daae25ee2f3f427981ad9464",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects@11.md",
+      "archive_sha256": "1fc67e64de02c4254dcd6a8b4403545eb27803f1a9eda865885b39b3c60252fb",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "previous_result_event": "conformance-evaluation-subjects-202609112254390400-005",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-11-part-6.ndjson",
+      "previous_result_line": 5
+    },
+    {
+      "identity": "CA-E-444",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "before_version": 1,
+      "version": 2,
+      "before_sha256": "6e1b554451e6901b9672ba4b1837db0b9f81715c089cd6d2bfa4cb58bfc7ab6c",
+      "sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning@1.md",
+      "archive_sha256": "6e1b554451e6901b9672ba4b1837db0b9f81715c089cd6d2bfa4cb58bfc7ab6c",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Reconcile the selected direct Subjects authority with the approved canonical target model while preserving its distinct Claim and identity.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "previous_result_event": "cd59304a-c73b-4a4b-97c3-8b10e2c55754",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-09-part-1.ndjson",
+      "previous_result_line": 74
+    },
+    {
+      "identity": "CA-D-269",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "before_version": 6,
+      "version": 7,
+      "before_sha256": "bb2c608c3a765f9ffba074e1e8de941708222cc361090b3fae4ad92c09c53685",
+      "sha256": "ab01104d1a8827664d3c2ba98e4ea7ac9f3d2f1a3fae197f03dcda56586ff319",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter@6.md",
+      "archive_sha256": "bb2c608c3a765f9ffba074e1e8de941708222cc361090b3fae4ad92c09c53685",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Set canonical flat shape for new or migrated Carriers; allow pre-existing unmigrated temporal representation only through its assigned migration deadline.",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "D",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "previous_result_event": "0aee51055e748ef06dec9cf3ae620d578945d997aec8eac7bf3a6110d44483f2",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "previous_result_line": 92
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-980",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-P-980-TASK--define-typed-operation-relations.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-P-980-TASK--define-typed-operation-relations.md",
+      "before_version": 1,
+      "version": 2,
+      "before_sha256": "c02306fb2f895a2f5adfecee4156ea19b591b4cc83c64064b2bdfa70667f0c97",
+      "sha256": "c8ab1601c9f5531762c0356615c285cbb46b0e3483c317eba27d758a0d9b59a7",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/05-CA-P-980-TASK--define-typed-operation-relations@1.md",
+      "archive_sha256": "c02306fb2f895a2f5adfecee4156ea19b591b4cc83c64064b2bdfa70667f0c97",
+      "classification": "same_identity_update",
+      "status": "Active",
+      "rationale": "Clarify explicit Process control flow and the approved direct Subjects model; preserve Task identity, dependency and administration fields; remain Active.",
+      "previous_result_event": "3a2a5050-2ab3-4444-aabf-65ae3241e8de",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-12-part-13.ndjson",
+      "previous_result_line": 5
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-partial-report.md",
+      "version": 1,
+      "sha256": "889d9115c7754c8ae38249cd30857b0c52c832a58478620179525bf7626acc6b",
+      "classification": "non_authoritative_partial_execution_evidence"
+    }
+  ],
+  "validation": {
+    "modified_active_sources": 24,
+    "unselected_active_sources_preserved": 1535,
+    "active_source_count_after": 1559,
+    "core_source_count": 677,
+    "excluded_drafts_preserved": 53,
+    "preexisting_archives_preserved": 8321,
+    "new_exact_archives": 25,
+    "same_identity_carrier_moves": 5,
+    "yaml_valid": true,
+    "canonical_relation_targets_resolve": true,
+    "unresolved_relations": [],
+    "one_governed_target_per_selected_atom": true,
+    "unselected_source_bytes_preserved": true,
+    "prior_evidence_unchanged": true,
+    "git_index_unchanged": true,
+    "staged_name_digest_unchanged": true,
+    "journal_prefix_unchanged": true,
+    "other_journals_unchanged": true,
+    "task_status": "Active",
+    "task_definition_of_done_falsifier": true,
+    "full_graph_relation_schema_validated": false,
+    "semantic_fixtures": [
+      {
+        "name": "Entity direct target",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "name": "Action direct target",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "name": "Process direct target",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "name": "Qualified Entity target",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "name": "Missing GOVERNS",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Multiple GOVERNS values",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Unresolved target",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Ambiguous target",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Entity and Action share one identity",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Term substituted for target",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Execution substituted for definition",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Intermediate Entity wrapper",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Intermediate Reference wrapper",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Repeated target kind",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Duplicate DEPENDS_ON value",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Scalar DEPENDS_ON value",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Legacy carrier without migration compatibility",
+        "expected": "reject",
+        "passed": true
+      },
+      {
+        "name": "Legacy carrier with migration compatibility",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "name": "Flat and legacy direct facts are identical",
+        "expected": "equal",
+        "passed": true
+      },
+      {
+        "name": "Dependency list order never supplies Process flow",
+        "expected": "equal without execution order",
+        "passed": true
+      },
+      {
+        "name": "Different Atoms reuse one canonical Action identity",
+        "expected": "same identity",
+        "passed": true
+      }
+    ],
+    "manual_review": [
+      "Single Claim per Atom at the defined direct-reference or target boundary",
+      "Terms remain words or phrases",
+      "Actor and Carrier remain Entities",
+      "Task prerequisite gate remains distinct from Subject DEPENDS_ON",
+      "No Scope Unit dependency graph introduced"
+    ],
+    "limitations": [
+      "Graph owner and Process composition/control-flow relation schema unresolved",
+      "No reusable product validator or runtime/tool conformance claimed",
+      "Temporal authority retirement and bulk carrier migration deferred"
+    ],
+    "fixture_harness": {
+      "path": "/private/tmp/ca-p-980.vIhFpY/validate.rb",
+      "sha256": "c0c5b6e273b3a269bc4182a0340b82ca3bc235848a3b0b7158a1085b1fb24a31",
+      "authority": "Non-authoritative semantic fixtures, not framework implementation conformance"
+    },
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "staged_name_sha256": "6081d5b0e307021aae971610cd7910e5ad854381455924872498963846c337a7",
+    "prior_archive_digest": "a9381f7299ddd9205b4df5e8982462416084e66bc2725c86a1333f1232ad70a2",
+    "prior_journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-13-part-1.ndjson",
+    "prior_journal_byte_count": 77228,
+    "prior_journal_sha256": "19301bcdcf6a0ed1c0d270a6386692b5a624467a60ad9773984d47c8257ff643",
+    "other_journal_digest": "36dc0d3f82b2273b1828927a06efef811fd91650f2541cf9c365fe9d82f96d16",
+    "git_materialization": "Pending CA-D-335; no stage, unstage, commit, push or reset."
+  },
+  "remaining_issues": [
+    {
+      "issue": "Sole graph-kind owner and complete graph-qualified metadata for direct GOVERNS/DEPENDS_ON",
+      "status": "Unresolved below 99%; no new owner graph kind admitted",
+      "recommendation": "Atom Subjects Graph, with Atom source nodes and canonical Entity/Action/Process targets retained by reference"
+    },
+    {
+      "issue": "Process composition and explicit control-flow relation schema",
+      "status": "Owner graph kind, exact names, endpoint domains, direction, cardinalities, contributions and full flow/cycle fixtures unresolved"
+    },
+    {
+      "issue": "R1363 retains existing child_of R1195 temporal-authority dependency",
+      "status": "Explicitly deferred to CA-P-984"
+    }
+  ],
+  "journal": {
+    "schema_version": 3,
+    "action_id": "execute-ca-p-980-direct-subjects-partial",
+    "expected_completed_event_count": 52,
+    "expected_recovered_event_count": 16,
+    "existing_exact_sealed_predecessor_count": 9,
+    "map_digest_binding": "The canonical Journal file-change event binds this map digest, avoiding self-reference."
+  },
+  "deferred_tasks": [
+    "CA-P-981",
+    "CA-P-982",
+    "CA-P-983",
+    "CA-P-984",
+    "CA-P-992"
+  ]
+}

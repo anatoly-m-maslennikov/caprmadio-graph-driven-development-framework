@@ -1,0 +1,120 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "06",
+  "frozen_plan": "CA-P-957-batch-06-planned-source-delta.json",
+  "frozen_plan_sha256": "15af5afda24b4bf3d7e0f62f047966cbbb61ee5687abb942e6b14725847b3f0e",
+  "existing": [
+    {
+      "atom_id": "CA-R-1000",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope.md",
+      "before_version": 8,
+      "before_sha256": "fcb91228aa5c400f227921dc85f85658b198b2aa7823581ec6509a6772836231",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope@8.md",
+      "archive_sha256": "fcb91228aa5c400f227921dc85f85658b198b2aa7823581ec6509a6772836231",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope.md",
+      "after_version": 9,
+      "after_sha256": "8684741a5cf2beaab33d8bac4a15cf611b118592e6e8c464a99bb486c8624759",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Claim/Scope"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1212",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-CORE_META_MODEL-CORE-REQUIREMENT--define-definition-of-done-for-a-task.md",
+      "before_version": 7,
+      "before_sha256": "b2c3d1c76696a31efe69b757062e51d5c34e8dcb8d59ea71b49fbb67cfc16227",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1212-CORE_META_MODEL-CORE-REQUIREMENT--define-definition-of-done-for-a-task@7.md",
+      "archive_sha256": "b2c3d1c76696a31efe69b757062e51d5c34e8dcb8d59ea71b49fbb67cfc16227",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-CORE_META_MODEL-CORE-REQUIREMENT--define-definition-of-done-for-a-task.md",
+      "after_version": 8,
+      "after_sha256": "29d256cfdc505f789a59e65c7ebdd7bf0bbeea80700296ddd0f82e5bf371ee46",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Definition of Done"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1214",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-CORE_META_MODEL-CORE-REQUIREMENT--define-task-details.md",
+      "before_version": 7,
+      "before_sha256": "1e2130cbad696751d2beb7184f26d59d8cfcb4a447ea70a82a0a7d80015682f0",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1214-CORE_META_MODEL-CORE-REQUIREMENT--define-task-details@7.md",
+      "archive_sha256": "1e2130cbad696751d2beb7184f26d59d8cfcb4a447ea70a82a0a7d80015682f0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-CORE_META_MODEL-CORE-REQUIREMENT--define-task-details.md",
+      "after_version": 8,
+      "after_sha256": "1a31fcfd05b3412714a02fa78392a47767f1abd40859963ee543543f9eec8ba9",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Details"
+      ]
+    },
+    {
+      "atom_id": "CA-M-124",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms.md",
+      "before_version": 14,
+      "before_sha256": "0e165f69ff6dac0d13b5778a6f37521c9e04c53205f481d74e91dfbba0814c9b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms@14.md",
+      "archive_sha256": "0e165f69ff6dac0d13b5778a6f37521c9e04c53205f481d74e91dfbba0814c9b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-METHOD--author-task-atoms.md",
+      "after_version": 15,
+      "after_sha256": "b22baddb141c51cf4884b01e353ba8aaf43ec8e622eed4e0be6f85061ebebd4d",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Task Atom Authoring"
+      ]
+    },
+    {
+      "atom_id": "CA-E-245",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms.md",
+      "before_version": 14,
+      "before_sha256": "47393cf21680ddbf2a7e98ea40539a2705187b1afe5643a477b7900b0f26a5b3",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms@14.md",
+      "archive_sha256": "47393cf21680ddbf2a7e98ea40539a2705187b1afe5643a477b7900b0f26a5b3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms.md",
+      "after_version": 15,
+      "after_sha256": "be89d573818326d837e52419a8aaf7a18aeb0a0f7df3ae0e63d02da9d497859d",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Task Atom Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-D-271",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+      "before_version": 7,
+      "before_sha256": "2e815c02566b2089b355b89f8aaa351aebc39395e764e55b50becdc4378f647b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections@7.md",
+      "archive_sha256": "2e815c02566b2089b355b89f8aaa351aebc39395e764e55b50becdc4378f647b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+      "after_version": 8,
+      "after_sha256": "15b7408a423b4b6f132fca7a377a41c15179481febe92d1a4db8f200d8b9e695",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Markdown Atom Carrier"
+      ]
+    },
+    {
+      "atom_id": "CA-R-955",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+      "before_version": 7,
+      "before_sha256": "cafb4aa951e97e6d6db980e02cc7792a80bfa731c0f9ce02a9b1ce0d4727a1e3",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result@7.md",
+      "archive_sha256": "cafb4aa951e97e6d6db980e02cc7792a80bfa731c0f9ce02a9b1ce0d4727a1e3",
+      "after_path": null,
+      "after_version": null,
+      "after_sha256": null,
+      "after_tier": null
+    }
+  ],
+  "additions": [],
+  "journal_status": "Not recorded under temporary Operator execution override; no Journal conformance claim."
+}

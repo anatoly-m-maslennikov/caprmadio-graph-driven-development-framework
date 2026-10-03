@@ -1,0 +1,15 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "02",
+  "checkpoint": "Frozen unchanged-only semantic dispositions; no source-mutation GO required.",
+  "existing": [],
+  "additions": [],
+  "counts": {
+    "reviewed": 72,
+    "revisions": 0,
+    "unchanged": 72
+  },
+  "source_scope": "Unchanged Core subset of the remaining620 original Active CORE_META_MODEL RMED.",
+  "dispositions": "CA-P-957-batch-02-dispositions.json"
+}

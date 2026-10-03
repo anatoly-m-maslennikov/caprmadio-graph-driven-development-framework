@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "source_roots": [
+    "/__fixture__/good",
+    "/__fixture__/good"
+  ],
+  "allowed_read_roots": [
+    "/__fixture__"
+  ],
+  "methodology": {
+    "kind": "sources",
+    "roots": [
+      "/__fixture__/context/authority"
+    ]
+  },
+  "selection": {
+    "atoms": [
+      {
+        "carrier_path": "/__fixture__/good/CA-R-9001-UNIT_A-REQUIREMENT--carry-a-greeting.md"
+      }
+    ]
+  },
+  "limits": {
+    "max_candidates": 100,
+    "max_file_bytes": 262144,
+    "max_total_read_bytes": 16777216,
+    "timeout_seconds": 30,
+    "max_findings": 100
+  }
+}

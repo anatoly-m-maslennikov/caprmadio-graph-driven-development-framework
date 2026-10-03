@@ -1,0 +1,291 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "19",
+  "frozen_plan": "CA-P-957-batch-19-planned-source-delta.json",
+  "frozen_plan_sha256": "0fb091b5230dd2e1ee5c5cee2b4095926718ff82cbf971f21db315308b57e2f6",
+  "existing": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-290",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset.md",
+      "before_version": 9,
+      "before_sha256": "8da206479df474b0bc0794c77393263f257305b1f1a642c8d170dea5f93d8459",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset@9.md",
+      "archive_sha256": "8da206479df474b0bc0794c77393263f257305b1f1a642c8d170dea5f93d8459",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset.md",
+      "after_version": 10,
+      "after_sha256": "2a0fa8389ba8fe7f6f6e5ebe972c5a9d421d873e841385912e7c2127ca31aaaf",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "external-boundary"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-302",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "before_version": 14,
+      "before_sha256": "f30835c50b4dc0d330f13af8b14f0960e7f09b7ce9dee03ce9104cfaf8237e42",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion@14.md",
+      "archive_sha256": "f30835c50b4dc0d330f13af8b14f0960e7f09b7ce9dee03ce9104cfaf8237e42",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "after_version": 15,
+      "after_sha256": "01b803174efb81b80c06dad49f3813d8fb9403dcd1ef5c1e067a1c944fd86465",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "lifecycle"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-305",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation.md",
+      "before_version": 12,
+      "before_sha256": "83ba9a17d37d8bfc9e35588aaa6e832625ad94290908da9d928230d06c61f29c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation@12.md",
+      "archive_sha256": "83ba9a17d37d8bfc9e35588aaa6e832625ad94290908da9d928230d06c61f29c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-305-CORE_META_MODEL-REQUIREMENT--configure-optional-projection-activation.md",
+      "after_version": 13,
+      "after_sha256": "334e832405696087e075d25f718217f4d0d80a762bff7c793c5ac5483659b4fe",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Optional Projection/Activation"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-310",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "before_version": 10,
+      "before_sha256": "4d953bd71f999d5b0420c03bb69a6d88bb3f6a9786830ae3f67b6498bb593ef6",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-REQUIREMENT--classify-lineage-impact-with-four-dispositions@10.md",
+      "archive_sha256": "4d953bd71f999d5b0420c03bb69a6d88bb3f6a9786830ae3f67b6498bb593ef6",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+      "after_version": 11,
+      "after_sha256": "68f0607787e9ab0b2fe75efddd028a28a46b85924de3ef3cb6bd06895ac5e6c3",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-312",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+      "before_version": 10,
+      "before_sha256": "0c313fd0d17a98eed9378feb6acc58bc45960349ca0fde48191aefa49b7f9d0b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision@10.md",
+      "archive_sha256": "0c313fd0d17a98eed9378feb6acc58bc45960349ca0fde48191aefa49b7f9d0b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+      "after_version": 11,
+      "after_sha256": "13367c29164f246144ff0f7a9c7d78f84fa7c39d181efcafdf7bcbd63fe4e3be",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-313",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "before_version": 19,
+      "before_sha256": "c8521b4a8339a1c0561c3ba0e4430650ac657a8cc723a9a92eee4e35ce6aa8e4",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection@19.md",
+      "archive_sha256": "c8521b4a8339a1c0561c3ba0e4430650ac657a8cc723a9a92eee4e35ce6aa8e4",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-GENERAL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection.md",
+      "after_version": 20,
+      "after_sha256": "8d40cf47ab08593d8a59afc95bb77b07d2f873176d8238080ff23b18882cefc8",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Projection/Type"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-339",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events.md",
+      "before_version": 14,
+      "before_sha256": "2acb46f2511533951d81e62d5712d4c07d8efd6d4a2ea54127546a8fb5f6680a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events@14.md",
+      "archive_sha256": "2acb46f2511533951d81e62d5712d4c07d8efd6d4a2ea54127546a8fb5f6680a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-GENERAL-REQUIREMENT--register-type-values-for-work-journal-events.md",
+      "after_version": 15,
+      "after_sha256": "21d744ef03f82059773792d3b30879887eb751b45a0034ae5ba7dcd1c3fd6532",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Work Journal/Event/Type"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-340",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "before_version": 7,
+      "before_sha256": "f5ffdf89a1ecce7fbe4c30d5e553fa1acc900cf97b33e1d42c61cb7fdfe4cd16",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention@7.md",
+      "archive_sha256": "f5ffdf89a1ecce7fbe4c30d5e553fa1acc900cf97b33e1d42c61cb7fdfe4cd16",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention.md",
+      "after_version": 8,
+      "after_sha256": "572e7aeb097fda08d2258798814caf67060e88035eeff0a3e654aa900b48821e",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "provenance"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-367",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-REQUIREMENT--journal-projection-rebuild-events.md",
+      "before_version": 9,
+      "before_sha256": "289f893fc9d4170fb6d063163384e2daaf37f279fbd9e7e6fcb3af824c905dc3",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-REQUIREMENT--journal-projection-rebuild-events@9.md",
+      "archive_sha256": "289f893fc9d4170fb6d063163384e2daaf37f279fbd9e7e6fcb3af824c905dc3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-367-CORE_META_MODEL-GENERAL-REQUIREMENT--journal-projection-rebuild-events.md",
+      "after_version": 10,
+      "after_sha256": "9c1571734bf4eefbf8577d03b15cd4ddb9eb0654a1e0ef1e4002959132577cfb",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Projection Rebuild"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-371",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-REQUIREMENT--define-the-bounded-session-state-envelope.md",
+      "before_version": 10,
+      "before_sha256": "2d78a82494937e29494c6d2fe63651a5a51295af5c7127e3c82223827e809090",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-REQUIREMENT--define-the-bounded-session-state-envelope@10.md",
+      "archive_sha256": "2d78a82494937e29494c6d2fe63651a5a51295af5c7127e3c82223827e809090",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-GENERAL-REQUIREMENT--define-the-bounded-session-state-envelope.md",
+      "after_version": 11,
+      "after_sha256": "877675399c2b4e1176c53d0185b05374761a019fc0693ed50c08067a06432bc2",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Session-State Envelope"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-375",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-REQUIREMENT--configure-necessary-information-confidence-threshold.md",
+      "before_version": 13,
+      "before_sha256": "693df9c54a8f919aed070f7449be8e743552f5d56c96d4499bca8a3d43ae3ecd",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-REQUIREMENT--configure-necessary-information-confidence-threshold@13.md",
+      "archive_sha256": "693df9c54a8f919aed070f7449be8e743552f5d56c96d4499bca8a3d43ae3ecd",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-375-CORE_META_MODEL-GENERAL-REQUIREMENT--configure-necessary-information-confidence-threshold.md",
+      "after_version": 14,
+      "after_sha256": "5fcdffe3170ff72947145191a220c15009ea6476197debca931315588155b957",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Framework Instance Settings/Confidence/Necessary Information Threshold"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-385",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration.md",
+      "before_version": 15,
+      "before_sha256": "d4f32f5caf542d14da3fe898a9d911a6afdfc2c24820a7014dc8d55bf2680b7c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration@15.md",
+      "archive_sha256": "d4f32f5caf542d14da3fe898a9d911a6afdfc2c24820a7014dc8d55bf2680b7c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration.md",
+      "after_version": 16,
+      "after_sha256": "ed142751241a2975782181acf9d6c7fd723f0732428558be70779a60056f72c0",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Artifact Classification Resolution"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CA-R-1038",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis.md",
+      "before_version": 6,
+      "before_sha256": "59d562d162f2dba0e9ab245f7e6b48e5970f914ecb05a7e636f3dd14ede8cf6b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis@6.md",
+      "archive_sha256": "59d562d162f2dba0e9ab245f7e6b48e5970f914ecb05a7e636f3dd14ede8cf6b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1038-CORE_META_MODEL-REQUIREMENT--permit-multiple-child-rows-in-one-lineage-impact-analysis.md",
+      "after_version": 7,
+      "after_sha256": "ef45733ce9d94013e15ad892607ec28602b00527bf1cf0dcfe2768f625a2e3dc",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-322",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "before_version": 14,
+      "before_sha256": "a60728382595991766c9a62f6678bf2bf7f147041e04b377378d0d1369f5f32a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection@14.md",
+      "archive_sha256": "a60728382595991766c9a62f6678bf2bf7f147041e04b377378d0d1369f5f32a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "after_version": 15,
+      "after_sha256": "6320dbe1768ce066d862b603b8dd5920cb4f261521873c9ff9925ab309507ecf",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Projection/Type: Implementation Record"
+      ],
+      "cross_frontier_dependency_repair": false
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "before_version": 10,
+      "before_sha256": "fc3a40c3e4e82fc54da5619e13ddc87fcd9dc1b34788abd0dd25700ad3fe5dee",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists@10.md",
+      "archive_sha256": "fc3a40c3e4e82fc54da5619e13ddc87fcd9dc1b34788abd0dd25700ad3fe5dee",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "after_version": 11,
+      "after_sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "cross_frontier_dependency_repair": true
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "before_version": 14,
+      "before_sha256": "54fb22f88167a2c38008abfcdf2f8c923d6d08a0118883ec8d1b43ad258bb801",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection@14.md",
+      "archive_sha256": "54fb22f88167a2c38008abfcdf2f8c923d6d08a0118883ec8d1b43ad258bb801",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "after_version": 15,
+      "after_sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "cross_frontier_dependency_repair": true
+    }
+  ],
+  "additions": [],
+  "scope_counts": {
+    "new_origin_dispositions": 31,
+    "origin_revisions": 12,
+    "origin_retirements": 0,
+    "unchanged_origins": 19,
+    "core_dependency_only_revisions": 2,
+    "cross_frontier_revisions": 2
+  },
+  "journal_status": "No Journal/Git execution or recording under temporary Operator override; no unlogged conformance claim."
+}

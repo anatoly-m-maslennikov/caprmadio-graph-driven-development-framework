@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "workflow": "CA-O-016",
+  "sources": [
+    {
+      "atom_id": "CA-D-487",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/ACTION_PROMPTS/07_delivery/CA-D-487-ACTION_PROMPTS-DELIVERY--bind-action-prompts-delivery-place.md",
+      "sha256": "c2168a2b445e5dcd9649efced42c7b0cea506139c177330f6d93c8b90d829029"
+    },
+    {
+      "atom_id": "CA-E-389",
+      "version": 9,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-389-PROGRAMMATIC-CORE-EVAL_APPROACH--combine-complementary-software-behavior-evidence.md",
+      "sha256": "7361cc0dc47e277adc2997410a6c962e5d3dc4c5f021203801ba714ab51d4d2d"
+    },
+    {
+      "atom_id": "CA-E-390",
+      "version": 8,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-390-PROGRAMMATIC-CORE-EVAL_APPROACH--compare-deterministic-outputs-with-reviewed-golden-baselines.md",
+      "sha256": "16153d80b8cb83492fbb1e57ba6efcc7c0357aaa0ee911b6d5798ba25eee5503"
+    },
+    {
+      "atom_id": "CA-M-285",
+      "version": 10,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-285-PROGRAMMATIC-CORE-METHOD--select-software-evaluation-techniques-by-failure-mode.md",
+      "sha256": "418defec78c89448bba1c7f4286b5f0192408731b3d9b5253ef8a76d9c877e89"
+    },
+    {
+      "atom_id": "CA-O-016",
+      "version": 9,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-016-CORE_META_MODEL-WORKFLOW--implement-evaluations-before-required-behavior.md",
+      "sha256": "738e6278ed278adfff7c61a2c0b02638879ea8747044a6eb43f6485587077d66"
+    },
+    {
+      "atom_id": "CA-O-017",
+      "version": 4,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-017-CORE_META_MODEL-ACTION--prepare-implementation-work.md",
+      "sha256": "a747b24850eb0f93936e0565c01e63d4341116a37c8729e6c170c3177629ef63"
+    },
+    {
+      "atom_id": "CA-O-018",
+      "version": 3,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-018-CORE_META_MODEL-ACTION--implement-evaluations.md",
+      "sha256": "2d3a06e04270fc94f98d6736f29be045b3dbb9d9557c96b97c622318cad9ca4a"
+    },
+    {
+      "atom_id": "CA-O-019",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-019-CORE_META_MODEL-ACTION--implement-requirements.md",
+      "sha256": "33ecedc825d8b44b189220de9e63b446017020380369096f60c4ea29362a9bf5"
+    },
+    {
+      "atom_id": "CA-O-020",
+      "version": 3,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-020-CORE_META_MODEL-ACTION--run-implementation-evaluations.md",
+      "sha256": "a4216e9724f17f4fc2bb9e249bc7c27af647d7fdff718d14f6ea001dabacb739"
+    },
+    {
+      "atom_id": "CA-O-021",
+      "version": 6,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-021-CORE_META_MODEL-ACTION--repair-nonconforming-implementation.md",
+      "sha256": "c84e17d935a5fb37100cdba3dadc4501f2316f23168beff618f8230a7d59d680"
+    },
+    {
+      "atom_id": "CA-O-024",
+      "version": 9,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-024-CORE_META_MODEL-ACTION--control-implementation-retries.md",
+      "sha256": "414e8cb36f815424084a2f74b662936ddb9224182dafde6f75c2e4ef6e4f22ed"
+    },
+    {
+      "atom_id": "CA-O-089",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-089-CORE_META_MODEL-ACTION--diagnose-implementation-test-failures.md",
+      "sha256": "78e60882f32c2d3fc90539e0b3de6e9c492db98bfe7ea7a6e789ebc7fd52c80c"
+    },
+    {
+      "atom_id": "CA-O-091",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-091-CORE_META_MODEL-STEP--prepare-delegated-implementation-work.md",
+      "sha256": "404ce8840f17be938d0351bf5c370c9b05e0e180d21d3c37b3336b17b53e991c"
+    },
+    {
+      "atom_id": "CA-O-092",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-092-CORE_META_MODEL-STEP--prepare-tests-in-the-implementation-subagent.md",
+      "sha256": "fb5190a16f0ed2301dbfc28849db222e13168271c8719fe8db26267f3fd5fc97"
+    },
+    {
+      "atom_id": "CA-O-093",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-093-CORE_META_MODEL-STEP--implement-requirements-in-the-assigned-subagent.md",
+      "sha256": "79903e5a2d644c19d027a6026e5a5c9c9c9cb4f0839587114805a1c3ca5057c7"
+    },
+    {
+      "atom_id": "CA-O-094",
+      "version": 2,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-094-CORE_META_MODEL-STEP--run-the-selected-implementation-checks.md",
+      "sha256": "2cd58f3b821426b1ebb06ec6e354d4ddaa0e0a251c081e8f321f7703609f6fe0"
+    },
+    {
+      "atom_id": "CA-O-095",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-095-CORE_META_MODEL-STEP--diagnose-failures-in-the-assigned-subagent.md",
+      "sha256": "62edb1cf1cd15b102c7755e14cef38db93a3614f347ca9310f9d7d01cc79b5f7"
+    },
+    {
+      "atom_id": "CA-O-096",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-096-CORE_META_MODEL-STEP--admit-an-implementation-repair-retry.md",
+      "sha256": "cab543fd6228d0009f5cbb2646bb1456ce09865b41891b67a092c9b45bb09465"
+    },
+    {
+      "atom_id": "CA-O-099",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-099-CORE_META_MODEL-STEP--repair-code-and-retain-issue-evidence.md",
+      "sha256": "addbff5dc403b78532bc89a345ad2fcc5b7dacc62c06c49fa212f543235b1eb4"
+    },
+    {
+      "atom_id": "CA-R-1601",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/04_requirement/CA-R-1601-PROMPTS-DEFINES_GOAL_FOR-ACTION_PROMPTS--implement-actions-as-agent-instructions.md",
+      "sha256": "b2255af93e223726197f1999f0abe4c0744f278e7d035dd22fc8f97d4cbba748"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1078",
+  "generated_at": "2026-09-13T03:13:25+04:00",
+  "status": "Done",
+  "source_changes": [],
+  "changes": [
+    {
+      "identity": "CA-P-1078",
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/01-CA-P-1078-TASK--freeze-derived-model-view-authority-boundary@2.md",
+      "version": 2,
+      "sha256": "bf286333236e75a0f6559b7ccd60c4eae0604e725b51a547b03ea9b46072bf26"
+    },
+    {
+      "identity": "CA-P-1078",
+      "action": "MOVE+UPDATE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/01-CA-P-1078-TASK--freeze-derived-model-view-authority-boundary.md",
+      "before_version": 2,
+      "before_sha256": "bf286333236e75a0f6559b7ccd60c4eae0604e725b51a547b03ea9b46072bf26",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/done/01-CA-P-1078-TASK--freeze-derived-model-view-authority-boundary.md",
+      "version": 3,
+      "sha256": "46d293de7142a1b3b56151e536f5ca7185c1f7c18e3799240293f4202f731b64",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/01-CA-P-1078-TASK--freeze-derived-model-view-authority-boundary@2.md"
+    },
+    {
+      "identity": null,
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1078-derived-model-view-authority-inventory.projection.json",
+      "version": 1,
+      "sha256": "d155a84576a56dd37b347e12634a0162b45e2470edb7468c9ba584c2253e70ea"
+    },
+    {
+      "identity": null,
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1078-authority-boundary-report.md",
+      "version": 1,
+      "sha256": "a3b19f53d02b98818d4ab6f7a962b86daf4d301b5b2f7cf2ca154b9e57104bda"
+    }
+  ],
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_change_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      }
+    ],
+    "frontier_count": 1559,
+    "core_count": 677,
+    "excluded_drafts": 53
+  },
+  "validation": {
+    "task_dod_falsifier": false,
+    "selected_source_count": 212,
+    "core_screened_count": 677,
+    "all_source_hashes_unchanged": 1559,
+    "unselected_source_count": 1347,
+    "excluded_drafts_unchanged": 53,
+    "prior_archives_unchanged": 8357,
+    "prior_evidence_unchanged": 14,
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "future_tasks_changed": 0,
+    "new_source_ids": 0
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1078-freeze-derived-model-view-authority-boundary",
+    "append_only": true,
+    "receipt_binding": "Exact sealed events for these changes and this map; no historical timestamps invented."
+  },
+  "next_task": "CA-P-1079",
+  "remaining_future_decisions": "17 findings in the inventory; inventory closure is not future schema closure."
+}

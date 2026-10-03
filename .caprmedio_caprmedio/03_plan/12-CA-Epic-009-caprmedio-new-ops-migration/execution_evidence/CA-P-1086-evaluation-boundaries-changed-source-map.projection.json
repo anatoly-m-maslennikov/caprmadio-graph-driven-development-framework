@@ -1,0 +1,355 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "evaluation_boundaries",
+  "generated_at": "2026-09-13T13:47:36+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_partial_stage",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-changed-source-map.projection.json",
+        "sha256": "db1b7f3527b76a06760f0a2676638c1b62a01d996fe0dcc49c827e96bcfea903"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1563,
+    "frontier_after": 1563,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CA-E-444",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "before_version": 3,
+      "before_sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "version": 4,
+      "sha256": "483c66c4a819d4eca454e76f6b3d727b3e191697f9e55cb65d7bb5174a179c3e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning@3.md",
+      "archive_sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "semantic_delta": "Correct the existing diagnostic Projection target and distinguish diagnostic correctness from the source-meaning/authority/reference outcomes it reports; preserve all fixtures and valid contextual checks without splitting or adding an Evaluation identity.",
+      "primary_claim_preserved": true,
+      "new_identity": false,
+      "governs": "Terminology Projection"
+    },
+    {
+      "identity": "CA-E-382",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "before_version": 12,
+      "before_sha256": "f85892e79d9ee2d5305982066c6b1195310863cb42d09a74f9f3088936796a2c",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "version": 13,
+      "sha256": "b36070637e5fcb2a55b7c3d49f288323031e8a9b7214025e619e0b9058b96de9",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph@12.md",
+      "archive_sha256": "f85892e79d9ee2d5305982066c6b1195310863cb42d09a74f9f3088936796a2c",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "semantic_delta": "Make graph validity and Projection fidelity visible within the existing composite Evaluation, preserve every current criterion and Root/cycle boundary, and prevent an unqualified pass from a faithful Projection of invalid or unresolved source authority.",
+      "primary_claim_preserved": true,
+      "new_identity": false,
+      "governs": "Projection/Type: Terms Graph"
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 4,
+      "before_sha256": "ac9501b86904bc9c9165311a109289327e4fdc411ae5c56c37ce18a84e6c70c0",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "version": 5,
+      "sha256": "e75e5a8ccb6b15193ec6bcfd0089787fbdb8c070feced18d957c6bb5c95dca5b",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@4.md",
+      "archive_sha256": "ac9501b86904bc9c9165311a109289327e4fdc411ae5c56c37ce18a84e6c70c0",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "delta": "Record the latest accepted composite Evaluation boundaries and preserved fixtures while leaving classification and remaining reservations open."
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-evaluation-boundaries-partial-stage.md",
+      "version": 1,
+      "sha256": "1d89295411a0bb9ddf87a4b2d1e765dcf67afe7c71a6d339cf32727f99a54df1",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_transfers": [
+    {
+      "identity": "CA-E-382",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "current_version": 11,
+      "current_sha256": "4d29bf7bad708983cc9d4f5a97852be8064ac526c162e247bc3c02a5cc322f13",
+      "prior_reservation": {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+        "version": 10,
+        "sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-E-444",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "current_version": 3,
+      "current_sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "prior_reservation": {
+        "identity": "CA-E-444",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+        "version": 2,
+        "sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+        "content_mutation_owner": "CA-P-1080",
+        "family": "vocabulary_diagnostics"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    }
+  ],
+  "reservation_dispositions": [
+    {
+      "identity": "CA-E-444",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-E-444",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+        "version": 2,
+        "sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+        "content_mutation_owner": "CA-P-1080",
+        "family": "vocabulary_diagnostics"
+      }
+    },
+    {
+      "identity": "CA-E-382",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+        "version": 10,
+        "sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      }
+    }
+  ],
+  "claim_correspondence": {
+    "CA-E-444": {
+      "change_class": "refinement",
+      "identity": "The same diagnostic assessment retains all tested Term meaning, defining-authority, direct Subject-reference, evidence and uncertainty conditions; the corrected GOVERNS target aligns that existing assessment with R1455/R1325 rather than adding a new independent Claim.",
+      "fixtures": "The complete Test case section is byte-identical.",
+      "criteria": "The first Acceptance criteria paragraph differs only in three qualified result labels; the complete second paragraph is byte-identical. New result wording makes diagnostic correctness and reported source conditions independently visible without deleting or weakening a fixture expectation.",
+      "lineage": "Same ID, Evaluation role/form, Summary/filename and all evaluation_for references; no split, absorption, new identity, or M274 replacement exception."
+    },
+    "CA-E-382": {
+      "change_class": "refinement",
+      "identity": "The same Terms Graph Evaluation retains graph validity, governed-only selection and source-authority checks; the two dimensions and qualified composite result clarify their existing acceptance boundary.",
+      "criteria": "The five rejection bullets, multiple-parent/isolated-Root paragraph, filtered-parent/uncertainty paragraph and operational-Term paragraph remain byte-identical. The defining-authority cardinality and missing/conflicting/uncertain-source reporting clauses move intact in meaning to Graph validity. All remaining selection, traceability and Projection-chain rejection clauses remain.",
+      "lineage": "Same ID, target, direct prerequisites, Evaluation role/form, Summary/filename and evaluation_for references; no additional role Atom or workflow-stage identity."
+    }
+  },
+  "read_only_authority": [
+    {
+      "identity": "CA-R-1455",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "version": 2,
+      "sha256": "fb5458fd7603cf2edf16187d35418f9c9decf03a288e0b52fc1c3155e61315ff",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1325",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+      "version": 3,
+      "sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1335",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "version": 7,
+      "sha256": "08350d693ec2b1966c097c5449e0abc5479f3bd599d80d86bbb0d84e397fc6d3",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1454",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "version": 2,
+      "sha256": "80c57bc3f4c15363ecee6700c72320594a1457fd17d4d251ad385e3396fc27b9",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1339",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1339-CORE_META_MODEL-CORE-REQUIREMENT--define-requirement-content-role.md",
+      "version": 3,
+      "sha256": "d490b2afc358006c1a093bcc590ee69ee83fd95e86010136edeb24ff014f15e3",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1340",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1340-CORE_META_MODEL-CORE-REQUIREMENT--define-method-content-role.md",
+      "version": 5,
+      "sha256": "6e3349aea6cbd05ad0600e2a9ce0e4917b7ef2914e0295e6adbef7e764855fea",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1341",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1341-CORE_META_MODEL-CORE-REQUIREMENT--define-evaluation-content-role.md",
+      "version": 3,
+      "sha256": "47b2a0e84e0a2e73348efceaa0b5ddfef57699dfdc15fc07d8fc80f470665cde",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1344",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1344-CORE_META_MODEL-CORE-REQUIREMENT--define-ops-content-role.md",
+      "version": 5,
+      "sha256": "11cced2e40eb6cab812cdc543c68243448aa28535cd9b2b5139dd8f08280ffdb",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1432",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "version": 1,
+      "sha256": "a482003778ea6770097e431d452b434650c5649e227e871d68b5e54fcae435c2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-274",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "version": 1,
+      "sha256": "19b46d69e939e50c0cea217b20a168b63daa55efb907da8cd8fa6ffec52288dd",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-114",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "version": 13,
+      "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+      "scope_unit": "CORE_META_MODEL"
+    }
+  ],
+  "remaining_reserved_sources": [
+    "CAPRMEDIO-GOV-REQU-313",
+    "CAPRMEDIO-META-REQU-166",
+    "CAPRMEDIO-META-REQU-673",
+    "CA-R-1281",
+    "CA-R-1325",
+    "CA-R-1213",
+    "CA-R-1272",
+    "CA-R-1273",
+    "CA-R-1274",
+    "CA-R-626",
+    "CAPRMEDIO-META-REQU-620",
+    "CAPRMEDIO-META-REQU-627",
+    "CAPRMEDIO-META-REQU-123",
+    "CAPRMEDIO-GOV-REQU-354",
+    "CA-M-114",
+    "CA-M-116",
+    "CA-M-231",
+    "CA-R-1408",
+    "CA-R-1409"
+  ],
+  "remaining": {
+    "task_done": false,
+    "E444_transition": "Existing ordinary Evaluation refined; no forced split or replacement. Diagnostic correctness and reported source conditions remain separately visible.",
+    "terminology_projection_classification": "Existing R1455/R1325 target reused; no dedicated Definition Atom or Projection Type admission established; separate gap remains open.",
+    "M114": "Unchanged here; not final approval of complete M/O classification; broader review remains P985/P986.",
+    "other_tasks_executed": []
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1086-evaluation-boundaries-partial-stage",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations authorized"
+  },
+  "validation": {
+    "existing_source_revisions": 2,
+    "new_source_ids": 0,
+    "unrelated_admitted_sources_unchanged": 1561,
+    "drafts_unchanged": 53,
+    "other_tasks_unchanged": 115,
+    "task_status": "Active",
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "implementation_conformance_claimed": false
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "schema": "caprmedio.migration_frontier.freeze_record.v1",
+  "task_atom_id": "CA-P-102",
+  "recorded_at": "2026-08-26T19:16:56+04:00",
+  "project_revision": "999b7712362b338a69aeda6536c43938837219ec",
+  "accepted_architecture": {
+    "framework_root": {
+      "path": ".caprmedio_framework",
+      "description": "persistent methodology and Tool environment governing the current Project"
+    },
+    "project_root": {
+      "path": ".caprmedio_project",
+      "description": "persistent governed Artifact and evidence root of the current Project"
+    },
+    "runtime_root": {
+      "path": ".caprmedio_runtime",
+      "description": "ephemeral execution state; it contains no governing authority"
+    },
+    "applicable_methodology": {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY",
+      "authority": "non_authoritative",
+      "derivation": "mechanical compilation without LLM inference",
+      "protected_sources_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+      "ordered_source_layers": [
+        "001_CORE_META_MODEL",
+        "002_INSTALLED_EXTENSIONS",
+        "003_LOCAL_CONFIGURATION"
+      ]
+    }
+  },
+  "active_bootstrap_plan_dispositions": [
+    {
+      "atom_id": "CA-P-036",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-037",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-038",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-039",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-041",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/01-CA-P-041-TASK--freeze-project-migration-target-set.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-042",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/02-CA-P-042-TASK--migrate-project-directory-topology.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-043",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/03-CA-P-043-TASK--rewrite-project-atoms-in-cce.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-044",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/05-CA-P-044-TASK--migrate-project-atom-carrier-names.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-045",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/06-CA-P-045-TASK--repair-project-atom-relations.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-046",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/07-CA-P-046-FR_ENGN-TASK--update-engine-governance-tools.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-047",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/08-CA-P-047-TASK--rebuild-project-derived-state.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-048",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/09-CA-P-048-TASK--validate-project-migration-closure.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-049",
+      "path": ".caprmedio/03_plan/01-CA-P-049-TASK--migrate-remaining-legacy-plan-carriers.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-050",
+      "path": ".caprmedio/03_plan/02-CA-P-040-EPIC--apply-bseed-meta-methodology-to-caprmedio/04-CA-P-050-TASK--remove-redundant-formulas.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-094",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/05-CA-P-094-META_MTHD-TASK--materialize-pending-subject-and-projection-authority.md",
+      "disposition": "unresolved",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-102 freezes the source state; CA-P-108 owns each exact retain, move, rename, replace, archive, cancel, done, or defer disposition."
+    },
+    {
+      "atom_id": "CA-P-101",
+      "path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "disposition": "accepted_as_migration_control",
+      "disposition_owner": "CA-P-108",
+      "rationale": "CA-P-101 is the active migration-control Epic; its final Carrier disposition remains unresolved until CA-P-108."
+    }
+  ],
+  "unresolved_choices": [
+    {
+      "choice": "active Bootstrap Plan final dispositions",
+      "owner": "CA-P-108",
+      "status": "unresolved"
+    },
+    {
+      "choice": "default Scope Unit Types",
+      "owner": "CA-P-103",
+      "status": "unresolved"
+    },
+    {
+      "choice": "temporal classification",
+      "owner": "CA-P-104",
+      "status": "unresolved"
+    },
+    {
+      "choice": "exact Framework and Project Journal subpaths",
+      "owner": "CA-P-113",
+      "status": "unresolved"
+    },
+    {
+      "choice": "final generated-carrier paths",
+      "owner": "CA-P-110",
+      "status": "unresolved"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+---
+subjects:
+  governs:
+    continuant:
+      - Atom/Scope
+  depends_on:
+    continuant:
+      - Atom
+      - Scope
+atom_id: CA-R-920
+cce_version: cce_1
+cce_form: cardinality
+version: 10
+updated_at: 2026-09-06 01:45:12 +0400
+relations:
+  replacement_of:
+    - CA-R-904
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-920-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-one-scope.md
+---
+# Give Every Atom One Scope
+
+**every** Atom **must** have **`=1`** Scope.

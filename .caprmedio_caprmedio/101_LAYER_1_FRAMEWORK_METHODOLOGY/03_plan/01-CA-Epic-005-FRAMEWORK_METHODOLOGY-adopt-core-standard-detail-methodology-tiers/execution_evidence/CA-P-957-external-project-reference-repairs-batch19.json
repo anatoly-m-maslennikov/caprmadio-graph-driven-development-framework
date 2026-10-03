@@ -1,0 +1,97 @@
+{
+  "schema": "CA-P-957-external-project-reference-repairs-batch19/v1",
+  "non_authoritative": true,
+  "scope": "Five necessary incoming Project reference-only revisions; six pointers. No Claim, Type, tier, Scope, Journal schema, or selected setting change.",
+  "execution_override": "No Journal logging, execution, or gate. No Git/runtime/projection changes.",
+  "records": [
+    {
+      "path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/04_requirement/CAPRMEDIO-METHODOLOGY-REQU-509-FRAMEWORK_METHODOLOGY-REQUIREMENT--govern-session-engine-rehydration-behavior.md",
+      "atom_id": "CAPRMEDIO-METHODOLOGY-REQU-509",
+      "before_version": 3,
+      "after_version": 4,
+      "archive_path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/04_requirement/archive/CAPRMEDIO-METHODOLOGY-REQU-509-FRAMEWORK_METHODOLOGY-REQUIREMENT--govern-session-engine-rehydration-behavior@3.md",
+      "before_sha256": "6ffcb68dd8f43d9461495ec397bf19f65379c228a9619a5e04dc5b3eb0622123",
+      "after_sha256": "ddcf83ccc61de5a28b44259e87a9e66abe4ada5141ae8fbb4e31c2e8b2cb47a3",
+      "replacements": [
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-371-CORE_META_MODEL-REQUIREMENT--define-the-bounded-session-state-envelope",
+          "new_reference": "CAPRMEDIO-GOV-REQU-371"
+        }
+      ],
+      "unchanged_body": true,
+      "unchanged_canonical_diagnostics": 0
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-562-SKILLS-REQUIREMENT--record-governed-action-lifecycles.md",
+      "atom_id": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-562",
+      "before_version": 3,
+      "after_version": 4,
+      "archive_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement/archive/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-562-SKILLS-REQUIREMENT--record-governed-action-lifecycles@3.md",
+      "before_sha256": "f7bfd970cd51276d717eb868ba8101862b3a46c5642964b275011a4ad7ee4c46",
+      "after_sha256": "f67471df15546560d73cdd38177d80ee8b072884d19ab273861226bf273e2fa2",
+      "replacements": [
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events",
+          "new_reference": "CAPRMEDIO-GOV-REQU-339"
+        },
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention",
+          "new_reference": "CAPRMEDIO-GOV-REQU-340"
+        }
+      ],
+      "unchanged_body": true,
+      "unchanged_canonical_diagnostics": 2
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-198-TOOLS-QA_CASE--replay-previous-state-without-before-fields.md",
+      "atom_id": "CA-E-198",
+      "before_version": 6,
+      "after_version": 7,
+      "archive_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/archive/CA-E-198-TOOLS-QA_CASE--replay-previous-state-without-before-fields@6.md",
+      "before_sha256": "34115c799397cc2cad2677da7b8e47891b4f7dae0f7d8588a163f0ae9387f9b6",
+      "after_sha256": "02bfdd121593b25c0a42d5636d6f8f86a02fb747a7c115ec967fd24aa1461371",
+      "replacements": [
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events",
+          "new_reference": "CAPRMEDIO-GOV-REQU-339"
+        }
+      ],
+      "unchanged_body": true,
+      "unchanged_canonical_diagnostics": 0
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/06_evaluation/CA-E-200-APPEND_CHANGE_RECORDS-QA_CASE--recover-the-first-prior-result-without-invention.md",
+      "atom_id": "CA-E-200",
+      "before_version": 7,
+      "after_version": 8,
+      "archive_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/06_evaluation/archive/CA-E-200-APPEND_CHANGE_RECORDS-QA_CASE--recover-the-first-prior-result-without-invention@7.md",
+      "before_sha256": "1ad26ad9f21c6d7a5a95d32664867a57fad15348a62184e1befef7a5add9c06f",
+      "after_sha256": "e6a0f563775676fa65b9dcd35bcac5d3bb2652883f441b48d676715405c65709",
+      "replacements": [
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-REQUIREMENT--recover-work-journal-coverage-without-invention",
+          "new_reference": "CAPRMEDIO-GOV-REQU-340"
+        }
+      ],
+      "unchanged_body": true,
+      "unchanged_canonical_diagnostics": 0
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/06_evaluation/CA-E-197-APPEND_CHANGE_RECORDS-QA_CASE--validate-the-structured-file-change-event-schema.md",
+      "atom_id": "CA-E-197",
+      "before_version": 9,
+      "after_version": 10,
+      "archive_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/06_evaluation/archive/CA-E-197-APPEND_CHANGE_RECORDS-QA_CASE--validate-the-structured-file-change-event-schema@9.md",
+      "before_sha256": "8257ae3d22271023ae04021c8ebb01ce5a6f54c50778f5ce00be3b70c02df6f2",
+      "after_sha256": "b8c8e8110318de7482fbecbfd290e1bda934c31df80cb1a0f754172b9e354dd4",
+      "replacements": [
+        {
+          "old_reference": "CAPRMEDIO-GOV-REQU-339-CORE_META_MODEL-REQUIREMENT--register-type-values-for-work-journal-events",
+          "new_reference": "CAPRMEDIO-GOV-REQU-339"
+        }
+      ],
+      "unchanged_body": true,
+      "unchanged_canonical_diagnostics": 0
+    }
+  ]
+}

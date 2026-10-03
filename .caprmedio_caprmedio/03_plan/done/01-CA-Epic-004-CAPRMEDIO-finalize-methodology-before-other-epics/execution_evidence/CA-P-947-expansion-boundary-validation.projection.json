@@ -1,0 +1,100 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "schema": "caprmedio.ca-p-947.expansion-boundary-validation.v1",
+  "task_atom_id": "CA-P-947",
+  "completed_at": "2026-09-03T22:41:54+0400",
+  "prerequisite": {
+    "atom_id": "CA-P-946",
+    "status": "Done",
+    "evidence": "execution_evidence/CA-P-946-combined-methodology-application.findings.json"
+  },
+  "authority_changes": {
+    "new_core_requirement": {
+      "atom_id": "CA-R-1375",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1375-MMODEL-CORE-REQUIREMENT--restrict-methodology-source-expansion-to-core-permission.md",
+      "carrier_sha256": "7d9bb14c981a303502b1a0ccc7fb57f76610bfee6a79030e1f2f30520349832a",
+      "governs": "Methodology Source/Expansion Boundary",
+      "effect": "Extensions and Local Configuration add authority only where an active CORE_META_MODEL Atom permits it and never mutate Core Meta-Model authority."
+    },
+    "local_configuration_resolution": {
+      "atom_id": "CA-R-1207",
+      "predecessor_archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1207-MMODEL-CORE-REQUIREMENT--make-local-configuration-own-project-methodology-resolution@3.md",
+      "predecessor_archive_sha256": "94d40b416431498191fef5c3520504e5182aa54e16508d70348e08e7ea03ca3a",
+      "successor_revision": 4,
+      "successor_carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1207-MMODEL-CORE-REQUIREMENT--make-local-configuration-own-project-methodology-resolution.md",
+      "successor_carrier_sha256": "a884d377eedb7896fdb56be8adc11bfc257e5a3403d8b4c2c157ae0ac968a03e",
+      "removed_authority": "replacement",
+      "retained_authority": [
+        "Project Extension activation",
+        "selected Extension revisions",
+        "Project Customizations",
+        "priority",
+        "compatibility resolution",
+        "local Tool, MCP, and App mode decisions"
+      ]
+    }
+  },
+  "validation_tool": {
+    "carrier_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/validate_expansion_boundary.py",
+    "schema": "caprmedio.validate_methodology_expansion_boundary.v1",
+    "mechanical_checks": [
+      "one active Core expansion-boundary Requirement exists",
+      "an external active Atom has no mutating relation to active Core authority",
+      "an external active Definition does not define a Core Term",
+      "an external active Atom does not duplicate an active Core Atom identity",
+      "unresolved legacy mutation lineage is reported without inferred resolution"
+    ],
+    "semantic_limit": "Claim equivalence is not inferred; later full conflict-and-gap review remains CA-P-948 scope."
+  },
+  "source_combination_checks": [
+    {
+      "selected_source_layers": ["CORE_META_MODEL"],
+      "source_counts": {"CORE_META_MODEL": 595, "INSTALLED_EXTENSIONS": 0, "LOCAL_CONFIGURATION": 0},
+      "external_member_count": 0,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "can_conform": true,
+      "report_sha256": "679790fd075d816cb01092e6c7965d89d9475576c2551c5a8707f127f0d01087"
+    },
+    {
+      "selected_source_layers": ["CORE_META_MODEL", "INSTALLED_EXTENSIONS"],
+      "source_counts": {"CORE_META_MODEL": 595, "INSTALLED_EXTENSIONS": 0, "LOCAL_CONFIGURATION": 0},
+      "external_member_count": 0,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "can_conform": true,
+      "report_sha256": "2eca8be680f8519a8ed30b1ff5d2ea0f08b5c231a753ef280b02736f3a83addf"
+    },
+    {
+      "selected_source_layers": ["CORE_META_MODEL", "LOCAL_CONFIGURATION"],
+      "source_counts": {"CORE_META_MODEL": 595, "INSTALLED_EXTENSIONS": 0, "LOCAL_CONFIGURATION": 70},
+      "external_member_count": 70,
+      "hard_violation_count": 0,
+      "stable_lineage_gap_count": 0,
+      "can_conform": true,
+      "report_sha256": "451e4c75cd05af65b101e9d8997639ed288b450639e3a04fa0cc7b62ae18ed7f"
+    }
+  ],
+  "applicable_methodology_compilation": {
+    "eligible_candidate_count": 665,
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+    "generated_tree_digest": "c518ff6bcfb6d2ebfde541f1d2bd20da2ee5a30139ff4ad81d79fba5ae32ea6e",
+    "new_projected_atom": {
+      "atom_id": "CA-R-1375",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/04_requirement/CA-R-1375-MMODEL-CORE-REQUIREMENT--restrict-methodology-source-expansion-to-core-permission.md",
+      "carrier_sha256": "aa8c69f071313078ada37a4d3a3e947f5927372d84d9953d6e2657391d91bd22"
+    }
+  },
+  "fixed_point": {
+    "validator_core_only_report_sha256": "679790fd075d816cb01092e6c7965d89d9475576c2551c5a8707f127f0d01087",
+    "validator_core_only_rerun_report_sha256": "679790fd075d816cb01092e6c7965d89d9475576c2551c5a8707f127f0d01087",
+    "compiler_apply_report_sha256": "bbc917ff107ef1bbde373b89251fae8f3324675dd4353df3dbb81af48f5a68f4",
+    "compiler_apply_rerun_report_sha256": "bbc917ff107ef1bbde373b89251fae8f3324675dd4353df3dbb81af48f5a68f4",
+    "same_source_frontier_digest": true,
+    "same_generated_tree_digest": true
+  },
+  "excluded": [".DS_Store", "protected empty shells"],
+  "operator_escalation": "none"
+}

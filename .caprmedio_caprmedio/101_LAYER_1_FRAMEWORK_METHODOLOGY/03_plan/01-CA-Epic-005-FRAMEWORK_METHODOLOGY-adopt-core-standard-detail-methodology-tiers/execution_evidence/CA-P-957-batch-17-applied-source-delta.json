@@ -1,0 +1,253 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "17",
+  "frozen_plan": "CA-P-957-batch-17-planned-source-delta.json",
+  "frozen_plan_sha256": "1b6e6cd3d524417b1c9a08513bb9d74efa7f0202a66018b72600efb02dabeb21",
+  "existing": [
+    {
+      "atom_id": "CA-R-747",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-747-CORE_META_MODEL-CORE-REQUIREMENT--register-goal-and-demand-as-type-values-for-relational-requirement-atoms.md",
+      "before_version": 17,
+      "before_sha256": "58b348f95ae1b8af6bb3eba496b814bea4771c7ac6baa57527a2b34b1422c0c9",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-747-CORE_META_MODEL-CORE-REQUIREMENT--register-goal-and-demand-as-type-values-for-relational-requirement-atoms@17.md",
+      "archive_sha256": "58b348f95ae1b8af6bb3eba496b814bea4771c7ac6baa57527a2b34b1422c0c9",
+      "successor_ids": [
+        "CA-R-924"
+      ],
+      "retirement_reason": "The complete Goal/Demand Requirement-Type contribution is exactly R924's Requirement-domain projection; no additional condition survives independently."
+    },
+    {
+      "atom_id": "CA-R-950",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-950-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes.md",
+      "before_version": 10,
+      "before_sha256": "5783f2acfcd0f3b888a0ecd92b693be326cc191a9337d076cf924f8c6ce4598c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-950-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes@10.md",
+      "archive_sha256": "5783f2acfcd0f3b888a0ecd92b693be326cc191a9337d076cf924f8c6ce4598c",
+      "successor_ids": [
+        "CA-R-935"
+      ],
+      "retirement_reason": "The complete bidirectional ancestor/descendant Demand prohibition is exactly R935 under R944's Consumer Atom Scope to Producer Claim Scope direction; it does not quantify pairs within the Producer set."
+    },
+    {
+      "atom_id": "CA-R-165",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "before_version": 10,
+      "before_sha256": "b416d2895f79191fc74366f205b649f80d09f3b8525804e8f011a274706bd409",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-165-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at@10.md",
+      "archive_sha256": "b416d2895f79191fc74366f205b649f80d09f3b8525804e8f011a274706bd409",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-CORE_META_MODEL-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "after_version": 11,
+      "after_sha256": "16caa7ef7a54f01cc3289adb79fc1e44a2d41b300b887b104e496ffa12b23a5c",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Atom/Revision"
+      ]
+    },
+    {
+      "atom_id": "CA-R-366",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-CORE_META_MODEL-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "before_version": 14,
+      "before_sha256": "22d055046fb3f27a6ed8c416c26ddaa6744f397d8a25a598d339b334d974a893",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-366-CORE_META_MODEL-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time@14.md",
+      "archive_sha256": "22d055046fb3f27a6ed8c416c26ddaa6744f397d8a25a598d339b334d974a893",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-CORE_META_MODEL-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "after_version": 15,
+      "after_sha256": "8c0f69895a724c3e0ee2cfbe597fe0a08b9b394d341ffd5017d2f44fec6d57b0",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Atom/Revision/Reference"
+      ]
+    },
+    {
+      "atom_id": "CA-R-380",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-380-CORE_META_MODEL-REQUIREMENT--configure-the-semantic-resolution-confidence-default.md",
+      "before_version": 16,
+      "before_sha256": "ae65d4b92e69b39004c00fa6470bf13c59f060f56a49bd707316c0e6ea10bc07",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-380-CORE_META_MODEL-REQUIREMENT--configure-the-semantic-resolution-confidence-default@16.md",
+      "archive_sha256": "ae65d4b92e69b39004c00fa6470bf13c59f060f56a49bd707316c0e6ea10bc07",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-380-CORE_META_MODEL-GENERAL-REQUIREMENT--configure-the-semantic-resolution-confidence-default.md",
+      "after_version": 17,
+      "after_sha256": "91cfe689e247137a5d6ab705b26bf64b5c70bc914bdf0c76c79506059a6f5ea6",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Framework Instance Settings/Confidence/Semantic Resolution Threshold"
+      ]
+    },
+    {
+      "atom_id": "CA-R-806",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "before_version": 14,
+      "before_sha256": "2ba0eca1cbb3a55225c4be54a5168aab5ffffd9059a4a7bd5d99e89cb2a6c224",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-806-CORE_META_MODEL-REQUIREMENT--register-complete-relation-kind-metadata@14.md",
+      "archive_sha256": "2ba0eca1cbb3a55225c4be54a5168aab5ffffd9059a4a7bd5d99e89cb2a6c224",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-GENERAL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "after_version": 15,
+      "after_sha256": "00bc338209034bb22675421703eaee07ed0c8b06833bb4f6ec833765e861a66a",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Relation Kind/Metadata"
+      ]
+    },
+    {
+      "atom_id": "CA-R-836",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-REQUIREMENT--encode-project-graph-node-partitions.md",
+      "before_version": 9,
+      "before_sha256": "69ddf6ec323ea4db2bed0252248d2149a94589afe5ab7cc1b83f357f470dcaaa",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-836-CORE_META_MODEL-REQUIREMENT--encode-project-graph-node-partitions@9.md",
+      "archive_sha256": "69ddf6ec323ea4db2bed0252248d2149a94589afe5ab7cc1b83f357f470dcaaa",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-GENERAL-REQUIREMENT--encode-project-graph-node-partitions.md",
+      "after_version": 10,
+      "after_sha256": "f162d74d53dc54d0f49207212c60d2c4911ddd8902fddb9cf45f1bc4910ebe25",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "project-containment graph"
+      ]
+    },
+    {
+      "atom_id": "CA-R-837",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md",
+      "before_version": 9,
+      "before_sha256": "0f6b9c33b5038b90c20f75ad10f17c48abbabbe12f3b3050a20b669564983fe7",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion@9.md",
+      "archive_sha256": "0f6b9c33b5038b90c20f75ad10f17c48abbabbe12f3b3050a20b669564983fe7",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md",
+      "after_version": 10,
+      "after_sha256": "0d55988452fd48ed6b2f1cb53ffe53386745f69858378f7a890fc6fd59cdec5b",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "scope-topology"
+      ]
+    },
+    {
+      "atom_id": "CA-R-838",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy.md",
+      "before_version": 10,
+      "before_sha256": "a08ad5700ec4bfa5a7fe471dfdc64a7dafeaa1d6f0db7cc1a5ad3fd276aeef4a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy@10.md",
+      "archive_sha256": "a08ad5700ec4bfa5a7fe471dfdc64a7dafeaa1d6f0db7cc1a5ad3fd276aeef4a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-GENERAL-REQUIREMENT--validate-the-normative-authority-hierarchy.md",
+      "after_version": 11,
+      "after_sha256": "346b7ffed3e54fcefd076aba0c6cf7d497b89e09c9f263018039a5a4992c0ff8",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-852",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-852-CORE_META_MODEL-REQUIREMENT--encode-bounded-ai-agent-delegation.md",
+      "before_version": 9,
+      "before_sha256": "f98bba7fdd991880fbcb60d9c7a7bf237d051470c9b086761ad1c55f8b53bf39",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-852-CORE_META_MODEL-REQUIREMENT--encode-bounded-ai-agent-delegation@9.md",
+      "archive_sha256": "f98bba7fdd991880fbcb60d9c7a7bf237d051470c9b086761ad1c55f8b53bf39",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-852-CORE_META_MODEL-GENERAL-REQUIREMENT--encode-bounded-ai-agent-delegation.md",
+      "after_version": 10,
+      "after_sha256": "9d3cf32e3b08b699fe1fdfdc75d02c2e37150b5bc969d3c0980164ed545776c5",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "AI Agent Delegation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-924",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications.md",
+      "before_version": 11,
+      "before_sha256": "f37b5b74f4f1ea927c8325cb423b2a08ac5762101ad48850df0be7c20e8b84bc",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications@11.md",
+      "archive_sha256": "f37b5b74f4f1ea927c8325cb423b2a08ac5762101ad48850df0be7c20e8b84bc",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-relational-atom-classifications.md",
+      "after_version": 12,
+      "after_sha256": "8d7d432c5cc33bcf7f445af0ead54b7b06ad0c8fb256c761f3c225ed1f6a4b3a",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "Relational Atom/Qualified Type"
+      ]
+    },
+    {
+      "atom_id": "CA-R-935",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+      "before_version": 10,
+      "before_sha256": "9cc921f47c422ea05695169a844b3870831b5d4009a03715ede59a1afff30fd8",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants@10.md",
+      "archive_sha256": "9cc921f47c422ea05695169a844b3870831b5d4009a03715ede59a1afff30fd8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-GENERAL-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+      "after_version": 11,
+      "after_sha256": "a2908db967a767e38541cf9bf237de229f063a7b8fcfc136226ed9750ad09e80",
+      "after_tier": "General",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-925",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "before_version": 13,
+      "before_sha256": "bc7e0caed57d38a6a3a19f0463777fa0eac15888c5d6f881d445613de4d8cdf5",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom@13.md",
+      "archive_sha256": "bc7e0caed57d38a6a3a19f0463777fa0eac15888c5d6f881d445613de4d8cdf5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "after_version": 14,
+      "after_sha256": "6901434d29086a909cb110782edcaa6ce9609aae70a2ff5c237462b03d0b5098",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Goal"
+      ]
+    },
+    {
+      "atom_id": "CA-R-932",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md",
+      "before_version": 12,
+      "before_sha256": "b3affb57d0562affdd686010d9b53071f9d133ef1272d1070530f08a8e123bdb",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom@12.md",
+      "archive_sha256": "b3affb57d0562affdd686010d9b53071f9d133ef1272d1070530f08a8e123bdb",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md",
+      "after_version": 13,
+      "after_sha256": "75afa287486d894cc138c5ce53a3950ddf7022e8e19be8c22b588ea395be7522",
+      "after_tier": "Core",
+      "after_governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Demand"
+      ]
+    },
+    {
+      "atom_id": "CA-E-425",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "before_version": 4,
+      "before_sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications@4.md",
+      "archive_sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "after_version": 5,
+      "after_sha256": "fd16c24e000d9d894085dc46cf6dc07ec374164bbc082a6e0bc6bb8010e4da56",
+      "after_tier": "Standard",
+      "after_governs_subjects": [
+        "Relational Atom Classification Validation"
+      ]
+    }
+  ],
+  "additions": [],
+  "scope_counts": {
+    "new_origin_dispositions": 17,
+    "origin_revisions": 10,
+    "origin_retirements": 2,
+    "unchanged_origins": 5,
+    "core_dependency_only_revisions": 3,
+    "cross_frontier_revisions": 0
+  },
+  "journal_status": "No Journal/Git work under the temporary Operator execution override; no unlogged conformance claim."
+}

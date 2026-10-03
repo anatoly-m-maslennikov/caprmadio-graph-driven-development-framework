@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed supporting authority for structural schema checks. Exact source bytes are required; this is implementation provenance, not independent methodology authority.",
+  "sources": {
+    "CA-R-1700": {
+      "version": 21,
+      "sha256": "3376bf9d18cdec8bad5ed71a8019111e8a0bc3061f4569835928da7a3e07bbb3",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1700-CORE_META_MODEL-CORE-REQUIREMENT--admit-atoms-only-where-a-role-has-an-atomic-unit.md"
+    },
+    "CA-R-925": {
+      "version": 20,
+      "sha256": "504e57b534b0c542cf4311f0f58f7a8130234b537ab513d836fe408cc796a8da",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md"
+    },
+    "CA-R-932": {
+      "version": 21,
+      "sha256": "218ba2fe2adf2516d620350fffecee78015aa07e9c49c1cc587f3c9a3b26706b",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md"
+    },
+    "CA-R-1674": {
+      "version": 20,
+      "sha256": "449b36d5682c18a90fcfc9d80393cc2358de3e48a74a8aa3706a3b77038c41a7",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1674-PROJECT_CONFIGURATION-REQUIREMENT--define-external-implementation-method-as-a-type-value-for-method-atoms.md"
+    },
+    "CA-R-1666": {
+      "version": 25,
+      "sha256": "a1d73d44172534868ebd54407107ddb5eaf90f1ccd1d57a6dcc0b9b439fee1e2",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1666-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--register-action-policy-for-plan-atoms.md"
+    },
+    "CA-R-825": {
+      "version": 20,
+      "sha256": "d4867e18fd17a8e1eda397be7e219f2f0cc6a31f8b8ce74e351df51496614c9d",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-825-PROJECT_CONFIGURATION-REQUIREMENT--define-boundary-as-a-type-value-for-requirement-atoms.md"
+    },
+    "CA-R-1673": {
+      "version": 23,
+      "sha256": "c780316e841a37b94faa8aaf0a12d5293270ffd408cd57a087e7e57c91dc8c91",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1673-PROJECT_CONFIGURATION-REQUIREMENT--register-constraint-as-an-external-type-value-for-requirement-atoms.md"
+    },
+    "CA-R-1675": {
+      "version": 20,
+      "sha256": "7503ce84729f2542926fa3499f7812de43f82866c7349e29a5e83e2c119dd60a",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1675-PROJECT_CONFIGURATION-REQUIREMENT--define-method-binding-as-a-type-value-for-method-atoms.md"
+    },
+    "CA-R-1667": {
+      "version": 21,
+      "sha256": "cb31a591c4f0704b69e096962b65938e305c52b8899df59d878b5bb1044ae5ea",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1667-PROJECT_CONFIGURATION-REQUIREMENT--define-implementation-method-as-a-type-value-for-method-atoms.md"
+    },
+    "CAPRMEDIO-R-793": {
+      "version": 22,
+      "sha256": "7e90ee03afc882179703487bdb87088fda53146921da021cc877eac3f083aaae",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-PROJECT_CONFIGURATION-REQUIREMENT--define-evaluation-approach-as-a-type-value-for-evaluation-atoms.md"
+    },
+    "CA-R-1668": {
+      "version": 22,
+      "sha256": "a5d2e332f976644a6f96933fec4b128aa35ed9241bb0d76d8c32e6df9f769bb7",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1668-PROJECT_CONFIGURATION-REQUIREMENT--define-implementation-decision-as-a-type-value-for-method-atoms.md"
+    },
+    "CA-R-1662": {
+      "version": 26,
+      "sha256": "031ca27dc996873acf1a716dad8d8395ed2dee8072eccad0b0c10a9ff065b330",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1662-PROJECT_CONFIGURATION-REQUIREMENT--register-type-values-for-evaluation-atoms.md"
+    },
+    "CA-R-1665": {
+      "version": 21,
+      "sha256": "5a445b50cc0062ef7db05dba177306de52301d71665b39fc4910330c9ba37633",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1665-PROJECT_CONFIGURATION-REQUIREMENT--register-type-values-for-delivery-atoms.md"
+    },
+    "CA-R-1232": {
+      "version": 14,
+      "sha256": "51b128bffbb1b9987d8fc45bb43694278ea7215dd23c935f07bb4f8df72305b0",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-type-values-for-analysis-atoms.md"
+    },
+    "CA-R-1506": {
+      "version": 4,
+      "sha256": "5979506916be4b84fb82499bc797b2921653d902f987764f2058ffbf56018ad4",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1506-CORE_META_MODEL-CORE-REQUIREMENT--separate-check-mechanism-labels-from-evaluation-atom-types.md"
+    },
+    "CA-R-1286": {
+      "version": 12,
+      "sha256": "44866e0a52e47af004ed19c33324162832acd8d27c3fbd4f908baefa8b002a36",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1286-CORE_META_MODEL-CORE-REQUIREMENT--keep-qualified-type-domains-open.md"
+    },
+    "CA-R-1284": {
+      "version": 11,
+      "sha256": "f7f3e887eb38a6912a2c5178d1158ae7f51391d374e69ead438c6417ed816549",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1284-CORE_META_MODEL-CORE-REQUIREMENT--define-type.md"
+    }
+  }
+}

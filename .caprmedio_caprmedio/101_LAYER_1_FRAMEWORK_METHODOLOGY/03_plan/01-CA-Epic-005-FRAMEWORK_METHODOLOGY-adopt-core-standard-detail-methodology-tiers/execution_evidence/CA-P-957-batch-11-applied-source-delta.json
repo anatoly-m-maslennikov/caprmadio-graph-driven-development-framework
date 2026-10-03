@@ -1,0 +1,331 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "11",
+  "frozen_plan": "CA-P-957-batch-11-planned-source-delta.json",
+  "frozen_plan_sha256": "b0070ea4787efdf3454a8f5e807248dd196f938458748b27351a8205456a9f6f",
+  "existing": [
+    {
+      "atom_id": "CA-M-106",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings.md",
+      "before_version": 6,
+      "before_sha256": "75c7c25fdfa002e6d5467f7ad84294223173b90e1e7bea5bb0d4a5cd2127233d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings@6.md",
+      "archive_sha256": "75c7c25fdfa002e6d5467f7ad84294223173b90e1e7bea5bb0d4a5cd2127233d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-GENERAL-METHOD--declare-methodology-expansion-mappings.md",
+      "after_version": 7,
+      "after_tier": "General",
+      "after_sha256": "aa293677bb09b40bb8b190ee5d1653f82312cc573a581a9eb3d39b663b9898f0",
+      "after_governs_subjects": [
+        "Methodology Source/expansion mapping"
+      ]
+    },
+    {
+      "atom_id": "CA-M-130",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-CORE_META_MODEL-CORE-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "before_version": 9,
+      "before_sha256": "da85caa3ee7b4b8617e394b75b176bd6eaa07dc7cae5e027b3d3c6cdd1ae24c0",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-130-CORE_META_MODEL-CORE-METHOD--apply-a-task-autonomous-confidence-threshold@9.md",
+      "archive_sha256": "da85caa3ee7b4b8617e394b75b176bd6eaa07dc7cae5e027b3d3c6cdd1ae24c0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-CORE_META_MODEL-GENERAL-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "after_version": 10,
+      "after_tier": "General",
+      "after_sha256": "262c06ec04c5d8a5b531452154250f9bae8d53700f73a201bbbe24e4f1afe729",
+      "after_governs_subjects": [
+        "Autonomous Confidence Threshold Application"
+      ]
+    },
+    {
+      "atom_id": "CA-M-134",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-134-CORE_META_MODEL-CORE-METHOD--bound-scripted-migrations.md",
+      "before_version": 14,
+      "before_sha256": "7faa679ba30ba6d87eea4d3ab4b6bbce30e0af8bfea72aa162da70a5f2ecf12e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-134-CORE_META_MODEL-CORE-METHOD--bound-scripted-migrations@14.md",
+      "archive_sha256": "7faa679ba30ba6d87eea4d3ab4b6bbce30e0af8bfea72aa162da70a5f2ecf12e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-134-CORE_META_MODEL-GENERAL-METHOD--bound-scripted-migrations.md",
+      "after_version": 15,
+      "after_tier": "General",
+      "after_sha256": "06c9935e11d12458ba2c4d944d0773a155ffdfdd46ce628a7df1b0b7a692d760",
+      "after_governs_subjects": [
+        "Scripted Migration"
+      ]
+    },
+    {
+      "atom_id": "CA-E-249",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+      "before_version": 3,
+      "before_sha256": "4ed2dc6b466101a37c9135cf4ca55a0aa5afc36d8e6ebefdc4b57f4bb061ef37",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings@3.md",
+      "archive_sha256": "4ed2dc6b466101a37c9135cf4ca55a0aa5afc36d8e6ebefdc4b57f4bb061ef37",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-GENERAL-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+      "after_version": 4,
+      "after_tier": "General",
+      "after_sha256": "92e3ed0c67831f0e85d18fe08075a422ef3f7fa6dcc09f0b9feb9b8718fe000c",
+      "after_governs_subjects": [
+        "Methodology Source/expansion mapping"
+      ]
+    },
+    {
+      "atom_id": "CA-E-382",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-term-system-graphs.md",
+      "before_version": 6,
+      "before_sha256": "0a7c89272d0be461d4f761cacb09cf47b9b5ecb2970c9cb409f9fccd7a72d706",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-term-system-graphs@6.md",
+      "archive_sha256": "0a7c89272d0be461d4f761cacb09cf47b9b5ecb2970c9cb409f9fccd7a72d706",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-term-system-graphs.md",
+      "after_version": 7,
+      "after_tier": "General",
+      "after_sha256": "aaeb5577379a708e767b651868561e8e6a2cf7263c27521a489e378a01699b3b",
+      "after_governs_subjects": [
+        "Term-System Graph Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-384",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-CORE-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+      "before_version": 7,
+      "before_sha256": "549c1665f933781aa993253d6c69ebc44967e3b1f19c02fa33ff3ff147bfc3f1",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-384-CORE_META_MODEL-CORE-EVALUATION--validate-composite-claims-and-derived-summaries@7.md",
+      "archive_sha256": "549c1665f933781aa993253d6c69ebc44967e3b1f19c02fa33ff3ff147bfc3f1",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-GENERAL-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+      "after_version": 8,
+      "after_tier": "General",
+      "after_sha256": "713ecf53691d32090ac2d6068c949dac634ae6576630fd7ca2a49805243edf8e",
+      "after_governs_subjects": [
+        "Claim-Boundary Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-386",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-CORE-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+      "before_version": 8,
+      "before_sha256": "a39d085f72f625eb4d63f3079b3fdb1996bbcca50756e5926c0a5325411feb4d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-386-CORE_META_MODEL-CORE-EVALUATION--validate-type-qualified-status-and-artifact-activity@8.md",
+      "archive_sha256": "a39d085f72f625eb4d63f3079b3fdb1996bbcca50756e5926c0a5325411feb4d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-GENERAL-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+      "after_version": 9,
+      "after_tier": "General",
+      "after_sha256": "b5a962f35f9dfa8005ab6c1bad34c69b04df4d730ab440e16c46b693ead538c0",
+      "after_governs_subjects": [
+        "Type-Qualified Status Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-387",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-type-assignments.md",
+      "before_version": 2,
+      "before_sha256": "6ca4983bfa7b5401ea9781874914dbeffaa1188c8b5539fbc2ea430a9a497a62",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-387-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-type-assignments@2.md",
+      "archive_sha256": "6ca4983bfa7b5401ea9781874914dbeffaa1188c8b5539fbc2ea430a9a497a62",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-type-assignments.md",
+      "after_version": 3,
+      "after_tier": "General",
+      "after_sha256": "9bc7b323d51e7f3a7a21e1f459c0882499cc96eada67351342a595dba52292ad",
+      "after_governs_subjects": [
+        "Type Assignment Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-001",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-QA_CASE--relation-vocabulary-interpretability.md",
+      "before_version": 11,
+      "before_sha256": "2495f9cdde5311b26ad6ef421ef2bc733e543f02d1e201a4017b7ffa22158bb8",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-QA_CASE--relation-vocabulary-interpretability@11.md",
+      "archive_sha256": "2495f9cdde5311b26ad6ef421ef2bc733e543f02d1e201a4017b7ffa22158bb8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-GENERAL-QA_CASE--relation-vocabulary-interpretability.md",
+      "after_version": 12,
+      "after_tier": "General",
+      "after_sha256": "6b530014043256961156bfe63651dc50e0b46e996005a60136023efa4a51cdd1",
+      "after_governs_subjects": [
+        "evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-241",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md",
+      "before_version": 11,
+      "before_sha256": "27d8fed62a04b982cc782aa73e22db3cee0c11f3d22740bc36880e7cd08c550d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections@11.md",
+      "archive_sha256": "27d8fed62a04b982cc782aa73e22db3cee0c11f3d22740bc36880e7cd08c550d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md",
+      "after_version": 12,
+      "after_tier": "Standard",
+      "after_sha256": "8e9e9ca3d350ef5286d233703e44e109a6ae86e887a716735959839edf72c980",
+      "after_governs_subjects": [
+        "CCE Claim and Projection Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-379",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+      "before_version": 8,
+      "before_sha256": "e7f965aa946a6e0bea2937af7f711eaea2eb609ef8c719bfc479ffe4b135cd9e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-379-CORE_META_MODEL-CORE-EVALUATION--validate-applicable-methodology-compilation@8.md",
+      "archive_sha256": "e7f965aa946a6e0bea2937af7f711eaea2eb609ef8c719bfc479ffe4b135cd9e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-EVALUATION--validate-applicable-methodology-compilation.md",
+      "after_version": 9,
+      "after_tier": "Standard",
+      "after_sha256": "3dbd25644ddf04bd9022e9b3f1cbea5e6c070760122edeb5958bd47e53a634f8",
+      "after_governs_subjects": [
+        "Applicable Methodology Compilation Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-383",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-subject-expressions.md",
+      "before_version": 4,
+      "before_sha256": "17b2b380fe1f6988af419a9897a0b1df359f0acfb0f3f10a3edc085a8914497d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-383-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-subject-expressions@4.md",
+      "archive_sha256": "17b2b380fe1f6988af419a9897a0b1df359f0acfb0f3f10a3edc085a8914497d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "after_version": 5,
+      "after_tier": "Standard",
+      "after_sha256": "2c9adc95b6d93e16474c8f1a31b387d029b7293c2da141d1170d4d4b56bd85bb",
+      "after_governs_subjects": [
+        "Subject Expression Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-429",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-CORE-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+      "before_version": 2,
+      "before_sha256": "e12bebcd5f6fef480ea587a4fa226a80e124887cf86fb622af85e3ab57cd5347",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-429-CORE_META_MODEL-CORE-EVALUATION--validate-authoritative-markdown-atom-carriers@2.md",
+      "archive_sha256": "e12bebcd5f6fef480ea587a4fa226a80e124887cf86fb622af85e3ab57cd5347",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+      "after_version": 3,
+      "after_tier": "Standard",
+      "after_sha256": "32f0abfafff8cb77cfc61002607078a24d20d67b726ad32c3ba5c10fddde2e52",
+      "after_governs_subjects": [
+        "Markdown Atom Carrier Validation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-002",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md",
+      "before_version": 14,
+      "before_sha256": "e3ca64a8a6593afe8898e13e6c915d706e519b14e5cb56afec9606dd21a35c80",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability@14.md",
+      "archive_sha256": "e3ca64a8a6593afe8898e13e6c915d706e519b14e5cb56afec9606dd21a35c80",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md",
+      "after_version": 15,
+      "after_tier": "Standard",
+      "after_sha256": "5edc36cc5d036fec5ce6358db2d8757b7e3de5fd00355d80e0ba0b08b8542ddf",
+      "after_governs_subjects": [
+        "evaluation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-003",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "before_version": 9,
+      "before_sha256": "91526bdaf44b07ca34f28b86018d834d1dc61bb2c4b86f478dd57abf32034b4f",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability@9.md",
+      "archive_sha256": "91526bdaf44b07ca34f28b86018d834d1dc61bb2c4b86f478dd57abf32034b4f",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "after_version": 10,
+      "after_tier": "Standard",
+      "after_sha256": "cead1fa419de058e828898914b65fe184f3c2d36a79dbb7f5c40a946026d90db",
+      "after_governs_subjects": [
+        "evaluation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-005",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "before_version": 10,
+      "before_sha256": "47c5fc7703cafa91d52efc613df8926c2b16a291a3cc7eb9ded9fb2d14b2c60b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity@10.md",
+      "archive_sha256": "47c5fc7703cafa91d52efc613df8926c2b16a291a3cc7eb9ded9fb2d14b2c60b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "after_version": 11,
+      "after_tier": "Standard",
+      "after_sha256": "1034484830a1d5094dbdb6b27c9599fac1955030a5c95556933b66dfdec4eaf2",
+      "after_governs_subjects": [
+        "relation validation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-009",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "before_version": 11,
+      "before_sha256": "1c92250c71f5e1b14e9b405ec44d08af229bc5159a95ed887e576c4af3636902",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection@11.md",
+      "archive_sha256": "1c92250c71f5e1b14e9b405ec44d08af229bc5159a95ed887e576c4af3636902",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "after_version": 12,
+      "after_tier": "Standard",
+      "after_sha256": "aa214d47ff77c7e8f3db0927f3f01d060097bdee88975bbf9ec00f0e2f7bc49b",
+      "after_governs_subjects": [
+        "evaluation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-010",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "before_version": 9,
+      "before_sha256": "51ab4e90deb95330a3715b400fa589483353536992002fe2159ee29e7abf738d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary@9.md",
+      "archive_sha256": "51ab4e90deb95330a3715b400fa589483353536992002fe2159ee29e7abf738d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "after_version": 10,
+      "after_tier": "Standard",
+      "after_sha256": "959e372dcc849ddb0b2f12c30cbb34c54f97bd3b353f880f7b6b45a5cf89deb0",
+      "after_governs_subjects": [
+        "Generated-Only Provenance Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-240",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "before_version": 18,
+      "before_sha256": "b0d5c9b01226245caad791fd6168f6cb1a4699de7082056b0bbe486f30ebfc03",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope@18.md",
+      "archive_sha256": "b0d5c9b01226245caad791fd6168f6cb1a4699de7082056b0bbe486f30ebfc03",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "after_version": 19,
+      "after_tier": "Standard",
+      "after_sha256": "77b6a971b4dc9b9051cf6a83c21d83f4657449a5355043e2581657a185995ae4",
+      "after_governs_subjects": [
+        "Scope Reference Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-403",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "before_version": 5,
+      "before_sha256": "42e281e4e19e041567a2172bde8edbe090c5c0cca536135c1860ccb117b15127",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates@5.md",
+      "archive_sha256": "42e281e4e19e041567a2172bde8edbe090c5c0cca536135c1860ccb117b15127",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-GENERAL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "after_version": 6,
+      "after_tier": "General",
+      "after_sha256": "535648005b44ec45db989975da7241436e91857de68a5153a26120b0bfd3f5f7",
+      "after_governs_subjects": [
+        "Claim Value Set Consolidation Candidate Evaluation"
+      ]
+    }
+  ],
+  "additions": [],
+  "journal_status": "Unlogged under temporary Operator execution override; no conformance claim."
+}

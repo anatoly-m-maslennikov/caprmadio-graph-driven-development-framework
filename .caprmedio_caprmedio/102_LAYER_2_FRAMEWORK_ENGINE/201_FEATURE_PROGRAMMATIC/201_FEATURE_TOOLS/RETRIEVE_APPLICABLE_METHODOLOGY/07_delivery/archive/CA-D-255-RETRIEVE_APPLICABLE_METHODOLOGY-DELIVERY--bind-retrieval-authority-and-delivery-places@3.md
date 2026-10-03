@@ -1,0 +1,17 @@
+---
+atom_id: CA-D-255
+cce_version: cce_1
+cce_form: delivery
+subjects:
+  governs: "Applicable Methodology Retrieval Tool/Carrier"
+  depends_on:
+    - "Applicable Methodology Retrieval Tool"
+version: 3
+updated_at: "2026-09-16 23:48:40 +0000"
+relations: {}
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Bind Retrieval Authority and Delivery Places
+
+the Applicable Methodology Retrieval Tool authority **must** live under `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS/RETRIEVE_APPLICABLE_METHODOLOGY/`, and its executable Delivery **must** live under `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/301_TOOLS/RETRIEVE_APPLICABLE_METHODOLOGY/`.

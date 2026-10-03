@@ -1,0 +1,32 @@
+---
+atom_id: CA-M-124
+cce_version: cce_1
+cce_form: method
+subjects:
+  governs:
+    occurrent:
+      - Task Atom Authoring
+  depends_on:
+    continuant:
+      - CCE
+      - Atom/Claim
+      - "Atom/Content Role: Plan/Type: Task/Scope"
+      - "Atom/Content Role: Plan/Type: Task/Definition of Done"
+version: 13
+updated_at: 2026-09-06 01:45:12 +0400
+relations: {}
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms.md
+---
+# Author Task Atoms
+
+**to** author one Task Atom, the Author **must** perform **all** of:
+
+1. resolve **`=1`** effective Author from the declared Author **or** its default.
+2. resolve **`=1`** effective Assignee from the declared Assignee **or** its default.
+3. state **`=1`** Claim that assigns its required action **and** intended result to the Assignee.
+4. derive the Task Summary from the complete Claim **and** Claim Scope.
+5. state **`=1`** atomic **or** composite Task Scope.
+6. state **`=1`** Definition of Done according to CA-M-123.
+7. state **`=1`** Autonomous Confidence Threshold.
+8. include Task Details **only** **when** the information remains within the Task Scope **and** Claim **and** establishes no additional Definition of Done.

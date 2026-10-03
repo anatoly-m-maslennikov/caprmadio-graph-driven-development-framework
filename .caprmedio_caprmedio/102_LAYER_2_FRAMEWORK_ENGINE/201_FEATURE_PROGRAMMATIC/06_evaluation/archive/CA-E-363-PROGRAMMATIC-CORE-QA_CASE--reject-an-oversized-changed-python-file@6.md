@@ -1,0 +1,41 @@
+---
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  governs: "source-file-size"
+  depends_on:
+    - "programmatic software"
+version: 6
+updated_at: 2026-09-01 02:00:00 +0400
+relations:
+  evaluation_for:
+    - CA-M-162
+  derived_from:
+    - CA-A-053
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Reject an oversized changed Python file
+
+## Claim checked
+
+One new **or** materially changed hand-authored PROGRAMMATIC Python file remains at
+**or** below 200 physical lines **or** has a specific bounded exception.
+
+## Test case
+
+Evaluate one changed 201-line hand-authored Python file with no file-size
+exception.
+
+## Acceptance criteria
+
+pass **only** **when** conformance is rejected **until** the file is reduced, split by
+responsibility, **or** supplied with one accepted bounded exception.
+
+## Failure disposition
+
+Block the changed file from claiming source-boundary conformance.
+
+## Sources
+
+- [CA-M-162 — Ratchet hand-authored Python source boundaries](../05_method/CA-M-162-PROGRAMMATIC-CORE-METHOD--ratchet-hand-authored-python-source-boundaries.md)

@@ -1,0 +1,754 @@
+{
+  "schema": "ca-p-957-final-validation/v1",
+  "non_authoritative": true,
+  "result": "PASS_WITH_EXPLICIT_LEGACY_LIMITS",
+  "source_closure": {
+    "result": "PASS",
+    "original_dispositions": 620,
+    "unclassified_origins": 0,
+    "active_originals": 613,
+    "retired_originals": 7,
+    "new_authorities": 3,
+    "active_core_source": 648,
+    "excluded_956_results": 32,
+    "mapped_active": 703,
+    "original_active_counts": {
+      "R": {
+        "Core": 293,
+        "General": 79,
+        "Standard": 72
+      },
+      "M": {
+        "General": 3,
+        "Standard": 30,
+        "Core": 3
+      },
+      "E": {
+        "Standard": 23,
+        "General": 7
+      },
+      "D": {
+        "Core": 22,
+        "Standard": 77,
+        "General": 4
+      },
+      "total": {
+        "Core": 318,
+        "General": 93,
+        "Standard": 202
+      }
+    },
+    "new_authority_counts": {
+      "R": {
+        "General": 2
+      },
+      "M": {
+        "Standard": 1
+      },
+      "E": {},
+      "D": {},
+      "total": {
+        "General": 2,
+        "Standard": 1
+      }
+    },
+    "excluded_956_counts": {
+      "R": {
+        "Core": 12,
+        "General": 7,
+        "Standard": 1
+      },
+      "M": {
+        "Standard": 3,
+        "General": 1
+      },
+      "E": {
+        "General": 1,
+        "Standard": 4
+      },
+      "D": {
+        "Standard": 3
+      },
+      "total": {
+        "Core": 12,
+        "General": 9,
+        "Standard": 11
+      }
+    },
+    "all_core_source_counts": {
+      "R": {
+        "Core": 305,
+        "General": 88,
+        "Standard": 73
+      },
+      "M": {
+        "General": 4,
+        "Standard": 34,
+        "Core": 3
+      },
+      "E": {
+        "Standard": 27,
+        "General": 8
+      },
+      "D": {
+        "Core": 22,
+        "Standard": 80,
+        "General": 4
+      },
+      "total": {
+        "Core": 330,
+        "General": 104,
+        "Standard": 214
+      }
+    },
+    "core_revision_operations": 359,
+    "core_unique_revised_origins": 352,
+    "unchanged_origin_count": 261,
+    "local_reference_revision_operations": 9,
+    "local_reference_identities": 8,
+    "exact_prior_archives": 375,
+    "total_revision_operations": 368,
+    "external_root_evidence": [
+      {
+        "path": "CA-P-957-external-analysis-reference-repair-batch14.json",
+        "sha256": "84f6b5295422f618b5fe387d747421557af4c8375967a65efe7354039b2780f2"
+      },
+      {
+        "path": "CA-P-957-external-analysis-reference-repair.json",
+        "sha256": "f79b82a950831fefecd684f5d86f86ccbb18c3301a02896e1233431c44551321"
+      },
+      {
+        "path": "CA-P-957-external-project-reference-repair.json",
+        "sha256": "825b41ffb7b81cf2a410dd97130c4dade85825bae69571f645360a09730fc31c"
+      },
+      {
+        "path": "CA-P-957-external-project-reference-repairs-batch18.json",
+        "sha256": "d19de2063d05157b472fef61bc45ca20f6883480fa0f6c1dd51c4983dcf07d44"
+      },
+      {
+        "path": "CA-P-957-external-project-reference-repairs-batch19.json",
+        "sha256": "1cdb4abeb07a0ad99276df9d9998d27a5fc10a99364b1c133f3ac18a8fb291da"
+      }
+    ],
+    "limit": "Exact source lineage/frontier and explicit per-origin evidence closure; not runtime, Journal, global relation-registry or source-owner migration conformance.",
+    "external_project_reference_revisions_verified": 11,
+    "external_project_identities_verified": 10,
+    "dangling_changed_relation_references": 0,
+    "exact_batch_checks": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19"
+    ]
+  },
+  "artifact_sha256": {
+    "CA-P-957-final-source-report.md": "1e2602b12be5371fc26fb0d716e6c0ced3ab38398e6f6d656f75867eab30a743",
+    "CA-P-957-final-edit-index.json": "1ebe18f878de9ad6f7022e7214e47d99cd518469b9d2fb93b7bc679612390019",
+    "CA-P-957-master-review-ledger.json": "854b003ecd01e76048d73ad417cbcb5109dabb9ef224abe90ab47e9ebaf83d99",
+    "CA-P-957-applied-source-delta.json": "4e5b4c5aea375a6108bb52ef6199d6e63aa288d7dc0446dda249101c76c4de71",
+    "CA-P-957-final-check.py": "1531ffe25aac3291680b9b104900d89cdb6b144eb8b75d3496588823520196c1",
+    "CA-P-957-evidence.py": "41310c61fdedffc5bcd878737e627a49cfbe016103456b0325f31f55f9ab4dd9"
+  },
+  "declared_reference_check": {
+    "dangling_changed_basenames_or_retired_ids": 0,
+    "standard_original_evaluations_missing_evaluation_for": []
+  },
+  "canonical_current_core_diagnostics": {
+    "status": "Preexisting/nonblocking for this bounded classification task; not full graph conformance",
+    "counts": {
+      "relation_target_unresolved": 36,
+      "relation_kind_unresolved": 6,
+      "relation_rule_not_applicable": 4
+    },
+    "carrier_count": 33,
+    "records": [
+      {
+        "atom_id": "CA-R-1014",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1014-CORE_META_MODEL-CORE-REQUIREMENT--resolve-atom-scope-contextually.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1013"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-1405",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1405-CORE_META_MODEL-CORE-REQUIREMENT--register-core-artifact-type-values.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-741--prohibit-artifact-subtypes"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-626",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-626-CORE_META_MODEL-REQUIREMENT--project-the-current-scope-unit-graph-without-owning-authority.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-843"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-855",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-855-CORE_META_MODEL-REQUIREMENT--validate-principle-content-role-semantics.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-854-REQUIREMENT-BSEED_SEMANTICS--distinguish-provided-outcome-and-operating-way-principles"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-862",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-862-CORE_META_MODEL-CORE-REQUIREMENT--bind-scope-unit-places-without-requiring-local-delivery-atoms.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-843"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-886",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-886-CORE_META_MODEL-CORE-REQUIREMENT--resolve-scope-unit-references-from-atom-scope.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-858"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-930",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-930-CORE_META_MODEL-CORE-REQUIREMENT--use-operator-names-when-an-atom-has-no-scope-unit.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-929"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-R-991",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-991-CORE_META_MODEL-CORE-REQUIREMENT--define-work-sequence-number.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-988"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-294",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-296",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-297",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-297-CORE_META_MODEL-REQUIREMENT--show-one-structural-level-when-architecture-views-are-enabled.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-299",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-302",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-310",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-310-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "relates_to",
+              "target": "CAPRMEDIO-GOV-REQU-309--use-direct-typed-relation-change-set-commit-messages"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-312",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-322",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-336",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-336-CORE_META_MODEL-REQUIREMENT--resolve-skill-routing-precedence.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-353",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-353-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          },
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-353-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-GOV-CONC-054--how-should-proof-currentness-be-represented"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-354",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-354-CORE_META_MODEL-REQUIREMENT--generate-the-proof-currentness-catalog.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          },
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-354-CORE_META_MODEL-REQUIREMENT--generate-the-proof-currentness-catalog.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-GOV-CONC-054--how-should-proof-currentness-be-represented"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-355",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          },
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-362",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-362-CORE_META_MODEL-REQUIREMENT--configure-the-artifact-timestamp-timezone.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-377",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-377-CORE_META_MODEL-REQUIREMENT--register-related-to-for-casual-mode.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-381",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-381-CORE_META_MODEL-REQUIREMENT--register-feature-realization-relation-kind.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-084--relational-artifacts-declare-endpoints"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-750",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-750-CORE_META_MODEL-REQUIREMENT--register-rationale-as-a-type-value-for-analysis-atoms.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-760",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-760-CORE_META_MODEL-REQUIREMENT--derive-default-external-type-names.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-742--permit-one-internal-default-type-per-content-role"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-116",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-116-CORE_META_MODEL-REQUIREMENT--require-stable-noun-content-role-names.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-122",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-122-CORE_META_MODEL-REQUIREMENT--keep-atom-identity-independent-of-its-mutable-summary.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-166",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-166-CORE_META_MODEL-REQUIREMENT--projections-have-updated-at.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-180",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-180-CORE_META_MODEL-REQUIREMENT--define-the-caprmedio-expansion.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-181",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-GENERAL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels.md",
+        "diagnostics": [
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-GENERAL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-675",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-675-CORE_META_MODEL-CORE-REQUIREMENT--partition-operator-settings-between-settings-artifacts.md",
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-675-CORE_META_MODEL-CORE-REQUIREMENT--partition-operator-settings-between-settings-artifacts.md"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-730",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-730-CORE_META_MODEL-REQUIREMENT--preserve-atom-id-across-scope-change.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-META-REQU-728--separate-immutable-atom-id-from-mutable-scope"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CA-M-120",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-120-CORE_META_MODEL-CORE-METHOD--compile-the-direct-relation-registry.md",
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-295"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-326"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "execution_limits": [
+    "No Journal/Git/runtime/production Tool/selected-settings execution or source-folder migration.",
+    "R1222's tier decision is complete; preexisting source-owner placement reconciliation remains downstream958/959.",
+    "The final report, edit index and batch records distinguish620 original dispositions,3 additions,9 Local reference-only operations on8 identities, and11 root Project reference-only operations on10 identities.",
+    "Source-only work complete; Task lifecycle remains root-owned."
+  ]
+}

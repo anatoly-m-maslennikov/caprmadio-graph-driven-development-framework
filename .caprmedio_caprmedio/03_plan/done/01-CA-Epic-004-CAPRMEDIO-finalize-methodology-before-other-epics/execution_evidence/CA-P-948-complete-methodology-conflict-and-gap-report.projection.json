@@ -1,0 +1,247 @@
+{
+  "schema": "caprmedio.ca-p-948.complete-methodology-conflict-and-gap-report.v1",
+  "artifact_form": "PROJECTION",
+  "authority": "NON_AUTHORITATIVE",
+  "task_atom_id": "CA-P-948",
+  "task_revision": 1,
+  "report_scope": {
+    "source_scope_units": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "excluded": [
+      "Draft",
+      "Archived",
+      "Done",
+      "Canceled",
+      "Bootstrap-history",
+      ".DS_Store",
+      "macOS-protected empty directory shells"
+    ]
+  },
+  "source_frontier": {
+    "compiler_sha256": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+    "entity_graph_sha256": "b891d915f0d95f2f2c7d39f9c5796b5555a867e7584557eb9e688614ac5515df",
+    "canonical_signature_sha256": "b35e72085a3d2c80c456a75369611e4bffc4e246adf224ff444230ce4440f906",
+    "active_atom_counts": {
+      "CORE_META_MODEL": 595,
+      "INSTALLED_EXTENSIONS": 0,
+      "LOCAL_CONFIGURATION": 70,
+      "total": 665
+    }
+  },
+  "evaluation_results": [
+    {
+      "defect_class": "definition_identity_and_signature_duplicates",
+      "result": "pass",
+      "observed_evidence": {
+        "compiler_conflict_count": 0,
+        "entity_definition_conflict_count": 0,
+        "cce_duplicate_signature_group_count": 0,
+        "scope_duplicate_signature_group_count": 0
+      }
+    },
+    {
+      "defect_class": "one_atom_one_claim_one_claim_scope_and_cce",
+      "result": "pass_at_registered_evaluation_boundary",
+      "observed_evidence": {
+        "entity_graph_parse_failures": 0,
+        "cce_eligible_single_statement_carriers": 418,
+        "cce_duplicate_signature_group_count": 0,
+        "scope_expression_occurrences": 0
+      },
+      "coverage_boundary": "the registered canonical-signature evaluators deliberately exclude noncanonical claim shapes; their exclusions are reported separately as permitted information."
+    },
+    {
+      "defect_class": "terms_subjects_relations_cycles_and_cardinality",
+      "result": "pass_with_permitted_findings",
+      "observed_evidence": {
+        "term_system_violation_count": 0,
+        "definition_conflict_count": 0,
+        "permitted_entity_definition_cycle_count": 3,
+        "valid_non_term_prerequisite_count": 76
+      }
+    },
+    {
+      "defect_class": "carrier_revision_lifecycle_filename_frontmatter_and_summary",
+      "result": "pass_at_registered_evaluation_boundary",
+      "observed_evidence": {
+        "compiler_source_frontmatter_diagnostics": 0,
+        "positive_selected_revisions": 665,
+        "applicable_projection_source_payload_mismatches": 0,
+        "applicable_projection_missing_or_orphan_members": 0
+      }
+    },
+    {
+      "defect_class": "extension_and_local_configuration_expansion_boundary",
+      "result": "pass",
+      "observed_evidence": {
+        "core_only_hard_violations": 0,
+        "core_and_extensions_hard_violations": 0,
+        "core_and_local_configuration_hard_violations": 0,
+        "stable_lineage_gap_count": 0
+      },
+      "violated_authority": "none; CA-R-1375 is satisfied."
+    },
+    {
+      "defect_class": "source_selection_conflict_replacement_and_compiler_drift",
+      "result": "pass",
+      "observed_evidence": {
+        "eligible_candidate_count": 665,
+        "selected_candidate_count": 665,
+        "conflict_count": 0,
+        "unresolved_conflict_count": 0,
+        "compiler_rerun_byte_identical": true
+      }
+    },
+    {
+      "defect_class": "retrieval_drift",
+      "result": "pass_with_permitted_findings",
+      "observed_evidence": {
+        "retriever_test_count": 9,
+        "retriever_test_status": "pass",
+        "capitalized_non_term_prerequisites_remain_unresolved_by_governor_lookup": 6
+      },
+      "coverage_boundary": "the six unresolved prerequisites are permitted non-Term prerequisites under CA-R-1279, CA-R-1318, and CA-R-1319; no retrieval defect is inferred."
+    },
+    {
+      "defect_class": "projection_source_mismatch_and_fixed_point",
+      "result": "one_mechanical_finding",
+      "observed_evidence": {
+        "applicable_methodology_source_payload_mismatches": 0,
+        "applicable_methodology_member_count": 665,
+        "project_scope_unit_graph_dry_run_changed": true,
+        "project_scope_unit_graph_stored_source_atom_count": 664,
+        "project_scope_unit_graph_current_source_atom_count": 665
+      }
+    },
+    {
+      "defect_class": "missing_or_failing_tests",
+      "result": "pass",
+      "observed_evidence": {
+        "focused_test_count": 53,
+        "focused_test_status": "pass",
+        "test_suites": [
+          "Applicable Methodology compiler: 9",
+          "expansion-boundary validator: 4",
+          "Applicable Methodology retriever: 9",
+          "Entity Graph generator: 9",
+          "Project Scope Unit Graph generator: 8",
+          "CCE canonical signatures: 4",
+          "Scope canonical signatures: 4",
+          "claim value-set candidate detector: 6"
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "CA-P-948-F-001",
+      "class": "non_authoritative_project_scope_unit_graph_projection_drift",
+      "affected_carrier_paths": [
+        ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml",
+        ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml"
+      ],
+      "source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+      "violated_authority": [
+        "CA-R-626",
+        "CAPRMEDIO-META-REQU-627",
+        "CA-D-332",
+        "CA-D-343"
+      ],
+      "observed_evidence": {
+        "dry_run": "GENERATE_PROJECT_GRAPH_STATE returned changed=true twice with identical receipts",
+        "stored_methodology_source_atom_count": 664,
+        "current_methodology_source_atom_count": 665,
+        "missing_current_source_atom_id": "CA-R-1375",
+        "stored_source_frontier_digest": "2048350c981641c187926ae65f570570b183a481405fb93877958c4c7aa4ead2",
+        "current_compiler_source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d"
+      },
+      "resolution_class": "mechanical",
+      "required_resolution": "run the selected installed Project Scope Unit Graph generator with --apply, then validate the exact generated source receipts against this source frontier."
+    },
+    {
+      "finding_id": "CA-P-948-I-001",
+      "class": "permitted_entity_definition_dependency_cycles",
+      "affected_carrier_paths": [
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL"
+      ],
+      "source_frontier_digest": "b891d915f0d95f2f2c7d39f9c5796b5555a867e7584557eb9e688614ac5515df",
+      "violated_authority": "none",
+      "observed_evidence": [
+        "Atom -> Claim -> Atom",
+        "CCE Operator -> CCE Operator Registry -> CCE Operator",
+        "Claim-Subject Relation -> Subject -> Claim-Subject Relation"
+      ],
+      "resolution_class": "informational_permitted"
+    },
+    {
+      "finding_id": "CA-P-948-I-002",
+      "class": "permitted_non_term_prerequisites",
+      "affected_carrier_paths": [
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"
+      ],
+      "source_frontier_digest": "b891d915f0d95f2f2c7d39f9c5796b5555a867e7584557eb9e688614ac5515df",
+      "violated_authority": "none; CA-R-1279, CA-R-1318, and CA-R-1319 permit non-Term prerequisites.",
+      "observed_evidence": {
+        "depends_on_without_governs_count": 76,
+        "retrieval_unresolved_capitalized_non_term_prerequisite_count": 6
+      },
+      "resolution_class": "informational_permitted"
+    },
+    {
+      "finding_id": "CA-P-948-I-003",
+      "class": "registered_restricted_cce_signature_boundary",
+      "affected_carrier_paths": [
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1213-MMODEL-CORE-REQUIREMENT--define-applicable-methodology-as-a-compiled-projection.md",
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1360-MMODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-MMODEL-CORE-REQUIREMENT--define-scope-expression-canonical-signature.md",
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-MMODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md"
+      ],
+      "source_frontier_digest": "b35e72085a3d2c80c456a75369611e4bffc4e246adf224ff444230ce4440f906",
+      "violated_authority": "none; the registered CCE signature grammar is intentionally restricted.",
+      "observed_evidence": {
+        "restricted_boundary_exclusion_count": 9,
+        "duplicate_signature_group_count": 0
+      },
+      "resolution_class": "informational_permitted"
+    },
+    {
+      "finding_id": "CA-P-948-I-004",
+      "class": "registered_narrow_claim_value_set_candidate_boundary",
+      "affected_carrier_paths": [
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL",
+        ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION"
+      ],
+      "source_frontier_digest": "b891d915f0d95f2f2c7d39f9c5796b5555a867e7584557eb9e688614ac5515df",
+      "violated_authority": "none; the candidate detector explicitly reports only exact parseable claim forms.",
+      "observed_evidence": {
+        "candidate_group_count": 0,
+        "unparseable_single_value_claims_skipped": 418
+      },
+      "resolution_class": "informational_permitted"
+    }
+  ],
+  "summary": {
+    "mechanical_finding_count": 1,
+    "operator_disposition_finding_count": 0,
+    "informational_permitted_finding_count": 4,
+    "unresolved_methodology_conflict_count": 0,
+    "source_authority_changes": 0,
+    "confidence": 99,
+    "next_task": "CA-P-949 has no disposition to obtain unless a later report changes the source frontier; CA-P-950 must resolve CA-P-948-F-001."
+  },
+  "reproducibility": {
+    "compiler_dry_runs_byte_identical": true,
+    "expansion_validator_report_digests": {
+      "CORE_META_MODEL": "679790fd075d816cb01092e6c7965d89d9475576c2551c5a8707f127f0d01087",
+      "CORE_META_MODEL_plus_INSTALLED_EXTENSIONS": "2eca8be680f8519a8ed30b1ff5d2ea0f08b5c231a753ef280b02736f3a83addf",
+      "CORE_META_MODEL_plus_LOCAL_CONFIGURATION": "451e4c75cd05af65b101e9d8997639ed288b450639e3a04fa0cc7b62ae18ed7f"
+    },
+    "cce_signature_reports_byte_identical": true,
+    "scope_signature_reports_byte_identical": true,
+    "project_scope_unit_graph_dry_run_receipts_byte_identical": true,
+    "projection_revision_time_excluded_from_content_comparison": true
+  }
+}

@@ -1,0 +1,1423 @@
+{
+  "task": "CA-P-963@2",
+  "dispositions": [
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-315",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-315",
+        "version": 7,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+        "sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-315",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+        "version": 7,
+        "sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Retain policy coverage, severity meanings, actionable failures, bounded DEBUG, meaningful transitions, deduplicated exception reporting, sensitive-data minimization, retention/sink failure behavior, monitors and no-prose-only acceptance. Separate exact record shape from behavior; the direct Operator resolution preserves each registered Journal placement.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-396",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-396",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-396-LOCAL_CONFIGURATION-DELIVERY--serialize-structured-production-log-records.md",
+            "version": 1,
+            "sha256": "cac3c9853b786692f8ad00e178453b9d4cc5e9b864a9d045d67838a18fc0d9db"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-315",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-315",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--require-production-logging-policies.md",
+            "version": 8,
+            "sha256": "c048ef3c4395c73399f7b35f17e84f5e8aec65943c1d55c7afe4ab42b2ee44c4"
+          }
+        },
+        {
+          "identity": "CA-D-406",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-406",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+            "version": 1,
+            "sha256": "279d9841dde65cc1b19f42bd991fa9e6d240e933c5fe94d134625bca51476bb8"
+          }
+        },
+        {
+          "identity": "CA-D-328",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CA-D-328",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+            "version": 1,
+            "sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6"
+          }
+        },
+        {
+          "identity": "CA-D-339",
+          "source_owner": "001_CORE_META_MODEL",
+          "content_role": "Delivery",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CA-D-339",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+            "version": 5,
+            "sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": "**every** structured production log record includes, **where** applicable:\n\n- UTC timestamp, severity, **and** a stable event name;\n- component, environment, **and** deployed version;\n- run, request, job, workflow, session, correlation, **or** trace identity;\n- relevant domain entity identity **and** lifecycle state;\n- outcome, duration, attempt number, **and** retry disposition;\n- stable error code **and** exception class for failures; **and**\n- a concise human-readable message with sanitized diagnostic context.",
+          "owners": [
+            "CA-D-396"
+          ],
+          "rationale": "Exact where-applicable field universe moves to D396; UTC remains limited to production logs."
+        },
+        {
+          "before_quote": "Governed CAPRMEDIO workflow **and** local project-control Journals use append-only NDJSON carriers **in** their applicable `.caprmedio` role folders; they are **not** a substitute for the production system's log platform.",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315",
+            "CA-D-406",
+            "CA-D-328",
+            "CA-D-339"
+          ],
+          "rationale": "Production-platform distinction remains R; append-only NDJSON domain moves to proposed D406. The Operator approved reuse of each registered placement. D328 and D339 retain their distinct domains; D406 covers the remainder of the original NDJSON domain without duplicating their contracts."
+        },
+        {
+          "before_quote": "# Require production logging policies\n\n**every** production-relevant component **must** define a Logging Policy that supports its Evaluation Controls **and** is referenced by its Production Evaluation Checklist. The policy identifies the events **and** context required to understand normal operation, detect failure, correlate distributed work, **and** investigate real production issues.\n\n## Severity policy\n\nThe policy uses these four operational levels:\n\n| Level | Required meaning |\n|---|---|\n| `ERROR` | An operation failed, correctness **or** availability **may** be affected, **or** explicit retry **or** intervention is required |\n| `WARNING` | Behavior was unexpected **or** degraded but recovered, fell back, **or** remains within an accepted tolerance |\n| `INFO` | A material lifecycle, business, **or** operational milestone occurred, including start, stop, acceptance, state transition, completion, **or** summarized progress |\n| `DEBUG` | Sanitized internal state **or** decision detail is useful for bounded investigation but is unnecessary during normal production operation |\n\nAn `ERROR` **or** `WARNING` record **must** be actionable: it identifies the failed **or** degraded condition, affected scope, expected operator **or** automated response, **and** whether retry is safe. High-frequency success, polling, **and** progress events **must not** create unbounded `INFO` noise; they are aggregated, sampled, **or** emitted as `DEBUG` **where** appropriate.\n\nProduction `DEBUG` logging is disabled by default. Temporary enablement **must** be scoped by component, subject, run, entity, **or** another bounded selector, have an automatic expiry, **and** preserve the same redaction rules as **every** other level.\n\n## Structured record policy\n\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "e",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "er",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " structured production log record",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "s fo",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " ",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "-",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "-",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n\nLogs record material state transitions **and** boundary outcomes rather than **every** internal tick. An exception is emitted once at the boundary responsible for handling **or** escalating it; lower layers preserve structured context **without** duplicating the same stack trace at **every** call boundary.\n\n## Safety and lifecycle policy\n\nLogs **must** never contain passwords, API keys, access tokens, session secrets, cookies, private keys, complete credentials, **or** unredacted secret-bearing payloads. Personal, customer, **and** commercially sensitive data is omitted, masked, hashed, tokenized, **or** **otherwise** minimized according to the applicable boundary.\n\nThe policy defines retention, access, sampling, rotation, maximum size, back-pressure, unavailable-sink behavior, **and** disk-pressure behavior. Logging **must not** make the primary operation silently fail, **and** loss **or** suppression of required records **must** itself produce an observable failure signal.\n\nProduction logs use the deployment environment's governed logging sink. Governed CAPRMEDIO workflow **and** local project-control Journals ",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "are **not** a substitute for the production system's log platform.\n\nImportant health counters, thresholds, **and** service-level signals receive explicit monitors. A production evaluation decision **must not** depend solely on parsing free-form log prose.\n\n## Rationale\n\nLogs are production Ops records, but their required coverage, structure, severity, safety, **and** retention **must** be governed **before** failures occur. A component-specific policy provides that evaluation boundary while leaving the logger implementation **and** emitted records **in** their proper artifact roles.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-315"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-315",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-315--production-logging-policies@7.md",
+          "version": 7,
+          "sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-323",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-323",
+        "version": 17,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes.md",
+        "sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-323",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes.md",
+        "version": 17,
+        "sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777"
+      },
+      "action": "replace",
+      "confidence_percent": 99,
+      "rationale": "Exact catl/maps/hubs/irec/ijrn prefix-to-Type table and Atom identity exclusion move as one representation contract.",
+      "primary_claim_identity_decision": "successor replaces carrier-only predecessor",
+      "after_owners": [
+        {
+          "identity": "CA-D-397",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-397",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-397-LOCAL_CONFIGURATION-DELIVERY--register-caprmedio-type-prefixes.md",
+            "version": 1,
+            "sha256": "aff0f8ef39ba12676b8e433e66cc0e9443f4192b55b303563dd442e9512982a7"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": "# Register CAPRMEDIO Type prefixes\n\nthe following fixed lowercase prefixes **must** be registered **only** for the listed Type values under Artifact; Atom identities use class short names instead.\n\n| Artifact form | Type | Prefix |\n|---|---|---|\n| `projection` | `catalog` | `catl` |\n| `projection` | `map` | `maps` |\n| `projection` | `hub` | `hubs` |\n| `projection` | `implementation_record` | `irec` |\n| `journal` | `implementation_journal` | `ijrn` |\n",
+          "owners": [
+            "CA-D-397"
+          ],
+          "rationale": "Exact catl/maps/hubs/irec/ijrn prefix-to-Type table and Atom identity exclusion move as one representation contract."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-323",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes@17.md",
+          "version": 17,
+          "sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-676",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-676",
+        "version": 15,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+        "sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-676",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+        "version": 15,
+        "sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592"
+      },
+      "action": "replace",
+      "confidence_percent": 99,
+      "rationale": "Exact optional owning-Claim YAML contribution maps and current-selection exclusions move as one qualified Carrier contract; no selected Settings value is touched.",
+      "primary_claim_identity_decision": "successor replaces carrier-only predecessor",
+      "after_owners": [
+        {
+          "identity": "CA-D-398",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-398",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-398-LOCAL_CONFIGURATION-DELIVERY--encode-configuration-surfaces-in-owning-atoms.md",
+            "version": 1,
+            "sha256": "a04340f2d42462a34d89154953fb1837d274101a946f0625ac099caa07f79133"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": "# Encode configuration surfaces in owning Atoms\n\nan owning Atom **may** carry its optional machine-readable contribution to the generated Project Scope Unit Graph under one top-level `project_scope_unit_graph` **or** `project_graph_state` YAML map **only** **when** it faithfully represents that Atom's own governed Claim. it **may** declare registered facts, allowed values, defaults, **or** structural contributions, but **must not** encode current Operator-selected Project identity, Atom prefix, Authority Mode values, **or** a `project_settings` contribution; Project initialization selections belong **only** to Project Settings, **and** Authority Mode selections belong **only** to Framework Instance Settings.\n",
+          "owners": [
+            "CA-D-398"
+          ],
+          "rationale": "Exact optional owning-Claim YAML contribution maps and current-selection exclusions move as one qualified Carrier contract; no selected Settings value is touched."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-676",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms@15.md",
+          "version": 15,
+          "sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CA-R-293",
+      "original_design_before": {
+        "canonical_identity": "CA-R-293",
+        "version": 11,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations.md",
+        "sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CA-R-293",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations.md",
+        "version": 11,
+        "sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-399",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-399",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+            "version": 1,
+            "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e"
+          }
+        },
+        {
+          "identity": "CA-R-293",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CA-R-293",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations.md",
+            "version": 12,
+            "sha256": "a32cbcba570b2460a2e0956e08f9a0b43764ce5288ef16f28d1ae3fefea56524"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " with Carrier token `constraint`",
+          "owners": [
+            "CA-D-399"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Use Constraint only for external limitations\n\nan Author **must** use Constraint ",
+          "owners": [
+            "CA-R-293"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "**only** for a limitation imposed from outside the Project choice boundary.\n",
+          "owners": [
+            "CA-R-293"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CA-R-293",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations@11.md",
+          "version": 11,
+          "sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CA-R-825",
+      "original_design_before": {
+        "canonical_identity": "CA-R-825",
+        "version": 11,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type.md",
+        "sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CA-R-825",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type.md",
+        "version": 11,
+        "sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-399",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-399",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+            "version": 1,
+            "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e"
+          }
+        },
+        {
+          "identity": "CA-R-825",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CA-R-825",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--define-boundary-as-a-type-value-for-requirement-atoms.md",
+            "version": 12,
+            "sha256": "3dc896bb7df1738ae34291466a435781caaafaa6f13c6b96b5c4c64c0cc20868"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `boundary`",
+          "owners": [
+            "CA-D-399"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define Boundary as a Type Value for Requirement Atoms\n\nBoundary **means** the Type value under Content Role Requirement for one explicit current limit of the owning Scope Unit",
+          "owners": [
+            "CA-R-825"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CA-R-825"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CA-R-825",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type@11.md",
+          "version": 11,
+          "sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-761",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-761",
+        "version": 11,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-761",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "version": 12,
+        "sha256": "e54069115da090d5940f974f0244aeccb4a3449a1f2a4edddaaa1f75ba6d816d"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-399",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-399",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-399-LOCAL_CONFIGURATION-DELIVERY--serialize-requirement-type-tokens.md",
+            "version": 1,
+            "sha256": "e09dd7a6372ba292969bd01986a2d9fc649056b7cfea254748ed51e9f0a54b2e"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-761",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-761",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--register-constraint-as-an-external-type-value-for-requirement-atoms.md",
+            "version": 13,
+            "sha256": "6d50fda566e2d33c777a8feec03482512b2e8d3135a3a33b67b395dc89cd0abe"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " with Carrier token `constraint`",
+          "owners": [
+            "CA-D-399"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Register Constraint as an External Type Value for Requirement Atoms\n\nConstraint",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-761"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " **must** be registered as a non-default external value of `Atom/Content Role: Requirement/Type`; its explicit name is **not** derived from the default external Type naming rule.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-761"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-761",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint@12.md",
+          "version": 12,
+          "sha256": "e54069115da090d5940f974f0244aeccb4a3449a1f2a4edddaaa1f75ba6d816d",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-748",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-748",
+        "version": 13,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+        "sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-748",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+        "version": 13,
+        "sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-400",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-400",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-400-LOCAL_CONFIGURATION-DELIVERY--serialize-evaluation-type-tokens.md",
+            "version": 1,
+            "sha256": "e794c4e0968abdd8c05a9b765c699dc50d14f7384522aa560d80c2b7b5346c01"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-748",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-748",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-type-values-for-evaluation-atoms.md",
+            "version": 14,
+            "sha256": "b1ed365984fbea4e157c1a887835ea37ebd9114e52c7ffc6060af478313ee883"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " with Carrier token `qa_case`",
+          "owners": [
+            "CA-D-400"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": " with Carrier token `evaluation_control`",
+          "owners": [
+            "CA-D-400"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Register Type Values for Evaluation Atoms\n\nQA Case ",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-748"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "**and** Evaluation Control",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-748"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " **must** be registered as internal values of `Atom/Content Role: Evaluation/Type`.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-748"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-748",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@13.md",
+          "version": 13,
+          "sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+        "version": 10,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+        "sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+        "version": 10,
+        "sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-400",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-400",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-400-LOCAL_CONFIGURATION-DELIVERY--serialize-evaluation-type-tokens.md",
+            "version": 1,
+            "sha256": "e794c4e0968abdd8c05a9b765c699dc50d14f7384522aa560d80c2b7b5346c01"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--define-evaluation-approach-as-a-type-value-for-evaluation-atoms.md",
+            "version": 11,
+            "sha256": "b76ff935222decd7cafd91f35827e78d734822a2eb371ffd1e365e1ea2cc78f7"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `evaluation_approach`",
+          "owners": [
+            "CA-D-400"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define Evaluation Approach as a Type Value for Evaluation Atoms\n\nEvaluation Approach **means** the internal Type value under Content Role Evaluation for one reusable, mechanism-neutral evaluation policy",
+          "owners": [
+            "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@10.md",
+          "version": 10,
+          "sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-751",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-751",
+        "version": 11,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-delivery-types.md",
+        "sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-751",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-delivery-types.md",
+        "version": 11,
+        "sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-402",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-402",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-402-LOCAL_CONFIGURATION-DELIVERY--serialize-delivery-type-tokens.md",
+            "version": 1,
+            "sha256": "60c1dd8e9fe233492fd00e363355f75abe1e4261f8a1a1fbf2485c0f6936111a"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-751",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-751",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-type-values-for-delivery-atoms.md",
+            "version": 12,
+            "sha256": "ad03ac041df5e50f7c36cd896b9437974e13988b5f84b5466e0f39dcd22658e7"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " with Carrier token `release_definition`",
+          "owners": [
+            "CA-D-402"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": " with Carrier token `environment_definition`",
+          "owners": [
+            "CA-D-402"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Register Type Values for Delivery Atoms\n\nRelease Definition ",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-751"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "**and** Environment Definition",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-751"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " **must** be registered as internal values of `Atom/Content Role: Delivery/Type`.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-751"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-751",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-751--register-delivery-types@11.md",
+          "version": 11,
+          "sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-754",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-754",
+        "version": 9,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type.md",
+        "sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-754",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type.md",
+        "version": 9,
+        "sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-404",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-404",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+            "version": 1,
+            "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-754",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-754",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--define-implementation-method-as-a-type-value-for-method-atoms.md",
+            "version": 10,
+            "sha256": "2e1cc67427bf309b01848b0eb42f2e2ace40abf844f43d4de0d8935f26967155"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `implementation_method`",
+          "owners": [
+            "CA-D-404"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define Implementation Method as a Type Value for Method Atoms\n\nImplementation Method **means** the internal Type value under Content Role Method for one reusable implementation policy",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-754"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-754"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-754",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@9.md",
+          "version": 9,
+          "sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-755",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-755",
+        "version": 10,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type.md",
+        "sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-755",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type.md",
+        "version": 10,
+        "sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-404",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-404",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+            "version": 1,
+            "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-755",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-755",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--define-implementation-decision-as-a-type-value-for-method-atoms.md",
+            "version": 11,
+            "sha256": "154c0a220c019aed94c5745be38f478bf7f9c8a67e8b50fc8b72657385b7bdf9"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `implementation_decision`",
+          "owners": [
+            "CA-D-404"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define Implementation Decision as a Type Value for Method Atoms\n\nImplementation Decision **means** the internal Type value under Content Role Method for one concrete implementation choice bounded to an explicit realization target",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-755"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-755"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-755",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@10.md",
+          "version": 10,
+          "sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-762",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-762",
+        "version": 8,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-762",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "version": 9,
+        "sha256": "28fdd59de936753a9d0dd91c22d23cb225021cc936909f14da658bc26a6000e9"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-404",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-404",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+            "version": 1,
+            "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-762",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-762",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-external-implementation-method-as-a-type-value-for-method-atoms.md",
+            "version": 10,
+            "sha256": "4480fb10331b0a09c56be00b81458226450bcb4f8c092002a1d960e0ba86eab5"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `external_implementation_method`",
+          "owners": [
+            "CA-D-404"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define External Implementation Method as a Type Value for Method Atoms\n\nExternal Implementation Method **means** the external Type value under Content Role Method for one reusable implementation policy whose meaning is owned by an identified external source revision",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-762"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-762"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-762",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type@9.md",
+          "version": 9,
+          "sha256": "28fdd59de936753a9d0dd91c22d23cb225021cc936909f14da658bc26a6000e9",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-763",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-763",
+        "version": 9,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type.md",
+        "sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-763",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type.md",
+        "version": 9,
+        "sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Preserve the complete semantic Type meaning/admission; reuse one token map per Content Role and source-owner context. No Type, tier, default or Settings selection changes.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-404",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-404",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-404-LOCAL_CONFIGURATION-DELIVERY--serialize-method-type-tokens.md",
+            "version": 1,
+            "sha256": "ca84f2d98cd9a7f71cc3b31f7cf7cb213fd36f6a853590a78403699ba685bc2d"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-763",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-763",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-method-binding-as-a-type-value-for-method-atoms.md",
+            "version": 10,
+            "sha256": "fb2bdf10113577fe30bc12da5e32d236958d5b192385ffcfcf6717308f1e2dcc"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** has Carrier token `method_binding`",
+          "owners": [
+            "CA-D-404"
+          ],
+          "rationale": "Exact token moves to the one shared D map; all Type meaning/admission and external/internal qualification remains R."
+        },
+        {
+          "before_quote": "# Define Method Binding as a Type Value for Method Atoms\n\nMethod Binding **means** the internal Type value under Content Role Method that governs how exact Method revisions apply to explicit targets **without** duplicating those Methods",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-763"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ".\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-763"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-763",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type@9.md",
+          "version": 9,
+          "sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-749",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-749",
+        "version": 12,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+        "sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-749",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+        "version": 12,
+        "sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Retain Question/Problem canonical admission and additional internal Risk/Opportunity admission.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-401",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-401",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-401-LOCAL_CONFIGURATION-DELIVERY--serialize-concern-type-tokens.md",
+            "version": 1,
+            "sha256": "912e165708ad7f102c7f857df9244ed69ed52e74b50279d5fb6e00e0794b244a"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-749",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-749",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-type-values-for-concern-atoms.md",
+            "version": 13,
+            "sha256": "aa69387389a8ac8d74d975c52bf882670f7f875e0487f4986b6c4c650e5580ce"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " **and** **must** use Carrier tokens `question` **and** `problem`, respectively",
+          "owners": [
+            "CA-D-401"
+          ],
+          "rationale": "Exact Question/Problem tokens move; CA-R-1231 admission reference remains R."
+        },
+        {
+          "before_quote": " with Carrier token `risk`",
+          "owners": [
+            "CA-D-401"
+          ],
+          "rationale": "Risk token moves; internal Type admission stays R."
+        },
+        {
+          "before_quote": " with Carrier token `opportunity`",
+          "owners": [
+            "CA-D-401"
+          ],
+          "rationale": "Opportunity token moves; internal Type admission stays R."
+        },
+        {
+          "before_quote": "# Register Type Values for Concern Atoms\n\nQuestion **and** Problem retain their canonical admission under CA-R-1231",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-749"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": ". Risk",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-749"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " **and** Opportunity",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-749"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": " **must** be registered as additional internal values of `Atom/Content Role: Concern/Type`.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-749"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-749",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@12.md",
+          "version": 12,
+          "sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-752",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-GOV-REQU-752",
+        "version": 11,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-ops-types.md",
+        "sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-GOV-REQU-752",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-ops-types.md",
+        "version": 11,
+        "sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Resolved at 99 from the source's own faithfully bound machine-readable contribution, not guessed naming. Frontmatter contributions continue to reflect the surviving admission; the token map is singular D authority.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-403",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-403",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-403-LOCAL_CONFIGURATION-DELIVERY--serialize-operations-type-tokens.md",
+            "version": 1,
+            "sha256": "56a49e59bcadc5b7525aec016c1095632789f62e19ee8c9a71fa204a4785d320"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-752",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-GOV-REQU-752",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-type-values-for-operations-atoms.md",
+            "version": 12,
+            "sha256": "8427ff6ffe7328bb43fa978de109660293767a973ad5c3e6f65ceddc10131727"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": " with their existing lowercase Carrier tokens",
+          "owners": [
+            "CA-D-403"
+          ],
+          "rationale": "Exact map read from this same source Revision: ops:release_record, ops:deployment_record, ops:environment_state, ops:health_record, ops:incident_record. Concrete tokens go to D403; five internal Type admissions stay R."
+        },
+        {
+          "before_quote": "# Register Type Values for Operations Atoms\n\nRelease Record, Deployment Record, Environment State, Health Record, **and** Incident Record ",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-752"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "**must** be registered as internal values of `Atom/Content Role: Operations/Type`.\n",
+          "owners": [
+            "CAPRMEDIO-GOV-REQU-752"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-GOV-REQU-752",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-752--register-ops-types@11.md",
+          "version": 11,
+          "sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-103",
+      "original_design_before": {
+        "canonical_identity": "CAPRMEDIO-META-REQU-103",
+        "version": 8,
+        "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release.md",
+        "sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d",
+        "source_owner": "003_LOCAL_CONFIGURATION",
+        "current_content_role": "Requirement",
+        "local_tier_filename_marker": "Standard (unmarked; CA-D-285)"
+      },
+      "execution_before": {
+        "identity": "CAPRMEDIO-META-REQU-103",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release.md",
+        "version": 8,
+        "sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d"
+      },
+      "action": "split",
+      "confidence_percent": 99,
+      "rationale": "Retain exact manifest accounting, full versus partial delivery, rescheduling, Journal append and Projection regeneration. done/ and Git are existing provenance references, not a new Carrier mandate or authorization to write either.",
+      "primary_claim_identity_decision": "retain recognizable semantic primary Claim and extract Carrier specification",
+      "after_owners": [
+        {
+          "identity": "CA-D-405",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Delivery",
+          "local_tier": "Standard",
+          "current": {
+            "identity": "CA-D-405",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-405-LOCAL_CONFIGURATION-DELIVERY--exclude-completed-work-from-the-development-backlog-carrier.md",
+            "version": 1,
+            "sha256": "f75aebbb58d7806b1993310d9ec3840f9cb62c0e0035eb71a70ad12a9e14d558"
+          }
+        },
+        {
+          "identity": "CAPRMEDIO-META-REQU-103",
+          "source_owner": "003_LOCAL_CONFIGURATION",
+          "content_role": "Requirement",
+          "local_tier": "Standard (unmarked; CA-D-285)",
+          "current": {
+            "identity": "CAPRMEDIO-META-REQU-103",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--requirement-reconcile-the-development-backlog-after-release.md",
+            "version": 9,
+            "sha256": "4770d03320941f61407cdc35a08ccfe42cb1d9013ceb9d98d75a42d030364e80"
+          }
+        }
+      ],
+      "clause_allocations": [
+        {
+          "before_quote": "The Development Backlog does **not** retain a completed-work section. ",
+          "owners": [
+            "CA-D-405"
+          ],
+          "rationale": "The exact completed-work-section content prohibition moves; journal/projection rebuild and done/history provenance remain unchanged."
+        },
+        {
+          "before_quote": "# Requirement — Reconcile the Development Backlog after release\n\n**after** the Release Record is accepted, CAPRMEDIO reconciles the Development Backlog against its exact released manifest.\n\nCandidates whose promoted Atoms were fully delivered **in** that release are removed from the Development Backlog. Unfinished, partially delivered, excluded, **or** newly deferred candidates remain unscheduled **or** move to another target version. A candidate cannot be removed as shipped **unless** the released manifest accounts for its promoted Atoms.\n\n",
+          "owners": [
+            "CAPRMEDIO-META-REQU-103"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        },
+        {
+          "before_quote": "Reconciliation appends Journal records **and** regenerates the Projection. Release Records, Plans under `done/`, **and** Git history preserve what shipped, what was executed, **and** how the planning allocation changed.\n\n## Primary claim\n\nRelease reconciliation removes fully shipped candidates from the Development Backlog **and** retains **or** reschedules **every** candidate **not** fully accounted for by the released manifest.\n",
+          "owners": [
+            "CAPRMEDIO-META-REQU-103"
+          ],
+          "rationale": "Exact unchanged span survives in the retained same-identity Claim."
+        }
+      ],
+      "archive_proofs": [
+        {
+          "identity": "CAPRMEDIO-META-REQU-103",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release@8.md",
+          "version": 8,
+          "sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d",
+          "byte_exact": true,
+          "basis": "Exact pre-963 source bytes verified against the bound baseline; original960 or sanctioned962 handoff Revision"
+        }
+      ],
+      "complete": true
+    }
+  ]
+}

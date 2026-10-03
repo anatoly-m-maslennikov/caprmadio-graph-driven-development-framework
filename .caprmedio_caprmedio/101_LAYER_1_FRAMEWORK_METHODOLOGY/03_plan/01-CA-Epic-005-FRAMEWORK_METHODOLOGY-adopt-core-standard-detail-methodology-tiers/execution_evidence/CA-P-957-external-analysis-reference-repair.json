@@ -1,0 +1,32 @@
+{
+  "schema": "ca-p-957-external-reference-repair/v1",
+  "non_authoritative": true,
+  "scope": "Only two live analysis_of references necessarily affected by planned META092/META093 tier-basename changes; no Project Claim or tier review.",
+  "atom_id": "CAPRMEDIO-ANRP-001",
+  "operation": "reference_only_revision",
+  "before_path": ".caprmedio_caprmedio/02_analysis/CAPRMEDIO-ANRP-001-ANALYSIS_RPRT--project-meta-and-gov-core-authority-audit.md",
+  "before_version": 9,
+  "before_sha256": "31d4bc87bead958afdf0abffaabf972d90ffc3252931f321e73352c0c64f608b",
+  "after_path": ".caprmedio_caprmedio/02_analysis/CAPRMEDIO-ANRP-001-ANALYSIS_RPRT--project-meta-and-gov-core-authority-audit.md",
+  "after_version": 10,
+  "after_sha256": "4845eb3f37283a93e63e242e4da9c393bc779b2999dd0e4047bb8f5bb2db3b6b",
+  "archive_path": ".caprmedio_caprmedio/02_analysis/archive/CAPRMEDIO-ANRP-001-ANALYSIS_RPRT--project-meta-and-gov-core-authority-audit@9.md",
+  "archive_sha256": "31d4bc87bead958afdf0abffaabf972d90ffc3252931f321e73352c0c64f608b",
+  "replacements": [
+    {
+      "from": "CAPRMEDIO-META-REQU-092-CORE_META_MODEL-REQUIREMENT--authority-evaluation-and-ops-remain-distinct",
+      "to": "CAPRMEDIO-META-REQU-092"
+    },
+    {
+      "from": "CAPRMEDIO-META-REQU-093-CORE_META_MODEL-REQUIREMENT--requirement-separate-analysis-from-factual-ops-records",
+      "to": "CAPRMEDIO-META-REQU-093"
+    }
+  ],
+  "verification": {
+    "whole_archive_exact": true,
+    "complete_historical_report_body_unchanged": true,
+    "targets_unique_active": true,
+    "canonical_relation_diagnostics_before_equal_after": true
+  },
+  "limits": "Historical audit claims and all other legacy references remain untouched. Not a new audit or general Project migration. No Journal work under current Operator direction."
+}

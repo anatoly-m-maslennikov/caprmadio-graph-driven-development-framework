@@ -1,0 +1,15 @@
+---
+atom_id: CAPRMEDIO-FRAMEWORK-ENGINE-REQU-700
+subject_scopes:
+  - feature-boundary
+version: 8
+updated_at: 2026-09-06 01:45:12 +0400
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  child_of:
+    - CA-M-001
+---
+# Define FRAMEWORK_ENGINE Feature topology
+
+FRAMEWORK_ENGINE owns exactly two immediate unordered Feature Scope Units: `PROGRAMMATIC` and `AGENTIC`.

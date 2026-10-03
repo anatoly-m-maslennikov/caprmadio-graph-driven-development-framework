@@ -1,0 +1,45 @@
+{
+  "schema": "caprmedio.atom_update_frontier.amendment.v1",
+  "task_atom_id": "CA-P-905",
+  "amendment_number": 3,
+  "base_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "amendment_owner_task_atom_id": "CA-P-915",
+  "reason": "Final reconciliation found one frozen KEEP disposition that conflicts with accepted decisions 39 and 40 and one Project-specific Bootstrap Delivery rule that remained in Core Meta-Model authority.",
+  "entries": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-647",
+      "original_disposition": "KEEP",
+      "final_disposition": "ARCHIVE_FOR_DELIVERY_REPLACEMENT",
+      "preserved_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-647--register-project-scope-unit-graph-projection-mechanics@15.md",
+      "replacement_atom_id": "CA-D-343",
+      "replacement_scope": "Project Scope Unit Graph Projection Carrier placement only",
+      "non_carrier_authority_preserved_by": [
+        "CAPRMEDIO-META-REQU-620",
+        "CAPRMEDIO-META-REQU-627",
+        "CAPRMEDIO-GOV-EVAL-006",
+        "CA-D-332",
+        "CA-D-333"
+      ]
+    },
+    {
+      "atom_id": "CA-D-014",
+      "original_disposition": "OUTSIDE_FROZEN_FRONTIER",
+      "final_disposition": "ARCHIVE_AS_PROJECT_SPECIFIC_DELIVERY_OUTSIDE_LOCAL_CONFIGURATION",
+      "preserved_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-014-DELIVERY-META--bind-metamodel-delivery-place@12.md",
+      "replacement_atom_id": "CA-D-325",
+      "replacement_scope": "CAPRMEDIO Applicable Methodology Source Carrier placement"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-746",
+      "original_disposition": "KEEP_THEN_REVISED_BY_CA-P-912",
+      "final_disposition": "ARCHIVE_AS_DUPLICATE_TYPE_QUALIFIED_STATUS_AUTHORITY",
+      "preserved_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-746--use-plan-role-type-lifecycles@7.md",
+      "replacement_atom_ids": [
+        "CA-R-1306",
+        "CA-R-1308",
+        "CA-R-1310",
+        "CA-R-1313"
+      ]
+    }
+  ]
+}

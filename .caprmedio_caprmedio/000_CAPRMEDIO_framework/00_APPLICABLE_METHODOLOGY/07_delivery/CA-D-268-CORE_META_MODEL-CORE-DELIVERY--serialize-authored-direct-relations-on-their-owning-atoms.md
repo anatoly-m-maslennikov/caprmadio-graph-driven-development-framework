@@ -1,0 +1,20 @@
+---
+atom_id: CA-D-268
+cce_version: cce_1
+cce_form: serialization
+subjects:
+  governs:
+    continuant:
+      - Atom/Direct Relation Serialization
+  depends_on:
+    continuant:
+      - Atom/Relation Owner
+version: 5
+updated_at: 2026-09-06 01:45:12 +0400
+relations: {}
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md
+---
+# Serialize Authored Direct Relations on Their Owning Atoms
+
+**every** authored direct semantic relation **must** be serialized once under `relations.<RELATION_KIND>` on the Atom that owns its declared direction as a nonempty unordered collection of unique canonical target references **in** deterministic canonical order; target position **must not** add, remove, **or** alter a direct relation **or** dependency.

@@ -1,0 +1,65 @@
+---
+subjects:
+  declared:
+    continuant:
+      - scope-topology
+  prerequisite:
+    continuant:
+      - carrier-format
+atom_id: CA-R-859
+cce_version: cce_1
+cce_form: obligation
+version: 18
+updated_at: 2026-08-23 15:24:07
+relations:
+  child_of:
+    - CA-R-962
+    - CA-R-963
+---
+# Register Unit Names and filename tokens
+
+GOVERNANCE MUST register one authoritative Unit Name and one stable Atom-filename token for every current Scope Unit without registering a Human Name:
+
+| Unit Name | Atom-filename token |
+| --- | --- |
+| META_METHODOLOGY | `META_MTHD` |
+| METAMODEL | `MMODEL` |
+| SEMANTICS | `SEMNTC` |
+| GOVERNANCE | `GOVERN` |
+| CAPRMEDIO | `CAPRMEDIO` |
+| FRAMEWORK_METHODOLOGY | `FR_MTHD` |
+| FRAMEWORK_ENGINE | `FR_ENGN` |
+| PROGRAMMATIC | `PROGRAMMATIC` |
+| AGENTIC | `AGENTIC` |
+| OPERATOR_DOCUMENTATION | `OPER_DOC` |
+| CORE_EXTENSIONS | `CORE_EXTENSIONS` |
+| RELEASES | `RELSS` |
+| COMMUNITY_EXTENSIONS | `COMMUNITY_EXTENSIONS` |
+| FIELD | `FIELD` |
+| APPS | `APPS` |
+| GRAPH_APP | `GRAPH_APP` |
+| MCP | `MCP` |
+| AGENT_HOST_PLUGINS | `AGENT_HOST_PLUGINS` |
+| CODEX_PLUGIN | `CODEX_PLUGIN` |
+| SKILLS | `SKILLS` |
+| TOOLS | `TOOLS` |
+| TARGET_SET | `TARGET_SET` |
+| GRAPH_CHECK | `GRAPH_CHECK` |
+| BULK_CHANGE | `BULK_CHANGE` |
+| PROJECTION_REBUILD | `PROJECTION_REBUILD` |
+| IMPLEMENTATION_INVENTORY | `IMPLEMENTATION_INVENTORY` |
+| ADOPT_RECONCILE | `ADOPT_RECONCILE` |
+| COMMIT_TRIGGER | `COMMIT_TRIGGER` |
+| COMMIT_CONTEXT | `COMMIT_CONTEXT` |
+| APPEND_CHANGE_RECORDS | `APPEND_CHANGE_RECORDS` |
+| COMMIT_CHANGE_SET | `COMMIT_CHANGE_SET` |
+| INSTALL_TOOLS | `INSTALL_TOOLS` |
+| START_BACKGROUND_SERVICES | `START_BACKGROUND_SERVICES` |
+| ATOM_SEARCH | `ATOM_SEARCH` |
+| ATOM_READ | `ATOM_READ` |
+| ATOM_CREATE | `ATOM_CREATE` |
+| ATOM_UPDATE | `ATOM_UPDATE` |
+| ATOM_MOVE | `ATOM_MOVE` |
+| ATOM_ARCHIVE | `ATOM_ARCHIVE` |
+| ATOM_PROMOTE | `ATOM_PROMOTE` |
+| ATOM_UPGRADE | `ATOM_UPGRADE` |

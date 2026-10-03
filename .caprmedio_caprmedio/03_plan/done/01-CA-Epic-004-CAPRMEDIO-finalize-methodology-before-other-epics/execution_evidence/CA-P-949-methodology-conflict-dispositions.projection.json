@@ -1,0 +1,57 @@
+{
+  "schema": "caprmedio.ca-p-949.methodology-conflict-dispositions.v1",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-949",
+  "completed_at": "2026-09-03T22:57:49+04:00",
+  "prerequisite": {
+    "atom_id": "CA-P-948",
+    "status": "Done",
+    "report_path": ".caprmedio_caprmedio/03_plan/01-CA-Epic-004-CAPRMEDIO-finalize-methodology-before-other-epics/execution_evidence/CA-P-948-complete-methodology-conflict-and-gap-report.projection.json",
+    "report_sha256": "ab868f45d117022785393f6bb991a3de3e066895f66623f6051dac3947bede4e",
+    "source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d"
+  },
+  "operator_disposition_set": {
+    "cardinality": "=0",
+    "finding_ids": [],
+    "bound_report_sha256": "ab868f45d117022785393f6bb991a3de3e066895f66623f6051dac3947bede4e",
+    "bound_source_frontier_digest": "9d6404698d0dfc2c4024d6e606793eb511583a58cbcd7046f9101afe4418762d",
+    "semantic_choice_approved": false,
+    "authority_changed": false
+  },
+  "independent_finding_partition": {
+    "operator_disposition_finding_count": 0,
+    "mechanical_finding_ids": [
+      "CA-P-948-F-001"
+    ],
+    "mechanical_finding_count": 1,
+    "informational_permitted_finding_ids": [
+      "CA-P-948-I-001",
+      "CA-P-948-I-002",
+      "CA-P-948-I-003",
+      "CA-P-948-I-004"
+    ],
+    "informational_permitted_finding_count": 4,
+    "unresolved_methodology_conflict_count": 0,
+    "mechanical_finding_delegation": {
+      "finding_id": "CA-P-948-F-001",
+      "resolution_class": "mechanical",
+      "next_task": "CA-P-950",
+      "source_authority_change_permitted_here": false
+    }
+  },
+  "validation": {
+    "report_sha256_matches_required_digest": true,
+    "report_schema_valid": true,
+    "report_summary_operator_disposition_finding_count": 0,
+    "independent_operator_disposition_finding_count": 0,
+    "operator_disposition_set_cardinality": "=0",
+    "source_frontier_bound": true,
+    "semantic_choice_approved": false,
+    "source_authority_changed": false,
+    "deterministic_repeated_report_digest": true
+  },
+  "excluded": [
+    ".DS_Store",
+    "macOS-protected empty directory shells"
+  ]
+}

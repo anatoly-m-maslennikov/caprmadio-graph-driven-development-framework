@@ -1,0 +1,23 @@
+# CA-P-1086 partial stage — Reconciled Projection classification
+
+Non-authoritative execution evidence, 2026-09-13 22:36:08 +0400. The Operator approved the name pair Source Reconciliation for the intended Process and Reconciled Projection for its output, with Applicable Methodology as an example. This stage applies only the output Type definition and classification. CA-P-1086 remains Active.
+
+## Two-source disposition
+
+New CA-R-1461 v1 defines Projection/Type: Reconciled Projection. It preserves selected source content, canonical identities and exact final selected Revisions without synthesis or merge, with no unresolved conflict under applicable declared checks. This is not an omniscient claim of freedom from every imaginable conflict. Needed source corrections require separate Operator authorization upstream and re-evaluation of the final selected Revisions; no output edit, compiler side effect or source precedence inference resolves a conflict. The result has no independent source authority or inferred Carrier strategy. Carrier is a direct prerequisite because the Claim uses it. Root reserved R1461 after a live maximum-ID check found R1460 and no R1461 references; unexecuted R1457/R1458 reservations remain untouched.
+
+R1213 v10→v11 is a same-ID semantic revision: Applicable Methodology is classified under the generic Reconciled Projection Type, not a use-case-specific Type, Catalog or Direct Projection Type. Its existing named target, classification form, Summary/filename, relations and prerequisites remain intact; the admitted Type is added as a direct prerequisite. Current active Atom Revisions in selected Methodology Source Scope Units, exact final selected source contents and identities, non-authority, no Scope Unit or Goal Claim Scope, and D-governed trace metadata remain required. No replacement/M274 exception is claimed.
+
+## Reused authority and the Process boundary
+
+M224 v12 already specifies methodology-specific selection, complete conflict reporting, exact Operator approval, separately authorized source correction, reselection/rechecking and fail-closed publication. It remains byte-for-byte unchanged; this stage neither duplicates that workflow nor approves its complete M/O classification. R1314 retains exact lineage; R1315 current-active RMEDO-only selection; R1316 no synthesis/merge; R1317 exact conflict/source-frontier approval and fail-closed membership. No gate is weakened by the generic Type.
+
+R1453 requires a reusable Process flow graph referencing Actions with explicit control flow, and R1344 places reusable operational behavior in O. Source Reconciliation is the accepted intended Process name, not an implemented O Process in this stage. Scoped reuse/generalization/migration of existing M224 remains a concrete pending decision; no generic Action library, dangling Process Subject or new control-flow schema is introduced. P980 and the later operational-role Tasks retain their boundaries. The existing P097 reference to Source Reconciliation is not treated as a reusable Process definition and remains unchanged.
+
+D305 still requires the exact source Atom Revision without new identity or Claim authority. D313 still mandates source Carrier paths; D306 still requires the governed projected Atom-file representation. These D Claims and D253/D309 remain unchanged. D-governed trace metadata is not a license to alter source content. R1460 keeps derivation distinct from materialization. META657 retains per-fact source authority and traceable derivation. No Tool, settings, runtime, schema, generated output or dbt dependency changes occur.
+
+## Footprint and verification
+
+This fourteenth ordered source map follows the derivation/materialization map (`94eeb0ef8d46335836dacbadeaa40c784b6b10bf506541ae323bc95b154115e6`), advances R1213 and adds R1461: 1,564→1,565 admitted sources. Seven paths: two sources, exact R1213@10 archive, P1086 Active v9 and exact @8 archive, this report and map. The current Task contextualizes its earlier open-Type note without rewriting the preserved prior Task or stage evidence. R1213's Type disposition is now resolved; the other 15 reserved-source dispositions and the separate Process issue remain open. No other Task is revised or executed.
+
+Verification preserves 1,563 unrelated admitted sources, 53 Drafts, 11,945 baseline files outside the exact footprint, 115 other Tasks, thirteen prior maps, exact old source/Task bytes, prior Journal prefixes and raw index `54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b`. Canonical Journal events record exact approved results append-only with honest provenance. No Git mutation is authorized; this checks authority/carrier consistency, not implemented runtime conformance.

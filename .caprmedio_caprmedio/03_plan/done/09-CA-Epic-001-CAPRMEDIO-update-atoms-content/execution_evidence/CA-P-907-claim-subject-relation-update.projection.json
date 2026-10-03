@@ -1,0 +1,257 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-907",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T22:36:22+04:00",
+  "outcomes": [
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-GOVERN-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "source_sha256": "d49eb442a120dc4c70a07932bbf991c7793a5709a847be27e789bfec16521d23",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-GOVERN-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "outcome_sha256": "d49eb442a120dc4c70a07932bbf991c7793a5709a847be27e789bfec16521d23"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1195-MMODEL-CORE-REQUIREMENT--define-subject-temporal-form.md",
+      "source_sha256": "566400fe93fc5c759575358a6359ae52828142f3ef4afebf1b4be0ee55a251be",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1195-MMODEL-CORE-REQUIREMENT--define-subject-temporal-form.md",
+      "outcome_sha256": "64af61a335d1b593f49e90ada5852ab3484b11244bc0cb0c056a74a93a80375f"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1196-MMODEL-CORE-REQUIREMENT--define-continuant-subject-temporal-form.md",
+      "source_sha256": "ed932a0a0797381cd42c8fd31fedcc8e273cde194c3c2a8fa03c1935d33e5f2f",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1196-MMODEL-CORE-REQUIREMENT--define-continuant-subject-temporal-form.md",
+      "outcome_sha256": "09d6dd16f08225be19f6f6aa4a00acaba939054f8dc14560ab5dbf95e17b8188"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1197-MMODEL-CORE-REQUIREMENT--define-occurrent-subject-temporal-form.md",
+      "source_sha256": "9a7a6e4ae0adc67d6ba688b795db35e8c76570f04945af42311a4e36e5bd601a",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1197-MMODEL-CORE-REQUIREMENT--define-occurrent-subject-temporal-form.md",
+      "outcome_sha256": "a019a9b62afa809c41f3a77e621ee53501d8409469fb1e5d2ea74aa5623f5d6b"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-MMODEL-CORE-REQUIREMENT--define-claim-subject-relation.md",
+      "source_sha256": "19624de0452e3d2962cec075fc0ef42a05667f967cae7b3c245ac1637624e504",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-MMODEL-CORE-REQUIREMENT--define-claim-subject-relation.md",
+      "outcome_sha256": "ba37690de967590e46442d9f93e88942f159c698bc9645638b22d2c116732049"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1199-MMODEL-CORE-REQUIREMENT--define-governs-claim-subject-relation.md",
+      "source_sha256": "c0d5a44741a7a460d564ffc3726168b2f943703950f153f74cc403b39eeff43c",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1199-MMODEL-CORE-REQUIREMENT--define-governs-claim-subject-relation.md",
+      "outcome_sha256": "3ac01c0d8f029e2307efde2c75c4e9e384402542527e7e8209ce6f73dbba3dab"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1200-MMODEL-CORE-REQUIREMENT--define-depends-on-claim-subject-relation.md",
+      "source_sha256": "537cff0a944f47504d28a909f7144a1bb6033baa1d8a8d3db5669dad63e3f5f2",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1200-MMODEL-CORE-REQUIREMENT--define-depends-on-claim-subject-relation.md",
+      "outcome_sha256": "f06559e7f062ac1289aba91d4a0dd560bcb6b0092cf5c728200509cccd9b4714"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-MMODEL-CORE-REQUIREMENT--require-a-governed-subject-on-every-active-and-draft-atom.md",
+      "source_sha256": "7f35041b8081531b19ff84dcdf516f5377d0d1a96b6d75b0101e896412355063",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1201-MMODEL-CORE-REQUIREMENT--require-a-governed-subject-on-every-active-and-draft-atom.md",
+      "outcome_sha256": "26f50506d2a574ff3e214ffcb48bf494e5024576e5a1623da5b6dc847c5f5a15"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1202-MMODEL-CORE-REQUIREMENT--limit-governed-subjects-by-temporal-form.md",
+      "source_sha256": "9d8252e4a2d3df25c792e3fd2af01e4c0cda2d6d97af5538bcfbb0fd54e08a21",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1202-MMODEL-CORE-REQUIREMENT--limit-governed-subjects-by-temporal-form.md",
+      "outcome_sha256": "ef9b355040ceef9c035067149cd3a5fe48369de7f9ee8f0d426c7f1c3eb54b48"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-MMODEL-CORE-REQUIREMENT--split-at-same-form-governed-subject-boundaries.md",
+      "source_sha256": "7622ed39b53b9817d2b604a43ae64b28e64e8c9996d90a54f0f4926be08d697a",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-MMODEL-CORE-REQUIREMENT--split-at-same-form-governed-subject-boundaries.md",
+      "outcome_sha256": "e1addae60089b6276faf0bfd086547ff9de9e16c8a42289dc1bb25fddd1469e5"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1208-MMODEL-CORE-REQUIREMENT--classify-capo-content-roles-as-occurrent.md",
+      "source_sha256": "e24e34af037f5eb655db65f8a4324af96de91897a606fe5b4d3f992293ae055c",
+      "disposition": "ARCHIVE_AS_CONFLICT",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1208-MMODEL-CORE-REQUIREMENT--classify-capo-content-roles-as-occurrent@1.md",
+      "outcome_sha256": "e24e34af037f5eb655db65f8a4324af96de91897a606fe5b4d3f992293ae055c"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1209-MMODEL-CORE-REQUIREMENT--classify-rmed-content-roles-as-continuant.md",
+      "source_sha256": "40a85ab738f6d9bfaea23755d1ea23200a095dd9da6e1c95c0c3bf69957e6f74",
+      "disposition": "ARCHIVE_AS_CONFLICT",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1209-MMODEL-CORE-REQUIREMENT--classify-rmed-content-roles-as-continuant@1.md",
+      "outcome_sha256": "40a85ab738f6d9bfaea23755d1ea23200a095dd9da6e1c95c0c3bf69957e6f74"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1210-MMODEL-CORE-REQUIREMENT--classify-implementation-content-role-as-not-applicable.md",
+      "source_sha256": "16efc106a05323a72b3f7691211093e28a616d49b055a01de793885074f2f023",
+      "disposition": "ARCHIVE_AS_CONFLICT",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1210-MMODEL-CORE-REQUIREMENT--classify-implementation-content-role-as-not-applicable@1.md",
+      "outcome_sha256": "16efc106a05323a72b3f7691211093e28a616d49b055a01de793885074f2f023"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-885-GOVERN-CORE-REQUIREMENT--store-depends-on-from-consumer-to-producer.md",
+      "source_sha256": "d07fa181428b04e8687a59b59149f2d04ae4dd2ed17a7e0eb426e319ce082712",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-885-GOVERN-CORE-REQUIREMENT--store-depends-on-from-consumer-to-producer.md",
+      "outcome_sha256": "d07fa181428b04e8687a59b59149f2d04ae4dd2ed17a7e0eb426e319ce082712"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-CORE-REQUIREMENT--classify-every-subject-by-relation-and-temporal-form.md",
+      "source_sha256": "722cd76e9fb2f8c271116977cc59629776a3a8e095bee0a37936c20306beb245",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R--MMODEL-CORE-REQUIREMENT--classify-every-subject-by-relation-and-temporal-form@1.md",
+      "outcome_sha256": "722cd76e9fb2f8c271116977cc59629776a3a8e095bee0a37936c20306beb245"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-SEMNTC-CORE-METHOD--assign-subjects-from-the-claim.md",
+      "source_sha256": "dc8095469ac7dd685ea5dfc3367fde4fec1f32a33b2277c142e787700a8663e5",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-SEMNTC-CORE-METHOD--assign-subjects-from-the-claim.md",
+      "outcome_sha256": "b2646c98d462787598c14f080af329af02e25fb5d5797bbd5d2acd9dc442d065"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--SEMNTC-CORE-METHOD--assign-qualified-subject-paths-from-the-claim.md",
+      "source_sha256": "ea1bb18f1222b9471db2b0e74cd81504fe038e254237d16ede8cf18606552532",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M--SEMNTC-CORE-METHOD--assign-qualified-subject-paths-from-the-claim@3.md",
+      "outcome_sha256": "ea1bb18f1222b9471db2b0e74cd81504fe038e254237d16ede8cf18606552532"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--SEMNTC-CORE-METHOD--derive-the-qualified-subject-projection.md",
+      "source_sha256": "3616a65b67afd1a33141e71f72dad2d4cd742bede61d0ccdd384aff0dc66f4d6",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M--SEMNTC-CORE-METHOD--derive-the-qualified-subject-projection@1.md",
+      "outcome_sha256": "3616a65b67afd1a33141e71f72dad2d4cd742bede61d0ccdd384aff0dc66f4d6"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-GOVERN-QA_CASE--validate-atom-subjects.md",
+      "source_sha256": "68707c6ba3c8fd044f36f7d105ed759ca36d34766f36486d7c2caf3c75fe3515",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-GOVERN-QA_CASE--validate-atom-subjects.md",
+      "outcome_sha256": "bc8e8cb7828451f56d1b49212acc312b10c2f6e8a2577568a73fcd22561c0111"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/drafts/CA-E--GOVERN-QA_CASE--validate-qualified-atom-subjects.md",
+      "source_sha256": "f94e427c15d949d5ec1126245716f4e411808dd7b4ee361bccc0e6efee72acca",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E--GOVERN-QA_CASE--validate-qualified-atom-subjects@4.md",
+      "outcome_sha256": "f94e427c15d949d5ec1126245716f4e411808dd7b4ee361bccc0e6efee72acca"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-126-SEMNTC-CORE-METHOD--derive-the-subject-projection.md",
+      "source_sha256": "d582862b6a2baf73801309c9b508d2f46e0e0f649da9f3eba9597363e87a8d23",
+      "disposition": "ARCHIVE_AS_CONFLICT_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-126-SEMNTC-CORE-METHOD--derive-the-subject-projection@4.md",
+      "outcome_sha256": "d582862b6a2baf73801309c9b508d2f46e0e0f649da9f3eba9597363e87a8d23"
+    }
+  ],
+  "new_authority": [
+    {
+      "atom_id": "CA-R-1275",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-MMODEL-CORE-REQUIREMENT--define-subject-as-an-independent-referenced-entity.md",
+      "sha256": "0de4c878b82a251e1358a7f29faa320b2a8024c35478173067bfb9f0ff22727c"
+    },
+    {
+      "atom_id": "CA-R-1276",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1276-MMODEL-CORE-REQUIREMENT--give-every-claim-subject-relation-one-kind.md",
+      "sha256": "c72ad212f6ffdb2820f16c456edaa7604441aac33ebc4a4640ec49929489a99c"
+    },
+    {
+      "atom_id": "CA-R-1277",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1277-MMODEL-CORE-REQUIREMENT--give-every-claim-subject-relation-one-temporal-form.md",
+      "sha256": "3726bb4985a11cba0c85169b0f07cad07350ca7ca972a5a218b005be38caefde"
+    },
+    {
+      "atom_id": "CA-R-1278",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1278-MMODEL-CORE-REQUIREMENT--leave-depends-on-relation-count-unbounded.md",
+      "sha256": "64bbda7b1511430cc62a2e2f558e39b0a0de4b6476601730f375667713202f20"
+    },
+    {
+      "atom_id": "CA-R-1279",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-MMODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "sha256": "96f2dbfcc1497c0278dd229da4095962a16a79384fe7cc1d1e22077b351dd67c"
+    },
+    {
+      "atom_id": "CA-R-1280",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1280-MMODEL-CORE-REQUIREMENT--reference-every-prerequisite-subject-through-depends-on.md",
+      "sha256": "3b90ad6038ae1a40ccf0b9b5d448c0bf0771b2725e296979258f739919723ded"
+    },
+    {
+      "atom_id": "CA-R-1281",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1281-MMODEL-CORE-REQUIREMENT--define-subject-projection-as-derived-authority-free-navigation.md",
+      "sha256": "4afb4fa28f8849a62784c39c767788419a20dcdd8d81d29e490a75a8e7a44750"
+    },
+    {
+      "atom_id": "CA-M-232",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-SEMNTC-CORE-METHOD--derive-subject-projection-from-current-claim-subject-relations.md",
+      "sha256": "3cdfb9ca8ef8a82730fc57c4bd44fed62f126379514f4c64201e1e5dedfda894"
+    }
+  ],
+  "preserved_revision_snapshots": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1195-MMODEL-CORE-REQUIREMENT--define-subject-temporal-form@1.md",
+      "sha256": "566400fe93fc5c759575358a6359ae52828142f3ef4afebf1b4be0ee55a251be"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1196-MMODEL-CORE-REQUIREMENT--define-continuant-subject-temporal-form@1.md",
+      "sha256": "ed932a0a0797381cd42c8fd31fedcc8e273cde194c3c2a8fa03c1935d33e5f2f"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1197-MMODEL-CORE-REQUIREMENT--define-occurrent-subject-temporal-form@1.md",
+      "sha256": "9a7a6e4ae0adc67d6ba688b795db35e8c76570f04945af42311a4e36e5bd601a"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1198-MMODEL-CORE-REQUIREMENT--define-claim-subject-relation@1.md",
+      "sha256": "19624de0452e3d2962cec075fc0ef42a05667f967cae7b3c245ac1637624e504"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1199-MMODEL-CORE-REQUIREMENT--define-governs-claim-subject-relation@1.md",
+      "sha256": "c0d5a44741a7a460d564ffc3726168b2f943703950f153f74cc403b39eeff43c"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1200-MMODEL-CORE-REQUIREMENT--define-depends-on-claim-subject-relation@1.md",
+      "sha256": "537cff0a944f47504d28a909f7144a1bb6033baa1d8a8d3db5669dad63e3f5f2"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1201-MMODEL-CORE-REQUIREMENT--require-a-governed-subject-on-every-active-and-draft-atom@1.md",
+      "sha256": "7f35041b8081531b19ff84dcdf516f5377d0d1a96b6d75b0101e896412355063"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1202-MMODEL-CORE-REQUIREMENT--limit-governed-subjects-by-temporal-form@1.md",
+      "sha256": "9d8252e4a2d3df25c792e3fd2af01e4c0cda2d6d97af5538bcfbb0fd54e08a21"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1203-MMODEL-CORE-REQUIREMENT--split-at-same-form-governed-subject-boundaries@1.md",
+      "sha256": "7622ed39b53b9817d2b604a43ae64b28e64e8c9996d90a54f0f4926be08d697a"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-125-SEMNTC-CORE-METHOD--assign-subjects-from-the-claim@5.md",
+      "sha256": "dc8095469ac7dd685ea5dfc3367fde4fec1f32a33b2277c142e787700a8663e5"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-246-GOVERN-QA_CASE--validate-atom-subjects@4.md",
+      "sha256": "68707c6ba3c8fd044f36f7d105ed759ca36d34766f36486d7c2caf3c75fe3515"
+    }
+  ],
+  "validation": {
+    "active_yaml": "PASS",
+    "active_atom_id_uniqueness": "PASS",
+    "independent_subject_authority": "PASS",
+    "relation_kind_cardinality": "PASS",
+    "relation_temporal_form_cardinality": "PASS",
+    "governs_cardinality": "PASS",
+    "depends_on_unbounded": "PASS",
+    "derived_subject_projection": "PASS",
+    "obsolete_subject_temporal_authority_inactive": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "execution_sha256": "ef7fc7fd3b71a70a63c6198809bd9e961feb82a4a5d5559089de4f3f8b500de6"
+}

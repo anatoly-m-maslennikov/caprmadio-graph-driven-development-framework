@@ -1,0 +1,54 @@
+{
+  "authority": "non_authoritative_conflict_report",
+  "can_apply": false,
+  "completed_at": "2026-08-29T09:23:46+04:00",
+  "conflict_count": 1,
+  "conflicts": [
+    {
+      "candidate_source_carriers": [
+        {
+          "atom_revision": 8,
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-316--register-ca-as-specialist-skill-prefix.md",
+          "sha256": "c9a2727ab63b1ee18f92e8b8d34c67ea2a13b6b00dd62164c9694bcd1073c142"
+        },
+        {
+          "atom_revision": 8,
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree.md",
+          "sha256": "4a1ab33c118aa464737f1346bfb9b2c15b80fce56a48d0529e945b1b3ca7de71"
+        }
+      ],
+      "classification": "source_authority_defect",
+      "conflict_id": "a9fcdbf6e39196b029e0397c1b4d360f8f3998d774b8d696f6bb87160cfaa6c0",
+      "operator_disposition": null,
+      "term": "public-interface",
+      "type": "duplicate_governed_term_definition"
+    }
+  ],
+  "contributing_source_layers": [
+    "CORE_META_MODEL",
+    "LOCAL_CONFIGURATION"
+  ],
+  "eligible_candidate_count": 627,
+  "schema": "caprmedio.applicable_methodology_conflict_report.v1",
+  "selected_candidate_count": 627,
+  "source_frontier_digest": "b46f92b26830e9e8c00eae3b82872720629ec0dd8610951d97df09a8c8233289",
+  "structural_source_layers": [
+    "CORE_META_MODEL",
+    "INSTALLED_EXTENSIONS",
+    "LOCAL_CONFIGURATION"
+  ],
+  "task_atom_id": "CA-P-921",
+  "unresolved_conflict_count": 1,
+  "validation": {
+    "compiler_exit": 2,
+    "compiler_output_sha256": "8ac1df4de2c8f2f48ab4267ff6b65a7857dc8bd725290ca8170f478c1d9e95d8",
+    "deterministic_repeated_dry_run": true,
+    "duplicate_selected_atom_identities": 0,
+    "invalid_dependency_cycles": 0,
+    "output_changed": false,
+    "output_path_collisions": 0,
+    "prohibited_role_specific_type_terms": 0,
+    "term_system_violations": 0,
+    "unresolved_replacements": 0
+  }
+}

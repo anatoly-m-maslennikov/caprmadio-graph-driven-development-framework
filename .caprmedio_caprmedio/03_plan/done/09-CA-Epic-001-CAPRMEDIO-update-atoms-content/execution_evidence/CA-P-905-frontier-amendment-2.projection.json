@@ -1,0 +1,50 @@
+{
+  "schema": "caprmedio.atom_update_frontier.amendment.v1",
+  "task_atom_id": "CA-P-905",
+  "base_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "amendment_owner_task_atom_id": "CA-P-913",
+  "reason": "CA-P-913 direct-Subject and direct-Claim audit found Carrier-specific authority assigned to earlier topics or omitted from the base topic match. Accepted decisions 36 through 40 require every such Claim to become Delivery authority.",
+  "added_frontier": {
+    "archive_for_delivery_replacement": [
+      "CA-R-327",
+      "CA-R-974",
+      "CA-R-986",
+      "CA-R-993",
+      "CAPRMEDIO-GOV-REQU-002",
+      "CAPRMEDIO-GOV-REQU-010",
+      "CAPRMEDIO-GOV-REQU-291",
+      "CAPRMEDIO-GOV-REQU-298",
+      "CAPRMEDIO-GOV-REQU-309",
+      "CAPRMEDIO-GOV-REQU-338",
+      "CAPRMEDIO-GOV-REQU-341",
+      "CAPRMEDIO-GOV-REQU-347",
+      "CAPRMEDIO-GOV-REQU-363",
+      "CAPRMEDIO-GOV-REQU-364",
+      "CAPRMEDIO-GOV-REQU-365",
+      "CAPRMEDIO-GOV-REQU-368",
+      "CAPRMEDIO-GOV-REQU-664",
+      "CAPRMEDIO-GOV-REQU-669",
+      "CAPRMEDIO-GOV-CNST-001",
+      "CA-M-132",
+      "CA-M-136",
+      "CA-E-244",
+      "CAPRMEDIO-GOV-EVAL-007",
+      "CAPRMEDIO-GOV-EVAL-008"
+    ],
+    "remove_carrier_content_while_preserving_semantic_authority": [
+      "CA-R-366",
+      "CA-R-806",
+      "CAPRMEDIO-GOV-REQU-305",
+      "CAPRMEDIO-GOV-REQU-313",
+      "CAPRMEDIO-GOV-REQU-339",
+      "CAPRMEDIO-GOV-REQU-342",
+      "CAPRMEDIO-GOV-REQU-367",
+      "CAPRMEDIO-GOV-REQU-385",
+      "CAPRMEDIO-GOV-REQU-764",
+      "CA-M-116",
+      "CA-M-134",
+      "CA-E-241",
+      "CAPRMEDIO-GOV-EVAL-010"
+    ]
+  }
+}

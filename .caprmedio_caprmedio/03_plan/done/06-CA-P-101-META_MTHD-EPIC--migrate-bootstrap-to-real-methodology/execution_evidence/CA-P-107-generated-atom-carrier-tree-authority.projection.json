@@ -1,0 +1,130 @@
+{
+  "schema": "caprmedio.ca_p_107.generated_atom_carrier_tree_authority.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-107",
+  "task_revision": 8,
+  "recorded_at": "2026-08-27T21:13:36+04:00",
+  "minimum_confidence_percent": 99,
+  "structural_source_layers": [
+    "CORE_META_MODEL",
+    "INSTALLED_EXTENSIONS",
+    "LOCAL_CONFIGURATION"
+  ],
+  "contributing_source_layers": [
+    "CORE_META_MODEL",
+    "LOCAL_CONFIGURATION"
+  ],
+  "installed_extensions": "empty and non-contributing",
+  "source_root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+  "generated_root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY",
+  "selected_content_roles": {
+    "directories": [
+      "04_requirement",
+      "05_method",
+      "06_evaluation",
+      "07_delivery",
+      "09_ops"
+    ],
+    "roles": [
+      "REQUIREMENT",
+      "METHOD",
+      "EVALUATION",
+      "DELIVERY",
+      "OPS"
+    ],
+    "excluded": [
+      "CONCERN",
+      "ANALYSIS",
+      "PLAN",
+      "IMPLEMENTATION",
+      "DRAFT",
+      "ARCHIVED"
+    ]
+  },
+  "generated_atom_carrier_rule": {
+    "output_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/<canonical role directory>/<source basename>",
+    "projection_only_frontmatter": {
+      "projection": {
+        "source_carrier_path": "<relative POSIX path from the projected Atom Carrier parent directory to its authoritative source Carrier>"
+      }
+    },
+    "preserved_source_payload": [
+      "Atom ID",
+      "Atom revision",
+      "Claim content",
+      "all source frontmatter except the added projection mapping"
+    ],
+    "projection_authority": "non_authoritative",
+    "persistent_output_not_allowed": [
+      "CAP role directories",
+      "IMPLEMENTATION role directory",
+      "drafts",
+      "archive",
+      "monolithic methodology JSON",
+      "persistent GOVERNS index Carrier",
+      "persistent DEPENDS_ON index Carrier"
+    ]
+  },
+  "resolution_and_tool_boundary": {
+    "source_frontier_digest": "SHA-256 of canonical UTF-8 JSON eligible Candidate records ordered by Source Layer, Atom ID, Atom revision, canonical relative Carrier path, and Carrier SHA-256",
+    "conflicts": [
+      "duplicate selected Atom identity",
+      "unresolved replacement",
+      "incompatible retained Candidate",
+      "unresolved priority",
+      "output-path collision"
+    ],
+    "dry_run": "reports the complete deterministic conflict set and one deterministic Candidate resolution per conflict",
+    "apply_gate": "one durable unambiguous Operator approval in LOCAL_CONFIGURATION bound to each exact conflict and the exact source-frontier digest",
+    "approval_failure": "stale, partial, missing, ambiguous, or mismatched approval leaves generated output unchanged",
+    "structural_order_is_permission": false,
+    "tool": "CA-P-110 must implement and use COMPILE_APPLICABLE_METHODOLOGY with dry-run validation and staged atomic replacement of generated RMEDO output directories only",
+    "source_mutation_permitted": false
+  },
+  "retrieval_and_regeneration": {
+    "indexes": "derive GOVERNS and DEPENDS_ON indexes mechanically on demand from generated projected Atom Carriers",
+    "deletion": "generated RMEDO output directories may be deleted",
+    "regeneration": "the resolved source frontier regenerates the complete tree without authority loss"
+  },
+  "authority_revisions": [
+    {
+      "atom_id": "CA-R-1229",
+      "version": 2,
+      "sha256": "9bdeca40e16235c14d81bf120944b50d421d8a6383a873596cc3aecb91b3b356"
+    },
+    {
+      "atom_id": "CA-R-1230",
+      "version": 2,
+      "sha256": "0184a64ee5925f661515f5ca35784d012e1a650c64bcd33ae16efae63ee3450a"
+    },
+    {
+      "atom_id": "CA-M-224",
+      "version": 4,
+      "sha256": "ac747d05903affede3df437ff86716f75cac3e1b3f076a85ee7fba3b4353ba21"
+    },
+    {
+      "atom_id": "CA-M-225",
+      "version": 2,
+      "sha256": "c598f0d5352136653c9771cc5271cbefc6e3ae2a368538486c0ad91cf403b624"
+    },
+    {
+      "atom_id": "CA-E-379",
+      "version": 3,
+      "sha256": "be9c301119093992f6d7e4e4720ac8bc25d057be07fb333a06a61907244c324a"
+    },
+    {
+      "atom_id": "CA-D-253",
+      "version": 2,
+      "sha256": "88a5b1624332caa45e318d69794fa3da623033c52c2aa19e3d77e53296a14b6c"
+    }
+  ],
+  "execution": {
+    "tool_implemented": false,
+    "dry_run_executed": false,
+    "generated_atom_carriers_created": false,
+    "source_carriers_modified": false,
+    "consumer_carriers_modified": false,
+    "confidence_percent": 99
+  }
+}

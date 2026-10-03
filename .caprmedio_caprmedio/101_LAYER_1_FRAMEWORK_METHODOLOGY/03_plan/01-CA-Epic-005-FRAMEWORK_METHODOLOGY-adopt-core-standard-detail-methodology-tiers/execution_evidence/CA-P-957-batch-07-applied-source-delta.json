@@ -1,0 +1,363 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "07",
+  "frozen_plan": "CA-P-957-batch-07-planned-source-delta.json",
+  "frozen_plan_sha256": "e9c9214884bfe28cd55dce7d685aacb0047f1d62c2e5d965f2f0e1f3a5487d3b",
+  "existing": [
+    {
+      "atom_id": "CA-R-1016",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1016-CORE_META_MODEL-REQUIREMENT--register-rationale-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "784bc9abe88357142cb618538e66c12aad6d317c2c826a7713b7874b1697fb78",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1016-CORE_META_MODEL-REQUIREMENT--register-rationale-for-relation@7.md",
+      "archive_sha256": "784bc9abe88357142cb618538e66c12aad6d317c2c826a7713b7874b1697fb78",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1016-CORE_META_MODEL-CORE-REQUIREMENT--register-rationale-for-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "3edbce8ca0827ae86e97d90aee7e2dcaa1b9467b0a61675eb1707d8abc5c277b",
+      "after_governs_subjects": [
+        "Rationale For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1017",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1017-CORE_META_MODEL-REQUIREMENT--register-method-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "42ec586410533db027aecc06c7d504ec35b8c41017fbcb6864b496724a6c81b8",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1017-CORE_META_MODEL-REQUIREMENT--register-method-for-relation@7.md",
+      "archive_sha256": "42ec586410533db027aecc06c7d504ec35b8c41017fbcb6864b496724a6c81b8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1017-CORE_META_MODEL-CORE-REQUIREMENT--register-method-for-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "e0e97970a88ef91ed545cf20bc426266397171971ff88acd662ef2b6b3afbc28",
+      "after_governs_subjects": [
+        "Method For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1019",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1019-CORE_META_MODEL-REQUIREMENT--register-delivery-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "b1ccc7c29d2608772e9885989771457597d14e1909c394191126f9b5f82c283f",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1019-CORE_META_MODEL-REQUIREMENT--register-delivery-for-relation@7.md",
+      "archive_sha256": "b1ccc7c29d2608772e9885989771457597d14e1909c394191126f9b5f82c283f",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1019-CORE_META_MODEL-CORE-REQUIREMENT--register-delivery-for-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "d7c3160f36d8bfd8f9953b95c46cbe512f86789c09d6aa6c31ea117f1a65699e",
+      "after_governs_subjects": [
+        "Delivery For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1020",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1020-CORE_META_MODEL-REQUIREMENT--register-implementation-of-relation.md",
+      "before_version": 7,
+      "before_sha256": "2c85c8eab4987bf7b34473f3801f174532fe8e1b885302589ccd9ef5a033515c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1020-CORE_META_MODEL-REQUIREMENT--register-implementation-of-relation@7.md",
+      "archive_sha256": "2c85c8eab4987bf7b34473f3801f174532fe8e1b885302589ccd9ef5a033515c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1020-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-of-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "bd3d988a8275f4d34ca2e8b2296dd455ee5869550ee4b2fcede4bb49125b98ee",
+      "after_governs_subjects": [
+        "Implementation Of Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1021",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1021-CORE_META_MODEL-REQUIREMENT--register-evidence-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "d38f827111a31917348eb1a5569dd518879e981b928aa1d2858daba1edb6e3df",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1021-CORE_META_MODEL-REQUIREMENT--register-evidence-for-relation@7.md",
+      "archive_sha256": "d38f827111a31917348eb1a5569dd518879e981b928aa1d2858daba1edb6e3df",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1021-CORE_META_MODEL-CORE-REQUIREMENT--register-evidence-for-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "4cf58a959dc72c1f21fbd0420cdb92e2168886cec4ea0b53cc91b82705324465",
+      "after_governs_subjects": [
+        "Evidence For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1022",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1022-CORE_META_MODEL-REQUIREMENT--register-concern-about-relation.md",
+      "before_version": 7,
+      "before_sha256": "82ab83addfd20d956b0102be135d395955e663d3bbb47feb6176722ba8c34fe5",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1022-CORE_META_MODEL-REQUIREMENT--register-concern-about-relation@7.md",
+      "archive_sha256": "82ab83addfd20d956b0102be135d395955e663d3bbb47feb6176722ba8c34fe5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1022-CORE_META_MODEL-CORE-REQUIREMENT--register-concern-about-relation.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "5b108079eb54cb359fe2dbab7c39a58dcc2fc8033f3cdac5071800a883533b75",
+      "after_governs_subjects": [
+        "Concern About Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1024",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1024-CORE_META_MODEL-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations.md",
+      "before_version": 6,
+      "before_sha256": "b3a2eacb72404c76667f09fa9bb832f8814a0fa99b51a91b5d6eee1c5872ae1a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1024-CORE_META_MODEL-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations@6.md",
+      "archive_sha256": "b3a2eacb72404c76667f09fa9bb832f8814a0fa99b51a91b5d6eee1c5872ae1a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1024-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations.md",
+      "after_version": 7,
+      "after_tier": "Core",
+      "after_sha256": "bbe93fa80af9e72da24b7afde3c7cf9b40a81ae624ae2d7bfa6fe5a28bbac164",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1025",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1025-CORE_META_MODEL-REQUIREMENT--require-authority-for-new-relation-meanings.md",
+      "before_version": 7,
+      "before_sha256": "3ec71c763468176f08a5634492708188d268a4f6a6e7e9910834665453099255",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1025-CORE_META_MODEL-REQUIREMENT--require-authority-for-new-relation-meanings@7.md",
+      "archive_sha256": "3ec71c763468176f08a5634492708188d268a4f6a6e7e9910834665453099255",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1025-CORE_META_MODEL-CORE-REQUIREMENT--require-authority-for-new-relation-meanings.md",
+      "after_version": 8,
+      "after_tier": "Core",
+      "after_sha256": "efd413f6335202736a81aa8ee4df6ded5978c01a159ad30b46bc8a5a798f2b2d",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1026",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-CORE_META_MODEL-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "before_version": 8,
+      "before_sha256": "2979ddab95d6c346dc819bbecb281954a8bb3dde24ca46c1eea33376c6644d21",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1026-CORE_META_MODEL-REQUIREMENT--register-depends-on-and-required-by-relation-pair@8.md",
+      "archive_sha256": "2979ddab95d6c346dc819bbecb281954a8bb3dde24ca46c1eea33376c6644d21",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-CORE_META_MODEL-CORE-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "after_version": 9,
+      "after_tier": "Core",
+      "after_sha256": "082802e154b6c6d7f138ab0047a7674758b1dfdedccc84e329c35a853c999f29",
+      "after_governs_subjects": [
+        "Dependency Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1027",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1027-CORE_META_MODEL-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair.md",
+      "before_version": 8,
+      "before_sha256": "f8695cef50ff1b3fe3f7aa4fae7124f4e1ac4348f2c5ec5baf3cd56af962ef89",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1027-CORE_META_MODEL-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair@8.md",
+      "archive_sha256": "f8695cef50ff1b3fe3f7aa4fae7124f4e1ac4348f2c5ec5baf3cd56af962ef89",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1027-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair.md",
+      "after_version": 9,
+      "after_tier": "Core",
+      "after_sha256": "4d4e2b28e4ddcabb8c128d5144ee6f0f8120da6fad4bc6bd377a396c4f890cbe",
+      "after_governs_subjects": [
+        "Implementation Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1031",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1031-CORE_META_MODEL-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence.md",
+      "before_version": 6,
+      "before_sha256": "b6223f2930331a90d17a0ae8daa8e54b23f3c35e7cc64aaa093a3ecb7eb76a5d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1031-CORE_META_MODEL-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence@6.md",
+      "archive_sha256": "b6223f2930331a90d17a0ae8daa8e54b23f3c35e7cc64aaa093a3ecb7eb76a5d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1031-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence.md",
+      "after_version": 7,
+      "after_tier": "Core",
+      "after_sha256": "07734b2a6d00eb6349cba8589ef0dc222c66418234df5596df5149362400e1ae",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1039",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1039-CORE_META_MODEL-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis.md",
+      "before_version": 6,
+      "before_sha256": "461196e0a6204bec3d934ba6efe794436c1c73cdc2e1e5c9dca91216e0411157",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1039-CORE_META_MODEL-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis@6.md",
+      "archive_sha256": "461196e0a6204bec3d934ba6efe794436c1c73cdc2e1e5c9dca91216e0411157",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1039-CORE_META_MODEL-CORE-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis.md",
+      "after_version": 7,
+      "after_tier": "Core",
+      "after_sha256": "ec873d68d25f0f6159c7f7bbf55aca0f3b243a4921625adc0296a15cc6da6826",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-325",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-REQUIREMENT--register-derived-from-relation.md",
+      "before_version": 11,
+      "before_sha256": "2399c0309bff830e88cbbc9e0af572513c7707b51c84223faf3ae668020ff2b5",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-REQUIREMENT--register-derived-from-relation@11.md",
+      "archive_sha256": "2399c0309bff830e88cbbc9e0af572513c7707b51c84223faf3ae668020ff2b5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-CORE-REQUIREMENT--register-derived-from-relation.md",
+      "after_version": 12,
+      "after_tier": "Core",
+      "after_sha256": "3ba4843e32cec8da9131607fa7d69cb95253fed07960e8bfdda2d7503f694dd9",
+      "after_governs_subjects": [
+        "DERIVED_FROM"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-351",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "before_version": 10,
+      "before_sha256": "6f8fa99813c0a11878fa549961ce3dd7657117e4f53ab0a2e899aae82c257163",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-REQUIREMENT--define-self-hosted-governance-origins@10.md",
+      "archive_sha256": "6f8fa99813c0a11878fa549961ce3dd7657117e4f53ab0a2e899aae82c257163",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-CORE-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "after_version": 11,
+      "after_tier": "Core",
+      "after_sha256": "363291542c8219375a0b0fb93b0a33bb81b76c2a2c4ae4040a1a81d6a13d71c7",
+      "after_governs_subjects": [
+        "Self-Hosted Governance Origin"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-710",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-REQUIREMENT--require-one-parent-scope-unit.md",
+      "before_version": 9,
+      "before_sha256": "fbb3e7957f6534e5fd02632d6f8fb47345974e10d479db63e7bc81eb30648edf",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-REQUIREMENT--require-one-parent-scope-unit@9.md",
+      "archive_sha256": "fbb3e7957f6534e5fd02632d6f8fb47345974e10d479db63e7bc81eb30648edf",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-CORE-REQUIREMENT--require-one-parent-scope-unit.md",
+      "after_version": 10,
+      "after_tier": "Core",
+      "after_sha256": "2e43d76ecf8165ee5e646b3ef3ca576818fa1b144aef0c6f13b6356a4e291091",
+      "after_governs_subjects": [
+        "scope-topology"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-712",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership.md",
+      "before_version": 9,
+      "before_sha256": "d843d2e0c285d3760dcb59bdb61144f738365ac2845a0f99f74e83c1878ea4cd",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership@9.md",
+      "archive_sha256": "d843d2e0c285d3760dcb59bdb61144f738365ac2845a0f99f74e83c1878ea4cd",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-CORE-REQUIREMENT--require-acyclic-structural-ownership.md",
+      "after_version": 10,
+      "after_tier": "Core",
+      "after_sha256": "844aaf265be2622c885410ecd9342c29361a4f843f49772fffd6e9e75a88bef1",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-713",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-REQUIREMENT--prohibit-skipped-scope-unit-ownership.md",
+      "before_version": 8,
+      "before_sha256": "fc3cc0cc2d9dbb01afe38295fca05b85834fb9745d2702af991fe50d75207690",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-REQUIREMENT--prohibit-skipped-scope-unit-ownership@8.md",
+      "archive_sha256": "fc3cc0cc2d9dbb01afe38295fca05b85834fb9745d2702af991fe50d75207690",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-skipped-scope-unit-ownership.md",
+      "after_version": 9,
+      "after_tier": "Core",
+      "after_sha256": "5e068078b02bc9d3d102041959b0edec4c92d60bed940b7a23dc9497d6da7181",
+      "after_governs_subjects": [
+        "scope-topology"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-717",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation.md",
+      "before_version": 10,
+      "before_sha256": "1d90f765577d6d64f6fce567d642c18b1b2355adb6a5bef1100b00b8fef058cd",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation@10.md",
+      "archive_sha256": "1d90f765577d6d64f6fce567d642c18b1b2355adb6a5bef1100b00b8fef058cd",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-CORE-REQUIREMENT--register-structural-parent-relation.md",
+      "after_version": 11,
+      "after_tier": "Core",
+      "after_sha256": "4e2723d147875c7653000fa2f178d188de1f03eedc8293afb159fd9568178a2b",
+      "after_governs_subjects": [
+        "Structural Parent Relation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-718",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership.md",
+      "before_version": 11,
+      "before_sha256": "7364610346fe722070d03c23ffe46f42d9f0c265782421bd9a8248a1bc7f4a88",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership@11.md",
+      "archive_sha256": "7364610346fe722070d03c23ffe46f42d9f0c265782421bd9a8248a1bc7f4a88",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-CORE-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership.md",
+      "after_version": 12,
+      "after_tier": "Core",
+      "after_sha256": "ff725ff4fef8dbaccd5d2b45474a1c9ea8fef4a7349281be83af7f7cd81f7ea9",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-879",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-879-CORE_META_MODEL-REQUIREMENT--register-child-of-and-parent-of-relation-pair.md",
+      "before_version": 12,
+      "before_sha256": "cb20772b737c975d601dab407009b7b901dd32841c8dc5f59bb7f23b48855212",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-879-CORE_META_MODEL-REQUIREMENT--register-child-of-and-parent-of-relation-pair@12.md",
+      "archive_sha256": "cb20772b737c975d601dab407009b7b901dd32841c8dc5f59bb7f23b48855212",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-879-CORE_META_MODEL-CORE-REQUIREMENT--register-child-of-and-parent-of-relation-pair.md",
+      "after_version": 13,
+      "after_tier": "Core",
+      "after_sha256": "78fc57e5355a319452f8651292aef496d9d6f0e8317b230ec263866c1ba74d20",
+      "after_governs_subjects": [
+        "Normative Authority Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-322",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-REQUIREMENT--register-the-implementation-record-projection.md",
+      "before_version": 13,
+      "before_sha256": "80e9899b3c5e636cab6bc58cb98232df8874af788c4e4c8bd412be073af510f1",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-REQUIREMENT--register-the-implementation-record-projection@13.md",
+      "archive_sha256": "80e9899b3c5e636cab6bc58cb98232df8874af788c4e4c8bd412be073af510f1",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "after_version": 14,
+      "after_tier": "Core",
+      "after_sha256": "a60728382595991766c9a62f6678bf2bf7f147041e04b377378d0d1369f5f32a",
+      "after_governs_subjects": [
+        "Projection/Type: Implementation Record"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-342",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal.md",
+      "before_version": 12,
+      "before_sha256": "9a4b6dc4c629942714c885f54baabf267d26ed3839c2140d5025b454a8f00679",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal@12.md",
+      "archive_sha256": "9a4b6dc4c629942714c885f54baabf267d26ed3839c2140d5025b454a8f00679",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal.md",
+      "after_version": 13,
+      "after_tier": "Core",
+      "after_sha256": "51c6a5a689df9723b75f54de975e05206a25564267b3d59fd9ca5ff7418b49a8",
+      "after_governs_subjects": [
+        "Journal/Type: Implementation Journal"
+      ]
+    }
+  ],
+  "additions": [],
+  "journal_status": "Unlogged under temporary Operator execution override; no conformance claim."
+}

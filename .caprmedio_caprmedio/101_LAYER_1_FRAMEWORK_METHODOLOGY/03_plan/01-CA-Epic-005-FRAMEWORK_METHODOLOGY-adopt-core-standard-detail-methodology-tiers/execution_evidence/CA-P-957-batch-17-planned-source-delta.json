@@ -1,0 +1,382 @@
+{
+  "schema": "ca-p-957-batch-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "17",
+  "recorded_at": "2026-09-10 07:15:17 +0400",
+  "checkpoint": "Exact bounded batch17; autonomous application under latest Operator override after preservation and canonical-overlay checks.",
+  "existing": [
+    {
+      "atom_id": "CA-R-747",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-747-CORE_META_MODEL-CORE-REQUIREMENT--register-goal-and-demand-as-type-values-for-relational-requirement-atoms.md",
+      "before_version": 17,
+      "before_sha256": "58b348f95ae1b8af6bb3eba496b814bea4771c7ac6baa57527a2b34b1422c0c9",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type\"\n  depends_on:\n    continuant:\n      - Relational Atom\natom_id: CA-R-747\ncce_version: cce_1\ncce_form: obligation\nversion: 17\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-923\n    - CA-R-924\n---\n# Register Goal and Demand as Type Values for Relational Requirement Atoms\n\nthe Core contribution to allowed values of `Atom/Content Role: Requirement/Type` for Relational Atoms **must** be exactly (Goal, Demand).\n",
+      "before_tier": "Core",
+      "proposed_path": null,
+      "proposed_version": null,
+      "proposed_tier": null,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-747-CORE_META_MODEL-CORE-REQUIREMENT--register-goal-and-demand-as-type-values-for-relational-requirement-atoms@17.md",
+      "successor": {
+        "atom_id": "CA-R-924",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications.md",
+        "version": 11,
+        "sha256": "f37b5b74f4f1ea927c8325cb423b2a08ac5762101ad48850df0be7c20e8b84bc",
+        "complete_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Relational Atom/Qualified Type\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\natom_id: CA-R-924\ncce_version: cce_1\ncce_form: registry\nversion: 11\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-923\n---\n# Register Core Relational Atom Classifications\n\nthe Core contribution to allowed qualified Types of Relational Atom **must** **`=`** (`Atom/Content Role: Requirement/Type: Goal`, `Atom/Content Role: Requirement/Type: Demand`, `Atom/Content Role: Plan/Type: Objective`).\n"
+      },
+      "retirement_reason": "The complete Goal/Demand Requirement-Type contribution is exactly R924's Requirement-domain projection; no additional condition survives independently.",
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-747"
+    },
+    {
+      "atom_id": "CA-R-950",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-950-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes.md",
+      "before_version": 10,
+      "before_sha256": "5783f2acfcd0f3b888a0ecd92b693be326cc191a9337d076cf924f8c6ce4598c",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Demand/Direction\"\n  depends_on:\n    continuant:\n      - Structural Parent Relation\natom_id: CA-R-950\ncce_version: cce_1\ncce_form: prohibition\nversion: 10\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CA-R-932\n    - CA-R-935\n---\n# Prohibit Demand between ancestor and descendant Scopes\n\na Demand Atom **must not** relate ancestor **and** descendant Scope Units **in** (ancestor-to-descendant **or** descendant-to-ancestor) direction.\n",
+      "before_tier": "Core",
+      "proposed_path": null,
+      "proposed_version": null,
+      "proposed_tier": null,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-950-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes@10.md",
+      "successor": {
+        "atom_id": "CA-R-935",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+        "version": 10,
+        "sha256": "9cc921f47c422ea05695169a844b3870831b5d4009a03715ede59a1afff30fd8",
+        "complete_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - Atom/Scope\n      - Atom/Claim/Scope/Scope Unit Set\natom_id: CA-R-935\ncce_version: cce_1\ncce_form: prohibition\nversion: 10\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-932\n---\n# Prohibit Demands between ancestors and descendants\n\na Demand Atom **must not** target an ancestor **or** descendant of its Consumer Atom Scope Unit **in** its Claim Scope Unit Set.\n"
+      },
+      "retirement_reason": "The complete bidirectional ancestor/descendant Demand prohibition is exactly R935 under R944's Consumer Atom Scope to Producer Claim Scope direction; it does not quantify pairs within the Producer set.",
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-950"
+    },
+    {
+      "atom_id": "CA-R-165",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "before_version": 10,
+      "before_sha256": "b416d2895f79191fc74366f205b649f80d09f3b8525804e8f011a274706bd409",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Atom/Revision\n  depends_on:\n    continuant:\n      - lifecycle-traceability\natom_id: CA-R-165\ncce_version: cce_1\ncce_form: cardinality\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 10\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n    - CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision\n---\n# Give every Atom Revision version and updated at\n\n**every** Atom Revision **must** have **`=1`** positive monotonic `version` **and** **`=1`** unambiguous `updated_at`.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-CORE_META_MODEL-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "proposed_version": 11,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Atom/Revision\n  depends_on:\n    continuant:\n      - lifecycle-traceability\natom_id: CA-R-165\ncce_version: cce_1\ncce_form: cardinality\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 11\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n---\n# Give every Atom Revision version and updated at\n\n**every** Atom Revision **must** have **`=1`** positive monotonic `version` **and** **`=1`** unambiguous `updated_at`.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-165-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at@10.md",
+      "exact_replacements": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision\n",
+          "after": "",
+          "count": 1,
+          "reason": "Remove the demonstrated inactive unresolved parent during this revised Atom's admission; retain active META125."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Atom/Revision"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-165",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-366",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-CORE_META_MODEL-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "before_version": 14,
+      "before_sha256": "22d055046fb3f27a6ed8c416c26ddaa6744f397d8a25a598d339b334d974a893",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Atom/Revision/Reference\n  depends_on:\n    continuant:\n      - Atom/Identity\n      - Atom/Revision/Version\n      - Atom/Revision/Updated At\natom_id: CA-R-366\ncce_version: cce_1\ncce_form: obligation\nversion: 14\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Reference exact Atom Revisions by version and time\n\n**every** exact Atom Revision reference **must** identify Atom identity, Version, **and** Updated At.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-CORE_META_MODEL-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "proposed_version": 15,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Atom/Revision/Reference\n  depends_on:\n    continuant:\n      - Atom/Identity\n      - Atom/Revision/Version\n      - Atom/Revision/Updated At\natom_id: CA-R-366\ncce_version: cce_1\ncce_form: obligation\nversion: 15\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations: {}\n---\n# Reference exact Atom Revisions by version and time\n\n**every** exact Atom Revision reference **must** identify Atom identity, Version, **and** Updated At.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-366-CORE_META_MODEL-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time@14.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Atom/Revision/Reference"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-366",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-380",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-380-CORE_META_MODEL-REQUIREMENT--configure-the-semantic-resolution-confidence-default.md",
+      "before_version": 16,
+      "before_sha256": "ae65d4b92e69b39004c00fa6470bf13c59f060f56a49bd707316c0e6ea10bc07",
+      "before_bytes_utf8": "---\natom_id: CA-R-380\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - \"Framework Instance Settings/Confidence/Semantic Resolution Threshold\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Framework Instance Settings\"\n      - \"Operator\"\nversion: 16\nupdated_at: \"2026-09-09 23:04:14 +0400\"\nrelations:\n  child_of:\n    - CA-M-115\n---\n# Configure the semantic-resolution confidence default\n\nthe semantic-resolution Confidence Threshold **must** have an Operator-configurable default **in** Framework Instance Settings.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-380-CORE_META_MODEL-GENERAL-REQUIREMENT--configure-the-semantic-resolution-confidence-default.md",
+      "proposed_version": 17,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-380\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - \"Framework Instance Settings/Confidence/Semantic Resolution Threshold\"\n  depends_on:\n    continuant:\n      - \"Confidence Threshold\"\n      - \"Framework Instance Settings\"\n      - \"Operator\"\nversion: 17\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-M-115\n---\n# Configure the semantic-resolution confidence default\n\nthe semantic-resolution Confidence Threshold **must** have an Operator-configurable default **in** Framework Instance Settings.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-380-CORE_META_MODEL-REQUIREMENT--configure-the-semantic-resolution-confidence-default@16.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Framework Instance Settings/Confidence/Semantic Resolution Threshold"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-380",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-806",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "before_version": 14,
+      "before_sha256": "2ba0eca1cbb3a55225c4be54a5168aab5ffffd9059a4a7bd5d99e89cb2a6c224",
+      "before_bytes_utf8": "---\natom_id: CA-R-806\ncce_version: cce_1\ncce_form: cardinality\nsubjects:\n  governs:\n    continuant:\n      - Relation Kind/Metadata\n  depends_on:\n    continuant:\n      - Relation Kind\nversion: 14\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Register Complete Relation Kind Metadata\n\n**every** admitted Relation Kind **must** have **`=1`** canonical metadata record that resolves its graph, declared direction, inverse direction, endpoint classes, cardinality, authority effect, transitivity, applicability, Status, **and** exclusive purpose.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-GENERAL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "proposed_version": 15,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-806\ncce_version: cce_1\ncce_form: cardinality\nsubjects:\n  governs:\n    continuant:\n      - Relation Kind/Metadata\n  depends_on:\n    continuant:\n      - Relation Kind\nversion: 15\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations: {}\n---\n# Register Complete Relation Kind Metadata\n\n**every** admitted Relation Kind **must** have **`=1`** canonical metadata record that resolves its graph, declared direction, inverse direction, endpoint classes, cardinality, authority effect, transitivity, applicability, Status, **and** exclusive purpose.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-806-CORE_META_MODEL-REQUIREMENT--register-complete-relation-kind-metadata@14.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Relation Kind/Metadata"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-806",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-836",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-REQUIREMENT--encode-project-graph-node-partitions.md",
+      "before_version": 9,
+      "before_sha256": "69ddf6ec323ea4db2bed0252248d2149a94589afe5ab7cc1b83f357f470dcaaa",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\natom_id: CA-R-836\nsubjects:\n  governs:\n    continuant:\n      - project-containment graph\n  depends_on:\n    continuant:\n      - Primary Entity\n      - Artifact\n      - Structural Entity\nversion: 9\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes\n---\n# Encode project-graph node partitions\n\nthe project-containment graph **must** derive **`=1`** partition for **every** governed Primary Entity node from its Artifact **or** Structural Entity classification **and** reject a node whose partition count is **`!=1`**.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-GENERAL-REQUIREMENT--encode-project-graph-node-partitions.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\natom_id: CA-R-836\nsubjects:\n  governs:\n    continuant:\n      - project-containment graph\n  depends_on:\n    continuant:\n      - Primary Entity\n      - Artifact\n      - Structural Entity\nversion: 10\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes\n---\n# Encode project-graph node partitions\n\nthe project-containment graph **must** derive **`=1`** partition for **every** governed Primary Entity node from its Artifact **or** Structural Entity classification **and** reject a node whose partition count is **`!=1`**.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-836-CORE_META_MODEL-REQUIREMENT--encode-project-graph-node-partitions@9.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "project-containment graph"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-836",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-837",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md",
+      "before_version": 9,
+      "before_sha256": "0f6b9c33b5038b90c20f75ad10f17c48abbabbe12f3b3050a20b669564983fe7",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\natom_id: CA-R-837\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 9\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-835-REQUIREMENT-BSEED_SEMANTICS--scope-artifacts-through-scope-units\n---\n# Derive Artifact scope inclusion\n\nthe resolver **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\natom_id: CA-R-837\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\nversion: 10\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations: {}\n---\n# Derive Artifact scope inclusion\n\nFor **every** Artifact contained **in** a Scope Unit, the resolver **must** derive its one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n\nAn Atom with no containing Scope Unit uses the separately governed Scope rule under CA-R-930; a failed Scope Unit resolution does **not** establish that no containing Scope Unit exists.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion@9.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-835-REQUIREMENT-BSEED_SEMANTICS--scope-artifacts-through-scope-units\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Remove only the demonstrated inactive legacy parent; no invented substitute."
+        },
+        {
+          "before": "the resolver **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.",
+          "after": "For **every** Artifact contained **in** a Scope Unit, the resolver **must** derive its one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n\nAn Atom with no containing Scope Unit uses the separately governed Scope rule under CA-R-930; a failed Scope Unit resolution does **not** establish that no containing Scope Unit exists.",
+          "count": 1,
+          "reason": "Narrow the containing-Unit resolver domain to respect the existing R930 exception, retaining canonical address, exact direct owner, complete ancestry and invalid-resolution guards."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "the resolver **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.",
+          "after": "For **every** Artifact contained **in** a Scope Unit, the resolver **must** derive its one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n\nAn Atom with no containing Scope Unit uses the separately governed Scope rule under CA-R-930; a failed Scope Unit resolution does **not** establish that no containing Scope Unit exists.",
+          "count": 1,
+          "reason": "Narrow the containing-Unit resolver domain to respect the existing R930 exception, retaining canonical address, exact direct owner, complete ancestry and invalid-resolution guards."
+        }
+      ],
+      "after_governs_subjects": [
+        "scope-topology"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-837",
+      "claim_change": "necessary existing Scope exception binding repair; no new owner policy"
+    },
+    {
+      "atom_id": "CA-R-838",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy.md",
+      "before_version": 10,
+      "before_sha256": "a08ad5700ec4bfa5a7fe471dfdc64a7dafeaa1d6f0db7cc1a5ad3fd276aeef4a",
+      "before_bytes_utf8": "---\natom_id: CA-R-838\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-833-CORE-REQUIREMENT--organize-normative-authority-as-an-acyclic-hierarchy\n---\n# Validate the normative-authority hierarchy\n\nvalidators **must** construct the active normative-authority subgraph from registered authority-bearing direct relations **and** **must** reject the subgraph **when** **any** authority edge lacks registered typing **or** the directed subgraph **contains** a cycle.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-GENERAL-REQUIREMENT--validate-the-normative-authority-hierarchy.md",
+      "proposed_version": 11,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-838\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 11\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-833-CORE-REQUIREMENT--organize-normative-authority-as-an-acyclic-hierarchy\n---\n# Validate the normative-authority hierarchy\n\nvalidators **must** construct the active normative-authority subgraph from registered authority-bearing direct relations **and** **must** reject the subgraph **when** **any** authority edge lacks registered typing **or** the directed subgraph **contains** a cycle.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy@10.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-838",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-852",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-852-CORE_META_MODEL-REQUIREMENT--encode-bounded-ai-agent-delegation.md",
+      "before_version": 9,
+      "before_sha256": "f98bba7fdd991880fbcb60d9c7a7bf237d051470c9b086761ad1c55f8b53bf39",
+      "before_bytes_utf8": "---\natom_id: CA-R-852\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - AI Agent Delegation\n  depends_on:\n    continuant:\n      - Operator\n      - AI Agent\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Encode Bounded AI Agent Delegation\n\n**every** AI Agent Delegation **must** identify its Operator, AI Agent, allowed actions, allowed target Scopes, constraints, validity boundary, **and** revocation state.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-852-CORE_META_MODEL-GENERAL-REQUIREMENT--encode-bounded-ai-agent-delegation.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-852\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - AI Agent Delegation\n  depends_on:\n    continuant:\n      - Operator\n      - AI Agent\nversion: 10\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations: {}\n---\n# Encode Bounded AI Agent Delegation\n\n**every** AI Agent Delegation **must** identify its Operator, AI Agent, allowed actions, allowed target Scopes, constraints, validity boundary, **and** revocation state.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-852-CORE_META_MODEL-REQUIREMENT--encode-bounded-ai-agent-delegation@9.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "AI Agent Delegation"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-852",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-924",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications.md",
+      "before_version": 11,
+      "before_sha256": "f37b5b74f4f1ea927c8325cb423b2a08ac5762101ad48850df0be7c20e8b84bc",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Relational Atom/Qualified Type\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\natom_id: CA-R-924\ncce_version: cce_1\ncce_form: registry\nversion: 11\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-923\n---\n# Register Core Relational Atom Classifications\n\nthe Core contribution to allowed qualified Types of Relational Atom **must** **`=`** (`Atom/Content Role: Requirement/Type: Goal`, `Atom/Content Role: Requirement/Type: Demand`, `Atom/Content Role: Plan/Type: Objective`).\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-relational-atom-classifications.md",
+      "proposed_version": 12,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Relational Atom/Qualified Type\n  depends_on:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\natom_id: CA-R-924\ncce_version: cce_1\ncce_form: registry\nversion: 12\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-923\n---\n# Register Core Relational Atom Classifications\n\nthe Core contribution to allowed qualified Types of Relational Atom **must** **`=`** (`Atom/Content Role: Requirement/Type: Goal`, `Atom/Content Role: Requirement/Type: Demand`, `Atom/Content Role: Plan/Type: Objective`).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications@11.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Relational Atom/Qualified Type"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-924",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-935",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+      "before_version": 10,
+      "before_sha256": "9cc921f47c422ea05695169a844b3870831b5d4009a03715ede59a1afff30fd8",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - Atom/Scope\n      - Atom/Claim/Scope/Scope Unit Set\natom_id: CA-R-935\ncce_version: cce_1\ncce_form: prohibition\nversion: 10\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-932\n---\n# Prohibit Demands between ancestors and descendants\n\na Demand Atom **must not** target an ancestor **or** descendant of its Consumer Atom Scope Unit **in** its Claim Scope Unit Set.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-GENERAL-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+      "proposed_version": 11,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - Atom/Scope\n      - Atom/Claim/Scope/Scope Unit Set\natom_id: CA-R-935\ncce_version: cce_1\ncce_form: prohibition\nversion: 11\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-932\n---\n# Prohibit Demands between ancestors and descendants\n\na Demand Atom **must not** target an ancestor **or** descendant of its Consumer Atom Scope Unit **in** its Claim Scope Unit Set.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants@10.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation-model"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-935",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-925",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "before_version": 13,
+      "before_sha256": "bc7e0caed57d38a6a3a19f0463777fa0eac15888c5d6f881d445613de4d8cdf5",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n  depends_on:\n    continuant:\n      - Relational Atom\n      - Scope Unit\natom_id: CA-R-925\ncce_version: cce_1\ncce_form: definition\nversion: 13\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-923\n    - CA-R-924\n---\n# Define Goal Atom\n\na Goal Atom **means** a Relational Atom with Content Role Requirement **and** Type Goal whose Claim states one desired result for **`=1`** Scope Unit Claim Scope.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "proposed_version": 14,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n  depends_on:\n    continuant:\n      - Relational Atom\n      - Scope Unit\natom_id: CA-R-925\ncce_version: cce_1\ncce_form: definition\nversion: 14\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-923\n---\n# Define Goal Atom\n\na Goal Atom **means** a Relational Atom with Content Role Requirement **and** Type Goal whose Claim states one desired result for **`=1`** Scope Unit Claim Scope.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom@13.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-924\n",
+          "after": "",
+          "count": 1,
+          "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Goal"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-925",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-R-932",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md",
+      "before_version": 12,
+      "before_sha256": "b3affb57d0562affdd686010d9b53071f9d133ef1272d1070530f08a8e123bdb",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n  depends_on:\n    continuant:\n      - Relational Atom\n      - Consumer\n      - Producer\n      - Atom/Scope\n      - Atom/Claim/Scope/Scope Unit Set\natom_id: CA-R-932\ncce_version: cce_1\ncce_form: definition\nversion: 12\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CA-R-923\n    - CA-R-924\n---\n# Define Demand Atom\n\na Demand Atom **means** a Relational Atom with Content Role Requirement **and** Type Demand that is owned by the Consumer Scope Unit identified by its Atom Scope **and** constrains its Producer Claim Scope.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md",
+      "proposed_version": 13,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n  depends_on:\n    continuant:\n      - Relational Atom\n      - Consumer\n      - Producer\n      - Atom/Scope\n      - Atom/Claim/Scope/Scope Unit Set\natom_id: CA-R-932\ncce_version: cce_1\ncce_form: definition\nversion: 13\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  child_of:\n    - CA-R-923\n---\n# Define Demand Atom\n\na Demand Atom **means** a Relational Atom with Content Role Requirement **and** Type Demand that is owned by the Consumer Scope Unit identified by its Atom Scope **and** constrains its Producer Claim Scope.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom@12.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-924\n",
+          "after": "",
+          "count": 1,
+          "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Demand"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-R-932",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-425",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "before_version": 4,
+      "before_sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+      "before_bytes_utf8": "---\natom_id: CA-E-425\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Relational Atom Classification Validation\n  depends_on:\n    continuant:\n      - Relational Atom/Qualified Type\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\nversion: 4\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-923\n    - CA-R-924\n    - CA-R-747\n    - CA-R-1365\n---\n# Validate Relational Atom Classifications\n\n## Claim checked\n\n**every** Relational Atom **must** have **`=1`** qualified Type allowed by the Applicable Methodology, **and** the Core contribution **must** admit **only** Requirement/Goal, Requirement/Demand, **and** Plan/Objective.\n\n## Test case\n\ncreate one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, **and** one relational Plan/Objective Atom. **then** create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, **and** Ops qualified Types **without** an additional Applicable Methodology contribution.\n\n## Acceptance criteria\n\n**only** the Requirement/Goal, Requirement/Demand, **and** Plan/Objective fixtures pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Relational Atom qualified Type.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "proposed_version": 5,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-425\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Relational Atom Classification Validation\n  depends_on:\n    continuant:\n      - Relational Atom/Qualified Type\n      - \"Atom/Content Role: Requirement/Type: Goal\"\n      - \"Atom/Content Role: Requirement/Type: Demand\"\n      - \"Atom/Content Role: Plan/Type: Objective\"\nversion: 5\nupdated_at: \"2026-09-10 07:15:17 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-923\n    - CA-R-924\n    - CA-R-1365\n---\n# Validate Relational Atom Classifications\n\n## Claim checked\n\n**every** Relational Atom **must** have **`=1`** qualified Type allowed by the Applicable Methodology, **and** the Core contribution **must** admit **only** Requirement/Goal, Requirement/Demand, **and** Plan/Objective.\n\n## Test case\n\ncreate one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, **and** one relational Plan/Objective Atom. **then** create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, **and** Ops qualified Types **without** an additional Applicable Methodology contribution.\n\n## Acceptance criteria\n\n**only** the Requirement/Goal, Requirement/Demand, **and** Plan/Objective fixtures pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Relational Atom qualified Type.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications@4.md",
+      "exact_replacements": [
+        {
+          "before": "    - CA-R-747\n",
+          "after": "",
+          "count": 1,
+          "reason": "R747 retires as R924's exact Requirement-domain projection. E425 already checks R924; remove only the duplicate target, preserving the entire original bounded predicate and fixtures."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Relational Atom Classification Validation"
+      ],
+      "classification_record": "CA-P-957-batch-17-dispositions.json#CA-E-425",
+      "claim_change": "none"
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "17 new origin dispositions plus three previously admitted dependency-only followups. No Journal/Git/runtime action.",
+    "R747 is exactly the Requirement-domain projection of R924; R950 is exactly R935 under R944's Consumer-to-Producer direction. Both retained owners are retiered without body change in this batch.",
+    "R930 remains Core: registered human names identify authority owners, not a selected Carrier encoding. R946 is untouched.",
+    "R838's R833 parent resolves to active Project authority and is preserved; no invented replacements for inactive legacy parents.",
+    "E425 retains its full original Claim and fixtures; R924 was already an actual checked target."
+  ]
+}

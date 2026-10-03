@@ -1,0 +1,35 @@
+{
+  "schema": "ca-p-957-external-reference-preservation/v1",
+  "non_authoritative": true,
+  "reason": "Preserve existing Analysis references during batch14 source tier renames; no new audit or historical Claim change.",
+  "atom_id": "CAPRMEDIO-ANRP-001",
+  "path": ".caprmedio_caprmedio/02_analysis/CAPRMEDIO-ANRP-001-ANALYSIS_RPRT--project-meta-and-gov-core-authority-audit.md",
+  "before_version": 10,
+  "after_version": 11,
+  "updated_at": "2026-09-10 06:28:11 +0400",
+  "before_sha256": "4845eb3f37283a93e63e242e4da9c393bc779b2999dd0e4047bb8f5bb2db3b6b",
+  "after_sha256": "08057cab2f77fb10cb8660e7e26778336f52baffd4d1183e64e162d185866e19",
+  "exact_prior_archive": ".caprmedio_caprmedio/02_analysis/archive/CAPRMEDIO-ANRP-001-ANALYSIS_RPRT--project-meta-and-gov-core-authority-audit@10.md",
+  "prior_mapping": "CA-P-957-external-analysis-reference-repair.json",
+  "reference_repairs": [
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-090",
+      "change": "Existing full-basename analysis_of target to unique verified stable identity"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-096",
+      "change": "Existing full-basename analysis_of target to unique verified stable identity"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-098",
+      "change": "Existing full-basename analysis_of target to unique verified stable identity"
+    }
+  ],
+  "validation": {
+    "before_diagnostics": 42,
+    "after_diagnostics": 42,
+    "body_preserved": true,
+    "after_sha256": "08057cab2f77fb10cb8660e7e26778336f52baffd4d1183e64e162d185866e19"
+  },
+  "scope_limit": "Reference-only external repair; excluded from CA-P-957 origin tier classification. All historical report body and other references unchanged. No Journal or Git operation."
+}

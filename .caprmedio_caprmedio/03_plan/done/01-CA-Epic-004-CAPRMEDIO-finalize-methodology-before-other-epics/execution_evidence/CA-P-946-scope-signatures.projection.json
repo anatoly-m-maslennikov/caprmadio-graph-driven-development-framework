@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "active_atom_carriers": 664,
+    "duplicate_signature_groups": 0,
+    "inactive_directory_carriers_skipped": 3619,
+    "scope_expression_occurrences": 0,
+    "scope_section_absent_or_invalid_skipped": 664
+  },
+  "diagnostics": [],
+  "duplicate_canonical_scope_signature_groups": [],
+  "mode": "report_only",
+  "restricted_grammar": {
+    "atom_id": "one exact active Atom ID in the selected source folder",
+    "exclusions": [
+      "mixed **and** and **or** groups",
+      "**without**, **where**, **all**, and every other CCE Operator",
+      "functions, Entity-kind selectors, descendant or dynamic selectors",
+      "unresolved Atomic Identities and changing source frontiers",
+      "unbalanced parentheses and unparseable prose"
+    ],
+    "scope_group": "(atom_id **or** atom_id [**or** atom_id ...]) | (atom_id **and** atom_id [**and** atom_id ...])",
+    "signature": {
+      "atomic_identities": "sorted unique non-empty list",
+      "operator": "and | or"
+    }
+  },
+  "schema": "caprmedio.derive_scope_canonical_signatures.v1",
+  "signatures": [],
+  "source_folder": "/Users/am/Documents/My_Repos/caprmedio-graph-driven-framework/.caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+  "source_frontier": {
+    "active_atom_carrier_count": 664,
+    "sha256": "84aed491d8a4fa30c990be8939c33f74cb35990798ecac72490ea899fe3ed646"
+  },
+  "tool_id": "DERIVE_SCOPE_CANONICAL_SIGNATURES"
+}

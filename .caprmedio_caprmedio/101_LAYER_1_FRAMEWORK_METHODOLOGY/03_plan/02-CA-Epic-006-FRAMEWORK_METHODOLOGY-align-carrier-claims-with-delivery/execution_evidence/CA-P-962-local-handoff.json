@@ -1,0 +1,136 @@
+{
+  "task": "CA-P-962@2",
+  "next_task": "CA-P-963@2",
+  "instruction": "Refresh these current sanctioned bytes; preserve each repaired link and exact prior Revision before changing it. Never overwrite from CA-P-960. Claim text was not extracted or otherwise changed by CA-P-962.",
+  "consumers": [
+    {
+      "identity": "CAPRMEDIO-GOV-EVAL-006",
+      "before": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "version": 16,
+        "sha256": "00f629d63836f91cbb62a3fceb4a529584fb273d7e5600a7d5daabb60daa9336"
+      },
+      "current": {
+        "identity": "CAPRMEDIO-GOV-EVAL-006",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "version": 17,
+        "sha256": "96e0443061bb04e99dc2cdfa7fd40a9f7653ba9cdb6ffe9809e35604d304abd8",
+        "subjects_one_governs_unique": true,
+        "metadata_valid": true
+      },
+      "archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection@16.md",
+        "version": 16,
+        "sha256": "00f629d63836f91cbb62a3fceb4a529584fb273d7e5600a7d5daabb60daa9336",
+        "byte_exact": true
+      },
+      "claim_bytes_preserved": true,
+      "repaired_links": [
+        {
+          "reference_id": 6437,
+          "consumer": "CAPRMEDIO-GOV-EVAL-006",
+          "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+          "target_before": "CAPRMEDIO-GOV-REQU-294",
+          "targets_after": [
+            "CAPRMEDIO-GOV-REQU-294",
+            "CA-D-383"
+          ],
+          "relation": "evaluation_for",
+          "operation_sequence": 26,
+          "clause_mapping_rationale": "Conditions 1, 4, 6 and 7 load/parse Settings, test the two allowed reporting values, reject unknown keys where closed, and require deterministic settings. R294 preserves allowed behavior/values; D383 owns the extracted field path. Retain R294 and add D383 before extraction.",
+          "targets_verified_before_extraction_or_retirement": true
+        },
+        {
+          "reference_id": 6438,
+          "consumer": "CAPRMEDIO-GOV-EVAL-006",
+          "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+          "target_before": "CAPRMEDIO-GOV-REQU-302",
+          "targets_after": [
+            "CAPRMEDIO-GOV-REQU-302",
+            "CA-D-387"
+          ],
+          "relation": "evaluation_for",
+          "operation_sequence": 26,
+          "clause_mapping_rationale": "Conditions 1, 3, 6 and 7 load/parse Settings, test medium/high admission strictness, reject unknown keys where closed, and require deterministic settings. R302 preserves allowed strictness/default; D387 owns the extracted field. Retain R302 and add D387 before extraction.",
+          "targets_verified_before_extraction_or_retirement": true
+        }
+      ]
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-761",
+      "before": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "version": 11,
+        "sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6"
+      },
+      "current": {
+        "identity": "CAPRMEDIO-GOV-REQU-761",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "version": 12,
+        "sha256": "e54069115da090d5940f974f0244aeccb4a3449a1f2a4edddaaa1f75ba6d816d",
+        "subjects_one_governs_unique": true,
+        "metadata_valid": true
+      },
+      "archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint@11.md",
+        "version": 11,
+        "sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6",
+        "byte_exact": true
+      },
+      "claim_bytes_preserved": true,
+      "repaired_links": [
+        {
+          "reference_id": 6101,
+          "consumer": "CAPRMEDIO-GOV-REQU-761",
+          "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+          "target_before": "CAPRMEDIO-GOV-REQU-760",
+          "targets_after": [
+            "CA-D-393"
+          ],
+          "relation": "relates_to",
+          "operation_sequence": 49,
+          "clause_mapping_rationale": "Constraint explicitly uses the non-default external-name exception and is not derived from the default rule. D393 preserves that exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+          "targets_verified_before_extraction_or_retirement": true
+        }
+      ]
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-762",
+      "before": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "version": 8,
+        "sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb"
+      },
+      "current": {
+        "identity": "CAPRMEDIO-GOV-REQU-762",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "version": 9,
+        "sha256": "28fdd59de936753a9d0dd91c22d23cb225021cc936909f14da658bc26a6000e9",
+        "subjects_one_governs_unique": true,
+        "metadata_valid": true
+      },
+      "archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type@8.md",
+        "version": 8,
+        "sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb",
+        "byte_exact": true
+      },
+      "claim_bytes_preserved": true,
+      "repaired_links": [
+        {
+          "reference_id": 6430,
+          "consumer": "CAPRMEDIO-GOV-REQU-762",
+          "consumer_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+          "target_before": "CAPRMEDIO-GOV-REQU-760",
+          "targets_after": [
+            "CA-D-393"
+          ],
+          "relation": "relates_to",
+          "operation_sequence": 50,
+          "clause_mapping_rationale": "External Implementation Method uses the default external-name derivation context. D393 retains the external_<internal_type_name> rule, role-default qualification and explicit non-default exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+          "targets_verified_before_extraction_or_retirement": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,575 @@
+{
+  "task": "CA-P-958",
+  "batch": "01",
+  "records": [
+    {
+      "atom_id": "CA-R-1226",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1226-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md",
+      "before_version": 2,
+      "before_sha256": "f89768589d673f4c9894c8afe2b98fafc72cf4d069eb57eda1096de7d4913aea",
+      "before_bytes_utf8": "---\natom_id: CA-R-1226\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - Applicable Methodology/Sources/Local Configuration/Project Customization\n  depends_on:\n    continuant:\n      - Applicable Methodology/Sources/Core Meta-Model\n      - Extension\n      - Artifact/Revision\nversion: 2\nupdated_at: 2026-08-29 01:16:37 +0400\nrelations: {}\n---\n# Bind Each Project Customization to One Source Revision\n\n**every** Project Customization **must** identify **`=1`** customized Core Meta-Model **or** Extension revision **without** modifying that revision.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1226-REQUIREMENT--bind-each-project-customization-to-one-source-revision@2.md",
+      "archive_sha256": "f89768589d673f4c9894c8afe2b98fafc72cf4d069eb57eda1096de7d4913aea",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CA-R-1226",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1226-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md",
+        "before_version": 2,
+        "before_sha256": "f89768589d673f4c9894c8afe2b98fafc72cf4d069eb57eda1096de7d4913aea",
+        "content_role": "R",
+        "governed_subject": [
+          "Applicable Methodology/Sources/Local Configuration/Project Customization"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Every Project Customization identifies exactly one customized source revision and does not modify it.",
+        "witness": "Revision binding is a shared customization admission contract; it adds one-source accountability within R1207/R1218 expansion ownership.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A graph edge from customization to exact source revision",
+          "A canonical manifest entry resolving the same exact revision"
+        ],
+        "countermodel": "Permit one customization to bind two exact source revisions while conserving immutable source ownership; this fails the existing exactly-one local admission contract.",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1226-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md",
+      "after_version": 3,
+      "after_sha256": "8eec73db8d49de8f2b9aebe665384f2d8fc12fbac0b2b541bb89f436b892e199",
+      "after_bytes_utf8": "---\natom_id: CA-R-1226\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - Applicable Methodology/Sources/Local Configuration/Project Customization\n  depends_on:\n    continuant:\n      - Applicable Methodology/Sources/Core Meta-Model\n      - Extension\n      - Artifact/Revision\nversion: 3\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations: {}\n---\n# Bind Each Project Customization to One Source Revision\n\n**every** Project Customization **must** identify **`=1`** customized Core Meta-Model **or** Extension revision **without** modifying that revision.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CA-R-1354",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1354-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill.md",
+      "before_version": 1,
+      "before_sha256": "6b5254d26e55117183e66f4b002344d1c5eb8a0673b27a9ca319edbd4cc1df82",
+      "before_bytes_utf8": "---\natom_id: CA-R-1354\ncce_version: cce_1\ncce_form: restriction\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO General System Prompt Loading\n  depends_on:\n    continuant:\n      - CAPRMEDIO Main Skill\n      - CAPRMEDIO General System Prompt\nversion: 1\nupdated_at: 2026-08-30 16:32:06 +0400\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Restrict General System Prompt Loading to Main Skill\n\n**only** the CAPRMEDIO Main Skill **may** load the CAPRMEDIO General System Prompt.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1354-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill@1.md",
+      "archive_sha256": "6b5254d26e55117183e66f4b002344d1c5eb8a0673b27a9ca319edbd4cc1df82",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CA-R-1354",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1354-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill.md",
+        "before_version": 1,
+        "before_sha256": "6b5254d26e55117183e66f4b002344d1c5eb8a0673b27a9ca319edbd4cc1df82",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO General System Prompt Loading"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Only the Main Skill may load the General System Prompt.",
+        "witness": "An exclusive permission contract over established Skills and prompt; revoking or widening that permission changes conformance without changing either entity.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A loader allowlist checked at prompt access",
+          "An equivalent capability check on prompt loading"
+        ],
+        "countermodel": "Permit a second explicitly authorized Skill to load the same unchanged prompt; source and Skill identities remain but the exclusive permission contract changes.",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1354-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill.md",
+      "after_version": 2,
+      "after_sha256": "49f8ad686e9c7c17d113460d1af90035556670ec5d0108ee82f66efb3eef1459",
+      "after_bytes_utf8": "---\natom_id: CA-R-1354\ncce_version: cce_1\ncce_form: restriction\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO General System Prompt Loading\n  depends_on:\n    continuant:\n      - CAPRMEDIO Main Skill\n      - CAPRMEDIO General System Prompt\nversion: 2\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Restrict General System Prompt Loading to Main Skill\n\n**only** the CAPRMEDIO Main Skill **may** load the CAPRMEDIO General System Prompt.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CA-R-1355",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1355-REQUIREMENT--route-main-skill-through-canonical-routing-tree.md",
+      "before_version": 1,
+      "before_sha256": "12f2e20556bd9c0742c329e3d42fca1857a71d7d8313e2909b5f5d27bcaa5c7c",
+      "before_bytes_utf8": "---\natom_id: CA-R-1355\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Main Skill Routing\n  depends_on:\n    continuant:\n      - CAPRMEDIO Main Skill\n      - CAPRMEDIO Routing Tree\nversion: 1\nupdated_at: 2026-08-30 16:32:06 +0400\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Route Main Skill Through Canonical Routing Tree\n\nthe CAPRMEDIO Main Skill **must** route **every** requested registered branch **or** leaf through the CAPRMEDIO Routing Tree.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1355-REQUIREMENT--route-main-skill-through-canonical-routing-tree@1.md",
+      "archive_sha256": "12f2e20556bd9c0742c329e3d42fca1857a71d7d8313e2909b5f5d27bcaa5c7c",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CA-R-1355",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1355-REQUIREMENT--route-main-skill-through-canonical-routing-tree.md",
+        "before_version": 1,
+        "before_sha256": "12f2e20556bd9c0742c329e3d42fca1857a71d7d8313e2909b5f5d27bcaa5c7c",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO Main Skill Routing"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "The Main Skill routes every requested registered branch or leaf through the canonical Routing Tree.",
+        "witness": "The entire requested-route coverage contract is shared behavior; it selects neither an encoding nor traversal steps and preserves GOV333 sole registry ownership.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A table-driven dispatcher consulting canonical registered routes",
+          "A graph-traversal dispatcher resolving the same registered routes"
+        ],
+        "countermodel": "Reject all branch requests before routing while retaining canonical leaf routing; the Tree still solely owns registered route meanings, but the every-branch-or-leaf coverage contract fails.",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1355-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--route-main-skill-through-canonical-routing-tree.md",
+      "after_version": 2,
+      "after_sha256": "fe3f7235e32110b76a63e0910871ff8238839d80c7980bb67784a05b43a6ecd9",
+      "after_bytes_utf8": "---\natom_id: CA-R-1355\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Main Skill Routing\n  depends_on:\n    continuant:\n      - CAPRMEDIO Main Skill\n      - CAPRMEDIO Routing Tree\nversion: 2\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Route Main Skill Through Canonical Routing Tree\n\nthe CAPRMEDIO Main Skill **must** route **every** requested registered branch **or** leaf through the CAPRMEDIO Routing Tree.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CA-R-1356",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1356-REQUIREMENT--define-caprmedio-direct-route-skill.md",
+      "before_version": 1,
+      "before_sha256": "84b4219c80f4f00bbf0257968bac80e69f801c28f488f1abd1ab2cd685d68e95",
+      "before_bytes_utf8": "---\natom_id: CA-R-1356\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - CAPRMEDIO Direct Route Skill\n  depends_on:\n    continuant:\n      - Operator\n      - CAPRMEDIO Routing Tree\nversion: 1\nupdated_at: 2026-08-30 16:32:06 +0400\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Define CAPRMEDIO Direct Route Skill\n\nCAPRMEDIO Direct Route Skill **means** an Operator-defined Skill that is bound to **`=1`** branch **or** leaf registered in the CAPRMEDIO Routing Tree **and** invokes **only** that bound target.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1356-REQUIREMENT--define-caprmedio-direct-route-skill@1.md",
+      "archive_sha256": "84b4219c80f4f00bbf0257968bac80e69f801c28f488f1abd1ab2cd685d68e95",
+      "before_tier": "Standard",
+      "after_tier": "Core",
+      "decision": {
+        "atom_id": "CA-R-1356",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1356-REQUIREMENT--define-caprmedio-direct-route-skill.md",
+        "before_version": 1,
+        "before_sha256": "84b4219c80f4f00bbf0257968bac80e69f801c28f488f1abd1ab2cd685d68e95",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO Direct Route Skill"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "Core",
+        "rank": "3d+1",
+        "test": "F",
+        "claim_evidence": "A Direct Route Skill means one Operator-defined Skill bound to exactly one registered branch or leaf and invoking only that target.",
+        "witness": "Allowing unbound or multi-target invocation destroys the defined Direct Route Skill identity; storage and invocation implementation can vary.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106",
+          "CA-R-1261"
+        ],
+        "operation": "revise",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1356-LOCAL_CONFIGURATION-CORE-REQUIREMENT--define-caprmedio-direct-route-skill.md",
+      "after_version": 2,
+      "after_sha256": "3082f78387e246d2317bc43892555b1d5de509ae2b552dac7fc2be8aab8ca739",
+      "after_bytes_utf8": "---\natom_id: CA-R-1356\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - CAPRMEDIO Direct Route Skill\n  depends_on:\n    continuant:\n      - Operator\n      - CAPRMEDIO Routing Tree\nversion: 2\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Define CAPRMEDIO Direct Route Skill\n\nCAPRMEDIO Direct Route Skill **means** an Operator-defined Skill that is bound to **`=1`** branch **or** leaf registered in the CAPRMEDIO Routing Tree **and** invokes **only** that bound target.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CA-R-1357",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1357-REQUIREMENT--permit-operator-defined-direct-route-skills.md",
+      "before_version": 1,
+      "before_sha256": "b20cbd33c153f0cc0d10dbe86cfc901efb3133c7986ff5aee5a466d1c04ce36f",
+      "before_bytes_utf8": "---\natom_id: CA-R-1357\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Direct Route Skill Addition\n  depends_on:\n    continuant:\n      - Operator\n      - CAPRMEDIO Direct Route Skill\nversion: 1\nupdated_at: 2026-08-30 16:32:06 +0400\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Permit Operator-Defined Direct Route Skills\n\nthe Operator **may** add a CAPRMEDIO Direct Route Skill.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1357-REQUIREMENT--permit-operator-defined-direct-route-skills@1.md",
+      "archive_sha256": "b20cbd33c153f0cc0d10dbe86cfc901efb3133c7986ff5aee5a466d1c04ce36f",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CA-R-1357",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1357-REQUIREMENT--permit-operator-defined-direct-route-skills.md",
+        "before_version": 1,
+        "before_sha256": "b20cbd33c153f0cc0d10dbe86cfc901efb3133c7986ff5aee5a466d1c04ce36f",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO Direct Route Skill Addition"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "The Operator may add a Direct Route Skill.",
+        "witness": "This grants an independent permission over a constituted Skill; ordinary nonuse never violates a MAY contract.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "Operator creates a declarative exact-target binding",
+          "Operator creates a host Skill that invokes that same bound target"
+        ],
+        "countermodel": "Withdraw permission to add further Direct Route Skills while retaining all existing Skill identities and bindings; the MAY contract changes. Choosing not to add one is not this countermodel.",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1357-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--permit-operator-defined-direct-route-skills.md",
+      "after_version": 2,
+      "after_sha256": "3646494dbe07de8029141e69fdb3d4d68c1d0d6cc45980c511f9504e3b0c6a1d",
+      "after_bytes_utf8": "---\natom_id: CA-R-1357\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Direct Route Skill Addition\n  depends_on:\n    continuant:\n      - Operator\n      - CAPRMEDIO Direct Route Skill\nversion: 2\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nllm_session_ids:\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nrelations: {}\n---\n# Permit Operator-Defined Direct Route Skills\n\nthe Operator **may** add a CAPRMEDIO Direct Route Skill.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "before_version": 11,
+      "before_sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-314\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 11\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-094\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface\n    - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types\n    - CAPRMEDIO-GOV-REQU-313\n---\n# Require production evaluation checklists\n\n**every** production-relevant component **or** governed scope **must** define a Production Evaluation Checklist **before** it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, **and** within its accepted operating boundaries during real work.\n\n**every** operational condition **or** invariant is owned by one `evaluation_control` Atom. The control identifies:\n\n- the Requirement, Demand For, Constraint, Method, **or** other governed claim being assured;\n- the production signal **and** authoritative data source;\n- the healthy condition, expected range, threshold, **or** failure predicate;\n- the evaluation window, cadence, **and** permitted detection delay;\n- the component, entity, lifecycle state, **or** workflow boundary to which it applies;\n- the accountable owner **and** escalation destination;\n- the alert, incident, investigation, degradation, rollback, **or** recovery action triggered by failure;\n- the diagnostic context required to investigate the condition;\n- the required Ops record **and** evidence-retention boundary; **and**\n- known blind spots, sampling limits, unavailable signals, **and** other evaluation limitations.\n\nA Production Evaluation Checklist is an Evaluation-role Catalog Projection over the applicable `evaluation_control` Atoms. It organizes **and** navigates those controls **without** absorbing, paraphrasing, **or** replacing their claims.\n\n**every** control distinguishes its governed meaning from its realization **and** results:\n\n- the Evaluation Control defines the production evaluation condition;\n- monitors, dashboards, alerts, health checks, **and** operational automation are Implementation;\n- metrics, logs, traces, alerts, incidents, **and** recorded check outcomes are Ops; **and**\n- a Concern Atom of Type `problem` records a material discrepancy requiring disposition.\n\nA Production Evaluation Checklist governs real production operation. It is **not** a QA Case, **and** passing pre-release Test **or** Evaluation implementations does **not** by itself satisfy the production-evaluation obligation.\n\n## Rationale\n\nPre-release QA demonstrates behavior under bounded conditions, while production evaluation **must** detect degradation, incorrect state, **and** supportability failures during actual operation. Atomic controls preserve independent lifecycle **and** replacement, while the checklist provides a navigable scope view **without** conflating definitions, implementations, **and** observations.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists@11.md",
+      "archive_sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-314",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+        "before_version": 11,
+        "before_sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e",
+        "content_role": "R",
+        "governed_subject": [
+          "evaluation"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Production readiness requires atomic operational Evaluation Controls with the listed assurance coverage, navigated by an Evaluation Catalog Projection.",
+        "witness": "The checklist is a shared readiness/coverage contract over existing Evaluation, Projection, Implementation and Ops boundaries; evaluation_control names its existing governed Type.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A generated graph catalog over independently owned controls",
+          "A generated document catalog over the same authoritative controls"
+        ],
+        "countermodel": "Require production control owners and thresholds but omit permitted detection-delay coverage; all role and authority boundaries remain, but the shared completeness criterion fails.",
+        "batch": "01",
+        "replacements": [
+          [
+            "    - CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface",
+            "    - CA-R-1286"
+          ]
+        ]
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+      "after_version": 12,
+      "after_sha256": "0ad6bbcf763a8b823d178aae902c46798bced473a94a1c7b8a3e18613b2ba36a",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-314\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 12\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-094\n  relates_to:\n    - CA-R-1286\n    - CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types\n    - CAPRMEDIO-GOV-REQU-313\n---\n# Require production evaluation checklists\n\n**every** production-relevant component **or** governed scope **must** define a Production Evaluation Checklist **before** it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, **and** within its accepted operating boundaries during real work.\n\n**every** operational condition **or** invariant is owned by one `evaluation_control` Atom. The control identifies:\n\n- the Requirement, Demand For, Constraint, Method, **or** other governed claim being assured;\n- the production signal **and** authoritative data source;\n- the healthy condition, expected range, threshold, **or** failure predicate;\n- the evaluation window, cadence, **and** permitted detection delay;\n- the component, entity, lifecycle state, **or** workflow boundary to which it applies;\n- the accountable owner **and** escalation destination;\n- the alert, incident, investigation, degradation, rollback, **or** recovery action triggered by failure;\n- the diagnostic context required to investigate the condition;\n- the required Ops record **and** evidence-retention boundary; **and**\n- known blind spots, sampling limits, unavailable signals, **and** other evaluation limitations.\n\nA Production Evaluation Checklist is an Evaluation-role Catalog Projection over the applicable `evaluation_control` Atoms. It organizes **and** navigates those controls **without** absorbing, paraphrasing, **or** replacing their claims.\n\n**every** control distinguishes its governed meaning from its realization **and** results:\n\n- the Evaluation Control defines the production evaluation condition;\n- monitors, dashboards, alerts, health checks, **and** operational automation are Implementation;\n- metrics, logs, traces, alerts, incidents, **and** recorded check outcomes are Ops; **and**\n- a Concern Atom of Type `problem` records a material discrepancy requiring disposition.\n\nA Production Evaluation Checklist governs real production operation. It is **not** a QA Case, **and** passing pre-release Test **or** Evaluation implementations does **not** by itself satisfy the production-evaluation obligation.\n\n## Rationale\n\nPre-release QA demonstrates behavior under bounded conditions, while production evaluation **must** detect degradation, incorrect state, **and** supportability failures during actual operation. Atomic controls preserve independent lifecycle **and** replacement, while the checklist provides a navigable scope view **without** conflating definitions, implementations, **and** observations.\n",
+      "after_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-094"
+        ],
+        "relates_to": [
+          "CA-R-1286",
+          "CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types",
+          "CAPRMEDIO-GOV-REQU-313"
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-333",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree.md",
+      "before_version": 10,
+      "before_sha256": "1ce04992ecabc39814e6da1dbd0b3739811eeb4ce059a1ce767a5cad50a5ca1b",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - CAPRMEDIO Routing Tree\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Register one canonical routing tree\n\none machine-readable **and** human-readable routing tree **must** be registered as the sole owner of intent concepts, synonyms, entry criteria, route targets, authority effects, outputs, **and** approval requirements.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree@10.md",
+      "archive_sha256": "1ce04992ecabc39814e6da1dbd0b3739811eeb4ce059a1ce767a5cad50a5ca1b",
+      "before_tier": "Standard",
+      "after_tier": "Core",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-333",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree.md",
+        "before_version": 10,
+        "before_sha256": "1ce04992ecabc39814e6da1dbd0b3739811eeb4ce059a1ce767a5cad50a5ca1b",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO Routing Tree"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "Core",
+        "rank": "3d+1",
+        "test": "F",
+        "claim_evidence": "One readable canonical Routing Tree solely owns intent concepts, synonyms, criteria, targets, authority effects, outputs and approvals.",
+        "witness": "Independent editable owners for the same route semantics destroy the local canonical Routing Tree authority boundary; representations and readers may vary.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "batch": "01",
+        "replacements": [
+          [
+            "relations:\n  child_of:\n    - CA-R-1054",
+            "relations: {}"
+          ]
+        ]
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333-LOCAL_CONFIGURATION-CORE-REQUIREMENT--register-one-canonical-routing-tree.md",
+      "after_version": 11,
+      "after_sha256": "5e3a686343cb152561fb847859aa8db3818f28fb9b6b5b9ad5cea26ef3298327",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-333\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - CAPRMEDIO Routing Tree\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nversion: 11\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations: {}\n---\n# Register one canonical routing tree\n\none machine-readable **and** human-readable routing tree **must** be registered as the sole owner of intent concepts, synonyms, entry criteria, route targets, authority effects, outputs, **and** approval requirements.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-334",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree.md",
+      "before_version": 10,
+      "before_sha256": "33acf802d78b421cc7a74aa05ee11c64822bee4a1f382cf7a456550693809c64",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Routing Tree Validation\n  depends_on:\n    continuant:\n      - CAPRMEDIO Routing Tree\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Validate the routing tree\n\nthe validator **must** reject a routing tree with an invalid schema, unknown target, ambiguous precedence, duplicate route identity, **or** authority effect that is **not** explicitly declared.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree@10.md",
+      "archive_sha256": "33acf802d78b421cc7a74aa05ee11c64822bee4a1f382cf7a456550693809c64",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-334",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree.md",
+        "before_version": 10,
+        "before_sha256": "33acf802d78b421cc7a74aa05ee11c64822bee4a1f382cf7a456550693809c64",
+        "content_role": "R",
+        "governed_subject": [
+          "CAPRMEDIO Routing Tree Validation"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Validator rejects invalid schema, unknown target, ambiguous precedence, duplicate identity or undeclared authority effect.",
+        "witness": "This is a shared acceptance predicate over the constituted Routing Tree; no specimen or schema encoding is selected.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A declarative validator with the same rejection predicate",
+          "An imperative validator evaluating the same semantic conditions"
+        ],
+        "countermodel": "Warn and withhold routing on an invalid schema instead of rejecting tree admission; tree identity and sole authority remain but the specified rejection contract fails.",
+        "batch": "01",
+        "replacements": [
+          [
+            "relations:\n  child_of:\n    - CA-R-1054",
+            "relations: {}"
+          ]
+        ]
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--validate-the-routing-tree.md",
+      "after_version": 11,
+      "after_sha256": "bcd26e1025e6c29c50f8e19d965147d7076d5393997251212576e386e8294144",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-334\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - CAPRMEDIO Routing Tree Validation\n  depends_on:\n    continuant:\n      - CAPRMEDIO Routing Tree\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a02650-eff7-7453-8c37-0699b36773c6\nversion: 11\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations: {}\n---\n# Validate the routing tree\n\nthe validator **must** reject a routing tree with an invalid schema, unknown target, ambiguous precedence, duplicate route identity, **or** authority effect that is **not** explicitly declared.\n",
+      "after_relations": {}
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-372",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+      "before_version": 10,
+      "before_sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - Development Backlog Splitting\n  depends_on:\n    continuant:\n      - Development Backlog\n      - \"Atom Collection/Type: Epic\"\n      - Operator\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 10\nupdated_at: 2026-09-04 01:04:00 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic\n    - CA-R-1370\n---\n# Propose Development Backlog splits\n\n**if** a Development Backlog Epic **contains** more than fifty Task Atoms, **then** Governance **must** propose narrower ordered Epics **and** **may** apply the split **only** **after** Operator approval.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits@10.md",
+      "archive_sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747",
+      "before_tier": "Standard",
+      "after_tier": "Standard",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-372",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+        "before_version": 10,
+        "before_sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747",
+        "content_role": "R",
+        "governed_subject": [
+          "Development Backlog Splitting"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "Standard",
+        "rank": "3d+3",
+        "test": "S",
+        "claim_evidence": "More than fifty backlog Tasks triggers a narrower-Epic proposal; applying it needs Operator approval.",
+        "witness": "A threshold of forty preserves bounded decomposition and approval ownership but fails the selected trigger.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "batch": "01",
+        "replacements": [
+          [
+            "    - CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic",
+            "    - CAPRMEDIO-META-REQU-139"
+          ]
+        ],
+        "revision_reason": "Standard retained; minimum inbound target serialization repair for META139 General rename."
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+      "after_version": 11,
+      "after_sha256": "76c25c843750d14d176f5cb17c1dfbfa29b9f8d9cc90f362e234482e30976242",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-372\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    occurrent:\n      - Development Backlog Splitting\n  depends_on:\n    continuant:\n      - Development Backlog\n      - \"Atom Collection/Type: Epic\"\n      - Operator\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 11\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-139\n    - CA-R-1370\n---\n# Propose Development Backlog splits\n\n**if** a Development Backlog Epic **contains** more than fifty Task Atoms, **then** Governance **must** propose narrower ordered Epics **and** **may** apply the split **only** **after** Operator approval.\n",
+      "after_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-139",
+          "CA-R-1370"
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-139",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic.md",
+      "before_version": 9,
+      "before_sha256": "f0459356d33ff034cee1651a7444a76ec617b9dcfe29a921f22245db6750fb23",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-139\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Development Backlog\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 9\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n---\n# Classify Development Backlog as Epic\n\nthe CAPRMEDIO Project **must** classify the Development Backlog as an Epic whose direct Task members are accepted intended actions that have no narrower Epic.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic@9.md",
+      "archive_sha256": "f0459356d33ff034cee1651a7444a76ec617b9dcfe29a921f22245db6750fb23",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CAPRMEDIO-META-REQU-139",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic.md",
+        "before_version": 9,
+        "before_sha256": "f0459356d33ff034cee1651a7444a76ec617b9dcfe29a921f22245db6750fb23",
+        "content_role": "R",
+        "governed_subject": [
+          "Development Backlog"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "The Development Backlog is an Epic for accepted intended Task actions with no narrower Epic.",
+        "witness": "This is a replaceable shared aggregation/membership contract over already defined Task and Epic meanings.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "An Epic membership graph derived from accepted narrower-Epic-free Tasks",
+          "A canonical Epic member manifest with the same accepted Tasks"
+        ],
+        "countermodel": "Use separate unscheduled Epics for each work domain instead of one Development Backlog Epic; Task and Epic identities remain, but the shared backlog aggregation contract changes.",
+        "batch": "01",
+        "replacements": [
+          [
+            "    - CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan\n",
+            ""
+          ]
+        ]
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--classify-development-backlog-as-epic.md",
+      "after_version": 10,
+      "after_sha256": "f25bf85be2b7f79ee10bc3b3cb406bb71ca5f662b831af4af00c5faea3f9d635",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-139\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Development Backlog\n  depends_on:\n    continuant:\n      - \"Atom Collection/Type: Epic\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nversion: 10\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry\n---\n# Classify Development Backlog as Epic\n\nthe CAPRMEDIO Project **must** classify the Development Backlog as an Epic whose direct Task members are accepted intended actions that have no narrower Epic.\n",
+      "after_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry"
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-769",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-methodology-source-revisions-explicitly.md",
+      "before_version": 9,
+      "before_sha256": "4a504ac7508bf185822abf1cc44ebbe48f9466270abc19252d567e8b78861ad6",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-769\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 9\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-108-CORE_META_MODEL-CORE-REQUIREMENT--evolve-authority-through-governed-history\n    - CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness\n    - CAPRMEDIO-REQU-686-CORE-REQUIREMENT--separate-core-extension-and-local-configuration-authority\n---\n# Select Methodology Source revisions explicitly\n\na Project **must** apply a Methodology Source update **or** downgrade **only** by selecting an identified source revision **and** reconciling affected Project authority; the selection **must not** silently rewrite other Methodology Sources **or** Project-owned Atoms.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-769--select-methodology-source-revisions-explicitly@9.md",
+      "archive_sha256": "4a504ac7508bf185822abf1cc44ebbe48f9466270abc19252d567e8b78861ad6",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CAPRMEDIO-META-REQU-769",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-methodology-source-revisions-explicitly.md",
+        "before_version": 9,
+        "before_sha256": "4a504ac7508bf185822abf1cc44ebbe48f9466270abc19252d567e8b78861ad6",
+        "content_role": "R",
+        "governed_subject": [
+          "lifecycle-traceability"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Source updates/downgrades require identified revision selection and affected Project authority reconciliation without silent rewrites.",
+        "witness": "The local update-admission contract adds reconciliation behavior while conserving distinct source and Project ownership.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A reconciled source-selection transaction with explicit revision links",
+          "A source-revision manifest with an equivalent affected-authority reconciliation review"
+        ],
+        "countermodel": "Allow an identified nonbreaking source downgrade without affected-Project reconciliation while still forbidding silent source/Project rewrites; source ownership survives but the local admission contract fails.",
+        "batch": "01"
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--select-methodology-source-revisions-explicitly.md",
+      "after_version": 10,
+      "after_sha256": "ae37dae45ce6ca13701efec21d1a7424d0a5beaca4b92aacf89a3b8d5bbd4c05",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-META-REQU-769\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - lifecycle-traceability\nversion: 10\nupdated_at: \"2026-09-10 07:59:26 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-108-CORE_META_MODEL-CORE-REQUIREMENT--evolve-authority-through-governed-history\n    - CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness\n    - CAPRMEDIO-REQU-686-CORE-REQUIREMENT--separate-core-extension-and-local-configuration-authority\n---\n# Select Methodology Source revisions explicitly\n\na Project **must** apply a Methodology Source update **or** downgrade **only** by selecting an identified source revision **and** reconciling affected Project authority; the selection **must not** silently rewrite other Methodology Sources **or** Project-owned Atoms.\n",
+      "after_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-108-CORE_META_MODEL-CORE-REQUIREMENT--evolve-authority-through-governed-history",
+          "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness",
+          "CAPRMEDIO-REQU-686-CORE-REQUIREMENT--separate-core-extension-and-local-configuration-authority"
+        ]
+      }
+    }
+  ]
+}

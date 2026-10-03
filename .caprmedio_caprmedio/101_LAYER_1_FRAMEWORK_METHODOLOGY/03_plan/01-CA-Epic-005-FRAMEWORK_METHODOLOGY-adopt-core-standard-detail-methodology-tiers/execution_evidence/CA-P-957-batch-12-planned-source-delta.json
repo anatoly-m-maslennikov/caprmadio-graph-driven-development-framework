@@ -1,0 +1,109 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "12",
+  "recorded_at": "2026-09-10 05:41:36 +0400",
+  "checkpoint": "Autonomous >=99% source execution after exact/canonical checks.",
+  "existing": [
+    {
+      "atom_id": "CA-D-253",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "before_version": 5,
+      "before_sha256": "02d13186847970b16f37efeacf8ab67fcdb2e02d5670ad75236eebcb9775f0eb",
+      "before_bytes_utf8": "---\natom_id: CA-D-253\ncce_version: cce_1\ncce_form: delivery\nsubjects:\n  governs:\n    continuant:\n      - Applicable Methodology/Carrier\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Applicable Methodology/Sources\nversion: 5\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Place Applicable Methodology and Its Sources\n\nthe Applicable Methodology Carrier topology **must** separate authoritative Methodology Source Carriers from non-authoritative projected member Carriers.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-CORE-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "proposed_version": 6,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-D-253\ncce_version: cce_1\ncce_form: delivery\nsubjects:\n  governs:\n    continuant:\n      - Applicable Methodology/Carrier\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Applicable Methodology/Sources\nversion: 6\nupdated_at: \"2026-09-10 05:41:36 +0400\"\nrelations: {}\n---\n# Place Applicable Methodology and Its Sources\n\nthe Applicable Methodology Carrier topology **must** separate authoritative Methodology Source Carriers from non-authoritative projected member Carriers.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-253-CORE_META_MODEL-DELIVERY--place-applicable-methodology-and-its-sources@5.md",
+      "after_governs_subjects": [
+        "Applicable Methodology/Carrier"
+      ],
+      "classification_record": "CA-P-957-batch-12-dispositions.json#CA-D-253",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-D-316",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-316-CORE_META_MODEL-CORE-DELIVERY--classify-carriers-by-ownership.md",
+      "before_version": 4,
+      "before_sha256": "27f05ec18072423a813dd61186dc8a31503c019aa91533dfbf549d81a71bc274",
+      "before_bytes_utf8": "---\natom_id: CA-D-316\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Carrier/Ownership Class\nversion: 4\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Classify Carriers by Ownership\n\n**every** internal CAPRMEDIO Carrier **must** have **`=1`** Ownership Class **in** (Framework-Owned, Project-Owned, Runtime State).\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-316-CORE_META_MODEL-GENERAL-DELIVERY--classify-carriers-by-ownership.md",
+      "proposed_version": 5,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-D-316\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    continuant:\n      - Carrier/Ownership Class\nversion: 5\nupdated_at: \"2026-09-10 05:41:36 +0400\"\nrelations: {}\n---\n# Classify Carriers by Ownership\n\n**every** internal CAPRMEDIO Carrier **must** have **`=1`** Ownership Class **in** (Framework-Owned, Project-Owned, Runtime State).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-316-CORE_META_MODEL-CORE-DELIVERY--classify-carriers-by-ownership@4.md",
+      "after_governs_subjects": [
+        "Carrier/Ownership Class"
+      ],
+      "classification_record": "CA-P-957-batch-12-dispositions.json#CA-D-316",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-D-333",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-333-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata.md",
+      "before_version": 6,
+      "before_sha256": "e71ddca41eac1392a6f4328575021c7e70f47b75e29c0eb429e1e8865bbb4026",
+      "before_bytes_utf8": "---\natom_id: CA-D-333\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Project Scope Unit Graph Projection/Carrier/Generation Metadata\nversion: 6\nupdated_at: \"2026-09-09 23:04:14 +0400\"\nrelations: {}\n---\n# Serialize Scope Unit Graph Projection Generation Metadata\n\n**every** Project Scope Unit Graph Projection Carrier **must** serialize Updated At, generator identity **and** digest, exact consumed Settings revisions, **and** the source bindings **and** Directory Carrier observations needed to explain emitted values **and** unresolved findings.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-333-CORE_META_MODEL-GENERAL-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata.md",
+      "proposed_version": 7,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-D-333\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Project Scope Unit Graph Projection/Carrier/Generation Metadata\nversion: 7\nupdated_at: \"2026-09-10 05:41:36 +0400\"\nrelations: {}\n---\n# Serialize Scope Unit Graph Projection Generation Metadata\n\n**every** Project Scope Unit Graph Projection Carrier **must** serialize Updated At, generator identity **and** digest, exact consumed Settings revisions, **and** the source bindings **and** Directory Carrier observations needed to explain emitted values **and** unresolved findings.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-333-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata@6.md",
+      "after_governs_subjects": [
+        "Project Scope Unit Graph Projection/Carrier/Generation Metadata"
+      ],
+      "classification_record": "CA-P-957-batch-12-dispositions.json#CA-D-333",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-D-338",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-338-CORE_META_MODEL-CORE-DELIVERY--serialize-completed-projection-rebuild-results.md",
+      "before_version": 4,
+      "before_sha256": "14555383df07d321b805666371778236d2392eb3d98cfc0bc31155b44ff50fa3",
+      "before_bytes_utf8": "---\natom_id: CA-D-338\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Projection Rebuild/Completed Event\nversion: 4\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Serialize Completed Projection Rebuild Results\n\n**every** completed Projection Rebuild Event **must** serialize the published Projection Updated At value, output Carrier reference, **and** content digest.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-338-CORE_META_MODEL-GENERAL-DELIVERY--serialize-completed-projection-rebuild-results.md",
+      "proposed_version": 5,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-D-338\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Projection Rebuild/Completed Event\nversion: 5\nupdated_at: \"2026-09-10 05:41:36 +0400\"\nrelations: {}\n---\n# Serialize Completed Projection Rebuild Results\n\n**every** completed Projection Rebuild Event **must** serialize the published Projection Updated At value, output Carrier reference, **and** content digest.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-338-CORE_META_MODEL-CORE-DELIVERY--serialize-completed-projection-rebuild-results@4.md",
+      "after_governs_subjects": [
+        "Work Journal/Projection Rebuild/Completed Event"
+      ],
+      "classification_record": "CA-P-957-batch-12-dispositions.json#CA-D-338",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-D-340",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-340-CORE_META_MODEL-CORE-DELIVERY--serialize-work-journal-event-properties.md",
+      "before_version": 5,
+      "before_sha256": "89854a66bf6e7d95e08ed79ef5633178af3c65e89ca003be78c079832acb52f5",
+      "before_bytes_utf8": "---\natom_id: CA-D-340\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Event/Carrier Serialization\n  depends_on:\n    continuant:\n      - Work Journal/Event/Type\nversion: 5\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Serialize Work Journal Event Properties\n\n**every** Work Journal Event Carrier record **must** serialize its Event identity, Action identity, Type value, action Kind, Author, timezone-qualified Occurred At, session provenance, **and** Structural Scope **in** its registered schema.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-340-CORE_META_MODEL-GENERAL-DELIVERY--serialize-work-journal-event-properties.md",
+      "proposed_version": 6,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-D-340\ncce_version: cce_1\ncce_form: serialization\nsubjects:\n  governs:\n    continuant:\n      - Work Journal/Event/Carrier Serialization\n  depends_on:\n    continuant:\n      - Work Journal/Event/Type\nversion: 6\nupdated_at: \"2026-09-10 05:41:36 +0400\"\nrelations: {}\n---\n# Serialize Work Journal Event Properties\n\n**every** Work Journal Event Carrier record **must** serialize its Event identity, Action identity, Type value, action Kind, Author, timezone-qualified Occurred At, session provenance, **and** Structural Scope **in** its registered schema.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-340-CORE_META_MODEL-CORE-DELIVERY--serialize-work-journal-event-properties@5.md",
+      "after_governs_subjects": [
+        "Work Journal/Event/Carrier Serialization"
+      ],
+      "classification_record": "CA-P-957-batch-12-dispositions.json#CA-D-340",
+      "claim_change": "none"
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "Semantic payload property names alone are not concrete syntax; complete Claims classified independently of source ownership.",
+    "No Journal Tool/schema or runtime execution is in scope."
+  ]
+}

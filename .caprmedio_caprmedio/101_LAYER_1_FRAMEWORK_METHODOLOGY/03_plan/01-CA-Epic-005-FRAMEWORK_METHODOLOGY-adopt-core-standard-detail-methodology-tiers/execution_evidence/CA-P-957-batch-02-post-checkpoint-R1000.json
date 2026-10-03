@@ -1,0 +1,77 @@
+{
+  "schema": "ca-p-957-post-checkpoint-disposition/v1",
+  "non_authoritative": true,
+  "batch": "02",
+  "frozen_evidence": "CA-P-957-batch-02-dispositions.json",
+  "atom_id": "CA-R-1000",
+  "supersedes": "Only CA-R-1000's unchanged-admission conclusion, not its recorded source bytes or Core classification. The original checkpoint remains immutable.",
+  "status": "not admitted unchanged; semantic-binding repair required in a later reviewed mutation batch",
+  "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope.md",
+  "source_version": 8,
+  "source_sha256": "fcb91228aa5c400f227921dc85f85658b198b2aa7823581ec6509a6772836231",
+  "old_tier": "Core",
+  "proposed_tier": "Core",
+  "complete_body": "\n# Define Task Scope\n\na Task Scope **means** the Claim Scope of one Task Atom.\n",
+  "rejection_reason": "The body defines Task Scope as the existing Claim Scope of a Task Atom, but its GOVERNS Subject Path ends Task/Scope. Under bearer-qualified path identity this binds an occurrence borne directly by Task (inheriting Atom/Scope), not the Scope borne by the Task's Claim. An unchanged body alone does not establish the correct governed Entity.",
+  "authority": [
+    {
+      "atom_id": "CA-R-1194",
+      "version": 6,
+      "clause": "a Subject Path means a canonical Subject Expression whose ordered names and registered relations identify =1 Entity."
+    },
+    {
+      "atom_id": "CA-R-1204",
+      "version": 5,
+      "clause": "in a Subject Path, / must express only one IS_BORNE_BY edge from the following Dependent Entity occurrence to the immediately preceding qualified Entity occurrence."
+    },
+    {
+      "atom_id": "CA-R-1245",
+      "version": 4,
+      "clause": "in a Subject Expression, : must express only one IS_ALLOWED_VALUE_OF relation from the following value to the immediately preceding Property occurrence."
+    },
+    {
+      "atom_id": "CA-R-1247",
+      "version": 4,
+      "clause": "every Dependent Entity occurrence must derive its bearer-qualified identity from its complete Subject Path without imposing one global ordinal position on its reusable Term."
+    },
+    {
+      "atom_id": "CA-R-1014",
+      "version": 11,
+      "governs": "Atom/Scope",
+      "role": "Distinguishes Atom Scope: contextual unit, governed Entity and explicit constraints."
+    },
+    {
+      "atom_id": "CA-R-919",
+      "version": 11,
+      "governs": "Atom/Claim/Scope",
+      "role": "Each Atom Claim has exactly one Claim Scope."
+    },
+    {
+      "atom_id": "CA-R-879",
+      "version": 12,
+      "clause": "child_of must be registered as the declared upstream relation and parent_of as its inverse-derived downstream relation in the normative-authority ordering domain."
+    },
+    {
+      "atom_id": "CA-R-829",
+      "version": 11,
+      "clause": "every active Current-scope Requirement Atom IS AN authority peer of every other active Current-scope Requirement Atom in the same Local Tier."
+    }
+  ],
+  "proposed_binding_repair": {
+    "before_governs": [
+      "Atom/Content Role: Plan/Type: Task/Scope"
+    ],
+    "after_governs": [
+      "Atom/Content Role: Plan/Type: Task/Claim/Scope"
+    ],
+    "meaning": "Bind the existing alias Claim to the Task-qualified occurrence of Claim Scope; do not introduce a new Scope coordinate or change the definition.",
+    "remove_child_of": [
+      "CA-R-919"
+    ],
+    "replacement_parent": null,
+    "relation_reason": "R1000 and R919 are both Core Requirements. Under R879 the authored child_of denotes upstream normative authority, not a generic content-boundary reference. R829 instead makes these same-tier Requirements authority peers. Remove that invalid edge when reconciling this Atom's binding. This is an existing direct-edge defect admitted for repair by root, not a new tier-only consequence."
+  },
+  "root_direction": "Root explicitly authorized inclusion of this demonstrated GOVERNS and direct-edge correction in a new reviewed mutation batch. No source mutation until that batch's exact bytes receive root GO.",
+  "preservation": "Stable identity, complete Claim body, Core tier, owner and Current-scope membership remain unchanged. Do not repair unrelated preexisting edges on untouched Atoms.",
+  "confidence_percent": 99
+}

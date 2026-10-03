@@ -1,0 +1,315 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-29T09:23:46+04:00",
+  "normalization_count": 27,
+  "normalizations": [
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1055-GOVERN-REQUIREMENT--bind-project-configuration-identity-and-current-revision@9.md",
+      "archived_revision_sha256": "6adfde79ae3c144e5e9efdcab0622433db6849dc02b5a35b1ea1fe4e9951d176",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1055-GOVERN-REQUIREMENT--bind-project-configuration-identity-and-current-revision.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "04f711cadaba2a7096eeea3f5bd14a41ecc8a672a41b8cb14f90d56595860a0a"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-770-GOVERN-CORE-REQUIREMENT--register-bootstrap-seed-authority-directories@18.md",
+      "archived_revision_sha256": "87769d1f1c87d0ee54d83c984db3ea8f8475c341deceb5ecb5d28ddf762cb17a",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-770-GOVERN-CORE-REQUIREMENT--register-bootstrap-seed-authority-directories.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 19,
+      "current_sha256": "caa7b1dab18d75b1889646719728eadfa5242ed653b34aafa35c74402347df33"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-884-GOVERN-REQUIREMENT--store-field-feedback-toward-the-observed-field-source@6.md",
+      "archived_revision_sha256": "1d3a9183ccce7c6f838e2fba666385a3c16e47f73be3f04391b0a9c7f3197906",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-884-GOVERN-REQUIREMENT--store-field-feedback-toward-the-observed-field-source.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 7,
+      "current_sha256": "7c76cff462bcc41c03df033f87816a349410da8542bb4653e94865eb26a93b54"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-952-GOVERN-CORE-REQUIREMENT--route-bseed-deliveries-inside-framework-methodology-authority@10.md",
+      "archived_revision_sha256": "e1fe5c53d1b84366e02cc0bb4e9d129c5841e62891d1f4f2016c8a35862c2fef",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-952-GOVERN-CORE-REQUIREMENT--route-bseed-deliveries-inside-framework-methodology-authority.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 11,
+      "current_sha256": "241f63a1344eea43d043574d2827bc5c4bfe966114b79502b5843c394690b3a1"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists@7.md",
+      "archived_revision_sha256": "ae9db13d7a7d2e8cda9fc659121644d43457754bdb8efcb1f0bfb582c6e5a429",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "d35ec626896317b2928e80e2acd85b7d69ab78142b290c28597b39319abf0116"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-315--production-logging-policies@6.md",
+      "archived_revision_sha256": "0c446ee4e4b7fefc192f13371cf03557895cbd5042b65ec126cefc5666d80365",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 7,
+      "current_sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-316--register-ca-as-specialist-skill-prefix@7.md",
+      "archived_revision_sha256": "9db627fb203626bd88b89a71580904bf62994b6a2e0ef6985058b0e91fbfa0e1",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-316--register-ca-as-specialist-skill-prefix.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "c9a2727ab63b1ee18f92e8b8d34c67ea2a13b6b00dd62164c9694bcd1073c142"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree@7.md",
+      "archived_revision_sha256": "9adb1922b2c0242f9ba52d358ab7ffee1e376f6b26f590ac0aa5f60f1aac41ae",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "4a1ab33c118aa464737f1346bfb9b2c15b80fce56a48d0529e945b1b3ca7de71"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree@7.md",
+      "archived_revision_sha256": "715cdb465ab3734b0226a40801fdd984ed4e75efe77f07335597733c4a1a0d55",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "2580085eec2720b3af45223b989e0f793d2f608b177f31abe1bcac9ff9326999"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone@9.md",
+      "archived_revision_sha256": "1000f7b8c124a92468684cc19ba6278572894b767310fc56f2d7b065c6fb86e0",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "4642ae70e05bc8a18155edf571615ce47032f5f3ff5d2be81a616ecf8af54ae2"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-611--register-field-feedback-relation-kind@9.md",
+      "archived_revision_sha256": "0ce4d7d47b86d08495a573abf265be078d2072fb613eafd54c8f0ed910504276",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-611--register-field-feedback-relation-kind.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "f289dbd1198e1d3e36380cf157b3bd7a57da4eda670b8a4ed385bbeeb69f0ff7"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-625--encode-project-configuration-as-a-native-toml-atom@9.md",
+      "archived_revision_sha256": "4812c6716ba0381f1f210303483b3fd3934a986e01d0e802f52baf5f89e15e3a",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-625--encode-project-configuration-as-a-native-toml-atom.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "49f4cab61378e84302ce7a089c3fd755de969eba5aceb5823ae8217fafc61a78"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-661--register-project-configuration-atom-identity@9.md",
+      "archived_revision_sha256": "0c5a57f8a0b9fc537f7ce61a6512defc88f7474743d4e09e80cbc57f5392676a",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-661--register-project-configuration-atom-identity.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "569ac31764eb86b0290b1c6a5afd32a7cfaa510496835068ef816ba30731a9d3"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms@10.md",
+      "archived_revision_sha256": "fef78787d26860228e6c765c09a3b099e378aa1e8f6f19df7b60099ffa387002",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 11,
+      "current_sha256": "029acd36e5aceaaf840311ba42a5837c35e8932afd56ba442b4c7aa351a5b9fc"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-771--admit-project-configuration-as-a-native-implementation-atom@9.md",
+      "archived_revision_sha256": "e24dc82bd0eae9b02c493c109953a9d57ff65fd5f2a8125ec005543931fe4ec9",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-771--admit-project-configuration-as-a-native-implementation-atom.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "59567e464b1977bc3d55961c1a1d0785f245cd9bc5897d5586e3df2a9aa489a1"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-102--freeze-a-version-only-at-release@7.md",
+      "archived_revision_sha256": "d795071ffc8d5c74dd3e7d4bc1d9d07cb803f09339d81a0ca19e5094079491a2",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-102--freeze-a-version-only-at-release.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "ba3bd07f2b57b80591c0b6dfa325f5990d7a9a46b51e601d29e10761e5c67c8b"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release@5.md",
+      "archived_revision_sha256": "e8eb1b25feb610123fe76db956794088b0adcc388b0aa8a35dd915307e508fac",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 6,
+      "current_sha256": "34f1a974ce761035b4f523f2abc4ffe17dc07b6d7ba95691c9cc2810ab6e1e62"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-106--keep-meta-and-gov-implementation-neutral@11.md",
+      "archived_revision_sha256": "a3d932930141e17c622a8db7664e218c42b4afb252b266a14e26a30ca2735080",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-106--keep-meta-and-gov-implementation-neutral.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 12,
+      "current_sha256": "e8776c66cf4c8ae9c55d8c11ab4bc4fcf94f75f66b56c8a073422cf1e68ed75c"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-619--classify-project-configuration-as-an-implementation-atom@7.md",
+      "archived_revision_sha256": "e6cacbff180a19b10c6544c6f8788fb4ca491afe1de8e8c2c833b7a32ddd45fc",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-619--classify-project-configuration-as-an-implementation-atom.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 8,
+      "current_sha256": "01bfb9ab2c73d943774d2e647658132310cb0c6041bddf4705c5c9873ce34ef6"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-707--separate-bootstrap-seed-from-scope-unit-type@13.md",
+      "archived_revision_sha256": "29659aefbbd82dba992ffcf530447272f5b63776f92ad178c7629c1561de4146",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-707--separate-bootstrap-seed-from-scope-unit-type.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 14,
+      "current_sha256": "7bb34230de556a758e54dd54143a1c68eb9935fb1bdb08e670859bd1f30c3d2e"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-769--select-bootstrap-seed-revisions-explicitly@6.md",
+      "archived_revision_sha256": "cbc91994f68b33408ee4372c85d9a91fb02572eedb43c52fa64379460ee3443f",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-bootstrap-seed-revisions-explicitly.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 7,
+      "current_sha256": "600e183222fc5bf23bca64643deac507aa669afa6534eb54193965aa90d7572c"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order@8.md",
+      "archived_revision_sha256": "a34af34e6954b0261a16bf706c4ca05b4a5c3513f4f6d02846eaa8ce5edcb3ad",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 9,
+      "current_sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/05_method/archive/CA-M-137-GOVERN-CORE-METHOD--resolve-project-configuration-and-the-scope-unit-graph-separately@10.md",
+      "archived_revision_sha256": "c1256fde9eec11b2864f67f4fe9b3d3168662f1763ce22dab82226d724b2ef30",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/05_method/CA-M-137-GOVERN-CORE-METHOD--resolve-project-configuration-and-the-scope-unit-graph-separately.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 11,
+      "current_sha256": "61f85439aa9eb55a66f0c2d1f9c7bd7f96fc77cc18608842167227c8388cf305"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006--canonical-project-configuration-selection@8.md",
+      "archived_revision_sha256": "ed9bc995c337a25587e955b79986c55cd2bd555f58a0e453bb54d8d828d01b95",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-project-configuration-selection.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 9,
+      "current_sha256": "d4ea8ac17e153bc591b935ee36b817eae1e619163134e69847ad1f8880cd0241"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/archive/CA-D-007-SEMNTC-DELIVERY--deliver-semantics-compilation-to-framework-methodology@10.md",
+      "archived_revision_sha256": "c479987e9017de43a30e3295bf5cf129c975af550d923fb4363c847e884ace62",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-007-SEMNTC-DELIVERY--deliver-semantics-compilation-to-framework-methodology.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 11,
+      "current_sha256": "8fd0fe1b1c370ad87f4e94b1d8ec0a13f8ae92a83d9b9a69ed96a08fa7e21ad4"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/archive/CA-D-008-GOVERN-DELIVERY--deliver-governance-to-framework-methodology@14.md",
+      "archived_revision_sha256": "9c59560e1ada840d98b15c54f4cf8c47814f511da91d1f9e72a6a9d215ef8db3",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-008-GOVERN-DELIVERY--deliver-governance-to-framework-methodology.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 15,
+      "current_sha256": "3e6bfd0a4a16ccd13f9d201e463845d60242ed45017a476f95c3f6cc6632285f"
+    },
+    {
+      "archived_revision_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/archive/CAPRMEDIO-D-006-RELEASE_DEFINITION-BSEED_METAMODEL--deliver-metamodel-compilation-to-framework-methodology@9.md",
+      "archived_revision_sha256": "bb27d89eccc6ed5cf4e4669ffbe597d851b7d9cc8ee04da8d9550946f2fde0f1",
+      "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CAPRMEDIO-D-006-RELEASE_DEFINITION-BSEED_METAMODEL--deliver-metamodel-compilation-to-framework-methodology.md",
+      "change": [
+        "subjects.declared -> subjects.governs",
+        "subjects.prerequisite -> subjects.depends_on when present"
+      ],
+      "current_revision": 10,
+      "current_sha256": "9d70ee7a5e975fddbaaee3f08c0129d68dad9d5901b4dbfb0f817843fc9f44ff"
+    }
+  ],
+  "post_normalization": {
+    "combined_active_atom_count": 627,
+    "entity_graph_source_frontier_sha256": "afe7e8add4d183654bb94d9706de6006714d4230316b50b6a2d65b044a15cfa8",
+    "legacy_subject_schema_atoms": 0,
+    "prohibited_role_specific_type_terms": 0,
+    "subtype_cycles": 0,
+    "term_system_violations": 0,
+    "unresolved_definition_conflicts_forwarded_to_CA_P_921": 1
+  },
+  "schema": "caprmedio.local_configuration_normalization.execution.v1",
+  "task_atom_id": "CA-P-920"
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "caprmedio.ca_p_106.local_configuration_reconciliation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-106",
+  "recorded_at": "2026-08-27T01:30:00+04:00",
+  "minimum_confidence_percent": 99,
+  "predecessor_evidence": [
+    "CA-P-102-freeze-record.projection.json",
+    "CA-P-103-target-topology.projection.json",
+    "CA-P-112-job-reconciliation.projection.json",
+    "CA-P-104-core-meta-model-reconciliation.projection.json",
+    "CA-P-105-installed-extensions-reconciliation.projection.json"
+  ],
+  "project_identity": {
+    "project": "CAPRMEDIO",
+    "native_configuration_atom_id": "CAPRMEDIO-I-001",
+    "native_configuration_carrier": "caprmedio_framework_settings.toml",
+    "native_configuration_sha256": "abdac674ea24eb0b9241fc1fc0fc900e30e59623f89d4201192a1deda03b2024",
+    "binding_projection": ".caprmedio/project_scope_unit_graph.projection.toml",
+    "binding_status": "resolved",
+    "identity_authority": "CA-R-1223"
+  },
+  "methodology_source_selection": {
+    "ordered_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "selection_authority": "CA-R-1224",
+    "installed_extensions_selected": 0,
+    "empty_selection_authority": "CA-R-1225",
+    "empty_catalog_authority": "CA-R-1221"
+  },
+  "project_owned_configuration": {
+    "local_configuration_job": "CA-R-1176@2",
+    "customization_reference_rule": "CA-R-1226",
+    "current_project_customization_atoms": [],
+    "caprmedio_specific_authority": {
+      "disposition": "Project Local Configuration",
+      "authority": "CA-R-1222",
+      "extension_package_created": false
+    },
+    "selected_extension_versions": [],
+    "replacement_priority_compatibility_resolutions": [],
+    "local_tool_mcp_app_modes": [],
+    "no_local_mode_authority": "CA-R-1227"
+  },
+  "boundary": {
+    "core_meta_model": "immutable source authority; no Core Meta-Model carrier was modified",
+    "installed_extensions": "explicitly empty candidate catalog; no Extension authority was modified or activated",
+    "local_configuration": "owns the current Project identity and the current selection, customization-reference, and local-mode decisions",
+    "final_carrier_materialization": "not performed by CA-P-106",
+    "compilation_algorithm_and_output": "owned by CA-P-107 and later Tasks"
+  },
+  "validation": {
+    "exactly_one_current_project": true,
+    "complete_ordered_source_frontier": true,
+    "inactive_extension_contributes_to_compilation": false,
+    "project_customization_mutates_source_authority": false,
+    "unowned_current_resolution_decision": false,
+    "local_configuration_duplicates_core_or_extension_content": false,
+    "decision_depends_on_unfinished_compiled_output": false,
+    "confidence_percent": 99
+  }
+}

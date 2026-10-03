@@ -1,0 +1,93 @@
+{
+  "schema": "caprmedio.ca_p_108.partial_migration_map.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-108",
+  "recorded_at": "2026-08-27T02:52:59+04:00",
+  "status": "blocked_pending_bootstrap_authority_reconciliation",
+  "frozen_frontier": {
+    "task_atom_id": "CA-P-102",
+    "carrier_count": 16172,
+    "directory_count": 2681,
+    "carrier_set_sha256": "a61f7dae5e66825db1eb1bf90a6bd8b2e21dcf90ec7195ef751167f5eedde60a",
+    "directory_set_sha256": "0a678244bc1b48b44f041d07836582313042cb9fe5865a5be5c9f2c1452eeb4f"
+  },
+  "accepted_mappings": {
+    "project_root": {
+      "project_name": "CAPRMEDIO",
+      "target_root": ".caprmedio_caprmedio",
+      "rule": "the generic governed-Project Carrier root is .caprmedio_<PROJECT_NAME>."
+    },
+    "migration_control": {
+      "source_root": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "target_root": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology",
+      "disposition": "MOVE",
+      "preserved_children": [
+        "Task",
+        "done",
+        "archive",
+        "execution_evidence"
+      ],
+      "frozen_control_tree_entry_count": 50,
+      "frozen_direct_task_carrier_count": 13,
+      "frozen_execution_evidence_carrier_count": 4
+    },
+    "framework_engine_installation": {
+      "source_root": ".caprmedio_install",
+      "target_root": ".caprmedio_install",
+      "disposition": "RETAIN_IN_PLACE",
+      "carrier_count": 2153,
+      "directory_count": 818,
+      "classification": "executable FRAMEWORK_ENGINE installation",
+      "included_components": [
+        "Tools",
+        "Apps",
+        "Skills",
+        "content-addressed releases",
+        "launchers",
+        "hooks",
+        "current-version manifest"
+      ],
+      "excluded_classifications": [
+        "Framework authority",
+        "ephemeral runtime state"
+      ]
+    }
+  },
+  "unresolved_bootstrap_authority": {
+    "source_root": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY",
+    "normal_carrier_count": 563,
+    "by_top_level_subtree": {
+      "-101_BSEED_LAYER_1_METAMODEL": 128,
+      "-102_BSEED_LAYER_2_SEMANTICS": 135,
+      "-103_BSEED_LAYER_3_GOVERNANCE": 262,
+      "03_plan": 34,
+      "04_requirement": 3,
+      "superlayer_root": 1
+    },
+    "by_content_or_lifecycle_location": {
+      "04_requirement": 441,
+      "05_method": 24,
+      "02_analysis": 20,
+      "01_concern": 19,
+      "done": 18,
+      "06_evaluation": 17,
+      "superlayer_root": 7,
+      "01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology": 6,
+      "02-CA-P-057-EPIC--normalization-bseed": 5,
+      "07_delivery": 4,
+      "canceled": 2
+    },
+    "blocking_reason": "CA-P-104 records thirty accepted Core Meta-Model successor Atoms but does not assign every remaining normal Bootstrap Carrier an exact preservation, successor, or archival disposition. CA-P-109 forbids changing Claims during Carrier migration.",
+    "required_prerequisite": "reconcile every normal Bootstrap Carrier individually as one of byte-preserved Core Meta-Model source authority, an immutable archived predecessor of one exact accepted successor, or retained non-authoritative Project history; record the exact final Carrier path and disposition before CA-P-108 resumes.",
+    "prohibited_action": "do not flatten, archive, or replace this set through a blanket rule."
+  },
+  "validation": {
+    "project_root_is_exact": true,
+    "control_target_is_exact": true,
+    "install_root_is_retained_in_place": true,
+    "complete_migration_map_frozen": false,
+    "source_carrier_mutated": false,
+    "confidence_percent": 99
+  }
+}

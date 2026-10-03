@@ -1,0 +1,291 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-909",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T22:41:06+04:00",
+  "outcomes": [
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1231-MMODEL-CORE-REQUIREMENT--define-default-concern-atom-types.md",
+      "source_sha256": "eddf09121311d02cc70019c540bb158a16e9300408770629ae267ffa3d732745",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1231-MMODEL-CORE-REQUIREMENT--define-default-concern-atom-types.md",
+      "outcome_sha256": "1bcdbce1a5ed6417a1d47e3cbbf59451ff99c520d2ccef8b55e9b005c0932a2a"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-MMODEL-CORE-REQUIREMENT--define-default-analysis-atom-types.md",
+      "source_sha256": "7b8596d60517b877fb6fee45b41f4f43ad4051344fbe4b4ff05701253c551674",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1232-MMODEL-CORE-REQUIREMENT--define-default-analysis-atom-types.md",
+      "outcome_sha256": "461e3d877ec33fcd297332d5ee97a0aa5ae83af379c14e1ca46547282b6cacd3"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1233-MMODEL-CORE-REQUIREMENT--use-local-tiers-instead-of-default-atom-types-for-prmedio.md",
+      "source_sha256": "b1b3fe2cd9340c18bd8b5490d2d3822c9e1fbd986413f5e719cdeb6ca7b6b1aa",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1233-MMODEL-CORE-REQUIREMENT--use-local-tiers-instead-of-default-atom-types-for-prmedio.md",
+      "outcome_sha256": "d080a64691c851ec73b16689d24feafa16e80609e30c028495efe190ea39b6c1"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1234-MMODEL-CORE-REQUIREMENT--distinguish-core-local-tier-from-core-meta-model-source-layer.md",
+      "source_sha256": "af2c0a46634c56507074f12fd4919e94b59249427d9da86a9b82329831306565",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1234-MMODEL-CORE-REQUIREMENT--distinguish-core-local-tier-from-core-meta-model-source-layer.md",
+      "outcome_sha256": "b9e415d06a4088cdc90b5526aad6bac91d55a07181c00ce985a83fca5f81df55"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-155-SEMNTC-CORE-REQUIREMENT--classify-atoms-by-one-local-tier.md",
+      "source_sha256": "e7a18fa4c12710fced9ec724b0fc5ca37d452e08f1ee5285d6921d1ccab4bd70",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-155-SEMNTC-CORE-REQUIREMENT--classify-atoms-by-one-local-tier.md",
+      "outcome_sha256": "7d710aa1adbde3f7f78f614ce8cefb19974b5f58cc8645e7c7e484d213bde134"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-658-SEMNTC-CORE-REQUIREMENT--define-principle-local-tier.md",
+      "source_sha256": "7abf0cde9540839a2dacda7dc81904c8a31a752a0c4ff60940a51dfcea46601b",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-658-SEMNTC-CORE-REQUIREMENT--define-principle-local-tier.md",
+      "outcome_sha256": "4ab9f2ad9de162860c512ad0727940e432c7d94b70fccc81b5a6eff7ca4c5a31"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-659-SEMNTC-CORE-REQUIREMENT--define-core-local-tier.md",
+      "source_sha256": "ca2efdb584e2e17df97118e20001e9b21cb802e3ddd6086111f58b6565694326",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-659-SEMNTC-CORE-REQUIREMENT--define-core-local-tier.md",
+      "outcome_sha256": "b62fbe21e4ffddc938881102fdddab1335f3e28da6b9322796b2e135dd1773da"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-660-SEMNTC-CORE-REQUIREMENT--define-standard-local-tier.md",
+      "source_sha256": "fb83fe5cb5f4c3e2e786f99fc80609fcf592553a528330d4188a5114dbf8b202",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-660-SEMNTC-CORE-REQUIREMENT--define-standard-local-tier.md",
+      "outcome_sha256": "4e2f235f2640bfd8a1108fda547cd51462e0acbd129bbb89052e823a948aae60"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-680-SEMNTC-CORE-REQUIREMENT--order-the-three-local-tiers.md",
+      "source_sha256": "38bec74a185c6c68e71366efa30d1ae91c73c5c056d58a9aa39712e6667a6a48",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-680-SEMNTC-CORE-REQUIREMENT--order-the-three-local-tiers.md",
+      "outcome_sha256": "ef57d578613ae76192f5a17b0dabcb87017991b19deba2bbe8675f10eb47bb26"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-GOVERN-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+      "source_sha256": "3430370c0e29cdbae88d66450263dc0520c4726afdb55dae5554ba3c3c023be6",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-GOVERN-CORE-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+      "outcome_sha256": "3430370c0e29cdbae88d66450263dc0520c4726afdb55dae5554ba3c3c023be6"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-740-MMODEL-CORE-REQUIREMENT--give-every-atom-one-content-role-and-type.md",
+      "source_sha256": "8ae3627c3c21be2bd67f8521bafb05c922153cb5be7711fd1d6aea44c95aa5e0",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-740-MMODEL-CORE-REQUIREMENT--give-every-atom-one-content-role-and-type.md",
+      "outcome_sha256": "92ad0c217aa553035ec90e8ecf4852ea32ad19970e7d4049d4691ffd541231b5"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-855-REQUIREMENT-BSEED_GOVERNANCE--validate-principle-content-role-semantics.md",
+      "source_sha256": "f5a0a91043d3c3040adc2ef876087c3a53cf6ee16b29337e65014421815518a0",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-855-REQUIREMENT-BSEED_GOVERNANCE--validate-principle-content-role-semantics.md",
+      "outcome_sha256": "f5a0a91043d3c3040adc2ef876087c3a53cf6ee16b29337e65014421815518a0"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-685--validate-local-tier-eligibility.md",
+      "source_sha256": "e5acf5fa1e970004361a81b3b51f86a23e3909e7cc5184ad1c0f76bcddefaa3a",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-685--validate-local-tier-eligibility.md",
+      "outcome_sha256": "e5acf5fa1e970004361a81b3b51f86a23e3909e7cc5184ad1c0f76bcddefaa3a"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-764--register-content-role-identity-letters.md",
+      "source_sha256": "b2a1745dac57ced9c82b96e7ae54ad9397d62d6d94c5d7705b4f848ab80f9a5a",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-764--register-content-role-identity-letters.md",
+      "outcome_sha256": "b2a1745dac57ced9c82b96e7ae54ad9397d62d6d94c5d7705b4f848ab80f9a5a"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan.md",
+      "source_sha256": "ba05067ba720a4ed90552a331d6947ac593efa34dac7c863bea6c8db299a2d12",
+      "disposition": "ARCHIVE_AS_CONFLICT_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan@8.md",
+      "outcome_sha256": "ba05067ba720a4ed90552a331d6947ac593efa34dac7c863bea6c8db299a2d12"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-114--preserve-content-role-boundaries-through-caprmedio-loop.md",
+      "source_sha256": "5d5d1d6588a0b64573428540337d51ae8c248208a3082c59dbb7519513c85dc2",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-114--preserve-content-role-boundaries-through-caprmedio-loop.md",
+      "outcome_sha256": "5d5d1d6588a0b64573428540337d51ae8c248208a3082c59dbb7519513c85dc2"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-116--use-nouns-for-content-role-names.md",
+      "source_sha256": "5e9b26f5bc23b06db21141202acd3765c02113e0092333f95c0e852e4be83de4",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-116--use-nouns-for-content-role-names.md",
+      "outcome_sha256": "5e9b26f5bc23b06db21141202acd3765c02113e0092333f95c0e852e4be83de4"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-138--route-priority-and-tier-by-content-role.md",
+      "source_sha256": "2f612c362934a645ff5138469f6f7251339e9d668ba48a475d98a99a7a765bac",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-138--route-priority-and-tier-by-content-role.md",
+      "outcome_sha256": "2f612c362934a645ff5138469f6f7251339e9d668ba48a475d98a99a7a765bac"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-148--allow-concern-analysis-plan-and-implementation-to-initiate-rmed-change.md",
+      "source_sha256": "542aef7e9812ab48284863a533610450a7142579f23740ec512a5afc9768daac",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-148--allow-concern-analysis-plan-and-implementation-to-initiate-rmed-change.md",
+      "outcome_sha256": "542aef7e9812ab48284863a533610450a7142579f23740ec512a5afc9768daac"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-743--make-atom-type-identity-bearing.md",
+      "source_sha256": "1a4e40b07535017eca6319e16f2c0204442d1cd70a6a619cf47b80e83c25a4ca",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-743--make-atom-type-identity-bearing.md",
+      "outcome_sha256": "1a4e40b07535017eca6319e16f2c0204442d1cd70a6a619cf47b80e83c25a4ca"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--classify-evaluations-as-er-em-or-ed.md",
+      "source_sha256": "b71dd7f2803cdf6b2842fd753bce19cd28999c790c82e42f6ca50eb44e62e8d2",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--classify-evaluations-as-er-em-or-ed.md",
+      "outcome_sha256": "b71dd7f2803cdf6b2842fd753bce19cd28999c790c82e42f6ca50eb44e62e8d2"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--give-every-evaluation-one-target-content-role.md",
+      "source_sha256": "95fc882f976521441f853e980599e7b6bea69f92d8eb2ef4283c5221613c5657",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--give-every-evaluation-one-target-content-role.md",
+      "outcome_sha256": "4e2e85fc37e3fe9d45c11112fe4f7d4d432ceb44f3dc1b88bade21cce1f59421"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--register-evaluation-for-rmd-targets.md",
+      "source_sha256": "5dd0415f24966623017f78a3e7fdb7af5ceb95710228049156a747cf4f696dd5",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--META_MTHD-CORE-REQUIREMENT--register-evaluation-for-rmd-targets.md",
+      "outcome_sha256": "5dd0415f24966623017f78a3e7fdb7af5ceb95710228049156a747cf4f696dd5"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--SEMNTC-CORE-REQUIREMENT--define-spec-content-roles.md",
+      "source_sha256": "b53bb30ce086db0ae0f6a998d9153fe9819307e87e96b481adee6e8ef8ceefed",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R--SEMNTC-CORE-REQUIREMENT--define-spec-content-roles@1.md",
+      "outcome_sha256": "b53bb30ce086db0ae0f6a998d9153fe9819307e87e96b481adee6e8ef8ceefed"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+      "source_sha256": "e81dec355cf1618b2de77137e2f09db23a0f1b039d8b3d1f7fee93349e4f61c7",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+      "outcome_sha256": "e81dec355cf1618b2de77137e2f09db23a0f1b039d8b3d1f7fee93349e4f61c7"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+      "source_sha256": "60920400f3cee5f0da94fee6a5fa8eafc12b90d5c825c63cf6ab31f3b4f02b11",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+      "outcome_sha256": "60920400f3cee5f0da94fee6a5fa8eafc12b90d5c825c63cf6ab31f3b4f02b11"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "source_sha256": "46df656e13fe4bfa7019a3e5e9902f456b7c94277c2f23ab59612678acaedc9c",
+      "disposition": "KEEP",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "outcome_sha256": "46df656e13fe4bfa7019a3e5e9902f456b7c94277c2f23ab59612678acaedc9c"
+    }
+  ],
+  "new_authority": [
+    {
+      "atom_id": "CA-R-1282",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1282-MMODEL-CORE-REQUIREMENT--define-content-role-as-an-atom-property.md",
+      "sha256": "592982b76602c53857999761867f2af42c77a28c169bab3ea70d169e272d11cb"
+    },
+    {
+      "atom_id": "CA-R-1283",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1283-MMODEL-CORE-REQUIREMENT--register-content-role-values.md",
+      "sha256": "cd416585717cf9b434cbb5cf7ffab3497a8da1159d1bd618a8770094eac2f66b"
+    },
+    {
+      "atom_id": "CA-R-1284",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1284-MMODEL-CORE-REQUIREMENT--define-type-under-a-value-qualified-content-role.md",
+      "sha256": "9d125da763d8893c37da8bf39104b0e0bfba35a8a4aee925e79859c6870c98aa"
+    },
+    {
+      "atom_id": "CA-R-1285",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1285-MMODEL-CORE-REQUIREMENT--permit-zero-or-one-type-under-an-atoms-content-role.md",
+      "sha256": "cfcb671726a899bb9bd6a064fac848b35c5788402058fad775631ab2a0a3be11"
+    },
+    {
+      "atom_id": "CA-R-1286",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1286-MMODEL-CORE-REQUIREMENT--keep-content-role-type-domains-open.md",
+      "sha256": "f6d91e8add3fe7ff6aa07723834e47238479bb15ccf9f0edf35ff9cb043d2971"
+    },
+    {
+      "atom_id": "CA-R-1287",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1287-MMODEL-CORE-REQUIREMENT--define-local-tier-as-an-atom-property.md",
+      "sha256": "ed7851a8056d4253ef6909949e7ca104dab3e1cac37503af7a0b709acfc0a830"
+    },
+    {
+      "atom_id": "CA-R-1288",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1288-MMODEL-CORE-REQUIREMENT--define-spec-content-roles.md",
+      "sha256": "be258f313279334700a657e5719aa279b7789dd1c5be859799001ce908640942"
+    }
+  ],
+  "preserved_revision_snapshots": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1231-MMODEL-CORE-REQUIREMENT--define-default-concern-atom-types@1.md",
+      "sha256": "eddf09121311d02cc70019c540bb158a16e9300408770629ae267ffa3d732745"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1232-MMODEL-CORE-REQUIREMENT--define-default-analysis-atom-types@1.md",
+      "sha256": "7b8596d60517b877fb6fee45b41f4f43ad4051344fbe4b4ff05701253c551674"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1233-MMODEL-CORE-REQUIREMENT--use-local-tiers-instead-of-default-atom-types-for-prmedio@1.md",
+      "sha256": "b1b3fe2cd9340c18bd8b5490d2d3822c9e1fbd986413f5e719cdeb6ca7b6b1aa"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1234-MMODEL-CORE-REQUIREMENT--distinguish-core-local-tier-from-core-meta-model-source-layer@1.md",
+      "sha256": "af2c0a46634c56507074f12fd4919e94b59249427d9da86a9b82329831306565"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-155-SEMNTC-CORE-REQUIREMENT--classify-atoms-by-one-local-tier@17.md",
+      "sha256": "e7a18fa4c12710fced9ec724b0fc5ca37d452e08f1ee5285d6921d1ccab4bd70"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-658-SEMNTC-CORE-REQUIREMENT--define-principle-local-tier@6.md",
+      "sha256": "7abf0cde9540839a2dacda7dc81904c8a31a752a0c4ff60940a51dfcea46601b"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-659-SEMNTC-CORE-REQUIREMENT--define-core-local-tier@4.md",
+      "sha256": "ca2efdb584e2e17df97118e20001e9b21cb802e3ddd6086111f58b6565694326"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-660-SEMNTC-CORE-REQUIREMENT--define-standard-local-tier@4.md",
+      "sha256": "fb83fe5cb5f4c3e2e786f99fc80609fcf592553a528330d4188a5114dbf8b202"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-680-SEMNTC-CORE-REQUIREMENT--order-the-three-local-tiers@7.md",
+      "sha256": "38bec74a185c6c68e71366efa30d1ae91c73c5c056d58a9aa39712e6667a6a48"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-740-MMODEL-CORE-REQUIREMENT--give-every-atom-one-content-role-and-type@6.md",
+      "sha256": "8ae3627c3c21be2bd67f8521bafb05c922153cb5be7711fd1d6aea44c95aa5e0"
+    }
+  ],
+  "validation": {
+    "active_yaml": "PASS",
+    "active_atom_id_uniqueness": "PASS",
+    "content_role_bearer": "PASS",
+    "content_role_value_registry": "PASS",
+    "qualified_type_bearer": "PASS",
+    "concern_default_type_registry": "PASS",
+    "analysis_default_type_registry": "PASS",
+    "local_tier_separation": "PASS",
+    "epic_excluded_from_atom_type_domain": "PASS",
+    "carrier_specific_tier_tokens_deferred_to_ca_p_913": true,
+    "git_diff_check": "PASS"
+  },
+  "execution_sha256": "5e4a381d36545aeb748c5709c292dd88cb3f2246b5d3bbdf14bbe67eca35adef"
+}

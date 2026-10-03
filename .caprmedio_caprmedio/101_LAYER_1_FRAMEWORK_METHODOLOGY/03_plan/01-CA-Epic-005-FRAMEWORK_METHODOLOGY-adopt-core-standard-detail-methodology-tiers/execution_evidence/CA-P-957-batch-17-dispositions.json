@@ -1,0 +1,1043 @@
+{
+  "schema": "ca-p-957-batch-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "17",
+  "scope": "17 remaining CORE_META_MODEL Requirement origins and three necessary dependency-only repairs; no external classification.",
+  "records": [
+    {
+      "atom_id": "CA-R-151",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Admits a durable construct only when an operational distinction is otherwise irreducible; this is the minimal-model boundary.",
+      "negation_witness": "Admit a construct without a required distinction that the existing model cannot preserve, and the metamodel's necessary-distinction boundary is lost.",
+      "concrete_choice_test": "No independently replaceable Carrier, algorithm or specimen is selected by this complete constitutive boundary.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-151-CORE_META_MODEL-CORE-REQUIREMENT--admit-only-necessary-metamodel-constructs.md",
+      "source_version": 12,
+      "source_sha256": "344ce4b95351cb37a36fad721c61d56c2c632491f734a7348942852f935f5fc2",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-151",
+      "filename_identity": "CA-R-151",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-model"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Admit only necessary Metamodel constructs THE CAPRMEDIO Metamodel must admit a durable construct only when the existing Metamodel cannot preserve the required operational distinction.",
+      "complete_body": "\n# Admit only necessary Metamodel constructs\n\nTHE CAPRMEDIO Metamodel **must** admit a durable construct **only** **when** the existing Metamodel cannot preserve the required operational distinction.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-005-PRINCIPLE-METHOD--add-complexity-only-when-necessary"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Admit unchanged Core Claim."
+    },
+    {
+      "atom_id": "CA-R-165",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the literal version and updated_at Carrier keys while preserving revision value/history guards.",
+      "replacement_witness": "Encode the same positive monotonic Version and unambiguous Updated At under different governed keys; exact Revision identity and history remain but the selected keys do not.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-165-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-version-and-updated-at.md",
+      "source_version": 10,
+      "source_sha256": "b416d2895f79191fc74366f205b649f80d09f3b8525804e8f011a274706bd409",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-165",
+      "filename_identity": "CA-R-165",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Revision"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Revision"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Give every Atom Revision version and updated at every Atom Revision must have =1 positive monotonic version and =1 unambiguous updated_at.",
+      "complete_body": "\n# Give every Atom Revision version and updated at\n\n**every** Atom Revision **must** have **`=1`** positive monotonic `version` **and** **`=1`** unambiguous `updated_at`.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "before": "    - CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision\n",
+          "after": "",
+          "count": 1,
+          "reason": "Remove the demonstrated inactive unresolved parent during this revised Atom's admission; retain active META125."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-366",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the exact Revision-reference tuple identity, Version and Updated At.",
+      "replacement_witness": "An immutable Revision reference resolving the same exact content and time preserves identity/history without requiring all three values in every reference.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-366-CORE_META_MODEL-CORE-REQUIREMENT--reference-exact-atom-revisions-by-version-and-time.md",
+      "source_version": 14,
+      "source_sha256": "22d055046fb3f27a6ed8c416c26ddaa6744f397d8a25a598d339b334d974a893",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-366",
+      "filename_identity": "CA-R-366",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Revision/Reference"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Revision/Reference"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Reference exact Atom Revisions by version and time every exact Atom Revision reference must identify Atom identity, Version, and Updated At.",
+      "complete_body": "\n# Reference exact Atom Revisions by version and time\n\n**every** exact Atom Revision reference **must** identify Atom identity, Version, **and** Updated At.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-380",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Requires a configurable semantic-resolution default at the existing Settings owner; this is a source policy, not a selected key.",
+      "preserving_realizations": [
+        "Resolve the configured default directly from Settings.",
+        "Compile the same Settings default into a derived resolver."
+      ],
+      "countermodel": "Require an explicit Operator threshold for every semantic-resolution action instead of a configurable default; this changes the default policy while preserving Operator authority and fail-closed confidence gating.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-380-CORE_META_MODEL-REQUIREMENT--configure-the-semantic-resolution-confidence-default.md",
+      "source_version": 16,
+      "source_sha256": "ae65d4b92e69b39004c00fa6470bf13c59f060f56a49bd707316c0e6ea10bc07",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-380",
+      "filename_identity": "CA-R-380",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Framework Instance Settings/Confidence/Semantic Resolution Threshold"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Framework Instance Settings/Confidence/Semantic Resolution Threshold"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Configure the semantic-resolution confidence default the semantic-resolution Confidence Threshold must have an Operator-configurable default in Framework Instance Settings.",
+      "complete_body": "\n# Configure the semantic-resolution confidence default\n\nthe semantic-resolution Confidence Threshold **must** have an Operator-configurable default **in** Framework Instance Settings.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-115"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-626",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a row-based Scope Unit Graph Projection with specified observed/authority-backed columns; authority separation is an inherited guard.",
+      "replacement_witness": "A read-only hierarchical view with separately bound observed and authority-backed properties can preserve all source distinctions, missing/conflict reporting and existing Units without the selected row contract.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-626-CORE_META_MODEL-REQUIREMENT--project-the-current-scope-unit-graph-without-owning-authority.md",
+      "source_version": 18,
+      "source_sha256": "8a8620c4e967bbf23e730b3ffed8b24611f33cba165c620f1b9bd11f537b430a",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-626",
+      "filename_identity": "CA-R-626",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-catalog"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-catalog"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Project the current Scope Unit Graph without owning authority every Project Scope Unit Graph Projection row must distinguish observed Unit Name, parent, Structural Level, and Carrier path from authority-backed Type, Project Boundary Position, Child Composition, Local Order, Label, Navigational Order Number, and Implementation Folder values when resolvable; missing or conflicting authority must be reported without inventing a value or hiding an existing Scope Unit.",
+      "complete_body": "\n# Project the current Scope Unit Graph without owning authority\n\n**every** Project Scope Unit Graph Projection row **must** distinguish observed Unit Name, parent, Structural Level, **and** Carrier path from authority-backed Type, Project Boundary Position, Child Composition, Local Order, Label, Navigational Order Number, **and** Implementation Folder values **when** resolvable; missing **or** conflicting authority **must** be reported **without** inventing a value **or** hiding an existing Scope Unit.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-843",
+          "CA-R-960",
+          "CA-R-961",
+          "CA-R-962"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Admit unchanged Standard Claim.",
+      "source_admission_limit": "Existing source/owner placement retained; this tier disposition does not perform a migration or broader source-admission cleanup."
+    },
+    {
+      "atom_id": "CA-R-747",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "The complete Goal/Demand Requirement-Type contribution is exactly R924's Requirement-domain projection; no additional condition survives independently.",
+      "preserving_realizations": [
+        "A qualified Type-domain registry.",
+        "A graph of qualified allowed-value contributions."
+      ],
+      "countermodel": "Move Objective's baseline membership to a separately admitted Extension contribution while retaining Objective/Goal/Demand meanings and one qualified Type per admitted Relational Atom; this changes the baseline contribution without changing their constitutive identities.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "new_tier_basis": "Conserved authority resides in the General survivor; the retired Carrier retains exact historical tier metadata.",
+      "retirement_successor": "CA-R-924",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-747-CORE_META_MODEL-CORE-REQUIREMENT--register-goal-and-demand-as-type-values-for-relational-requirement-atoms.md",
+      "source_version": 17,
+      "source_sha256": "58b348f95ae1b8af6bb3eba496b814bea4771c7ac6baa57527a2b34b1422c0c9",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-747",
+      "filename_identity": "CA-R-747",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Content Role: Requirement/Type"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Requirement/Type"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": null,
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Register Goal and Demand as Type Values for Relational Requirement Atoms the Core contribution to allowed values of Atom/Content Role: Requirement/Type for Relational Atoms must be exactly (Goal, Demand).",
+      "complete_body": "\n# Register Goal and Demand as Type Values for Relational Requirement Atoms\n\nthe Core contribution to allowed values of `Atom/Content Role: Requirement/Type` for Relational Atoms **must** be exactly (Goal, Demand).\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-923",
+          "CA-R-924"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "Exact prior relations retained in Archive; no formal replacement edge invented."
+        }
+      ],
+      "disposition": "Retire exact duplicate into CA-R-924"
+    },
+    {
+      "atom_id": "CA-R-806",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Requires a complete semantic metadata record for each Relation Kind, not particular serialized keys.",
+      "preserving_realizations": [
+        "Normalized relational metadata records.",
+        "Typed object records with the same semantic properties."
+      ],
+      "countermodel": "Use several non-overlapping, jointly authoritative metadata records for a Relation Kind instead of exactly one complete canonical record; each fact still has one owner and the same exact meaning/direction/cardinality, but the single-record contract changes.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "source_version": 14,
+      "source_sha256": "2ba0eca1cbb3a55225c4be54a5168aab5ffffd9059a4a7bd5d99e89cb2a6c224",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-806",
+      "filename_identity": "CA-R-806",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Relation Kind/Metadata"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Relation Kind/Metadata"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Register Complete Relation Kind Metadata every admitted Relation Kind must have =1 canonical metadata record that resolves its graph, declared direction, inverse direction, endpoint classes, cardinality, authority effect, transitivity, applicability, Status, and exclusive purpose.",
+      "complete_body": "\n# Register Complete Relation Kind Metadata\n\n**every** admitted Relation Kind **must** have **`=1`** canonical metadata record that resolves its graph, declared direction, inverse direction, endpoint classes, cardinality, authority effect, transitivity, applicability, Status, **and** exclusive purpose.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-836",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Requires partition derivation and rejection over the already constituted R834 partition.",
+      "preserving_realizations": [
+        "Validate typed node objects against the two partitions.",
+        "Run a graph constraint query with the same exact-one rejection rule."
+      ],
+      "countermodel": "Quarantine an unresolved invalid node without admitting it and return indeterminate rather than reject; the Core partition remains exact and no invalid authority is admitted, but this binary rejection contract changes.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-REQUIREMENT--encode-project-graph-node-partitions.md",
+      "source_version": 9,
+      "source_sha256": "69ddf6ec323ea4db2bed0252248d2149a94589afe5ab7cc1b83f357f470dcaaa",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-836",
+      "filename_identity": "CA-R-836",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "project-containment graph"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "project-containment graph"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Encode project-graph node partitions the project-containment graph must derive =1 partition for every governed Primary Entity node from its Artifact or Structural Entity classification and reject a node whose partition count is !=1.",
+      "complete_body": "\n# Encode project-graph node partitions\n\nthe project-containment graph **must** derive **`=1`** partition for **every** governed Primary Entity node from its Artifact **or** Structural Entity classification **and** reject a node whose partition count is **`!=1`**.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-837",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects canonical Carrier address as the resolution mechanism; its universal domain must respect R930's separately governed no-Scope-Unit Atom exception.",
+      "replacement_witness": "An explicit authoritative membership registry can resolve the same direct containing Unit and full ancestry without deriving membership from canonical Carrier address. Exact ownership and invalid-ownership rejection remain.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md",
+      "source_version": 9,
+      "source_sha256": "0f6b9c33b5038b90c20f75ad10f17c48abbabbe12f3b3050a20b669564983fe7",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-837",
+      "filename_identity": "CA-R-837",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "scope-topology"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "scope-topology"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Derive Artifact scope inclusion the resolver must derive every Artifact's one direct Scope Unit from its canonical carrier address and include that Artifact in every Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, or cyclic scope ownership is invalid.",
+      "complete_body": "\n# Derive Artifact scope inclusion\n\nthe resolver **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-835-REQUIREMENT-BSEED_SEMANTICS--scope-artifacts-through-scope-units"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "necessary existing Scope exception binding repair; no new owner policy",
+      "relation_impacts": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-835-REQUIREMENT-BSEED_SEMANTICS--scope-artifacts-through-scope-units\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "reason": "Remove only the demonstrated inactive legacy parent; no invented substitute."
+        },
+        {
+          "before": "the resolver **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.",
+          "after": "For **every** Artifact contained **in** a Scope Unit, the resolver **must** derive its one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.\n\nAn Atom with no containing Scope Unit uses the separately governed Scope rule under CA-R-930; a failed Scope Unit resolution does **not** establish that no containing Scope Unit exists.",
+          "count": 1,
+          "reason": "Narrow the containing-Unit resolver domain to respect the existing R930 exception, retaining canonical address, exact direct owner, complete ancestry and invalid-resolution guards."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-838",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Requires active normative-subgraph construction and typed-edge/acyclic rejection, without selecting an algorithm.",
+      "preserving_realizations": [
+        "Depth-first cycle and registered-edge validation.",
+        "Kahn topological validation with independently checked edge typing."
+      ],
+      "countermodel": "Return indeterminate with authority use blocked on unknown typing or a cycle instead of a rejection result; Core valid authority remains acyclic and typed, but this validator's binary failure contract changes.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy.md",
+      "source_version": 10,
+      "source_sha256": "a08ad5700ec4bfa5a7fe471dfdc64a7dafeaa1d6f0db7cc1a5ad3fd276aeef4a",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-838",
+      "filename_identity": "CA-R-838",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "relation-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "relation-model"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Validate the normative-authority hierarchy validators must construct the active normative-authority subgraph from registered authority-bearing direct relations and must reject the subgraph when any authority edge lacks registered typing or the directed subgraph contains a cycle.",
+      "complete_body": "\n# Validate the normative-authority hierarchy\n\nvalidators **must** construct the active normative-authority subgraph from registered authority-bearing direct relations **and** **must** reject the subgraph **when** **any** authority edge lacks registered typing **or** the directed subgraph **contains** a cycle.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-833-CORE-REQUIREMENT--organize-normative-authority-as-an-acyclic-hierarchy"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-852",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Requires a bounded delegation's semantic payload, not an encoding.",
+      "preserving_realizations": [
+        "Typed delegation records checked at action admission.",
+        "Normalized delegation/constraint tables checked by a guard."
+      ],
+      "countermodel": "Allow an unknown recorded revocation state only when every attempted action remains blocked pending fresh Operator approval; bounded human authorization is preserved, but every Delegation no longer identifies the required revocation state.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-852-CORE_META_MODEL-REQUIREMENT--encode-bounded-ai-agent-delegation.md",
+      "source_version": 9,
+      "source_sha256": "f98bba7fdd991880fbcb60d9c7a7bf237d051470c9b086761ad1c55f8b53bf39",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-852",
+      "filename_identity": "CA-R-852",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "AI Agent Delegation"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "AI Agent Delegation"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Encode Bounded AI Agent Delegation every AI Agent Delegation must identify its Operator, AI Agent, allowed actions, allowed target Scopes, constraints, validity boundary, and revocation state.",
+      "complete_body": "\n# Encode Bounded AI Agent Delegation\n\n**every** AI Agent Delegation **must** identify its Operator, AI Agent, allowed actions, allowed target Scopes, constraints, validity boundary, **and** revocation state.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-855",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the stated who/what/how paraphrase test for contribution-role admission, expressly without a literal wording template.",
+      "replacement_witness": "A direct contribution/authority-effect classifier can preserve the role boundaries without requiring the Claim to pass the selected paraphrase test.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-855-CORE_META_MODEL-REQUIREMENT--validate-principle-content-role-semantics.md",
+      "source_version": 9,
+      "source_sha256": "f6c6af61ea1272663ac28468aad4228419cc24547974f32e4f7c72be1b63de36",
+      "identity_basis": "filename identity; no new identity allocated",
+      "explicit_atom_id": null,
+      "filename_identity": "CA-R-855",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "principles"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "principles"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Validate Principle Content-role semantics Classify a Plan Principle only when its meaning can be faithfully paraphrased as who may perform or authorize governed actions, classify a Requirement, Delivery, or Ops Principle only when its meaning can be faithfully paraphrased as what CAPRMEDIO provides, and classify a Method or Evaluation Principle only when its meaning can be faithfully paraphrased as how CAPRMEDIO provides its capabilities; the paraphrase is a semantic test and does not require a literal wording template.",
+      "complete_body": "\n# Validate Principle Content-role semantics\n\nClassify a Plan Principle **only** **when** its meaning can be faithfully paraphrased as who **may** perform **or** authorize governed actions, classify a Requirement, Delivery, **or** Ops Principle **only** **when** its meaning can be faithfully paraphrased as what CAPRMEDIO provides, **and** classify a Method **or** Evaluation Principle **only** **when** its meaning can be faithfully paraphrased as how CAPRMEDIO provides its capabilities; the paraphrase is a semantic test **and** does **not** require a literal wording template.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-854-REQUIREMENT-BSEED_SEMANTICS--distinguish-provided-outcome-and-operating-way-principles"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Admit unchanged Standard Claim.",
+      "source_admission_limit": "Existing source/owner placement retained; this tier disposition does not perform a migration or broader source-admission cleanup."
+    },
+    {
+      "atom_id": "CA-R-862",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Assigns the authority-place/Implementation Folder binding to applicable Delivery and separates that ownership from mandatory local Atom occurrence.",
+      "negation_witness": "Let an ungoverned realization own the binding, or equate authority applicability with dedicated local Delivery occurrence, and the Delivery ownership/application distinction is lost.",
+      "concrete_choice_test": "No independently replaceable Carrier, algorithm or specimen is selected by this complete constitutive boundary.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-862-CORE_META_MODEL-CORE-REQUIREMENT--bind-scope-unit-places-without-requiring-local-delivery-atoms.md",
+      "source_version": 10,
+      "source_sha256": "67f5a8399327413ceab9a0f16a36a27c5aecc72e5423d0c7d7cb2cc09e135d01",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-862",
+      "filename_identity": "CA-R-862",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "scope-topology"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "scope-topology"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Bind Scope Unit Places without Requiring Local Delivery Atoms every Scope Unit must have its authority place bound to its Implementation Folder by applicable Delivery authority; this binding must not require a dedicated Delivery Atom owned by that Scope Unit.",
+      "complete_body": "\n# Bind Scope Unit Places without Requiring Local Delivery Atoms\n\n**every** Scope Unit **must** have its authority place bound to its Implementation Folder by applicable Delivery authority; this binding **must not** require a dedicated Delivery Atom owned by that Scope Unit.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-843"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Admit unchanged Core Claim."
+    },
+    {
+      "atom_id": "CA-R-924",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Defines the extensible Core Meta-Model contribution to qualified Relational Types; the catalog is independent of each Type's constitutive definition.",
+      "preserving_realizations": [
+        "A qualified Type-domain registry.",
+        "A graph of qualified allowed-value contributions."
+      ],
+      "countermodel": "Move Objective's baseline membership to a separately admitted Extension contribution while retaining Objective/Goal/Demand meanings and one qualified Type per admitted Relational Atom; this changes the baseline contribution without changing their constitutive identities.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-CORE-REQUIREMENT--register-core-relational-atom-classifications.md",
+      "source_version": 11,
+      "source_sha256": "f37b5b74f4f1ea927c8325cb423b2a08ac5762101ad48850df0be7c20e8b84bc",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-924",
+      "filename_identity": "CA-R-924",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Relational Atom/Qualified Type"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Relational Atom/Qualified Type"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Register Core Relational Atom Classifications the Core contribution to allowed qualified Types of Relational Atom must = (Atom/Content Role: Requirement/Type: Goal, Atom/Content Role: Requirement/Type: Demand, Atom/Content Role: Plan/Type: Objective).",
+      "complete_body": "\n# Register Core Relational Atom Classifications\n\nthe Core contribution to allowed qualified Types of Relational Atom **must** **`=`** (`Atom/Content Role: Requirement/Type: Goal`, `Atom/Content Role: Requirement/Type: Demand`, `Atom/Content Role: Plan/Type: Objective`).\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-923"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-930",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Constitutes the no-Scope-Unit Scope fallback as the nonempty set of identified human Operators. Registered name identifies actors, not a required serialization token.",
+      "negation_witness": "Invent a containing Scope Unit or permit an unidentified/nonhuman authority owner for the no-unit case, and its human Operator ownership boundary is lost.",
+      "concrete_choice_test": "No independently replaceable Carrier, algorithm or specimen is selected by this complete constitutive boundary.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-930-CORE_META_MODEL-CORE-REQUIREMENT--use-operator-names-when-an-atom-has-no-scope-unit.md",
+      "source_version": 10,
+      "source_sha256": "eceb5e58b6a8e7162eb2469a77ec997f1f2563c9f10fd026653c08c1b0c02b9e",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-930",
+      "filename_identity": "CA-R-930",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Scope"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Scope"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Use Operator Names When an Atom Has No Scope Unit an Atom with no containing Scope Unit must use the canonical non-empty set of its identified human Operators by registered name as its Scope.",
+      "complete_body": "\n# Use Operator Names When an Atom Has No Scope Unit\n\nan Atom with no containing Scope Unit **must** use the canonical non-empty set of its identified human Operators by registered name as its Scope.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-927",
+          "CA-R-929"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Admit unchanged Core Claim."
+    },
+    {
+      "atom_id": "CA-R-935",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Constrains Demand's admissible Consumer-to-Producer ancestry domain while retaining those endpoint and authority identities.",
+      "preserving_realizations": [
+        "An ancestry predicate over the containment graph.",
+        "A precomputed ancestor closure joined to Demand endpoint sets."
+      ],
+      "countermodel": "Admit a bounded Demand to an ancestor or descendant Producer while still constraining only its demanded result and preserving Consumer ownership and Producer authority outside that result; this changes the ancestry prohibition without redefining Demand or transferring ownership.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-935-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demands-between-ancestors-and-descendants.md",
+      "source_version": 10,
+      "source_sha256": "9cc921f47c422ea05695169a844b3870831b5d4009a03715ede59a1afff30fd8",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-935",
+      "filename_identity": "CA-R-935",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "relation-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "relation-model"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Prohibit Demands between ancestors and descendants a Demand Atom must not target an ancestor or descendant of its Consumer Atom Scope Unit in its Claim Scope Unit Set.",
+      "complete_body": "\n# Prohibit Demands between ancestors and descendants\n\na Demand Atom **must not** target an ancestor **or** descendant of its Consumer Atom Scope Unit **in** its Claim Scope Unit Set.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-932"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "All direct relations preserved. Existing unresolved diagnostics on unchanged Atoms remain outside this bounded admission repair."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-950",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "The complete bidirectional ancestor/descendant Demand prohibition is exactly R935 under R944's Consumer Atom Scope to Producer Claim Scope direction; it does not quantify pairs within the Producer set.",
+      "preserving_realizations": [
+        "An ancestry predicate over the containment graph.",
+        "A precomputed ancestor closure joined to Demand endpoint sets."
+      ],
+      "countermodel": "Admit a bounded Demand to an ancestor or descendant Producer while still constraining only its demanded result and preserving Consumer ownership and Producer authority outside that result; this changes the ancestry prohibition without redefining Demand or transferring ownership.",
+      "concrete_choice_test": "The complete Claim specifies a shared semantic contract, without selecting a Carrier encoding, procedure or concrete test specimen.",
+      "new_tier_basis": "Conserved authority resides in the General survivor; the retired Carrier retains exact historical tier metadata.",
+      "retirement_successor": "CA-R-935",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-950-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-demand-between-ancestor-and-descendant-scopes.md",
+      "source_version": 10,
+      "source_sha256": "5783f2acfcd0f3b888a0ecd92b693be326cc191a9337d076cf924f8c6ce4598c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-950",
+      "filename_identity": "CA-R-950",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Demand/Direction"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Requirement/Type: Demand/Direction"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": null,
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Prohibit Demand between ancestor and descendant Scopes a Demand Atom must not relate ancestor and descendant Scope Units in (ancestor-to-descendant or descendant-to-ancestor) direction.",
+      "complete_body": "\n# Prohibit Demand between ancestor and descendant Scopes\n\na Demand Atom **must not** relate ancestor **and** descendant Scope Units **in** (ancestor-to-descendant **or** descendant-to-ancestor) direction.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-932",
+          "CA-R-935"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "reason": "Exact prior relations retained in Archive; no formal replacement edge invented."
+        }
+      ],
+      "disposition": "Retire exact duplicate into CA-R-935"
+    },
+    {
+      "atom_id": "CA-R-925",
+      "new_tier": "Core",
+      "decisive_test": "dependency_repair_only",
+      "classification_deferred_or_previously_admitted": true,
+      "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-925-CORE_META_MODEL-CORE-REQUIREMENT--define-goal-atom.md",
+      "source_version": 13,
+      "source_sha256": "bc7e0caed57d38a6a3a19f0463777fa0eac15888c5d6f881d445613de4d8cdf5",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-925",
+      "filename_identity": "CA-R-925",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Goal"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Requirement/Type: Goal"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Define Goal Atom a Goal Atom means a Relational Atom with Content Role Requirement and Type Goal whose Claim states one desired result for =1 Scope Unit Claim Scope.",
+      "complete_body": "\n# Define Goal Atom\n\na Goal Atom **means** a Relational Atom with Content Role Requirement **and** Type Goal whose Claim states one desired result for **`=1`** Scope Unit Claim Scope.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-923",
+          "CA-R-924"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "before": "    - CA-R-924\n",
+          "after": "",
+          "count": 1,
+          "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-R-932",
+      "new_tier": "Core",
+      "decisive_test": "dependency_repair_only",
+      "classification_deferred_or_previously_admitted": true,
+      "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md",
+      "source_version": 12,
+      "source_sha256": "b3affb57d0562affdd686010d9b53071f9d133ef1272d1070530f08a8e123bdb",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-932",
+      "filename_identity": "CA-R-932",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Content Role: Requirement/Type: Demand"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Requirement/Type: Demand"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Define Demand Atom a Demand Atom means a Relational Atom with Content Role Requirement and Type Demand that is owned by the Consumer Scope Unit identified by its Atom Scope and constrains its Producer Claim Scope.",
+      "complete_body": "\n# Define Demand Atom\n\na Demand Atom **means** a Relational Atom with Content Role Requirement **and** Type Demand that is owned by the Consumer Scope Unit identified by its Atom Scope **and** constrains its Producer Claim Scope.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-923",
+          "CA-R-924"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "before": "    - CA-R-924\n",
+          "after": "",
+          "count": 1,
+          "reason": "R924 becomes General, making this Core Requirement's normative parent lower-ranked; remove the demonstrated invalid edge under R796/R829/R879, retain R923 and the whole definition."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    },
+    {
+      "atom_id": "CA-E-425",
+      "new_tier": "Standard",
+      "decisive_test": "dependency_repair_only",
+      "classification_deferred_or_previously_admitted": true,
+      "reason": "R747 retires as R924's exact Requirement-domain projection. E425 already checks R924; remove only the duplicate target, preserving the entire original bounded predicate and fixtures.",
+      "batch": "17",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "source_version": 4,
+      "source_sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-E-425",
+      "filename_identity": "CA-E-425",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Relational Atom Classification Validation"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Relational Atom Classification Validation"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing complete source/context retained; no owner or Claim Scope migration."
+      },
+      "content_role": "E",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Validate Relational Atom Classifications ## Claim checked every Relational Atom must have =1 qualified Type allowed by the Applicable Methodology, and the Core contribution must admit only Requirement/Goal, Requirement/Demand, and Plan/Objective. ## Test case create one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, and one relational Plan/Objective Atom. then create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, and Ops qualified Types without an additional Applicable Methodology contribution. ## Acceptance criteria only the Requirement/Goal, Requirement/Demand, and Plan/Objective fixtures pass. ## Failure disposition record a Concern naming the invalid Relational Atom qualified Type.",
+      "complete_body": "\n# Validate Relational Atom Classifications\n\n## Claim checked\n\n**every** Relational Atom **must** have **`=1`** qualified Type allowed by the Applicable Methodology, **and** the Core contribution **must** admit **only** Requirement/Goal, Requirement/Demand, **and** Plan/Objective.\n\n## Test case\n\ncreate one relational Requirement/Goal Atom, one relational Requirement/Demand Atom, **and** one relational Plan/Objective Atom. **then** create relational Atoms with Requirement/Task, Plan/Task, Method, Evaluation, Delivery, Implementation, **and** Ops qualified Types **without** an additional Applicable Methodology contribution.\n\n## Acceptance criteria\n\n**only** the Requirement/Goal, Requirement/Demand, **and** Plan/Objective fixtures pass.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Relational Atom qualified Type.\n",
+      "direct_relations": {
+        "evaluation_for": [
+          "CA-R-923",
+          "CA-R-924",
+          "CA-R-747",
+          "CA-R-1365"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [
+        {
+          "before": "    - CA-R-747\n",
+          "after": "",
+          "count": 1,
+          "reason": "R747 retires as R924's exact Requirement-domain projection. E425 already checks R924; remove only the duplicate target, preserving the entire original bounded predicate and fixtures."
+        }
+      ],
+      "disposition": "Apply exact reviewed revision."
+    }
+  ]
+}

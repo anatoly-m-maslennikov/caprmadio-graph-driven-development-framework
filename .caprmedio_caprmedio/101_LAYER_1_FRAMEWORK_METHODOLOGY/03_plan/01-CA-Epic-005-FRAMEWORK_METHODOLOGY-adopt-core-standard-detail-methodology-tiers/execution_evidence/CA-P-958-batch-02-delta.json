@@ -1,0 +1,331 @@
+{
+  "task": "CA-P-958",
+  "batch": "02",
+  "records": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-321",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+      "before_version": 20,
+      "before_sha256": "58f45dd9ed6e49ec18cd495170e708d160984d23cd97d935398b5b5ba063a0ce",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-321\ncce_version: cce_1\ncce_form: requirement\nsubjects:\n  governs:\n    continuant:\n      - Type\n  depends_on:\n    continuant:\n      - Atom\n      - Content Role\nversion: 20\nupdated_at: \"2026-09-10 04:26:29 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-112\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n  resolution_of:\n    - CAPRMEDIO-GOV-CONC-037--semantic-route-catalog-remains-incomplete\n    - CAPRMEDIO-GOV-CONC-051--which-types-complete-the-semantic-route-catalog\n---\n# Register the CAPRMEDIO Type Surface for Atoms\n\n**every** typed Atom **must** be registered with **`=1`** Content Role value **and** **`<=1`** Type value. Content Role states the Atom's primary semantic contribution, Type states the governed kind within that role, **and** Atom routing admits no additional subtype coordinate.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface@20.md",
+      "archive_sha256": "58f45dd9ed6e49ec18cd495170e708d160984d23cd97d935398b5b5ba063a0ce",
+      "before_tier": "Standard",
+      "after_tier": null,
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-321",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+        "before_version": 20,
+        "before_sha256": "58f45dd9ed6e49ec18cd495170e708d160984d23cd97d935398b5b5ba063a0ce",
+        "content_role": "R",
+        "governed_subject": [
+          "Type"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": null,
+        "rank": null,
+        "test": "absorbed",
+        "claim_evidence": "Typed Atoms have one Content Role and at most one Type; those axes express contribution/kind and admit no extra subtype coordinate.",
+        "witness": "The complete local assertion independently duplicates the canonical one-role, single Type, qualified domain and axis boundaries; no unique CAPRMEDIO Type value or token remains.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "retire",
+        "batch": "02",
+        "clause_allocation": [
+          {
+            "clause": "Exactly one Content Role and primary semantic contribution",
+            "retained": [
+              "CA-R-740",
+              "CA-R-1282"
+            ]
+          },
+          {
+            "clause": "At most one optional Type and governed kind under one qualified role path",
+            "retained": [
+              "CA-R-1284",
+              "CA-R-1285",
+              "CAPRMEDIO-META-REQU-112"
+            ]
+          },
+          {
+            "clause": "No added subtype coordinate and distinct role/Type axes",
+            "retained": [
+              "CA-R-1286",
+              "CAPRMEDIO-META-REQU-113"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-749",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "before_version": 11,
+      "before_sha256": "d9b97ed2bf1f0f387316d8c010f279302b42cd03de9f1d855d4d2995b66fd136",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: requirement\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Concern/Type\"\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - concern:question\n      - concern:problem\n      - concern:risk\n      - concern:opportunity\nversion: 11\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n---\n# Register Type Values for Concern Atoms\n\nQuestion with Carrier token `question`, Problem with Carrier token `problem`, Risk with Carrier token `risk`, **and** Opportunity with Carrier token `opportunity` **must** be registered as internal values of `Atom/Content Role: Concern/Type`.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@11.md",
+      "archive_sha256": "d9b97ed2bf1f0f387316d8c010f279302b42cd03de9f1d855d4d2995b66fd136",
+      "before_tier": "Standard",
+      "after_tier": "Standard",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-749",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+        "before_version": 11,
+        "before_sha256": "d9b97ed2bf1f0f387316d8c010f279302b42cd03de9f1d855d4d2995b66fd136",
+        "content_role": "R",
+        "governed_subject": [
+          "Atom/Content Role: Concern/Type"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "Standard",
+        "rank": "3d+3",
+        "test": "S",
+        "claim_evidence": "Question/Problem Carrier tokens realize inherited Core Types; Risk/Opportunity and their tokens are additional Local Types.",
+        "witness": "Different tokens preserve all four meanings and Core's Question/Problem admission but fail the concrete registration; inherited admission must not become a second owner.",
+        "source_authority": [
+          "CA-R-1286",
+          "CAPRMEDIO-META-REQU-112",
+          "CA-R-1218"
+        ],
+        "operation": "revise",
+        "batch": "02",
+        "replacements": [
+          [
+            "Question with Carrier token `question`, Problem with Carrier token `problem`, Risk with Carrier token `risk`, **and** Opportunity with Carrier token `opportunity` **must** be registered as internal values of `Atom/Content Role: Concern/Type`.",
+            "Question **and** Problem retain their canonical admission under CA-R-1231 **and** **must** use Carrier tokens `question` **and** `problem`, respectively. Risk with Carrier token `risk` **and** Opportunity with Carrier token `opportunity` **must** be registered as additional internal values of `Atom/Content Role: Concern/Type`."
+          ]
+        ],
+        "revision_reason": "Conserve inherited Core Question/Problem admission while retaining unique Local token realizations and added Risk/Opportunity Types."
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "after_version": 12,
+      "after_sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-749\ncce_version: cce_1\ncce_form: requirement\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Concern/Type\"\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - concern:question\n      - concern:problem\n      - concern:risk\n      - concern:opportunity\nversion: 12\nupdated_at: \"2026-09-10 08:02:35 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n---\n# Register Type Values for Concern Atoms\n\nQuestion **and** Problem retain their canonical admission under CA-R-1231 **and** **must** use Carrier tokens `question` **and** `problem`, respectively. Risk with Carrier token `risk` **and** Opportunity with Carrier token `opportunity` **must** be registered as additional internal values of `Atom/Content Role: Concern/Type`.\n",
+      "after_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "CA-R-1054"
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-753",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753--register-plan-role-types.md",
+      "before_version": 14,
+      "before_sha256": "971997d754a39c64214d2143365f257722c87f0794b24999046e58c933dd7504",
+      "before_bytes_utf8": "---\ncce_version: cce_1\ncce_form: requirement\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Plan/Type\"\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - plan:task\n      - plan:action_policy\nversion: 14\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n    - CA-R-888\n---\n# Register Type Values for Plan Atoms\n\nthe CAPRMEDIO Local Configuration **must** register Task **and** Action Policy as values of `Atom/Content Role: Plan/Type`.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-753--register-plan-role-types@14.md",
+      "archive_sha256": "971997d754a39c64214d2143365f257722c87f0794b24999046e58c933dd7504",
+      "before_tier": "Standard",
+      "after_tier": "General",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-REQU-753",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753--register-plan-role-types.md",
+        "before_version": 14,
+        "before_sha256": "971997d754a39c64214d2143365f257722c87f0794b24999046e58c933dd7504",
+        "content_role": "R",
+        "governed_subject": [
+          "Atom/Content Role: Plan/Type"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "General",
+        "rank": "3d+2",
+        "test": "G",
+        "claim_evidence": "Local adds Action Policy to Plan Type; Task admission is already owned by R989.",
+        "witness": "One additional allowed value is a shared qualified-domain contribution, not a new Type property; removing the duplicate Task assertion conserves canonical admission.",
+        "source_authority": [
+          "CA-R-1286",
+          "CAPRMEDIO-META-REQU-112",
+          "CA-R-1218"
+        ],
+        "operation": "revise",
+        "realizations": [
+          "A qualified-domain registry resolves the added Action Policy value",
+          "A generated catalog derives the same added allowed value from this authoritative Claim"
+        ],
+        "countermodel": "Close new Local Plan admission to Task/Objective only while leaving constituted Plan/Task meanings intact; the independent Action Policy extension contribution is removed.",
+        "batch": "02",
+        "replacements": [
+          [
+            "      - plan:task\n",
+            ""
+          ],
+          [
+            "  child_of:\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n    - CA-R-888",
+            "  child_of:\n    - CA-R-1286"
+          ],
+          [
+            "# Register Type Values for Plan Atoms",
+            "# Register Action Policy for Plan Atoms"
+          ],
+          [
+            "the CAPRMEDIO Local Configuration **must** register Task **and** Action Policy as values of `Atom/Content Role: Plan/Type`.",
+            "the CAPRMEDIO Local Configuration **must** register Action Policy as an additional value of `Atom/Content Role: Plan/Type`; Task retains its canonical admission under CA-R-989."
+          ]
+        ],
+        "clause_allocation": [
+          {
+            "clause": "Task semantic admission removed from independently editable local contribution",
+            "retained": [
+              "CA-R-989"
+            ]
+          },
+          {
+            "clause": "Action Policy additional qualified Plan Type remains owned by this same Local identity",
+            "retained": [
+              "CAPRMEDIO-GOV-REQU-753"
+            ]
+          }
+        ]
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--register-plan-role-types.md",
+      "after_version": 15,
+      "after_sha256": "4719f60c8616b8e8163ac720e903c372063aa241318f63ffec29748e0c02c2f7",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-753\ncce_version: cce_1\ncce_form: requirement\nsubjects:\n  governs:\n    continuant:\n      - \"Atom/Content Role: Plan/Type\"\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - plan:action_policy\nversion: 15\nupdated_at: \"2026-09-10 08:02:35 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  child_of:\n    - CA-R-1286\n---\n# Register Action Policy for Plan Atoms\n\nthe CAPRMEDIO Local Configuration **must** register Action Policy as an additional value of `Atom/Content Role: Plan/Type`; Task retains its canonical admission under CA-R-989.\n",
+      "after_relations": {
+        "child_of": [
+          "CA-R-1286"
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-788",
+      "operation": "retire",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order.md",
+      "before_version": 9,
+      "before_sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - artifact-model\n      - atom-boundary\ncce_version: cce_1\ncce_form: separation\nversion: 9\nupdated_at: 2026-08-29 09:18:56 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-709\n---\n# Derive the Type Value of a Scope Unit Only from Sibling Order\n\nthe Type value of a Scope Unit **must** depend **only** on its position among siblings **and** **must not** depend on its Child Composition.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order@9.md",
+      "archive_sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76",
+      "before_tier": "Standard",
+      "after_tier": null,
+      "decision": {
+        "atom_id": "CAPRMEDIO-META-REQU-788",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order.md",
+        "before_version": 9,
+        "before_sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76",
+        "content_role": "R",
+        "governed_subject": [
+          "relation-model"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": null,
+        "rank": null,
+        "test": "absorbed",
+        "claim_evidence": "Scope Unit Type depends only on sibling ordering, independently of Child Composition.",
+        "witness": "Ordered/Unordered membership and independence from Child Composition are completely retained by META709/712/713/714; no local variation remains.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "retire",
+        "batch": "02",
+        "clause_allocation": [
+          {
+            "clause": "Only Ordered/Unordered sibling Local Order membership determines Scope Unit Type",
+            "retained": [
+              "CAPRMEDIO-META-REQU-709",
+              "CAPRMEDIO-META-REQU-712",
+              "CAPRMEDIO-META-REQU-713"
+            ]
+          },
+          {
+            "clause": "Child Composition is independent",
+            "retained": [
+              "CAPRMEDIO-META-REQU-714"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "before_version": 15,
+      "before_sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-006\ncce_version: cce_1\ncce_form: evaluation\nartifact_subtype: qa_case\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 15\nupdated_at: \"2026-09-10 07:34:05 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054\n---\n# Canonical Settings Selection\n\n## Claim checked\n\nthe Framework Instance Settings Artifact **and** Project Settings Artifact accept exactly their registered values, resolve deterministically, **and** fail closed on invalid **or** unknown selections; the generated Project Scope Unit Graph reproduces applicable Project Settings **without** becoming selection authority.\n\n## Applicable conditions\n\n1. resolve **and** load the exact current caprmedio_framework_settings Artifact **and** caprmedio_<project_name>_settings Artifact with documented defaults.\n2. accept **only** enabled catalog Types, subtypes, **and** Governance loci.\n3. accept **only** `medium` **or** `high` artifact creation strictness.\n4. accept **only** `silent` **or** `verbose` interaction reporting.\n5. validate initialization inputs against Project Settings field authority **and** Authority Modes against Framework Instance Settings field authority; do **not** hard-code this Project's selected values in the Evaluation.\n6. reject unknown keys **when** the governing schema marks their table closed.\n7. confirm a second parse produces identical effective settings **and** a regenerated Project Scope Unit Graph Projection binds to the same consumed Settings revisions.\n\n## Acceptance criteria\n\n**every** valid selection resolves deterministically **and** **every** invalid selection fails closed with the exact key **and** allowed values.\n\n## Failure disposition\n\nrecord a Concern naming the accepted invalid value, rejected valid value, **or** non-deterministic result **and** stop settings-schema readiness.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection@15.md",
+      "archive_sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190",
+      "before_tier": "Standard",
+      "after_tier": "Standard",
+      "decision": {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+        "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+        "before_version": 15,
+        "before_sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190",
+        "content_role": "E",
+        "governed_subject": [
+          "evaluation"
+        ],
+        "owner": "LOCAL_CONFIGURATION",
+        "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+        "previous_tier": "Standard",
+        "previous_rank": "3d+3",
+        "tier": "Standard",
+        "rank": "3d+3",
+        "test": "S",
+        "claim_evidence": "The concrete settings case checks exact medium/high, silent/verbose and parse/reparse/projection cases.",
+        "witness": "Other valid schema specimens can check the same settings boundaries but fail these exact cases; checked R/M/D relations must identify actual governing authority.",
+        "source_authority": [
+          "CA-R-1218",
+          "CA-R-1207",
+          "CAPRMEDIO-META-REQU-106"
+        ],
+        "operation": "revise",
+        "batch": "02",
+        "filename": "CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "replacements": [
+          [
+            "artifact_subtype: qa_case\n",
+            ""
+          ],
+          [
+            "  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054",
+            "  evaluation_for:\n    - CAPRMEDIO-GOV-REQU-294\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302\n    - CA-D-361\n    - CA-D-366\n    - CA-R-1052\n    - CA-R-1430\n    - CAPRMEDIO-META-REQU-627"
+          ],
+          [
+            "2. accept **only** enabled catalog Types, subtypes, **and** Governance loci.",
+            "2. accept **only** enabled catalog Artifact Types, Atom Content Roles **and** their qualified Types, **and** Governance Origins."
+          ]
+        ],
+        "revision_reason": "Bind the admitted QA Case Type in the filename; remove obsolete subtype coordinate; replace registered check_of once with current evaluation_for and eight actual checked R/D targets; remove inactive R1054 parent."
+      },
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "after_version": 16,
+      "after_sha256": "00f629d63836f91cbb62a3fceb4a529584fb273d7e5600a7d5daabb60daa9336",
+      "after_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-006\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 16\nupdated_at: \"2026-09-10 08:02:35 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  evaluation_for:\n    - CAPRMEDIO-GOV-REQU-294\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302\n    - CA-D-361\n    - CA-D-366\n    - CA-R-1052\n    - CA-R-1430\n    - CAPRMEDIO-META-REQU-627\n---\n# Canonical Settings Selection\n\n## Claim checked\n\nthe Framework Instance Settings Artifact **and** Project Settings Artifact accept exactly their registered values, resolve deterministically, **and** fail closed on invalid **or** unknown selections; the generated Project Scope Unit Graph reproduces applicable Project Settings **without** becoming selection authority.\n\n## Applicable conditions\n\n1. resolve **and** load the exact current caprmedio_framework_settings Artifact **and** caprmedio_<project_name>_settings Artifact with documented defaults.\n2. accept **only** enabled catalog Artifact Types, Atom Content Roles **and** their qualified Types, **and** Governance Origins.\n3. accept **only** `medium` **or** `high` artifact creation strictness.\n4. accept **only** `silent` **or** `verbose` interaction reporting.\n5. validate initialization inputs against Project Settings field authority **and** Authority Modes against Framework Instance Settings field authority; do **not** hard-code this Project's selected values in the Evaluation.\n6. reject unknown keys **when** the governing schema marks their table closed.\n7. confirm a second parse produces identical effective settings **and** a regenerated Project Scope Unit Graph Projection binds to the same consumed Settings revisions.\n\n## Acceptance criteria\n\n**every** valid selection resolves deterministically **and** **every** invalid selection fails closed with the exact key **and** allowed values.\n\n## Failure disposition\n\nrecord a Concern naming the accepted invalid value, rejected valid value, **or** non-deterministic result **and** stop settings-schema readiness.\n",
+      "after_relations": {
+        "evaluation_for": [
+          "CAPRMEDIO-GOV-REQU-294",
+          "CAPRMEDIO-GOV-REQU-385",
+          "CAPRMEDIO-GOV-REQU-302",
+          "CA-D-361",
+          "CA-D-366",
+          "CA-R-1052",
+          "CA-R-1430",
+          "CAPRMEDIO-META-REQU-627"
+        ]
+      }
+    }
+  ]
+}

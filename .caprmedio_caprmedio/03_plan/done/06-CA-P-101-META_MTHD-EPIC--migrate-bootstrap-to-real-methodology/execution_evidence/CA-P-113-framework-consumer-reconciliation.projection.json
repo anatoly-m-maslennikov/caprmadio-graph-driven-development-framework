@@ -1,0 +1,125 @@
+{
+  "schema": "caprmedio.ca_p_113.framework_consumer_reconciliation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-113",
+  "task_revision": 2,
+  "recorded_at": "2026-09-03T15:00:00+04:00",
+  "minimum_confidence_percent": 99,
+  "ownership_roots": {
+    "framework_authority": ".caprmedio_framework",
+    "project_governed_carriers": ".caprmedio_caprmedio",
+    "durable_engine_installation": ".caprmedio_install",
+    "ephemeral_runtime_state": ".caprmedio_runtime",
+    "bootstrap_history_only": ".caprmedio"
+  },
+  "source_authority_repairs": {
+    "artifact_revision": "CA-R-1371",
+    "journal_revision": "CA-R-1372",
+    "methodology_source": "CA-R-1219",
+    "applicable_methodology_conflict": "CA-R-1373",
+    "conflict_disposition": "CA-R-1374",
+    "operator_approval": "exact approvals supplied before source change"
+  },
+  "applicable_methodology": {
+    "source_scope_units": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "source_active_atom_count": 664,
+    "source_frontier_digest": "dc9e4f7eac620b3b30a7450218d6b6e6ff9aa6f56cf9a2e162743abca53fd981",
+    "generated_tree_digest": "0369363587fa3f0129e9adcea6f37cd8998c3d7ca7824fecd591626cc1410132",
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "persistent_subject_indexes": false,
+    "generated_role_carriers": {
+      "04_requirement": 503,
+      "05_method": 33,
+      "06_evaluation": 28,
+      "07_delivery": 100,
+      "09_ops": 0
+    }
+  },
+  "project_scope_unit_graph": {
+    "generator": "GENERATE_PROJECT_GRAPH_STATE",
+    "executed_installed_release": "83ad94081c4d51e9eb71f367c759b1ec98556df8ec373705cdf228126011c330",
+    "scope_unit_count": 13,
+    "methodology_source_atom_count": 664,
+    "mechanical_source_frontier": true,
+    "whole_project_folder_receipt_gate": false,
+    "second_run_changed": false
+  },
+  "retrieval": {
+    "projection_only": true,
+    "exact_governor_artifact_revision": {
+      "selected_atom_count": 1,
+      "digest": "5921364e090cec0ce72e2227d9770434704cd3cca0722d935bc342c465b759af"
+    },
+    "exact_governor_methodology_source": {
+      "selected_atom_count": 48,
+      "digest": "fe9d499ca07dad5b52b7b18fc2d7824b34ab9d8a08cbc6ac10e0dff00d5963e8"
+    },
+    "scope_unit_core_meta_model": {
+      "selected_atom_count": 0,
+      "resolution": "structural Scope Unit frontier"
+    },
+    "general_subject_methodology": {
+      "selected_atom_count": 0,
+      "resolution": "successful terminal"
+    },
+    "process_applicable_methodology_compilation": {
+      "selected_atom_count": 53,
+      "digest": "582c965fe6734592eb47b192cafec794be97cd554f2455ecd9543b3878a28c09"
+    }
+  },
+  "consumer_updates": [
+    "README.md",
+    "pyproject.toml",
+    "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca-project-settings/SKILL.md",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RETRIEVE_APPLICABLE_METHODOLOGY/retrieve_applicable_methodology.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/atom_operations.py"
+  ],
+  "installation": {
+    "tool_release_installed_without_host_hooks": true,
+    "final_no_hook_release": "9bc3a2fa78bea86fb0ca137f194dcb994bca091443e0a7bff84ebfd36e528e30",
+    "git_hook_path_unchanged": ".caprmedio_install/hooks/git",
+    "codex_hook_state_unchanged": true,
+    "source_matches_install": true
+  },
+  "validation": {
+    "retrieve_applicable_methodology_tests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "compile_applicable_methodology_tests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "generate_project_graph_state_tests": {
+      "passed": 8,
+      "failed": 0
+    },
+    "applicable_methodology_recompiled": "PASS",
+    "installed_graph_generator_apply_and_idempotent_rerun": "PASS",
+    "installer_no_hook_live_apply": "PASS",
+    "atom_read_installed_launcher_current_project_carrier": "PASS",
+    "atom_operations_current_carrier_suite": {
+      "passed": 19,
+      "failed": 0
+    },
+    "installer_no_hook_suite": {
+      "passed": 8,
+      "failed": 0,
+      "fixture_cleanup": "sandbox-protected synthetic Git and CODEX_HOME directories are ignored after successful behavior assertions"
+    },
+    "git_diff_check": "PASS"
+  },
+  "closure": {
+    "status": "DONE",
+    "atom_operations": "current Project Settings selects .caprmedio_caprmedio; current filename form, typed Scope Unit graph authority paths, frontmatter identities, and folder lifecycle statuses are supported",
+    "applicable_methodology": "the 664-Atom active source frontier recompiles without conflicts; exact Subject and Process retrievals are complete without a persistent Subject Index",
+    "installation": "the current release is installed with --without-hooks and the installed Atom read launcher resolves CA-P-113 from its frontmatter Atom ID in done/"
+  }
+}

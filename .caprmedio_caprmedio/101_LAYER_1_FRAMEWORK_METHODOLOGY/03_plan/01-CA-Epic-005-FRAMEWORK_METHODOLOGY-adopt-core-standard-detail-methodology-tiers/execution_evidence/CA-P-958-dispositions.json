@@ -1,0 +1,1886 @@
+{
+  "task": "CA-P-958",
+  "status": "49 complete source dispositions; 3 pending current-selection admissions. Task CA-P-958 is NOT Done.",
+  "basis": "M272 ordered S/F/G; M273 owner and Claim Scope preserved. Core > General > Standard remains binding; d is actual unresolved source-owner depth. Hypothetical witnesses do not authorize live changes.",
+  "records": [
+    {
+      "atom_id": "CA-R-1223",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1223-REQUIREMENT--identify-caprmedio-as-the-current-project.md",
+      "before_version": 3,
+      "before_sha256": "aa3bd390e0c6ac9c377ea36c1a394adc7b0b677db09e88ae9ba3b85499a2b3ee",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Sources/Local Configuration/Current Project"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The Local source must identify caprmedio as its one current Project.",
+      "witness": "Binding this source to a different existing Project preserves the source/application and Settings ownership boundaries but fails this named application binding.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1223-REQUIREMENT--identify-caprmedio-as-the-current-project.md",
+        "version": 3,
+        "sha256": "aa3bd390e0c6ac9c377ea36c1a394adc7b0b677db09e88ae9ba3b85499a2b3ee"
+      }
+    },
+    {
+      "atom_id": "CA-R-1224",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1224-REQUIREMENT--select-core-meta-model-and-local-configuration-for-compilation.md",
+      "before_version": 2,
+      "before_sha256": "d1e05ccd12add68d6826485dee86ea1649157c1c548138115473c28cc1a6d64b",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Sources/Local Configuration/Methodology Source Selection"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "unresolved",
+      "claim_evidence": "Local must select Core and Local, in that order, as the only compilation source layers.",
+      "witness": "The explicit only-source current composition may exclude Settings-owned activation; retaining or retiring needs the exact accepted selection disposition.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "pending",
+      "actual_outcome": "pending_admission_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1224-REQUIREMENT--select-core-meta-model-and-local-configuration-for-compilation.md",
+        "version": 2,
+        "sha256": "d1e05ccd12add68d6826485dee86ea1649157c1c548138115473c28cc1a6d64b"
+      }
+    },
+    {
+      "atom_id": "CA-R-1225",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1225-REQUIREMENT--exclude-installed-extensions-from-current-compilation.md",
+      "before_version": 2,
+      "before_sha256": "160cda02172985917efb078811f2dd79d0912c1be33985d186a81f3bd41bf450",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Sources/Local Configuration/Installed Extension Selection"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "unresolved",
+      "claim_evidence": "Local must select zero Installed Extensions for current compilation.",
+      "witness": "Converting zero current activation to a default would change the accepted obligation; R1207 assigns current Extension activation exclusively to Settings.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "pending",
+      "actual_outcome": "pending_admission_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1225-REQUIREMENT--exclude-installed-extensions-from-current-compilation.md",
+        "version": 2,
+        "sha256": "160cda02172985917efb078811f2dd79d0912c1be33985d186a81f3bd41bf450"
+      }
+    },
+    {
+      "atom_id": "CA-R-1226",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1226-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md",
+      "before_version": 2,
+      "before_sha256": "f89768589d673f4c9894c8afe2b98fafc72cf4d069eb57eda1096de7d4913aea",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Sources/Local Configuration/Project Customization"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Every Project Customization identifies exactly one customized source revision and does not modify it.",
+      "witness": "Revision binding is a shared customization admission contract; it adds one-source accountability within R1207/R1218 expansion ownership.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A graph edge from customization to exact source revision",
+        "A canonical manifest entry resolving the same exact revision"
+      ],
+      "countermodel": "Permit one customization to bind two exact source revisions while conserving immutable source ownership; this fails the existing exactly-one local admission contract.",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1226-REQUIREMENT--bind-each-project-customization-to-one-source-revision@2.md",
+        "sha256": "f89768589d673f4c9894c8afe2b98fafc72cf4d069eb57eda1096de7d4913aea"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1226-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md",
+        "version": 3,
+        "sha256": "8eec73db8d49de8f2b9aebe665384f2d8fc12fbac0b2b541bb89f436b892e199"
+      }
+    },
+    {
+      "atom_id": "CA-R-1227",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1227-REQUIREMENT--select-no-local-tool-mcp-or-app-mode.md",
+      "before_version": 3,
+      "before_sha256": "f1c01b18732ee2d9a01598956d42dacd30d1cf75ef188ce99d395fa2a1bad887",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Sources/Local Configuration/Mode Selection"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "unresolved",
+      "claim_evidence": "Local must select zero local Tool, MCP, or App modes.",
+      "witness": "The explicit zero mode selection conflicts with Settings-owned selection under META163/R1218; no inferred default or selected Settings edit is admitted.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "pending",
+      "actual_outcome": "pending_admission_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1227-REQUIREMENT--select-no-local-tool-mcp-or-app-mode.md",
+        "version": 3,
+        "sha256": "f1c01b18732ee2d9a01598956d42dacd30d1cf75ef188ce99d395fa2a1bad887"
+      }
+    },
+    {
+      "atom_id": "CA-R-1354",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1354-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill.md",
+      "before_version": 1,
+      "before_sha256": "6b5254d26e55117183e66f4b002344d1c5eb8a0673b27a9ca319edbd4cc1df82",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO General System Prompt Loading"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Only the Main Skill may load the General System Prompt.",
+      "witness": "An exclusive permission contract over established Skills and prompt; revoking or widening that permission changes conformance without changing either entity.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A loader allowlist checked at prompt access",
+        "An equivalent capability check on prompt loading"
+      ],
+      "countermodel": "Permit a second explicitly authorized Skill to load the same unchanged prompt; source and Skill identities remain but the exclusive permission contract changes.",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1354-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill@1.md",
+        "sha256": "6b5254d26e55117183e66f4b002344d1c5eb8a0673b27a9ca319edbd4cc1df82"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1354-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--restrict-general-system-prompt-loading-to-main-skill.md",
+        "version": 2,
+        "sha256": "49f8ad686e9c7c17d113460d1af90035556670ec5d0108ee82f66efb3eef1459"
+      }
+    },
+    {
+      "atom_id": "CA-R-1355",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1355-REQUIREMENT--route-main-skill-through-canonical-routing-tree.md",
+      "before_version": 1,
+      "before_sha256": "12f2e20556bd9c0742c329e3d42fca1857a71d7d8313e2909b5f5d27bcaa5c7c",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Main Skill Routing"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "The Main Skill routes every requested registered branch or leaf through the canonical Routing Tree.",
+      "witness": "The entire requested-route coverage contract is shared behavior; it selects neither an encoding nor traversal steps and preserves GOV333 sole registry ownership.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A table-driven dispatcher consulting canonical registered routes",
+        "A graph-traversal dispatcher resolving the same registered routes"
+      ],
+      "countermodel": "Reject all branch requests before routing while retaining canonical leaf routing; the Tree still solely owns registered route meanings, but the every-branch-or-leaf coverage contract fails.",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1355-REQUIREMENT--route-main-skill-through-canonical-routing-tree@1.md",
+        "sha256": "12f2e20556bd9c0742c329e3d42fca1857a71d7d8313e2909b5f5d27bcaa5c7c"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1355-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--route-main-skill-through-canonical-routing-tree.md",
+        "version": 2,
+        "sha256": "fe3f7235e32110b76a63e0910871ff8238839d80c7980bb67784a05b43a6ecd9"
+      }
+    },
+    {
+      "atom_id": "CA-R-1356",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1356-REQUIREMENT--define-caprmedio-direct-route-skill.md",
+      "before_version": 1,
+      "before_sha256": "84b4219c80f4f00bbf0257968bac80e69f801c28f488f1abd1ab2cd685d68e95",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Direct Route Skill"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Core",
+      "rank": "3d+1",
+      "test": "F",
+      "claim_evidence": "A Direct Route Skill means one Operator-defined Skill bound to exactly one registered branch or leaf and invoking only that target.",
+      "witness": "Allowing unbound or multi-target invocation destroys the defined Direct Route Skill identity; storage and invocation implementation can vary.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106",
+        "CA-R-1261"
+      ],
+      "operation": "revise",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1356-REQUIREMENT--define-caprmedio-direct-route-skill@1.md",
+        "sha256": "84b4219c80f4f00bbf0257968bac80e69f801c28f488f1abd1ab2cd685d68e95"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1356-LOCAL_CONFIGURATION-CORE-REQUIREMENT--define-caprmedio-direct-route-skill.md",
+        "version": 2,
+        "sha256": "3082f78387e246d2317bc43892555b1d5de509ae2b552dac7fc2be8aab8ca739"
+      }
+    },
+    {
+      "atom_id": "CA-R-1357",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1357-REQUIREMENT--permit-operator-defined-direct-route-skills.md",
+      "before_version": 1,
+      "before_sha256": "b20cbd33c153f0cc0d10dbe86cfc901efb3133c7986ff5aee5a466d1c04ce36f",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Direct Route Skill Addition"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "The Operator may add a Direct Route Skill.",
+      "witness": "This grants an independent permission over a constituted Skill; ordinary nonuse never violates a MAY contract.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "Operator creates a declarative exact-target binding",
+        "Operator creates a host Skill that invokes that same bound target"
+      ],
+      "countermodel": "Withdraw permission to add further Direct Route Skills while retaining all existing Skill identities and bindings; the MAY contract changes. Choosing not to add one is not this countermodel.",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-1357-REQUIREMENT--permit-operator-defined-direct-route-skills@1.md",
+        "sha256": "b20cbd33c153f0cc0d10dbe86cfc901efb3133c7986ff5aee5a466d1c04ce36f"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1357-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--permit-operator-defined-direct-route-skills.md",
+        "version": 2,
+        "sha256": "3646494dbe07de8029141e69fdb3d4d68c1d0d6cc45980c511f9504e3b0c6a1d"
+      }
+    },
+    {
+      "atom_id": "CA-R-1374",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1374-REQUIREMENT--define-applicable-methodology-conflict-disposition.md",
+      "before_version": 1,
+      "before_sha256": "462ce641b44c83c25c170af4f926fc804ae97636e6e8c2cf15947fa34e258bc4",
+      "content_role": "R",
+      "governed_subject": [
+        "Applicable Methodology/Conflict Disposition"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Conflict Disposition means an exact Operator approval recorded in Local and bound to one conflict and one source-frontier digest.",
+      "witness": "A lossless exact source-revision manifest can bind the same approval and frontier while preserving ownership but fails the chosen digest tuple.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106",
+        "CA-R-1261"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1374-REQUIREMENT--define-applicable-methodology-conflict-disposition.md",
+        "version": 1,
+        "sha256": "462ce641b44c83c25c170af4f926fc804ae97636e6e8c2cf15947fa34e258bc4"
+      }
+    },
+    {
+      "atom_id": "CA-R-293",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations.md",
+      "before_version": 11,
+      "before_sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Requirement/Type: Constraint"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Constraint uses the concrete constraint Carrier token only for external limitations.",
+      "witness": "Encoding the same qualified Type with external_limit preserves meaning and authority but fails the selected token; external-origin meaning is a guard.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations.md",
+        "version": 11,
+        "sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27"
+      }
+    },
+    {
+      "atom_id": "CA-R-825",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type.md",
+      "before_version": 11,
+      "before_sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Requirement/Type: Boundary"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Boundary is the Requirement Type for an explicit current Scope Unit limit, with Carrier token boundary.",
+      "witness": "Using scope_limit for the same Boundary Type changes conformance while preserving the definition and limit semantics.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type.md",
+        "version": 11,
+        "sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "before_version": 11,
+      "before_sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e",
+      "content_role": "R",
+      "governed_subject": [
+        "evaluation"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Production readiness requires atomic operational Evaluation Controls with the listed assurance coverage, navigated by an Evaluation Catalog Projection.",
+      "witness": "The checklist is a shared readiness/coverage contract over existing Evaluation, Projection, Implementation and Ops boundaries; evaluation_control names its existing governed Type.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A generated graph catalog over independently owned controls",
+        "A generated document catalog over the same authoritative controls"
+      ],
+      "countermodel": "Require production control owners and thresholds but omit permitted detection-delay coverage; all role and authority boundaries remain, but the shared completeness criterion fails.",
+      "batch": "01",
+      "replacements": [
+        [
+          "    - CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface",
+          "    - CA-R-1286"
+        ]
+      ],
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists@11.md",
+        "sha256": "dd9f44b2d1944c64e099832850618fce5cfd364e9b4c5a0e877ec95a6304071e"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+        "version": 12,
+        "sha256": "0ad6bbcf763a8b823d178aae902c46798bced473a94a1c7b8a3e18613b2ba36a"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-315",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+      "before_version": 7,
+      "before_sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26",
+      "content_role": "R",
+      "governed_subject": [
+        "evaluation"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Logging policy selects ERROR/WARNING/INFO/DEBUG, disabled production DEBUG by default, record coverage and NDJSON workflow carriers.",
+      "witness": "A renamed severity encoding and another append-only record format can preserve the operational assurance contract while failing these selected keys/default/carrier choices.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+        "version": 7,
+        "sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-316",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-316--define-caprmedio-main-skill.md",
+      "before_version": 9,
+      "before_sha256": "4634aa5ef40b85b9076d9e5ef1ccb5ad3d0df54221b4246f5e656cc469f12d3b",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Main Skill"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Main Skill is the canonical Skill with exact identity ca.",
+      "witness": "Renaming the same canonical entry Skill to caprmedio preserves its role and authority but fails the exact identity realization.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-316--define-caprmedio-main-skill.md",
+        "version": 9,
+        "sha256": "4634aa5ef40b85b9076d9e5ef1ccb5ad3d0df54221b4246f5e656cc469f12d3b"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-321",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+      "before_version": 20,
+      "before_sha256": "58f45dd9ed6e49ec18cd495170e708d160984d23cd97d935398b5b5ba063a0ce",
+      "content_role": "R",
+      "governed_subject": [
+        "Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": null,
+      "rank": null,
+      "test": "absorbed",
+      "claim_evidence": "Typed Atoms have one Content Role and at most one Type; those axes express contribution/kind and admit no extra subtype coordinate.",
+      "witness": "The complete local assertion independently duplicates the canonical one-role, single Type, qualified domain and axis boundaries; no unique CAPRMEDIO Type value or token remains.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "retire",
+      "batch": "02",
+      "clause_allocation": [
+        {
+          "clause": "Exactly one Content Role and primary semantic contribution",
+          "retained": [
+            "CA-R-740",
+            "CA-R-1282"
+          ]
+        },
+        {
+          "clause": "At most one optional Type and governed kind under one qualified role path",
+          "retained": [
+            "CA-R-1284",
+            "CA-R-1285",
+            "CAPRMEDIO-META-REQU-112"
+          ]
+        },
+        {
+          "clause": "No added subtype coordinate and distinct role/Type axes",
+          "retained": [
+            "CA-R-1286",
+            "CAPRMEDIO-META-REQU-113"
+          ]
+        }
+      ],
+      "actual_outcome": "retired",
+      "applied_batch": "02",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface@20.md",
+        "sha256": "58f45dd9ed6e49ec18cd495170e708d160984d23cd97d935398b5b5ba063a0ce"
+      },
+      "current_binding": null
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-323",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes.md",
+      "before_version": 17,
+      "before_sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777",
+      "content_role": "R",
+      "governed_subject": [
+        "Artifact/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The Artifact Type prefix table fixes catl, maps, hubs, irec and ijrn.",
+      "witness": "Another injective prefix table preserves the Type meanings and Atom identity boundary but fails the exact table.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes.md",
+        "version": 17,
+        "sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-333",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree.md",
+      "before_version": 10,
+      "before_sha256": "1ce04992ecabc39814e6da1dbd0b3739811eeb4ce059a1ce767a5cad50a5ca1b",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Routing Tree"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Core",
+      "rank": "3d+1",
+      "test": "F",
+      "claim_evidence": "One readable canonical Routing Tree solely owns intent concepts, synonyms, criteria, targets, authority effects, outputs and approvals.",
+      "witness": "Independent editable owners for the same route semantics destroy the local canonical Routing Tree authority boundary; representations and readers may vary.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "batch": "01",
+      "replacements": [
+        [
+          "relations:\n  child_of:\n    - CA-R-1054",
+          "relations: {}"
+        ]
+      ],
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-333--register-one-canonical-routing-tree@10.md",
+        "sha256": "1ce04992ecabc39814e6da1dbd0b3739811eeb4ce059a1ce767a5cad50a5ca1b"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333-LOCAL_CONFIGURATION-CORE-REQUIREMENT--register-one-canonical-routing-tree.md",
+        "version": 11,
+        "sha256": "5e3a686343cb152561fb847859aa8db3818f28fb9b6b5b9ad5cea26ef3298327"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-334",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree.md",
+      "before_version": 10,
+      "before_sha256": "33acf802d78b421cc7a74aa05ee11c64822bee4a1f382cf7a456550693809c64",
+      "content_role": "R",
+      "governed_subject": [
+        "CAPRMEDIO Routing Tree Validation"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Validator rejects invalid schema, unknown target, ambiguous precedence, duplicate identity or undeclared authority effect.",
+      "witness": "This is a shared acceptance predicate over the constituted Routing Tree; no specimen or schema encoding is selected.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A declarative validator with the same rejection predicate",
+        "An imperative validator evaluating the same semantic conditions"
+      ],
+      "countermodel": "Warn and withhold routing on an invalid schema instead of rejecting tree admission; tree identity and sole authority remain but the specified rejection contract fails.",
+      "batch": "01",
+      "replacements": [
+        [
+          "relations:\n  child_of:\n    - CA-R-1054",
+          "relations: {}"
+        ]
+      ],
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-334--validate-the-routing-tree@10.md",
+        "sha256": "33acf802d78b421cc7a74aa05ee11c64822bee4a1f382cf7a456550693809c64"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--validate-the-routing-tree.md",
+        "version": 11,
+        "sha256": "bcd26e1025e6c29c50f8e19d965147d7076d5393997251212576e386e8294144"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-372",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+      "before_version": 10,
+      "before_sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747",
+      "content_role": "R",
+      "governed_subject": [
+        "Development Backlog Splitting"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "More than fifty backlog Tasks triggers a narrower-Epic proposal; applying it needs Operator approval.",
+      "witness": "A threshold of forty preserves bounded decomposition and approval ownership but fails the selected trigger.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "batch": "01",
+      "replacements": [
+        [
+          "    - CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic",
+          "    - CAPRMEDIO-META-REQU-139"
+        ]
+      ],
+      "revision_reason": "Standard retained; minimum inbound target serialization repair for META139 General rename.",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits@10.md",
+        "sha256": "e1dd8254412470efecab0ba92f01edd547c9728165484b263c42005ea0bf5747"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+        "version": 11,
+        "sha256": "76c25c843750d14d176f5cb17c1dfbfa29b9f8d9cc90f362e234482e30976242"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-676",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+      "before_version": 15,
+      "before_sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592",
+      "content_role": "R",
+      "governed_subject": [
+        "settings"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Optional own-Claim contributions use project_scope_unit_graph or project_graph_state YAML maps and exclude current Settings values.",
+      "witness": "Another faithful serialization preserves optional contribution and Settings ownership but fails the selected YAML field contract; nonuse is permitted.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+        "version": 15,
+        "sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-748",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+      "before_version": 13,
+      "before_sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Evaluation/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Evaluation Type registration selects qa_case and evaluation_control tokens.",
+      "witness": "Different unique tokens preserve the added qualified Type meanings while failing their concrete registration.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+        "version": 13,
+        "sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-749",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "before_version": 11,
+      "before_sha256": "d9b97ed2bf1f0f387316d8c010f279302b42cd03de9f1d855d4d2995b66fd136",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Concern/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Question/Problem Carrier tokens realize inherited Core Types; Risk/Opportunity and their tokens are additional Local Types.",
+      "witness": "Different tokens preserve all four meanings and Core's Question/Problem admission but fail the concrete registration; inherited admission must not become a second owner.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "revise",
+      "batch": "02",
+      "replacements": [
+        [
+          "Question with Carrier token `question`, Problem with Carrier token `problem`, Risk with Carrier token `risk`, **and** Opportunity with Carrier token `opportunity` **must** be registered as internal values of `Atom/Content Role: Concern/Type`.",
+          "Question **and** Problem retain their canonical admission under CA-R-1231 **and** **must** use Carrier tokens `question` **and** `problem`, respectively. Risk with Carrier token `risk` **and** Opportunity with Carrier token `opportunity` **must** be registered as additional internal values of `Atom/Content Role: Concern/Type`."
+        ]
+      ],
+      "revision_reason": "Conserve inherited Core Question/Problem admission while retaining unique Local token realizations and added Risk/Opportunity Types.",
+      "actual_outcome": "applied",
+      "applied_batch": "02",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@11.md",
+        "sha256": "d9b97ed2bf1f0f387316d8c010f279302b42cd03de9f1d855d4d2995b66fd136"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+        "version": 12,
+        "sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-751",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-delivery-types.md",
+      "before_version": 11,
+      "before_sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Delivery/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Delivery Type registration fixes release_definition and environment_definition.",
+      "witness": "Different tokens for the same two qualified Types preserve their meanings but fail the chosen realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-delivery-types.md",
+        "version": 11,
+        "sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-752",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-ops-types.md",
+      "before_version": 11,
+      "before_sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Operations/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Ops Type registration fixes the existing lowercase tokens for five named record Types.",
+      "witness": "Another token set preserves the five Ops record distinctions but fails the selected registration.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-ops-types.md",
+        "version": 11,
+        "sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-753",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753--register-plan-role-types.md",
+      "before_version": 14,
+      "before_sha256": "971997d754a39c64214d2143365f257722c87f0794b24999046e58c933dd7504",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Plan/Type"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Local adds Action Policy to Plan Type; Task admission is already owned by R989.",
+      "witness": "One additional allowed value is a shared qualified-domain contribution, not a new Type property; removing the duplicate Task assertion conserves canonical admission.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A qualified-domain registry resolves the added Action Policy value",
+        "A generated catalog derives the same added allowed value from this authoritative Claim"
+      ],
+      "countermodel": "Close new Local Plan admission to Task/Objective only while leaving constituted Plan/Task meanings intact; the independent Action Policy extension contribution is removed.",
+      "batch": "02",
+      "replacements": [
+        [
+          "      - plan:task\n",
+          ""
+        ],
+        [
+          "  child_of:\n    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type\n    - CA-R-1054\n    - CA-R-888",
+          "  child_of:\n    - CA-R-1286"
+        ],
+        [
+          "# Register Type Values for Plan Atoms",
+          "# Register Action Policy for Plan Atoms"
+        ],
+        [
+          "the CAPRMEDIO Local Configuration **must** register Task **and** Action Policy as values of `Atom/Content Role: Plan/Type`.",
+          "the CAPRMEDIO Local Configuration **must** register Action Policy as an additional value of `Atom/Content Role: Plan/Type`; Task retains its canonical admission under CA-R-989."
+        ]
+      ],
+      "clause_allocation": [
+        {
+          "clause": "Task semantic admission removed from independently editable local contribution",
+          "retained": [
+            "CA-R-989"
+          ]
+        },
+        {
+          "clause": "Action Policy additional qualified Plan Type remains owned by this same Local identity",
+          "retained": [
+            "CAPRMEDIO-GOV-REQU-753"
+          ]
+        }
+      ],
+      "actual_outcome": "applied",
+      "applied_batch": "02",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-753--register-plan-role-types@14.md",
+        "sha256": "971997d754a39c64214d2143365f257722c87f0794b24999046e58c933dd7504"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--register-plan-role-types.md",
+        "version": 15,
+        "sha256": "4719f60c8616b8e8163ac720e903c372063aa241318f63ffec29748e0c02c2f7"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-754",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type.md",
+      "before_version": 9,
+      "before_sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Method/Type: Implementation Method"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Implementation Method is a reusable implementation-policy Type with implementation_method token.",
+      "witness": "Changing only the token preserves META744 policy meaning but fails this concrete Type realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type.md",
+        "version": 9,
+        "sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-755",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type.md",
+      "before_version": 10,
+      "before_sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Method/Type: Implementation Decision"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Implementation Decision is a bounded concrete-choice Type with implementation_decision token.",
+      "witness": "Changing only the token preserves META744 decision semantics and target binding but fails this realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type.md",
+        "version": 10,
+        "sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-761",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+      "before_version": 11,
+      "before_sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Requirement/Type: Constraint"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Constraint is a non-default external Requirement Type with constraint token.",
+      "witness": "A different explicit token preserves the exception to default naming and external classification but fails this realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+        "version": 11,
+        "sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-762",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+      "before_version": 8,
+      "before_sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Method/Type: External Implementation Method"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "External Implementation Method uses external_implementation_method and retains one external source revision owner.",
+      "witness": "A different Type token preserves reusable-policy meaning and external authority ownership but fails this realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+        "version": 8,
+        "sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-763",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type.md",
+      "before_version": 9,
+      "before_sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Method/Type: Method Binding"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Method Binding uses method_binding and relates exact Method revisions to explicit targets without duplicate authority.",
+      "witness": "A different binding token preserves revision/target binding and Method ownership but fails the concrete realization.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type.md",
+        "version": 9,
+        "sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-102",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-102--freeze-a-version-only-at-release.md",
+      "before_version": 10,
+      "before_sha256": "06a9e8046920e7dbf543c8449464eb21a26d1698764b980b5e0b51a99ff6c908",
+      "content_role": "R",
+      "governed_subject": [
+        "development-flow"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "A configured release event freezes a version through one immutable Release Record manifest binding canonical Git commit or tag.",
+      "witness": "Binding an equivalent immutable non-Git release content identity preserves the release/freeze and Ops boundaries but fails the selected Git binding; the PR event is only an example.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-102--freeze-a-version-only-at-release.md",
+        "version": 10,
+        "sha256": "06a9e8046920e7dbf543c8449464eb21a26d1698764b980b5e0b51a99ff6c908"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-103",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release.md",
+      "before_version": 8,
+      "before_sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d",
+      "content_role": "R",
+      "governed_subject": [
+        "development-flow"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Release reconciliation uses the exact manifest, Journal/Projection updates and done/ Plans while removing only fully shipped candidates.",
+      "witness": "Another canonical archive path and derived reconciliation representation preserve shipped/remaining semantics but fail the selected done/ and projection procedure.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release.md",
+        "version": 8,
+        "sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-139",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic.md",
+      "before_version": 9,
+      "before_sha256": "f0459356d33ff034cee1651a7444a76ec617b9dcfe29a921f22245db6750fb23",
+      "content_role": "R",
+      "governed_subject": [
+        "Development Backlog"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "The Development Backlog is an Epic for accepted intended Task actions with no narrower Epic.",
+      "witness": "This is a replaceable shared aggregation/membership contract over already defined Task and Epic meanings.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "An Epic membership graph derived from accepted narrower-Epic-free Tasks",
+        "A canonical Epic member manifest with the same accepted Tasks"
+      ],
+      "countermodel": "Use separate unscheduled Epics for each work domain instead of one Development Backlog Epic; Task and Epic identities remain, but the shared backlog aggregation contract changes.",
+      "batch": "01",
+      "replacements": [
+        [
+          "    - CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan\n",
+          ""
+        ]
+      ],
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic@9.md",
+        "sha256": "f0459356d33ff034cee1651a7444a76ec617b9dcfe29a921f22245db6750fb23"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--classify-development-backlog-as-epic.md",
+        "version": 10,
+        "sha256": "f25bf85be2b7f79ee10bc3b3cb406bb71ca5f662b831af4af00c5faea3f9d635"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-769",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769--select-methodology-source-revisions-explicitly.md",
+      "before_version": 9,
+      "before_sha256": "4a504ac7508bf185822abf1cc44ebbe48f9466270abc19252d567e8b78861ad6",
+      "content_role": "R",
+      "governed_subject": [
+        "lifecycle-traceability"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "General",
+      "rank": "3d+2",
+      "test": "G",
+      "claim_evidence": "Source updates/downgrades require identified revision selection and affected Project authority reconciliation without silent rewrites.",
+      "witness": "The local update-admission contract adds reconciliation behavior while conserving distinct source and Project ownership.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "realizations": [
+        "A reconciled source-selection transaction with explicit revision links",
+        "A source-revision manifest with an equivalent affected-authority reconciliation review"
+      ],
+      "countermodel": "Allow an identified nonbreaking source downgrade without affected-Project reconciliation while still forbidding silent source/Project rewrites; source ownership survives but the local admission contract fails.",
+      "batch": "01",
+      "actual_outcome": "applied",
+      "applied_batch": "01",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-769--select-methodology-source-revisions-explicitly@9.md",
+        "sha256": "4a504ac7508bf185822abf1cc44ebbe48f9466270abc19252d567e8b78861ad6"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-769-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--select-methodology-source-revisions-explicitly.md",
+        "version": 10,
+        "sha256": "ae37dae45ce6ca13701efec21d1a7424d0a5beaca4b92aacf89a3b8d5bbd4c05"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-788",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order.md",
+      "before_version": 9,
+      "before_sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76",
+      "content_role": "R",
+      "governed_subject": [
+        "relation-model"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": null,
+      "rank": null,
+      "test": "absorbed",
+      "claim_evidence": "Scope Unit Type depends only on sibling ordering, independently of Child Composition.",
+      "witness": "Ordered/Unordered membership and independence from Child Composition are completely retained by META709/712/713/714; no local variation remains.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "retire",
+      "batch": "02",
+      "clause_allocation": [
+        {
+          "clause": "Only Ordered/Unordered sibling Local Order membership determines Scope Unit Type",
+          "retained": [
+            "CAPRMEDIO-META-REQU-709",
+            "CAPRMEDIO-META-REQU-712",
+            "CAPRMEDIO-META-REQU-713"
+          ]
+        },
+        {
+          "clause": "Child Composition is independent",
+          "retained": [
+            "CAPRMEDIO-META-REQU-714"
+          ]
+        }
+      ],
+      "actual_outcome": "retired",
+      "applied_batch": "02",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-788--derive-scope-unit-type-only-from-sibling-order@9.md",
+        "sha256": "80a20d8c2e430b2e120a6050033538c10a3dab2f0860d423243ce3a6a884aa76"
+      },
+      "current_binding": null
+    },
+    {
+      "atom_id": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+      "before_version": 10,
+      "before_sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40",
+      "content_role": "R",
+      "governed_subject": [
+        "Atom/Content Role: Evaluation/Type: Evaluation Approach"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "Evaluation Approach is a reusable mechanism-neutral evaluation-policy Type with evaluation_approach token.",
+      "witness": "A different qualified Type token preserves policy meaning and Evaluation ownership but fails its exact registration; the opaque original identity is conserved.",
+      "source_authority": [
+        "CA-R-1286",
+        "CAPRMEDIO-META-REQU-112",
+        "CA-R-1218"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+        "version": 10,
+        "sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40"
+      }
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection.md",
+      "before_version": 15,
+      "before_sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190",
+      "content_role": "E",
+      "governed_subject": [
+        "evaluation"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The concrete settings case checks exact medium/high, silent/verbose and parse/reparse/projection cases.",
+      "witness": "Other valid schema specimens can check the same settings boundaries but fail these exact cases; checked R/M/D relations must identify actual governing authority.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "revise",
+      "batch": "02",
+      "filename": "CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "replacements": [
+        [
+          "artifact_subtype: qa_case\n",
+          ""
+        ],
+        [
+          "  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054",
+          "  evaluation_for:\n    - CAPRMEDIO-GOV-REQU-294\n    - CAPRMEDIO-GOV-REQU-385\n    - CAPRMEDIO-GOV-REQU-302\n    - CA-D-361\n    - CA-D-366\n    - CA-R-1052\n    - CA-R-1430\n    - CAPRMEDIO-META-REQU-627"
+        ],
+        [
+          "2. accept **only** enabled catalog Types, subtypes, **and** Governance loci.",
+          "2. accept **only** enabled catalog Artifact Types, Atom Content Roles **and** their qualified Types, **and** Governance Origins."
+        ]
+      ],
+      "revision_reason": "Bind the admitted QA Case Type in the filename; remove obsolete subtype coordinate; replace registered check_of once with current evaluation_for and eight actual checked R/D targets; remove inactive R1054 parent.",
+      "actual_outcome": "applied",
+      "applied_batch": "02",
+      "prior_archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-006--canonical-settings-selection@15.md",
+        "sha256": "f49a26bfffa94d66babc08bd3bdfbe34771146cde6cee6fcb304e7c73d54f190"
+      },
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+        "version": 16,
+        "sha256": "00f629d63836f91cbb62a3fceb4a529584fb273d7e5600a7d5daabb60daa9336"
+      }
+    },
+    {
+      "atom_id": "CA-D-319",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-319-DELIVERY--place-caprmedio-project-carriers.md",
+      "before_version": 1,
+      "before_sha256": "776e04387811f2191a574eb47391e849a58d533b2d7c8ec740142c27f62235b8",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project-Owned Carrier Root"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects Project-owned persistent Carrier root .caprmedio_caprmedio/.",
+      "witness": "Using another registered authority-root path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-319-DELIVERY--place-caprmedio-project-carriers.md",
+        "version": 1,
+        "sha256": "776e04387811f2191a574eb47391e849a58d533b2d7c8ec740142c27f62235b8"
+      }
+    },
+    {
+      "atom_id": "CA-D-320",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-320-DELIVERY--place-installed-framework-engine-files.md",
+      "before_version": 2,
+      "before_sha256": "bf0365ced6b1bdd50a75c6e3b3f5d2fe2a07880d81addbbe0d690fe7e74714a3",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Installed Framework Engine Carrier Root"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects installed running Engine files under .caprmedio_install/.",
+      "witness": "Using another installation-root path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-320-DELIVERY--place-installed-framework-engine-files.md",
+        "version": 2,
+        "sha256": "bf0365ced6b1bdd50a75c6e3b3f5d2fe2a07880d81addbbe0d690fe7e74714a3"
+      }
+    },
+    {
+      "atom_id": "CA-D-321",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-321-DELIVERY--place-ephemeral-runtime-state.md",
+      "before_version": 2,
+      "before_sha256": "6fbb3a8c46225f8bc67bee187b2a10db5856cb695f5c20d0d7e12e894b5bce19",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Runtime State Carrier Root"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects .caprmedio_runtime/ holds ephemeral state only.",
+      "witness": "Using another ephemeral runtime-root path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-321-DELIVERY--place-ephemeral-runtime-state.md",
+        "version": 2,
+        "sha256": "6fbb3a8c46225f8bc67bee187b2a10db5856cb695f5c20d0d7e12e894b5bce19"
+      }
+    },
+    {
+      "atom_id": "CA-D-322",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-322-DELIVERY--register-caprmedio-root-delivery-directories.md",
+      "before_version": 1,
+      "before_sha256": "8f2dd35b0153b0a213c3952dd60af75fd09f76550e4cfc6abe2386d7ea0ed1e3",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project Root/Delivery Directory Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects the seven named Project-root Scope Unit Delivery directories.",
+      "witness": "Using a different injective directory-name set preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-322-DELIVERY--register-caprmedio-root-delivery-directories.md",
+        "version": 1,
+        "sha256": "8f2dd35b0153b0a213c3952dd60af75fd09f76550e4cfc6abe2386d7ea0ed1e3"
+      }
+    },
+    {
+      "atom_id": "CA-D-323",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-323-DELIVERY--register-caprmedio-project-authority-directories.md",
+      "before_version": 1,
+      "before_sha256": "69a7c3946a436806a6d97cfb1c716bdcce7e60e8faf64d44bb8531abd20a754a",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project-Owned Carrier Root/Scope Unit Authority Directory"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects the seven named top-level authority directories under .caprmedio_caprmedio/.",
+      "witness": "Using a different authority-directory mapping preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-323-DELIVERY--register-caprmedio-project-authority-directories.md",
+        "version": 1,
+        "sha256": "69a7c3946a436806a6d97cfb1c716bdcce7e60e8faf64d44bb8531abd20a754a"
+      }
+    },
+    {
+      "atom_id": "CA-D-324",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-324-DELIVERY--register-project-atom-scope-content-role-directories.md",
+      "before_version": 2,
+      "before_sha256": "5d465e58ac89f7eb71f34d004c32189bb0d24ee07eedd32659972e522644f116",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project Atom Scope/Content Role Directory Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects the nine numbered Current-Scope Content Role directories.",
+      "witness": "Using a different one-to-one role-directory encoding preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-324-DELIVERY--register-project-atom-scope-content-role-directories.md",
+        "version": 2,
+        "sha256": "5d465e58ac89f7eb71f34d004c32189bb0d24ee07eedd32659972e522644f116"
+      }
+    },
+    {
+      "atom_id": "CA-D-325",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-325-DELIVERY--place-applicable-methodology-sources.md",
+      "before_version": 4,
+      "before_sha256": "7e0fc93c7e3f26afd7a8779cee221baad24756d90e66f5bb69904e7aa97fca38",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Applicable Methodology/Methodology Source Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects Core and Local source authority directory paths under the named Project-owned root.",
+      "witness": "Using a different registered source-directory placement preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-325-DELIVERY--place-applicable-methodology-sources.md",
+        "version": 4,
+        "sha256": "7e0fc93c7e3f26afd7a8779cee221baad24756d90e66f5bb69904e7aa97fca38"
+      }
+    },
+    {
+      "atom_id": "CA-D-326",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-326-DELIVERY--place-applicable-methodology-projected-atoms.md",
+      "before_version": 3,
+      "before_sha256": "acb04830d92db2fc1ffd32a3e12127fc9653c26fffcd31422df2a7b2b804bfd3",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Applicable Methodology/Projected Atom Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects projected role paths and preserved source basenames.",
+      "witness": "Using a different projection-root placement with the same source binding preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-326-DELIVERY--place-applicable-methodology-projected-atoms.md",
+        "version": 3,
+        "sha256": "acb04830d92db2fc1ffd32a3e12127fc9653c26fffcd31422df2a7b2b804bfd3"
+      }
+    },
+    {
+      "atom_id": "CA-D-327",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-327-DELIVERY--use-the-project-root-only-for-delivery-carriers.md",
+      "before_version": 3,
+      "before_sha256": "93453b3970c6814bcfdf7f7862abccbf949c1651108beef0277cb99b7118324c",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project Root/Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects Project root contains only Scope Unit Delivery Directory Carriers.",
+      "witness": "Using placing those same Delivery carriers under a dedicated delivery/ root preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-327-DELIVERY--use-the-project-root-only-for-delivery-carriers.md",
+        "version": 3,
+        "sha256": "93453b3970c6814bcfdf7f7862abccbf949c1651108beef0277cb99b7118324c"
+      }
+    },
+    {
+      "atom_id": "CA-D-328",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+      "before_version": 1,
+      "before_sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Work Journal/Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects Work Journal append-only NDJSON segments under .caprmedio_caprmedio/work_journal/.",
+      "witness": "Using a different registered append-only Journal format/path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+        "version": 1,
+        "sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6"
+      }
+    },
+    {
+      "atom_id": "CA-D-332",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-332-DELIVERY--place-project-scope-unit-graph-sources-projection.md",
+      "before_version": 1,
+      "before_sha256": "d9037757797a042a5820bcc1087930adb8dddaeaff79a1639fb3a78f0ea6177d",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project Scope Unit Graph Sources Projection/Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects the exact versionless project_scope_unit_graph_sources.projection.toml path.",
+      "witness": "Using another versionless projection format/path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-332-DELIVERY--place-project-scope-unit-graph-sources-projection.md",
+        "version": 1,
+        "sha256": "d9037757797a042a5820bcc1087930adb8dddaeaff79a1639fb3a78f0ea6177d"
+      }
+    },
+    {
+      "atom_id": "CA-D-337",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-337-DELIVERY--place-legal-file-carriers-outside-caprmedio-roots.md",
+      "before_version": 2,
+      "before_sha256": "89e93b979cc1f8c086da0f605702d92ef9cf2c6279ccf79c49ef81ed5a7ac3b5",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Legal File Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects root LICENSE and LICENSES/ placements outside authority/install/runtime.",
+      "witness": "Using another legal-directory mapping with the same separation preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-337-DELIVERY--place-legal-file-carriers-outside-caprmedio-roots.md",
+        "version": 2,
+        "sha256": "89e93b979cc1f8c086da0f605702d92ef9cf2c6279ccf79c49ef81ed5a7ac3b5"
+      }
+    },
+    {
+      "atom_id": "CA-D-343",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-343-DELIVERY--place-project-scope-unit-graph-projection.md",
+      "before_version": 1,
+      "before_sha256": "1087365c62369b628bade31bf1ba0412b17b47e39b1efdfc9ddb67273ec1c1f2",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO/Project Scope Unit Graph Projection/Carrier"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects the exact versionless project_scope_unit_graph.projection.toml path.",
+      "witness": "Using another versionless graph projection format/path preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-343-DELIVERY--place-project-scope-unit-graph-projection.md",
+        "version": 1,
+        "sha256": "1087365c62369b628bade31bf1ba0412b17b47e39b1efdfc9ddb67273ec1c1f2"
+      }
+    },
+    {
+      "atom_id": "CA-D-344",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-344-DELIVERY--serialize-main-skill-invocation-per-host.md",
+      "before_version": 2,
+      "before_sha256": "da4cfe1069788bc29feedf0bf38230f33f7d93be6980cceb4383199168c5ebc9",
+      "content_role": "D",
+      "governed_subject": [
+        "CAPRMEDIO Main Skill/Host Invocation"
+      ],
+      "owner": "LOCAL_CONFIGURATION",
+      "scope_binding": "Atom owner and omitted Claim Scope remain the current LOCAL_CONFIGURATION context; explicit governed Subjects retain their stated Project/application or mechanism constraints. No source ownership is inferred from tier.",
+      "previous_tier": "Standard",
+      "previous_rank": "3d+3",
+      "tier": "Standard",
+      "rank": "3d+3",
+      "test": "S",
+      "claim_evidence": "The complete delivery selects Codex $ca and conditionally authorized Claude /ca invocations.",
+      "witness": "Using another host invocation string for the same canonical Skill preserves its represented Carrier purpose, content and authority but violates the selected concrete placement/encoding; this witness authorizes no live migration.",
+      "source_authority": [
+        "CA-R-1218",
+        "CA-R-1207",
+        "CAPRMEDIO-META-REQU-106"
+      ],
+      "operation": "unchanged",
+      "actual_outcome": "accepted_byte_unchanged",
+      "current_binding": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-344-DELIVERY--serialize-main-skill-invocation-per-host.md",
+        "version": 2,
+        "sha256": "da4cfe1069788bc29feedf0bf38230f33f7d93be6980cceb4383199168c5ebc9"
+      }
+    }
+  ],
+  "completed_count": 49,
+  "pending_ids": [
+    "CA-R-1224",
+    "CA-R-1225",
+    "CA-R-1227"
+  ]
+}

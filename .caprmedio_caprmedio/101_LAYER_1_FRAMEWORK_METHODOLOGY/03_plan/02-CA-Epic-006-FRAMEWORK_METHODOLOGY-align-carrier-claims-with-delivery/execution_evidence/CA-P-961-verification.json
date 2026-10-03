@@ -1,0 +1,808 @@
+{
+  "task": "CA-P-961@2",
+  "result": "PASS",
+  "checks": {
+    "all_50_candidates_dispositioned": true,
+    "all_clauses_allocated": true,
+    "all_owners_resolve": true,
+    "all_source_hashes_unchanged": true,
+    "source_frontier_unchanged": true,
+    "all_proposed_ids_globally_available": true,
+    "archive_paths_safe": true,
+    "subjects_one_governed_no_duplicates": true,
+    "all_dispositions_admitted_at_99": true,
+    "references_review_complete": true,
+    "no_unresolved_external_retirement_blocker": true,
+    "analysis_identity_letter_preserved": true,
+    "version_monotonicity_preserved": true,
+    "date_time_unambiguity_preserved": true,
+    "stricter_epic_cardinality_preserved": true,
+    "journal_resolution_approved": true
+  },
+  "clause_coverage": [
+    {
+      "identity": "CA-R-1305",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-737",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-764",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-1304",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-1369",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-728",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-165",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 4,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-1372",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 8,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-963",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-978",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-981",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-997",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-290",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 5,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-294",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-296",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 12,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-297",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-299",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 14,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-302",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 4,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-337",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 16,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-353",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 11,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-355",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 6,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-362",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-373",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-383",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-760",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-750",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-086",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 4,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-098",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-119",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-122",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 16,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-166",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 5,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-174",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-730",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 8,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-381",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-315",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 12,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-323",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-676",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 1,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-293",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CA-R-825",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-761",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-748",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 5,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-751",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 5,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-754",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-755",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-762",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-763",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-749",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 7,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-752",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-103",
+      "all_substantive_original_text_allocated": true,
+      "unallocated": [],
+      "allocation_count": 3,
+      "review": "Complete source/after Claims compared for meaning, domain, conditions and modality; exact unchanged spans and original extracted clauses recorded. This coverage check corroborates the semantic review; it is not a proof of semantic equivalence."
+    }
+  ],
+  "source_refresh": {
+    "count": 698,
+    "sha256_mismatches": [],
+    "added": [],
+    "removed": []
+  },
+  "proposed_identity_availability": {
+    "ids": [
+      "CA-D-378",
+      "CA-D-379",
+      "CA-D-380",
+      "CA-D-381",
+      "CA-D-382",
+      "CA-D-383",
+      "CA-D-384",
+      "CA-D-385",
+      "CA-D-386",
+      "CA-D-387",
+      "CA-D-388",
+      "CA-D-389",
+      "CA-D-390",
+      "CA-D-391",
+      "CA-D-392",
+      "CA-D-393",
+      "CA-D-394",
+      "CA-D-395",
+      "CA-D-396",
+      "CA-D-397",
+      "CA-D-398",
+      "CA-D-399",
+      "CA-D-400",
+      "CA-D-401",
+      "CA-D-402",
+      "CA-D-403",
+      "CA-D-404",
+      "CA-D-405",
+      "CA-D-406",
+      "CA-M-275"
+    ],
+    "reservation": "none; recheck immediately before admission",
+    "content_collisions": [],
+    "filename_collisions": []
+  },
+  "archive_checks": [
+    {
+      "identity": "CA-D-353",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier@3.md",
+      "expected_sha256": "15296a9d396578a9fdd5ca54c4fe94f134913c28ffc25ea3973ac50ea1f1e845",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-728",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-728-CORE_META_MODEL-REQUIREMENT--define-project-atom-id@15.md",
+      "expected_sha256": "12624bf3bbac3912cb2c2a94247e7d79a8ca371f68506f02deea38fe02fa130c",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1415",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1415-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-version@3.md",
+      "expected_sha256": "17deb3870ecf03a283b0be671a1ac6454da9f5f86263b9c3fc748d19856a4597",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1416",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1416-CORE_META_MODEL-GENERAL-REQUIREMENT--give-every-atom-revision-one-updated-at@3.md",
+      "expected_sha256": "11b39efbb6ddb8144bcec2cd35fba497ee3693a162e262f7dc42a8fc4cda5648",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1372",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1372-CORE_META_MODEL-REQUIREMENT--derive-journal-revision-updated-at@3.md",
+      "expected_sha256": "be818921cc3f0974bccaa05219798105533fc8457aa41f9169f8d73795617f35",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-978",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-978-CORE_META_MODEL-REQUIREMENT--define-navigational-order-number@9.md",
+      "expected_sha256": "9b2c8ca71fde9f9862d294c713b2d920900afd7e34902a282d7d4e85536b0b1d",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-981",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-981-CORE_META_MODEL-REQUIREMENT--default-navigational-order-chronologically@7.md",
+      "expected_sha256": "11cc79a6d9aadc12ee32104bccf48130065dff4cf27f6809519361565ae65db2",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-997",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers@9.md",
+      "expected_sha256": "51751283157ea53f84b0b23df50cfa34a4d6cbd13061d2d53ba3b34d3ae4418a",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-290",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-290-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-dset@10.md",
+      "expected_sha256": "2a0fa8389ba8fe7f6f6e5ebe972c5a9d421d873e841385912e7c2127ca31aaaf",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-294",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode@13.md",
+      "expected_sha256": "0dfe40c47dde753c964519adf9c0f8a3df49f2db7d43e65062c36f0ea4696f6c",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-296",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-296-CORE_META_MODEL-REQUIREMENT--distinguish-internal-and-external-git-commits@9.md",
+      "expected_sha256": "8d82b7ccd637f1bef88ae24e05ff63383aaac38ad3105c638cbaafa7f7502fce",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-299",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection@15.md",
+      "expected_sha256": "91e9bfea56d9bdb736b305a87b56c7cfca881752491dabfd34a498b75f34bc94",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-302",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion@15.md",
+      "expected_sha256": "01b803174efb81b80c06dad49f3813d8fb9403dcd1ef5c1e067a1c944fd86465",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-337",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stage-prefixes@10.md",
+      "expected_sha256": "31c7ddaeb6fde0ac18448c0e98b7eb1d5fca557bd1969c7b77ff4276f7bde86e",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-D-329",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references@5.md",
+      "expected_sha256": "f1324c89a1570b48b3f724d0ef3c912966592928b1e2f6d1eec8bc35c78fabd6",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-353",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-353-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers@9.md",
+      "expected_sha256": "31371859085625ab582af82f6d6c4dffd43dea88c92f62d9127423704eea17c8",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-355",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes@11.md",
+      "expected_sha256": "f6b78330b27886a38a238cfd5b37a76e995d720bffb1b6d068a57627f02a5138",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-750",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-750-CORE_META_MODEL-REQUIREMENT--register-rationale-as-a-type-value-for-analysis-atoms@13.md",
+      "expected_sha256": "05777cf9981607fbbfe22ae0ce0e4f79836b89a9335fb243e481e6cc8034cfe4",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-086",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting@11.md",
+      "expected_sha256": "16abd8f1474ce25d440115cf745e8c1d40ab7b844ea0bebb68a3100035b29856",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-098",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-098-CORE_META_MODEL-REQUIREMENT--scope-path-does-not-change-semantic-coordinates@15.md",
+      "expected_sha256": "7cc26d3535b0b4f36d116617128b852e79560575b8e4784031414c8e4d9efb57",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-D-283",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames@5.md",
+      "expected_sha256": "ddde5a99c7b4f7fde3abfe52a1c56fb9087b4da194251931629782f1fe2a000b",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-122",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-122-CORE_META_MODEL-REQUIREMENT--keep-atom-identity-independent-of-its-mutable-summary@11.md",
+      "expected_sha256": "b0ba1f6b279ad1bf21b28c5e107b7972197423b7fa03bf597486ac8c8e0a778c",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-166",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-166-CORE_META_MODEL-REQUIREMENT--projections-have-updated-at@10.md",
+      "expected_sha256": "81799813802e6f993dc278f70177fda792d42d4fb99fe7370262299a0b8a0f33",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-174",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-174-CORE_META_MODEL-REQUIREMENT--separate-extension-ownership-from-application-bindings@9.md",
+      "expected_sha256": "ba89e8779128953c38b6c1f305ca2e25a2d261e80b69bcadaa0625eb8c2fce37",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-730",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-730-CORE_META_MODEL-REQUIREMENT--preserve-atom-id-across-scope-change@10.md",
+      "expected_sha256": "19e01bad960b6a0dcc32376c9d250ab0aecea3de579fbda222acac71e60872b9",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-381",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-381-CORE_META_MODEL-REQUIREMENT--register-feature-realization-relation-kind@13.md",
+      "expected_sha256": "191d897f2d173ba8d1e5f1d4cbd8b11f968e046adbc74ee6761494b433b0b0a9",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-315",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-315--production-logging-policies@7.md",
+      "expected_sha256": "be1b5d95f7e8706fb59d060a0a9d1a03c1e067076f54717e3109e7901c143a26",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-293",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-293-LOCAL_CONFIGURATION-REQUIREMENT--use-constraint-only-for-external-limitations@11.md",
+      "expected_sha256": "d187f8d03ab6ec91b36a6b71d399d4d98d362ff8614f1f162323948cd71f7d27",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-825",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CA-R-825-LOCAL_CONFIGURATION-REQUIREMENT--register-boundary-as-a-requirement-type@11.md",
+      "expected_sha256": "c921953f90018493e69216785d3e4f5ef830d864ef4e4a551dada04605997163",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-761",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint@11.md",
+      "expected_sha256": "334b55fb4a23c3d29074cd08611a0f9c5b92f46b963421df80eafa3f8ab7c6e6",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-748",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@13.md",
+      "expected_sha256": "73bb4bd8db7586c7c88e111e187e244c3b54ba035376acb02f2f31ba8df8ea6e",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@10.md",
+      "expected_sha256": "120ac92de83a94374cda8015a8f0d9728ee7059e5244c3317fda6b51e2a52d40",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-751",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-751--register-delivery-types@11.md",
+      "expected_sha256": "014df26ba1e096a6c67055f420da9014f416bd9bc754fbdbdb958753c179b502",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-754",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@9.md",
+      "expected_sha256": "c8a15ad141c91932a07fb192aa87c0b6184cbce181a1481a5685248aa05b48bc",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-755",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@10.md",
+      "expected_sha256": "a1bf5f926fdf83989035e7fb0d789faf1f3b2b8e3b6e6967e7d5833db9d39a9a",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-762",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type@8.md",
+      "expected_sha256": "ec27848b7a82a71464550b23f96c5b30826ee5ceedede3060f83f85049e868bb",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-763",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type@9.md",
+      "expected_sha256": "92339b15887fbf34ec88c1a800067a03f593519572526b2137f7a454033ddaf4",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-749",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@12.md",
+      "expected_sha256": "62eee5026a6ba522bb618974f7d2640a439472fdbb81168bb401aaf71bd612a6",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-752",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-752--register-ops-types@11.md",
+      "expected_sha256": "6dd15fad0612631080537e0ea731cea4a57b5d9599a3740d44966dd45d1307e2",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-103",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-103--reconcile-the-backlog-after-release@8.md",
+      "expected_sha256": "61e7cc913f55c37f43a798288ae56732beb2877482fffac3729c6f7909ffee3d",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1305",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1305-CORE_META_MODEL-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms@7.md",
+      "expected_sha256": "9aefca394f8782ee0537e71ed2e475b13a761b03ba7e241e132ef9a5a378a7a5",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-737",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-737-CORE_META_MODEL-REQUIREMENT--prefix-every-assigned-atom-id-with-the-project-prefix@12.md",
+      "expected_sha256": "aeea4cc2b36f9a54a43591886f6e569a2090eb8f374ce3b51e9148bddf1c27ab",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-764",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-764-CORE_META_MODEL-REQUIREMENT--register-content-role-identity-letters@16.md",
+      "expected_sha256": "68a007cbba83a6ea5b4eba97b13b25454dc39bb9895bf583aa5d40152c87c885",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1304",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1304-CORE_META_MODEL-REQUIREMENT--define-epic-identifier-grammar@6.md",
+      "expected_sha256": "a5f333a272ebda2e816161f3c6288477628058ebb2a643be9aec8e358c3e7993",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-1369",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1369-CORE_META_MODEL-REQUIREMENT--give-every-epic-one-directory-carrier@4.md",
+      "expected_sha256": "78b1795e7df4e5f47d07b777b16b5bcb7ae2d08bc721b799280973a89d03d1f6",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-165",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-165-CORE_META_MODEL-REQUIREMENT--give-every-atom-revision-version-and-updated-at@11.md",
+      "expected_sha256": "16caa7ef7a54f01cc3289adb79fc1e44a2d41b300b887b104e496ffa12b23a5c",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CA-R-963",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-963-CORE_META_MODEL-REQUIREMENT--encode-scope-unit-names-as-uppercase-tokens@9.md",
+      "expected_sha256": "cbb14b504d8daef722988884c8d5dfa7598758825625129ba9c7450248f75161",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-297",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-297-CORE_META_MODEL-REQUIREMENT--show-one-structural-level-when-architecture-views-are-enabled@10.md",
+      "expected_sha256": "970f3c8c920324d4832648c8d896dd31cb1d58d1a2e6182f39737e4db2f22e27",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-362",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-362-CORE_META_MODEL-REQUIREMENT--configure-the-artifact-timestamp-timezone@12.md",
+      "expected_sha256": "21057419e1d42ee180c6d8ad560627fdc30edbe250f8d13a212fe787f0362340",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-373",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-373-CORE_META_MODEL-REQUIREMENT--encode-project-scope-authority-modes-in-the-scope-unit-graph@14.md",
+      "expected_sha256": "e2bed35591184a0708dc626582dd2353dc744ce20ec3209ad2049697c772e29d",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-383",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-383-CORE_META_MODEL-REQUIREMENT--register-obsolete-project-names@14.md",
+      "expected_sha256": "f82a18be6f00eb74c540574344ac5b5680b91be2c489a96e3771d917994c8479",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-760",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-760-CORE_META_MODEL-REQUIREMENT--derive-default-external-type-names@12.md",
+      "expected_sha256": "f17b613affb524d1dd7a38e4f656c8f3c2710a837c215ee2fe57a400123a738d",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-323",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes@17.md",
+      "expected_sha256": "6dc4a63b052615b9f44d5f5f161dde3efa371f01fe9ae0bdeeb0fbf77aad8777",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-676",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms@15.md",
+      "expected_sha256": "8abb93e721713d903ec6c5bc6c20248066297e2dddd54b6e03d54d824745c592",
+      "existing_sha256": null,
+      "status": "must_create_exact_copy"
+    }
+  ],
+  "subject_failures": [],
+  "missing_owners": [],
+  "reference_summary": {
+    "occurrences": 9303,
+    "consumers": 1356,
+    "active_RMED_occurrences": 11,
+    "required_pre_retirement": 4,
+    "required_before_extraction": 3,
+    "external_blockers": 0
+  },
+  "verification_limits": "Design review plus deterministic evidence checks; no source schema/compiler, Tools, install/runtime, Projection, Journal, Task lifecycle or Git workflow was run or modified."
+}

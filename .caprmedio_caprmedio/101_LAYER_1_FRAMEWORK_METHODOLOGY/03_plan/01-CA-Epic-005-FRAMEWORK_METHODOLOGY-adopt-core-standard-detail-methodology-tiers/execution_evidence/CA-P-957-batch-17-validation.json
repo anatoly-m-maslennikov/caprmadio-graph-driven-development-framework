@@ -1,0 +1,33 @@
+{
+  "schema": "ca-p-957-batch-audit/v1",
+  "non_authoritative": true,
+  "batch": "17",
+  "frozen_plan": "CA-P-957-batch-17-planned-source-delta.json",
+  "frozen_plan_sha256": "1b6e6cd3d524417b1c9a08513bb9d74efa7f0202a66018b72600efb02dabeb21",
+  "checks": {
+    "exact_premutation": "PASS;20 records,13 revisions,2 retirements,5 unchanged",
+    "canonical_overlay": "PASS;13 candidates and13 affected inbound Carriers,zero candidate or inbound diagnostics",
+    "source_scope": "17 new original Core Meta-Model dispositions;3 previously admitted dependent repairs;no Local/Project mutation",
+    "identity_and_archive": "Exact original IDs, whole prior bytes and @version paths bound in plan;no archive collision",
+    "incoming": "R747 incoming E425 already has R924;delete redundant target only. No live incoming R950 or Project full-basename repair needed.",
+    "requirement_parents": "Remove R925/R932 Core-to-new-General R924 edges under R796/R829/R879. Preserve valid R924→R923 and R935→R932. R930 remains Core;R946 unchanged. R838→R833 resolves active Project Core authority and is preserved. R380→M115 is not a Requirement-to-Requirement tier-parent case."
+  },
+  "absorption": [
+    {
+      "predecessor": "CA-R-747@17",
+      "survivor": "CA-R-924@11 → @12 in this batch",
+      "comparison": "Both Current CORE_META_MODEL source context. The predecessor's exact Requirement/Type (Goal,Demand) contribution is the Requirement-domain projection of the survivor's qualified Goal,Demand,Objective contribution. No unique qualifier or independently governable contribution is lost."
+    },
+    {
+      "predecessor": "CA-R-950@10",
+      "survivor": "CA-R-935@10 → @11 in this batch",
+      "comparison": "R944@11 binds Demand direction to Consumer Atom Scope Unit→Producer Claim Scope Unit; R932@12 binds the same ownership/endpoints. R950's ancestor/descendant direction prohibition therefore equals R935's exclusion of ancestor/descendant targets from the Consumer's Claim Scope Set. It does not constrain Producer-set pairs independently."
+    }
+  ],
+  "limits": [
+    "Unchanged R626/R855/R862/R930 retain their preexisting unresolved legacy-parent diagnostics. No full graph or source-admission closure claimed.",
+    "R626/R855 current owner/source placement preserved; no migration.",
+    "Classification witnesses are counterfactuals only; no countermodel policy is adopted.",
+    "Temporary Operator override: no Journal/Git execution, recording or conformance claim."
+  ]
+}

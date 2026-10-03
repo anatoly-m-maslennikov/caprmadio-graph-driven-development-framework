@@ -1,0 +1,185 @@
+{
+  "schema": "ca-p-957-batch-audit/v1",
+  "non_authoritative": true,
+  "batch": "18",
+  "frozen_plan": "CA-P-957-batch-18-planned-source-delta.json",
+  "frozen_plan_sha256": "a2fbe7349cbfd616ff001869ad7a43f1cfd8d6a152d5fa5588e78bb0fadee93a",
+  "exact_preflight": "PASS;20 records,15 revisions,5 unchanged;no Archive collision",
+  "canonical_overlay": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "candidate_count": 15,
+    "checked_count": 20,
+    "diagnostic_count": 13,
+    "candidate_diagnostic_count": 7,
+    "new_inbound_diagnostic_count": 0,
+    "new_candidate_diagnostic_count": 0,
+    "existing_diagnostics": [
+      {
+        "atom_id": "CAPRMEDIO-META-REQU-181",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-181-CORE_META_MODEL-GENERAL-REQUIREMENT--require-an-irreducible-ownership-boundary-for-new-structural-levels.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-294",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-355",
+        "planned_candidate": true,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          },
+          {
+            "code": "relation_rule_not_applicable",
+            "message": "logger did not enforce the relation registry while recording the file change",
+            "details": {
+              "relation_type": "resolution_of",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-355-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "resolution_of",
+              "target": "CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-METHODOLOGY-REQU-516",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-REQU-708--define-framework-methodology-layer-scope"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-METHODOLOGY-REQU-692",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-REQU-708--define-framework-methodology-layer-scope"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-694",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CAPRMEDIO-REQU-702--define-framework-engine-layer-scope"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-REQU-302",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_kind_unresolved",
+            "message": "logger preserved the file change without resolving an unknown relation kind",
+            "details": {
+              "relation_type": "relates_to",
+              "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md"
+            }
+          },
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      },
+      {
+        "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+        "planned_candidate": false,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "semantic_checks": [
+    "META169 is Core: the suggested stage-terminal countermodel still met the one whole-attempt terminal condition. Removing exact consumed-source/outcome lineage would violate META158/META107. No concrete representation/procedure is selected.",
+    "META174 preserves its entire prior application-binding Claim and adds the already governed Settings ownership qualification plus its actual Settings prerequisite. No current settings are changed.",
+    "Remove only new Current CORE_META_MODEL Requirement peers META087→META114 and META123→META090. Unchanged cross-context Project links are not assigned speculative same-Scope tier parentage or global ranks.",
+    "META773's unresolved legacy normative parent is removed without inventing a substitute. META181 resolution_of is a preexisting contextual/Concern-binding limitation, not a new normative tier-parent defect; it is preserved explicitly.",
+    "GOV294/GOV355 receive only exact old-basename→stable-ID repairs. Their original classification remains pending; their existing unknown-kind/inactive/history-binding diagnostics are not normalized here.",
+    "Root completed three necessary Project reference-only repairs before the overlay, separately mapped in CA-P-957-external-project-reference-repairs-batch18.json."
+  ],
+  "limits": [
+    "No full graph-registry, Project-source-admission or runtime conformance claim.",
+    "No Journal execution, event recording, Git work or persistent authority override. Rebuild-provenance requirements are classified as source content.",
+    "Countermodels are classification witnesses only, not newly adopted policies.",
+    "Five unchanged origins preserve all original body and relation bytes, including unrelated legacy diagnostics."
+  ]
+}

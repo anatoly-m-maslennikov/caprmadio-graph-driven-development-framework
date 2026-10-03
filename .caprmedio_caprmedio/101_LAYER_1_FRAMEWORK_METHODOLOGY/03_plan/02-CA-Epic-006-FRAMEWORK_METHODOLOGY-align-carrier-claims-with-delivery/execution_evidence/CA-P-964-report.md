@@ -1,0 +1,19 @@
+# CA-P-964 methodology reference reconciliation
+
+Non-authoritative execution evidence for CA-P-964@2. Result: **PASS**. Root retains Task lifecycle; CA-P-965 owns the final complete-Claim review.
+
+The only remaining source repair is GOV314@12 → @13: its `relates_to` value now uses canonical `CAPRMEDIO-GOV-REQU-748`, retaining the Evaluation Type admission contribution and adding no D400 target. The selected relation collection is canonically ordered. The complete Claim, Subjects, unrelated metadata and relation values, source owner and General tier are preserved. The exact @12 Archive SHA-256 is `0ad6bbcf763a8b823d178aae902c46798bced473a94a1c7b8a3e18613b2ba36a`; current @13 SHA-256 is `2d5d3b03fbab22b02deed5f63d8c27629b9b6555761727120b1d1938e6d780eb`.
+
+The other ten baseline reference decisions remain valid. E427 retains D379 for Epic Identifier grammar and D353 for the stricter Epic Carrier cardinality. GOV-EVAL009 retains R299 plus D386; GOV-EVAL006 retains R294/R302 plus D383/D387. Local GOV761@13 and GOV762@10 retain D393. GOV302 retains canonical R294. External ENGINE-REQU561 still consumes GOV337 stage semantics; M163 still consumes GOV315 logging behavior. `references.json` records each exact consumer and rationale; `fresh-decisions.json` covers every fresh active mention, including the explicit successor prose references.
+
+All 91 CA-P-962/963 operations were replayed against exact current or Archive bytes. All 61 prior Archives and all 48 split/replace/dedupe successor sequences pass. The seven mandatory successor → consumer repair → extraction/retirement sequences are: 962:5→7→8; 6→7→9; 24→26→27; 25→26→35; 32→33→34; 48→49→51; 48→50→51. No required repair was deferred to CA-P-964. The known D378@1 Analysis-letter defect and its exact corrective @2 operation remain explicitly recorded in `ordering.json`.
+
+The fresh hidden/ignored-file scan enumerated 36,801 repository files and found 9,705 relevant occurrences across 1,216 paths. All 714 source RMED Atoms remain accounted for: Core 655 and Local 59. There are 27 active RMED occurrences, none targeting the 14 retired identities. The scan excludes secret files, `.git`, `.DS_Store`, execution evidence and symlink traversal.
+
+CA-P-964 introduces zero resolved-edge changes, unresolved targets or reference cycles. Before962/before964/after964 each contain 98 legacy unresolved relation rows. Seven rows moved intact from mapped predecessors to successors; `graph.json` records each exact lineage rather than misclassifying it as a newly missing target. Dependency kinds have no cycles. The unchanged M267/M269/M270 `relates_to` component is a relation-domain diagnostic, not a dependency cycle. The broader identity graph has legacy duplicate external identities; `coverage.json` states that limitation and retains exact paths. This is not a repository-wide graph-health verdict.
+
+`handoff.json` lists all 1,199 exact out-of-scope paths with hashes, target line numbers and follow-up: 627 generated/installed, 550 historical/Journal, 18 other non-RMED, two external active RMED consumers and two migration scripts. Historical provenance is preserved; generated/installed content requires its separately governed rebuild. The migration scripts are `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/migrations/apply_fpf_audit_repairs.py` and `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/migrations/apply_realization_releases_field_authority.py`; any future reuse must review their old target/path mappings. None is an external prerequisite blocker.
+
+No external consumer, source-owner assignment, Settings choice, pending Epic005 decision, Tool/compiler/install/runtime, Projection, Journal or Git index was changed. Index SHA-256 remains `57190e4a096cc585704d68f44ed8f1744a2b3487c32643b5bb0da162a2d126c2`.
+
+Reproduce with `ruby` on the sibling `CA-P-964-audit.rb`; it reads source bytes and writes only CA-P-964 evidence through `apply_patch`.

@@ -1,0 +1,143 @@
+{
+  "schema": "caprmedio.ca_p_103.target_topology.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-103",
+  "source_frontier": {
+    "task_atom_id": "CA-P-102",
+    "source_carrier_set_digest": "a61f7dae5e66825db1eb1bf90a6bd8b2e21dcf90ec7195ef751167f5eedde60a",
+    "structural_directory_set_digest": "0a678244bc1b48b44f041d07836582313042cb9fe5865a5be5c9f2c1452eeb4f"
+  },
+  "ownership_roots": {
+    "framework": ".caprmedio_framework",
+    "project": ".caprmedio_project",
+    "runtime": ".caprmedio_runtime"
+  },
+  "applicable_methodology": {
+    "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY",
+    "authority": "non_authoritative",
+    "protected_sources_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+    "ordered_source_layers": [
+      "001_CORE_META_MODEL",
+      "002_INSTALLED_EXTENSIONS",
+      "003_LOCAL_CONFIGURATION"
+    ],
+    "source_layer_scope_definition_atoms": [
+      "CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-CORE_META_MODEL--make-core-meta-model-the-first-ordered-source-layer.md",
+      "CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-INSTALLED_EXTENSIONS--make-installed-extensions-the-second-ordered-source-layer.md",
+      "CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-LOCAL_CONFIGURATION--make-local-configuration-the-third-ordered-source-layer.md"
+    ],
+    "durable_empty_directory_carriers": [
+      {
+        "source_layer": "002_INSTALLED_EXTENSIONS",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/002_INSTALLED_EXTENSIONS/.gitkeep",
+        "carrier_kind": "gitkeep",
+        "catalog_candidate_count": 0,
+        "extension_authority_created": false
+      }
+    ]
+  },
+  "scope_unit_delivery_mappings": [
+    {
+      "scope_unit": "FRAMEWORK_METHODOLOGY",
+      "authority_path": ".caprmedio_project/101_LAYER_1_FRAMEWORK_METHODOLOGY",
+      "delivery_path": "101_FRAMEWORK_METHODOLOGY",
+      "delivery_atom": "CA-D-017"
+    },
+    {
+      "scope_unit": "FRAMEWORK_ENGINE",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE",
+      "delivery_path": "102_FRAMEWORK_ENGINE",
+      "delivery_atom": "CA-D-018"
+    },
+    {
+      "scope_unit": "OPERATOR_DOCUMENTATION",
+      "authority_path": ".caprmedio_project/103_LAYER_3_OPERATOR_DOCUMENTATION",
+      "delivery_path": "103_OPERATOR_DOCUMENTATION",
+      "delivery_atom": "CA-D-019"
+    },
+    {
+      "scope_unit": "CORE_EXTENSIONS",
+      "authority_path": ".caprmedio_project/104_LAYER_4_CORE_EXTENSIONS",
+      "delivery_path": "104_CORE_EXTENSIONS",
+      "delivery_atom": "CA-D-020"
+    },
+    {
+      "scope_unit": "RELEASES",
+      "authority_path": ".caprmedio_project/105_LAYER_5_RELEASES",
+      "delivery_path": "105_RELEASES",
+      "delivery_atom": "CA-D-021"
+    },
+    {
+      "scope_unit": "COMMUNITY_EXTENSIONS",
+      "authority_path": ".caprmedio_project/110_FEATURE_COMMUNITY_EXTENSIONS",
+      "delivery_path": "110_COMMUNITY_EXTENSIONS",
+      "delivery_atom": "CA-D-026"
+    },
+    {
+      "scope_unit": "FIELD",
+      "authority_path": ".caprmedio_project/110_FEATURE_FIELD",
+      "delivery_path": "110_FIELD",
+      "delivery_atom": "CA-D-022"
+    },
+    {
+      "scope_unit": "PROGRAMMATIC",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC",
+      "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC",
+      "delivery_atom": "CA-D-251"
+    },
+    {
+      "scope_unit": "AGENTIC",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC",
+      "delivery_path": "102_FRAMEWORK_ENGINE/202_AGENTIC",
+      "delivery_atom": "CA-D-252"
+    },
+    {
+      "scope_unit": "TOOLS",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS",
+      "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS",
+      "delivery_atom": "CA-D-025"
+    },
+    {
+      "scope_unit": "APPS",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS",
+      "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS",
+      "delivery_atom": "CA-D-023"
+    },
+    {
+      "scope_unit": "MCP",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP",
+      "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP",
+      "delivery_atom": "CA-D-049"
+    },
+    {
+      "scope_unit": "SKILLS",
+      "authority_path": ".caprmedio_project/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS",
+      "delivery_path": "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS",
+      "delivery_atom": "CA-D-024"
+    }
+  ],
+  "engine_direct_children": [
+    "PROGRAMMATIC",
+    "AGENTIC"
+  ],
+  "programmatic_direct_children": [
+    "TOOLS",
+    "APPS",
+    "MCP"
+  ],
+  "agentic_direct_children": [
+    "SKILLS"
+  ],
+  "obsolete_named_target_scope_units": [
+    "METAMODEL",
+    "SEMANTICS",
+    "GOVERNANCE",
+    "METHODOLOGY_META_MODEL",
+    "CAPRMEDIO_APPLICATION",
+    "PROJECT_LOCAL_METHODOLOGY"
+  ],
+  "obsolete_named_target_scope_units_disposition_owner": "CA-P-108",
+  "materialization": "not_performed_by_ca_p_103",
+  "native_carrier_exception_model": "none; each Scope Unit Delivery Atom maps one authority folder to one governed Delivery folder or subfolder"
+}

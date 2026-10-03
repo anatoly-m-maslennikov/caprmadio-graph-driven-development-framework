@@ -1,0 +1,35 @@
+---
+cce_version: cce_1
+cce_form: method
+subjects:
+  governs: "framework-engine-mcp"
+  depends_on: []
+version: 3
+updated_at: "2026-09-16 23:48:40 +0000"
+relations:
+  method_for:
+    - CA-R-1115
+  derived_from:
+    - CA-A-057
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Bind one MCP invocation to its current project frontier
+
+## Applicable when
+
+Apply when an MCP service instance discovers or invokes an exposed Tool.
+
+## Procedure
+
+1. Resolve exactly one project root, selected installed Tool release, project-graph frontier, and MCP registry revision.
+2. Include sufficient source and revision provenance in discovery and result records.
+3. Reject cross-project path escape, unresolved identity, or a stale registry before Tool invocation.
+
+## Outcome
+
+Every MCP operation is attributable to one current project and Tool frontier.
+
+## Failure or stop
+
+Stop at an unresolved or stale frontier; do not guess a project or release.

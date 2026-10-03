@@ -1,0 +1,273 @@
+{
+  "schema": "ca-p-957-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "12",
+  "scope": "The final six Delivery origins; all complete bodies and relations preserved.",
+  "records": [
+    {
+      "atom_id": "CA-D-253",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Constitutively separates authoritative methodology sources from their non-authoritative member projections.",
+      "concrete_choice_test": "No concrete storage address, encoding or procedure is selected.",
+      "negation_witness": "Treat a projected member Carrier as independent methodology source authority: source/projection ownership and conserved derivation cease to hold, regardless of physical layout.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-DELIVERY--place-applicable-methodology-and-its-sources.md",
+      "source_version": 5,
+      "source_sha256": "02d13186847970b16f37efeacf8ab67fcdb2e02d5670ad75236eebcb9775f0eb",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-253",
+      "filename_identity": "CA-D-253",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Applicable Methodology/Carrier"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Applicable Methodology/Carrier"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Place Applicable Methodology and Its Sources the Applicable Methodology Carrier topology must separate authoritative Methodology Source Carriers from non-authoritative projected member Carriers.",
+      "complete_body": "\n# Place Applicable Methodology and Its Sources\n\nthe Applicable Methodology Carrier topology **must** separate authoritative Methodology Source Carriers from non-authoritative projected member Carriers.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retier with whole body/relations unchanged and exact prior Archive."
+    },
+    {
+      "atom_id": "CA-D-316",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Defines a closed semantic Ownership Class catalog over already constituted Carriers.",
+      "concrete_choice_test": "Semantic property/catalog requirements do not select keys, field order, file format or algorithm.",
+      "preserving_realizations": [
+        "A TOML classification discriminator containing one of the same three values.",
+        "A tagged Carrier registry preserving the same three exclusive classes."
+      ],
+      "countermodel": "Partition ownership by Framework/Project and model Runtime ephemerality separately; one authority owner and the runtime-not-canonical boundary remain, but the combined three-value classification contract changes.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-316-CORE_META_MODEL-CORE-DELIVERY--classify-carriers-by-ownership.md",
+      "source_version": 4,
+      "source_sha256": "27f05ec18072423a813dd61186dc8a31503c019aa91533dfbf549d81a71bc274",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-316",
+      "filename_identity": "CA-D-316",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Carrier/Ownership Class"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Carrier/Ownership Class"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Classify Carriers by Ownership every internal CAPRMEDIO Carrier must have =1 Ownership Class in (Framework-Owned, Project-Owned, Runtime State).",
+      "complete_body": "\n# Classify Carriers by Ownership\n\n**every** internal CAPRMEDIO Carrier **must** have **`=1`** Ownership Class **in** (Framework-Owned, Project-Owned, Runtime State).\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retier with whole body/relations unchanged and exact prior Archive."
+    },
+    {
+      "atom_id": "CA-D-333",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Defines required semantic generation-provenance payload; no concrete keys, order, format or digest algorithm is selected.",
+      "concrete_choice_test": "Semantic property/catalog requirements do not select keys, field order, file format or algorithm.",
+      "preserving_realizations": [
+        "A JSON metadata record preserving all named exact generation/settings/source/observation facts.",
+        "A YAML metadata record preserving the same facts and qualified update time."
+      ],
+      "countermodel": "Resolve generator identity/digest through an exact immutable generation-event reference rather than serialize both values in every Projection Carrier. Exact regeneration provenance and source non-authority remain, but the per-Carrier payload contract changes.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-333-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata.md",
+      "source_version": 6,
+      "source_sha256": "e71ddca41eac1392a6f4328575021c7e70f47b75e29c0eb429e1e8865bbb4026",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-333",
+      "filename_identity": "CA-D-333",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Project Scope Unit Graph Projection/Carrier/Generation Metadata"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Project Scope Unit Graph Projection/Carrier/Generation Metadata"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Serialize Scope Unit Graph Projection Generation Metadata every Project Scope Unit Graph Projection Carrier must serialize Updated At, generator identity and digest, exact consumed Settings revisions, and the source bindings and Directory Carrier observations needed to explain emitted values and unresolved findings.",
+      "complete_body": "\n# Serialize Scope Unit Graph Projection Generation Metadata\n\n**every** Project Scope Unit Graph Projection Carrier **must** serialize Updated At, generator identity **and** digest, exact consumed Settings revisions, **and** the source bindings **and** Directory Carrier observations needed to explain emitted values **and** unresolved findings.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retier with whole body/relations unchanged and exact prior Archive."
+    },
+    {
+      "atom_id": "CA-D-338",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Defines the required semantic result payload of a completed rebuild event, not a particular event encoding.",
+      "concrete_choice_test": "Semantic property/catalog requirements do not select keys, field order, file format or algorithm.",
+      "preserving_realizations": [
+        "A JSONL completed-event record carrying the same published time, output reference and digest.",
+        "A YAML completed-event record with the identical three result facts."
+      ],
+      "countermodel": "Bind the event to an exact immutable output revision and resolve its published update time/digest from that revision instead of serializing those values in the event. Identity, immutable history and exact result provenance remain, but this event payload contract differs.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-338-CORE_META_MODEL-CORE-DELIVERY--serialize-completed-projection-rebuild-results.md",
+      "source_version": 4,
+      "source_sha256": "14555383df07d321b805666371778236d2392eb3d98cfc0bc31155b44ff50fa3",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-338",
+      "filename_identity": "CA-D-338",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Work Journal/Projection Rebuild/Completed Event"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Work Journal/Projection Rebuild/Completed Event"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Serialize Completed Projection Rebuild Results every completed Projection Rebuild Event must serialize the published Projection Updated At value, output Carrier reference, and content digest.",
+      "complete_body": "\n# Serialize Completed Projection Rebuild Results\n\n**every** completed Projection Rebuild Event **must** serialize the published Projection Updated At value, output Carrier reference, **and** content digest.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retier with whole body/relations unchanged and exact prior Archive."
+    },
+    {
+      "atom_id": "CA-D-340",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Defines required semantic Event-property payload without choosing exact keys, order, format or algorithm.",
+      "concrete_choice_test": "Semantic property/catalog requirements do not select keys, field order, file format or algorithm.",
+      "preserving_realizations": [
+        "A JSONL event record preserving every property and timezone-qualified time.",
+        "A YAML event record preserving the same semantic payload."
+      ],
+      "countermodel": "Resolve action Kind and Structural Scope from the exact immutable Action revision referenced by Action identity instead of serializing their values in every Event. Semantic provenance, identity and conservation remain, but this per-record payload contract changes.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-340-CORE_META_MODEL-CORE-DELIVERY--serialize-work-journal-event-properties.md",
+      "source_version": 5,
+      "source_sha256": "89854a66bf6e7d95e08ed79ef5633178af3c65e89ca003be78c079832acb52f5",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-340",
+      "filename_identity": "CA-D-340",
+      "old_tier": "Core",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Work Journal/Event/Carrier Serialization"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Work Journal/Event/Carrier Serialization"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Serialize Work Journal Event Properties every Work Journal Event Carrier record must serialize its Event identity, Action identity, Type value, action Kind, Author, timezone-qualified Occurred At, session provenance, and Structural Scope in its registered schema.",
+      "complete_body": "\n# Serialize Work Journal Event Properties\n\n**every** Work Journal Event Carrier record **must** serialize its Event identity, Action identity, Type value, action Kind, Author, timezone-qualified Occurred At, session provenance, **and** Structural Scope **in** its registered schema.\n",
+      "direct_relations": {},
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retier with whole body/relations unchanged and exact prior Archive."
+    },
+    {
+      "atom_id": "CA-D-377",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects exclusion of Atom metadata from the particular Framework Instance Settings TOML Carrier and its selected revision-binding route.",
+      "replacement_witness": "Use another admitted Settings encoding with separately bound revision metadata instead of this TOML exclusion rule, preserving Settings-not-Atom identity, current-setting ownership and provenance separation.",
+      "batch": "12",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-377-CORE_META_MODEL-DELIVERY--exclude-atom-metadata-from-framework-settings.md",
+      "source_version": 1,
+      "source_sha256": "f057dc70e5a83769ff60c24f12084e59912bdcc8078b7c7c5983b8fd3394664e",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-377",
+      "filename_identity": "CA-D-377",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Framework Instance Settings/Carrier/Atom metadata exclusion"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Framework Instance Settings/Carrier/Atom metadata exclusion"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing locally owned Active RMED context; independent of Local Tier."
+      },
+      "content_role": "D",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "d numerically unresolved; no folder-derived coordinate",
+      "governing_clause_normalized": "# Exclude Atom metadata from Framework Instance Settings the Framework Instance Settings TOML Carrier must not contain Atom Frontmatter, Atom ID, Atom Revision metadata, Atom relations, rationale, or provenance; its Revision binding follows CA-D-360.",
+      "complete_body": "\n# Exclude Atom metadata from Framework Instance Settings\n\nthe Framework Instance Settings TOML Carrier **must not** contain Atom Frontmatter, Atom ID, Atom Revision metadata, Atom relations, rationale, **or** provenance; its Revision binding follows CA-D-360.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-D-361"
+        ]
+      },
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_impacts": [],
+      "disposition": "Retain unchanged."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "caprmedio.ca_p_107.deterministic_compilation_authority.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-107",
+  "recorded_at": "2026-08-27T01:34:55+04:00",
+  "minimum_confidence_percent": 99,
+  "predecessor_evidence": [
+    "CA-P-102-freeze-record.projection.json",
+    "CA-P-103-target-topology.projection.json",
+    "CA-P-112-job-reconciliation.projection.json",
+    "CA-P-104-core-meta-model-reconciliation.projection.json",
+    "CA-P-105-installed-extensions-reconciliation.projection.json",
+    "CA-P-106-local-configuration-reconciliation.projection.json"
+  ],
+  "accepted_source_composition": {
+    "ordered_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "source_layer_carrier_order": [
+      "001_CORE_META_MODEL",
+      "002_INSTALLED_EXTENSIONS",
+      "003_LOCAL_CONFIGURATION"
+    ],
+    "selection_authority": "CA-R-1224",
+    "installed_extensions_selected": 0,
+    "installed_extensions_authority": [
+      "CA-R-1221",
+      "CA-R-1225"
+    ],
+    "local_configuration_resolution_authority": [
+      "CA-R-1207",
+      "CA-R-1226",
+      "CA-R-1227"
+    ]
+  },
+  "compiler_contract": {
+    "source_layer_topology_authority": "CA-R-1228",
+    "algorithm_authority": "CA-M-125",
+    "retrieval_authority": "CA-M-126",
+    "output_provenance_authority": "CA-R-1229",
+    "subject_index_authority": "CA-R-1230",
+    "validation_authority": "CA-E-300",
+    "carrier_authority": "CA-D-251",
+    "source_location": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+    "output_location": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY",
+    "materialized_output": false,
+    "compiler_uses_llm_inference": false
+  },
+  "deterministic_output_contract": {
+    "projection_identity": [
+      "APPLICABLE_METHODOLOGY",
+      "Compiler Method atom ID and revision",
+      "source-frontier digest"
+    ],
+    "retained_source_atom_order": [
+      "Source Layer order",
+      "Atom ID",
+      "canonical relative Carrier path"
+    ],
+    "source_frontier_record": [
+      "Source Layer",
+      "Atom ID",
+      "Atom revision",
+      "canonical relative Carrier path",
+      "Carrier SHA-256"
+    ],
+    "source_frontier_digest": "SHA-256 of canonical UTF-8 JSON source-frontier records",
+    "output_digest": "SHA-256 of canonical UTF-8 JSON ordered output manifest and Subject Indexes",
+    "required_indexes": [
+      "GOVERNS",
+      "DEPENDS_ON"
+    ],
+    "failure_behavior": "do not generate an Output when selection, resolution, digest, or index validation fails"
+  },
+  "validation": {
+    "core_meta_model_cannot_be_omitted": true,
+    "unselected_installed_extension_cannot_be_retained": true,
+    "source_carrier_mutation_prohibited": true,
+    "output_independent_authority_prohibited": true,
+    "output_regenerability_required": true,
+    "final_output_created_by_ca_p_107": false,
+    "confidence_percent": 99
+  }
+}

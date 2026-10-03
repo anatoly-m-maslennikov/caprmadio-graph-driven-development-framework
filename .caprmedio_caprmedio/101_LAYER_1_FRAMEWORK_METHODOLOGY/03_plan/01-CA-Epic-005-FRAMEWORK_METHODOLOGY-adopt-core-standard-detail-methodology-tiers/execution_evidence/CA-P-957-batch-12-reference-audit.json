@@ -1,0 +1,101 @@
+{
+  "schema": "ca-p-957-reference-audit/v1",
+  "non_authoritative": true,
+  "batch": "12",
+  "canonical": {
+    "result": "PASS",
+    "batch": "12",
+    "candidate_count": 5,
+    "checked_count": 5,
+    "diagnostic_count": 0,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "new_candidate_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-D-253",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-CORE-DELIVERY--place-applicable-methodology-and-its-sources.md",
+        "sha256": "490f1eb8121d6167bacb5f4b2dc6cbecf89c7daf6015207726fa46ee702dca55",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-D-316",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-316-CORE_META_MODEL-GENERAL-DELIVERY--classify-carriers-by-ownership.md",
+        "sha256": "c21697e1ebb734241b0fbca4372973f0cb8cf9caa7e4762bebef16ce27c7ad69",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-D-333",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-333-CORE_META_MODEL-GENERAL-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata.md",
+        "sha256": "725091ad8eca48e7cfa5c6368af49ddfcaed551e5cf0e60b3498c082a5fa9a0f",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-D-338",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-338-CORE_META_MODEL-GENERAL-DELIVERY--serialize-completed-projection-rebuild-results.md",
+        "sha256": "45788d345460ff53e33bf5b7d5d23e3d658ef0e5ffe30c952789163731f54696",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-D-340",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-340-CORE_META_MODEL-GENERAL-DELIVERY--serialize-work-journal-event-properties.md",
+        "sha256": "93271ff97f6e5b6f440abf56a5344bdceae9e0efcbda595486bef1719ae22ca5",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "basename_scan": {
+    "scanned_markdown": 10340,
+    "matches": [
+      {
+        "atom_id": "CA-D-316",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-316-CORE_META_MODEL-CORE-DELIVERY--classify-carriers-by-ownership.md",
+        "line": 13
+      },
+      {
+        "atom_id": "CA-D-253",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-253-CORE_META_MODEL-DELIVERY--place-applicable-methodology-and-its-sources.md",
+        "line": 17
+      },
+      {
+        "atom_id": "CA-D-333",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-333-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-graph-projection-generation-metadata.md",
+        "line": 13
+      },
+      {
+        "atom_id": "CA-D-340",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-340-CORE_META_MODEL-CORE-DELIVERY--serialize-work-journal-event-properties.md",
+        "line": 16
+      },
+      {
+        "atom_id": "CA-D-338",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-338-CORE_META_MODEL-CORE-DELIVERY--serialize-completed-projection-rebuild-results.md",
+        "line": 13
+      }
+    ]
+  },
+  "semantic_tier_parent_check": "All records are Deliveries; no Requirement tier-parent prohibition is invented. Existing D377→D361 content boundary remains unchanged.",
+  "limits": "Generated/history references preserved; source-only exact classification."
+}

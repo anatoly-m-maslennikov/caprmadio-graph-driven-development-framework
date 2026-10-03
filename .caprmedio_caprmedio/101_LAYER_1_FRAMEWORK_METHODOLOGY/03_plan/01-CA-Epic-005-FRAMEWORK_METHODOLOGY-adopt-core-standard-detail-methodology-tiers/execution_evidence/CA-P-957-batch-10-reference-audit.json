@@ -1,0 +1,347 @@
+{
+  "schema": "ca-p-957-reference-audit/v1",
+  "non_authoritative": true,
+  "batch": "10",
+  "canonical": {
+    "result": "PASS_WITH_EXISTING_DIAGNOSTICS",
+    "batch": "10",
+    "candidate_count": 16,
+    "checked_count": 21,
+    "diagnostic_count": 1,
+    "candidate_diagnostic_count": 0,
+    "new_inbound_diagnostic_count": 0,
+    "new_candidate_diagnostic_count": 0,
+    "records": [
+      {
+        "atom_id": "CA-M-114",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+        "sha256": "a1849a544784a234a0171540465ef8421ea617235cc1f6a46de31b0a5b0f453c",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-125",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+        "sha256": "f46cac967dc7facffdfcb325f3705cc8e7fc240fd3c29571d6178932813d4927",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-135",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md",
+        "sha256": "f23ba1bb07650686e88386179917b59076933a0297d5e6e35313b596e45e97ee",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "child_of",
+              "target": "CA-R-1054"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-224",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-METHOD--compile-applicable-methodology-deterministically.md",
+        "sha256": "55529d881468da0c289d2cdf07711c3056c53b6dfbf484357e5e05cb7a0fe691",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-231",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+        "sha256": "f9895a0f22cbc0f70d560852b42c820e1be49732ada082efd536c963142f73f7",
+        "planned_candidate": true,
+        "source_count": 0,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-M-271",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-METHOD--resolve-confidence-thresholds-by-source-precedence.md",
+        "sha256": "c764b5102343d3e33e648cff210d4daf4192d1562e4b4c33c63900801fe1ebee",
+        "planned_candidate": true,
+        "source_count": 1,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-243",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom.md",
+        "sha256": "bbd77fccdd225ef877028fd4b2d0dc1c4ddfb9db15568d93a68be9e3f69b4b95",
+        "planned_candidate": true,
+        "source_count": 7,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-402",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-EVALUATION--reject-invalid-claim-value-sets.md",
+        "sha256": "3dbc3f69c1cb54ad82916ae67bbeda4ee3b6b6c7489825faf5d16f657f021574",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-403",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+        "sha256": "42e281e4e19e041567a2172bde8edbe090c5c0cca536135c1860ccb117b15127",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-404",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-EVALUATION--reject-invalid-dependency-order-derivations.md",
+        "sha256": "38f210a1c07b8ad2f55e391e135079105fc821e985b6b6a2d47709a1d21d3524",
+        "planned_candidate": true,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-405",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+        "sha256": "c5d967ae5b30fd073972f15beaeeb65d30db294f71631c352c212919e547427a",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-407",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-EVALUATION--validate-canonical-scope-signature-boundary.md",
+        "sha256": "1ad768fb1fadf7746219997550d681fddb9f5c894759048ddabdaa80da00ad4b",
+        "planned_candidate": true,
+        "source_count": 2,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-424",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-EVALUATION--validate-objective-atoms.md",
+        "sha256": "46004a0a41bdcf5eec49747b238ed328632188767381aca76d0d43e313ccc4fc",
+        "planned_candidate": true,
+        "source_count": 4,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-425",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+        "sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+        "planned_candidate": true,
+        "source_count": 4,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-426",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-EVALUATION--validate-epic-containment.md",
+        "sha256": "5cb4d2a09e21781adfcdaa6ba1419e7c6571e1a8359c723978a04cb1b80eeb3c",
+        "planned_candidate": true,
+        "source_count": 9,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-427",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+        "sha256": "2f83beeaecf177e4f9e6fbd67f356ce535f3691183d70b48b946795c011da88f",
+        "planned_candidate": true,
+        "source_count": 8,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-385",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/06_evaluation/CA-E-385-PROGRAMMATIC-CORE-QA_CASE--verify-changed-python-with-mypy.md",
+        "sha256": "8f73b78d6166afec66da3936a45bc8faf88936c06459a64cf3d882ae13b41330",
+        "planned_candidate": false,
+        "source_count": 1,
+        "diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "evaluation_for",
+              "target": "CA-M-231"
+            }
+          }
+        ],
+        "prior_diagnostics": [
+          {
+            "code": "relation_target_unresolved",
+            "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+            "details": {
+              "relation_type": "evaluation_for",
+              "target": "CA-M-231"
+            }
+          }
+        ],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-245",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms.md",
+        "sha256": "be89d573818326d837e52419a8aaf7a18aeb0a0f7df3ae0e63d02da9d497859d",
+        "planned_candidate": false,
+        "source_count": 5,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-246",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+        "sha256": "23d2c7ba8d5406ec6b86fbb692b5164f643bcce0a0cc5f4065c664b0ac3c4264",
+        "planned_candidate": false,
+        "source_count": 3,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-443",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-443-CORE_META_MODEL-QA_CASE--validate-confidence-threshold-precedence-and-inheritance.md",
+        "sha256": "9954cb8ed888cf773a5cc12a8658bafc0208653e55a3b05f25ebe9633aa9eadd",
+        "planned_candidate": false,
+        "source_count": 10,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      },
+      {
+        "atom_id": "CA-E-444",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+        "sha256": "6e1b554451e6901b9672ba4b1837db0b9f81715c089cd6d2bfa4cb58bfc7ab6c",
+        "planned_candidate": false,
+        "source_count": 10,
+        "diagnostics": [],
+        "prior_diagnostics": [],
+        "new_diagnostics": []
+      }
+    ],
+    "preserved_ambiguous_alias_count": 28,
+    "limit": "Canonical current/proposed relation endpoint and registry checks; no production mutation, semantic tier-parent proof, or runtime validation."
+  },
+  "basename_scan": {
+    "scanned_markdown": 10304,
+    "matches": [
+      {
+        "atom_id": "CA-M-224",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+        "line": 19,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md"
+      },
+      {
+        "atom_id": "CA-M-125",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim.md",
+        "line": 20,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim.md"
+      },
+      {
+        "atom_id": "CA-M-231",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+        "line": 17,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim.md"
+      },
+      {
+        "atom_id": "CA-M-135",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges.md",
+        "line": 16,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges.md"
+      },
+      {
+        "atom_id": "CA-M-114",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms.md",
+        "line": 17,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms.md"
+      },
+      {
+        "atom_id": "CA-E-427",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity.md",
+        "line": 30,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity.md"
+      },
+      {
+        "atom_id": "CA-E-404",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations.md",
+        "line": 24,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations.md"
+      },
+      {
+        "atom_id": "CA-E-407",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary.md",
+        "line": 21,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary.md"
+      },
+      {
+        "atom_id": "CA-E-403",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+        "line": 26,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md"
+      },
+      {
+        "atom_id": "CA-E-402",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets.md",
+        "line": 23,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets.md"
+      },
+      {
+        "atom_id": "CA-E-405",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+        "line": 21,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md"
+      },
+      {
+        "atom_id": "CA-E-424",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms.md",
+        "line": 24,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms.md"
+      },
+      {
+        "atom_id": "CA-E-425",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications.md",
+        "line": 26,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications.md"
+      },
+      {
+        "atom_id": "CA-E-426",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/06_evaluation/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment.md",
+        "line": 31,
+        "text": "  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment.md"
+      }
+    ]
+  },
+  "semantic_tier_parent_check": "All revised origins are Methods/Evaluations. Requirement-only tier-parent constraints are not extended to these roles. M135's inactive R1054 is removed; active direct links remain.",
+  "limits": "Generated and historical full-basename references remain unchanged. One preexisting inbound diagnostic remains; zero candidate or new inbound diagnostics."
+}

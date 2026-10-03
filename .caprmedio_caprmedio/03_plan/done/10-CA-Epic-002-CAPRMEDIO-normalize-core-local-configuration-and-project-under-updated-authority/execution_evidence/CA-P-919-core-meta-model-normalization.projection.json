@@ -1,0 +1,37 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-29T09:23:46+04:00",
+  "schema": "caprmedio.core_meta_model_normalization.execution.v1",
+  "source": {
+    "active_atom_count": 563,
+    "frontier_sha256": "7c7532427b800983b9a66840e7ee52318165a8aea5f03ea253dc52634f51d738",
+    "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL"
+  },
+  "task_atom_id": "CA-P-919",
+  "validation": {
+    "cycle_classification_basis": "Current acyclicity authority is graph-specific; the SUBTYPE_OF graph is acyclic and the observed Claim-Subject dependency cycles are not Term-system violations.",
+    "definition_conflicts": 0,
+    "dependency_cycles_observed": [
+      [
+        "Atom",
+        "Claim"
+      ],
+      [
+        "CCE Operator",
+        "CCE Operator Registry"
+      ],
+      [
+        "Claim-Subject Relation",
+        "Subject"
+      ],
+      [
+        "Job"
+      ]
+    ],
+    "invalid_dependency_cycles": 0,
+    "legacy_subject_schema_atoms": 0,
+    "prohibited_role_specific_type_terms": 0,
+    "subtype_cycles": 0,
+    "term_system_violations": 0
+  }
+}

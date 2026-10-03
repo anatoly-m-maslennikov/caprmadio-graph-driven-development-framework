@@ -1,0 +1,38 @@
+{
+  "task": "CA-P-964@2",
+  "operations": [
+    {
+      "sequence": 1,
+      "kind": "repair_consumer",
+      "identity": "CAPRMEDIO-GOV-REQU-314",
+      "at": "2026-09-10 21:22:59 +0400",
+      "before": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+        "version": 12,
+        "sha256": "0ad6bbcf763a8b823d178aae902c46798bced473a94a1c7b8a3e18613b2ba36a"
+      },
+      "after": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+        "version": 13,
+        "sha256": "2d5d3b03fbab22b02deed5f63d8c27629b9b6555761727120b1d1938e6d780eb"
+      },
+      "archive": {
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists@12.md",
+        "version": 12,
+        "sha256": "0ad6bbcf763a8b823d178aae902c46798bced473a94a1c7b8a3e18613b2ba36a",
+        "byte_exact": true
+      },
+      "reference_id": 5475,
+      "relation": "relates_to",
+      "target_before": "CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types",
+      "target_after": "CAPRMEDIO-GOV-REQU-748",
+      "rationale": "961 clause-specific mapping retains Evaluation Type admission in R748; canonicalize its obsolete decorated filename under D268. No D400 link because the consumer does not own token encoding.",
+      "claim_bytes_preserved": true,
+      "subjects_preserved": true,
+      "unrelated_metadata_and_relation_values_preserved": true,
+      "canonical_relation_order": true,
+      "source_owner_and_general_tier_preserved": true
+    }
+  ],
+  "boundary": "No other source or external mutations. Root owns lifecycle; no Git index, Journal, compiler or runtime work."
+}

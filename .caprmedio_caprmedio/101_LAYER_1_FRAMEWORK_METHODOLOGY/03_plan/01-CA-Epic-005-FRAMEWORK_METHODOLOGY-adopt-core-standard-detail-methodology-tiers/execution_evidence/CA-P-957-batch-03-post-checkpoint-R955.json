@@ -1,0 +1,104 @@
+{
+  "schema": "ca-p-957-post-checkpoint-disposition/v1",
+  "non_authoritative": true,
+  "batch": "03",
+  "frozen_evidence": "CA-P-957-batch-03-dispositions.json",
+  "atom_id": "CA-R-955",
+  "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+  "source_version": 7,
+  "source_sha256": "cafb4aa951e97e6d6db980e02cc7792a80bfa731c0f9ce02a9b1ce0d4727a1e3",
+  "complete_body": "\n# Preserve Producer authority outside the demanded result\n\nA Demand Atom **must not** constrain its Producer Claim Scope outside the exact demanded Implementation result.\n",
+  "status": "Core classification retained; duplicate unchanged authority admission rejected pending reviewed absorption into CA-R-934",
+  "supersedes": "Only R955 unchanged-admission conclusion; frozen batch03 evidence remains an immutable historical proposal.",
+  "comparison": {
+    "R933_vs_R954": {
+      "same_governed_entity": "Atom/Content Role: Requirement/Type: Demand/Producer Result",
+      "same_owner_and_claim_scope": "CORE_META_MODEL; contextual Current-scope",
+      "R933_necessary_contribution": "The single Producer result must be one on which its Consumer's accepted Goal depends.",
+      "R954_necessary_contribution": "The single target must be an Implementation result produced by the Demand's Claim Scope.",
+      "conclusion": "Distinct coherent target constraints: dependency authorization versus target/result kind and production boundary. Shared =1 cardinality does not make the complete Claims duplicates. Retain both unchanged; do not delete either qualifier."
+    },
+    "R934_vs_R955": {
+      "same_governs": [
+        "relation-model"
+      ],
+      "same_dependency_subjects": [
+        "authority",
+        "atom-boundary"
+      ],
+      "same_owner_and_claim_scope": "CORE_META_MODEL; contextual Current-scope",
+      "meaning_equivalence": "R932 defines a Demand as Consumer-owned and constraining its Producer Claim Scope. In this context 'Producer authority outside the exact Implementation result named by the Demand' and 'its Producer Claim Scope outside the exact demanded Implementation result' impose the same exclusion boundary.",
+      "relation_difference": "R934 child_of R933; R955 child_of R934. A normative-parent reference does not supply a new independent Claim or alter the explicit owner/target scope.",
+      "conclusion": "R955 is duplicate authority. Retain the already-active R934 as the unchanged complete Claim owner and propose absorption retirement of R955 after exact inbound-reference and archive planning."
+    }
+  },
+  "proposed_disposition": {
+    "operation": "retire absorbed duplicate CA-R-955",
+    "already_active_preserving_owner": "CA-R-934",
+    "preserving_owner_version": 7,
+    "confidence_percent": 99,
+    "scope_limit": "No expansion beyond this demonstrated duplicate pair; no source mutation before exact checkpoint and root GO."
+  },
+  "comparison_source_bindings": [
+    {
+      "atom_id": "CA-R-933",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-933-CORE_META_MODEL-CORE-REQUIREMENT--restrict-demand-to-one-depended-on-result.md",
+      "version": 10,
+      "sha256": "0da8e0b93f862664ca17e93ba9774b3ce17353ff4ba29e1d1fe7aae83c1011b6",
+      "governs": [
+        "Atom/Content Role: Requirement/Type: Demand/Producer Result"
+      ],
+      "relations": {
+        "child_of": [
+          "CA-R-932"
+        ]
+      },
+      "complete_body": "\n# Restrict Demand to one depended-on result\n\n**every** Demand Atom **must** constrain **`=1`** Producer result on which its Consumer's accepted Goal depends.\n"
+    },
+    {
+      "atom_id": "CA-R-954",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-954-CORE_META_MODEL-CORE-REQUIREMENT--target-one-implementation-result-with-each-demand.md",
+      "version": 9,
+      "sha256": "f8e2322f066902ba88a92d370d2cd85e434da8b8bd3c96987f293202ef561114",
+      "governs": [
+        "Atom/Content Role: Requirement/Type: Demand/Producer Result"
+      ],
+      "relations": {
+        "child_of": [
+          "CA-R-933"
+        ]
+      },
+      "complete_body": "\n# Target one Implementation result with each Demand\n\n**every** Demand Atom **must** constrain **`=1`** Implementation result produced by its Claim Scope.\n"
+    },
+    {
+      "atom_id": "CA-R-934",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-934-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-demanded-result.md",
+      "version": 7,
+      "sha256": "5ec5fe4701dfacd881323689c1b375966aa7aed578e792d83755c55560fb82f3",
+      "governs": [
+        "relation-model"
+      ],
+      "relations": {
+        "child_of": [
+          "CA-R-933"
+        ]
+      },
+      "complete_body": "\n# Preserve Producer authority outside demanded result\n\nA Demand Atom **must not** constrain Producer authority outside the exact Implementation result named by the Demand Atom.\n"
+    },
+    {
+      "atom_id": "CA-R-955",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+      "version": 7,
+      "sha256": "cafb4aa951e97e6d6db980e02cc7792a80bfa731c0f9ce02a9b1ce0d4727a1e3",
+      "governs": [
+        "relation-model"
+      ],
+      "relations": {
+        "child_of": [
+          "CA-R-934"
+        ]
+      },
+      "complete_body": "\n# Preserve Producer authority outside the demanded result\n\nA Demand Atom **must not** constrain its Producer Claim Scope outside the exact demanded Implementation result.\n"
+    }
+  ]
+}

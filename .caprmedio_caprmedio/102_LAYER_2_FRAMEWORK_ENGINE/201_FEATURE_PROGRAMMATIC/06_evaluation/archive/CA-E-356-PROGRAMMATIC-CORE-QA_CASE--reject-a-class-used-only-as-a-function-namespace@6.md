@@ -1,0 +1,43 @@
+---
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  governs: "function-allocation"
+  depends_on:
+    - "programmatic software"
+version: 6
+updated_at: 2026-09-01 02:00:00 +0400
+relations:
+  evaluation_for:
+    - CA-M-157
+  derived_from:
+    - CA-A-053
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Reject a class used only as a function namespace
+
+## Claim checked
+
+One deterministic responsibility that needs no identity **or** owned state is
+implemented as specifically named functions **in** a module rather than as a class
+used **only** for grouping.
+
+## Test case
+
+Evaluate one changed class whose methods are **all** static deterministic
+transformations **and** whose instances own no state, invariant, resource,
+lifecycle, **or** adapter.
+
+## Acceptance criteria
+
+pass **only** **when** the class is rejected **and** the transformations are allocated **to**
+specifically named functions **in** one cohesive module.
+
+## Failure disposition
+
+Reject the changed allocation **until** the namespace-only class is removed.
+
+## Sources
+
+- [CA-M-157 — Allocate deterministic transformations to functions](../05_method/CA-M-157-PROGRAMMATIC-CORE-METHOD--allocate-deterministic-transformations-to-functions.md)

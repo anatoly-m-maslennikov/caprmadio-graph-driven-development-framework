@@ -1,0 +1,1626 @@
+{
+  "schema": "ca-p-957-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "04",
+  "admitted_authority": [
+    "CA-R-660@10",
+    "CA-M-272@1",
+    "CA-D-285@5",
+    "CA-M-273@1",
+    "CA-R-931@9",
+    "CAPRMEDIO-META-REQU-106@15"
+  ],
+  "scope": "35 independently reviewed concrete language, expression, encoding and authoring/evaluation procedure Claims. No mixed/unresolved binding or Requirement-edge repair is included.",
+  "records": [
+    {
+      "atom_id": "CA-R-1204",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects slash as the bearer-qualification operator in Subject Path syntax.",
+      "replacement_witness": "A structured sequence of bearer-edge records can encode exactly the same qualified Entity occurrences without slash notation.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1204",
+      "filename_identity": "CA-R-1204",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-CORE-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "source_version": 5,
+      "source_sha256": "2219e3f9b65b6f221dce48c4cf98cccf3337c00c916e4048cce59427031381ff",
+      "governing_clause_normalized": "in a Subject Path, / must express only one IS_BORNE_BY edge from the following Dependent Entity occurrence to the immediately preceding qualified Entity occurrence.",
+      "complete_body": "\n# Use Subject Path Slash Only for Bearer Qualification\n\n**in** a Subject Path, `/` **must** express **only** one IS_BORNE_BY edge from the following Dependent Entity occurrence to the immediately preceding qualified Entity occurrence.\n",
+      "governs_subjects": [
+        "Subject Path"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Subject Path"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1245",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects colon as the allowed-value qualification operator in Subject Expression syntax.",
+      "replacement_witness": "An explicitly typed allowed-value edge record can preserve the same Property/value relation without colon notation.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1245",
+      "filename_identity": "CA-R-1245",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-CORE-REQUIREMENT--qualify-allowed-values-with-colon.md",
+      "source_version": 4,
+      "source_sha256": "387a0a89a14b82f9b8f5a745b9cf0128b83f9e416579c257a1b7c5a708b01613",
+      "governing_clause_normalized": "in a Subject Expression, : must express only one IS_ALLOWED_VALUE_OF relation from the following value to the immediately preceding Property occurrence.",
+      "complete_body": "\n# Qualify Allowed Values with Colon\n\n**in** a Subject Expression, `:` **must** express **only** one IS_ALLOWED_VALUE_OF relation from the following value to the immediately preceding Property occurrence.\n",
+      "governs_subjects": [
+        "Subject Expression"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Subject Expression"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1297",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a lexical collision-avoidance convention tied to uppercase underscore renderings of CCE operators.",
+      "replacement_witness": "A separate explicit namespace tag for Scope Unit names can prevent operator/name confusion while permitting the same visible spelling.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1297",
+      "filename_identity": "CA-R-1297",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1297-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-cce-operator-scope-unit-names.md",
+      "source_version": 4,
+      "source_sha256": "af334e8a4d8f0536fd8b464f6db8f0de0382d4c405b661df424b6116950bff06",
+      "governing_clause_normalized": "a Scope Unit Name must not equal the uppercase underscore-joined rendering of any word-form CCE Operator.",
+      "complete_body": "\n# Prohibit CCE Operator Scope Unit Names\n\na Scope Unit Name **must not** equal the uppercase underscore-joined rendering of **any** word-form CCE Operator.\n",
+      "governs_subjects": [
+        "Scope Unit/Name"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Scope Unit/Name"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1304",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the concrete segmented Epic Identifier grammar.",
+      "replacement_witness": "An opaque stable Epic key with separately represented scope and summary preserves Epic identity and containment without this segmented identifier.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1304",
+      "filename_identity": "CA-R-1304",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1304-CORE_META_MODEL-CORE-REQUIREMENT--define-epic-identifier-grammar.md",
+      "source_version": 5,
+      "source_sha256": "bf7697910a10af10ea3e10671d93e730ae2ddae666583c659d467d711b68afe3",
+      "governing_clause_normalized": "an Epic Identifier must match <PROJECT_PREFIX>-Epic-<number>-<scope>-<summary>.",
+      "complete_body": "\n# Define Epic Identifier Grammar\n\nan Epic Identifier **must** match `<PROJECT_PREFIX>-Epic-<number>-<scope>-<summary>`.\n",
+      "governs_subjects": [
+        "Atom Collection/Type: Epic/Identifier"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type: Epic/Identifier"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1305",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Reserves a concrete Project-prefix/P identifier spelling for Plan Atoms and excludes Epic use.",
+      "replacement_witness": "A typed identity record with an explicit Plan role discriminator can preserve the Plan/Epic identity distinction without the P spelling.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1305",
+      "filename_identity": "CA-R-1305",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1305-CORE_META_MODEL-CORE-REQUIREMENT--reserve-plan-identifiers-for-plan-atoms.md",
+      "source_version": 6,
+      "source_sha256": "16102f5571f006f341a12e89e9990ec2c3ccf8f77147361945d9449991272dc6",
+      "governing_clause_normalized": "a <PROJECT_PREFIX>-P Identifier must identify a Plan Atom and must not identify an Epic.",
+      "complete_body": "\n# Reserve Plan Identifiers for Plan Atoms\n\na `<PROJECT_PREFIX>-P` Identifier **must** identify a Plan Atom **and** **must not** identify an Epic.\n",
+      "governs_subjects": [
+        "Atom/Identifier"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Identifier"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1322",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects initial capitalization to render Governed Term names.",
+      "replacement_witness": "A governed-term namespace marker or semantic style can distinguish governed terms while preserving exact definitions without initial capitalization.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1322",
+      "filename_identity": "CA-R-1322",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1322-CORE_META_MODEL-CORE-REQUIREMENT--capitalize-governed-term-names.md",
+      "source_version": 3,
+      "source_sha256": "4621f7e20c5a16b5e7209f806c7f8506b5a2667ba9509c44bddff688d822f7e8",
+      "governing_clause_normalized": "every Governed Term name must begin with a capital letter.",
+      "complete_body": "\n# Capitalize Governed Term Names\n\n**every** Governed Term name **must** begin with a capital letter.\n",
+      "governs_subjects": [
+        "Governed Term/name"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Governed Term/name"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1323",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects initial lowercase rendering of General Term names.",
+      "replacement_witness": "An explicit ungoverned-language text role can distinguish ordinary English terms without using lowercase as the discriminator.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1323",
+      "filename_identity": "CA-R-1323",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1323-CORE_META_MODEL-CORE-REQUIREMENT--lowercase-general-term-names.md",
+      "source_version": 3,
+      "source_sha256": "d809256a1dbec3f3cd0454444e71e2e5e4a1bd9a1c07441e5da13bdfa95e6bc9",
+      "governing_clause_normalized": "every General Term name must begin with a lowercase letter.",
+      "complete_body": "\n# Lowercase General Term Names\n\n**every** General Term name **must** begin with a lowercase letter.\n",
+      "governs_subjects": [
+        "General Term/name"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "General Term/name"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1324",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Reserves slash and colon characters from Term names for the selected Subject grammar.",
+      "replacement_witness": "Escaped or length-delimited term strings can preserve exact Term identity and unambiguous Subject parsing while allowing those characters in names.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1324",
+      "filename_identity": "CA-R-1324",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1324-CORE_META_MODEL-CORE-REQUIREMENT--reserve-subject-expression-separators.md",
+      "source_version": 3,
+      "source_sha256": "a948cc268db448ee1a01ee90f1a0900fa4237e60024c8614ae1d9ec252ee8f47",
+      "governing_clause_normalized": "a Term name must not contain / or :.",
+      "complete_body": "\n# Reserve Subject Expression Separators\n\na Term name **must not** contain `/` **or** `:`.\n",
+      "governs_subjects": [
+        "Term/name"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Term/name"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1359",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Defines the chosen X:(A,B,C) Claim Value-Set expression, including its one-property, unordered, unique and single-lifecycle semantic guards.",
+      "replacement_witness": "A typed property/value-set record can preserve the same finite unique allowed values, no value-order authority, and one inseparable Claim lifecycle without colon/parenthesis/comma syntax.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1359",
+      "filename_identity": "CA-R-1359",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1359-CORE_META_MODEL-CORE-REQUIREMENT--define-claim-value-set.md",
+      "source_version": 2,
+      "source_sha256": "614a1839c04673867e2362603c4755c8728e2be18718b7f008d4d39f67619f1a",
+      "governing_clause_normalized": "a Claim Value Set means one Claim expression in the form X: (A, B, C), where X identifies =1 Property and (A, B, C) identifies one finite unordered set of >=1 unique canonical values allowed by X; the value order carries no authority, and the complete set must have one authority unit and lifecycle by accepting, replacing, and retiring all values together as one Claim.",
+      "complete_body": "\n# Define Claim Value Set\n\na Claim Value Set **means** one Claim expression **in** the form `X: (A, B, C)`, **where** X identifies **`=1`** Property **and** `(A, B, C)` identifies one finite unordered set of **`>=1`** unique canonical values allowed by X; the value order carries no authority, **and** the complete set **must** have one authority unit **and** lifecycle by accepting, replacing, **and** retiring **all** values together as one Claim.\n",
+      "governs_subjects": [
+        "Claim Value Set"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Claim Value Set"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1270"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1360",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Defines a particular restricted Boolean grammar and flatten/deduplicate/sort comparison algorithm, explicitly nonauthoritative.",
+      "replacement_witness": "A normalized expression-tree comparison with a different canonical ordering can preserve bounded exact comparison and source nonauthority without this textual grammar or sorting recipe.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1360",
+      "filename_identity": "CA-R-1360",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1360-CORE_META_MODEL-CORE-REQUIREMENT--define-restricted-cce-canonical-signature.md",
+      "source_version": 2,
+      "source_sha256": "f20d9aebcdb36a013f8a3dd0c88005f697e58c5e8e3033da574d58d4972c77aa",
+      "governing_clause_normalized": "a Canonical Signature means one derived non-authoritative comparison value for =1 parenthesized restricted Boolean expression occurrence in one Atom Claim, where group ::= (operand and operand [and operand ...]) | (operand or operand [or operand ...]), operand ::= atomic predicate | nested group with the same Boolean Operator, atomic predicate ::= subject path: value, canonicalization flattens nested same-operator groups, removes duplicate atomic predicates, sorts the remaining atomic predicates, preserves the root Boolean Operator, and excludes mixed Boolean Operators, every other CCE Operator, unrecognized bold token, unbalanced parentheses, and unparseable prose.",
+      "complete_body": "\n# Define Restricted CCE Canonical Signature\n\na Canonical Signature **means** one derived non-authoritative comparison value for **`=1`** parenthesized restricted Boolean expression occurrence **in** one Atom Claim, **where** `group ::= (operand **and** operand [**and** operand ...]) | (operand **or** operand [**or** operand ...])`, `operand ::= atomic predicate | nested group with the same Boolean Operator`, `atomic predicate ::= subject path: value`, canonicalization flattens nested same-operator groups, removes duplicate atomic predicates, sorts the remaining atomic predicates, preserves the root Boolean Operator, **and** excludes mixed Boolean Operators, **every** other CCE Operator, unrecognized bold token, unbalanced parentheses, **and** unparseable prose.\n",
+      "governs_subjects": [
+        "Atom/Claim/Canonical Signature"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Claim/Canonical Signature"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-918"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-1369",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects one Directory Carrier as the physical representation of an Epic.",
+      "replacement_witness": "A separately identified collection record in a single structured Carrier can preserve one Epic identity and its exact containment without giving it a filesystem Directory Carrier.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1369",
+      "filename_identity": "CA-R-1369",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1369-CORE_META_MODEL-CORE-REQUIREMENT--give-every-epic-one-directory-carrier.md",
+      "source_version": 3,
+      "source_sha256": "0045eed0c9511fa71c177695276376bcd84a0b8a07e185f44c964b0337e17fe5",
+      "governing_clause_normalized": "every Epic must have =1 Directory Carrier.",
+      "complete_body": "\n# Give Every Epic One Directory Carrier\n\n**every** Epic **must** have **`=1`** Directory Carrier.\n",
+      "governs_subjects": [
+        "Atom Collection/Type: Epic/Directory Carrier"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Collection/Type: Epic/Directory Carrier"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-946",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the exact registered Project Name as the reference encoding for an external Goal's Project target.",
+      "replacement_witness": "An exact immutable Project identifier reference can preserve the same external Goal target and ownership without encoding the target by registered name.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-946",
+      "filename_identity": "CA-R-946",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-946-CORE_META_MODEL-CORE-REQUIREMENT--resolve-external-goal-claim-scope-exactly.md",
+      "source_version": 14,
+      "source_sha256": "d6f5c0f108166d97b22513cb15046e095d2ca1b1fe595884340c63e9a51f5307",
+      "governing_clause_normalized": "every Goal Atom with no Scope Unit Atom Scope must identify its Project Claim Scope by the exact registered Project Name.",
+      "complete_body": "\n# Resolve External Goal Claim Scope Exactly\n\n**every** Goal Atom with no Scope Unit Atom Scope **must** identify its Project Claim Scope by the exact registered Project Name.\n",
+      "governs_subjects": [
+        "Atom/Claim/Scope"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Claim/Scope"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-927",
+          "CA-R-930"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-R-997",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Constrains the selected decimal ordinal rendering and local uniqueness of Work Sequence labels.",
+      "replacement_witness": "A nondecimal representation of the same positive ordinal with container-scoped uniqueness preserves mutable local navigation without decimal spelling.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-997",
+      "filename_identity": "CA-R-997",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-CORE-REQUIREMENT--validate-work-sequence-numbers.md",
+      "source_version": 8,
+      "source_sha256": "040bf444ae7e167eb7b34470db038ca2b7260197d953abcb8789df7acd5ccf2e",
+      "governing_clause_normalized": "every Work Sequence Number must be a unique positive decimal ordinal among the direct Epic and Task members of one local Plan container.",
+      "complete_body": "\n# Validate Work Sequence Numbers\n\n**every** Work Sequence Number **must** be a unique positive decimal ordinal among the direct Epic **and** Task members of one local Plan container.\n",
+      "governs_subjects": [
+        "Work Sequence Number"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Work Sequence Number"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-991",
+          "CA-R-992",
+          "CA-R-994",
+          "CA-R-995"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-111",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a CCE authoring procedure with explicit Current/Relational representation steps and source-derived navigation outputs.",
+      "replacement_witness": "A human-readable typed Claim form with one exact authority-bearing content value can preserve the same Claim, resolved Scope and directly derived summaries/translations without requiring the Author to write the Claim in CCE or use its selected omitted/explicit Scope representation.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-111",
+      "filename_identity": "CA-M-111",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "source_version": 15,
+      "source_sha256": "93d38ad126ad901e04ce910b38538b7ff124c87ce183438c22722e3f60a53b9a",
+      "governing_clause_normalized": "to author one CAPRMEDIO Atom Claim, the Author must perform all of:",
+      "complete_body": "\n# Author one CCE Claim and derived Summary\n\n**to** author one CAPRMEDIO Atom Claim, the Author **must** perform **all** of:\n\n1. write **`=1`** independently replaceable Claim **in** CAPRMEDIO Controlled English.\n2. resolve **`=1`** atomic **or** composite Claim Scope; omit its duplicate representation for a Current-scope Atom **and** represent its different target explicitly for a Relational Atom.\n3. derive one concise Summary from the complete Claim **and** its resolved Claim Scope.\n4. derive **every** Translation from the complete Claim **and** its resolved Claim Scope rather than from the Summary.\n",
+      "governs_subjects": [
+        "Atom Claim Authoring"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Claim Authoring"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-112",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects English as the base language for Project meaning.",
+      "replacement_witness": "A controlled alternate natural language with exact admitted term mappings can preserve the same governed Claims and authority boundaries while using another base language.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "filename identity; no new identity allocated",
+      "explicit_atom_id": null,
+      "filename_identity": "CA-M-112",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-112-CORE_META_MODEL-CORE-METHOD--use-english-as-the-project-language.md",
+      "source_version": 8,
+      "source_sha256": "05893c87eb62fa93cb39ff03ea83833550d81fb8bf4e0a9070607212911024c0",
+      "governing_clause_normalized": "to express CAPRMEDIO Project meaning, the Author must use English as the base language.",
+      "complete_body": "\n# Use English as the Project language\n\n**to** express CAPRMEDIO Project meaning, the Author **must** use English as the base language.\n",
+      "governs_subjects": [
+        "language"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "language"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-940"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-113",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the identified CCE subset and explicit participant/modality/quantity/term authoring discipline.",
+      "replacement_witness": "A typed authoring form rendered through a different controlled language can preserve one precise complete meaning without this CCE-subset writing procedure.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "filename identity; no new identity allocated",
+      "explicit_atom_id": null,
+      "filename_identity": "CA-M-113",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-CORE-METHOD--write-claims-in-caprmedio-controlled-english.md",
+      "source_version": 9,
+      "source_sha256": "40438ed6970e640a21b5f442f208a60d46fa5e2fb3d24be9ffe66e2e16172c69",
+      "governing_clause_normalized": "to write one Claim in CAPRMEDIO Controlled English, the Author must PERFORM all OF:",
+      "complete_body": "\n# Write Claims in CAPRMEDIO Controlled English\n\n**to** write one Claim **in** CAPRMEDIO Controlled English, the Author **must** PERFORM **all** OF:\n\n1. Use the controlled English subset of the identified CCE version.\n2. Name **every** necessary participant **and** relation explicitly.\n3. State **every** necessary modality, quantity, condition, **and** boundary explicitly.\n4. Use exact canonical terms owned by active Definition Atoms.\n5. Exclude ambiguous pronouns, anaphora, ellipsis, unstated defaults, **and** mixed logical groupings.\n",
+      "governs_subjects": [
+        "language"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "language"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-111",
+          "CA-M-112",
+          "CA-R-941"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-115",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a concrete authoring sequence from independent Claim selection and splitting through Scope representation and CCE writing.",
+      "replacement_witness": "A human-readable typed authoring form can enforce the same independent-Claim split, one resolved target and sole authoritative content while using an alternative controlled representation rather than requiring the current CCE writing and Scope omission procedure.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-115",
+      "filename_identity": "CA-M-115",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-CORE_META_MODEL-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "source_version": 13,
+      "source_sha256": "b03d3e4258ea3d4962c33aa1ff4838a60e1695d543c99ace5f9e386629df3e0a",
+      "governing_clause_normalized": "to author an Atom, the Author must perform all of:",
+      "complete_body": "\n# Author one CCE Claim per Atom\n\n**to** author an Atom, the Author **must** perform **all** of:\n\n1. identify one statement whose complete effect **must** be accepted, replaced, **and** retired together.\n2. split **every** independently replaceable component into another Atom.\n3. identify **`=1`** resolved atomic **or** composite Claim Scope; omit its duplicate representation for a Current-scope Atom **and** represent its different target explicitly for a Relational Atom.\n4. write the complete Claim **in** the current CCE version.\n5. remove **every** duplicate alternate authoritative statement.\n",
+      "governs_subjects": [
+        "Atom Claim Boundary Authoring"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom Claim Boundary Authoring"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-119",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects one-Atom-at-a-time CCE migration and its validation/escalation procedure.",
+      "replacement_witness": "An atomic batch migration with exact per-Atom equivalence, identity/lifecycle preservation and the same confidence escalation can preserve those boundaries without sequentially migrating one Atom at a time.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-119",
+      "filename_identity": "CA-M-119",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-119-CORE_META_MODEL-CORE-METHOD--migrate-atoms-to-a-current-cce-version.md",
+      "source_version": 9,
+      "source_sha256": "190f0539d64215f2f995442637977c5b00aea24c9aac7738c820afa9eb125c64",
+      "governing_clause_normalized": "to migrate Atoms to a current CCE version, the Operator or AI Agent must convert one Atom at a time, preserve its lifecycle and identity, validate its one Claim and derived Projections, and request Operator disposition when semantic confidence is below the effective Confidence Threshold resolved for that migration according to CA-M-271.",
+      "complete_body": "\n# Migrate Atoms to a current CCE version\n\n**to** migrate Atoms **to** a current CCE version, the Operator **or** AI Agent **must** convert one Atom at a time, preserve its lifecycle **and** identity, validate its one Claim **and** derived Projections, **and** request Operator disposition **when** semantic confidence is below the effective Confidence Threshold resolved for that migration according **to** CA-M-271.\n",
+      "governs_subjects": [
+        "CCE migration"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "CCE migration"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-115",
+          "CA-R-380"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-121",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects evaluation rules for the concrete Scope Expression language and innermost-parenthesis execution order.",
+      "replacement_witness": "A typed set-expression evaluator can resolve the same identities and union/intersection/exclusion/filter semantics without interpreting the selected textual operators or parenthesis sequence.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-121",
+      "filename_identity": "CA-M-121",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-121-CORE_META_MODEL-CORE-METHOD--evaluate-scope-expressions.md",
+      "source_version": 9,
+      "source_sha256": "0851a67a730b4c705eb6189550010e3061ead76cd44c3c8d683ac08c05df482e",
+      "governing_clause_normalized": "to evaluate one Scope Expression, the Resolver must perform all of:",
+      "complete_body": "\n# Evaluate Scope Expressions\n\n**to** evaluate one Scope Expression, the Resolver **must** perform **all** of:\n\n1. resolve **every** exact Atom ID **or** other atomic identity to **`=1`** Governed Entity.\n2. interpret **all** `<ENTITY_KIND>` as **every** Governed Entity of that kind within Atom Scope.\n3. interpret **or** as set union.\n4. interpret **and** as set intersection.\n5. interpret **without** as left-side set exclusion.\n6. interpret **where** as retention of **only** members whose field predicate evaluates to true according to CA-M-122.\n7. evaluate the innermost parenthesized set function **before** its containing set function.\n8. use another Scope function **only** **when** an active CCE Method gives that function **`=1`** set meaning.\n",
+      "governs_subjects": [
+        "Scope Expression Evaluation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Scope Expression Evaluation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-122",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the concrete CCE condition evaluator's operator interpretations and parenthesis-first procedure.",
+      "replacement_witness": "A typed predicate tree evaluator can preserve the same decidable comparisons, quantifiers and truth functions without parsing these CCE tokens or evaluating text parentheses.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-122",
+      "filename_identity": "CA-M-122",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-122-CORE_META_MODEL-CORE-METHOD--evaluate-condition-expressions.md",
+      "source_version": 7,
+      "source_sha256": "6c2d3defd80789b1e9bed437a2ffea6c967f9f75384174844a7144ab4b1d5876",
+      "governing_clause_normalized": "to evaluate one CCE condition expression, the Resolver must PERFORM all OF:",
+      "complete_body": "\n# Evaluate Condition Expressions\n\n**to** evaluate one CCE condition expression, the Resolver **must** PERFORM **all** OF:\n\n1. Evaluate the innermost parenthesized function **before** its containing function.\n2. Evaluate **`=`** **and** **`!=`** as exact equality **and** inequality between one governed property **and** one canonical value.\n3. Evaluate **`<`**, **`<=`**, **`>`**, **and** **`>=`** **only** for properties with one governed comparison order.\n4. Evaluate **in** **and** **not in** as scalar membership **and** non-membership **in** one explicitly parenthesized value list, **or** according to CA-M-127 **when** the governed property is set-valued.\n5. Evaluate **is empty** **and** **is not empty** as absence **and** presence of a governed property value.\n6. Evaluate **contains**, **starts with**, **and** **ends with** **only** for governed textual property values.\n7. Evaluate **and** as true **only** **when** **every** argument is true.\n8. Evaluate **or** as true **when** **`>=1`** argument is true.\n9. Evaluate **not** as the inverse truth value of its argument.\n10. Evaluate **if** ... **then** as false **only** **when** its antecedent is true **and** its consequent is false.\n11. Evaluate **every** as true **only** **when** its predicate is true for **every** member of its population.\n12. Evaluate **any** as true **when** its predicate is true for **`>=1`** member of its population.\n13. Evaluate **none** as true **only** **when** its predicate is false for **every** member of its population.\n14. Evaluate **where** as restriction of one population to members whose predicate is true.\n15. Use another logical function **only** **when** an active CCE Method gives that function **`=1`** logical meaning.\n",
+      "governs_subjects": [
+        "CCE Condition Expression Evaluation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "CCE Condition Expression Evaluation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-113"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-123",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the opening Task-is-not-Done-if form, explicit parenthesis rendering and CCE evaluator for Definition of Done authoring.",
+      "replacement_witness": "A structured falsifying-condition record can preserve the exact observable decidable completion boundary without the selected English opening or textual parentheses.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "filename identity; no new identity allocated",
+      "explicit_atom_id": null,
+      "filename_identity": "CA-M-123",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-CORE-METHOD--write-definitions-of-done.md",
+      "source_version": 8,
+      "source_sha256": "28ec894e74d971fdb40acd451d9c03de23a87fa7d8c0aab7e268507ac9ef62cb",
+      "governing_clause_normalized": "to write one Definition of Done, the Author must PERFORM all OF:",
+      "complete_body": "\n# Write Definitions of Done\n\n**to** write one Definition of Done, the Author **must** PERFORM **all** OF:\n\n1. begin the falsification condition expression with: the Task is **not** Done **if**.\n2. Make **every** atomic condition observable **and** decidable.\n3. Enclose **every** composite condition **and** **every** function argument **in** explicit parentheses.\n4. Evaluate the condition expression according to CA-M-122.\n",
+      "governs_subjects": [
+        "semantics"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "semantics"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-113",
+          "CA-M-122",
+          "CA-R-1212",
+          "CA-R-1005"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-127",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects existential membership truth functions for the concrete in/not-in operators on set-valued properties.",
+      "replacement_witness": "Explicit intersects/nonintersects predicates in a typed evaluator can preserve those exact set-membership truth conditions without the selected operator-token convention.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-127",
+      "filename_identity": "CA-M-127",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-127-CORE_META_MODEL-CORE-METHOD--evaluate-set-valued-property-membership.md",
+      "source_version": 8,
+      "source_sha256": "85f51c3e853f0ddfb6f125084963f784bd4adc5471b6c234549ae5c371ccfd48",
+      "governing_clause_normalized": "to evaluate in or not in for one set-valued governed property, the Resolver must evaluate in as true exactly when >=1 property member = one listed value and must evaluate not in as true exactly when no property member = any listed value.",
+      "complete_body": "\n# Evaluate Set-valued Property Membership\n\n**to** evaluate **in** **or** **not in** for one set-valued governed property, the Resolver **must** evaluate **in** as true exactly **when** **`>=1`** property member **`=`** one listed value **and** **must** evaluate **not in** as true exactly **when** no property member **`=`** **any** listed value.\n",
+      "governs_subjects": [
+        "Set-valued Property Membership Evaluation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Set-valued Property Membership Evaluation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-122"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-137",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects resolution through registered TOML Settings Carriers before derived structure, guarded against circular initialization or cross-Project substitution.",
+      "replacement_witness": "An equivalent Settings resolver using another admitted structured Carrier can preserve initialization inputs, owner and source authority without TOML access.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-137",
+      "filename_identity": "CA-M-137",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-137-CORE_META_MODEL-CORE-METHOD--resolve-project-and-framework-settings-before-derived-structure.md",
+      "source_version": 16,
+      "source_sha256": "1f147a4da82df28c1632c4bd9b00f0f8187ea9d7bce2c55869aa34b1843c8920",
+      "governing_clause_normalized": "to operate a Project, resolve its Project Settings and project-owned Framework Instance Settings through their registered authoritative TOML Carriers before using derived Project Structure; do not require an existing Project Atom or Implementation to resolve initialization inputs, substitute a Projection for either Settings Artifact, or read another Project's instance settings.",
+      "complete_body": "\n# Resolve Project and Framework Settings before derived structure\n\n**to** operate a Project, resolve its Project Settings **and** project-owned Framework Instance Settings through their registered authoritative TOML Carriers **before** using derived Project Structure; do **not** require an existing Project Atom **or** Implementation to resolve initialization inputs, substitute a Projection for either Settings Artifact, **or** read another Project's instance settings.\n",
+      "governs_subjects": [
+        "settings"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "settings"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1052"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-225",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects on-demand Subject indexing, GOVERNS-first retrieval and transitive prerequisite expansion while retaining membership order.",
+      "replacement_witness": "A precomputed read-only index keyed to the exact same source frontier can return identical governed matches and prerequisite closure without constructing indexes on demand.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-225",
+      "filename_identity": "CA-M-225",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-CORE_META_MODEL-CORE-METHOD--retrieve-applicable-methodology-mechanically.md",
+      "source_version": 7,
+      "source_sha256": "8310c345f7649192978a76f3c2564218def02e3e20f9925f9351318cc394ef1a",
+      "governing_clause_normalized": "to retrieve Applicable Methodology for one Subject or Process query, the Retriever must derive GOVERNS and DEPENDS_ON indexes on demand from projected Atom Subjects, select matching GOVERNS paths, add DEPENDS_ON authority only through transitive prerequisite closure, retain Applicable Methodology membership order, make no inference, and return no Atom if no matching GOVERNS path exists.",
+      "complete_body": "\n# Retrieve Applicable Methodology Mechanically\n\n**to** retrieve Applicable Methodology for one Subject **or** Process query, the Retriever **must** derive GOVERNS **and** DEPENDS_ON indexes on demand from projected Atom Subjects, select matching GOVERNS paths, add DEPENDS_ON authority **only** through transitive prerequisite closure, retain Applicable Methodology membership order, make no inference, **and** return no Atom **if** no matching GOVERNS path exists.\n",
+      "governs_subjects": [
+        "Applicable Methodology Retrieval"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Applicable Methodology Retrieval"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-228",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects slash/colon append operations for writing bearer- and value-qualified Subject Expressions.",
+      "replacement_witness": "A structured editor can encode the same Primary Entity, bearer chain and allowed values as typed edges without slash/colon textual appends.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-228",
+      "filename_identity": "CA-M-228",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-CORE-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "source_version": 5,
+      "source_sha256": "4eb137e7e3bcf7b9a15f9fa8fc73f24eb0ab1bcd9674f11b529d1ad38a86deac",
+      "governing_clause_normalized": "to write a Subject Expression, start with one Primary Entity, append every bearer-dependent occurrence with /, append every allowed value with :, and continue qualification only from the resulting qualified occurrence.",
+      "complete_body": "\n# Write Subject Expressions with Bearer and Value Qualification\n\n**to** write a Subject Expression, start with one Primary Entity, append **every** bearer-dependent occurrence with `/`, append **every** allowed value with `:`, **and** continue qualification **only** from the resulting qualified occurrence.\n",
+      "governs_subjects": [
+        "Subject Expression Writing"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Subject Expression Writing"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-229",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects capitalization and lowercase-bold formatting to distinguish governed/general terms and CCE operators.",
+      "replacement_witness": "Semantic text spans or explicit namespace tags can preserve these distinctions without capitalization or bold operator rendering.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-229",
+      "filename_identity": "CA-M-229",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL-CORE-METHOD--render-governed-terms-and-cce-operators-distinctly.md",
+      "source_version": 4,
+      "source_sha256": "488cf0ae72c482a8f20660266136f3597f884ee4940e7fb792d41af7f11b873c",
+      "governing_clause_normalized": "to render CAPRMEDIO content, start every Governed Term with a capital letter, start every General Term with a lowercase letter, and render every registered CCE Operator in lowercase bold text, including at the start of a sentence.",
+      "complete_body": "\n# Render Governed Terms and CCE Operators Distinctly\n\n**to** render CAPRMEDIO content, start **every** Governed Term with a capital letter, start **every** General Term with a lowercase letter, **and** render **every** registered CCE Operator **in** lowercase bold text, including at the start of a sentence.\n",
+      "governs_subjects": [
+        "Governed Term Rendering"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Governed Term Rendering"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-230",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Defines the chosen canonical lowercase/symbolic token representation of a registered CCE Operator.",
+      "replacement_witness": "A typed operator identifier can retain its one active Method-owned syntactic/logical function without a lowercase word-form or symbolic token representation.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-230",
+      "filename_identity": "CA-M-230",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-CORE-METHOD--define-registered-cce-operators-through-cce-methods.md",
+      "source_version": 5,
+      "source_sha256": "52ed3ae47b6476474bbb75e6d4441a1ac4547a69a7d429600e7e76ba7509ad3c",
+      "governing_clause_normalized": "within CCE, a CCE Operator means one canonical lowercase word-form token or token sequence or one canonical symbolic token that one active CCE Method assigns one syntactic or logical function.",
+      "complete_body": "\n# Define Registered CCE Operators through CCE Methods\n\nwithin CCE, a CCE Operator **means** one canonical lowercase word-form token **or** token sequence **or** one canonical symbolic token that one active CCE Method assigns one syntactic **or** logical function.\n",
+      "governs_subjects": [
+        "CCE Operator"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "CCE Operator"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-233",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects positive normative phrasing except where a genuine negative constraint must be expressed.",
+      "replacement_witness": "Logically equivalent negative or conditional controlled phrasing can preserve the complete obligation without this positive-prose preference.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-233",
+      "filename_identity": "CA-M-233",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL-CORE-METHOD--prefer-positive-normative-statements.md",
+      "source_version": 4,
+      "source_sha256": "858d927632e7f8d9620d8ce4ff45ee0810ba9251800b2e5fe75014069079a6fe",
+      "governing_clause_normalized": "to author normative Atom prose, the Author must use a positive statement when it preserves the complete Claim and must use a negative statement only for a genuine prohibition, exclusion, or absence constraint.",
+      "complete_body": "\n# Prefer Positive Normative Statements\n\n**to** author normative Atom prose, the Author **must** use a positive statement **when** it preserves the complete Claim **and** **must** use a negative statement **only** for a genuine prohibition, exclusion, **or** absence constraint.\n",
+      "governs_subjects": [
+        "Normative Atom Prose Authoring"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Normative Atom Prose Authoring"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-234",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the concrete expandable CCE operator token registry and its functional admission guard.",
+      "replacement_witness": "A different controlled token vocabulary with exact registered function mappings can preserve modalities, conditions, quantifiers and truth functions without this listed spelling set.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-234",
+      "filename_identity": "CA-M-234",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL-CORE-METHOD--register-expandable-canonical-cce-operator-list.md",
+      "source_version": 5,
+      "source_sha256": "64198b3dcac09a139b4b98621cab00ab8d292a3a36a195ed032c529a9857077e",
+      "governing_clause_normalized": "the current canonical CCE Operator Registry must contain this expandable set:",
+      "complete_body": "\n# Register Expandable Canonical CCE Operator List\n\nthe current canonical CCE Operator Registry **must** contain this expandable set:\n\n1. statement form: **to**, **means**.\n2. modality: **must**, **must not**, **may**.\n3. condition: **if**, **then**, **when**, **otherwise**.\n4. temporal condition: **before**, **after**, **until**, **unless**.\n5. quantification: **all**, **every**, **any**, **none**.\n6. logical/set: **and**, **or**, **not**, **without**, **where**.\n7. restriction: **only**.\n8. predicate: **in**, **not in**, **is empty**, **is not empty**, **contains**, **starts with**, **ends with**.\n9. comparison: **`=`**, **`!=`**, **`<`**, **`<=`**, **`>`**, **`>=`**.\n\nanother token **may** enter the CCE Operator Registry **when** one active CCE Method assigns the token one syntactic **or** logical function.\n",
+      "governs_subjects": [
+        "CCE Operator Registry"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "CCE Operator Registry"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-236",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects six exact lexical normalization rewrites into canonical CCE forms.",
+      "replacement_witness": "A parser producing an equivalent typed syntax tree can preserve the same operator meaning without performing these particular textual rewrites.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-236",
+      "filename_identity": "CA-M-236",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-236-CORE_META_MODEL-CORE-METHOD--normalize-noncanonical-cce-operator-expressions.md",
+      "source_version": 3,
+      "source_sha256": "eea5a347863282ec704c53374425957e0b5e3ee7b1ea4508879b4e2ec46d4e28",
+      "governing_clause_normalized": "to normalize one noncanonical CCE Operator Expression, the Author must apply all applicable rewrites:",
+      "complete_body": "\n# Normalize Noncanonical CCE Operator Expressions\n\n**to** normalize one noncanonical CCE Operator Expression, the Author **must** apply **all** applicable rewrites:\n\n1. `each` to **every**.\n2. `equals` to **`=`**.\n3. `does not equal` to **`!=`**.\n4. `both <A> and <B>` to `(<A>` **and** `<B>)`.\n5. `either <A> or <B>` to `(<A>` **or** `<B>)`.\n6. `neither <A> nor <B>` to **not** `(<A>` **or** `<B>)`.\n",
+      "governs_subjects": [
+        "CCE Operator Expression Normalization"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "CCE Operator Expression Normalization"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-237",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the ordered X:(A,B,C) authoring procedure and its context-sensitive colon disambiguation.",
+      "replacement_witness": "A typed property/value-set authoring form can preserve unique unordered allowed values, one inseparable lifecycle and distinct Subject relations without colon syntax.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-237",
+      "filename_identity": "CA-M-237",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-237-CORE_META_MODEL-CORE-METHOD--author-claim-value-sets.md",
+      "source_version": 3,
+      "source_sha256": "eb866bc5229597390ccbe243062876b7c1dd0b1742eac887a278a67c299841cd",
+      "governing_clause_normalized": "to author one Claim Value Set, the Author must:",
+      "complete_body": "\n# Author Claim Value Sets\n\n**to** author one Claim Value Set, the Author **must**:\n\n1. identify **`=1`** Property X within **`=1`** Claim;\n2. write its finite allowed-value set as `X: (A, B, C)`;\n3. include **`>=1`** unique canonical values **and** treat their order as non-authoritative;\n4. retain the complete set as **`=1`** Claim **only** **if** **all** values **must** be accepted, replaced, **and** retired together;\n5. interpret `:` as Claim Value-Set syntax inside that Claim **and** as **`=1`** IS_ALLOWED_VALUE_OF relation **only** inside a Subject Expression.\n",
+      "governs_subjects": [
+        "Claim Value Set Authoring"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Claim Value Set Authoring"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-115"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-239",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a direct-field dependency graph construction and deterministic identity-tied prerequisite-first topological ordering.",
+      "replacement_witness": "A structured-edge store and another deterministic topological algorithm with declared equivalent tie resolution can preserve the exact dependency partial order, owned inverse and cycle rejection without reading relations.depends_on fields or this recipe.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-239",
+      "filename_identity": "CA-M-239",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-239-CORE_META_MODEL-CORE-METHOD--derive-dependency-order-from-explicit-edges.md",
+      "source_version": 3,
+      "source_sha256": "a3087833d082d95b29e5257cc7b4421d07a7397029f18804e6ee39dd28f805ea",
+      "governing_clause_normalized": "to derive one Artifact dependency order, the resolver must construct one directed graph from direct relations.depends_on edges from every dependent Artifact to every prerequisite Artifact, derive its required_by inverse view without authoring inverse edges, calculate one deterministic prerequisite-first topological order with canonical identity only as a tie-breaker, and reject a cycle; it must not use target-list position, Local Order, or relations.derived_from as a dependency edge.",
+      "complete_body": "\n# Derive Dependency Order from Explicit Edges\n\n**to** derive one Artifact dependency order, the resolver **must** construct one directed graph from direct `relations.depends_on` edges from **every** dependent Artifact **to** **every** prerequisite Artifact, derive its `required_by` inverse view **without** authoring inverse edges, calculate one deterministic prerequisite-first topological order with canonical identity **only** as a tie-breaker, **and** reject a cycle; it **must not** use target-list position, Local Order, **or** `relations.derived_from` as a dependency edge.\n",
+      "governs_subjects": [
+        "Dependency Order Derivation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Dependency Order Derivation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-120"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-240",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a caller-folder, active single-statement inspection procedure for restricted CCE signatures, with explicit diagnostic and no-mutation limits.",
+      "replacement_witness": "An explicit immutable frontier of eligible expression records can yield the same bounded comparisons and exclusions without scanning a selected Carrier folder.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-240",
+      "filename_identity": "CA-M-240",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-240-CORE_META_MODEL-CORE-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md",
+      "source_version": 2,
+      "source_sha256": "ace03669f6da3655993ab0970c04030a79bac70851f01133cac82ba26aa397ba",
+      "governing_clause_normalized": "to derive Canonical Signatures from one selected Atom Carrier folder, the Tool must inspect only active single-statement Atom Claims, identify every outermost parenthesized expression that contains the and Operator or the or Operator, derive a Canonical Signature only if the expression satisfies the Restricted Boolean Expression grammar, emit source-identity evidence and every exclusion diagnostic, and make no source-Carrier rewrite, lifecycle change, Claim merge, or authority decision.",
+      "complete_body": "\n# Derive Restricted CCE Canonical Signatures Without Source Rewrite\n\n**to** derive Canonical Signatures from one selected Atom Carrier folder, the Tool **must** inspect **only** active single-statement Atom Claims, identify **every** outermost parenthesized expression that **contains** the **and** Operator **or** the **or** Operator, derive a Canonical Signature **only** **if** the expression satisfies the Restricted Boolean Expression grammar, emit source-identity evidence **and** **every** exclusion diagnostic, **and** make no source-Carrier rewrite, lifecycle change, Claim merge, **or** authority decision.\n",
+      "governs_subjects": [
+        "Canonical Signature Derivation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Canonical Signature Derivation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-115"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-241",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a folder-and-## Scope-section extraction procedure for bounded signatures and their evidence fields.",
+      "replacement_witness": "An explicit typed Scope-expression frontier can preserve exact identity/revision/digest bindings and all exclusions without relying on folder membership or Markdown Scope sections.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-241",
+      "filename_identity": "CA-M-241",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-241-CORE_META_MODEL-CORE-METHOD--derive-canonical-scope-signatures-without-source-rewrite.md",
+      "source_version": 2,
+      "source_sha256": "60f97c5c2dcf78aa526ebbb4bd7ae41e0d3255fcecc9304e02840fb5886acfdf",
+      "governing_clause_normalized": "to derive Canonical Scope Signatures from one caller-selected Atom Carrier folder, the Tool must inspect only active Carriers with =1 unwrapped Scope Expression in one ## Scope section, resolve every atomic identity against active Atom IDs in that selected folder, derive a signature only if the Scope Expression satisfies the restricted Canonical Scope Signature grammar, emit source identity, source revision, source Carrier digest, source frontier digest, source expression, signature, and exclusion diagnostic, and make no source-Carrier rewrite, lifecycle change, Claim merge, authority decision, or dependency relation.",
+      "complete_body": "\n# Derive Canonical Scope Signatures Without Source Rewrite\n\n**to** derive Canonical Scope Signatures from one caller-selected Atom Carrier folder, the Tool **must** inspect **only** active Carriers with **`=1`** unwrapped Scope Expression **in** one `## Scope` section, resolve **every** atomic identity against active Atom IDs **in** that selected folder, derive a signature **only** **if** the Scope Expression satisfies the restricted Canonical Scope Signature grammar, emit source identity, source revision, source Carrier digest, source frontier digest, source expression, signature, **and** exclusion diagnostic, **and** make no source-Carrier rewrite, lifecycle change, Claim merge, authority decision, **or** dependency relation.\n",
+      "governs_subjects": [
+        "Canonical Scope Signature Derivation"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Canonical Scope Signature Derivation"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-121"
+        ]
+      },
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    },
+    {
+      "atom_id": "CA-M-242",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects a lexical naming convention that excludes verb, instruction, status and activity labels for Content Roles.",
+      "replacement_witness": "Typed role identifiers with separately governed display labels can preserve Content Role versus action/status separation without enforcing this naming convention.",
+      "ordered_test_result": "Concrete-choice test S succeeds for the complete selected expression/representation/procedure Claim. Its semantic guards preserve existing identity, owner, separation and conservation; those guards are not independently rewritten or stripped out. Do not force a General intermediate rung.",
+      "confidence_percent": 99,
+      "body_change": "none",
+      "relation_change": "none",
+      "batch": "04",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-242",
+      "filename_identity": "CA-M-242",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-242-CORE_META_MODEL-CORE-METHOD--exclude-activity-labels-from-content-role-names.md",
+      "source_version": 2,
+      "source_sha256": "4444387f2b2ff291c10f0f39c529202f2373008c1c00ef09eb033a48fa7c2958",
+      "governing_clause_normalized": "to name a Content Role, the Author must not use a verb, imperative, workflow instruction, Status, or activity label.",
+      "complete_body": "\n# Exclude Activity Labels from Content Role Names\n\n**to** name a Content Role, the Author **must not** use a verb, imperative, workflow instruction, Status, **or** activity label.\n",
+      "governs_subjects": [
+        "Content Role Naming"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Content Role Naming"
+        ],
+        "constraints": "Complete unchanged Claim retains every explicit boundary; named Carrier, grammar or procedure is its governed Entity, not a hidden prerequisite for unrelated Claims."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "included; local Active Current-scope RMED independently of Local Tier"
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "2d+1",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d below Project remains unresolved numerically; no folder-derived coordinates.",
+      "direct_relations": {},
+      "relation_impacts": "Preserve all existing direct relations byte-for-byte. Complete active-frontier Requirement endpoint scan finds no new same-tier or upward-to-Standard Requirement-parent consequence from this checkpoint. Other existing unresolved/boundary edges are not declared valid by this check. Method child_of links are not subjected to the Requirement-only peer constraint.",
+      "disposition": "revise carrier metadata and omit CORE token to encode default Standard; preserve complete body and all relations"
+    }
+  ]
+}

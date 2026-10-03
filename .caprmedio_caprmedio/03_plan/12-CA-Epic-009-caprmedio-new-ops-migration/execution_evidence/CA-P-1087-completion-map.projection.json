@@ -1,0 +1,172 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1087",
+  "generated_at": "2026-09-13T05:52:34+04:00",
+  "status": "Done",
+  "source_changes": [],
+  "changes": [
+    {
+      "identity": "CA-P-1087",
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/01-CA-P-1087-TASK--inventory-projection-and-journal-authority@1.md",
+      "version": 1,
+      "sha256": "872c1d3edbe9ead57bd43744dc3641dd4d9d956dd9b35ef87729341a2a12c85f",
+      "purpose": "Exact prior Task revision"
+    },
+    {
+      "identity": "CA-P-1087",
+      "action": "MOVE+UPDATE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/01-CA-P-1087-TASK--inventory-projection-and-journal-authority.md",
+      "before_version": 1,
+      "before_sha256": "872c1d3edbe9ead57bd43744dc3641dd4d9d956dd9b35ef87729341a2a12c85f",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/done/01-CA-P-1087-TASK--inventory-projection-and-journal-authority.md",
+      "version": 2,
+      "sha256": "3870f1cdedb6e4c9d8afb99d1f3cc97ee613f87989722681431bd82551e4d316",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/01-CA-P-1087-TASK--inventory-projection-and-journal-authority@1.md"
+    },
+    {
+      "identity": null,
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "version": 1,
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    {
+      "identity": null,
+      "action": "ADD",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-authority-boundary-report.md",
+      "version": 1,
+      "sha256": "f1f4212f3d22f5aa5b15558e2f74f820deac34ae0e53044a51183b07ef39f6c0"
+    }
+  ],
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_change_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      }
+    ],
+    "frontier_count": 1562,
+    "core_count": 680,
+    "excluded_drafts": 53,
+    "source_root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL",
+    "allowed_roles": [
+      "R",
+      "M",
+      "E",
+      "D",
+      "O"
+    ]
+  },
+  "validation": {
+    "task_dod_falsifier": false,
+    "selected_source_count": 155,
+    "epic_016_mutation_reservations": 50,
+    "downstream_mutation_reservations": 30,
+    "read_only_selected_sources": 75,
+    "bounded_ownership_transfers": 27,
+    "core_screened_count": 680,
+    "unselected_core_count": 525,
+    "all_source_hashes_unchanged": 1562,
+    "excluded_drafts_unchanged": 53,
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "other_tasks_changed": 0,
+    "new_source_ids": 0,
+    "tasks_after": 116,
+    "done_after": 9,
+    "active_after": 107,
+    "implementation_conformance_claimed": false
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1087-inventory-projection-and-journal-authority",
+    "append_only": true,
+    "receipt_binding": "New sealed events for exactly these administrative outputs and this map; prior Task result found by exact hash/version and referenced without replay."
+  },
+  "next_task": "CA-P-1086",
+  "remaining_future_decisions": [
+    {
+      "finding": "PJ01",
+      "owner": "CA-P-1086",
+      "disposition": "Reconcile generic derivation and exact source traceability without treating every fact as an Atom Claim or requiring every source kind in every Projection. Declared/consumed sources and persisted metadata remain distinct."
+    },
+    {
+      "finding": "PJ02",
+      "owner": "CA-P-1086",
+      "disposition": "Record the exact canonical paths in P1086; do not preselect Projection/Type: Entities Graph or create an independent graph taxonomy. Preserve Entity/Action/Process domains, distinct valid Claims and established selection behavior. Universal R/D/M/E counts remain undecided."
+    },
+    {
+      "finding": "PJ03",
+      "owner": "CA-P-1086",
+      "disposition": "Review analogous source-versus-Projection assignments only. Do not turn Summary into a separately identified Artifact or weaken its source-faithfulness rule; preserve admitted specialist semantics."
+    },
+    {
+      "finding": "PJ04",
+      "owner": "CA-P-1088",
+      "disposition": "Reuse coherent Claims and establish only missing general model distinctions. Corrections append records. No physical two-log requirement, per-Scope-Unit Journal, historical data migration or full-outcome proof from a receipt."
+    },
+    {
+      "finding": "PJ05",
+      "owner": "CA-P-1089",
+      "disposition": "P1086 owns classification in R1408/R1409; P1089 reads those results and owns generic participation/identity rules. Do not collapse represented relations with relations connecting the Artifact, duplicate shared Entity identity, or classify all underlying structural facts as derived."
+    },
+    {
+      "finding": "PJ06",
+      "owner": "CA-P-1089",
+      "disposition": "Transfer generic registry reconciliation from P1083 to P1089; preserve D source authority with P1090. Resolve signatures from admitted authority or ask at the 99-percent gate. No guessed graph owner, universal vocabulary, or invented edge is frozen by this inventory."
+    },
+    {
+      "finding": "PJ07",
+      "owner": "CA-P-1090",
+      "disposition": "P1090 owns generic D and record identity representation; P1084 retains only view-specific refinements. No universal JSON, monolithic methodology output, persistent Subject index inside Applicable Methodology, Carrier relocation or settings-value changes."
+    },
+    {
+      "finding": "PJ08",
+      "owner": "CA-P-983",
+      "disposition": "P983 consumes general source/Journal/Carrier authority and specializes state-change versus process-execution records. Keep one fact and reference it; permit read-only executions without fabricated changes. P1091 must hand off this remaining specialization explicitly, not claim it complete."
+    },
+    {
+      "finding": "PJ09",
+      "owner": "CA-P-1082",
+      "disposition": "P1082 owns Subject links/reverse navigation; P1083 owns composition; P980 owns operational flow. M232 remains P1082; its replacement exception under M274 is not approved."
+    },
+    {
+      "finding": "PJ10",
+      "owner": "CA-P-1090",
+      "disposition": "Required pre-execution Task metadata repair for P1090 and P1084 under exact Carrier authority; root coordinates that separate administrative change. This inventory neither edits those Tasks nor transfers source ownership because of the metadata issue."
+    },
+    {
+      "finding": "PJ11",
+      "owner": "CA-P-1091",
+      "disposition": "P1091 owns necessary generic E coverage and the seven accepted authority scenarios. P1085 later validates graph-view integration. Fixtures, source hashes and Journal receipts are bounded evidence and cannot prove generator/runtime conformity."
+    }
+  ]
+}

@@ -1,0 +1,476 @@
+{
+  "schema": "ca-p-957-full-basename-reference-audit/v1",
+  "non_authoritative": true,
+  "batch": "01",
+  "searched_markdown_files": 10071,
+  "search": "Read-only literal current basename search in every rg-discovered repository Markdown file, including hidden source and historical/generated surfaces; excludes .git.",
+  "references": [
+    {
+      "target_atom_id": "CA-M-235",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/05_method/CA-M-235-CORE_META_MODEL-CORE-METHOD--express-cardinality-with-comparison-operators-and-integer-literals.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-293",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-293-CORE_META_MODEL-CORE-DELIVERY--serialize-epic-directory-names.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-295",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-295-CORE_META_MODEL-CORE-DELIVERY--place-carriers-by-revision-status.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-271",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-271-CORE_META_MODEL-CORE-DELIVERY--serialize-task-sections.md",
+      "lines": [
+        20
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-280",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-280-CORE_META_MODEL-CORE-DELIVERY--serialize-cce-operators-in-bold.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-302",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-302-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-357",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-357-CORE_META_MODEL-CORE-DELIVERY--define-markdown-atom-main-content.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-275",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-275-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-assignee.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-330",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-330-CORE_META_MODEL-CORE-DELIVERY--preserve-github-file-preview-compatibility.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-310",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-310-CORE_META_MODEL-CORE-DELIVERY--serialize-projection-updated-at.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-367",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-367-CORE_META_MODEL-CORE-DELIVERY--serialize-claim-scope-only-for-relational-atoms.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-336",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-336-CORE_META_MODEL-CORE-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-355",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-355-CORE_META_MODEL-CORE-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-269",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-269-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-331",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-331-CORE_META_MODEL-CORE-DELIVERY--keep-durable-hub-navigation-at-folder-level.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-272",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-272-CORE_META_MODEL-CORE-DELIVERY--serialize-task-dependencies-as-direct-relations.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-346",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-346-CORE_META_MODEL-CORE-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections.md",
+      "lines": [
+        19
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-267",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-267-CORE_META_MODEL-CORE-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-353",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-353-CORE_META_MODEL-CORE-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-276",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-276-CORE_META_MODEL-CORE-DELIVERY--use-economical-yaml-frontmatter.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-290",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-290-CORE_META_MODEL-CORE-DELIVERY--omit-version-suffixes-from-active-carriers.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-288",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-288-CORE_META_MODEL-CORE-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-306",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-306-CORE_META_MODEL-CORE-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-287",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-287-CORE_META_MODEL-CORE-DELIVERY--serialize-demand-type-and-producer-scope.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-307",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-307-CORE_META_MODEL-CORE-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-335",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-335-CORE_META_MODEL-CORE-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-268",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-342",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-342-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-references.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-264",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-264-CORE_META_MODEL-CORE-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-299",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-299-CORE_META_MODEL-CORE-DELIVERY--serialize-root-delivery-directory-names.md",
+      "lines": [
+        20
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-292",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-292-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-filenames.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-274",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-274-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-atom-revision-author.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-301",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-301-CORE_META_MODEL-CORE-DELIVERY--require-portable-safe-carrier-addresses.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-347",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-347-CORE_META_MODEL-CORE-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections.md",
+      "lines": [
+        19
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-262",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-262-CORE_META_MODEL-CORE-DELIVERY--register-current-file-carrier-formats.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-298",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-298-CORE_META_MODEL-CORE-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories.md",
+      "lines": [
+        19
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-291",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-291-CORE_META_MODEL-CORE-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-334",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-334-CORE_META_MODEL-CORE-DELIVERY--serialize-governed-change-commit-messages.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-351",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-351-CORE_META_MODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-294",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-294-CORE_META_MODEL-CORE-DELIVERY--serialize-task-filenames.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-270",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-270-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-278",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-278-CORE_META_MODEL-CORE-DELIVERY--omit-resolved-frontmatter-defaults.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-339",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-339-CORE_META_MODEL-CORE-DELIVERY--serialize-implementation-journal-carriers.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-356",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-356-CORE_META_MODEL-CORE-DELIVERY--structure-markdown-atom-carriers.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-297",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-297-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-authority-directory-names.md",
+      "lines": [
+        20
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-350",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-350-CORE_META_MODEL-CORE-DELIVERY--serialize-objective-filenames.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-296",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-296-CORE_META_MODEL-CORE-DELIVERY--materialize-content-role-directories-on-first-artifact.md",
+      "lines": [
+        17
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-329",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-329-CORE_META_MODEL-CORE-DELIVERY--serialize-proof-frontier-references.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-313",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-313-CORE_META_MODEL-CORE-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-277",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-277-CORE_META_MODEL-CORE-DELIVERY--serialize-safe-frontmatter-scalars.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-282",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-282-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-284",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-284-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-token-case.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-286",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-286-CORE_META_MODEL-CORE-DELIVERY--serialize-goal-type-as-defines-goal-for.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-281",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-281-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-289",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-289-CORE_META_MODEL-CORE-DELIVERY--serialize-archive-revision-version-suffixes.md",
+      "lines": [
+        16
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-300",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-300-CORE_META_MODEL-CORE-DELIVERY--size-structural-level-prefixes-dynamically.md",
+      "lines": [
+        18
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-283",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-283-CORE_META_MODEL-CORE-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    },
+    {
+      "target_atom_id": "CA-D-279",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/07_delivery/CA-D-279-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines.md",
+      "lines": [
+        13
+      ],
+      "disposition": "Generated Applicable Methodology source-path reference; outside source-only Task. Retain and report for later governed regeneration."
+    }
+  ],
+  "active_source_references": 0,
+  "other_non_generated_markdown_references": 0,
+  "limitation": "This audit is exact full-basename references in Markdown, not arbitrary external systems or non-Markdown consumers. Stable-ID relation links do not require a rename."
+}

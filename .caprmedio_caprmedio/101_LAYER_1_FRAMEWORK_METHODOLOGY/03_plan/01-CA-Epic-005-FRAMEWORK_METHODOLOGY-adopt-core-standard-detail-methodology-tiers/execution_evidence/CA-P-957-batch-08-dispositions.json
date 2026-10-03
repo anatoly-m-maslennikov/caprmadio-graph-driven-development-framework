@@ -1,0 +1,2567 @@
+{
+  "schema": "ca-p-957-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "08",
+  "admitted_authority": [
+    "CA-R-1431@1",
+    "CA-M-272@1",
+    "CA-M-273@1",
+    "CA-R-879@13",
+    "CA-R-829@11"
+  ],
+  "scope": "38 origin dispositions plus4 authorized Local Configuration basename-only dependency repairs. No new policy, body changes, registry normalization or external tier classification.",
+  "records": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-335",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies when clarification may be omitted through four independently configured confidence gates, while retaining the foundational authority restriction.",
+      "concrete_choice_test": "False: no test specimen, interface, evaluator implementation or algorithm is selected.",
+      "foundation_test": "The exact conjunction of clarification-gate criteria is an additional shared policy, not what Operator authority or confidence means.",
+      "preserving_realizations": [
+        "A policy engine evaluates the four contextual confidence requirements before omitting clarification.",
+        "A human-reviewed decision table checks the same four requirements and active approval conditions."
+      ],
+      "countermodel": "Require clarification for every new route even when all four confidence requirements pass. Authority remains bounded and confidence still creates no permission; the clarification eligibility contract changes.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-335-CORE_META_MODEL-REQUIREMENT--govern-ca-execution-gates.md",
+      "source_version": 10,
+      "source_sha256": "8559c9a6c1390169f8f5c59fad990b62b2f321e793aa8fdb900ef4d4d9b0775a",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-335",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-335",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "interaction"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "interaction"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An identified AI Agent may omit clarification only when intent, scope, route, and entry-criteria confidence every satisfies its configured requirement. Confidence must not create delegated authority or bypass per-action Operator approval when active authority requires it.",
+      "complete_body": "\n# Govern CA execution gates\n\nAn identified AI Agent **may** omit clarification **only** **when** intent, scope, route, **and** entry-criteria confidence **every** satisfies its configured requirement. Confidence **must not** create delegated authority **or** bypass per-action Operator approval **when** active authority requires it.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-144-CORE_META_MODEL-REQUIREMENT--keep-confidence-subordinate-to-authority"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-144-CORE_META_MODEL-REQUIREMENT--keep-confidence-subordinate-to-authority",
+          "after": "CAPRMEDIO-META-REQU-144",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-337",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects the src/stg/mrt/biz pipeline vocabulary, NDJSON-to-TOON staging representation and forward dependency procedure as one generated-data pipeline convention.",
+      "replacement_witness": "Use different stage tokens and a lossless canonical JSON staging representation, retaining exact Journal authority, source-frontier binding, forward-only transformation dependencies and non-authoritative derived outputs; this concrete pipeline convention changes.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stage-prefixes.md",
+      "source_version": 9,
+      "source_sha256": "d863208e088fddb5e5836d483a267beab97291db8d327ed182d091f1ddce53a9",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-337",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-337",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Generated Data Stage Prefix"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Generated Data Stage Prefix"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "the following ordered vocabulary must be registered for generated-data pipeline stages:",
+      "complete_body": "\n# Register generated-data stage prefixes\n\nthe following ordered vocabulary **must** be registered for generated-data pipeline stages:\n\n| Prefix | Stage meaning |\n| --- | --- |\n| `src` | Canonical NDJSON Journal input; authority comes from the Journal, **not** the prefix. |\n| `stg` | Deterministic, lossless TOON projection of a bounded `src` frontier. |\n| `mrt` | Consumer-ready semantic Projection, including Requirement groupings by scope **and** tier **or** Mermaid relation maps. |\n| `biz` | Aggregated CAPRMEDIO artifact **and** implementation metrics, including point-in-time snapshots **and** historical trends. |\n\nDependencies **must** move forward through `src → stg → mrt → biz`; a stage **may** depend on **any** earlier registered stage but **must not** depend on a later stage. These prefixes classify Journal inputs **and** generated Projections **only**. Unregistered stage prefixes remain available for later governed extension.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-150-CORE_META_MODEL-REQUIREMENT--keep-data-stages-orthogonal-to-artifact-semantics"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-150-CORE_META_MODEL-REQUIREMENT--keep-data-stages-orthogonal-to-artifact-semantics",
+          "after": "CAPRMEDIO-META-REQU-150",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-080",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Qualifies an effect guarantee by its explicit scope, assumptions, owner, time and enforcement; bounded guarantee is not universal exactly-once truth.",
+      "negation_witness": "Claim universal exactly-once effect from a merely local conditional guarantee; the asserted truth exceeds its constitutive scope.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-080-CORE_META_MODEL-REQUIREMENT--requirement-bound-effect-guarantees.md",
+      "source_version": 8,
+      "source_sha256": "fbb4cbea7866b4c1fbbc3e75062cfbb02c27b81cb9f72c770dde3a9b8d1bf72b",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-080",
+      "filename_identity": "CAPRMEDIO-META-REQU-080",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "evaluation"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "evaluation"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "CAPRMEDIO permits an effect guarantee only when its scope, assumptions, owner, temporal boundary, and enforcement conditions are explicit. A bounded local guarantee must never be presented as universal exactly-once execution.",
+      "complete_body": "\n# Requirement — Bound effect guarantees\n\n## Primary claim\n\nCAPRMEDIO permits an effect guarantee **only** **when** its scope, assumptions, owner, temporal boundary, **and** enforcement conditions are explicit. A bounded local guarantee **must** never be presented as universal exactly-once execution.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-088",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules.md",
+            "filename": "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules.md",
+            "version": 13,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-092",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates semantic authority, realization, enacted facts/evidence and verification judgment.",
+      "negation_witness": "Allow a dashboard, Evaluation result or evidence record to rewrite the normative Claim; observational reliance replaces semantic authority.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-092-CORE_META_MODEL-REQUIREMENT--authority-evaluation-and-ops-remain-distinct.md",
+      "source_version": 11,
+      "source_sha256": "66c65564146f5f0aa9acd9ca7d49b4156b3efddd312fbac598e9e7dca01e115f",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-092",
+      "filename_identity": "CAPRMEDIO-META-REQU-092",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "authority"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "authority"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "CAPRMEDIO distinguishes authoritative Requirements, Methods, Evaluation criteria, and Delivery rules; concrete Implementations of those accepted claims; enacted execution, factual Ops records, and claim-bound evidence; and verification judgments about sufficiency and currentness. Evaluation material, evaluations, evidence, dashboards, and verification judgments may support, challenge, or invalidate reliance on a claim, but cannot establish, edit, replace, or override semantic authority.",
+      "complete_body": "\n# Authority, Evaluation, and Ops remain distinct\n\nCAPRMEDIO distinguishes authoritative Requirements, Methods, Evaluation criteria, **and** Delivery rules; concrete Implementations of those accepted claims; enacted execution, factual Ops records, **and** claim-bound evidence; **and** verification judgments about sufficiency **and** currentness. Evaluation material, evaluations, evidence, dashboards, **and** verification judgments **may** support, challenge, **or** invalidate reliance on a claim, but cannot establish, edit, replace, **or** override semantic authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-M-001"
+        ]
+      },
+      "relation_impacts": [],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-093",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates factual Ops input from interpretive Analysis, including their admission as distinct contributions when one Carrier mixes them.",
+      "negation_witness": "Admit a causal interpretation as the occurred Ops fact itself; factual report and explanation acquire one indistinguishable meaning.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-093-CORE_META_MODEL-REQUIREMENT--requirement-separate-analysis-from-factual-ops-records.md",
+      "source_version": 8,
+      "source_sha256": "f62db6f9f16085283365fc3376a71771f53315c625a7da737808b427001c2438",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-093",
+      "filename_identity": "CAPRMEDIO-META-REQU-093",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "evaluation"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "evaluation"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Ops records what occurred, was measured, or was reported during enacted execution or operation, with its available provenance and context. Examples include logs, complaints, tickets, errors, execution outputs, measurements, delivery outcomes, and externally received operational reports.",
+      "complete_body": "\n# Requirement — Separate Analysis from factual Ops records\n\nOps records what occurred, was measured, **or** was reported during enacted execution **or** operation, with its available provenance **and** context. Examples include logs, complaints, tickets, errors, execution outputs, measurements, delivery outcomes, **and** externally received operational reports.\n\nAn Ops record does **not** explain causes, justify a choice, synthesize implications, **or** prescribe a required outcome, method, evaluation mechanism, **or** delivery path.\n\nAnalysis interprets Concerns, Ops records, Requirements, Methods, Evaluation, Delivery, **or** Implementations. It **may** compare alternatives, investigate causes, synthesize findings, explain implications, **and** provide rationale for a Requirement, Method, Evaluation rule, **or** Delivery rule.\n\n**when** one carrier mixes factual input with interpretation, the factual Ops record **and** interpretive Analysis are separate governed artifacts linked by explicit relations.\n\n## Primary claim\n\nFactual Ops records **and** interpretive Analysis are separate semantic contributions.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-094",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves mechanism-neutral Evaluation authority and distinct, attributable Implementation/Ops/Evidence/Verification chains, even with shared runners or many-to-many coverage.",
+      "negation_witness": "Let one shared runner merge covered Claims or treat its Ops result as the Evaluation specification; role boundaries and attributable coverage disappear.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct.md",
+      "source_version": 10,
+      "source_sha256": "a8eb49cd2ba2e3b4958fd18b5d7f5140176aa4ab3b9940049242320181f8911c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-094",
+      "filename_identity": "CAPRMEDIO-META-REQU-094",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "evaluation"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "evaluation"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "A mechanism-neutral Evaluation Atom defines what claim is checked, the applicable conditions, the acceptance criteria, and the disposition rule. It does not prescribe whether the check is realized by an automated test, model-judged evaluation, statistical assessment, rubric, manual review, or another implementation mechanism.",
+      "complete_body": "\n# Requirement — Keep Evaluation Atoms mechanism-neutral and chains distinct\n\nA mechanism-neutral Evaluation Atom defines what claim is checked, the applicable conditions, the acceptance criteria, **and** the disposition rule. It does **not** prescribe whether the check is realized by an automated test, model-judged evaluation, statistical assessment, rubric, manual review, **or** another implementation mechanism.\n\nOne Evaluation Atom **may** be realized by multiple distinct evaluation implementations. One implementation **may** realize multiple Evaluation Atoms **only** **when** its result remains attributable to **every** covered claim. Coverage is many-to-many but never implicit.\n\nDeterministic Test implementations **and** qualitative, probabilistic, statistical, rubric-based, **or** model-judged Evaluation implementations retain distinct chains. **every** chain keeps its executable Implementation, configuration **or** rubric, factual Ops result, Evidence, **and** Verification judgment distinguishable. A shared runner, prompt, judge, report, **or** gate does **not** merge their meanings, results, **or** coverage.\n\nTest **and** Evaluation describe implementation mechanisms, **not** Type values under Content Role Evaluation. The Evaluation Atom remains the authority; executable mechanisms are Implementation, **and** their enacted results are Ops.\n\n## Primary claim\n\nEvaluation Atoms remain mechanism-neutral authority, while Test **and** Evaluation implementations **and** their factual Ops results remain distinct, attributable chains.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-104",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates required externally observable outcomes from internal construction Methods, Delivery rules and operative Implementation; mixed independent contributions must retain their roles.",
+      "negation_witness": "Treat internal code organization as the externally required outcome or let one independently replaceable construction rule redefine Requirement identity; semantic roles collapse.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-104-CORE_META_MODEL-REQUIREMENT--requirement-keep-requirements-realization-agnostic.md",
+      "source_version": 8,
+      "source_sha256": "076c19eafa39507706dbf520e875aeddbf847d6113602e50142595e7da637535",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-104",
+      "filename_identity": "CAPRMEDIO-META-REQU-104",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "semantics"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "semantics"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every Requirement states an outcome, obligation, or externally observable boundary that the governed product or project must, may, or must not satisfy without prescribing its internal code or code organization.",
+      "complete_body": "\n# Requirement — Keep Requirements realization-agnostic\n\n**every** Requirement states an outcome, obligation, **or** externally observable boundary that the governed product **or** project **must**, **may**, **or** **must not** satisfy **without** prescribing its internal code **or** code organization.\n\nA normative choice about programming languages, libraries, algorithms, functions, classes, modules, source-file structure, **or** another construction technique is Method. A normative choice about packaging, release, deployment, distribution, installation, migration, upgrade, **or** rollback is Delivery. The concrete code, configuration, schema realization, executable automation, **or** other operative asset is Implementation.\n\nA Requirement **may** preserve an accepted external interface, protocol, data shape, **or** host obligation **when** conformance to that boundary is itself required. It does **not** thereby prescribe the project's internal realization. A candidate that combines an independently replaceable outcome with a code-facing Method **or** Delivery rule **must** be split **before** admission.\n\n## Primary claim\n\nRequirements are realization-agnostic; code-facing construction rules belong to Method, delivery-path rules belong to Delivery, **and** operative code **and** configuration belong to Implementation.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification",
+          "CAPRMEDIO-META-REQU-106-CORE_META_MODEL-CORE-REQUIREMENT--keep-the-core-meta-model-implementation-neutral"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-091",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification.md",
+            "filename": "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification.md",
+            "version": 12,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-106-CORE_META_MODEL-CORE-REQUIREMENT--keep-the-core-meta-model-implementation-neutral",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-106-CORE_META_MODEL-CORE-REQUIREMENT",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-106-CORE_META_MODEL-CORE-REQUIREMENT--keep-the-core-meta-model-implementation-neutral.md",
+            "filename": "CAPRMEDIO-META-REQU-106-CORE_META_MODEL-CORE-REQUIREMENT--keep-the-core-meta-model-implementation-neutral.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-112",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Binds Atom Type admission to an actual independently governed atomic unit rather than an empty coordinate placeholder.",
+      "negation_witness": "Admit a placeholder Atom Type with no atomic governed contribution merely to fill a matrix; the Type asserts atomic identity without an Atom.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-112-CORE_META_MODEL-REQUIREMENT--admit-atoms-only-where-a-role-has-an-atomic-unit.md",
+      "source_version": 11,
+      "source_sha256": "e4bb67b52b7e7bcef8ddbe9304ae7cbfa0c5b10b7b66d3d79dddcb8557b9b74d",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-112",
+      "filename_identity": "CAPRMEDIO-META-REQU-112",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "a Content Role admits a Type value for an Atom only when that role has an independently governed atomic unit that benefits from stable identity, admission, and whole-unit lifecycle; CAPRMEDIO must not create a placeholder Type value merely to fill a semantic coordinate.",
+      "complete_body": "\n# Admit Atoms only where a role has an atomic unit\n\na Content Role admits a Type value for an Atom **only** **when** that role has an independently governed atomic unit that benefits from stable identity, admission, **and** whole-unit lifecycle; CAPRMEDIO **must not** create a placeholder Type value merely to fill a semantic coordinate.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types",
+          "CAPRMEDIO-META-REQU-124-CORE_META_MODEL-CORE-REQUIREMENT--make-requirement-the-only-universally-mandatory-atom",
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-113",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types.md",
+            "filename": "CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types.md",
+            "version": 11,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-124-CORE_META_MODEL-CORE-REQUIREMENT--make-requirement-the-only-universally-mandatory-atom",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-124",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-124-CORE_META_MODEL-CORE-REQUIREMENT--make-requirement-the-only-universally-mandatory-atom.md",
+            "filename": "CAPRMEDIO-META-REQU-124-CORE_META_MODEL-CORE-REQUIREMENT--make-requirement-the-only-universally-mandatory-atom.md",
+            "version": 10,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-125",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "filename": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-143",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Classifies enacted release, deployment, health and incident facts as Ops, not normative change.",
+      "negation_witness": "Let a successful deployment event establish a new Requirement or Delivery Claim; what occurred becomes authority for what ought to occur.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-143-CORE_META_MODEL-REQUIREMENT--classify-enacted-release-and-runtime-facts-as-ops.md",
+      "source_version": 7,
+      "source_sha256": "c430d3f9d18b824510c690ea48556914566eb58532892cb0b5636a5eaf0ae71c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-143",
+      "filename_identity": "CAPRMEDIO-META-REQU-143",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "semantics"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "semantics"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "CAPRMEDIO must classify successful and failed release or deployment events, deployed environment state, runtime health, and incidents as Ops. Ops records enacted facts and their bounded evidence without establishing or silently changing Plan, Requirement, Method, Evaluation, or Delivery authority.",
+      "complete_body": "\n# Classify enacted release and runtime facts as Ops\n\nCAPRMEDIO **must** classify successful **and** failed release **or** deployment events, deployed environment state, runtime health, **and** incidents as Ops. Ops records enacted facts **and** their bounded evidence **without** establishing **or** silently changing Plan, Requirement, Method, Evaluation, **or** Delivery authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-144",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Preserves the separation between confidence and Operator authority.",
+      "negation_witness": "Treat high confidence as delegated authority to act; epistemic assurance silently creates permission.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-144-CORE_META_MODEL-REQUIREMENT--keep-confidence-subordinate-to-authority.md",
+      "source_version": 7,
+      "source_sha256": "ea260239e7eb0aab1838687497014489f681038fff6db354a52a918f909c25a5",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-144",
+      "filename_identity": "CAPRMEDIO-META-REQU-144",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "authority"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "authority"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Execution confidence must never create, extend, or replace operator authority.",
+      "complete_body": "\n# Keep confidence subordinate to authority\n\nExecution confidence **must** never create, extend, **or** replace operator authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-129",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "filename": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "version": 14,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-145",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Distinguishes ephemeral session control from an admitted, persisted Plan Artifact.",
+      "negation_witness": "Treat an unadmitted scratch plan as an authoritative Plan Artifact; ephemeral intention gains governed identity and lifecycle without admission.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-145-CORE_META_MODEL-REQUIREMENT--distinguish-operative-plans-from-plan-artifacts.md",
+      "source_version": 7,
+      "source_sha256": "fbbf3e57c90924c558da72126b8161716a656da9feb2fb27f35c6ba14834e2c0",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-145",
+      "filename_identity": "CAPRMEDIO-META-REQU-145",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "development-flow"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "development-flow"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An operative plan is ephemeral session control; a Plan is a persisted CAPRMEDIO artifact created only by governed entry criteria.",
+      "complete_body": "\n# Distinguish operative plans from Plan artifacts\n\nAn operative plan is ephemeral session control; a Plan is a persisted CAPRMEDIO artifact created **only** by governed entry criteria.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-146",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Binds Atom mutation authority to explicit Operator approval or active bounded delegation to the identified Agent.",
+      "negation_witness": "Allow mutation solely because an Agent chose it, with no approval or delegation; governance loses the authority owner controlling the mutation.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-146-CORE_META_MODEL-REQUIREMENT--govern-caprmedio-atom-mutation-by-operator-authority.md",
+      "source_version": 9,
+      "source_sha256": "6b750d4eb1c40be0361fa6c892d8178420cbdfd457606a72a371101b622359cd",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-146",
+      "filename_identity": "CAPRMEDIO-META-REQU-146",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "authority"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "authority"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every CAPRMEDIO Atom mutation, including mutation of an Implementation Atom, requires (explicit per-action Operator approval or active bounded authority delegated by an Operator) to the identified AI Agent performing the mutation; generated Projections and append-only Journals follow their own lifecycle authority.",
+      "complete_body": "\n# Govern CAPRMEDIO Atom mutation by Operator authority\n\n**every** CAPRMEDIO Atom mutation, including mutation of an Implementation Atom, requires (explicit per-action Operator approval **or** active bounded authority delegated by an Operator) to the identified AI Agent performing the mutation; generated Projections **and** append-only Journals follow their own lifecycle authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-129",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "filename": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "version": 14,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-148",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates proposing a normative change from establishing its accepted authority.",
+      "negation_witness": "Let an Analysis or Task proposal itself establish PRMEDO authority; proposing and admitting a normative Claim become indistinguishable.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-148-CORE_META_MODEL-REQUIREMENT--allow-proposal-of-prmedo-change-from-active-content-roles.md",
+      "source_version": 9,
+      "source_sha256": "818cb8a35d2f950712a00502c3f76be40ac6012978f6404efb6ff6f71373a728",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-148",
+      "filename_identity": "CAPRMEDIO-META-REQU-148",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "development-flow"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "development-flow"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Concern, Analysis, Task, and native Implementation may propose a PRMEDO authority change, but only Operator-approved PRMEDO authority may establish that change.",
+      "complete_body": "\n# Allow proposal of PRMEDO change from active content roles\n\nConcern, Analysis, Task, **and** native Implementation **may** propose a PRMEDO authority change, but **only** Operator-approved PRMEDO authority **may** establish that change.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-114",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop.md",
+            "filename": "CAPRMEDIO-META-REQU-114-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop.md",
+            "version": 13,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-150",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Keeps transformation-stage position separate from Artifact form, Content Role, origin, scope and authority.",
+      "negation_witness": "Let a generated-data stage prefix establish authority or Scope; an operational processing coordinate replaces semantic classification.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-150-CORE_META_MODEL-REQUIREMENT--keep-data-stages-orthogonal-to-artifact-semantics.md",
+      "source_version": 9,
+      "source_sha256": "192678e95dd7a34a4018663f13dadbae4cc69936550d337703173ac984d396a9",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-150",
+      "filename_identity": "CAPRMEDIO-META-REQU-150",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Generated-data stage names must classify transformation position without becoming Artifact forms, Content roles, Governance origins, scope coordinates, or sources of authority.",
+      "complete_body": "\n# Keep data stages orthogonal to artifact semantics\n\nGenerated-data stage names **must** classify transformation position **without** becoming Artifact forms, Content roles, Governance origins, scope coordinates, **or** sources of authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-125",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "filename": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-163",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Makes Framework Instance Settings the owner of current selection, activation and selected revisions, distinct from capability meaning and installation availability.",
+      "negation_witness": "Treat installation or retained disabled settings as activation, or let selection rewrite the capability's meaning; availability/activation and selection/authority boundaries collapse.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-163-CORE_META_MODEL-REQUIREMENT--define-configuration-selection-and-precedence.md",
+      "source_version": 13,
+      "source_sha256": "9d8025964a798fd7a8a0a142c809a20073a5a09688626f5946e75912010f43cd",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-163",
+      "filename_identity": "CAPRMEDIO-META-REQU-163",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Configuration Selection and Precedence"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Configuration Selection and Precedence"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "the Framework Instance Settings Artifact may select, combine, parameterize, activate in foreground or background, or disable available Tools and Extensions and must resolve composition precedence explicitly without changing any selected capability's governed meaning. installation establishes availability, not activation: an installed Extension may remain disabled, and its retained settings do not enable it unless the Framework Instance Settings Artifact explicitly does so. the Framework Instance Settings Artifact must own the current activation selection and selected revision of every selected Extension.",
+      "complete_body": "\n# Define Configuration selection and precedence\n\nthe Framework Instance Settings Artifact **may** select, combine, parameterize, activate **in** foreground **or** background, **or** disable available Tools **and** Extensions **and** **must** resolve composition precedence explicitly **without** changing **any** selected capability's governed meaning. installation establishes availability, **not** activation: an installed Extension **may** remain disabled, **and** its retained settings do **not** enable it **unless** the Framework Instance Settings Artifact explicitly does so. the Framework Instance Settings Artifact **must** own the current activation selection **and** selected revision of **every** selected Extension.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1052"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CA-R-1052",
+          "target": {
+            "id": "CA-R-1052",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "filename": "CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "version": 16,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-167",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines unresolved versus terminally disposed Concern states and distinguishes archival from solved disposition.",
+      "negation_witness": "Call a Concern solved merely because it was archived as obsolete or duplicated; removal from current authority is confused with resolving its matter.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-167-CORE_META_MODEL-REQUIREMENT--concerns-have-active-and-solved-states.md",
+      "source_version": 7,
+      "source_sha256": "e6dd1059cad33f0593454ad7a27da18c005ef0768ca9b1540c1c805887a07a39",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-167",
+      "filename_identity": "CAPRMEDIO-META-REQU-167",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "lifecycle-traceability"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "lifecycle-traceability"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An admitted Concern is active while its independently resolvable matter still requires disposition and solved after that matter receives its terminal disposition. Archival preserves a Concern that is obsolete, invalidated, duplicated, or absorbed without representing it as solved.",
+      "complete_body": "\n# Concerns have active and solved states\n\nAn admitted Concern is active while its independently resolvable matter still requires disposition **and** solved **after** that matter receives its terminal disposition. Archival preserves a Concern that is obsolete, invalidated, duplicated, **or** absorbed **without** representing it as solved.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-168",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines unfinished versus completed Analysis inquiry while keeping completed reasoning distinct from current normative authority.",
+      "negation_witness": "Let a done Analysis become a Requirement or let archival itself prove its inquiry complete; lifecycle completion and semantic authority are conflated.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-168-CORE_META_MODEL-REQUIREMENT--analyses-have-draft-and-done-states.md",
+      "source_version": 7,
+      "source_sha256": "3c09d579601eff0da11e578a70984d1751ee88b7a02c80e117af410ea6266c8e",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-168",
+      "filename_identity": "CAPRMEDIO-META-REQU-168",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "lifecycle-traceability"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "lifecycle-traceability"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An admitted Analysis is draft while its bounded inquiry or interpretation product remains unfinished and done when that product is complete. A done Analysis remains a factual record of its completed reasoning rather than current normative authority; archival preserves one that is obsolete, invalidated, duplicated, or absorbed.",
+      "complete_body": "\n# Analyses have draft and done states\n\nAn admitted Analysis is draft while its bounded inquiry **or** interpretation product remains unfinished **and** done **when** that product is complete. A done Analysis remains a factual record of its completed reasoning rather than current normative authority; archival preserves one that is obsolete, invalidated, duplicated, **or** absorbed.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-170",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Ops lifecycle as factual admission, separate from operational response handling.",
+      "negation_witness": "Mark an admitted historical fact unadmitted because the incident response reopened; admission history is replaced by a different work state.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-170-CORE_META_MODEL-REQUIREMENT--govern-ops-factual-admission-lifecycle.md",
+      "source_version": 7,
+      "source_sha256": "e249fd591a0d135432b610a644db35ac28b7608fc536ef93d8f2752bcb857bd9",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-170",
+      "filename_identity": "CAPRMEDIO-META-REQU-170",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "lifecycle-traceability"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "lifecycle-traceability"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An Ops Atom lifecycle represents factual admission rather than response handling: a draft is a governed Atom whose asserted fact is not yet admitted, an admitted factual record remains historical regardless of its operational response, and an invalidated, duplicated, or replaced record is archived.",
+      "complete_body": "\n# Govern Ops factual admission lifecycle\n\nAn Ops Atom lifecycle represents factual admission rather than response handling: a draft is a governed Atom whose asserted fact is **not** yet admitted, an admitted factual record remains historical regardless of its operational response, **and** an invalidated, duplicated, **or** replaced record is archived.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-130--define-atom-admission-and-lifecycle",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-620",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines a read-only graph Projection of actual Project Atoms and Directory Carriers, with observed structure distinct from Goal and authority gaps.",
+      "negation_witness": "Erase an observed Scope Unit merely because no accepted Goal exists, or let the graph create authority; observation and governance cease to be distinct.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-620-CORE_META_MODEL-REQUIREMENT--classify-the-project-scope-unit-graph-as-implementation-projections.md",
+      "source_version": 14,
+      "source_sha256": "b3004684b646d96fcdefc2edd944dc6eabbf3d68d7db32274a6c0ff16b30238f",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-620",
+      "filename_identity": "CAPRMEDIO-META-REQU-620",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Project Scope Unit Graph Projection"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Project Scope Unit Graph Projection"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Project Structure means the read-only Project Scope Unit Graph Projection of all Project Atoms and actual Scope Unit Directory Carriers, bound to applicable Settings and source revisions; it records what exists without establishing or changing authority. a Scope Unit Directory Carrier must remain visible when it has no active accepted Goal, with that gap reported separately; drafts and archived Atoms provide evidence without becoming active authority.",
+      "complete_body": "\n# Project current structure without creating authority\n\nProject Structure **means** the read-only Project Scope Unit Graph Projection of all Project Atoms **and** actual Scope Unit Directory Carriers, bound to applicable Settings **and** source revisions; it records what exists **without** establishing **or** changing authority. a Scope Unit Directory Carrier **must** remain visible **when** it has no active accepted Goal, with that gap reported separately; drafts **and** archived Atoms provide evidence **without** becoming active authority.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "CA-R-1052"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-125",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "filename": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CA-R-1052",
+          "target": {
+            "id": "CA-R-1052",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "filename": "CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "version": 16,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-640",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Assigns enacted recurrence-check outcomes to the factual Ops role.",
+      "negation_witness": "Let a recurrence-check outcome itself become the normative recurrence policy; execution result and specification are no longer separate.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-640-CORE_META_MODEL-REQUIREMENT--record-recurrence-check-outcomes-in-ops.md",
+      "source_version": 7,
+      "source_sha256": "dfb067186eb0591dfd56e7395a60f76ae8a4c0482d52f173c4eac273042a04b9",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-640",
+      "filename_identity": "CAPRMEDIO-META-REQU-640",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "continuous-improvement"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "continuous-improvement"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every execution outcome of a recurrence-protection mechanism must be recorded as Ops.",
+      "complete_body": "\n# Record recurrence-check outcomes in Ops\n\n**every** execution outcome of a recurrence-protection mechanism **must** be recorded as Ops.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-091",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification.md",
+            "filename": "CAPRMEDIO-META-REQU-091-CORE_META_MODEL-CORE-REQUIREMENT--normative-atoms-are-the-caprmedio-specification.md",
+            "version": 12,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-648",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Preserves Project ownership of its particular substrate against making that choice a reusable CORE_META_MODEL prerequisite.",
+      "negation_witness": "Let one consuming Project's selected substrate become mandatory framework authority for unrelated Projects; contextual ownership is silently widened.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-648-CORE_META_MODEL-REQUIREMENT--keep-project-specific-substrates-out-of-the-reusable-core.md",
+      "source_version": 9,
+      "source_sha256": "1b88794076513fb73851b59c9cb32536f19f01cb4a29236cfb2d72c7608088c0",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-648",
+      "filename_identity": "CAPRMEDIO-META-REQU-648",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "authority"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "authority"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "an Operator-mandated Project-specific substrate must be governed by Project authority or LOCAL_CONFIGURATION without becoming an implicit prerequisite of the reusable CORE_META_MODEL.",
+      "complete_body": "\n# Keep Project-specific substrates out of the reusable Core\n\nan Operator-mandated Project-specific substrate **must** be governed by Project authority **or** LOCAL_CONFIGURATION **without** becoming an implicit prerequisite of the reusable CORE_META_MODEL.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-088",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules.md",
+            "filename": "CAPRMEDIO-META-REQU-088-CORE_META_MODEL-CORE-REQUIREMENT--admit-implementation-independent-core-rules.md",
+            "version": 13,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-656",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Journal identity by ordered admitted records whose accepted history is immutable.",
+      "negation_witness": "Edit, reorder or remove an accepted record as ordinary Journal operation; the Artifact no longer preserves the ordered admitted history that defines it.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-REQUIREMENT--define-journal-artifact-form.md",
+      "source_version": 8,
+      "source_sha256": "28a37932e54fbdcd2f59ea1b027339fd6cda95086070962b4d11a25a8ff6369e",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-656",
+      "filename_identity": "CAPRMEDIO-META-REQU-656",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Journal"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Journal"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "A Journal is an ordered sequence of admitted records whose accepted records cannot be edited, reordered, or removed.",
+      "complete_body": "\n# Define Journal Artifact form\n\nA Journal is an ordered sequence of admitted records whose accepted records cannot be edited, reordered, **or** removed.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-125",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "filename": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-657",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Projection as reproducibly derived and non-authoritative, retaining exact source ownership of rendered meaning/history.",
+      "negation_witness": "Treat generated output as an independent authoritative edit of its source meaning or history; Projection and source authority collapse.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-REQUIREMENT--define-projection-artifact-form.md",
+      "source_version": 9,
+      "source_sha256": "679c821f2541bbf52541f3f64e4367c7a46f2abd3f4380d1830ca860e5af87b5",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-657",
+      "filename_identity": "CAPRMEDIO-META-REQU-657",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Projection"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Projection"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "A Projection is a non-authoritative generated view reproducibly derived from an exact declared frontier of Atom revisions and Journal records. The source Atoms and Journals remain the sole owners of the governed meaning and history rendered by the Projection. A Projection never becomes authority, and its generation mechanism does not alter this status.",
+      "complete_body": "\n# Define Projection Artifact form\n\nA Projection is a non-authoritative generated view reproducibly derived from an exact declared frontier of Atom revisions **and** Journal records. The source Atoms **and** Journals remain the sole owners of the governed meaning **and** history rendered by the Projection. A Projection never becomes authority, **and** its generation mechanism does **not** alter this status.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-125",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "filename": "CAPRMEDIO-META-REQU-125-CORE_META_MODEL-CORE-REQUIREMENT--classify-artifacts-through-the-extensible-type-registry.md",
+            "version": 15,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-671",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates native Implementation targets from separately admitted governed Artifact identity.",
+      "negation_witness": "Treat every native code file as an admitted Artifact without separate identity/admission; operative existence silently supplies governed identity.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-671-CORE_META_MODEL-REQUIREMENT--distinguish-native-targets-from-governed-artifacts.md",
+      "source_version": 8,
+      "source_sha256": "a962c3c4d9289b0b31f7af10b28905b542acc9a255a736c76c99dff9e1f0e908",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-671",
+      "filename_identity": "CAPRMEDIO-META-REQU-671",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "A native project target is Implementation rather than a governed Artifact unless CAPRMEDIO separately admits an Artifact identity that represents or binds it.",
+      "complete_body": "\n# Distinguish native targets from governed Artifacts\n\nA native project target is Implementation rather than a governed Artifact **unless** CAPRMEDIO separately admits an Artifact identity that represents **or** binds it.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes",
+          "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes",
+          "target": {
+            "id": "CA-R-834",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes.md",
+            "filename": "CA-R-834-CORE_META_MODEL-CORE-REQUIREMENT--partition-project-graph-nodes.md",
+            "version": 10,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-672",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves inherited meaning outside the explicitly bounded descendant specialization.",
+      "negation_witness": "Let a child specialization alter its parent's meaning in sibling or ancestor scope; the bounded local change escapes its owner boundary.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-672-CORE_META_MODEL-REQUIREMENT--bound-descendant-specialization-to-its-structural-scope.md",
+      "source_version": 7,
+      "source_sha256": "a74ee9a2f65b848422a332849bf55515b9b9488caefd356db0dccc3bd5922f9f",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-672",
+      "filename_identity": "CAPRMEDIO-META-REQU-672",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "scope-topology"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "scope-topology"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Applicable inherited authority remains effective in a descendant scope unless an explicit child or override specializes it within a declared boundary, and that specialization cannot change the parent meaning outside the descendant scope.",
+      "complete_body": "\n# Bound descendant specialization to its structural scope\n\nApplicable inherited authority remains effective **in** a descendant scope **unless** an explicit child **or** override specializes it within a declared boundary, **and** that specialization cannot change the parent meaning outside the descendant scope.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-REQU-033-REQUIREMENT--preserve-ancestor-core-authority-across-structural-levels",
+          "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-153",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales.md",
+            "filename": "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales.md",
+            "version": 11,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-673",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves each source's declared scope and evidential limits through aggregation.",
+      "negation_witness": "Aggregate two bounded views and claim broader truth, completeness or priority than their sources justify; derivation invents scope or authority.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-673-CORE_META_MODEL-REQUIREMENT--preserve-source-scope-in-derived-views.md",
+      "source_version": 7,
+      "source_sha256": "813c6e7af5ad2d3ea2e3482366c49708c3720345436376810b9961248afb34ab",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-673",
+      "filename_identity": "CAPRMEDIO-META-REQU-673",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "scope-topology"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "scope-topology"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "A derived view preserves every source's declared scope and must not inflate truth, completeness, evaluation, or priority by aggregating sources.",
+      "complete_body": "\n# Preserve source scope in derived views\n\nA derived view preserves **every** source's declared scope **and** **must not** inflate truth, completeness, evaluation, **or** priority by aggregating sources.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-153",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales.md",
+            "filename": "CAPRMEDIO-META-REQU-153-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales.md",
+            "version": 11,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-675",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Partitions selected settings ownership once between Project initialization and framework behavior; definition authority does not duplicate selected values.",
+      "negation_witness": "Let both an Atom and Settings independently own today's selected value or let both Settings forms own it; authoritative selection has conflicting owners.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-675-CORE_META_MODEL-REQUIREMENT--partition-operator-settings-between-settings-artifacts.md",
+      "source_version": 12,
+      "source_sha256": "62b1dc14260ad0e9e4ed6fecdf4cbcf23a38112eeedef591be129ef75a66ede6",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-675",
+      "filename_identity": "CAPRMEDIO-META-REQU-675",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "settings authority"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "settings authority"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "an Operator-selected setting must have =1 authoritative owner: Project Settings for Project initialization inputs, or Framework Instance Settings for CAPRMEDIO behavior and configuration choices; Atoms define the permitted settings without duplicating current selected values.",
+      "complete_body": "\n# Partition Operator Settings Between Settings Artifacts\n\nan Operator-selected setting **must** have **`=1`** authoritative owner: Project Settings for Project initialization inputs, **or** Framework Instance Settings for CAPRMEDIO behavior **and** configuration choices; Atoms define the permitted settings **without** duplicating current selected values.\n",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-1052"
+        ],
+        "relates_to": [
+          "CAPRMEDIO-META-REQU-627-CORE_META_MODEL-REQUIREMENT--bind-every-project-scope-unit-graph-value-to-exact-sources"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CA-R-1052",
+          "target": {
+            "id": "CA-R-1052",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "filename": "CA-R-1052-CORE_META_MODEL-CORE-REQUIREMENT--separate-project-settings-from-the-project-scope-unit-graph.md",
+            "version": 16,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged.",
+      "preexisting_limitation": "Existing unregistered relates_to semantics retained; source classification and exact binding repair do not normalize the relation registry."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-679",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Structural Level by signed ancestry depth relative to the Project origin, distinguishing in-Project descent from explicitly admitted outside Bootstrap.",
+      "negation_witness": "Replace ancestry depth with an independently assigned rank or admit a negative in-Project level; Structural Level no longer denotes that structural relationship.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-679-CORE_META_MODEL-REQUIREMENT--define-structural-level.md",
+      "source_version": 12,
+      "source_sha256": "d032ff21ebc4f4aa5c93a3eb8e82859d260d13fddd1cd746e9a9b242220c8cd6",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-679",
+      "filename_identity": "CAPRMEDIO-META-REQU-679",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Structural Level"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Structural Level"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Structural Level means the signed ancestry depth of a Scope Unit relative to the Project Scope Unit at level 0, with positive levels inside the Project and negative levels only for explicitly admitted Bootstrap Scope Units outside that Project.",
+      "complete_body": "\n# Define Structural Level\n\nStructural Level **means** the signed ancestry depth of a Scope Unit relative to the Project Scope Unit at level **`0`**, with positive levels inside the Project **and** negative levels **only** for explicitly admitted Bootstrap Scope Units outside that Project.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-708"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-708",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-708",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+            "filename": "CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+            "version": 8,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-688",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates Adaptation/Extension definition authority from Settings selection and derived graph display.",
+      "negation_witness": "Let toggling Settings or regenerating a graph amend the Extension's governed definition; selection or display becomes semantic authority.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-688-CORE_META_MODEL-REQUIREMENT--keep-project-adaptation-authority-out-of-settings.md",
+      "source_version": 11,
+      "source_sha256": "0241f08a29bcf67f77f583c2b6a719a88ab446767f4e242acb9955d8f8f935f7",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-688",
+      "filename_identity": "CAPRMEDIO-META-REQU-688",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "extension-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "extension-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "the governed definitions of Project Adaptation and Extension must be owned by their applicable Atoms. the Framework Instance Settings Artifact may select, disable, and parameterize them, and Project Scope Unit Graph Projections may expose the effective result, but Framework Instance Settings and Project Scope Unit Graph Projection must not redefine or amend those governed definitions.",
+      "complete_body": "\n# Keep Project Adaptation authority out of settings\n\nthe governed definitions of Project Adaptation **and** Extension **must** be owned by their applicable Atoms. the Framework Instance Settings Artifact **may** select, disable, **and** parameterize them, **and** Project Scope Unit Graph Projections **may** expose the effective result, but Framework Instance Settings **and** Project Scope Unit Graph Projection **must not** redefine **or** amend those governed definitions.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-687",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics.md",
+            "filename": "CAPRMEDIO-META-REQU-687-CORE_META_MODEL-CORE-REQUIREMENT--govern-project-adaptation-semantics.md",
+            "version": 10,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-700",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves an Extension's declared applicability boundary.",
+      "negation_witness": "Apply the Extension beyond that boundary merely because it is installed; applicability no longer constrains its authority.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-700-CORE_META_MODEL-REQUIREMENT--bound-extension-applicability.md",
+      "source_version": 8,
+      "source_sha256": "12839c6d8f7f664c6117a5a0cee704886bf1f0cde676aefe2ca85c1e106a680d",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-700",
+      "filename_identity": "CAPRMEDIO-META-REQU-700",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "extension-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "extension-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every Extension must affect only its declared applicability boundary.",
+      "complete_body": "\n# Bound Extension applicability\n\n**every** Extension **must** affect **only** its declared applicability boundary.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics",
+          "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-160",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics.md",
+            "filename": "CAPRMEDIO-META-REQU-160-CORE_META_MODEL-CORE-REQUIREMENT--govern-extension-semantics.md",
+            "version": 10,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-129",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "filename": "CAPRMEDIO-META-REQU-129-CORE_META_MODEL-CORE-REQUIREMENT--separate-authority-applicability-and-currentness.md",
+            "version": 14,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-710",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Constitutes the Project Scope Unit as parentless and outside sibling Local Order.",
+      "negation_witness": "Give the Project a structural parent or a sibling Local Order as an Ordered unit; it no longer supplies the Project root boundary.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-710-CORE_META_MODEL-REQUIREMENT--keep-the-project-unordered-without-a-parent.md",
+      "source_version": 13,
+      "source_sha256": "75e07cf34061aabc08c4fc36745a25ed21051b37d3cff342055885a38461634b",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-710",
+      "filename_identity": "CAPRMEDIO-META-REQU-710",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Project"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Project"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "the Project Scope Unit must have =0 parent Scope Units and Type: Unordered.",
+      "complete_body": "\n# Keep the Project Unordered without a Parent\n\nthe Project Scope Unit **must** have **`=0`** parent Scope Units **and** Type: Unordered.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-708"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-708",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-708",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+            "filename": "CAPRMEDIO-META-REQU-708-CORE_META_MODEL-REQUIREMENT--define-scope-unit.md",
+            "version": 8,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-712",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Ordered by participation in one Local Order among sibling Scope Units, without choosing order notation.",
+      "negation_witness": "Call a Scope Unit Ordered while it does not participate in sibling Local Order; the Type loses its defining structural distinction.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-712-CORE_META_MODEL-REQUIREMENT--define-ordered-as-a-type-value-under-scope-unit.md",
+      "source_version": 12,
+      "source_sha256": "c2f1059a3c8dbcac90628b04035993c6c676247ad64039f81a3774fd881e1ff1",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-712",
+      "filename_identity": "CAPRMEDIO-META-REQU-712",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Scope Unit/Type: Ordered"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Scope Unit/Type: Ordered"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "the Scope Unit Type value Ordered means the value whose bearer participates in one Local Order among sibling Scope Units.",
+      "complete_body": "\n# Define Ordered as a Type Value under Scope Unit\n\nthe Scope Unit Type value Ordered **means** the value whose bearer participates **in** one Local Order among sibling Scope Units.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-709"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-709",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-709",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+            "filename": "CAPRMEDIO-META-REQU-709-CORE_META_MODEL-REQUIREMENT--register-ordered-and-unordered-as-type-values-under-scope-unit.md",
+            "version": 12,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-741",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Separates Artifact Type classification from admitting an Artifact through SUBKIND_OF taxonomy.",
+      "negation_witness": "Use a subtype link itself to admit Artifact identity; classification relation substitutes for governed Artifact admission.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-741-CORE_META_MODEL-REQUIREMENT--prohibit-artifact-subkinds.md",
+      "source_version": 10,
+      "source_sha256": "9f2edc48eb670621476e4f78c9f2f57671029e82221857193ea68e08f3daf3f7",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-741",
+      "filename_identity": "CAPRMEDIO-META-REQU-741",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Artifact/Type"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Artifact/Type"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "an Artifact Type value must not use SUBKIND_OF to establish its admission as an Artifact.",
+      "complete_body": "\n# Prohibit Artifact subkinds\n\nan Artifact Type value **must not** use SUBKIND_OF to establish its admission as an Artifact.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-151--admit-only-materially-distinct-framework-constructs",
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-151--admit-only-materially-distinct-framework-constructs",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-743",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves Atom identity across ordinary revisions by making a Type change a successor boundary.",
+      "negation_witness": "Change an Atom's identity-bearing Type while claiming the same ordinary identity; distinct admitted kinds are silently collapsed.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-743-CORE_META_MODEL-REQUIREMENT--make-the-type-value-of-an-atom-identity-bearing.md",
+      "source_version": 8,
+      "source_sha256": "94486cd005cffad0bd3d2c25b7208c13b54a62a0bcce4a532f11d8df2e1e7b90",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-743",
+      "filename_identity": "CAPRMEDIO-META-REQU-743",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "artifact-model"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "artifact-model"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "an Atom's Type value is identity-bearing. An ordinary change to that Type value creates a successor Atom rather than revising the existing Atom identity.",
+      "complete_body": "\n# Make the Type Value of an Atom Identity-Bearing\n\nan Atom's Type value is identity-bearing. An ordinary change to that Type value creates a successor Atom rather than revising the existing Atom identity.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision",
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-128--separate-artifact-carrier-and-revision",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-745",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Conserves all still-necessary Implementation Decision meaning in active Methods before absorption.",
+      "negation_witness": "Archive the Decision while any necessary governed realization meaning lacks an active Method owner; absorption deletes accepted meaning.",
+      "concrete_choice_test": "False: this complete Claim binds the stated identity, purpose, authority owner, separation or conservation boundary; it selects no concrete encoding, algorithm or test specimen.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-745-CORE_META_MODEL-REQUIREMENT--absorb-implementation-decisions-without-semantic-loss.md",
+      "source_version": 7,
+      "source_sha256": "1a75b105c1cfd6f248f4f4adf214ef4b9fad027359633160aefc5cd64eb8d8f3",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-META-REQU-745",
+      "filename_identity": "CAPRMEDIO-META-REQU-745",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Atom/Content Role: Method"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Method"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "An Implementation Decision may be archived as absorbed only after >=1 active Implementation Methods preserve every part of its still-necessary governed meaning for the affected realization scope.",
+      "complete_body": "\n# Absorb Implementation Decisions without semantic loss\n\nAn Implementation Decision **may** be archived as absorbed **only** **after** **`>=1`** active Implementation Methods preserve **every** part of its still-necessary governed meaning for the affected realization scope.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-154--semantic-irreducibility",
+          "CAPRMEDIO-META-REQU-744-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-implementation-methods-from-implementation-decisions"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-154--semantic-irreducibility",
+          "target": null,
+          "reason": "GOV767: exact target exists only in Archive, not active authority; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-744-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-implementation-methods-from-implementation-decisions",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-744",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-744-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-implementation-methods-from-implementation-decisions.md",
+            "filename": "CAPRMEDIO-META-REQU-744-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-implementation-methods-from-implementation-decisions.md",
+            "version": 9,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-R-791-REQUIREMENT-BSEED_METAMODEL",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines the semantic coordinate by ancestry Level plus the order dimension when the bearer is Ordered; no tuple, string, file format or global uniqueness requirement is selected.",
+      "negation_witness": "Omit the order dimension for an Ordered Scope Unit or substitute an unrelated metric for ancestry Level; the locator no longer expresses the defined structural coordinate.",
+      "concrete_choice_test": "False: the Claim defines coordinate dimensions, not their concrete navigational encoding. This does not assert global uniqueness.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-R-791-CORE_META_MODEL-REQUIREMENT--define-structural-coordinate.md",
+      "source_version": 8,
+      "source_sha256": "b8e500e8c115a1d5e0b7f43c576d6321e03cd842a46f32199329c1a54c1fdde5",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-R-791-REQUIREMENT-BSEED_METAMODEL",
+      "filename_identity": "CAPRMEDIO-R-791",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "Structural Coordinate"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Structural Coordinate"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Structural Coordinate means a derived locator containing one Scope Unit's Structural Level and its Local Order when that Scope Unit has Type: Ordered.",
+      "complete_body": "\n# Define Structural Coordinate\n\nStructural Coordinate **means** a derived locator containing one Scope Unit's Structural Level **and** its Local Order **when** that Scope Unit has Type: Ordered.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-679",
+          "CAPRMEDIO-META-REQU-715"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-679",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-679",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-679-CORE_META_MODEL-REQUIREMENT--define-structural-level.md",
+            "filename": "CAPRMEDIO-META-REQU-679-CORE_META_MODEL-REQUIREMENT--define-structural-level.md",
+            "version": 12,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        },
+        {
+          "kind": "child_of",
+          "raw": "CAPRMEDIO-META-REQU-715",
+          "target": {
+            "id": "CAPRMEDIO-META-REQU-715",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order.md",
+            "filename": "CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order.md",
+            "version": 9,
+            "lifecycle": "active"
+          },
+          "reason": "Retiering this local Current-scope Requirement to Core makes this local Requirement parent a same-tier peer (R829), or reverses the admitted Core→General→Standard normative ordering. R879 fixes child_of's normative meaning; no substitute parent."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "new_tier": "Standard",
+      "decisive_test": "reference_binding_only",
+      "cross_frontier_dependency_repair": true,
+      "reason": "Necessary exact incoming reference preservation authorized by root: replace only the renamed META094/META112 basename with its verified unique stable identity. No Local Configuration Claim or tier is classified in CA-P-957.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md",
+      "source_version": 9,
+      "source_sha256": "23e199cdb8d508412e15bbd90d68740609623465207dc36ea9b399e0b137cce2",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-314",
+      "old_tier": "Standard",
+      "owner": "LOCAL_CONFIGURATION",
+      "governs_subjects": [
+        "evaluation"
+      ],
+      "atom_scope": {
+        "context": "LOCAL_CONFIGURATION authoritative owner",
+        "governed_entities": [
+          "evaluation"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(LOCAL_CONFIGURATION)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Excluded from957origin classification; only authorized cross-frontier reference repair."
+      },
+      "content_role": "R",
+      "old_structural_rank": "unchanged, not classified",
+      "new_structural_rank": "unchanged, not classified",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every production-relevant component or governed scope must define a Production Evaluation Checklist before it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, and within its accepted operating boundaries during real work.",
+      "complete_body": "\n# Require production evaluation checklists\n\n**every** production-relevant component **or** governed scope **must** define a Production Evaluation Checklist **before** it can pass a production-readiness gate. The checklist states how operators will know that the realized system remains healthy, correct, supportable, **and** within its accepted operating boundaries during real work.\n\n**every** operational condition **or** invariant is owned by one `evaluation_control` Atom. The control identifies:\n\n- the Requirement, Demand For, Constraint, Method, **or** other governed claim being assured;\n- the production signal **and** authoritative data source;\n- the healthy condition, expected range, threshold, **or** failure predicate;\n- the evaluation window, cadence, **and** permitted detection delay;\n- the component, entity, lifecycle state, **or** workflow boundary to which it applies;\n- the accountable owner **and** escalation destination;\n- the alert, incident, investigation, degradation, rollback, **or** recovery action triggered by failure;\n- the diagnostic context required to investigate the condition;\n- the required Ops record **and** evidence-retention boundary; **and**\n- known blind spots, sampling limits, unavailable signals, **and** other evaluation limitations.\n\nA Production Evaluation Checklist is an Evaluation-role Catalog Projection over the applicable `evaluation_control` Atoms. It organizes **and** navigates those controls **without** absorbing, paraphrasing, **or** replacing their claims.\n\n**every** control distinguishes its governed meaning from its realization **and** results:\n\n- the Evaluation Control defines the production evaluation condition;\n- monitors, dashboards, alerts, health checks, **and** operational automation are Implementation;\n- metrics, logs, traces, alerts, incidents, **and** recorded check outcomes are Ops; **and**\n- a Concern Atom of Type `problem` records a material discrepancy requiring disposition.\n\nA Production Evaluation Checklist governs real production operation. It is **not** a QA Case, **and** passing pre-release Test **or** Evaluation implementations does **not** by itself satisfy the production-evaluation obligation.\n\n## Rationale\n\nPre-release QA demonstrates behavior under bounded conditions, while production evaluation **must** detect degradation, incorrect state, **and** supportability failures during actual operation. Atomic controls preserve independent lifecycle **and** replacement, while the checklist provides a navigable scope view **without** conflating definitions, implementations, **and** observations.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct"
+        ],
+        "relates_to": [
+          "CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface",
+          "CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types",
+          "CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "after": "CAPRMEDIO-META-REQU-094",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Reference-only cross-frontier revision;958 classification remains pending.",
+      "preexisting_limitation": "Existing unregistered relates_to semantics retained; source classification and exact binding repair do not normalize the relation registry."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-321",
+      "new_tier": "Standard",
+      "decisive_test": "reference_binding_only",
+      "cross_frontier_dependency_repair": true,
+      "reason": "Necessary exact incoming reference preservation authorized by root: replace only the renamed META094/META112 basename with its verified unique stable identity. No Local Configuration Claim or tier is classified in CA-P-957.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-321--register-caprmedio-atom-type-surface.md",
+      "source_version": 19,
+      "source_sha256": "d44e3557369c76464a4cfe5b5b2c9a0f2d513046ceff2cdbedb6269fbb5c4b37",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-321",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-321",
+      "old_tier": "Standard",
+      "owner": "LOCAL_CONFIGURATION",
+      "governs_subjects": [
+        "Type"
+      ],
+      "atom_scope": {
+        "context": "LOCAL_CONFIGURATION authoritative owner",
+        "governed_entities": [
+          "Type"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(LOCAL_CONFIGURATION)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Excluded from957origin classification; only authorized cross-frontier reference repair."
+      },
+      "content_role": "R",
+      "old_structural_rank": "unchanged, not classified",
+      "new_structural_rank": "unchanged, not classified",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "every typed Atom must be registered with =1 Content Role value and <=1 Type value. Content Role states the Atom's primary semantic contribution, Type states the governed kind within that role, and Atom routing admits no additional subtype coordinate.",
+      "complete_body": "\n# Register the CAPRMEDIO Type Surface for Atoms\n\n**every** typed Atom **must** be registered with **`=1`** Content Role value **and** **`<=1`** Type value. Content Role states the Atom's primary semantic contribution, Type states the governed kind within that role, **and** Atom routing admits no additional subtype coordinate.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-112-CORE_META_MODEL-REQUIREMENT--admit-atoms-only-where-a-role-has-an-atomic-unit",
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "CA-R-1054"
+        ],
+        "resolution_of": [
+          "CAPRMEDIO-GOV-CONC-037--semantic-route-catalog-remains-incomplete",
+          "CAPRMEDIO-GOV-CONC-051--which-types-complete-the-semantic-route-catalog"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-112-CORE_META_MODEL-REQUIREMENT--admit-atoms-only-where-a-role-has-an-atomic-unit",
+          "after": "CAPRMEDIO-META-REQU-112",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Reference-only cross-frontier revision;958 classification remains pending."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-748",
+      "new_tier": "Standard",
+      "decisive_test": "reference_binding_only",
+      "cross_frontier_dependency_repair": true,
+      "reason": "Necessary exact incoming reference preservation authorized by root: replace only the renamed META094/META112 basename with its verified unique stable identity. No Local Configuration Claim or tier is classified in CA-P-957.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+      "source_version": 12,
+      "source_sha256": "8a013535f0779dc0af11a24acc101b2654db4f15925ae4044c35a2f36b6e859c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-748",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-748",
+      "old_tier": "Standard",
+      "owner": "LOCAL_CONFIGURATION",
+      "governs_subjects": [
+        "Atom/Content Role: Evaluation/Type"
+      ],
+      "atom_scope": {
+        "context": "LOCAL_CONFIGURATION authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Evaluation/Type"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(LOCAL_CONFIGURATION)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Excluded from957origin classification; only authorized cross-frontier reference repair."
+      },
+      "content_role": "R",
+      "old_structural_rank": "unchanged, not classified",
+      "new_structural_rank": "unchanged, not classified",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "QA Case with Carrier token qa_case and Evaluation Control with Carrier token evaluation_control must be registered as internal values of Atom/Content Role: Evaluation/Type.",
+      "complete_body": "\n# Register Type Values for Evaluation Atoms\n\nQA Case with Carrier token `qa_case` **and** Evaluation Control with Carrier token `evaluation_control` **must** be registered as internal values of `Atom/Content Role: Evaluation/Type`.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "CA-R-1054"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "after": "CAPRMEDIO-META-REQU-094",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Reference-only cross-frontier revision;958 classification remains pending."
+    },
+    {
+      "atom_id": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "new_tier": "Standard",
+      "decisive_test": "reference_binding_only",
+      "cross_frontier_dependency_repair": true,
+      "reason": "Necessary exact incoming reference preservation authorized by root: replace only the renamed META094/META112 basename with its verified unique stable identity. No Local Configuration Claim or tier is classified in CA-P-957.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+      "source_version": 9,
+      "source_sha256": "a84bbb33fd0bd78f29ab650cb793c31c4fba45f07badcb4f4cb98555b59b514c",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "filename_identity": "CAPRMEDIO-R-793",
+      "old_tier": "Standard",
+      "owner": "LOCAL_CONFIGURATION",
+      "governs_subjects": [
+        "Atom/Content Role: Evaluation/Type: Evaluation Approach"
+      ],
+      "atom_scope": {
+        "context": "LOCAL_CONFIGURATION authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Evaluation/Type: Evaluation Approach"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(LOCAL_CONFIGURATION)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Excluded from957origin classification; only authorized cross-frontier reference repair."
+      },
+      "content_role": "R",
+      "old_structural_rank": "unchanged, not classified",
+      "new_structural_rank": "unchanged, not classified",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "Evaluation Approach means the internal Type value under Content Role Evaluation for one reusable, mechanism-neutral evaluation policy and has Carrier token evaluation_approach.",
+      "complete_body": "\n# Define Evaluation Approach as a Type Value for Evaluation Atoms\n\nEvaluation Approach **means** the internal Type value under Content Role Evaluation for one reusable, mechanism-neutral evaluation policy **and** has Carrier token `evaluation_approach`.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type",
+          "CA-R-1054"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "after": "CAPRMEDIO-META-REQU-094",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Reference-only cross-frontier revision;958 classification remains pending."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-301",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "reason": "Selects two concrete development/release-readiness workflow chains, their default/mandatory mode choices, refresh timing and candidate-head test execution as one execution-flow convention, while retaining authority and evidence-freshness guards.",
+      "replacement_witness": "Replace the listed stage chains with a dependency-driven state machine that schedules only invalidated work, while preserving explicit currentness gates, immutable accepted meaning, candidate-bound fresh evidence, conflict resolution and Settings ownership of mode selection; the chosen workflow changes.",
+      "batch": "08",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-301-CORE_META_MODEL-REQUIREMENT--separate-development-and-release-readiness-flows.md",
+      "source_version": 12,
+      "source_sha256": "d83206d51682b72e08f5804e4f44ccd4a22d856ff74be1b3ae9ce0c7043bf554",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-301",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-301",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "interaction"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "interaction"
+        ],
+        "explicit_constraints": "Complete Claim boundaries preserved."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing source/context binding preserved.",
+        "local_rmed_basis_membership": "Included local Active Current-scope RMED"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Numerical depth unresolved; no folder-derived coordinate.",
+      "governing_clause_normalized": "development is the default flow:",
+      "complete_body": "\n# Separate development and release-readiness flows\n\ndevelopment is the default flow:\n\n```text\nactive atomic authority\n→ QA Cases\n→ Implementation, including executable Tests and Evaluations\n→ factual Ops records\n→ development Verification\n```\n\ndevelopment consumes active atomic authority plus **any** enabled current Projections. it does **not** require **every** enabled Projection to refresh **after** **every** new Atom **unless** that Projection's own gate requires currentness.\n\nrelease readiness is mandatory **before** a Version can be declared ready:\n\n```text\nall active atomic authority\n→ optional atomic refactoring when overlap warrants it\n→ refresh every required Projection\n→ detect conflicts\n→ resolve conflicts through new atomic authority\n→ repeat to a fixed point\n→ reconcile implementation and evaluation\n→ execute Tests and Evaluations at the exact candidate head\n→ fresh Ops records and Verification\n→ accepted readiness Verification Record\n```\n\nconflict resolution never edits an accepted Atom. **any** applicable code, configuration, Test, Evaluation, **or** Projection change **after** an Evaluation run makes the affected release evidence stale.\n\nthe Framework Instance Settings Artifact records `development` as the default workflow selection **and** `release_readiness` as the mandatory pre-release mode. the Project Scope Unit Graph Projections **may** expose the effective mode but **must not** select it.\n\n## Rationale\n\nthe successor removes retired compilation **and** Evergreen terminology while preserving the different currentness needs of ordinary development **and** release.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "CAPRMEDIO-META-REQU-102--freeze-a-version-only-at-release"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "kind": "child_of",
+          "before": "CAPRMEDIO-META-REQU-094-CORE_META_MODEL-REQUIREMENT--requirement-keep-evaluation-atoms-mechanism-neutral-and-chains-distinct",
+          "after": "CAPRMEDIO-META-REQU-094",
+          "reason": "Exact incoming target binding only; relation kind and meaning retained."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "Admit complete-Claim tier disposition and exact direct relation consequences; whole body unchanged."
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-790",
+      "batch": "08",
+      "new_tier": "General",
+      "decisive_test": "G",
+      "reason": "Specifies complete coordinate/component validation coverage against active defining authority, without selecting an encoding, validator algorithm or fixture.",
+      "concrete_choice_test": "False: any validator implementation and admitted coordinate encoding may satisfy the criterion.",
+      "foundation_test": "The coordinate's dimensions and source authority remain defined independently; this Claim adds a shared validation-coverage obligation.",
+      "preserving_realizations": [
+        "A parser resolves each encoded coordinate component to its active governing authority and checks conformance.",
+        "A reviewer checks the same component coverage and active authorities through a generated review form."
+      ],
+      "countermodel": "Permit a bounded check of Structural Level alone while explicitly reporting Local Order as unchecked, and forbid claiming full-coordinate verification. Coordinate meaning, owner and evidence/authority separation remain; this complete-coverage contract changes.",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-790-CORE_META_MODEL-REQUIREMENT--validate-structural-coordinates-against-authority.md",
+      "source_version": 11,
+      "source_sha256": "15e9c541b0c099b44d37a9aff8cbc8ebb2dd843bb9ebb5206bc3a738cd1a1e32",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CAPRMEDIO-GOV-REQU-790",
+      "filename_identity": "CAPRMEDIO-GOV-REQU-790",
+      "old_tier": "Standard",
+      "owner": "CORE_META_MODEL",
+      "governs_subjects": [
+        "scope-topology"
+      ],
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "scope-topology"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Existing contextual default preserved",
+        "local_rmed_basis_membership": "Included origin"
+      },
+      "content_role": "R",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+2",
+      "structural_depth": "d numerically unresolved",
+      "governing_clause_normalized": "the validator must validate every encoded Structural coordinate and every of its components against the active authority defining that coordinate.",
+      "complete_body": "\n# Validate Structural coordinates against authority\n\nthe validator **must** validate **every** encoded Structural coordinate **and** **every** of its components against the active authority defining that coordinate.\n",
+      "direct_relations": {
+        "child_of": [
+          "CAPRMEDIO-R-791-CORE_META_MODEL-REQUIREMENT--define-structural-coordinate",
+          "CA-R-1054"
+        ]
+      },
+      "relation_impacts": [
+        {
+          "before": "    - CAPRMEDIO-R-791-CORE_META_MODEL-REQUIREMENT--define-structural-coordinate\n",
+          "after": "    - CAPRMEDIO-R-791-REQUIREMENT-BSEED_METAMODEL\n",
+          "count": 1,
+          "boundary": "relations.child_of",
+          "reason": "Exact renamed coordinate authority mapped to its verified opaque stable identity."
+        },
+        {
+          "before": "    - CA-R-1054\n",
+          "after": "",
+          "count": 1,
+          "boundary": "relations.child_of",
+          "reason": "GOV767: R1054 is Archive-only; remove inactive target without substitute."
+        }
+      ],
+      "confidence_percent": 99,
+      "body_change": "none",
+      "disposition": "General classification plus exact active coordinate binding and inactive-target cleanup; body unchanged."
+    }
+  ]
+}

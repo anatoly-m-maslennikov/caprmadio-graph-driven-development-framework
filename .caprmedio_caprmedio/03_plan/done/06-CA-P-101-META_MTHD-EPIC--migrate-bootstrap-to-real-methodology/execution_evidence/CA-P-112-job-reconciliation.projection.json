@@ -1,0 +1,152 @@
+{
+  "schema": "caprmedio.ca_p_112.job_reconciliation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-112",
+  "recorded_at": "2026-08-27T00:26:21+04:00",
+  "minimum_confidence_percent": 99,
+  "predecessor_tasks": [
+    "CA-P-102",
+    "CA-P-103"
+  ],
+  "retained_jobs": [
+    {
+      "claim_scope": "CAPRMEDIO",
+      "owner": "ANATOLY-MASLENNIKOV",
+      "carrier": ".caprmedio/ANATOLY-MASLENNIKOV-DEFINES_JOB_FOR-CAPRMEDIO--create-and-evolve-a-working-caprmedio-framework.md",
+      "disposition": "retained"
+    }
+  ],
+  "operator_authorized_jobs": [
+    {
+      "claim_scope": "APPLICABLE_MTHD_SOURCES",
+      "owner": "CAPRMEDIO",
+      "carrier": ".caprmedio/04_requirement/CA-R-1173-DEFINES_JOB_FOR-APPLICABLE_MTHD_SOURCES--provide-authoritative-source-layers-for-applicable-methodology.md",
+      "claim": "APPLICABLE_MTHD_SOURCES must provide the authoritative source Layers from which Applicable Methodology is compiled."
+    },
+    {
+      "claim_scope": "CORE_EXTENSIONS",
+      "owner": "CAPRMEDIO",
+      "carrier": ".caprmedio/04_requirement/CA-R-1180-DEFINES_JOB_FOR-CORE_EXTENSIONS--provide-caprmedio-maintained-optional-extensions.md",
+      "claim": "CORE_EXTENSIONS must provide CAPRMEDIO-maintained Extensions that add or specialize optional CAPRMEDIO capabilities without modifying canonical Core Meta-Model authority."
+    }
+  ],
+  "promoted_source_layer_jobs": [
+    {
+      "claim_scope": "CORE_META_MODEL",
+      "owner": "APPLICABLE_MTHD_SOURCES",
+      "draft_disposition": "promoted",
+      "carrier": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/CA-R-1174-APPLICABLE_MTHD_SOURCES-DEFINES_JOB_FOR-CORE_META_MODEL--provide-the-minimal-self-applicable-canonical-methodology-model.md"
+    },
+    {
+      "claim_scope": "INSTALLED_EXTENSIONS",
+      "owner": "APPLICABLE_MTHD_SOURCES",
+      "draft_disposition": "promoted",
+      "carrier": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/CA-R-1175-APPLICABLE_MTHD_SOURCES-DEFINES_JOB_FOR-INSTALLED_EXTENSIONS--preserve-installed-extension-revisions-as-candidate-inputs.md"
+    },
+    {
+      "claim_scope": "LOCAL_CONFIGURATION",
+      "owner": "APPLICABLE_MTHD_SOURCES",
+      "draft_disposition": "promoted",
+      "carrier": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/CA-R-1176-APPLICABLE_MTHD_SOURCES-DEFINES_JOB_FOR-LOCAL_CONFIGURATION--select-and-resolve-project-methodology-composition.md"
+    }
+  ],
+  "reconciled_predecessors": [
+    {
+      "claim_scope": "FRAMEWORK_METHODOLOGY",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CAPRMEDIO-REQU-708--define-framework-methodology-layer-scope@1.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1177-DEFINES_JOB_FOR-FR_MTHD--own-pure-framework-meaning-without-executable-io.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "FRAMEWORK_ENGINE",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CAPRMEDIO-REQU-702--define-framework-engine-layer-scope@2.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1178-DEFINES_JOB_FOR-FR_ENGN--own-executable-methodology-application.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "OPERATOR_DOCUMENTATION",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CAPRMEDIO-REQU-703--define-operator-documentation-layer-scope@3.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1179-DEFINES_JOB_FOR-OPER_DOC--describe-explain-navigate-and-teach-framework-authority.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "RELEASES",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CAPRMEDIO-REQU-704--define-releases-layer-scope@5.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1181-DEFINES_JOB_FOR-RELSS--plan-evaluate-and-record-framework-releases.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "COMMUNITY_EXTENSIONS",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CA-R-845-REQUIREMENT--define-community-extensions-as-a-project-feature@3.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1182-DEFINES_JOB_FOR-COMMUNITY_EXTENSIONS--catalog-externally-maintained-extension-packages.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "FIELD",
+      "owner": "CAPRMEDIO",
+      "predecessor": ".caprmedio/04_requirement/archive/CAPRMEDIO-REQU-608--define-field-scope@4.md",
+      "successor": ".caprmedio/04_requirement/CA-R-1183-DEFINES_JOB_FOR-FIELD--register-and-route-field-reality-inputs.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "PROGRAMMATIC",
+      "owner": "FRAMEWORK_ENGINE",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/04_requirement/archive/CA-R-1084-FR_ENGN-CORE-REQUIREMENT--define-programmatic-feature-scope@1.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/04_requirement/CA-R-1184-FR_ENGN-DEFINES_JOB_FOR-PROGRAMMATIC--own-deterministic-programmatic-framework-engine-behavior.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "AGENTIC",
+      "owner": "FRAMEWORK_ENGINE",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/04_requirement/archive/CA-R-1085-FR_ENGN-CORE-REQUIREMENT--define-agentic-feature-scope@1.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/04_requirement/CA-R-1185-FR_ENGN-DEFINES_JOB_FOR-AGENTIC--own-agent-facing-methodology-application-procedures.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "TOOLS",
+      "owner": "PROGRAMMATIC",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/archive/CA-R-1097-PROGRAMMATIC-REQUIREMENT--define-tools-feature-scope@9.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/CA-R-1186-PROGRAMMATIC-DEFINES_JOB_FOR-TOOLS--own-independently-executable-framework-tools.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "APPS",
+      "owner": "PROGRAMMATIC",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/archive/CA-R-1098-PROGRAMMATIC-REQUIREMENT--define-apps-feature-scope@8.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/CA-R-1187-PROGRAMMATIC-DEFINES_JOB_FOR-APPS--own-operator-facing-application-products-and-agent-host-plugins.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "MCP",
+      "owner": "PROGRAMMATIC",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/archive/CA-R-1099-PROGRAMMATIC-CORE-REQUIREMENT--define-mcp-unit@5.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/PROGRAMMATIC/04_requirement/CA-R-1188-PROGRAMMATIC-DEFINES_JOB_FOR-MCP--own-provider-neutral-tool-discovery-schema-and-dispatch.md",
+      "disposition": "archived_after_successor"
+    },
+    {
+      "claim_scope": "SKILLS",
+      "owner": "AGENTIC",
+      "predecessor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/AGENTIC/04_requirement/archive/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-701--define-skills-feature-scope@2.md",
+      "successor": ".caprmedio/102_PROJECT_LAYER_2_FRAMEWORK_ENGINE/AGENTIC/04_requirement/CA-R-1189-AGENTIC-DEFINES_JOB_FOR-SKILLS--own-agent-facing-methodology-and-capability-procedures.md",
+      "disposition": "archived_after_successor"
+    }
+  ],
+  "topology_only_predecessors_retained": [
+    "CA-R-975",
+    "CA-R-844",
+    "CAPRMEDIO-REQU-775",
+    "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-700"
+  ],
+  "validation": {
+    "required_final_scope_units": 18,
+    "accepted_jobs": 18,
+    "missing_jobs": [],
+    "ambiguous_jobs": []
+  }
+}

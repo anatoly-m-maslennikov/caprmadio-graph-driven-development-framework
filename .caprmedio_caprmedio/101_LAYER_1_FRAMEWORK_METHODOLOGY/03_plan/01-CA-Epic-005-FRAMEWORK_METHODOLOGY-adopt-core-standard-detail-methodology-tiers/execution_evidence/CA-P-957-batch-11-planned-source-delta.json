@@ -1,0 +1,670 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "11",
+  "recorded_at": "2026-09-10 05:28:44 +0400",
+  "checkpoint": "Autonomous >=99% execution after exact and canonical overlay checks.",
+  "existing": [
+    {
+      "atom_id": "CA-M-106",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings.md",
+      "before_version": 6,
+      "before_sha256": "75c7c25fdfa002e6d5467f7ad84294223173b90e1e7bea5bb0d4a5cd2127233d",
+      "before_bytes_utf8": "---\nversion: 6\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations:\n  child_of:\n    - \"CA-M-006\"\n  method_for:\n    - \"CA-R-1375\"\ncce_version: \"cce_1\"\ncce_form: \"method\"\nsubjects:\n  governs:\n    continuant:\n      - \"Methodology Source/expansion mapping\"\n  depends_on:\n    continuant:\n      - \"Methodology Source\"\n      - \"Extension\"\n      - \"Local Configuration\"\n      - \"Core Meta-Model\"\n      - \"Operator\"\natom_id: \"CA-M-106\"\n---\n# Declare methodology expansion mappings\n\n**before** an Extension **or** Local Configuration relies on a mapped element, declare its source element, exact canonical target, mapping rule, intended Scope, **and** applicable Core distinctions; retain the source provenance **and** apply the same mapping procedure regardless of provenance. evaluate the mapping under CA-E-249 **before** activation **or** reliance **and** **after** a material source, target, rule, Scope, **or** authority change. **if** canonical ownership **or** preservation remains unresolved, **then** stop the affected application **and** return the evidence **to** the Operator; an approval **must not** authorize loss **or** reinterpretation of applicable Core authority.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-GENERAL-METHOD--declare-methodology-expansion-mappings.md",
+      "proposed_version": 7,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\nversion: 7\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  child_of:\n    - \"CA-M-006\"\n  method_for:\n    - \"CA-R-1375\"\ncce_version: \"cce_1\"\ncce_form: \"method\"\nsubjects:\n  governs:\n    continuant:\n      - \"Methodology Source/expansion mapping\"\n  depends_on:\n    continuant:\n      - \"Methodology Source\"\n      - \"Extension\"\n      - \"Local Configuration\"\n      - \"Core Meta-Model\"\n      - \"Operator\"\natom_id: \"CA-M-106\"\n---\n# Declare methodology expansion mappings\n\n**before** an Extension **or** Local Configuration relies on a mapped element, declare its source element, exact canonical target, mapping rule, intended Scope, **and** applicable Core Meta-Model distinctions at **any** Local Tier; retain the source provenance **and** apply the same mapping procedure regardless of provenance. evaluate the mapping under CA-E-249 **before** activation **or** reliance **and** **after** a material source, target, rule, Scope, **or** authority change. **if** canonical ownership **or** preservation remains unresolved, **then** stop the affected application **and** return the evidence **to** the Operator; an approval **must not** authorize loss **or** reinterpretation of applicable Core Meta-Model authority at **any** Local Tier.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings@6.md",
+      "exact_replacements": [
+        {
+          "before": "applicable Core distinctions",
+          "after": "applicable Core Meta-Model distinctions at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1375@4 source-ownership clarification; Core Meta-Model authority is protected independently of Local Tier."
+        },
+        {
+          "before": "applicable Core authority",
+          "after": "applicable Core Meta-Model authority at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Same R1375 source-owner binding, not a Core-tier-only boundary."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "applicable Core distinctions",
+          "after": "applicable Core Meta-Model distinctions at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1375@4 source-ownership clarification; Core Meta-Model authority is protected independently of Local Tier."
+        },
+        {
+          "before": "applicable Core authority",
+          "after": "applicable Core Meta-Model authority at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Same R1375 source-owner binding, not a Core-tier-only boundary."
+        }
+      ],
+      "after_governs_subjects": [
+        "Methodology Source/expansion mapping"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-M-106",
+      "claim_change": "Only the explicit existing-authority binding repairs listed in the exact manifest."
+    },
+    {
+      "atom_id": "CA-M-130",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-CORE_META_MODEL-CORE-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "before_version": 9,
+      "before_sha256": "da85caa3ee7b4b8617e394b75b176bd6eaa07dc7cae5e027b3d3c6cdd1ae24c0",
+      "before_bytes_utf8": "---\natom_id: CA-M-130\nsubjects:\n  governs:\n    occurrent:\n      - \"Autonomous Confidence Threshold Application\"\n  depends_on:\n    continuant:\n      - \"Autonomous Confidence Threshold\"\n      - \"Confidence Threshold/source\"\n      - \"AI Agent/Confidence\"\n      - \"Operator/authority\"\ncce_version: cce_1\ncce_form: method\nversion: 9\nupdated_at: \"2026-09-09 02:24:28 +0400\"\nrelations: {}\n---\n# Apply a Task Autonomous Confidence Threshold\n\n**to** apply a Task's Autonomous Confidence Threshold, an AI Agent **must** resolve the effective value according **to** CA-M-271; **if** confidence **in** correct Task execution is below that value, **then** the AI Agent **must** request Operator disposition **before** continuing; **otherwise** the AI Agent **may** continue **only** within its existing authority.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-CORE_META_MODEL-GENERAL-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "proposed_version": 10,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-130\nsubjects:\n  governs:\n    occurrent:\n      - \"Autonomous Confidence Threshold Application\"\n  depends_on:\n    continuant:\n      - \"Autonomous Confidence Threshold\"\n      - \"Confidence Threshold/source\"\n      - \"AI Agent/Confidence\"\n      - \"Operator/authority\"\ncce_version: cce_1\ncce_form: method\nversion: 10\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Apply a Task Autonomous Confidence Threshold\n\n**to** apply a Task's Autonomous Confidence Threshold, an AI Agent **must** resolve the effective value according **to** CA-M-271; **if** confidence **in** correct Task execution is below that value, **then** the AI Agent **must** request Operator disposition **before** continuing; **otherwise** the AI Agent **may** continue **only** within its existing authority.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-130-CORE_META_MODEL-CORE-METHOD--apply-a-task-autonomous-confidence-threshold@9.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Autonomous Confidence Threshold Application"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-M-130",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-M-134",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-134-CORE_META_MODEL-CORE-METHOD--bound-scripted-migrations.md",
+      "before_version": 14,
+      "before_sha256": "7faa679ba30ba6d87eea4d3ab4b6bbce30e0af8bfea72aa162da70a5f2ecf12e",
+      "before_bytes_utf8": "---\natom_id: CA-M-134\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Scripted Migration\n  depends_on:\n    continuant:\n      - Target Set\nversion: 14\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Bound Scripted Migrations\n\n**to** perform a Scripted Migration, the Agent **must** bind it to an exact governed Target Set, fail **when** an expected target is absent, **and** produce a reviewable change set.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-134-CORE_META_MODEL-GENERAL-METHOD--bound-scripted-migrations.md",
+      "proposed_version": 15,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-M-134\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Scripted Migration\n  depends_on:\n    continuant:\n      - Target Set\nversion: 15\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Bound Scripted Migrations\n\n**to** perform a Scripted Migration, the Agent **must** bind it to an exact governed Target Set, fail **when** an expected target is absent, **and** produce a reviewable change set.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-134-CORE_META_MODEL-CORE-METHOD--bound-scripted-migrations@14.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Scripted Migration"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-M-134",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-249",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+      "before_version": 3,
+      "before_sha256": "4ed2dc6b466101a37c9135cf4ca55a0aa5afc36d8e6ebefdc4b57f4bb061ef37",
+      "before_bytes_utf8": "---\natom_id: \"CA-E-249\"\nversion: 3\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - \"CA-E-001\"\n  evaluation_for:\n    - \"CA-M-106\"\n    - \"CA-R-1375\"\ncce_version: \"cce_1\"\ncce_form: \"evaluation\"\nsubjects:\n  governs:\n    continuant:\n      - \"Methodology Source/expansion mapping\"\n  depends_on:\n    continuant:\n      - \"Methodology Source\"\n      - \"Core Meta-Model\"\n      - \"Extension\"\n      - \"Local Configuration\"\n      - \"Operator\"\n      - \"Entity\"\n---\n# Evaluate methodology expansion mappings\n\na methodology expansion mapping Evaluation **must** return `fail` **if** a source element, exact canonical target, mapping rule, intended Scope, **or** applicable Core distinction is missing, canonical ownership is ambiguous, preservation is unproven, **or** the mapping redefines, replaces, shadows, weakens, deletes, contradicts, **or** reinterprets applicable Core authority; it **must** return `pass` **only** **when** the declared mapping preserves that authority **and** stays within its permitted expansion boundary. an Operator-approved loss **must not** count as conformance; report the failed boundary **and** leave the affected application stopped.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-GENERAL-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+      "proposed_version": 4,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: \"CA-E-249\"\nversion: 4\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  child_of:\n    - \"CA-E-001\"\n  evaluation_for:\n    - \"CA-M-106\"\n    - \"CA-R-1375\"\ncce_version: \"cce_1\"\ncce_form: \"evaluation\"\nsubjects:\n  governs:\n    continuant:\n      - \"Methodology Source/expansion mapping\"\n  depends_on:\n    continuant:\n      - \"Methodology Source\"\n      - \"Core Meta-Model\"\n      - \"Extension\"\n      - \"Local Configuration\"\n      - \"Operator\"\n      - \"Entity\"\n---\n# Evaluate methodology expansion mappings\n\na methodology expansion mapping Evaluation **must** return `fail` **if** a source element, exact canonical target, mapping rule, intended Scope, **or** applicable Core Meta-Model distinction at **any** Local Tier is missing, canonical ownership is ambiguous, preservation is unproven, **or** the mapping redefines, replaces, shadows, weakens, deletes, contradicts, **or** reinterprets applicable Core Meta-Model authority at **any** Local Tier; it **must** return `pass` **only** **when** the declared mapping preserves that authority **and** stays within its permitted expansion boundary. an Operator-approved loss **must not** count as conformance; report the failed boundary **and** leave the affected application stopped.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings@3.md",
+      "exact_replacements": [
+        {
+          "before": "applicable Core distinction",
+          "after": "applicable Core Meta-Model distinction at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1375@4 source-ownership clarification; Core Meta-Model authority is protected independently of Local Tier."
+        },
+        {
+          "before": "applicable Core authority",
+          "after": "applicable Core Meta-Model authority at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Same R1375 source-owner binding, not a Core-tier-only boundary."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "applicable Core distinction",
+          "after": "applicable Core Meta-Model distinction at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "R1375@4 source-ownership clarification; Core Meta-Model authority is protected independently of Local Tier."
+        },
+        {
+          "before": "applicable Core authority",
+          "after": "applicable Core Meta-Model authority at **any** Local Tier",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Same R1375 source-owner binding, not a Core-tier-only boundary."
+        }
+      ],
+      "after_governs_subjects": [
+        "Methodology Source/expansion mapping"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-249",
+      "claim_change": "Only the explicit existing-authority binding repairs listed in the exact manifest."
+    },
+    {
+      "atom_id": "CA-E-382",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-term-system-graphs.md",
+      "before_version": 6,
+      "before_sha256": "0a7c89272d0be461d4f761cacb09cf47b9b5ecb2970c9cb409f9fccd7a72d706",
+      "before_bytes_utf8": "---\natom_id: CA-E-382\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Term-System Graph Evaluation\n  depends_on:\n    continuant:\n      - Term System\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Reject Invalid Term-System Graphs\n\nthe Evaluation **must** reject a Term-System Graph **if** it admits another primitive Relation Kind, gives one Term **`>1`** direct IS_ALLOWED_VALUE_OF parents, **contains** a SUBKIND_OF cycle, **or** uses a Term-System Relation outside its registered graph.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-term-system-graphs.md",
+      "proposed_version": 7,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-382\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Term-System Graph Evaluation\n  depends_on:\n    continuant:\n      - Term System\nversion: 7\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Reject Invalid Term-System Graphs\n\nthe Evaluation **must** reject a Term-System Graph **if** it admits another primitive Relation Kind, gives one Term **`>1`** direct IS_ALLOWED_VALUE_OF parents, **contains** a SUBKIND_OF cycle, **or** uses a Term-System Relation outside its registered graph.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-term-system-graphs@6.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Term-System Graph Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-382",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-384",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-CORE-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+      "before_version": 7,
+      "before_sha256": "549c1665f933781aa993253d6c69ebc44967e3b1f19c02fa33ff3ff147bfc3f1",
+      "before_bytes_utf8": "---\natom_id: CA-E-384\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim-Boundary Evaluation\n  depends_on:\n    continuant:\n      - Claim\n      - Atom/Claim/Scope\nversion: 7\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Validate Composite Claims and Derived Summaries\n\nthe Evaluation **must** reject an Atom **if** it has zero **or** multiple Claims, multiple Claim Scopes, an independently replaceable component inside one Claim, ambiguous composite grouping, a non-deterministic Scope Expression, **or** a Summary that is **not** reproducibly source-faithful to the complete Claim **and** any Claim Scope.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-GENERAL-EVALUATION--validate-composite-claims-and-derived-summaries.md",
+      "proposed_version": 8,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-384\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim-Boundary Evaluation\n  depends_on:\n    continuant:\n      - Claim\n      - Atom/Claim/Scope\nversion: 8\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Validate Composite Claims and Derived Summaries\n\nthe Evaluation **must** reject an Atom **if** it has zero **or** multiple Claims, multiple Claim Scopes, an independently replaceable component inside one Claim, ambiguous composite grouping, a non-deterministic Scope Expression, **or** a Summary that is **not** reproducibly source-faithful to the complete Claim **and** any Claim Scope.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-384-CORE_META_MODEL-CORE-EVALUATION--validate-composite-claims-and-derived-summaries@7.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Claim-Boundary Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-384",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-386",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-CORE-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+      "before_version": 8,
+      "before_sha256": "a39d085f72f625eb4d63f3079b3fdb1996bbcca50756e5926c0a5325411feb4d",
+      "before_bytes_utf8": "---\natom_id: CA-E-386\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Type-Qualified Status Validation\n  depends_on:\n    continuant:\n      - Artifact/Revision/Status\n      - Artifact/Activity\n      - Atom/Content Role\n      - Type\n      - \"Atom Collection/Type: Epic/Status\"\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Validate Type-Qualified Status and Artifact Activity\n\nthe Evaluation **must** reject an Artifact **if** its Status domain is resolved outside its complete qualified Type **or** Atom Content Role **and** Type path, its current Status cardinality is not **`=1`**, its current Status is not an allowed value of that resolved domain, its Activity cardinality is not **`=1`**, its Activity does not derive as Active exactly from Status Active **or** as Inactive from any other Status, a prior transition coexists as current Status metadata, **or** a second revision-disposition axis duplicates Status.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-GENERAL-EVALUATION--validate-type-qualified-status-and-artifact-activity.md",
+      "proposed_version": 9,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-386\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Type-Qualified Status Validation\n  depends_on:\n    continuant:\n      - Artifact/Revision/Status\n      - Artifact/Activity\n      - Atom/Content Role\n      - Type\n      - \"Atom Collection/Type: Epic/Status\"\nversion: 9\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Validate Type-Qualified Status and Artifact Activity\n\nthe Evaluation **must** reject an Artifact **if** its Status domain is resolved outside its complete qualified Type **or** Atom Content Role **and** Type path, its current Status cardinality is not **`=1`**, its current Status is not an allowed value of that resolved domain, its Activity cardinality is not **`=1`**, its Activity does not derive as Active exactly from Status Active **or** as Inactive from any other Status, a prior transition coexists as current Status metadata, **or** a second revision-disposition axis duplicates Status.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-386-CORE_META_MODEL-CORE-EVALUATION--validate-type-qualified-status-and-artifact-activity@8.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Type-Qualified Status Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-386",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-387",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-type-assignments.md",
+      "before_version": 2,
+      "before_sha256": "6ca4983bfa7b5401ea9781874914dbeffaa1188c8b5539fbc2ea430a9a497a62",
+      "before_bytes_utf8": "---\natom_id: CA-E-387\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Type Assignment Evaluation\n  depends_on:\n    continuant:\n      - Entity\n      - Subject Expression\n      - Type\nversion: 2\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Reject Invalid Type Assignments\n\nthe Evaluation **must** reject a Type assignment **if** one Entity occurrence has **`>1`** direct Type values, the selected value is not allowed by its most-specific applicable qualified Type Subject, **or** qualified Type Subjects create **`>1`** Type Property slots for the occurrence.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-GENERAL-EVALUATION--reject-invalid-type-assignments.md",
+      "proposed_version": 3,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-387\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Type Assignment Evaluation\n  depends_on:\n    continuant:\n      - Entity\n      - Subject Expression\n      - Type\nversion: 3\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations: {}\n---\n# Reject Invalid Type Assignments\n\nthe Evaluation **must** reject a Type assignment **if** one Entity occurrence has **`>1`** direct Type values, the selected value is not allowed by its most-specific applicable qualified Type Subject, **or** qualified Type Subjects create **`>1`** Type Property slots for the occurrence.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-387-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-type-assignments@2.md",
+      "exact_replacements": [],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Type Assignment Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-387",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-001",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-QA_CASE--relation-vocabulary-interpretability.md",
+      "before_version": 11,
+      "before_sha256": "2495f9cdde5311b26ad6ef421ef2bc733e543f02d1e201a4017b7ffa22158bb8",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-001\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 11\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-METH-006--canonical-artifact-relations\n  child_of:\n    - CA-R-1054\n---\n# Relation-vocabulary interpretability\n\n## Claim checked\n\nThe registered relation vocabulary lets an independent assessor select the governed relation for representative artifact pairs **without** inventing another kind.\n\n## Applicable conditions\n\nThe case covers lineage, implementation, checking, evidence, resolution, conflict solution, override, replacement, recurrence, **and** generic relation.\n\n## Acceptance criteria\n\n**`>=90`**% of classifications match the governed relation **and** no pair produces a repeated conceptual ambiguity.\n\n## Failure disposition\n\nRecord a Concern for **every** ambiguous pair **and** stop relation-vocabulary readiness **until** the owning relation-authority Claim **or** its presentation is corrected.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-GENERAL-QA_CASE--relation-vocabulary-interpretability.md",
+      "proposed_version": 12,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-001\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 12\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Relation-vocabulary interpretability\n\n## Claim checked\n\nThe registered relation vocabulary lets an independent assessor select the governed relation for representative artifact pairs **without** inventing another kind.\n\n## Applicable conditions\n\nThe case covers lineage, implementation, checking, evidence, resolution, conflict solution, override, replacement, recurrence, **and** generic relation.\n\n## Acceptance criteria\n\n**`>=90`**% of classifications match the governed relation **and** no pair produces a repeated conceptual ambiguity.\n\n## Failure disposition\n\nRecord a Concern for **every** ambiguous pair **and** stop relation-vocabulary readiness **until** the owning relation-authority Claim **or** its presentation is corrected.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-QA_CASE--relation-vocabulary-interpretability@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  check_of:\n    - CAPRMEDIO-GOV-METH-006--canonical-artifact-relations\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Remove only inactive legacy methodology/parent targets; General policy requires no artificial individual target list."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-001",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-241",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md",
+      "before_version": 11,
+      "before_sha256": "27d8fed62a04b982cc782aa73e22db3cee0c11f3d22740bc36880e7cd08c550d",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - \"CCE Claim and Projection Validation\"\n  depends_on:\n    continuant:\n      - \"Atom/Claim\"\n      - \"Atom/Summary\"\n      - \"Translation\"\n      - \"Confidence Threshold\"\n      - \"Operator\"\n      - \"Atom/Content Role: Plan/Type: Task\"\n      - \"Epic\"\n      - \"Framework Instance Settings\"\natom_id: CA-E-241\ncce_version: cce_1\ncce_form: evaluation\nversion: 11\nupdated_at: \"2026-09-09 02:24:28 +0400\"\nrelations: {}\n---\n# Validate CCE Claims and derived Projections\n\n## Claim checked\n\n**every** active **or** draft Atom **contains** one human-readable precise CCE Claim **and** source-faithful derived Summary **and** Translations.\n\n## Test case\n\ncreate valid Requirement, Method, **and** Evaluation Claims. derive Summary, Translation, **and** terminology twice. **then** introduce ambiguity, an unstated participant, two independent Claims, an added Projection meaning, an independent vocabulary entry, **and** a confidence result below the effective Confidence Threshold resolved according **to** CA-M-271.\n\n## Acceptance criteria\n\n**every** valid fixture has one precise interpretation **and** reproducible Projections. **every** invalid fixture fails. a confidence result below the effective Confidence Threshold leaves the Atom unchanged **and** requests Operator disposition. changing the applicable Operator input, Task override, enclosing Epic override, **or** Framework Instance Settings default changes the checked threshold according **to** CA-M-271 **without** retaining a fixed percentage gate.\n\n## Failure disposition\n\nrecord a Concern naming the affected Claim **or** Projection.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - \"CCE Claim and Projection Validation\"\n  depends_on:\n    continuant:\n      - \"Atom/Claim\"\n      - \"Atom/Summary\"\n      - \"Translation\"\n      - \"Confidence Threshold\"\n      - \"Operator\"\n      - \"Atom/Content Role: Plan/Type: Task\"\n      - \"Epic\"\n      - \"Framework Instance Settings\"\natom_id: CA-E-241\ncce_version: cce_1\ncce_form: evaluation\nversion: 12\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-M-111\n    - CA-M-115\n    - CA-M-114\n    - CA-M-271\n    - CA-M-130\n---\n# Validate CCE Claims and derived Projections\n\n## Claim checked\n\n**every** active **or** draft Atom **contains** one human-readable precise CCE Claim **and** source-faithful derived Summary **and** Translations.\n\n## Test case\n\ncreate valid Requirement, Method, **and** Evaluation Claims. derive Summary, Translation, **and** terminology twice. **then** introduce ambiguity, an unstated participant, two independent Claims, an added Projection meaning, an independent vocabulary entry, **and** a confidence result below the effective Confidence Threshold resolved according **to** CA-M-271.\n\n## Acceptance criteria\n\n**every** valid fixture has one precise interpretation **and** reproducible Projections. **every** invalid fixture fails. a confidence result below the effective Confidence Threshold leaves the Atom unchanged **and** requests Operator disposition. changing the applicable Operator input, Task override, enclosing Epic override, **or** Framework Instance Settings default changes the checked threshold according **to** CA-M-271 **without** retaining a fixed percentage gate.\n\n## Failure disposition\n\nrecord a Concern naming the affected Claim **or** Projection.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-M-111\n    - CA-M-115\n    - CA-M-114\n    - CA-M-271\n    - CA-M-130\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "CCE Claim and Projection Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-241",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-379",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-CORE-EVALUATION--validate-applicable-methodology-compilation.md",
+      "before_version": 8,
+      "before_sha256": "e7f965aa946a6e0bea2937af7f711eaea2eb609ef8c719bfc479ffe4b135cd9e",
+      "before_bytes_utf8": "---\natom_id: CA-E-379\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Applicable Methodology Compilation Validation\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Applicable Methodology/Sources\n      - Local Configuration\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Validate Applicable Methodology Compilation\n\nthe Applicable Methodology Compilation Validation **must not** pass **if** (CORE_META_MODEL **or** LOCAL_CONFIGURATION is omitted **or** an unselected **or** inactive Extension revision contributes **or** a selected Atom revision is **not** current **and** active **or** its Content Role is outside (Requirement, Method, Evaluation, Delivery, Ops) **or** a selected Atom ID, exact source revision, authority owner, **or** Claim is changed **or** Claims are synthesized **or** merged **or** the conflict report omits a duplicate Atom identity, unresolved replacement, incompatible retained Candidate, **or** unresolved priority **or** **any** conflict is resolved **without** one unambiguous Operator approval **in** source authority bound to the exact conflict **and** source-frontier digest **or** **any** approval is stale, partial, missing, ambiguous, **or** mismatched **or** source order resolves a conflict **or** compilation uses LLM inference **or** the same resolved source frontier produces different Applicable Methodology membership).\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-EVALUATION--validate-applicable-methodology-compilation.md",
+      "proposed_version": 9,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-379\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Applicable Methodology Compilation Validation\n  depends_on:\n    continuant:\n      - Applicable Methodology\n      - Applicable Methodology/Sources\n      - Local Configuration\nversion: 9\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-M-224\n---\n# Validate Applicable Methodology Compilation\n\nthe Applicable Methodology Compilation Validation **must not** pass **if** (CORE_META_MODEL **or** LOCAL_CONFIGURATION is omitted **or** an unselected **or** inactive Extension revision contributes **or** a selected Atom revision is **not** current **and** active **or** its Content Role is outside (Requirement, Method, Evaluation, Delivery, Ops) **or** a selected Atom ID, exact source revision, authority owner, **or** Claim is changed **or** Claims are synthesized **or** merged **or** the conflict report omits a duplicate Atom identity, unresolved replacement, incompatible retained Candidate, **or** unresolved priority **or** **any** conflict is resolved **without** one unambiguous Operator approval **in** source authority bound to the exact conflict **and** source-frontier digest **or** **any** approval is stale, partial, missing, ambiguous, **or** mismatched **or** source order resolves a conflict **or** compilation uses LLM inference **or** the same resolved source frontier produces different Applicable Methodology membership).\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-379-CORE_META_MODEL-CORE-EVALUATION--validate-applicable-methodology-compilation@8.md",
+      "exact_replacements": [
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-M-224\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Applicable Methodology Compilation Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-379",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-383",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-subject-expressions.md",
+      "before_version": 4,
+      "before_sha256": "17b2b380fe1f6988af419a9897a0b1df359f0acfb0f3f10a3edc085a8914497d",
+      "before_bytes_utf8": "---\natom_id: CA-E-383\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Subject Expression Evaluation\n  depends_on:\n    continuant:\n      - General Term\n      - Governed Term\n      - Subject Expression\nversion: 4\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Reject Invalid Subject Expressions\n\nthe Evaluation **must** reject a Subject Expression **if** `/` does **not** encode one valid bearer edge, `:` does **not** assign one allowed value, a Dependent Entity occurrence lacks one immediate bearer, a reusable Term is rejected **only** for changing ordinal position, a Governed Term begins with a lowercase letter, a General Term begins with a capital letter, a Term name **contains** `/` **or** `:`, a complete composite Subject Expression is classified as one Term, **or** a registered CCE Operator is redefined as a Governed Term **or** Scope Unit Name.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "proposed_version": 5,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-383\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Subject Expression Evaluation\n  depends_on:\n    continuant:\n      - General Term\n      - Governed Term\n      - Subject Expression\nversion: 5\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1194\n    - CA-R-1204\n    - CA-R-1245\n    - CA-R-1322\n    - CA-R-1323\n    - CA-R-1324\n    - CA-R-1325\n    - CA-R-1297\n---\n# Reject Invalid Subject Expressions\n\nthe Evaluation **must** reject a Subject Expression **if** `/` does **not** encode one valid bearer edge, `:` does **not** assign one allowed value, a Dependent Entity occurrence lacks one immediate bearer, a reusable Term is rejected **only** for changing ordinal position, a Governed Term begins with a lowercase letter, a General Term begins with a capital letter, a Term name **contains** `/` **or** `:`, a complete composite Subject Expression is classified as one Term, **or** a registered CCE Operator is redefined as a Governed Term **or** Scope Unit Name.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-383-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-subject-expressions@4.md",
+      "exact_replacements": [
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-R-1194\n    - CA-R-1204\n    - CA-R-1245\n    - CA-R-1322\n    - CA-R-1323\n    - CA-R-1324\n    - CA-R-1325\n    - CA-R-1297\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Subject Expression Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-383",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-429",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-CORE-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+      "before_version": 2,
+      "before_sha256": "e12bebcd5f6fef480ea587a4fa226a80e124887cf86fb622af85e3ab57cd5347",
+      "before_bytes_utf8": "---\natom_id: CA-E-429\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Markdown Atom Carrier Validation\n  depends_on:\n    continuant:\n      - Atom/Revision\n      - Markdown Atom Carrier\n      - Project\nversion: 2\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Validate Authoritative Markdown Atom Carriers\n\nthe Evaluation **must** reject an Atom Revision **if** it has other than **`=1`** authoritative Markdown Atom Carrier on the Project filesystem, its authoritative Carrier does not contain YAML Frontmatter followed by Main Content, **or** a TOML, YAML, JSON, database, **or** projected copy is treated as authoritative for that Atom Revision.\n",
+      "before_tier": "Core",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-429-CORE_META_MODEL-EVALUATION--validate-authoritative-markdown-atom-carriers.md",
+      "proposed_version": 3,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-429\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Markdown Atom Carrier Validation\n  depends_on:\n    continuant:\n      - Atom/Revision\n      - Markdown Atom Carrier\n      - Project\nversion: 3\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-D-355\n    - CA-D-356\n---\n# Validate Authoritative Markdown Atom Carriers\n\nthe Evaluation **must** reject an Atom Revision **if** it has other than **`=1`** authoritative Markdown Atom Carrier on the Project filesystem, its authoritative Carrier does not contain YAML Frontmatter followed by Main Content, **or** a TOML, YAML, JSON, database, **or** projected copy is treated as authoritative for that Atom Revision.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-429-CORE_META_MODEL-CORE-EVALUATION--validate-authoritative-markdown-atom-carriers@2.md",
+      "exact_replacements": [
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-D-355\n    - CA-D-356\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Markdown Atom Carrier Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-429",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-002",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md",
+      "before_version": 14,
+      "before_sha256": "e3ca64a8a6593afe8898e13e6c915d706e519b14e5cb56afec9606dd21a35c80",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-002\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 14\nupdated_at: \"2026-09-09 23:04:14 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054\n---\n# Settings Artifact Usability\n\n## Claim checked\n\nan Operator unfamiliar with the repository can configure framework-instance behavior, including Authority Modes, through Framework Instance Settings **and** Project initialization inputs through Project Settings using **only** the two Settings Artifacts **and** their in-file documentation, while recognizing the Project Scope Unit Graph as a read-only derived view.\n\n## Applicable conditions\n\nthe Operator has no undocumented Framework knowledge **and** **must not** edit the Framework Catalog.\n\n## Acceptance criteria\n\n**every** intended change is made through the owning Settings Artifact, **and** **`>=90`**% of classifications correctly distinguish project choices from methodology definitions.\n\n## Failure disposition\n\nrecord a Concern for **every** misleading **or** missing setting instruction **and** stop settings-usability readiness **until** it is corrected.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md",
+      "proposed_version": 15,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-002\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 15\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  evaluation_for:\n    - CA-R-1052\n    - CA-R-1402\n    - CAPRMEDIO-META-REQU-675\n    - CA-R-1430\n---\n# Settings Artifact Usability\n\n## Claim checked\n\nan Operator unfamiliar with the repository can configure framework-instance behavior, including Authority Modes, through Framework Instance Settings **and** Project initialization inputs through Project Settings using **only** the two Settings Artifacts **and** their in-file documentation, while recognizing the Project Scope Unit Graph as a read-only derived view.\n\n## Applicable conditions\n\nthe Operator has no undocumented Framework knowledge **and** **must not** edit the Framework Catalog.\n\n## Acceptance criteria\n\n**every** intended change is made through the owning Settings Artifact, **and** **`>=90`**% of classifications correctly distinguish project choices from methodology definitions.\n\n## Failure disposition\n\nrecord a Concern for **every** misleading **or** missing setting instruction **and** stop settings-usability readiness **until** it is corrected.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability@14.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode\n    - CAPRMEDIO-GOV-REQU-385-CORE_META_MODEL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration\n    - CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-R-1052\n    - CA-R-1402\n    - CAPRMEDIO-META-REQU-675\n    - CA-R-1430\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-002",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-003",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "before_version": 9,
+      "before_sha256": "91526bdaf44b07ca34f28b86018d834d1dc61bb2c4b86f478dd57abf32034b4f",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-003\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 9\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal\n  child_of:\n    - CA-R-1054\n---\n# Storage-boundary interpretability\n\n## Claim checked\n\nAn operator can place an Atom, Journal record, resumable checkpoint, generated cache, **and** disposable workspace **in** the governed storage boundary **and** explain its retention behavior.\n\n## Applicable conditions\n\nThe available boundaries are `.caprmedio`, `.caprmedio_runtime`, **and** the host temporary root. Governed Journals are located inside `.caprmedio` by scope **and** Content role.\n\n## Acceptance criteria\n\n**`>=90`**% of classifications are correct **and** no classification treats runtime **or** scratch as canonical truth.\n\n## Failure disposition\n\nRecord a Concern for **every** ambiguous boundary **and** stop storage-boundary readiness **until** the governing rule **or** its presentation is corrected.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-003\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 10\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  evaluation_for:\n    - CA-D-341\n---\n# Storage-boundary interpretability\n\n## Claim checked\n\nAn operator can place an Atom, Journal record, resumable checkpoint, generated cache, **and** disposable workspace **in** the governed storage boundary **and** explain its retention behavior.\n\n## Applicable conditions\n\nThe available boundaries are `.caprmedio`, `.caprmedio_runtime`, **and** the host temporary root. Governed Journals are located inside `.caprmedio` by scope **and** Content role.\n\n## Acceptance criteria\n\n**`>=90`**% of classifications are correct **and** no classification treats runtime **or** scratch as canonical truth.\n\n## Failure disposition\n\nRecord a Concern for **every** ambiguous boundary **and** stop storage-boundary readiness **until** the governing rule **or** its presentation is corrected.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability@9.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-D-341\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-003",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-005",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "before_version": 10,
+      "before_sha256": "47c5fc7703cafa91d52efc613df8926c2b16a291a3cc7eb9ded9fb2d14b2c60b",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-005\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - relation validation\n  depends_on:\n    continuant:\n      - Atom\n      - Atom/Content Role\n      - Atom/Status\n      - Journal\nversion: 10\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-METH-006--canonical-artifact-relations\n    - CAPRMEDIO-GOV-REQU-767\n    - CA-R-1007\n    - CA-R-807\n  child_of:\n    - CA-R-1054\n---\n# Canonical relation validity\n\n## Claim checked\n\n**every** registered relation accepts valid endpoints **and** rejects unknown kinds, invalid cardinality, ambiguous targets, **and** endpoint lifecycle states prohibited for that relation.\n\n## Applicable conditions\n\n1. admit **`=1`** valid example of **every** registered relation kind.\n2. reject an unknown relation kind.\n3. reject a relation **without** the endpoint cardinality required by its kind.\n4. resolve **every** target to **`=1`** addressable identity under its relation rules; reject missing **or** ambiguous targets.\n5. reject a non-Active RMED target of a direct relation authored by an Active RMED Atom.\n6. accept a Task dependency that resolves to a Done prerequisite Task; confirm that Draft, Active, **or** Cancelled prerequisites do **not** satisfy the Done completion gate.\n7. confirm that an Archived target remains addressable as history **without** becoming Active authority.\n8. confirm that **every** direct relation is persisted **only** in its registered declaration Carrier **and** that **every** inverse remains derived.\n9. confirm that replacement **and** absorption history uses explicit predecessor **and** successor identities in Journal events, **not** formal replacement relation payloads in active Atom frontmatter.\n\n## Acceptance criteria\n\n**all** valid fixtures pass **and** **every** invalid fixture fails with the exact relation, endpoint, lifecycle restriction, **or** declaration Carrier identified.\n\n## Failure disposition\n\nrecord a Concern naming the relation **and** invalid endpoint behavior **and** stop relation-schema readiness.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "proposed_version": 11,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-005\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - relation validation\n  depends_on:\n    continuant:\n      - Atom\n      - Atom/Content Role\n      - Atom/Status\n      - Journal\nversion: 11\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  evaluation_for:\n    - CA-R-806\n    - CAPRMEDIO-GOV-REQU-767\n    - CA-R-1007\n    - CA-R-807\n    - CA-D-268\n    - CA-R-1040\n---\n# Canonical relation validity\n\n## Claim checked\n\n**every** registered relation accepts valid endpoints **and** rejects unknown kinds, invalid cardinality, ambiguous targets, **and** endpoint lifecycle states prohibited for that relation.\n\n## Applicable conditions\n\n1. admit **`=1`** valid example of **every** registered relation kind.\n2. reject an unknown relation kind.\n3. reject a relation **without** the endpoint cardinality required by its kind.\n4. resolve **every** target to **`=1`** addressable identity under its relation rules; reject missing **or** ambiguous targets.\n5. reject a non-Active RMED target of a direct relation authored by an Active RMED Atom.\n6. accept a Task dependency that resolves to a Done prerequisite Task; confirm that Draft, Active, **or** Cancelled prerequisites do **not** satisfy the Done completion gate.\n7. confirm that an Archived target remains addressable as history **without** becoming Active authority.\n8. confirm that **every** direct relation is persisted **only** in its registered declaration Carrier **and** that **every** inverse remains derived.\n9. confirm that replacement **and** absorption history uses explicit predecessor **and** successor identities in Journal events, **not** formal replacement relation payloads in active Atom frontmatter.\n\n## Acceptance criteria\n\n**all** valid fixtures pass **and** **every** invalid fixture fails with the exact relation, endpoint, lifecycle restriction, **or** declaration Carrier identified.\n\n## Failure disposition\n\nrecord a Concern naming the relation **and** invalid endpoint behavior **and** stop relation-schema readiness.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity@10.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  check_of:\n    - CAPRMEDIO-GOV-METH-006--canonical-artifact-relations\n    - CAPRMEDIO-GOV-REQU-767\n    - CA-R-1007\n    - CA-R-807\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-R-806\n    - CAPRMEDIO-GOV-REQU-767\n    - CA-R-1007\n    - CA-R-807\n    - CA-D-268\n    - CA-R-1040\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "relation validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-005",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-009",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "before_version": 11,
+      "before_sha256": "1c92250c71f5e1b14e9b405ec44d08af229bc5159a95ed887e576c4af3636902",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-009\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 11\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection\n  child_of:\n    - CA-R-1054\n---\n# Effective-priority selection\n\n## Claim checked\n\nConflict selection derives the governed effective priorities **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.\n\n## Applicable conditions\n\n1. Accept stored priority **only** on Concern Atoms **and** reject it on Epic, Task, Action Policy, **and** **every** other Content role Atom.\n2. Accept **only** stored `high`, `medium`, **or** `low`.\n3. Reject stored `highest`, `critical`, **and** `deferred`.\n4. apply the strict-ancestor increment, capped at virtual `highest`; confirm that earlier ordering alone, unrelated Scope, **and** incomparable Scope produce no Scope increment.\n5. Confirm `ask_always` always asks.\n6. Confirm `auto_by_effective_priority` selects **`=1`** unique eligible winner **and** asks on ties, incomparable scopes, uncertainty, **or** multiple winners.\n7. Confirm unsatisfiable external obligations stop rather than auto-resolve.\n\n## Acceptance criteria\n\n**every** comparison produces the governed effective priorities **and** never guesses through a non-unique **or** ineligible result.\n\n## Failure disposition\n\nStop automatic selection, ask the operator, **and** record a Concern for **any** incorrect priority **or** unauthorized winner.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "proposed_version": 12,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-009\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - evaluation\nversion: 12\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  evaluation_for:\n    - CAPRMEDIO-GOV-REQU-299\n---\n# Effective-priority selection\n\n## Claim checked\n\nConflict selection derives the governed effective priorities **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.\n\n## Applicable conditions\n\n1. Accept stored priority **only** on Concern Atoms **and** reject it on Epic, Task, Action Policy, **and** **every** other Content role Atom.\n2. Accept **only** stored `high`, `medium`, **or** `low`.\n3. Reject stored `highest`, `critical`, **and** `deferred`.\n4. apply the strict-ancestor increment, capped at virtual `highest`; confirm that earlier ordering alone, unrelated Scope, **and** incomparable Scope produce no Scope increment.\n5. Confirm `ask_always` always asks.\n6. Confirm `auto_by_effective_priority` selects **`=1`** unique eligible winner **and** asks on ties, incomparable scopes, uncertainty, **or** multiple winners.\n7. Confirm unsatisfiable external obligations stop rather than auto-resolve.\n\n## Acceptance criteria\n\n**every** comparison produces the governed effective priorities **and** never guesses through a non-unique **or** ineligible result.\n\n## Failure disposition\n\nStop automatic selection, ask the operator, **and** record a Concern for **any** incorrect priority **or** unauthorized winner.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  check_of:\n    - CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations:\n  evaluation_for:\n    - CAPRMEDIO-GOV-REQU-299\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-009",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-010",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "before_version": 9,
+      "before_sha256": "51ab4e90deb95330a3715b400fa589483353536992002fe2159ee29e7abf738d",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-010\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Generated-Only Provenance Validation\n  depends_on:\n    continuant:\n      - Git Commit\n      - Implementation Relation\n      - Projection\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Validate Generated-Only Provenance Boundary\n\nGenerated-Only Provenance Validation **must not** pass **if** a generated-only Git Commit contributes an Implementation Relation **or** a generated Projection cites itself as its semantic input.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary.md",
+      "proposed_version": 10,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-EVAL-010\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Generated-Only Provenance Validation\n  depends_on:\n    continuant:\n      - Git Commit\n      - Implementation Relation\n      - Projection\nversion: 10\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-M-135\n    - CAPRMEDIO-META-REQU-657\n---\n# Validate Generated-Only Provenance Boundary\n\nGenerated-Only Provenance Validation **must not** pass **if** a generated-only Git Commit contributes an Implementation Relation **or** a generated Projection cites itself as its semantic input.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION--validate-generated-only-provenance-boundary@9.md",
+      "exact_replacements": [
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-M-135\n    - CAPRMEDIO-META-REQU-657\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [],
+      "after_governs_subjects": [
+        "Generated-Only Provenance Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CAPRMEDIO-GOV-EVAL-010",
+      "claim_change": "none"
+    },
+    {
+      "atom_id": "CA-E-240",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "before_version": 18,
+      "before_sha256": "b0d5c9b01226245caad791fd6168f6cb1a4699de7082056b0bbe486f30ebfc03",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - Scope Reference Validation\n  depends_on:\n    continuant:\n      - Atom/Scope\n      - Atom/Claim/Governed Subject Set\n      - Atom/Claim/Scope\n      - Atom/Claim/Scope/Scope Unit Set\n      - Structural Parent Relation\natom_id: CA-E-240\ncce_version: cce_1\ncce_form: evaluation\nversion: 18\nupdated_at: 2026-09-07 09:59:57 +0000\nrelations: {}\n---\n# Validate Atom Scope and Claim Scope\n\n## Claim checked\n\n**every** Atom resolves **`=1`** Atom Scope, **`=1`** Governed Subject Set, **and** **`=1`** resolved atomic **or** composite Claim Scope **without** making a referenced Entity bearer-dependent.\n\n## Test case\n\ncreate a Current-scope Atom, a parent-owned Goal for a direct child, an Operator-owned Project Goal with no Scope Unit Atom Scope, composite Claim Scopes, **and** one permitted Demand. **then** omit **or** duplicate an Atom Scope component, reorder the same Governed Subject Set, leave a reference unresolved, make a referenced Scope Unit bearer-dependent, **and** use a forbidden Goal **or** Demand target.\n\n## Acceptance criteria\n\n**every** valid fixture resolves **`=1`** Atom Scope **and** **`=1`** Claim Scope, resolves an omitted Claim Scope representation to the current Scope for a Current-scope Atom, classifies an explicitly represented different Claim Scope as a Relational Atom, **and** preserves canonical component equality independent of authored Subject order. **every** invalid fixture fails with the incorrect reference, ownership, Subject set, **or** relational fact identified.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Atom **and** Scope fact.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md",
+      "proposed_version": 19,
+      "proposed_tier": "Standard",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    occurrent:\n      - Scope Reference Validation\n  depends_on:\n    continuant:\n      - Atom/Scope\n      - Atom/Governed Subject\n      - Atom/Claim/Scope\n      - Atom/Claim/Scope/Scope Unit Set\n      - Structural Parent Relation\natom_id: CA-E-240\ncce_version: cce_1\ncce_form: evaluation\nversion: 19\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1014\n    - CA-R-920\n    - CA-R-919\n    - CA-R-1363\n    - CA-R-1201\n    - CA-R-923\n    - CA-R-947\n    - CA-R-944\n    - CA-R-946\n    - CA-D-269\n    - CA-D-367\n---\n# Validate Atom Scope and Claim Scope\n\n## Claim checked\n\n**every** Atom resolves **`=1`** Atom Scope, **`=1`** Atom Governed Subject, **and** **`=1`** resolved atomic **or** composite Claim Scope **without** making a referenced Entity bearer-dependent.\n\n## Test case\n\ncreate a Current-scope Atom, a parent-owned Goal for a direct child, an Operator-owned Project Goal with no Scope Unit Atom Scope, composite Claim Scopes, **and** one permitted Demand. **then** omit **or** duplicate an Atom Scope component **or** GOVERNS Subject, reorder Subject declarations containing **`=1`** GOVERNS Subject **and** prerequisite DEPENDS_ON Subjects **without** changing their Entity references, Relation Kinds, **or** Temporal Forms, leave a reference unresolved, make a referenced Scope Unit bearer-dependent, **and** use a forbidden Goal **or** Demand target.\n\n## Acceptance criteria\n\n**every** valid fixture resolves **`=1`** Atom Scope **and** **`=1`** Claim Scope, resolves an omitted Claim Scope representation to the current Scope for a Current-scope Atom, classifies an explicitly represented different Claim Scope as a Relational Atom, **and** preserves canonical component equality independent of authored Subject order. **every** invalid fixture fails with the incorrect reference, ownership, Subject declaration, **or** relational fact identified.\n\n## Failure disposition\n\nrecord a Concern naming the invalid Atom **and** Scope fact.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope@18.md",
+      "exact_replacements": [
+        {
+          "before": "      - Atom/Claim/Governed Subject Set\n",
+          "after": "      - Atom/Governed Subject\n",
+          "count": 1,
+          "boundary": "subjects.depends_on",
+          "reason": "R1363/R1201: one governed Entity, not obsolete multi-member GSS."
+        },
+        {
+          "before": "**`=1`** Governed Subject Set",
+          "after": "**`=1`** Atom Governed Subject",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Bind the checked governed Entity to current R1363."
+        },
+        {
+          "before": "omit **or** duplicate an Atom Scope component, reorder the same Governed Subject Set,",
+          "after": "omit **or** duplicate an Atom Scope component **or** GOVERNS Subject, reorder Subject declarations containing **`=1`** GOVERNS Subject **and** prerequisite DEPENDS_ON Subjects **without** changing their Entity references, Relation Kinds, **or** Temporal Forms,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Preserve cardinality and authored-order tests without inventing a multi-member GOVERNS set."
+        },
+        {
+          "before": "ownership, Subject set,",
+          "after": "ownership, Subject declaration,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Remove the obsolete set name while retaining exact failure attribution."
+        },
+        {
+          "before": "relations: {}\n",
+          "after": "relations:\n  evaluation_for:\n    - CA-R-1014\n    - CA-R-920\n    - CA-R-919\n    - CA-R-1363\n    - CA-R-1201\n    - CA-R-923\n    - CA-R-947\n    - CA-R-944\n    - CA-R-946\n    - CA-D-269\n    - CA-D-367\n",
+          "count": 1,
+          "boundary": "relations",
+          "reason": "Declare only actual checked R/M/D authorities under R1018; where legacy check_of exists, normalize its checked-target purpose, remove demonstrated inactive targets and bind current actual authority."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "**`=1`** Governed Subject Set",
+          "after": "**`=1`** Atom Governed Subject",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Bind the checked governed Entity to current R1363."
+        },
+        {
+          "before": "omit **or** duplicate an Atom Scope component, reorder the same Governed Subject Set,",
+          "after": "omit **or** duplicate an Atom Scope component **or** GOVERNS Subject, reorder Subject declarations containing **`=1`** GOVERNS Subject **and** prerequisite DEPENDS_ON Subjects **without** changing their Entity references, Relation Kinds, **or** Temporal Forms,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Preserve cardinality and authored-order tests without inventing a multi-member GOVERNS set."
+        },
+        {
+          "before": "ownership, Subject set,",
+          "after": "ownership, Subject declaration,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Remove the obsolete set name while retaining exact failure attribution."
+        }
+      ],
+      "after_governs_subjects": [
+        "Scope Reference Validation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-240",
+      "claim_change": "Only the explicit existing-authority binding repairs listed in the exact manifest."
+    },
+    {
+      "atom_id": "CA-E-403",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "before_version": 5,
+      "before_sha256": "42e281e4e19e041567a2172bde8edbe090c5c0cca536135c1860ccb117b15127",
+      "before_bytes_utf8": "---\natom_id: CA-E-403\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Consolidation Candidate Evaluation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Scope\n      - Atom/Scope\n      - Atom/Claim/Governed Subject Set\n      - Atom/Claim/Scope\n      - Claim Value Set\n      - Property\n      - IS_ALLOWED_VALUE_OF\nversion: 5\nupdated_at: \"2026-09-10 05:21:58 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1358\n    - CA-R-1359\n---\n# Report Exact Claim Value-Set Consolidation Candidates\n\nthe Evaluation **must** report one Claim Value Set consolidation candidate **only** **if** **every** contributing active Atom has the same Atom Scope, Governed Subject Set, Claim Scope, Property, **and** exact qualifiers, has one mechanically parseable single-value Claim, **and** differs **only** by one unique value proven through IS_ALLOWED_VALUE_OF for that Property; it **must not** mutate, merge, archive, replace, compile, **or** change a Source Atom by another operation, use semantic **or** LLM inference, **or** cause Applicable Methodology compilation **to** fail.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-GENERAL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "proposed_version": 6,
+      "proposed_tier": "General",
+      "proposed_bytes_utf8": "---\natom_id: CA-E-403\ncce_version: cce_1\ncce_form: evaluation\nsubjects:\n  governs:\n    occurrent:\n      - Claim Value Set Consolidation Candidate Evaluation\n  depends_on:\n    continuant:\n      - Atom/Claim\n      - Atom/Scope\n      - Atom/Governed Subject\n      - Atom/Claim/Scope\n      - Claim Value Set\n      - Property\n      - Subject/Temporal Form\n      - IS_ALLOWED_VALUE_OF\nversion: 6\nupdated_at: \"2026-09-10 05:28:44 +0400\"\nrelations:\n  evaluation_for:\n    - CA-R-1358\n    - CA-R-1359\n---\n# Report Exact Claim Value-Set Consolidation Candidates\n\nthe Evaluation **must** report one Claim Value Set consolidation candidate **only** **if** **every** contributing active Atom has the same Atom Scope, Atom Governed Subject, GOVERNS Subject Temporal Form, Claim Scope, Property, **and** exact qualifiers, has one mechanically parseable single-value Claim, **and** differs **only** by one unique value proven through IS_ALLOWED_VALUE_OF for that Property; it **must not** mutate, merge, archive, replace, compile, **or** change a Source Atom by another operation, use semantic **or** LLM inference, **or** cause Applicable Methodology compilation **to** fail.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates@5.md",
+      "exact_replacements": [
+        {
+          "before": "      - Atom/Claim/Governed Subject Set\n",
+          "after": "      - Atom/Governed Subject\n",
+          "count": 1,
+          "boundary": "subjects.depends_on",
+          "reason": "R1363/R1201: one governed Entity, not obsolete multi-member GSS."
+        },
+        {
+          "before": "      - Atom/Scope\n      - Atom/Scope\n",
+          "after": "      - Atom/Scope\n",
+          "count": 1,
+          "boundary": "subjects.depends_on",
+          "reason": "Remove one duplicate prerequisite; no authority change."
+        },
+        {
+          "before": "      - Property\n",
+          "after": "      - Property\n      - Subject/Temporal Form\n",
+          "count": 1,
+          "boundary": "subjects.depends_on",
+          "reason": "Declare the retained GOVERNS Temporal Form equality prerequisite."
+        },
+        {
+          "before": "same Atom Scope, Governed Subject Set, Claim Scope, Property,",
+          "after": "same Atom Scope, Atom Governed Subject, GOVERNS Subject Temporal Form, Claim Scope, Property,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Replace obsolete GSS binding without dropping its Temporal Form distinction or conflating Entity equality with Claim equivalence; all other qualifiers and safeguards remain."
+        }
+      ],
+      "approved_body_replacements": [
+        {
+          "before": "same Atom Scope, Governed Subject Set, Claim Scope, Property,",
+          "after": "same Atom Scope, Atom Governed Subject, GOVERNS Subject Temporal Form, Claim Scope, Property,",
+          "count": 1,
+          "boundary": "body",
+          "reason": "Replace obsolete GSS binding without dropping its Temporal Form distinction or conflating Entity equality with Claim equivalence; all other qualifiers and safeguards remain."
+        }
+      ],
+      "after_governs_subjects": [
+        "Claim Value Set Consolidation Candidate Evaluation"
+      ],
+      "classification_record": "CA-P-957-batch-11-dispositions.json#CA-E-403",
+      "claim_change": "Only the explicit existing-authority binding repairs listed in the exact manifest."
+    }
+  ],
+  "additions": [],
+  "notes": [
+    "19 remaining origin dispositions and one chained E403 correction; frozen batch10 history is unchanged.",
+    "Source-only execution under temporary Operator Journal override; no runtime, Journal or full legacy-vocabulary conformance claim.",
+    "check_of is a registered legacy Evaluation check relation, not an unknown kind. Standard cases normalize actual checked authorities into R1018 evaluation_for without duplicate checks; E002 replaces stale coverage bindings, adding no new case coverage."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "CA-M-271": {
+      "version": 8,
+      "sha256": "b7b9c95148d370a6101412f359dcd0baff875c27655b02c2972fbb0236311de2",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-METHOD--resolve-confidence-thresholds-by-source-precedence.md"
+    },
+    "CA-R-1427": {
+      "version": 7,
+      "sha256": "23ff646d8981dd1ac164e9f053f5543c4d30d49b8add4be6c88e04033fd77a1a",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1427-CORE_META_MODEL-CORE-REQUIREMENT--define-confidence-threshold.md"
+    },
+    "CA-R-1488": {
+      "version": 6,
+      "sha256": "9b09686d17b5b7b85e75de9037d64c9c8ef133c703cb24ba6036929ebc2ff269",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1488-CORE_META_MODEL-REQUIREMENT--define-implementation-retry-limit.md"
+    },
+    "CA-M-295": {
+      "version": 8,
+      "sha256": "575dc446280eea2d1b345d4d40368078ecdaf8dd342ab1a329e467e0ef36a1fb",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-295-CORE_META_MODEL-METHOD--resolve-implementation-retry-limits-by-source-precedence.md"
+    },
+    "CA-M-279": {
+      "version": 8,
+      "sha256": "cbc6d089a575795e3d3e0cefa3ab8d4a2a2b3ab8608947e7675f51b042d5ec6b",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-279-CORE_META_MODEL-GENERAL-METHOD--resolve-missing-framework-parameters-from-default-settings.md"
+    },
+    "CA-D-368": {
+      "version": 9,
+      "sha256": "225234e73165f21d820eaa20942457d961807796525f56cf74dd34fcf08cdbec",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-368-CORE_META_MODEL-DELIVERY--serialize-the-necessary-information-confidence-default.md"
+    },
+    "CA-D-369": {
+      "version": 8,
+      "sha256": "f59fe6f845a0e436e798ad577118321459c8737218b0f709d915be5f4213feb1",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-369-CORE_META_MODEL-DELIVERY--serialize-the-semantic-resolution-confidence-default.md"
+    },
+    "CA-R-1585": {
+      "version": 4,
+      "sha256": "c8058bf31fe092b80a81166e4d2bf79d5088220c53493e627e30b18d67018e5f",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1585-CORE_META_MODEL-GENERAL-REQUIREMENT--default-plan-work-assignment-to-an-ai-agent.md"
+    },
+    "CA-D-494": {
+      "version": 2,
+      "sha256": "2d96cd1193e7d33de6d79e405dfda5c2958fb9d60dc8bead69896d82f0b0b43d",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-494-CORE_META_MODEL-DELIVERY--store-operator-registry-in-project-root.md"
+    }
+  }
+}

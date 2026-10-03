@@ -1,0 +1,136 @@
+{
+  "schema": "caprmedio.ca_p_110.applicable_methodology_compilation.v1",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-110",
+  "task_revision": 7,
+  "recorded_at": "2026-08-27T21:40:42+04:00",
+  "minimum_confidence_percent": 99,
+  "prerequisite_authority": {
+    "ca_p_107_task_revision": 8,
+    "ca_p_107_task_sha256": "6c04f0abfb24538e5f5b5a6c31bd25b9636c4556ca55afc097a70354eb4add1e",
+    "ca_p_107_evidence_sha256": "b164722c8f9123f8289dd8ca5c487b4e553dfe2cf1f2ec2821f7173566f528c6",
+    "ca_p_108_task_revision": 18,
+    "ca_p_108_map_sha256": "2f6725e26c589df6b27bb521d5d36fa310f264eda001ef5a1766b8b5325c5dbc",
+    "ca_p_109_task_revision": 6,
+    "ca_p_109_execution_evidence_sha256": "48056c93fc5d42523d3ef4b912b33e649e60521cd70d5f9eb52582482dcf7726"
+  },
+  "tool": {
+    "name": "COMPILE_APPLICABLE_METHODOLOGY",
+    "executable_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py",
+    "executable_sha256": "c44495d4a32615ec5dd692c6524a7de0a0bc9cab662710b9c70f3d16db14decb",
+    "executable_mode": "0755",
+    "tests_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/tests/test_compile_applicable_methodology.py",
+    "tests_sha256": "817443f8f9e81ab79183985ed04752d318884cd9151a529904610fa39fcde38b",
+    "tests_passed": 8,
+    "tests_failed": 0
+  },
+  "tool_authority": [
+    {
+      "atom_id": "CA-R-1240",
+      "version": 1,
+      "sha256": "defdfa977a1d2606b3dff2be40e23184713bfb3a0e96ddaae508ef7742d60988"
+    },
+    {
+      "atom_id": "CA-M-226",
+      "version": 1,
+      "sha256": "c01ffad64e2d18b8f5e93b3c08ba2c0af69af0adccc344edbf86c62bd93c2467"
+    },
+    {
+      "atom_id": "CA-E-380",
+      "version": 1,
+      "sha256": "f0b5e811ede77f597725faf2d989aae7f3c9d95ef9150af5b4c083ab321b6afe"
+    },
+    {
+      "atom_id": "CA-D-254",
+      "version": 1,
+      "sha256": "0fa8ccc25df61254ddda00f9ca96ce158faf2b94ff6655b996c40111a7996aed"
+    }
+  ],
+  "source_frontier": {
+    "structural_source_layers": [
+      "CORE_META_MODEL",
+      "INSTALLED_EXTENSIONS",
+      "LOCAL_CONFIGURATION"
+    ],
+    "contributing_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "installed_extensions": "empty and non-contributing",
+    "selected_lifecycle": "current active only",
+    "selected_content_roles": [
+      "REQUIREMENT",
+      "METHOD",
+      "EVALUATION",
+      "DELIVERY",
+      "OPS"
+    ],
+    "eligible_candidate_count": 527,
+    "selected_candidate_count": 527,
+    "source_frontier_digest": "da419d079ba666c852aaaf6abfa482cc0f3fac48a4ebc315a309b8695470cd07"
+  },
+  "dry_run": {
+    "executed_before_apply": true,
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "approval_count_required": 0,
+    "approval_carrier_created": false,
+    "complete_conflict_classes_checked": [
+      "duplicate selected Atom identity",
+      "unresolved replacement",
+      "incompatible retained Candidate",
+      "unresolved priority",
+      "output-path collision"
+    ],
+    "source_mutation": false,
+    "output_mutation": false
+  },
+  "generated_tree": {
+    "root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY",
+    "carrier_counts": {
+      "04_requirement": 478,
+      "05_method": 26,
+      "06_evaluation": 18,
+      "07_delivery": 5,
+      "09_ops": 0,
+      "total": 527
+    },
+    "generated_tree_digest": "e946d378a384bd34acaf634afde0d1f5af413d922923ff7ad43a1d949545f830",
+    "projection_source_paths_relative_posix": 527,
+    "projection_source_paths_resolved": 527,
+    "source_payloads_restored_exactly_after_projection_removal": 527,
+    "persistent_governs_index_carriers": 0,
+    "persistent_depends_on_index_carriers": 0,
+    "non_markdown_output_carriers": 0,
+    "forbidden_role_directories": 0,
+    "draft_carriers": 0,
+    "archived_carriers": 0,
+    "independent_authority": false
+  },
+  "determinism_and_regeneration": {
+    "identical_live_rerun": "PASS",
+    "live_rerun_source_frontier_digest": "da419d079ba666c852aaaf6abfa482cc0f3fac48a4ebc315a309b8695470cd07",
+    "live_rerun_generated_tree_digest": "e946d378a384bd34acaf634afde0d1f5af413d922923ff7ad43a1d949545f830",
+    "fresh_disposable_root_started_without_generated_output": true,
+    "fresh_disposable_root_regeneration": "PASS",
+    "regenerated_source_frontier_digest": "da419d079ba666c852aaaf6abfa482cc0f3fac48a4ebc315a309b8695470cd07",
+    "regenerated_tree_digest": "e946d378a384bd34acaf634afde0d1f5af413d922923ff7ad43a1d949545f830",
+    "transaction_rollback_test": "PASS"
+  },
+  "deferred": {
+    "consumer_rewrite": "CA-P-113",
+    "consumer_carriers_modified": 0,
+    "persistent_subject_indexes": false
+  },
+  "validation": {
+    "source_immutability": "PASS",
+    "conflict_gate": "PASS",
+    "projected_carrier_payload": "PASS",
+    "canonical_role_directories": "PASS",
+    "deterministic_rerun": "PASS",
+    "complete_regeneration": "PASS",
+    "no_consumer_rewrite": "PASS",
+    "confidence_percent": 99
+  }
+}

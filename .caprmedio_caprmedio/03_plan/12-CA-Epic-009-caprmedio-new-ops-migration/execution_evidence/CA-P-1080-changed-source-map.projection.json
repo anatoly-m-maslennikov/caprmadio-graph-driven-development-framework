@@ -1,0 +1,905 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1080",
+  "generated_at": "2026-09-13T03:43:10+04:00",
+  "status": "Done",
+  "changes": [
+    {
+      "identity": "CA-E-444",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "Standard",
+      "global_tier": 9,
+      "status": "Active",
+      "version": 3,
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "before_version": 2,
+      "before_sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning@2.md",
+      "archive_sha256": "304366bc98654042351b3e384e494399d79ff8dfd6ef463de3e3278c62f0761b",
+      "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "classification": "same_identity_evaluation_extension",
+      "rationale": "Extend the existing owned Term-meaning evaluation with source-evidenced diagnostic index cases while preserving Term/reference checks."
+    },
+    {
+      "identity": "CA-R-1455",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "version": 1,
+      "before_path": null,
+      "before_version": null,
+      "before_sha256": null,
+      "archive_path": null,
+      "archive_sha256": null,
+      "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "classification": "new_diagnostic_index_requirement",
+      "rationale": "One independently adjustable admission/evidence boundary for derived vocabulary diagnostic indexes; no new graph identity, Carrier format or operational Process.",
+      "identity_admission": "No R1455 in live governed source/Project/archive/Journal content or Git history filenames; prior assigned Requirement number R1454. General tier follows R1431 derived-set criteria."
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1080",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/03-CA-P-1080-TASK--define-general-vocabulary-and-unresolved-term-indexes.md",
+      "before_version": 2,
+      "before_sha256": "e7b3038c1743d1255ca134b4eb3b078756fdba5f3a20d7623ad84635838374a5",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/done/03-CA-P-1080-TASK--define-general-vocabulary-and-unresolved-term-indexes.md",
+      "version": 3,
+      "sha256": "c3fcdb836c48946dab89bee634829d765ee92a54ff1c9dcfea44fcb92ae42249",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/03-CA-P-1080-TASK--define-general-vocabulary-and-unresolved-term-indexes@2.md",
+      "archive_sha256": "e7b3038c1743d1255ca134b4eb3b078756fdba5f3a20d7623ad84635838374a5",
+      "action": "MOVE+UPDATE"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-vocabulary-diagnostics-report.md",
+      "version": 1,
+      "sha256": "ddd15ab95cfd55c631b861d7192a3af0392c417ef9bf5c542ccf7bef9a92fb09",
+      "action": "ADD"
+    }
+  ],
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      }
+    ],
+    "ownership_inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1078-derived-model-view-authority-inventory.projection.json",
+      "sha256": "d155a84576a56dd37b347e12634a0162b45e2470edb7468c9ba584c2253e70ea"
+    }
+  },
+  "validation": {
+    "task_dod_falsifier": false,
+    "before_source_count": 1560,
+    "after_source_count": 1561,
+    "before_core_count": 678,
+    "after_core_count": 679,
+    "unchanged_sources": 1559,
+    "changed_source_carriers": 1,
+    "new_source_carriers": 1,
+    "unchanged_reserved_sources": 2,
+    "excluded_drafts_unchanged": 53,
+    "prior_archives_unchanged": 8361,
+    "new_exact_archives": 2,
+    "prior_evidence_unchanged": 19,
+    "other_tasks_unchanged": 109,
+    "enumerated_existing_repository_files": 11867,
+    "semantic_authority_fixtures": 24,
+    "generator_implementation_conformance_claimed": false,
+    "full_source_word_classification_claimed": false,
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b"
+  },
+  "semantic_fixtures": [
+    {
+      "id": "F01",
+      "scenario": "A Claim uses the ordinary word ready in its ordinary English sense; the checked context supplies no Project-specific meaning and no definition.",
+      "expected": "Accept as general vocabulary; no missing governed definition.",
+      "authority": [
+        "CA-R-1320",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1320",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1320-CORE_META_MODEL-CORE-REQUIREMENT--define-general-term.md",
+          "version": 4,
+          "sha256": "6d2e3a1ada6687f9fb87f41cedf9e74615a244cfdd435ca37555ca36381494e2",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "scenario": "The same ordinary word begins a sentence with a capital letter.",
+      "expected": "Capitalization does not establish Project-specific status; preserve the exact source occurrence.",
+      "authority": [
+        "CA-R-1320",
+        "CA-R-1323",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1320",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1320-CORE_META_MODEL-CORE-REQUIREMENT--define-general-term.md",
+          "version": 4,
+          "sha256": "6d2e3a1ada6687f9fb87f41cedf9e74615a244cfdd435ca37555ca36381494e2",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1323",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1323-CORE_META_MODEL-REQUIREMENT--lowercase-general-term-names.md",
+          "version": 4,
+          "sha256": "f01904b62ce8f233442f38e1db01594e0467ac2f8daba9c4b4907a783997d7cc",
+          "claim_start_line": 13
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "scenario": "A hypothetical Claim refers to Zorping as its Project-specific approval criterion, but complete checked definition coverage for the declared applicable source boundary has no active defining authority.",
+      "expected": "Report a candidate with missing defining authority and its contextual evidence; do not supply the criterion meaning.",
+      "authority": [
+        "CA-R-1319",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1319",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1319-CORE_META_MODEL-CORE-REQUIREMENT--define-governed-term.md",
+          "version": 4,
+          "sha256": "8b9a8ac34ee0d1fab15ffbd511b456828e44b18a22a900017b8c603ceb25d7be",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "scenario": "Two active definitions assign incompatible Project-specific meanings to the same candidate in the same applicable scope.",
+      "expected": "Report conflicting defining authority with both source references; choose neither meaning.",
+      "authority": [
+        "CA-R-1318",
+        "CA-R-1319",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1318",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md",
+          "version": 4,
+          "sha256": "483cb6e3b6d301632251edfc5b0ce5f3f7744aa5d6c6e713fbf5b350083246a1",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1319",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1319-CORE_META_MODEL-CORE-REQUIREMENT--define-governed-term.md",
+          "version": 4,
+          "sha256": "8b9a8ac34ee0d1fab15ffbd511b456828e44b18a22a900017b8c603ceb25d7be",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "scenario": "A unique defining Atom and an applicable source use supply conflicting Project-specific meanings.",
+      "expected": "Report conflicting use with the defining Atom and exact affected occurrence.",
+      "authority": [
+        "CA-R-1318",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1318",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md",
+          "version": 4,
+          "sha256": "483cb6e3b6d301632251edfc5b0ce5f3f7744aa5d6c6e713fbf5b350083246a1",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "scenario": "An unfamiliar capitalized phrase occurs with insufficient context to decide ordinary versus Project-specific use.",
+      "expected": "Keep a source-backed uncertain case and reason; do not promote it to an established Project-specific candidate.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "scenario": "A capitalized expression occurs only as a DEPENDS_ON target.",
+      "expected": "The occurrence alone establishes neither a Term nor missing defining authority; assess actual source context.",
+      "authority": [
+        "CA-M-114",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-M-114",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+          "version": 13,
+          "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+          "claim_start_line": 22
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F08",
+      "scenario": "A Scope Unit name or Actor name is used only to identify the referenced unit or person, with no evidence of Project-specific vocabulary meaning.",
+      "expected": "Do not admit an unresolved Term candidate merely from the name.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F09",
+      "scenario": "An Atom ID, filesystem path, or syntax token occurs only as an identifier, locator, or notation.",
+      "expected": "Do not report missing Term definitions from those occurrences alone.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "scenario": "A name-like expression also has contextual source evidence explicitly assigning it a Project-specific vocabulary role.",
+      "expected": "Evaluate that actual evidence; the shape of the expression is not a blanket exclusion or sufficient admission.",
+      "authority": [
+        "CA-R-1318",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1318",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md",
+          "version": 4,
+          "sha256": "483cb6e3b6d301632251edfc5b0ce5f3f7744aa5d6c6e713fbf5b350083246a1",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "scenario": "A definition exists outside a filtered selection, but the index treats its absence from the selected files as proof of missing authority in the applicable scope.",
+      "expected": "Reject the absence claim; retain the selection and coverage limitation without silently importing a definition.",
+      "authority": [
+        "CA-R-1454",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1454",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "32c6d2f4740c024cbf4bb9f3de4f03b11836fef3f0bb8917069b146ef35c646b",
+          "claim_start_line": 24
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F12",
+      "scenario": "Definition coverage is incomplete and no matching definition has been observed.",
+      "expected": "Report uncertainty about coverage or defining authority; no established missing-authority result.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F13",
+      "scenario": "A diagnostic entry proposes a candidate but cites no exact source occurrence.",
+      "expected": "Reject the index entry as ungrounded.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F14",
+      "scenario": "A diagnostic entry cites a source filename but omits its exact Revision and the context supporting its judgment.",
+      "expected": "Reject incomplete traceability.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F15",
+      "scenario": "The same spelling has an evidenced ordinary use in one occurrence and an evidenced Project-specific use in another.",
+      "expected": "Preserve both contexts; spelling alone does not transfer classification or settle a meaning conflict.",
+      "authority": [
+        "CA-R-1320",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1320",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1320-CORE_META_MODEL-CORE-REQUIREMENT--define-general-term.md",
+          "version": 4,
+          "sha256": "6d2e3a1ada6687f9fb87f41cedf9e74615a244cfdd435ca37555ca36381494e2",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F16",
+      "scenario": "An index invents edges from general vocabulary to unresolved candidates merely because entries co-occur or share spelling.",
+      "expected": "Reject; index membership or co-occurrence supplies no Relation Kind or authoritative source edge.",
+      "authority": [
+        "CA-R-1437",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1437",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+          "version": 1,
+          "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F17",
+      "scenario": "An implementation labels the diagnostic index a second Non-governed Terms Graph solely from its membership.",
+      "expected": "Reject the new graph identity; no independently admitted relation authority supports it.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F18",
+      "scenario": "A separate graph representation uses an independently admitted Relation Kind and exact source Relation declarations.",
+      "expected": "The index authority does not itself forbid that separately governed representation or invent its edges.",
+      "authority": [
+        "CA-R-1437",
+        "CA-R-1455"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1437",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+          "version": 1,
+          "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        }
+      ]
+    },
+    {
+      "id": "F19",
+      "scenario": "The diagnostic index is truthful about insufficient evidence and retains occurrence, context, Revision, coverage and reason.",
+      "expected": "The diagnostic-index check passes while the underlying classification or authority remains unresolved.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F20",
+      "scenario": "A reviewer substitutes a guessed definition to make a missing-authority diagnostic disappear.",
+      "expected": "Reject fabricated authority; retain the evidenced unresolved source issue.",
+      "authority": [
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F21",
+      "scenario": "A classifier asserts that capitalization and token extraction mechanically settle every word's semantic status.",
+      "expected": "Reject unsupported certainty; retain uncertain cases for review.",
+      "authority": [
+        "CA-M-114",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-M-114",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+          "version": 13,
+          "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+          "claim_start_line": 22
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F22",
+      "scenario": "Two active Definition Atoms provide the same wording and meaning for one governed Term in the same applicable scope.",
+      "expected": "Report a defining-authority uniqueness conflict; do not falsely claim conflicting meanings.",
+      "authority": [
+        "CA-R-1319",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1319",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1319-CORE_META_MODEL-CORE-REQUIREMENT--define-governed-term.md",
+          "version": 4,
+          "sha256": "8b9a8ac34ee0d1fab15ffbd511b456828e44b18a22a900017b8c603ceb25d7be",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F23",
+      "scenario": "A complete composite Subject Path is classified as one Term, or a Term's spelling is substituted for the direct Entity, Action or Process reference.",
+      "expected": "Reject the substitution or composite-Term admission under the retained checks.",
+      "authority": [
+        "CA-R-1325",
+        "CA-M-114",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1325",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1325-CORE_META_MODEL-CORE-REQUIREMENT--keep-composite-subject-expressions-out-of-terminology.md",
+          "version": 3,
+          "sha256": "c8050a57fca72bed749c42fa63c1579cd7432d94cfc6a6733fe596a2f5f62705",
+          "claim_start_line": 17
+        },
+        {
+          "identity": "CA-M-114",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+          "version": 13,
+          "sha256": "1736d7cc95ba6de1c69b0243d8b838bb7b5581a0286175c983aff73a9fa1d1a8",
+          "claim_start_line": 22
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    },
+    {
+      "id": "F24",
+      "scenario": "A unique active Definition Atom establishes a Project-specific meaning and the selected source uses it coherently.",
+      "expected": "The governed Term remains eligible under existing authority; do not label it unresolved solely to populate a diagnostic index.",
+      "authority": [
+        "CA-R-1318",
+        "CA-R-1319",
+        "CA-R-1454",
+        "CA-R-1455",
+        "CA-E-444"
+      ],
+      "review": "PASS: manually reviewed against the current authority; expected disposition is not an executable classifier result.",
+      "authority_sources": [
+        {
+          "identity": "CA-R-1318",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md",
+          "version": 4,
+          "sha256": "483cb6e3b6d301632251edfc5b0ce5f3f7744aa5d6c6e713fbf5b350083246a1",
+          "claim_start_line": 16
+        },
+        {
+          "identity": "CA-R-1319",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1319-CORE_META_MODEL-CORE-REQUIREMENT--define-governed-term.md",
+          "version": 4,
+          "sha256": "8b9a8ac34ee0d1fab15ffbd511b456828e44b18a22a900017b8c603ceb25d7be",
+          "claim_start_line": 18
+        },
+        {
+          "identity": "CA-R-1454",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+          "version": 1,
+          "sha256": "32c6d2f4740c024cbf4bb9f3de4f03b11836fef3f0bb8917069b146ef35c646b",
+          "claim_start_line": 24
+        },
+        {
+          "identity": "CA-R-1455",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+          "version": 1,
+          "sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+          "claim_start_line": 31
+        },
+        {
+          "identity": "CA-E-444",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+          "version": 3,
+          "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+          "claim_start_line": 43
+        }
+      ]
+    }
+  ],
+  "journal": {
+    "action_id": "execute-ca-p-1080-vocabulary-diagnostic-index-authority",
+    "append_only": true,
+    "receipt_binding": "Exact sealed source/archive/report/map/Task events append after root completion review; receipts returned separately. No historical author/time inferred."
+  },
+  "next_task": "CA-P-1081",
+  "deferred": [
+    "Entity qualification: P1081",
+    "Subject backlinks: P1082",
+    "Composed navigation/registry: P1083",
+    "D Carriers: P1084",
+    "Sub-Epic closure: P1085",
+    "Operation flow schema: P980 after parent review",
+    "Temporal-axis retirement and bulk Carrier migration: later assigned Tasks"
+  ]
+}

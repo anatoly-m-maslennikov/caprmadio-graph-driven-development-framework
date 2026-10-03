@@ -1,0 +1,2875 @@
+{
+  "schema": "ca-p-957-applied-batch/v1",
+  "non_authoritative": true,
+  "batch": "01",
+  "root_go": "Explicit root GO for frozen batch01 received before mutation; root sealed57 observed-state baselines and reused11 prior results. Worker does not invent historical provenance.",
+  "frozen_plan": "CA-P-957-batch-01-planned-source-delta.json",
+  "frozen_plan_sha256": "e8eed3bbf7b019b1ce8d3a333d9f64dcc9b4326d977fe4c05a60002df8cf6b64",
+  "existing": [
+    {
+      "atom_id": "CA-D-262",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-262-CORE_META_MODEL-CORE-DELIVERY--register-current-file-carrier-formats.md",
+      "before_version": 4,
+      "before_sha256": "c32aa524d017625ddd8729208d4b5e8d4d1d0ee2e7974253426af8e4ff25600d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-262-CORE_META_MODEL-DELIVERY--register-current-file-carrier-formats.md",
+      "after_version": 5,
+      "after_sha256": "974ee37ce6262c7e43ab9eac5658a2151ae7fe3917013dd902399523ca41486c",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-262-CORE_META_MODEL-CORE-DELIVERY--register-current-file-carrier-formats@4.md",
+      "archive_sha256": "c32aa524d017625ddd8729208d4b5e8d4d1d0ee2e7974253426af8e4ff25600d",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-264",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-264-CORE_META_MODEL-CORE-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier.md",
+      "before_version": 7,
+      "before_sha256": "d1b13023687256d2e35180b01302addcf3bbb0232bc0d8a342f81a9f41bc0ceb",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-264-CORE_META_MODEL-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier.md",
+      "after_version": 8,
+      "after_sha256": "6bd827cc3f113d44183ebcd38bc6be1766641fe0f2c34a8ca182ada32466aaae",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-264-CORE_META_MODEL-CORE-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier@7.md",
+      "archive_sha256": "d1b13023687256d2e35180b01302addcf3bbb0232bc0d8a342f81a9f41bc0ceb",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-267",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-267-CORE_META_MODEL-CORE-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md",
+      "before_version": 4,
+      "before_sha256": "b30f9954655436d6ff1c13e94caf395bf2e033b972c8d3097ae359608867c124",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-267-CORE_META_MODEL-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md",
+      "after_version": 5,
+      "after_sha256": "fafbab59f1c7ae193a88e844992c90e497468447b1e0bd9c38f6efa6e705df16",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-267-CORE_META_MODEL-CORE-DELIVERY--derive-address-facts-without-duplicated-frontmatter@4.md",
+      "archive_sha256": "b30f9954655436d6ff1c13e94caf395bf2e033b972c8d3097ae359608867c124",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-268",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+      "before_version": 5,
+      "before_sha256": "c31422af56c88b96517edecf2e847c811c1ccca955d3d1ba01cce732a1437a7a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+      "after_version": 6,
+      "after_sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms@5.md",
+      "archive_sha256": "c31422af56c88b96517edecf2e847c811c1ccca955d3d1ba01cce732a1437a7a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-269",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "before_version": 5,
+      "before_sha256": "74e41bddc77942668f78d4efc70ffeea15f9de9199d932d4ce10fa8903e4f99a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "after_version": 6,
+      "after_sha256": "bb2c608c3a765f9ffba074e1e8de941708222cc361090b3fae4ad92c09c53685",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-269-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-subjects-in-frontmatter@5.md",
+      "archive_sha256": "74e41bddc77942668f78d4efc70ffeea15f9de9199d932d4ce10fa8903e4f99a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-270",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+      "before_version": 4,
+      "before_sha256": "b293e7fce60bc06dce26c65d4059b377152cdca3379dc0c476a9b696b50347ba",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+      "after_version": 5,
+      "after_sha256": "1582889d0eb47298875f0b1dcbc8969a8d1e631cc5502e18397fa36f91572175",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-270-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-revision-metadata-in-frontmatter@4.md",
+      "archive_sha256": "b293e7fce60bc06dce26c65d4059b377152cdca3379dc0c476a9b696b50347ba",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-271",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-CORE-DELIVERY--serialize-task-sections.md",
+      "before_version": 6,
+      "before_sha256": "ef0908afccc0e47901b5c87de4b6bf7a39ddc6859f848e452b97d9bc6a549325",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+      "after_version": 7,
+      "after_sha256": "2e815c02566b2089b355b89f8aaa351aebc39395e764e55b50becdc4378f647b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-271-CORE_META_MODEL-CORE-DELIVERY--serialize-task-sections@6.md",
+      "archive_sha256": "ef0908afccc0e47901b5c87de4b6bf7a39ddc6859f848e452b97d9bc6a549325",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-272",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-272-CORE_META_MODEL-CORE-DELIVERY--serialize-task-dependencies-as-direct-relations.md",
+      "before_version": 6,
+      "before_sha256": "3ebb54eceda14dc127f9396763f8343dfba4914c789b518624cc50d8c958a813",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-272-CORE_META_MODEL-DELIVERY--serialize-task-dependencies-as-direct-relations.md",
+      "after_version": 7,
+      "after_sha256": "40c5d7fd8a23d79b811375288d72ba451ce5e4132cae7e4f2ef93f8697748d33",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-272-CORE_META_MODEL-CORE-DELIVERY--serialize-task-dependencies-as-direct-relations@6.md",
+      "archive_sha256": "3ebb54eceda14dc127f9396763f8343dfba4914c789b518624cc50d8c958a813",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-273",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-273-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-confidence-threshold-overrides.md",
+      "before_version": 6,
+      "before_sha256": "740ba46ebb4686ecf62e7cca078bb4559548d06c8e78f9fa9205314333a361ed",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-273-CORE_META_MODEL-DELIVERY--serialize-explicit-task-confidence-threshold-overrides.md",
+      "after_version": 7,
+      "after_sha256": "4b619e1ca47bc2b3eabe8512c7a9362dbbb61a8bfe0e66ccfd2c3439f909f6d1",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-273-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-confidence-threshold-overrides@6.md",
+      "archive_sha256": "740ba46ebb4686ecf62e7cca078bb4559548d06c8e78f9fa9205314333a361ed",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-274",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-atom-revision-author.md",
+      "before_version": 6,
+      "before_sha256": "2dec3d44e3b6b5ef345763bb1da4f3b3d9b04758c8216be3361bd24e0dbaab53",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md",
+      "after_version": 7,
+      "after_sha256": "eeaa34da4915e9782889c7b400e73dcd7f1acb07767e949e8680842012220980",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-274-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-atom-revision-author@6.md",
+      "archive_sha256": "2dec3d44e3b6b5ef345763bb1da4f3b3d9b04758c8216be3361bd24e0dbaab53",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-275",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-275-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-assignee.md",
+      "before_version": 5,
+      "before_sha256": "f1c445f29f2977071504ea95c5f12435bfffff365201c7bce8b831c597c8424d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-275-CORE_META_MODEL-DELIVERY--serialize-explicit-task-assignee.md",
+      "after_version": 6,
+      "after_sha256": "08143c7438bf773a82af23ddb299174b0ac9b302380f5b5e4751da60226dbed0",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-275-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-assignee@5.md",
+      "archive_sha256": "f1c445f29f2977071504ea95c5f12435bfffff365201c7bce8b831c597c8424d",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-276",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-CORE-DELIVERY--use-economical-yaml-frontmatter.md",
+      "before_version": 5,
+      "before_sha256": "52f4abaa76d376d3f7c210374bced6153f095c91112fbb5bf4a1f9cfd9661a96",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md",
+      "after_version": 6,
+      "after_sha256": "4deb8ad99daa40866d3151be83ab721ba98ef86e78e214f3a096123cc5bcabae",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-276-CORE_META_MODEL-CORE-DELIVERY--use-economical-yaml-frontmatter@5.md",
+      "archive_sha256": "52f4abaa76d376d3f7c210374bced6153f095c91112fbb5bf4a1f9cfd9661a96",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-277",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-277-CORE_META_MODEL-CORE-DELIVERY--serialize-safe-frontmatter-scalars.md",
+      "before_version": 5,
+      "before_sha256": "79d394df6d18fd3b3b5c586e8799de122a17608abed39347c034ff770e3545cf",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-277-CORE_META_MODEL-DELIVERY--serialize-safe-frontmatter-scalars.md",
+      "after_version": 6,
+      "after_sha256": "6991f16037400e293cf31b0b64db1d2c773e733089b9c72dfce3641c486c5ed2",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-277-CORE_META_MODEL-CORE-DELIVERY--serialize-safe-frontmatter-scalars@5.md",
+      "archive_sha256": "79d394df6d18fd3b3b5c586e8799de122a17608abed39347c034ff770e3545cf",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-278",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-278-CORE_META_MODEL-CORE-DELIVERY--omit-resolved-frontmatter-defaults.md",
+      "before_version": 6,
+      "before_sha256": "15c55ee2a529b2dfd1f40e292c3219fc869d1ac3f296e499bcb318619d6773f8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-278-CORE_META_MODEL-DELIVERY--omit-resolved-frontmatter-defaults.md",
+      "after_version": 7,
+      "after_sha256": "c57901e64c82baf937425b6d688882ca8ccab3d2d061aee16c065ce65dbc505e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-278-CORE_META_MODEL-CORE-DELIVERY--omit-resolved-frontmatter-defaults@6.md",
+      "archive_sha256": "15c55ee2a529b2dfd1f40e292c3219fc869d1ac3f296e499bcb318619d6773f8",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-279",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-279-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines.md",
+      "before_version": 5,
+      "before_sha256": "e4b81d9e204d14ad409a22e21dfc3260adb1aeb2c0a194ea6eaf87f888d39750",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-279-CORE_META_MODEL-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines.md",
+      "after_version": 6,
+      "after_sha256": "199b39e31bf09254dff83c88983f8f9d63590abddb88eb027c077933d696c986",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-279-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines@5.md",
+      "archive_sha256": "e4b81d9e204d14ad409a22e21dfc3260adb1aeb2c0a194ea6eaf87f888d39750",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-280",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-280-CORE_META_MODEL-CORE-DELIVERY--serialize-cce-operators-in-bold.md",
+      "before_version": 5,
+      "before_sha256": "2ed731e16cd97e35d120034f4ff84c6ceeaf1c503e9242d2071d1e46bb778963",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-280-CORE_META_MODEL-DELIVERY--serialize-cce-operators-in-bold.md",
+      "after_version": 6,
+      "after_sha256": "5aea68b0d97b6e3cab9043b612b46a17fd0757911530f31de77882d6c70ffe08",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-280-CORE_META_MODEL-CORE-DELIVERY--serialize-cce-operators-in-bold@5.md",
+      "archive_sha256": "2ed731e16cd97e35d120034f4ff84c6ceeaf1c503e9242d2071d1e46bb778963",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-281",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-281-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+      "before_version": 4,
+      "before_sha256": "00bb60b9f20855a478c752b3d3e61e02907eed9d22ff9ce85dc3dfacaabd964e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-281-CORE_META_MODEL-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+      "after_version": 5,
+      "after_sha256": "884609bcc38ee82962121e8ad05e95e411a9bbe6f3bd459250c5b0ae4931e07e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-281-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-atom-h1-from-summary@4.md",
+      "archive_sha256": "00bb60b9f20855a478c752b3d3e61e02907eed9d22ff9ce85dc3dfacaabd964e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-282",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-282-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+      "before_version": 4,
+      "before_sha256": "49360cd2ab69d92f97bd9754601267a24f2fe5f00713555e1cebae7dd6d2bcd8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-282-CORE_META_MODEL-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+      "after_version": 5,
+      "after_sha256": "75c24c4d92389b40d7b14e6b3eb7151a6068443181ba9122148e8ff23142b441",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-282-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-summary-slug-from-summary@4.md",
+      "archive_sha256": "49360cd2ab69d92f97bd9754601267a24f2fe5f00713555e1cebae7dd6d2bcd8",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-283",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-CORE-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+      "before_version": 4,
+      "before_sha256": "1f6a171229dc83b94884506d164d344095aed71903ec243dd68033d065cc952e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+      "after_version": 5,
+      "after_sha256": "ddde5a99c7b4f7fde3abfe52a1c56fb9087b4da194251931629782f1fe2a000b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-283-CORE_META_MODEL-CORE-DELIVERY--serialize-project-owned-markdown-atom-filenames@4.md",
+      "archive_sha256": "1f6a171229dc83b94884506d164d344095aed71903ec243dd68033d065cc952e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-284",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-284-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-token-case.md",
+      "before_version": 4,
+      "before_sha256": "7c235d1253aa953ba6c98f87ed6cb280c5fc2d32b28c6d175508ba8def3720a3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-284-CORE_META_MODEL-DELIVERY--serialize-filename-token-case.md",
+      "after_version": 5,
+      "after_sha256": "8cb7291a685e6c9e94ff0aa3b620ccd93fdbcea3bc2b61c22a1d151bf9b6e1a1",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-284-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-token-case@4.md",
+      "archive_sha256": "7c235d1253aa953ba6c98f87ed6cb280c5fc2d32b28c6d175508ba8def3720a3",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-286",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-286-CORE_META_MODEL-CORE-DELIVERY--serialize-goal-type-as-defines-goal-for.md",
+      "before_version": 7,
+      "before_sha256": "56cccb2068f88c20a595c96bcbe73de7bf89a2f8fa70b5d30004464c9bb20ffb",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-286-CORE_META_MODEL-DELIVERY--serialize-goal-type-as-defines-goal-for.md",
+      "after_version": 8,
+      "after_sha256": "36e53bdce051b94a07a3a1c55ce7e5ff5ffaf6edeb3f9bdfa7aec920e304ef43",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-286-CORE_META_MODEL-CORE-DELIVERY--serialize-goal-type-as-defines-goal-for@7.md",
+      "archive_sha256": "56cccb2068f88c20a595c96bcbe73de7bf89a2f8fa70b5d30004464c9bb20ffb",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-287",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-287-CORE_META_MODEL-CORE-DELIVERY--serialize-demand-type-and-producer-scope.md",
+      "before_version": 5,
+      "before_sha256": "9d5d92c367048dd2f7ddcc386da0ba0965e1f75543869398a155fd17317e4944",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-287-CORE_META_MODEL-DELIVERY--serialize-demand-type-and-producer-scope.md",
+      "after_version": 6,
+      "after_sha256": "9f96a5962e991e395ed89ebed457fd3b70b1f99ce83d1d2f60bec680bb040e9a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-287-CORE_META_MODEL-CORE-DELIVERY--serialize-demand-type-and-producer-scope@5.md",
+      "archive_sha256": "9d5d92c367048dd2f7ddcc386da0ba0965e1f75543869398a155fd17317e4944",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-288",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-288-CORE_META_MODEL-CORE-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md",
+      "before_version": 5,
+      "before_sha256": "b4e4199717bda9c3042a376bac679ffca8d14e15f01bdfec92652f8fbc5eaee8",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-288-CORE_META_MODEL-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md",
+      "after_version": 6,
+      "after_sha256": "7b04b8064d02e3acdb9eb3e7ed8eb02f9d5840d521ac7e9b0416203c353c0e28",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-288-CORE_META_MODEL-CORE-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number@5.md",
+      "archive_sha256": "b4e4199717bda9c3042a376bac679ffca8d14e15f01bdfec92652f8fbc5eaee8",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-289",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-289-CORE_META_MODEL-CORE-DELIVERY--serialize-archive-revision-version-suffixes.md",
+      "before_version": 5,
+      "before_sha256": "b073c77c4776d68ebb3d42979505d6bb94ab91a2e536029f277036c49a89b5df",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-289-CORE_META_MODEL-DELIVERY--serialize-archive-revision-version-suffixes.md",
+      "after_version": 6,
+      "after_sha256": "32c2afc5f6191a474c3dc969ad1680d0ad80a51897c4fb08da1de1a9951ec35a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-289-CORE_META_MODEL-CORE-DELIVERY--serialize-archive-revision-version-suffixes@5.md",
+      "archive_sha256": "b073c77c4776d68ebb3d42979505d6bb94ab91a2e536029f277036c49a89b5df",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-290",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-290-CORE_META_MODEL-CORE-DELIVERY--omit-version-suffixes-from-active-carriers.md",
+      "before_version": 4,
+      "before_sha256": "41a8b9228ac37cfb3e5fda6554577b5e5a800558cd82b154495c7a2fb2bcf2c5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-290-CORE_META_MODEL-DELIVERY--omit-version-suffixes-from-active-carriers.md",
+      "after_version": 5,
+      "after_sha256": "ce30f51a31ddb226287cb3e89683d7f3f79acd05dd0807e211019a65e1304e25",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-290-CORE_META_MODEL-CORE-DELIVERY--omit-version-suffixes-from-active-carriers@4.md",
+      "archive_sha256": "41a8b9228ac37cfb3e5fda6554577b5e5a800558cd82b154495c7a2fb2bcf2c5",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-291",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-291-CORE_META_MODEL-CORE-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md",
+      "before_version": 7,
+      "before_sha256": "f738598610cfb4789294bac8418bcae11718626dd556e7bca50991100a5e0f9f",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-291-CORE_META_MODEL-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md",
+      "after_version": 8,
+      "after_sha256": "4e2126dc2ebdf5b617922aacbcf5e1d1017ff03082a529247712935b50d8effd",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-291-CORE_META_MODEL-CORE-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames@7.md",
+      "archive_sha256": "f738598610cfb4789294bac8418bcae11718626dd556e7bca50991100a5e0f9f",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-292",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-292-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-filenames.md",
+      "before_version": 7,
+      "before_sha256": "6772bb80a841333016e885419ccce7a7f9784c6157737b16fe5ca875bf3d36b7",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-292-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-filenames.md",
+      "after_version": 8,
+      "after_sha256": "c66855ca784717cf15eb1122a3f0534a5f857942e88735732422a211649622db",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-292-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-filenames@7.md",
+      "archive_sha256": "6772bb80a841333016e885419ccce7a7f9784c6157737b16fe5ca875bf3d36b7",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-293",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-293-CORE_META_MODEL-CORE-DELIVERY--serialize-epic-directory-names.md",
+      "before_version": 6,
+      "before_sha256": "89f7f2ce2f215e01c25588f04b229ab3578214c4743e3f11f22af417a281a3cf",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-293-CORE_META_MODEL-DELIVERY--serialize-epic-directory-names.md",
+      "after_version": 7,
+      "after_sha256": "069c504146f6c2f5dfbb7e9e343cfd5e213850095b2db1da12f041f56b695374",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-293-CORE_META_MODEL-CORE-DELIVERY--serialize-epic-directory-names@6.md",
+      "archive_sha256": "89f7f2ce2f215e01c25588f04b229ab3578214c4743e3f11f22af417a281a3cf",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-294",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-294-CORE_META_MODEL-CORE-DELIVERY--serialize-task-filenames.md",
+      "before_version": 5,
+      "before_sha256": "e752431e0c28789d549bcd681e2c3852309a1ad1179692410377b4009c350378",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-294-CORE_META_MODEL-DELIVERY--serialize-task-filenames.md",
+      "after_version": 6,
+      "after_sha256": "72c8310fb6752b5aa7f1b1ac215adc7bdcf535df0ce8825f7864250d9b1549cd",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-294-CORE_META_MODEL-CORE-DELIVERY--serialize-task-filenames@5.md",
+      "archive_sha256": "e752431e0c28789d549bcd681e2c3852309a1ad1179692410377b4009c350378",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-295",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-295-CORE_META_MODEL-CORE-DELIVERY--place-carriers-by-revision-status.md",
+      "before_version": 6,
+      "before_sha256": "c11f69ea62a1b388f7946287ea548e4fe558486d63c7defc659dbb0b1ed8ad73",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-295-CORE_META_MODEL-DELIVERY--place-carriers-by-revision-status.md",
+      "after_version": 7,
+      "after_sha256": "973fd03b80b266fdb452e03b2ee298011fc1f4f5c195e919222754bfa3528aef",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-295-CORE_META_MODEL-CORE-DELIVERY--place-carriers-by-revision-status@6.md",
+      "archive_sha256": "c11f69ea62a1b388f7946287ea548e4fe558486d63c7defc659dbb0b1ed8ad73",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-296",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-296-CORE_META_MODEL-CORE-DELIVERY--materialize-content-role-directories-on-first-artifact.md",
+      "before_version": 5,
+      "before_sha256": "bdd303efedb63a08ecc4ddda31d51539428cf57c708f1ceb7f907a1168dd09bf",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-296-CORE_META_MODEL-DELIVERY--materialize-content-role-directories-on-first-artifact.md",
+      "after_version": 6,
+      "after_sha256": "d0a797b303bc88bfa3d1ddb77f466b527719a2e60f61940e055b041d31bc0148",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-296-CORE_META_MODEL-CORE-DELIVERY--materialize-content-role-directories-on-first-artifact@5.md",
+      "archive_sha256": "bdd303efedb63a08ecc4ddda31d51539428cf57c708f1ceb7f907a1168dd09bf",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-297",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-297-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-authority-directory-names.md",
+      "before_version": 5,
+      "before_sha256": "553e54f1399fc36545225d11a7a80e6985fbd3012fd80738c39091662559e4b1",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-297-CORE_META_MODEL-DELIVERY--serialize-scope-unit-authority-directory-names.md",
+      "after_version": 6,
+      "after_sha256": "512d475fb467e3702dcbb6ff1b95af66d0cd5f93e51acfb1f5d91981a226c35b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-297-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-authority-directory-names@5.md",
+      "archive_sha256": "553e54f1399fc36545225d11a7a80e6985fbd3012fd80738c39091662559e4b1",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-298",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-298-CORE_META_MODEL-CORE-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories.md",
+      "before_version": 5,
+      "before_sha256": "8dda77c2db7f417f9f3ad382e748980c7c9dc63259b95f3cf641eff3be49c0a7",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-298-CORE_META_MODEL-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories.md",
+      "after_version": 6,
+      "after_sha256": "e405d3d54c05182a4861f8616c4af8afc819bb66a1961990af488f864d32fe9a",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-298-CORE_META_MODEL-CORE-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories@5.md",
+      "archive_sha256": "8dda77c2db7f417f9f3ad382e748980c7c9dc63259b95f3cf641eff3be49c0a7",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-299",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-299-CORE_META_MODEL-CORE-DELIVERY--serialize-root-delivery-directory-names.md",
+      "before_version": 5,
+      "before_sha256": "0f4fc4da48ce5ed3914b75f8e042c51f218d60d6523c666e8ad69cb29ae7ca91",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-299-CORE_META_MODEL-DELIVERY--serialize-root-delivery-directory-names.md",
+      "after_version": 6,
+      "after_sha256": "d6e7dd238339a340569079a44ed03ddf5dd80fc0ace492ea79f0353e96803424",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-299-CORE_META_MODEL-CORE-DELIVERY--serialize-root-delivery-directory-names@5.md",
+      "archive_sha256": "0f4fc4da48ce5ed3914b75f8e042c51f218d60d6523c666e8ad69cb29ae7ca91",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-300",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-300-CORE_META_MODEL-CORE-DELIVERY--size-structural-level-prefixes-dynamically.md",
+      "before_version": 5,
+      "before_sha256": "221f239e499457fe0184c461e2b68cd86b2f79ffea4a96a6e79c8b66cb6a5625",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-300-CORE_META_MODEL-DELIVERY--size-structural-level-prefixes-dynamically.md",
+      "after_version": 6,
+      "after_sha256": "49e27c9d69ec798e9321bfbd96fcd4cbb067360c646e08297611eff9659c6272",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-300-CORE_META_MODEL-CORE-DELIVERY--size-structural-level-prefixes-dynamically@5.md",
+      "archive_sha256": "221f239e499457fe0184c461e2b68cd86b2f79ffea4a96a6e79c8b66cb6a5625",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-301",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-301-CORE_META_MODEL-CORE-DELIVERY--require-portable-safe-carrier-addresses.md",
+      "before_version": 5,
+      "before_sha256": "879e9d82a3f5f0fa646bc39c702ad9592b1582fe7bb6fb9200035552a577f52b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-301-CORE_META_MODEL-DELIVERY--require-portable-safe-carrier-addresses.md",
+      "after_version": 6,
+      "after_sha256": "c92ea4b08a5f2cdbb98f3db88ae2178844e5965ac39d4ed85f89d279aa5ff21d",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-301-CORE_META_MODEL-CORE-DELIVERY--require-portable-safe-carrier-addresses@5.md",
+      "archive_sha256": "879e9d82a3f5f0fa646bc39c702ad9592b1582fe7bb6fb9200035552a577f52b",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-302",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-302-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+      "before_version": 5,
+      "before_sha256": "4f1454110f994bc6275ec97674a951a24a312d4ad8bf42ebd4e5cdb48ab075bc",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-302-CORE_META_MODEL-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+      "after_version": 6,
+      "after_sha256": "1720f821abeae640cc28fd0b71e8d89f9347f0cf8d18aa78a983ecece352c36b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-302-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-references-as-filename-tokens@5.md",
+      "archive_sha256": "4f1454110f994bc6275ec97674a951a24a312d4ad8bf42ebd4e5cdb48ab075bc",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-306",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-306-CORE_META_MODEL-CORE-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+      "before_version": 4,
+      "before_sha256": "8e3f128d3a156f9f1a1d6616c9d3c05d28cfb25b528df3f6e42cced6ec7d43bb",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-306-CORE_META_MODEL-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+      "after_version": 5,
+      "after_sha256": "dcf87760aaf3bf095607c262d8347a6c40488922b8a2ec73d5477a8511bf15ad",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-306-CORE_META_MODEL-CORE-DELIVERY--materialize-applicable-methodology-as-projected-atom-files@4.md",
+      "archive_sha256": "8e3f128d3a156f9f1a1d6616c9d3c05d28cfb25b528df3f6e42cced6ec7d43bb",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-307",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-307-CORE_META_MODEL-CORE-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md",
+      "before_version": 4,
+      "before_sha256": "13bb88f2db6395f58ac9b76a0fef28652157558238ca58cc82c6b66d96a61492",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-307-CORE_META_MODEL-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md",
+      "after_version": 5,
+      "after_sha256": "e34018ad0e07e863f788e0be3136f6015045697bf3fba04045d764eb1a35b1d1",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-307-CORE_META_MODEL-CORE-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes@4.md",
+      "archive_sha256": "13bb88f2db6395f58ac9b76a0fef28652157558238ca58cc82c6b66d96a61492",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-310",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-310-CORE_META_MODEL-CORE-DELIVERY--serialize-projection-updated-at.md",
+      "before_version": 4,
+      "before_sha256": "8eea3e39929cb4cb13f393364aab58ce85a4fbadd15dc6f127068b443f66450c",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-310-CORE_META_MODEL-DELIVERY--serialize-projection-updated-at.md",
+      "after_version": 5,
+      "after_sha256": "a4fadc0dabc2aadb59c41856b60b5a1074986d3d9e1a7f3ca19b31f45744b23e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-310-CORE_META_MODEL-CORE-DELIVERY--serialize-projection-updated-at@4.md",
+      "archive_sha256": "8eea3e39929cb4cb13f393364aab58ce85a4fbadd15dc6f127068b443f66450c",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-313",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-313-CORE_META_MODEL-CORE-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+      "before_version": 4,
+      "before_sha256": "404edf43f1bc474e408d47252838cfb8bc3c5d56c72ecf82127f20af5361e859",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-313-CORE_META_MODEL-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+      "after_version": 5,
+      "after_sha256": "fd5c7bfbcd1ee11d4eea70d615861f2fbcf5e85af8c22c22525069147b9c28d2",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-313-CORE_META_MODEL-CORE-DELIVERY--serialize-projected-atom-source-carrier-paths@4.md",
+      "archive_sha256": "404edf43f1bc474e408d47252838cfb8bc3c5d56c72ecf82127f20af5361e859",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-317",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-317-CORE_META_MODEL-CORE-DELIVERY--place-each-project-framework-instance-inside-its-project.md",
+      "before_version": 3,
+      "before_sha256": "83232871c0fb2c4b0c5d034a5602d672304fdd2854a724f3bf3a7801292caf58",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-317-CORE_META_MODEL-DELIVERY--place-each-project-framework-instance-inside-its-project.md",
+      "after_version": 4,
+      "after_sha256": "2836c6afc67788ca831d9347d21d078dbea5f950094bc0a950ae7b6e9eb926db",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-317-CORE_META_MODEL-CORE-DELIVERY--place-each-project-framework-instance-inside-its-project@3.md",
+      "archive_sha256": "83232871c0fb2c4b0c5d034a5602d672304fdd2854a724f3bf3a7801292caf58",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-318",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-318-CORE_META_MODEL-CORE-DELIVERY--place-project-owned-persistent-carriers.md",
+      "before_version": 3,
+      "before_sha256": "6691ca0450f6343feabefc64d4d2d083f6fb683e8bccddd3e9a7c77d4edcf5a0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-318-CORE_META_MODEL-DELIVERY--place-project-owned-persistent-carriers.md",
+      "after_version": 4,
+      "after_sha256": "2d606e438c977c2ba9c769cf715c0eda9458e00974c65ccd7b1fb75202881a47",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-318-CORE_META_MODEL-CORE-DELIVERY--place-project-owned-persistent-carriers@3.md",
+      "archive_sha256": "6691ca0450f6343feabefc64d4d2d083f6fb683e8bccddd3e9a7c77d4edcf5a0",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-329",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL-CORE-DELIVERY--serialize-proof-frontier-references.md",
+      "before_version": 4,
+      "before_sha256": "0a8d4463fcf8bc53de47ac3e646630c09703d0512638beb09b25b7d625aa3f72",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references.md",
+      "after_version": 5,
+      "after_sha256": "f1324c89a1570b48b3f724d0ef3c912966592928b1e2f6d1eec8bc35c78fabd6",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-329-CORE_META_MODEL-CORE-DELIVERY--serialize-proof-frontier-references@4.md",
+      "archive_sha256": "0a8d4463fcf8bc53de47ac3e646630c09703d0512638beb09b25b7d625aa3f72",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-330",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-330-CORE_META_MODEL-CORE-DELIVERY--preserve-github-file-preview-compatibility.md",
+      "before_version": 4,
+      "before_sha256": "99231f840b1c3fca1686a8c80e4b12c9101c57eb04fd54c6402bf071d29f7a22",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-330-CORE_META_MODEL-DELIVERY--preserve-github-file-preview-compatibility.md",
+      "after_version": 5,
+      "after_sha256": "b6bcf6fb8889d332cba3e2c58cb493522e9d30d01a081607d38ed56aec1541d9",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-330-CORE_META_MODEL-CORE-DELIVERY--preserve-github-file-preview-compatibility@4.md",
+      "archive_sha256": "99231f840b1c3fca1686a8c80e4b12c9101c57eb04fd54c6402bf071d29f7a22",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-331",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-331-CORE_META_MODEL-CORE-DELIVERY--keep-durable-hub-navigation-at-folder-level.md",
+      "before_version": 4,
+      "before_sha256": "8c20ade5dfcfe50a8511176cac8673621b616febd020041b2eb4c120b773d8a3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-331-CORE_META_MODEL-DELIVERY--keep-durable-hub-navigation-at-folder-level.md",
+      "after_version": 5,
+      "after_sha256": "62fb0005bcc14571b56e1fc33c0f155bf19c59dbe1099b318c4b0c02504332a8",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-331-CORE_META_MODEL-CORE-DELIVERY--keep-durable-hub-navigation-at-folder-level@4.md",
+      "archive_sha256": "8c20ade5dfcfe50a8511176cac8673621b616febd020041b2eb4c120b773d8a3",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-334",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-334-CORE_META_MODEL-CORE-DELIVERY--serialize-governed-change-commit-messages.md",
+      "before_version": 4,
+      "before_sha256": "0cfeaf42e28be4d61fa8657d54c9296ddc62dc0181f6c59af8facf97c4afc208",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-334-CORE_META_MODEL-DELIVERY--serialize-governed-change-commit-messages.md",
+      "after_version": 5,
+      "after_sha256": "0a35a260c296895f4ae2570ca3787eb1a553356d3dcc40e838901ea3dbd53341",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-334-CORE_META_MODEL-CORE-DELIVERY--serialize-governed-change-commit-messages@4.md",
+      "archive_sha256": "0cfeaf42e28be4d61fa8657d54c9296ddc62dc0181f6c59af8facf97c4afc208",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-335",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-335-CORE_META_MODEL-CORE-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+      "before_version": 4,
+      "before_sha256": "6a9184e1cdf4a565892d9435329ba04cde587e9ccb38842d206d079799dd70ae",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-335-CORE_META_MODEL-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+      "after_version": 5,
+      "after_sha256": "9963938e690661ace52dbc86d453f91903d0d9cbd0ba8458c155736eac4a61d6",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-335-CORE_META_MODEL-CORE-DELIVERY--mirror-governed-file-changes-in-journal-and-git@4.md",
+      "archive_sha256": "6a9184e1cdf4a565892d9435329ba04cde587e9ccb38842d206d079799dd70ae",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-336",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-336-CORE_META_MODEL-CORE-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities.md",
+      "before_version": 4,
+      "before_sha256": "0e518fca7d3295ec5575458c89ca207eeac2abd2cd6a0393dbbab92564dfa271",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-336-CORE_META_MODEL-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities.md",
+      "after_version": 5,
+      "after_sha256": "9f5dc0a1e81781427eaa83fa938085f2e6b639d5de79a4e5cdd418c0526160ad",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-336-CORE_META_MODEL-CORE-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities@4.md",
+      "archive_sha256": "0e518fca7d3295ec5575458c89ca207eeac2abd2cd6a0393dbbab92564dfa271",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-339",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-CORE-DELIVERY--serialize-implementation-journal-carriers.md",
+      "before_version": 4,
+      "before_sha256": "cadf1375f7364efadf2ea2ebae4f2cadf73cf7ec9e3da4546041141963aacedc",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+      "after_version": 5,
+      "after_sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-339-CORE_META_MODEL-CORE-DELIVERY--serialize-implementation-journal-carriers@4.md",
+      "archive_sha256": "cadf1375f7364efadf2ea2ebae4f2cadf73cf7ec9e3da4546041141963aacedc",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-342",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-342-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-references.md",
+      "before_version": 7,
+      "before_sha256": "16a8652e5ebeeb0b2189272078d74dfd4ed152e00fdbea4a7de6fde1a0acea60",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-342-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-references.md",
+      "after_version": 8,
+      "after_sha256": "d20e07e6cb624c63d165074dd6f79c6c6142ae4d403874629443f3aeac0ce169",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-342-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-references@7.md",
+      "archive_sha256": "16a8652e5ebeeb0b2189272078d74dfd4ed152e00fdbea4a7de6fde1a0acea60",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-346",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-346-CORE_META_MODEL-CORE-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections.md",
+      "before_version": 3,
+      "before_sha256": "0412ce9766ae69cf73de75bdb433b4cd582c08eb532ec8c050db02c521b979f7",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-346-CORE_META_MODEL-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections.md",
+      "after_version": 4,
+      "after_sha256": "67ea6624826cc9d03f2e5ef3e6838addc442284a52b40876764640b84d22cc9f",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-346-CORE_META_MODEL-CORE-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections@3.md",
+      "archive_sha256": "0412ce9766ae69cf73de75bdb433b4cd582c08eb532ec8c050db02c521b979f7",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-347",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-347-CORE_META_MODEL-CORE-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections.md",
+      "before_version": 3,
+      "before_sha256": "0120a0ee7c3ec1484f77e7d6da4e9fccb997e445cad48d2d76c3c782233fef60",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-347-CORE_META_MODEL-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections.md",
+      "after_version": 4,
+      "after_sha256": "ddd8dc70971c1e2c762e3fd2d69a7dd45abc48101bcae103546b97cefcc3ec88",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-347-CORE_META_MODEL-CORE-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections@3.md",
+      "archive_sha256": "0120a0ee7c3ec1484f77e7d6da4e9fccb997e445cad48d2d76c3c782233fef60",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-350",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-350-CORE_META_MODEL-CORE-DELIVERY--serialize-objective-filenames.md",
+      "before_version": 4,
+      "before_sha256": "f0c3a2378d5c132381ca7f67ee541baf334cb19c4f0323f5ba70f43b7e3116f9",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-350-CORE_META_MODEL-DELIVERY--serialize-objective-filenames.md",
+      "after_version": 5,
+      "after_sha256": "bfca8a3b31b099b7c3a93061f3bcd020daa4686fc9feb614f6e08173162d142e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-350-CORE_META_MODEL-CORE-DELIVERY--serialize-objective-filenames@4.md",
+      "archive_sha256": "f0c3a2378d5c132381ca7f67ee541baf334cb19c4f0323f5ba70f43b7e3116f9",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-351",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-351-CORE_META_MODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories.md",
+      "before_version": 5,
+      "before_sha256": "3506f6139d86a570ae0abbc64ba7a0b6c1e4b7b145c3074c158869a2f9d5dbb4",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-351-CORE_META_MODEL-DELIVERY--store-objectives-outside-their-epic-directories.md",
+      "after_version": 6,
+      "after_sha256": "97a08ff45945e6edb7976b3628efd01c83b6db713aac8dffbd7047eacc088f8e",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-351-CORE_META_MODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories@5.md",
+      "archive_sha256": "3506f6139d86a570ae0abbc64ba7a0b6c1e4b7b145c3074c158869a2f9d5dbb4",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-353",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-353-CORE_META_MODEL-CORE-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+      "before_version": 2,
+      "before_sha256": "6709ba7d83ae265f0cc8e098bd5553f996aea10b56dc519905e610636db5957e",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+      "after_version": 3,
+      "after_sha256": "15296a9d396578a9fdd5ca54c4fe94f134913c28ffc25ea3973ac50ea1f1e845",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-353-CORE_META_MODEL-CORE-DELIVERY--carry-every-structural-entity-with-a-directory-carrier@2.md",
+      "archive_sha256": "6709ba7d83ae265f0cc8e098bd5553f996aea10b56dc519905e610636db5957e",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-355",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-355-CORE_META_MODEL-CORE-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier.md",
+      "before_version": 2,
+      "before_sha256": "664480eab2ecf0275c4238eb64dfb012102d656355913083b5c1376ca7efddc0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-355-CORE_META_MODEL-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier.md",
+      "after_version": 3,
+      "after_sha256": "4e6d3f785fa63d727c45f2d6c98afeec22765ad3544a7e43522a894e851cb801",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-355-CORE_META_MODEL-CORE-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier@2.md",
+      "archive_sha256": "664480eab2ecf0275c4238eb64dfb012102d656355913083b5c1376ca7efddc0",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-356",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-356-CORE_META_MODEL-CORE-DELIVERY--structure-markdown-atom-carriers.md",
+      "before_version": 2,
+      "before_sha256": "ff8e06674f7dad0bb9861e3aae3bb5f0582811be6e309c5b9666dc81f93df07f",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-356-CORE_META_MODEL-DELIVERY--structure-markdown-atom-carriers.md",
+      "after_version": 3,
+      "after_sha256": "32071514e6472ca8d6070d8206e57dc5376ade53f1f7c61ceefa93c464ee7ab3",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-356-CORE_META_MODEL-CORE-DELIVERY--structure-markdown-atom-carriers@2.md",
+      "archive_sha256": "ff8e06674f7dad0bb9861e3aae3bb5f0582811be6e309c5b9666dc81f93df07f",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-357",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-357-CORE_META_MODEL-CORE-DELIVERY--define-markdown-atom-main-content.md",
+      "before_version": 2,
+      "before_sha256": "41445294c2dc73f78bf5e518033f67db50307fc318d9767ec671dc7d180955c2",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-357-CORE_META_MODEL-DELIVERY--define-markdown-atom-main-content.md",
+      "after_version": 3,
+      "after_sha256": "9e4ca1ca7d1cd75962d8ae94b857af348865709a35dd8b9acf9c1a5ddd1e6932",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-357-CORE_META_MODEL-CORE-DELIVERY--define-markdown-atom-main-content@2.md",
+      "archive_sha256": "41445294c2dc73f78bf5e518033f67db50307fc318d9767ec671dc7d180955c2",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-358",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-358-CORE_META_MODEL-CORE-DELIVERY--identify-framework-settings-artifact.md",
+      "before_version": 3,
+      "before_sha256": "1ca77a8e0ba7f4a64e3f2a2ef10d90c84516bf494e41bb767e1aac46e94eff9b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-358-CORE_META_MODEL-DELIVERY--identify-framework-settings-artifact.md",
+      "after_version": 4,
+      "after_sha256": "09bea3c54bbbf1293500d7a2230e06905920d2cd20591f20ae45f22e021ec1fd",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-358-CORE_META_MODEL-CORE-DELIVERY--identify-framework-settings-artifact@3.md",
+      "archive_sha256": "1ca77a8e0ba7f4a64e3f2a2ef10d90c84516bf494e41bb767e1aac46e94eff9b",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-359",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-359-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier.md",
+      "before_version": 3,
+      "before_sha256": "b0adf158a12dec6737734c2c86a36ce5e182f20de1f0d6bb4b326ae6f95b136a",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-359-CORE_META_MODEL-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier.md",
+      "after_version": 4,
+      "after_sha256": "cb6b222a836fbf6e4b377ef5951ef5b775f69951018683ad45209d5fd250406b",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-359-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier@3.md",
+      "archive_sha256": "b0adf158a12dec6737734c2c86a36ce5e182f20de1f0d6bb4b326ae6f95b136a",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-360",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-360-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+      "before_version": 3,
+      "before_sha256": "247257137e8c877f925ce34b9908116d47bfefbfeaf9ce8600674c792e73f150",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+      "after_version": 4,
+      "after_sha256": "5e74916c16cbecdce7e7e9f18a239a97643cb9759faee7f7624b3c36f71b2067",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-360-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-revisions-to-journal-receipts@3.md",
+      "archive_sha256": "247257137e8c877f925ce34b9908116d47bfefbfeaf9ce8600674c792e73f150",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-362",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-362-CORE_META_MODEL-CORE-DELIVERY--identify-project-settings-artifact.md",
+      "before_version": 2,
+      "before_sha256": "6016384cddb9362369c8294cbe4646f3632bab26c6e17e1b0fbe386ae8de36c5",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-362-CORE_META_MODEL-DELIVERY--identify-project-settings-artifact.md",
+      "after_version": 3,
+      "after_sha256": "4930590c31437466b7a3e147933443ba6ccd7fe2339bf36b94349498731f25c1",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-362-CORE_META_MODEL-CORE-DELIVERY--identify-project-settings-artifact@2.md",
+      "archive_sha256": "6016384cddb9362369c8294cbe4646f3632bab26c6e17e1b0fbe386ae8de36c5",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-363",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-363-CORE_META_MODEL-CORE-DELIVERY--serialize-project-settings-filename.md",
+      "before_version": 2,
+      "before_sha256": "18a3cce08b343d0b80ad363d11b1a0b270aa74e17164ddd5d7446a6d0dd7601b",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-363-CORE_META_MODEL-DELIVERY--serialize-project-settings-filename.md",
+      "after_version": 3,
+      "after_sha256": "95d39a0b5e261e35d1f4a71e80ba697453db2fe4440d97fef2d8764e301e7ba9",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-363-CORE_META_MODEL-CORE-DELIVERY--serialize-project-settings-filename@2.md",
+      "archive_sha256": "18a3cce08b343d0b80ad363d11b1a0b270aa74e17164ddd5d7446a6d0dd7601b",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-364",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-364-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier.md",
+      "before_version": 2,
+      "before_sha256": "3fdd748252ad176362881f17d938d7fa035d607e283c81320913b340e2657806",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-364-CORE_META_MODEL-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier.md",
+      "after_version": 3,
+      "after_sha256": "9debb4355ed433bac6aaae237b7753e387e5802757ef1f370026f7e625575ce5",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-364-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier@2.md",
+      "archive_sha256": "3fdd748252ad176362881f17d938d7fa035d607e283c81320913b340e2657806",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-365",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+      "before_version": 2,
+      "before_sha256": "47d4bc9bb0e7aa48897bcc218b06ece7b71a9df6d42c7b8e78ff9d898b4434e7",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+      "after_version": 3,
+      "after_sha256": "01889edd3489dc644f5285cc4947ca81bc1468458af40349f7596a441996b2cc",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-365-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-revisions-to-journal-receipts@2.md",
+      "archive_sha256": "47d4bc9bb0e7aa48897bcc218b06ece7b71a9df6d42c7b8e78ff9d898b4434e7",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-D-367",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-367-CORE_META_MODEL-CORE-DELIVERY--serialize-claim-scope-only-for-relational-atoms.md",
+      "before_version": 2,
+      "before_sha256": "beae6847d360dee4c4c85e3c1d02fa24d072507a590e2cb0880b03f649d5c300",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-367-CORE_META_MODEL-DELIVERY--serialize-claim-scope-only-for-relational-atoms.md",
+      "after_version": 3,
+      "after_sha256": "0708bff37f56e4127fdee5605a9604d018545c7c34bc269c9436c49b65113064",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-367-CORE_META_MODEL-CORE-DELIVERY--serialize-claim-scope-only-for-relational-atoms@2.md",
+      "archive_sha256": "beae6847d360dee4c4c85e3c1d02fa24d072507a590e2cb0880b03f649d5c300",
+      "body_preserved": true
+    },
+    {
+      "atom_id": "CA-M-235",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-235-CORE_META_MODEL-CORE-METHOD--express-cardinality-with-comparison-operators-and-integer-literals.md",
+      "before_version": 4,
+      "before_sha256": "bca9165c98207dbf51c3603c1c694c980aedd70889f18ef059dccbf01ee509a3",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-235-CORE_META_MODEL-METHOD--express-cardinality-with-comparison-operators-and-integer-literals.md",
+      "after_version": 5,
+      "after_sha256": "b5eba10f4adf1ec213763e377ce1de480bb1b8d9ebb3c3aefd23977c29e68cb6",
+      "after_tier": "Standard",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-235-CORE_META_MODEL-CORE-METHOD--express-cardinality-with-comparison-operators-and-integer-literals@4.md",
+      "archive_sha256": "bca9165c98207dbf51c3603c1c694c980aedd70889f18ef059dccbf01ee509a3",
+      "body_preserved": true
+    }
+  ],
+  "additions": [],
+  "counts": {
+    "revisions": 68,
+    "exact_prior_archives": 68,
+    "unchanged_dispositions": 9
+  },
+  "source_journal_status": "All136 root-sealed source results independently verified against current bytes and planned result hashes.",
+  "journal_receipts": [
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 83,
+      "event_id": "00d250ea442a7282505f7602eb56e4bc6af0dec5d4561c07c71033b0a627c09a",
+      "event_digest": "910517f5bf28a8eabc4bcea7910869cbfad7bce910b4eb8c74771047c1b3feeb",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-262-CORE_META_MODEL-CORE-DELIVERY--register-current-file-carrier-formats@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-262-CORE_META_MODEL-CORE-DELIVERY--register-current-file-carrier-formats@4.md",
+        "sha256": "c32aa524d017625ddd8729208d4b5e8d4d1d0ee2e7974253426af8e4ff25600d",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 84,
+      "event_id": "d51585cfc548118e0622a7d1aad683189019b04f119174f8f069e9ccbd8c11ba",
+      "event_digest": "6847399572aa9c7e1d23d2bac95e58b9a6fb367eed561eaaefbeee028e855398",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-262-CORE_META_MODEL-DELIVERY--register-current-file-carrier-formats.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-262-CORE_META_MODEL-DELIVERY--register-current-file-carrier-formats.md",
+        "sha256": "974ee37ce6262c7e43ab9eac5658a2151ae7fe3917013dd902399523ca41486c",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 85,
+      "event_id": "42fa7c7b288bfa48bf7dfdcd3df3526f25e871fd6a3f78fafa89dca36dd2cd43",
+      "event_digest": "cc9c8cf751e1208849477f374d4926b29a966adae2824f08f1bdffed8202d08d",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-264-CORE_META_MODEL-CORE-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier@7.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-264-CORE_META_MODEL-CORE-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier@7.md",
+        "sha256": "d1b13023687256d2e35180b01302addcf3bbb0232bc0d8a342f81a9f41bc0ceb",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 86,
+      "event_id": "9051bb28f17811b5d3e53ccbe3cd442e841868e57ad060e8a4fa6dd667344a97",
+      "event_digest": "46be966dc3b1062913bd7772581224a4c267069c33a8c131f22639778087980d",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-264-CORE_META_MODEL-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-264-CORE_META_MODEL-DELIVERY--derive-direct-containment-from-the-nearest-directory-carrier.md",
+        "sha256": "6bd827cc3f113d44183ebcd38bc6be1766641fe0f2c34a8ca182ada32466aaae",
+        "state": "present",
+        "version": 8
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 87,
+      "event_id": "b047333a489100783b7afa0817af48bffdf31b474f3cb313bf53d5380ffa8af0",
+      "event_digest": "ba74af020c0e21e140c0db2a87c9fb741e49209ad9ed38597cb8b56703644d53",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-267-CORE_META_MODEL-CORE-DELIVERY--derive-address-facts-without-duplicated-frontmatter@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-267-CORE_META_MODEL-CORE-DELIVERY--derive-address-facts-without-duplicated-frontmatter@4.md",
+        "sha256": "b30f9954655436d6ff1c13e94caf395bf2e033b972c8d3097ae359608867c124",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 88,
+      "event_id": "c5d2573b2c5b04a3fbc0a53015211ef8af893f8312bc6712d35782597d244fa5",
+      "event_digest": "d79f73590f72fe93586fc62fbc10069934c791fc6f03d3ed749b8d94078ede61",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-267-CORE_META_MODEL-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-267-CORE_META_MODEL-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md",
+        "sha256": "fafbab59f1c7ae193a88e844992c90e497468447b1e0bd9c38f6efa6e705df16",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 89,
+      "event_id": "6b0324a59c45660a8fa54b9a180feb95b4f742824a433a0fca4f006adbe8e5f2",
+      "event_digest": "f1b192e0652678ecfd017e1dc109a5bd3226eaf62366672dd8ea6c964aaaed93",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-268-CORE_META_MODEL-CORE-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms@5.md",
+        "sha256": "c31422af56c88b96517edecf2e847c811c1ccca955d3d1ba01cce732a1437a7a",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 90,
+      "event_id": "1b33ca0a818d08f50e6956572f535ab56f88f8e8ad5d16e8e3e9bc39769a92f3",
+      "event_digest": "588a4bde4bd2e168b992e69959658405c27e04eaeeb7f2a4edfaeea6fcc761c8",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 91,
+      "event_id": "436bd6cc74c300b638d349fd0c9587a10cd31349bbd7ebb402ecc98b740ffe6e",
+      "event_digest": "61fce63cf37d543932f1c7c4538728b98ee31e8ea156d86533ac310884518221",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-269-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-subjects-in-frontmatter@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-269-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-subjects-in-frontmatter@5.md",
+        "sha256": "74e41bddc77942668f78d4efc70ffeea15f9de9199d932d4ce10fa8903e4f99a",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 92,
+      "event_id": "0aee51055e748ef06dec9cf3ae620d578945d997aec8eac7bf3a6110d44483f2",
+      "event_digest": "f24349f9c03fe889e47c5f6749d4b21a74d8ba062068dd27bab9becd742ad1e6",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+        "sha256": "bb2c608c3a765f9ffba074e1e8de941708222cc361090b3fae4ad92c09c53685",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 93,
+      "event_id": "1c983fd1201914f54713cab49b84604fa48ad3f2f846fe13e837bcb4b911cb36",
+      "event_digest": "fcc1f16554bd72d92b12f0497235ada6a6243cc396905077866245190a6c0f07",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-270-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-revision-metadata-in-frontmatter@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-270-CORE_META_MODEL-CORE-DELIVERY--serialize-atom-revision-metadata-in-frontmatter@4.md",
+        "sha256": "b293e7fce60bc06dce26c65d4059b377152cdca3379dc0c476a9b696b50347ba",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 94,
+      "event_id": "850e4375ca6391d87c2f8a4ddca07efdb33d55821e651d7fac0142415a1369be",
+      "event_digest": "a8003360503cf1d2d2902e987cb0d33ec0e8384c52d10fef6d5702780d44c44d",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-270-CORE_META_MODEL-DELIVERY--serialize-atom-revision-metadata-in-frontmatter.md",
+        "sha256": "1582889d0eb47298875f0b1dcbc8969a8d1e631cc5502e18397fa36f91572175",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 95,
+      "event_id": "d9c0e5b5bd9a07cf18e7471f8249f2abae94f3637475b471015c8fa9bb145d9d",
+      "event_digest": "ef249d73322aeca4126d553e0eea574216a8768be1f4b3fbf405fc01d8232041",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-271-CORE_META_MODEL-CORE-DELIVERY--serialize-task-sections@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-271-CORE_META_MODEL-CORE-DELIVERY--serialize-task-sections@6.md",
+        "sha256": "ef0908afccc0e47901b5c87de4b6bf7a39ddc6859f848e452b97d9bc6a549325",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 96,
+      "event_id": "080d97f04fc6d42f436c87e28cb01e72157c8be95764d77ecbb4cec903c390e8",
+      "event_digest": "fe5983a34e623d9a4c4606bc1a534e88615c6343f282d3ce0212ef1076f28f7a",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+        "sha256": "2e815c02566b2089b355b89f8aaa351aebc39395e764e55b50becdc4378f647b",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 97,
+      "event_id": "f4d480a3036839d6293203f61dec89f3c8216abf5a34345d5d26ed40eba6970d",
+      "event_digest": "01fe5df9119b16001c325ea3ebd6dcf7e756fe2cb57d0d1f7b97d86305ce3923",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-272-CORE_META_MODEL-CORE-DELIVERY--serialize-task-dependencies-as-direct-relations@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-272-CORE_META_MODEL-CORE-DELIVERY--serialize-task-dependencies-as-direct-relations@6.md",
+        "sha256": "3ebb54eceda14dc127f9396763f8343dfba4914c789b518624cc50d8c958a813",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 98,
+      "event_id": "79d39a903c2c09ad6c14878018b5e20ea1c03bc6c8e160692a36d629d9dd4a78",
+      "event_digest": "fc1d6ed959293497b8743e90a7000117c00a814f37cec989b68abcc02d09f016",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-272-CORE_META_MODEL-DELIVERY--serialize-task-dependencies-as-direct-relations.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-272-CORE_META_MODEL-DELIVERY--serialize-task-dependencies-as-direct-relations.md",
+        "sha256": "40c5d7fd8a23d79b811375288d72ba451ce5e4132cae7e4f2ef93f8697748d33",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 99,
+      "event_id": "1331907a03036c9f8713709e0471ffb4aeaf63b22b15ed1dabbc2f59358fb3c6",
+      "event_digest": "6cd21e4476061e6337c0a09bae88e3e0dfdedba3edb0c1b8e99262c760c703d7",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-273-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-confidence-threshold-overrides@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-273-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-confidence-threshold-overrides@6.md",
+        "sha256": "740ba46ebb4686ecf62e7cca078bb4559548d06c8e78f9fa9205314333a361ed",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-2.ndjson",
+      "line": 100,
+      "event_id": "791d27387cd545192d13940d3eff06bc962bbd8e2022a48f3874648cdb5709a5",
+      "event_digest": "967690bad52ffd8c9f9ef30301865cd0430b465454a50568fccca0a02e6c60f4",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-273-CORE_META_MODEL-DELIVERY--serialize-explicit-task-confidence-threshold-overrides.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-273-CORE_META_MODEL-DELIVERY--serialize-explicit-task-confidence-threshold-overrides.md",
+        "sha256": "4b619e1ca47bc2b3eabe8512c7a9362dbbb61a8bfe0e66ccfd2c3439f909f6d1",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 1,
+      "event_id": "9ce79b80d0f292380b32fe5e75b6c1d6e86fcadfaa5e9543a0a46144546e82d0",
+      "event_digest": "252cc58ce0d0df778c952002c95a6f6c3fcfe26f5eb73d8da79e5b090e16e604",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-274-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-atom-revision-author@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-274-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-atom-revision-author@6.md",
+        "sha256": "2dec3d44e3b6b5ef345763bb1da4f3b3d9b04758c8216be3361bd24e0dbaab53",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 2,
+      "event_id": "22bf61ce69b4eb735e5ffae113bb29b359b3ee9d8f2704f71936047804c49489",
+      "event_digest": "7357ca0f2977b82d6fcf7be1cd9451b6d94d9c9258c16b3de1fb555a079ec407",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md",
+        "sha256": "eeaa34da4915e9782889c7b400e73dcd7f1acb07767e949e8680842012220980",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 3,
+      "event_id": "7341c0bd5aaf993d030a4a341fc2f8f7e8721c4aa6b27b3014939f47d210f976",
+      "event_digest": "06f96a9f8895bd2dd086ffc6c835e74513de66098e17a6fece045020de3f1b4d",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-275-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-assignee@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-275-CORE_META_MODEL-CORE-DELIVERY--serialize-explicit-task-assignee@5.md",
+        "sha256": "f1c445f29f2977071504ea95c5f12435bfffff365201c7bce8b831c597c8424d",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 4,
+      "event_id": "9e9e49ec706b6a544f60475129d28e02e760265d6a3a5fcfdd981da9e44e2a0c",
+      "event_digest": "95303d82f906f23900179fbc13b88f40dd9942c03963c951e0674e4c3e560d7a",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-275-CORE_META_MODEL-DELIVERY--serialize-explicit-task-assignee.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-275-CORE_META_MODEL-DELIVERY--serialize-explicit-task-assignee.md",
+        "sha256": "08143c7438bf773a82af23ddb299174b0ac9b302380f5b5e4751da60226dbed0",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 5,
+      "event_id": "ed6290763189bdbab214cb38d9c82470e646dfa52ebd272d5a1f120e9581fc93",
+      "event_digest": "13f5ff7ba79623153cf97d11e8134556d69aae83355e8dbc26430583cfcf3cbb",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-276-CORE_META_MODEL-CORE-DELIVERY--use-economical-yaml-frontmatter@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-276-CORE_META_MODEL-CORE-DELIVERY--use-economical-yaml-frontmatter@5.md",
+        "sha256": "52f4abaa76d376d3f7c210374bced6153f095c91112fbb5bf4a1f9cfd9661a96",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 6,
+      "event_id": "011371d6ed90d20ac0e9a0ce7b822a74e45ae26c1a029192248056cb5a2e0392",
+      "event_digest": "6c38aa5d8b1c90a3e0ff84978e933e2d25c9e83afdff9ed97e03f2b40366d7f7",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md",
+        "sha256": "4deb8ad99daa40866d3151be83ab721ba98ef86e78e214f3a096123cc5bcabae",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 7,
+      "event_id": "25a8dcebfe9961a504d9fa3b4b0b30a692971c3a2f40ade516c86c97e8bc2ca0",
+      "event_digest": "e8999484402060c41f64d9e04e9626e4405240ac3e3084707f117cd789089234",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-277-CORE_META_MODEL-CORE-DELIVERY--serialize-safe-frontmatter-scalars@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-277-CORE_META_MODEL-CORE-DELIVERY--serialize-safe-frontmatter-scalars@5.md",
+        "sha256": "79d394df6d18fd3b3b5c586e8799de122a17608abed39347c034ff770e3545cf",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 8,
+      "event_id": "893be1ed40fe32f81d8a54309bd7a406354e2b42f4d7d3ee80d41db76bfabc1b",
+      "event_digest": "a9af9f8ee2571623d9905c8471ce23e4fe39780472ff51b4a0a084ad8ea0af7a",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-277-CORE_META_MODEL-DELIVERY--serialize-safe-frontmatter-scalars.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-277-CORE_META_MODEL-DELIVERY--serialize-safe-frontmatter-scalars.md",
+        "sha256": "6991f16037400e293cf31b0b64db1d2c773e733089b9c72dfce3641c486c5ed2",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 9,
+      "event_id": "72b61f45b0b8f00f357c78ee3ef89c6a815d178e27203121bef2bc245679a727",
+      "event_digest": "9ca9407446638e7fc3d783f3ad86fc4babe22bbce6582529edb3191153ffac33",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-278-CORE_META_MODEL-CORE-DELIVERY--omit-resolved-frontmatter-defaults@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-278-CORE_META_MODEL-CORE-DELIVERY--omit-resolved-frontmatter-defaults@6.md",
+        "sha256": "15c55ee2a529b2dfd1f40e292c3219fc869d1ac3f296e499bcb318619d6773f8",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 10,
+      "event_id": "e2d906c91a0fe9fe7bb2f4c16a277c1880328a5139831ffd7aa2971a30b2df42",
+      "event_digest": "f65abcf1d311c86d88e850eb3a3ee559572b85a3cd69c23560b88ae51377f2ce",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-278-CORE_META_MODEL-DELIVERY--omit-resolved-frontmatter-defaults.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-278-CORE_META_MODEL-DELIVERY--omit-resolved-frontmatter-defaults.md",
+        "sha256": "c57901e64c82baf937425b6d688882ca8ccab3d2d061aee16c065ce65dbc505e",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 11,
+      "event_id": "581c6f02eb670cc62aa9f0161003810c3db7c5886a44e7ddf67885e7b307b95c",
+      "event_digest": "2c08750b8f6e2081bc5a478575e86d802c1d8c11d3fd3ab822be64fbf97d02ff",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-279-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-279-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines@5.md",
+        "sha256": "e4b81d9e204d14ad409a22e21dfc3260adb1aeb2c0a194ea6eaf87f888d39750",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 12,
+      "event_id": "52cca8dd0b84e6a1dd8bcba141a7b2f725a7143ed56fd7e5c6ab4c4688036d60",
+      "event_digest": "bdfbe1465e69d55e2518328401e55f92d4c76c3605ab16e4928e07415fccc70c",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-279-CORE_META_MODEL-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-279-CORE_META_MODEL-DELIVERY--serialize-markdown-paragraphs-as-unwrapped-lines.md",
+        "sha256": "199b39e31bf09254dff83c88983f8f9d63590abddb88eb027c077933d696c986",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 13,
+      "event_id": "54f27cc98a10d6153284a1dd43a749a3e1402597b4eb0f646f733c0e9f99444a",
+      "event_digest": "a23a3fe7e3aa76fd90649c346d0e2f4f1abde8d1f7b18cd80caa7a720ccdf66d",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-280-CORE_META_MODEL-CORE-DELIVERY--serialize-cce-operators-in-bold@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-280-CORE_META_MODEL-CORE-DELIVERY--serialize-cce-operators-in-bold@5.md",
+        "sha256": "2ed731e16cd97e35d120034f4ff84c6ceeaf1c503e9242d2071d1e46bb778963",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 14,
+      "event_id": "e5230e02a8a3357df1354a847bb5efbb02fa2ace2ef1c1c87169b639998ddf41",
+      "event_digest": "e0cd9984846dd2cfb6d1fcda778bd58a8ff0bd6cc783aebf124a0cc397518c75",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-280-CORE_META_MODEL-DELIVERY--serialize-cce-operators-in-bold.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-280-CORE_META_MODEL-DELIVERY--serialize-cce-operators-in-bold.md",
+        "sha256": "5aea68b0d97b6e3cab9043b612b46a17fd0757911530f31de77882d6c70ffe08",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 15,
+      "event_id": "b9c118a5e63812db6894684a8f5d7e722ef9bf2f0b9155ed4295916838f4ebd7",
+      "event_digest": "4982683fffd43397aa5c040f38e2b6472a291fc071aaef09b234766e913943a1",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-281-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-atom-h1-from-summary@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-281-CORE_META_MODEL-CORE-DELIVERY--serialize-markdown-atom-h1-from-summary@4.md",
+        "sha256": "00bb60b9f20855a478c752b3d3e61e02907eed9d22ff9ce85dc3dfacaabd964e",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 16,
+      "event_id": "8d603edaf989b58908cd40623a284aafbeef32d5da0a44a1857d44134062ba46",
+      "event_digest": "4ce30afb2f7c7dee598fe3befc098d98a4306cbfe929c32f9300a80d102a634d",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-281-CORE_META_MODEL-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-281-CORE_META_MODEL-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+        "sha256": "884609bcc38ee82962121e8ad05e95e411a9bbe6f3bd459250c5b0ae4931e07e",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 17,
+      "event_id": "d9c3ca62d0072d39e7bce8973a8a128a90ff33288d2ec22e7863b1fe40a3a43a",
+      "event_digest": "1161e2cabe0d78088ff41249b32ad6a32f852f59847d088440097d2a7a23d861",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-282-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-summary-slug-from-summary@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-282-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-summary-slug-from-summary@4.md",
+        "sha256": "49360cd2ab69d92f97bd9754601267a24f2fe5f00713555e1cebae7dd6d2bcd8",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 18,
+      "event_id": "395ecbfe4125a8815a11aa2be18612acefb6a6877554263cc7aa9b30fa639480",
+      "event_digest": "6bce349407b1b68d96b3a4a49b413251749498d7bec993cf36a1602d62895b2b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-282-CORE_META_MODEL-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-282-CORE_META_MODEL-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+        "sha256": "75c24c4d92389b40d7b14e6b3eb7151a6068443181ba9122148e8ff23142b441",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 19,
+      "event_id": "9d50db9ad1332335ac2cda4f8b412f48bec0bb8ea2a11d758cdd7d5adcc470c9",
+      "event_digest": "39d19400f1855cc2c0ff9de99c8f177bd5ebb48ae3899c2a1a9d3ba5c5ba2a95",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-283-CORE_META_MODEL-CORE-DELIVERY--serialize-project-owned-markdown-atom-filenames@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-283-CORE_META_MODEL-CORE-DELIVERY--serialize-project-owned-markdown-atom-filenames@4.md",
+        "sha256": "1f6a171229dc83b94884506d164d344095aed71903ec243dd68033d065cc952e",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 20,
+      "event_id": "aee6cd54f2830b6702d9ee2f336441b8329783fa6678468fd2e0be637149263b",
+      "event_digest": "acce78a1253ee3f8478b92e857883751c084315460c935d551c4d72fc81a8247",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+        "sha256": "ddde5a99c7b4f7fde3abfe52a1c56fb9087b4da194251931629782f1fe2a000b",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 21,
+      "event_id": "4b56f0e2781c7aeb6666de42abed2d23695c4a47ae08eed5fbe953c8067e7b42",
+      "event_digest": "e010acbda4c64a5a88525d3571186c242ac97405ee51cf718c93c456d84ca35c",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-284-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-token-case@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-284-CORE_META_MODEL-CORE-DELIVERY--serialize-filename-token-case@4.md",
+        "sha256": "7c235d1253aa953ba6c98f87ed6cb280c5fc2d32b28c6d175508ba8def3720a3",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 22,
+      "event_id": "f362bed9b599b3cd3ad0139bb91afa2f40ea2898d75d847218f83f572d39c4a4",
+      "event_digest": "441f2755f3234b06f18069cbe2d15d5cde65815dccb8fcb0d3679a407b0166ce",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-284-CORE_META_MODEL-DELIVERY--serialize-filename-token-case.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-284-CORE_META_MODEL-DELIVERY--serialize-filename-token-case.md",
+        "sha256": "8cb7291a685e6c9e94ff0aa3b620ccd93fdbcea3bc2b61c22a1d151bf9b6e1a1",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 23,
+      "event_id": "316b2cdbdc14d7dbbe0dde4b9ec85a1f571782618fb462d3f5b9c56d5f05e3fd",
+      "event_digest": "7fb6045a69e5f73a0223ab4306974621af464018bc2d0029b3d5e417af04e4a2",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-286-CORE_META_MODEL-CORE-DELIVERY--serialize-goal-type-as-defines-goal-for@7.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-286-CORE_META_MODEL-CORE-DELIVERY--serialize-goal-type-as-defines-goal-for@7.md",
+        "sha256": "56cccb2068f88c20a595c96bcbe73de7bf89a2f8fa70b5d30004464c9bb20ffb",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 24,
+      "event_id": "1b9595194a5435b2a7405e1a178344cb938e6d50ad4187019d9dca763fd4ba12",
+      "event_digest": "a1758940fcb59541a6468b4842a674d40c0154d771ade8a7bb62cff93016b19d",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-286-CORE_META_MODEL-DELIVERY--serialize-goal-type-as-defines-goal-for.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-286-CORE_META_MODEL-DELIVERY--serialize-goal-type-as-defines-goal-for.md",
+        "sha256": "36e53bdce051b94a07a3a1c55ce7e5ff5ffaf6edeb3f9bdfa7aec920e304ef43",
+        "state": "present",
+        "version": 8
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 25,
+      "event_id": "a3ec4a7efb6ffe13827700f9f944a4359d3994113fde75a36ae92486e8927165",
+      "event_digest": "7826df08c5f816105597184815cd1e890c3e7833727ea5038e6d64b09bb6b2d7",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-287-CORE_META_MODEL-CORE-DELIVERY--serialize-demand-type-and-producer-scope@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-287-CORE_META_MODEL-CORE-DELIVERY--serialize-demand-type-and-producer-scope@5.md",
+        "sha256": "9d5d92c367048dd2f7ddcc386da0ba0965e1f75543869398a155fd17317e4944",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 26,
+      "event_id": "ad1daf5d149d3d007bdd16816b3953656585502bf24d0d6ea29d5750d0d6c088",
+      "event_digest": "b083e2cdb5bc93550fe6d574b8497b88c796ae8ecb30fe9a41ba5641bfa94277",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-287-CORE_META_MODEL-DELIVERY--serialize-demand-type-and-producer-scope.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-287-CORE_META_MODEL-DELIVERY--serialize-demand-type-and-producer-scope.md",
+        "sha256": "9f96a5962e991e395ed89ebed457fd3b70b1f99ce83d1d2f60bec680bb040e9a",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 27,
+      "event_id": "29a13d68db7e863accade348bcabf6cd1713ac350ac64a92cb2faebf044e0509",
+      "event_digest": "b83da57d4d5bed7282200731f456d4c81f9a17ca68e92af434ab4ab837558c40",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-288-CORE_META_MODEL-CORE-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-288-CORE_META_MODEL-CORE-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number@5.md",
+        "sha256": "b4e4199717bda9c3042a376bac679ffca8d14e15f01bdfec92652f8fbc5eaee8",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 28,
+      "event_id": "82764feb73676497cbbad79f873517322f8793545aa3575138b65228e5236727",
+      "event_digest": "7d961724421407ff3c730bf4d77d50be58f87cb356b7dca745f41029d9c324f2",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-288-CORE_META_MODEL-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-288-CORE_META_MODEL-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md",
+        "sha256": "7b04b8064d02e3acdb9eb3e7ed8eb02f9d5840d521ac7e9b0416203c353c0e28",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 29,
+      "event_id": "fbdcf35f86bd743ff9639041dcb1a7507a8e994295ad6862e2f956c7c89a810f",
+      "event_digest": "126e46bc742d6a2de745e4e1e31a090511bedde408739898397d975fc57c9998",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-289-CORE_META_MODEL-CORE-DELIVERY--serialize-archive-revision-version-suffixes@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-289-CORE_META_MODEL-CORE-DELIVERY--serialize-archive-revision-version-suffixes@5.md",
+        "sha256": "b073c77c4776d68ebb3d42979505d6bb94ab91a2e536029f277036c49a89b5df",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 30,
+      "event_id": "3409349ec08ead10bde2b60a2b8654a89a14e0c0abea349e48a487260730faef",
+      "event_digest": "645d9a7050605164b01bc9b99f52fc7a0a1accf5b36a595074e050fa188d0faa",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-289-CORE_META_MODEL-DELIVERY--serialize-archive-revision-version-suffixes.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-289-CORE_META_MODEL-DELIVERY--serialize-archive-revision-version-suffixes.md",
+        "sha256": "32c2afc5f6191a474c3dc969ad1680d0ad80a51897c4fb08da1de1a9951ec35a",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 31,
+      "event_id": "d60e37c5ec610060e4f4ed1fcfe62f6f4119570a4ae55ce83389907f25c94190",
+      "event_digest": "1d16241f94e2cfaa54fc8f3e1fa8d853b9b269e3c396a3a4a467c7093df0122e",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-290-CORE_META_MODEL-CORE-DELIVERY--omit-version-suffixes-from-active-carriers@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-290-CORE_META_MODEL-CORE-DELIVERY--omit-version-suffixes-from-active-carriers@4.md",
+        "sha256": "41a8b9228ac37cfb3e5fda6554577b5e5a800558cd82b154495c7a2fb2bcf2c5",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 32,
+      "event_id": "863fb2d7343fa278916321b24e9cc7ccf61328840b5fd5e9b7bab26c5f7de5f8",
+      "event_digest": "d744503be641822cbcc2758d69e1a05e3692cdfbd693acd772d97ad16419373c",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-290-CORE_META_MODEL-DELIVERY--omit-version-suffixes-from-active-carriers.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-290-CORE_META_MODEL-DELIVERY--omit-version-suffixes-from-active-carriers.md",
+        "sha256": "ce30f51a31ddb226287cb3e89683d7f3f79acd05dd0807e211019a65e1304e25",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 33,
+      "event_id": "0deb7b9743fa719333f357f3b21525f3de7f025c934bbfa38ff4d4cd2536a542",
+      "event_digest": "7f3741fae2d9e65f2b737bc6a959010712d0f043380c3a3127d4f7962984d104",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-291-CORE_META_MODEL-CORE-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames@7.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-291-CORE_META_MODEL-CORE-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames@7.md",
+        "sha256": "f738598610cfb4789294bac8418bcae11718626dd556e7bca50991100a5e0f9f",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 34,
+      "event_id": "0064230274fe02b38ce17ab8426b6f1db846d56646b20a6f329363ddcf36ea4d",
+      "event_digest": "8c0ac44915f532223be7dfc91ccf3a729dd5c3772500e677a781514cbeeb4d06",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-291-CORE_META_MODEL-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-291-CORE_META_MODEL-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md",
+        "sha256": "4e2126dc2ebdf5b617922aacbcf5e1d1017ff03082a529247712935b50d8effd",
+        "state": "present",
+        "version": 8
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 35,
+      "event_id": "2db9fea1790acae75951d5f9d1ac6cb5a8571bc0514f6484b8040d944b92b8ee",
+      "event_digest": "be93234712c303a19646a6be994a955683166322b2ea5c2ad8f4106b770040bf",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-292-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-filenames@7.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-292-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-filenames@7.md",
+        "sha256": "6772bb80a841333016e885419ccce7a7f9784c6157737b16fe5ca875bf3d36b7",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 36,
+      "event_id": "91b72169b03e58947ba9d7e205eedd2b6b7c0825427146fa14230077298457a5",
+      "event_digest": "17da4b56c32392f487ef5540265039b37e1cc99bc068e6825b6176caec8b4230",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-292-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-filenames.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-292-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-filenames.md",
+        "sha256": "c66855ca784717cf15eb1122a3f0534a5f857942e88735732422a211649622db",
+        "state": "present",
+        "version": 8
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 37,
+      "event_id": "cc3da91062003544b67441822a259401411b12a629de370f34e542fffd887da3",
+      "event_digest": "6d39e2a8aee1392ee1a23fcd03ba91423868ca9d65511644a491b2f2c63e1d95",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-293-CORE_META_MODEL-CORE-DELIVERY--serialize-epic-directory-names@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-293-CORE_META_MODEL-CORE-DELIVERY--serialize-epic-directory-names@6.md",
+        "sha256": "89f7f2ce2f215e01c25588f04b229ab3578214c4743e3f11f22af417a281a3cf",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 38,
+      "event_id": "9d0171fe6f2761de8df7524dee27349c2c02b12db6fc77d97d0e304029c08df1",
+      "event_digest": "c1693b587085306974b6067bca0bf42b458fd06f96ae3e44e07d01052ec06364",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-293-CORE_META_MODEL-DELIVERY--serialize-epic-directory-names.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-293-CORE_META_MODEL-DELIVERY--serialize-epic-directory-names.md",
+        "sha256": "069c504146f6c2f5dfbb7e9e343cfd5e213850095b2db1da12f041f56b695374",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 39,
+      "event_id": "b58aa183e943d9d831c4afef2d1c4bdcd17c1ca1c98ea7052a4620d404d93fef",
+      "event_digest": "d6f3aa5faa072534116a39d3cb573b377c6e4557888e5da074d2d5f4de2cdc59",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-294-CORE_META_MODEL-CORE-DELIVERY--serialize-task-filenames@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-294-CORE_META_MODEL-CORE-DELIVERY--serialize-task-filenames@5.md",
+        "sha256": "e752431e0c28789d549bcd681e2c3852309a1ad1179692410377b4009c350378",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 40,
+      "event_id": "7b8f5bd7153b71dd626b8aad6753c3b722f54f017d3bb62a1d844feb432b118d",
+      "event_digest": "43e61f5d7076744b6982dc7d317eab66dcfdd1640bc8098601b50ea0351ae04b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-294-CORE_META_MODEL-DELIVERY--serialize-task-filenames.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-294-CORE_META_MODEL-DELIVERY--serialize-task-filenames.md",
+        "sha256": "72c8310fb6752b5aa7f1b1ac215adc7bdcf535df0ce8825f7864250d9b1549cd",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 41,
+      "event_id": "8d617e2d213fe73938c0943b9a3d1fa8174bb732616af8aa17926471148fc19f",
+      "event_digest": "434ec32d42b14e43d567fbb18e76126133ab8b5a7e11c77065bfa0c316ae2e0b",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-295-CORE_META_MODEL-CORE-DELIVERY--place-carriers-by-revision-status@6.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-295-CORE_META_MODEL-CORE-DELIVERY--place-carriers-by-revision-status@6.md",
+        "sha256": "c11f69ea62a1b388f7946287ea548e4fe558486d63c7defc659dbb0b1ed8ad73",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 42,
+      "event_id": "95804c67954920e21c1ed967d77385236b9b8637259648e2f17a143c9054b5f1",
+      "event_digest": "e0776005a444c8b1ac78b3601ea0bdbb99e8fe88287de2b99faacbd852f89601",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-295-CORE_META_MODEL-DELIVERY--place-carriers-by-revision-status.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-295-CORE_META_MODEL-DELIVERY--place-carriers-by-revision-status.md",
+        "sha256": "973fd03b80b266fdb452e03b2ee298011fc1f4f5c195e919222754bfa3528aef",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 43,
+      "event_id": "99199023b098cd2668269a669a8339a0e9896cb39f540d0dae06f52a3367fbe4",
+      "event_digest": "1e63a604fe88c247790d25bb6c0075f914ee8bbc6461571e1f8ab24d033dcbdf",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-296-CORE_META_MODEL-CORE-DELIVERY--materialize-content-role-directories-on-first-artifact@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-296-CORE_META_MODEL-CORE-DELIVERY--materialize-content-role-directories-on-first-artifact@5.md",
+        "sha256": "bdd303efedb63a08ecc4ddda31d51539428cf57c708f1ceb7f907a1168dd09bf",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 44,
+      "event_id": "8dfb92a30ea1614307d66fed639caa2a90f8caeea793174c0130891746f81473",
+      "event_digest": "453498be2a498eca0924d2901ca988a194e63e1f2c0d1a2dca6d473128fa6338",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-296-CORE_META_MODEL-DELIVERY--materialize-content-role-directories-on-first-artifact.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-296-CORE_META_MODEL-DELIVERY--materialize-content-role-directories-on-first-artifact.md",
+        "sha256": "d0a797b303bc88bfa3d1ddb77f466b527719a2e60f61940e055b041d31bc0148",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 45,
+      "event_id": "ab548e66727eeb597ab8c6f739409b823657fd299f5192d2e4241e9c05686f0b",
+      "event_digest": "f96a70bf5a3d455f96ff7914cb64ab3c13dd8a038e8bbdb0c62eaac1252426c0",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-297-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-authority-directory-names@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-297-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-authority-directory-names@5.md",
+        "sha256": "553e54f1399fc36545225d11a7a80e6985fbd3012fd80738c39091662559e4b1",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 46,
+      "event_id": "4ec19cb722eeb1143586eaa8867235753aad3e66c2a877fc43f97f1c868994da",
+      "event_digest": "c384745c4164771ba28735be17b5191dc4e4220c8dc89cb9ffa7596449a187b2",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-297-CORE_META_MODEL-DELIVERY--serialize-scope-unit-authority-directory-names.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-297-CORE_META_MODEL-DELIVERY--serialize-scope-unit-authority-directory-names.md",
+        "sha256": "512d475fb467e3702dcbb6ff1b95af66d0cd5f93e51acfb1f5d91981a226c35b",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 47,
+      "event_id": "9e62e806ca600bce2f8321a5aba4baeef7049c76a2ffeeda3dfd107d1e1f4867",
+      "event_digest": "b1af65fc4e67349754924a416b6a98c6b16ed507df5a616e07e1a05bc5f92c50",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-298-CORE_META_MODEL-CORE-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-298-CORE_META_MODEL-CORE-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories@5.md",
+        "sha256": "8dda77c2db7f417f9f3ad382e748980c7c9dc63259b95f3cf641eff3be49c0a7",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 48,
+      "event_id": "04978ef352bc592dbe3e7a855a2caac99e96f7837b47b920cd4de3bddca6c7ae",
+      "event_digest": "5a6e84f787791eb01de7bdc0f3de0b9b58cbf6b1cef880a4189af246c89dde73",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-298-CORE_META_MODEL-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-298-CORE_META_MODEL-DELIVERY--serialize-local-order-only-for-ordered-scope-unit-directories.md",
+        "sha256": "e405d3d54c05182a4861f8616c4af8afc819bb66a1961990af488f864d32fe9a",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 49,
+      "event_id": "ee2fbac46ed996df743b4c09b36f8bb16604098166ba0767f5f604c07f3fc041",
+      "event_digest": "47bc7bdfab59ecdcab1686b692b898c6fe7bbd2e08e9053b375ef2e4b77a8b80",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-299-CORE_META_MODEL-CORE-DELIVERY--serialize-root-delivery-directory-names@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-299-CORE_META_MODEL-CORE-DELIVERY--serialize-root-delivery-directory-names@5.md",
+        "sha256": "0f4fc4da48ce5ed3914b75f8e042c51f218d60d6523c666e8ad69cb29ae7ca91",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 50,
+      "event_id": "507c712be063919700629d2e37a445c9700f6c0ec34108db52f85ab95a998031",
+      "event_digest": "3cf7627d5b59dacebb1a2486542c6de503d54c38e59aaf7584e4f91d048ad67b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-299-CORE_META_MODEL-DELIVERY--serialize-root-delivery-directory-names.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-299-CORE_META_MODEL-DELIVERY--serialize-root-delivery-directory-names.md",
+        "sha256": "d6e7dd238339a340569079a44ed03ddf5dd80fc0ace492ea79f0353e96803424",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 51,
+      "event_id": "16ca4ead3d62d98d67b9fbeb447499ef664b7807ac64ed55e89abc9f159cc1de",
+      "event_digest": "99145ec2fc38c9788fa0c1b4fac2c18bbc557088c9f0ade786af04079b1d26dd",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-300-CORE_META_MODEL-CORE-DELIVERY--size-structural-level-prefixes-dynamically@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-300-CORE_META_MODEL-CORE-DELIVERY--size-structural-level-prefixes-dynamically@5.md",
+        "sha256": "221f239e499457fe0184c461e2b68cd86b2f79ffea4a96a6e79c8b66cb6a5625",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 52,
+      "event_id": "bb359c1c8e74db0abfd8539eada14ea5a24b1a8e96254102cddd5f389247d39d",
+      "event_digest": "7256d497289d010a28ffd1516386bac07a5e51c20dd77d486db092cb5cf21940",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-300-CORE_META_MODEL-DELIVERY--size-structural-level-prefixes-dynamically.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-300-CORE_META_MODEL-DELIVERY--size-structural-level-prefixes-dynamically.md",
+        "sha256": "49e27c9d69ec798e9321bfbd96fcd4cbb067360c646e08297611eff9659c6272",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 53,
+      "event_id": "3772f9fe0cf908dadf4f79a26d4f3453d90f8fe66d56e6279875ace69d103f52",
+      "event_digest": "495bcae9288abeb72ad2eab7cdd4afe6c7c1d26b89581d796493db78660e23d5",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-301-CORE_META_MODEL-CORE-DELIVERY--require-portable-safe-carrier-addresses@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-301-CORE_META_MODEL-CORE-DELIVERY--require-portable-safe-carrier-addresses@5.md",
+        "sha256": "879e9d82a3f5f0fa646bc39c702ad9592b1582fe7bb6fb9200035552a577f52b",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 54,
+      "event_id": "1d96ed7687446ca39d3eca10018f04424300f8c61ad375cc4ccb38737ae6a25d",
+      "event_digest": "c4b453b15bdc756e5edaa1378abe240d1e46435f22ff12afb90f3b6f4ce1cdbb",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-301-CORE_META_MODEL-DELIVERY--require-portable-safe-carrier-addresses.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-301-CORE_META_MODEL-DELIVERY--require-portable-safe-carrier-addresses.md",
+        "sha256": "c92ea4b08a5f2cdbb98f3db88ae2178844e5965ac39d4ed85f89d279aa5ff21d",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 55,
+      "event_id": "2b88bb4fdb077ab2df89f63876903d94cce343f0846f720f5d8c29bedf33551d",
+      "event_digest": "de61de71b24a2764001fbe9315a593aff87cf5eacab264dfd8bb43f2544ebbd4",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-302-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-references-as-filename-tokens@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-302-CORE_META_MODEL-CORE-DELIVERY--serialize-scope-unit-references-as-filename-tokens@5.md",
+        "sha256": "4f1454110f994bc6275ec97674a951a24a312d4ad8bf42ebd4e5cdb48ab075bc",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 56,
+      "event_id": "abca4489b99a2ac4673b9a12cbf3d4da50a391c07411434fb29584de005dd95b",
+      "event_digest": "de493adacca1f344e34664025de067597a21ab802d3fd36e2c55423b928afeb7",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-302-CORE_META_MODEL-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-302-CORE_META_MODEL-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md",
+        "sha256": "1720f821abeae640cc28fd0b71e8d89f9347f0cf8d18aa78a983ecece352c36b",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 57,
+      "event_id": "16f60f368f495a0fed00254f5c71f4f99a1a4b166473dc979254dcd7ff0643af",
+      "event_digest": "cc5528d4b1fe4b08abb8d466b1b2253ae0cc9106697066efd5228ab196d29ae8",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-306-CORE_META_MODEL-CORE-DELIVERY--materialize-applicable-methodology-as-projected-atom-files@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-306-CORE_META_MODEL-CORE-DELIVERY--materialize-applicable-methodology-as-projected-atom-files@4.md",
+        "sha256": "8e3f128d3a156f9f1a1d6616c9d3c05d28cfb25b528df3f6e42cced6ec7d43bb",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 58,
+      "event_id": "e17698751eaec9cf66050483dbfd4bef70858e6cd68e03acda74caba6b9d94f9",
+      "event_digest": "96fd8aab92bb44b5c7f4badcf8edd42cd88d76e3df6a4cee19185de4326b7586",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-306-CORE_META_MODEL-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-306-CORE_META_MODEL-DELIVERY--materialize-applicable-methodology-as-projected-atom-files.md",
+        "sha256": "dcf87760aaf3bf095607c262d8347a6c40488922b8a2ec73d5477a8511bf15ad",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 59,
+      "event_id": "441e5243a9f853a676c827c508b0591d1fd1c12d6fc749a96071341043ae27f7",
+      "event_digest": "278939bf177dbc68bc91a678f6b068399a629cc865c1e424be82a098b1103162",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-307-CORE_META_MODEL-CORE-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-307-CORE_META_MODEL-CORE-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes@4.md",
+        "sha256": "13bb88f2db6395f58ac9b76a0fef28652157558238ca58cc82c6b66d96a61492",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 60,
+      "event_id": "5bf757fbcc2e6dc336581f95d882b0b6a1087904c858e145a1f5eb4e12b2d0d9",
+      "event_digest": "53f8164821cb2e10b44abc4d1b63ec483ae25441f87963034b71707217354b3c",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-307-CORE_META_MODEL-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-307-CORE_META_MODEL-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md",
+        "sha256": "e34018ad0e07e863f788e0be3136f6015045697bf3fba04045d764eb1a35b1d1",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 61,
+      "event_id": "3472f29825a99cba73ae4a897d0f4c33ba28b4e1173f3c1c3747aac1fe35c149",
+      "event_digest": "25c7560c2673d0e7c4ea3e04d385267dd6c9fff4de6bf049c104b39afec424cd",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-310-CORE_META_MODEL-CORE-DELIVERY--serialize-projection-updated-at@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-310-CORE_META_MODEL-CORE-DELIVERY--serialize-projection-updated-at@4.md",
+        "sha256": "8eea3e39929cb4cb13f393364aab58ce85a4fbadd15dc6f127068b443f66450c",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 62,
+      "event_id": "9ed4f1646e7033a2873307b09dd6963a2e8c325a6e8524a44c495dc0dfd1109e",
+      "event_digest": "eaf753716a41bfd2a782b5c26785379ef9db5e820d738607ec63514a4beae6d5",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-310-CORE_META_MODEL-DELIVERY--serialize-projection-updated-at.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-310-CORE_META_MODEL-DELIVERY--serialize-projection-updated-at.md",
+        "sha256": "a4fadc0dabc2aadb59c41856b60b5a1074986d3d9e1a7f3ca19b31f45744b23e",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 63,
+      "event_id": "19af72ac2dcaf82444a85ba85c6956316838308a969841cea47d9ddd88907c33",
+      "event_digest": "1c07676a3becd017c68f851554dc9c14145b64c43630eb8815630cb32487a4c5",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-313-CORE_META_MODEL-CORE-DELIVERY--serialize-projected-atom-source-carrier-paths@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-313-CORE_META_MODEL-CORE-DELIVERY--serialize-projected-atom-source-carrier-paths@4.md",
+        "sha256": "404edf43f1bc474e408d47252838cfb8bc3c5d56c72ecf82127f20af5361e859",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 64,
+      "event_id": "66c0c33ee07b345705baad69de5f10aebd2402ab9a8d00b1ef0fbaed9763461d",
+      "event_digest": "a24c60ac43fad6ae043c40fe4d05d9158c65639fbc1ecd29e82492d280e4d111",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-313-CORE_META_MODEL-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-313-CORE_META_MODEL-DELIVERY--serialize-projected-atom-source-carrier-paths.md",
+        "sha256": "fd5c7bfbcd1ee11d4eea70d615861f2fbcf5e85af8c22c22525069147b9c28d2",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 65,
+      "event_id": "7df112683bce55cf1949ec7c6d3ea7b17ca47ea6cafad2bd56f4bcbdef53bd96",
+      "event_digest": "2c0a8267313fdd0188602e3de1e3f87fc5d88624d20870df5ea626f10a59e1e5",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-317-CORE_META_MODEL-CORE-DELIVERY--place-each-project-framework-instance-inside-its-project@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-317-CORE_META_MODEL-CORE-DELIVERY--place-each-project-framework-instance-inside-its-project@3.md",
+        "sha256": "83232871c0fb2c4b0c5d034a5602d672304fdd2854a724f3bf3a7801292caf58",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 66,
+      "event_id": "ca88750b4f530673cb0fece979b87fdba4950824c3dea7e06e49a87a42131f74",
+      "event_digest": "f5d5a7f1c5f46c264328df03ec55a45acf540dea52a3b020c7dcb42973c29f0b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-317-CORE_META_MODEL-DELIVERY--place-each-project-framework-instance-inside-its-project.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-317-CORE_META_MODEL-DELIVERY--place-each-project-framework-instance-inside-its-project.md",
+        "sha256": "2836c6afc67788ca831d9347d21d078dbea5f950094bc0a950ae7b6e9eb926db",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 67,
+      "event_id": "2a49dda1e11305eddf0a9068c3e5ab5dcb86c6d0ba566447b3df2a77afa443e8",
+      "event_digest": "2559b77fa40754b84420b16b5e76053797dea8d306edae6e93af4d1521dc7f28",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-318-CORE_META_MODEL-CORE-DELIVERY--place-project-owned-persistent-carriers@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-318-CORE_META_MODEL-CORE-DELIVERY--place-project-owned-persistent-carriers@3.md",
+        "sha256": "6691ca0450f6343feabefc64d4d2d083f6fb683e8bccddd3e9a7c77d4edcf5a0",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 68,
+      "event_id": "5b8af0def681ab87cc783d8b6d4dfb46880427251bbbb566a03c6b5bea054e47",
+      "event_digest": "16df66b6a70a5c995fc85a5b8b41b4e13d1b44551b0f80c09eef068240c6e212",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-318-CORE_META_MODEL-DELIVERY--place-project-owned-persistent-carriers.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-318-CORE_META_MODEL-DELIVERY--place-project-owned-persistent-carriers.md",
+        "sha256": "2d606e438c977c2ba9c769cf715c0eda9458e00974c65ccd7b1fb75202881a47",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 69,
+      "event_id": "a0590a04451d31e88ec29dc1d53742ed24d2253429c95654bd3d595f256b020a",
+      "event_digest": "2f855541f0774745d9527810e84224a4c798e8ee51bdf676708c7e8c2ad71c2e",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-329-CORE_META_MODEL-CORE-DELIVERY--serialize-proof-frontier-references@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-329-CORE_META_MODEL-CORE-DELIVERY--serialize-proof-frontier-references@4.md",
+        "sha256": "0a8d4463fcf8bc53de47ac3e646630c09703d0512638beb09b25b7d625aa3f72",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 70,
+      "event_id": "3423c1bcd8e92f98e4c2e7b03d0d3aaa6cd3610526ec8b137518fa94edd10388",
+      "event_digest": "edf9d32d7d203840115e198e55fec618ca44ff8dc6c31400ffa5cedbf3da24c3",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references.md",
+        "sha256": "f1324c89a1570b48b3f724d0ef3c912966592928b1e2f6d1eec8bc35c78fabd6",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 71,
+      "event_id": "bf633b993e52ef242e2bc8e09ac6df17db0367104689acc93b0925469afa2440",
+      "event_digest": "96c799aefaaf587739d426d1065ca0087fe4acb39e89603c16cfacc4908739b1",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-330-CORE_META_MODEL-CORE-DELIVERY--preserve-github-file-preview-compatibility@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-330-CORE_META_MODEL-CORE-DELIVERY--preserve-github-file-preview-compatibility@4.md",
+        "sha256": "99231f840b1c3fca1686a8c80e4b12c9101c57eb04fd54c6402bf071d29f7a22",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 72,
+      "event_id": "26042a1937495609c49cfb8cc9011c79df86381a877562cfbff77f0f1342dff4",
+      "event_digest": "0bf74efa6e6d93af554d1d517c9db4e0da80c10d8ee0e1dec64bcc9efd987b00",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-330-CORE_META_MODEL-DELIVERY--preserve-github-file-preview-compatibility.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-330-CORE_META_MODEL-DELIVERY--preserve-github-file-preview-compatibility.md",
+        "sha256": "b6bcf6fb8889d332cba3e2c58cb493522e9d30d01a081607d38ed56aec1541d9",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 73,
+      "event_id": "eeba2317bc7bc35c655887bc41b55ab04e9160709fd5f6297a4c54ce92fc779e",
+      "event_digest": "49db557e070d2e0d2f383566267584800c28a85180316997e5478b1fe8659fc7",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-331-CORE_META_MODEL-CORE-DELIVERY--keep-durable-hub-navigation-at-folder-level@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-331-CORE_META_MODEL-CORE-DELIVERY--keep-durable-hub-navigation-at-folder-level@4.md",
+        "sha256": "8c20ade5dfcfe50a8511176cac8673621b616febd020041b2eb4c120b773d8a3",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 74,
+      "event_id": "e16603a9743691ab89658be08de3fb2091a110f14e16b6895be050625c4c2ddd",
+      "event_digest": "74fdf774719fe14aff989745aea49416679e294b3761b3bc340120dd0a1a5ee0",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-331-CORE_META_MODEL-DELIVERY--keep-durable-hub-navigation-at-folder-level.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-331-CORE_META_MODEL-DELIVERY--keep-durable-hub-navigation-at-folder-level.md",
+        "sha256": "62fb0005bcc14571b56e1fc33c0f155bf19c59dbe1099b318c4b0c02504332a8",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 75,
+      "event_id": "d85b9793f1492c9fb025eccd1ccf81a8f2a843b1a982e396f9195f255f25d75a",
+      "event_digest": "278da014386b07fb2b124408d85e4fca01176881ae64fcc897c4bb405b17f3ba",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-334-CORE_META_MODEL-CORE-DELIVERY--serialize-governed-change-commit-messages@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-334-CORE_META_MODEL-CORE-DELIVERY--serialize-governed-change-commit-messages@4.md",
+        "sha256": "0cfeaf42e28be4d61fa8657d54c9296ddc62dc0181f6c59af8facf97c4afc208",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 76,
+      "event_id": "82fe3ff6f1364e5a685c90c00f4340800c81d30cd19d07d0441d5c9c2a191a66",
+      "event_digest": "e6e3306492677f254799cbde0fd97c5e4a09378046edbfd756c5ca348db11f6b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-334-CORE_META_MODEL-DELIVERY--serialize-governed-change-commit-messages.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-334-CORE_META_MODEL-DELIVERY--serialize-governed-change-commit-messages.md",
+        "sha256": "0a35a260c296895f4ae2570ca3787eb1a553356d3dcc40e838901ea3dbd53341",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 77,
+      "event_id": "452466d061fceee34f36ebdc27f073248db773cf3c4e115a4b841ade5a9d7e83",
+      "event_digest": "cda577bc5e6536db05e0538d9d573f0fcfb2119d61bbdb9be744fb9612392142",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-335-CORE_META_MODEL-CORE-DELIVERY--mirror-governed-file-changes-in-journal-and-git@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-335-CORE_META_MODEL-CORE-DELIVERY--mirror-governed-file-changes-in-journal-and-git@4.md",
+        "sha256": "6a9184e1cdf4a565892d9435329ba04cde587e9ccb38842d206d079799dd70ae",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 78,
+      "event_id": "2f43ed8145798443a60bac1b882297b7289be7b8978a63668531ec72f571be81",
+      "event_digest": "4bee056b2759839b1d37bbc0b9752415d1ddb75747895c79d1872b2d8e983bca",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-335-CORE_META_MODEL-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-335-CORE_META_MODEL-DELIVERY--mirror-governed-file-changes-in-journal-and-git.md",
+        "sha256": "9963938e690661ace52dbc86d453f91903d0d9cbd0ba8458c155736eac4a61d6",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 79,
+      "event_id": "734afa4251141276114db4d9a0771372b23477375fe33d2a21ed1a7342852ef4",
+      "event_digest": "dff39e9a384abbfa7309f9b986ef8b2878d49e29c5a93f8e0caad100ae166183",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-336-CORE_META_MODEL-CORE-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-336-CORE_META_MODEL-CORE-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities@4.md",
+        "sha256": "0e518fca7d3295ec5575458c89ca207eeac2abd2cd6a0393dbbab92564dfa271",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 80,
+      "event_id": "6dee5e76ce082cdeecf4fcf17e4182615baf023c5c626b77ab47a11cc994f132",
+      "event_digest": "70532a312538168bd07972d7b93327bb6bb92b28e7bc5836adc4255d49f0753f",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-336-CORE_META_MODEL-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-336-CORE_META_MODEL-DELIVERY--resolve-active-atoms-from-canonical-carrier-identities.md",
+        "sha256": "9f5dc0a1e81781427eaa83fa938085f2e6b639d5de79a4e5cdd418c0526160ad",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 81,
+      "event_id": "343547dad141a7d68d0d5a22d1760df8725476f816d1886e5e04b9103fa1d17b",
+      "event_digest": "70e747c6dabc68d2b4ac456c265ba66eb1112a065a9d6e75810e02769a71ab21",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-339-CORE_META_MODEL-CORE-DELIVERY--serialize-implementation-journal-carriers@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-339-CORE_META_MODEL-CORE-DELIVERY--serialize-implementation-journal-carriers@4.md",
+        "sha256": "cadf1375f7364efadf2ea2ebae4f2cadf73cf7ec9e3da4546041141963aacedc",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 82,
+      "event_id": "a23bf9b6c8314c9f94c813e2bff6373313952515288b6698a14d1fe54ead6c6b",
+      "event_digest": "d60103855af04e63f4a2e79fcd5d6c263323d1d864057efaa8aa4e3bfefd5447",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+        "sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 83,
+      "event_id": "37980a0d93c2335262aaf0f327f12e28ada39b571a40322e38c9a600a22e3877",
+      "event_digest": "07dfae354c994a3d998a30a204448a266baa76976e107540c4c448b04cad9c22",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-342-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-references@7.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-342-CORE_META_MODEL-CORE-DELIVERY--serialize-external-project-goal-references@7.md",
+        "sha256": "16a8652e5ebeeb0b2189272078d74dfd4ed152e00fdbea4a7de6fde1a0acea60",
+        "state": "present",
+        "version": 7
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 84,
+      "event_id": "d2012dd8fb71785fd7acab7d9fba1fbe24cb560ccc44267a5acabf253d85fb0d",
+      "event_digest": "ee495c056037810bd57a9aea6360a71479a7c8bd24c61d2db1e10db25bff00ef",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-342-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-references.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-342-CORE_META_MODEL-DELIVERY--serialize-external-project-goal-references.md",
+        "sha256": "d20e07e6cb624c63d165074dd6f79c6c6142ae4d403874629443f3aeac0ce169",
+        "state": "present",
+        "version": 8
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 85,
+      "event_id": "f8e9591b7954e36748eafbf09987d63bb9f8d510accd89b84b1703cabc81f0b1",
+      "event_digest": "410149dbfcda106ed51861c7dd73775e7d3f2770ea0f7fc401e1a6b004fc6cd8",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-346-CORE_META_MODEL-CORE-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-346-CORE_META_MODEL-CORE-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections@3.md",
+        "sha256": "0412ce9766ae69cf73de75bdb433b4cd582c08eb532ec8c050db02c521b979f7",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 86,
+      "event_id": "5f0ed9d65420d62f3987bd0c449533be0418d34abef41cfdb30862eb30fcb301",
+      "event_digest": "4e473a53fd667e5ad7dfbc35f11234a112cdf523ee6549ad261a3e933ba23d1c",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-346-CORE_META_MODEL-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-346-CORE_META_MODEL-DELIVERY--deliver-cce-canonical-signatures-as-external-report-projections.md",
+        "sha256": "67ea6624826cc9d03f2e5ef3e6838addc442284a52b40876764640b84d22cc9f",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 87,
+      "event_id": "a61bf71c5c1b7061b68a5e3415e674d85cefce7b366754162a7309f7f9750fa4",
+      "event_digest": "386cd3a455ec95590ca48960c5548f7d0fab7c4a40e3a4da2cfa547f217e2516",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-347-CORE_META_MODEL-CORE-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-347-CORE_META_MODEL-CORE-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections@3.md",
+        "sha256": "0120a0ee7c3ec1484f77e7d6da4e9fccb997e445cad48d2d76c3c782233fef60",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 88,
+      "event_id": "58095b5992c98b29f5a7da5e2fcf554af03f4f900a0880c6c5c02ac345ac3fac",
+      "event_digest": "7a225cf1a30824ff6b30fdac64f0b22db493b4ba87b7dfddae029d87df09729b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-347-CORE_META_MODEL-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-347-CORE_META_MODEL-DELIVERY--deliver-canonical-scope-signatures-as-external-report-projections.md",
+        "sha256": "ddd8dc70971c1e2c762e3fd2d69a7dd45abc48101bcae103546b97cefcc3ec88",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 89,
+      "event_id": "663980a78cc5715eeb2d13342a572254e98b069a7f7df81dfa63f4ce1e946375",
+      "event_digest": "94ba0c3f683f1119349fa89103f9f4d82f316cb7c6c74838b2e82d1a016ca1df",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-350-CORE_META_MODEL-CORE-DELIVERY--serialize-objective-filenames@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-350-CORE_META_MODEL-CORE-DELIVERY--serialize-objective-filenames@4.md",
+        "sha256": "f0c3a2378d5c132381ca7f67ee541baf334cb19c4f0323f5ba70f43b7e3116f9",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 90,
+      "event_id": "f9f05153e8d03b7c39c66658d7f11973ff9f2e60665bfc7d847f441d1c642311",
+      "event_digest": "c8c0970ea79249a1e5b83aa647b82fd2f0c5185e91b8cea52c3406b0d77bbd99",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-350-CORE_META_MODEL-DELIVERY--serialize-objective-filenames.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-350-CORE_META_MODEL-DELIVERY--serialize-objective-filenames.md",
+        "sha256": "bfca8a3b31b099b7c3a93061f3bcd020daa4686fc9feb614f6e08173162d142e",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 91,
+      "event_id": "8c7fe27243eb7524e01aa5f26cd1e43c889c173ecb6db926529c5e1378f2eabf",
+      "event_digest": "3c61b8f2713439aa5ab65dbc65b6458da9bba980e6d33d59d42f69e5de3b2db4",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-351-CORE_META_MODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories@5.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-351-CORE_META_MODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories@5.md",
+        "sha256": "3506f6139d86a570ae0abbc64ba7a0b6c1e4b7b145c3074c158869a2f9d5dbb4",
+        "state": "present",
+        "version": 5
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 92,
+      "event_id": "b796573576ff74f6eb6618d3eaf3b9af404e78762e473becd9f61ed65bf2d48e",
+      "event_digest": "422452b9391cb2f2e92c5f618768bd02706d301e62a37183457b8e4332e3525b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-351-CORE_META_MODEL-DELIVERY--store-objectives-outside-their-epic-directories.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-351-CORE_META_MODEL-DELIVERY--store-objectives-outside-their-epic-directories.md",
+        "sha256": "97a08ff45945e6edb7976b3628efd01c83b6db713aac8dffbd7047eacc088f8e",
+        "state": "present",
+        "version": 6
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 93,
+      "event_id": "d561d11a6caacb6874e2fe7ac60d6e4864bb571d66ee7f93988132cdc5a20b7e",
+      "event_digest": "85165246a3cffbc376afc278c5d8915d7011726709a19f198fc3b6ab56c2ac88",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-353-CORE_META_MODEL-CORE-DELIVERY--carry-every-structural-entity-with-a-directory-carrier@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-353-CORE_META_MODEL-CORE-DELIVERY--carry-every-structural-entity-with-a-directory-carrier@2.md",
+        "sha256": "6709ba7d83ae265f0cc8e098bd5553f996aea10b56dc519905e610636db5957e",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 94,
+      "event_id": "bbfe485118f07169171b5a5d70f9a14aa4349387f70ef7f6dd1c6c4fda4c2a42",
+      "event_digest": "7b90e4f7178299fa70e87ee2447268ca5c6e8535f7cb47fdae179680cb30f9fb",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+        "sha256": "15296a9d396578a9fdd5ca54c4fe94f134913c28ffc25ea3973ac50ea1f1e845",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 95,
+      "event_id": "011cf94e8e0a9367518210b456ef22b56da0cf99691268b9b044f3ec71f24a59",
+      "event_digest": "742cf9fad864107d788e0ea3debc794a672f7b00db7008e3624dad300310e354",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-355-CORE_META_MODEL-CORE-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-355-CORE_META_MODEL-CORE-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier@2.md",
+        "sha256": "664480eab2ecf0275c4238eb64dfb012102d656355913083b5c1376ca7efddc0",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 96,
+      "event_id": "7bcf9292fc5eb7149e27da82d1fd99b3f263b8d62e514e666a9e69298ad6dafa",
+      "event_digest": "7ecb043c9e45462d4b71e26c6612d35913f4e91bf969ba58068f94ff930ec52f",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-355-CORE_META_MODEL-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-355-CORE_META_MODEL-DELIVERY--give-every-atom-revision-one-authoritative-markdown-carrier.md",
+        "sha256": "4e6d3f785fa63d727c45f2d6c98afeec22765ad3544a7e43522a894e851cb801",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 97,
+      "event_id": "b27b60f47551c494877ef3fc07b15d272166f37aaa26b673ec3aee1db5df2a17",
+      "event_digest": "11815d840558e20cf9d04ee6bd0b54672f5038c79cc32f7bc85695f027fcc79d",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-356-CORE_META_MODEL-CORE-DELIVERY--structure-markdown-atom-carriers@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-356-CORE_META_MODEL-CORE-DELIVERY--structure-markdown-atom-carriers@2.md",
+        "sha256": "ff8e06674f7dad0bb9861e3aae3bb5f0582811be6e309c5b9666dc81f93df07f",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 98,
+      "event_id": "bfa58ce7bfb95d158ae0e300894e2dc8f18101057f3a99d0d5d7bc69f1148bb0",
+      "event_digest": "cd1a287a6091a691c4fbad9ed019dd0f1d3ecba4a6bb27be226bdf7dc26ac0c4",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-356-CORE_META_MODEL-DELIVERY--structure-markdown-atom-carriers.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-356-CORE_META_MODEL-DELIVERY--structure-markdown-atom-carriers.md",
+        "sha256": "32071514e6472ca8d6070d8206e57dc5376ade53f1f7c61ceefa93c464ee7ab3",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 99,
+      "event_id": "4701da5c7b315e98480f9d9df1755e1151854f44c579b76e27b5107956161d39",
+      "event_digest": "e09c356dbcf884cc34aa1c05fd178aba25ebccad73e25ac52a6ee9df42df3105",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-357-CORE_META_MODEL-CORE-DELIVERY--define-markdown-atom-main-content@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-357-CORE_META_MODEL-CORE-DELIVERY--define-markdown-atom-main-content@2.md",
+        "sha256": "41445294c2dc73f78bf5e518033f67db50307fc318d9767ec671dc7d180955c2",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-3.ndjson",
+      "line": 100,
+      "event_id": "30d1dce0becbd0c31842404069da863b047d91452772a02e699bff1e68f89634",
+      "event_digest": "fabb37ebab2275f42088732289d0aacb5b082396e79c92dde0ec5d1f95740816",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-357-CORE_META_MODEL-DELIVERY--define-markdown-atom-main-content.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-357-CORE_META_MODEL-DELIVERY--define-markdown-atom-main-content.md",
+        "sha256": "9e4ca1ca7d1cd75962d8ae94b857af348865709a35dd8b9acf9c1a5ddd1e6932",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 1,
+      "event_id": "cb8578f19da394c1c8baca7846f1108b8180ca72440922c48c49b80b7b1be5c3",
+      "event_digest": "66392bdbc866dd413888246bc554a6bc3a4621fe4fbb4e0d3f209a646764f469",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-358-CORE_META_MODEL-CORE-DELIVERY--identify-framework-settings-artifact@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-358-CORE_META_MODEL-CORE-DELIVERY--identify-framework-settings-artifact@3.md",
+        "sha256": "1ca77a8e0ba7f4a64e3f2a2ef10d90c84516bf494e41bb767e1aac46e94eff9b",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 2,
+      "event_id": "8d7dbc41cc45e500fe8ad023c1213bb3b777c511d5e2fbb77c8a11e520807e4f",
+      "event_digest": "0f4ca24edd35bb77294afdeb26ef933e97ba920299a7437cb1f887fb554a5702",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-358-CORE_META_MODEL-DELIVERY--identify-framework-settings-artifact.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-358-CORE_META_MODEL-DELIVERY--identify-framework-settings-artifact.md",
+        "sha256": "09bea3c54bbbf1293500d7a2230e06905920d2cd20591f20ae45f22e021ec1fd",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 3,
+      "event_id": "d118aeaeea0c0520325381b7d6bb5c30d06b7fcacee6d5c9faf7ecd6402ae3d0",
+      "event_digest": "7873ef7a207e707517e69778c5748aa5c1ed80b8aeb666e33e334f2001d669df",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-359-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-359-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier@3.md",
+        "sha256": "b0adf158a12dec6737734c2c86a36ce5e182f20de1f0d6bb4b326ae6f95b136a",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 4,
+      "event_id": "9920f5621dd8b05afd70aefe7ff032b0ad694a26af9b46d88cc3807d17d926e5",
+      "event_digest": "3a7b8dc5537937d1f68e9d6b3d8aa5f8c9ec89a919d9a21a2750d3d0e59199b3",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-359-CORE_META_MODEL-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-359-CORE_META_MODEL-DELIVERY--bind-framework-settings-to-its-authoritative-toml-carrier.md",
+        "sha256": "cb6b222a836fbf6e4b377ef5951ef5b775f69951018683ad45209d5fd250406b",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 5,
+      "event_id": "3810f90ed715e262984e775cd1575310192d806076a85f1c1b9dbb5bbffea2dc",
+      "event_digest": "6471c23c91bfc3a34a7d6e02c35571a4b2a72813775d23feb3ff2db83f6267f9",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-360-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-revisions-to-journal-receipts@3.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-360-CORE_META_MODEL-CORE-DELIVERY--bind-framework-settings-revisions-to-journal-receipts@3.md",
+        "sha256": "247257137e8c877f925ce34b9908116d47bfefbfeaf9ce8600674c792e73f150",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 6,
+      "event_id": "e403dcc6959f8aad6d5620ad5e4a57bc7a0d91fb9deb79c62bda615449486a98",
+      "event_digest": "cb872b219556bbc26062ccef4a04f655412a947360fbd3bfdc676c6bf2711ab8",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-360-CORE_META_MODEL-DELIVERY--bind-framework-settings-revisions-to-journal-receipts.md",
+        "sha256": "5e74916c16cbecdce7e7e9f18a239a97643cb9759faee7f7624b3c36f71b2067",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 7,
+      "event_id": "7e7787266c5cea66853b269bb7e5f5ea3413d3e88b9f5836cea94d6c9daed60c",
+      "event_digest": "5df99df3e6a9c0cd2572ed9412d9df09dab648b499a2473709ace6dd277c082f",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-362-CORE_META_MODEL-CORE-DELIVERY--identify-project-settings-artifact@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-362-CORE_META_MODEL-CORE-DELIVERY--identify-project-settings-artifact@2.md",
+        "sha256": "6016384cddb9362369c8294cbe4646f3632bab26c6e17e1b0fbe386ae8de36c5",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 8,
+      "event_id": "ccd17518cf8d9344e167994e476e597b3c5edc775de0e565b5c0dce7d311ed50",
+      "event_digest": "24cdc96cedb81b62977db24625f39ebe511485bdd5b3076a520ddfa8b0e1d423",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-362-CORE_META_MODEL-DELIVERY--identify-project-settings-artifact.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-362-CORE_META_MODEL-DELIVERY--identify-project-settings-artifact.md",
+        "sha256": "4930590c31437466b7a3e147933443ba6ccd7fe2339bf36b94349498731f25c1",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 9,
+      "event_id": "dd7e6f4417888d7adddf233f75ca7487d00c4dbbae840938ca257f491951f284",
+      "event_digest": "21829fdb3507d3b7b8d93566339782c44095e03fe5831b65044f6297e917ab22",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-363-CORE_META_MODEL-CORE-DELIVERY--serialize-project-settings-filename@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-363-CORE_META_MODEL-CORE-DELIVERY--serialize-project-settings-filename@2.md",
+        "sha256": "18a3cce08b343d0b80ad363d11b1a0b270aa74e17164ddd5d7446a6d0dd7601b",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 10,
+      "event_id": "0d834f449d841358ffac6d9776677e06dfbb350a6126128fc7352ad24919a360",
+      "event_digest": "2f4bfdc4f595fab3f4c602ff164ee0f9b3f938f8d7b518746eccf898b6a888e3",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-363-CORE_META_MODEL-DELIVERY--serialize-project-settings-filename.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-363-CORE_META_MODEL-DELIVERY--serialize-project-settings-filename.md",
+        "sha256": "95d39a0b5e261e35d1f4a71e80ba697453db2fe4440d97fef2d8764e301e7ba9",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 11,
+      "event_id": "b7aa1515f8932c8f1b670101b2cf113884dd4185de5f3c575747e9e3213ab0b9",
+      "event_digest": "1dcd08995c4961b29af249dc3717cd02bbcb42acdc003e624e251d069946e97b",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-364-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-364-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier@2.md",
+        "sha256": "3fdd748252ad176362881f17d938d7fa035d607e283c81320913b340e2657806",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 12,
+      "event_id": "01a69c11dd4b2463f5528fba5984d206741cdacf18da6da34adffdebe5556b58",
+      "event_digest": "b73a211fad453b183bec9cd60f44a84e92b634473ed7330404996582383cda57",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-364-CORE_META_MODEL-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-364-CORE_META_MODEL-DELIVERY--bind-project-settings-to-its-authoritative-toml-carrier.md",
+        "sha256": "9debb4355ed433bac6aaae237b7753e387e5802757ef1f370026f7e625575ce5",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 13,
+      "event_id": "7a8b7e6b7efa4f5999ff753982c08a98f0a043be8cb53ecf69ed50e0f4b5ab8b",
+      "event_digest": "7a8f51ba2c17f7ae11a11a33ca5669dbce4d4bee813dd3c55e27767abe425d95",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-365-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-revisions-to-journal-receipts@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-365-CORE_META_MODEL-CORE-DELIVERY--bind-project-settings-revisions-to-journal-receipts@2.md",
+        "sha256": "47d4bc9bb0e7aa48897bcc218b06ece7b71a9df6d42c7b8e78ff9d898b4434e7",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 14,
+      "event_id": "afeb70700c479538ee4a4088b19155df59d7feb3048ccf3d50905b54948832da",
+      "event_digest": "4ef78f7052ee8d9cfc9a5d648c7b85fa8d31189e4435d56fb5a19248b888bd92",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL-DELIVERY--bind-project-settings-revisions-to-journal-receipts.md",
+        "sha256": "01889edd3489dc644f5285cc4947ca81bc1468458af40349f7596a441996b2cc",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 15,
+      "event_id": "d91c74a8945e08bb727a7c0f45d3df65ce5bdfcb3ee54a833aee2799cfa89a07",
+      "event_digest": "69a6f10601fe1c2019aee27c19a19bf919ea3641ae9c3d753bf4c648f183534e",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-D-367-CORE_META_MODEL-CORE-DELIVERY--serialize-claim-scope-only-for-relational-atoms@2.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-367-CORE_META_MODEL-CORE-DELIVERY--serialize-claim-scope-only-for-relational-atoms@2.md",
+        "sha256": "beae6847d360dee4c4c85e3c1d02fa24d072507a590e2cb0880b03f649d5c300",
+        "state": "present",
+        "version": 2
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 16,
+      "event_id": "3916dbe78b607a81a41c98efb82c1fa5212726b13bda194a17c38ebe0325d1e5",
+      "event_digest": "1d86f2f7971614d38e841f2e47426809efa3aa684d4b09b981c55d80f98ad49b",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-D-367-CORE_META_MODEL-DELIVERY--serialize-claim-scope-only-for-relational-atoms.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-367-CORE_META_MODEL-DELIVERY--serialize-claim-scope-only-for-relational-atoms.md",
+        "sha256": "0708bff37f56e4127fdee5605a9604d018545c7c34bc269c9436c49b65113064",
+        "state": "present",
+        "version": 3
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 17,
+      "event_id": "e50d3a296a2b7fec73818aa013015b70b185a119d5dbd9219827f255015ad5bd",
+      "event_digest": "499d6fde48d452919002ce2e355e3b52786077d1de719faed453c9fccd308cb4",
+      "action_type": "ADD",
+      "result": {
+        "filename": "CA-M-235-CORE_META_MODEL-CORE-METHOD--express-cardinality-with-comparison-operators-and-integer-literals@4.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-235-CORE_META_MODEL-CORE-METHOD--express-cardinality-with-comparison-operators-and-integer-literals@4.md",
+        "sha256": "bca9165c98207dbf51c3603c1c694c980aedd70889f18ef059dccbf01ee509a3",
+        "state": "present",
+        "version": 4
+      }
+    },
+    {
+      "journal_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-10-part-4.ndjson",
+      "line": 18,
+      "event_id": "52d7333a874f31e22533eaec796a9fadbc9faa75c0d5250c5643d9586df50315",
+      "event_digest": "daf2fcf71a787c1e69bc8b24a02f82fe828bc407a0dfbf3d4ec41c59a2bd83f7",
+      "action_type": "MOVE+UPDATE",
+      "result": {
+        "filename": "CA-M-235-CORE_META_MODEL-METHOD--express-cardinality-with-comparison-operators-and-integer-literals.md",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-235-CORE_META_MODEL-METHOD--express-cardinality-with-comparison-operators-and-integer-literals.md",
+        "sha256": "b5eba10f4adf1ec213763e377ce1de480bb1b8d9ebb3c3aefd23977c29e68cb6",
+        "state": "present",
+        "version": 5
+      }
+    }
+  ]
+}

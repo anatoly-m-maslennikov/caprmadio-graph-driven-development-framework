@@ -1,0 +1,117 @@
+{
+  "schema": "ca-p-957-planned-checkpoint-corrections/v1",
+  "non_authoritative": true,
+  "batch": "05",
+  "frozen_plan": "CA-P-957-batch-05-planned-source-delta.json",
+  "frozen_plan_sha256": "5c55b1d4b7029963b031e455573ef8e0eab5114d4772f08b8e9ac21af81f5f80",
+  "status": "Additive correction to frozen proposal before source mutation; wait for exact root GO over this effective checkpoint.",
+  "corrections": [
+    {
+      "atom_id": "CA-R-1382",
+      "status": "Frozen General classification rejected; Standard classification replaces it before any source mutation",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1382-CORE_META_MODEL-CORE-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+      "source_version": 2,
+      "source_sha256": "2f8f60c18e10838ca1af72b94cecac77a968366b0a7f23bdb637064809de63c6",
+      "frozen_proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1382-CORE_META_MODEL-GENERAL-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+      "frozen_proposed_tier": "General",
+      "frozen_proposed_bytes_utf8": "---\natom_id: CA-R-1382\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - \"Scope Unit/Type: Ordered\"\nversion: 3\nupdated_at: \"2026-09-10 03:38:57 +0400\"\nrelations: {}\n---\n# Default Ordered Scope Unit Label to Layer\n\n**every** Ordered Scope Unit **must** use Layer as its default Label.\n",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1382-CORE_META_MODEL-REQUIREMENT--default-ordered-scope-unit-label-to-layer.md",
+      "proposed_tier": "Standard",
+      "proposed_version": 3,
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1382\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - \"Scope Unit/Type: Ordered\"\nversion: 3\nupdated_at: \"2026-09-10 03:38:57 +0400\"\nrelations: {}\n---\n# Default Ordered Scope Unit Label to Layer\n\n**every** Ordered Scope Unit **must** use Layer as its default Label.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1382-CORE_META_MODEL-CORE-REQUIREMENT--default-ordered-scope-unit-label-to-layer@2.md",
+      "decisive_test": "S",
+      "reason": "The complete Claim selects the concrete freely chosen navigation label 'Layer' for Ordered Scope Units. R972 makes that Label independent of Type; changing its rendering is an earlier successful concrete-choice test, so two implementation paths do not justify proceeding to G.",
+      "replacement_witness": "Use an alternative Operator-controlled navigation rendering such as 'Group' for the same Ordered Unit, preserving its exact identity, Type, Scope, parentage and authority. Only the chosen displayed default label changes.",
+      "confidence_percent": 99,
+      "preservation": "Identity, owner, Scope, complete body, source version/time correction candidate bytes, and every direct relation are unchanged. Only the planned tier filename token changes from GENERAL to omitted Standard; the original proposed General path is never created."
+    },
+    {
+      "atom_id": "CA-R-980",
+      "status": "Frozen General classification rejected; Standard classification replaces it before any source mutation",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-CORE-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+      "source_version": 8,
+      "source_sha256": "dbd4660acf1c0a6253c1a89d27fdac8113dbb988ffde7d55c9cdf6a393dddc06",
+      "frozen_proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-GENERAL-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+      "frozen_proposed_tier": "General",
+      "frozen_proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - \"Scope Unit/Type: Unordered\"\natom_id: CA-R-980\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 03:38:57 +0400\"\nrelations:\n  child_of:\n    - CA-R-972\n---\n# Default Unordered Scope Unit Label to Feature\n\n**every** Unordered Scope Unit **must** use Feature as its default Label.\n",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-980-CORE_META_MODEL-REQUIREMENT--default-unordered-scope-unit-label-to-feature.md",
+      "proposed_tier": "Standard",
+      "proposed_version": 9,
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Scope Unit/Label\n  depends_on:\n    continuant:\n      - \"Scope Unit/Type: Unordered\"\natom_id: CA-R-980\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: \"2026-09-10 03:38:57 +0400\"\nrelations:\n  child_of:\n    - CA-R-972\n---\n# Default Unordered Scope Unit Label to Feature\n\n**every** Unordered Scope Unit **must** use Feature as its default Label.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-980-CORE_META_MODEL-CORE-REQUIREMENT--default-unordered-scope-unit-label-to-feature@8.md",
+      "decisive_test": "S",
+      "reason": "The complete Claim selects the concrete freely chosen navigation label 'Feature' for Unordered Scope Units. R972 makes that Label independent of Type; changing its rendering is an earlier successful concrete-choice test, so two implementation paths do not justify proceeding to G.",
+      "replacement_witness": "Use an alternative Operator-controlled navigation rendering such as 'Group' for the same Unordered Unit, preserving its exact identity, Type, Scope, parentage and authority. Only the chosen displayed default label changes.",
+      "confidence_percent": 99,
+      "preservation": "Identity, owner, Scope, complete body, source version/time correction candidate bytes, and every direct relation are unchanged. Only the planned tier filename token changes from GENERAL to omitted Standard; the original proposed General path is never created."
+    }
+  ],
+  "R1370_countermodel_boundary_review": {
+    "atom_id": "CA-R-1370",
+    "classification": "General retained",
+    "countermodel": "Keep one Task Atom identity, one authoritative Markdown Carrier at its owning Scope's Plan root, one Atom Scope and Claim Scope, and one Claim. A replacement Standard Delivery rule reads one authoritative Task membership binding and derives direct CONTAINS/IS_CONTAINED_BY connections to two Epics. The membership facts have one owner; generated Epic views are not independently editable truths. Both Epics remain acyclic planning collections within the same owning Scope.",
+    "preserved_core": [
+      {
+        "atom_id": "CA-R-1378",
+        "version": 2,
+        "boundary": "Atom Collections organize Atoms without creating Scope boundaries; two Epic memberships do not create two Task Scope owners."
+      },
+      {
+        "atom_id": "CA-R-1300",
+        "version": 6,
+        "boundary": "Epic membership remains Delivery-derived CONTAINS/IS_CONTAINED_BY, not independent authored relation declarations."
+      },
+      {
+        "atom_id": "CA-R-1368",
+        "version": 3,
+        "boundary": "Containment remains in the Structural Entity containment domain, distinct from Scope Unit structural_parent."
+      },
+      {
+        "atom_id": "CA-R-1303",
+        "version": 5,
+        "boundary": "The two membership edges introduce no containment cycle."
+      },
+      {
+        "atom_id": "CA-R-1376",
+        "version": 4,
+        "boundary": "Each organizing Epic identity remains independent of its member Task."
+      },
+      {
+        "atom_id": "CA-R-643",
+        "boundary": "The Task's one governed Claim retains one authoritative owner."
+      },
+      {
+        "atom_id": "CA-D-263",
+        "version": 5,
+        "boundary": "Each represented Epic Directory Carrier still carries exactly one Structural Entity Revision; the Task's shared membership does not duplicate a Carrier."
+      },
+      {
+        "atom_id": "CA-D-265",
+        "version": 5,
+        "boundary": "Recursive membership still equals transitive closure of the complete direct containment graph."
+      },
+      {
+        "atom_id": "CA-D-341",
+        "version": 4,
+        "boundary": "The sole authoritative Task membership binding and all persistent sources remain outside Runtime State."
+      },
+      {
+        "atom_id": "CA-D-308",
+        "version": 4,
+        "boundary": "The current D308 is Journal append-only serialization; no admitted Journal Record is edited."
+      }
+    ],
+    "preserved_additional_choice": {
+      "atom_id": "CA-D-355",
+      "version": 3,
+      "boundary": "Even the existing Standard one-authoritative-Markdown-Carrier choice can be retained; two Epic memberships do not require two Task Carriers."
+    },
+    "changed_standard_choice": {
+      "atom_id": "CA-D-264",
+      "boundary": "Replace nearest-ancestor-directory membership derivation with a different single-source Delivery derivation; this is explicitly a hypothetical Standard alternative, not permission for a live variation."
+    },
+    "conclusion": "The altered <=1 direct-membership admission bound changes General policy without changing Core identity, authority ownership, Scope hierarchy or single-source conservation.",
+    "confidence_percent": 99
+  }
+}

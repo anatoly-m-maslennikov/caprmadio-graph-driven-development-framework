@@ -1,0 +1,23 @@
+---
+atom_id: CAPRMEDIO-META-REQU-730
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs:
+    continuant:
+      - lifecycle-traceability
+version: 9
+updated_at: 2026-09-06 01:45:12 +0400
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  child_of:
+    - CAPRMEDIO-META-REQU-090-CORE_META_MODEL-CORE-REQUIREMENT--propagate-atomic-revision-impact-through-lineage
+    - CAPRMEDIO-META-REQU-098-CORE_META_MODEL-CORE-REQUIREMENT--scope-path-does-not-change-semantic-coordinates
+    - CAPRMEDIO-META-REQU-728--separate-immutable-atom-id-from-mutable-scope
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-730-CORE_META_MODEL-REQUIREMENT--preserve-atom-id-across-scope-change.md
+---
+# Preserve Atom ID across scope change
+
+A governed scope change of an identified Atom **must** preserve the exact Atom-ID segment **in** its Carrier filename, create a new Atom Revision, **and** trigger lineage-impact review for the changed Applicability.

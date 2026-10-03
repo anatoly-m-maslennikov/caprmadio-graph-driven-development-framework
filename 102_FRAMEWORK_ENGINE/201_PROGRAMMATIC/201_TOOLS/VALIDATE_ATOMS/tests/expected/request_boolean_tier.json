@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "result": "error",
+  "bindings": {
+    "methodology": [],
+    "action": null,
+    "rules": [],
+    "context": [],
+    "workflow": null,
+    "step": null
+  },
+  "selection": {
+    "requested": null,
+    "source_roots": [],
+    "selected": [],
+    "excluded": [],
+    "unresolved": []
+  },
+  "coverage": {
+    "targets": {
+      "selected": 0,
+      "assessed": 0,
+      "excluded": 0,
+      "unresolved": 0
+    },
+    "rules": {
+      "required": 0,
+      "supported": 0,
+      "unsupported": 0
+    },
+    "outcomes": {
+      "passed": 0,
+      "failed": 0,
+      "not_applicable": 0,
+      "not_checked": 0
+    },
+    "gaps": []
+  },
+  "carriers": [],
+  "findings": [],
+  "currentness": {
+    "state": "unverified",
+    "affected_inputs": []
+  },
+  "execution": {
+    "limits": {},
+    "limit_sources": {},
+    "stopped_by": null,
+    "diagnostics": [
+      {
+        "code": "REQUEST_INVALID",
+        "severity": "error",
+        "path": null,
+        "span": null,
+        "property": null,
+        "authority": [],
+        "reason": "Request does not conform to CA-D-492.",
+        "evidence": null
+      }
+    ],
+    "run_context": {}
+  }
+}

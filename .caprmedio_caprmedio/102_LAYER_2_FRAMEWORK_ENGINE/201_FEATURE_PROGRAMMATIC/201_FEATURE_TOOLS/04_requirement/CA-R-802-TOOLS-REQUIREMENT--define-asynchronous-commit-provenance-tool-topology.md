@@ -1,0 +1,30 @@
+---
+subjects:
+  governs: "feature-boundary"
+  depends_on: []
+cce_version: cce_1
+cce_form: obligation
+version: 22
+updated_at: 2026-09-04 03:10:59 +0400
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Define asynchronous commit-provenance Tool topology
+
+automatic provenance uses four peer Tool Scope Units plus one independently supervised repository-local COMMIT_AUTOMATION service:
+
+| Component | Kind | Owned responsibility |
+|---|---|---|
+| COMMIT_TRIGGER | Hook Tool | atomically accept one immutable source event into the Runtime inbox **and** return **without** waiting for provenance work. |
+| COMMIT_AUTOMATION | Background service | reconcile accepted events **and** repository state, persist the manager-defined execution graph, **and** mechanically dispatch ready work. |
+| COMMIT_CONTEXT | Finder Tool | gather read-only provisional action context **and** revalidate it at an effect boundary. |
+| APPEND_CHANGE_RECORDS | Doer Tool | prepare **and** append governed Journal records through the canonical Journal writer. |
+| COMMIT_CHANGE_SET | Doer Tool | serialize admitted local commit creation through the single logical repository Git gate. |
+
+the four Tools remain peer unordered_unit Scope Units at Structural level 4; the service is an execution component, **not** a fifth semantic Tool **or** authority owner. the service has one deterministic I/O-free manager that receives typed facts **and** returns the complete admissible execution graph **or** next command. a mechanical Scheduler persists **and** advances **only** manager-declared transitions. workers perform one atomic operation, return typed facts, **and** never choose targets, ordering, fallback, retry, acceptance, **or** downstream work.
+
+trigger intake, context gathering, **and** Journal preparation **may** run concurrently **and** out of order. trigger intake **must not** start one pipeline worker per Hook event. the service preserves accepted work across Hook completion, manager termination, service restart, pause, stop, **and** reload. it reconciles missed Hook delivery **and** external edits **without** treating a host callback as repository truth. **=1** logical Git-gate worker **may** create a commit **in** one repository at a time.
+
+**after** COMMIT_CONTEXT seals an action, real-change commit work **and** Journal append work are independent branches. a real-change commit does **not** wait for a Journal append **or** Journal-only commit. Journal records remain the canonical append-only provenance stream **and** are committed later through an independent Journal-only batch. both commit classes share the same Git gate, while Journal append itself does **not**.
+
+automatic execution is limited by the current COMMIT_AUTOMATION autonomy envelope. that envelope **may** admit **only** local real-change commits **and** local Journal-only commits. Branch creation, deletion, **or** rename; upstream **or** remote selection **or** configuration; fetch, pull, merge, **or** rebase; push **or** force-push; tags; releases; **and** **every** other Git effect remain explicit Operator **or** external operations outside CAPRMEDIO Tools. the final Git Doer **must not** import **or** orchestrate its peers.

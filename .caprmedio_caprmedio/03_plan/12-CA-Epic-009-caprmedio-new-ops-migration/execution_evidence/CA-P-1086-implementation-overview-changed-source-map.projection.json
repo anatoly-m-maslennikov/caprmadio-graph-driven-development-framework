@@ -1,0 +1,230 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "implementation_overview",
+  "generated_at": "2026-09-13T12:46:19+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_partial_stage",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_count": 1562,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-322",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "before_version": 16,
+      "before_sha256": "14884147bfa783396d93b553052f27eee94b4bde4509936b18478613ea52cebc",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-overview-projection.md",
+      "version": 17,
+      "sha256": "813def3d83aca3fd4ba6e25a0cc4cf31558d5418c1f2d7efb210677f4f90f5c3",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection@16.md",
+      "archive_sha256": "14884147bfa783396d93b553052f27eee94b4bde4509936b18478613ea52cebc",
+      "change_class": "semantic_revision",
+      "action": "MOVE+UPDATE",
+      "semantic_delta": "Rename the existing current-state Projection Type to Implementation Overview, retain its primary definition and source frontier semantics, and distinguish its derived current view from Journal-owned implementation history. Preserve the old rationale and explain its historical name.",
+      "primary_claim_preserved": true,
+      "new_identity": false,
+      "lineage_disposition": "Preserve assigned Atom identity and exact predecessor; all current source references remain resolvable by identity. No absorption, independent-Claim split, new Type alias, graph-Type decision, or M274 replacement is performed."
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-115",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-115-CORE_META_MODEL-CORE-REQUIREMENT--requirement-use-implementation-record-as-a-projection.md",
+      "before_version": 9,
+      "before_sha256": "0edf8a96559d284286ce7b097941729f8514d4ee1da9d7cad285b81232b35c25",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-115-CORE_META_MODEL-CORE-REQUIREMENT--use-implementation-overview-as-a-projection.md",
+      "version": 10,
+      "sha256": "3da23edacebbea9cb9563b3a866f918bac7c525af419f08cc03e6dec309e9b14",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-115-CORE_META_MODEL-CORE-REQUIREMENT--requirement-use-implementation-record-as-a-projection@9.md",
+      "archive_sha256": "0edf8a96559d284286ce7b097941729f8514d4ee1da9d7cad285b81232b35c25",
+      "change_class": "semantic_revision",
+      "action": "MOVE+UPDATE",
+      "semantic_delta": "Rename the current-state Projection and correct its direct GOVERNS target; remove its contradictory Implementation-role classification under META113 while preserving realization, lineage, retention, native-source and Verification boundaries.",
+      "primary_claim_preserved": true,
+      "new_identity": false,
+      "lineage_disposition": "Preserve assigned Atom identity and exact predecessor; all current source references remain resolvable by identity. No absorption, independent-Claim split, new Type alias, graph-Type decision, or M274 replacement is performed."
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 2,
+      "before_sha256": "becb1c6f819e0252bf88e565841dd44de36a14826496436fa9cf9b069264fa8e",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "version": 3,
+      "sha256": "167ca48e26245c8174219991835c5a0771f8d8d7f4889953e4c0c5d98b78b526",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@2.md",
+      "archive_sha256": "becb1c6f819e0252bf88e565841dd44de36a14826496436fa9cf9b069264fa8e",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-partial-stage.md",
+      "version": 1,
+      "sha256": "a426057dcba41cd9140e8bb67c07ee28b2e749f15649dbdd9c0cc9609e9e6326",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_transfers": [],
+  "read_only_authority": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-105",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-105-CORE_META_MODEL-REQUIREMENT--preserve-implementation-traceability-in-the-shared-project-journal.md",
+      "version": 8,
+      "sha256": "c1db9cafaa3a86bb47fa2f88b326fa48ecc96e8c7c69fc48a7188ba97363341e",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-113",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-113-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types.md",
+      "version": 11,
+      "sha256": "5102e534628f2ca07827de9afef9bf2cd08255d6263f5fcbf90d3c85eca3f972",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-397",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-397-PROJECT_CONFIGURATION-DELIVERY--register-caprmedio-type-prefixes.md",
+      "version": 4,
+      "sha256": "023f07e61873c5eed79b6f2c3bd6c74afa292791474cb4b54904fd1da8608d22",
+      "scope_unit": "PROJECT_CONFIGURATION"
+    },
+    {
+      "identity": "CA-D-311",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-311-CORE_META_MODEL-CORE-DELIVERY--represent-authority-without-semantic-change.md",
+      "version": 4,
+      "sha256": "1ae09d4170f64f9b6270940a6237f6d3ee7fdb049e20ee877050a781c1ebc92b",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1432",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "version": 1,
+      "sha256": "a482003778ea6770097e431d452b434650c5649e227e871d68b5e54fcae435c2",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-281",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-281-CORE_META_MODEL-DELIVERY--serialize-markdown-atom-h1-from-summary.md",
+      "version": 5,
+      "sha256": "884609bcc38ee82962121e8ad05e95e411a9bbe6f3bd459250c5b0ae4931e07e",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-282",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-282-CORE_META_MODEL-DELIVERY--serialize-filename-summary-slug-from-summary.md",
+      "version": 5,
+      "sha256": "75c24c4d92389b40d7b14e6b3eb7151a6068443181ba9122148e8ff23142b441",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-283",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-283-CORE_META_MODEL-DELIVERY--serialize-project-owned-markdown-atom-filenames.md",
+      "version": 6,
+      "sha256": "847f46a71bdba6939cecdf708bd197d1c4ca8ddd8880edaa7e0b558f1aaa5f3a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-D-289",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-289-CORE_META_MODEL-DELIVERY--serialize-archive-revision-version-suffixes.md",
+      "version": 6,
+      "sha256": "32c2afc5f6191a474c3dc969ad1680d0ad80a51897c4fb08da1de1a9951ec35a",
+      "scope_unit": "CORE_META_MODEL"
+    }
+  ],
+  "carrier_compatibility": {
+    "semantic_type_name": "Implementation Overview",
+    "existing_serialized_token": "implementation_record",
+    "existing_prefix": "irec",
+    "token_authority": "CA-D-397",
+    "new_alias": false,
+    "settings_or_code_changes": false
+  },
+  "remaining": {
+    "task_done": false,
+    "graph_type_admission": "Entities Graph and Terms Graph under Projection/Type pending Operator decision",
+    "other_reserved_source_count": 28,
+    "other_tasks_executed": []
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1086-implementation-overview-partial-stage",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations authorized"
+  },
+  "validation": {
+    "source_changes": 2,
+    "new_source_ids": 0,
+    "unchanged_admitted_sources": 1560,
+    "drafts_unchanged": 53,
+    "task_status": "Active",
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "implementation_conformance_claimed": false
+  },
+  "reservation_dispositions": [
+    {
+      "identity": "CAPRMEDIO-GOV-REQU-322",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-115",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+---
+cce_version: cce_1
+cce_form: method
+subjects:
+  governs: "framework-engine-mcp"
+  depends_on:
+    - "Projection"
+    - "programmatic software"
+version: 10
+updated_at: "2026-09-17 19:02:58 +0000"
+relations:
+  method_for:
+    - CA-R-1096
+  derived_from:
+    - CA-A-058
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Supply the active Tool frontier to MCP
+
+## Applicable when
+
+apply **when** MCP builds **or** refreshes the callable frontier supplied by TOOLS.
+
+## Procedure
+
+1. enumerate the complete current set of active immediate Tool units from the
+   canonical TOOLS frontier.
+2. read **and** validate each active Tool's machine-invocation contract **without**
+   inferring missing meaning from its code **or** runtime state.
+3. project exactly one stable callable endpoint for each valid active Tool.
+4. omit inactive **and** explicitly disabled Tools; report **every** invalid active
+   Tool as a diagnostic rather than silently omitting it.
+5. delegate each admitted call **to** the Tool **without** duplicating **or** changing its
+   meaning, inputs, outcomes, **or** mechanics.
+6. replace the exposed frontier **only** **after** the complete candidate projection
+   validates; preserve the preceding valid frontier **when** refresh fails.
+
+## Outcome
+
+MCP exposes one complete, deterministic projection of valid active Tools **and**
+remains a replaceable interface rather than a second Tool authority.
+preserving an earlier frontier **after** a failed refresh does **not** make it current;
+apply the publication boundary **in** CA-R-1110.
+
+## Failure or stop
+
+stop refresh **and** preserve the preceding valid frontier **when** active Tool
+enumeration is incomplete, endpoint identities collide, **or** a machine contract
+is missing **or** invalid. reject a call that cannot delegate unchanged.
+
+## Sources
+
+- [Model Context Protocol: lifecycle](https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle)
+- [Model Context Protocol: tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools)
+- [CA-A-058 — Validate PROGRAMMATIC Method and Evaluation closure](../02_analysis/CA-A-058-PROGRAMMATIC-ANALYSIS_RPRT--validate-programmatic-method-and-evaluation-closure.md)

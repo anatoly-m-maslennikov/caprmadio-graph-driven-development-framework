@@ -1,0 +1,19 @@
+---
+atom_id: CA-R-1026
+cce_version: cce_1
+cce_form: definition
+subjects:
+  governs: "Dependency Relation Pair"
+  depends_on:
+    - "atom-boundary"
+    - "relation-model"
+    - "Artifact"
+version: 10
+updated_at: "2026-09-16 23:48:40 +0000"
+relations: {}
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Register depends_on and required_by relation pair
+
+`depends_on` **means** a direct dependency-ordering relation from a dependent Artifact **to** its prerequisite Artifact, with `required_by` as its inverse-derived view.

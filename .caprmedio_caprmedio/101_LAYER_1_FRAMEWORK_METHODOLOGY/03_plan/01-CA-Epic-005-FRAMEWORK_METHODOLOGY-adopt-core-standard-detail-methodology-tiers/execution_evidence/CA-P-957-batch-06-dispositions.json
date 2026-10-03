@@ -1,0 +1,350 @@
+{
+  "schema": "ca-p-957-dispositions/v1",
+  "non_authoritative": true,
+  "batch": "06",
+  "scope": "Six exact Task Claim Scope binding/admission revisions plus lossless absorption of one duplicate Demand boundary. Two new origin tier dispositions; five additive follow-up dispositions preserve frozen history.",
+  "admitted_authority": [
+    "CA-R-1431@1",
+    "CA-M-272@1",
+    "CA-M-273@1",
+    "CA-R-1194@6",
+    "CA-R-1247@4",
+    "CA-R-919@11",
+    "CA-R-1014@11",
+    "CA-R-829@11",
+    "CA-R-879@12",
+    "CA-R-1018@8"
+  ],
+  "records": [
+    {
+      "atom_id": "CA-R-1000",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Identifies Task Scope with the Task's existing Claim Scope.",
+      "negation_witness": "Treating Task Scope as a second independent target would break this identity and introduce a separate scope coordinate.",
+      "concrete_choice_test": "False: the complete Claim governs the named identity, ownership, separation or conservation boundary; it selects no concrete field/path/token/format, realization procedure or test specimen.",
+      "confidence_percent": 99,
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "remove only child_of CA-R-919",
+      "batch": "06",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1000",
+      "filename_identity": "CA-R-1000",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-CORE_META_MODEL-CORE-REQUIREMENT--define-task-scope.md",
+      "source_version": 8,
+      "source_sha256": "fcb91228aa5c400f227921dc85f85658b198b2aa7823581ec6509a6772836231",
+      "governing_clause_normalized": "a Task Scope means the Claim Scope of one Task Atom.",
+      "complete_body": "\n# Define Task Scope\n\na Task Scope **means** the Claim Scope of one Task Atom.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Scope"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Scope"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope.",
+        "corrected_governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Claim/Scope"
+        ]
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-919"
+        ]
+      },
+      "relation_impacts": "Replace the GOVERNS path with Task/Claim/Scope: R1194 identifies exactly one Entity by the ordered path; R1247 makes its complete bearer-qualified path identity-bearing. R919's Claim Scope is distinct from R1014's Atom Scope. Remove child_of R919: R879 defines normative parentage, and R829 makes these same-tier Core Current-scope Requirements authority peers. No substitute parent.",
+      "disposition": "revise exact binding metadata; preserve complete body",
+      "historical_disposition": "CA-P-957-batch-02-dispositions.json#CA-R-1000",
+      "admission_repair": "Replace the GOVERNS path with Task/Claim/Scope: R1194 identifies exactly one Entity by the ordered path; R1247 makes its complete bearer-qualified path identity-bearing. R919's Claim Scope is distinct from R1014's Atom Scope. Remove child_of R919: R879 defines normative parentage, and R829 makes these same-tier Core Current-scope Requirements authority peers. No substitute parent."
+    },
+    {
+      "atom_id": "CA-R-1212",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Definition of Done as one falsifying condition over one Task Claim and Scope.",
+      "negation_witness": "An independent additional outcome or condition detached from that Task's Claim/Scope would not be its Definition of Done.",
+      "concrete_choice_test": "False: the complete Claim governs the named identity, ownership, separation or conservation boundary; it selects no concrete field/path/token/format, realization procedure or test specimen.",
+      "confidence_percent": 99,
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "none",
+      "batch": "06",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1212",
+      "filename_identity": "CA-R-1212",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-CORE_META_MODEL-CORE-REQUIREMENT--define-definition-of-done-for-a-task.md",
+      "source_version": 7,
+      "source_sha256": "b2c3d1c76696a31efe69b757062e51d5c34e8dcb8d59ea71b49fbb67cfc16227",
+      "governing_clause_normalized": "the Definition of Done means one falsifying Condition Expression that may be atomic or explicitly composite and evaluates one Task Claim within one Task Scope.",
+      "complete_body": "\n# Define Definition of Done for a Task\n\nthe Definition of Done **means** one falsifying Condition Expression that **may** be atomic **or** explicitly composite **and** evaluates one Task Claim within one Task Scope.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Definition of Done"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Definition of Done"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "direct_relations": {},
+      "relation_impacts": "All existing direct relations retained. The exact prerequisite expression changes only the demonstrated Task Claim Scope binding; no Requirement tier-parent or Delivery content link is removed.",
+      "disposition": "revise exact binding metadata; preserve complete body",
+      "historical_disposition": "CA-P-957-batch-02-dispositions.json#CA-R-1212",
+      "admission_repair": "Replace only the exact DEPENDS_ON Task/Scope expression with Task/Claim/Scope. The complete Claim uses the Task's Claim Scope; this follows the explicit R1000 binding repair without changing Claim meaning or any governed Entity."
+    },
+    {
+      "atom_id": "CA-R-1214",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Defines Task Details as optional supporting information confined to the Task's Claim and Scope.",
+      "negation_witness": "Details that establish another Definition of Done would become independent Task authority and violate this supporting-content identity.",
+      "concrete_choice_test": "False: the complete Claim governs the named identity, ownership, separation or conservation boundary; it selects no concrete field/path/token/format, realization procedure or test specimen.",
+      "confidence_percent": 99,
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "none",
+      "batch": "06",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-1214",
+      "filename_identity": "CA-R-1214",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-CORE_META_MODEL-CORE-REQUIREMENT--define-task-details.md",
+      "source_version": 7,
+      "source_sha256": "1e2130cbad696751d2beb7184f26d59d8cfcb4a447ea70a82a0a7d80015682f0",
+      "governing_clause_normalized": "the Task Details means optional non-Claim supporting information that remains within one Task Scope and Claim without establishing another Definition of Done.",
+      "complete_body": "\n# Define Task Details\n\nthe Task Details **means** optional non-Claim supporting information that remains within one Task Scope **and** Claim **without** establishing another Definition of Done.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Details"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Details"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "direct_relations": {},
+      "relation_impacts": "All existing direct relations retained. The exact prerequisite expression changes only the demonstrated Task Claim Scope binding; no Requirement tier-parent or Delivery content link is removed.",
+      "disposition": "revise exact binding metadata; preserve complete body",
+      "historical_disposition": "CA-P-957-batch-02-dispositions.json#CA-R-1214",
+      "admission_repair": "Replace only the exact DEPENDS_ON Task/Scope expression with Task/Claim/Scope. The complete Claim uses the Task's Claim Scope; this follows the explicit R1000 binding repair without changing Claim meaning or any governed Entity."
+    },
+    {
+      "atom_id": "CA-M-124",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "confidence_percent": 99,
+      "reason": "Selects an eight-step Task-authoring procedure that resolves roles, states Claim and Scope, derives Summary and DoD, resolves the threshold, and bounds Details. These safeguards form one coherent authoring procedure; the procedure is independently replaceable without changing the governed Task contract.",
+      "replacement_witness": "Replace the enumerated authoring procedure with a constraint-driven form that captures Claim and Claim Scope together, derives effective roles and threshold, and validates bounded Details and DoD before admission. Preserve all Task role, scope, author/assignee, confidence-source and completion contracts; the selected procedure changes.",
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "none",
+      "batch": "06",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-CORE_META_MODEL-CORE-METHOD--author-task-atoms.md",
+      "source_version": 14,
+      "source_sha256": "0e165f69ff6dac0d13b5778a6f37521c9e04c53205f481d74e91dfbba0814c9b",
+      "complete_body": "\n# Author Task Atoms\n\n**to** author one Task Atom, the Author **must** perform **all** of:\n\n1. resolve **`=1`** effective Author from the declared Author **or** its default.\n2. resolve **`=1`** effective Assignee from the declared Assignee **or** its default.\n3. state **`=1`** Claim that assigns its required action **and** intended result to the Assignee.\n4. derive the Task Summary from the complete Claim **and** Claim Scope.\n5. state **`=1`** atomic **or** composite Task Scope.\n6. state **`=1`** Definition of Done according to CA-M-123.\n7. resolve **`=1`** effective Autonomous Confidence Threshold according **to** CA-M-271; declare a Task override **only** **when** the Author explicitly selects that Task value, **and** **otherwise** inherit **without** copying it into the Task.\n8. include Task Details **only** **when** the information remains within the Task Scope **and** Claim **and** establishes no additional Definition of Done.\n",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-M-124",
+      "filename_identity": "CA-M-124",
+      "governs_subjects": [
+        "Task Atom Authoring"
+      ],
+      "content_role": "M",
+      "owner": "CORE_META_MODEL",
+      "old_tier": "Core",
+      "direct_relations": {},
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Task Atom Authoring"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+3",
+      "governing_clause_normalized": "to author one Task Atom, the Author must perform all of:",
+      "admission_repair": "Replace only the exact DEPENDS_ON Task/Scope expression with Task/Claim/Scope. The complete Claim uses the Task's Claim Scope; this follows the explicit R1000 binding repair without changing Claim meaning or any governed Entity.",
+      "disposition": "revise exact binding metadata and encode omitted Standard Local Tier; preserve complete body",
+      "relation_impacts": "All existing direct relations retained. The exact prerequisite expression changes only the demonstrated Task Claim Scope binding; no Requirement tier-parent or Delivery content link is removed."
+    },
+    {
+      "atom_id": "CA-E-245",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "confidence_percent": 99,
+      "reason": "Selects a positive/negative Task-fixture procedure, the specific invalid mutations to exercise, pass/fail timing and Concern failure route. The composite fixtures test one Task admission/completion boundary and do not introduce new independent policy.",
+      "replacement_witness": "Replace hand-constructed valid/invalid Tasks and the listed fixture mutations with property-based generation plus a model-based admission oracle exercising the same Task components, inheritance boundaries, dependency semantics and failure conditions. The chosen concrete test changes, not those authorities.",
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "Add evaluation_for CA-M-124, CA-M-271, CA-R-1007, CA-R-990, CA-R-992; each authority is explicitly checked.",
+      "batch": "06",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-CORE_META_MODEL-QA_CASE--validate-task-atoms.md",
+      "source_version": 14,
+      "source_sha256": "47393cf21680ddbf2a7e98ea40539a2705187b1afe5643a477b7900b0f26a5b3",
+      "complete_body": "\n# Validate Task Atoms\n\n## Claim checked\n\n**every** Task Atom has one effective Author, one effective Assignee, one Claim assigned to that Assignee, one atomic **or** composite Task Scope, one Definition of Done, one effective Autonomous Confidence Threshold, an optional explicit threshold override, optional bounded Task Details, **and** explicit Task dependencies.\n\n## Test case\n\ncreate valid Tasks with default **and** explicit Authors **and** Assignees, atomic **and** composite Scope Expressions, atomic **and** composite falsification conditions, optional bounded Details, an explicit dependency on a Done Task, standalone Tasks, contained Tasks, **and** permitted thresholds (80, 90, 95, 98, 99) supplied explicitly **or** inherited according **to** CA-M-271; include omitted Task values, nested Epics, **and** scoped Operator input. **then** declare multiple Authors **or** Assignees, assign the Claim to another Actor, remove **or** duplicate a required effective component, leave a Task **without** **any** applicable threshold source, use a threshold outside its permitted domain **or** a non-integer, add ambiguous Scope **or** falsification grouping, let Details expand Scope **or** Claim, imply dependency **only** through Work Sequence, **or** require Epic membership.\n\n## Acceptance criteria\n\n**every** valid fixture resolves to **`=1`** effective Author, **`=1`** effective Assignee, one unambiguous Task Scope, **and** one falsifiable completion interpretation **and** passes. an omitted Task threshold passes **when** **`=1`** effective value resolves according **to** CA-M-271 **without** copying inherited values into the Task. confidence below the effective Autonomous Confidence Threshold blocks autonomous continuation **and** requests Operator disposition. confidence equal **to** **or** above the effective threshold permits autonomous continuation **only** within existing authority. **every** invalid fixture fails **before** Task execution **or** completion.\n\n## Failure disposition\n\nrecord a Concern naming the affected Task Author, Task Assignee, Task component, Autonomous Confidence Threshold, Scope function, **or** dependency.\n",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-E-245",
+      "filename_identity": "CA-E-245",
+      "governs_subjects": [
+        "Task Atom Validation"
+      ],
+      "content_role": "E",
+      "owner": "CORE_META_MODEL",
+      "old_tier": "Standard",
+      "direct_relations": {},
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Task Atom Validation"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "governing_clause_normalized": "every Task Atom has one effective Author, one effective Assignee, one Claim assigned to that Assignee, one atomic or composite Task Scope, one Definition of Done, one effective Autonomous Confidence Threshold, an optional explicit threshold override, optional bounded Task Details, and explicit Task dependencies.",
+      "admission_repair": "Replace only the exact DEPENDS_ON Task/Scope expression with Task/Claim/Scope. The complete Claim uses the Task's Claim Scope; this follows the explicit R1000 binding repair without changing Claim meaning or any governed Entity.",
+      "disposition": "revise exact binding metadata and admit actual evaluation_for targets; preserve complete body",
+      "relation_impacts": "Actual checked targets: M124 supplies the effective Author/Assignee, Claim, Scope, DoD, Details and threshold authoring obligations; M271 is explicitly exercised for precedence/inheritance; R1007 supplies the Done-prerequisite Task Dependency semantics. These are typed R/M targets, not artificial cardinality fillers. No Requirement normative parent is introduced. R990@10 is tested by standalone Tasks; R992@9 is tested by rejecting dependency implied only by Work Sequence."
+    },
+    {
+      "atom_id": "CA-D-271",
+      "new_tier": "Standard",
+      "decisive_test": "S",
+      "governing_clause_normalized": "in order, one H1 Summary, one CCE Claim, one `Scope` section",
+      "reason": "Selects the ordered Markdown Task section layout, with semantic Task contents retained as guards.",
+      "replacement_witness": "Place the same Definition of Done before the same Scope section; the Task meaning is recoverable but the mandated section order fails.",
+      "earlier_test_result": "Concrete-choice test is decisive; F and G are not used to override this selected realization.",
+      "confidence_percent": 99,
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "none",
+      "batch": "06",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-D-271",
+      "filename_identity": "CA-D-271",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-271-CORE_META_MODEL-DELIVERY--serialize-task-sections.md",
+      "source_version": 7,
+      "source_sha256": "2e815c02566b2089b355b89f8aaa351aebc39395e764e55b50becdc4378f647b",
+      "complete_body": "\n# Serialize Task Sections\n\n**every** Markdown Task Atom Carrier **must** contain, **in** order, one H1 Summary, one CCE Claim, one `Scope` section, one `Definition of Done` section, **and** **`<=1`** `Details` section.\n",
+      "governs_subjects": [
+        "Atom/Content Role: Plan/Type: Task/Markdown Atom Carrier"
+      ],
+      "content_role": "D",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "Atom/Content Role: Plan/Type: Task/Markdown Atom Carrier"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "old_tier": "Standard",
+      "old_structural_rank": "3d+3",
+      "new_structural_rank": "3d+3",
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "direct_relations": {},
+      "relation_impacts": "All existing direct relations retained. The exact prerequisite expression changes only the demonstrated Task Claim Scope binding; no Requirement tier-parent or Delivery content link is removed.",
+      "disposition": "revise exact binding metadata; preserve complete body",
+      "historical_disposition": "CA-P-957-batch-01-dispositions.json#CA-D-271",
+      "admission_repair": "Replace only the exact DEPENDS_ON Task/Scope expression with Task/Claim/Scope. The complete Claim uses the Task's Claim Scope; this follows the explicit R1000 binding repair without changing Claim meaning or any governed Entity.",
+      "chained_revision": "Batch01 admitted and applied D271@7 is the exact before state here; proposed @8 does not alter batch01 source bytes or evidence history."
+    },
+    {
+      "atom_id": "CA-R-955",
+      "new_tier": "Core",
+      "decisive_test": "F",
+      "reason": "Preserves the Producer's authority beyond the demanded result.",
+      "negation_witness": "Letting the Demand regulate unrelated Producer work turns one dependency into general Producer governance.",
+      "concrete_choice_test": "False: this complete Claim identifies or conserves the named authority, identity, owner, role, or separation boundary. Semantic cardinalities, named relations and defined quantities do not select a Carrier representation, algorithm, test specimen, or replaceable realization.",
+      "confidence_percent": 99,
+      "body_change": "none; complete Claim body preserved",
+      "relation_change": "none",
+      "batch": "06",
+      "identity_basis": "explicit atom_id; legacy opacity preserved",
+      "explicit_atom_id": "CA-R-955",
+      "filename_identity": "CA-R-955",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-955-CORE_META_MODEL-CORE-REQUIREMENT--preserve-producer-authority-outside-the-demanded-result.md",
+      "source_version": 7,
+      "source_sha256": "cafb4aa951e97e6d6db980e02cc7792a80bfa731c0f9ce02a9b1ce0d4727a1e3",
+      "governing_clause_normalized": "A Demand Atom must not constrain its Producer Claim Scope outside the exact demanded Implementation result.",
+      "complete_body": "\n# Preserve Producer authority outside the demanded result\n\nA Demand Atom **must not** constrain its Producer Claim Scope outside the exact demanded Implementation result.\n",
+      "governs_subjects": [
+        "relation-model"
+      ],
+      "content_role": "R",
+      "owner": "CORE_META_MODEL",
+      "atom_scope": {
+        "context": "CORE_META_MODEL authoritative owner",
+        "governed_entities": [
+          "relation-model"
+        ],
+        "constraints": "All explicit complete-Claim boundaries preserved. Task Scope denotes the bearer-qualified Task Claim Scope, not a separate Task Scope coordinate or inherited Atom Scope."
+      },
+      "claim_scope": {
+        "binding": "current(CORE_META_MODEL)",
+        "basis": "Omitted explicit Scope; CA-D-367 and CA-M-273 contextual default.",
+        "local_rmed_basis_membership": "Included origin; local Active Current-scope RMED independently of Local Tier. R955 becomes an exact historical origin after approved absorption."
+      },
+      "old_tier": "Core",
+      "old_structural_rank": "3d+1",
+      "new_structural_rank": "3d+1",
+      "structural_depth": "Actual depth d unresolved numerically; no folder-derived coordinate.",
+      "direct_relations": {
+        "child_of": [
+          "CA-R-934"
+        ]
+      },
+      "relation_impacts": "R955's existing child_of R934 is preserved in its exact archived bytes, not invented as a replacement relation. No active inbound reference was found; historical/generated references remain historical. R934 and its preexisting direct relations are untouched.",
+      "disposition": "retire duplicate to exact @7 Archive, retaining R934@7 unchanged",
+      "historical_disposition": "CA-P-957-batch-03-dispositions.json#CA-R-955",
+      "admission_repair": "The frozen batch03 unchanged admission was rejected: under R932, Producer Claim Scope is the Producer boundary constrained by Demand. R934 and R955 share complete owner, Current Claim Scope, GOVERNS relation-model and authority/atom-boundary prerequisites. R955 states no independently governable condition beyond R934; absorb losslessly into exact unchanged R934@7."
+    }
+  ]
+}

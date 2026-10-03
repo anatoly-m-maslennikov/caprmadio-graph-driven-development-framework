@@ -1,0 +1,25 @@
+---
+subjects:
+  declared:
+    continuant:
+      - artifact-validation
+    occurrent:
+      - evaluation
+version: 5
+updated_at: 2026-08-23 17:53:53 +0400
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  evaluation_for:
+    - CA-R-1137
+    - CA-R-833-REQUIREMENT--organize-normative-authority-as-an-acyclic-hierarchy
+    - CA-R-838-REQUIREMENT-BSEED_GOVERNANCE--validate-normative-authority-hierarchy
+    - CAPRMEDIO-REQU-030--require-complete-authority-topology-in-strict-mode
+---
+# Reject authority cycle
+
+## Test case
+
+**Fixture:** Add one `child_of` edge that closes a cycle.
+
+**Expected result:** Fail with the stable authority-cycle diagnostic and a non-zero exit.

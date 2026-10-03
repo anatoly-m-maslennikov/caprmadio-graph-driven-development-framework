@@ -1,0 +1,106 @@
+{
+  "schema": "ca-p-957-r1053-successor-proposal/v1",
+  "non_authoritative": true,
+  "state": "Exact source proposal for root semantic review; no source mutation.",
+  "source": {
+    "atom_id": "CA-R-1053",
+    "version": 16,
+    "relative_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1053-CORE_META_MODEL-REQUIREMENT--classify-every-atomic-artifact-change.md",
+    "identity_basis": "filename identity; no new identity allocated",
+    "explicit_atom_id": null,
+    "filename_identity": "CA-R-1053",
+    "identity_representation_note": null,
+    "sha256": "d0b7b9c77d2a0a6888124231a8bc5acc4d3640cb5731da818602a940cc4da240",
+    "byte_count": 2906,
+    "updated_at": "2026-09-07 09:59:57 +0000",
+    "content_role": "R",
+    "source_scope_unit": "CORE_META_MODEL",
+    "frontier_kind": "active_RMED_source_atom",
+    "current_local_tier": "Standard",
+    "current_tier_filename_token": null,
+    "current_tier_basis": "CA-D-285: omitted token resolves Standard",
+    "explicit_tier_metadata": null,
+    "current_status": "Active",
+    "status_basis": "active Carrier location; no non-active status directory",
+    "governs_subjects": [
+      "lifecycle"
+    ],
+    "review_categories": [
+      "application_review"
+    ],
+    "change_disposition": "fx03_application_review_after_fx04_gate",
+    "disposition_reason": "Active RMED source Atom requires later option-C classification after admission of FX-04; no present rewrite or new tier assigned.",
+    "bytes_utf8": "---\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    occurrent:\n      - lifecycle\nversion: 16\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Classify every Atomic Artifact change\n\n**before** changing an admitted Atomic Artifact, CAPRMEDIO assigns **`=1`** change class:\n\n| Change class | Boundary | Identity result | Required review |\n|---|---|---|---|\n| `carrier_only` | Representation, summary, filename, path, **or** encoding changes **without** changing governed meaning | Keep the artifact ID | Verify lossless recoding |\n| `refinement` | Wording **or** criteria become clearer **or** stricter while primary claim, applicability, **and** acceptance meaning remain equivalent | Keep the artifact ID **and** commit a new revision | Demonstrate equivalence **and** assess lineage |\n| `semantic_revision` | Meaning **or** applicability changes while the same primary claim remains recognizable | Keep the artifact ID **and** commit a new revision | Declare the delta **and** complete lineage-impact review |\n| `replacement` | The primary claim changes identity, **or** an independently replaceable claim is added **or** removed | Create a new artifact ID; record explicit predecessor **and** successor IDs **in** the predecessor's archival Journal event | Review the replacement boundary **and** affected lineage |\n\nScope narrowing **or** expansion is a `semantic_revision`, **not** a carrier-only change. Splitting **or** combining independently replaceable claims is a `replacement`.\n\nThe semantic change class is independent of the Git change set. **every** persisted carrier change follows the canonical direct typed-relation commit-message rule. A same-ID content change creates a new Revision, while a carrier-only move **or** rename **may** preserve the current version. A replacement first commits the successor as active, **then** archives the predecessor **in** a `MOVE` whose authoritative Work Journal event records explicit predecessor **and** successor Atom IDs. the predecessor Atom frontmatter **and** successor Atom frontmatter **must not** author replacement history. Formal replacement relations **and** inverse navigation are deferred. the archival move preserves the predecessor's content, identity, frontmatter, **and** version; its filename receives **only** the canonical `@<version>` Archive suffix. **every** successor **and** predecessor carrier change remains a separate one-file commit.\n\nTools **may** propose a class but **must** fail closed **when** the distinction between refinement, semantic revision, **and** replacement is uncertain.\n\n## Rationale\n\nThe four classes preserve stable identities for genuine claim evolution while preventing formatting changes, refinements, semantic changes, **and** replacements from being treated as interchangeable.\n",
+    "excluded_as_956_result": false,
+    "retired_by_957": false,
+    "direct_relations": {
+      "child_of": [
+        "CA-R-1054"
+      ]
+    }
+  },
+  "historical_allocation": "CA-P-957-R1053-allocation-and-provenance-blocker.json",
+  "execution_override": "The historical Journal blocker is superseded only for this execution by Operator instruction; no Journal authority/Tool change or Git/Journal fulfillment is claimed.",
+  "successors": [
+    {
+      "atom_id": "CA-R-1432",
+      "content_role": "R",
+      "new_tier": "General",
+      "new_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "new_bytes_utf8": "---\natom_id: CA-R-1432\ncce_version: cce_1\ncce_form: classification\nsubjects:\n  governs:\n    occurrent:\n      - Atom Change Classification\n  depends_on:\n    continuant:\n      - Atom\n      - Atom/Claim\n      - Atom/Claim/Scope\n      - Artifact/Revision\n      - Carrier-Only Recoding\n      - Lineage Impact Analysis\n      - Tool\nversion: 1\nupdated_at: \"2026-09-10 05:46:00 +0400\"\nrelations: {}\n---\n# Classify admitted Atom changes by semantic effect\n\n**before** changing an admitted Atom, CAPRMEDIO **must** assign **`=1`** change class using these boundaries, identity results, **and** required reviews:\n\n| Change class | Boundary | Identity result | Required review |\n|---|---|---|---|\n| `carrier_only` | Representation, Summary, filename, path, **or** encoding changes **without** changing governed meaning | Keep the Atom ID | Verify lossless recoding |\n| `refinement` | Wording **or** criteria become clearer **or** stricter while primary Claim, applicability, **and** acceptance meaning remain equivalent | Keep the Atom ID **and** create a new Revision | Demonstrate equivalence **and** assess lineage |\n| `semantic_revision` | Meaning **or** applicability changes while the same primary Claim remains recognizable | Keep the Atom ID **and** create a new Revision | Declare the delta **and** complete lineage-impact review |\n| `replacement` | The primary Claim changes identity, **or** an independently replaceable Claim is added **or** removed | Create a new Atom ID; preserve the predecessor **and** successor identity binding under CA-R-807 | Review the replacement boundary **and** affected lineage |\n\nScope narrowing **or** expansion is a `semantic_revision`, **not** a carrier-only change. splitting **or** combining independently replaceable Claims is a `replacement`. the semantic change class is independent of the Git change set; persistence remains governed by CA-D-334 **and** CA-D-335.\n\nTools **may** propose a class but **must** fail closed **when** the distinction between refinement, semantic revision, **and** replacement is uncertain.\n",
+      "decisive_test": "G",
+      "reason": "Independent representation-free four-class partition and review contract; spelling denotes semantic classes rather than selecting a serialized field.",
+      "preserving_realizations": [
+        "A manually completed semantic decision table.",
+        "A declarative rule engine requiring the same proof and uncertainty stop."
+      ],
+      "countermodel": "Use one combined meaning-equivalent-change category instead of distinguishing refinement from carrier-only recoding, retaining Core identity/revision conservation and no unreviewed replacement. The admitted four-class shared contract changes."
+    },
+    {
+      "atom_id": "CA-R-1433",
+      "content_role": "R",
+      "new_tier": "General",
+      "new_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1433-CORE_META_MODEL-GENERAL-REQUIREMENT--permit-version-preservation-for-carrier-only-relocation.md",
+      "new_bytes_utf8": "---\natom_id: CA-R-1433\ncce_version: cce_1\ncce_form: permission\nsubjects:\n  governs:\n    continuant:\n      - Atom/Revision/Version\n  depends_on:\n    continuant:\n      - Atom\n      - Artifact/Revision\n      - Carrier-Only Recoding\nversion: 1\nupdated_at: \"2026-09-10 05:46:00 +0400\"\nrelations: {}\n---\n# Permit Version preservation for carrier-only relocation\n\na carrier-only move **or** rename of an Atom Carrier **may** preserve the current Version **only** **when** it does **not** change the Carrier's content **and** preserves Atom identity, Claim, Claim Scope, Atom Scope, **and** authored direct semantic relations under CA-D-304; a same-ID content change **must** create a new Revision under CA-R-1371.\n",
+      "decisive_test": "G",
+      "reason": "Narrow semantic permission for Version retention on content-preserving relocation, not a filename syntax or relocation algorithm.",
+      "preserving_realizations": [
+        "A filesystem rename transaction with exact before/after content proof.",
+        "A Carrier-address relocation transaction retaining the same immutable content revision."
+      ],
+      "countermodel": "Always create a new Version for relocation while retaining stable Atom identity and exact prior history. Core conservation remains, but the permission to preserve Version is removed."
+    },
+    {
+      "atom_id": "CA-M-274",
+      "content_role": "M",
+      "new_tier": "Standard",
+      "new_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "new_bytes_utf8": "---\natom_id: CA-M-274\ncce_version: cce_1\ncce_form: method\nsubjects:\n  governs:\n    occurrent:\n      - Atom Carrier Replacement\n  depends_on:\n    continuant:\n      - Atom\n      - Artifact/Revision\n      - Atom/Carrier\n      - Git Commit\n      - Work Journal\n      - Artifact/Revision/Archive Carrier Basename\nversion: 1\nupdated_at: \"2026-09-10 05:46:00 +0400\"\nrelations:\n  method_for:\n    - CA-R-1432\n    - CA-R-807\n---\n# Persist Atom replacement through ordered Carrier transitions\n\n**to** persist an Atom replacement, CAPRMEDIO **must** perform **all** of:\n\n1. commit the successor as Active **before** archiving the predecessor.\n2. archive the predecessor as one whole Carrier under CA-D-303 **in** a `MOVE` whose authoritative Work Journal Event records explicit predecessor **and** successor Atom IDs under CA-R-807.\n3. preserve the predecessor's content, identity, frontmatter, **and** Version exactly; change its basename **only** by adding the canonical `@<version>` Archive suffix under CA-D-289.\n4. keep **every** successor **and** predecessor Carrier change as a separate one-file Git Commit, following the canonical direct typed-relation commit-message rule under CA-D-334 **and** CA-D-335.\n5. keep replacement history out of predecessor **and** successor Atom frontmatter; formal replacement relations **and** inverse navigation remain deferred under CA-R-807 **and** CA-R-1028.\n",
+      "decisive_test": "S",
+      "reason": "Selected ordered Git-before-Archive/MOVE, exact suffix and one-file commit workflow.",
+      "replacement_witness": "Use a differently admitted immutable transactional persistence backend and archive address encoding while preserving all semantic identity, whole-Carrier, already-active successor and source-history boundaries."
+    }
+  ],
+  "reused_authority": [
+    "CA-D-304",
+    "CA-R-1371",
+    "CAPRMEDIO-META-REQU-122",
+    "CAPRMEDIO-GOV-REQU-302",
+    "CAPRMEDIO-GOV-REQU-310",
+    "CA-D-334",
+    "CA-D-335",
+    "CA-R-807",
+    "CA-R-1028",
+    "CA-D-303",
+    "CA-D-289",
+    "CA-D-311"
+  ],
+  "preservation_notes": [
+    "Atomic Artifact resolves to Atom from R655/R918 and the original primary-Claim/Atom-ID context.",
+    "Original commit-new-revision consequences remain under unchanged D335; the semantic classifier does not choose Git operations.",
+    "R1433 preserves MAY and explicitly excludes content/Summary/H1 edits; unchanged R1371 retains immutable-state obligation.",
+    "M274 retains every unmatched commit-before-archive, whole-Carrier, only-suffix and one-file commit constraint; existing event-history/deferred-relation authority is reused.",
+    "No formal replacement edge is added. Original R1053 remains active pending exact checkpoint review."
+  ],
+  "id_availability": "Read-only whole-repository filename and explicit atom_id scans found no existing CA-R-1432/CA-R-1433/CA-M-274 before this proposal."
+}

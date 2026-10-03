@@ -1,0 +1,72 @@
+[
+  {
+    "atom_id": "CA-R-1622",
+    "version": 4,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1622-TOOLS-REQUIREMENT--implement-atom-carrier-validation-in-validate-atoms.md",
+    "sha256": "5492f51bdac259b3ecbed9450f376db18657622baf8958f6369ae02167e45e5f",
+    "fixture_path": "fixtures/context/governance/CA-R-1622.md"
+  },
+  {
+    "atom_id": "CA-R-1623",
+    "version": 2,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1623-TOOLS-REQUIREMENT--keep-atom-validation-execution-bounded-and-read-only.md",
+    "sha256": "80ce0a07b1e310db2f0d1925005daa5b8e6af82baa83265574478953c1b474e0",
+    "fixture_path": "fixtures/context/governance/CA-R-1623.md"
+  },
+  {
+    "atom_id": "CA-D-491",
+    "version": 3,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-491-TOOLS-DELIVERY--deliver-the-validate-atoms-command.md",
+    "sha256": "ce49773e322cd7b0d89bd79859654c52219d51bf04a041d9189c91592c7e43c1",
+    "fixture_path": "fixtures/context/governance/CA-D-491.md"
+  },
+  {
+    "atom_id": "CA-D-492",
+    "version": 5,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-492-TOOLS-DELIVERY--serialize-atom-validator-requests.md",
+    "sha256": "2b4b0d7bd08d9c12606adec52257364db2d9cfa874f5c20bb44ce124e9be6451",
+    "fixture_path": "fixtures/context/governance/CA-D-492.md"
+  },
+  {
+    "atom_id": "CA-D-493",
+    "version": 3,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-493-TOOLS-DELIVERY--serialize-atom-validator-results.md",
+    "sha256": "2cdf12d9d0eab932de679cc3ad0fb86ac264b0648d564fe3b10ff6b101a97fc5",
+    "fixture_path": "fixtures/context/governance/CA-D-493.md"
+  },
+  {
+    "atom_id": "CA-E-515",
+    "version": 8,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-515-TOOLS-QA_CASE--check-atom-validator-carrier-coverage.md",
+    "sha256": "41f1d86f28b2006cbc31ad756757e3259d843e9c0f4d8f3e7ac8121f29422c4c",
+    "fixture_path": "fixtures/context/governance/CA-E-515.md"
+  },
+  {
+    "atom_id": "CA-E-516",
+    "version": 2,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-516-TOOLS-QA_CASE--check-atom-validator-projected-source-bindings.md",
+    "sha256": "0929ed52718cc9243bbe12957045ed7189a31af416051f65b26129fbfd31a089",
+    "fixture_path": "fixtures/context/governance/CA-E-516.md"
+  },
+  {
+    "atom_id": "CA-E-517",
+    "version": 4,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-517-TOOLS-QA_CASE--check-atom-validator-isolation-and-repeatability.md",
+    "sha256": "7cd7ce8cee641d8b34ad643a0a8926dc54ab6269ecf1e83cc639670672015345",
+    "fixture_path": "fixtures/context/governance/CA-E-517.md"
+  },
+  {
+    "atom_id": "CA-E-518",
+    "version": 3,
+    "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-518-TOOLS-QA_CASE--check-validate-atoms-against-its-action.md",
+    "sha256": "b54f2582dc4349ae4f7a7ab1d29e4e5859d101e2fe6ed51d755dc8cf19849420",
+    "fixture_path": "fixtures/context/governance/CA-E-518.md"
+  },
+  {
+    "atom_id": "CA-O-087",
+    "version": 5,
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/ATOM_CARRIER_VALIDATION/CA-O-087-CORE_META_MODEL-ACTION--check-atoms.md",
+    "sha256": "044337952815c3b528289fd3305a79b57e34bdf4b499ca63d561d099d97c9764",
+    "fixture_path": "fixtures/context/governance/CA-O-087.md"
+  }
+]

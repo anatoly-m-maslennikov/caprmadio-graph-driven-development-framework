@@ -1,0 +1,206 @@
+{
+  "kind": "non-authoritative plan change projection",
+  "updated_at": "2026-09-13 02:51:00 +0400",
+  "epic": "CA-Epic-015",
+  "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views",
+  "parent": "CA-Epic-010",
+  "purpose": "Define derived model graph views",
+  "authorization": "Operator requested a new sub-Epic with Tasks for Atom-derived Terms, vocabulary diagnostics, Entities, and governing/dependent Atom navigation.",
+  "execution_status": "Plan created only; no new Task executed.",
+  "sequence": {
+    "after": "CA-P-979",
+    "tasks": [
+      "CA-P-1078",
+      "CA-P-1079",
+      "CA-P-1080",
+      "CA-P-1081",
+      "CA-P-1082",
+      "CA-P-1083",
+      "CA-P-1084",
+      "CA-P-1085"
+    ],
+    "before_remaining_work": "CA-P-980",
+    "review_gate": "Review CA-Epic-015 before execution. After closure, review remaining CA-Epic-010 before resuming CA-P-980."
+  },
+  "ownership": {
+    "new_epic": "Generic Terms/Entity graph views, diagnostic indexes, direct Subject backlinks, composed navigation and carrier authority.",
+    "retained_ca_p_980": "Operation-specific Action/Process composition and control-flow relations; sealed completed direct-Subjects stage is preserved.",
+    "excluded": "Generator/runtime implementation; regenerated projections; bulk source carrier migration; drafts and archives as migration inputs."
+  },
+  "changes": [
+    {
+      "identity": "CA-P-1078",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/01-CA-P-1078-TASK--freeze-derived-model-view-authority-boundary.md",
+      "version": 1,
+      "sha256": "947021827c3cef035c28cb3afe3c130baeedbbd34c1a7f5e2a5c447e74935ef3",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1079",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/02-CA-P-1079-TASK--reconcile-governed-terms-graph-authority.md",
+      "version": 1,
+      "sha256": "7eec8454c7ba6d6b00346958ff16c9f87cba54c46fb82194045a44ed013ea7eb",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1080",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/03-CA-P-1080-TASK--define-general-vocabulary-and-unresolved-term-indexes.md",
+      "version": 1,
+      "sha256": "239f80eb9d493cd89b233964ec5d7e6ac9bcd6e25e1a594280f114454b772218",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1081",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/04-CA-P-1081-TASK--reconcile-entities-graph-authority.md",
+      "version": 1,
+      "sha256": "3356e974c6f84c9eee20d55e6ff771d4bd5c1b509e219f3f881485a8a41223a4",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1082",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-P-1082-TASK--define-derived-governing-and-dependent-atom-links.md",
+      "version": 1,
+      "sha256": "5ba680e18c67b8d56e9c01846b228b4f885ece6bbd954ca7cb8d0f2434d65340",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1083",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/06-CA-P-1083-TASK--define-composed-atom-and-entity-navigation.md",
+      "version": 1,
+      "sha256": "94097cd45dcaa543be06161a4da6a11e83c2204be099c46070ce0569eef680f2",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1084",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/07-CA-P-1084-TASK--specify-derived-model-view-carriers.md",
+      "version": 1,
+      "sha256": "170a9b7414aca87ccb325ba29f009de4e261e15bb308f12f8f8b4eb4eff6d4f8",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-1085",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/08-CA-P-1085-TASK--validate-derived-model-view-authority-and-handoff.md",
+      "version": 1,
+      "sha256": "43d95c4181d477282e4488901f2db786f00370d72242603a21d9c8ec9c2736d3",
+      "action": "ADD"
+    },
+    {
+      "identity": "CA-P-980",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/05-CA-P-980-TASK--define-typed-operation-relations@2.md",
+      "version": 2,
+      "sha256": "c8ab1601c9f5531762c0356615c285cbb46b0e3483c317eba27d758a0d9b59a7",
+      "action": "ADD",
+      "purpose": "Exact prior Task revision; unchanged historical evidence."
+    },
+    {
+      "identity": "CA-P-980",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/06-CA-P-980-TASK--define-typed-operation-relations.md",
+      "version": 3,
+      "sha256": "540e3b6099ec17c8c66632e48c23ec25828751334791d9215825aeb3bef81897",
+      "action": "MOVE+UPDATE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-P-980-TASK--define-typed-operation-relations.md",
+      "before_version": 2,
+      "before_sha256": "c8ab1601c9f5531762c0356615c285cbb46b0e3483c317eba27d758a0d9b59a7",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/05-CA-P-980-TASK--define-typed-operation-relations@2.md"
+    },
+    {
+      "identity": "CA-P-981",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/07-CA-P-981-TASK--define-operational-actor-authority.md",
+      "version": 1,
+      "sha256": "dcd21930f04ae8236db6496d62ada7e891faf363e11663aec9f263ff97817211",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/06-CA-P-981-TASK--define-operational-actor-authority.md",
+      "before_version": 1,
+      "before_sha256": "dcd21930f04ae8236db6496d62ada7e891faf363e11663aec9f263ff97817211"
+    },
+    {
+      "identity": "CA-P-982",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/08-CA-P-982-TASK--define-process-use-by-tasks-and-tools.md",
+      "version": 1,
+      "sha256": "b8bb5705380ffaa543c8448dca60f257ed21b54c523ef6839ef8df764aa33946",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/07-CA-P-982-TASK--define-process-use-by-tasks-and-tools.md",
+      "before_version": 1,
+      "before_sha256": "b8bb5705380ffaa543c8448dca60f257ed21b54c523ef6839ef8df764aa33946"
+    },
+    {
+      "identity": "CA-P-983",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "version": 1,
+      "sha256": "5acc6aa5f1a56b7ee62d018f0f66b3a58ee7dcfe4db3512aeb8f5d844fdb2757",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/08-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "before_version": 1,
+      "before_sha256": "5acc6aa5f1a56b7ee62d018f0f66b3a58ee7dcfe4db3512aeb8f5d844fdb2757"
+    },
+    {
+      "identity": "CA-P-984",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/10-CA-P-984-TASK--remove-temporal-subject-classification-authority.md",
+      "version": 1,
+      "sha256": "5eba840daa4164ef628d4c96ae1b3e708dfd169f23d570515da0a25f24a6c684",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-984-TASK--remove-temporal-subject-classification-authority.md",
+      "before_version": 1,
+      "before_sha256": "5eba840daa4164ef628d4c96ae1b3e708dfd169f23d570515da0a25f24a6c684"
+    },
+    {
+      "identity": "CA-P-985",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/11-CA-P-985-TASK--inventory-mixed-rmed-and-ops-claims-in-core-meta-model.md",
+      "version": 1,
+      "sha256": "d8aefabdef3366b0f8010df76e057079c2ebee7a5117b13d09dccdab24a1bef9",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/10-CA-P-985-TASK--inventory-mixed-rmed-and-ops-claims-in-core-meta-model.md",
+      "before_version": 1,
+      "before_sha256": "d8aefabdef3366b0f8010df76e057079c2ebee7a5117b13d09dccdab24a1bef9"
+    },
+    {
+      "identity": "CA-P-986",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/12-CA-P-986-TASK--migrate-core-meta-model-operational-claims.md",
+      "version": 1,
+      "sha256": "b0f5476e3345c5277cff06e491a80cd56cd6ce299d5e26181838acc405ee015c",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/11-CA-P-986-TASK--migrate-core-meta-model-operational-claims.md",
+      "before_version": 1,
+      "before_sha256": "b0f5476e3345c5277cff06e491a80cd56cd6ce299d5e26181838acc405ee015c"
+    },
+    {
+      "identity": "CA-P-987",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/13-CA-P-987-TASK--reconcile-project-configuration-operational-claims.md",
+      "version": 1,
+      "sha256": "684967c992eb4067ed99ac68473b8f9a44366dff6c6f8f2d27c4eab563fb3865",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/12-CA-P-987-TASK--reconcile-project-configuration-operational-claims.md",
+      "before_version": 1,
+      "before_sha256": "684967c992eb4067ed99ac68473b8f9a44366dff6c6f8f2d27c4eab563fb3865"
+    },
+    {
+      "identity": "CA-P-988",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/14-CA-P-988-TASK--validate-new-ops-model-authority.md",
+      "version": 1,
+      "sha256": "e34ac89d4ffbf6c5587261a0c1aeb4a8637049b7d7d4deb4814a6564a6c599b5",
+      "action": "MOVE",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/13-CA-P-988-TASK--validate-new-ops-model-authority.md",
+      "before_version": 1,
+      "before_sha256": "e34ac89d4ffbf6c5587261a0c1aeb4a8637049b7d7d4deb4814a6564a6c599b5"
+    }
+  ],
+  "validation": {
+    "tasks": 110,
+    "dependency_edges": 109,
+    "acyclic": true,
+    "navigational_order_matches_dependencies": true,
+    "done_tasks": [
+      "CA-P-976",
+      "CA-P-977",
+      "CA-P-978",
+      "CA-P-979"
+    ],
+    "source_files_unchanged": 9815,
+    "source_digest": "8610e6b85acb8d3be047d624e31946ce5de375d3f7910fc2f735975a244d59ee",
+    "preexisting_unselected_epic_files_unchanged": 109,
+    "preexisting_unselected_epic_digest": "9e1174eb6cd8a94826e34a50e71f98b09f86c2bc59ca3c22129902b18e39f024",
+    "git_index_unchanged": true,
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b"
+  },
+  "previous_evidence": "No previous source maps, reports, frozen inventory or prior archives were rewritten. Old Task paths in sealed records describe historical versions."
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "Projection",
+  "authoritative": false,
+  "updated_at": "2026-09-15 01:47:49 +0400",
+  "purpose": "Source-only secondary graph and Single Source of Truth amendment",
+  "changes": [
+    {
+      "atom_id": "CA-R-1470",
+      "kind": "add",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1470-CORE_META_MODEL-CORE-REQUIREMENT--define-single-source-of-truth.md",
+      "version": 1,
+      "archive_path": null,
+      "before_sha256": null,
+      "after_sha256": "75f8ad84bfc5cf7bedb5f53dc1a18344fc49f4485da2e177a84035a952784e2a"
+    },
+    {
+      "atom_id": "CA-R-1471",
+      "kind": "add",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1471-CORE_META_MODEL-CORE-REQUIREMENT--keep-secondary-graphs-derived-from-source-authority.md",
+      "version": 1,
+      "archive_path": null,
+      "before_sha256": null,
+      "after_sha256": "1e5e42803177a1f2f4da59cdcce3a0af8c1b6ce93dd1534c52e1ba894873720b"
+    },
+    {
+      "atom_id": "CA-R-1472",
+      "kind": "add",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1472-CORE_META_MODEL-GENERAL-REQUIREMENT--admit-typed-secondary-graph-connections.md",
+      "version": 1,
+      "archive_path": null,
+      "before_sha256": null,
+      "after_sha256": "e21b8a8127087cca9426cc33eea32b0befbcf6ce4af42342da7b268d13f9780f"
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-657",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "version": 12,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form@11.md",
+      "before_sha256": "95c5081e91f2de4a97c5a8ec8db11e8c3649a4a5074760ac32d3f44926290267",
+      "after_sha256": "bd64fc89f1778e18aa650711509f284d228ebcce22fc5b068de0a0ea9f6b0065"
+    },
+    {
+      "atom_id": "CA-R-1246",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1246-CORE_META_MODEL-CORE-REQUIREMENT--keep-relation-vocabularies-graph-specific.md",
+      "version": 7,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1246-CORE_META_MODEL-CORE-REQUIREMENT--keep-relation-vocabularies-graph-specific@6.md",
+      "before_sha256": "9497ecab1ab9268222169ee8c2106fb371c2478b0c1ff0f57bb5f2dac3388e0a",
+      "after_sha256": "211c0b23c74c6d7b4ac2281a549f7d709339c9ce92ee27db70e0a38aa4ce40cc"
+    },
+    {
+      "atom_id": "CA-R-806",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-806-CORE_META_MODEL-GENERAL-REQUIREMENT--register-complete-relation-kind-metadata.md",
+      "version": 17,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-806-CORE_META_MODEL-GENERAL-REQUIREMENT--register-complete-relation-kind-metadata@16.md",
+      "before_sha256": "9fe27da4be13a97edad27d65cff1d2aed2114d8b9e7750eb47e2b8369e077eba",
+      "after_sha256": "45c7682b1dc32cc1c220d894b396859357d6d416b7ac52c0630c1f7eac530f6c"
+    },
+    {
+      "atom_id": "CA-R-1437",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+      "version": 2,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact@1.md",
+      "before_sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+      "after_sha256": "29d3145f315530e98c86c8013c1d83672fadd4bcc7dd37114e3e91379621b7c3"
+    },
+    {
+      "atom_id": "CA-R-1408",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1408-CORE_META_MODEL-CORE-REQUIREMENT--define-graph-of-graphs.md",
+      "version": 3,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1408-CORE_META_MODEL-CORE-REQUIREMENT--define-graph-of-graphs@2.md",
+      "before_sha256": "3d365f8d4cccbdac8388701009b188292a2a94a87feb74a65e925af90e13a879",
+      "after_sha256": "6e7a5cd4e07e33a7903c314a9c5779e1ca0057a942a5430cb2d58b2fcfdb4c79"
+    },
+    {
+      "atom_id": "CA-R-1335",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "version": 8,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph@7.md",
+      "before_sha256": "08350d693ec2b1966c097c5449e0abc5479f3bd599d80d86bbb0d84e397fc6d3",
+      "after_sha256": "f8884057de6afe2b6a3013c69adceb9e2ef7a65ad6720a2ca938d394767eda66"
+    },
+    {
+      "atom_id": "CA-R-1438",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+      "version": 3,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph@2.md",
+      "before_sha256": "ab3c48debce5a43fc83b74aeb3edec399373912f7b01a8aead655a4f31bf334b",
+      "after_sha256": "87ec40ab07050830b931fdacf6dfb06b61b5e88a13d2cc49f6944ea96c31c56a"
+    },
+    {
+      "atom_id": "CA-R-1454",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "version": 3,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority@2.md",
+      "before_sha256": "80c57bc3f4c15363ecee6700c72320594a1457fd17d4d251ad385e3396fc27b9",
+      "after_sha256": "0feee08df4975d42f2efbf95b880e49d97743dd0b90f40431e3d85e34fd5a7d3"
+    },
+    {
+      "atom_id": "CA-R-1456",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+      "version": 3,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority@2.md",
+      "before_sha256": "574651e7d6b2eb643e9eb529dd87fe46b84f0515562e6b9ff65d010fb12820c7",
+      "after_sha256": "de1860f0842b8e55a4754e036604dcd817a45d4de4bcf9da9cec8e5a3ea8a4a3"
+    },
+    {
+      "atom_id": "CA-M-120",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-120-CORE_META_MODEL-CORE-METHOD--compile-the-direct-relation-registry.md",
+      "version": 10,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-120-CORE_META_MODEL-CORE-METHOD--compile-the-direct-relation-registry@9.md",
+      "before_sha256": "ff55766248159f09a6bfe8d6977d328af447ef6667ebc6482e947a27100cf48b",
+      "after_sha256": "17ee831f48adee37f11c8be89887439046046864b66fec2379164bdf0f515cf4"
+    },
+    {
+      "atom_id": "CA-E-382",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "version": 14,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph@13.md",
+      "before_sha256": "b36070637e5fcb2a55b7c3d49f288323031e8a9b7214025e619e0b9058b96de9",
+      "after_sha256": "36277394f618487ea553a543ea8db8306b21438ced6f4f0d8160d1a909af4963"
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-005",
+      "kind": "revise",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "version": 13,
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity@12.md",
+      "before_sha256": "64eedfc3dc26132f06f6e34e08203138d598e075bce0eab3683d52e291730eea",
+      "after_sha256": "2d0227e12563fc483ecb19c3a4a1fb164e01eb3d8f9a5f2b88af826bdc283f15"
+    },
+    {
+      "atom_id": "CA-E-466",
+      "kind": "add",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-466-CORE_META_MODEL-EVALUATION--validate-single-source-of-truth-in-secondary-graphs.md",
+      "version": 1,
+      "archive_path": null,
+      "before_sha256": null,
+      "after_sha256": "1d9aa23cd58019941ac434ffc3856529dcea204e595cace90f406221871e6f66"
+    }
+  ],
+  "validation": {
+    "errors": [],
+    "current_atoms": 16,
+    "exact_archives": 12,
+    "new_atoms": 4,
+    "protected_files": 11699,
+    "protected_digest": "f8fd1b2d0eb42fddddcd48a6d9eb8a41178e57c1a97f242e9a8468fb5a8ce8f6",
+    "index_unchanged": true,
+    "new_references": [
+      "CA-R-1470",
+      "CA-R-1471",
+      "CA-R-1472"
+    ]
+  },
+  "boundaries": {
+    "tools_changed": false,
+    "generated_methodology_changed": false,
+    "journal_appended": false,
+    "task_or_epic_completed": false,
+    "cardinality_question_resolved": false
+  }
+}

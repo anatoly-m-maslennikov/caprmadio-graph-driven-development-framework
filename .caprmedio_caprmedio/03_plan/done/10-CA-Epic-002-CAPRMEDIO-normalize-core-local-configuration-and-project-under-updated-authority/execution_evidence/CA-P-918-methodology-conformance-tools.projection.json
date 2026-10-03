@@ -1,0 +1,46 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-29T09:23:46+04:00",
+  "frontier": [
+    {
+      "path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py",
+      "sha256": "ca7609e872149e5d105e2b09dfdbd167e6b70bdbed41e534e558eec7d0682a7b"
+    },
+    {
+      "path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/tests/test_compile_applicable_methodology.py",
+      "sha256": "ac2319f1138264b5dc219a9cf9c1dc5b35dffdc10dc0828261efd9dcc3ceec68"
+    },
+    {
+      "path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_ENTITY_GRAPH/generate_entity_graph.py",
+      "sha256": "f4cbe3a68f9e384c9b539260e35e50e6b5e82e8708392fcee71d0198b97ae95f"
+    },
+    {
+      "path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_ENTITY_GRAPH/tests/test_generate_entity_graph.py",
+      "sha256": "3c5d5006ee9bcc065a06b66d899b7a56abcb4ba0822a3dce162f4663d47c08fe"
+    }
+  ],
+  "schema": "caprmedio.methodology_conformance_tools.execution.v1",
+  "task_atom_id": "CA-P-918",
+  "validation": {
+    "arbitrary_input_folder_supported": true,
+    "claim_subject_relations_separated": [
+      "GOVERNS",
+      "DEPENDS_ON"
+    ],
+    "compile_applicable_methodology_tests": {
+      "count": 9,
+      "status": "PASS"
+    },
+    "conflicts_block_compiler_application": true,
+    "generate_entity_graph_tests": {
+      "count": 9,
+      "status": "PASS"
+    },
+    "read_only_by_default": true,
+    "term_system_relations_separated": [
+      "SUBTYPE_OF",
+      "IS_BORNE_BY",
+      "IS_ALLOWED_VALUE_OF"
+    ]
+  }
+}

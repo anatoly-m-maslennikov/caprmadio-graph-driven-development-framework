@@ -1,0 +1,78 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-31T21:41:58+04:00",
+  "schema": "caprmedio.applicable_methodology_recompilation.execution.v1",
+  "task_atom_id": "CA-P-934",
+  "result": "applicable_methodology_recompiled",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-933",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/16-CA-P-933-TASK--repair-project-scope-unit-graph-source-authority.md",
+    "dependency_predecessor_archive": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/archive/16-CA-P-933-TASK--repair-project-scope-unit-graph-source-authority@1.md"
+  },
+  "source_authority": {
+    "contributing_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "source_root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+    "installed_extensions_contribute": false,
+    "source_frontier_digest": "1807df50a636b5be387f25452fb9dc4154a315c7413ec138732796b09edc1d39",
+    "eligible_candidate_count": 632,
+    "selected_candidate_count": 632,
+    "repaired_source_revision": {
+      "atom_id": "CAPRMEDIO-META-REQU-627",
+      "atom_revision": 11,
+      "source_layer": "CORE_META_MODEL",
+      "source_carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-627--bind-every-project-scope-unit-graph-value-to-exact-sources.md",
+      "source_carrier_sha256": "7f4407826c7bcec1d0ab973efd39fd6a0613e986c7702825c789e3e5ab865fed",
+      "work_journal": {
+        "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+        "line": 2,
+        "event_id": "69cf68629a574c080e1e311ff9ade9526788cdffcbe1a5c68475cb53e3f7203e",
+        "action_id": "4353cadc7354b9490574d6cd8ab3218f0a7c6d5ae636497e1890d0ac952cd9ab"
+      }
+    }
+  },
+  "dry_run": {
+    "run_count": 2,
+    "reports_byte_identical": true,
+    "report_sha256": "d3bbe5a059c0415bb5d431e2e3685ff95e8b56ac9f2367569fb4884100427c5a",
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "diagnostic_count": 0,
+    "approval_result_count": 0,
+    "stale_or_unapproved_approval_count": 0,
+    "approval_carrier_present": false,
+    "can_apply": true,
+    "excluded_selected_source_count": 0
+  },
+  "application": {
+    "apply_status": "APPLIED",
+    "generated_tree_digest": "e3f669ef8ba3d2492eb6aecbb29f563462780cf84457135f576eebaac98968bd",
+    "generated_carrier_count": 632,
+    "generated_content_roles": {
+      "REQUIREMENT": 489,
+      "METHOD": 29,
+      "EVALUATION": 19,
+      "DELIVERY": 95,
+      "OPS": 0
+    },
+    "source_snapshot_unchanged_after_apply": true,
+    "generated_provenance_error_count": 0,
+    "every_generated_source_path_resolves_to_selected_source": true,
+    "repaired_source_projection": {
+      "atom_id": "CAPRMEDIO-META-REQU-627",
+      "projected_atom_revision": 11,
+      "projected_carrier_sha256": "d24f2d890ee8f21d04fca0a3b78336f79d6a2fe31ffd628293e06995f5c904c0",
+      "matches_expected_projection_bytes": true,
+      "source_path_resolves": true
+    }
+  },
+  "validation": {
+    "compiler_test_command": "python3 -m unittest 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/tests/test_compile_applicable_methodology.py",
+    "compiler_tests_passed": 9,
+    "compiler_tests_failed": 0,
+    "source_frontier_carrier_count": 632,
+    "generated_tree_digest_recomputed_after_tests": "e3f669ef8ba3d2492eb6aecbb29f563462780cf84457135f576eebaac98968bd"
+  }
+}

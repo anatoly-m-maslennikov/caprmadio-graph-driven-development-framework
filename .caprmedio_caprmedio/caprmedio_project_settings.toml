@@ -1,0 +1,135 @@
+# Project Settings: [project] and [artifacts.identity] are authoritative Operator inputs.
+# Other sections are retained legacy compatibility data pending Settings migration.
+# The legacy projection metadata below does not govern Project identity.
+
+schema_version = "2.0"
+
+[projection]
+updated_at = "2026-08-20 05:09:33"
+generator = "02_FR_ENGN/TOOLS/generate_project_settings.py"
+generator_version = 2
+generator_sha256 = "a25ad0ef1865a65c721ac38e913a8986db9a469ace6d8412c9d8ef86bd57f98f"
+source_map = ".caprmedio/08_implementation/CAPRMEDIO-MAPS-001--project-settings-source-map.yaml"
+source_map_sha256 = "e18640ba3abc357d2e33846db87877c7ce6bf8ec96d40b8b9a0aa8905394728d"
+configuration = "caprmedio_framework_settings.toml"
+configuration_artifact = "CAPRMEDIO-FRAMEWORK-SETTINGS@2,2026-08-18 20:28:32"
+configuration_sha256 = "be3b0aef23e402d09ad4ab56a00b8f5f9141b370ec7cd02743c70a9e39d1fca8"
+source_frontier_sha256 = "46ff0fe1a14d0bfb28cb457f62b546f886a6a1401f099f5c3af39a55bb0b9405"
+source_frontier = [
+  "CAPRMEDIO-GOV-REQU-294--interaction-reporting-mode-setting@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate@3,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-313--govern-catalog-map-and-hub-projections@5,2026-08-20 02:38:43",
+  "CAPRMEDIO-GOV-REQU-322--register-implementation-record-projection@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30",
+  "CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00",
+  "CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone@3,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-383--register-obsolete-project-names@3,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-626--encode-project-settings-as-a-generated-toml-projection@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-747--register-external-and-relational-atom-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-750--register-rationale-analysis-type@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-751--register-delivery-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-752--register-ops-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-753--register-plan-types@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53",
+  "CAPRMEDIO-GOV-REQU-781--register-goal-requirement-type@1,2026-08-20 02:38:43",
+  "CAPRMEDIO-GOV-REQU-783--register-project-definition-projection-type@1,2026-08-20 02:38:43",
+  "CAPRMEDIO-META-REQU-127--define-three-governance-loci@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-META-REQU-155--classify-rmed-atoms-by-applicability-tier@7,2026-08-18 20:19:17",
+  "CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53",
+  "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@1,2026-08-20 03:40:53",
+  "CAPRMEDIO-R-798-REQUIREMENT-BSEED_GOVERNANCE--register-principle-types-across-rmedo@1,2026-08-20 05:09:11",
+  "CAPRMEDIO-R-799-REQUIREMENT-BSEED_GOVERNANCE--encode-rmedo-applicability-tiers@1,2026-08-20 05:09:11",
+  "CAPRMEDIO-REQU-051--use-caprmedio-as-the-canonical-project-name@2,2026-08-18 20:19:17",
+  "CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10",
+  "CAPRMEDIO-REQU-711--use-casual-authority-below-project@1,2026-08-19 01:02:10",
+]
+
+[projection.bindings]
+"artifact_timestamps.timezone" = ["CAPRMEDIO-GOV-REQU-362--configure-artifact-timestamp-timezone@3,2026-08-18 20:19:17"]
+"artifacts.creation_strictness" = ["CAPRMEDIO-GOV-REQU-302--atomic-admission-and-promotion-gate@3,2026-08-18 20:19:17"]
+"artifacts.default_types.analysis" = ["CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53"]
+"artifacts.default_types.evaluation" = ["CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53"]
+"artifacts.default_types.requirement" = ["CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53"]
+"artifacts.enabled_types" = ["CAPRMEDIO-GOV-REQU-313--govern-catalog-map-and-hub-projections@5,2026-08-20 02:38:43", "CAPRMEDIO-GOV-REQU-322--register-implementation-record-projection@2,2026-08-18 20:19:17", "CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30", "CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@2,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-747--register-external-and-relational-atom-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-749--register-concern-atom-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-750--register-rationale-analysis-type@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-751--register-delivery-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-752--register-ops-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-753--register-plan-types@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-754--register-implementation-method-type@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@1,2026-08-19 04:55:53", "CAPRMEDIO-GOV-REQU-781--register-goal-requirement-type@1,2026-08-20 02:38:43", "CAPRMEDIO-GOV-REQU-783--register-project-definition-projection-type@1,2026-08-20 02:38:43", "CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@1,2026-08-20 03:40:53", "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type@1,2026-08-20 03:40:53", "CAPRMEDIO-R-798-REQUIREMENT-BSEED_GOVERNANCE--register-principle-types-across-rmedo@1,2026-08-20 05:09:11"]
+"artifacts.routing.enabled_governance_loci" = ["CAPRMEDIO-META-REQU-127--define-three-governance-loci@2,2026-08-18 20:19:17"]
+"authority.tiers.default" = ["CAPRMEDIO-R-799-REQUIREMENT-BSEED_GOVERNANCE--encode-rmedo-applicability-tiers@1,2026-08-20 05:09:11"]
+"authority.tiers.ordered" = ["CAPRMEDIO-META-REQU-155--classify-rmed-atoms-by-applicability-tier@7,2026-08-18 20:19:17"]
+"authority_modes.default" = ["CAPRMEDIO-REQU-711--use-casual-authority-below-project@1,2026-08-19 01:02:10"]
+"authority_modes.governance" = ["CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10"]
+"authority_modes.metamodel" = ["CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10"]
+"authority_modes.project" = ["CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10"]
+"authority_modes.semantics" = ["CAPRMEDIO-REQU-710--use-strict-authority-for-metalevels-and-project@1,2026-08-19 01:02:10"]
+"git.commit_each_atom_edit" = ["CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17"]
+"git.initialize_if_missing" = ["CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17"]
+"git.required" = ["CAPRMEDIO-GOV-REQU-347--mirror-every-atom-edit-in-git@2,2026-08-18 20:19:17"]
+"governance_surfaces.architecture_view" = ["CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17"]
+"governance_surfaces.project_overview" = ["CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17"]
+"governance_surfaces.relation_map" = ["CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17"]
+"governance_surfaces.requirement_catalog" = ["CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17"]
+"governance_surfaces.scope_hub" = ["CAPRMEDIO-GOV-REQU-305--optional-governance-surface-activation@2,2026-08-18 20:19:17"]
+"paths.control_root" = ["CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00"]
+"paths.journal_root" = ["CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal@4,2026-08-20 04:03:30"]
+"paths.runtime_root" = ["CAPRMEDIO-GOV-REQU-344--all-governed-artifacts-live-under-caprmedio@3,2026-08-19 16:45:00"]
+"schema_version" = ["CAPRMEDIO-GOV-REQU-626--encode-project-settings-as-a-generated-toml-projection@2,2026-08-18 20:19:17"]
+
+[artifact_timestamps]
+timezone = "local"
+
+[artifacts]
+creation_strictness = "medium"
+enabled_types = ["catalog", "map", "hub", "implementation_record", "work_journal", "analysis:analysis_report", "concern:external_problem", "concern:conflict", "analysis:external_analysis_report", "analysis:conflict_analysis_report", "requirement:constraint", "requirement:contract", "method:external_implementation_method", "method:method_binding", "evaluation:external_evaluation_standard", "evaluation:review_protocol", "implementation:external_git_commit", "implementation:pull_request", "operations:external_evidence_record", "operations:verification_record", "evaluation:qa_case", "evaluation:evaluation_control", "concern:question", "concern:problem", "concern:risk", "concern:opportunity", "analysis:rationale", "delivery:release_definition", "delivery:environment_definition", "operations:release_record", "operations:deployment_record", "operations:environment_state", "operations:health_record", "operations:incident_record", "plan:development_backlog", "plan:version_plan", "plan:change_plan", "plan:refactoring_plan", "method:implementation_method", "method:implementation_decision", "requirement:requirement", "requirement:goal", "project_definition", "evaluation:evaluation", "evaluation:evaluation_approach", "requirement:principle", "method:principle", "evaluation:principle", "delivery:principle", "operations:principle"]
+
+[artifacts.default_types]
+analysis = "analysis_report"
+evaluation = "evaluation"
+requirement = "requirement"
+
+[artifacts.identity]
+project_prefix = "CA"
+
+[artifacts.routing]
+enabled_governance_loci = ["internal", "external", "relation"]
+
+[authority.tiers]
+default = "standard"
+ordered = ["principle", "core", "standard"]
+
+[authority_modes]
+default = "casual"
+governance = "strict"
+metamodel = "strict"
+project = "strict"
+semantics = "strict"
+
+[git]
+commit_each_atom_edit = true
+initialize_if_missing = true
+required = true
+
+[governance_surfaces]
+architecture_view = false
+project_overview = false
+relation_map = false
+requirement_catalog = false
+scope_hub = false
+
+[paths]
+control_root = ".caprmedio_caprmedio"
+framework_root = ".caprmedio_framework"
+journal_root = ".caprmedio_caprmedio/work_journal"
+runtime_root = ".caprmedio_runtime"
+temporary_root = ".caprmedio_tmp"
+legacy_migration_roots = [".caprmedio"]
+
+[project]
+key = "caprmedio"
+name = "caprmedio"
+obsolete_names = ["DSET", "CARMAIO", "CARMADIO"]
+repository_slug = "caprmedio-graph-driven-framework"

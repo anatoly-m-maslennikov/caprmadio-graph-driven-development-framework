@@ -1,0 +1,64 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-31T21:55:15+04:00",
+  "schema": "caprmedio.project_scope_unit_graph_generator_authority_coverage.execution.v1",
+  "task_atom_id": "CA-P-935",
+  "result": "project_scope_unit_graph_generator_authority_coverage_completed",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-934",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/17-CA-P-934-TASK--recompile-applicable-methodology-after-graph-authority-repair.md"
+  },
+  "source_authority": {
+    "control_root": ".caprmedio_caprmedio",
+    "current_scope_unit_directory_carrier_count": 13,
+    "active_delivery_atom_count": 13,
+    "current_directory_receipt_count": 13,
+    "all_directory_receipts_exact": true,
+    "all_delivery_atoms_bound_by_directory_receipts": true,
+    "source_binding_count": 250,
+    "graph_row_fields": [
+      "Unit Name",
+      "Project Boundary Position",
+      "Type value",
+      "Child Composition",
+      "Structural Level",
+      "Local Order when applicable",
+      "Unit Type Name",
+      "Navigational Order Number",
+      "parent",
+      "authority path",
+      "Delivery path"
+    ]
+  },
+  "generator_metadata": {
+    "canonical_source_carrier": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+    "canonical_source_sha256": "88ab6552b5f26eeca27dd5f4f47a0edaa2664d2e03f10eb27e33dca4600a6dd4",
+    "both_projection_carriers_include_identity_and_digest": true,
+    "execution_carrier_serialized_separately": true,
+    "source_and_installed_execution_canonical_bytes_identical": true
+  },
+  "determinism": {
+    "dry_run_count": 2,
+    "dry_run_stdout_byte_identical": true,
+    "dry_run_stdout_sha256": "27747a489dda408fc1596657da5fd7b5db906a79d81e7cd5bcf306114f1f5d49",
+    "writes_performed": false,
+    "registered_graph_projections_preserved_for_ca_p_932": true
+  },
+  "validation": {
+    "test_command": "python3 -m unittest 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/tests/test_generate_project_graph_state.py",
+    "tests_passed": 8,
+    "tests_failed": 0,
+    "in_memory_projection_parse": true,
+    "in_memory_scope_unit_row_count": 13,
+    "in_memory_source_binding_count": 250,
+    "required_row_fields_missing": 0
+  },
+  "out_of_scope_preservation": {
+    "registered_graph_projections_rebuilt": false,
+    "applicable_methodology_recompiled": false,
+    "installation_changed": false,
+    "hooks_changed": false,
+    "commit_created": false,
+    "push_performed": false
+  }
+}

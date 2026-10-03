@@ -1,0 +1,22 @@
+---
+atom_id: CA-R-838
+subjects:
+  governs:
+    continuant:
+      - relation-model
+  depends_on:
+    continuant:
+      - atom-boundary
+cce_version: cce_1
+cce_form: obligation
+version: 9
+updated_at: 2026-09-06 01:45:12 +0400
+relations:
+  child_of:
+    - CA-R-833-CORE-REQUIREMENT--organize-normative-authority-as-an-acyclic-hierarchy
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-838-CORE_META_MODEL-REQUIREMENT--validate-the-normative-authority-hierarchy.md
+---
+# Validate the normative-authority hierarchy
+
+GOVERNANCE validators **must** construct the active normative-authority subgraph from registered authority-bearing direct relations **and** **must** reject the subgraph **when** **any** authority edge lacks registered typing **or** the directed subgraph **contains** a cycle.

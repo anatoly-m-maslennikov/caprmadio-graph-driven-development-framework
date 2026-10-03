@@ -1,0 +1,458 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "terms_entities_subjects_source_amendment",
+  "updated_at": "2026-09-14 04:00:22 +0400",
+  "task_status": "Active",
+  "stage_status": "source_content_applied_materialization_deferred",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-changed-source-map.projection.json",
+        "sha256": "db1b7f3527b76a06760f0a2676638c1b62a01d996fe0dcc49c827e96bcfea903"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-evaluation-boundaries-changed-source-map.projection.json",
+        "sha256": "96e511268d0429494a51b218a1382ddf87832a7ed62180152f9e679f1d588a0e"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-catalog-classification-changed-source-map.projection.json",
+        "sha256": "2ce75ae77e32a6805291b9915e99b56178e6a57a760a4337714c6b00bb40ccda"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-atom-subjects-graph-changed-source-map.projection.json",
+        "sha256": "60c54accd2ace34c00bd3c1ea92f361d377bdc2305d9e2b5416b7b48458886e1"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-derivation-materialization-changed-source-map.projection.json",
+        "sha256": "94eeb0ef8d46335836dacbadeaa40c784b6b10bf506541ae323bc95b154115e6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-reconciled-projection-changed-source-map.projection.json",
+        "sha256": "9d2ffb90e553bf657a5a9801a5ced769b62b292c77991303b78c1714a3a51caf"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-rmedo-evaluation-targets-changed-source-map.projection.json",
+        "sha256": "9c9530f13006a225632a86c6d352487726b1cbfd5e20eed520163b40e6ea200c"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1088-shared-event-journal-changed-source-map.projection.json",
+        "sha256": "259af3cb0acb2a7d040f9e06d0b539aef74f624717f087a2af189b4e5f6b2ea4"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-source-reconciliation-changed-source-map.projection.json",
+        "sha256": "11d1c4217c0b0cbf77344629fef368ee07358b4f1a8fe53e07c19474af8fa70c"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-summary-lifecycle-changed-source-map.projection.json",
+        "sha256": "a083650436f8943ee57032e8924ce451f43c989cfcdda13ac871e87250b7b910"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1579,
+    "frontier_after": 1579,
+    "excluded_drafts": 53,
+    "operator_amendment": "Entity is the target; Subject is the Atom-to-target typed Relation; every named target-path component references a Term. Meta-model first, Tools deferred."
+  },
+  "changes": [
+    {
+      "identity": "CA-R-1275",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject.md",
+      "before_version": 7,
+      "before_sha256": "35999d6bf00371ef5be73807943c80cca7a5cce8b13f04485b71b945d700c05f",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject.md",
+      "version": 8,
+      "sha256": "512909ea00be28c765c2ac9107e6b366bd9e972f0d8f1892e9f0054a3c91823c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1275-CORE_META_MODEL-CORE-REQUIREMENT--define-subject@7.md",
+      "archive_sha256": "35999d6bf00371ef5be73807943c80cca7a5cce8b13f04485b71b945d700c05f",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1198",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects.md",
+      "before_version": 7,
+      "before_sha256": "7d85f89bb0a621b185822937c44d069c3d38fac04a4273564fa7df92bffadd24",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects.md",
+      "version": 8,
+      "sha256": "d4bbd248ebfebf4028930e2d35851ce2849887043db7d1b4227c2c83f38bca4a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1198-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects@7.md",
+      "archive_sha256": "7d85f89bb0a621b185822937c44d069c3d38fac04a4273564fa7df92bffadd24",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1363",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject.md",
+      "before_version": 5,
+      "before_sha256": "727cb5f72a0b368e0a744c1c626336225cc69b50c9c02faf2f22b994e8ef13d0",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject.md",
+      "version": 6,
+      "sha256": "64982721b28bf02f25382e10088f64b570fc2971cbb196035e98190266a33127",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1363-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-governed-subject@5.md",
+      "archive_sha256": "727cb5f72a0b368e0a744c1c626336225cc69b50c9c02faf2f22b994e8ef13d0",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1321",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression.md",
+      "before_version": 5,
+      "before_sha256": "8fa1cd22d539d0af9d53b9d436d8da660f6b34ce4693c3b65a5cf3db7518bcda",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression.md",
+      "version": 6,
+      "sha256": "6675c5c64785bf315fe8e080c9a9e7e67951202b0794505948c010b3be82897e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1321-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-expression@5.md",
+      "archive_sha256": "8fa1cd22d539d0af9d53b9d436d8da660f6b34ce4693c3b65a5cf3db7518bcda",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1194",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "before_version": 7,
+      "before_sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "version": 8,
+      "sha256": "eb42fe349cbeb76f5c6f806c136ace235c89b1630744db7bed6624415a03f777",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path@7.md",
+      "archive_sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1279",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "before_version": 7,
+      "before_sha256": "41df6af5cfbf5a1362225ccbc2cd96bcff99cad851fd03ea43f3c55f3d9efd92",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "version": 8,
+      "sha256": "a6ac64ac73f3ccc55943f1992056b86edef61e6aa7b7fa57a871986040e05a8a",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term@7.md",
+      "archive_sha256": "41df6af5cfbf5a1362225ccbc2cd96bcff99cad851fd03ea43f3c55f3d9efd92",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1203",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-subject-boundaries.md",
+      "before_version": 6,
+      "before_sha256": "728578aed28fa52ed7d866203c4374f7313ab2e6e37113ad09a1eccc54a5198f",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-subject-boundaries.md",
+      "version": 7,
+      "sha256": "7d33968cc929cfc2178c25fa91e2417f40885eacc042868cae79b7bbc891250d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1203-CORE_META_MODEL-CORE-REQUIREMENT--split-at-multiple-governed-subject-boundaries@6.md",
+      "archive_sha256": "728578aed28fa52ed7d866203c4374f7313ab2e6e37113ad09a1eccc54a5198f",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1281",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1281-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects-graph.md",
+      "before_version": 5,
+      "before_sha256": "a8d4191ba51dedbc03c42d44a8ab61fe5e277321cb03457d52bf447304d62318",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1281-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects-graph.md",
+      "version": 6,
+      "sha256": "dff39f1926cf78396d8de5e01cbf8641fbb9a3c36869e99e98cac827c078ffcf",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1281-CORE_META_MODEL-CORE-REQUIREMENT--define-atom-subjects-graph@5.md",
+      "archive_sha256": "a8d4191ba51dedbc03c42d44a8ab61fe5e277321cb03457d52bf447304d62318",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-M-125",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "before_version": 14,
+      "before_sha256": "0c3ac6e4f17304c7e0f2d84c57c14888e24019948291e1b0ff0c22740b2e015d",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "version": 15,
+      "sha256": "7eaf03dd335c22dcffc6d39c9577f520540ac178972f871655c22391b2b3307e",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim@14.md",
+      "archive_sha256": "0c3ac6e4f17304c7e0f2d84c57c14888e24019948291e1b0ff0c22740b2e015d",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-M-228",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "before_version": 7,
+      "before_sha256": "256ebf747183404456fa747fb519d00737a83cb64483671da327cfb8fcf227cb",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md",
+      "version": 8,
+      "sha256": "078b1b4f345ff53e59e3149c5e1e9484e0daa6377759d125fa865c014ed15a9f",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification@7.md",
+      "archive_sha256": "256ebf747183404456fa747fb519d00737a83cb64483671da327cfb8fcf227cb",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-M-114",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "before_version": 14,
+      "before_sha256": "05c9cf59bd73113ea314b365d12b963fdb3de5c1b0cc737b4cf6b0b8e0da34a2",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "version": 15,
+      "sha256": "786c6dbdfd3755e805c4adc67312ee9ca3d7316b47b594ec0f43f53745422388",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms@14.md",
+      "archive_sha256": "05c9cf59bd73113ea314b365d12b963fdb3de5c1b0cc737b4cf6b0b8e0da34a2",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-D-269",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "D",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "before_version": 7,
+      "before_sha256": "ab01104d1a8827664d3c2ba98e4ea7ac9f3d2f1a3fae197f03dcda56586ff319",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+      "version": 8,
+      "sha256": "2ad1932ff0943a67f0b67505f3ce79cc351130795a5c6baf8f6c1f84a18adf12",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter@7.md",
+      "archive_sha256": "ab01104d1a8827664d3c2ba98e4ea7ac9f3d2f1a3fae197f03dcda56586ff319",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-M-232",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "M",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-atom-subjects-graph-from-current-atom-subjects.md",
+      "before_version": 7,
+      "before_sha256": "49e8599b828fcb4ef472272969f46d995c2b16fd43ea677fe6522621e85fb691",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-atom-subjects-graph-from-current-atom-subjects.md",
+      "version": 8,
+      "sha256": "94f8ac5da5f66ba673537a72df36012abb9f9eee9a3377f8f201d22478e1cb2d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-232-CORE_META_MODEL-CORE-METHOD--derive-atom-subjects-graph-from-current-atom-subjects@7.md",
+      "archive_sha256": "49e8599b828fcb4ef472272969f46d995c2b16fd43ea677fe6522621e85fb691",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-246",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+      "before_version": 13,
+      "before_sha256": "73d9de5f093e47ac1b84ad9aaa64a8f7c3827ce22149600e65ad86e57c03d4d3",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md",
+      "version": 14,
+      "sha256": "d2f1229e8b117003a08637b8d831b62c5c29ddd340e4203f496f3578f25f6a82",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects@13.md",
+      "archive_sha256": "73d9de5f093e47ac1b84ad9aaa64a8f7c3827ce22149600e65ad86e57c03d4d3",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-383",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "before_version": 6,
+      "before_sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions.md",
+      "version": 7,
+      "sha256": "c6cff53d64e7fe0ac55c77dbef82e5db2dce31f995d12bd8397e75284f081911",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-383-CORE_META_MODEL-EVALUATION--reject-invalid-subject-expressions@6.md",
+      "archive_sha256": "793b9988e1392bdf8d5a93833c7220c9272a5a18b93ed5d2a348de506dd35201",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-444",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "before_version": 5,
+      "before_sha256": "1c6a6ef720c217e4c239eeee6fed8cdbb4f4df3b70cdd9b2f9f33b450effe9ff",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "version": 6,
+      "sha256": "ea4365abfa979f24d772de9eab97aa5dfe9156187e563a69fa5dbd936befaa5b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning@5.md",
+      "archive_sha256": "1c6a6ef720c217e4c239eeee6fed8cdbb4f4df3b70cdd9b2f9f33b450effe9ff",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "summary_changed": false,
+      "new_identity": false
+    }
+  ],
+  "retirements": [],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 12,
+      "version": 13,
+      "before_sha256": "0f2e1b49eaa2cfeb0353b245b131212689b0e0627b016b3df6d8e46666e3eb35",
+      "sha256": "617d890a5498b2c0bd1e5b7cbdf35ff2ff8a868e8476dbb13e5666b473c784bd",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@12.md",
+      "archive_sha256": "0f2e1b49eaa2cfeb0353b245b131212689b0e0627b016b3df6d8e46666e3eb35",
+      "action": "UPDATE",
+      "scope_unit": "caprmedio"
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-terms-entities-subjects-partial-stage.md",
+      "sha256": "a368a1d7f7bb9d3b98d04547bf9f506567536b149c19f1599b6a2d4380a3f60e",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "remaining_reserved_sources": [
+    "CAPRMEDIO-META-REQU-166",
+    "CAPRMEDIO-META-REQU-673",
+    "CA-R-626",
+    "CAPRMEDIO-META-REQU-620",
+    "CAPRMEDIO-META-REQU-627",
+    "CAPRMEDIO-META-REQU-123",
+    "CAPRMEDIO-GOV-REQU-354",
+    "CA-R-1408",
+    "CA-R-1409"
+  ],
+  "remaining": {
+    "task_done": false,
+    "other_tasks_executed": [],
+    "broader_operational_role_migration": "deferred to owning Tasks",
+    "bulk_subject_value_migration": false,
+    "tools": "deferred",
+    "generated_outputs": "untouched",
+    "journal_and_git": "deferred"
+  },
+  "validation": {
+    "result": "PASS",
+    "revised_source_atoms": 16,
+    "new_source_identities": 0,
+    "exact_source_archives": 16,
+    "same_identity_summaries_preserved": 16,
+    "unchanged_other_source_atoms": 1563,
+    "unchanged_drafts": 53,
+    "preserved_prior_source_maps": 18,
+    "source_frontier": 1579,
+    "evaluation_targets_resolve": true,
+    "action_and_process_targets_preserved": true,
+    "tool_files_unchanged": true,
+    "journal_unchanged": true,
+    "git_index_unchanged": true,
+    "runtime_enforcement": "not claimed; Tools deferred"
+  },
+  "tool_changes": [],
+  "journal": {
+    "append_performed": false,
+    "baseline_sha256": "d26f4f646c1e6b2f44725dc65bd81763982ebb82776dbbfebe08f33b5649a976",
+    "recording_status": "pending; this map is not authoritative Journal history"
+  },
+  "git": {
+    "mutated": false,
+    "head": "29b861b0d34369918336645a0f8d30cecb1c8e70",
+    "index_sha256": "c911ebaac5f3fe49793ceced4d424e4beca39dda64b39f4812f5de48848b92ee"
+  }
+}

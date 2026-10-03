@@ -1,0 +1,894 @@
+{
+  "schema": "ca-p-957-planned-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "07",
+  "checkpoint": "Exact candidate set; autonomous application at >=99% after preflight and canonical proposed-overlay checks; known unchanged diagnostics remain explicit.",
+  "recorded_at": "2026-09-10 04:16:18 +0400",
+  "existing": [
+    {
+      "atom_id": "CA-R-1016",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1016-CORE_META_MODEL-REQUIREMENT--register-rationale-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "784bc9abe88357142cb618538e66c12aad6d317c2c826a7713b7874b1697fb78",
+      "before_bytes_utf8": "---\natom_id: CA-R-1016\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Rationale For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-119-CORE_META_MODEL-REQUIREMENT--requirement-create-rationale-after-its-subject\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register rationale_for relation\n\n`rationale_for` **must** be registered as a direct relation owned by a Rationale Analysis Atom **and** directed to one Requirement, Method, Evaluation, **or** Delivery Atom that it explains.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1016-CORE_META_MODEL-CORE-REQUIREMENT--register-rationale-for-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1016\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Rationale For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register rationale_for relation\n\n`rationale_for` **must** be registered as a direct relation owned by a Rationale Analysis Atom **and** directed to one Requirement, Method, Evaluation, **or** Delivery Atom that it explains.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1016-CORE_META_MODEL-REQUIREMENT--register-rationale-for-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-119-CORE_META_MODEL-REQUIREMENT--requirement-create-rationale-after-its-subject\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-119-CORE_META_MODEL-REQUIREMENT--requirement-create-rationale-after-its-subject",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-119",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-119-CORE_META_MODEL-REQUIREMENT--requirement-create-rationale-after-its-subject.md",
+            "version": 8,
+            "sha256": "27e0d18cbf136d25ff794808bd61e6426be96cd7669adae1096ad2f08baa090e"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-119-CORE_META_MODEL-REQUIREMENT--requirement-create-rationale-after-its-subject an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1016",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Rationale For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1017",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1017-CORE_META_MODEL-REQUIREMENT--register-method-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "42ec586410533db027aecc06c7d504ec35b8c41017fbcb6864b496724a6c81b8",
+      "before_bytes_utf8": "---\natom_id: CA-R-1017\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Method For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register method_for relation\n\n`method_for` **must** be registered as a direct relation owned by a Method Atom **and** directed to one Requirement Atom that the Method serves.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1017-CORE_META_MODEL-CORE-REQUIREMENT--register-method-for-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1017\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Method For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register method_for relation\n\n`method_for` **must** be registered as a direct relation owned by a Method Atom **and** directed to one Requirement Atom that the Method serves.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1017-CORE_META_MODEL-REQUIREMENT--register-method-for-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1017",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Method For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1019",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1019-CORE_META_MODEL-REQUIREMENT--register-delivery-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "b1ccc7c29d2608772e9885989771457597d14e1909c394191126f9b5f82c283f",
+      "before_bytes_utf8": "---\natom_id: CA-R-1019\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Delivery For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register delivery_for relation\n\n`delivery_for` **must** be registered as a direct relation owned by a Delivery Atom **and** directed to one Requirement **or** Method Atom that the Delivery realizes.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1019-CORE_META_MODEL-CORE-REQUIREMENT--register-delivery-for-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1019\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Delivery For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register delivery_for relation\n\n`delivery_for` **must** be registered as a direct relation owned by a Delivery Atom **and** directed to one Requirement **or** Method Atom that the Delivery realizes.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1019-CORE_META_MODEL-REQUIREMENT--register-delivery-for-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1019",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Delivery For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1020",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1020-CORE_META_MODEL-REQUIREMENT--register-implementation-of-relation.md",
+      "before_version": 7,
+      "before_sha256": "2c85c8eab4987bf7b34473f3801f174532fe8e1b885302589ccd9ef5a033515c",
+      "before_bytes_utf8": "---\natom_id: CA-R-1020\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Implementation Of Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register implementation_of relation\n\n`implementation_of` **must** be registered as a direct relation owned by a governed Implementation carrier **and** directed to one specification Atom that the carrier implements.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1020-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-of-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1020\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Implementation Of Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register implementation_of relation\n\n`implementation_of` **must** be registered as a direct relation owned by a governed Implementation carrier **and** directed to one specification Atom that the carrier implements.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1020-CORE_META_MODEL-REQUIREMENT--register-implementation-of-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1020",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Implementation Of Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1021",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1021-CORE_META_MODEL-REQUIREMENT--register-evidence-for-relation.md",
+      "before_version": 7,
+      "before_sha256": "d38f827111a31917348eb1a5569dd518879e981b928aa1d2858daba1edb6e3df",
+      "before_bytes_utf8": "---\natom_id: CA-R-1021\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Evidence For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register evidence_for relation\n\n`evidence_for` **must** be registered as a direct relation owned by an Evidence carrier **and** directed to one Evaluation **or** Implementation carrier that the Evidence supports.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1021-CORE_META_MODEL-CORE-REQUIREMENT--register-evidence-for-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1021\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Evidence For Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register evidence_for relation\n\n`evidence_for` **must** be registered as a direct relation owned by an Evidence carrier **and** directed to one Evaluation **or** Implementation carrier that the Evidence supports.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1021-CORE_META_MODEL-REQUIREMENT--register-evidence-for-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1021",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Evidence For Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1022",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1022-CORE_META_MODEL-REQUIREMENT--register-concern-about-relation.md",
+      "before_version": 7,
+      "before_sha256": "82ab83addfd20d956b0102be135d395955e663d3bbb47feb6176722ba8c34fe5",
+      "before_bytes_utf8": "---\natom_id: CA-R-1022\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Concern About Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register concern_about relation\n\n`concern_about` **must** be registered as a direct relation owned by a Concern Atom **and** directed to one Observation **or** other directly affected governed entity.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1022-CORE_META_MODEL-CORE-REQUIREMENT--register-concern-about-relation.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1022\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Concern About Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register concern_about relation\n\n`concern_about` **must** be registered as a direct relation owned by a Concern Atom **and** directed to one Observation **or** other directly affected governed entity.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1022-CORE_META_MODEL-REQUIREMENT--register-concern-about-relation@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1022",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Concern About Relation"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1024",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1024-CORE_META_MODEL-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations.md",
+      "before_version": 6,
+      "before_sha256": "b3a2eacb72404c76667f09fa9bb832f8814a0fa99b51a91b5d6eee1c5872ae1a",
+      "before_bytes_utf8": "---\natom_id: CA-R-1024\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Prohibit transitive meaning for direct relations\n\nA registered direct relation **must not** imply a transitive relation.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1024-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations.md",
+      "proposed_version": 7,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1024\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 7\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Prohibit transitive meaning for direct relations\n\nA registered direct relation **must not** imply a transitive relation.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1024-CORE_META_MODEL-REQUIREMENT--prohibit-transitive-meaning-for-direct-relations@6.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1024",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1025",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1025-CORE_META_MODEL-REQUIREMENT--require-authority-for-new-relation-meanings.md",
+      "before_version": 7,
+      "before_sha256": "3ec71c763468176f08a5634492708188d268a4f6a6e7e9910834665453099255",
+      "before_bytes_utf8": "---\natom_id: CA-R-1025\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 7\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-151\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Require authority for new relation meanings\n\n**every** additional direct relation meaning **must** have separate owning Requirement authority instead of reusing a registered relation with a different meaning.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1025-CORE_META_MODEL-CORE-REQUIREMENT--require-authority-for-new-relation-meanings.md",
+      "proposed_version": 8,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1025\ncce_version: cce_1\ncce_form: obligation\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 8\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Require authority for new relation meanings\n\n**every** additional direct relation meaning **must** have separate owning Requirement authority instead of reusing a registered relation with a different meaning.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1025-CORE_META_MODEL-REQUIREMENT--require-authority-for-new-relation-meanings@7.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-151\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CA-R-151",
+          "resolved_target": {
+            "id": "CA-R-151",
+            "tier": "Core",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-151-CORE_META_MODEL-CORE-REQUIREMENT--admit-only-necessary-metamodel-constructs.md",
+            "version": 12,
+            "sha256": "344ce4b95351cb37a36fad721c61d56c2c632491f734a7348942852f935f5fc2"
+          },
+          "reason": "Retiering this Requirement to Core makes CA-R-151 an invalid normative parent: same-tier Current-scope peers under R829. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1025",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1026",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-CORE_META_MODEL-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "before_version": 8,
+      "before_sha256": "2979ddab95d6c346dc819bbecb281954a8bb3dde24ca46c1eea33376c6644d21",
+      "before_bytes_utf8": "---\natom_id: CA-R-1026\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Dependency Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\n      - Artifact\nversion: 8\nupdated_at: \"2026-09-09 21:33:29 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Register depends_on and required_by relation pair\n\n`depends_on` **means** a direct dependency-ordering relation from a dependent Artifact **to** its prerequisite Artifact, with `required_by` as its inverse-derived view.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-CORE_META_MODEL-CORE-REQUIREMENT--register-depends-on-and-required-by-relation-pair.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1026\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Dependency Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\n      - Artifact\nversion: 9\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register depends_on and required_by relation pair\n\n`depends_on` **means** a direct dependency-ordering relation from a dependent Artifact **to** its prerequisite Artifact, with `required_by` as its inverse-derived view.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1026-CORE_META_MODEL-REQUIREMENT--register-depends-on-and-required-by-relation-pair@8.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CA-R-1054",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1026",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Dependency Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1027",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1027-CORE_META_MODEL-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair.md",
+      "before_version": 8,
+      "before_sha256": "f8695cef50ff1b3fe3f7aa4fae7124f4e1ac4348f2c5ec5baf3cd56af962ef89",
+      "before_bytes_utf8": "---\natom_id: CA-R-1027\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Implementation Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 8\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Register implementation_of and implemented_by relation pair\n\n`implementation_of` **must** be registered as the declared upstream relation **and** `implemented_by` as its inverse-derived downstream relation **in** the realization ordering domain.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1027-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1027\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Implementation Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\nversion: 9\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register implementation_of and implemented_by relation pair\n\n`implementation_of` **must** be registered as the declared upstream relation **and** `implemented_by` as its inverse-derived downstream relation **in** the realization ordering domain.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1027-CORE_META_MODEL-REQUIREMENT--register-implementation-of-and-implemented-by-relation-pair@8.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CA-R-1054",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1027",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Implementation Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1031",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1031-CORE_META_MODEL-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence.md",
+      "before_version": 6,
+      "before_sha256": "b6223f2930331a90d17a0ae8daa8e54b23f3c35e7cc64aaa093a3ecb7eb76a5d",
+      "before_bytes_utf8": "---\natom_id: CA-R-1031\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\n      - provenance\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-097-CORE_META_MODEL-REQUIREMENT--requirement-keep-provenance-separate-from-evidence\n---\n# Prohibit Lineage Impact Analysis from serving as Ops Evidence\n\nA Lineage Impact Analysis Atom **must not** serve as Ops Evidence of its own correctness.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1031-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence.md",
+      "proposed_version": 7,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1031\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\n      - provenance\nversion: 7\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Prohibit Lineage Impact Analysis from serving as Ops Evidence\n\nA Lineage Impact Analysis Atom **must not** serve as Ops Evidence of its own correctness.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1031-CORE_META_MODEL-REQUIREMENT--prohibit-lineage-impact-analysis-from-serving-as-ops-evidence@6.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-097-CORE_META_MODEL-REQUIREMENT--requirement-keep-provenance-separate-from-evidence\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-097-CORE_META_MODEL-REQUIREMENT--requirement-keep-provenance-separate-from-evidence",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-097",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-097-CORE_META_MODEL-REQUIREMENT--requirement-keep-provenance-separate-from-evidence.md",
+            "version": 8,
+            "sha256": "c49ec92f70f0a375375a32669fa33a19b1d99e508acb61f5e1c043c68c637dab"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-097-CORE_META_MODEL-REQUIREMENT--requirement-keep-provenance-separate-from-evidence an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1031",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-1039",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1039-CORE_META_MODEL-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis.md",
+      "before_version": 6,
+      "before_sha256": "461196e0a6204bec3d934ba6efe794436c1c73cdc2e1e5c9dca91216e0411157",
+      "before_bytes_utf8": "---\natom_id: CA-R-1039\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 6\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision\n---\n# Preserve authority outside Lineage Impact Analysis\n\nA Lineage Impact Analysis Atom **must not** replace an examined child, supporting Evidence, **or** another Atom's Claim.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1039-CORE_META_MODEL-CORE-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis.md",
+      "proposed_version": 7,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CA-R-1039\ncce_version: cce_1\ncce_form: prohibition\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\nversion: 7\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Preserve authority outside Lineage Impact Analysis\n\nA Lineage Impact Analysis Atom **must not** replace an examined child, supporting Evidence, **or** another Atom's Claim.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1039-CORE_META_MODEL-REQUIREMENT--preserve-authority-outside-lineage-impact-analysis@6.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision",
+          "resolved_target": {
+            "id": "CAPRMEDIO-GOV-REQU-312",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md",
+            "version": 9,
+            "sha256": "ecbb1ca6e256106f2a400fcb7c83c4792f6daf149d370eddd6039629b53b059a"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-GOV-REQU-312-CORE_META_MODEL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-1039",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-325",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-REQUIREMENT--register-derived-from-relation.md",
+      "before_version": 11,
+      "before_sha256": "2399c0309bff830e88cbbc9e0af572513c7707b51c84223faf3ae668020ff2b5",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-325\nsubjects:\n  governs:\n    continuant:\n      - DERIVED_FROM\n  depends_on:\n    continuant:\n      - Artifact/Revision\ncce_version: cce_1\ncce_form: definition\nversion: 11\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-120-CORE_META_MODEL-REQUIREMENT--requirement-keep-analysis-optional-before-specification\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n---\n# Register derived_from relation\n\na DERIVED_FROM relation **means** a direct relation from one derived Artifact Revision to one exact source Artifact Revision used to derive it.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-CORE-REQUIREMENT--register-derived-from-relation.md",
+      "proposed_version": 12,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-325\nsubjects:\n  governs:\n    continuant:\n      - DERIVED_FROM\n  depends_on:\n    continuant:\n      - Artifact/Revision\ncce_version: cce_1\ncce_form: definition\nversion: 12\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Register derived_from relation\n\na DERIVED_FROM relation **means** a direct relation from one derived Artifact Revision to one exact source Artifact Revision used to derive it.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-325-CORE_META_MODEL-REQUIREMENT--register-derived-from-relation@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once\n    - CAPRMEDIO-META-REQU-120-CORE_META_MODEL-REQUIREMENT--requirement-keep-analysis-optional-before-specification\n    - CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-117--store-each-semantic-relation-once",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-120-CORE_META_MODEL-REQUIREMENT--requirement-keep-analysis-optional-before-specification",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-120",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-120-CORE_META_MODEL-REQUIREMENT--requirement-keep-analysis-optional-before-specification.md",
+            "version": 9,
+            "sha256": "28fbbf38e759ec6eacfd05b57d56ab41c4339964039d7117ef3d9ff2a8ac9062"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-120-CORE_META_MODEL-REQUIREMENT--requirement-keep-analysis-optional-before-specification an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-121--store-only-direct-semantic-relations",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-325",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "DERIVED_FROM"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-351",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "before_version": 10,
+      "before_sha256": "6f8fa99813c0a11878fa549961ce3dd7657117e4f53ab0a2e899aae82c257163",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-351\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Self-Hosted Governance Origin\n  depends_on:\n    continuant:\n      - authority\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n---\n# Define self-hosted Governance origins\n\nwithin the caprmedio Project, its Methodology authority, framework authority, **and** other Project-owned Artifacts have internal Governance origin. A distributed CAPRMEDIO framework source has external Governance origin relative to a consuming project **until** that project establishes its own internal Adaptation authority. Graph relations change **none** of the origins. These origins describe meaning ownership rather than Git authorship, filesystem ownership, **or** byte identity.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-CORE-REQUIREMENT--define-self-hosted-governance-origins.md",
+      "proposed_version": 11,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-351\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - Self-Hosted Governance Origin\n  depends_on:\n    continuant:\n      - authority\nversion: 11\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Define self-hosted Governance origins\n\nwithin the caprmedio Project, its Methodology authority, framework authority, **and** other Project-owned Artifacts have internal Governance origin. A distributed CAPRMEDIO framework source has external Governance origin relative to a consuming project **until** that project establishes its own internal Adaptation authority. Graph relations change **none** of the origins. These origins describe meaning ownership rather than Git authorship, filesystem ownership, **or** byte identity.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-351-CORE_META_MODEL-REQUIREMENT--define-self-hosted-governance-origins@10.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting\n    - CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-086",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting.md",
+            "version": 11,
+            "sha256": "16abd8f1474ce25d440115cf745e8c1d40ab7b844ea0bebb68a3100035b29856"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-086-CORE_META_MODEL-REQUIREMENT--requirement-bound-recursive-self-hosting an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-127",
+            "tier": "Core",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins.md",
+            "version": 14,
+            "sha256": "7deeb4ff4140e916cd6f0a0c2cc51a2af81cd59a8d7f1c68a7e0e7c3e00cbefb"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins an invalid normative parent: same-tier Current-scope peers under R829. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-351",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Self-Hosted Governance Origin"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-710",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-REQUIREMENT--require-one-parent-scope-unit.md",
+      "before_version": 9,
+      "before_sha256": "fbb3e7957f6534e5fd02632d6f8fb47345974e10d479db63e7bc81eb30648edf",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-710\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\ncce_version: cce_1\ncce_form: cardinality\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n---\n# Require one parent Scope Unit\n\n**every** Scope Unit except a Scope Unit root **must** have **`=1`** direct parent Scope Unit.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-CORE-REQUIREMENT--require-one-parent-scope-unit.md",
+      "proposed_version": 10,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-710\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\ncce_version: cce_1\ncce_form: cardinality\nversion: 10\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Require one parent Scope Unit\n\n**every** Scope Unit except a Scope Unit root **must** have **`=1`** direct parent Scope Unit.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-710-CORE_META_MODEL-REQUIREMENT--require-one-parent-scope-unit@9.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-706",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-706",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+            "version": 14,
+            "sha256": "2b12252229d611e93828c8e22d37d37402626a2d979216fb32f7a509079f8456"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-706 an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-710",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "scope-topology"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-712",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership.md",
+      "before_version": 9,
+      "before_sha256": "d843d2e0c285d3760dcb59bdb61144f738365ac2845a0f99f74e83c1878ea4cd",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-712\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 9\nupdated_at: 2026-09-06 01:45:12 +0400\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n---\n# Require acyclic structural ownership\n\nTHE directed graph formed by active `structural_parent` relations **must** be acyclic.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-CORE-REQUIREMENT--require-acyclic-structural-ownership.md",
+      "proposed_version": 10,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-712\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - atom-boundary\ncce_version: cce_1\ncce_form: obligation\nversion: 10\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Require acyclic structural ownership\n\nTHE directed graph formed by active `structural_parent` relations **must** be acyclic.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-712-CORE_META_MODEL-REQUIREMENT--require-acyclic-structural-ownership@9.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-706",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+            "version": 14,
+            "sha256": "2b12252229d611e93828c8e22d37d37402626a2d979216fb32f7a509079f8456"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-712",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-713",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-REQUIREMENT--prohibit-skipped-scope-unit-ownership.md",
+      "before_version": 8,
+      "before_sha256": "fc3cc0cc2d9dbb01afe38295fca05b85834fb9745d2702af991fe50d75207690",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-713\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\ncce_version: cce_1\ncce_form: prohibition\nversion: 8\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n---\n# Prohibit skipped Scope Unit ownership\n\nA Scope Unit **must not** own a descendant Scope Unit through a stored structural-parent relation **when** another active Scope Unit lies between them.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-skipped-scope-unit-ownership.md",
+      "proposed_version": 9,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-713\nsubjects:\n  governs:\n    continuant:\n      - scope-topology\n  depends_on:\n    continuant:\n      - authority\ncce_version: cce_1\ncce_form: prohibition\nversion: 9\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Prohibit skipped Scope Unit ownership\n\nA Scope Unit **must not** own a descendant Scope Unit through a stored structural-parent relation **when** another active Scope Unit lies between them.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-713-CORE_META_MODEL-REQUIREMENT--prohibit-skipped-scope-unit-ownership@8.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-706",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-706",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+            "version": 14,
+            "sha256": "2b12252229d611e93828c8e22d37d37402626a2d979216fb32f7a509079f8456"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-706 an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-713",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "scope-topology"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-717",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation.md",
+      "before_version": 10,
+      "before_sha256": "1d90f765577d6d64f6fce567d642c18b1b2355adb6a5bef1100b00b8fef058cd",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-717\nsubjects:\n  governs:\n    continuant:\n      - Structural Parent Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\ncce_version: cce_1\ncce_form: definition\nversion: 10\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n    - CAPRMEDIO-META-REQU-717--define-structural-scope-ownership\n---\n# Register structural parent relation\n\n`structural_parent` **must** be registered as the kind-independent Structural ownership relation stored by a child **and** directed to its immediate parent.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-CORE-REQUIREMENT--register-structural-parent-relation.md",
+      "proposed_version": 11,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-717\nsubjects:\n  governs:\n    continuant:\n      - Structural Parent Relation\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\ncce_version: cce_1\ncce_form: definition\nversion: 11\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\nrelations: {}\n---\n# Register structural parent relation\n\n`structural_parent` **must** be registered as the kind-independent Structural ownership relation stored by a child **and** directed to its immediate parent.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-717-CORE_META_MODEL-REQUIREMENT--register-structural-parent-relation@10.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive\n    - CAPRMEDIO-META-REQU-717--define-structural-scope-ownership\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-706",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive.md",
+            "version": 14,
+            "sha256": "2b12252229d611e93828c8e22d37d37402626a2d979216fb32f7a509079f8456"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-706-CORE_META_MODEL-REQUIREMENT--make-scope-unit-ownership-immediate-and-recursive an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CAPRMEDIO-META-REQU-717--define-structural-scope-ownership",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-717",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Structural Parent Relation"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-718",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership.md",
+      "before_version": 11,
+      "before_sha256": "7364610346fe722070d03c23ffe46f42d9f0c265782421bd9a8248a1bc7f4a88",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-718\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - artifact-model\n      - atom-boundary\ncce_version: cce_1\ncce_form: separation\nversion: 11\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-714\n---\n# Encode a Type Value for a Scope Unit Independently from Parent Ownership\n\na Scope Unit's Type value **must** be encoded independently from its structural-parent relation.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-CORE-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership.md",
+      "proposed_version": 12,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-718\nsubjects:\n  governs:\n    continuant:\n      - relation-model\n  depends_on:\n    continuant:\n      - scope-topology\n      - artifact-model\n      - atom-boundary\ncce_version: cce_1\ncce_form: separation\nversion: 12\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Encode a Type Value for a Scope Unit Independently from Parent Ownership\n\na Scope Unit's Type value **must** be encoded independently from its structural-parent relation.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-718-CORE_META_MODEL-REQUIREMENT--encode-a-type-value-for-a-scope-unit-independently-from-parent-ownership@11.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-714\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-714",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-714",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-714-CORE_META_MODEL-REQUIREMENT--coordinate-scope-units-through-three-independent-axes.md",
+            "version": 10,
+            "sha256": "a04d998ac160575122cac236ff87328df3561730661bed984b159010ddd7fc43"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-714 an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-718",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "relation-model"
+      ]
+    },
+    {
+      "atom_id": "CA-R-879",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-879-CORE_META_MODEL-REQUIREMENT--register-child-of-and-parent-of-relation-pair.md",
+      "before_version": 12,
+      "before_sha256": "cb20772b737c975d601dab407009b7b901dd32841c8dc5f59bb7f23b48855212",
+      "before_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Normative Authority Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\ncce_version: cce_1\ncce_form: definition\nversion: 12\nupdated_at: \"2026-09-09 21:56:59 +0400\"\nrelations:\n  child_of:\n    - CA-R-1054\n---\n# Register child_of and parent_of relation pair\n\n`child_of` **must** be registered as the declared upstream relation **and** `parent_of` as its inverse-derived downstream relation **in** the normative-authority ordering domain.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-879-CORE_META_MODEL-CORE-REQUIREMENT--register-child-of-and-parent-of-relation-pair.md",
+      "proposed_version": 13,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\nsubjects:\n  governs:\n    continuant:\n      - Normative Authority Relation Pair\n  depends_on:\n    continuant:\n      - atom-boundary\n      - relation-model\ncce_version: cce_1\ncce_form: definition\nversion: 13\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register child_of and parent_of relation pair\n\n`child_of` **must** be registered as the declared upstream relation **and** `parent_of` as its inverse-derived downstream relation **in** the normative-authority ordering domain.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-879-CORE_META_MODEL-REQUIREMENT--register-child-of-and-parent-of-relation-pair@12.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CA-R-1054\n",
+          "after": "relations: {}\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CA-R-1054",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CA-R-879",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Normative Authority Relation Pair"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-322",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-REQUIREMENT--register-the-implementation-record-projection.md",
+      "before_version": 13,
+      "before_sha256": "80e9899b3c5e636cab6bc58cb98232df8874af788c4e4c8bd412be073af510f1",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-322\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Projection/Type: Implementation Record\"\n  depends_on:\n    continuant:\n      - artifact-catalog\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - implementation_record\nversion: 13\nupdated_at: 2026-09-07 09:59:57 +0000\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  child_of:\n    - CAPRMEDIO-META-REQU-115-CORE_META_MODEL-REQUIREMENT--requirement-use-implementation-record-as-a-projection\n    - CA-R-888\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal\n---\n# Register the Implementation Record Projection\n\nImplementation Record **means** the internal Type value under Projection that presents current realization, coverage, source-to-target bindings, relevant provenance, **and** unresolved gaps derived from its declared source frontier.\n\nThe Projection declares the exact normative Atom, native-target, provenance, **and** **any** registered implementation-lineage frontier it represents. Regeneration replaces its rendered content **without** converting it into an Atom **or** granting it authority over the native project, normative specification, Ops evidence, **or** Verification.\n\nIts storage **and** retention policy is configured separately. A generated runtime copy **may** be disposable; a committed current view **may** be reviewable history. the two storage choices do **not** change the Projection's semantic role.\n\n## Rationale\n\nThe predecessor incorrectly bundled Change Plan **and** Implementation Record under one Implementation-role Projection rule. The split preserves the record while routing Change Plan to the new Plan Atom family.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-CORE-REQUIREMENT--register-the-implementation-record-projection.md",
+      "proposed_version": 14,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-322\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Projection/Type: Implementation Record\"\n  depends_on:\n    continuant:\n      - artifact-catalog\nproject_graph_state:\n  artifacts:\n    enabled_types:\n      - implementation_record\nversion: 14\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nllm_session_ids:\n  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d\n  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094\nrelations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal\n---\n# Register the Implementation Record Projection\n\nImplementation Record **means** the internal Type value under Projection that presents current realization, coverage, source-to-target bindings, relevant provenance, **and** unresolved gaps derived from its declared source frontier.\n\nThe Projection declares the exact normative Atom, native-target, provenance, **and** **any** registered implementation-lineage frontier it represents. Regeneration replaces its rendered content **without** converting it into an Atom **or** granting it authority over the native project, normative specification, Ops evidence, **or** Verification.\n\nIts storage **and** retention policy is configured separately. A generated runtime copy **may** be disposable; a committed current view **may** be reviewable history. the two storage choices do **not** change the Projection's semantic role.\n\n## Rationale\n\nThe predecessor incorrectly bundled Change Plan **and** Implementation Record under one Implementation-role Projection rule. The split preserves the record while routing Change Plan to the new Plan Atom family.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-322-CORE_META_MODEL-REQUIREMENT--register-the-implementation-record-projection@13.md",
+      "exact_replacements": [
+        {
+          "before": "relations:\n  child_of:\n    - CAPRMEDIO-META-REQU-115-CORE_META_MODEL-REQUIREMENT--requirement-use-implementation-record-as-a-projection\n    - CA-R-888\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal\n",
+          "after": "relations:\n  relates_to:\n    - CAPRMEDIO-GOV-REQU-313-CORE_META_MODEL-REQUIREMENT--register-catalog-map-and-hub-as-type-values-under-projection\n    - CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal\n",
+          "count": 1,
+          "boundary": "relations.child_of"
+        },
+        {
+          "before": "CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal",
+          "after": "CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal",
+          "count": 1,
+          "boundary": "relations.relates_to exact target basename following retier"
+        }
+      ],
+      "removed_relations": [
+        {
+          "target": "CAPRMEDIO-META-REQU-115-CORE_META_MODEL-REQUIREMENT--requirement-use-implementation-record-as-a-projection",
+          "resolved_target": {
+            "id": "CAPRMEDIO-META-REQU-115",
+            "tier": "Standard",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-115-CORE_META_MODEL-REQUIREMENT--requirement-use-implementation-record-as-a-projection.md",
+            "version": 8,
+            "sha256": "e9239ab889b9f3047ebda6f12ac7fb20d5d9379f187d8e5b3ccff28c3c084573"
+          },
+          "reason": "Retiering this Requirement to Core makes CAPRMEDIO-META-REQU-115-CORE_META_MODEL-REQUIREMENT--requirement-use-implementation-record-as-a-projection an invalid normative parent: the parent is lower in the admitted Core→General→Standard order, not upstream normative authority. R879 supplies the normative meaning; no replacement parent is invented."
+        },
+        {
+          "target": "CA-R-888",
+          "resolved_target": null,
+          "reason": "The exact target has no active Carrier; bounded filename scan finds its predecessor only in Archive. GOV767 requires Active RMED targets. Remove this inactive target while preserving the Claim."
+        }
+      ],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-322",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Projection/Type: Implementation Record"
+      ]
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-342",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal.md",
+      "before_version": 12,
+      "before_sha256": "9a4b6dc4c629942714c885f54baabf267d26ed3839c2140d5025b454a8f00679",
+      "before_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-342\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Journal/Type: Implementation Journal\"\n  depends_on:\n    continuant:\n      - Journal\n      - Implementation Binding\nversion: 12\nupdated_at: 2026-09-06 01:45:12 +0400\nrelations: {}\n---\n# Register Implementation Journal\n\nImplementation Journal **means** the internal Type value under Journal whose Records establish, replace, correct, **or** remove Implementation Bindings.\n",
+      "before_tier": "Standard",
+      "proposed_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-CORE-REQUIREMENT--register-implementation-journal.md",
+      "proposed_version": 13,
+      "proposed_tier": "Core",
+      "proposed_bytes_utf8": "---\natom_id: CAPRMEDIO-GOV-REQU-342\ncce_version: cce_1\ncce_form: definition\nsubjects:\n  governs:\n    continuant:\n      - \"Journal/Type: Implementation Journal\"\n  depends_on:\n    continuant:\n      - Journal\n      - Implementation Binding\nversion: 13\nupdated_at: \"2026-09-10 04:16:18 +0400\"\nrelations: {}\n---\n# Register Implementation Journal\n\nImplementation Journal **means** the internal Type value under Journal whose Records establish, replace, correct, **or** remove Implementation Bindings.\n",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-GOV-REQU-342-CORE_META_MODEL-REQUIREMENT--register-implementation-journal@12.md",
+      "exact_replacements": [],
+      "removed_relations": [],
+      "classification_record": "CA-P-957-batch-07-dispositions.json#CAPRMEDIO-GOV-REQU-342",
+      "claim_change": "none; whole body byte-preserved",
+      "after_governs_subjects": [
+        "Journal/Type: Implementation Journal"
+      ]
+    }
+  ],
+  "additions": []
+}

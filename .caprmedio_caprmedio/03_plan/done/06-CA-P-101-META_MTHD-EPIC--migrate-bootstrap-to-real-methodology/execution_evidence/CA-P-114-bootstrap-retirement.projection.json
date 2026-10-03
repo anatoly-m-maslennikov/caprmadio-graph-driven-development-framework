@@ -1,0 +1,93 @@
+{
+  "schema": "caprmedio.ca_p_114.bootstrap_retirement.v2",
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-114",
+  "task_revision": 2,
+  "recorded_at": "2026-09-03T15:06:00+04:00",
+  "prerequisite": {
+    "task_atom_id": "CA-P-113",
+    "status": "DONE",
+    "task_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/done/12-CA-P-113-META_MTHD-TASK--reconcile-framework-consumers-with-applicable-methodology.md",
+    "task_sha256": "ca86cdafc9bef6fab607904292d727676830b12c3697c624d7b82f9fae2e8f10",
+    "evidence_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-113-framework-consumer-reconciliation.projection.json",
+    "evidence_sha256": "e73acab293a057dc0084fa030029e9e8452abead013c7bc989701eb838a89156",
+    "recorded_checks": "PASS: retrieval=9, compilation=9, graph=8, atom_operations=19, installer=8"
+  },
+  "ca_p_108_reconciliation": {
+    "map_schema": "caprmedio.ca_p_108.migration_map.v13",
+    "obsolete_disposition": "OUT_OF_SCOPE_RETAIN_IN_PLACE for the remaining .caprmedio root",
+    "replacement_basis": "later Operator-approved topology, recorded by CA-P-114 v2",
+    "exact_mapping_manifest_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-114-bootstrap-retirement.carrier-manifest.json",
+    "exact_mapping_manifest_sha256": "1ac0387f8551c070d2c7a4a4b87e930e70f92cff84032019ba56fb720b006f26"
+  },
+  "migrations": [
+    {
+      "classification": "BOOTSTRAP_HISTORY",
+      "source_root": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY",
+      "target_root": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY",
+      "carrier_count": 313,
+      "carrier_manifest_sha256": "ac80aedc4f3b460d497cd0c2221242ae607d0e16f3ae0c12aae52995aec48368",
+      "source_regular_file_count_after": 0,
+      "target_regular_file_count_after": 313
+    },
+    {
+      "classification": "FPF_EVIDENCE",
+      "source_root": ".caprmedio/fpf-reports",
+      "target_root": "fpf-reports",
+      "carrier_count": 25,
+      "carrier_manifest_sha256": "63011a6d6bab1d5f5555d0b93e65321a9f53262542b129e91c78c1fe8679ed28",
+      "source_regular_file_count_after": 0,
+      "target_regular_file_count_after": 36
+    },
+    {
+      "classification": "PROJECT_ANALYSIS",
+      "source_root": ".caprmedio/02_analysis",
+      "target_root": ".caprmedio_caprmedio/02_analysis",
+      "carrier_count": 2,
+      "carrier_manifest_sha256": "09b7c1ad2ab4a883a2fd42178a5c70ab0eb7f56fd144c1439c3a06c61eda5042",
+      "source_regular_file_count_after": 0,
+      "target_regular_file_count_after": 31
+    }
+  ],
+  "protected_roots": {
+    "required_retention": [
+      ".caprmedio_install",
+      ".caprmedio_runtime"
+    ],
+    "ca_p_114_staged_changes": {
+      ".caprmedio_install": [],
+      ".caprmedio_runtime": []
+    }
+  },
+  "physical_directory_retirement": {
+    "tracked_carrier_retirement": "PASS",
+    "remaining_governed_carrier_count": 0,
+    "local_empty_directory_removal": "BLOCKED_BY_MACOS_PERMISSION",
+    "residue_manifest_path": ".caprmedio_caprmedio/03_plan/06-CA-P-101-META_MTHD-EPIC--migrate-bootstrap-to-real-methodology/execution_evidence/CA-P-114-empty-directory-residue.txt",
+    "residue_manifest_sha256": "7df21a9640a97a0de6d44fd2cad8c67506559238fa3f8cca91e2b25c1ecd459c",
+    "residue_roots": [
+      {"root_path": ".caprmedio", "governed_carrier_count": 0, "empty_directory_count": 576},
+      {"root_path": "001_FRAMEWORK_METHODOLOGY", "governed_carrier_count": 0, "empty_directory_count": 1},
+      {"root_path": "002_FRAMEWORK_ENGINE", "governed_carrier_count": 0, "empty_directory_count": 90},
+      {"root_path": "003_OPERATOR_DOCUMENTATION", "governed_carrier_count": 0, "empty_directory_count": 1},
+      {"root_path": "004_CORE_EXTENSIONS", "governed_carrier_count": 0, "empty_directory_count": 1},
+      {"root_path": "005_RELEASES", "governed_carrier_count": 0, "empty_directory_count": 1},
+      {"root_path": "010_COMMUNITY_EXTENSIONS", "governed_carrier_count": 0, "empty_directory_count": 1},
+      {"root_path": "010_FIELD", "governed_carrier_count": 0, "empty_directory_count": 1}
+    ]
+  },
+  "validation": {
+    "carrier_mapping_count": 340,
+    "source_absent_after_count": 340,
+    "byte_exact_target_count": 340,
+    "target_collisions": 0,
+    "protected_root_staged_change_count": 0,
+    "result": "PASS_WITH_RECORDED_LOCAL_EMPTY_DIRECTORY_RESIDUE"
+  },
+  "rollback": {
+    "carrier_rollback": "reverse each path pair in the exact mapping manifest after checking its SHA-256",
+    "directory_residue": "no governed Carrier requires restoration because no directory deletion succeeded",
+    "finder_metadata": "untracked Finder metadata is outside the governed rollback frontier and did not affect this result"
+  }
+}

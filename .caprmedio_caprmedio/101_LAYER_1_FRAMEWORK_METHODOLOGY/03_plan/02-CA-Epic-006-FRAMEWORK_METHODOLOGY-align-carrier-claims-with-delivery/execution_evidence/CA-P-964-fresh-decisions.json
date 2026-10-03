@@ -1,0 +1,491 @@
+{
+  "task": "CA-P-964@2",
+  "decisions": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-353-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers.md",
+      "line": 21,
+      "target": "CA-D-329",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "CAPRMEDIO binds **every** governed proof record **to** a machine-readable frontier of the exact Artifact **and** Implementation revisions, configurations, evaluators, environments, **and** material inputs under which its observation was produced. the Carrier representation follows CA-D-329.",
+      "consumer": "CAPRMEDIO-GOV-REQU-353",
+      "target_current": {
+        "identity": "CA-D-329",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL-DELIVERY--serialize-proof-frontier-references.md",
+        "version": 6,
+        "sha256": "456172d42d182e6496128449ebdb9caeb234e4258a8d9a0f11996c23e16c364d"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Retained proof-binding semantics explicitly delegate frontier representation to the revised D329 owner; correct contribution.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+      "line": 15,
+      "target": "CAPRMEDIO-GOV-REQU-294",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CAPRMEDIO-GOV-REQU-294\"",
+      "consumer": "CAPRMEDIO-GOV-REQU-302",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-294",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+        "version": 14,
+        "sha256": "9f7ac74d68bd83bd8bf73901d743be4946ed6c8f321d52021c51da79e890302c"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The admission Claim points to reporting behavior for its focused-question workflow. R294 retains silent/verbose behavior and mandatory exception reporting; the consumer does not prescribe [interaction].reporting_mode encoding. Retain this semantic relation; canonicalize the legacy decorated target while revising this already affected source.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/04_requirement/CAPRMEDIO-FRAMEWORK-ENGINE-REQU-561-SKILLS-REQUIREMENT--route-generated-data-pipeline-work.md",
+      "line": 11,
+      "target": "CAPRMEDIO-GOV-REQU-337",
+      "context": "external_active_RMED",
+      "retired_target": false,
+      "text": "    - CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stage-prefixes",
+      "consumer": "CAPRMEDIO-FRAMEWORK-ENGINE-REQU-561",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-337",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stages.md",
+        "version": 11,
+        "sha256": "17f1dda398e6dd98c155cfe34c8afb49e6c32fe6482c6b46295dff8a369970e1"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The complete consumer routes stage selection, validation and materialization through the governed stage vocabulary and deterministic Tools without redefining either. Retained GOV337 still registers the four stage meanings, their prefix cross-references and all forward-only dependency constraints. It points to D388 for physical formats. No consuming vocabulary clause loses its authority; the external child_of relation remains valid.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-337-CORE_META_MODEL-REQUIREMENT--register-generated-data-stages.md",
+      "line": 22,
+      "target": "CA-D-388",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "the following ordered generated-data pipeline stages **must** be registered, referenced by their Carrier prefixes governed by CA-D-388:",
+      "consumer": "CAPRMEDIO-GOV-REQU-337",
+      "target_current": {
+        "identity": "CA-D-388",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-388-CORE_META_MODEL-DELIVERY--serialize-generated-data-stage-prefixes-and-formats.md",
+        "version": 1,
+        "sha256": "ca6db1ca0f80b6920bedd112629459f8ca30c9d9cd89f0c134a2f55a4f79703e"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Retained stage vocabulary explicitly delegates physical prefixes/formats to D388; correct contribution.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-EVALUATION--reject-invalid-dependency-order-derivations.md",
+      "line": 22,
+      "target": "CA-D-268",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - CA-D-268",
+      "consumer": "CA-E-404",
+      "target_current": {
+        "identity": "CA-D-268",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "version": 6,
+        "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Existing consumer retains unchanged D268 direct-relation serialization authority; reused D268 was not reclassified and requires no link change.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "line": 15,
+      "target": "CA-D-386",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-386\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-009",
+      "target_current": {
+        "identity": "CA-D-386",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-386-CORE_META_MODEL-DELIVERY--serialize-concern-priority.md",
+        "version": 1,
+        "sha256": "70e7a0c36f425db2b1b93a9ae9f538aecb300c503b653e485a021777a197c1bf"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Applicable conditions 1–3 test stored priority eligibility, exact high/medium/low values, and rejection of highest/critical/deferred. Conditions 4–7 test the surviving R comparison and selection semantics. Retain R299 and add D386 to evaluation_for before extracting its Carrier clauses.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md",
+      "line": 16,
+      "target": "CAPRMEDIO-GOV-REQU-299",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CAPRMEDIO-GOV-REQU-299\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-009",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-299",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection.md",
+        "version": 16,
+        "sha256": "8204b24777d6219a8d561cf5ff09e58792611f898d0a69676d3804f1a8daf595"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Applicable conditions 1–3 test stored priority eligibility, exact high/medium/low values, and rejection of highest/critical/deferred. Conditions 4–7 test the surviving R comparison and selection semantics. Retain R299 and add D386 to evaluation_for before extracting its Carrier clauses.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "line": 23,
+      "target": "CA-D-353",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-353\"",
+      "consumer": "CA-E-427",
+      "target_current": {
+        "identity": "CA-D-353",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-353-CORE_META_MODEL-DELIVERY--carry-every-structural-entity-with-a-directory-carrier.md",
+        "version": 4,
+        "sha256": "a00310fd905bab541d018da98c02dbb895504f2bd6d9d449bfd038c2df2c6a23"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The check rejects !=1 Epic Directory Carriers. D353 must first include the stricter =1 Epic qualification, then replace R1369 in evaluation_for before retiring it. D263 inverse per-directory cardinality is not interchangeable.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "line": 24,
+      "target": "CA-D-379",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-379\"",
+      "consumer": "CA-E-427",
+      "target_current": {
+        "identity": "CA-D-379",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-379-CORE_META_MODEL-DELIVERY--serialize-epic-identifiers.md",
+        "version": 1,
+        "sha256": "1481d89513b554b5a64ed70653055cf56f026932fb631d6474219c49b5717e8e"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The check requires one canonical Epic Identifier and rejects malformed identifiers; that exact grammar moves wholly from R1304 to D379. Replace this evaluation_for target only after D379 is admitted, before retiring R1304.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/05_method/CA-M-163-PROGRAMMATIC-CORE-METHOD--emit-structured-operational-diagnostics.md",
+      "line": 24,
+      "target": "CAPRMEDIO-GOV-REQU-315",
+      "context": "external_active_RMED",
+      "retired_target": false,
+      "text": "Logging Policy in `CAPRMEDIO-GOV-REQU-315`, including its ERROR, WARNING, INFO,",
+      "consumer": "CA-M-163",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-315",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--require-production-logging-policies.md",
+        "version": 8,
+        "sha256": "c048ef3c4395c73399f7b35f17e84f5e8aec65943c1d55c7afe4ab42b2ee44c4"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The complete Method expressly consumes ERROR/WARNING/INFO/DEBUG meanings and actionable, sanitized, bounded diagnostics. GOV315 retains those meanings, retention/failure behavior and the no-Journal-as-log-sink boundary. Method step 4 already delegates Carrier placement/encoding to Delivery; no new external rewrite is required.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-100-CORE_META_MODEL-CORE-REQUIREMENT--preserve-external-boundary-obligations.md",
+      "line": 19,
+      "target": "CA-D-268",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "An obligation imposed by an identified external source occupies the Requirement Content role, has external Governance origin, **and** pins the applicable external source version **or** digest. Its graph connections are typed relations whose Carrier encoding is governed by CA-D-268 **and** do **not** create another Governance origin.",
+      "consumer": "CAPRMEDIO-META-REQU-100",
+      "target_current": {
+        "identity": "CA-D-268",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "version": 6,
+        "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Existing consumer retains unchanged D268 direct-relation serialization authority; reused D268 was not reclassified and requires no link change.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md",
+      "line": 25,
+      "target": "CA-D-268",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - CA-D-268",
+      "consumer": "CAPRMEDIO-GOV-EVAL-005",
+      "target_current": {
+        "identity": "CA-D-268",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "version": 6,
+        "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Existing consumer retains unchanged D268 direct-relation serialization authority; reused D268 was not reclassified and requires no link change.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-387-CORE_META_MODEL-DELIVERY--serialize-atomic-admission-strictness.md",
+      "line": 18,
+      "target": "CAPRMEDIO-GOV-REQU-302",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "the Framework Instance Settings TOML Carrier **must** encode atomic admission strictness as `creation_strictness` **in** `[artifacts]`, using the allowed values **and** default governed by CAPRMEDIO-GOV-REQU-302.",
+      "consumer": "CA-D-387",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-302",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+        "version": 16,
+        "sha256": "ae69709989ded1f741df24784698d80a5cca075ab4984ac9c93977d6131d64bd"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Admission field serialization consumes retained allowed strictness/default in R302; correct semantic target.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-383-CORE_META_MODEL-DELIVERY--serialize-interaction-reporting-mode.md",
+      "line": 18,
+      "target": "CAPRMEDIO-GOV-REQU-294",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "the Framework Instance Settings TOML Carrier **must** serialize its interaction reporting setting as `reporting_mode` **in** the `[interaction]` section, using the allowed value **and** default governed by CAPRMEDIO-GOV-REQU-294.",
+      "consumer": "CA-D-383",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-294",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+        "version": 14,
+        "sha256": "9f7ac74d68bd83bd8bf73901d743be4946ed6c8f321d52021c51da79e890302c"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Reporting field serialization consumes retained allowed values/default behavior in R294; correct semantic target.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-127-CORE_META_MODEL-CORE-REQUIREMENT--define-two-governance-origins.md",
+      "line": 33,
+      "target": "CA-D-268",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "Governance origin is independent of Artifact form, Content role, structural scope, provenance, **and** graph relations. A typed graph relation does **not** create another Governance Origin; its Carrier encoding is governed by CA-D-268.",
+      "consumer": "CAPRMEDIO-META-REQU-127",
+      "target_current": {
+        "identity": "CA-D-268",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-268-CORE_META_MODEL-DELIVERY--serialize-authored-direct-relations-on-their-owning-atoms.md",
+        "version": 6,
+        "sha256": "fa41beb8a30ad922397220f3f7f5a3d8a1c7a488d8e98b966a0f06439589517b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Existing consumer retains unchanged D268 direct-relation serialization authority; reused D268 was not reclassified and requires no link change.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+      "line": 19,
+      "target": "CAPRMEDIO-GOV-REQU-748",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - CAPRMEDIO-GOV-REQU-748",
+      "consumer": "CAPRMEDIO-GOV-REQU-314",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-748",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-type-values-for-evaluation-atoms.md",
+        "version": 14,
+        "sha256": "b1ed365984fbea4e157c1a887835ea37ebd9114e52c7ffc6060af478313ee883"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "The checklist Claim consumes the admitted Evaluation Control Type and distinguishes control meaning, realization and result. evaluation_control is its reference to that Type, not an independent encoding obligation or token validation. R748 still admits that Type; retain its semantic relates_to target. No optional D400 link is added.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-external-implementation-method-as-a-type-value-for-method-atoms.md",
+      "line": 18,
+      "target": "CA-D-393",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-393\"",
+      "consumer": "CAPRMEDIO-GOV-REQU-762",
+      "target_current": {
+        "identity": "CA-D-393",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-393-CORE_META_MODEL-DELIVERY--derive-default-external-type-names.md",
+        "version": 1,
+        "sha256": "c292f124d1f2ac91a3f615826d3428cbc23561d2d51d05a80982426a9e154d61"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "External Implementation Method uses the default external-name derivation context. D393 retains the external_<internal_type_name> rule, role-default qualification and explicit non-default exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--register-constraint-as-an-external-type-value-for-requirement-atoms.md",
+      "line": 18,
+      "target": "CA-D-393",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-393\"",
+      "consumer": "CAPRMEDIO-GOV-REQU-761",
+      "target_current": {
+        "identity": "CA-D-393",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-393-CORE_META_MODEL-DELIVERY--derive-default-external-type-names.md",
+        "version": 1,
+        "sha256": "c292f124d1f2ac91a3f615826d3428cbc23561d2d51d05a80982426a9e154d61"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Constraint explicitly uses the non-default external-name exception and is not derived from the default rule. D393 preserves that exception. Replace the entire decorated relates_to value with canonical CA-D-393 before retiring GOV760.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--require-production-logging-policies.md",
+      "line": 43,
+      "target": "CA-D-396",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "the Carrier content of structured production log records follows CA-D-396.",
+      "consumer": "CAPRMEDIO-GOV-REQU-315",
+      "target_current": {
+        "identity": "CA-D-396",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-396-LOCAL_CONFIGURATION-DELIVERY--serialize-structured-production-log-records.md",
+        "version": 1,
+        "sha256": "cac3c9853b786692f8ad00e178453b9d4cc5e9b864a9d045d67838a18fc0d9db"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Retained production logging policy delegates record content to D396; correct contribution.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "line": 17,
+      "target": "CA-D-383",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-383\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "target_current": {
+        "identity": "CA-D-383",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-383-CORE_META_MODEL-DELIVERY--serialize-interaction-reporting-mode.md",
+        "version": 1,
+        "sha256": "52211511bdea1a31127f238e49c69f5c6a1707c893775363524e577e12934a64"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Conditions 1, 4, 6 and 7 load/parse Settings, test the two allowed reporting values, reject unknown keys where closed, and require deterministic settings. R294 preserves allowed behavior/values; D383 owns the extracted field path. Retain R294 and add D383 before extraction.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "line": 18,
+      "target": "CA-D-387",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CA-D-387\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "target_current": {
+        "identity": "CA-D-387",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-387-CORE_META_MODEL-DELIVERY--serialize-atomic-admission-strictness.md",
+        "version": 1,
+        "sha256": "d912e75dc1ffec781cfc59fab69fdaf7d223ca92850a4eb98b08c49d6f6f569e"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Conditions 1, 3, 6 and 7 load/parse Settings, test medium/high admission strictness, reject unknown keys where closed, and require deterministic settings. R302 preserves allowed strictness/default; D387 owns the extracted field. Retain R302 and add D387 before extraction.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "line": 21,
+      "target": "CAPRMEDIO-GOV-REQU-294",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CAPRMEDIO-GOV-REQU-294\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-294",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-294-CORE_META_MODEL-REQUIREMENT--configure-interaction-reporting-mode.md",
+        "version": 14,
+        "sha256": "9f7ac74d68bd83bd8bf73901d743be4946ed6c8f321d52021c51da79e890302c"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Conditions 1, 4, 6 and 7 load/parse Settings, test the two allowed reporting values, reject unknown keys where closed, and require deterministic settings. R294 preserves allowed behavior/values; D383 owns the extracted field path. Retain R294 and add D383 before extraction.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "line": 22,
+      "target": "CAPRMEDIO-GOV-REQU-302",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "    - \"CAPRMEDIO-GOV-REQU-302\"",
+      "consumer": "CAPRMEDIO-GOV-EVAL-006",
+      "target_current": {
+        "identity": "CAPRMEDIO-GOV-REQU-302",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-302-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md",
+        "version": 16,
+        "sha256": "ae69709989ded1f741df24784698d80a5cca075ab4984ac9c93977d6131d64bd"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Conditions 1, 3, 6 and 7 load/parse Settings, test medium/high admission strictness, reject unknown keys where closed, and require deterministic settings. R302 preserves allowed strictness/default; D387 owns the extracted field. Retain R302 and add D387 before extraction.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+      "line": 21,
+      "target": "CA-D-328",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "**every** governed CAPRMEDIO workflow **or** local project-control Journal Carrier whose append-only NDJSON representation is **not** already governed by CA-D-328 **or** CA-D-339 **must** use append-only NDJSON **in** its applicable registered authoritative place. the CAPRMEDIO Project Work Journal follows CA-D-328; the Implementation Journal follows CA-D-339.",
+      "consumer": "CA-D-406",
+      "target_current": {
+        "identity": "CA-D-328",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+        "version": 1,
+        "sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Residual workflow/local-control Journal contract explicitly excludes and points to the unchanged Work Journal placement owner.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+      "line": 21,
+      "target": "CA-D-339",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "**every** governed CAPRMEDIO workflow **or** local project-control Journal Carrier whose append-only NDJSON representation is **not** already governed by CA-D-328 **or** CA-D-339 **must** use append-only NDJSON **in** its applicable registered authoritative place. the CAPRMEDIO Project Work Journal follows CA-D-328; the Implementation Journal follows CA-D-339.",
+      "consumer": "CA-D-406",
+      "target_current": {
+        "identity": "CA-D-339",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+        "version": 5,
+        "sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Residual workflow/local-control Journal contract explicitly excludes and points to the unchanged Implementation Journal owner.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+      "line": 21,
+      "target": "CA-D-328",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "**every** governed CAPRMEDIO workflow **or** local project-control Journal Carrier whose append-only NDJSON representation is **not** already governed by CA-D-328 **or** CA-D-339 **must** use append-only NDJSON **in** its applicable registered authoritative place. the CAPRMEDIO Project Work Journal follows CA-D-328; the Implementation Journal follows CA-D-339.",
+      "consumer": "CA-D-406",
+      "target_current": {
+        "identity": "CA-D-328",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-328-DELIVERY--place-the-caprmedio-project-work-journal.md",
+        "version": 1,
+        "sha256": "5c720746a6fed37b9471442302122d5d4c04f4a09e161abb45a0cce6f10330b6"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Residual workflow/local-control Journal contract explicitly excludes and points to the unchanged Work Journal placement owner.",
+      "confidence_percent": 99
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-406-LOCAL_CONFIGURATION-DELIVERY--serialize-governed-workflow-journal-carriers.md",
+      "line": 21,
+      "target": "CA-D-339",
+      "context": "active_source_RMED",
+      "retired_target": false,
+      "text": "**every** governed CAPRMEDIO workflow **or** local project-control Journal Carrier whose append-only NDJSON representation is **not** already governed by CA-D-328 **or** CA-D-339 **must** use append-only NDJSON **in** its applicable registered authoritative place. the CAPRMEDIO Project Work Journal follows CA-D-328; the Implementation Journal follows CA-D-339.",
+      "consumer": "CA-D-406",
+      "target_current": {
+        "identity": "CA-D-339",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-implementation-journal-carriers.md",
+        "version": 5,
+        "sha256": "6ab648723dd6af6db76334d5722279d99fb71a81304564cd14c7d09cf658592b"
+      },
+      "decision": "Retain verified surviving contribution",
+      "rationale": "Residual workflow/local-control Journal contract explicitly excludes and points to the unchanged Implementation Journal owner.",
+      "confidence_percent": 99
+    }
+  ]
+}

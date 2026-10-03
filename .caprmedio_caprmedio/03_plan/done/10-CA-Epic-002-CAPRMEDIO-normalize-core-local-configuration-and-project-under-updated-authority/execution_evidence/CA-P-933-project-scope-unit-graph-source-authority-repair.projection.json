@@ -1,0 +1,413 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-31T21:37:09+04:00",
+  "schema": "caprmedio.project_scope_unit_graph_source_authority_repair.execution.v1",
+  "task_atom_id": "CA-P-933",
+  "result": "project_scope_unit_graph_source_authority_repaired",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-931",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/14-CA-P-931-TASK--migrate-project-scope-unit-graph-generator.md"
+  },
+  "source_authority": {
+    "journal": {
+      "action_id": "4353cadc7354b9490574d6cd8ab3218f0a7c6d5ae636497e1890d0ac952cd9ab",
+      "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+      "event_id": "69cf68629a574c080e1e311ff9ade9526788cdffcbe1a5c68475cb53e3f7203e",
+      "line": 2,
+      "occurred_at": "2026-08-31T17:16:35Z"
+    },
+    "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-627--bind-every-project-scope-unit-graph-value-to-exact-sources.md",
+    "predecessor_archive": {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-627--bind-every-project-scope-unit-graph-value-to-exact-sources@10.md",
+      "revision": 10,
+      "sha256": "b0f57977e4a3058282192a590c43139ac1c37b5ddfee06150649c2146f2007e4"
+    },
+    "revision": 11,
+    "sha256": "7f4407826c7bcec1d0ab973efd39fd6a0613e986c7702825c789e3e5ab865fed",
+    "admitted_authoritative_source_artifact": true,
+    "relational_directory_carrier_admitted": true,
+    "preserves_exact_revision_digest_and_work_journal_provenance": true
+  },
+  "delivery_authority": {
+    "active_scope_unit_count": 13,
+    "control_root": ".caprmedio_caprmedio",
+    "all_current_authority_paths_exact": true,
+    "all_current_delivery_paths_preserved": true,
+    "all_exact_predecessor_archives_present": true
+  },
+  "directory_receipts": [
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/",
+        "delivery_path": "101_FRAMEWORK_METHODOLOGY/",
+        "path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/07_delivery/CA-D-017-DELIVERY-FR_MTHD--bind-framework-methodology-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/07_delivery/archive/CA-D-017-DELIVERY-FR_MTHD--bind-framework-methodology-delivery-place@7.md",
+          "revision": 7,
+          "sha256": "10497203fc3ac6442f38261db2df6dab62f6cee17555df5f62d67e0cb0a0e01f"
+        },
+        "revision": 8,
+        "sha256": "a5f9d391530d3570d3fe5264c5e1c6d3b16e90db52eb7994616dbcb4e3d5837f"
+      },
+      "directory_receipt": {
+        "entry_count": 52,
+        "journal": {
+          "action_id": "caf627c08dd47c7c28632de71fb9ef504e6ecb9e39031ed4e7362c4b4b24afdf",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "a27ff4759dc284f8a134da0a19f76dc820cd30dee5c59eff8e8251ac08320b83",
+          "line": 19,
+          "occurred_at": "2026-08-31T17:27:22Z"
+        },
+        "path": ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY",
+        "revision": 2,
+        "sha256": "b018ec466649abd1d627c4087e86848681ab0d579d30661b5cf66c9d39f717c4"
+      },
+      "scope_unit": "101_LAYER_1_FRAMEWORK_METHODOLOGY"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/07_delivery/CA-D-018-DELIVERY-FR_ENGN--bind-framework-engine-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/07_delivery/archive/CA-D-018-DELIVERY-FR_ENGN--bind-framework-engine-delivery-place@7.md",
+          "revision": 7,
+          "sha256": "5694343be217e69f8be1f753a09bef5a0e4e2214afa2ea254f00551be201c2f5"
+        },
+        "revision": 8,
+        "sha256": "b0576e0385124f6fe06b64aa1e3c89db7e1c473bc44e9a53773553b2a0722ce7"
+      },
+      "directory_receipt": {
+        "entry_count": 1935,
+        "journal": {
+          "action_id": "937a489f06b74a0b8cdece9cbac45dd71a80e4d200b02308288eddcc55e4d5b1",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "36a6d394dbcf758d28e37b5760de9f506d5d68d7ec4fc2a8b819b4656e7d6360",
+          "line": 17,
+          "occurred_at": "2026-08-31T17:24:03Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE",
+        "revision": 9,
+        "sha256": "73190ff108892a8e271ce87a935c92102622e6e8fc8d9ceabd8d8a8d9b333752"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/CA-D-251-DELIVERY-PROGRAMMATIC--bind-programmatic-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/07_delivery/archive/CA-D-251-DELIVERY-PROGRAMMATIC--bind-programmatic-delivery-place@3.md",
+          "revision": 3,
+          "sha256": "2198e8bd05cd8a3f0260f2bf718dd9876bd126bb75b15ba8db22bf0896d091bc"
+        },
+        "revision": 4,
+        "sha256": "8103fefa7d5c6e74ce5c36abf45fec4271e7e7966cbbd10b00909ebe6d8cddc8"
+      },
+      "directory_receipt": {
+        "entry_count": 1756,
+        "journal": {
+          "action_id": "8f84bd24e2c0cd591796ea8c8c921d123937364bfe0a57c4e22639caa6c68d1b",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "b312b74bbd1b12c1a7727f05e60b41d9bce319dbb723c4a7e7604130311f526b",
+          "line": 11,
+          "occurred_at": "2026-08-31T17:20:50Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC",
+        "revision": 6,
+        "sha256": "7019200c34705c57f4839e394b34baf09be11687b326c504a816fc75736a5dd9"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-025-DELIVERY-TOOLS--bind-tools-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/archive/CA-D-025-DELIVERY-TOOLS--bind-tools-delivery-place@6.md",
+          "revision": 6,
+          "sha256": "5835f76a3c193232b6135120409f390c36a424b55fc439256fb97bd6ce471522"
+        },
+        "revision": 7,
+        "sha256": "47001513b17833c25516e037d760969bc5efe97b3d1a9be710f3e2476a4f277d"
+      },
+      "directory_receipt": {
+        "entry_count": 1321,
+        "journal": {
+          "action_id": "b8cdf8e7f5fa2de7f0b208c36a74d2c7194c4437b20ede983f01b52717e9b92a",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "664589e055ab3d98949c7362be82db16b2500cb5ad0892c1b69349add8b07789",
+          "line": 5,
+          "occurred_at": "2026-08-31T17:18:02Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS",
+        "revision": 3,
+        "sha256": "15eae63368c929cbbfbbd4405461d8e80782f9f2586b751567497b184162fe6d"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/07_delivery/CA-D-023-DELIVERY-APPS--bind-apps-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/07_delivery/archive/CA-D-023-DELIVERY-APPS--bind-apps-delivery-place@7.md",
+          "revision": 7,
+          "sha256": "fe640364587467dfe3f30475fdcc359b8b623156378f16ee7848f4aa03a083c1"
+        },
+        "revision": 8,
+        "sha256": "203e9610ec01d2c2c4817e3b081cef89c28bd639b65e9dd38a30ecc6a35713f5"
+      },
+      "directory_receipt": {
+        "entry_count": 116,
+        "journal": {
+          "action_id": "14807911bfb2c807e692663cb6897f409a7674b8669711233aa0f3c24cb2a7a3",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "e8675ac5099633b456eca115ac2d1707f018f0b0c217970851c4c57126e85b1a",
+          "line": 7,
+          "occurred_at": "2026-08-31T17:20:17Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS",
+        "revision": 3,
+        "sha256": "c5cb08057357b27cfa57b0ba6e975f53e48362e19cac0bde1ee165535a14c8bc"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP/07_delivery/CA-D-049-DELIVERY-MCP--bind-mcp-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP/07_delivery/archive/CA-D-049-DELIVERY-MCP--bind-mcp-delivery-place@3.md",
+          "revision": 3,
+          "sha256": "33b7ed0df540b1e7c05ddbb64012c1aa1e585b77fa7be1514ee6b7bfb360e6fc"
+        },
+        "revision": 4,
+        "sha256": "7c2ffd0063be8bac15cabfb57068951a4635bdc357c020e5d239f85936fb12fd"
+      },
+      "directory_receipt": {
+        "entry_count": 161,
+        "journal": {
+          "action_id": "f4a6c0405cffe7bc49e3019347c6231573d424e9dd659026571461cf00033d61",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "944ec9b3a0801df66402a7423f677d0276b9c9c80e166339ecae72688721ebcc",
+          "line": 9,
+          "occurred_at": "2026-08-31T17:20:31Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP",
+        "revision": 3,
+        "sha256": "595ed5e1de5c3f2c432b52b4bbb722050e1865d2d86f2437f79af421112ac449"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/202_AGENTIC/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/07_delivery/CA-D-252-DELIVERY-AGENTIC--bind-agentic-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/07_delivery/archive/CA-D-252-DELIVERY-AGENTIC--bind-agentic-delivery-place@3.md",
+          "revision": 3,
+          "sha256": "085cc97539c00d93e284e195e92ee36814b7f1ab4a8477708fb7e89d3d51277e"
+        },
+        "revision": 4,
+        "sha256": "d7707a6aca4fe9f33625a8adb538269a56a9907d8b044d837911e15407e708b7"
+      },
+      "directory_receipt": {
+        "entry_count": 33,
+        "journal": {
+          "action_id": "53a391d5675f2c301cb46218f5b7aae4cf60fcf94b93cf97a53c7b310c299d30",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "2c25d0890074e977e7a051237ee8270d1c09a04c91ce4e54abad976a2bdf44ae",
+          "line": 15,
+          "occurred_at": "2026-08-31T17:23:58Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC",
+        "revision": 3,
+        "sha256": "cc48abb82886715e7d3b51a9b5e95881fd16f16e80a38c3b7e688fa8a52da0a3"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/",
+        "delivery_path": "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/",
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/07_delivery/CA-D-024-DELIVERY-SKILLS--bind-skills-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS/07_delivery/archive/CA-D-024-DELIVERY-SKILLS--bind-skills-delivery-place@6.md",
+          "revision": 6,
+          "sha256": "dda165f5d32eac396b8c7703dc55bea1a65390e1bf450c79535bf27ca9f45cf0"
+        },
+        "revision": 7,
+        "sha256": "1132720548fbefe6f92fc42e75908b1f91a54eb8632a465bb0b1e7f174228483"
+      },
+      "directory_receipt": {
+        "entry_count": 29,
+        "journal": {
+          "action_id": "63f371c9a4fbb67b36dacf648391833d0e576144ff93ecc4a7786297a0ebe8c7",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "d782811b1b734f320bc8a1bca2097709f1db2d56dc26d0081157fdc5d5e1d81b",
+          "line": 13,
+          "occurred_at": "2026-08-31T17:23:53Z"
+        },
+        "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS",
+        "revision": 2,
+        "sha256": "00c6c24ffeeacf7087043d218a80706be97cead0a9ebbbe07f6fe32b6b0d9df6"
+      },
+      "scope_unit": "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION/",
+        "delivery_path": "103_OPERATOR_DOCUMENTATION/",
+        "path": ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION/07_delivery/CA-D-019-DELIVERY-OPER_DOC--bind-operator-documentation-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION/07_delivery/archive/CA-D-019-DELIVERY-OPER_DOC--bind-operator-documentation-delivery-place@6.md",
+          "revision": 6,
+          "sha256": "2bd9fa3ec22cbde05d9012cbe83fa5c380984e34312daa00b4939396337c438c"
+        },
+        "revision": 7,
+        "sha256": "a04241f6b7bb9a76afc4d30972bb4eebf92345cde8bdfae419a3d3e314ad1032"
+      },
+      "directory_receipt": {
+        "entry_count": 6,
+        "journal": {
+          "action_id": "c3bdfdd3f79b58843a9e3268e1b8b346cd3aee505cac92c729bb2a35d9d53fd3",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "b140366009273a33f360639dd090809939703099a89f36dc46bf93e4c258178d",
+          "line": 21,
+          "occurred_at": "2026-08-31T17:27:30Z"
+        },
+        "path": ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION",
+        "revision": 2,
+        "sha256": "3a8b310feaccd5e85ecdb09bf5a14e5569d701f18530d8a9b725e310bedbe53b"
+      },
+      "scope_unit": "103_LAYER_3_OPERATOR_DOCUMENTATION"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/",
+        "delivery_path": "104_CORE_EXTENSIONS/",
+        "path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/07_delivery/CA-D-020-DELIVERY-CORE_EXTENSIONS--bind-core-extensions-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS/07_delivery/archive/CA-D-020-DELIVERY-CORE_EXTENSIONS--bind-core-extensions-delivery-place@5.md",
+          "revision": 5,
+          "sha256": "00a16117deac212c75f2e12e32f269fdcb6bde043ada3589b679e98bdb5bc65f"
+        },
+        "revision": 6,
+        "sha256": "b2093444f4d871afd181aaf4672359b4c8ab4ae48a666ed81e89455097b81822"
+      },
+      "directory_receipt": {
+        "entry_count": 5,
+        "journal": {
+          "action_id": "149cfeb398fd479cd3895003b6319a40dc695617fb7470613190500173b26573",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "b05f78238e330475ca3fea5ba4b8f83151371a60decdf079110bf9965ccc201f",
+          "line": 23,
+          "occurred_at": "2026-08-31T17:27:33Z"
+        },
+        "path": ".caprmedio_caprmedio/104_LAYER_4_CORE_EXTENSIONS",
+        "revision": 2,
+        "sha256": "94df077ad0c112a4eb5505c2b439b1695194bd7d5964cde9d65fe7a8efa34e75"
+      },
+      "scope_unit": "104_LAYER_4_CORE_EXTENSIONS"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/105_LAYER_5_RELEASES/",
+        "delivery_path": "105_RELEASES/",
+        "path": ".caprmedio_caprmedio/105_LAYER_5_RELEASES/07_delivery/CA-D-021-DELIVERY-RELSS--bind-releases-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/105_LAYER_5_RELEASES/07_delivery/archive/CA-D-021-DELIVERY-RELSS--bind-releases-delivery-place@5.md",
+          "revision": 5,
+          "sha256": "b8fa6ef31e1e4d0ab8b39bce0dc2485d77b5f2ef46102d346f00dd049db5b513"
+        },
+        "revision": 6,
+        "sha256": "be25aa198025d6a41639028d3c56c44e827d1aa9ef94badd869bfae63b3869ed"
+      },
+      "directory_receipt": {
+        "entry_count": 5,
+        "journal": {
+          "action_id": "428263691720a8da0fdaf063dbea2149f31cc36a0ea2957db94fc33514b9a2ae",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "5b3f74b12ddbea349cd26895701bb0a5326e70f21aca63b46f82227aa70358d7",
+          "line": 25,
+          "occurred_at": "2026-08-31T17:27:36Z"
+        },
+        "path": ".caprmedio_caprmedio/105_LAYER_5_RELEASES",
+        "revision": 2,
+        "sha256": "f80f63fd382e7306c32da6677227cfc5cd3580d8d3588b2375d651336b6d9d96"
+      },
+      "scope_unit": "105_LAYER_5_RELEASES"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS/",
+        "delivery_path": "110_COMMUNITY_EXTENSIONS/",
+        "path": ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS/07_delivery/CA-D-026-DELIVERY-COMMUNITY_EXTENSIONS--bind-community-extensions-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS/07_delivery/archive/CA-D-026-DELIVERY-COMMUNITY_EXTENSIONS--bind-community-extensions-delivery-place@2.md",
+          "revision": 2,
+          "sha256": "405c2088e6d519a9b21c4d729859f4b37ca364a1159317cf75ffe70c9f057aee"
+        },
+        "revision": 3,
+        "sha256": "7fc50435aac06c213d18e73acf69f941b7e89df76c4e814bbd816798c70cc0b9"
+      },
+      "directory_receipt": {
+        "entry_count": 3,
+        "journal": {
+          "action_id": "699520d9ebf16e5049643526b828991724f38ccac0ec0f14206e170d66ffcbcc",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "cbac52b5c204fed4738a845702eedaa01089d937029417d9386a71a16bc0112d",
+          "line": 27,
+          "occurred_at": "2026-08-31T17:27:42Z"
+        },
+        "path": ".caprmedio_caprmedio/110_FEATURE_COMMUNITY_EXTENSIONS",
+        "revision": 2,
+        "sha256": "b378b8daac528efb3b9361fe45ad5247e5013c3cc3dfdd46f6c8cc36e33e9f37"
+      },
+      "scope_unit": "110_FEATURE_COMMUNITY_EXTENSIONS"
+    },
+    {
+      "delivery_atom": {
+        "authority_path": ".caprmedio_caprmedio/110_FEATURE_FIELD/",
+        "delivery_path": "110_FIELD/",
+        "path": ".caprmedio_caprmedio/110_FEATURE_FIELD/07_delivery/CA-D-022-DELIVERY-FIELD--bind-field-delivery-place.md",
+        "predecessor_archive": {
+          "path": ".caprmedio_caprmedio/110_FEATURE_FIELD/07_delivery/archive/CA-D-022-DELIVERY-FIELD--bind-field-delivery-place@5.md",
+          "revision": 5,
+          "sha256": "c20e566142659874774d540d4b4c58553f727f11c401833ca57b95644f5a73ad"
+        },
+        "revision": 6,
+        "sha256": "cf455b310315e8f782cda60a02c084711891395514528e666be52c00b9e1747d"
+      },
+      "directory_receipt": {
+        "entry_count": 5,
+        "journal": {
+          "action_id": "f17acf0c5ba64c027b5ed7671c8e7aee54d2fe99ac2087844b301e4fdd47a70c",
+          "carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-31-part-1.ndjson",
+          "event_id": "c138e42e1a9374e20f95f56237d881959185a31f047f00aa46ed0fcd01b91841",
+          "line": 29,
+          "occurred_at": "2026-08-31T17:27:49Z"
+        },
+        "path": ".caprmedio_caprmedio/110_FEATURE_FIELD",
+        "revision": 2,
+        "sha256": "e45c945c5f304486095eee8fc624c2d2b38c83e1ba3f8ed3214c3daf31bbc1fc"
+      },
+      "scope_unit": "110_FEATURE_FIELD"
+    }
+  ],
+  "validation": {
+    "receipt_coverage": "13/13",
+    "canonical_folder_receipt_digests_valid": true,
+    "each_receipt_binds_current_delivery_atom_sha256": true,
+    "delivery_atom_revision_is_bound_by_its_receipt_entry": true,
+    "scope_unit_worktrees_clean_at_validation": true,
+    "git_diff_check_passed": true
+  },
+  "boundary": "CA-P-932 owns registered Projection rebuild. The two stale Project Scope Unit Graph Projections and the pre-existing 2026-08-30 Work Journal modification were not changed."
+}

@@ -1,0 +1,669 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1086",
+  "stage": "graph_types",
+  "generated_at": "2026-09-13T13:05:58+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_partial_stage",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1562,
+    "frontier_after": 1563,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-657",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "before_version": 10,
+      "before_sha256": "f32e08e788878493a86817fe565a6599cfb9dab3da9793c3789e245e06141157",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "version": 11,
+      "sha256": "95c5081e91f2de4a97c5a8ec8db11e8c3649a4a5074760ac32d3f44926290267",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form@10.md",
+      "archive_sha256": "f32e08e788878493a86817fe565a6599cfb9dab3da9793c3789e245e06141157",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Replace the Atom-plus-Journal-only source boundary with the accepted per-fact authority boundary, distinguish governing specification from derived contents, and admit traceable Projection chains without a universal persisted frontier.",
+      "governs": "Projection",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1438",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+      "before_version": 1,
+      "before_sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+      "version": 2,
+      "sha256": "ab3c48debce5a43fc83b74aeb3edec399373912f7b01a8aead655a4f31bf334b",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph@1.md",
+      "archive_sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Explicitly admit the existing Entities Graph as the approved Projection Type; preserve Entity nodes and graph-kind Relation authority.",
+      "governs": "Projection/Type: Entities Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1335",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "before_version": 6,
+      "before_sha256": "a49e4b7531c297eb1c72af884868e65c2f2e92e1919b792885fca8be1d50042b",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "version": 7,
+      "sha256": "08350d693ec2b1966c097c5449e0abc5479f3bd599d80d86bbb0d84e397fc6d3",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph@6.md",
+      "archive_sha256": "a49e4b7531c297eb1c72af884868e65c2f2e92e1919b792885fca8be1d50042b",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Explicitly admit the existing Terms Graph as the approved Projection Type; preserve Term nodes and graph-kind Relation authority.",
+      "governs": "Projection/Type: Terms Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1456",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+      "before_version": 1,
+      "before_sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority.md",
+      "version": 2,
+      "sha256": "574651e7d6b2eb643e9eb529dd87fe46b84f0515562e6b9ff65d010fb12820c7",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1456-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-entities-views-from-selected-authority@1.md",
+      "archive_sha256": "292d8bd7e4e63ffcafe486a874447e4209877deff4cdbafe728431211951daae",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Move the governing target into its admitted Projection Type; preserve the exact source-Claim admission gates, source/display selection, native identities, graph ownership, sharing and bearer/allowed-value checks while tracing represented structural/historical facts and upstream graph Projections to their actual sources.",
+      "governs": "Projection/Type: Entities Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1454",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "before_version": 1,
+      "before_sha256": "32c6d2f4740c024cbf4bb9f3de4f03b11836fef3f0bb8917069b146ef35c646b",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority.md",
+      "version": 2,
+      "sha256": "80c57bc3f4c15363ecee6700c72320594a1457fd17d4d251ad385e3396fc27b9",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1454-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-governed-terms-views-from-selected-authority@1.md",
+      "archive_sha256": "32c6d2f4740c024cbf4bb9f3de4f03b11836fef3f0bb8917069b146ef35c646b",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Assign the governed-only view rule to its admitted Terms Graph Projection Type and allow a traceable upstream Projection while preserving exact Definition Atom and Relation-source selection.",
+      "governs": "Projection/Type: Terms Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1455",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "before_version": 1,
+      "before_sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md",
+      "version": 2,
+      "sha256": "fb5458fd7603cf2edf16187d35418f9c9decf03a288e0b52fc1c3155e61315ff",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1455-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes@1.md",
+      "archive_sha256": "49d2c877718c97b19177b3078d785de366a62fadec84450a9123ee5e17648a61",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "semantic_delta": "Update only the Terms Graph prerequisite to its newly admitted canonical Projection Type path; preserve the complete diagnostic-index Claim and its separate Projection target.",
+      "governs": "Terminology Projection",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-382",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "before_version": 11,
+      "before_sha256": "4d29bf7bad708983cc9d4f5a97852be8064ac526c162e247bc3c02a5cc322f13",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "version": 12,
+      "sha256": "f85892e79d9ee2d5305982066c6b1195310863cb42d09a74f9f3088936796a2c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph@11.md",
+      "archive_sha256": "4d29bf7bad708983cc9d4f5a97852be8064ac526c162e247bc3c02a5cc322f13",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Assign graph checks to the actual Terms Graph Projection rather than an unestablished validation Property; preserve existing Term and Relation checks and add only direct source-authority/chain checks.",
+      "governs": "Projection/Type: Terms Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-E-449",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "E",
+      "local_tier": "General",
+      "global_tier": 8,
+      "status": "Active",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+      "before_version": 2,
+      "before_sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+      "version": 3,
+      "sha256": "5634cb3e6dae8378bc36fa86343c5abed4ebbe5d120dd36303daf9e67b58bf82",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph@2.md",
+      "archive_sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "semantic_delta": "Assign graph checks to the admitted Entities Graph Projection, preserve all source-Claim admission gates and native Entity/Relation constraints, and add actual structural/historical-source provenance and immediate Projection-chain checks.",
+      "governs": "Projection/Type: Entities Graph",
+      "primary_claim_preserved": true,
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1459",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "before_path": null,
+      "before_version": null,
+      "before_sha256": null,
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1459-CORE_META_MODEL-CORE-REQUIREMENT--define-extended-entities-graph.md",
+      "version": 1,
+      "sha256": "908af25b00a5c0e4e3c6d119e1c6b0d5957856f75099b325cc253c903d82596b",
+      "archive_path": null,
+      "archive_sha256": null,
+      "action": "ADD",
+      "change_class": "new_definition",
+      "semantic_delta": "Admit only the explicitly Operator-requested composite Projection Type: Entity structure together with its governing/dependent Atoms and source-derived Subjects links. Detailed link mechanics and navigation remain downstream.",
+      "governs": "Projection/Type: Extended Entities Graph",
+      "primary_claim_preserved": false,
+      "new_identity": true
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1086",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "before_version": 3,
+      "before_sha256": "167ca48e26245c8174219991835c5a0771f8d8d7f4889953e4c0c5d98b78b526",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections.md",
+      "version": 4,
+      "sha256": "ac9501b86904bc9c9165311a109289327e4fdc411ae5c56c37ce18a84e6c70c0",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/02-CA-P-1086-TASK--separate-source-authority-from-derived-projections@3.md",
+      "archive_sha256": "167ca48e26245c8174219991835c5a0771f8d8d7f4889953e4c0c5d98b78b526",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "delta": "Record the approved graph Types and exact partial-stage evidence while retaining Active status and the remaining E444 transition."
+    },
+    {
+      "identity": "CA-P-1083",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/07-CA-P-1083-TASK--define-composed-atom-and-entity-navigation.md",
+      "before_version": 2,
+      "before_sha256": "6498c2385b8dcbc4a5c244f7aad96f3946478a9526f1dae15edb87d9d7542714",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/07-CA-P-1083-TASK--define-composed-atom-and-entity-navigation.md",
+      "version": 3,
+      "sha256": "50c77139aa62162c2788e9fe8622f8956162494cbba51257d5154b773bdbc783",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/archive/07-CA-P-1083-TASK--define-composed-atom-and-entity-navigation@2.md",
+      "archive_sha256": "6498c2385b8dcbc4a5c244f7aad96f3946478a9526f1dae15edb87d9d7542714",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "delta": "Align the future composed-navigation Task with the accepted Extended Entities Graph definition, preserve distinct Subject Projection authority, and do not execute its work."
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-partial-stage.md",
+      "version": 1,
+      "sha256": "e3b3452b7b385ec665ea58419b05fbba77fac416c63722955f79d269e798c4f4",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_transfers": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-657",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+      "current_version": 10,
+      "current_sha256": "f32e08e788878493a86817fe565a6599cfb9dab3da9793c3789e245e06141157",
+      "prior_reservation": {
+        "identity": "CAPRMEDIO-META-REQU-657",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+        "version": 10,
+        "sha256": "f32e08e788878493a86817fe565a6599cfb9dab3da9793c3789e245e06141157",
+        "content_mutation_owner": "CA-P-1083",
+        "family": "projection_and_traceability_context"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-R-1438",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+      "current_version": 1,
+      "current_sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+      "prior_reservation": {
+        "identity": "CA-R-1438",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+        "version": 1,
+        "sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+        "content_mutation_owner": "CA-P-1081",
+        "family": "entity_qualification"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-R-1335",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+      "current_version": 6,
+      "current_sha256": "a49e4b7531c297eb1c72af884868e65c2f2e92e1919b792885fca8be1d50042b",
+      "prior_reservation": {
+        "identity": "CA-R-1335",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+        "version": 6,
+        "sha256": "a49e4b7531c297eb1c72af884868e65c2f2e92e1919b792885fca8be1d50042b",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-E-382",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+      "current_version": 11,
+      "current_sha256": "4d29bf7bad708983cc9d4f5a97852be8064ac526c162e247bc3c02a5cc322f13",
+      "prior_reservation": {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+        "version": 10,
+        "sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    },
+    {
+      "identity": "CA-E-449",
+      "current_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+      "current_version": 2,
+      "current_sha256": "c81405317f7dd842754f0970889218b87b9e884aea67a199a82d4874d8a5a7c5",
+      "prior_reservation": {
+        "identity": "CA-E-449",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+        "version": 1,
+        "sha256": "bb968d91224e78919a011366991381421868c73bf0aa3896bea4566fa5c00bd8",
+        "content_mutation_owner": "CA-P-1081",
+        "family": "entity_qualification"
+      },
+      "new_owner": "CA-P-1086",
+      "bounded_reason": "Reserve only a demonstrated source-versus-Projection definition, direct Subject assignment, source-kind/chain, or immediate supporting-check correction. Preserve established selection and specialty semantics; exact canonical Projection paths remain for P1086. A reservation does not require rewriting a coherent Claim.",
+      "readers": [
+        "CA-P-1088",
+        "CA-P-1089",
+        "CA-P-1090",
+        "CA-P-1091",
+        "CA-P-1082",
+        "CA-P-1083",
+        "CA-P-1084",
+        "CA-P-1085",
+        "CA-P-980",
+        "CA-P-983"
+      ]
+    }
+  ],
+  "reservation_dispositions": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-657",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CAPRMEDIO-META-REQU-657",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-657-CORE_META_MODEL-CORE-REQUIREMENT--define-projection-artifact-form.md",
+        "version": 10,
+        "sha256": "f32e08e788878493a86817fe565a6599cfb9dab3da9793c3789e245e06141157",
+        "content_mutation_owner": "CA-P-1083",
+        "family": "projection_and_traceability_context"
+      }
+    },
+    {
+      "identity": "CA-R-1438",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-R-1438",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1438-CORE_META_MODEL-CORE-REQUIREMENT--define-entities-graph.md",
+        "version": 1,
+        "sha256": "ef5c1c956ba53b7dde23de1c57cfecc30b89dfdbb958ba208197cd71c334564e",
+        "content_mutation_owner": "CA-P-1081",
+        "family": "entity_qualification"
+      }
+    },
+    {
+      "identity": "CA-R-1335",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-R-1335",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1335-CORE_META_MODEL-CORE-REQUIREMENT--define-terms-graph.md",
+        "version": 6,
+        "sha256": "a49e4b7531c297eb1c72af884868e65c2f2e92e1919b792885fca8be1d50042b",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      }
+    },
+    {
+      "identity": "CA-R-1456",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    },
+    {
+      "identity": "CA-R-1454",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    },
+    {
+      "identity": "CA-R-1455",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "new_bounded_reservation",
+      "prior_inventory_entry": null
+    },
+    {
+      "identity": "CA-E-382",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-E-382",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION--validate-terms-graph.md",
+        "version": 10,
+        "sha256": "a15a4567871234cb6c2d2dffbf5d5baa3f5db8f50f22b5f458bb612d90f079d2",
+        "content_mutation_owner": "CA-P-1079",
+        "family": "governed_terms"
+      }
+    },
+    {
+      "identity": "CA-E-449",
+      "content_mutation_owner": "CA-P-1086",
+      "ownership_disposition": "bounded_transfer",
+      "prior_inventory_entry": {
+        "identity": "CA-E-449",
+        "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION--validate-entities-graph.md",
+        "version": 1,
+        "sha256": "bb968d91224e78919a011366991381421868c73bf0aa3896bea4566fa5c00bd8",
+        "content_mutation_owner": "CA-P-1081",
+        "family": "entity_qualification"
+      }
+    }
+  ],
+  "new_definition_authority": {
+    "identity": "CA-R-1459",
+    "operator_decision": "Explicitly add Extended Entities Graph with Atoms as a Projection Type.",
+    "root_id_reservation": "CA-R-1459",
+    "pending_ids_untouched": [
+      "CA-R-1457",
+      "CA-R-1458"
+    ]
+  },
+  "read_only_authority": [
+    {
+      "identity": "CA-R-1246",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1246-CORE_META_MODEL-CORE-REQUIREMENT--keep-relation-vocabularies-graph-specific.md",
+      "version": 6,
+      "sha256": "9497ecab1ab9268222169ee8c2106fb371c2478b0c1ff0f57bb5f2dac3388e0a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1248",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md",
+      "version": 6,
+      "sha256": "b9b82cbe4f2cb1c4e4632e1c34eb69cd47dea5cb01b107e2780eee5a9af2502d",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1437",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1437-CORE_META_MODEL-CORE-REQUIREMENT--keep-one-source-for-each-relation-fact.md",
+      "version": 1,
+      "sha256": "e768d7e2d230ce8f51580e268b0803d7b1bc2ff11ec82c1893a5de0a789a05d4",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1279",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+      "version": 7,
+      "sha256": "41df6af5cfbf5a1362225ccbc2cd96bcff99cad851fd03ea43f3c55f3d9efd92",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1194",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md",
+      "version": 7,
+      "sha256": "ee7857cb95a44448aaa511c289c2ff0d2b17f5de046f1f13fa528a865484861a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1204",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1204-CORE_META_MODEL-REQUIREMENT--use-subject-path-slash-only-for-bearer-qualification.md",
+      "version": 6,
+      "sha256": "c7a6ce361c2c0fcbbf72ed035de42b12c880c7df30e2104546bbfa157f3b7157",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1281",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1281-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-projection-as-derived-navigation.md",
+      "version": 4,
+      "sha256": "3208269a3a20588f9b4e07728267e9417fe0914919db559238d00b3d2197c66a",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1405",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1405-CORE_META_MODEL-CORE-REQUIREMENT--register-core-artifact-type-values.md",
+      "version": 4,
+      "sha256": "b6544e569825236831ac0add2c90ec6a3f7e54ae0b4504c6ad1659184abcc356",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-741",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-741-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-artifact-type-admission-through-narrower-than.md",
+      "version": 12,
+      "sha256": "42c967afdd86498c13552f1d7743d7b3b6912835174504f03cd28ce20bcfd056",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-166",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-166-CORE_META_MODEL-REQUIREMENT--projections-have-updated-at.md",
+      "version": 11,
+      "sha256": "8755265d66709fabe50e7b9c47a0c7f91919347a6f30415b413ca1827593a364",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-E-444",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md",
+      "version": 3,
+      "sha256": "df3f04b7af2695008bcc1e763b33f0bca899b1974c07d7618ea3db26b8bf0eae",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-M-274",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-274-CORE_META_MODEL-METHOD--persist-atom-replacement-through-ordered-carrier-transitions.md",
+      "version": 1,
+      "sha256": "19b46d69e939e50c0cea217b20a168b63daa55efb907da8cd8fa6ffec52288dd",
+      "scope_unit": "CORE_META_MODEL"
+    },
+    {
+      "identity": "CA-R-1432",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-admitted-atom-changes-by-semantic-effect.md",
+      "version": 1,
+      "sha256": "a482003778ea6770097e431d452b434650c5649e227e871d68b5e54fcae435c2",
+      "scope_unit": "CORE_META_MODEL"
+    }
+  ],
+  "remaining_reserved_sources": [
+    "CAPRMEDIO-GOV-REQU-313",
+    "CAPRMEDIO-META-REQU-166",
+    "CAPRMEDIO-META-REQU-673",
+    "CA-R-1281",
+    "CA-R-1325",
+    "CA-R-1213",
+    "CA-R-1272",
+    "CA-R-1273",
+    "CA-R-1274",
+    "CA-R-626",
+    "CAPRMEDIO-META-REQU-620",
+    "CAPRMEDIO-META-REQU-627",
+    "CAPRMEDIO-META-REQU-123",
+    "CAPRMEDIO-GOV-REQU-354",
+    "CA-M-114",
+    "CA-M-116",
+    "CA-M-231",
+    "CA-E-444",
+    "CA-R-1408",
+    "CA-R-1409"
+  ],
+  "remaining": {
+    "task_done": false,
+    "graph_type_admissions": "Entities Graph, Terms Graph, Extended Entities Graph approved and applied",
+    "E444_transition": "Separate underlying Term checks from diagnostic-index checks under governed transition; no M274 exception approved.",
+    "other_tasks_executed": []
+  },
+  "journal": {
+    "action_id": "execute-ca-p-1086-graph-types-partial-stage",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations authorized"
+  },
+  "validation": {
+    "existing_source_revisions": 8,
+    "new_source_ids": 1,
+    "unrelated_admitted_sources_unchanged": 1554,
+    "drafts_unchanged": 53,
+    "task_status": "Active",
+    "raw_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "implementation_conformance_claimed": false
+  }
+}

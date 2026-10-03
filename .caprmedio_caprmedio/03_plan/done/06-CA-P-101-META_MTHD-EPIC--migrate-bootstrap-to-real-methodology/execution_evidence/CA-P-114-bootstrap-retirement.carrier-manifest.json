@@ -1,0 +1,2388 @@
+{
+  "schema": "caprmedio.ca_p_114.bootstrap_retirement_carrier_manifest.v1",
+  "task_atom_id": "CA-P-114",
+  "task_revision": 2,
+  "map_reconciliation": "CA-P-108 v13 OUT_OF_SCOPE_RETAIN_IN_PLACE superseded for this remaining legacy root by later Operator topology",
+  "mappings": [
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/CA-C-106-MMODEL-QUESTION--which-accepted-subject-and-projection-decisions-remain-unmaterialized.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/CA-C-106-MMODEL-QUESTION--which-accepted-subject-and-projection-decisions-remain-unmaterialized.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 768,
+      "sha256": "c0fb56f4af474b7421c01b17c671c0e9cd859bfbd2f6b2a0af46b436e068a8b8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 506,
+      "sha256": "c2ba8dda2cb839d38c98d046aba3fa2ccda6b09b56a4519622b00956bcf42bd8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1079,
+      "sha256": "1f1241adf61213b567800bf66f8d926622dd34e6293906fad34c68281eb455c8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 489,
+      "sha256": "96567bf5b8bb5b8ff8ffff62e22156e59ff165b323cc557702e8dbd64696bbc6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 443,
+      "sha256": "252cc075dab0c04dd57988bbe08d073b1ed401cb212a418d32ecece4e684ee7d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 437,
+      "sha256": "abdffbc8aa590e02972991abbb49960d4e16abe3bad532d80b69919226cddc8c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-C-094-QUESTION-BSEED_METAMODEL--how-should-metamodel-be-compiled@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 475,
+      "sha256": "964525545a2f8a33182de380fdad9fd57ef716c4842b1a4a77c3493cff7f5f7c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-006--should-caprmedio-standardize-journey@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-006--should-caprmedio-standardize-journey@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 592,
+      "sha256": "4345d6dd7fca08bc30f4ae3ba2bcfebebf46278763c4768e33c40f3abe956573"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-007--should-caprmedio-standardize-actor-and-persona@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-007--should-caprmedio-standardize-actor-and-persona@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 632,
+      "sha256": "67ca40d5e0a8e0355982dacfccab4c774176d48f7eb8b50f084b478f6a27ff3f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-008--should-caprmedio-standardize-hypothesis-and-experiment@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-008--should-caprmedio-standardize-hypothesis-and-experiment@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 636,
+      "sha256": "8f2f84fe40b700d34230aa69c00088f4173b3a4f9d7eea1625bf0a838237549b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-009--should-evidence-context-be-separate-from-work-area@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-009--should-evidence-context-be-separate-from-work-area@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 677,
+      "sha256": "fc044ede4f323e7c59c0644cec4dea2aef970c31ca6e97ffa5b3ed8143688d0a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-010--should-work-areas-expose-optional-descriptive-tags@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/archive/CAPRMEDIO-META-CONC-010--should-work-areas-expose-optional-descriptive-tags@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 676,
+      "sha256": "b2dc888ea29399c7767dd1e2139b021a8e6bd8a64f57979be78924f1175c3970"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CA-C-099-QUESTION-BSEED_METAMODEL--does-artifact-semantic-shape-need-an-axis.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CA-C-099-QUESTION-BSEED_METAMODEL--does-artifact-semantic-shape-need-an-axis.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 779,
+      "sha256": "05ea73ddbfb343a09b07d45a101321de8bf81cbca130fe97ee065a40e717f7bf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CA-C-101-QUESTION-BSEED_METAMODEL--what-scope-owns-relations-among-root-bootstrap-seed-layers.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 498,
+      "sha256": "e9cf432be01fd36014620ba6eec5a9000b361b17159708bd48568410ef850e6b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/01_concern/solved/CAPRMEDIO-META-CONC-012--structural-level-necessity-is-not-operationalized.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 486,
+      "sha256": "4bb4a1837c245ebb7b28e844d486a3835a3eccc18449727238fb9efeb0f8f10b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CA-A-063-MMODEL-ANALYSIS_RPRT--reconcile-seven-day-bseed-subject-and-projection-frontier.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CA-A-063-MMODEL-ANALYSIS_RPRT--reconcile-seven-day-bseed-subject-and-projection-frontier.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 5246,
+      "sha256": "4b61cad789f62df9c8215ed8df63d89f97a023d12acd6cc081b5b3bec731f282"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3524,
+      "sha256": "edcb7f562913a0b89f840a6b049108397c0f05f002f0496059496437651f090f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2871,
+      "sha256": "55102634bba5065fec52721813a00fad0132612eaf2e90f6bbd8d1667e163753"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6888,
+      "sha256": "269cd3e1627c773061327cdd06786c8db59bdc52a5a1339342955d6cedfef3f9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3424,
+      "sha256": "2b2aef55f97651758525c0fdc53a4e085988c90f9d5b236e39bc725d453d3cbb"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3455,
+      "sha256": "c4750dcf1c7d1724a42dddec23cece3c14266d0b0f16a39ccb9856b7f16735a2"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-007--plan-role-and-implementation-boundary@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3493,
+      "sha256": "8ea65ea60338ee5277b4cb1d6df2f709b6bd3f8fbb2d1d3174eacc2fbca2ef8b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2715,
+      "sha256": "f03af6e845469b84614e2291e3ac1cd93231bb5255e6258d1a85d6e135eac8e3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2765,
+      "sha256": "b08d49c45707ab16b16d6b9ee8a8464c504dff08560e3c370b835b819ff9cc16"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2803,
+      "sha256": "b0da9ece766c38968379e2dd129970567a75b5e9c3e4ac9e5e17193c512dcfa6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-009--projection-generation-subtypes@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2839,
+      "sha256": "1ceb83ac746c6970406a11da32f40c628425d1cd80c82c315664e4cddc47e686"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6792,
+      "sha256": "931a9aaf79f76a79df2a3c92d6354ce3e303991ad067a1f10509317d67ab489a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6818,
+      "sha256": "20e711792a67253c0b9479a83b77177c4e35cf07b90c772940d6e75ededf7526"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-011--llm-wiki-and-graph-driven-development@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6856,
+      "sha256": "10b1b36c1e449e8295ec6e86999f000c5c0e6fe4cf920e767c8e07827adc9103"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-013--narrowest-common-scope-ownership@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-013--narrowest-common-scope-ownership@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 459,
+      "sha256": "de76f40d61a7c08746203f9f2dc278b9c19f326cfd4167aee5be0e8fbb75eb43"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-015--meta-completion-and-fpf-review@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/02_analysis/archive/CAPRMEDIO-META-ANRP-015--meta-completion-and-fpf-review@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7691,
+      "sha256": "ec4b99b1adb208611afaef9ec9b8979ad97e91824fafea9233f1d8bd019dea47"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1001-MMODEL-CORE-REQUIREMENT--define-task-goal@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1001-MMODEL-CORE-REQUIREMENT--define-task-goal@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 402,
+      "sha256": "4254a3fd0f35211c5b5838d1746846eb79307e6ef7d79df8ca3308693d30d979"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1002-MMODEL-CORE-REQUIREMENT--define-definition-of-done@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1002-MMODEL-CORE-REQUIREMENT--define-definition-of-done@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 574,
+      "sha256": "bd3a0f124ac46d89af1e32d1674e13fb081e4373e9afa61fc124a16306b2381c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1003-MMODEL-CORE-REQUIREMENT--define-task-details@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1003-MMODEL-CORE-REQUIREMENT--define-task-details@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 429,
+      "sha256": "73f994f7dadbbc65cc26782d3f23de62a37709c39cfbab918813ff6d7ec1fc01"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1004-MMODEL-CORE-REQUIREMENT--make-task-summary-express-task-goal@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1004-MMODEL-CORE-REQUIREMENT--make-task-summary-express-task-goal@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 489,
+      "sha256": "81a828fffb25d0c769e6b03f2d9d2f01819d702922ecb4d1a4bfea0740346067"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1012-MMODEL-CORE-REQUIREMENT--define-subject@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1012-MMODEL-CORE-REQUIREMENT--define-subject@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 393,
+      "sha256": "71a2c1718a6cc608f929fc20ab5c3e6c7fa4b9c84a3458947f3c434bed9b1be5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1013-MMODEL-CORE-REQUIREMENT--require-subjects-on-active-and-draft-atoms@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1013-MMODEL-CORE-REQUIREMENT--require-subjects-on-active-and-draft-atoms@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 534,
+      "sha256": "79f870a2ccb7e1fe9138abc1f1a1437e62987e5360cb6b6639a0e877a5fc1111"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1084-MMODEL-CORE-REQUIREMENT--define-claim-role@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1084-MMODEL-CORE-REQUIREMENT--define-claim-role@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 426,
+      "sha256": "233e90c22d612e7886533c8e1bbca400fc97720ac20c34aa5d70c4be1d70ef38"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1085-MMODEL-CORE-REQUIREMENT--define-declared-claim-role@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1085-MMODEL-CORE-REQUIREMENT--define-declared-claim-role@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 421,
+      "sha256": "ddaf514cba5c9d87c43a146a8de7262f37f8f5812e3ffac5588c0d7aa99a427c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1086-MMODEL-CORE-REQUIREMENT--define-prerequisite-claim-role@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1086-MMODEL-CORE-REQUIREMENT--define-prerequisite-claim-role@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 559,
+      "sha256": "4ac2e0c2fee721ab4057e5316411f83a983fb49dc837bffa55f3af1b62f88001"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1087-MMODEL-CORE-REQUIREMENT--define-claim-participant-temporal-form@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1087-MMODEL-CORE-REQUIREMENT--define-claim-participant-temporal-form@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 503,
+      "sha256": "a1eaa5ce739b7a1fb0f34cd7fcaab309899007fccaeb1c7b0e75bf9814abd201"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1088-MMODEL-CORE-REQUIREMENT--define-continuant-temporal-form@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1088-MMODEL-CORE-REQUIREMENT--define-continuant-temporal-form@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 496,
+      "sha256": "973210dd3c7a239a0330dbf3fe72fb6e245a53e615981fb1c2a4614a7e04f62a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1089-MMODEL-CORE-REQUIREMENT--define-occurrent-temporal-form@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1089-MMODEL-CORE-REQUIREMENT--define-occurrent-temporal-form@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 496,
+      "sha256": "2319ea16975489a134abd25846403b7f5f794ec8978b848c97d003b84f8e930f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1090-MMODEL-CORE-REQUIREMENT--classify-every-subject-by-both-axes@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1090-MMODEL-CORE-REQUIREMENT--classify-every-subject-by-both-axes@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 517,
+      "sha256": "73bb13ee0cdfdba54f7078b60c386e215c35cbe7bf02d45ba299c43b89397104"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1091-MMODEL-CORE-REQUIREMENT--limit-declared-subjects-by-temporal-form@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1091-MMODEL-CORE-REQUIREMENT--limit-declared-subjects-by-temporal-form@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 476,
+      "sha256": "b6a87d580daf8592989cb7bc23aa3d8e45b45588d40b2aa88e05ea4d6c92c74f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1092-MMODEL-CORE-REQUIREMENT--split-at-same-form-declared-subject-boundaries@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-1092-MMODEL-CORE-REQUIREMENT--split-at-same-form-declared-subject-boundaries@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 556,
+      "sha256": "7d806742672ca1b358cda5d8f62a2eaccc77e14a8b31cfe8b0d1ec5d641b4afa"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-989-MMODEL-CORE-REQUIREMENT--define-task-atom@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CA-R-989-MMODEL-CORE-REQUIREMENT--define-task-atom@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 522,
+      "sha256": "8070aa2cf051e82184fb64d02db729fce9a464ff230342412d6ee5eacdba8ebc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CAPRMEDIO-META-REQU-742--permit-one-internal-default-type-per-content-role@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-101_BSEED_LAYER_1_METAMODEL/04_requirement/archive/CAPRMEDIO-META-REQU-742--permit-one-internal-default-type-per-content-role@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 561,
+      "sha256": "ed480e527faf40139d17b671e8d9edf00c92950bb26a67cea1803ccaa1953f64"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 425,
+      "sha256": "e30b07c26cdc9cb1687b288b3a68c124263c86b33e0a6902d10aa18b9d8cb94d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 661,
+      "sha256": "41ff24c73ee7e108fb85c75d14a119cc4b505882bc193b8a54feea5b669fa30f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 507,
+      "sha256": "a023961dd3203a9dbba5da08fd9806a26b917a8cba6fdedfdf49b80672b8847d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 507,
+      "sha256": "d0cb6bdc3d7138926905b5020dac9d2db3476678d2c44e7cd94e543628aa2c15"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 312,
+      "sha256": "33a2b7b5594490841beaf04a03da9bc3385a9d58e375135762440ecf7d4b08de"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 357,
+      "sha256": "43eadf2dc47224a660be3409f8f6b4766ef04ab29e61c9464b5d0f116e12dfab"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@6.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-095-SEMNTC-QUESTION--decide-how-to-compile-semantics@6.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 393,
+      "sha256": "d8269cc1211d86bde12f4a943a75f1fc7e5a8992d317b1e69ecb70f5981fb0d7"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-098-QUESTION-BSEED_SEMANTICS--should-plan-be-renamed-producing@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CA-C-098-QUESTION-BSEED_SEMANTICS--should-plan-be-renamed-producing@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 815,
+      "sha256": "214438720443998a6a05e5165759797893b5f527a445dfcbc2126f402c350dde"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-C-095-QUESTION-BSEED_SEMANTICS--how-should-semantics-be-compiled@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-C-095-QUESTION-BSEED_SEMANTICS--how-should-semantics-be-compiled@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 447,
+      "sha256": "31342e738806b77b4ea448e3fd95a564a65b452233f077d4def48d5cfd3c200d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 597,
+      "sha256": "8ff1333876bb410a083ddc957a6ce176700e3a33e87b8af7557e4455251b7959"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 591,
+      "sha256": "26fbecff12917cdbc739efadb65c58b7740f7b3db1f8002cecc04b2514f236aa"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-003--what-is-the-canonical-meaning-of-a-proof-record@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 629,
+      "sha256": "c2dce36c63dd542554000192a408d01f71e5f6c4978af7458c36067e21c070e5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 443,
+      "sha256": "def1451297bb194ab14e4151006efad0cd5334e1d3a8954ab21d4306c5de6557"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 437,
+      "sha256": "ba6e32c067e52cb0672c2d0316a0813d1c42519a4c043579fef867e8a7140a1d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-004--do-concerns-need-a-draft-lifecycle@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 475,
+      "sha256": "206c3ca000f99a44808ba8474ec363a5399b8fb954c69be8cf236b7ce03e91f4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 443,
+      "sha256": "ba91beaf8e08c940b32f21cc1fb0ddf4472b615bc161159ac47f0f72893bc03a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 437,
+      "sha256": "6cf6d8a89f8b6d150bf68ba2ae89ac4bb8fa4b4be87cc32113be3e24000fed8a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-005--what-lifecycle-governs-future-implementation-atoms@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 475,
+      "sha256": "987d20b7214912413c9a100bb48aa7233d2c521f8436cc341858730328c28f42"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-011--what-lifecycle-models-govern-cap-and-io-atoms@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/01_concern/archive/CAPRMEDIO-META-CONC-011--what-lifecycle-models-govern-cap-and-io-atoms@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 689,
+      "sha256": "2e5bb40d8bd6219443a348ce20696743b7b9a8c3b60fbc3b242da9ebd417ee81"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CA-A-064-SEMNTC-ANALYSIS_RPRT--map-interaction-patterns-to-caprmedio.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CA-A-064-SEMNTC-ANALYSIS_RPRT--map-interaction-patterns-to-caprmedio.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7819,
+      "sha256": "6f42833761bd38ac73af5c129aa297279b0039de6c9d7a804d9e7565e35c9820"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 5699,
+      "sha256": "9bec7584f5bc9638cf5df374e7da2e081ad327b56438645ca3a3e01dff9e21db"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2479,
+      "sha256": "834462dacfcd65d246bd073613ab79ea0ba8f9922269e5db66c73deb99b63042"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4582,
+      "sha256": "3a18d9b9d2db3e41e86f13d2bcca0ebe9042ca1d25437b09ce5eec7fac0cea24"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6200,
+      "sha256": "e34e75d1dd9c025dbb4b95f83de5c43808933329af87a1cba831d08a565fd371"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 5580,
+      "sha256": "38e9581442e14347018ade2292ed38196deb1792987fbcde626a6611afef94b2"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 5625,
+      "sha256": "69a60599f0d0acd98a4e51849e4dc7a6adff76d87b62601e7349f880d13fafac"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-006--delivery-definition-lineage-impact@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 5648,
+      "sha256": "80947ff4646c6b09b3be1a80a6d961eb7167b0dd0e92a8d0d38205ec2826c185"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2380,
+      "sha256": "bf803fb1a63e21dfe9effd92dddb8b371ab30fbf565508c5bd07cc42d666f6fc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2409,
+      "sha256": "75e22572e1d0e4e75a8022f1bb16ac7515ec546eed137ef18709ce804c4606ff"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-008--requirement-tier-reference-model@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2447,
+      "sha256": "d9c0ff8e79b2c283eca505872561a1633069d4c7abd2ff4a08d08e222d4382ad"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4451,
+      "sha256": "eb873eef1ac58c03127ac9a825a75e4414a8f1a348b2840e49dce55a96b78adb"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4493,
+      "sha256": "870383d09d7f63e3c5a5fd5cf7e83be43e4cbcafb7e1043da1d1ccfc586a5b2c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-010--agent-memory-and-graph-driven-development@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4531,
+      "sha256": "e57a07c511cb648e2a3ca613dcdc12187f65a5cfca07d94841bea8740c52f3f5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6104,
+      "sha256": "18384430afe187b880906f40715dca6aec81899d22e2013391d51fc2b09f5b31"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6130,
+      "sha256": "13b41399f9c28395336fe69e747fbda58b60ae452018ca423ac7790f742a1763"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-012--software-3-attention-and-graph-driven-development@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6168,
+      "sha256": "5abc2eeff934807be564c97200e6a154d015434d9175bb38b44068e195646607"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-014--method-definition-lineage-impact@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/02_analysis/archive/CAPRMEDIO-META-ANRP-014--method-definition-lineage-impact@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3461,
+      "sha256": "29fc5e391b4df47cbabd61afe434a5cf7def80d845cf767290e7e84e6ade7318"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/04_requirement/archive/CA-R-1005-SEMNTC-CORE-REQUIREMENT--define-task-done@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/04_requirement/archive/CA-R-1005-SEMNTC-CORE-REQUIREMENT--define-task-done@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 421,
+      "sha256": "9c30e708752d17b972d5177475b2d5c9243e20c0e0ad8eed04c13948eadb9e50"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/05_method/archive/CA-M-123-SEMNTC-CORE-METHOD--write-definitions-of-done@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/05_method/archive/CA-M-123-SEMNTC-CORE-METHOD--write-definitions-of-done@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 663,
+      "sha256": "552fb28a7c4ed5a18374fe3971a2658ca37bf3c59eeda530dbe1e30d7c469004"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/05_method/archive/CA-M-124-SEMNTC-CORE-METHOD--author-task-atoms@7.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/05_method/archive/CA-M-124-SEMNTC-CORE-METHOD--author-task-atoms@7.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1176,
+      "sha256": "448c32e345b71b10cd114f6242780710f82a409db84e1f71d116f46ee4f9eb90"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/09_ops/archive/CAPRMEDIO-META-OPER-001--current-generated-adopter@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-102_BSEED_LAYER_2_SEMANTICS/09_ops/archive/CAPRMEDIO-META-OPER-001--current-generated-adopter@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2501,
+      "sha256": "adab0e7b2651c85cc95038255ad49aa426143ed3eec889c72840dfc243c563a5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 445,
+      "sha256": "2218125f007f888203cd8ea507745d37dccb857c39331c375c1d3cebdc7449f5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1630,
+      "sha256": "169bdf0440e97c70214d4eedd688b1d5453da7331d46ff56dfb3c076f2257518"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 660,
+      "sha256": "300f666bfe17b2e82c3354d2bff23bcd3287c3fb1974e04e323b74558970c398"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 685,
+      "sha256": "2852ef9a148c4a1f0e60de2fd9d7a63634c6ffb6b6848f1eb7b90a0ff0f3dce4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 760,
+      "sha256": "06e2c74bca41be0bc0519998a67265a0e7f7995dd69b4f27834b509de9bb4851"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 332,
+      "sha256": "7adde8bc7e5ab69c33e9b0473af82233184c74ce5f1dc083f66b5a38e89b355c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 377,
+      "sha256": "a595f366e8099657d1c7806cc6196702cb86d9cf274440caf37ed8c6bdc5e9f3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@6.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-096-GOVERN-QUESTION--how-should-governance-be-compiled@6.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 413,
+      "sha256": "f2d9b15fd033af9124d40156777caeb687d8848d6bc0d2e7d3a899f23cac247b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-097-QUESTION-BSEED_GOVERNANCE--must-intent-and-principles-be-reconciled-in-one-change@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CA-C-097-QUESTION-BSEED_GOVERNANCE--must-intent-and-principles-be-reconciled-in-one-change@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 583,
+      "sha256": "cca3fe345529f3be1855410cd5b5c47e0b1dcc311c26f499d8235f8906f4cdd5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-C-096-QUESTION-BSEED_GOVERNANCE--how-should-governance-be-compiled@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-C-096-QUESTION-BSEED_GOVERNANCE--how-should-governance-be-compiled@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 447,
+      "sha256": "62a334df2af2ff9f1db910eb9abfc6d70f3b9e7fc94dd5adf4c5ab68f4001843"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CNFL-001--all-toml-carrier-conflict@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CNFL-001--all-toml-carrier-conflict@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1911,
+      "sha256": "85c19f99ec1737fb9d27854430c2dbda3b91e38f3d632e13f71b0b13944dd2b7"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-016--implementation-journals-and-projections-are-not-materialized@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-016--implementation-journals-and-projections-are-not-materialized@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1396,
+      "sha256": "a512b2c6036627f8b8b4dcfa74dec8e593342fb5bb7f1c1485e383aae30b65b3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1560,
+      "sha256": "390ca84f6f62b22b2850d941f75d1b4cc06e8c95cf444928866d3a5950a07b49"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1554,
+      "sha256": "c62136ed443e5219b9c3a39fc985f8b49e1440dea027e101ece1f21e3922111c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-017--which-artifact-subtypes-should-refine-route-types@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1598,
+      "sha256": "a4123be9aedc89a74a75e49211364ff7b68ef5970a533257dfa53f40a8ff495c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 596,
+      "sha256": "3a26528e057160678bd94ad6ba80d836feffcbd1ea211bc1d8ad330a52867677"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 590,
+      "sha256": "c2db330ed9ff891e622780bc01d629cf02f767ea877d64c0578a1acc133e05ab"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-018--which-properties-form-the-external-review-envelope@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 628,
+      "sha256": "1e5910bc6015bdcf29d66899c0d19a4023a31f329565e2eaaa748c5123edf94a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-019--lifecycle-transition-validation@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-019--lifecycle-transition-validation@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 689,
+      "sha256": "d1d23e6b056ee6f178ed3fa4c22d86c4c584547be484824f6befbdee6c9736e1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-020--compilation-consequence@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-020--compilation-consequence@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 676,
+      "sha256": "6d1c8f17fdfd83c83d1dda5d0023dd3b416841724449fd8d6aff74643407fdba"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-021--artifact-emission-gate@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-021--artifact-emission-gate@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 694,
+      "sha256": "21311defaf55f6849fd57b19b2eb15ef4c0e042ba1d47683af3857b9917d5827"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-022--stale-verification-claims@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-022--stale-verification-claims@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 706,
+      "sha256": "5e80d6475496ad55d5e863ff3c8c0d89b2cc5e8e9dc8078f70845d58ec462dbd"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-023--classification-enforcement@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-023--classification-enforcement@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1055,
+      "sha256": "c81a05ddc26110829397312891b70bf5c454fe6bb81b9eae8da485056549a24c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-024--evidence-record-contract@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-024--evidence-record-contract@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1250,
+      "sha256": "f0fc56ef0e7afd27a4ccaac0352a5f8f8004fccb2a03d3960dbdbbda9d47facd"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-025--generated-refresh-self-reference@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-025--generated-refresh-self-reference@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1303,
+      "sha256": "9492155ab68357277d9a64209370634ee43d0424049c94732849cbd802fadc45"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-026--legacy-immutability@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-026--legacy-immutability@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 706,
+      "sha256": "e642842ab5da2ca9813b11486f56356b29f1b762f5ec246d65f4320e71a3efd9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-027--live-yaml-and-json-python-carriers@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-027--live-yaml-and-json-python-carriers@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1273,
+      "sha256": "18ee0624af0fda5a158ddd0278f6bf741842147b7d038a9821a9ba58142f5aa3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-028--generate-a-proof-currentness-review-view@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-028--generate-a-proof-currentness-review-view@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 690,
+      "sha256": "5632bc248fc621e34feacb36bd4f7b62cf9622c990371a7a7dfe401fe6298f93"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-029--active-deltas-and-accepted-truth-reuse-ids-inconsistently@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-029--active-deltas-and-accepted-truth-reuse-ids-inconsistently@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 882,
+      "sha256": "807d09d5e69a272b33245781ce1814198d192da05796c6a9da0bc34d783bf98c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-030--roadmap-redeclared-accepted-test-and-eval-ids@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-030--roadmap-redeclared-accepted-test-and-eval-ids@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 844,
+      "sha256": "8e1161afddf4e850cb8c8032b1e4f154705d4c8a99091736942bfc275a57e4ba"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-031--verification-promoted-proofs-after-their-reopen-conditions-fired@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-031--verification-promoted-proofs-after-their-reopen-conditions-fired@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 883,
+      "sha256": "bb137e04a51ff9e6e7ad97c4a23655d7427a15d78f9d7144754b0f23b92e33be"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-032--the-declared-your-harness-pilot-has-not-adopted-dset@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-032--the-declared-your-harness-pilot-has-not-adopted-dset@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1024,
+      "sha256": "eb76c175cae0d3ceb4671650daf1cbed7685ff27edbda294735bc8209114c51c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-033--external-review-handoff-has-no-executable-artifact-flow@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-033--external-review-handoff-has-no-executable-artifact-flow@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 756,
+      "sha256": "0b909b30d1c30443a99a29aa19ea94c94a94f652e2c88d47c397f39b02d4626a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-034--immutable-atomic-lifecycle-is-not-enforced@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-034--immutable-atomic-lifecycle-is-not-enforced@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 832,
+      "sha256": "8667be192b12d946dc22d68f579e92af7dfd40ffa60d98e363731dda832f6d2c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-035--canonical-flat-type-model-is-not-schema-enforced@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-035--canonical-flat-type-model-is-not-schema-enforced@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1090,
+      "sha256": "eaf7ba6017cf41df9f3cca43ca85e07f9bf5392175446395fbf1da467e0a67c4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-036--route-catalog-is-not-total-or-one-to-one@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-036--route-catalog-is-not-total-or-one-to-one@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1315,
+      "sha256": "cbe71b66865369c2c6c55f84b3ea046e728e7020be9b7613d7c65e4995a5ad1f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-037--semantic-route-catalog-remains-incomplete@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-037--semantic-route-catalog-remains-incomplete@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1902,
+      "sha256": "eb6a8e249887dd350e3655cf099a9e82064079093d9686678d4c91ebda0058ed"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-038--should-action-become-a-first-class-entity@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-038--should-action-become-a-first-class-entity@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 614,
+      "sha256": "73e72269de9f243b5f813e4a3a9d28c7ddbb5f04f3386b14777b9c8b3473c175"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-039--which-priority-scale-should-dset-standardize@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-039--which-priority-scale-should-dset-standardize@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 918,
+      "sha256": "4a1530c760b68fc5f55cadb8a00f393e3f103ec1532d2ef950bbcc265d37035b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-040--should-dset-generate-roadmap-and-release-views@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-040--should-dset-generate-roadmap-and-release-views@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 648,
+      "sha256": "ce8c8cfc6c69c299ee99dd021befa3f2b9a414fd227ebf08abc216079d86a216"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-041--should-traceability-use-typed-relation-edges@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-041--should-traceability-use-typed-relation-edges@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 727,
+      "sha256": "0186f4061745be10c42105bded8c14eb6ce07fa124250c5dbb6aa25902e74394"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-042--should-decision-lifecycle-be-schema-enforced@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-042--should-decision-lifecycle-be-schema-enforced@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 701,
+      "sha256": "3617983d38b6b274a66daada47ec9892a735d76ef6922c14ef48c69aa833ffbf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-043--should-proof-dependency-closures-become-machine-readable@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-043--should-proof-dependency-closures-become-machine-readable@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 702,
+      "sha256": "d7ca2c07db75b1fa55c0f832e63efd303bf54b6a2060873e30548216006cc49b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-044--how-strictly-should-external-review-reports-be-schema-enforced@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-044--how-strictly-should-external-review-reports-be-schema-enforced@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 681,
+      "sha256": "05b4ee880abce20bf1a584f2ee4a112d1ec8a3fe060b36c7d317020410fb63a7"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-045--requirements-versus-implementation-decisions@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-045--requirements-versus-implementation-decisions@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1354,
+      "sha256": "e1f93ff8802a34812e95b472895ef41894588a86f400173f61466d482cb9cc77"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-046--which-direct-decision-subtypes@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-046--which-direct-decision-subtypes@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1321,
+      "sha256": "d4b6da86ce314a84c27586909f2a24bb1de35b7fa6459b89b6714cfd689513f1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-047--should-lifecycle-event-artifacts-be-removed@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-047--should-lifecycle-event-artifacts-be-removed@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2303,
+      "sha256": "e97c1e3b4bae1550125ad92be1c6cc3459c94b30c2b9a088191a4cac383efcc8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-048--should-active-atoms-replace-evergreen-compilation@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-048--should-active-atoms-replace-evergreen-compilation@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2039,
+      "sha256": "39aaffb73dafa9f9a3b44f2ff9cd7762e4b3329fa5ecadfd6c0514d255b3a9af"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-049--should-artifact-classification-use-three-simple-axes@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-049--should-artifact-classification-use-three-simple-axes@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2811,
+      "sha256": "ad0052fb17700af4ff3d69733eff8e798a7d9268c1f6b678c481513d54572d97"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-050--which-canonical-type-name-occupies-each-route@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-050--which-canonical-type-name-occupies-each-route@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1453,
+      "sha256": "7dcbfbf8a96f0e1e07b030d2ed87b4436b6b7a0a3acb2aca4069edfffe1f427f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-051--which-types-complete-the-semantic-route-catalog@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-051--which-types-complete-the-semantic-route-catalog@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2010,
+      "sha256": "b63c40177d864d1185f76667eaad14f66e956ab2853d1661a53ab86dc7154f9c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-052--lineage-preserving-integration-commits@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-052--lineage-preserving-integration-commits@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1630,
+      "sha256": "db57071c1bc06bd7817051361aca6a2e214466df44f075a63d29ed2f4f7852f1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 621,
+      "sha256": "50acf72cd9c39fabdcc3578cf042af819d8b9b0949b52db7f202df7b1236f8dd"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 615,
+      "sha256": "6440921604d36ae3e44e3d74186dcf70695f6c7c83a055bf62b698e4f21c9921"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-092--implementation-lineage-replay-is-not-materialized@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 653,
+      "sha256": "a696a6603cc8164852a96314d0c131cb133ed787faeacb520f985a4b2ff20bce"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 748,
+      "sha256": "8da073b6df952f59b83099a7cdb495a60d0de164b4e8d9378c2a2f3b735b5430"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 690,
+      "sha256": "e5669aa2384ad1fb8656b568424eb740ed116c4d5928773beefb217ef7717075"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/archive/CAPRMEDIO-GOV-CONC-093--when-may-self-sufficiency-duplicate-derived-properties@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 728,
+      "sha256": "f76321da0783d8e1bdc882368d2f3fdd349d14bc4341f77ada640952fc75877c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-013--control-plane-uses-retired-layer-layout.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-013--control-plane-uses-retired-layer-layout.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1289,
+      "sha256": "6491c5a520cf764fed70537635aa09039eaccc3b5b9f8de601d40817dc6e78c6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-014--atomic-carriers-are-not-role-local.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-014--atomic-carriers-are-not-role-local.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1716,
+      "sha256": "c95ec7e0c107ec4d11712acae752569d401982d3e03062c9a865fddeefc946a8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-015--atomic-identities-use-retired-grammar.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-015--atomic-identities-use-retired-grammar.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1689,
+      "sha256": "6583012c07d7f5a59e5260f868111b76b30e6b2642d8df9d38dfcbdd405245ea"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-053--what-external-review-envelope-is-sufficient.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1125,
+      "sha256": "3f8801ffbce0e85f6889e106d6b7d66c0889efaccd4a8cd623fe24baecba9102"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-054--how-should-proof-currentness-be-represented.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/01_concern/solved/CAPRMEDIO-GOV-CONC-054--how-should-proof-currentness-be-represented.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1038,
+      "sha256": "86a081a0cb5e59629fbfc78a79f4e9907a216cd13a029d9140d13e98f7b8feb2"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 549,
+      "sha256": "8e0b4f3eb37a2451ea5c4487b077ace60d6cf682b72033e37417dd97a59b025e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 576,
+      "sha256": "e29cfc667911a5c24593410e10b6f83371e12455f88914e2fe68f42bfe08fe4d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 348,
+      "sha256": "3fcf1f2cbc3ab88c2ab59ac34906f483811a0ed5ed83c8e6b76fbc389b80fa7c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 500,
+      "sha256": "1e5d4ab8d20b6bc3d188ffd704fd752608b5be22b2acbef939a4dba00f60af67"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 418,
+      "sha256": "b6176f4dcb59a0f9a534dd2210de5b4ef51fb20bda3c770fb84d2f55f6004e37"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 364,
+      "sha256": "f5ba53706d690fe7626efe88f08c7972ff6f9654986a491cca63b82257eb17de"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 451,
+      "sha256": "be9c9b58e7696fe2ba28b614620d696416b61a166285bbbe95374e006aa26df7"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 357,
+      "sha256": "6e8b912a4e329e11b70ab332eb2618e0bb1d2ff3dc2a8b0f26db3fe274b084c8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 398,
+      "sha256": "4419abaf891319ac95e37e0f0698f5ab5c27e4c490a48479f10b44fe2474f662"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-project-configuration-and-the-scope-unit-graph-distinctly.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-project-configuration-and-the-scope-unit-graph-distinctly.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 588,
+      "sha256": "4591938518496f73688f766ff7ecae87869646bbb1eb94d94ba3d5cc4a82a88e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2767,
+      "sha256": "517a5872a2d97d968b11aec7c79b5492501ce785d29bd140177e29fb984ab5ec"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7094,
+      "sha256": "ffa5ad9f2859e9e1b409ec02f2268b1d7f652947dc582a4b89fb9466d2075aa1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 481,
+      "sha256": "114e3f6747b8f25e0776294050a01868f1dd64ced313deab730f94224e72e428"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-050-GOVERN-RATIONALE--use-a-closed-lineage-impact-disposition-set@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 517,
+      "sha256": "4165692b4b1d9a649913776a8e5d4893bb84704f2f6defc2917ceed4c2a1727f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 508,
+      "sha256": "d84982f1e69cb381b07852e45557bd173a7e20bf85537876e8b37edbf4fc81ba"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CA-A-051-GOVERN-RATIONALE--use-one-change-bound-lineage-impact-analysis@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 544,
+      "sha256": "c3a62f41a38dc861d58e385b6fe10d7454b044c1e2498ba80f1a10f6dd999b56"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 326,
+      "sha256": "d4344112db61483b50dba79584495ae9857ebd005f86e795255018a7f24f2045"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 277,
+      "sha256": "859e5e11850852928cd95a4cad28692c48512a4f195d451ef28ffd79e9d30713"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-030-RATIONALE-GOV--atomized-carrier-transition-evidence@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 316,
+      "sha256": "0554348e15ece47858d9c698230454738cfeb5d6f1d73ff29efa8034b8a8caf6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 435,
+      "sha256": "ecfc3c70ce33b403a2219f4cddc197156d2cc887066375e9ea5a351b3b32a671"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 429,
+      "sha256": "5e1c9d6b4f5285f19696263959ae885cdf35683310a94900bb5a365722b3a0d4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-031-RATIONALE-GOV--separate-legal-and-governed-carriers@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 468,
+      "sha256": "a1caa030ac5e95c39f897315a8ec8bc12ef21a9e512194e4f53ac3fd8257ca1d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 354,
+      "sha256": "9f833747d3aa532305f8b645bcb5b4c40628d5165579a7bffe05a1285f1b0c0c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 348,
+      "sha256": "f6dea3500e3a461341e5aea1046864f1be21e46607bba9200c432d81a1ede23a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-032-RATIONALE-GOV--avoid-a-duplicated-lifecycle-state-model@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 387,
+      "sha256": "d43d27e9b01ec0896efbe6b6db541a6d1f4c891416b502db5bc3b52dc7502753"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 342,
+      "sha256": "7079084d05fe9c137b1f9d04b9edfdd0b13cb9c8bffa1839c383aaaf840500b1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 293,
+      "sha256": "268d2222a9898d04068ad8086c9a692c62cbdf3d0fd7bff604ebd42e3f328c7a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-033-RATIONALE-GOV--apply-mechanical-migrations-consistently@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 332,
+      "sha256": "e6e148ec8caa118c83f571375a1a4a4e8ba9fc508c3c5bb6fc1def6b94ced9bf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 332,
+      "sha256": "5e026ca0b5057afd492dd2754882733dd698d2e1fc01ca01ff7b0f777b8e7ba2"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 344,
+      "sha256": "442abe5202ea19ffcf5dec9267f61f109e65778a65f5b11b0c65d5794bc9f973"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 383,
+      "sha256": "b4a7b1b213a95a0cbf78d014c9fe372d1abd597247138bf1816c2e0a8e2c4170"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-034-RATIONALE-GOV--keep-relation-meanings-explicit-and-bounded@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 419,
+      "sha256": "1c63c2c7e7e02bda3bdd034963a5b84e4611d701b25285d470a1dc23d0aa8cd9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 340,
+      "sha256": "77cc9bee0b4b8a0440c44303d568f083245661369ae7ff53b54b1e663eb38490"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 286,
+      "sha256": "6d715d772d062531fd543dc5724bf54939e71dfffc92ceb426c8568dad892c01"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-035-RATIONALE-GOV--prevent-generated-provenance-from-proving-itself@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 325,
+      "sha256": "be1d7aebcedb8303bf699329faeab8c9d52641f81b0d627435162f2433453ee4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 386,
+      "sha256": "4f1e48353e71888ce75338a175891812bd7e3fe734a81c034df8af673b5537e4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 327,
+      "sha256": "13a85545a552071b95745f9ec9bd69a99005a9334ac8a77975b88ce5bdf48795"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-036-RATIONALE-GOV--resolve-active-artifacts-independently-of-path@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 366,
+      "sha256": "f5e9f99a1e6c6f16c79f1047ef5944507b825bb2e3e46cbbaa047c4c6a307912"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-framework-and-project-settings-distinctly@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-framework-and-project-settings-distinctly@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 574,
+      "sha256": "d619db87a00219d68465f1f5ed3977ea034fc6e1394bc8b27e197b8cf9e09418"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-framework-and-project-settings-distinctly@5.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-framework-and-project-settings-distinctly@5.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 517,
+      "sha256": "d8a89abe4bbe76ef7156fdb5ec4d144f9f48c7c98d5a5e31b55cfe4eaf8f0fc5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-project-configuration-and-the-scope-unit-graph-distinctly@6.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-A-037-RATIONALE-GOV--resolve-project-configuration-and-the-scope-unit-graph-distinctly@6.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 556,
+      "sha256": "65dfd6cdad9c3af6bc3b5da6e79b868b957f56558718d9cb16a9997dc9c68daf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2836,
+      "sha256": "e8087a434fb04aebef5eb24c059211935b06553585233bb5fec9ac8c7c39be57"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2673,
+      "sha256": "ea501202930ae2738e219dc0d66b8daf1a2cc2d48713f5b9da9f1fd17296d0cf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2699,
+      "sha256": "a99205626552aee29a0d1a47f2bae9b89f578fd4cf999cd92d153465f6e933e1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-016--framework-coherence-and-fpf-audit@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2735,
+      "sha256": "ba134dcd0955526cbf93fc184f47c9e26a7b0bee01f930082edc979231371be9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6969,
+      "sha256": "591eccdd7b753fd7fcab2dbdc2cf7b0375471fa80fafa93eb9996e7e790f1dd8"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7022,
+      "sha256": "661c0a0811c2d418c95b43ef4eb3ec86f2d03e19974c5d43604b5a161909d840"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7026,
+      "sha256": "f92e36a81742f2f3dd93818927a45bfb459b3b5ea8f2fd1c3099c3e13e20f97c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-017--meta-and-gov-fpf-revision@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7062,
+      "sha256": "359b967bac581727518b26c50313c1544fa183a32bfac35415b4b85d21ecdfb3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-018--artifact-carrier-format-policy@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-018--artifact-carrier-format-policy@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 14633,
+      "sha256": "01372fdd43bab552633213512cf9c16950431a0333d4da2a4da5e69d1caa1cce"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-019--meta-and-gov-fpf-overview@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-019--meta-and-gov-fpf-overview@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 7888,
+      "sha256": "011c7a6f4a35c4d4ddfd4904af781b3be77e2a6f6044caf49c169f31ddc8ae14"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-020--session-preservation-audit@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/02_analysis/archive/CAPRMEDIO-GOV-ANRP-020--session-preservation-audit@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6555,
+      "sha256": "37abb767b9782af706c19ebfc669d44eedafb8befa0f875f3668b547ad46230d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1008-GOVERN-CORE-REQUIREMENT--encode-task-atom-sections@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1008-GOVERN-CORE-REQUIREMENT--encode-task-atom-sections@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 664,
+      "sha256": "76668716044694e56788a61a07f2ee55b98c64b5908adcf753fe035b0389c79c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1009-GOVERN-CORE-REQUIREMENT--resolve-task-scope-before-execution@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1009-GOVERN-CORE-REQUIREMENT--resolve-task-scope-before-execution@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 454,
+      "sha256": "e2b28e31f1b615e475ee13213c1189cebd3f1a4b7f6a049d3d86150526a684d0"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1011-GOVERN-CORE-REQUIREMENT--encode-task-dependencies@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CA-R-1011-GOVERN-CORE-REQUIREMENT--encode-task-dependencies@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 490,
+      "sha256": "67aab1ab9d560446791e22fab96b9c32eb53747d6a730660f0ccefface91e9f6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@8.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-GOV-REQU-735--default-internal-analysis-to-analysis-report@8.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 740,
+      "sha256": "d0fcc90d73423e4125f21395ef648617d546fabe563c9d56b1a32de1dc7590a9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@7.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-GOV-REQU-765--register-the-default-internal-requirement-type@7.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 718,
+      "sha256": "36dbe5d699484891e7266d1946e6fa534f5b929c50e0d4cee54adf276afe7ac1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@7.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/04_requirement/archive/CAPRMEDIO-R-792-REQUIREMENT-BSEED_GOVERNANCE--register-default-evaluation-type@7.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 646,
+      "sha256": "c0d6bb1a0a260681e42a5394e4c8ea01348b898ed37483417469a9243ff4c48c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/06_evaluation/archive/CA-E-245-GOVERN-QA_CASE--validate-task-atoms@6.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/06_evaluation/archive/CA-E-245-GOVERN-QA_CASE--validate-task-atoms@6.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2908,
+      "sha256": "e590732fc44b3458754ff2bfc0544d53d8ea7d42d90b2c87878f61655c93886a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-002--typed-artifact-relations@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-002--typed-artifact-relations@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2380,
+      "sha256": "959ee11f6537d944bd0470ddcb98095325a0dbba9dec8d88466292dd5a275b0a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-003--legacy-relation-sealing@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-003--legacy-relation-sealing@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2571,
+      "sha256": "5c6465e9c504a679a97aba9ede929f607bde47b7933a8902ec721e42049c2f19"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-004--verbose-project-settings@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-004--verbose-project-settings@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2403,
+      "sha256": "3613208488523e63cc5e46bd7d0e4c89cf708e1185e3d673647a4605e6d3cc5c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-005--canonical-settings-selections@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-005--canonical-settings-selections@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1857,
+      "sha256": "757d56a6c24bd25b0ddfde0abb8fa5c150f4a22c385a40a0390a7c24a5e8367a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-006--native-package-successors@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-006--native-package-successors@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1876,
+      "sha256": "590e12f360aeaad00be7c7dc2e23497e7c7cf73f44ab07413a15f9d1b6a478ac"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-007--legacy-structured-snapshots@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-007--legacy-structured-snapshots@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2035,
+      "sha256": "fc4ef7770cdae0537bfb222d2830636f4668353e06b051bdb2cb447469c5dc90"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-008--semantic-carrier-transitions@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-008--semantic-carrier-transitions@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2015,
+      "sha256": "f24ebc90b1c7e49dd1dbfc0ef56e7612e4a76ef4d2c2e001543f8ec2a6860997"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-009--complete-toml-cutover@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-009--complete-toml-cutover@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2533,
+      "sha256": "397e65aa11de020973c6145bcd01f7cb9f8933516363bb4ba1f5b548da09cc97"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-010--version-artifact-type@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-010--version-artifact-type@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3038,
+      "sha256": "85ba657c9a59c9249bcb0126f48c213f5f26f3e457422ce5d1c8827882fe3807"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-011--current-claude-review-attempt@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-011--current-claude-review-attempt@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2438,
+      "sha256": "37f2e48102f84c2b125152b1a93982eccadac86a57a8686b3f7c8bc79ec04c3a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-012--claude-review-packet-005@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-012--claude-review-packet-005@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2552,
+      "sha256": "3b78f9f53115fbdd4722c9a63ca8c67d59039b47987e37dabbae0a57532021b0"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-013--claude-review-packet-006-boundary@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-013--claude-review-packet-006-boundary@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2747,
+      "sha256": "be910e6dfa6b2fd6d9e01c55713f8fce57326751669809e8315f81713c2bd1c7"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-014--claude-review-packet-007@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-014--claude-review-packet-007@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2776,
+      "sha256": "0cb804129e3aecc209eac6e08bf44da1f1e5140eb588fb6a6ea633f445d93b5f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-015--hidden-project-control-root@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-015--hidden-project-control-root@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3042,
+      "sha256": "5cdaa6b1649d3476c51c0d18eae44ca77611a072bc7c4e8707a18cd6459a1306"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-016--runtime-and-scratch-boundaries@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/-103_BSEED_LAYER_3_GOVERNANCE/09_ops/archive/CAPRMEDIO-GOV-OPER-016--runtime-and-scratch-boundaries@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3863,
+      "sha256": "4ac3d092b28e0fb509866b6e7f9e07536b83c3275f93668714b34b7108497856"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 796,
+      "sha256": "2d211751422e6e56e4fbca503faed0bd197e639f62bd6cc5b923cdc16fbbdfc1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 820,
+      "sha256": "d61494baf4ddb14c49c27118a02b5711ab6e555972a5730f0e07cbb2dcb43940"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 817,
+      "sha256": "19b1917b383e399600166e1965176fe5597656aa3702478033ecc05335c63ccc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1102,
+      "sha256": "00685a79b07a1b9d362bcf9bc45130542f8c43fc99231757ee9d2cb5adec3089"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 704,
+      "sha256": "6faae0ad46377fe631e9dec780151bfd27500ac4009cb46ee667bd224ebef470"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 740,
+      "sha256": "7b1492285e9386ddc1bf4c4abc5d738f658d9530f38633efd4d8b8a66500d499"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 740,
+      "sha256": "25d82a68abca25fdfded537c852b05dea39da463026df859b0620b5bed3dcd04"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/01-CA-P-036-MMODEL-TASK--reconcile-metamodel-authority@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 791,
+      "sha256": "bdeec9e7bd56090826a64c99dc923e8216c817cc585b1f3def2874d7640f509e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 728,
+      "sha256": "912e2c099e520eb28b7ea3373c7981e549472fa0534d5446412614a63d91162c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 764,
+      "sha256": "4d9e74ee9eabe5ddd9449e9677ba462beeb024c7ce5e2c894bff190c6d527043"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 764,
+      "sha256": "e84a4e0aeedfbc6e948c85f6ca46a85ae893f036eea137592638ec0a8654ca87"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/02-CA-P-037-SEMNTC-TASK--reconcile-semantics-authority@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 815,
+      "sha256": "0baf750ec7b11930be1adbcbe2cd2e3f819b1932132473bb0c0c2ff89d09777e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 730,
+      "sha256": "564f6f18ef0ea52c8d653f516b31902a505d1ce49f0c15ac8b70c59b009c14f1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 766,
+      "sha256": "b6647b65967cd0997db1ed9c32c55adb8b630702700cff259ee1b829fd7f5f6e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/03-CA-P-038-GOVERN-TASK--reconcile-governance-authority@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 766,
+      "sha256": "5becd1cbdd98134e2be430e3c104270f5d3815e6827c80b1805109d055478358"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 913,
+      "sha256": "77cde8df2e84f7ab78e352c87d6dca5d996191427f61c0d40d297e29413cbbfe"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 949,
+      "sha256": "fba99d736e7c4a87990590cb3eb46c35a7e493020b94b1d028a1edf2a96b001e"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 949,
+      "sha256": "0452be442fb4784da471f8d23398e5cc9bbc6c0ae9188efd6662c0f92c7ab797"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/archive/04-CA-P-039-META_MTHD-TASK--validate-combined-bseed-authority-after-layer-reconciliation@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1087,
+      "sha256": "d4a6a9b2a2069bc635d698e20d2381f20be0df9e7ddfea6fd202a25867990c5a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/canceled/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/canceled/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/done/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/01-CA-P-035-EPIC--complete-bseed-superlayer-meta-methodology/done/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1035,
+      "sha256": "c1c69dc469fc22e3aa76c783912a7a1382ae9b50e4db0f8548653c93d12cd67f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1025,
+      "sha256": "733a8288e4781c4a2df85cb20172762c50aa1293b20071f8990d2b6f7ac7d058"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1302,
+      "sha256": "3a023549f2987ab253876ce92a3942ad2da10f90b49ad75c6770ac9ff489e80c"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1171,
+      "sha256": "fe88cded93ecae4c831922c6e19581b7d8b99ef432f4e79fe25b90302e3525f5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2349,
+      "sha256": "f56da8955f8629eb012b09ed3d5c9a4e76d16c598e427d81df58825577ad0033"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2346,
+      "sha256": "64c695d0bf151c9fcd11e2e0b2b02e4d9ba0e2f3e74e1d8da05edecc8d5e93f6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1067,
+      "sha256": "9f0f48ea727c1495956fbd85c6c2104afcddf5df28c274726663fa0a78c9c367"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1054,
+      "sha256": "bd4deda5f42a9e73eed73b112d6e29743554e8cd1b07a2ba3bae52901829fe00"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1057,
+      "sha256": "c3cc9e3d0c1989268ccfc57c95123726e962ad5984e29dd447b3e950d23bec65"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@4.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/archive/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059@4.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2971,
+      "sha256": "04301b2d3d1b7f0c45349567496b180779b088a517afb096732895141a3e91ef"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/canceled/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/canceled/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/01-CA-P-058-META_MTHD-TASK--apply-cce-authority-to-all-bseed-atoms.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 30103,
+      "sha256": "8d98b85809e89208a240aff27fc822cccca0207dfb8f2465cb24b49dd0c2dcd1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/02-CA-P-059-META_MTHD-TASK--apply-atom-boundary-authority-to-all-bseed-atoms-after-ca-p-058.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4678,
+      "sha256": "c4b1d0c08b34f8d3d48b8574623e5a944a2f0e6b6b2edc980b407217dc21f41f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/02-CA-P-057-EPIC--normalization-bseed/done/03-CA-P-060-META_MTHD-TASK--revise-subjects-in-all-bseed-atoms-after-ca-p-059.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 138607,
+      "sha256": "9b7dc14cbaefca613e59378b00ff10734de367d2d7ab3577e9908f7a9b1b5b07"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1570,
+      "sha256": "9e9314ec3577fb7d5d2190b5ab102836f32f53e1404b530b913965f921abc4ba"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/04-CA-P-069-META_MTHD-TASK--replace-stale-bseed-methods-evaluations-and-deliveries.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/04-CA-P-069-META_MTHD-TASK--replace-stale-bseed-methods-evaluations-and-deliveries.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1555,
+      "sha256": "905927ba24fda82d7497509965cceecaf36f67adb96171948efd469b11774e63"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/05-CA-P-094-META_MTHD-TASK--materialize-pending-subject-and-projection-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/05-CA-P-094-META_MTHD-TASK--materialize-pending-subject-and-projection-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4619,
+      "sha256": "e9b92e344c735776eaa6059b2d010f52296f1a0719c4dd65500b5aaffa7cc7cf"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1483,
+      "sha256": "5155eedb221dafb71c6c0b49c15530f1edf4605469873d11710dfd2abf63cd68"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/03-CA-P-062-GOVERN-TASK--reconcile-git-and-journal-governance@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1538,
+      "sha256": "f575664fab14014eb4864c826d10abf11e695d060ff82f0dbae0d6c365965e92"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/04-CA-P-069-META_MTHD-TASK--replace-stale-bseed-methods-evaluations-and-deliveries@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/archive/04-CA-P-069-META_MTHD-TASK--replace-stale-bseed-methods-evaluations-and-deliveries@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1422,
+      "sha256": "d972d828886b5c204d31760725ffbc152e175350cc812422ea3de5bf739f2986"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/canceled/CAPRMEDIO-P-020-CHANGE_PLAN--orchestrate-bootstrap-seed-migration@26.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/canceled/CAPRMEDIO-P-020-CHANGE_PLAN--orchestrate-bootstrap-seed-migration@26.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6780,
+      "sha256": "7518e4503fd5a966b02bcdb0cc559f42bad4b2a08913d1ed9ab6255796c23f1a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/canceled/CAPRMEDIO-PLAN-013--migrate-to-the-metalevel-structural-model.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/canceled/CAPRMEDIO-PLAN-013--migrate-to-the-metalevel-structural-model.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 988,
+      "sha256": "b3462f3590244d8efb5698719fa6f5496717f52c5d07b12a64d738d0f1f0ddbc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 826,
+      "sha256": "768c7b703dd80d779c2de541fa96a6f57bd83ee6c35b63688295de5ecbbaba39"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3003,
+      "sha256": "dae0d965f387cd817510991a7d5eee590eba60fe85c9f6be303cc105548a78bc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 736,
+      "sha256": "90fe9f5842ec0904d908f0771d116eac635a265a45e6d4470b7adb52fda539ba"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 772,
+      "sha256": "1d45b303a540f2e1edd9a561490dfed66badcfee7aa02829cf58569814a171fe"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 764,
+      "sha256": "fd5e37fb413bc420eafcfa71aa09f1fca8fab8a16405e8d3141aa330f3502d76"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 800,
+      "sha256": "3bec98de11b0a60a7aba14f2f956f872efdbfdc2e9fff43c88809ef32bc75d75"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 773,
+      "sha256": "cb71f4a5184912088e4600c9b87db048cc76e82f7b20bdd4a21ff66fcbf07c5b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 809,
+      "sha256": "7cc406cbfd5b05f3eef0e0fb9bb15ed4d4a85996f9ed66349aab89f0484c03c6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 856,
+      "sha256": "07595cc964524a58a524d1e5dceefd71330aa7b4adec459e240c2fdcf3ad768a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/archive/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 892,
+      "sha256": "691e1bac98ed52f19c336a145ce5cec9bb24374e5033613245d1e258b72ee074"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/canceled/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/canceled/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/01-CA-P-052-META_MTHD-TASK--self-apply-atom-boundary-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3039,
+      "sha256": "43e2d711639a4bd891b5af6e8673dbbe12d1716c42d78ba07565df31502c050a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/02-CA-P-053-META_MTHD-TASK--apply-atom-boundary-authority-to-cce-authority-after-ca-p-052.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3400,
+      "sha256": "063d2098702b546dde5b210c901a04b1657f026b6626f80b4ef7e3ce48699764"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/03-CA-P-054-META_MTHD-TASK--self-apply-cce-authority-after-ca-p-053.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 4396,
+      "sha256": "8a8172036298051ad780d5e6e2216638f62c7545845616f51a6433848d62fd6f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/04-CA-P-055-META_MTHD-TASK--apply-cce-authority-to-atom-boundary-authority-after-ca-p-054.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 17280,
+      "sha256": "b0bb22f4ceee34baf66edd872e03309680bbb4fd2845e701d723a08fc3f3384b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/02-CA-P-051-EPIC--reconcile-atom-boundary-and-cce-authority/done/05-CA-P-056-META_MTHD-TASK--remove-formulas-after-atom-boundary-and-cce-reconciliation.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 3616,
+      "sha256": "ff9ee3c77a7c7c544aa500d540d4f67d9d6bef3867150febd7e5ffd077b81308"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1899,
+      "sha256": "f7cbe2091a0817cb2a1040f91a3e039fbf38a8f7a8f46c03311a4ce349c14d43"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6093,
+      "sha256": "b10f297238577e3cbf8c74180fc7da44bf00d0c2173e91c1230dca82db8523c4"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1578,
+      "sha256": "1ff3989c9d9f74d078d4403474afe651d0646b18e3a4bc45526e431e7d58ed3d"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1885,
+      "sha256": "91ee0b2d4e44ce2b7ad3fd5bee6d5f88ff9280afdcbb533caf20da28f199e4f5"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 135035,
+      "sha256": "169415f10c29108fced9b1eef83892d6e937ece121a9aa03d185dc12430cf654"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1339,
+      "sha256": "12a1d31cb37e58ce9fd2e5c5835d57113c7610f2a97c36a0d6bf0260fea3ccb6"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1740,
+      "sha256": "9d3b97a34ed21cc60da7c525c3e1c2f7f2bc09b44b5c14c875724fd2944deaf3"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@2.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@2.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 2184,
+      "sha256": "36c9ee9bc39a631fcbc6f6584aa5313c11c0a8b8bcaf8c3e16b0f4d0f7331d90"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@3.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/archive/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078@3.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1351,
+      "sha256": "a8ba55823ade0874c69b83d3d3c673105dfbf09c25690d762d542eabee26cbbc"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/canceled/.gitkeep",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/canceled/.gitkeep",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/01-CA-P-077-META_MTHD-TASK--establish-two-axis-subject-authority.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 6220,
+      "sha256": "19e612758e89d1c89229f3027a57cc323b2262333ef42eaa9a86544a09929b78"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/02-CA-P-078-META_MTHD-TASK--normalize-current-bseed-subjects-after-ca-p-077.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 136095,
+      "sha256": "49d0099aa21f611f3af570793498dc0890be3d032fd7d34779b5d95a34576c5b"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/03-CA-P-076-META_MTHD-EPIC--subject-normalization/done/03-CA-P-079-META_MTHD-TASK--validate-subject-normalization-after-ca-p-078.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 135630,
+      "sha256": "2d951f772fb35ce42cdf799a80c2a7d935b7c4578300795f6ceea0dc6dcda150"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-024-CHANGE_PLAN--define-bootstrap-seed-scope.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-024-CHANGE_PLAN--define-bootstrap-seed-scope.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 849,
+      "sha256": "035675f5a5dacfc160974d8ec25311aef71e7f4ef348db8131c6f3f26b155c1a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-025-CHANGE_PLAN--review-bootstrap-seed-ownership.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-025-CHANGE_PLAN--review-bootstrap-seed-ownership.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 749,
+      "sha256": "1a31e56b0b8e6afd1838ba03ac8b5c164e85bbd0a9afffb5110fee91f33edd69"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-026-CHANGE_PLAN--review-bootstrap-seed-structure.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-026-CHANGE_PLAN--review-bootstrap-seed-structure.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1134,
+      "sha256": "ea0fa56b7a77973f5de523d1a1f456187be9a7c52bbdf9409b8cc397e8c8e267"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-027-CHANGE_PLAN--remediate-bootstrap-seed-semantics.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-027-CHANGE_PLAN--remediate-bootstrap-seed-semantics.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1995,
+      "sha256": "bca00a3fb0af3b7c4da8510460ee8da58a2ae24330461db713fdd919885839a1"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-028-CHANGE_PLAN--repair-pre-migration-semantic-and-plan-gaps.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-028-CHANGE_PLAN--repair-pre-migration-semantic-and-plan-gaps.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1374,
+      "sha256": "6b448e29aa5229043baf5067d03302737d8a71c3043242dd4d8cca65309fe909"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-029-CHANGE_PLAN--freeze-bootstrap-seed-migration-inventory.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-029-CHANGE_PLAN--freeze-bootstrap-seed-migration-inventory.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1437,
+      "sha256": "5eb8d725a64173ef774d68144f8996feab5fc152f05840a9144a1f29425bbb87"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-030-CHANGE_PLAN--relocate-approved-folder-structure.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/03_plan/done/CAPRMEDIO-P-030-CHANGE_PLAN--relocate-approved-folder-structure.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 1531,
+      "sha256": "dcf72b308e3b29369b5c8b8c61364fc5d2f8fda5cd4561b5b5b23fc3e7901e7f"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/archive/CA-R-1176-APPLICABLE_MTHD_SOURCES-DEFINES_JOB_FOR-LOCAL_CONFIGURATION--select-and-resolve-project-methodology-composition@1.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/archive/CA-R-1176-APPLICABLE_MTHD_SOURCES-DEFINES_JOB_FOR-LOCAL_CONFIGURATION--select-and-resolve-project-methodology-composition@1.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 580,
+      "sha256": "5cd0dd2521f52e5a1467dd6d60538a9c18256f11534ea6b0a88f95dd13d7a01a"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-CORE_META_MODEL--make-core-meta-model-the-first-ordered-source-layer.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-CORE_META_MODEL--make-core-meta-model-the-first-ordered-source-layer.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 441,
+      "sha256": "ac681bc65c5c6f23bd7c35731685b0a0c24ba110d280a5a578c55939a8edd5bb"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-INSTALLED_EXTENSIONS--make-installed-extensions-the-second-ordered-source-layer.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-INSTALLED_EXTENSIONS--make-installed-extensions-the-second-ordered-source-layer.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 458,
+      "sha256": "9faceb72fb6722ec6c47911e7beadb7cdec461994a04544afd930bc6d5415062"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-LOCAL_CONFIGURATION--make-local-configuration-the-third-ordered-source-layer.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/04_requirement/drafts/CA-R--APPLICABLE_MTHD_SOURCES-CORE-DEFINE_SCOPE_FOR-LOCAL_CONFIGURATION--make-local-configuration-the-third-ordered-source-layer.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 453,
+      "sha256": "176edb83d13759c56baa361aba048beae7b5fbd53484fff884405a96ceb1ebc9"
+    },
+    {
+      "source_path": ".caprmedio/-100_BSEED_SUPERLAYER_META_METHODOLOGY/meta_methodology_entity_graph.projection.md",
+      "target_path": ".caprmedio_bseed/-100_BSEED_SUPERLAYER_META_METHODOLOGY/meta_methodology_entity_graph.projection.md",
+      "classification": "BOOTSTRAP_HISTORY",
+      "bytes": 8765,
+      "sha256": "355b20a6a0a3c1ad0f446205ef25de23de67d0b8643bf6d2a5dbadad4fc5d79d"
+    },
+    {
+      "source_path": ".caprmedio/02_analysis/CA-A-065-ANALYSIS_RPRT--compare-caprmedio-work-execution-architectures.md",
+      "target_path": ".caprmedio_caprmedio/02_analysis/CA-A-065-ANALYSIS_RPRT--compare-caprmedio-work-execution-architectures.md",
+      "classification": "PROJECT_ANALYSIS",
+      "bytes": 12498,
+      "sha256": "093ce58ea7de2f8f710cee5730a354ba6ea697534c3889d3506bb7e44700efd4"
+    },
+    {
+      "source_path": ".caprmedio/02_analysis/CA-A-066-ANALYSIS_RPRT--recommend-staged-work-execution-direction.md",
+      "target_path": ".caprmedio_caprmedio/02_analysis/CA-A-066-ANALYSIS_RPRT--recommend-staged-work-execution-direction.md",
+      "classification": "PROJECT_ANALYSIS",
+      "bytes": 8313,
+      "sha256": "06e78cbb14731eaaf490604cd1bd53cde753639945e090f4781947648678830e"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/2026-08-21T01-07-46Z-fpf-alignment-audit-intent-principle-repairs.md",
+      "target_path": "fpf-reports/2026-08-21T01-07-46Z-fpf-alignment-audit-intent-principle-repairs.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 11040,
+      "sha256": "ace2b8ce64d9fbcb291a4514260263a7d6dce1304d9a3f64cb495744f336bfc3"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T012014Z-fpf-design-challenge-intent-and-principles-proposal.md",
+      "target_path": "fpf-reports/20260821T012014Z-fpf-design-challenge-intent-and-principles-proposal.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 18205,
+      "sha256": "c1711001f9d943d3ef5b527b1129f6da48763641db09782eb81a7fab12316862"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T023206Z-fpf-alignment-audit-intent-and-active-principles.md",
+      "target_path": "fpf-reports/20260821T023206Z-fpf-alignment-audit-intent-and-active-principles.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 21390,
+      "sha256": "295574284911ea90fb55671cec80cbcb4ff4c9c2c7eea07bca6e73b2cdd3c49b"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T025954Z-fpf-design-challenge-intent-and-active-principles.md",
+      "target_path": "fpf-reports/20260821T025954Z-fpf-design-challenge-intent-and-active-principles.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 27878,
+      "sha256": "2085bf49f0beef63066e65cd13547b473d25ded0f13c4cd041f990a4c4104dd2"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T034644Z-fpf-alignment-audit-intent-and-principles.md",
+      "target_path": "fpf-reports/20260821T034644Z-fpf-alignment-audit-intent-and-principles.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 22698,
+      "sha256": "2cf7ea7be5a4b6f05b5a7c9c5aa56f4e5e00bc6967ed991cef7ec378a5570e44"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T043145Z-fpf-design-challenge-intent-principles-with-alignment-findings.md",
+      "target_path": "fpf-reports/20260821T043145Z-fpf-design-challenge-intent-principles-with-alignment-findings.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 18179,
+      "sha256": "83644f9ca59916eafd529a0d7b41b17cd180c999c81fb4e7818d1cf9286ea36d"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T045202Z-fpf-quality-improve-review-cycle-convergence.md",
+      "target_path": "fpf-reports/20260821T045202Z-fpf-quality-improve-review-cycle-convergence.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 15155,
+      "sha256": "dd7bc1d3ec37584839f80d85b0ce85b40829a5ad786e9f3dc4a8faccb28bb612"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T161903Z-fpf-sota-harvest-python-engineering-policies.md",
+      "target_path": "fpf-reports/20260821T161903Z-fpf-sota-harvest-python-engineering-policies.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 37917,
+      "sha256": "ae369db6945b9714b3b749d2bc4eabf9429358050678d668f2bc4a00adb5a2f9"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T212733Z-fpf-design-challenge-async-hook-manager-worker.md",
+      "target_path": "fpf-reports/20260821T212733Z-fpf-design-challenge-async-hook-manager-worker.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 10164,
+      "sha256": "221c8e9bc4e5a140d1cd3818afc5955adbd9cc353c1d57f1c26c0bd9bde491e0"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T213411Z-fpf-decision-synthesize-async-commit-automation.md",
+      "target_path": "fpf-reports/20260821T213411Z-fpf-decision-synthesize-async-commit-automation.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 16886,
+      "sha256": "4d1ba51f46a7fe8cd70a8867acfd4ecf22ea4f1f55267761f44bc7ba7d83b0ae"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T213453Z-fpf-design-challenge-apps-naming.md",
+      "target_path": "fpf-reports/20260821T213453Z-fpf-design-challenge-apps-naming.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 10301,
+      "sha256": "a0d1ba11f54eece28561d6263c72ee380fd56be7751c68e1a4436f329be8959f"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T215838Z-fpf-design-challenge-formal-first-principles-and-bootstrap-seed.md",
+      "target_path": "fpf-reports/20260821T215838Z-fpf-design-challenge-formal-first-principles-and-bootstrap-seed.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 23716,
+      "sha256": "9ce2695d060000335825431c028d529e5d8cd0bf92a385166d66bb72d7c81349"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T222024Z-fpf-design-challenge-cce-authority-profile.md",
+      "target_path": "fpf-reports/20260821T222024Z-fpf-design-challenge-cce-authority-profile.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 16381,
+      "sha256": "2a3bf70cc10a3609e5cc692df370ba0fb82b205a9a3e294620d3f4411c581535"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T225624Z-fpf-decision-synthesize-caprmedio-authority-language.md",
+      "target_path": "fpf-reports/20260821T225624Z-fpf-decision-synthesize-caprmedio-authority-language.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 22622,
+      "sha256": "eeb5642ca4618aed96a5878459f1c62b8818e244e87b038cd820329f9525bc13"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T230917Z-fpf-design-challenge-controller-owned-contracts.md",
+      "target_path": "fpf-reports/20260821T230917Z-fpf-design-challenge-controller-owned-contracts.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 11505,
+      "sha256": "8e3357756ffc9ed963a6e719fd9820545812dc2652273ef1aaf6f0e86dc5123c"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T231346Z-fpf-alignment-audit-active-methods.md",
+      "target_path": "fpf-reports/20260821T231346Z-fpf-alignment-audit-active-methods.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 24502,
+      "sha256": "9ab74a2b1062e37e281a33ee5cffb788bf0acbbd284bc6d60d1e335eab5857fe"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T231845Z-fpf-options-explore-contract-endpoint-policy.md",
+      "target_path": "fpf-reports/20260821T231845Z-fpf-options-explore-contract-endpoint-policy.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 12618,
+      "sha256": "e4cf244a625f08eb6f7c8116744f20280b5b0ae1447f55a30c9871800c304ee4"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T232644Z-fpf-options-explore-contract-content-role-matrix.md",
+      "target_path": "fpf-reports/20260821T232644Z-fpf-options-explore-contract-content-role-matrix.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 15698,
+      "sha256": "af7c8e4a32c5f8689605c134bf53eb0b496a50c8a30d2a3f3fb13a9243058790"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260821T233633Z-fpf-design-challenge-r-to-d-contract-model.md",
+      "target_path": "fpf-reports/20260821T233633Z-fpf-design-challenge-r-to-d-contract-model.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 6492,
+      "sha256": "f04c220d09623950e66898a93157b7088b48e6ffed1e99ee0fb2205ace74b111"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260822T001133Z-fpf-quality-improve-active-method-repair-plan.md",
+      "target_path": "fpf-reports/20260822T001133Z-fpf-quality-improve-active-method-repair-plan.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 11472,
+      "sha256": "0e4552a725df168eb6ffd76a4ec983e024d9b8b65cc64e3c4f607206d149cde8"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260822T224444Z-fpf-sota-harvest-realization-graph-repositories.md",
+      "target_path": "fpf-reports/20260822T224444Z-fpf-sota-harvest-realization-graph-repositories.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 26346,
+      "sha256": "3d5497a0ceb2a3e992b517ab7613fc972de6a958ace89e48201c3f4f70af6102"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260823T065227Z-fpf-design-challenge-realization-graph-design.md",
+      "target_path": "fpf-reports/20260823T065227Z-fpf-design-challenge-realization-graph-design.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 30845,
+      "sha256": "23bf3de496b2280cfa3f31e53110d935708b9a70769ced097bfd8dbd7d6fa737"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260823T080122Z-active-methods-alignment-repair-closure.md",
+      "target_path": "fpf-reports/20260823T080122Z-active-methods-alignment-repair-closure.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 6103,
+      "sha256": "ed1355fce1452114ab070cb938e3c48b293317eb69874f7289bee071729ef908"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260824T002115Z-fpf-options-explore-caprmedio-vs-hindsight.md",
+      "target_path": "fpf-reports/20260824T002115Z-fpf-options-explore-caprmedio-vs-hindsight.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 18751,
+      "sha256": "4e75bd352f7758ad9e7a08d4ee38b08393d734f61414a493d24e3f6857013ef3"
+    },
+    {
+      "source_path": ".caprmedio/fpf-reports/20260826T202459Z-fpf-sota-harvest-broad-context-agent-narrow-workflow.md",
+      "target_path": "fpf-reports/20260826T202459Z-fpf-sota-harvest-broad-context-agent-narrow-workflow.md",
+      "classification": "FPF_EVIDENCE",
+      "bytes": 39270,
+      "sha256": "921bd5cb5cd22f66616e1ec7e5091313920eb8af6f8575784f0cb0cba5cceefe"
+    }
+  ]
+}

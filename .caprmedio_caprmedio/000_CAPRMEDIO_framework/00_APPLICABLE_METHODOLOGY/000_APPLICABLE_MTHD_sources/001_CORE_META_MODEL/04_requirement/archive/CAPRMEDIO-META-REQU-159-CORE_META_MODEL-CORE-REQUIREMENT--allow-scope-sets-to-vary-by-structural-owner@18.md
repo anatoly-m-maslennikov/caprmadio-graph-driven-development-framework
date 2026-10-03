@@ -1,0 +1,22 @@
+---
+subjects:
+  governs: "scope-topology"
+  depends_on: []
+version: 18
+updated_at: 2026-09-07 09:59:57 +0000
+relations:
+  child_of:
+    - CA-M-001
+atom_id: "CAPRMEDIO-META-REQU-159"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Requirement"
+global_tier: 9
+---
+# Allow scope sets to vary by structural owner
+
+the governing owner declares the structural scope set applicable **to** **every** structural scope. Scope sets **may** be identical, overlapping, **or** different across structural owners; reuse **or** correspondence **must** be explicit **and** cannot be inferred from matching labels alone.

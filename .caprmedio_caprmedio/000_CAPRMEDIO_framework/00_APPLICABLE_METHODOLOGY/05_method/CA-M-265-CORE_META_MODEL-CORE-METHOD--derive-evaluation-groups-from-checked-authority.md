@@ -1,0 +1,21 @@
+---
+atom_id: "CA-M-265"
+cce_version: "cce_1"
+cce_form: "method"
+subjects:
+  governs:
+    continuant:
+      - "Atom/Content Role: Evaluation/grouping"
+  depends_on:
+    continuant:
+      - "Atom/Content Role"
+      - "Evaluation For Relation"
+version: 2
+updated_at: 2026-09-06 01:45:12 +0400
+relations: {}
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-265-CORE_META_MODEL-CORE-METHOD--derive-evaluation-groups-from-checked-authority.md
+---
+# Derive evaluation groups from checked authority
+
+**to** derive Er, Em, **and** Ed groups, resolve the Content Role of **every** `evaluation_for` target **and** include the Evaluation **in** the corresponding Requirement, Method, **or** Delivery group; **if** targets span multiple roles, **then** include it **in** **every** applicable group **without** assigning a new Content Role **or** persisting a duplicate target-role field. absence of individual targets on a Core Evaluation **must not** require an invented classification.

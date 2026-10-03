@@ -1,0 +1,69 @@
+[
+  {
+    "id": "missing_subject_dependency_revision",
+    "fixture": "missing-prerequisite.md",
+    "atom_id": "SYN-R-101",
+    "version": 1,
+    "carrier_path": ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-101-SYNTHETIC--use-blue-for-public-widget-displays.md",
+    "depends_on": ["Widget", "Widget/Color: Blue"],
+    "disposition": "revision",
+    "permission_paths": [".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-101-SYNTHETIC--use-blue-for-public-widget-displays.md"],
+    "reserved_successor_ids": [],
+    "preservation": [
+      "Preserve the public-display scope and the Active-status condition.",
+      "Preserve the Blue Color requirement while adding only required Subject dependencies."
+    ]
+  },
+  {
+    "id": "summary_only_entity_replacement",
+    "fixture": "summary-only-entity.md",
+    "atom_id": "SYN-R-102",
+    "version": 2,
+    "carrier_path": ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-102-SYNTHETIC--use-blue-for-widget-displays-seen-by-operator.md",
+    "depends_on": ["Widget", "Widget/Color: Blue", "Operator"],
+    "disposition": "replacement",
+    "permission_paths": [
+      ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-102-SYNTHETIC--use-blue-for-widget-displays-seen-by-operator.md",
+      ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-201-SYNTHETIC--use-blue-for-public-widget-displays.md"
+    ],
+    "reserved_successor_ids": ["SYN-R-201"],
+    "preservation": [
+      "Preserve the public-display Scope, Blue Claim, and Details value statement.",
+      "Correct the Summary in a reserved successor rather than changing a same-ID Summary."
+    ]
+  },
+  {
+    "id": "independent_details_obligation_split",
+    "fixture": "details-add-obligation.md",
+    "atom_id": "SYN-R-103",
+    "version": 7,
+    "carrier_path": ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-103-SYNTHETIC--use-blue-for-public-widget-displays.md",
+    "depends_on": ["Widget", "Widget/Color: Blue", "Widget/Size", "Widget/Size: Large"],
+    "disposition": "split",
+    "permission_paths": [
+      ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-103-SYNTHETIC--use-blue-for-public-widget-displays.md",
+      ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-301-SYNTHETIC--use-blue-for-public-widget-displays.md",
+      ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-302-SYNTHETIC--use-large-size-for-public-widget-displays.md"
+    ],
+    "reserved_successor_ids": ["SYN-R-301", "SYN-R-302"],
+    "preservation": [
+      "Preserve the complete public-display Blue Color contribution.",
+      "Preserve the independent Large Size obligation in a distinct successor with its conditions."
+    ]
+  },
+  {
+    "id": "unbold_must_formatting",
+    "fixture": "plain-operator.md",
+    "atom_id": "SYN-R-104",
+    "version": 3,
+    "carrier_path": ".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-104-SYNTHETIC--use-blue-for-public-widget-displays.md",
+    "depends_on": ["Widget", "Widget/Color: Blue"],
+    "disposition": "formatting",
+    "permission_paths": [".caprmedio_synthetic_project/000_CAPRMEDIO_framework/03_SYNTHETIC/04_requirement/SYN-R-104-SYNTHETIC--use-blue-for-public-widget-displays.md"],
+    "reserved_successor_ids": [],
+    "preservation": [
+      "Bold only the existing lowercase must operator; do not alter its proposition.",
+      "Preserve complete frontmatter bytes, including atom_id, version, and updated_at."
+    ]
+  }
+]

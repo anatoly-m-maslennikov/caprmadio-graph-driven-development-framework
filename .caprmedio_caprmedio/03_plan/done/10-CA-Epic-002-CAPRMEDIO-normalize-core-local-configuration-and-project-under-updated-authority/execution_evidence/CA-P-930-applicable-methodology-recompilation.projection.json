@@ -1,0 +1,75 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-30T20:03:41+04:00",
+  "schema": "caprmedio.applicable_methodology_recompilation.execution.v1",
+  "task_atom_id": "CA-P-930",
+  "result": "applicable_methodology_recompiled",
+  "precondition": {
+    "dependency_task_atom_id": "CA-P-929",
+    "dependency_done_carrier": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/done/12-CA-P-929-TASK--repair-lowercase-caprmedio-project-identity-authority.md",
+    "dependency_predecessor_archive": ".caprmedio_caprmedio/03_plan/10-CA-Epic-002-CAPRMEDIO-normalize-core-local-configuration-and-project-under-updated-authority/archive/12-CA-P-929-TASK--repair-lowercase-caprmedio-project-identity-authority@1.md"
+  },
+  "source_authority": {
+    "contributing_source_layers": [
+      "CORE_META_MODEL",
+      "LOCAL_CONFIGURATION"
+    ],
+    "source_root": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources",
+    "installed_extensions_contribute": false,
+    "source_frontier_digest": "b7c21b03fcbcb6e2e29d39c19d1c423aae0c3c408da466eecfbf9fd0e39d0c81",
+    "eligible_candidate_count": 632,
+    "selected_candidate_count": 632,
+    "repaired_source_revisions": [
+      {
+        "source_filename_identity": "CA-R-1055",
+        "compiled_atom_id": "CA-R-1055-GOVERN-REQUIREMENT",
+        "atom_revision": 12,
+        "source_layer": "LOCAL_CONFIGURATION",
+        "source_carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1055-GOVERN-REQUIREMENT--bind-project-configuration-identity-and-current-revision.md",
+        "source_carrier_sha256": "d3b19f53bba74850c47abdc90d691d4380398c1377962bf7b04c1f6593f97921"
+      },
+      {
+        "atom_id": "CA-R-1223",
+        "atom_revision": 2,
+        "source_layer": "LOCAL_CONFIGURATION",
+        "source_carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CA-R-1223-REQUIREMENT--identify-caprmedio-as-the-current-project.md",
+        "source_carrier_sha256": "b09c74039e0ccf64d4fe737589278eb690f5e8e5f1412fee77e760f5c03c31a4"
+      }
+    ]
+  },
+  "dry_run": {
+    "run_count": 2,
+    "reports_byte_identical": true,
+    "report_sha256": "b12696857974765e06fb848cbde3b4d90a56cd221d2f36185de1908a08a11b8d",
+    "conflict_count": 0,
+    "unresolved_conflict_count": 0,
+    "diagnostic_count": 0,
+    "approval_result_count": 0,
+    "stale_or_unapproved_approval_count": 0,
+    "approval_carrier_present": false,
+    "can_apply": true,
+    "excluded_selected_source_count": 0
+  },
+  "application": {
+    "apply_status": "APPLIED",
+    "generated_tree_digest": "b691b68b5f507407216cefe8c52cb8d707b4a4a273c35f733d2f1f3fa5b7ba41",
+    "generated_carrier_count": 632,
+    "generated_role_directories": [
+      "04_requirement",
+      "05_method",
+      "06_evaluation",
+      "07_delivery",
+      "09_ops"
+    ],
+    "source_snapshot_unchanged_after_apply": true,
+    "generated_provenance_error_count": 0,
+    "every_generated_source_path_resolves_to_selected_source": true
+  },
+  "validation": {
+    "compiler_test_command": "python3 -m unittest 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/tests/test_compile_applicable_methodology.py",
+    "compiler_tests_passed": 9,
+    "compiler_tests_failed": 0,
+    "source_frontier_carrier_count": 632,
+    "generated_tree_digest_recomputed_after_tests": "b691b68b5f507407216cefe8c52cb8d707b4a4a273c35f733d2f1f3fa5b7ba41"
+  }
+}

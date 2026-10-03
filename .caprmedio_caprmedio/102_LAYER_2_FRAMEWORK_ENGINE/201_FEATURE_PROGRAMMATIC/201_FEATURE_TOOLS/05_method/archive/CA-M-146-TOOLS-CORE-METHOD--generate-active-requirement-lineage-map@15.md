@@ -1,0 +1,27 @@
+---
+subjects:
+  governs: "projection-pipeline"
+  depends_on: []
+version: 15
+updated_at: "2026-09-17 20:20:04 +0000"
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+relations:
+  method_for:
+    - CA-R-1061
+    - CA-R-1062
+    - CA-R-1068
+---
+# Generate active Requirement Lineage Map
+
+generate the Lineage Map through this procedure:
+
+1. resolve exactly one requested structural unit from the common selectors, bind the output **to** `<selected-structural-unit-root>/stg_requirements_lineage_sections.md`, **and** select **every** active Requirement **in** that unit for displayed rows, but build **and** validate ancestry from the complete active project Requirement graph so a selected Layer **or** Feature retains Principle ancestry declared outside its own scope.
+2. treat each Principle as its own lineage root. traverse **only** direct authored `child_of` Requirement edges upward; require **every** Core Requirement parent **to** be a Principle **and** **every** Standard Requirement parent **to** be a Core, **and** classify missing, inactive, wrong-tier, cyclic, **or** rootless Requirements as Orphans with explicit reasons.
+3. for each non-orphan Requirement, compute the sorted unique set of **all** reachable Principle Requirement numbers. name its group by joining those unpadded numbers with `+`, so descendants of **only** `REQU-002` belong **to** `2` **and** descendants shared by `REQU-002` **and** `REQU-003` belong once **to** `2+3` rather than also appearing **in** `2` **or** `3`.
+4. sort group names by comparing their numbers from left **to** right; at the first difference, place the smaller number first, **and** place an exhausted prefix **before** **any** extension: `2`, `2+3`, `2+4`, `3`. within each group emit Principle, Core, **and** Standard subsections **in** that order **and** sort rows within each tier by numeric Requirement ID.
+5. require one parseable first level-one heading per displayed Requirement **and** use its text **after** `# ` verbatim as `Summary`; fail the build **when** it is missing **or** ambiguous **and** never use filename text.
+6. emit exactly three columns: `TYPE + ID`, `Summary`, **and** `Child of`. link `TYPE + ID` as `REQU-NNN` **to** the canonical Atom; link the direct authored `child_of` targets **in** `Child of`, sorted numerically; never substitute reachable ancestors **or** the lineage group key.
+7. **after** **all** normal lineage groups, emit exactly one final `Orphans` section. retain tier **and** numeric ordering inside it, **and** include each orphan reason **without** adding a fourth table column.
+8. bind the selected structural unit, exact complete-graph Atom source frontier, generator version, configuration, source digests, **and** `updated_at`; replace `stg_requirements_lineage_sections.md` atomically **in** that structural-unit root, record the completed Work Journal event, **and** prove byte-stable semantic output from the same frontier **before** reporting it current.

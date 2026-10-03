@@ -1,0 +1,267 @@
+{
+  "schema": "ca-p-957-applied-source-delta/v1",
+  "non_authoritative": true,
+  "batch": "10",
+  "frozen_plan": "CA-P-957-batch-10-planned-source-delta.json",
+  "frozen_plan_sha256": "6cd5e04f6e7e5129d93a0bdd16a73cf75ef2914464056ba4b5bc96c59d5fe42d",
+  "existing": [
+    {
+      "atom_id": "CA-M-114",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "before_version": 11,
+      "before_sha256": "5643187b2f414b33750bc604aed1445f3ec09e16ffbf9d012cd80f4ee39c3a59",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-114-CORE_META_MODEL-CORE-METHOD--derive-terminology-projection-from-definition-atoms@11.md",
+      "archive_sha256": "5643187b2f414b33750bc604aed1445f3ec09e16ffbf9d012cd80f4ee39c3a59",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-114-CORE_META_MODEL-METHOD--derive-terminology-projection-from-definition-atoms.md",
+      "after_version": 12,
+      "after_tier": "Standard",
+      "after_sha256": "a1849a544784a234a0171540465ef8421ea617235cc1f6a46de31b0a5b0f453c",
+      "after_governs_subjects": [
+        "Terminology Projection Derivation"
+      ]
+    },
+    {
+      "atom_id": "CA-M-125",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim.md",
+      "before_version": 11,
+      "before_sha256": "12a6874cdb45a88292000d901e5b7919dd57cdc5ca55737bf2630b2d60354074",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-125-CORE_META_MODEL-CORE-METHOD--assign-subjects-from-the-claim@11.md",
+      "archive_sha256": "12a6874cdb45a88292000d901e5b7919dd57cdc5ca55737bf2630b2d60354074",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+      "after_version": 12,
+      "after_tier": "Standard",
+      "after_sha256": "f46cac967dc7facffdfcb325f3705cc8e7fc240fd3c29571d6178932813d4927",
+      "after_governs_subjects": [
+        "Subject Assignment"
+      ]
+    },
+    {
+      "atom_id": "CA-M-135",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges.md",
+      "before_version": 11,
+      "before_sha256": "bc0a06f87358a9229c555b96a4d19f33b9bfe77924d5067f00edeef5a2c11d1d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-135-CORE_META_MODEL-CORE-METHOD--exclude-generated-only-implementation-edges@11.md",
+      "archive_sha256": "bc0a06f87358a9229c555b96a4d19f33b9bfe77924d5067f00edeef5a2c11d1d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md",
+      "after_version": 12,
+      "after_tier": "Standard",
+      "after_sha256": "f23ba1bb07650686e88386179917b59076933a0297d5e6e35313b596e45e97ee",
+      "after_governs_subjects": [
+        "provenance"
+      ]
+    },
+    {
+      "atom_id": "CA-M-224",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically.md",
+      "before_version": 9,
+      "before_sha256": "ab8698ad7b93963eefa2f2bf6de007c6bf7a6dcfd3d78a22441035fe1f6f4c42",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-224-CORE_META_MODEL-CORE-METHOD--compile-applicable-methodology-deterministically@9.md",
+      "archive_sha256": "ab8698ad7b93963eefa2f2bf6de007c6bf7a6dcfd3d78a22441035fe1f6f4c42",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-224-CORE_META_MODEL-METHOD--compile-applicable-methodology-deterministically.md",
+      "after_version": 10,
+      "after_tier": "Standard",
+      "after_sha256": "55529d881468da0c289d2cdf07711c3056c53b6dfbf484357e5e05cb7a0fe691",
+      "after_governs_subjects": [
+        "Applicable Methodology Compilation"
+      ]
+    },
+    {
+      "atom_id": "CA-M-231",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+      "before_version": 8,
+      "before_sha256": "4ecf2ddd51e668ca2537c2254b3f18affbf9c98cf98e6072216fdc7a41cff6bc",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-231-CORE_META_MODEL-CORE-METHOD--derive-navigation-projections-from-the-cce-claim@8.md",
+      "archive_sha256": "4ecf2ddd51e668ca2537c2254b3f18affbf9c98cf98e6072216fdc7a41cff6bc",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-231-CORE_META_MODEL-METHOD--derive-navigation-projections-from-the-cce-claim.md",
+      "after_version": 9,
+      "after_tier": "Standard",
+      "after_sha256": "f9895a0f22cbc0f70d560852b42c820e1be49732ada082efd536c963142f73f7",
+      "after_governs_subjects": [
+        "Navigation Projection Derivation"
+      ]
+    },
+    {
+      "atom_id": "CA-M-271",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-CORE-METHOD--resolve-confidence-thresholds-by-source-precedence.md",
+      "before_version": 1,
+      "before_sha256": "ab8c5b4eff51c9369fe7967350296f7c3b761b8ac92087327a1264893a345a14",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-271-CORE_META_MODEL-CORE-METHOD--resolve-confidence-thresholds-by-source-precedence@1.md",
+      "archive_sha256": "ab8c5b4eff51c9369fe7967350296f7c3b761b8ac92087327a1264893a345a14",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-METHOD--resolve-confidence-thresholds-by-source-precedence.md",
+      "after_version": 2,
+      "after_tier": "Standard",
+      "after_sha256": "c764b5102343d3e33e648cff210d4daf4192d1562e4b4c33c63900801fe1ebee",
+      "after_governs_subjects": [
+        "Confidence Threshold/resolution"
+      ]
+    },
+    {
+      "atom_id": "CA-E-243",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom.md",
+      "before_version": 13,
+      "before_sha256": "1bf3bc7e69058aebf3b460df359a4cbc244b809388a1ad13ac2c049d230ce4f9",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom@13.md",
+      "archive_sha256": "1bf3bc7e69058aebf3b460df359a4cbc244b809388a1ad13ac2c049d230ce4f9",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-243-CORE_META_MODEL-QA_CASE--validate-a-demand-atom.md",
+      "after_version": 14,
+      "after_tier": "Standard",
+      "after_sha256": "bbd77fccdd225ef877028fd4b2d0dc1c4ddfb9db15568d93a68be9e3f69b4b95",
+      "after_governs_subjects": [
+        "Demand Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-402",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets.md",
+      "before_version": 2,
+      "before_sha256": "9c15440f19ab1f224f55c2afd3bc86e994a5a32d2e3a6449c5041f6c946fd5a0",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-402-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-claim-value-sets@2.md",
+      "archive_sha256": "9c15440f19ab1f224f55c2afd3bc86e994a5a32d2e3a6449c5041f6c946fd5a0",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-EVALUATION--reject-invalid-claim-value-sets.md",
+      "after_version": 3,
+      "after_tier": "Standard",
+      "after_sha256": "3dbc3f69c1cb54ad82916ae67bbeda4ee3b6b6c7489825faf5d16f657f021574",
+      "after_governs_subjects": [
+        "Claim Value Set Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-403",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "before_version": 4,
+      "before_sha256": "885af24d0b441dcdc91e1ee5983b7b3b4d8a7b7b5d4c13e69f2dcaa9686ad3ea",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-403-CORE_META_MODEL-CORE-EVALUATION--report-exact-claim-value-set-consolidation-candidates@4.md",
+      "archive_sha256": "885af24d0b441dcdc91e1ee5983b7b3b4d8a7b7b5d4c13e69f2dcaa9686ad3ea",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-EVALUATION--report-exact-claim-value-set-consolidation-candidates.md",
+      "after_version": 5,
+      "after_tier": "Standard",
+      "after_sha256": "42e281e4e19e041567a2172bde8edbe090c5c0cca536135c1860ccb117b15127",
+      "after_governs_subjects": [
+        "Claim Value Set Consolidation Candidate Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-404",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations.md",
+      "before_version": 3,
+      "before_sha256": "0dc41bf4b68c35203100df2a9b1585389029771037037ea77c8e9371e040c1a2",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-404-CORE_META_MODEL-CORE-EVALUATION--reject-invalid-dependency-order-derivations@3.md",
+      "archive_sha256": "0dc41bf4b68c35203100df2a9b1585389029771037037ea77c8e9371e040c1a2",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-404-CORE_META_MODEL-EVALUATION--reject-invalid-dependency-order-derivations.md",
+      "after_version": 4,
+      "after_tier": "Standard",
+      "after_sha256": "38f210a1c07b8ad2f55e391e135079105fc821e985b6b6a2d47709a1d21d3524",
+      "after_governs_subjects": [
+        "Dependency Order Derivation Evaluation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-405",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+      "before_version": 2,
+      "before_sha256": "1525000bd12fbda68485f1fb4fc1217be13bec7dd538b7b01ce2ea58f7ce2d8d",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-405-CORE_META_MODEL-CORE-EVALUATION--validate-restricted-cce-canonical-signature-boundary@2.md",
+      "archive_sha256": "1525000bd12fbda68485f1fb4fc1217be13bec7dd538b7b01ce2ea58f7ce2d8d",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-EVALUATION--validate-restricted-cce-canonical-signature-boundary.md",
+      "after_version": 3,
+      "after_tier": "Standard",
+      "after_sha256": "c5d967ae5b30fd073972f15beaeeb65d30db294f71631c352c212919e547427a",
+      "after_governs_subjects": [
+        "Canonical Signature Derivation Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-407",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary.md",
+      "before_version": 2,
+      "before_sha256": "d9bdfad4ab20eef3eea89d7b63b2637daa89c9fed77a5ac3cb8ea50579465183",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-407-CORE_META_MODEL-CORE-EVALUATION--validate-canonical-scope-signature-boundary@2.md",
+      "archive_sha256": "d9bdfad4ab20eef3eea89d7b63b2637daa89c9fed77a5ac3cb8ea50579465183",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-EVALUATION--validate-canonical-scope-signature-boundary.md",
+      "after_version": 3,
+      "after_tier": "Standard",
+      "after_sha256": "1ad768fb1fadf7746219997550d681fddb9f5c894759048ddabdaa80da00ad4b",
+      "after_governs_subjects": [
+        "Canonical Scope Signature Derivation Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-424",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms.md",
+      "before_version": 5,
+      "before_sha256": "83029cf2574cb158c8b61cda722f6ee66d31ea994aaf3c8d391ddef22a04f397",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-424-CORE_META_MODEL-CORE-EVALUATION--validate-objective-atoms@5.md",
+      "archive_sha256": "83029cf2574cb158c8b61cda722f6ee66d31ea994aaf3c8d391ddef22a04f397",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-424-CORE_META_MODEL-EVALUATION--validate-objective-atoms.md",
+      "after_version": 6,
+      "after_tier": "Standard",
+      "after_sha256": "46004a0a41bdcf5eec49747b238ed328632188767381aca76d0d43e313ccc4fc",
+      "after_governs_subjects": [
+        "Objective Atom Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-425",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications.md",
+      "before_version": 3,
+      "before_sha256": "bf6e101d4a02a99862743eeed5d20824c8b92ac046274406ece3897a0b3c8e20",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-425-CORE_META_MODEL-CORE-EVALUATION--validate-relational-atom-classifications@3.md",
+      "archive_sha256": "bf6e101d4a02a99862743eeed5d20824c8b92ac046274406ece3897a0b3c8e20",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-425-CORE_META_MODEL-EVALUATION--validate-relational-atom-classifications.md",
+      "after_version": 4,
+      "after_tier": "Standard",
+      "after_sha256": "baa5c41e8e77ad9819d79733b491f926a9750775146b11664b7d0607a2cf172c",
+      "after_governs_subjects": [
+        "Relational Atom Classification Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-426",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment.md",
+      "before_version": 5,
+      "before_sha256": "36853f4795c0f68a772dd8ba2336afb0314f26f1f1ca816f0e0f7bff103b4452",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-426-CORE_META_MODEL-CORE-EVALUATION--validate-epic-containment@5.md",
+      "archive_sha256": "36853f4795c0f68a772dd8ba2336afb0314f26f1f1ca816f0e0f7bff103b4452",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-426-CORE_META_MODEL-EVALUATION--validate-epic-containment.md",
+      "after_version": 6,
+      "after_tier": "Standard",
+      "after_sha256": "5cb4d2a09e21781adfcdaa6ba1419e7c6571e1a8359c723978a04cb1b80eeb3c",
+      "after_governs_subjects": [
+        "Epic Containment Validation"
+      ]
+    },
+    {
+      "atom_id": "CA-E-427",
+      "operation": "revise",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity.md",
+      "before_version": 5,
+      "before_sha256": "3f7f0a9bd9aa1890e5393d08a3cd876eb1dc74a56ab1f328cd96fbb738b98caa",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-427-CORE_META_MODEL-CORE-EVALUATION--validate-epic-carriers-and-identity@5.md",
+      "archive_sha256": "3f7f0a9bd9aa1890e5393d08a3cd876eb1dc74a56ab1f328cd96fbb738b98caa",
+      "after_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-427-CORE_META_MODEL-EVALUATION--validate-epic-carriers-and-identity.md",
+      "after_version": 6,
+      "after_tier": "Standard",
+      "after_sha256": "2f83beeaecf177e4f9e6fbd67f356ce535f3691183d70b48b946795c011da88f",
+      "after_governs_subjects": [
+        "Epic Carrier and Identity Validation"
+      ]
+    }
+  ],
+  "additions": [],
+  "journal_status": "Unlogged under temporary Operator execution override; no conformance claim."
+}

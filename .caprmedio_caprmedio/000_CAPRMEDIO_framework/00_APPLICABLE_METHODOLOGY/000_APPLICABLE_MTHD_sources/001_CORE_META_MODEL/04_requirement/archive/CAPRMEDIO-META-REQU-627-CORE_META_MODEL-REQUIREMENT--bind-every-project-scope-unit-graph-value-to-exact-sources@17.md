@@ -1,0 +1,25 @@
+---
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs: "Project Scope Unit Graph Projection"
+  depends_on:
+    - "Project Structure"
+    - "Artifact/Revision"
+    - "Framework Instance Settings"
+    - "Atom"
+    - "Scope Unit"
+    - "Journal"
+version: 17
+updated_at: "2026-09-15 00:05:45 +0000"
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+relations:
+  child_of:
+    - CA-R-1052
+    - CAPRMEDIO-REQU-007-CORE-REQUIREMENT--full-minimal-traceability
+---
+# Bind every Project Scope Unit Graph value to exact sources
+
+**every** Project Scope Unit Graph Projection value **must** retain traceability **to** the exact Project Structure state, Settings state, Atom Revisions, Carrier observations, **or** Journal Records actually used **to** derive it. an unavailable **or** contradictory source **must** produce an explicit unresolved result for the affected value **without** erasing independent observations **or** claiming complete source coverage. declared values **and** observed materialization **must not** be conflated.

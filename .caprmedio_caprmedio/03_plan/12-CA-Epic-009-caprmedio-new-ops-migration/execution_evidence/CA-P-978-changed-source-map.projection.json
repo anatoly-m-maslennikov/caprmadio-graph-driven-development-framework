@@ -1,0 +1,157 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-978",
+  "generated_at": "2026-09-13T01:08:56+04:00",
+  "baseline_git_commit": "2f3708e01d55adbd1cbed6108eca54bdeaab4dcb",
+  "source_state": "current working tree, including pre-existing uncommitted changes",
+  "admission_source": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+  "admission_frontier_sha256": "af8cbb03622f61b9367ca2e4a487e12af32b8261b1d5f692854f5ae4612b4373",
+  "preceding_task_change_map": {
+    "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+    "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+  },
+  "changes": [
+    {
+      "identity": "CA-R-1452",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1452-CORE_META_MODEL-CORE-REQUIREMENT--define-action.md",
+      "version": 1,
+      "sha256": "fc2b5374e605a8ac57191300b8d0bfc9de0b9e2d4274429efce58d8fe0eda879",
+      "before_path": null,
+      "before_version": null,
+      "before_sha256": null,
+      "archive_path": null,
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "local_tier": "Core",
+      "global_tier": 7,
+      "status": "Active",
+      "classification": "new_definition",
+      "rationale": "Constitute the single accepted Action definition and useful independently governed subdivision boundary; no reusable procedure is authored.",
+      "identity_admission": "Next unreused Project-wide Requirement number under CA-R-732 and CA-D-378; source, project, history and Journal scan found no CA-R-1452 before creation.",
+      "successor_reference_effect": "New canonical Action definition; no prior owner, replacement relation, renamed alias or incoming-reference rewrite.",
+      "governed_subject": "Action",
+      "subject_serialization": "Existing continuant carrier only; no Entity-taxonomy assignment or future temporal-axis authority. P980/P984/P992 retain later decisions.",
+      "authority_basis": [
+        {
+          "identity": "CA-R-732",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-732-CORE_META_MODEL-REQUIREMENT--number-project-owned-atoms-within-each-content-role.md",
+          "sha256": "a03134ea5a072b60b5e780228e4bff5f706508ce638c25bc728e9b1b89a77191"
+        },
+        {
+          "identity": "CA-D-378",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-378-CORE_META_MODEL-DELIVERY--serialize-assigned-atom-identities.md",
+          "sha256": "78ee586527428613c076406add76aa613a7bea08514fac25074a8e8b4be1cfa2"
+        },
+        {
+          "identity": "CA-R-126",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-126-CORE_META_MODEL-CORE-REQUIREMENT--give-each-governed-term-one-definition-atom.md",
+          "sha256": "34da2cf6c5903c2d91957bc973e8a39147002d134dd5aebcf163f0e08679a742"
+        },
+        {
+          "identity": "CA-R-1279",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1279-CORE_META_MODEL-CORE-REQUIREMENT--govern-every-defined-term.md",
+          "sha256": "0ee2b732a5ea36ef6e9b44a1f3a2676c09405953a0e62e7ccee72875d63f2d6a"
+        },
+        {
+          "identity": "CA-R-1282",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1282-CORE_META_MODEL-CORE-REQUIREMENT--define-content-role-as-an-atom-property.md",
+          "sha256": "839002de28e15e8f7cd1147298ee76dbc8c1540472544371e9f4637fb9b2d29e"
+        },
+        {
+          "identity": "CA-R-1288",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1288-CORE_META_MODEL-CORE-REQUIREMENT--define-spec-content-roles.md",
+          "sha256": "38b0faabdd711b92fa67024df4f8c2e4441a20efe97e6f9353b1b6b98e8c9818"
+        },
+        {
+          "identity": "CA-R-659",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-659-CORE_META_MODEL-CORE-REQUIREMENT--define-core-local-tier.md",
+          "sha256": "a81bcabdfecc5e7d0066fbbcddcdeb85b83def20de2071b0c021db0b6c6d76f9"
+        },
+        {
+          "identity": "CA-R-1390",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1390-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-child-core-global-tier-from-parent-standard.md",
+          "sha256": "dbf728ab9c6ff32600a79ef0fe12c8c1bfd1a9bd47bcf6c5ab3405f79c40812e"
+        },
+        {
+          "identity": "CA-D-285",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-285-CORE_META_MODEL-DELIVERY--serialize-local-tier-filename-tokens.md",
+          "sha256": "6311cde6f236f0c7b4e60e079665c606166b948cd9e6a48fa376f185710011fa"
+        },
+        {
+          "identity": "CA-D-269",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-269-CORE_META_MODEL-DELIVERY--serialize-atom-subjects-in-frontmatter.md",
+          "sha256": "bb2c608c3a765f9ffba074e1e8de941708222cc361090b3fae4ad92c09c53685"
+        },
+        {
+          "identity": "CA-M-125",
+          "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL-METHOD--assign-subjects-from-the-claim.md",
+          "sha256": "79583eb11c4cc26601438fa979df8bea7d38563df43f3de33fd8a685a682857f"
+        }
+      ]
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-978",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/03-CA-P-978-TASK--define-atomic-actions.md",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/done/03-CA-P-978-TASK--define-atomic-actions.md",
+      "before_version": 1,
+      "version": 2,
+      "before_sha256": "bced5937a343a7e1a857e058f1b7b8902537709d1902a4690e42cfaf6da19399",
+      "sha256": "6f489e4cf67bed029dcc62fff11203e5ce7eb26f39f1335383b00431abbd737d",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/03-CA-P-978-TASK--define-atomic-actions@1.md",
+      "archive_sha256": "bced5937a343a7e1a857e058f1b7b8902537709d1902a4690e42cfaf6da19399",
+      "classification": "same_identity_move_update",
+      "status": "Done",
+      "previous_result_event": "c4e18737-c4bd-4a6b-91a5-26f172a53c59",
+      "previous_result_carrier": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-09-12-part-13.ndjson",
+      "previous_result_line": 3
+    },
+    {
+      "identity": null,
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-action-atomicity-report.md",
+      "version": 1,
+      "sha256": "8a3baf8fede71a6dd36e7e6d2483190bfc2de37a741a5e9222d8bae04edc3354",
+      "classification": "non_authoritative_execution_evidence"
+    }
+  ],
+  "validation": {
+    "preexisting_active_sources_unchanged_since_CA_P_977": 1557,
+    "excluded_drafts_unchanged": 53,
+    "prior_CA_P_977_archives_unchanged": 15,
+    "core_source_count": 676,
+    "canonical_action_definitions": [
+      ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1452-CORE_META_MODEL-CORE-REQUIREMENT--define-action.md"
+    ],
+    "new_source_sha256": "fc2b5374e605a8ac57191300b8d0bfc9de0b9e2d4274429efce58d8fe0eda879",
+    "yaml_valid": true,
+    "one_definition_claim_and_one_governed_target": true,
+    "git_index_unchanged": true,
+    "task_predecessor_archive_exact": true,
+    "task_metadata_unchanged_except_version_and_updated_at": true,
+    "task_original_body_preserved_with_completion_evidence_appended": true,
+    "task_definition_of_done_falsifier": false,
+    "semantic_acceptance_method": "Manual review of complete definition against all seven contextual fixtures in the report; these fixtures are not admitted Operations authority.",
+    "semantic_acceptance_fixture_count": 7,
+    "active_source_count_after": 1558,
+    "frozen_inventory_not_rewritten": true,
+    "git_index_sha256": "54ec1294d1bd71d296f56bbef952eed63fe84f8d498bd4e1b93d04257db14e1b",
+    "git_materialization": "Pending CA-D-335; unrelated staged index preserved. No stage, unstage, commit or push."
+  },
+  "journal": {
+    "schema_version": 3,
+    "action_id": "execute-ca-p-978-action-atomicity",
+    "expected_completed_event_count": 5,
+    "expected_recovered_event_count": 0,
+    "map_digest_binding": "The canonical Journal file-change event binds this map digest, avoiding self-reference."
+  },
+  "deferred_tasks": [
+    "CA-P-979",
+    "CA-P-980",
+    "CA-P-984",
+    "CA-P-985",
+    "CA-P-986",
+    "CA-P-992"
+  ]
+}

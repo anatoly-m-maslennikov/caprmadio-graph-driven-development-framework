@@ -1,0 +1,41 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-30T19:32:24+04:00",
+  "reconciled_at": "2026-08-30T19:55:31+04:00",
+  "schema": "caprmedio.project_configuration_revision_binding_repair.execution.v1",
+  "task_atom_id": "CA-P-928",
+  "result": "current_native_project_configuration_binding_repaired",
+  "canonical_project_configuration": {
+    "atom_id": "CAPRMEDIO-I-001",
+    "revision": 4,
+    "carrier_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/caprmedio_framework_settings.toml",
+    "sha256": "78d6669cb1d13cd4098ba182144633e339eb08d16b72decb3d52853521e1b306"
+  },
+  "identity_authority": {
+    "requirement": "CAPRMEDIO-GOV-REQU-661@10",
+    "binding": "CAPRMEDIO-I-001 to canonical native Carrier"
+  },
+  "revision_digest_receipt": {
+    "carrier_path": ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-30-part-1.ndjson",
+    "event_id": "59613820628308f1ee20b996b6af1bc77dc04539e6e001e922b022474e5ec10c",
+    "event": "completed",
+    "kind": "governed_project_change",
+    "action_type": "UPDATE",
+    "schema_version": 3,
+    "receipt_bound": true
+  },
+  "authority_reconciliation": {
+    "requirement": "CA-R-1055@12",
+    "delivery": "CA-D-328@1",
+    "work_journal_root": ".caprmedio_caprmedio/work_journal/",
+    "retired_control_root_binding": ".caprmedio/",
+    "status": "consistent"
+  },
+  "validation": {
+    "native_carrier_sha256_matches_receipt": true,
+    "current_receipt_count": 1,
+    "predecessor_archive": "CA-R-1055@11",
+    "manual_event_588_referenced": false,
+    "unrelated_local_configuration_authority_changed": false
+  }
+}

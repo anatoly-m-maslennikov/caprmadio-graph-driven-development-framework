@@ -1,0 +1,31 @@
+{
+  "task": "CA-P-960@2",
+  "result": "PASS",
+  "source_count": 698,
+  "reviewed_count": 698,
+  "source_bytes_preserved": 465991,
+  "independent_fields_checked": [
+    "canonical_identity",
+    "version",
+    "source_path",
+    "sha256"
+  ],
+  "complete_evidence_compared": true,
+  "all_source_hashes_preserved": true,
+  "review_count_by_category": {
+    "justified_non_D_contribution": 528,
+    "carrier_specification_outside_D": 12,
+    "mixed_role_carrier_claim": 37,
+    "unresolved_classification": 1,
+    "existing_D_authority": 120
+  },
+  "below_threshold_questions": [
+    "CA-R-1372",
+    "CA-R-963",
+    "CA-R-978",
+    "CA-R-997",
+    "CAPRMEDIO-META-REQU-119",
+    "CAPRMEDIO-GOV-REQU-752"
+  ],
+  "failures": []
+}

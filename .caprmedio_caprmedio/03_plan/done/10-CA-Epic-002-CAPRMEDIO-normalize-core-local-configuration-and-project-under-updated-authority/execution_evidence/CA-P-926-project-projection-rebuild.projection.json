@@ -1,0 +1,59 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-30T17:44:53+04:00",
+  "schema": "caprmedio.project_projection_rebuild.execution.v1",
+  "task_atom_id": "CA-P-926",
+  "result": "no_affected_registered_persistent_project_projection",
+  "source_change_range": {
+    "from_exclusive": "0879e6de4be23462f7f39691691c3f00ea4accc8",
+    "through_inclusive": "cdd0369bb836f7edc60c3043dfb8beeffcf51396",
+    "selection": "all repository-relative Carrier paths changed by CA-P-918 through CA-P-925",
+    "carrier_count": 1560,
+    "carrier_path_sha256": "458f43e7564c7fedc3eed503e8f52613d953c7bc6b89c57a36dd6b510433a8e1",
+    "carriers_by_top_level_root": {
+      ".caprmedio_caprmedio": 931,
+      ".caprmedio_framework": 629,
+      ".caprmedio": 0
+    }
+  },
+  "registered_persistent_project_projections": [
+    {
+      "carrier_path": ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml",
+      "registration_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-343-DELIVERY--place-project-scope-unit-graph-projection.md",
+      "output_sha256": "67f30f62935a5388a21551e222851a1674aa966879444f360a13eb7c6c57c8ad",
+      "declared_source_frontier_carrier": ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml",
+      "affected_by_source_change_range": false
+    },
+    {
+      "carrier_path": ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml",
+      "registration_carrier": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/07_delivery/CA-D-332-DELIVERY--place-project-scope-unit-graph-sources-projection.md",
+      "output_sha256": "2020c5465326b5e053b1417e46d941dad4cc387071b305a179d60c4cdf638bd1",
+      "declared_source_frontier_carrier": ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml",
+      "affected_by_source_change_range": false
+    }
+  ],
+  "declared_source_frontier": {
+    "carrier": ".caprmedio_caprmedio/project_scope_unit_graph_sources.projection.toml",
+    "source_carrier_count": 60,
+    "source_carrier_path_sha256": "21413508d9a05082f7de32c73303fac3be8169b30490e765478c1eea3904f877",
+    "intersection_with_changed_carriers": 0,
+    "comparison": "a changed Carrier intersects only when its repository-relative path equals a declared source Carrier or is a descendant of a declared source directory"
+  },
+  "excluded_from_rebuild": {
+    "applicable_methodology": "CA-P-924 owns generated Applicable Methodology Carriers",
+    "entity_graph_and_subject_index": "on-demand derived views are not persistent Projections",
+    "work_journals": "Journals are evidence Carriers, not Projections",
+    "historical_execution_evidence": "task-completion evidence has no active Project Projection registration"
+  },
+  "verification": {
+    "registered_projection_count": 2,
+    "affected_projection_count": 0,
+    "rebuild_count": 0,
+    "output_carrier_path_sha256": "a9f5b3d94be490520d1c3890adcf7c7bfa05b749501197495f94356d1dc5fa95",
+    "canonical_generator_dry_run": {
+      "command": "python3 -B 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+      "status": "not_needed_for_no_op",
+      "observation": "the legacy generator exits before source evaluation because its legacy control-root configuration is absent; this unrelated repair is outside CA-P-926"
+    }
+  }
+}

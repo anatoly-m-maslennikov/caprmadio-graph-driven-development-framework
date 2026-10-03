@@ -1,0 +1,433 @@
+{
+  "schema": "caprmedio.atom_authority_update.execution.v1",
+  "task_atom_id": "CA-P-911",
+  "source_frontier_sha256": "b44c42c5abb7d8f8478f674329b9547e6639e2af0111cf7aeeaeb6cd0ddc5b14",
+  "accepted_decision_set_sha256": "68218fdd0968bd18b2803cce164a3ee2d580abe116d53942b97af6cc7f2b2036",
+  "completed_at": "2026-08-28T22:55:17+04:00",
+  "outcomes": [
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-MMODEL-CORE-REQUIREMENT--define-task-scope.md",
+      "source_sha256": "e03bb51b7500a9c9193af727864acdf3f9e58bf39a64c4f8c1f477830272ce08",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1000-MMODEL-CORE-REQUIREMENT--define-task-scope.md",
+      "outcome_sha256": "303f116ef2cefa22231a88dd4aec0f9e03cbe5da87e43144a153fecd18e3d9af"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1005-SEMNTC-CORE-REQUIREMENT--define-task-done.md",
+      "source_sha256": "66d779f58959816fde2ee3519ff61da44e9d4feda744763195f295b1cab221d4",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1005-SEMNTC-CORE-REQUIREMENT--define-task-done.md",
+      "outcome_sha256": "185d7466f60585eac2cbf99ec2e04cc69bba4d1862ced2214e0f53cc6602f8d6"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1006-SEMNTC-CORE-REQUIREMENT--define-task-scope-resolution.md",
+      "source_sha256": "d42148343eda67c028ae351f3e32a055e98f08f2d6b82db438b3b6f127912d34",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1006-SEMNTC-CORE-REQUIREMENT--define-task-scope-resolution.md",
+      "outcome_sha256": "03e4119897839489d74e7f2b84c9d5548f872e0ee40f26b3bcde108dfd1e76ea"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1007-SEMNTC-CORE-REQUIREMENT--define-task-dependency.md",
+      "source_sha256": "c3847286e14dc1b5f09b822adaa77dc40b7215f6d120fd16ef4c7e1b154b5c8a",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1007-SEMNTC-CORE-REQUIREMENT--define-task-dependency.md",
+      "outcome_sha256": "58f790b9851f41f1926f9174440c2189637948476b42b76e00c90f9d5a4d6905"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1009-GOVERN-CORE-REQUIREMENT--resolve-task-scope-before-execution.md",
+      "source_sha256": "c4d38f17c2ad463648c466fe08fba59ac6e0ff22a10bf599834856548b03f5f0",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1009-GOVERN-CORE-REQUIREMENT--resolve-task-scope-before-execution.md",
+      "outcome_sha256": "9c8eec266130898dc32971b233cbde5f92485e103f5f128121c26e903e971327"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1043-MMODEL-CORE-REQUIREMENT--require-one-autonomous-confidence-threshold-per-task.md",
+      "source_sha256": "e9e98b9de8c68d934d1631f302a546bacd87006962105af0dfe3687c0f2a5b83",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1043-MMODEL-CORE-REQUIREMENT--require-one-autonomous-confidence-threshold-per-task.md",
+      "outcome_sha256": "7701c67b41e4eb5e6c2a7b18dc4ea5fe8fadd002fa93353bbeaaf2d67ae58acb"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1044-SEMNTC-CORE-REQUIREMENT--define-autonomous-confidence-threshold.md",
+      "source_sha256": "23a7bbeeb55c92c3d649f8386424af2b3eae3133efbd4d71f82dbc8ac0f6d2c2",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1044-SEMNTC-CORE-REQUIREMENT--define-autonomous-confidence-threshold.md",
+      "outcome_sha256": "ecefdf276a24eab0a4c7c6f121d013202762fd1d6d3d1ef916b3d4419e0b7add"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1045-SEMNTC-CORE-REQUIREMENT--restrict-autonomous-confidence-threshold-values.md",
+      "source_sha256": "fe39cfd00fe93246b588940f0bae8b803dc8d57d7db225c90f181d2c6404a92d",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1045-SEMNTC-CORE-REQUIREMENT--restrict-autonomous-confidence-threshold-values.md",
+      "outcome_sha256": "30b5f81f3329dc25214623521de5b69b758f570a8afd6fa6b5f83eb8a626682a"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1078-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-author.md",
+      "source_sha256": "5c4ee9663bd7cdc1514c0f7e17f22faa128a964e3e5afa37b424dff8b0e43d69",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1078-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-author.md",
+      "outcome_sha256": "ff732724475f6a0c6ae98529d2f38cfb305b3ee82ca79f69b4e22de3e216db35"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1079-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-assignee.md",
+      "source_sha256": "7487cf841aba0a2e575a737d93c54412921a65c987f090dfc751d05e75071ac8",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1079-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-assignee.md",
+      "outcome_sha256": "618fc87dc246c1fbf1ddf3c9394df11a2920b5d9adbd6fa982566e72d2bffb47"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1080-SEMNTC-CORE-REQUIREMENT--default-task-author-to-the-operator.md",
+      "source_sha256": "60f35e08a1c0a45a6ca332e669d838391c84f431e1d54b970eada5be1f38d9bc",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1080-SEMNTC-CORE-REQUIREMENT--default-task-author-to-the-operator.md",
+      "outcome_sha256": "d5c573fba5c0c7171e91864c8fd405a8949685d098d769a716587b28ce879237"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1081-SEMNTC-CORE-REQUIREMENT--default-task-assignee-to-an-ai-agent.md",
+      "source_sha256": "f7d67d17ab900b4405cf593f2310efb958132a40b845093532e12887c4393a90",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1081-SEMNTC-CORE-REQUIREMENT--default-task-assignee-to-an-ai-agent.md",
+      "outcome_sha256": "b718ff3063a8461d92153fa5fe281529096d9afb182973b9d7b88bad9b42f47c"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1211-MMODEL-CORE-REQUIREMENT--define-task-job.md",
+      "source_sha256": "d5aaa247ce354c52a28e87f7c7a4113d396ee3a1bb808f0f5330a675212fdec4",
+      "disposition": "ARCHIVE_AS_CONFLICT",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1211-MMODEL-CORE-REQUIREMENT--define-task-job@1.md",
+      "outcome_sha256": "d5aaa247ce354c52a28e87f7c7a4113d396ee3a1bb808f0f5330a675212fdec4"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-MMODEL-CORE-REQUIREMENT--define-definition-of-done-for-task-job.md",
+      "source_sha256": "e799012e39af4e00dff2cf828e5e303ea60f82672c54979ab778944e8f7ace3f",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1212-MMODEL-CORE-REQUIREMENT--define-definition-of-done-for-task-job.md",
+      "outcome_sha256": "2f47ffc98b001ad76138ab9c8e3c429d8ea99d62f8e8fc83bd2fb2675b12fc7e"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-MMODEL-CORE-REQUIREMENT--define-task-details-for-task-job.md",
+      "source_sha256": "50ae0572c5ff4c86563725f35e8c78aae6cde1bf7e0a54bf66a94f11a918fd27",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1214-MMODEL-CORE-REQUIREMENT--define-task-details-for-task-job.md",
+      "outcome_sha256": "abdafb958dc8858a5f9ef2ffdaa9676cad328813cf99ad36011e57e4e9e80a9b"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-988-MMODEL-CORE-REQUIREMENT--define-epic-atom.md",
+      "source_sha256": "58f46e0a86e0ba1823a8ec066ed96ba7c11e59174611a97cb044cd34002f249c",
+      "disposition": "REPLACE_WITH_NEW_AUTHORITY",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-988-MMODEL-CORE-REQUIREMENT--define-epic-atom@3.md",
+      "outcome_sha256": "58f46e0a86e0ba1823a8ec066ed96ba7c11e59174611a97cb044cd34002f249c"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-989-MMODEL-CORE-REQUIREMENT--define-task-atom.md",
+      "source_sha256": "4c04648fec08580299c98c2b1b00842baa97f05799fa5fdeaa8ad7f1f1531a15",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-989-MMODEL-CORE-REQUIREMENT--define-task-atom.md",
+      "outcome_sha256": "3834b8976d58256ba15c67d4f24fd27f7361a729514ef56a6b357afaecf01554"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-990-MMODEL-CORE-REQUIREMENT--permit-standalone-task-atoms.md",
+      "source_sha256": "ec42b5d26a1955553e28e6ea2cdf5a2ab2d5be04e43ae5b85ad774f3283e261d",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-990-MMODEL-CORE-REQUIREMENT--permit-standalone-task-atoms.md",
+      "outcome_sha256": "a685e3929b92814a43dd69a8a1aace30679d0e0bdbcf7a6b13f8b2712649ec1e"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-991-SEMNTC-CORE-REQUIREMENT--define-work-sequence-number.md",
+      "source_sha256": "37dee54b9f36f1b41ff623160ecd5838b970b4b68635d9a1ad82c73af867578e",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-991-SEMNTC-CORE-REQUIREMENT--define-work-sequence-number.md",
+      "outcome_sha256": "bb80eda96443cdeabb0ed01355d4ba11fe53e59f10dadeeeb80f6d5fecfada4b"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-992-SEMNTC-CORE-REQUIREMENT--separate-work-sequence-from-atom-identity.md",
+      "source_sha256": "a86c56cd81485d009c567a644f0b295d4220cabcf85d1d4a4fb43420be394164",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-992-SEMNTC-CORE-REQUIREMENT--separate-work-sequence-from-atom-identity.md",
+      "outcome_sha256": "159d2ea3b9a0740f5fd8d5104faa561ade8d7d0755ec69e385dc721bc7601fe0"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-GOVERN-CORE-REQUIREMENT--validate-work-sequence-numbers.md",
+      "source_sha256": "d387c86e2ca64b6907d041d488ba45c8b5230f39b66dd62ecf0b19a66cdf88d4",
+      "disposition": "UPDATE",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-GOVERN-CORE-REQUIREMENT--validate-work-sequence-numbers.md",
+      "outcome_sha256": "8e646b278f9919eda3348980142bb699c564169aa2d99ecbbf4a0123690aa1c1"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-140--contain-each-task-in-at-most-one-epic.md",
+      "source_sha256": "c9747cd32ad092e9a67526eacc5ecf7bbb7a3d693dfbc19bb79fc569e5c51871",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-140--contain-each-task-in-at-most-one-epic.md",
+      "outcome_sha256": "736b949d3e071268493db54b25e9d1610172d70b2f738d14d41e845832cd8d16"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-CORE-REQUIREMENT--define-definition-of-done.md",
+      "source_sha256": "cf81d26640d51b33f5d54ee29674c691cd84384963a84ac7a14970cc3a3dc822",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R--MMODEL-CORE-REQUIREMENT--define-definition-of-done@1.md",
+      "outcome_sha256": "cf81d26640d51b33f5d54ee29674c691cd84384963a84ac7a14970cc3a3dc822"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/drafts/CA-R--MMODEL-CORE-REQUIREMENT--make-task-summary-express-task-goal.md",
+      "source_sha256": "68d40e23337f13a1225928c057f7feb220182b9be3e0f7fcf7fc74cd214d935f",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R--MMODEL-CORE-REQUIREMENT--make-task-summary-express-task-goal@1.md",
+      "outcome_sha256": "68d40e23337f13a1225928c057f7feb220182b9be3e0f7fcf7fc74cd214d935f"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-MMODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "source_sha256": "65ec854e9f4d85cb373ceb59d840964ce74b7e396582e9faa63d283f00ce9ac9",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-111-MMODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "outcome_sha256": "e4a6ade239e552b8939a836d6c582a1b114b28430c82edf38fbfe9848ae81394"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-GOVERN-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "source_sha256": "ffc863a7bf701707d25dd4a3b3ed3b3b41d877e6c12fd19f8c1e637809b737c8",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-GOVERN-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "outcome_sha256": "70a4e4c0e04e9d469d2411c90ad548233916f04f088e8888360bc6e6b0f5c427"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-SEMNTC-CORE-METHOD--author-task-atoms.md",
+      "source_sha256": "1c5ceb70c3a7cd3c8d42fdd8cff8cbccd0b184ce41a2864ff3aff280f8d6d181",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-124-SEMNTC-CORE-METHOD--author-task-atoms.md",
+      "outcome_sha256": "e6204535f37de39e21c0e2863a334b788f386071744384521649b9fcf60ba174"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-SEMNTC-CORE-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "source_sha256": "022e46b7c20a9c1320e9910ddb47c455163b003544c3d5ba0c507a69130a923b",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-130-SEMNTC-CORE-METHOD--apply-a-task-autonomous-confidence-threshold.md",
+      "outcome_sha256": "9718185f0245c8cc12a7d96efccf8686194269fdc18574275936cd8bc8f38a94"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--GOVERN-CORE-METHOD--author-one-cce-claim-per-atom.md",
+      "source_sha256": "698bb6bfc1a1eaff8f0dd9afe95aa3a062ffeae8d9d7a9b20406745084195586",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M--GOVERN-CORE-METHOD--author-one-cce-claim-per-atom@2.md",
+      "outcome_sha256": "698bb6bfc1a1eaff8f0dd9afe95aa3a062ffeae8d9d7a9b20406745084195586"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--MMODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary.md",
+      "source_sha256": "9fc7d4a324a08549102a01759d2e42b11a5ac187ba3d8718f19208951c9cfbcd",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M--MMODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary@2.md",
+      "outcome_sha256": "9fc7d4a324a08549102a01759d2e42b11a5ac187ba3d8718f19208951c9cfbcd"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/drafts/CA-M--SEMNTC-CORE-METHOD--author-task-atoms.md",
+      "source_sha256": "7e0ed308c111b6f41750333bbf3e622dd31d24daf01ccb6adab9738327ccebb9",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M--SEMNTC-CORE-METHOD--author-task-atoms@1.md",
+      "outcome_sha256": "7e0ed308c111b6f41750333bbf3e622dd31d24daf01ccb6adab9738327ccebb9"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-GOVERN-QA_CASE--validate-task-atoms.md",
+      "source_sha256": "d2531adf26e119d8f3503397d91bab67556fd09036209f90a603aaeb4fed1a85",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-245-GOVERN-QA_CASE--validate-task-atoms.md",
+      "outcome_sha256": "676ee7fba3ebcc1456e5338ef43b12897d65cf9368bf4524c4a4523122ce57f3"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/drafts/CA-E--GOVERN-QA_CASE--validate-task-atoms.md",
+      "source_sha256": "d51bf3b5c144a157f5c4277158769bb454daff07d5c917ae7d562822756f2b85",
+      "disposition": "ARCHIVE_AS_SUPERSEDED",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E--GOVERN-QA_CASE--validate-task-atoms@1.md",
+      "outcome_sha256": "d51bf3b5c144a157f5c4277158769bb454daff07d5c917ae7d562822756f2b85"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753--register-plan-role-types.md",
+      "source_sha256": "8a0ece7655138a2d55ce44d5e86899949d3db4bdb36407a7cf44f7e563b3f66a",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753--register-plan-role-types.md",
+      "outcome_sha256": "c4d54fd6b13e0d5f818d24a477c66c59bcc84c59538cc6ba11914ad335b934c5"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic.md",
+      "source_sha256": "6d7ed0f6363f224299779846c597c63b0bb8c42103d9d61d498c30903c5843f9",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic.md",
+      "outcome_sha256": "9089bb32eb02f72871dec2380c937f7ccd688721f16a80abb8d726a0c4f927df"
+    },
+    {
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+      "source_sha256": "9c673833356795d34d57be67a23900a35e2f6454e164cc8035ee769f3183c278",
+      "disposition": "UPDATE_AFTER_REVIEW",
+      "outcome_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits.md",
+      "outcome_sha256": "ce6a5d89b1744e1e04281078dac769667b1d54a4f12d25a5461105af7b72a763"
+    }
+  ],
+  "new_authority": [
+    {
+      "atom_id": "CA-R-1298",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1298-MMODEL-CORE-REQUIREMENT--define-epic-as-a-relational-artifact.md",
+      "sha256": "36873654f4b1c80a8a089cbba16594ba0f5c9aebb2b1e298c8afe36d3a67fe4a"
+    },
+    {
+      "atom_id": "CA-R-1299",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1299-MMODEL-CORE-REQUIREMENT--keep-epic-identity-independent-from-its-members.md",
+      "sha256": "5dffeb3526e70fda7b27a321c82cacb606d8ba07fae5e7f03d2e4fcaf024915c"
+    },
+    {
+      "atom_id": "CA-R-1300",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1300-MMODEL-CORE-REQUIREMENT--use-only-delivery-derived-containment-for-epic-membership.md",
+      "sha256": "f9287df8bc139f3589f300293f8befb5d9edb193ec0cf2a648e6b8ba97a22932"
+    },
+    {
+      "atom_id": "CA-R-1301",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1301-MMODEL-CORE-REQUIREMENT--permit-epics-to-contain-epics-and-tasks.md",
+      "sha256": "7af0663ed88bc2ff4841b90ad58b3a06d32225dcdd1a3f844a37019c031e696a"
+    },
+    {
+      "atom_id": "CA-R-1302",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1302-MMODEL-CORE-REQUIREMENT--derive-recursive-epic-membership-by-transitive-closure.md",
+      "sha256": "28c0b812023b8a99d0270e69a23e976a7aaec0398eca55bbf95abc911d9561bc"
+    },
+    {
+      "atom_id": "CA-R-1303",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1303-MMODEL-CORE-REQUIREMENT--prohibit-epic-containment-cycles.md",
+      "sha256": "f44c4048b4f306a739318719faeff70213f7bdb06104b48567689e9c606cd3d6"
+    },
+    {
+      "atom_id": "CA-R-1304",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1304-MMODEL-CORE-REQUIREMENT--define-epic-identifier-grammar.md",
+      "sha256": "89c47af7e03c4ef7dbb12a8aa2ad54cf0ef325b25fba36ae205886640dfd8cdc"
+    },
+    {
+      "atom_id": "CA-R-1305",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1305-MMODEL-CORE-REQUIREMENT--reserve-ca-p-identifiers-for-plan-atoms.md",
+      "sha256": "b4d92ed18c156f00b7194eafb60b5b20568584de6b1f8907c0a833c039d3763f"
+    }
+  ],
+  "preserved_revision_snapshots": [
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1000-MMODEL-CORE-REQUIREMENT--define-task-scope@2.md",
+      "sha256": "e03bb51b7500a9c9193af727864acdf3f9e58bf39a64c4f8c1f477830272ce08"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1005-SEMNTC-CORE-REQUIREMENT--define-task-done@3.md",
+      "sha256": "66d779f58959816fde2ee3519ff61da44e9d4feda744763195f295b1cab221d4"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1006-SEMNTC-CORE-REQUIREMENT--define-task-scope-resolution@2.md",
+      "sha256": "d42148343eda67c028ae351f3e32a055e98f08f2d6b82db438b3b6f127912d34"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1007-SEMNTC-CORE-REQUIREMENT--define-task-dependency@3.md",
+      "sha256": "c3847286e14dc1b5f09b822adaa77dc40b7215f6d120fd16ef4c7e1b154b5c8a"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1009-GOVERN-CORE-REQUIREMENT--resolve-task-scope-before-execution@3.md",
+      "sha256": "c4d38f17c2ad463648c466fe08fba59ac6e0ff22a10bf599834856548b03f5f0"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1043-MMODEL-CORE-REQUIREMENT--require-one-autonomous-confidence-threshold-per-task@3.md",
+      "sha256": "e9e98b9de8c68d934d1631f302a546bacd87006962105af0dfe3687c0f2a5b83"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1044-SEMNTC-CORE-REQUIREMENT--define-autonomous-confidence-threshold@2.md",
+      "sha256": "23a7bbeeb55c92c3d649f8386424af2b3eae3133efbd4d71f82dbc8ac0f6d2c2"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1045-SEMNTC-CORE-REQUIREMENT--restrict-autonomous-confidence-threshold-values@2.md",
+      "sha256": "fe39cfd00fe93246b588940f0bae8b803dc8d57d7db225c90f181d2c6404a92d"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1078-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-author@2.md",
+      "sha256": "5c4ee9663bd7cdc1514c0f7e17f22faa128a964e3e5afa37b424dff8b0e43d69"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1079-MMODEL-CORE-REQUIREMENT--give-every-task-one-effective-assignee@2.md",
+      "sha256": "7487cf841aba0a2e575a737d93c54412921a65c987f090dfc751d05e75071ac8"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1080-SEMNTC-CORE-REQUIREMENT--default-task-author-to-the-operator@2.md",
+      "sha256": "60f35e08a1c0a45a6ca332e669d838391c84f431e1d54b970eada5be1f38d9bc"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1081-SEMNTC-CORE-REQUIREMENT--default-task-assignee-to-an-ai-agent@2.md",
+      "sha256": "f7d67d17ab900b4405cf593f2310efb958132a40b845093532e12887c4393a90"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1212-MMODEL-CORE-REQUIREMENT--define-definition-of-done-for-task-job@1.md",
+      "sha256": "e799012e39af4e00dff2cf828e5e303ea60f82672c54979ab778944e8f7ace3f"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-1214-MMODEL-CORE-REQUIREMENT--define-task-details-for-task-job@1.md",
+      "sha256": "50ae0572c5ff4c86563725f35e8c78aae6cde1bf7e0a54bf66a94f11a918fd27"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-989-MMODEL-CORE-REQUIREMENT--define-task-atom@4.md",
+      "sha256": "4c04648fec08580299c98c2b1b00842baa97f05799fa5fdeaa8ad7f1f1531a15"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-990-MMODEL-CORE-REQUIREMENT--permit-standalone-task-atoms@3.md",
+      "sha256": "ec42b5d26a1955553e28e6ea2cdf5a2ab2d5be04e43ae5b85ad774f3283e261d"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-991-SEMNTC-CORE-REQUIREMENT--define-work-sequence-number@3.md",
+      "sha256": "37dee54b9f36f1b41ff623160ecd5838b970b4b68635d9a1ad82c73af867578e"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-992-SEMNTC-CORE-REQUIREMENT--separate-work-sequence-from-atom-identity@4.md",
+      "sha256": "a86c56cd81485d009c567a644f0b295d4220cabcf85d1d4a4fb43420be394164"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CA-R-997-GOVERN-CORE-REQUIREMENT--validate-work-sequence-numbers@4.md",
+      "sha256": "d387c86e2ca64b6907d041d488ba45c8b5230f39b66dd62ecf0b19a66cdf88d4"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-140--contain-each-task-in-at-most-one-epic@5.md",
+      "sha256": "c9747cd32ad092e9a67526eacc5ecf7bbb7a3d693dfbc19bb79fc569e5c51871"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-111-MMODEL-CORE-METHOD--author-one-cce-claim-and-derived-summary@6.md",
+      "sha256": "65ec854e9f4d85cb373ceb59d840964ce74b7e396582e9faa63d283f00ce9ac9"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-115-GOVERN-CORE-METHOD--author-one-cce-claim-per-atom@6.md",
+      "sha256": "ffc863a7bf701707d25dd4a3b3ed3b3b41d877e6c12fd19f8c1e637809b737c8"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-124-SEMNTC-CORE-METHOD--author-task-atoms@8.md",
+      "sha256": "1c5ceb70c3a7cd3c8d42fdd8cff8cbccd0b184ce41a2864ff3aff280f8d6d181"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/archive/CA-M-130-SEMNTC-CORE-METHOD--apply-a-task-autonomous-confidence-threshold@3.md",
+      "sha256": "022e46b7c20a9c1320e9910ddb47c455163b003544c3d5ba0c507a69130a923b"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CA-E-245-GOVERN-QA_CASE--validate-task-atoms@7.md",
+      "sha256": "d2531adf26e119d8f3503397d91bab67556fd09036209f90a603aaeb4fed1a85"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-753--register-plan-role-types@10.md",
+      "sha256": "8a0ece7655138a2d55ce44d5e86899949d3db4bdb36407a7cf44f7e563b3f66a"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-META-REQU-139--classify-development-backlog-as-epic@5.md",
+      "sha256": "6d7ed0f6363f224299779846c597c63b0bb8c42103d9d61d498c30903c5843f9"
+    },
+    {
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/archive/CAPRMEDIO-GOV-REQU-372--propose-development-backlog-splits@6.md",
+      "sha256": "9c673833356795d34d57be67a23900a35e2f6454e164cc8035ee769f3183c278"
+    }
+  ],
+  "validation": {
+    "active_yaml": "PASS",
+    "active_atom_id_uniqueness": "PASS",
+    "epic_relational_artifact_not_atom": "PASS",
+    "recursive_acyclic_epic_membership": "PASS",
+    "task_plan_type": "PASS",
+    "standalone_task_permission": "PASS",
+    "task_job_authority_inactive": "PASS",
+    "task_author_assignee_threshold": "PASS",
+    "threshold_99_admitted": "PASS",
+    "epic_identifier_grammar": "PASS",
+    "ca_p_reserved_for_plan_atoms": "PASS",
+    "carrier_containment_materialization_deferred_to_ca_p_913": true,
+    "git_diff_check": "PASS"
+  },
+  "execution_sha256": "4e24ee23db246898dd920a456bee617061f1ffd1c93ad8f56c231266b5c8fb11"
+}

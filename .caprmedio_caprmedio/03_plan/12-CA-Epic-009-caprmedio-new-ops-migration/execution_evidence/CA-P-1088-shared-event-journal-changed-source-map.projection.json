@@ -1,0 +1,224 @@
+{
+  "artifact_form": "projection",
+  "authority": "non_authoritative_execution_evidence",
+  "task_atom_id": "CA-P-1088",
+  "stage": "operator_directed_shared_event_journal_update",
+  "generated_at": "2026-09-14T01:17:47+04:00",
+  "task_status": "Active",
+  "stage_status": "applied_bounded_authority_update",
+  "execution_authority": "Explicit Operator request to update Atoms with one authoritative Event Journal and derived artifact-change/process-execution logs; not full Task execution.",
+  "admission": {
+    "freeze": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-976-active-source-inventory.projection.json",
+      "sha256": "f60cbebd0a2d91987cbfed9701f9d7233c718c1d51e644644c4f7d473450fb14"
+    },
+    "ordered_prior_source_maps": [
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-977-changed-source-map.projection.json",
+        "sha256": "e421ff362ae1d44039a739f1a587170c2bcc02de42c90b83ec89f196c3cfdff8"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-978-changed-source-map.projection.json",
+        "sha256": "769f33cabdd1e5c3a75f143814e93d6da080680168a18ad5dc9b402e5ffccf8b"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-979-changed-source-map.projection.json",
+        "sha256": "1fb1ac093fa261843b866e97e1d354b2a3351804c737e8d881259a1a8b534bac"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-980-direct-subjects-changed-source-map.projection.json",
+        "sha256": "99d8e00ebd3b64f4720cabeffb1b5273a51f088a3454ffc45d7342d5ffb33d72"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1079-changed-source-map.projection.json",
+        "sha256": "6efd7d43ffdfa24b6d4c2e36c1de4be615173b2561641fcf09c7a3d732def9bb"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1080-changed-source-map.projection.json",
+        "sha256": "a0b2631e6ce5c8f57aa34b069ff1af4ee717a42b5c1c6406e58982c026554c08"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1081-changed-source-map.projection.json",
+        "sha256": "3318e467bc5f116399de3cef1082ee61c0a1a52a2b14e3647fa6efb4ce13a3d6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-implementation-overview-changed-source-map.projection.json",
+        "sha256": "d02e5db907366cbcebabbc4d7ea034570b99e39225e363d61ef609455f6da5ce"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-graph-types-changed-source-map.projection.json",
+        "sha256": "db1b7f3527b76a06760f0a2676638c1b62a01d996fe0dcc49c827e96bcfea903"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-evaluation-boundaries-changed-source-map.projection.json",
+        "sha256": "96e511268d0429494a51b218a1382ddf87832a7ed62180152f9e679f1d588a0e"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-catalog-classification-changed-source-map.projection.json",
+        "sha256": "2ce75ae77e32a6805291b9915e99b56178e6a57a760a4337714c6b00bb40ccda"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-atom-subjects-graph-changed-source-map.projection.json",
+        "sha256": "60c54accd2ace34c00bd3c1ea92f361d377bdc2305d9e2b5416b7b48458886e1"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-derivation-materialization-changed-source-map.projection.json",
+        "sha256": "94eeb0ef8d46335836dacbadeaa40c784b6b10bf506541ae323bc95b154115e6"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-reconciled-projection-changed-source-map.projection.json",
+        "sha256": "9d2ffb90e553bf657a5a9801a5ced769b62b292c77991303b78c1714a3a51caf"
+      },
+      {
+        "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1086-rmedo-evaluation-targets-changed-source-map.projection.json",
+        "sha256": "9c9530f13006a225632a86c6d352487726b1cbfd5e20eed520163b40e6ea200c"
+      }
+    ],
+    "inventory": {
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1087-projection-and-journal-authority-inventory.projection.json",
+      "sha256": "07074be7045503b464efc80b0978c4b7628d4a94d782b113d275c9269a23076e"
+    },
+    "frontier_before": 1565,
+    "frontier_after": 1566,
+    "excluded_drafts": 53
+  },
+  "changes": [
+    {
+      "identity": "CAPRMEDIO-META-REQU-656",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form.md",
+      "before_version": 9,
+      "before_sha256": "4787e2d92fb4059610a7afab33e82bb91068304088260af22719728fcac3aa36",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form.md",
+      "version": 10,
+      "sha256": "ec10a4411c72aa1edd62d67fd11de24ba3940ab13dd4d424d4c1da4d53631664",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-656-CORE_META_MODEL-CORE-REQUIREMENT--define-journal-artifact-form@9.md",
+      "archive_sha256": "4787e2d92fb4059610a7afab33e82bb91068304088260af22719728fcac3aa36",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "status": "Active",
+      "scope_unit": "CORE_META_MODEL",
+      "new_identity": false
+    },
+    {
+      "identity": "CAPRMEDIO-META-REQU-158",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance.md",
+      "before_version": 9,
+      "before_sha256": "18c8259c69c8bd39aa25c10c4db4df9d2b85ba3fd9e74b0a1d76a5cf681989c8",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance.md",
+      "version": 10,
+      "sha256": "ad53e9ae06623263b134a8618781ad3b78c99f2382589557075144ef81955f4c",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/archive/CAPRMEDIO-META-REQU-158-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance@9.md",
+      "archive_sha256": "18c8259c69c8bd39aa25c10c4db4df9d2b85ba3fd9e74b0a1d76a5cf681989c8",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "status": "Active",
+      "scope_unit": "CORE_META_MODEL",
+      "new_identity": false
+    },
+    {
+      "identity": "CA-D-339",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-the-shared-project-journal.md",
+      "before_version": 6,
+      "before_sha256": "7730843b26f010be274014b9f0223a808df048ef2b35c6775938f66f15ea50a5",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-the-shared-project-journal.md",
+      "version": 7,
+      "sha256": "cecf13944636bfe9ceaa14ef005c3dcccafad0348b893f9d06822efdd3fd1946",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-339-CORE_META_MODEL-DELIVERY--serialize-the-shared-project-journal@6.md",
+      "archive_sha256": "7730843b26f010be274014b9f0223a808df048ef2b35c6775938f66f15ea50a5",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "status": "Active",
+      "scope_unit": "CORE_META_MODEL",
+      "new_identity": false
+    },
+    {
+      "identity": "CA-R-1463",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1463-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-log-views-from-the-shared-journal.md",
+      "version": 1,
+      "sha256": "a05014af8130f2bd1aae5adce223beb6a5f3dcbb9cdf9dd52155f8f35833f074",
+      "action": "ADD",
+      "change_class": "new_atom",
+      "status": "Active",
+      "scope_unit": "CORE_META_MODEL",
+      "content_role": "R",
+      "new_identity": true
+    },
+    {
+      "identity": "CAPRMEDIO-GOV-EVAL-003",
+      "before_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "before_version": 11,
+      "before_sha256": "28efb633cd5dacf4227099fbc72f7454f93aa79f5a83c4c33fae23b1a7451e98",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability.md",
+      "version": 12,
+      "sha256": "ab538c93cb7dccfbc85d689bfd44ff3f339e71d035910647ab6fd386c9daa9ca",
+      "archive_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/archive/CAPRMEDIO-GOV-EVAL-003-CORE_META_MODEL-QA_CASE--storage-boundary-interpretability@11.md",
+      "archive_sha256": "28efb633cd5dacf4227099fbc72f7454f93aa79f5a83c4c33fae23b1a7451e98",
+      "action": "UPDATE",
+      "change_class": "semantic_revision",
+      "status": "Active",
+      "scope_unit": "CORE_META_MODEL",
+      "new_identity": false
+    }
+  ],
+  "administration_and_evidence": [
+    {
+      "identity": "CA-P-1088",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/03-CA-P-1088-TASK--reconcile-journal-authority-and-records.md",
+      "before_version": 1,
+      "before_sha256": "6f339b80b0c7e1a14de20668d2d04222a044479fb42dc332b25d47943171f8d4",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/03-CA-P-1088-TASK--reconcile-journal-authority-and-records.md",
+      "version": 2,
+      "sha256": "e7af5c53ea76bc25976827c7ba9d9ca87df2ed88c78d4ab61c51e2d4501f92f3",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/05-CA-Epic-015-caprmedio-define-derived-model-graph-views/05-CA-Epic-016-caprmedio-establish-projection-and-journal-model/archive/03-CA-P-1088-TASK--reconcile-journal-authority-and-records@1.md",
+      "archive_sha256": "6f339b80b0c7e1a14de20668d2d04222a044479fb42dc332b25d47943171f8d4",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "new_identity": false
+    },
+    {
+      "identity": "CA-P-983",
+      "before_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "before_version": 2,
+      "before_sha256": "b96c3f33f6b9a9eabe4105fa1497ed819eb9f28d657e6ac349b0b7c0d4a12a77",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/09-CA-P-983-TASK--define-the-two-journal-responsibilities.md",
+      "version": 3,
+      "sha256": "f87fdf74e90c4f09884ee9d2f20f694467957bd52414efeb095c62f31766f4b7",
+      "archive_path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/01-CA-Epic-010-caprmedio-update-meta-model/archive/09-CA-P-983-TASK--define-the-two-journal-responsibilities@2.md",
+      "archive_sha256": "b96c3f33f6b9a9eabe4105fa1497ed819eb9f28d657e6ac349b0b7c0d4a12a77",
+      "action": "UPDATE",
+      "change_class": "refinement",
+      "status": "Active",
+      "scope_unit": "caprmedio",
+      "new_identity": false
+    },
+    {
+      "identity": "shared-event-journal-authority-update",
+      "path": ".caprmedio_caprmedio/03_plan/12-CA-Epic-009-caprmedio-new-ops-migration/execution_evidence/CA-P-1088-shared-event-journal-authority-update.md",
+      "version": 1,
+      "sha256": "63b4302d5a028f12e4fb2133d7504a4c4263d6b4fc30da0860397e82c7903f53",
+      "action": "ADD",
+      "scope_unit": "caprmedio"
+    }
+  ],
+  "ownership_disposition": "Direct Operator amendment of bounded Journal/view authority; preserve P1088/P983 responsibilities and prerequisite gates for remaining Task execution.",
+  "remaining": {
+    "task_done": false,
+    "other_tasks_executed": [],
+    "M224_extraction": "unapplied; separate replacement-lineage carrier decision pending",
+    "tool_schema_and_implementation": "unchanged"
+  },
+  "journal": {
+    "action_id": "operator-directed-shared-event-journal-authority-update",
+    "append_only": true,
+    "git_materialization": "pending; no Git mutations"
+  },
+  "validation": {
+    "frontier_after": 1566,
+    "unrelated_sources": 1561,
+    "drafts": 53,
+    "raw_index_sha256": "c911ebaac5f3fe49793ceced4d424e4beca39dda64b39f4812f5de48848b92ee",
+    "historical_index_equivalence_asserted": false
+  }
+}

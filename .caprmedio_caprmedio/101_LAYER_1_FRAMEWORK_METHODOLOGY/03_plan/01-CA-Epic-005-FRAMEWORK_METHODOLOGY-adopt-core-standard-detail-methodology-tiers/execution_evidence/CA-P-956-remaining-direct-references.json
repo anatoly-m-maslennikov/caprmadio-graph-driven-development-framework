@@ -1,0 +1,144 @@
+{
+  "schema": "ca-p-956-remaining-direct-references.v1",
+  "non_authoritative": true,
+  "scan_boundary": "675 unchanged frozen active source/adjacent records only; generated, Task, historical and external Project carriers are outside this scan",
+  "references": [
+    {
+      "source_atom_id": "CA-R-943",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-943-CORE_META_MODEL-CORE-REQUIREMENT--separate-goal-from-scope.md",
+      "source_version": 11,
+      "source_sha256": "a9097ac6c7814d8d04777bc4851d8efa4b8f7feb7088a8db0047de5d46fb581b",
+      "relation_kind": "child_of",
+      "target_reference": "CA-R-931",
+      "target_atom_id": "CA-R-931",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-M-106",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-106-CORE_META_MODEL-CORE-METHOD--declare-methodology-expansion-mappings.md",
+      "source_version": 6,
+      "source_sha256": "75c7c25fdfa002e6d5467f7ad84294223173b90e1e7bea5bb0d4a5cd2127233d",
+      "relation_kind": "method_for",
+      "target_reference": "CA-R-1375",
+      "target_atom_id": "CA-R-1375",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-E-249",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-CORE-EVAL_APPROACH--evaluate-methodology-expansion-mappings.md",
+      "source_version": 3,
+      "source_sha256": "4ed2dc6b466101a37c9135cf4ca55a0aa5afc36d8e6ebefdc4b57f4bb061ef37",
+      "relation_kind": "evaluation_for",
+      "target_reference": "CA-R-1375",
+      "target_atom_id": "CA-R-1375",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-368",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-368-CORE_META_MODEL-DELIVERY--serialize-the-necessary-information-confidence-default.md",
+      "source_version": 2,
+      "source_sha256": "c8872fb91ed456e8e1787023582167df08066218f2147f560c90657a80e328b7",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-369",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-369-CORE_META_MODEL-DELIVERY--serialize-the-semantic-resolution-confidence-default.md",
+      "source_version": 1,
+      "source_sha256": "ad5c7f0650cb8c42bac24ddd40bc14b44e9cd3c985ac7ed30132e25eec1011d5",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-370",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-370-CORE_META_MODEL-DELIVERY--serialize-the-framework-control-root-locator.md",
+      "source_version": 1,
+      "source_sha256": "aa0724a03fe5870259325beefd2b7a0fd65a924fdedddf9f2b4be9e65db4cd3f",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-371",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-371-CORE_META_MODEL-DELIVERY--serialize-framework-code-root-locators.md",
+      "source_version": 1,
+      "source_sha256": "f84f825607a30bcb2a41cf1a5c05ead219f5ffd3bff2303414a0e4515e2a9204",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-372",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-372-CORE_META_MODEL-DELIVERY--serialize-instance-tool-selections.md",
+      "source_version": 1,
+      "source_sha256": "9b206aa55241d220015f39616a3fe703307933adb0a905f72a59542e47d24eab",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-373",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-373-CORE_META_MODEL-DELIVERY--serialize-instance-extension-selections.md",
+      "source_version": 1,
+      "source_sha256": "b47d12c177de0f9a6837e97a380e14d7fe9f97cf1a4f19197ecd882ca2f0764b",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-374",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-374-CORE_META_MODEL-DELIVERY--serialize-instance-authority-mode-selections.md",
+      "source_version": 1,
+      "source_sha256": "97b117515095afa3d843f28e7cfcd25d27b25f8004e20c322b1bd3ede5a5e497",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-375",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-375-CORE_META_MODEL-DELIVERY--serialize-project-initialization-identity.md",
+      "source_version": 1,
+      "source_sha256": "c194e2c0683f298e7b3eac326447a9da406a60b4da46da4b6db2259311fbadec",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-366",
+      "target_atom_id": "CA-D-366",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-376",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-376-CORE_META_MODEL-DELIVERY--serialize-project-atom-prefix.md",
+      "source_version": 1,
+      "source_sha256": "900ff6d1bb40b9e15299660a40258731bb6f91b77c5b012e6fea97efa09ea605",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-366",
+      "target_atom_id": "CA-D-366",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    },
+    {
+      "source_atom_id": "CA-D-377",
+      "source_path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-377-CORE_META_MODEL-DELIVERY--exclude-atom-metadata-from-framework-settings.md",
+      "source_version": 1,
+      "source_sha256": "f057dc70e5a83769ff60c24f12084e59912bdcc8078b7c7c5983b8fd3394664e",
+      "relation_kind": "child_of",
+      "target_reference": "CA-D-361",
+      "target_atom_id": "CA-D-361",
+      "disposition": "preserved unchanged; direct reference consumer in later per-Atom corpus review"
+    }
+  ],
+  "count": 13,
+  "retired_source_ids": [
+    "CA-R-716",
+    "CAPRMEDIO-META-REQU-766"
+  ],
+  "retired_ids_referenced": false,
+  "global_collision": "CA-R-1385 source vs Tools preexists; E447 now uses exact source basename; neither identity changed."
+}

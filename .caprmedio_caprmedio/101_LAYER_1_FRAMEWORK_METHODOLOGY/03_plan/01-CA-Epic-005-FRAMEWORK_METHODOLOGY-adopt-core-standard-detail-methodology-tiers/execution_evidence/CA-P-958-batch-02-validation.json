@@ -1,0 +1,644 @@
+{
+  "task": "CA-P-958",
+  "result": "PASS",
+  "proposed_overlay": false,
+  "origin_count": 52,
+  "mapped_change_count": 16,
+  "exact_archive_count": 16,
+  "byte_unchanged_origins": 36,
+  "protected_core_count": 648,
+  "protected_adjacent_goals": 3,
+  "active_local_count": 50,
+  "actual_active_tier_counts": {
+    "Standard": 39,
+    "General": 9,
+    "Core": 2
+  },
+  "completed_admission_count": 49,
+  "pending_admission_count": 3,
+  "pending_ids": [
+    "CA-R-1224",
+    "CA-R-1225",
+    "CA-R-1227"
+  ],
+  "new_relation_diagnostic_count": 0,
+  "current_relation_diagnostic_count": 24,
+  "relation_records": [
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-314",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md",
+      "diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--production-evaluation-checklists.md"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-314--production-evaluation-checklists.md"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-315",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md",
+      "diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "relates_to",
+            "target": "CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-315--production-logging-policies.md"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "relates_to",
+            "target": "CAPRMEDIO-GOV-REQU-338--register-the-project-work-journal"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-316",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-316--define-caprmedio-main-skill.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-323",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-323--register-caprmedio-type-prefixes.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-888"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-888"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-333",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-333-LOCAL_CONFIGURATION-CORE-REQUIREMENT--register-one-canonical-routing-tree.md",
+      "diagnostics": [],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-334",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-334-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--validate-the-routing-tree.md",
+      "diagnostics": [],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-676",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-676--encode-configuration-surfaces-in-owning-atoms.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-748",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-748--register-evaluation-atom-types.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-749",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-749--register-concern-atom-types.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-751",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-751--register-delivery-types.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-752",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-752--register-ops-types.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-753",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-753-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--register-plan-role-types.md",
+      "diagnostics": [],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-888"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-754",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-754--register-implementation-method-type.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-755",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-755--register-implementation-decision-type.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-761",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-761--name-the-external-requirement-type-constraint.md"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-762",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md",
+      "diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_kind_unresolved",
+          "message": "logger preserved the file change without resolving an unknown relation kind",
+          "details": {
+            "relation_type": "relates_to",
+            "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-762--define-the-external-implementation-method-type.md"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-REQU-763",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-GOV-REQU-763--define-the-method-binding-type.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-084--relational-artifacts-declare-endpoints"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-084--relational-artifacts-declare-endpoints"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-META-REQU-139",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-META-REQU-139-LOCAL_CONFIGURATION-GENERAL-REQUIREMENT--classify-development-backlog-as-epic.md",
+      "diagnostics": [],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-111--nine-content-roles-with-plan"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-REQUIREMENT-BSEED_GOVERNANCE--register-evaluation-approach-type.md",
+      "diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type"
+          }
+        },
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    },
+    {
+      "atom_id": "CAPRMEDIO-GOV-EVAL-006",
+      "path": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_LOCAL_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-LOCAL_CONFIGURATION-QA_CASE--canonical-settings-selection.md",
+      "diagnostics": [],
+      "before_diagnostics": [
+        {
+          "code": "relation_target_unresolved",
+          "message": "logger preserved the file change without resolving a missing or ambiguous relation target",
+          "details": {
+            "relation_type": "child_of",
+            "target": "CA-R-1054"
+          }
+        }
+      ],
+      "new_diagnostics": []
+    }
+  ],
+  "limits": "Exact reviewed byte maps and canonical endpoint checks; no proof of arbitrary prose, unresolved owner depth, runtime or legacy graph closure."
+}

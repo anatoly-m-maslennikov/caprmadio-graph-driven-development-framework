@@ -1,0 +1,47 @@
+{
+  "authority": "non_authoritative_execution_evidence",
+  "completed_at": "2026-08-30T17:27:38+04:00",
+  "schema": "caprmedio.project_atom_normalization.execution.v1",
+  "task_atom_id": "CA-P-925",
+  "source": {
+    "baseline_commit": "2094ec89dfd5e941404d1984b021e405df723b80",
+    "path": ".caprmedio_caprmedio",
+    "project_identity": "caprmedio",
+    "framework_identity": "CAPRMEDIO"
+  },
+  "normalization": {
+    "active_atom_count": 452,
+    "archived_predecessor_count": 452,
+    "mechanical_legacy_schema_migrations": 432,
+    "operator_approved_semantic_dispositions": 20,
+    "active_carrier_path_set_sha256": "15d865e84ff3f9d89691bacb89b0b67b2c778312dd034b70175871be87c27383",
+    "active_carrier_content_manifest_sha256": "0ce38ece2093b6a5069004854cae0561308f80a3b0145a770f49ba950878f6ba",
+    "archive_carrier_path_set_sha256": "408bb56340e4d843df1a99dbf7e400cdbf92524582806adc568e2cff1d03d4f9",
+    "archive_carrier_content_manifest_sha256": "010077877514ab14c6164e3fdd69084895aeabc4e2f13511dbe8263ccc1fbd35"
+  },
+  "entity_graph_validation": {
+    "active_atoms": 543,
+    "claim_subject_relations": 964,
+    "governed_subjects": 152,
+    "depends_on_subjects": 61,
+    "depends_on_without_governs_observations": 55,
+    "legacy_schema_atoms": 0,
+    "definition_conflicts": 0,
+    "term_system_violations": 0,
+    "dependency_cycles": 0,
+    "subtype_cycles": 0,
+    "error_diagnostics": 0
+  },
+  "validation": {
+    "archive_integrity_exact_matches": 452,
+    "archive_integrity_mismatches": 0,
+    "changed_claims": 0,
+    "changed_filenames": 0,
+    "changed_relations": 0,
+    "changed_scopes": 0,
+    "entity_graph_test_count": 9,
+    "entity_graph_test_failures": 0,
+    "git_diff_check": "pass",
+    "unapproved_semantic_decisions": 0
+  }
+}

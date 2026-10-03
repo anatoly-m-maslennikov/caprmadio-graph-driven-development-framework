@@ -1,0 +1,64 @@
+---
+cce_version: "cce_1"
+cce_form: "method"
+subjects:
+  governs: "deterministic-transformation"
+  depends_on:
+    - "programmatic software"
+version: 11
+updated_at: "2026-09-05 03:48:00 +0400"
+relations:
+  derived_from:
+    - "CA-A-053"
+  child_of:
+    - "CA-M-110"
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Allocate deterministic transformations to functions
+
+Use a side-effect-free function as the default unit of PROGRAMMATIC behavior.
+Implement one deterministic transformation as a function **when** its result
+follows **only** from its declared inputs **and** the responsibility needs no identity
+across calls.
+
+## Applicable when
+
+Apply **when** Tools, App backend services, **or** MCP components parse, classify,
+validate, plan, project, format, **or** **otherwise** transform explicit input into a
+result.
+
+## Procedure
+
+- Use a function **unless** the responsibility **must** own mutable state, an
+   invariant across calls, a resource, a lifecycle, **or** a replaceable adapter.
+- Give the function a specific, intention-revealing verb phrase that states
+   its one responsibility; prefer clarity over brevity **and** split a function
+   whose accurate name requires multiple responsibilities.
+- State the function's input, result, **and** failure values explicitly.
+- Do **not** mutate inputs **or** shared state, perform I/O **or** logging export, **or** read
+   the filesystem, process, clock, environment, network, persistence, **or**
+   randomness.
+- Pass **every** required observation **and** setting as explicit input rather than
+   obtaining them implicitly.
+- Group related functions **in** a specifically named module; do **not** create a
+   class **only** **to** provide a namespace.
+
+## Outcome
+
+Behavior is locally readable, reproducible from declared input, **and** free of
+observable side effects. It can be reused, checked, **or** extended **without**
+constructing component lifecycle state.
+
+## Failure or stop
+
+Stop treating the unit as a deterministic transformation **when** it applies an
+external effect. A bounded one-shot effect **may** remain a function under
+CA-M-160; allocate an object **only** **when** identity across calls **or** owned state,
+invariant, resource, lifecycle, **or** adapter behavior is required.
+
+## Sources
+
+- [Python Functional Programming HOWTO](https://docs.python.org/3.14/howto/functional.html)
+- [PEP 8 — Style Guide for Python Code](https://peps.python.org/pep-0008/)
+- [CA-A-053 — Reconcile shared PROGRAMMATIC policy decisions](../02_analysis/CA-A-053-PROGRAMMATIC-ANALYSIS_RPRT--reconcile-shared-programmatic-policy-decisions.md)

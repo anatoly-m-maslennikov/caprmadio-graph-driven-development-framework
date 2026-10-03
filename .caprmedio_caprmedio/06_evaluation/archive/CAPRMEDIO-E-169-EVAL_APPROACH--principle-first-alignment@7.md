@@ -1,0 +1,43 @@
+---
+tier: core
+version: 7
+updated_at: "2026-09-05 23:00:00 +0400"
+relations:
+  child_of:
+    - "CA-M-006"
+    - "CA-E-001"
+  evaluation_for:
+    - "CAPRMEDIO-REQU-026"
+    - "CA-R-830-REQUIREMENT-BSEED_GOVERNANCE--reserve-principle-conflict-resolution-to-the-operator"
+subjects:
+  governs:
+    occurrent:
+      - "Project/Principle alignment"
+  depends_on:
+    continuant:
+      - "Structural Level"
+      - "Atom"
+      - "Project"
+      - "Atom/Local Tier: Principle"
+      - "Operator"
+cce_version: cce_1
+cce_form: evaluation
+atom_id: CAPRMEDIO-E-169-EVAL_APPROACH
+---
+# Principle-first alignment
+
+## Claim checked
+
+for **every** selected Structural Level **and** given scope, the complete active Atom set is aligned with **every** active Project Principle.
+
+## Check
+
+load the complete active Project Principle set first, resolve the Structural Level **and** scope, collect the complete active Atom set, **and** evaluate **every** Atom against **every** Principle **before** applying lower-tier authority.
+
+## Acceptance
+
+pass **only** **when** no Atom conflicts with a Project Principle **and** no lower-tier interpretation weakens **or** overrides one.
+
+## Failure
+
+report **every** conflicting Atom **and** Principle pair; route **every** conflict between active Project Principles **to** the Operator under `CA-R-830`.

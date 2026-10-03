@@ -1,0 +1,111 @@
+{
+  "schema": "caprmedio.ca-p-945.core-meta-model-self-application.v1",
+  "artifact_form": "PROJECTION",
+  "authority": "NON_AUTHORITATIVE",
+  "task_atom_id": "CA-P-945",
+  "task_revision": 1,
+  "recorded_at": "2026-09-03 22:03:41 +0400",
+  "source_scope_unit": "CORE_META_MODEL",
+  "frozen_prerequisite": {
+    "task_atom_id": "CA-P-944",
+    "frontier_projection": "CA-P-944-methodology-finalization-frontier.projection.json",
+    "entity_subject_projection": "CA-P-944-entity-subject-graph.projection.json",
+    "accepted_source_authority": "only active RMEDO Atom Carriers selected by the current compiler",
+    "excluded": [
+      "Draft",
+      "Archived",
+      "Done",
+      "Canceled",
+      "generated",
+      "Bootstrap-history",
+      "runtime",
+      ".DS_Store",
+      "macOS-protected empty directory shells"
+    ]
+  },
+  "scope_receipt": {
+    "active_core_atom_carriers": 594,
+    "selected_folder": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL",
+    "frontmatter_parse_errors": 0,
+    "atom_id_omitted_by_default": 179,
+    "atom_id_omission_authority": [
+      "CA-D-278",
+      "CA-D-336"
+    ],
+    "atom_id_omission_disposition": "valid: canonical filename identity supplies the omitted default frontmatter value"
+  },
+  "required_repair": {
+    "atom_id": "CA-D-351",
+    "active_revision_before": 1,
+    "active_revision_after": 2,
+    "archived_revision": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/archive/CA-D-351-MMODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories@1.md",
+    "active_successor": ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-351-MMODEL-CORE-DELIVERY--store-objectives-outside-their-epic-directories.md",
+    "change": "replace noncanonical bold span **and must not** with the two canonical spans **and** and **must not**",
+    "basis": [
+      "CA-M-229",
+      "CA-M-234",
+      "CA-M-236",
+      "CA-D-289"
+    ]
+  },
+  "core_graph_receipt": {
+    "source_frontier_sha256": "00d4627abb5068302cccacc2493e4e9e772be3ddb08252be0e9b3857f2d26980",
+    "claim_subject_relations": 1347,
+    "declared_terms": 130,
+    "governed_subjects": 356,
+    "depends_on_subjects": 191,
+    "terms_in_depends_on": 63,
+    "definition_conflicts": 0,
+    "term_system_violations": 0,
+    "legacy_schema_atoms": 0,
+    "dependency_cycles": [
+      ["Atom", "Claim"],
+      ["CCE Operator", "CCE Operator Registry"],
+      ["Claim-Subject Relation", "Subject"]
+    ],
+    "dependency_cycle_disposition": "valid definitional cycles: no current Core authority prohibits these Entity-definition cycles",
+    "depends_on_without_governs": 68,
+    "depends_on_without_governs_disposition": "valid non-Term prerequisites: CA-R-1318, CA-R-1319, and CA-R-1279 require definition ownership only for Governed Terms"
+  },
+  "cce_and_scope_receipt": {
+    "source_frontier_sha256": "54078677abd96fc7e8fde5ef863943b2349018b90d9c257b3cc06afd7de3efea",
+    "invalid_cce_operator_bold_spans": 0,
+    "duplicate_cce_signature_groups": 0,
+    "eligible_single_statement_carriers": 360,
+    "restricted_boundary_exclusions": 9,
+    "restricted_boundary_disposition": "info only: the restricted canonical-signature grammar deliberately excludes its documented noncanonical claim shapes",
+    "duplicate_scope_signature_groups": 0,
+    "scope_expression_occurrences": 0,
+    "scope_signature_diagnostics": 0
+  },
+  "core_independence_receipt": {
+    "core_authority_edits": "CA-D-351 only",
+    "local_configuration_authority_used_to_justify_core_invariant": false,
+    "compiler_dry_run": {
+      "authority": "non_authoritative_dry_run",
+      "can_apply": true,
+      "conflict_count": 0,
+      "unresolved_conflict_count": 0,
+      "contributing_source_layers": [
+        "CORE_META_MODEL",
+        "LOCAL_CONFIGURATION"
+      ],
+      "eligible_candidate_count": 664,
+      "selected_candidate_count": 664,
+      "source_frontier_digest": "d2feed3a7febb8fa2a100bd3215a2e874adb01d20827565c3465512fe188a3c0"
+    }
+  },
+  "verification": {
+    "entity_graph_tests": "9 passed",
+    "cce_canonical_signature_tests": "4 passed",
+    "scope_canonical_signature_tests": "4 passed",
+    "applicable_methodology_compiler_tests": "9 passed",
+    "focused_test_total": "26 passed"
+  },
+  "fixed_point": {
+    "second_entity_projection_equals_first_ignoring_updated_at": true,
+    "second_cce_projection_equals_first": true,
+    "second_pass_authority_changes": 0,
+    "conclusion": "Core-only self-application reached a reproducible fixed point after CA-D-351 revision 2."
+  }
+}
