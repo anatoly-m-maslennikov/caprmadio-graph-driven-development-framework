@@ -21,6 +21,10 @@ The name describes four connected parts:
 
 ## Why CAPRMEDIO works this way
 
+Interfaces and Tools change → the project's meaning must not depend on them → an explicit ontology/base model defines the core: concepts, relations and constraints.
+
+Prompts, Skills, MCP, Apps and execution Tools expose and operate that core → they form the harness: a frontend and toolset → they must be replaceable without changing the core.
+
 ### Ontology
 
 Sessions are ephemeral → we need a stable source of truth → specification.
