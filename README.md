@@ -21,11 +21,11 @@ The name describes four connected parts:
 
 ## Why CAPRMEDIO works this way
 
-Interfaces and Tools change → the project's meaning must not depend on them → an explicit ontology/base model defines the core: concepts, relations and constraints.
+Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) → the project's meaning must not depend on them → an explicit ontology/base model defines the core: concepts, relations and constraints.
 
-Prompts, Skills, MCP, Apps and execution Tools expose and operate that core → they form the harness: a frontend and toolset → they must be replaceable without changing the core.
+CAPRMEDIO therefore has two parts: ontology (methodology) and harness (engine). The engine must be replaceable without changing the core.
 
-### Ontology
+### Ontology (methodology)
 
 Sessions are ephemeral → we need a stable source of truth → specification.
 
@@ -41,7 +41,7 @@ We need more than spec → C for problems, A for analysis, P for objectives/task
 
 Work changes the project → Journal records changes and execution → observed outcomes create the next Concerns.
 
-### Harness
+### Harness (engine)
 
 Files in folders are clear and inspectable → they currently hold authority → rescanning can become expensive → a derived graph database index supports queries and views → database state lives in `.caprmedio_runtime/`. Database authority could be a future migration.
 
