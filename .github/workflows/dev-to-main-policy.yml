@@ -1,4 +1,4 @@
-name: Enforce dev-to-main PR policy
+name: Enforce development-to-main PR policy
 
 on:
   pull_request_target:
@@ -24,7 +24,7 @@ jobs:
     name: PR policy
     runs-on: ubuntu-latest
     steps:
-      - name: Require owner-authored same-repository dev to main
+      - name: Require owner-authored same-repository development branch to main
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
@@ -34,7 +34,10 @@ jobs:
           REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: |
           test "$BASE_REF" = "main"
-          test "$HEAD_REF" = "dev"
+          case "$HEAD_REF" in
+            dev|amm/dev) ;;
+            *) printf 'Only dev or amm/dev may target main\n' >&2; exit 1 ;;
+          esac
           test "$HEAD_REPOSITORY" = "$REPOSITORY"
           test "$PR_AUTHOR" = "$REPOSITORY_OWNER"
 
