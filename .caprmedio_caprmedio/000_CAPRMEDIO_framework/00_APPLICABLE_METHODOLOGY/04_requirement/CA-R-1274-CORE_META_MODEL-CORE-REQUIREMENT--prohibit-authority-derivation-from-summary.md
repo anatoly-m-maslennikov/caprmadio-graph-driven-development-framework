@@ -1,21 +1,33 @@
 ---
-atom_id: CA-R-1274
-cce_version: cce_1
-cce_form: prohibition
 subjects:
-  governs:
-    continuant:
-      - Summary
+  governs: "Atom/Summary"
   depends_on:
-    continuant:
-      - Claim
-      - Atom/Claim/Scope
-version: 5
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Atom/Claim"
+    - "Translation"
+version: 12
+updated_at: "2026-10-02 21:45:33 +0400"
 relations: {}
+atom_id: "CA-R-1274"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1274-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-authority-derivation-from-summary.md
 ---
-# Prohibit Authority Derivation from Summary
+# Summary
 
-a Claim, Claim Scope, **or** Translation **must not** be reconstructed **or** validated from a Summary.
+Prohibit Authority Derivation from Summary
+
+## Scope
+
+the relationship between an Atom's Summary and its authoritative content.
+
+## Claim
+
+an Atom's primary content block, remaining Main Content, Claim restrictions, **or** Translation **must not** be reconstructed **or** validated from its Summary. Summary is derived navigation, **not** authority for the content it abbreviates.
+
+## Details

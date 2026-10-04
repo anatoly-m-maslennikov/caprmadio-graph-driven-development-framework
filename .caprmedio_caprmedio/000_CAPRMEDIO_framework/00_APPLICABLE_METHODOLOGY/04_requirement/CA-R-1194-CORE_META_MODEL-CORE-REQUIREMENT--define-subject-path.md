@@ -1,21 +1,36 @@
 ---
-atom_id: CA-R-1194
-cce_version: cce_1
-cce_form: definition
 subjects:
-  governs:
-    continuant:
-      - Subject Path
+  governs: "Subject Path"
   depends_on:
-    continuant:
-      - Subject Expression
-      - Term
-version: 5
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Subject Expression"
+    - "Entity"
+    - "Relation"
+    - "Subject"
+    - "Term"
+version: 14
+updated_at: "2026-10-02 21:29:19 +0400"
 relations: {}
+atom_id: "CA-R-1194"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1194-CORE_META_MODEL-CORE-REQUIREMENT--define-subject-path.md
 ---
-# Define Subject Path
+# Summary
 
-a Subject Path **means** one canonical Subject Expression whose ordered Term occurrences **and** direct Term-System Relations identify **`=1`** Subject.
+Define Subject Path
+
+## Scope
+
+a Subject Path.
+
+## Claim
+
+a Subject Path **means** a full canonical Subject Expression used by a Subject Relation **to** identify **`=1`** Entity through its named Term components **and** registered qualifications. qualification retains its registered endpoint constraints; the path identifies the target **without** creating another target identity **or** becoming the Subject Relation itself.
+
+## Details

@@ -1,20 +1,33 @@
 ---
-cce_version: "cce_1"
-cce_form: "separation"
 subjects:
-  governs:
-    continuant:
-      - "lifecycle-traceability"
-version: 14
-updated_at: 2026-09-06 01:45:12 +0400
-llm_session_ids:
-  - "codex:019f591f-04f6-70f2-8de7-828b7cccc69d"
+  governs: "lifecycle-traceability"
+  depends_on: []
+version: 21
+updated_at: "2026-10-02 21:26:39 +0400"
 relations:
   child_of:
     - "CA-M-002"
+atom_id: "CA-R-1051"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1051-CORE_META_MODEL-CORE-REQUIREMENT--separate-active-authority-from-preserved-history.md
 ---
-# Separate active authority from preserved history
+# Summary
 
-The active RMAD authority graph represents **only** current governed state. Historical states **and** transitions are excluded from that graph **and** preserved through canonical lifecycle placement **and** append-only Journals; generated Projections **may** render history **without** making it active RMAD authority.
+Separate active authority from preserved history
+
+## Scope
+
+the active RMED authority graph and preserved historical states and transitions.
+
+## Claim
+
+the active RMED authority graph represents **only** current governed state. historical states **and** transitions are excluded from that graph **and** preserved through canonical lifecycle placement **and** append-only Journals; generated Projections **may** render history **without** making it active RMED authority.
+
+## Details

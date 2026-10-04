@@ -1,22 +1,40 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - Work Sequence Number
+  governs: "Work Sequence Number"
   depends_on:
-    continuant:
-      - Artifact/Identity
-atom_id: CA-R-992
-cce_version: cce_1
-cce_form: prohibition
-version: 9
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Atom/Content Role: Plan/Type: Plan"
+    - "Atom/Content Role: Plan/Type: Plan/Work Sequence Number"
+    - "Atom/Content Role: Plan/Type: Plan/Subtype"
+    - "Atom/Content Role: Plan/Type: Plan/Decomposition"
+    - "Atom/Content Role: Plan/Type: Plan/Blocking"
+    - "Atom/Scope"
+    - "Atom/Claim/Target Scope Unit"
+version: 17
+updated_at: "2026-10-01 21:46:54 +0400"
 relations:
   child_of:
     - CA-R-991
+atom_id: "CA-R-992"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-992-CORE_META_MODEL-CORE-REQUIREMENT--separate-work-sequence-from-atom-identity.md
 ---
-# Separate Work Sequence from Atom identity
+# Summary
 
-a Work Sequence Number **must not** establish **or** change Artifact identity, Atom Scope, Claim Scope, Type, Epic membership, **or** dependency.
+Separate Work Sequence from Atom identity
+
+## Scope
+
+Work Sequence Numbers **and** Atom identity-related properties.
+
+## Claim
+
+a Work Sequence Number **must not** establish **or** change Atom identity, Atom Scope, Claim Target Scope Unit, Type, authoring Subtype, decomposition, **or** blocking.
+
+## Details

@@ -1,21 +1,37 @@
 ---
-atom_id: CA-R-1340
-cce_version: cce_1
-cce_form: definition
 subjects:
-  governs:
-    continuant:
-      - "Atom/Content Role: Method"
+  governs: "Atom/Content Role: Method"
   depends_on:
-    continuant:
-      - Atom/Content Role
-      - Claim
-version: 3
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Atom/Content Role"
+    - "Atom/Claim"
+    - "Spec"
+    - "Implementation"
+    - "Action"
+    - "Workflow"
+version: 13
+updated_at: "2026-10-02 22:05:04 +0400"
 relations: {}
+atom_id: "CA-R-1340"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1340-CORE_META_MODEL-CORE-REQUIREMENT--define-method-content-role.md
 ---
-# Define Method Content Role
+# Summary
 
-Method **means** the Content Role of an Atom Claim that establishes one reusable way to satisfy accepted authority.
+Define Method Content Role
+
+## Scope
+
+Atom Claims that establish reusable authorship, construction, **or** Implementation choices **or** conventions for satisfying accepted Spec authority.
+
+## Claim
+
+Method **means** the Content Role of an Atom Claim that establishes a reusable authorship, construction, **or** Implementation choice **or** convention for satisfying accepted Spec authority, **without** defining a particular operational Action **or** Workflow.
+
+## Details
