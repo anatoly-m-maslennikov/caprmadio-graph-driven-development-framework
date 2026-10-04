@@ -10,7 +10,7 @@ subjects:
     - "Journal"
     - "Journal/Record"
 version: 6
-updated_at: "2026-09-16 22:01:42 +0000"
+updated_at: "2026-10-04 16:46:08 +0000"
 relations: {}
 atom_id: "CA-O-007"
 content_role: "Operations"
@@ -22,7 +22,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Obtain source correction decisions
+# Summary
+
+Obtain source correction decisions
+
+## Operation
 
 Obtain Source Correction Decision **means** the reusable Action that obtains the Operator's explicit decision about an exact conflict-resolution proposal.
 
@@ -32,3 +36,5 @@ Obtain Source Correction Decision **means** the reusable Action that obtains the
 4. return the recorded decision for the applicable authorization checks. a changed proposal **or** source frontier requires the decision's applicability **to** be checked again **before** reliance.
 
 this Action **must not** apply the correction, record approval the Operator did **not** give, **or** create a duplicate approval Atom **in** Project Configuration. the Journal records the decision; it does **not** independently redefine the governing source Claims.
+
+## Details

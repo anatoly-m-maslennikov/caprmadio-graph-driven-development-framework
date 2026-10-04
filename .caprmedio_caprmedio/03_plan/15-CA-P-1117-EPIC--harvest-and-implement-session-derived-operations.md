@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 3
-updated_at: "2026-10-04 15:51:44 +0000"
+updated_at: "2026-10-04 17:23:34 +0000"
 relations: {}
 ---
 # Summary
@@ -118,6 +118,12 @@ The remaining required decomposition has six composite stages. Existing bounded 
 - Preserve unrelated changes. Use mechanical Git commits for this Epic's changes under the Operator's explicit exception; do not invoke COMMIT_CHANGE_SET or make its repair a prerequisite. If Git cannot commit, skip that commit and retain a truthful save frontier. Retain required execution Journal evidence and append-only history; do not fabricate save-Tool receipts.
 
 ## Details
+
+### Current execution frontier
+
+The selected thirteen-capability scope is unchanged. Source definitions now cover lifecycle requests, structural requests, Revert Changes, Implementation and the three Projection builders. Independent reviews have accepted the graph-builder definitions, shared Run-journaling contract and current Implementation graph. Two narrow lifecycle/reversal corrections are saved and await focused review. Workflow graph/Step binding duplication and legacy lifecycle Tool contracts are the remaining source repairs; CA-P-1463–1467 bind these exact packets.
+
+This is source-stage progress, not tool delivery. Continue with reviewed PROGRAMMATIC/PROMPTS RMED, implementation, functional Docker/MCP verification and closure after these gates. No further harvest or broad source audit is required.
 
 ### Definition of Done
 

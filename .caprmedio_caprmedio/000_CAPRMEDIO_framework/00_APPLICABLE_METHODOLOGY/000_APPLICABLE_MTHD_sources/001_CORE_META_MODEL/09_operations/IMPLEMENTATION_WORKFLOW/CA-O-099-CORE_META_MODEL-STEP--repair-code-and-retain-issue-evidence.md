@@ -18,7 +18,7 @@ subjects:
     - "Workflow Run"
     - "Step Run"
 version: 2
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-021
@@ -30,7 +30,7 @@ global_tier: 11
 
 Repair code and retain issue evidence
 
-## Claim
+## Operation
 
 Implementation Repair Step **means** the Workflow node invoking **=1** Action, CA-O-021, **in** Isolated context under CA-R-1527.
 
@@ -39,3 +39,5 @@ Implementation Repair Step **means** the Workflow node invoking **=1** Action, C
 - retain exact Action/Step Revisions, source bindings, actual effects, **and** returned results. pass the Action's result **to** the Workflow **without** independently copying its behavior.
 
 reuse the assigned subagent for the selected P work across its test, implementation, diagnosis, **and** repair invocations **when** available. replacement requires the complete retained input/evidence handoff **and** fresh admission; do **not** rely on unrecorded conversational memory.
+
+## Details

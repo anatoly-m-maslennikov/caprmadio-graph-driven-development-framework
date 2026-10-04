@@ -23,7 +23,7 @@ subjects:
     - "Atom/Revision/Author"
     - "Local Tier"
 version: 9
-updated_at: "2026-10-04 03:57:26 +0400"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-R-1559
@@ -36,7 +36,7 @@ global_tier: 11
 
 Repair nonconforming Implementation
 
-## Claim
+## Operation
 
 Implementation Repair **means** the Agentic Action that repairs a diagnosed code defect within the admitted work boundary **and** retry allowance, preserving the issue **and** verification evidence.
 
@@ -47,3 +47,5 @@ Implementation Repair **means** the Agentic Action that repairs a diagnosed code
 - return `repaired` with the changed candidate, failure evidence, diagnosis, actual correction, tests, expected outcomes, **and** replay commands for re-evaluation. passing targeted checks do **not** replace any other check retained **in** the admitted Evaluation portfolio.
 - do **not** create, update, **or** promote corrective M Atoms **in** this Action. retain evidence for the separate Method-learning Workflow; learning is **not** a condition for accepting a verified implementation fix.
 - return `authority_change_required` **if** a governing RMED change is necessary, for disposition under CA-R-1559 **before** changing that authority. authorized baseline changes require renewed preparation; do **not** reset retry accounting.
+
+## Details

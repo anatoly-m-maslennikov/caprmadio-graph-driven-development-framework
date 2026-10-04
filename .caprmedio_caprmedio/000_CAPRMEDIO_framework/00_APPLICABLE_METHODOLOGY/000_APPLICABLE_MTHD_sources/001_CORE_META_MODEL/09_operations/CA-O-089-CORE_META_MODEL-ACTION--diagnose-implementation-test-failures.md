@@ -19,7 +19,7 @@ subjects:
     - "Operator"
     - "Spec"
 version: 3
-updated_at: "2026-09-24 01:39:33 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-020
@@ -33,7 +33,7 @@ global_tier: 11
 
 Diagnose implementation test failures
 
-## Claim
+## Operation
 
 Implementation Failure Diagnosis **means** the Agentic Action that explains failed implementation checks **before** choosing a recovery route.
 
@@ -43,3 +43,5 @@ Implementation Failure Diagnosis **means** the Agentic Action that explains fail
 - return `implementation_defect` for incorrect production code **or** `test_implementation_defect` for incorrect executable test code, with evidence, affected work, **and** proposed correction. **every** admitted repair still passes through retry control.
 - return `authority_change_required` for incorrect, missing, **or** conflicting governing expected behavior; return `environment_blocker` for unavailable execution prerequisites outside the admitted correction; return `unresolved` **when** evidence **or** confidence is insufficient.
 - do **not** modify code, governing Atoms, Status, **or** test expectations. report failures honestly; do **not** relabel an unexplained failure as expected merely **to** proceed.
+
+## Details

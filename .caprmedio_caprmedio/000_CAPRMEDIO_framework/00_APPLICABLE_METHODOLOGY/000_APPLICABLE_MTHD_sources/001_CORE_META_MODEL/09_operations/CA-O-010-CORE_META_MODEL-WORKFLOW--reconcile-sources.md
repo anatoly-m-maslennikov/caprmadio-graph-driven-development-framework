@@ -18,8 +18,8 @@ subjects:
     - "AI Agent"
     - "Autonomous Confidence Threshold"
     - "Projection/Type: Reconciled Projection"
-version: 7
-updated_at: "2026-10-04 15:08:22 +0000"
+version: 9
+updated_at: "2026-10-04 17:31:25 +0000"
 relations: {}
 atom_id: "CA-O-010"
 content_role: "Operations"
@@ -39,41 +39,41 @@ Reconcile sources
 
 Source Reconciliation **means** the reusable Workflow whose nodes are the following Steps **and** whose control flow is defined by their result conditions. the Step references reuse those Action definitions; they do **not** copy them **or** make another Workflow the Action invoked by a Step.
 
-the entry Step is select. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
+the entry Step is CA-O-146. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
 
 ### Steps
 
-| Step | Action reference | Parameters **and** inputs |
-|---|---|---|
-| select | CA-O-004 | the requested source selection **and** applicable source authority |
-| assess | CA-O-005 | the exact frontier returned by select **and** applicable checks |
-| propose | CA-O-006 | the assessed frontier, identified conflicts, **and** authorized correction boundaries |
-| decide | CA-O-007 | the exact proposal, conflicts, frontier, **and** required approval context |
-| correct | CA-O-008 | the exact approved correction **and** its current source frontier |
-| publish | CA-O-009 | the final assessed frontier, valid decisions, **and** selected Projection Delivery authority |
+| Step |
+|---|
+| CA-O-146 |
+| CA-O-147 |
+| CA-O-148 |
+| CA-O-149 |
+| CA-O-150 |
+| CA-O-151 |
 
 ### Transitions
 
 the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513 **when** the destination is a Step. a terminal outcome ends the Workflow Run; it is **not** another Step **or** Action.
 
-| Step **and** Action reference | Result condition | Next Step **or** outcome |
+| Step | Result condition | Next Step **or** outcome |
 |---|---|---|
-| select — CA-O-004, Select Reconciliation Sources | complete exact selection | assess |
-| select — CA-O-004 | incomplete, ambiguous, **or** failed selection | stop **and** escalate; no publication |
-| assess — CA-O-005, Assess Source Conflicts | required checks complete, no unresolved conflict, required approvals valid | publish |
-| assess — CA-O-005 | unresolved conflict with an authorized correction-proposal route | propose |
-| assess — CA-O-005 | incomplete checks, unavailable correction authority, **or** unsupported resolution | stop **and** escalate; no publication |
-| propose — CA-O-006, Propose Source Corrections | exact supported proposal ready | decide |
-| propose — CA-O-006 | unsupported proposal **or** unmet confidence/authority gate | stop **and** escalate; no source mutation **or** publication |
-| decide — CA-O-007, Obtain Source Correction Decision | valid exact approval **and** upstream corrections required | correct |
-| decide — CA-O-007 | valid exact resolution decision **without** a needed source correction | select, **then** reassess the decision against the selected frontier |
-| decide — CA-O-007 | requested revision **and** applicable authority permits another bounded proposal attempt | propose |
-| decide — CA-O-007 | rejection, absent decision, invalid approval, **or** no accepted further attempt | stop **and** escalate; no source mutation **or** publication |
-| correct — CA-O-008, Apply Approved Source Corrections | authorized correction completed | select, **then** reassess the new frontier |
-| correct — CA-O-008 | failed **or** partially completed correction | stop **and** escalate with actual effects; an expressly authorized bounded recovery re-enters at select |
-| publish — CA-O-009, Publish Reconciled Projection | completed publication from the still-valid final frontier | complete |
-| publish — CA-O-009 | changed frontier | select **only** under the applicable accepted revisit conditions; **otherwise** stop **and** escalate |
-| publish — CA-O-009 | failed publication | stop **and** escalate under applicable recovery authority; do **not** report completion |
+| CA-O-146 | complete exact selection | CA-O-147 |
+| CA-O-146 | incomplete, ambiguous, **or** failed selection | stop **and** escalate; no publication |
+| CA-O-147 | required checks complete, no unresolved conflict, required approvals valid | CA-O-151 |
+| CA-O-147 | unresolved conflict with an authorized correction-proposal route | CA-O-148 |
+| CA-O-147 | incomplete checks, unavailable correction authority, **or** unsupported resolution | stop **and** escalate; no publication |
+| CA-O-148 | exact supported proposal ready | CA-O-149 |
+| CA-O-148 | unsupported proposal **or** unmet confidence/authority gate | stop **and** escalate; no source mutation **or** publication |
+| CA-O-149 | valid exact approval **and** upstream corrections required | CA-O-150 |
+| CA-O-149 | valid exact resolution decision **without** a needed source correction | CA-O-146, **then** reassess the decision against the selected frontier |
+| CA-O-149 | requested revision **and** applicable authority permits another bounded proposal attempt | CA-O-148 |
+| CA-O-149 | rejection, absent decision, invalid approval, **or** no accepted further attempt | stop **and** escalate; no source mutation **or** publication |
+| CA-O-150 | authorized correction completed | CA-O-146, **then** reassess the new frontier |
+| CA-O-150 | failed **or** partially completed correction | stop **and** escalate with actual effects; an expressly authorized bounded recovery re-enters at CA-O-146 |
+| CA-O-151 | completed publication from the still-valid final frontier | complete |
+| CA-O-151 | changed frontier | CA-O-146 **only** under the applicable accepted revisit conditions; **otherwise** stop **and** escalate |
+| CA-O-151 | failed publication | stop **and** escalate under applicable recovery authority; do **not** report completion |
 
 an AI Agent **must** resolve **and** satisfy its effective applicable Autonomous Confidence Threshold from governing sources **and** valid overrides, together with authorization gates, **before** continuing autonomously. this does **not** require a persisted Task Atom; unmet **or** unresolved gates require Operator clarification **or** escalation. **every** autonomous revisit, including re-evaluation **after** an approved source change, repeated correction proposals, **and** recovery retries, **must** remain within the applicable accepted retry budget **and** escalation conditions for the current Workflow Run. reselection **or** discovery of a new conflict does **not** reset that budget. an absent, exhausted, **or** unresolved revisit allowance requires stopping **and** escalation; required re-evaluation **must not** be skipped **to** publish. this Workflow does **not** authorize concurrent execution, arbitrary recursion, automatic source corrections, **or** publication with unresolved conflicts. execution evidence remains distinct from this reusable definition.
 
