@@ -29,16 +29,19 @@ specification.
 Spec grows →\
 we need smaller units →\
 no single file structure is optimal for every use case →\
-a graph with typed relations.
+a graph with typed nodes and typed relations.
 
 Each unit should be the smallest meaningful part of the spec →\
 one scope + one Claim = one Atom →\
 splitting further adds no useful distinction.
 
-The graph grows →\
-identify Entities: the things the project describes →\
-declare each Atom’s Subjects: what its Claim governs and what it depends on →\
-load only the context needed.
+Nodes represent different things →\
+Atoms state Claims; Entities are the things those Claims describe →\
+Subjects link Atoms to Entities through `GOVERNS` and `DEPENDS_ON`.
+
+Different tasks need different views →\
+derive them from one authoritative source →\
+load only the context needed without duplicating authority.
 
 Small files can still be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
@@ -49,6 +52,10 @@ Concerns, Analysis and Plans for understanding and planning →\
 Requirements, Methods, Evaluations and Delivery (RMED) for specification →\
 Implementation for code, tests and configuration →\
 Operations for repeatable actions and workflows.
+
+Implementation, tests and views rely on Claims →\
+record the exact source Claim identities and revisions →\
+trace results back to the specification.
 
 Work changes the project →\
 Journal records changes and execution →\
