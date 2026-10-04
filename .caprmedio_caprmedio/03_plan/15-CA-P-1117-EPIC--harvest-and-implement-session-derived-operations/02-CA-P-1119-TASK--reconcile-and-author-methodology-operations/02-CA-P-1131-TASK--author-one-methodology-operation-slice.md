@@ -16,14 +16,11 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 3
-updated_at: "2026-10-04 15:34:45 +0000"
+version: 4
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1119
-  blocks:
-    - CA-P-1157
-    - CA-P-1132
 ---
 # Summary
 
@@ -66,6 +63,8 @@ the current saved child statuses, exact authored-source paths and worker preserv
 after this Plan's paired Carrier closure succeeds, CA-P-1132 / CA-P-1157 must bind read-only independent reviews of all thirty-nine changed Operations and the directly related CA-M-301 repair, at most four Operations per leaf with reviewer distinct from author. keep the five optional Actions and formatting-only packets distinct; do not repeat candidate harvesting/reconciliation or convert source checks into runtime acceptance. references by Atom ID retain their meaning across placement changes.
 
 ### Paired Carrier closure blocker
+
+Operator scope disposition: CA-P-1117 v3 excludes this former authoring packet's legacy physical closure from required delivery. Its BLOCKS edges to CA-P-1132 / CA-P-1157 are removed. The source results remain retained; this Plan remains Active at its unchanged paired location and CA-C-410 is not claimed fixed. The selected Workflows' actual sources still require independent review. The earlier blocker receipt below describes the pre-amendment frontier, not current permission to perform the denied move.
 
 all source authoring and child work above remains complete. the child bundle could not be relocated beside this Plan in P1119's `done/` directory: the exact directory rename returned `Operation not permitted`, including the unchanged retry at 2026-10-04 15:34:45 +0000. ordinary ownership, permissions and file flags did not identify the cause. CA-C-410 records the unresolved filesystem denial; no alternative tool or permission bypass was attempted. this Markdown Carrier is restored to its original Active location beside the unchanged bundle, and this Plan remains Active until the paired placement succeeds. CA-P-1132 / CA-P-1157 remain blocked; independent source review has not started. preserve the finished sources and authoring evidence through the authorized scoped Git save while this administrative closure is postponed.
 

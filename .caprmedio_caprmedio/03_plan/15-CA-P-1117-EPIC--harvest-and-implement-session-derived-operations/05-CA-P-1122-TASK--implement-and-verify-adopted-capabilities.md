@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:19:35 +0400"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -32,7 +32,11 @@ Implement and verify adopted capabilities
 
 ## Objective
 
-Implement the adopted workflows, Steps, Actions, tools, and prompts from reviewed governing RMED, reuse the existing orchestrator/MCP interfaces, and verify observable behavior before container packaging.
+Implement the thirteen selected Workflows and their required Steps, Actions, Tools and prompts from reviewed source Operations and RMED. Reuse existing orchestrator/MCP interfaces and implementations rather than rebuilding working behavior.
+
+Use the reviewed Implementation Workflow: compile applicable active Methods, bind Requirements/Delivery and Evaluations, build E2E/golden mock tests first, implement, then run the selected tests and diagnose failures. Preserve Operator-selected repair/rebuild choices and current retry/permission/confidence controls; a separate generalized learning campaign is not required here.
+
+Functional scenarios must exercise Create/Update/Replace/Change Status Atom, all four Scope Unit operations, approved Revert, all three Projection builds, and the Implementation Workflow itself. Prove Workflow-level and every Action-level Journal records, their lineage and terminal results; include failure and no-op cases. Validation, Relation checks, approval and journaling stay inside these execution paths.
 
 ### Work decomposition
 
@@ -44,4 +48,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any adopted capability is unimplemented, any implementation relies on missing governing RMED, workflow recovery or authority boundaries fail functional checks, or independent implementation review findings remain undisposed. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done if any of the thirteen selected Workflows or required support paths is unimplemented, lacks reviewed governing sources, fails functional scenarios or Journal completeness, or has undisposed independent implementation findings. Required leaves must be Done; other harvested capabilities are not implementation obligations.

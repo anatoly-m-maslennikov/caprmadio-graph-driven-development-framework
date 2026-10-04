@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:19:35 +0400"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -32,7 +32,9 @@ Build and verify Docker images for the complete runtime
 
 ## Objective
 
-Build Docker image artifacts from which every implemented workflow, MCP service, and every other implemented tool works; cover both pre-existing and newly implemented capabilities, not only the harvest additions.
+Build and functionally verify Docker images for the thirteen selected Workflows in CA-P-1117 v3 and every Action, Tool, prompt, MCP interface and runtime dependency they actually use, including reused implementations. The Operator's scope amendment excludes container-testing unrelated existing Tools and harvested capabilities.
+
+Exercise image-based mutation and no-op paths on controlled mock Projects, the Implementation Workflow, Revert, all three Projection builders, and Workflow/Action Journal persistence and recovery. Keep image identity, Run/Action IDs and result evidence. A successful image build or host-only test is insufficient. Runtime Project-data mounts are allowed; undeclared host implementation mounts and baked secrets are not.
 
 ### Work decomposition
 
@@ -44,4 +46,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any implemented workflow, MCP interface, or other tool is absent from the coverage inventory, lacks a working image-based execution path, requires undeclared host implementation code/dependencies, or lacks recorded image-based functional evidence; a successful build alone does not satisfy this Plan. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done if any selected Workflow or required support/MCP path is absent from the scoped inventory, lacks passing image-based functional and Journal evidence, or requires undeclared host implementation code/dependencies. All three Projection builders, Revert and the Implementation Workflow need actual runtime evidence, not a build-only claim. Required verification/review/repair leaves must be Done; unrelated runtime inventory is excluded.

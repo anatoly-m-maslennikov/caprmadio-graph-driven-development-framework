@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:36:25 +0400"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1119
@@ -33,6 +33,10 @@ The assigned AI Agent must complete one bounded work packet for review one metho
 ### Inputs and bounded ownership
 
 Assign one read-only subagent the exact operation slice, source revisions, Project Principles, and applicable methodology authority. Review the destination rationale as well as the Operation: reusable, project-independent Operations belong to CORE_META_MODEL; caprmedio-specific Operations belong to PROJECT_CONFIGURATION. Reviewer must not be the author of that slice. Limit one leaf to at most four changed Operations; do not grant repair authority through review.
+
+Bind only source Operations actually required by CA-P-1117 v3's thirteen selected Workflows, including all Workflow/Action Run journaling and the Entities Graph, Terms Graph and Applicable Methodology builders. CA-P-1157 first maps existing definitions and actual gaps, then creates bounded authoring/review leaves as needed. The former five additional assessment Actions and all thirty-nine prior changed Operations are not automatically a new review campaign.
+
+The Operator excluded CA-P-1131's legacy closure from required decomposition. Its former incoming gates are removed; this does not remove the independent review of sources actually used by the selected Workflows or authorize a bypass of CA-C-410's filesystem denial. Bind actual source files, not their old parent-folder closure.
 
 ### Required output
 

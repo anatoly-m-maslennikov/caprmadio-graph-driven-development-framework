@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:19:35 +0400"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -34,7 +34,9 @@ Specify and review PROGRAMMATIC capabilities
 
 ## Objective
 
-Add or update current RMED for every adopted programmatic capability at its narrowest owning Scope Unit, respecting Project-local authority before methodology sources and engine-specific specifications.
+Add or update RMED only for the PROGRAMMATIC capabilities required by CA-P-1117 v3's thirteen Workflows, at their narrowest owning Scope Units. Cover Create/Update/Replace/Change Status Atom; Create/Rename/Move/Remove Scope Unit; Implementation Workflow; Revert Changes; and the Entities Graph, Terms Graph and Applicable Methodology builders. Archive is a Change Status shortcut.
+
+Specify every Workflow Run and Action Run's durable Journal evidence, including standalone, nested, failed, canceled and no-op paths. Reuse one authoritative Events Journal and derived log views. Specify source traceability, source conflict reporting, Operator-approved corrections, rebuild behavior, and incomplete-result handling for the three Projections. Preserve identity/history and Operator control at mutation boundaries. Obtain independent RMED review; do not expand this task into unrelated Tool delivery.
 
 ### Work decomposition
 
@@ -46,4 +48,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any adopted programmatic capability lacks current governing RMED, R/M/E/D responsibilities are mixed, a local tier is incorrect, or any capability lacks independent subagent review and findings dispositions. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done if any required PROGRAMMATIC path for the thirteen selected Workflows lacks current RMED, functional acceptance criteria and independent review, including complete Workflow/Action Run journaling and all three Projection builders. R/M/E/D responsibilities and local tiers must be correct, findings disposed and required leaves Done; unrelated implementations are excluded.

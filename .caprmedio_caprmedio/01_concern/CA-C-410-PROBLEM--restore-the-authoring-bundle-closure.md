@@ -11,8 +11,8 @@ status: Active
 subjects:
   governs: "Source-authoring Plan/paired Carrier closure"
   depends_on: [Plan, Artifact/Carrier]
-version: 1
-updated_at: "2026-10-04 15:34:45 +0000"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   concern_about: [CA-P-1131]
 ---
@@ -33,4 +33,4 @@ the completed source-authoring child bundle cannot be relocated to its parent's 
 
 ## Blast radius
 
-CA-P-1131's physical paired closure and its dependent CA-P-1132 / CA-P-1157 independent-review gates. the authorized scoped Git save of finished source work is safe independent work; review, downstream RMED and implementation remain postponed. resolution requires the exact paired relocation to succeed within authorized permissions. do not route around the denial or silently waive the required placement.
+CA-P-1131's physical paired closure remains unresolved. The subsequent explicit Operator scope amendment in CA-P-1117 v3 excludes that legacy authoring closure from required delivery and removes its gates on the newly selected source frontier; this Concern is now nonblocking for the amended Epic. The selected sources still require independent review. No directory relocation, permission bypass or repair is claimed. Resolution of this retained physical-placement defect still requires the exact paired relocation to succeed within authorized permissions.

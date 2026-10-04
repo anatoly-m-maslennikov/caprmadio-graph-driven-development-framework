@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 16:19:11 +0400"
+version: 3
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -28,7 +28,9 @@ Verify project-wide traceability and close the epic
 
 ## Objective
 
-Verify end-to-end evidence from the Operator-closed admitted harvest through source Operations, reviewed RMED, implementations, built images, functional results, and Journal/Git provenance before declaring the Epic complete. Confirm the incomplete harvest remains explicitly canceled and is not represented as completed coverage.
+Verify an exact thirteen-Workflow coverage matrix from current source Operations through reviewed RMED, implementation, Docker/MCP execution, Workflow/Action Run Journal records, and results before closing CA-P-1117. Check all three Projection builds and source traceability, approved Revert, identity-preserving Update versus Replace, applicable status models, and Scope Unit changes.
+
+Retain historical harvest and additional authored work with their truthful dispositions. CA-P-1118 and CA-P-1131's excluded legacy closure are not required completion; CA-C-410 remains an unresolved but nonblocking historical placement defect for this amended scope. Do not call these Done or claim their failures fixed. A finding that affects an actual selected execution path still blocks that path.
 
 ### Work decomposition
 
@@ -40,4 +42,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any preceding required composite Plan is not Done, an admitted decision/capability has no traceable disposition, a projection is mistaken for authority, a Docker coverage item has no passing execution evidence, or a blocking Concern remains open. CA-P-1118 and the Operator-canceled harvest descendants are excluded from required decomposition completion; their unfinished evidence must stay truthfully classified. Any remaining required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done until all required stages/leaves are Done and every one of the thirteen selected Workflows has exact reviewed-source, RMED, implementation, image, Run/Action Journal and passing result evidence. Projections must remain derived, all required supporting paths covered and blocking findings resolved. Excluded harvest/capability/administrative work stays truthfully classified with justified nonblocking dispositions; it is not inferred complete.

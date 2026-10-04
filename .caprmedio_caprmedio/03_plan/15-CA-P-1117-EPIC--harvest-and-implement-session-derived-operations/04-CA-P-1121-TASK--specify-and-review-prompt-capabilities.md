@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:19:35 +0400"
+version: 2
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -34,7 +34,9 @@ Specify and review PROMPTS capabilities
 
 ## Objective
 
-Add or update current RMED for the adopted Action Prompts and Operator Prompts, including interactive workflow Steps and the main session's decision/result handoff, and obtain independent subagent review.
+Add or update and independently review RMED only for Action/Operator Prompts needed by the thirteen selected Workflows in CA-P-1117 v3, particularly the Implementation Workflow and genuinely agentic or approval-dependent Steps. Reuse existing prompts. Purely programmatic Actions do not require invented agent prompts.
+
+Specify concise input/result handoffs, decision and permission boundaries, Update-to-Replace routing, and Run/Action identifiers needed for Journal linkage. Workflow execution order belongs to reviewed O definitions, not duplicate independent prompt procedures.
 
 ### Work decomposition
 
@@ -46,4 +48,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any adopted prompt capability lacks current governing RMED, interactive result submission is confused with prompt delivery or Step completion, or any prompt lacks independent subagent review and findings dispositions. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done if a prompt actually required by a selected Workflow lacks reviewed RMED and findings disposition, result submission is confused with prompt delivery or Step completion, or identity/permission/Journal handoff boundaries are missing. Required leaves must be Done; unrelated prompts and gratuitous prompts for programmatic Actions are excluded.

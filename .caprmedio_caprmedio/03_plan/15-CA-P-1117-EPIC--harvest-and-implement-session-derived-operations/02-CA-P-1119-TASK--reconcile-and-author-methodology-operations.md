@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 16:19:11 +0400"
+version: 3
+updated_at: "2026-10-04 15:51:44 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -35,9 +35,11 @@ Reconcile and author methodology operations
 
 ## Objective
 
-Reconcile the Operator-closed admitted harvest against active Project and methodology authority, then add or update reusable, project-independent Operations in CORE_META_MODEL and caprmedio-specific Operations in PROJECT_CONFIGURATION, and obtain independent subagent review. Both destinations are authoritative methodology sources; neither is the derived applicable-methodology projection.
+Bind the thirteen Workflows selected in CA-P-1117 v3 to existing source Operations; author only missing or incorrect definitions and required Actions, then obtain independent source review. Reusable Operations belong to CORE_META_MODEL and caprmedio-specific Operations to PROJECT_CONFIGURATION. Both are authoritative sources, not the derived Applicable Methodology.
 
-Use the completed results of the 102 harvest packets retained by CA-P-1117. No further native-session harvesting is required or authorized by this stage. The interrupted CA-A-1043 output is excluded from admitted completion. CA-P-1118 and canceled harvest remainder Plans do not block this stage.
+Use retained evidence only where directly relevant to those selected Workflows. No further harvesting, all-candidate reconciliation, or delivery of the five extra authored assessment Actions is required. Define Workflow/Action Run journaling and the three main Projection Workflows as part of this source scope.
+
+CA-P-1130's completed reconciliation remains retained history. CA-P-1131 and its legacy closure are excluded from this stage's required decomposition by the Operator's scope amendment; no failed directory move is bypassed or reported repaired. CA-P-1132 / CA-P-1157 must bind the selected source frontier instead. Create bounded authoring leaves only for actual source gaps, and retain independent review before dependent RMED execution.
 
 ### Work decomposition
 
@@ -49,4 +51,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any harvested candidate lacks an explicit adopted/already-covered/rejected/Concern disposition and a justified destination for adopted Operations, any needed operation exists only in a projection or in the wrong source layer, or any source Operation lacks independent review and a disposition for every finding. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done until all thirteen selected Workflows and their required Actions have a traceable existing-or-authored source disposition, correct destination, independent review and findings disposition, including all-Run journaling and the three Projection behaviors. Every newly required authoring/review/repair leaf must be Done. The Operator-excluded legacy authoring closure and unrelated harvest capabilities are not required children.
