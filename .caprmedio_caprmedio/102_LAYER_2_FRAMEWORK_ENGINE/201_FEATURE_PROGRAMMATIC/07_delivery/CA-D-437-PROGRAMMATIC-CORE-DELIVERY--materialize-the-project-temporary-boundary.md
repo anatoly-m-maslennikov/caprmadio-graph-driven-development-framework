@@ -9,8 +9,8 @@ subjects:
 llm_session_ids:
   - codex:01a0263a-7510-7672-bce4-58830bc4d184
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
-version: 8
-updated_at: 2026-09-15 04:19:10 +0400
+version: 9
+updated_at: "2026-10-04 04:23:29 +0400"
 relations:
   delivery_for:
     - CA-R-1473
@@ -18,26 +18,24 @@ relations:
 ---
 # Materialize the Project temporary boundary
 
-the PROGRAMMATIC Delivery **must** materialize one shared Project Temporary State
-path boundary **in** canonical source under `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/`
-**and** the selected `.caprmedio_runtime/tools/` release. **every** Tool, App backend, MCP
-component, test launcher, **and** dependency launcher **must** use that boundary **to**
-allocate owned temporary descendants below `.caprmedio_tmp/`.
+the shared Project Temporary State path boundary **must** be carried **in**
+canonical source under `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/` **and** the selected
+`.caprmedio_runtime/tools/` release.
 
-the root `pyproject.toml` **must** route admitted Python development **and**
-Evaluation tool caches into `.caprmedio_tmp/`. launch Carriers **must**
-provide explicit run-specific temporary, staging, build, **and** cache locations
-for dependencies that do **not** read `pyproject.toml`. canonical source **and**
-configuration **must not** select the repository root, source tree, Project
-control root, `.caprmedio_runtime/`, **or** a host temporary root for those
-Carriers.
+the root `pyproject.toml` carries the admitted development **and** Evaluation-tool
+cache-path configuration. dependency launch Carriers carry explicit temporary,
+staging, build, **and** cache-path parameters **when** that dependency does **not**
+read `pyproject.toml`. those configured temporary Carriers occupy descendants
+of `.caprmedio_tmp/`.
 
-Python entrypoints, test runners, **and** service launchers **must** route
-bytecode caches into `.caprmedio_tmp/cache/python/` **or** disable bytecode writes.
-the delivered Runtime State root **must not** contain `__pycache__/` Directory
-Carriers **or** `.pyc` File Carriers.
+Python bytecode caches use `.caprmedio_tmp/cache/python/`; the corresponding
+entrypoint, test-runner, **or** service-launcher Carrier stores that path **or** the
+disabled-bytecode-write setting. the delivered Runtime State root **must not**
+contain `__pycache__/` Directory Carriers **or** `.pyc` File Carriers.
 
-the delivered boundary **must** preserve owner **and** run identity **in** retained
-paths, support bounded cleanup **without** requiring it for correctness, **and** emit
-one stable diagnostic containing the violating owner **and** path whenever safe
-runtime placement cannot be established.
+temporary-path representations carry owner **and** run identity. the boundary
+diagnostic representation carries the violating owner **and** path.
+
+CA-R-1473 owns confinement, identity, cleanup-independence, **and** diagnostic
+outcomes. CA-M-289 owns temporary-path construction **and** configuration
+conventions; CA-E-467 checks their conformance.
