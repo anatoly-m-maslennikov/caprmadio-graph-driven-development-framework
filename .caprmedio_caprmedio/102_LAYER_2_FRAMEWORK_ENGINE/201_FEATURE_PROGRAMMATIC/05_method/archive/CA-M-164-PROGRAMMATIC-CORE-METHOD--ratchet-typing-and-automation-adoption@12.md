@@ -6,8 +6,8 @@ subjects:
   depends_on:
     - "Journal/Record"
     - "programmatic software"
-version: 13
-updated_at: "2026-10-04 04:23:29 +0400"
+version: 12
+updated_at: "2026-09-17 18:36:42 +0000"
 relations:
   derived_from:
     - "CA-A-053"
@@ -18,10 +18,9 @@ llm_session_ids:
 ---
 # Ratchet typing and automation adoption
 
-advance PROGRAMMATIC typing **and** automation through bounded target selection,
-explicit tool configuration, **and** deliberate expansion. Evaluation authority
-owns acceptance profiles **and** regression policy under CA-E-539, CA-E-540,
-**and** the applicable behavioral Evaluation.
+advance PROGRAMMATIC typing **and** automation through bounded passing targets:
+prevent regression, require the admitted profile for changed **or** new targets,
+**and** expand **only** deliberately.
 
 ## Applicable when
 
@@ -37,8 +36,8 @@ behavioral-check capability.
    from canonical configuration **or** Implementation; read carrier placement **and**
    encoding from Delivery.
 3. keep formatting, linting, typing, **and** behavioral evidence distinct.
-4. provide changed **or** new target evidence **and** its current admitted baseline
-   **to** the applicable Evaluation for its regression decision.
+4. prevent changed **or** new targets from regressing below the current admitted
+   boundary.
 5. expand **or** replace a selected capability **only** through a Method change;
    materialize that change separately **and** preserve evidence of actual runs **in** Journal Records.
 
@@ -49,9 +48,9 @@ turning an unselected tool, version, **or** strictness level into shared authori
 
 ## Failure or stop
 
-return unresolved selection **when** no accepted Method owns the tool choice **or**
-the bounded materialization is unavailable. Evaluation authority determines
-whether the supplied baseline **and** execution evidence admit the claimed ratchet.
+stop a claimed ratchet **when** no accepted Method owns the selection, no passing
+baseline **or** bounded materialization exists, **or** the configuration,
+Implementation, Delivery, **and** recorded execution evidence disagree with that selection.
 
 ## Sources
 

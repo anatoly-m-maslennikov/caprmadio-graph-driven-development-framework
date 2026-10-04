@@ -5,8 +5,8 @@ subjects:
   governs: "source-boundary"
   depends_on:
     - "programmatic software"
-version: 14
-updated_at: "2026-09-05 03:48:00 +0400"
+version: 15
+updated_at: "2026-10-04 04:23:29 +0400"
 relations:
   derived_from:
     - "CA-A-053"
@@ -17,13 +17,11 @@ llm_session_ids:
 ---
 # Ratchet hand-authored Python source boundaries
 
-keep new **or** materially changed hand-authored PROGRAMMATIC Python source within
-the accepted source-size ratchet **and** require cyclomatic-complexity lint for
-**every** changed executable unit. apply CA-M-157, CA-M-158, **and** CA-M-160 for
-function allocation, object ownership, effect boundaries, **and** their naming
-rules rather than restating those policies here. review cohesion,
-responsibility, dependency direction, **and** testability independently from size
-**and** complexity scores.
+**to** construct bounded hand-authored PROGRAMMATIC Python source, decompose code
+by responsibility under CA-M-157, CA-M-158, **and** CA-M-160; choose smaller coherent
+units **and** external data Carriers; **and** use measurements **to** guide the next
+construction choice. CA-E-539 owns source-size, complexity, exception, **and**
+ratchet acceptance policy.
 
 ## Applicable when
 
@@ -33,37 +31,28 @@ are outside this source rule.
 
 ## Procedure
 
-1. target **<=200** physical lines per file.
-2. target **<=25** logical lines per executable unit; use 26–40 **only** for one
-   coherent job.
-3. run the Method-selected cyclomatic-complexity lint for **every** new **or**
-   materially changed executable unit.
-4. reject a unit above the Method-selected complexity maximum as materialized
-   **in** canonical configuration **unless** one specific bounded exception records
-   the measured value, applicable maximum, reason, **and** condition for
-   reconsideration.
-5. for an executable unit above 40 logical lines, record the specific
-   source-size exception **and** retain its single responsibility.
-6. externalize a static mapping larger than 20 entries **or** 25 source lines.
-   use TOML by default, JSON for schemas **or** machine interchange, **and** YAML **only**
-   **when** its distinct features are required. treat size **and** complexity scores
-   as navigation constraints rather than proof of quality.
+1. read the applicable Evaluation policy **and** changed-source measurements.
+2. separate independently reusable responsibilities **and** move deterministic
+   transformations outside effect **and** lifecycle owners.
+3. extract related units into specifically named modules **when** that keeps
+   dependencies **and** responsibility visible.
+4. externalize large static mappings. use TOML by default, JSON for schemas
+   **or** machine interchange, **and** YAML **only when** its distinct features are required.
+5. submit the resulting source **and** any bounded exception rationale **to** the
+   applicable Evaluation. use its result **to** choose the next decomposition.
 
 ## Outcome
 
 changed source ratchets toward readable, bounded units **and** externalized static
-data **without** declaring existing oversized **or** over-complex source an immediate
-whole-repository failure. source size **and** cyclomatic complexity cannot regress
-silently **in** changed executable units.
+data. construction choices remain traceable **to** responsibility boundaries
+**and** the measurements supplied **to** CA-E-539.
 
 ## Failure or stop
 
-stop claiming conformance for a changed unit that exceeds its source-size **or**
-cyclomatic-complexity boundary **without** a documented bounded exception **or**
-retains a large static mapping inside executable Python source. stop **when** no
-accepted Method selects the complexity-lint profile **and** maximum, their
-materialization is absent **or** inconsistent, **or** reducing a score would obscure
-a separate responsibility **or** needed recovery boundary.
+return unresolved construction choices **when** the applicable Evaluation policy
+**or** required measurement is unavailable. retain a separate responsibility **and**
+needed recovery boundary **when** a proposed decomposition would obscure either.
+acceptance **and** rejection follow CA-E-539.
 
 ## Sources
 
