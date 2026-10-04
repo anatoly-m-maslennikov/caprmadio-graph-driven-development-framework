@@ -18,8 +18,6 @@ Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and to
 the project's meaning must not depend on them →\
 an explicit ontology/base model defines the core: concepts, relations and constraints.
 
-CAPRMEDIO therefore has two parts: ontology (methodology) and harness (engine). The engine must be replaceable without changing the core.
-
 ### Ontology (methodology)
 
 Sessions are ephemeral →\
