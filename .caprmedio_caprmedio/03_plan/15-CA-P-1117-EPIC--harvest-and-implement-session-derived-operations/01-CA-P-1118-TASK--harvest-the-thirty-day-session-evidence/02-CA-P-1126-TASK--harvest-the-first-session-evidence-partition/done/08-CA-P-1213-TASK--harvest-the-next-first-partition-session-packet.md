@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 09:14:26 +0400"
+version: 2
+updated_at: "2026-10-04 09:40:13 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1221
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -925,6 +926,22 @@ source_sha256 isretained905/910snapshotprovenance,notnewimmutablefull-fileproof.
 SystemPythonstandard-library seek/readeveryexactselected/contextslice;verify response_item/messagekind,hash/timestamp/role/nullchannel/partcount/byte/native sum-of-text-part charcount/window.67selected/22user/45assistant/60903bytes/34260chars/1parteach;orderedaggregateSHA256b02eefd7c06040ca4e9afe0c55c21830454a5cbd92f971a5c9d757a6179cf63b. Context53836 hash/metadata/325charsseparate,total34585;following55029separatelychecked. Bindingintegrityisnotcompletedharvest.
 
 Aftersaving931 reread67uniquecompleteprovenance/dispositionrows pluscontext,allhumanrequests/candidates/claims/frontiers andactualnextinput/output/ownership/estimate/functionalchecks/directgates. Verifymandatorysections/nativekeys/immediateparent/uniquesiblingIDs/sequence/boundedaffectedcompletion-BLOCKSacyclicity. Review1119/1130/1155 fromresult;1126staysActive. RecordpassingsavedchecksbeforeDone. RootownsstrictYAML/full-EpicDAG/authorizedsavingunderC293;claimonlyobservedsuccess.
+
+### Completed substantive result and actual next gate
+
+Durable CA-A-931v1 at `.caprmedio_caprmedio/02_analysis/CA-A-931-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md` saves67 whole canonical original-main53947–55000,22user/45assistant,60903raw bytes/34260native chars; ordered aggregateSHA256b02eefd7c06040ca4e9afe0c55c21830454a5cbd92f971a5c9d757a6179cf63b. All67selected native parts+one53836context part fully read.67complete provenance/disposition rows,22literal human messages/13annotation selections in12historical groups and4provisional reusable candidates preserve exact delayed approvals/corrections. Human instructions cover DRY/two-level uniqueness, scoped Project Principle/Core hierarchy, semantically sufficient Summaries, informed-decision communication and breadth review. Actor-Principle demotion was rejected; R827 demotion accepted; configuration/extensibility promotion remains unapproved. Reports of model/hierarchy/reference/archive/check/rebuild edits are not independent implementation/save proof. No selected fragment remains.
+
+Combined1180+1190+1194+1200+1204+1209+1213 coverage354;refined9101869minus354 leaves1515,original1877 including8latermachinecontexts minus354 leaves1523. All1659-file/1657-ID905 rows/other1658files/17PRIMARY+1642worker origins/metadata-parent/worktree/both continuation pairs retain exact source/window frontiers; no whole source subtraction.917candidate zero-monthly metadata-only/unasserted broaderidentityC294 andSeptember15 priorprefix/boundaries/unassessed overlap/later partitions remain in931/1221. Aggregate1949PRIMARY includesother sources; no source/partition/month completion.
+
+Actual next ActiveCA-P-1221v1 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/02-CA-P-1126-TASK--harvest-the-first-session-evidence-partition/09-CA-P-1221-TASK--harvest-the-following-first-partition-session-packet.md`, immediate1126/sequence9/oneAI/<=15minutes, outputreservedCA-A-939 at `.caprmedio_caprmedio/02_analysis/CA-A-939-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`.57whole55029–56032,13user/44assistant,44748rawbytes/22263chars,aggregateSHA256e7d5f4de2974f1f30a6985ac1f99869ad1728859b8ff7e97c06795718b7f6dca;55000context231 gives22494<=35000. Fresh raw binding is not completed harvest. First55029bytes[349226734,349227810)/2026-09-04T21:06:42.481Z/assistant/null/1part/hash44ffc0d6e3b48e0d8720c16f3ed8348d4aba66e26aff7bbebd7e82f038b7e4df. Last56032bytes[353527518,353528036)/2026-09-04T22:45:02.401Z/assistant/null/1part/hashd7551dfd2b122e71cf12986f3da6828802e084cc9a4e9909fb7f4f4552ca3bde. Following whole56085bytes[353853655,353887980)/2026-09-04T22:51:07.530Z/assistant/null/1part/hash3bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e/34325rawbytes/33549chars remains intact/unharvested, excluded by35k whole-packet boundary, not silently truncated. Eventual57completion leaves1458/1466;1515/1523 remain now. Root reserves laterP1229/A947 only when1221 executes; this worker holds after1213.
+
+1213 directlyblocks1221;Active1221 andActive1126 directlyblock1119/1130/1155. Those livev1 dependents were reread; localDone never releases methodology. Governing Goal/Principles/permissions/sourcePlan bodies reread, exact currentrevisions in931. No current issue needed newConcern;C293/C294 retain dispositions. No O/RMED/code/environment/Docker/FPF/Git/Journal edits;rootownsstrictYAML/full-EpicDAG/authorizedsaving.
+
+### Actual verification and timing
+
+Actual work began2026-10-04T05:27:58Z,estimate<=15minutes. Pre-Done systemPython standard-library checks passed68selected/context source records/all68parts,raw metadata/window/hash/67aggregate,67uniquecomplete saved provenance/dispositions,22literalhumanrequests/13exactannotationselections,57nextbound+followingwhole raw slices,mandatoryheadings/oneDoD/oneEOFnewline/no trailingwhitespace,unique direct siblingIDs/sequence9 andseven-node completion/BLOCKS acyclicity. Current-source verification/refingerprint does not prove historical reported code/tests/save outcomes. RootstrictYAML/full-EpicDAG/authorizedsave remain separate. Done-placement/roll-up/terminal-closure clock follows after final saved checks.
+
+Final saved Done-placement/roll-up/source fingerprints/literal annotations/headers/EOF/unique-sibling/seven-node completion-BLOCKS checks passed2026-10-04T05:39:30Z. Terminal closure clock2026-10-04T05:40:13Z,elapsed12m15s fromactualfirstclock05:27:58Z,includes all substantive reading,authoring,Done placement,parent/next updates andfinal saved checks,notjust anearlier substantive-check timestamp. Onlythis timing-record/metadata confirmation follows; rootstrictYAML/full-EpicDAG/save remainseparate. Workerholdsafter1213.
 
 ## Details
 

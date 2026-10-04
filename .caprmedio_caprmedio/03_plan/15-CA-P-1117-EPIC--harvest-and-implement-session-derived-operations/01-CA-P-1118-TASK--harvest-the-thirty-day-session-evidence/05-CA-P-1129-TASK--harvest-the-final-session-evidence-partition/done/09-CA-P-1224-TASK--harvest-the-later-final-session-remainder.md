@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following final-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:13:50 +0400"
+version: 2
+updated_at: "2026-10-04 09:33:12 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1228
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1386,6 +1387,10 @@ Own A942,this Plan result/Done,1129roll-up and actual next root-reserved remaind
 ```
 
 ## Details
+
+### Actual result
+
+Observed firstclock05:28:56Z; saved100-message verification/strict94Plan32carrier completion-DAG check05:33:12Z,4m16s. A942v1 retains100complete records/12698chars,97assistant3human,originaltexts/exactcompactidentities and100nonempty dispositions,3historicalhumanchoices/3provisionalgroups. The initially truncated double-metadata/text tool output was not accepted as full evidence; complete native and metadata reads/saved exact comparison passed. Source690→790/1284,494remain. Actualnext1228/A946seq10 binds100whole/9205chars+191context=9396,L97832–101152,rawSHA2566b124b7cccfa501236faf57b0942317415129835f69e576095bb75b0e03d91d9;394followingrecords startL101168/1039910216/2026-10-02T19:40:09.353Z/hashbb1b64a785247820765536a5db560490f02716617f08cd56147ccd201f6a64ca. Nativecurrent/next bindingverified; nextstatementsunharvested.1224Done→1228ready;1129/1118Active and1119/1130/1155 blocked. Noauthoring/implementation/environment/Journal/Git work inleaf.
 
 ### Definition of Done
 

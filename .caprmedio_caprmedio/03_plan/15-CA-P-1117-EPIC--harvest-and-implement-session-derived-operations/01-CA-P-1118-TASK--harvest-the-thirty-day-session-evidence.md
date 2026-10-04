@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 5
-updated_at: "2026-10-04 09:25:27 +0400"
+version: 6
+updated_at: "2026-10-04 09:45:41 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -44,15 +44,15 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
 
-Current checkpoint:25 substantive packets retain1692 unique PRIMARY message dispositions. Original-main coverage is287 first-partition /459 second-partition; main-continuation256 third-partition /690 final-partition. The original indexed PRIMARY baseline6588 leaves4896 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
+Current checkpoint:32 substantive packets retain2354 unique PRIMARY message dispositions. Original-main coverage is354 first-partition /554 second-partition; main-continuation356 third-partition /1090 final-partition. The original indexed PRIMARY baseline6588 leaves4234 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
 
-Latest completed leaves1209/A927,1210/A928,1211/A929,1212/A930,1216/A934 and1220/A938 add544 complete records, respectively86/99/59/100/100/100. Their4/7/3/3/4/3 provisional groups bring the historical overlapping group count to115; these are not115 adopted Operations or deduplicated capabilities. All selected whole records, native fingerprints, substantive dispositions and context remain durable.
+Latest completed leaves1213/A931,1214/A932,1215/A933,1224/A942,1228/A946,1232/A950 and1236/A954 add662 complete records, respectively67/95/100/100/100/100/100. Their4/7/5/3/2/3/5 provisional groups bring the historical overlapping group count to144; these are not144 adopted Operations or deduplicated capabilities. All selected whole records, native fingerprints, substantive dispositions and context remain durable.
 
-Actual next leaves are1213/A931(first67 whole records),1214/A932(second95),1215/A933(third100 with explicitly bound context) and1224/A942(final100). All are ready, held unexecuted, and directly block1119/1130/1155 with unfinished parents1126–1129/1118. First original-main1582 refined records remain; second165 original plus759 continuation; third919 continuation; final594 continuation. Authoring, engine specification, implementation and complete Docker runtime verification remain required and have not executed under this Epic. No source is labeled unavailable merely because of its size.
+Actual next leaves are1221/A939(first57whole),1222/A940(secondwhole78201charreport plus2689context under explicit90000charbudget),1223/A941(third73whole plus3333context) and1240/A958(final100whole). All are ready, held unexecuted, and directly block1119/1130/1155 with unfinished parents1126–1129/1118. First original-main1515 refined records remain; second70 original plus759 continuation; third819 continuation; final194 continuation. Authoring, engine specification, implementation and complete Docker runtime verification remain required and have not executed under this Epic. No source is labeled unavailable merely because of its size.
 
-Root's strict duplicate-rejecting YAML/headings/fields, unique-ID, Done-placement and complete completion/BLOCKS DAG checks pass93Plans/31supporting carriers after saved closure. Root independently verified A928's99 identities/parts/dispositions and95next raw/text/context/budget/frontier, plus the root-owned A930/A934/A938 complete saved sources and exact next bindings. Workers retain their complete native/saved/binding checks. Observed terminal intervals:1209 14m35s;1211 13m46s;1212 4m34s through owned checks;1216 4m56s through closure;1220 3m12s through owned checks.1210 substantive checks13m49s but final closure15m04s; resolvedC299 and actual1217 preserve that overrun.1217 closure7m23s exceeded its5minute estimate but stayed within the15minute Epic bound. No duplicated harvest or invented earlier terminal clock.
+Root's strict duplicate-rejecting YAML/headings/fields, unique-ID, Done-placement and complete completion/BLOCKS DAG checks pass100Plans/38supporting carriers. All root-owned current/saved originaltexts/fingerprints/dispositions and actualnext native hashes/time/role/chars/context/budgets pass; workers retain their full saved/source/context/binding checks. Observed terminal intervals1213 12m16s;1214 11m35s;1215 14m14s;rootownedchecks1224 4m16s,1228 3m11s,1232 2m50s,1236 3m04s. All stay below15min. Original1210 timingfailure andresolvedC299/1217closure remain explicit historical evidence; no clock reset or repeatedsemanticrecheck.
 
-Prior committed checkpointdcb2bddb8fa805826bd7851913d72f6596a6931f is real. Its17 saved states were independently matched to Git bytes and appended as actual recovered-state Journal receipts; this execution has81 receipts before saving this round. These are not save-Tool or newly executed Workflow events. The shared Journal still has unrelated pre-existing edits; its Git save stays explicitly pending rather than staging unrelated work. This round's direct Git result is recorded separately after verification.
+Prior committed checkpoint9033330aa is real. Its23actualnew savedstates were independently matched to Git bytes and actual sealed recovered-state Journal records; this execution has104events before saving this round. An overly strict whole receipt-object equality assertion failed after append, but independent actualJournal/path/hash/Git checks verify all23states; no duplicateappend or false saveToolcompletionclaim. The shared Journal still has unrelated pre-existing edits; its Git save stays explicitly pending rather than staging unrelated work. This round's direct Git result is recorded separately after verification.
 
 Earlier checkpoint paragraphs below are historical and superseded by these current counts/frontiers.
 

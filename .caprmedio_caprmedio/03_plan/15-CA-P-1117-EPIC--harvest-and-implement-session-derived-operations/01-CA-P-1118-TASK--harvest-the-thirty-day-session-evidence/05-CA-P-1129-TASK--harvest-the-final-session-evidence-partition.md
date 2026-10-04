@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 10
-updated_at: "2026-10-04 09:16:07 +0400"
+version: 14
+updated_at: "2026-10-04 09:45:41 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -64,6 +64,14 @@ Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-windo
 ## Details
 
 ### Latest completed packet checkpoint
+
+Latest supersedingfrontier1236Done/A954 adds100whole/16562chars/10human/5provisionalgroups;coverage1090/1284,194remain. Actualnext1240/A958seq13 binds100whole/21412chars+176context=21588,L106889–108732;94afterfuturebound atL108744/1066547008/2026-10-03T20:40:48.484Z/raw3bd91d9a77ed73ec06c1b1df70fd8329815d425bbe1c22c7469eda5c4727b790. Root3m04s throughownedchecks.1236BLOCKS1240,1240BLOCKS1119/1130/1155;allother131finalPRIMARY/4051worker/window/sourcefinalL111074persist.1129/1118Active;earlier990/294andbound1236paragraphshistorical.
+
+Latest supersedingfrontier1232Done/A950 adds100whole/9476chars/0human/3provisionalgroups;coverage990/1284,294remain. Actualnext1236/A954seq12 binds100whole/16562chars+149context=16711,L104327–106883;194afterfutureboundatL106889/1051288688/2026-10-03T13:05:20.849Z/rawe2f94505fe2a4ab11b0eb13f90a1796dd300a3006ddecafbcee1a12acf8b790e. Root2m50s throughownedchecks.1232BLOCKS1236,1236BLOCKS1119/1130/1155;allother131finalPRIMARY/4051worker/window/sourcefinalL111074 persist.1129/1118Active;earlier890/394andbound1232paragraphshistorical.
+
+Latest superseding frontier:1228Done/A946 adds100whole/9205chars/one humanrequest/twoprovisionalgroups. Current890/1284,394remain. Actualnext1232/A950seq11 binds100whole/9476chars+66context=9542,L101168–104299;294afterfuturebound atL104327/offset1043449213/2026-10-02T22:14:28.248Z/raw56572e811885e785ff02cf1359f9f0735b5dd347144668312157e8d8e23d79bc. Root3m11s throughownedchecks.1228BLOCKS1232;1232BLOCKS1119/1130/1155;allother131finalPRIMARY/4051worker/source-window-continuation/finalL111074frontierspersist.1129/1118Active. Earlier790/494andbound1228paragraphsbelowhistorical.
+
+Latest superseding frontier:1224Done/A942 adds100whole/12698chars,3explicit human choices/3provisional groups; coverage790/1284,494remain. Human authorizes independent check/fix overlap,Summarycorrectionreplacement and requests additionalworkers; historicalcapacity/resultsnotindependentproof. Actualnext1228/A946seq10 binds100whole/9205chars+191context=9396,L97832–101152;afterfuturebound394remain atL101168/offset1039910216/2026-10-02T19:40:09.353Z/rawbb1b64a785247820765536a5db560490f02716617f08cd56147ccd201f6a64ca.1224BLOCKS1228,1228BLOCKS1119/1130/1155. Realrootelapsed4m16s toownedchecks. Allother131finalPRIMARY/4051worker/window/sourcefinalL111074unchanged;1129/1118Active,downstreamauthoring/implementation/Dockerblocked. Earlier690/594andbound1224paragraphsbelowhistorical.
 
 1208 is Done with A926:100 whole PRIMARY records/22529 native characters and nine human contributions, three provisional overlapping groups. A909/A914/A922/A926 now dispose390/1284 source records;894 remain. Earlier290/994 figures above are historical checkpoints, superseded here. Actual next1212/A930, sequence6, binds100 whole records/23153 characters, positions391–490, L81861–87394, aggregatee9c61682df254f56f154a25aa86fc26d4b41cd08b5e9e9b3f4dfee3499b30dba.1208 BLOCKS1212;1212 BLOCKS1119/1130/1155.
 

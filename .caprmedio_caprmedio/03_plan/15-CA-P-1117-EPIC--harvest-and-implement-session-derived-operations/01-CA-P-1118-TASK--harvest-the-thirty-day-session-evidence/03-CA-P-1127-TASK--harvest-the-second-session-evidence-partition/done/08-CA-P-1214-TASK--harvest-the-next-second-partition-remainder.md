@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition primary session evidence remainder packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:12:07 +0400"
+version: 2
+updated_at: "2026-10-04 09:39:13 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1222
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -65,6 +66,12 @@ Same-ID continuation`/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T19-
 SystemPythonstdlibseek621500183/read11963268bytes,parsecompleteJSONLrecords/applypredicate;reproduce95orderedlines/times,24/71roles,nullchannels,33466chars,max2685,95parts,rawselected/first/last hashes. Independently reread savedA932 and native re-extract allidentities/parts/dispositions/candidates/supersession/context. Verify wholecontext/raw/partidentity separately. No reportpromotion.
 
 Check requiredPlanproperties/headings,cleanEOF,parent/Active/sequence,oneagent/<=15min,actualnextbounds/input/output/checks and changedBLOCKSacyclicity;update1127actualfrontier/reread1119/1130/1155. Allunfinishedharvest/Active1127/fullharvest1118 keep dependentsblocked. RootseparatelystrictYAML/fullDAG/save.
+
+### Actual result
+
+CA-A-932v1 saves95whole messages/95nativeparts/nonemptydispositions,eight historical choice/supersession records andseven meaningfulprovisionalgroups. Exact862-characterwholepriorcontextread,notnewcount. Independentnative/savedreadback/counts/hashes/headings/EOF andwholegiantnextbinding passed09:37:13+0400. Firstclock09:28:13+0400;terminalclockreportedafteractualcarrierclosure,notthisearlierreadback. ActualfrontierL96763/633463451/2026-09-15T02:07:59.340Z;554of624originalcovered,70original/759continuationunprocessed. Boundnext1222/A940sequence9whole78201-characterreport+2689exactcontext=80890underexplicit90000characterbudget/rootauthorizedwhole-reportexception,oneagent/<=15min. No fragmentIDsused;giantnotprematurelyharvested;later69ordinaryfrontierretained/rootreserved1230/A948nextbinding.1214BLOCKS1222;1222BLOCKS1119/1130/1155;1127/1118Active. Historicalproposal/approval/report/executionlimitsretained;noactualcurrentissue,rootstrictYAML/fullDAG/save separate.
+
+Terminal carrier-closure check passed2026-10-04T05:39:13Z/09:39:13+0400,11m00s from05:28:13Z. Savedplacement/status/sequence/edges/headings/EOF andall9nextcontextnativefingerprints passed. Finalreceiptstamp clock reported separately to root;rootstrictYAML/fullDAG/save pending.
 
 ## Details
 
