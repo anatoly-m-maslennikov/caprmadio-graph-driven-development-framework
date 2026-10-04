@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 06:42:47 +0400"
+version: 3
+updated_at: "2026-10-04 06:57:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -57,7 +57,9 @@ Inherit CA-P-1117 controls and the 90% confidence threshold through IS_DECOMPOSI
 
 CA-P-1150 completed bounded preparation at 2026-10-04 06:42:47 +0400. One app listing with limit 20 returned 20 recent records and 6 pinned overflow records; 7 exact project-linked Codex IDs are durably carried in the new child `02-CA-P-1175-TASK--bind-the-first-seven-session-metadata-sources.md`. No pagination cursor was supplied, and app updated_at does not enumerate in-window events. No session content was harvested.
 
-CA-P-1175 is the next executable metadata-discovery child after CA-P-1150. The parent remains Active. Older/archived app threads, additional local sessions and event-window coverage remain unenumerated; CA-P-1175 must bind their concrete remainder before completion. The parent's existing BLOCKS edges and CA-P-1175's direct edges keep CA-P-1151 through CA-P-1154 and CA-P-1126 through CA-P-1129 gated: Done preparation does not authorize substantive harvest.
+CA-P-1175 completed the first metadata binding: all seven exact app session IDs have local sources, represented by nine continuation candidates. One filename-only enumeration returned 2,011 files with no limit reached; only the first session_meta record of the nine matches was read. Its durable result and exact paths are retained in `done/02-CA-P-1175-TASK--bind-the-first-seven-session-metadata-sources.md`; supplemental JSON is `.caprmedio_tmp/CA-P-1117/manifest-CA-P-1175.json`. Duplicate continuations and verified historical cwd values remain evidence, not restored Project bindings or proof of complete source history.
+
+CA-P-1176 is the concrete next executable leaf: `03-CA-P-1176-TASK--enumerate-the-project-session-metadata-corpus.md`, with exact native active/archived roots, first-record bounds, optional one-page archived app source, and durable CA-A-905 corpus-manifest output. This parent remains Active until the required corpus manifest and actual discovery remainders are complete. Event-window body coverage is an explicit later harvest frontier, not metadata completion. The parent's existing gates plus CA-P-1176's direct BLOCKS edges retain all four partition preflights and parents as blocked; Done initial binding does not authorize substantive harvest.
 
 Existing Harvest Epic 014 is a TOOLS-authority harvest: CA-P-1073 inventories reusable operations from the TOOLS RMEDO subtree, not the monthly session corpus. Reuse and cross-map its candidates in later reconciliation rather than duplicating that inventory. No monthly completion evidence is inferred from it. General adopted Operations route to CORE_META_MODEL and caprmedio-specific Operations to PROJECT_CONFIGURATION under CA-P-1117; this metadata packet authors neither.
 

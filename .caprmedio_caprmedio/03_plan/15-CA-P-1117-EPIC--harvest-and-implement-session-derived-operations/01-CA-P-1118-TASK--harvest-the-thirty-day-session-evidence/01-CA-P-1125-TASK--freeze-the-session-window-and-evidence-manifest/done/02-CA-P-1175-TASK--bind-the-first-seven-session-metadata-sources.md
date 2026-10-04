@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Session evidence metadata manifest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 06:42:47 +0400"
+version: 2
+updated_at: "2026-10-04 06:55:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1125
   blocks:
+    - CA-P-1176
     - CA-P-1151
     - CA-P-1152
     - CA-P-1153
@@ -72,6 +73,47 @@ The assigned AI Agent must bind the seven exact project-matched session identifi
 Carry seven manifest rows in this file's execution result, each with its exact ID, relevance evidence, app source, local/app availability, retrieval path/cursor or explicit unavailability, date-window caveat and next retrieval boundary. Roll up the slice and explicit incomplete frontier in CA-P-1125. Retain the enumeration counts, limits hit, excluded-source categories and new remainder Plan ID/path.
 
 Verification scenario: compare the seven saved row IDs to the exact seven-ID input set; every ID must have exactly one manifest disposition, every claimed local path must exist and its first session_meta ID must match, and every claimed app cursor must come from the actual response. Confirm the window remains unchanged, the parent remains Active, the required remainder is represented by an executable bound Plan, and the combined decomposition/BLOCKS graph is acyclic. No source is declared fully harvested by this metadata-only packet.
+
+### Execution result: first metadata slice
+
+Completed at 2026-10-04 06:55:00 +0400 using system Python's standard library. One filename-only enumeration returned 2011 files in 0.0144 seconds with neither the 10,000-filename nor 60-second limit hit. Only the first session_meta record of the nine exact-ID matches was read, within 128 KiB per file. No message body, tool output, credential or unrelated project content was read. All first-record IDs matched their requested IDs; none was missing or unreadable.
+
+The seven app rows use the exact projectId and current working-directory match recorded in CA-P-1150. Their supplemental app snapshot remains `.caprmedio_tmp/CA-P-1117/preflight-CA-P-1150-app-metadata.json`; no older-turn cursor was supplied by that listing, and no read_thread fallback was needed. Every row below has exactly one disposition; multiple native files are retained as candidates, not counted as separate conversations or deduplicated blindly.
+
+| Session ID | App title, verbatim | Local sources | Disposition and next boundary |
+| --- | --- | --- | --- |
+| 01a02650-eff7-7453-8c37-0699b36773c6 | CA #7: main | L6, L8 | local metadata bound; bodies unread; app cursor absent |
+| 01a01cb4-e15e-78d1-9084-766bf6b0cd63 | CA #3: TOOLS R | L3 | local metadata bound; bodies unread; app cursor absent |
+| 01a0263a-7510-7672-bce4-58830bc4d184 | CA #?: README | L5 | local metadata bound; bodies unread; app cursor absent |
+| 01a0a296-34e6-73e3-a56d-b6073c30eedc | CA #: SOTA harvest | L7 | local metadata bound; bodies unread; app cursor absent |
+| 019f591f-04f6-70f2-8de7-828b7cccc69d | CA #1: project structure | L1, L9 | local metadata bound; bodies unread; app cursor absent |
+| 019fc24e-24ed-7921-b4db-cf4df3e14bf7 | CA #2: programmatic Ms | L2 | local metadata bound; bodies unread; app cursor absent |
+| 01a02617-cc4e-70d2-9509-1308b0f64c32 | CA #5: Skill | L4 | local metadata bound; bodies unread; app cursor absent |
+
+Each row's next harvest boundary is the first body record after session_meta in every listed source, filtered by the frozen event window; no event-window coverage is inferred from creation time or modification time. App updated_at is exactly the value in the input table above, not a substitute for body timestamps. Local source metadata:
+
+| Source | Exact retrievable file | session_meta timestamp (UTC) | Observed bytes | Observed modification (UTC) |
+| --- | --- | --- | --- | --- |
+| L1 | `/Users/am/.codex/sessions/2026/07/13/rollout-2026-07-13T05-37-12-019f591f-04f6-70f2-8de7-828b7cccc69d.jsonl` | 2026-07-13T01:37:12.986Z | 563671530 | 2026-09-18T21:33:14.886111+00:00 |
+| L2 | `/Users/am/.codex/sessions/2026/08/02/rollout-2026-08-02T15-48-49-019fc24e-24ed-7921-b4db-cf4df3e14bf7.jsonl` | 2026-08-02T11:48:49.039Z | 167898817 | 2026-09-23T00:04:21.758873+00:00 |
+| L3 | `/Users/am/.codex/sessions/2026/08/20/rollout-2026-08-20T05-06-51-01a01cb4-e15e-78d1-9084-766bf6b0cd63.jsonl` | 2026-08-20T01:06:51.359Z | 86941052 | 2026-10-04T02:20:03.183020+00:00 |
+| L4 | `/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T00-51-29-01a02617-cc4e-70d2-9509-1308b0f64c32.jsonl` | 2026-08-21T20:51:29.010Z | 45607082 | 2026-09-14T22:30:48.481421+00:00 |
+| L5 | `/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T01-29-20-01a0263a-7510-7672-bce4-58830bc4d184.jsonl` | 2026-08-21T21:29:20.434Z | 126242568 | 2026-10-03T20:55:53.435229+00:00 |
+| L6 | `/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T01-53-53-01a02650-eff7-7453-8c37-0699b36773c6.jsonl` | 2026-08-21T21:53:53.680Z | 644432542 | 2026-09-15T15:24:51.068861+00:00 |
+| L7 | `/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T05-02-28-01a0a296-34e6-73e3-a56d-b6073c30eedc.jsonl` | 2026-09-15T01:02:28.095Z | 11246391 | 2026-10-02T10:58:43.265811+00:00 |
+| L8 | `/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T19-25-02-01a02650-eff7-7453-8c37-0699b36773c6_01a0a5ab-e9a3-79e0-a7d3-110195054118.jsonl` | 2026-09-15T15:25:02.243Z | 1094970866 | 2026-10-04T02:52:17.779702+00:00 |
+| L9 | `/Users/am/.codex/sessions/2026/09/19/rollout-2026-09-19T01-33-39-019f591f-04f6-70f2-8de7-828b7cccc69d_01a0b670-7827-7d73-8106-9c9089bfd42b.jsonl` | 2026-09-18T21:33:39.239Z | 7628444 | 2026-09-24T22:24:33.660237+00:00 |
+
+Relevance and historical metadata caveats:
+
+- L1, L2 and L9 declare the historical cwd suffix `dset-loops-framework`; L3 declares `caprmadio-vibe-coding-to-production-framework`. Their exact session IDs are positively linked to this current Project by the app metadata. These strings are retained solely as observed historical evidence, not restored runtime paths or Project bindings. Other files with an alias alone remain candidates requiring metadata validation.
+- L4 through L8 declare the exact current Project cwd. L6 and L8 carry the same main session ID; L1 and L9 carry the same structure session ID. Preserve both continuations until their event boundaries establish overlap and coverage; no source is claimed complete from size or ID alone.
+- Files created before September 4 remain eligible because they can contain later in-window turns. The current main app timestamp is later than L6's modification time; L8 is an additional continuation, not proof that either local file independently covers the complete app history.
+- Excluded in this slice: unmatched native filenames (not read), archived native sessions (not enumerated), older/archived app rows outside the first listing (not enumerated), and all source bodies. Supplemental row-level JSON is `.caprmedio_tmp/CA-P-1117/manifest-CA-P-1175.json`; the identifiers, exact paths, caveats and frontier are also durable in this Plan.
+
+Created the concrete next execution leaf `03-CA-P-1176-TASK--enumerate-the-project-session-metadata-corpus.md`, estimated <=15 minutes for one AI Agent. It binds first-record metadata enumeration over both native directories, optional bounded archived app discovery, a durable CA-A-905 manifest, and actual source/cursor gaps. This leaf BLOCKS CA-P-1176; CA-P-1176 BLOCKS the four harvest preflights and four partition parents. CA-P-1125 remains Active. No session-content harvest or methodology/tool implementation ran.
+
+Verification: compared the seven result IDs with the seven input IDs; each has one disposition and >=1 existing file with matching first session_meta ID. Verified the frozen window, mandatory Plan body sections, Done placement, parent Active status, unique unused next Plan/Analysis IDs and acyclic explicit prerequisite/decomposition graph. Full YAML/parser validation remains unavailable under CA-C-293; no environment retry or save-Tool receipt is claimed.
 
 ## Details
 
