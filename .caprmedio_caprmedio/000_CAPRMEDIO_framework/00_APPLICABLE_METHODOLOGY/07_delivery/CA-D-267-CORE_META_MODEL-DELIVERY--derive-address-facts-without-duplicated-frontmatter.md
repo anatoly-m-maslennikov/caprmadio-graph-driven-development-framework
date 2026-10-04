@@ -1,0 +1,33 @@
+---
+subjects:
+  governs: "Carrier/Canonical Address"
+  depends_on:
+    - "Artifact/Property"
+    - "Atom/Frontmatter"
+version: 12
+updated_at: "2026-10-01 21:24:59 +0400"
+relations: {}
+atom_id: "CA-D-267"
+content_role: "Delivery"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 11
+projection:
+  source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-267-CORE_META_MODEL-DELIVERY--derive-address-facts-without-duplicated-frontmatter.md
+---
+# Summary
+
+Derive Address Facts without Duplicated Frontmatter
+
+## Scope
+
+registered canonical Carrier addresses that completely **and** unambiguously derive non-Atom Artifact Properties.
+
+## Claim
+
+that address **must** be its sole Carrier encoding **and** embedded metadata **must not** duplicate it. Atom Properties instead follow CA-D-478 **and** CA-D-480.
+
+## Details
