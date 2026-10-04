@@ -9,18 +9,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition worker evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 11:46:45 +0400"
+version: 2
+updated_at: "2026-10-04 12:27:44 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1296
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1385,3 +1386,8 @@ TypedConcerns foractualnewissues; below90% consultGoal/Principles, safeauthorize
 ## Details
 
 Definition of Done: read all77 whole records and full469context; preserve individual native text/parts/disposition and decision-status boundaries; saveA1006; verify hashes, totals, layouts, uniqueIDs and local dependency/Doneplacement; bind actual next remainder before finishing. Update parent with actualcoverage, never metadata-only counts. Report actual first/terminal clocks without resetting time.
+
+### Actual completion
+
+A1006 retains77 complete native messages, all original parts, individual dispositions and469 complete context characters; six provisional overlapping candidate groups. Final workers356/4051,3695 remain; monthlyworkers6067 remain. NextP1296/A1014seq26 binds94 whole messages/23sources,33470+1340=34810characters; futurebinding adds zero semantic coverage. First clock2026-10-04 08:15:38 UTC. Native/saved/Carrier checks follow before terminal receipt. No source authority, implementation, settings or service changes and no Epic completion.
+Terminal verification:2026-10-04 08:26:01 UTC; actual elapsed from08:15:38UTC. All77 saved native texts/dispositions and originalparts,13 source prefixes/raw fingerprints,three complete contexts, current/next disjointness, intact next frontier and ownfour saved registeredCarriers passed. Global diagnostic found missing version fields in another agent's A1008/P1293; those are excluded from this leaf's completion claim and are being repaired separately, not silently passed. No further semantic recheck stage.

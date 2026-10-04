@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next whole first-partition filename-migration continuation harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 12:02:51 +0400"
+version: 2
+updated_at: "2026-10-04 12:33:37 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1293
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -47,3 +48,9 @@ Own only CA-A-1008, this leaf’s Active-to-Done placement, parent1126 roll-up a
 ### Definition of Done
 
 Not Done without complete native evidence, individual disposition, exact next whole/fragment frontier, a saved CA-A-1008 carrier, source/hash/provenance verification, and an actual next <=15-minute child.
+
+### Corrected actual completion
+
+Original owning-Agent completion was rejected because A1008 contained jq errors instead of native texts and C312 contained a sed error. Root recovery started08:28:41UTC and reread whole59756 plus546fullcontextcharacters; A1008 now retains literal parts/fingerprints/individualdisposition. Originalstart/terminal clocks remain unavailable; do not claim original<=15elapsed. P1293/A1011 actual89canonicalmessages/23393chars+338context=23731 exactinput, not unverified91/25119. Root fullnative/saved/Carrier checks follow before corrected terminalreceipt. Parent1126 staysActive; no current migration or Operator adoption.
+
+Corrected root terminalreceipt:2026-10-04 08:33:37 UTC. Actual recovery started08:28:41UTC; complete whole currentrecord/threecontexts, exact89nextcanonicalbinding, sourceprefix/raw/text/parts/fingerprints/intactfrontier and fullstrict134Plans/86supportingCarriers passed. Original Agent elapsed remains unavailable, not asserted<=15. No current migration implemented.

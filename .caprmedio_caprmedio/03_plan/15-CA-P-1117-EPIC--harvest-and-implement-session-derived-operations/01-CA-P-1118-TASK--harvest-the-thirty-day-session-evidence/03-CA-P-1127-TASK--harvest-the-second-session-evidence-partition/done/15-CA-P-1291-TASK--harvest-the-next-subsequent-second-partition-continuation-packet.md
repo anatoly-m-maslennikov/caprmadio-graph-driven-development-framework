@@ -10,18 +10,21 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next subsequent second-partition continuation evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 2
-updated_at: "2026-10-04 12:08:25 +0400"
+version: 4
+updated_at: "2026-10-04 12:36:07 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
+  has_concern:
+    - CA-C-314
   blocks:
+    - CA-P-1294
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -586,3 +589,11 @@ CA-P-1270 has processed 53 records, leaving 470 continuation records. This leaf 
 ### Definition of Done
 
 Not Done if any selected whole text/part, exact provenance, individual disposition, counted context, actual following remainder, inherited frontier, or required check is absent; if historical material is promoted to current proof/approval; if a dependency edge is lost; if the fifteen-minute closure gate fails without truthful bounded unfinished work; or if CA-P-1127 is marked Done.
+
+### Completion record
+
+Intermediate receipt: initial full-evidence/layout closure was `2026-10-04T12:17:43+0400` / `2m58s`. It preceded required record-specific disposition refinement.
+
+Actual first clock remains `2026-10-04T12:14:45+0400`; final carrier/check clock: `2026-10-04T12:32:43+0400`; elapsed `17m58s`, an overrun of `2m58s` beyond the fifteen-minute gate. The overrun is preserved rather than reset. CA-A-1009 retains 32 full texts/original parts and five complete contexts in its JSON fence, now with 32 record-specific historical dispositions and five operational/refinement candidate groups that distinguish reports, proposals, withdrawn/unresolved boundaries, machine context, and human authority. Saved evidence/layout readback passed: 32 records,32777 text chars, five contexts1891, and CA-A-1009 64361 bytes; Done carrier exists only under `done/`. CA-P-1294/CA-A-1012 remains the exact next bound packet: 35 messages, 33485 chars, L6484–7418, raw SHA `ace4688a2fceb701c991abb1b313d2bb05ff6af17f585e33d9388ef9774d836c`; it carries the following candidate L7419. No next execution or implementation claim was made.
+
+Root saved-byte correction:2026-10-04 08:36:07 UTC. A1009 now saves32 individual source-specific dispositions and five actual provisional overlapping candidate groups, not its initial generic boilerplate. C314 has registered fields/layout and truthful17m58 elapsed, with first12:14:45+0400 exactly08:14:45UTC. The original fifteen-minute estimate is exceeded, not silently reset or claimedmet. P1294 remainsActive/unexecuted; no newcoverage beyondthis32records.

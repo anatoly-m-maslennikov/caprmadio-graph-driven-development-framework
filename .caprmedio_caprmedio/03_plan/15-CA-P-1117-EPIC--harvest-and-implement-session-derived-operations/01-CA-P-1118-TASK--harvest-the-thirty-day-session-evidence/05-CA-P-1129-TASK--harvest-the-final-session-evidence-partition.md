@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 26
-updated_at: "2026-10-04 11:48:30 +0400"
+version: 27
+updated_at: "2026-10-04 12:27:44 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -62,6 +62,13 @@ Actualnext1208/A926,sequence5,binds100wholemessages/22529chars,positions291–39
 
 Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-window-continuation frontier remainsunfinished. A917candidate0canonicalmonthlycontent,C294broaderidentityunasserted/nonblocking;post-cutoffOperatoramendmentsremainseparate.1129/1118Active;authoring/implementationblocked.
 ## Details
+
+### Latest superseding worker frontier
+
+Terminal verification:2026-10-04 08:26:01 UTC; actual elapsed from08:15:38UTC. All77 saved native texts/dispositions and originalparts,13 source prefixes/raw fingerprints,three complete contexts, current/next disjointness, intact next frontier and ownfour saved registeredCarriers passed. Global diagnostic found missing version fields in another agent's A1008/P1293; those are excluded from this leaf's completion claim and are being repaired separately, not silently passed. No further semantic recheck stage.
+
+P1288 Done/A1006 adds77 whole messages/34462characters with469 full prior-context characters and six provisional overlapping groups. Final workers356/4051;3695 remain. Monthlyworkers356/6423;6067 remain. Earlier279/3772 checkpoints are historical. ExactnextP1296/A1014seq26 binds94 whole messages/23sources,33470+1340=34810characters. Nextbinding contributes zero semanticcoverage; afterfuturepacket finalworkers3601 andmonthlyworkers5973wouldremain. P1288 BLOCKS1296;1296 BLOCKS1119/1130/1155. ActualnextfrontierL102/offset1519406/rawf1b07cca8fcc96943d8930331225f09fb956faa6a4e0e9156635f91b4b51d0b5 in /Users/am/.codex/sessions/2026/09/29/rollout-2026-09-29T05-51-09-01a0eadb-cf11-77d3-8c31-9a7b1f8d8ae0.jsonl. All other PRIMARY/window/source/continuation frontiers remain; finalPRIMARY1415/1415unchanged.1129/1118 stayActive anddownstreamO/RMED/implementation/Dockerblocked.
+
 
 ### Latest completed packet checkpoint
 

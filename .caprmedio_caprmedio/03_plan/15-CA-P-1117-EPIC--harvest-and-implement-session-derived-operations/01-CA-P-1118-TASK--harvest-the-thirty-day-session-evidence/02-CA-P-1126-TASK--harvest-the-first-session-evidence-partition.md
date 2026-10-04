@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 15
-updated_at: "2026-10-04 12:02:51 +0400"
+version: 16
+updated_at: "2026-10-04 12:33:37 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -211,6 +211,19 @@ Combinedcanonicalcoverage593;refined1869minus593 leaves1276,original1877minus593
 1265directlyblocks1269;Active1269 and1126 directlyblock1119/1130/1155. Affectedv1dependents/readinessreviewed;1126Active. FreshGoal/activePrinciples/permissionsread;fivePlan-sourcebodies/revisionsunchanged,currentversionsin983. Passingchecks:current74+fivecontexts/next26+fivecontexts/bothfollowingslices rawhashes/aggregates/native metadata/parts/windows/budgets;74unique substantivejoins/24literalparts/oneannotation/22intentgroupmapping/16groups/5candidates;fourmandatorylayouts/EOF/whitespace/uniquesiblings-sequences/seven-nodeBLOCKS+completionDAG. NoactualcurrentConcern/excludedchanges. RootstrictfullsavedYAML/full-EpicDAG/save remainseparate. Holdafter1265.
 
 ## Details
+
+### Corrected superseding first-source frontier
+
+P1290/A1008 adds1whole canonical message59756 after root recovered corrupt saved evidence. Original first coverage620 leaves1249refined/1257original; previous593/619 paragraphs are historical. One provisional overlapping clarification; mapping proposal unanswered in this packet. Complete546priorcontextcharacters do not addcoverage. P1293/A1011 binds89canonicalwhole/23393chars plus338context, not the Agent's unverified91/25119 estimate; followingL61633/61287charsintact.1290BLOCKS1293;1293BLOCKS1119/1130/1155. Originalclocksunavailable; rootrecoveryelapsedseparate. All other source/window/continuation frontiers remain and1126/1118Active.
+
++
+
+### Fifteenth packet result and next filename continuation
+
+CA-P-1290 harvested whole59756,338nativechars/731rawbytes,assistant/null/onepart, plus contexts59666/59671/59722,594chars. CA-A-1008 preserves all native text in JSON. It is an unanswered historical assistant normalization question and says no files changed; no current adoption or migration is inferred. Clock API unavailable, so both mandatory clocks are unavailable.
+
+Next ActiveCA-P-1293 ownsCA-A-1011:91whole59763–61609,60656rawbytes/25119nativechars; 59756context338 total25457. Following61633 is whole61287chars and excluded. Remaining refined1249/original1257. Parent1126 staysActive;1293/1126 block1119/1130/1155.
+
 +
 
 ### Fourteenth substantive packet result and next filename-migration continuation
@@ -225,3 +238,5 @@ Actual next Active CA-P-1290v1 is `15-CA-P-1290-TASK--harvest-the-next-whole-fir
 ### Definition of Done
 
 This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
+
+Corrected root terminalreceipt:2026-10-04 08:33:37 UTC. Actual recovery started08:28:41UTC; complete whole currentrecord/threecontexts, exact89nextcanonicalbinding, sourceprefix/raw/text/parts/fingerprints/intactfrontier and fullstrict134Plans/86supportingCarriers passed. Original Agent elapsed remains unavailable, not asserted<=15. No current migration implemented.

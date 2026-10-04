@@ -5,22 +5,24 @@ type: Plan
 label: Task
 work_sequence_number: 15
 current_scope_unit: caprmedio
+claim_target_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition evaluation evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 11:59:15 +0400"
+version: 2
+updated_at: "2026-10-04 12:26:12 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1295
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -936,6 +938,22 @@ Bindactualremainingmessages beforeDone; sourcecoverage becomes896/1175only after
 }
 ```
 
+### Completed packet, affected readiness and actual remainder
+
+CA-A-1010v1 at `.caprmedio_caprmedio/02_analysis/CA-A-1010-ANALYSIS_RPRT--harvest-the-subsequent-third-partition-evaluation-continuation-packet.md` preserves all60whole native records/31913characters/60812rawbytes/60parts,51assistant/9user, positions837–896, sparseL42982–45250; five full contexts1194chars,total33107. AggregateSHA25600a94f0e2805b983054c197ae38c2203a11fa02b4cc5f7595191398cd6a03049. One unique substantive disposition/full native text/parts/fingerprints per record and full contexts are saved. Five direct human chains and six provisional candidate refinements distinguish annotated reconstruction, exactOrderedhierarchy correction, descendant continuation, directTerra/high preference and full-goal continuation from four inert machine wrappers. Pending14legacyPrinciple review-only admission and relation-order authority remain unanswered historical boundaries; no source implementation proof/newadoption or current defect is inferred.
+
+Actual next Active CA-P-1295/A1013 sequence16 binds83whole, positions897–979,9user/74assistant,72909rawbytes/32917nativechars, sparseL45256–49653/[756544328,786187885), 2026-09-26T12:32:11.307Z–2026-09-26T18:18:15.569Z; seven full contexts2058chars, total34975<=35000. AggregateSHA256ec1da7e71c772afac54bcee8a70dd60bee9565a975c733bc9f0ddaaa722fca0b. First L45256 is a whole6447-character machine goal wrapper, retained intact/inert, not a fresh decision. Last L49653/[786187162,786187885)/2026-09-26T18:18:15.569Z/assistant/null/onepart/rawSHA256cca3922879714d6ab0d6e05fa02231d880b686ffd7b05dd67fd1408680a4433e. Following L49756/[786460063,786460771)/2026-09-26T18:22:42.273Z/assistant/null/onepart/708bytes/261chars/rawSHA256a2b3aad5f06c07bb1995cecb209146444c102ef894f440a5ccda6a43fd46b6e1/textSHA25644a6b068b35fd6806f21381e99861fab8e6db081cb385e995f87a895f94e7b55 remains whole/unprocessed;34975+261 exceeds35000. Future completion of83 would leave196; actual current remainder279. Binding contributes zero substantive coverage and next was not executed.
+
+Combined prior836 plus60 is896/1175;279remain. ActualnextP1295/A1013 is Active at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/04-CA-P-1128-TASK--harvest-the-third-session-evidence-partition/16-CA-P-1295-TASK--harvest-the-following-third-partition-evaluation-and-authority-packet.md`,immediate1128/sequence16.1292 directlyBLOCKS1295 and retains1119/1130/1155;Active1295 and1128 retainthose directgates. Those three v1Active objectives were reread; no complete-harvest/currentauthority/exactdestination prerequisite is waived.1128/1118 stayActive. Every otherA905/A910 source/file/worker/continuation/nonthird/excludedcarrier/window frontier is retained exactly inA1010/1295/priorparent; no sourcefile completion or next execution.
+
+Fresh liveGoalv13/activePrinciples/Epic1117v1/90% andcurrentPlan/Analysisauthority were reread. Historical checker/fixture/citation/Scope errors, initialfalseallclear and reportedlater tests134/16temporarycandidates are preserved, not currentimplementationverification or automaticConcerns. No actualnewcurrentConcern/excludedchange. Native/saved provenance/carrier/localDAG verification and true first/terminal clocks are recorded below; rootfullstrictsavedYAML/fullEpicDAG/save remain separate. Holdafter1292.
+
+### Actual first clock and completion check
+
+First actual clock2026-10-04 08:15:02UTC. Final full native/saved provenance and local carrier/dependency checks passed at2026-10-04 08:25:43UTC,10m41s afterstart, after Doneplacement/parentrollup/actualnextbinding were persisted. Terminal receipt clock2026-10-04 08:26:12UTC,11m10s after the unchanged start,3m50s before15minute limit. Checks covered60whole+fivecontexts and83nextwhole+sevencontexts/bothboundaryrecords:raw/textSHA256/nativeparts/metadata/window/aggregate/exact savedliteraltext/60uniquesubstantivedispositions/fourinertwrappers/fivehumanrecords/annotation/unchangedgoverningbinding/fourregisteredlayouts/fields/EOF/whitespace/uniquesiblings-sequences/seven-nodeBLOCKS+completionDAG/Done-parent17Active-next. Only receipt persistence/EOF confirmation follows; final handoff clock remains explicit. No repeated semantic recheck, historical implementation rerun, sourcecoverage withdrawal or next execution. Root fullstrictYAML/fullEpicDAG/save remains unclaimed.
+
 ## Details
 
-Definition of Done: readeverywhole selected record/context; preserveoriginalparts/source/time/hash/individualdisposition andproposal/adoption/supersession/reportboundaries; saveA1010;verify source/savedproof, exactregisteredheadings/fields/IDs, Doneplacement andlocaldependencies;createactualnextboundedremainder andBLOCKS beforeDone. Reportactual first/terminalclock withoutreset. ParentActiveuntil entirepartition/sourcefrontierscomplete. No extrapolationfrommetadata or sampledsemanticresults.
+### Definition of Done
+
+readeverywhole selected record/context; preserveoriginalparts/source/time/hash/individualdisposition andproposal/adoption/supersession/reportboundaries; saveA1010;verify source/savedproof, exactregisteredheadings/fields/IDs, Doneplacement andlocaldependencies;createactualnextboundedremainder andBLOCKS beforeDone. Reportactual first/terminalclock withoutreset. ParentActiveuntil entirepartition/sourcefrontierscomplete. No extrapolationfrommetadata or sampledsemanticresults.

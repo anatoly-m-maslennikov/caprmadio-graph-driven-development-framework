@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 12
-updated_at: "2026-10-04 12:11:15 +0400"
+version: 13
+updated_at: "2026-10-04 12:36:07 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -41,6 +41,19 @@ This is a composite task, not a fifteen-minute executable leaf. Its initial chil
 Before marking this task Done, verify full-stage coverage and update the next dependent task(s) from actual results. A blocked child remains unfinished, has a C/Problem, and does not authorize bypassing this parent's gate.
 
 ## Details
+
+Current superseding checkpoint:66 substantive packets.3876 unique PRIMARY dispositions plus356worker dispositions =4232total. Original-main first620/second624; continuation second321/third896/final1284, plus72README/59TOOL_RfinalPRIMARY. PRIMARYbaseline6588 leaves2712unharvested; workerbaseline6423 leaves6067. FinalPRIMARY1415/1415complete;finalworkers356/4051,3695remain. Futurebinding/metadata/index contributezerosemanticcoverage.
+
+P1290/A1008(1whole,1clarification),P1291/A1009(32whole,5groups),P1292/A1010(60whole,6groups),P1288/A1006(77workerwhole,6groups)add170dispositions/18provisionaloverlappinggroups, bringinghistoricaloverlappinggroups to315—not315adopted/deduplicatedOperations. A1008's savedcommanderrors were rejectedandrecoveredfromnativebytes; A1009'sgenericdispositionswere replacedwithsource-specificanalysisbeforecoverageadmission. A1006retainsevaluatorgrammar/definition-ownerproof/fourunfinishedfreezeissuesandlaterQAwithdrawals; A1010retainsrealhumanintents/machinewrapperdistinction,same-sampleguardsandfrozeninput admission.
+
+Actualnextboundleaves:1293/A1011(first89canonicalwhole/23393+338=23731,notunverified91;followingwhole61633/61287charsintact);1294/A1012(second35whole/33485chars,starts6484);1295/A1013(third83whole/32917+2058=34975);1296/A1014(final94workerwhole/33470+1340=34810). Bindingsnotexecuted. First1249refined/1257originalremain; second438; third279; final3695workers. Allotherwindow/source/continuationfrontiers,candidateidentitydispositionandpostcutoffamendmentsremain.1126–1129/1118Active;1119/1130/1155blocked.
+
+Actualreceipts:P1290Agentclocksunavailable,notinferred;rootrecovery08:28:41→08:33:37UTC=4m56,whole4nativeinputsand89futurebindingverified. C312records corruptnative/Concern carriers,missingfieldsandwithdrawncounts. P1291first08:14:45UTC,substantivecorrection08:32:43UTC=17m58;C314discloses2m58estimateoverrunandpremature2m58closure. P1292first08:15:02→finalconfirmation08:27:02=12m00. P1288first08:15:38→fullownnative/saved/Carrier08:26:01=10m23;laterfullsharedcheckobserved134Plans/86supportingCarriersbeforeC314layoutrepair. C313records correctedephemeralexclusionselector;C308records rejectednextbindingtransport;noneofthesegrantfalsecoverage. Actualnextsharedcheck/mechanicalsaveproofrecordedseparately.
+
+Prioractualcheckpoint62commit624b0cc0b matched16Git/saved/sealedrecoveredCarrierstates;ownedrecordedstates251. C311recordspriorA987finalblanklinecorrectionbeforethatcommit. SharedJournal Gitsavependingduepre-existingunrelatedevents. Thisround'sactualmechanicalGit/recoveredstateprooffollows; no save-Toolreceipts. No O/RMEDauthoring,implementation,settings/servicechangesorfullDocker validationexecutedunderthisEpic.
+
+Alllowercheckpointsarehistoricalandsuperseded.
+
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
 
