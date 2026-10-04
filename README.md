@@ -95,14 +95,16 @@ Evaluations check Claims and results.
 
 ### Content roles and artifact forms
 
+**RMED is the specification; I implements all of RMED.**
+
 - **C — Concern:** problems, bugs, questions and opportunities.
 - **A — Analysis:** analysis reports and rationale.
 - **P — Plan:** backlog, tasks, epics and version plans.
-- **R — Requirement:** specification of required outcomes.
+- **R — Requirement:** required outcomes.
 - **M — Method:** how code should be written.
-- **E — Evaluation:** quality assurance policies and test cases.
+- **E — Evaluation:** quality assurance policies and test-case specifications.
 - **D — Delivery:** target environments, CI/CD and release policies.
-- **I — Implementation:** code, tests, configuration and CI/CD pipelines.
+- **I — Implementation:** actual code, tests, configuration and CI/CD pipelines.
 - **O — Operations:** actions and workflows with steps to operate the project.
 
 Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
