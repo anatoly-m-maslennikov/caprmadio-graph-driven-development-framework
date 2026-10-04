@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:36:25 +0400"
+version: 2
+updated_at: "2026-10-04 06:42:47 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -52,6 +52,16 @@ A timestamped corpus manifest with session identifiers, relevance reasons, retri
 This packet Plan is composite. Its initial preflight child has an estimate of <=15 minutes; actual execution children are created only after their inputs, ownership, output and verification are bound. Composite roll-up effort depends on the resulting decomposition. Before execution, the parent/preceding-task review must bind the exact evidence packet or capability IDs, live governing revisions, target file paths, output and verification command/scenario in this file. If they cannot be bound safely or exceed the estimate, create narrower subtasks before execution rather than starting an underspecified leaf. A remainder is represented by new Plan files and explicit dependency edges, not an untracked promise.
 
 Inherit CA-P-1117 controls and the 90% confidence threshold through IS_DECOMPOSITION_OF. Every issue requires a typed C atom: blocker/failure -> Problem; unresolved choice -> Question; incompatible authority -> Conflict. Postpone a blocked task and work on another independent ready task. After completion, reassess and update affected dependent tasks before they start. Retain durable source/result/provenance evidence; do not mark the parent Done merely because this first packet is Done.
+
+### Preparation result and remaining manifest frontier
+
+CA-P-1150 completed bounded preparation at 2026-10-04 06:42:47 +0400. One app listing with limit 20 returned 20 recent records and 6 pinned overflow records; 7 exact project-linked Codex IDs are durably carried in the new child `02-CA-P-1175-TASK--bind-the-first-seven-session-metadata-sources.md`. No pagination cursor was supplied, and app updated_at does not enumerate in-window events. No session content was harvested.
+
+CA-P-1175 is the next executable metadata-discovery child after CA-P-1150. The parent remains Active. Older/archived app threads, additional local sessions and event-window coverage remain unenumerated; CA-P-1175 must bind their concrete remainder before completion. The parent's existing BLOCKS edges and CA-P-1175's direct edges keep CA-P-1151 through CA-P-1154 and CA-P-1126 through CA-P-1129 gated: Done preparation does not authorize substantive harvest.
+
+Existing Harvest Epic 014 is a TOOLS-authority harvest: CA-P-1073 inventories reusable operations from the TOOLS RMEDO subtree, not the monthly session corpus. Reuse and cross-map its candidates in later reconciliation rather than duplicating that inventory. No monthly completion evidence is inferred from it. General adopted Operations route to CORE_META_MODEL and caprmedio-specific Operations to PROJECT_CONFIGURATION under CA-P-1117; this metadata packet authors neither.
+
+CA-C-293 records the actual Project Python/environment verification failure. The saved Plan structure and prerequisite graph were checked with system Python's standard library; full YAML/parser validation was not run. This has a truthful nonblocking preparation disposition and does not authorize environment repair or bypass a later functional gate.
 
 ## Details
 

@@ -10,17 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Executable work-packet admission"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:36:25 +0400"
+version: 2
+updated_at: "2026-10-04 06:42:47 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1125
+  blocks:
+    - CA-P-1175
 ---
 # Summary
 
@@ -45,6 +47,16 @@ Create exactly one new execution child Plan in the parent's same-stem folder wit
 Wire this preflight as blocker of the new child. Wire generated work/repair/re-review leaves as blockers of affected next dependent Plans and their first executable descendants: preparation completion must not unlock the next substantive packet. Parent completion still requires its declared substantive outputs and every required child.
 
 Before declaring this preflight Done, verify current headings/properties, immediate parent, sufficient input/output/verification, <=15-minute estimate and BLOCKS acyclicity. Record child ID/path and verification result in this leaf, then review and update affected dependents. Every issue gets a typed C atom. Below 90%, check Goal/Principles, then record the best safe in-scope choice in C/Question if still uncertain; blockers/failures use C/Problem and incompatible authority C/Conflict.
+
+### Execution result
+
+- Completed one `mcp__codex_app__list_threads({limit: 20})` metadata request at 2026-10-04 06:42:47 +0400. Access succeeded: no unavailable hosts or sources reported. The response contained 20 non-pinned entries plus 6 automatically returned pinned entries; this pinned overflow is disclosed, not treated as compliance with a 20-total cap. No cursor or total-corpus enumeration was provided.
+- Retained exact seven project-linked IDs and verbatim titles in the new child CA-P-1175; the raw supplemental snapshot is `.caprmedio_tmp/CA-P-1117/preflight-CA-P-1150-app-metadata.json`. App metadata alone is not full monthly enumeration or event-window proof.
+- Created `02-CA-P-1175-TASK--bind-the-first-seven-session-metadata-sources.md` in CA-P-1125's same-stem container. It is one <=15-minute, one-Assignee metadata-discovery leaf, with exact seven-ID inputs, current source revisions, owned paths, required durable output, concrete verification and mandatory remainder disposition. No harvest or implementation stage ran.
+- Reviewed the live external Goal v13, all 14 top-level active filename-marked Project Principles including CA-P-032 v5 and CA-P-033 v9, and current authoritative CA-R-1589 v4, CA-R-1580 v4, CA-D-460 v6, CA-D-470 v7, CA-D-481 v4 and CA-D-461 v6. The Principle carriers remain legacy-shaped; this preparation does not migrate them.
+- Reconciled overlap with CA-P-1073's TOOLS-authority inventory: its source universe differs from monthly sessions, so later authoring will cross-map existing candidates rather than duplicate work.
+- Readiness: this preflight BLOCKS CA-P-1175. CA-P-1175 also BLOCKS the four first harvest preflights and their four packet parents. CA-P-1125 remains Active with its same stage gates. Older/archived/local sessions and per-session in-window event coverage remain explicit discovery work, not hidden completion.
+- Verification: system Python standard-library structural checks confirmed one new unique child ID/work-sequence number, mandatory Summary/Objective/Details and nested Definition of Done, immediate decomposition target CA-P-1125 matching placement, carried frontmatter Properties and one Assignee, concrete source/output bindings, and an acyclic combined completion-prerequisite graph. Full YAML/parser validation was not performed: CA-C-293 records the actual Project environment and cache failures with a nonblocking fallback disposition. Status Done is carried in this mandatory Markdown file and materialized under the parent's `done/` folder. No save-Tool or Journal receipt is claimed.
 
 ## Details
 
