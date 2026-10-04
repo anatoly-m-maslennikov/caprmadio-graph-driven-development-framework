@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 19
-updated_at: "2026-10-04 09:29:29 +0000"
+version: 22
+updated_at: "2026-10-04 10:10:47 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -180,11 +180,29 @@ Coverage1047/1175;128remain fromL53619/[807739898,807740638)/2026-09-27T09:20:35
 
 1298BLOCKS1303 and1119/1130/1155;1303 andthisActiveparentretainallthree directgates. The threecurrentv1objectives werefullyread andremainfullharvest/currentauthority/exactdestinationgated. Every other1657sourcefile/15otherPRIMARY/1642workerorigin/structurecontinuation/repository-parent-worktree support/bothmainpaths/nonthird/limitedoverlap/nineexcludedenvironmentcarriers/sparsegaps/finalthirdL59916/A917zero-monthly-canonical/broadernonblockingC294identity retains exactA905/A910/A1013/A1016/P1298frontiers. No file/copiedhumanintent subtracted/promoted. Native/saved fullprefix/68/16/actual31binding proof passed09:27:20UTC;C317resolved bythatproof. Originalfirst09:12:48UTC anddistinct recoveryfirst09:18:43UTC remain;C318recordsoriginaloverrun. FinalCarrier/terminalreceipt is in1298/A1016. Rootstrictsharedchecker/save/Git remains separate; no next execution.
 
+### Seventeenth substantive packet result and actual next frontier
+
+P1303 is Done. A1021 retains 31 whole records/21,576 native characters/35,740 raw bytes, 29 assistant/two inert user goal wrappers, 31 individual selected dispositions, 19 full contexts/7,164 characters and 19 context dispositions: 28,740 total. Nine prior human context records form seven decision chains, with six provisional grouped refinements. Complete native parts and raw/text/part fingerprints remain recoverable. Historical reports and proposals are not adopted Operations or current implementation proof.
+
+Coverage is 1,078/1,175; 97 remain. Actual next Active P1307/A1025 is immediate P1128 child/sequence 19 and binds 56 whole records at positions 1079–1134, 25,959 characters/56,095 raw bytes, 41 assistant/15 user, plus 23 full antecedents/8,644 characters: 34,603 total. Its aggregate SHA256 is 8be25ce16b8d6c3ba8430baa34e62a1d24c99a4e87f9efcbfbc2a618e00dc397. Sparse L55785–57152/[819757895,828987148), through 2026-09-27T22:59:22.565Z. Following intact L57204/[829108079,829109103), 2026-09-27T23:01:02.885Z, assistant/null/one part/565 characters, raw SHA256 76a74c4050dd0dc00e2b1f2f00a0f59f2cb78b050c8dbc90de366374c5106f31, remains unprocessed; 34,603+565 exceeds 35,000. Future completion leaves 41; 97 remain now. Binding adds zero coverage and next was not executed.
+
+P1303 directly BLOCKS P1307 and P1119/P1130/P1155; P1307 retains those three direct gates. Their current v1 Active objectives were fully read and remain complete-harvest/current-authority/exact-destination gated. This parent remains Active. All exact A905/A910/A1016 frontiers above persist: the 1,659-file/1,657-ID corpus, other 1,657 files/fifteen other PRIMARY files/1,642 worker origins, structure continuation/repository/worktree and metadata parent-chain support, both main paths/non-third frontiers/limited overlap, nine environment exclusions/sparse gaps, final third L59916 and A917's zero monthly canonical messages/broader nonblocking C294 identity. No source or copied human intent is subtracted or adopted.
+
+The complete frozen-prefix/native/saved/current-source/Carrier/local-DAG proof passed at 10:02:29 UTC for fifty complete parts/dispositions, 56 next records/23 contexts, twenty-two governing sources, unused A1025 and nine local Plan nodes. C322 is resolved by read-only cached-PyYAML recovery after interpreter/YAML availability failures; no environment or service changed. Actual first clock remains 09:49:19 UTC; terminal closure is recorded in P1303/A1021. Root's shared strict checker/save/Git remains separate.
+
+### P1303 timing amendment
+
+P1303 remains Done with fully saved and proved output; the original first clock is 09:49:19 UTC. The complete proof passed at 10:02:29 UTC, but closure persistence at 10:05:20 UTC and observation at 10:05:22 UTC/963.49 seconds exceeded the fifteen-minute estimate by 63.49 seconds. C322 is reopened as an active nonblocking actual-overrun Problem; its earlier runtime issue is resolved. The original clock is not reset, timely completion is not claimed, and the mistaken actual-elapsed completion assertion is replaced with proof of the actual required outputs and final placement. Coverage remains 1,078/1,175 with 97 source records remaining; next P1307/A1025 remains bound and unexecuted. Saved closure recovery is the only continued work, followed by hold.
+
+### Saved closure recovery terminal receipt
+
+The final required-output/strict owned Carrier/current-next/physical Done/local-DAG proof passed at 2026-10-04 10:09:37 UTC, 1218.95 seconds from the original 09:49:19 UTC first clock, with an actual overrun of 318.95 seconds. C322 remains active and explicitly nonblocking; its runtime issue is resolved and its overrun remains disclosed. Coverage is 1,078/1,175 with 97 records remaining. P1307/A1025 remains bound and unexecuted; preparation adds zero coverage. The single full frozen-prefix/native/saved/current-source proof passed at 10:02:29 UTC. This saved closure recovery is complete; hold without executing another leaf. Root owns shared strict checking/save/Git.
+
 ## Details
 
 ### Latest superseding completed packet
 
-P1298Done/A1016 adds68whole records and16context-onlyrecords. Currentselected-sourcecoverage1047/1175,128remain. ActualnextActiveP1303/A1021 binds31whole+19contexts,total28740;metadataaddszerocoverage. P1298BLOCKS1303;1303BLOCKS1119/1130/1155. Parent1128/1118remainsActive andallsourcefrontiersabovepersist. Originalfirst09:12:48UTC andseparaterecoveryfirst09:18:43UTC are notreset;C318ownsactualoriginaloverrun. No authoring/implementation stage bypass.
+P1303 Done/A1021 adds 31 whole records and 19 context-only records. Current selected-source coverage is 1,078/1,175; 97 remain. Actual next Active P1307/A1025 binds 56 whole records plus 23 full contexts, totaling 34,603 characters; binding adds zero coverage. P1303 BLOCKS P1307 and P1119/P1130/P1155; P1307 retains those three gates. P1128/P1118 remain Active and all source frontiers above persist. Actual P1303 start is 09:49:19 UTC; C322's runtime recovery is resolved. Predecessor clocks and C318's original overrun remain separate. No authoring or implementation stage is bypassed.
 
 ### Definition of Done
 

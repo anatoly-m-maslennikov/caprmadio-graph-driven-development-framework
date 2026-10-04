@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 30
-updated_at: "2026-10-04 13:43:13 +0400"
+version: 32
+updated_at: "2026-10-04 10:10:01 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -62,6 +62,18 @@ Actualnext1208/A926,sequence5,binds100wholemessages/22529chars,positions291–39
 
 Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-window-continuation frontier remainsunfinished. A917candidate0canonicalmonthlycontent,C294broaderidentityunasserted/nonblocking;post-cutoffOperatoramendmentsremainseparate.1129/1118Active;authoring/implementationblocked.
 ## Details
+
+### Superseding seventh final-worker bundle and actual remainder
+
+Final saved recovery proof passed at 2026-10-04 10:08:23 UTC, 18m39s from the original 09:49:44 UTC start, including full literal reading, analysis, persistence and final native/saved/Carrier/local-DAG checks. The estimate was exceeded. CA-C-323 is nonblocking only because complete saved recovery and placement proof now passes; the original timing failure remains visible. The Agent holds after this leaf.
+
+P1306 Done/A1024 adds 98 whole assistant records across 19 admitted worker snapshots, 34,602 native characters plus two whole antecedents of 377 characters, total 34,979. All 98 source-specific dispositions and six provisional groups preserve withdrawn R660 Subject/identity findings, corrected R850 Scope with unresolved R032 endpoint, equivalent but unclassified R643 Scope, exact Subject and property/prompt provenance, and staged composed repair criteria. No literal human record or new approval occurs. Historical reports are not current conformance or implementation proof.
+
+Final workers are 743/4051, leaving 3308; monthly workers are 743/6423, leaving 5680. Final PRIMARY remains 1415/1415. All other primary/worker/window/source/continuation/candidate frontiers and post-cutoff amendments persist. Earlier 645/3406/5778 totals are historical checkpoints.
+
+Actual next Active P1308/A1026 sequence30 binds 60 whole records across 9 sources, 32,400 native characters plus both whole R940 antecedents of 346 characters, total 32,746, raw aggregate 55e0f598e7e684dcbe36ce35d249370d8e4551369f40eaebbd719af75656cd00. First whole 591-character R940 report is L438/offset3203312/raw344737da15a1821dc6baaaa50824c71a2f34bb8c330896d53521b30886a270d8 in source01a0ebcd. Following whole 4,310-character proposal is L260/offset1623813/rawa3ac74d9189a91833c6317e153f83b444328f77a74677a8a3ed3419ae72b7b6f in source01a0eda5-c5a9-7261-a51b-633423127589 and remains unprocessed. Binding contributes zero coverage; after future P1308, 3248 final and 5620 monthly would remain.
+
+P1306 BLOCKS P1308/1119/1130/1155; P1308 retains the three downstream gates. P1129/P1118/Epic remain Active. CA-C-323 is physically resolved after recovery, retaining the original estimate overrun. Source/saved/registered-Carrier/local-DAG proof passed at 2026-10-04 10:03:14 UTC, 13m30s after the original 09:49:44 UTC start. All 98 original records and both whole antecedents, 19 frozen prefixes/raw/text/line/aggregate fingerprints, 98 dispositions, six groups, current governing hashes, exact next60/two contexts/intact 4,310-character boundary, disjoint packets and five owned Carrier fields/headings/EOF passed. Completion subsequently exceeded the original 15-minute estimate after a stale-timestamp patch rejection and a truncated combined completion read. CA-C-323 retains the original timing failure and actual recovery; no new clock or timely-completion claim is made. Physical Done follows successful evidence proof and recovered persistence. Parent1129 and next1308 remain Active. Root owns global strict/Git/Journal proof.
 
 ### Superseding sixth final-worker bundle and actual remainder
 

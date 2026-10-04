@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition structural-authority repair evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 13:37:22 +0400"
+version: 2
+updated_at: "2026-10-04 14:07:05 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1309
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1061,3 +1062,9 @@ Perform one actual native/saved/current-next/registered-Carrier/unique-ID/Done-p
 ### Definition of Done
 
 Not Done unless all21 whole records and32 full contexts are read and fully saved with provenance, substantive dispositions and meaningful supersession; the actual next bounded leaf and direct BLOCKS gates are saved; native/saved and mandatory Carrier checks pass; elapsed clock and issues are truthful; parent1127 remains Active until every required source is processed. Neither future metadata nor historical repair reports establish current implementation.
+
+### Execution receipt
+
+Read and saved all21 whole records/32 full antecedents with individual substantive dispositions and six provisional groups in CA-A-1022. Actual next P1309/A1027 and outgoing BLOCKS are saved; no next execution. Actual first 2026-10-04 09:57:24 UTC, initial persistence 2026-10-04 10:04:19 UTC. Terminal native/saved/Carrier receipt follows. Historical reports do not establish current implementation; C320 retains rejected transports. Parent1127 remains Active with404/759 continuation records processed and355 remaining.
+
+Terminal receipt: 2026-10-04 10:07:05 UTC. Actual elapsed 581 seconds from unchanged 2026-10-04 09:57:24 UTC. Full frozen-prefix/native/saved 21 records/32 contexts and original parts, aggregates, actual next27/27/full following L9937, disjoint selections and29 governing source hashes passed. Shared strict147 Plans/106 supporting carriers and completion/BLOCKS DAG passed. This is persistence/provenance proof, not a second semantic review; Git/recovered Journal follows separately.

@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition checker separation continuation evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:22:30 +0000"
+version: 5
+updated_at: "2026-10-04 10:10:47 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1307
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -952,6 +953,18 @@ Every A905 1659-file/1657-ID row remains: other1657 files/15otherPRIMARY/1642wor
 ### Functional verification and affected readiness
 
 Seek each frozen source interval; verify response_item/message, timestamp, role, channel, raw/text/part hashes, sizes, whole parts, character counts, partition and aggregate plus every full antecedent and following record. Parse the actual saved A1021 JSON and compare complete native text/parts/provenance; require one specific disposition per record/context. Verify exact registered headings/required properties, EOF/whitespace, globally unique IDs, immediate1128 decomposition, sequence18, actual next, physical Done placement and local BLOCKS/completion acyclicity. Record actual first and terminal clocks without reset. Root owns full shared strict checker/save/Git. Re-read live1119/1130/1155 readiness; they remain full-harvest/current-authority/exact-destination gated and1128 remainsActive. A historical finding is not a new current Concern. Below90% consult liveGoal/Principles, safe authorized disposition+Question; actual blocker→Problem and postpone affected work.
+
+### Checker separation packet result and actual next
+
+A1021 saves 31 whole selected records/21,576 native characters/35,740 raw bytes and 19 full contexts/7,164 characters, with 31 specific selected dispositions, 19 context dispositions, seven historical human chains and six provisional groups. Both selected user records are inert machine goal wrappers. Current coverage is 1,078/1,175 with 97 remaining; no broader adoption or implementation is claimed.
+
+Actual next Active P1307/A1025, immediate P1128 child/sequence 19, binds 56 whole records at positions 1079–1134, 25,959 native characters/56,095 raw bytes, 41 assistant/15 user, plus 23 full contexts/8,644 characters: 34,603 total. Raw aggregate SHA256 is 8be25ce16b8d6c3ba8430baa34e62a1d24c99a4e87f9efcbfbc2a618e00dc397. Its following intact L57204/[829108079,829109103), 2026-09-27T23:01:02.885Z, is 565 characters; 34,603+565 exceeds 35,000. Future completion would leave 41; 97 remain now. Binding contributes zero coverage and next was not executed. P1303 directly BLOCKS P1307 and retains P1119/P1130/P1155; P1307 retains those three direct gates. Parent P1128 remains Active and every inherited corpus frontier in this leaf remains unchanged.
+
+Actual first clock: 2026-10-04 09:49:19 UTC. The complete native/saved/current-source/Carrier/local-DAG proof passed at 10:02:29 UTC, including the full frozen prefix, fifty complete parts/dispositions, actual next binding, twenty-two governing sources and nine-node local DAG. Runtime recovery used existing cached PyYAML without installation or environment change. Closure persistence at 10:05:20 UTC and observation at 10:05:22 UTC/963.49 seconds exceeded the estimate by 63.49 seconds. C322 is reopened for the actual overrun with an explicit nonblocking disposition; no timely completion is claimed and the original start is not reset. The elapsed<=900 assertion was an incorrect completion gate; all preceding required-output/physical-Done/next/whitespace assertions passed. Saved closure recovery checks the actual completion requirements and records its real terminal clock. Root's shared checker/save/Git remains separate.
+
+### Saved closure recovery terminal receipt
+
+The final required-output/strict owned Carrier/current-next/physical Done/local-DAG proof passed at 2026-10-04 10:09:37 UTC, 1218.95 seconds from the original 09:49:19 UTC first clock, with an actual overrun of 318.95 seconds. C322 remains active and explicitly nonblocking; its runtime issue is resolved and its overrun remains disclosed. Coverage is 1,078/1,175 with 97 records remaining. P1307/A1025 remains bound and unexecuted; preparation adds zero coverage. The single full frozen-prefix/native/saved/current-source proof passed at 10:02:29 UTC. This saved closure recovery is complete; hold without executing another leaf. Root owns shared strict checking/save/Git.
 
 ## Details
 

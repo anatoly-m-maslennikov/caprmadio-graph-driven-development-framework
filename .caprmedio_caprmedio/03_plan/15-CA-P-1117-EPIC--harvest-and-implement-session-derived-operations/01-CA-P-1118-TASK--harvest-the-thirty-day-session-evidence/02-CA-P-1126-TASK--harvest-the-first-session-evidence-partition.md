@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 18
-updated_at: "2026-10-04 13:38:06 +0400"
+version: 21
+updated_at: "2026-10-04 10:04:15 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -265,6 +265,26 @@ Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed
 Native/saved/current+next/Carrier/localDAG proof checkpoint:2026-10-04 09:35:32UTC, original elapsed31m50s and recovery9m43s at that checkpoint. Actual recovered full terminal receipt after final receipt persistence:2026-10-04 09:38:06UTC (13:38:06 +0400). Original09:03:42→09:38:06 elapsed34m24s,19m24s beyond the15-minute estimate; the09:05:00 premature claim is retained as history only. Separate recovery09:25:49→09:38:06 elapsed12m17s; it never resets the original start. No extra semantic recheck stage or next execution occurred. Root global strict/save/Git/Journal work is separate.
 
 This current receipt supersedes every older709-count or L61633-unprocessed paragraph:1297/A1015 proved one new whole canonical record; current710/1869 refined,1159remain; original1877/1167remain. Actual1301/A1019 is fully bound and unexecuted, with whole96-character question plus whole61287-character context and exact followingL61643. Four provisional groups remain historical; no adopted O/RMED/runtime change. C319 resolves the concrete source-binding omission, with original timing disclosed and nonblocking. Parent1126 staysActive and all corpus/window/continuation frontiers persist.
+
+### Eighteenth substantive packet result and actual Principles-first follow-up
+
+P1301/A1019 substantively dispositions exactly one whole user record L61640, 477 raw bytes/96 native characters, with the complete L61633 audit report as context only, 61287 characters. The full 61383-character reading preserves the explicit whole-antecedent exception. The instruction asks the historical Agent to attempt Principles-first issue resolution and consult one question at a time if confidence remains below 99%; it accepts no particular fix and proves no repair. The four A1015 groups remain four, refined by that historical resolution/consultation control. Historical 99% does not replace current Epic 90%.
+
+Current original-main coverage is 711/1869 refined, leaving 1158 refined records; original first-scan1877 leaves1166 original records, with eight excluded machine contexts retained. This receipt supersedes the preceding710-count execution frontier only. Every A905 manifest/source origin, other1658 sources,17PRIMARY/1642worker distinction, metadata-parent/worktree/candidate evidence, both continuation pairs, appendable prefixes, frozen window and amendments remains unfinished as previously recorded. No source, partition or month is complete.
+
+Actual next Active P1305, immediate child1126/sequence19/one Agent/<=15-minute estimate, owns reserved A1023. It binds eight whole L61643–61827, 5797raw bytes/2694native characters; raw aggregate SHA256 b6008340b00b7ef97a0830cfd6af2a340c921f3bc87ffc36d407f2db6ba8ba70. Complete L61633/L61640 contexts add61383characters, total64077 under an explicit necessary whole-antecedent exception. Exact following whole L61834, offset395938566/382bytes/hash a566375eb9f1c065bd1cd414a77ac93ad187be3b120c52fc5861717b083ae424 remains unconsumed. Eight-record binding is preparation only and A1023 is uncreated. P1301 blocks1305/1119/1130/1155; Active1305 and this Active parent retain downstream gates.
+
+P1301 actual first clock is2026-10-04 09:48:55UTC, never reset. Initial persistence 2026-10-04 09:57:42 UTC; proof/full terminal receipt is pending. C321 records rejected oversized transports and bounded full rereading, with zero coverage credited to incomplete responses. Root owns global strict/save/Git/Journal work. No current O/RMED/code/settings/environment/service/FPF fix was performed.
+
+### Local completion proof and clock
+
+P1301/A1019 local native/saved/current-plus-next proof passed: full frozen prefix, 10 unique whole records/native parts, selected/context/next aggregates, exact following L61834, five strict Carriers and local eight-Plan BLOCKS/decomposition DAG. P1301 is physically Done; C321 is physically resolved. Two C293 cache-startup failures recovered through already cached PyYAML without settings changes. An invalid completion patch was rejected unchanged and corrected. Full local closure receipt 2026-10-04 10:03:03 UTC; original start09:48:55UTC is unchanged, elapsed 14m08s. No next semantic execution occurred.
+
+Current coverage is711/1869 refined,1158 refined remaining and1166 original remaining. Actual next Active P1305/A1023 retains its necessary64077-character whole-antecedent exception and exact L61834 following frontier. This parent stays Active; every other source/window/continuation frontier and downstream gate remains retained. Root global strict/save/Git/Journal work is separate.
+
+### Full terminal receipt
+
+Full terminal receipt after Done/resolved placement and persisted-receipt checks: 2026-10-04 10:04:15 UTC. Original09:48:55UTC start remains unchanged; total elapsed 15m20s, 20s beyond the <=15-minute estimate. The final five-Carrier placement/receipt check passed: P1301 physically Done, C321 physically resolved, P1126 and P1305 Active, A1023 reserved/uncreated and zero next semantic consumption. This supersedes the earlier closure checkpoint time. Reading, transport/cache recovery, persistence and all local checks are included; no start was reset. Root global strict/save/Git/Journal work is separate.
 
 ## Details
 

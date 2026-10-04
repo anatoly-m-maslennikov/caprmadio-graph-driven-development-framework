@@ -9,15 +9,15 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition worker evidence"
   depends_on: [Project, Operations]
-version: 1
-updated_at: "2026-10-04 13:36:49 +0400"
+version: 4
+updated_at: "2026-10-04 10:10:01 +0000"
 relations:
   is_decomposition_of: [CA-P-1129]
-  blocks: [CA-P-1119, CA-P-1130, CA-P-1155]
+  blocks: [CA-P-1308, CA-P-1119, CA-P-1130, CA-P-1155]
 ---
 # Summary
 
@@ -1792,6 +1792,14 @@ Current completed1302 checkpoint is finalworkers645/4051,3406remain; monthlywork
 
 ## Details
 
+### Actual execution and saved frontier
+
+The actual first clock was 2026-10-04 09:49:44 UTC. All 98 native texts/parts and both whole same-source antecedents have been read and saved in CA-A-1024 with 98 source-specific dispositions and six provisional groups. Three truncated native/binding transports were rejected and fully reopened; CA-C-323 records the failure and recovery. The original clock has not been reset.
+
+Actual next CA-P-1308/A1026 binds 60 whole records across 9 sources, 32,400 native characters plus both complete R940 antecedents of 346 characters, total 32,746. P1306 explicitly BLOCKS P1308 and the three downstream gates. This binding adds zero semantic coverage. Its full first and following records are retained; the following whole 4,310-character record remains unprocessed. Source/saved/registered-Carrier/local-DAG proof passed at 2026-10-04 10:03:14 UTC, 13m30s after the original 09:49:44 UTC start. All 98 original records and both whole antecedents, 19 frozen prefixes/raw/text/line/aggregate fingerprints, 98 dispositions, six groups, current governing hashes, exact next60/two contexts/intact 4,310-character boundary, disjoint packets and five owned Carrier fields/headings/EOF passed. Completion subsequently exceeded the original 15-minute estimate after a stale-timestamp patch rejection and a truncated combined completion read. CA-C-323 retains the original timing failure and actual recovery; no new clock or timely-completion claim is made. Physical Done follows successful evidence proof and recovered persistence. Parent1129 and next1308 remain Active. Root owns global strict/Git/Journal proof.
+
 ### Definition of Done
 
-Not Done without all98 complete original native texts/parts and whole necessarycontexts read and retained, source-specific substantive dispositions and provisionalgroups/literalhuman-correction or truthful no-human disposition, exact sourceprefix/rawaggregate fingerprints; actual next bounded Plan with whole nextfrontier/full nativeparts and explicit BLOCKS before Done; one final fullsaved/source/registeredCarriers/localDAG proof and truthful terminalclock within estimate. Futurebindings must not count as coverage; parent1129/1118 remainActive until all declared input/remainder work is complete. No added semanticrecheck stage. Completion of1302 authorizes this ready leaf but does not unlock authoring or implementation.
+Do not mark Done before all 98 complete original native texts/parts and whole necessary contexts are read and retained, source-specific substantive dispositions and provisional groups with a truthful human-intent disposition are saved, exact source-prefix/raw-aggregate fingerprints are verified, the actual next bounded Plan retains whole first/following native parts and explicit BLOCKS, and one final full saved/source/registered-Carrier/local-DAG proof passes. Preserve the original start, actual terminal time and any documented estimate overrun/recovery disposition; do not claim an exceeded estimate was met. Future binding contributes zero coverage. Parent1129/1118 remain Active until all declared input and remainder work is complete. No added semantic recheck stage is created. Completion of1302 authorizes this leaf but does not unlock authoring or implementation.
+
+Final saved recovery proof passed at 2026-10-04 10:08:23 UTC, 18m39s from the original 09:49:44 UTC start, including full literal reading, analysis, persistence and final native/saved/Carrier/local-DAG checks. The estimate was exceeded. CA-C-323 is nonblocking only because complete saved recovery and placement proof now passes; the original timing failure remains visible. The Agent holds after this leaf.

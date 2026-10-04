@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 18
-updated_at: "2026-10-04 13:38:26 +0400"
+version: 19
+updated_at: "2026-10-04 14:07:05 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -112,3 +112,9 @@ All earlier checkpoint totals are historical and superseded.
 This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
 
 Root terminal receipt: 2026-10-04 09:38:26 UTC. Actual elapsed7m16s from unchanged2026-10-04 09:31:10 UTC. Native/saved27 full parts/nine contexts/current-next bindings/source prefix/hash/aggregate/placement passed; shared strict142Plans/100supporting Carriers passed before this terminal receipt. This is persistence/provenance proof, not another semantic recheck stage. Git/recovered-Journal saving follows separately; no historical repair or current implementation claimed.
+
+### Latest superseding P1304 checkpoint
+
+P1304/A1022 completes21 whole records/32 full contexts/six provisional groups. Continuation coverage404/759 leaves355; original second624 remains completed. Three selected goal wrappers are inert transport, not human adoption. Actual next P1309/A1027 sequence19 binds27 whole records/27 full contexts,34771 characters, following intact L9937; its binding contributes zero coverage. All source/window/identity/frontiers and1119/1130/1155 gates remain. Parent Active; unresolved historical Scope/Plan domains, Journal horizons and Settings transfers are preserved, not silently implemented. C320 retains rejected reading/lookup recovery; terminal proof follows.
+
+Terminal receipt: 2026-10-04 10:07:05 UTC. Actual elapsed 581 seconds from unchanged 2026-10-04 09:57:24 UTC. Full frozen-prefix/native/saved 21 records/32 contexts and original parts, aggregates, actual next27/27/full following L9937, disjoint selections and29 governing source hashes passed. Shared strict147 Plans/106 supporting carriers and completion/BLOCKS DAG passed. This is persistence/provenance proof, not a second semantic review; Git/recovered Journal follows separately.
