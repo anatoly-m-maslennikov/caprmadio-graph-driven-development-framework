@@ -427,6 +427,12 @@ class SelectedExecution:
                 available[action_id] = compiler
         except ImportError:
             pass
+        try:
+            import query_actions
+
+            available.update(query_actions.ACTION_HANDLERS)
+        except ImportError:
+            pass
         return available
 
     def run_directory(self, run_id: str) -> Path:
@@ -621,12 +627,13 @@ class SelectedExecution:
         entry_step: str | None = None
         if "ordered_steps" in route:
             validated_steps, entry_step = self._d547_steps(route)
-            return {
+            graph = {
                 "route": route_name, "workflow": validated_workflow,
                 "steps": validated_steps, "entry_step": entry_step,
                 "native_action_calls": validated_native_calls,
                 "manifest_ref": manifest_ref, "manifest_digest": manifest_digest,
             }
+            return graph
         if not isinstance(steps, list) or not steps:
             raise SelectedExecutionError("selected Workflow must bind ordered Steps")
         validated_steps: list[dict[str, Any]] = []
@@ -655,7 +662,7 @@ class SelectedExecution:
             if len(step["on_result"]) != len(transitions):
                 raise SelectedExecutionError("selected On Result transition is invalid")
             validated_steps.append(step)
-        return {
+        graph = {
             "route": route_name,
             "workflow": validated_workflow,
             "steps": validated_steps,
@@ -664,6 +671,34 @@ class SelectedExecution:
             "manifest_ref": manifest_ref,
             "manifest_digest": manifest_digest,
         }
+        return graph
+
+    @staticmethod
+    def _validate_query_admission(graph: Mapping[str, Any], execution: Mapping[str, Any]) -> None:
+        """Keep native query input rejection ahead of selected-Run dispatch."""
+        if graph.get("route") not in {"find_and_fetch_artifacts", "find_and_fetch_journal_events"}:
+            return
+        steps = graph.get("steps")
+        if not isinstance(steps, list) or len(steps) != 1 or not isinstance(steps[0], Mapping):
+            raise SelectedExecutionError("query Workflow must bind exactly one Step")
+        step = steps[0]
+        actions = step.get("actions")
+        if not isinstance(actions, list) or len(actions) != 1 or not isinstance(actions[0], Mapping):
+            raise SelectedExecutionError("query Step must bind exactly one Action")
+        try:
+            import query_actions
+        except ImportError as error:
+            raise SelectedExecutionError("query request adapter is unavailable") from error
+        try:
+            query_actions.validate_query_parameters({
+                "route": graph["route"],
+                "workflow_definition_id": graph["workflow"]["atom_id"],
+                "step_definition_id": step["atom_id"],
+                "action_definition_id": actions[0]["atom_id"],
+                "parameters": execution.get("parameters"),
+            })
+        except query_actions.QueryActionError as error:
+            raise SelectedExecutionError("query request is not admitted") from error
 
     @staticmethod
     def _support_definition(binding: Mapping[str, Any]) -> dict[str, Any]:
@@ -801,6 +836,7 @@ class SelectedExecution:
 
     def freeze(self, request: Mapping[str, Any]) -> dict[str, Any]:
         frozen = self._validated_freeze(request)
+        self._validate_query_admission(frozen["graph"], frozen["request"]["execution"])
         run_id = frozen["request"]["run_id"]
         path = self.run_directory(run_id) / "selected_request.json"
         if path.exists():
@@ -880,6 +916,7 @@ class SelectedExecution:
         )
         visit_counts: dict[str, int] = {}
         next_step = graph["entry_step"]
+        journal_preparation = self._prepare_journal_query_before_run(graph, request["execution"])
         workflow_actual = session.start_run(run_id)
         workflow_run_id = workflow_actual["run_id"]
         results: list[dict[str, Any]] = []
@@ -910,6 +947,7 @@ class SelectedExecution:
                 if graph["workflow"]["atom_id"] == "CA-O-016":
                     parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
                 context = {
+                    "project_root": self.root,
                     "workflow_run_id": workflow_run_id,
                     "step_run_id": step_run_id,
                     "action_run_id": action_run_id,
@@ -929,6 +967,8 @@ class SelectedExecution:
                     "session": session,
                     "requested_action_run_id": requested_action_id,
                 }
+                if action["atom_id"] == "CA-O-162":
+                    context["journal_preparation"] = journal_preparation
                 output = handler(context)
                 if not isinstance(output, Mapping) or not isinstance(output.get("result"), str):
                     raise SelectedExecutionError("native Action handler returned no declared result")
@@ -947,8 +987,11 @@ class SelectedExecution:
                                             "compiler_publication_recording": output.get("compiler_publication_recording")})
                 terminal_receipt: Mapping[str, Any] | None = None
                 if output.get("action_terminal_recorded") is not True:
+                    action_outcome = output.get("terminal_outcome", "completed")
+                    if action_outcome not in {"completed", "no_op", "failed", "cancelled", "partial", "interrupted_pending"}:
+                        raise SelectedExecutionError("native Action handler returned an invalid terminal outcome")
                     terminal_receipt = session.finish_run(
-                        action_run_id, outcome="completed",
+                        action_run_id, outcome=action_outcome,
                         result_ref=progress_path.relative_to(self.root).as_posix(),
                         effect_refs=effect_refs,
                     )
@@ -1018,6 +1061,38 @@ class SelectedExecution:
                 raise SelectedExecutionError("selected transition target is invalid")
         raise SelectedExecutionError("selected Workflow has no terminal result")
 
+    def _prepare_journal_query_before_run(
+        self, graph: Mapping[str, Any], execution: Mapping[str, Any],
+    ) -> Any | None:
+        """Seal CA-O-163's source after generic admission but before Run evidence."""
+        if graph.get("route") != "find_and_fetch_journal_events":
+            return None
+        try:
+            import query_actions
+        except ImportError as error:
+            raise SelectedExecutionError("Journal query adapter is unavailable") from error
+        steps = graph.get("steps")
+        if not isinstance(steps, list) or len(steps) != 1 or not isinstance(steps[0], Mapping):
+            raise SelectedExecutionError("Journal query route must retain exactly one source Step")
+        step = steps[0]
+        actions = step.get("actions")
+        if step.get("atom_id") != "CA-O-163" or not isinstance(actions, list) or len(actions) != 1:
+            raise SelectedExecutionError("Journal query route must retain CA-O-163 and one Action")
+        action = actions[0]
+        if not isinstance(action, Mapping) or action.get("atom_id") != "CA-O-162":
+            raise SelectedExecutionError("Journal query route must retain CA-O-162")
+        context = {
+            "route": graph["route"],
+            "workflow_definition_id": graph["workflow"]["atom_id"],
+            "step_definition_id": step["atom_id"],
+            "action_definition_id": action["atom_id"],
+            "parameters": execution.get("parameters"),
+        }
+        try:
+            return query_actions.prepare_journal_query(self.root, context)
+        except query_actions.QueryActionError as error:
+            raise SelectedExecutionError(str(error)) from error
+
     def _shared_dispatch(self, frozen: Mapping[str, Any]) -> dict[str, Any]:
         """Late import keeps APPS importable while the shared service is replaced."""
         import sys
@@ -1051,7 +1126,8 @@ class SelectedExecution:
         if intent.exists():
             return {"disposition": "recording_pending", "outcome": "interrupted_pending",
                     "workflow_run_id": run_id, "reason": "uncertain selected dispatch intent retained; no replay"}
-        self._revalidate(frozen)
+        graph = self._revalidate(frozen)
+        self._validate_query_admission(graph, request["execution"])
         self._write(intent, {"run_id": run_id, "state": "dispatching", "graph": frozen["graph"]})
         try:
             if run_support is None:
