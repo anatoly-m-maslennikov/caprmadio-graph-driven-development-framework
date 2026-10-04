@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 5
-updated_at: "2026-10-04 20:15:56 +0000"
+version: 6
+updated_at: "2026-10-05 00:30:00 +0400"
 relations: {}
 ---
 # Summary
@@ -66,6 +66,8 @@ The two query Workflows are read-only:
 Every Workflow Run and every Action Run must be journaled, including standalone Actions, nested invocation lineage, failed or canceled Runs, and successful no-op outcomes. Retain the Run identifiers, governing definition, parent Run/Step references where applicable, input references, start, terminal outcome, results, and actual change/evidence references. Do not put secrets in the Journal.
 
 Use the authoritative Events Journal as the single event source; Artifact Change Log and Process Execution Log are derived views, not independently maintained competing Journals. Journal failures must be reported truthfully; an unpersisted event or Run is never claimed journaled or complete. Functional verification must prove both Workflow-level and Action-level records, failure paths, lineage, and reconstructable results.
+
+Canonical Journal carriers use the single Project-local `.caprmedio_<project name>/_journal/` root. Persisted Projection carriers use the single `.caprmedio_<project name>/_projection/` root, including the graphs, Applicable Methodology and derived log views. For this Project the bindings are `.caprmedio_caprmedio/_journal/` and `.caprmedio_caprmedio/_projection/`. Methodology source authority stays under `000_CAPRMEDIO_framework/`; runtime locks, receipts, pending recording and disposable stages remain ephemeral runtime state. Preserve historical event bytes and sealed recovery context during relocation; do not create duplicate canonical Journal or Projection locations.
 
 ### Projection behavior
 
@@ -131,6 +133,8 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+Centralized carrier cutover: CA-D-549/CA-D-550 establish `_journal/` and `_projection/`; current Journal, Applicable Methodology, signature-report, historical graph placement and MCP manifest bindings have been revised. Settings and consumers bind the new roots. Physical relocation is pending: the first `work_journal` → `_journal` directory rename returned an explicit local `Operation not permitted`; no carrier move occurred. Journal admission fails closed while that old directory remains without its approved new destination, so it cannot silently create a second canonical Journal. The prepared `tmp/centralize_project_carriers.py` preserves and verifies Journal/Projection bytes; after an Operator-side relocation, rebase projected Atom source references and validate actual manifest loading before treating cutover or image evidence as complete. Temporary locks/receipts/pending events remain runtime state, and source authority remains in the framework folder.
 
 The original thirteen-capability implementation branch is unchanged. Required source definitions and independent source reviews are complete for those thirteen; P1119/P1132 are physically Done for that scope. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the original Docker acceptance portfolio. P1493–P1500 reviews and their bounded corrections have been accepted; P1120/P1121 and the initial implementation preflights are Done.
 

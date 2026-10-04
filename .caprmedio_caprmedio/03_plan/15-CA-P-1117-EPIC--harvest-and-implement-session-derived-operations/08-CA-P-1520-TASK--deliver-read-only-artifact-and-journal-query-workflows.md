@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Read-only Artifact and Events Journal query Workflow delivery"
   depends_on: [Operations, Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 1
-updated_at: "2026-10-04 20:15:56 +0000"
+version: 2
+updated_at: "2026-10-05 00:30:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -35,6 +35,10 @@ Both routes are read-only. Artifacts expose frontmatter and Markdown heading/sec
 P1521/P1523 author the respective O Workflow/Action/Step and RMED source packets; P1522/P1524 independently review them. P1525/P1526 implement test-first Tools, P1527 amends the existing source-bound discovery/MCP/orchestrator route contract and shared execution, P1528 proves fresh immutable-image E2E, and P1529 independently reviews closure. Each child is a <=15-minute dispatch packet inheriting P1117's 90% threshold. Before every downstream dispatch, bind the exact current source IDs, Versions, and carrier paths; absent P1521/P1523 outputs are blockers, not planning evidence. P1521/P1523 instead bind their live authority inputs and save those output IDs/Versions/paths for successors.
 
 ## Details
+
+### Centralized Project carriers
+
+Find and Fetch Journal Events reads canonical Event carriers from the selected Project's `_journal/` root. Persisted query-result Projections use that Project's `_projection/` root; ephemeral response/report state remains temporary. The shared Run recorder uses the same canonical `_journal/` root. Existing immutable historical Event references may retain their original sealed locations; relocation must resolve them without rewriting Event bytes.
 
 ### Definition of Done
 

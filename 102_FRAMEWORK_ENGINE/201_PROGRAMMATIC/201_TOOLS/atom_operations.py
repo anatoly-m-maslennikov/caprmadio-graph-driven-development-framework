@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -288,6 +289,164 @@ def _with_atom_id(frontmatter: str, atom_id: str | None) -> str:
             raise ToolError("atom-frontmatter-id-mismatch", "frontmatter atom_id must equal the filename Atom ID")
         return frontmatter
     return (frontmatter + "\n" if frontmatter else "") + f"atom_id: {atom_id}"
+
+
+def frontmatter_scalar(frontmatter: str, name: str) -> str | None:
+    """Read one simple top-level scalar without reserializing the carrier."""
+
+    matches = re.findall(rf"(?m)^{re.escape(name)}:\s*(.*?)\s*$", frontmatter)
+    if len(matches) > 1:
+        raise ToolError("atom-frontmatter-invalid", f"Atom has duplicate {name} values")
+    if not matches:
+        return None
+    value = matches[0].strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        value = value[1:-1]
+    return value
+
+
+def replace_frontmatter_scalar(frontmatter: str, name: str, value: str) -> str:
+    """Replace one top-level scalar while retaining every unrelated YAML block."""
+
+    if not isinstance(value, str) or not value:
+        raise ToolError("input-invalid", f"{name} must be a non-empty scalar")
+    expression = re.compile(rf"(?m)^{re.escape(name)}:\s*.*?\s*$")
+    matches = list(expression.finditer(frontmatter))
+    if len(matches) > 1:
+        raise ToolError("atom-frontmatter-invalid", f"Atom has duplicate {name} values")
+    replacement = f"{name}: {value}"
+    if matches:
+        return expression.sub(replacement, frontmatter, count=1)
+    return (frontmatter + "\n" if frontmatter else "") + replacement
+
+
+def atom_version(atom: Atom) -> int:
+    """Return the current carried Version without manufacturing a default."""
+
+    raw = frontmatter_scalar(atom.frontmatter, "version")
+    if raw is None or re.fullmatch(r"[0-9]+", raw) is None:
+        raise ToolError("atom-version-invalid", f"Atom lacks a non-negative integer Version: {atom.relative}")
+    return int(raw)
+
+
+def atom_digest(atom: Atom) -> str:
+    """Return the digest of the full, current carrier bytes."""
+
+    return hashlib.sha256(atom.path.read_bytes()).hexdigest()
+
+
+def write_atom_revision(atom: Atom, frontmatter: str, content: str) -> None:
+    """Persist one already-validated full carrier revision atomically."""
+
+    _atomic_write(atom.path, render(frontmatter, content))
+
+
+def prepare_create_atom_revision(root: Path, relative_path: str, frontmatter: str) -> tuple[Path, str, str | None]:
+    """Validate the explicit identity and destination of one new full carrier.
+
+    The lifecycle adapter calls this before authorization and before any effect.
+    It deliberately never derives or inserts an Atom ID from a filename: a
+    non-draft carrier has to carry the same stable ID in both places.
+    """
+
+    root = root.resolve()
+    path = safe_path(root, relative_path)
+    _validate_destination(root, path, filename_required=True)
+    if not CURRENT_FILENAME.fullmatch(path.name):
+        raise ToolError("filename-invalid", f"new Atom filename does not follow current grammar: {path.name}")
+    match = ATOM_ID.search(path.name)
+    atom_id = match.group(1) if match else None
+    destination_lifecycle = _lifecycle(path, control_root(root))
+    normalized = _normalize_frontmatter(frontmatter)
+    declared = frontmatter_scalar(normalized, "atom_id")
+    if destination_lifecycle == "draft" and atom_id is not None:
+        raise ToolError("draft-has-stable-id", f"draft filename must not contain a stable Atom ID: {path.name}")
+    if destination_lifecycle == "draft" and declared is not None:
+        raise ToolError("draft-has-stable-id", "a draft carrier cannot declare atom_id")
+    if destination_lifecycle != "draft" and atom_id is None:
+        raise ToolError("atom-id-required", f"non-draft Atom filename must contain a stable Atom ID: {path.name}")
+    if atom_id is not None and declared is None:
+        raise ToolError("atom-frontmatter-id-required", "non-draft Atom frontmatter must declare atom_id")
+    if atom_id is not None and declared != atom_id:
+        raise ToolError("atom-frontmatter-id-mismatch", "frontmatter atom_id must equal the filename Atom ID")
+    return path, normalized, atom_id
+
+
+def create_atom_revision(root: Path, relative_path: str, frontmatter: str, content: str) -> Atom:
+    """Create one validated, complete Markdown Atom carrier atomically."""
+
+    root = root.resolve()
+    path, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    if path.exists():
+        raise ToolError("destination-collision", f"Atom destination already exists: {path.relative_to(root)}")
+    if atom_id and any(atom.atom_id == atom_id for atom in scan_atoms(root)):
+        raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
+    prepared = _revision(normalized, creating=True)
+    _atomic_write(path, render(prepared, content))
+    return atom_from_path(root, path)
+
+
+def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: str, content: str) -> Atom:
+    """Atomically relocate one current carrier while retaining its identity."""
+
+    root = root.resolve()
+    target, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    if atom.atom_id is None or atom_id != atom.atom_id:
+        raise ToolError("atom-frontmatter-id-mismatch", "moved carrier must retain the current Atom ID")
+    if target != atom.path and target.exists():
+        raise ToolError("destination-collision", f"Atom destination already exists: {target.relative_to(root)}")
+    snapshots = {atom.path: atom.path.read_bytes(), target: None if target != atom.path else atom.path.read_bytes()}
+    try:
+        _atomic_write(target, render(normalized, content))
+        if target != atom.path:
+            atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
+
+
+def preserve_atom_revision(root: Path, atom: Atom) -> Atom:
+    """Copy one prior semantic revision to its native role-local history path."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle != "active" or atom.atom_id is None:
+        raise ToolError("atom-not-active", f"only active Atoms with stable identity can preserve history: {atom.relative}")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", f"Atom has no content-role history location: {atom.relative}")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    target = (role / "archive" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}").resolve()
+    if target.exists():
+        raise ToolError("destination-collision", f"history destination already exists: {target.relative_to(root)}")
+    _atomic_write(target, atom.path.read_bytes())
+    return atom_from_path(root, target)
+
+
+def archive_atom_revision(root: Path, atom: Atom, frontmatter: str, content: str) -> Atom:
+    """Atomically move one validated active carrier into its versioned archive."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle != "active" or atom.atom_id is None:
+        raise ToolError("atom-not-active", f"only active Atoms with stable identity can be archived: {atom.relative}")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", f"Atom has no content-role archive location: {atom.relative}")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    target = role / "archive" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}"
+    target = target.resolve()
+    if target.exists():
+        raise ToolError("destination-collision", f"archive destination already exists: {target.relative_to(root)}")
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, render(frontmatter, content))
+        atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
 
 
 def render(frontmatter: str, content: str) -> bytes:

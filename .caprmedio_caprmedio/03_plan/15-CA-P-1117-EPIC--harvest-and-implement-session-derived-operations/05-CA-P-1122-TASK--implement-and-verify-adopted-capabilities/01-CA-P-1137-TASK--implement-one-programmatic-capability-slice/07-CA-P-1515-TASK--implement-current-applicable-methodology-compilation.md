@@ -55,3 +55,39 @@ Retain actual initial failing golden baseline, real tested saved effects and fin
 ### Definition of Done
 
 The exact owned packet has saved implementation and source-driven golden functional proof, with truthful defects/remaining dependencies. Aggregate integration, all13route Docker/MCP proof and full Epic closure remain separate and unclaimed.
+
+## Implementation result — 2026-10-04
+
+Status remains `Active`: the bounded compiler and focused functional proof are saved, but shared Run-support recording and source-graph queue dispatch remain owned integration dependencies. This Plan does not claim their completion or immutable-image coverage.
+
+### Saved implementation
+
+- `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py`
+  - accepts only the strict governed request contract through `run_request`; the legacy CLI builds that request without exposing mutable source or output locations;
+  - selects Active Core, settings-selected installed Extension revisions, and Active Project Configuration from Project Structure and Framework Settings; inactive and unselected candidates are reported but never emitted;
+  - requires exact canonical-Journal decision references for conflict selections. A Project Configuration TOML file is not authority; source change makes decision provenance stale and blocks publication;
+  - stages the full derived role set under `.caprmedio_runtime`, rechecks the whole source state, atomically replaces generated files with rollback, and reports pending recording rather than inventing a Journal receipt;
+  - exports `ACTION_ADAPTERS` for CA-O-004 through CA-O-009. These are individual Action adapters only; they do not execute or continue CA-O-011.
+- `tests/test_selected_compilation.py` adds current golden/strict-boundary evidence. Existing compatibility tests now retain no TOML-only authorization premise.
+
+### Verification
+
+Initial test-first run of the newly added selected suite failed before compiler execution because its temporary fixture attempted to recreate an already-created `.caprmedio_caprmedio` directory. The fixture was corrected with `exist_ok=True`; that setup failure is retained as test-authoring evidence and is not represented as a product failure.
+
+Passed locally:
+
+`python -m unittest discover -s 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/tests -p 'test_*.py' -v`
+
+Result: 28 tests passed. This includes deterministic regeneration, output-preserving rollback, strict request rejections, every settings-activated Extension revision, active Extension source fidelity, canonical-Journal selection, stale-decision rejection, and recovery-reference gating.
+
+Passed in the development container after the final publication implementation:
+
+`docker exec -i -w /project caprmedio-ea535e2c0d4e-worker-1 python -m unittest 102_FRAMEWORK_ENGINE.201_PROGRAMMATIC.201_TOOLS.COMPILE_APPLICABLE_METHODOLOGY.tests.test_selected_compilation.SelectedCompilationTest.test_golden_active_core_extension_and_project_configuration_preserve_source_fidelity -v`
+
+Result: 1 test passed.
+
+### Remaining integration
+
+- P1510 must pass canonical shared Run/Journal recorder handles into these adapters so a successful publication can transition from `pending_recording` to a receipt-backed published result without duplicate Journal semantics.
+- The source-graph interpreter / selected queue must register and dispatch the six exported adapters in CA-O-011 order; this compiler intentionally does not own Workflow continuation.
+- P1123 owns fresh Docker-image functional proof. The development-container test above does not establish immutable-image coverage.

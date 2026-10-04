@@ -110,8 +110,13 @@ def validate_report(row):
 
 
 def short_status(state):
-    return {key: state[key] for key in ('workflow_name', 'workflow_run_id', 'outcome',
+    result = {key: state[key] for key in ('workflow_name', 'workflow_run_id', 'outcome',
         'gathered', 'progress', 'report_path', 'recording_blockers')}
+    result['coverage_gates'] = state.get('coverage_gates', {})
+    result['reason'] = state.get('reason')
+    result['operator_question'] = next((row['operator_question'] for row in
+        result['coverage_gates'].values() if row.get('operator_question')), None)
+    return result
 
 
 def execution_context(store, request):

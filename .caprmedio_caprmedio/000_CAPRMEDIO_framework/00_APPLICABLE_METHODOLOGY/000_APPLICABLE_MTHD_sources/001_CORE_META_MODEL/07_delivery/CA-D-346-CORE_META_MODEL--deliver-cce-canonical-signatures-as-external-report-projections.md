@@ -9,8 +9,8 @@ subjects:
     - "Atom/Claim"
     - "Atom/Carrier"
     - "CCE"
-version: 11
-updated_at: "2026-09-28 15:12:22 +0400"
+version: 12
+updated_at: "2026-10-05 00:25:37 +0400"
 relations:
   child_of:
     - CA-D-266
@@ -31,6 +31,6 @@ Canonical Signature Projections for selected source frontiers **and** their exte
 
 ## Claim
 
-**every** Canonical Signature Projection **must** be delivered as **`=1`** non-authoritative report outside its selected source folder with the selected source frontier digest, **every** source Atom Identity **and** Revision, **every** source expression occurrence, **every** Canonical Signature, **and** **every** exclusion diagnostic; the Projection **must not** become an Atom Carrier, modify a selected source Carrier, **or** establish Claim equivalence.
+**every** Canonical Signature Projection **must** be delivered as **`=1`** non-authoritative report under its Project's `.caprmedio_<project_name>/_projection/` Directory Carrier with the selected source frontier digest, **every** source Atom Identity **and** Revision, **every** source expression occurrence, **every** Canonical Signature, **and** **every** exclusion diagnostic; the Projection **must not** become an Atom Carrier, modify a selected source Carrier, **or** establish Claim equivalence.
 
 ## Details

@@ -8,8 +8,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 4
-updated_at: "2026-10-03 16:23:03 +0400"
+version: 5
+updated_at: "2026-10-04 02:57:00 +0400"
 subjects:
   governs: "Repair RMED Review Batch"
   depends_on:
@@ -35,9 +35,9 @@ Repair RMED Review Batch **means** the Action that applies the smallest authoriz
    - correct forced execution as a capability Requirement **only** **when** its intended capability **and** target are established **and** the semantic change is authorized.
    - preserve required outcomes, validation gates, safeguards, **and** behavior during authorized execution. do **not** replace `must` with `may` mechanically **or** invent a target.
    - retirement requires explicit authority; unresolved intent **or** absent authority blocks the correction rather than weakening the Claim.
-3. classify the change under CA-O-067. refresh `updated_at` on **every** edit; retain Version for formatting **or** equivalent wording, **and** increment it for a real meaning change. a Summary-value **or** genuine Type change requires replacement authority. retain required history.
-4. apply the correction **and** record the actual changes **in** the same Atom report. uncertain, unauthorized, identity-changing, **or** outside-scope work remains blocked rather than expanding this Run.
-5. return `fixed_not_rechecked` **only** **when** **all** **`=6`** initial checks concluded **and** **all** findings were corrected **or** rejected with recorded reasons. otherwise return `blocked`, preserving safe partial edits **and** the remaining findings **or** unfinished coverage. this Action performs no proposal review, post-fix Evaluation, **or** automatic recheck loop.
+3. classify the change under CA-O-067. refresh `updated_at` on **every** edit; retain Version for formatting **or** equivalent wording, **and** increment it for a real meaning change. a Summary-value **or** genuine Type change requires replacement authority. for a Summary change, `allow_replacements=true` **with** fix permission delegates replacement **within** the selected Atom; the executor reserves a new ID **and** Version **`=1`**, archives the predecessor, **and** records the transition. retain required history.
+4. apply the correction **and** record the actual changes **in** the same Atom report. uncertain, unauthorized, **or** outside-scope work remains blocked rather than expanding this Run.
+5. return `fixed_not_rechecked` **or** `replaced_not_rechecked` **only** **when** **all** **`=6`** initial checks concluded **and** **all** findings were corrected **or** rejected with recorded reasons. otherwise return `blocked`, preserving safe partial edits **and** the remaining findings **or** unfinished coverage. this Action performs no proposal review, post-fix Evaluation, **or** automatic recheck loop.
 
 ## Details
 

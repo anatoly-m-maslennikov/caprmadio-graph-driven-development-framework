@@ -1,6 +1,6 @@
 # Implementation Workflow prompts
 
-Seven short prompt implementations for the active Steps of **CA-O-016**. These files implement agent instructions under **CA-R-1601** and **CA-D-487**; they are not new methodology Atoms or independent authority.
+Seven short prompt implementations for the active Steps of **CA-O-016**. They implement the reviewed **CA-R-1843–46**, **CA-M-326–29**, **CA-E-563–66**, and **CA-D-544–46** packet; they are not new methodology Atoms or independent authority.
 
 | Step | Action | Context | Prompt |
 |---|---|---|---|
@@ -36,6 +36,10 @@ Return one listed result with concise actual outputs, evidence references, retai
 
 Method learning is a separate **CA-O-102** Run, not an implementation Step. Passing implementation checks does not require creating an M Atom.
 
+## Callable actions
+
+`implementation_actions.py` exports `ACTION_HANDLERS`, `prepare_method_projection(method_paths)`, and `implement_selected_queue(step, packet, agent, implement_run_support=None)`. It recomputes every source pin from live authority bytes; accepts only the full current binding frontier; compiles complete active-M source content, revisions, paths, and digests separately from selected R/D/E; and validates context, permission, bounded Isolated handoff, test-first inputs, retry allowance, and performed-success evidence before passing the selected prompt to the replaceable Agent callable. It does not require MCP, invoke successor Steps, write a Journal, or claim the mock adapter is a live LLM run. `implement_run_support` is an injected shared interface owned outside this package.
+
 ## Checks
 
 From the repository root:
@@ -44,4 +48,4 @@ From the repository root:
 python3 -m unittest discover -s 102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/tests -v
 ```
 
-These checks verify coverage, bindings, context, result labels, source freshness, and a 160-word prompt ceiling. They are not evidence of successful LLM execution.
+These checks verify coverage, bindings, context, result labels, source freshness, prompt contracts, and mock-Agent action envelopes. Mock Agent tests are not live LLM proof.

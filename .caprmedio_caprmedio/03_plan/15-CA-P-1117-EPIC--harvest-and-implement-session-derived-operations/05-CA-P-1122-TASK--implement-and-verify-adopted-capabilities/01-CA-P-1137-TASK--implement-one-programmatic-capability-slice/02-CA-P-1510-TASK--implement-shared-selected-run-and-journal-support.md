@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Selected Workflow implementation delivery"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
-version: 1
-updated_at: "2026-10-04 19:12:21 +0000"
+version: 2
+updated_at: "2026-10-04 23:57:02 +0400"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1123, CA-P-1164, CA-P-1165, CA-P-1166]
@@ -55,3 +55,57 @@ Retain actual initial failing golden baseline, real tested saved effects and fin
 ### Definition of Done
 
 The exact owned packet has saved implementation and source-driven golden functional proof, with truthful defects/remaining dependencies. Aggregate integration, all13route Docker/MCP proof and full Epic closure remain separate and unclaimed.
+
+## Implementation result
+
+Implemented the non-executable shared `RunTracker` service in
+`102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/workflow_run_support.py` and
+the compatible schema-v5 extension in `work_journal.py`.
+
+- `RunTracker.run_selected_operation(request)` seals the preview contract,
+  rejects unknown or shadow manifest fields and request-ID byte changes, checks
+  injected selected-route currentness, and requires exact preview-bound current
+  authorization for `execute`.
+- Its injected executor receives a lazy `RunExecutionSession`, whose
+  `start_run`/`finish_run`/`note_effects`/`recover` methods record only actual
+  invocations. A durable accepted-dispatch carrier rejects an exact execute
+  replay after restart; recovery can append only its preserved pending event.
+  A requested Workflow ID is preserved as its actual outer Run ID; uninvoked
+  branches receive no Run or Event. An executor exception records only started
+  work as `interrupted_pending`, rather than claiming completion.
+- Schema-v5 `workflow_execution` records distinct Run/definition/Initiative
+  provenance and truthful admitted outcomes. The Journal now seals append
+  context, finds Event IDs globally across partitions and receipts, retains
+  pending immutable bytes/context, and retries only that original append.
+
+Changed files:
+
+- `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/workflow_run_support.py`
+- `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/work_journal.py`
+- `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_selected_run_support.py`
+- `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_work_journal_schema_v5.py`
+
+Test-first baseline: the required selected-run discovery command initially
+failed with `ModuleNotFoundError: workflow_run_support`, before the service was
+created. Final development-worker proof used the mounted `/project` code:
+
+```text
+docker exec -i -w /project caprmedio-ea535e2c0d4e-worker-1 python -m unittest discover -s 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests -p 'test_selected_run_support.py' -v
+# 7 tests: OK
+docker exec -i -w /project caprmedio-ea535e2c0d4e-worker-1 python -m unittest discover -s 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests -p 'test_work_journal_schema_v5.py' -v
+# 1 test: OK
+```
+
+The selected-run tests prove read-only preview, exact execute admission,
+outer-Workflow identity preservation, skipped-branch non-materialization,
+executor-exception interruption, stale/currentness refusal, manifest shadow
+rejection, durable schema-v5 receipts, post-fsync receipt reconciliation,
+date/timezone rollover context reuse, and global collision refusal without
+effect replay. They additionally cover no-op, confirmed-zero-effect failure,
+cancellation, partial effects, an exception after observed effects, and a
+restart replay that remains blocked before and after one identical recovery.
+
+Not yet covered here: integration of a configured `RunTracker` instance into
+the selected queue, MCP, and reversal adapters; all thirteen real route
+executors; and fresh immutable-image proof. Those are separate packets and are
+not claimed by this result.

@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+import tomllib
 from collections import defaultdict
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
@@ -22,8 +23,14 @@ from project_runtime import atomic_tempfile
 
 TOOL_ID = "GENERATE_ENTITY_GRAPH"
 TOOL_KIND = "finder"
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 INACTIVE_DIRECTORY_NAMES = {"archive", "drafts", "done", "canceled", "cancelled", "solved", "handled"}
+PROJECTION_DIRECTORY_NAME = "_projection"
+JOURNAL_DIRECTORY_NAME = "_journal"
+PERSISTED_CONTROL_NON_SOURCE_DIRECTORY_NAMES = {
+    PROJECTION_DIRECTORY_NAME,
+    JOURNAL_DIRECTORY_NAME,
+}
 CANONICAL_SUBJECT_KINDS = {"governs": "GOVERNS", "depends_on": "DEPENDS_ON"}
 LEGACY_SUBJECT_KINDS = {"declared": "GOVERNS", "prerequisite": "DEPENDS_ON"}
 TEMPORAL_FORMS = {"continuant": "CONTINUANT", "occurrent": "OCCURRENT"}
@@ -50,6 +57,9 @@ class AtomCarrier:
     atom_id: str
     version: int
     cce_form: str
+    content_role: str
+    atom_type: str
+    status: str
     carrier_path: str
     sha256: str
     frontmatter: str
@@ -61,6 +71,9 @@ class AtomCarrier:
             "atom_revision": self.version,
             "carrier_path": self.carrier_path,
             "carrier_sha256": self.sha256,
+            "content_role": self.content_role,
+            "type": self.atom_type,
+            "status": self.status,
         }
 
 
@@ -104,6 +117,23 @@ def scalar_value(raw: str) -> str:
     if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
         value = value[1:-1]
     return value
+
+
+def yaml_scalar_or_list(raw: str, *, path: str, field: str) -> list[str]:
+    """Read the narrow scalar/inline-list YAML form used by current Subjects."""
+
+    value = raw.strip()
+    if not value:
+        return []
+    if not (value.startswith("[") and value.endswith("]")):
+        return [scalar_value(value)]
+    body = value[1:-1].strip()
+    if not body:
+        return []
+    values = [scalar_value(item) for item in body.split(",")]
+    if any(not item for item in values):
+        raise EntityGraphError("subjects-yaml-invalid", "Subject list has an empty value", path=path, field=field)
+    return values
 
 
 def split_frontmatter(data: bytes, path: str) -> str | None:
@@ -157,16 +187,25 @@ def _display_path(path: Path, repository: Path) -> str:
         return path.as_posix()
 
 
-def _is_excluded(path: Path, selected_folder: Path) -> bool:
+def _is_excluded(path: Path, selected_folder: Path, repository: Path) -> bool:
     relative_parts = path.relative_to(selected_folder).parts[:-1]
-    return any(part.lower() in INACTIVE_DIRECTORY_NAMES for part in relative_parts)
+    if any(part.lower() in INACTIVE_DIRECTORY_NAMES for part in relative_parts):
+        return True
+    try:
+        control_root = _configured_control_root(repository)
+    except EntityGraphError:
+        return False
+    return any(
+        path.is_relative_to(control_root / directory)
+        for directory in PERSISTED_CONTROL_NON_SOURCE_DIRECTORY_NAMES
+    )
 
 
 def discover_atoms(repository: Path, selected_folder: Path) -> tuple[list[AtomCarrier], list[dict[str, object]]]:
     carriers: list[AtomCarrier] = []
     diagnostics: list[dict[str, object]] = []
     for path in sorted(selected_folder.rglob("*.md")):
-        if _is_excluded(path, selected_folder):
+        if _is_excluded(path, selected_folder, repository):
             continue
         display_path = _display_path(path, repository)
         data = path.read_bytes()
@@ -194,6 +233,19 @@ def discover_atoms(repository: Path, selected_folder: Path) -> tuple[list[AtomCa
             continue
         atom_id = atom_identifier(path.name, top_scalar(frontmatter, "atom_id"))
         cce_form = (top_scalar(frontmatter, "cce_form") or "").lower()
+        content_role = top_scalar(frontmatter, "content_role") or ""
+        atom_type = top_scalar(frontmatter, "type") or ""
+        status = top_scalar(frontmatter, "status") or ""
+        if status and status.lower() != "active":
+            diagnostics.append(
+                {
+                    "severity": "info",
+                    "code": "inactive-status-skipped",
+                    "message": "Markdown Atom Carrier outside Active status was excluded from the selected frontier.",
+                    "details": {"atom_id": atom_id, "carrier_path": display_path, "status": status},
+                }
+            )
+            continue
         raw_version = top_scalar(frontmatter, "version")
         if not raw_version or not raw_version.isdigit() or int(raw_version) < 1:
             raise EntityGraphError(
@@ -207,6 +259,9 @@ def discover_atoms(repository: Path, selected_folder: Path) -> tuple[list[AtomCa
                 atom_id=atom_id,
                 version=int(raw_version),
                 cce_form=cce_form,
+                content_role=content_role,
+                atom_type=atom_type,
+                status=status or "legacy-unspecified",
                 carrier_path=display_path,
                 sha256=hashlib.sha256(data).hexdigest(),
                 frontmatter=frontmatter,
@@ -229,8 +284,26 @@ def parse_subject_relations(carrier: AtomCarrier) -> tuple[list[SubjectRelation]
     current_kind: str | None = None
     current_form: str | None = None
     legacy_keys: set[str] = set()
+
+    def append(kind: str, subject_path: str, temporal_form: str, source_schema_key: str) -> None:
+        if not subject_path:
+            raise EntityGraphError("subject-path-empty", "Subject Path must not be empty", path=carrier.carrier_path)
+        relations.append(
+            SubjectRelation(
+                atom_id=carrier.atom_id,
+                atom_revision=carrier.version,
+                carrier_path=carrier.carrier_path,
+                carrier_sha256=carrier.sha256,
+                subject_path=subject_path,
+                kind=CANONICAL_SUBJECT_KINDS.get(kind) or LEGACY_SUBJECT_KINDS[kind],
+                temporal_form=temporal_form,
+                source_schema_key=source_schema_key,
+                cce_form=carrier.cce_form,
+            )
+        )
+
     for line in block:
-        kind_match = re.fullmatch(r"  ([a-z_]+):\s*", line)
+        kind_match = re.fullmatch(r"  ([a-z_]+):(?:\s*(.*))?", line)
         if kind_match:
             current_kind = kind_match.group(1)
             current_form = None
@@ -243,17 +316,45 @@ def parse_subject_relations(carrier: AtomCarrier) -> tuple[list[SubjectRelation]
                     path=carrier.carrier_path,
                     kind=current_kind,
                 )
+            inline_values = yaml_scalar_or_list(
+                kind_match.group(2) or "", path=carrier.carrier_path, field=current_kind
+            )
+            for subject_path in inline_values:
+                append(current_kind, subject_path, "CURRENT", current_kind)
             continue
-        form_match = re.fullmatch(r"    ([a-z_]+):\s*(?:\[\])?\s*", line)
+        form_match = re.fullmatch(r"    ([a-z_]+):(?:\s*(.*))?", line)
         if form_match:
-            current_form = form_match.group(1)
-            if current_form not in TEMPORAL_FORMS:
+            if current_kind is None:
                 raise EntityGraphError(
-                    "subject-temporal-form-invalid",
-                    "Atom Carrier has an unknown Subject Temporal Form",
+                    "subject-coordinate-missing",
+                    "Subject requires one relation kind before a nested value",
                     path=carrier.carrier_path,
-                    temporal_form=current_form,
+                    line=line,
                 )
+            candidate_form = form_match.group(1)
+            if candidate_form in TEMPORAL_FORMS:
+                current_form = candidate_form
+                for subject_path in yaml_scalar_or_list(
+                    form_match.group(2) or "", path=carrier.carrier_path, field=candidate_form
+                ):
+                    append(current_kind, subject_path, TEMPORAL_FORMS[candidate_form], current_kind)
+                continue
+            raise EntityGraphError(
+                "subject-temporal-form-invalid",
+                "Atom Carrier has an unknown legacy Subject Temporal Form",
+                path=carrier.carrier_path,
+                temporal_form=candidate_form,
+            )
+        current_item_match = re.fullmatch(r"    -\s*(.+?)\s*", line)
+        if current_item_match:
+            if current_kind is None or current_form is not None:
+                raise EntityGraphError(
+                    "subject-coordinate-missing",
+                    "Current Subject item requires one relation kind without a legacy Temporal Form",
+                    path=carrier.carrier_path,
+                    line=line,
+                )
+            append(current_kind, scalar_value(current_item_match.group(1)), "CURRENT", current_kind)
             continue
         item_match = re.fullmatch(r"      -\s*(.+?)\s*", line)
         if not item_match:
@@ -272,23 +373,7 @@ def parse_subject_relations(carrier: AtomCarrier) -> tuple[list[SubjectRelation]
                 path=carrier.carrier_path,
                 line=line,
             )
-        subject_path = scalar_value(item_match.group(1))
-        if not subject_path:
-            raise EntityGraphError("subject-path-empty", "Subject Path must not be empty", path=carrier.carrier_path)
-        effective_kind = CANONICAL_SUBJECT_KINDS.get(current_kind) or LEGACY_SUBJECT_KINDS[current_kind]
-        relations.append(
-            SubjectRelation(
-                atom_id=carrier.atom_id,
-                atom_revision=carrier.version,
-                carrier_path=carrier.carrier_path,
-                carrier_sha256=carrier.sha256,
-                subject_path=subject_path,
-                kind=effective_kind,
-                temporal_form=TEMPORAL_FORMS[current_form],
-                source_schema_key=current_kind,
-                cce_form=carrier.cce_form,
-            )
-        )
+        append(current_kind, scalar_value(item_match.group(1)), TEMPORAL_FORMS[current_form], current_kind)
     if legacy_keys:
         diagnostics.append(
             {
@@ -598,7 +683,18 @@ def _relation_sort_key(relation: SubjectRelation) -> tuple[object, ...]:
     )
 
 
+def _is_definition_carrier(carrier: AtomCarrier) -> bool:
+    """Admit current Definition Type carriers; retain retired CCE-form compatibility."""
+
+    return (
+        carrier.atom_type.strip().lower() == "definition"
+        or carrier.content_role.strip().lower() == "definition"
+        or carrier.cce_form == "definition"
+    )
+
+
 def dependency_edges(
+    carriers: Sequence[AtomCarrier],
     relations: Sequence[SubjectRelation],
 ) -> tuple[
     dict[str, set[str]],
@@ -608,6 +704,7 @@ def dependency_edges(
     dict[str, list[SubjectRelation]],
 ]:
     by_atom: dict[tuple[str, str], list[SubjectRelation]] = defaultdict(list)
+    carriers_by_atom = {(carrier.atom_id, carrier.carrier_path): carrier for carrier in carriers}
     for relation in relations:
         by_atom[(relation.atom_id, relation.carrier_path)].append(relation)
     graph: dict[str, set[str]] = defaultdict(set)
@@ -620,13 +717,14 @@ def dependency_edges(
     for atom_key, rows in by_atom.items():
         governs = sorted((row for row in rows if row.kind == "GOVERNS"), key=_relation_sort_key)
         depends_on = sorted((row for row in rows if row.kind == "DEPENDS_ON"), key=_relation_sort_key)
+        is_definition = _is_definition_carrier(carriers_by_atom[atom_key])
         for row in governs:
             governed_subjects[row.subject_path].append(row)
-            if row.cce_form == "definition":
+            if is_definition:
                 declared_terms[terminal_term(row.subject_path)].append(row)
         for row in depends_on:
             depended[row.subject_path].append(row)
-        definition_rows_by_atom[atom_key] = [row for row in governs if row.cce_form == "definition"]
+        definition_rows_by_atom[atom_key] = list(governs) if is_definition else []
         dependency_rows_by_atom[atom_key] = depends_on
 
     declared_term_names = set(declared_terms)
@@ -771,7 +869,7 @@ def generate_projection(repository: Path, selected_folder: Path) -> dict[str, ob
         relations.extend(carrier_relations)
         diagnostics.extend(carrier_diagnostics)
     relations.sort(key=_relation_sort_key)
-    graph, edge_evidence, declared, governed, depended = dependency_edges(relations)
+    graph, edge_evidence, declared, governed, depended = dependency_edges(carriers, relations)
     duplicate_definitions = {
         term: rows for term, rows in declared.items() if len(rows) != 1
     }
@@ -893,6 +991,848 @@ def generate_projection(repository: Path, selected_folder: Path) -> dict[str, ob
             "legacy_schema_atoms": sum(row["code"] == "legacy-subject-schema-mapped" for row in diagnostics),
         },
     }
+
+
+GRAPH_KINDS = {"entities", "terms"}
+STRICT_REQUEST_FIELDS = {
+    "graph_kind",
+    "source_frontier",
+    "selection",
+    "display_selection",
+    "representation_configuration",
+    "output_destination",
+    "existing_projection_evidence",
+    "capability_permission_evidence",
+    "run_recording_context",
+}
+STRICT_REQUIRED_REQUEST_FIELDS = {
+    "graph_kind",
+    "source_frontier",
+    "selection",
+    "representation_configuration",
+    "capability_permission_evidence",
+    "run_recording_context",
+}
+PROJECT_SETTINGS_FILENAME = "caprmedio_project_settings.toml"
+DEFAULT_GRAPH_OUTPUT_NAMES = {
+    "entities": "entities_graph.json",
+    "terms": "terms_graph.json",
+}
+
+
+def _mapping(value: object, name: str) -> Mapping[str, object]:
+    if not isinstance(value, Mapping):
+        raise EntityGraphError("request-field-invalid", f"{name} must be an object", field=name)
+    return value
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _structure_frontier(repository: Path) -> dict[str, object] | None:
+    try:
+        path = _configured_control_root(repository) / "project_structure.toml"
+    except EntityGraphError:
+        return None
+    if not path.is_file():
+        return None
+    return {
+        "carrier_path": _display_path(path, repository),
+        "carrier_sha256": _sha256(path),
+        "schema_version": 1,
+    }
+
+
+def source_frontier_for(repository: Path, selected_folder: Path) -> dict[str, object]:
+    """Seal the current Atom and optional Project Structure source frontier.
+
+    Callers bind this returned value into a strict request.  The builder compares
+    it before construction and again immediately before publication, rather than
+    accepting a folder path as an implicit moving frontier.
+    """
+
+    repository = repository.resolve()
+    selected_folder = selected_folder.resolve()
+    carriers, _ = discover_atoms(repository, selected_folder)
+    result: dict[str, object] = {
+        "selected_folder": _display_path(selected_folder, repository),
+        "carriers": [carrier.evidence() for carrier in carriers],
+        "source_frontier_sha256": frontier_digest(carriers),
+    }
+    structure = _structure_frontier(repository)
+    if structure is not None:
+        result["project_structure"] = structure
+    return result
+
+
+def _safe_repository_path(repository: Path, value: str, *, name: str) -> Path:
+    candidate = Path(value)
+    if candidate.is_absolute() or ".." in candidate.parts:
+        raise EntityGraphError("unsafe-path", f"{name} must be a safe repository-relative path", path=value)
+    resolved = (repository / candidate).resolve()
+    try:
+        resolved.relative_to(repository)
+    except ValueError as error:
+        raise EntityGraphError("unsafe-path", f"{name} escapes the repository", path=value) from error
+    return resolved
+
+
+def _configured_project_roots(repository: Path) -> tuple[Path, Path]:
+    """Resolve the Project-owned control and persistent Projection roots from Settings."""
+
+    candidates = sorted(
+        path
+        for path in repository.glob(f"*/{PROJECT_SETTINGS_FILENAME}")
+        if path.is_file() and not path.is_symlink()
+    )
+    if len(candidates) != 1:
+        raise EntityGraphError(
+            "project-settings-unavailable",
+            "Exactly one Project Settings carrier is required to resolve Projection output.",
+            settings_paths=[_display_path(path, repository) for path in candidates],
+        )
+    settings_path = candidates[0]
+    try:
+        settings = tomllib.loads(settings_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError) as error:
+        raise EntityGraphError(
+            "project-settings-unreadable",
+            "Project Settings cannot be read to resolve Projection output.",
+            path=_display_path(settings_path, repository),
+        ) from error
+    paths = settings.get("paths")
+    if not isinstance(paths, Mapping):
+        raise EntityGraphError("project-settings-invalid", "Project Settings require a paths object")
+    control_value = paths.get("control_root")
+    if not isinstance(control_value, str) or not control_value:
+        raise EntityGraphError("project-settings-invalid", "paths.control_root must be a safe repository-relative path")
+    control_root = _safe_repository_path(repository, control_value, name="paths.control_root")
+    if control_root != settings_path.parent.resolve():
+        raise EntityGraphError(
+            "project-settings-invalid",
+            "Project Settings must be located directly under paths.control_root.",
+            control_root=control_value,
+            path=_display_path(settings_path, repository),
+        )
+    configured_projection = paths.get("projection_root")
+    if configured_projection is None:
+        projection_root = control_root / PROJECTION_DIRECTORY_NAME
+    elif isinstance(configured_projection, str) and configured_projection:
+        projection_root = _safe_repository_path(repository, configured_projection, name="paths.projection_root")
+    else:
+        raise EntityGraphError(
+            "project-settings-invalid",
+            "paths.projection_root must be a safe repository-relative path when configured.",
+        )
+    expected_root = control_root / PROJECTION_DIRECTORY_NAME
+    if projection_root != expected_root:
+        raise EntityGraphError(
+            "project-settings-invalid",
+            "paths.projection_root must resolve to paths.control_root/_projection.",
+            control_root=_display_path(control_root, repository),
+            projection_root=_display_path(projection_root, repository),
+        )
+    return control_root, projection_root
+
+
+def _configured_control_root(repository: Path) -> Path:
+    return _configured_project_roots(repository)[0]
+
+
+def _configured_projection_root(repository: Path) -> Path:
+    return _configured_project_roots(repository)[1]
+
+
+def _default_publication_path(repository: Path, graph_kind: str) -> Path:
+    return _configured_projection_root(repository) / DEFAULT_GRAPH_OUTPUT_NAMES[graph_kind]
+
+
+def _validate_frontier(
+    repository: Path, frontier: Mapping[str, object]
+) -> tuple[Path, dict[str, object], list[dict[str, object]]]:
+    allowed = {"selected_folder", "carriers", "source_frontier_sha256", "project_structure"}
+    unknown = sorted(set(frontier) - allowed)
+    if unknown:
+        raise EntityGraphError("source-frontier-unknown-field", "Source frontier has unknown fields", fields=unknown)
+    selected_folder = frontier.get("selected_folder")
+    if not isinstance(selected_folder, str) or not selected_folder:
+        raise EntityGraphError("source-frontier-folder-missing", "Source frontier requires selected_folder")
+    folder = _safe_repository_path(repository, selected_folder, name="source_frontier.selected_folder")
+    if not folder.is_dir():
+        raise EntityGraphError("source-frontier-folder-missing", "Selected source frontier folder is unavailable", folder=selected_folder)
+    requested_carriers = frontier.get("carriers")
+    requested_digest = frontier.get("source_frontier_sha256")
+    if not isinstance(requested_carriers, list) or not isinstance(requested_digest, str) or not requested_digest:
+        raise EntityGraphError("source-frontier-incomplete", "Source frontier requires carriers and source_frontier_sha256")
+    actual = source_frontier_for(repository, folder)
+    actual_carriers = actual["carriers"]
+    assert isinstance(actual_carriers, list)
+    if canonical_json(requested_carriers) != canonical_json(actual_carriers) or requested_digest != actual[
+        "source_frontier_sha256"
+    ]:
+        return folder, actual, [
+            {
+                "severity": "error",
+                "code": "source-frontier-stale",
+                "message": "The admitted source frontier no longer matches current source bytes.",
+                "details": {"requested": dict(frontier), "actual": actual},
+            }
+        ]
+    requested_structure = frontier.get("project_structure")
+    actual_structure = actual.get("project_structure")
+    if requested_structure is not None and canonical_json(requested_structure) != canonical_json(actual_structure):
+        return folder, actual, [
+            {
+                "severity": "error",
+                "code": "project-structure-stale",
+                "message": "The admitted Project Structure evidence no longer matches current bytes.",
+                "details": {"requested": requested_structure, "actual": actual_structure},
+            }
+        ]
+    return folder, actual, []
+
+
+def _frontmatter_properties(carrier: AtomCarrier) -> dict[str, object]:
+    properties: dict[str, object] = {}
+    for line in carrier.frontmatter.splitlines():
+        if line.startswith((" ", "\t")) or ":" not in line:
+            continue
+        key, raw = line.split(":", 1)
+        if key in {"atom_id", "subjects", "relations"}:
+            continue
+        value = scalar_value(raw)
+        if value:
+            properties[key] = value
+    properties["atom_revision"] = carrier.version
+    properties["cce_form"] = carrier.cce_form
+    return dict(sorted(properties.items()))
+
+
+def _selected_carriers(
+    carriers: Sequence[AtomCarrier], selection: Mapping[str, object]
+) -> tuple[list[AtomCarrier], list[str]]:
+    allowed = {"atom_ids", "scope_unit_names"}
+    unknown = sorted(set(selection) - allowed)
+    if unknown:
+        raise EntityGraphError("selection-unknown-field", "Selection has unknown fields", fields=unknown)
+    atom_ids = selection.get("atom_ids")
+    if not isinstance(atom_ids, list) or not atom_ids or any(not isinstance(item, str) or not item for item in atom_ids):
+        raise EntityGraphError("selection-atoms-invalid", "Selection requires a non-empty atom_ids array")
+    if atom_ids != sorted(set(atom_ids)):
+        raise EntityGraphError("selection-atoms-ambiguous", "Selection atom_ids must be unique and canonically sorted")
+    available = {carrier.atom_id: carrier for carrier in carriers}
+    missing = sorted(set(atom_ids) - set(available))
+    if missing:
+        raise EntityGraphError("selection-atom-unresolved", "Selection names atoms outside the admitted frontier", atom_ids=missing)
+    scope_units = selection.get("scope_unit_names", [])
+    if not isinstance(scope_units, list) or any(not isinstance(item, str) or not item for item in scope_units):
+        raise EntityGraphError("selection-structure-invalid", "scope_unit_names must be an array of names")
+    if scope_units != sorted(set(scope_units)):
+        raise EntityGraphError("selection-structure-ambiguous", "scope_unit_names must be unique and canonically sorted")
+    return [available[atom_id] for atom_id in atom_ids], scope_units
+
+
+def _selected_structure(
+    repository: Path, frontier: Mapping[str, object], scope_unit_names: Sequence[str]
+) -> tuple[list[dict[str, object]], list[dict[str, object]]]:
+    if not scope_unit_names:
+        return [], []
+    evidence = frontier.get("project_structure")
+    if not isinstance(evidence, Mapping):
+        return [], [
+            {
+                "severity": "error",
+                "code": "project-structure-unbound",
+                "message": "Selected Scope Units require bound Project Structure evidence.",
+                "details": {"scope_unit_names": list(scope_unit_names)},
+            }
+        ]
+    path_value = evidence.get("carrier_path")
+    if not isinstance(path_value, str):
+        raise EntityGraphError("project-structure-invalid", "Project Structure evidence lacks carrier_path")
+    path = _safe_repository_path(repository, path_value, name="source_frontier.project_structure.carrier_path")
+    try:
+        parsed = tomllib.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError) as error:
+        raise EntityGraphError("project-structure-unreadable", "Project Structure source is unreadable", path=path_value) from error
+    raw_units = parsed.get("scope_units")
+    if not isinstance(raw_units, list):
+        raise EntityGraphError("project-structure-invalid", "Project Structure lacks scope_units", path=path_value)
+    by_name = {
+        unit.get("scope_unit_name"): unit
+        for unit in raw_units
+        if isinstance(unit, dict) and isinstance(unit.get("scope_unit_name"), str)
+    }
+    missing = sorted(set(scope_unit_names) - set(by_name))
+    diagnostics: list[dict[str, object]] = []
+    if missing:
+        diagnostics.append(
+            {
+                "severity": "error",
+                "code": "scope-unit-unresolved",
+                "message": "Selected Scope Units are not declared by bound Project Structure evidence.",
+                "details": {"scope_unit_names": missing, "carrier_path": path_value},
+            }
+        )
+    keys = (
+        "scope_unit_name",
+        "parent",
+        "scope_unit_type",
+        "scope_unit_label",
+        "structural_level",
+        "local_order",
+        "navigational_order_number",
+        "authority_path",
+        "delivery_path",
+        "authority_mode",
+    )
+    rows = []
+    for name in scope_unit_names:
+        unit = by_name.get(name)
+        if unit is None:
+            continue
+        row = {key: unit[key] for key in keys if key in unit}
+        row["source"] = dict(evidence)
+        rows.append(row)
+    return rows, diagnostics
+
+
+def _quality(
+    *,
+    diagnostics: Sequence[Mapping[str, object]],
+    current: bool,
+    authorized: bool,
+    recording_confirmed: bool,
+    persistence_valid: bool,
+) -> dict[str, str]:
+    codes = {str(row.get("code", "")) for row in diagnostics}
+    invalid_codes = {
+        "term-subkind-cycle",
+        "dependency-cycle",
+        "self-reference",
+        "term-allowed-value-parent-cardinality",
+        "dependent-subject-bearer-cardinality",
+        "governed-term-definition-conflict",
+    }
+    incomplete_codes = {
+        "term-unresolved",
+        "scope-unit-unresolved",
+        "project-structure-unbound",
+        "carrier-unreadable",
+    }
+    return {
+        "coverage": "fail" if codes & incomplete_codes else "pass",
+        "fidelity": "fail" if any(row.get("severity") == "error" and str(row.get("code")) not in invalid_codes | incomplete_codes for row in diagnostics) else "pass",
+        "validity": "fail" if codes & invalid_codes else "pass",
+        "currentness": "pass" if current else "fail",
+        "permission": "pass" if authorized else "fail",
+        "persistence": "pass" if persistence_valid else "fail",
+        "recording": "pass" if recording_confirmed else "fail",
+    }
+
+
+def _outcome_for(quality: Mapping[str, str], diagnostics: Sequence[Mapping[str, object]]) -> str:
+    if quality["currentness"] != "pass":
+        return "stale"
+    if quality["permission"] != "pass" or quality["recording"] != "pass" or quality["persistence"] != "pass":
+        return "blocked"
+    if quality["validity"] != "pass":
+        return "conflicting"
+    if quality["coverage"] != "pass":
+        return "incomplete"
+    if quality["fidelity"] != "pass":
+        return "failed"
+    return "built"
+
+
+def _term_dependencies(
+    relations: Sequence[SubjectRelation], terms: set[str]
+) -> tuple[dict[str, list[str]], list[dict[str, object]], list[list[str]]]:
+    by_atom: dict[tuple[str, str], list[SubjectRelation]] = defaultdict(list)
+    for relation in relations:
+        by_atom[(relation.atom_id, relation.carrier_path)].append(relation)
+    dependency_graph: dict[str, set[str]] = defaultdict(set)
+    evidence: list[dict[str, object]] = []
+    for rows in by_atom.values():
+        governed = [row for row in rows if row.kind == "GOVERNS" and terminal_term(row.subject_path) in terms]
+        depended = [row for row in rows if row.kind == "DEPENDS_ON"]
+        for source in governed:
+            source_term = terminal_term(source.subject_path)
+            for target in depended:
+                target_term = terminal_term(target.subject_path)
+                if target_term in terms:
+                    dependency_graph[source_term].add(target_term)
+                    evidence.append(
+                        {
+                            "relation": "DEPENDS_ON",
+                            "source": source_term,
+                            "target": target_term,
+                            "source_lineage": _edge_evidence(target),
+                        }
+                    )
+    for term in terms:
+        dependency_graph.setdefault(term, set())
+    return (
+        {term: sorted(targets) for term, targets in sorted(dependency_graph.items())},
+        sorted(evidence, key=lambda row: (str(row["source"]), str(row["target"]))),
+        dependency_cycles(dependency_graph),
+    )
+
+
+def _ancestor_sets(parents: Mapping[str, Sequence[str]]) -> tuple[dict[str, list[str]], list[list[str]]]:
+    graph = {term: set(values) for term, values in parents.items()}
+    cycles = dependency_cycles(graph)
+    result: dict[str, list[str]] = {}
+    for term in sorted(graph):
+        found: set[str] = set()
+        pending = list(graph[term])
+        while pending:
+            parent = pending.pop()
+            if parent == term or parent in found:
+                continue
+            found.add(parent)
+            pending.extend(graph.get(parent, ()))
+        result[term] = sorted(found)
+    return result, cycles
+
+
+def _publication_path(repository: Path, value: object) -> Path:
+    if not isinstance(value, str) or not value:
+        raise EntityGraphError("output-destination-invalid", "output_destination must be a non-empty path")
+    destination = _safe_repository_path(repository, value, name="output_destination")
+    try:
+        destination.relative_to(_configured_projection_root(repository))
+    except ValueError as error:
+        raise EntityGraphError(
+            "output-destination-unauthorized",
+            "Output destination is outside the configured Project Projection root",
+            path=value,
+        ) from error
+    if destination.suffix != ".json":
+        raise EntityGraphError("output-destination-invalid", "Projection output must use a .json Carrier", path=value)
+    probe = destination
+    while probe != repository:
+        if probe.exists() and probe.is_symlink():
+            raise EntityGraphError("output-destination-symlink", "Output destination must not traverse a symlink", path=value)
+        probe = probe.parent
+    return destination
+
+
+def _strict_error_result(graph_kind: object, error: EntityGraphError) -> dict[str, object]:
+    key = "entities_graph" if graph_kind == "entities" else "terms_graph" if graph_kind == "terms" else None
+    result: dict[str, object] = {
+        "outcome": "failed",
+        "source_frontier_evidence": {},
+        "selection_evidence": {},
+        "lineage": [],
+        "quality_dispositions": {name: "unresolved" for name in ("coverage", "fidelity", "validity", "currentness", "permission", "persistence", "recording")},
+        "diagnostics": [error.record()],
+        "non_authoritative": True,
+        "output_effects": {"state": "none", "paths": []},
+        "run_receipt_refs": [],
+    }
+    if key is not None:
+        result[key] = {}
+    return result
+
+
+def build_graph(repository: Path, request: Mapping[str, object]) -> dict[str, object]:
+    """Build one source-sealed Entities or Terms Graph without source mutation.
+
+    This is the public Tool/Action API for CA-O-134 and CA-O-137.  It accepts
+    only the CA-D-539 request fields, returns the common Run-compatible result
+    envelope, and leaves Journal persistence to the shared support owner.
+    """
+
+    graph_kind: object = request.get("graph_kind") if isinstance(request, Mapping) else None
+    try:
+        if not isinstance(request, Mapping):
+            raise EntityGraphError("request-invalid", "Graph request must be an object")
+        unknown = sorted(set(request) - STRICT_REQUEST_FIELDS)
+        missing = sorted(STRICT_REQUIRED_REQUEST_FIELDS - set(request))
+        if unknown or missing:
+            raise EntityGraphError("request-schema-invalid", "Graph request fields are not exact", unknown=unknown, missing=missing)
+        graph_kind = request["graph_kind"]
+        if graph_kind not in GRAPH_KINDS:
+            raise EntityGraphError("graph-kind-invalid", "graph_kind must be entities or terms", graph_kind=graph_kind)
+        repository = repository.resolve()
+        frontier = _mapping(request["source_frontier"], "source_frontier")
+        selection = _mapping(request["selection"], "selection")
+        configuration = _mapping(request["representation_configuration"], "representation_configuration")
+        permission = _mapping(request["capability_permission_evidence"], "capability_permission_evidence")
+        recording = _mapping(request["run_recording_context"], "run_recording_context")
+        display_selection = request.get("display_selection")
+        if display_selection is not None:
+            display_selection = dict(_mapping(display_selection, "display_selection"))
+        if set(permission) != {"authorized"} or not isinstance(permission["authorized"], bool):
+            raise EntityGraphError("permission-evidence-invalid", "Permission evidence must contain only authorized:boolean")
+        if set(recording) != {"state", "receipt_refs"} or recording["state"] not in {"confirmed", "pending", "blocked"}:
+            raise EntityGraphError("recording-context-invalid", "Recording context must bind state and receipt_refs")
+        receipt_refs = recording["receipt_refs"]
+        if not isinstance(receipt_refs, list) or any(not isinstance(item, str) or not item for item in receipt_refs):
+            raise EntityGraphError("recording-context-invalid", "recording receipt_refs must be a string array")
+        folder, actual_frontier, frontier_diagnostics = _validate_frontier(repository, frontier)
+        if frontier_diagnostics:
+            result = _strict_error_result(graph_kind, EntityGraphError("source-frontier-stale", "Admitted source frontier is stale"))
+            result["outcome"] = "stale"
+            result["source_frontier_evidence"] = actual_frontier
+            result["diagnostics"] = frontier_diagnostics
+            result["output_effects"] = {"state": "none", "paths": []}
+            return result
+        carriers, discovery_diagnostics = discover_atoms(repository, folder)
+        selected_carriers, scope_unit_names = _selected_carriers(carriers, selection)
+        relations: list[SubjectRelation] = []
+        diagnostics: list[dict[str, object]] = list(discovery_diagnostics)
+        for carrier in selected_carriers:
+            parsed, carrier_diagnostics = parse_subject_relations(carrier)
+            relations.extend(parsed)
+            diagnostics.extend(carrier_diagnostics)
+        relations.sort(key=_relation_sort_key)
+        structure_rows, structure_diagnostics = _selected_structure(repository, frontier, scope_unit_names)
+        diagnostics.extend(structure_diagnostics)
+        graph_payload: dict[str, object]
+        if graph_kind == "entities":
+            typed_edges = term_system_edges(selected_carriers, relations)
+            governed_by_subject: dict[str, list[SubjectRelation]] = defaultdict(list)
+            for relation in relations:
+                if relation.kind == "GOVERNS":
+                    governed_by_subject[relation.subject_path].append(relation)
+            property_nodes: list[dict[str, object]] = []
+            for carrier in selected_carriers:
+                governed = [
+                    relation.subject_path
+                    for relation in relations
+                    if relation.atom_id == carrier.atom_id
+                    and relation.carrier_path == carrier.carrier_path
+                    and relation.kind == "GOVERNS"
+                ]
+                for key, value in _frontmatter_properties(carrier).items():
+                    property_nodes.append(
+                        {
+                            "identity": f"{carrier.atom_id}#{key}",
+                            "entity_identities": governed,
+                            "name": key,
+                            "value": value,
+                            "source": carrier.evidence(),
+                        }
+                    )
+            graph_payload = {
+                "entities": [
+                    {
+                        "identity": subject_path,
+                        "governing_sources": [relation.evidence() for relation in governed_by_subject[subject_path]],
+                    }
+                    for subject_path in sorted(governed_by_subject)
+                ],
+                "properties": sorted(property_nodes, key=lambda row: str(row["identity"])),
+                "relations": [
+                    {
+                        "identity": f"{relation.atom_id}:{relation.kind}:{relation.subject_path}",
+                        "relation": relation.kind,
+                        "source_atom_id": relation.atom_id,
+                        "target_entity": relation.subject_path,
+                        "temporal_form": relation.temporal_form,
+                        "source_lineage": _edge_evidence(relation),
+                    }
+                    for relation in relations
+                ],
+                "structural_relations": [
+                    {
+                        "relation": edge["relation"],
+                        "source": edge["source_subject"],
+                        "target": edge["target_subject"],
+                        "source_term": edge["source_term"],
+                        "target_term": edge["target_term"],
+                        "evidence": edge["evidence"],
+                    }
+                    for edge in typed_edges
+                    if edge["relation"] in {"IS_BORNE_BY", "IS_ALLOWED_VALUE_OF"}
+                ],
+                "source_atoms": [
+                    {
+                        "atom_id": carrier.atom_id,
+                        "properties": _frontmatter_properties(carrier),
+                        "claim": {"sha256": hashlib.sha256(carrier.body.encode("utf-8")).hexdigest()},
+                        "source": carrier.evidence(),
+                    }
+                    for carrier in selected_carriers
+                ],
+                "project_structure": structure_rows,
+                "external_references": [],
+            }
+        else:
+            _, _, declared, _, depended = dependency_edges(selected_carriers, relations)
+            terms = sorted(declared)
+            terms_set = set(terms)
+            conflicts = {term: rows for term, rows in declared.items() if len(rows) != 1}
+            for term, rows in sorted(conflicts.items()):
+                diagnostics.append(
+                    {
+                        "severity": "error",
+                        "code": "governed-term-definition-conflict",
+                        "message": "A selected Term has conflicting defining Atom evidence.",
+                        "details": {"term": term, "definitions": [row.evidence() for row in rows]},
+                    }
+                )
+            typed_edges = term_system_edges(selected_carriers, relations)
+            term_edges = [
+                {
+                    "relation": edge["relation"],
+                    "source": edge["source_term"],
+                    "target": edge["target_term"],
+                    "source_subject": edge["source_subject"],
+                    "target_subject": edge["target_subject"],
+                    "evidence": edge["evidence"],
+                }
+                for edge in typed_edges
+                if str(edge["source_term"]) in terms_set and str(edge["target_term"]) in terms_set
+                and edge["relation"] == "SUBKIND_OF"
+            ]
+            external_edges = [
+                edge
+                for edge in typed_edges
+                if edge["relation"] == "SUBKIND_OF"
+                and (str(edge["source_term"]) not in terms_set or str(edge["target_term"]) not in terms_set)
+            ]
+            parent_sets: dict[str, list[str]] = {term: [] for term in terms}
+            for edge in term_edges:
+                if edge["relation"] == "SUBKIND_OF":
+                    parent_sets[str(edge["source"])].append(str(edge["target"]))
+            parent_sets = {term: sorted(set(values)) for term, values in sorted(parent_sets.items())}
+            ancestors, parent_cycles = _ancestor_sets(parent_sets)
+            dependencies, dependency_evidence, dependency_cycles_found = _term_dependencies(relations, terms_set)
+            unresolved = sorted(
+                subject_path
+                for subject_path in depended
+                if terminal_term(subject_path) not in terms_set
+            )
+            for subject_path in unresolved:
+                diagnostics.append(
+                    {
+                        "severity": "warning",
+                        "code": "term-unresolved",
+                        "message": "A selected dependency names no governed Term in the selected frontier.",
+                        "details": {"subject_path": subject_path},
+                    }
+                )
+            for cycle in parent_cycles + dependency_cycles_found:
+                diagnostics.append(
+                    {
+                        "severity": "error",
+                        "code": "self-reference" if len(cycle) == 1 else "dependency-cycle",
+                        "message": "Selected Term relation data contains a cycle.",
+                        "details": {"cycle": cycle},
+                    }
+                )
+            graph_payload = {
+                "terms": [
+                    {
+                        "identity": term,
+                        "defining_sources": [
+                            {"subject_path": row.subject_path, "source": row.evidence()}
+                            for row in declared[term]
+                        ],
+                    }
+                    for term in terms
+                ],
+                "relations": sorted(term_edges + dependency_evidence, key=lambda row: (str(row["relation"]), str(row["source"]), str(row["target"]))),
+                "parents_by_term": parent_sets,
+                "ancestors_by_term": ancestors,
+                "dependencies_by_term": dependencies,
+                "unresolved_terms": unresolved,
+                "cycles": sorted(parent_cycles + dependency_cycles_found, key=lambda cycle: tuple(cycle)),
+                "external_references": external_edges,
+            }
+        diagnostics.sort(key=lambda row: (str(row.get("severity", "")), str(row.get("code", "")), canonical_json(row.get("details", {}))))
+        final_frontier = source_frontier_for(repository, folder)
+        current = canonical_json(final_frontier) == canonical_json(frontier)
+        authorized = bool(permission["authorized"])
+        recording_confirmed = recording["state"] == "confirmed" and bool(receipt_refs)
+        destination: Path
+        persistence_valid = True
+        if "output_destination" in request:
+            destination = _publication_path(repository, request["output_destination"])
+        else:
+            assert isinstance(graph_kind, str)
+            destination = _default_publication_path(repository, graph_kind)
+        quality = _quality(
+            diagnostics=diagnostics,
+            current=current,
+            authorized=authorized,
+            recording_confirmed=recording_confirmed,
+            persistence_valid=persistence_valid,
+        )
+        outcome = _outcome_for(quality, diagnostics)
+        graph_key = "entities_graph" if graph_kind == "entities" else "terms_graph"
+        selection_evidence = {"selection": dict(selection)}
+        if display_selection is not None:
+            selection_evidence["display_selection"] = display_selection
+        settings_digest = hashlib.sha256(
+            canonical_json(
+                {
+                    "graph_kind": graph_kind,
+                    "selection_evidence": selection_evidence,
+                    "representation_configuration": dict(configuration),
+                }
+            ).encode("utf-8")
+        ).hexdigest()
+        result: dict[str, object] = {
+            "outcome": outcome,
+            graph_key: graph_payload,
+            "source_frontier_evidence": final_frontier,
+            "selection_evidence": selection_evidence,
+            "representation_configuration": dict(configuration),
+            "settings_sha256": settings_digest,
+            "lineage": [carrier.evidence() for carrier in selected_carriers],
+            "quality_dispositions": quality,
+            "diagnostics": diagnostics,
+            "non_authoritative": True,
+            "output_effects": {"state": "none", "paths": []},
+            "run_receipt_refs": list(receipt_refs),
+        }
+        if outcome != "built":
+            return result
+        publication = {
+            "schema_version": SCHEMA_VERSION,
+            "tool": TOOL_ID,
+            "graph_kind": graph_kind,
+            graph_key: graph_payload,
+            "source_frontier_evidence": final_frontier,
+            "selection_evidence": selection_evidence,
+            "representation_configuration": dict(configuration),
+            "settings_sha256": settings_digest,
+            "lineage": result["lineage"],
+            "quality_dispositions": quality,
+            "diagnostics": diagnostics,
+            "non_authoritative": True,
+        }
+        rendered = canonical_json(publication, pretty=True)
+        requested_existing = request.get("existing_projection_evidence")
+        if requested_existing is not None:
+            existing = _mapping(requested_existing, "existing_projection_evidence")
+            expected_digest = existing.get("sha256")
+            if not isinstance(expected_digest, str) or not destination.is_file() or _sha256(destination) != expected_digest:
+                result["outcome"] = "stale"
+                result["quality_dispositions"] = {**quality, "currentness": "fail"}
+                result["diagnostics"] = diagnostics + [
+                    {
+                        "severity": "error",
+                        "code": "existing-projection-stale",
+                        "message": "Existing Projection evidence does not match the explicit destination.",
+                        "details": {"path": _display_path(destination, repository)},
+                    }
+                ]
+                return result
+        publication_frontier = source_frontier_for(repository, folder)
+        if canonical_json(publication_frontier) != canonical_json(frontier):
+            result["outcome"] = "stale"
+            result["source_frontier_evidence"] = publication_frontier
+            result["quality_dispositions"] = {**quality, "currentness": "fail"}
+            result["diagnostics"] = diagnostics + [
+                {
+                    "severity": "error",
+                    "code": "source-frontier-changed-before-publication",
+                    "message": "Source bytes changed after construction and before publication.",
+                    "details": {"actual": publication_frontier},
+                }
+            ]
+            return result
+        if destination.is_file() and destination.read_text(encoding="utf-8") == rendered:
+            result["outcome"] = "no_op"
+            result["output_effects"] = {"state": "unchanged", "paths": []}
+            result["projection_revision"] = _sha256(destination)
+            return result
+        atomic_write(destination, rendered)
+        result["output_effects"] = {
+            "state": "created" if not requested_existing else "replaced",
+            "paths": [_display_path(destination, repository)],
+        }
+        result["projection_revision"] = _sha256(destination)
+        return result
+    except EntityGraphError as error:
+        return _strict_error_result(graph_kind, error)
+
+
+def construct_entities_graph_projection(repository: Path, request: Mapping[str, object]) -> dict[str, object]:
+    """CA-O-134 Action adapter for the source graph executor."""
+
+    if request.get("graph_kind", "entities") != "entities":
+        return _strict_error_result(
+            request.get("graph_kind"),
+            EntityGraphError("graph-kind-action-mismatch", "CA-O-134 accepts only an entities graph request"),
+        )
+    bound = dict(request)
+    bound["graph_kind"] = "entities"
+    return build_graph(repository, bound)
+
+
+def construct_terms_graph_projection(repository: Path, request: Mapping[str, object]) -> dict[str, object]:
+    """CA-O-137 Action adapter for the source graph executor."""
+
+    if request.get("graph_kind", "terms") != "terms":
+        return _strict_error_result(
+            request.get("graph_kind"),
+            EntityGraphError("graph-kind-action-mismatch", "CA-O-137 accepts only a terms graph request"),
+        )
+    bound = dict(request)
+    bound["graph_kind"] = "terms"
+    return build_graph(repository, bound)
+
+
+ACTION_HANDLERS = {
+    "CA-O-134": construct_entities_graph_projection,
+    "CA-O-137": construct_terms_graph_projection,
+}
+
+
+def queue_action_handlers(repository: Path) -> dict[str, object]:
+    """Return CA-O-134/O-137 adapters in the selected queue's context contract.
+
+    `SelectedExecution` passes one frozen context and requires `result` plus
+    optional effect references.  The caller supplies the already-admitted strict
+    graph request as `context.parameters`; this adapter never invents a receipt,
+    transition, or retry.
+    """
+
+    def adapt(action_id: str, graph_kind: str, context: Mapping[str, object]) -> dict[str, object]:
+        parameters = context.get("parameters")
+        if not isinstance(parameters, Mapping):
+            return {
+                "result": "blocked",
+                "effect_refs": [],
+                "graph_result": _strict_error_result(
+                    graph_kind,
+                    EntityGraphError("queue-parameters-invalid", "Selected queue context lacks a graph request"),
+                ),
+            }
+        request = dict(parameters.get("graph_request", parameters))
+        if request.get("graph_kind", graph_kind) != graph_kind:
+            result = _strict_error_result(
+                request.get("graph_kind"),
+                EntityGraphError("graph-kind-action-mismatch", f"{action_id} received the wrong graph kind"),
+            )
+        else:
+            request["graph_kind"] = graph_kind
+            result = build_graph(repository, request)
+        effects = result.get("output_effects")
+        paths = effects.get("paths", []) if isinstance(effects, Mapping) else []
+        return {
+            "result": result["outcome"],
+            "effect_refs": list(paths) if isinstance(paths, list) else [],
+            "graph_result": result,
+        }
+
+    return {
+        "CA-O-134": lambda context: adapt("CA-O-134", "entities", context),
+        "CA-O-137": lambda context: adapt("CA-O-137", "terms", context),
+    }
+
+
+def run(repository: Path, request: Mapping[str, object]) -> dict[str, object]:
+    """Queue-facing alias; the caller owns workflow continuation and Journal I/O."""
+
+    return build_graph(repository, request)
 
 
 def _walk_declared_tree(nodes: Sequence[Mapping[str, object]], depth: int = 0) -> Iterable[str]:

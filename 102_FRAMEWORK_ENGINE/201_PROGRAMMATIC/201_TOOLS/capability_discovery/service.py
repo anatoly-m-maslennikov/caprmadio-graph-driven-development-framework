@@ -67,15 +67,41 @@ class Service:
                 raise ValueError('Carrier exceeds read limit')
             return raw
 
-    def catalog(self):
-        settings = tomllib.loads(self.read(self.root / '.caprmedio_caprmedio/caprmedio_project_settings.toml').decode())
-        control = self.root / settings.get('paths', {}).get('control_root', '.caprmedio_caprmedio')
-        if '..' in control.parts or not control.is_relative_to(self.root) or control.is_symlink():
+    def _control_root(self):
+        """Resolve the Project's declared control root from its one settings Carrier."""
+        settings_paths = sorted(
+            path for path in self.root.glob('.caprmedio_*/caprmedio_project_settings.toml')
+            if path.is_file() and not path.is_symlink() and not path.parent.is_symlink()
+        )
+        if len(settings_paths) != 1:
+            raise ValueError('Project settings carrier is missing or ambiguous')
+        settings_path = settings_paths[0]
+        try:
+            settings = tomllib.loads(self.read(settings_path).decode())
+        except (UnicodeDecodeError, tomllib.TOMLDecodeError) as error:
+            raise ValueError('Invalid Project settings carrier') from error
+        paths = settings.get('paths', {})
+        if not isinstance(paths, dict):
             raise ValueError('Invalid Project control root')
+        default = settings_path.parent.relative_to(self.root).as_posix()
+        value = paths.get('control_root', default)
+        if not isinstance(value, str) or not value:
+            raise ValueError('Invalid Project control root')
+        control = Path(value)
+        if control.is_absolute() or '..' in control.parts or control.as_posix() in ('', '.'):
+            raise ValueError('Invalid Project control root')
+        control_path = self.root / control
+        resolved = control_path.resolve()
+        if control_path.is_symlink() or not resolved.is_relative_to(self.root) or not resolved.is_dir():
+            raise ValueError('Invalid Project control root')
+        return resolved
+
+    def catalog(self):
+        control = self._control_root()
         atoms, tools, issues = {}, [], []
         started, total = time.monotonic(), 0
         candidates = (path for path in control.rglob('*.md') if not
-                      any(part.lower() in ('archive', 'archived', 'draft', 'done', 'resolved', 'canceled', 'cancelled')
+                      any(part.lower() in ('archive', 'archived', 'draft', 'done', 'resolved', 'canceled', 'cancelled', '_journal', '_projection')
                           for part in path.relative_to(control).parts))
         for number, path in enumerate(candidates):
             if number >= 10000 or time.monotonic() - started > 60:
@@ -139,7 +165,7 @@ class Service:
         words = request.query.lower().split()
         rows = [row for row in rows if all(word in json.dumps(row).lower() for word in words)]
         if request.scope_unit:
-            structure = tomllib.loads(self.read(self.root / '.caprmedio_caprmedio/project_structure.toml').decode())
+            structure = tomllib.loads(self.read(self._control_root() / 'project_structure.toml').decode())
             units = structure.get('scope_units', [])
             selected = {request.scope_unit}
             if not any(unit['scope_unit_name'] == request.scope_unit for unit in units):
@@ -197,10 +223,22 @@ class Service:
             raise ValueError('Invalid Run ID')
         path = self.root / '.caprmedio_tmp/rmed-base-revise' / request.run_id / 'progress.json'
         if not path.is_file():
+            admission = self.root / '.caprmedio_install/workflow_orchestrator/runs' / request.run_id / 'request.json'
+            if admission.is_file():
+                import sys
+                sys.path.insert(0, str(Path(__file__).resolve().parents[2] / '203_APPS/WORKFLOW_ORCHESTRATOR'))
+                from backend import status as queued_status
+                from contracts import Status
+                result = queued_status(self.root, Status(run_id=request.run_id))
+                saved = json.loads(self.read(admission))
+                return result, {'request': saved['request'], 'selection': saved['selection_bindings'],
+                                'criteria': saved['rule_bindings'], 'events': [], 'reports': [], 'handoffs': []}
             raise ValueError('Run not found; only RMED Atoms Base Revise backend is registered')
         state = json.loads(self.read(path))
         result = {key: state.get(key) for key in ('workflow_run_id', 'workflow_name', 'outcome',
-                  'progress', 'report_path', 'recording_blockers', 'updated_at')}
+                  'progress', 'report_path', 'recording_blockers', 'updated_at', 'coverage_gates')}
+        result['operator_question'] = next((row['operator_question'] for row in
+            state.get('coverage_gates', {}).values() if row.get('operator_question')), None)
         if request.include_results:
             result['results'] = state.get('reports', [])
             result['history'] = state.get('history', [])

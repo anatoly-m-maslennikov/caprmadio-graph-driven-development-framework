@@ -14,7 +14,7 @@ from capability_discovery.service import Service, Query, Observation, Watch
 
 class ServiceTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(dir='/private/tmp', ignore_cleanup_errors=True)
+        self.temp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         control = self.root / '.caprmedio_caprmedio'
@@ -28,6 +28,23 @@ class ServiceTests(unittest.TestCase):
                 f'---\natom_id: CA-O-{status}\nstatus: {status}\ncontent_role: Operations\ntype: Action\n---\n# Summary\nFind things\n')
         result = self.service.discover(Query(), operations=True)
         self.assertEqual(result['total'], 1)
+
+    def test_catalog_excludes_persistent_journal_and_projection_carriers(self):
+        control = self.root / '.caprmedio_caprmedio'
+        for relative, identity in (
+            ('visible.md', 'CA-O-visible'),
+            ('_journal/hidden.md', 'CA-O-journal'),
+            ('_projection/hidden.md', 'CA-O-projection'),
+        ):
+            path = control / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                f'---\natom_id: {identity}\nstatus: Active\ncontent_role: Operations\ntype: Action\n---\n# Summary\nFixture\n'
+            )
+
+        result = self.service.discover(Query(), operations=True)
+
+        self.assertEqual(['CA-O-visible'], [row['id'] for row in result['matches']])
 
     def test_traversal_rejected(self):
         with self.assertRaises(ValueError):

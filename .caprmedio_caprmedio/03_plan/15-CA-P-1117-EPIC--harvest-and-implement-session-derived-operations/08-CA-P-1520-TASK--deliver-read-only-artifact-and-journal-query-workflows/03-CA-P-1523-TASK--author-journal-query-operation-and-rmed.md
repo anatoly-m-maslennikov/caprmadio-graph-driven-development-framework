@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Events Journal query source and RMED authoring"
   depends_on: [Operations, Workflow, Action, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-04 20:15:56 +0000"
+updated_at: "2026-10-05 00:30:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1524]
@@ -41,3 +41,18 @@ Statically verify one minimal Workflow/Action route, canonical-Journal-only sour
 ### Definition of Done
 
 The exact active source/RMED IDs, Versions, and paths are saved with the canonical-Journal contract and verification; otherwise this authoring packet remains Active and blocks P1524.
+
+## Authoring result
+
+Saved the minimal source route: CA-O-161 Workflow, CA-O-162 Action, and
+CA-O-163 Step. Saved the PROGRAMMATIC packet R1861-R1872, M334-M337,
+E575-E580, and D555-D558 in the native TOOLS authority folders, all at Version
+1. The route binds only the canonical Project `_journal/` source, one stable
+snapshot token, IDs-by-default/selected-fetch behavior, the shared CA-R-1850
+typed literal filter contract, truthful diagnostics/pagination, and the existing D527-D529 shared
+Run support. It explicitly does not claim an implementation, MCP registration,
+runtime invocation, Journal write, or test execution.
+
+Static verification confirmed one Workflow/Action/Step route; required O/RMED
+cross-references; the declared Tool and golden-test paths; and no reserved-ID
+collision. `git diff --check` is recorded by the authoring verification.

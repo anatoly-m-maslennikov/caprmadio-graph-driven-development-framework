@@ -1,7 +1,9 @@
 # CAPRMEDIO workflow MCP — first local slice
 
-Exposes **RMED Atoms Base Revise** through one canonical Tool:
-`rmed_atoms_base_revise`. This is a coordination interface, not an Agent launcher.
+Exposes caller-coordinated **RMED Atoms Base Revise** through
+`rmed_atoms_base_revise`, plus discovery, context, status/results and notification helpers.
+`workflow_orchestrator` enqueues explicitly authorized independent Runs through
+a separately started DBOS worker and Codex CLI adapter.
 It uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk).
 
 ## Run
@@ -18,7 +20,49 @@ Codex or any other host. The current file-lock implementation supports macOS and
 Linux. The server is bound to one Project root at startup, not a client-supplied
 root on each request. Project Settings must register the shared Journal.
 
+For independent execution, also include `--group workflow-orchestrator` in the
+runtime invocation. Start the worker explicitly using its
+[README](../203_APPS/WORKFLOW_ORCHESTRATOR/README.md). The worker's lifetime is
+independent of this stdio adapter. The MCP does not start it implicitly.
+
 ## Calls
+
+## Hot reload
+
+`server.py` is now a stable stdio gateway; `implementation_server.py` runs in a
+separate local process per generation. Install this gateway with one initial MCP
+reconnect. Afterward invoke `reload_mcp_implementation`:
+
+```json
+{"request":{"operation":"reload","request_id":"reload-001"}}
+```
+
+Use a new request ID for a new reload; repeating an ID returns its original receipt
+within the gateway session. Call `get_mcp_reload_status` with `{"request":{}}`
+to inspect the current generation and in-flight counts. It is a separate read-only
+Tool and performs no reload or persistence. `reload_mcp_implementation` accepts
+only `operation: reload` and is explicitly state-changing. No file watcher or
+automatic reload runs. Annotations do not override Codex's permission policy;
+reload may still need a client-side allow rule.
+
+Candidate initialization/schema failure keeps the old implementation serving.
+Already-admitted calls finish on their original process; no calls are replayed.
+The gateway emits Tool-list-change notifications when the registry changes, but
+reports Codex's cache refresh as unconfirmed. A client that does not refresh still
+needs reconnecting. Changes to gateway code or its Python runtime also require
+reconnect; installed dependencies are never changed by a reload.
+
+Receipts live in `.caprmedio_install/mcp_hot_reload/`; they are not Atom authority.
+The DBOS worker is independent and is not restarted by MCP reload.
+
+Candidate startup is bounded to 20 seconds. Retired generations with calls still
+running after 60 seconds are marked `drain_limit_reached`; they are not forcibly
+killed or replayed. A generation's `process_available` reports observed lifecycle,
+not successful completion of its calls. This first slice sends legacy negotiated
+Tool-list-change notifications; modern subscription-based delivery is reported
+unsupported rather than claimed available.
+
+## Workflow calls
 
 Every call has `{"request": {"operation": "…", …}}`. The advertised schema is
 a discriminated union: unknown fields and invalid operations are rejected.

@@ -269,21 +269,21 @@
     },
     {
       "atom_id": "CA-M-310",
-      "version": 4,
+      "version": 5,
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-310-CORE_META_MODEL--write-requirement-claims-with-the-requirement-cce-profile.md",
-      "sha256": "6a98b05b39ffe429e7923a8caec113ab87a53878ee2abfd782ea6b62c3ca6f49"
+      "sha256": "b41cd2dfe70813a227d0253e717c5d39ac6d5cb842ea72524ce0582476ed0db6"
     },
     {
       "atom_id": "CA-M-311",
-      "version": 4,
+      "version": 5,
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-311-CORE_META_MODEL--write-method-claims-with-the-method-cce-profile.md",
-      "sha256": "1c86977aded30c27f138f2631683150fdd93195ca1ff652a757f8ece6a2ac1cb"
+      "sha256": "e269327a60f09d386b1857772c57f35f2135bce174be8e85f6ab34bcf0b3f1bc"
     },
     {
       "atom_id": "CA-M-312",
-      "version": 4,
+      "version": 5,
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-312-CORE_META_MODEL--write-evaluation-claims-with-the-evaluation-cce-profile.md",
-      "sha256": "110ca561eac9dde519f6f7ee97c1e69b86125ef0a6eeb1d05a6021aca2716569"
+      "sha256": "f89d277d5a08c3c9c33129fe95b91e9a735335ed103f50fd37f1c7c41e48ff9e"
     },
     {
       "atom_id": "CA-M-313",
@@ -305,9 +305,9 @@
     },
     {
       "atom_id": "CA-O-104",
-      "version": 7,
+      "version": 9,
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-104-CORE_META_MODEL-WORKFLOW--review-and-repair-a-bounded-rmed-atom-batch.md",
-      "sha256": "69b78658e09e59b0fba749d0bd63a5e09105562b958f8f33d04bee55387f573a"
+      "sha256": "44f09c0cc44ff08b03200c21e88d8e7f36ab0d3b10b037b17d0b22a20badea79"
     },
     {
       "atom_id": "CA-O-105",
@@ -323,9 +323,9 @@
     },
     {
       "atom_id": "CA-O-111",
-      "version": 4,
+      "version": 5,
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-111-CORE_META_MODEL-ACTION--fix-confirmed-local-rmed-atom-issues.md",
-      "sha256": "67f669ff69967c4a8496e37be3836664639dc6c81d5fe0ff3f957b2d02ab7be1"
+      "sha256": "4408a09c5a8a4ce316a34d072a2a3ca3dd5d057f48f7853de390efb3615f4103"
     },
     {
       "atom_id": "CA-O-108",
@@ -560,6 +560,30 @@
       "version": 1,
       "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/04_requirement/CA-R-1803-PROMPTS--provide-traceable-full-review-run-evidence.md",
       "sha256": "56c560c56c2788f5510603fe329dd7a74ee785438af3820e00a5713cca659376"
+    },
+    {
+      "atom_id": "CA-O-118",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-118-CORE_META_MODEL-ACTION--review-base-revise-result-coverage.md",
+      "sha256": "37ef3ea88d45ee50a8524ac352c849b0fb3fbb66a1c56124754838af89209cea"
+    },
+    {
+      "atom_id": "CA-O-119",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-119-CORE_META_MODEL-STEP--gate-gather-result-coverage.md",
+      "sha256": "4f9f072eb47d4c3536a86d6edbf634a18c177136a3c9e560c944d642c0543a67"
+    },
+    {
+      "atom_id": "CA-O-120",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-120-CORE_META_MODEL-STEP--gate-check-result-coverage.md",
+      "sha256": "f89bc7ec47a3fed5e52daf011167e6244693f3cb5df47b11943fabcbcd3a4a40"
+    },
+    {
+      "atom_id": "CA-O-121",
+      "version": 1,
+      "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-121-CORE_META_MODEL-STEP--gate-fix-result-coverage.md",
+      "sha256": "5fa55cfb3f70101f5c29c1f95497cd80d5847130232ec28b688c697d26530f09"
     }
   ],
   "settings": [

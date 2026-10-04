@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Selected Workflow implementation delivery"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
-version: 1
-updated_at: "2026-10-04 19:12:21 +0000"
+version: 3
+updated_at: "2026-10-04 23:53:29 +0400"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1123, CA-P-1164, CA-P-1165, CA-P-1166]
@@ -30,7 +30,7 @@ Implement one bounded native capability packet from independently accepted RMED.
 
 ### Exact inputs
 
-P1494/P1501 accepted native ATOM_LIFECYCLE current R1825–28,E545–48,D530–32; O127/128/129/145,O067/native lifecycle bindings and shared D527v2.
+P1494/P1501 accepted native ATOM_LIFECYCLE current R1825–28,E545–48,D530–32; O127/128/129/145,O067/native lifecycle bindings and shared D527v3.
 
 Root supplies the current active Method projection before implementation; relevant Goal and Project Principles remain governing. Reopen current saved R/M/E/D and directly bound O source definitions, not preparation summaries alone.
 
@@ -55,3 +55,53 @@ Retain actual initial failing golden baseline, real tested saved effects and fin
 ### Definition of Done
 
 The exact owned packet has saved implementation and source-driven golden functional proof, with truthful defects/remaining dependencies. Aggregate integration, all13route Docker/MCP proof and full Epic closure remain separate and unclaimed.
+
+### Implementation result — 2026-10-04
+
+Implemented the route-local adapter API in `lifecycle_intents.py`:
+`create_atom_action`, `update_atom_action`, `replace_atom_action`, and
+`change_status_atom_action`. Each takes one complete sealed Carrier boundary
+and caller-provided `execute`/`authorized` admission flags; it returns only
+route facts and does not create a Run, receipt, Event, Journal entry, retry, or
+Workflow continuation. `carrier_descriptor` supplies the exact full current
+Carrier seal for the shared CA-D-527 caller.
+
+`atom_operations.py` now supplies atomic complete-Carrier primitives used by
+those actions. New Create and successor carriers must explicitly carry the
+same `atom_id` as their filename; it is never inferred or inserted. A semantic
+Update retains a role-local `@Version` prior revision before writing the next
+Version. Summary-changing Update accepts validated, not-yet-published complete
+successor inputs and returns them unchanged in its terminal, non-effect
+Replace handoff. Replace preflights every supplied successor, publishes all of
+them before predecessor archive, and returns `partial` plus the exact unknown
+remainder when a later successor or predecessor archive fails. A non-Archive
+Change Status atomically relocates a carrier to the qualified status subfolder
+and promotes `Active` back to the role root; its model need not invent a
+`type` when the current Content Role model has none. Archive only reports
+broken active references/referrers and does not repair them. The replacement
+module re-exports `replace_atom_action` without changing its legacy
+deferred-intent CLI.
+
+Initial test-first baseline (Docker development worker) failed because the
+action API did not yet exist: `ImportError: cannot import name LifecycleError`.
+The updated current-contract golden cases then failed as expected before this
+revision (`1` failure, `5` errors): missing frontmatter identity was accepted,
+Summary handoff and Replace demanded already-existing successors, `type` was
+mandatory in status models, and semantic Update did not emit preserved
+history. Final verification passed:
+
+`docker exec -i -w /project caprmedio-ea535e2c0d4e-worker-1 python -m unittest discover -s 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests -p 'test_selected_atom_lifecycle.py' -v` — 7 tests passed. Coverage includes explicit matching/mismatched IDs, non-placeholder status models and status relocation/promotion, native Version history, supplied successor publication order, and both second-successor and archive-failure truthful partial results.
+
+`docker exec -i -w /project caprmedio-ea535e2c0d4e-worker-1 python -m unittest discover -s 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/ATOM_SEARCH/tests -p 'test_atom_operations.py' -v` — 19 tests passed. `python -m py_compile` passed for all three owned modules.
+
+Changed paths: `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/atom_operations.py`,
+`102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/lifecycle_intents.py`,
+`102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/REPLACE_ATOM/replace_atom.py`,
+and `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_selected_atom_lifecycle.py`.
+
+This Plan remains Active. The route-local packet is saved and its bounded
+golden cases pass, but it is not itself the source-bound CA-D-527 executor.
+P1510 must wire these action callables into the shared seal/receipt service;
+its run identities, durable Journal evidence, recording-pending handling,
+retry behavior, post-effect verification/recording fault injection, and the
+cross-route MCP/fresh-image Docker proof remain outside this Plan's ownership.

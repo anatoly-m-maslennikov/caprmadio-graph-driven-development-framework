@@ -33,7 +33,12 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertEqual({tool.name for tool in tools.tools}, {
                 'rmed_atoms_base_revise', 'discover_tools', 'discover_operations',
                 'get_execution_context', 'get_execution_status',
-                'resume_execution_context', 'watch_execution'})
+                'resume_execution_context', 'watch_execution', 'workflow_orchestrator',
+                'reload_mcp_implementation', 'get_mcp_reload_status'})
+            schema = next(tool for tool in tools.tools if tool.name == 'workflow_orchestrator').input_schema
+            encoded_schema = __import__('json').dumps(schema)
+            self.assertIn('allow_replacements', encoded_schema)
+            self.assertFalse(schema['$defs']['Enqueue']['properties']['allow_replacements']['default'])
             discovered = await client.call_tool('discover_tools', {'request': {'query': 'missing'}})
             self.assertFalse(discovered.is_error)
             self.assertEqual(discovered.structured_content['matches'], [])

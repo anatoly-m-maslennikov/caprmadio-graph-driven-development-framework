@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Artifact query source and RMED authoring"
   depends_on: [Operations, Workflow, Action, Tool, Evaluation, Journal]
-version: 1
-updated_at: "2026-10-05 00:02:29 +0400"
+version: 2
+updated_at: "2026-10-05 00:00:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1522]
@@ -41,3 +41,21 @@ Statically verify one minimal Workflow/Action route, complete source/RMED refere
 ### Definition of Done
 
 The exact active source/RMED IDs, Versions, and paths are saved with the stated contract and verification; otherwise this authoring packet remains Active and blocks P1522.
+
+## Result
+
+Saved active source definitions: CA-O-158@1 Workflow,
+CA-O-159@1 Action, and CA-O-160@1 Step in
+`000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/`.
+Saved active RMED: CA-R-1849@1, CA-R-1850@1 (the shared bounded query-filter contract),
+CA-M-330@1, CA-E-569@1, and CA-D-551@1 in the respective
+`102_LAYER_2_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/`,
+`05_method/`, `06_evaluation/`, and `07_delivery/` source paths. The exact
+delivery and golden-test paths are bound in CA-D-551@1 and CA-E-569@1.
+
+## Evidence
+
+Static source-authoring verification is limited to saved carrier metadata,
+one Workflow/Step/Action route, referenced RMED IDs and paths, and repository
+diff hygiene. No Tool, registration, migration, source snapshot, Run, Journal
+receipt, or runtime test was created or claimed.

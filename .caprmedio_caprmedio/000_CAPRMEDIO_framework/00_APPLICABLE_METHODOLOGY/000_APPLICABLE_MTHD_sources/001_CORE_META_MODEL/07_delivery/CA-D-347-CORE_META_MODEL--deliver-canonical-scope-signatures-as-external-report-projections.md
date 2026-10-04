@@ -4,8 +4,8 @@ subjects:
   depends_on:
     - "Scope Expression/Canonical Scope Signature"
     - "Carrier"
-version: 11
-updated_at: "2026-10-02 19:18:22 +0400"
+version: 12
+updated_at: "2026-10-05 00:25:37 +0400"
 relations:
   child_of:
     - CA-D-266
@@ -28,6 +28,6 @@ external report Projections that deliver Canonical Scope Signatures.
 
 ## Claim
 
-**every** Canonical Scope Signature Projection **must** be delivered as **`=1`** non-authoritative JSON report outside its selected source folder with the selected source frontier digest, **every** source Atom identity **and** revision, source Carrier digest, source Scope Expression occurrence, Canonical Scope Signature, **and** exclusion diagnostic; the Projection **must not** become an Atom Carrier, modify a selected source Carrier, establish Claim equivalence, **or** create a dependency relation.
+**every** Canonical Scope Signature Projection **must** be delivered as **`=1`** non-authoritative JSON report under its Project's `.caprmedio_<project_name>/_projection/` Directory Carrier with the selected source frontier digest, **every** source Atom identity **and** revision, source Carrier digest, source Scope Expression occurrence, Canonical Scope Signature, **and** exclusion diagnostic; the Projection **must not** become an Atom Carrier, modify a selected source Carrier, establish Claim equivalence, **or** create a dependency relation.
 
 ## Details

@@ -49,6 +49,7 @@ def render_report(state):
         'outcome', 'recording_blockers')}), '## Selection\n',
         block({key: state[key] for key in ('request', 'selection', 'gathered', 'exclusions')}),
         '## Rules\n', block(state['criteria']), '## Results\n', block(state['progress']),
+        '## Coverage Gates\n', block(state.get('coverage_gates', {})),
         '## Atom Reports\n']
     if not state['selection']:
         lines.append('No Atoms selected.\n' if state['gathered'] else 'Selection pending.\n')
@@ -285,7 +286,10 @@ class RunEvidence:
             state['progress'] = summarize_progress(state['reports'])
             if state['gather_blockers']:
                 state['progress']['complete'] = False
-            self._event(state, 'progressed', stage, report['result'], {'ordinal': ordinal})
+            details = {'ordinal': ordinal}
+            if report.get('replacement'):
+                details['replacement'] = report['replacement']
+            self._event(state, 'progressed', stage, report['result'], details)
             return self._sync(state)
 
     def _preserve_initial_evidence(self, state, ordinal, previous, report, stage, after_paths):
@@ -315,6 +319,20 @@ class RunEvidence:
         saved = previous.get('findings', [])
         if report.get('findings', [])[:len(saved)] != saved:
             raise ValueError('retain initial findings when continuing unfinished checks')
+
+    def record_coverage(self, run_id, gate):
+        """Persist orchestrator accounting without performing an Atom recheck."""
+        with self._lock(run_id):
+            state = self.load(run_id)
+            self._running(state)
+            gates = state.setdefault('coverage_gates', {})
+            if gate['phase'] in gates:
+                if gates[gate['phase']] != gate:
+                    raise ValueError('Coverage evidence already bound for this phase')
+                return self._sync(state)
+            gates[gate['phase']] = gate
+            self._event(state, 'progressed', 'coverage_' + gate['phase'], gate['result'], gate)
+            return self._sync(state)
 
     def handoff(self, run_id, note):
         with self._lock(run_id):

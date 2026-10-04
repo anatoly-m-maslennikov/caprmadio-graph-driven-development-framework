@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Selected Workflow implementation delivery"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-04 19:12:21 +0000"
+updated_at: "2026-10-04 19:39:00 +0000"
 relations:
   is_decomposition_of: [CA-P-1138]
   blocks: [CA-P-1123, CA-P-1164, CA-P-1165, CA-P-1166]
@@ -55,3 +55,19 @@ Retain actual initial failing golden baseline, real tested saved effects and fin
 ### Definition of Done
 
 The exact owned packet has saved implementation and source-driven golden functional proof, with truthful defects/remaining dependencies. Aggregate integration, all13route Docker/MCP proof and full Epic closure remain separate and unclaimed.
+
+## Result
+
+Completed the bounded IMPLEMENTATION_WORKFLOW packet.
+
+- Refreshed `source_bindings.json` from the reviewed R1843–46/M326–29/E563–66/D544–46 sources and current O016v11, seven Steps, and seven Actions; all identities, versions, paths, and digests are now checked.
+- Added `implementation_actions.py`: current Action exports, `implement_selected_queue`, separate active-M projection validation from selected R/D/E, exact context/permission/under-fifteen-minute Isolated-handoff checks, test-first/retry gates, replaceable Agent dispatch, and truthful result envelopes. It does not require MCP, own Workflow transitions, or duplicate Journal/shared-run effects.
+- Expanded focused tests for the refreshed frontier, mock-Agent envelope, blocked context/test-first/retry cases, and explicit non-live-LLM boundary. Updated README callable API and current packet references.
+
+Initial golden baseline (Docker worker): `python -m unittest discover -s 102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/tests -v` failed only on all 17 stale pins. Final same command: 10 tests passed. The mock-Agent checks are contract proof only; no live LLM run, immutable image coverage, MCP route coverage, shared `implement_run_support` implementation, aggregate integration, or Epic closure is claimed.
+
+### Functional sufficiency follow-up
+
+Reopened and completed the label-only success gap. `current_source_bindings()` now recomputes each reviewed authority digest and version from live bytes; queue admission requires the complete current source frontier. `prepare_method_projection(method_paths)` produces sorted full-content active-M input with source identity/version/path/digest, and `compile_active_methods` rejects any changed projection while retaining R/D and E as separate inputs. Successful `prepared`, `implemented`, `passed`, and `repaired` results now require their respective performed-work outputs and nonempty evidence.
+
+The Docker test suite now has 12 passing tests. Its golden Agent fixture creates a disposable implementation and assertion, retains the initial actual failing command result (`returncode: 1`), writes the required implementation, and retains final actual passing command output (`returncode: 0`) through CA-O-092, CA-O-093, and CA-O-094 queue calls. Remaining dependencies are only P1510 shared-run integration, P1517 graph/queue integration, fresh immutable-image coverage, MCP routes, and a deliberately separate live-Agent proof; none are claimed here.

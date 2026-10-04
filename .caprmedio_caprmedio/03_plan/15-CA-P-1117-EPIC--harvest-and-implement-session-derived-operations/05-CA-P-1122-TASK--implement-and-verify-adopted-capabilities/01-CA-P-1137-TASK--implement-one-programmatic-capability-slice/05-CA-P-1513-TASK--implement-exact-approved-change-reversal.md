@@ -55,3 +55,35 @@ Retain actual initial failing golden baseline, real tested saved effects and fin
 ### Definition of Done
 
 The exact owned packet has saved implementation and source-driven golden functional proof, with truthful defects/remaining dependencies. Aggregate integration, all13route Docker/MCP proof and full Epic closure remain separate and unclaimed.
+
+## Implementation result (2026-10-04)
+
+Implemented the bounded native CA-O-131 adapter at
+`102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/WORKFLOW_OPERATIONS/REVERT_CHANGES/revert_changes.py`.
+Its public `RevertChangesService.handle` and standalone
+`apply_approved_reversal` accept only strict `admit`, `execute`, and
+`recover_recording` modes. Admission is mutation-free and seals a deterministic
+manifest. Execution uses injected governed effect, currentness/revalidation, and
+shared Run/Journal collaborators; it applies approved effects in order, retains
+exact effect accounting, stops at failure/uncertainty/cancellation, and never
+performs inverse, replay, reset, or history deletion. The same pending-recording
+event is reconciled through the shared tracker without effect replay.
+
+Initial red command: the prescribed Docker unittest command failed with
+`ModuleNotFoundError: No module named 'revert_changes'` before the entrypoint
+existed. Final command: `docker exec -i -w /project
+caprmedio-ea535e2c0d4e-worker-1 python -m unittest discover -s
+102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/WORKFLOW_OPERATIONS/REVERT_CHANGES/tests
+-p 'test_revert_changes.py' -v` passed 8 tests, including a real temporary-file
+two-effect reversal, no-op, stale reference, ordering, cancellation, timeout,
+and recording-retry cases. `git diff --check` is clean for the owned package.
+
+Continuation result: adapted the Action to P1510's lazy shared-session API via
+`execute_with_session(manifest, session, requested_action_run_id)` and
+`recover_recording_with_session(...)`. The Action starts/finishes only its
+generated Action Run; the caller retains Workflow/Step lineage and graph
+continuation. A real temporary Project test now proves shared preview, admitted
+execute, canonical schema-v5 Journal events, transient terminal append failure,
+and canonical pending-event-only recovery with no effect replay (10 tests
+passing). Direct selected-queue/MCP registration remains P1517/P1518-owned;
+P1519 owns immutable-image/all-route proof and neither is claimed here.
