@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 3
-updated_at: "2026-10-04 17:23:34 +0000"
+version: 4
+updated_at: "2026-10-04 19:15:16 +0000"
 relations: {}
 ---
 # Summary
@@ -121,9 +121,9 @@ The remaining required decomposition has six composite stages. Existing bounded 
 
 ### Current execution frontier
 
-The selected thirteen-capability scope is unchanged. Source definitions now cover lifecycle requests, structural requests, Revert Changes, Implementation and the three Projection builders. Independent reviews have accepted the graph-builder definitions, shared Run-journaling contract and current Implementation graph. Two narrow lifecycle/reversal corrections are saved and await focused review. Workflow graph/Step binding duplication and legacy lifecycle Tool contracts are the remaining source repairs; CA-P-1463–1467 bind these exact packets.
+The selected thirteen-capability scope is unchanged. Required source definitions and independent source reviews are complete; P1119/P1132 are physically Done. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the exact Docker acceptance portfolio. Eight independent RMED review leaves P1493–P1500 found bounded corrections; graph/PROMPTS contracts passed first, and shared Run support, lifecycle, structure and Revert passed focused correction re-acceptance. Compiler compatibility and MCP mode/full-frontier bindings are the last narrow current specification corrections under P1504/P1506.
 
-This is source-stage progress, not tool delivery. Continue with reviewed PROGRAMMATIC/PROMPTS RMED, implementation, functional Docker/MCP verification and closure after these gates. No further harvest or broad source audit is required.
+P1510–P1519 now bind the actual test-first implementation packets: shared sealed Run/Journal support, lifecycle, authoritative structure, Revert, Entity/Term graphs, compilation, Implementation prompts/Actions, existing DBOS graph execution, MCP/manifest and the selected Docker golden harness. Dispatch remains gated on the required current RMED acceptance/preflight. Existing baseline code is not proof of these selected deliverables. After the exact last gate closes, execute these independent owned packets in parallel, retain actual golden tests/effects and complete functional Docker/MCP/journaling evidence. No additional source campaign is required.
 
 ### Definition of Done
 
