@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/filter"
   depends_on: [Event, Tool]
@@ -29,6 +29,9 @@ FIND_AND_FETCH_JOURNAL_EVENTS **must** expose every canonical Event field as a v
 
 ## Details
 
-The namespace is the top-level canonical Event object plus dot-qualified object
-fields. The Tool retains this selector mapping only; equality, inequality, NOT,
-IN, boolean precedence, missing/null, and type semantics are exactly CA-R-1850.
+The namespace is `event:/<RFC6901-pointer>`: `event:/` addresses the complete
+Event only for full-Event query, and every other selector is an RFC6901 pointer
+from the Event root, including escaped object keys and array indices. A selector
+is a JSON string under CA-R-1850's RFC8259 literal grammar. This mapping exposes
+scalar, null, array, and object values without dot traversal or coercion; all
+comparison semantics remain exactly CA-R-1850.

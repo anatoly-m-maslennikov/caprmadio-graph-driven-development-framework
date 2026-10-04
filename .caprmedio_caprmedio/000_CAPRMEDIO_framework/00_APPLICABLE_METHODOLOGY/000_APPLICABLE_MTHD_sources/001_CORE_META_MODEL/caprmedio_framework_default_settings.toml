@@ -29,6 +29,20 @@ max_total_read_bytes = 268435456
 timeout_seconds = 60
 max_findings = 10000
 
+[query]
+# Reusable bounded-query defaults; explicit instance/request values may override.
+max_request_bytes = 65536
+max_grammar_depth = 32
+max_filter_tokens = 1024
+max_in_members = 256
+max_selected_fields = 128
+max_page_size = 100
+max_snapshot_members = 10000
+max_file_bytes = 8388608
+max_total_read_bytes = 268435456
+timeout_seconds = 60
+max_findings = 10000
+
 [rmed_review]
 # Reserve this share of each worker's effective context capacity.
 # Operator/instance values may override; model capacity comes from runtime evidence.

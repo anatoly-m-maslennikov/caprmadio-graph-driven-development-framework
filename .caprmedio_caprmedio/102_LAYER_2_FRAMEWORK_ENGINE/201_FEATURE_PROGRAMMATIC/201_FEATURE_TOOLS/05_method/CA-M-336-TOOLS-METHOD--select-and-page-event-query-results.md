@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/result selection"
   depends_on: [Event, Tool]
@@ -29,4 +29,7 @@ To construct results, the Tool **must** order snapshot matches deterministically
 
 ## Details
 
-The next-page token remains bound to the source snapshot and result selection; a request cannot use it against a new frontier.
+The next-page token remains bound to the source snapshot, source/prefix hashes,
+result selection, and configured limits. Before any continuation it revalidates
+captured members and rejects changed, deleted, unreadable, or truncated captured
+data, while allowing append strictly after the sealed prefix.

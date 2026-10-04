@@ -8,8 +8,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/filter"
   depends_on: [Tool, Event, Evaluation]
@@ -26,13 +26,17 @@ The Tool applies CA-R-1850 unchanged to every valid canonical Event selector and
 
 ## Test case
 
-Query a fixed snapshot containing canonical Event fields through the shared
-filter's valid and invalid fixtures, plus unknown and ambiguous Event selectors.
+Query a fixed snapshot containing scalar, null, array, object, nested,
+escaped-key, and array-index values through shared valid/invalid fixtures, plus
+unknown, bad-pointer, and dot-qualified Event selectors.
 
 ## Acceptance criteria
 
-Shared valid and invalid cases preserve CA-R-1850 results; local unknown or
-ambiguous selectors return invalid-filter diagnostics and no fallback.
+Shared valid and invalid cases preserve CA-R-1850 results for every Event value
+type; local invalid selectors return invalid-filter diagnostics and no fallback.
+Request-byte, depth, token, IN-member, page-size, selected-field, timeout, and
+retained-finding maxima each reject at maximum plus one (or time out) and expose
+configured and consumed budget evidence.
 
 ## Failure disposition
 

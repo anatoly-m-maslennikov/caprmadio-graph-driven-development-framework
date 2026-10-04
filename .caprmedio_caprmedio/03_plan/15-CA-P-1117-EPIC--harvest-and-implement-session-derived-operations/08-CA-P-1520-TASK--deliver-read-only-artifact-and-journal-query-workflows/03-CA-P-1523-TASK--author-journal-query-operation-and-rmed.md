@@ -14,8 +14,8 @@ status: Done
 subjects:
   governs: "Events Journal query source and RMED authoring"
   depends_on: [Operations, Workflow, Action, Tool, Evaluation, Journal]
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1524]
@@ -41,6 +41,14 @@ Statically verify one minimal Workflow/Action route, canonical-Journal-only sour
 ### Definition of Done
 
 The exact active source/RMED IDs, Versions, and paths are saved with the canonical-Journal contract and verification; otherwise this authoring packet remains Active and blocks P1524.
+
+## Corrected source pins
+
+P-1531 supersedes the rejected v1 contract with O161–163@2; R1861, R1862,
+R1865, R1866, R1868, R1869@2; M334, M336, M337@2; E575, E577, E578, E580@2;
+and D556@2, reusing shared R1850@2. Unchanged carriers remain v1. The repaired
+packet awaits independent P-1533 acceptance; this remains no implementation
+admission.
 
 ## Authoring result
 

@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/filter safety"
   depends_on: [Tool, Event]
@@ -29,5 +29,8 @@ FIND_AND_FETCH_JOURNAL_EVENTS **must** reject every selector that does not resol
 
 ## Details
 
-SQL, code, grammar, boolean precedence, and literal validity remain exclusively
+A valid Event selector is exactly `event:/` (only for full-Event query) or
+`event:/` followed by an RFC6901 pointer; bad pointer escapes, absent paths,
+and dot-qualified traversal are rejected locally. SQL, code, grammar, boolean
+precedence, literal validity, and structural comparison remain exclusively
 governed by CA-R-1850; this Requirement adds no second expression grammar.

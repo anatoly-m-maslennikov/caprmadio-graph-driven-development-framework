@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Query route integration with existing discovery, MCP, orchestrator and Journal"
   depends_on: [Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 1
-updated_at: "2026-10-05 00:02:29 +0400"
+version: 2
+updated_at: "2026-10-05 01:05:27 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1528]
@@ -30,9 +30,9 @@ Within <=15 minutes, integrate the two accepted Tools into the existing discover
 
 ### Exact inputs, output, ownership, and gate
 
-Inputs: accepted P1522/P1524 exact IDs/Versions/paths; passing P1525/P1526 Tool tests; current D547/D548 and their consumer tests, which are closed to original13; current `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py`, `selected_routes.py`, `selected_workflow_bindings.json`, and tests. Ownership is the necessary revisions of the current D547/D548 RMED/route bindings/consumer tests plus those existing integration files; archive meaningful native predecessors when required.
+Inputs: accepted P1532/P1533 exact IDs/Versions/paths; passing P1525/P1526 Tool tests; current D547/D548 and their consumer tests, which are closed to original13; current `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py`, `selected_routes.py`, `selected_workflow_bindings.json`, and tests. Ownership is the necessary revisions of the current D547/D548 RMED/route bindings/consumer tests plus those existing integration files; archive meaningful native predecessors when required.
 
-Output: two source-bound routes in the existing stack, with discovery and actual admitted execution (not merely registration), preserving read-only semantics, source snapshots, and one shared Journal support. The route manifest/RMED must expand from thirteen to fifteen only after new source/spec acceptance. Verify both routes through existing consumers, default/selected returns and diagnostics, no credential/secret delivery, and truthful Workflow/Action records only for actual admitted execution. P1522, P1524, P1525, and P1526 are true dispatch blockers.
+Output: two source-bound routes in the existing stack, with discovery and actual admitted execution (not merely registration), preserving read-only semantics, source snapshots, and one shared Journal support. The route manifest/RMED must expand from thirteen to fifteen only after new source/spec acceptance. Verify both routes through existing consumers, default/selected returns and diagnostics, no credential/secret delivery, and truthful Workflow/Action records only for actual admitted execution. P1532, P1533, P1525, and P1526 are true dispatch blockers.
 
 ### Definition of Done
 

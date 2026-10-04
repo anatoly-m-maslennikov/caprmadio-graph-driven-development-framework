@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/source"
   depends_on: [Journal, Event, Tool]
@@ -29,4 +29,7 @@ FIND_AND_FETCH_JOURNAL_EVENTS **must** query only canonical Event carriers under
 
 ## Details
 
-Historical sealed Event references resolve only as immutable references; no alternate log, derived projection, filename identity, or source rewrite may substitute for canonical Events.
+Historical sealed Event references resolve only as immutable references. The source
+is raw canonical JSON Event bytes: raw duplicate object keys are rejected before
+parse, and no alternate log, derived projection, filename identity, or source
+rewrite may substitute for canonical Events.

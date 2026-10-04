@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/source snapshot"
   depends_on: [Journal, Event, Workflow Run, Action Run, Tool]
@@ -25,8 +25,15 @@ The query-source snapshot.
 
 ## Claim
 
-FIND_AND_FETCH_JOURNAL_EVENTS **must** bind an immutable source snapshot before execution evidence can append and must not enlarge that snapshot with its own execution Events.
+FIND_AND_FETCH_JOURNAL_EVENTS **must** bind an immutable source snapshot before
+workflow/action-start execution evidence can append and must not enlarge that
+snapshot with its own execution Events.
 
 ## Details
 
-The opaque snapshot token binds ordered canonical Event carrier references and their digests plus the configured source root. An unavailable, changed, or incompletely read frontier reports that condition and cannot claim complete coverage.
+The token binds the source root, raw-Journal byte-prefix length and hash, ordered
+member references, member byte hashes, and unique Event IDs. Before every
+continuation it revalidates the source/prefix hashes and captured members:
+changed, deleted, unreadable, or truncated members reject continuation; bytes
+appended only after the sealed prefix do not. An unavailable, changed, or
+incomplete frontier cannot claim complete coverage.

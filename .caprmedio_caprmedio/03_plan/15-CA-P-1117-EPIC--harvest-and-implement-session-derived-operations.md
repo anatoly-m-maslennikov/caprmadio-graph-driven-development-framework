@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 6
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 7
+updated_at: "2026-10-05 01:05:27 +0400"
 relations: {}
 ---
 # Summary
@@ -117,7 +117,7 @@ Authoring disposition: the Plan files have been created and independently review
 - CA-P-1124: Verify the fifteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
 - CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
 
-The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source O Action/Step/Workflow definitions and their RMED are not yet authored: their absence is an explicit dispatch blocker for dependent review/implementation, not bound evidence.
+The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
 
 ### Execution controls
 
@@ -138,7 +138,9 @@ Centralized carrier cutover: CA-D-549/CA-D-550 establish `_journal/` and `_proje
 
 The original thirteen-capability implementation branch is unchanged. Required source definitions and independent source reviews are complete for those thirteen; P1119/P1132 are physically Done for that scope. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the original Docker acceptance portfolio. P1493–P1500 reviews and their bounded corrections have been accepted; P1120/P1121 and the initial implementation preflights are Done.
 
-P1510–P1519 bind the test-first implementation packets. Shared Run/Journal support, authoritative structure, Entity/Term graphs and Implementation prompts have saved local proof; lifecycle, Revert, compilation, queue/MCP and the Docker harness have saved implementations with outstanding integration or image coverage. The physical MCP manifest now passes frozen-graph admission checks for all thirteen routes; actual native Action dispatch, effects and fresh-image execution remain unproven. No all-route functional pass is claimed. P1520–P1529 add the two-query branch; its O/RMED authoring, reviews, implementations, integration, image evidence and closure review are unstarted. Original thirteen implementation/tests continue independently; final image-coverage review and Epic closure require the additional two.
+The two query source packets are authored. Initial P1522/P1524 reviews rejected structural-value/lexical filter gaps, snapshot/identity integrity gaps and missing enforceable budgets. P1530/P1531 repair the packets; fresh P1532/P1533 acceptances are mandatory before P1525/P1526 implementation. Rejected review completion is not implementation admission.
+
+P1510–P1519 bind the test-first implementation packets. Shared Run/Journal support, authoritative structure, Entity/Term graphs and Implementation prompts have saved local proof; lifecycle, Revert, compilation, queue/MCP and the Docker harness have saved implementations with outstanding integration or image coverage. The original thirteen-route manifest previously passed frozen-graph admission, but its new canonical Projection placement is still pending; current production loading fails closed. Actual all-route native dispatch, effects and fresh-image execution remain unproven. P1520's two-query branch has saved O/RMED authoring and initial rejected reviews; P1530–1533 repair and re-review those sources before implementation. Original thirteen implementation/tests continue independently; final image-coverage review and Epic closure require the additional two.
 
 ### Definition of Done
 

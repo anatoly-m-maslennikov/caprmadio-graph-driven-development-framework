@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Read-only Artifact and Events Journal query Workflow delivery"
   depends_on: [Operations, Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 2
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 3
+updated_at: "2026-10-05 01:05:27 +0400"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -43,3 +43,7 @@ Find and Fetch Journal Events reads canonical Event carriers from the selected P
 ### Definition of Done
 
 Both source/RMED packets, independent reviews, Tools, route integration, fresh-image evidence, and closure review are Done with exact source/implementation/image/Run/Action/result evidence. Original13 work continues independently; P1171's final image-coverage review and P1124 closure require this branch's accepted proof.
+
+## Source-review repair frontier
+
+P1522/P1524 completed their initial reviews with rejected source contracts. P1530/P1531 own bounded repairs; P1532/P1533 independently review the repaired current packets. P1525/P1526 require these fresh acceptances, not the completed initial rejection records. The two repair lanes share exactly one filter authority, CA-R-1850; no second grammar or parser authority is introduced.

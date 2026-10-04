@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/value semantics"
   depends_on: [Event, Tool]
@@ -29,6 +29,7 @@ FIND_AND_FETCH_JOURNAL_EVENTS **must** pass each selected canonical Event field'
 
 ## Details
 
-The Tool marks absent selectors as absent and explicit null as null. It delegates
-all comparison and invalid-literal decisions to CA-R-1850 rather than defining
-another type system.
+The Tool marks absent selectors as absent and explicit null as null. Arrays and
+objects are passed as parsed RFC8259 structural values, including nested fields
+resolved by RFC6901 pointers, without stringification or flattening. It delegates
+all comparison and invalid-literal decisions to CA-R-1850.

@@ -8,8 +8,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/Run evidence"
   depends_on: [Tool, Workflow Run, Action Run, Journal, Evaluation]
@@ -26,7 +26,8 @@ The Tool creates shared RunJournal evidence only for an actual admitted query ex
 
 ## Test case
 
-Run preview, denied execute, and admitted execute against one stable source snapshot.
+Run preview, denied execute, and admitted execute against a source whose
+byte-prefix is captured before workflow/action-start recording.
 
 ## Acceptance criteria
 
