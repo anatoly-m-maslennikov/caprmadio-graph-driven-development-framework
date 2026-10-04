@@ -13,7 +13,7 @@ subjects:
     - "Project"
     - "Operations"
 version: 1
-updated_at: "2026-10-04 09:43:25 +0400"
+updated_at: "2026-10-04 09:47:25 +0400"
 relations:
   analysis_for:
     - CA-P-1236
@@ -772,4 +772,3 @@ Coverage1090/1284,194remain. ActualnextP1240/reservedA958 binds100whole,L106889â
 ## TLDR
 
 100whole records:humanapprovalR1516replacement,WFcoveragefix,explicitO/RMEDplacement/scopecorrectionandJournal/reportimplementation. Fiveprovisionalgroups;no test/rollback/Journalclaimpromotedasverifiedproof. Actualnext1240/A958bound;194recordsremaininthissourceandallotherunfinishedsourcespersist.
-

@@ -13,7 +13,7 @@ subjects:
     - "Project"
     - "Operations"
 version: 1
-updated_at: "2026-10-04 09:36:06 +0400"
+updated_at: "2026-10-04 09:47:25 +0400"
 relations:
   analysis_for:
     - CA-P-1228
@@ -764,4 +764,3 @@ Coverage890/1284,394remaining. ActualnextP1232/reservedA950 binds100whole,L10116
 ## TLDR
 
 100whole records,one explicit human request,five-parallel preference not actual platform proof. Two provisional groups retain queue ownership and source-versus-projection lookup. Reported504checks does not prove whole-run completion. Actualnext1232/A950 bound;1129/1118 remainActive.
-

@@ -13,7 +13,7 @@ subjects:
     - "Project"
     - "Operations"
 version: 1
-updated_at: "2026-10-04 09:39:09 +0400"
+updated_at: "2026-10-04 09:47:25 +0400"
 relations:
   analysis_for:
     - CA-P-1232
@@ -764,4 +764,3 @@ Coverage990of1284,294remaining. ActualnextP1236/reservedA954 binds100whole,L1043
 ## TLDR
 
 100whole assistantmessages;no newhumanacceptance. Threeprovisionalgroups retain truthfulhandoff,meaning-preserving representation and unresolvedcoverage. R1516Summarychoice stillpendinginthispacket;reported654checks≠731fullychecked/correct. Actualnext1236/A954bound.
-

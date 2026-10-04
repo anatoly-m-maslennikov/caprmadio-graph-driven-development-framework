@@ -17,7 +17,7 @@ subjects:
     - "Project"
     - "Operations"
 version: 1
-updated_at: "2026-10-04 09:43:25 +0400"
+updated_at: "2026-10-04 09:47:25 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
@@ -1387,4 +1387,3 @@ OwnA958,leafDone/result,1129rollup,nextactualroot-reserved boundedremainder. Not
 ### Definition of Done
 
 All100nativewhole/currentraw/text/role/time/count/aggregate andsaveddistinctnonemptydispositions pass. Input21412+176context=21588<35000,nullchannels/onepart each. Nextactual<=100/contextsafe<=35000/<=15min/rootuniqueIDs/exactsource/output/ownership/checks/directBLOCKS bound;94recordsafterward atnextfingerprintabove. EveryotherPRIMARY/worker/window/sourcefrontierpersist;no prematurewholeharvestpass. RootstrictYAML/headings/IDs/Done/fullcompletionBLOCKSDAG.1129/1118/1119/1130/1155requireduntilfullharvest/reconciliation. No truncation/skip/inventedunavailability or convertinghistoricalreportintoverifiedproof.
-
