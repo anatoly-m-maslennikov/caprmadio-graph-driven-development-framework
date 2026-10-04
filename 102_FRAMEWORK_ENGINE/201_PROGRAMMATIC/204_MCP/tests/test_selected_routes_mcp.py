@@ -17,7 +17,10 @@ TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(MCP))
 
 from selected_routes import (  # noqa: E402
+    ORIGINAL_SELECTED_ROUTE_NAMES,
+    QUERY_ROUTE_NAMES,
     SELECTED_ROUTE_NAMES,
+    SelectedRouteError,
     SelectedRouteAdapter,
     canonical_digest,
     load_selected_manifest,
@@ -174,7 +177,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                                   "parent_requested_run_id": step_run_id})
         return requested
 
-    def test_current_physical_manifest_freezes_all_thirteen_routes_through_queue_consumer(self) -> None:
+    def test_current_physical_manifest_freezes_the_original_thirteen_routes_through_queue_consumer(self) -> None:
         """The MCP source fixture must be sufficient for the independent queue.
 
         This copies only the immutable manifest and its pinned sources into a
@@ -207,7 +210,10 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 shutil.copyfile(source, destination)
 
             queue = SelectedExecution(project, handlers={})
-            for ordinal, route in enumerate(self.manifest["routes"], start=1):
+            original_routes = [route for route in self.manifest["routes"]
+                               if route["route"] in ORIGINAL_SELECTED_ROUTE_NAMES]
+            self.assertEqual(13, len(original_routes))
+            for ordinal, route in enumerate(original_routes, start=1):
                 run_id = f"freeze{ordinal:02d}"
                 execution = {
                     "mode": "execute", "request_id": f"request-{run_id}",
@@ -225,15 +231,17 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertEqual(route["route"], frozen["graph"]["route"])
                 self.assertEqual(graph["entry_step"], frozen["graph"]["entry_step"])
 
-    def test_manifest_is_full_closed_thirteen_route_projection_with_fresh_pins(self) -> None:
+    def test_manifest_is_full_closed_fifteen_route_projection_with_fresh_pins(self) -> None:
         contract = selected_manifest_contract(ROOT)
         self.assertEqual(self.manifest["manifest_ref"], contract["manifest_ref"])
         self.assertEqual(list(SELECTED_ROUTE_NAMES), contract["route_names"])
         self.assertTrue(contract["canonical_digest"]["self_field_omitted_from_digest"])
+        self.assertEqual(["route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions"],
+                         contract["query_source_admission_fields"])
         self.assertEqual(["from", "condition", "to"], contract["on_result_fields"])
         self.assertEqual("complete", contract["on_result_terminal_target"])
         self.assertEqual(list(SELECTED_ROUTE_NAMES), [entry["route"] for entry in self.manifest["routes"]])
-        self.assertEqual(13, len(self.manifest["routes"]))
+        self.assertEqual(15, len(self.manifest["routes"]))
         self.assertEqual(self.manifest["canonical_manifest_sha256"], canonical_digest(
             {key: value for key, value in self.manifest.items()
              if key not in {"canonical_manifest_sha256", "manifest_ref"}}))
@@ -253,6 +261,18 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertTrue((ROOT / pin["source_path"]).is_file())
 
         routes = {entry["route"]: entry for entry in self.manifest["routes"]}
+        admissions = self.manifest["query_source_admissions"]
+        self.assertEqual(list(QUERY_ROUTE_NAMES), [entry["route"] for entry in admissions])
+        self.assertEqual(["CA-P-1532", "CA-P-1535"], [entry["acceptance_frontier"]["atom_id"] for entry in admissions])
+        self.assertNotIn("CA-P-1543", {pin["atom_id"] for entry in admissions
+                                        for pin in [entry["acceptance_frontier"], entry["workflow"],
+                                                    *[item["step"] for item in entry["ordered_steps"]],
+                                                    *[item["action"] for item in entry["ordered_steps"]]]})
+        for admission in admissions:
+            route = routes[admission["route"]]
+            self.assertFalse(route["mutation_capable"])
+            for field in ("workflow", "ordered_steps", "ordered_actions"):
+                self.assertEqual(admission[field], route[field])
         for route in ("create_atom", "replace_atom", "change_atom_status"):
             self.assertEqual([], routes[route]["on_result"])
         self.assertEqual(
@@ -272,13 +292,55 @@ class SelectedRoutesMCPTest(unittest.TestCase):
              for edge in routes["build_applicable_methodology"]["on_result"]],
         )
 
+    def test_manifest_rejects_missing_or_third_query_source_admission(self) -> None:
+        """The two accepted frontier records are closed manifest evidence."""
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True) as temporary:
+            project = Path(temporary)
+            (project / ".git").mkdir()
+            control = project / ".caprmedio_caprmedio"
+            control.mkdir()
+            (control / "caprmedio_project_settings.toml").write_text(
+                '[paths]\ncontrol_root = ".caprmedio_caprmedio"\n'
+                'journal_root = ".caprmedio_caprmedio/_journal"\n', encoding="utf-8",
+            )
+            pins = {self.manifest["manifest_ref"], self.manifest["source_freshness"]["selected_source_registry_ref"]}
+            for route in self.manifest["routes"]:
+                pins.add(route["workflow"]["source_path"])
+                pins.update(item["step"]["source_path"] for item in route["ordered_steps"])
+                pins.update(item["action"]["source_path"] for item in route["ordered_steps"])
+                pins.update(item["source_path"] for item in route["native_action_calls"])
+            for admission in self.manifest["query_source_admissions"]:
+                pins.add(admission["acceptance_frontier"]["source_path"])
+            for relative in pins:
+                source = ROOT / relative
+                destination = project / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, destination)
+
+            for mutation in ("missing", "third"):
+                with self.subTest(mutation=mutation):
+                    candidate = {key: copy.deepcopy(value) for key, value in self.manifest.items()
+                                 if key not in {"manifest_ref", "canonical_manifest_sha256"}}
+                    if mutation == "missing":
+                        candidate["query_source_admissions"] = candidate["query_source_admissions"][:1]
+                    else:
+                        candidate["query_source_admissions"].append(
+                            copy.deepcopy(candidate["query_source_admissions"][0])
+                        )
+                    candidate["canonical_manifest_sha256"] = canonical_digest(candidate)
+                    (project / self.manifest["manifest_ref"]).write_text(
+                        __import__("json").dumps(candidate), encoding="utf-8",
+                    )
+                    with self.assertRaises(SelectedRouteError):
+                        load_selected_manifest(project)
+
     def test_every_selected_route_forwards_one_mutation_free_preview(self) -> None:
         for route in SELECTED_ROUTE_NAMES:
             result = self.adapter.invoke(route, self.request(route))
             self.assertEqual("prepared", result["outcome"])
             self.assertEqual(route, self.support.calls[-1]["operation_route"])
             self.assertEqual("preview", self.support.calls[-1]["mode"])
-        self.assertEqual(13, len(self.support.calls))
+        self.assertEqual(15, len(self.support.calls))
 
     def test_default_adapter_uses_shared_preview_support_without_an_executor(self) -> None:
         result = SelectedRouteAdapter(ROOT).invoke("create_atom", self.request("create_atom"))

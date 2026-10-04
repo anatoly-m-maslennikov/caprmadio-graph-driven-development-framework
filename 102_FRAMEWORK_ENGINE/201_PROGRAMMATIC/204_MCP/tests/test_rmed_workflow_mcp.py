@@ -22,13 +22,14 @@ D548_REQUIRED_TOOLS = frozenset({
     'reload_mcp_implementation', 'get_mcp_reload_status',
 })
 
-# CA-D-547 v4 is the reviewed admission boundary.  This independently fixed
+# CA-D-547 v5 is the reviewed admission boundary.  This independently fixed
 # tuple prevents the registration registry from making its own test pass.
 D547_ADMITTED_SELECTED_ROUTES = (
     'create_atom', 'update_atom', 'replace_atom', 'change_atom_status',
     'create_scope_unit', 'rename_scope_unit', 'move_scope_unit', 'remove_scope_unit',
     'run_implementation_workflow', 'revert_changes', 'build_entities_graph',
     'build_terms_graph', 'build_applicable_methodology',
+    'find_and_fetch_artifacts', 'find_and_fetch_journal_events',
 )
 D547_SELECTED_CONTROL_TOOLS = frozenset({
     'get_selected_workflow_run', 'get_selected_action_run',
@@ -61,6 +62,8 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(D548_REQUIRED_TOOLS <= actual_tool_names)
             self.assertTrue(set(D547_ADMITTED_SELECTED_ROUTES) <= actual_tool_names)
             self.assertTrue(D547_SELECTED_CONTROL_TOOLS <= actual_tool_names)
+            self.assertTrue(next(tool for tool in tools.tools if tool.name == 'find_and_fetch_artifacts').annotations.read_only_hint)
+            self.assertTrue(next(tool for tool in tools.tools if tool.name == 'find_and_fetch_journal_events').annotations.read_only_hint)
             self.assertEqual(
                 D548_REQUIRED_TOOLS | set(SELECTED_ROUTE_NAMES) | D547_SELECTED_CONTROL_TOOLS,
                 actual_tool_names,

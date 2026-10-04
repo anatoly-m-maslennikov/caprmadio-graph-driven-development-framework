@@ -404,7 +404,7 @@ class SelectedExecutionTests(unittest.TestCase):
         self.assertEqual(result["disposition"], "recording_pending")
         self.assertEqual(result["outcome"], "interrupted_pending")
 
-    def test_current_d547_manifest_verifies_all_thirteen_routes(self) -> None:
+    def test_current_d547_manifest_verifies_all_fifteen_routes(self) -> None:
         """Exercise the physical producer schema, not the legacy mock shape."""
         manifest_path = REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -425,12 +425,12 @@ class SelectedExecutionTests(unittest.TestCase):
                 self.fail(f"{route['route']} D547 binding was refused: {error}")
             else:
                 accepted.add(graph["route"])
-        self.assertEqual(len(accepted), 13)
+        self.assertEqual(len(accepted), 15)
         self.assertEqual(accepted, {route["route"] for route in manifest["routes"]})
         self.assertIn("run_implementation_workflow", accepted)
         self.assertIn("build_applicable_methodology", accepted)
 
-    def test_current_d547_all_thirteen_routes_pass_prequeue_freeze_validation(self) -> None:
+    def test_current_d547_all_fifteen_routes_pass_prequeue_freeze_validation(self) -> None:
         manifest_path = REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         frozen_routes: set[str] = set()

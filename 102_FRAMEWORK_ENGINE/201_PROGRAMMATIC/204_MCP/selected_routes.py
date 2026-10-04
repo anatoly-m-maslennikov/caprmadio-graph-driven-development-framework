@@ -14,18 +14,90 @@ from typing import Any, Callable, Mapping
 DEFAULT_CONTROL_ROOT = Path(".caprmedio_caprmedio")
 MANIFEST_FILENAME = "selected_workflow_bindings.json"
 PROJECT_SETTINGS_REF = DEFAULT_CONTROL_ROOT / "caprmedio_project_settings.toml"
-SELECTED_ROUTE_NAMES = (
+ORIGINAL_SELECTED_ROUTE_NAMES = (
     "create_atom", "update_atom", "replace_atom", "change_atom_status",
     "create_scope_unit", "rename_scope_unit", "move_scope_unit", "remove_scope_unit",
     "run_implementation_workflow", "revert_changes", "build_entities_graph",
     "build_terms_graph", "build_applicable_methodology",
 )
+QUERY_ROUTE_NAMES = ("find_and_fetch_artifacts", "find_and_fetch_journal_events")
+SELECTED_ROUTE_NAMES = (*ORIGINAL_SELECTED_ROUTE_NAMES, *QUERY_ROUTE_NAMES)
 _DIGEST = re.compile(r"^[0-9a-f]{64}$")
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$")
 _FRESHNESS_FIELDS = {
     "selected_source_registry_ref", "selected_source_registry_version",
     "selected_source_registry_digest", "selected_binding_ref", "selected_binding_digest",
 }
+_ORIGINAL_SELECTED_SOURCE_REGISTRY_REF = (
+    ".caprmedio_caprmedio/02_analysis/"
+    "CA-A-1142-ANALYSIS_RPRT--prepare-the-selected-source-to-rmed-handoff.md"
+)
+_ORIGINAL_SELECTED_SOURCE_REGISTRY_VERSION = 2
+_QUERY_SOURCE_ADMISSION_FIELDS = {
+    "route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions",
+}
+_QUERY_SOURCE_ADMISSION_SPECS = (
+    {
+        "route": "find_and_fetch_artifacts",
+        "acceptance_frontier": {
+            "atom_id": "CA-P-1532", "version": 2,
+            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md",
+            "digest": "b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432",
+        },
+        "workflow": {
+            "atom_id": "CA-O-158", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-158-CORE_META_MODEL-WORKFLOW--find-and-fetch-artifacts.md",
+            "digest": "2424aa7475d2e7f98006040dc0d5826702e641190c6535a834869c1fe5a7e536",
+        },
+        "ordered_steps": [{
+            "step": {
+                "atom_id": "CA-O-160", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-160-CORE_META_MODEL-STEP--run-the-artifact-query-and-fetch.md",
+                "digest": "a743a84fd24db32123ac8162e7a2178e6d83b1b727cbe54477b6020914537384",
+            },
+            "action": {
+                "atom_id": "CA-O-159", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-159-CORE_META_MODEL-ACTION--query-and-fetch-artifacts.md",
+                "digest": "3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08",
+            },
+        }],
+        "ordered_actions": [{
+            "atom_id": "CA-O-159", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-159-CORE_META_MODEL-ACTION--query-and-fetch-artifacts.md",
+            "digest": "3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08",
+        }],
+    },
+    {
+        "route": "find_and_fetch_journal_events",
+        "acceptance_frontier": {
+            "atom_id": "CA-P-1535", "version": 2,
+            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/15-CA-P-1535-TASK--accept-final-journal-query-source.md",
+            "digest": "6246b46d2961d795e29eeb224f01b14979434d4ad24cf3f4913c490268cf52dc",
+        },
+        "workflow": {
+            "atom_id": "CA-O-161", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-161-CORE_META_MODEL-WORKFLOW--find-and-fetch-journal-events.md",
+            "digest": "362b9d3848a796a14e7374cfa0bf0b561c4f2035b7b2bf87bd9b56fc97a6724d",
+        },
+        "ordered_steps": [{
+            "step": {
+                "atom_id": "CA-O-163", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/FIND_AND_FETCH_JOURNAL_EVENTS/CA-O-163-CORE_META_MODEL-STEP--query-the-stable-journal-event-snapshot.md",
+                "digest": "8d0238a1614f5888f2aa486038d271cc58db1d3f0d7014dece0baa53004a489c",
+            },
+            "action": {
+                "atom_id": "CA-O-162", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-162-CORE_META_MODEL-ACTION--query-journal-events.md",
+                "digest": "71301ecf9531c70adeba03d6cf7f39761a237a081cee43eb0f9f7ce40e12f9fe",
+            },
+        }],
+        "ordered_actions": [{
+            "atom_id": "CA-O-162", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-162-CORE_META_MODEL-ACTION--query-journal-events.md",
+            "digest": "71301ecf9531c70adeba03d6cf7f39761a237a081cee43eb0f9f7ce40e12f9fe",
+        }],
+    },
+)
 
 
 class SelectedRouteError(ValueError):
@@ -95,8 +167,9 @@ def selected_manifest_contract(root: str | Path | None = None) -> dict[str, Any]
             "self_field": "canonical_manifest_sha256",
             "self_field_omitted_from_digest": True,
         },
-        "outer_fields": ["schema_version", "source_freshness", "routes", "canonical_manifest_sha256"],
+        "outer_fields": ["schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"],
         "source_freshness_fields": sorted(_FRESHNESS_FIELDS),
+        "query_source_admission_fields": ["route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions"],
         "route_fields": [
             "route", "workflow", "ordered_steps", "ordered_actions", "native_action_calls",
             "entry_step", "on_result", "mutation_capable",
@@ -192,6 +265,48 @@ def _validate_route(root: Path, entry: Any) -> dict[str, Any]:
     return result
 
 
+def _validate_query_source_admissions(
+    root: Path, admissions: Any, routes: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Validate the two admission-frontier proofs without creating a registry."""
+    if not isinstance(admissions, list) or len(admissions) != len(_QUERY_SOURCE_ADMISSION_SPECS):
+        raise SelectedRouteError("selected query-source admissions must contain exactly two routes")
+    by_route = {entry["route"]: entry for entry in routes}
+    validated: list[dict[str, Any]] = []
+    for value, expected in zip(admissions, _QUERY_SOURCE_ADMISSION_SPECS, strict=True):
+        if not isinstance(value, Mapping) or set(value) != _QUERY_SOURCE_ADMISSION_FIELDS:
+            raise SelectedRouteError("query-source admission has an incomplete or unknown schema")
+        if value.get("route") != expected["route"]:
+            raise SelectedRouteError("query-source admission route order or identity differs")
+        route = by_route.get(value["route"])
+        if route is None or route["route"] not in QUERY_ROUTE_NAMES or route["mutation_capable"]:
+            raise SelectedRouteError("query-source admission does not bind one read-only selected route")
+        if not isinstance(value.get("ordered_steps"), list) or not isinstance(value.get("ordered_actions"), list):
+            raise SelectedRouteError("query-source admission definitions are malformed")
+        admission = {
+            "route": value["route"],
+            "acceptance_frontier": _validate_pin(root, value["acceptance_frontier"]),
+            "workflow": _validate_pin(root, value["workflow"]),
+            "ordered_steps": [],
+            "ordered_actions": [],
+        }
+        for item in value["ordered_steps"]:
+            if not isinstance(item, Mapping) or set(item) != {"step", "action"}:
+                raise SelectedRouteError("query-source admission Step binding is malformed")
+            admission["ordered_steps"].append({
+                "step": _validate_pin(root, item["step"]),
+                "action": _validate_pin(root, item["action"]),
+            })
+        admission["ordered_actions"] = [_validate_pin(root, item) for item in value["ordered_actions"]]
+        if admission != expected:
+            raise SelectedRouteError("query-source admission differs from the accepted source frontier")
+        for key in ("workflow", "ordered_steps", "ordered_actions"):
+            if admission[key] != route[key]:
+                raise SelectedRouteError("query-source admission definitions differ from the selected route")
+        validated.append(admission)
+    return validated
+
+
 def load_selected_manifest(root: str | Path) -> dict[str, Any]:
     """Load the immutable projection and verify its self digest and live source pins."""
     project_root = Path(root).resolve(strict=True)
@@ -200,7 +315,7 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
         manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
-    required = {"schema_version", "source_freshness", "routes", "canonical_manifest_sha256"}
+    required = {"schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"}
     if not isinstance(manifest, Mapping) or set(manifest) != required or manifest["schema_version"] != 1:
         raise SelectedRouteError("selected workflow binding manifest schema is invalid")
     if not isinstance(manifest["canonical_manifest_sha256"], str) or not _DIGEST.fullmatch(manifest["canonical_manifest_sha256"]):
@@ -215,18 +330,23 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
         raise SelectedRouteError("selected workflow binding manifest source freshness is incomplete")
     if not _DIGEST.fullmatch(freshness["selected_source_registry_digest"]) or not _DIGEST.fullmatch(freshness["selected_binding_digest"]):
         raise SelectedRouteError("selected workflow binding manifest freshness digest is invalid")
+    if (freshness["selected_source_registry_ref"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_REF
+            or freshness["selected_source_registry_version"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_VERSION):
+        raise SelectedRouteError("selected workflow binding manifest does not retain the CA-A-1142 registry authority")
     registry = _safe_path(project_root, freshness["selected_source_registry_ref"])
     if not registry.is_file() or hashlib.sha256(registry.read_bytes()).hexdigest() != freshness["selected_source_registry_digest"]:
         raise SelectedRouteError("selected source registry pin is stale")
     routes = manifest["routes"]
     if not isinstance(routes, list) or len(routes) != len(SELECTED_ROUTE_NAMES):
-        raise SelectedRouteError("selected workflow binding manifest does not contain thirteen routes")
+        raise SelectedRouteError("selected workflow binding manifest does not contain fifteen routes")
     validated = [_validate_route(project_root, entry) for entry in routes]
-    if tuple(entry["route"] for entry in validated) != SELECTED_ROUTE_NAMES or len({entry["route"] for entry in validated}) != 13:
+    if tuple(entry["route"] for entry in validated) != SELECTED_ROUTE_NAMES or len({entry["route"] for entry in validated}) != len(SELECTED_ROUTE_NAMES):
         raise SelectedRouteError("selected workflow route registry is incomplete or duplicate")
+    admissions = _validate_query_source_admissions(project_root, manifest["query_source_admissions"], validated)
     if canonical_digest(validated) != freshness["selected_binding_digest"]:
         raise SelectedRouteError("selected workflow route binding digest differs")
-    return {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness), "routes": validated,
+    return {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness),
+            "query_source_admissions": admissions, "routes": validated,
             "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
 
 
@@ -363,8 +483,16 @@ class _QueueBackedSelectedSupport:
             return {"disposition": "blocked", "outcome": "blocked", "diagnostics": [f"selected Run observation unavailable: {error}"]}
 
     def get_selected_action_run(self, request: dict[str, Any]) -> dict[str, Any]:
-        return {"action_run_id": request["action_run_id"], "disposition": "blocked", "outcome": "implementation_gap",
-                "diagnostics": ["shared action-Run observation is not yet published by the queue service"]}
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            manifest = load_selected_manifest(self.root)
+            observer = importlib.import_module("selected_action_observation")
+            return observer.observe_selected_action(self.root, request["action_run_id"], manifest)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"action_run_id": request["action_run_id"], "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Action observation is unavailable: {error}"]}
 
     def recover_selected_run_recording(self, request: dict[str, Any]) -> dict[str, Any]:
         try:
@@ -526,11 +654,13 @@ def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdap
 
     adapter = SelectedRouteAdapter(root, strict_manifest=False)
     selected_annotations = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
+    query_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
     observation_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 
     for route_name in SELECTED_ROUTE_NAMES:
         def add_route(route: str) -> None:
-            @server.tool(name=route, structured_output=True, annotations=selected_annotations)
+            @server.tool(name=route, structured_output=True,
+                         annotations=query_annotations if route in QUERY_ROUTE_NAMES else selected_annotations)
             def selected_route(request: dict[str, Any]) -> dict[str, Any]:
                 """Preview by default; execute requires exact sealed Operator authorization and never starts a worker."""
                 return adapter.invoke(route, request)
