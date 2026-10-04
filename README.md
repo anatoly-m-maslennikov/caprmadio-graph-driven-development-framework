@@ -41,7 +41,7 @@ Different tasks need different views →\
 derive them from one authoritative source →\
 load only the context needed without duplicating authority.
 
-Small files can still be ambiguous →\
+Natural-language phrases can be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
 explicit, checkable Claims.
 
