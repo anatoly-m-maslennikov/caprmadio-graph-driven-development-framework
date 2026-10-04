@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 07:30:00 +0400"
+version: 2
+updated_at: "2026-10-04 07:55:13 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1194
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -412,6 +413,22 @@ Retain the selected September15 same-ID continuation and CA-A-906's exact observ
 Use system Python standard library to parse this retained JSON, seek/read each indexed raw slice, decode all content parts, and verify each hash, timestamp, response_item/message kind, role and exact null channel. Verify24 distinct in-window messages with4 user/20 assistant,17126 raw bytes/7728 content characters and ordered aggregate SHA256026d8066395b64366334a186b03b858ec800b00889a282948b449f947b5ce7d8; verify two context-only predecessor records separately. Current binding already passed this input-integrity scenario; it does not claim substantive harvest.
 
 After saving A912 reread its24 unique coverage rows, decision/candidate source and supersession dispositions, exact processed/next frontier and all retained source frontiers. Verify actual new bound remainder input/output/ownership/estimate and direct readiness edges; mandatory Plan headings/frontmatter, unique IDs/sibling sequence numbers, immediate-parent placement and acyclic BLOCKS/completion graph must pass. Review affected1119/1130/1155 from observed results, keeping1126 Active. Ask root for full-parser verification under C293 and report actual limits without claiming unsupported parser success. Save actual verification results before Done.
+
+### Saved substantive result and next execution gate
+
+Durable CA-A-912v1 at `.caprmedio_caprmedio/02_analysis/CA-A-912-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md` saves all24 whole selected message dispositions with exact session/source/line/bytes/SHA256/timestamp/role/null channel/part count,2 completed1180 context-only dispositions,2 historical human decision groups and6 provisional operational candidates. D01 clarifies the historical whole-tree save target; D02 requests and approves the exact bounded design-challenge Plan. Machine skill context and assistant progress/test/Git/FPF claims are retained with their distinct provenance, never converted into independent human/current authority or execution proof. No selected fragment remains.
+
+All26 indexed slices passed individual raw hash/metadata/size checks;24 selected records passed4 user/20 assistant,17126bytes/7728characters and ordered aggregate SHA256026d8066395b64366334a186b03b858ec800b00889a282948b449f947b5ce7d8. Goal13, all active Project Principles, P032v5/P033v9/P034v6 and source Plan R1589v4/R1580v4/D460v6/D470v7/D481v4 were reread unchanged. Existing C293/C294 retained; no new current uncertainty/blocker/conflict required a Concern. No O/RMED/code/environment/Docker/FPF/Git/Journal work was performed.
+
+Actual next execution is Active CA-P-1194v1 in `04-CA-P-1194-TASK--harvest-the-next-first-partition-session-packet.md`, same immediate parent1126, one AI Agent/<=15-minute estimate and reserved output CA-A-915. It binds whole line51030's42672raw bytes/41960characters with exact raw SHA256cfe949bcc10c37371aae9dbc46db394a8e0ca4a36eed443ee2e8defebdaa0309 and3 context-only completed1190 antecedents.1190 directly blocks1194;1194 directly blocks1119/1130/1155. This report is entirely unharvested. Following whole record51037,bytes[321042732,321043177),2026-09-04T13:43:24.896Z,user/null/1part,hash0838369b77722ed66ef347bb02fad1e1a2a5afb244b31207177b666b79183cd8,445bytes/65characters, was independently verified for the next binding frontier.
+
+Immediate parent1126 roll-up v5 saves combined59 canonical dispositions,1810 refined substantive original-main records remaining/1818 original preflight predicate, full source/window/continuation provenance and unchanged Active status. Affected1119v1/1130v1/1155v1 were reread; Active1126 and1194 outgoing BLOCKS facts retain their readiness gates, so no methodology stage is released. Root was asked for full-parser/whole-Epic DAG under C293; local saved-output/affected-readiness verification is recorded separately below before Done.
+
+### Actual saved-output verification
+
+System Python standard-library saved-output check passed:24 unique substantive coverage rows match bound line/byte/hash/timestamp/role/null channel/part count and nonempty disposition;2 context-only rows; mandatory Analysis Summary/Question/Scope/Approach/Results/TLDR headings; exact whole51030 next-report and3 context/following51037 raw integrity; mandatory owned Plan frontmatter/headings, immediate parent1126, unique sibling IDs/sequence numbers; direct1190->1194 and1194->1119/1130/1155 readiness declarations; affected owned-edge graph acyclic; parent1126 remains Active. No full-parser or whole-Epic DAG success is claimed; root was asked to perform its verification under C293. A routine diagnostic row-splitting error was corrected before the passing saved-output check and did not change coverage.
+
+Substantive harvest/binding and owned verification completed in approximately14 minutes, within the <=15-minute estimate.1190 is Done in its parent's reserved done directory;1194 is the actual unexecuted next packet. This leaf's completed24 dispositions do not close the59-record partial parent, the1810 refined original-main remainder, any other retained source/window/continuation frontier or methodology gates.
 
 ## Details
 

@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition primary session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 07:31:00 +0400"
+version: 2
+updated_at: "2026-10-04 08:00:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1197
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -105,6 +106,12 @@ After harvest reconcile CA-A-913's processed keys against all 12 line/hash pairs
 Packet selection is >=90% confidence with no unresolved Operator choice. Below 90%, check live Goal/Principles then record the safe authorized choice in C/Question if needed. Actual permission/runtime/evidence/authority blockers require C/Problem or C/Conflict, truthful postponement and exact frontier. Request an unused Concern ID from the root only for an evidenced encountered issue; historical reports and normal provisional candidate dispositions are not invented current Concerns.
 
 ## Details
+
+### Execution result and verification
+
+Root substantively read all12 complete native text records/4613 characters and saved CA-A-913v1 with12 exact provenance identities and12 nonempty dispositions. Selected raw aggregate SHA256d1a603c61384bceb81114dddb7bf3a30923dda75bfddea58e3723889dfca8e49 matched; every raw hash/time/role/null channel and character count passed. Historical human RMED/O separation/tier authoring choices remain provisional to later supersession; assistant14-Atom/Journal/check reports remain unverified. Two reusable authoring/decision-handoff intents are saved, not current O/RMED authority. Actual CA-P-1197/A918 binds the next complete input from24154, with verified native identities and1192→1197→1119/1130/1155 gates. Parent1128 stays Active;1151 source canonical messages remain at this completed frontier, including the bound next packet. All other corpus frontiers remain open; A917 supplies the single candidate's later no-canonical-window disposition without asserting historical identity.
+
+The live Goalv13 was reread; no changed governing revision or uncertain new authority choice was observed. Root's saved-carrier strict YAML/exact headings/fields/unique IDs/Done-placement/completion-DAG diagnostic passed73 Plans and11 supporting carriers before final placement, and is rerun on the final saved bytes. Completed within<=15 minutes. No new Concern, authority authoring, engine/environment/Docker change or save-Tool receipt belongs to this leaf; root handles direct Git/Journal provenance separately.
 
 ### Definition of Done
 

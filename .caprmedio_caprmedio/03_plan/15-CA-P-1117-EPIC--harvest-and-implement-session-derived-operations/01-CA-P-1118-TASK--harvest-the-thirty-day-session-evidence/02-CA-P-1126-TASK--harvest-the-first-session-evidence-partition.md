@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 4
-updated_at: "2026-10-04 07:31:00 +0400"
+version: 5
+updated_at: "2026-10-04 07:52:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -83,6 +83,16 @@ The following wholly unprocessed message is line51030,bytes[320947802,320990474)
 Retain both source-count predicates: the original preflight counted1877 canonical original-main first-partition records including machine context,1842 after1180. Root's shared index refines this original-main count to1869 after excluding8 later machine environment-context records;1834 indexed substantive records remain at line50360. The aggregate1949 PRIMARY first-partition count also includes other primary sources. Root owns durable exclusion/index verification in CA-A-910. The temporary index does not replace original bytes/A905 or semantic harvest. Do not subtract a whole source because one packet is complete.
 
 Live Goal/Principle/permission/Plan authority revisions were reread and remain as recorded in CA-A-906. Affected1119v1/1130v1/1155v1 were reread; authoritative outgoing edges on this Active parent and new Active1190 retain strict incoming readiness, so none can start from1180's local completion. This parent remains Active until every required source/window/fragment/remainder has a substantive disposition. Existing C293/C294 retain their dispositions; no new uncertainty required a Concern. Root owns full-parser and authorized Git/Journal saving; packet work authored no O/RMED/code/environment/Docker/FPF changes and no save-Tool receipt.
+
+### Second substantive packet result and next whole-report remainder
+
+CA-P-1190 harvested24 exact canonical original-main records50360–50965,4 user/20 assistant,17126raw bytes/7728content characters; ordered aggregate SHA256026d8066395b64366334a186b03b858ec800b00889a282948b449f947b5ce7d8. Durable CA-A-912v1 at `.caprmedio_caprmedio/02_analysis/CA-A-912-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md` saves24 unique complete provenance/disposition rows,2 predecessor context-only rows,2 historical human decision groups,6 provisional operational candidates and assistant outcome/traceability claims. Machine-injected skill context is not independent human intent; historical tests/Git/FPF outcomes remain reports rather than execution proof. All source/window/continuation frontiers are retained. Combined1180+1190 substantive canonical coverage is59; no selected fragment remains.
+
+Actual next execution child is `04-CA-P-1194-TASK--harvest-the-next-first-partition-session-packet.md`, CA-P-1194v1, one AI Agent/<=15-minute estimate, output reserved CA-A-915 at `.caprmedio_caprmedio/02_analysis/CA-A-915-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`. It binds whole line51030,bytes[320947802,320990474),2026-09-04T12:33:12.813Z,assistant/null/1part,hashcfe949bcc10c37371aae9dbc46db394a8e0ca4a36eed443ee2e8defebdaa0309,42672raw bytes/41960characters, plus3 completed1190 context-only antecedents. Raw integrity/size was checked for binding; report content is unharvested. Its following source frontier is verified line51037,bytes[321042732,321043177),2026-09-04T13:43:24.896Z,user/null/1part,hash0838369b77722ed66ef347bb02fad1e1a2a5afb244b31207177b666b79183cd8,445bytes/65characters.1194 must bind the actual following execution packet before Done.
+
+Both original-main count predicates remain:1877 original including machine context minus59 leaves1818;1869 refined910 excluding8 later machine environment-context records minus59 leaves1810 substantive indexed records. Completing1194's1 would leave1817/1809, not processed yet. Aggregate1949 PRIMARY includes other sources. All other1658 retained905 file rows/worker supporting context/C294 identity/continuation overlap retain their exact manifest body/window frontiers. No whole source file is subtracted.
+
+1190 directly blocks1194; Active1194 directly blocks1119/1130/1155. Those three livev1 dependents were reread, and outgoing authoritative edges retain incoming readiness. This Active parent still blocks them; local packet completion cannot unlock methodology. Goal/Principle/permission/source Plan revisions remain as912 records. Existing C293/C294 remain; no new current issue needed a Concern. Root owns full-parser/whole-Epic DAG and authorized saving; this worker authored no O/RMED/code/environment/Docker/FPF/Git/Journal changes.
 
 ## Details
 

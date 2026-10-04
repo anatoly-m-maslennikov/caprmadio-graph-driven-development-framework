@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 4
-updated_at: "2026-10-04 07:35:00 +0400"
+version: 5
+updated_at: "2026-10-04 08:00:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -71,6 +71,10 @@ All other 1657 retained CA-A-905 rows keep their exact metadata admission, avail
 Readiness facts: CA-P-1153 BLOCKS CA-P-1182; completed CA-P-1182 BLOCKS CA-P-1192 and the existing CA-P-1119/CA-P-1130/CA-P-1155 gates. Active CA-P-1192 BLOCKS those same three downstream gates; this Active parent also retains its direct gates, and CA-P-1118's stage gate remains. Their current objectives/readiness were reviewed against CA-A-908: full harvest and current-source reconciliation remain required. Standard-library functional checks passed for both exact packets, all12 saved processed keys/dispositions, mandatory headings/properties, unique IDs, decomposition/Done placement, final newline and acyclic completion graph. Full YAML parsing was not claimed. Current governing revisions matched the binding; historical reported issues remain later reconciliation evidence, with no new current blocker or Concern encountered.
 
 ## Details
+
+### Second substantive packet result
+
+CA-P-1192 is Done; CA-A-913v1 retains all12 complete native records/4613 characters and two provisional reusable candidates. Combined source substantive coverage is24 messages;1151 source third-partition messages remain from24154. Actual nextCA-P-1197/A918 is bound with explicit1192→1197 and1197→1119/1130/1155 readiness. Binding does not add coverage. All other PRIMARY/worker source frontiers remain unfinished. A917 proves the historical identity candidate contributes0 canonical messages in all monthly partitions; C294 remains a justified nonblocking broader-identity limitation. This parent remains Active; no methodology/implementation stage is unlocked.
 
 ### Definition of Done
 
