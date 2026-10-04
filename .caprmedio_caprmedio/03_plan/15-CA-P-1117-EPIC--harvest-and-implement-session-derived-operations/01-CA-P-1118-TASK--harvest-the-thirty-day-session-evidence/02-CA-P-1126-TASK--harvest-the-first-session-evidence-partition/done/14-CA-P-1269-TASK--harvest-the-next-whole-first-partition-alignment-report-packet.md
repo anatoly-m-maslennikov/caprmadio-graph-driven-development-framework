@@ -10,7 +10,7 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next whole bounded first-partition alignment-report harvest"
   depends_on:
@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Atom/Content Role: Plan"
 version: 1
-updated_at: "2026-10-04 11:39:54 +0400"
+updated_at: "2026-10-04 12:02:51 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
@@ -489,6 +489,10 @@ SystemPythonstandard-library seek/readeachselected/context byteinterval; verify 
 After saving987 compare all26savedrowfingerprints/nativeparts/complete-reportsemantics/literalintent/annotationtargets/antecedents/groups/claims/frontiers againstoriginalbytes, fullcontext andactualnextbinding. Verify mandatoryAnalysis/Planheadings/oneDoD/oneEOFnewline/no trailingwhitespace,immediateparent/uniqueIDs/siblingsequence andacyclicBLOCKS+child-completionedges. Review1119/1130/1155 readiness;1126Active. Record passing savedchecks/real firstandterminalclocks includingpersistence/Done/parent/nextclosure. RootstrictfullYAML/full-EpicDAG/save separate.
 
 ## Details
+
+### Execution clock
+
+Actual first-clock timestamp is unavailable from the worker tool receipts and is not inferred. Actual terminal clock: 2026-10-04 12:02:51 +0400. Exact elapsed duration is unavailable for that reason; the terminal state includes approximately four minutes of root-checkpoint coordination wait and exceeded the <=15-minute estimate.
 
 ### Definition of Done
 

@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 11
-updated_at: "2026-10-04 11:53:00 +0400"
+version: 12
+updated_at: "2026-10-04 12:11:15 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,18 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current superseding checkpoint:62 substantive packets.3783 unique PRIMARY dispositions plus279worker dispositions =4062total. Original-main first619/second624; continuation second289/third836/final1284, plus72README/59TOOL_RfinalPRIMARY. PRIMARYbaseline6588 leaves2805unharvested; workerbaseline6423 leaves6144. FinalPRIMARY1415/1415 complete; finalworkers279/4051,3772remain. Futurebindings andmetadata index grantzero semanticcoverage.
+
+Latest1269/A987(26whole,5groups),1270/A988(53whole,6groups),1271/A989(48whole,6groups) add127dispositions/17provisionaloverlappinggroups, bringing historicaloverlappinggroups to297—not297adopted or deduplicatedOperations. A987preserves whole23037report and actuallaterhumanconflict/priorities/filename-migration directions; A988separates historicalformattingtimestampdirection andunresolvedcross-scope-movereports; A989preserves actualsemanticQA, false-positivewithdrawals, completeSubjectinventory and guardedpreviewfixer.
+
+Actualnextboundleaves:1290/A1008(firstonewhole338charrecord withthreewholepriorcontexts);1291/A1009(second32whole/32777+1891=34668characters,exactroot-frozenbinding);1292/A1010(third60whole/31913+1194=33107);1288/A1006(final77workerwhole/34462+469=34931). These bindings are not completedharvest. First1250refined/1258original-main remain; second470continuation; third339continuation; final3772workers. Allothersource/windowfrontiers,candidateidentitydisposition andpostcutoffamendments persist. Parents1126–1129/1118Active;1119/1130/1155blocked.
+
+Actualreceipts:1269terminal12:02:51+0400 butfirstclock unavailable, so exactelapsed/within15minute claimunproved; C310retains thetiminglimitation andcorrectednexttimestamp withoutinventingaclock. P1270first11:49:48,completefull-nativepersistence11:59:21=9m33, correctedDoneplacement12:01:33=11m45; C309preserves earlierprematurereceipts. P1271first07:54:54Z,fullnative/saved/fullstrict08:05:19Z=10m25, savedreceipt08:05:20Z=10m26. C308records rejectedoversizedreadtransports; nonecountasread/savedsemanticcoverage. Laterstrictcarrierchecks pass130Plans/79supportingCarriers afteractualcorrections.
+
+Actualpriorcheckpoint59commits1edf6433a(10Analysis/Concernstates) andbaf5880e3(16Plan/Concernstates) areindependentlymatched toGit/savedbytes/sealedrecoveredJournalevents, bringingownedrecordedstates to235. C307recorded correctedbasename-target staging; allownedPlans savedinsecondcommit. SharedJournal Gitsave stayspendingdueunrelatedpre-existingevents. Thisround's actualmechanicalGit/recovered-stateproof isrecordedseparately, not save-Toolreceipts. No O/RMEDauthoring, implementation, servicemutation orfullDocker validation executedunderthisEpic.
+
+All lower checkpoints are historical and superseded.
 
 Current superseding checkpoint:59 substantive packets.3656 unique PRIMARY dispositions plus279 worker dispositions =3935 total. Original-main first593/second624; continuation second236/third788/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves2932 unharvested; worker baseline6423 leaves6144. Final PRIMARY1415/1415 complete; finalworkers279/4051,3772remain. Metadata indexing, machine-context refinements and futurebindings do not grant semantic coverage.
 

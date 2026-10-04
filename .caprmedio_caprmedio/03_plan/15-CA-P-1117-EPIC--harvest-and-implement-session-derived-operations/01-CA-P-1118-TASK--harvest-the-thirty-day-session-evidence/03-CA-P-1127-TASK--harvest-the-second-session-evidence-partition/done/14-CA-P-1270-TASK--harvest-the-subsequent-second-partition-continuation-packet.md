@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Subsequent second-partition continuation session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 11:28:17 +0400"
+version: 2
+updated_at: "2026-10-04 12:01:33 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1291
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -132,6 +133,12 @@ PreserveallotherA905event/bodyfrontiers/17primary1642workers/original3continuati
 SystemPythonstdlibseek31271593/read12784941bytes/parsecompleteJSONL/applypredicate mustreproduce53orderedlines/bytes/timestamps/10user43assistant/null/34072joinednativechars/53parts/max6174/selectedconcatSHA/firstlast/individualrawtextpartfingerprints. Fourwholecontext801checkedseparately. Independentnative/savedA988identities/parts/context/nonemptydispositions/completewhole-reportstatements/groups/choices/headings/cleanEOFrequired. Reportsnotcurrentproof/silentadoption/semanticdedup.
 
 Checkone-agent<=15min/requiredPlanproperties/headings/Doneplacement/sequence14-parent1127/exactoutput/actualfollowingremainder/BLOCKSacyclicity/P1127rollup/affecteddependents. Terminalclockincludescarrierpersistence/checks,notearliersemanticcompletion;overrun/blockertruthfulunfinishedstate/currenttypedProblem/boundedclosure. RootstrictsavedYAML/fullDAG/Git/Journalsaveseparate.
+
+### Completion record
+
+Intermediate receipt: the first carrier/check checkpoint completed at `2026-10-04T11:54:36+0400`, elapsed `4m48s`, including root-coordination wait. It did not yet retain the complete text copy.
+
+Actual first clock remains `2026-10-04T11:49:48+0400`. Final carrier/check clock: `2026-10-04T12:01:33+0400`; total elapsed `11m45s`. CA-A-988 v1 now durably retains full original native text and every original part for all 53 records, plus all four complete contexts, in a JSON evidence fence. Saved-readback reproduced 53 messages, 10 user/43 assistant, 53 parts, 4 contexts, 34072 text characters and an A988 size of 147323 bytes. Native readback reproduced 53 raw records / 55076 selected-record bytes, current source size 1135092986 bytes, source interval 12784941 bytes, maximum text 6174, and raw-record concatenation SHA-256 `c80a2ca7d662b920e58cb5ff33a3af35cd49c4d219e23e27582015a619ca0814`. Strict saved-layout check then confirmed the Done carrier exists only under this `done/` path and is absent from the Active path. CA-P-1291/CA-A-1009 remains the actual reserved next bounded leaf; it begins L5675 and carries the 470-record remainder. This leaf did not re-run semantic review or claim historical reports as current proof.
 
 ## Details
 
