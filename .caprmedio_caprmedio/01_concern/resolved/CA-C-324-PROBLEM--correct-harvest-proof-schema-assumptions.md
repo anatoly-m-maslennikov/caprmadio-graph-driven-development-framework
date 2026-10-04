@@ -12,7 +12,7 @@ subjects:
   depends_on:
     - "Artifact"
 version: 2
-updated_at: "2026-10-04 11:46:51 +0000"
+updated_at: "2026-10-04 11:48:37 +0000"
 relations:
   concern_about:
     - CA-P-1118
@@ -39,6 +39,8 @@ The first proof returned nonzero after the independently successful P1301 proof,
 The corrected proof requires complete original_parts/full_text for every saved A1024 source record and all full saved contexts; it permits exact metadata-only future selected records and opens each directly from its frozen native source. It verifies raw/text/role/time fingerprints, prefix hashes, per-source/global aggregates, all98 substantive dispositions, current/next disjointness and full following frontier. Both the current98/context2 and next60/context2 native/saved proofs then passed. No missing source originals or Tool implementation defect was inferred.
 
 ## Blast radius
+
+The first checkpoint 93 recovered-state preparation used an over-escaped numeric Version regex and stopped before any Journal append with an AttributeError. Replacing the ephemeral regex with an explicit digit class recovered all 47 actual Version values. The existing Journal API then appended exactly 47 sealed recovered-state events; predicted receipts, reopened NDJSON records/digests and actual saved bytes versus commit fc6e569608a40cfc8499ca84f6f4cf77df3e4174 all matched. No failed invocation was a receipt, save-Tool completion or delivered Tool change.
 
 The checkpoint 93 save whitelist comparison initially counted Git's rename-collapsed listing as 47 paths against 51 explicit old/new paths and stopped before committing. The exact staged paths are correct: disabling rename detection exposes all 51 owned paths, including four former Active carriers and their Done destinations. That comparison passed with no unrelated staged paths. No unstage, reset, discarded change or false commit receipt occurred.
 

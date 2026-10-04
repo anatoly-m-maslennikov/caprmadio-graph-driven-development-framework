@@ -17,7 +17,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 19
-updated_at: "2026-10-04 11:44:51 +0000"
+updated_at: "2026-10-04 11:48:37 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -52,7 +52,7 @@ Actual next Active, unexecuted leaves are P1314/A1032, P1315/A1033, P1316/A1034,
 
 Actual original clocks were retained. Interrupted P1310–1313 and completed P1318/P1319/P1322 exceeded their estimates; C330–335/C338 retain the actual interruption, transport/schema/race recovery and elapsed evidence. P1320/P1321/P1323 completed within their original fifteen-minute estimates. C331 remains active/nonblocking for disclosed interruption/overrun; the other assigned recovery Concerns are physically resolved after their required proof. No clock reset or missing read was accepted.
 
-Root integration compared every one of the 232 new selected native identities and supplied timestamp/role/line/offset/bytes/raw/text metadata to the frozen index: no overlap, context credit or future-binding credit. The agents' native/saved/current-authority/Carrier/placement checks passed; the shared duplicate-rejecting YAML, registered headings/fields, unique-ID and completion/BLOCKS-DAG check passed 167 Plans and 139 supporting Carriers. These are the required persistence/provenance gates, not an added semantic-review stage or full-month acceptance. Scoped whitespace/EOF and mechanical Git/sealed recovered-state saving follow before redispatch.
+Root integration compared every one of the 232 new selected native identities and supplied timestamp/role/line/offset/bytes/raw/text metadata to the frozen index: no overlap, context credit or future-binding credit. The agents' native/saved/current-authority/Carrier/placement checks passed; the shared duplicate-rejecting YAML, registered headings/fields, unique-ID and completion/BLOCKS-DAG check passed 167 Plans and 139 supporting Carriers. All 51 exact owned old/new paths passed scoped whitespace checks; all 47 present carriers have exactly one terminal newline. Mechanical commit fc6e569608a40cfc8499ca84f6f4cf77df3e4174 matches all 47 actual saved carrier states. The existing Journal API appended and reopened 47 sealed recovered-state events; prediction/receipt/digest/Git/saved-byte comparisons passed, bringing owned recorded states to 408 before this receipt update. These are required persistence/provenance gates, not an added semantic-review stage, save-Tool receipt or full-month acceptance.
 
 Prior checkpoint 83 was saved in fac583df1850d7f2d42fc9a35c9ef7095fe0d51b with 22 actual saved recovered Carrier states, bringing owned recorded states to 361. Shared Journal Git save remains pending because it also contains unrelated pre-existing events; no save-Tool receipt is fabricated. No O/RMED authoring, Engine implementation, Settings/service mutation or complete Docker verification has executed under this Epic.
 
