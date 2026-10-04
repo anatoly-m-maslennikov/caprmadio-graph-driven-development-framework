@@ -18,8 +18,9 @@ relations:
   concern_about:
     - CA-P-1150
     - CA-P-1175
-version: 2
-updated_at: "2026-10-04 07:01:57 +0400"
+    - CA-P-1176
+version: 3
+updated_at: "2026-10-04 07:08:00 +0400"
 ---
 # Summary
 
@@ -36,6 +37,7 @@ The current Project Python environment cannot execute the intended PyYAML-based 
 - A single isolated `uv run --no-project --with pyyaml` attempt failed with cache rename `Operation not permitted (os error 1)` under `.caprmedio_tmp/cache/uv`. No additional installation, permission retry or environment repair was performed.
 - App metadata listing independently succeeded: 20 recent records plus 6 pinned records, no unavailable host/source reported. This Problem does not invalidate those source IDs.
 - At 2026-10-04 07:01:57 +0400, the existing healthy Docker worker independently parsed all 60 current Epic Plan carriers with PyYAML 6.0.3 and duplicate-key rejection. Required fields/headings, unique Atom IDs and the combined completion DAG passed. The check read existing Project carriers; it did not repair the local environment or change dependencies.
+- CA-P-1176 moved the completed metadata Plan file and every matching bundle file into the declared Done location with apply_patch. Removing the two obsolete empty directories at the old CA-P-1125 location reported `Operation not permitted`; they contain no remaining carrier files. No permission retry or filesystem repair was attempted. This observed filesystem limitation is retained alongside the earlier cache-rename permission failure; it does not invalidate saved metadata, alter descendant Status, or claim that the empty directories were removed.
 
 ## Blast radius
 

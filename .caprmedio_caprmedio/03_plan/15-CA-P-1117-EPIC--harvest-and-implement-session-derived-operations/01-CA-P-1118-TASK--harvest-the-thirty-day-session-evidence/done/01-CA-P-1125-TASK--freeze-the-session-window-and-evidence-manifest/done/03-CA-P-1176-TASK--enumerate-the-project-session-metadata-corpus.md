@@ -10,15 +10,15 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Project session metadata corpus"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 06:57:00 +0400"
+version: 2
+updated_at: "2026-10-04 07:08:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1125
@@ -64,9 +64,22 @@ Compare saved Analysis and supplemental JSON rows with the admitted metadata set
 
 The expected next execution frontier is actual bounded content harvest under CA-P-1126–1129 using this manifest: <=100 relevant human/assistant messages per packet with an exact source/event/cursor boundary. Do not generate an endless chain of unbound preflights. Any actual discovery limit, inaccessible primary evidence or unresolved relevance choice gets its typed Concern, bounded next leaf and truthful parent state.
 
+### Execution result and actual verification
+
+Completed at 2026-10-04 07:05:00 +0400 within the <=15-minute bound. The native snapshot contains2045 files (2010 active,35 archived); all first records parsed successfully with the system Python standard library. The discovery pass read44414591 first-record bytes in1.0198seconds, with no file/time/per-record/aggregate limit reached. Durable CA-A-905 and supplemental JSON retain1659 files /1657 IDs:1466 exact current cwd,4 app-verified historical-ID files,31 current repository matches,150 verified metadata parent chains,7 independently corroborated historical repository matches, and1 unresolved candidate. Seventeen files are primary VS Code sources;1642 are worker sources.
+
+All seven initial app IDs are present, with both continuation files for the main and structure sessions. Exact paths, creation/cwd metadata, bytes/modification, parent/repository relevance basis, availability and first-body harvest frontier are retained in the Analysis itself. No body, credential or denied data was read; no app content or archived listing was needed. The known initial2011-file active enumeration and this2010-file active snapshot are different observed metadata frontiers, not inferred source loss. Snapshot counts are not a claim that the live native directory cannot change.
+
+CA-C-294 records the safe candidate disposition under the90% policy. Root directed that source-identity confirmation is the first bounded harvest check, not an endless new metadata preflight; all four partition Plans/preflights now bind that candidate and this manifest. Metadata enumeration is complete and CA-P-1125 closes; no partition, methodology or implementation stage is declared complete.
+
+Verified the saved Analysis's JSON against the supplemental manifest, the seven input IDs, represented continuation identities, existing source paths and matching first session_meta IDs. The frozen window is unchanged; no app cursor was invented. Verified mandatory headings, unique Analysis/Concern/Plan IDs, explicit parent and acyclic BLOCKS/decomposition graph with system Python. Root separately reported the prior60-Plan snapshot passed PyYAML6.0.3 duplicate-key/field/headings/graph checks in the existing healthy Docker worker; local full-parser availability remains limited under CA-C-293. No local environment repair, save-Tool receipt, implementation or Journal append is claimed.
+
+Next: CA-P-1151–1154 bind actual content packets for CA-P-1126–1129 using CA-A-905; every unprocessed source or event boundary remains substantive harvest work.
+
+Carrier files for CA-P-1125 and its three Done children were relocated together into the parent's declared Done bundle; descendant Status values did not change silently. The old two empty directories could not be removed: `rmdir` returned `Operation not permitted`. CA-C-293 retains this actual filesystem limitation. No carrier file remains at the old location and no directory-removal success or permission repair is claimed.
+
 ## Details
 
 ### Definition of Done
 
 This leaf is not Done if the native enumeration lacks counts/bounds and an exact frontier; an admitted or candidate metadata source disappears without disposition; the seven known IDs are lost; the durable CA-A-905 manifest is missing; source completeness is inferred only from size/timestamps/ID; unrelated bodies or denied data are accessed; required unfinished discovery lacks a bounded remainder and BLOCKS edges; the parent or harvest gates overstate coverage; verification fails; or execution exceeds <=15 minutes without narrower unfinished Plans.
-

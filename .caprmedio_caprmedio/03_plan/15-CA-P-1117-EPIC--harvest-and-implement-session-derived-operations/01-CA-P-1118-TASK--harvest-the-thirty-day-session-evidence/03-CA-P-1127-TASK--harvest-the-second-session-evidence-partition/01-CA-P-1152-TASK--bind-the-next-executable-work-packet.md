@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:36:25 +0400"
+version: 2
+updated_at: "2026-10-04 07:05:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
@@ -45,6 +45,16 @@ Create exactly one new execution child Plan in the parent's same-stem folder wit
 Wire this preflight as blocker of the new child. Wire generated work/repair/re-review leaves as blockers of affected next dependent Plans and their first executable descendants: preparation completion must not unlock the next substantive packet. Parent completion still requires its declared substantive outputs and every required child.
 
 Before declaring this preflight Done, verify current headings/properties, immediate parent, sufficient input/output/verification, <=15-minute estimate and BLOCKS acyclicity. Record child ID/path and verification result in this leaf, then review and update affected dependents. Every issue gets a typed C atom. Below 90%, check Goal/Principles, then record the best safe in-scope choice in C/Question if still uncertain; blockers/failures use C/Problem and incompatible authority C/Conflict.
+
+### Bound corpus source and next execution frontier
+
+The completed metadata source is CA-A-905 at `.caprmedio_caprmedio/02_analysis/CA-A-905-ANALYSIS_RPRT--inventory-the-session-evidence-corpus.md`, v1; supplemental rows are `.caprmedio_tmp/CA-P-1117/manifest-CA-P-1176.json`. The snapshot contains 1659 retained files /1657 IDs, including all seven app-linked primary IDs and two continuation pairs. Read this durable source, not only the seven-session initial slice. The manifest distinguishes 17 primary files and1642 worker files; copied worker context does not establish a new Operator decision.
+
+Bind the actual first <=100 relevant human/assistant-message packet to exact source paths, event timestamps and byte/line or app cursor boundaries for this Plan's date partition. Do not exclude older-created sessions by metadata date, mistake current app updated_at for event coverage, or drop native continuations without overlap evidence. Include corroborated worktree/repository and metadata-parent-chain sources when relevant. Carry every still-unprocessed source/event frontier into actual bounded harvest/remainder Plans; do not mark this partition Done from corpus discovery.
+
+CA-C-294 binds candidate session `01a01cb6-4ee4-7553-b68d-0823dda35094`. Source-identity confirmation is its first bounded harvest check before adopting any content; record Project identity or a truthful unrelated/unavailable disposition and reuse that single result across partition Plans. Candidate uncertainty is not an authorization to consume unrelated Project content. No new generic metadata preflight is required: enumeration over both verified native roots is complete.
+
+Preserve CA-P-1117's frozen window and explicit post-cutoff Operator corrections as separate amendments. Metadata gates are Done; downstream stage gates still require substantive harvest and its actual remainders.
 
 ## Details
 
