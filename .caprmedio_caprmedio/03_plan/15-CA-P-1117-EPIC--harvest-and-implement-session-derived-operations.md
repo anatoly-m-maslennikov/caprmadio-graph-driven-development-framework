@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 6
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 8
+updated_at: "2026-10-04 21:59:34 +0000"
 relations: {}
 ---
 # Summary
@@ -117,7 +117,7 @@ Authoring disposition: the Plan files have been created and independently review
 - CA-P-1124: Verify the fifteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
 - CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
 
-The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source O Action/Step/Workflow definitions and their RMED are not yet authored: their absence is an explicit dispatch blocker for dependent review/implementation, not bound evidence.
+The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
 
 ### Execution controls
 
@@ -134,11 +134,13 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 ### Current execution frontier
 
-Centralized carrier cutover: CA-D-549/CA-D-550 establish `_journal/` and `_projection/`; current Journal, Applicable Methodology, signature-report, historical graph placement and MCP manifest bindings have been revised. Settings and consumers bind the new roots. Physical relocation is pending: the first `work_journal` → `_journal` directory rename returned an explicit local `Operation not permitted`; no carrier move occurred. Journal admission fails closed while that old directory remains without its approved new destination, so it cannot silently create a second canonical Journal. The prepared `tmp/centralize_project_carriers.py` preserves and verifies Journal/Projection bytes; after an Operator-side relocation, rebase projected Atom source references and validate actual manifest loading before treating cutover or image evidence as complete. Temporary locks/receipts/pending events remain runtime state, and source authority remains in the framework folder.
+Centralized carrier cutover: CA-D-549/CA-D-550 establish `_journal/` and `_projection/`. The earlier directory rename was denied and was not bypassed. Current readback now finds `_journal/` and no old `work_journal/`; root compared all 337 tracked historical Journal files against their Git predecessor bytes and verified all 337 identical, with no missing or changed files. The canonical MCP manifest exists in `_projection/` and its original-thirteen current source pins loaded successfully. Remaining cutover: persisted graph/signature outputs and Applicable Methodology carriers still use old physical locations; relocate only the registered derived outputs and rebase their source references before whole-cutover/image acceptance. Source authority stays in the framework folder and runtime locks/receipts/pending records stay ephemeral. This readback is not a claim that all persisted Projections are migrated.
 
 The original thirteen-capability implementation branch is unchanged. Required source definitions and independent source reviews are complete for those thirteen; P1119/P1132 are physically Done for that scope. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the original Docker acceptance portfolio. P1493–P1500 reviews and their bounded corrections have been accepted; P1120/P1121 and the initial implementation preflights are Done.
 
-P1510–P1519 bind the test-first implementation packets. Shared Run/Journal support, authoritative structure, Entity/Term graphs and Implementation prompts have saved local proof; lifecycle, Revert, compilation, queue/MCP and the Docker harness have saved implementations with outstanding integration or image coverage. The physical MCP manifest now passes frozen-graph admission checks for all thirteen routes; actual native Action dispatch, effects and fresh-image execution remain unproven. No all-route functional pass is claimed. P1520–P1529 add the two-query branch; its O/RMED authoring, reviews, implementations, integration, image evidence and closure review are unstarted. Original thirteen implementation/tests continue independently; final image-coverage review and Epic closure require the additional two.
+The two query source packets are accepted: P1532 accepts the repaired Artifact packet; P1533 rejected a remaining Journal absence-semantics conflict; P1534 repaired it and P1535 accepted the final Journal source pins. Workers returned both query Tools and the shared filter. Root's combined development-worker suites passed 15 Artifact/filter and 8 Journal tests; P1544 now independently checks their actual contract coverage. Tool code/test counts alone do not close P1525/P1526 or prove shared Run/MCP/image behavior. P1542/P1543 author and independently accept the necessary additive fifteen-route MCP source contract before P1527 integration.
+
+P1510–P1519 bind the test-first implementation packets. P1536 completed Implementation Step-specific input handoff, and P1539 completed native W01–W08 golden inputs with actual disposable-Project adapter effects. P1540's manifest-based repeat visit identities retain one failing real shared-recorder test; P1541 repairs duplicate Workflow definition bindings without weakening the Journal. Implementation Agent startup, governed Revert service startup, compilation approval/correction paths, remaining golden inputs, actual all-route queue/MCP dispatch, and fresh immutable-image execution remain unproven. Original-thirteen implementation continues independently of query source admission. Final coverage and Epic closure require all fifteen Workflows, actual effects and truthful every-Run Journal evidence.
 
 ### Definition of Done
 

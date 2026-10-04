@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/Run evidence"
   depends_on: [Workflow Run, Action Run, Journal, Tool]
@@ -25,7 +25,10 @@ Actual query invocation evidence.
 
 ## Claim
 
-To record an actual Journal query invocation, the Tool **must** delegate preview/execute admission and Run evidence to the shared selected-Run support after snapshot binding.
+To record an actual Journal query invocation, the Tool **must** delegate
+preview/execute admission and Run evidence to shared selected-Run support only
+after the adapter captured the sealed frontier; that evidence consumes no Event
+in the frontier.
 
 ## Details
 

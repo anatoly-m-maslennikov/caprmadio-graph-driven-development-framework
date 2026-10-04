@@ -10,7 +10,7 @@ from __future__ import annotations
 import datetime as dt
 import hashlib
 import uuid
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -513,6 +513,9 @@ class RunExecutionSession:
         self.tracker = tracker
         self.request = request
         self.requested = {item["requested_run_id"]: item for item in request["requested_runs"]}
+        self.workflow_definition_bindings = self.canonical_requested_definition_bindings(
+            request["requested_runs"],
+        )
         self.actual: dict[str, dict[str, Any]] = {}
         self.terminal: dict[str, dict[str, Any]] = {}
         self.observed_effects: dict[str, dict[str, Any]] = {}
@@ -631,10 +634,46 @@ class RunExecutionSession:
 
     def _bindings_for(self, run: Mapping[str, Any]) -> list[dict[str, Any]]:
         if run["kind"] == "workflow":
-            bindings = [{"kind": item["kind"], **item["definition"]} for item in self.requested.values()]
+            bindings = self.workflow_definition_bindings
         else:
             bindings = [{"kind": run["kind"], **run["definition"]}]
         return sorted(bindings, key=lambda item: (item["kind"], item["atom_id"], item["version"], item["path"]))
+
+    @staticmethod
+    def canonical_requested_definition_bindings(
+        requested_runs: Iterable[Mapping[str, Any]],
+    ) -> list[dict[str, Any]]:
+        return RunExecutionSession._canonical_definition_bindings(
+            {"kind": item["kind"], **item["definition"]}
+            for item in requested_runs
+        )
+
+    @staticmethod
+    def _canonical_definition_bindings(
+        bindings: Iterable[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        """Retain one exact Workflow definition binding per reusable revision.
+
+        Several requested Runs may visit one Step or Action definition.  Those
+        Runs remain distinct in ``actual`` and their parent lineage, while the
+        Workflow event names the reusable definition revision once.  A shared
+        identity with different exact bytes is an integrity conflict, not a
+        candidate for lossy collapsing.
+        """
+        canonical: dict[tuple[str, str, int, str], dict[str, Any]] = {}
+        for binding in bindings:
+            key = (
+                binding["kind"], binding["atom_id"], binding["version"], binding["path"],
+            )
+            previous = canonical.get(key)
+            if previous is None:
+                canonical[key] = binding
+            elif previous != binding:
+                raise SelectedRunError(
+                    "conflicting-definition-binding",
+                    "one definition identity has conflicting exact Workflow bindings",
+                )
+        return list(canonical.values())
 
 
 class LazyRunTracker(RunTracker):
@@ -663,6 +702,7 @@ class LazyRunTracker(RunTracker):
         if not observation["selected"] or not observation["current"]:
             return self._nonstart(parsed, observation, "blocked", "revalidation-required")
         self._validate_execute(parsed, proposal, proposal_digest)
+        RunExecutionSession.canonical_requested_definition_bindings(parsed["requested_runs"])
         try:
             dispatch, created = work_journal.register_selected_run_dispatch(
                 self.root,

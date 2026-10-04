@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Read-only Artifact and Events Journal query Workflow delivery"
   depends_on: [Operations, Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 2
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 4
+updated_at: "2026-10-04 22:00:35 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -32,7 +32,7 @@ Both routes are read-only. Artifacts expose frontmatter and Markdown heading/sec
 
 ## Work decomposition
 
-P1521/P1523 author the respective O Workflow/Action/Step and RMED source packets; P1522/P1524 independently review them. P1525/P1526 implement test-first Tools, P1527 amends the existing source-bound discovery/MCP/orchestrator route contract and shared execution, P1528 proves fresh immutable-image E2E, and P1529 independently reviews closure. Each child is a <=15-minute dispatch packet inheriting P1117's 90% threshold. Before every downstream dispatch, bind the exact current source IDs, Versions, and carrier paths; absent P1521/P1523 outputs are blockers, not planning evidence. P1521/P1523 instead bind their live authority inputs and save those output IDs/Versions/paths for successors.
+P1521/P1523 authored the respective source packets; P1522/P1524 independently rejected initial gaps. P1530/P1531 repaired them; P1532 accepted Artifact sources, while P1534/P1535 repaired and accepted the final Journal sources after P1533's remaining rejection. P1525/P1526 implement test-first Tools with P1537/P1538 finishing the Artifact/shared-filter contract; P1544 independently verifies combined Tool coverage. P1542/P1543 author and accept the additive fifteen-route MCP source contract, then P1527 integrates the existing discovery/MCP/orchestrator/shared execution. P1528 proves fresh immutable-image E2E and P1529 independently reviews closure. Each child is a <=15-minute packet inheriting P1117's 90% threshold; exact current source IDs/Versions/paths/hashes and true blocking gates must be rebound before dispatch.
 
 ## Details
 
@@ -43,3 +43,7 @@ Find and Fetch Journal Events reads canonical Event carriers from the selected P
 ### Definition of Done
 
 Both source/RMED packets, independent reviews, Tools, route integration, fresh-image evidence, and closure review are Done with exact source/implementation/image/Run/Action/result evidence. Original13 work continues independently; P1171's final image-coverage review and P1124 closure require this branch's accepted proof.
+
+## Source-review repair frontier
+
+The current source gates are ACCEPTED P1532 and P1535. Completed REJECTED P1522/P1524/P1533 are retained history, not admission. Root reran 15 Artifact/shared-parser and 8 Journal tests successfully; P1544 coverage review remains pending, so Tool completion is not yet inferred. Actual shared Run/MCP behavior, source capture before own execution Events, fresh-image proof and closure remain separate required work. Exactly one CA-R-1850 filter authority and one shared parser are reused.

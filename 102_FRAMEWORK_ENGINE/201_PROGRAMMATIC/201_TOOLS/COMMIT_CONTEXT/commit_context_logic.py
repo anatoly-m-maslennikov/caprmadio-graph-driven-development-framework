@@ -310,8 +310,13 @@ def configured_repository_paths(root: Path) -> RepositoryPaths:
     temporary = _configured_relative_path(paths, "temporary_root", ".caprmedio_tmp")
     if control != SETTINGS_PATH.parent:
         raise ContextError("project_paths_invalid", "control_root must own the Project settings Carrier", value=control.as_posix())
-    if journal.parts[: len(control.parts)] != control.parts or journal == control:
-        raise ContextError("project_paths_invalid", "journal_root must be a descendant of control_root", value=journal.as_posix())
+    canonical_journal = control / "_journal"
+    if journal != canonical_journal:
+        raise ContextError(
+            "project_paths_invalid",
+            "journal_root must be exactly control_root/_journal",
+            value=journal.as_posix(),
+        )
     legacy_raw = paths.get("legacy_migration_roots", [".caprmedio"])
     if not isinstance(legacy_raw, list) or not all(isinstance(value, str) for value in legacy_raw):
         raise ContextError("project_paths_invalid", "legacy_migration_roots must be an array of strings")

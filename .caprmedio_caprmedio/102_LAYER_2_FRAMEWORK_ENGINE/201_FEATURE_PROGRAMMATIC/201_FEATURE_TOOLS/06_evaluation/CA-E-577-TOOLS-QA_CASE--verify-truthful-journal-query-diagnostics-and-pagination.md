@@ -8,8 +8,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/diagnostics"
   depends_on: [Tool, Journal, Evaluation]
@@ -26,11 +26,18 @@ The Tool reports malformed Events, missing IDs, duplicate fields, incomplete rea
 
 ## Test case
 
-Introduce one fixture for each diagnostic plus a bounded multi-page snapshot.
+Introduce fixtures for raw duplicate JSON object keys before parsing, duplicate
+Event IDs across captured members, malformed/missing-ID/incomplete reads,
+frontier-member/per-member-byte/total-read exhaustion, and a bounded multi-page
+snapshot. Continue after changed, deleted, truncated, unreadable captured
+members and after an append outside the sealed prefix.
 
 ## Acceptance criteria
 
-Every outcome identifies its exact diagnostic, returned/scanned counts, and snapshot-bound continuation state; no affected fixture is reported complete.
+Every rejection identifies its exact diagnostic and configured/consumed limit
+evidence; changed, deleted, truncated, or unreadable captured members reject
+continuation, while append after the sealed prefix preserves it. No affected
+fixture is reported complete.
 
 ## Failure disposition
 

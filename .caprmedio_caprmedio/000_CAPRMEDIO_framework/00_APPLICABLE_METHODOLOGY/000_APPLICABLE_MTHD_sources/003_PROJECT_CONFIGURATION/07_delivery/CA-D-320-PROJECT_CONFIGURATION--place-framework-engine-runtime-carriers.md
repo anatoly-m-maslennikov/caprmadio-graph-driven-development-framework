@@ -2,8 +2,8 @@
 subjects:
   governs: "CAPRMEDIO/Framework Engine Runtime Carrier Root"
   depends_on: []
-version: 12
-updated_at: "2026-10-02 19:05:39 +0400"
+version: 13
+updated_at: "2026-10-04 22:10:46 +0000"
 relations: {}
 atom_id: "CA-D-320"
 content_role: "Delivery"
@@ -20,12 +20,12 @@ Place Framework Engine Runtime Carriers
 
 ## Scope
 
-Framework Engine Runtime Carriers in a CAPRMEDIO Project.
+Framework Engine executable installation and mutable execution-state Carriers in a CAPRMEDIO Project.
 
 ## Claim
 
-the CAPRMEDIO Project **must** place its selected running Framework Engine releases, stable launchers, Tools, Apps, Skills, logs, sessions, databases, service state, **and** resumable execution state under `.caprmedio_runtime/`.
+the CAPRMEDIO Project **must** place its selected running Framework Engine releases, stable launchers, Tools, Apps, Skills, sessions, service state, **and** resumable execution state under `.caprmedio_runtime/`. runtime technical **and** business Journal Carriers use their explicitly configured governed sinks **and** are **not** required **to** use this Directory Carrier.
 
 ## Details
 
-the Framework Engine Runtime Carrier Root **must** remain non-authoritative. its selected releases, stable launchers, Tools, Apps, **and** Skills **must** be reconstructible from governed source **and** configuration. its logs, sessions, databases, service state, **and** resumable execution state **may** contain a non-reconstructible operational timeline. deleting the Runtime Carrier Root **may** require reinstallation **or** lose operational history but **must not** delete governed authority **or** Project Journal history.
+Runtime executable copies and mutable service state do not govern RMED Claims. Selected releases, launchers, Tools, Apps, and Skills must be reconstructible from governed source and configuration. Journal history may be non-reconstructible and retains its recorded-history authority wherever its Carrier is delivered. Stopping, reinstalling, or deleting disposable runtime state must not remove accepted Journal records, including runtime Journal history retained in a local or remote sink. The Project Work Journal remains under the Project-control _journal directory.

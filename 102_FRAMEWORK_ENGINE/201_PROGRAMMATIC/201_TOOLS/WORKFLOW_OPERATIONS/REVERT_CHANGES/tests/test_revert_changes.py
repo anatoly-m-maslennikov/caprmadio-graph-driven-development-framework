@@ -188,7 +188,7 @@ class RevertChangesTests(unittest.TestCase):
             (root / ".git").mkdir()
             control = root / ".caprmedio_caprmedio"
             control.mkdir()
-            (control / "caprmedio_project_settings.toml").write_text('[paths]\njournal_root = ".caprmedio_caprmedio/work_journal"\nruntime_root = ".caprmedio_runtime"\n', encoding="utf-8")
+            (control / "caprmedio_project_settings.toml").write_text('[paths]\ncontrol_root = ".caprmedio_caprmedio"\njournal_root = ".caprmedio_caprmedio/_journal"\nruntime_root = ".caprmedio_runtime"\n', encoding="utf-8")
             effects = FileEffects(root)
             service = RevertChangesService(effects.observe, effects.apply, FakeRuns())
             admitted = service.handle({"operation": "admit", "reversal_request": complete_request(effects)})
@@ -220,13 +220,13 @@ class RevertChangesTests(unittest.TestCase):
             result = tracker.run_selected_operation({**request, "mode": "execute", "proposal_receipt": preview["proposal_receipt"], "proposal_receipt_digest": preview["proposal_receipt_digest"], "assigned_action_id": "CA-O-131", "operator_authorization": authorization})
             self.assertEqual("terminal", result["disposition"])
             self.assertEqual(["first", "second"], effects.calls)
-            journal = next((root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson"))
+            journal = next((root / ".caprmedio_caprmedio/_journal").glob("*.ndjson"))
             self.assertEqual(4, len(journal.read_text(encoding="utf-8").splitlines()))
 
     def test_shared_session_recovers_canonical_pending_terminal_without_replay(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary); (root / ".git").mkdir(); control = root / ".caprmedio_caprmedio"; control.mkdir()
-            (control / "caprmedio_project_settings.toml").write_text('[paths]\njournal_root = ".caprmedio_caprmedio/work_journal"\nruntime_root = ".caprmedio_runtime"\n', encoding="utf-8")
+            (control / "caprmedio_project_settings.toml").write_text('[paths]\ncontrol_root = ".caprmedio_caprmedio"\njournal_root = ".caprmedio_caprmedio/_journal"\nruntime_root = ".caprmedio_runtime"\n', encoding="utf-8")
             effects, service, sessions = FileEffects(root), None, []
             service = RevertChangesService(effects.observe, effects.apply, FakeRuns())
             admitted = service.handle({"operation": "admit", "reversal_request": complete_request(effects)})

@@ -8,6 +8,32 @@ from mcp import Client, StdioServerParameters
 
 ROOT = Path(__file__).resolve().parents[4]
 SERVER = ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py'
+MCP = SERVER.parent
+sys.path.insert(0, str(MCP))
+
+from selected_routes import SELECTED_ROUTE_NAMES  # noqa: E402
+
+
+# CA-D-548's eight stable helpers plus its gateway controls remain required.
+D548_REQUIRED_TOOLS = frozenset({
+    'rmed_atoms_base_revise', 'discover_tools', 'discover_operations',
+    'get_execution_context', 'get_execution_status',
+    'resume_execution_context', 'watch_execution', 'workflow_orchestrator',
+    'reload_mcp_implementation', 'get_mcp_reload_status',
+})
+
+# CA-D-547 v4 is the reviewed admission boundary.  This independently fixed
+# tuple prevents the registration registry from making its own test pass.
+D547_ADMITTED_SELECTED_ROUTES = (
+    'create_atom', 'update_atom', 'replace_atom', 'change_atom_status',
+    'create_scope_unit', 'rename_scope_unit', 'move_scope_unit', 'remove_scope_unit',
+    'run_implementation_workflow', 'revert_changes', 'build_entities_graph',
+    'build_terms_graph', 'build_applicable_methodology',
+)
+D547_SELECTED_CONTROL_TOOLS = frozenset({
+    'get_selected_workflow_run', 'get_selected_action_run',
+    'recover_selected_run_recording',
+})
 
 
 class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
@@ -21,7 +47,7 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         control = self.root / '.caprmedio_caprmedio'
         control.mkdir()
         (control / 'caprmedio_project_settings.toml').write_text(
-            '[paths]\njournal_root=".caprmedio_caprmedio/work_journal"\n')
+            '[paths]\ncontrol_root=".caprmedio_caprmedio"\njournal_root=".caprmedio_caprmedio/_journal"\n')
         (self.root / 'atom.md').write_text('mock original atom')
         (self.root / 'rules.md').write_text('mock applicable criteria')
 
@@ -30,11 +56,15 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             args=[str(SERVER), '--project-root', str(self.root)])
         async with Client(params) as client:
             tools = await client.list_tools()
-            self.assertEqual({tool.name for tool in tools.tools}, {
-                'rmed_atoms_base_revise', 'discover_tools', 'discover_operations',
-                'get_execution_context', 'get_execution_status',
-                'resume_execution_context', 'watch_execution', 'workflow_orchestrator',
-                'reload_mcp_implementation', 'get_mcp_reload_status'})
+            actual_tool_names = {tool.name for tool in tools.tools}
+            self.assertEqual(D547_ADMITTED_SELECTED_ROUTES, SELECTED_ROUTE_NAMES)
+            self.assertTrue(D548_REQUIRED_TOOLS <= actual_tool_names)
+            self.assertTrue(set(D547_ADMITTED_SELECTED_ROUTES) <= actual_tool_names)
+            self.assertTrue(D547_SELECTED_CONTROL_TOOLS <= actual_tool_names)
+            self.assertEqual(
+                D548_REQUIRED_TOOLS | set(SELECTED_ROUTE_NAMES) | D547_SELECTED_CONTROL_TOOLS,
+                actual_tool_names,
+            )
             schema = next(tool for tool in tools.tools if tool.name == 'workflow_orchestrator').input_schema
             encoded_schema = __import__('json').dumps(schema)
             self.assertIn('allow_replacements', encoded_schema)

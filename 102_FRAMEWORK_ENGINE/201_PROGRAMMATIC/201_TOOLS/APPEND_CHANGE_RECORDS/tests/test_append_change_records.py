@@ -62,7 +62,8 @@ class AppendChangeRecordsTest(unittest.TestCase):
         control.mkdir()
         (control / "caprmedio_project_settings.toml").write_text(
             "[paths]\n"
-            'journal_root = ".caprmedio_caprmedio/work_journal"\n'
+            'control_root = ".caprmedio_caprmedio"\n'
+            'journal_root = ".caprmedio_caprmedio/_journal"\n'
             'runtime_root = ".caprmedio_runtime"\n',
             encoding="utf-8",
         )
@@ -164,7 +165,7 @@ class AppendChangeRecordsTest(unittest.TestCase):
                         "author": "test-user",
                         "local_date": local_date,
                         "part": 1,
-                        "path": f".caprmedio_caprmedio/work_journal/test-user-{local_date}-part-1.ndjson",
+                        "path": f".caprmedio_caprmedio/_journal/test-user-{local_date}-part-1.ndjson",
                         "predicted_line": 1,
                     }
                 ],
@@ -177,18 +178,18 @@ class AppendChangeRecordsTest(unittest.TestCase):
         result = run(self.root, {"context": self.context()}, apply=False, wait_seconds=0)
         self.assertTrue(result["ok"])
         self.assertEqual("dry-run", result["mode"])
-        self.assertFalse((self.root / ".caprmedio_caprmedio/work_journal").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio/_journal").exists())
         self.assertFalse((self.root / ".caprmedio_runtime").exists())
 
     def test_apply_is_idempotent_and_routes_by_sealed_date(self) -> None:
         payload = {"context": self.context()}
         first = run(self.root, payload, apply=True, wait_seconds=0)
         second = run(self.root, payload, apply=True, wait_seconds=0)
-        path = self.root / ".caprmedio_caprmedio/work_journal/test-user-2026-08-20-part-1.ndjson"
+        path = self.root / ".caprmedio_caprmedio/_journal/test-user-2026-08-20-part-1.ndjson"
         self.assertTrue(path.is_file())
         self.assertEqual(1, len(path.read_text(encoding="utf-8").splitlines()))
         self.assertEqual(first["result"]["receipts"], second["result"]["receipts"])
-        self.assertFalse((self.root / ".caprmedio_caprmedio/work_journal/test-user-2026-08-21-part-1.ndjson").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio/_journal/test-user-2026-08-21-part-1.ndjson").exists())
         correlations = self.root / ".caprmedio_runtime/state/commit_trigger/pipeline_correlations.ndjson"
         registered = [json.loads(line) for line in correlations.read_text(encoding="utf-8").splitlines()]
         self.assertEqual(["registered"], [record["event"] for record in registered])
@@ -202,7 +203,7 @@ class AppendChangeRecordsTest(unittest.TestCase):
         context["git_base"] = {"commit": "0" * 40, "tree": "0" * 40}
         with self.assertRaisesRegex(ToolError, "context_id"):
             run(self.root, {"context": context}, apply=True, wait_seconds=0)
-        self.assertFalse((self.root / ".caprmedio_caprmedio/work_journal").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio/_journal").exists())
         self.assertFalse((self.root / ".caprmedio_runtime/state/commit_change_set/lease.json").exists())
 
     def test_rejects_existing_staged_change_before_append(self) -> None:
@@ -211,14 +212,14 @@ class AppendChangeRecordsTest(unittest.TestCase):
         self.run_git("add", "unrelated.txt")
         with self.assertRaisesRegex(ToolError, "index contains a change outside the resolved subject identity"):
             run(self.root, {"context": self.context()}, apply=True, wait_seconds=0)
-        self.assertFalse((self.root / ".caprmedio_caprmedio/work_journal").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio/_journal").exists())
 
     def test_rejects_missing_result_before_append(self) -> None:
         context = self.context()
         context.pop("result")
         with self.assertRaisesRegex(ToolError, "result must be an object"):
             run(self.root, {"context": context}, apply=True, wait_seconds=0)
-        self.assertFalse((self.root / ".caprmedio_caprmedio/work_journal").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio/_journal").exists())
 
     def test_rolls_to_second_part_after_one_hundred_records(self) -> None:
         event_template = self.context()["predictions"]["journal_records"][0]
@@ -237,8 +238,8 @@ class AppendChangeRecordsTest(unittest.TestCase):
             local_date="2026-08-20",
             timezone="Asia/Tbilisi",
         )
-        first = self.root / ".caprmedio_caprmedio/work_journal/test-user-2026-08-20-part-1.ndjson"
-        second = self.root / ".caprmedio_caprmedio/work_journal/test-user-2026-08-20-part-2.ndjson"
+        first = self.root / ".caprmedio_caprmedio/_journal/test-user-2026-08-20-part-1.ndjson"
+        second = self.root / ".caprmedio_caprmedio/_journal/test-user-2026-08-20-part-2.ndjson"
         self.assertEqual(100, len(first.read_text(encoding="utf-8").splitlines()))
         self.assertEqual(1, len(second.read_text(encoding="utf-8").splitlines()))
         self.assertEqual(100, receipts[99]["line"])
@@ -284,7 +285,7 @@ class AppendChangeRecordsTest(unittest.TestCase):
         context["predictions"]["journal_records"] = [recovered, completed]
         context["context_id"] = _expected_context_id(context)
         output = run(self.root, {"context": context}, apply=True, wait_seconds=0)
-        journal = self.root / ".caprmedio_caprmedio/work_journal/test-user-2026-08-20-part-1.ndjson"
+        journal = self.root / ".caprmedio_caprmedio/_journal/test-user-2026-08-20-part-1.ndjson"
         records = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()]
         self.assertEqual(["recovered", "completed"], [record["event"] for record in records])
         self.assertEqual(recovered["event_id"], records[-1]["previous_result_event"])
@@ -585,7 +586,7 @@ class ReplacementPayloadTest(unittest.TestCase):
             control = root / ".caprmedio_caprmedio"
             control.mkdir()
             (control / "caprmedio_project_settings.toml").write_text(
-                '[paths]\njournal_root = ".caprmedio_caprmedio/work_journal"\n', encoding="utf-8"
+                '[paths]\ncontrol_root = ".caprmedio_caprmedio"\njournal_root = ".caprmedio_caprmedio/_journal"\n', encoding="utf-8"
             )
             event = self.event()
             partition = {"author": "test-user", "local_date": "2026-09-14", "timezone": "Asia/Tbilisi"}

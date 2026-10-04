@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/diagnostics"
   depends_on: [Journal, Event, Tool]
@@ -25,8 +25,17 @@ Query failure and coverage reporting.
 
 ## Claim
 
-FIND_AND_FETCH_JOURNAL_EVENTS **must** report malformed Events, missing IDs, duplicate Event fields, incomplete reads, invalid filters, source change, coverage, and pagination truthfully without silent skipping.
+FIND_AND_FETCH_JOURNAL_EVENTS **must** reject and report malformed Events, raw
+duplicate JSON keys before parse, missing IDs, duplicate IDs across the captured
+frontier, incomplete reads, invalid filters, changed/deleted/truncated captured
+members, configurable-budget exhaustion, coverage, and pagination truthfully
+without silent skipping.
 
 ## Details
 
-Each result identifies scanned snapshot coverage, matched count when determinable, returned count, next-page availability, and every blocking or partial-read diagnostic.
+The shared configured maxima govern request bytes, expression depth, filter
+tokens, IN members, page size, selected fields, frontier members, per-member
+bytes, total read bytes, timeout, and retained findings. Each result identifies
+the applicable configured limit and consumption/exhaustion state, scanned
+coverage, matched and returned counts when determinable, continuation
+availability, and every blocking or partial-read diagnostic.

@@ -12,20 +12,11 @@ In practice, it should make AI-assisted development reliable from the first idea
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
 
-The name describes four connected parts:
-
-- **CAP** — problems, analysis, and planning: Concern, Analysis, and Plan.
-- **RMED** — the specification: Requirement, Method, Evaluation, and Delivery.
-- **I** — the actual code.
-- **O** — Operations: repeatable actions and workflows.
-
 ## Why CAPRMEDIO works this way
 
 Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
 the project's meaning must not depend on them →\
 an explicit ontology/base model defines the core: concepts, relations and constraints.
-
-CAPRMEDIO therefore has two parts: ontology (methodology) and harness (engine). The engine must be replaceable without changing the core.
 
 ### Ontology (methodology)
 
@@ -35,29 +26,34 @@ specification.
 
 Spec grows →\
 we need smaller units →\
+no single file structure is optimal for every use case →\
+a graph with typed nodes and typed relations.
+
+Each unit should be the smallest meaningful part of the spec →\
 one scope + one Claim = one Atom →\
 splitting further adds no useful distinction.
 
-Different use cases need different structures →\
-keep one authoritative source →\
-derive different views →\
-graph.
+Nodes represent different things →\
+Atoms state Claims; Entities are the things those Claims describe →\
+Subjects link Atoms to Entities through `GOVERNS` and `DEPENDS_ON`.
 
-The graph grows →\
-identify Entities: the things the project describes →\
-declare each Atom’s Subjects: what its Claim governs and what it depends on →\
-organize them with typed nodes and relations →\
-load only the context needed.
+Different tasks need different views →\
+derive them from one authoritative source →\
+load only the context needed without duplicating authority.
 
-Small files can still be ambiguous →\
-shared vocabulary + CCE →\
+Natural-language phrases can be ambiguous →\
+shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
 explicit, checkable Claims.
 
 We need more than spec →\
-C for problems, A for analysis, P for objectives/tasks/backlog →\
-RMED for specification →\
-I for implementation →\
-O for repeatable actions and workflows.
+Concerns, Analysis and Plans for understanding and planning →\
+Requirements, Methods, Evaluations and Delivery (RMED) for specification →\
+Implementation for code, tests and configuration →\
+Operations for repeatable actions and workflows.
+
+Implementation, tests and views rely on Claims →\
+record the exact source Claim identities and revisions →\
+trace results back to the specification.
 
 Work changes the project →\
 Journal records changes and execution →\
@@ -99,13 +95,23 @@ Evaluations check Claims and results.
 
 ### Content roles and artifact forms
 
-C — concerns; A — analysis; P — plans/tasks; R — requirements; M — methods; E — evaluations; D — delivery; I — actual Implementation; O — operations/workflows.
+- **C — Concern:** problems, bugs, questions and opportunities.
+- **A — Analysis:** analysis reports and rationale.
+- **P — Plan:** backlog, tasks, epics and version plans.
+- **R — Requirement:** specification of required outcomes.
+- **M — Method:** how code should be written.
+- **E — Evaluation:** quality assurance policies and test-case specifications.
+- **D — Delivery:** target environments, CI/CD and release policies.
+- **I — Implementation:** code, tests, configuration and CI/CD pipelines implementing all RMED.
+- **O — Operations:** actions and workflows with steps to operate the project.
 
 Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
 
 CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
 
 [project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
+
+Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
 
 ## Current boundaries
 

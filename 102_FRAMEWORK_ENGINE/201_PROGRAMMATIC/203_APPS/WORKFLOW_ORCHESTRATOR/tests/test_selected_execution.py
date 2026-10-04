@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 APP = Path(__file__).resolve().parents[1]
@@ -16,6 +17,7 @@ sys.path.insert(0, str(APP))
 from selected_execution import (  # noqa: E402
     SelectedExecution,
     SelectedExecutionError,
+    build_requested_runs,
     canonical_json,
     manifest_relative_path,
     make_revert_action_handler,
@@ -47,12 +49,15 @@ class SelectedExecutionTests(unittest.TestCase):
         for name, atom_id in (("workflow.md", "CA-O-127"), ("step-one.md", "CA-O-129"),
                               ("step-two.md", "CA-O-130"), ("action-one.md", "CA-O-128"),
                               ("action-two.md", "CA-O-131")):
-            path = self.root / "definitions" / name
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(
-                f"---\natom_id: {atom_id}\nversion: 1\nstatus: Active\n---\n# Summary\nFixture\n",
-                encoding="utf-8",
-            )
+            self._write_definition(name, atom_id)
+
+    def _write_definition(self, name: str, atom_id: str) -> None:
+        path = self.root / "definitions" / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            f"---\natom_id: {atom_id}\nversion: 1\nstatus: Active\n---\n# Summary\nFixture\n",
+            encoding="utf-8",
+        )
 
     def _binding(self, name: str, atom_id: str, kind: str) -> dict[str, object]:
         path = self.root / "definitions" / name
@@ -67,29 +72,75 @@ class SelectedExecutionTests(unittest.TestCase):
     def _write_manifest(self) -> None:
         first = self._binding("action-one.md", "CA-O-128", "action")
         second = self._binding("action-two.md", "CA-O-131", "action")
+        self._replace_route_steps([
+            {
+                **self._binding("step-one.md", "CA-O-129", "step"),
+                "actions": [first],
+                "on_result": [{"result": "prepared", "next": "CA-O-130"}],
+            },
+            {
+                **self._binding("step-two.md", "CA-O-130", "step"),
+                "actions": [second],
+                "on_result": [{"result": "completed", "terminal": "completed"}],
+            },
+        ])
+
+    def _replace_route_steps(self, steps: list[dict[str, object]]) -> None:
         value = {
             "routes": [
                 {
                     "route": "create_atom",
                     "workflow": self._binding("workflow.md", "CA-O-127", "workflow"),
-                    "steps": [
-                        {
-                            **self._binding("step-one.md", "CA-O-129", "step"),
-                            "actions": [first],
-                            "on_result": [{"result": "prepared", "next": "CA-O-130"}],
-                        },
-                        {
-                            **self._binding("step-two.md", "CA-O-130", "step"),
-                            "actions": [second],
-                            "on_result": [{"result": "completed", "terminal": "completed"}],
-                        },
-                    ],
+                    "steps": steps,
                 }
             ]
         }
         value["canonical_manifest_sha256"] = digest(value)
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
         self.manifest_path.write_text(json.dumps(value), encoding="utf-8")
+
+    def _refresh_execute_seal(self, request: dict[str, object]) -> None:
+        """Rebind the fixture preview/authorization after declared input changes."""
+        execution = request["execution"]
+        assert isinstance(execution, dict)
+        execution["parameters_digest"] = digest(execution["parameters"])
+        source_freshness = execution["source_freshness"]
+        definition_manifest = execution["definition_manifest"]
+        proposal = {
+            "request_id": execution["request_id"],
+            "operation_route": execution["operation_route"],
+            "initiative_ref": execution["initiative"]["initiative_ref"],
+            "source_freshness": {
+                "declared": source_freshness,
+                "observed": {
+                    "manifest_ref": definition_manifest["manifest_ref"],
+                    "manifest_digest": definition_manifest["manifest_digest"],
+                },
+                "selected": True,
+                "current": True,
+            },
+            "parameters_digest": execution["parameters_digest"],
+            "target_frontier_digest": execution["target_frontier_digest"],
+            "effects_digest": execution["effects_digest"],
+            "definition_manifest": definition_manifest,
+        }
+        execution["proposal_receipt"] = proposal
+        execution["proposal_receipt_digest"] = digest(proposal)
+        authorization = execution["operator_authorization"]
+        assert isinstance(authorization, dict)
+        authorization["proposal_receipt_digest"] = execution["proposal_receipt_digest"]
+        authorization["parameters_digest"] = execution["parameters_digest"]
+
+    def _freeze_with_planned_runs(self, request: dict[str, object], handlers: dict[str, object]) -> tuple[SelectedExecution, dict[str, object]]:
+        execution = request["execution"]
+        assert isinstance(execution, dict)
+        runner = self.executor(handlers)
+        graph = runner._validate_graph(execution)
+        parameters = execution.get("parameters")
+        limits = parameters.get("run_visit_limits") if isinstance(parameters, dict) else None
+        execution["requested_runs"] = build_requested_runs(graph, request["run_id"], limits)
+        self._refresh_execute_seal(request)
+        return runner, runner.freeze(request)
 
     def request(self, run_id: str = "selected-run") -> dict[str, object]:
         manifest = json.loads(self.manifest_path.read_text(encoding="utf-8"))
@@ -147,7 +198,7 @@ class SelectedExecutionTests(unittest.TestCase):
                            "initiative_ref": "definitions/workflow.md"},
             "requested_runs": requested_runs,
         }
-        observed = {"definition_manifest": definition_manifest, "manifest_ref": manifest_ref,
+        observed = {"manifest_ref": manifest_ref,
                     "manifest_digest": manifest["canonical_manifest_sha256"]}
         proposal = {
             "request_id": execution["request_id"],
@@ -202,23 +253,7 @@ class SelectedExecutionTests(unittest.TestCase):
         }
         selected = SelectedExecution(REPOSITORY)
         graph = selected._validate_graph(execution)
-        requested_runs = [{
-            "requested_run_id": run_id, "kind": "workflow",
-            "definition": selected._support_definition(graph["workflow"]),
-        }]
-        for ordinal, step in enumerate(graph["steps"], start=1):
-            step_run_id = f"{run_id}:step:{ordinal}"
-            requested_runs.append({
-                "requested_run_id": step_run_id, "kind": "step",
-                "definition": selected._support_definition(step), "parent_requested_run_id": run_id,
-            })
-            for action_ordinal, action in enumerate(step["actions"], start=1):
-                requested_runs.append({
-                    "requested_run_id": f"{step_run_id}:action:{action_ordinal}", "kind": "action",
-                    "definition": selected._support_definition(action),
-                    "parent_requested_run_id": step_run_id,
-                })
-        execution["requested_runs"] = requested_runs
+        execution["requested_runs"] = build_requested_runs(graph, run_id)
         return selected, {"operation": "enqueue_selected", "run_id": run_id, "execution": execution}
 
     @staticmethod
@@ -308,6 +343,33 @@ class SelectedExecutionTests(unittest.TestCase):
         events = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()]
         self.assertEqual(len(events), 10)
         self.assertEqual({event["run"]["kind"] for event in events}, {"workflow", "step", "action"})
+
+    def test_mcp_preview_receipt_is_accepted_by_real_worker_dispatch(self) -> None:
+        sys.path.insert(0, str(APP.parents[1] / "204_MCP"))
+        from selected_routes import _QueueBackedSelectedSupport
+
+        request = self.request("mcp-preview-worker")
+        execution_request = request["execution"]
+        manifest = json.loads(self.manifest_path.read_text())
+        manifest["manifest_ref"] = execution_request["definition_manifest"]["manifest_ref"]
+        manifest["source_freshness"] = execution_request["source_freshness"]
+        preview_request = {key: value for key, value in execution_request.items()
+                           if key not in {"proposal_receipt", "proposal_receipt_digest",
+                                          "assigned_action_id", "operator_authorization", "requested_runs"}}
+        preview_request["mode"] = "preview"
+        with patch("selected_routes.load_selected_manifest", return_value=manifest):
+            preview = _QueueBackedSelectedSupport(self.root, None)._tracker().run_selected_operation(preview_request)
+        execution_request["proposal_receipt"] = preview["proposal_receipt"]
+        execution_request["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
+        execution_request["operator_authorization"]["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
+        runner = self.executor({
+            "CA-O-128": lambda _context: {"result": "prepared", "effect_refs": []},
+            "CA-O-131": lambda _context: {"result": "completed", "effect_refs": []},
+        })
+        result = runner.dispatch(runner.freeze(request))
+
+        self.assertEqual(result["disposition"], "terminal", result)
+        self.assertEqual({row["outcome"] for row in result["terminal_runs"]}, {"completed"})
 
     def test_dispatch_rechecks_definition_bindings_after_queue_admission(self) -> None:
         execution = self.executor({"CA-O-128": lambda _context: {"result": "prepared"}})
@@ -407,6 +469,236 @@ class SelectedExecutionTests(unittest.TestCase):
         self.assertEqual(calls, ["CA-O-067", "CA-O-128"])
         self.assertEqual(result["outcome"], "completed")
         self.assertEqual(len(result["step_results"]), 2)
+
+    def test_o016_selects_manifest_step_packets_and_carries_actual_prior_results(self) -> None:
+        """Exercise all seven real prompt handlers through their injected Agent."""
+        import implementation_actions
+
+        selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016")
+        method_paths = [row["path"] for row in implementation_actions.current_source_bindings()
+                        if row["atom_id"].startswith("CA-M-")]
+        projection = implementation_actions.prepare_method_projection(method_paths)
+        calls: list[dict[str, object]] = []
+        evaluation_calls = 0
+
+        def agent(_prompt: str, packet: dict[str, object]) -> dict[str, object]:
+            nonlocal evaluation_calls
+            calls.append(packet)
+            step = packet["step_marker"]
+            outputs: dict[str, object] = {}
+            if step == "CA-O-092":
+                outputs = {"golden_e2e": True, "commands": ["test"], "expected_outcomes": ["pass"]}
+            elif step == "CA-O-093":
+                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"]}
+            elif step == "CA-O-094":
+                evaluation_calls += 1
+                if evaluation_calls == 1:
+                    return {"result": "failed", "outputs": {}, "evidence": ["failure"]}
+                outputs = {"commands": ["test"], "checks": [{"returncode": 0}]}
+            elif step == "CA-O-099":
+                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"], "recheck_commands": ["test"]}
+            results = {"CA-O-091": "evaluation_ready", "CA-O-092": "prepared", "CA-O-093": "implemented",
+                       "CA-O-094": "passed", "CA-O-095": "implementation_defect", "CA-O-096": "retry_permitted",
+                       "CA-O-099": "repaired"}
+            return {"result": results[step], "outputs": outputs, "evidence": [f"evidence:{step}"]}
+
+        base = {
+            "source_bindings": implementation_actions.current_source_bindings(),
+            "permissions": {"allowed": True}, "method_projection": projection,
+            "requirements_delivery": ["R/D"], "evaluations": ["E"],
+            "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
+            "golden_e2e": True, "baseline_command": "test", "retry": {"consumed": 0, "limit": 1},
+            "retained_state": {"run": "fixture"},
+        }
+        request["execution"]["parameters"] = {
+            "base_packet": base,
+            "run_visit_limits": {"CA-O-094": 2},
+            "step_packets": {
+                step: {"context": context, "step_marker": step}
+                for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
+            },
+        }
+        runner = SelectedExecution(REPOSITORY, implementation_agent=agent)
+        graph = selected._validate_graph(request["execution"])
+        request["execution"]["requested_runs"] = build_requested_runs(
+            graph, "current-o016", {"CA-O-094": 2},
+        )
+        frozen = {"request": request, "graph": graph}
+
+        class RevisitSession:
+            def __init__(self) -> None:
+                self.started: dict[str, dict[str, object]] = {}
+                self.finished: list[dict[str, object]] = []
+
+            def start_run(self, requested_run_id: str) -> dict[str, object]:
+                if requested_run_id not in self.started:
+                    self.started[requested_run_id] = {"run_id": f"actual-{len(self.started) + 1}"}
+                return dict(self.started[requested_run_id])
+
+            def finish_run(self, run_id: str, **result: object) -> dict[str, object]:
+                value = {"run_id": run_id, **result}
+                self.finished.append(value)
+                return value
+
+        result = runner._execute_graph(frozen, RevisitSession())
+
+        self.assertEqual(result["outcome"], "completed")
+        self.assertEqual([packet["step_marker"] for packet in calls],
+                         ["CA-O-091", "CA-O-092", "CA-O-093", "CA-O-094", "CA-O-095", "CA-O-096", "CA-O-099", "CA-O-094"])
+        self.assertEqual([packet["context"] for packet in calls],
+                         ["Integrated", "Isolated", "Isolated", "Integrated", "Isolated", "Integrated", "Isolated", "Integrated"])
+        self.assertEqual(calls[1]["prior_results"][0]["step_definition_id"], "CA-O-091")
+        self.assertEqual(calls[4]["prior_results"][-1]["result"], "checks fail")
+
+    def test_o016_rejects_missing_or_mismatched_step_packet(self) -> None:
+        selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016-missing")
+        request["execution"]["parameters"] = {"base_packet": {}, "step_packets": {"CA-O-092": {"context": "Isolated"}}}
+        frozen = {"request": request, "graph": selected._validate_graph(request["execution"])}
+
+        with self.assertRaisesRegex(SelectedExecutionError, "no packet for Step CA-O-091"):
+            SelectedExecution(REPOSITORY)._execute_graph(frozen, self.session(frozen))
+
+    def test_shared_session_branched_skip_uses_manifest_step_identity(self) -> None:
+        """A skipped manifest Step must not shift the actual Step definition."""
+        self._write_definition("step-three.md", "CA-O-132")
+        self._write_definition("action-three.md", "CA-O-133")
+        self._replace_route_steps([
+            {
+                **self._binding("step-one.md", "CA-O-129", "step"),
+                "actions": [self._binding("action-one.md", "CA-O-128", "action")],
+                "on_result": [{"result": "branch", "next": "CA-O-132"}],
+            },
+            {
+                **self._binding("step-two.md", "CA-O-130", "step"),
+                "actions": [self._binding("action-two.md", "CA-O-131", "action")],
+                "on_result": [{"result": "unused", "terminal": "completed"}],
+            },
+            {
+                **self._binding("step-three.md", "CA-O-132", "step"),
+                "actions": [self._binding("action-three.md", "CA-O-133", "action")],
+                "on_result": [{"result": "completed", "terminal": "completed"}],
+            },
+        ])
+        calls: list[str] = []
+        runner, frozen = self._freeze_with_planned_runs(self.request("branched"), {
+            "CA-O-128": lambda context: calls.append(context["requested_action_run_id"]) or {"result": "branch", "effect_refs": []},
+            "CA-O-133": lambda context: calls.append(context["requested_action_run_id"]) or {"result": "completed", "effect_refs": []},
+        })
+
+        result = runner.dispatch(frozen)
+
+        self.assertEqual(result["disposition"], "terminal")
+        self.assertEqual(calls, ["branched:step:1:action:1", "branched:step:3:action:1"])
+        self.assertIn("branched:step:3", result["run_ids"])
+        self.assertNotIn("branched:step:2", result["run_ids"])
+        journal = next((self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson"))
+        events = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()]
+        started = [event for event in events if event["event"] == "started"]
+        third = [event for event in started if event["run"]["kind"] == "step"
+                 and event["run"]["definition"]["atom_id"] == "CA-O-132"]
+        self.assertEqual(len(third), 1)
+        self.assertEqual(third[0]["run"]["run_id"], "branched:step:3")
+
+    def test_shared_session_authorized_loop_uses_distinct_predeclared_visit_ids(self) -> None:
+        self._replace_route_steps([
+            {
+                **self._binding("step-one.md", "CA-O-129", "step"),
+                "actions": [self._binding("action-one.md", "CA-O-128", "action")],
+                "on_result": [
+                    {"result": "again", "next": "CA-O-129"},
+                    {"result": "completed", "terminal": "completed"},
+                ],
+            },
+        ])
+        calls: list[str] = []
+
+        def loop(context: dict[str, object]) -> dict[str, object]:
+            calls.append(context["requested_action_run_id"])
+            return {"result": "again" if len(calls) == 1 else "completed", "effect_refs": []}
+
+        request = self.request("loop")
+        request["execution"]["parameters"] = {
+            "fixture": True,
+            "run_visit_limits": {"CA-O-129": 2},
+        }
+        runner, frozen = self._freeze_with_planned_runs(request, {"CA-O-128": loop})
+
+        result = runner.dispatch(frozen)
+
+        self.assertEqual(result["disposition"], "terminal")
+        self.assertEqual(calls, ["loop:step:1:action:1", "loop:step:1:visit:2:action:1"], result)
+        self.assertIn("loop:step:1:visit:2", result["run_ids"])
+        journal = next((self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson"))
+        events = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()]
+        repeated = [event for event in events if event["event"] == "started"
+                    and event["run"]["run_id"] == "loop:step:1:visit:2:action:1"]
+        self.assertEqual(len(repeated), 1)
+        self.assertEqual(repeated[0]["run"]["definition"]["atom_id"], "CA-O-128")
+        self.assertEqual(repeated[0]["run"]["parent_run_id"], "loop:step:1:visit:2")
+
+    def test_shared_session_exhausts_unregistered_visit_before_second_effect(self) -> None:
+        self._replace_route_steps([
+            {
+                **self._binding("step-one.md", "CA-O-129", "step"),
+                "actions": [self._binding("action-one.md", "CA-O-128", "action")],
+                "on_result": [{"result": "again", "next": "CA-O-129"}],
+            },
+        ])
+        calls: list[str] = []
+        runner, frozen = self._freeze_with_planned_runs(self.request("exhausted"), {
+            "CA-O-128": lambda context: calls.append(context["requested_action_run_id"]) or {"result": "again", "effect_refs": []},
+        })
+
+        result = runner.dispatch(frozen)
+
+        self.assertEqual(calls, ["exhausted:step:1:action:1"])
+        self.assertEqual(result["disposition"], "started")
+        self.assertNotIn("exhausted:step:1:visit:2", result["run_ids"])
+        self.assertEqual(
+            {row["outcome"] for row in result["terminal_runs"]},
+            {"completed", "interrupted_pending"},
+        )
+
+    def test_freeze_rejects_wrong_or_stale_predeclared_run_rows(self) -> None:
+        request = self.request("wrong-planned-row")
+        request["execution"]["requested_runs"][1]["requested_run_id"] = "wrong-planned-row:step:9"
+        with self.assertRaisesRegex(SelectedExecutionError, "requested Runs"):
+            self.executor({}).freeze(request)
+
+        stale = self.request("stale-planned-row")
+        stale["execution"]["requested_runs"][1]["definition"]["digest"] = "0" * 64
+        with self.assertRaisesRegex(SelectedExecutionError, "requested Runs"):
+            self.executor({}).freeze(stale)
+
+    def test_pending_terminal_recovery_never_replays_the_handler(self) -> None:
+        calls: list[str] = []
+        runner, frozen = self._freeze_with_planned_runs(self.request("terminal-pending"), {
+            "CA-O-128": lambda context: calls.append(context["requested_action_run_id"]) or {"result": "prepared", "effect_refs": []},
+            "CA-O-131": lambda context: calls.append(context["requested_action_run_id"]) or {"result": "completed", "effect_refs": []},
+        })
+        tools_root = APP.parents[1] / "201_TOOLS"
+        sys.path.insert(0, str(tools_root))
+        import work_journal
+
+        append = work_journal.append_sealed_events
+
+        def fail_terminal(*args: object, **kwargs: object) -> object:
+            events = args[1]
+            assert isinstance(events, list)
+            if events[0]["event"] != "started":
+                raise OSError("fixture terminal Journal failure")
+            return append(*args, **kwargs)
+
+        with patch.object(work_journal, "append_sealed_events", side_effect=fail_terminal):
+            pending = runner.dispatch(frozen)
+
+        self.assertEqual(pending["disposition"], "recording_pending")
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
+        for event_id in pending["pending_event_ids"]:
+            work_journal.recover_pending_event(self.root, event_id)
+        recovered = runner.dispatch(frozen)
+        self.assertEqual(recovered, pending)
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
 
     def test_revert_adapter_uses_the_existing_lazy_action_run(self) -> None:
         frozen = self.executor({}).freeze(self.request())

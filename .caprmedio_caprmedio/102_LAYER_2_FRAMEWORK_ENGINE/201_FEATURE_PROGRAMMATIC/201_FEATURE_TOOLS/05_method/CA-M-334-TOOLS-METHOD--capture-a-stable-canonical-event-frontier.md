@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/source snapshot"
   depends_on: [Journal, Event, Tool]
@@ -25,8 +25,16 @@ Source snapshot construction.
 
 ## Claim
 
-To capture the query source, the Tool **must** enumerate canonical Event carriers once, seal their ordered references and digests into one opaque snapshot token, then read only that frontier.
+To capture the query source, the adapter **must**, before any workflow/action-start
+recording or Action dispatch, read and seal the canonical Journal byte-prefix,
+enumerate its Event carriers once, reject raw duplicate object keys before
+parsing, and seal ordered references, member byte hashes, and unique Event IDs
+into one opaque snapshot token. A standalone Action captures before its own Run
+evidence and consumes exactly that token.
 
 ## Details
 
-The method detects changed, unreadable, duplicate, or malformed frontier members and returns their exact condition; it never retries by silently extending the frontier.
+The method enforces configured member and byte maxima, detects changed, deleted,
+truncated, unreadable, duplicate-ID, or malformed members, and never silently
+extends the frontier. Every continuation revalidates the original prefix and
+members; later append outside the prefix remains permitted.

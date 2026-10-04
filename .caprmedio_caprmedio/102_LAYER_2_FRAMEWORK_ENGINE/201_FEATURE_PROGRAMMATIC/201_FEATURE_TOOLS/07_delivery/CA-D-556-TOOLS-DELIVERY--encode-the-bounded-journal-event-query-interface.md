@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "FIND_AND_FETCH_JOURNAL_EVENTS/interface"
   depends_on: [Tool, Event, Journal, Implementation]
@@ -25,7 +25,13 @@ The Tool input and result contract.
 
 ## Claim
 
-FIND_AND_FETCH_JOURNAL_EVENTS **must** deliver one bounded interface with snapshot token, literal filter, result selection, page request, result evidence, and diagnostics.
+FIND_AND_FETCH_JOURNAL_EVENTS **must** deliver one bounded interface with a
+snapshot token (source root, byte-prefix length/hash, ordered member hashes, and
+Event-ID frontier), literal filter, JSON-Pointer Event selectors, result
+selection, page request, and the shared configurable maxima for request bytes,
+grammar depth, filter tokens, IN members, page size, selected fields, frontier
+members, per-member bytes, total reads, timeout, and retained findings. Result
+evidence reports each applicable configured and consumed/exhausted limit.
 
 ## Details
 

@@ -340,7 +340,8 @@ class SelectedExecution:
                 "evaluation_ready": "evaluation ready", "prepared": "tests prepared",
                 "implemented": "implementation delivered", "passed": "checks pass",
                 "failed": "checks fail", "retry_permitted": "retry admitted",
-                "repaired": "repair completed",
+                "repaired": "repair completed", "implementation_defect": "repair admission",
+                "test_implementation_defect": "repair admission",
             }
             for action_id, handler in implementation_actions.ACTION_HANDLERS.items():
                 def implementation(context: dict[str, Any], handler: Any = handler) -> dict[str, Any]:
@@ -642,25 +643,103 @@ class SelectedExecution:
         return {"atom_id": binding["atom_id"], "version": binding["version"],
                 "path": binding["path"], "digest": binding["sha256"]}
 
-    def _validate_requested_runs(self, execution: Mapping[str, Any], graph: Mapping[str, Any], run_id: str) -> None:
-        """Require the caller's requested Run graph to be exactly the manifest graph."""
-        requested = execution.get("requested_runs")
-        if not isinstance(requested, list):
-            raise SelectedExecutionError("selected execution must declare requested Runs")
+    @classmethod
+    def build_requested_runs(
+        cls,
+        graph: Mapping[str, Any],
+        run_id: str,
+        run_visit_limits: Mapping[str, int] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Build every caller-authorized selected Run before an execution starts.
+
+        A Step's identity is its manifest position, not its traversal position.
+        Callers may authorize a finite number of revisits for a manifest Step;
+        each visit then has a separate requested Step and Action identity.  The
+        shared lazy session creates Journal evidence only if this interpreter
+        actually starts that predeclared identity.
+        """
+        if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
+            raise SelectedExecutionError("invalid selected Run ID")
+        steps = graph.get("steps")
+        workflow = graph.get("workflow")
+        if not isinstance(steps, list) or not isinstance(workflow, Mapping):
+            raise SelectedExecutionError("selected Workflow graph is invalid")
+        limits = cls._run_visit_limits(graph, run_visit_limits)
         expected: list[dict[str, Any]] = [{
             "requested_run_id": run_id,
             "kind": "workflow",
-            "definition": self._support_definition(graph["workflow"]),
+            "definition": cls._support_definition(workflow),
         }]
-        for ordinal, step in enumerate(graph["steps"], start=1):
-            step_id = f"{run_id}:step:{ordinal}"
-            expected.append({"requested_run_id": step_id, "kind": "step",
-                             "definition": self._support_definition(step),
-                             "parent_requested_run_id": run_id})
-            for action_ordinal, action in enumerate(step["actions"], start=1):
-                expected.append({"requested_run_id": f"{step_id}:action:{action_ordinal}", "kind": "action",
-                                 "definition": self._support_definition(action),
-                                 "parent_requested_run_id": step_id})
+        for manifest_ordinal, step in enumerate(steps, start=1):
+            step_id = step.get("atom_id")
+            actions = step.get("actions")
+            if not isinstance(step_id, str) or not isinstance(actions, list):
+                raise SelectedExecutionError("selected Workflow graph is invalid")
+            for visit in range(1, limits[step_id] + 1):
+                requested_step_id = cls._requested_step_id(run_id, manifest_ordinal, visit)
+                expected.append({
+                    "requested_run_id": requested_step_id,
+                    "kind": "step",
+                    "definition": cls._support_definition(step),
+                    "parent_requested_run_id": run_id,
+                })
+                for action_ordinal, action in enumerate(actions, start=1):
+                    expected.append({
+                        "requested_run_id": f"{requested_step_id}:action:{action_ordinal}",
+                        "kind": "action",
+                        "definition": cls._support_definition(action),
+                        "parent_requested_run_id": requested_step_id,
+                    })
+        return expected
+
+    @staticmethod
+    def _requested_step_id(run_id: str, manifest_ordinal: int, visit: int) -> str:
+        """Keep first-visit IDs compatible while making later visits explicit."""
+        first_visit = f"{run_id}:step:{manifest_ordinal}"
+        return first_visit if visit == 1 else f"{first_visit}:visit:{visit}"
+
+    @staticmethod
+    def _declared_run_visit_limits(execution: Mapping[str, Any]) -> Mapping[str, int] | None:
+        parameters = execution.get("parameters")
+        if not isinstance(parameters, Mapping):
+            return None
+        limits = parameters.get("run_visit_limits")
+        if limits is None:
+            return None
+        if not isinstance(limits, Mapping):
+            raise SelectedExecutionError("run_visit_limits must be a Step-to-positive-integer mapping")
+        return limits
+
+    @staticmethod
+    def _run_visit_limits(
+        graph: Mapping[str, Any], run_visit_limits: Mapping[str, int] | None,
+    ) -> dict[str, int]:
+        """Accept only explicit, finite revisit authority for bound Steps."""
+        steps = graph.get("steps")
+        if not isinstance(steps, list):
+            raise SelectedExecutionError("selected Workflow graph is invalid")
+        step_ids = [step.get("atom_id") for step in steps if isinstance(step, Mapping)]
+        if len(step_ids) != len(steps) or any(not isinstance(step_id, str) for step_id in step_ids):
+            raise SelectedExecutionError("selected Workflow graph is invalid")
+        declared = dict(run_visit_limits or {})
+        if set(declared) - set(step_ids):
+            raise SelectedExecutionError("run_visit_limits includes an unbound Step")
+        limits: dict[str, int] = {}
+        for step_id in step_ids:
+            limit = declared.get(step_id, 1)
+            if type(limit) is not int or limit < 1 or limit > 100:
+                raise SelectedExecutionError("run_visit_limits must contain positive bounded visit limits")
+            limits[step_id] = limit
+        return limits
+
+    def _validate_requested_runs(self, execution: Mapping[str, Any], graph: Mapping[str, Any], run_id: str) -> None:
+        """Require the caller's requested Runs to exactly bind every allowed visit."""
+        requested = execution.get("requested_runs")
+        if not isinstance(requested, list):
+            raise SelectedExecutionError("selected execution must declare requested Runs")
+        expected = self.build_requested_runs(
+            graph, run_id, self._declared_run_visit_limits(execution),
+        )
         if canonical_json(requested) != canonical_json(expected):
             raise SelectedExecutionError("requested Runs do not exactly bind the selected Workflow graph")
 
@@ -729,23 +808,65 @@ class SelectedExecution:
                     return transition
         raise SelectedExecutionError("no declared On Result transition admits Action result")
 
+    @staticmethod
+    def _implementation_packet(parameters: object, step_id: str,
+                               prior_results: list[dict[str, Any]]) -> dict[str, Any]:
+        """Select one explicit O016 Step packet and retain only observed state.
+
+        O016's request parameters deliberately have a small, explicit shape:
+        ``base_packet`` contains common, admitted inputs and ``step_packets``
+        maps each manifest Step ID to its additional input mapping.  The
+        executor selects by the manifest-bound Step ID; it never infers a
+        packet from position or from a successor edge.
+        """
+        if not isinstance(parameters, Mapping):
+            raise SelectedExecutionError("implementation Workflow requires a packet mapping")
+        base = parameters.get("base_packet")
+        packets = parameters.get("step_packets")
+        if not isinstance(base, Mapping) or not isinstance(packets, Mapping):
+            raise SelectedExecutionError("implementation Workflow requires base_packet and step_packets")
+        packet = packets.get(step_id)
+        if not isinstance(packet, Mapping):
+            raise SelectedExecutionError(f"implementation Workflow has no packet for Step {step_id}")
+        merged = {**base, **packet}
+        if merged.get("context") not in {"Integrated", "Isolated"}:
+            raise SelectedExecutionError(f"implementation packet context is missing for Step {step_id}")
+        retained = base.get("retained_state", {})
+        if not isinstance(retained, Mapping):
+            raise SelectedExecutionError("implementation base retained_state is invalid")
+        step_retained = packet.get("retained_state", {})
+        if not isinstance(step_retained, Mapping):
+            raise SelectedExecutionError(f"implementation packet retained_state is invalid for Step {step_id}")
+        merged["retained_state"] = {**retained, **step_retained, "prior_results": list(prior_results)}
+        merged["prior_results"] = list(prior_results)
+        return merged
+
     def _execute_graph(self, frozen: Mapping[str, Any], session: Any) -> dict[str, Any]:
         graph = frozen["graph"]
         request = frozen["request"]
         run_id = request["run_id"]
         steps = {row["atom_id"]: row for row in graph["steps"]}
+        manifest_ordinals = {row["atom_id"]: ordinal for ordinal, row in enumerate(graph["steps"], start=1)}
+        visit_limits = self._run_visit_limits(
+            graph, self._declared_run_visit_limits(request["execution"]),
+        )
+        visit_counts: dict[str, int] = {}
         next_step = graph["entry_step"]
         workflow_actual = session.start_run(run_id)
         workflow_run_id = workflow_actual["run_id"]
-        ordinal = 0
         results: list[dict[str, Any]] = []
+        implementation_prior_results: list[dict[str, Any]] = []
         while next_step:
-            if ordinal >= 100:
-                raise SelectedExecutionError("selected Workflow exceeded its bounded transition budget")
             step = steps.get(next_step)
             if step is None:
                 raise SelectedExecutionError("On Result transition references an unbound Step")
-            requested_step_id = f"{run_id}:step:{ordinal + 1}"
+            visit = visit_counts.get(next_step, 0) + 1
+            if visit > visit_limits[next_step]:
+                raise SelectedExecutionError(
+                    "selected Workflow exhausted the caller-declared Step visit limit before Action dispatch"
+                )
+            visit_counts[next_step] = visit
+            requested_step_id = self._requested_step_id(run_id, manifest_ordinals[next_step], visit)
             actual_step = session.start_run(requested_step_id)
             step_run_id = actual_step["run_id"]
             final_result: str | None = None
@@ -757,6 +878,9 @@ class SelectedExecution:
                 handler = self.handlers.get(action["atom_id"])
                 if handler is None:
                     raise SelectedExecutionError(f"no native handler registered for Action {action['atom_id']}")
+                parameters = request["execution"].get("parameters")
+                if graph["workflow"]["atom_id"] == "CA-O-016":
+                    parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
                 context = {
                     "workflow_run_id": workflow_run_id,
                     "step_run_id": step_run_id,
@@ -769,7 +893,7 @@ class SelectedExecution:
                     "workflow_definition_id": graph["workflow"]["atom_id"],
                     "step_definition_id": step["atom_id"],
                     "action_definition_id": action["atom_id"],
-                    "parameters": request["execution"].get("parameters"),
+                    "parameters": parameters,
                     "target_frontier": request["execution"].get("target_frontier"),
                     "effects": request["execution"].get("effects"),
                     "initiative": request["execution"].get("initiative"),
@@ -801,6 +925,16 @@ class SelectedExecution:
                                 "step_definition_id": step["atom_id"],
                                 "action_definition_id": action["atom_id"], "result": final_result,
                                 "effect_refs": effect_refs})
+                if graph["workflow"]["atom_id"] == "CA-O-016":
+                    native = output.get("native_result")
+                    implementation_prior_results.append({
+                        "step_definition_id": step["atom_id"],
+                        "action_definition_id": action["atom_id"],
+                        "result": final_result,
+                        "outputs": native.get("outputs", {}) if isinstance(native, Mapping) else {},
+                        "evidence": native.get("evidence", []) if isinstance(native, Mapping) else [],
+                        "retained_state": native.get("retained_state", {}) if isinstance(native, Mapping) else {},
+                    })
             try:
                 transition = self._transition(step, final_result or "")
             except SelectedExecutionError:
@@ -834,7 +968,6 @@ class SelectedExecution:
             next_step = transition["next"]
             if not isinstance(next_step, str):
                 raise SelectedExecutionError("selected transition target is invalid")
-            ordinal += 1
         raise SelectedExecutionError("selected Workflow has no terminal result")
 
     def _shared_dispatch(self, frozen: Mapping[str, Any]) -> dict[str, Any]:
@@ -850,8 +983,7 @@ class SelectedExecution:
         def observe(request: dict[str, Any]) -> dict[str, Any]:
             graph = self._revalidate(frozen)
             return {"selected": request.get("operation_route") == graph["route"], "current": True,
-                    "observed": {"definition_manifest": request.get("definition_manifest"),
-                                 "manifest_ref": graph["manifest_ref"],
+                    "observed": {"manifest_ref": graph["manifest_ref"],
                                  "manifest_digest": graph["manifest_digest"]}}
 
         tracker = RunTracker(self.root, source_observer=observe,
@@ -889,3 +1021,17 @@ class SelectedExecution:
             self._write(folder / "dispatch_uncertain.json", {"run_id": run_id, "reason": str(error)})
             return {"disposition": "recording_pending", "outcome": "interrupted_pending",
                     "workflow_run_id": run_id, "reason": "uncertain selected dispatch intent retained; no replay"}
+
+
+def build_requested_runs(
+    graph: Mapping[str, Any],
+    run_id: str,
+    run_visit_limits: Mapping[str, int] | None = None,
+) -> list[dict[str, Any]]:
+    """Public requested-Run planner for selected-route callers and fixtures.
+
+    The graph must be the already validated selected graph returned by
+    :meth:`SelectedExecution._validate_graph`; callers remain responsible for
+    sealing the returned rows in their execute request before dispatch.
+    """
+    return SelectedExecution.build_requested_runs(graph, run_id, run_visit_limits)

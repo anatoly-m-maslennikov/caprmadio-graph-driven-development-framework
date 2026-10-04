@@ -38,7 +38,8 @@ class AtomOperationsTest(unittest.TestCase):
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n",
             encoding="utf-8",
         )
-        (self.root / ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml").write_text(
+        (self.root / ".caprmedio_caprmedio/_projection").mkdir()
+        (self.root / ".caprmedio_caprmedio/_projection/project_scope_unit_graph.projection.toml").write_text(
             '[[scope_units]]\nname = "FRAMEWORK_METHODOLOGY"\nunit_name = "FRAMEWORK_METHODOLOGY"\nauthority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY"\nparent = "caprmedio"\n\n'
             '[[scope_units]]\nname = "FRAMEWORK_ENGINE"\nunit_name = "FRAMEWORK_ENGINE"\nauthority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE"\nparent = "caprmedio"\n\n'
             '[[scope_units]]\nname = "OPERATOR_DOCUMENTATION"\nunit_name = "OPERATOR_DOCUMENTATION"\nauthority_path = ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION"\nparent = "caprmedio"\n',
@@ -75,6 +76,83 @@ class AtomOperationsTest(unittest.TestCase):
         selectors = ["CA-R-343", self.first.name, self.first.stem, self.first.relative_to(self.root).as_posix()]
         for selector in selectors:
             self.assertEqual(operations.resolve_selector(self.root, selector).atom_id, "CA-R-343")
+
+    def test_projection_directory_is_excluded_from_atom_lookup(self) -> None:
+        projected = self._atom(
+            self.root / ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY/04_requirement" / self.first.name,
+            "# Non-authoritative view",
+        )
+
+        self.assertEqual(operations.resolve_selector(self.root, "CA-R-343").path, self.first)
+        self.assertNotIn(projected, [atom.path for atom in operations.scan_atoms(self.root)])
+        with self.assertRaises(operations.ToolError) as error:
+            operations.atom_from_path(self.root, projected)
+        self.assertEqual(error.exception.code, "not-markdown-atom")
+
+    def test_legacy_projected_atom_copies_are_excluded_by_metadata(self) -> None:
+        for metadata in ("projection:\n  source_carrier_path: source.md", "projection: {source_carrier_path: source.md}"):
+            with self.subTest(metadata=metadata):
+                projected = self._atom(
+                    self.root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/04_requirement" / self.first.name,
+                    "# Copied source",
+                )
+                projected.write_text(projected.read_text().replace("---\n#", metadata + "\n---\n#"))
+
+                self.assertEqual(operations.resolve_selector(self.root, "CA-R-343").path, self.first)
+                self.assertNotIn(projected, [atom.path for atom in operations.scan_atoms(self.root)])
+                with self.assertRaises(operations.ToolError) as error:
+                    operations.atom_from_path(self.root, projected)
+                self.assertEqual(error.exception.code, "not-markdown-atom")
+
+    def test_scalar_id_spellings_survive_create_read_search_and_update(self) -> None:
+        for number, quote in enumerate(("", "'", '"'), start=400):
+            atom_id = f"CA-R-{number}"
+            identity = f"atom_id: {quote}{atom_id}{quote}"
+            path = self.requirements / f"{atom_id}-FRAMEWORK_METHODOLOGY-REQUIREMENT--quoted-id.md"
+            with self.subTest(quote=quote):
+                payload = {"atoms": [{
+                    "path": path.relative_to(self.root).as_posix(),
+                    "frontmatter": identity,
+                    "content": "# Quoted identity\n",
+                }]}
+                operations.run_create(self.root, argparse.Namespace(input=self._input(payload), apply=True))
+                for selector in (atom_id, path.name, path.relative_to(self.root).as_posix()):
+                    read = operations.run_read(self.root, argparse.Namespace(atom=[selector], view="both"))
+                    self.assertEqual(read["atoms"][0]["metadata"]["atom_id"], atom_id)
+                    self.assertIn(identity, read["atoms"][0]["metadata"]["frontmatter"])
+                search = operations.run_search(self.root, argparse.Namespace(
+                    under=None, lifecycle="active", atom=None, query=[atom_id], limit=None, view="metadata",
+                ))
+                self.assertEqual(search["count"], 1)
+                update = {"atoms": [{"selector": atom_id, "content": "# Updated\n"}]}
+                operations.run_update(self.root, argparse.Namespace(input=self._input(update), apply=True))
+                updated = operations.resolve_selector(self.root, atom_id)
+                self.assertIn(identity, updated.frontmatter)
+                self.assertEqual(operations.atom_version(updated), 2)
+                self.assertEqual(updated.content, "# Updated\n")
+
+    def test_quoted_id_validation_rejects_duplicates_mismatch_and_malformed_values(self) -> None:
+        cases = (
+            ('atom_id: "CA-R-343"\natom_id: CA-R-343', "atom-frontmatter-invalid"),
+            ('atom_id: CA-R-343\natom_id: "invalid"', "atom-frontmatter-invalid"),
+            ('atom_id: "CA-R-999"', "atom-frontmatter-id-mismatch"),
+            ('atom_id: "CA-R-343', "atom-frontmatter-invalid"),
+        )
+        for identity, code in cases:
+            with self.subTest(identity=identity):
+                self.first.write_text(f"---\n{identity}\nversion: 1\n---\n# Fixture\n", encoding="utf-8")
+                with self.assertRaises(operations.ToolError) as context:
+                    operations.atom_from_path(self.root, self.first)
+                self.assertEqual(context.exception.code, code)
+
+    def test_draft_rejects_quoted_stable_identity(self) -> None:
+        path = self.drafts / "CA-R--FRAMEWORK_METHODOLOGY-REQUIREMENT--candidate.md"
+        for quote in ("'", '"'):
+            with self.subTest(quote=quote):
+                path.write_text(f"---\natom_id: {quote}CA-R-343{quote}\n---\n# Draft\n", encoding="utf-8")
+                with self.assertRaises(operations.ToolError) as context:
+                    operations.atom_from_path(self.root, path)
+                self.assertEqual(context.exception.code, "draft-has-stable-id")
 
     def test_frontmatter_identity_resolves_sequence_prefixed_plan_carrier(self) -> None:
         atom = operations.resolve_selector(self.root, "CA-P-346")

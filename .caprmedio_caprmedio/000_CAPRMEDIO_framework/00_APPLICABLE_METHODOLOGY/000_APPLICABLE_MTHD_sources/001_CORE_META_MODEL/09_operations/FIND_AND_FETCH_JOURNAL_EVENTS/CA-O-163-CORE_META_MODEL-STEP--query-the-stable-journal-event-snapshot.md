@@ -8,8 +8,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 00:30:00 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "Find and Fetch Journal Events/Step: query"
   depends_on: [Workflow, Step, Action, Journal, Event, Workflow Run, Action Run]
@@ -26,7 +26,7 @@ This Step is the query node of CA-O-161 and invokes exactly one Action, CA-O-162
 
 ### Inputs and parameters
 
-Before Action dispatch, bind the selected Project's canonical `.caprmedio_<project name>/_journal/` Event carriers into one opaque snapshot token that identifies the complete ordered source frontier. Bind the literal filter expression, requested result mode (`ids`, selected `fields`, or `full_events`), selected fields when applicable, and bounded page request. The token's frontier excludes this invocation's later Run/Event records and remains fixed even if append occurs while the query is read.
+Before workflow/action-start recording or Action dispatch, the adapter captures the selected Project's canonical Journal byte-prefix and binds one opaque snapshot token containing source-root identity, prefix byte length and hash, ordered member references, member byte hashes, and unique Event IDs. The Action consumes exactly that sealed frontier. A standalone Action captures before its own Run evidence. Bind the literal filter expression, requested result mode (`ids`, selected `fields`, or `full_events`), selected fields when applicable, and bounded page request. The token excludes this invocation's later Run/Event records and permits later append only outside the sealed prefix.
 
 ## Details
 

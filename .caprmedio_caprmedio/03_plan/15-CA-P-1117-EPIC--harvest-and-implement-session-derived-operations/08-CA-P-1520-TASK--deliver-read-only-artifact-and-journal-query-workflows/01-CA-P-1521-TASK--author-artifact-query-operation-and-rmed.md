@@ -14,8 +14,8 @@ status: Done
 subjects:
   governs: "Artifact query source and RMED authoring"
   depends_on: [Operations, Workflow, Action, Tool, Evaluation, Journal]
-version: 2
-updated_at: "2026-10-05 00:00:00 +0400"
+version: 3
+updated_at: "2026-10-05 01:20:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1522]
@@ -44,11 +44,11 @@ The exact active source/RMED IDs, Versions, and paths are saved with the stated 
 
 ## Result
 
-Saved active source definitions: CA-O-158@1 Workflow,
-CA-O-159@1 Action, and CA-O-160@1 Step in
+CA-P-1530 supersedes the rejected packet with active source definitions:
+CA-O-158@2 Workflow, CA-O-159@2 Action, and CA-O-160@2 Step in
 `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/`.
-Saved active RMED: CA-R-1849@1, CA-R-1850@1 (the shared bounded query-filter contract),
-CA-M-330@1, CA-E-569@1, and CA-D-551@1 in the respective
+Saved active RMED: CA-R-1849@2, CA-R-1850@2 (the shared bounded query-filter contract),
+CA-M-330@2, CA-E-569@2, and CA-D-551@2 in the respective
 `102_LAYER_2_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/`,
 `05_method/`, `06_evaluation/`, and `07_delivery/` source paths. The exact
 delivery and golden-test paths are bound in CA-D-551@1 and CA-E-569@1.

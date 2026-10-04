@@ -266,7 +266,7 @@ class InstallToolsTests(unittest.TestCase):
             "[paths]\n"
             'control_root = ".caprmedio_caprmedio"\n'
             'framework_root = ".caprmedio_framework"\n'
-            'journal_root = ".caprmedio_caprmedio/work_journal"\n'
+            'journal_root = ".caprmedio_caprmedio/_journal"\n'
             'runtime_root = ".caprmedio_runtime"\n'
             'temporary_root = ".caprmedio_tmp"\n'
             'legacy_migration_roots = [".caprmedio"]\n',

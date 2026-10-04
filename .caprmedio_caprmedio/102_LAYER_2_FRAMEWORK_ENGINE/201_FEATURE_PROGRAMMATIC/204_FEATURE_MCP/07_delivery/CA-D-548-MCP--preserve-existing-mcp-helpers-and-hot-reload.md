@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-04 18:30:00 +0000"
+version: 2
+updated_at: "2026-10-05 02:00:00 +0400"
 subjects:
   governs: "MCP/selected Workflow compatibility"
   depends_on: [MCP, Tool, Workflow, Run, Project]
@@ -29,10 +29,20 @@ Selected adapters **must** be additive and reload-compatible; they **must not** 
 
 ## Details
 
-Implementation registers the declared routes through `create_server(root)` after root resolution and uses the current stdio transport and stable hot-reload boundary. It preserves `discover_tools`, `discover_operations`, `get_execution_context`, `get_execution_status`, `resume_execution_context`, `watch_execution`, `rmed_atoms_base_revise`, and `workflow_orchestrator` with their current names and contracts. It does not make `workflow_orchestrator` an executor for selected O016 or other unsupported selected Workflows.
+Implementation registers the declared routes through `create_server(root)` after
+root resolution and uses the current stdio transport and stable hot-reload
+boundary. It preserves `discover_tools`, `discover_operations`,
+`get_execution_context`, `get_execution_status`, `resume_execution_context`,
+`watch_execution`, `rmed_atoms_base_revise`, and `workflow_orchestrator` with
+their current names and contracts. `workflow_orchestrator` remains the general
+selected-queue entrypoint for an admitted `enqueue_selected` request; it does
+not itself become a per-route executor. Only a selected route whose configured
+execution binding is absent is blocked or deferred. That absence does not
+disallow an otherwise accepted general selected-queue request, including either
+admitted read-only query route once its exact binding is implemented.
 
 Reload validates a complete new route registry before publication, keeps in-flight calls on their captured implementation generation, and rolls back invalid registration without removing prior helpers. The selected route registry exposes only current/admitted source bindings supplied by the adapter/service; stale or unsupported routes remain rejected or explicitly deferred. MCP code contains adapter/validation/projection logic only; the common `RUN_SUPPORT` interface owns lifecycle execution, durable event retries, and canonical Journal persistence.
 
 ### Sources
 
-- CA-D-523 v2; CA-E-533 v1; CA-E-534 v1; CA-A-1141 v1 K7/K16.
+- CA-D-523 v2; CA-E-533 v1; CA-E-534 v1; CA-A-1141 v1 K7/K16; CA-D-521 v3.
