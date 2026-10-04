@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Iterable
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from artifact_metadata import atom_identifier
+from artifact_metadata import SETTINGS_PATH, atom_identifier
 
 
 SOURCE_RELATIVE = Path(
@@ -26,6 +26,7 @@ SOURCE_RELATIVE = Path(
 )
 OUTPUT_RELATIVE = Path(".caprmedio_framework/00_APPLICABLE_METHODOLOGY")
 APPROVAL_RELATIVE = SOURCE_RELATIVE / "003_PROJECT_CONFIGURATION/applicable_methodology_conflict_approvals.toml"
+STRUCTURE_RELATIVE = SETTINGS_PATH.parent / "project_structure.toml"
 LAYERS = (
     ("CORE_META_MODEL", "001_CORE_META_MODEL", 0, True),
     ("INSTALLED_EXTENSIONS", "002_INSTALLED_EXTENSIONS", 1, False),
@@ -46,6 +47,51 @@ RELATION_KINDS = {
     "incompatible": {"incompatible_with", "incompatibility_with"},
 }
 SCHEMA = "caprmedio.compile_applicable_methodology.dry_run.v1"
+
+
+@dataclass(frozen=True)
+class MethodologyPaths:
+    source: Path = SOURCE_RELATIVE
+    output: Path = OUTPUT_RELATIVE
+    structure_sha256: str | None = None
+
+    @property
+    def approvals(self) -> Path:
+        return self.source / "003_PROJECT_CONFIGURATION/applicable_methodology_conflict_approvals.toml"
+
+
+def methodology_paths(root: Path) -> MethodologyPaths:
+    """Use the declared source unit's authority and delivery places."""
+    structure = root / STRUCTURE_RELATIVE
+    if not structure.exists():
+        return MethodologyPaths()
+    try:
+        raw = structure.read_bytes()
+        data = tomllib.loads(raw.decode("utf-8"))
+        declared = data.get("scope_units", [])
+        if not isinstance(declared, list) or any(not isinstance(unit, dict) for unit in declared):
+            raise ValueError("scope_units must be an array of tables")
+        units = [unit for unit in declared
+                 if unit.get("scope_unit_name") == "METHODOLOGY_SOURCES"]
+    except (OSError, ValueError, AttributeError) as error:
+        raise CompileError("project-structure-invalid", "Cannot resolve methodology places from Project Structure") from error
+    if len(units) != 1:
+        raise CompileError("source-unit-cardinality", "Project Structure must declare exactly one METHODOLOGY_SOURCES unit")
+    paths = []
+    for key in ("authority_path", "delivery_path"):
+        value = units[0].get(key)
+        if not isinstance(value, str) or not value:
+            raise CompileError("source-unit-place-missing", "Methodology source unit has no declared place", property=key)
+        path = Path(value)
+        if path.is_absolute() or ".." in path.parts or path == Path("."):
+            raise CompileError("source-unit-place-invalid", "Methodology place must be repository-relative", property=key)
+        if not (root / path).resolve().is_relative_to(root.resolve()):
+            raise CompileError("source-unit-place-invalid", "Methodology place resolves outside the Project", property=key)
+        paths.append(path)
+    source_place, output_place = ((root / path).resolve() for path in paths)
+    if output_place.is_relative_to(source_place):
+        raise CompileError("source-output-overlap", "Generated output cannot replace the authoritative source place")
+    return MethodologyPaths(*paths, sha256_bytes(raw))
 
 
 class CompileError(Exception):
@@ -81,6 +127,7 @@ class Candidate:
     incompatibilities: tuple[str, ...]
     definition_term: str | None
     definition_subject_path: str | None
+    output_relative: str = OUTPUT_RELATIVE.as_posix()
 
     def frontier_record(self) -> dict[str, object]:
         return {
@@ -95,7 +142,7 @@ class Candidate:
         record = {
             **self.frontier_record(),
             "content_role": self.role,
-            "output_path": f"{OUTPUT_RELATIVE.as_posix()}/{self.role_directory}/{self.basename}",
+            "output_path": f"{self.output_relative}/{self.role_directory}/{self.basename}",
         }
         if self.definition_term is not None:
             record["definition_term"] = self.definition_term
@@ -279,11 +326,12 @@ def repo_relative(root: Path, path: Path) -> str:
         raise CompileError("path-outside-project", "Carrier is outside the Project root", path=path.as_posix()) from error
 
 
-def discover_candidates(root: Path) -> tuple[list[Candidate], list[dict[str, object]], dict[str, str]]:
-    source_root = root / SOURCE_RELATIVE
+def discover_candidates(root: Path, places: MethodologyPaths | None = None) -> tuple[list[Candidate], list[dict[str, object]], dict[str, str]]:
+    places = places or methodology_paths(root)
+    source_root = root / places.source
     diagnostics: list[dict[str, object]] = []
     if not source_root.is_dir():
-        raise CompileError("source-root-missing", "Applicable Methodology source root is missing", path=SOURCE_RELATIVE.as_posix())
+        raise CompileError("source-root-missing", "Applicable Methodology source root is missing", path=places.source.as_posix())
 
     root_role_directories = {directory for _, directory in ROLES}
     observed_layers = sorted(
@@ -315,6 +363,8 @@ def discover_candidates(root: Path) -> tuple[list[Candidate], list[dict[str, obj
 
     candidates: list[Candidate] = []
     source_snapshot: dict[str, str] = {}
+    if places.structure_sha256 is not None:
+        source_snapshot[STRUCTURE_RELATIVE.as_posix()] = places.structure_sha256
     for layer, layer_directory, layer_order, contributes in LAYERS:
         layer_root = source_root / layer_directory
         if not contributes:
@@ -359,6 +409,7 @@ def discover_candidates(root: Path) -> tuple[list[Candidate], list[dict[str, obj
                         incompatibilities=relation_targets(frontmatter, RELATION_KINDS["incompatible"]),
                         definition_term=defined_term,
                         definition_subject_path=definition_subject_path,
+                        output_relative=places.output.as_posix(),
                     )
                 )
     candidates.sort(key=candidate_sort_key)
@@ -504,22 +555,23 @@ def detect_conflicts(candidates: list[Candidate]) -> list[dict[str, object]]:
     return conflicts
 
 
-def discover_approvals(root: Path, candidates: list[Candidate]) -> list[Approval]:
+def discover_approvals(root: Path, candidates: list[Candidate], places: MethodologyPaths | None = None) -> list[Approval]:
     del candidates
-    path = root / APPROVAL_RELATIVE
+    approval_relative = (places or methodology_paths(root)).approvals.as_posix()
+    path = root / approval_relative
     if not path.exists():
         return []
     if not path.is_file() or path.is_symlink():
-        raise CompileError("approval-carrier-invalid", "Project Configuration approval Carrier must be a regular TOML file", path=APPROVAL_RELATIVE.as_posix())
+        raise CompileError("approval-carrier-invalid", "Project Configuration approval Carrier must be a regular TOML file", path=approval_relative)
     try:
         document = tomllib.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeDecodeError, tomllib.TOMLDecodeError) as error:
-        raise CompileError("approval-carrier-invalid", "Project Configuration approval Carrier is not valid UTF-8 TOML", path=APPROVAL_RELATIVE.as_posix()) from error
+        raise CompileError("approval-carrier-invalid", "Project Configuration approval Carrier is not valid UTF-8 TOML", path=approval_relative) from error
     if document.get("schema") != "caprmedio.applicable_methodology_conflict_approvals.v1":
-        raise CompileError("approval-schema-invalid", "Project Configuration approval Carrier schema is invalid", path=APPROVAL_RELATIVE.as_posix())
+        raise CompileError("approval-schema-invalid", "Project Configuration approval Carrier schema is invalid", path=approval_relative)
     records = document.get("approvals", [])
     if not isinstance(records, list) or any(not isinstance(record, dict) for record in records):
-        raise CompileError("approval-record-invalid", "Project Configuration approvals must be an array of tables", path=APPROVAL_RELATIVE.as_posix())
+        raise CompileError("approval-record-invalid", "Project Configuration approvals must be an array of tables", path=approval_relative)
     required = {"conflict_id", "source_frontier_digest", "selected_source_carrier_path", "operator"}
     approvals: list[Approval] = []
     for record in records:
@@ -528,14 +580,14 @@ def discover_approvals(root: Path, candidates: list[Candidate]) -> list[Approval
             raise CompileError(
                 "approval-record-incomplete",
                 "Project Configuration approval record is incomplete",
-                carrier_path=APPROVAL_RELATIVE.as_posix(),
+                carrier_path=approval_relative,
                 missing=missing,
             )
         if any(not isinstance(record[key], str) for key in required):
             raise CompileError(
                 "approval-record-invalid",
                 "Project Configuration approval fields must be strings",
-                carrier_path=APPROVAL_RELATIVE.as_posix(),
+                carrier_path=approval_relative,
             )
         approvals.append(
             Approval(
@@ -543,7 +595,7 @@ def discover_approvals(root: Path, candidates: list[Candidate]) -> list[Approval
                 source_frontier_digest=record["source_frontier_digest"],
                 selected_source_carrier_path=record["selected_source_carrier_path"],
                 operator=record["operator"],
-                carrier_path=APPROVAL_RELATIVE.as_posix(),
+                carrier_path=approval_relative,
             )
         )
     return approvals
@@ -632,8 +684,8 @@ def validate_existing_output_ownership(output_root: Path) -> None:
                 raise CompileError("output-role-not-owned", "Generated output Carrier lacks projection ownership metadata", path=path.as_posix())
 
 
-def stage_outputs(root: Path, candidates: list[Candidate], source_snapshot: dict[str, str]) -> Path:
-    output_root = root / OUTPUT_RELATIVE
+def stage_outputs(root: Path, candidates: list[Candidate], source_snapshot: dict[str, str], places: MethodologyPaths | None = None) -> Path:
+    output_root = root / (places or methodology_paths(root)).output
     output_root.mkdir(parents=True, exist_ok=True)
     temporary_staging = root / ".caprmedio_tmp/compile_applicable_methodology"
     temporary_staging.mkdir(parents=True, exist_ok=True)
@@ -657,8 +709,8 @@ def stage_outputs(root: Path, candidates: list[Candidate], source_snapshot: dict
         raise
 
 
-def replace_outputs_atomically(root: Path, staging: Path) -> None:
-    output_root = root / OUTPUT_RELATIVE
+def replace_outputs_atomically(root: Path, staging: Path, places: MethodologyPaths | None = None) -> None:
+    output_root = root / (places or methodology_paths(root)).output
     new_root = staging / "new"
     existing: dict[Path, bytes] = {}
     expected: set[Path] = set()
@@ -690,8 +742,8 @@ def replace_outputs_atomically(root: Path, staging: Path) -> None:
         shutil.rmtree(staging, ignore_errors=True)
 
 
-def generated_tree_digest(root: Path) -> str:
-    output_root = root / OUTPUT_RELATIVE
+def generated_tree_digest(root: Path, places: MethodologyPaths | None = None) -> str:
+    output_root = root / (places or methodology_paths(root)).output
     records: list[dict[str, str]] = []
     for _, role_directory in ROLES:
         role_root = output_root / role_directory
@@ -708,11 +760,12 @@ def generated_tree_digest(root: Path) -> str:
     return sha256_bytes(canonical_json(records))
 
 
-def compile_report(root: Path) -> tuple[dict[str, object], list[Candidate], dict[str, str]]:
-    candidates, diagnostics, source_snapshot = discover_candidates(root)
+def compile_report(root: Path, places: MethodologyPaths | None = None) -> tuple[dict[str, object], list[Candidate], dict[str, str]]:
+    places = places or methodology_paths(root)
+    candidates, diagnostics, source_snapshot = discover_candidates(root, places)
     digest = frontier_digest(candidates)
     conflicts = detect_conflicts(candidates)
-    approvals = discover_approvals(root, candidates)
+    approvals = discover_approvals(root, candidates, places)
     selected, approval_results, unresolved = resolve_conflicts(candidates, conflicts, approvals, digest)
     report: dict[str, object] = {
         "schema": SCHEMA,
@@ -737,7 +790,7 @@ def compile_report(root: Path) -> tuple[dict[str, object], list[Candidate], dict
 def find_project_root(start: Path) -> Path:
     resolved = start.resolve()
     for candidate in (resolved, *resolved.parents):
-        if (candidate / SOURCE_RELATIVE).is_dir():
+        if (candidate / methodology_paths(candidate).source).is_dir():
             return candidate
     raise CompileError("project-root-not-found", "Cannot find CAPRMEDIO Project root", start=resolved.as_posix())
 
@@ -749,7 +802,8 @@ def run(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve() if args.root else find_project_root(Path.cwd())
-        report, selected, source_snapshot = compile_report(root)
+        places = methodology_paths(root)
+        report, selected, source_snapshot = compile_report(root, places)
         if not args.apply:
             print(json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2))
             return 0 if report["can_apply"] else 2
@@ -757,13 +811,13 @@ def run(argv: list[str] | None = None) -> int:
             report["apply_status"] = "BLOCKED"
             print(json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2))
             return 2
-        validate_existing_output_ownership(root / OUTPUT_RELATIVE)
-        staging = stage_outputs(root, selected, source_snapshot)
-        replace_outputs_atomically(root, staging)
+        validate_existing_output_ownership(root / places.output)
+        staging = stage_outputs(root, selected, source_snapshot, places)
+        replace_outputs_atomically(root, staging, places)
         if not source_snapshot_is_current(root, source_snapshot):
             raise CompileError("source-frontier-changed", "Source frontier changed during output replacement")
         report["apply_status"] = "APPLIED"
-        report["generated_tree_digest"] = generated_tree_digest(root)
+        report["generated_tree_digest"] = generated_tree_digest(root, places)
         print(json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2))
         return 0
     except CompileError as error:

@@ -153,6 +153,75 @@ class CompilerTest(unittest.TestCase):
         self.assertTrue(report["can_apply"])
         self.assertEqual(report["selected_candidate_count"], 1)
 
+    def declare_places(self, source: str, output: str) -> Path:
+        structure = self.temp / module.STRUCTURE_RELATIVE
+        structure.parent.mkdir(parents=True, exist_ok=True)
+        structure.write_text(
+            '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+            f'authority_path = {json.dumps(source)}\n'
+            f'delivery_path = {json.dumps(output)}\n'
+        )
+        return structure
+
+    def test_declared_source_and_delivery_places_drive_regeneration(self) -> None:
+        output = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+        source = f"{output}/000_APPLICABLE_MTHD_sources"
+        self.declare_places(source, output)
+        moved_source = self.temp / source
+        moved_source.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(self.source, moved_source)
+        self.source = moved_source
+        original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        before = original.read_bytes()
+
+        code, report = self.invoke()
+        projected = self.temp / output / "05_method" / original.name
+        self.assertEqual(0, code)
+        self.assertEqual(str(projected.relative_to(self.temp)), report["output_plan"][0]["output_path"])
+        applied_code, applied = self.invoke("--apply")
+        self.assertEqual(0, applied_code)
+        self.assertIn(b"projection:", projected.read_bytes())
+        self.assertEqual(before, original.read_bytes())
+        rerun_code, rerun = self.invoke("--apply")
+        self.assertEqual(0, rerun_code)
+        self.assertEqual(applied["generated_tree_digest"], rerun["generated_tree_digest"])
+
+    def test_invalid_declared_places_do_not_mutate_sources(self) -> None:
+        original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        for source, output, expected in (
+            ("../outside", "projection", "source-unit-place-invalid"),
+            ("sources", "sources", "source-output-overlap"),
+            ("sources", "sources/generated", "source-output-overlap"),
+        ):
+            with self.subTest(source=source, output=output):
+                self.declare_places(source, output)
+                code, report = self.invoke("--apply")
+                self.assertEqual(2, code)
+                self.assertEqual(expected, report["diagnostics"][0]["code"])
+                self.assertEqual(carrier("CA-M-001"), original.read_bytes())
+
+    def test_changed_structure_blocks_staging_at_original_places(self) -> None:
+        self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), module.OUTPUT_RELATIVE.as_posix())
+        places = module.methodology_paths(self.temp)
+        _, candidates, snapshot = module.compile_report(self.temp, places)
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), "other_projection")
+
+        with self.assertRaises(module.CompileError) as raised:
+            module.stage_outputs(self.temp, candidates, snapshot, places)
+
+        self.assertEqual("source-frontier-changed", raised.exception.code)
+        self.assertFalse((self.temp / "other_projection").exists())
+
+    def test_delivery_alias_cannot_overwrite_source_authority(self) -> None:
+        (self.temp / "source_alias").symlink_to(self.source, target_is_directory=True)
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), "source_alias")
+
+        code, report = self.invoke("--apply")
+
+        self.assertEqual(2, code)
+        self.assertEqual("source-output-overlap", report["diagnostics"][0]["code"])
+
     def test_duplicate_identity_blocks_apply_without_exact_approval(self) -> None:
         self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001-A--one.md", carrier("CA-R-001"))
         self.write("003_PROJECT_CONFIGURATION", "04_requirement", "CA-R-001-B--two.md", carrier("CA-R-001", version=2))
