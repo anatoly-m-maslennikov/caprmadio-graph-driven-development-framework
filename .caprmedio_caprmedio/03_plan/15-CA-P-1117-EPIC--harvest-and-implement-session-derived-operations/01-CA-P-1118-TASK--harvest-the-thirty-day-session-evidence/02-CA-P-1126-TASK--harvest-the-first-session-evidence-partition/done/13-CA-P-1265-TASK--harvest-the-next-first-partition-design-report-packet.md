@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next bounded first-partition design-report harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 11:15:37 +0400"
+version: 2
+updated_at: "2026-10-04 11:39:54 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1269
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1063,6 +1064,22 @@ source_sha256 is retained905/910snapshotprovenance,notfreshimmutablefull-sourcep
 SystemPythonstandard-library seek/read each exact selected/context byteinterval; verify rawSHA/bytes/response_item-messagekind/timestamp/role/nullchannel/nativepartcount/characters/window.74selected/24user/50assistant/58703bytes/29624chars; orderedaggregateSHA2563f8f4ac0362da9e6a4d3fbda4430d29401b6fd54f4a4e8a197b3e79e908bfda7;fivecontextparts1335,total30959<=35000. Whole57816report8156chars included; following59283checked separately, notharvested.
 
 After saving983 compare all74savedrowfingerprints/nativeparts/literalintent/annotationtargets/short-answerantecedents/groups/claims/frontiers tooriginal bytes; confirm fullfivecontextdispositions andactualnextbinding. VerifymandatoryAnalysis/Planheadings/oneDoD/oneEOFnewline/no trailingwhitespace,immediateparent/uniqueIDs/siblingsequence/acyclicchild-completion+BLOCKS. Review1119/1130/1155 readiness;1126Active. Record passing savedchecks andactualfirst/terminalclocks includingpersistence/Done/parent/next closure. Root strictfullYAML/full-EpicDAG/save remainseparate.
+
+### Completed design-report packet and actual whole alignment-report remainder
+
+CA-P-1265 harvested74 whole57816–59236,24user/50assistant,58703raw bytes/29624native chars/74parts plusfive full contextparts1335,total30959. AggregateSHA2563f8f4ac0362da9e6a4d3fbda4430d29401b6fd54f4a4e8a197b3e79e908bfda7. CA-A-983v1 at `.caprmedio_caprmedio/02_analysis/CA-A-983-ANALYSIS_RPRT--harvest-the-next-first-partition-design-report-packet.md` saves74complete fingerprinted substantive dispositions,24literaluser-role parts=22intent+emptyedit/copiedskill wrappers,oneannotation/16historicalgroups/5provisionalcandidates/fivecontextdispositions. Full8156report retains3RI findings/1RF proposal/2gaps/5reportedreferences/allguarantee/ordering/assurance limits. No selectedfragment remains.
+
+Latesthuman runtimeequivalence/Operator modes/dependencies-first/no prerequisitecycles/E-M-Dloop/author-permission-confidence gates/3additionalretries/ALLinputs/pre-refactorchecks/annotationapply boundaries are preserved. Historicalcommit-push-everything separatefromapply-onlyscope; reported12Atoms/fourcommits/latest4ed9feffe/11entitygraphtests/remote-clean/validatorpass are notindependentTool/runtime/Git/Journalproof. Projectstatus distinguishesappliedrepairs/tooltestsfromauthoritycoherence; laterdo approvesexactreadonlyTier0–1auditPlan99%, notcurrentEpic90% orautomaticfixes. CoreMetaModelplanningrequest separate/unprovencomplete. HistoricalReader/SSH/nonoverwrite-reportstorage claims are notcurrentConcerns.
+
+ActualnextActive1269v1 at `14-CA-P-1269-TASK--harvest-the-next-whole-first-partition-alignment-report-packet.md`, immediate1126/sequence14/oneAI/<=15minutes, reservedCA-A-987 at `.caprmedio_caprmedio/02_analysis/CA-A-987-ANALYSIS_RPRT--harvest-the-next-whole-first-partition-alignment-report-packet.md`.26whole59283–59722,8user/18assistant,43817raw bytes/33279nativechars;aggregateSHA256d7fe0fd9be4284c04a646b03ef2bccf0eb48273ed57fec7d2ec46a0d543e262b. Fivefullcontexts58417/58600/58607/59186/59236 total1646 preservehumanrequest/fullPlan/literaldo/review-and-save-boundary; total34925<=35000. Whole23037firstreport59283 included intact, notharvestedhere. Last59722 bytes[378122206,378122804),2026-09-05T21:29:36.592Z,assistant/null/1part,SHA2564f3d665c1daf10f4a74c6d2de1046c7cdcdb9a18e3563521433d62bb2746905d. Following59756 bytes[378261239,378261970),2026-09-05T21:31:01.362Z,assistant/null/1part,731bytes/338chars,SHA2562e87b1ec284cdb77e295fd65e6c40fd5f5df3ff943b0ff6c09a17fe8d1c239ff remainsintact/unprocessed;wouldexceed35000. ObtainrootnextIDs/bindactualremainderbefore1269Done; metadata/rawbinding isnotsemanticreading.
+
+Combinedcanonicalcoverage593;refined1869minus593 leaves1276,original1877minus593 leaves1284;currentwrappers arenot910environment_context exclusions. Eventual26completion1250/1258,notcurrentcoverage. All1659-file/1657-ID905rows/other1658files/17PRIMARY+1642worker origins/metadata-parent/worktree/bothcontinuationpairs/candidate/appendableprefix/frozenwindow-amendments retainexactfrontiers in983/1269/priorrollups. No file/partition/monthcompletion.
+
+1265directlyblocks1269;Active1269 and1126 directlyblock1119/1130/1155. Affectedv1dependents/readinessreviewed;1126Active. FreshGoal/activePrinciples/permissionsread;fivePlan-sourcebodies/revisionsunchanged,currentversionsin983. Passingchecks:current74+fivecontexts/next26+fivecontexts/bothfollowingslices rawhashes/aggregates/native metadata/parts/windows/budgets;74unique substantivejoins/24literalparts/oneannotation/22intentgroupmapping/16groups/5candidates;fourmandatorylayouts/EOF/whitespace/uniquesiblings-sequences/seven-nodeBLOCKS+completionDAG. NoactualcurrentConcern/excludedchanges. RootstrictfullsavedYAML/full-EpicDAG/save remainseparate. Holdafter1265.
+
+### Actual closure and timing exception
+
+First clock: 2026-10-04 07:22:43 UTC. All substantive dispositions, native/saved checks, Done placement, parent roll-up, next binding and post-persistence local verification were complete and passed at 2026-10-04 07:36:59 UTC: 14m16s, with 44s remaining against the 15-minute estimate. Context recovery delayed the final timing receipt and handoff. Receipt assembly resumed at 2026-10-04 07:39:54 UTC: 17m11s from the unchanged first clock, 2m11s over the estimate. This is an explicit terminal/handoff timing overrun, not a claim that the entire turn closed within 15 minutes. No evidence remains partially harvested in this leaf; complete saved coverage is preserved. Root was notified for timing-control adjudication. Final post-receipt native/saved/layout/local-DAG verification passed at 2026-10-04 07:40:45 UTC: actual terminal closure 18m02s from the first clock, 3m02s over the estimate. Receipt persistence/EOF confirmation follows this terminal verification and is not presented as source-harvest work. No next leaf was executed.
 
 ## Details
 

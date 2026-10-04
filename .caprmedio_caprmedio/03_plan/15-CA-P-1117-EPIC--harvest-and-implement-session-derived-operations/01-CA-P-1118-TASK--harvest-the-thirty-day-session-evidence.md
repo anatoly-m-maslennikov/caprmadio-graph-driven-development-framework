@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 10
-updated_at: "2026-10-04 11:19:30 +0400"
+version: 11
+updated_at: "2026-10-04 11:53:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,20 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current superseding checkpoint:59 substantive packets.3656 unique PRIMARY dispositions plus279 worker dispositions =3935 total. Original-main first593/second624; continuation second236/third788/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves2932 unharvested; worker baseline6423 leaves6144. Final PRIMARY1415/1415 complete; finalworkers279/4051,3772remain. Metadata indexing, machine-context refinements and futurebindings do not grant semantic coverage.
+
+Latest1265/A983(74whole,5groups),1266/A984(100whole/101parts,8groups),1267/A985(92whole,3groups),1276/A994(10workerwhole,3groups),1280/A998(85workerwhole,6groups),1284/A1002(100workerwhole,6groups) add461 dispositions/31provisional overlapping groups, bringing historicaloverlappinggroups to280. These are not280adopted or deduplicated Operations. Whole reports, exact native parts/context, human decisions, withdrawal/report/current-proof boundaries remain retained.
+
+Actual next bound leaves:1269/A987(first26whole,total34925),1270/A988(second53whole,total34873),1271/A989(third48whole,total34730),1288/A1006(final77workerwhole,total34931). At this saved frontier these are bound, not completed. First1276refined/1284original-main remain; second523continuation; third387continuation; final3772workers. All other source/windowfrontiers,candidateidentity disposition and separatepost-cutoffamendments persist. Parents1126–1129/1118remainActive and block1119/1130/1155. No authoring/implementation/Docker-stage bypass.
+
+Actual terminal receipts:1266 finalpersistedcheck10m48;1267 finalpersistedreceipt13m22;root1276checks2m51,1280checks5m44,1284native/savedchecks13m40 andreceipt13m41. P1265 substantive savedclosure/checks14m16, but laterterminalverification18m02/finalreceipt18m24 exceeded15minutes; C304retains that actualfailure without resetting clocks or withdrawing completed nativecoverage. C305resolves a temporarydiagnostic frontier-key error after priornative/saved assertions passed; exact actualfrontier thenpassed. C306records the fresh-Agent threadlimit, with two freshparallelAgents and root's assignedindependent thirdleaf ratherthan a fabricated thirdAgent.
+
+Fullstrict saved-Carrier checks cover127Plans/72supportingCarriers: duplicate-rejecting safeYAML, exactregisteredheadings/fields, uniqueIDs, Doneplacement andcompletion/BLOCKSDAG. Individualnative/saved text/part/context/hash/disposition/frontier proofpasses. These are persistence/provenance checks, not an added semanticrecheck stage.
+
+Prioractualcommit21ebc3d74 has19then-current states independentlymatched to Git/savedbytes and sealedrecovered-state Journal events, bringing ownedrecordedstates to209before thisround. C303records corrected caller's localJournalmoduleimportpath; no runtime/libraryimplementation changed. SharedJournal Git save remainspending dueunrelatedpre-existingedits. Thisround's actualdirectGit andrecorded-state append are verified separately after save, not fabricatedsave-Toolreceipts. No O/RMED authoring, implementation, service mutation or fullDocker runtimevalidation executed under thisEpic.
+
+All lower checkpoints are historical and superseded.
 
 Current superseding checkpoint:53 substantive packets.3390 unique PRIMARY dispositions plus84 worker dispositions =3474 total. Original-main first519/second624; continuation second136/third696/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves3198 unharvested; worker baseline6423 leaves6339. Final PRIMARY1415/1415 is complete, but only84/4051final worker messages are harvested;3967remain. Machine-context refinements still require final source reconciliation. Metadata indexing and future bindings do not count as semantic harvest.
 

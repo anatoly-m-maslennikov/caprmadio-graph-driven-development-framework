@@ -10,21 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following second-partition continuation session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 11:09:05 +0400"
+version: 2
+updated_at: "2026-10-04 11:32:38 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
-    - CA-P-1119
-    - CA-P-1130
-    - CA-P-1155
+    - CA-P-1270
 ---
 # Summary
 
@@ -181,6 +179,20 @@ AllotherA905event/bodyfrontiers/17primary1642workers/original3continuation4exclu
 SystemPythonstdlibseek13271244/read17996424bytes/parsecompleteJSONL/applypredicate mustreproduce100orderedlines/bytes/timestamps/31user69assistant/null/26825joined26824nativechars/max5001/101parts/selectedconcatSHA/firstlast/individualrawtextparts. MultipartL4242both3077/1923partsreadfull/hashchecked;contextsixwhole1591checkedseparately. Independentnative/savedA984identities/parts/context/nonemptydispositions/humanchoices/groups/headings/cleanEOFrequired;nohistoricalreportpromotion/dedupwithoutprovenance.
 
 Checkone-agent<=15minutes/Planproperties/headings/Doneplacement/parentsequence13/exactoutput/actualnextremainder/BLOCKSacyclicity/P1127rollup/affecteddependents. Realterminalclockincludescarrierpersistence/checks,notearliersemanticcompletion. Overrun/blockerrequirestruthfulunfinishedstate/currenttypedProblem/boundedclosure. RootstrictsavedYAML/fullDAG/Git/Journalsaveseparate.
+
+### Actual result and dependent readiness
+
+A984v1 at `.caprmedio_caprmedio/02_analysis/CA-A-984-ANALYSIS_RPRT--harvest-the-following-second-partition-continuation-packet.md`retains100wholemessages/101nativeparts/26825joined26824nativechars/31user69assistant/null,allL4242parts3077/1923/sixwholecontexts1591/fullinput28416,100substantivedispositions/12historicalchoicechains/eightprovisionalgroups. S088machinecontextnotOperatorapproval;exactshortantecedentspreserved. Objectiveinsteadnewfiles/PreservationnotDRY/Journalstorageintegrityversusconformance/R791uniquecases/conflictO/qualifiedretirementnogapschoices scoped;assistantorderedrecencyalgorithm/reportedexecutionnotfreshapproval/currentproof.
+
+Independentnative/savedchecks PASS at2026-10-04T07:30:46Z:100orderedidentities/bytes/timestamps/roles/null/raw/text/101partindices/types/lengths/hashes/sixcontexts/selectedconcatSHA/dispositions/12chains/eightgroups/headings/cleanEOF. Full17996424-bytenativeslice/applypredicate reproduces100eligiblelines/hash. ActualnextP1270/A988sequence14 at `14-CA-P-1270-TASK--harvest-the-subsequent-second-partition-continuation-packet.md`binds53wholeL4398–5659/[31271593,44056534),10user43assistant/34072chars/53parts/max6174/rawSHA `c80a2ca7d662b920e58cb5ff33a3af35cd49c4d219e23e27582015a619ca0814`;fourwholecontexts801/full34873<=35000,next715wouldyield35588. Allnext53native/savedidentities/parts/contextmetadata/full12784941-byteslicepredicatepassed;statementsunharvested.
+
+Original624fullyharvested;continuation236of759nowharvested,523remain. P1270binds53;further470startL5675/[44102391,44103510)/2026-09-17T03:07:40.694Z,rawSHA `5cb7f8b796025c38813817495e8ba01c2ad52e440e641f627dedc65957e3512b`;lastL23936/[511891514,511892940)/2026-09-18T22:23:04.656Z. P1127v15Active/allotherA905frontiers/17primary1642workers/exclusions/identity/Concern/windowdispositionsretained. DownstreamP1119/P1130/P1155fullbodiesreread/stillblockedbyfullharvest/P1270/allunfinishedprerequisites;1266→1270→1119/1130/1155explicit.
+
+Oneassignedagent,actualfirst07:22:48UTC,substantiveverification07:30:46UTC (7m58s),closuremarginretained. Actualcarrierclosure/finalterminalreceiptclockrecordedafterpersist/checkbelow. Nocurrentnativecoverage/authorityissuerequiringnewConcern;historicalunverifieddefectsnotpromoted. RootstrictsavedYAML/fullDAG/Git/Journalsaveseparate. Noadoption/implementation/extraleafexecution.
+
+Actualcarrierclosureclock2026-10-04T07:32:38Z/11:32:38+0400 (9m50s),afterallfour ownedcarrierspersisted/readback andlocalDoneplacement/sequence14-parent/explicitacyclicchangedchain/parentActive/frontier523=53+470/headings/cleanEOFchecksPASS. Noextra leafexecuted;rootstrictYAML/fullDAG/save separate;holdafterclosure.
+
+Finalterminalreceiptread-backclock2026-10-04T07:33:17Z/11:33:17+0400 (10m29s):persistedclosure/allfour ownedcarriersreadbackwithcleanEOF. Finalreceiptpersistencewithin07:37:48Zdeadline;noextra leafexecuted;holdforrootstrictvalidation/save.
 
 ## Details
 

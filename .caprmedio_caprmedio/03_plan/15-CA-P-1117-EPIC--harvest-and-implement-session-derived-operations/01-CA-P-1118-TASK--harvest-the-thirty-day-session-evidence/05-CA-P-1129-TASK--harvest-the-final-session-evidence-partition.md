@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 23
-updated_at: "2026-10-04 11:17:30 +0400"
+version: 26
+updated_at: "2026-10-04 11:48:30 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -64,6 +64,12 @@ Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-windo
 ## Details
 
 ### Latest completed packet checkpoint
+
+Latest superseding frontier1284Done/A1002 adds100 whole worker messages/19sources/33077characters plus1654completecontext andsix provisionaloverlappinggroups. FinalPRIMARY1415/1415 unchanged; finalworkers279/4051,3772remain; monthlyworkers6144remain. ActualnextP1288/A1006seq25 binds77whole/13sources,34462+469=34931characters.1284BLOCKS1288;1288BLOCKS1119/1130/1155. Bindingaddszerocoverage;allotherfrontierspersist,1129/1118Active. Firstclock2026-10-04 07:34:50 UTC; terminalverification2026-10-04 07:48:30 UTC, strict127Plans/69supportingCarriers andnative/savedproof passed.
+
+Latest superseding frontier1280Done/A998 adds85whole workerrecords/15sources/33843characters andsix provisionaloverlappinggroups. FinalPRIMARY1415/1415 unchanged; finalworkers179/4051,3872remain; monthlyworkers6244remain. ActualnextP1284/A1002seq24 binds100whole/19sources,33077characters+1654completepriorcontext,total34731.1280BLOCKS1284;1284BLOCKS1119/1130/1155. Futurebindingaddszerocoverage; allotherfrontierspersist,1129/1118Active. Firstclock2026-10-04 07:27:21 UTC; native/saved/fullstrictchecks07:33:05Z,5m44s,125Plans/68supportingCarriers.
+
+Latest superseding frontier1276Done/A994 adds10whole workerreports/2920characters and three provisionalgroups. FinalPRIMARY1415/1415 unchanged; finalworkers94/4051,3957remain; monthlyworkers6329remain. ActualnextP1280/A998seq23 binds85whole/15sources,33843characters.14whole windows andonepartial source; nextwhole1351-char message excluded only by35k bound.1276BLOCKS1280;1280BLOCKS1119/1130/1155. Futurebindingnotcoverage;1129/1118Active. Firstclock2026-10-04 07:23:47 UTC; native/saved/fullstrictchecks07:26:38Z,2m51s,122Plans/64supportingCarriers.
 
 Latest superseding frontier1272Done/A990 adds37 whole worker reports/9017characters plus402context, five provisional overlapping groups, zero human approval. FinalPRIMARY1415/1415 unchanged; finalworkers84/4051,3967unharvested; monthlyworkers6339unharvested. Actualnext1276/A994seq22 binds10whole/2920characters, source01a0e79b-f415-75b3-98e7-b4371e571393, rawaggregateb0e821e37a6b405364f8bab89c324fce772826421564e859a55b3053adc1e08f.1272BLOCKS1276;1276BLOCKS1119/1130/1155. Futurebindingaddszerocoverage; allotherpartitions/sourcefrontierspersist;1129/1118Active. First clock2026-10-04 07:13:26 UTC; native/saved/fullstrictchecks07:17:30Z,4m04s,121Plans/62supportingCarriers.
 
