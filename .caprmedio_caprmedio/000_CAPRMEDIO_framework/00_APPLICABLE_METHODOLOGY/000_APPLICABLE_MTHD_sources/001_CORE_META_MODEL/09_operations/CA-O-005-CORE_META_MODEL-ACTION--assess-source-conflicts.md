@@ -10,7 +10,7 @@ subjects:
     - "Atom/Local Tier: Principle"
     - "Operator"
 version: 8
-updated_at: "2026-09-21 00:39:50 +0000"
+updated_at: "2026-10-04 15:07:08 +0000"
 relations: {}
 atom_id: "CA-O-005"
 content_role: "Operations"
@@ -22,7 +22,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Assess source conflicts
+# Summary
+
+Assess source conflicts
+
+## Operation
 
 Assess Source Conflicts **means** the reusable Action that assesses one exact selected source frontier against its applicable authority **and** returns the conflict assessment **without** changing sources.
 
@@ -36,3 +40,5 @@ Assess Source Conflicts **means** the reusable Action that assesses one exact se
 7. check affected authority coverage, including still-required Claims, active references **and** Relations, **and** required Evaluations. report an unresolved gap separately from a resolved conflict; absence of a conflict does **not** prove complete coverage.
 
 this Action **must not** synthesize **or** merge Claims, treat an LLM judgment as Operator authorization, change source **or** projected content, **or** silently exclude a conflicting source from the assessment.
+
+## Details

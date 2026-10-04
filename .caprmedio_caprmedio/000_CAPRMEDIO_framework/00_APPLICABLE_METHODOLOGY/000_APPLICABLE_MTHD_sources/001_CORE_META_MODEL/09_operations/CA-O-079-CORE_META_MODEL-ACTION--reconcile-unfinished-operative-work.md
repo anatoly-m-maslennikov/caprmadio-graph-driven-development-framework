@@ -29,7 +29,7 @@ subjects:
     - "Workflow Run"
 
 version: 4
-updated_at: "2026-09-23 16:51:13 +0000"
+updated_at: "2026-10-04 15:16:04 +0000"
 relations: {"relates_to": ["CA-R-1715", "CA-M-306", "CA-R-1574", "CA-R-1576", "CA-R-1577", "CA-R-1579", "CA-R-1580", "CA-R-1583", "CA-R-1599", "CA-R-1539", "CA-R-1464", "CA-D-461", "CA-D-470", "CA-D-481", "CA-R-1490", "CA-R-1720"]}
 global_tier: 11
 ---
@@ -37,7 +37,7 @@ global_tier: 11
 
 Reconcile unfinished operative work
 
-## Claim
+## Operation
 
 Reconcile Unfinished Work **means** the Action that reconciles still-valid remaining work with its applicable Plan representation under CA-R-1715, **without** duplicating existing Plans **or** authorizing execution of that work.
 
@@ -63,3 +63,5 @@ Reconcile Unfinished Work **means** the Action that reconciles still-valid remai
 - failed: the exact completed **and** incomplete effects, recoverable evidence, **and** required recovery; do **not** report partial reconciliation as completion.
 
 this Action maintains the representation of unfinished work. it does **not** execute that work, restart a Workflow Run, replay completed effects, mark the work Done, **or** introduce another completed-work preservation policy. resulting Plan Atoms remain subject **to** their existing Definition of Done, Status, authorization, **and** execution rules.
+
+## Details

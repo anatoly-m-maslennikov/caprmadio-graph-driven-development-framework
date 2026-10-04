@@ -22,7 +22,7 @@ subjects:
     - "Applicable Methodology/Source Frontier Digest"
     - "Journal/Record"
 version: 10
-updated_at: "2026-09-18 14:16:20 +0000"
+updated_at: "2026-10-04 15:08:22 +0000"
 relations: {}
 atom_id: "CA-O-011"
 content_role: "Operations"
@@ -34,7 +34,11 @@ author: "Anatoly Maslennikov"
 type: "Workflow"
 global_tier: 11
 ---
-# Bind source reconciliation to Applicable Methodology
+# Summary
+
+Bind source reconciliation to Applicable Methodology
+
+## Operation
 
 Applicable Methodology Compilation **must** bind Source Reconciliation **to** producing Applicable Methodology by reusing CA-O-010's Steps **and** typed control-flow Relations with the following bindings. this preserves the named methodology-specific Workflow target; it does **not** introduce a Step that invokes another Workflow **or** duplicate an Action definition.
 
@@ -48,3 +52,5 @@ Applicable Methodology Compilation **must** bind Source Reconciliation **to** pr
 | publish | CA-O-009, Publish Reconciled Projection | preserve **every** selected Atom ID, exact source Revision, authority owner, **and** Claim under CA-R-1314 **and** CA-R-1316; enforce CA-R-1461 **and** CA-D-305 **and** CA-D-306 source identity, exact source Carrier bytes **and** Carrier form. fail **without** changing Applicable Methodology membership **if** **any** conflict remains unresolved **or** **any** required approval is invalid. produce the same ordered Applicable Methodology membership from the same resolved source frontier. |
 
 these bindings preserve CA-O-010's entry Step, Step-to-Action references, ON_RESULT transitions, **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
+
+## Details

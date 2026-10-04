@@ -19,7 +19,7 @@ subjects:
     - "Autonomous Confidence Threshold"
     - "Projection/Type: Reconciled Projection"
 version: 7
-updated_at: "2026-09-18 14:16:20 +0000"
+updated_at: "2026-10-04 15:08:22 +0000"
 relations: {}
 atom_id: "CA-O-010"
 content_role: "Operations"
@@ -31,13 +31,17 @@ author: "Anatoly Maslennikov"
 type: "Workflow"
 global_tier: 11
 ---
-# Reconcile sources
+# Summary
+
+Reconcile sources
+
+## Operation
 
 Source Reconciliation **means** the reusable Workflow whose nodes are the following Steps **and** whose control flow is defined by their result conditions. the Step references reuse those Action definitions; they do **not** copy them **or** make another Workflow the Action invoked by a Step.
 
 the entry Step is select. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
 
-## Steps
+### Steps
 
 | Step | Action reference | Parameters **and** inputs |
 |---|---|---|
@@ -48,7 +52,7 @@ the entry Step is select. interpret Step bindings **and** run boundaries under C
 | correct | CA-O-008 | the exact approved correction **and** its current source frontier |
 | publish | CA-O-009 | the final assessed frontier, valid decisions, **and** selected Projection Delivery authority |
 
-## Transitions
+### Transitions
 
 the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513 **when** the destination is a Step. a terminal outcome ends the Workflow Run; it is **not** another Step **or** Action.
 
@@ -72,3 +76,5 @@ the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513
 | publish — CA-O-009 | failed publication | stop **and** escalate under applicable recovery authority; do **not** report completion |
 
 an AI Agent **must** resolve **and** satisfy its effective applicable Autonomous Confidence Threshold from governing sources **and** valid overrides, together with authorization gates, **before** continuing autonomously. this does **not** require a persisted Task Atom; unmet **or** unresolved gates require Operator clarification **or** escalation. **every** autonomous revisit, including re-evaluation **after** an approved source change, repeated correction proposals, **and** recovery retries, **must** remain within the applicable accepted retry budget **and** escalation conditions for the current Workflow Run. reselection **or** discovery of a new conflict does **not** reset that budget. an absent, exhausted, **or** unresolved revisit allowance requires stopping **and** escalation; required re-evaluation **must not** be skipped **to** publish. this Workflow does **not** authorize concurrent execution, arbitrary recursion, automatic source corrections, **or** publication with unresolved conflicts. execution evidence remains distinct from this reusable definition.
+
+## Details

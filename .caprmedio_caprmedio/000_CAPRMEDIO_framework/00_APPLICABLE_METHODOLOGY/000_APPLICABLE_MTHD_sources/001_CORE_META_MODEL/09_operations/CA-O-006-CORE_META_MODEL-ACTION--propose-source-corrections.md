@@ -14,7 +14,7 @@ subjects:
     - "Operator"
     - "Autonomous Confidence Threshold"
 version: 6
-updated_at: "2026-09-16 22:42:50 +0000"
+updated_at: "2026-10-04 15:07:08 +0000"
 relations: {}
 atom_id: "CA-O-006"
 content_role: "Operations"
@@ -26,7 +26,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Propose source corrections
+# Summary
+
+Propose source corrections
+
+## Operation
 
 Propose Source Corrections **means** the reusable Action that prepares an explicit correction for an identified conflict **in** one exact selected source frontier.
 
@@ -38,3 +42,5 @@ Propose Source Corrections **means** the reusable Action that prepares an explic
 6. return the proposal **and** its authorization needs. **if** no sufficiently supported gap-free correction fits the applicable authority **and** confidence constraints, report the exact uncertainty for Operator escalation.
 
 a proposal does **not** authorize **or** perform the change. no duplicate authority **must** be created merely **to** make archival possible.
+
+## Details

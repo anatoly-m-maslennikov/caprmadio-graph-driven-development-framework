@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Operation Carrier normalization packet 1"
   depends_on: [Operations, "Markdown Atom Carrier/Structure"]
-version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+version: 2
+updated_at: "2026-10-04 15:17:49 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -49,7 +49,7 @@ No source is owned by two generated packets; overlapping Concerns are attributio
 
 P1131 v3/P1119 v2/P1117 v2, live Goal13/all14 active Project Principles and inherited90% govern. Reuse unchanged full controls after live qualification; fully read changed/directly relied clauses. Current D479 v6 requires literal # Summary then ## Operation and ## Details for Operations, with exactly one registered heading each and supporting headings subordinate to their Property. Preserve the existing Summary value (legacy descriptive H1 content, or current Summary body), not a new title. Put executable clauses under Operation without replacing them or adding Claim; demote supporting Steps/Transitions/Inputs/Outcomes/other nonregistered level-two headings to the proper lower-level boundary without changing their content/order. Details may be empty.
 
-D482 v7 requires an explicit top-level nonempty claim_target_scope_unit resolved from actual current authority: use each row's declared Scope Unit, not its location. Preserve the existing correct resolved target; only an actually absent admitted target is added under the declared binding. R1432 v9/O067 v6 classify this as lossless carrier_only/equivalent refinement; retain Version and identity, refresh updated_at to the actual edit instant under R1788 v1. No Summary-value change or genuine Type/Scope/meaning change is authorized. 
+D482 v7 requires an explicit top-level nonempty claim_target_scope_unit resolved from actual current authority: use each row's declared Scope Unit, not its location. Preserve the existing correct resolved target; only an actually absent admitted target is added under the declared binding. R1432 v9/O067 v6 classify this as lossless carrier_only/equivalent refinement; retain Version and identity, refresh updated_at to the actual edit instant under R1788 v1. No Summary-value change or genuine Type/Scope/meaning change is authorized.
 
 For M301 v6 only, preserve Summary/Scope/Claim/Details and demote the existing supporting Meaning and context/Structure/Preservation headings under Details; preserve their entire text/order, Version and identity. No Method technique change.
 O025/O027 remain PROJECT_CONFIGURATION with their optional readiness-not-publication/execution boundaries; CORE ownership is not inferred from their neighbors.
@@ -61,6 +61,16 @@ O025/O027 remain PROJECT_CONFIGURATION with their optional readiness-not-publica
 Use the same bounded scenario as the other eight formatting packets, not a per-file test framework: compare saved before/after Carriers and show that differences are confined to registered heading wrappers/levels, the explicitly missing resolved target (if bound), and actual updated_at. Check strict duplicate-key-safe YAML, required role headings exactly once/in order, nested supporting boundaries, one EOF newline, unique Atom IDs, exact unchanged Summary/Version/current/target/type/status/relations and all non-heading semantic text. Reopen every saved owned file; preserve Step/Action references, transition/result table values and their exact old order. Missing or changed meaning is a failed preservation check, not a pass or permission to repair meaning.
 
 Save only a concise actual proof in this leaf's existing Details: exact changed sources/revisions, observed allowed diff, validation result, acceptance outline, actual first/terminal clock and any issue/remainder. No extra Analysis report, hash ledger, semantic audit, native evidence or runtime test. Source layout conformance is not implementation acceptance or independent review. P1132/P1157 remain the separate reviewer/finding stage.
+
+### Actual execution receipt
+
+First clock2026-10-04 15:05:22 UTC; source edit2026-10-04 15:08:16 UTC; saved check PASS2026-10-04 15:09:29 UTC; completion2026-10-04 15:10:09 UTC. Actual elapsed287s, within the <=15-minute estimate. P1156 was reopened physically Done v2 before execution; Goal13/all14 active Principles were unchanged against the previously fully read bytes. D479 v6 and D482 v7 and all five owned source Carriers were read completely.
+
+Normalized only CA-O-004 v5/CA-O-009 v5/CA-O-025 v6/CA-O-027 v5 at the exact authoritative paths in the input/output table: preserved the legacy descriptive H1 text as the exact Summary value, added the registered Summary/Operation/Details wrappers, and demoted O025's four supporting headings beneath Operation. For CA-M-301 v6 at its bound path, only Meaning and context/Structure/Preservation were demoted beneath unchanged Details. All source Versions and already correct targets were retained; O025/O027 remain PROJECT_CONFIGURATION. Every source updated_at records the actual15:08:16 UTC edit.
+
+The one bounded saved-carrier check reopened all five outputs and passed duplicate-key-safe YAML, exact registered role headings once/in order, nested supporting boundaries, explicit nonempty current/target values, five unique owned Atom IDs and one EOF newline. Inverting only the admitted wrappers/heading-level changes and updated_at reproduced every original byte: Summary, Version, identity, Type/Status/relations/all other fields, full non-heading text, Step/Action references and all transition/result values and order are unchanged. This is the acceptance outline for this layout-only output; preserved permission/currentness/stop/retry/history and readiness-not-publication/execution qualifications were not semantically re-reviewed.
+
+No actual issue or owned source remainder remains. This packet is Done; BLOCKS P1132/P1157 are retained. Shared Concern resolution, independent source review, governed persistence, parent completion, implementation and runtime acceptance remain outside this receipt. No Analysis, other source, code, Git or Journal was written.
 
 ### Definition of Done
 

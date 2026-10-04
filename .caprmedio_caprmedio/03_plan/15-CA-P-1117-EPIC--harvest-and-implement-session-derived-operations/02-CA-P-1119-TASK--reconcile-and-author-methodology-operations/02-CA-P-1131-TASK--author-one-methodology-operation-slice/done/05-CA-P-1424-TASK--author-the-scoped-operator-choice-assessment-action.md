@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Author the scoped Operator choice assessment Action"
   depends_on: [Operations, Analysis, Evaluation]
-version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+version: 2
+updated_at: "2026-10-04 15:10:21 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -63,6 +63,16 @@ Save concise actual authoring proof in this leaf's existing Details: source ID/p
 Walk all six A1086 counterexamples: A-only yes leaves B unanswered; research-only permission excludes added benchmark/implementation; changed frontier invalidates old scope; complete existing delegation creates no redundant question; assistant/wrapper approval is not literal provenance; unresolved priority parameters/tie remain with O022/O023. No outcome grants mutation/activation.
 
 Reopen the one saved source and this leaf; use one small strict duplicate-key YAML/registered heading/one-EOF/unique-ID/explicit-target check, and manually map every accepted input/outcome/exclusion and scenario above to its actual clauses. Confirm Active Action v1 at the exact authoritative target, CORE_META_MODEL current/target and no duplicated Workflow. Record actual results in Details; passing authoring conformance is not implementation tests or independent approval. No per-file test framework or broad audit is required.
+
+### Actual source-authoring result
+
+Saved CA-O-125 v1, Active Operations/Action, at the exact authoritative output path above: CORE_META_MODEL current/target, Standard/global11, Summary "Assess scoped Operator-choice applicability", Operation/Details and source edit clock 2026-10-04 15:06:54 UTC. A1086 v1 was read completely, including its accepted input/outcome/exclusions and six counterexamples; O007 v6/O008 v11/O013 v5/O022 v6/O023 v5/O065 v5/O078 v3/O118 v1 were read in full. Live Goal13/fourteen Principle revisions and governing parent revisions qualified prior full reads; R1423 v4 was reread to resolve a stale recalled version, not changed. D479 v6/D482 v7/O103 v2/O067 v6/R1432 v9/R1788 v1/D270 v13 were read fully; R1589 v4/R1580 v4/D461 v6 remain current. P1156 v2 was physically Done before execution and the reserved O125 target was absent before creation.
+
+All accepted clauses map to the saved Action: Operation/Inputs carries exact versions, literal provenance/prospective scope, the bounded independent list, settled authority, current controls/confidence/source state and explicit unknowns; Assessment1–4 carries supported matching, corrections/currentness, distinct choice/permission/effect/proof, unanswered choices and partial/failure limitations; Outcome and handoff carries evidence references, absent prerequisites, one optional consequential question and caller-owned communication/persistence/readiness; Details preserves domain owners and every no-effect/no-authority exclusion. No generic ledger, mandatory question loop, duplicate Workflow or RMED was authored.
+
+The manual functional clause walkthrough passed all six accepted cases: (1) Assessment2/4 binds A-only yes while B remains unanswered; (2) Assessment3 excludes added benchmark/implementation from research permission; (3) Assessment3 plus Details preserves changed-frontier limits and routes source decisions/effects through O007/O008 without Journal rewriting; (4) Assessment1 preserves complete delegation without redundant approval; (5) Inputs/Assessment2 requires literal provenance rather than an assistant/wrapper approval; (6) Details retains O022/O023 unresolved parameters/ties without activation. These are saved-source acceptance walkthroughs, not runtime tests or independent review.
+
+The one small saved check returned PASS/exit0, observed 2026-10-04 15:09:06 UTC: strict duplicate-key YAML, registered headings, one EOF newline, unique O125/P1424 IDs, explicit registered CORE target/authoritative source root, Active Action v1 and retained P1132/P1157 BLOCKS. First actual clock 2026-10-04 15:04:44 UTC is unchanged; passing gate elapsed4m22s and completion 2026-10-04 15:10:21 UTC is within <=15 minutes. No encountered issue or unbound semantic remainder remains. Only this Plan moves to local done; P1132/P1157 independent source review, governed save, RMED, implementation and runtime remain separate, and root retains parents/shared persistence. No other source/model/Concern/code/Git/Journal/harvest writes occurred.
 
 ### Definition of Done
 

@@ -17,7 +17,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 3
-updated_at: "2026-10-04 14:39:01 +0000"
+updated_at: "2026-10-04 15:34:45 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1119
@@ -56,6 +56,18 @@ This packet Plan is composite. Its initial preflight child has an estimate of <=
 Inherit CA-P-1117 controls and the 90% confidence threshold through IS_DECOMPOSITION_OF. Every issue requires a typed C atom: blocker/failure -> Problem; unresolved choice -> Question; incompatible authority -> Conflict. Postpone a blocked task and work on another independent ready task. After completion, reassess and update affected dependent tasks before they start. Retain durable source/result/provenance evidence; do not mark the parent Done merely because this first packet is Done.
 
 ## Details
+
+### Authoring completion and review handoff
+
+all fifteen required child Plans are physically Done: preparation CA-P-1156, five semantic authoring leaves CA-P-1421–1425, and nine Carrier-repair leaves CA-P-1426–1434. the five optional read-only CORE_META_MODEL Actions CA-O-122–126 are saved Active at initial Version 1; their accepted qualifiers and functional outlines are mapped in the completed leaf proofs. the existing thirty-four Operations and CA-M-301 received only the exact bound Carrier repairs, preserving Summary, semantic Version and meaning. CA-O-025/027 remain in PROJECT_CONFIGURATION and CA-O-077 stays at its existing `09_ops` Carrier; CA-O-118 now carries its explicit CORE_META_MODEL target.
+
+the current saved child statuses, exact authored-source paths and worker preservation/strict-carrier results supply this authoring closure. resolved CA-C-405–409 retain recovered preparation/diagnostic/save defects; the final scoped whitespace check exited zero. the existing source-layout Concerns CA-C-350/353/354/363/374/376/379/380/389/391 remain assigned to CA-P-1132's independent review and disposition, not silently closed by their own authors. no authoring remainder remains; independent review, source save/Projection provenance, Engine RMED, implementation and complete functional Docker coverage are still required downstream.
+
+after this Plan's paired Carrier closure succeeds, CA-P-1132 / CA-P-1157 must bind read-only independent reviews of all thirty-nine changed Operations and the directly related CA-M-301 repair, at most four Operations per leaf with reviewer distinct from author. keep the five optional Actions and formatting-only packets distinct; do not repeat candidate harvesting/reconciliation or convert source checks into runtime acceptance. references by Atom ID retain their meaning across placement changes.
+
+### Paired Carrier closure blocker
+
+all source authoring and child work above remains complete. the child bundle could not be relocated beside this Plan in P1119's `done/` directory: the exact directory rename returned `Operation not permitted`, including the unchanged retry at 2026-10-04 15:34:45 +0000. ordinary ownership, permissions and file flags did not identify the cause. CA-C-410 records the unresolved filesystem denial; no alternative tool or permission bypass was attempted. this Markdown Carrier is restored to its original Active location beside the unchanged bundle, and this Plan remains Active until the paired placement succeeds. CA-P-1132 / CA-P-1157 remain blocked; independent source review has not started. preserve the finished sources and authoring evidence through the authorized scoped Git save while this administrative closure is postponed.
 
 ### Definition of Done
 

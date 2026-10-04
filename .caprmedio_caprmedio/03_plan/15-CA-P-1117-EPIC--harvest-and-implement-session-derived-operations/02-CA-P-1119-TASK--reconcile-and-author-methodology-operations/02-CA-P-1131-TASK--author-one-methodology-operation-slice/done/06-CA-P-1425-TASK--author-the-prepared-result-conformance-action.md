@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Author the prepared result conformance Action"
   depends_on: [Operations, Analysis, Evaluation]
-version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+version: 2
+updated_at: "2026-10-04 15:13:38 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -60,6 +60,18 @@ Save concise actual authoring proof in this leaf's existing Details: source ID/p
 Walk A1087's eight minimal scenarios: omitted condition/exception; unsupported accepted/full-pass despite100% accounting; stale criterion or swapped final artifact; missing review-point provenance; mechanical-clean semantic failure; clean exact result; absent receiving-use/cost/adoption evidence with no invented threshold; untouched unselected frontier. Return semantic evidence only, preserving reviewer independence and no-recheck.
 
 Reopen the one saved source and this leaf; use one small strict duplicate-key YAML/registered heading/one-EOF/unique-ID/explicit-target check, and manually map every accepted input/outcome/exclusion and scenario above to its actual clauses. Confirm Active Action v1 at the exact authoritative target, CORE_META_MODEL current/target and no duplicated Workflow. Record actual results in Details; passing authoring conformance is not implementation tests or independent approval. No per-file test framework or broad audit is required.
+
+### Actual bounded source authoring
+
+First actual 2026-10-04 15:05:00 UTC, unchanged; <=15-minute estimate at90%. P1156 was physically Donev2 before execution; live P1130 Donev6/P1131 Activev3/P1119v2/P1117v2 and Goal13/all14 active Principles qualified the bound controls. Full A1087v2 and current O005v8/O104v9/O106v8/O111v5/O118v1, D479v6/D482v7/O103v2/R1432v9/O067v6/R1788v1 and relevant Plan carriers were read; current R1725v16 confirms the separate adoption boundary. No native/F17/F07/F08/F10 reconciliation or FPF run followed.
+
+New source saved 2026-10-04 15:09:20 UTC: `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-126-CORE_META_MODEL-ACTION--assess-prepared-result-conformance.md`, CA-O-126 Active Actionv1, CORE_META_MODEL current/target, Standard/global11. Exact target and source ID were absent before creation. Operation1–7 retain whole final Artifact/source binding, distinct producer/reviewer, complete conditions/exceptions, stable findings/review-point provenance, currentness and untouched frontier. Details discriminate conforms/nonconforming/incomplete; legitimate caller-bound use/value/overlap/cost/placement/adoption evidence is conditional, not a new default. O005 responsibility is reused; local O106, accounting O118 and O104/O111 no-recheck, separate migration/import/next-input domains stay intact. No approval, adoption, repair, forced rerun, new authority or duplicate Workflow follows.
+
+Functional outline walked against actual clauses: omitted condition/exception→Operation2/4 nonconforming (or incomplete where evidence is missing); unsupported full-pass despite100% accounting→Operation4 and outcome/accounting boundary, never inferred conforms; stale criterion/swapped final output→Operation3/6 incomplete; absent review-point provenance→Operation1/4 incomplete; mechanical-clean semantic failure→Operation4 nonconforming, Details deny mechanical proof; clean exact result→all seven clauses/outcome conforms; absent required use/cost/adoption receipt→Operation5 incomplete without invented threshold; unselected frontier→Operation1/7 and final Details retain it untouched. This is a source-clause walkthrough, not runtime tests or independent source acceptance.
+
+One actual small saved check passed2026-10-04 15:12:17 UTC, elapsed437seconds from unchanged first: two strict duplicate-key YAML carriers, registered Summary/Operation/Details and Plan/DoD headings, oneEOF, unique IDs, explicit registered CORE_META_MODEL authoritative target, Active Actionv1, P1156 Donev2 and retained P1131 decomposition/BLOCKS P1132/P1157. The eight source-clause scenarios above passed the authoring walkthrough; no runtime or independent source-review pass is claimed. A read-only locator probe included an absent noncanonical root project_structure.toml alongside the actual .caprmedio_caprmedio registry; the actual registered target resolved. The first check transport was rejected for JavaScript string encoding before execution or mutation; correcting only that encoding allowed this single executed saved check to pass. Neither is an unresolved source/authority issue; original clock and failures are retained.
+
+Authoring DoD is met with no unbound semantic remainder. Closure edit and physical local Done existence receipt passed2026-10-04 15:13:05 UTC, elapsed485seconds, no overrun: the Donev2 leaf is present at `done/06-CA-P-1425-TASK--author-the-prepared-result-conformance-action.md`, its former Active path is absent, and original ID/Summary/sequence/immediate decomposition/BLOCKS are retained. D270v13/D276v15 were read for exact revision/frontmatter encoding; source Version1 remains unchanged. Final receipt saved 2026-10-04 15:13:38 UTC, elapsed518seconds from unchanged first, overrun0. Root retains P1132/P1157, governed save/RMED/implementation/runtime and all parent/Concern/peer work; BLOCKS is not removed by this leaf's Done.
 
 ### Definition of Done
 

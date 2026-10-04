@@ -24,7 +24,7 @@ subjects:
     - "Autonomous Confidence Threshold"
     - "Journal"
 version: 8
-updated_at: "2026-09-21 00:39:50 +0000"
+updated_at: "2026-10-04 15:07:08 +0000"
 relations: {"relates_to":["CA-O-004","CA-O-005","CA-O-006","CA-O-007","CA-O-008","CA-R-1551","CA-R-807"]}
 atom_id: "CA-O-028"
 content_role: "Operations"
@@ -36,7 +36,11 @@ author: "Anatoly Maslennikov"
 type: "Workflow"
 global_tier: 11
 ---
-# Resolve RMEDO conflicts without leaving gaps
+# Summary
+
+Resolve RMEDO conflicts without leaving gaps
+
+## Operation
 
 RMEDO Conflict Resolution **means** the Workflow that resolves conflicts among selected active Requirement, Method, Evaluation, Delivery, **and** Operations Atoms **without** leaving gaps **in** affected authority.
 
@@ -44,7 +48,7 @@ the Workflow reuses the following Actions through its Steps. it **must not** rep
 
 the entry Step is select. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
 
-## Steps
+### Steps
 
 | Step | Action reference | Parameters **and** inputs |
 |---|---|---|
@@ -54,7 +58,7 @@ the entry Step is select. interpret Step bindings **and** run boundaries under C
 | decide | CA-O-007 | the exact proposal, current frontier, **and** unresolved decision **or** authorization |
 | correct | CA-O-008 | the gap-free correction **and** its valid exact authorization for the current frontier |
 
-## Transitions
+### Transitions
 
 the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513 **when** the destination is a Step. a terminal outcome ends the Workflow Run; it is **not** another Step **or** Action.
 
@@ -78,3 +82,5 @@ the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513
 - archive an obsolete conflicting Atom **when** removal improves Principle alignment, CA-O-006's no-gap conditions hold, **and** the mutation is authorized. an already valid delegation does **not** require repeated per-Atom approval.
 - use the effective Autonomous Confidence Threshold **and** accepted retry bounds from governing sources; this Workflow **must not** hard-code a percentage, reset a retry budget through reselection, **or** widen delegated scope.
 - completion requires the selected conflicts resolved, **all** affected still-required Claims covered, valid active references **and** Relations, preserved required Evaluations, recoverable archival history, **and** no new Principle conflict. an unperformed check **or** unresolved gap is **not** success.
+
+## Details

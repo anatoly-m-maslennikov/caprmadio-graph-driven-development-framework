@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Author the evaluator calibration Action"
   depends_on: [Operations, Analysis, Evaluation]
 version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+updated_at: "2026-10-04 15:14:00 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -62,6 +62,25 @@ Save concise actual authoring proof in this leaf's existing Details: source ID/p
 Trace complete match, seeded defect missed despite schema-valid output, invented/duplicate/withdrawn finding, missing or disputed independent oracle, incomplete actual evidence and changed evaluator/case binding. The outline must distinguish setup/currentness blockers, mechanical results and bounded semantic evidence without a Base Revise recheck.
 
 Reopen the one saved source and this leaf; use one small strict duplicate-key YAML/registered heading/one-EOF/unique-ID/explicit-target check, and manually map every accepted input/outcome/exclusion and scenario above to its actual clauses. Confirm Active Action v1 at the exact authoritative target, CORE_META_MODEL current/target and no duplicated Workflow. Record actual results in Details; passing authoring conformance is not implementation tests or independent approval. No per-file test framework or broad audit is required.
+
+### Actual source-authoring receipt
+
+Original actual first clock2026-10-04 15:04:28 UTC remains unchanged. P1156 is physically Donev2 and explicitly blocks this leaf. Full accepted A1085v1 and all seven direct reuse owners were read at execution;21 previously full Goal/Principle/Plan/Carrier reads were live-qualified unchanged, P1131v3 and the current authoring/change/metadata clauses were read fully. The reserved O123 ID and exact target had no concurrent carrier before creation. No native/session mining, family reconciliation or reused-source/parent mutation was performed.
+
+Authored only CA-O-123v1 at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-123-CORE_META_MODEL-ACTION--calibrate-evaluator-evidence.md`, Active Operations/Action, CORE_META_MODEL current/explicit target, Standard/global11. Its Operation/Details were completed and reviewed for the bounded contribution before deriving the faithful Summary. New source identity is initial Version1; this leaf's evidence/placement refinements preserve its Objective/Summary/Version under R1432/O067. No Workflow, Step or RMED was added.
+
+Accepted-intent disposition: Operation1 binds admitted request, exact evaluator/configuration/cases, reviewed independent oracle, criteria and actor/permissions; Operation2 preserves original/corrected evidence and fresh independently produced actual output while reusing O018/O020; Operation3 preserves exact occurrences, misses, false positives, duplicates and withdrawals; Operation4 and the outcome table separate mechanics, semantic differences, coverage and authority/setup/currentness blockers. Actor/reuse Details preserve separately requested O105/O106, O118's accounting-only limit and O104/O111's no automatic recheck. The final boundary excludes fixed20/sample/default threshold, universal gates, truth substitution, automatic repairs/rollout/rechecks, source correction and scope expansion. No accepted semantic remainder is identified.
+
+Functional clause walkthrough, authoring only:
+
+- complete current independently reviewed expected/actual match -> `matched`, bounded to exact cases/configuration/criteria; no repair or rollout authority;
+- schema-valid output misses a seeded exact defect -> `mismatch`, mechanical pass retained separately;
+- invented, unsupported duplicate or incorrectly withdrawn finding -> `mismatch`, each initial finding/occurrence and its disposition retained;
+- absent/unreviewed/disputed independent oracle -> `blocked`, no self-certified expectation or new truth; admitted resolution required;
+- missing/pending actual evidence or coverage -> `incomplete`, completed comparisons preserved without claiming omitted work;
+- evaluator/configuration/case/oracle/criteria/authority binding changes -> current calibration `blocked`, original evidence historical, no automatic rerun.
+
+The small saved strict duplicate-key YAML/registered headings/one-EOF/unique-ID/explicit-target check passed, received2026-10-04 15:12:10 UTC; both exact saved carriers were reopened completely. The clause walkthrough above passed as authoring evidence, not an executed evaluator experiment. Its final mismatch wording explicitly retains a difference even when explained, preserving the reviewed expected/actual comparison. Final saved receipt/source parsing and unique O123 lookup passed2026-10-04 15:14:00 UTC; no additional semantic campaign was run. This leaf is physically Done in its local `done` folder at closure15:14:00 UTC, elapsed9m32s from the unchanged first clock, within the15-minute estimate. Objective, Summary, Version1 and literal DoD remain unchanged; BLOCKS P1132/P1157 are retained. No unresolved issue or semantic remainder is identified. Source authoring does not certify independent review, governed save, implementation or runtime; P1132/P1157 remain separate required gates.
 
 ### Definition of Done
 

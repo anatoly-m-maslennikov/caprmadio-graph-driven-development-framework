@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Author the legacy evidence preparation Action"
   depends_on: [Operations, Analysis, Evaluation]
-version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+version: 2
+updated_at: "2026-10-04 15:10:50 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -60,6 +60,26 @@ Save concise actual authoring proof in this leaf's existing Details: source ID/p
 Trace isolated legacy fixture with absent initial RMED/Journal, supported versus inferred observation, missing contract/window/provenance, ready reviewable packet and attempted premature refactor/activation. Every unknown stays explicit; no invented authority/history or behavior-equivalence pass.
 
 Reopen the one saved source and this leaf; use one small strict duplicate-key YAML/registered heading/one-EOF/unique-ID/explicit-target check, and manually map every accepted input/outcome/exclusion and scenario above to its actual clauses. Confirm Active Action v1 at the exact authoritative target, CORE_META_MODEL current/target and no duplicated Workflow. Record actual results in Details; passing authoring conformance is not implementation tests or independent approval. No per-file test framework or broad audit is required.
+
++### Actual authoring and bounded clause walkthrough
+
+First actual clock2026-10-04 15:04:17 UTC, unchanged; estimate <=15 minutes. P1156 was physically Donev2 before execution. Full bound leaf, A1085v1, P1131v3 and O017v6/O019v4/O006v6/O007v6/O008v11 were read. Current Goal13/all14 Principles and P1117v2/P1119v2 retain the previously fully read controls; current metadata was qualified. D479v6/D482v7/D461v6/O103v2/O067v6/R1432v9/R1788v1/R1589v4/R1580v4 and D270v13/D276v15 were read fully. Nonessential locator misses and a truncated combined display contributed no evidence: the actual Goal locator was reopened and the complete relied-upon source content was read separately, with no clock reset or scope expansion.
+
+The reserved ID and exact target were absent before creation. Saved new CA-O-124v1 at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-124-CORE_META_MODEL-ACTION--prepare-legacy-evidence-and-provisional-rmed.md`, Active Operations/Action, CORE_META_MODEL current/target, Standard/global11, first saved15:07:31UTC. Operation/Details were settled before deriving the faithful Summary. This new contribution is not a revision/replacement of reused Operations; no projection, Workflow/Step or associated RMED was created.
+
+Manual clause walkthrough of the saved definition, not fixture execution or runtime tests:
+
+| Bound intent / functional scenario | Actual clause disposition |
+| --- | --- |
+| Admitted isolated legacy fixture with no initial RMED/Journal | Operation1–3 bind source/window/Actor/permission and record evidenced absence; Operation5–6 allow a complete attributable provisional packet ready-for-review, not fabricated active authority/history. |
+| Supported observation versus inferred explanation or unknown | Operation2–4 retain exact evidence/provenance and separate observed/inferred/unknown; historical requests and assistant reports do not become actual execution proof. |
+| Preserve/change recommendation and existing authority conflict | Operation4 attributes each candidate and uncertainty; no recommendation becomes an Operator decision. Operation7 preserves the separate O006/O007/O008 conflict/decision/mutation domains. |
+| Missing essential contract, source/window, permission or provenance | Operation1/5–6 return blocked with exact missing inputs and retained partial evidence; qualified substantive unknowns alone do not fabricate completeness or require invention. |
+| Ready packet / changed evidence or source | Operation5–6 return exact bindings, limitations and proposed handoff; affected bindings become stale after relevant changes, with prior evidence retained. |
+| Premature refactor, activation or behavior-equivalence claim | Operation4/7 and Details exclude mutation/activation/refactor/history fabrication and equivalence proof. O017/O019 require actual admitted governing inputs and their own prerequisites. |
+| Project paths, extraction adapter or mandatory graph/value schema | Operation1 and Details leave concrete bindings to the caller; no mandatory schema, adapter, duplicate Workflow, automatic invocation or new universal gate. |
+
+All accepted A1085 legacy inputs, outcomes, exclusions and supplied scenarios map to the saved clauses; no unbound semantic remainder was found. Only this new source and this leaf were written. The one small saved carrier check actually passed / exit0 at2026-10-04 15:10:08UTC: two strict duplicate-key YAML carriers, registered headings, single EOF, unique IDs, Active Actionv1 at the exact authoritative CORE current/target, faithful Summary and retained Plan ownership/review gates. The manual walkthrough above is authoring conformance, not fixture/runtime tests or independent source approval. Physical Done closure edit2026-10-04 15:10:50 UTC, from original15:04:17UTC, is within the <=15-minute estimate. P1132/P1157 independent review, governed save, authority admission, implementation and runtime remain separate gates; BLOCKS P1132/P1157 are retained. No other source, peer, parent, code, Git or Journal write was made.
 
 ### Definition of Done
 

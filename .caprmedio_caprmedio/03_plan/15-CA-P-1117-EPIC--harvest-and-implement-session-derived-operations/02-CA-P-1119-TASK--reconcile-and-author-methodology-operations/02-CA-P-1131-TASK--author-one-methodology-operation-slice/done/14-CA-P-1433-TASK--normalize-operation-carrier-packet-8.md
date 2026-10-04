@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Operation Carrier normalization packet 8"
   depends_on: [Operations, "Markdown Atom Carrier/Structure"]
-version: 1
-updated_at: "2026-10-04 15:00:12 +0000"
+version: 2
+updated_at: "2026-10-04 15:17:45 +0000"
 relations:
   is_decomposition_of: [CA-P-1131]
   blocks: [CA-P-1132, CA-P-1157]
@@ -48,10 +48,7 @@ No source is owned by two generated packets; overlapping Concerns are attributio
 
 P1131 v3/P1119 v2/P1117 v2, live Goal13/all14 active Project Principles and inherited90% govern. Reuse unchanged full controls after live qualification; fully read changed/directly relied clauses. Current D479 v6 requires literal # Summary then ## Operation and ## Details for Operations, with exactly one registered heading each and supporting headings subordinate to their Property. Preserve the existing Summary value (legacy descriptive H1 content, or current Summary body), not a new title. Put executable clauses under Operation without replacing them or adding Claim; demote supporting Steps/Transitions/Inputs/Outcomes/other nonregistered level-two headings to the proper lower-level boundary without changing their content/order. Details may be empty.
 
-D482 v7 requires an explicit top-level nonempty claim_target_scope_unit resolved from actual current authority: use each row's declared Scope Unit, not its location. Preserve the existing correct resolved target; only an actually absent admitted target is added under the declared binding. R1432 v9/O067 v6 classify this as lossless carrier_only/equivalent refinement; retain Version and identity, refresh updated_at to the actual edit instant under R1788 v1. No Summary-value change or genuine Type/Scope/meaning change is authorized. 
-
-
-
+D482 v7 requires an explicit top-level nonempty claim_target_scope_unit resolved from actual current authority: use each row's declared Scope Unit, not its location. Preserve the existing correct resolved target; only an actually absent admitted target is added under the declared binding. R1432 v9/O067 v6 classify this as lossless carrier_only/equivalent refinement; retain Version and identity, refresh updated_at to the actual edit instant under R1788 v1. No Summary-value change or genuine Type/Scope/meaning change is authorized.
 
 ## Details
 
@@ -60,6 +57,16 @@ D482 v7 requires an explicit top-level nonempty claim_target_scope_unit resolved
 Use the same bounded scenario as the other eight formatting packets, not a per-file test framework: compare saved before/after Carriers and show that differences are confined to registered heading wrappers/levels, the explicitly missing resolved target (if bound), and actual updated_at. Check strict duplicate-key-safe YAML, required role headings exactly once/in order, nested supporting boundaries, one EOF newline, unique Atom IDs, exact unchanged Summary/Version/current/target/type/status/relations and all non-heading semantic text. Reopen every saved owned file; preserve Step/Action references, transition/result table values and their exact old order. Missing or changed meaning is a failed preservation check, not a pass or permission to repair meaning.
 
 Save only a concise actual proof in this leaf's existing Details: exact changed sources/revisions, observed allowed diff, validation result, acceptance outline, actual first/terminal clock and any issue/remainder. No extra Analysis report, hash ledger, semantic audit, native evidence or runtime test. Source layout conformance is not implementation acceptance or independent review. P1132/P1157 remain the separate reviewer/finding stage.
+
++### Actual carrier-only preservation receipt
+
+First actual clock2026-10-04 15:14:22UTC, unchanged; P1156 was physically Donev2 before execution. Full leaf, all four bound source carriers, the packet-specific C363 portions and current D479v6/D482v7 were read. Current Goal13/all14 Principles and P1117v2/P1119v2/P1131v3 qualified the unchanged prior full controls. Each source still matched its complete before image immediately before editing.
+
+O018v6/O020v5/O100v3/O101v2 were normalized at2026-10-04 15:15:47UTC. The saved before/after comparison passed exact text equality after only three allowed transformations: refresh updated_at, replace the single `## Claim` wrapper with `## Operation`, and append empty `## Details`. All four already had the correct explicit CORE_META_MODEL target; no target or other metadata was added/changed. Summary, Version, identity, Type/Status/relations, all non-heading text, order, inputs, outcomes and guards are unchanged. O101 remains its existing Isolated Step referencing O100; no paths/IDs or source meanings were rewritten. The Plan preservation paragraph's trailing space and excess separating blank lines were removed losslessly as requested; no shared Concern was edited.
+
+Acceptance outline: O018's preparation-not-pass/complete-portfolio boundary, O020's actual current coverage and retained failed/blocked evidence, O100's verified separate-learning/Draft/no-promotion gates, and O101's Isolated native-context/capability/returned-outcome boundaries all remain byte-identical. This is preservation evidence, not a new semantic audit or runtime test.
+
+The one combined saved preservation/carrier gate passed / exit0 at2026-10-04 15:16:53UTC: five strict duplicate-key-safe YAML carriers, exact registered heading order, subordinate body boundaries, single EOF, unique current authoritative IDs, resolved targets, unchanged source Versions/Types/Statuses and retained leaf gates. Actual terminal closure edit2026-10-04 15:17:45 UTC, from the unchanged first clock, is within the <=15-minute estimate. No source issue or unbound remainder was found. This leaf is Donev2 with BLOCKS P1132/P1157 retained; independent source review, shared Concern resolution, governed save and parent/runtime completion remain separate. Only the four bound source files and this leaf were edited.
 
 ### Definition of Done
 

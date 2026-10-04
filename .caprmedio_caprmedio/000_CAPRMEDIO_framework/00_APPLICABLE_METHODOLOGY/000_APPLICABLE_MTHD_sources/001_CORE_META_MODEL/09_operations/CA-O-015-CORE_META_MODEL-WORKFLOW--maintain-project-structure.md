@@ -15,7 +15,7 @@ subjects:
     - "Authorize Structural Change"
     - "Apply Structural Change"
 version: 6
-updated_at: "2026-09-18 14:16:20 +0000"
+updated_at: "2026-10-04 15:08:26 +0000"
 relations:
   relates_to:
     - "CA-R-1483"
@@ -35,13 +35,17 @@ author: "Anatoly Maslennikov"
 type: "Workflow"
 global_tier: 11
 ---
-# Maintain Project Structure
+# Summary
+
+Maintain Project Structure
+
+## Operation
 
 Project Structure Maintenance **means** the Workflow that maintains authoritative declarations through the following Step graph; Tools execute this Workflow **without** becoming its authority.
 
 the entry Step is select. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
 
-## Steps
+### Steps
 
 | Step | Action reference | Parameters **and** inputs |
 |---|---|---|
@@ -52,7 +56,7 @@ the entry Step is select. interpret Step bindings **and** run boundaries under C
 | apply | CA-O-014 | the exact authorized proposal **and** its unchanged source state |
 | assess-result | CA-O-005 | the resulting declarations, references, Carrier observations, **and** accepted effects |
 
-## Transitions
+### Transitions
 
 the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513 **when** the destination is a Step. a terminal outcome ends the Workflow Run; it is **not** another Step **or** Action.
 
@@ -68,3 +72,5 @@ the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513
 | **any** Step | failed, stale, ambiguous, unauthorized, **or** below-threshold outcome | stop **and** report the exact state; further attempts require applicable authorization **and** remaining retry allowance |
 
 this Workflow produces authoritative source changes **and** validation results; it does **not** require **or** publish a separate Project Structure Projection. publication of an unrelated Projection remains a separately selected operation.
+
+## Details

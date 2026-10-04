@@ -15,7 +15,7 @@ subjects:
     - "Check Atoms"
     - "Workflow Run"
 version: 3
-updated_at: "2026-09-23 23:53:58 +0000"
+updated_at: "2026-10-04 15:14:54 +0000"
 relations:
   relates_to:
     - CA-O-087
@@ -25,9 +25,11 @@ global_tier: 11
 
 Check selected Atoms
 
-## Claim
+## Operation
 
 Check Atoms Step **means** the Workflow node that invokes **=1** Action, CA-O-087, with the admitted Workflow Run's source inventory, selector, applicable methodology, reference context, read boundaries, **and** execution limits.
 
 - pass these inputs **without** independent reselection **or** inference from the Step's location.
 - expose the Action's unchanged result tag **and** report payload **to** the Workflow.
+
+## Details
