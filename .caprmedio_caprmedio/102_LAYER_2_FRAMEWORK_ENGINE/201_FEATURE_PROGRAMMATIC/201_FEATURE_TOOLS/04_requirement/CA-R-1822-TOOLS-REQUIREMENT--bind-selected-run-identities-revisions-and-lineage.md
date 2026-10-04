@@ -8,7 +8,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-04 22:25:44 +0400"
+updated_at: "2026-10-04 19:36:28 +0000"
 subjects:
   governs: "WORKFLOW_OPERATIONS/RUN_SUPPORT/Run provenance"
   depends_on: [Workflow, Step, Action, Initiative, Journal, Implementation]
@@ -52,4 +52,3 @@ lineage in the canonical Events Journal.
   source Atom revisions and Journal selection, generator/configuration
   reference, and produced revision only when it exists, as required by
   CA-R-1728.
-

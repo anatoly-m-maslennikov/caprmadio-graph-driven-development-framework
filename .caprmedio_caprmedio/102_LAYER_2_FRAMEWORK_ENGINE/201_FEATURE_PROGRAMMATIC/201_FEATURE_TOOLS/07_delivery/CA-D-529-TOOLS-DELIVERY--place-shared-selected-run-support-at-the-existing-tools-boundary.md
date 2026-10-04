@@ -8,7 +8,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-04 22:25:44 +0400"
+updated_at: "2026-10-04 19:36:28 +0000"
 subjects:
   governs: "WORKFLOW_OPERATIONS/RUN_SUPPORT/delivery placement"
   depends_on: [Tool, Journal, Workflow, Action, Implementation]
@@ -47,4 +47,3 @@ one library rather than adapter-local Run/Journaling implementations.
   campaign, or authority to mutate from importing the library. A later
   separately approved delivery may add route implementations only after this
   RMED packet has independent review.
-
