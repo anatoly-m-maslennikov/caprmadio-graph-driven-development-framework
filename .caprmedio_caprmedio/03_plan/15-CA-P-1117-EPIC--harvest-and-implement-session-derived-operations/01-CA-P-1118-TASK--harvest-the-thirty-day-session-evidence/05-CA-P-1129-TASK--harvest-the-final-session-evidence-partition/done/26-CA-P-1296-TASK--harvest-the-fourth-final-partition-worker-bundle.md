@@ -9,18 +9,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition worker evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 12:24:09 +0400"
+version: 2
+updated_at: "2026-10-04 12:46:51 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1299
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1840,3 +1841,9 @@ Currentfinalworkers356/4051,3695remain; future94bindingaddszerocoverageandwouldl
 ### Definition of Done
 
 Readall94wholemessagesandall1340wholecontextcharacters; preserve original parts/fingerprints/fulltext andindividualsubstantivedisposition, pluscandidategroups/meaningfulcorrections/unknowns. Bind actualnextwholepacketandBLOCKSbeforeDone; keep parentsActiveuntilallrequiredworkcomplete. SaveA1014/Doneplacement/updatedparent/actualnextinputandverifytheirnative/savedCarrier bytes within15minutes includingcheckmargin. Bindingisnotsemanticcoverage; nofullEpic/partition/implementationcompletionclaim.
+
+### Actual completion
+
+A1014 saves94whole original messages, nativeparts/fingerprints/individualdispositions and1340whole prior-context characters; five provisional overlappinggroups. Finalworkers450/4051,3601remain;monthlyworkers5973remain. ActualnextP1299/A1017seq27binds100whole/21sources,32930+141=33071. Futurebindingaddszerocoverage. Firstclock08:38:53UTC;fullnative/saved/Carrier checksfollow beforeterminalreceipt. No sourceauthority/implementation/settings/servicechanges, noEpiccompletion.
+
+Terminalnative/saved/ownregisteredCarrierverification:2026-10-04 08:46:51 UTC;actualfirst08:38:53UTC. All94wholemessages/dispositions,originalparts,23sourceprefixes/raw/textfingerprints,fivewholecontexts,current/nextdisjointness,intactfrontierandown4Carrierfields/headers/Doneplacement/Activeparentandnext/BLOCKSpassed. Fullsharedcheckfound unfinishedA1011missingauthor inanotherAgent'spendingclosure; notcountedasglobalpass. Noextrarecheckstage.

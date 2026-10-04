@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 16
-updated_at: "2026-10-04 12:33:37 +0400"
+version: 17
+updated_at: "2026-10-04 12:57:20 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -212,6 +212,16 @@ Combinedcanonicalcoverage593;refined1869minus593 leaves1276,original1877minus593
 
 ## Details
 
+### Superseding sixteenth-packet result and frontier
+
+P1293/A1011 adds89 complete canonical original-main messages59763–61609/23393characters/58084rawbytes after root recovered its missing author/context and premature Done. One complete59756 context338characters adds no coverage. Five provisional overlapping groups preserve stable identity/carrier migration, bounded audit recovery with literal authorization, coverage/currentness versus implementation proof, Principle-first issue-to-fix proposals, and faithful Operator report delivery. Seven actual human records are distinct from two machine skill wrappers. Final historical631/288 migration count supersedes preliminary631/290; validated12+2 findings/11fixes remain proposed, not adopted.
+
+Superseding first-source coverage709; refined1869 leaves1160, original1877 leaves1168. Older593/619/620 and erroneous91-record/25119 estimates are historical and do not govern the current frontier. A1008 recovered-context total546, not594; A1011 has exactly one338-character context, not five. Whole61633/61287characters remains intact/unprocessed in actual ActiveP1297/A1015, with five antecedent contexts1989 and explicit oversized whole-record <=15-minute estimate; exact following61640/96characters is bound but unread. No next execution or monthly/partition completion. All other corpus, candidate, worker, continuation and frozen-window frontiers remain.
+
+P1293 BLOCKS1297 and downstream1119/1130/1155; Active1297/1126 retain downstream gates. Root recovery started08:52:26UTC, not the original Agent start, which remains unavailable. CA-C-315 records rejected partial closure and recovery; actual terminal/save evidence follows separately.
+
+
+
 ### Corrected superseding first-source frontier
 
 P1290/A1008 adds1whole canonical message59756 after root recovered corrupt saved evidence. Original first coverage620 leaves1249refined/1257original; previous593/619 paragraphs are historical. One provisional overlapping clarification; mapping proposal unanswered in this packet. Complete546priorcontextcharacters do not addcoverage. P1293/A1011 binds89canonicalwhole/23393chars plus338context, not the Agent's unverified91/25119 estimate; followingL61633/61287charsintact.1290BLOCKS1293;1293BLOCKS1119/1130/1155. Originalclocksunavailable; rootrecoveryelapsedseparate. All other source/window/continuation frontiers remain and1126/1118Active.
@@ -240,3 +250,5 @@ Actual next Active CA-P-1290v1 is `15-CA-P-1290-TASK--harvest-the-next-whole-fir
 This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
 
 Corrected root terminalreceipt:2026-10-04 08:33:37 UTC. Actual recovery started08:28:41UTC; complete whole currentrecord/threecontexts, exact89nextcanonicalbinding, sourceprefix/raw/text/parts/fingerprints/intactfrontier and fullstrict134Plans/86supportingCarriers passed. Original Agent elapsed remains unavailable, not asserted<=15. No current migration implemented.
+
+Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock unavailable, not reconstructed. No current historical operation executed; Git/Journal save follows separately.

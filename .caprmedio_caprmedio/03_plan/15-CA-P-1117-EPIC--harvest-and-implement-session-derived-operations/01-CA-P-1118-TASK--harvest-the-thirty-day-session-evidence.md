@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 13
-updated_at: "2026-10-04 12:36:07 +0400"
+version: 14
+updated_at: "2026-10-04 13:01:20 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -42,18 +42,17 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ## Details
 
-Current superseding checkpoint:66 substantive packets.3876 unique PRIMARY dispositions plus356worker dispositions =4232total. Original-main first620/second624; continuation second321/third896/final1284, plus72README/59TOOL_RfinalPRIMARY. PRIMARYbaseline6588 leaves2712unharvested; workerbaseline6423 leaves6067. FinalPRIMARY1415/1415complete;finalworkers356/4051,3695remain. Futurebinding/metadata/index contributezerosemanticcoverage.
+Current superseding checkpoint:69 substantive packets.4048 unique PRIMARY dispositions plus450worker dispositions =4498total. Original-main first709/second624; continuation second321/third979/final1284, plus72README/59TOOL_RfinalPRIMARY. PRIMARYbaseline6588 leaves2540unharvested; workerbaseline6423 leaves5973. FinalPRIMARY1415/1415complete;finalworkers450/4051,3601remain. Futurebinding/metadata/index contribute zero semantic coverage.
 
-P1290/A1008(1whole,1clarification),P1291/A1009(32whole,5groups),P1292/A1010(60whole,6groups),P1288/A1006(77workerwhole,6groups)add170dispositions/18provisionaloverlappinggroups, bringinghistoricaloverlappinggroups to315—not315adopted/deduplicatedOperations. A1008's savedcommanderrors were rejectedandrecoveredfromnativebytes; A1009'sgenericdispositionswere replacedwithsource-specificanalysisbeforecoverageadmission. A1006retainsevaluatorgrammar/definition-ownerproof/fourunfinishedfreezeissuesandlaterQAwithdrawals; A1010retainsrealhumanintents/machinewrapperdistinction,same-sampleguardsandfrozeninput admission.
+P1293/A1011(89whole,5groups),P1295/A1013(83whole,5groups),P1296/A1014(94workerwhole,5groups)add266dispositions/15provisionaloverlappinggroups, bringing historical overlapping groups to330—not330adopted/deduplicatedOperations. P1293's missing author/context and premature Done were rejected and recovered on the same leaf before admission; CA-C-315 records the saved-byte repair. A1011 preserves stable identity/mutable-carrier migration, stalled versus approved bounded audits, coverage/currentness versus implementation proof, Principle-first proposed fixes and faithful report delivery. A1013 preserves scoped authority admission, Entity/Subject resolution, correction-first evaluation, narrow candidate repairs and same-sample rollout gates. A1014 preserves independent semantic criteria despite layout, contextual entities, narrow QA withdrawals, literal authority admission and Principle versus same-tier limits.
 
-Actualnextboundleaves:1293/A1011(first89canonicalwhole/23393+338=23731,notunverified91;followingwhole61633/61287charsintact);1294/A1012(second35whole/33485chars,starts6484);1295/A1013(third83whole/32917+2058=34975);1296/A1014(final94workerwhole/33470+1340=34810). Bindingsnotexecuted. First1249refined/1257originalremain; second438; third279; final3695workers. Allotherwindow/source/continuationfrontiers,candidateidentitydispositionandpostcutoffamendmentsremain.1126–1129/1118Active;1119/1130/1155blocked.
+Actual next bound leaves:1297/A1015(first one whole61287-character report plus5fullcontexts1989=63276, explicit oversized whole-record estimate; following61640intact);1294/A1012(second35whole/33485chars, starts6484, running but uncounted at this checkpoint);1298/A1016(third68whole/30607+4331=34938);1299/A1017(final100workerwhole/32930+141=33071). Future binding is not execution. First1160refined/1168originalremain; second438; third196; final3601workers. All other frozen-window/source/continuation/candidate-identity frontiers and postcutoff amendments remain.1126–1129/1118Active;1119/1130/1155blocked.
 
-Actualreceipts:P1290Agentclocksunavailable,notinferred;rootrecovery08:28:41→08:33:37UTC=4m56,whole4nativeinputsand89futurebindingverified. C312records corruptnative/Concern carriers,missingfieldsandwithdrawncounts. P1291first08:14:45UTC,substantivecorrection08:32:43UTC=17m58;C314discloses2m58estimateoverrunandpremature2m58closure. P1292first08:15:02→finalconfirmation08:27:02=12m00. P1288first08:15:38→fullownnative/saved/Carrier08:26:01=10m23;laterfullsharedcheckobserved134Plans/86supportingCarriersbeforeC314layoutrepair. C313records correctedephemeralexclusionselector;C308records rejectednextbindingtransport;noneofthesegrantfalsecoverage. Actualnextsharedcheck/mechanicalsaveproofrecordedseparately.
+Actual receipts:P1293 original Agent first/elapsed unavailable, not inferred; root recovery08:52:26→08:59:28UTC=7m02, complete89native/one338context/exact next whole and contexts proved; full strict137Plans/91supportingCarriers passed. P1295first08:39:38→finalhandoff08:51:51UTC=12m13; complete83native/sevencontexts/actual next68 verified. P1296first08:38:53→own saved/native/Carrier terminal08:46:51UTC=7m58; complete94native/fivecontexts/actual next100 verified. Later shared checks are not reset leaf clocks or extra semantic recheck stages.
 
-Prioractualcheckpoint62commit624b0cc0b matched16Git/saved/sealedrecoveredCarrierstates;ownedrecordedstates251. C311recordspriorA987finalblanklinecorrectionbeforethatcommit. SharedJournal Gitsavependingduepre-existingunrelatedevents. Thisround'sactualmechanicalGit/recoveredstateprooffollows; no save-Toolreceipts. No O/RMEDauthoring,implementation,settings/servicechangesorfullDocker validationexecutedunderthisEpic.
+Prior actual checkpoint66 commitb23cc208c0f306fd1d660d7775713883485af499 matched22 Git/saved/sealed recovered Carrier states; owned recorded states273. Shared Journal Git save remains pending because of pre-existing unrelated events. This round's actual mechanical Git and recovered-state proof follows separately; no save-Tool receipt. No O/RMED authoring, implementation, settings/service changes or full Docker validation executed under this Epic.
 
-Alllowercheckpointsarehistoricalandsuperseded.
-
+All lower checkpoints are historical and superseded.
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
 

@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 27
-updated_at: "2026-10-04 12:27:44 +0400"
+version: 28
+updated_at: "2026-10-04 12:46:51 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -62,6 +62,11 @@ Actualnext1208/A926,sequence5,binds100wholemessages/22529chars,positions291–39
 
 Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-window-continuation frontier remainsunfinished. A917candidate0canonicalmonthlycontent,C294broaderidentityunasserted/nonblocking;post-cutoffOperatoramendmentsremainseparate.1129/1118Active;authoring/implementationblocked.
 ## Details
+
+### Latest superseding worker frontier
+
+P1296Done/A1014adds94whole/33470charactersplus1340wholecontext, fiveprovisionaloverlappinggroups. Finalworkers450/4051,3601remain;monthlyworkers450/6423,5973remain. Earlier356/3695checkpointshistorical. NextP1299/A1017seq27binds100whole/21sources,32930+141=33071;futurebindingzerocoverage,afterfuturefinal3501/monthly5873wouldremain.1296BLOCKS1299;1299BLOCKS1119/1130/1155. FollowingactualnativefrontierL14/offset446486/raw70830643ff05e44e4af1662f5056b15c4885ff915b56cb95a4a7fb7fca0f66ab in /Users/am/.codex/sessions/2026/09/29/rollout-2026-09-29T06-51-51-01a0eb13-62d3-7b43-99d4-bc1f35a5e7e6.jsonl. AllotherPRIMARY/window/source/continuationfrontiers remain;1129/1118Active, downstreamO/RMED/implementation/Dockerrequired.
+
 
 ### Latest superseding worker frontier
 
@@ -124,3 +129,5 @@ Latest superseding frontier:1212 is Done with A930,100 complete messages/23153 n
 Actual next1216/A934,sequence7, binds100 whole messages/20776 characters,L87399–90120,positions491–590,rawaggregateb8eda725b149963d43f7a523aadecbed054a9d5ad96b847614bd9f695ec37652.1212 BLOCKS1216;1216 BLOCKS1119/1130/1155. Following that future packet694 remain atL90154/offset1024418710/583bytes/2026-10-01T16:49:02.294Z/hashacfd1736368e371c2dc6fab9ecb355983544e69e761c32a13c5d7edcfc6a8778. This binding adds zero semantic coverage. Other131 final PRIMARY/all4051 finalworker/everyunfinishedsource-window-continuation and finalL111074 remain;1129/1118Active,all downstream authoring/specification/implementation/Docker gates blocked.
 
 This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
+
+Terminalnative/saved/ownregisteredCarrierverification:2026-10-04 08:46:51 UTC;actualfirst08:38:53UTC. All94wholemessages/dispositions,originalparts,23sourceprefixes/raw/textfingerprints,fivewholecontexts,current/nextdisjointness,intactfrontierandown4Carrierfields/headers/Doneplacement/Activeparentandnext/BLOCKSpassed. Fullsharedcheckfound unfinishedA1011missingauthor inanotherAgent'spendingclosure; notcountedasglobalpass. Noextrarecheckstage.
