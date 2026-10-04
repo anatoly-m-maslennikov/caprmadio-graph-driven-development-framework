@@ -1,0 +1,43 @@
+---
+atom_id: CA-P-1124
+content_role: Plan
+type: Plan
+label: Task
+work_sequence_number: 7
+current_scope_unit: caprmedio
+claim_target_scope_unit: caprmedio
+local_tier: Standard
+global_tier: 2
+author: Anatoly Maslennikov
+assignee: AI Agent
+status: Active
+subjects:
+  governs: "Session-derived operational capability delivery"
+  depends_on:
+    - "Operations"
+    - "Implementation"
+version: 1
+updated_at: "2026-10-04 06:36:25 +0400"
+relations:
+  is_decomposition_of:
+    - CA-P-1117
+---
+# Summary
+
+Verify project-wide traceability and close the epic
+
+## Objective
+
+Verify end-to-end evidence from thirty-day decisions through source Operations, reviewed RMED, implementations, built images, functional results, and Journal/Git provenance before declaring the Epic complete.
+
+### Work decomposition
+
+This is a composite task, not a fifteen-minute executable leaf. Its initial child files partition the work; add more <=15-minute one-file subtasks for remaining evidence, capability slices, reviews or failures. Roll-up effort depends on the frozen inventory. Inherit CA-P-1117 execution controls and its autonomous-confidence threshold; do not copy or override inherited values.
+
+Before marking this task Done, verify full-stage coverage and update the next dependent task(s) from actual results. A blocked child remains unfinished, has a C/Problem, and does not authorize bypassing this parent's gate.
+
+## Details
+
+### Definition of Done
+
+This Plan is not Done if any preceding composite Plan is not Done, a session/decision/capability has no traceable disposition, a projection is mistaken for authority, a Docker coverage item has no passing execution evidence, or a blocking Concern remains open. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
