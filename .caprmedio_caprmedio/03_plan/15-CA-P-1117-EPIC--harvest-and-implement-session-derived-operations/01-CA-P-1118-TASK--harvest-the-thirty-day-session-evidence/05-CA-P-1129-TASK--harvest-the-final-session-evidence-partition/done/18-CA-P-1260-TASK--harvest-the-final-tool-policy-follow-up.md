@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition Tool policy follow-up"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:31:19 +0400"
+version: 2
+updated_at: "2026-10-04 10:50:25 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1264
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -663,6 +664,11 @@ Own A978,thisleafresult/Done,P1129roll-up and actual next bounded worker/source 
 ```
 
 ## Details
+
+### Actual completion
+
+All40 whole native messages/20625 characters and exact12995 context characters are read and individually disposed in A978. Eight intentional Operator messages, five overlapping candidate groups. Final PRIMARY1415/1415 complete; all4051 final worker messages remain. Actual next1264/A982 binds22 worker messages+377 context characters,total8521; zero future semantic count. Two truncated transports were rejected and recovered with bounded complete output; CA-C-301 resolved. First clock 2026-10-04 06:42:35 UTC; actual native/saved/full strict YAML/DAG verification passed at06:49:44Z,7m09s after start; full report records the result. Git and independent committed-state Journal save remain root checkpoint work. No new authoring, implementation, service or settings changes.
+
 
 ### Definition of Done
 

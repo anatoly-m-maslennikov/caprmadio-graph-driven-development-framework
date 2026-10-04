@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following bounded first-partition decision harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 10:25:34 +0400"
+version: 2
+updated_at: "2026-10-04 10:50:57 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1261
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -207,6 +208,22 @@ source_sha256 is retained905/910snapshot provenance,notfreshimmutablefull-source
 SystemPythonstandard-library seek/readeveryselected/context byteinterval; verify response_item/messagekind/rawSHA/bytes/timestamp/role/nullchannel/partcount/nativecharacters/window.7selected/4user/3assistant/3881bytes/1165chars/1parteach;orderedaggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Wholecontext56085/34325bytes/33549chars/1part/hash3bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e separatelychecked,total34714;following56137checkedseparately.
 
 After saving951 reread all7substantivedispositions/literalrequests/antecedents/fullcontext/frontiers/actualnextbinding. Verify source/savedfingerprints/nativeparts/mandatoryAnalysis+Planheadings/oneDoD/oneEOFnewline/no trailingwhitespace,immediateparent/uniqueIDs/siblingsequence/completion-BLOCKSacyclicity. Review1119/1130/1155 readiness;1126staysActive. Recordpassing savedchecks andreal first/terminalclocksincludingclosure—notearliersubstantive timestamp. RootstrictYAML/full-EpicDAG/save remainseparate.
+
+### Completed decision packet and actual remainder
+
+CA-P-1233 harvested exactly7 whole canonical original-main records56092–56130,4user/3assistant,3881raw bytes/1165native characters/7native parts, plus full completed56085 context33549chars/one part; total34714. Ordered raw aggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Durable CA-A-951v1 at `.caprmedio_caprmedio/02_analysis/CA-A-951-ANALYSIS_RPRT--harvest-the-next-first-partition-decision-packet.md` saves7 complete fingerprinted substantive dispositions, all4 literal human texts in4 historical intent/decision groups,3 genuinely grouped provisional candidates and one full context-only disposition. Original full report read gaplessly, not a fragment; no selected part remains unread.
+
+Human intent: ask questions to resolve the report's fixes, then explicit historical100% threshold and target correction to FPF report. The four-criterion F01 evaluator scope is accepted, not independently applied/tested/saved. Actor/authority P remains; obsolete Intent/formula/text-equivalence checks are to be replaced. Assistant F02 settings-authority question remains unanswered at this packet boundary; unread following56137 is not imported as acceptance. Historical100% supersedes source99% only within that exchange, not current Epic90%; confidence never grants permissions. No blanket repair batch, FPF invocation, methodology/implementation or current Concern follows from these records. Prior accepted-but-unapplied classifications, open proposals, later supersession and reported-versus-proven state remain explicit.
+
+Actual next Active CA-P-1261v1 at `12-CA-P-1261-TASK--harvest-the-following-first-partition-session-packet.md`, immediate1126/sequence12/one AI/<=15minutes, owns reserved CA-A-979 at `.caprmedio_caprmedio/02_analysis/CA-A-979-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`.100 whole56137–57761,29user/71assistant,64237raw bytes/25351native chars; aggregateSHA256d50aaf6da800f5acf35ba8ee62ecf948ba3a3c4e81072c20ad5a47a2c59c3efb. Complete56130 F02 question is context-only389chars; total25740<=35000. First56137 bytes[354050071,354050453),2026-09-04T22:55:27.904Z,user/null/one part,SHA256759f7fda5aa9e976cbe4ab5b229a68825956346cba82e72cd89af8628fd8ce50. Last57761 bytes[364979098,364979629),2026-09-05T07:45:49.353Z,assistant/null/one part,SHA256ee3252bfdc5001838a3959f3dea02a8aa9300f3a7960f763fa376e870800286a. Following whole57816 bytes[365150850,365159531),2026-09-05T07:48:26.080Z,assistant/null/one part,8681raw bytes/8156native chars,SHA256184906e7806e2d1e7255b79c1abf9dc3a3761bb6e77157a184697ae128bed88f remains unprocessed. Native metadata/hash binding is preparation, not semantic reading of the next100. Obtain subsequent IDs from root; next must bind its own actual bounded remainder before Done.
+
+Combined canonical coverage419; refined1869minus419 leaves1450, original1877 including eight later machine contexts minus419 leaves1458. All1659-file/1657-ID905 source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree evidence, both continuation pairs, candidate/appendable-prefix and exact frozen-window/amendment distinctions remain in951/1261 and prior roll-ups. Only actual canonical dispositions subtract; no file/partition/month completion. Eventual next100completion leaves1350/1358, not current coverage.
+
+1233 directly blocks1261; Active1261 and1126 directly block1119/1130/1155. All affectedv1 dependents/readiness reviewed; parent1126 remainsActive. FreshGoalv13/current active Principles/permissions read; five sourcePlan bodies/revisions unchanged from prior full reads; governing versions in951. Native hashes/metadata/all parts/budgets,7 saved row joins/4 literal human texts/4groups/3candidates, four saved layouts/EOF/whitespace, unique sibling IDs/sequences and seven-node direct BLOCKS/child-completion DAG passed. No excluded edits; root owns strict full saved YAML/full-Epic DAG/authorized save underC293. No current Concern; historical source questions/findings are not automatic current defects. Hold after1233.
+
+### Actual execution and terminal verification
+
+Actual execution started2026-10-04 06:42:18UTC. Substantive reading, saved dispositions, Done placement, parent roll-up, actual next binding and post-persistence verification completed2026-10-04 06:50:57UTC:8minutes39seconds (519seconds), within900seconds with381seconds closure margin. Current7/full33549context and next100/full389context plus both following slices passed raw hashes/ordered aggregates/native metadata/all parts/windows/budgets. Saved7row joins/4literal human texts/4decision groups/3provisional candidates, four mandatory layouts/EOF/whitespace, unique sibling IDs/sequences and seven-node direct BLOCKS/child-completion DAG passed; Done placement/result and parentv13Active confirmed. This includes completion persistence, not only an earlier substantive source check. Root strict full saved YAML/full-Epic DAG/authorized save remain separate. Only this terminal metadata receipt and its final saved confirmation follow before hold.
 
 ## Details
 

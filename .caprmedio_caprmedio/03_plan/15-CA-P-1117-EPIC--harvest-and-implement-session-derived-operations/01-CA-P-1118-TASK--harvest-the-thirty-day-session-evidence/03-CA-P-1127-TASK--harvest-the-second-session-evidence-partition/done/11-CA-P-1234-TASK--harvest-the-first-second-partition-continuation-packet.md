@@ -10,21 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "First second-partition continuation session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:18:09 +0400"
+version: 2
+updated_at: "2026-10-04 10:54:57 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
-    - CA-P-1119
-    - CA-P-1130
-    - CA-P-1155
+    - CA-P-1262
 ---
 # Summary
 
@@ -71,6 +69,18 @@ No broadsemanticcontinuationoverlap/dedupestablished;firstrepeatmetadataobjectio
 SystemPythonstdlibseek57214/read6504614bytes/parsecompleteJSONLrecords/applypredicate;reproduce100orderedlines/times/15user85assistant/nullchannels/32589joined32588nativechars/max4978/101parts,rawselectedfirstlast/individualnativeparts. MultipartL188both3077/1900partsandjoinboundaryexplicitlychecked;contextraw/text/whole982charsverifiedseparately. IndependentsavedA952/native100identities/101parts/nonemptydispositions/candidates/choices/context/headings/EOFrequired. No reportpromotion/nosemanticdedupwithoutprovenance.
 
 Checkoneagent<=15min/requiredPlanproperties/headings/Doneplacement/nextActiveparentsequence/inputoutputchecks/changedBLOCKSacyclicity/update1127actualfrontier/reread1119/1130/1155. Realterminalclockincludescarrierclosure,targetmargin;overrunrequires truthfulunfinishedstate/typedProblem/boundedclosure,notearliersemanticverificationasfinalclock. RootstrictsavedYAML/fullDAG/save separate.
+
+### Actual result and dependent review
+
+A952 v1 at `.caprmedio_caprmedio/02_analysis/CA-A-952-ANALYSIS_RPRT--harvest-the-first-second-partition-continuation-packet.md` retains all100 whole native records/101 parts,32589 joined/native sum32588 characters,15 user/85 assistant, both L188 parts3077/1900, two whole prior contexts982 characters,100 substantive dispositions,eight historical choices/seven provisional candidate groups. Distinct repeated human objection retained; machine/embedded/delegated instructions and assistant reports are not fresh Operator approval or independent execution proof.
+
+Independent saved/native read-back PASS at2026-10-04T06:54:57Z: exact100 ordered lines/bytes/timestamps/roles/null channels/raw hashes/all101 part indices/types/lengths/hashes,whole context2,counts/selected raw SHA,nonempty dispositions/choices/groups/headings/clean EOF. Actual next P1262/A980 sequence12 at `12-CA-P-1262-TASK--harvest-the-next-second-partition-continuation-packet.md` binds36 whole records L1787–2775/[6573177,13243722),32509 characters,5 user/31 assistant,36 parts/max24641,whole L2014 report preserved. Whole S041 Plan2084/S042 do3/S100227 context=2314,total34823<=35000;next414 would exceed35237. All36 native/saved identity metadata verified without statement harvest.
+
+Original624 remain fully harvested; continuation first100 now harvested,659 remain. P1262 binds36 of659;further623 startL2786/[13271244,13272056)/2026-09-16T08:01:04.557Z,raw SHA `d802f0a173c3dd169846c7df845f0be445d97bea836db3276afb68a68851267d`;lastL23936/[511891514,511892940)/2026-09-18T22:23:04.656Z. P1127 v13 remains Active,retains allother A905 frontiers/17 primary1642workers/C294 zero canonical window/broader identity gate/C293unchanged/C299resolved/frozen-window amendments. P1119/P1130/P1155 full bodies reread,still blocked by full harvest/P1262/all unfinished prerequisites.1230→1234→1262→1119/1130/1155 is explicit.
+
+One assigned agent; actual first06:43:17UTC, local substantive/native verification06:54:57UTC (11m40s). Actual carrier closure terminal clock2026-10-04T06:55:53Z/10:55:53+0400 (12m36s), after A952/P1234Done/P1127v13/P1262 persisted and local closure checks passed: Done placement, nextsequence12/parent1127/exactinput,explicit changed acyclic chain,parent Active/frontier659=36+623,headings/cleanEOF. No actual current evidence/authority issue requiring new Concern; historical audit/Journal defects not promoted. Root strict YAML/full DAG/Git/Journal save separate; no implementation or adoption.
+
+Final terminal receipt read-back clock2026-10-04T06:56:46Z/10:56:46+0400 (13m29s): allfour owned carriers and closure receipt read back with cleanEOF; final receipt persistence within06:58:17Z deadline. No extra packet executed; hold for root strict validation/save.
 
 ## Details
 

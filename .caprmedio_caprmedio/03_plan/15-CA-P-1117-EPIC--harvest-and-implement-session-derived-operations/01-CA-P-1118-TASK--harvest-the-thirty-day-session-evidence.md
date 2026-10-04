@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-04 10:35:33 +0400"
+version: 9
+updated_at: "2026-10-04 11:01:05 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,18 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current superseding checkpoint:48 substantive packets /3163 unique PRIMARY dispositions plus22 worker dispositions =3185 total. Original-main first419/second624; continuation second100/third605/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves3425 unharvested; worker baseline6423 leaves6401. Final PRIMARY1415/1415 is complete, but only22/4051 final worker messages are harvested;4029 remain. Native machine-context refinements still require final source reconciliation. No metadata index or binding is counted as semantic harvest.
+
+Latest1233/A951 (7whole,3groups),1234/A952 (100whole/101parts,7groups),1235/A953 (95whole,4groups),1260/A978 (40whole,5groups),1264/A982 (22whole worker,4groups) add264 native dispositions/23 provisional overlapping groups, bringing the historical overlapping total to224. These are not224 adopted or deduplicated Operations. A951 retains accepted-not-applied F01 and unanswered F02; A952 preserves read-only audit scope, withdrawn E363 allegation and both native L188 parts; A953 separates Method learning from implementation; A978 preserves the later M/E policy correction; A982 preserves unapplied packets/gates and five-versus-34 report coverage.
+
+Actual next bound leaves1261/A979(first100whole,total25740),1262/A980(second36whole including24641-character whole report,total34823),1263/A981(third91whole,total34848),1268/A986(final25workerwhole,total9715). All held unexecuted. First1450refined/1458original-main remain; second659continuation; third570continuation; final4029worker. All other admitted source/window frontiers, candidate identity disposition and separate post-cutoff amendments persist. Parents1126–1129/1118 remainActive and block1119/1130/1155; no authoring/implementation/Docker bypass.
+
+Root native/saved full-text/part/role/time/hash/disposition/context/frontier checks pass for1260/1264 and source fingerprint/budget/context checks for1233/1235/1261/1263; agents retain full saved/native checks for all three worker leaves. Full strict safe YAML/duplicate-key rejection/exact headings/fields/IDs/Done placement/completion-BLOCKS DAG passes116 Plans/57 supporting carriers. Actual terminal receipts:1233 9m15s,1234 13m51s,1235 11m07s including receipt; root1260 fullchecks7m09s,1264fullchecks3m16s. All stay within15minutes. Rejected oversized transports are resolved in C301; no truncated output became completion evidence. C302 records the staged final-blank-line failure and mechanical correction; repeat strict/whitespace checks pass before save.
+
+Prior actual commit629b0778c and22 then-current states were matched to Git and sealed recovered-state Journal events, bringing owned recorded states to169 before this round. Common prediction/receipt fields match; no fictional save-Tool receipts. Shared Journal Git save remains pending due unrelated pre-existing edits. This round's direct Git result and recovered-state evidence are recorded separately after actual verification. No O/RMED authoring, implementation, service mutation or full Docker runtime validation executed under this Epic.
+
+All lower checkpoints are historical and superseded.
 
 Current superseding checkpoint:43 substantive packets /2921 unique PRIMARY-message dispositions. Original-main first412/second624; main-continuation third510/final1284, plus72README/19TOOL_R finalmessages. Indexed PRIMARY baseline6588 leaves3667 unharvested; all6423 worker messages remain substantively unfinished. Native machine-context refinements still require source reconciliation. A readonly metadata diagnostic found0worker-to-PRIMARY matches on timestamp/role/channel/textSHA/count/nontextfingerprints; it grants no worker semantic coverage or deduplication.
 

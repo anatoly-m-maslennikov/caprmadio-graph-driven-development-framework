@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 12
-updated_at: "2026-10-04 10:25:34 +0400"
+version: 13
+updated_at: "2026-10-04 10:50:57 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -167,6 +167,20 @@ CA-P-1229 processed exactly one whole assistant record56085,33549 native charact
 Actual next Active CA-P-1233v1 at `11-CA-P-1233-TASK--harvest-the-next-first-partition-decision-packet.md`, immediate1126/sequence11/one AI/<=15minutes, owns reserved CA-A-951. Seven whole records56092–56130,4user/3assistant,3881raw bytes/1165native characters; aggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Complete56085 report is context-only,33549characters, giving34714<=35000. All seven raw slices/context/following fingerprints are bound; next substantive harvest has not started. Following unprocessed56137 bytes[354050071,354050453),2026-09-04T22:55:27.904Z,user/null/one part,382bytes/4chars,SHA256759f7fda5aa9e976cbe4ab5b229a68825956346cba82e72cd89af8628fd8ce50.1233 must obtain subsequent reserved IDs from root and bind its own actual remainder before Done.
 
 Combined canonical coverage412; refined1869minus412 leaves1457, original1877 including eight later machine contexts minus412 leaves1465. All1659-file/1657-ID source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree sources, both continuations, exact candidate and frozen-window/amendment distinctions remain in947/1233. No file, partition or monthly completion is claimed. Current1229 directly blocks1233; Active1233 and1126 directly block1119/1130/1155. Affected dependents reviewed;1126 remainsActive. Current authority revisions retained in947; inherited90% governs, historical99% does not override it. No O/RMED/code/settings/environment/Docker/FPF/Git/Journal changes or other-leaf execution. Root owns strict saved YAML/full-Epic DAG/authorized save. Hold after1229.
+
+### Tenth substantive packet result and actual session remainder
+
+### Completed decision packet and actual remainder
+
+CA-P-1233 harvested exactly7 whole canonical original-main records56092–56130,4user/3assistant,3881raw bytes/1165native characters/7native parts, plus full completed56085 context33549chars/one part; total34714. Ordered raw aggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Durable CA-A-951v1 at `.caprmedio_caprmedio/02_analysis/CA-A-951-ANALYSIS_RPRT--harvest-the-next-first-partition-decision-packet.md` saves7 complete fingerprinted substantive dispositions, all4 literal human texts in4 historical intent/decision groups,3 genuinely grouped provisional candidates and one full context-only disposition. Original full report read gaplessly, not a fragment; no selected part remains unread.
+
+Human intent: ask questions to resolve the report's fixes, then explicit historical100% threshold and target correction to FPF report. The four-criterion F01 evaluator scope is accepted, not independently applied/tested/saved. Actor/authority P remains; obsolete Intent/formula/text-equivalence checks are to be replaced. Assistant F02 settings-authority question remains unanswered at this packet boundary; unread following56137 is not imported as acceptance. Historical100% supersedes source99% only within that exchange, not current Epic90%; confidence never grants permissions. No blanket repair batch, FPF invocation, methodology/implementation or current Concern follows from these records. Prior accepted-but-unapplied classifications, open proposals, later supersession and reported-versus-proven state remain explicit.
+
+Actual next Active CA-P-1261v1 at `12-CA-P-1261-TASK--harvest-the-following-first-partition-session-packet.md`, immediate1126/sequence12/one AI/<=15minutes, owns reserved CA-A-979 at `.caprmedio_caprmedio/02_analysis/CA-A-979-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`.100 whole56137–57761,29user/71assistant,64237raw bytes/25351native chars; aggregateSHA256d50aaf6da800f5acf35ba8ee62ecf948ba3a3c4e81072c20ad5a47a2c59c3efb. Complete56130 F02 question is context-only389chars; total25740<=35000. First56137 bytes[354050071,354050453),2026-09-04T22:55:27.904Z,user/null/one part,SHA256759f7fda5aa9e976cbe4ab5b229a68825956346cba82e72cd89af8628fd8ce50. Last57761 bytes[364979098,364979629),2026-09-05T07:45:49.353Z,assistant/null/one part,SHA256ee3252bfdc5001838a3959f3dea02a8aa9300f3a7960f763fa376e870800286a. Following whole57816 bytes[365150850,365159531),2026-09-05T07:48:26.080Z,assistant/null/one part,8681raw bytes/8156native chars,SHA256184906e7806e2d1e7255b79c1abf9dc3a3761bb6e77157a184697ae128bed88f remains unprocessed. Native metadata/hash binding is preparation, not semantic reading of the next100. Obtain subsequent IDs from root; next must bind its own actual bounded remainder before Done.
+
+Combined canonical coverage419; refined1869minus419 leaves1450, original1877 including eight later machine contexts minus419 leaves1458. All1659-file/1657-ID905 source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree evidence, both continuation pairs, candidate/appendable-prefix and exact frozen-window/amendment distinctions remain in951/1261 and prior roll-ups. Only actual canonical dispositions subtract; no file/partition/month completion. Eventual next100completion leaves1350/1358, not current coverage.
+
+1233 directly blocks1261; Active1261 and1126 directly block1119/1130/1155. All affectedv1 dependents/readiness reviewed; parent1126 remainsActive. FreshGoalv13/current active Principles/permissions read; five sourcePlan bodies/revisions unchanged from prior full reads; governing versions in951. Native hashes/metadata/all parts/budgets,7 saved row joins/4 literal human texts/4groups/3candidates, four saved layouts/EOF/whitespace, unique sibling IDs/sequences and seven-node direct BLOCKS/child-completion DAG passed. No excluded edits; root owns strict full saved YAML/full-Epic DAG/authorized save underC293. No current Concern; historical source questions/findings are not automatic current defects. Hold after1233.
 
 ## Details
 
