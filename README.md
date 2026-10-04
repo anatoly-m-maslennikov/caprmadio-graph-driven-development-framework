@@ -28,18 +28,16 @@ specification.
 
 Spec grows →\
 we need smaller units →\
+no single file structure is optimal for every use case →\
+a graph with typed relations.
+
+Each unit should be the smallest meaningful part of the spec →\
 one scope + one Claim = one Atom →\
 splitting further adds no useful distinction.
-
-Different use cases need different structures →\
-keep one authoritative source →\
-derive different views →\
-graph.
 
 The graph grows →\
 identify Entities: the things the project describes →\
 declare each Atom’s Subjects: what its Claim governs and what it depends on →\
-organize them with typed nodes and relations →\
 load only the context needed.
 
 Small files can still be ambiguous →\
