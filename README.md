@@ -12,13 +12,6 @@ In practice, it should make AI-assisted development reliable from the first idea
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
 
-The name describes four connected parts:
-
-- **CAP** — problems, analysis, and planning: Concern, Analysis, and Plan.
-- **RMED** — the specification: Requirement, Method, Evaluation, and Delivery.
-- **I** — the actual code.
-- **O** — Operations: repeatable actions and workflows.
-
 ## Why CAPRMEDIO works this way
 
 Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
