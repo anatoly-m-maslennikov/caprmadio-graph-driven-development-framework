@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:29:05 +0400"
+version: 3
+updated_at: "2026-10-04 14:39:01 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1119
@@ -35,7 +35,15 @@ The assigned AI Agent must complete one bounded work packet for author one metho
 
 ### Inputs and bounded ownership
 
-Bind one reconciled workflow/process and at most three directly associated Step/Action source Atoms with exact target carriers and governing revisions. Use the reconciled destination: CORE_META_MODEL for reusable, project-independent Operations; PROJECT_CONFIGURATION for caprmedio-specific Operations. Reuse existing Operations where equivalent; preserve governed archives and required Journal provenance under the Epic's Operator-approved save policy. Write only authoritative methodology sources, not generated projections.
+Bind one reconciled Action or Workflow and at most three directly associated Step/Action source Atoms with exact target carriers and governing revisions. An accepted Action-only contribution does not require inventing a duplicate Workflow. Use the reconciled destination: CORE_META_MODEL for reusable, project-independent Operations; PROJECT_CONFIGURATION for caprmedio-specific Operations. Reuse existing Operations where equivalent; preserve governed archives and required Journal provenance under the Epic's Operator-approved save policy. Write only authoritative methodology sources, not generated projections.
+
+For the separately retained Carrier repairs, bind layout-only packets of at most four existing Operations, plus the directly identified CA-M-301 supporting-heading repair in one packet. These packets preserve Summary, meaning and Version; refresh Updated At and apply CA-D-479's registered body boundaries and CA-D-482's explicit resolved target. This is repair of the reconciled source frontier, not semantic reauthoring of reused Operations. Keep the independent review limit of four changed Operations per leaf.
+
+### Current admitted authoring frontier
+
+CA-A-1064 independently accepts the optional completed-work handoff assessment. CA-A-1085 accepts evaluator calibration and legacy-evidence/provisional-RMED preparation. CA-A-1086 accepts read-only scoped-choice applicability assessment. Completed CA-P-1372 / CA-A-1087 v2 independently accepts the single coalesced F07/F08/F10 prepared-result conformance assessment. All five reusable accepted contributions target CORE_META_MODEL. No automatic repair, rollout, refactoring, approval or Workflow invocation follows from these definitions.
+
+The CA-P-1130 family and independent-review gates remain binding. This update adapts packet granularity to actual results, not permission to start while an incoming required blocker is Active. CA-P-1156 must bind the exact accepted carriers and any explicitly retained source-layout repair remainder from those results before execution. Current Operation reuse is not a requirement to reauthor every existing Operation.
 
 ### Required output
 
