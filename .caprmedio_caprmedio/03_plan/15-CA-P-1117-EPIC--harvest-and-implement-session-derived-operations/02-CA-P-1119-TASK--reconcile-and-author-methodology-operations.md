@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:29:05 +0400"
+version: 2
+updated_at: "2026-10-04 16:19:11 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -35,7 +35,9 @@ Reconcile and author methodology operations
 
 ## Objective
 
-Reconcile the complete harvest against active Project and methodology authority, then add or update reusable, project-independent Operations in CORE_META_MODEL and caprmedio-specific Operations in PROJECT_CONFIGURATION, and obtain independent subagent review. Both destinations are authoritative methodology sources; neither is the derived applicable-methodology projection.
+Reconcile the Operator-closed admitted harvest against active Project and methodology authority, then add or update reusable, project-independent Operations in CORE_META_MODEL and caprmedio-specific Operations in PROJECT_CONFIGURATION, and obtain independent subagent review. Both destinations are authoritative methodology sources; neither is the derived applicable-methodology projection.
+
+Use the completed results of the 102 harvest packets retained by CA-P-1117. No further native-session harvesting is required or authorized by this stage. The interrupted CA-A-1043 output is excluded from admitted completion. CA-P-1118 and canceled harvest remainder Plans do not block this stage.
 
 ### Work decomposition
 

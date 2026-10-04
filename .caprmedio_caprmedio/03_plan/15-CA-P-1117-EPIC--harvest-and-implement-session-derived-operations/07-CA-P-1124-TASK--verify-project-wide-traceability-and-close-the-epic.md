@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 1
-updated_at: "2026-10-04 06:36:25 +0400"
+version: 2
+updated_at: "2026-10-04 16:19:11 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -28,7 +28,7 @@ Verify project-wide traceability and close the epic
 
 ## Objective
 
-Verify end-to-end evidence from thirty-day decisions through source Operations, reviewed RMED, implementations, built images, functional results, and Journal/Git provenance before declaring the Epic complete.
+Verify end-to-end evidence from the Operator-closed admitted harvest through source Operations, reviewed RMED, implementations, built images, functional results, and Journal/Git provenance before declaring the Epic complete. Confirm the incomplete harvest remains explicitly canceled and is not represented as completed coverage.
 
 ### Work decomposition
 
@@ -40,4 +40,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any preceding composite Plan is not Done, a session/decision/capability has no traceable disposition, a projection is mistaken for authority, a Docker coverage item has no passing execution evidence, or a blocking Concern remains open. Any required child, remainder, repair or re-review task that is not Done also falsifies completion.
+This Plan is not Done if any preceding required composite Plan is not Done, an admitted decision/capability has no traceable disposition, a projection is mistaken for authority, a Docker coverage item has no passing execution evidence, or a blocking Concern remains open. CA-P-1118 and the Operator-canceled harvest descendants are excluded from required decomposition completion; their unfinished evidence must stay truthfully classified. Any remaining required child, remainder, repair or re-review task that is not Done also falsifies completion.
