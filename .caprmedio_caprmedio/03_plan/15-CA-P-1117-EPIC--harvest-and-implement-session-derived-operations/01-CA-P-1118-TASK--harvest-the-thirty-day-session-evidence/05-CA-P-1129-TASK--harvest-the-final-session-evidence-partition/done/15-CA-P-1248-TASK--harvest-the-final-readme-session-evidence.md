@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition README session evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:05:47 +0400"
+version: 2
+updated_at: "2026-10-04 10:16:49 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1252
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1009,6 +1010,10 @@ Own A966, this leaf's result/Done placement, P1129 roll-up and the exact next bo
 ```
 
 ## Details
+
+### Completed result
+
+Saved A966 conserves all72 native whole texts, raw/text/part/time/role/channel/count fingerprints and individual substantive dispositions.49assistant/23nativeuser, three inert app-open notifications/20intentionalhuman messages, six provisional groups. Source raw aggregatebd5d9972d18a9bb60252d5fc95d138e610863f7ea33d2943402e1e5740131d28 and28744 selectedchars match; whole2130 previouscontext is retained without recounting. Firstclock06:11:38Z; owned native/saved/nextbinding checks06:16:10Z,4m32s. Exactnext P1252/A970sequence16 binds18 Tool-source messages/3517chars+878context=4395,stopping before the accessible77488-character report.18native identities/context/aggregate and that nextfrontier verified, not semantically harvested.1248BLOCKS1252;1252BLOCKS1119/1130/1155. FinalPRIMARY now1356/1415;59 Tool-source/all4051worker remain. Allotherpartitions/sources remain unfinished;1129/1118Active. Root full strictcarrier/DAG/save is separate.
 
 ### Definition of Done
 

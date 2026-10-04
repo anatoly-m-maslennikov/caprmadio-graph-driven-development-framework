@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final original-file second-partition session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:58:19 +0400"
+version: 2
+updated_at: "2026-10-04 10:22:57 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1234
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -68,6 +69,12 @@ BeforeDone bindactualnext<=100whole/contextsafe<=35000char/<=15mincontinuationle
 SystemPythonstdlibseek634453946/read9976152bytes/parsecompleteJSONLrecords/exactpredicate;reproduce69orderedlines/times/22user47assistant/nullchannels/16546chars/max775/69parts/selectedfirstlasthashes. IndependentsavedA948/nativeidentity/part/disposition/contextreadback required. Readexacttwoantecedentspansandverifyhashes/fullScope/F/Gmeaning;includeexplicitsourceexcerptlimits,notnewwholecount. Source-nativeinputsum32796<=35000;anyaddedrowcontext accounted/narrowpacketifneeded.
 
 CheckrequiredPlanproperties/headings/cleanEOF/Doneplacement/nextActiveparentsequence11/oneagent<=15min/fullyboundinputoutputchecks,changedBLOCKSacyclicity/update1127actualfrontier/reread1119/1130/1155. Parent/fullharvest/downstreamremainblockedbyunfinishedcontinuation/corpus. Realterminalclockincludescarrierclosure;overrunretaintruthfulunfinishedstate/typedProblem/boundedclosure,notearliersemanticcheckasfinalclock. RootstrictsavedYAML/fullDAG/save separate.
+
+### Actual result
+
+CA-A-948v1 saves69wholemessages/69nativeparts/exactfingerprints/nonemptydispositions,11historicalchoices/eightcandidate groups. Exactalready-harvestedScope/F/Gcontext16250chars+selected16546=32796<=35000 readfully;no giantrecount. Independentnative/savedreadback/hash/counts/context/headings/EOFpassed10:21:04+0400. Firstclock10:11:50+0400;terminalclockreportedaftercarrierclosure. All624originaleligiblemessagesnowcovered,actualL97884/end644430098/2026-09-15T15:24:42.768Z;1127/1118Active,759continuation/allotherfrontiersremain. Next1234/A952sequence11bound100wholecontinuationmessages/101parts/32589joined32588nativechars/33571with982wholecontext. MultipartL188parts3077+1900preserved;no statementsbeyondpacketprematurelyharvested. Further659explicitfrontier;1234mustbindactualnextroot-coordinatedleafbeforeDone.1230BLOCKS1234;1234BLOCKS1119/1130/1155. Reported implementation/validation/saves nevercurrentproof;noactualcurrentissue. RootstrictsavedYAML/fullDAG/save separate.
+
+Terminal saved-carrier closure check passed2026-10-04T06:22:57Z/10:22:57+0400,11m07s from06:11:50Z. Placement/status/sequence/edges/headings/EOF/frontiers andnextwholecontext/multipartchecks passed;finalreceipt-stampclockreportedseparatelytoroot. RootstrictYAML/fullDAG/save separate.
 
 ## Details
 

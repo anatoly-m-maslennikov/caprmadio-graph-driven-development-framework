@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 16
-updated_at: "2026-10-04 10:06:52 +0400"
+version: 19
+updated_at: "2026-10-04 10:33:09 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -64,6 +64,12 @@ Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-windo
 ## Details
 
 ### Latest completed packet checkpoint
+
+Latest superseding frontier1256Done/A974 addsonewhole77488-charreport,58fullcoverageheadingregions/97tabledatarowdispositions,6issues/6fixes/4gaps andsixprovisionalgroups. FinalPRIMARY1375/1415;40Tool-source/all4051worker remain. Actualnext1260/A978seq18 bindsall40whole/20625chars with12995 exactalready-harvestedScope/synthesis/receiving-use/fix-registercontextspans,total33620. Selectedrawaggregate3a7354dd6d393e00f03cf513abcca315c55129b4502b2c0ec17b6b75918cc488;firstL12500reply"tldr",lastL14101/[83864431,83865448)/2026-10-04T01:49:52.360Z/3192441f3dce9296db5aeff5e74c67bd25f1143966a00460be48ef4a5497ab5f. Noafterboundeligiblerecordfromthissourceinwindow.1256BLOCKS1260;1260BLOCKS1119/1130/1155. Firstclock06:22:47Z,ownedchecks06:32:15Z,9m28s. No futuresemantic count;1129/1118Active, otherpartitions/sources and finalworkers unfinished.
+
+Latest superseding frontier1252Done/A970 adds18whole/3517chars/3intentionalhuman/twoprovisionalgroups. FinalPRIMARY1374/1415,41Tool-source/all4051worker remain. Actualnext1256/A974sequence17 binds whole77488-character reportL12493 plusfivecontext messages1273chars,total78761 with explicit90000budget; selectedrawaggregate8a298cc1287ce4e4b58ffb423aaed5cc132d2eec1da6036400b5fb0270c20998.1252BLOCKS1256;1256BLOCKS1119/1130/1155. After future1256,40wholemessages/20625chars remain startingL12500/[66222812,66223569)/2026-10-03T22:32:55.688Z/3935d33755d39a8447884eef80275af5c7d145b2a797447d7c126f75cce7c9f7. Root firstclock06:17:30Z,ownedchecks06:20:25Z,2m55s. No future semantic count;1129/1118Active, allotherpartition/sourcefrontiers preserved.
+
+Latest superseding frontier1248Done/A966 adds72whole/28744chars/20intentionalhuman/sixprovisionalgroups, completing this READMEsource's partition4. Maincontinuation1284+README72=1356/1415PRIMARY;59 TOOL_R PRIMARY/all4051worker remain. Actualnext1252/A970sequence16 binds18whole/3517chars+878context=4395, before whole77488charreportL12493/[66054666,66133941)/2026-10-03T22:21:31.280Z/raw8a298cc1287ce4e4b58ffb423aaed5cc132d2eec1da6036400b5fb0270c20998. After future1252,41source messages remain, including that whole report; no futuresemantic count yet.1248BLOCKS1252;1252BLOCKS1119/1130/1155. Firstclock06:11:38Z, ownedchecks06:16:10Z,4m32s.1129/1118 remainActive and allotherpartition/sourcefrontiers persist. Earlier131remaining-source paragraphs are historical, not current totals.
 
 Latest superseding frontier1244Done/A962 adds94whole/21145chars/17intentionalhuman/sevenprovisionalgroups. All1284 main-continuation messages are harvested for this partition; this is not the full1415 PRIMARY coverage. Actualnext1248/A966sequence15 binds72 README messages atL11046–12205,28744chars+2130context=30874,rawaggregatebd5d9972d18a9bb60252d5fc95d138e610863f7ea33d2943402e1e5740131d28.1244BLOCKS1248;1248BLOCKS1119/1130/1155. The other131PRIMARY/4051worker/allotherpartition and sourcefrontiers remain unharvested. After future1248,59 TOOL_R PRIMARY messages remain with101630chars; bind a bounded actual remainder rather than assume they fit one leaf. Firstclock05:56:37Z, owned checks06:06:14Z,9m37s.1129/1118 remain Active; all earlier source-only frontiers are historical, not erased.
 

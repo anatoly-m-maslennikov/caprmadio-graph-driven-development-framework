@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 11
-updated_at: "2026-10-04 10:02:29 +0400"
+version: 12
+updated_at: "2026-10-04 10:25:34 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -157,6 +157,16 @@ Combined1180+1190+1194+1200+1204+1209+1213+1221canonicalcoverage411;refined91018
 ActualnextActiveCA-P-1229v1 at `10-CA-P-1229-TASK--harvest-the-next-whole-first-partition-review-report.md`,immediate1126/sequence10/oneAI/<=15minutes,outputreservedCA-A-947 at `.caprmedio_caprmedio/02_analysis/CA-A-947-ANALYSIS_RPRT--harvest-the-whole-first-partition-review-report.md`. Exactly1whole56085reviewreport,33549nativechars/34325rawbytes,assistant/null/1part,bytes[353853655,353887980)/2026-09-04T22:51:07.530Z/rawandaggregateSHA2563bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e.3context records55561fullproposedPlan1303chars,55576literaldo3chars,56032partialstopstate133chars total34988<=35000. Approvalisreadonly,nothumanfixauthority;wholepreservedwithoutfragment/squeezing. Nextbinding/rawintegritynotcompletedharvest. Followingwhole56092bytes[353931693,353932107)/2026-09-04T22:52:20.577Z/user/null/1part/hash9b69ea969ce299f6436af5dac5d73f8f89c80dfafe5b23deeb46a68f79cb9556/414rawbytes/35chars remainsunfinished;wouldmake35023chars. Eventualonecompletionleaves1457/1465;1458/1466remainnow. LaterP1233/A951reservedbyroot,nofile/executionhere.
 
 1221directlyblocks1229;Active1229 andthisActiveparent directlyblock1119/1130/1155. Livev1dependents/readinessreviewed;local1221Done neverreleasesmethodology. FreshGoal/Principles/permissionsread andsourcePlanbody/revisioncomparisonunchanged,currentrevisionsin939. No newcurrentConcern;source/savedfingerprints/literalrequests/annotationtargets/nativeparts/headers/uniquesiblings/seven-nodeaffectedDAG/whitespacechecks passed,timingin1221. RootownsstrictYAML/full-EpicDAG/authorizedsaveunderC293. Workerholdsafter1221,made noO/RMED/code/environment/Docker/FPF/Git/Journalchanges.1126 staysActive untileveryrequiredsource/window/fragment/remainderissubstantivelycomplete.
+
+### Ninth substantive packet result and actual decision remainder
+
+### Completed whole-report result and actual remainder
+
+CA-P-1229 processed exactly one whole assistant record56085,33549 native characters/34325 raw bytes/one native part, plus three full context-only parts55561/55576/56032,1439 characters; total34988. Raw/aggregateSHA2563bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e. CA-A-947v1 saves one complete fingerprinted substantive disposition, fourteen exact Principle-support rows, fourteen finding dispositions, fourteen proposed-fix dispositions, four gap dispositions, five reported-reference dispositions, three context dispositions and four provisional grouped operational candidates. Full report displayed/read gaplessly; display splitting is not a source fragment. Literal historical do authorizes only the read-only audit. No new selected human decision; proposed repairs, accepted-but-unapplied D002/O003 classifications, reported execution and later supersession remain distinct. Assistant claims, copied memory/FPF references and claimed digests are not independent Tool, implementation, test or save proof. No fragment or current Concern was created.
+
+Actual next Active CA-P-1233v1 at `11-CA-P-1233-TASK--harvest-the-next-first-partition-decision-packet.md`, immediate1126/sequence11/one AI/<=15minutes, owns reserved CA-A-951. Seven whole records56092–56130,4user/3assistant,3881raw bytes/1165native characters; aggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Complete56085 report is context-only,33549characters, giving34714<=35000. All seven raw slices/context/following fingerprints are bound; next substantive harvest has not started. Following unprocessed56137 bytes[354050071,354050453),2026-09-04T22:55:27.904Z,user/null/one part,382bytes/4chars,SHA256759f7fda5aa9e976cbe4ab5b229a68825956346cba82e72cd89af8628fd8ce50.1233 must obtain subsequent reserved IDs from root and bind its own actual remainder before Done.
+
+Combined canonical coverage412; refined1869minus412 leaves1457, original1877 including eight later machine contexts minus412 leaves1465. All1659-file/1657-ID source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree sources, both continuations, exact candidate and frozen-window/amendment distinctions remain in947/1233. No file, partition or monthly completion is claimed. Current1229 directly blocks1233; Active1233 and1126 directly block1119/1130/1155. Affected dependents reviewed;1126 remainsActive. Current authority revisions retained in947; inherited90% governs, historical99% does not override it. No O/RMED/code/settings/environment/Docker/FPF/Git/Journal changes or other-leaf execution. Root owns strict saved YAML/full-Epic DAG/authorized save. Hold after1229.
 
 ## Details
 

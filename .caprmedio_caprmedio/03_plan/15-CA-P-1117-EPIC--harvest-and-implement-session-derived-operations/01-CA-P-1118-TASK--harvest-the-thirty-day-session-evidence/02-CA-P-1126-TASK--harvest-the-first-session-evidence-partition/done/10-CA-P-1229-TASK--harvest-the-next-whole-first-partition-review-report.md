@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Whole bounded first-partition review-report harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 10:02:29 +0400"
+version: 2
+updated_at: "2026-10-04 10:25:34 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1233
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -159,6 +160,18 @@ source_sha256 is retained905/910snapshot provenance,not new immutablefull-filepr
 SystemPythonstandard-library seek/read each exact selected/context byteinterval; verify rawSHA256/bytes/response_item-messagekind/timestamp/role/nullchannel/partcount/native textsum/window. Selected1assistant/0user/34325bytes/33549chars/1part; raw/aggregateSHA2563bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e.3contextparts total1439; execution34988. Following56092checkedseparately. Originalbytes govern,indexretrievalonly.
 
 After saving947 reread whole-report disposition/allsubstantive sections/candidates/claims/3contexts/frontiers andactualnextbinding; compare complete source fingerprints/nativeparts/literalapproval/antecedent. Verify exactAnalysis andPlan mandatoryheadings/oneDoD/oneEOFnewline/no trailingwhitespace, immediateparent/unique siblingIDs/sequence/completion-BLOCKSacyclicity. Review1119/1130/1155 fromresult;1126 staysActive. Record passing savedchecks/actualfirstandterminalclocksbeforeDone; do not hide closure in an earlier source-check timestamp. RootstrictYAML/full-EpicDAG/save remainseparate.
+
+### Completed whole-report result and actual remainder
+
+CA-P-1229 processed exactly one whole assistant record56085,33549 native characters/34325 raw bytes/one native part, plus three full context-only parts55561/55576/56032,1439 characters; total34988. Raw/aggregateSHA2563bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e. CA-A-947v1 saves one complete fingerprinted substantive disposition, fourteen exact Principle-support rows, fourteen finding dispositions, fourteen proposed-fix dispositions, four gap dispositions, five reported-reference dispositions, three context dispositions and four provisional grouped operational candidates. Full report displayed/read gaplessly; display splitting is not a source fragment. Literal historical do authorizes only the read-only audit. No new selected human decision; proposed repairs, accepted-but-unapplied D002/O003 classifications, reported execution and later supersession remain distinct. Assistant claims, copied memory/FPF references and claimed digests are not independent Tool, implementation, test or save proof. No fragment or current Concern was created.
+
+Actual next Active CA-P-1233v1 at `11-CA-P-1233-TASK--harvest-the-next-first-partition-decision-packet.md`, immediate1126/sequence11/one AI/<=15minutes, owns reserved CA-A-951. Seven whole records56092–56130,4user/3assistant,3881raw bytes/1165native characters; aggregateSHA25658fb6589dcbf2ce5a312013f392f68d9b437ba7b19448c21659565b10d39030e. Complete56085 report is context-only,33549characters, giving34714<=35000. All seven raw slices/context/following fingerprints are bound; next substantive harvest has not started. Following unprocessed56137 bytes[354050071,354050453),2026-09-04T22:55:27.904Z,user/null/one part,382bytes/4chars,SHA256759f7fda5aa9e976cbe4ab5b229a68825956346cba82e72cd89af8628fd8ce50.1233 must obtain subsequent reserved IDs from root and bind its own actual remainder before Done.
+
+Combined canonical coverage412; refined1869minus412 leaves1457, original1877 including eight later machine contexts minus412 leaves1465. All1659-file/1657-ID source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree sources, both continuations, exact candidate and frozen-window/amendment distinctions remain in947/1233. No file, partition or monthly completion is claimed. Current1229 directly blocks1233; Active1233 and1126 directly block1119/1130/1155. Affected dependents reviewed;1126 remainsActive. Current authority revisions retained in947; inherited90% governs, historical99% does not override it. No O/RMED/code/settings/environment/Docker/FPF/Git/Journal changes or other-leaf execution. Root owns strict saved YAML/full-Epic DAG/authorized save. Hold after1229.
+
+### Actual execution and terminal verification
+
+Actual execution started2026-10-04 06:11:07UTC. Terminal substantive/Done-placement/parent-roll-up/actual-next-binding and saved-verification checks completed2026-10-04 06:25:34UTC:14minutes27seconds (867seconds), within900seconds with33seconds closure margin. Passing checks reread four saved layouts/one EOF/no trailing whitespace; exact current selected/context and next selected/context/following raw slices, hashes/nativeparts/counts/budgets;14I/14F/4G/4OP dispositions; seven unique affected nodes and acyclic child-completion/BLOCKS edges. All substantive work and readiness closure are included, not hidden in an earlier source check. Root strict full YAML/full-Epic DAG/save remains separate; this metadata receipt is followed only by saved EOF/receipt confirmation and hold.
 
 ## Details
 

@@ -11,9 +11,11 @@ subjects:
   governs: "Harvest report save validation"
   depends_on:
     - "Analysis"
-version: 1
-updated_at: "2026-10-04 10:09:01 +0400"
+version: 2
+updated_at: "2026-10-04 10:35:33 +0400"
 relations:
+  concern_about:
+    - CA-A-940
   relates_to:
     - CA-P-1118
     - CA-A-940
@@ -28,7 +30,7 @@ The staged save check found24 quoted blank lines with trailing spaces in A940. C
 
 ## Evidences
 
-The staged check identified24 lines from430 to499. Mechanical formatting removed the spaces after the quote marker; updated_at changed, Version stayed1 because no meaning or native evidence changed. All125 row dispositions, complete native text and fingerprints remain intact. The subsequent staged whitespace and strict-carrier checks must pass before the root checkpoint commit.
+The staged check identified24 lines from430 to499. Mechanical formatting removed the spaces after the quote marker; A940 updated_at changed, Version stayed1 because no meaning or native evidence changed. All125 row dispositions, complete native text and fingerprints remain intact. Subsequent staged whitespace and strict-carrier checks passed before actual checkpointcommit a25e687d7. This Concern's direct concern_about relation now binds A940 as required by the Epic; the resolved disposition is unchanged.
 
 ## Blast radius
 
