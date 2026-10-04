@@ -10,11 +10,11 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Bind Implementation Step-specific inputs"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
-version: 1
+version: 2
 updated_at: "2026-10-05 01:30:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1137]
@@ -35,3 +35,7 @@ Own selected_execution.py's Implementation adapter/state handoff and tests/test_
 ### Definition of Done
 
 The exact bounded result, changed files, source pins and actual verification are saved with truthful remainder. No broader implementation or immutable-image proof is implied.
+
+## Result
+
+Implemented Step-specific selection in `selected_execution.py`: `parameters.base_packet` plus `parameters.step_packets[manifest Step ID]`, explicit Integrated/Isolated context checks, actual prior Action outputs/evidence in `prior_results` and `retained_state.prior_results`, and source-edge compatible diagnosis labels. Fourteen focused Docker development-worker tests pass, including real seven prompt Action handlers through injected mock Agent on failed-check/diagnose/retry/repair/passed traversal. Scoped diff check passes. Backend/real Agent transport and image proof remain separate. The retry traversal uses a bounded session mock: actual shared Run support currently predeclares only one visit per Step, so durable retry revisit needs a separately bound continuation before P1517 can be Done.
