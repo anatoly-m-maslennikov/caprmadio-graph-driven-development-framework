@@ -1,0 +1,56 @@
+---
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  governs: "file-mutation-recovery"
+  depends_on:
+    - "programmatic software"
+version: 10
+updated_at: "2026-10-04 04:23:28 +0400"
+relations:
+  evaluation_for:
+    - CA-M-161
+  derived_from:
+    - CA-A-053
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+atom_id: CA-E-263
+content_role: Evaluation
+current_scope_unit: PROGRAMMATIC
+claim_target_scope_unit: PROGRAMMATIC
+local_tier: Standard
+global_tier: 8
+status: Active
+author: Anatoly Maslennikov
+---
+# Recover one partial file write
+
+## Claim checked
+
+one interrupted PROGRAMMATIC file replacement preserves **or** explicitly reports
+its declared recovery boundary **without** guessing at a completed result.
+
+## Applicable conditions
+
+apply **when** a component writes replacement content through a temporary carrier
+**or** **otherwise** has a declared partial-write recovery boundary.
+
+## Test case
+
+interrupt one replacement **after** its temporary carrier is prepared but **before**
+the declared replacement completes.
+
+## Acceptance criteria
+
+pass **only** **when** the original target **or** a declared recoverable result remains
+identifiable, no false completion is reported, **and** the partial state is
+diagnosable from the returned context.
+
+## Failure disposition
+
+stop the mutation path **until** its weaker recovery boundary is explicit **or** its
+atomic replacement guarantee is restored.
+
+## Sources
+
+- [CA-M-161 — Bound file and subprocess effects](../05_method/CA-M-161-PROGRAMMATIC-CORE-METHOD--bound-file-and-subprocess-effects.md)
