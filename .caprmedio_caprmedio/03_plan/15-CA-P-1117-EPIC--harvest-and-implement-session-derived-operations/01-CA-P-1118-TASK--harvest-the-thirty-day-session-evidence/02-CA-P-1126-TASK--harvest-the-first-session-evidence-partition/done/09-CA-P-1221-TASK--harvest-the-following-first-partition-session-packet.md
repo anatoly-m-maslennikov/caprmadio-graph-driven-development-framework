@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 09:40:13 +0400"
+version: 2
+updated_at: "2026-10-04 10:02:29 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1229
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -805,6 +806,22 @@ source_sha256 is retained905/910 snapshot provenance, not new immutable full-fil
 System Python standard-library seek/read every exact selected/context slice; verify response_item/message kind, hash/timestamp/role/null channel/part count/byte/native sum-of-text-part character count/window.57selected/13user/44assistant/44748bytes/22263chars/1part each; ordered aggregateSHA256e7d5f4de2974f1f30a6985ac1f99869ad1728859b8ff7e97c06795718b7f6dca. Context55000 hash/metadata/231chars separate,total22494; following56085 whole separately raw-checked. Binding integrity is not completed harvest.
 
 After saving939 reread57 unique complete provenance/disposition rows plus context, all human requests/candidates/claims/frontiers and actual next input/output/ownership/estimate/functional checks/direct gates. Verify mandatory sections/native keys/immediate parent/unique sibling IDs/sequence/bounded affected completion-BLOCKS acyclicity. Review1119/1130/1155 from result;1126 stays Active. Record passing saved checks before Done. Root owns strict YAML/full-Epic DAG/authorized saving underC293; claim only observed success.
+
+### Completed substantive result and exact next gate
+
+DurableCA-A-939v1 at `.caprmedio_caprmedio/02_analysis/CA-A-939-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` saves57 whole canonical original-main55029–56032,13user/44assistant,44748rawbytes/22263nativechars,orderedaggregateSHA256e7d5f4de2974f1f30a6985ac1f99869ad1728859b8ff7e97c06795718b7f6dca. All57selectedparts+one55000contextpart fullyread.57complete whole-record fingerprints/substantivedispositions join canonicalJSONmetadata retainedhere;13literalhumanrequests/10exactannotationtargets in10historicalgroups and4provisionalcandidates. HumanSummary/customization/formula/supportingdefinition/staleDRY/ActorP/Method-vs-Requirement/read-onlyaudit directions retain exactantecedents/supersession. D001preciseMPrincipleapplication unresolved,D002CoreM/O003PrincipleRapproved-but-unapplied; literal55576do approves55561read-onlyPlan,notfixes. Historicaledits/tests/independentreview/reportvalidation areclaims,notindependentToolproof. No selectedfragment remains.
+
+Combined1180+1190+1194+1200+1204+1209+1213+1221coverage411;refined9101869minus411leaves1458,original1877including8latermachinecontextsminus411leaves1466. All1659-file/1657-ID905rows/other1658files/17PRIMARY+1642workerorigins/metadata-parent/worktree/bothcontinuations retain exactsource/windowfrontiers; no whole source subtraction.917candidate zero-monthlymetadata-only/unassertedbroaderidentityC294 andSeptember15 priorprefix/boundaries/unassessedoverlap/laterpartitions remainin939/1229. Aggregate1949PRIMARY includesothersources; no source/partition/monthcompletion.
+
+ActualnextActiveCA-P-1229v1 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/02-CA-P-1126-TASK--harvest-the-first-session-evidence-partition/10-CA-P-1229-TASK--harvest-the-next-whole-first-partition-review-report.md`,immediate1126/sequence10/oneAI/<=15minutes,outputreservedCA-A-947 at `.caprmedio_caprmedio/02_analysis/CA-A-947-ANALYSIS_RPRT--harvest-the-whole-first-partition-review-report.md`. Exactly1whole33549-characterreviewreport56085,34325rawbytes,assistant/null/1part,bytes[353853655,353887980)/2026-09-04T22:51:07.530Z/rawandaggregateSHA2563bdc569008e61026eed57ef148927ccdcf02eb78d2418149109676b26dd98e3e.3completed1221context records55561fullproposedPlan1303chars,55576literaldo3chars,56032partialstopstate133chars total34988<=35000. Exactnativeapprovalscope retained;nofragment/no squeezing. Rawbinding/integritynotsemanticreportharvest. Followingwhole56092bytes[353931693,353932107)/2026-09-04T22:52:20.577Z/user/null/1part/hash9b69ea969ce299f6436af5dac5d73f8f89c80dfafe5b23deeb46a68f79cb9556/414rawbytes/35chars remainsunfinished;34988+35=35023,explicitlyoutsidebound. Eventualonecompletionleaves1457/1465;1458/1466remainnow. RootreserveslaterP1233/A951onlywhen1229executes;nofile/executionhere.
+
+1221directlyblocks1229;Active1229 andActive1126 directlyblock1119/1130/1155. Thoseunchangedlivev1dependents/readinesswerereviewed;localDone neverreleasesmethodology. FreshGoal/Principles/permissionsread andsourcePlanbodies/revisionscomparedunchangedfrompriorfullreads,currentrevisionsin939. No currentissue requirednewConcern;C293/C294retaindispositions. NoO/RMED/code/environment/Docker/FPF/Git/Journalchanges. RootownsstrictYAML/full-EpicDAG/authorizedsaving;thisworkerholdsafter1221.
+
+### Actual verification and bounded timing
+
+Actualworkbegan2026-10-04T05:49:53Z,estimate<=15minutes. Pre-Done systemPythonstandard-library checks passed58selected/contextrecords/all58parts/canonicalmetadata/window/rawhash/57aggregate,57complete saved fingerprintedsubstantivedispositions,13literalhumanrequests/10exactannotationtargets,onewhole33549-report+3nativecontexts+followingrawbinding,mandatoryAnalysis/Planheadings/oneDoD/oneEOFnewline/no trailingwhitespace,uniquedirectsiblingIDs/sequence10 andseven-nodecompletion/BLOCKSacyclicity. No historicalimplementation/test/saveproofinferred. RootstrictYAML/full-EpicDAG/save remainseparate. FinalDoneplacement/roll-upverificationandactualterminalclosureclockfollows.
+
+Final saved Done-placement/roll-up/sourcefingerprints/literalannotation/nativeparts/headers/EOF/unique-sibling/seven-node completion-BLOCKS checks passed2026-10-04T06:01:43Z. Actualterminalclosureclock2026-10-04T06:02:29Z,elapsed12m36s fromrealfirstclock05:49:53Z,includes allnative reading,authoring,nextbinding,Done placement,parentroll-up andfinal saved checks—notjust anearliersubstantive-check timestamp. Onlytimingmetadatawrite/confirmationfollows; rootstrictYAML/full-EpicDAG/save remainsseparate. Holdafter1221.
 
 ## Details
 

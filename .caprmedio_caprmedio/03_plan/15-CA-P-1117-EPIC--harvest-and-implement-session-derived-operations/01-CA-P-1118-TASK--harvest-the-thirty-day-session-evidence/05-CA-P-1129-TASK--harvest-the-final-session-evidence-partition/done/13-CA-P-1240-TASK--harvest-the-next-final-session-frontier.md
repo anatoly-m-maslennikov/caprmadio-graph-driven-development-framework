@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following final-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:47:25 +0400"
+version: 2
+updated_at: "2026-10-04 09:54:57 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1244
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1383,6 +1384,10 @@ OwnA958,leafDone/result,1129rollup,nextactualroot-reserved boundedremainder. Not
 ```
 
 ## Details
+
+### Actual result
+
+Observedstart05:51:26Z;savedownedchecks05:54:57Z,3m31s. A958retains100whole/21412chars,69assistant31nativeuser(28intentionalhuman),completeoriginaltexts/fingerprints/nonemptydispositions/6provisionalgroups. Native/savedcurrenthash/text/time/role/count/aggregateandnext94/context/budget/tailverify;strict101Plans39carriers/fullcompletionDAGpasses. Coverage1090→1190/1284,94remain. Actualnext1244/A962seq14 binds94whole/21145chars+65context=21210,L108744–111074/raw76baa07c9244b3a76b495491df7e7892d8fe4161691dcf09f99125229a8e8b9d. Noeligiblemain-continuationrecordafterboundwithinwindow;other131finalPRIMARY/4051finalworker/sourcewindowsstillunfinished. Nextstatementsunharvested;1240Done→1244ready,1129/1118Active/fullharvestdownstreamblocked. Noauthoring/implementation/env/Journal/Git work inleaf.
 
 ### Definition of Done
 

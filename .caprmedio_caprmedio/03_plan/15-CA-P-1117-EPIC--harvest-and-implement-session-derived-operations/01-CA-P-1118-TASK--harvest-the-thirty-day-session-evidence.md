@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 6
-updated_at: "2026-10-04 09:45:41 +0400"
+version: 7
+updated_at: "2026-10-04 10:07:54 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,18 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current superseding checkpoint:37 substantive packets /2679 unique PRIMARY-message dispositions. Original-main first411/second555; main-continuation third429/final1284. Indexed PRIMARY baseline6588 leaves3909 unharvested; all6423 worker messages remain substantively unfinished. Machine-context refinements still require final source reconciliation;13011 indexed records are not semantic coverage.
+
+Latest1221/A939 (57whole,4groups),1222/A940 (onewhole78201-characterreport,8groups),1223/A941 (73whole,3groups),1240/A958 (100whole,6groups),1244/A962 (94whole,7groups) add325 records/28groups. Historical overlapping candidate groups total172, not172 adopted or deduplicated Operations. A940 retains all125 internal rows,11sections,8issue/fixpairs/4evidencegaps as content of one native message. Main-continuation final1284/1284 is complete only for that source/partition, not all1415 final PRIMARY.
+
+Actual next bound leaves:1229/A947 (first whole33549-characterreport with34988 totalcontextbudget),1230/A948 (second69originalrecords with32796 contextbudget),1231/A949 (third81whole with34208 contextbudget),1248/A966 (final72READMEwhole with30874 contextbudget). All are unexecuted; parents1126–1129/1118 remain Active and block1119/1130/1155. Remaining local main-source frontiers:first1458refined/1466original;second69original+759continuation;third746continuation;finalother131PRIMARY+4051worker. After future1248,59TOOL_R PRIMARY remain. All other retained sources/window partitions are preserved.
+
+Root strict saved-carrier duplicate-key YAML/headings/fields/IDs/Done placement/fullcompletionBLOCKSDAG passes105Plans/43supportingcarriers. Native/saved94texts/fingerprints/dispositions/aggregate and next72metadata/context bounds pass; workers retained complete own-source/saved checks. Actual observed terminal intervals1221 12m36s;1222 14m03s;1223 13m12s (receipt13m33s);1240 ownedchecks3m31s;1244 fullcarriercheck10m17s. Historical timing failures remain explicit, not reset.
+
+Actual prior commits9033330aa,1251adc22,cf8709531 are retained.127 then-current committed states have sealed recovered-state Journal records verified against saved bytes/Git; none imply save-Tool completion. Earlier whole-object receipt equality failed only because prediction includes a disposition marker absent from actual receipt; independent actual event/carrier/Git verification succeeded, with no duplicate append. Shared Journal Git save remains pending due to unrelated pre-existing edits. This checkpoint's direct Git save and recovered-state receipts are recorded separately after verification.
+
+All paragraphs below with older counts/frontiers are historical and superseded. No O/RMED authoring, implementation or full Docker runtime validation has executed under this Epic.
 
 Current checkpoint:32 substantive packets retain2354 unique PRIMARY message dispositions. Original-main coverage is354 first-partition /554 second-partition; main-continuation356 third-partition /1090 final-partition. The original indexed PRIMARY baseline6588 leaves4234 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
 

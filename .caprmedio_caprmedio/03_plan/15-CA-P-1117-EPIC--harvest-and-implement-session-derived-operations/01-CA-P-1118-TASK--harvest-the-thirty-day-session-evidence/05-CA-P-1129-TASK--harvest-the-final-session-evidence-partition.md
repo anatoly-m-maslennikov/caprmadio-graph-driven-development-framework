@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 14
-updated_at: "2026-10-04 09:45:41 +0400"
+version: 16
+updated_at: "2026-10-04 10:06:52 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -64,6 +64,10 @@ Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-windo
 ## Details
 
 ### Latest completed packet checkpoint
+
+Latest superseding frontier1244Done/A962 adds94whole/21145chars/17intentionalhuman/sevenprovisionalgroups. All1284 main-continuation messages are harvested for this partition; this is not the full1415 PRIMARY coverage. Actualnext1248/A966sequence15 binds72 README messages atL11046–12205,28744chars+2130context=30874,rawaggregatebd5d9972d18a9bb60252d5fc95d138e610863f7ea33d2943402e1e5740131d28.1244BLOCKS1248;1248BLOCKS1119/1130/1155. The other131PRIMARY/4051worker/allotherpartition and sourcefrontiers remain unharvested. After future1248,59 TOOL_R PRIMARY messages remain with101630chars; bind a bounded actual remainder rather than assume they fit one leaf. Firstclock05:56:37Z, owned checks06:06:14Z,9m37s.1129/1118 remain Active; all earlier source-only frontiers are historical, not erased.
+
+Latest supersedingfrontier1240Done/A958 adds100whole/21412chars/28intentionalhuman/6provisionalgroups;coverage1190/1284,94remain. Actualnext1244/A962seq14 binds94whole/21145chars+65context=21210,L108744–111074/end1086406600/raw76baa07c9244b3a76b495491df7e7892d8fe4161691dcf09f99125229a8e8b9d. Noafter-bound eligiblemaincontinuationrecordinwindow. Root3m31s throughownedchecks.1240BLOCKS1244;1244BLOCKS1119/1130/1155. Actualother131finalPRIMARY/4051worker/allotherwindow/sourcefrontierspersist;1244mustbindanactualnextother-sourceleaf,notmark1129Done.1129/1118Active;earlier1090/194andbound1240paragraphshistorical.
 
 Latest supersedingfrontier1236Done/A954 adds100whole/16562chars/10human/5provisionalgroups;coverage1090/1284,194remain. Actualnext1240/A958seq13 binds100whole/21412chars+176context=21588,L106889–108732;94afterfuturebound atL108744/1066547008/2026-10-03T20:40:48.484Z/raw3bd91d9a77ed73ec06c1b1df70fd8329815d425bbe1c22c7469eda5c4727b790. Root3m04s throughownedchecks.1236BLOCKS1240,1240BLOCKS1119/1130/1155;allother131finalPRIMARY/4051worker/window/sourcefinalL111074persist.1129/1118Active;earlier990/294andbound1236paragraphshistorical.
 

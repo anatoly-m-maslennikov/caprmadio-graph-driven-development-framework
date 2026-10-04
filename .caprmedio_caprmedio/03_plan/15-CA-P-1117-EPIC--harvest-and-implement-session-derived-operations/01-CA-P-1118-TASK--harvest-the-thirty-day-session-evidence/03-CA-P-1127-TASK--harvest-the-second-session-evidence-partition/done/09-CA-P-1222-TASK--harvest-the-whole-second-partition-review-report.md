@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Whole second-partition primary session review report"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:34:27 +0400"
+version: 2
+updated_at: "2026-10-04 10:04:03 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1230
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -82,6 +83,12 @@ Same-IDcontinuation`/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T19-2
 SystemPythonstdlibseek634285852/read79289bytes/parsecompleteJSONLmessage;reproduceL96827/time/assistant/null/rawhash/onepartindex0output_text78201/full[0,78201)/textSHA. Nativeallpartsandcontext mustbevisible/readfully throughoutput-safechunks;verify exhaustivecharactercoverage0–78201withoutgaps/duplicates,nochunkisnewcountedmessage. Independentlyre-extractnative/rereadsavedA940 exactidentity/partspan/reportcoverage/dispositions/candidates/proposal/reportlimits,requiredheadings/EOF. Verifyactualcontext2689+78201=80890<=90000declaredbudget. Wholeharvestincrementonlyafterallsourcecharacters/substantivecoverage verified.
 
 ChecknextactualleafPlanproperties/headings,parent/Active/sequence/input/output/verification/<=15min/ordinarycontextbudget,changedBLOCKSacyclicity;update1127actualfrontier/reread1119/1130/1155. Allunfinishedharvest/Active1127/fullharvest1118 keepdownstreamblocked. RootstrictYAML/fullDAG/save separate. Realfinalterminalclockincludescarrierclosure;iftimeexceeds15minretaintruthfulunfinishedstate/boundedclosureandtypedProblem,neveruse earliersemanticverificationasfalsefinalclock.
+
+### Actual result
+
+CA-A-940v1 savesonewhole78201-characterassistantreport/exactnativepart[0,78201),ninewholecontexts2689chars/total80890underexplicit90000budget. Entiretextreadthrough6contiguousnontruncateddisplays;125uniqueinternalrows/11reportsections/8I8F4Gcompleteparagraphs/nonmatrixprose andexhaustivedispositionsretained. Independentnative/savedreadbackpassed10:02:26+0400;historicalproposals/inspection/quotedacceptance neverpromotedcurrentadoption/execution. Firstclock09:50:23+0400;terminalclockreportedafteractualcarrierclosure. ActualfrontierL96827/634365141/2026-09-15T02:21:17.872Z;555of624originalcovered,69original+759continuationunprocessed. Next1230/A948sequence10binds69wholemessages16546chars+16250explicitalready-harvestedgiantcontext-onlyexcerpts=32796<=35000;no fragments/recounting.1230mustbindnextcontinuation1234/A952beforeDone.1222BLOCKS1230;1230BLOCKS1119/1130/1155;1127/1118Active. RootstrictsavedYAML/fullDAG/save separate.
+
+Terminal saved-carrier closure check passed2026-10-04T06:04:03Z/10:04:03+0400,13m40s from05:50:23Z. Actualplacement/status/sequence/edges/headings/EOF/frontierspass;finalreceipt-stampclockreportedseparatelytoroot. RootstrictsavedYAML/fullDAG/save pending;no currentboundoverrun.
 
 ## Details
 
