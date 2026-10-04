@@ -38,7 +38,8 @@ class AtomOperationsTest(unittest.TestCase):
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n",
             encoding="utf-8",
         )
-        (self.root / ".caprmedio_caprmedio/project_scope_unit_graph.projection.toml").write_text(
+        (self.root / ".caprmedio_caprmedio/_projection").mkdir()
+        (self.root / ".caprmedio_caprmedio/_projection/project_scope_unit_graph.projection.toml").write_text(
             '[[scope_units]]\nname = "FRAMEWORK_METHODOLOGY"\nunit_name = "FRAMEWORK_METHODOLOGY"\nauthority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY"\nparent = "caprmedio"\n\n'
             '[[scope_units]]\nname = "FRAMEWORK_ENGINE"\nunit_name = "FRAMEWORK_ENGINE"\nauthority_path = ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE"\nparent = "caprmedio"\n\n'
             '[[scope_units]]\nname = "OPERATOR_DOCUMENTATION"\nunit_name = "OPERATOR_DOCUMENTATION"\nauthority_path = ".caprmedio_caprmedio/103_LAYER_3_OPERATOR_DOCUMENTATION"\nparent = "caprmedio"\n',

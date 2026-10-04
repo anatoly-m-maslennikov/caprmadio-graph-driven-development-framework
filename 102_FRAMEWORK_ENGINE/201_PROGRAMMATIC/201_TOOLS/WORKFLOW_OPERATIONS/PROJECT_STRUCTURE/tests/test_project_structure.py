@@ -250,7 +250,7 @@ class ProjectStructureSharedServiceIntegration(unittest.TestCase):
         control.mkdir()
         (control / "caprmedio_project_settings.toml").write_text(
             "[authority_modes]\ndefault = 'casual'\n\n"
-            "[paths]\njournal_root = '.caprmedio_caprmedio/work_journal'\n"
+            "[paths]\ncontrol_root = '.caprmedio_caprmedio'\njournal_root = '.caprmedio_caprmedio/_journal'\n"
             "runtime_root = '.caprmedio_runtime'\n",
             encoding="utf-8",
         )
@@ -405,7 +405,7 @@ class ProjectStructureSharedServiceIntegration(unittest.TestCase):
         preview = self.tracker.run_selected_operation(request)
         self.assertEqual("preview", preview["disposition"])
         self.assertNotIn("CHILD", self.toml.read_text(encoding="utf-8"))
-        self.assertFalse((self.root / ".caprmedio_caprmedio" / "work_journal").exists())
+        self.assertFalse((self.root / ".caprmedio_caprmedio" / "_journal").exists())
 
         result = self.tracker.run_selected_operation({
             **request,
@@ -422,7 +422,7 @@ class ProjectStructureSharedServiceIntegration(unittest.TestCase):
         self.assertEqual("missing", self.executions[-1]["goal_coverage_disposition"]["state"])
         self.assertIn("CHILD", self.toml.read_text(encoding="utf-8"))
         self.assertFalse((self.root / "delivery" / "CHILD").exists())
-        journal = next((self.root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson"))
+        journal = next((self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson"))
         events = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines()]
         self.assertEqual(["started", "completed"], [event["event"] for event in events])
         self.assertTrue(all(event["schema_version"] == 5 for event in events))

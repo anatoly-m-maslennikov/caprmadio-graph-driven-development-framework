@@ -48,7 +48,7 @@ class CommitTriggerTests(unittest.TestCase):
             "[artifact_timestamps]\ntimezone = \"Asia/Tbilisi\"\n\n"
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n"
             "framework_root = \".caprmedio_framework\"\n"
-            "journal_root = \".caprmedio_caprmedio/work_journal\"\n"
+            "journal_root = \".caprmedio_caprmedio/_journal\"\n"
             "runtime_root = \".caprmedio_runtime\"\n"
             "temporary_root = \".caprmedio_tmp\"\n"
             "legacy_migration_roots = [\".caprmedio\"]\n",
@@ -112,7 +112,7 @@ class CommitTriggerTests(unittest.TestCase):
             }
 
         runtime = self.repository / ".caprmedio_runtime"
-        journals = self.repository / ".caprmedio_caprmedio" / "work_journal"
+        journals = self.repository / ".caprmedio_caprmedio" / "_journal"
         return {
             "status": self._git("status", "--porcelain=v1"),
             "index": (self.repository / ".git" / "index").read_bytes(),
@@ -226,7 +226,7 @@ class CommitTriggerTests(unittest.TestCase):
         journal = self._observation(
             source_event_id="journal-write",
             before_path=None,
-            after_path=".caprmedio_caprmedio/work_journal/alice-2026-08-20-part-1.ndjson",
+            after_path=".caprmedio_caprmedio/_journal/alice-2026-08-20-part-1.ndjson",
             pipeline={"owned": True, "action_id": "action-001", "kind": "journal"},
         )
         runtime = self._observation(
@@ -275,11 +275,11 @@ class CommitTriggerTests(unittest.TestCase):
         self.assertTrue(str(triggers[0]["source_event_id"]).startswith("watch-"))
 
         previous = commit_trigger.scan_governed_files(self.repository)
-        journal = control_root / "work_journal" / "alice-2026-08-20-part-1.ndjson"
+        journal = control_root / "_journal" / "alice-2026-08-20-part-1.ndjson"
         journal.parent.mkdir()
         journal.write_text('{"event_id":"fixture"}\n', encoding="utf-8")
         current = commit_trigger.scan_governed_files(self.repository)
-        carrier = ".caprmedio_caprmedio/work_journal/alice-2026-08-20-part-1.ndjson"
+        carrier = ".caprmedio_caprmedio/_journal/alice-2026-08-20-part-1.ndjson"
         state = current[carrier]
         transition = {
             "event_id": "event-001",
@@ -349,7 +349,7 @@ class CommitTriggerTests(unittest.TestCase):
         self.assertEqual(affected[0]["after_path"], new.relative_to(self.repository).as_posix())
 
     def test_digest_bound_correlation_replay_and_retirement(self) -> None:
-        carrier = ".caprmedio_caprmedio/work_journal/alice-2026-08-20-part-1.ndjson"
+        carrier = ".caprmedio_caprmedio/_journal/alice-2026-08-20-part-1.ndjson"
         transition = {
             "event_id": "event-001",
             "event_digest": hashlib.sha256(b"event").hexdigest(),
@@ -655,7 +655,7 @@ class CommitTriggerTests(unittest.TestCase):
         self.assertEqual(1, envelope["result"]["commit_count"])
         changed = self._git("diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD").splitlines()
         self.assertIn(subject, changed)
-        journals = [path for path in changed if path.startswith(".caprmedio_caprmedio/work_journal/")]
+        journals = [path for path in changed if path.startswith(".caprmedio_caprmedio/_journal/")]
         self.assertEqual(1, len(journals))
         record = json.loads((self.repository / journals[0]).read_text(encoding="utf-8").splitlines()[-1])
         self.assertEqual(

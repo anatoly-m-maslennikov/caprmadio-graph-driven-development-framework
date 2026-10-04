@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 TEST_TEMP_ROOT = Path.cwd() / ".caprmedio_tmp" / "tests" / Path(__file__).stem
@@ -21,7 +22,8 @@ for _parent in Path(__file__).resolve().parents:
         break
 sys.path.insert(0, str(TOOL_DIRECTORY))
 
-from commit_context_logic import ContextError, derive_identity, digest, gather_context, repository_identity, validate_context  # noqa: E402
+import commit_context_logic  # noqa: E402
+from commit_context_logic import ContextError, configured_repository_paths, derive_identity, digest, gather_context, repository_identity, validate_context  # noqa: E402
 
 class IdentityTests(unittest.TestCase):
     def test_task_sequence_and_scope_are_not_identity(self) -> None:
@@ -108,6 +110,39 @@ class CommitContextTests(unittest.TestCase):
             context["predictions"]["journal_partitions"][0]["path"],
         )
         self.assertNotIn("previous_result_event", event)
+
+    def test_configured_paths_rejects_noncanonical_journal_descendant(self) -> None:
+        settings = self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml"
+        settings.write_text(
+            "[paths]\n"
+            'control_root = ".caprmedio_caprmedio"\n'
+            'journal_root = ".caprmedio_caprmedio/journal_segments"\n',
+            encoding="utf-8",
+        )
+        configured_repository_paths.cache_clear()
+
+        with self.assertRaisesRegex(ContextError, "exactly control_root/_journal"):
+            configured_repository_paths(self.root)
+
+    def test_configured_paths_derives_journal_from_custom_control_root(self) -> None:
+        control = Path(".caprmedio_fixture")
+        settings_path = control / "caprmedio_project_settings.toml"
+        target = self.root / settings_path
+        target.parent.mkdir()
+        target.write_text(
+            "[paths]\n"
+            f'control_root = "{control.as_posix()}"\n',
+            encoding="utf-8",
+        )
+        configured_repository_paths.cache_clear()
+        try:
+            with mock.patch.object(commit_context_logic, "SETTINGS_PATH", settings_path):
+                paths = configured_repository_paths(self.root)
+        finally:
+            configured_repository_paths.cache_clear()
+
+        self.assertEqual(control, paths.control_root)
+        self.assertEqual(control / "_journal", paths.journal_root)
 
     def test_graph_excludes_non_atom_markdown_lookalikes(self) -> None:
         narrative = self.root / ".caprmedio_caprmedio/README--CA-R-999.md"

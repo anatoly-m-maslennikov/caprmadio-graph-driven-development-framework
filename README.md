@@ -107,6 +107,8 @@ CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; act
 
 [project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
 
+Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
+
 ## Current boundaries
 
 - More than one person can use CAPRMEDIO on a project, but the framework does not yet provide native support for team workflows.

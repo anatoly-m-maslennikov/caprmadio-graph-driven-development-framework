@@ -25,8 +25,8 @@ from artifact_metadata import SETTINGS_PATH, atom_identifier, project_identity  
 from project_runtime import atomic_tempfile  # noqa: E402
 
 
-OUTPUT = CONTROL / "project_scope_unit_graph.projection.toml"
-SOURCE_MAP = CONTROL / "project_scope_unit_graph_sources.projection.toml"
+OUTPUT = CONTROL / "_projection" / "project_scope_unit_graph.projection.toml"
+SOURCE_MAP = CONTROL / "_projection" / "project_scope_unit_graph_sources.projection.toml"
 CANONICAL_GENERATOR_CARRIER = Path(
     "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/"
     "generate_project_graph_state.py"
@@ -46,7 +46,7 @@ METHODOLOGY_SOURCE_SCOPE_UNITS = (
     ("INSTALLED_EXTENSIONS", METHODOLOGY_SOURCES / "002_INSTALLED_EXTENSIONS"),
     ("PROJECT_CONFIGURATION", METHODOLOGY_SOURCES / "003_PROJECT_CONFIGURATION"),
 )
-JOURNAL = CONTROL / "work_journal"
+JOURNAL = CONTROL / "_journal"
 INACTIVE_FOLDERS = frozenset({"archive", "drafts", "done", "solved", "handled", "canceled", "cancelled"})
 SCOPE_UNIT_NAME = re.compile(
     r"(?P<numeric_prefix>[0-9]+)_(?P<unit_type>LAYER|FEATURE)_(?:(?P<local_order>[1-9][0-9]*)_)?(?P<name>[A-Z][A-Z0-9_]*)\Z"

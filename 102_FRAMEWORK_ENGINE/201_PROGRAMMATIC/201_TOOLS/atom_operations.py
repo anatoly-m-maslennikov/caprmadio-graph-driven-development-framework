@@ -780,7 +780,7 @@ def _upgrade_filename(atom: Atom, *, current_prefix: str, target_prefix: str, ta
 
 
 def _scope_graph(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
-    carrier = control_root(root) / "project_scope_unit_graph.projection.toml"
+    carrier = control_root(root) / "_projection" / "project_scope_unit_graph.projection.toml"
     try:
         document = tomllib.loads(carrier.read_text(encoding="utf-8"))
     except (OSError, tomllib.TOMLDecodeError) as error:

@@ -25,6 +25,15 @@ SPEC.loader.exec_module(generate_project_graph_state)
 
 
 class GenerateProjectGraphStateTests(unittest.TestCase):
+    def test_persistent_carriers_use_the_project_single_roots(self) -> None:
+        projection_root = generate_project_graph_state.CONTROL / "_projection"
+        self.assertEqual(projection_root, generate_project_graph_state.OUTPUT.parent)
+        self.assertEqual(projection_root, generate_project_graph_state.SOURCE_MAP.parent)
+        self.assertEqual(
+            generate_project_graph_state.CONTROL / "_journal",
+            generate_project_graph_state.JOURNAL,
+        )
+
     def test_quoted_source_timestamps_use_the_existing_supported_formats(self) -> None:
         for value in ('"2026-09-06 12:00:00 +0400"', "'2026-09-06 12:00:00'", "2026-09-06 12:00:00 +0400"):
             self.assertEqual("2026-09-06 12:00:00", generate_project_graph_state.normalise_timestamp(value))

@@ -33,7 +33,7 @@ class CommitChangeSetTests(unittest.TestCase):
         (self.root / ".caprmedio").mkdir()
         (self.root / ".caprmedio_caprmedio").mkdir()
         (self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml").write_text(
-            "[artifact_timestamps]\ntimezone = \"Asia/Tbilisi\"\n\n[paths]\njournal_root = \".caprmedio_caprmedio/work_journal\"\nruntime_root = \".caprmedio_runtime\"\n",
+            "[artifact_timestamps]\ntimezone = \"Asia/Tbilisi\"\n\n[paths]\ncontrol_root = \".caprmedio_caprmedio\"\njournal_root = \".caprmedio_caprmedio/_journal\"\nruntime_root = \".caprmedio_runtime\"\n",
             encoding="utf-8",
         )
         self.git("init", "-q")
@@ -115,7 +115,7 @@ class CommitChangeSetTests(unittest.TestCase):
             "index": (self.root / ".git/index").read_bytes(),
             "head": self.git("rev-parse", "HEAD").strip(),
             "runtime": files(self.root / ".caprmedio_runtime"),
-            "journal": files(self.root / ".caprmedio_caprmedio/work_journal"),
+            "journal": files(self.root / ".caprmedio_caprmedio/_journal"),
         }
 
     def append_only(self) -> tuple[dict[str, object], dict[str, object]]:
@@ -228,10 +228,10 @@ class CommitChangeSetTests(unittest.TestCase):
         self.assertEqual("folder", context["subject"]["kind"])
         self.assertEqual(".caprmedio_caprmedio", context["result"]["path"])
         self.assertFalse(
-            any(entry["path"].startswith(".caprmedio_caprmedio/work_journal/") for entry in context["result"]["entries"])
+            any(entry["path"].startswith(".caprmedio_caprmedio/_journal/") for entry in context["result"]["entries"])
         )
         changed = set(self.git("diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD").splitlines())
-        journals = {path for path in changed if path.startswith(".caprmedio_caprmedio/work_journal/")}
+        journals = {path for path in changed if path.startswith(".caprmedio_caprmedio/_journal/")}
         subjects = changed - journals
         self.assertEqual({self.subject}, subjects)
         self.assertEqual(1, len(journals))
@@ -399,7 +399,7 @@ class CommitChangeSetTests(unittest.TestCase):
 
     def test_recover_committed_rejects_stale_journal_without_runtime_mutation(self) -> None:
         context, lease = self.committed_without_release()
-        journal = next((self.root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson"))
+        journal = next((self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson"))
         lines = journal.read_bytes().splitlines(keepends=True)
         lines[-1] = b" " + lines[-1]
         journal.write_bytes(b"".join(lines))
@@ -538,7 +538,7 @@ class CommitChangeSetTests(unittest.TestCase):
         head = self.git("rev-parse", "HEAD").strip()
         journal_before = {
             path.relative_to(self.root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in (self.root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson")
+            for path in (self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson")
         }
 
         first = commit_change_set.observe_post_commit(self.root)
@@ -555,7 +555,7 @@ class CommitChangeSetTests(unittest.TestCase):
             journal_before,
             {
                 path.relative_to(self.root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-                for path in (self.root / ".caprmedio_caprmedio/work_journal").glob("*.ndjson")
+                for path in (self.root / ".caprmedio_caprmedio/_journal").glob("*.ndjson")
             },
         )
 
