@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 TOOL = Path(__file__).resolve().parents[1] / "compile_applicable_methodology.py"
@@ -81,6 +82,14 @@ class SelectedCompilationTest(unittest.TestCase):
         }
         result.update(extra)
         return result
+
+    def output_bytes(self) -> dict[str, bytes]:
+        output = self.root / compiler.methodology_paths(self.root).output
+        return {
+            path.relative_to(output).as_posix(): path.read_bytes()
+            for path in sorted(output.rglob("*"))
+            if path.is_file()
+        }
 
     def test_golden_active_core_extension_and_project_configuration_preserve_source_fidelity(self) -> None:
         core = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001", relations="\n  relates_to:\n    - CA-R-900"))
@@ -181,21 +190,169 @@ class SelectedCompilationTest(unittest.TestCase):
         applied = compiler.run_request(self.request("apply", expected_source_frontier_digest=assessed["source_frontier_digest"], decision_refs=decision_refs))
         self.assertEqual("pending_recording", applied["outcome"])
         self.assertEqual(selected.relative_to(self.root).as_posix(), applied["output_plan"][0]["source_carrier_path"])
+        self.assertEqual(selected.relative_to(self.root).as_posix(), applied["decision_provenance"][0]["selected_source_carrier_path"])
 
         selected.write_bytes(carrier("CA-R-001", version=3))
         stale = compiler.run_request(self.request("apply", expected_source_frontier_digest=assessed["source_frontier_digest"], decision_refs=decision_refs))
         self.assertEqual("blocked", stale["outcome"])
         self.assertEqual("decision-source-frontier-stale", stale["blocking_findings"][0]["code"])
 
-    def test_recovery_requires_failed_publication_reference_and_republishes_only_current_frontier(self) -> None:
+    def test_rejected_and_stale_canonical_decisions_preserve_prior_projection(self) -> None:
+        core = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
+        (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
+        initial = compiler.run_request(self.request())
+        self.assertEqual("pending_recording", compiler.run_request(self.request("apply", expected_source_frontier_digest=initial["source_frontier_digest"]))["outcome"])
+        before = self.output_bytes()
+        selected = self.write("003_PROJECT_CONFIGURATION/04_requirement/CA-R-001--project.md", carrier("CA-R-001", version=2))
+        assessed = compiler.run_request(self.request())
+        conflict = assessed["conflicts"][0]
+        journal = self.control / "_journal/decisions.ndjson"
+        journal.parent.mkdir(parents=True)
+
+        for outcome, digest, expected in (
+            ("rejected", assessed["source_frontier_digest"], "decision-journal-not-approved"),
+            ("approved", "stale-frontier", "decision-source-frontier-stale"),
+        ):
+            with self.subTest(outcome=outcome):
+                journal.write_text(json.dumps({
+                    "event_id": "decision-1",
+                    "event_digest": "digest-1",
+                    "outcome": outcome,
+                    "operator": "TEST_OPERATOR",
+                    "details": {
+                        "conflict_id": conflict["conflict_id"],
+                        "source_frontier_digest": digest,
+                        "selected_source_carrier_path": selected.relative_to(self.root).as_posix(),
+                    },
+                }) + "\n")
+                result = compiler.run_request(self.request(
+                    "apply",
+                    expected_source_frontier_digest=assessed["source_frontier_digest"],
+                    decision_refs=[{
+                        "conflict_id": conflict["conflict_id"],
+                        "journal_record_ref": journal.relative_to(self.root).as_posix() + "#decision-1",
+                        "journal_record_digest": "digest-1",
+                    }],
+                ))
+                self.assertEqual("blocked", result["outcome"])
+                self.assertEqual(expected, result["blocking_findings"][0]["code"])
+                self.assertEqual("preserved", result["publication"]["prior_output_state"])
+                self.assertEqual(before, self.output_bytes())
+
+        self.assertTrue(core.is_file())
+
+    def test_source_correction_handoff_requires_fresh_selection_and_assessment(self) -> None:
+        selected = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
+        (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
+        before = compiler.source_state_snapshot(self.root, compiler.methodology_paths(self.root))
+        initial_selection = compiler.select_sources_action(self.request())
+        handoff = compiler.apply_corrections_action(self.request())
+
+        self.assertEqual("reassess_required", handoff["outcome"])
+        self.assertFalse(handoff["source_edit_supported"])
+        self.assertEqual("source_owner_correction_request", handoff["correction_request_or_receipt"]["kind"])
+        self.assertEqual(["CA-O-004", "CA-O-005"], handoff["correction_request_or_receipt"]["required_follow_up_actions"])
+        self.assertEqual(before, compiler.source_state_snapshot(self.root, compiler.methodology_paths(self.root)))
+
+        selected.write_bytes(carrier("CA-R-001", version=2))
+        reselection = compiler.select_sources_action(self.request())
+        reassessment = compiler.assess_sources_action(self.request())
+        self.assertNotEqual(initial_selection["source_frontier_digest"], reselection["source_frontier_digest"])
+        self.assertEqual(reselection["source_frontier_digest"], reassessment["source_frontier_digest"])
+        self.assertEqual("assessed", reassessment["outcome"])
+
+    def test_publication_failure_and_uncertainty_report_no_success_receipt(self) -> None:
+        requirement = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
+        method = self.write("001_CORE_META_MODEL/05_method/CA-M-001--core.md", carrier("CA-M-001"))
+        (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
+        initial = compiler.run_request(self.request())
+        self.assertEqual("pending_recording", compiler.run_request(self.request("apply", expected_source_frontier_digest=initial["source_frontier_digest"]))["outcome"])
+        before = self.output_bytes()
+        requirement.write_bytes(carrier("CA-R-001", version=2))
+        method.write_bytes(carrier("CA-M-001", version=2))
+        current = compiler.run_request(self.request())
+        real_replace = compiler.os.replace
+
+        calls = 0
+
+        def fail_second(source: Path, target: Path) -> None:
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise OSError("injected publication failure")
+            real_replace(source, target)
+
+        with mock.patch.object(compiler.os, "replace", side_effect=fail_second):
+            failed = compiler.run_request(self.request("apply", expected_source_frontier_digest=current["source_frontier_digest"]))
+        self.assertEqual("blocked", failed["outcome"])
+        self.assertEqual("atomic-replacement-failed", failed["blocking_findings"][0]["code"])
+        self.assertEqual("preserved", failed["publication"]["prior_output_state"])
+        self.assertEqual([], failed["run_receipt_refs"])
+        self.assertEqual(before, self.output_bytes())
+
+        calls = 0
+
+        def fail_replacement_and_rollback(source: Path, target: Path) -> None:
+            nonlocal calls
+            calls += 1
+            if calls in {2, 3}:
+                raise OSError("injected uncertain recovery")
+            real_replace(source, target)
+
+        with mock.patch.object(compiler.os, "replace", side_effect=fail_replacement_and_rollback):
+            uncertain = compiler.run_request(self.request("apply", expected_source_frontier_digest=current["source_frontier_digest"]))
+        self.assertEqual("blocked", uncertain["outcome"])
+        self.assertEqual("atomic-replacement-uncertain", uncertain["blocking_findings"][0]["code"])
+        self.assertEqual("uncertain", uncertain["publication"]["prior_output_state"])
+        self.assertEqual([], uncertain["run_receipt_refs"])
+
+    def test_recovery_requires_canonical_failed_publication_evidence_and_preserves_shared_receipt_context(self) -> None:
         self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
         (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
         assessed = compiler.run_request(self.request())
         missing = compiler.run_request(self.request("recover_publication", expected_source_frontier_digest=assessed["source_frontier_digest"]))
         self.assertEqual("blocked", missing["outcome"])
         self.assertEqual("request-recovery-evidence-missing", missing["blocking_findings"][0]["code"])
-        recovered = compiler.run_request(self.request("recover_publication", expected_source_frontier_digest=assessed["source_frontier_digest"], failed_publication_ref="journal://failed-publication-1"))
+        not_canonical = compiler.run_request(self.request("recover_publication", expected_source_frontier_digest=assessed["source_frontier_digest"], failed_publication_ref="journal://failed-publication-1"))
+        self.assertEqual("decision-journal-reference-invalid", not_canonical["blocking_findings"][0]["code"])
+
+        journal = self.control / "_journal/publications.ndjson"
+        journal.parent.mkdir(parents=True)
+        journal.write_text(json.dumps({
+            "event_id": "failed-publication-1",
+            "event_digest": "failed-publication-digest",
+            "event": "failed",
+            "outcome": "failed",
+            "details": {"source_frontier_digest": assessed["source_frontier_digest"]},
+        }) + "\n")
+        shared_refs = [{"run_id": "shared-action-run"}]
+        recovered = compiler.run_request(self.request(
+            "recover_publication",
+            expected_source_frontier_digest=assessed["source_frontier_digest"],
+            failed_publication_ref=journal.relative_to(self.root).as_posix() + "#failed-publication-1",
+            run_receipt_refs=shared_refs,
+        ))
         self.assertEqual("pending_recording", recovered["outcome"])
+        self.assertEqual(shared_refs, recovered["run_receipt_refs"])
+        self.assertEqual(journal.relative_to(self.root).as_posix() + "#failed-publication-1", recovered["evidence_refs"]["failed_publication"]["failed_publication_ref"])
+
+        published_handoff = compiler.publish_action(self.request(
+            "apply",
+            expected_source_frontier_digest=assessed["source_frontier_digest"],
+            run_receipt_refs=shared_refs,
+        ))
+        self.assertEqual("pending_recording", published_handoff["outcome"])
+        self.assertEqual(shared_refs, published_handoff["run_receipt_refs"])
+        self.assertEqual("shared_passthrough_pending_canonical_recording", published_handoff["action_handoff"]["run_receipt_behavior"])
+
+        self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001", version=2))
+        stale = compiler.run_request(self.request(
+            "recover_publication",
+            expected_source_frontier_digest=assessed["source_frontier_digest"],
+            failed_publication_ref=journal.relative_to(self.root).as_posix() + "#failed-publication-1",
+        ))
+        self.assertEqual("blocked", stale["outcome"])
+        self.assertEqual("recovery-source-frontier-stale", stale["blocking_findings"][0]["code"])
 
     def test_inactive_or_unselected_extension_is_excluded_and_not_published(self) -> None:
         self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))

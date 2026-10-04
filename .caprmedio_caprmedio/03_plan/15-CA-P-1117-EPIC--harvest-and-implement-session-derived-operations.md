@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-04 21:59:34 +0000"
+version: 9
+updated_at: "2026-10-04 22:52:48 +0000"
 relations: {}
 ---
 # Summary
@@ -133,6 +133,14 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+Latest verified frontier supersedes the older snapshots below. P1547 accepts both native query Tools and the sole parser after repaired adversarial snapshots and truthful consumption diagnostics; P1525/P1526 are Done for native Tool scope. P1543 accepts the fifteen-route MCP source, and P1552 accepts D521@5's exact two-frontier admission. P1562 extends the sole canonical manifest and adapter; P1563 connects native queries to actual shared Run execution and pre-own-event capture. Neither route registration nor core tests count as runtime/image proof.
+
+P1540/P1541's repeated visit identities and deduplicated definition bindings now pass actual shared-recording tests and are saved in a16344eab. P1553/P1554 add native Revert and independent Implementation transport; P1560 wires explicit selected startup. P1555/P1557/P1561 provide real native golden inputs for W09-W13, with Implementation's executable mock explicitly distinguished from a live Agent call. P1558 accepts native compiler conflict/recovery proof; P1559 connects publication to actual shared Action recording, including truthful pending/no replay on recording failure. Fresh fifteen-route queue/MCP/image evidence remains required.
+
+Carrier cutover is partial, not complete: 102 registered historical view Projections moved in 615b49250 with 55,288,394 byte-identical predecessor bytes, and P1556 saves the durable map. The first Applicable Methodology role-directory move was denied EPERM. C443/P1549 retain that blocked remainder; no retry, alternative move, rebasing or rollback occurred. All 963 original source links remain valid and the distinct legacy Engine manifest remains untouched. The earlier 337-file Journal byte-preserving cutover remains verified. Independent ready implementation continues while denied work remains unfinished.
+
+The following paragraphs are retained historical frontier snapshots, not current completion assertions.
 
 Centralized carrier cutover: CA-D-549/CA-D-550 establish `_journal/` and `_projection/`. The earlier directory rename was denied and was not bypassed. Current readback now finds `_journal/` and no old `work_journal/`; root compared all 337 tracked historical Journal files against their Git predecessor bytes and verified all 337 identical, with no missing or changed files. The canonical MCP manifest exists in `_projection/` and its original-thirteen current source pins loaded successfully. Remaining cutover: persisted graph/signature outputs and Applicable Methodology carriers still use old physical locations; relocate only the registered derived outputs and rebase their source references before whole-cutover/image acceptance. Source authority stays in the framework folder and runtime locks/receipts/pending records stay ephemeral. This readback is not a claim that all persisted Projections are migrated.
 

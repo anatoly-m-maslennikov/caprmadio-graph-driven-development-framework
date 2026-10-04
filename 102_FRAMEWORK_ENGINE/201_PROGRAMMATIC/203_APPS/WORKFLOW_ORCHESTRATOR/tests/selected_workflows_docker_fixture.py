@@ -132,6 +132,8 @@ class GoldenProject:
             encoding="utf-8",
         )
         self._write_native_authority()
+        self._write_graph_authority()
+        self._write_compiler_authority()
         (self.root / "fixture/authority").mkdir(parents=True, exist_ok=True)
         (self.root / self.case.authority_path).write_text(
             json.dumps({"case": self.case.case_id, "route": self.case.route, "state": "before"}),
@@ -209,6 +211,127 @@ class GoldenProject:
         (self.root / "fixture/reference.txt").parent.mkdir(parents=True, exist_ok=True)
         (self.root / "fixture/reference.txt").write_text("CHILD\n", encoding="utf-8")
 
+    @property
+    def graph_source_dir(self) -> Path:
+        """The explicit selected source folder for the two graph Actions."""
+        return self.root / ".caprmedio_caprmedio/graph_sources"
+
+    def _write_graph_authority(self) -> None:
+        """Declare a minimal current Entity/Term frontier, never a graph fake."""
+        self.graph_source_dir.mkdir(parents=True, exist_ok=True)
+        def atom(atom_id: str, governs: str, depends_on: tuple[str, ...] = ()) -> str:
+            dependencies = ", ".join(json.dumps(value) for value in depends_on)
+            return (
+                "---\n"
+                f"atom_id: {atom_id}\ncontent_role: Requirement\ntype: Definition\n"
+                "current_scope_unit: PARENT\nclaim_target_scope_unit: PARENT\nstatus: Active\n"
+                "author: Golden Fixture\nversion: 1\nupdated_at: 2026-10-05 00:00:00 +0000\n"
+                "subjects:\n"
+                f"  governs: {json.dumps(governs)}\n  depends_on: [{dependencies}]\n"
+                "relations: {}\n---\n"
+                f"# {atom_id}\n\nDeclared fixture source.\n"
+            )
+        (self.graph_source_dir / "CA-R-201.md").write_text(atom("CA-R-201", "Entity"), encoding="utf-8")
+        (self.graph_source_dir / "CA-R-202.md").write_text(atom("CA-R-202", "Property", ("Entity",)), encoding="utf-8")
+        (self.graph_source_dir / "CA-R-203.md").write_text(
+            atom("CA-R-203", "Entity/Property: Label", ("Property",)), encoding="utf-8"
+        )
+
+    def native_graph_parameters(self, graph_kind: str) -> dict[str, Any]:
+        """Return the actual CA-O-134/O-137 request, with pinned source bytes."""
+        if graph_kind not in {"entities", "terms"}:
+            raise GoldenCorpusError("graph kind must be entities or terms")
+        import sys
+        graph_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "GENERATE_ENTITY_GRAPH"
+        if str(graph_root) not in sys.path:
+            sys.path.insert(0, str(graph_root))
+        import generate_entity_graph
+        return {
+            "graph_kind": graph_kind,
+            "source_frontier": generate_entity_graph.source_frontier_for(self.root, self.graph_source_dir),
+            "selection": {"atom_ids": ["CA-R-201", "CA-R-202", "CA-R-203"], "scope_unit_names": ["PARENT"]},
+            "representation_configuration": {"format": "canonical-json"},
+            "capability_permission_evidence": {"authorized": True},
+            "run_recording_context": {"state": "confirmed", "receipt_refs": [f"golden-{self.case.case_id}"]},
+        }
+
+    @property
+    def compiler_source_dir(self) -> Path:
+        return self.root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"
+
+    def _write_compiler_authority(self) -> None:
+        """Declare Core, selected Extension, and Project Configuration sources."""
+        source = self.compiler_source_dir
+        for layer in ("001_CORE_META_MODEL", "003_PROJECT_CONFIGURATION"):
+            for role in ("04_requirement", "05_method", "06_evaluation", "07_delivery", "09_operations"):
+                (source / layer / role).mkdir(parents=True, exist_ok=True)
+        def carrier(atom_id: str) -> str:
+            return (
+                "---\n" + f"atom_id: {atom_id}\ncce_version: cce_1\ncce_form: obligation\n"
+                "status: Active\nversion: 1\nupdated_at: 2026-10-05 00:00:00 +0000\nrelations: {}\n---\n"
+                f"# {atom_id}\n\nDeclared compiler fixture source.\n"
+            )
+        (source / "001_CORE_META_MODEL/04_requirement/CA-R-301--core.md").write_text(carrier("CA-R-301"), encoding="utf-8")
+        extension = source / "002_INSTALLED_EXTENSIONS/example/v2/05_method"
+        extension.mkdir(parents=True, exist_ok=True)
+        (extension / "CA-M-302--extension.md").write_text(carrier("CA-M-302"), encoding="utf-8")
+        (source / "003_PROJECT_CONFIGURATION/07_delivery/CA-D-303--project.md").write_text(carrier("CA-D-303"), encoding="utf-8")
+        (source / "001_CORE_META_MODEL/caprmedio_framework_default_settings.toml").write_text("", encoding="utf-8")
+        (source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text(
+            '[extensions.example]\nenabled = true\nrevision = "v2"\n', encoding="utf-8"
+        )
+        structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
+        with structure.open("a", encoding="utf-8") as handle:
+            handle.write(
+                "\n[[scope_units]]\n"
+                'scope_unit_name = "METHODOLOGY_SOURCES"\nparent = "PROJECT"\n'
+                'scope_unit_type = "Unordered"\nscope_unit_label = "FEATURE"\nstructural_level = 1\n'
+                'navigational_order_number = 2\n'
+                'authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"\n'
+                'delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"\n'
+            )
+
+    def native_compiler_parameters(self, operation: str = "dry_run", *, expected_source_frontier_digest: str | None = None) -> dict[str, Any]:
+        """Actual CA-O-011 request; it deliberately has no fabricated receipt."""
+        import sys
+        compiler_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "COMPILE_APPLICABLE_METHODOLOGY"
+        if str(compiler_root) not in sys.path:
+            sys.path.insert(0, str(compiler_root))
+        import compile_applicable_methodology
+        request: dict[str, Any] = {
+            "operation": operation, "project_root": self.root.as_posix(),
+            "governed_bindings": compile_applicable_methodology.governed_bindings(
+                self.root, compile_applicable_methodology.methodology_paths(self.root)
+            ),
+        }
+        if operation == "apply":
+            if not expected_source_frontier_digest:
+                raise GoldenCorpusError("compiler apply needs the just-assessed source frontier digest")
+            request["expected_source_frontier_digest"] = expected_source_frontier_digest
+        return request
+
+    def native_implementation_parameters(self) -> dict[str, Any]:
+        """Source-full CA-O-016 packets; mock transport is supplied separately."""
+        import sys
+        implementation_root = Path(__file__).resolve().parents[4] / "202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW"
+        if str(implementation_root) not in sys.path:
+            sys.path.insert(0, str(implementation_root))
+        import implementation_actions
+        bindings = implementation_actions.current_source_bindings()
+        methods = [row["path"] for row in bindings if str(row["atom_id"]).startswith("CA-M-")]
+        base = {
+            "source_bindings": bindings, "permissions": {"allowed": True},
+            "method_projection": implementation_actions.prepare_method_projection(methods),
+            "requirements_delivery": ["CA-R-1843", "CA-D-544"], "evaluations": ["CA-E-563"],
+            "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
+            "golden_e2e": ["disposable executable assertion"], "baseline_command": "python fixture_assertion.py",
+            "retry": {"consumed": 0, "limit": 1}, "retained_state": {"transport": "mock-not-live-llm"},
+        }
+        return {"base_packet": base, "run_visit_limits": {"CA-O-094": 2}, "step_packets": {
+            step: {"context": context, "step_marker": step}
+            for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
+        }}
+
     def _carrier(self, atom_id: str, slug: str, summary: str) -> dict[str, str]:
         return {
             "path": f".caprmedio_caprmedio/04_requirement/{atom_id}--{slug}.md",
@@ -229,6 +352,14 @@ class GoldenProject:
     def native_parameters(self) -> dict[str, Any]:
         """Return one source-valid native Action payload for W01--W08 only."""
         route = self.case.route
+        if route == "run_implementation_workflow":
+            return self.native_implementation_parameters()
+        if route == "build_applicable_methodology":
+            return self.native_compiler_parameters()
+        if route == "build_entities_graph":
+            return self.native_graph_parameters("entities")
+        if route == "build_terms_graph":
+            return self.native_graph_parameters("terms")
         target = self._descriptor("CA-R-100")
         if route == "create_atom":
             return {"carrier": self._carrier("CA-R-102", "created", "Created summary")}
@@ -356,12 +487,17 @@ class GoldenProject:
         route = self.case.route
         # W09--W13 remain the reviewed legacy corpus until their own packets.
         # W01--W08 use precisely the native Action payloads above.
-        parameters = self.native_parameters() if self.case.case_id <= "W08" else {
+        parameters = self.native_parameters() if self.case.case_id in {
+            "W01", "W02", "W03", "W04", "W05", "W06", "W07", "W08", "W09", "W11", "W12", "W13"
+        } else {
             "fixture_schema": "selected-workflows-docker-golden/v1", "case_id": self.case.case_id,
             "route": route, "authority_path": self.case.authority_path,
             "expected_effect_path": self.case.expected_effect_path,
         }
-        refs = ([".caprmedio_caprmedio/project_structure.toml"] if self.case.case_id in {"W05", "W06", "W07", "W08"}
+        refs = ([".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"] if self.case.case_id == "W13"
+                else [f".caprmedio_caprmedio/_projection/{'entities_graph.json' if route == 'build_entities_graph' else 'terms_graph.json'}"]
+                if self.case.case_id in {"W11", "W12"}
+                else [".caprmedio_caprmedio/project_structure.toml"] if self.case.case_id in {"W05", "W06", "W07", "W08"}
                 else [str(parameters.get("target", parameters.get("predecessor", parameters.get("carrier", {}))).get("path", self.case.authority_path))])
         effects = [{"type": route, "target": refs[0]}]
         request: dict[str, Any] = {

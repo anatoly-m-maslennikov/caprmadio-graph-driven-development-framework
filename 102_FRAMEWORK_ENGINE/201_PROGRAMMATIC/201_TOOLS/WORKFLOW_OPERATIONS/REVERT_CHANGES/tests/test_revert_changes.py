@@ -98,6 +98,16 @@ def complete_request(effects: MemoryEffects) -> dict:
         effect["expected_result_hash"] = digest(effect["expected_after"])
         effect["before_evidence"] = f"before:{effect['effect_id']}"
         effect["after_evidence"] = f"after:{effect['effect_id']}"
+        effect["capability_binding"] = {
+            "capability_id": "test.memory",
+            "parameters": {"effect_id": effect["effect_id"]},
+            "target": {"target_id": effect["target_id"]},
+            "permission_evidence": {
+                "capability_id": "test.memory", "granted": True,
+                "evidence_ref": f"permission:{effect['effect_id']}", "evidence_hash": "a" * 64,
+            },
+            "evidence_refs": [effect["before_evidence"], effect["after_evidence"]],
+        }
     return {
         "selected_change_refs": ["event:accepted-1", "revision:7"],
         "targets": ["one", "two"],
@@ -149,6 +159,18 @@ class RevertChangesTests(unittest.TestCase):
         self.assertEqual("partial_failure", result["outcome"])
         self.assertEqual("uncertain", result["effect_account"]["effects"][0]["status"])
         self.assertEqual("unattempted", result["effect_account"]["effects"][1]["status"])
+        self.assertEqual(["first"], effects.calls)
+
+    def test_completed_capability_with_wrong_observed_hash_is_uncertain_partial_failure(self) -> None:
+        effects, runs = MemoryEffects(), FakeRuns()
+        request = complete_request(effects)
+        request["ordered_effects"][0]["expected_result_hash"] = digest("not-the-applied-state")
+        service = RevertChangesService(effects.observe, effects.apply, runs)
+        admitted = service.handle({"operation": "admit", "reversal_request": request})
+        result = service.handle({"operation": "execute", "approved_reversal_manifest": admitted["approved_reversal_manifest"]})
+        self.assertEqual("partial_failure", result["outcome"])
+        self.assertEqual("uncertain", result["effect_account"]["effects"][0]["status"])
+        self.assertEqual(0, result["effect_account"]["applied_effect_count"])
         self.assertEqual(["first"], effects.calls)
 
     def test_already_satisfied_result_is_no_op_with_action_evidence(self) -> None:

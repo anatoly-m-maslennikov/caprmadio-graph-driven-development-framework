@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Artifact query Tool implementation"
   depends_on: [Implementation, Workflow, Action, Tool, Evaluation, Journal]
-version: 3
-updated_at: "2026-10-05 01:25:00 +0400"
+version: 4
+updated_at: "2026-10-04 22:46:18 +0000"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1527]
@@ -41,5 +41,7 @@ P1532 now accepts the current eight-carrier v2 packet with exact SHA-256 pins. W
 The owned Tool and golden tests pass against accepted source pins with truthful remainder; host proof is not MCP or image proof.
 
 ## Result
+
+Final bounded Tool disposition: Done. P1537/P1538 implemented the admitted Tool and sole parser; P1546 completed the namespace collision golden case; P1548 added observed parser statistics. Independent P1547@3 accepts Artifact pure core and shared parser against current P1532 sources, with 11 Artifact and 7 parser tests. The initial result below is historical and superseded. MCP/queue/Run/image gates remain P1527/P1528.
 
 Initial implementation is saved in FIND_AND_FETCH_ARTIFACTS: shared `query_filter.py`, `find_and_fetch_artifacts.py`, package entry and three golden tests. Development-worker tests passed 3/3; that narrow check does not satisfy the complete bound golden corpus. Root inspection found continuation re-enumeration instead of retained members, incorrect canonical section selector/boundaries, incomplete resource/secret diagnostics and YAML fallback, plus incomplete shared parser depth/token and number semantics. This Plan remains Active; separately bound P1537/P1538 must complete these obligations before P1525 is Done. No MCP, immutable-image, live Journal or actual selected Run proof exists yet.

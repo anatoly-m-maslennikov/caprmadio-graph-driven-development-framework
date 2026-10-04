@@ -10,6 +10,7 @@ from engine import Coordinator, execute_phase, runtime_fingerprint
 from runtime_config import control_directory, docker_runtime
 from remote_agent import RemoteAgent
 from selected_execution import SelectedExecution
+from selected_native_providers import SelectedNativeProviders
 
 APPLICATION = 'caprmedio-orchestrator'
 QUEUE = 'base-revise'
@@ -119,8 +120,9 @@ def status(root, request):
     return response
 
 
-def register_execution(DBOS, engine):
+def register_execution(DBOS, engine, *, selected_providers=None):
     """Register one admitted recipe with durable phase checkpoints."""
+    selected_providers = selected_providers or SelectedNativeProviders(engine.root)
     @DBOS.step(name='base-revise-gather')
     def gather(run_id):
         return engine.gather(run_id)
@@ -143,8 +145,7 @@ def register_execution(DBOS, engine):
 
     @DBOS.step(name='selected-workflow-dispatch')
     def selected_dispatch(run_id):
-        selected = SelectedExecution(engine.root)
-        return selected.dispatch(selected.load(run_id))
+        return selected_providers.dispatch(run_id)
 
     @DBOS.workflow(name=WORKFLOW)
     def execute(run_id):
@@ -173,7 +174,7 @@ def execute_plan(engine, run_id, gather, check, fix, finish, coverage):
             return {'workflow_run_id': run_id, 'outcome': 'interrupted', 'reason': str(error)}
 
 
-def worker(root, *, agent=None, ready_file=None):
+def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
     """Explicitly started foreground process; no implicit daemon or hook installation."""
     from dbos import DBOS
     root = Path(root).resolve(strict=True)
@@ -183,7 +184,8 @@ def worker(root, *, agent=None, ready_file=None):
     DBOS(config={'name': APPLICATION, 'system_database_url': url,
                  'run_admin_server': False, 'enable_otlp': False,
                  'application_version': APP_VERSION, 'max_executor_threads': 2})
-    register_execution(DBOS, engine)
+    register_execution(DBOS, engine, selected_providers=SelectedNativeProviders(
+        root, implementation_agent=implementation_agent))
 
     previous = {number: signal.getsignal(number) for number in (signal.SIGINT, signal.SIGTERM)}
     for number in previous:

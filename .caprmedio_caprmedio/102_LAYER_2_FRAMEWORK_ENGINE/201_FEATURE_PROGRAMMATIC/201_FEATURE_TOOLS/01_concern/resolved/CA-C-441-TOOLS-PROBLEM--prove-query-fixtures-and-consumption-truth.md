@@ -6,10 +6,10 @@ current_scope_unit: TOOLS
 claim_target_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-04 22:09:50 +0000"
+version: 2
+updated_at: "2026-10-04 22:52:48 +0000"
 subjects:
   governs: "Prove query fixtures and consumption truth"
   depends_on: [Journal, Projection, Evaluation, Implementation]
@@ -30,5 +30,6 @@ CA-P-1544 maps the missing cases to E569/E575/E577/E579. A three-token expressio
 
 ## Blast radius
 
-Neither query Tool is admitted to MCP until its current repair and independent acceptance gates are satisfied. No source write, real Run, image or aggregate Epic completion is inferred from the initial passing unit suites.
+Resolved disposition: P1546/P1548 supplied namespace collision and actual parser consumption; P1545@3 repaired counts on rejected selectors. Independent P1547@3 accepts Artifact, Journal and the shared parser pure cores. No MCP/Run/image proof is implied.
 
+Neither query Tool is admitted to MCP until its current repair and independent acceptance gates are satisfied. No source write, real Run, image or aggregate Epic completion is inferred from the initial passing unit suites.

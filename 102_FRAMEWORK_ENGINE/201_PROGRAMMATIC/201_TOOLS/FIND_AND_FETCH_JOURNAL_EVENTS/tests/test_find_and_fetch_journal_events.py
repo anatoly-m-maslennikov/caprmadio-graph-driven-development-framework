@@ -275,6 +275,27 @@ class JournalQueryGoldenTest(unittest.TestCase):
             rejected_statistics["grammar_depth"],
         )
 
+    def test_rejected_selector_admission_retains_successful_parser_consumption(self):
+        self.write_events("events.ndjson", {"event_id": "E-1", "details": {"api_key": "do-not-leak"}})
+        snapshot = capture_snapshot(self.root)
+        cases = (
+            ('"event:bad" = 1', "invalid-event-selector"),
+            ('"event:/details" = {}', "protected-selector"),
+        )
+        for expression, code in cases:
+            with self.subTest(code=code):
+                _, statistics = parse_filter_with_stats(
+                    expression,
+                    max_depth=16,
+                    max_tokens=128,
+                    max_in_members=16,
+                )
+                outcome = query(snapshot, {"filter": expression})
+                self.assertEqual(outcome["findings"][0]["code"], code)
+                self.assertEqual(outcome["limits"]["max_filter_tokens"]["consumed"], statistics["tokens"])
+                self.assertEqual(outcome["limits"]["max_grammar_depth"]["consumed"], statistics["grammar_depth"])
+                self.assertEqual(outcome["limits"]["max_in_members"]["consumed"], statistics["in_members"])
+
     def test_limit_provenance_survives_snapshot_and_request_override(self):
         self.write_events("events.ndjson", {"event_id": "E-1"})
         instance = self.control / "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION"

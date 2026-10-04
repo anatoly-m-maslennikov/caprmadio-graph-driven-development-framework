@@ -6,10 +6,10 @@ current_scope_unit: TOOLS
 claim_target_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-04 22:09:50 +0000"
+version: 2
+updated_at: "2026-10-04 22:52:48 +0000"
 subjects:
   governs: "Prevent forged Journal query snapshots"
   depends_on: [Journal, Projection, Evaluation, Implementation]
@@ -30,5 +30,6 @@ CA-P-1544's in-memory probe substituted source_root '.', zero members and an INJ
 
 ## Blast radius
 
-Neither query Tool is admitted to MCP until its current repair and independent acceptance gates are satisfied. No source write, real Run, image or aggregate Epic completion is inferred from the initial passing unit suites.
+Resolved disposition: P1545 repaired opaque server-retained snapshot trust and canonical-root/member validation. Independent P1547@3 accepted the adversarial core contract. Actual queue/Run/image gates remain separate and are not bypassed.
 
+Neither query Tool is admitted to MCP until its current repair and independent acceptance gates are satisfied. No source write, real Run, image or aggregate Epic completion is inferred from the initial passing unit suites.

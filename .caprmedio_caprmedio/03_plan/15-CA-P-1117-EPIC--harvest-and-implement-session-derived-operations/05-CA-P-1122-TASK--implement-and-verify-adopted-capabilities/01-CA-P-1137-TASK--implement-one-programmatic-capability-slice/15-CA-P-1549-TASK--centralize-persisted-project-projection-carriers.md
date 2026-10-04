@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Centralize persisted Project Projection carriers"
   depends_on: [Implementation, Projection, Journal, Evaluation]
-version: 1
-updated_at: "2026-10-04 22:15:10 +0000"
+version: 2
+updated_at: "2026-10-04 22:33:50 +0000"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1519, CA-P-1123]
@@ -38,3 +38,6 @@ Inherit CA-P-1117's 90% confidence threshold and mechanical Git save exception. 
 
 Actual changed carriers and source-bound verification are saved truthfully. Final all-fifteen Docker/MCP proof remains a separate required gate.
 
+### Partial Result
+
+102 registered historical Projection files were relocated and byte-verified against their predecessor: 55,288,394 bytes, zero mismatches. Those completed moves are now preserved in 615b49250. The first Applicable Methodology role-directory rename raised PermissionError; execution stopped without retry or bypass. Its 963 projected source links remain valid at the original locations, but no Applicable Methodology relocation or rebasing occurred. The legacy Engine manifest remains distinct from the canonical manifest and untouched. No full migration map was saved before failure. CA-P-1556 records the partial accounting without repeating the denied operation. This Task remains Active and does not claim completed migration.

@@ -373,7 +373,35 @@ class SelectedExecution:
                     outcome = result["outcome"]
                     step_id = context["step_definition_id"]
                     output: dict[str, Any] = {"result": outcome, "effect_refs": [], "native_result": result}
-                    if outcome in {"blocked", "pending_recording"}:
+                    if (step_id == "CA-O-157" and context["action_definition_id"] == "CA-O-009"
+                            and outcome == "pending_recording" and result.get("apply_status") == "APPLIED"):
+                        publication = result.get("publication")
+                        frontier = result.get("source_frontier_digest")
+                        planned = publication.get("output_plan") if isinstance(publication, Mapping) else None
+                        output_digest = publication.get("output_digest") if isinstance(publication, Mapping) else None
+                        if (not isinstance(frontier, str) or not frontier or not isinstance(output_digest, str)
+                                or not output_digest or not isinstance(planned, list)):
+                            output.update(result="blocked", terminal_outcome="interrupted_pending")
+                        else:
+                            paths = sorted({
+                                item["output_path"] for item in planned
+                                if isinstance(item, Mapping) and isinstance(item.get("output_path"), str)
+                            })
+                            if len(paths) != len(planned):
+                                output.update(result="blocked", terminal_outcome="interrupted_pending")
+                            else:
+                                output.update(
+                                    result="publication recording required",
+                                    terminal_outcome="interrupted_pending",
+                                    effect_refs=paths,
+                                    compiler_publication_recording={
+                                        "on_recorded_result": "completed publication from the still-valid final frontier",
+                                        "source_frontier_digest": frontier,
+                                        "output_digest": output_digest,
+                                        "output_paths": paths,
+                                    },
+                                )
+                    elif outcome in {"blocked", "pending_recording"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     elif step_id == "CA-O-152" and outcome == "assessed":
                         output["result"] = "complete exact selection"
@@ -915,11 +943,31 @@ class SelectedExecution:
                     raise SelectedExecutionError("native Action handler returned invalid effect references")
                 progress_path = self.run_directory(run_id) / f"{requested_action_id}.json"
                 self._write(progress_path, {"result": final_result, "action_run_id": action_run_id,
-                                            "native_result": output.get("native_result")})
+                                            "native_result": output.get("native_result"),
+                                            "compiler_publication_recording": output.get("compiler_publication_recording")})
+                terminal_receipt: Mapping[str, Any] | None = None
                 if output.get("action_terminal_recorded") is not True:
-                    session.finish_run(action_run_id, outcome="completed",
-                                       result_ref=progress_path.relative_to(self.root).as_posix(),
-                                       effect_refs=effect_refs)
+                    terminal_receipt = session.finish_run(
+                        action_run_id, outcome="completed",
+                        result_ref=progress_path.relative_to(self.root).as_posix(),
+                        effect_refs=effect_refs,
+                    )
+                recording = output.get("compiler_publication_recording")
+                if recording is not None:
+                    if not isinstance(recording, Mapping):
+                        raise SelectedExecutionError("compiler publication recording handoff is invalid")
+                    if (terminal_receipt is not None and terminal_receipt.get("disposition") == "terminal"
+                            and terminal_receipt.get("outcome") == "completed"):
+                        completed = recording.get("on_recorded_result")
+                        if not isinstance(completed, str):
+                            raise SelectedExecutionError("compiler publication recording handoff is incomplete")
+                        final_result = result_map.get(completed, completed)
+                    else:
+                        # The native effect is already applied, but without the
+                        # shared Action receipt it cannot take the published
+                        # On Result edge.  The durable dispatch result prevents
+                        # re-entering this Action while recording is pending.
+                        output["terminal_outcome"] = "interrupted_pending"
                 step_effect_refs.extend(effect_refs)
                 results.append({"step_run_id": step_run_id, "action_run_id": action_run_id,
                                 "step_definition_id": step["atom_id"],
