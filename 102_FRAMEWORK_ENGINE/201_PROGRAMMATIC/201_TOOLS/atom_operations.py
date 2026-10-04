@@ -131,41 +131,50 @@ def _lifecycle(path: Path, control: Path) -> str:
 
 def atom_from_path(root: Path, path: Path) -> Atom:
     root = root.resolve()
-    control = control_root(root)
+    return _atom_from_path(root, path, control_root(root))
+
+
+def _atom_from_path(root: Path, path: Path, control: Path) -> Atom:
+    """Parse against the validated control-root snapshot for one operation."""
     path = path.resolve()
     if not _inside(path, control) or path.suffix.lower() != ".md" or not path.is_file():
         raise ToolError("not-markdown-atom", f"not a CAPRMEDIO Markdown Atom carrier: {path}")
+    if "_projection" in path.relative_to(control).parts:
+        raise ToolError("not-markdown-atom", f"Projection Carrier is not an authoritative Atom: {path}")
     role = _role_directory(path, control)
     if role is None and path.parent != control:
         raise ToolError("not-markdown-atom", f"carrier is not placed in a CAPRMEDIO content-role directory: {path}")
     frontmatter, content = split_frontmatter(path.read_text(encoding="utf-8"))
+    if re.search(r"(?m)^projection:\s*(?:$|\{)", frontmatter):
+        raise ToolError("not-markdown-atom", f"projected Atom view is not an authoritative Atom: {path}")
     lifecycle = _lifecycle(path, control)
     match = ATOM_ID.search(path.name)
-    declared = re.findall(r"(?m)^atom_id:\s*(CA-[CAPRMEDO]-[0-9]+)\s*$", frontmatter)
-    if len(declared) > 1:
-        raise ToolError("atom-frontmatter-invalid", f"Atom has duplicate atom_id values: {path}")
+    declared = frontmatter_scalar(frontmatter, "atom_id")
     if lifecycle == "draft":
-        if declared:
+        if declared is not None:
             raise ToolError("draft-has-stable-id", f"draft Atom cannot declare atom_id: {path}")
         atom_id = None
     else:
-        if not declared:
+        if declared is None:
             raise ToolError("atom-frontmatter-id-required", f"active Atom must declare atom_id in frontmatter: {path}")
-        if match is not None and declared[0] != match.group(1):
+        if re.fullmatch(r"CA-[CAPRMEDO]-[0-9]+", declared) is None:
+            raise ToolError("atom-frontmatter-invalid", f"Atom has an invalid atom_id value: {path}")
+        if match is not None and declared != match.group(1):
             raise ToolError("atom-frontmatter-id-mismatch", f"filename and frontmatter atom_id differ: {path}")
-        atom_id = declared[0]
+        atom_id = declared
     return Atom(path, path.relative_to(root).as_posix(), path.name, atom_id,
                 lifecycle, role or "control-root", frontmatter, content)
 
 
 def scan_atoms(root: Path, *, under: str | None = None, lifecycle: str = "all") -> list[Atom]:
     root = root.resolve()
-    base = safe_path(root, under, must_exist=True) if under else control_root(root)
+    control = control_root(root)
+    base = safe_path(root, under, must_exist=True) if under else control
     candidates = [base] if base.is_file() else sorted(base.rglob("*.md"), key=lambda p: p.as_posix())
     atoms: list[Atom] = []
     for path in candidates:
         try:
-            atom = atom_from_path(root, path)
+            atom = _atom_from_path(root, path, control)
         except (ToolError, UnicodeDecodeError, OSError):
             continue
         if lifecycle == "all" or atom.lifecycle == lifecycle:
@@ -277,15 +286,13 @@ def _revision(frontmatter: str, *, creating: bool) -> str:
 def _with_atom_id(frontmatter: str, atom_id: str | None) -> str:
     """Make the current carrier identity explicit without accepting a conflict."""
 
-    declared = re.findall(r"(?m)^atom_id:\s*(\S+)\s*$", frontmatter)
-    if len(declared) > 1:
-        raise ToolError("atom-frontmatter-invalid", "frontmatter must declare atom_id at most once")
+    declared = frontmatter_scalar(frontmatter, "atom_id")
     if atom_id is None:
-        if declared:
+        if declared is not None:
             raise ToolError("draft-has-stable-id", "a draft cannot declare atom_id")
         return frontmatter
-    if declared:
-        if declared[0] != atom_id:
+    if declared is not None:
+        if declared != atom_id:
             raise ToolError("atom-frontmatter-id-mismatch", "frontmatter atom_id must equal the filename Atom ID")
         return frontmatter
     return (frontmatter + "\n" if frontmatter else "") + f"atom_id: {atom_id}"

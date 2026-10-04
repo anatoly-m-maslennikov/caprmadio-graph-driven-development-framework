@@ -230,17 +230,26 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
             "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
 
 
-def _find_shadow_manifest_fields(value: Any, *, allowed_definition_manifest: bool = False) -> bool:
+def _find_shadow_manifest_fields(
+    value: Any, *, allowed_definition_manifest: bool = False, _path: tuple[str | int, ...] = ()
+) -> bool:
     if isinstance(value, Mapping):
         for key, child in value.items():
             if key in {"definition_manifest_ref", "definition_manifest_digest"}:
                 return True
-            if key == "definition_manifest" and not allowed_definition_manifest:
+            if key == "definition_manifest" and not (
+                allowed_definition_manifest
+                and _path in {(), ("operator_authorization",), ("proposal_receipt",)}
+            ):
                 return True
-            if _find_shadow_manifest_fields(child, allowed_definition_manifest=key == "operator_authorization"):
+            if _find_shadow_manifest_fields(
+                child, allowed_definition_manifest=allowed_definition_manifest, _path=(*_path, key)
+            ):
                 return True
     elif isinstance(value, list):
-        return any(_find_shadow_manifest_fields(item, allowed_definition_manifest=allowed_definition_manifest) for item in value)
+        return any(_find_shadow_manifest_fields(
+            item, allowed_definition_manifest=allowed_definition_manifest, _path=(*_path, index)
+        ) for index, item in enumerate(value))
     return False
 
 
@@ -432,8 +441,11 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
         missing = [name for name in sorted(required) if name not in request]
         if missing:
             return "execute requires exact preview receipt and Operator authorization"
-        if not isinstance(request["proposal_receipt"], str) or not request["proposal_receipt"] or not _DIGEST.fullmatch(str(request["proposal_receipt_digest"])):
+        receipt = request["proposal_receipt"]
+        if not isinstance(receipt, Mapping) or not receipt or not _DIGEST.fullmatch(str(request["proposal_receipt_digest"])):
             return "execute proposal receipt is invalid"
+        if canonical_digest(receipt) != request["proposal_receipt_digest"]:
+            return "execute proposal receipt digest differs"
         if not isinstance(request["assigned_action_id"], str) or not request["assigned_action_id"]:
             return "execute assigned_action_id is invalid"
         requested = request["requested_runs"]

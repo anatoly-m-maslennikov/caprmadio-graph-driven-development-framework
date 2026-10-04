@@ -39,3 +39,7 @@ P1532 now accepts the current eight-carrier v2 packet with exact SHA-256 pins. W
 ### Definition of Done
 
 The owned Tool and golden tests pass against accepted source pins with truthful remainder; host proof is not MCP or image proof.
+
+## Result
+
+Initial implementation is saved in FIND_AND_FETCH_ARTIFACTS: shared `query_filter.py`, `find_and_fetch_artifacts.py`, package entry and three golden tests. Development-worker tests passed 3/3; that narrow check does not satisfy the complete bound golden corpus. Root inspection found continuation re-enumeration instead of retained members, incorrect canonical section selector/boundaries, incomplete resource/secret diagnostics and YAML fallback, plus incomplete shared parser depth/token and number semantics. This Plan remains Active; separately bound P1537/P1538 must complete these obligations before P1525 is Done. No MCP, immutable-image, live Journal or actual selected Run proof exists yet.

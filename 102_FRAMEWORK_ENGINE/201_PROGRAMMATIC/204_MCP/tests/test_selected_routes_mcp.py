@@ -12,6 +12,8 @@ from unittest.mock import patch
 MCP = Path(__file__).resolve().parents[1]
 ROOT = MCP.parents[2]
 ORCHESTRATOR = MCP.parent / "203_APPS" / "WORKFLOW_ORCHESTRATOR"
+TEST_TEMP_ROOT = ROOT / ".caprmedio_tmp" / "tests" / Path(__file__).stem
+TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(MCP))
 
 from selected_routes import (  # noqa: E402
@@ -34,12 +36,13 @@ class FakeRunSupport:
     def run_selected_operation(self, request: dict) -> dict:
         self.calls.append(copy.deepcopy(request))
         if request["mode"] == "preview":
+            receipt = {"request_id": request["request_id"], "definition_manifest": request["definition_manifest"]}
             return {
                 "request_id": request["request_id"],
                 "disposition": "preview",
                 "outcome": "prepared",
-                "proposal_receipt": "proposal:fixture",
-                "proposal_receipt_digest": "a" * 64,
+                "proposal_receipt": receipt,
+                "proposal_receipt_digest": canonical_digest(receipt),
                 "source_freshness": copy.deepcopy(request["source_freshness"]),
             }
         return {
@@ -66,7 +69,7 @@ class FakeRunSupport:
 
 class SelectedManifestRefResolverTest(unittest.TestCase):
     def test_manifest_ref_uses_the_configured_control_root_projection(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True) as temporary:
             project = Path(temporary)
             self.assertEqual(
                 ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json",
@@ -124,9 +127,11 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                            "initiative_ref": "initiative:fixture"},
         }
         if mode == "execute":
+            receipt = {"request_id": request["request_id"], "definition_manifest": request["definition_manifest"]}
+            receipt_digest = canonical_digest(receipt)
             request.update({
-                "proposal_receipt": "proposal:fixture",
-                "proposal_receipt_digest": "a" * 64,
+                "proposal_receipt": receipt,
+                "proposal_receipt_digest": receipt_digest,
                 "assigned_action_id": "operator:fixture",
                 "requested_runs": [{"requested_run_id": "requested:workflow", "kind": "workflow",
                                     "definition": self._definition(route, "workflow")},
@@ -136,7 +141,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 "operator_authorization": {"authorization_ref": "authorization:fixture",
                     "authorization_freshness": {"state": "current", "digest": "b" * 64},
                     "request_id": request["request_id"], "operation_route": route,
-                    "proposal_receipt_digest": "a" * 64,
+                    "proposal_receipt_digest": receipt_digest,
                     "parameters_digest": request["parameters_digest"],
                     "target_frontier_digest": request["target_frontier_digest"],
                     "effects_digest": request["effects_digest"],
@@ -179,7 +184,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
         sys.path.insert(0, str(ORCHESTRATOR))
         from selected_execution import SelectedExecution  # noqa: PLC0415
 
-        with tempfile.TemporaryDirectory() as temporary:
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True) as temporary:
             project = Path(temporary)
             (project / ".git").mkdir()
             control = project / ".caprmedio_caprmedio"
@@ -291,6 +296,46 @@ class SelectedRoutesMCPTest(unittest.TestCase):
         self.assertEqual("recording_pending", self.adapter.get_workflow_run({"run_id": "run:fixture"})["status"])
         self.assertEqual("completed", self.adapter.get_action_run({"action_run_id": "action:fixture"})["status"])
         self.assertEqual(before, len(self.support.calls))
+
+    def test_execute_accepts_manifest_in_the_shared_supports_real_preview_receipt(self) -> None:
+        route = "create_atom"
+        preview = SelectedRouteAdapter(ROOT).invoke(route, self.request(route))
+        self.assertEqual("preview", preview["disposition"])
+        request = self.request(route, mode="execute")
+        request["proposal_receipt"] = preview["proposal_receipt"]
+        request["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
+        request["operator_authorization"]["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
+
+        result = self.adapter.invoke(route, request)
+
+        self.assertEqual("started", result["outcome"], result)
+        self.assertEqual([request], self.support.calls)
+
+    def test_receipt_exception_does_not_allow_nested_shadow_manifest_wrappers(self) -> None:
+        cases = []
+        for wrapper in ("proposal_receipt", "operator_authorization"):
+            request = self.request("create_atom", mode="execute")
+            request["parameters"] = {wrapper: {"definition_manifest": request["definition_manifest"]}}
+            request["parameters_digest"] = canonical_digest(request["parameters"])
+            request["operator_authorization"]["parameters_digest"] = request["parameters_digest"]
+            cases.append(request)
+        request = self.request("create_atom", mode="execute")
+        request["proposal_receipt"] = {"unexpected": {"definition_manifest": request["definition_manifest"]}}
+        cases.append(request)
+
+        for request in cases:
+            with self.subTest(request=request):
+                self.assertEqual("rejected", self.adapter.invoke("create_atom", request)["disposition"])
+        self.assertEqual([], self.support.calls)
+
+    def test_execute_rejects_non_object_empty_or_digest_mismatched_receipts(self) -> None:
+        for receipt in ("proposal:fixture", {}, {"request_id": "changed"}):
+            with self.subTest(receipt=receipt):
+                request = self.request("create_atom", mode="execute")
+                request["proposal_receipt"] = receipt
+                result = self.adapter.invoke("create_atom", request)
+                self.assertEqual("blocked", result["disposition"])
+        self.assertEqual([], self.support.calls)
 
     def test_stale_manifest_and_matching_or_different_shadow_manifest_fields_reject_before_support(self) -> None:
         cases = []

@@ -10,11 +10,11 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Align missing Event field filter semantics"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
-version: 1
+version: 2
 updated_at: "2026-10-05 01:30:00 +0400"
 relations:
   is_decomposition_of: [CA-P-1520]
@@ -35,3 +35,7 @@ Own only current CA-R-1869 and CA-E-575, their @2 predecessor archives, and one 
 ### Definition of Done
 
 The exact bounded result, changed files, source pins and actual verification are saved with truthful remainder. No broader implementation or immutable-image proof is implied.
+
+## Result
+
+Source repair complete by `/root/repair_missing_event_field`: CA-R-1869@3 (`03f44ef2543d2138b858516a7b908fcba8da4fbbd25c2d11852c84e2336ef2f9`) and CA-E-575@3 (`30da391211d0a2623387f54fffbf8a267e11ef6012f1cba31e1e296773b31de5`) preserve their Summaries and align valid per-Event absence with R1850's false comparison, distinct from explicit null. Invalid selector syntax remains rejected. Their @2 archive bytes exactly retain rejected hashes; CA-C-438 is resolved for this source fix. Scoped diff check passes. Fresh P1535 acceptance remains mandatory; no implementation or runtime proof claimed.

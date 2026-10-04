@@ -11,8 +11,8 @@ subjects:
     - "Project Structure"
     - "Journal"
     - "Single Source of Truth"
-version: 19
-updated_at: "2026-10-03 02:55:14 +0400"
+version: 20
+updated_at: "2026-10-04 22:03:32 +0000"
 relations: {}
 atom_id: "CA-R-1746"
 content_role: "Requirement"
@@ -33,10 +33,10 @@ Projection Artifacts and the authoritative sources represented in their derived 
 
 ## Claim
 
-a Projection **means** a non-authoritative generated view reproducibly derived from its declared selection of authoritative sources **or** other Projections. source authority follows Single Source of Truth under CA-R-1470: Atoms carry governing Claims, Project Structure owns declared Scope Unit facts, Structural Entity Carriers supply materialization observations, **and** Journals preserve recorded historical facts; other admitted source kinds retain the authority established for their facts by applicable governing Claims.
+a Projection **means** a non-authoritative generated view derived from its declared selection of authoritative sources **or** other Projections. source authority follows Single Source of Truth under CA-R-1470. **every** represented fact retains traceability through **any** upstream Projections **to** its appropriate authoritative sources. a Projection's source specification governs its required behavior **without** making its derived contents authoritative. multiple Projections of the same source facts, further derived views, **and** the choice of generation mechanism do **not** create another independent authority for those facts.
 
-**every** represented fact retains traceability through **any** upstream Projections **to** its appropriate authoritative sources. a Projection's source specification governs the Projection's required behavior **without** making its derived contents authoritative. multiple Projections of the same source facts, further derived views, **and** the choice of generation mechanism do **not** create another independent authority for those facts.
-
-the declared selection identifies the sources actually used; it does **not** require **every** Projection **to** consume **every** source kind.
+the declared selection identifies the sources actually used; it does **not** require **every** Projection **to** consume **every** source kind **or** require generation **to** be byte-deterministic.
 
 ## Details
+
+The production relation RMED → using O → I is a projection/derivation of governing intent during Implementation. This does not permanently classify every native Implementation Carrier as a non-authoritative view: native I can subsequently supply actual-state source facts under CA-R-1470. A generated view of I, including its dependency graph, has no independent authority for those source facts. Ordinary Projection Artifacts remain non-authoritative.

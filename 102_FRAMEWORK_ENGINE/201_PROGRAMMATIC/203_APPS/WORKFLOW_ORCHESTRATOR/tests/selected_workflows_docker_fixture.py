@@ -122,13 +122,16 @@ class GoldenProject:
             "[paths]\n"
             'control_root = ".caprmedio_caprmedio"\n'
             'journal_root = ".caprmedio_caprmedio/_journal"\n'
-            'runtime_root = ".caprmedio_runtime"\n',
+            'runtime_root = ".caprmedio_runtime"\n\n'
+            "[authority_modes]\n"
+            'default = "casual"\n',
             encoding="utf-8",
         )
         (self.root / ".caprmedio_caprmedio/operators_registry.toml").write_text(
             '[[operators]]\nname = "golden-operator"\nrole = "project owner"\n',
             encoding="utf-8",
         )
+        self._write_native_authority()
         (self.root / "fixture/authority").mkdir(parents=True, exist_ok=True)
         (self.root / self.case.authority_path).write_text(
             json.dumps({"case": self.case.case_id, "route": self.case.route, "state": "before"}),
@@ -143,6 +146,128 @@ class GoldenProject:
         manifest = self._copy_reviewed_manifest()
         self.manifest = manifest
         return manifest
+
+    @property
+    def _authority_dir(self) -> Path:
+        # Atom discovery uses the registered content-role directory convention.
+        return self.root / ".caprmedio_caprmedio/04_requirement"
+
+    @staticmethod
+    def _status_model() -> dict[str, Any]:
+        """The registered Requirement status model carried by W03/W04."""
+        return {
+            "model_ref": "fixture://requirement-statuses",
+            "model_revision": "1",
+            "content_role": "Requirement",
+            "statuses": ["Active", "Reviewed", "Archived"],
+            "transitions": {"Active": ["Reviewed", "Archived"],
+                            "Reviewed": ["Active", "Archived"]},
+            "archive_status": "Archived",
+        }
+
+    def _write_atom(self, atom_id: str, slug: str, summary: str) -> Path:
+        path = self._authority_dir / f"{atom_id}--{slug}.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            "---\n"
+            f"atom_id: {atom_id}\ncontent_role: Requirement\nstatus: Active\nversion: 1\n"
+            "updated_at: 2026-10-05 00:00:00 +0000\nrelations: {}\n---\n"
+            f"# Summary\n\n{summary}\n\n## Scope\n\nFixture scope.\n\n## Claim\n\nFixture claim.\n",
+            encoding="utf-8",
+        )
+        return path
+
+    def _write_native_authority(self) -> None:
+        """Create real disposable carriers and structure authority for W01--W08.
+
+        These are deliberately ordinary Project files, rather than a test-only
+        request schema: the native Action adapters validate them directly.
+        """
+        self._write_atom("CA-R-100", "target", "Stable summary")
+        self._write_atom("CA-R-101", "related", "Related summary")
+        control = self.root / ".caprmedio_caprmedio"
+        # Canonical serializer output is not required by the adapter; this is
+        # the minimal valid Project Structure source it parses and rewrites.
+        (control / "project_structure.toml").write_text(
+            "[[scope_units]]\n"
+            'scope_unit_name = "PARENT"\nparent = "PROJECT"\nscope_unit_type = "Ordered"\n'
+            'scope_unit_label = "LAYER"\nstructural_level = 1\nlocal_order = 1\n'
+            'navigational_order_number = 0\nauthority_path = ".caprmedio_caprmedio/PARENT"\n'
+            'delivery_path = "delivery/PARENT"\n\n'
+            "[[scope_units]]\n"
+            'scope_unit_name = "CHILD"\nparent = "PARENT"\nscope_unit_type = "Unordered"\n'
+            'scope_unit_label = "FEATURE"\nstructural_level = 2\n'
+            'navigational_order_number = 0\nauthority_path = ".caprmedio_caprmedio/CHILD"\n'
+            'delivery_path = "delivery/CHILD"\n\n'
+            "[[scope_units]]\n"
+            'scope_unit_name = "DEST"\nparent = "PROJECT"\nscope_unit_type = "Unordered"\n'
+            'scope_unit_label = "LAYER"\nstructural_level = 1\n'
+            'navigational_order_number = 1\nauthority_path = ".caprmedio_caprmedio/DEST"\n'
+            'delivery_path = "delivery/DEST"\n',
+            encoding="utf-8",
+        )
+        (self.root / "fixture/reference.txt").parent.mkdir(parents=True, exist_ok=True)
+        (self.root / "fixture/reference.txt").write_text("CHILD\n", encoding="utf-8")
+
+    def _carrier(self, atom_id: str, slug: str, summary: str) -> dict[str, str]:
+        return {
+            "path": f".caprmedio_caprmedio/04_requirement/{atom_id}--{slug}.md",
+            "frontmatter": f"atom_id: {atom_id}\ncontent_role: Requirement\nstatus: Active",
+            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture scope.\n",
+        }
+
+    def _descriptor(self, atom_id: str) -> dict[str, Any]:
+        # Imported lazily so this corpus module remains usable by Docker's
+        # harness bootstrap without host implementation imports.
+        import sys
+        tools_root = Path(__file__).resolve().parents[3] / "201_TOOLS"
+        if str(tools_root) not in sys.path:
+            sys.path.insert(0, str(tools_root))
+        from lifecycle_intents import carrier_descriptor
+        return carrier_descriptor(self.root, atom_id)
+
+    def native_parameters(self) -> dict[str, Any]:
+        """Return one source-valid native Action payload for W01--W08 only."""
+        route = self.case.route
+        target = self._descriptor("CA-R-100")
+        if route == "create_atom":
+            return {"carrier": self._carrier("CA-R-102", "created", "Created summary")}
+        if route == "update_atom":
+            path = self.root / target["path"]
+            frontmatter, content = path.read_text(encoding="utf-8")[4:].split("\n---\n", 1)
+            return {"target": target, "proposed": {"frontmatter": frontmatter,
+                    "content": content + "\nCarrier-only fixture detail.\n"}, "change_class": "carrier_only"}
+        if route == "replace_atom":
+            return {"predecessor": target, "successors": [self._carrier("CA-R-103", "replacement", "Replacement summary")],
+                    "status_model": self._status_model()}
+        if route == "change_atom_status":
+            return {"target": target, "status": "Reviewed", "status_model": self._status_model()}
+        structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
+        base: dict[str, Any] = {
+            "expected_toml_revision": file_digest(structure), "reference_frontier": [],
+            "goal_coverage_disposition": {"state": "present", "parent": "PARENT"},
+            "preservation_disposition": {"preserved": ["fixture/reference.txt"]},
+            "recovery_disposition": {"authorized": True, "boundary": "toml-and-listed-references"},
+        }
+        def declaration(name: str, parent: str, level: int) -> dict[str, Any]:
+            return {"scope_unit_name": name, "parent": parent, "scope_unit_type": "Unordered",
+                    "scope_unit_label": "FEATURE", "structural_level": level,
+                    "navigational_order_number": 0, "authority_path": f".caprmedio_caprmedio/{name}",
+                    "delivery_path": f"delivery/{name}"}
+        if route == "create_scope_unit":
+            return {**base, "operation": "Create", "declaration": declaration("NEW_CHILD", "PARENT", 2)}
+        if route == "rename_scope_unit":
+            reference = self.root / "fixture/reference.txt"
+            return {**base, "operation": "Rename", "target_name": "CHILD",
+                    "declaration": declaration("RENAMED", "PARENT", 2),
+                    "reference_frontier": [{"path": "fixture/reference.txt", "expected_sha256": file_digest(reference),
+                                            "replacements": [{"old": "CHILD", "new": "RENAMED"}]}]}
+        if route == "move_scope_unit":
+            return {**base, "operation": "Move", "target_name": "CHILD", "declaration": declaration("CHILD", "DEST", 2),
+                    "goal_coverage_disposition": {"state": "present", "parent": "DEST"}}
+        if route == "remove_scope_unit":
+            return {**base, "operation": "Remove", "target_name": "CHILD"}
+        raise GoldenCorpusError(f"native golden parameters are not separately bound for {route}")
 
     def _copy_runtime_readiness_definition(self) -> None:
         """Keep the existing worker's unrelated readiness fingerprint satisfiable.
@@ -229,15 +354,16 @@ class GoldenProject:
         if self.manifest is None:
             raise GoldenCorpusError("prepare the golden Project before creating a request")
         route = self.case.route
-        parameters = {
-            "fixture_schema": "selected-workflows-docker-golden/v1",
-            "case_id": self.case.case_id,
-            "route": route,
-            "authority_path": self.case.authority_path,
+        # W09--W13 remain the reviewed legacy corpus until their own packets.
+        # W01--W08 use precisely the native Action payloads above.
+        parameters = self.native_parameters() if self.case.case_id <= "W08" else {
+            "fixture_schema": "selected-workflows-docker-golden/v1", "case_id": self.case.case_id,
+            "route": route, "authority_path": self.case.authority_path,
             "expected_effect_path": self.case.expected_effect_path,
         }
-        refs = [self.case.authority_path]
-        effects = [{"type": route, "target": self.case.expected_effect_path}]
+        refs = ([".caprmedio_caprmedio/project_structure.toml"] if self.case.case_id in {"W05", "W06", "W07", "W08"}
+                else [str(parameters.get("target", parameters.get("predecessor", parameters.get("carrier", {}))).get("path", self.case.authority_path))])
+        effects = [{"type": route, "target": refs[0]}]
         request: dict[str, Any] = {
             "operation_route": route,
             "mode": mode,
