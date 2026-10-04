@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following final-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:34:00 +0400"
+version: 2
+updated_at: "2026-10-04 08:52:32 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1212
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1390,6 +1391,10 @@ OwnA926,thisPlanresult/Doneplacement,1129rollup,actualnextboundremainderonly;pre
 Directnativehashes,times,roles/channels,textparts/counts/aggregateand100saveddispositionsmustmatch. Followingfuturepacket894source recordsremainfromL81861;all994areunprocessedbeforethisleaf. Other131PRIMARY/4051worker/manifest/continuationandfinalL111074remainunchanged. Bindactualnext<=100whole/contextsafe<=35000chars/<=15minutechild,exactinputs/output/ownership/checks/uniqueIDs;1208BLOCKSnext,nextBLOCKS1119/1130/1155.1129/1118Active. Checkownedheadings/properties/placement/readiness;rootfullparser/DAGseparate. Neverdropa source fragmentorclaimcurrentauthority/implementationfromreports.
 
 ## Details
+
+### Saved completion
+
+CA-A-926 retains all100 full-message fingerprints and substantive dispositions. Native current/next200 raw records, timestamps, roles, selected aggregates and22529/23153 character counts passed direct verification; next metadata binding is not a semantic read. Actual1212/A930 is saved and1129 updated to390/1284 disposed,894 remaining. Strict YAML/headings/fields, unique IDs and completion/BLOCKS DAG passed for85 Plans/23 supporting carriers before Done. Start04:41:51Z to observed owned-check clock04:52:32Z is10m41s, within the15-minute estimate. No current Concern arose; no authoring/implementation gate released.
 
 ### Definition of Done
 

@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 08:31:31 +0400"
+version: 2
+updated_at: "2026-10-04 08:54:05 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1209
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1318,6 +1319,16 @@ Retain September15 same-ID continuation `/Users/am/.codex/sessions/2026/09/15/ro
 System Python standard-library seek/read each exact selected/context slice; verify canonical in-window response_item/message kind, hash/timestamp/role/null channel/part count/byte/character count,100selected/47user/53assistant/70241raw bytes/30830characters and ordered aggregateSHA25600bebd61489bc48bb1bc51aaaf1cc1fbfd6b190cc8d64c1a31a88a6af86fec38. Context51283 hash/metadata/835chars is separately checked, not counted twice; total execution31665chars. Verify following52093 separately. Parent1200 binding verification proves integrity only, not content harvest.
 
 After saving923 reread100 unique complete coverage/disposition rows plus separate context row, all human decisions/candidates/claims/retained frontiers. Verify actual next bound input/output/ownership/<=15minute estimate/functional checks/direct gates, mandatory Plan headings/native keys/immediate parent/unique IDs/sequence and bounded affected completion/BLOCKS acyclicity. Review1119/1130/1155 from results;1126 stays Active. Record actual passing saved checks before Done. Root owns strict YAML/full-Epic DAG underC293; report only observed success.
+
+### Execution result and actual next bound remainder
+
+Durable CA-A-923v1 at `.caprmedio_caprmedio/02_analysis/CA-A-923-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md` saves100 unique complete provenance/disposition rows,47 literal human evidence rows/14 historical groups,4 provisional candidate groups,assistant proposal/reading/inventory/edit/conflict/retirement claims andone completed51283 context-only row. Original100 whole records51290–52086 are47user/53assistant,70241bytes/30830chars; aggregateSHA25600bebd61489bc48bb1bc51aaaf1cc1fbfd6b190cc8d64c1a31a88a6af86fec38. All native parts read intact. No selected fragment remains. Human/source distinctions include later reporting/Core,RMED→I/Implementation Folder,DRY graph ownership anddependent Subject/Subjects corrections; no report orprospective audit proves implementation. Final qualified Status question remains unanswered here. No current Concern was needed.
+
+Actual next Active CA-P-1209v1 at `07-CA-P-1209-TASK--harvest-the-following-first-partition-session-packet.md`, sequence7/immediate1126/one AI Agent/<=15minutes, owns reservedCA-A-927 at `.caprmedio_caprmedio/02_analysis/CA-A-927-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`. It binds86 whole52093–53836 records,31user/55assistant,68564raw bytes/34614native chars; aggregateSHA2562af7b3862ae354861167bf91757de36ecb2653570d79921fa36e37bc094e6967,pluscompleted52086 context302chars gives34916<=35000.52632 has2 native parts/4624chars,not index's4625 joined-display count; both retained,not fragmented. Next input was integrity bound,not harvested. Following whole53947/bytes[341533911,341534679)/2026-09-04T19:48:59.021Z/assistant/null/1part/hash63c2c2cf3553c71d1d75fd41dacabcb66a5427a067cff55d74cc65a748c2d6da/768bytes/377chars remains unprocessed.
+
+Observed passing checks before Done: all101 input/context original slice metadata/hashes/parts;100-record aggregate/counts;100 unique saved full coverage rows compared to every bound provenance field anddisposition reread;47 literal human rows/14 groups/4 candidates/claims/frontiers;86 next slices/context/following hashes/part counts/native character sums/aggregate/capacity;mandatory Analysis/Plan headings/native keys/immediate parents/unique sibling IDs+sequence;actual seven-node affected BLOCKS/completion acyclicity and1200->1204->1209 plus1209->1119/1130/1155 direct gates;whitespace/one terminal newline. Affected1119v1/1130v1/1155v1 were reread; Active1126 andActive1209 preserve readiness. Root owns strict YAML/full-Epic DAG/save underC293; no such success orsave-Tool receipt is claimed.
+
+Combined canonical coverage201;1668 refined/1676 original records remain. Every1659-source/window/continuation frontier is retained in923/905/915/1209;1126 remains Active. Work began2026-10-04 04:39:55 UTC; substantive harvest/binding/saved checks passed2026-10-04 04:52:09 UTC,12m14s; actual affected DAG/body-readiness checks passed before2026-10-04 04:54:05 UTC. Final Done-placement/result/Active-parent/100 coverage/47 native-literal matches/next capacity/headers/cleanEOF verification passed before2026-10-04 04:54:52 UTC,14m57s,within15minutes. No O/RMED/code/environment/Docker/FPF/Git/Journal edits were made by this worker.
 
 ## Details
 

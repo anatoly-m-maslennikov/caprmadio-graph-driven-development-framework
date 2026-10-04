@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 7
-updated_at: "2026-10-04 08:35:16 +0400"
+version: 8
+updated_at: "2026-10-04 08:54:42 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -91,6 +91,14 @@ Combined908/913/918/921 source coverage is196/1175;979 remain beginning complete
 Following wholly unprocessedL26713/[544178116,544178677)/2026-09-22T16:55:35.896Z/user/null/onepart/561bytes/178chars/rawSHA2566b8f240f1d5ffd753ad35a351466084b6b9ca936385301a9adc2951a7f20c5e0/textSHA256baede60a7d1cff569d38fa34f7032f71cf7a57993ddaa94e3633807431e3f4ab. Future whole1206 completion would leave978, but979remain now.1202BLOCKS1206;1206BLOCKS1119/1130/1155; this Active parent retains its direct gates. All other1657 source rows/other15PRIMARY/1642worker files/structure continuation/parent-worktree support, both main paths/non-third-partition frontiers, nine excluded environments/sparse gaps and lastthird boundaryL59916 remain exact905/910/921 unfinished frontiers.917's no-monthly-canonical candidate result/broaderC294identity limitation remains explicit. No whole file or copied-context human intent is silently removed/adopted.
 
 Live governing revisions match921; no current issue required Concern. Owned checks and completion timing are recorded in1202; root owns complete parser/DAG/Git. This parent remains Active; local packet completion releases no methodology/implementation stage.
+
+### Fifth substantive packet result and actual next frontier
+
+CA-P-1206 v2 is Done at `done/06-CA-P-1206-TASK--harvest-the-whole-third-partition-draft-review-report.md`; CA-A-925 v1 preserves one complete original assistant report, 87,838 characters/88,776 raw bytes at L26710, and three context-only records/2,132 characters. All 79 individually linked proposed draft dispositions, I1–I8 findings, F1–F7 proposed fixes, G1–G4 gaps, two corrected overstatements, references and historical receipt/stop state are retained in the exact whole report plus concise meaning/candidate groups. Its full raw/text hashes and native role/channel/part counts passed. Retrieval ranges are one original message, not fragmented coverage. No human adoption, current implementation or new FPF execution is inferred. Three provisional workflow groups refine A921's review/authority-cleanup candidates and retain closed-evidence-contract validation.
+
+Combined A908/913/918/921/925 coverage is197/1175;978 source third-partition canonical messages remain from L26713/[544178116,544178677)/2026-09-22T16:55:35.896Z/user/null/178 characters/rawSHA2566b8f240f1d5ffd753ad35a351466084b6b9ca936385301a9adc2951a7f20c5e0. Actual next Active CA-P-1211/A929 at `07-CA-P-1211-TASK--harvest-the-following-third-partition-session-packet.md`, immediate1128/work sequence7, binds59 whole records/24,953 selected characters/48,173 raw bytes,43assistant/16user, L26713–27846/[544178116,567736467), through2026-09-22T19:17:56.300Z, plus three already-completed raw contexts/2,132 characters and A925's durable meaning index. Total selected-plus-raw-context27,085 characters leaves room within35,000 for the report's6,181-character meaning index. Next binding aggregate5985fbb1a783f9dc8bc91ced6f5cd4b90daa993d3023775af32c242c2e0f84b3 passed; binding contributes no coverage. After those59,919 would remain at L27863/[567803383,567805043)/2026-09-22T19:18:46.648Z/assistant/null/1225 characters/rawSHA2563cc604cb755de797f59862da77b42dc4e1c7946fd62f0058249aee25e52611dc;978 remain now.
+
+1206 directly BLOCKS1211 and retains1119/1130/1155;1211 directly BLOCKS1119/1130/1155. Those v1 Active objectives were reread and still require complete harvest/current-authority reconciliation/destination binding; no stage unlocks. This parent stays Active with all direct gates. All other1657 source rows/15 otherPRIMARY/1642worker origins/structure continuation/repository-parent-worktree support, both main paths/non-third-partition frontiers, nine excluded environments/sparse gaps and lastthird boundary L59916 retain the exact A905/A910/A925 frontiers. A917's zero-monthly-canonical candidate result/broader nonblocking C294 identity remains explicit. No new current Concern or prohibited mutation occurred. Owned saved checks/elapsed are recorded in1206; strict parser/full-Epic DAG/Git remain root-owned.
 
 ## Details
 

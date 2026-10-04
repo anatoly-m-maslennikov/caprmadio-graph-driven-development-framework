@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Whole oversized third-partition draft-review report harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:29:00 +0400"
+version: 2
+updated_at: "2026-10-04 08:55:14 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1211
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -163,6 +164,16 @@ Remaining selected-continuation third-partition content extends through L59916/[
 Use system Python standard-library seek/read for one selected record and three contexts. Verify canonical in-window response_item/message kind, each raw/text hash, timestamp, role/null channel, one part/zero nontext blocks and sizes. Selected:88776bytes/87838chars/aggregateSHA256d2956a26b762bb747bf62daf2c880199bfe04c6e17584075e3ddaa7fa5283c6a. Contexts:2132characters separately. Verify following26713 independently.1202 checked future binding integrity/metadata only, not report semantics.
 
 After saving, reread one unique full selected disposition, three contexts, all report/draft recommendations/corrections/gaps/references/stop states and retained frontiers. Check actual next bound inputs/output/ownership/estimate/functional verification/direct gates; mandatory Plan/Analysis headings/native keys; unique reserved IDs/sibling sequence/immediate parent; bounded affected completion/BLOCKS acyclicity and local Done placement. Review1119/1130/1155 from results;1128 remains Active. Record measured elapsed and actual pass before Done. Root owns strict YAML/whole-Epic DAG underC293; report only observed success.
+
+### Completion result
+
+Saved CA-A-925 v1 at `.caprmedio_caprmedio/02_analysis/CA-A-925-ANALYSIS_RPRT--harvest-the-whole-third-partition-draft-review-report.md`. One original L26710 report is entirely harvested:87,838 characters/88,776 bytes; three context-only records retain2,132 characters/zero added coverage. The complete historical report, all79 original draft rows, I1–I8/F1–F7/G1–G4, two corrected interpretations, exact references and receipt/stop state are durable. Three provisional workflow groups preserve the human/proposal/reported-execution/current-authority boundary.
+
+Coverage is197/1175;978 remain. Actual next CA-P-1211/A929 is fully bound at `07-CA-P-1211-TASK--harvest-the-following-third-partition-session-packet.md`:59 whole records/24,953 selected characters plus2,132 raw-context characters and A925's6,181-character durable meaning index, total33,266 characters;<=15-minute estimate/assigned agent/exact output/scenario. Its59 original raw/text metadata checks passed, aggregate5985fbb1a783f9dc8bc91ced6f5cd4b90daa993d3023775af32c242c2e0f84b3. Current frontierL26713; future after-bound frontierL27863/919remain is not current coverage. Every retained corpus/window/other-source frontier remains A925's explicit unfinished work.
+
+Saved checks passed at 2026-10-04 04:54:42 UTC: exact whole source/text hash; all79 linked row ranges; one unique selected native disposition/three context-only keys; all59 next original raw/text hashes, canonical metadata, aggregate and next frontier; exact mandatory headings/native properties; immediate parent/sequence/direct acyclic local gates; parent Active; clean terminal newlines. First observed task clock was2026-10-04 04:40:34 UTC; observed start-to-saved-check interval14m08s, within the <=15-minute estimate. Exact root dispatch-to-completion elapsed is not asserted. Strict YAML/full-Epic DAG/Git remain root-owned.
+
+Final saved Done-placement/version/newline verification passed at2026-10-04 04:55:14 UTC,14m40s after the first observed task clock; exact dispatch-to-completion duration is unavailable. No current Concern arose; no O/RMED/code/environment/Docker/FPF/Git/Journal change. Parent1128 stays Active;1206→1211→1119/1130/1155 remains explicit and dependent objectives still require full harvest/reconciliation.
 
 ## Details
 

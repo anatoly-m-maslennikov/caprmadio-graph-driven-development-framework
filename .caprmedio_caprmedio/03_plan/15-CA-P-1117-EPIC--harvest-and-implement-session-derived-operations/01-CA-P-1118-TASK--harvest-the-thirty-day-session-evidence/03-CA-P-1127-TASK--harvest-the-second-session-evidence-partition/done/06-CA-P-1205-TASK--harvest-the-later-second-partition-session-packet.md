@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition primary session evidence remainder packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:23:59 +0400"
+version: 2
+updated_at: "2026-10-04 08:52:07 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1210
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -65,6 +66,16 @@ Same-ID continuation `/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T19
 Using system Python stdlib, seek585977060/read13557598bytes, parse every complete JSONL record and apply the exact predicate. Reproduce100 ordered lines/timestamps,24/76roles,all-nullchannels,27478joined/nativechars,max1623,100nativeparts and selected/first/last raw hashes. Independently re-extract and reread savedA924's100 identities/all parts, substantive dispositions, candidates and supersession. Mismatch requires a current typed Concern and truthful postponement, no environment repair.
 
 Verify the next actual leaf's mandatory Plan headings/properties, parent/status/input/output/verification, one assigned agent/<=15minutes and changed BLOCKS acyclicity. Update1127's actual frontier and review1119/1130/1155. Incoming1201 BLOCKS1205; Active1127/1118 and every unfinished harvest/remainder continue blocking downstream. Parent1127 remains Active until complete partition coverage.
+
+### Actual result and dependent readiness
+
+First clock2026-10-04 08:40:13 +0400;independent saved-result/native verification08:49:17,9minutes04seconds,within<=15minutes. Incoming1201 is Done,root reports strict parser/DAG/checkpoint5b1c87000,and savedA920 was read. DurableA924v1 at `.caprmedio_caprmedio/02_analysis/CA-A-924-ANALYSIS_RPRT--harvest-the-later-second-partition-session-packet.md` retains100whole identities/parts/dispositions,eight historical decisions and seven provisional candidate groups. Native extraction/re-extraction matches24user/76assistant,27478chars,max1623,nullchannels,selectedhash`e68393ecf41d90282e50857c28dcb760a82cb7f5dd2345a4bc4f8c3d6ae7d376`,first/last and all native part hashes. Saved headings/newline/coverage passed. Short answers keep exact antecedents;Summary's latest human correction supersedes earlier interpretations;reports are not current authority or independent execution. No current issue occurred.
+
+Actual frontierL93708/byteend599534658/2026-09-13T22:33:54.037Z;360of624originalmessages harvested,264unprocessed. Actual new1210/A928,sequence7,`07-CA-P-1210-TASK--harvest-the-following-second-partition-remainder.md`,binds99whole messagesL93715–95288/bytes[599544979,621493919),34user/65assistant,34985chars,max5085,allnull/onepart each,rawhash`f432fb3f147d32383ded30d0b94675f65500681e6051136f19b4787cdb2947d9`. Adding100th would exceed35000;all whole native spans retained. Every next native raw/text hash/part and ordered metadata verified;statements unharvested. Exact priorS100whole context is bound for firstshortreply.
+
+1205BLOCKS1210;1210BLOCKS1119/1130/1155;changededges have no backward target. Further165originalmessages afterfuture1210 beginL95293/bytes[621500183,621501299)/2026-09-14T23:43:19.487Z,assistant/null,701chars,hash`190f53c03b59f023f9b588cbc45141751fcee733b2e450057f09aa3d9ef59900`. All264currentlyunprocessed;759continuationmessages/otherA905frontiers/17primary1642workerdistinctions persist.1127v8remainsActive with actual frontier/new leaf;1118Active;1119/1130/1155 reread and blocked by unfinished harvest/1210/everyprerequisite. ExistingC293/C294dispositions unchanged;root owns strictYAML/fullDAG/save/Git/Journal checks. No O/RMED/code/environment/Docker/FPF/Git/Journal work.
+
+Final local closure at2026-10-04 08:52:07 +0400 passed unique Done placement, Active1210/1127v8, headings/properties/clean EOF, retained frontiers and changed edges. Elapsed11minutes54seconds from first clock; root strict YAML/full-DAG/save verification remains separately owned.
 
 ## Details
 

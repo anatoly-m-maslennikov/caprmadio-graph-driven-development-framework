@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 6
-updated_at: "2026-10-04 08:34:09 +0400"
+version: 7
+updated_at: "2026-10-04 08:52:32 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -62,6 +62,12 @@ Actualnext1208/A926,sequence5,binds100wholemessages/22529chars,positions291–39
 
 Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-window-continuation frontier remainsunfinished. A917candidate0canonicalmonthlycontent,C294broaderidentityunasserted/nonblocking;post-cutoffOperatoramendmentsremainseparate.1129/1118Active;authoring/implementationblocked.
 ## Details
+
+### Latest completed packet checkpoint
+
+1208 is Done with A926:100 whole PRIMARY records/22529 native characters and nine human contributions, three provisional overlapping groups. A909/A914/A922/A926 now dispose390/1284 source records;894 remain. Earlier290/994 figures above are historical checkpoints, superseded here. Actual next1212/A930, sequence6, binds100 whole records/23153 characters, positions391–490, L81861–87394, aggregatee9c61682df254f56f154a25aa86fc26d4b41cd08b5e9e9b3f4dfee3499b30dba.1208 BLOCKS1212;1212 BLOCKS1119/1130/1155.
+
+Following future1212,794 remain at L87399/offset1010807305/717bytes/2026-09-30T17:54:53.860Z/rawSHA2561fcda4ae1b2789b32c681bde7ad17d0b68ea7c7c858ad45447ab51590a2faf44. Binding contributes zero semantic coverage. All894 current remaining, other131 final PRIMARY/all4051 final worker messages, and every unfinished source/window/continuation frontier remain. Final L111074 fingerprint above is unchanged.1129/1118 remain Active; all authoring/RMED/implementation/Docker gates stay blocked.
 
 ### Definition of Done
 

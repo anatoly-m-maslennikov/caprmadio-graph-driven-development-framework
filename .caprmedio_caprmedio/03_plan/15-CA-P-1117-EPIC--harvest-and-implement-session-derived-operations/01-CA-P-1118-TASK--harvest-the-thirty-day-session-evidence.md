@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 3
-updated_at: "2026-10-04 08:37:00 +0400"
+version: 4
+updated_at: "2026-10-04 08:57:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,18 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current checkpoint:19 substantive packets retain1148 unique PRIMARY message dispositions. Original-main coverage is201 first-partition /360 second-partition; main-continuation197 third-partition /390 final-partition. The original indexed PRIMARY baseline6588 leaves5440 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
+
+Latest completed leaves1204/A923,1205/A924,1206/A925 and1208/A926 add301 complete records. A925 retains one whole87,838-character report, including all79 linked draft recommendations, corrections, references and evidence limits. A923/A924/A926 retain100 complete records each with exact native fingerprints/dispositions. Their4/7/3/3 provisional groups bring the historical overlapping group count to91; these are not91 adopted Operations or deduplicated capabilities.
+
+Actual next leaves are1209/A927(first86 whole records),1210/A928(second99),1211/A929(third59 with explicitly bound context) and1212/A930(final100). All are ready, held unexecuted, and directly block1119/1130/1155 with unfinished parents1126–1129/1118. Authoring, engine specification, implementation and complete Docker runtime verification remain required and have not executed under this Epic. No source is labeled unavailable merely because of its size.
+
+After all four workers finished saving, root's strict duplicate-rejecting YAML/headings/fields, unique-ID, Done-placement and complete completion/BLOCKS DAG checks passed86 Plans/24 supporting carriers. A transient1206 in-progress placement diagnostic was rerun only after its final saved Done state; the final check passes. Root independently verified A926's100 saved dispositions and200 current/next native raw identities/aggregates/time/roles/counts; workers retain their complete source/saved/next-bound verification evidence. Observed leaf intervals are1204 14m57s,1205 11m54s,1206 14m40s from its first recorded clock,1208 10m41s through owned checks; exact unobserved dispatch intervals are not invented.
+
+Prior committed checkpoint5b1c870008955791f4fbbe05e5007bcfcd75d226 is real. Root appended36 additional verified committed-state Journal receipts for the actual saved bytes of that and5f7e9e5a6, bringing this execution's receipts to64 before saving this round. They are recovered-state receipts, not save-Tool or newly executed Workflow events. The shared Journal still has unrelated pre-existing edits; its Git save stays explicitly pending rather than staging unrelated work. This round's direct Git result is recorded separately after verification.
+
+Earlier checkpoint paragraphs below are historical and superseded by these current counts/frontiers.
 
 Fifteen substantive packets are complete:847 unique PRIMARY messages. Original-main partitioncoverage is101(first)/260(second); main-continuation is196(third)/290(final). Full indexed PRIMARY6588 leaves5741; all6423 worker messages remain substantively unfinished. Metadata/event indexing13011 is not semantic harvest. The15reports contain74 overlapping provisionalcandidate groups,not74adoptedOperations; later1130 must reconcile/deduplicate and apply all later human corrections/currentauthority.
 
