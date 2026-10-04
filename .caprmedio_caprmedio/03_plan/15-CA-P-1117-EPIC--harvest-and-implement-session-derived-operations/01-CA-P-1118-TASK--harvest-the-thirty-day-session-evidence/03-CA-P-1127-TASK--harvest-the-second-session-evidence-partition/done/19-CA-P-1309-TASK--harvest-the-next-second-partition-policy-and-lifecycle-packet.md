@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition policy and lifecycle repair evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 14:19:05 +0400"
+version: 2
+updated_at: "2026-10-04 10:37:57 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1313
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1029,3 +1030,9 @@ Perform one actual native/saved/current-next/registered-Carrier/unique-ID/Done-p
 ### Definition of Done
 
 Not Done until all bound whole records/full contexts are read and fully saved with substantive dispositions and meaningful supersession; the actual next bounded leaf and direct BLOCKS gates are saved; native/saved and mandatory Carrier checks pass; elapsed clocks/issues are truthful. Parent1127 remains Active until every required source is processed. Metadata and historical repair reports never establish current implementation.
+
+### Saved result and closure boundary
+
+A1027 retains27whole records/27full contexts/seven provisional groups and specific dispositions; zero new literal human messages, three inert goal wrappers. Actual next P1313/A1031 binds13whole/51full contexts32246characters; no future execution. Parent continuation431/759,328remain; original624 and all other frozen fronts preserved. C329 resolves rejected preparation transports by complete bounded reopen; no failed output counted. Actual first clock 2026-10-04 10:28:19 UTC, initial persistence 2026-10-04 10:32:30 UTC. One native/saved/current-next/Carrier/local-DAG closure proof and terminal receipt follow; no extra semantic review stage. Git/recovered Journal separate.
+
+Terminal receipt 2026-10-04 10:37:57 UTC: actual elapsed 578seconds from unchanged 2026-10-04 10:28:19 UTC. Whole frozen-prefix/native/saved27records/27contexts/current-next13/51, original text parts/metadata/hashes/aggregates/exact-index/disjointness/37governing hashes/Done placement/one terminal newline passed. Shared strict149Plans/115supporting Carriers and completion/BLOCKS DAG passed. Earlier literal-case diagnostic failure is retained and recovered in C329. This is persistence/provenance proof, not a second semantic review; Git and recovered Journal remain separate.

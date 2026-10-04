@@ -1,42 +1,76 @@
 ---
-atom_id: CA-P-1305
-content_role: Plan
-type: Plan
-label: Task
-work_sequence_number: 19
+atom_id: CA-A-1023
+content_role: Analysis
+type: Analysis Report
 current_scope_unit: caprmedio
 claim_target_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
-assignee: AI Agent
 status: Active
 subjects:
-  governs: "First-partition Principles-first audit follow-up harvest"
+  governs: "First-partition Principles-first audit follow-up evidence"
   depends_on: [Project, Operations, "Atom/Content Role: Plan"]
-version: 1
-updated_at: "2026-10-04 14:19:05 +0400"
+version: 2
+updated_at: "2026-10-04 10:40:32 +0000"
 relations:
-  is_decomposition_of: [CA-P-1126]
-  blocks: [CA-P-1119, CA-P-1130, CA-P-1155]
+  relates_to: [CA-P-1305, CA-P-1126, CA-A-1019, CA-C-326]
 ---
 # Summary
 
 Harvest the first-partition Principles-first audit follow-up.
 
-## Objective
+## Question
 
-One assigned AI Agent must harvest exactly eight whole canonical original-main first-partition messages L61643–61827 into reserved CA-A-1023 at `.caprmedio_caprmedio/02_analysis/CA-A-1023-ANALYSIS_RPRT--harvest-the-first-partition-principles-first-audit-follow-up.md`, then bind the actual following whole remainder before Done. Estimate <=15 minutes including full native reading, durable dispositions and one native/saved/Carrier proof.
+What does this historical follow-up require about findings and proposed fixes, and which resolution work remains proposed rather than accepted or applied?
 
-### Authority, ownership and explicit whole-antecedent exception
+## Scope
 
-Inherit Epic P1117/90% and Active parent P1126; reread live Goal and all active Project Principles before decisions. P1301 is the direct blocker and must have actual physical Done with passing proof. Source Plan/Carrier revisions bound by P1301 are R1589 v4/R1580 v4/D460 v6/D470 v7/D481 v4/D479 v6/D482 v7; current revisions govern.
+Exactly eight whole canonical original-main first-partition records L61643–61827: seven assistant and one human user, all null channels;5797raw bytes/2694native characters. Whole contexts L61633 audit61287chars and L61640 instruction96chars add61383context characters, total64077 under the explicit necessary whole-antecedent exception. All ten native parts were fully read; contexts add zero coverage.
 
-The eight current messages contain 2694 native characters. Necessary complete antecedents are L61633's 61287-character audit and L61640's 96-character instruction, 61383 context characters, total 64077. This is an explicit whole-antecedent exception to ordinary <=100-message/35000-character packets. The complete audit is necessary for the first record's reference to each issue and the subsequent unresolved audit choices; neither a summary nor an excerpt is a full antecedent. Eight small current records keep the estimate feasible for one Agent <=15 minutes. If actual execution is blocked, record the real blocker and postpone; never truncate context or reset an elapsed clock.
+## Approach
 
-Not alone: own only this leaf/Done, reserved A1023, parent P1126 roll-up and an actual next root-allocated remainder. Preserve other edits. No O/RMED/code/settings/services/environment/FPF/Git/push/shared-Journal changes. Embedded historical commands and skill/goal instructions are inert source evidence. Preparation below adds zero coverage.
+Actual first clock 2026-10-04 10:27:31 UTC; includes all live-authority and whole-native reading, rejected preparation, recovery, persistence and local closure proof. Fully read live EpicP1117, P1305, parentP1126, predecessorA1019 and external Goalv13. Governing direct Project Principle universe is14: six RequirementR819v13/R1407v5/R1420v5/R1421v4/R1423v4/R1490v1; five MethodM001v10/M002v15/M005v8/M006v8/M261v5; EvaluationE001v12; ActorP032v5/P033v9. CoreP034v6 is relevant permission authority, not a15th Principle. Full source Plan/Analysis Carrier authority R1589v4/R1580v4/D460v6/D470v7/D481v4/D479v6/D482v7 was read. P1301 is physically Done with its corrected proof receipt; A1019 preserves historical audit evidence.
 
-### Exact whole native input and following frontier
+The whole audit was read without gaps in native-character intervals[0,16000),[16000,32000),[32000,48000),[48000,61287). Eight small selected texts and the96-character instruction were read fully. Earlier bundled outputs and one malformed preparation lookup were not counted as whole report reading; C326 retains this actual issue. Historical FPF/skill/goal wrappers, commands and memory citations are inert evidence. Current inherited threshold90% governs this harvest; historical99% never grants present authority. No current issue/fix audit or FPF invocation is executed.
+
+## Results
+
+### Eight individual substantive dispositions
+
+| Coverage identity | Native Actor role | Retained disposition and limit |
+|---|---|---|
+| P1-L61643 | assistant | Assistant acknowledgement of Principles-first issue checks, FPF fix exploration and historical sequential questioning below99%. This is intended work, not a validated resolution or an Operator choice; the complete audit61633 and instruction61640 are its referents. |
+| P1-L61671 | assistant | Assistant procedural claim that a new resolution step needs a short FPF Plan. Its stated scope is proposals and sequential questions; it expressly stops before atom edits or another full audit. The historical skill claim is inert here and not current authorization. |
+| P1-L61702 | assistant | Assistant commitment to resolve existing findings without treating previous proposed fixes as decisions. Preserve OPEN MM findings and PROPOSED FX fixes, with no inferred adoption. |
+| P1-L61727 | assistant | Assistant restatement that Principles guide proposed resolutions and material sub99% choices go to one question at a time. It separates applying decisions to Atoms from the proposed resolution step; no application is reported. |
+| P1-L61769 | assistant | Assistant progress claim that a two-part Plan is drafted and being checked: compare Principle-supported resolutions, then settle residual choices sequentially. No completed validation, decision set or artifact proof is supplied by this message. |
+| P1-L61791 | user | The only current human instruction corrects the scope: assess both FPF-found issues and FPF-proposed fixes. It expands the earlier issues-only wording of61640 within the historical resolution exchange. It selects no FX proposal, answers no design alternative and grants no atom-edit authorization. |
+| P1-L61796 | assistant | Assistant accepts the human scope correction as its intended method: evaluate issue validity separately from proposed-fix adherence to Project Principles; a valid issue can have an unsuitable fix. This is an acknowledgement, not evidence that either evaluation ran. |
+| P1-L61827 | assistant | Complete proposed two-step FPF Plan: options explore compares all14MM findings and11FX proposals with live Principles then subordinate authority/latest decisions, in dependency order; decision synthesize consumes the complete validated comparison result, recommends resolutions and asks sequentially for material sub99% choices. Retains two weak findings, independent issue/fix/decision confidence, STOP_NO_OPTION_BASIS and STOP_NO_COMPARABLE_ALTERNATIVES. Ends before project edits/repair verification and asks for literaldo; no approval is imported from following61834. |
+
+### Whole antecedents and source limits
+
+Context61640 asks Principles-first resolution of issues with one-at-a-time consultation below historical99%. Current human61791 clarifies that proposed fixes also require evaluation. Context61633 retains14OPENMM findings: MM01–12 reported supported defects/gaps and MM13/14 weak points;11PROPOSEDFX fixes and unresolvedG01(new-parent compatibility)/G02(overlapping-claim purpose). Its631source/13historicalPrinciple/80Core/724hash/auditvalidation/68replacement claims are historical assistant reports; they do not describe the current14-Principle inventory or prove present source conformance/runtime/test/save outcomes. Full findings, sources, confidence limits, proposal alternatives/trade-offs/owners/dependencies/checks, gap actions and FPF ledger remain in complete native evidence below. No MM or FX advances to accepted/applied/verified through this packet.
+
+### Four provisional retrieval groups
+
+The four A1019 groups remain four, with overlapping retrieval purposes rather than a claimed canonical decomposition:
+
+- Coherent taxonomy and settings ownership: MM01/02/03/04/06. Separately evaluate each finding and FX01/02/04 proposal against Principles; compare necessary alternatives and respect dependency order instead of automatically accepting the report recommendation.
+- Lifecycle and minimum-model consistency: MM05/07/08. Keep completed-prerequisite versus normative-authority references, necessary Delivery and recoverable history as resolution subjects; FX03/05/06 suitability is distinct from reported issue validity.
+- Faithful Evaluation, serialization and eligibility: MM09/10/11/12. FX07/08/09 remain proposal subjects; authored tests/rules and prospective checks are not observed executions. Preserve eligible ownership and portable revision identity.
+- Evidence-limited lineage and ownership closure: MM13/14 withG01/G02. Retain weak-point status and explicit missing comparison/specialization basis; FX10/11 are not mandatory merge or closure decisions. Ask a supported residual question only after the Principle-guided attempt.
+
+LiveM001 limits complete-partition claims; M002 reuses four existing retrieval identities without duplicated authority; M005 admits no new mechanism beyond necessary distinctions; M006 supports coherent issue/fix reasoning; M261 adds no reconstructed-Implementation claim. E001 supports checkable commitments and evidence limits. P032 distinguishes human instruction from AI planning, P033 reserves original authority to Operator, P034 confines this Agent to the present harvest delegation. Requirement Principles support recoverable information, connected authority/Implementation, bounded improvement and necessary communication; they do not settle the historical FX choices here.
+
+### Coverage, readiness and actual next remainder
+
+Eight new dispositions increase first-source coverage711→719/1869;1150refined remain. Original1877first-scan denominator remains,1158original remain and eight machine-context exclusions add no coverage. Every A905/P1126 source-origin/1659files/1657IDs/other1658sources/17PRIMARY versus1642worker/metadata-parent/worktree/candidate/both-continuation/appendable-prefix/frozen-month-and-partition/amendment frontier remains retained. No source, partition or month is complete.
+
+Actual next ActiveP1310 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/02-CA-P-1126-TASK--harvest-the-first-session-evidence-partition/20-CA-P-1310-TASK--harvest-the-first-partition-audit-resolution-plan-approval.md` owns reservedA1028, immediate1126/sequence20/oneAI/<=15-minute estimate. It binds only wholeL61834(3characters/382rawbytes), with complete61633/61640/61791/61827 antecedents63033characters, total63036 under an explicit whole-antecedent exception. Preparation adds zero coverage and no semantic disposition. Exact followingL61837(207chars/596rawbytes) is retained unharvested. P1305BLOCKSP1310/1119/1130/1155; ActiveP1126/P1310 retain downstream gates. No next-leaf execution occurs.
+
+### Full native evidence and provenance
 
 ~~~json
 {
@@ -342,16 +376,165 @@ Not alone: own only this leaf/Done, reserved A1023, parent P1126 roll-up and an 
 }
 ~~~
 
-### Required output and retained readiness
+### Current live authority read ledger
 
-Save eight unique substantive coverage/disposition records and every complete native part, raw original, source-specific question/answer, claimed outcome and historical authority limit. The two complete antecedents remain context only and add zero coverage. Historical thresholds and proposals do not replace current authority or prove implemented fixes. Inspect latest explicit human supersession only within the bound records; do not invent an answer or consume the following literal do.
+~~~json
+[
+  {
+    "path": ".caprmedio_caprmedio/ANATOLY-MASLENNIKOV-DEFINES_GOAL_FOR-caprmedio--create-and-evolve-a-working-caprmedio-framework.md",
+    "version": 13,
+    "bytes": 513,
+    "sha256": "82c260ce235708b7d83bd11c1a88759634fdcef2b1fe11c815c8ffd7f2885885"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-819-PRINCIPLE-REQUIREMENT--build-what-you-want-without-requiring-proficiency-in-the-craft.md",
+    "version": 13,
+    "bytes": 703,
+    "sha256": "08ba41c0c4638721a7df044a7c3e13b4b0267d7562a3c55bf85e65b123f3027e"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-1407-PRINCIPLE-REQUIREMENT--the-caprmedio-instance-and-the-implementation-form-a-graph-of-graphs.md",
+    "version": 5,
+    "bytes": 532,
+    "sha256": "f034884fa0e65d337935d7ca495a1fa8aefab069881d9ae6bf4c5ee7c96c968a"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-1420-PRINCIPLE-REQUIREMENT--support-informed-operator-decisions.md",
+    "version": 5,
+    "bytes": 522,
+    "sha256": "816a03918b1b0198138dc44a33277bb41b08084da2b8fa38823bef2367ea7b6b"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-1421-PRINCIPLE-REQUIREMENT--keep-the-framework-configurable-and-extensible.md",
+    "version": 4,
+    "bytes": 478,
+    "sha256": "01fe8927295fd8ed5b539b2dc7781ba1803a33dbd409f49b07031ac542752473"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-1423-PRINCIPLE-REQUIREMENT--support-improvement-from-observed-outcomes.md",
+    "version": 4,
+    "bytes": 643,
+    "sha256": "6ea7e21b4948e39e2b7b7d57a3c25ae3121fd53b6dc66f1bb95449f4bbfd8f8a"
+  },
+  {
+    "path": ".caprmedio_caprmedio/04_requirement/CA-R-1490-PRINCIPLE-REQUIREMENT--preserve-valuable-information.md",
+    "version": 1,
+    "bytes": 531,
+    "sha256": "af65fc105597d5966efaa59d663d452dfa7d0376ad9ebe7bb2b521077ccafb65"
+  },
+  {
+    "path": ".caprmedio_caprmedio/05_method/CA-M-001-PRINCIPLE-METHOD--mece-cover-the-whole-with-non-overlapping-parts.md",
+    "version": 10,
+    "bytes": 633,
+    "sha256": "63d5281078dcda09248447787bdc8957f1b04213a31268abd494083fc35538a5"
+  },
+  {
+    "path": ".caprmedio_caprmedio/05_method/CA-M-002-PRINCIPLE-METHOD--dry-don-t-repeat-yourself.md",
+    "version": 15,
+    "bytes": 495,
+    "sha256": "943be84418b6f865e85d172845892c58187917d22dad56bb6103c5ded7cc6834"
+  },
+  {
+    "path": ".caprmedio_caprmedio/05_method/CA-M-005-PRINCIPLE-METHOD--add-complexity-only-when-necessary.md",
+    "version": 8,
+    "bytes": 530,
+    "sha256": "cd4f3ec4fa61d979997600fbcdb2e96865da694ba1f49fcd391232b72664fd1b"
+  },
+  {
+    "path": ".caprmedio_caprmedio/05_method/CA-M-006-PRINCIPLE-METHOD--keep-the-whole-project-coherent.md",
+    "version": 8,
+    "bytes": 533,
+    "sha256": "f34990465205ac3e655d83b1e3b5dcd66c8c93d2e5287cedbcb9dd38a432bd1f"
+  },
+  {
+    "path": ".caprmedio_caprmedio/05_method/CA-M-261-PRINCIPLE-METHOD--rebuild-implementation-from-its-governing-specification.md",
+    "version": 5,
+    "bytes": 722,
+    "sha256": "bd92092c4f929df3539916febbcae34fc91eb02945dca0bd6388a0841775341f"
+  },
+  {
+    "path": ".caprmedio_caprmedio/06_evaluation/CA-E-001-PRINCIPLE-EVALUATION--make-governed-commitments-and-results-checkable.md",
+    "version": 12,
+    "bytes": 482,
+    "sha256": "2c0d7ed0f5b2d1abb994c40e5e7dddfdee58fc273449b0432e277956069cd4c0"
+  },
+  {
+    "path": ".caprmedio_caprmedio/03_plan/CA-P-032-PRINCIPLE-ACTION_POLICY--distinguish-human-operators-from-ai-agents.md",
+    "version": 5,
+    "bytes": 580,
+    "sha256": "7f5b6b5ea4469ac6d2c25046850ef2b1128038f533ac7741f4c156b61e8767c3"
+  },
+  {
+    "path": ".caprmedio_caprmedio/03_plan/CA-P-033-PRINCIPLE-ACTION_POLICY--the-operator-holds-authority.md",
+    "version": 9,
+    "bytes": 631,
+    "sha256": "687cd7b7b001f7a86eb687930b3cb14bd340179a531d627be8fe15469894d4f4"
+  },
+  {
+    "path": ".caprmedio_caprmedio/03_plan/CA-P-034-CORE-ACTION_POLICY--ai-agents-act-within-permission.md",
+    "version": 6,
+    "bytes": 703,
+    "sha256": "22f827e76b5ffc5191b23b9bddafa84d626b7e9c40128c54372b7b2ebead307e"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1589-CORE_META_MODEL-GENERAL--bound-executable-leaf-plans.md",
+    "version": 4,
+    "bytes": 1054,
+    "sha256": "8181b2296267fc0e2e9ae8bca19afeb66f8d20045e940ba812b8bd84e9b86419"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1580-CORE_META_MODEL-CORE-REQUIREMENT--define-plan-blocking.md",
+    "version": 4,
+    "bytes": 2071,
+    "sha256": "38611796a0d9565a222ef4b85c7ae833cf1a92184e377f026097db675f9b7284"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-460-CORE_META_MODEL-CORE--serialize-plan-atom-carrier-bundles.md",
+    "version": 6,
+    "bytes": 1474,
+    "sha256": "7879c6dd77ac6eab1f6a5b80b9fab58112b9d7d6111b169d5038185597b53f23"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-470-CORE_META_MODEL-STANDARD--serialize-plan-file-sections.md",
+    "version": 7,
+    "bytes": 1869,
+    "sha256": "7e91dbd7f5bd26889e0a2f3b9efeb3bbbafd680856b6e404736f7dcbc0c9b06c"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-481-CORE_META_MODEL-DELIVERY--store-plan-decomposition-on-the-decomposing-plan.md",
+    "version": 4,
+    "bytes": 1770,
+    "sha256": "f9a0d601d76895e245c78765004c60cb4c4ffbb01bb578afc0ce6279c2cf2ccb"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-479-CORE_META_MODEL-DELIVERY--use-stable-headings-for-atom-body-properties.md",
+    "version": 6,
+    "bytes": 2629,
+    "sha256": "0819f8433cde89484e21a200466504a9fdcad31b58958c777a761637fbb45ff1"
+  },
+  {
+    "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-482-CORE_META_MODEL-DELIVERY--carry-the-resolved-claim-target-scope-unit.md",
+    "version": 7,
+    "bytes": 2036,
+    "sha256": "234720c3b8aafb19a9befc3a934155959b49ec876897370b1ae16adf290e4065"
+  }
+]
+~~~
 
-Current original-main coverage is 711/1869 refined, leaving 1158 refined and 1166 original records of the retained 1877 first-scan universe. Eventual successful completion of all eight would yield 719 refined coverage, 1150 refined remaining and 1158 original remaining; those are future counts only. Preserve every A905/P1126 source/window/continuation/candidate/worker/metadata-parent/worktree frontier and amendment boundary. No source, partition or month is complete.
+### Persistence and local proof boundary
 
-Before Done, obtain globally unused following Plan/Analysis IDs from root, save the actual complete remainder starting intact L61834 with all necessary full antecedents and exact following frontier, and add P1305 BLOCKS that next leaf. P1305 and Active P1126 continue to block P1119/P1130/P1155. Verify once: frozen native prefix and exact raw boundaries/hashes/aggregates/full parts against saved output; mandatory Carrier fields/headings/EOF/status placement; unique IDs and immediate decomposition; local explicit BLOCKS/decomposition DAG. Record actual first and full terminal clocks including persistence and checks without resetting any overrun. No extra semantic recheck stage.
+Initial persistence includes complete original raw records/native parts, exact metadata/hashes and context flags. Native/saved/Carrier/local BLOCKS proof and terminal receipt remain pending until the closure receipt below is saved. Root global strict/save/Git/Journal work is separate.
 
-## Details
+### Local closure proof and clock
 
-### Definition of Done
+Native/saved proof passed for the full frozen 644432542-byte prefix SHA256 6043d82aca024c8dba2a4139be077a8d591865891b47d299c76e0f688a2b39a0 and 12 unique original records. All exact raw offsets/line numbers/bytes/roles/null channels/timestamps/hashes/native parts and context flags pass. Current selected 5797-byte and ordered 68459-byte aggregates pass; next selected 382-byte and ordered 65477-byte aggregates pass, with four full antecedents and exact following L61837. Eight individual dispositions join once to their original records; next semantic coverage is zero. All 23 live authority ledger entries and the full 14-carrier Project Principle inventory match. Eleven local strict Carriers pass fields/headings/EOF and nine local Plans pass unique identity, sibling sequences, immediate decomposition and explicit BLOCKS/completion DAG with zero cycles. Already cached PyYAML supplied strict parsing without installs, services or settings changes.
 
-Not Done unless all eight whole current records and both complete antecedents are read and saved with unique current coverage versus context-only provenance; every encountered issue has its typed Concern/disposition; an actual bounded following remainder and explicit BLOCKS exist; native/saved, strict Carrier and local DAG proof pass; clocks and any overrun are truthful; and parent P1126 remains Active for all remaining required sources.
+Closure proof receipt: 2026-10-04 10:39:35 +0000. Original first clock 2026-10-04 10:27:31 UTC remains unchanged and includes live reading, transport/key recovery, persistence and proof. P1305 is now physically Done and C326 physically resolved; terminal receipt after placement and receipt persistence is recorded below. Parent P1126 and next P1310 remain Active. One closure patch was rejected atomically because header hunks were out of document order; the corrected ordered patch retains this issue in C326. No source evidence or clock changed. No historical FPF command, proposed fix or next leaf was executed. Root global strict/checkpoint/Git/Journal work is separate.
+
+### Full terminal receipt
+
+Full terminal clock after saved proof, physical Done/resolved placement and persisted closure checks: 2026-10-04 10:40:32 UTC. Original first clock 2026-10-04 10:27:31 UTC was never reset; elapsed 13m01s, within the <=15-minute estimate, including authority/whole-source reading, transport/schema recovery, rejected atomic closure patch, persistence and local checks. Eight new records give 719/1869 refined coverage, 1150 refined and 1158 original records remaining. P1305 is physically Done; C326 is physically resolved; P1126 and P1310 are Active. P1310/A1028 binding contributes zero semantic coverage. All other corpus/frontier and downstream gates remain. Root global strict/save/Git/Journal work is separate; this Agent holds after P1305.
+
+## TLDR
+
+Eight whole historical records are harvested. The human correction includes findings and proposed fixes; the two-step comparison/decision Plan remains proposed. No fix is accepted or applied, and the next literal approval remains future work.

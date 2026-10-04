@@ -9,15 +9,15 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition worker evidence"
   depends_on: [Project, Operations]
-version: 1
-updated_at: "2026-10-04 09:59:26 +0000"
+version: 3
+updated_at: "2026-10-04 10:45:31 +0000"
 relations:
   is_decomposition_of: [CA-P-1129]
-  blocks: [CA-P-1119, CA-P-1130, CA-P-1155]
+  blocks: [CA-P-1119, CA-P-1130, CA-P-1155, CA-P-1312]
 ---
 # Summary
 
@@ -1103,6 +1103,16 @@ After P1306's verified completion, final workers are 743/4051 with 3308 remainin
   }
 }
 ```
+
+### Eighth worker bundle result and next frontier
+
+A1026 retains all60 whole assistant records across nine frozen prefixes,32,400 native plus both346-character whole R940 antecedents,total32,746,60 individual dispositions and six provisional groups. R940 blocked semantic resolution, withdrawn R155 pass, corrected R658 Subject/Scope findings, R154 validator limitation and narrowed literal-only prototype remain explicit historical evidence. No literal human adoption occurs. Native/saved/registered-Carrier/local-DAG proof passed at 2026-10-04 10:43:00 UTC,14m43s from the original10:28:17 UTC start. All60 whole originals/two antecedents,9 current+4 next frozen prefixes/metadata/line/raw/text/role/channel/timestamp/source+overall aggregates,60 dispositions/six groups,all34 governing hashes,exact803 index frontier/next23/full8 contexts/intact3165 and five owned Carrier fields/headings/EOF/local edges passed. The proof output's hardcoded33 authority label was corrected to the actual34 retained reads; no evidence changed. Closure clock captured2026-10-04 10:43:58 UTC,15m41s from the original start; completion has exceeded the original15-minute estimate. CA-C-328 retains rejected transports, diagnostic syntax failure and actual overrun/recovery. Physical Done follows successful saved proof; no reset or timely-completion claim. Root owns global checkpoint/Git/Journal, and the Agent holds after this leaf. Original actual clock 2026-10-04 10:28:17 UTC; no reset or unsupported elapsed claim.
+
+Actual next Active P1312/A1030 sequence31 binds23 whole records/four sources,27,252 native plus all eight4,827-character whole continuing-source antecedents,total32,079; raw aggregate d9cb345cccb4a88c2da4c0a33ba839d123a4853b6a8246cbdec907a34e074719. First intact4,310-character proposal:01a0eda5 L260/offset1623813/rawa3ac74d9189a91833c6317e153f83b444328f77a74677a8a3ed3419ae72b7b6f. Following intact3,165-character report:01a0edb5 L320/offset6676465/rawfaf3431ec487eefa956a23dd23ade3c8c7803dc9970782286d8022c12b1bf58f. Binding contributes zero coverage. After actualP1308 completion final workers803/4051,3248 remain; monthly803/6423,5620 remain. FutureP1312 would leave3225 final/5597 monthly; those23 are unprocessed.
+
+CA-C-328 retains incomplete authority/prior transports and bounded recovery, with zero credit from rejected responses. Parent1129/1118/Epic remain Active; all other frontiers and post-cutoff amendments persist. No O/RMED, production code, settings, service, FPF, next-leaf execution, Git or shared Journal mutation.
+
+Terminal owned mechanical verification passed at 2026-10-04 10:45:31 UTC,17m14s from the original2026-10-04 10:28:17 UTC start, including full literal reading, analysis, persistence and source/saved/Carrier/local-DAG checks. Unique P1308 Done/v3, A1026 v2, P1129 Active/v34, P1312 Active/v1 and physically resolved C328/v2, retained exact bindings/60 dispositions/6 groups/34 authority reads, local edges and exact single-newline EOF passed. The original15-minute estimate was exceeded; C328 preserves the failure and completed recovery. This terminal receipt is metadata/provenance only and does not change adopted content, coverage or Version. HOLD after the assigned leaf; root owns global checkpoint/Git/Journal.
 
 ## Details
 

@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 22
-updated_at: "2026-10-04 10:10:47 +0000"
+version: 23
+updated_at: "2026-10-04 10:48:00 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -198,9 +198,27 @@ P1303 remains Done with fully saved and proved output; the original first clock 
 
 The final required-output/strict owned Carrier/current-next/physical Done/local-DAG proof passed at 2026-10-04 10:09:37 UTC, 1218.95 seconds from the original 09:49:19 UTC first clock, with an actual overrun of 318.95 seconds. C322 remains active and explicitly nonblocking; its runtime issue is resolved and its overrun remains disclosed. Coverage is 1,078/1,175 with 97 records remaining. P1307/A1025 remains bound and unexecuted; preparation adds zero coverage. The single full frozen-prefix/native/saved/current-source proof passed at 10:02:29 UTC. This saved closure recovery is complete; hold without executing another leaf. Root owns shared strict checking/save/Git.
 
+### Eighteenth substantive packet result and actual next frontier
+
+P1307v2 is Done at `done/19-CA-P-1307-TASK--harvest-the-next-third-partition-citation-and-carrier-decisions-packet.md`; A1025v1 retains56 whole records/25,959characters/56,095rawbytes,41assistant/15user,56 individual selected dispositions and23 fullcontexts/8,644characters/23 dispositions,total34,603. Thirteen selected actual human inputs/two inert wrappers/nine prior human contexts retain fourteen decision chains and six provisional grouped refinements: latest full-filename citation rendering supersedes ID-plus-Summary; full Scope Unit names/capitals/underscores; fractal Content Role folders; Term self-application; and Action/Workflow/Step in place of undefined Transition. Candidate repairs and historical test/publication/review reports remain separate from current adoption/implementation proof.
+
+Current selected-source coverage1,134/1,175;41remain. Actual next ActiveP1311/A1029 sequence20 at `20-CA-P-1311-TASK--harvest-the-final-selected-source-third-partition-validation-packet.md` binds41whole/9,906characters/29467rawbytes plus53fullcontexts/16,622characters,total26,528. Exact aggregate2c1025a5cb65294c6e2aab87c39ff591ff34020fad02e75ba0fe408c334d5458. The701-character whole following partition4 boundary makes27,229characters/95whole records across preparation. Next startsL57204/[829108079,829109103)/2026-09-27T23:01:02.885Z/rawSHA25676a74c4050dd0dc00e2b1f2f00a0f59f2cb78b050c8dbc90de366374c5106f31 and endsfinalthirdL59916. FollowingwholeL60063/[844267412,844268580)/2026-09-28T01:57:37.689Z/partition4/rawSHA256b9b5fcd044898d5ffd7345f77a49743bbe9ee25b76ba8db2763f39075ea864a7 remains outside this third window and unprocessed. Future41completion leaveszero only in the selected third source;41remain now. Binding addszero coverage; next unexecuted.
+
+P1307directlyBLOCKSP1311 andP1119/P1130/P1155;ActiveP1311 andthisActiveparent retainthose three gates. Theirv1 objectives remain full-harvest/current-authority/exact-destination gated. All exact A905/A910/A1016/A1021/P1128 frontiers remain: the 1,659-file/1,657-ID corpus; other 1,657 files/fifteen other PRIMARY files/1,642 worker origins; structure continuation/repository/worktree and metadata parent-chain support; both main paths/non-third partitions; twelve limited prepartition matches without global deduplication/file exclusion; nine environment exclusions and sparse gaps. Original August 22 source remains 97,888 records/644,432,542 bytes, zero third-partition records, greatest 2026-09-15T15:24:51.068Z. Final third L59916/[842689409,842690140), 2026-09-28T01:50:11.416Z/raw SHA256 a910f284acb38e377e24f569e31e63a27826374c0a67d928cfea1ee3fff10090 remains below exclusive cutoff 2026-09-28T01:54:15Z. A917 retains its 5,865,276-byte prefix SHA256 4f9d453d6cbbb76f50573c64b73c3b0f2b2d77e502b9ae955ae1c93b055ea49f, zero monthly canonical messages and sole-window L1570 metadata; broader C294 identity remains unasserted/nonblocking. No source or copied worker human intent is subtracted/adopted; frozen evidence and post-cutoff amendments remain distinct.
+
+Actual firstclock10:27:55UTC. C327 physicallyresolved retains reading/orchestration failure recovery; the single full frozen-prefix/native/saved/current-source/Carrier/local-DAG proof and real terminal receipt are recorded inP1307/A1025 after persistence. No newsemantic recheckstage or prohibited mutation; root owns sharedcheckpoint/save/Git/Journal.
+
+### Single full proof and actual timing receipt
+
+The same full frozen-prefix/native/saved/current-source/Carrier/local-DAG proof passed at 2026-10-04T10:44:37.879604+00:00, 1002.88seconds from original firstclock2026-10-04 10:27:55UTC. It matched1,095,406,718frozen bytes/fullSHA256, all56selected/23context parts and79 substantive dispositions, next41records/53antecedents/wholepartition4boundary,26 unchanged current source fingerprints/revisions, strict YAML/headings/EOF/whitespace, unique owned/reserved IDs/sibling sequence, immediate P1128 decomposition, physical Done and nine local completion-DAG nodes. A1029 is unused; P1311 remains Active/unexecuted and binding adds zero coverage.
+
+The first attempt rejected a complete short context disposition through an arbitrary minimum-length assertion. Removing that unsupported criterion recovered the same proof without padding or another semantic review stage. C327 retains this and prior read/orchestration failures. Two closure patches were rejected before writing: one repeated a parent-file operation; the next put an earlier Objective hunk after a later Details hunk. Consolidating operations and ordering hunks recovered persistence. A broad diagnostic capture was rejected on output limits; bounded header inspection recovered it.
+
+Actual closure-persistence clock2026-10-04 10:48:00 +0000, 1205seconds from unchanged10:27:55UTC, exceeds the900-second estimate by305seconds. No timely-completion claim or clock reset. C327 remains active/nonblocking for the process overrun; reading/orchestration/verification failures are resolved. Required output is complete, P1307 physicallyDone, P1128 Active, coverage1,134/1,175/41remaining. Hold without another leaf. Root owns sharedcheckpoint/save/Git/Journal.
+
 ## Details
 
-### Latest superseding completed packet
+### Prior superseded completed packet
 
 P1303 Done/A1021 adds 31 whole records and 19 context-only records. Current selected-source coverage is 1,078/1,175; 97 remain. Actual next Active P1307/A1025 binds 56 whole records plus 23 full contexts, totaling 34,603 characters; binding adds zero coverage. P1303 BLOCKS P1307 and P1119/P1130/P1155; P1307 retains those three gates. P1128/P1118 remain Active and all source frontiers above persist. Actual P1303 start is 09:49:19 UTC; C322's runtime recovery is resolved. Predecessor clocks and C318's original overrun remain separate. No authoring or implementation stage is bypassed.
 

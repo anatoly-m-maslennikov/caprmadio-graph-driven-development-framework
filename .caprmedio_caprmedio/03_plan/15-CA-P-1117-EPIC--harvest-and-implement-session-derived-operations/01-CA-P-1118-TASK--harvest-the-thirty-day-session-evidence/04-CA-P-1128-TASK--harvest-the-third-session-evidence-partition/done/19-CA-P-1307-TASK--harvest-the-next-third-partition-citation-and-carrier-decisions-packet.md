@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition citation and Carrier decision evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 09:58:49 +0000"
+version: 2
+updated_at: "2026-10-04 10:48:00 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1311
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -32,7 +33,7 @@ Harvest the next third-partition citation and Carrier decisions packet
 
 ## Objective
 
-Exactly one assigned AI Agent must harvest the complete frozen packet below within an estimate of <=15 minutes, including reading every native part and full antecedent, meaningful individual dispositions, persistence, one saved/native/current-source/Carrier/local-DAG proof and terminal margin. P1303 directly BLOCKS this leaf. Its output is reserved unused A1025 at `.caprmedio_caprmedio/02_analysis/CA-A-1025-ANALYSIS_RPRT--harvest-the-next-third-partition-citation-and-carrier-decisions-packet.md`. This leaf is bound but unexecuted; binding contributes zero coverage.
+Exactly one assigned AI Agent must harvest the complete frozen packet below within an estimate of <=15 minutes, including reading every native part and full antecedent, meaningful individual dispositions, persistence, one saved/native/current-source/Carrier/local-DAG proof and terminal margin. P1303 directly BLOCKS this leaf. Its saved output is A1025 at `.caprmedio_caprmedio/02_analysis/CA-A-1025-ANALYSIS_RPRT--harvest-the-next-third-partition-citation-and-carrier-decisions-packet.md`. The original binding added zero coverage; actual complete harvest and disclosed timing are recorded below.
 
 ### Governing authority and ownership
 
@@ -1410,6 +1411,24 @@ All A905 1,659-file/1,657-ID rows and exact A905/A910/A1016/A1021/P1128 frontier
 Seek every frozen interval and verify response_item/message, exact timestamp/role/channel, partition, raw/text/part hashes and lengths, complete parts, totals and aggregate, all full antecedents and following whole record. Parse saved A1025 JSON and compare every complete native part, provenance and individual disposition. Verify the required headings/properties, one EOF newline, whitespace, globally unique IDs, immediate P1128 decomposition, sequence 19, actual next, physical Done placement and local BLOCKS/completion acyclicity. Record actual first and terminal clocks without reset. Use one substantive saved/native/current-source/Carrier/local-DAG proof; do not create another semantic recheck stage.
 
 Re-read current P1119/P1130/P1155; they remain complete-harvest, current-authority and exact-destination gated, with parent P1128 Active. Root owns shared strict checking, save and Git. Below 90%, consult Goal/Principles and record a safe authorized option plus C/Question if uncertainty remains. An actual permission, runtime, evidence or authority blocker requires C/Problem and truthful postponement. Historical defects are not automatically current Concerns, and an observation timeout is not terminal failure.
+
+### Completed harvest and actual continuation
+
+A1025 retains all56 whole selected records/25,959 native characters/56,095 raw bytes plus23 complete contexts/8,644 characters:34,603 total; every record has full native parts/provenance and an individual substantive disposition. Thirteen selected actual human inputs/two inert goal wrappers/nine prior actual human contexts form fourteen scoped historical chains and six provisional grouped refinements. Full-filename citation supersession, full Scope Unit tokens, fractal folders, Term self-application and existing Action/Workflow/Step operation choice remain literal human decisions; assistant interpretations/tests/publication reports do not become current adoption or proof.
+
+Coverage1,134/1,175;41 remain. Actual next ActiveP1311/A1029 sequence20 binds41 whole records/9,906 selected characters plus53 full antecedents/16,622 characters,total26,528. The following whole701-character partition4 boundary makes27,229 characters/95 whole records in preparation. Raw next aggregate2c1025a5cb65294c6e2aab87c39ff591ff34020fad02e75ba0fe408c334d5458; next startsL57204 and endsL59916. FollowingL60063/[844267412,844268580)/2026-09-28T01:57:37.689Z/partition4 remains wholly unprocessed outside the third window. Future completion leaves zero only in this selected third source; other corpus frontiers remain. Binding contributes zero coverage and next was not executed.
+
+P1307BLOCKSP1311 andP1119/P1130/P1155;P1311 retains those three direct gates. P1128 remains Active. Their currentv1 objectives were fully reread and remain full-harvest/current-authority/exact-destination gated. All exactA905/A910/A1016/A1021/P1128 corpus/window/identity/non-third/overlap/environment/sparse-gap/A917/C294 frontiers persist without subtraction or copied-human-intent adoption.
+
+Actual firstclock10:27:55UTC. C327 physically resolved retains real read-output/orchestration failures and bounded read-only recovery. The required single full frozen-prefix/native/saved/current-source/Carrier/local-DAG proof and actual terminal receipt follow persistence. Root owns shared checker/save/Git/Journal. No O/RMED/code/settings/environment/services/FPF or next-leaf execution occurred.
+
+### Single full proof and actual timing receipt
+
+The same full frozen-prefix/native/saved/current-source/Carrier/local-DAG proof passed at 2026-10-04T10:44:37.879604+00:00, 1002.88seconds from original firstclock2026-10-04 10:27:55UTC. It matched1,095,406,718frozen bytes/fullSHA256, all56selected/23context parts and79 substantive dispositions, next41records/53antecedents/wholepartition4boundary,26 unchanged current source fingerprints/revisions, strict YAML/headings/EOF/whitespace, unique owned/reserved IDs/sibling sequence, immediate P1128 decomposition, physical Done and nine local completion-DAG nodes. A1029 is unused; P1311 remains Active/unexecuted and binding adds zero coverage.
+
+The first attempt rejected a complete short context disposition through an arbitrary minimum-length assertion. Removing that unsupported criterion recovered the same proof without padding or another semantic review stage. C327 retains this and prior read/orchestration failures. Two closure patches were rejected before writing: one repeated a parent-file operation; the next put an earlier Objective hunk after a later Details hunk. Consolidating operations and ordering hunks recovered persistence. A broad diagnostic capture was rejected on output limits; bounded header inspection recovered it.
+
+Actual closure-persistence clock2026-10-04 10:48:00 +0000, 1205seconds from unchanged10:27:55UTC, exceeds the900-second estimate by305seconds. No timely-completion claim or clock reset. C327 remains active/nonblocking for the process overrun; reading/orchestration/verification failures are resolved. Required output is complete, P1307 physicallyDone, P1128 Active, coverage1,134/1,175/41remaining. Hold without another leaf. Root owns sharedcheckpoint/save/Git/Journal.
 
 ## Details
 
