@@ -5,8 +5,8 @@ subjects:
     - "Atom/Content Role: Evaluation"
     - "CCE Operator"
     - "Condition Expression"
-version: 5
-updated_at: "2026-10-04 04:27:08 +0400"
+version: 4
+updated_at: "2026-10-02 20:35:16 +0400"
 relations:
   child_of:
     - CA-M-307
@@ -39,12 +39,7 @@ Evaluation Claims with the Evaluation CCE Role Profile.
 2. state recoverable inputs, the evaluated subject, observable evidence, **and** the condition that yields each result necessary for reproducibility under CA-M-264-CORE_META_MODEL-METHOD--write-evaluations-with-reproducible-falsification.
 3. use condition, temporal, quantification, logical, restriction, predicate, **and** comparison Operators with explicit scope over the checked evidence **and** result.
 4. use modality **only** to constrain correct evaluation **or** disposition. an Evaluation **must not** create the Requirement that it checks.
-5. specify the checked behavior, case inputs **or** fixture, expected observations, acceptance policy, **and** result disposition required by the check. include a checking procedure **only** as subordinate Evaluation content. reusable test-construction **or** selection conventions belong **in** Method authority; executable test code belongs **in** Implementation; a separately reusable test-running Action **or** Workflow belongs **in** Operations.
+5. include a checking procedure **only** as subordinate Evaluation content. keep reusable authoring technique **or** general test procedure **in** Method authority.
 6. report unresolved, unavailable, **or** contradictory evidence as its governed result rather than silently converting it **to** pass **or** fail.
 
 ## Details
-
-classification follows the primary contribution. quality-assurance policies **and**
-test cases are Evaluation contributions; product outcome policy remains Requirement
-authority, **and** tool **or** technique selection remains Method authority.
-apply CA-R-794 for the Evaluation's Local Tier.
