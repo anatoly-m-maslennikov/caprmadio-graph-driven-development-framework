@@ -16,11 +16,15 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 07:05:00 +0400"
+version: 4
+updated_at: "2026-10-04 07:33:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
+  blocks:
+    - CA-P-1119
+    - CA-P-1130
+    - CA-P-1155
 ---
 # Summary
 
@@ -53,6 +57,21 @@ Bind the actual first <=100 relevant human/assistant-message packet to exact sou
 CA-C-294 binds candidate session `01a01cb6-4ee4-7553-b68d-0823dda35094`. Source-identity confirmation is its first bounded harvest check before adopting any content; record Project identity or a truthful unrelated/unavailable disposition and reuse that single result across partition Plans. Candidate uncertainty is not an authorization to consume unrelated Project content. No new generic metadata preflight is required: enumeration over both verified native roots is complete.
 
 Preserve CA-P-1117's frozen window and explicit post-cutoff Operator corrections as separate amendments. Metadata gates are Done; downstream stage gates still require substantive harvest and its actual remainders.
+
+### Bound second-partition packets and remaining coverage
+
+CA-P-1152 binds two actual consecutive packets from the admitted primary source `01a02650-eff7-7453-8c37-0699b36773c6`, original native file `/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T01-53-53-01a02650-eff7-7453-8c37-0699b36773c6.jsonl`. Exact current cwd, VS Code primary source and repository match CA-A-905. This preparation scanned timestamp/role/line/length metadata; it did not harvest statements or infer acceptance.
+
+- CA-P-1181, `done/02-CA-P-1181-TASK--harvest-the-first-bound-second-partition-packet.md` in this matching bundle: first30 canonical visible messages in the partition, lines85148–85560, byte interval[557545477,558999787), 2026-09-12T11:57:01.094Z–2026-09-12T13:45:44.035Z. Eleven user and nineteen assistant records;11995 text characters; largest complete message2722 characters. Actual durable output is CA-A-907 v1 at `.caprmedio_caprmedio/02_analysis/CA-A-907-ANALYSIS_RPRT--harvest-the-first-bound-second-partition-packet.md`; every selected record has reproducible metadata/hash and substantive candidate/decision or no-candidate disposition. This is the only substantively processed original-file packet recorded here.
+- CA-P-1191, `03-CA-P-1191-TASK--harvest-the-next-bound-second-partition-packet.md`: immediately following30 visible messages, lines85578–86082, byte interval[559013854,561490229), 2026-09-12T13:47:24.805Z–2026-09-12T16:23:48.566Z. Five user and twenty-five assistant records;28976 text characters. The21296-character message at line86010 is explicitly included whole, never silently truncated. Owned durable output is CA-A-911. CA-P-1181 BLOCKS CA-P-1191.
+
+The refined shared source-level index records624 eligible original-file partition messages, excluding machine environment-context records (the preflight count627 included them). After completed CA-P-1181,594 remain unprocessed: CA-P-1191's bound30 plus564 afterward, beginning line86089 at byte561500900, timestamp2026-09-12T16:29:08.594Z; last eligible record is line97884, timestamp2026-09-15T15:24:42.768Z. The precise next processed frontier is line85560 /byte end558999787 /2026-09-12T13:45:44.035Z; the next unprocessed bound packet starts line85578 /byte559013854 /2026-09-12T13:47:24.805Z. CA-A-910/CA-P-1184 owns the durable index count/exclusion disposition; the refinement changes neither exact30-message packet. CA-P-1191 must materialize the next exact <=15-minute remainder leaf before it can be Done; it must preserve any further source/message remainder under this parent.
+
+The same-ID continuation `/Users/am/.codex/sessions/2026/09/15/rollout-2026-09-15T19-25-02-01a02650-eff7-7453-8c37-0699b36773c6_01a0a5ab-e9a3-79e0-a7d3-110195054118.jsonl` has759 refined eligible visible records in this partition, excluding machine environment-context records (preflight count763), first line5 at byte57214 /2026-09-15T15:25:05.726Z and last line23936 at byte511891514 /2026-09-18T22:23:04.656Z. This source remains fully unprocessed. Timestamp ranges alone do not establish semantic continuation overlap or justify dropping history. Source identity is one conversation, with two retained native files; copied context is not a new Operator decision.
+
+All other CA-A-905 rows retain their explicit unprocessed event-window/body frontier for this partition. Their creation dates do not exclude in-window events. The corpus index and future bounded leaf enumeration must preserve the17 primary and1642 worker file distinctions, candidate CA-C-294 and every retained path; no metadata-only source is claimed substantively processed. Do not read candidate content before its Project identity check. The shared corpus metadata index may later narrow exact remainder packets without converting discovery into completed harvest.
+
+Readiness review after CA-P-1181: CA-P-1125, CA-P-1176 and CA-P-1152 are Done. CA-P-1181's processed output retains six provisional candidates and human/assistant/proposal/report/supersession distinctions; reported historical updates do not establish current tests or Implementation. CA-P-1191 was reviewed and updated to consume actual A907 as its incoming result, preserve the whole bound next30 and all further frontiers, and reconcile later human input before adoption. It is the actual next work after CA-P-1181; no additional placeholder is needed for CA-P-1181 completion. Both execution leaves directly block CA-P-1119, CA-P-1130 and its first executable descendant CA-P-1155. Those three downstream Plans were read and remain blocked by this Active partition, the Active full-harvest CA-P-1118 and all other unfinished prerequisites; none is authorized to start from this packet. Existing CA-C-293/294 dispositions remain. This parent remains Active until its entire declared partition and all required remainders are processed or truthfully disposed.
 
 ## Details
 
