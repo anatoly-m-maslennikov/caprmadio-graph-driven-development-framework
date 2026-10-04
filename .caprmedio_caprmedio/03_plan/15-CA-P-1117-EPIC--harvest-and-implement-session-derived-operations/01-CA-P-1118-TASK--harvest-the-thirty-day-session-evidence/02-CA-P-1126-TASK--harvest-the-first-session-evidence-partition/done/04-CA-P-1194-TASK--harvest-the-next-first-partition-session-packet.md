@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 07:52:00 +0400"
+version: 3
+updated_at: "2026-10-04 08:20:00 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1200
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -154,9 +155,26 @@ Use system Python standard library to parse retained JSON, seek/read each slice 
 
 After saving915 reread1 unique selected coverage row, complete report finding/correction/gap and source/stop-state dispositions, exact processed/next frontier and every retained source frontier. Verify actual next bound remainder inputs/output/ownership/estimate and direct readiness edges; mandatory Plan headings/frontmatter, unique reserved IDs/sibling sequence, immediate-parent placement and bounded affected completion/BLOCKS acyclicity. Review1119/1130/1155 from results, keeping1126 Active. Root owns full-parser/whole-Epic DAG under C293; report only observed verification. Save actual verification result before Done.
 
+### Saved substantive result and actual next execution
+
+Durable CA-A-915v1 at `.caprmedio_caprmedio/02_analysis/CA-A-915-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` saves exactly one whole selected report,42672raw bytes/41960characters, complete exact coverage row,3 completed1190 context-only dispositions,6 scoped OPEN DC/PROPOSED FX pairs,4 deferred gaps,7 reported FPF source labels(5 used/2 screened),4 provisional reusable candidate groups and complete historical receipt/frontier/reference/stop-state dispositions. Selected human decisions0; context literal50678 do approves50671 analytical Plan only, already912 D02, not the new report's fixes. Assistant tests/validation/Git/save/clean-tree claims remain reported outcomes, not independently observed proof. All report content was read intact in a dedicated complete display after an initially truncated combined display. No selected part/fragment remains.
+
+Observed input verification passed all4 original slices/hashes/canonical metadata/part and size checks; selected/aggregateSHA256cfe949bcc10c37371aae9dbc46db394a8e0ca4a36eed443ee2e8defebdaa0309. Goalv13, active Principles, actor/permissionP032v5/P033v9/P034v6 and source PlanR1589v4/R1580v4/D460v6/D470v7/D481v4 were reread unchanged. ExistingC293 remains root-owned; laterA917v1 proves candidateC294 has0 monthly canonical messages, with broader historical identity unasserted/nonblocking. No actual current uncertainty/blocker/conflict required a new Concern.
+
+Actual next execution is ActiveCA-P-1200v1, `05-CA-P-1200-TASK--harvest-the-following-first-partition-session-packet.md`, immediate parent1126/work sequence5, one AI Agent/<=15-minute estimate, output reservedCA-A-919 at `.caprmedio_caprmedio/02_analysis/CA-A-919-ANALYSIS_RPRT--harvest-the-subsequent-first-partition-session-packet.md`. It binds41 exact whole canonical records51037–51283,20user/21assistant,25695raw bytes/9687characters, ordered aggregateSHA256f98e344b53f6db71587ed186a18fdb7b05cce899651a9df03d362760456bf23e. Original byte/metadata/size integrity was verified for binding only; no following body was substantively interpreted. Prior915/912 supply complete report/approval context.1194 directly blocks1200;1200 directly blocks1119/1130/1155.
+
+Following wholly unprocessed record51290/bytes[321407809,321408228)/2026-09-04T14:35:34.795Z/user/null/1part/hashd703d0f6521aa83066037bacff7c2689419dbee6ee5b46be3b8eeb695693dcc1/419bytes/40chars was verified separately. Combined1180+1190+1194 substantive coverage60 leaves1809 refined original-main records/1817 original predicate; actual next41 remain unexecuted. Every retained905 source/window/continuation frontier remains in915/1200/parent; no whole source is subtracted.
+
+Affected1119v1/1130v1/1155v1 were reread/reviewed; Active1126 and1200 still directly block them.1194 retains its outgoing gates and only releases1200 after Done. Parent1126 stays Active. Root owns strict YAML/whole-Epic DAG and authorized saving underC293. No O/RMED/code/environment/Docker/FPF/Git/Journal change or save-Tool receipt was authored by this worker.
+
+### Actual saved-output verification
+
+System Python standard-library saved-output check passed:1 unique selected row with exact line/bytes/SHA256/timestamp/assistant/null/one part/42672bytes/41960characters/nonempty complete disposition;3 context-only rows;6 report-scoped DC/FX pairs,4 deferred gaps and4 provisional candidate groups;mandatory Analysis Summary/Question/Scope/Approach/Results/TLDR;owned Plan native keys/headings/immediate parent;unique sibling Atom IDs/work sequences. Actual1200 index reread passed41 selected slice hashes/canonical metadata/one part/size counts and20user/21assistant/25695bytes/9687chars/aggregateSHA256f98e344b53f6db71587ed186a18fdb7b05cce899651a9df03d362760456bf23e; following51290 hash checked separately. Completed1190 directly blocks1194;1194 directly blocks1200;1200 directly blocks1119/1130/1155;bounded affected-owned graph acyclic. Parent1126 remains Active; exact source/window/continuation and917 candidate-disposition hashes retained. This is not a strict-YAML/full-Epic DAG claim;root owns that underC293.
+
+Owned git diff whitespace check passed with exit0;all new/owned leaf files independently passed no trailing whitespace and exactly one terminal newline, including1194's previously reported extra blank EOF line. No semantic change was made for that formatting correction. Substantive harvest, next-packet binding and saved-output verification finished by2026-10-04T04:13:00Z. Root recovered the native dispatch record:2026-10-04T04:00:50.921Z, spawn_agent call_NCqzbSVyDPH6y21oNaQwdrUj for epic1117_harvest1194 in the main-continuation source. Dispatch-to-reported-completion upper bound is12m9.079s, below the fifteen-minute estimate. Root's saved-carrier check also passed76 Plans/14 supporting carriers, strict YAML, exact headings, unique IDs, Done placement and the completion/BLOCKS DAG. The selected report is complete; this leaf is Done and releases only the bound1200 execution. Parent1126 and the monthly harvest remain Active.
+
 ## Details
 
 ### Definition of Done
 
 This leaf is not Done if its whole41960-character report lacks complete substantive disposition/provenance; a content part or source frontier is silently dropped; assistant/copied material becomes independent human/current authority or uncorroborated execution proof; source integrity/saved coverage fails; a typed current issue lacks Concern/disposition; actual next execution child/output/verification/<=15-minute estimate/direct BLOCKS facts are missing; affected dependent readiness is not reviewed; authority/ownership is bypassed; or actual work exceeds the estimate without truthful Active/partial/fragment remainder. Parent1126 remains Active until all required retained-source/window/fragment work is substantively complete.
-

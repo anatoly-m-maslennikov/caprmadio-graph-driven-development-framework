@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition primary session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 07:58:39 +0400"
+version: 2
+updated_at: "2026-10-04 08:09:07 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1202
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1367,6 +1368,14 @@ Owned checks: exact complete source hashes/count/aggregate, one disposition per 
   "selected_raw_sha256": "25b125e8ab4bd27663fedb66e49f23f2681a95fda9bfcb96538fa32ce4fba632"
 }
 ```
+
+### Completed result and actual next bound
+
+CA-A-918v1 substantively harvested all97 complete canonical records/34123 characters, with97 unique full-provenance dispositions,62 assistant/35 user records and2 context-only predecessors. Native hashes/time/role/channel/text counts and selected aggregate passed. Seven historical human decision/supersession chains and three provisional reusable workflow/Step/Action candidate groups are retained; current adoption remains unresolved. Assistant proposal/update/save/Journal/test reports are not verification. No current blocker or uncertain authority choice required a new Concern.
+
+Combined CA-A-908/913/918 coverage is121/1175 source third-partition canonical records;1054 remain. Actual next CA-P-1202/A921 is bound at `05-CA-P-1202-TASK--harvest-the-next-third-partition-session-packet.md`:75 complete records/19770 characters, positions122–196, L25477–26668, selected bytes [531610726,543484635), timestamps2026-09-22T13:31:23.738Z–2026-09-22T16:40:53.252Z. The2 context-only predecessors add580 characters; total context20350, safely below35000. Native next binding hash/count checks passed; binding is not harvest coverage. The next frontier after that packet is the unconsumed87838-character whole record atL26710, requiring later context-safe bounded decomposition with retained original provenance. All other PRIMARY/worker source and sparse-gap/exclusion frontiers remain truthful and unfinished where applicable.
+
+1197 BLOCKS1202;1202 BLOCKS1119/1130/1155. Active1128 and1118 stage gates remain; no methodology/implementation gate is unlocked. Owned exact packet/coverage/disposition/next-bound/readiness/Done-placement checks passed; root owns comprehensive parser/DAG/Git and no such independent full verification is claimed here. Execution and binding remained within the<=15-minute leaf limit.
 
 ## Details
 

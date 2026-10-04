@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 07:54:00 +0400"
+version: 2
+updated_at: "2026-10-04 08:27:15 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1203
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -32,7 +33,7 @@ Harvest the second final-partition session packet
 
 ## Objective
 
-One assigned AI Agent must substantively harvest exactly100 complete PRIMARY user/assistant messages,22835 text characters, canonical positions91–190 from A905/A910's admitted row362 snapshot within<=15 minutes. Save durable A914 at `.caprmedio_caprmedio/02_analysis/CA-A-914-ANALYSIS_RPRT--harvest-the-second-final-partition-session-packet.md`. CA-P-1183 is the explicit prerequisite; consume A909's observed decisions/candidates/frontiers. Inherit Epic1117 controls and90% threshold. This is actual semantic harvest, not another metadata preflight.
+Complete the harvest of exactly100 complete PRIMARY user/assistant messages,22835 text characters, canonical positions91–190 from A905/A910's admitted row362 snapshot. Original leaf estimate was<=15 minutes; root has completed substantive reading but its persistence/check exceeded the original elapsed estimate. Remaining completion is decomposed into bounded child1207,not reported as a successful elapsed leaf. Save durable A914 at `.caprmedio_caprmedio/02_analysis/CA-A-914-ANALYSIS_RPRT--harvest-the-second-final-partition-session-packet.md`. CA-P-1183 is the explicit prerequisite; consume A909's observed decisions/candidates/frontiers. Inherit Epic1117 controls and90% threshold. This is actual semantic harvest, not another metadata preflight.
 
 ### Exact input and authority
 
@@ -165,6 +166,14 @@ Using host Python standard library, parse this exact JSON block, seek offset/rea
 ```
 
 ## Details
+
+### Saved substantive result and completed decomposition
+
+All100 bound messages/22835characters were fully read; A914 saves100 exact nativefingerprints/dispositions,four historicalhuman decision chains andfour provisionalcandidates. Selectedraw aggregate0a983c5940b3f1e608b44c9d2b88383fe2d6c7de03a7289152a3423f7f95bdc1 verified. These are source evidence,not current adoption/implementation proof. Prior1193 estimate was exceeded by root coordination/context continuation; C298 owns the scheduling Problem. Actualchild1207 completed saved-output checks at04:27:15Z,4m17safter04:22:58Zstart.1193 closes as a completed composite,not a falsely elapsed originalleaf. No selected source fragment remains unprocessed. FinalDoneplacement/parser belongs to root's subsequent savegate.
+
+Actualnext1203/A922 binds100wholemessages/22407characters,positions191–290,L71318–77325,rawaggregatef9e60c5ce08d8797ab5418646ea9e2efea9d5b1d9df2d7cbd371b7e36615eeb2.1193 and1207 directlyblock1203;1203 directlyblocks1119/1130/1155. The final-partition source coverage is190/1284;1094 remain. Afterfuture1203,994remain beginningL77355/offset954156262/2026-09-29T14:40:18.870Z/hashe46c8c6b440caae0f2e156489f5b1e8647e1e79c1400dc83542f9a32b383352b. Other131PRIMARY/4051worker records and all source/window/continuation frontiers remain unchanged.1129/1118 stayActive. Rootfullparser/save policy follows Epic1117; noO/RMED/environment/implementation change.
+
+
 
 ### Definition of Done
 

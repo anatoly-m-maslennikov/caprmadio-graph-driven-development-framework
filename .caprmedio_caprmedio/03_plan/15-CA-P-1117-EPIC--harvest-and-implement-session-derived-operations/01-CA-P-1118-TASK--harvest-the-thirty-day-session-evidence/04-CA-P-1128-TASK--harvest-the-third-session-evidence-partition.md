@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 5
-updated_at: "2026-10-04 08:00:00 +0400"
+version: 7
+updated_at: "2026-10-04 08:35:16 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -70,11 +70,29 @@ All other 1657 retained CA-A-905 rows keep their exact metadata admission, avail
 
 Readiness facts: CA-P-1153 BLOCKS CA-P-1182; completed CA-P-1182 BLOCKS CA-P-1192 and the existing CA-P-1119/CA-P-1130/CA-P-1155 gates. Active CA-P-1192 BLOCKS those same three downstream gates; this Active parent also retains its direct gates, and CA-P-1118's stage gate remains. Their current objectives/readiness were reviewed against CA-A-908: full harvest and current-source reconciliation remain required. Standard-library functional checks passed for both exact packets, all12 saved processed keys/dispositions, mandatory headings/properties, unique IDs, decomposition/Done placement, final newline and acyclic completion graph. Full YAML parsing was not claimed. Current governing revisions matched the binding; historical reported issues remain later reconciliation evidence, with no new current blocker or Concern encountered.
 
-## Details
-
 ### Second substantive packet result
 
 CA-P-1192 is Done; CA-A-913v1 retains all12 complete native records/4613 characters and two provisional reusable candidates. Combined source substantive coverage is24 messages;1151 source third-partition messages remain from24154. Actual nextCA-P-1197/A918 is bound with explicit1192→1197 and1197→1119/1130/1155 readiness. Binding does not add coverage. All other PRIMARY/worker source frontiers remain unfinished. A917 proves the historical identity candidate contributes0 canonical messages in all monthly partitions; C294 remains a justified nonblocking broader-identity limitation. This parent remains Active; no methodology/implementation stage is unlocked.
+
+### Third substantive packet result and current frontier
+
+CA-P-1197v2 is Done at `done/04-CA-P-1197-TASK--harvest-the-following-third-partition-main-session-packet.md`. CA-A-918v1 retains97 complete canonical native records/34123 characters,97 provenance-keyed substantive dispositions,62 assistant/35 user records, seven historical decision/supersession chains and three provisional reusable candidate groups. Two prior records are context-only. Native selected hashes/time/role/channel/text parts/counts and aggregate passed; reported source changes/saves/Journal/tests remain historical reports and current adoption remains unresolved. Combined CA-A-908/913/918 source coverage is121/1175;1054 source third-partition canonical records remain fromL25477, [531610726,531612153),2026-09-22T13:31:23.738Z, assistant/null channel, raw SHA256 `82db0740c2845a4fb25210a11e50df87501b828c90106f4e83039c050a981e33`.
+
+Actual nextCA-P-1202/A921 at `05-CA-P-1202-TASK--harvest-the-next-third-partition-session-packet.md` binds75 complete records/19770 selected characters at canonical positions122–196, sparseL25477–26668, [531610726,543484635), timestamps2026-09-22T13:31:23.738Z–2026-09-22T16:40:53.252Z, plus580 context-only characters. Its native binding aggregate `5906038b3680a86f9ce4ce25112e388d5ef657b411b0d25578de44349568167a` was checked; binding contributes zero harvest coverage. After those bound75,979 remain beginning oversized complete recordL26710, [544087597,544176373),2026-09-22T16:55:35.549Z, assistant/null channel,87838 characters, raw SHA256 `d2956a26b762bb747bf62daf2c880199bfe04c6e17584075e3ddaa7fa5283c6a`; its body was not consumed here. CA-P-1202 must bind a truthful context-safe next remainder before closing, retaining whole-message identity/provenance rather than truncation.
+
+Completed1197 BLOCKS1202; Active1202 BLOCKS1119/1130/1155 and this parent retains all direct stage gates. Earlier packet frontiers above describe historical boundaries; the current source frontier isL25477. All other PRIMARY/worker sources retain their true unprocessed frontiers, and C294/A917 remains zero monthly canonical records with broader identity nonblocking. No new current blocker/uncertain choice required a Concern. This parent remains Active and no methodology/implementation stage is unlocked. Owned local exact/disposition/binding checks passed; comprehensive parser/DAG/Git remains root-owned.
+
+### Fourth substantive packet result and intact oversized next report
+
+CA-P-1202v2 is Done at `done/05-CA-P-1202-TASK--harvest-the-next-third-partition-session-packet.md` and saved CA-A-921v1 at `.caprmedio_caprmedio/02_analysis/CA-A-921-ANALYSIS_RPRT--harvest-the-subsequent-third-partition-session-packet.md`:75 whole canonical selected records,57assistant/18user,49041raw bytes/19770characters,75 unique full provenance/disposition rows and two already918 context-only rows. Selected aggregate5906038b3680a86f9ce4ce25112e388d5ef657b411b0d25578de44349568167a passed. Nine historical human decision/correction chains and three provisional workflow groups retain exact antecedents/supersession/current adoption limits. Source mutation/check/validation reports,79-draft totals and two corrected overstatements are not execution proof or adopted recommendations. No selected part/fragment remains.
+
+Combined908/913/918/921 source coverage is196/1175;979 remain beginning complete oversizedL26710/[544087597,544176373)/2026-09-22T16:55:35.549Z/assistant/null/onepart/88776bytes/87838chars/rawSHA256d2956a26b762bb747bf62daf2c880199bfe04c6e17584075e3ddaa7fa5283c6a/textSHA2561f6bc645d5be2ae2d94e0e64c2caf56bc530fc863158222662badf5ac57ed5f6. Actual next ActiveCA-P-1206v1 in `06-CA-P-1206-TASK--harvest-the-whole-third-partition-draft-review-report.md`, immediate1128/work sequence6, binds this one intact report and2132chars of contextL26274Plan/L26281do/L26668reportedvalidation, one assigned agent/<=15minutes with fresh-context capacity controls. Reserved outputCA-A-925 at `.caprmedio_caprmedio/02_analysis/CA-A-925-ANALYSIS_RPRT--harvest-the-whole-third-partition-draft-review-report.md`. Binding checks raw/text integrity only, not report harvest. Any capacity/time failure must retain Active/exact partial boundaries and actual fragment remainder rather than truncation.
+
+Following wholly unprocessedL26713/[544178116,544178677)/2026-09-22T16:55:35.896Z/user/null/onepart/561bytes/178chars/rawSHA2566b8f240f1d5ffd753ad35a351466084b6b9ca936385301a9adc2951a7f20c5e0/textSHA256baede60a7d1cff569d38fa34f7032f71cf7a57993ddaa94e3633807431e3f4ab. Future whole1206 completion would leave978, but979remain now.1202BLOCKS1206;1206BLOCKS1119/1130/1155; this Active parent retains its direct gates. All other1657 source rows/other15PRIMARY/1642worker files/structure continuation/parent-worktree support, both main paths/non-third-partition frontiers, nine excluded environments/sparse gaps and lastthird boundaryL59916 remain exact905/910/921 unfinished frontiers.917's no-monthly-canonical candidate result/broaderC294identity limitation remains explicit. No whole file or copied-context human intent is silently removed/adopted.
+
+Live governing revisions match921; no current issue required Concern. Owned checks and completion timing are recorded in1202; root owns complete parser/DAG/Git. This parent remains Active; local packet completion releases no methodology/implementation stage.
+
+## Details
 
 ### Definition of Done
 

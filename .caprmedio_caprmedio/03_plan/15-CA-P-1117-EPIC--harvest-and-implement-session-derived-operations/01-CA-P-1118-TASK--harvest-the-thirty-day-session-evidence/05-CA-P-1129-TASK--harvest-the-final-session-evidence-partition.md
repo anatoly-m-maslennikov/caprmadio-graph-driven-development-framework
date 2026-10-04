@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 4
-updated_at: "2026-10-04 07:55:00 +0400"
+version: 6
+updated_at: "2026-10-04 08:34:09 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -56,10 +56,11 @@ Preserve CA-P-1117's frozen window and explicit post-cutoff Operator corrections
 
 ### Actual execution frontier
 
-CA-P-1154 preparation and CA-P-1183 are Done. Durable CA-A-909 substantively disposes exactly90 original main-continuation messages/26792 characters and eight provisional candidate groups; no monthly or current implementation completion follows. Actual next execution is CA-P-1193 at work-sequence3, bound to the next100 complete records/22835 characters, positions91–190, lines65120–71282, output CA-A-914.1183 BLOCKS1193;1193 BLOCKS1119/1130/1155. The packet is bound, not harvested.
+Preparation1154,1183,1193/its1207completionchild,and1203areDone. A909/A914/A922dispose290of1284source messages. LatestA922adds100wholemessages/22407characters,onescopedhumancontinuation,threeprovisionalcandidates;unverifiedhistoricalreportsremainreports. C298resolved1193schedulingoverrunthroughactualboundedcompletion;originaltimingfailureisnoterased.
 
-The refined shared index retains1415 PRIMARY/4051 worker messages in this final partition; only the above90 PRIMARY messages are substantively processed here. Main continuation1284 is not aggregate1415.1194 source records remain after1183:100 are bound in1193, with1094 following from line71318,offset917622888,timestamp2026-09-29T02:57:58.639Z,hash175427759acd78a223f8417a1c64f9b53ef4a649ca6a9d14a4fafd4b84545464. Source final frontier remains line111074,offset1086405734,866bytes,timestamp2026-10-04T01:51:06.772Z,hash04c661b9b7bf201223a27bef231a90fb37e1763bec0a5a1ec4a47b70bbd8ebe8. Other131 PRIMARY source records, all worker evidence, every retained manifest source/continuation and CA-C-294's identity check retain their exact unprocessed frontiers. Later Operator amendments remain separate from the cutoff.1193 must bind its actual next leaf before Done; parent1129 remains Active and downstream complete-harvest/authoring gates remain blocked by the actual remainders.
+Actualnext1208/A926,sequence5,binds100wholemessages/22529chars,positions291–390,L77355–81854,rawaggregate12322962cc8e5fc8ad6dd03731560f36f31d3a924ef4c45fbcb8849d7b5d78d3.1203directlyblocks1208;1208directlyblocks1119/1130/1155.994source messagesremainunprocessed;afterfuture1208,894remainbeginningL81861/offset984842696/2026-09-29T21:44:20.528Z/hashdd404dc65785f9f11b187a3ce1e60dc14b081148eeb060ae5295318adc2a825f. FinalsourcefrontierremainsL111074/offset1086405734/866bytes/2026-10-04T01:51:06.772Z/hash04c661b9b7bf201223a27bef231a90fb37e1763bec0a5a1ec4a47b70bbd8ebe8.
 
+Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-window-continuation frontier remainsunfinished. A917candidate0canonicalmonthlycontent,C294broaderidentityunasserted/nonblocking;post-cutoffOperatoramendmentsremainseparate.1129/1118Active;authoring/implementationblocked.
 ## Details
 
 ### Definition of Done

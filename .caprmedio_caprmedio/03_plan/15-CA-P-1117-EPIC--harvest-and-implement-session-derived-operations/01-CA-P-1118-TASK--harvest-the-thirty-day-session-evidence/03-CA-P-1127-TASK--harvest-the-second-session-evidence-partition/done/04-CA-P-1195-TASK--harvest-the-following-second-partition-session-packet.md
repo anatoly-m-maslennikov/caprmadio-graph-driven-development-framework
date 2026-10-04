@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition primary session evidence remainder packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 07:58:31 +0400"
+version: 2
+updated_at: "2026-10-04 08:14:36 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1201
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -61,6 +62,14 @@ Same-ID native continuation `/Users/am/.codex/sessions/2026/09/15/rollout-2026-0
 System Python standard-library scenario: seek561500900,read13777774 bytes,parse every complete JSONL record,apply the exact predicate and reproduce100 ordered lines,first/last timestamps,18/82 roles,31195 characters,max2183,all null channels and selected raw hash above. Verify first/last complete-record hashes;only selected visible text may be exposed. A mismatch requires C/Problem and truthful postponement,not environment repair.
 
 Reread saved A916 and verify all100 evidence identities and substantive dispositions;no source message or span is omitted/truncated. Verify the actual next bounded leaf exists with exact input/output/verification,mandatory headings/properties,immediate parent/status placement and acyclic changed BLOCKS. Update actual parent frontier and review affected dependents. CA-P-1191 BLOCKS this leaf;Active CA-P-1127/1118 and other unfinished harvest work continue blocking1119/1130/1155 regardless of this packet's completion.
+
+### Completed result and dependent readiness
+
+Saved CA-A-916 v1 at `.caprmedio_caprmedio/02_analysis/CA-A-916-ANALYSIS_RPRT--harvest-the-following-second-partition-session-packet.md`: all100 whole-message identities/dispositions,100native textparts,31195characters,nine historical choice/supersession records and seven provisional candidate groups. Exact native re-extraction independently matched every saved line/byte/time/role/channel/character/raw-hash identity and all100 coverage rows;bound count/role/max/selected/first/last hashes passed. Assistant saves/updates/reviews/tests remain reports,not current authority or independent implementation proof.
+
+Actual next CA-P-1201/work-sequence5 is `../05-CA-P-1201-TASK--harvest-the-next-second-partition-session-packet.md`,reservesA920 and binds100complete records/32121newline-joined chars/max4912/22user78assistant/null channels,lines88844–91181,bytes[575565935,585852760),raw hash `e9ff5715ce5a52dc7b319aff8837de61423d6275cfa0c894f85cfc637184ba70`;exact source/output/functionalverification<=15minutes and multipart89574 lengths3077/1834 are explicit. Native100-record raw/text hashes passed with declared joining normalization;no future statement harvest.1195 BLOCKS1201;1201 BLOCKS1119/1130/1155. Current frontier88762/end575278674;464original messages remain plus759continuation/allotherA905 frontiers. Nextafter1201 is91209/585977060;last original97884 retained. Parent1127 remains Active and rollup updated.
+
+1119/1130/1155 reread and remain blocked by Active1127/1118,1201 and allother unfinished harvest prerequisites. C2940canonical monthly messages/A917,broader identity unasserted/nonblocking;C293 unchanged. Historical questions/findings received source dispositions;no new current issue/Concern necessary. Owned savedAnalysis headings/coverage and nextPlan headings/properties/parent/status checks passed;final1195 uniqueDone placement,Active1127/1201,sourcefrontiers and local changed-edge topology passed2026-10-04 08:14:36+0400,12minutes51seconds from recorded execution gate. New1201 has only1195's alreadyexisting downstream targets,no backward edge;strictYAML/full-DAG/Git/Journal remain root-owned. No unavailable verification or save receipt is fabricated.
 
 ## Details
 
