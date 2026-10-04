@@ -18,7 +18,7 @@ subjects:
     - "Atom/Content Role: Plan/Type: Plan"
     - "Implementation Retry Control"
 version: 11
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 16:11:58 +0000"
 relations:
   relates_to:
     - CA-R-1509
@@ -39,7 +39,7 @@ global_tier: 11
 
 Implement Evaluations before required behavior
 
-## Claim
+## Operation
 
 Implementation Workflow **means** the test-first implementation graph below; its referenced Step Atoms own Action/input/context bindings, **and** its Action Atoms own operational behavior.
 
@@ -78,3 +78,5 @@ an unknown result, failed invocation, unresolved confidence/permission gate, **o
 a terminal blocker preserves completed effects **and** pending P work. resumption requires fresh admission under the definition-binding rules; it is **not** success **or** permission **to** silently replay completed work.
 
 Method creation **and** acceptance are outside this Workflow. return retained issue, test, diagnosis, **and** fix evidence for a separately invoked Method-learning Run under CA-O-102; neither that Run nor creation of an M Atom is an implementation-completion prerequisite.
+
+## Details
