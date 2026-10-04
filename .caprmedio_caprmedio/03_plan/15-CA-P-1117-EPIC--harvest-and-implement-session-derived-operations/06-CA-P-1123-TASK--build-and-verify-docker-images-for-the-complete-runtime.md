@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 15:51:44 +0000"
+version: 3
+updated_at: "2026-10-05 00:02:29 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -32,9 +32,9 @@ Build and verify Docker images for the complete runtime
 
 ## Objective
 
-Build and functionally verify Docker images for the thirteen selected Workflows in CA-P-1117 v3 and every Action, Tool, prompt, MCP interface and runtime dependency they actually use, including reused implementations. The Operator's scope amendment excludes container-testing unrelated existing Tools and harvested capabilities.
+Build and functionally verify Docker images for the fifteen selected Workflows in CA-P-1117 v5 and every Action, Tool, prompt, MCP interface and runtime dependency they actually use, including reused implementations. The Operator's scope amendment excludes container-testing unrelated existing Tools and harvested capabilities.
 
-Exercise image-based mutation and no-op paths on controlled mock Projects, the Implementation Workflow, Revert, all three Projection builders, and Workflow/Action Journal persistence and recovery. Keep image identity, Run/Action IDs and result evidence. A successful image build or host-only test is insufficient. Runtime Project-data mounts are allowed; undeclared host implementation mounts and baked secrets are not.
+Exercise image-based mutation and no-op paths on controlled mock Projects, the Implementation Workflow, Revert, all three Projection builders, the two read-only query Workflows, and Workflow/Action Journal persistence and recovery. Query proof must cover source-snapshot stability, default Artifact/Event IDs, selected property/section or field/full-Event fetch, pagination/coverage, malformed-carrier/missing-ID/duplicate-heading-or-property/incomplete-read and invalid-filter diagnostics, and no credential/secret return; a query must not create mutation authority. Keep image identity, Run/Action IDs and result evidence. A successful image build or host-only test is insufficient. Runtime Project-data mounts are allowed; undeclared host implementation mounts and baked secrets are not.
 
 ### Work decomposition
 
@@ -46,4 +46,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any selected Workflow or required support/MCP path is absent from the scoped inventory, lacks passing image-based functional and Journal evidence, or requires undeclared host implementation code/dependencies. All three Projection builders, Revert and the Implementation Workflow need actual runtime evidence, not a build-only claim. Required verification/review/repair leaves must be Done; unrelated runtime inventory is excluded.
+This Plan is not Done if any selected Workflow or required support/MCP path is absent from the scoped inventory, lacks passing image-based functional and Journal evidence, or requires undeclared host implementation code/dependencies. All three Projection builders, Revert, the Implementation Workflow, and both query Workflows need actual runtime evidence, not a build-only claim. Required verification/review/repair leaves must be Done; unrelated runtime inventory is excluded.

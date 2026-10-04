@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 4
-updated_at: "2026-10-04 19:15:16 +0000"
+version: 5
+updated_at: "2026-10-04 20:15:56 +0000"
 relations: {}
 ---
 # Summary
@@ -31,7 +31,7 @@ Deliver the Operator-selected minimal Workflow set below: authoritative methodol
 
 ### Current Operator-selected scope
 
-The Operator narrowed the remaining delivery to these thirteen Workflows:
+The Operator selected these fifteen Workflows:
 
 1. Create Atom.
 2. Update Atom.
@@ -46,10 +46,20 @@ The Operator narrowed the remaining delivery to these thirteen Workflows:
 11. Build Entities Graph.
 12. Build Terms Graph.
 13. Build Applicable Methodology.
+14. Find and Fetch Artifacts (Markdown carriers).
+15. Find and Fetch Journal Events.
 
-The three Projection Workflows support rebuilding from current authoritative sources. A generic Rebuild Projections entrypoint may route to them; it is not a fourteenth independent deliverable.
+The three Projection Workflows support rebuilding from current authoritative sources. A generic Rebuild Projections entrypoint may route to them; it is not an additional independent deliverable.
 
 Validation, Relation checks, approval gates, and journaling are required supporting behavior inside these Workflows and their Actions, not additional standalone Workflows. Preserve the current identity rule: an Update that requires a Summary change hands off to Replace; it does not silently update the existing Atom's Summary. Change Status resolves the applicable current status model instead of hardcoding one Content Role's statuses. Scope Unit changes use the authoritative Project Structure and preserve or explicitly report affected references. Revert preserves required history and performs only the approved reversal.
+
+The two query Workflows are read-only:
+
+- Artifact queries filter any Markdown frontmatter property and any heading/section property, including `#`, `##`, and deeper headings. Return Artifact IDs by default; fetch only caller-selected properties/sections, such as Claims, when requested.
+- Journal queries filter canonical Event fields. Return Event IDs by default; fetch only caller-selected fields or full Events when requested.
+- Both use basic SQL-WHERE-style equality, inequality/NOT, and `IN`, with unambiguous boolean combinations. Return bounded, truthful coverage/pagination and invalid-filter diagnostics; do not evaluate arbitrary SQL/code or infer identities from filenames.
+- Preserve the caller's requested property/status selection and do not fetch credentials/secrets or create mutation authority. The canonical Events Journal remains the one source, not independently maintained derived logs.
+- Actual admitted Workflow/Action execution uses the single shared Run Journal support. Bind a stable query-source snapshot; the query's own execution records must not mutate or enlarge that captured result set. Preview is non-dispatching, and Run records must describe only actual execution.
 
 ### Run journaling
 
@@ -66,7 +76,7 @@ Use the authoritative Events Journal as the single event source; Artifact Change
 
 ### Scope amendment and retained history
 
-This explicit Operator scope replaces the former requirement to implement every adopted harvest capability and container-test every unrelated existing Tool. Required Docker coverage now includes all thirteen selected Workflows and the Actions, Tools, prompts, MCP paths and runtime infrastructure they actually use, including reused implementations. It is not satisfied by an image build alone.
+This explicit Operator scope replaces the former requirement to implement every adopted harvest capability and container-test every unrelated existing Tool. Required Docker coverage now includes all fifteen selected Workflows and the Actions, Tools, prompts, MCP paths and runtime infrastructure they actually use, including reused implementations. It is not satisfied by an image build alone.
 
 Keep the completed harvest, reconciliation, five additional authored Actions, layout repairs and their evidence. They remain available history and reusable sources; they do not create extra delivery obligations. No further harvest or broad reconciliation campaign is required. Existing child Plans must be rebound to this scope before execution; historical or unrelated leaves remain truthfully classified and are excluded from the required decomposition, not reported Done.
 
@@ -97,14 +107,15 @@ CA-P-1118 and its unfinished harvest descendants are canceled, not Done. CA-P-11
 Authoring disposition: the Plan files have been created and independently reviewed. The Operator explicitly authorizes mechanical Git commits for this Epic without the save Tool; if Git cannot commit, skip that commit, retain the unfinished save disposition, and continue independent ready work. CA-C-292 remains an active save-Tool defect, but repairing it is not a prerequisite for this authorized Git path. Record actual commit results without claiming Tool-generated Journal provenance. The stricter body-layout disposition for source conflict CA-C-290 is nonblocking for this Epic's preparation.
 
 - CA-P-1118: Canceled harvest stage; retained completed evidence supplies the following stage.
-- CA-P-1119: Bind, author or reuse, and independently review the thirteen selected source Workflows and their required Actions.
+- CA-P-1119: Bind, author or reuse, and independently review the original thirteen selected source Workflows and their required Actions.
 - CA-P-1120: Specify and independently review their PROGRAMMATIC capabilities, including all-Run journaling and Projection construction.
 - CA-P-1121: Specify and independently review only the PROMPTS capabilities required by these Workflows.
 - CA-P-1122: Implement and functionally verify the selected capabilities from reviewed RMED.
 - CA-P-1123: Verify all selected execution paths in Docker, including MCP and reused dependencies.
-- CA-P-1124: Verify the thirteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
+- CA-P-1124: Verify the fifteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
+- CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
 
-The remaining required decomposition has six composite stages. Existing bounded preflights bind work to the thirteen selected Workflows, not to an open-ended harvest inventory. Reuse or replace their old packet bindings before execution. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow.
+The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source O Action/Step/Workflow definitions and their RMED are not yet authored: their absence is an explicit dispatch blocker for dependent review/implementation, not bound evidence.
 
 ### Execution controls
 
@@ -121,10 +132,10 @@ The remaining required decomposition has six composite stages. Existing bounded 
 
 ### Current execution frontier
 
-The selected thirteen-capability scope is unchanged. Required source definitions and independent source reviews are complete; P1119/P1132 are physically Done. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the exact Docker acceptance portfolio. Eight independent RMED review leaves P1493–P1500 found bounded corrections; graph/PROMPTS contracts passed first, and shared Run support, lifecycle, structure and Revert passed focused correction re-acceptance. Compiler compatibility and MCP mode/full-frontier bindings are the last narrow current specification corrections under P1504/P1506.
+The original thirteen-capability implementation branch is unchanged. Required source definitions and independent source reviews are complete for those thirteen; P1119/P1132 are physically Done for that scope. No harvesting or broad source audit remains. P1484–1492 supplied eighty-two native PROGRAMMATIC/PROMPTS specification carriers and the original Docker acceptance portfolio. P1493–P1500 reviews and their bounded corrections have been accepted; P1120/P1121 and the initial implementation preflights are Done.
 
-P1510–P1519 now bind the actual test-first implementation packets: shared sealed Run/Journal support, lifecycle, authoritative structure, Revert, Entity/Term graphs, compilation, Implementation prompts/Actions, existing DBOS graph execution, MCP/manifest and the selected Docker golden harness. Dispatch remains gated on the required current RMED acceptance/preflight. Existing baseline code is not proof of these selected deliverables. After the exact last gate closes, execute these independent owned packets in parallel, retain actual golden tests/effects and complete functional Docker/MCP/journaling evidence. No additional source campaign is required.
+P1510–P1519 bind the test-first implementation packets. Shared Run/Journal support, authoritative structure, Entity/Term graphs and Implementation prompts have saved local proof; lifecycle, Revert, compilation, queue/MCP and the Docker harness have saved implementations with outstanding integration or image coverage. The physical MCP manifest now passes frozen-graph admission checks for all thirteen routes; actual native Action dispatch, effects and fresh-image execution remain unproven. No all-route functional pass is claimed. P1520–P1529 add the two-query branch; its O/RMED authoring, reviews, implementations, integration, image evidence and closure review are unstarted. Original thirteen implementation/tests continue independently; final image-coverage review and Epic closure require the additional two.
 
 ### Definition of Done
 
-This Epic is not Done until all thirteen selected Workflows have reviewed source definitions, correctly located RMED, implementations and passing functional Docker/MCP evidence for their required execution paths; every Workflow Run and Action Run in the acceptance scenarios has truthful Journal evidence; all three main Projections have passing source-traceability and rebuild evidence; and every required composite/leaf, repair or review is Done with blocking findings resolved. The coverage matrix must identify actual source, implementation, image, Run, Action and result evidence for every selected Workflow, not infer coverage from file presence or a successful image build. Preserve required history and source/Projection/Journal/Git provenance under the approved save exception. Operator-excluded harvest work, additional capability delivery and legacy administrative closure are not required completion and are never falsely reported Done. A skipped commit requires an explicit disposition; nonblocking Concerns retain justified dispositions.
+This Epic is not Done until all fifteen selected Workflows have reviewed source definitions, correctly located RMED, implementations and passing functional Docker/MCP evidence for their required execution paths; every Workflow Run and Action Run in the acceptance scenarios has truthful Journal evidence; all three main Projections have passing source-traceability and rebuild evidence; and every required composite/leaf, repair or review is Done with blocking findings resolved. The coverage matrix must identify actual source, implementation, image, Run, Action and result evidence for every selected Workflow, not infer coverage from file presence or a successful image build. The two query Workflows additionally require source-snapshot-stable, read-only query proof, default-ID and selected-fetch proof, invalid-filter/coverage/pagination proof, and a no-credentials/secrets proof. Preserve required history and source/Projection/Journal/Git provenance under the approved save exception. Operator-excluded harvest work, additional capability delivery and legacy administrative closure are not required completion and are never falsely reported Done. A skipped commit requires an explicit disposition; nonblocking Concerns retain justified dispositions.
