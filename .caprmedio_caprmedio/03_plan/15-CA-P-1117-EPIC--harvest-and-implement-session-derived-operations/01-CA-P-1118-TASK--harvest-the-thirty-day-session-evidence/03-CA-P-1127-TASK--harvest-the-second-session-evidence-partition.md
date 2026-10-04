@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 16
-updated_at: "2026-10-04 12:01:33 +0400"
+version: 18
+updated_at: "2026-10-04 13:38:26 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -86,8 +86,29 @@ All other CA-A-905 rows retain their explicit unprocessed event-window/body fron
 
 Readiness review after CA-P-1266: incoming1262Done/A980/original624retained;A984completes100whole/101parts includingL4242bothparts/100individualdispositions/12choicechains/eightgroups. ActualnextP1270/A988sequence14 binds53whole plusfourwholefreshness/tierPrinciples/archiveproposal/nogapcontexts801,total34873.1266→1270→1119/1130/1155preservesunfinishedgates. P1119/P1130/P1155fullbodiesreread/stillblockedbyActive1127/fullharvest1118/P1270/allunfinishedprerequisites. C293unchanged,C294zerocanonicalwindowA917/broaderidentityunassertednonblocking,C297headingssatisfied,C299resolvedprioroverrunpreserved. HistoricalJournal/identity/authorityreporteddefectsnotnewcurrentConcerns;noactualcurrentnativecoverage/authorityissue. ParentActiveuntilcontinuation/allotherpartitioncoveragecomplete.
 
+### Latest superseding continuation packet and actual next frontier
+
+P1294v2Done at `done/16-CA-P-1294-TASK--harvest-the-following-second-partition-continuation-packet.md`; A1012v1 at `.caprmedio_caprmedio/02_analysis/CA-A-1012-ANALYSIS_RPRT--harvest-the-following-second-partition-continuation-packet.md` saves35wholetexts/35nativeparts/33485chars/47487rawbytes,29assistant/6user,max6175,positions322–356,L6484–7418,zeroextra contexts/rawaggregateace4688a2fceb701c991abb1b313d2bb05ff6af17f585e33d9388ef9774d836c.35source-specificsubstantivedispositions/fourinertmachinewrappers/twohumanrecords/oneOActor-MetaModelchain/fiveprovisionalgroups. HumanType/destinationchoices remainhistorical; token/registration/migration/validation/archive/Journalreportsare notcurrentauthorityorproof. Uncertainmodeldomains/legacyIDunappendedsevenbatch preserved.
+
+Actualcontinuationcoverage356/759;403remain. All624originalsecond-partitionmessagesretainpriorcompletion. Actual next P1300/A1018 sequence17 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/03-CA-P-1127-TASK--harvest-the-second-session-evidence-partition/17-CA-P-1300-TASK--harvest-the-next-second-partition-actor-and-authority-packet.md` binds27 whole messages,positions357–383,23assistant/4user,43055rawbytes/32196characters plusninefullpriorcontexts2558,total34754<=35000. SparseL7424–8231/[62316920,68431149),2026-09-17T11:59:26.091Z–2026-09-17T12:56:18.820Z; aggregateSHA2563d241316e5e5166c15013bba91899c140d50fe4df2bb15ce94408a7e621b3f17. First L7424/user/null/onepart/6643bytes/6175chars/rawSHA25694b17bbe827e09d024283b00896a06da2289ecd91ca19ce31e984af5bd3d7831; lastL8231/assistant/null/onepart/728bytes/341chars/rawSHA2563e51787a2b1b2425ddd32becb8d758e6d4966ea4144502987166a412f163b41f. FollowingL8287/[68599506,68600193)/2026-09-17T13:01:44.325Z/assistant/null/onepart/687bytes/298chars/rawSHA256440b831c67a651e5aa7ee1abb11bc8f0ea200958a74ae577e4af167fa9f632e9/textSHA2564467bd64fc92f3957c9b6b3083dacbf280db8a0b6865e947cc67d0b1a6c9a567 remainswhole/unprocessed;34754+298 exceeds35000. Nine full contexts preserve unadmittedType concern, directO/Actor/MetaModel decisions, registry/policy permission reports, seven-event unappendedbatch, Atom-versus-Actor distinction, fourClaim split and latest no-duplicate/currentlookup. Binding contributeszero coverage; future27completionwouldleave376, actualcurrentremaining403. No next execution.
+
+P1291latestv4Done/A1009v2 predecessorretainsC314real17m58elapsed/32recordsandrefinedsource-specificdispositions; no clockreset/sourcecoveragewithdrawal. PriorcandidateL7419wasnonmessageboundarymetadata; fivegappedrecords7419–7423retainedwithfingerprints, actualnextcanonicalL7424.1294directlyBLOCKS1300 andretains1119/1130/1155;Active1300/1127retaindirectgates/allcompositesActive. Dependentfullharvest/currentauthority/exactdestinationobjectivesremainblocked.
+
+EveryA9051659file/1657ID/17PRIMARY/1642worker/other1657file/15otherPRIMARY/structurecontinuation/repository-parent-worktree/body-event/nonsecond frontier, original624/preflight627 andcontinuation759/preflight763environmentexclusions/finalL23936andA917zero-monthlycanonical/broaderC294nonblocking identity remainexactA905/A910/prior1127/A1012/P1300. Copiedworker/goalcontextnotnewhumanintent; no sourcefile/partition/monthcompletion. Actualfirst08:58:43UTC/terminalnative-saved-fourCarrier receipt recordedin1294/A1012. RootstrictfullsavedYAML/fullEpicDAG/save remainsseparate; no next execution.
+
 ## Details
+
+### Current superseding checkpoint
+
+P1300/A1018 completed27 whole records/nine full contexts/five provisional refinements. Continuation coverage383/759 leaves376; original second624 remains completed. Four new user-role goal wrappers are inert transport, not human adoption. Full originals and specific dispositions are retained; reported source fixes/tests/Journal are not current proof.
+
+Actual next P1304/A1022 sequence18 binds21 whole messages/32 full antecedents34857 characters, followingwholeL9021 intact. It is unexecuted; future coverage404/759 would leave355, current remaining376. All other source/window/identity/frontiers and1119/1130/1155 gates remain; parentActive. First clock2026-10-04 09:31:10 UTC, terminal receipt follows saved/native/Carrier checks. CA-C-320 retains rejected transports without counting them as reading.
+
+All earlier checkpoint totals are historical and superseded.
+
 
 ### Definition of Done
 
 This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
+
+Root terminal receipt: 2026-10-04 09:38:26 UTC. Actual elapsed7m16s from unchanged2026-10-04 09:31:10 UTC. Native/saved27 full parts/nine contexts/current-next bindings/source prefix/hash/aggregate/placement passed; shared strict142Plans/100supporting Carriers passed before this terminal receipt. This is persistence/provenance proof, not another semantic recheck stage. Git/recovered-Journal saving follows separately; no historical repair or current implementation claimed.

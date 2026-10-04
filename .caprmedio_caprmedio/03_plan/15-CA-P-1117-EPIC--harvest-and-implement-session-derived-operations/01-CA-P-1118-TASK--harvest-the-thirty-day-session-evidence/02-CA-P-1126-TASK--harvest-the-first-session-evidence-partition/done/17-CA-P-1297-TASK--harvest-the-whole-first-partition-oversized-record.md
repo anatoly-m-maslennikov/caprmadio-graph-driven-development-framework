@@ -10,15 +10,15 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Whole oversized first-partition continuation record"
   depends_on: [Project, Operations]
-version: 2
-updated_at: "2026-10-04 12:57:20 +0400"
+version: 3
+updated_at: "2026-10-04 13:38:06 +0400"
 relations:
   is_decomposition_of: [CA-P-1126]
-  blocks: [CA-P-1119, CA-P-1130, CA-P-1155]
+  blocks: [CA-P-1301, CA-P-1119, CA-P-1130, CA-P-1155]
 ---
 # Summary
 
@@ -210,7 +210,15 @@ Inherit Epic CA-P-1117/90%, live Goal/Principles and registered Plan/Analysis ru
 }
 ```
 
-Metadata checks are preparation and contribute zero semantic coverage. No execution starts here. Current first-source coverage709 leaves1160 refined/1168 original; eventual completion of this single record would leave1159/1167, not current coverage. Immediate following L61640/96characters remains unprocessed.
+The earlier709/1160refined/1168original figures above described binding preparation. Recovered completion adds exactly one unique whole canonical record61633, yielding710/1869 refined coverage,1159 refined remain; original1877 universe is retained with1167 original remain. Five full contexts add zero coverage. A1015 retains four provisional intent groups,14 MM finding dispositions,11 corrected FX proposal dispositions,2 gaps and all proof/currentness limits. Six saved literal source lines total66113rawbytes/63276nativechars; aggregateSHA25685d67276d2ff6ff02ffcb733997bc5fa4f9f78d526c0428a971d764998847ef7.
+
+Actual next Active1301v2 owns reservedA1019 and binds only wholeL61640/96characters plus whole61633/61287characters context, total61383 under the explicit <=15-minute whole-antecedent exception. It retains frozenprefix/hash, all full text parts and current/context raw aggregates, with exact followingL61643/177characters. No1301 execution occurs.1297 BLOCKS1301/1119/1130/1155; Active1126/1301 retain downstream gates. Every other source/window/continuation/candidate frontier remains. CA-C-319 records the repaired premature closure; timing is disclosed separately and nonblocking.
+
+### Execution clock
+
+Original first clock:2026-10-04 09:03:42 UTC (13:03:42 +0400). Prior premature terminal claim:09:05:00 UTC (13:05:00 +0400),1m18s, was not full closure because the actual next binding was missing. The original elapsed runs through recovered full closure and exceeds15minutes; no start is reset. Separate recovery first clock:2026-10-04 09:25:49 UTC.
+
+Native/saved/current+next/Carrier/localDAG proof checkpoint:2026-10-04 09:35:32UTC, original elapsed31m50s and recovery9m43s at that checkpoint. Actual recovered full terminal receipt after final receipt persistence:2026-10-04 09:38:06UTC (13:38:06 +0400). Original09:03:42→09:38:06 elapsed34m24s,19m24s beyond the15-minute estimate; the09:05:00 premature claim is retained as history only. Separate recovery09:25:49→09:38:06 elapsed12m17s; it never resets the original start. No extra semantic recheck stage or next execution occurred. Root global strict/save/Git/Journal work is separate.
 
 ## Details
 

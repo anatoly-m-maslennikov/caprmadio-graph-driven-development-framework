@@ -14,7 +14,7 @@ subjects:
     - "Project"
     - "Operations"
 version: 2
-updated_at: "2026-10-04 12:54:39 +0400"
+updated_at: "2026-10-04 13:28:14 +0400"
 relations:
   analysis_for: [CA-P-1293]
   relates_to: [CA-P-1297, CA-P-1126, CA-A-1008, CA-C-315]
@@ -35,7 +35,7 @@ Live Goal/Principles and Epic CA-P-1117/90% retain authority. No current naming 
 
 ## Approach
 
-The first assigned Agent saved complete native messages but omitted required author/context and closed the Plan before its parent roll-up. Root rejected that incomplete result. Root recovery began2026-10-04 08:52:26 UTC, read all89 whole original texts by08:53:08, verified actual source-prefix/offset/hash/parts at08:54:23, and replaced generic excerpts with89 substantive dispositions. Original Agent first/elapsed clocks remain unavailable unless actual receipts arrive; file updated_at is not substituted for an execution clock. Concern CA-C-315 records this recovery. No semantic recheck workflow stage is added.
+The first assigned Agent saved complete native messages but omitted required author/context and closed the Plan before its parent roll-up. Root rejected that incomplete result. Root recovery began2026-10-04 08:52:26 UTC, read all89 whole original texts by08:53:08, verified actual source-prefix/offset/hash/parts at08:54:23, and replaced generic excerpts with89 substantive dispositions. The original Agent later reported08:39:21UTC as its first clock; CA-C-316 discloses20m07 from that reported start to recovered completion. File updated_at is not substituted for an execution clock. Concern CA-C-315 records this recovery. No semantic recheck workflow stage is added.
 
 ## Results
 
@@ -2154,4 +2154,4 @@ Admitted completion adds89 canonical messages to first-source620, yielding709; r
 
 89 complete messages and one complete context retained with89 source-specific dispositions and five provisional overlapping groups. No historical commands executed or fixes adopted; first-source709 processed,1160 refined messages remain.
 
-Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock unavailable, not reconstructed. No current historical operation executed; Git/Journal save follows separately.
+Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock was unavailable when this receipt was first saved; its later reported08:39:21UTC start and20m07 total elapsed are disclosed in CA-C-316. No current historical operation executed; Git/Journal save follows separately.

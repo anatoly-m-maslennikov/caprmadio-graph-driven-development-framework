@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 17
-updated_at: "2026-10-04 12:57:20 +0400"
+version: 18
+updated_at: "2026-10-04 13:38:06 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -210,7 +210,16 @@ Combinedcanonicalcoverage593;refined1869minus593 leaves1276,original1877minus593
 
 1265directlyblocks1269;Active1269 and1126 directlyblock1119/1130/1155. Affectedv1dependents/readinessreviewed;1126Active. FreshGoal/activePrinciples/permissionsread;fivePlan-sourcebodies/revisionsunchanged,currentversionsin983. Passingchecks:current74+fivecontexts/next26+fivecontexts/bothfollowingslices rawhashes/aggregates/native metadata/parts/windows/budgets;74unique substantivejoins/24literalparts/oneannotation/22intentgroupmapping/16groups/5candidates;fourmandatorylayouts/EOF/whitespace/uniquesiblings-sequences/seven-nodeBLOCKS+completionDAG. NoactualcurrentConcern/excludedchanges. RootstrictfullsavedYAML/full-EpicDAG/save remainseparate. Holdafter1265.
 
-## Details
++
+
+### Seventeenth oversized whole-record result and next continuation
+
+CA-P-1297 harvested whole61633 intact,61287nativechars/62185rawbytes,assistant/null/onepart,SHA256c66eaeeff2f645cfcbe16142e5354f4b41997896be63b5f6ba81ca70df8c01e0, plus five antecedents1989chars under the explicit whole-record exception. CA-A-1015 preserves original JSONL. MM-01..MM-12 reported source findings,MM-13/14 weak points,FX-01..11 proposals andG-01/02 gaps remain OPEN report content; no repair/runtime/test/save proof.
+
+The earlier1301 binding and709 projection were premature. Recovery now saves Active1301v2/ownedA1019 with only whole61640 bytes[395595677,395596154),2026-09-07T00:33:47.359Z,user/null/onepart,477rawbytes/96chars,SHA2567df216b3eda54437ede0427197a22dddef404d897705c7f7d634e55fee096835, plus whole61633 context-only61287chars, total61383 under an explicit <=15-minute whole-antecedent exception. Frozenprefix644432542/SHA6043d82aca024c8dba2a4139be077a8d591865891b47d299c76e0f688a2b39a0, exact raw/text/part provenance and both aggregates are saved. Immediate following61643 bytes[395597316,395597882),2026-09-07T00:33:51.619Z,assistant/null/onepart,566rawbytes/177chars,SHA25660d096f18e9505296a57d030c170f0166f9505067666e5f98e10aa32888a05f2 remains intact/unprocessed.
+
+Proved current first-source coverage710/1869;1159 refined remain. Original1877 universe retained/1167 original remain; eight subsequently excluded machine contexts do not create coverage. Four provisional report intent groups,14 MM findings,11 source-correct FX proposals and2 gaps remain historical. Six saved literal source lines/five contexts+whole61633 total66113rawbytes/63276nativechars; aggregateSHA25685d67276d2ff6ff02ffcb733997bc5fa4f9f78d526c0428a971d764998847ef7.1297 BLOCKS1301/1119/1130/1155; Active1126/1301 continue to block1119/1130/1155. All other1659file/1657ID corpus, origin, worker, candidate, continuation and frozen-window frontiers remain. No1301 execution, source/partition/month completion or current O/RMED/runtime change. CA-C-319 resolves the actual incomplete-binding failure after proof; original09:03:42 start, premature09:05 claim and separate09:25:49 recovery clock remain disclosed.
+
 
 ### Superseding sixteenth-packet result and frontier
 
@@ -245,10 +254,20 @@ Closure clock for CA-P-1269: first-clock timestamp unavailable from worker tool 
 Actual next Active CA-P-1290v1 is `15-CA-P-1290-TASK--harvest-the-next-whole-first-partition-filename-migration-continuation-packet.md`, immediate1126/sequence15/oneAI/<=15minutes and owns CA-A-1008. It begins intact whole59756, bytes[378261239,378261970),2026-09-05T21:31:01.362Z,assistant/null/onepart,731rawbytes/338nativechars,SHA2562e87b1ec284cdb77e295fd65e6c40fd5f5df3ff943b0ff6c09a17fe8d1c239ff. Context59666/59671/59722 is necessary; current packet could not include59756 because34925+338>35000. Combined canonical coverage593; refined1869minus593 leaves1276 and original1877including8latermachinecontextsminus593 leaves1284. Every other source/window/continuation/candidate frontier remains; no source/partition/month is complete. CA-P-1269 directly blocks CA-P-1290; Active1290 and Active1126 continue to block1119/1130/1155. Parent1126 remainsActive.
 
 
-### Definition of Done
-
-This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.
+### Retained preceding root recovery receipts
 
 Corrected root terminalreceipt:2026-10-04 08:33:37 UTC. Actual recovery started08:28:41UTC; complete whole currentrecord/threecontexts, exact89nextcanonicalbinding, sourceprefix/raw/text/parts/fingerprints/intactfrontier and fullstrict134Plans/86supportingCarriers passed. Original Agent elapsed remains unavailable, not asserted<=15. No current migration implemented.
 
 Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock unavailable, not reconstructed. No current historical operation executed; Git/Journal save follows separately.
+
+### Current recovered seventeenth-packet closure receipt
+
+Native/saved/current+next/Carrier/localDAG proof checkpoint:2026-10-04 09:35:32UTC, original elapsed31m50s and recovery9m43s at that checkpoint. Actual recovered full terminal receipt after final receipt persistence:2026-10-04 09:38:06UTC (13:38:06 +0400). Original09:03:42→09:38:06 elapsed34m24s,19m24s beyond the15-minute estimate; the09:05:00 premature claim is retained as history only. Separate recovery09:25:49→09:38:06 elapsed12m17s; it never resets the original start. No extra semantic recheck stage or next execution occurred. Root global strict/save/Git/Journal work is separate.
+
+This current receipt supersedes every older709-count or L61633-unprocessed paragraph:1297/A1015 proved one new whole canonical record; current710/1869 refined,1159remain; original1877/1167remain. Actual1301/A1019 is fully bound and unexecuted, with whole96-character question plus whole61287-character context and exact followingL61643. Four provisional groups remain historical; no adopted O/RMED/runtime change. C319 resolves the concrete source-binding omission, with original timing disclosed and nonblocking. Parent1126 staysActive and all corpus/window/continuation frontiers persist.
+
+## Details
+
+### Definition of Done
+
+This Plan is not Done if the bound packet's required output or verification evidence is missing; any encountered issue lacks its typed Concern and disposition; any remaining work lacks explicit child/remainder tasks and appropriate BLOCKS edges; governing sources or authority boundaries were bypassed; or the affected dependent task(s) were not reviewed and updated from the completed result. A blocked or timed-out packet is not Done.

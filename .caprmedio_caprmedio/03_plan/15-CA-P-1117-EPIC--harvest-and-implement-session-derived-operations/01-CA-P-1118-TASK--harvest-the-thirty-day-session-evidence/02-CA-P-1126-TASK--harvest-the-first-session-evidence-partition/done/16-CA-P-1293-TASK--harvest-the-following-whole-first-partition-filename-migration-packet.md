@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Atom/Content Role: Plan"
 version: 3
-updated_at: "2026-10-04 12:57:20 +0400"
+updated_at: "2026-10-04 13:28:14 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
@@ -1258,7 +1258,7 @@ OwnA1011,thisleaf/Done,parent1126rollup andactualnextboundedremainder with globa
 
 ### Corrected saved completion
 
-The earlier Agent Done placement was premature: A1011 lacked author and the mandatory whole59756 context; parent1126 roll-up was absent. Root rejected that completion and recovered this same leaf, not a new harvest. Root recovery began08:52:26UTC; all89 complete original messages were read by08:53:08. Complete raw/part/text/snapshot proof passed08:54:23. A1011v2 now retains89 source-specific dispositions, one338-character full context and five provisional overlapping groups. Actual first-source coverage709 leaves1160 refined/1168 original. Original Agent first clock remains unavailable and is not inferred from updated_at. CA-C-315 records the recovery.
+The earlier Agent Done placement was premature: A1011 lacked author and the mandatory whole59756 context; parent1126 roll-up was absent. Root rejected that completion and recovered this same leaf, not a new harvest. Root recovery began08:52:26UTC; all89 complete original messages were read by08:53:08. Complete raw/part/text/snapshot proof passed08:54:23. A1011v2 now retains89 source-specific dispositions, one338-character full context and five provisional overlapping groups. Actual first-source coverage709 leaves1160 refined/1168 original. Original Agent first clock was unavailable at recovery; its later reported08:39:21UTC start and20m07 original-to-recovered elapsed are now disclosed in CA-C-316, not inferred from updated_at. CA-C-315 records the recovery.
 
 Actual next P1297/A1015 is bound to whole61287-character61633 plus five complete1989-character contexts, with explicit oversized whole-record estimate and exact following61640. Binding adds zero semantic coverage. This leaf BLOCKS1297 and downstream1119/1130/1155; parent1126 remains Active. Actual root terminal receipt will be appended only after all saved/native/Carrier checks pass.
 
@@ -1267,4 +1267,4 @@ Actual next P1297/A1015 is bound to whole61287-character61633 plus five complete
 
 All89wholemessages and338contextcharacters read, complete source/time/raw/text/parts/dispositions saved inA1011. Verify savedbytes and exact nextfrontier, create actualnextchild+BLOCKS beforeDone, physicallysaveDone. Following61633 is61287characters and remains unprocessed; bind it as one whole record with an explicit estimate/checkmargin, not a silent fragment or claim of availability loss. Original first coverage620 leaves1249refined/1257original. Futurebinding is zerosemanticcoverage. Parents remainActiveuntilallrequiredinputsprocessed.
 
-Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock unavailable, not reconstructed. No current historical operation executed; Git/Journal save follows separately.
+Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock was unavailable when this receipt was first saved; its later reported08:39:21UTC start and20m07 total elapsed are disclosed in CA-C-316. No current historical operation executed; Git/Journal save follows separately.

@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 14
-updated_at: "2026-10-04 13:01:20 +0400"
+version: 15
+updated_at: "2026-10-04 13:46:35 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -41,6 +41,23 @@ This is a composite task, not a fifteen-minute executable leaf. Its initial chil
 Before marking this task Done, verify full-stage coverage and update the next dependent task(s) from actual results. A blocked child remains unfinished, has a C/Problem, and does not authorize bypassing this parent's gate.
 
 ## Details
+
+### Current harvest checkpoint — supersedes earlier totals
+
+75 substantive packets retain4179 unique PRIMARY dispositions and645 worker dispositions,4824 total. Original-main first710/second624; continuation second383/third1047/final1284, plus72README/59TOOL_R finalPRIMARY. PRIMARYbaseline6588 leaves2409 unharvested; workerbaseline6423 leaves5778. FinalPRIMARY1415/1415 is complete; finalworkers645/4051,3406 remain. Every other source/window/identity frontier is retained. Metadata, machine context and future bindings add zero semantic coverage.
+
+Newly completed leaves1294/A1012(35whole,5groups),1297/A1015(1whole,4groups),1298/A1016(68whole,6groups),1299/A1017(100workerwhole,5groups),1300/A1018(27whole,5groups),1302/A1020(95workerwhole,6groups) add326 dispositions and31 provisional overlapping refinements; historical overlapping groups361 are not361 adopted or deduplicated Operations. Reports preserve complete original parts, scoped human decisions, withdrawn QA, candidate-versus-original identity, incomplete mechanical coverage and report-versus-current-proof boundaries. No historical command or proposed fix is executed by this harvest.
+
+Actual next bound leaves:1301/A1019(first1whole96-character question plus whole61287-character antecedent,61383 total under explicit whole-antecedent exception; following61643 intact);1304/A1022(second21whole/24803+10054 contexts=34857, following9021 intact);1303/A1021(third31whole/21576+7164=28740, following55785 intact);1306/A1024(final98workerwhole/34602+377=34979, following591-character record intact). These are bound and unexecuted at this checkpoint. First1159 refined/1167 original-main remain; second376; third128; final3406 workers. Parents1126–1129/1118 remain Active;1119/1130/1155 remain blocked.
+
+Actual timing and repair receipts remain separate. P1294 first08:58:43→final09:11:51UTC=13m08. P1299 root09:03:09→saved/native/Carrier receipt09:10:25=7m16. P1300 root09:31:10→actual terminal receipt2026-10-04 09:38:26 UTC remains within15minutes. P1302 first09:30:25→terminal09:43:13=12m48. P1297 original09:03:42→recovered full terminal09:38:06=34m24, separate recovery09:25:49→09:38:06=12m17; C319 preserves the original overrun and corrected complete remainder binding. P1298 original09:12:48→last observed09:33:29=20m41, separate recovery09:18:43→09:33:29=14m46; saved09:32:49 receipt remains earlier proof. C317's context-key defect is resolved and C318 retains the overrun. C316 discloses P1293's later-reported original08:39:21→root08:59:28=20m07; earlier unavailable-clock receipts are qualified, not reset. C320 retains rejected P1300 transports; C308 includes P1302's recovered whole middle. Concern statuses/placement use lowercase resolved where resolved.
+
+Current saved-source proofs pass:1297 six literal JSONL originals/source prefix/context and exact next full question+antecedent;1298 full68/16context and exact31/19context next;1294 full35 originals and27/9context successor;1300 full27/9context and21/32context next;1299 full100/1context and95next;1302 full95/18snapshots and98next/19snapshots/two contexts. Shared strict checks pass143Plans/102supporting Carriers before this checkpoint's write. They prove Carrier/provenance consistency, not another semantic recheck stage or full monthly completion.
+
+Prior actual checkpoint69 commitaf20e7c0ab5c3d57cedce0e1d9d9a03caa98bda1 matched14 Git/saved/sealed recovered Carrier states; owned recorded states287 before this save. Shared Journal Git save remains pending because of unrelated pre-existing events. This round's authorized mechanical Git and genuine recovered-state Journal proof follow separately; no save-Tool receipt. No O/RMED authoring, Engine implementation, settings/service changes or complete Docker verification has executed under this Epic.
+
+All lower checkpoints are historical and superseded.
+
 
 Current superseding checkpoint:69 substantive packets.4048 unique PRIMARY dispositions plus450worker dispositions =4498total. Original-main first709/second624; continuation second321/third979/final1284, plus72README/59TOOL_RfinalPRIMARY. PRIMARYbaseline6588 leaves2540unharvested; workerbaseline6423 leaves5973. FinalPRIMARY1415/1415complete;finalworkers450/4051,3601remain. Futurebinding/metadata/index contribute zero semantic coverage.
 

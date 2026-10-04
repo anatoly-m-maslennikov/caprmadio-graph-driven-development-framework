@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following second-partition continuation evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 12:14:45 +0400"
+version: 2
+updated_at: "2026-10-04 13:10:58 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1300
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -474,6 +475,20 @@ After CA-P-1291 is Done, harvest exactly this frozen source packet into CA-A-101
 ```
 
 Read live Goal/Principles and current P1117/P1127/P1291/A1009 before execution. The exact selection is bounded to <=100 messages and <=35000 accounted characters. P1294 blocks P1119/P1130/P1155; parent remains Active. No execution begins from this creation alone.
+
+### Completed continuation packet and actual next
+
+A1012v1 at `.caprmedio_caprmedio/02_analysis/CA-A-1012-ANALYSIS_RPRT--harvest-the-following-second-partition-continuation-packet.md` preserves35whole originalnative messages/35parts/33485characters/47487rawbytes,max6175,29assistant/6user, positions322–356/sparseL6484–7418,zeroaddedcontexts. AggregateSHA256ace4688a2fceb701c991abb1b313d2bb05ff6af17f585e33d9388ef9774d836c. Full native text/parts/fingerprints and35individualsource-specificsubstantivedispositions saved; fourinertgoalwrappers/twohumanrecords/oneOActor-MetaModelchain/fiveprovisionalgroups retain currentproof/adoptionlimits. ReportedR1496/D449/policymigrations/archives/validation/timestamps/Concerns/legacyIDJournalbatches remainhistorical. No sourceO/RMED/code/settings/environment/service/Git/sharedJournal/FPF mutation/currentConcern.
+
+Actual next P1300/A1018 sequence17 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/03-CA-P-1127-TASK--harvest-the-second-session-evidence-partition/17-CA-P-1300-TASK--harvest-the-next-second-partition-actor-and-authority-packet.md` binds27 whole messages,positions357–383,23assistant/4user,43055rawbytes/32196characters plusninefullpriorcontexts2558,total34754<=35000. SparseL7424–8231/[62316920,68431149),2026-09-17T11:59:26.091Z–2026-09-17T12:56:18.820Z; aggregateSHA2563d241316e5e5166c15013bba91899c140d50fe4df2bb15ce94408a7e621b3f17. First L7424/user/null/onepart/6643bytes/6175chars/rawSHA25694b17bbe827e09d024283b00896a06da2289ecd91ca19ce31e984af5bd3d7831; lastL8231/assistant/null/onepart/728bytes/341chars/rawSHA2563e51787a2b1b2425ddd32becb8d758e6d4966ea4144502987166a412f163b41f. FollowingL8287/[68599506,68600193)/2026-09-17T13:01:44.325Z/assistant/null/onepart/687bytes/298chars/rawSHA256440b831c67a651e5aa7ee1abb11bc8f0ea200958a74ae577e4af167fa9f632e9/textSHA2564467bd64fc92f3957c9b6b3083dacbf280db8a0b6865e947cc67d0b1a6c9a567 remainswhole/unprocessed;34754+298 exceeds35000. Nine full contexts preserve unadmittedType concern, directO/Actor/MetaModel decisions, registry/policy permission reports, seven-event unappendedbatch, Atom-versus-Actor distinction, fourClaim split and latest no-duplicate/currentlookup. Binding contributeszero coverage; future27completionwouldleave376, actualcurrentremaining403. No next execution.
+
+Priorfollowingcandidate7419isnotcanonicalmessage: L7419–7423 aretoken_usage_record/eventtoken_count/task_complete/task_started/turn_context,exactrawmetadatafingerprintsinA1012,notmissinghumanintent. ActualnextstartsL7424. Combined321+35=356/759;403continuationrecordsremain;all624originalmessages andeveryothersource/worker/continuation/nonsecond/environment/frozenwindowfrontierremaininA1012/P1300/priorP1127. No parent/sourcefile/monthcompletion.
+
+P1291v4Done/A1009v2 isdirectprerequisite;1294directlyBLOCKS1300 andretains1119/1130/1155. Active1300 andActive1127retaindirectgates;1127/1118/allcompositesremainActive. Threecurrentv1dependentobjectives/readinessreviewed:fullharvest/currentauthority/exactdestinationconditionsremainunchanged. CurrentdirectGoalv13/Principles/Epic1117v1/90%/Plan-AnalysisCarrier authoritywere reopenedunchanged. C314prior17m58clock/sourcecoverage preserved, notreset. RootfullstrictYAML/fullEpicDAG/mechanicalsave remainsseparate; holdafterthisleaf.
+
+### Actual clock and local saved check
+
+First actual clock2026-10-04 08:58:43UTC. Final native/saved and four-owned-Carrier/localdependency checks passed at2026-10-04 09:10:33UTC,11m50s afterstart, after35fulltexts/parts/dispositions/Done-parent17-next binding persisted. Terminal receipt clock2026-10-04 09:10:58UTC,12m15s elapsed from the unchanged start,2m45s margin against15minutes including persistence/contextrecovery/checks. Native check ran once:35records/raw-textSHA256/35originalparts/fullsavedtexts/metadata/window/counts/aggregate/individualdispositions/fourinertwrappers/twohumanrecords/onechain/fivegroups; actualnext27/ninefullcontexts/boundaries/fivefingerprintednonmessagegaprecords checked. FourmandatoryCarriers/fields/headings/EOF/whitespace/unchangedoriginalgoverningbody-binding/Doneplacement/parent17Active/uniqueIDs/immediatesiblingsequences/seven-nodeBLOCKS+completionDAG passed. Initialsequenceguard incorrectly counted anestedchildas sibling; correctedimmediate-parent Carrier checks passed without repeatednative/semanticwork. Onlyreceipt persistence/EOF confirmation follows; actualfinalhandoffclock remains explicit. No rootwait,clockreset,historicalimplementationrun,nextexecution or sourcecoveragewithdrawal. RootfullstrictsavedYAML/fullEpicDAG/save remains separate/unclaimed.
 
 ## Details
 

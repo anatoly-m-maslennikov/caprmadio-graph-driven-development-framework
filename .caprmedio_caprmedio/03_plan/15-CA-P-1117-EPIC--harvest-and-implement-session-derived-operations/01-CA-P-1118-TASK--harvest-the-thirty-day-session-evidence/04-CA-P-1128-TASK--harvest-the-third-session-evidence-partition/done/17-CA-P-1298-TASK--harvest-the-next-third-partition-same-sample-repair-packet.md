@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Third-partition same-sample evaluator and repair evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 12:51:03 +0400"
+version: 2
+updated_at: "2026-10-04 09:29:29 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1303
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1417,6 +1418,22 @@ Every A905 1659-file/1657-ID row remains: other1657 files/15otherPRIMARY/1642wor
 Seekexactboundintervals andverifyraw/textSHA256/bytes/response_item-messagekind/timestamp/role/channel/nativeparts/characters/window/aggregate/16contexts/followingboundary. After savingA1016 parseactualsavedJSONandcomparefullnativeparts/text/metadata/fingerprints/68uniquesubstantivedispositions; do notaccept errorstringsasJSON orhashes. VerifyregisteredAnalysisheadings/mandatoryfields/oneEOFnewline/no trailingwhitespace, ownedPlan/immediateparent/uniqueIDs/siblingsequence/Doneplacement/localBLOCKS+completionacyclicity anddirectgates. Do notrescanfullcorpus orrerunhistoricalevaluatorimplementation/newsemanticreview. Recordactualfirst/terminalclocks onceincludingcontextrecovery/persistence/checkmargin, noreset. Reassess1119/1130/1155readiness; allremainfullharvest/currentauthority/exactdestinationgated andparentActive.
 
 Actualnewblocker/failure→Problem, unresolvedchoice→Question,incompatibleliveauthority→Conflict at narrowestScopeUnit; askrootConcernID. HistoricalreportsarenotautomaticcurrentConcerns. Below90%reopenGoal/Principles/bestsafeauthorizedchoice+Question; actualpermission/evidence/runtime/authorityblocker postponesaffectedwork. If limit/capacity cannotclose, preserveActive/exactwhole-or-explicit-fragmentfrontier/boundedrealremainder, neverfalsecomplete.
+
+### Recovered result, elapsed disposition and verification
+
+A1016v2 saves68 whole records/68native parts/30607characters/64671rawbytes,57assistant/11user, plus16full prior contexts/4331characters; total34938. All68 individual fingerprint-bound substantive dispositions and16context dispositions retain9 actual human messages versus2machinegoalwrappers, six human chains/six provisional candidate groups and exact report/approval/supersession limits. Combined selected-source coverage1047/1175;128remain. No current O/RMED, code, service, environment, skill/FPF, Git or Journal execution is claimed.
+
+Actual next ActiveP1303/A1021 at `18-CA-P-1303-TASK--harvest-the-next-third-partition-checker-separation-packet.md`, immediate1128/sequence18, binds31 whole records positions1048–1078/21576nativechars/35740rawbytes/29assistant/2user,19wholecontexts7164chars,total28740. SparseL53619–55779/[807739898,819750448),2026-09-27T09:20:35.688Z–2026-09-27T10:46:51.248Z,rawaggregate920d1f615f6e91ecdbc75c2e707135f834c9848fa066de47e62ca6a22c245b96. Following intactL55785/[819757895,819764999)/2026-09-27T10:46:51.941Z/user/null/6638chars/rawSHA256e55b6fe2b3d7190608db766eedf4af665bc8566c97d557c41fdbc599090f43cf/textSHA256e7f98950cf3bae708e7ea16ad8b0633d7fee3aa9f1dd026e9c794da6bb648f23 remains unprocessed;28740+6638>35000. Future31 completion would leave97;128remain now. Binding contributes zero coverage and next was not executed.
+
+Original worker first2026-10-04 09:12:48 UTC and separate recovery first2026-10-04 09:18:43 UTC are preserved without reset. Original attempt did not complete persistence/terminal Carrier proof by its09:27:48 deadline; C318 records that actual overrun and distinct bounded recovery rather than claiming an original <=15-minute completion. C317's context-key extraction issue is resolved by saved/native proof. Source-specific harvest/native proof passed at09:27:20 UTC: frozen1095406718-byte prefix SHA256d3b839e5620dfb6e6eee41b272d22b553480a8c58782f1ef72d343eddb5fe5fc;68 raw/text/parts/time/role/channel/byte identities and aggregate941efcafa3ad91e896968517094bcea2537a6c23bd1d50ba3e296e9d1df70868; all16saved literal contexts/dispositions; actual31/19/fullfollowing binding. Final saved Carrier/local-DAG terminal receipt follows this persistence.
+
+P1298 directlyBLOCKS1303 and1119/1130/1155; P1303 andActive1128 retainallthree directgates. Thethreev1Active objectives were fully reread and remain fullharvest/currentauthority/exactdestination gated. All1659source/1657ID frontiers,15otherPRIMARY/1642worker origins, structurecontinuation/repository-parent-worktree support, both mainpaths/nonthird/limitedoverlap/nineexcludedenvironmentcarriers/sparsegaps/finalthirdL59916/A917zero-monthly-canonical/broadernonblockingC294identity are retained exactly above and in A1016/P1303. Parent1128/1118 remainsActive; no stage unlock. CurrentGoalv13,14Principles/P034 and six Plan/headings sources matched frozen revisions. Rootstrictsharedchecker/save/Git remains separate; hold afterthisleaf.
+
+### Terminal native/saved Carrier proof
+
+Actual terminal proof clock2026-10-04 09:30:41UTC follows closing persistence09:29:29UTC. Recovery09:18:43→09:30:41 elapsed11minutes58seconds<=15; original09:12:48→09:30:41 elapsed17minutes53seconds>15, owned by resolvedC318. Neither clock was reset. Read-only strict YAML in theexisting Docker runtime passed exact registered headings/mandatory fields/EOF for A1016/P1298/Active1128/Active1303 plusC317/C318, physicalDone/immediateparent/uniqueownedIDs/directgates andlocalcompletion/BLOCKSDAG. Exactindex/native/saved68whole+16contexts andactual31whole+19fullantecedents/followingL55785 integrity passed;09:27:20 fullfrozen1095406718-byte prefixhash proof remains. No historical evaluator implementation/semanticrerun/wholemonthlycoverage or next execution is claimed. Rootfullsharedchecker/save/Git is separate.
+
+Final persisted receipt validation and actual terminal clock2026-10-04 09:32:49UTC: original09:12:48→09:32:49 elapsed20minutes01seconds>15; recovery09:18:43→09:32:49 elapsed14minutes06seconds<=15. The09:30:41 native/saved/Carrier result above is an earlier verification checkpoint. The final saved receipt was reopened and its clocks/Done+Active placement/headings/EOF/disposition counts passed; no next execution. A rejected oversized patch serialization made no edits; bounded hunks persisted the receipt.
 
 ## Details
 
