@@ -28,7 +28,8 @@ cache-dir = ".caprmedio_tmp/cache/uv"
 [dependency-groups]
 validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
 validate-atoms-dev = ["ruff==0.16.8", "mypy==2.3.1", "types-PyYAML==6.0.12.20260906"]
-rmed-workflow-mcp = ["mcp==2.3.0", "PyYAML==6.0.3"]
+rmed-workflow-mcp = ["mcp==2.3.0", "PyYAML==6.0.3", "jsonschema>=4.23,<5"]
+workflow-orchestrator = ["dbos==2.31.1", "pydantic==2.13.5", "PyYAML==6.0.3"]
 
 [tool.caprmedio.framework_engine_software.components.validate_atoms]
 authority_atoms = ["CA-R-1622", "CA-R-1623", "CA-M-316", "CA-M-286", "CA-D-491", "CA-D-492", "CA-D-493"]

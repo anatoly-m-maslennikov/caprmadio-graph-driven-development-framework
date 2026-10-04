@@ -15,7 +15,7 @@ subjects:
     - "Framework Instance Settings"
     - "Project Settings"
 version: 11
-updated_at: "2026-09-28 06:30:40 +0400"
+updated_at: "2026-10-04 16:46:08 +0000"
 relations: {}
 atom_id: "CA-O-008"
 content_role: "Operations"
@@ -27,7 +27,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Apply approved source corrections
+# Summary
+
+Apply approved source corrections
+
+## Operation
 
 Apply Approved Source Corrections **means** the reusable Action that applies **only** the exact upstream corrections authorized for the current proposal, conflict, **and** source frontier.
 
@@ -38,3 +42,5 @@ Apply Approved Source Corrections **means** the reusable Action that applies **o
 5. return changed sources for renewed selection, conflict assessment, Principle alignment, **and** affected coverage checks. do **not** report completion **until** required checks confirm no remaining conflict **or** coverage gap **in** the affected authority.
 
 this Action **must not** edit projected Claims as a conflict fix, infer additional corrections, create a duplicate approval Atom, **or** claim completion **after** a failed correction. retries **and** recovery require their applicable accepted authority **and** bounds; this Action does **not** authorize automatic rollback **or** unbounded repetition.
+
+## Details

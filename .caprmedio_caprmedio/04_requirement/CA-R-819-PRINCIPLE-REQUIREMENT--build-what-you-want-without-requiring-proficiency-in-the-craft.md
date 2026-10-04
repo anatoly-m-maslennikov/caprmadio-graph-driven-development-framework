@@ -1,8 +1,8 @@
 ---
 cce_version: "cce_1"
 cce_form: "obligation"
-version: 12
-updated_at: "2026-09-15 21:31:49 +0000"
+version: 13
+updated_at: "2026-10-04 00:53:10 +0400"
 relations:
   child_of:
     - "ANATOLY-MASLENNIKOV-DEFINES_GOAL_FOR-caprmedio--create-and-evolve-a-working-caprmedio-framework"
@@ -13,6 +13,6 @@ subjects:
     - "Operator"
     - "CAPRMEDIO Framework Instance"
 ---
-# Build what you want without requiring proficiency in the craft
+# Do not require human participants to master or personally perform specialist work
 
-the CAPRMEDIO Framework Instance **must** enable the Operator **to** create, deliver, run, **and** maintain **every** feasible Project **without** requiring **any** of the Operator's human participants **to** acquire **or** personally perform that Project's specialist craft work.
+the CAPRMEDIO Framework Instance **must not** require **any** of the Operator's human participants **to** acquire specialist craft proficiency **or** personally perform specialist craft work **to** create, deliver, run, **or** maintain **any** feasible Project.

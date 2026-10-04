@@ -1,22 +1,34 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - artifact-model
+  governs: "artifact-model"
   depends_on:
-    continuant:
-      - authority
-atom_id: CA-R-829
-cce_version: cce_1
-cce_form: relation_assertion
-version: 11
-updated_at: 2026-09-06 01:45:12 +0400
+    - "authority"
+version: 19
+updated_at: "2026-10-02 20:52:00 +0400"
 relations:
   child_of:
     - CA-R-796
+atom_id: "CA-R-829"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-829-CORE_META_MODEL-CORE-REQUIREMENT--keep-same-tier-requirements-as-authority-peers.md
 ---
-# Keep same-tier Requirements as authority peers
+# Summary
 
-**every** active Current-scope Requirement Atom IS AN authority peer of **every** other active Current-scope Requirement Atom **in** the same Local Tier.
+Keep same-tier Requirements as authority peers
+
+## Scope
+
+active Current-scope Requirement Atoms in the same Local Tier.
+
+## Claim
+
+**every** active Current-scope Requirement Atom is an authority peer of **every** other active Current-scope Requirement Atom **in** the same Local Tier.
+
+## Details

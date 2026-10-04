@@ -18,7 +18,7 @@ subjects:
     - "Workflow Run"
     - "Step Run"
 version: 3
-updated_at: "2026-09-24 01:39:33 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-024
@@ -30,7 +30,7 @@ global_tier: 11
 
 Admit an implementation repair retry
 
-## Claim
+## Operation
 
 Implementation Retry Control Step **means** the Workflow node invoking **=1** Action, CA-O-024, **in** Integrated context under CA-R-1527.
 
@@ -39,3 +39,5 @@ Implementation Retry Control Step **means** the Workflow node invoking **=1** Ac
 - retain exact Action/Step Revisions, source bindings, actual effects, **and** returned results. pass the Action's result **to** the Workflow **without** independently copying its behavior.
 
 map the Action's admitted-retry decision **to** `retry_permitted` **and** **every** exhausted, prohibited, unresolved, **or** approval-blocked decision **to** `retry_blocked`. preserve CA-O-024 accounting **without** another retry counter.
+
+## Details

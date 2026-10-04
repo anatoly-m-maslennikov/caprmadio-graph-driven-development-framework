@@ -1,38 +1,50 @@
 ---
-cce_version: "cce_1"
-cce_form: "method"
+atom_id: CA-M-285
+content_role: Method
+current_scope_unit: PROGRAMMATIC
+claim_target_scope_unit: PROGRAMMATIC
+local_tier: Core
+global_tier: 6
+status: Active
+author: Anatoly Maslennikov
+version: 12
+updated_at: "2026-10-04 03:52:53 +0400"
 subjects:
   governs: "software-evaluation-selection"
   depends_on:
     - "programmatic software"
-version: 10
-updated_at: "2026-09-24 17:18:07 +0000"
+    - "Actor"
+    - "Spec"
+    - "Evaluation"
+    - "Implementation"
 relations:
   derived_from:
-    - "CA-A-053"
+    - CA-A-053
   child_of:
-    - "CA-M-110"
-llm_session_ids:
-  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+    - CA-M-110
 ---
-# Select software Evaluation techniques by failure mode
+# Summary
+
+Select software Evaluation techniques by failure mode
+
+## Scope
+
+selection of behavioral software Evaluation techniques for PROGRAMMATIC components.
 
 ## Claim
 
-select PROGRAMMATIC behavioral Evaluations with end-to-end tests as the first acceptance boundary, a reviewed golden corpus as their repeatable evidence base, **and** targeted complementary tests for discovered issues.
+**to** select behavioral software Evaluation techniques for a PROGRAMMATIC component, the Actor selecting the portfolio **must** take the applicable Spec, declared failure predicates, **and** active Evaluation authority as inputs; identify candidate checks for **every** predicate; evaluate candidate portfolios against the applicable Core Evaluation policy **and** each selected technique's own acceptance **and** disposition rules; select one admitted portfolio; repeat **until** all predicates are covered **or** no candidate remains; produce the selected Evaluation identities **and** selection rationale; **and** return unresolved predicates for authority **or** design clarification **when** no portfolio is admitted.
 
-- prepare end-to-end tests **before** implementing the behavior they check. exercise the real public command, interface, **or** installed component boundary; a small explicit prerequisite needed **to** run the test does **not** justify implementing the feature first.
-- use a golden corpus of mock inputs, fixtures, controlled external responses, **and** reviewed expected outputs. include valid, invalid, boundary, **and** representative combined cases. mock admitted external dependencies **or** input data, **not** the implementation being checked.
-- derive expected outputs **and** observable effects from governing RED authority. do **not** accept current implementation output as its own oracle **or** automatically refresh a golden baseline after a failure.
-- use unit, integration, property-based, stateful, mutation, **or** other focused tests **when** they reproduce, isolate, **or** prevent recurrence of an observed issue. preserve the failing case **and** verify the fix with the focused regression **and** relevant end-to-end corpus. additional tests complement, **not** replace, the end-to-end boundary; retain already-required checks.
-- select the smallest complementary test set that covers the declared failure modes. keep fast syntax, format, lint, type, **and** focused behavioral checks **in** the changed-code gate; expensive campaigns stay outside synchronous Hooks **unless** an admitted measured bound permits them.
-- keep expected results, actual results, failed assertions, diagnosis, fix, relevant inputs, source frontier, test configuration, **and** replay command traceable. these observations are evidence for a separately invoked Method-learning Workflow, **not** new M authority created by the implementation Workflow.
-- reject acceptance **when** required coverage is missing, a result is stale **or** unreplayable, **or** a focused passing test masks a failed required end-to-end check.
+## Details
+
+1. enumerate the failure predicates established by applicable authority **and** bind each predicate **to** the observable behavior that can distinguish acceptance from rejection.
+2. identify applicable Evaluation Atoms across test scopes, purposes, boundary-realism choices, execution environments, **and** release stages **without** treating those labels as a universal ranking.
+3. construct candidate portfolios from those Evaluation Atoms. include a specialized technique **only when** its Evaluation applicability **and** evidence preconditions are satisfied.
+4. evaluate **every** candidate portfolio under `CA-E-389-PROGRAMMATIC-CORE-EVAL_APPROACH--combine-complementary-software-behavior-evidence` **and** the acceptance **and** disposition rules of **every** selected Evaluation Atom. apply `CA-E-536-PROGRAMMATIC-CORE-EVAL_APPROACH--admit-safe-canary-evaluation` **when** a candidate includes canary evidence.
+5. stop with one traceable admitted portfolio **when** all predicates are covered. **when** no candidate passes, return the uncovered predicates, failed policy conditions, **and** missing evidence rather than inventing a test-count ratio **or** silently accepting incomplete coverage.
 
 ## Sources
 
-- [Hypothesis documentation](https://hypothesis.readthedocs.io/en/latest/)
-- [Mutmut documentation](https://mutmut.readthedocs.io/en/latest/)
-- [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12)
-- [Syrupy snapshot testing](https://github.com/syrupy-project/syrupy)
-- [CA-A-053 — Reconcile shared PROGRAMMATIC policy decisions](../02_analysis/CA-A-053-PROGRAMMATIC-ANALYSIS_RPRT--reconcile-shared-programmatic-policy-decisions.md)
+- [CA-E-389-PROGRAMMATIC-CORE-EVAL_APPROACH--combine-complementary-software-behavior-evidence](../06_evaluation/CA-E-389-PROGRAMMATIC-CORE-EVAL_APPROACH--combine-complementary-software-behavior-evidence.md)
+- [CA-E-536-PROGRAMMATIC-CORE-EVAL_APPROACH--admit-safe-canary-evaluation](../06_evaluation/CA-E-536-PROGRAMMATIC-CORE-EVAL_APPROACH--admit-safe-canary-evaluation.md)
+- [CA-A-053-PROGRAMMATIC-ANALYSIS_RPRT--reconcile-shared-programmatic-policy-decisions](../02_analysis/CA-A-053-PROGRAMMATIC-ANALYSIS_RPRT--reconcile-shared-programmatic-policy-decisions.md)

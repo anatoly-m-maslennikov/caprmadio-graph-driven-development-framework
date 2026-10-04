@@ -1,25 +1,31 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - Previous Unit
+  governs: "Previous Unit"
   depends_on:
-    continuant:
-      - scope-topology
-cce_version: cce_1
-cce_form: definition
-version: 6
-updated_at: 2026-09-06 01:45:12 +0400
-relations:
-  child_of:
-    - CAPRMEDIO-META-REQU-712--define-ordered-unit-structural-kind
-    - CAPRMEDIO-META-REQU-715-CORE_META_MODEL-REQUIREMENT--define-local-order
-  replacement_of: [CA-R-842]
+    - "scope-topology"
+version: 13
+updated_at: "2026-10-02 21:01:00 +0400"
+relations: {}
+atom_id: "CA-R-913"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-913-CORE_META_MODEL-CORE-REQUIREMENT--define-previous-unit.md
 ---
-# Define Previous Unit
+# Summary
+Define Previous Unit
 
-## CCE Claim
+## Scope
+
+Ordered peer Scope Units.
+
+## Claim
 
 Previous Unit **means** the ordered peer Scope Unit with the nearest lower Local Order.
+
+## Details

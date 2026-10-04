@@ -1,0 +1,5 @@
+services:
+  agent:
+    environment:
+      CAPRMEDIO_AGENT_MODE: mock
+    networks: [runtime]

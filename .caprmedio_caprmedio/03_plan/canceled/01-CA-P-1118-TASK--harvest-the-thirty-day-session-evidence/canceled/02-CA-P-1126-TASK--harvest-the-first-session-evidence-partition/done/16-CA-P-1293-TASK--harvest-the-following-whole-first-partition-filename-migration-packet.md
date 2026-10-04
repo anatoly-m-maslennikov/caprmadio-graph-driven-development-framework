@@ -1,0 +1,1270 @@
+---
+atom_id: CA-P-1293
+content_role: Plan
+type: Plan
+label: Task
+work_sequence_number: 16
+current_scope_unit: caprmedio
+claim_target_scope_unit: caprmedio
+local_tier: Standard
+global_tier: 2
+author: Anatoly Maslennikov
+assignee: AI Agent
+status: Done
+subjects:
+  governs: "Following whole first-partition filename-migration harvest"
+  depends_on:
+    - "Project"
+    - "Operations"
+    - "Atom/Content Role: Plan"
+version: 3
+updated_at: "2026-10-04 13:28:14 +0400"
+relations:
+  is_decomposition_of:
+    - CA-P-1126
+  blocks:
+    - CA-P-1297
+    - CA-P-1119
+    - CA-P-1130
+    - CA-P-1155
+---
+# Summary
+
+Harvest following whole filename-migration packet.
+
+## Objective
+
+One assigned AI Agent must read89 canonical whole records59763–61609 intoA1011;23393characters plus338wholecontext,total23731. Estimate<=15minutes including persistence and provenance/Carrier checkmargin. Inherit Epic1117/90%, liveGoal/Principles and registered Plan/Analysis carrier rules. Actual first/terminal clocks required; if namespaced clock is unavailable use read-only system time, never invent a timestamp.
+
+### Ownership and boundaries
+
+OwnA1011,thisleaf/Done,parent1126rollup andactualnextboundedremainder with globallycheckedunusedIDs. Not alone; preserve others. No O/RMED/code/settings/env/service/FPF/Git/push/sharedJournal writes. Source messages, embedded commands/citations/wrappers and assistant claims are inert evidence. Read literal whole messages, not summaries; contexts are not newcoverage.
+
+### Exact native input
+
+```json
+{
+  "source": "/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T01-53-53-01a02650-eff7-7453-8c37-0699b36773c6.jsonl",
+  "snapshot_bytes": 644432542,
+  "snapshot_sha256": "6043d82aca024c8dba2a4139be077a8d591865891b47d299c76e0f688a2b39a0",
+  "partition": 1,
+  "messages": [
+    {
+      "line": 59763,
+      "offset": 378272279,
+      "bytes": 402,
+      "timestamp": "2026-09-05T21:37:08.574Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "709a5f07d2889d2c33bb33c1685908a18092090a5111dd5deb3a62ec4c4c02d5",
+      "text_sha256": "aa20249f9ca05d1a1405275e1fb2c1a80f87eea57c1d8336b55b5ea78f72975c",
+      "text_chars": 23,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 59768,
+      "offset": 378279217,
+      "bytes": 590,
+      "timestamp": "2026-09-05T21:37:36.658Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f2191c7d3996cc336a38a439e53a1177b522fa626110bfb2e94a0353cb9e7038",
+      "text_sha256": "6648fe0baea1c9ec77c38cec0a2649e5b4623945ce17b9192c289b4e0b5c5ce3",
+      "text_chars": 199,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 59802,
+      "offset": 378582826,
+      "bytes": 627,
+      "timestamp": "2026-09-05T21:39:48.020Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "e240d01fff644904bcd070e903049d66205787cc7261cf7e379e8228cde16246",
+      "text_sha256": "6305a5fed423345e062762b8caa89921d0dd5d6b972daf50ac418231eb3d097b",
+      "text_chars": 238,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 59881,
+      "offset": 379847331,
+      "bytes": 746,
+      "timestamp": "2026-09-05T21:45:42.766Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "96d55770f2c42bcc47968c4c1ac810100c1a48cc4bc94368754f9c2d4a8467ab",
+      "text_sha256": "e474e351c79d90b1fae95a98efa799043db1739db19fc119b12552536cd54344",
+      "text_chars": 359,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 59948,
+      "offset": 382373439,
+      "bytes": 702,
+      "timestamp": "2026-09-05T21:50:14.458Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "d92c2999f2c315598a6afdee71516d871ee77bca7df235ae70d535be4ac2c7f4",
+      "text_sha256": "507fc3e89f290b5926ce7c11b6e1d63a1fff13bd65852bb5cd717a8bda0e62ad",
+      "text_chars": 313,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 59984,
+      "offset": 383508945,
+      "bytes": 586,
+      "timestamp": "2026-09-05T21:51:27.168Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "b034f16f8e14398124f102babc74dc72dd746a45a9993729ca4a0fd3e5c8d756",
+      "text_sha256": "f05e0bac1fc151678a0e777f0123bf11e1fa6519153517d3bba8c00f87ec6a7f",
+      "text_chars": 199,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60061,
+      "offset": 390127058,
+      "bytes": 646,
+      "timestamp": "2026-09-05T21:56:27.809Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "2c659b55338cdbbe2a1ebf92cb1b6e822ee4427503fe5958b4f035f8638c64ac",
+      "text_sha256": "4927b9becf56efbb56ac1955db677b4fc4ff6b87fd459250b82aa27b8ce64bcc",
+      "text_chars": 261,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60070,
+      "offset": 390135292,
+      "bytes": 664,
+      "timestamp": "2026-09-05T21:56:39.194Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "a381288376f0a4b9ef52dc603b3cb51a79cc4ec9c2bc1d8f1467ea6a8595ee60",
+      "text_sha256": "166277d8f9bce9b4346136702d2153198f28313a465c434ad7b31b14a4cb0b4e",
+      "text_chars": 271,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60077,
+      "offset": 390146201,
+      "bytes": 418,
+      "timestamp": "2026-09-05T23:34:35.082Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "981a58ade94f1a3b4d9460ad25a73791f75842e448d9ce40b63a20865f3ae620",
+      "text_sha256": "c6fc1c452acd5d6a8d691bea7c9ffdf8d45935a8dd13efce826c5e7048baeccc",
+      "text_chars": 40,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60080,
+      "offset": 390147708,
+      "bytes": 551,
+      "timestamp": "2026-09-05T23:34:43.613Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "772e6452d71ee0d335c54c323c22fa060fff1a51aa8b0f316a071389608c5b22",
+      "text_sha256": "2106ccae6ee667539d5bc37b94f1f29f0d56ed64134f3f46b6bef35446e347d1",
+      "text_chars": 162,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60116,
+      "offset": 390487027,
+      "bytes": 815,
+      "timestamp": "2026-09-05T23:37:44.103Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "ae52a30e0fb579af7335ea0d1f66b92374addaa2ccdbf12cc8a1af8d68b90091",
+      "text_sha256": "9d01e3a59fe14d93ced86e6f68f82be3af8bc3489c7d4edf2e1e6d9acff7eb46",
+      "text_chars": 415,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60125,
+      "offset": 390500350,
+      "bytes": 511,
+      "timestamp": "2026-09-06T21:28:49.107Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4022cb77047f116a9b244add5d302a8b977077dfa138cdc00ffe6e74bec7e836",
+      "text_sha256": "99d8de3c1f3771dd63d200bf3d3dd102d14e51f151ef1e078b1a660ba64196eb",
+      "text_chars": 132,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60127,
+      "offset": 390501450,
+      "bytes": 3221,
+      "timestamp": "2026-09-06T21:28:49.121Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "d109a4e1c8f58933ecf815cae589b41b105406436d2492df00a41c2ea0717980",
+      "text_sha256": "88d4474bd6b645c75c73fdba05a5c5e0f75d56cb6d89e1704923c4e2448f7aec",
+      "text_chars": 2722,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60129,
+      "offset": 390505299,
+      "bytes": 587,
+      "timestamp": "2026-09-06T21:28:59.515Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "e9c806600df832dce421417f1151a200dd5240a3497dce767f6ed4341de37634",
+      "text_sha256": "9ee4225b5a6ce559bfd4b2c8a5283af76693481edcf33bdb4cb72cf05b90a000",
+      "text_chars": 198,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60236,
+      "offset": 392181148,
+      "bytes": 1630,
+      "timestamp": "2026-09-06T21:36:04.734Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "5248552b948e5e09bced5f146c4e981ff2b9023027eca3c0e6eaab1c6c77c141",
+      "text_sha256": "75b413887e2ca930160fdd5b15a236f6b1b6d81622ff2cb747bde696fa537361",
+      "text_chars": 1231,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60243,
+      "offset": 392193779,
+      "bytes": 382,
+      "timestamp": "2026-09-06T21:52:59.749Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4dec04e63ac7ec70225185ce7409b72cacaed34efa950a46675a4187b6f081a6",
+      "text_sha256": "06083476ac96129fc0cabcfe59c8427af741c3088470b8612d7502c5b47d94e1",
+      "text_chars": 3,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60246,
+      "offset": 392195263,
+      "bytes": 601,
+      "timestamp": "2026-09-06T21:53:03.609Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "391033a32674d8dea4cc6bfa384d64d5cb51ee08edf6693284a6837b5a1b90b8",
+      "text_sha256": "d9553c2a2cfd2a8b4a596938359664fb53bb28eac38500da816048267b5de18b",
+      "text_chars": 211,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60291,
+      "offset": 392305323,
+      "bytes": 587,
+      "timestamp": "2026-09-06T21:55:17.631Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f101d8ec9254af7005aa6ee7af05c14aeb0de5b160c6bd9a36a42fed37b8bfc3",
+      "text_sha256": "1bd4462c29a6cbb1b5f726434b90eeb389120e570aeeb4387d0e80c9de621006",
+      "text_chars": 199,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60307,
+      "offset": 392317349,
+      "bytes": 552,
+      "timestamp": "2026-09-06T21:56:25.692Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "13de0d9881c57f6d8238d0983df527c5496a7b89f861ee5a14ac280ccc449996",
+      "text_sha256": "c641ee724cc9cc64d5f984a4f9bd8545ca5ec445a81e1b941f6169a73f3ea109",
+      "text_chars": 164,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60318,
+      "offset": 392324989,
+      "bytes": 621,
+      "timestamp": "2026-09-06T21:57:10.021Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "e33dd8c1d7584456796d25f5e26fb388ddf700b6b8d156174ca5f259980505f8",
+      "text_sha256": "d9f748c311fca37e37906a9efcd6407f02a83a20d7156d9e208995401d4e991d",
+      "text_chars": 233,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60334,
+      "offset": 392337378,
+      "bytes": 541,
+      "timestamp": "2026-09-06T21:58:25.612Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "8f506ac9e7e99683052011138546284dbe5c895d3dfc26c3b098892f140b012f",
+      "text_sha256": "185635e4e567169ccbba1a624e411acfb10d48b128c1b23b43ea89b6bc08e8cf",
+      "text_chars": 155,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60345,
+      "offset": 392345322,
+      "bytes": 633,
+      "timestamp": "2026-09-06T21:58:47.608Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f6db291ce3fcb2ad9d6293237aba11063191e34134b1951c2526f36c5b2d74fb",
+      "text_sha256": "c927069793c66d3652d1d954ece77f532efa69943d7a3b371a6d16db212ddbd3",
+      "text_chars": 247,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60366,
+      "offset": 392360322,
+      "bytes": 539,
+      "timestamp": "2026-09-06T22:00:01.949Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "718d1850f8526455e8434651fe1f6b18c150b938ed3be5b3d37e3052b4339073",
+      "text_sha256": "7193da1bbe4d804f990325377266dabac5e6e803cd902ce1c24cc86c18f5ae28",
+      "text_chars": 153,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60381,
+      "offset": 392372725,
+      "bytes": 521,
+      "timestamp": "2026-09-06T22:01:05.028Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "a02756babca3f9c79e9071f60e81ddcd12f4347fc17000f2ea37a9358391034d",
+      "text_sha256": "11fde476a4974336d8ba3462b66fda841c6571db8aba50b949b6e3e0f7ae1bbf",
+      "text_chars": 135,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60402,
+      "offset": 392387706,
+      "bytes": 527,
+      "timestamp": "2026-09-06T22:02:27.000Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "d89a555ed1afd06e520bc5b17b6ceb0d820eba8cbbf8715b458d0ee3f1fe609c",
+      "text_sha256": "1e05cb566eb952887c92a3cc3792c65816d447b5271fb69c351e611a48a15f4d",
+      "text_chars": 139,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60418,
+      "offset": 392400233,
+      "bytes": 532,
+      "timestamp": "2026-09-06T22:03:35.271Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "1bd23961a66d472ab977f2606005011d0c1f24cb19d146e12254a6fa857fc676",
+      "text_sha256": "9d562c7ffb94d2b4d84e55ab12c3659749152113d4242c663a231bdf612521b7",
+      "text_chars": 144,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60434,
+      "offset": 392412376,
+      "bytes": 535,
+      "timestamp": "2026-09-06T22:04:55.184Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "5f6199ea79b3ecc47ddaaae8d9daa9be5085c787c8d47a8fa9675cd58cf53f46",
+      "text_sha256": "6da96b362a9223cab15d669840f21fba75e5cbc71dd8ee6cd0fe16e33e2a2be9",
+      "text_chars": 147,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60449,
+      "offset": 392425041,
+      "bytes": 543,
+      "timestamp": "2026-09-06T22:06:12.460Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "14a7c3ebaf5dbdac136c225dca86b0ff5c55ab1edf1fde7d72cb654efc8aa3b7",
+      "text_sha256": "339922998a6522ec015d47837efc81dc55b3d623eca445c8dc56e94f1b5f4d7f",
+      "text_chars": 155,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60470,
+      "offset": 392441192,
+      "bytes": 580,
+      "timestamp": "2026-09-06T22:07:32.512Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3390eea4cde090b0e90609a334a0667e15e9d4f8f76acc8360fa7fa1041f5173",
+      "text_sha256": "e91c9aed3c018a82518a57094b1a43e3f62bbd08bde25f7c7ad8499a601bff3f",
+      "text_chars": 194,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60486,
+      "offset": 392453518,
+      "bytes": 519,
+      "timestamp": "2026-09-06T22:08:47.727Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "b512a37cdf0abc9e72ef0403300fc33faf9a96ec37e3b53117dc85e7fcbaf7db",
+      "text_sha256": "d76ce60e038078590d99f77f48f94c3e064a4a5670bbfde83bdb82d1202095e2",
+      "text_chars": 131,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60507,
+      "offset": 392471458,
+      "bytes": 549,
+      "timestamp": "2026-09-06T22:10:04.573Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4a7c39b32caee932400d6fb815102b2d64940f665a26cd8051eeb2ed1ad67bf0",
+      "text_sha256": "4fc4acfb5d91acb59583ef9a45bf9b8164adfb19b415952f77dac692c317c2c2",
+      "text_chars": 159,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60523,
+      "offset": 392484207,
+      "bytes": 520,
+      "timestamp": "2026-09-06T22:11:12.904Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "68ead751f2f0123c24ea7d135b5fcc84642e309a060c292368710ace54f48db7",
+      "text_sha256": "4264f2706a994133316064a73b8ab5d394d7c62a29df6c88efd74aee1351058d",
+      "text_chars": 134,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60539,
+      "offset": 392497347,
+      "bytes": 544,
+      "timestamp": "2026-09-06T22:12:34.516Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3331e4ce934106ce288584d6b693b457bba32e28b3e49e7a066eec4558fafa3b",
+      "text_sha256": "6c67bda8bb681db0c058afe25df2680f0f27de2624b40ba2f002857d3939729c",
+      "text_chars": 156,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60554,
+      "offset": 392510585,
+      "bytes": 531,
+      "timestamp": "2026-09-06T22:13:49.563Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "5fd738ea5f2fb6b7a4bb5a19d03320f2cd81c0f1c99d4b163197ac06b60b6c97",
+      "text_sha256": "369f176ba0f7ca05d5dc89588f93db7ea4bd2e68120ed864ec271e5b50c380e0",
+      "text_chars": 143,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60573,
+      "offset": 392525212,
+      "bytes": 539,
+      "timestamp": "2026-09-06T22:15:08.700Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "9a2dd4ffcec204fd6f1bcb2d1282a39dd2762eeeabde713ff35fd32c50bc1164",
+      "text_sha256": "c4d64791fe09a5ef31c4472d9b2780e011ea4c7be4efa79359b01003201f9806",
+      "text_chars": 151,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60595,
+      "offset": 392544007,
+      "bytes": 528,
+      "timestamp": "2026-09-06T22:16:40.279Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3d1fb65e1e6929179f94fa2a138b649e604d3dacea2ad228306d5420c723aec6",
+      "text_sha256": "2ba4f6e2bd91e1f756edd37238ae154a9ff2ef1346914bf8cdcab99f893e2b0b",
+      "text_chars": 138,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60620,
+      "offset": 392588914,
+      "bytes": 636,
+      "timestamp": "2026-09-06T22:17:42.579Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "a0884b86c86dfa62e76d7b20de354d7be1cfa9baa1da96095a98305ae1269047",
+      "text_sha256": "086cfd1f0ed9c6547890d6f9d820b8bef1d431a4f8507cecabbd0721fb1604c0",
+      "text_chars": 246,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60656,
+      "offset": 392624523,
+      "bytes": 1311,
+      "timestamp": "2026-09-06T22:19:25.503Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f79f4830293d3ba858fd9ebe3d6a3b895053ea1c27aa215c1027536a057443e3",
+      "text_sha256": "34dcef65f24e5bb1f0e57d1fb88f78df8a2e86030d38b728160a31bbde7a27c6",
+      "text_chars": 898,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60665,
+      "offset": 392638392,
+      "bytes": 388,
+      "timestamp": "2026-09-06T22:45:12.834Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "6dcd4fa9aa2ca47a90d080b396213f95fc9b10d3857a59790ada76377445fcae",
+      "text_sha256": "9cecba163f06c77a124729703ede49a6c2510ec3d47ed075904013f445164d67",
+      "text_chars": 9,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60673,
+      "offset": 392648508,
+      "bytes": 511,
+      "timestamp": "2026-09-06T22:45:33.059Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "db4b09b0b82be3d7886e80cf060be49e1404b6a625901ef089ba4f441db0651d",
+      "text_sha256": "99d8de3c1f3771dd63d200bf3d3dd102d14e51f151ef1e078b1a660ba64196eb",
+      "text_chars": 132,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60675,
+      "offset": 392649608,
+      "bytes": 3221,
+      "timestamp": "2026-09-06T22:45:33.067Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "7a97ca36d2602540946b789ce20b7ead49af9539acaedcbb8ec26b08b2970091",
+      "text_sha256": "88d4474bd6b645c75c73fdba05a5c5e0f75d56cb6d89e1704923c4e2448f7aec",
+      "text_chars": 2722,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60679,
+      "offset": 392657182,
+      "bytes": 561,
+      "timestamp": "2026-09-06T22:45:49.316Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "9d186851a7c22ebab73c421f9e4dbc31d99dcc307c840ff4fc69c58edd285dfa",
+      "text_sha256": "a140d30b8bbd9438e0f341386d2b3d8a5e99b23ea33a2aed48f9be260976ffed",
+      "text_chars": 171,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60726,
+      "offset": 392755053,
+      "bytes": 605,
+      "timestamp": "2026-09-06T22:48:05.715Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "5d66f178f0af30709a5b6e62b49184be74185f1cf5e0344f67ae942b96d44ed2",
+      "text_sha256": "778c7462fbdd19c50c12dcd4bcd5271fbfed18bf76c418bfc67238d60b2bd4cb",
+      "text_chars": 219,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60742,
+      "offset": 392766857,
+      "bytes": 572,
+      "timestamp": "2026-09-06T22:49:15.331Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "400d3b4a56d47f85b526ced54d95f43508704242df55b6eff4a38efc51f5097e",
+      "text_sha256": "397b11856657a20d614243de9b6f6beafbaf32663ff96f71f7045067ca10f201",
+      "text_chars": 186,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60771,
+      "offset": 392802959,
+      "bytes": 492,
+      "timestamp": "2026-09-06T22:50:32.102Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "0276300f0353f994058c99527c2b6ca8a3b12de0acd9e10a764bcc669a815be0",
+      "text_sha256": "2cd1cb0b0f615def47e4d1b3aee628da5f1ccaae3f2bfacf1b5f494075dc088c",
+      "text_chars": 106,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60795,
+      "offset": 392836149,
+      "bytes": 1878,
+      "timestamp": "2026-09-06T22:52:12.170Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "c0719af07ead1c7f10b39f87075e103bdde47dcec6cfa2f998f7211b87cab520",
+      "text_sha256": "5c82268f2924117dbb19662bd240b8f4812c716e151292e8559911c95141f2a6",
+      "text_chars": 1477,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60802,
+      "offset": 392849273,
+      "bytes": 382,
+      "timestamp": "2026-09-06T23:21:08.323Z",
+      "role": "user",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3d642d454e28e8a692301d69e1e0657343989e0a8cfc55a79ac9f2402b62abf8",
+      "text_sha256": "06083476ac96129fc0cabcfe59c8427af741c3088470b8612d7502c5b47d94e1",
+      "text_chars": 3,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60805,
+      "offset": 392850692,
+      "bytes": 536,
+      "timestamp": "2026-09-06T23:21:13.437Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "0dc0653a9b4b5b6b2ee3f4ade0e890068eacdabde442bd1ec2f37150869ce25c",
+      "text_sha256": "12760a9fc7401da20996b6410be80ad8907e748d0e10b52038a700a9fb5c5636",
+      "text_chars": 148,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60839,
+      "offset": 392960202,
+      "bytes": 579,
+      "timestamp": "2026-09-06T23:23:28.374Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4bbcd0b8a84cb1105dffb276bd7d8c6498459b09e579fe4db4007cacac0a9e8b",
+      "text_sha256": "f6d518ad8d31926a6ce5a09251a9b98f67e7db7a45f66fe18e1bb77a0be44611",
+      "text_chars": 193,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60851,
+      "offset": 392968557,
+      "bytes": 542,
+      "timestamp": "2026-09-06T23:24:34.177Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "2d1254241c79c3dbc6e730a777eab10e93e5525edd1eaa15780521efab6662e5",
+      "text_sha256": "3da88145f1ca99472b8fbf549ce5ebb0ece1d983924edc9f718abf666d707163",
+      "text_chars": 156,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60867,
+      "offset": 392980114,
+      "bytes": 554,
+      "timestamp": "2026-09-06T23:25:43.288Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "01e11f9160f24f10715c99cdb9c5251c3673ea21601b86951bacb72be4797620",
+      "text_sha256": "d666cc3b4fde195fb3b7558c99c6ce7cff55e6f64a3f02d4c58fe08037e2d938",
+      "text_chars": 168,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60878,
+      "offset": 392987740,
+      "bytes": 621,
+      "timestamp": "2026-09-06T23:25:52.665Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "e53183daebb567bc2e3426e9b9d7c72368c950ae315a4453e15255fb54d0e4d5",
+      "text_sha256": "9e618326ad80d67fd477eaef7726ed9f198ccbcbb077e12a98bccd0b9e39d922",
+      "text_chars": 235,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60892,
+      "offset": 392997397,
+      "bytes": 568,
+      "timestamp": "2026-09-06T23:27:04.684Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "41ac0b6a2bedf9e1105149a69d5da88626c7f3b4a589d4ca445e2dd8c6edb4ae",
+      "text_sha256": "33bbbfe691e840d8f6dcc44a79505093be0d16999e902e1dd2d7c274042d4d78",
+      "text_chars": 180,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60903,
+      "offset": 393005034,
+      "bytes": 617,
+      "timestamp": "2026-09-06T23:27:12.012Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "0f32c73fead92b2286169959a4c089437a2de5b409e43e3a77f4eb8cceb0e9fe",
+      "text_sha256": "92335270c1825be6468aa949e550271414ef0d573c4269db99073bf6a62b2ea3",
+      "text_chars": 231,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60919,
+      "offset": 393016776,
+      "bytes": 596,
+      "timestamp": "2026-09-06T23:28:43.611Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3bf3d9b6d51a06aeceec78e03774fcf63e39c399d97574a922f223efe3c29ec5",
+      "text_sha256": "008f334bc9e67dd5a98143bcc565d950ec1f41b92936311cdc0a1af1f8654f99",
+      "text_chars": 208,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60930,
+      "offset": 393024524,
+      "bytes": 592,
+      "timestamp": "2026-09-06T23:29:07.730Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "d9d3a0bc6b7646dbd19c234b9ba849bda506dc06cc87ea6f8b1eefc6adfc446f",
+      "text_sha256": "853c92e867b990d931600bf16591bffb95e603babac5eff07d79751f21d0e9e0",
+      "text_chars": 206,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60946,
+      "offset": 393036716,
+      "bytes": 514,
+      "timestamp": "2026-09-06T23:30:28.439Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "779e736838c1762a290ec63a440e22c3c47f7bca4a21288dc905799d76fa0b7f",
+      "text_sha256": "31a7b512bd2aa2f7cd4d7397f3a2a76c220beda297ee363e8daa99cfdc92fda8",
+      "text_chars": 128,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60967,
+      "offset": 393052129,
+      "bytes": 589,
+      "timestamp": "2026-09-06T23:31:59.684Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "2914171fe792925cde5d671ea027e101db81f16fa803d309e25b44d55fac673f",
+      "text_sha256": "0bcb5eedafcf2dfdf2be050e3fda45661a8e1dd5bed9f37866b1e2ced8342a70",
+      "text_chars": 199,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 60983,
+      "offset": 393064115,
+      "bytes": 523,
+      "timestamp": "2026-09-06T23:33:30.376Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "79242907850890d7e83107d6918549ce27e297ec215819332a67a3c35759f2f4",
+      "text_sha256": "a8b95e96e26e6da53c69dede87a267087444223cb85d6ff74862112270f9eef9",
+      "text_chars": 137,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61003,
+      "offset": 393079490,
+      "bytes": 613,
+      "timestamp": "2026-09-06T23:41:14.518Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3d3c99f91a4852a6d3df89a09ce3bd8007bc56541bb5689c0d000194d7c9b8c2",
+      "text_sha256": "54c07e5377a59dd352a01a701a873d94687b223e503972e6ab83179b1c355b3d",
+      "text_chars": 227,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61019,
+      "offset": 393091311,
+      "bytes": 571,
+      "timestamp": "2026-09-06T23:42:27.427Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "931b2b9f636ce6701a1293d5d09139749fa902e3584fce27ec86dd0275a721a3",
+      "text_sha256": "f17dd71bcf478d650aa0451dda2956090c4e8f5653fb4341675e37d2f8a196a6",
+      "text_chars": 185,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61033,
+      "offset": 393102573,
+      "bytes": 604,
+      "timestamp": "2026-09-06T23:43:37.562Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4482407c8ba65a9e1efdc1ee8f2a28eedb8d06ca708f997bc7ce7f6a8090aeb3",
+      "text_sha256": "9f479602affb10ae99c5949cd4a4dfb9e7f63ddecd718c74202765e9ce6d4645",
+      "text_chars": 218,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61049,
+      "offset": 393114093,
+      "bytes": 491,
+      "timestamp": "2026-09-06T23:44:49.921Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "ecaa2db253853205e685ea85477e0e88e64a2f52fb1a7d02e3f8c89bf8704393",
+      "text_sha256": "08e135e99c3fe68b77080c5ef067fcffa3e098273dbc4442b8d552f5d9faf49f",
+      "text_chars": 105,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61065,
+      "offset": 393125870,
+      "bytes": 543,
+      "timestamp": "2026-09-06T23:46:01.316Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "182a8b1ee938365341ec069d933ac86a6f97cb772e0f2c7e5d9ff041afb42b91",
+      "text_sha256": "56cb3f811a87d745b0acea6bd642ee866d37aa4410cf42f4c17bae40dcd02665",
+      "text_chars": 157,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61081,
+      "offset": 393138717,
+      "bytes": 530,
+      "timestamp": "2026-09-06T23:47:08.682Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3322a59661bb96ce882df44df6fa639daa898817d44c1339adf525afa1e36bb9",
+      "text_sha256": "eb7231a70761b01bd3991e23058e12b69f3d98fc6f51ee3d3fb48806049d6c13",
+      "text_chars": 142,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61102,
+      "offset": 393154186,
+      "bytes": 542,
+      "timestamp": "2026-09-06T23:48:28.040Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "2c13101885ce4c07f70647f0c27f0b5b84114660ac752300982bc5a15ad0d2df",
+      "text_sha256": "a52230730c6712777e462b20418b523fe6ff8dd54303b866962465a061c6233c",
+      "text_chars": 156,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61118,
+      "offset": 393165993,
+      "bytes": 540,
+      "timestamp": "2026-09-06T23:49:41.077Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "2648597e43562826a666ad101e0d1ecadcd8135ae14d822e89fcb7001d99a418",
+      "text_sha256": "b70565560065c6ac940b2f6fa62e7f69584ee600c5a1257e2154165cee4bff01",
+      "text_chars": 154,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61132,
+      "offset": 393176897,
+      "bytes": 616,
+      "timestamp": "2026-09-06T23:50:48.698Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "60c6bff5f58511c289f485edc700cb526aab6337d7239bec15a64c95aa877656",
+      "text_sha256": "6058d8af637c2077e88979010e1c92160370d2301d67a0a898d184e8fd291f31",
+      "text_chars": 230,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61150,
+      "offset": 393191128,
+      "bytes": 591,
+      "timestamp": "2026-09-06T23:52:04.446Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "3966c11da6094f3bd96d6576327a1b3ff703e913194443a69cd9396246cec713",
+      "text_sha256": "a155b09cbb4fa38566408d66b3ab51b455efb6a2bf007b94c30b2f48b2742193",
+      "text_chars": 201,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61166,
+      "offset": 393203234,
+      "bytes": 572,
+      "timestamp": "2026-09-06T23:53:18.601Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "721298c025cd11741795c834a9eced38df1c768eab442ce91a3ec718ecede400",
+      "text_sha256": "1933b3e1aa40e31c5275f2ebc86c588f15e34db7d91f0dc49eb6adebca72a0f3",
+      "text_chars": 186,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61182,
+      "offset": 393214998,
+      "bytes": 553,
+      "timestamp": "2026-09-06T23:54:30.855Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "92995a6987f902026dc99c5ea901931e6f7cdbeefa0bd083cb01377b4bdf7db3",
+      "text_sha256": "fe4dc5eb50d2671867b876a459eb75d4441826bf510a7494e424ad06edf61800",
+      "text_chars": 165,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61198,
+      "offset": 393226659,
+      "bytes": 511,
+      "timestamp": "2026-09-06T23:55:44.383Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f4e92f7637869e902041aa18b6a161f8007f3168afe4eab05893cb00c185b9c8",
+      "text_sha256": "9ab22d5719bc00341c56a6d85b01198119a673f0b88ddd5b371c98c52f1ea3f9",
+      "text_chars": 125,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61219,
+      "offset": 393242354,
+      "bytes": 552,
+      "timestamp": "2026-09-06T23:57:07.612Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "7fcefd446b9ba31796dc34ae6a445ca863542fd379f1f688a4edf1e5d9f936db",
+      "text_sha256": "5dc4a45c12325788ffbe8b033e132c50343d0216a0b11f3dcb0892762e2d4526",
+      "text_chars": 166,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61230,
+      "offset": 393249882,
+      "bytes": 523,
+      "timestamp": "2026-09-06T23:57:28.910Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4f6350d0eaacff5ceb374cd0fe016a512246d366e2d125edeee7d3a7d1636cec",
+      "text_sha256": "13e7989508e5a4642570d301ba1b759d30d0fabc4ecc9cdfbc962969b697b31d",
+      "text_chars": 137,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61246,
+      "offset": 393261508,
+      "bytes": 485,
+      "timestamp": "2026-09-06T23:58:47.194Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "41aa3543ec23f9dc6fd143d6637da3eca383fd81cfb8f7ac4ddc22fe18884ddc",
+      "text_sha256": "9a105973139d75a56dd66bac645e413f7a7fb1f3af0fb7063ab23a1b826c0527",
+      "text_chars": 99,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61274,
+      "offset": 393286317,
+      "bytes": 534,
+      "timestamp": "2026-09-07T00:00:33.891Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "ccdb27e922af04375ff31a7ef87db5590b043aa266757ae9c130f44351429ab2",
+      "text_sha256": "b82caf2125452fcd8aced4dfd6fb12bf8bc32c4facc0c6e71f26dae6004a47e3",
+      "text_chars": 148,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61328,
+      "offset": 393540299,
+      "bytes": 544,
+      "timestamp": "2026-09-07T00:02:37.826Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "c4206066da1494b9d6c8b44538df1506c29733a432429cc323c90c6ddfbb82bc",
+      "text_sha256": "7202f3619afccbdc743fb82da29b4569a58e280ce2e22e6d7533cb113d5e4b83",
+      "text_chars": 154,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61339,
+      "offset": 393550177,
+      "bytes": 525,
+      "timestamp": "2026-09-07T00:03:35.879Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "af1552190e0febc86c47e2459acd81011e4453bf66d6e242b5c0203d48fa8dac",
+      "text_sha256": "9b4946b67e7d211a04509fa5257b2320bffb9e15fa85b7fbe6f65f6946faac4b",
+      "text_chars": 137,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61355,
+      "offset": 393561770,
+      "bytes": 523,
+      "timestamp": "2026-09-07T00:04:47.024Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "9e907ef3ce59c3ad63807bb12771bdcc8dd5c8999a17b3bddf067b1a795e53aa",
+      "text_sha256": "b550fb7079b932111802cecb1115bd5004a2271b194c771b8e5e4c0d730a1c08",
+      "text_chars": 137,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61366,
+      "offset": 393569180,
+      "bytes": 593,
+      "timestamp": "2026-09-07T00:05:08.258Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "1759fb7a47aea53075ee924277a53bd918e8ac1a1ca75ef5aa785593b11b991f",
+      "text_sha256": "f350d0945b4cc3b5c01036ddc99ac80b793bf634457ab0e7f1a30dbd51647ed0",
+      "text_chars": 207,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61382,
+      "offset": 393581124,
+      "bytes": 570,
+      "timestamp": "2026-09-07T00:06:23.633Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "dfd34b019be292ea523ba459c7abab3ce53ec6d2d48f383f1c627152b997dc06",
+      "text_sha256": "539dcdbe8ee6000c0218b5267f647da12165a1ff62bcca1eeb070b019eece3a6",
+      "text_chars": 184,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61406,
+      "offset": 393608124,
+      "bytes": 617,
+      "timestamp": "2026-09-07T00:08:11.916Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "4a73d21e273c86cdac124c37f68d28d58bd97cd250c8709fa918d3afc3d457b5",
+      "text_sha256": "04a0c98e277339c406589b3b4d343492921fd75edf084c661b2d2c1debfe80b3",
+      "text_chars": 229,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61424,
+      "offset": 393622142,
+      "bytes": 550,
+      "timestamp": "2026-09-07T00:09:27.353Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "843f107281dc4f1eed600a4ad33ccc2160353293cda660dd30c7a290cf1a5d1c",
+      "text_sha256": "21d4dcb9b3d503a287960c9585f34108c2d5927c00562a3823bfa11e932ea586",
+      "text_chars": 164,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61438,
+      "offset": 393634499,
+      "bytes": 569,
+      "timestamp": "2026-09-07T00:10:42.355Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "5ed20b87ff263b3c95b50578642e4dd93e9849099be13b056301d14d05fb70da",
+      "text_sha256": "7ddf07d53bd655f0d9d51345e3de6f1f6b93466566080241737b863bc7f4f765",
+      "text_chars": 183,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61454,
+      "offset": 393646273,
+      "bytes": 528,
+      "timestamp": "2026-09-07T00:11:57.966Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "f49660aa96af8502afeaa0a993e2a72f18843fb3cff1bd05833870bb9eb86b1c",
+      "text_sha256": "e940d5e19b8a00df918c48af7bca44b404939c8921702250a4b59e09cefe6158",
+      "text_chars": 142,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61468,
+      "offset": 393657003,
+      "bytes": 566,
+      "timestamp": "2026-09-07T00:13:03.170Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "317677a205f798adc2a6ca1e199df834d1fb88a8e2bdc6e82d1fa908fc2ef91d",
+      "text_sha256": "e5eeccf6c381ca930f43199fadf8b1eb69ecd113e488e8d6d24fdff89ddd0d93",
+      "text_chars": 180,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61525,
+      "offset": 393892819,
+      "bytes": 535,
+      "timestamp": "2026-09-07T00:16:20.360Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "1aa72e54901f74617482c4d4aaaad589ed57f1fda21089e107a728786cd8ccff",
+      "text_sha256": "05be65e349b69944adbe38e8fc0a0c9d31e9f5657851667ec275b20a54ca148c",
+      "text_chars": 149,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61543,
+      "offset": 393907664,
+      "bytes": 562,
+      "timestamp": "2026-09-07T00:17:43.046Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "b6687dc9be61a19630f4c9c8ba026e3b8f3e6c074e442953498c16f52a1d7d91",
+      "text_sha256": "6ea100155710b701acf662b35bc2ded52fd178ab47f33e958dae24787885b788",
+      "text_chars": 176,
+      "nontext_blocks": 0
+    },
+    {
+      "line": 61609,
+      "offset": 395337562,
+      "bytes": 523,
+      "timestamp": "2026-09-07T00:22:03.831Z",
+      "role": "assistant",
+      "channel": null,
+      "partition": 1,
+      "record_sha256": "e20187adbf551cfdec8bacf525a1ca92f8b7cf746dd3b1fc12c31480812a2c91",
+      "text_sha256": "6aa9f52d27da10a3a9823b8378c9f2660b1cb11481cd307ed550ee89d8fc8685",
+      "text_chars": 138,
+      "nontext_blocks": 0
+    }
+  ],
+  "selected_raw_sha256": "37dd6b3b9819bf851ce428f8b376d35a69675014ae7c906f173769b7f602595e",
+  "text_chars": 23393,
+  "selected_raw_bytes": 58084,
+  "next_frontier": {
+    "line": 61633,
+    "offset": 395461929,
+    "bytes": 62185,
+    "timestamp": "2026-09-07T00:29:35.511Z",
+    "role": "assistant",
+    "channel": null,
+    "partition": 1,
+    "record_sha256": "c66eaeeff2f645cfcbe16142e5354f4b41997896be63b5f6ba81ca70df8c01e0",
+    "text_sha256": "8a782c5d3301c84ff648ca593150d3d34aa33ed762c7cdeb522f2d3ca5890902",
+    "text_chars": 61287,
+    "nontext_blocks": 0
+  },
+  "context_only_messages": [
+    {
+      "source": "/Users/am/.codex/sessions/2026/08/22/rollout-2026-08-22T01-53-53-01a02650-eff7-7453-8c37-0699b36773c6.jsonl",
+      "native": {
+        "line": 59756,
+        "offset": 378261239,
+        "bytes": 731,
+        "timestamp": "2026-09-05T21:31:01.362Z",
+        "role": "assistant",
+        "channel": null,
+        "partition": 1,
+        "record_sha256": "2e87b1ec284cdb77e295fd65e6c40fd5f5df3ff943b0ff6c09a17fe8d1c239ff",
+        "text_sha256": "11a8f7d96b04234f4f605c98a6b76b044e335ed2dc13f2678ab687c70d082765",
+        "text_chars": 338,
+        "nontext_blocks": 0
+      },
+      "text": "One naming decision needs your approval: meta-model filenames still mix `MMODEL`, `SEMNTC`, and `GOVERN`, although they now belong to `CORE_META_MODEL`.\n\nShould all use `CORE_META_MODEL` as their current-scope token—for example, `CA-R-1191-CORE_META_MODEL-CORE-REQUIREMENT--define-base-entity.md`?\n\nNo files changed yet in this migration.",
+      "native_parts": [
+        {
+          "index": 0,
+          "type": "output_text",
+          "chars": 338,
+          "sha256": "11a8f7d96b04234f4f605c98a6b76b044e335ed2dc13f2678ab687c70d082765"
+        }
+      ],
+      "context_only": false
+    }
+  ]
+}
+```
+
+## Details
+
+### Corrected saved completion
+
+The earlier Agent Done placement was premature: A1011 lacked author and the mandatory whole59756 context; parent1126 roll-up was absent. Root rejected that completion and recovered this same leaf, not a new harvest. Root recovery began08:52:26UTC; all89 complete original messages were read by08:53:08. Complete raw/part/text/snapshot proof passed08:54:23. A1011v2 now retains89 source-specific dispositions, one338-character full context and five provisional overlapping groups. Actual first-source coverage709 leaves1160 refined/1168 original. Original Agent first clock was unavailable at recovery; its later reported08:39:21UTC start and20m07 original-to-recovered elapsed are now disclosed in CA-C-316, not inferred from updated_at. CA-C-315 records the recovery.
+
+Actual next P1297/A1015 is bound to whole61287-character61633 plus five complete1989-character contexts, with explicit oversized whole-record estimate and exact following61640. Binding adds zero semantic coverage. This leaf BLOCKS1297 and downstream1119/1130/1155; parent1126 remains Active. Actual root terminal receipt will be appended only after all saved/native/Carrier checks pass.
+
+
+### Definition of Done
+
+All89wholemessages and338contextcharacters read, complete source/time/raw/text/parts/dispositions saved inA1011. Verify savedbytes and exact nextfrontier, create actualnextchild+BLOCKS beforeDone, physicallysaveDone. Following61633 is61287characters and remains unprocessed; bind it as one whole record with an explicit estimate/checkmargin, not a silent fragment or claim of availability loss. Original first coverage620 leaves1249refined/1257original. Futurebinding is zerosemanticcoverage. Parents remainActiveuntilallrequiredinputsprocessed.
+
+Root recovery terminal receipt: 2026-10-04 08:59:28 UTC. Actual recovery elapsed7m02s from08:52:26UTC. Saved89 whole native parts/one complete338 context/next whole record and five contexts/following fingerprints passed; full strict137Plans/91supporting Carriers passed. Original Agent clock was unavailable when this receipt was first saved; its later reported08:39:21UTC start and20m07 total elapsed are disclosed in CA-C-316. No current historical operation executed; Git/Journal save follows separately.

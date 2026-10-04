@@ -18,7 +18,7 @@ subjects:
     - "Workflow Run"
     - "Step Run"
 version: 4
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-020
@@ -30,10 +30,12 @@ global_tier: 11
 
 Run the selected implementation checks
 
-## Claim
+## Operation
 
 Implementation Evaluation Step **means** the Workflow node invoking **=1** Action, CA-O-020, **in** Integrated context under CA-R-1527.
 
 - bind inputs from the selected P/Plan, exact current candidate **and** phase, prepared tests **and** commands, governing Method Projection **and** R/E/D, relevant complete test inputs, **and** retained issue **and** regression evidence from prior Step results.
 - use the host's native session/subagent, file, **and** command capabilities; this binding has no MCP prerequisite. missing required context **or** capability returns a blocked invocation, **not** silent execution **in** another context.
 - retain exact Action/Step Revisions, source bindings, actual effects, **and** returned results. pass the Action's result **to** the Workflow **without** independently copying its behavior.
+
+## Details

@@ -1,24 +1,34 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - relation-model
+  governs: "relation-model"
   depends_on:
-    continuant:
-      - Atom/Scope
-      - Atom/Claim/Scope/Scope Unit Set
-atom_id: CA-R-916
-cce_version: cce_1
-cce_form: obligation
-version: 10
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Atom/Scope"
+    - "Atom/Claim/Target Scope Unit"
+version: 19
+updated_at: "2026-10-02 21:01:00 +0400"
 relations:
   child_of:
     - CA-R-932
-    - CA-R-914
+atom_id: "CA-R-916"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-916-CORE_META_MODEL-CORE-REQUIREMENT--restrict-ordered-demands-to-earlier-producers.md
 ---
-# Restrict ordered Demands to earlier Producers
+# Summary
+Restrict ordered Demands to earlier Producers
 
-**every** Demand Atom between ordered peer Scope Units **must** have a Producer Claim Scope Scope Unit that precedes its Consumer Atom Scope Unit.
+## Scope
+
+Demand Atoms whose Consumer Atom Scope Unit and Producer Claim Target Scope Unit are ordered siblings.
+
+## Claim
+
+**if** a Demand Atom's Consumer Atom Scope Unit **and** Producer Claim Target Scope Unit are ordered siblings, **then** its Producer Claim Target Scope Unit **must** precede its Consumer Atom Scope Unit.
+
+## Details

@@ -2,7 +2,11 @@
 import hashlib
 import json
 import re
+import subprocess
+import sys
+import tempfile
 import unittest
+import importlib.util
 from pathlib import Path
 
 
@@ -25,6 +29,23 @@ def atom(atom_id):
 
 
 class PromptContracts(unittest.TestCase):
+    @staticmethod
+    def actions():
+        spec = importlib.util.spec_from_file_location('implementation_actions', HERE / 'implementation_actions.py')
+        actions = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(actions)
+        return actions
+
+    @staticmethod
+    def packet(actions, context='Isolated'):
+        method = '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/05_method/CA-M-326-PROMPTS--compose-short-current-implementation-step-prompts.md'
+        return {
+            'context': context, 'source_bindings': actions.current_source_bindings(),
+            'permissions': {'allowed': True}, 'handoff_complete': True,
+            'plan_item': {'estimated_minutes': 14}, 'requirements_delivery': ['R', 'D'],
+            'evaluations': ['E'], 'method_projection': actions.prepare_method_projection([method]),
+            'retained_state': {'retry': 0}, 'evidence': ['baseline'],
+        }
     @classmethod
     def setUpClass(cls):
         cls.workflow = atom('CA-O-016')
@@ -98,7 +119,12 @@ class PromptContracts(unittest.TestCase):
         self.assertEqual(bindings['workflow'], 'CA-O-016')
         ids = [row['atom_id'] for row in bindings['sources']]
         self.assertEqual(len(ids), len(set(ids)))
-        required = {'CA-O-016', 'CA-M-285', 'CA-E-389', 'CA-E-390', 'CA-R-1601', 'CA-D-487'} | self.nodes
+        required = {
+            'CA-R-1843', 'CA-R-1844', 'CA-R-1845', 'CA-R-1846',
+            'CA-M-326', 'CA-M-327', 'CA-M-328', 'CA-M-329',
+            'CA-E-563', 'CA-E-564', 'CA-E-565', 'CA-E-566',
+            'CA-D-544', 'CA-D-545', 'CA-D-546', 'CA-O-016',
+        } | self.nodes
         for prompt in self.prompts.values():
             required.add(re.search(r'Action: (CA-O-\d+)', prompt)[1])
         self.assertEqual(set(ids), required)
@@ -109,6 +135,74 @@ class PromptContracts(unittest.TestCase):
                 raw = path.read_bytes()
                 self.assertEqual(hashlib.sha256(raw).hexdigest(), row['sha256'], 'Authority changed: review prompts before refreshing bindings')
                 self.assertEqual(int(re.search(r'^version: (\d+)$', raw.decode('utf-8'), re.M)[1]), row['version'])
+
+    def test_prompt_runtime_contract_is_not_live_llm_proof(self):
+        readme = (HERE / 'README.md').read_text(encoding='utf-8')
+        self.assertIn('Mock Agent tests are not live LLM proof.', readme)
+        self.assertIn('implementation_actions.py', readme)
+
+    def test_queue_uses_replaceable_agent_and_truthful_envelope(self):
+        actions = self.actions()
+        packet = self.packet(actions)
+        seen = []
+        def agent(prompt, supplied):
+            seen.append((prompt, supplied))
+            return {'result': 'implemented', 'outputs': {'candidate': 'c1', 'changed_paths': ['a.py']}, 'evidence': ['change']}
+        actual = actions.implement_selected_queue('CA-O-093', packet, agent)
+        self.assertEqual(actual['result'], 'implemented')
+        self.assertEqual(actual['context'], 'Isolated')
+        self.assertEqual(actual['evidence'], ['baseline', 'change'])
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(set(actions.ACTION_HANDLERS), {'CA-O-017', 'CA-O-018', 'CA-O-019', 'CA-O-020', 'CA-O-089', 'CA-O-024', 'CA-O-021'})
+
+    def test_queue_blocks_context_missing_test_first_or_retry_overrun(self):
+        actions = self.actions()
+        base = self.packet(actions)
+        base.pop('context')
+        self.assertEqual(actions.implement_selected_queue('CA-O-092', base, lambda *_: {'result': 'prepared'})['result'], 'blocked')
+        retry = {**base, 'context': 'Integrated', 'retry': {'consumed': 1, 'limit': 1}}
+        self.assertEqual(actions.implement_selected_queue('CA-O-096', retry)['result'], 'retry_blocked')
+
+    def test_queue_rejects_stale_pins_projection_and_label_only_success(self):
+        actions = self.actions()
+        packet = self.packet(actions)
+        packet['source_bindings'] = packet['source_bindings'][:-1]
+        self.assertEqual(actions.implement_selected_queue('CA-O-093', packet, lambda *_: {'result': 'implemented'})['result'], 'blocked')
+        packet = self.packet(actions)
+        packet['method_projection']['sources'][0]['sha256'] = '0' * 64
+        self.assertEqual(actions.implement_selected_queue('CA-O-093', packet, lambda *_: {'result': 'implemented'})['result'], 'blocked')
+        packet = self.packet(actions)
+        self.assertEqual(actions.implement_selected_queue('CA-O-093', packet, lambda *_: {'result': 'implemented', 'outputs': {}, 'evidence': []})['result'], 'blocked')
+
+    def test_golden_agent_retains_initial_failure_and_final_command_output(self):
+        actions = self.actions()
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            implementation = work / 'implementation.py'
+            test_script = work / 'golden_test.py'
+            implementation.write_text('def ready():\n    return False\n', encoding='utf-8')
+            test_script.write_text('from implementation import ready\nassert ready()\n', encoding='utf-8')
+            command = [sys.executable, str(test_script)]
+            retained = {}
+            def agent(prompt, _packet):
+                step = re.search(r'Step: (CA-O-\d+)', prompt)[1]
+                if step == 'CA-O-092':
+                    initial = subprocess.run(command, cwd=work, capture_output=True, text=True)
+                    retained['initial'] = {'returncode': initial.returncode, 'stderr': initial.stderr}
+                    return {'result': 'prepared', 'outputs': {'golden_e2e': ['ready'], 'commands': [command], 'expected_outcomes': ['pass after implementation']}, 'evidence': [retained['initial']]}
+                if step == 'CA-O-093':
+                    implementation.write_text('def ready():\n    return True\n', encoding='utf-8')
+                    return {'result': 'implemented', 'outputs': {'candidate': 'golden-v1', 'changed_paths': [str(implementation)]}, 'evidence': [{'changed': str(implementation)}]}
+                final = subprocess.run(command, cwd=work, capture_output=True, text=True)
+                return {'result': 'passed', 'outputs': {'commands': [command], 'checks': [{'returncode': final.returncode, 'stdout': final.stdout, 'stderr': final.stderr}]}, 'evidence': [{'phase': 'final', 'returncode': final.returncode}]}
+            prepared_packet = self.packet(actions)
+            prepared_packet['golden_e2e'], prepared_packet['baseline_command'] = ['ready'], command
+            prepared = actions.implement_selected_queue('CA-O-092', prepared_packet, agent)
+            implemented = actions.implement_selected_queue('CA-O-093', self.packet(actions), agent)
+            evaluated = actions.implement_selected_queue('CA-O-094', self.packet(actions, 'Integrated'), agent)
+            self.assertEqual((prepared['result'], implemented['result'], evaluated['result']), ('prepared', 'implemented', 'passed'))
+            self.assertEqual(retained['initial']['returncode'], 1)
+            self.assertEqual(evaluated['outputs']['checks'][0]['returncode'], 0)
 
 
 if __name__ == '__main__':

@@ -8,18 +8,22 @@ import hashlib
 import json
 import re
 import sys
+import tomllib
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
 
 
-APPLICABLE_RELATIVE = Path(".caprmedio_framework/00_APPLICABLE_METHODOLOGY")
-SOURCES_RELATIVE = APPLICABLE_RELATIVE / "000_APPLICABLE_MTHD_sources"
 TOOLS_ROOT = Path(__file__).resolve().parents[1]
 if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
 from artifact_metadata import SETTINGS_PATH, project_identity  # noqa: E402
+
+# Sources remain framework authority; only the published Applicable Methodology
+# tree is a Project-local Projection.
+SOURCES_RELATIVE = Path(".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources")
+APPLICABLE_RELATIVE = SETTINGS_PATH.parent / "_projection/APPLICABLE_METHODOLOGY"
 ROLES = ("04_requirement", "05_method", "06_evaluation", "07_delivery", "09_operations")
 SCHEMA = "caprmedio.retrieve_applicable_methodology.v1"
 TEMPORAL_FORMS = ("continuant", "occurrent")
@@ -216,10 +220,14 @@ def projection_source(frontmatter: str, path: str) -> str:
 
 
 def source_payload(projected: bytes, source_relative: str, path: str) -> bytes:
-    addition = f"\nprojection:\n  source_carrier_path: {source_relative}".encode("utf-8")
-    if projected.count(addition) != 1:
+    start = projected.find(b"\nprojection:\n")
+    end = projected.find(b"\n---\n", start + 1)
+    expected = f"\n  source_carrier_path: {source_relative}".encode("utf-8")
+    if start < 0 or end < 0 or projected[start:end].count(expected) != 1:
         raise RetrievalError("projection-payload-invalid", "Projection metadata is not canonical", path=path)
-    return projected.replace(addition, b"", 1)
+    # The compiler may add source identity and checksum fields to this same
+    # Projection block.  Those fields are delivery metadata, not source bytes.
+    return projected[:start] + projected[end:]
 
 
 def repo_relative(root: Path, path: Path) -> str:
@@ -232,13 +240,37 @@ def repo_relative(root: Path, path: Path) -> str:
 def find_project_root(start: Path) -> Path:
     resolved = start.resolve()
     for candidate in (resolved, *resolved.parents):
-        if (candidate / APPLICABLE_RELATIVE).is_dir():
+        if (candidate / SOURCES_RELATIVE).is_dir():
             return candidate
     raise RetrievalError("project-root-not-found", "Cannot find the Applicable Methodology root", start=resolved.as_posix())
 
 
+def applicable_projection_relative(root: Path) -> Path:
+    """Bind published output to the configured Project control root."""
+    try:
+        # Keep Project identity validation authoritative before reading its
+        # routing configuration; a graph Projection cannot choose this root.
+        project_identity(root)
+        settings = tomllib.loads((root / SETTINGS_PATH).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, ValueError, tomllib.TOMLDecodeError) as error:
+        raise RetrievalError("project-settings-invalid", str(error), path=SETTINGS_PATH.as_posix()) from error
+    paths = settings.get("paths", {})
+    if not isinstance(paths, dict):
+        raise RetrievalError("project-control-root-invalid", "Project Settings paths must be a table", path=SETTINGS_PATH.as_posix())
+    value = paths.get("control_root", SETTINGS_PATH.parent.as_posix())
+    if not isinstance(value, str) or not value:
+        raise RetrievalError("project-control-root-invalid", "Project Settings control root is invalid", path=SETTINGS_PATH.as_posix())
+    control = Path(value)
+    if control.is_absolute() or ".." in control.parts or control.as_posix() in {"", "."}:
+        raise RetrievalError("project-control-root-invalid", "Project Settings control root must be repository-relative", value=value)
+    resolved = (root / control).resolve()
+    if not resolved.is_relative_to(root.resolve()) or (root / control).is_symlink():
+        raise RetrievalError("project-control-root-invalid", "Project Settings control root is unsafe", value=value)
+    return control / "_projection/APPLICABLE_METHODOLOGY"
+
+
 def discover(root: Path) -> list[Carrier]:
-    applicable = (root / APPLICABLE_RELATIVE).resolve()
+    applicable = (root / applicable_projection_relative(root)).resolve()
     sources = (root / SOURCES_RELATIVE).resolve()
     if not sources.is_dir():
         raise RetrievalError("source-root-missing", "Applicable Methodology Source root is missing", path=repo_relative(root, sources))

@@ -303,7 +303,9 @@ def configured_repository_paths(root: Path) -> RepositoryPaths:
         raise ContextError("project_paths_invalid", "paths must be a TOML table")
     control = _configured_relative_path(paths, "control_root", ".caprmedio_caprmedio")
     framework = _configured_relative_path(paths, "framework_root", ".caprmedio_framework")
-    journal = _configured_relative_path(paths, "journal_root", ".caprmedio_caprmedio/work_journal")
+    # Journal Carriers are Project-local durable evidence.  Keep the default
+    # tied to the configured control root instead of a particular Project name.
+    journal = _configured_relative_path(paths, "journal_root", (control / "_journal").as_posix())
     runtime = _configured_relative_path(paths, "runtime_root", ".caprmedio_runtime")
     temporary = _configured_relative_path(paths, "temporary_root", ".caprmedio_tmp")
     if control != SETTINGS_PATH.parent:

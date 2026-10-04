@@ -9,7 +9,7 @@ subjects:
     - "Carrier"
     - "Operator"
 version: 4
-updated_at: "2026-09-22 23:02:20 +0000"
+updated_at: "2026-10-04 15:11:59 +0000"
 relations: {"relates_to": ["CA-R-1598", "CA-D-478", "CA-D-479", "CA-D-480", "CA-D-481", "CA-R-1464"]}
 atom_id: "CA-O-077"
 content_role: "Operations"
@@ -25,7 +25,7 @@ global_tier: 11
 
 Reconcile Atom Properties and addresses together
 
-## Claim
+## Operation
 
 **to** reconcile an Atom's carried Properties **and** address, execute this Action within the authorized change:
 
@@ -35,3 +35,5 @@ Reconcile Atom Properties and addresses together
 4. check Property sections, address agreement, once-owned Relations, **and** any affected references against the proposed result.
 5. apply the coordinated Carrier change **only** while the observed before-state is still current. preserve the required history; do **not** report completion for a partially applied change.
 6. verify the resulting internal values, representations, **and** Relations. **if** completion fails, preserve recoverable evidence **and** report the incomplete state for authorized recovery.
+
+## Details

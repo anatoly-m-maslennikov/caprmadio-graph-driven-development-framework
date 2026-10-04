@@ -1,27 +1,36 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - Producer Result/Flow Direction
+  governs: "Producer Result/Flow Direction"
   depends_on:
-    continuant:
-      - Producer
-      - Consumer
-      - Atom/Scope
-      - Atom/Claim/Scope/Scope Unit Set
-atom_id: CA-R-945
-cce_version: cce_1
-cce_form: definition
-version: 9
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Producer"
+    - "Consumer"
+    - "Atom/Scope"
+    - "Atom/Claim/Target Scope Unit"
+version: 18
+updated_at: "2026-10-02 21:01:00 +0400"
 relations:
-  replacement_of:
-    - CA-R-876
   child_of:
     - CA-R-933
+atom_id: "CA-R-945"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-945-CORE_META_MODEL-CORE-REQUIREMENT--define-result-flow-direction.md
 ---
-# Define result-flow direction
+# Summary
+Define result-flow direction
 
-a Producer result flow direction **means** from the Producer Claim Scope Scope Unit **to** the Consumer Atom Scope Unit.
+## Scope
+
+Producer result flow directions.
+
+## Claim
+
+a Producer result flow direction **means** from the Producer Claim Target Scope Unit **to** the Consumer Atom Scope Unit.
+
+## Details

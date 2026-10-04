@@ -1,17 +1,32 @@
 ---
-atom_id: CA-R-1248
-cce_version: cce_1
-cce_form: definition
 subjects:
-  governs:
-    continuant:
-      - Entity
-version: 5
-updated_at: 2026-09-06 01:45:12 +0400
+  governs: "Entity"
+  depends_on:
+    - "CAPRMEDIO Graph"
+version: 12
+updated_at: "2026-10-02 21:35:09 +0400"
 relations: {}
+atom_id: "CA-R-1248"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1248-CORE_META_MODEL-CORE-REQUIREMENT--define-entity.md
 ---
-# Define Entity
+# Summary
 
-an Entity **means** one independently identified **or** bearer-qualified object admitted by an authoritative source as a possible node in **`>=1`** CAPRMEDIO Graph.
+Define Entity
+
+## Scope
+
+Entities admitted as possible nodes in CAPRMEDIO Graphs.
+
+## Claim
+
+an Entity **means** one independently identified **or** bearer-qualified object admitted by an authoritative source as a possible node **in** **`>=1`** CAPRMEDIO Graph.
+
+## Details

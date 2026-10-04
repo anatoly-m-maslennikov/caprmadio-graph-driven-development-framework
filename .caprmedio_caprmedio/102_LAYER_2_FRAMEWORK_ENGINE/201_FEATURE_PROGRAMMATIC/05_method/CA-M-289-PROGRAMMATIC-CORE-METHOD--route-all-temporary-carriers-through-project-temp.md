@@ -9,8 +9,8 @@ subjects:
 llm_session_ids:
   - codex:01a0263a-7510-7672-bce4-58830bc4d184
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
-version: 8
-updated_at: 2026-09-15 04:19:10 +0400
+version: 9
+updated_at: "2026-10-04 04:23:29 +0400"
 relations:
   method_for:
     - CA-R-1473
@@ -22,7 +22,10 @@ component creates a temporary Carrier **or** invokes a dependency that can creat
 one. allocate a component-owned **and**, **when** concurrency is possible, run-specific
 descendant below `.caprmedio_tmp/`. pass that descendant explicitly **to**
 temporary-file APIs **and** configure dependency cache, temporary, staging, build,
-**and** Evaluation paths **before** invocation. do **not** rely on an ambient host
+**and** Evaluation paths **before** invocation. materialize shared development-tool
+cache paths through the root `pyproject.toml`; provide explicit run-specific
+paths through launch Carriers for dependencies that do **not** read that file.
+do **not** rely on an ambient host
 temporary directory **or** the process working directory.
 
 route Python bytecode cache output **to** `.caprmedio_tmp/cache/python/` **before**

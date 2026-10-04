@@ -10,7 +10,7 @@ subjects:
     - "Core Meta-Model"
     - "Operator"
 version: 5
-updated_at: "2026-09-17 05:07:33 +0000"
+updated_at: "2026-10-04 15:16:04 +0000"
 relations: {relates_to: [CA-M-298, CA-E-249, CA-R-1375, CA-R-1207]}
 atom_id: "CA-O-054"
 content_role: "Operations"
@@ -22,7 +22,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Admit methodology expansion mappings
+# Summary
+
+Admit methodology expansion mappings
+
+## Operation
 
 Admit Methodology Expansion Mapping **means** the reusable Action that returns an admission decision for **`=1`** explicitly described expansion mapping **before** its activation **or** use. its boundary is the mapping's conformance decision, **not** choosing an Extension **or** changing activation Settings.
 
@@ -32,3 +36,5 @@ Admit Methodology Expansion Mapping **means** the reusable Action that returns a
 4. return the Evaluation result for the exact mapping **and** authority assessed. a failed **or** unresolved mapping **must not** be treated as admitted; a successful mapping check does **not** itself activate a source **or** grant additional authority.
 
 the admission boundary preserves CA-R-1375. CA-R-1207 continues **to** separate expansion rules from current Settings selections.
+
+## Details

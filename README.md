@@ -21,41 +21,91 @@ The name describes four connected parts:
 
 ## Why CAPRMEDIO works this way
 
-Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) → the project's meaning must not depend on them → an explicit ontology/base model defines the core: concepts, relations and constraints.
+Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
+the project's meaning must not depend on them →\
+an explicit ontology/base model defines the core: concepts, relations and constraints.
 
 CAPRMEDIO therefore has two parts: ontology (methodology) and harness (engine). The engine must be replaceable without changing the core.
 
 ### Ontology (methodology)
 
-Sessions are ephemeral → we need a stable source of truth → specification.
+Sessions are ephemeral →\
+we need a stable source of truth →\
+specification.
 
-Spec grows → we need smaller units → one scope + one Claim = one Atom → splitting further adds no useful distinction.
+Spec grows →\
+we need smaller units →\
+one scope + one Claim = one Atom →\
+splitting further adds no useful distinction.
 
-Different use cases need different structures → keep one authoritative source → derive different views → graph.
+Different use cases need different structures →\
+keep one authoritative source →\
+derive different views →\
+graph.
 
-The graph grows → identify Entities: the things the project describes → declare each Atom’s Subjects: what its Claim governs and what it depends on → organize them with typed nodes and relations → load only the context needed.
+The graph grows →\
+identify Entities: the things the project describes →\
+declare each Atom’s Subjects: what its Claim governs and what it depends on →\
+organize them with typed nodes and relations →\
+load only the context needed.
 
-Small files can still be ambiguous → shared vocabulary + CCE → explicit, checkable Claims.
+Small files can still be ambiguous →\
+shared vocabulary + CCE →\
+explicit, checkable Claims.
 
-We need more than spec → C for problems, A for analysis, P for objectives/tasks/backlog → RMED for specification → I for implementation → O for repeatable actions and workflows.
+We need more than spec →\
+C for problems, A for analysis, P for objectives/tasks/backlog →\
+RMED for specification →\
+I for implementation →\
+O for repeatable actions and workflows.
 
-Work changes the project → Journal records changes and execution → observed outcomes create the next Concerns.
+Work changes the project →\
+Journal records changes and execution →\
+observed outcomes create the next Concerns.
 
 ### Harness (engine)
 
-Files in folders are clear and inspectable → they currently hold authority → rescanning can become expensive → a derived graph database index supports queries and views → database state lives in `.caprmedio_runtime/`. Database authority could be a future migration.
+Files in folders are clear and inspectable →\
+they currently hold authority →\
+rescanning can become expensive →\
+a derived graph database index supports queries and views →\
+database state lives in `.caprmedio_runtime/`. Database authority could be a future migration.
 
-Deterministic work → programmatic Tools → less repeated model reasoning and token use.
+Deterministic work →\
+programmatic Tools →\
+less repeated model reasoning and token use.
 
-We cannot put everything into one prompt → Tools retrieve context and assemble Prompts → Workflow Orchestrator coordinates the steps.
+We cannot put everything into one prompt →\
+Tools retrieve context and assemble Prompts →\
+Workflow Orchestrator coordinates the steps.
 
-Wide-context reasoning → main session. Narrow, repeatable work → bounded execution contexts and structured results.
+Wide-context reasoning →\
+main session.
 
-Long actions should not block sessions → background orchestration → durable state, reconnectable runs, approvals and recovery.
+Narrow, repeatable work →\
+bounded execution contexts and structured results.
 
-Agents need a consistent interface → MCP exposes capabilities → Skills guide their use.
+Long actions should not block sessions →\
+background orchestration →\
+durable state, reconnectable runs, approvals and recovery.
 
-AI performs delegated work → the Operator retains authority → Evaluations check Claims and results.
+Agents need a consistent interface →\
+MCP exposes capabilities →\
+Skills guide their use.
+
+AI performs delegated work →\
+the Operator retains authority →\
+Evaluations check Claims and results.
+
+### Content roles and artifact forms
+
+C — concerns; A — analysis; P — plans/tasks; R — requirements; M — methods; E — evaluations; D — delivery; I — actual Implementation; O — operations/workflows.
+
+Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
+
+CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
+
+[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
 
 ## Current boundaries
 

@@ -38,7 +38,7 @@ class CommitContextTests(unittest.TestCase):
         (self.root / ".caprmedio_caprmedio").mkdir()
         (self.root / ".caprmedio_runtime").mkdir()
         (self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml").write_text(
-            "[artifact_timestamps]\ntimezone = \"Asia/Tbilisi\"\n\n[paths]\njournal_root = \".caprmedio_caprmedio/work_journal\"\nruntime_root = \".caprmedio_runtime\"\n",
+            "[artifact_timestamps]\ntimezone = \"Asia/Tbilisi\"\n\n[paths]\nruntime_root = \".caprmedio_runtime\"\n",
             encoding="utf-8",
         )
         self.git("init")
@@ -104,7 +104,7 @@ class CommitContextTests(unittest.TestCase):
         self.assertEqual("2026-08-20", context["local_date"])
         self.assertEqual("anatoly-m-maslennikov", context["author"])
         self.assertEqual(
-            ".caprmedio_caprmedio/work_journal/anatoly-m-maslennikov-2026-08-20-part-1.ndjson",
+            ".caprmedio_caprmedio/_journal/anatoly-m-maslennikov-2026-08-20-part-1.ndjson",
             context["predictions"]["journal_partitions"][0]["path"],
         )
         self.assertNotIn("previous_result_event", event)
@@ -183,7 +183,7 @@ class CommitContextTests(unittest.TestCase):
     def test_project_carrier_root_folder_excludes_configured_journal_subtree(self) -> None:
         subject = ".caprmedio_caprmedio/04_requirement/CA-R-001-REQUIREMENT--parent.md"
         self.write_atom(subject, version=2, relations={}, body="updated")
-        journal = self.root / ".caprmedio_caprmedio/work_journal/fixture.ndjson"
+        journal = self.root / ".caprmedio_caprmedio/_journal/fixture.ndjson"
         journal.parent.mkdir(parents=True)
         journal.write_text("", encoding="utf-8")
 
@@ -196,16 +196,16 @@ class CommitContextTests(unittest.TestCase):
         self.assertEqual(".caprmedio_caprmedio", context["result"]["path"])
         self.assertTrue(context["result"]["entries"])
         self.assertFalse(
-            any(entry["path"].startswith(".caprmedio_caprmedio/work_journal/") for entry in context["result"]["entries"])
+            any(entry["path"].startswith(".caprmedio_caprmedio/_journal/") for entry in context["result"]["entries"])
         )
 
     def test_project_carrier_root_add_ignores_committed_journal_only_tree(self) -> None:
         self.git("rm", "--cached", ".caprmedio_caprmedio/caprmedio_project_settings.toml")
         self.git("rm", ".caprmedio_caprmedio/04_requirement/CA-R-001-REQUIREMENT--parent.md")
-        journal = self.root / ".caprmedio_caprmedio/work_journal/fixture.ndjson"
+        journal = self.root / ".caprmedio_caprmedio/_journal/fixture.ndjson"
         journal.parent.mkdir(parents=True)
         journal.write_text("{}\n", encoding="utf-8")
-        self.git("add", ".caprmedio_caprmedio/work_journal/fixture.ndjson")
+        self.git("add", ".caprmedio_caprmedio/_journal/fixture.ndjson")
         self.git("commit", "-m", "journal-only project carrier root")
         subject = self.root / ".caprmedio_caprmedio/04_requirement/CA-R-002-REQUIREMENT--subject.md"
         subject.parent.mkdir(parents=True, exist_ok=True)
@@ -218,7 +218,7 @@ class CommitContextTests(unittest.TestCase):
         result_paths = [entry["path"] for entry in context["result"]["entries"]]
         self.assertIn(subject.relative_to(self.root).as_posix(), result_paths)
         self.assertIn(".caprmedio_caprmedio/caprmedio_project_settings.toml", result_paths)
-        self.assertFalse(any(path.startswith(".caprmedio_caprmedio/work_journal/") for path in result_paths))
+        self.assertFalse(any(path.startswith(".caprmedio_caprmedio/_journal/") for path in result_paths))
 
     def test_legacy_migration_root_remains_an_admitted_subject(self) -> None:
         path = ".caprmedio/retained-history.md"

@@ -25,10 +25,16 @@ from lifecycle_intents import (  # noqa: E402
     deferred_handoff,
     required_atom_id,
     required_context,
+    replace_atom_action,
     run_cli,
 )
 
 TOOL_ID = "REPLACE_ATOM"
+
+# The selected workflow adapter imports this route-local callable after its
+# shared CA-D-527 request has been admitted.  The legacy CLI remains a
+# deferred-intent description and never invokes it directly.
+__all__ = ("build_intent", "replace_atom_action")
 
 
 INPUT_SCHEMA = {

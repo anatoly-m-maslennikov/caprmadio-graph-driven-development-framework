@@ -5,8 +5,8 @@ subjects:
     - "Atom/Content Role: Requirement"
     - "CCE Operator"
     - "Atom/Claim"
-version: 4
-updated_at: "2026-10-02 20:35:16 +0400"
+version: 5
+updated_at: "2026-10-04 04:27:08 +0400"
 relations:
   child_of:
     - CA-M-307
@@ -35,7 +35,7 @@ Requirement Claims with the Requirement CCE Role Profile.
 
 **to** write a Requirement Claim with the Requirement CCE Role Profile, the Author **must** perform **all** of:
 
-1. state the primary contribution as one required outcome, obligation, permission, prohibition, externally observable boundary, **or** governed definition of such authority.
+1. state the primary contribution as one Entity model **or** required result by its meaning **and** value under CA-R-1339. express required properties **and** observable boundaries within that model **or** result; an obligation, permission, **or** prohibition alone does **not** select Requirement.
 2. use **must**, **must not**, **may**, **only**, quantification, predicates, comparisons, **and** explicit conditions as applicable **to** state what is required, permitted, prohibited, **or** bounded.
 3. use **means** **only** **when** the Claim defines the governed Requirement subject rather than merely describing it.
 4. express temporal Operators **only** as observable timing boundaries **or** conditions on the required result.
@@ -43,4 +43,4 @@ Requirement Claims with the Requirement CCE Role Profile.
 
 ## Details
 
-the Requirement profile governs what **must**, **may**, **or** **must not** be true. it does **not** govern the reusable way **to** make it true.
+the Requirement profile governs the required model **or** result. an observed test result remains execution evidence; it is **not** the required-result specification.

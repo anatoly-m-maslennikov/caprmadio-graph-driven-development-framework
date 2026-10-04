@@ -4,6 +4,7 @@ import contextlib
 import importlib.util
 import io
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -26,6 +27,7 @@ def carrier(atom_id: str, version: int = 1, extra: str = "", body: str = "claim"
         f"atom_id: {atom_id}\n"
         "cce_version: cce_1\n"
         "cce_form: obligation\n"
+        "status: Active\n"
         f"{extra}"
         f"version: {version}\n"
         "updated_at: 2026-08-27 00:00:00 +0400\n"
@@ -48,6 +50,7 @@ def definition_carrier(atom_id: str, term: str, subject_path: str | None = None)
         f"      - {json.dumps(governed)}\n"
         "  depends_on:\n"
         "    continuant: []\n"
+        "status: Active\n"
         "version: 1\n"
         "updated_at: 2026-08-29 00:00:00 +0400\n"
         "relations: {}\n"
@@ -96,6 +99,16 @@ class CompilerTest(unittest.TestCase):
         for layer in ("001_CORE_META_MODEL", "003_PROJECT_CONFIGURATION"):
             for _, role in module.ROLES:
                 (self.source / layer / role).mkdir()
+        structure = self.temp / module.STRUCTURE_RELATIVE
+        structure.parent.mkdir(parents=True, exist_ok=True)
+        structure.write_text(
+            '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+            f'authority_path = {json.dumps(module.SOURCE_RELATIVE.as_posix())}\n'
+            f'delivery_path = {json.dumps(module.OUTPUT_RELATIVE.as_posix())}\n'
+        )
+        (self.temp / module.SETTINGS_PATH).write_text(
+            '[paths]\ncontrol_root = ".caprmedio_caprmedio"\n'
+        )
 
     def tearDown(self) -> None:
         shutil.rmtree(self.temp, ignore_errors=True)
@@ -127,7 +140,10 @@ class CompilerTest(unittest.TestCase):
         self.assertEqual(before, {source: source.read_bytes(), local: local.read_bytes()})
         projected = self.temp / module.OUTPUT_RELATIVE / "04_requirement" / source.name
         projected_text = projected.read_text()
-        self.assertIn("projection:\n  source_carrier_path: ../000_APPLICABLE_MTHD_sources/", projected_text)
+        self.assertIn(
+            f"projection:\n  source_carrier_path: {Path(os.path.relpath(source, start=projected.parent)).as_posix()}",
+            projected_text,
+        )
         self.assertIn("# CA-R-001\n\nclaim", projected_text)
 
         rerun_code, rerun = self.invoke("--apply")
@@ -152,6 +168,74 @@ class CompilerTest(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertTrue(report["can_apply"])
         self.assertEqual(report["selected_candidate_count"], 1)
+
+    def declare_places(self, source: str, output: str) -> Path:
+        structure = self.temp / module.STRUCTURE_RELATIVE
+        structure.parent.mkdir(parents=True, exist_ok=True)
+        structure.write_text(
+            '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+            f'authority_path = {json.dumps(source)}\n'
+            f'delivery_path = {json.dumps(output)}\n'
+        )
+        return structure
+
+    def test_declared_source_place_drives_configured_projection_regeneration(self) -> None:
+        output = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+        source = f"{output}/000_APPLICABLE_MTHD_sources"
+        self.declare_places(source, output)
+        moved_source = self.temp / source
+        moved_source.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(self.source, moved_source)
+        self.source = moved_source
+        original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        before = original.read_bytes()
+
+        code, report = self.invoke()
+        projected = self.temp / module.OUTPUT_RELATIVE / "05_method" / original.name
+        self.assertEqual(0, code)
+        self.assertEqual(str(projected.relative_to(self.temp)), report["output_plan"][0]["output_path"])
+        applied_code, applied = self.invoke("--apply")
+        self.assertEqual(0, applied_code)
+        self.assertIn(b"projection:", projected.read_bytes())
+        self.assertEqual(before, original.read_bytes())
+        rerun_code, rerun = self.invoke("--apply")
+        self.assertEqual(0, rerun_code)
+        self.assertEqual(applied["generated_tree_digest"], rerun["generated_tree_digest"])
+
+    def test_invalid_declared_places_do_not_mutate_sources(self) -> None:
+        original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        for source, output, expected in (
+            ("../outside", "projection", "source-unit-place-invalid"),
+        ):
+            with self.subTest(source=source, output=output):
+                self.declare_places(source, output)
+                code, report = self.invoke("--apply")
+                self.assertEqual(2, code)
+                self.assertEqual(expected, report["diagnostics"][0]["code"])
+                self.assertEqual(carrier("CA-M-001"), original.read_bytes())
+
+    def test_changed_structure_blocks_staging_at_original_places(self) -> None:
+        self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), module.OUTPUT_RELATIVE.as_posix())
+        places = module.methodology_paths(self.temp)
+        _, candidates, snapshot = module.compile_report(self.temp, places)
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), "other_projection")
+
+        with self.assertRaises(module.CompileError) as raised:
+            module.stage_outputs(self.temp, candidates, snapshot, places)
+
+        self.assertEqual("source-frontier-changed", raised.exception.code)
+        self.assertFalse((self.temp / "other_projection").exists())
+
+    def test_structure_delivery_alias_does_not_override_configured_projection_target(self) -> None:
+        self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001--one.md", carrier("CA-R-001"))
+        (self.temp / "source_alias").symlink_to(self.source, target_is_directory=True)
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), "source_alias")
+
+        code, report = self.invoke("--apply")
+
+        self.assertEqual(0, code)
+        self.assertTrue((self.temp / module.OUTPUT_RELATIVE / "04_requirement").is_dir())
 
     def test_duplicate_identity_blocks_apply_without_exact_approval(self) -> None:
         self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001-A--one.md", carrier("CA-R-001"))
@@ -191,7 +275,7 @@ class CompilerTest(unittest.TestCase):
         self.assertEqual(2, apply_code)
         self.assertEqual("BLOCKED", applied["apply_status"])
 
-    def test_exact_project_configuration_approval_resolves_one_conflict(self) -> None:
+    def test_project_configuration_toml_index_cannot_resolve_one_conflict(self) -> None:
         first = self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001-A--one.md", carrier("CA-R-001"))
         second = self.write("003_PROJECT_CONFIGURATION", "04_requirement", "CA-R-001-B--two.md", carrier("CA-R-001", version=2))
         _, initial = self.invoke()
@@ -208,11 +292,11 @@ class CompilerTest(unittest.TestCase):
         approval_path.write_text(approval)
 
         code, report = self.invoke("--apply")
-        self.assertEqual(code, 0)
-        self.assertEqual(report["unresolved_conflict_count"], 0)
+        self.assertEqual(code, 2)
+        self.assertGreater(report["unresolved_conflict_count"], 0)
         output = self.temp / module.OUTPUT_RELATIVE / "04_requirement"
         self.assertFalse((output / first.name).exists())
-        self.assertTrue((output / second.name).exists())
+        self.assertFalse((output / second.name).exists())
 
     def test_stale_approval_does_not_replace_output(self) -> None:
         self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001-A--one.md", carrier("CA-R-001"))

@@ -1,20 +1,36 @@
 ---
-atom_id: CA-R-1199
-cce_version: cce_1
-cce_form: definition
 subjects:
-  governs:
-    continuant:
-      - "Subject/Relation Kind: GOVERNS"
+  governs: "GOVERNS"
   depends_on:
-    continuant:
-      - Subject/Relation Kind
-version: 5
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Relation Kind"
+    - "Atom"
+    - "Subject"
+    - "Entity"
+    - "Atom/Claim"
+version: 13
+updated_at: "2026-10-02 21:29:19 +0400"
 relations: {}
+atom_id: "CA-R-1199"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1199-CORE_META_MODEL-CORE-REQUIREMENT--define-governs-subject-relation-kind.md
 ---
-# Define GOVERNS Subject Relation Kind
+# Summary
 
-the GOVERNS Subject Relation Kind **means** the Subject Relation Kind that makes its Atom authoritative about the referenced Entity.
+Define GOVERNS Subject Relation Kind
+
+## Scope
+
+the GOVERNS Subject Relation Kind.
+
+## Claim
+
+GOVERNS **means** the direct Subject Relation Kind from an Atom **to** the canonical Entity about which its Claim is authoritative.
+
+## Details

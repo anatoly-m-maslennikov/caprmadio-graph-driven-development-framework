@@ -13,7 +13,7 @@ subjects:
     - "Version"
     - "AI Agent"
 version: 5
-updated_at: "2026-09-16 17:31:26 +0000"
+updated_at: "2026-10-04 15:08:16 +0000"
 relations:
   relates_to:
     - "CA-O-025"
@@ -30,7 +30,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Assess release readiness for the current candidate
+# Summary
+
+Assess release readiness for the current candidate
+
+## Operation
 
 Assess Release Readiness **means** the Action that returns the readiness disposition for the exact selected release candidate.
 
@@ -40,3 +44,5 @@ Assess Release Readiness **means** the Action that returns the readiness disposi
 4. record the actual disposition **and** its candidate/evidence binding **in** the shared Journal.
 
 a passed readiness disposition applies **only** **to** the checked candidate. it does **not** perform publication, create a release event, freeze a Version, change governing authority, **or** substitute AI Agent confidence for required Operator approval.
+
+## Details

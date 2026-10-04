@@ -1,20 +1,34 @@
 ---
-atom_id: CA-R-1217
-cce_version: cce_1
-cce_form: definition
 subjects:
-  governs:
-    continuant:
-      - Extension
+  governs: "Extension"
   depends_on:
-    continuant:
-      - Applicable Methodology/Sources/Core Meta-Model
-version: 4
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Methodology Source"
+    - "Core Meta-Model"
+    - "Methodology Source/Expansion Boundary"
+version: 11
+updated_at: "2026-10-02 21:35:09 +0400"
 relations: {}
+atom_id: "CA-R-1217"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1217-CORE_META_MODEL-CORE-REQUIREMENT--define-extension.md
 ---
-# Define Extension
+# Summary
 
-an Extension **means** an immutable authority source that adds **or** specializes Methodology authority **without** modifying the Core Meta-Model authority.
+Define Extension
+
+## Scope
+
+Extensions within the Core Meta-Model's permitted expansion boundary.
+
+## Claim
+
+an Extension **means** an immutable Methodology Source that adds authority within the Core Meta-Model's permitted expansion boundary under CA-R-1375-CORE_META_MODEL-CORE-REQUIREMENT--restrict-methodology-source-expansion-to-core-permission. specialization is admitted **only** **where** that boundary permits it **and** preserves applicable Core Meta-Model authority; unchanged Core Carrier bytes alone do **not** establish preservation.
+
+## Details

@@ -1,23 +1,34 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - "Atom/Content Role: Requirement/Type: Demand/Producer Result"
+  governs: "Atom/Content Role: Requirement/Type: Demand/Producer Result"
   depends_on:
-    continuant:
-      - Consumer/Goal
-      - Producer/Result
-atom_id: CA-R-933
-cce_version: cce_1
-cce_form: obligation
-version: 10
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Consumer/Goal"
+    - "Producer/Result"
+version: 17
+updated_at: "2026-10-02 21:01:00 +0400"
 relations:
   child_of:
     - CA-R-932
+atom_id: "CA-R-933"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-933-CORE_META_MODEL-CORE-REQUIREMENT--restrict-demand-to-one-depended-on-result.md
 ---
-# Restrict Demand to one depended-on result
+# Summary
+Restrict Demand to one depended-on result
+
+## Scope
+
+Demand Atoms.
+
+## Claim
 
 **every** Demand Atom **must** constrain **`=1`** Producer result on which its Consumer's accepted Goal depends.
+
+## Details

@@ -17,7 +17,7 @@ subjects:
     - "Atom/Content Role: Method"
     - "Implementation Workflow"
 version: 2
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 15:15:46 +0000"
 relations:
   relates_to:
     - CA-O-101
@@ -29,7 +29,7 @@ global_tier: 11
 
 Learn Methods from verified implementation issues
 
-## Claim
+## Operation
 
 Method Learning Workflow **means** the separately invoked graph that derives **and**, **when** admitted, accepts Method lessons from verified implementation evidence.
 
@@ -47,3 +47,5 @@ Method Learning Workflow **means** the separately invoked graph that derives **a
 | CA-O-098 | blocked | blocked |
 
 the input is an explicitly admitted learning request with retained implementation issue, test, diagnosis, **and** fix evidence, **not** an automatic continuation required for implementation completion. a failed invocation, unknown result, stale evidence, **or** unmet confidence/permission gate terminates `blocked` with actual partial results. a blocked learning Run does **not** retroactively fail a verified implementation Run; a separately discovered implementation defect still requires its own disposition.
+
+## Details

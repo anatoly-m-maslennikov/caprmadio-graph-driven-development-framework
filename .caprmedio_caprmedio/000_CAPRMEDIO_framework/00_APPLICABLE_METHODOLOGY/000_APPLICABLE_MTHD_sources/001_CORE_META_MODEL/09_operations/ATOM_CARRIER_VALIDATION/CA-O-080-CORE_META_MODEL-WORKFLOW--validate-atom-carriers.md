@@ -15,7 +15,7 @@ subjects:
     - "Workflow/Relation Kind: On Result"
     - "Check Atoms Step"
 version: 4
-updated_at: "2026-09-23 23:53:58 +0000"
+updated_at: "2026-10-04 15:14:54 +0000"
 relations:
   relates_to:
     - CA-O-088
@@ -28,7 +28,7 @@ global_tier: 11
 
 Validate Atom Carriers
 
-## Claim
+## Operation
 
 Atom Carrier Validation **means** the reusable Workflow with the following graph; the referenced Step owns its invocation binding.
 
@@ -43,3 +43,5 @@ Atom Carrier Validation **means** the reusable Workflow with the following graph
 | CA-O-088 | error | error |
 
 an undeclared result **or** failed Step invocation ends the Run as `error` with available partial evidence. the graph has no back edge, automatic retry, repair, **or** successor-Workflow invocation.
+
+## Details

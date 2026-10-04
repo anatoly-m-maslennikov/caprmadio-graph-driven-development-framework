@@ -1,45 +1,51 @@
 ---
-atom_id: CAPRMEDIO-GOV-EVAL-009
-cce_version: cce_1
-cce_form: evaluation
 subjects:
-  governs:
-    occurrent:
-      - evaluation
-version: 10
-updated_at: 2026-09-06 01:45:12 +0400
-llm_session_ids:
-  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+  governs: "evaluation"
+version: 19
+updated_at: "2026-10-01 21:46:54 +0400"
 relations:
-  replacement_of:
-    - CAPRMEDIO-GOV-EVAL-041--three-level-priority-vocabulary
-  check_of:
-    - CAPRMEDIO-GOV-REQU-299-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection
-  child_of:
-    - CA-R-1054
+  evaluation_for:
+    - "CA-D-386"
+    - "CA-R-1629"
+atom_id: "CAPRMEDIO-GOV-EVAL-009"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md
 ---
-# Effective-priority selection
+# Summary
 
-## Claim checked
+Effective-priority selection
 
-Conflict selection derives the governed effective priorities **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.
+## Scope
 
-## Applicable conditions
+the following effective-priority selection conditions:
 
-1. Accept stored priority **only** on Concern Atoms **and** reject it on Epic, Task, Action Policy, **and** **every** other Content role Atom.
-2. Accept **only** stored `high`, `medium`, **or** `low`.
-3. Reject stored `highest`, `critical`, **and** `deferred`.
-4. Apply the strict-ancestor **and** earlier-layer increments independently **and** together, capped at virtual `highest`.
-5. Confirm `ask_always` always asks.
-6. Confirm `auto_by_effective_priority` selects **`=1`** unique eligible winner **and** asks on ties, incomparable scopes, uncertainty, **or** multiple winners.
-7. Confirm unsatisfiable external obligations stop rather than auto-resolve.
+1. accept stored priority **only** on Concern Atoms **and** reject it on **every** non-Concern Content Role Atom.
+2. accept **only** stored `high`, `medium`, **or** `low`.
+3. reject stored `highest`, `critical`, **and** `deferred`.
+4. compare Concern Atoms with equal stored Priority under a selected model that gives them equal comparison results. change **only** their Scope Unit ancestry; confirm that no implicit increment, virtual `highest`, **or** ancestry-based winner appears.
+5. confirm that comparison follows the selected model, its effective parameters, **and** its active criteria; an unresolved model **or** unjustified selection asks the Operator.
+6. confirm `ask_always` always asks.
+7. confirm `auto_by_effective_priority` selects **`=1`** unique eligible winner **and** asks on ties, incomparable scopes, uncertainty, **or** multiple winners.
+8. confirm unsatisfiable external obligations stop rather than auto-resolve.
 
-## Acceptance criteria
+## Claim
 
-**every** comparison produces the governed effective priorities **and** never guesses through a non-unique **or** ineligible result.
+conflict selection follows the admissible Operator-selected priority model **without** an implicit ancestry bonus **and** never chooses through a tie, incomparable scope, uncertainty, **or** ineligible external obligation.
 
-## Failure disposition
+## Details
 
-Stop automatic selection, ask the operator, **and** record a Concern for **any** incorrect priority **or** unauthorized winner.
+### Acceptance criteria
+
+**every** comparison conforms **to** the selected priority model **without** an implicit ancestry bonus **and** never guesses through a non-unique **or** ineligible result. authority-tier precedence remains separate **and** unchanged.
+
+### Failure disposition
+
+stop automatic selection, ask the Operator, **and** record a Concern for **any** incorrect priority **or** unauthorized winner.

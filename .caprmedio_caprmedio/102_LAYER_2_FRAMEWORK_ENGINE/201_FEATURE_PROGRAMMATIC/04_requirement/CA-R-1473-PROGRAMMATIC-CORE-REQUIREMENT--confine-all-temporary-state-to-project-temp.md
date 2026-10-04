@@ -9,8 +9,8 @@ subjects:
 llm_session_ids:
   - codex:01a0263a-7510-7672-bce4-58830bc4d184
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
-version: 8
-updated_at: 2026-09-15 04:19:10 +0400
+version: 9
+updated_at: "2026-10-04 04:23:29 +0400"
 relations: {}
 ---
 # Confine all temporary state to project temp
@@ -31,7 +31,12 @@ working directory, a source **or** Delivery Carrier, the Project control root,
 Temporary State root is unavailable, an invoked dependency cannot be redirected,
 **or** a required same-filesystem atomicity precondition cannot be satisfied, the
 component **must** stop **before** the affected effect **and** report the boundary
-failure.
+failure with one stable diagnostic identifying its creating owner **and**
+violating path.
+
+retained temporary paths **must** preserve their owner **and** run identity.
+temporary confinement **must** remain correct **when** bounded cleanup is interrupted
+**or** denied; cleanup completion is **not** a prerequisite for confinement.
 
 Temporary state **must not** become authority **or** installed implementation.
 Deleting `.caprmedio_tmp/` **may** discard caches, diagnostics, disposable

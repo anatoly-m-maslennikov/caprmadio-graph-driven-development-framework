@@ -1,20 +1,32 @@
 ---
-atom_id: CA-R-1234
-cce_version: cce_1
-cce_form: separation
 subjects:
-  governs:
-    continuant:
-      - "Atom/Local Tier: Core"
+  governs: "Atom/Local Tier: Core"
   depends_on:
-    continuant:
-      - Applicable Methodology/Sources/CORE_META_MODEL
-version: 5
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Applicable Methodology/Sources/CORE_META_MODEL"
+version: 12
+updated_at: "2026-10-02 21:35:09 +0400"
 relations: {}
+atom_id: "CA-R-1234"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1234-CORE_META_MODEL-CORE-REQUIREMENT--distinguish-core-local-tier-from-core-meta-model-source-layer.md
 ---
-# Distinguish CORE Local Tier from CORE_META_MODEL Source Layer
+# Summary
+
+Distinguish CORE Local Tier from CORE_META_MODEL Source Layer
+
+## Scope
+
+Local Tier Core and the named Source Layer CORE_META_MODEL.
+
+## Claim
 
 the Local Tier Core **and** the named Source Layer CORE_META_MODEL **must** remain independent coordinates.
+
+## Details

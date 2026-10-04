@@ -1,0 +1,67 @@
+x-runtime: &runtime
+  image: ${CAPRMEDIO_IMAGE:-caprmedio-runtime:local}
+  init: true
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  restart: "no"
+  tmpfs: ["/tmp:rw,nosuid,nodev,size=256m"]
+  pids_limit: 256
+  mem_limit: 1g
+  cpus: 2
+
+x-project-mounts: &project-mounts
+  - type: bind
+    source: ${CAPRMEDIO_PROJECT_ROOT}
+    target: /project
+    bind: {create_host_path: false}
+  - type: bind
+    source: ${CAPRMEDIO_PROJECT_ROOT}/.git
+    target: /project/.git
+    read_only: true
+    bind: {create_host_path: false}
+
+services:
+  worker:
+    <<: *runtime
+    command: [worker]
+    environment:
+      CAPRMEDIO_RUNTIME_NAMESPACE: docker
+    volumes: *project-mounts
+    networks: [runtime]
+    depends_on:
+      agent: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/entrypoint.py, health]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+    stop_grace_period: 30s
+  agent:
+    <<: *runtime
+    command: [agent]
+    environment:
+      CAPRMEDIO_AGENT_MODE: codex
+    volumes:
+      - agent_auth:/home/caprmedio/.codex
+    networks: [runtime]
+    healthcheck:
+      test: [CMD, python, 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/entrypoint.py, agent-health]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+  mcp:
+    <<: *runtime
+    command: [mcp]
+    stdin_open: true
+    profiles: [stdio]
+    environment:
+      CAPRMEDIO_RUNTIME_NAMESPACE: docker
+    volumes: *project-mounts
+    networks: [runtime]
+
+networks:
+  runtime: {internal: true}
+  egress: {}
+volumes:
+  agent_auth: {}

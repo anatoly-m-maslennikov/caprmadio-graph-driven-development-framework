@@ -1,38 +1,57 @@
 ---
 subjects:
-  governs:
-    occurrent:
-      - Scope Reference Validation
+  governs: "Scope Reference Validation"
   depends_on:
-    continuant:
-      - Atom/Scope
-      - Atom/Claim/Governed Subject Set
-      - Atom/Claim/Scope
-      - Atom/Claim/Scope/Scope Unit Set
-      - Structural Parent Relation
-atom_id: CA-E-240
-cce_version: cce_1
-cce_form: evaluation
-version: 17
-updated_at: 2026-09-06 01:45:12 +0400
-relations: {}
+    - "Atom/Revision/Author"
+    - "Atom/Scope"
+    - "Atom/Claim/Target Scope Unit"
+    - "Atom/Claim"
+    - "Atom/Subjects"
+    - "Scope Unit"
+    - "Project Structure"
+    - "Operator"
+    - "Hub Atom"
+version: 30
+updated_at: "2026-10-01 21:25:33 +0400"
+relations: {"evaluation_for": ["CA-R-1595", "CA-R-1596", "CA-R-922", "CA-R-923", "CA-R-1588", "CA-R-1271", "CA-R-947", "CA-R-944", "CA-R-1201", "CA-R-1202", "CA-D-482", "CA-D-495"]}
+atom_id: "CA-E-240"
+content_role: "Evaluation"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "QA Case"
+global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md
 ---
-# Validate Atom Scope and Claim Scope
+# Summary
 
-## Claim checked
+Validate Atom Scope **and** Claim Scope
 
-**every** Atom resolves **`=1`** Atom Scope, **`=1`** Governed Subject Set, **and** **`<=1`** atomic **or** composite Claim Scope **without** making a referenced Entity bearer-dependent.
+## Scope
 
-## Test case
+independent resolution of Atom ownership, GOVERNS Subject, Claim Target Scope Unit, **and** textual applicability.
 
-create a Current-scope Atom, a parent-owned Goal for a direct child, an Operator-owned Project Goal with no Scope Unit Atom Scope, composite Claim Scopes, **and** one permitted Demand. **then** omit **or** duplicate an Atom Scope component, reorder the same Governed Subject Set, leave a reference unresolved, make a referenced Scope Unit bearer-dependent, **and** use a forbidden Goal **or** Demand target.
+## Claim
 
-## Acceptance criteria
+### Claim checked
 
-**every** valid fixture resolves **`=1`** Atom Scope **and** **`<=1`** Claim Scope, classifies a fixture with **`=0`** Claim Scope as a Current-scope Atom, classifies a fixture with **`=1`** Claim Scope as a Relational Atom, **and** preserves canonical component equality independent of authored Subject order. **every** invalid fixture fails with the incorrect reference, ownership, Subject set, **or** relational fact identified.
+**every** Atom resolves its ownership, **`=1`** GOVERNS Relation, **and** **`=1`** Claim Target Scope Unit independently of **any** applicability restrictions **in** its Main Content.
 
-## Failure disposition
+## Details
 
-record a Concern naming the invalid Atom **and** Scope fact.
+### Test case
+
+create a Current-scope Atom with its own Scope Unit carried as the target; repeat with a narrower restriction **and** a composite restriction **in** its Scope section for RMED **or** the registered primary content for other roles. create a parent-owned Goal for a declared direct child, an external Project Goal with its Author's registered Operator name **and** an explicit Project target, **and** a permitted Demand. include a Plan **in** a nested Hub whose carried target is its owning Scope Unit.
+
+**then** omit a required target, provide two target values, supply a Hub **or** another non-Scope-Unit target, leave a reference unresolved, infer a different target merely from textual restrictions, change ownership from the target, make the referenced Scope Unit bearer-dependent, reorder Subject declarations, **or** use a forbidden Goal **or** Demand target.
+
+### Acceptance criteria
+
+**every** valid fixture retains its ownership, resolves **`=1`** canonical GOVERNS target **and** **`=1`** Claim Target Scope Unit, **and** preserves its applicability restrictions **in** the body sections registered by CA-D-495-CORE_META_MODEL-CORE-DELIVERY--carry-applicability-in-the-registered-body-sections. a Current-scope target is selected from the owning Scope Unit during authoring **and** carried explicitly; an external Goal requires its explicit Project target. narrower **or** composite Claim Scope alone does **not** make an Atom Relational. a different permitted target does **not** transfer ownership **or** create Scope Unit ancestry. Subject ordering **and** Hub nesting do **not** change these facts. **every** invalid fixture fails with the exact affected fact identified.
+
+### Failure disposition
+
+report the invalid Atom **and** ownership, target, textual restriction, **or** Subject fact; do **not** repair unresolved references by guessing.

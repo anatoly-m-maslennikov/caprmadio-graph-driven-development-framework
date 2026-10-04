@@ -25,7 +25,7 @@ subjects:
     - "Dependency Order Derivation"
     - "Scope Unit"
 version: 6
-updated_at: "2026-09-24 18:16:00 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-M-239
@@ -43,7 +43,7 @@ global_tier: 11
 
 Prepare implementation work
 
-## Claim
+## Operation
 
 Implementation Preparation **means** the Agentic Action that resolves an implementation request into persistent Plan work **and** the next prerequisite-ready item.
 
@@ -72,3 +72,5 @@ Implementation Preparation **means** the Agentic Action that resolves an impleme
 - return `complete` **only** after **all** selected implementation Plan work, required child Plans, Definitions of Done, **and** applicable Evaluations are satisfied, with no failed, blocked, stale, **or** unevaluated implementation obligations. return retained issue/diagnosis/fix evidence for separate Method learning; creating **or** accepting a Method is **not** a completion condition **or** a next Step **in** this Run.
 - return `blocked` for unmet authority, capability, confidence, permission, prerequisite, **or** Plan admission, including nonempty residual work with no ready next item.
 - current execution uses the host's native subagent, file, **and** command capabilities. MCP **or** a running Workflow server is **not** required. missing subagent capability blocks delegated work rather than silently executing it **in** the main session. Step bindings own the Integrated/Isolated choice; do **not** introduce a Workflow-wide context Property.
+
+## Details

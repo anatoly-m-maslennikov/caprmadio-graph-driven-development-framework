@@ -140,24 +140,47 @@ def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
 
 def configured_journal_root(root: Path) -> Path:
     settings = tomllib.loads((root / SETTINGS_PATH).read_text(encoding="utf-8"))
-    value = settings.get("paths", {}).get("journal_root")
-    if not isinstance(value, str) or not value:
-        raise RuntimeError("Project Settings requires paths.journal_root")
-    path = Path(value)
-    control_value = settings.get("paths", {}).get("control_root", ".caprmedio_caprmedio")
+    paths = settings.get("paths", {})
+    control_value = paths.get("control_root")
     if not isinstance(control_value, str) or not control_value:
         raise RuntimeError("Project Settings requires paths.control_root")
     control = Path(control_value)
-    if (
-        path.is_absolute()
-        or ".." in path.parts
-        or control.is_absolute()
-        or ".." in control.parts
-        or path == control
-        or path.parts[: len(control.parts)] != control.parts
-    ):
-        raise RuntimeError("paths.journal_root must be a safe descendant of paths.control_root")
-    return path
+    if control.is_absolute() or ".." in control.parts or not control.parts:
+        raise RuntimeError("paths.control_root must be a safe repository-relative path")
+    canonical = control / "_journal"
+    value = paths.get("journal_root", canonical.as_posix())
+    if not isinstance(value, str) or not value:
+        raise RuntimeError("paths.journal_root must be a non-empty string when provided")
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts:
+        raise RuntimeError("paths.journal_root must be a safe repository-relative path")
+    if path != canonical:
+        raise RuntimeError("paths.journal_root must be exactly paths.control_root/_journal")
+    legacy = control / "work_journal"
+    if (root / legacy).exists() and not (root / canonical).exists():
+        raise RuntimeError(
+            "migration-pending: move paths.control_root/work_journal to paths.control_root/_journal before Journal admission"
+        )
+    return canonical
+
+
+def _legacy_journal_root(root: Path) -> Path:
+    """Return the former Journal location accepted only for sealed recovery."""
+    return configured_journal_root(root).parent / "work_journal"
+
+
+def _physical_journal_path(root: Path, reference: str) -> Path:
+    """Map an old sealed carrier reference to its renamed Journal location.
+
+    The returned location is only for filesystem I/O.  Callers retain the
+    original ``reference`` bytes in any sealed append context or receipt.
+    """
+    path = Path(reference)
+    legacy = _legacy_journal_root(root)
+    if path.parts[: len(legacy.parts)] == legacy.parts:
+        remainder = path.parts[len(legacy.parts) :]
+        return root / configured_journal_root(root) / Path(*remainder)
+    return root / path
 
 
 def configured_runtime_root(root: Path) -> Path:
@@ -397,9 +420,136 @@ def _validate_workflow_event(value: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
+def _validate_safe_ref(value: object, label: str, *, allow_none: bool = False) -> str | None:
+    if value is None and allow_none:
+        return None
+    if not isinstance(value, str) or not value:
+        raise WorkJournalError("invalid-event", f"{label} must be a non-empty safe repository-relative reference")
+    path = Path(value)
+    if path.is_absolute() or ".." in path.parts or not path.parts:
+        raise WorkJournalError("invalid-event", f"{label} must be repository-relative")
+    return value
+
+
+def _validate_definition_binding(value: object, *, label: str) -> dict[str, Any]:
+    if not isinstance(value, dict) or set(value) != {"kind", "atom_id", "version", "path", "digest"}:
+        raise WorkJournalError("invalid-event", f"{label} must contain kind, atom_id, version, path, and digest")
+    if value["kind"] not in {"workflow", "step", "action"}:
+        raise WorkJournalError("invalid-event", f"{label}.kind is invalid")
+    _require_string(value, "atom_id")
+    if type(value["version"]) is not int or value["version"] < 1:
+        raise WorkJournalError("invalid-event", f"{label}.version must be a positive integer")
+    _validate_safe_ref(value["path"], f"{label}.path")
+    _require_sha256(value["digest"], f"{label}.digest")
+    return value
+
+
+def _validate_workflow_event_v5(value: dict[str, Any]) -> dict[str, Any]:
+    """Validate selected-run evidence without changing schema-v4 readers."""
+    expected = {
+        "schema_version", "kind", "event_id", "action_id", "event", "author", "occurred_at", "llm_session",
+        "structural_scope", "initiative", "run", "definition_bindings", "input_ref", "outcome", "result_ref",
+        "effect_refs", "report_ref", "redaction", "event_digest",
+    }
+    if set(value) != expected or value.get("schema_version") != 5:
+        raise WorkJournalError("invalid-event", "workflow execution requires schema-v5 fields")
+    if value.get("kind") != "workflow_execution" or value.get("event") not in EVENTS:
+        raise WorkJournalError("invalid-event", "invalid workflow execution kind or event")
+    for field in ("event_id", "action_id", "author", "occurred_at", "structural_scope"):
+        _require_string(value, field)
+    if not AUTHOR_RE.fullmatch(value["author"]):
+        raise WorkJournalError("invalid-event", "author must be a full GitHub username")
+    _validate_occurred_at(value["occurred_at"])
+    session = value["llm_session"]
+    if not isinstance(session, dict) or set(session) != {"app", "uuid"}:
+        raise WorkJournalError("invalid-event", "llm_session must contain only app and uuid")
+    _require_string(session, "app")
+    _require_string(session, "uuid")
+    initiative = value["initiative"]
+    if not isinstance(initiative, dict) or set(initiative) - {"initiative_id", "instruction_summary", "initiative_ref"}:
+        raise WorkJournalError("invalid-event", "initiative has unsupported fields")
+    _require_string(initiative, "initiative_id")
+    _require_string(initiative, "instruction_summary")
+    if "initiative_ref" in initiative:
+        _validate_safe_ref(initiative["initiative_ref"], "initiative.initiative_ref")
+    run = value["run"]
+    if not isinstance(run, dict) or set(run) - {"run_id", "kind", "definition", "parent_run_id", "predecessor_run_id", "successor_run_ids"}:
+        raise WorkJournalError("invalid-event", "run has unsupported fields")
+    _require_string(run, "run_id")
+    if run.get("kind") not in {"workflow", "step", "action"}:
+        raise WorkJournalError("invalid-event", "run.kind is invalid")
+    definition = run.get("definition")
+    if not isinstance(definition, dict):
+        raise WorkJournalError("invalid-event", "run.definition must be an object")
+    _validate_definition_binding({"kind": run["kind"], **definition}, label="run.definition")
+    for relation in ("parent_run_id", "predecessor_run_id"):
+        if relation in run:
+            _require_string(run, relation)
+            if run[relation] == run["run_id"]:
+                raise WorkJournalError("invalid-event", f"run.{relation} cannot self-reference")
+    if "successor_run_ids" in run:
+        successors = run["successor_run_ids"]
+        if not isinstance(successors, list) or not successors or len(set(successors)) != len(successors):
+            raise WorkJournalError("invalid-event", "run.successor_run_ids must be a distinct non-empty list")
+        for successor in successors:
+            if not isinstance(successor, str) or not successor or successor == run["run_id"]:
+                raise WorkJournalError("invalid-event", "run.successor_run_ids contains an invalid identity")
+    bindings = value["definition_bindings"]
+    if not isinstance(bindings, list) or not bindings:
+        raise WorkJournalError("invalid-event", "definition_bindings must be a non-empty ordered list")
+    prior: tuple[str, str, int, str] | None = None
+    seen: set[tuple[str, str, int, str]] = set()
+    for binding in bindings:
+        _validate_definition_binding(binding, label="definition binding")
+        key = (binding["kind"], binding["atom_id"], binding["version"], binding["path"])
+        if key in seen or (prior is not None and key <= prior):
+            raise WorkJournalError("invalid-event", "definition_bindings must be uniquely canonical")
+        seen.add(key)
+        prior = key
+    run_key = (run["kind"], definition["atom_id"], definition["version"], definition["path"])
+    if run_key not in seen:
+        raise WorkJournalError("invalid-event", "definition_bindings must retain the Run definition")
+    _validate_safe_ref(value["input_ref"], "input_ref")
+    outcome = value["outcome"]
+    if outcome is not None and outcome not in {"completed", "no_op", "failed", "cancelled", "partial", "interrupted_pending"}:
+        raise WorkJournalError("invalid-event", "outcome is invalid")
+    event = value["event"]
+    allowed_outcomes = {
+        "started": {None}, "progressed": {None}, "completed": {"completed", "no_op"},
+        "failed": {"failed", "partial"}, "abandoned": {"cancelled", "partial"},
+        "interrupted": {"interrupted_pending"}, "recovered": {"completed", "no_op", "failed", "cancelled", "partial", "interrupted_pending"},
+    }
+    if outcome not in allowed_outcomes[event]:
+        raise WorkJournalError("invalid-event", "event and outcome do not have an admitted truthful mapping")
+    result_ref = _validate_safe_ref(value["result_ref"], "result_ref", allow_none=True)
+    report_ref = _validate_safe_ref(value["report_ref"], "report_ref", allow_none=True)
+    if event in {"completed", "failed", "abandoned"} and result_ref is None:
+        raise WorkJournalError("invalid-event", "terminal selected Run evidence requires result_ref")
+    effect_refs = value["effect_refs"]
+    if not isinstance(effect_refs, list) or len(set(effect_refs)) != len(effect_refs):
+        raise WorkJournalError("invalid-event", "effect_refs must be a duplicate-free ordered list")
+    for effect_ref in effect_refs:
+        _validate_safe_ref(effect_ref, "effect_ref")
+    if outcome == "no_op" and effect_refs:
+        raise WorkJournalError("invalid-event", "no_op cannot carry a fictitious effect reference")
+    redaction = value["redaction"]
+    if not isinstance(redaction, dict) or set(redaction) != {"redacted", "fields"} or type(redaction["redacted"]) is not bool or not isinstance(redaction["fields"], list):
+        raise WorkJournalError("invalid-event", "redaction must contain redacted and fields")
+    if any(not isinstance(field, str) or not field for field in redaction["fields"]):
+        raise WorkJournalError("invalid-event", "redaction.fields must contain non-empty field labels")
+    if bool(redaction["fields"]) != redaction["redacted"]:
+        raise WorkJournalError("invalid-event", "redaction flag must match listed redacted fields")
+    _require_sha256(value.get("event_digest"), "event_digest")
+    if value["event_digest"] != event_digest(value):
+        raise WorkJournalError("event-digest-mismatch", f"sealed event {value['event_id']} has mismatched canonical bytes")
+    return value
+
+
 def validate_sealed_event(event: Mapping[str, Any]) -> dict[str, Any]:
     """Validate an event already sealed by COMMIT_CONTEXT without re-resolution."""
     value = dict(event)
+    if value.get("schema_version") == 5:
+        return _validate_workflow_event_v5(value)
     if value.get('schema_version') == 4 or value.get('kind') == 'workflow_execution':
         return _validate_workflow_event(value)
     if {"action_message", "before_path", "before_sha256", "session_id", "session"} & set(value):
@@ -562,10 +712,22 @@ def _receipt(root: Path, path: Path, data: bytes, line: int, event: Mapping[str,
     }
 
 
-def _existing_receipt(root: Path, event: Mapping[str, Any], author: str, local_date: str) -> dict[str, Any] | None:
+def _receipt_path(root: Path, event_id: str) -> Path:
+    return root / configured_runtime_root(root) / "state" / "work_journal" / "receipts" / f"{event_id}.json"
+
+
+def _all_journal_parts(root: Path) -> list[Path]:
+    directory = root / configured_journal_root(root)
+    if not directory.exists():
+        return []
+    return sorted(path for path in directory.glob("*.ndjson") if path.is_file())
+
+
+def _existing_receipt(root: Path, event: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Find an Event identity globally, before any date-partition choice."""
     event_id = str(event["event_id"])
     digest = str(event["event_digest"])
-    for _, path in _part_paths(root, author, local_date):
+    for path in _all_journal_parts(root):
         data, records = _carrier_records(path)
         for line, record in enumerate(records, start=1):
             if record.get("event_id") != event_id:
@@ -573,6 +735,17 @@ def _existing_receipt(root: Path, event: Mapping[str, Any], author: str, local_d
             if record.get("event_digest") != digest:
                 raise WorkJournalError("identity-collision", f"event_id {event_id} already has different canonical bytes")
             return _receipt(root, path, data, line, event)
+    receipt_path = _receipt_path(root, event_id)
+    if receipt_path.is_file():
+        try:
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise WorkJournalError("invalid-receipt", f"cannot read receipt for event_id {event_id}") from error
+        if not isinstance(receipt, dict) or receipt.get("event_id") != event_id:
+            raise WorkJournalError("invalid-receipt", f"receipt for event_id {event_id} is malformed")
+        if receipt.get("event_digest") != digest:
+            raise WorkJournalError("identity-collision", f"event_id {event_id} already has different canonical bytes")
+        return receipt
     return None
 
 
@@ -611,6 +784,38 @@ def _partition_lock(root: Path, author: str, local_date: str) -> Iterator[None]:
             path.unlink(missing_ok=True)
 
 
+@contextmanager
+def _event_lock(root: Path, event_id: str) -> Iterator[None]:
+    """Serialize an Event identity across every author/date partition."""
+    locks = root / configured_runtime_root(root) / "state" / "work_journal" / "locks" / "events"
+    locks.mkdir(parents=True, exist_ok=True)
+    path = locks / f"{_sha256(event_id.encode('utf-8'))}.lock"
+    token = str(uuid.uuid4())
+    deadline = time.monotonic() + 30.0
+    descriptor: int | None = None
+    while descriptor is None:
+        try:
+            descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        except FileExistsError:
+            if time.monotonic() >= deadline:
+                raise WorkJournalError("journal-lock-unavailable", f"Journal event lock remains held: {event_id}")
+            time.sleep(0.05)
+    try:
+        try:
+            _write_all(descriptor, canonical_json_bytes({"token": token, "pid": os.getpid()}) + b"\n")
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+        yield
+    finally:
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            value = {}
+        if value.get("token") == token:
+            path.unlink(missing_ok=True)
+
+
 def _open_part(root: Path, author: str, local_date: str) -> tuple[Path, bytes, list[dict[str, Any]]]:
     paths = _part_paths(root, author, local_date)
     if not paths:
@@ -622,13 +827,17 @@ def _open_part(root: Path, author: str, local_date: str) -> tuple[Path, bytes, l
     return _part_path(root, author, local_date, part + 1), b"", []
 
 
-def _append_locked(root: Path, event: Mapping[str, Any], author: str, local_date: str) -> dict[str, Any]:
-    existing = _existing_receipt(root, event, author, local_date)
+def _append_locked(root: Path, event: Mapping[str, Any], author: str, local_date: str, *, partition_ref: str | None = None) -> dict[str, Any]:
+    existing = _existing_receipt(root, event)
     if existing is not None:
         return existing
-    path, before, records = _open_part(root, author, local_date)
+    if partition_ref is None:
+        path, before, records = _open_part(root, author, local_date)
+    else:
+        path = _physical_journal_path(root, partition_ref)
+        before, records = _carrier_records(path)
     if len(records) >= MAX_EVENTS_PER_PART:
-        raise AssertionError("open Journal segment cannot be full")
+        raise WorkJournalError("journal-part-full", "sealed original Journal partition is full")
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = canonical_json_bytes(event) + b"\n"
     descriptor = os.open(path, os.O_APPEND | os.O_CREAT | os.O_WRONLY, 0o644)
@@ -646,7 +855,7 @@ def _append_locked(root: Path, event: Mapping[str, Any], author: str, local_date
         "previous_carrier_digest": _sha256(before),
         "appended_carrier_digest": _sha256(before + payload),
     }
-    receipt_path = root / configured_runtime_root(root) / "state" / "work_journal" / "receipts" / f"{event['event_id']}.json"
+    receipt_path = _receipt_path(root, str(event["event_id"]))
     _atomic_json(receipt_path, receipt)
     return receipt
 
@@ -673,6 +882,7 @@ def append_sealed_events(
     author: object,
     local_date: object,
     timezone: object,
+    append_context: Mapping[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Append an ordered v2 event set with fsync and idempotent receipts.
 
@@ -680,10 +890,232 @@ def append_sealed_events(
     values.  They are validated and used as supplied; this library does not
     resolve a clock, user, or timezone.
     """
-    sealed_author, sealed_date, _ = validate_partition(author, local_date, timezone)
+    sealed_author, sealed_date, sealed_timezone = validate_partition(author, local_date, timezone)
     sealed = _validate_event_set(events, sealed_author)
-    with _partition_lock(root, sealed_author, sealed_date):
-        return [_append_locked(root, event, sealed_author, sealed_date) for event in sealed]
+    configured_journal_root(root)
+    partition_ref: str | None = None
+    if append_context is not None:
+        if len(sealed) != 1:
+            raise WorkJournalError("invalid-context", "sealed append context supports exactly one event")
+        context = validate_append_context(root, append_context)
+        if (context["author"], context["local_date"], context["timezone"]) != (sealed_author, sealed_date, sealed_timezone):
+            raise WorkJournalError("invalid-context", "append context must match supplied partition context")
+        partition_ref = context["partition_ref"]
+    receipts: list[dict[str, Any]] = []
+    for event in sealed:
+        with _event_lock(root, str(event["event_id"])):
+            with _partition_lock(root, sealed_author, sealed_date):
+                receipts.append(_append_locked(root, event, sealed_author, sealed_date, partition_ref=partition_ref))
+    return receipts
+
+
+def seal_append_context(
+    root: Path,
+    event: Mapping[str, Any],
+    *,
+    author: object,
+    local_date: object,
+    timezone: object,
+) -> dict[str, Any]:
+    """Seal the original append partition before a selected-run append attempt."""
+    sealed_author, sealed_date, sealed_timezone = validate_partition(author, local_date, timezone)
+    validate_sealed_event(event)
+    path, _, _ = _open_part(root, sealed_author, sealed_date)
+    context: dict[str, Any] = {
+        "author": sealed_author,
+        "local_date": sealed_date,
+        "timezone": sealed_timezone,
+        "partition_ref": _safe_relative(path, root),
+    }
+    context["append_context_digest"] = canonical_json_digest(context)
+    return context
+
+
+def validate_append_context(root: Path, context: Mapping[str, Any]) -> dict[str, Any]:
+    """Verify an immutable append context without consulting the current clock."""
+    value = dict(context)
+    expected = {"author", "local_date", "timezone", "partition_ref", "append_context_digest"}
+    if set(value) != expected:
+        raise WorkJournalError("invalid-context", "append context has missing or unsupported fields")
+    author, local_date, timezone = validate_partition(value["author"], value["local_date"], value["timezone"])
+    partition_ref = _validate_safe_ref(value["partition_ref"], "partition_ref")
+    expected_paths = (
+        _safe_relative(_part_path(root, author, local_date, 1), root),
+        _safe_relative(
+            root / _legacy_journal_root(root) / f"{author}-{local_date}-part-1.ndjson",
+            root,
+        ),
+    )
+    patterns = tuple(
+        re.compile(rf"^{re.escape(expected_path[:-len('1.ndjson')])}[1-9][0-9]*\.ndjson$")
+        for expected_path in expected_paths
+    )
+    if not any(pattern.fullmatch(str(partition_ref)) for pattern in patterns):
+        raise WorkJournalError("invalid-context", "partition_ref is not the original author/date Journal partition")
+    actual = value.pop("append_context_digest")
+    _require_sha256(actual, "append_context_digest")
+    if actual != canonical_json_digest(value):
+        raise WorkJournalError("invalid-context", "append context digest does not match canonical bytes")
+    return {**value, "append_context_digest": actual}
+
+
+def _pending_path(root: Path, event_id: str) -> Path:
+    return root / configured_runtime_root(root) / "state" / "work_journal" / "pending" / f"{event_id}.json"
+
+
+def store_pending_event(
+    root: Path,
+    event: Mapping[str, Any],
+    append_context: Mapping[str, Any],
+    *,
+    result_ref: str | None,
+    effect_refs: Sequence[str],
+    diagnostic: str,
+    retry_linkage: str | None = None,
+) -> dict[str, Any]:
+    """Persist retry-only evidence without issuing an effect or a new Run."""
+    sealed = validate_sealed_event(event)
+    context = validate_append_context(root, append_context)
+    event_bytes = canonical_json_bytes(sealed)
+    context_bytes = canonical_json_bytes(context)
+    if result_ref is not None:
+        _validate_safe_ref(result_ref, "result_ref")
+    if any(_validate_safe_ref(effect_ref, "effect_ref") != effect_ref for effect_ref in effect_refs):
+        raise WorkJournalError("invalid-pending", "effect_refs must be safe repository-relative references")
+    if not isinstance(diagnostic, str) or not diagnostic:
+        raise WorkJournalError("invalid-pending", "diagnostic must be non-empty")
+    if retry_linkage is not None and (not isinstance(retry_linkage, str) or not retry_linkage):
+        raise WorkJournalError("invalid-pending", "retry_linkage must be a non-empty string when supplied")
+    pending: dict[str, Any] = {
+        "event_id": sealed["event_id"],
+        "event_digest": sealed["event_digest"],
+        "event_bytes": event_bytes.decode("utf-8"),
+        "event_bytes_digest": _sha256(event_bytes),
+        "append_context_bytes": context_bytes.decode("utf-8"),
+        "append_context_bytes_digest": _sha256(context_bytes),
+        "result_ref": result_ref,
+        "effect_refs": list(effect_refs),
+        "diagnostic": diagnostic,
+        "retry_linkage": retry_linkage,
+    }
+    path = _pending_path(root, str(sealed["event_id"]))
+    if path.exists():
+        try:
+            prior = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise WorkJournalError("invalid-pending", f"cannot read pending evidence for {sealed['event_id']}") from error
+        if not isinstance(prior, dict) or prior.get("event_bytes") != pending["event_bytes"] or prior.get("append_context_bytes") != pending["append_context_bytes"]:
+            raise WorkJournalError("identity-collision", f"pending event_id {sealed['event_id']} has different immutable bytes")
+        return prior
+    _atomic_json(path, pending)
+    return pending
+
+
+def _read_pending_event(root: Path, event_id: str) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], Path]:
+    if not isinstance(event_id, str) or not event_id:
+        raise WorkJournalError("invalid-pending", "event_id must be a non-empty string")
+    path = _pending_path(root, event_id)
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as error:
+        raise WorkJournalError("pending-not-found", f"no pending evidence for event_id {event_id}") from error
+    except (OSError, json.JSONDecodeError) as error:
+        raise WorkJournalError("invalid-pending", f"cannot read pending evidence for {event_id}") from error
+    required = {"event_id", "event_digest", "event_bytes", "event_bytes_digest", "append_context_bytes", "append_context_bytes_digest", "result_ref", "effect_refs", "diagnostic", "retry_linkage"}
+    if not isinstance(value, dict) or set(value) != required or value.get("event_id") != event_id:
+        raise WorkJournalError("invalid-pending", f"pending evidence for {event_id} has invalid fields")
+    event_bytes = value["event_bytes"]
+    context_bytes = value["append_context_bytes"]
+    if not isinstance(event_bytes, str) or not isinstance(context_bytes, str):
+        raise WorkJournalError("invalid-pending", "pending evidence must retain immutable byte strings")
+    encoded_event = event_bytes.encode("utf-8")
+    encoded_context = context_bytes.encode("utf-8")
+    if value["event_bytes_digest"] != _sha256(encoded_event) or value["append_context_bytes_digest"] != _sha256(encoded_context):
+        raise WorkJournalError("invalid-pending", "pending evidence byte digest mismatch")
+    try:
+        event = json.loads(event_bytes)
+        context = json.loads(context_bytes)
+    except json.JSONDecodeError as error:
+        raise WorkJournalError("invalid-pending", "pending evidence bytes are not JSON") from error
+    if not isinstance(event, dict) or not isinstance(context, dict) or canonical_json_bytes(event) != encoded_event or canonical_json_bytes(context) != encoded_context:
+        raise WorkJournalError("invalid-pending", "pending evidence is not canonical immutable JSON")
+    sealed = validate_sealed_event(event)
+    if sealed["event_id"] != event_id or sealed["event_digest"] != value["event_digest"]:
+        raise WorkJournalError("invalid-pending", "pending event identity does not match immutable payload")
+    return value, sealed, validate_append_context(root, context), path
+
+
+def recover_pending_event(root: Path, event_id: str) -> dict[str, Any]:
+    """Append exactly the pending original bytes in their sealed original partition."""
+    _, event, context, path = _read_pending_event(root, event_id)
+    receipt = append_sealed_events(
+        root,
+        [event],
+        author=context["author"],
+        local_date=context["local_date"],
+        timezone=context["timezone"],
+        append_context=context,
+    )[0]
+    path.unlink(missing_ok=True)
+    return receipt
+
+
+def register_selected_run_dispatch(
+    root: Path,
+    *,
+    request_id: str,
+    canonical_request_bytes: bytes,
+) -> tuple[dict[str, Any], bool]:
+    """Persist one accepted selected-run dispatch before any route effect.
+
+    The carrier is runtime recovery evidence, not a second historical Journal.
+    A process restart can therefore refuse to dispatch the same request again
+    until it inspects or recovers the original evidence.
+    """
+    if not isinstance(request_id, str) or not request_id:
+        raise WorkJournalError("invalid-dispatch", "request_id must be a non-empty string")
+    if not isinstance(canonical_request_bytes, bytes) or not canonical_request_bytes:
+        raise WorkJournalError("invalid-dispatch", "canonical_request_bytes must be non-empty bytes")
+    try:
+        parsed = json.loads(canonical_request_bytes)
+    except json.JSONDecodeError as error:
+        raise WorkJournalError("invalid-dispatch", "canonical request bytes must be JSON") from error
+    if canonical_json_bytes(parsed) != canonical_request_bytes:
+        raise WorkJournalError("invalid-dispatch", "request dispatch bytes must be canonical JSON")
+    configured_journal_root(root)
+    digest = _sha256(canonical_request_bytes)
+    path = (
+        root
+        / configured_runtime_root(root)
+        / "state"
+        / "work_journal"
+        / "selected_runs"
+        / "requests"
+        / f"{_sha256(request_id.encode('utf-8'))}.json"
+    )
+    value = {
+        "schema_version": 1,
+        "request_id": request_id,
+        "canonical_request_bytes": canonical_request_bytes.decode("utf-8"),
+        "canonical_request_bytes_digest": digest,
+        "state": "accepted",
+    }
+    with _event_lock(root, f"selected-run-request:{request_id}"):
+        if path.exists():
+            try:
+                prior = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as error:
+                raise WorkJournalError("invalid-dispatch", f"cannot read selected-run dispatch for {request_id}") from error
+            expected = {"schema_version", "request_id", "canonical_request_bytes", "canonical_request_bytes_digest", "state"}
+            if not isinstance(prior, dict) or set(prior) != expected or prior.get("schema_version") != 1 or prior.get("request_id") != request_id:
+                raise WorkJournalError("invalid-dispatch", f"selected-run dispatch for {request_id} has invalid fields")
+            if prior.get("canonical_request_bytes") != canonical_request_bytes.decode("utf-8") or prior.get("canonical_request_bytes_digest") != digest:
+                raise WorkJournalError("request-id-conflict", f"request_id {request_id} already has different accepted dispatch bytes")
+            if prior.get("state") != "accepted":
+                raise WorkJournalError("invalid-dispatch", f"selected-run dispatch for {request_id} has invalid state")
+            return prior, False
+        _atomic_json(path, value)
+        return value, True
 
 
 def predict_sealed_event_receipts(
@@ -703,7 +1135,7 @@ def predict_sealed_event_receipts(
     }
     output: list[dict[str, Any]] = []
     for event in sealed:
-        existing = _existing_receipt(root, event, sealed_author, sealed_date)
+        existing = _existing_receipt(root, event)
         if existing is not None:
             output.append({**existing, "disposition": "reused"})
             continue

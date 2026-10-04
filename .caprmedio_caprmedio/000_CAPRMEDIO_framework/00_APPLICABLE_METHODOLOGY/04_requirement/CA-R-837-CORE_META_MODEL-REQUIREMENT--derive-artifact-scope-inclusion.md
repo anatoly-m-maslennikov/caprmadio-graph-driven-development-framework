@@ -1,19 +1,34 @@
 ---
-cce_version: cce_1
-cce_form: obligation
-atom_id: CA-R-837
 subjects:
-  governs:
-    continuant:
-      - scope-topology
-version: 8
-updated_at: 2026-09-06 01:45:12 +0400
-relations:
-  child_of:
-    - CA-R-835-REQUIREMENT-BSEED_SEMANTICS--scope-artifacts-through-scope-units
+  governs: "scope-topology"
+  depends_on:
+    - "Atom/Revision/Author"
+version: 19
+updated_at: "2026-10-02 20:52:00 +0400"
+relations: {}
+atom_id: "CA-R-837"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md
 ---
-# Derive Artifact scope inclusion
+# Summary
 
-GOVERNANCE **must** derive **every** Artifact's one direct Scope Unit from its canonical carrier address **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.
+Derive Artifact scope inclusion
+
+## Scope
+
+Artifacts contained **in** a Scope Unit.
+
+## Claim
+
+the resolver **must** resolve **`=1`** direct Scope Unit from the Atom's internally carried ownership, checked against its canonical Carrier address, **or** from the registered canonical Carrier authority for a non-Atom Artifact **and** include that Artifact **in** **every** Scope Unit on the direct Unit's complete ancestor path; missing, multiple, unknown, **or** cyclic scope ownership is invalid.
+
+## Details
+
+an Atom with no containing Scope Unit uses the external-Atom Author fallback under CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter; a failed Scope Unit resolution does **not** establish that no containing Scope Unit exists.

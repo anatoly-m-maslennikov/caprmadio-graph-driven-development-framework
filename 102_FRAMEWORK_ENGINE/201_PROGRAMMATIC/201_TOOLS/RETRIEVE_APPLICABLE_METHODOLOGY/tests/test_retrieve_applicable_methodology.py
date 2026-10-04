@@ -4,6 +4,7 @@ import contextlib
 import importlib.util
 import io
 import json
+import os
 import shutil
 import sys
 import tempfile
@@ -57,6 +58,7 @@ class RetrieverTest(unittest.TestCase):
         for role in module.ROLES:
             (self.applicable / role).mkdir(parents=True)
             (self.source_root / role).mkdir(parents=True)
+        self.add_project_settings()
 
     def tearDown(self) -> None:
         shutil.rmtree(self.root, ignore_errors=True)
@@ -65,13 +67,17 @@ class RetrieverTest(unittest.TestCase):
         source = self.source_root / role / name
         source.write_bytes(data)
         target = self.applicable / role / name
-        relative = Path("../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL") / role / name
+        relative = Path(os.path.relpath(source, start=target.parent))
         target.write_bytes(projected(data, relative.as_posix()))
 
-    def add_project_settings(self, project_name: str = "caprmedio") -> None:
+    def add_project_settings(self, project_name: str = "caprmedio", control_root: str = ".caprmedio_caprmedio") -> None:
         graph = self.root / module.SETTINGS_PATH
         graph.parent.mkdir(parents=True, exist_ok=True)
-        graph.write_text(f"[project]\nkey = {project_name!r}\nname = {project_name!r}\nrepository_slug = 'test'\n[artifacts.identity]\nproject_prefix = 'TEST'\n", encoding="utf-8")
+        graph.write_text(
+            f"[project]\nkey = {project_name!r}\nname = {project_name!r}\nrepository_slug = 'test'\n"
+            f"[artifacts.identity]\nproject_prefix = 'TEST'\n[paths]\ncontrol_root = {control_root!r}\n",
+            encoding="utf-8",
+        )
 
     def invoke(self, *arguments: str) -> tuple[int, dict[str, object]]:
         output = io.StringIO()
@@ -140,12 +146,13 @@ class RetrieverTest(unittest.TestCase):
 
     def test_project_query_fails_closed_without_valid_settings(self) -> None:
         path = self.root / module.SETTINGS_PATH
-        path.parent.mkdir(parents=True)
         graph = path.parent / "project_scope_unit_graph.projection.toml"
         graph.write_text("[project]\nname = 'caprmedio'\n", encoding="utf-8")
         for payload in (None, "[project", "project = 'bad'", "[project]\nname = 'caprmedio'\n"):
             with self.subTest(payload=payload):
-                if payload is not None:
+                if payload is None:
+                    path.unlink(missing_ok=True)
+                else:
                     path.write_text(payload, encoding="utf-8")
                 code, report = self.invoke("--subject", "Project")
                 self.assertEqual(2, code)
@@ -190,12 +197,49 @@ class RetrieverTest(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertEqual(report["diagnostics"][0]["code"], "projection-source-mismatch")
 
+    def test_compiler_projection_metadata_does_not_change_source_payload(self) -> None:
+        data = source_carrier("CA-R-001", ("continuant", "Base"))
+        source = self.source_root / "04_requirement/CA-R-001--base.md"
+        source.write_bytes(data)
+        target = self.applicable / "04_requirement/CA-R-001--base.md"
+        relative = Path(os.path.relpath(source, start=target.parent)).as_posix()
+        rendered = projected(data, relative).replace(
+            f"  source_carrier_path: {relative}\n---\n".encode(),
+            (
+                f"  source_carrier_path: {relative}\n"
+                "  source_atom_id: CA-R-001\n"
+                "  source_atom_revision: 1\n"
+                "  source_sha256: fixture\n"
+                "  original_relations_sha256: fixture\n---\n"
+            ).encode(),
+        )
+        target.write_bytes(rendered)
+
+        code, report = self.invoke("--subject", "Base")
+
+        self.assertEqual(0, code)
+        self.assertTrue(report["complete"])
+
     def test_same_frontier_produces_same_selection_digest(self) -> None:
         self.add("04_requirement", "CA-R-001--base.md", source_carrier("CA-R-001", ("continuant", "Base")))
         first_code, first = self.invoke("--subject", "Base")
         second_code, second = self.invoke("--subject", "Base")
         self.assertEqual((first_code, second_code), (0, 0))
         self.assertEqual(first["selected_frontier_digest"], second["selected_frontier_digest"])
+
+    def test_published_output_uses_configured_control_root_while_sources_remain_framework(self) -> None:
+        control = ".caprmedio_fixture"
+        self.add_project_settings(control_root=control)
+        published = self.root / control / "_projection/APPLICABLE_METHODOLOGY"
+        for role in module.ROLES:
+            (published / role).mkdir(parents=True, exist_ok=True)
+        self.applicable = published
+        self.add("04_requirement", "CA-R-001--base.md", source_carrier("CA-R-001", ("continuant", "Base")))
+
+        code, report = self.invoke("--subject", "Base")
+
+        self.assertEqual(0, code)
+        self.assertTrue(report["complete"])
 
 
 if __name__ == "__main__":

@@ -1,25 +1,34 @@
 ---
 subjects:
-  governs:
-    continuant:
-      - "Atom/Content Role: Requirement/Type: Demand/Direction"
+  governs: "Atom/Content Role: Requirement/Type: Demand/Direction"
   depends_on:
-    continuant:
-      - Atom/Scope
-      - Atom/Claim/Scope/Scope Unit Set
-atom_id: CA-R-944
-cce_version: cce_1
-cce_form: definition
-version: 10
-updated_at: 2026-09-06 01:45:12 +0400
+    - "Atom/Scope"
+    - "Atom/Claim/Target Scope Unit"
+version: 19
+updated_at: "2026-10-02 21:01:00 +0400"
 relations:
-  replacement_of:
-    - CA-R-876
   child_of:
     - CA-R-932
+atom_id: "CA-R-944"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-944-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-direction.md
 ---
-# Define Demand direction
+# Summary
+Define Demand direction
 
-a Demand direction **means** from its Consumer Atom Scope Unit **to** its Producer Claim Scope Scope Unit.
+## Scope
+
+Demand directions.
+
+## Claim
+
+a Demand direction **means** from its Consumer Atom Scope Unit **to** its Producer Claim Target Scope Unit.
+
+## Details

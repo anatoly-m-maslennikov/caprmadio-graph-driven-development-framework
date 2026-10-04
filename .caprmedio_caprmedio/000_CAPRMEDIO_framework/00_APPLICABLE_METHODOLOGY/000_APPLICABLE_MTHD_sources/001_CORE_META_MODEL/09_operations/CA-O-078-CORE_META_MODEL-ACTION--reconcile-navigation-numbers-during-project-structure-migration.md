@@ -26,7 +26,7 @@ subjects:
     - "Project Structure Maintenance"
 
 version: 3
-updated_at: "2026-09-23 15:59:19 +0000"
+updated_at: "2026-10-04 15:16:04 +0000"
 relations: {"relates_to": ["CA-R-1483", "CA-R-1484", "CA-R-976", "CA-R-981", "CA-R-983", "CA-M-291", "CA-D-440", "CA-D-442", "CA-D-444", "CA-D-445", "CA-D-297", "CA-D-299", "CA-D-300", "CA-D-380", "CA-O-012", "CA-O-015"]}
 global_tier: 11
 ---
@@ -34,7 +34,7 @@ global_tier: 11
 
 Reconcile Navigation Numbers During Project Structure Migration
 
-## Claim
+## Operation
 
 Reconcile Navigation Numbers **means** the Action that prepares evidence-backed Navigational Order Number values for a bounded Project Structure migration candidate, **without** activating that candidate **or** changing live Carriers.
 
@@ -61,3 +61,5 @@ Reconcile Navigation Numbers **means** the Action that prepares evidence-backed 
 - failed: the failed operation, exact partial candidate state, **and** recoverable evidence; do **not** report partial preparation as completion.
 
 this Action writes **only** its candidate **and** result evidence **in** the selected workspace. it does **not** rename live folders, create Scope Units, change active TOML, **or** activate a candidate. authorization, freshness checks, reference repairs, **and** recoverable cutover remain governed by CA-D-444 **and** the Project Structure Maintenance Workflow CA-O-015. a ready result is **not** approval **or** proof that broader migration checks passed.
+
+## Details

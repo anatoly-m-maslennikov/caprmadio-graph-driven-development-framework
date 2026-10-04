@@ -24,6 +24,8 @@ __pycache__/
 /.codex/hooks.json
 /.caprmedio_runtime/
 /.caprmedio_tmp/
+/.caprmedio_install/workflow_orchestrator/
+/.caprmedio_install/mcp_hot_reload/
 .env
 .env.*
 !.env.example

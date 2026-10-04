@@ -1,0 +1,7 @@
+services:
+  agent:
+    secrets: [codex_auth]
+    networks: [runtime, egress]
+secrets:
+  codex_auth:
+    file: ${CAPRMEDIO_CODEX_AUTH_FILE:?Pass an explicit Codex credential file}

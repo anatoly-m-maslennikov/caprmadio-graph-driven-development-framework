@@ -1,0 +1,16 @@
+# Deny by default: Project authority, runtime data and credentials never enter a layer.
+**
+!pyproject.toml
+!uv.lock
+!102_FRAMEWORK_ENGINE
+!102_FRAMEWORK_ENGINE/**
+**/.env
+**/.env.*
+**/*.env
+**/auth.json
+**/.git
+**/__pycache__
+**/.venv
+**/venv
+**/node_modules
+**/.DS_Store

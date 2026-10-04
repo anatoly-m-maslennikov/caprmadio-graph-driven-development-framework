@@ -11,7 +11,7 @@ subjects:
     - "Projection"
     - "Artifact/Carrier"
 version: 4
-updated_at: "2026-09-17 05:05:05 +0000"
+updated_at: "2026-10-04 15:08:22 +0000"
 relations:
   child_of:
     - CA-R-1052
@@ -27,7 +27,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Resolve Project and Framework Settings before derived structure
+# Summary
+
+Resolve Project and Framework Settings before derived structure
+
+## Operation
 
 Resolve Project Initialization Inputs **means** the reusable Action that resolves the current Project's authoritative initialization inputs **before** interpreting its Project Structure **or** deriving structural values from it.
 
@@ -36,3 +40,5 @@ Resolve Project Initialization Inputs **means** the reusable Action that resolve
 3. use these resolved inputs **before** interpreting authoritative Project Structure **or** deriving structural values from it.
 
 this Action **must not** require an existing Project Atom **or** Implementation **to** resolve initialization inputs, substitute a Projection for either Settings Artifact, **or** read another Project's instance settings. unresolved required parameters follow CA-M-279's stop condition. the Action reuses the registered Settings Carriers; it does **not** define their format **or** placement independently.
+
+## Details

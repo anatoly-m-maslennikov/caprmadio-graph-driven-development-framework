@@ -6,7 +6,7 @@ subjects:
     - "Operator"
     - "Project"
 version: 5
-updated_at: "2026-09-21 00:57:42 +0000"
+updated_at: "2026-10-04 15:08:22 +0000"
 relations: {"child_of":["CA-M-005"],"relates_to":["CA-R-1057"]}
 atom_id: "CA-O-065"
 content_role: "Operations"
@@ -18,7 +18,11 @@ author: "Anatoly Maslennikov"
 type: "Action"
 global_tier: 11
 ---
-# Screen short names for unintended readings
+# Summary
+
+Screen short names for unintended readings
+
+## Operation
 
 Screen Short Names **means** the Action that screens a proposed short name, abbreviation, **or** prefix **before** admission:
 
@@ -27,3 +31,5 @@ Screen Short Names **means** the Action that screens a proposed short name, abbr
 - do **not** automatically reject the candidate on that basis; allow the Operator **to** accept the warned name explicitly.
 
 this Action defines screening behavior; it does **not** record a particular execution **or** automatically change a registered name.
+
+## Details
