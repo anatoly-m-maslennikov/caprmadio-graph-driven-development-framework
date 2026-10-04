@@ -101,7 +101,11 @@ Evaluations check Claims and results.
 
 C — concerns; A — analysis; P — plans/tasks; R — requirements; M — methods; E — evaluations; D — delivery; I — actual Implementation; O — operations/workflows.
 
+Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
+
 CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
+
+[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
 
 ## Current boundaries
 
