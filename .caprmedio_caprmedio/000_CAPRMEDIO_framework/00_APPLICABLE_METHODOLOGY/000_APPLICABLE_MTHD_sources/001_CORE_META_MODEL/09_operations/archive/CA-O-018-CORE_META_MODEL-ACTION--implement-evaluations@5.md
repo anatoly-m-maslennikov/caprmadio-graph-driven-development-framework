@@ -17,8 +17,8 @@ subjects:
     - "Atom/Content Role: Delivery"
     - "Atom/Content Role: Requirement"
     - "Atom/Content Role: Implementation"
-version: 6
-updated_at: "2026-10-04 03:57:26 +0400"
+version: 5
+updated_at: "2026-09-24 17:18:07 +0000"
 relations:
   relates_to:
     - CA-O-017
@@ -39,4 +39,4 @@ Evaluation Implementation **means** the Agentic Action that prepares **or** reus
 - make tests runnable **when** prerequisites permit **and** return the exact tests, commands, expected outcomes, authority bindings, **and** any execution blocker. actual execution belongs **to** Implementation Evaluation.
 - return `prepared` **or** `blocked`. preparing tests is **not** a passing test result; missing behavior **may** cause an expected initial failure, which still requires diagnosis before feature implementation.
 
-- honor the selection procedure established by applicable Methods **and** the acceptance, priority, **and** disposition rules established by applicable Evaluation authority. prepare the complete admitted portfolio at its selected observable boundaries; no test scope has default priority. preserve issue-driven targeted checks as complementary evidence **without** creating Method Atoms.
+- honor the test strategy **and** order selected by applicable Methods. **when** those Methods require end-to-end-first testing **and** a golden corpus, prepare that boundary evidence first; a focused test is **not** a substitute. preserve issue-driven targeted tests as complementary evidence **without** creating Method Atoms.
