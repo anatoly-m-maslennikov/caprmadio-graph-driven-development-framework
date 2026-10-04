@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next third-partition validator and migration packet harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:51:43 +0400"
+version: 2
+updated_at: "2026-10-04 11:17:17 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1267
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1467,6 +1468,20 @@ Actual current blocker/failure→Problem, uncertain choice→Question, incompati
 Reuse existing standard-library bounded native-seek scenario: all91 selected/seven contexts canonicalresponse_item/message/inwindow/raw newline-inclusive/textSHA256/original timestamp-role-channel/allparts-nontext/counts. Selected aggregate dca374e2d4c858d44333bc68183fe2f4e7f75fc1cbdeb998f1973e636e616c98/32,531chars/68,524bytes. Independently verify followingL37868. Integrity binding is not harvested meaning.
 
 After saving reread91 unique full-fingerprint substantive dispositions/seven context joins, allpart coverage/humanantecedents/supersessions/candidates/report limits/numbers/frontiers. Check exact Plan/Analysis headings/native properties/root-reservedID/sequence12/immediate1128/actualnextinput-output-owner-estimate-scenario/directgates/ownedchangedcompletionBLOCKS acyclicity/Doneplacement/clean single terminal newline-whitespace. Reassess1119/1130/1155 objectives, keep1128Active, and record real first/terminal clocks/saved checks. Root strict savedYAML/fullEpicDAG/Git remains separate; do not infer new result from prior committed validation.
+
+### Saved result, actual remainder and local completion checks
+
+CA-A-981v1 at `.caprmedio_caprmedio/02_analysis/CA-A-981-ANALYSIS_RPRT--harvest-the-next-third-partition-validator-and-migration-packet.md` saves all91 whole selected records/32,531 characters/68,524 raw bytes,71 assistant/20 user,91 unique full-fingerprint substantive dispositions and seven completed context-only identities/2,317 characters. Every complete native text/part was read without truncation; exact line/offset/bytes/time/role/channel/raw/text/part fingerprints remain once in this governing index and join the Analysis ledger. Ten historical human chains and three provisional candidate groups refine evidence-bound ACTIVE migration, latest role-aware authority/body review and coverage-aware checks/exact external Operator-registry membership. Latest Claim-within-Scope layout supersedes earlier Claim-first instructions; plural operators_registry supersedes singular spelling. Historical saves/migrations/tests/Journal and counts remain reported outcomes, not current proof/adoption. No current blocker/uncertain choice required a new Concern.
+
+Actual substantive selected-source coverage is696/1175;479 remain at L37868/[699838954,699839589)/2026-09-25T20:51:50.854Z/assistant/null/onepart/635 bytes/242 chars/rawSHA2563ff3284ddeba81ef5742622849fb2b7923968ad285f40323bb48b2c3ef227166/textSHA256c24b8b47335622086fcd973dc7b5199d3e5bd4aba7b44da4959b24342a586866. Actual next ActiveCA-P-1267/A985 at `13-CA-P-1267-TASK--harvest-the-following-third-partition-scope-and-review-packet.md`, immediate1128/sequence13, binds92 whole records, positions697–788,75 assistant/17 user,32,972 selected characters/73,971 raw bytes, sparseL37868–40502/[699838954,726712515), through2026-09-26T03:48:47.788Z, plus seven completed contextsL37735/37744/37749/37752/37755/37797/37843 totaling1,959 characters; total34,931<=35,000. Native binding aggregatec74c85b97b9d11c441d5b4c860a007bca323e72e88cd7e54f57dc09269fa56ac passed; binding adds zero coverage and next was not executed. After those92,387 would remain at L40571/[727263156,727263872)/2026-09-26T03:51:00.014Z/assistant/null/onepart/716 bytes/268 chars/rawSHA256becc1adff3ffb2d938f6ee66108b3c6df8bc47cf6dd4f3f93b4f4b70699927b2/textSHA256ee3ff951fc1711809bdc9e0a31cac53fc6f82b5f829dca1f876691;479 remain now.
+
+1263 directly BLOCKS1267 and retains1119/1130/1155;1267 directly BLOCKS1119/1130/1155. Allthree v1Active objectives were fully reread at07:12:11Z and still require complete substantive harvest/current-source reconciliation/exact destination binding; no stage is unlocked. Parent1128 remains Active. All other1657 retained files/15otherPRIMARY/1642worker origins/structure continuation/repository-parent-worktree support, both mainpaths/nonthird frontiers/limited prepartition overlap, nine machine-environment exclusions/sparsegaps, finalthirdL59916 and A917zero-monthly-canonical/broader nonblockingC294identity retain exact A905/A910/A953/A981 unfinished frontiers. No whole source or copied-worker human intent is subtracted/promoted.
+
+Owned checks passed at07:12:11Z:91 selected/seven context complete native raw/text/part/time/role/channel/count/aggregate fingerprints;91 substantive saved fingerprint joins/seven context joins;92 next/seven context/first-and-following-frontier integrity;exact headings/native Properties/parent-sequence/input-output-owner-estimate-scenario/gates; clean EOF/whitespace. Full strict savedYAML/fullEpicDAG/Git remains root-owned. First observed clock07:04:03Z; initial saved checks07:12:11Z=8m08s. Closure placement and terminal clock are recorded below; no exact dispatch timestamp is independently asserted.
+
+Terminal closure checks passed at2026-10-04 07:16:32Z: old Active path absent, saved v2Done carrier in done/, parent v14Active, next v1Active sequence13/immediate1128, required headings/native Properties, direct1263→1267→1119/1130/1155 and retained parent gates, owned changed-edge acyclicity, saved result/remainder counts and clean single-terminal-newline/whitespace. Actual first-observed-to-terminal elapsed12m29s (07:04:03Z–07:16:32Z), within <=15-minute estimate; exact dispatch-to-completion elapsed is not independently asserted. This final clock receipt only closes persistence; next remains unexecuted and root strict parser/fullDAG/Git remains separate.
+
+Final persisted clock-receipt and all-four-carrier EOF/whitespace checks passed at07:17:17Z,13m14s from the first observed clock. This includes closure persistence after the07:16:32Z terminal structural check; no further native harvest or next-leaf execution occurred.
 
 ## Details
 

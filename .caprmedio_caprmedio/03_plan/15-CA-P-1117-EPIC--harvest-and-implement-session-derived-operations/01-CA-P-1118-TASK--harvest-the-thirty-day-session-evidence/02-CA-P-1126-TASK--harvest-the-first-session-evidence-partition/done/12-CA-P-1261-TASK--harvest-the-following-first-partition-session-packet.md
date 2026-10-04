@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 10:50:57 +0400"
+version: 2
+updated_at: "2026-10-04 11:15:37 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1265
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1327,6 +1328,22 @@ source_sha256 retains905/910 snapshot provenance, not a fresh immutable full-sou
 SystemPython standard-library seek/read every exact selected/context byte interval; verify rawSHA256/bytes/response_item-message kind/timestamp/role/nullchannel/partcount/native character sum/window, ordered aggregateSHA256d50aaf6da800f5acf35ba8ee62ecf948ba3a3c4e81072c20ad5a47a2c59c3efb,100selected/29user/71assistant/64237bytes/25351characters. Complete56130 context has795bytes/389chars/one part/SHA2565129a29f8f0d33bf08b4b49645573f0f5a5c878e4109abedb394907c7bd8771c; total25740<=35000. Following57816 verified separately as boundary, not harvested.
 
 After saving979 reread all100 individual dispositions, literal intent/short-answer antecedents/nativeparts, full context, candidate groups, frontiers and actual next binding; compare saved fingerprints to original bytes. Verify exact Analysis/Plan mandatory headings, one Definition of Done, one terminal newline/no trailing whitespace, immediate parent, unique IDs/sibling sequence and acyclic child-completion/BLOCKS edges. Review1119/1130/1155 incoming readiness;1126 remainsActive. Record passing saved checks and actual first/terminal clocks including persistence/Done placement/parent/next closure, not an earlier substantive-check timestamp. Root strict full YAML/full-Epic DAG/save remain separate.
+
+### Completed following packet and actual design-report remainder
+
+CA-P-1261 harvested100 whole canonical original-main56137–57761,29user/71assistant,64237raw bytes/25351native characters/100native parts, plus full56130 question context389chars/one part,total25740. Ordered aggregateSHA256d50aaf6da800f5acf35ba8ee62ecf948ba3a3c4e81072c20ad5a47a2c59c3efb. DurableCA-A-979v1 at `.caprmedio_caprmedio/02_analysis/CA-A-979-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` saves100complete fingerprinted individual substantive dispositions,29exact literal human parts/one response annotation in16historicalgroups,5genuinelygrouped provisional candidates andcompletecontext disposition. All selected textparts read fully; no fragment remains.
+
+Latest source decisions preserved: settings/topology/Goalduplicate fixes; F06 PythonM/DCarriers inPROGRAMMATIC supersedesProjectStandard-only; sharedMeta-Model applicationlogic with sourceprovenance/reuse rather thanunconditionalmove; expansion-onlyCore; currentRMEDrebuildwithoutspecrescue; F12 toolcapability/Operatorfreedom supersedescompulsorycompliance; broadcheckability/ErEmEd/typedRMDtargets/CoreEpolicy/Standardchecks/Mauthoring/Meta-Modelowner, exactkey/cardinality notmanufacturedfinalapproval; REQU048 retirement. HistoricalapplyTHENcommitpush isexplicit, notcurrentworkerpermission. Reported13tests/706sources/fourgovernedcommits/latestb3143c1ec/amm-next-versionpush/Journal/remoteverification areclaims, notindependentlyverifiedTool/Git/saveproof. Laterhumanidempotentprocess/orderproposal andread-onlyFPFdo remain separatefromadoption/implementation; fixedorder, replaystability, fresh-equivalence andbyteidentity are distinct. Historical100% doesnotchangecurrent90%.
+
+ActualnextActiveCA-P-1265v1 at `13-CA-P-1265-TASK--harvest-the-next-first-partition-design-report-packet.md`,immediate1126/sequence13/oneAI/<=15minutes,ownsreservedCA-A-983 at `.caprmedio_caprmedio/02_analysis/CA-A-983-ANALYSIS_RPRT--harvest-the-next-first-partition-design-report-packet.md`.74whole57816–59236,24user/50assistant,58703raw bytes/29624native chars; aggregateSHA2563f8f4ac0362da9e6a4d3fbda4430d29401b6fd54f4a4e8a197b3e79e908bfda7. Fivecompletecontextrecords57246/57421/57430/57728/57761 preservehumanproposal/fullread-onlyPlan/literaldo/openresultchoice/final-reportprogress;1335chars,total30959<=35000. Firstwhole57816 report8156chars isintact/included; last59236 bytes[370012704,370013335),2026-09-05T16:45:44.296Z,assistant/null/one part,SHA2565bfb8f1f597fe7a1a1f765623a6c3002f43a7e89d71507f27d470517080a052f. Followingwhole59283 bytes[370234452,370258152),2026-09-05T16:51:57.606Z,assistant/null/one part,23700raw bytes/23037native chars,SHA256ed32536c6ff41ac150e4283e489513b5b3333d5d39e4cf4f0dd7a1ca8d6eb863 remainsintact/unprocessed; excludedbecausebudget, notskipped/squeezed. Metadata/rawbinding isnotsemanticreading; askrootforsubsequentIDs andbindactualremainderbefore1265Done.
+
+Combinedcanonicalcoverage519;refined1869minus519 leaves1350,original1877including8latermachinecontextsminus519 leaves1358. Eventualnext74completion leaves1276/1284,notcurrentcoverage. All1659-file/1657-ID905source rows/other1658files/17PRIMARY+1642workerorigins/metadata-parent/worktree/bothcontinuationpairs/candidate/appendableprefix/frozenwindow-amendment distinctions retainexactfrontiers in979/1265/priorroll-ups. Onlyactualcanonicaldispositionssubtract; nosource/partition/monthcompletion.
+
+1261directlyblocks1265;Active1265 and1126 directlyblock1119/1130/1155. Affectedv1dependentsreadinessreviewed;1126remainsActive. FreshGoalv13/activePrinciples/permissionsread;fivePlan-sourcebodies/revisionsunchanged,currentversionsin979. Nativecurrent100+context/next74+fivecontexts/bothfollowingslices hashes/aggregates/message metadata/parts/windows/budgets,100unique savedrowjoins/29exacthumanparts/oneannotation/16groups/5candidates,fourmandatorylayouts/EOF/whitespace,uniquesiblings/sequences andseven-nodeBLOCKS/child-completionDAG passed. NoactualcurrentConcern; historicalissues/openchoicesnotautomaticcurrentdefects. RootstrictfullYAML/full-EpicDAG/authorizedsaveunderC293 remainsseparate. NoGit/Journal/O/RMED/code/settings/services/environment/Docker/FPF/otherleafchanges. Holdafter1261.
+
+### Actual execution and terminal verification
+
+Actual execution started2026-10-04 07:03:25UTC. Full semantic reading, saved100dispositions/29literalhumanparts/oneannotation/16groups/5candidates, Done placement, parent roll-up, actualnextbinding and post-persistence verification completed2026-10-04 07:15:37UTC:12minutes12seconds (732seconds), within900seconds with168seconds closure margin. Current100/full389context and next74/fivefullcontexts plus both following slices passed raw hashes/ordered aggregates/native metadata/parts/windows/budgets; saved joins/literalparts/annotation/group coverage and four mandatory layouts/EOF/whitespace passed. Unique sibling IDs/sequences, seven-node direct BLOCKS/child-completion DAG, persisted Done/result and parentv14Active confirmed. This clock includes closure persistence, not just earlier source checks. Root strict full saved YAML/full-Epic DAG/authorized save remain separate; only terminal metadata receipt and its final saved verification follow before hold.
 
 ## Details
 

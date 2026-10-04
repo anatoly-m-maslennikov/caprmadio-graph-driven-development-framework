@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second final-partition worker evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:53:11 +0400"
+version: 2
+updated_at: "2026-10-04 11:12:34 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1272
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -435,6 +436,11 @@ Parent-linked worker reports are not humanapproval; nativeencrypteddelegation is
 ```
 
 ## Details
+
+### Actual completion
+
+All25whole native worker reports/8699characters+1016contextreadandindividuallydisposedinA986,fiveoverlappingprovisionalgroups/zero newhumanapproval. Finalworker47/4051,4004remaining; actualnext1272/A990binds37whole/9017chars+402context,total9419. Futurebindingaddszerocoverage. Firstclock2026-10-04 07:04:18 UTC;Native/saved text, all 25 complete records and parts, exact contexts, source snapshots, the actual 37-message next binding, Done move and full strict Carrier/DAG checks passed at 2026-10-04 07:12:34 UTC, 8m16s after first clock. The strict check covered 119 Plans and 61 supporting Carriers; it is a scoped execution diagnostic, not the delivered Epic Tool. No tool/recovery/lease/settings/service mutations; gatesremainunfinished.
+
 
 ### Definition of Done
 

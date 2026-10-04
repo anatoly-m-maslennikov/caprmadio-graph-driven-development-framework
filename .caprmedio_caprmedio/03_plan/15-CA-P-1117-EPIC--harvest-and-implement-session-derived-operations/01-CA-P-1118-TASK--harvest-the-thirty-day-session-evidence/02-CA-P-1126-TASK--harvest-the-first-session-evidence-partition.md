@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 13
-updated_at: "2026-10-04 10:50:57 +0400"
+version: 14
+updated_at: "2026-10-04 11:15:37 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -181,6 +181,20 @@ Actual next Active CA-P-1261v1 at `12-CA-P-1261-TASK--harvest-the-following-firs
 Combined canonical coverage419; refined1869minus419 leaves1450, original1877 including eight later machine contexts minus419 leaves1458. All1659-file/1657-ID905 source rows, other1658files,17PRIMARY/1642worker origins, metadata-parent/worktree evidence, both continuation pairs, candidate/appendable-prefix and exact frozen-window/amendment distinctions remain in951/1261 and prior roll-ups. Only actual canonical dispositions subtract; no file/partition/month completion. Eventual next100completion leaves1350/1358, not current coverage.
 
 1233 directly blocks1261; Active1261 and1126 directly block1119/1130/1155. All affectedv1 dependents/readiness reviewed; parent1126 remainsActive. FreshGoalv13/current active Principles/permissions read; five sourcePlan bodies/revisions unchanged from prior full reads; governing versions in951. Native hashes/metadata/all parts/budgets,7 saved row joins/4 literal human texts/4groups/3candidates, four saved layouts/EOF/whitespace, unique sibling IDs/sequences and seven-node direct BLOCKS/child-completion DAG passed. No excluded edits; root owns strict full saved YAML/full-Epic DAG/authorized save underC293. No current Concern; historical source questions/findings are not automatic current defects. Hold after1233.
+
+### Eleventh substantive packet result and actual design-report remainder
+
+### Completed following packet and actual design-report remainder
+
+CA-P-1261 harvested100 whole canonical original-main56137–57761,29user/71assistant,64237raw bytes/25351native characters/100native parts, plus full56130 question context389chars/one part,total25740. Ordered aggregateSHA256d50aaf6da800f5acf35ba8ee62ecf948ba3a3c4e81072c20ad5a47a2c59c3efb. DurableCA-A-979v1 at `.caprmedio_caprmedio/02_analysis/CA-A-979-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` saves100complete fingerprinted individual substantive dispositions,29exact literal human parts/one response annotation in16historicalgroups,5genuinelygrouped provisional candidates andcompletecontext disposition. All selected textparts read fully; no fragment remains.
+
+Latest source decisions preserved: settings/topology/Goalduplicate fixes; F06 PythonM/DCarriers inPROGRAMMATIC supersedesProjectStandard-only; sharedMeta-Model applicationlogic with sourceprovenance/reuse rather thanunconditionalmove; expansion-onlyCore; currentRMEDrebuildwithoutspecrescue; F12 toolcapability/Operatorfreedom supersedescompulsorycompliance; broadcheckability/ErEmEd/typedRMDtargets/CoreEpolicy/Standardchecks/Mauthoring/Meta-Modelowner, exactkey/cardinality notmanufacturedfinalapproval; REQU048 retirement. HistoricalapplyTHENcommitpush isexplicit, notcurrentworkerpermission. Reported13tests/706sources/fourgovernedcommits/latestb3143c1ec/amm-next-versionpush/Journal/remoteverification areclaims, notindependentlyverifiedTool/Git/saveproof. Laterhumanidempotentprocess/orderproposal andread-onlyFPFdo remain separatefromadoption/implementation; fixedorder, replaystability, fresh-equivalence andbyteidentity are distinct. Historical100% doesnotchangecurrent90%.
+
+ActualnextActiveCA-P-1265v1 at `13-CA-P-1265-TASK--harvest-the-next-first-partition-design-report-packet.md`,immediate1126/sequence13/oneAI/<=15minutes,ownsreservedCA-A-983 at `.caprmedio_caprmedio/02_analysis/CA-A-983-ANALYSIS_RPRT--harvest-the-next-first-partition-design-report-packet.md`.74whole57816–59236,24user/50assistant,58703raw bytes/29624native chars; aggregateSHA2563f8f4ac0362da9e6a4d3fbda4430d29401b6fd54f4a4e8a197b3e79e908bfda7. Fivecompletecontextrecords57246/57421/57430/57728/57761 preservehumanproposal/fullread-onlyPlan/literaldo/openresultchoice/final-reportprogress;1335chars,total30959<=35000. Firstwhole57816 report8156chars isintact/included; last59236 bytes[370012704,370013335),2026-09-05T16:45:44.296Z,assistant/null/one part,SHA2565bfb8f1f597fe7a1a1f765623a6c3002f43a7e89d71507f27d470517080a052f. Followingwhole59283 bytes[370234452,370258152),2026-09-05T16:51:57.606Z,assistant/null/one part,23700raw bytes/23037native chars,SHA256ed32536c6ff41ac150e4283e489513b5b3333d5d39e4cf4f0dd7a1ca8d6eb863 remainsintact/unprocessed; excludedbecausebudget, notskipped/squeezed. Metadata/rawbinding isnotsemanticreading; askrootforsubsequentIDs andbindactualremainderbefore1265Done.
+
+Combinedcanonicalcoverage519;refined1869minus519 leaves1350,original1877including8latermachinecontextsminus519 leaves1358. Eventualnext74completion leaves1276/1284,notcurrentcoverage. All1659-file/1657-ID905source rows/other1658files/17PRIMARY+1642workerorigins/metadata-parent/worktree/bothcontinuationpairs/candidate/appendableprefix/frozenwindow-amendment distinctions retainexactfrontiers in979/1265/priorroll-ups. Onlyactualcanonicaldispositionssubtract; nosource/partition/monthcompletion.
+
+1261directlyblocks1265;Active1265 and1126 directlyblock1119/1130/1155. Affectedv1dependentsreadinessreviewed;1126remainsActive. FreshGoalv13/activePrinciples/permissionsread;fivePlan-sourcebodies/revisionsunchanged,currentversionsin979. Nativecurrent100+context/next74+fivecontexts/bothfollowingslices hashes/aggregates/message metadata/parts/windows/budgets,100unique savedrowjoins/29exacthumanparts/oneannotation/16groups/5candidates,fourmandatorylayouts/EOF/whitespace,uniquesiblings/sequences andseven-nodeBLOCKS/child-completionDAG passed. NoactualcurrentConcern; historicalissues/openchoicesnotautomaticcurrentdefects. RootstrictfullYAML/full-EpicDAG/authorizedsaveunderC293 remainsseparate. NoGit/Journal/O/RMED/code/settings/services/environment/Docker/FPF/otherleafchanges. Holdafter1261.
 
 ## Details
 

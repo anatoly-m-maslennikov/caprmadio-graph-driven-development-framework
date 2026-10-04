@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 21
-updated_at: "2026-10-04 10:54:32 +0400"
+version: 23
+updated_at: "2026-10-04 11:17:30 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -64,6 +64,11 @@ Source1284isnotaggregate1415. Other131PRIMARY/all4051worker/every905source-windo
 ## Details
 
 ### Latest completed packet checkpoint
+
+Latest superseding frontier1272Done/A990 adds37 whole worker reports/9017characters plus402context, five provisional overlapping groups, zero human approval. FinalPRIMARY1415/1415 unchanged; finalworkers84/4051,3967unharvested; monthlyworkers6339unharvested. Actualnext1276/A994seq22 binds10whole/2920characters, source01a0e79b-f415-75b3-98e7-b4371e571393, rawaggregateb0e821e37a6b405364f8bab89c324fce772826421564e859a55b3053adc1e08f.1272BLOCKS1276;1276BLOCKS1119/1130/1155. Futurebindingaddszerocoverage; allotherpartitions/sourcefrontierspersist;1129/1118Active. First clock2026-10-04 07:13:26 UTC; native/saved/fullstrictchecks07:17:30Z,4m04s,121Plans/62supportingCarriers.
+
+Latest superseding frontier1268Done/A986 adds25whole workerassistantreports/8699characters,1016exactcontext,fiveoverlappinggroups/zero newhumanapproval. FinalPRIMARY1415/1415 unchanged;finalworker47/4051,4004unharvested;monthlyworkers6376unharvested. Actualnext1272/A990seq21 binds37whole/9017chars+402contexts,total9419,source01a0e562-82ac-7f53-b1ae-39864a2f3cf3,rawaggregate7a1f9f7be17544172acbcff23e54e8fb66931052761195575ab0d2213798dfb2.1268BLOCKS1272;1272BLOCKS1119/1130/1155. Afterfuture1272,3967finalworkerswouldremain;zerobindingcoverage. Withdrawnpass/invalidchecker/recoverynotapplieddistinctionsretained;allotherPRIMARYpartitions/sourcefrontierspersist;1129/1118Active. First clock2026-10-04 07:04:18 UTC; native/saved/full strict checks07:12:34Z,8m16s,119Plans/61supportingCarriers.
+
 
 Latest superseding frontier1264Done/A982 adds22 whole worker assistant reports/8144chars,377exactcontext,four overlapping provisionalgroups/zero newhumanapproval. FinalPRIMARY1415/1415 unchanged; finalworker22/4051,4029remaining; monthlyworkers6401unharvested. Actualnext1268/A986seq20 binds25whole/8699chars+1016contexts,total9715,rawaggregate8f8e375195acee12bbdd5d17affa0f7f08fd4d5a104523532ea0370e3ca804df,source01a0e56b-f350-7202-8c59-97411c22cc91.1264BLOCKS1268;1268BLOCKS1119/1130/1155. Afterfuture1268,4004finalworkersremain;futurebindingnotread. Parentlinks/assistantcontextnotOperatorapproval. AllotherPRIMARYpartitions/sourcefrontierspersist;1129/1118Active. Firstclock2026-10-04 06:50:48 UTC; native/saved/full strict checks06:54:04Z,3m16s after start.
 

@@ -10,21 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Next second-partition continuation session evidence packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:51:55 +0400"
+version: 2
+updated_at: "2026-10-04 11:15:16 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
-    - CA-P-1119
-    - CA-P-1130
-    - CA-P-1155
+    - CA-P-1266
 ---
 # Summary
 
@@ -114,6 +112,20 @@ Preserve all other A905 event/body frontiers, 17 primary/1642 workers, original3
 System Python stdlib seek6573177/read6670545 bytes/parse complete native JSONL/apply predicate must reproduce all36 ordered records/timestamps/roles/null channels/32509 characters/36parts/max24641/selected first-last/individual raw/text hashes. Verify whole L2014 report and allthree context identities separately. Independently compare saved A980 against native records/parts/context; every selected message gets a nonempty meaningful disposition and whole report gets exhaustive statement/section coverage. Check groups/choices/proposal/reported proof limits and clean headings/EOF.
 
 Verify one-agent <=15 minutes, required Plan properties/headings, Done placement, parent sequence12, exact output, actual following frontier/BLOCKS acyclicity, P1127 roll-up and affected dependent readiness. Terminal clock includes carrier persistence and checks, not an earlier semantic read completion. Overrun/blocker requires truthful unfinished state/typed Problem/bounded closure; root strict saved YAML/full DAG/save separate.
+
+### Actual result and dependent readiness
+
+A980v1 at `.caprmedio_caprmedio/02_analysis/CA-A-980-ANALYSIS_RPRT--harvest-the-next-second-partition-continuation-packet.md` retainsall36wholemessages/36nativeparts/32509chars/5user31assistant/nullchannels/threewholecontexts2314/fullinput34823,individualsubstantivedispositions andentireS01124641-characterreportverbatim. Nativequoteexact/hash-equal;all eightheadings/sixresultrows/14OPENissues/14PROPOSEDfixes/sixgaps/sixreportedFPFsourcerefs plusexhaustivedispositions retained. Five newhistoricalhuman events pluscarriedread-onlyapproval/sevenprovisionalgroups;unknownR791notaccepted,E363weakeningwithdrawn,reportedrepairsnotcurrentproof.
+
+Independentnative/savedchecks PASS at2026-10-04T07:12:30Z: all36orderednativeidentities/bytes/timestamps/roles/null/raw/text/partindices/types/lengths/hashes,wholecontexts,selectedconcatSHA,dispositions,reporttext24641equality/sectionandrecordcoverage/headings/cleanEOF. Fullnative6670545-byte slice/applypredicate independentlyreproduced36eligiblelines/hash. ActualnextP1266/A984 sequence13 at `13-CA-P-1266-TASK--harvest-the-following-second-partition-continuation-packet.md` binds100whole L2786–4393/[13271244,31267668),31user69assistant,26825joined/native26824,101parts/max5001,multipartL4242parts3077/1923,rawSHA `d72be2b941e5d5334515c29e4fb92bf643170e1f274bff38d89440bfa069eb38`. Sixwhole R791/ancestrycontexts1591,total28416<=35000. Nextnative/savedall100raw/text/parts/contextmetadataandfull17996424-byte slicepredicatepass;statementsunharvested.
+
+Original624fullyharvested;continuation136of759nowharvested,623remain. P1266binds100;further523startL4398/[31271593,31272214)/2026-09-16T22:42:59.267Z,rawSHA `1e31ac2971f93d850479d6e2928f172b931d45b3136effe9286e0dfca35aa502`;lastL23936/[511891514,511892940)/2026-09-18T22:23:04.656Z. P1127v14Active/allotherA905frontiers/17primary1642workers/identity/exclusion/Concern/windowdispositions retained. P1119/P1130/P1155fullbodiesreread/stillblockedbyfullharvest/P1266/allunfinishedprerequisites;1262→1266→1119/1130/1155explicit.
+
+Oneassignedagent;actualfirst07:03:29UTC, substantiveverification07:12:30UTC (9m01s),targetclosuremargin. Actualcarrierclosure/finalterminalreceiptclockrecordedafterpersist/checkbelow. Nocurrentevidence/authorityissuerequiringnewConcern;historicalreportfindingsnotpromoted. RootstrictsavedYAML/fullDAG/Git/Journalsaveseparate. Noadoption/implementation/extra-leafexecution.
+
+Actualcarrierclosureclock2026-10-04T07:15:16Z/11:15:16+0400 (11m47s),afterfour ownedcarriers persisted/readback andlocalDoneplacement/sequence13-parent/explicitacyclicchangedchain/parentActive/exactfrontier623=100+523/headings/cleanEOFchecksPASS. Priorlocalassertion usedwrongwhitespace literal,notartifactfault;correctedcheckpassedwithoutcarrierrepair. RootstrictYAML/fullDAG/save separate;hold/noextrapacketexecution.
+
+Finalterminalreceiptread-backclock2026-10-04T07:15:50Z/11:15:50+0400 (12m21s): persistedclosure/fourownedcarriers readbackwithcleanEOF. Finalreceiptpersistencewithin07:18:29Zdeadline;noextra leafexecuted;holdforrootstrictvalidation/save.
 
 ## Details
 

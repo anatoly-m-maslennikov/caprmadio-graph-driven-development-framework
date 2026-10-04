@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 9
-updated_at: "2026-10-04 11:01:05 +0400"
+version: 10
+updated_at: "2026-10-04 11:19:30 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -43,6 +43,18 @@ Before marking this task Done, verify full-stage coverage and update the next de
 ## Details
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
+
+Current superseding checkpoint:53 substantive packets.3390 unique PRIMARY dispositions plus84 worker dispositions =3474 total. Original-main first519/second624; continuation second136/third696/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves3198 unharvested; worker baseline6423 leaves6339. Final PRIMARY1415/1415 is complete, but only84/4051final worker messages are harvested;3967remain. Machine-context refinements still require final source reconciliation. Metadata indexing and future bindings do not count as semantic harvest.
+
+Latest1261/A979(100whole,5groups),1262/A980(36whole,7groups),1263/A981(91whole,3groups),1268/A986(25workerwhole,5groups),1272/A990(37workerwhole,5groups) add289dispositions/25provisional overlapping groups, bringing historical overlapping groups to249. These are not249adopted or deduplicated Operations. A979 retains capability-not-compulsion and role/policy corrections; A980 preserves the whole24641-character report and read-only approval boundaries; A981 preserves current role-aware Claim-within-Scope rules; A986/A990 retain withdrawn passes, actual-byte mappings and report-versus-current-proof limits.
+
+Actual next bound leaves:1265/A983(first74whole,total30959),1266/A984(second100whole/101parts,total28416),1267/A985(third92whole,total34931),1276/A994(final10workerwhole,total2920). All are unexecuted at this checkpoint. First1350refined/1358original-main remain; second623continuation; third479continuation; final3967workers. Other admitted source/window frontiers, candidate identity disposition and separate post-cutoff amendments persist. Parents1126–1129/1118remainActive and block1119/1130/1155. No authoring/implementation/Docker stage bypass.
+
+Actual terminal receipts:1261 12m43s,1262 12m39s,1263 13m14s; root1268 native/saved/fullstrict checks8m16s and1272checks4m04s. All stay within15minutes. Full strict saved-Carrier checks cover121Plans/62supportingCarriers: duplicate-rejecting safe YAML, exact registered headings/fields, unique IDs, Done placement and completion/BLOCKS DAG. Individual native/saved text/part/context/hash/disposition/frontier checks pass; semantic checks were not substituted by a metadata index.
+
+Actual prior save5e0713dbf has21then-current states independently matched to Git bytes and sealed recovered-state Journal events, bringing owned recordedstates to190before this round. Shared Journal Git save remains pending due unrelated pre-existing edits. This round's direct Git and recovered-state evidence will be recorded separately after actual verification. No O/RMED authoring, implementation, service mutation or full Docker runtime validation executed under this Epic.
+
+All lower checkpoints are historical and superseded.
 
 Current superseding checkpoint:48 substantive packets /3163 unique PRIMARY dispositions plus22 worker dispositions =3185 total. Original-main first419/second624; continuation second100/third605/final1284, plus72README/59TOOL_R final PRIMARY. Indexed PRIMARY baseline6588 leaves3425 unharvested; worker baseline6423 leaves6401. Final PRIMARY1415/1415 is complete, but only22/4051 final worker messages are harvested;4029 remain. Native machine-context refinements still require final source reconciliation. No metadata index or binding is counted as semantic harvest.
 
