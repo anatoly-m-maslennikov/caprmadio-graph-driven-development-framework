@@ -9,7 +9,7 @@ global_tier: 11
 author: Anatoly Maslennikov
 status: resolved
 version: 1
-updated_at: "2026-10-04 16:55:19 +0000"
+updated_at: "2026-10-04 18:39:51 +0000"
 subjects:
   governs: "Source verification evidence"
   depends_on: [Operations, Implementation, Plan, Artifact/Carrier]
@@ -31,4 +31,3 @@ P1445 assumed fourteen transition rows instead of deriving thirteen from the pre
 ## Blast radius
 
 These acquisition/verification incidents remain retained in the owned Plan evidence; they are not runtime failures or evidence of source acceptance. Use actual original structure and semantic disclaimers in the corrected gate. No broad verifier rewrite campaign is required.
-
