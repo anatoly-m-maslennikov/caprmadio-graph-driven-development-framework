@@ -43,14 +43,14 @@ organize them with typed nodes and relations →\
 load only the context needed.
 
 Small files can still be ambiguous →\
-shared vocabulary + CCE →\
+shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
 explicit, checkable Claims.
 
 We need more than spec →\
-C for problems, A for analysis, P for objectives/tasks/backlog →\
-RMED for specification →\
-I for implementation →\
-O for repeatable actions and workflows.
+Concerns, Analysis and Plans for understanding and planning →\
+Requirements, Methods, Evaluations and Delivery (RMED) for specification →\
+Implementation for code, tests and configuration →\
+Operations for repeatable actions and workflows.
 
 Work changes the project →\
 Journal records changes and execution →\
@@ -92,7 +92,15 @@ Evaluations check Claims and results.
 
 ### Content roles and artifact forms
 
-C — concerns; A — analysis; P — plans/tasks; R — requirements; M — methods; E — evaluations; D — delivery; I — actual Implementation; O — operations/workflows.
+- **C — Concern:** problems, bugs, questions and opportunities.
+- **A — Analysis:** analysis reports and rationale.
+- **P — Plan:** backlog, tasks, epics and version plans.
+- **R — Requirement:** specification of required outcomes.
+- **M — Method:** how code should be written.
+- **E — Evaluation:** quality assurance policies and test cases.
+- **D — Delivery:** target environments, CI/CD and release policies.
+- **I — Implementation:** code, tests, configuration and CI/CD pipelines.
+- **O — Operations:** actions and workflows with steps to operate the project.
 
 Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
 
