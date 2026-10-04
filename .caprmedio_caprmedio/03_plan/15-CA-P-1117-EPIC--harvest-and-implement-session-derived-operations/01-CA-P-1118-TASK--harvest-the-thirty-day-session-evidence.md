@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 4
-updated_at: "2026-10-04 08:57:00 +0400"
+version: 5
+updated_at: "2026-10-04 09:25:27 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -44,15 +44,15 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Latest saved harvest checkpoint — supersedes earlier counts
 
-Current checkpoint:19 substantive packets retain1148 unique PRIMARY message dispositions. Original-main coverage is201 first-partition /360 second-partition; main-continuation197 third-partition /390 final-partition. The original indexed PRIMARY baseline6588 leaves5440 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
+Current checkpoint:25 substantive packets retain1692 unique PRIMARY message dispositions. Original-main coverage is287 first-partition /459 second-partition; main-continuation256 third-partition /690 final-partition. The original indexed PRIMARY baseline6588 leaves4896 not yet semantically disposed; all6423 worker messages remain substantively unfinished. Per-source machine-context refinements are explicit in the source reports and still require final inventory reconciliation. Indexing13011 messages never counts as reading them.
 
-Latest completed leaves1204/A923,1205/A924,1206/A925 and1208/A926 add301 complete records. A925 retains one whole87,838-character report, including all79 linked draft recommendations, corrections, references and evidence limits. A923/A924/A926 retain100 complete records each with exact native fingerprints/dispositions. Their4/7/3/3 provisional groups bring the historical overlapping group count to91; these are not91 adopted Operations or deduplicated capabilities.
+Latest completed leaves1209/A927,1210/A928,1211/A929,1212/A930,1216/A934 and1220/A938 add544 complete records, respectively86/99/59/100/100/100. Their4/7/3/3/4/3 provisional groups bring the historical overlapping group count to115; these are not115 adopted Operations or deduplicated capabilities. All selected whole records, native fingerprints, substantive dispositions and context remain durable.
 
-Actual next leaves are1209/A927(first86 whole records),1210/A928(second99),1211/A929(third59 with explicitly bound context) and1212/A930(final100). All are ready, held unexecuted, and directly block1119/1130/1155 with unfinished parents1126–1129/1118. Authoring, engine specification, implementation and complete Docker runtime verification remain required and have not executed under this Epic. No source is labeled unavailable merely because of its size.
+Actual next leaves are1213/A931(first67 whole records),1214/A932(second95),1215/A933(third100 with explicitly bound context) and1224/A942(final100). All are ready, held unexecuted, and directly block1119/1130/1155 with unfinished parents1126–1129/1118. First original-main1582 refined records remain; second165 original plus759 continuation; third919 continuation; final594 continuation. Authoring, engine specification, implementation and complete Docker runtime verification remain required and have not executed under this Epic. No source is labeled unavailable merely because of its size.
 
-After all four workers finished saving, root's strict duplicate-rejecting YAML/headings/fields, unique-ID, Done-placement and complete completion/BLOCKS DAG checks passed86 Plans/24 supporting carriers. A transient1206 in-progress placement diagnostic was rerun only after its final saved Done state; the final check passes. Root independently verified A926's100 saved dispositions and200 current/next native raw identities/aggregates/time/roles/counts; workers retain their complete source/saved/next-bound verification evidence. Observed leaf intervals are1204 14m57s,1205 11m54s,1206 14m40s from its first recorded clock,1208 10m41s through owned checks; exact unobserved dispatch intervals are not invented.
+Root's strict duplicate-rejecting YAML/headings/fields, unique-ID, Done-placement and complete completion/BLOCKS DAG checks pass93Plans/31supporting carriers after saved closure. Root independently verified A928's99 identities/parts/dispositions and95next raw/text/context/budget/frontier, plus the root-owned A930/A934/A938 complete saved sources and exact next bindings. Workers retain their complete native/saved/binding checks. Observed terminal intervals:1209 14m35s;1211 13m46s;1212 4m34s through owned checks;1216 4m56s through closure;1220 3m12s through owned checks.1210 substantive checks13m49s but final closure15m04s; resolvedC299 and actual1217 preserve that overrun.1217 closure7m23s exceeded its5minute estimate but stayed within the15minute Epic bound. No duplicated harvest or invented earlier terminal clock.
 
-Prior committed checkpoint5b1c870008955791f4fbbe05e5007bcfcd75d226 is real. Root appended36 additional verified committed-state Journal receipts for the actual saved bytes of that and5f7e9e5a6, bringing this execution's receipts to64 before saving this round. They are recovered-state receipts, not save-Tool or newly executed Workflow events. The shared Journal still has unrelated pre-existing edits; its Git save stays explicitly pending rather than staging unrelated work. This round's direct Git result is recorded separately after verification.
+Prior committed checkpointdcb2bddb8fa805826bd7851913d72f6596a6931f is real. Its17 saved states were independently matched to Git bytes and appended as actual recovered-state Journal receipts; this execution has81 receipts before saving this round. These are not save-Tool or newly executed Workflow events. The shared Journal still has unrelated pre-existing edits; its Git save stays explicitly pending rather than staging unrelated work. This round's direct Git result is recorded separately after verification.
 
 Earlier checkpoint paragraphs below are historical and superseded by these current counts/frontiers.
 

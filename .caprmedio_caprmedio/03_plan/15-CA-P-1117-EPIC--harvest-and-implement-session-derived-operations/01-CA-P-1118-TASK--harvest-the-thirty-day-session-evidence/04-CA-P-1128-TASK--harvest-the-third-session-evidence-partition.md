@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-04 08:54:42 +0400"
+version: 9
+updated_at: "2026-10-04 09:13:05 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -99,6 +99,14 @@ CA-P-1206 v2 is Done at `done/06-CA-P-1206-TASK--harvest-the-whole-third-partiti
 Combined A908/913/918/921/925 coverage is197/1175;978 source third-partition canonical messages remain from L26713/[544178116,544178677)/2026-09-22T16:55:35.896Z/user/null/178 characters/rawSHA2566b8f240f1d5ffd753ad35a351466084b6b9ca936385301a9adc2951a7f20c5e0. Actual next Active CA-P-1211/A929 at `07-CA-P-1211-TASK--harvest-the-following-third-partition-session-packet.md`, immediate1128/work sequence7, binds59 whole records/24,953 selected characters/48,173 raw bytes,43assistant/16user, L26713–27846/[544178116,567736467), through2026-09-22T19:17:56.300Z, plus three already-completed raw contexts/2,132 characters and A925's durable meaning index. Total selected-plus-raw-context27,085 characters leaves room within35,000 for the report's6,181-character meaning index. Next binding aggregate5985fbb1a783f9dc8bc91ced6f5cd4b90daa993d3023775af32c242c2e0f84b3 passed; binding contributes no coverage. After those59,919 would remain at L27863/[567803383,567805043)/2026-09-22T19:18:46.648Z/assistant/null/1225 characters/rawSHA2563cc604cb755de797f59862da77b42dc4e1c7946fd62f0058249aee25e52611dc;978 remain now.
 
 1206 directly BLOCKS1211 and retains1119/1130/1155;1211 directly BLOCKS1119/1130/1155. Those v1 Active objectives were reread and still require complete harvest/current-authority reconciliation/destination binding; no stage unlocks. This parent stays Active with all direct gates. All other1657 source rows/15 otherPRIMARY/1642worker origins/structure continuation/repository-parent-worktree support, both main paths/non-third-partition frontiers, nine excluded environments/sparse gaps and lastthird boundary L59916 retain the exact A905/A910/A925 frontiers. A917's zero-monthly-canonical candidate result/broader nonblocking C294 identity remains explicit. No new current Concern or prohibited mutation occurred. Owned saved checks/elapsed are recorded in1206; strict parser/full-Epic DAG/Git remain root-owned.
+
+### Sixth substantive packet result and actual next frontier
+
+CA-P-1211 v2 is Done at `done/07-CA-P-1211-TASK--harvest-the-following-third-partition-session-packet.md`; CA-A-929 v1 retains all59 whole native records/48,173bytes/24,953characters,43assistant/16user,59 unique full text/provenance/disposition rows and three context-only records/2,132characters. Nine historical human chains preserve79-Question resolution authorization/no promotion/99% context, conditional archival, full Concern display, Subject grouping/blast-radius ordering, group1 naming/update authorization and group2 Atom–Entity relation definition/inquiry. Three provisional workflow groups refine existing review/authority-cleanup candidates. Claimed79Question saves, firstthree/NaturalRendering-dependent/group1 archives, checks/Journal/runtime changes remain reported, not current proof. Group2's final question continues at the actual remainder; no current Concern arose.
+
+Combined A908/A913/A918/A921/A925/A929 source coverage256/1175;919 remain beginning L27863/[567803383,567805043)/2026-09-22T19:18:46.648Z/assistant/null/onepart/1660bytes/1225characters/rawSHA2563cc604cb755de797f59862da77b42dc4e1c7946fd62f0058249aee25e52611dc. Actual next Active CA-P-1215/A933 at `08-CA-P-1215-TASK--harvest-the-subsequent-third-partition-session-packet.md`, immediate1128/sequence8, binds100whole records/31,839selectedcharacters/71,166bytes,70assistant/30user, positions257–356, sparseL27863–29532/[567803383,591992738), through2026-09-23T17:23:16.322Z, plus seven already-completed group2 contextrecords/1,941characters; total33,780<=35,000. Nativebinding aggregatec129e64c346ae2caa16cbb65c4eb26b4c8269276ae93656fcbdf0f0f31a19376 passed; binding addszero coverage. Afterthose100,819 would remain at L29556/[592106294,592107302)/2026-09-23T17:24:06.678Z/assistant/null/1008bytes/601characters/rawSHA256b60bf4c0a0d0da0e9281fde3fa04f659bdc23ead3056f244db9d024c29c3a0ac;919 remain now.
+
+1211 directlyBLOCKS1215 and retains1119/1130/1155;1215 directlyBLOCKS1119/1130/1155. Allthree v1Active objectives remain fullharvest/reconciliation/destinationbinding gated. This parent staysActive withdirectgates. Every other1657 retainedsource/15otherPRIMARY/1642worker/structurecontinuation/repository-parent-worktree frontier, bothmainpaths/non-thirdpartitionfrontiers, nineexcludedmachineenvironments/sparsegaps, lastthirdL59916 and A917zero-monthly-canonical/nonblockingbroaderC294identity remain exactA905/A910/A929 unfinished evidence; nofile or copiedhumanintent silently adopted/subtracted. CurrentGoal/Principle/Plan source revisions matchbinding. Owned savedchecks/elapsed are recorded in1211; strictYAML/fullEpicDAG/Git remainroot-owned.
 
 ## Details
 

@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following third-partition session evidence packet harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:50:00 +0400"
+version: 2
+updated_at: "2026-10-04 09:14:36 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1215
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -964,6 +965,16 @@ Only actual current blockers/failures, uncertain choices or incompatible current
 System Python standard-library exact seeks must verify all59 selected/3 context slices: canonical response_item/message/in-window, raw/text SHA256, timestamp, role/null channel, parts/nontext counts and original sizes. Selected aggregate5985fbb1a783f9dc8bc91ced6f5cd4b90daa993d3023775af32c242c2e0f84b3. Verify next27863 independently. Binding checks metadata/integrity, not harvest; raw envelopes do not cover sparse gaps.
 
 After saving reread all59 selected dispositions/three contexts/actual human antecedents, supersessions/candidates/report limitations and corpus frontiers. Verify original unique coverage, native keys, exact Analysis/Plan headings, root-reserved unique ID/sequence/immediate parent, real next inputs/output/ownership/<=15-minute estimate/scenario/direct gates, affected local completion/BLOCKS acyclicity and Done placement/final newline. Reassess1119/1130/1155 readiness and keep1128 Active. Record observed functional pass/actual elapsed before Done; root owns strict YAML/full-Epic DAG/Git, so do not claim unobserved full parser success.
+
+### Completion result
+
+Saved CA-A-929 v1 at `.caprmedio_caprmedio/02_analysis/CA-A-929-ANALYSIS_RPRT--harvest-the-following-third-partition-session-packet.md`:59 whole canonical records,43assistant/16user,48,173raw bytes/24,953characters and three already-completed context-only records/2,132characters. All59 native keys, complete original texts and per-record dispositions are retained. Nine historical human decision/correction chains and three provisional reusable groups cover draft-resolution handoffs, Subject/blast-radius grouping and bounded model-term correction. Assistant archive/save/check/Journal/runtime claims remain reports. No new current Concern or O/RMED/code/environment/Docker/FPF/Git/Journal mutation.
+
+Current selected-source coverage256/1175;919 remain at L27863/[567803383,567805043)/2026-09-22T19:18:46.648Z/assistant/null/rawSHA2563cc604cb755de797f59862da77b42dc4e1c7946fd62f0058249aee25e52611dc. Actual next CA-P-1215/A933 is bound at `08-CA-P-1215-TASK--harvest-the-subsequent-third-partition-session-packet.md`:100whole records/31,839selectedcharacters/71,166bytes plus sevencontextrecords/1,941characters, total33,780<=35,000; assigned agent/<=15-minute estimate/exact output/scenario/directparent/sequence8. Aggregatec129e64c346ae2caa16cbb65c4eb26b4c8269276ae93656fcbdf0f0f31a19376 passed. After that boundpacket,819 would remain at L29556/[592106294,592107302)/2026-09-23T17:24:06.678Z/rawSHA256b60bf4c0a0d0da0e9281fde3fa04f659bdc23ead3056f244db9d024c29c3a0ac;919 remain now and binding is not harvest. All A905/A910/A929 other-source/window/worker/continuation/metadata exclusions and limited-overlap frontiers remain unfinished.
+
+Saved checks passed at2026-10-04 05:13:05 UTC: all59 unique native disposition keys/exact saved text hashes and counts/16human inputs/three contexts;100 next complete records/seven contexts/native raw/text metadata/window/aggregate/next frontier/context budget; mandatory headings/native properties/immediate parent/sequence8/direct local acyclic readiness edges; clean whitespace and one terminal newline. First observed task clock05:00:50 UTC; observed start-to-saved-check interval12m15s, within <=15-minute estimate. Exact dispatch-to-completion elapsed is not asserted. Strict YAML/full-Epic DAG/Git remain root-owned.
+
+Final saved Done-placement/version/clean-whitespace/local-gate checks passed at2026-10-04 05:14:36 UTC,13m46s after the first observed task clock. Exact root dispatch-to-completion duration is unavailable. Current1119/1130/1155 v1Active objectives/readiness were reread; fullharvest/currentauthority reconciliation/destinationbinding are stillrequired.1211→1215→1119/1130/1155 explicit;1128Active/directgates remain. No stage unlocks.
 
 ## Details
 

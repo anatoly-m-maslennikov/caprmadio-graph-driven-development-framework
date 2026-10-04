@@ -10,19 +10,20 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following bounded first-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
     - "Atom/Content Role: Plan"
-version: 1
-updated_at: "2026-10-04 08:54:05 +0400"
+version: 2
+updated_at: "2026-10-04 09:14:26 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1126
   blocks:
+    - CA-P-1213
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1151,6 +1152,22 @@ Retain September15 same-ID continuation `/Users/am/.codex/sessions/2026/09/15/ro
 System Python standard-library seek/read every exact selected/context slice; verify response_item/message kind,hash/timestamp/role/null channel/part count/byte/native sum-of-text-part character count/window.86 selected/31user/55assistant/68564bytes/34614characters andordered aggregateSHA2562af7b3862ae354861167bf91757de36ecb2653570d79921fa36e37bc094e6967.52632 has2parts; count4624 native characters,not4625 index display characters. Context52086 separately hash/metadata/302chars,not counted twice; total34916. Following53947 separately checked. Parent1204 binding proves integrity,not substantive harvest.
 
 After saving927 reread86 unique complete provenance/disposition rows plusseparate context,all decisions/candidates/claims/frontiers andactual next input/output/ownership/estimate/functional checks/direct gates. Verify mandatory Plan sections/native keys/immediate parent/unique sibling IDs/sequence/bounded affected completion-BLOCKS acyclicity. Review1119/1130/1155 from result;1126 stays Active. Record passing saved checks before Done. Root owns strict YAML/full-Epic DAG andauthorized saving underC293; claim only observed success.
+
+### Completed substantive result and exact next gate
+
+CA-A-927v1 at `.caprmedio_caprmedio/02_analysis/CA-A-927-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` records86 whole canonical original-main dispositions52093–53836,31user/55assistant,68564raw bytes/34614native chars; ordered aggregateSHA2562af7b3862ae354861167bf91757de36ecb2653570d79921fa36e37bc094e6967. All87 selected native parts andone context part were fully read,including both52632 machine parts.30intentional human messages form18historical decision/query/prospective-action groups and4provisional reusable candidates. Literal requests/annotation targets/antecedents/supersession remainexact. Historical Status/revision/Scope/Draft/cardinality/DRY/Principles-first/graph directions are not current adoption; reported edits/tests/rebuild/save/FPF are not independently observed proof. No selected fragment remains.
+
+Combined1180+1190+1194+1200+1204+1209 coverage287; refined9101869 minus287 leaves1582,original1877 including8latermachinecontexts minus287 leaves1590. Aggregate1949PRIMARYincludesothersources. All1659manifestrows/1657IDs/other1658files/17primary+1642workerorigins/metadata-parent/worktree/bothcontinuations retainexactsource/windowfrontiers. Later917candidatezero-monthlymetadata-only/unassertedbroaderidentityC294 andSeptember15 priorprefix/boundary/overlapfrontiers remain in927/1213; no whole source/sourcepartition/month completion.
+
+Actual next ActiveCA-P-1213v1 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/02-CA-P-1126-TASK--harvest-the-first-session-evidence-partition/08-CA-P-1213-TASK--harvest-the-next-first-partition-session-packet.md`,immediate1126/sequence8/oneAI/<=15minutes,outputreservedCA-A-931 at `.caprmedio_caprmedio/02_analysis/CA-A-931-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md`.67whole53947–55000,22user/45assistant,60903rawbytes/34260chars,aggregateSHA256b02eefd7c06040ca4e9afe0c55c21830454a5cbd92f971a5c9d757a6179cf63b;53836context325gives34585<=35000. Everyexactnextslice/part bound,not substantively harvested. First53947bytes[341533911,341534679)/2026-09-04T19:48:59.021Z/assistant/null/1part/hash63c2c2cf3553c71d1d75fd41dacabcb66a5427a067cff55d74cc65a748c2d6da. Last55000bytes[349141915,349142534)/2026-09-04T21:05:28.432Z/assistant/null/1part/hash31c0233ba5b85e654661a26182d040f5d0dcd59bf095b95cb28a420177f2b6c5. Followingwhole55029bytes[349226734,349227810)/2026-09-04T21:06:42.481Z/assistant/null/1part/hash44ffc0d6e3b48e0d8720c16f3ed8348d4aba66e26aff7bbebd7e82f038b7e4df/1076bytes/668chars remainsunfinished. Eventual67completionwouldleave1515/1523;1582/1590remainnow.
+
+1209 directlyblocks1213;Active1213 directlyblocks1119/1130/1155,asdoesActive1126. Allthreev1dependentswerefullyreread;authoritativeincomingreadinessremainsblocked. Goal/Principles/permissions/sourcePlanbodieswerefullyreread,currentrevisionsas927. NoactualcurrentissuerequirednewConcern;C293/C294retaindispositions. Thisworkerholdsafter1209 andmade noO/RMED/code/environment/Docker/FPF/Git/Journalchanges;rootownsstrictYAML/full-EpicDAG/authorizedsaving.
+
+### Actual verification and bounded timing
+
+Actualworkstart2026-10-04T05:00:33Z,estimate<=15minutes. BeforeDone systemPythonstandard-library source/saved checks passed87 selected/context slices,allnativeparts/rawmetadata/aggregate,86uniquecompleteprovenance/dispositionrows,30literalhumanrequests,67nextbound+followingrawslices,mandatorysections/nativekeys/oneDoD/oneEOFnewline/no trailingwhitespace,uniquedirectsiblingIDs/sequence8 andactualseven-nodecompletion/BLOCKSacyclicity. RootstrictYAML/full-EpicDAG/save remainseparate,notclaimedhere. FinalDone-placement/roll-up checks andcompletionclock follow below.
+
+Final saved Done-placement/roll-up source/provenance/parts/headers/EOF/unique-sibling/seven-node completion-BLOCKS checks passed at2026-10-04T05:14:26Z; elapsed13m53s from05:00:33Z,within15minutes.86selected rows/87selected parts+1contextpart,30intentionalhuman messages/18groups/4candidates;next67bound andfollowing55029verified. Timing-only metadata write followed these observed checks; rootstrictparser/fullDAG/save remainunclaimed.
 
 ## Details
 

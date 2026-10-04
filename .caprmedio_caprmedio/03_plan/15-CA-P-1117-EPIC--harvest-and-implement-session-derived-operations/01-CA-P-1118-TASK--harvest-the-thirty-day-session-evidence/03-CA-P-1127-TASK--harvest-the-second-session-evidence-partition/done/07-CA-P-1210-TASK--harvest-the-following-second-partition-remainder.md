@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition primary session evidence remainder packet"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:41:56 +0400"
+version: 4
+updated_at: "2026-10-04 09:25:27 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1214
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -68,8 +69,18 @@ SystemPythonstdlibseek599544979/read21948940bytes,parseeverycompleteJSONLrecord,
 
 Verify nextactualleaf required Plan headings/fields/status/parent/sequence,oneassignedagent/<=15minutes,exactinput/output/verification and changedBLOCKSacyclicity. Update1127actualfrontier and review1119/1130/1155.1205BLOCKS1210;Active1127/fullharvest1118 and all unfinished harvest/remainders keep downstream blocked.1127 stays Active until complete partition coverage.
 
+### Actual result
+
+CA-A-928v1 saved99whole messages plus512characterpriorcontext,99exactidentities/nativeparts/dispositions,ninehistoricalchoices/sevenprovisionalgroups. Independentnative/savedcoverage/hash/context and next95binding passed09:14:36+0400. Start09:00:47+0400,completion09:14:36+0400,13m49s. Historicalreportedexecution/permissions neverpromoted. ActualfrontierL95288/621493919/2026-09-14T23:43:02.440Z;459of624originalcovered,165remain. BoundActive1214/A932sequence8,next95contextsafe34328chars;later70includewhole78201charL96827+69records;759continuationunchanged.1210BLOCKS1214;1214BLOCKS1119/1130/1155;1127/1118Active. Rootfullparser/DAG/save remains separate.
+
 ## Details
 
+### Actual terminal timing and bounded closure
+
+The13m49s result above is substantive verification, not final carrier closure. Final worker clock05:15:51Z makes15m04s from05:00:47Z, exceeding theleaf bound by4seconds. C299 preserves that failure. This Plan is now composite Active with actual<=5minute child1217 to verify the already-saved harvest/binding/placement/graph closure only. All99 original source dispositions and all unfinished frontiers remain valid; no duplicate semantic harvest.1214 stays blocked until1217 and this composite are Done;1127/1118 and downstream full stages remain Active.
+
 ### Definition of Done
+
+Actual closure:1217Done at05:25:27Z after7m23s, within the15minute Epic bound despite the5minute estimate. Native/saved99 identities/parts/dispositions,95 next bound identities/budget/context/frontier and strict saved carrier/completion-DAG checks pass. C299 resolved; the original15m04s overrun remains recorded above. Composite and its actual child bundle are now Done; next1214 remains Active and ready, all full-harvest downstream stages blocked.
 
 ThisleafisnotDoneifany99-messageidentity/wholepart/substantivedisposition or exact short-answer context is missing;contenttruncated/skipped;assistantreportbecamecurrentauthority/independentexecutionproof;hash/frontierfailed;nextactualboundedremainder/edgesmissing;otherfrontierslost;currentissueuntyped/undisposed;dependentsunreviewed;or<=15minutes exceeded without bounded unfinished work. OneassignedAIagent,estimate<=15minutes; do not mark1127Done from this packet.

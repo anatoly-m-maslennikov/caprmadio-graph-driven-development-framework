@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Following final-partition session harvest"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 08:51:00 +0400"
+version: 2
+updated_at: "2026-10-04 09:05:18 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1129
   blocks:
+    - CA-P-1216
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1386,6 +1387,10 @@ Own A930, this Plan result/Done placement,1129 roll-up and actual next bound rem
 ```
 
 ## Details
+
+### Saved completion
+
+A930 retains100 fully read selected messages/23153 characters,90assistant/10human, all raw/text fingerprints and individual dispositions. Native current/next200 raw/text/time/role/count/aggregate checks,100 saved dispositions, exact next first/context binding and clean EOF passed. A930 retains the final human correction gather → check → fix, no rechecks, as superseding older historical proposals. Actual1216/A934 binds100 whole records/20776 native characters;1129 updated to490/1284 disposed,794 remaining. Start05:00:44Z to observed verification05:05:18Z=4m34s within estimate. Strict YAML/headings/fields/unique IDs/completion-BLOCKS DAG passed87 Plans/25 supporting carriers before Done. No current issue/Concern or stage-gate release.
 
 ### Definition of Done
 

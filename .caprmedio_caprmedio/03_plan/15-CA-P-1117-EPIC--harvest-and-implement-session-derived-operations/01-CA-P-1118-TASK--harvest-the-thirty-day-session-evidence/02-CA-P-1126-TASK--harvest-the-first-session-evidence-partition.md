@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-04 08:54:05 +0400"
+version: 9
+updated_at: "2026-10-04 09:14:26 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -127,6 +127,16 @@ Combined1180+1190+1194+1200+1204 canonical coverage201; refined9101869 minus201 
 Actual next ActiveCA-P-1209v1 at `07-CA-P-1209-TASK--harvest-the-following-first-partition-session-packet.md`, immediate1126/sequence7/one AI Agent/<=15minutes, owns reservedCA-A-927 at `.caprmedio_caprmedio/02_analysis/CA-A-927-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md`. It binds86 whole52093–53836,31user/55assistant,68564raw bytes/34614native chars;aggregateSHA2562af7b3862ae354861167bf91757de36ecb2653570d79921fa36e37bc094e6967,plus52086 context302=34916<=35000.52632's2parts/4624nativechars remain intact;index4625 includesoneinjecteddisplayseparator. First52093/bytes[325153827,325154214)/2026-09-04T18:30:11.689Z/user/null/1part/hash007cbf09f1d08a72331a73e929c116b0ddbabca34cc35943937fac4620ddf410/387bytes/8chars. Last53836/bytes[341300981,341301693)/2026-09-04T19:44:21.659Z/assistant/null/1part/hash113ff4bff3e95a3ffd77acace2440e047e220384b2b773aa6e5433ca805c42ca/712bytes/325chars. Following whole53947/bytes[341533911,341534679)/2026-09-04T19:48:59.021Z/assistant/null/1part/hash63c2c2cf3553c71d1d75fd41dacabcb66a5427a067cff55d74cc65a748c2d6da/768bytes/377chars remains unfinished. Bound next integrity is not harvest;eventual86completion would leave1582/1590,while1668/1676 remain now.
 
 1204 directly blocks1209;Active1209 andthis Activeparent directly block1119/1130/1155. Those livev1 dependents were reread;local1204completion never releases methodology. Governing Goal/Principles/permissions/sourcePlan bodies were reread andunchanged. No newcurrentConcern;source integrity/savedcoverage/nativeparts/headers/unique siblings/actualseven-nodeaffectedDAG/whitespacechecks passed,withactualtiming in1204. Root owns strictYAML/full-EpicDAG/authorizedsave underC293. Worker made noO/RMED/code/environment/Docker/FPF/Git/Journalchanges.1126 remains Active until every required source/window/fragment/remainder is substantively complete.
+
+### Sixth substantive packet result and actual next remainder
+
+CA-P-1209 harvested86wholecanonicaloriginal-main52093–53836,31user/55assistant,68564rawbytes/34614nativechars;aggregateSHA2562af7b3862ae354861167bf91757de36ecb2653570d79921fa36e37bc094e6967. DurableCA-A-927v1 at `.caprmedio_caprmedio/02_analysis/CA-A-927-ANALYSIS_RPRT--harvest-the-following-first-partition-session-packet.md` saves86uniquecompleteprovenance/dispositionrows,30literalintentionalhumanmessages in18historicalgroups,4provisionalcandidates,onecompleted52086contextrow andassistantclaims/limits.52632has2machinecontextparts;all87selectednativeparts+contextread. Per-revisionStatus/Draft-IDexception/semanticScopeversuscarrieromission/DRY/Principles-first/graphconnectivity/laterapplyacceptedrefinements retainexactantecedents/supersession. Negativeapplied-state/interrupted-batchaudits correctearliereditingimpressions;reportsarenotTool/artifact/implementationproof. No selectedfragmentremains.
+
+Combined1180+1190+1194+1200+1204+1209canonicalcoverage287;refined9101869minus287leaves1582,original1877including8latermachinecontextsminus287leaves1590. Aggregate1949PRIMARYincludesothersources. All1659-file/1657-ID905rows/other1658files/17primary+1642workerorigins/metadata-parent/worktree/bothcontinuations retainexactsource/windowfrontiers;onlyactualcanonicaldispositionssubtract. Later917candidatezero-monthlymetadata-only/unassertedbroaderidentityC294 andSeptember15continuationexactpath/priorprefix/boundaryhashes/unassessedoverlap/laterpartitions remainin927/1213. No source/partition/monthcompletionclaimed.
+
+ActualnextActiveCA-P-1213v1 at `08-CA-P-1213-TASK--harvest-the-next-first-partition-session-packet.md`,immediate1126/sequence8/oneAI/<=15minutes,outputreservedCA-A-931 at `.caprmedio_caprmedio/02_analysis/CA-A-931-ANALYSIS_RPRT--harvest-the-next-first-partition-session-packet.md`.67whole53947–55000,22user/45assistant,60903rawbytes/34260chars,aggregateSHA256b02eefd7c06040ca4e9afe0c55c21830454a5cbd92f971a5c9d757a6179cf63b;53836context325gives34585<=35000. Nextintegrity/bindingisnotcompletedharvest. First53947bytes[341533911,341534679)/2026-09-04T19:48:59.021Z/assistant/null/1part/hash63c2c2cf3553c71d1d75fd41dacabcb66a5427a067cff55d74cc65a748c2d6da/768bytes/377chars;last55000bytes[349141915,349142534)/2026-09-04T21:05:28.432Z/assistant/null/1part/hash31c0233ba5b85e654661a26182d040f5d0dcd59bf095b95cb28a420177f2b6c5/619bytes/231chars. Followingwhole55029bytes[349226734,349227810)/2026-09-04T21:06:42.481Z/assistant/null/1part/hash44ffc0d6e3b48e0d8720c16f3ed8348d4aba66e26aff7bbebd7e82f038b7e4df/1076bytes/668chars remainsunfinished. Eventual67completionleaves1515/1523;1582/1590remainnow.
+
+1209directlyblocks1213;Active1213 andthisActiveparent directlyblock1119/1130/1155. Allthreev1dependentswerereread;local1209Done neverreleasesmethodology. GoverningGoal/Principles/permissions/sourcePlanbodieswerereread,currentrevisionsrecordedin927. NoactualcurrentConcern;source/savedcoverage/literalrequests/nativeparts/headers/uniquesiblings/actualseven-nodeaffectedDAG/whitespacecheckspassed,timingin1209. RootownsstrictYAML/full-EpicDAG/authorizedsaveunderC293. Workerholdsafter1209,made noO/RMED/code/environment/Docker/FPF/Git/Journalchanges.1126 staysActive until everyrequiredsource/window/fragment/remainderissubstantivelycomplete.
 
 ## Details
 
