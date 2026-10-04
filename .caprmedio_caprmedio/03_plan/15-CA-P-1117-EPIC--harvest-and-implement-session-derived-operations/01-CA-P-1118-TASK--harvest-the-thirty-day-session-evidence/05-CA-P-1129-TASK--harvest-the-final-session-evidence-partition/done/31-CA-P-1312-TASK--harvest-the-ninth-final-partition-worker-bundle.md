@@ -9,15 +9,15 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final-partition worker evidence"
   depends_on: [Project, Operations]
-version: 1
-updated_at: "2026-10-04 10:37:41 +0000"
+version: 2
+updated_at: "2026-10-04 11:27:29 +0000"
 relations:
   is_decomposition_of: [CA-P-1129]
-  blocks: [CA-P-1119, CA-P-1130, CA-P-1155]
+  blocks: [CA-P-1119, CA-P-1130, CA-P-1155, CA-P-1316]
 ---
 # Summary
 
@@ -642,6 +642,22 @@ P1308 completion advances final workers to803/4051,3248 remain; monthly803/6423,
   }
 }
 ```
+
+### Interrupted harvest and bound actual remainder
+
+Actual first clock2026-10-04 10:59:24 UTC is retained after interruption; no restart or elapsed<=900 hardgate applies. All23 whole native original parts/texts and all eight complete antecedents were read and retained inA1030, with23 substantive dispositions and five provisional overlapping groups. Four frozen prefix/Project/parent/line/raw/text/role/channel/timestamp/aggregate checks passed. Current39 authority fingerprints, exact saved Carrier fields/headings/EOF, index frontier and localDAG proof are pending. CA-C-332 retains interruption, preparation truncations, zero credit from rejected outputs and actual overrun.
+
+Actualnext ActiveP1316/A1034 sequence32 binds34 whole records/five sources,23,634 native plus all six full continuing-source antecedents of10,446 characters,total34,080; rawaggregate5766d86cb42354a2f8912a1e99b885fe933b28ade43aae159eca0d7321055a59. First intact3,165-character report remains01a0edb5-92a5 L320/offset6676465/rawfaf3431ec487eefa956a23dd23ade3c8c7803dc9970782286d8022c12b1bf58f. Following intact1,360-character report is01a0ee18 L574/offset4808074/raw3886fdd1a69e89c286d5bddd694fab12884a3f9de2430bcd66df63cbb8f8626e;34,080+1,360 exceeds35,000. All actualnext required literal contexts and first/following parts are retained; binding adds zero coverage. P1312 BLOCKS P1316/1119/1130/1155 and P1316 retains downstream gates. Parent1129/1118/Epic remain Active. Once saved proof passes, final/monthly workers become826 with3225/5597 remaining; finalPRIMARY1415 unchanged. No next execution or adoption is claimed.
+
+### Verified completion receipt
+
+Native/saved/current-authority/registered-Carrier/local-DAG proof passed at2026-10-04 11:25:32 UTC,1,568 seconds/26m08s from the original10:59:24 UTC start. All23 whole originals/eight full contexts,four current and five next frozen prefixes, exact index803:826/826:860,raw/text/line/role/channel/timestamp/Project/parent/source and overall fingerprints,23 dispositions/five provisional groups,39 current governing hashes, fullnext34/six contexts/intact first/following, and five owned registered Carrier fields/headings/Author registry/EOF/local edges passed. The original15-minute estimate was exceeded; interruption and preparation truncations remain inC332. Physical Done and resolved placement follow successful proof; no clock reset, timely-completion claim or next execution occurs. Root owns global checkpoint/Git/Journal.
+
+Actual completion advances final workers826/4051 with3225 remaining; monthly826/6423 with5597 remaining. FinalPRIMARY1415/1415 remains. All other frontiers and post-cutoff amendments persist. PlanVersion2 records the changed next blocking boundary; completion timing/status provenance does not create another meaning revision. HOLD after this leaf; nextP1316/A1034 is only bound.
+
+### Terminal owned placement receipt
+
+Terminal owned mechanical verification passed at2026-10-04 11:26:46 UTC,1,642 seconds/27m22s from the original2026-10-04 10:59:24 UTC start. Unique P1312 Done/v2,A1030 Active/v1,P1129 Active/v35,P1316 Active/v1 and physically resolvedC332/v2, exact saved current/next bindings,23 dispositions/five groups, registered fields/headings/Author registry, single-newline EOF,status/placement and localBLOCKS/decomposition DAG passed. This receipt is metadata/provenance only; no governed meaning or Version changes. The15-minute estimate was exceeded and its interruption/recovery remains visible. Root owns global checkpoint/Git/Journal; HOLD after this leaf.
 
 ## Details
 

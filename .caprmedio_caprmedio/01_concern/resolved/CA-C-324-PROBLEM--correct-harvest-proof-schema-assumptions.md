@@ -12,9 +12,11 @@ subjects:
   depends_on:
     - "Artifact"
 version: 2
-updated_at: "2026-10-04 10:54:29 +0000"
+updated_at: "2026-10-04 11:46:51 +0000"
 relations:
   concern_about:
+    - CA-P-1118
+    - CA-A-1036
     - CA-P-1305
     - CA-A-1023
     - CA-P-1306
@@ -38,8 +40,14 @@ The corrected proof requires complete original_parts/full_text for every saved A
 
 ## Blast radius
 
+The checkpoint 93 save whitelist comparison initially counted Git's rename-collapsed listing as 47 paths against 51 explicit old/new paths and stopped before committing. The exact staged paths are correct: disabling rename detection exposes all 51 owned paths, including four former Active carriers and their Done destinations. That comparison passed with no unrelated staged paths. No unstage, reset, discarded change or false commit receipt occurred.
+
+Checkpoint 93 metadata preparation used an incorrect frontmatter delimiter position, so the ephemeral inventory command returned a traceback rather than JSON; the caller rejected it with a JSON parse error. No proof or absence was inferred. The corrected lookup separates the opening delimiter explicitly and verifies the unique current path, status, Version and registered Details heading for all twenty assigned/current-next leaves and five shared parents. The complete shared registered-Carrier gate independently passed 167 Plans and 139 supporting Carriers without exclusions.
+
 A later root preparation lookup for A1023 assumed every JSON fence was a mapping and raised AttributeError on its valid list-shaped authority ledger. The root rejected that failed lookup, added explicit mapping/list classification and reopened the entire non-evidence prose and JSON shapes successfully. The actual P1305/A1023 current8/context2, actual next1/context4, full native/raw/parts/text/metadata/prefix/aggregate and all23 current governing fingerprints passed. No saved schema change or source omission was inferred from the failed lookup.
 
 Root integration for P1308/A1026 initially asserted literal equality between the metadata-only Plan selection and its completed Analysis binding, which correctly adds original_parts/full_text to all60 current selected records. The comparison failed before any proof was counted. A bounded schema comparison confirmed those are the only differences. The corrected diagnostic compares the identical selection metadata separately, then verifies the Analysis's complete originals directly against native sources; it does not remove originals, change evidence or infer a delivered Tool defect. The actual current60/context2 and next23/context8 native/saved parts/text/metadata/prefix/aggregate/disposition/disjointness/Done proof and34 current governing fingerprints passed. This is saved provenance, not another semantic recheck stage.
+
+A post-restart report-shape lookup again assumed that the first JSON block was a mapping. A1036 correctly starts with its list of21 individual dispositions, so the lookup stopped with AttributeError before establishing any aggregate or proof. Explicit mapping/list classification recovered the metadata lookup and exposed each completed report's actual selected-record schema. The root did not rewrite the reports, count contexts or future bindings, or infer a framework Tool defect from this ephemeral failure. The shared registered-Carrier check passed165Plans/134supporting Carriers while the explicitly excluded unfinished leaves and Concerns retained their pending states; that scoped pass was not reported as a full-round pass.
 
 Root integration provenance preparation/checking for P1305/A1023, P1306/A1024 and their actual next bindings. The saved source evidence and coverage did not change. This repairs ephemeral schema assumptions; it does not implement a framework Tool, add a semantic recheck stage, reset a leaf clock or hide an overrun.

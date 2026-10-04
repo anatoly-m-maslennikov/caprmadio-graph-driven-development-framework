@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Final selected-source third-partition validation evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:41:32 +0000"
+version: 2
+updated_at: "2026-10-04 11:27:22 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1128
   blocks:
+    - CA-P-1315
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -32,7 +33,7 @@ Harvest the final selected-source third-partition validation packet
 
 ## Objective
 
-Exactly one assigned AI Agent must harvest the complete frozen packet below within an estimate of <=15 minutes including live authority/native full-part reading, individual substantive dispositions, persistence, one full saved/native/current-source/Carrier/local-DAG proof and terminal margin. P1307 directly BLOCKS this leaf. Reserved output A1029 is `.caprmedio_caprmedio/02_analysis/CA-A-1029-ANALYSIS_RPRT--harvest-the-final-selected-source-third-partition-validation-packet.md`. Binding contributes zero coverage; this leaf is unexecuted.
+Exactly one assigned AI Agent must harvest the complete frozen packet below within an estimate of <=15 minutes including live authority/native full-part reading, individual substantive dispositions, persistence, one full saved/native/current-source/Carrier/local-DAG proof and terminal margin. P1307 directly BLOCKS this leaf. Reserved output A1029 is `.caprmedio_caprmedio/02_analysis/CA-A-1029-ANALYSIS_RPRT--harvest-the-final-selected-source-third-partition-validation-packet.md`. Initial binding contributed zero coverage; the interrupted execution is completed by the saved result and proof below.
 
 ### Governing authority and ownership
 
@@ -2264,6 +2265,23 @@ Before Done, persist an actual context-safe bounded next leaf from a still-unpro
 ### Functional verification and downstream readiness
 
 Seek every frozen interval; verify response_item/message identity, timestamp/role/channel/partition, complete parts and raw/text/part lengths/hashes, selected/context totals/aggregate, first/last/following whole boundaries and unchanged frozen prefix. Parse saved A1029 JSON and compare every original native part/provenance/disposition. Verify required Analysis/Plan headings/properties, exactly one EOF newline, whitespace, unique IDs, immediate P1128 decomposition/sequence20, actual next, physical Done placement, and local BLOCKS/completion acyclicity. Use cached PyYAML read-only or the already running worker parser; no installation or environment retries. Reopen P1119/P1130/P1155 and preserve all direct gates. Root owns shared checkpoint/save/Git.
+
+### Completed interrupted execution and actual next
+
+A1029 saves41whole selected parts/9906characters/29467rawbytes,38assistant/3literalhuman, plus53fullantecedents16622characters/53context dispositions;26528total. Full partition4 boundary adds701characters only for provenance,27229/95whole records. Coverage1134->1175/1175 leaveszero only in this selected third source. Six provisional workflow refinements and literal timestamp-on-every-edit/meaning-only Version corrections retain full antecedents and supersession. Assistant tests/reviews/source claims are historical reports. All A905/A910/A1016/A1021/P1128 frontiers persist: 1659 retained files/1657 IDs, both main sources and non-third windows, fifteen other PRIMARY files/1642 worker origins, structure continuation/repository/worktree/metadata-parent-chain support, twelve limited prepartition matches without global deduplication, nine selected-continuation environment exclusions and sparse non-message gaps. The original August22 main source remains97888 records/644432542bytes, zero third records and greatest2026-09-15T15:24:51.068Z. A917 retains5865276-byte prefix SHA2564f9d453d6cbbb76f50573c64b73c3b0f2b2d77e502b9ae955ae1c93b055ea49f, zero monthly canonical messages and sole-window L1570metadata; broader C294identity remains unasserted/nonblocking. No source or copied-worker human intent is subtracted/adopted. Frozen evidence and post-cutoff amendments remain distinct. Of other sources,223 third PRIMARY records and1422 third worker records remain unprocessed; discovery/binding does not add coverage.
+
+Actual next Active P1315/A1033 sequence21 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/04-CA-P-1128-TASK--harvest-the-third-session-evidence-partition/21-CA-P-1315-TASK--harvest-the-third-partition-framework-name-and-lifecycle-plan-packet.md` binds source-third positions1-8/L9364-L9733/3710characters plus three full partition2 antecedents7451characters,total11161. Its84 source records remain unprocessed; futureeight leaves76. Whole followingL9790/27887characters excluded intact. Binding addszero coverage. P1311 directlyBLOCKSP1315 and1119/1130/1155; P1315/ActiveP1128 retainthese gates. The three downstream currentv1 objectives were reopened and still require fullharvest/currentauthority/exactdestinations. P1128/P1118 remainActive; no stage unlocks.
+
+Original firstclock2026-10-04 10:58:48UTC remains; interruption/preparation failures and actualoverrun are C331. One full native/saved/frozen-prefix/current-source/Carrier/local-DAG proof and truthfulterminal receipt are appended after persistence. Root owns sharedcheckpoint/mechanicalGit; no next-leaf execution or prohibited mutation.
+
+### Full proof and interrupted closure receipt
+
+The single full frozen-prefix/native/saved/current-authority/strict-Carrier/local-completion-DAG proof passed2026-10-04T11:24:40.538444+00:00,1552.538444seconds from original first2026-10-04 10:58:48UTC,652.538444seconds over estimate. It verified1095406718frozen selected-source prefix bytes/SHA256,126242568frozen next-source prefix bytes/SHA256, all41selected/53context full native parts/provenance/substantive dispositions, wholepartition4 boundary, next8/full3contexts11161characters and excluded wholeL9790/raw/text/part boundary,26 unchanged governing fingerprints/revisions, index/corpus counts, strictYAML/headings/EOF/whitespace, unique owned/reserved IDs/sibling sequences, immediate1128decomposition, physicalDone and nine-node local BLOCKS/completion acyclicity. All11 affected/local Carrier YAML documents passed. A1033 remains unused; P1315 Active/unexecuted.
+
+Closure receipt persistence clock2026-10-04 11:25:58 +0000,elapsed1630.619227seconds,actualoverrun730.619227seconds. Originalfirstclock is unchanged. C331 remains active/nonblocking for interruption/processoverrun; preparation/read failures are resolved by complete proof. The initial whole-carrier patch-generation capture was truncated before any write and was discarded; a bounded differential patch recovered full persistence without truncating evidence. Required output is complete, P1311physicallyDone, selectedsource1175/1175/0remaining, P1128/P1118Active, other223PRIMARY/1422workerthird records remain, nextP1315 boundonly/zero coverage. No timely claim, artificialelapsedgate, additionalsemanticre-review or next execution. Root owns sharedcheckpoint/mechanicalcommit.
+
+
+Final saved-only strict Carrier/EOF/status/placement/gate/local-completion-DAG check passed2026-10-04T11:26:44.267783+00:00,1676.267783seconds from originalfirstclock,actualoverrun776.267783seconds. All11documents passed; P1311Done/P1315Active/P1128Active/P1118Active/C331active, A1033unused. This saved closure check repeats no semantic review or full-prefix scan. Terminal check is recorded here; root sharedcheckpoint/mechanicalcommit remains separate.
 
 ## Details
 

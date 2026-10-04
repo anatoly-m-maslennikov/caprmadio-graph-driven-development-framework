@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 23
-updated_at: "2026-10-04 10:48:00 +0000"
+version: 25
+updated_at: "2026-10-04 11:44:51 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -216,7 +216,34 @@ The first attempt rejected a complete short context disposition through an arbit
 
 Actual closure-persistence clock2026-10-04 10:48:00 +0000, 1205seconds from unchanged10:27:55UTC, exceeds the900-second estimate by305seconds. No timely-completion claim or clock reset. C327 remains active/nonblocking for the process overrun; reading/orchestration/verification failures are resolved. Required output is complete, P1307 physicallyDone, P1128 Active, coverage1,134/1,175/41remaining. Hold without another leaf. Root owns sharedcheckpoint/save/Git/Journal.
 
+### Nineteenth substantive packet: interrupted P1311 completion
+
+P1311v2 is physicallyDone/A1029v1:41whole selected records/9906nativecharacters/29467rawbytes,38assistant/3literalhuman,41individual dispositions;53whole fullcontexts16622characters/53individual dispositions,total26528. Following701-character wholepartition4 boundary retained for provenance only,27229characters/95whole records across read envelope. Complete native parts remain saved with raw/text/part fingerprints. Same-twenty review/replacement reports, timestamp-every-edit/meaning-only Version correction and sixprovisional groups retain literal chains/supersession/report-versus-proof boundaries. Selected thirdsource coverage1134->1175/1175,zero remaining only in this source; finalL59916 and excluded wholeP4 L60063/cutoff stay unchanged.
+
+Actual next ActiveP1315/A1033 sequence21 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/01-CA-P-1118-TASK--harvest-the-thirty-day-session-evidence/04-CA-P-1128-TASK--harvest-the-third-session-evidence-partition/21-CA-P-1315-TASK--harvest-the-third-partition-framework-name-and-lifecycle-plan-packet.md` binds admitted PRIMARY source01a0263a-7510-7672-bce4-58830bc4d184,source-third positions1-8/L9364-L9733/3710chars plusthree fullP2 antecedentsL9336/9343/9350/7451chars,total11161. Source84thirdrecords remain whollyunprocessed; future8completion leaves76. Following wholeL9790/[98546918,98575647)/27887chars excludedintact. Binding contributeszero coverage. All A905/A910/A1016/A1021/P1128 frontiers persist: 1659 retained files/1657 IDs, both main sources and non-third windows, fifteen other PRIMARY files/1642 worker origins, structure continuation/repository/worktree/metadata-parent-chain support, twelve limited prepartition matches without global deduplication, nine selected-continuation environment exclusions and sparse non-message gaps. The original August22 main source remains97888 records/644432542bytes, zero third records and greatest2026-09-15T15:24:51.068Z. A917 retains5865276-byte prefix SHA2564f9d453d6cbbb76f50573c64b73c3b0f2b2d77e502b9ae955ae1c93b055ea49f, zero monthly canonical messages and sole-window L1570metadata; broader C294identity remains unasserted/nonblocking. No source or copied-worker human intent is subtracted/adopted. Frozen evidence and post-cutoff amendments remain distinct. Of other sources,223 third PRIMARY records and1422 third worker records remain unprocessed; discovery/binding does not add coverage.
+
+P1311directlyBLOCKSP1315 and1119/1130/1155;P1315 andthisActiveparent retainthose gates. Threecurrentv1 downstreamobjectives were reopened and remainfullharvest/currentauthority/exactdestinationgated;P1118 also remainsActive. Originalfirstclock2026-10-04 10:58:48UTC persists;C331 recordsinterruption/recoveredreadprep failures/actualoverrun. Singlefullproof/terminalreceipt followsafterpersistence; no additional semantic re-review or next execution. Root owns sharedcheckpoint/save/Git/Journal.
+
+### Full proof and interrupted closure receipt
+
+The single full frozen-prefix/native/saved/current-authority/strict-Carrier/local-completion-DAG proof passed2026-10-04T11:24:40.538444+00:00,1552.538444seconds from original first2026-10-04 10:58:48UTC,652.538444seconds over estimate. It verified1095406718frozen selected-source prefix bytes/SHA256,126242568frozen next-source prefix bytes/SHA256, all41selected/53context full native parts/provenance/substantive dispositions, wholepartition4 boundary, next8/full3contexts11161characters and excluded wholeL9790/raw/text/part boundary,26 unchanged governing fingerprints/revisions, index/corpus counts, strictYAML/headings/EOF/whitespace, unique owned/reserved IDs/sibling sequences, immediate1128decomposition, physicalDone and nine-node local BLOCKS/completion acyclicity. All11 affected/local Carrier YAML documents passed. A1033 remains unused; P1315 Active/unexecuted.
+
+Closure receipt persistence clock2026-10-04 11:25:58 +0000,elapsed1630.619227seconds,actualoverrun730.619227seconds. Originalfirstclock is unchanged. C331 remains active/nonblocking for interruption/processoverrun; preparation/read failures are resolved by complete proof. The initial whole-carrier patch-generation capture was truncated before any write and was discarded; a bounded differential patch recovered full persistence without truncating evidence. Required output is complete, P1311physicallyDone, selectedsource1175/1175/0remaining, P1128/P1118Active, other223PRIMARY/1422workerthird records remain, nextP1315 boundonly/zero coverage. No timely claim, artificialelapsedgate, additionalsemanticre-review or next execution. Root owns sharedcheckpoint/mechanicalcommit.
+
+
+Final saved-only strict Carrier/EOF/status/placement/gate/local-completion-DAG check passed2026-10-04T11:26:44.267783+00:00,1676.267783seconds from originalfirstclock,actualoverrun776.267783seconds. All11documents passed; P1311Done/P1315Active/P1128Active/P1118Active/C331active, A1033unused. This saved closure check repeats no semantic review or full-prefix scan. Terminal check is recorded here; root sharedcheckpoint/mechanicalcommit remains separate.
+
 ## Details
+
+### Current shared third-partition checkpoint — selected continuation complete, other frontiers retained
+
+P1311 Done/A1029 adds 41 whole records and completes the selected continuation at 1,175/1,175. P1323 Done/A1041 adds all 36 TOOL_R third PRIMARY records, with fourteen full context-only antecedents: other third PRIMARY is 36/223, 187 remain (README 84, PYAML 71 and other retained sources 32). P1320 Done/A1038 adds 28 whole worker records, 25 assistant and three copied user-role contexts: 28/1,422, 1,394 remain. Required context-only material and future bindings add zero coverage. Third PRIMARY coverage is 1,211/1,398, leaving 187, independently of its 28/1,422 workers.
+
+Actual next Active, unexecuted leaves are P1315/A1033 (README first eight third records plus three full second-partition contexts, 11,161 characters), P1329/A1047 (PYAML first twenty third records plus ten full contexts, 17,636 characters) and P1328/A1046 (ten whole worker reports plus two full contexts, 34,672 characters). The Analyses remain reserved/uncreated; exact whole following boundaries stay intact. These disjoint sources may execute independently; navigation does not invent BLOCKS. Root owns shared parent roll-ups.
+
+All three current leaves are physically Done with complete native/saved/current-authority/Carrier/DAG evidence. P1311's original interruption/overrun remains in active, nonblocking C331; C336/C339 retain their recovered diagnostic/persistence issues and actual timely terminal receipts. This parent/P1118 remain Active until other admitted PRIMARY, all worker and every source/window/identity frontier is disposed. P1119/P1130/P1155 remain blocked; no authoring/implementation/Docker gate is bypassed.
+
+
 
 ### Prior superseded completed packet
 

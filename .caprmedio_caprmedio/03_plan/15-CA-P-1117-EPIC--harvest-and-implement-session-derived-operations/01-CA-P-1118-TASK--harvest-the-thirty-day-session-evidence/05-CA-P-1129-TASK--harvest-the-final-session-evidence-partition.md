@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 34
-updated_at: "2026-10-04 10:45:31 +0000"
+version: 35
+updated_at: "2026-10-04 11:27:29 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -29,6 +29,16 @@ Harvest the final session evidence partition
 ## Objective
 
 The assigned AI Agent must complete one bounded work packet for harvest the final session evidence partition, using the stated inputs and ownership restrictions, and record the required output without extending this leaf's scope.
+
+### Latest ninth final-worker completion and actual remainder
+
+P1312 Done/A1030 adds23 whole assistant records across four admitted worker snapshots,27,252 native characters plus all eight complete antecedents of4,827 characters,total32,079.23 substantive individual dispositions/five overlapping provisional groups preserve qualified-literal coverage after independent meaning proof, run-bound R918 acceptance with incomplete mechanical evidence, R927 wrong-candidate/advisory and corrected Actor-owner/successor distinctions, and R930 withdrawn splitting/layout-specific checks/latest re-scope intention. No literal human approval occurs; historical implementation/test/admission reports remain inert evidence rather than current proof or adopted Operations.
+
+Finalworkers826/4051,3225 remain; monthly826/6423,5597 remain. FinalPRIMARY1415/1415 unchanged. All other primary/worker/window/source/continuation/candidate frontiers and post-cutoff amendments persist; earlier803/3248/5620 totals are historical checkpoints.
+
+Actualnext ActiveP1316/A1034 sequence32 binds34 whole records/five sources,23,634 native plus all six full continuing-source antecedents of10,446 characters,total34,080; rawaggregate5766d86cb42354a2f8912a1e99b885fe933b28ade43aae159eca0d7321055a59. First whole3,165-character report remains01a0edb5-92a5 L320/offset6676465/rawfaf3431ec487eefa956a23dd23ade3c8c7803dc9970782286d8022c12b1bf58f. Following whole1,360-character report remains01a0ee18 L574/offset4808074/raw3886fdd1a69e89c286d5bddd694fab12884a3f9de2430bcd66df63cbb8f8626e;34,080+1,360 exceeds35,000. Nextbinding/fullcontexts/first/following parts are retained and add zero coverage; after future34,3191 final/5563 monthly would remain. P1312BLOCKS1316/1119/1130/1155;P1316 retains downstream gates.1129/1118/Epic remainActive.
+
+Native/saved/current-authority/registered-Carrier/local-DAG proof passed at2026-10-04 11:25:32 UTC,1,568 seconds/26m08s from the original10:59:24 UTC start. All23 whole originals/eight full contexts,four current and five next frozen prefixes, exact index803:826/826:860,raw/text/line/role/channel/timestamp/Project/parent/source and overall fingerprints,23 dispositions/five provisional groups,39 current governing hashes, fullnext34/six contexts/intact first/following, and five owned registered Carrier fields/headings/Author registry/EOF/local edges passed. The original15-minute estimate was exceeded; interruption and preparation truncations remain inC332. Physical Done and resolved placement follow successful proof; no clock reset, timely-completion claim or next execution occurs. Root owns global checkpoint/Git/Journal.
 
 ### Inputs and bounded ownership
 
@@ -70,6 +80,10 @@ Actual next Active P1312/A1030 sequence31 binds23 whole records/four sources,27,
 CA-C-328 retains incomplete authority/prior transports and bounded recovery, with zero credit from rejected responses. Parent1129/1118/Epic remain Active; all other frontiers and post-cutoff amendments persist. No O/RMED, production code, settings, service, FPF, next-leaf execution, Git or shared Journal mutation.
 
 Terminal owned mechanical verification passed at 2026-10-04 10:45:31 UTC,17m14s from the original2026-10-04 10:28:17 UTC start, including full literal reading, analysis, persistence and source/saved/Carrier/local-DAG checks. Unique P1308 Done/v3, A1026 v2, P1129 Active/v34, P1312 Active/v1 and physically resolved C328/v2, retained exact bindings/60 dispositions/6 groups/34 authority reads, local edges and exact single-newline EOF passed. The original15-minute estimate was exceeded; C328 preserves the failure and completed recovery. This terminal receipt is metadata/provenance only and does not change adopted content, coverage or Version. HOLD after the assigned leaf; root owns global checkpoint/Git/Journal.
+
+### Terminal owned placement receipt
+
+Terminal owned mechanical verification passed at2026-10-04 11:26:46 UTC,1,642 seconds/27m22s from the original2026-10-04 10:59:24 UTC start. Unique P1312 Done/v2,A1030 Active/v1,P1129 Active/v35,P1316 Active/v1 and physically resolvedC332/v2, exact saved current/next bindings,23 dispositions/five groups, registered fields/headings/Author registry, single-newline EOF,status/placement and localBLOCKS/decomposition DAG passed. This receipt is metadata/provenance only; no governed meaning or Version changes. The15-minute estimate was exceeded and its interruption/recovery remains visible. Root owns global checkpoint/Git/Journal; HOLD after this leaf.
 
 ## Details
 

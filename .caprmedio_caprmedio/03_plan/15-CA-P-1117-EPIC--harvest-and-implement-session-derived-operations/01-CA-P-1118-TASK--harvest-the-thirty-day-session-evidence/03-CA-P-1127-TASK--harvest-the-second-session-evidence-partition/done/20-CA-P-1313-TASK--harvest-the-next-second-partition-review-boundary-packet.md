@@ -10,18 +10,19 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Second-partition review-boundary repair evidence"
   depends_on:
     - "Project"
     - "Operations"
-version: 1
-updated_at: "2026-10-04 10:32:30 +0000"
+version: 2
+updated_at: "2026-10-04 11:27:32 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1127
   blocks:
+    - CA-P-1317
     - CA-P-1119
     - CA-P-1130
     - CA-P-1155
@@ -1375,3 +1376,13 @@ Perform one actual native/saved/current-next/mandatory-Carrier/unique-ID/Done-pl
 ### Definition of Done
 
 Not Done until all bound whole records and full contexts are read/saved with meaningful dispositions and supersession; actual next bounded leaf/direct gates persisted; native/saved and mandatory Carrier checks pass; clocks/issues truthful. Parent1127 remains Active until all required source coverage. Metadata/historical reports never establish current implementation.
+
+### Saved result and closure boundary
+
+A1031 saves13whole messages/16000characters plus51full contexts/16246,total32246, exactly2inert user-role wrappers and11assistant reports with zero fresh literal human decisions. Full original parts and each unique source-specific disposition, five provisional overlapping groups and live37source fingerprints are retained. Historical repairs/checks/archives/Journal reports are not present adoption or proof.
+
+Continuation444/759 leaves315; original624 and all other corpus/window/identity/frontiers remain. Actual nextP1317/A1035sequence21 binds9whole positions445–453/14934characters plus62whole antecedents/19896,total34830. FollowingwholeL10587/428wouldexceed35000; binding is zero coverage and future453/759/306remaining is not current progress. P1313BLOCKS1317 and both retain1119/1130/1155 gates; parent1127Active.
+
+C333 retains interruption and recovered diagnostic/output/path failures, corrected native role counts and overrun. Original firstclock2026-10-04 11:01:42UTC is unchanged. Current saved/native/Carrier/local-DAG proof and actual terminal receipt follow without a second semantic review. RootGit/sharedJournal saving is separate.
+
+Closure receipt 2026-10-04 11:27:32 UTC: actual elapsed 1550 seconds from unchanged 2026-10-04 11:01:42 UTC, including interruption, full reopening, persistence and closure checks. Frozen prefix 1095406718 bytes/SHA d3b839e5620dfb6e6eee41b272d22b553480a8c58782f1ef72d343eddb5fe5fc; native/saved 13 full records/13 parts and 51 full contexts; selected raw aggregate e14b35d6819e00003cd86c7bc7c3178f2ca749b8c80542bc94e393c758f4b0f3; exact current/next index, nine next records/62 full contexts, whole following L10587, 37 governing fingerprints, five strict saved Carriers, unique IDs, registered fields/headings, Done placement, one EOF newline and 52-node relevant completion/BLOCKS DAG passed. The actual overrun is retained in resolved C333. Current continuation 444/759 leaves 315; original 624 remains complete. This is persistence/provenance proof; no additional semantic review or later-leaf execution. Root shared checkpoint/Git/Journal saving remains separate.

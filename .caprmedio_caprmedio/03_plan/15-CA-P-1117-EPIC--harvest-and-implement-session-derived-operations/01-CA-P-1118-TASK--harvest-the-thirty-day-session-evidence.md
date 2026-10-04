@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 18
-updated_at: "2026-10-04 10:56:14 +0000"
+version: 19
+updated_at: "2026-10-04 11:44:51 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -42,7 +42,25 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ## Details
 
-### Current harvest checkpoint — supersedes earlier totals
+### Current harvest checkpoint — 93 completed packets
+
+Ten completed leaves P1310–1313 and P1318–1323 add 232 mutually disjoint whole native records: 141 PRIMARY and 91 worker dispositions. Current coverage is 4,464/6,588 PRIMARY plus 894/6,423 workers, 5,358/13,011 total; 7,653 remain. Context-only records and future bindings add zero coverage. Original-main first is 720/1,869 refined (1,149 remain; 1,157 under the retained original count), original-main second is 624/624; continuation second is 444/759 (315 remain), third 1,175/1,175, final 1,284/1,284. Other PRIMARY frontiers are 23/80 first, 27/443 second and 36/223 third, leaving 57/416/187 respectively. Final PRIMARY remains 1,415/1,415. Worker partitions are 21/474, 19/476, 28/1,422 and 826/4,051, leaving 453/457/1,394/3,225. Every exact frozen-window/source/identity/continuation frontier and separate post-cutoff amendment remains retained.
+
+All ten assigned leaves are physically Done. Their saved Analyses A1028–1031 and A1036–1041 preserve complete originals, required full contexts, native parts and individual dispositions. The packet groups are provisional, overlapping retrieval/refinement records, not adopted or deduplicated Operations. Historical assistant reports, machine context and native user-role wrappers do not create fresh Operator decisions or current implementation proof.
+
+Actual next Active, unexecuted leaves are P1314/A1032, P1315/A1033, P1316/A1034, P1317/A1035, P1324/A1042, P1325/A1043, P1326/A1044, P1327/A1045, P1328/A1046 and P1329/A1047. Every next binding retains its whole first/following boundary and full required contexts. The ten Analysis IDs remain reserved/uncreated at this checkpoint. Parents P1126–1129 and P1118 remain Active; P1119/P1130/P1155 retain their full-harvest gates and cannot execute yet.
+
+Actual original clocks were retained. Interrupted P1310–1313 and completed P1318/P1319/P1322 exceeded their estimates; C330–335/C338 retain the actual interruption, transport/schema/race recovery and elapsed evidence. P1320/P1321/P1323 completed within their original fifteen-minute estimates. C331 remains active/nonblocking for disclosed interruption/overrun; the other assigned recovery Concerns are physically resolved after their required proof. No clock reset or missing read was accepted.
+
+Root integration compared every one of the 232 new selected native identities and supplied timestamp/role/line/offset/bytes/raw/text metadata to the frozen index: no overlap, context credit or future-binding credit. The agents' native/saved/current-authority/Carrier/placement checks passed; the shared duplicate-rejecting YAML, registered headings/fields, unique-ID and completion/BLOCKS-DAG check passed 167 Plans and 139 supporting Carriers. These are the required persistence/provenance gates, not an added semantic-review stage or full-month acceptance. Scoped whitespace/EOF and mechanical Git/sealed recovered-state saving follow before redispatch.
+
+Prior checkpoint 83 was saved in fac583df1850d7f2d42fc9a35c9ef7095fe0d51b with 22 actual saved recovered Carrier states, bringing owned recorded states to 361. Shared Journal Git save remains pending because it also contains unrelated pre-existing events; no save-Tool receipt is fabricated. No O/RMED authoring, Engine implementation, Settings/service mutation or complete Docker verification has executed under this Epic.
+
+All lower checkpoints are historical and superseded.
+
+
+
+### Prior checkpoint 83 — retained historical totals
 
 83 completed packets retain4323 unique PRIMARY dispositions and803 worker dispositions,5126total. Original-main first719/second624; continuation second431/third1134/final1284, plus72README/59TOOL_R finalPRIMARY. PRIMARYbaseline6588 leaves2265; workerbaseline6423 leaves5620; total7885unprocessed. FinalPRIMARY1415/1415 complete; finalworkers803/4051,3248remain. Every other frozen source/window/identity frontier remains, including746otherPRIMARY records and earlier-partition worker records. Context and future bindings addzero processed records; machine wrappers do not create human decisions.
 

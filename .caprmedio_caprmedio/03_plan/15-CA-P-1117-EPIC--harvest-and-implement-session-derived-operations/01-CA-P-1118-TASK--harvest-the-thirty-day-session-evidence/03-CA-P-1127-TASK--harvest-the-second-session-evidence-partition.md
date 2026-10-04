@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 20
-updated_at: "2026-10-04 10:37:57 +0000"
+version: 22
+updated_at: "2026-10-04 11:44:51 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1118
@@ -98,6 +98,16 @@ EveryA9051659file/1657ID/17PRIMARY/1642worker/other1657file/15otherPRIMARY/struc
 
 ## Details
 
+### Current shared second-partition checkpoint — three independent frontiers
+
+P1313 Done/A1031 advances the selected continuation by thirteen whole records to 444/759, leaving 315; original-main second remains 624/624 complete. P1322 Done/A1040 adds the first 27 other PRIMARY records, including the whole 20,614-character ontology report: 27/443, 416 remain. P1319 Done/A1037 adds nineteen worker records, five inert wrappers and fourteen assistant reports with no new human decisions: 19/476, 457 remain. Complete required contexts are preserved but add zero coverage. Second PRIMARY coverage is 1,095/1,826, leaving 731, independently of its 19/476 workers.
+
+Actual next Active, unexecuted leaves are P1317/A1035 (nine whole continuation records plus 62 full contexts, 34,830 characters), P1327/A1045 (one whole 27,023-character ontology challenge plus five full contexts, 28,808 total) and P1326/A1044 (21 whole worker records across four sources, 30,869 characters). The reserved Analyses remain uncreated; exact first/following boundaries remain intact. Distinct frontiers permit independent execution rather than order-derived dependency. Root alone owns shared roll-up changes, avoiding concurrent parent fingerprint races.
+
+Current leaves are physically Done. Their native/saved/authority/Carrier/DAG evidence and original clocks remain in A1031/A1037/A1040 and C333/C335/C338, including disclosed estimate overruns and recovered preparation/parent-checkpoint drift. P1127/P1118 remain Active and keep P1119/P1130/P1155 blocked; no source remainder or later-stage preflight is bypassed.
+
+
+
 ### Current superseding checkpoint
 
 P1300/A1018 completed27 whole records/nine full contexts/five provisional refinements. Continuation coverage383/759 leaves376; original second624 remains completed. Four new user-role goal wrappers are inert transport, not human adoption. Full originals and specific dispositions are retained; reported source fixes/tests/Journal are not current proof.
@@ -125,3 +135,13 @@ Terminal receipt: 2026-10-04 10:07:05 UTC. Actual elapsed 581 seconds from uncha
 P1309/A1027 completes27whole records/27full antecedents/seven provisional refinements. Continuation431/759 leaves328; original second624 remains complete. All3selected user-role records are inert goal wrappers, not new human decisions. Actual next P1313/A1031 sequence20 binds13whole/16000characters plus51full antecedents/16246characters, total32246; following L10296/6175characters remains whole and unprocessed. Next binding contributeszero coverage; future completion444/759 would leave315. All other source/window/identity and1119/1130/1155 gates remain; parent Active. C329 retains recovered preparation output failures. Exact native/saved/Carrier/local-DAG closure receipt follows; historical archive/Journal reports do not prove present implementation.
 
 Terminal receipt 2026-10-04 10:37:57 UTC: actual elapsed 578seconds from unchanged 2026-10-04 10:28:19 UTC. Whole frozen-prefix/native/saved27records/27contexts/current-next13/51, original text parts/metadata/hashes/aggregates/exact-index/disjointness/37governing hashes/Done placement/one terminal newline passed. Shared strict149Plans/115supporting Carriers and completion/BLOCKS DAG passed. Earlier literal-case diagnostic failure is retained and recovered in C329. This is persistence/provenance proof, not a second semantic review; Git and recovered Journal remain separate.
+
+### Latest superseding P1313 checkpoint
+
+P1313/A1031 retains13whole selected messages/16000characters plus51full antecedents/16246,total32246 and five provisional overlapping refinements. Exact native roles correct the handoff count:2inert user-role goal wrappers,11assistant reports,zero new literal human decisions. Continuation444/759 leaves315; original624remainscomplete. Current source/Carrier/Actor-policy/lifecycle/configuration and narrow verification reports stay historical,not adopted repairs or present implementation.
+
+Actual nextP1317/A1035sequence21 binds9whole selected positions445–453/14934characters with62fullcontexts/19896,total34830. FollowingL10587/428characters stays whole; addingitwould35258exceed35000. Nextbindingaddszerocoverage; eventual453/759and306remaining is future only. P1313BLOCKS1317;bothretain1119/1130/1155gates andParentActive. P1119/P1130/P1155werefullyreread; completeharvest/currentauthority/destinationgatesremainunchanged and blocked. EveryotherA905corpus/source/window/worker/metadata-parent/worktree/identity/amendmentfrontier is retained.
+
+C333retains original interruption/recoveredoutput/schema/pathdiagnostics and elapsedoverrun. Originalfirstclock2026-10-04 11:01:42UTC isunchanged. Oneactualnative/saved/currentauthority/Carrier/Done/localDAGclosureproof andterminalreceiptfollow; rootGit/sharedJournalworkisseparate.
+
+Closure receipt 2026-10-04 11:27:32 UTC: actual elapsed 1550 seconds from unchanged 2026-10-04 11:01:42 UTC, including interruption, full reopening, persistence and closure checks. Frozen prefix 1095406718 bytes/SHA d3b839e5620dfb6e6eee41b272d22b553480a8c58782f1ef72d343eddb5fe5fc; native/saved 13 full records/13 parts and 51 full contexts; selected raw aggregate e14b35d6819e00003cd86c7bc7c3178f2ca749b8c80542bc94e393c758f4b0f3; exact current/next index, nine next records/62 full contexts, whole following L10587, 37 governing fingerprints, five strict saved Carriers, unique IDs, registered fields/headings, Done placement, one EOF newline and 52-node relevant completion/BLOCKS DAG passed. The actual overrun is retained in resolved C333. Current continuation 444/759 leaves 315; original 624 remains complete. This is persistence/provenance proof; no additional semantic review or later-leaf execution. Root shared checkpoint/Git/Journal saving remains separate.
