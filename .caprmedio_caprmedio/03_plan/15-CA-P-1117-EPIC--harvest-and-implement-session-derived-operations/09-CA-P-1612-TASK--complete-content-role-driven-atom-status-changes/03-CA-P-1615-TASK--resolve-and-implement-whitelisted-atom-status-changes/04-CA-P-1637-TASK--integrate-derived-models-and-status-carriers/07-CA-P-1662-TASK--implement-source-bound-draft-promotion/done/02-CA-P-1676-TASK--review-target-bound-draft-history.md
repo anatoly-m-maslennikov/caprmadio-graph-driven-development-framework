@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Review target-bound Draft history"
   depends_on: [Atom, Carrier, History, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 04:41:02 +0000"
+updated_at: "2026-10-05 05:18:32 +0000"
 relations:
   is_decomposition_of: [CA-P-1662]
   blocks: [CA-P-1677]
@@ -37,3 +37,7 @@ Choose the best authorized in-scope option when uncertain; record C/Question and
 ## Definition of Done
 
 Save exact source/code hashes, the actual bounded result, genuine evidence and remaining coverage. A rejected review or partial test does not close the parent or mandatory runtime gates.
+
+## Result
+
+Final source acceptance: D568@5 SHA-256 64d2e60303d9dceeaee694263ebd888daf4bd217a794830896b1c5837517559d, D570@4 462ff2638fdba7050c83c27c9a8f974c1008c431cb46b4d8d81212d207ea1f37 and D569@5 ada92dcacfcf906878e3c3e3964281abd8e9c8b99336042564d565d2a79dd523. The unique current acyclic head and private non-consuming exact-transition reservation are independently accepted by P1676; only observed output finalizes consuming history. Every saved predecessor archive matches exact reviewed bytes. No code/runtime/Journal or promotion effect is claimed.

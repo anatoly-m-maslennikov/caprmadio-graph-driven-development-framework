@@ -15,7 +15,7 @@ subjects:
   governs: "Implement target-bound Draft history"
   depends_on: [Atom, Carrier, History, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 04:41:02 +0000"
+updated_at: "2026-10-05 05:04:38 +0000"
 relations:
   is_decomposition_of: [CA-P-1662]
   blocks: [CA-P-1638]
@@ -26,11 +26,13 @@ Implement target-bound Draft history
 
 ## Objective
 
-Within <=15 minutes, implement target-bound Draft history.
+Implement target-bound Draft history through P1683-P1685; this is a composite, not an enlarged executable leaf.
 
 ## Details
 
 After accepted P1676, implement only the existing Create/Demotion/Draft Update/Promotion lineage handoff in atom_operations.py and lifecycle_intents.py, with focused golden corpus additions. Preserve all external changes. The retained history entry must bind the actual current target path/bytes and direct origin; mutable caller/carrier fields alone must not select another identity. Cover both actual P1638 forgeries, ordinary create/demote/update/promote, changed Summary, missing/stale history and no-effect refusals. Existing development worker only. No shared route, source, manifest, environment/image or C447/C449 bypass.
+
+P1676 now independently ACCEPTS exact D568@5 SHA-256 64d2e60303d9dceeaee694263ebd888daf4bd217a794830896b1c5837517559d, D570@4 462ff2638fdba7050c83c27c9a8f974c1008c431cb46b4d8d81212d207ea1f37 and D569@5 ada92dcacfcf906878e3c3e3964281abd8e9c8b99336042564d565d2a79dd523. Implement the unique current immutable history head and private exact-output-bound pending promotion, finalized only after actual output observation. Caller draft_identity_evidence is now retired, not corroboration. A focused draft_history.py helper is allowed if needed to keep source parsing/history/reservation logic cohesive. Golden tests first, then implementation. One Agent owns this complete bounded native delta; if actual remaining work cannot fit <=15 minutes, return exact partial frontier and bounded remainder rather than expand this leaf.
 
 Choose the best authorized in-scope option when uncertain; record C/Question and continue. One Task, one Agent. You are not alone: preserve all other work. No broad harvesting, source campaign or denied-operation workaround.
 
