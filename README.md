@@ -64,16 +64,14 @@ observed outcomes create the next Concerns.
 Files in folders are clear and inspectable →\
 they currently hold authority →\
 rescanning can become expensive →\
-a derived graph database index supports queries and views →\
-database state lives in `.caprmedio_runtime/`. Database authority could be a future migration.
+a derived graph database index supports queries and views. Database authority could be a future migration.
 
-Deterministic work →\
-programmatic Tools →\
-less repeated model reasoning and token use.
+Repeated model reasoning costs time and tokens →\
+every repeatable task that can be done deterministically should run programmatically →\
+Tools.
 
 We cannot put everything into one prompt →\
-Tools retrieve context and assemble Prompts →\
-Workflow Orchestrator coordinates the steps.
+Tools retrieve context and assemble Prompts.
 
 Wide-context reasoning →\
 main session.
@@ -83,15 +81,12 @@ bounded execution contexts and structured results.
 
 Long actions should not block sessions →\
 background orchestration →\
+Workflow Orchestrator coordinates the steps →\
 durable state, reconnectable runs, approvals and recovery.
 
 Agents need a consistent interface →\
 MCP exposes capabilities →\
 Skills guide their use.
-
-AI performs delegated work →\
-the Operator retains authority →\
-Evaluations check Claims and results.
 
 ### Content roles and artifact forms
 
