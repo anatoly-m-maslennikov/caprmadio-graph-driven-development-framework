@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 19:49:20 +0000"
+version: 2
+updated_at: "2026-10-05 20:40:22 +0000"
 subjects:
   governs: "Release suite/E2E execution environment"
   depends_on: [Evaluation, Test Suite, Implementation, Docker Image, Workflow, Action]
@@ -33,4 +33,10 @@ Actual full-suite acceptance and Release promotion. Focused golden tests and tru
 
 ## Disposition
 
-Preserve the isolated executor and truthful non-pass state. Do not hide the E2E modules, accept their skips, mount the host Docker socket into the test container, or relax permissions by implementation alone. The preferred next design is a separately governed E2E-capable gate whose observed case evidence is bound to the same candidate and included in complete coverage. Its exact executor, fixture boundary and image lifecycle require RMED first and independent review before implementation. This records the chosen direction under the Epic's autonomous policy; it is not a new execution permission or passing gate.
+The Operator explicitly approved a separate bounded host-side executor for the three source-pinned Docker E2E harnesses. Keep the isolated Unit executor unchanged and block Release promotion until both phases pass with complete candidate-bound coverage. This approval covers the bounded host executor; it does not authorize Docker socket mounts, a privileged daemon, a generic remote Docker interface, permission bypass, arbitrary candidate commands, or hidden test exclusions.
+
+The selected sequence is compilation, closed Unit Gate, candidate-image build and canary, Candidate E2E Gate, Full Gate aggregation, then promotion. The frozen Docker worker is not the host E2E controller and gains no socket access. Missing host Python or Docker capability yields a non-passing unavailable result.
+
+Source review accepted the candidate/image/phase bindings and byte-backed receipt/aggregation direction, but found absent literal command/environment carriers and absent configured limit keys. Repair CA-R-1890, CA-M-346, CA-E-589 and CA-D-582 before dependent implementation. Resolve `release_e2e` limits from explicit Framework Instance settings, otherwise the canonical defaults: inspect timeout 60 seconds, per-harness timeout 900 seconds, cleanup timeout 60 seconds, and 8 MiB each for retained stdout, stderr and JUnit. These are configurable safety defaults selected under the Epic's autonomous policy, not measured performance claims.
+
+Actual Docker E2E execution, full-suite aggregation, source-frontier admission, Release installation and promotion remain unfinished. Retaining disposable fixture directories is not a gate failure by itself; uncertain Docker cleanup or a failed required command remains non-passing.
