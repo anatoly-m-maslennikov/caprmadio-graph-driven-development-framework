@@ -8,8 +8,8 @@ global_tier: 11
 status: "Active"
 author: "Anatoly Maslennikov"
 type: "Workflow"
-version: 3
-updated_at: "2026-10-05 04:58:25 +0400"
+version: 2
+updated_at: "2026-10-05 01:20:00 +0400"
 subjects:
   governs: "Find and Fetch Artifacts"
   depends_on: [Workflow, Step, Action, Artifact, Markdown, Journal, Tool]
@@ -50,8 +50,8 @@ CA-O-038's body-free generic helper.
 
 ## Details
 
-The implementation contract is CA-R-1849@3, CA-R-1850@2, CA-M-330@3,
-CA-E-569@2, and CA-D-551@4 in
+The implementation contract is CA-R-1849, CA-R-1850, CA-M-330, CA-E-569, and
+CA-D-551, all version 2 in
 `102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/`.
 The delivered Tool and golden test paths are respectively
 `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/FIND_AND_FETCH_ARTIFACTS/`
