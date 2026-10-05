@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-05 18:37:31 +0000"
+version: 2
+updated_at: "2026-10-06 00:55:29 +0400"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite runner QA"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, Source Carrier, Compiled Candidate, JUnit Report, Writable Output]
@@ -21,12 +21,12 @@ Verify complete and source-bound Release suite evidence
 
 ## Scope
 
-The Release Version full-suite driver, its declared-case discovery, and its sealed JUnit evidence boundary.
+The Release Version closed Unit driver, its phase-derived declared-case discovery, and its sealed JUnit evidence boundary.
 
 ## Claim
 
-The QA case **must** prove that the full-suite driver passes only after every discovered in-tree Framework test case executes once with valid immutable-envelope source-read evidence for all required groups and a compiled-candidate carrier, and rejects incomplete, fabricated, or non-passing evidence.
+The QA case **must** prove that the closed Unit Gate passes only after every phase-assigned `unit` in-tree Framework test case executes once with valid immutable-envelope source-read evidence for all required groups and a compiled-candidate carrier, and rejects incomplete, fabricated, or non-passing evidence. It must also prove that this Unit result alone cannot be credited as the Full Gate.
 
 ## Details
 
-Exercise an isolated fixture suite with valid bindings for Methodology, Tools, Apps, MCP, Agentic, Skill, and a compiled-candidate carrier. Verify every sealed `102_FRAMEWORK_ENGINE/**/test_*.py` module is discovered in a fresh process, one JUnit row per discovered case, the exact complete test-ID set, one immutable-envelope SHA-256 property per case, and exact byte-and-digest source-probe records resolving to sealed package rows. Independently verify that a focused subset, omitted module, duplicate test ID, absent or altered envelope, unmapped or unreadable source, altered digest, absent compiled-candidate evidence, failure, error, skip, invalid report location, read-only-workspace write, or unresolved test-ID/import collision cannot produce a passing gate. Equal module basenames are permitted when fresh child processes discover and execute both modules with distinct test IDs and correct source bindings; name equality alone is not an import collision. The test harness may retain its disposable output fixture after execution; that retention is not source or runtime mutation.
+Exercise an isolated fixture suite with valid bindings for Methodology, Tools, Apps, MCP, Agentic, Skill, and a compiled-candidate carrier. Verify that every sealed `102_FRAMEWORK_ENGINE/**/test_*.py` module receives exactly one sealed phase assignment: the three paths named by CA-R-1890 are `candidate_e2e` and every other path is `unit`. Verify every `unit` module is discovered in a fresh process, one Unit JUnit row per discovered case, the exact Unit test-ID set, one immutable-envelope SHA-256 property per case, and exact byte-and-digest source-probe records resolving to sealed package rows. Independently verify that a focused subset, omitted or duplicated phase assignment, duplicate test ID, a candidate-E2E module represented as a Unit skip, absent or altered envelope, unmapped or unreadable source, altered digest, absent compiled-candidate evidence, failure, error, skip, invalid report location, read-only-workspace write, or unresolved test-ID/import collision cannot produce a passing Unit Gate. Verify the fixed closed Unit CLI and schema-2 control-context digest remain unchanged, and that a passing Unit report authorizes candidate-image construction only; its result cannot authorize promotion without the actual source-pinned, candidate-image-bound E2E evidence and Full Gate aggregation verified by CA-E-589. Equal module basenames are permitted when fresh child processes discover and execute both Unit modules with distinct test IDs and correct source bindings; name equality alone is not an import collision. The test harness may retain its disposable output fixture after execution; that retention is not source or runtime mutation.
