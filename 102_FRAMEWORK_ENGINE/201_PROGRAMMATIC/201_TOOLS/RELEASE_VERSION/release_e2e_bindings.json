@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "environment_keys": [
+    "PATH",
+    "TMPDIR",
+    "CAPRMEDIO_RELEASE_E2E_CONTEXT",
+    "CAPRMEDIO_CANDIDATE_IMAGE_DIGEST"
+  ],
+  "image_inspect_argv": [
+    "docker",
+    "image",
+    "inspect",
+    "--format",
+    "{{.Id}}",
+    "{candidate_image_digest}"
+  ],
+  "driver": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_e2e.py",
+  "harnesses": [
+    {
+      "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py",
+      "argv": [
+        "{trusted_python}",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_e2e.py",
+        "--start-directory",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests",
+        "--pattern",
+        "test_docker_e2e.py",
+        "--junit",
+        "{e2e_junit_path}"
+      ],
+      "context_optins": {
+        "CAPRMEDIO_DOCKER_E2E": "1"
+      }
+    },
+    {
+      "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_workflows_docker_e2e.py",
+      "argv": [
+        "{trusted_python}",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_e2e.py",
+        "--start-directory",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests",
+        "--pattern",
+        "test_selected_workflows_docker_e2e.py",
+        "--junit",
+        "{e2e_junit_path}"
+      ],
+      "context_optins": {
+        "CAPRMEDIO_DOCKER_E2E": "1"
+      }
+    },
+    {
+      "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_query_mcp_e2e.py",
+      "argv": [
+        "{trusted_python}",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_e2e.py",
+        "--start-directory",
+        "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests",
+        "--pattern",
+        "test_selected_query_mcp_e2e.py",
+        "--junit",
+        "{e2e_junit_path}"
+      ],
+      "context_optins": {
+        "CAPRMEDIO_DOCKER_QUERY_E2E": "1",
+        "CAPRMEDIO_DOCKER_QUERY_IMAGE": "{candidate_image_digest}",
+        "CAPRMEDIO_IMAGE": "{candidate_image_digest}"
+      }
+    }
+  ]
+}

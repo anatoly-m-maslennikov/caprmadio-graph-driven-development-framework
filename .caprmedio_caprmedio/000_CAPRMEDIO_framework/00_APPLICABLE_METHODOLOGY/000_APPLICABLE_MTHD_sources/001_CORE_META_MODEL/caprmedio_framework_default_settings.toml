@@ -47,3 +47,11 @@ max_findings = 10000
 # Reserve this share of each worker's effective context capacity.
 # Operator/instance values may override; model capacity comes from runtime evidence.
 context_headroom_fraction = 0.30
+
+[release_e2e]
+inspect_timeout_seconds = 60
+harness_timeout_seconds = 900
+cleanup_timeout_seconds = 60
+max_stdout_bytes = 8388608
+max_stderr_bytes = 8388608
+max_junit_bytes = 8388608
