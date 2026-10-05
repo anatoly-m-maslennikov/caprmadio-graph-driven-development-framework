@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-626-CORE_META_MODEL--project-the-current-scope-unit-graph-without-owning-authority.md
+  source_atom_id: CA-R-626
+  source_atom_revision: 23
+  source_sha256: c7c976354f6808eaa5df542a3058d941990992328035cf60b7ffae0dc157cd0b
+  original_relations_sha256: fdcff71931cab6291573c3ef3ef6557f0f840e14ab089f37a36ccb79e65e2cf2
 ---
 # Summary
 

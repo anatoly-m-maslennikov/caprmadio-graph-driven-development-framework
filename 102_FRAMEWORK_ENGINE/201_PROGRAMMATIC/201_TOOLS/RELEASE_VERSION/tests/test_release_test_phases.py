@@ -17,6 +17,7 @@ from release_contract import ReleaseContractError, canonical_json  # noqa: E402
 from release_test_phases import (  # noqa: E402
     CANDIDATE_E2E_MODULES,
     derive_test_phase_map,
+    derive_test_phase_map_from_rows,
 )
 
 
@@ -63,3 +64,19 @@ class ReleaseTestPhaseMapTests(unittest.TestCase):
         with self.assertRaises(ReleaseContractError) as rejected:
             derive_test_phase_map(_candidate(rows))
         self.assertEqual(rejected.exception.code, "release-test-phase-row-invalid")
+
+    def test_package_rows_use_the_same_phase_projection_as_candidate_inventory(self) -> None:
+        paths = [
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/tests/test_release_actions.py",
+            *CANDIDATE_E2E_MODULES,
+        ]
+        inventory = [_row(path, hashlib.sha256(path.encode()).hexdigest()) for path in paths]
+        package_rows = [
+            SimpleNamespace(source_path=row["source_path"], sha256=row["source_sha256"])
+            for row in inventory
+        ]
+
+        self.assertEqual(
+            derive_test_phase_map_from_rows(package_rows),
+            derive_test_phase_map(_candidate(inventory)),
+        )

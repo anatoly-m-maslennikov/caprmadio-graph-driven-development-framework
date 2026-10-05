@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1036-CORE_META_MODEL-GENERAL--define-uncertain-lineage-impact-disposition.md
+  source_atom_id: CA-R-1036
+  source_atom_revision: 13
+  source_sha256: 940e73ebf82a65a10e1bbf25c2dedfd2bd966d9cab33cd7f130315ecedee427b
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

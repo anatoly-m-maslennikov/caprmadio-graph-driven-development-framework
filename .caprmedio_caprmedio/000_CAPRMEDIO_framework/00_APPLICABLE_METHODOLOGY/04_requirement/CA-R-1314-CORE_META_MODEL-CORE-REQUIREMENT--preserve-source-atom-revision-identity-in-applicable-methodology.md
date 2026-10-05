@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1314-CORE_META_MODEL-CORE-REQUIREMENT--preserve-source-atom-revision-identity-in-applicable-methodology.md
+  source_atom_id: CA-R-1314
+  source_atom_revision: 13
+  source_sha256: 053895b5075fbe3f20a69ccfc35edb2331f31a36ec9052cbb584f0ba470aaa88
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

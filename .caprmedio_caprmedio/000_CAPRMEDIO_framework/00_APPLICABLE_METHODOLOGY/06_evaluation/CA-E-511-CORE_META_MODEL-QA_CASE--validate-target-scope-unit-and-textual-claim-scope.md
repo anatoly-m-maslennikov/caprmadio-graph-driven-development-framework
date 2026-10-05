@@ -34,6 +34,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-511-CORE_META_MODEL-QA_CASE--validate-target-scope-unit-and-textual-claim-scope.md
+  source_atom_id: CA-E-511
+  source_atom_revision: 5
+  source_sha256: 7d1a04cabf809fd37379b0367ad0d4732c130e13257a1fb427f3a5d5053197bd
+  original_relations_sha256: be5737b9afecc383c01dacfa16b2124d01728c40cbd6c601be94031bfc56f4c4
 ---
 # Summary
 

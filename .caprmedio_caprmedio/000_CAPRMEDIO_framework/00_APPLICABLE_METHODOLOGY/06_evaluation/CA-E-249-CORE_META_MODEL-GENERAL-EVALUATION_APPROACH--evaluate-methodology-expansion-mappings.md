@@ -22,6 +22,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-249-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--evaluate-methodology-expansion-mappings.md
+  source_atom_id: CA-E-249
+  source_atom_revision: 12
+  source_sha256: fcb2658717a91add097f34751c89d54f03a047442031ee7cf79e89c9f817d965
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

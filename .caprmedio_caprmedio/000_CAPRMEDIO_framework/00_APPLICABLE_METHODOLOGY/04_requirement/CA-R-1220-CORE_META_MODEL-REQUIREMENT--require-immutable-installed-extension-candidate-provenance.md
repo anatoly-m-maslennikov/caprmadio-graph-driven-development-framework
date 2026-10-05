@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1220-CORE_META_MODEL-REQUIREMENT--require-immutable-installed-extension-candidate-provenance.md
+  source_atom_id: CA-R-1220
+  source_atom_revision: 11
+  source_sha256: e2d321b77e2249bfebeac59d2bfed861b0937bb695fc48983d231ba4bdacb2bc
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

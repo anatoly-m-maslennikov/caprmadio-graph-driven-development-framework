@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-277-CORE_META_MODEL-DELIVERY--serialize-safe-frontmatter-scalars.md
+  source_atom_id: CA-D-277
+  source_atom_revision: 12
+  source_sha256: 3f725da058e785dcb62fd2ff25bdcf55e20c1df6ad906c3d471024aae9398ee9
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

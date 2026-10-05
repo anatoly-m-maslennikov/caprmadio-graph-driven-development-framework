@@ -30,6 +30,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-512-CORE_META_MODEL-QA_CASE--validate-cce-lexical-case.md
+  source_atom_id: CA-E-512
+  source_atom_revision: 3
+  source_sha256: f4b1f457c746f09e73e68e784f552b45c2157b6587ea319ee8c0ca0f4a37202e
+  original_relations_sha256: ad09a21da9ece59c317f2f1187e6d9854462c43cbaac7a77b5ca450bea6d1a3f
 ---
 # Summary
 

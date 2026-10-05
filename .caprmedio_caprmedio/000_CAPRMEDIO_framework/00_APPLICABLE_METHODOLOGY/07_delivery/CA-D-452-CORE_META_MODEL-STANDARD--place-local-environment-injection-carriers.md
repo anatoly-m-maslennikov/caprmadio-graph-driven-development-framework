@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-452-CORE_META_MODEL-STANDARD--place-local-environment-injection-carriers.md
+  source_atom_id: CA-D-452
+  source_atom_revision: 4
+  source_sha256: d41df8b908601938efc6a08fdd661e6d51422950ce0c83070340592720a0980e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

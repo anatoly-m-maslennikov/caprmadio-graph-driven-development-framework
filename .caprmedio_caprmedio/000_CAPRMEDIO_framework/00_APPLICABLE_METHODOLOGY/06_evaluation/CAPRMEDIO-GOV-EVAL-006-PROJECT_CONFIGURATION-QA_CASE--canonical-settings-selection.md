@@ -37,6 +37,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CAPRMEDIO-GOV-EVAL-006-PROJECT_CONFIGURATION-QA_CASE--canonical-settings-selection.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-006
+  source_atom_revision: 27
+  source_sha256: 35f125e547f1c9eda79d1981853e729a4f4d8dc884ae153c4ffdd4ec6d06ccd8
+  original_relations_sha256: eefe9d7a92dc5d944ca9585e23951f32ebb872628ed357be9a09440d1ad7c31a
 ---
 # Summary
 Canonical Settings Selection

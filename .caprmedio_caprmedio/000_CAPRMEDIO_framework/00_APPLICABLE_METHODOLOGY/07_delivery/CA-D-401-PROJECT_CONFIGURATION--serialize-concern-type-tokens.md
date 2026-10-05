@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-401-PROJECT_CONFIGURATION--serialize-concern-type-tokens.md
+  source_atom_id: CA-D-401
+  source_atom_revision: 9
+  source_sha256: 91222abd4f418954bfb54d0e38d389f364b5e723f77115c64387356d96d40fd7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

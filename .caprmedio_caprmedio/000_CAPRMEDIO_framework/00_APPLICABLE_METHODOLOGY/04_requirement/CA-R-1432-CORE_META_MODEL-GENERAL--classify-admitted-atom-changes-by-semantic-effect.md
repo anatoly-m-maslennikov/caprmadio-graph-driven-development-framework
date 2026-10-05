@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1432-CORE_META_MODEL-GENERAL--classify-admitted-atom-changes-by-semantic-effect.md
+  source_atom_id: CA-R-1432
+  source_atom_revision: 9
+  source_sha256: 74b7e6a47a421dd660cc905dd19bdb874b23ef2c2030473b5c3c694f5b9fa487
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

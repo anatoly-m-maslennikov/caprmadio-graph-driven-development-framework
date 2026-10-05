@@ -18,6 +18,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-009-CORE_META_MODEL-QA_CASE--effective-priority-selection.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-009
+  source_atom_revision: 19
+  source_sha256: debf8c3f03344fc462b228052941f60107f165c5d571dfebde4724368c947ada
+  original_relations_sha256: cfa35829dc6d9343744fff2321fb2cf02a4f2f8894266ef3fcdb6f460637746e
 ---
 # Summary
 

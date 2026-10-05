@@ -6,7 +6,7 @@ subjects:
     - "Operator"
     - "Project"
 version: 5
-updated_at: "2026-09-21 00:57:42 +0000"
+updated_at: "2026-10-04 15:08:22 +0000"
 relations: {"child_of":["CA-M-005"],"relates_to":["CA-R-1057"]}
 atom_id: "CA-O-065"
 content_role: "Operations"
@@ -19,8 +19,16 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-065-CORE_META_MODEL-ACTION--screen-short-names-for-unintended-readings.md
+  source_atom_id: CA-O-065
+  source_atom_revision: 5
+  source_sha256: 3629a7a79d844cca473130fcf02d15b8597d2ef3c5f4c1eb503d381ea109f084
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
-# Screen short names for unintended readings
+# Summary
+
+Screen short names for unintended readings
+
+## Operation
 
 Screen Short Names **means** the Action that screens a proposed short name, abbreviation, **or** prefix **before** admission:
 
@@ -29,3 +37,5 @@ Screen Short Names **means** the Action that screens a proposed short name, abbr
 - do **not** automatically reject the candidate on that basis; allow the Operator **to** accept the warned name explicitly.
 
 this Action defines screening behavior; it does **not** record a particular execution **or** automatically change a registered name.
+
+## Details

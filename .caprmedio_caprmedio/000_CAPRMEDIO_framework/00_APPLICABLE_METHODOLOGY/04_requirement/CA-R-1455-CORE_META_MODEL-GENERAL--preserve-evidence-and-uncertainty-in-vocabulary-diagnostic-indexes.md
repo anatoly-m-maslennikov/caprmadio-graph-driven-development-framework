@@ -34,6 +34,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1455-CORE_META_MODEL-GENERAL--preserve-evidence-and-uncertainty-in-vocabulary-diagnostic-indexes.md
+  source_atom_id: CA-R-1455
+  source_atom_revision: 7
+  source_sha256: a373608bb8bcfefc91ea4d5dd836ac5aea2f347c3711cc38aaa86d643d861c96
+  original_relations_sha256: af9665670e08557ac5e66f5e4fc8ff9188127ed71311d9954d642d5cbc3dfdf2
 ---
 # Summary
 

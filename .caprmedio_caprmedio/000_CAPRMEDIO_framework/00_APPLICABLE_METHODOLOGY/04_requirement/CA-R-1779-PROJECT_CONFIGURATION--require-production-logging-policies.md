@@ -19,6 +19,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1779-PROJECT_CONFIGURATION--require-production-logging-policies.md
+  source_atom_id: CA-R-1779
+  source_atom_revision: 1
+  source_sha256: 65ee89fdf890cbaf62747b77d301c47f0f1027f41400da532c36be1a64f114b1
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

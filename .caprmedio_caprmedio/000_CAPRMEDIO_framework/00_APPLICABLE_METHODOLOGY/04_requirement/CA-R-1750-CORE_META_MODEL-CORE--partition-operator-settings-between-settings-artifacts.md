@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1750-CORE_META_MODEL-CORE--partition-operator-settings-between-settings-artifacts.md
+  source_atom_id: CA-R-1750
+  source_atom_revision: 21
+  source_sha256: ccc949d6ede0c9a9d436a25d934f3fb3d771afdae4e31a36044273a8474da1ab
+  original_relations_sha256: 4e823082688e17e42d7889dacdc356b5f8822d57bcf2f4501c09225f60722871
 ---
 # Summary
 

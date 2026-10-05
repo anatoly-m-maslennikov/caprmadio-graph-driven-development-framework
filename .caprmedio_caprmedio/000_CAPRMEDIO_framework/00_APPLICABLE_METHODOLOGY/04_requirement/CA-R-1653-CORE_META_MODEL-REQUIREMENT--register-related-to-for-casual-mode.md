@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1653-CORE_META_MODEL-REQUIREMENT--register-related-to-for-casual-mode.md
+  source_atom_id: CA-R-1653
+  source_atom_revision: 18
+  source_sha256: 3eaa9aab888e393f88d9e432ff8138ac2dbe04536f418b769a0386708727cca5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

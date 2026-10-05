@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1696-CORE_META_MODEL-CORE-REQUIREMENT--keep-the-core-meta-model-implementation-neutral.md
+  source_atom_id: CA-R-1696
+  source_atom_revision: 24
+  source_sha256: 5ae38a6a474c8dd7c03370ab09981ee3fb3a427b80e8cc70dd2339326f413c99
+  original_relations_sha256: d104c15c6c9b67dbddeeb2533a1c0505c1add4d27ec6f933fe755ee4bdd51563
 ---
 # Summary
 

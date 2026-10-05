@@ -28,6 +28,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1692-PROJECT_CONFIGURATION-REQUIREMENT--requirement-freeze-a-version-only-at-release.md
+  source_atom_id: CA-R-1692
+  source_atom_revision: 19
+  source_sha256: aef0f7a90feda3466a625b61d5cf31f4dd55077d873c7a9f47221989862688aa
+  original_relations_sha256: bfb0b24f5e8a3603ba95eca3a7b57448a494f25778bf5c7057c5dfb477919a92
 ---
 # Summary
 

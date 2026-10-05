@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-340-CORE_META_MODEL-GENERAL-DELIVERY--serialize-work-journal-event-properties.md
+  source_atom_id: CA-D-340
+  source_atom_revision: 11
+  source_sha256: f10f4d14cda74263ab6c9ab5cad1f98ffc4f32a843ba4adf5ac01ce349710504
+  original_relations_sha256: fa17cb2940d3d5f3c20487f9702e146d5406ed2c969cbd11a75fa082ea547405
 ---
 # Summary
 Serialize Work Journal Event Properties

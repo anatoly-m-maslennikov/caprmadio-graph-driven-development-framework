@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-469-CORE_META_MODEL-STANDARD--serialize-plan-carrier-stems.md
+  source_atom_id: CA-D-469
+  source_atom_revision: 4
+  source_sha256: cdd86ae5e46ead4e36148382c5182dc0f492cf460eab4c6891f9c35eae1221e0
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

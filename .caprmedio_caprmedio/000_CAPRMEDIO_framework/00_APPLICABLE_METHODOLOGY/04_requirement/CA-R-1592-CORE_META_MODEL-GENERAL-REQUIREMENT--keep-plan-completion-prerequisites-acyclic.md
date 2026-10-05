@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1592-CORE_META_MODEL-GENERAL-REQUIREMENT--keep-plan-completion-prerequisites-acyclic.md
+  source_atom_id: CA-R-1592
+  source_atom_revision: 4
+  source_sha256: 3c9178170eebdb7429db7564c3b7cb58dd59c2d2cb43d726dc0c1e4a47f56ed7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

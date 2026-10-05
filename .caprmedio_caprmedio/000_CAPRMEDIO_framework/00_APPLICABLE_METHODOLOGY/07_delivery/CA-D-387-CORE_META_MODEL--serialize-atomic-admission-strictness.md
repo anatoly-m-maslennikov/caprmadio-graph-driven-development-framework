@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-387-CORE_META_MODEL--serialize-atomic-admission-strictness.md
+  source_atom_id: CA-D-387
+  source_atom_revision: 9
+  source_sha256: bf5cc85740830e28421b31913823bcdcff18c4a5ee7b47590c4b39d0a3137083
+  original_relations_sha256: 4f8fca2057373dee7e1934385c6ad655c38a428a7dc3d670e9844c9f996ddbfb
 ---
 # Summary
 

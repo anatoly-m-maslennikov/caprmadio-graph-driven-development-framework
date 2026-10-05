@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1769-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--select-methodology-source-revisions-explicitly.md
+  source_atom_id: CA-R-1769
+  source_atom_revision: 20
+  source_sha256: f40612366535a56f64aa259cfc59ef18b6c3e93224bc1a335fb3614fc29b8cec
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

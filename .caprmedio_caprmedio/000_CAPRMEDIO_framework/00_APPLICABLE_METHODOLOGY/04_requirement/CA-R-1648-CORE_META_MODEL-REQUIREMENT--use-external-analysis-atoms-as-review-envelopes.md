@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1648-CORE_META_MODEL-REQUIREMENT--use-external-analysis-atoms-as-review-envelopes.md
+  source_atom_id: CA-R-1648
+  source_atom_revision: 20
+  source_sha256: 8369f556bea4300ccfd986d3a4aed5a9747cf77e6a7e113085698caca65b8b8e
+  original_relations_sha256: 60ffbe44775a703c4301793eb522c2568274b0b7acf28f33d6730a8da850d834
 ---
 # Summary
 

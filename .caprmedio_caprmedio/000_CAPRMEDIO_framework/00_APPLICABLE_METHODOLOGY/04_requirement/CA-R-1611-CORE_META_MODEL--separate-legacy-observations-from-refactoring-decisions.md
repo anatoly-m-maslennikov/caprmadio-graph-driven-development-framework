@@ -24,6 +24,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1611-CORE_META_MODEL--separate-legacy-observations-from-refactoring-decisions.md
+  source_atom_id: CA-R-1611
+  source_atom_revision: 4
+  source_sha256: fb085c82756757845314bbdaf48b2039afeeddc0afe70fed2c402db5980a8584
+  original_relations_sha256: ecfa056a4dd17d6264df2fb6bbe74ba7e195d2c7c2e3bf0eadd3b55fae051b4b
 ---
 # Summary
 

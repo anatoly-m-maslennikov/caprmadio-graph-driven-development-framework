@@ -23,6 +23,10 @@ subjects:
 relations: {"relates_to":["CA-O-105"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-108-CORE_META_MODEL-STEP--select-the-rmed-review-batch.md
+  source_atom_id: CA-O-108
+  source_atom_revision: 6
+  source_sha256: 741aa7ecef3eb1c00d0e70e2d72d77f42416e7062b29b7fe31e4ebdbc55bbee6
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

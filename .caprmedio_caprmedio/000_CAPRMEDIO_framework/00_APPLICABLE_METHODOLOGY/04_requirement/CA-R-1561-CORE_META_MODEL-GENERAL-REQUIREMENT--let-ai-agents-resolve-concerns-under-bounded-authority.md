@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1561-CORE_META_MODEL-GENERAL-REQUIREMENT--let-ai-agents-resolve-concerns-under-bounded-authority.md
+  source_atom_id: CA-R-1561
+  source_atom_revision: 4
+  source_sha256: c59c8fffc4b6a895cb16cbd8af97babed7a7b11d462e6e18c37715508de9da0a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

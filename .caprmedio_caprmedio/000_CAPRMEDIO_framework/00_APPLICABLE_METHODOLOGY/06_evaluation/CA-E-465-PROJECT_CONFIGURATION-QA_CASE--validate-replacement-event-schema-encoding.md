@@ -23,6 +23,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-465-PROJECT_CONFIGURATION-QA_CASE--validate-replacement-event-schema-encoding.md
+  source_atom_id: CA-E-465
+  source_atom_revision: 7
+  source_sha256: dc2921e214f5a04f15929915847561205977bfb8da24fc6d860edaee5c3e8946
+  original_relations_sha256: a2c0eabd6c46d0c5e4047f0b164c1fbe4b51882a883b69df6fe296abf10c590e
 ---
 # Summary
 

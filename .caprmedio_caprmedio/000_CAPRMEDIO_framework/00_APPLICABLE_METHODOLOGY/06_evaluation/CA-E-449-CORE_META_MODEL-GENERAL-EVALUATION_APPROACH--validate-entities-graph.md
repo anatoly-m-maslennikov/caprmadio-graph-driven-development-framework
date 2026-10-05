@@ -50,6 +50,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-449-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-entities-graph.md
+  source_atom_id: CA-E-449
+  source_atom_revision: 12
+  source_sha256: 29db3bbff5744963c4fc7960042e6267a826b2fe16198e954039f5b223f3b00a
+  original_relations_sha256: 32d176e115b397a9556f35dcb173e1b97416c5ccc8322632b2dcfa8de293a29c
 ---
 # Summary
 Validate Entities Graph

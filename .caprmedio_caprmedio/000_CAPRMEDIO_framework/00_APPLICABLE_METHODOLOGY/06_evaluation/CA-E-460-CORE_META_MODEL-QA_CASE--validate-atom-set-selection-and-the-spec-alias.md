@@ -27,6 +27,10 @@ relations: {"evaluation_for": ["CA-D-482", "CA-D-495", "CA-M-273", "CA-M-288", "
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-460-CORE_META_MODEL-QA_CASE--validate-atom-set-selection-and-the-spec-alias.md
+  source_atom_id: CA-E-460
+  source_atom_revision: 12
+  source_sha256: 630a6a8c3588ce3372c8543c8cc303db8a79ce911f7b144c645e5c7832c39fe5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

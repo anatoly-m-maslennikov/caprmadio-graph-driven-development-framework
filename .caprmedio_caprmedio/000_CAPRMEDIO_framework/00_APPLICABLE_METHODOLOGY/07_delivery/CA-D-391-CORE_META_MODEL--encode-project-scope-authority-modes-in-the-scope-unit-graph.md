@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-391-CORE_META_MODEL--encode-project-scope-authority-modes-in-the-scope-unit-graph.md
+  source_atom_id: CA-D-391
+  source_atom_revision: 6
+  source_sha256: f5218881c7f122c2871d116e2cb58678a4b149d98dae94010ff65a7d636b0b4f
+  original_relations_sha256: 1be50eaa42168c84ffd69ce5d3a59f12850826b66f6c14e32382932fd9c81147
 ---
 # Summary
 

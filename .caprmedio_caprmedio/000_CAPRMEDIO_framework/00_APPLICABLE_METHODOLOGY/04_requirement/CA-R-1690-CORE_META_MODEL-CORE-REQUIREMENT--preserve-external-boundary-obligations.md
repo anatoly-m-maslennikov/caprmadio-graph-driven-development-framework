@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1690-CORE_META_MODEL-CORE-REQUIREMENT--preserve-external-boundary-obligations.md
+  source_atom_id: CA-R-1690
+  source_atom_revision: 22
+  source_sha256: 7b1d3537ff15a8f51c6dc295111659d586879f0677c67abb807c4d0564a40011
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

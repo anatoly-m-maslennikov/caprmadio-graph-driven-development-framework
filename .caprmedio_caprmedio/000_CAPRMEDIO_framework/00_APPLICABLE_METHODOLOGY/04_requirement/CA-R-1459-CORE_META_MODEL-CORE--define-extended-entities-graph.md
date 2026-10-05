@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1459-CORE_META_MODEL-CORE--define-extended-entities-graph.md
+  source_atom_id: CA-R-1459
+  source_atom_revision: 5
+  source_sha256: c83c42a9741b5a3fce20499a52b01ae5ff9442943acf4fce4c09160c19ed78c7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-122-CORE_META_MODEL-METHOD--evaluate-condition-expressions.md
+  source_atom_id: CA-M-122
+  source_atom_revision: 16
+  source_sha256: f9c8e95aaf79f92b2c92d3cedfdf173870102cac58f6a134fedb830cfe3c5197
+  original_relations_sha256: 5eb127874e3ee8c1f6d4c667ea5a3b8f1fcf5ca1bc02536507146474a017249a
 ---
 # Summary
 

@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1664-CORE_META_MODEL-REQUIREMENT--register-rationale-as-a-type-value-for-analysis-atoms.md
+  source_atom_id: CA-R-1664
+  source_atom_revision: 22
+  source_sha256: 0ae2f08278a54534fa50c76bc773598da83104ca003d4eedeb3364a6f3c3d486
+  original_relations_sha256: b89d3dda96c6d1aabe3172420cd0a102ac12befd4244aa13be47b1a556386fed
 ---
 # Summary
 

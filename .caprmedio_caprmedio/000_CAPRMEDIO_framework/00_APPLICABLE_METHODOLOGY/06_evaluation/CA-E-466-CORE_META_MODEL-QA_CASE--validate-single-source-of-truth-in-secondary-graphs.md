@@ -29,6 +29,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-466-CORE_META_MODEL-QA_CASE--validate-single-source-of-truth-in-secondary-graphs.md
+  source_atom_id: CA-E-466
+  source_atom_revision: 7
+  source_sha256: fbd793ad409812ff54bfa84a596493181b9444abda65a2cd9641be63f678c06b
+  original_relations_sha256: 1f641957f8b24374747c60ccf6d83cb8981e57e81ec8f35b43570b46ac17c66b
 ---
 # Summary
 Validate Single Source of Truth in secondary graphs

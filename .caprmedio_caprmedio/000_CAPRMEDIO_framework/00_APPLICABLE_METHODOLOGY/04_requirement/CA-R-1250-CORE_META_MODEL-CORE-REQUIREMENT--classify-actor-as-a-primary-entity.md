@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1250-CORE_META_MODEL-CORE-REQUIREMENT--classify-actor-as-a-primary-entity.md
+  source_atom_id: CA-R-1250
+  source_atom_revision: 12
+  source_sha256: 8ec002929de017298e9210c61590b78278b61f57bd9d9ed73df488b9c849055e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

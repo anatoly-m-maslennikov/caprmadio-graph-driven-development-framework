@@ -29,6 +29,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-384-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-composite-claims-and-derived-summaries.md
+  source_atom_id: CA-E-384
+  source_atom_revision: 19
+  source_sha256: d8895427fc5d003df3bf3f3be2463b55e5df157f6ccf4549673385c8a281d230
+  original_relations_sha256: 07213b2ab316a074edef5b36598f1f4f4d2e1c9cf14e66d3ad001e784d02e330
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1666-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--register-action-policy-for-plan-atoms.md
+  source_atom_id: CA-R-1666
+  source_atom_revision: 25
+  source_sha256: 7c693406f9f435d5aac909033d108c3384613487ee65c4ef940195fda337ccc0
+  original_relations_sha256: f0d97831402e5e54faecfcbfd6d830789dedc4e2dff1db9b0d49ebcd0cdb9783
 ---
 # Summary
 

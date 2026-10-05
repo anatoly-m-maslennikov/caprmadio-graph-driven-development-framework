@@ -23,6 +23,10 @@ subjects:
 relations: {"relates_to":["CA-D-496","CA-E-520","CA-O-028","CA-O-067","CA-R-1464"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-111-CORE_META_MODEL-ACTION--fix-confirmed-local-rmed-atom-issues.md
+  source_atom_id: CA-O-111
+  source_atom_revision: 5
+  source_sha256: 4408a09c5a8a4ce316a34d072a2a3ca3dd5d057f48f7853de390efb3615f4103
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

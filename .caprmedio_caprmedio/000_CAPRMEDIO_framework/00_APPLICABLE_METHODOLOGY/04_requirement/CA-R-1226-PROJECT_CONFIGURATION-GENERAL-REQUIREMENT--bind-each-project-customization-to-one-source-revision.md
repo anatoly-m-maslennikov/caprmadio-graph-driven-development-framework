@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1226-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--bind-each-project-customization-to-one-source-revision.md
+  source_atom_id: CA-R-1226
+  source_atom_revision: 10
+  source_sha256: df1fe40b0221d6469a5d027e4af7811af5f68d803311a2cc5aa0fce1bcbf4571
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-241-CORE_META_MODEL-QA_CASE--validate-cce-claims-and-derived-projections.md
+  source_atom_id: CA-E-241
+  source_atom_revision: 22
+  source_sha256: 14db0fb0858f91896dabebfb63f9b58e34582357ddd1511a71dbf8c08c61a955
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

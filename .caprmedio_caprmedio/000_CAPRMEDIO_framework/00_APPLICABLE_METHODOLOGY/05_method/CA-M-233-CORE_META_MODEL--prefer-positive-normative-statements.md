@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-233-CORE_META_MODEL--prefer-positive-normative-statements.md
+  source_atom_id: CA-M-233
+  source_atom_revision: 12
+  source_sha256: c377b64f94f41a68f97151370042bc08ec743ef7068ac723475acbe61b62e167
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

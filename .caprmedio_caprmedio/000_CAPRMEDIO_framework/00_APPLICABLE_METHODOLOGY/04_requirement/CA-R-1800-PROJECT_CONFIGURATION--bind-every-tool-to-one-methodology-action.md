@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1800-PROJECT_CONFIGURATION--bind-every-tool-to-one-methodology-action.md
+  source_atom_id: CA-R-1800
+  source_atom_revision: 1
+  source_sha256: bf434b59da21f10557519a8f2799e597c7b7a507bf9a5ce7dd718b3da9091c00
+  original_relations_sha256: 14339fb49658e7e5b53fba1df7f68fda17cee1e19b793f8e8009b5e0f8272d41
 ---
 # Summary
 

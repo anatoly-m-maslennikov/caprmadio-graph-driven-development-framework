@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1706-CORE_META_MODEL-GENERAL-REQUIREMENT--requirement-provide-lineage-impact-projections.md
+  source_atom_id: CA-R-1706
+  source_atom_revision: 19
+  source_sha256: bfa88e477216cfd2a836d8d12a1f15b1b9ff348b17e4804b9ab0ce4f47f5d88a
+  original_relations_sha256: 05788e6d15a7593cc839dc903b49d9380071b7a1d9244db036454ca78f48ddd0
 ---
 # Summary
 

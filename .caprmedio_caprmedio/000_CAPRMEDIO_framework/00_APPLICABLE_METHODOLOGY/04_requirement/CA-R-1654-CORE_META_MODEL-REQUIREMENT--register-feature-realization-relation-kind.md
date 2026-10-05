@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1654-CORE_META_MODEL-REQUIREMENT--register-feature-realization-relation-kind.md
+  source_atom_id: CA-R-1654
+  source_atom_revision: 22
+  source_sha256: 28ff8f32783d05401da1b6a3f8d0e71e79545120da43dae1d166910079326d67
+  original_relations_sha256: 6b3375aaa9cb1a906b8aef7a153d94efc144f3cb6094fca3d9551306b7308bd3
 ---
 # Summary
 

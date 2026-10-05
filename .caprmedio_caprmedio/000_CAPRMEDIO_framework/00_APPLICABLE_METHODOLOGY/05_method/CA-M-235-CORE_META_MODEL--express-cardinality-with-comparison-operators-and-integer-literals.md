@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-235-CORE_META_MODEL--express-cardinality-with-comparison-operators-and-integer-literals.md
+  source_atom_id: CA-M-235
+  source_atom_revision: 11
+  source_sha256: 738043ae13bf80391f1bd5ac62b179a7f68df6b6203474f322e78d8469f8456d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1397-CORE_META_MODEL-GENERAL--register-core-method-status-values.md
+  source_atom_id: CA-R-1397
+  source_atom_revision: 9
+  source_sha256: b18023c1108023137f539703aec3812c3675c257ba154ac0a08cc087621669fb
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

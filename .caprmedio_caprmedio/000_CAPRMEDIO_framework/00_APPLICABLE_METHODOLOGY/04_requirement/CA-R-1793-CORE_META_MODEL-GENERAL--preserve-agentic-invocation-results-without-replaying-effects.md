@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1793-CORE_META_MODEL-GENERAL--preserve-agentic-invocation-results-without-replaying-effects.md
+  source_atom_id: CA-R-1793
+  source_atom_revision: 1
+  source_sha256: f847c6bb0936122046a5392017d0824b5b510e90dfb5af90620939f2cc91de50
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

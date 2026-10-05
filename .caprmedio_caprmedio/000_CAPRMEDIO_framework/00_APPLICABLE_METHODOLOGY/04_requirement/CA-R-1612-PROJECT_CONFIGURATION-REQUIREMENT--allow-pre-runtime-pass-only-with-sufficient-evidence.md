@@ -25,6 +25,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1612-PROJECT_CONFIGURATION-REQUIREMENT--allow-pre-runtime-pass-only-with-sufficient-evidence.md
+  source_atom_id: CA-R-1612
+  source_atom_revision: 4
+  source_sha256: 26235debc4577171032d694a9b82c61c80597b006c3385ec2308a35fe10c6c19
+  original_relations_sha256: 8da48041734298ad2b3053caa0cf525a16911dcc519175fc9832741c5007d037
 ---
 # Summary
 

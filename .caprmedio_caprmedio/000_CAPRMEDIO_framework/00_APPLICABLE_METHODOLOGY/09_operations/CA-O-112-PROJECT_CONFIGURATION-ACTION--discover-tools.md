@@ -24,6 +24,10 @@ relations:
   relates_to: [CA-R-1804, CA-D-512]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-112-PROJECT_CONFIGURATION-ACTION--discover-tools.md
+  source_atom_id: CA-O-112
+  source_atom_revision: 1
+  source_sha256: 6f0b9eaaa3d69011259f1c6f8c5f07da670988092eab2a1b5407c798d60764c2
+  original_relations_sha256: 2546a899cd4c6c82eb55e6cb5fafe4bcc76d8fddae0ac1cd4f3107b0135324b1
 ---
 # Summary
 

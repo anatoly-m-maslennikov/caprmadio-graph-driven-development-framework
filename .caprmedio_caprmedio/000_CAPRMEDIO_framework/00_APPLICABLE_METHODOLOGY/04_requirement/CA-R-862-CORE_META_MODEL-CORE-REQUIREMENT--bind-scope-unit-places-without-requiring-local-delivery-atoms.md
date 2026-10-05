@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-862-CORE_META_MODEL-CORE-REQUIREMENT--bind-scope-unit-places-without-requiring-local-delivery-atoms.md
+  source_atom_id: CA-R-862
+  source_atom_revision: 16
+  source_sha256: 2c3b55fa8c64ff236eaec12483ca43141025aeb2f7c030dc17f3bec5d7dde195
+  original_relations_sha256: e97103b9de4ee47dfbc03a240fd5f7d67efe5c3a843e2d7604a54112d1133c11
 ---
 # Summary
 

@@ -29,10 +29,10 @@ from typing import Any, Literal
 
 from release_contract import ReleaseContractError, ValidatedCandidate, canonical_json
 from release_e2e_context import CANDIDATE_IMAGE_ENVIRONMENT_VARIABLE, CONTEXT_ENVIRONMENT_VARIABLE
-from release_handoff import CANONICAL_SOURCE_RELATIVE, FRAMEWORK_SETTINGS_RELATIVE, SealedCandidateCompilation
-from release_image import ImageBuildEvidence, ImageVerificationEvidence, verify_bound_image_evidence
-from release_packaging import RUNTIME_ROOT
-from release_suite import SuiteGateEvidence, _active_n_state, _safe_path, _validate_bound_inputs, verify_bound_suite_evidence
+from release_handoff import CANONICAL_SOURCE_RELATIVE, FRAMEWORK_SETTINGS_RELATIVE, PackageRow, SealedCandidateCompilation, tree_sha256
+from release_image import ImageBuildEvidence, ImageVerificationEvidence, read_image_execution_artifacts, verify_bound_image_evidence
+from release_packaging import RUNTIME_ROOT, ReleasePackagingError, _verify_release
+from release_suite import SuiteGateEvidence, _active_n_state, _active_skill_records, _safe_path, _validate_bound_inputs, verify_bound_suite_evidence
 from release_test_phases import derive_test_phase_map
 
 
@@ -767,6 +767,92 @@ def verify_bound_candidate_e2e_evidence(
     """
 
     root = _reopen_predecessors(candidate, compilation, unit_suite, image_build, image)
+    capability = _read_candidate_e2e_artifacts(root, candidate, compilation, image, evidence)
+    HostE2EExecutor.revalidate_capability(root, candidate, capability)
+    return root
+
+
+def _verify_retained_host_capability(root: Path, candidate: ValidatedCandidate,
+                                     unit_suite: SuiteGateEvidence,
+                                     capability: FrozenHostE2ECapability) -> None:
+    """Prove original N and executable bytes without requiring N to remain selected."""
+
+    expected_state = (
+        unit_suite.executing_selector_sha256, unit_suite.executing_release_package_sha256,
+        unit_suite.executing_skill_sha256,
+    )
+    actual_state = (
+        capability.executing_selector_sha256, capability.executing_release_package_sha256,
+        capability.executing_skill_sha256,
+    )
+    if actual_state != expected_state:
+        raise ReleaseContractError("release-e2e-capability-untrusted", "host capability differs from the original Suite N identity")
+    package_relative = f"{RUNTIME_ROOT}/releases/{candidate.authority.executing_release}"
+    package = _safe_path(root, package_relative)
+    manifest_bytes = _regular(root, f"{package_relative}/manifest.toml", label="retained N manifest").read_bytes()
+    try:
+        manifest_text = manifest_bytes.decode("utf-8")
+        manifest = tomllib.loads(manifest_text)
+        rows = [PackageRow.model_validate({
+            "resource": row["resource"], "source_path": row["source_path"],
+            "destination_path": row["destination"], "sha256": row["sha256"], "mode": row["mode"],
+        }) for row in manifest["files"]]
+        _verify_release(package, manifest_text, rows)
+    except (KeyError, OSError, TypeError, ValueError, ReleasePackagingError) as error:
+        raise ReleaseContractError("release-e2e-capability-untrusted", "original N package bytes or modes changed") from error
+    if tree_sha256(root, package_relative) != capability.executing_release_package_sha256:
+        raise ReleaseContractError("release-e2e-capability-untrusted", "original N package no longer matches the frozen host capability")
+    skill_files, skill_directories = _active_skill_records(root, f"{package_relative}/SKILLS/ca")
+    skill_sha = _digest(canonical_json({"files": skill_files, "directories": sorted(skill_directories)}))
+    if skill_sha != capability.executing_skill_sha256:
+        raise ReleaseContractError("release-e2e-capability-untrusted", "original N Skill no longer matches the frozen host capability")
+    controller = _regular(root, f"{package_relative}/{_N_DRIVER_RELATIVE}", label="retained N host controller")
+    if capability.n_host_controller.path != str(controller) or capability.driver.path != str(controller):
+        raise ReleaseContractError("release-e2e-capability-untrusted", "retained host controller is outside the exact original N package")
+    for identity in (capability.n_host_controller, capability.python, capability.driver, capability.docker):
+        path = Path(identity.path)
+        try:
+            resolved = path.resolve(strict=True)
+            if (resolved != path or path.is_symlink() or not path.is_file()
+                    or (identity.role in {"python", "docker"} and not os.access(path, os.X_OK))
+                    or _digest(path.read_bytes()) != identity.sha256):
+                raise ValueError("executable bytes or carrier changed")
+        except (OSError, ValueError) as error:
+            raise ReleaseContractError("release-e2e-capability-untrusted", f"retained {identity.role} executable changed") from error
+
+
+def read_candidate_e2e_execution_artifacts(
+    candidate: ValidatedCandidate,
+    compilation: SealedCandidateCompilation,
+    unit_suite: SuiteGateEvidence,
+    image: ImageVerificationEvidence,
+    evidence: CandidateE2EGateEvidence,
+    *,
+    image_build: ImageBuildEvidence,
+) -> Path:
+    """Read exact original E2E proof after selection, without admitting any effect.
+
+    The original Suite and Image receipts, frozen N package/controller and host
+    executables remain byte-bound. Current selection and public Skill ownership
+    are separate duties of the promotion consumer; fresh admission still uses
+    ``verify_bound_candidate_e2e_evidence`` and its active-N guard.
+    """
+
+    image_attempt = read_image_execution_artifacts(candidate, compilation, unit_suite, image_build, image)
+    root = Path(candidate.project_root).resolve()
+    if image_attempt != _safe_path(root, image.evidence_root):
+        raise ReleaseContractError("release-e2e-predecessor-root-mismatch", "image artifacts reopened outside their bound candidate carrier")
+    capability = _read_candidate_e2e_artifacts(root, candidate, compilation, image, evidence)
+    _verify_retained_host_capability(root, candidate, unit_suite, capability)
+    return root
+
+
+def _read_candidate_e2e_artifacts(root: Path, candidate: ValidatedCandidate,
+                                  compilation: SealedCandidateCompilation,
+                                  image: ImageVerificationEvidence,
+                                  evidence: CandidateE2EGateEvidence) -> FrozenHostE2ECapability:
+    """Shared receipt, context, source and observed JUnit validation."""
+
     if not isinstance(evidence, CandidateE2EGateEvidence) or not evidence.passed:
         raise ReleaseContractError("release-e2e-evidence-untrusted", "later admission requires passed actual host E2E evidence")
     if (evidence.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
@@ -790,6 +876,14 @@ def verify_bound_candidate_e2e_evidence(
         raise ReleaseContractError("release-e2e-evidence-untrusted", "candidate E2E receipt changed or is caller-forged")
     limits = _reopen_release_e2e_settings(root, candidate, evidence)
     capability = _reopen_host_capability(root, evidence)
+    context_path = f"{evidence.evidence_root}/scratch/context.json"
+    context = _read_bounded_artifact(root, context_path, limit=_MAX_CONTEXT_BYTES, label="candidate E2E context")
+    expected_context, _harnesses = _context_bytes(
+        root, attempt / "scratch", attempt / "scratch/reports", candidate, image,
+        grammar_sha256, phase_map_sha256, grammar,
+    )
+    if context != expected_context:
+        raise ReleaseContractError("release-e2e-evidence-untrusted", "candidate E2E context differs from its exact bound attempt")
     expected_sources = tuple(row["source_path"] for row in grammar["harnesses"])
     source_sha256s = {
         source_path: source_sha256
@@ -848,8 +942,7 @@ def verify_bound_candidate_e2e_evidence(
                 or not isinstance(receipt_row.reason, str) or receipt_row.reason):
             raise ReleaseContractError("release-e2e-evidence-untrusted", "candidate E2E harness receipt is missing or changed")
     _source_control_fingerprint(root, candidate, compilation, grammar_bytes)
-    HostE2EExecutor.revalidate_capability(root, candidate, capability)
-    return root
+    return capability
 
 
 def run_candidate_e2e_gate(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
@@ -1015,6 +1108,7 @@ __all__ = [
     "HarnessReceipt",
     "HostE2EExecutor",
     "ReleaseE2ELimits",
+    "read_candidate_e2e_execution_artifacts",
     "run_candidate_e2e_gate",
     "verify_bound_candidate_e2e_evidence",
 ]

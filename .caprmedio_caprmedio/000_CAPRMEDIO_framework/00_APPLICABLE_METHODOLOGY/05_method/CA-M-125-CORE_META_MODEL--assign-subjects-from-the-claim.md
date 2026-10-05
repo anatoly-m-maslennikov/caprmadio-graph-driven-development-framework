@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-125-CORE_META_MODEL--assign-subjects-from-the-claim.md
+  source_atom_id: CA-M-125
+  source_atom_revision: 25
+  source_sha256: 3c4a8960bac48476767cb4deda9a7771ea48b8fb303a1c6b85da2dc9a0f19e31
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -26,6 +26,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-488-PROJECT_CONFIGURATION-QA_CASE--validate-tool-action-bindings-and-evaluation-ownership.md
+  source_atom_id: CA-E-488
+  source_atom_revision: 6
+  source_sha256: a7e7aba272be20d9a9ffadfd4fe76840290d00abecfa2113a49d98d1f564423d
+  original_relations_sha256: 8a86c5a55a2f9aee1e1111d08b0f0b2254ec89520b80843ce2927cce497d0cd5
 ---
 # Summary
 

@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-383-CORE_META_MODEL-DELIVERY--serialize-interaction-reporting-mode.md
+  source_atom_id: CA-D-383
+  source_atom_revision: 11
+  source_sha256: 1ae8e1df0c2eeb193b37fa1953b3761b8a2c4247fb7f250c7958c344b466f0ae
+  original_relations_sha256: f35ab4d15e0ddafd47faf74ffa94717141e3d1f8a5764928d58928f822191627
 ---
 # Summary
 

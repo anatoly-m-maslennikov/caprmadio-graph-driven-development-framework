@@ -15,6 +15,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-502-PROJECT_CONFIGURATION--exclude-secrets-from-production-logs.md
+  source_atom_id: CA-D-502
+  source_atom_revision: 1
+  source_sha256: b59982d93ad84f2017e52209eab1980e205c7d6e1da8408290c64a1fd798307c
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

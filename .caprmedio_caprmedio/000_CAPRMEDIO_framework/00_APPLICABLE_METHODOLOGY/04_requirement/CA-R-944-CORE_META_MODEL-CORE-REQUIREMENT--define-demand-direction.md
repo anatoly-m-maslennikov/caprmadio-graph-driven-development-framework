@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-944-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-direction.md
+  source_atom_id: CA-R-944
+  source_atom_revision: 19
+  source_sha256: deb00175c1cdaa1877f7982b191b4f2bba2599b236a55969dcfc321c580324a8
+  original_relations_sha256: 986ab56d61737841b77ed4fc4f1a391a0c8ad370d896e576cf2be7bdd2bdf459
 ---
 # Summary
 Define Demand direction

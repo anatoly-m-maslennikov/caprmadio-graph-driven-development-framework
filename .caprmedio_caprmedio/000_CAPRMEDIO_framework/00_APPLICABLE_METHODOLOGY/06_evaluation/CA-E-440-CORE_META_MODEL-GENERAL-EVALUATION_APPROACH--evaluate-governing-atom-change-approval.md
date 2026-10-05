@@ -29,6 +29,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-440-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--evaluate-governing-atom-change-approval.md
+  source_atom_id: CA-E-440
+  source_atom_revision: 14
+  source_sha256: 04cf2c957d5cba0f777d0d9c4ecab39e816bed26bce872a9a5eae74224e10a4a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -23,7 +23,7 @@ subjects:
     - "Autonomous Confidence Threshold"
     - "Spec"
 version: 4
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 15:14:54 +0000"
 relations:
   relates_to:
     - CA-O-021
@@ -35,12 +35,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-090-CORE_META_MODEL-ACTION--activate-corrective-methods-after-verified-fixes.md
+  source_atom_id: CA-O-090
+  source_atom_revision: 4
+  source_sha256: 2597f1ee55db765569b57cde7c88d6a28abc462c0f3353b37b296a71d5a4ebdc
+  original_relations_sha256: 055477a4851f7fa791bab976c6be1395ee6c13ed05be6399a8e324bbfea2bd27
 ---
 # Summary
 
 Activate corrective Methods after verified fixes
 
-## Claim
+## Operation
 
 Corrective Method Acceptance **means** the Agentic Action that promotes a verified corrective Method Draft **only** after the repaired candidate **and** its regression evidence justify that Method.
 
@@ -51,3 +55,5 @@ Corrective Method Acceptance **means** the Agentic Action that promotes a verifi
 - resolve the effective confidence threshold **and** permissions, including CA-R-1559 for governing-Atom changes. obtain required Operator approval; authorship **or** a passing test never grants permission. an unresolved gate returns `blocked` with the Draft unchanged.
 - **only** after verification **and** admission, promote the new Method under the current Atom identity, Status, Carrier, **and** history rules, preserving its Summary. return `accepted` with actual activated identities/Revisions **and** the governing-baseline change; return `already_covered` for a nonduplicating disposition; return `blocked` for incomplete verification **or** admission.
 - return the accepted Method identities **and** baseline change **to** the separate learning Run. refresh affected Method Projections **and** require current-baseline review **before** later work relies on them; do **not** reopen a completed implementation Run merely **to** make learning part of its completion **or** claim its old evidence proves the changed authority.
+
+## Details

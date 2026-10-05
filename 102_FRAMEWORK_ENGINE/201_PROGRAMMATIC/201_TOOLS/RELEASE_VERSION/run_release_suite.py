@@ -26,6 +26,7 @@ from release_suite_reference_context import (
     ReferenceRow,
     validate_reference_rows,
 )
+from release_test_phases import ReleaseTestPhaseMap, derive_test_phase_map_from_rows
 
 
 PROJECT_ROOT_ENV = "CAPRMEDIO_RELEASE_PROJECT_ROOT"
@@ -160,7 +161,7 @@ class BoundInputs:
     rows: dict[str, PackageRow]
     reference_rows: tuple[ReferenceRow, ...]
     control_context_digest: str
-    test_modules: tuple[str, ...]
+    phase_map: ReleaseTestPhaseMap
     probes: ModuleProbeRules
 
 
@@ -344,9 +345,14 @@ def _bound_inputs_from_frame(environment: dict[str, str], *, require_sandbox_pat
             raise SuiteError("source bindings package and reference rows conflict")
     control_context_digest = _digest(envelope["control_context_digest"], label="source bindings control context")
     rules = _parse_rules(root, envelope["mapping_rules"], rows, compiled_root=compiled_root)
-    test_modules = tuple(sorted(path for path in rows if _TEST_MODULE.fullmatch(path) is not None))
-    if not test_modules:
+    try:
+        phase_map = derive_test_phase_map_from_rows(rows.values())
+    except ValueError as error:
+        raise SuiteError("sealed package does not define a valid Release test phase map") from error
+    if not phase_map.rows:
         raise SuiteError("sealed package has no in-tree Framework test modules")
+    if any(_TEST_MODULE.fullmatch(path) is None for path, _digest_value, _phase in phase_map.rows):
+        raise SuiteError("sealed package has an unsupported test-module path")
     return BoundInputs(
         root,
         compiled_root,
@@ -356,7 +362,7 @@ def _bound_inputs_from_frame(environment: dict[str, str], *, require_sandbox_pat
         rows,
         reference_rows,
         control_context_digest,
-        test_modules,
+        phase_map,
         rules,
     )
 
@@ -512,7 +518,11 @@ def _write_report(inputs: BoundInputs, cases: list[ObservedCase], module_errors:
     suite = ET.Element(
         "testsuite",
         name="caprmedio.release_suite",
-        **{"caprmedio.control_context_digest": inputs.control_context_digest},
+        **{
+            "caprmedio.control_context_digest": inputs.control_context_digest,
+            "caprmedio.phase": "unit",
+            "caprmedio.phase_map_sha256": inputs.phase_map.sha256,
+        },
     )
     for observed in cases:
         case = ET.SubElement(suite, "testcase", classname=observed.module_path, name=observed.test_id)
@@ -573,7 +583,7 @@ def _execute_bound(inputs: BoundInputs) -> int:
     temporary = Path(tempfile.mkdtemp(prefix="release-suite-", dir=inputs.report_path.parent))
     cases: list[ObservedCase] = []
     module_errors: list[str] = []
-    for module_path in inputs.test_modules:
+    for module_path in inputs.phase_map.unit_paths:
         observed, errors = _run_module(inputs, module_path, temporary)
         cases.extend(observed)
         module_errors.extend(errors)

@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-441-CORE_META_MODEL-GENERAL--encode-the-project-structure-document-schema.md
+  source_atom_id: CA-D-441
+  source_atom_revision: 5
+  source_sha256: 30042a747a31e13c2618a7111a884c5af1ed2175c687645f9eaae9f6d5d10e81
+  original_relations_sha256: 4ea2c90f06a6f75bf31082400ec9137e19d06cdfa3e8d7bded3331399aa3453a
 ---
 # Summary
 Encode the Project Structure document schema

@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-295-CORE_META_MODEL--resolve-implementation-retry-limits-by-source-precedence.md
+  source_atom_id: CA-M-295
+  source_atom_revision: 9
+  source_sha256: 2d3c0506dcedfda929c9f391340eca3afb829f93d5807bd1be5db924069ca81c
+  original_relations_sha256: 0e568ddd932a6a9cb52688571f732567cbd704e78761e71bf6799c4a1827c540
 ---
 # Summary
 

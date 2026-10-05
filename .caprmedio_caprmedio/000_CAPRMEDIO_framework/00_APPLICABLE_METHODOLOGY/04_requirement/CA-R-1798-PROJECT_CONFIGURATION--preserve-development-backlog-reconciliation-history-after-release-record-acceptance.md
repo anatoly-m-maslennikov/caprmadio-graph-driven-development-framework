@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1798-PROJECT_CONFIGURATION--preserve-development-backlog-reconciliation-history-after-release-record-acceptance.md
+  source_atom_id: CA-R-1798
+  source_atom_revision: 1
+  source_sha256: 0001c092d7ba32231c2b070beebe23cd5e24be022743cd288102154e12482b9e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Preserve Development Backlog reconciliation history **after** Release Record acceptance

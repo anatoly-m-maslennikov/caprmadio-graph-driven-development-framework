@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-309-CORE_META_MODEL-METHOD--write-plan-claims-with-the-plan-cce-profile.md
+  source_atom_id: CA-M-309
+  source_atom_revision: 4
+  source_sha256: 0ccf013b3aa5e388853f9b0a8acd98e73180fd4d4e0028684a472f2566e46f61
+  original_relations_sha256: 55738e4ef8b9a22c50eaa72508a8c36a2fd271300e142933cb6bdfa7928d3dae
 ---
 # Summary
 

@@ -48,7 +48,12 @@ from release_image import (  # noqa: E402
     verify_bound_image_evidence,
 )
 from release_packaging import RUNTIME_ROOT, _render_manifest  # noqa: E402
-from release_source_admission import AUTHORITY_REF, derive_release_source_admission  # noqa: E402
+from release_source_admission import (  # noqa: E402
+    AUTHORITY_REF,
+    derive_release_graph_admission,
+    derive_release_private_carriers,
+    derive_release_source_admission,
+)
 from release_suite import (  # noqa: E402
     COMPILED_PROBE_TEST_MODULE,
     EVIDENCE_ROOT,
@@ -62,7 +67,8 @@ from release_suite import (  # noqa: E402
     verify_bound_suite_evidence,
 )
 from release_suite_reference_context import capture_context  # noqa: E402
-from selected_routes import PROJECT_SETTINGS_REF, load_selected_manifest, selected_manifest_ref  # noqa: E402
+from release_test_phases import derive_test_phase_map_from_rows  # noqa: E402
+from selected_routes import PROJECT_SETTINGS_REF, canonical_digest, load_selected_manifest, selected_manifest_ref  # noqa: E402
 
 
 _PAYLOAD = json.loads((Path(__file__).with_name("payloads.json")).read_bytes())
@@ -199,16 +205,23 @@ def _copy_canonical_and_control_closure(root: Path) -> None:
 
     manifest_ref = selected_manifest_ref(REPOSITORY_ROOT)
     raw_manifest = json.loads((REPOSITORY_ROOT / manifest_ref).read_bytes())
-    # D572 is a read-only source-admission derivation.  We use its existing
-    # pinned record to select retained archive bytes; no selector is repaired.
+    # Keep the live selector untouched.  This fresh private fixture retains
+    # other routes but derives its Release route from the admitted sources.
+    raw_manifest["routes"] = [route for route in raw_manifest["routes"] if route["route"] != "release_version"]
+    raw_manifest.pop("release_source_admissions", None)
     admission = derive_release_source_admission(REPOSITORY_ROOT)
+    private_carriers = derive_release_private_carriers(REPOSITORY_ROOT)
     pins = _pin_digests(raw_manifest)
     for relative, digest in _pin_digests(admission).items():
         existing = pins.setdefault(relative, digest)
         if existing != digest:
             raise RuntimeError(f"fixture source pin disagrees for {relative}")
-    required = _source_paths(raw_manifest) | _source_paths(admission) | {
-        manifest_ref,
+    for row in private_carriers:
+        relative, digest = row["source_path"], row["sha256"]
+        existing = pins.setdefault(relative, digest)
+        if existing != digest:
+            raise RuntimeError(f"fixture private source pin disagrees for {relative}")
+    required = _source_paths(raw_manifest) | _source_paths(admission) | _source_paths(private_carriers) | {
         ".caprmedio_caprmedio/operators_registry.toml",
         PROJECT_SETTINGS_REF.as_posix(),
         raw_manifest["source_freshness"]["selected_source_registry_ref"],
@@ -219,6 +232,14 @@ def _copy_canonical_and_control_closure(root: Path) -> None:
     }
     for relative in sorted(required):
         _copy_exact(root, relative, _retained_source(relative, pins.get(relative)))
+    route, copied_admission = derive_release_graph_admission(root)
+    raw_manifest["routes"].append(route)
+    raw_manifest["release_source_admissions"] = [copied_admission]
+    raw_manifest["source_freshness"]["selected_binding_digest"] = canonical_digest(raw_manifest["routes"])
+    raw_manifest["canonical_manifest_sha256"] = canonical_digest({
+        key: value for key, value in raw_manifest.items() if key != "canonical_manifest_sha256"
+    })
+    _write_new(root / manifest_ref, canonical_json(raw_manifest), (REPOSITORY_ROOT / manifest_ref).stat().st_mode & 0o777)
     # The compiler governs three structural layers even where this tiny
     # fixture intentionally carries no installed-extension source atom.
     for layer in ("001_CORE_META_MODEL", "002_INSTALLED_EXTENSIONS", "003_PROJECT_CONFIGURATION"):
@@ -241,8 +262,11 @@ def _write_engine_seed(root: Path) -> None:
     }
     for relative, payload in content.items():
         _write_new(root / relative, payload)
-    for relative in (UNIT_MODULE, *HARNESS_PATHS):
-        _write_new(root / relative, b"def test_mock_fixture() -> None:\n    assert True\n")
+    _write_new(root / UNIT_MODULE, b"def test_mock_fixture() -> None:\n    assert True\n")
+    for relative in HARNESS_PATHS:
+        # D572 admits the actual harness bytes.  Only their retained command
+        # observations are synthetic; no harness execution occurs here.
+        _copy_exact(root, relative)
     for relative in (
         COMPILER_ENTRYPOINT_RELATIVE,
         "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_suite.py",
@@ -263,7 +287,6 @@ def _module_rules() -> bytes:
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml",
         ],
-        **{path: [] for path in HARNESS_PATHS},
     }
     rows = []
     for module in sorted(probes):
@@ -327,7 +350,8 @@ def _seed_active_n(root: Path, candidate: ValidatedCandidate, compilation: Seale
         raise RuntimeError("fixture selector must be presealed before candidate construction")
 
 
-def _coverage_report(root: Path, candidate: ValidatedCandidate, compilation: SealedCandidateCompilation, context) -> bytes:
+def _coverage_report(root: Path, candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                     context, phase_map_sha256: str) -> bytes:
     bindings_sha = _digest(_source_bindings_bytes(
         root, candidate.manifest.sha256, compilation.package_rows, compilation.child_materialization_root, context,
     ))
@@ -340,6 +364,8 @@ def _coverage_report(root: Path, candidate: ValidatedCandidate, compilation: Sea
     bindings = {row["test_module_source_path"]: tuple(row["source_paths"]) for row in rules["module_probes"]}
     report = ET.Element("testsuite", {
         "tests": str(len(bindings)), "failures": "0", "errors": "0", "skipped": "0",
+        "caprmedio.phase": "unit",
+        "caprmedio.phase_map_sha256": phase_map_sha256,
         "caprmedio.control_context_digest": context.control_context_digest,
     })
     for index, module in enumerate(sorted(bindings)):
@@ -368,7 +394,9 @@ def _seed_suite(root: Path, candidate: ValidatedCandidate, compilation: SealedCa
     attempt = root / EVIDENCE_ROOT / candidate.manifest.sha256 / "attempt-mock-data"
     attempt.mkdir(parents=True)
     stdout, stderr = b"MOCK DATA ONLY: sealed Unit Gate receipt\n", b""
-    report = _coverage_report(root, candidate, compilation, context)
+    phase_map = derive_test_phase_map_from_rows(compilation.package_rows)
+    report = _coverage_report(root, candidate, compilation, context, phase_map.sha256)
+    executed_tests = len(list(ET.fromstring(report).iter("testcase")))
     _write_new(attempt / "context.json", _context_receipt(context))
     _write_new(attempt / "stdout.bin", stdout)
     _write_new(attempt / "stderr.bin", stderr)
@@ -376,9 +404,9 @@ def _seed_suite(root: Path, candidate: ValidatedCandidate, compilation: SealedCa
     selector_sha, package_sha, skill_sha = _active_n_state(root, candidate)
     bare = SuiteGateEvidence(
         candidate.manifest.sha256, "passed", f"{MOCK_DATA_LABEL}: Unit Gate fixture receipt",
-        "local-subprocess", tuple(SUITE_DRIVER_COMMAND), ".", 0, 4, tuple(sorted(REQUIRED_COVERAGE)),
+        "local-subprocess", tuple(SUITE_DRIVER_COMMAND), ".", 0, executed_tests, tuple(sorted(REQUIRED_COVERAGE)),
         attempt.relative_to(root).as_posix(), _digest(stdout), _digest(stderr), _digest(report),
-        selector_sha, package_sha, skill_sha, None, 0.0, context.control_context_digest,
+        selector_sha, package_sha, skill_sha, None, 0.0, context.control_context_digest, phase_map.sha256,
     )
     receipt = canonical_json(asdict(bare))
     _write_new(attempt / "receipt.json", receipt)

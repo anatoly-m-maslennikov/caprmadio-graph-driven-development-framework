@@ -30,6 +30,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-294-CORE_META_MODEL--use-simpler-words-without-losing-meaning.md
+  source_atom_id: CA-M-294
+  source_atom_revision: 4
+  source_sha256: f43b99c71608021b8e927996c4924fb1ece77c55346c73cbd82d1fc3a9407700
+  original_relations_sha256: ef5e3e1940601bf417f7ddae95bd601b72d88cbab3eb0749af23d7404ac30c0e
 ---
 # Summary
 

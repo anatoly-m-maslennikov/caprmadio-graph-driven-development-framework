@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-278-CORE_META_MODEL--report-in-verbose-mode.md
+  source_atom_id: CA-M-278
+  source_atom_revision: 9
+  source_sha256: 28a9c6a6e3143994fa1219f196480063245a917ac0917bcb4e54d331a98c3d0d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

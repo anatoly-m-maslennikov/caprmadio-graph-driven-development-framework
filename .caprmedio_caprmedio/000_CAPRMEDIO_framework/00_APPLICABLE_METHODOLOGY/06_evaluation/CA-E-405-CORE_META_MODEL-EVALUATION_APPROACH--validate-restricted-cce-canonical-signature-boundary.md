@@ -22,6 +22,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-405-CORE_META_MODEL-EVALUATION_APPROACH--validate-restricted-cce-canonical-signature-boundary.md
+  source_atom_id: CA-E-405
+  source_atom_revision: 10
+  source_sha256: 1e237a88f00238545747d71e7a1022445c404accb5dcc8235ca08bc941880a5d
+  original_relations_sha256: 7dd373415c940e6e37f65dd1259b1a506ecf9af8fcf83fd941c984daf3095a31
 ---
 # Summary
 

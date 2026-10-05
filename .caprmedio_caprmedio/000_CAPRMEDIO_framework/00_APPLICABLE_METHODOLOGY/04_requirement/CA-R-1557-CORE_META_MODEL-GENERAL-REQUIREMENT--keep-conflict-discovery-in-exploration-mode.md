@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1557-CORE_META_MODEL-GENERAL-REQUIREMENT--keep-conflict-discovery-in-exploration-mode.md
+  source_atom_id: CA-R-1557
+  source_atom_revision: 5
+  source_sha256: 5aacdee1be98f04966d555e5149fbfaa42c98ecacdef83f96c1fc40490997416
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

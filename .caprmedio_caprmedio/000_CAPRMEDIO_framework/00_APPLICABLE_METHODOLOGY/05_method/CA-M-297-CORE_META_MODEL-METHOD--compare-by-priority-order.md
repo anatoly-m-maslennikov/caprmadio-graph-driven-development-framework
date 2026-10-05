@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-297-CORE_META_MODEL-METHOD--compare-by-priority-order.md
+  source_atom_id: CA-M-297
+  source_atom_revision: 4
+  source_sha256: e217fde189c3c466446ed69929a43747cde86c1b0ac535d092bfd67cef11cbd5
+  original_relations_sha256: 281ec85f44ff131b99377546943617cbfcfbf23e636c242eb0d23f43d42db629
 ---
 # Compare by priority order
 

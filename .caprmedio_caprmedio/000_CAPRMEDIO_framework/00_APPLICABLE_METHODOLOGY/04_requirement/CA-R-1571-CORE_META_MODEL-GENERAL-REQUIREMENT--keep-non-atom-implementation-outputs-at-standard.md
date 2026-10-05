@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1571-CORE_META_MODEL-GENERAL-REQUIREMENT--keep-non-atom-implementation-outputs-at-standard.md
+  source_atom_id: CA-R-1571
+  source_atom_revision: 4
+  source_sha256: ccaf94fd0aa849e497e8205a51d7febc25373148d7b0a66fa11d315cb4e37f15
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-405-PROJECT_CONFIGURATION--exclude-completed-work-from-the-development-backlog-carrier.md
+  source_atom_id: CA-D-405
+  source_atom_revision: 8
+  source_sha256: 62db0e58fc82a1793001cf4cface51eb7650ced7eaae1b0f4440c200fe79de14
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

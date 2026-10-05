@@ -27,6 +27,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-522-CORE_META_MODEL-QA_CASE--storage-boundary-classification-interpretability.md
+  source_atom_id: CA-E-522
+  source_atom_revision: 1
+  source_sha256: 3d311421cf753721b84da36b1cb5f67c70bcaa766baa5636bc95453cdf005d62
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

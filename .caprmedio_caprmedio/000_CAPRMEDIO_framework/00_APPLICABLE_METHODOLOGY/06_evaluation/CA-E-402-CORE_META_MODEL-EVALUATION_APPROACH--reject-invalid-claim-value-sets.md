@@ -24,6 +24,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-402-CORE_META_MODEL-EVALUATION_APPROACH--reject-invalid-claim-value-sets.md
+  source_atom_id: CA-E-402
+  source_atom_revision: 10
+  source_sha256: cffc334a0cfc39cca910ac8893452709ad85be1d34cb4b4bda8d038b7180858b
+  original_relations_sha256: 2c0932358549235fdbd296113de13ad2b49d058b029ebdab8919171cb68323a5
 ---
 # Summary
 

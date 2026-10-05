@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-491-CORE_META_MODEL-QA_CASE--validate-update-to-replacement-routing.md
+  source_atom_id: CA-E-491
+  source_atom_revision: 5
+  source_sha256: 687b3d30d85e0ca910a82f6688bc0f14dc3424f25f48ba8ac444d644f226ddc6
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

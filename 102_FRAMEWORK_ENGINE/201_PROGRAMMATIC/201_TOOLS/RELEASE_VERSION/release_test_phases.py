@@ -6,7 +6,7 @@ import hashlib
 import re
 from dataclasses import dataclass
 from pathlib import PurePosixPath
-from typing import Literal
+from typing import Iterable, Literal
 
 from release_contract import ReleaseContractError, ValidatedCandidate, canonical_json
 
@@ -38,22 +38,31 @@ def _is_test_module(path: object) -> bool:
     return isinstance(path, str) and PurePosixPath(path).name.startswith("test_") and path.endswith(".py")
 
 
-def derive_test_phase_map(candidate: ValidatedCandidate) -> ReleaseTestPhaseMap:
-    """Classify only sealed test-module rows; never discover from the filesystem."""
+def _row_value(row: object, name: str) -> object:
+    if isinstance(row, dict):
+        return row.get(name)
+    return getattr(row, name, None)
 
-    manifest = getattr(candidate, "manifest", None)
-    inventory = getattr(manifest, "source_inventory_rows", None)
-    if not isinstance(inventory, list):
-        raise _error("release-test-phase-inventory-invalid", "candidate has no sealed source inventory rows")
+
+def derive_test_phase_map_from_rows(rows: Iterable[object]) -> ReleaseTestPhaseMap:
+    """Classify sealed test rows supplied by either inventory or package bindings.
+
+    Candidate inventory rows call their digest ``source_sha256`` whereas the
+    schema-2 package envelope calls the same sealed value ``sha256``.  This
+    projection deliberately accepts only those two already-attested carriers;
+    it never discovers modules from the filesystem.
+    """
 
     modules: dict[str, str] = {}
-    for row in inventory:
-        path = getattr(row, "source_path", None)
-        if isinstance(row, dict):
-            path = row.get("source_path")
-            digest = row.get("source_sha256")
-        else:
-            digest = getattr(row, "source_sha256", None)
+    try:
+        iterator = iter(rows)
+    except TypeError as error:
+        raise _error("release-test-phase-inventory-invalid", "sealed test rows are not iterable") from error
+    for row in iterator:
+        path = _row_value(row, "source_path")
+        digest = _row_value(row, "sha256")
+        if digest is None:
+            digest = _row_value(row, "source_sha256")
         if not _is_test_module(path):
             continue
         if not isinstance(digest, str) or _SHA256.fullmatch(digest) is None:
@@ -80,4 +89,19 @@ def derive_test_phase_map(candidate: ValidatedCandidate) -> ReleaseTestPhaseMap:
     )
 
 
-__all__ = ["CANDIDATE_E2E_MODULES", "ReleaseTestPhaseMap", "derive_test_phase_map"]
+def derive_test_phase_map(candidate: ValidatedCandidate) -> ReleaseTestPhaseMap:
+    """Classify only sealed candidate-inventory rows; never discover files."""
+
+    manifest = getattr(candidate, "manifest", None)
+    inventory = getattr(manifest, "source_inventory_rows", None)
+    if not isinstance(inventory, list):
+        raise _error("release-test-phase-inventory-invalid", "candidate has no sealed source inventory rows")
+    return derive_test_phase_map_from_rows(inventory)
+
+
+__all__ = [
+    "CANDIDATE_E2E_MODULES",
+    "ReleaseTestPhaseMap",
+    "derive_test_phase_map",
+    "derive_test_phase_map_from_rows",
+]

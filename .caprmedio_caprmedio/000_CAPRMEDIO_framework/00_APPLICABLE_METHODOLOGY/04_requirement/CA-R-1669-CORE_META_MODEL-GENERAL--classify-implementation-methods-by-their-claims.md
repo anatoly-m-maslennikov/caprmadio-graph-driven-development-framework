@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1669-CORE_META_MODEL-GENERAL--classify-implementation-methods-by-their-claims.md
+  source_atom_id: CA-R-1669
+  source_atom_revision: 18
+  source_sha256: a4a988041eef39c22aece23978739261e3f543dc94580fec54cbb50712e54f7b
+  original_relations_sha256: bb1efe8d9178f87d6f639a0d02c4fe22d14421f666c1ee2ef619a5f7a08177f4
 ---
 # Summary
 

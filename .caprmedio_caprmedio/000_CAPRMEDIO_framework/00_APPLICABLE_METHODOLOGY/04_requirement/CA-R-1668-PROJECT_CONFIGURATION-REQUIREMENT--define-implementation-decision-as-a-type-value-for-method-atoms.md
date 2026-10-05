@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1668-PROJECT_CONFIGURATION-REQUIREMENT--define-implementation-decision-as-a-type-value-for-method-atoms.md
+  source_atom_id: CA-R-1668
+  source_atom_revision: 22
+  source_sha256: 355a65673d1c9c33b0a6a44f09a7eaae33ab08623e020c16b9318aaf14dd597f
+  original_relations_sha256: fa2ed1b51c93aa6a0246c06ab257fec71c84abb802d4cd52416bad20300e11ae
 ---
 # Summary
 

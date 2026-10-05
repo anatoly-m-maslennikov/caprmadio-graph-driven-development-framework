@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1763-CORE_META_MODEL-CORE--define-local-order.md
+  source_atom_id: CA-R-1763
+  source_atom_revision: 18
+  source_sha256: 5885c31a872f1a9feca8531e125ae40a8ab4e7a5a852c110e5d9ed800e1a7141
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

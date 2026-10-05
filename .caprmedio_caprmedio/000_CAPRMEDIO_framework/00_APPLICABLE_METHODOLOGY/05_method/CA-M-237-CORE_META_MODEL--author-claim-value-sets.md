@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-237-CORE_META_MODEL--author-claim-value-sets.md
+  source_atom_id: CA-M-237
+  source_atom_revision: 10
+  source_sha256: f9293974e41c66ef9e209c37203fa8135d012b1a62acdc28c31d116a34891b92
+  original_relations_sha256: 8560a14f5d40024180f49119ad6216bc8babc0722610186fff08e9b20d081299
 ---
 # Summary
 

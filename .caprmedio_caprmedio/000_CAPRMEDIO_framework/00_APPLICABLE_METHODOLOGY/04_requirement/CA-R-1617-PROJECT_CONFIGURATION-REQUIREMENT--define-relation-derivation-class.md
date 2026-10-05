@@ -21,6 +21,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1617-PROJECT_CONFIGURATION-REQUIREMENT--define-relation-derivation-class.md
+  source_atom_id: CA-R-1617
+  source_atom_revision: 4
+  source_sha256: 7635a2d2bbb42796722d7f7b20daa3f42bb439617ceb3803cd56f0d662886f25
+  original_relations_sha256: 5c515042d9acf4a1873660ace68c5e35e3fcb02639d6e217cf7cfe67cfec33ec
 ---
 # Summary
 

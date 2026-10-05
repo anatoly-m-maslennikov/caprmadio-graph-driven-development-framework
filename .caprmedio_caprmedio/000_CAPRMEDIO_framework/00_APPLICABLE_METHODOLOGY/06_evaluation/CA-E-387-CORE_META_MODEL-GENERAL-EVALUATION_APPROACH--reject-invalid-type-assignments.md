@@ -19,6 +19,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-387-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--reject-invalid-type-assignments.md
+  source_atom_id: CA-E-387
+  source_atom_revision: 13
+  source_sha256: 0fdebfd3a98131382e9c7e5a3be4f536e8e2a43481b081fc08fbce10f5eee93a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -45,6 +45,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-444-CORE_META_MODEL-QA_CASE--validate-project-specific-term-meaning.md
+  source_atom_id: CA-E-444
+  source_atom_revision: 12
+  source_sha256: 33afa32da8e3334db17bbd7fb27ce6d3cafb8f99b12dd7bac8b1e036fb4b0ae5
+  original_relations_sha256: 0d64e659b20d5948f54c21bda3d484df7b0a5119e2e2a32a34700623d64dda3d
 ---
 # Summary
 

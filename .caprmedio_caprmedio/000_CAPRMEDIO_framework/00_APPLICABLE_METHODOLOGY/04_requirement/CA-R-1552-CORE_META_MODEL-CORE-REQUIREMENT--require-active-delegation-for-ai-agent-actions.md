@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1552-CORE_META_MODEL-CORE-REQUIREMENT--require-active-delegation-for-ai-agent-actions.md
+  source_atom_id: CA-R-1552
+  source_atom_revision: 4
+  source_sha256: 9c8bf376935993dd5ad8f8d42f38d5a63de1b4b47a0681b5d856ac6e77036961
+  original_relations_sha256: b47bf49353063d138eaaafb2507e53893b8f65ed84f88d6c603da43b611c30d9
 ---
 # Summary
 

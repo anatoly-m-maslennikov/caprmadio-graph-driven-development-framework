@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1447-CORE_META_MODEL-GENERAL--define-owned-atoms.md
+  source_atom_id: CA-R-1447
+  source_atom_revision: 8
+  source_sha256: 71013a2f3d4d646ea0b9d5b54db1bb903d9308bc13ee9df121940c36905af514
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -40,6 +40,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-482-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-principle-content-role-semantics.md
+  source_atom_id: CA-E-482
+  source_atom_revision: 11
+  source_sha256: 63074cf1df61acaee8b72785316a000db1b1d4a5b893591c789fa2d88706683f
+  original_relations_sha256: d63238eff976077a998317d0a36e32fdc3e09e703d6f3a9cee15c60755964d5c
 ---
 # Summary
 

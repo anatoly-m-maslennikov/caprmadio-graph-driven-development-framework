@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1044-CORE_META_MODEL-CORE-REQUIREMENT--define-autonomous-confidence-threshold.md
+  source_atom_id: CA-R-1044
+  source_atom_revision: 15
+  source_sha256: 50f83d3f12961961999d3f7d9ff7cc61cd8bbc58c6b6b198d3cf138d21969422
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

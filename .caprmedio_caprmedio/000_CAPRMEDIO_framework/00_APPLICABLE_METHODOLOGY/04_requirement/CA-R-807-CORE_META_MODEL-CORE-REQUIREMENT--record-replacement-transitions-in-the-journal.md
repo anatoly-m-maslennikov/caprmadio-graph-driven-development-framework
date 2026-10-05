@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-807-CORE_META_MODEL-CORE-REQUIREMENT--record-replacement-transitions-in-the-journal.md
+  source_atom_id: CA-R-807
+  source_atom_revision: 19
+  source_sha256: 2577d577d6b0804f095ec635a1e9da79da0dfc5a101816800576fb72f228f4b0
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

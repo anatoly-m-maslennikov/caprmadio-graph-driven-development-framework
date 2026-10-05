@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1697-CORE_META_MODEL-CORE-REQUIREMENT--bind-traceability-to-exact-claims-and-revisions.md
+  source_atom_id: CA-R-1697
+  source_atom_revision: 21
+  source_sha256: ec50dcadfd39438b319cf3d5bcafd0cbbf257f6f2885230cf2bb0688c6e952e9
+  original_relations_sha256: 1a0524f477df91d6f61ba6ed9eb1ee88a4409751914a1e0856255d36167b4dd8
 ---
 # Summary
 

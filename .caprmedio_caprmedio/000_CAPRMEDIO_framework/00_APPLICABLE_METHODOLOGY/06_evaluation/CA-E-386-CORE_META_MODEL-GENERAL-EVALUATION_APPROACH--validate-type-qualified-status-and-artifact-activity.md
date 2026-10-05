@@ -21,6 +21,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-386-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-type-qualified-status-and-artifact-activity.md
+  source_atom_id: CA-E-386
+  source_atom_revision: 19
+  source_sha256: 716b8601f26158d51281729d18c7b19c76bb2d5c6430d8b1f887b333c92de113
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

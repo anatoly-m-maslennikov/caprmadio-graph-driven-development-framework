@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1489-CORE_META_MODEL-REQUIREMENT--permit-implementation-retry-limit-defaults-and-overrides.md
+  source_atom_id: CA-R-1489
+  source_atom_revision: 6
+  source_sha256: e6562f963e35f84691c5c3195a04bd117791ca722ec1dd160abedd0d21adc905
+  original_relations_sha256: 3b6a41bc9d7e0c44152670010734eb1413010930f791c90c87f9676ac2766dfe
 ---
 # Summary
 

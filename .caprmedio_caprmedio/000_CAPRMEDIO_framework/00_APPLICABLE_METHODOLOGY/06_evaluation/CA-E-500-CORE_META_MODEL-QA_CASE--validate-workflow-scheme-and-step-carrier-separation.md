@@ -22,6 +22,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-500-CORE_META_MODEL-QA_CASE--validate-workflow-scheme-and-step-carrier-separation.md
+  source_atom_id: CA-E-500
+  source_atom_revision: 4
+  source_sha256: 5db4d560b31de1eb2de323baee397f35eb6dbd70e64bc2aca6e2844df6384156
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

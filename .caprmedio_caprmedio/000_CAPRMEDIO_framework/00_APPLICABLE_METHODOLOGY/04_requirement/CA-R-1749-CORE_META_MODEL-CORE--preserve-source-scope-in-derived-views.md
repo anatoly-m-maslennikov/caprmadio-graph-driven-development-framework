@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1749-CORE_META_MODEL-CORE--preserve-source-scope-in-derived-views.md
+  source_atom_id: CA-R-1749
+  source_atom_revision: 16
+  source_sha256: 4351c1f107ec24023fb36e05a2452d8a9a079a8ea1859ca3e72278e93eac437d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

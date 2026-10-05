@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1646-CORE_META_MODEL-REQUIREMENT--bind-proof-records-to-dependency-frontiers.md
+  source_atom_id: CA-R-1646
+  source_atom_revision: 18
+  source_sha256: 3e10153314d2dc0953b1b2d53f34f78ff8870ba006bf70091fbe8ed9f34a148a
+  original_relations_sha256: 7d5e5955ca0ee72f9019f7d2d5dbbcfbeac9d5f91bff5e109d83e55ba651637f
 ---
 # Bind proof records to dependency frontiers
 

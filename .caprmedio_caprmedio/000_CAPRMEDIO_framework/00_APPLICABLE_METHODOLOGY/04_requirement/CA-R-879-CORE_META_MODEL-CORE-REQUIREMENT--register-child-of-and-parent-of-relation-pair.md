@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-879-CORE_META_MODEL-CORE-REQUIREMENT--register-child-of-and-parent-of-relation-pair.md
+  source_atom_id: CA-R-879
+  source_atom_revision: 18
+  source_sha256: 81f1773a9c91d42edb267e3be146973d27f54c90966776edb0f79b59966ea6b3
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

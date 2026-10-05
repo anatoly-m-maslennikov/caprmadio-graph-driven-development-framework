@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-443-CORE_META_MODEL-QA_CASE--validate-confidence-threshold-precedence-and-inheritance.md
+  source_atom_id: CA-E-443
+  source_atom_revision: 10
+  source_sha256: 46d0dd92027080aced49be321e800f842bb2f5e4a3d42262910b82399e3ef970
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1754-CORE_META_MODEL-GENERAL--promote-project-adaptation-authority-to-an-extension.md
+  source_atom_id: CA-R-1754
+  source_atom_revision: 20
+  source_sha256: a570e58dbe813efe4d67bb8c75c05d883943b781dae968c1edb47d23599b6a66
+  original_relations_sha256: 27bc1a42b9fb5a4b3313486a5e3194ef31656282356a7cf92ba30cd237a0b36e
 ---
 # Summary
 

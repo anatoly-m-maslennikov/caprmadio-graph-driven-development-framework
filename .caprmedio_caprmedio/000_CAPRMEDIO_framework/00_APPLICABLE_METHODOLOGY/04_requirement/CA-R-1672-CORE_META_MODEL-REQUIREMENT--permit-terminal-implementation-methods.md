@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1672-CORE_META_MODEL-REQUIREMENT--permit-terminal-implementation-methods.md
+  source_atom_id: CA-R-1672
+  source_atom_revision: 16
+  source_sha256: 77c703549e168c4d45e6bbf6f3840b4713a69347a757c3913eb85ad089afd900
+  original_relations_sha256: 14ac0c15d3e353250d2419d14b8f18671fc7bba24a2d44d7df60b4494ee088b2
 ---
 # Summary
 

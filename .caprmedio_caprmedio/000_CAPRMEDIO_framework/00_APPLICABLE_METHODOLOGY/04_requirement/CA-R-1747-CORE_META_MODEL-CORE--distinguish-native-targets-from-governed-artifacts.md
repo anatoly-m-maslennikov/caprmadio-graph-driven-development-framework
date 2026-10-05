@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1747-CORE_META_MODEL-CORE--distinguish-native-targets-from-governed-artifacts.md
+  source_atom_id: CA-R-1747
+  source_atom_revision: 17
+  source_sha256: 619c1916826859628af327566a919ab7ba2066d91a04443738295909223f1db7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

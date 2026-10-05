@@ -10,7 +10,6 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-import shutil
 import sys
 import tempfile
 import unittest
@@ -26,7 +25,7 @@ for path in (RELEASE_ROOT, MCP_ROOT):
         sys.path.insert(0, str(path))
 
 import release_source_admission  # noqa: E402
-from release_source_admission import AUTHORITY_REF, derive_release_source_admission  # noqa: E402
+from release_source_admission import AUTHORITY_REF, derive_release_private_carriers, derive_release_source_admission  # noqa: E402
 import release_suite_reference_context as reference_context  # noqa: E402
 import selected_routes  # noqa: E402
 from release_suite_reference_context import (  # noqa: E402
@@ -40,6 +39,7 @@ from release_suite_reference_context import (  # noqa: E402
     validate_schema2_context,
 )
 from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_manifest, selected_manifest_ref  # noqa: E402
+from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
 
 
 def _source_paths(value: object) -> set[str]:
@@ -78,22 +78,8 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         # neighbouring release tests rather than turning cleanup into a test
         # outcome.
         self.root = Path(tempfile.mkdtemp(prefix="release-suite-reference-", dir=temporary_root))
-        manifest = load_selected_manifest(REPOSITORY)
-        admission = derive_release_source_admission(REPOSITORY)
+        copy_control_closure(REPOSITORY, self.root)
         self.manifest_ref = selected_manifest_ref(REPOSITORY)
-        required = _source_paths(manifest) | _source_paths(admission) | {
-            self.manifest_ref,
-            ".caprmedio_caprmedio/operators_registry.toml",
-            PROJECT_SETTINGS_REF.as_posix(),
-            manifest["source_freshness"]["selected_source_registry_ref"],
-            AUTHORITY_REF,
-        }
-        for relative in required:
-            source = REPOSITORY / relative
-            target = self.root / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
-            target.chmod(source.stat().st_mode & 0o777)
         self.bindings = {
             "candidate_snapshot_manifest_sha256": "a" * 64,
             "compiled_candidate_root": ".caprmedio_caprmedio/_release_materialized/a",
@@ -161,6 +147,7 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
             AUTHORITY_REF,
         }.issubset(paths))
         self.assertTrue(_source_paths(derive_release_source_admission(self.root)).issubset(paths))
+        self.assertTrue(_source_paths(derive_release_private_carriers(self.root)).issubset(paths))
         for row in context.reference_rows:
             source = self.root / row.source_path
             self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), row.sha256)

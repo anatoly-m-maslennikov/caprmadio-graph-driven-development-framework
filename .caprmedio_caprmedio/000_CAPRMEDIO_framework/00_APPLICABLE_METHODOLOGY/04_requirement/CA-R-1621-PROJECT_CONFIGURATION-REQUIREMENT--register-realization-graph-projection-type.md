@@ -24,6 +24,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1621-PROJECT_CONFIGURATION-REQUIREMENT--register-realization-graph-projection-type.md
+  source_atom_id: CA-R-1621
+  source_atom_revision: 4
+  source_sha256: 527037c8c22355403929e48698432f9b27c3d9c2cd659aa6e15347914bec5e91
+  original_relations_sha256: 695ef58c9dabb656ca3524e218df1bd9654588850a8709ccf2f2ddf9fc283635
 ---
 # Summary
 

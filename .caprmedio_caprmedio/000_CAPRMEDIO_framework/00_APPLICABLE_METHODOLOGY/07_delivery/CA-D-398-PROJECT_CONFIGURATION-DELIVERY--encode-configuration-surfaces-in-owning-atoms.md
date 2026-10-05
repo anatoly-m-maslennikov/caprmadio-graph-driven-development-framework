@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-398-PROJECT_CONFIGURATION-DELIVERY--encode-configuration-surfaces-in-owning-atoms.md
+  source_atom_id: CA-D-398
+  source_atom_revision: 10
+  source_sha256: 0124f089bb0d66ed98f7c8645420874cf5674bf47fdb17fcd248213ba432ec86
+  original_relations_sha256: df3214db01151c15d28465fdde971a33f9b8dc718e8791daaef5f11bcdd8a895
 ---
 # Summary
 

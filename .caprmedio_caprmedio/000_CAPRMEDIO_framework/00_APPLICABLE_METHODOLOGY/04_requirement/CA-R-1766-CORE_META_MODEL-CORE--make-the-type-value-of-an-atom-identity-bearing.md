@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1766-CORE_META_MODEL-CORE--make-the-type-value-of-an-atom-identity-bearing.md
+  source_atom_id: CA-R-1766
+  source_atom_revision: 18
+  source_sha256: 693cf56a21f43b0e36cd07bfccb25332a6a29c529366131660cd7f29801d4ce8
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

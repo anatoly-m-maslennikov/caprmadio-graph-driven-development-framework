@@ -22,6 +22,10 @@ subjects:
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-505-CORE_META_MODEL-CORE--define-the-entity-carrier-binding.md
+  source_atom_id: CA-D-505
+  source_atom_revision: 1
+  source_sha256: a8cea8b0ee7e5d0a1030c8871b110164eb6f7cc96425b7d1e2dcd935edef5ab3
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

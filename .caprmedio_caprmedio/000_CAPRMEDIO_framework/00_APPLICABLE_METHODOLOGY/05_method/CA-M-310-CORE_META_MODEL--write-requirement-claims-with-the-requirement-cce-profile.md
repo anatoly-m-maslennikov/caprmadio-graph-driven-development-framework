@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-310-CORE_META_MODEL--write-requirement-claims-with-the-requirement-cce-profile.md
+  source_atom_id: CA-M-310
+  source_atom_revision: 5
+  source_sha256: b41cd2dfe70813a227d0253e717c5d39ac6d5cb842ea72524ce0582476ed0db6
+  original_relations_sha256: 7ff74fac259540a50c68f38f47ef057478ad58aa287534b9bcfad07aacadfb73
 ---
 # Summary
 

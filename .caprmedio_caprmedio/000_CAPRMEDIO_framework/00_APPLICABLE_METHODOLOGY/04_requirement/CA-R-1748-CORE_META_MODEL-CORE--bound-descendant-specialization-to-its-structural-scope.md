@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1748-CORE_META_MODEL-CORE--bound-descendant-specialization-to-its-structural-scope.md
+  source_atom_id: CA-R-1748
+  source_atom_revision: 16
+  source_sha256: 568c25016973897bc81b3ba479746e6a6382c7203ddee3c4c9fa0830eefc0585
+  original_relations_sha256: 25cf0b2d0152002964c2cf0fb51830ae0c3aeec207d6ed401d90de60ad84e0a9
 ---
 # Summary
 

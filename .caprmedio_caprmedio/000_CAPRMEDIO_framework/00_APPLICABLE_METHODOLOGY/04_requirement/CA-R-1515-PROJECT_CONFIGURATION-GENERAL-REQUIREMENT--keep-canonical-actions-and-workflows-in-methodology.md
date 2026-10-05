@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1515-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--keep-canonical-actions-and-workflows-in-methodology.md
+  source_atom_id: CA-R-1515
+  source_atom_revision: 5
+  source_sha256: 198406a9363d62164bdf9bd7edb52448a74c95dbd8aebaa89acc79f84fafe950
+  original_relations_sha256: de61e7999cee53d072b99dfe97e51bb9b3051fc8ae35683a243a90c39dd7c0d8
 ---
 # Summary
 

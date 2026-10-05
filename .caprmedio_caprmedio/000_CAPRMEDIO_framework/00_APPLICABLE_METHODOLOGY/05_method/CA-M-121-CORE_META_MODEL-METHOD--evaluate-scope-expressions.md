@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-121-CORE_META_MODEL-METHOD--evaluate-scope-expressions.md
+  source_atom_id: CA-M-121
+  source_atom_revision: 17
+  source_sha256: 6b5139e9e507051863dcac7faa4eb75fb70cd38592e68bf05914e9dc6accdb14
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Evaluate Scope Expressions

@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-475-CORE_META_MODEL-STANDARD--serialize-the-plan-backlog-directory.md
+  source_atom_id: CA-D-475
+  source_atom_revision: 4
+  source_sha256: ca52f96efabd9dada8b13bb3e7a7ef52f21be88988d95d1b216069854122417e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

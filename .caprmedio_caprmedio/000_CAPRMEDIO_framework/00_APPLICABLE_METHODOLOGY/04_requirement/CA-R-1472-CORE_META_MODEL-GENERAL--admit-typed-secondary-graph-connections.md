@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1472-CORE_META_MODEL-GENERAL--admit-typed-secondary-graph-connections.md
+  source_atom_id: CA-R-1472
+  source_atom_revision: 5
+  source_sha256: c4ae524cad97b270246272ec9604e243318a8eba5cdd32bae80e4c8e13cacd5e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

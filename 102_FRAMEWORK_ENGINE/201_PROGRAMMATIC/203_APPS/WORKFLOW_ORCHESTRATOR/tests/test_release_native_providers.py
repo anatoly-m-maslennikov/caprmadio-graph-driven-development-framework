@@ -8,6 +8,7 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass
 from pathlib import Path
+import re
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -27,6 +28,22 @@ from release_image import DockerSubprocessExecutor
 from selected_execution import SelectedExecution, SelectedExecutionError, build_requested_runs
 from selected_native_providers import SelectedNativeProviders
 from workflow_run_support import RunExecutionSession
+
+
+CURRENT_RELEASE_PHASES = (
+    ("CA-O-170", "CA-O-165", "freeze"),
+    ("CA-O-171", "CA-O-165", "validate"),
+    ("CA-O-172", "CA-O-166", "deliver_sources"),
+    ("CA-O-173", "CA-O-166", "compile"),
+    ("CA-O-185", "CA-O-168", "closed_unit_gate"),
+    ("CA-O-175", "CA-O-167", "stage_candidate"),
+    ("CA-O-176", "CA-O-168", "candidate_image_build"),
+    ("CA-O-186", "CA-O-168", "candidate_image_canary"),
+    ("CA-O-182", "CA-O-181", "host_candidate_e2e"),
+    ("CA-O-184", "CA-O-183", "aggregate_full_gate"),
+    ("CA-O-178", "CA-O-169", "promote"),
+    ("CA-O-179", "CA-O-169", "retire"),
+)
 
 
 @dataclass(frozen=True)
@@ -63,20 +80,28 @@ class ReleaseSourceBindingTests(unittest.TestCase):
         )
         text = source.read_text(encoding="utf-8")
         self.assertIn("atom_id: CA-O-164", text)
-        self.assertIn("version: 3", text)
+        self.assertIn("version: 5", text)
+        source_pairs = tuple(re.findall(
+            r"^\| (CA-O-\d+) \| (CA-O-\d+) \| ([a-z0-9_]+) \|$", text, flags=re.MULTILINE,
+        ))
+        self.assertEqual(CURRENT_RELEASE_PHASES, source_pairs)
+
+    def test_private_provider_phase_contract_matches_current_o164_graph(self):
+        self.assertEqual(CURRENT_RELEASE_PHASES, release_actions.PHASES)
 
 
 class ReleaseNativeProvidersTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory()
+        self.temporary = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
         self.parameters = {"project_root": str(self.root), "operation": "apply", "fixture": True}
-        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 3),
+        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 5),
                       "entry_step": "CA-O-170", "steps": []}
         for index, (step, action, _phase) in enumerate(release_actions.PHASES):
             edge = {"result": f"phase_{index}"}
-            edge.update({"next": release_actions.PHASES[index + 1][0]} if index < 9 else {"terminal": "completed"})
+            edge.update({"next": release_actions.PHASES[index + 1][0]}
+                        if index < len(release_actions.PHASES) - 1 else {"terminal": "completed"})
             self.graph["steps"].append({**self.binding(step, "step"),
                                         "actions": [self.binding(action, "action")], "on_result": [edge]})
         self.admitted = {"release_source_admissions": [{"fixture": True}], "manifest_ref": "manifest.json",
@@ -179,18 +204,18 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.assertIsInstance(admission, release_actions.AdmittedImageExecutor)
         self.assertIsInstance(admission.executor, DockerSubprocessExecutor)
 
-    def test_complete_ten_phase_graph_uses_one_private_run_and_shared_session(self):
+    def test_complete_current_phase_graph_uses_one_private_run_and_shared_session(self):
         selected = self.providers()
         result = selected._execute_graph(self.frozen, self.session)
         self.assertEqual(result["outcome"], "completed")
         self.assertEqual(self.begin.call_count, 1)
-        self.assertEqual(self.execute.call_count, 10)
-        self.assertEqual(len(self.session.actual), 21)
-        self.assertEqual(len(self.session.terminal), 21)
-        self.assertEqual(len(self.tracker.events), 42)
+        self.assertEqual(self.execute.call_count, len(release_actions.PHASES))
+        self.assertEqual(len(self.session.actual), 1 + 2 * len(release_actions.PHASES))
+        self.assertEqual(len(self.session.terminal), 1 + 2 * len(release_actions.PHASES))
+        self.assertEqual(len(self.tracker.events), 2 * (1 + 2 * len(release_actions.PHASES)))
         self.assertEqual(len(self.private_runs), 1)
         self.assertTrue(callable(self.private_runs[0].checkpoint_callback))
-        self.assertEqual(self.dump_checkpoint.call_count, 10)
+        self.assertEqual(self.dump_checkpoint.call_count, len(release_actions.PHASES))
         typed = [call.kwargs["context"] for call in self.execute.call_args_list]
         self.assertEqual([(item.step_atom_id, item.action_atom_id) for item in typed],
                          [phase[:2] for phase in release_actions.PHASES])

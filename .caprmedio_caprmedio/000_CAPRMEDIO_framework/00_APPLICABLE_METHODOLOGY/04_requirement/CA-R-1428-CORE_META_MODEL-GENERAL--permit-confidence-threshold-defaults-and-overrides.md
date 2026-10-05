@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1428-CORE_META_MODEL-GENERAL--permit-confidence-threshold-defaults-and-overrides.md
+  source_atom_id: CA-R-1428
+  source_atom_revision: 9
+  source_sha256: 8bf145b5175d143954ac403bb11247fc8d2a74168881ed607260b1fb66c2c075
+  original_relations_sha256: b9ddd5f70b093dcd4d45ab17e845ea6ec539b7ffb12ebf514ff45f075ec5936d
 ---
 # Summary
 

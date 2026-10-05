@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1491-CORE_META_MODEL-CORE-REQUIREMENT--keep-project-validation-out-of-journal-admission.md
+  source_atom_id: CA-R-1491
+  source_atom_revision: 6
+  source_sha256: e5f83066ff0b497d4fa4a9781b10b10ae5de6161a88b7eaa95af45b7bebfc937
+  original_relations_sha256: 9924b6ff7c6932dfffb0d4989dcbbd73519db955518463bb61a9ef1a4be43d59
 ---
 # Summary
 

@@ -24,6 +24,10 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-022-CORE_META_MODEL-ACTION--resolve-and-activate-operator-priorities.md
+  source_atom_id: CA-O-022
+  source_atom_revision: 6
+  source_sha256: 44e316259ddd26c107c4ae3d5b468857f58440f6161f7b203006c45fa3227a7c
+  original_relations_sha256: 6bed8d41cbd7d52168cdd7e51dd4f6908abe8e316b7f83b5bc478ba64412d785
 ---
 # Resolve and activate Operator priorities
 

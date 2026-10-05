@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1409-CORE_META_MODEL-CORE--define-general-artifact-graph.md
+  source_atom_id: CA-R-1409
+  source_atom_revision: 8
+  source_sha256: 3a076773130957430f7c9ee585d8199643cb83edba9e90d60b049ce3d0880069
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

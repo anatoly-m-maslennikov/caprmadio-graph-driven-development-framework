@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1222-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--defer-caprmedio-specific-extension-packaging.md
+  source_atom_id: CA-R-1222
+  source_atom_revision: 10
+  source_sha256: 70e2ea491eae2a3388a7b86fcc5677ccb3b99e67d15061c18d04ec1e743fbe53
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1789-CORE_META_MODEL-GENERAL--provide-self-contained-agentic-step-invocation-payloads.md
+  source_atom_id: CA-R-1789
+  source_atom_revision: 1
+  source_sha256: 4ae58bbfdd3ba4497b86011788c85efce40585e4c580c9581404e9627bd346ef
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

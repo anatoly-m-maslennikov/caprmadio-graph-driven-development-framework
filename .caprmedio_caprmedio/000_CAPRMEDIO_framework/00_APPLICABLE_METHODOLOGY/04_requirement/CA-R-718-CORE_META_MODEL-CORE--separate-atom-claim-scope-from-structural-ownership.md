@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-718-CORE_META_MODEL-CORE--separate-atom-claim-scope-from-structural-ownership.md
+  source_atom_id: CA-R-718
+  source_atom_revision: 22
+  source_sha256: 6f8b6e7119e86eadcc9ad7a38dbaed1d8a28f9c2f84bac06032507eefba3e21d
+  original_relations_sha256: 868eac844141c4cf0b077b00bddf6f56fd5513a31eee2000992d30643acfad35
 ---
 # Summary
 

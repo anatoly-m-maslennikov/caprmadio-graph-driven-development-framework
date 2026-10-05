@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-288-CORE_META_MODEL-DELIVERY--serialize-draft-atom-filenames-with-an-empty-number.md
+  source_atom_id: CA-D-288
+  source_atom_revision: 12
+  source_sha256: 20e84e78dd39241773a5434693dd8fe4a308d1dffd043cd656eec8e6f9306551
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Serialize Draft Atom Filenames with an Empty Number

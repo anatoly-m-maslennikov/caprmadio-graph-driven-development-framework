@@ -22,6 +22,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-441-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--evaluate-retry-budget-and-escalation.md
+  source_atom_id: CA-E-441
+  source_atom_revision: 13
+  source_sha256: aa65c9e7bb5d8607a5a2286541ea13dc30629a0e76dc5219cf7f380facba9ec4
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

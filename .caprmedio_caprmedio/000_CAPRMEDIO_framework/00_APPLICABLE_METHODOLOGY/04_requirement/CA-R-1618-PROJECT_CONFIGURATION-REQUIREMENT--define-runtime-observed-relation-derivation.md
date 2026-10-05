@@ -25,6 +25,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1618-PROJECT_CONFIGURATION-REQUIREMENT--define-runtime-observed-relation-derivation.md
+  source_atom_id: CA-R-1618
+  source_atom_revision: 4
+  source_sha256: 4bd0256dcfbb37226f87645c5b0f77410945bb8a3f5fd48efbfeb02c801b382f
+  original_relations_sha256: 9498a3bf925a4c9ab02a1ce984d38e81a4cea3f350b87deeacc61ca5f1581a30
 ---
 # Summary
 

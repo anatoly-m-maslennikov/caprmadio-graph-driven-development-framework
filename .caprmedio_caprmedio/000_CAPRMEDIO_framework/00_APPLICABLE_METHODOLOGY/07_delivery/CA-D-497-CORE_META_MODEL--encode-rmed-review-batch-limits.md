@@ -19,6 +19,10 @@ subjects:
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-497-CORE_META_MODEL--encode-rmed-review-batch-limits.md
+  source_atom_id: CA-D-497
+  source_atom_revision: 3
+  source_sha256: 1a689616605c762c43f95dbc5779b3203210c9b9df37d237c1579207e58a080e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

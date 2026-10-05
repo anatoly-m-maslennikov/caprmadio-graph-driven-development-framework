@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-273-CORE_META_MODEL--derive-ownership-and-claim-target-atom-sets.md
+  source_atom_id: CA-M-273
+  source_atom_revision: 13
+  source_sha256: 2f2a40037201679c18e7b0722f1d1fa26796758b7f797b575df0574c0a4e26ef
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

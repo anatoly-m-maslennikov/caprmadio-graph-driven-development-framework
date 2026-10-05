@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1707-CORE_META_MODEL-CORE-REQUIREMENT--make-requirement-the-only-universally-mandatory-atom.md
+  source_atom_id: CA-R-1707
+  source_atom_revision: 18
+  source_sha256: 20ffb45226456869e9ac731dd992f6692a18ac63a2a46559debad518d6477ed2
+  original_relations_sha256: 1d97b712aab203a6ed7c4b1ef6988c7cde1b88a74df8e146138ebc82f84203cd
 ---
 # Summary
 

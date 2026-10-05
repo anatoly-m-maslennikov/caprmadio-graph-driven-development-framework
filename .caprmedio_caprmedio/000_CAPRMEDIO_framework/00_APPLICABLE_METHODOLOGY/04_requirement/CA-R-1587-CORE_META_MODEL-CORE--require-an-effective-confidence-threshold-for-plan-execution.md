@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1587-CORE_META_MODEL-CORE--require-an-effective-confidence-threshold-for-plan-execution.md
+  source_atom_id: CA-R-1587
+  source_atom_revision: 4
+  source_sha256: e2c13e07ba539b05959868169d761d18746b26e583abbccde1d55b1ee64b4523
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

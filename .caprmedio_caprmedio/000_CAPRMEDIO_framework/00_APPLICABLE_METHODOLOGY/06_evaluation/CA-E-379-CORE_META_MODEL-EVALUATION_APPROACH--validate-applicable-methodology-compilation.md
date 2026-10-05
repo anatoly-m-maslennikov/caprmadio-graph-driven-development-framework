@@ -35,6 +35,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-379-CORE_META_MODEL-EVALUATION_APPROACH--validate-applicable-methodology-compilation.md
+  source_atom_id: CA-E-379
+  source_atom_revision: 21
+  source_sha256: db46fe91bf39c16f4c1f833848f2e073096812f8f1f8b6c8edfd393adae5a023
+  original_relations_sha256: 4d75dd368f1379a3981e2860afca1b710fa2dfb2213461b7d467333060bf8338
 ---
 # Summary
 

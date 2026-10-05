@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-123-CORE_META_MODEL-METHOD--write-definitions-of-done.md
+  source_atom_id: CA-M-123
+  source_atom_revision: 17
+  source_sha256: 5aaaa1e47a069d6a24f00fe4b1a4f5e81353bf9b03b2c9131ffd5315d72f49a3
+  original_relations_sha256: 2aa0ce80741420b4d4117c8549859b37a61bda9c2552dbc2b69af35c0950c329
 ---
 # Summary
 

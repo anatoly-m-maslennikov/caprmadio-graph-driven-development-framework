@@ -23,6 +23,10 @@ subjects:
 relations: {"relates_to":["CA-O-111"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-110-CORE_META_MODEL-STEP--repair-the-evaluated-rmed-review-batch.md
+  source_atom_id: CA-O-110
+  source_atom_revision: 6
+  source_sha256: b988a4b68f6f34b78c17bc6a66cf9646c2c3b21c4ce45910e65d67f80f506ae5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

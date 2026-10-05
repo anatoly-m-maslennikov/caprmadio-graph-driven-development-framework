@@ -10,7 +10,8 @@ import shutil
 import subprocess
 import sys
 import unittest
-from dataclasses import replace
+import xml.etree.ElementTree as ET
+from dataclasses import asdict, replace
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -23,12 +24,13 @@ for path in (RELEASE_ROOT, TEST_ROOT):
         sys.path.insert(0, str(path))
 
 from release_compilation import build_preflight_validated_candidate, render_release_candidate  # noqa: E402
-from release_contract import ReleaseContractError  # noqa: E402
+from release_contract import ReleaseContractError, canonical_json  # noqa: E402
 from release_handoff import CANONICAL_SOURCE_RELATIVE, tree_sha256  # noqa: E402
 from release_inventory import ReleaseInventoryError  # noqa: E402
 from release_packaging import ReleasePackagingError, _render_manifest, stage_framework_package  # noqa: E402
 from release_suite import (  # noqa: E402
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
+    COMPILED_PROBE_TEST_MODULE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     MODULE_RULES_RELATIVE,
     PROJECT_ROOT_ENVIRONMENT_VARIABLE,
@@ -45,6 +47,13 @@ from release_suite import (  # noqa: E402
     execute_bound_release_suite,
     verify_bound_suite_evidence,
 )
+from release_test_phases import CANDIDATE_E2E_MODULES, derive_test_phase_map_from_rows  # noqa: E402
+from release_e2e_gate import (  # noqa: E402
+    DEFAULT_RELEASE_E2E_LIMITS,
+    DRIVER_RELATIVE as E2E_DRIVER_RELATIVE,
+    GRAMMAR_RELATIVE as E2E_GRAMMAR_RELATIVE,
+)
+from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
 import test_release_compilation as compilation_test  # noqa: E402
 
 
@@ -62,6 +71,20 @@ bindings = json.loads(bindings_bytes)
 assert bindings == json.loads(json.dumps(bindings, sort_keys=True, separators=(",", ":")))
 rows = {row["source_path"]: row for row in bindings["package_rows"]}
 assert bindings["schema_version"] == 2
+candidate_e2e_modules = {
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_query_mcp_e2e.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_workflows_docker_e2e.py",
+}
+test_modules = {
+    path for path in rows if Path(path).name.startswith("test_") and path.endswith(".py")
+}
+assert candidate_e2e_modules <= test_modules
+phase_rows = [
+    [path, rows[path]["sha256"], "candidate_e2e" if path in candidate_e2e_modules else "unit"]
+    for path in sorted(test_modules)
+]
+phase_map_sha256 = hashlib.sha256(json.dumps(phase_rows, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 assert len(bindings["control_context_digest"]) == 64
 for reference in bindings["reference_rows"]:
     assert (root / reference["source_path"]).read_bytes()
@@ -72,6 +95,7 @@ assert hashlib.sha256(rules_path.read_bytes()).hexdigest() == rules_ref["sha256"
 rules = json.loads(rules_path.read_bytes())
 assert rules == json.loads(json.dumps(rules, sort_keys=True, separators=(",", ":")))
 module_probes = rules["module_probes"]
+assert {item["test_module_source_path"] for item in module_probes} == test_modules - candidate_e2e_modules
 print("actual stdout:" + literal, flush=True)
 print("actual stderr", file=sys.stderr, flush=True)
 if mode == "timeout":
@@ -92,7 +116,11 @@ if mode == "compiled-omitted":
     ]
 report = ET.Element(
     "testsuite", tests=str(len(module_probes)), failures="0", errors="0", skipped="0",
-    **{"caprmedio.control_context_digest": bindings["control_context_digest"]},
+    **{
+        "caprmedio.phase": "unit",
+        "caprmedio.phase_map_sha256": phase_map_sha256,
+        "caprmedio.control_context_digest": bindings["control_context_digest"],
+    },
 )
 sources = []
 for item in module_probes:
@@ -140,7 +168,7 @@ if mode == "settings":
 if mode == "journal":
     journal = root / ".caprmedio_caprmedio/_journal/release.jsonl"
     journal.parent.mkdir(parents=True, exist_ok=True)
-    journal.write_text('{"forged":true}\n')
+    journal.write_text('{"forged":true}\\n')
 if mode == "fail":
     sys.exit(17)
 '''
@@ -179,6 +207,10 @@ class FixtureSandboxExecutor:
         if self.start_error:
             raise FileNotFoundError("deliberate fixture start failure")
         if tuple(command) == SUITE_DRIVER_COMMAND:
+            # The explicit local fixture uses the test interpreter; the sealed
+            # production argv still names the interpreter in the verified N
+            # image, which is unavailable from the stripped host fixture PATH.
+            rewritten[0] = sys.executable
             rewritten.extend((self.mode, self.literal))
         stdout_path, stderr_path = output_root / "fixture.stdout", output_root / "fixture.stderr"
         with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
@@ -254,11 +286,59 @@ class ReleaseSuiteTests(unittest.TestCase):
         self.fixture.setUp()
         self.addCleanup(self.fixture.doCleanups)
         self.root = self.fixture.root
+        # These pinned controls and synthetic module bytes exist only in the
+        # disposable Project.  Real readers validate the resulting context;
+        # this setup does not constitute live Unit or candidate E2E proof.
+        copy_control_closure(RELEASE_ROOT.parents[3], self.root)
+        self._seed_phase_modules()
         # Every test suite invocation explicitly receives this approved
         # disposable executor.  The production path has no host-process or
         # implicit global-executor fallback.
         self.executor = FixtureSandboxExecutor(self.root)
         (self.root / "suite-work").mkdir()
+
+    def _seed_phase_modules(self) -> None:
+        methodology_control = self.fixture.core.relative_to(self.root).as_posix()
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
+            ("[release_e2e]\n" + "".join(
+                f"{name} = {value}\n" for name, value in asdict(DEFAULT_RELEASE_E2E_LIMITS).items()
+            )).encode(),
+        )
+        probes = {
+            COMPILED_PROBE_TEST_MODULE: [methodology_control],
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_fixture_tools.py": [
+                methodology_control, "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py",
+            ],
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/tests/test_fixture_apps.py": [
+                "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py",
+            ],
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/tests/test_fixture_mcp.py": [
+                "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py",
+            ],
+            "102_FRAMEWORK_ENGINE/202_AGENTIC/tests/test_fixture_agentic.py": [
+                "102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md",
+                "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md",
+                "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml",
+            ],
+        }
+        for module in sorted(probes):
+            self.fixture.write(module, b"# Synthetic sealed carrier, never live Release proof.\ndef test_fixture():\n    assert True\n")
+        for relative in (*CANDIDATE_E2E_MODULES, E2E_DRIVER_RELATIVE, E2E_GRAMMAR_RELATIVE):
+            source = RELEASE_ROOT.parents[3] / relative
+            target = self.root / relative
+            if not target.exists():
+                self.fixture.write(relative, source.read_bytes(), source.stat().st_mode & 0o777)
+            else:
+                self.assertEqual(target.read_bytes(), source.read_bytes())
+                self.assertEqual(target.stat().st_mode & 0o777, source.stat().st_mode & 0o777)
+        rules = []
+        for module, sources in sorted(probes.items()):
+            rule = {"test_module_source_path": module, "source_paths": sorted(sources)}
+            if module == COMPILED_PROBE_TEST_MODULE:
+                rule["compiled_candidate_probe"] = True
+            rules.append(rule)
+        self.fixture.write(MODULE_RULES_RELATIVE, canonical_json({"schema_version": 1, "module_probes": rules}))
 
     def execute_suite(self, candidate, compilation, *, timeout_seconds: float = 900):
         return execute_bound_release_suite(
@@ -451,6 +531,13 @@ class ReleaseSuiteTests(unittest.TestCase):
         self.assertEqual(result.coverage, ("Agentic", "Apps", "MCP", "Methodology", "Skill", "Tools"))
         self.assertEqual(result.command, tuple(self.command))
         evidence = self.root / result.evidence_root
+        phase_map = derive_test_phase_map_from_rows(compilation.package_rows)
+        report = ET.fromstring((evidence / "coverage.xml").read_bytes())
+        self.assertEqual(phase_map.candidate_e2e_paths, CANDIDATE_E2E_MODULES)
+        self.assertEqual({case.get("classname") for case in report.iter("testcase")}, set(phase_map.unit_paths))
+        self.assertEqual(report.get("caprmedio.phase"), "unit")
+        self.assertEqual(report.get("caprmedio.phase_map_sha256"), phase_map.sha256)
+        self.assertEqual(result.phase_map_sha256, phase_map.sha256)
         stdout = (evidence / "stdout.bin").read_bytes()
         self.assertIn(b"$HOME;$(should-stay-literal)", stdout)
         self.assertEqual(hashlib.sha256(stdout).hexdigest(), result.stdout_sha256)
@@ -474,6 +561,8 @@ class ReleaseSuiteTests(unittest.TestCase):
         self.assertEqual(verify_bound_suite_evidence(candidate, compilation, result), self.root)
         with self.assertRaises(ReleaseContractError):
             verify_bound_suite_evidence(candidate, compilation, replace(result, executed_tests=999))
+        with self.assertRaises(ReleaseContractError):
+            verify_bound_suite_evidence(candidate, compilation, replace(result, phase_map_sha256="0" * 64))
         (self.root / result.evidence_root / "stdout.bin").write_bytes(b"changed")
         with self.assertRaises(ReleaseContractError) as raised:
             verify_bound_suite_evidence(candidate, compilation, result)
@@ -486,7 +575,7 @@ class ReleaseSuiteTests(unittest.TestCase):
         (self.root / ".agents/skills/ca/SKILL.md").write_bytes(b"changed after suite")
         with self.assertRaises(ReleaseContractError) as raised:
             verify_bound_suite_evidence(candidate, compilation, result)
-        self.assertEqual(raised.exception.code, "release-active-n-invalid")
+        self.assertEqual(raised.exception.code, "release-suite-evidence-mismatch")
 
     def test_actual_nonzero_exit_never_passes_even_with_complete_report(self) -> None:
         candidate, compilation = self.bound("fail")

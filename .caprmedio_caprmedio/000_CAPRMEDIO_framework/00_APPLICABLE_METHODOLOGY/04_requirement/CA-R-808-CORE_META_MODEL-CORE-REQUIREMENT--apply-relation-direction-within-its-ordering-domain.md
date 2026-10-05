@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-808-CORE_META_MODEL-CORE-REQUIREMENT--apply-relation-direction-within-its-ordering-domain.md
+  source_atom_id: CA-R-808
+  source_atom_revision: 18
+  source_sha256: 497adbeca50b7b5dfa93a0b32bb75048640c3b7ee40c185c1562f96e0308c14f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

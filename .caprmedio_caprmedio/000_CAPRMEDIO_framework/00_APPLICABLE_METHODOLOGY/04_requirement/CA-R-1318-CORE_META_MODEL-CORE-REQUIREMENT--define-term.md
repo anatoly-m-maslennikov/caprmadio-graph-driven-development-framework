@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1318-CORE_META_MODEL-CORE-REQUIREMENT--define-term.md
+  source_atom_id: CA-R-1318
+  source_atom_revision: 11
+  source_sha256: b30f5d73b9c4aff8cfc69c228a2ed4759c9d260297162cea46d0f42b75dd6e6b
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

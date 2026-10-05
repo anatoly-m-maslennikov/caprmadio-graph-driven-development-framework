@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-932-CORE_META_MODEL-CORE-REQUIREMENT--define-demand-atom.md
+  source_atom_id: CA-R-932
+  source_atom_revision: 21
+  source_sha256: d471f827067c6db2a5020ab6634a210caae500f00d631a92c5d0f86df5c82f36
+  original_relations_sha256: 8c48d07682f7742193d2b400e5432116c42c0465013e1dadd3b1b1dfc4e3d146
 ---
 # Summary
 

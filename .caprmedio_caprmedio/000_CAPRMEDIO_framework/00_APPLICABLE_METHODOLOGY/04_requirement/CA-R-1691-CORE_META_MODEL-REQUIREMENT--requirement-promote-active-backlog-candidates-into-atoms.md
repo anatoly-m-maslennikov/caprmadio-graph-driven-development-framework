@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1691-CORE_META_MODEL-REQUIREMENT--requirement-promote-active-backlog-candidates-into-atoms.md
+  source_atom_id: CA-R-1691
+  source_atom_revision: 21
+  source_sha256: 4fc85bd5eb791489fef2e8df76020d75cb851f6d074fc87a8adf565b4844d561
+  original_relations_sha256: e993fdf9eb607df60577f31e29a8ec9b4a45c5634135598de949b7c4c4432a61
 ---
 # Summary
 

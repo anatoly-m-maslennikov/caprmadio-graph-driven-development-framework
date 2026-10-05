@@ -318,10 +318,10 @@ class SelectedNativeProviders:
                 or execution.get("mode") != "execute"
                 or graph.get("route") != "release_version"
                 or graph.get("workflow", {}).get("atom_id") != "CA-O-164"
-                # The admitted source is the current O164@3 graph.  This is
+                # The admitted source is the current O164@5 graph.  This is
                 # deliberately an equality to the source admission, rather
-                # than the retired hard-coded @2 provider contract.
-                or graph["workflow"].get("version") != 3
+                # than a retired provider contract.
+                or graph["workflow"].get("version") != 5
                 or not admitted.get("release_source_admissions")
                 or execution.get("definition_manifest") != {"manifest_ref": admitted["manifest_ref"],
                     "manifest_digest": admitted["canonical_manifest_sha256"]}
@@ -331,7 +331,7 @@ class SelectedNativeProviders:
         pairs = [(step.get("atom_id"), step.get("actions", [{}])[0].get("atom_id")) for step in steps
                  if isinstance(step, Mapping) and isinstance(step.get("actions"), list) and len(step["actions"]) == 1]
         if pairs != [phase[:2] for phase in PHASES] or len(steps) != len(PHASES):
-            raise SelectedExecutionError("Release frozen Step/Action occurrences differ from the admitted ten phases")
+            raise SelectedExecutionError("Release frozen Step/Action occurrences differ from the admitted source phases")
 
         def expected_result_for(index: int) -> str:
             """Resolve one frozen graph result; never infer it from progress."""
@@ -492,7 +492,7 @@ class SelectedNativeProviders:
                         or (item.step_atom_id, item.action_atom_id) != pairs[saved_index]
                         for saved_index, item in restored.contexts.items()
                     ):
-                        return self._blocked("Release checkpoint contexts differ from the exact current source-3 graph")
+                        return self._blocked("Release checkpoint contexts differ from the exact current source-5 graph")
                     private_run = restored
                     shared_recordings = dict(restored_recordings)
                     try:

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1675-PROJECT_CONFIGURATION--define-method-binding-as-a-type-value-for-method-atoms.md
+  source_atom_id: CA-R-1675
+  source_atom_revision: 20
+  source_sha256: 2ac1145885651a20ca7971d3dd64e21a40dfd1e6629790140d0800e142445cb3
+  original_relations_sha256: 7e36832165b0eda8ef68d48c593099b0e9b80e2b8e3b6774e861b19683faf867
 ---
 # Summary
 

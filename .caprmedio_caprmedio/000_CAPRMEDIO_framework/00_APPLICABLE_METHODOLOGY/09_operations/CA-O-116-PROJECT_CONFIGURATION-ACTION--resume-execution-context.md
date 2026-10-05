@@ -24,6 +24,10 @@ relations:
   relates_to: [CA-R-1808, CA-D-516]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-116-PROJECT_CONFIGURATION-ACTION--resume-execution-context.md
+  source_atom_id: CA-O-116
+  source_atom_revision: 1
+  source_sha256: f4dd57a47eeae6931591e46596495f462567dccfb99c6bd514696cd6c820ce5d
+  original_relations_sha256: 2bab61be527ae364466eaac7e245ea5c6eff60357168e5f436517e416dd6eeb7
 ---
 # Summary
 

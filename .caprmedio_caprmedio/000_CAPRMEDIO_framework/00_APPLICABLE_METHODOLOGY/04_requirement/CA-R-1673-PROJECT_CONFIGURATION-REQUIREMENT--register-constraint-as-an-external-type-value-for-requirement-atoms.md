@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1673-PROJECT_CONFIGURATION-REQUIREMENT--register-constraint-as-an-external-type-value-for-requirement-atoms.md
+  source_atom_id: CA-R-1673
+  source_atom_revision: 23
+  source_sha256: d3e7be671382c40955ca50c006b0bc4368d03ce5f4a8c7d4705d86207dafa191
+  original_relations_sha256: 704504189c4c75fbd2fed4969ad540c4dcb418e4a1db7e1f214f3a2e21a3f89f
 ---
 # Summary
 

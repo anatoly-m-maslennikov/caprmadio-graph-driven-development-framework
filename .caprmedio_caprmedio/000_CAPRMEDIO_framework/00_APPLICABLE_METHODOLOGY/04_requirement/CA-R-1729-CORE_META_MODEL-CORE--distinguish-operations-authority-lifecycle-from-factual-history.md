@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1729-CORE_META_MODEL-CORE--distinguish-operations-authority-lifecycle-from-factual-history.md
+  source_atom_id: CA-R-1729
+  source_atom_revision: 16
+  source_sha256: c50c68fea59b4168b3b694b09e453d220d31feb3166b9cc908ba827a81f2ee96
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

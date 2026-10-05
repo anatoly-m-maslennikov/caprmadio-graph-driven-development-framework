@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1454-CORE_META_MODEL-GENERAL--derive-governed-terms-views-from-selected-authority.md
+  source_atom_id: CA-R-1454
+  source_atom_revision: 7
+  source_sha256: bab78ca52edb070123af5d40dd61fe4f44cf70941253aeb6aaf9deab0a5283f5
+  original_relations_sha256: e1b78d5732a22f1a249523c8a80f9e751fb887dee7a89eaec9dd1b3fc06664b1
 ---
 # Summary
 

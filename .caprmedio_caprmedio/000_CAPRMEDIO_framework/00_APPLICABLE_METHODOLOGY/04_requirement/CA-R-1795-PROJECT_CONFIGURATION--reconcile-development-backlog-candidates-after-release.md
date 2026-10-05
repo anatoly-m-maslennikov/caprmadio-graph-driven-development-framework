@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1795-PROJECT_CONFIGURATION--reconcile-development-backlog-candidates-after-release.md
+  source_atom_id: CA-R-1795
+  source_atom_revision: 1
+  source_sha256: a0ddb8b86bcc95ff08ef92336cbc24bd71be5c9fe71710531d4c03121348d6d0
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Reconcile Development Backlog candidates **after** release

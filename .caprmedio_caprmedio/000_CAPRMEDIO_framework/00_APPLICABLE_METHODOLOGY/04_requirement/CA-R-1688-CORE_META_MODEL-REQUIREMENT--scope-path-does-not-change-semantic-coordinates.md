@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1688-CORE_META_MODEL-REQUIREMENT--scope-path-does-not-change-semantic-coordinates.md
+  source_atom_id: CA-R-1688
+  source_atom_revision: 24
+  source_sha256: 7b5cf238bd6f1d4f928c6016300c2727440aff2ff5761d4684693a6b8d44deb1
+  original_relations_sha256: 72ddfdc0667725e6e9f7d88a8543eef5c2f84deeda1c3f0e29608a221a378b9d
 ---
 # Summary
 

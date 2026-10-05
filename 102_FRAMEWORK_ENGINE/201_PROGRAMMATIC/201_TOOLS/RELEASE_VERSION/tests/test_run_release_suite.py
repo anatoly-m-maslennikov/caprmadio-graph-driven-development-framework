@@ -17,6 +17,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 import xml.etree.ElementTree as ET
 
 
@@ -52,7 +53,13 @@ CANDIDATE_DIGEST = "a" * 64
 
 sys.path.insert(0, str(RELEASE_VERSION_ROOT))
 import run_release_suite as suite_driver  # noqa: E402
+from release_test_phases import (  # noqa: E402
+    CANDIDATE_E2E_MODULES,
+    ReleaseTestPhaseMap,
+    derive_test_phase_map_from_rows,
+)
 from release_suite_reference_context import capture_context  # noqa: E402
+from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
 
 
 REPOSITORY = RELEASE_VERSION_ROOT.parents[3]
@@ -94,6 +101,51 @@ class ReleaseSuiteGoldenCorpusTests(unittest.TestCase):
         self.assertEqual(len(list(GOLDEN_ROOT.rglob("fixture_test_*.py"))), 17)
 
 
+class ReleaseSuiteUnitPartitionTests(unittest.TestCase):
+    """The isolated suite process may not execute host-gated candidate E2E rows."""
+
+    def test_execute_bound_runs_only_sealed_unit_paths_and_marks_unit_report(self) -> None:
+        unit_path = f"{ENGINE_ROOT}/201_PROGRAMMATIC/201_TOOLS/test_tools.py"
+        phase_rows = tuple(
+            sorted(
+                [(unit_path, "a" * 64, "unit")]
+                + [(path, "b" * 64, "candidate_e2e") for path in CANDIDATE_E2E_MODULES]
+            )
+        )
+        phase_map = ReleaseTestPhaseMap(
+            rows=phase_rows,
+            sha256=hashlib.sha256(_canonical_json(list(phase_rows))).hexdigest(),
+            unit_paths=(unit_path,),
+            candidate_e2e_paths=tuple(sorted(CANDIDATE_E2E_MODULES)),
+        )
+        scratch = Path(tempfile.mkdtemp(prefix="caprmedio-unit-partition-"))
+        inputs = suite_driver.BoundInputs(
+            root=scratch,
+            compiled_root=f"{ENGINE_ROOT}/299_COMPILED_CANDIDATE",
+            candidate_manifest_sha256=CANDIDATE_DIGEST,
+            report_path=scratch / "coverage.xml",
+            envelope_sha256="c" * 64,
+            rows={},
+            reference_rows=(),
+            control_context_digest="d" * 64,
+            phase_map=phase_map,
+            probes=suite_driver.ModuleProbeRules("rules.json", "e" * 64, {}),
+        )
+        invoked: list[str] = []
+
+        def record_module(_inputs, module_path, _results_root):
+            invoked.append(module_path)
+            return [], []
+
+        with mock.patch.object(suite_driver, "_run_module", side_effect=record_module):
+            self.assertEqual(suite_driver._execute_bound(inputs), 1)
+
+        self.assertEqual(invoked, [unit_path])
+        report = ET.parse(inputs.report_path).getroot()
+        self.assertEqual(report.get("caprmedio.phase"), "unit")
+        self.assertEqual(report.get("caprmedio.phase_map_sha256"), phase_map.sha256)
+
+
 class ReleaseSuiteGoldenTests(unittest.TestCase):
     """Exercise complete source discovery and JUnit evidence via the CLI only."""
 
@@ -106,16 +158,10 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
         self.candidate_root = self.project_root / ENGINE_ROOT / "299_COMPILED_CANDIDATE"
         shutil.copytree(GOLDEN_ROOT / "project", self.project_root)
         _materialize_golden_test_payloads(self.project_root)
-        # A schema-2 envelope cannot invent control files.  Capture the live,
-        # source-derived selected-source closure, then reproduce exactly those
-        # regular files in the disposable Project before constructing its rows.
-        source_context = capture_context(REPOSITORY, CONTROL_BINDINGS)
-        for row in source_context.reference_rows:
-            source = REPOSITORY / row.source_path
-            target = self.project_root / row.source_path
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
-            target.chmod(row.mode)
+        # The disposable selector binds the accepted D572 graph using actual
+        # retained source bytes.  Capture/validation still run the real D580
+        # reader against this Project, without requiring a fresh live selector.
+        copy_control_closure(REPOSITORY, self.project_root)
         self.output_root.mkdir()
 
     def _control_context(self):
@@ -333,6 +379,10 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
             ET.parse(report_path).getroot().get("caprmedio.control_context_digest"),
             context.control_context_digest,
         )
+        phase_map = derive_test_phase_map_from_rows(envelope["package_rows"])
+        report = ET.parse(report_path).getroot()
+        self.assertEqual(report.get("caprmedio.phase"), "unit")
+        self.assertEqual(report.get("caprmedio.phase_map_sha256"), phase_map.sha256)
         expected_count = 7
         cases = self._junit_cases(report_path)
         self.assertEqual(sum(map(len, cases.values())), expected_count)
@@ -360,6 +410,12 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
         self.assertTrue(set(CASKILL_PATHS) <= observed_source_paths)
         self.assertIn(COMPILED_PROBE_PATH, observed_source_paths)
         self.assertNotIn(CANDIDATE_PATH, observed_source_paths)
+        self.assertFalse(
+            set(CANDIDATE_E2E_MODULES).intersection(
+                case.get("classname") for rows in cases.values() for case in rows
+            ),
+            "candidate E2E modules are reserved for the host E2E gate",
+        )
 
     def test_failure_error_skip_and_subtest_failure_cannot_pass(self) -> None:
         variants = ("test_failure.py", "test_error.py", "test_skipped.py", "test_subtest_failure.py")

@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1689-CORE_META_MODEL--requirement-close-every-constitutional-amendment.md
+  source_atom_id: CA-R-1689
+  source_atom_revision: 23
+  source_sha256: 529ce352b55356a046df92d0595f44e764ce40a01f46763781e7bd34a9f2156f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

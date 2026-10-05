@@ -23,6 +23,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-494-CORE_META_MODEL-QA_CASE--validate-workflow-run-definition-bindings.md
+  source_atom_id: CA-E-494
+  source_atom_revision: 5
+  source_sha256: 55b1d6c759133d0166335e5bb43bbe061cff344ed71bb44af5e8a2f0f861f3b0
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

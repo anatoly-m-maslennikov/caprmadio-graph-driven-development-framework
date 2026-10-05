@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1563-CORE_META_MODEL-CORE-REQUIREMENT--define-the-workflow-operations-atom-type.md
+  source_atom_id: CA-R-1563
+  source_atom_revision: 6
+  source_sha256: 302bc6369eb00725ed10692d423b17b333f343bf94f49be2e58ee0f042fc226f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

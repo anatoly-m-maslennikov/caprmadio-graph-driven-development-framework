@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-127-CORE_META_MODEL-METHOD--evaluate-set-valued-property-membership.md
+  source_atom_id: CA-M-127
+  source_atom_revision: 15
+  source_sha256: bb09a5845cbff2aef2b4b36e84e452f0e798a9771e177150937453fef30bf64d
+  original_relations_sha256: 565f63e574a87ad14f65da732f938c81a77229348647edb76e4491faccb0d844
 ---
 # Summary
 

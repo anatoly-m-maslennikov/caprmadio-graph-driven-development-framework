@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1463-CORE_META_MODEL-GENERAL-REQUIREMENT--derive-log-views-from-the-shared-journal.md
+  source_atom_id: CA-R-1463
+  source_atom_revision: 7
+  source_sha256: 0e392839c13a6ecf15daa3524edf8649ea8b942d2f2da69169605fe72ffad47b
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

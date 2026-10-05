@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1632-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-lineage-impact-with-four-dispositions.md
+  source_atom_id: CA-R-1632
+  source_atom_revision: 20
+  source_sha256: 345d4038af3b7fd708ddc9111280c32afd65fe7ac8f0cb70ac83948054b52a88
+  original_relations_sha256: 5b250d15fdb96d514af818780bc64934cacc2cdf1c722126d1c874a4ef156e22
 ---
 # Summary
 

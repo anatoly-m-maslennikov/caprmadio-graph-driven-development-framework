@@ -18,6 +18,10 @@ updated_at: "2026-10-03 01:07:45 +0400"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1624-CORE_META_MODEL-CORE-REQUIREMENT--keep-details-within-the-primary-contribution.md
+  source_atom_id: CA-R-1624
+  source_atom_revision: 2
+  source_sha256: d985c624f5c0b92010a3f1a670e2e12ef0d018aa221ce1052faab293060966cf
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1684-CORE_META_MODEL-CORE--separate-analysis-from-factual-execution-records.md
+  source_atom_id: CA-R-1684
+  source_atom_revision: 18
+  source_sha256: 92f5d8efb9c837e4646dbb57a5b27b853e128c6e77df774795400508798fe196
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

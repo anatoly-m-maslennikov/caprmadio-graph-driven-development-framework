@@ -24,6 +24,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-506-CORE_META_MODEL-QA_CASE--validate-self-sufficient-atom-carriers.md
+  source_atom_id: CA-E-506
+  source_atom_revision: 7
+  source_sha256: 0aed2ded8b6ea6704021d6cb0dd464d2dda3af84ab0c5f76875fb81916b03709
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-476-CORE_META_MODEL-CORE-QA_CASE--check-the-journal-storage-boundary.md
+  source_atom_id: CA-E-476
+  source_atom_revision: 5
+  source_sha256: 6ab9828f130133780eb89ea7dac13b3e3cc60134a92ab8a120d31da9a23ea2ae
+  original_relations_sha256: 0bb9bdd707ca608a1c818dea2bc9d515b9d834249c593269b81348c8b6275d01
 ---
 # Summary
 

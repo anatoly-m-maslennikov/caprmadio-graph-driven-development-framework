@@ -26,6 +26,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-487-PROJECT_CONFIGURATION-QA_CASE--validate-workflow-independent-implementation-specifications.md
+  source_atom_id: CA-E-487
+  source_atom_revision: 7
+  source_sha256: aba33421611cd704194b37f6c2c102e370b21f91c1ed381004a72147f8ea2d8d
+  original_relations_sha256: 3be8d238abf4fa0469143bf4fd1ad39a38b573b93a81f03060c92ea3d66512e9
 ---
 # Summary
 

@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-225-CORE_META_MODEL--retrieve-applicable-methodology-mechanically.md
+  source_atom_id: CA-M-225
+  source_atom_revision: 15
+  source_sha256: a5b42abbafdd7458d70e4282e6912f1ac3073ab697caca67d2d262c85d66b4b5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

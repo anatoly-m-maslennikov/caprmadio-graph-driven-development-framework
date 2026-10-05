@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1752-CORE_META_MODEL-CORE--govern-project-adaptation-semantics.md
+  source_atom_id: CA-R-1752
+  source_atom_revision: 19
+  source_sha256: 786a0e7ee618b03c2680615b1f1e56b63b48324113f8a68bead9386dab4bf293
+  original_relations_sha256: 0df5922f56186e87e4c151eebd55348c0bb8fdafa313c6db0f385710a5098712
 ---
 # Summary
 

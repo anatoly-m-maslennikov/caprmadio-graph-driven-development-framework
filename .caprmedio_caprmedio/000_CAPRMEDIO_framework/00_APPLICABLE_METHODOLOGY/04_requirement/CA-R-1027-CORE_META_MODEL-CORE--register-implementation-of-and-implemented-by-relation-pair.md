@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1027-CORE_META_MODEL-CORE--register-implementation-of-and-implemented-by-relation-pair.md
+  source_atom_id: CA-R-1027
+  source_atom_revision: 15
+  source_sha256: da81db4a8fcf73c03994d815f3861a34fdbcc806b3db07d909ffbd98c372a20a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

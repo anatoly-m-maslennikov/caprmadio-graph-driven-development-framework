@@ -15,7 +15,7 @@ subjects:
     - "Framework Instance Settings"
     - "Project Settings"
 version: 11
-updated_at: "2026-09-28 06:30:40 +0400"
+updated_at: "2026-10-04 16:46:08 +0000"
 relations: {}
 atom_id: "CA-O-008"
 content_role: "Operations"
@@ -28,8 +28,16 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-008-CORE_META_MODEL-ACTION--apply-approved-source-corrections.md
+  source_atom_id: CA-O-008
+  source_atom_revision: 11
+  source_sha256: 7dba215459417f680301c03e853579dde655cbd9854d5d270df560e6a31a2a96
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
-# Apply approved source corrections
+# Summary
+
+Apply approved source corrections
+
+## Operation
 
 Apply Approved Source Corrections **means** the reusable Action that applies **only** the exact upstream corrections authorized for the current proposal, conflict, **and** source frontier.
 
@@ -40,3 +48,5 @@ Apply Approved Source Corrections **means** the reusable Action that applies **o
 5. return changed sources for renewed selection, conflict assessment, Principle alignment, **and** affected coverage checks. do **not** report completion **until** required checks confirm no remaining conflict **or** coverage gap **in** the affected authority.
 
 this Action **must not** edit projected Claims as a conflict fix, infer additional corrections, create a duplicate approval Atom, **or** claim completion **after** a failed correction. retries **and** recovery require their applicable accepted authority **and** bounds; this Action does **not** authorize automatic rollback **or** unbounded repetition.
+
+## Details

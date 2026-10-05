@@ -30,6 +30,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-207-CORE_META_MODEL-EVALUATION_APPROACH--evaluate-priority-governed-alternative-selection.md
+  source_atom_id: CA-E-207
+  source_atom_revision: 13
+  source_sha256: d722991a355ed9c72a210150049bc95be05a9f10b0268403ef8bd65bf97f4f5c
+  original_relations_sha256: e2be46359af7cbd5714136dddbc8fa3c5ca2d5156bc6d596b2921d2bb081b0f2
 ---
 # Summary
 

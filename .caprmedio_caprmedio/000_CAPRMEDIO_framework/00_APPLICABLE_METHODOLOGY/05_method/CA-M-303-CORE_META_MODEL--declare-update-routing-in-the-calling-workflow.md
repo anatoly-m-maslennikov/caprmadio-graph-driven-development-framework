@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-303-CORE_META_MODEL--declare-update-routing-in-the-calling-workflow.md
+  source_atom_id: CA-M-303
+  source_atom_revision: 4
+  source_sha256: 2f4c60f6dfc4a019614c0e04a185fc53cf06b88a3a6ddbd580497ff4bb7cf7db
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

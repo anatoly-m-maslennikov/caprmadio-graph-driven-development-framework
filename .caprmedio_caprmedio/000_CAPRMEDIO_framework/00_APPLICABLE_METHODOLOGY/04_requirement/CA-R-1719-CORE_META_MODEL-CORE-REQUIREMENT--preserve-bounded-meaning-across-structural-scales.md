@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1719-CORE_META_MODEL-CORE-REQUIREMENT--preserve-bounded-meaning-across-structural-scales.md
+  source_atom_id: CA-R-1719
+  source_atom_revision: 21
+  source_sha256: cbdc087fb652f6a770bf760e3ca295063cfbacc76101238d2a8522aaf6dc04a8
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

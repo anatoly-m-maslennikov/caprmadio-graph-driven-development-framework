@@ -47,6 +47,7 @@ from release_suite_reference_context import (
     ReleaseSuiteReferenceContext, ReleaseSuiteReferenceContextError,
     capture_context, copy_verified_bytes, revalidate_context, validate_schema2_context,
 )
+from release_test_phases import ReleaseTestPhaseMap, derive_test_phase_map_from_rows
 
 
 EVIDENCE_ROOT = ".caprmedio_runtime/release_suite"
@@ -137,6 +138,7 @@ class SuiteGateEvidence:
     receipt_sha256: str | None
     elapsed_seconds: float
     control_context_digest: str | None = None
+    phase_map_sha256: str | None = None
 
     @property
     def passed(self) -> bool:
@@ -405,6 +407,15 @@ def _coverage_group(destination: str) -> str | None:
     return next((group for prefix, group in prefixes.items() if destination.startswith(prefix)), None)
 
 
+def _unit_phase_map(rows: list[PackageRow]) -> ReleaseTestPhaseMap:
+    """Derive the Unit partition from complete sealed package rows only."""
+
+    phase_map = derive_test_phase_map_from_rows(rows)
+    if not phase_map.unit_paths:
+        raise ReleaseContractError("release-test-phase-unit-set-invalid", "sealed candidate has no Unit test module")
+    return phase_map
+
+
 def _observe_report(
     path: Path,
     root: Path,
@@ -424,6 +435,13 @@ def _observe_report(
         return 0, (), "unsupported coverage report format"
     if report.tag not in {"testsuite", "testsuites"}:
         return 0, (), "unsupported coverage report format"
+    try:
+        phase_map = _unit_phase_map(compilation.package_rows)
+    except ReleaseContractError:
+        return 0, (), "sealed Unit phase map is unavailable or invalid"
+    if (report.get("caprmedio.phase") != "unit"
+            or report.get("caprmedio.phase_map_sha256") != phase_map.sha256):
+        return 0, (), "coverage report Unit phase binding is missing or mismatched"
     if report.get("caprmedio.control_context_digest") != context.control_context_digest:
         return 0, (), "coverage report control-context digest is missing or mismatched"
     cases = list(report.iter("testcase"))
@@ -547,14 +565,9 @@ def _envelope_package_rows(rows: list[PackageRow]) -> list[dict[str, object]]:
 
 
 def _test_module_source_paths(rows: list[PackageRow]) -> tuple[str, ...]:
-    return tuple(sorted(
-        row.source_path
-        for row in rows
-        if (row.resource == "FRAMEWORK_ENGINE"
-            and row.source_path.startswith("102_FRAMEWORK_ENGINE/")
-            and Path(row.source_path).name.startswith("test_")
-            and row.source_path.endswith(".py"))
-    ))
+    """Return only Unit modules from the complete sealed phase assignment."""
+
+    return _unit_phase_map(rows).unit_paths
 
 
 def _validate_module_rules(
@@ -776,6 +789,7 @@ def execute_bound_release_suite(
     if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= 900:
         raise ReleaseContractError("release-suite-timeout-invalid", "suite timeout must be within (0, 900] seconds")
     root = _validate_bound_inputs(candidate, compilation)
+    phase_map = _unit_phase_map(compilation.package_rows)
     environment = candidate.manifest.full_suite_environment
     require_declared_suite_command(environment)
     if os.name != "posix":
@@ -896,7 +910,8 @@ def execute_bound_release_suite(
                                      tests, coverage, relative, stdout_sha, stderr_sha, report_sha,
                                      *active_n_before, None,
                                      time.monotonic() - started,
-                                     control_context_digest=context.control_context_digest if context is not None else None)
+                                     control_context_digest=context.control_context_digest if context is not None else None,
+                                     phase_map_sha256=phase_map.sha256)
         receipt = canonical_json(asdict(evidence))
         _durable_bytes(attempt / "receipt.json", receipt)
         directory_descriptor = os.open(attempt, os.O_RDONLY)
@@ -914,7 +929,8 @@ def execute_bound_release_suite(
                              tests, coverage, relative, stdout_sha, stderr_sha, report_sha,
                              *active_n_before, receipt_sha,
                              time.monotonic() - started,
-                             control_context_digest=context.control_context_digest if context is not None else None)
+                             control_context_digest=context.control_context_digest if context is not None else None,
+                             phase_map_sha256=phase_map.sha256)
 
 
 def verify_bound_suite_evidence(
@@ -928,6 +944,9 @@ def verify_bound_suite_evidence(
     root = _validate_bound_inputs(candidate, compilation)
     if not isinstance(evidence, SuiteGateEvidence) or not evidence.passed:
         raise ReleaseContractError("release-suite-evidence-untrusted", "later admission requires actual successful typed suite evidence")
+    phase_map = _unit_phase_map(compilation.package_rows)
+    if evidence.phase_map_sha256 != phase_map.sha256:
+        raise ReleaseContractError("release-suite-evidence-mismatch", "suite evidence binds a different Unit phase map")
     environment = candidate.manifest.full_suite_environment
     require_declared_suite_command(environment)
     prefix = f"{EVIDENCE_ROOT}/{candidate.manifest.sha256}/"

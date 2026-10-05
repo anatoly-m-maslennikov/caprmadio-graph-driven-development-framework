@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1488-CORE_META_MODEL-REQUIREMENT--define-implementation-retry-limit.md
+  source_atom_id: CA-R-1488
+  source_atom_revision: 6
+  source_sha256: bb0cf786c7048e414a4f9bed02714f906c6828d7969544bb68c3be042a16ca81
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

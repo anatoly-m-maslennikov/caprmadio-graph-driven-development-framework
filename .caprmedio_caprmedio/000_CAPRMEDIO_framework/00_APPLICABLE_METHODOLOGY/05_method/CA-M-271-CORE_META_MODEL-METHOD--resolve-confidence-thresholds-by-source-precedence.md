@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-271-CORE_META_MODEL-METHOD--resolve-confidence-thresholds-by-source-precedence.md
+  source_atom_id: CA-M-271
+  source_atom_revision: 8
+  source_sha256: 1a8af9646ed7959358cfc6e67c77a3efabc242f989719fa9e8ce8fd81ecda79b
+  original_relations_sha256: 497953542e013d49a96769c3dc96da367586703dea19f14dab294a1757de06d4
 ---
 # Summary
 Resolve confidence thresholds by source precedence

@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-304-CORE_META_MODEL--write-self-contained-agentic-action-instructions.md
+  source_atom_id: CA-M-304
+  source_atom_revision: 4
+  source_sha256: 42bac0554e085881c7902a8477792c052a4abda9c8538efc0751410f71044aac
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Write self-contained agentic Action instructions

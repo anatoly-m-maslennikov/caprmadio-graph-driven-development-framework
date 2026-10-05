@@ -28,7 +28,7 @@ subjects:
     - "Version"
     - "Autonomous Confidence Threshold"
 version: 6
-updated_at: "2026-09-18 14:16:20 +0000"
+updated_at: "2026-10-04 15:08:16 +0000"
 relations:
   relates_to:
     - "CA-O-016"
@@ -54,12 +54,20 @@ type: "Workflow"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-025-PROJECT_CONFIGURATION-WORKFLOW--check-release-readiness-when-selected.md
+  source_atom_id: CA-O-025
+  source_atom_revision: 6
+  source_sha256: f7d2e3edc6eaf05d901bd6924a77f7019c98652e8a1ada63ae77bc2c831af43f
+  original_relations_sha256: 7235e8a1c87920355d46c80bdb1426e0d3bd5f0b2a5de186979a007e10713b17
 ---
-# Check release readiness when selected
+# Summary
+
+Check release readiness when selected
+
+## Operation
 
 Release Readiness **means** the configurable Workflow used by this Project **when** the Operator **or** applicable Project Configuration selects a release-readiness check. selection supplies the candidate, the release boundary, required Projections, applicable Evaluations, approval gates, **and** accepted retry limits. missing **or** conflicting selections block execution rather than creating implicit defaults.
 
-## Entry conditions
+### Entry conditions
 
 1. use CA-O-016 for development **and** Implementation repair; do **not** duplicate its implementation loop here.
 2. begin this Workflow **after** the selected candidate's implementation work has completed under CA-O-016 **or** its applicable completion evidence has been validated.
@@ -67,7 +75,7 @@ Release Readiness **means** the configurable Workflow used by this Project **whe
 
 the entry Step is select. interpret Step bindings **and** run boundaries under CA-R-1509, CA-R-1510, **and** CA-R-1511.
 
-## Steps
+### Steps
 
 | Step | Action reference | Parameters **and** inputs |
 |---|---|---|
@@ -80,7 +88,7 @@ the entry Step is select. interpret Step bindings **and** run boundaries under C
 | evaluate | CA-O-020 | the exact candidate **and** selected applicable Evaluations |
 | gate | CA-O-027 | the exact candidate, checked results, required evidence, **and** approvals |
 
-## Transitions
+### Transitions
 
 the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513 **when** the destination is a Step. a terminal outcome ends the Workflow Run; it is **not** another Step **or** Action.
 
@@ -100,10 +108,12 @@ the transitions below use the Workflow-scoped ON_RESULT Relation under CA-R-1513
 | gate — CA-O-027 | changed inputs, missing evidence, **or** unmet approval | report the blocker; do **not** report readiness |
 | **any** Step | failed work, unresolved confidence **or** permission gate, rejected decision, **or** unavailable retry allowance | stop **and** escalate with actual results |
 
-## Execution boundaries
+### Execution boundaries
 
 - reassessment **or** a new candidate does **not** silently reset a retry budget. **every** autonomous revisit requires an applicable accepted allowance; missing **or** exhausted allowance requires Operator disposition.
 - source corrections use CA-O-008's governed revision **or** replacement workflow. projected content **must not** become the correction target.
 - optional Atom consolidation is a separately authorized source change, **not** a mandatory release step.
 - record actual execution outcomes **in** the shared Journal. successful readiness is **not** release execution **and** does **not** freeze a Version under CA-R-1692.
 - this Workflow selects no Git branch, commit, tag, merge, publication, **or** universal Framework Instance workflow setting.
+
+## Details

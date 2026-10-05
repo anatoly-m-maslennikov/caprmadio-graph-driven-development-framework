@@ -18,7 +18,7 @@ subjects:
     - "Workflow Run"
     - "Step Run"
 version: 3
-updated_at: "2026-09-24 01:39:33 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-019
@@ -27,12 +27,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-093-CORE_META_MODEL-STEP--implement-requirements-in-the-assigned-subagent.md
+  source_atom_id: CA-O-093
+  source_atom_revision: 3
+  source_sha256: bda6055ba9ea55de409a1a4f3e89ad7ae8346140e7e2e7bb4dc1eaa931a2b522
+  original_relations_sha256: b3d2f873746220ae988ed15cfa2e21ae9d85f8447183565fc5bf5be6dcd64c7a
 ---
 # Summary
 
 Implement requirements in the assigned subagent
 
-## Claim
+## Operation
 
 Requirement Implementation Step **means** the Workflow node invoking **=1** Action, CA-O-019, **in** Isolated context under CA-R-1527.
 
@@ -41,3 +45,5 @@ Requirement Implementation Step **means** the Workflow node invoking **=1** Acti
 - retain exact Action/Step Revisions, source bindings, actual effects, **and** returned results. pass the Action's result **to** the Workflow **without** independently copying its behavior.
 
 reuse the assigned subagent for the selected P work across its test, implementation, diagnosis, **and** repair invocations **when** available. replacement requires the complete retained input/evidence handoff **and** fresh admission; do **not** rely on unrecorded conversational memory.
+
+## Details

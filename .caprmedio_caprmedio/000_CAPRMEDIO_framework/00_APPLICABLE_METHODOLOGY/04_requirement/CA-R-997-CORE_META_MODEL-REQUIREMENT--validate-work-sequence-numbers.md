@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-997-CORE_META_MODEL-REQUIREMENT--validate-work-sequence-numbers.md
+  source_atom_id: CA-R-997
+  source_atom_revision: 17
+  source_sha256: fe5adbdfd0fdf5b84930e836dbfbc5d67b40a0861e29a3b4ebb37060a9a89e56
+  original_relations_sha256: 84d32a87616b0ba20eb7e61228c75eef35f9218c63f3b6b448b4cf6624bb5430
 ---
 # Summary
 

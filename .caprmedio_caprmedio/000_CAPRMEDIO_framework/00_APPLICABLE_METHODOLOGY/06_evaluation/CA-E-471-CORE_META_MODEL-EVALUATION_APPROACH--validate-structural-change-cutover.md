@@ -29,6 +29,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-471-CORE_META_MODEL-EVALUATION_APPROACH--validate-structural-change-cutover.md
+  source_atom_id: CA-E-471
+  source_atom_revision: 7
+  source_sha256: 1718ae5ac2b7359c74b1d6c17b15b84fdbc2ca36c3f390961324716431d31c8d
+  original_relations_sha256: 318865287cda0356e51e6261ca8fe15ace9ad22dd37a62e11499b968bf0e0927
 ---
 # Summary
 Validate structural change cutover

@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1685-CORE_META_MODEL-GENERAL--requirement-keep-product-framing-optional.md
+  source_atom_id: CA-R-1685
+  source_atom_revision: 19
+  source_sha256: 54efd56b966ecfd7b91c769fc1ae8da4ed43c74f3936d806c671096ad99f6dc3
+  original_relations_sha256: a7f6d3ad50be1daf30707c083b4c6218a782fe46e74f87c43b2844b6708609d9
 ---
 # Summary
 

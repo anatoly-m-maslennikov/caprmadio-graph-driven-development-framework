@@ -23,6 +23,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1610-CORE_META_MODEL-REQUIREMENT--keep-reverse-engineered-rmed-provisional.md
+  source_atom_id: CA-R-1610
+  source_atom_revision: 4
+  source_sha256: c81af64dc247d653c719f54f79cf4d7239e55540cd83a9c7aeb468e940705a2c
+  original_relations_sha256: 98b573c3081158134b84ff5bb7f4dc41ac192decc52b2d93acab69de0b27cc5c
 ---
 # Summary
 

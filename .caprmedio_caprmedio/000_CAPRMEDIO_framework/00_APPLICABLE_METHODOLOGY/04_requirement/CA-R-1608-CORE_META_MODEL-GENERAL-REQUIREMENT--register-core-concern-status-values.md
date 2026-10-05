@@ -21,6 +21,10 @@ relations:
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1608-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-concern-status-values.md
+  source_atom_id: CA-R-1608
+  source_atom_revision: 3
+  source_sha256: 5bf01a8f1d27c69cddcc939e74f3b11325b376565281fdcb2054b77bd18ae672
+  original_relations_sha256: 2c6453ce04412f942992095a079e1deae0b11a3c6fa53b60e6e419ede3b8f74c
 ---
 # Summary
 

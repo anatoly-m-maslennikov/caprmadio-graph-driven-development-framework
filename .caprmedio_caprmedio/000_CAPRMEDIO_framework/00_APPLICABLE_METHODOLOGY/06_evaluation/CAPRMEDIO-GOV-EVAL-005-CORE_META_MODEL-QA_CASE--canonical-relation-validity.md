@@ -27,6 +27,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-005-CORE_META_MODEL-QA_CASE--canonical-relation-validity.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-005
+  source_atom_revision: 23
+  source_sha256: a4bc5f58d2d06a4b599d74c00429c926dc2ba45eb3e500b2701b896690f5df14
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

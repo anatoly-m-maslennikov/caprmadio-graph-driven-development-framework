@@ -10,7 +10,7 @@ subjects:
     - "Journal"
     - "Journal/Record"
 version: 6
-updated_at: "2026-09-16 22:01:42 +0000"
+updated_at: "2026-10-04 16:46:08 +0000"
 relations: {}
 atom_id: "CA-O-007"
 content_role: "Operations"
@@ -23,8 +23,16 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-007-CORE_META_MODEL-ACTION--obtain-source-correction-decisions.md
+  source_atom_id: CA-O-007
+  source_atom_revision: 6
+  source_sha256: c567988819dd8200975186d1581bb7249fb9ac88dd850e466d0cfe76eda5b311
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
-# Obtain source correction decisions
+# Summary
+
+Obtain source correction decisions
+
+## Operation
 
 Obtain Source Correction Decision **means** the reusable Action that obtains the Operator's explicit decision about an exact conflict-resolution proposal.
 
@@ -34,3 +42,5 @@ Obtain Source Correction Decision **means** the reusable Action that obtains the
 4. return the recorded decision for the applicable authorization checks. a changed proposal **or** source frontier requires the decision's applicability **to** be checked again **before** reliance.
 
 this Action **must not** apply the correction, record approval the Operator did **not** give, **or** create a duplicate approval Atom **in** Project Configuration. the Journal records the decision; it does **not** independently redefine the governing source Claims.
+
+## Details

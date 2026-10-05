@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1651-PROJECT_CONFIGURATION-REQUIREMENT--propose-development-backlog-splits.md
+  source_atom_id: CA-R-1651
+  source_atom_revision: 20
+  source_sha256: f4ec3dc2628b9bdf91f84dde7ea5a70788990d2f15730062864cb91ea3f891c4
+  original_relations_sha256: 9f0d6d6a3f52c9c57a2a5b059201cfde659c64a34b072ab7abbdb9bffb05fab0
 ---
 # Summary
 

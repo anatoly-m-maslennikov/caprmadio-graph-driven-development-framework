@@ -39,6 +39,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-383-CORE_META_MODEL-EVALUATION_APPROACH--reject-invalid-subject-expressions.md
+  source_atom_id: CA-E-383
+  source_atom_revision: 13
+  source_sha256: 00c3e901fbd18cdb584387386f6b04cd43905f651c4369e16a97d20b469b3274
+  original_relations_sha256: f9669e1f1833a322d66483ad6508513c6452d1b1a619dc9d0bbcdaefb6ece8e4
 ---
 # Reject Invalid Subject Expressions
 

@@ -29,7 +29,11 @@ from release_manifest_authorization import (  # noqa: E402
 )
 from release_manifest_lifecycle import ReleaseManifestLifecycle  # noqa: E402
 from release_manifest_publisher import _candidate, plan_release_manifest_publish  # noqa: E402
-from release_source_admission import AUTHORITY_REF, derive_release_graph_admission  # noqa: E402
+from release_source_admission import (  # noqa: E402
+    AUTHORITY_REF,
+    derive_release_graph_admission,
+    derive_release_private_carriers,
+)
 from selected_routes import selected_manifest_ref  # noqa: E402
 from selected_workflows_docker_fixture import GoldenCase, GoldenProject  # noqa: E402
 
@@ -58,7 +62,8 @@ class ReleaseManifestAuthorizationTest(unittest.TestCase):
         source_registry_ref = raw["source_freshness"]["selected_source_registry_ref"]
         operators_registry_ref = ".caprmedio_caprmedio/operators_registry.toml"
         project_settings_ref = ".caprmedio_caprmedio/caprmedio_project_settings.toml"
-        for relative in _paths(admission) | {
+        private_carriers = derive_release_private_carriers(REPOSITORY)
+        for relative in _paths(admission) | _paths(private_carriers) | {
             AUTHORITY_REF, manifest_ref, source_registry_ref, operators_registry_ref, project_settings_ref,
         }:
             source, target = REPOSITORY / relative, self.root / relative

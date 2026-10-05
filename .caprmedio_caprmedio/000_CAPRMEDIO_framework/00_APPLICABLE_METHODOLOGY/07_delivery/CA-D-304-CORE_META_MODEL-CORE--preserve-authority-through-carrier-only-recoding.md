@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-304-CORE_META_MODEL-CORE--preserve-authority-through-carrier-only-recoding.md
+  source_atom_id: CA-D-304
+  source_atom_revision: 12
+  source_sha256: d9c2fe921539bbc0a0df41a684581021072b3d1b3d3b40165068789f4a59653a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

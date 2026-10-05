@@ -26,7 +26,13 @@ if not _MCP_ROOT.is_dir():  # pragma: no cover - immutable carrier installation 
 if str(_MCP_ROOT) not in sys.path:
     sys.path.insert(0, str(_MCP_ROOT))
 
-from release_source_admission import AUTHORITY_PIN, derive_release_source_admission  # noqa: E402
+from release_source_admission import (  # noqa: E402
+    AUTHORITY_PIN,
+    ReleaseSourceAdmissionError,
+    _private_carriers,
+    derive_release_private_carriers,
+    derive_release_source_admission,
+)
 from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_manifest, selected_manifest_ref  # noqa: E402
 
 
@@ -231,6 +237,16 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         authority_text = authority_raw.decode("utf-8")
     except UnicodeDecodeError as error:
         raise ReleaseSuiteReferenceContextError("D572 is unavailable for reference preflight") from error
+    if hashlib.sha256(authority_raw).hexdigest() != AUTHORITY_PIN["digest"]:
+        _fail("D572 source pin is stale")
+    # Parse the already descriptor-captured authority bytes before any reader
+    # can reread the mutable Project.  D572 alone admits these implementation
+    # paths; they remain ordinary byte-and-mode ReferenceRows in D580.
+    try:
+        private_carriers = _private_carriers(authority_text)
+    except ReleaseSourceAdmissionError as error:
+        raise ReleaseSuiteReferenceContextError("D572 private carrier declaration is invalid") from error
+    candidates.extend(row["source_path"] for row in private_carriers)
     for value in re.findall(r"`([^`]+)`", authority_text):
         if value.startswith(".caprmedio_"):
             candidates.append(value)
@@ -281,6 +297,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     manifest = load_selected_manifest(snapshot_root)
     manifest_ref = selected_manifest_ref(snapshot_root)
     admission = derive_release_source_admission(snapshot_root)
+    private_carriers = derive_release_private_carriers(snapshot_root)
     freshness = manifest["source_freshness"]
     source_registry = freshness["selected_source_registry_ref"]
     _safe_relative(source_registry)
@@ -292,6 +309,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         str(source_registry),
         str(AUTHORITY_PIN["source_path"]),
         *_pin_paths(admission),
+        *(row["source_path"] for row in private_carriers),
     ]
     # The selected manifest has already source-validated every route/admission
     # pin.  Capture their source paths too, while naturally deduplicating a

@@ -31,6 +31,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-458-CORE_META_MODEL-EVALUATION_APPROACH--validate-authoritative-framework-settings-artifact.md
+  source_atom_id: CA-E-458
+  source_atom_revision: 16
+  source_sha256: b66034350426c662eb4f4de967ed29a5ee4c905f2383b530e6336b95c6b1cc4c
+  original_relations_sha256: c43710a24ba9609df14ffa1948ef1b7800e193bfc80ab2f310b1715a02cb8616
 ---
 # Summary
 

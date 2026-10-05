@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-435-PROJECT_CONFIGURATION--serialize-atom-replacement-event-references.md
+  source_atom_id: CA-D-435
+  source_atom_revision: 8
+  source_sha256: c325ec117ed4b879a3766aad78c79a6780781ce0718eaf49431f28479eb65263
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

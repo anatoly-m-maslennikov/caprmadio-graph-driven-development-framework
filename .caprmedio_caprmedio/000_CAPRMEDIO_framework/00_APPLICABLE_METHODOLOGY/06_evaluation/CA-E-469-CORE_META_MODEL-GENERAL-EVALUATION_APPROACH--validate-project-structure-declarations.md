@@ -25,6 +25,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-469-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-project-structure-declarations.md
+  source_atom_id: CA-E-469
+  source_atom_revision: 8
+  source_sha256: ec921f23afcb699a01a8fe2039e71865b6cd8e09f4e81b167c2262004d1b836b
+  original_relations_sha256: d86665373422473d05db0aa248c67702c64650cf7b2163e327cfbed4dccb3db8
 ---
 # Summary
 

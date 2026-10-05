@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-923-CORE_META_MODEL-CORE--define-relational-atom.md
+  source_atom_id: CA-R-923
+  source_atom_revision: 22
+  source_sha256: 251d0accd8acdec682af7687d4df05369222e916cfbef0ef71c94e6e4deb481b
+  original_relations_sha256: bb6e7449127f6a7b5fd2adfab279201f33fd1e44c746e3974b29f5c557c9b581
 ---
 # Summary
 Define Relational Atom

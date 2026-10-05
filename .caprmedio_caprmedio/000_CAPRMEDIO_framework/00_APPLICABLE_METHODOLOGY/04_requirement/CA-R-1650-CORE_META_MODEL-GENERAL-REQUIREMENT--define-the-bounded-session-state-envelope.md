@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1650-CORE_META_MODEL-GENERAL-REQUIREMENT--define-the-bounded-session-state-envelope.md
+  source_atom_id: CA-R-1650
+  source_atom_revision: 19
+  source_sha256: 600a62b7febd9ee2e57e8366747a1e03d6df6047e4d7627eef4583b7182c0795
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-276-CORE_META_MODEL-METHOD--repair-accidental-atom-id-reuse.md
+  source_atom_id: CA-M-276
+  source_atom_revision: 9
+  source_sha256: 99bb048b7aabaaadab2bab139acaaba852fe8df1bc7e75bff898f063cedd5249
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -15,6 +15,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1784-PROJECT_CONFIGURATION--protect-primary-operations-from-logging-failure.md
+  source_atom_id: CA-R-1784
+  source_atom_revision: 1
+  source_sha256: e7db2c59323fa708f6ea1ec69b76fd0c9aafe9d08ec3c1ded6677f536c915beb
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

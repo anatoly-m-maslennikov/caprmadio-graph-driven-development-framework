@@ -15,6 +15,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1787-PROJECT_CONFIGURATION--exclude-log-prose-as-sole-production-evaluation-evidence.md
+  source_atom_id: CA-R-1787
+  source_atom_revision: 1
+  source_sha256: d04fbf6c8ef3f2a9fb2181369874e43b3e37c35911929af02878aedcef1c9695
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

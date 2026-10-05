@@ -33,6 +33,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-120-CORE_META_MODEL-CORE--compile-the-direct-relation-registry.md
+  source_atom_id: CA-M-120
+  source_atom_revision: 14
+  source_sha256: 4f1a2004c885b1134ef57e309c37e1ab14c86bf008a3374fc93bbc20a2c104db
+  original_relations_sha256: 0ee5848e38173afc3aa73f55b419962fa9b6f19cedd32210873fd1d71efaa5fa
 ---
 # Summary
 
