@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 7
-updated_at: "2026-10-05 05:18:32 +0000"
+version: 4
+updated_at: "2026-10-05 02:00:00 +0400"
 subjects:
   governs: "MCP/selected Workflow capability routes"
   depends_on: [MCP, Tool, Workflow, Action, Operator, Run, Journal]
@@ -22,21 +22,21 @@ Expose selected Workflow capability routes
 ## Scope
 
 The Project-local MCP adapter surface for the original thirteen Operator-selected
-P1117 capabilities, two explicitly admitted read-only P1520 query Workflows,
-and one separately admitted Release Version Workflow.
+P1117 capabilities plus the two explicitly admitted read-only P1520 query
+Workflows, with their standalone/nested Action and Run observations.
 
 ## Claim
 
-MCP **must** expose only the capability adapters admitted below through the existing reloadable Project-local server, while delegating execution and every-Run recording to the shared `WORKFLOW_OPERATIONS/RUN_SUPPORT` service.
+MCP **must** expose exactly the selected capability adapters below through the existing reloadable Project-local server, while delegating execution and every-Run recording to the shared `WORKFLOW_OPERATIONS/RUN_SUPPORT` service.
 
 ## Details
 
-The admitted route-name set is `create_atom`, `update_atom`, `replace_atom`,
+The public route names are `create_atom`, `update_atom`, `replace_atom`,
 `change_atom_status`, `create_scope_unit`, `rename_scope_unit`,
 `move_scope_unit`, `remove_scope_unit`, `run_implementation_workflow`,
 `revert_changes`, `build_entities_graph`, `build_terms_graph`,
 `build_applicable_methodology`, `find_and_fetch_artifacts`, and
-`find_and_fetch_journal_events`, and `release_version`. The current selected-definition binding is the
+`find_and_fetch_journal_events`. Their one selected-definition binding is the
 derived fifteen-route Projection
 `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json`. It carries
 every route's full current source Workflow, ordered Steps, ordered Action
@@ -50,8 +50,8 @@ are admitted only by `query_source_admissions` in that same canonical manifest;
 that field contains exactly these current acceptance-frontier pins and their
 corresponding Workflow/Action/Step pins:
 
-- `find_and_fetch_artifacts`: CA-P-1618@1 at
-  `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/29-CA-P-1618-TASK--accept-current-artifact-query-source-frontier.md`, SHA-256 `bdf10c928c10c102dc489c8e3e526ffe73e8a33d492f4dabc8b5d0129c453b1f`; CA-O-158@4 `d7fdaebdd1d0c6ca7dac9aced25552c487336f2a51f18c0f03ef65d16ff4618a`, CA-O-159@2 `3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08`, and CA-O-160@2 `a743a84fd24db32123ac8162e7a2178e6d83b1b727cbe54477b6020914537384` at their accepted P1618 paths.
+- `find_and_fetch_artifacts`: CA-P-1532@2 at
+  `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md`, SHA-256 `b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432`; CA-O-158@2 `2424aa7475d2e7f98006040dc0d5826702e641190c6535a834869c1fe5a7e536`, CA-O-159@2 `3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08`, and CA-O-160@2 `a743a84fd24db32123ac8162e7a2178e6d83b1b727cbe54477b6020914537384` at their accepted P1532 paths.
 - `find_and_fetch_journal_events`: CA-P-1535@2 at
   `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/15-CA-P-1535-TASK--accept-final-journal-query-source.md`, SHA-256 `6246b46d2961d795e29eeb224f01b14979434d4ad24cf3f4913c490268cf52dc`; CA-O-161@2 `362b9d3848a796a14e7374cfa0bf0b561c4f2035b7b2bf87bd9b56fc97a6724d`, CA-O-162@2 `71301ecf9531c70adeba03d6cf7f39761a237a081cee43eb0f9f7ce40e12f9fe`, and CA-O-163@2 `8d0238a1614f5888f2aa486038d271cc58db1d3f0d7014dece0baa53004a489c` at their accepted P1535 paths.
 
@@ -60,8 +60,6 @@ authority, manifest, parser, or executor. Missing, malformed, incomplete,
 duplicate, digest-mismatched, or stale bindings or admissions reject the route
 before shared support, worker start, Run creation, Action Run creation, effect,
 or Journal event.
-
-`release_version` is not present in the current fifteen-route Projection. It is admitted as an additive sixteenth implementation target only when one successor revision of that same canonical manifest carries D572@3's complete closed Release source-admission record, including its exact current Workflow, ordered Step/Action occurrences and accepted Release RMED frontier. D572 is the sole serialization authority for these pins; this Requirement does not independently repeat their versions or hashes. A manifest without `release_version` omits that outer field. The original thirteen retain CA-A-1142@2 unchanged; the current two query records and their P1618@1/P1535@2 frontiers remain unchanged. This additive source evidence is neither a second registry, caller approval, nor alternate executor; it cannot contain itself, a canonical-manifest digest, or any output digest that would form a self-hash cycle. Its `execute` request additionally requires the exact current, route-bound Operator authorization and all D527 proposal/currentness rechecks; missing, stale, malformed, incomplete, duplicate, out-of-order, or digest-mismatched Release evidence rejects before a Run, queue intent, effect, or Journal event.
 
 Every route delegates one normalized CA-D-527 v3 request to shared
 `run_selected_operation(request)`: request/route identity, typed
@@ -93,9 +91,9 @@ expressions, secrets, or a second parser.
 
 `get_selected_workflow_run` and `get_selected_action_run` read only one exact Run/Action Run and return its status, safe output/result/effect references, lineage, source currentness, and canonical event/receipt references. `recover_selected_run_recording` accepts only a pending shared-recording event reference and retries persistence with the same event identity and payload; it never replays an Action or Workflow. MCP must not implement a parallel request schema or execution path.
 
-The adapters reuse the server's existing Project-root/stdin binding, discovery helpers, `workflow_orchestrator`, and hot-reload gateway. CA-D-521 v6's existing DBOS `enqueue_selected` variant remains the general selected-dispatch variant; MCP supplies the admitted request to that existing APP and does not create another executor. The adapters add no alternate root, shell, arbitrary path, generic mutation, implicit dispatch, Journal writer, or duplicate business behavior. The existing eight helper names and their contracts remain available. Route annotations truthfully describe preview/execute behavior and do not override client permission policy.
+The adapters reuse the server's existing Project-root/stdin binding, discovery helpers, `workflow_orchestrator`, and hot-reload gateway. CA-D-521 v3's existing DBOS `enqueue_selected` variant remains the general selected-dispatch variant; MCP supplies the admitted request to that existing APP and does not create another executor. The adapters add no alternate root, shell, arbitrary path, generic mutation, implicit dispatch, Journal writer, or duplicate business behavior. The existing eight helper names and their contracts remain available. Route annotations truthfully describe preview/execute behavior and do not override client permission policy.
 
 ### Sources
 
-- CA-A-1142 v2, unchanged original-thirteen registry; CA-P-1618 v1 and CA-P-1535 v2, the exact two query admission frontiers; CA-P-1622 v1 and CA-D-572 v3, the additive Release source admission; CA-P-1117 v7 shared Run obligation.
-- CA-D-527 v3; CA-D-521 v6; CA-D-548 v2; CA-R-1720 v17; CA-R-1525 v6; CA-R-1728 v16; CA-D-523 v2; CA-R-1850 v2; CA-R-1866 v2; CA-R-1867 v1.
+- CA-A-1142 v2, unchanged original-thirteen registry; CA-P-1532 v2 and CA-P-1535 v2, the exact two query admission frontiers; CA-P-1117 v7 shared Run obligation.
+- CA-D-527 v3; CA-D-521 v3; CA-D-548 v2; CA-R-1720 v17; CA-R-1525 v6; CA-R-1728 v16; CA-D-523 v2; CA-R-1850 v2; CA-R-1866 v2; CA-R-1867 v1.

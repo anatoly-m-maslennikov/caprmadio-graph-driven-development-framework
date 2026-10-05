@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 7
-updated_at: "2026-10-05 05:18:32 +0000"
+version: 6
+updated_at: "2026-10-05 05:11:12 +0000"
 subjects:
   governs: "MCP/selected Workflow capability routes"
   depends_on: [MCP, Tool, Workflow, Action, Operator, Run, Journal]
@@ -61,7 +61,7 @@ duplicate, digest-mismatched, or stale bindings or admissions reject the route
 before shared support, worker start, Run creation, Action Run creation, effect,
 or Journal event.
 
-`release_version` is not present in the current fifteen-route Projection. It is admitted as an additive sixteenth implementation target only when one successor revision of that same canonical manifest carries D572@3's complete closed Release source-admission record, including its exact current Workflow, ordered Step/Action occurrences and accepted Release RMED frontier. D572 is the sole serialization authority for these pins; this Requirement does not independently repeat their versions or hashes. A manifest without `release_version` omits that outer field. The original thirteen retain CA-A-1142@2 unchanged; the current two query records and their P1618@1/P1535@2 frontiers remain unchanged. This additive source evidence is neither a second registry, caller approval, nor alternate executor; it cannot contain itself, a canonical-manifest digest, or any output digest that would form a self-hash cycle. Its `execute` request additionally requires the exact current, route-bound Operator authorization and all D527 proposal/currentness rechecks; missing, stale, malformed, incomplete, duplicate, out-of-order, or digest-mismatched Release evidence rejects before a Run, queue intent, effect, or Journal event.
+`release_version` is not present in the current fifteen-route Projection. It is admitted as an additive sixteenth implementation target only when one successor revision of that same canonical manifest carries the optional `release_source_admissions` outer array with cardinality exactly one and D572@2's one closed record: CA-P-1622@1 independent acceptance frontier; CA-O-164@2 Workflow; exact ordered CA-O-170@1/CA-O-165@1 through CA-O-179@1/CA-O-169@1 Step/Action pairs, with CA-O-173@2; and D572@2's complete accepted Release RMED source frontier including CA-D-571@2. A manifest without `release_version` omits that outer field. The original thirteen retain CA-A-1142@2 unchanged; the current two query records and their P1618@1/P1535@2 frontiers remain unchanged. This additive source evidence is neither a second registry, caller approval, nor alternate executor; it cannot contain itself, a canonical-manifest digest, or any output digest that would form a self-hash cycle. Its `execute` request additionally requires the exact current, route-bound Operator authorization and all D527 proposal/currentness rechecks; missing, stale, malformed, incomplete, duplicate, out-of-order, or digest-mismatched Release evidence rejects before a Run, queue intent, effect, or Journal event.
 
 Every route delegates one normalized CA-D-527 v3 request to shared
 `run_selected_operation(request)`: request/route identity, typed

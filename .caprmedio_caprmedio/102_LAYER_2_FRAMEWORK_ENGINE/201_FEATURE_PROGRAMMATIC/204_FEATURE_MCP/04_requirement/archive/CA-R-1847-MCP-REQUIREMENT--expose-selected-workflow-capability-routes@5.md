@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 7
-updated_at: "2026-10-05 05:18:32 +0000"
+version: 5
+updated_at: "2026-10-05 08:12:00 +0400"
 subjects:
   governs: "MCP/selected Workflow capability routes"
   depends_on: [MCP, Tool, Workflow, Action, Operator, Run, Journal]
@@ -61,7 +61,7 @@ duplicate, digest-mismatched, or stale bindings or admissions reject the route
 before shared support, worker start, Run creation, Action Run creation, effect,
 or Journal event.
 
-`release_version` is not present in the current fifteen-route Projection. It is admitted as an additive sixteenth implementation target only when one successor revision of that same canonical manifest carries D572@3's complete closed Release source-admission record, including its exact current Workflow, ordered Step/Action occurrences and accepted Release RMED frontier. D572 is the sole serialization authority for these pins; this Requirement does not independently repeat their versions or hashes. A manifest without `release_version` omits that outer field. The original thirteen retain CA-A-1142@2 unchanged; the current two query records and their P1618@1/P1535@2 frontiers remain unchanged. This additive source evidence is neither a second registry, caller approval, nor alternate executor; it cannot contain itself, a canonical-manifest digest, or any output digest that would form a self-hash cycle. Its `execute` request additionally requires the exact current, route-bound Operator authorization and all D527 proposal/currentness rechecks; missing, stale, malformed, incomplete, duplicate, out-of-order, or digest-mismatched Release evidence rejects before a Run, queue intent, effect, or Journal event.
+`release_version` is not present in the current fifteen-route Projection. It is admitted as an additive sixteenth implementation target only when one successor revision of that same canonical manifest carries exactly one D572 `release_source_admissions` record, its CA-P-1622@1 independent acceptance frontier, and the complete O164–O179@1/RMED source pins D572 serializes. The original thirteen retain CA-A-1142@2 unchanged; the current two query records and their P1618@1/P1535@2 frontiers remain unchanged. This additive record is neither a second registry nor an alternate executor. Its `execute` request additionally requires the exact current, route-bound Operator authorization and all D527 proposal/currentness rechecks; missing, stale, malformed, incomplete, duplicate, or digest-mismatched Release evidence rejects before a Run, queue intent, effect, or Journal event.
 
 Every route delegates one normalized CA-D-527 v3 request to shared
 `run_selected_operation(request)`: request/route identity, typed
@@ -93,9 +93,9 @@ expressions, secrets, or a second parser.
 
 `get_selected_workflow_run` and `get_selected_action_run` read only one exact Run/Action Run and return its status, safe output/result/effect references, lineage, source currentness, and canonical event/receipt references. `recover_selected_run_recording` accepts only a pending shared-recording event reference and retries persistence with the same event identity and payload; it never replays an Action or Workflow. MCP must not implement a parallel request schema or execution path.
 
-The adapters reuse the server's existing Project-root/stdin binding, discovery helpers, `workflow_orchestrator`, and hot-reload gateway. CA-D-521 v6's existing DBOS `enqueue_selected` variant remains the general selected-dispatch variant; MCP supplies the admitted request to that existing APP and does not create another executor. The adapters add no alternate root, shell, arbitrary path, generic mutation, implicit dispatch, Journal writer, or duplicate business behavior. The existing eight helper names and their contracts remain available. Route annotations truthfully describe preview/execute behavior and do not override client permission policy.
+The adapters reuse the server's existing Project-root/stdin binding, discovery helpers, `workflow_orchestrator`, and hot-reload gateway. CA-D-521 v5's existing DBOS `enqueue_selected` variant remains the general selected-dispatch variant; MCP supplies the admitted request to that existing APP and does not create another executor. The adapters add no alternate root, shell, arbitrary path, generic mutation, implicit dispatch, Journal writer, or duplicate business behavior. The existing eight helper names and their contracts remain available. Route annotations truthfully describe preview/execute behavior and do not override client permission policy.
 
 ### Sources
 
-- CA-A-1142 v2, unchanged original-thirteen registry; CA-P-1618 v1 and CA-P-1535 v2, the exact two query admission frontiers; CA-P-1622 v1 and CA-D-572 v3, the additive Release source admission; CA-P-1117 v7 shared Run obligation.
-- CA-D-527 v3; CA-D-521 v6; CA-D-548 v2; CA-R-1720 v17; CA-R-1525 v6; CA-R-1728 v16; CA-D-523 v2; CA-R-1850 v2; CA-R-1866 v2; CA-R-1867 v1.
+- CA-A-1142 v2, unchanged original-thirteen registry; CA-P-1618 v1 and CA-P-1535 v2, the exact two query admission frontiers; CA-P-1622 v1 and CA-D-572 v1, the additive Release source admission; CA-P-1117 v7 shared Run obligation.
+- CA-D-527 v3; CA-D-521 v5; CA-D-548 v2; CA-R-1720 v17; CA-R-1525 v6; CA-R-1728 v16; CA-D-523 v2; CA-R-1850 v2; CA-R-1866 v2; CA-R-1867 v1.

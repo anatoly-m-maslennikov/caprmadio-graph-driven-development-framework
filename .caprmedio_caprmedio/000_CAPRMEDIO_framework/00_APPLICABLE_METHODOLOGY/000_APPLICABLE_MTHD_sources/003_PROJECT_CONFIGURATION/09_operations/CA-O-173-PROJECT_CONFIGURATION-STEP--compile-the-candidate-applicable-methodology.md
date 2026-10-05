@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: compile candidate Methodology"
   depends_on: [Workflow, Step, Action, Applicable Methodology, Compiler, Delivery, Journal]
-version: 1
-updated_at: 2026-10-05 06:13:05 +0400
+version: 2
+updated_at: 2026-10-05 08:12:00 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-166]
@@ -22,8 +22,8 @@ Compile the candidate Applicable Methodology
 
 ## Step
 
-This Step invokes CA-O-166 once with phase `compile`, binding only the complete delivered source manifest from CA-O-172, the reviewed selected-snapshot compiler Tool boundary and the canonical candidate Projection contract. A later derived runtime Methodology delivery is not compiler output authority.
+This Step invokes CA-O-166 once with phase `compile`, binding only the complete delivered source manifest from CA-O-172 and the reviewed selected-snapshot compiler Tool boundary. Its candidate output is only the sealed child materialization under `_release_materialized/<candidateSnapshotManifest.sha256>/`; the canonical `_projection/APPLICABLE_METHODOLOGY` remains source-bound and is not this Step's output. A later derived runtime Methodology delivery is not compiler output authority.
 
 ## Details
 
-This is not another compiler graph: CA-O-166 uses the reviewed Tool boundary required for a selected pinned snapshot while preserving the existing canonical compiler authority. A changed frontier, incomplete delivery, unbound Tool/layout or canonical Projection mismatch stops without runtime installation, image work or promotion.
+This is not another compiler graph: CA-O-166 uses the reviewed Tool boundary required for a selected pinned snapshot while preserving the existing canonical compiler authority. A changed frontier, incomplete delivery, unbound Tool/layout, child-materialization mismatch, or any canonical projection mutation stops without runtime installation, image work or promotion.

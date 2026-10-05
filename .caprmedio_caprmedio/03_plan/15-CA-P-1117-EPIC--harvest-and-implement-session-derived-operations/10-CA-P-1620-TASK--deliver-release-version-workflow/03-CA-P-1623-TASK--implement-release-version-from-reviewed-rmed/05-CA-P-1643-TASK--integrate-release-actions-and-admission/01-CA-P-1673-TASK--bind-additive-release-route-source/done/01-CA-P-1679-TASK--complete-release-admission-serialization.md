@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Complete Release admission serialization"
   depends_on: [Atom, Workflow, Action, Tool, Manifest, Evaluation]
 version: 1
-updated_at: "2026-10-05 04:42:52 +0000"
+updated_at: "2026-10-05 05:44:17 +0000"
 relations:
   is_decomposition_of: [CA-P-1673]
   blocks: [CA-P-1674]
@@ -35,3 +35,7 @@ P1674 rejected only the missing D571 pin, underdefined exact D572 record/contain
 ## Definition of Done
 
 Exact saved hashes and complete unambiguous closed schema permit P1674's narrow independent re-review. File presence alone is not acceptance or dispatch.
+
+## Result
+
+The exact closed additive serialization is repaired and independently accepted through P1674. D572@3 `fb3e91bb5bee075c6394ac9a490b8599cd5cc8a9a86e7893f52e483556847b22` carries the complete twenty-pin RMED frontier including D571@2, exact ordered Step/Action occurrences, optional canonical-manifest container and six-field closed record. R1847@7 `cd8f8f100560a0beeb0254e78b74d17a2b0f92050bd6b18b264c15659061dc5a` delegates the current frontier rather than duplicating it. No uncertain schema choice remained below90%; C458 was not created. No manifest/runtime dispatch occurred.
