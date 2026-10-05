@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Iterable
 
 from release_contract import IMAGE_DOCKERFILE, REQUIRED_ENGINE_SOURCE_PREFIXES
+from release_inventory import ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 from release_handoff import (
     CANONICAL_SOURCE_RELATIVE,
     COMPILER_ENTRYPOINT_RELATIVE,
@@ -74,6 +75,10 @@ def _candidate_sha256(value: object) -> str:
 
 def _regular_file(root: Path, relative: str | Path, *, code: str = "package-source-missing") -> Path:
     safe = _safe_relative(relative.as_posix() if isinstance(relative, Path) else relative, "source path")
+    try:
+        refuse_secret_path(safe)
+    except ReleaseInventoryError as error:
+        raise ReleasePackagingError(error.code, str(error)) from error
     cursor = root
     for component in safe.parts:
         cursor = cursor / component
@@ -90,6 +95,10 @@ def _regular_file(root: Path, relative: str | Path, *, code: str = "package-sour
 
 def _regular_directory(root: Path, relative: str | Path, *, code: str = "package-source-missing") -> Path:
     safe = _safe_relative(relative.as_posix() if isinstance(relative, Path) else relative, "directory path")
+    try:
+        refuse_secret_path(safe)
+    except ReleaseInventoryError as error:
+        raise ReleasePackagingError(error.code, str(error)) from error
     path = root / safe
     if path.is_symlink() or not path.is_dir():
         raise ReleasePackagingError(code, f"required directory is absent: {safe.as_posix()}")
@@ -102,14 +111,10 @@ def _regular_directory(root: Path, relative: str | Path, *, code: str = "package
 
 def _regular_files(root: Path, relative: str | Path) -> set[str]:
     directory = _regular_directory(root, relative)
-    files: set[str] = set()
-    for path in sorted(directory.rglob("*"), key=lambda item: item.as_posix()):
-        if path.is_symlink():
-            raise ReleasePackagingError("package-source-symlink", f"source is a symlink: {path.relative_to(root).as_posix()}")
-        if path.is_file():
-            files.add(path.relative_to(root).as_posix())
-        elif not path.is_dir():
-            raise ReleasePackagingError("package-source-invalid", f"source is not a regular carrier: {path.relative_to(root).as_posix()}")
+    try:
+        files = {path.relative_to(root).as_posix() for path in persistent_regular_files(root, directory)}
+    except ReleaseInventoryError as error:
+        raise ReleasePackagingError(error.code, str(error)) from error
     if not files:
         raise ReleasePackagingError("package-incomplete", f"source inventory is empty: {Path(relative).as_posix()}")
     return files

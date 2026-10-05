@@ -66,7 +66,12 @@ class ReleaseCompilationTests(unittest.TestCase):
         self.write("102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md", b"prompt\n")
         self.write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md", b"# ca\n")
         self.write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml", b"name: ca\n")
-        self.write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile", b"FROM scratch\n")
+        self.write("pyproject.toml", b"[project]\nname = 'fixture'\n")
+        self.write("uv.lock", b"version = 1\n")
+        self.write(
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile",
+            b"FROM scratch\nCOPY pyproject.toml uv.lock ./\n",
+        )
         self.compiler = self.write(
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py",
             EXECUTING_COMPILER_PATH.read_bytes(),

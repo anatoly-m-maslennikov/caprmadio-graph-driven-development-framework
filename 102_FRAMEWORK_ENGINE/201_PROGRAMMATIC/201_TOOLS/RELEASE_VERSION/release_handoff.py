@@ -8,7 +8,6 @@ event.
 from __future__ import annotations
 
 import hashlib
-import os
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
@@ -32,6 +31,7 @@ from release_contract import (
     canonical_json,
     encode_candidate_manifest,
 )
+from release_inventory import ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 
 
 CANONICAL_SOURCE_RELATIVE = (
@@ -46,6 +46,8 @@ MATERIALIZED_RELATIVE = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICA
 ENGINE_ROOT_RELATIVE = "102_FRAMEWORK_ENGINE"
 SKILL_ROOT_RELATIVE = "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca"
 COMPILER_ENTRYPOINT_RELATIVE = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py"
+_PINNED_IMAGE_DEPENDENCY_COPY = b"COPY pyproject.toml uv.lock ./"
+_PINNED_IMAGE_DEPENDENCY_INPUTS = ("pyproject.toml", "uv.lock")
 
 
 def _error(code: str, message: str) -> ReleaseContractError:
@@ -72,6 +74,10 @@ def _relative(root: Path, path: Path, *, label: str) -> str:
 
 def _file(root: Path, relative: str, *, code: str = "release-input-missing") -> Path:
     safe = _safe_relative(relative, "relative")
+    try:
+        refuse_secret_path(safe)
+    except ReleaseInventoryError as error:
+        raise _error(error.code, str(error)) from error
     path = root / safe
     if path.is_symlink() or not path.is_file():
         raise _error(code, f"required regular file is absent: {safe}")
@@ -84,6 +90,10 @@ def _file(root: Path, relative: str, *, code: str = "release-input-missing") -> 
 
 def _directory(root: Path, relative: str, *, code: str = "release-input-missing") -> Path:
     safe = _safe_relative(relative, "relative")
+    try:
+        refuse_secret_path(safe)
+    except ReleaseInventoryError as error:
+        raise _error(error.code, str(error)) from error
     path = root / safe
     if path.is_symlink() or not path.is_dir():
         raise _error(code, f"required directory is absent: {safe}")
@@ -95,14 +105,10 @@ def _directory(root: Path, relative: str, *, code: str = "release-input-missing"
 
 
 def _regular_files(root: Path, directory: Path, *, code: str = "release-input-invalid") -> list[Path]:
-    files: list[Path] = []
-    for path in sorted(directory.rglob("*"), key=lambda item: item.as_posix()):
-        if path.is_symlink():
-            raise _error("release-path-unsafe", f"symlink is not admitted: {_relative(root, path, label='file')}")
-        if path.is_file():
-            files.append(path)
-        elif not path.is_dir():
-            raise _error(code, f"non-regular inventory entry: {_relative(root, path, label='file')}")
+    try:
+        files = persistent_regular_files(root, directory)
+    except ReleaseInventoryError as error:
+        raise _error(error.code, str(error)) from error
     if not files:
         raise _error(code, f"required inventory is empty: {_relative(root, directory, label='directory')}")
     return files
@@ -160,6 +166,24 @@ def _inventory_row(root: Path, path: Path, resource: str, destination: str) -> S
     )
 
 
+def _image_input_paths(root: Path, dockerfile: Path) -> list[Path]:
+    """Observe the fixed dependency inputs declared by the pinned Dockerfile.
+
+    This is intentionally not a general Dockerfile parser.  The known
+    repository build instruction has exactly two root dependency inputs; when
+    that instruction is present, both are required before the candidate can be
+    sealed.
+    """
+
+    paths = [dockerfile]
+    if _PINNED_IMAGE_DEPENDENCY_COPY in dockerfile.read_bytes():
+        paths.extend(
+            _file(root, relative, code="release-image-input-missing")
+            for relative in _PINNED_IMAGE_DEPENDENCY_INPUTS
+        )
+    return paths
+
+
 def _observed_inventory(root: Path) -> tuple[list[SourceInventoryRow], CandidateImageReference]:
     source_root = _directory(root, CANONICAL_SOURCE_RELATIVE)
     engine_root = _directory(root, ENGINE_ROOT_RELATIVE)
@@ -174,7 +198,12 @@ def _observed_inventory(root: Path) -> tuple[list[SourceInventoryRow], Candidate
         rows.append(_inventory_row(root, path, "FRAMEWORK_ENGINE", f"FRAMEWORK_ENGINE/{path.relative_to(engine_root).as_posix()}"))
     for path in _regular_files(root, skill_root):
         rows.append(_inventory_row(root, path, "SKILL", f"SKILLS/ca/{path.relative_to(skill_root).as_posix()}"))
-    rows.append(_inventory_row(root, dockerfile, "IMAGE_INPUT", f"IMAGE_INPUT/{dockerfile.relative_to(engine_root).as_posix()}"))
+    for image_input in _image_input_paths(root, dockerfile):
+        if image_input == dockerfile:
+            destination = f"IMAGE_INPUT/{dockerfile.relative_to(engine_root).as_posix()}"
+        else:
+            destination = f"IMAGE_INPUT/{image_input.relative_to(root).as_posix()}"
+        rows.append(_inventory_row(root, image_input, "IMAGE_INPUT", destination))
     if not any(row.resource == "FRAMEWORK_ENGINE" for row in rows):
         raise _error("release-inventory-incomplete", "Framework Engine inventory is empty")
     image = CandidateImageReference(

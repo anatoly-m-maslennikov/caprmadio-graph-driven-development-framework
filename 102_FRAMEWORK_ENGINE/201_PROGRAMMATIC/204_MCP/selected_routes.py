@@ -22,6 +22,9 @@ ORIGINAL_SELECTED_ROUTE_NAMES = (
 )
 QUERY_ROUTE_NAMES = ("find_and_fetch_artifacts", "find_and_fetch_journal_events")
 SELECTED_ROUTE_NAMES = (*ORIGINAL_SELECTED_ROUTE_NAMES, *QUERY_ROUTE_NAMES)
+# Preparatory file-level admission only: public registration still advertises
+# SELECTED_ROUTE_NAMES until native Release providers are separately admitted.
+_OPTIONAL_RELEASE_ROUTE_NAME = "release_version"
 _DIGEST = re.compile(r"^[0-9a-f]{64}$")
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$")
 _FRESHNESS_FIELDS = {
@@ -226,12 +229,14 @@ def _definition_sequence(route: Mapping[str, Any]) -> list[dict[str, Any]]:
     return [route["workflow"], *[item["step"] for item in route["ordered_steps"]], *route["ordered_actions"]]
 
 
-def _validate_route(root: Path, entry: Any) -> dict[str, Any]:
+def _validate_route(
+    root: Path, entry: Any, *, allowed_routes: tuple[str, ...] = SELECTED_ROUTE_NAMES,
+) -> dict[str, Any]:
     required = {"route", "workflow", "ordered_steps", "ordered_actions", "native_action_calls",
                 "entry_step", "on_result", "mutation_capable"}
     if not isinstance(entry, Mapping) or set(entry) != required:
         raise SelectedRouteError("route binding has an incomplete or unknown schema")
-    if entry["route"] not in SELECTED_ROUTE_NAMES or not isinstance(entry["entry_step"], str):
+    if entry["route"] not in allowed_routes or not isinstance(entry["entry_step"], str):
         raise SelectedRouteError("route binding has an unsupported route or entry step")
     if not isinstance(entry["mutation_capable"], bool) or not isinstance(entry["ordered_steps"], list) or not entry["ordered_steps"]:
         raise SelectedRouteError("route binding has no ordered step graph")
@@ -307,16 +312,33 @@ def _validate_query_source_admissions(
     return validated
 
 
+def _unique_manifest_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject duplicate JSON members before the parser silently collapses them."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise SelectedRouteError(f"selected workflow binding manifest has duplicate JSON member: {key}")
+        result[key] = value
+    return result
+
+
 def load_selected_manifest(root: str | Path) -> dict[str, Any]:
-    """Load the immutable projection and verify its self digest and live source pins."""
+    """Verify the current15 or source-admitted additive16 file, without dispatch.
+
+    Optional Release evidence belongs only to this canonical file. It does not
+    alter D527 request bindings or the public fifteen-route registration set.
+    """
     project_root = Path(root).resolve(strict=True)
     manifest_ref = selected_manifest_ref(project_root)
     try:
-        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"))
+        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"),
+                              object_pairs_hook=_unique_manifest_object)
     except (OSError, json.JSONDecodeError) as error:
         raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
     required = {"schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"}
-    if not isinstance(manifest, Mapping) or set(manifest) != required or manifest["schema_version"] != 1:
+    if (not isinstance(manifest, Mapping) or not required <= set(manifest)
+            or set(manifest) - required - {"release_source_admissions"}
+            or manifest["schema_version"] != 1):
         raise SelectedRouteError("selected workflow binding manifest schema is invalid")
     if not isinstance(manifest["canonical_manifest_sha256"], str) or not _DIGEST.fullmatch(manifest["canonical_manifest_sha256"]):
         raise SelectedRouteError("selected workflow binding manifest digest is invalid")
@@ -337,17 +359,28 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
     if not registry.is_file() or hashlib.sha256(registry.read_bytes()).hexdigest() != freshness["selected_source_registry_digest"]:
         raise SelectedRouteError("selected source registry pin is stale")
     routes = manifest["routes"]
-    if not isinstance(routes, list) or len(routes) != len(SELECTED_ROUTE_NAMES):
-        raise SelectedRouteError("selected workflow binding manifest does not contain fifteen routes")
-    validated = [_validate_route(project_root, entry) for entry in routes]
-    if tuple(entry["route"] for entry in validated) != SELECTED_ROUTE_NAMES or len({entry["route"] for entry in validated}) != len(SELECTED_ROUTE_NAMES):
+    if not isinstance(routes, list) or len(routes) not in {len(SELECTED_ROUTE_NAMES), len(SELECTED_ROUTE_NAMES) + 1}:
+        raise SelectedRouteError("selected workflow binding manifest must contain fifteen routes or their additive Release successor")
+    expected_names = (SELECTED_ROUTE_NAMES if len(routes) == len(SELECTED_ROUTE_NAMES)
+                      else (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME))
+    validated = [_validate_route(project_root, entry, allowed_routes=expected_names) for entry in routes]
+    if tuple(entry["route"] for entry in validated) != expected_names or len({entry["route"] for entry in validated}) != len(expected_names):
         raise SelectedRouteError("selected workflow route registry is incomplete or duplicate")
     admissions = _validate_query_source_admissions(project_root, manifest["query_source_admissions"], validated)
     if canonical_digest(validated) != freshness["selected_binding_digest"]:
         raise SelectedRouteError("selected workflow route binding digest differs")
-    return {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness),
-            "query_source_admissions": admissions, "routes": validated,
-            "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
+    from release_source_admission import ReleaseSourceAdmissionError, validate_release_source_admissions
+
+    try:
+        release_admissions = validate_release_source_admissions(project_root, {**manifest, "routes": validated})
+    except ReleaseSourceAdmissionError as error:
+        raise SelectedRouteError(str(error)) from error
+    result = {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness),
+              "query_source_admissions": admissions, "routes": validated,
+              "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
+    if release_admissions:
+        result["release_source_admissions"] = release_admissions
+    return result
 
 
 def _find_shadow_manifest_fields(

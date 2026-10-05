@@ -12,9 +12,11 @@ from unittest.mock import patch
 MCP = Path(__file__).resolve().parents[1]
 ROOT = MCP.parents[2]
 ORCHESTRATOR = MCP.parent / "203_APPS" / "WORKFLOW_ORCHESTRATOR"
+TOOLS_TESTS = MCP.parent / "201_TOOLS" / "tests"
 TEST_TEMP_ROOT = ROOT / ".caprmedio_tmp" / "tests" / Path(__file__).stem
 TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(MCP))
+sys.path.insert(0, str(TOOLS_TESTS))
 
 from selected_routes import (  # noqa: E402
     ORIGINAL_SELECTED_ROUTE_NAMES,
@@ -27,6 +29,7 @@ from selected_routes import (  # noqa: E402
     selected_manifest_contract,
     selected_manifest_ref,
 )
+import test_model_driven_status_lifecycle as status_goldens  # noqa: E402
 
 
 class FakeRunSupport:
@@ -98,18 +101,30 @@ class SelectedRoutesMCPTest(unittest.TestCase):
         # below deliberately exercise the same immutable snapshot instead of
         # re-reading every source graph once per route.
         cls._verified_manifest = load_selected_manifest(ROOT)
+        status_goldens.ModelDrivenStatusLifecycleTest.setUpClass()
 
     def setUp(self) -> None:
         self.manifest = copy.deepcopy(self._verified_manifest)
+        self.status_fixture = status_goldens.ModelDrivenStatusLifecycleTest()
+        self.status_fixture.setUp()
+        self.addCleanup(self.status_fixture.tearDown)
+        self.status_target = self.status_fixture.atom("Requirement", "Active")
         self.support = FakeRunSupport()
         self.loader = patch("selected_routes.load_selected_manifest", return_value=self.manifest)
         self.loader.start()
         self.addCleanup(self.loader.stop)
-        self.adapter = SelectedRouteAdapter(ROOT, service=self.support)
+        # Status preflight must inspect a real disposable Atom and its copied
+        # source-bound model/Structure authority.  Other selected routes still
+        # use the same manifest snapshot and fake shared support.
+        self.adapter = SelectedRouteAdapter(self.status_fixture.root, service=self.support)
 
     def request(self, route: str, *, mode: str = "preview") -> dict:
-        parameters = {"route_input": route}
-        refs = ["target:fixture"]
+        if route == "change_atom_status":
+            parameters = self.status_fixture.request(self.status_target, "Archived")
+            refs = [parameters["target"]["path"]]
+        else:
+            parameters = {"route_input": route}
+            refs = ["target:fixture"]
         effects = []
         request = {
             "operation_route": route,
@@ -177,6 +192,23 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                                   "parent_requested_run_id": step_run_id})
         return requested
 
+    def _copy_status_bindings(self, project: Path) -> dict:
+        """Copy the real disposable Atom, model sources, and Project Structure."""
+        for source in self.status_fixture.sources.values():
+            relative = source.relative_to(self.status_fixture.root)
+            destination = project / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        structure = self.status_fixture.root / status_goldens.CONTROL / "project_structure.toml"
+        structure_destination = project / status_goldens.CONTROL / "project_structure.toml"
+        structure_destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(structure, structure_destination)
+        target = self.status_target.relative_to(self.status_fixture.root)
+        target_destination = project / target
+        target_destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(self.status_target, target_destination)
+        return self.status_fixture.request(self.status_target, "Archived")
+
     def test_current_physical_manifest_freezes_the_original_thirteen_routes_through_queue_consumer(self) -> None:
         """The MCP source fixture must be sufficient for the independent queue.
 
@@ -197,6 +229,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 'journal_root = ".caprmedio_caprmedio/_journal"\n',
                 encoding="utf-8",
             )
+            status_parameters = self._copy_status_bindings(project)
             pins = {self.manifest["manifest_ref"], self.manifest["source_freshness"]["selected_source_registry_ref"]}
             for route in self.manifest["routes"]:
                 pins.add(route["workflow"]["source_path"])
@@ -215,15 +248,26 @@ class SelectedRoutesMCPTest(unittest.TestCase):
             self.assertEqual(13, len(original_routes))
             for ordinal, route in enumerate(original_routes, start=1):
                 run_id = f"freeze{ordinal:02d}"
+                parameters = (copy.deepcopy(status_parameters)
+                              if route["route"] == "change_atom_status" else {})
+                target_frontier = ([parameters["target"]["path"]]
+                                   if route["route"] == "change_atom_status" else ["fixture/input"])
                 execution = {
                     "mode": "execute", "request_id": f"request-{run_id}",
-                    "operation_route": route["route"], "parameters": {},
-                    "target_frontier": ["fixture/input"], "effects": [],
+                    "operation_route": route["route"], "parameters": parameters,
+                    "target_frontier": target_frontier, "effects": [],
                     "definition_manifest": {"manifest_ref": self.manifest["manifest_ref"],
                                             "manifest_digest": self.manifest["canonical_manifest_sha256"]},
                     "source_freshness": copy.deepcopy(self.manifest["source_freshness"]),
                     "initiative": {"initiative_id": "fixture", "instruction_summary": "freeze"},
                 }
+                if route["route"] == "change_atom_status":
+                    preview = SelectedRouteAdapter(project).invoke(
+                        route["route"], self.request(route["route"]),
+                    )
+                    self.assertEqual("preview", preview["disposition"], preview)
+                    execution["proposal_receipt"] = preview["proposal_receipt"]
+                    execution["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
                 graph = queue._validate_graph(execution)
                 execution["requested_runs"] = self._queue_requested_runs(graph, run_id)
                 frozen = queue.freeze({"operation": "enqueue_selected", "run_id": run_id,

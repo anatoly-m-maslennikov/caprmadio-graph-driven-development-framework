@@ -1,0 +1,518 @@
+"""Bound image phases; never select a runtime or replay an uncertain effect.
+
+The executor is an internal dependency, not a Tool request member. Fake executor
+results prove command construction only. Actual image proof requires the Docker
+executor and successful immutable-ID inspection and executable canary output.
+Retirement remains refused until the separate promotion producer exists.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+import subprocess
+import tempfile
+from dataclasses import asdict, dataclass, replace
+from pathlib import Path
+from typing import Literal, Protocol
+
+from release_contract import IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, ReleaseContractError, ValidatedCandidate, canonical_json
+from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation, _file
+from release_packaging import RUNTIME_ROOT, _complete_rows, _render_manifest, _verify_release
+from release_suite import SuiteGateEvidence, _safe_path, verify_bound_suite_evidence
+
+
+IMAGE_ID = re.compile(r"^sha256:[0-9a-f]{64}$")
+IMAGE_ROOT = ".caprmedio_runtime/release_image"
+CANDIDATE_LABEL = "org.caprmedio.candidate"
+CONTEXT_LABEL = "org.caprmedio.context"
+MAX_OUTPUT_BYTES = 4 * 1024 * 1024
+
+
+@dataclass(frozen=True)
+class DockerCommandResult:
+    exit_code: int | None
+    stdout: bytes
+    stderr: bytes
+    timed_out: bool = False
+
+
+class DockerExecutor(Protocol):
+    def run(self, argv: tuple[str, ...], *, cwd: Path, timeout_seconds: float) -> DockerCommandResult: ...
+
+
+class DockerSubprocessExecutor:
+    """Existing Docker CLI only; no shell, provisioning or socket workaround."""
+
+    def run(self, argv: tuple[str, ...], *, cwd: Path, timeout_seconds: float) -> DockerCommandResult:
+        if not argv or argv[0] != "docker" or argv[1] not in {"build", "image", "run"}:
+            raise ReleaseContractError("release-image-command-invalid", "unsupported internal Docker operation")
+        try:
+            result = subprocess.run(argv, cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True,
+                                    shell=False, timeout=timeout_seconds, check=False)
+            return DockerCommandResult(result.returncode, result.stdout, result.stderr)
+        except subprocess.TimeoutExpired as error:
+            # Killing a CLI does not establish whether its daemon-side effect stopped.
+            return DockerCommandResult(None, error.stdout or b"", error.stderr or b"", True)
+
+
+@dataclass(frozen=True)
+class ImageBuildEvidence:
+    candidate_snapshot_manifest_sha256: str
+    outcome: Literal["built", "failed", "incomplete", "stale", "effect_uncertain", "recording_uncertain"]
+    reason: str
+    candidate_image_digest: str | None
+    context_root: str
+    context_sha256: str
+    package_manifest_sha256: str
+    suite_receipt_sha256: str
+    evidence_root: str
+    commands_sha256: str
+    execution_kind: Literal["docker-subprocess", "test-double"]
+    receipt_sha256: str | None = None
+
+
+@dataclass(frozen=True)
+class ImageVerificationEvidence:
+    candidate_snapshot_manifest_sha256: str
+    outcome: Literal["verified", "failed", "incomplete", "stale", "effect_uncertain", "recording_uncertain"]
+    reason: str
+    candidate_image_digest: str
+    build_receipt_sha256: str
+    evidence_root: str
+    commands_sha256: str
+    execution_kind: Literal["docker-subprocess", "test-double"]
+    receipt_sha256: str | None = None
+
+
+def _digest(payload: bytes) -> str:
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _tree(root: Path) -> str:
+    records = []
+    if root.is_symlink() or not root.is_dir():
+        raise ReleaseContractError("release-image-context-unsafe", "image context root is unsafe")
+    for path in sorted(root.rglob("*")):
+        if path.is_symlink() or not (path.is_dir() or path.is_file()):
+            raise ReleaseContractError("release-image-context-unsafe", "image context contains an unsafe carrier")
+        if path.is_file():
+            records.append((path.relative_to(root).as_posix(), _digest(path.read_bytes()), path.stat().st_mode & 0o777))
+    return _digest(canonical_json(records))
+
+
+def _freeze(root: Path) -> tuple[bytes, str | None]:
+    selector = _file(root, CURRENT_SELECTOR_RELATIVE).read_bytes()
+    skill = root / PROJECT_SKILL_TARGET
+    for ancestor in (root / ".agents", root / ".agents/skills", skill):
+        if ancestor.is_symlink():
+            raise ReleaseContractError("release-image-selection-unsafe", "public Skill selection contains a symlink")
+    return selector, _tree(skill) if skill.exists() else None
+
+
+def _bound(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation, suite: SuiteGateEvidence) -> Path:
+    return verify_bound_suite_evidence(candidate, compilation, suite)
+
+
+def _post_bound(candidate, compilation, suite, root, frozen):
+    _bound(candidate, compilation, suite)
+    if _freeze(root) != frozen:
+        raise ReleaseContractError("release-image-selection-stale", "executing N or public Skill changed during image phase")
+
+
+def _attempt(root: Path, candidate_sha: str, phase: str) -> Path:
+    parent = _safe_path(root, f"{IMAGE_ROOT}/{candidate_sha}/{phase}", create=True)
+    return Path(tempfile.mkdtemp(prefix="attempt-", dir=parent))
+
+
+def _write(path: Path, payload: bytes, mode: int = 0o644) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("xb") as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    path.chmod(mode)
+
+
+def _record(attempt: Path, evidence):
+    payload = canonical_json(asdict(evidence))
+    try:
+        _write(attempt / "receipt.json", payload)
+        descriptor = os.open(attempt, os.O_RDONLY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    except OSError:
+        return replace(evidence, outcome="recording_uncertain", reason="image receipt recording is uncertain")
+    return replace(evidence, receipt_sha256=_digest(payload))
+
+
+def _command(executor, argv, root, attempt, records, timeout):
+    argv = tuple(argv)
+    try:
+        result = executor.run(argv, cwd=root, timeout_seconds=timeout)
+    except OSError as error:
+        result = DockerCommandResult(None, b"", type(error).__name__.encode())
+    if not isinstance(result, DockerCommandResult) or not isinstance(result.stdout, bytes) or not isinstance(result.stderr, bytes):
+        raise ReleaseContractError("release-image-executor-invalid", "executor must return captured byte outputs")
+    if len(result.stdout) > MAX_OUTPUT_BYTES or len(result.stderr) > MAX_OUTPUT_BYTES:
+        raise ReleaseContractError("release-image-output-incomplete", "captured Docker output is too large")
+    index = len(records)
+    _write(attempt / f"command-{index}.stdout", result.stdout)
+    _write(attempt / f"command-{index}.stderr", result.stderr)
+    records.append({"argv": argv, "exit_code": result.exit_code, "timed_out": result.timed_out,
+                    "stdout_sha256": _digest(result.stdout), "stderr_sha256": _digest(result.stderr)})
+    return result
+
+
+def _inspect(executor, image, context_sha, candidate_sha, root, attempt, records, timeout):
+    result = _command(executor, ("docker", "image", "inspect", image), root, attempt, records, timeout)
+    if result.timed_out:
+        return False
+    if result.exit_code != 0:
+        return False
+    try:
+        inspected = json.loads(result.stdout)
+        labels = inspected[0]["Config"]["Labels"]
+        return len(inspected) == 1 and inspected[0]["Id"] == image and labels.get(CANDIDATE_LABEL) == candidate_sha and labels.get(CONTEXT_LABEL) == context_sha
+    except (ValueError, TypeError, KeyError, IndexError):
+        return False
+
+
+# This producer reads image bytes and executes the image's actual MCP gateway.
+# Its output is parsed strictly by verify_candidate_image, never a caller flag.
+CANARY = r'''import asyncio, hashlib, json, shutil, sys, tomllib
+from pathlib import Path
+from mcp import Client, StdioServerParameters
+def digest(value):
+    return hashlib.sha256(value).hexdigest()
+base = Path('/opt/caprmedio-framework')
+spec = json.loads(Path('/opt/caprmedio-release-canary.json').read_bytes())
+manifest_bytes = (base / 'manifest.toml').read_bytes()
+assert digest(manifest_bytes) == spec['package_manifest_sha256']
+manifest = tomllib.loads(manifest_bytes.decode())
+assert manifest['candidate_snapshot_manifest_sha256'] == spec['candidate_snapshot_manifest_sha256']
+rows = spec['package_rows']
+assert manifest['files'] == rows
+expected = {'manifest.toml'} | {row['destination'] for row in rows}
+assert {p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()} == expected
+for row in rows:
+    p = base / row['destination']
+    assert p.is_file() and not p.is_symlink()
+    assert digest(p.read_bytes()) == row['sha256'] and p.stat().st_mode & 511 == row['mode']
+for row in spec['engine_rows']:
+    p = Path('/workspace') / row['path']
+    assert p.is_file() and not p.is_symlink()
+    assert digest(p.read_bytes()) == row['sha256'] and p.stat().st_mode & 511 == row['mode']
+engine = Path('/workspace/102_FRAMEWORK_ENGINE')
+assert {p.relative_to(Path('/workspace')).as_posix() for p in engine.rglob('*') if p.is_file()} == {row['path'] for row in spec['engine_rows']}
+project = Path('/tmp/release-canary-project')
+project.mkdir()
+source = project / '.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources'
+shutil.copytree(base / 'METHODOLOGY/sources', source)
+shutil.copytree(base / 'METHODOLOGY/compiled', project / '.caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY')
+(project / '.caprmedio_caprmedio/project_structure.toml').write_text('[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\nauthority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"\n')
+async def probe():
+    params = StdioServerParameters(command=sys.executable, args=['/workspace/102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py', '--project-root', str(project)])
+    async with Client(params, cache=None) as client:
+        page = await client.list_tools()
+        names = [tool.name for tool in page.tools]
+        while page.next_cursor:
+            page = await client.list_tools(cursor=page.next_cursor)
+            names.extend(tool.name for tool in page.tools)
+        assert names and len(names) == len(set(names))
+        result = await client.call_tool('get_mcp_reload_status', {'request': {}})
+        assert not result.is_error
+        return sorted(names)
+names = asyncio.run(asyncio.wait_for(probe(), 60))
+print(json.dumps({'schema': 'caprmedio.release_version.image_canary.v1', 'candidate_snapshot_manifest_sha256': spec['candidate_snapshot_manifest_sha256'], 'package_manifest_sha256': digest(manifest_bytes), 'verified_files': len(rows), 'mcp_tools': names}, sort_keys=True))
+'''
+
+
+def _context(root, candidate, compilation, attempt):
+    identity, rows, _selector = _complete_rows(root, compilation)
+    package = _safe_path(root, (RUNTIME_ROOT / "releases" / identity).as_posix())
+    manifest = _render_manifest(identity, rows)
+    _verify_release(package, manifest, rows)
+    inputs = {row.source_path: row for row in candidate.manifest.source_inventory_rows if row.resource == "IMAGE_INPUT"}
+    if not {IMAGE_DOCKERFILE, "pyproject.toml", "uv.lock"} <= inputs.keys():
+        raise ReleaseContractError("release-image-input-incomplete", "Dockerfile, pyproject.toml and uv.lock must all be sealed image inputs")
+    context = attempt / "context"
+    context.mkdir()
+    _write(context / "PACKAGE/manifest.toml", manifest.encode())
+    engine_rows = []
+    for row in rows:
+        source = package / row.destination_path
+        payload = source.read_bytes()
+        if _digest(payload) != row.sha256 or source.stat().st_mode & 0o777 != row.mode:
+            raise ReleaseContractError("release-image-package-stale", "package changed while private context was assembled")
+        _write(context / "PACKAGE" / row.destination_path, payload, row.mode)
+        runtime = None
+        if row.resource == "FRAMEWORK_ENGINE":
+            runtime = "102_" + row.destination_path
+        elif row.resource == "SKILL":
+            runtime = "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/" + row.destination_path.removeprefix("SKILLS/ca/")
+        if runtime:
+            _write(context / runtime, payload, row.mode)
+            engine_rows.append({"path": runtime, "sha256": row.sha256, "mode": row.mode})
+    for source_relative, row in sorted(inputs.items()):
+        source = _file(root, source_relative)
+        payload = source.read_bytes()
+        if _digest(payload) != row.source_sha256 or source.stat().st_mode & 0o777 != row.source_mode:
+            raise ReleaseContractError("release-image-input-stale", "sealed image input changed during context assembly")
+        _write(context / source_relative, payload, row.source_mode)
+        if source_relative.startswith("102_FRAMEWORK_ENGINE/"):
+            engine_rows.append({"path": source_relative, "sha256": row.source_sha256, "mode": row.source_mode})
+    pinned = (context / IMAGE_DOCKERFILE).read_bytes()
+    if _digest(pinned) != candidate.manifest.candidate_image.dockerfile_sha256:
+        raise ReleaseContractError("release-image-dockerfile-stale", "pinned Dockerfile digest differs")
+    _write(context / "Dockerfile", pinned + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n")
+    _write(context / "canary.py", CANARY.encode())
+    package_rows = [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
+                     "sha256": row.sha256, "mode": row.mode} for row in rows]
+    _write(context / "canary.json", canonical_json({"candidate_snapshot_manifest_sha256": identity,
+           "package_manifest_sha256": _digest(manifest.encode()), "package_rows": package_rows, "engine_rows": engine_rows}))
+    return context, _digest(manifest.encode())
+
+
+def build_candidate_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                          suite: SuiteGateEvidence, *, executor: DockerExecutor, timeout_seconds: float = 900) -> ImageBuildEvidence:
+    """One admitted build attempt, retaining its exact context and output evidence."""
+    if isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= 900:
+        raise ReleaseContractError("release-image-timeout-invalid", "image timeout must be within (0, 900]")
+    root = _bound(candidate, compilation, suite)
+    frozen = _freeze(root)
+    attempt = _attempt(root, candidate.manifest.sha256, "build")
+    context, package_sha = _context(root, candidate, compilation, attempt)
+    context_sha = _tree(context)
+    records = []
+    image, outcome, reason = None, "incomplete", "immutable image identity is unverified"
+    try:
+        _post_bound(candidate, compilation, suite, root, frozen)
+        result = _command(executor, ("docker", "build", "--iidfile", str(attempt / "image.id"),
+                          "--label", f"{CANDIDATE_LABEL}={candidate.manifest.sha256}",
+                          "--label", f"{CONTEXT_LABEL}={context_sha}", "--file", str(context / "Dockerfile"), str(context)),
+                          root, attempt, records, timeout_seconds)
+        if result.timed_out:
+            outcome, reason = "effect_uncertain", "Docker CLI timed out; build effect must not be replayed"
+        elif result.exit_code != 0:
+            outcome, reason = "failed", "candidate image build failed"
+        else:
+            iid = attempt / "image.id"
+            value = iid.read_text().strip() if iid.is_file() and not iid.is_symlink() else ""
+            if IMAGE_ID.fullmatch(value):
+                image = value
+                if _inspect(executor, image, context_sha, candidate.manifest.sha256, root, attempt, records, timeout_seconds):
+                    outcome, reason = "built", "bound immutable image built; executable verification is still required"
+        _post_bound(candidate, compilation, suite, root, frozen)
+        if _tree(context) != context_sha:
+            raise ReleaseContractError("release-image-context-stale", "private build context changed during execution")
+    except (ValueError, OSError, RuntimeError) as error:
+        outcome, reason = "stale" if isinstance(error, ReleaseContractError) and "stale" in error.code else "recording_uncertain", str(error)
+    commands = canonical_json(records)
+    try:
+        _write(attempt / "commands.json", commands)
+    except OSError:
+        outcome, reason = "recording_uncertain", "captured image command recording is uncertain"
+    evidence = ImageBuildEvidence(candidate.manifest.sha256, outcome, reason, image,
+               context.relative_to(root).as_posix(), context_sha, package_sha, suite.receipt_sha256,
+               attempt.relative_to(root).as_posix(), _digest(commands),
+               "docker-subprocess" if type(executor) is DockerSubprocessExecutor else "test-double")
+    return _record(attempt, evidence)
+
+
+def _verify_build(root, candidate, compilation, suite, build):
+    if not isinstance(build, ImageBuildEvidence) or build.outcome != "built" or not build.receipt_sha256 or not IMAGE_ID.fullmatch(build.candidate_image_digest or ""):
+        raise ReleaseContractError("release-image-build-untrusted", "verification requires a recorded immutable build")
+    if build.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256 or build.suite_receipt_sha256 != suite.receipt_sha256:
+        raise ReleaseContractError("release-image-build-mismatch", "build belongs to another candidate or suite")
+    prefix = f"{IMAGE_ROOT}/{candidate.manifest.sha256}/build/"
+    if not build.evidence_root.startswith(prefix) or "/" in build.evidence_root.removeprefix(prefix) or build.context_root != f"{build.evidence_root}/context":
+        raise ReleaseContractError("release-image-build-path-invalid", "build carrier is outside the fixed attempt root")
+    attempt = _safe_path(root, build.evidence_root)
+    receipt = _file(root, f"{build.evidence_root}/receipt.json").read_bytes()
+    if _digest(receipt) != build.receipt_sha256 or receipt != canonical_json(asdict(replace(build, receipt_sha256=None))):
+        raise ReleaseContractError("release-image-build-untrusted", "build receipt does not match retained evidence")
+    commands = _file(root, f"{build.evidence_root}/commands.json").read_bytes()
+    if _digest(commands) != build.commands_sha256:
+        raise ReleaseContractError("release-image-build-untrusted", "build command evidence changed")
+    for index, command in enumerate(json.loads(commands)):
+        for stream in ("stdout", "stderr"):
+            if _digest(_file(root, f"{build.evidence_root}/command-{index}.{stream}").read_bytes()) != command[f"{stream}_sha256"]:
+                raise ReleaseContractError("release-image-build-untrusted", "build captured output changed")
+    context = _safe_path(root, build.context_root)
+    if _tree(context) != build.context_sha256:
+        raise ReleaseContractError("release-image-context-stale", "private build context no longer matches")
+    identity, rows, _selector = _complete_rows(root, compilation)
+    manifest = _render_manifest(identity, rows)
+    if build.package_manifest_sha256 != _digest(manifest.encode()):
+        raise ReleaseContractError("release-image-build-untrusted", "build package identity differs from the complete current package")
+    _verify_release(context / "PACKAGE", manifest, rows)
+    expected_paths = {"PACKAGE/manifest.toml", "Dockerfile", "canary.py", "canary.json"}
+    engine_rows = []
+    for row in rows:
+        expected_paths.add("PACKAGE/" + row.destination_path)
+        runtime = None
+        if row.resource == "FRAMEWORK_ENGINE":
+            runtime = "102_" + row.destination_path
+        elif row.resource == "SKILL":
+            runtime = "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/" + row.destination_path.removeprefix("SKILLS/ca/")
+        if runtime:
+            expected_paths.add(runtime)
+            engine_rows.append({"path": runtime, "sha256": row.sha256, "mode": row.mode})
+            path = context / runtime
+            if _digest(path.read_bytes()) != row.sha256 or path.stat().st_mode & 0o777 != row.mode:
+                raise ReleaseContractError("release-image-context-stale", "private Engine bytes differ from the complete package")
+    for row in sorted((row for row in candidate.manifest.source_inventory_rows if row.resource == "IMAGE_INPUT"), key=lambda row: row.source_path):
+        expected_paths.add(row.source_path)
+        path = context / row.source_path
+        if _digest(path.read_bytes()) != row.source_sha256 or path.stat().st_mode & 0o777 != row.source_mode:
+            raise ReleaseContractError("release-image-context-stale", "private image input differs from its sealed source")
+        if row.source_path.startswith("102_FRAMEWORK_ENGINE/"):
+            engine_rows.append({"path": row.source_path, "sha256": row.source_sha256, "mode": row.source_mode})
+    spec = {"candidate_snapshot_manifest_sha256": identity, "package_manifest_sha256": _digest(manifest.encode()),
+            "package_rows": [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
+                              "sha256": row.sha256, "mode": row.mode} for row in rows], "engine_rows": engine_rows}
+    dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
+    if ((context / "canary.py").read_bytes() != CANARY.encode()
+        or (context / "canary.json").read_bytes() != canonical_json(spec)
+        or (context / "Dockerfile").read_bytes() != dockerfile
+        or {path.relative_to(context).as_posix() for path in context.rglob("*") if path.is_file()} != expected_paths):
+        raise ReleaseContractError("release-image-context-stale", "private context or fixed canary producer changed")
+    return attempt
+
+
+def verify_candidate_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                           suite: SuiteGateEvidence, build: ImageBuildEvidence, *, executor: DockerExecutor,
+                           timeout_seconds: float = 120) -> ImageVerificationEvidence:
+    """Inspect exact ID and execute fixed complete-package/MCP canary in isolation."""
+    if isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= 120:
+        raise ReleaseContractError("release-image-timeout-invalid", "canary timeout must be within (0, 120]")
+    root = _bound(candidate, compilation, suite)
+    _verify_build(root, candidate, compilation, suite, build)
+    frozen = _freeze(root)
+    attempt = _attempt(root, candidate.manifest.sha256, "verify")
+    records = []
+    outcome, reason = "incomplete", "candidate image canary evidence is incomplete"
+    try:
+        if _inspect(executor, build.candidate_image_digest, build.context_sha256, candidate.manifest.sha256,
+                    root, attempt, records, timeout_seconds):
+            result = _command(executor, ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+                    "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+                    "--entrypoint", "python", build.candidate_image_digest, "/opt/caprmedio-release-canary.py"),
+                    root, attempt, records, timeout_seconds)
+            if result.timed_out:
+                outcome, reason = "effect_uncertain", "Docker CLI timed out; canary cleanup/effect is uncertain"
+            elif result.exit_code != 0:
+                outcome, reason = "failed", "actual candidate-image canary failed"
+            else:
+                try:
+                    report = json.loads(result.stdout)
+                    exact = {"schema", "candidate_snapshot_manifest_sha256", "package_manifest_sha256", "verified_files", "mcp_tools"}
+                    tools = report.get("mcp_tools")
+                    if (set(report) == exact and report["schema"] == "caprmedio.release_version.image_canary.v1"
+                        and report["candidate_snapshot_manifest_sha256"] == candidate.manifest.sha256
+                        and report["package_manifest_sha256"] == build.package_manifest_sha256
+                        and type(report["verified_files"]) is int and report["verified_files"] == len(compilation.package_rows)
+                        and isinstance(tools, list) and tools and all(isinstance(tool, str) and tool for tool in tools)
+                        and len(tools) == len(set(tools)) and "get_mcp_reload_status" in tools):
+                        outcome, reason = "verified", "complete bound package and executable MCP canary observed"
+                except (ValueError, TypeError, AttributeError):
+                    pass
+        _post_bound(candidate, compilation, suite, root, frozen)
+        _verify_build(root, candidate, compilation, suite, build)
+    except (ValueError, OSError, RuntimeError) as error:
+        outcome, reason = "stale" if isinstance(error, ReleaseContractError) and "stale" in error.code else "recording_uncertain", str(error)
+    commands = canonical_json(records)
+    try:
+        _write(attempt / "commands.json", commands)
+    except OSError:
+        outcome, reason = "recording_uncertain", "canary output recording is uncertain"
+    evidence = ImageVerificationEvidence(candidate.manifest.sha256, outcome, reason, build.candidate_image_digest,
+               build.receipt_sha256, attempt.relative_to(root).as_posix(), _digest(commands),
+               "docker-subprocess" if type(executor) is DockerSubprocessExecutor else "test-double")
+    return _record(attempt, evidence)
+
+
+def verify_bound_image_evidence(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                                suite: SuiteGateEvidence, build: ImageBuildEvidence,
+                                evidence: ImageVerificationEvidence) -> Path:
+    """Reopen actual Docker evidence for the future promotion producer.
+
+    A test double cannot create promotion evidence. This reader has no Docker
+    effect and requires current sealed N before the separate promotion effect.
+    """
+    root = _bound(candidate, compilation, suite)
+    _verify_build(root, candidate, compilation, suite, build)
+    if (not isinstance(evidence, ImageVerificationEvidence) or evidence.outcome != "verified"
+        or build.execution_kind != "docker-subprocess" or evidence.execution_kind != "docker-subprocess"
+        or not evidence.receipt_sha256):
+        raise ReleaseContractError("release-image-evidence-untrusted", "promotion requires recorded actual Docker execution, never a test double")
+    if (evidence.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
+        or evidence.build_receipt_sha256 != build.receipt_sha256
+        or evidence.candidate_image_digest != build.candidate_image_digest):
+        raise ReleaseContractError("release-image-evidence-mismatch", "image verification belongs to a different bound build")
+    prefix = f"{IMAGE_ROOT}/{candidate.manifest.sha256}/verify/"
+    if not evidence.evidence_root.startswith(prefix) or "/" in evidence.evidence_root.removeprefix(prefix):
+        raise ReleaseContractError("release-image-evidence-path-invalid", "verification carrier is outside the fixed attempt root")
+    attempt = _safe_path(root, evidence.evidence_root)
+    receipt = _file(root, f"{evidence.evidence_root}/receipt.json").read_bytes()
+    if _digest(receipt) != evidence.receipt_sha256 or receipt != canonical_json(asdict(replace(evidence, receipt_sha256=None))):
+        raise ReleaseContractError("release-image-evidence-untrusted", "verification receipt changed or is caller-forged")
+    payload = _file(root, f"{evidence.evidence_root}/commands.json").read_bytes()
+    if _digest(payload) != evidence.commands_sha256:
+        raise ReleaseContractError("release-image-evidence-untrusted", "verification command recording changed")
+    commands = json.loads(payload)
+    expected_run = ["docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+                    "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+                    "--entrypoint", "python", build.candidate_image_digest, "/opt/caprmedio-release-canary.py"]
+    if (len(commands) != 2 or commands[0]["argv"] != ["docker", "image", "inspect", build.candidate_image_digest]
+        or commands[1]["argv"] != expected_run
+        or any(command["exit_code"] != 0 or command["timed_out"] for command in commands)):
+        raise ReleaseContractError("release-image-evidence-untrusted", "verification did not execute the exact immutable-ID canary")
+    captured = []
+    for index, command in enumerate(commands):
+        for stream in ("stdout", "stderr"):
+            output = _file(root, f"{evidence.evidence_root}/command-{index}.{stream}").read_bytes()
+            if _digest(output) != command[f"{stream}_sha256"]:
+                raise ReleaseContractError("release-image-evidence-untrusted", "recorded verification output changed")
+            if stream == "stdout":
+                captured.append(json.loads(output))
+    inspected, report = captured
+    try:
+        labels = inspected[0]["Config"]["Labels"]
+        valid_inspect = (len(inspected) == 1 and inspected[0]["Id"] == build.candidate_image_digest
+                         and labels.get(CANDIDATE_LABEL) == candidate.manifest.sha256
+                         and labels.get(CONTEXT_LABEL) == build.context_sha256)
+        tools = report["mcp_tools"]
+        valid_canary = (set(report) == {"schema", "candidate_snapshot_manifest_sha256", "package_manifest_sha256", "verified_files", "mcp_tools"}
+                        and report["schema"] == "caprmedio.release_version.image_canary.v1"
+                        and report["candidate_snapshot_manifest_sha256"] == candidate.manifest.sha256
+                        and report["package_manifest_sha256"] == build.package_manifest_sha256
+                        and type(report["verified_files"]) is int and report["verified_files"] == len(compilation.package_rows)
+                        and isinstance(tools, list) and tools and all(isinstance(tool, str) and tool for tool in tools)
+                        and len(tools) == len(set(tools)) and "get_mcp_reload_status" in tools)
+    except (TypeError, KeyError, IndexError):
+        valid_inspect = valid_canary = False
+    if not valid_inspect or not valid_canary:
+        raise ReleaseContractError("release-image-evidence-untrusted", "actual image inspection or canary is incomplete")
+    return attempt
+
+
+def retire_prior_image(candidate: ValidatedCandidate, *, prior_image_digest: str, executor: DockerExecutor):
+    """Refuse retirement until an actual matching promotion producer is available.
+
+    No accepted caller flag, mutable tag, selector presence or fake typed receipt
+    establishes promotion. A future implementation must consume the promotion
+    producer, observe all containers and required rollback references, then issue
+    only ``docker image rm <exact-prior-id>`` without force or broad pruning.
+    """
+    raise ReleaseContractError("release-image-promotion-producer-missing",
+                               "actual same-candidate verified promotion and prior-image/rollback authority are not implemented")
+
+
+__all__ = ["DockerCommandResult", "DockerExecutor", "DockerSubprocessExecutor", "ImageBuildEvidence",
+           "ImageVerificationEvidence", "build_candidate_image", "verify_candidate_image", "verify_bound_image_evidence", "retire_prior_image"]
