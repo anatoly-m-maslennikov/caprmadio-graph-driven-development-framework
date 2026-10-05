@@ -50,21 +50,6 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
         self.path = project.manifest_path
         self.record = copy.deepcopy(self.fixture.record)
         self.release = copy.deepcopy(self.fixture.route)
-        # Parse real Workflow transitions, rather than inventing source edges.
-        contents = (self.root / self.record["workflow"]["source_path"]).read_text()
-        transitions = []
-        in_transitions = False
-        for line in contents.splitlines():
-            if line == "## Transitions":
-                in_transitions = True
-            elif in_transitions and line.startswith("## "):
-                break
-            elif in_transitions and line.startswith("| CA-O-"):
-                event, target = [cell.strip() for cell in line.strip("|").split("|")]
-                step, condition = event.split(" ", 1)
-                transitions.append({"from": step, "condition": condition, "to": target})
-        self.assertEqual(10, len(transitions))
-        self.release["on_result"] = transitions
 
     def successor(self) -> dict:
         return {**copy.deepcopy(self.base), "routes": [*copy.deepcopy(self.base["routes"]), copy.deepcopy(self.release)],
@@ -124,6 +109,16 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
         manifest = self.successor()
         manifest["release_source_admissions"][0]["rmed_frontier"].pop()
         self.refusal(manifest)
+        for field in ("mutation_capable", "native_action_calls"):
+            manifest = self.successor()
+            manifest["release_source_admissions"][0].pop(field)
+            self.refusal(manifest)
+        for field, values in (("mutation_capable", (None, 0, False)),
+                              ("native_action_calls", (None, 0, False, ["CA-O-165"]))):
+            for value in values:
+                manifest = self.successor()
+                manifest["release_source_admissions"][0][field] = value
+                self.refusal(manifest)
 
     def test_registry_order_unknown_route_and_existing_query_guards_remain_closed(self) -> None:
         manifest = self.successor()
@@ -141,6 +136,20 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
         manifest = self.successor()
         manifest["source_freshness"]["selected_source_registry_version"] = 3
         self.refusal(manifest)
+
+    def test_rehashed_structurally_valid_release_graph_alterations_refuse_before_support(self) -> None:
+        mutations = (
+            ("entry_step", lambda route: route.__setitem__("entry_step", "CA-O-171")),
+            ("transition", lambda route: route["on_result"][0].__setitem__("to", "CA-O-172")),
+            ("native-call", lambda route: route.__setitem__(
+                "native_action_calls", [copy.deepcopy(route["ordered_actions"][0])])),
+            ("capability", lambda route: route.__setitem__("mutation_capable", False)),
+        )
+        for name, mutate in mutations:
+            with self.subTest(name=name):
+                manifest = self.successor()
+                mutate(manifest["routes"][-1])
+                self.refusal(manifest)
 
     def test_self_digest_binding_digest_and_stale_actual_rmed_are_rejected(self) -> None:
         manifest = self.successor()

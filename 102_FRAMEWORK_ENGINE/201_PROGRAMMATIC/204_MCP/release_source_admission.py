@@ -19,15 +19,22 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 5, "source_path": AUTHORITY_REF,
-    "digest": "f310863886274866401a52a0611660de2be8f05c1ab61bc7591da53752e1e969",
+    "atom_id": "CA-D-572", "version": 6, "source_path": AUTHORITY_REF,
+    "digest": "49e23c3e31514fb33f2e4bfc485f65455031e952818395b2cb10afd102b41df0",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
-                               "ordered_actions", "rmed_frontier"})
+                               "ordered_actions", "rmed_frontier", "mutation_capable",
+                               "native_action_calls"})
 _ATOM = re.compile(r"CA-[A-Z]+-[0-9]+")
 _DIGEST = re.compile(r"[0-9a-f]{64}")
 _MAX_SOURCE_BYTES = 1024 * 1024
+_RELEASE_STOP_RESULT = "any missing, stale, unauthorized, failed, partial, recording-blocked, unsafe, or unmatched result"
+_RELEASE_STOP_OUTCOME = "stop with its actual evidence; do not promote, retire, retry, or recurse implicitly"
+_GENERIC_STOP_CONTRACT = (
+    "The record serializes no catch-all transition, outcome, or execution policy: "
+    "CA-O-164@3 and the generic executor retain the existing catch-all stop behavior."
+)
 
 
 class ReleaseSourceAdmissionError(ValueError):
@@ -154,8 +161,32 @@ def _occurrence_pin(value: str) -> dict[str, Any]:
                        "source_path": match[3], "digest": match[4]})
 
 
+def _route_serialization_metadata(text: str) -> dict[str, Any]:
+    """Read D572's one typed route-serialization declaration, fail closed."""
+    matches = re.findall(r"^## Route serialization metadata\n+```json\n(.*?)\n```$", text, re.MULTILINE | re.DOTALL)
+    if len(matches) != 1:
+        _reject("D572 must define exactly one typed Release route serialization metadata block",
+                code="release-authority-invalid")
+    try:
+        metadata = json.loads(matches[0])
+    except json.JSONDecodeError as error:
+        raise ReleaseSourceAdmissionError(
+            "release-authority-invalid", "D572 Release route serialization metadata is not JSON"
+        ) from error
+    if (not isinstance(metadata, dict)
+            or set(metadata) != {"mutation_capable", "native_action_calls"}
+            or type(metadata["mutation_capable"]) is not bool
+            or metadata["native_action_calls"] != []):
+        _reject("D572 Release route serialization metadata is not the closed typed declaration",
+                code="release-authority-invalid")
+    if text.count(_GENERIC_STOP_CONTRACT) != 1:
+        _reject("D572 does not retain the generic executor catch-all stop contract",
+                code="release-authority-invalid")
+    return metadata
+
+
 def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
-    """Derive the one accepted record from pinned actual D572@5, read-only.
+    """Derive the one accepted record from pinned actual D572@6, read-only.
 
     Only this defining authority is read here. The validator separately observes
     all unique referenced pins on each admission; no source-currentness cache is
@@ -174,12 +205,92 @@ def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
         if len(row) != 3 or row[0] != str(ordinal):
             _reject("D572 Step occurrence order is invalid", code="release-authority-invalid")
         steps.append({"step": _occurrence_pin(row[1]), "action": _occurrence_pin(row[2])})
+    metadata = _route_serialization_metadata(text)
     return {"route": "release_version",
             "acceptance_frontier": _pin_shape({"atom_id": "CA-P-1622", "version": int(matches[0][0]),
                                                "source_path": matches[0][1], "digest": matches[0][2]}),
             "workflow": _table_pin(tables[0][2]), "ordered_steps": steps,
             "ordered_actions": [copy.deepcopy(row["action"]) for row in steps],
-            "rmed_frontier": [_table_pin(row) for row in tables[2][2:]]}
+            "rmed_frontier": [_table_pin(row) for row in tables[2][2:]], **metadata}
+
+
+def _release_workflow_graph(raw: bytes, admission: Mapping[str, Any]) -> dict[str, Any]:
+    """Extract the closed route graph from the accepted O164 Workflow source."""
+    try:
+        text = raw.decode("utf-8")
+        sections: dict[str, list[str]] = {"Steps": [], "Transitions": []}
+        current: str | None = None
+        for line in text.splitlines():
+            if line in {"## Steps", "## Transitions"}:
+                current = line.removeprefix("## ")
+            elif current is not None and line.startswith("## "):
+                current = None
+            elif current is not None:
+                sections[current].append(line)
+
+        def rows(section: str, header: list[str]) -> list[list[str]]:
+            table = [[cell.strip() for cell in line.strip("|").split("|")]
+                     for line in sections[section] if line.startswith("|")]
+            if len(table) < 2 or table[0] != header or not all(set(cell) <= {"-", " ", ":"} for cell in table[1]):
+                raise ValueError(f"{section} table header is invalid")
+            return table[2:]
+
+        step_rows = rows("Steps", ["Step", "Action", "Bound phase"])
+        expected_pairs = [(row["step"]["atom_id"], row["action"]["atom_id"])
+                          for row in admission["ordered_steps"]]
+        if (len(step_rows) != len(expected_pairs)
+                or [(row[0], row[1]) for row in step_rows] != expected_pairs):
+            raise ValueError("Steps do not match the accepted occurrence sequence")
+        transition_rows = rows("Transitions", ["Step result", "Next step or outcome"])
+        if (len(transition_rows) != len(expected_pairs) + 1
+                or transition_rows[-1] != [_RELEASE_STOP_RESULT, _RELEASE_STOP_OUTCOME]):
+            raise ValueError("Transitions omit or alter the required unmatched-result stop")
+        transitions = []
+        for event, target in transition_rows[:-1]:
+            if not event.startswith("CA-O-"):
+                raise ValueError("Transitions contain an unrepresentable non-Step edge")
+            source, condition = event.split(" ", 1)
+            transitions.append({"from": source, "condition": condition, "to": target})
+        step_ids = [step for step, _ in expected_pairs]
+        if (len(transitions) != len(expected_pairs)
+                or [edge["from"] for edge in transitions] != step_ids
+                or any(edge["to"] not in {*step_ids, "complete"} for edge in transitions)):
+            raise ValueError("Transitions do not define the accepted Release graph")
+    except (UnicodeDecodeError, KeyError, TypeError, ValueError) as error:
+        raise ReleaseSourceAdmissionError(
+            "release-authority-invalid", "accepted O164 Workflow graph cannot be parsed"
+        ) from error
+    return {"entry_step": step_ids[0], "on_result": transitions}
+
+
+def derive_release_route_graph(project_root: str | Path) -> dict[str, Any]:
+    """Derive the exact Release route graph for a future manifest publisher.
+
+    D572 pins O164 and its ten Step/Action occurrences; this helper reads that
+    pinned Workflow source and returns the remaining route fields which a
+    publisher must serialize unchanged.  It has no manifest or registry side
+    effects.
+    """
+    return derive_release_graph_admission(project_root)[0]
+
+
+def derive_release_graph_admission(project_root: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Return the source-derived closed Release route and its D572 admission.
+
+    The pair is intended for a future publisher.  It is read-only and preserves
+    the existing eight-field route schema; the O164 unmatched-result stop is
+    validated here rather than serialized as a non-schema route member.
+    """
+    root = _project_root(project_root)
+    admission = derive_release_source_admission(root)
+    workflow_raw = _read_pin(root, admission["workflow"])
+    graph = _release_workflow_graph(workflow_raw, admission)
+    route = {"route": "release_version", "workflow": copy.deepcopy(admission["workflow"]),
+             "ordered_steps": copy.deepcopy(admission["ordered_steps"]),
+             "ordered_actions": copy.deepcopy(admission["ordered_actions"]), **graph,
+             "mutation_capable": admission["mutation_capable"],
+             "native_action_calls": copy.deepcopy(admission["native_action_calls"])}
+    return route, copy.deepcopy(admission)
 
 
 def _record_shape(record: Any) -> dict[str, Any]:
@@ -187,6 +298,8 @@ def _record_shape(record: Any) -> dict[str, Any]:
         _reject("Release admission has unknown, absent or unsupported fields")
     _pin_shape(record["acceptance_frontier"])
     _pin_shape(record["workflow"])
+    if type(record["mutation_capable"]) is not bool or record["native_action_calls"] != []:
+        _reject("Release admission typed route metadata is invalid")
     for field, count in (("ordered_steps", 10), ("ordered_actions", 10)):
         if not isinstance(record[field], list) or len(record[field]) != count:
             _reject(f"Release admission {field} must contain exactly {count} ordered entries")
@@ -232,12 +345,19 @@ def validate_release_source_admissions(project_root: str | Path, manifest: Mappi
         _reject("Release admission differs from the accepted D572 source frontier")
     # Python considers True == 1; route pins must retain the same strict types
     # as admission pins even when this helper is called before the route loader.
+    graph, _ = derive_release_graph_admission(root)
     route_shape = {**expected, **{field: release[0].get(field)
-                                 for field in ("workflow", "ordered_steps", "ordered_actions")}}
+                                  for field in ("workflow", "ordered_steps", "ordered_actions")}}
     _record_shape(route_shape)
     for field in ("workflow", "ordered_steps", "ordered_actions"):
         if release[0].get(field) != expected[field]:
             _reject(f"Release admission {field} differs from the selected route")
+    for field in ("entry_step", "on_result"):
+        if release[0].get(field) != graph[field]:
+            _reject(f"Release route {field} differs from the accepted Workflow graph")
+    for field in ("native_action_calls", "mutation_capable"):
+        if release[0].get(field) != expected[field]:
+            _reject(f"Release route {field} differs from the accepted source admission")
     pins = [expected["acceptance_frontier"], expected["workflow"],
             *[pin for row in expected["ordered_steps"] for pin in (row["step"], row["action"])],
             *expected["ordered_actions"], *expected["rmed_frontier"]]

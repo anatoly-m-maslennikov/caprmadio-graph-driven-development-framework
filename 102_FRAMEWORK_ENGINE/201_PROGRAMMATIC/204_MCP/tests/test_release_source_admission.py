@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
@@ -10,6 +11,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 MCP = Path(__file__).resolve().parents[1]
@@ -18,11 +20,13 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "f310863886274866401a52a0611660de2be8f05c1ab61bc7591da53752e1e969"
+AUTHORITY_SHA = "49e23c3e31514fb33f2e4bfc485f65455031e952818395b2cb10afd102b41df0"
 sys.path.insert(0, str(MCP))
 
+import release_source_admission as admission_module  # noqa: E402
 from release_source_admission import (  # noqa: E402
-    ReleaseSourceAdmissionError, derive_release_source_admission, validate_release_source_admissions,
+    ReleaseSourceAdmissionError, derive_release_graph_admission, derive_release_route_graph, derive_release_source_admission,
+    validate_release_source_admissions,
 )
 
 
@@ -52,12 +56,15 @@ def reference_record(text: str) -> dict[str, object]:
         return {"atom_id": match[1], "version": int(match[2]), "source_path": match[3], "digest": match[4]}
 
     steps = [{"step": occurrence(row[1]), "action": occurrence(row[2])} for row in tables[1][2:]]
+    metadata_match = re.search(r"^## Route serialization metadata\n+```json\n(.*?)\n```$", text, re.MULTILINE | re.DOTALL)
+    assert metadata_match is not None
+    metadata = json.loads(metadata_match[1])
     return {"route": "release_version",
             "acceptance_frontier": {"atom_id": "CA-P-1622", "version": int(acceptance[1]),
                                     "source_path": acceptance[2], "digest": acceptance[3]},
             "workflow": row_pin(tables[0][2]), "ordered_steps": steps,
             "ordered_actions": [copy.deepcopy(row["action"]) for row in steps],
-            "rmed_frontier": [row_pin(row) for row in tables[2][2:]]}
+            "rmed_frontier": [row_pin(row) for row in tables[2][2:]], **metadata}
 
 
 def all_pins(record: dict[str, object]) -> list[dict[str, object]]:
@@ -72,7 +79,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@5 is not the accepted source pin")
+            raise AssertionError("current D572@6 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
 
     def setUp(self) -> None:
@@ -87,10 +94,8 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
         self.record = copy.deepcopy(self.expected)
-        self.route = {"route": "release_version", **{key: copy.deepcopy(self.record[key])
-                       for key in ("workflow", "ordered_steps", "ordered_actions")},
-                      "native_action_calls": [], "entry_step": "CA-O-170",
-                      "on_result": [], "mutation_capable": True}
+        self.graph = derive_release_route_graph(self.root)
+        self.route = {"route": "release_version", **copy.deepcopy(self.graph)}
         # Fixture input is deliberately not saved as a canonical manifest.
         # Existing loader retains self-digest/registry/other-route validation.
         self.manifest = {"routes": [self.route], "release_source_admissions": [self.record]}
@@ -106,12 +111,53 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
             validate_release_source_admissions(self.root, manifest)
         self.assertEqual(before, self.snapshot(), "rejected admission mutated Project evidence")
 
+    @contextmanager
+    def trusted_workflow_source(self, contents: str):
+        """Temporarily trust a fixture-only O164/D572 pair for parser negatives."""
+        workflow = self.root / self.record["workflow"]["source_path"]
+        authority = self.root / AUTHORITY_REF
+        original_workflow, original_authority = workflow.read_bytes(), authority.read_bytes()
+        try:
+            workflow.write_text(contents, encoding="utf-8")
+            updated = hashlib.sha256(workflow.read_bytes()).hexdigest()
+            updated_authority = original_authority.decode("utf-8").replace(
+                self.record["workflow"]["digest"], updated, 1
+            ).encode("utf-8")
+            authority.write_bytes(updated_authority)
+            authority_pin = {**admission_module.AUTHORITY_PIN,
+                             "digest": hashlib.sha256(updated_authority).hexdigest()}
+            with patch.object(admission_module, "AUTHORITY_PIN", authority_pin):
+                yield
+        finally:
+            workflow.write_bytes(original_workflow)
+            authority.write_bytes(original_authority)
+
+    @contextmanager
+    def trusted_route_metadata(self, payload: str):
+        """Temporarily trust fixture-only typed D572 metadata for provenance tests."""
+        authority = self.root / AUTHORITY_REF
+        original = authority.read_bytes()
+        try:
+            updated = original.decode("utf-8").replace(
+                '{"mutation_capable": true,"native_action_calls": []}', payload, 1
+            ).encode("utf-8")
+            self.assertNotEqual(original, updated)
+            authority.write_bytes(updated)
+            authority_pin = {**admission_module.AUTHORITY_PIN,
+                             "digest": hashlib.sha256(updated).hexdigest()}
+            with patch.object(admission_module, "AUTHORITY_PIN", authority_pin):
+                yield
+        finally:
+            authority.write_bytes(original)
+
     def test_actual_authority_derives_exact_repeated_occurrences_and_full_rmed(self) -> None:
         before = self.snapshot()
         record = derive_release_source_admission(self.root)
         self.assertEqual(self.expected, record)
         self.assertEqual(39, len({pin["source_path"] for pin in all_pins(record)}))
         self.assertEqual(10, len(record["ordered_steps"]))
+        self.assertIs(True, record["mutation_capable"])
+        self.assertEqual([], record["native_action_calls"])
         self.assertEqual(["CA-O-165", "CA-O-165", "CA-O-166", "CA-O-166", "CA-O-168",
                           "CA-O-167", "CA-O-168", "CA-O-168", "CA-O-169", "CA-O-169"],
                          [pin["atom_id"] for pin in record["ordered_actions"]])
@@ -130,6 +176,46 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         self.assertEqual([self.expected], result)
         self.assertEqual(original_manifest, self.manifest)
         self.assertEqual(before, self.snapshot())
+
+    def test_actual_workflow_derives_the_closed_route_graph(self) -> None:
+        route, admission = derive_release_graph_admission(self.root)
+        self.assertEqual(self.record, admission)
+        self.assertEqual("release_version", route["route"])
+        self.assertEqual(self.record["workflow"], self.graph["workflow"])
+        self.assertEqual(self.record["ordered_steps"], self.graph["ordered_steps"])
+        self.assertEqual(self.record["ordered_actions"], self.graph["ordered_actions"])
+        self.assertEqual("CA-O-170", self.graph["entry_step"])
+        self.assertEqual([], self.graph["native_action_calls"])
+        self.assertIs(True, self.graph["mutation_capable"])
+        self.assertEqual(10, len(self.graph["on_result"]))
+        self.assertEqual([row["step"]["atom_id"] for row in self.record["ordered_steps"]],
+                         [edge["from"] for edge in self.graph["on_result"]])
+        self.assertEqual("complete", self.graph["on_result"][-1]["to"])
+
+    def test_trusted_fixture_rejects_missing_stop_and_malformed_workflow_tables(self) -> None:
+        workflow = (self.root / self.record["workflow"]["source_path"]).read_text(encoding="utf-8")
+        variants = (
+            workflow.replace(
+                "| any missing, stale, unauthorized, failed, partial, recording-blocked, unsafe, or unmatched result | stop with its actual evidence; do not promote, retire, retry, or recurse implicitly |\n",
+                "",
+                1,
+            ),
+            workflow.replace("| Step | Action | Bound phase |", "| Step | Bound phase |", 1),
+        )
+        for contents in variants:
+            with self.subTest(contents=contents):
+                with self.trusted_workflow_source(contents):
+                    with self.assertRaisesRegex(ReleaseSourceAdmissionError, "O164 Workflow graph cannot be parsed"):
+                        derive_release_graph_admission(self.root)
+
+    def test_trusted_fixture_derives_flags_from_typed_d572_metadata(self) -> None:
+        with self.trusted_route_metadata('{"mutation_capable": false,"native_action_calls": []}'):
+            route, _ = derive_release_graph_admission(self.root)
+            self.assertIs(False, route["mutation_capable"])
+            self.assertEqual([], route["native_action_calls"])
+        with self.trusted_route_metadata('{"mutation_capable": true,"native_action_calls": ["CA-O-165"]}'):
+            with self.assertRaisesRegex(ReleaseSourceAdmissionError, "closed typed declaration"):
+                derive_release_graph_admission(self.root)
 
     def test_actual_fifteen_route_manifest_needs_no_release_authority(self) -> None:
         actual = json.loads((REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json").read_text())
@@ -158,7 +244,8 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
                 self.refused(variant)
 
     def test_missing_reordered_duplicate_and_forged_frontiers_refuse(self) -> None:
-        for field in ("workflow", "ordered_steps", "ordered_actions", "rmed_frontier", "acceptance_frontier"):
+        for field in ("workflow", "ordered_steps", "ordered_actions", "rmed_frontier", "acceptance_frontier",
+                      "mutation_capable", "native_action_calls"):
             record = copy.deepcopy(self.record)
             record.pop(field)
             self.refused({**self.manifest, "release_source_admissions": [record]})
@@ -174,6 +261,12 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         record = copy.deepcopy(self.record)
         record["rmed_frontier"][-1]["atom_id"] = "CA-D-572"
         self.refused({**self.manifest, "release_source_admissions": [record]})
+        for field, values in (("mutation_capable", (None, 0, False)),
+                              ("native_action_calls", (None, 0, False, ["CA-O-165"]))):
+            for value in values:
+                record = copy.deepcopy(self.record)
+                record[field] = value
+                self.refused({**self.manifest, "release_source_admissions": [record]})
 
     def test_pin_types_unknown_fields_unsafe_paths_and_forged_live_hash_refuse(self) -> None:
         for field, value in (("version", True), ("version", 0), ("version", "2"),
@@ -227,6 +320,27 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         route = copy.deepcopy(self.route)
         route["ordered_steps"][0]["step"]["version"] = True
         self.refused({**self.manifest, "routes": [route]})
+
+    def test_structurally_valid_route_graph_alterations_refuse(self) -> None:
+        variants = []
+        route = copy.deepcopy(self.route)
+        route["entry_step"] = "CA-O-171"
+        variants.append(route)
+        route = copy.deepcopy(self.route)
+        route["on_result"][0]["to"] = "CA-O-172"
+        variants.append(route)
+        route = copy.deepcopy(self.route)
+        route["on_result"] = route["on_result"][::-1]
+        variants.append(route)
+        route = copy.deepcopy(self.route)
+        route["native_action_calls"] = [copy.deepcopy(route["ordered_actions"][0])]
+        variants.append(route)
+        route = copy.deepcopy(self.route)
+        route["mutation_capable"] = False
+        variants.append(route)
+        for route in variants:
+            with self.subTest(route=route):
+                self.refused({**self.manifest, "routes": [route]})
 
 
 if __name__ == "__main__":

@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 6
-updated_at: "2026-10-05 13:59:15 +0000"
+version: 5
+updated_at: "2026-10-05 15:29:23 +0400"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -24,13 +24,13 @@ The one Release Version source-admission record which a successor canonical sele
 
 ## Claim
 
-A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@3 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/done/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `c0bca7b52f424415175da8e672bd66d083c7509ac9699b93def86cd6d306ba16`, the exact current O164–O179 pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
+A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@2 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `b28d4566f05403d834835792562ae0de2684b4f54e1dde0cb399958a05267df6`, the exact current O164–O179 pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
 
 ## Details
 
-`release_source_admissions` is an optional top-level array in the loaded canonical `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` manifest file. It is never a member of D527's request `definition_manifest`, which remains exactly the existing two fields `manifest_ref` and `manifest_digest`. The current fifteen-route manifest omits this array. A successor which contains `release_version` **must** contain it with cardinality exactly one; a manifest without that route **must not** carry a Release admission. No unknown member of that admission array or its record is accepted. Its one record has exactly `route`, `acceptance_frontier`, `workflow`, `ordered_steps`, `ordered_actions`, `rmed_frontier`, `mutation_capable`, and `native_action_calls`; `route` is exactly `release_version`.
+`release_source_admissions` is an optional top-level array in the loaded canonical `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` manifest file. It is never a member of D527's request `definition_manifest`, which remains exactly the existing two fields `manifest_ref` and `manifest_digest`. The current fifteen-route manifest omits this array. A successor which contains `release_version` **must** contain it with cardinality exactly one; a manifest without that route **must not** carry a Release admission. No unknown member of that admission array or its record is accepted. Its one record has exactly `route`, `acceptance_frontier`, `workflow`, `ordered_steps`, `ordered_actions`, and `rmed_frontier`; `route` is exactly `release_version`.
 
-Every `acceptance_frontier`, `workflow`, `step`, `action`, and `rmed_frontier` member is the existing canonical manifest pin object with exactly `atom_id`, positive integer `version`, safe Project-relative `source_path`, and lowercase 64-hex `digest`. `acceptance_frontier` is exactly CA-P-1622@3 above. `workflow` is exactly:
+Every `acceptance_frontier`, `workflow`, `step`, `action`, and `rmed_frontier` member is the existing canonical manifest pin object with exactly `atom_id`, positive integer `version`, safe Project-relative `source_path`, and lowercase 64-hex `digest`. `acceptance_frontier` is exactly CA-P-1622@2 above. `workflow` is exactly:
 
 | Atom | Version | Source path | SHA-256 |
 | --- | --- | --- | --- |
@@ -50,14 +50,6 @@ Every `acceptance_frontier`, `workflow`, `step`, `action`, and `rmed_frontier` m
 | 8 | CA-O-177@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-177-PROJECT_CONFIGURATION-STEP--prove-the-actual-candidate-package-and-image.md` `a26a2740b4324ee40b3d55f2cc6c90eb917c0b05785fed69df087f3a9f3c24a4` | CA-O-168@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-168-PROJECT_CONFIGURATION-ACTION--verify-candidate-release-package-and-image.md` `ec4c7b0c42924f33b816b3f9a00f00d80b05119087283e1dc8c2674087256704` |
 | 9 | CA-O-178@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-178-PROJECT_CONFIGURATION-STEP--promote-the-candidate-runtime-and-project-local-ca-skill.md` `90deb140df692959689388e3785860fa5fc450ea63f1b9a6645215580e0b658d` | CA-O-169@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-169-PROJECT_CONFIGURATION-ACTION--promote-candidate-and-retire-exact-prior-image.md` `a3e492fee45833a17f78bb99a61c3c59c1ca1185f2b357b6f41c7cb2d8ad969f` |
 | 10 | CA-O-179@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-179-PROJECT_CONFIGURATION-STEP--retire-the-exact-prior-image-after-promotion.md` `7472a8e806ed0859a611c733bc130fcddc11a2dab9d033492732a9253cbb8107` | CA-O-169@1 `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-169-PROJECT_CONFIGURATION-ACTION--promote-candidate-and-retire-exact-prior-image.md` `a3e492fee45833a17f78bb99a61c3c59c1ca1185f2b357b6f41c7cb2d8ad969f` |
-
-## Route serialization metadata
-
-```json
-{"mutation_capable": true,"native_action_calls": []}
-```
-
-This one unique delivery-level object is part of the one Release admission record. `mutation_capable: true` declares a potentially effectful route; it grants neither permission nor automatic execution. `native_action_calls: []` declares that the record adds no direct native Action calls outside the Action pins bound by `ordered_steps` and `ordered_actions`. The record serializes no catch-all transition, outcome, or execution policy: CA-O-164@3 and the generic executor retain the existing catch-all stop behavior. This metadata therefore neither creates a second Workflow graph nor omits that behavior.
 
 `rmed_frontier` has exactly the following source pins, each once, in ascending Atom ID order within content role. It is source evidence only: it never contains D572, a canonical-manifest digest, a caller approval, a Run result, or any self/final/expected output digest that would make a self-hash or cross-hash cycle.
 
@@ -86,4 +78,4 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-D-573 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-573-TOOLS-DELIVERY--serialize-approved-release-rollback-retention.md` | `5db7045ec34fbd9aea129d63262f6fce1ac5a6bff2b147af90a9fad6e560adad` |
 | CA-D-574 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-574-TOOLS-DELIVERY--serialize-typed-release-recovery-checkpoints.md` | `d1162607c515afe184ba2488d6030acc93b522331b3a819c520792db39e28012` |
 
-The record is additive source-admission serialization only. It preserves the original thirteen CA-A-1142@2 registry entries and both unchanged query-source admissions (CA-P-1618@1 and CA-P-1535@2) in the same canonical manifest. It is not a second registry, Workflow graph, executor, permission grant, generic effect schema, caller-supplied approval, or dispatch result. Its typed metadata neither changes CA-O-164@3's catch-all stop behavior nor confers permission or automatic execution. A route-bound current Operator authorization and D527 preview/currentness rechecks remain required for `execute`; no admission record itself creates a Run, queue intent, Journal Event, compiler result, package effect, or release completion. Absent, duplicate, malformed, stale, digest-mismatched, out-of-order, incomplete, or self/cross-hash-cyclic Release evidence rejects before shared support.
+The record is additive source-admission serialization only. It preserves the original thirteen CA-A-1142@2 registry entries and both unchanged query-source admissions (CA-P-1618@1 and CA-P-1535@2) in the same canonical manifest. It is not a second registry, Workflow graph, executor, permission grant, generic effect schema, caller-supplied approval, or dispatch result. A route-bound current Operator authorization and D527 preview/currentness rechecks remain required for `execute`; no admission record itself creates a Run, queue intent, Journal Event, compiler result, package effect, or release completion. Absent, duplicate, malformed, stale, digest-mismatched, out-of-order, incomplete, or self/cross-hash-cyclic Release evidence rejects before shared support.
