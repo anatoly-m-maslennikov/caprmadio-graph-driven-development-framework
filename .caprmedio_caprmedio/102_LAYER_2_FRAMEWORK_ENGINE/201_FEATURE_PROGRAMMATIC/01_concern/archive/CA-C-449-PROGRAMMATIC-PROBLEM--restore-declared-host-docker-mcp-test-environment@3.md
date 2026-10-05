@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: PROGRAMMATIC
 local_tier: Standard
 global_tier: 8
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 4
-updated_at: "2026-10-05 13:18:22 +0000"
+version: 3
+updated_at: "2026-10-05 12:34:20 +0000"
 subjects:
   governs: "Host Docker MCP test environment"
   depends_on: [Implementation, Evaluation, Workflow, MCP]
@@ -21,7 +21,7 @@ Restore declared host Docker MCP test environment
 
 ## Concern
 
-The declared host test dependencies are available, but the current session again denies Docker API access and atomic directory publication. These execution restrictions leave host Release regression, real installation and fresh immutable-image acceptance incomplete.
+The declared host test dependencies and Docker API access are now available. Host Release regression execution still encounters filesystem permission denials on disposable fixture directories, so current native-suite and fresh immutable-image acceptance remain incomplete.
 
 ## Evidences
 
@@ -42,11 +42,9 @@ The declared host test dependencies are available, but the current session again
 - Under that retention policy the current Release source-admission and manifest suites passed 15/15. The canonical selected manifest remains fifteen routes. The complete Release Action suite passed 15/23; eight cases stopped at source publication. The retained original exception is `PermissionError: [Errno 1] Operation not permitted` while atomically renaming a `.release-sources-*` staging directory to `101_LAYER_1_FRAMEWORK_METHODOLOGY/sources`. No Docker effect was reached.
 - A retained Release-suite golden case independently failed before its functional assertions at the atomic `.release-render-*` staging-directory rename to `_release_materialized/<digest>`. This is an effect/publication permission denial, not fixture teardown, and cannot be cleared merely by retaining directories. No test assertion or production publication guard was weakened.
 
-- The later permission update expanded filesystem write scope to the root. A fresh read-only image inspection still returned permission denied at the same Docker socket. The retained Release-suite golden case again stopped at `release_compilation.py:313`, before functional assertions, when `.release-render-*` was atomically published to `_release_materialized/<digest>`. The exact retained fixture is `/var/folders/56/ylp5765x6hnc8chzplc_rjqh0000gn/T/tmp04cv0vum`. Broad filesystem write configuration therefore did not clear either observed execution restriction; the precise enforcement cause remains unconfirmed.
-
 ## Blast radius
 
-P1600–P1604, P1528, current host Release regression acceptance and whole-image closure remain unfinished. Dependency provisioning is cleared; the latest current-session socket retry is denied. Earlier successful Docker inventory remains historical evidence, not present access. Passing host transport and fixture checks are not relabelled immutable-image, queue or all-Workflow proof. Existing containers and protected source carriers were not changed by this retry.
+P1600–P1604, P1528, current host Release regression acceptance and whole-image closure remain unfinished. Dependency provisioning and Docker socket access are cleared for the current session. Passing host transport and fixture checks are not relabelled immutable-image, queue or all-Workflow proof. Existing containers and protected source carriers were not changed by this retry.
 
 ## Disposition
 

@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 15
-updated_at: "2026-10-05 11:05:25 +0000"
+updated_at: "2026-10-05 13:27:20 +0000"
 relations: {}
 ---
 # Summary
@@ -166,6 +166,14 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+The 2026-10-05 continuation below supersedes older frontier snapshots. Root integration passes 66 typed recovery/provider tests and 56 first-install, canonical Journal, compatibility, isolated-fixture-safety and source-admission tests. These are focused/mocked or retained-fixture proofs, not a real Docker Release. The first-install package now uses canonical compiled Methodology role folders, rejects unsafe Skill ancestry, serializes competing requests, and retains exact pending Journal recovery without replay. Its N-to-N+1 reader seam is under strict source review.
+
+P1715 owns the source-derived additive manifest publisher and its authority packet. P1716 connects the existing private Release recovery method to an explicit typed queue/MCP operation. The canonical selected manifest remains fifteen routes until the complete source-owned Release graph and publication are independently accepted. D572 graph serialization semantics must be declared rather than guessed. P1714 remains Active until actual complete package, Skill, immutable image and Journal evidence establish this Project's first N.
+
+The Operator directed retaining test fixture directories, so cleanup is not a blocker. The latest broadened-permission retry still denies Docker socket access and atomic directory publication; C449@4 records both exact observations. No actual runtime installation, Skill activation, new image, image removal or Release promotion is claimed.
+
+The following paragraphs are historical snapshots, not newer completion assertions.
 
 Latest bounded result: f2ba6c494 resolves the image override review finding with a shared strict immutable-ID resolver; independent review accepts it and root reruns five pure cases. Root also reruns four guarded-registration and two hook-payload cases, plus three existing pure provider serialization cases. Suite candidate-binding/N-carrier and private provider/retirement repairs remain working-tree code with fixture verification pending, not accepted complete implementation. Recovery review established that saved native results omit preflight/type identity; no unsafe rehydrator was created. A typed closed checkpoint in the existing shared progress path is required before restart continuation. Directory-cleanup C449 remains the real test blocker; no canonical manifest, installed runtime, Skill or Docker image was changed by this continuation.
 
