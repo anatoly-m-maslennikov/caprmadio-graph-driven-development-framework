@@ -32,7 +32,7 @@ class SelectedProjectBindings(unittest.TestCase):
         sources = actions.current_source_bindings(project)
         methods = [row["path"] for row in sources if row["atom_id"].startswith("CA-M-")]
         workspace = project / "disposable-workspace"
-        workspace.mkdir()
+        workspace.mkdir(exist_ok=True)
         return {
             "context": "Isolated",
             "selected_project": {
@@ -117,6 +117,33 @@ class SelectedProjectBindings(unittest.TestCase):
             launches = []
             actual = actions.ACTION_HANDLERS["CA-O-019"](
                 packet, lambda *_: launches.append("launched"), selected_project_root=project)
+            self.assertEqual(actual["result"], "blocked")
+            self.assertEqual(launches, [])
+
+    def test_workspace_cannot_overlap_selected_project_or_protected_authority(self):
+        actions = load_actions()
+        with tempfile.TemporaryDirectory() as directory:
+            project = self.project_with_reviewed_sources(actions, Path(directory))
+            launches = []
+
+            for workspace in (project, project / ".caprmedio_caprmedio"):
+                with self.subTest(workspace=workspace):
+                    packet = self.packet(actions, project)
+                    packet["workspace"] = str(workspace)
+                    packet["permissions"]["implementation_workspace"]["path"] = str(workspace)
+                    actual = actions.implement_selected_queue(
+                        "CA-O-093", packet, lambda *_: launches.append("launched"),
+                        selected_project_root=project)
+                    self.assertEqual(actual["result"], "blocked")
+                    self.assertEqual(launches, [])
+
+            protected_git = project / ".git"
+            protected_git.mkdir()
+            packet = self.packet(actions, project)
+            packet["workspace"] = str(protected_git)
+            packet["permissions"]["implementation_workspace"]["path"] = str(protected_git)
+            actual = actions.implement_selected_queue(
+                "CA-O-093", packet, lambda *_: launches.append("launched"), selected_project_root=project)
             self.assertEqual(actual["result"], "blocked")
             self.assertEqual(launches, [])
 

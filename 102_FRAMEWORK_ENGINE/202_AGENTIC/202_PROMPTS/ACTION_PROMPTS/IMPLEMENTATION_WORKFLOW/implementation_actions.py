@@ -189,13 +189,18 @@ def _validate_selected_project(packet: Mapping[str, Any], selected_project_root:
     source_references = binding.get("source_references")
     if not isinstance(source_references, list):
         raise ValueError("selected Project source references are missing")
-    expected = current_source_bindings(selected_project_root)
+    root = _trusted_project_root(selected_project_root)
+    expected = current_source_bindings(root)
     if source_references != expected:
         raise ValueError("selected Project source references are stale or mismatched")
-    _validate_workspace_capability(packet)
+    _validate_workspace_capability(packet, root)
 
 
-def _validate_workspace_capability(packet: Mapping[str, Any]) -> None:
+def _overlaps(left: Path, right: Path) -> bool:
+    return left == right or left.is_relative_to(right) or right.is_relative_to(left)
+
+
+def _validate_workspace_capability(packet: Mapping[str, Any], selected_project_root: Path) -> None:
     workspace = packet.get("workspace")
     if not isinstance(workspace, str) or not workspace:
         raise ValueError("selected Project workspace is missing")
@@ -208,6 +213,11 @@ def _validate_workspace_capability(packet: Mapping[str, Any]) -> None:
         raise ValueError("selected Project workspace is not readable") from error
     if resolved != path:
         raise ValueError("selected Project workspace must be an absolute non-symlink directory")
+    source_root = selected_project_root / SELECTED_PROJECT_SOURCE_ROOT
+    protected_locations = (source_root, selected_project_root / ".git")
+    if selected_project_root.is_relative_to(resolved) or any(_overlaps(resolved, protected)
+                                                               for protected in protected_locations):
+        raise ValueError("selected Project workspace overlaps protected Project authority")
     permissions = packet.get("permissions")
     capability = permissions.get("implementation_workspace") if isinstance(permissions, Mapping) else None
     expected = {"kind": "disposable_workspace", "path": workspace, "allow_write": True}
