@@ -429,11 +429,22 @@ class _QueueBackedSelectedSupport:
                 current = dict(request.get("definition_manifest", {})) == {
                     "manifest_ref": manifest["manifest_ref"], "manifest_digest": manifest["canonical_manifest_sha256"]
                 } and dict(request.get("source_freshness", {})) == manifest["source_freshness"]
-            except (SelectedRouteError, TypeError, ValueError):
-                selected, current = False, False
+                lifecycle_admission = None
+                if request.get("operation_route") == "change_atom_status":
+                    app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+                    if str(app) not in sys.path:
+                        sys.path.insert(0, str(app))
+                    selected_execution = importlib.import_module("selected_execution")
+                    lifecycle_admission = selected_execution.preflight_selected_lifecycle(
+                        self.root, "change_atom_status", request.get("parameters"),
+                    )
+            except (ImportError, SelectedRouteError, TypeError, ValueError, RuntimeError):
+                selected, current, lifecycle_admission = False, False, None
             return {"selected": selected, "current": current, "observed": {
                 "manifest_ref": request.get("definition_manifest", {}).get("manifest_ref") if isinstance(request.get("definition_manifest"), Mapping) else None,
                 "manifest_digest": request.get("definition_manifest", {}).get("manifest_digest") if isinstance(request.get("definition_manifest"), Mapping) else None,
+                **({"lifecycle_admission": lifecycle_admission}
+                   if lifecycle_admission is not None else {}),
             }}
 
         def never_execute(_request: dict[str, Any], _session: Any) -> Mapping[str, Any]:
@@ -502,6 +513,45 @@ class _QueueBackedSelectedSupport:
 
 
 class SelectedRouteAdapter(_SelectedRouteAdapterBase):
+
+    def _preflight_lifecycle(self, request: Mapping[str, Any]) -> dict[str, Any] | None:
+        """Reject one source-invalid status request before shared preview admission."""
+        if request.get("operation_route") != "change_atom_status":
+            return None
+        app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+        if str(app) not in sys.path:
+            sys.path.insert(0, str(app))
+        try:
+            selected_execution = importlib.import_module("selected_execution")
+        except (ImportError, AttributeError, TypeError, ValueError, RuntimeError) as error:
+            return self._result(request, "blocked", "blocked", f"source-derived lifecycle admission unavailable: {error}")
+        try:
+            current = selected_execution.preflight_selected_lifecycle(
+                self.root, "change_atom_status", request.get("parameters"),
+            )
+            if request.get("mode") == "execute":
+                receipt = request.get("proposal_receipt")
+                freshness = receipt.get("source_freshness") if isinstance(receipt, Mapping) else None
+                observed = freshness.get("observed") if isinstance(freshness, Mapping) else None
+                expected = observed.get("lifecycle_admission") if isinstance(observed, Mapping) else None
+                if not isinstance(expected, Mapping):
+                    raise selected_execution.LifecycleAdmissionError(
+                        "status-preview-admission-missing",
+                        "status execution requires the source-derived preview admission",
+                    )
+                if canonical_digest(dict(expected)) != canonical_digest(current):
+                    raise selected_execution.LifecycleAdmissionError(
+                        "status-model-stale",
+                        "authoritative status-model source changed after lifecycle admission",
+                    )
+        except selected_execution.LifecycleAdmissionError as error:
+            result = self._result(request, "blocked", "blocked", str(error))
+            result["effect_refs"] = []
+            result["lifecycle_error"] = error.record()
+            return result
+        except (AttributeError, TypeError, ValueError, RuntimeError) as error:
+            return self._result(request, "blocked", "blocked", f"source-derived lifecycle admission unavailable: {error}")
+        return None
 
     def _validate_request(self, route: str, request: Any) -> dict[str, Any]:
         if not isinstance(request, Mapping):
@@ -609,6 +659,9 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
             blocked = self._validate_execute(normalized)
             if blocked:
                 return self._result(normalized, "blocked", "blocked", blocked)
+        lifecycle_refusal = self._preflight_lifecycle(normalized)
+        if lifecycle_refusal is not None:
+            return lifecycle_refusal
         support = self._support()
         if support is None:
             return {"request_id": normalized["request_id"], "disposition": "blocked", "outcome": "implementation_gap",

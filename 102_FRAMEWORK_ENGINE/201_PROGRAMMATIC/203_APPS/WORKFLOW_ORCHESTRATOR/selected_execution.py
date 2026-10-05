@@ -28,6 +28,55 @@ class SelectedExecutionError(RuntimeError):
     """A selected request cannot safely progress through the queue."""
 
 
+class LifecycleAdmissionError(SelectedExecutionError):
+    """A source-derived lifecycle refusal before queue or Run admission."""
+
+    def __init__(self, code: str, message: str) -> None:
+        self.code = code
+        self.message = message
+        super().__init__(message)
+
+    def record(self) -> dict[str, str]:
+        return {"code": self.code, "message": self.message}
+
+
+def preflight_selected_lifecycle(root: Path, route: object, parameters: object) -> dict[str, Any] | None:
+    """Admit a status request from its authoritative model before a Run exists.
+
+    The native handler repeats this same source observation immediately before
+    its effect.  This early check is intentionally only an admission gate: it
+    does not retain caller-controlled model data or create Run/Journal state.
+    """
+    if route != "change_atom_status":
+        return None
+    import sys
+
+    tools_root = str(Path(__file__).resolve().parents[2] / "201_TOOLS")
+    if tools_root not in sys.path:
+        sys.path.insert(0, tools_root)
+    try:
+        import lifecycle_intents
+    except ImportError as error:
+        raise SelectedExecutionError("source-derived lifecycle admission is unavailable") from error
+    try:
+        preflight = lifecycle_intents.preflight_atom_lifecycle(
+            Path(root), "change_status", parameters,
+        )
+    except lifecycle_intents.LifecycleError as error:
+        raise LifecycleAdmissionError(error.code, str(error)) from error
+    # This source-derived, serializable seal is retained only by the preview
+    # observation and frozen queue request. It excludes the live Atom object
+    # and accepts no caller-authored status model.
+    return {
+        "operation": preflight["operation"],
+        "prior": dict(preflight["prior"]),
+        "requested_status": preflight["requested_status"],
+        "current_status": preflight["current_status"],
+        "status_model": dict(preflight["status_model"]),
+        "archive": preflight["archive"],
+    }
+
+
 def manifest_relative_path(root: Path) -> str:
     """Locate the one Project-local selected Workflow projection."""
     root = root.resolve(strict=True)
@@ -246,8 +295,18 @@ class SelectedExecution:
                     "failed": "failed", "partial": "partial", "canceled": "cancelled",
                     "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
                 }.get(native_outcome, "interrupted_pending")
+                effects = result.get("effects")
+                changed_effects = [
+                    effect for effect in effects
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(effects, list) else []
+                effect_refs = paths(changed_effects)
+                history = result.get("history")
+                prior_revision = history.get("prior_revision") if isinstance(history, Mapping) else None
+                if isinstance(prior_revision, Mapping) and isinstance(prior_revision.get("path"), str):
+                    effect_refs = sorted({*effect_refs, prior_revision["path"]})
                 return {"result": result_label, "terminal_outcome": terminal_outcome,
-                        "effect_refs": paths(result.get("effects")), "native_result": result}
+                        "effect_refs": effect_refs, "native_result": result}
 
             def assess_update_identity(context: dict[str, Any]) -> dict[str, Any]:
                 """CA-O-067 is a read-only assessment; O145 owns its edge."""
@@ -705,6 +764,34 @@ class SelectedExecution:
         except query_actions.QueryActionError as error:
             raise SelectedExecutionError("query request is not admitted") from error
 
+    def _validate_lifecycle_admission(
+        self, graph: Mapping[str, Any], execution: Mapping[str, Any], *,
+        expected_admission: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any] | None:
+        """Run source-derived status admission at each pre-Run queue boundary."""
+        current = preflight_selected_lifecycle(
+            self.root, graph.get("route"), execution.get("parameters"),
+        )
+        if current is None:
+            return None
+        expected = expected_admission
+        if expected is None:
+            receipt = execution.get("proposal_receipt")
+            freshness = receipt.get("source_freshness") if isinstance(receipt, Mapping) else None
+            observed = freshness.get("observed") if isinstance(freshness, Mapping) else None
+            expected = observed.get("lifecycle_admission") if isinstance(observed, Mapping) else None
+        if not isinstance(expected, Mapping):
+            raise LifecycleAdmissionError(
+                "status-preview-admission-missing",
+                "status execution requires the source-derived preview admission",
+            )
+        if canonical_json(dict(expected)) != canonical_json(current):
+            raise LifecycleAdmissionError(
+                "status-model-stale",
+                "authoritative status-model source changed after lifecycle admission",
+            )
+        return current
+
     @staticmethod
     def _support_definition(binding: Mapping[str, Any]) -> dict[str, Any]:
         """Translate a manifest pin into the shared service's source pin shape."""
@@ -842,6 +929,11 @@ class SelectedExecution:
     def freeze(self, request: Mapping[str, Any]) -> dict[str, Any]:
         frozen = self._validated_freeze(request)
         self._validate_query_admission(frozen["graph"], frozen["request"]["execution"])
+        lifecycle_admission = self._validate_lifecycle_admission(
+            frozen["graph"], frozen["request"]["execution"],
+        )
+        if lifecycle_admission is not None:
+            frozen["lifecycle_admission"] = lifecycle_admission
         run_id = frozen["request"]["run_id"]
         path = self.run_directory(run_id) / "selected_request.json"
         if path.exists():
@@ -1139,9 +1231,18 @@ class SelectedExecution:
 
         def observe(request: dict[str, Any]) -> dict[str, Any]:
             graph = self._revalidate(frozen)
-            return {"selected": request.get("operation_route") == graph["route"], "current": True,
+            lifecycle_admission = preflight_selected_lifecycle(
+                self.root, graph.get("route"), request.get("parameters"),
+            )
+            lifecycle_current = (
+                lifecycle_admission is None
+                or canonical_json(lifecycle_admission) == canonical_json(frozen.get("lifecycle_admission"))
+            )
+            return {"selected": request.get("operation_route") == graph["route"], "current": lifecycle_current,
                     "observed": {"manifest_ref": graph["manifest_ref"],
-                                 "manifest_digest": graph["manifest_digest"]}}
+                                 "manifest_digest": graph["manifest_digest"],
+                                 **({"lifecycle_admission": lifecycle_admission}
+                                    if lifecycle_admission is not None else {})}}
 
         tracker = RunTracker(self.root, source_observer=observe,
                              executor=lambda _request, session: self._execute_graph(frozen, session))
@@ -1162,6 +1263,17 @@ class SelectedExecution:
                     "workflow_run_id": run_id, "reason": "uncertain selected dispatch intent retained; no replay"}
         graph = self._revalidate(frozen)
         self._validate_query_admission(graph, request["execution"])
+        try:
+            self._validate_lifecycle_admission(
+                graph, request["execution"],
+                expected_admission=frozen.get("lifecycle_admission"),
+            )
+        except LifecycleAdmissionError as error:
+            return {
+                "disposition": "blocked", "outcome": "blocked", "workflow_run_id": run_id,
+                "effect_refs": [], "lifecycle_error": error.record(),
+                "diagnostics": [str(error)],
+            }
         self._write(intent, {"run_id": run_id, "state": "dispatching", "graph": frozen["graph"]})
         try:
             if run_support is None:
