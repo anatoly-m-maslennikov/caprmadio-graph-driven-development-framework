@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Prove query MCP selected results and diagnostics"
   depends_on: [Workflow, Action, Implementation, Evaluation, Journal]
-version: 1
-updated_at: "2026-10-05 00:32:33 +0000"
+version: 2
+updated_at: "2026-10-05 00:37:00 +0000"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1519]
@@ -35,6 +35,10 @@ Use image sha256:057792974dc2d81f84f99dee5535a44d5ee30513b03f6154381d99aa0bd558c
 ## Saved frontier
 
 The host driver could not start: the repository virtual environment contains no Python executable. Provisioning the declared groups also failed on distribution-cache directory rename with EPERM in the existing and fresh permitted temporary cache. These attempts stopped. The bundled runtime lacks MCP, PyYAML and DBOS. No actual-image case ran; image tag was unchanged. CA-C-449 preserves the blocker. Prepared harness source does not count as execution or completion.
+
+## Prepared source and verification
+
+Saved test_selected_query_mcp_e2e.py, SHA256 5ff655f344c3bc79ee0ad517a5ba4ff86c97c91ed86f92868f228a090f2c4f33. It reuses the actual shared recorder and fresh MCP client and supplies four opt-in cases for W14/W15 selected fields, hierarchical headings, filters, stable pagination, snapshots and separate refusal diagnostics. No manual Journal or Run facts are inserted. Development-worker discovery passed one carrier check and intentionally skipped four actual-image cases. No runtime started; C449 still prevents functional execution, so this Task remains Active.
 
 ## Definition of Done
 
