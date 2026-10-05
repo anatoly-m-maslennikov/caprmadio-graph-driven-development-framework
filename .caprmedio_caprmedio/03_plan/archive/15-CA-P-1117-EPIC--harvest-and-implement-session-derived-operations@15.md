@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 16
-updated_at: "2026-10-05 19:55:10 +0000"
+version: 15
+updated_at: "2026-10-05 13:59:15 +0000"
 relations: {}
 ---
 # Summary
@@ -89,7 +89,7 @@ The Operator selected this additional release path:
 
 The first working vertical cut establishes a frozen Version N that builds and tests N+1. A release Run binds the executing N implementation and Methodology separately from the candidate N+1 sources/package. Changes being built do not silently redefine the running Workflow. Promote the candidate only after its required gates pass; retain N as the working runtime and rollback point until then.
 
-CA-P-1620 owns source-first authoring/review, test-first implementation and actual-release verification. The admitted sixteen-route successor is published and observed; earlier fifteen-route evidence remains historical proof of its bound predecessor only. Dispatch still requires fresh exact source admission and the actual runtime gates. This Plan does not itself execute a release or delete an image.
+CA-P-1620 owns source-first authoring/review, test-first implementation and actual-release verification. Existing fifteen-route admission and evidence remain valid only for their bound fifteen-route scope; the sixteenth capability needs separately accepted additive admission before dispatch. This Plan does not execute a release or delete an image.
 
 ### Run journaling
 
@@ -169,15 +169,11 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 The Operator temporarily deferred queue item #5: the final all-sixteen-Workflow code-versus-RMED/O review, coverage audit and Epic closure. CA-P-1655 and CA-P-1124 remain unfinished and are not being executed now. Continue the source-admission, manifest-publication, recovery integration, first-runtime installation and actual runtime-test work; their necessary local checks remain in scope. This deferral is neither a waiver of final acceptance nor permission to mark the Epic Done.
 
-The latest 2026-10-05 continuation supersedes the older snapshots below. P1715 is Done: c1a4749e2 actually published and independently observed the source-admitted sixteen-route successor, with completed canonical Event journal:release-manifest:81cf4fac9b9087e14d451502fa1be473c664eea1f7f4b74e1032ba1b084449a7. Physical Carrier SHA-256 is 1eabfd2f1a0df45ae0df2ff4b2221ebe557ef1f520a990ef6d10f542259d6723; the canonical digest is 48a03709ba64113b007893bf92886be447a57be1ce5b324056c8f18eab7854e7. Durable recovery, source admission and immutable-suite executor development are saved in 88e6546d8. Earlier focused recovery/provider and source-admission results are not actual Docker Release acceptance.
+The 2026-10-05 continuation below supersedes older frontier snapshots. Root integration passes 66 typed recovery/provider tests and 56 first-install, canonical Journal, compatibility, isolated-fixture-safety and source-admission tests. These are focused/mocked or retained-fixture proofs, not a real Docker Release. The first-install package now uses canonical compiled Methodology role folders, rejects unsafe Skill ancestry, serializes competing requests, and retains exact pending Journal recovery without replay. Its N-to-N+1 reader seam is under strict source review.
 
-The Operator stopped PID 61257. Root then started a host worker that emitted structured v5 readiness and subsequently stopped only that owned foreground worker cleanly after code changed. The old v3 Base Revise Run remains ENQUEUED and was not replayed or migrated. Actual Docker compiler Run release-methodology-reconcile-20261005-1805 reached its first Action but ended interrupted_pending without effects: frozen host compiler parameters did not match /project. Its six canonical Workflow/Step/Action Journal records are saved in 877a669bf. Local trusted-root repair 684b87f0e passes four focused tests, but the Docker worker has not loaded it. A new freshly admitted Run is required after an authorized runtime rebuild/restart and source reassessment; scheduler SUCCESS is not Workflow success.
+P1715 owns the source-derived additive manifest publisher and its authority packet. P1716 connects the existing private Release recovery method to an explicit typed queue/MCP operation. The canonical selected manifest remains fifteen routes until the complete source-owned Release graph and publication are independently accepted. D572 graph serialization semantics must be declared rather than guessed. P1714 remains Active until actual complete package, Skill, immutable image and Journal evidence establish this Project's first N.
 
-P1722-P1726 and P1727-P1731 are Done for the bounded complete-suite driver, private current-control context, focused tests and independent integration review. Their accepted source packet is saved in b7d44ccfa and implementation in 689dd212f. The fixed CLI, exact schema-2 envelope and actual per-case reports preserve the candidate-inventory and sixteen-route contracts. Twelve golden driver tests and 34 context/timing/checkpoint/handoff/executor/retained-image tests pass. Seventeen intentional fixture payloads no longer match real-test discovery; no production exclusion was added. C475 is resolved for that bounded design/implementation, not for actual full-suite execution.
-
-P1714 and P1717/P1721 remain Active. A complete Framework N selector/package and project-local ca Skill are still absent, and canonical Applicable Methodology remains stale. First-N source authoring is being repaired to require compiler-current canonical output and actual complete-package bootstrap-image build/inspect/canary proof; matching labels alone are insufficient. C476 records another source-confirmed prerequisite: the three mandatory Docker E2E modules cannot execute inside the existing closed, read-only, network-disabled suite environment. Their skips are non-passing. A separately governed E2E-capable gate needs accepted RMED before implementation; no host Docker socket mount, hidden exclusion or permission relaxation is authorized by this Plan.
-
-The Operator directed retaining test fixture directories, so cleanup alone is not a blocker. Direct Docker socket access and isolated Release atomic directory publication remain denied. No actual complete-runtime installation, Skill activation, new image, image removal or Release promotion is claimed. These external gates and the deferred final audit remain open; current development evidence does not close them.
+The Operator directed retaining test fixture directories, so cleanup is not a blocker. The latest broadened-permission retry still denies Docker socket access and atomic directory publication; C449@4 records both exact observations. No actual runtime installation, Skill activation, new image, image removal or Release promotion is claimed.
 
 The following paragraphs are historical snapshots, not newer completion assertions.
 

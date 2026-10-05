@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-05 18:22:01 +0000"
+updated_at: "2026-10-05 19:52:10 +0000"
 subjects:
   governs: "Release suite delivery/Implement the declared Release suite driver"
   depends_on: [Implementation, Evaluation, Methodology, Manifest, Test Suite]
@@ -34,3 +34,7 @@ Own only RELEASE_VERSION/run_release_suite.py and release_suite_bindings.json. E
 ## Definition of Done
 
 The driver satisfies the accepted RMED and deterministic E2E corpus without hidden exclusions or synthetic full-suite success.
+
+## Results
+
+The fixed CLI driver and maintained source-probe rules are saved in 689dd212f. Independent bounded review accepts exact per-testcase reporting, complete sealed-module discovery and truthful incomplete/non-pass states. Twelve golden cases pass; no actual complete Docker suite is claimed.
