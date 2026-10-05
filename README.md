@@ -16,7 +16,7 @@ CAPRMEDIO stores project knowledge as small artifacts connected by typed links. 
 
 ## Why CAPRMEDIO works this way
 
-Prompts/Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
+Prompts/Skills, MCP, Apps and execution Tools form the harness →\
 the project's meaning must not depend on them →\
 an explicit ontology/base model defines the core: concepts, relations and constraints.
 
@@ -64,6 +64,15 @@ observed outcomes create the next Concerns.
 
 ### Harness (engine)
 
+Ontology is big and complex →\
+operating a project with the framework should be simple →\
+harness, Tools and Prompts should show this complexity only when needed →\
+ontology and engine are the "backend"; Skills and Prompts are the "frontend".
+
+Skills vary a lot →\
+different people prefer different Skills →\
+the framework harness should support third-party Skills as a **replaceable frontend/interface**.
+
 Repeated model reasoning costs time and tokens →\
 every repeatable task that can be done deterministically should run programmatically →\
 **Tools save time and tokens.**
@@ -76,7 +85,7 @@ Repeatable sequences of actions using Tools and Prompts/Skills →\
 Workflows define their steps and control flow.
 
 We cannot put everything into one prompt →\
-the single entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
+the built-in entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
 Tools retrieve the needed context and assemble Prompts/Skills →\
 MCP delivers them and exposes Tool and Workflow execution.
 
