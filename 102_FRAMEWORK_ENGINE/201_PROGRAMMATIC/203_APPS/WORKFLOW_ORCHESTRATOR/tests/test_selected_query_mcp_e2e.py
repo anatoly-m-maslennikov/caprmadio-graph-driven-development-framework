@@ -11,6 +11,7 @@ from copy import deepcopy
 import hashlib
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import tempfile
@@ -23,7 +24,24 @@ sys.path.insert(0, str(TESTS))
 import test_selected_workflows_docker_e2e as strict  # noqa: E402
 from selected_workflows_docker_fixture import FixtureLease, GoldenCase, GoldenProject  # noqa: E402
 
-EXPECTED_IMAGE = "sha256:057792974dc2d81f84f99dee5535a44d5ee30513b03f6154381d99aa0bd558cd"
+_IMMUTABLE_IMAGE = re.compile(r"sha256:[0-9a-f]{64}")
+_MISSING = object()
+
+
+def _required_query_image(environment: dict[str, str] | os._Environ[str]) -> str:
+    """Return the opt-in query acceptance image, never a mutable fallback.
+
+    Query acceptance is deliberately separate from normal development image
+    selection.  An operator opts in only by supplying this exact immutable
+    identity alongside ``CAPRMEDIO_DOCKER_QUERY_E2E=1``.
+    """
+    value = environment.get("CAPRMEDIO_DOCKER_QUERY_IMAGE")
+    if not isinstance(value, str) or not _IMMUTABLE_IMAGE.fullmatch(value):
+        raise AssertionError(
+            "CAPRMEDIO_DOCKER_QUERY_IMAGE must name one immutable sha256 image ID "
+            "for query acceptance"
+        )
+    return value
 
 
 def _projection_fingerprint(root: Path) -> dict[str, str]:
@@ -170,18 +188,28 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.runtime: strict.Runtime | None = None
         self.lease: FixtureLease | None = None
         self.launched = False
+        self.query_image = _required_query_image(os.environ)
         observed = await asyncio.to_thread(
             subprocess.run, ["docker", "image", "inspect", "caprmedio-runtime:local", "--format", "{{.Id}}"],
             capture_output=True, text=True, timeout=20, check=False,
         )
         self.assertEqual(0, observed.returncode, "the admitted image must already exist")
-        self.assertEqual(EXPECTED_IMAGE, observed.stdout.strip(), "query proof must bind the exact fresh image")
+        self.assertEqual(self.query_image, observed.stdout.strip(),
+                         "query proof must bind the requested exact fresh image")
+        self._previous_runtime_image = os.environ.get("CAPRMEDIO_IMAGE", _MISSING)
+        os.environ["CAPRMEDIO_IMAGE"] = self.query_image
 
     async def asyncTearDown(self) -> None:
-        if self.launched and self.runtime is not None:
-            await self.harness._stop(self.runtime)
-        if self.lease is not None:
-            self.lease.cleanup()
+        try:
+            if self.launched and self.runtime is not None:
+                await self.harness._stop(self.runtime)
+            if self.lease is not None:
+                self.lease.cleanup()
+        finally:
+            if self._previous_runtime_image is _MISSING:
+                os.environ.pop("CAPRMEDIO_IMAGE", None)
+            else:
+                os.environ["CAPRMEDIO_IMAGE"] = self._previous_runtime_image
 
     async def _start_fixture(self, case_id: str, route: str) -> QueryProject:
         parent = strict.ROOT / ".caprmedio_tmp/tests/selected-query-mcp-e2e"
@@ -192,6 +220,8 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
                                     execution_project_root="/project")
         self.fixture.prepare()
         self.runtime = strict.Runtime(root, mock=True)
+        self.assertEqual(self.query_image, self.runtime.environment()["CAPRMEDIO_IMAGE"],
+                         "query Runtime must receive the requested immutable image identity")
         self.launched = True
         await self.harness._start(self.runtime)
         return self.fixture
