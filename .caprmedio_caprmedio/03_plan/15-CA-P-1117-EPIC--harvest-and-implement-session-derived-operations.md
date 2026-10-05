@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 15
-updated_at: "2026-10-05 09:45:00 +0000"
+updated_at: "2026-10-05 11:05:25 +0000"
 relations: {}
 ---
 # Summary
@@ -166,6 +166,10 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+Latest bounded result: f2ba6c494 resolves the image override review finding with a shared strict immutable-ID resolver; independent review accepts it and root reruns five pure cases. Root also reruns four guarded-registration and two hook-payload cases, plus three existing pure provider serialization cases. Suite candidate-binding/N-carrier and private provider/retirement repairs remain working-tree code with fixture verification pending, not accepted complete implementation. Recovery review established that saved native results omit preflight/type identity; no unsafe rehydrator was created. A typed closed checkpoint in the existing shared progress path is required before restart continuation. Directory-cleanup C449 remains the real test blocker; no canonical manifest, installed runtime, Skill or Docker image was changed by this continuation.
+
+Parallel continuation saved 194dee472 (truthful task/environment frontier), 85a80d698 (explicit Methodology delivery destination), 3eec8cffb (guarded Release registration, four pure tests) and 28f5e572c (hook-free ca payload admission, two pure tests). d7e1c53de preserved explicit image selection with four pure tests, but independent review found arbitrary tag overrides too broad; a strict immutable-ID repair is in progress. The live canonical manifest is still fifteen routes, and no image was built, promoted or retired. Provider effect-reference and retirement-outcome repairs remain saved but fixture-unverified. Suite candidate/N-preservation and typed recovery prerequisites are still being implemented. Public effect-free Release refusal is intentional under D560/D572 until successor admission, not itself an authority conflict.
 
 The latest am-default probes permit Docker inventory and temporary-file removal, but deny temporary-directory removal. The Operator directed leaving the empty probe untouched. C449 remains Active for fixture cleanup; no tests are weakened or relabelled passing. Ten independent subagents now continue bounded Release implementation and source/code reviews in parallel. P1712's three fixture-root changes pass independent static review without weakening production checks or cleanup; runtime verification remains pending.
 

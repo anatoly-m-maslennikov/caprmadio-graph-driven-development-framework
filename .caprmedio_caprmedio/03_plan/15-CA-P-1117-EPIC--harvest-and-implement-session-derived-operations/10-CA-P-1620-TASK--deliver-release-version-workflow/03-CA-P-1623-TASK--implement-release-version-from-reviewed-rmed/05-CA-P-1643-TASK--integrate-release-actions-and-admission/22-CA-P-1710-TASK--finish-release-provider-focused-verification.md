@@ -15,7 +15,7 @@ subjects:
   governs: "Finish Release provider focused verification"
   depends_on: [Tool, Workflow, Action, Journal, Evaluation]
 version: 1
-updated_at: "2026-10-05 09:49:00 +0000"
+updated_at: "2026-10-05 11:05:25 +0000"
 relations:
   is_decomposition_of: [CA-P-1643]
   blocks: [CA-P-1708, CA-P-1644]
@@ -37,6 +37,8 @@ Own only selected_native_providers.py and tests/test_release_native_providers.py
 Save exact code/test hashes and genuine focused result/remaining coverage, without claiming public or complete Release dispatch.
 
 ## Result
+
+Parallel continuation repaired the private provider's effect-reference boundary: empty carrier paths and symlinks escaping the Project are rejected. Added an empty-path case and a symlink-escape case; fixture coverage remains unexecuted because directory cleanup is denied. Root reran the three pure serialization cases successfully. Current provider SHA-256 is f65c82aa54bae8e4ebe800c0973fafe75c63e616c5aba963447c3e2a1eaf7080; current test SHA-256 is da5f3b2ae02bb0abd7657eda1a3efb425833f9f03374728b7451e4ef88deee1a. This does not prove shared Journal or restart recovery; historical hashes below remain historical evidence only.
 
 The resumed subagent returned normally; model capacity no longer prevents this bounded work. Added sixteen focused tests in tests/test_release_native_providers.py: thirteen disposable provider/admission/lineage/phase/refusal checks and three pure result conversion checks.
 
