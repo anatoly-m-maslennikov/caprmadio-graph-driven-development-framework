@@ -7,7 +7,7 @@ import threading
 from contracts import Enqueue, EnqueueSelected, Status
 from agent import CodexAgent
 from engine import Coordinator, execute_phase, runtime_fingerprint
-from runtime_config import control_directory, docker_runtime
+from runtime_config import control_directory, docker_runtime, implementation_mock_runtime
 from remote_agent import RemoteAgent
 from selected_execution import SelectedExecution
 from selected_native_providers import SelectedNativeProviders
@@ -178,6 +178,9 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
     """Explicitly started foreground process; no implicit daemon or hook installation."""
     from dbos import DBOS
     root = Path(root).resolve(strict=True)
+    if implementation_agent is None and implementation_mock_runtime():
+        from implementation_mock_agent import ImplementationMockAgent
+        implementation_agent = ImplementationMockAgent(root)
     _, url = database(root)
     engine = Coordinator(root, agent or (RemoteAgent() if docker_runtime() else CodexAgent()))
     stop = threading.Event()
