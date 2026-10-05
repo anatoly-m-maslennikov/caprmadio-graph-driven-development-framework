@@ -37,4 +37,3 @@ Choose the best authorized in-scope option when uncertain; record C/Question and
 ## Definition of Done
 
 Save exact source/code hashes, the actual bounded result, genuine evidence and remaining coverage. A rejected review or partial test does not close the parent or mandatory runtime gates.
-

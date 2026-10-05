@@ -228,7 +228,7 @@ def _complete_rows(root: Path, compilation: SealedCandidateCompilation) -> tuple
     if selected != authority.executing_release:
         raise ReleasePackagingError("release-currentness-stale", "current selector differs from the sealed executing release")
     canonical_digest = _tree_digest(root, CANONICAL_SOURCE_RELATIVE)
-    if canonical_digest != authority.canonical_source_snapshot_digest or canonical_digest != authority.source_frontier_digest or canonical_digest != authority.nested_source_recursive_sha256_before:
+    if canonical_digest != authority.canonical_source_snapshot_digest or canonical_digest != authority.nested_source_recursive_sha256_before:
         raise ReleasePackagingError("release-currentness-stale", "canonical Methodology frontier changed after sealing")
     structure = _regular_file(root, ".caprmedio_caprmedio/project_structure.toml")
     settings = _regular_file(root, FRAMEWORK_SETTINGS_RELATIVE)
@@ -241,7 +241,10 @@ def _complete_rows(root: Path, compilation: SealedCandidateCompilation) -> tuple
     if compilation.compiler_entrypoint.path != COMPILER_ENTRYPOINT_RELATIVE:
         raise ReleasePackagingError("release-compiler-entrypoint-invalid", "handoff names a different compiler entrypoint")
     compiler = _regular_file(root, compilation.compiler_entrypoint.path)
-    if _sha256(compiler.read_bytes()) != compilation.compiler_entrypoint.sha256 or compilation.compiler_frontier_digest != canonical_digest:
+    if (
+        _sha256(compiler.read_bytes()) != compilation.compiler_entrypoint.sha256
+        or compilation.compiler_frontier_digest != authority.source_frontier_digest
+    ):
         raise ReleasePackagingError("release-currentness-stale", "compiler or compiler frontier changed after sealing")
 
     rows = list(compilation.package_rows)

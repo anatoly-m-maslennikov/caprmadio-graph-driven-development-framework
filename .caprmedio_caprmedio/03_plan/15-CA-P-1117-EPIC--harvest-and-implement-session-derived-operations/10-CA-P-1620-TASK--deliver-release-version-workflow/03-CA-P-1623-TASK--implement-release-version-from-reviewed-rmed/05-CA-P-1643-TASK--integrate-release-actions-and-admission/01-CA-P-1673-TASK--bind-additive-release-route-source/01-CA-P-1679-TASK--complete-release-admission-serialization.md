@@ -35,4 +35,3 @@ P1674 rejected only the missing D571 pin, underdefined exact D572 record/contain
 ## Definition of Done
 
 Exact saved hashes and complete unambiguous closed schema permit P1674's narrow independent re-review. File presence alone is not acceptance or dispatch.
-

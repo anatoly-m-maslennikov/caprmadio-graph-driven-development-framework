@@ -30,4 +30,3 @@ P1638's saved rejected review and independent origin adjudication identify the e
 ## Blast radius
 
 The bounded Draft identity promotion path and its source history contract. No mandatory image/permission gate is bypassed and no broad identity registry or new Journal is introduced.
-
