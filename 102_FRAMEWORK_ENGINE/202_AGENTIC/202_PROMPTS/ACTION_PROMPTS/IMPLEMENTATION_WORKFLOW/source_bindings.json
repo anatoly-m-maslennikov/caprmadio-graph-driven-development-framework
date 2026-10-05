@@ -28,9 +28,9 @@
     },
     {
       "atom_id": "CA-M-326",
-      "version": 1,
+      "version": 2,
       "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/05_method/CA-M-326-PROMPTS--compose-short-current-implementation-step-prompts.md",
-      "sha256": "9d0e869f520e3a4ec086a25526fbaa1179e0c45547496319f8173f3f09b8133b"
+      "sha256": "88e5c2a036fa96672a27787c28add4f99903ba3101b6022d65e8ea9efd9a6cab"
     },
     {
       "atom_id": "CA-M-327",
@@ -58,9 +58,9 @@
     },
     {
       "atom_id": "CA-E-564",
-      "version": 1,
+      "version": 2,
       "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/06_evaluation/CA-E-564-PROMPTS-QA_CASE--verify-implementation-prompt-source-currentness.md",
-      "sha256": "4cd28f220e3dcfaa8d96da14cd10cab19b34184cb185a2d25d5c80c4525d465c"
+      "sha256": "02871ae5806537b137f71957670b5988d154299654a5749c10dc9b62f37714d0"
     },
     {
       "atom_id": "CA-E-565",
@@ -76,9 +76,9 @@
     },
     {
       "atom_id": "CA-D-544",
-      "version": 1,
+      "version": 2,
       "path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/07_delivery/CA-D-544-PROMPTS--deliver-current-implementation-workflow-prompt-carriers.md",
-      "sha256": "dcc275ceccfb9ebe078c32008d5c1f8a34231175ddf17ad589500c73de1fbffc"
+      "sha256": "276f6c642357716b137b224476b162e0c8b32467f4d8cc103068692fcf0fdeec"
     },
     {
       "atom_id": "CA-D-545",
@@ -184,4 +184,3 @@
     }
   ]
 }
-
