@@ -24,12 +24,16 @@ from release_suite import (
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     PROJECT_ROOT_ENVIRONMENT_VARIABLE,
     REPORT_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_RELATIVE,
+    SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE,
     SANDBOX_OUTPUT_PATH,
     SANDBOX_WORKSPACE_PATH,
     SuiteExecutionResult,
     _active_n_state,
     _bootstrap_prior_manifest_is_exact,
     _bootstrap_source_context_is_valid,
+    require_declared_suite_command,
 )
 
 
@@ -46,6 +50,8 @@ _EXPECTED_ENVIRONMENT_KEYS = frozenset({
     REPORT_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE,
 })
 _BOOTSTRAP_PACKAGE_LABEL = "org.caprmedio.framework.package_manifest_sha256"
 _BOOTSTRAP_CONTEXT_LABEL = "org.caprmedio.framework.source_context_sha256"
@@ -244,12 +250,17 @@ class InstalledNSuiteDockerExecutor:
             raise ReleaseContractError("release-suite-executor-binding-mismatch", "suite command or working directory differs from sealed selection")
         if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= _MAX_TIMEOUT_SECONDS:
             raise ReleaseContractError("release-suite-executor-timeout-invalid", "suite timeout is outside the governed bound")
+        bindings_sha256 = environment.get(SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE)
+        if not isinstance(bindings_sha256, str) or _SHA256.fullmatch(bindings_sha256) is None:
+            raise ReleaseContractError("release-suite-executor-environment-untrusted", "suite source-bindings digest is invalid")
         expected = {
             "PATH": self.image_path,
             PROJECT_ROOT_ENVIRONMENT_VARIABLE: str(SANDBOX_WORKSPACE_PATH),
             REPORT_ENVIRONMENT_VARIABLE: str(SANDBOX_OUTPUT_PATH / "coverage.xml"),
             COMPILED_ROOT_ENVIRONMENT_VARIABLE: self.compiled_root,
             CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE: self.candidate_snapshot_manifest_sha256,
+            SOURCE_BINDINGS_ENVIRONMENT_VARIABLE: str(SANDBOX_WORKSPACE_PATH / SOURCE_BINDINGS_RELATIVE),
+            SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE: bindings_sha256,
         }
         if set(environment) != _EXPECTED_ENVIRONMENT_KEYS or environment != expected:
             raise ReleaseContractError("release-suite-executor-environment-untrusted", "suite environment differs from fixed sandbox values")
@@ -305,6 +316,8 @@ class InstalledNSuiteDockerExecutor:
             "--env", f"{REPORT_ENVIRONMENT_VARIABLE}={environment[REPORT_ENVIRONMENT_VARIABLE]}",
             "--env", f"{COMPILED_ROOT_ENVIRONMENT_VARIABLE}={environment[COMPILED_ROOT_ENVIRONMENT_VARIABLE]}",
             "--env", f"{CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE}={environment[CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE]}",
+            "--env", f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_ENVIRONMENT_VARIABLE]}",
+            "--env", f"{SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE]}",
             self.image_digest,
             *command[1:],
         )
@@ -352,6 +365,7 @@ def installed_n_suite_executor(
     if binding.image_path is None:
         raise ReleaseContractError("release-suite-executor-n-unproven", "executing N image PATH is absent")
     environment = candidate.manifest.full_suite_environment
+    require_declared_suite_command(environment)
     return InstalledNSuiteDockerExecutor(
         root=root,
         docker=docker,

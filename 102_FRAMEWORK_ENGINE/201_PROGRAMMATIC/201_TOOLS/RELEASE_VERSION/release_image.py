@@ -17,7 +17,7 @@ import subprocess
 import tempfile
 import tomllib
 from dataclasses import asdict, dataclass, replace
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Literal, Protocol
 
 from release_contract import (IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, CandidateSnapshotManifest,
@@ -27,7 +27,7 @@ from release_handoff import (COMPILER_ENTRYPOINT_RELATIVE, CURRENT_SELECTOR_RELA
                              SealedCandidateCompilation, _file)
 from release_packaging import RUNTIME_ROOT, _complete_rows, _render_manifest, _verify_release
 from release_suite import (EVIDENCE_ROOT as SUITE_ROOT, SUPPORTED_RUNNER, SuiteGateEvidence,
-                           _observe_report, _safe_path, verify_bound_suite_evidence)
+                           _safe_path, verify_bound_suite_evidence)
 
 
 IMAGE_ID = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -35,6 +35,13 @@ IMAGE_ROOT = ".caprmedio_runtime/release_image"
 CANDIDATE_LABEL = "org.caprmedio.candidate"
 CONTEXT_LABEL = "org.caprmedio.context"
 MAX_OUTPUT_BYTES = 4 * 1024 * 1024
+_SHA256 = re.compile(r"[0-9a-f]{64}")
+_RETAINED_CONTEXT_BINDINGS = (
+    "candidate_snapshot_manifest_sha256",
+    "compiled_candidate_root",
+    "selected_n_identity",
+    "selected_n_image_context",
+)
 
 
 @dataclass(frozen=True)
@@ -441,8 +448,74 @@ def _verify_build(root, candidate, compilation, suite, build):
     return _verify_build_artifacts(root, candidate, compilation, suite, build)
 
 
+def _retained_suite_context(payload: bytes, candidate, compilation, suite) -> None:
+    """Validate the immutable suite context without reopening current selection.
+
+    The source/currentness gate ran before the suite's own receipt was sealed.
+    Later image readers may run after promotion, so they validate the retained
+    receipt and its digest-bound context rather than treating current N as the
+    past suite's authority.
+    """
+    try:
+        value = json.loads(payload)
+        if not isinstance(value, dict) or canonical_json(value) != payload:
+            raise ValueError("context receipt is not canonical")
+        if set(value) != {"schema_version", *_RETAINED_CONTEXT_BINDINGS, "reference_rows", "control_context_digest"}:
+            raise ValueError("context receipt has an unknown schema")
+        if value["schema_version"] != 1:
+            raise ValueError("context receipt has an unsupported schema version")
+        if value["candidate_snapshot_manifest_sha256"] != candidate.manifest.sha256:
+            raise ValueError("context receipt binds a different candidate")
+        if value["compiled_candidate_root"] != compilation.child_materialization_root:
+            raise ValueError("context receipt binds a different compilation")
+        authority = getattr(candidate, "authority", None)
+        if value["selected_n_identity"] != getattr(authority, "executing_release", None):
+            raise ValueError("context receipt binds a different retained release")
+        if _SHA256.fullmatch(value["selected_n_image_context"]) is None:
+            raise ValueError("context receipt image context is invalid")
+        digest = value["control_context_digest"]
+        if (not isinstance(digest, str) or _SHA256.fullmatch(digest) is None
+                or digest != suite.control_context_digest):
+            raise ValueError("context receipt digest differs from suite evidence")
+        rows = value["reference_rows"]
+        if not isinstance(rows, list) or not rows:
+            raise ValueError("context receipt has no reference rows")
+        prior = ""
+        seen: set[str] = set()
+        for row in rows:
+            if not isinstance(row, dict) or set(row) != {"source_path", "sha256", "mode"}:
+                raise ValueError("context receipt reference row is malformed")
+            source_path, row_digest, mode = row["source_path"], row["sha256"], row["mode"]
+            if (not isinstance(source_path, str) or not source_path or "\\" in source_path or ":" in source_path
+                    or not isinstance(row_digest, str) or _SHA256.fullmatch(row_digest) is None
+                    or type(mode) is not int or not 0 <= mode <= 0o777):
+                raise ValueError("context receipt reference row is invalid")
+            path = PurePosixPath(source_path)
+            if (path.is_absolute() or path.as_posix() != source_path or not path.parts
+                    or any(part in {".", ".."} for part in path.parts)
+                    or path.parts[0] == ".caprmedio_runtime" or "_journal" in path.parts
+                    or "output" in path.parts or any(part == ".env" or part.startswith(".env.") for part in path.parts)):
+                raise ValueError("context receipt reference row escapes the control closure")
+            if source_path <= prior or source_path in seen:
+                raise ValueError("context receipt reference rows are not canonical")
+            prior = source_path
+            seen.add(source_path)
+        preimage = {
+            "schema_version": 1,
+            **{key: value[key] for key in _RETAINED_CONTEXT_BINDINGS},
+            "reference_rows": rows,
+        }
+        if _digest(canonical_json(preimage)) != digest:
+            raise ValueError("context receipt digest is not bound to its rows")
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
+        raise ReleaseContractError(
+            "release-image-suite-untrusted",
+            "original suite context receipt is missing, changed or incomplete",
+        ) from error
+
+
 def _read_suite_artifacts(root, candidate, compilation, suite):
-    """Observe the original execution artifacts without consulting a selector."""
+    """Observe retained suite artifacts without consulting the current selector."""
     if not isinstance(suite, SuiteGateEvidence) or not suite.passed:
         raise ReleaseContractError("release-image-suite-untrusted", "image artifacts require a successful recorded suite")
     environment = candidate.manifest.full_suite_environment
@@ -455,14 +528,16 @@ def _read_suite_artifacts(root, candidate, compilation, suite):
         or not suite.evidence_root.startswith(prefix) or not suffix.startswith("attempt-") or "/" in suffix):
         raise ReleaseContractError("release-image-suite-untrusted", "suite artifacts differ from the exact sealed invocation")
     attempt = _safe_path(root, suite.evidence_root)
-    for name, expected in (("receipt.json", suite.receipt_sha256), ("stdout.bin", suite.stdout_sha256),
-                           ("stderr.bin", suite.stderr_sha256), ("coverage.xml", suite.report_sha256)):
+    files: dict[str, bytes] = {}
+    for name, expected in (("receipt.json", suite.receipt_sha256), ("context.json", None),
+                           ("stdout.bin", suite.stdout_sha256), ("stderr.bin", suite.stderr_sha256),
+                           ("coverage.xml", suite.report_sha256)):
         payload = _file(root, f"{suite.evidence_root}/{name}").read_bytes()
-        if _digest(payload) != expected or (name == "receipt.json" and payload != canonical_json(asdict(replace(suite, receipt_sha256=None)))):
+        if ((expected is not None and _digest(payload) != expected)
+                or (name == "receipt.json" and payload != canonical_json(asdict(replace(suite, receipt_sha256=None))))):
             raise ReleaseContractError("release-image-suite-untrusted", "original suite receipt or captured output changed")
-    tests, coverage, reason = _observe_report(attempt / "coverage.xml", compilation)
-    if reason or tests != suite.executed_tests or coverage != suite.coverage:
-        raise ReleaseContractError("release-image-suite-untrusted", "original suite report no longer establishes complete successful coverage")
+        files[name] = payload
+    _retained_suite_context(files["context.json"], candidate, compilation, suite)
 
 
 def _artifact_inputs(candidate, compilation):

@@ -17,6 +17,7 @@ remain unchanged throughout every later gate.
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import re
 import signal
@@ -42,6 +43,10 @@ from release_packaging import (
     REQUIRED_SKILL_FILES, RUNTIME_ROOT, ReleasePackagingError, _complete_rows,
     _render_manifest, _verify_release,
 )
+from release_suite_reference_context import (
+    ReleaseSuiteReferenceContext, ReleaseSuiteReferenceContextError,
+    capture_context, copy_verified_bytes, revalidate_context, validate_schema2_context,
+)
 
 
 EVIDENCE_ROOT = ".caprmedio_runtime/release_suite"
@@ -49,6 +54,14 @@ REPORT_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_SUITE_REPORT"
 PROJECT_ROOT_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_PROJECT_ROOT"
 COMPILED_ROOT_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_COMPILED_CANDIDATE_ROOT"
 CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_CANDIDATE_MANIFEST_SHA256"
+SOURCE_BINDINGS_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_SOURCE_BINDINGS"
+SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE = "CAPRMEDIO_RELEASE_SOURCE_BINDINGS_SHA256"
+MODULE_RULES_RELATIVE = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_bindings.json"
+SOURCE_BINDINGS_RELATIVE = ".caprmedio_release/source_bindings.json"
+SUITE_DRIVER_RELATIVE = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_suite.py"
+SUITE_DRIVER_COMMAND = ("python", SUITE_DRIVER_RELATIVE)
+SUITE_DRIVER_WORKING_DIRECTORY = "."
+COMPILED_PROBE_TEST_MODULE = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/tests/test_release_compilation.py"
 SUPPORTED_RUNNER = "local-subprocess"
 REQUIRED_COVERAGE = frozenset({"Methodology", "Tools", "Apps", "MCP", "Agentic", "Skill"})
 MAX_REPORT_BYTES = 4 * 1024 * 1024
@@ -123,6 +136,7 @@ class SuiteGateEvidence:
     executing_skill_sha256: str
     receipt_sha256: str | None
     elapsed_seconds: float
+    control_context_digest: str | None = None
 
     @property
     def passed(self) -> bool:
@@ -191,12 +205,22 @@ def _refuse_secret_relative(relative: str | Path) -> None:
         raise ReleaseContractError(error.code, str(error)) from error
 
 
+def require_declared_suite_command(environment: object) -> None:
+    """Admit only D579's fixed private driver at both suite boundaries."""
+
+    if (getattr(environment, "runner", None) != SUPPORTED_RUNNER
+            or tuple(getattr(environment, "command", ())) != SUITE_DRIVER_COMMAND
+            or getattr(environment, "working_directory", None) != SUITE_DRIVER_WORKING_DIRECTORY):
+        raise ReleaseContractError("release-suite-command-untrusted", "suite invocation is not the declared Release driver command")
+
+
 def _suite_process_environment(
     root: Path,
     report_path: Path,
     compilation: SealedCandidateCompilation,
     candidate: ValidatedCandidate,
     *,
+    source_bindings_sha256: str,
     executable_path: str = os.defpath,
 ) -> dict[str, str]:
     """Return the complete, minimal environment for one sealed suite process.
@@ -211,6 +235,8 @@ def _suite_process_environment(
     if (not isinstance(executable_path, str) or not executable_path
             or "\x00" in executable_path or "\n" in executable_path or "\r" in executable_path):
         raise ReleaseContractError("release-suite-executor-untrusted", "suite executor has no safe declared PATH")
+    if not isinstance(source_bindings_sha256, str) or _SOURCE_CONTEXT.fullmatch(source_bindings_sha256) is None:
+        raise ReleaseContractError("release-suite-bindings-invalid", "suite source-bindings digest is invalid")
 
     return {
         "PATH": executable_path,
@@ -218,6 +244,8 @@ def _suite_process_environment(
         REPORT_ENVIRONMENT_VARIABLE: str(report_path),
         COMPILED_ROOT_ENVIRONMENT_VARIABLE: compilation.child_materialization_root,
         CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE: candidate.manifest.sha256,
+        SOURCE_BINDINGS_ENVIRONMENT_VARIABLE: str(SANDBOX_WORKSPACE_PATH / SOURCE_BINDINGS_RELATIVE),
+        SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE: source_bindings_sha256,
     }
 
 
@@ -377,8 +405,14 @@ def _coverage_group(destination: str) -> str | None:
     return next((group for prefix, group in prefixes.items() if destination.startswith(prefix)), None)
 
 
-def _observe_report(path: Path, compilation: SealedCandidateCompilation) -> tuple[int, tuple[str, ...], str]:
-    """Extract actual execution counts and bound coverage; no caller pass field."""
+def _observe_report(
+    path: Path,
+    root: Path,
+    candidate: ValidatedCandidate,
+    compilation: SealedCandidateCompilation,
+    context: ReleaseSuiteReferenceContext,
+) -> tuple[int, tuple[str, ...], str]:
+    """Extract actual execution counts and admit only sealed per-case probes."""
     if path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_REPORT_BYTES:
         return 0, (), "coverage report missing, unsafe or too large"
     payload = path.read_bytes()
@@ -390,24 +424,58 @@ def _observe_report(path: Path, compilation: SealedCandidateCompilation) -> tupl
         return 0, (), "unsupported coverage report format"
     if report.tag not in {"testsuite", "testsuites"}:
         return 0, (), "unsupported coverage report format"
+    if report.get("caprmedio.control_context_digest") != context.control_context_digest:
+        return 0, (), "coverage report control-context digest is missing or mismatched"
     cases = list(report.iter("testcase"))
     if not cases:
         return 0, (), "coverage report has no executed testcases"
-    sources = {row.source_path: _coverage_group(row.destination_path) for row in compilation.package_rows}
+    try:
+        envelope_sha256 = _digest(_source_bindings_bytes(
+            root, candidate.manifest.sha256, compilation.package_rows, compilation.child_materialization_root, context,
+        ))
+        _rules_row, explicit_probes = _validate_module_rules(
+            root, compilation.package_rows, compilation.child_materialization_root,
+        )
+    except (OSError, ReleaseContractError):
+        return len(cases), (), "source bindings are unavailable or changed"
+    rows = {row.source_path: row for row in compilation.package_rows}
     compiled_prefix = f"{compilation.child_materialization_root}/"
     covered: set[str] = set()
     compiled_covered = False
+    probed_sources: set[str] = set()
+    test_ids: set[str] = set()
     for case in cases:
         if list(case.iter("failure")) or list(case.iter("error")):
             return len(cases), tuple(sorted(covered)), "coverage report contains failed testcases"
         if list(case.iter("skipped")):
             return len(cases), tuple(sorted(covered)), "coverage report contains skipped testcases"
-        properties = [item.get("value") for item in case.findall("./properties/property")
-                      if item.get("name") == "caprmedio.covered_source"]
-        if not properties or any(source not in sources for source in properties):
-            return len(cases), tuple(sorted(covered)), "testcase lacks locally bound source coverage"
-        covered.update(sources[source] for source in properties if sources[source] is not None)
-        compiled_covered = compiled_covered or any(source.startswith(compiled_prefix) for source in properties)
+        values: dict[str, list[str | None]] = {}
+        for property_ in case.findall("./properties/property"):
+            values.setdefault(property_.get("name", ""), []).append(property_.get("value"))
+        test_id = values.get("caprmedio.test_id")
+        if (test_id is None or len(test_id) != 1 or not isinstance(test_id[0], str)
+                or test_id[0] != case.get("name") or test_id[0] in test_ids):
+            return len(cases), tuple(sorted(covered)), "testcase test ID is missing, mismatched or duplicated"
+        test_ids.add(test_id[0])
+        module_path = case.get("classname")
+        if not isinstance(module_path, str) or module_path not in set(_test_module_source_paths(compilation.package_rows)):
+            return len(cases), tuple(sorted(covered)), "testcase module is not a sealed test carrier"
+        binding_values = values.get("caprmedio.source_bindings_sha256")
+        if binding_values != [envelope_sha256]:
+            return len(cases), tuple(sorted(covered)), "testcase source-bindings digest is missing or mismatched"
+        expected_paths = (module_path, *explicit_probes.get(module_path, ()))
+        expected_probes = [
+            canonical_json({"source_path": source_path, "sha256": rows[source_path].sha256}).decode("utf-8")
+            for source_path in expected_paths
+        ]
+        if values.get("caprmedio.source_probe") != expected_probes:
+            return len(cases), tuple(sorted(covered)), "testcase source probes do not match sealed module bindings"
+        for source_path in expected_paths:
+            probed_sources.add(source_path)
+            group = _coverage_group(rows[source_path].destination_path)
+            if group is not None:
+                covered.add(group)
+            compiled_covered = compiled_covered or source_path.startswith(compiled_prefix)
     for suite in (item for item in report.iter() if item.tag in {"testsuite", "testsuites"}):
         actual = len(list(suite.iter("testcase")))
         for key, observed in (("tests", actual), ("failures", 0), ("errors", 0), ("skipped", 0)):
@@ -419,6 +487,12 @@ def _observe_report(path: Path, compilation: SealedCandidateCompilation) -> tupl
                     return len(cases), tuple(sorted(covered)), "coverage report summary is invalid"
     if covered != REQUIRED_COVERAGE:
         return len(cases), tuple(sorted(covered)), "full suite coverage is incomplete"
+    skill_controls = {
+        row.source_path for row in compilation.package_rows
+        if row.destination_path in {"SKILLS/ca/SKILL.md", "SKILLS/ca/agents/openai.yaml"}
+    }
+    if len(skill_controls) != 2 or not skill_controls <= probed_sources:
+        return len(cases), tuple(sorted(covered)), "suite did not report both sealed Skill controls"
     if not compiled_covered:
         return len(cases), tuple(sorted(covered)), "suite did not report compiled candidate coverage"
     return len(cases), tuple(sorted(covered)), ""
@@ -457,6 +531,155 @@ def _sealed_file(root: Path, relative: str) -> Path:
     return cursor
 
 
+def _envelope_package_rows(rows: list[PackageRow]) -> list[dict[str, object]]:
+    """Render the complete typed handoff rows without sorting or projection."""
+
+    return [
+        {
+            "resource": row.resource,
+            "source_path": row.source_path,
+            "destination_path": row.destination_path,
+            "sha256": row.sha256,
+            "mode": row.mode,
+        }
+        for row in rows
+    ]
+
+
+def _test_module_source_paths(rows: list[PackageRow]) -> tuple[str, ...]:
+    return tuple(sorted(
+        row.source_path
+        for row in rows
+        if (row.resource == "FRAMEWORK_ENGINE"
+            and row.source_path.startswith("102_FRAMEWORK_ENGINE/")
+            and Path(row.source_path).name.startswith("test_")
+            and row.source_path.endswith(".py"))
+    ))
+
+
+def _validate_module_rules(
+    root: Path, rows: list[PackageRow], compiled_root: str,
+) -> tuple[PackageRow, dict[str, tuple[str, ...]]]:
+    """Prove the sealed explicit-probe mapping references only typed rows."""
+
+    matching = [row for row in rows if row.source_path == MODULE_RULES_RELATIVE]
+    if len(matching) != 1:
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules carrier is absent or duplicated")
+    rules_row = matching[0]
+    rules_path = _sealed_file(root, MODULE_RULES_RELATIVE)
+    rules_bytes = rules_path.read_bytes()
+    if _digest(rules_bytes) != rules_row.sha256 or rules_path.stat().st_mode & 0o777 != rules_row.mode:
+        raise ReleaseContractError("release-currentness-stale", "sealed module-rules carrier changed")
+    try:
+        rules = json.loads(rules_bytes)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules carrier is not JSON") from error
+    if not isinstance(rules, dict) or set(rules) != {"schema_version", "module_probes"} or rules.get("schema_version") != 1:
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules schema is invalid")
+    if canonical_json(rules) != rules_bytes:
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules carrier is not canonical JSON")
+    probes = rules.get("module_probes")
+    if not isinstance(probes, list):
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules probes are invalid")
+    rows_by_source = {row.source_path: row for row in rows}
+    if len(rows_by_source) != len(rows):
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed package rows have duplicate source paths")
+    test_modules = set(_test_module_source_paths(rows))
+    compiled_prefix = compiled_root + "/"
+    compiled_rows = sorted(
+        row.source_path for row in rows
+        if row.resource == "METHODOLOGY" and row.source_path.startswith(compiled_prefix)
+    )
+    if not compiled_rows:
+        raise ReleaseContractError("release-suite-bindings-invalid", "sealed package has no compiled-candidate probe row")
+    compiled_probe = compiled_rows[0]
+    module_paths: list[str] = []
+    bindings: dict[str, tuple[str, ...]] = {}
+    compiled_probe_modules: list[str] = []
+    for probe in probes:
+        if (not isinstance(probe, dict)
+                or set(probe) not in ({"test_module_source_path", "source_paths"},
+                                      {"test_module_source_path", "source_paths", "compiled_candidate_probe"})):
+            raise ReleaseContractError("release-suite-bindings-invalid", "sealed module-rules probe is invalid")
+        module_path = probe.get("test_module_source_path")
+        source_paths = probe.get("source_paths")
+        if not isinstance(module_path, str) or module_path not in test_modules:
+            raise ReleaseContractError("release-suite-bindings-invalid", "module rule names an unsealed test module")
+        if (not isinstance(source_paths, list)
+                or any(not isinstance(source, str) or source not in rows_by_source for source in source_paths)
+                or source_paths != sorted(set(source_paths))
+                or any(source.startswith(compiled_prefix) for source in source_paths)):
+            raise ReleaseContractError("release-suite-bindings-invalid", "module probe is not a sorted sealed package-row reference")
+        compiled_candidate_probe = probe.get("compiled_candidate_probe", False)
+        if type(compiled_candidate_probe) is not bool:
+            raise ReleaseContractError("release-suite-bindings-invalid", "compiled-candidate probe flag is not boolean")
+        if compiled_candidate_probe:
+            if module_path != COMPILED_PROBE_TEST_MODULE:
+                raise ReleaseContractError("release-suite-bindings-invalid", "compiled-candidate probe is assigned to the wrong test module")
+            compiled_probe_modules.append(module_path)
+        module_paths.append(module_path)
+        bindings[module_path] = tuple(source_paths) + ((compiled_probe,) if compiled_candidate_probe else ())
+    if module_paths != sorted(set(module_paths)):
+        raise ReleaseContractError("release-suite-bindings-invalid", "module rules are not source-path sorted")
+    if compiled_probe_modules != [COMPILED_PROBE_TEST_MODULE]:
+        raise ReleaseContractError("release-suite-bindings-invalid", "compiled-candidate probe must occur exactly once")
+    return rules_row, bindings
+
+
+def _source_bindings_bytes(root: Path, candidate_snapshot_manifest_sha256: str,
+                           rows: list[PackageRow], compiled_root: str,
+                           context: ReleaseSuiteReferenceContext) -> bytes:
+    """Build the D579 canonical envelope from complete sealed package rows."""
+
+    if _SOURCE_CONTEXT.fullmatch(candidate_snapshot_manifest_sha256) is None:
+        raise ReleaseContractError("release-suite-bindings-invalid", "candidate snapshot digest is invalid")
+    rules_row, _bindings = _validate_module_rules(root, rows, compiled_root)
+    envelope = {
+        "schema_version": 2,
+        "candidate_snapshot_manifest_sha256": candidate_snapshot_manifest_sha256,
+        "mapping_rules": {"source_path": MODULE_RULES_RELATIVE, "sha256": rules_row.sha256},
+        "package_rows": _envelope_package_rows(rows),
+        "reference_rows": [row.as_dict() for row in context.reference_rows],
+        "control_context_digest": context.control_context_digest,
+    }
+    return canonical_json(envelope)
+
+
+def _capture_reference_context(
+    root: Path, candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+    executor: SuiteSandboxExecutor, selected_n_identity: str,
+) -> ReleaseSuiteReferenceContext:
+    bindings = _trusted_context_bindings(candidate, compilation, executor, selected_n_identity)
+    try:
+        return capture_context(root, bindings)
+    except ReleaseSuiteReferenceContextError as error:
+        raise ReleaseContractError("release-suite-reference-context-invalid", str(error)) from error
+
+
+def _trusted_context_bindings(
+    candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+    executor: SuiteSandboxExecutor, selected_n_identity: str,
+) -> dict[str, str]:
+    image_context = getattr(executor, "source_context_sha256", None)
+    if not isinstance(image_context, str) or _SOURCE_CONTEXT.fullmatch(image_context) is None:
+        raise ReleaseContractError("release-suite-reference-context-untrusted", "suite executor has no trusted selected-N image context")
+    return {
+        "candidate_snapshot_manifest_sha256": candidate.manifest.sha256,
+        "compiled_candidate_root": compilation.child_materialization_root,
+        "selected_n_identity": selected_n_identity,
+        "selected_n_image_context": image_context,
+    }
+
+
+def _context_receipt(context: ReleaseSuiteReferenceContext) -> bytes:
+    return canonical_json({
+        "schema_version": 1,
+        **dict(context.trusted_binding_values),
+        "reference_rows": [row.as_dict() for row in context.reference_rows],
+        "control_context_digest": context.control_context_digest,
+    })
+
+
 def _copy_workspace_file(root: Path, workspace: Path, relative: str, sha256: str, mode: int) -> None:
     source = _sealed_file(root, relative)
     if _digest(source.read_bytes()) != sha256 or source.stat().st_mode & 0o777 != mode:
@@ -478,7 +701,8 @@ def _materialize_suite_workspace(
     candidate: ValidatedCandidate,
     compilation: SealedCandidateCompilation,
     working_directory: str,
-) -> None:
+    context: ReleaseSuiteReferenceContext,
+) -> str:
     """Copy only sealed candidate inputs into a disposable suite workspace.
 
     In particular this does *not* copy the live selector, retained N package,
@@ -495,12 +719,34 @@ def _materialize_suite_workspace(
         observed = rows.setdefault(row.source_path, (row.sha256, row.mode))
         if observed != (row.sha256, row.mode):
             raise ReleaseContractError("release-suite-binding-mismatch", "suite input has conflicting sealed digests")
+    reference_rows = {row.source_path: (row.sha256, row.mode) for row in context.reference_rows}
+    for relative, expected in reference_rows.items():
+        if relative in rows and rows[relative] != expected:
+            raise ReleaseContractError("release-suite-reference-context-invalid", "reference context conflicts with a sealed package row")
+    try:
+        copy_verified_bytes(context, workspace)
+    except ReleaseSuiteReferenceContextError as error:
+        raise ReleaseContractError("release-suite-reference-context-invalid", str(error)) from error
     for relative, (sha256, mode) in sorted(rows.items()):
+        if relative in reference_rows:
+            continue
         _copy_workspace_file(root, workspace, relative, sha256, mode)
+
+    bindings = _source_bindings_bytes(
+        root, candidate.manifest.sha256, compilation.package_rows, compilation.child_materialization_root, context,
+    )
+    try:
+        validate_schema2_context(json.loads(bindings), context)
+    except (ReleaseSuiteReferenceContextError, json.JSONDecodeError) as error:
+        raise ReleaseContractError("release-suite-reference-context-invalid", str(error)) from error
+    bindings_path = workspace / SOURCE_BINDINGS_RELATIVE
+    _safe_path(workspace, ".caprmedio_release", create=True)
+    _durable_bytes(bindings_path, bindings)
 
     # The declared working directory can be an intentionally empty carrier.
     # Creating it in the disposable workspace does not add a host source.
     _safe_path(workspace, working_directory, create=True)
+    return _digest(bindings)
 
 
 def _copy_report_from_output(output_root: Path, destination: Path) -> None:
@@ -531,8 +777,7 @@ def execute_bound_release_suite(
         raise ReleaseContractError("release-suite-timeout-invalid", "suite timeout must be within (0, 900] seconds")
     root = _validate_bound_inputs(candidate, compilation)
     environment = candidate.manifest.full_suite_environment
-    if environment.runner != SUPPORTED_RUNNER:
-        raise ReleaseContractError("release-suite-runner-unsupported", "sealed suite runner is unsupported")
+    require_declared_suite_command(environment)
     if os.name != "posix":
         raise ReleaseContractError("release-suite-runner-unsupported", "runner requires POSIX process-group timeout cleanup")
     if Path(environment.command[0]).name.lower() in SHELLS:
@@ -551,6 +796,7 @@ def execute_bound_release_suite(
     outcome, reason, exit_code = "incomplete", "suite command did not complete", None
     tests, coverage = 0, ()
     stdout_sha = stderr_sha = report_sha = receipt_sha = None
+    context: ReleaseSuiteReferenceContext | None = None
     evidence: SuiteGateEvidence | None = None
     try:
         selected_executor = executor if executor is not None else _DEFAULT_EXECUTOR
@@ -559,7 +805,20 @@ def execute_bound_release_suite(
             _write_capture(attempt / "stderr.bin", b"")
             outcome, reason = "incomplete", "approved isolated suite executor is not configured"
         else:
-            _materialize_suite_workspace(root, workspace, candidate, compilation, environment.working_directory)
+            context = _capture_reference_context(
+                root, candidate, compilation, selected_executor, candidate.authority.executing_release,
+            )
+            _durable_bytes(attempt / "context.json", _context_receipt(context))
+            source_bindings_sha256 = _materialize_suite_workspace(
+                root, workspace, candidate, compilation, environment.working_directory, context,
+            )
+            # The context bytes were captured before workspace assembly.  Do
+            # not issue the sandbox command if a live control carrier changed
+            # while those sealed copies were being prepared.
+            revalidate_context(
+                root, context,
+                _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
+            )
             # The process contract names only sandbox-internal paths.  The
             # executor receives host paths separately for its mounts; source
             # code never receives an authoritative Project or output path.
@@ -569,6 +828,7 @@ def execute_bound_release_suite(
                 SANDBOX_OUTPUT_PATH / "coverage.xml",
                 compilation,
                 candidate,
+                source_bindings_sha256=source_bindings_sha256,
                 executable_path=admitted_path,
             )
             try:
@@ -609,7 +869,10 @@ def execute_bound_release_suite(
             report_sha = _digest(durable_report_path.read_bytes())
             with durable_report_path.open("rb") as report_stream:
                 os.fsync(report_stream.fileno())
-        tests, coverage, coverage_reason = _observe_report(durable_report_path, compilation)
+        if context is None:
+            coverage_reason = "source reference context was not captured"
+        else:
+            tests, coverage, coverage_reason = _observe_report(durable_report_path, root, candidate, compilation, context)
         if exit_code == 0 and reason != "suite left running descendant processes":
             outcome, reason = ("incomplete", coverage_reason) if coverage_reason else ("passed", "complete bound suite execution")
         try:
@@ -620,13 +883,20 @@ def execute_bound_release_suite(
                 raise ReleaseContractError("release-currentness-stale", "executing N selector, runtime package or project-local ca Skill changed during suite")
             if _safe_path(root, environment.working_directory) != cwd:
                 raise ReleaseContractError("release-currentness-stale", "suite working directory changed")
+            if context is None:
+                raise ReleaseContractError("release-suite-reference-context-invalid", "reference context is absent")
+            revalidate_context(
+                root, context,
+                _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
+            )
         except (ReleaseContractError, ReleasePackagingError, OSError, ValueError) as error:
             outcome, reason = "stale", f"post-suite bindings no longer validate: {getattr(error, 'code', type(error).__name__)}"
         evidence = SuiteGateEvidence(candidate.manifest.sha256, outcome, reason, environment.runner,
                                      tuple(environment.command), environment.working_directory, exit_code,
                                      tests, coverage, relative, stdout_sha, stderr_sha, report_sha,
                                      *active_n_before, None,
-                                     time.monotonic() - started)
+                                     time.monotonic() - started,
+                                     control_context_digest=context.control_context_digest if context is not None else None)
         receipt = canonical_json(asdict(evidence))
         _durable_bytes(attempt / "receipt.json", receipt)
         directory_descriptor = os.open(attempt, os.O_RDONLY)
@@ -635,7 +905,7 @@ def execute_bound_release_suite(
         finally:
             os.close(directory_descriptor)
         receipt_sha = _digest(receipt)
-    except (OSError, ValueError) as error:
+    except (OSError, ValueError, KeyError) as error:
         outcome, reason = "recording_uncertain", f"suite evidence could not be durably recorded: {type(error).__name__}"
     if evidence is not None:
         return replace(evidence, outcome=outcome, reason=reason, receipt_sha256=receipt_sha)
@@ -643,7 +913,8 @@ def execute_bound_release_suite(
                              tuple(environment.command), environment.working_directory, exit_code,
                              tests, coverage, relative, stdout_sha, stderr_sha, report_sha,
                              *active_n_before, receipt_sha,
-                             time.monotonic() - started)
+                             time.monotonic() - started,
+                             control_context_digest=context.control_context_digest if context is not None else None)
 
 
 def verify_bound_suite_evidence(
@@ -658,6 +929,7 @@ def verify_bound_suite_evidence(
     if not isinstance(evidence, SuiteGateEvidence) or not evidence.passed:
         raise ReleaseContractError("release-suite-evidence-untrusted", "later admission requires actual successful typed suite evidence")
     environment = candidate.manifest.full_suite_environment
+    require_declared_suite_command(environment)
     prefix = f"{EVIDENCE_ROOT}/{candidate.manifest.sha256}/"
     if (evidence.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
             or evidence.runner != environment.runner or evidence.command != tuple(environment.command)
@@ -670,7 +942,7 @@ def verify_bound_suite_evidence(
     attempt = _safe_path(root, evidence.evidence_root)
     try:
         files = {}
-        for name in ("receipt.json", "stdout.bin", "stderr.bin", "coverage.xml"):
+        for name in ("receipt.json", "context.json", "stdout.bin", "stderr.bin", "coverage.xml"):
             path = attempt / name
             if path.is_symlink() or not path.is_file():
                 raise ValueError("durable suite carrier is missing or unsafe")
@@ -681,7 +953,19 @@ def verify_bound_suite_evidence(
                 or _digest(files["stderr.bin"]) != evidence.stderr_sha256
                 or _digest(files["coverage.xml"]) != evidence.report_sha256):
             raise ValueError("durable suite bytes differ from the typed receipt")
-        tests, coverage, reason = _observe_report(attempt / "coverage.xml", compilation)
+        context_payload = json.loads(files["context.json"])
+        if canonical_json(context_payload) != files["context.json"]:
+            raise ValueError("reference-context receipt is not canonical")
+        bindings = {
+            key: context_payload[key]
+            for key in ("candidate_snapshot_manifest_sha256", "compiled_candidate_root",
+                        "selected_n_identity", "selected_n_image_context")
+        }
+        context = capture_context(root, bindings)
+        if (_context_receipt(context) != files["context.json"]
+                or context.control_context_digest != evidence.control_context_digest):
+            raise ValueError("reference context no longer matches the retained receipt")
+        tests, coverage, reason = _observe_report(attempt / "coverage.xml", root, candidate, compilation, context)
         if reason or tests != evidence.executed_tests or coverage != evidence.coverage:
             raise ValueError("actual suite report no longer establishes complete successful coverage")
         if _active_n_state(root, candidate) != (
