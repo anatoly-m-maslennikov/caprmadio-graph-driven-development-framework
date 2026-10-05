@@ -8,6 +8,8 @@ If it can be built, CAPRMEDIO should help anyone build it if they are willing to
 
 In practice, it should make AI-assisted development reliable from the first idea to production without losing meaning, traceability, or learning.
 
+Even a fully AI-generated project should be understandable, controllable and **not slop**.
+
 ## What CAPRMEDIO is
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
@@ -20,10 +22,10 @@ an explicit ontology/base model defines the core: concepts, relations and constr
 
 ### Ontology (methodology)
 
-The project puts decisions into practice—yours and AI Agents' →\
-but sessions are ephemeral →\
-we need a **stable source of truth** →\
-the specification.
+The project is made of implemented decisions—yours and AI Agents' →\
+But sessions are ephemeral →\
+We need a **stable source of truth** →\
+It's the specification.
 
 Spec grows →\
 we need smaller units →\
@@ -114,66 +116,82 @@ a derived graph database index supports queries and views. Database authority co
 - **I — Implementation:** code, tests, configuration and CI/CD pipelines implementing all RMED.
 - **O — Operations:** actions and workflows with steps to operate the project.
 
-Each Atom content role has allowed **Types**. Each Type defines its structure, properties, authoring rules and checks, including when each property is required. For example, O includes Action, Step, Workflow and Actor.
+Each Atom content role has **Types**. Each Type has its own structure, properties, authoring rules and checks. For example, O has Action, Step, Workflow and Actor.
 
-Content roles describe purpose. Atom, Journal and Projection describe form. Both classifications follow **MECE**: categories cover their declared scope without overlap. **DRY** means that each meaning has one authority, not independent copies.
+Content roles describe purpose. Atom, Journal and Projection describe form.
+
+- **MECE:** cover the defined scope without overlap.
+- **DRY:** keep one source of meaning, not independent copies.
 
 **One coherent source of truth:** Atoms record Claims; actual Implementation shows what is built.
 
-[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) defines Scope Units, their parents and their authority/Delivery paths. Folders follow these declarations; they do not define them.
+[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) defines Scope Units, their parents and their authority/Delivery paths. Folders follow this file.
 
 ### Fractal structure
 
-**The same pattern repeats at every level.** Scope Units can contain child Scope Units. P Atoms can break work into smaller P Atoms: epics, sub-epics, tasks and subtasks.
+Scope Units can fold one inside another. P Atoms can split into smaller P Atoms: epics, sub-epics, tasks and subtasks.
 
-Both structures have **no fixed limit on nesting depth**. Declared relationships define the nesting, not folders alone. Neither structure may contain cycles. Each Claim keeps its own scope; nesting does not give it wider authority.
+**As many layers as needed. The same framework rules at every layer.** The structure must not contain cycles.
 
 ### Local and global tiers
 
-**Local Tier** describes a Claim's level within its Scope Unit:
+**Local tiers** are levels inside one Scope Unit:
 
-- **Principle:** a guiding rule at Project level.
+- **Principle:** project principles.
 - **Core:** basic definitions and boundaries.
-- **General:** reusable rules for Standard content.
-- **Standard:** concrete project content and decisions.
+- **General:** reusable rules.
+- **Standard:** work and implementation details.
 
-At Project level, Principle governs Core, and Core governs Standard. In other Scope Units, Core governs General, and General governs Standard.
+From higher to lower authority:
 
-**Global Tier** combines scope and Local Tier into one authority number across the hierarchy. Smaller numbers govern larger numbers within the applicable scope. Project goals have Global Tier `-1` and no Local Tier.
+- Project: Principle, Core, Standard.
+- Other Scope Units: Core, General, Standard.
 
-**Tiers describe authority, not work priority or folder depth.**
+**Global tiers** give Atoms one authority number across the project. The number comes from the scope and Local Tier. Within the scope where a Claim applies, a lower number means higher authority.
+
+Project goals have Global Tier `-1` and no Local Tier. **Tiers are not work priority or folder depth.**
 
 ### Ownership and claim scope
 
-- **Internal:** the project sets and owns the artifact's meaning.
-- **External:** an identified outside source sets or imposes the meaning. The project records that source and how it applies.
-- **Relational:** an Atom's Claim targets a Scope Unit other than the Atom's own, or the Atom has no containing Scope Unit.
+- **Internal:** the project defines the meaning.
+- **External:** an outside source defines or imposes the meaning. The project records the source and how it applies.
+- **Relational:** a Claim targets another Scope Unit, or the Atom is not inside a Scope Unit.
 
-Internal/external describe **Governance Origin**; relational describes **claim scope**, not a third origin.
+Internal/external say **who defines the meaning**. Relational says **where the Claim applies**.
 
 ### Relations
 
-- **Direct relations** link specific artifacts: `child_of` links Requirements to their parents; `method_for`, `evaluation_for` and `delivery_for` link RMED Atoms to the Requirements they serve; `derived_from` links results to their sources.
-- **Subjects** link an Atom to an Entity. `GOVERNS` names what its Claim governs. `DEPENDS_ON` names what the Claim needs but does not govern. A Subject is a relation, not another node.
+**Direct relations** link artifacts. Examples:
+
+- `child_of`: a parent Requirement.
+- `method_for`, `evaluation_for`, `delivery_for`: RMED support for a Requirement.
+- `derived_from`: the sources used.
+
+**Subjects** link Atoms to Entities:
+
+- `GOVERNS`: what the Claim governs.
+- `DEPENDS_ON`: what the Claim needs but does not govern.
+
+Subjects are links, not nodes.
 
 Scope Units + typed relations + Subjects →\
-**fetch the relevant slice of the specification—or the wider CAPRMEDIO set—mechanically or almost mechanically.**
+**fetch the right part of the spec or other CAPRMEDIO content mechanically, or almost mechanically.**
 
 ### Main projections
 
-- **Entity Graph:** Entities and their relationships, built from Atom Subjects.
+- **Entity Graph:** Entities and their relations, based on Subjects.
 - **Terms Graph:** terms and their allowed typed relations.
 - **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
-- **Applicable Methodology:** the methodology that applies to the selected scope, with conflicts resolved.
+- **Applicable Methodology:** the rules that apply to the selected scope.
 - **Requirement Lineage Map:** Requirements traced back to their Principles.
 
-**Different views, one authority:** rebuild Projections from their sources instead of maintaining separate copies of project meaning.
+**Different views, one source.** Rebuild Projections from their sources.
 
-Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journals in `_journal/` and persistent Projections in `_projection/`. Applicable Methodology, graph views and derived Journal views are Projections. Keep these storage roots separate from authority sources and temporary state.
+Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journals in `_journal/` and Projections in `_projection/`. Applicable Methodology, graph views and derived Journal views are Projections.
 
 ### Extension and configuration
 
-**CAPRMEDIO is extensible and configurable:** projects can add Types, Workflows, Tools and authoring rules within the allowed extension boundaries. Package reusable additions as Extensions. Settings choose available capabilities, their parameters and configuration precedence; they do not change the capabilities' meaning.
+**The framework is expandable and configurable.** You can add Types, Workflows, Tools and authoring rules. Put reusable additions in Extensions. Settings choose what to use and with which parameters. Framework rules still apply.
 
 ## Current boundaries
 
