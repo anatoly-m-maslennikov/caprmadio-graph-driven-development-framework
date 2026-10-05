@@ -15,7 +15,7 @@ subjects:
   governs: "Integrate derived models and status carriers"
   depends_on: [Atom, Content Role, Status, Carrier, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 02:36:46 +0000"
+updated_at: "2026-10-05 04:42:52 +0000"
 relations:
   is_decomposition_of: [CA-P-1615]
   blocks: [CA-P-1638]
@@ -38,3 +38,8 @@ Inputs: accepted CA-P-1633 source packet and current saved lifecycle inputs; cur
 
 Golden E2E effects cover all current domains, missing folder creation/collision, same-status no-op, Draft identity handling, history/diagnostics and shared receipts; truthfully report remaining coverage.
 
+## Result
+
+Completed through the required bounded children, not as one enlarged executable leaf: native source resolver/status effects, non-active demotion repair, current source admission/recording, exact W01-W04 rebinding, and durable carried-lineage promotion are saved. P1662's current five/fourteen/four native corpora and the eight shared-run cases pass; previous independent source reviews retain their exact pins. C453/C455 describe actual resolved native repairs. Current status code now uses qualified source authority and complete carriers; P1638 still independently reviews integration. This development completion does not satisfy P1616/C449 actual immutable-image/MCP gates or C447 relocation.
+
+P1638 rejected the complete native promotion claim on two target-origin forgeries. This composite is reopened while P1662 repairs that required remainder; P1647 shared integration remains Done for its accepted independent scope. Passing focused cases remain genuine but do not establish the missing origin invariant.
