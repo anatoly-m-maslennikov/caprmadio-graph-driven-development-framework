@@ -11,8 +11,8 @@ status: Active
 subjects:
   governs: "Workflow"
   depends_on: ["Step", "Workflow Run", "Workflow/Relation Kind: On Result", "Operator", "Journal"]
-version: 3
-updated_at: "2026-10-05 01:39:17 +0000"
+version: 2
+updated_at: "2026-10-04 17:12:08 +0000"
 relations:
   relates_to: [CA-O-129, CA-O-145, CA-M-303, CA-R-1508, CA-R-1513, CA-R-1520, CA-R-1525, CA-R-1720]
 ---
@@ -47,6 +47,6 @@ The two ON_RESULT edges have Step endpoints in this Workflow. No other route, im
 
 Reuse O067 identity assessment through O145 and O051 accepted replacement persistence through the effect Action. The graph neither duplicates those behaviors nor owns their bindings. A Summary change always follows the replacement-required terminal route; a changed proposal or stale evidence requires reassessment before update persistence.
 
-The separately admitted successor obtains fresh definition/input/permission bindings. Required pending replacement is not reported complete. Change Status resolves the actual current Atom, then its complete Content Role and optional Type-qualified model: use the applicable existing whitelist and transition rule under R1521/R1308, including current Operations R1874 and Analysis R1875 role bindings, not a Workflow list. A more-specific declared Role/Type model overrides its role model; otherwise the role model applies without duplicated Type value sets. A same current status is a no-op. Archive is only a shortcut when that qualified model explicitly defines an archival status; otherwise archive ends missing-archival-model/unsupported without mapping Concern resolved or canceled to archival meaning.
+The separately admitted successor obtains fresh definition/input/permission bindings. Required pending replacement is not reported complete. Current qualified status models, Carrier rules and permissions govern Change Status; no universal Draft/Active/Archived list is introduced.
 
 Every Workflow/Step/Action Run, including referenced Action executions, standalone use, nested lineage, failure/cancellation and no-op, retains exact definitions/inputs, parent references, start/terminal/result/effect evidence in the one authoritative Journal under R1720/R1525 and applicable Run policy. Missing durable receipts are recording-blocked, not journaled success. No secret or competing history store is introduced. This is a source graph, not evidence of implementation, MCP, prompt or runtime execution.

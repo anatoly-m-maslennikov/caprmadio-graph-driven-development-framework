@@ -17,8 +17,8 @@ subjects:
     - "Atom/Revision"
     - "Artifact/Carrier"
     - "Journal/Record"
-version: 5
-updated_at: "2026-10-05 01:39:17 +0000"
+version: 4
+updated_at: "2026-10-04 17:40:59 +0000"
 relations: {}
 ---
 # Summary
@@ -33,14 +33,14 @@ Archive Selected Active Atoms **means** the reusable Action that withdraws the s
 
 - select **`=1`** active Atom **or** a frozen bulk set of **`>=2`** active Atoms.
 - actual archival requires an authorized Project-local MCP delegation with a sealed Initiative action envelope. a preview grants no apply authority.
-- preserve the Atom ID, Version, content, Summary, prior history, **and** resolvable historical dependents. derive the archive location from the applicable Delivery authority under CA-D-565 **and** CA-D-466, and serialize its basename under CA-D-289; preserved meaning **and** history do **not** require unchanged lifecycle metadata **or** active basename.
+- preserve the Atom ID, Version, content, Summary, prior history, **and** resolvable historical dependents. derive the archive location **and** basename from the applicable Delivery authority under CA-D-289 **and** CA-D-303; preserved meaning **and** history do **not** require unchanged lifecycle metadata **or** active basename.
 
 ### Action
 
-1. resolve **every** selected Atom uniquely, establish its active classification **and** owning Content Role/Type, **and** retain its exact path, ID, Version, Status, Updated At, digest, **and** historical references as preconditions. resolve the applicable Atom status model and authorization/transition conditions under CA-R-1521/CA-R-1308, including R1874 for Operations and R1875 for Analysis. Bind a more-specific declared Role/Type override only when it exists; otherwise bind the role model. Require that model's explicitly defined archival status and transition, not a literal universal `Archived` value. Missing, ambiguous, unsupported or non-archival models return missing-archival-model/unsupported unchanged; in particular, do not map Concern resolved/canceled to archival meaning. this Tool is the archive shortcut used by Change Status, **not** another generic Status Workflow.
+1. resolve **every** selected Atom uniquely, establish its active classification **and** owning Content Role/Type, **and** retain its exact path, ID, Version, Status, Updated At, digest, **and** historical references as preconditions. resolve the applicable Atom status model **and** authorization/transition conditions under CA-R-1521; require its admitted Archived transition. missing **or** unsupported models block **or** report the unsupported capability, **not** an invented universal lifecycle. this Tool is the archive shortcut used by Change Status, **not** another generic Status Workflow.
 2. derive **`=1`** role-local archive destination per target using the required `@<version>` suffix. reject Drafts, already archived Carriers, non-Atoms, invalid destinations, collisions, repeated targets, **and** stale targets.
 3. freeze the complete source-to-destination map **and** return its mutation-free dry run.
-4. on explicit authorized `--apply`, recheck **every** source **and** destination precondition. archive each whole Carrier with its model-admitted archival `status` and actual archive-time `updated_at` under CA-R-1788/CA-R-1371, preserving body, Summary, ID, Version, **and** **all** other frontmatter values. publish the complete selected set as **`=1`** rollbackable transaction **and** exclude it from current-authority discovery.
+4. on explicit authorized `--apply`, recheck **every** source **and** destination precondition. archive each whole Carrier with its admitted lifecycle `status: Archived` **and** actual archive-time `updated_at` under CA-R-1788/CA-R-1371, preserving body, Summary, ID, Version, **and** **all** other frontmatter values. publish the complete selected set as **`=1`** rollbackable transaction **and** exclude it from current-authority discovery.
 5. verify unchanged body, Summary, ID, Version, **and** other preserved metadata/history; independently verify **only** the admitted lifecycle Status/actual Updated At differences, correct @<version> archive basename, absence from active locations, **and** retained historical resolution. do **not** demand an unchanged full-file digest after an admitted Status/time edit. failed preflight still leaves **all** bytes unchanged.
 6. **if** an effect **or** postcondition fails, restore **every** selected mutable source **and** destination **to** its before-state; preserve unrelated Carriers **and** immutable accepted Journal evidence. report the failed attempt **and** recovery result rather than archive success.
 

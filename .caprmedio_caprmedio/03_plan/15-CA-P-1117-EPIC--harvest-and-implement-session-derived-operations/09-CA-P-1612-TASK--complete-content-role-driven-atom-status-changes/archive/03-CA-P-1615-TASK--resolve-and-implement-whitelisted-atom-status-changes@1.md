@@ -15,8 +15,8 @@ status: Active
 subjects:
   governs: "Resolve and implement whitelisted Atom status changes"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]
-version: 2
-updated_at: "2026-10-05 02:37:23 +0000"
+version: 1
+updated_at: "2026-10-05 01:04:37 +0000"
 relations:
   is_decomposition_of: [CA-P-1612]
   blocks: [CA-P-1616]
@@ -33,11 +33,7 @@ Within <=15 minutes, implement the accepted current-status/folder resolver and n
 
 ### Inputs
 
-CA-P-1614 and CA-P-1633 accepted complete source pins; current change_status_atom_action and selected route; current parser/model sources and shared Run support. Freeze resolved inputs for admitted execution.
-
-### Bounded decomposition
-
-CA-P-1634 implements the pure source-derived resolver; CA-P-1635 authors its test-first golden corpus; CA-P-1636 binds exact integration touchpoints. These independent leaves can run in parallel. All three block CA-P-1637, which integrates the existing Action/Tool/MCP/orchestrator path and required carrier effects. CA-P-1638 independently reviews complete integration evidence. Completing only the pure helper or source review does not complete this parent. Every leaf is bounded to <=15 minutes and preserves external edits; split unfinished work rather than overstating completion.
+CA-P-1614 accepted source pins; current change_status_atom_action and selected route; current parser/model sources and shared Run support. Freeze resolved inputs for admitted execution.
 
 ### Output and ownership
 
