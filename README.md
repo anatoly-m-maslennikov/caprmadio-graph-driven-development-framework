@@ -97,8 +97,8 @@ a derived graph database index supports queries and views. Database authority co
 
 ### Node types
 
-- **Scope Unit:** a declared boundary of project responsibility, with its place in the project hierarchy.
-- **Atom:** one scoped Claim with a content role. Atoms belong to Scope Units; project-wide goals are the exception.
+- **Scope Unit:** one area of project responsibility, declared in the project structure.
+- **Atom:** one Claim in one scope, with a content role. Atoms belong to Scope Units; project-wide goals are the exception.
 - **Journal:** records of changes, execution and observed outcomes.
 - **Projection:** a derived, non-authoritative view of existing sources.
 
@@ -114,45 +114,66 @@ a derived graph database index supports queries and views. Database authority co
 - **I — Implementation:** code, tests, configuration and CI/CD pipelines implementing all RMED.
 - **O — Operations:** actions and workflows with steps to operate the project.
 
-Within each Atom content role, governed **Types** define structure, required and conditional properties, authoring rules and validation. For example, O includes Action, Step, Workflow and Actor.
+Each Atom content role has allowed **Types**. Each Type defines its structure, properties, authoring rules and checks, including when each property is required. For example, O includes Action, Step, Workflow and Actor.
 
-Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
+Content roles describe purpose. Atom, Journal and Projection describe form. Both classifications follow **MECE**: categories cover their declared scope without overlap. **DRY** means that each meaning has one authority, not independent copies.
 
-CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
+**One coherent source of truth:** Atoms record Claims; actual Implementation shows what is built.
 
-[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
+[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) defines Scope Units, their parents and their authority/Delivery paths. Folders follow these declarations; they do not define them.
+
+### Fractal structure
+
+**The same pattern repeats at every level.** Scope Units can contain child Scope Units. P Atoms can break work into smaller P Atoms: epics, sub-epics, tasks and subtasks.
+
+Both structures have **no fixed limit on nesting depth**. Declared relationships define the nesting, not folders alone. Neither structure may contain cycles. Each Claim keeps its own scope; nesting does not give it wider authority.
+
+### Local and global tiers
+
+**Local Tier** describes a Claim's level within its Scope Unit:
+
+- **Principle:** a guiding rule at Project level.
+- **Core:** basic definitions and boundaries.
+- **General:** reusable rules for Standard content.
+- **Standard:** concrete project content and decisions.
+
+At Project level, Principle governs Core, and Core governs Standard. In other Scope Units, Core governs General, and General governs Standard.
+
+**Global Tier** combines scope and Local Tier into one authority number across the hierarchy. Smaller numbers govern larger numbers within the applicable scope. Project goals have Global Tier `-1` and no Local Tier.
+
+**Tiers describe authority, not work priority or folder depth.**
 
 ### Ownership and claim scope
 
-- **Internal:** the project establishes and owns the artifact's meaning.
-- **External:** an identified outside source establishes or imposes the meaning; the project records and binds itself to that source.
-- **Relational:** an Atom's Claim targets a different Scope Unit from its containing one, or the Atom has no containing Scope Unit.
+- **Internal:** the project sets and owns the artifact's meaning.
+- **External:** an identified outside source sets or imposes the meaning. The project records that source and how it applies.
+- **Relational:** an Atom's Claim targets a Scope Unit other than the Atom's own, or the Atom has no containing Scope Unit.
 
 Internal/external describe **Governance Origin**; relational describes **claim scope**, not a third origin.
 
 ### Relations
 
-- **Direct relations** connect identified artifacts: `child_of` for Requirement lineage, `method_for`, `evaluation_for` and `delivery_for` for RMED traceability, and `derived_from` for source provenance.
-- **Subjects** link an Atom to an Entity: `GOVERNS` identifies what its Claim governs; `DEPENDS_ON` identifies what it needs without governing it. A Subject is a relation, not another node.
+- **Direct relations** link specific artifacts: `child_of` links Requirements to their parents; `method_for`, `evaluation_for` and `delivery_for` link RMED Atoms to the Requirements they serve; `derived_from` links results to their sources.
+- **Subjects** link an Atom to an Entity. `GOVERNS` names what its Claim governs. `DEPENDS_ON` names what the Claim needs but does not govern. A Subject is a relation, not another node.
 
 Scope Units + typed relations + Subjects →\
 **fetch the relevant slice of the specification—or the wider CAPRMEDIO set—mechanically or almost mechanically.**
 
 ### Main projections
 
-- **Entity Graph:** Entities and their relationships, derived from Atom Subjects.
-- **Terms Graph:** vocabulary and its admitted typed relations.
-- **Project Scope Unit Graph and Sources view:** declared hierarchy and authority/Delivery bindings.
-- **Applicable Methodology:** the resolved methodology applicable to the selected scope.
-- **Requirement Lineage Map:** Requirements traced to their governing Principles.
+- **Entity Graph:** Entities and their relationships, built from Atom Subjects.
+- **Terms Graph:** terms and their allowed typed relations.
+- **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
+- **Applicable Methodology:** the methodology that applies to the selected scope, with conflicts resolved.
+- **Requirement Lineage Map:** Requirements traced back to their Principles.
 
-**Different views, one authority:** Projections can be regenerated without maintaining competing copies of project meaning.
+**Different views, one authority:** rebuild Projections from their sources instead of maintaining separate copies of project meaning.
 
-Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
+Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journals in `_journal/` and persistent Projections in `_projection/`. Applicable Methodology, graph views and derived Journal views are Projections. Keep these storage roots separate from authority sources and temporary state.
 
 ### Extension and configuration
 
-**CAPRMEDIO is extensible and configurable:** projects can add governed Types, Workflows, Tools and authoring rules within declared extension boundaries, including reusable Extensions. Settings select and parameterize available capabilities and resolve their precedence without changing their governed meaning.
+**CAPRMEDIO is extensible and configurable:** projects can add Types, Workflows, Tools and authoring rules within the allowed extension boundaries. Package reusable additions as Extensions. Settings choose available capabilities, their parameters and configuration precedence; they do not change the capabilities' meaning.
 
 ## Current boundaries
 
