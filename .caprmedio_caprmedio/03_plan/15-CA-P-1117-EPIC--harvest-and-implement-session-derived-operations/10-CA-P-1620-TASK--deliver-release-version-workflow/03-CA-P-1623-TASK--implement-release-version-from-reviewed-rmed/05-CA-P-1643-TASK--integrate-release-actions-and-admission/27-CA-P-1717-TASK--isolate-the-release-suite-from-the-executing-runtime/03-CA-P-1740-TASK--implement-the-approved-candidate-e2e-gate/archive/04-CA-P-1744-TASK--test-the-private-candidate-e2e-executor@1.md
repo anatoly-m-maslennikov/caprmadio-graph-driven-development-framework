@@ -11,8 +11,8 @@ author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
 status: Active
-version: 2
-updated_at: "2026-10-05 21:58:15 +0000"
+version: 1
+updated_at: "2026-10-05 20:50:41 +0000"
 subjects:
   governs: "Candidate E2E Release gate/Test the private Candidate E2E executor"
   depends_on: [Implementation, Evaluation, Workflow, Action, Docker Image, Test Suite, Journal]
@@ -39,7 +39,3 @@ The owned source or implementation is independently accepted and actual scoped v
 ## Pre-execution review
 
 Root accepts this bounded decomposition of the Operator-approved host E2E design. Respect the stated dependency and file-ownership boundaries. The existing isolated Unit executor, current public manifest, pending Runs and retained N remain protected.
-
-## Required decomposition
-
-This composite is not one executable <=15-minute leaf. Complete CA-P-1750, CA-P-1751; each owns the files and acceptance stated in its carrier. Prototype/import checks already occurred but are not the complete behavioral test prerequisite. No actual Docker or publication failure is bypassed. The composite remains Active until every required child is Done.
