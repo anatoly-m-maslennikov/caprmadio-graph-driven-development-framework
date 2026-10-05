@@ -19,13 +19,24 @@ APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[3]
 sys.path.insert(0, str(APP))
 sys.path.insert(0, str(APP / "docker"))
+RELEASE_ROOT = ROOT / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION"
+sys.path.insert(0, str(RELEASE_ROOT))
 from runtime import Runtime  # noqa: E402
+from release_e2e_context import load_release_e2e_context  # noqa: E402
+
+try:
+    E2E_CONTEXT = load_release_e2e_context(os.environ)
+except Exception:
+    E2E_CONTEXT = None
 
 
-@unittest.skipUnless(os.environ.get("CAPRMEDIO_DOCKER_E2E") == "1", "requires built Docker image")
+@unittest.skipUnless(
+    os.environ.get("CAPRMEDIO_DOCKER_E2E") == "1" and E2E_CONTEXT is not None,
+    "requires sealed Release E2E context and built candidate image",
+)
 class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
-        parent = ROOT / ".caprmedio_tmp/tests/docker-e2e"
+        parent = E2E_CONTEXT.scratch_root / "docker-e2e"
         parent.mkdir(parents=True, exist_ok=True)
         self.temporary = tempfile.TemporaryDirectory(dir=parent, ignore_cleanup_errors=True)
         self.root = Path(self.temporary.name)
@@ -53,7 +64,7 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             "## Scope\nMOCK\n\n## Claim\nbad wording\n"
         )
         (control / "rules.md").write_text("mock local rules")
-        self.runtime = Runtime(self.root, mock=True)
+        self.runtime = Runtime(self.root, mock=True, image=E2E_CONTEXT.candidate_image_digest)
         self.started = False
 
     async def asyncTearDown(self):
@@ -81,6 +92,8 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 str(APP / "docker/runtime.py"),
                 "--project-root",
                 str(self.root),
+                "--image",
+                E2E_CONTEXT.candidate_image_digest,
                 "--mock",
                 "mcp",
             ],

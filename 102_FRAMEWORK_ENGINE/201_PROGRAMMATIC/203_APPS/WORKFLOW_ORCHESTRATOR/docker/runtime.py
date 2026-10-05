@@ -9,25 +9,28 @@ import subprocess
 import tempfile
 
 try:
-    from .image_reference import IMAGE, image_reference
+    from .image_reference import IMAGE, IMMUTABLE_IMAGE, image_reference
 except ImportError:  # direct execution: docker/ is the import root
-    from image_reference import IMAGE, image_reference
+    from image_reference import IMAGE, IMMUTABLE_IMAGE, image_reference
 
 DIRECTORY = Path(__file__).resolve().parent
 SOURCE_ROOT = DIRECTORY.parents[4]
 
 
 class Runtime:
-    def __init__(self, root, *, mock=False, auth_file=None):
+    def __init__(self, root, *, mock=False, auth_file=None, image=None):
         self.root = Path(root).resolve(strict=True)
         self.mock, self.auth_file = mock, auth_file
+        if image is not None and (not isinstance(image, str) or IMMUTABLE_IMAGE.fullmatch(image) is None):
+            raise ValueError("Runtime image must be an immutable sha256 image ID")
+        self.image = image
         self.project = "caprmedio-" + hashlib.sha256(str(self.root).encode()).hexdigest()[:12]
 
     def environment(self):
         environment = dict(
             os.environ,
             CAPRMEDIO_PROJECT_ROOT=str(self.root),
-            CAPRMEDIO_IMAGE=image_reference(os.environ),
+            CAPRMEDIO_IMAGE=self.image or image_reference(os.environ),
         )
         environment.pop("CAPRMEDIO_CODEX_AUTH_FILE", None)
         if not self.mock and self.auth_file:
@@ -151,12 +154,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, default=SOURCE_ROOT)
     parser.add_argument("--auth-file", type=Path)
+    parser.add_argument("--image", help=argparse.SUPPRESS)
     parser.add_argument("--mock", action="store_true")
     parser.add_argument(
         "operation", choices=["build", "start", "stop", "restart", "status", "logs", "mcp"]
     )
     args = parser.parse_args()
-    runtime = Runtime(args.project_root, mock=args.mock, auth_file=args.auth_file)
+    runtime = Runtime(args.project_root, mock=args.mock, auth_file=args.auth_file, image=args.image)
     if args.operation == "build":
         runtime.build()
     elif args.operation in ("start", "restart"):
