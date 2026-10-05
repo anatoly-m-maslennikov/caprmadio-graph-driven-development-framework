@@ -93,7 +93,7 @@ they currently hold authority →\
 rescanning can become expensive →\
 a derived graph database index supports queries and views. Database authority could be a future migration.
 
-## Main architecture
+## Main framework architecture
 
 ### Node types
 
@@ -114,11 +114,21 @@ a derived graph database index supports queries and views. Database authority co
 - **I — Implementation:** code, tests, configuration and CI/CD pipelines implementing all RMED.
 - **O — Operations:** actions and workflows with steps to operate the project.
 
+Within each Atom content role, governed **Types** define structure, required and conditional properties, authoring rules and validation. For example, O includes Action, Step, Workflow and Actor.
+
 Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
 
 CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
 
 [project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
+
+### Ownership and claim scope
+
+- **Internal:** the project establishes and owns the artifact's meaning.
+- **External:** an identified outside source establishes or imposes the meaning; the project records and binds itself to that source.
+- **Relational:** an Atom's Claim targets a different Scope Unit from its containing one, or the Atom has no containing Scope Unit.
+
+Internal/external describe **Governance Origin**; relational describes **claim scope**, not a third origin.
 
 ### Relations
 
@@ -139,6 +149,10 @@ Scope Units + typed relations + Subjects →\
 **Different views, one authority:** Projections can be regenerated without maintaining competing copies of project meaning.
 
 Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
+
+### Extension and configuration
+
+**CAPRMEDIO is extensible and configurable:** projects can add governed Types, Workflows, Tools and authoring rules within declared extension boundaries, including reusable Extensions. Settings select and parameterize available capabilities and resolve their precedence without changing their governed meaning.
 
 ## Current boundaries
 
