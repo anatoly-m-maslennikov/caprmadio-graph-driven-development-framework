@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Implement source-bound Draft promotion"
   depends_on: [Atom, Status, Carrier, Tool, Manifest, Methodology, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 04:34:07 +0000"
+updated_at: "2026-10-05 07:10:33 +0000"
 relations:
   is_decomposition_of: [CA-P-1637]
   blocks: [CA-P-1638]
@@ -47,3 +47,7 @@ Implemented carried D570 Draft lineage, current D569@2 optional {draft_digest, r
 ### Independent review disposition
 
 P1638 independently REJECT96%: existing unrelated immutable-history substitution and demoted-to-never_identified substitution still pass the native validator. Earlier 23+8 passing cases do not cover these actual counterexamples. Source origin-authenticity adjudication is required before this Task can be Done; current authority is not bypassed or silently weakened.
+
+### Current accepted completion
+
+This current completion supersedes the older rejected transient/carried-lineage result below. P1675-P1677 and their bounded descendants replace caller draft_identity_evidence with the accepted immutable target-bound history head and private exact pending transition. Both original origin substitutions, changed requests, stale/replayed heads, partial/final retry and missing old-Draft retry are covered. Native/status23 pass at current independently accepted98% repair frontier; shared eight cases retain their accepted independent scope. Image/MCP/queue proof remains required elsewhere.

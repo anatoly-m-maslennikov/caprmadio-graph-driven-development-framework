@@ -84,6 +84,19 @@ def control_root(root: Path) -> Path:
     return (root / candidate).resolve()
 
 
+def project_identity_prefix(root: Path) -> str:
+    """Read the authoritative Project-owned Atom prefix from Project Settings."""
+
+    try:
+        settings = tomllib.loads((root.resolve() / SETTINGS_PATH).read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError) as error:
+        raise ToolError("project-settings-unavailable", "cannot read Project Settings identity") from error
+    prefix = settings.get("artifacts", {}).get("identity", {}).get("project_prefix")
+    if not isinstance(prefix, str) or re.fullmatch(r"[A-Za-z0-9]+", prefix) is None:
+        raise ToolError("project-settings-invalid", "artifacts.identity.project_prefix is invalid")
+    return prefix
+
+
 def safe_path(root: Path, value: str, *, must_exist: bool = False) -> Path:
     root = root.resolve()
     if not value or "\x00" in value:
@@ -337,6 +350,27 @@ def remove_frontmatter_scalar(frontmatter: str, name: str) -> str:
     return expression.sub("", frontmatter, count=1).rstrip("\n")
 
 
+def draft_revision_lineage(frontmatter: str) -> dict[str, Any] | None:
+    """Read the one serialized Draft provenance map without treating it as identity."""
+
+    raw = frontmatter_scalar(frontmatter, "revision_lineage")
+    if raw is None:
+        return None
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as error:
+        raise ToolError("draft-lineage-invalid", "revision_lineage must be one JSON-compatible YAML map") from error
+    if not isinstance(value, dict):
+        raise ToolError("draft-lineage-invalid", "revision_lineage must be one map")
+    return value
+
+
+def replace_draft_revision_lineage(frontmatter: str, lineage: Mapping[str, Any]) -> str:
+    """Serialize the source-governed Draft lineage map as one YAML map value."""
+
+    return replace_frontmatter_scalar(frontmatter, "revision_lineage", json.dumps(dict(lineage), sort_keys=True))
+
+
 def atom_version(atom: Atom) -> int:
     """Return the current carried Version without manufacturing a default."""
 
@@ -399,8 +433,21 @@ def create_atom_revision(root: Path, relative_path: str, frontmatter: str, conte
     if atom_id and any(atom.atom_id == atom_id for atom in scan_atoms(root)):
         raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
     prepared = _revision(normalized, creating=True)
+    history_ref = None
+    if _lifecycle(path, control_root(root)) == "draft":
+        # Local import avoids the retained-history module importing this writer.
+        from draft_history import append_draft_entry, reserve_history_entry
+        history_ref = reserve_history_entry(root)
+        prepared = replace_draft_revision_lineage(prepared, {"history_entry_ref": history_ref})
     _atomic_write(path, render(prepared, content))
-    return atom_from_path(root, path)
+    created = atom_from_path(root, path)
+    if history_ref is not None:
+        try:
+            append_draft_entry(root, created.relative, reference=history_ref, origin={"kind": "never_identified"})
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+    return created
 
 
 def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: str, content: str) -> Atom:
@@ -492,6 +539,44 @@ def demote_atom_to_draft(root: Path, atom: Atom, frontmatter: str, content: str)
     try:
         _atomic_write(target, render(normalized, content))
         atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
+
+
+def prepare_draft_promotion(root: Path, atom: Atom, atom_id: str, frontmatter: str, content: str) -> tuple[Path, str, bytes]:
+    """Derive exact identified output bytes without consuming the Draft carrier."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle != "draft" or atom.atom_id is not None:
+        raise ToolError("draft-promotion-invalid", "only an ID-free Draft carrier can be promoted")
+    match = re.fullmatch(r"([A-Za-z0-9]+-[A-Z]+)--(.+)", atom.filename)
+    identity = re.fullmatch(r"([A-Za-z0-9]+-[A-Z]+)-(\d+)", atom_id)
+    if match is None or identity is None or match.group(1) != identity.group(1):
+        raise ToolError("draft-promotion-invalid", "Draft filename and assigned identity do not share one role prefix")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", "Draft has no content-role location")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    target = (role / f"{identity.group(1)}-{identity.group(2)}-{match.group(2)}").resolve()
+    if target.exists() or any(candidate.atom_id == atom_id and candidate.lifecycle != "archived" for candidate in scan_atoms(root)):
+        raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
+    normalized = replace_frontmatter_scalar(remove_frontmatter_scalar(_normalize_frontmatter(frontmatter), "revision_lineage"), "atom_id", atom_id)
+    return target, normalized, render(normalized, content)
+
+
+def promote_draft_atom(root: Path, atom: Atom, atom_id: str, frontmatter: str, content: str, *, consume_draft: bool = True) -> Atom:
+    """Write identified output; callers may retain Draft until history finalization."""
+
+    root = root.resolve()
+    target, normalized, output = prepare_draft_promotion(root, atom, atom_id, frontmatter, content)
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, output)
+        if consume_draft:
+            atom.path.unlink()
     except BaseException:
         _restore(snapshots)
         raise

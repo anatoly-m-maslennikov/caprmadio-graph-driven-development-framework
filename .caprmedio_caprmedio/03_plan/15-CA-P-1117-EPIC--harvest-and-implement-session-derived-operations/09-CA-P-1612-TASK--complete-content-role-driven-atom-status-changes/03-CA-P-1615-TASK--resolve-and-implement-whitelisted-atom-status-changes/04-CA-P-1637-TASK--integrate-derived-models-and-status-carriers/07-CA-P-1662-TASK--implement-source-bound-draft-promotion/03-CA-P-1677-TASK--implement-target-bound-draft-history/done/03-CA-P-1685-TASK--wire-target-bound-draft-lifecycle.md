@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Wire target-bound Draft lifecycle"
   depends_on: [Atom, Carrier, History, Runtime, Tool, Evaluation]
 version: 1
-updated_at: "2026-10-05 05:04:38 +0000"
+updated_at: "2026-10-05 07:10:33 +0000"
 relations:
   is_decomposition_of: [CA-P-1677]
   blocks: [CA-P-1638]
@@ -37,3 +37,7 @@ Inputs: accepted D568@5 64d2e60303d9dceeaee694263ebd888daf4bd217a794830896b1c583
 ## Definition of Done
 
 Save exact code/test hashes, concrete API, genuine focused evidence and remaining coverage. Partial results do not close the parent or mandatory runtime gates.
+
+### Current accepted completion
+
+P1694 and independently accepted P1699 complete this bounded native wiring. Create, Demotion, Draft Update and Promotion use accepted D568@5/D570@4/D569@5 retained target history and exact pending recovery. Native nine and model-status fourteen tests pass; the isolated owned staged delta also passes all23 without including external legacy-migration changes. Isolated atom_operations.py 0eac7b8166843480e82a23158510f0b643a98ccc73f5cccfb0df9b0385ab62ea; isolated lifecycle_intents.py 7bce9d70bdeb6681aaf5ce448b5412c34526e02dd4182b0e1bc08aae24050f2b. No actual image/MCP or permission-bound work is closed.

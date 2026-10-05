@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Implement target-bound Draft history"
   depends_on: [Atom, Carrier, History, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 05:04:38 +0000"
+updated_at: "2026-10-05 07:10:33 +0000"
 relations:
   is_decomposition_of: [CA-P-1662]
   blocks: [CA-P-1638]
@@ -39,3 +39,7 @@ Choose the best authorized in-scope option when uncertain; record C/Question and
 ## Definition of Done
 
 Save exact source/code hashes, the actual bounded result, genuine evidence and remaining coverage. A rejected review or partial test does not close the parent or mandatory runtime gates.
+
+### Current accepted completion
+
+Required source and helper children are complete: P1675/P1676/P1681 accept the current target-bound history sources; P1683/P1684/P1690 implement independently accepted atomic history/pending recovery; P1685/P1694/P1699 complete native wiring and both original origin substitutions plus the later Update head gap. Current native acceptance is98%; focused native/status23 and previously accepted shared status/Journal8 pass. Required image/runtime proof remains separate.

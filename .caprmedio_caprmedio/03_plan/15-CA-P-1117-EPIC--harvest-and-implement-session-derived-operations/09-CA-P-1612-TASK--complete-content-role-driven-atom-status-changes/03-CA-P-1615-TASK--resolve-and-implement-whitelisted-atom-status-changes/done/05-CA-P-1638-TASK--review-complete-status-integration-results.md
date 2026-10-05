@@ -15,7 +15,7 @@ subjects:
   governs: "Review complete status integration results"
   depends_on: [Atom, Content Role, Status, Carrier, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 04:34:07 +0000"
+updated_at: "2026-10-05 07:10:33 +0000"
 relations:
   is_decomposition_of: [CA-P-1615]
   blocks: [CA-P-1616]
@@ -43,3 +43,7 @@ Accept or reject complete P1615 integration with precise current findings. P1615
 ## Result
 
 Independent source/code review REJECT96%. Resolver/ID removal/current D569 evidence shape/Project-prefix allocation/frozen shared admission/W01-W04 bindings are aligned, but existing unrelated archive substitution and demoted lineage changed to never_identified can assign the wrong identity. No actual mutation probe was executed; the counterexamples follow directly from the saved helper branches, and current goldens cover only absent rather than existing unrelated history. P1662 and P1637 reopen for that bounded source/provenance repair. This completed rejected review is not acceptance of P1615 or runtime/image gates.
+
+### Current successor acceptance
+
+The rejected origin and later Draft Update findings above remain historical evidence. Current target-bound D568@5/D570@4/D569@5 history and P1690 atomic recovery are independently accepted at97%. Native Create/demotion/promotion/head-first retry pass; the later P1699 Update repair is independently ACCEPTED at98% after reproducing the old probe and observing draft-lineage-invalid without any Project-byte change. Nine native plus fourteen status cases pass at working hashes lifecycle_intents.py de56ce720bfa9f29ba728d3c56db45ff9991e069f20fcd613fee73563dcdfb2d and tests0a56ca2c3e27ec91650b1878ea008fa9caec7eb256169005e2bc15bfaa77f64d. The isolated owned staged native delta also passes23 without external legacy-migration edits. P1637/P1662/P1677/P1685 are Done for this accepted development scope. No immutable-image, actual MCP/queue or denied relocation gate is accepted here.
