@@ -345,7 +345,10 @@ class SelectedExecution:
             }
             for action_id, handler in implementation_actions.ACTION_HANDLERS.items():
                 def implementation(context: dict[str, Any], handler: Any = handler) -> dict[str, Any]:
-                    result = handler(context["parameters"], agent=self.implementation_agent)
+                    result = handler(
+                        context["parameters"], agent=self.implementation_agent,
+                        selected_project_root=self.root,
+                    )
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("implementation Action returned an invalid queue envelope")
                     label = implementation_results.get(result["result"], result["result"])
@@ -392,7 +395,9 @@ class SelectedExecution:
                             else:
                                 output.update(
                                     result="publication recording required",
-                                    terminal_outcome="interrupted_pending",
+                                    # The graph remains interim until its completed Action receipt is
+                                    # persisted below; this requests that receipt's terminal outcome.
+                                    terminal_outcome="completed",
                                     effect_refs=paths,
                                     compiler_publication_recording={
                                         "on_recorded_result": "completed publication from the still-valid final frontier",
@@ -921,6 +926,7 @@ class SelectedExecution:
         workflow_run_id = workflow_actual["run_id"]
         results: list[dict[str, Any]] = []
         implementation_prior_results: list[dict[str, Any]] = []
+        structural_prior_results: list[dict[str, Any]] = []
         while next_step:
             step = steps.get(next_step)
             if step is None:
@@ -969,6 +975,10 @@ class SelectedExecution:
                 }
                 if action["atom_id"] == "CA-O-162":
                     context["journal_preparation"] = journal_preparation
+                if graph["workflow"]["atom_id"] == "CA-O-015":
+                    # This is executor-retained state only; structural Actions
+                    # never admit caller-provided prior-result assertions.
+                    context["structural_prior_results"] = list(structural_prior_results)
                 output = handler(context)
                 if not isinstance(output, Mapping) or not isinstance(output.get("result"), str):
                     raise SelectedExecutionError("native Action handler returned no declared result")
@@ -982,9 +992,10 @@ class SelectedExecution:
                 if not isinstance(effect_refs, list) or any(not isinstance(item, str) for item in effect_refs):
                     raise SelectedExecutionError("native Action handler returned invalid effect references")
                 progress_path = self.run_directory(run_id) / f"{requested_action_id}.json"
-                self._write(progress_path, {"result": final_result, "action_run_id": action_run_id,
-                                            "native_result": output.get("native_result"),
-                                            "compiler_publication_recording": output.get("compiler_publication_recording")})
+                progress = {"result": final_result, "action_run_id": action_run_id,
+                            "native_result": output.get("native_result"),
+                            "compiler_publication_recording": output.get("compiler_publication_recording")}
+                self._write(progress_path, progress)
                 terminal_receipt: Mapping[str, Any] | None = None
                 if output.get("action_terminal_recorded") is not True:
                     action_outcome = output.get("terminal_outcome", "completed")
@@ -1005,12 +1016,35 @@ class SelectedExecution:
                         if not isinstance(completed, str):
                             raise SelectedExecutionError("compiler publication recording handoff is incomplete")
                         final_result = result_map.get(completed, completed)
+                        # The Tool's raw pending_recording result remains intact,
+                        # while this derived carrier can now reflect the sealed
+                        # shared Action receipt that admitted the graph edge.
+                        progress["result"] = final_result
+                        self._write(progress_path, progress)
                     else:
                         # The native effect is already applied, but without the
                         # shared Action receipt it cannot take the published
                         # On Result edge.  The durable dispatch result prevents
                         # re-entering this Action while recording is pending.
                         output["terminal_outcome"] = "interrupted_pending"
+                if (graph["workflow"]["atom_id"] == "CA-O-015"
+                        and isinstance(terminal_receipt, Mapping)
+                        and terminal_receipt.get("disposition") == "terminal"
+                        and terminal_receipt.get("outcome") == "completed"
+                        and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
+                        and terminal_receipt.get("effect_refs") == effect_refs):
+                    structural_prior_results.append({
+                        "workflow_run_id": workflow_run_id,
+                        "workflow_definition_id": graph["workflow"]["atom_id"],
+                        "step_run_id": step_run_id,
+                        "step_definition_id": step["atom_id"],
+                        "action_run_id": action_run_id,
+                        "action_definition_id": action["atom_id"],
+                        "result": final_result,
+                        "result_ref": progress_path.relative_to(self.root).as_posix(),
+                        "native_result": output.get("native_result"),
+                        "completed_receipt": dict(terminal_receipt),
+                    })
                 step_effect_refs.extend(effect_refs)
                 results.append({"step_run_id": step_run_id, "action_run_id": action_run_id,
                                 "step_definition_id": step["atom_id"],

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import json
 import os
 from pathlib import Path, PurePosixPath
 import re
@@ -299,7 +300,10 @@ def _render_resulting_source(source: str, before: list[dict[str, Any]], after: l
 
 
 def _normalise_parameters(value: object, root: Path) -> dict[str, Any]:
-    parameters = _require_mapping(value, "parameters")
+    # Queue Steps share the sealed request mapping.  Normalization is an
+    # internal view, not permission to replace a caller's literal frontier
+    # with Path-bearing helper fields before the next source Action reads it.
+    parameters = dict(_require_mapping(value, "parameters"))
     operation = parameters.get("operation")
     if operation not in OPERATIONS:
         raise StructuralConflict("operation must be exactly Create, Rename, Move, or Remove")
@@ -737,7 +741,151 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
     """
     root = Path(repository).resolve()
 
-    def candidate(context: Mapping[str, Any], *, shared_source_action: bool = False) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    def post_cutover_assessment(
+        context: Mapping[str, Any], normalised: Mapping[str, Any], rows: list[dict[str, Any]], observed_revision: str,
+    ) -> dict[str, Any] | None:
+        """Bind O144 to the completed same-Workflow O143 result before reading it."""
+        def blocked(reason: str) -> dict[str, Any]:
+            return {
+                "result": "blocked", "effect_refs": [],
+                "native_result": {
+                    "state": "blocked", "pre_toml_revision": observed_revision,
+                    "validation_errors": [reason],
+                },
+            }
+
+        workflow_run_id = context.get("workflow_run_id")
+        prior = context.get("structural_prior_results")
+        if not isinstance(workflow_run_id, str) or not isinstance(prior, list):
+            return blocked("O144 requires a completed same-Workflow O143 result handoff")
+        retained: dict[str, Mapping[str, Any]] = {}
+        for step_id, action_id, result in (
+            ("CA-O-140", "CA-O-012", "proposal ready"),
+            ("CA-O-141", "CA-O-005", "checks complete"),
+            ("CA-O-142", "CA-O-013", "authorization valid"),
+            ("CA-O-143", "CA-O-014", "cutover completed"),
+        ):
+            matched = [entry for entry in prior if isinstance(entry, Mapping)
+                       and entry.get("workflow_run_id") == workflow_run_id
+                       and entry.get("workflow_definition_id") == "CA-O-015"
+                       and entry.get("step_definition_id") == step_id
+                       and entry.get("action_definition_id") == action_id
+                       and entry.get("result") == result]
+            if len(matched) != 1:
+                return blocked("O144 requires its completed same-Workflow proposal, checks, authorization and cutover")
+            entry = matched[0]
+            action_run_id, result_ref, receipt = entry.get("action_run_id"), entry.get("result_ref"), entry.get("completed_receipt")
+            if (not isinstance(action_run_id, str) or action_run_id == context.get("action_run_id")
+                    or not isinstance(result_ref, str) or not isinstance(receipt, Mapping)
+                    or receipt.get("run_id") != action_run_id or receipt.get("disposition") != "terminal"
+                    or receipt.get("outcome") != "completed" or receipt.get("result_ref") != result_ref):
+                return blocked("O144 received an unsafe completed prior result")
+            try:
+                _relative_path(root, result_ref, "prior result_ref")
+            except StructuralConflict:
+                return blocked("O144 received an unsafe completed prior result")
+            retained[step_id] = entry
+        handoff = retained["CA-O-143"]
+        action_run_id, result_ref = handoff.get("action_run_id"), handoff.get("result_ref")
+        receipt, native = handoff.get("completed_receipt"), handoff.get("native_result")
+        if (not isinstance(action_run_id, str) or action_run_id == context.get("action_run_id")
+                or not isinstance(result_ref, str) or not isinstance(receipt, Mapping)
+                or not isinstance(native, Mapping)):
+            return blocked("O144 received an unsafe O143 result handoff")
+        try:
+            result_path = _relative_path(root, result_ref, "O143 result_ref")
+            if not result_path.is_file() or result_path.is_symlink():
+                return blocked("O144 cannot read its completed O143 result")
+            record = json.loads(result_path.read_text(encoding="utf-8"))
+        except (StructuralConflict, OSError, UnicodeDecodeError, json.JSONDecodeError):
+            return blocked("O144 cannot read its completed O143 result")
+        if (not isinstance(record, Mapping) or handoff.get("result") != "cutover completed"
+                or record.get("result") != "cutover completed" or record.get("action_run_id") != action_run_id
+                or record.get("native_result") != native
+                or receipt.get("run_id") != action_run_id or receipt.get("disposition") != "terminal"
+                or receipt.get("outcome") != "completed" or receipt.get("result_ref") != result_ref):
+            return blocked("O144 O143 result or completed receipt is not bound")
+        effects = native.get("actual_effects")
+        if native.get("state") != "completed" or not isinstance(effects, list):
+            return blocked("O144 O143 result is not a completed structural cutover")
+        paths: list[str] = []
+        effect_by_path: dict[str, Mapping[str, Any]] = {}
+        for effect in effects:
+            if not isinstance(effect, Mapping) or set(effect) != {"path", "before_sha256", "after_sha256"}:
+                return blocked("O144 O143 effects are malformed")
+            path = effect.get("path")
+            if not isinstance(path, str) or not all(isinstance(effect.get(key), str) and SHA256.fullmatch(effect[key])
+                                                     for key in ("before_sha256", "after_sha256")):
+                return blocked("O144 O143 effects are malformed")
+            if path in effect_by_path:
+                return blocked("O144 O143 effects are duplicated")
+            effect_by_path[path] = effect
+            paths.append(path)
+        if receipt.get("effect_refs") != paths or STRUCTURE_RELATIVE_PATH not in effect_by_path:
+            return blocked("O144 O143 effect receipt is not bound")
+        structure_effect = effect_by_path[STRUCTURE_RELATIVE_PATH]
+        if (structure_effect["before_sha256"] != normalised["expected_toml_revision"]
+                or structure_effect["after_sha256"] != observed_revision
+                or native.get("pre_toml_revision") != normalised["expected_toml_revision"]
+                or native.get("post_toml_revision") != observed_revision):
+            return blocked("O144 Project Structure revision diverges from completed O143")
+        references = {entry["relative_path"]: entry for entry in normalised["reference_frontier"]}
+        if set(effect_by_path) - ({STRUCTURE_RELATIVE_PATH} | set(references)):
+            return blocked("O144 O143 includes an undeclared effect")
+        for relative, entry in references.items():
+            effect = effect_by_path.get(relative)
+            path = entry["path"]
+            try:
+                if not path.is_file() or path.is_symlink():
+                    return blocked("O144 reference frontier is unavailable")
+                current = _digest_text(path.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError):
+                return blocked("O144 reference frontier is unavailable")
+            if ((effect is None and current != entry["expected_sha256"])
+                    or (effect is not None and (effect["before_sha256"] != entry["expected_sha256"]
+                                                 or effect["after_sha256"] != current))):
+                return blocked("O144 reference frontier diverges from completed O143")
+        operation = normalised["operation"]
+        target = normalised.get("target_name")
+        declaration = normalised.get("declaration")
+        if operation == "Create":
+            expected = declaration
+            matches = [row for row in rows if row["scope_unit_name"] == declaration["scope_unit_name"]]
+        elif operation == "Rename":
+            expected = declaration
+            matches = [row for row in rows if row["scope_unit_name"] == declaration["scope_unit_name"]]
+            if any(row["scope_unit_name"] == target for row in rows):
+                matches = []
+        elif operation == "Move":
+            expected = declaration
+            matches = [row for row in rows if row["scope_unit_name"] == target]
+        else:
+            expected = None
+            matches = [row for row in rows if row["scope_unit_name"] == target]
+        if ((expected is not None and (len(matches) != 1 or matches[0] != expected))
+                or (expected is None and matches)):
+            return {
+                "result": "stale", "effect_refs": [],
+                "native_result": {
+                    "state": "stale", "pre_toml_revision": observed_revision,
+                    "validation_errors": ["post-cutover Project Structure does not match the declared result"],
+                },
+            }
+        try:
+            _validate_tree(rows, root)
+        except StructuralConflict as error:
+            return {
+                "result": "conflict", "effect_refs": [],
+                "native_result": {
+                    "state": "conflict", "pre_toml_revision": observed_revision,
+                    "validation_errors": [str(error)],
+                },
+            }
+        return None
+
+    def candidate(
+        context: Mapping[str, Any], *, shared_source_action: bool = False, post_cutover: bool = False,
+    ) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
         if not isinstance(context, Mapping):
             return None, {"result": "blocked", "effect_refs": [], "reason": "queue context is invalid"}
         if shared_source_action and context.get("workflow_definition_id") != "CA-O-015":
@@ -750,9 +898,14 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
             return None, {"result": "blocked", "effect_refs": [], "reason": "route and structural operation differ"}
         try:
             normalised = _normalise_parameters(parameters, root)
-            source, _ = _parse_structure(root / STRUCTURE_RELATIVE_PATH, root)
+            source, rows = _parse_structure(root / STRUCTURE_RELATIVE_PATH, root)
             observed = _digest_text(source)
             if normalised["expected_toml_revision"] != observed:
+                if post_cutover:
+                    assessment = post_cutover_assessment(context, normalised, rows, observed)
+                    if assessment is None:
+                        return normalised, None
+                    return None, assessment
                 return None, {
                     "result": "stale", "effect_refs": [],
                     "native_result": {"state": "stale", "pre_toml_revision": observed},
@@ -784,7 +937,9 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
         return {"result": "prepared", "effect_refs": [], "native_result": {"operation": normalised["operation"]}}
 
     def assess(context: Mapping[str, Any]) -> dict[str, Any]:
-        normalised, failure = candidate(context, shared_source_action=True)
+        normalised, failure = candidate(
+            context, shared_source_action=True, post_cutover=context.get("step_definition_id") == "CA-O-144",
+        )
         if failure is not None:
             return failure
         return {"result": "accepted", "effect_refs": [], "native_result": {"operation": normalised["operation"]}}
@@ -809,7 +964,11 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
             "Move": move_scope_unit,
             "Remove": remove_scope_unit,
         }[normalised["operation"]]
-        result = action(root, normalised)
+        # ``candidate`` deliberately normalizes a copy for read-only checks.
+        # The bounded domain Action owns its one canonical normalization of the
+        # sealed literal request; feeding it helper-only Path/relative_path
+        # fields would turn a valid reference frontier into a false conflict.
+        result = action(root, context["parameters"])
         effects = [effect["path"] for effect in result["actual_effects"]]
         return {"result": result["state"], "effect_refs": effects, "native_result": result}
 

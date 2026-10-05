@@ -39,4 +39,3 @@ Saved the trusted-root overlap guards in implementation_actions.py and focused s
 ## Definition of Done
 
 Exact authority-overlap bypass is closed and independently reviewed; normal disposable workspaces remain admitted.
-

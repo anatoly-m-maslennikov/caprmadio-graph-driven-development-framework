@@ -233,6 +233,8 @@ class SelectedCompilerRecordingTest(unittest.TestCase):
         action_progress = runner.run_directory("compiler-recorded") / "compiler-recorded:step:1:action:1.json"
         progress = json.loads(action_progress.read_text(encoding="utf-8"))
         native = progress["native_result"]
+        self.assertEqual("completed publication from the still-valid final frontier", progress["result"])
+        self.assertEqual("pending_recording", native["outcome"])
         self.assertEqual([], native["run_receipt_refs"])
         self.assertEqual(request["execution"]["parameters"]["expected_source_frontier_digest"], native["source_frontier_digest"])
         self.assertEqual("CA-R-001", native["source_frontier"][0]["source_atom_id"])
@@ -292,6 +294,10 @@ class SelectedCompilerRecordingTest(unittest.TestCase):
         action_terminal = next(row for row in pending["terminal_runs"] if row["run_id"] == pending["run_ids"][2])
         self.assertEqual("recording_pending", action_terminal["disposition"])
         self.assertEqual("completed", action_terminal["outcome"])
+        progress = json.loads((runner.run_directory("compiler-recording-pending") /
+                               "compiler-recording-pending:step:1:action:1.json").read_text(encoding="utf-8"))
+        self.assertEqual("publication recording required", progress["result"])
+        self.assertEqual("pending_recording", progress["native_result"]["outcome"])
 
 
 if __name__ == "__main__":
