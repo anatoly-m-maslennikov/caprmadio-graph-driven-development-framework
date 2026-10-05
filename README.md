@@ -2,6 +2,17 @@
 
 **The Graph-Driven Development Framework**
 
+## Contents
+
+- [The Goal](#the-goal)
+- [What CAPRMEDIO is](#what-caprmedio-is)
+- [Why CAPRMEDIO works this way](#why-caprmedio-works-this-way)
+- [Main framework architecture](#main-framework-architecture)
+- [Current boundaries](#current-boundaries)
+- [Status](#status)
+- [Version History](#version-history)
+- [Thanks](#thanks)
+
 ## The Goal
 
 If it can be built, CAPRMEDIO should help anyone build it if they are willing to invest the time and effort.
