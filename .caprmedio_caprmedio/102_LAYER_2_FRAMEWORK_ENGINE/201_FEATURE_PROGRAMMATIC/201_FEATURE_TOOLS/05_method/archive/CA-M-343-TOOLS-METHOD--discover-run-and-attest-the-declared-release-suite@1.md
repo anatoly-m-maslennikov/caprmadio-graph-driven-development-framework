@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 18:39:29 +0000"
+version: 1
+updated_at: "2026-10-05 22:00:58 +0400"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite test procedure"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, Source Carrier, Compiled Candidate, JUnit Report, Writable Output]
@@ -32,8 +32,8 @@ RELEASE_VERSION **must** use standard-library `unittest` discovery to derive the
 2. Flatten the `unittest.TestCase.id()` values returned by all child processes and reject duplicate test IDs, an empty set, or a mismatch between the discovered test IDs and the JUnit test IDs. Each test ID has exactly one derived binding record containing its test-method definition carrier and the explicit probe sources for its module; that record has **>=1** source reference.
 3. Load the immutable binding envelope from the read-only workspace and verify its exact SHA-256 from the sealed environment. The envelope contains the candidate manifest digest, the complete `compilation.package_rows`, and the maintained module-rule carrier and digest. Each derived referenced path and SHA-256 must equal a package row.
 4. For each executed test case, read every source reference through the sealed workspace, verify its SHA-256, and emit its test ID, the envelope SHA-256, and one exact source-probe record per reference in JUnit properties. The bindings are source-attestation mappings, not a statement that the test provides complete code coverage.
-5. Use maintained module rules rather than an import trace because compiled Methodology and Skill carriers need not be imported by Python. The rules contain module-level explicit package probes; the test-module definition carrier is always derived. Exactly one rule, for `RELEASE_VERSION/tests/test_release_compilation.py`, sets `compiled_candidate_probe: true`. For that rule, select exactly the first source-path-sorted sealed METHODOLOGY package row beneath the bound compiled-candidate root and include it as an explicit byte-and-digest integrity probe. An absent flag means false. Reject non-boolean, duplicate or misplaced true flags and static probes beneath the runtime compiled root. A maintainer adds a probe only when that module's test case exercises the source or a byte-and-digest probe is needed to establish its sealed-carrier integrity; the procedure must not mechanically mark arbitrary package components as covered.
-6. Write **=1** JUnit testcase row per executed `unittest.TestCase.id()` at `/output/coverage.xml`. Driver-owned result files use the writable `/output` mount; child-process temporary files use `/tmp` through `TMPDIR`. Set `PYTHONDONTWRITEBYTECODE` to `1`; neither class of writable data uses the read-only `/workspace`. The procedure records only sealed repository-relative source paths, never host absolute paths.
+5. Use maintained module rules rather than an import trace because compiled Methodology and Skill carriers need not be imported by Python. The rules contain only module-level explicit package probes; the test-module definition carrier is always derived. A maintainer adds a probe only when that module's test case exercises the source or a byte-and-digest probe is needed to establish its sealed-carrier integrity; the procedure must not mechanically mark arbitrary package components as covered.
+6. Write **=1** JUnit testcase row per executed `unittest.TestCase.id()` and all temporary fixtures beneath the executor's writable output mount. Set `TMPDIR` to `/tmp` and `PYTHONDONTWRITEBYTECODE` to `1`; the procedure records only sealed repository-relative source paths, never host absolute paths, and it does not mutate the read-only workspace.
 7. Any discovery error, missing declared module, unmapped test ID, unreadable carrier, digest or envelope mismatch, test failure, error, skip, missing compiled-candidate evidence, or incomplete required group ends the run without a passing full-suite result.
 
 The existing RELEASE_VERSION Tool and its sealed full-suite environment invoke this procedure. This Method creates neither a selected Workflow nor an MCP route.
