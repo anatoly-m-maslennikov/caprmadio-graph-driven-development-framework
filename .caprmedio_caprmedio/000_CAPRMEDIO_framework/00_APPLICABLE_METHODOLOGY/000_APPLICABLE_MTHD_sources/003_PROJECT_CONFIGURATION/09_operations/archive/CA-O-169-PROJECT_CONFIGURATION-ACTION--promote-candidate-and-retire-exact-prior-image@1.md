@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Promote candidate and retire exact prior image"
   depends_on: [Action, Version, Framework Package, Docker Image, Container, Permission, Journal]
-version: 2
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 1
+updated_at: 2026-10-05 06:13:05 +0400
 relations:
   relates_to: [CA-O-164, CA-O-178, CA-O-179, CA-D-563, CA-R-1525, CA-R-1720]
 ---
@@ -25,7 +25,7 @@ Promote candidate and retire exact prior image **means** the final Action that p
 
 ## Scope
 
-`promote` requires CA-O-184's exact passing Full Gate aggregate, explicit promotion permission, the exact frozen N and N+1 identities/digests, candidate manifest, source frontier, compiled output, staged package, immutable candidate image and parent lineage, plus CA-D-563's hook-free complete `ca` directory payload. This check is required even when this Action is directly invoked: an earlier receipt chain, workflow sequence, or caller assertion is not admission. A missing, stale, non-pass or differently bound aggregate stops before selection. It alone selects N+1 runtime and replaces the project-local `.agents/skills/ca` Skill after all gates. `retire` requires the completed promotion result, an approved rollback-retention condition, and an exact old-image digest. Before removal, verify that the identified old image has no running or stopped container, retained required rollback reference or other in-scope use. No name, tag prefix, age rule, global prune or inferred image is a removal target.
+`promote` requires complete current evidence from CA-O-170 through CA-O-177, explicit promotion permission, the exact N and N+1 identities/digests, and the staged complete package plus CA-D-563's hook-free complete `ca` directory payload. It alone selects N+1 runtime and replaces the project-local `.agents/skills/ca` Skill after all gates. `retire` requires the completed promotion result, an approved rollback-retention condition, and an exact old-image digest. Before removal, verify that the identified old image has no running or stopped container, retained required rollback reference or other in-scope use. No name, tag prefix, age rule, global prune or inferred image is a removal target.
 
 ## Details
 

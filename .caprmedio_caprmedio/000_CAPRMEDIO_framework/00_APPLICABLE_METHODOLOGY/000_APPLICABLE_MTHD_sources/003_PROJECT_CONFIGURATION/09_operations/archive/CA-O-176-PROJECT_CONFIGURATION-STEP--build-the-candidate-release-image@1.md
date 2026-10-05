@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: build candidate image"
   depends_on: [Workflow, Step, Action, Docker Image, Framework Package, Test, Journal]
-version: 3
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 1
+updated_at: 2026-10-05 06:13:05 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-168]
@@ -22,7 +22,7 @@ Build the candidate release image
 
 ## Step
 
-This Step invokes CA-O-168 once with phase `candidate_image_build`, binding CA-O-175's staged package, exact source/context rows and immutable candidate image identity. The frozen Docker worker has no Docker socket and cannot substitute for host Candidate E2E.
+This Step invokes CA-O-168 once with phase `build_image`, binding the complete passed candidate test result, staged package manifest, sources, declared build context and immutable candidate image identity.
 
 ## Details
 

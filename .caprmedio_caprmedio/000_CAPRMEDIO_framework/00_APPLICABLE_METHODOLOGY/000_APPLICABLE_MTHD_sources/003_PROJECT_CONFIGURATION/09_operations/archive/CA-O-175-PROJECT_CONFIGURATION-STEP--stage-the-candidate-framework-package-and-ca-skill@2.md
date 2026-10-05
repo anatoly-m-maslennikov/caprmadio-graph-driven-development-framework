@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: stage candidate package and Skill"
   depends_on: [Workflow, Step, Action, Framework Package, Methodology, Skill, Delivery, Journal]
-version: 3
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 2
+updated_at: 2026-10-06 00:00:00 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-167]
@@ -22,7 +22,7 @@ Stage the candidate Framework package and ca Skill
 
 ## Step
 
-This Step invokes CA-O-167 once with phase `stage_candidate`, binding CA-O-185's closed unit-gate result, CA-O-173's exact compiled candidate output, complete package manifest and CA-D-563's complete hook-free `ca` directory payload for eventual project-local target `.agents/skills/ca`.
+This Step invokes CA-O-167 once with phase `stage_candidate`, binding CA-O-174's closed unit-gate result, CA-O-173's exact compiled candidate output, complete package manifest and CA-D-563's complete hook-free `ca` directory payload for eventual project-local target `.agents/skills/ca`.
 
 ## Details
 

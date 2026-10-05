@@ -10,10 +10,10 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release selected Framework Version"
   depends_on: [Workflow, Step, Action, Operator, Version, Methodology, Implementation, Skill, Test, Docker Image, Journal]
-version: 5
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 3
+updated_at: 2026-10-05 15:29:23 +0400
 relations:
-  relates_to: [CA-O-011, CA-O-025, CA-O-165, CA-O-166, CA-O-167, CA-O-168, CA-O-169, CA-O-181, CA-O-183, CA-R-1525, CA-R-1720]
+  relates_to: [CA-O-011, CA-O-025, CA-O-165, CA-O-166, CA-O-167, CA-O-168, CA-O-169, CA-R-1525, CA-R-1720]
 ---
 # Summary
 
@@ -35,12 +35,10 @@ The selected boundary binds one current N, one distinct candidate N+1, their exa
 | CA-O-171 | CA-O-165 | validate |
 | CA-O-172 | CA-O-166 | deliver_sources |
 | CA-O-173 | CA-O-166 | compile |
-| CA-O-185 | CA-O-168 | closed_unit_gate |
+| CA-O-174 | CA-O-168 | run_tests |
 | CA-O-175 | CA-O-167 | stage_candidate |
-| CA-O-176 | CA-O-168 | candidate_image_build |
-| CA-O-186 | CA-O-168 | candidate_image_canary |
-| CA-O-182 | CA-O-181 | host_candidate_e2e |
-| CA-O-184 | CA-O-183 | aggregate_full_gate |
+| CA-O-176 | CA-O-168 | build_image |
+| CA-O-177 | CA-O-168 | prove_candidate |
 | CA-O-178 | CA-O-169 | promote |
 | CA-O-179 | CA-O-169 | retire |
 
@@ -51,13 +49,11 @@ The selected boundary binds one current N, one distinct candidate N+1, their exa
 | CA-O-170 complete frozen N and candidate N+1 boundary | CA-O-171 |
 | CA-O-171 complete exact delivery, compiler, package, Skill, test, image and Journal bindings | CA-O-172 |
 | CA-O-172 complete full source delivery | CA-O-173 |
-| CA-O-173 complete compilation from the delivered candidate frontier | CA-O-185 |
-| CA-O-185 closed declared unit gate passed for that exact compiled candidate | CA-O-175 |
+| CA-O-173 complete compilation from the delivered candidate frontier | CA-O-174 |
+| CA-O-174 every declared candidate test passed | CA-O-175 |
 | CA-O-175 complete non-active candidate runtime/package and Skill staging | CA-O-176 |
-| CA-O-176 exact candidate image built | CA-O-186 |
-| CA-O-186 exact candidate image canary passed | CA-O-182 |
-| CA-O-182 host-capable Candidate E2E passed | CA-O-184 |
-| CA-O-184 complete bound Full Gate aggregate passed | CA-O-178 |
+| CA-O-176 candidate image built with exact identity | CA-O-177 |
+| CA-O-177 complete actual candidate package and image proof | CA-O-178 |
 | CA-O-178 complete N+1 runtime and project-local Skill promotion | CA-O-179 |
 | CA-O-179 complete exact unused N-image retirement | complete |
 | any missing, stale, unauthorized, failed, partial, recording-blocked, unsafe, or unmatched result | stop with its actual evidence; do not promote, retire, retry, or recurse implicitly |

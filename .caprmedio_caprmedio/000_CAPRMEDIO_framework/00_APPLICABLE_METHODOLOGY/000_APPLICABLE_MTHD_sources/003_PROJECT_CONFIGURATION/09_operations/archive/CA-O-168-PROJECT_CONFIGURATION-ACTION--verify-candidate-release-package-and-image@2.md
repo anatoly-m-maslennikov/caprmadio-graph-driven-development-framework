@@ -10,10 +10,10 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Verify candidate release package and image"
   depends_on: [Action, Test, Framework Package, Methodology, Docker Image, Artifact/Revision, Journal]
-version: 3
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 2
+updated_at: 2026-10-06 00:00:00 +0400
 relations:
-  relates_to: [CA-O-164, CA-O-176, CA-O-185, CA-O-186, CA-O-178, CA-R-1525, CA-R-1720]
+  relates_to: [CA-O-164, CA-O-176, CA-O-177, CA-O-178, CA-R-1525, CA-R-1720]
 ---
 # Summary
 

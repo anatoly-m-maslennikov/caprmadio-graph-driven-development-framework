@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: promote candidate runtime and Skill"
   depends_on: [Workflow, Step, Action, Version, Framework Package, Skill, Permission, Journal]
-version: 3
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 1
+updated_at: 2026-10-05 06:13:05 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-169]
@@ -22,7 +22,7 @@ Promote the candidate runtime and project-local ca Skill
 
 ## Step
 
-This Step invokes CA-O-169 once with phase `promote`, binding CA-O-184's exact passing Full Gate aggregate, the same frozen N/N+1 identities, candidate manifest, source frontier, compiled output, staged package, immutable image and parent lineage, explicit promotion permission, and CA-D-563's complete hook-free `ca` directory payload for `.agents/skills/ca`.
+This Step invokes CA-O-169 once with phase `promote`, binding CA-O-177's complete candidate proof, exact N/N+1 identities, explicit promotion permission and the staged package plus CA-D-563's complete hook-free `ca` directory payload for `.agents/skills/ca`.
 
 ## Details
 

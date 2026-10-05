@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: build candidate image"
   depends_on: [Workflow, Step, Action, Docker Image, Framework Package, Test, Journal]
-version: 3
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 2
+updated_at: 2026-10-06 00:00:00 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-168]
