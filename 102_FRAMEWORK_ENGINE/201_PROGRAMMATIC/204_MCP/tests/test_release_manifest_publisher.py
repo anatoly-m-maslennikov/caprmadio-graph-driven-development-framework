@@ -187,6 +187,20 @@ class ReleaseManifestPublisherTest(unittest.TestCase):
         self.assertEqual(before + b"\nmanifest drift after sealed intent\n", path.read_bytes())
         self.assertEqual(1, len(self.pending_ids(root)))
 
+    def test_preseal_lifecycle_runtime_failure_is_blocked_without_an_invented_pending_id(self) -> None:
+        context = self.authorization()
+        with self.git_evidence(), patch.object(
+            ReleaseManifestLifecycle, "_prior_history",
+            side_effect=RuntimeError("injected preseal lifecycle failure"),
+        ):
+            result = publish_release_manifest(self.root, execute=True, authorization=context)
+        self.assertEqual("blocked", result["disposition"])
+        self.assertFalse(result["published"])
+        self.assertEqual("injected preseal lifecycle failure", result["publication_requirement"])
+        self.assertNotIn("pending_event_id", result)
+        self.assertEqual(self.before, self.path.read_bytes())
+        self.assertEqual([], self.pending_ids())
+
     def test_append_failure_leaves_sealed_pending_evidence_and_recovery_never_replays_write(self) -> None:
         context = self.authorization()
         original_append = work_journal.append_sealed_events

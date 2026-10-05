@@ -178,14 +178,21 @@ class ReleaseManifestLifecycle:
         lock_id = "release-manifest-carrier:" + manifest_ref
         if self._held_carrier_lock is not None:
             raise ReleaseManifestLifecycleError("a Release manifest publication lock is already held")
+        entered = False
         try:
             with work_journal._event_lock(self.root, lock_id):
+                entered = True
                 self._held_carrier_lock = lock_id
                 try:
                     yield
                 finally:
                     self._held_carrier_lock = None
         except (OSError, RuntimeError, work_journal.WorkJournalError) as error:
+            # Do not recast a publisher failure from inside the protected
+            # scope as a lock-acquisition failure.  The caller needs that
+            # original failure to report an honest pre-effect result.
+            if entered:
+                raise
             raise ReleaseManifestLifecycleError("cannot acquire Release manifest publication lock") from error
 
     def prepare_release_manifest_publication(self, plan: Mapping[str, Any], payload: bytes) -> str:
@@ -210,6 +217,10 @@ class ReleaseManifestLifecycle:
             # unequal timestamped pending bytes for one manifest binding.
             with work_journal._event_lock(self.root, lock_id):
                 return self._prepare_release_manifest_publication_locked(plan, payload, intent, path)
+        except ReleaseManifestLifecycleError:
+            # A verified lifecycle refusal (for example, malformed history
+            # for this exact carrier) is not a Journal persistence failure.
+            raise
         except (OSError, RuntimeError, work_journal.WorkJournalError) as error:
             raise ReleaseManifestLifecycleError("cannot persist sealed publication intent") from error
 
@@ -329,11 +340,34 @@ class ReleaseManifestLifecycle:
                 raise ReleaseManifestLifecycleError("cannot read canonical Work Journal history") from error
             for line in records:
                 try:
-                    record = work_journal.validate_sealed_event(json.loads(line))
-                except (json.JSONDecodeError, work_journal.WorkJournalError) as error:
+                    raw = json.loads(line)
+                except json.JSONDecodeError as error:
                     raise ReleaseManifestLifecycleError("canonical Work Journal history is invalid") from error
-                result = record.get("result")
-                if not isinstance(result, dict) or result.get("path") != reference or result.get("state") != "present":
+                # The Journal contains more than generic governed-project
+                # state: legacy and Workflow execution events carry their
+                # own schemas.  Only a schema-3 generic record that claims
+                # this exact carrier can establish its carrier history.  An
+                # unrelated record is not evidence about this target and is
+                # intentionally not parsed by the generic-state validator.
+                raw_result = raw.get("result") if isinstance(raw, dict) else None
+                if not isinstance(raw_result, dict) or raw_result.get("path") != reference:
+                    continue
+                if (
+                    raw.get("schema_version") != 3
+                    or raw.get("kind") not in {"governed_project_state", "governed_project_change"}
+                ):
+                    # A record that asserts this exact carrier is potential
+                    # lineage evidence.  It must not disappear merely by
+                    # naming an unsupported schema or kind.
+                    raise ReleaseManifestLifecycleError(
+                        "canonical Work Journal history has unsupported target carrier evidence"
+                    )
+                try:
+                    record = work_journal.validate_sealed_event(raw)
+                except work_journal.WorkJournalError as error:
+                    raise ReleaseManifestLifecycleError("canonical Work Journal history is invalid") from error
+                result = record["result"]
+                if result.get("state") != "present":
                     continue
                 version = result.get("version")
                 if type(version) is not int or version < 1:

@@ -162,6 +162,60 @@ class ReleaseManifestLifecycleTest(unittest.TestCase):
                 with self.lifecycle.release_manifest_publication_lock(self.plan):
                     pass
 
+    def test_lifecycle_owned_carrier_lock_preserves_the_publisher_failure(self) -> None:
+        with self.assertRaisesRegex(RuntimeError, "publisher body failed"):
+            with self.lifecycle.release_manifest_publication_lock(self.plan):
+                raise RuntimeError("publisher body failed")
+
+    def test_unrelated_legacy_journal_record_does_not_block_target_history(self) -> None:
+        journal = self.root / ".caprmedio_caprmedio/_journal/unrelated-legacy.ndjson"
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        journal.write_text(json.dumps({
+            "schema_version": 1,
+            "event_id": "legacy-unrelated",
+            "event": "started",
+            "kind": "projection_rebuild",
+            "prior_state": None,
+            "provenance": None,
+        }) + "\n", encoding="utf-8")
+        with patch("release_manifest_lifecycle.subprocess.run") as git:
+            git.return_value.returncode, git.return_value.stdout = 0, "8" * 40 + "\n"
+            event_id = self.lifecycle.prepare_release_manifest_publication(self.plan, self.payload)
+        self._pending(event_id)
+
+    def test_malformed_relevant_generic_carrier_history_remains_a_refusal(self) -> None:
+        journal = self.root / ".caprmedio_caprmedio/_journal/relevant-malformed.ndjson"
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        journal.write_text(json.dumps({
+            "schema_version": 3,
+            "kind": "governed_project_state",
+            "result": {"path": self.plan["manifest_ref"]},
+        }) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ReleaseManifestLifecycleError, "history is invalid"):
+            self.lifecycle.prepare_release_manifest_publication(self.plan, self.payload)
+
+    def test_unsupported_schema_claiming_target_history_is_refused(self) -> None:
+        journal = self.root / ".caprmedio_caprmedio/_journal/target-unsupported-schema.ndjson"
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        journal.write_text(json.dumps({
+            "schema_version": 1,
+            "kind": "governed_project_state",
+            "result": {"path": self.plan["manifest_ref"]},
+        }) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ReleaseManifestLifecycleError, "unsupported target carrier evidence"):
+            self.lifecycle.prepare_release_manifest_publication(self.plan, self.payload)
+
+    def test_unsupported_kind_claiming_target_history_is_refused(self) -> None:
+        journal = self.root / ".caprmedio_caprmedio/_journal/target-unsupported-kind.ndjson"
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        journal.write_text(json.dumps({
+            "schema_version": 3,
+            "kind": "workflow_execution",
+            "result": {"path": self.plan["manifest_ref"]},
+        }) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(ReleaseManifestLifecycleError, "unsupported target carrier evidence"):
+            self.lifecycle.prepare_release_manifest_publication(self.plan, self.payload)
+
     def test_repeated_prepare_reuses_the_same_closed_intent(self) -> None:
         first_time = dt.datetime(2026, 10, 5, 12, 0, tzinfo=dt.timezone.utc)
         second_time = dt.datetime(2026, 10, 5, 12, 1, tzinfo=dt.timezone.utc)

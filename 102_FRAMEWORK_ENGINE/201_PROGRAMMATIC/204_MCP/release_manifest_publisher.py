@@ -168,9 +168,14 @@ def publish_release_manifest(
                     or candidate_final != candidate or payload_final != payload):
                 raise ReleaseManifestPublishError("source-derived successor changed after intent sealing")
             _atomic_write(path, payload)
-    except (OSError, ValueError, TypeError) as error:
-        return {"mode": "execute", "published": False, "disposition": "pending_publication",
-                "pending_event_id": locals().get("pending_event_id"), "publication_requirement": str(error), **plan}
+    except (OSError, RuntimeError, ValueError, TypeError) as error:
+        pending_event_id = locals().get("pending_event_id")
+        result = {"mode": "execute", "published": False,
+                  "disposition": "pending_publication" if isinstance(pending_event_id, str) and pending_event_id else "blocked",
+                  "publication_requirement": str(error), **plan}
+        if isinstance(pending_event_id, str) and pending_event_id:
+            result["pending_event_id"] = pending_event_id
+        return result
     try:
         published = path.read_bytes()
         if published != payload:
