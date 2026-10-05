@@ -48,6 +48,18 @@ SKILL_ROOT_RELATIVE = "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca"
 COMPILER_ENTRYPOINT_RELATIVE = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/COMPILE_APPLICABLE_METHODOLOGY/compile_applicable_methodology.py"
 _PINNED_IMAGE_DEPENDENCY_COPY = b"COPY pyproject.toml uv.lock ./"
 _PINNED_IMAGE_DEPENDENCY_INPUTS = ("pyproject.toml", "uv.lock")
+_HOOK_CONFIGURATION_FILE_NAMES = frozenset(
+    {
+        ".huskyrc",
+        ".pre-commit-config.yaml",
+        ".pre-commit-config.yml",
+        "husky.config.cjs",
+        "husky.config.js",
+        "husky.config.mjs",
+        "lefthook.yaml",
+        "lefthook.yml",
+    }
+)
 
 
 def _error(code: str, message: str) -> ReleaseContractError:
@@ -184,6 +196,28 @@ def _image_input_paths(root: Path, dockerfile: Path) -> list[Path]:
     return paths
 
 
+def _assert_hook_free_skill_payload(root: Path, skill_root: Path) -> list[Path]:
+    """Return the retained Skill files only when they contain no hook carrier.
+
+    D563 permits ordinary prose about hooks in the Skill, but the release must
+    not deliver executable hook carriers or hook configuration as part of the
+    project-local ``ca`` Skill.  Inspect only names and locations; the
+    content of Markdown and other ordinary resources is deliberately opaque.
+    """
+
+    files = _regular_files(root, skill_root)
+    for path in files:
+        relative = path.relative_to(skill_root)
+        parts = relative.parts
+        if len(parts) >= 2 and parts[0] == ".git" and parts[1] == "hooks":
+            raise _error("release-skill-hook-forbidden", "Skill payload contains a Git hook carrier")
+        if "hooks" in parts:
+            raise _error("release-skill-hook-forbidden", "Skill payload contains a hook carrier")
+        if len(parts) == 1 and relative.name in _HOOK_CONFIGURATION_FILE_NAMES:
+            raise _error("release-skill-hook-forbidden", "Skill payload contains hook configuration")
+    return files
+
+
 def _observed_inventory(root: Path) -> tuple[list[SourceInventoryRow], CandidateImageReference]:
     source_root = _directory(root, CANONICAL_SOURCE_RELATIVE)
     engine_root = _directory(root, ENGINE_ROOT_RELATIVE)
@@ -196,7 +230,7 @@ def _observed_inventory(root: Path) -> tuple[list[SourceInventoryRow], Candidate
         if path == dockerfile or path.is_relative_to(skill_root):
             continue
         rows.append(_inventory_row(root, path, "FRAMEWORK_ENGINE", f"FRAMEWORK_ENGINE/{path.relative_to(engine_root).as_posix()}"))
-    for path in _regular_files(root, skill_root):
+    for path in _assert_hook_free_skill_payload(root, skill_root):
         rows.append(_inventory_row(root, path, "SKILL", f"SKILLS/ca/{path.relative_to(skill_root).as_posix()}"))
     for image_input in _image_input_paths(root, dockerfile):
         if image_input == dockerfile:
