@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 12
-updated_at: "2026-10-05 01:04:37 +0000"
+version: 11
+updated_at: "2026-10-05 00:32:00 +0000"
 relations: {}
 ---
 # Summary
@@ -36,7 +36,7 @@ The Operator selected these fifteen Workflows:
 1. Create Atom.
 2. Update Atom.
 3. Replace Atom.
-4. Change Atom Status for any Atom and Content Role, including Archive as a shortcut rather than a duplicate Workflow.
+4. Change Atom Status, including Archive as a shortcut rather than a duplicate Workflow.
 5. Create Scope Unit.
 6. Rename Scope Unit.
 7. Move Scope Unit.
@@ -60,18 +60,6 @@ The two query Workflows are read-only:
 - Both use basic SQL-WHERE-style equality, inequality/NOT, and `IN`, with unambiguous boolean combinations. Return bounded, truthful coverage/pagination and invalid-filter diagnostics; do not evaluate arbitrary SQL/code or infer identities from filenames.
 - Preserve the caller's requested property/status selection and do not fetch credentials/secrets or create mutation authority. The canonical Events Journal remains the one source, not independently maintained derived logs.
 - Actual admitted Workflow/Action execution uses the single shared Run Journal support. Bind a stable query-source snapshot; the query's own execution records must not mutate or enlarge that captured result set. Preview is non-dispatching, and Run records must describe only actual execution.
-
-### Change Atom Status coverage
-
-The existing selected Change Atom Status Workflow applies to any Atom and every declared Content Role, using the current applicable status whitelist and defined folder mapping. It is not an Archive-only capability and is not a new sixteenth Workflow.
-
-- Input: an Atom reference and the requested Status. Include Draft carriers according to the current identity rules.
-- Resolve the applicable Status model for the Atom's actual Content Role and specialized Type, when present, from existing authoritative methodology. Use its admitted statuses and defined Carrier folders; caller-supplied values do not create new Status authority.
-- Validate the requested Status. For the same Status, return a successful no-op without changing Atom bytes or placement. For a permitted change, update the complete Carrier and required metadata, and move it to the defined destination; create the destination folder when the Delivery rules permit it.
-- Preserve identity, required Revision history and source information. Report invalid or missing models, undefined statuses or folder mappings, destination collisions and affected active references truthfully. Keep Archive as a shortcut through this same Workflow.
-- Use the existing Workflow/Action shared Run Journal path for actual execution, including success, no-op and failure. Verify all declared Content Roles and their admitted statuses, not only the current Requirement fixture.
-
-CA-P-1612 owns the bounded gap-closing decomposition below. Reuse CA-O-127/129/128 and the current generic status Action; extend source resolution and proof where needed rather than authoring another Workflow, Tool or independent status registry.
 
 ### Run journaling
 
@@ -128,7 +116,6 @@ Authoring disposition: the Plan files have been created and independently review
 - CA-P-1123: Verify all selected execution paths in Docker, including MCP and reused dependencies.
 - CA-P-1124: Verify the fifteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
 - CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
-- CA-P-1612: Complete the existing Change Atom Status capability for every Content Role using current status/folder authority, then prove the resolved model and execution behavior independently.
 
 The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
 
@@ -147,11 +134,7 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 ### Current execution frontier
 
-Latest verified frontier supersedes the older snapshots below. The Operator reaffirmed universal Atom status changes; CA-P-1612 adds explicit source-resolution and all-role verification Tasks without increasing the fifteen-Workflow set. Current W04 proof uses a caller-supplied Requirement fixture and does not prove that the current methodology's complete whitelist and folder mappings are resolved for all roles.
-
-P1605 diagnosed a stale live discovery generation and absent query discovery bindings; P1607/P1609 repaired explicit bindings and registry-derived availability. Live reload changed generation from 1be08a172092c071a5412fb0958dba3a2cacf353276618cb644a2a4ed350c04f to 677e2f34b80b3f6aa3637dcedea7cd0b8af05b633666fdfe2ec632c5d0d727b6. Actual MCP discovery now returns both query Tools as MCP-available, 49 diagnostics and no projected CA-O-159/162 ambiguity. Client schema refresh remains unconfirmed; this is not fresh-image execution. P1608's independent source acceptance repairs the query test's Projection-write blind spot. Subsequent Engine changes are not included in P1596's earlier immutable image.
-
- P1589 now accepts all fifteen selected native contracts in the development worker: the strict W01-W08/W11-W15 suite passed, W09 passed 3/3 and W10 passed 2/2. The proofs include actual native effects, frozen inputs, graph/progress consistency and per-Run shared Journal lineage. W09 is explicitly mock-not-live-llm. Native success is not immutable-image, MCP or queue-process acceptance.
+Latest verified frontier supersedes the older snapshots below. P1589 now accepts all fifteen selected native contracts in the development worker: the strict W01-W08/W11-W15 suite passed, W09 passed 3/3 and W10 passed 2/2. The proofs include actual native effects, frozen inputs, graph/progress consistency and per-Run shared Journal lineage. W09 is explicitly mock-not-live-llm. Native success is not immutable-image, MCP or queue-process acceptance.
 
 P1566's rejected Revert candidate is retained separately from the accepted P1574/P1581 repair and P1584 actual native route proof; C446 is resolved. P1567 caches stable approved carriers, supplies a valid pre-Run Journal directory and uses explicit container-visible paths before preview. P1576/P1586 bind structural cutover to actual sealed predecessor receipts. P1592 finalizes W13 derived progress only after actual recording; the raw native pending_recording result remains truthful. P1588 accepts P1591's trusted-root workspace overlap guard. P1597 accepts explicit bounded Docker mock injection without widening mounts or changing the live default. No old harvest resumes.
 
