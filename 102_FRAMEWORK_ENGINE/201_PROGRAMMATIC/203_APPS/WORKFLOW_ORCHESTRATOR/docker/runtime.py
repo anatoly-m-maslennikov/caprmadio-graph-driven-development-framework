@@ -13,6 +13,12 @@ SOURCE_ROOT = DIRECTORY.parents[4]
 IMAGE = "caprmedio-runtime:local"
 
 
+def image_reference(environment=None):
+    """Use an explicit image identity when one is supplied; retain the dev fallback."""
+    value = (os.environ if environment is None else environment).get("CAPRMEDIO_IMAGE")
+    return value or IMAGE
+
+
 class Runtime:
     def __init__(self, root, *, mock=False, auth_file=None):
         self.root = Path(root).resolve(strict=True)
@@ -23,7 +29,7 @@ class Runtime:
         environment = dict(
             os.environ,
             CAPRMEDIO_PROJECT_ROOT=str(self.root),
-            CAPRMEDIO_IMAGE=IMAGE,
+            CAPRMEDIO_IMAGE=image_reference(),
         )
         environment.pop("CAPRMEDIO_CODEX_AUTH_FILE", None)
         if not self.mock and self.auth_file:
