@@ -12,7 +12,7 @@ assignee: AI Agent
 autonomous_confidence_threshold: 90
 status: Active
 version: 1
-updated_at: "2026-10-05 13:59:15 +0000"
+updated_at: "2026-10-05 16:49:29 +0000"
 subjects:
   governs: "Release suite preservation"
   depends_on: [Implementation, Evaluation, Skill, Methodology, Image, Manifest]
@@ -35,6 +35,12 @@ Preserve the executing runtime N, active ca Skill and canonical authority while 
 3. implement adversarial attempted-write tests before the repair. Check truthful failed, unavailable and incomplete outcomes; no unavailable Docker or directory-publication result is reported passing.
 4. independently review the repaired local boundary. This necessary Release gate is not the deferred all-Workflow final audit.
 5. estimate the bounded next implementation/review leaf at <=15 minutes; decompose before expanding beyond that limit.
+
+## Current frontier
+
+The local adapter passed **9** focused command, mount, path and timeout boundary tests. Immutable-image bootstrap checks passed **2** cases, and generic suite-boundary checks passed **2** cases. This is focused local evidence, not actual Release-gate evidence.
+
+The complete declared suite has not reached its executor. The retained-suite run stops in `release_compilation.py:313` when `os.replace` receives `EPERM`; an earlier Action O174 `deliver_sources` attempt also stopped at a rename `EPERM`. The installed-N Docker execution, complete-suite evidence and required delivery/compilation publication gates therefore remain open.
 
 ## Definition of Done
 
