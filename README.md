@@ -61,11 +61,6 @@ observed outcomes create the next Concerns.
 
 ### Harness (engine)
 
-Files in folders are clear and inspectable →\
-they currently hold authority →\
-rescanning can become expensive →\
-a derived graph database index supports queries and views. Database authority could be a future migration.
-
 Repeated model reasoning costs time and tokens →\
 every repeatable task that can be done deterministically should run programmatically →\
 Tools.
@@ -73,6 +68,20 @@ Tools.
 Work that cannot be done deterministically →\
 LLM reasoning →\
 repeatable actions need reusable Prompts.
+
+Agents need instructions for using Tools and Prompts →\
+Skills package that guidance.
+
+Agents need a consistent interface →\
+MCP exposes Tools and reusable guidance.
+
+Repeatable sequences of actions using Tools and Skills/Prompts →\
+Workflows define their steps and control flow.
+
+Files in folders are clear and inspectable →\
+they currently hold authority →\
+rescanning can become expensive →\
+a derived graph database index supports queries and views. Database authority could be a future migration.
 
 We cannot put everything into one prompt →\
 Tools retrieve context and assemble Prompts.
@@ -84,13 +93,8 @@ Narrow, repeatable work →\
 bounded execution contexts and structured results.
 
 Long actions should not block sessions →\
-background orchestration →\
-Workflow Orchestrator coordinates the steps →\
+Workflow Orchestrator coordinates the steps in the background →\
 durable state, reconnectable runs, approvals and recovery.
-
-Agents need a consistent interface →\
-MCP exposes capabilities →\
-Skills guide their use.
 
 ### Content roles and artifact forms
 
