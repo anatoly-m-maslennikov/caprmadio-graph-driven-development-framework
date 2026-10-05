@@ -133,9 +133,11 @@ Scope Units can fold one inside another. P Atoms can split into smaller P Atoms:
 
 **As many layers as needed. The same framework rules at every layer.** The structure must not contain cycles.
 
-### Local and global tiers
+### Scope Unit levels, tiers and order
 
-**Local tiers** are levels inside one Scope Unit:
+**Scope Unit levels** show nesting depth. The Project is level `0`. Each child is one level deeper: `1`, `2`, `3`, and so on.
+
+**Local tiers** show authority inside one Scope Unit:
 
 - **Principle:** project principles.
 - **Core:** basic definitions and boundaries.
@@ -150,6 +152,13 @@ From higher to lower authority:
 **Global tiers** give Atoms one authority number across the project. The number comes from the scope and Local Tier. Within the scope where a Claim applies, a lower number means higher authority.
 
 Project goals have Global Tier `-1` and no Local Tier. **Tiers are not work priority or folder depth.**
+
+**Scope Units can be ordered or unordered:**
+
+- **Ordered:** has a `local_order` among ordered Scope Units with the same parent.
+- **Unordered:** has no `local_order`.
+
+Order does not create dependencies. State dependencies separately. Folder numbers are for navigation; they do not set `local_order`.
 
 ### Ownership and claim scope
 
