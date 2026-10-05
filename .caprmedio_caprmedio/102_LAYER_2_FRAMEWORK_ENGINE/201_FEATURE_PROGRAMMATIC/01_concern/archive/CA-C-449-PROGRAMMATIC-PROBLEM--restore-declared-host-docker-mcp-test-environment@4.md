@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 8
 status: Active
 author: Anatoly Maslennikov
-version: 5
-updated_at: "2026-10-05 23:35:01 +0000"
+version: 4
+updated_at: "2026-10-05 13:18:22 +0000"
 subjects:
   governs: "Host Docker MCP test environment"
   depends_on: [Implementation, Evaluation, Workflow, MCP]
@@ -51,7 +51,3 @@ P1600–P1604, P1528, current host Release regression acceptance and whole-image
 ## Disposition
 
 Use .caprmedio_runtime/host-tests/bin/python for the declared host driver. Bind a new source-current immutable acceptance image and update only the stale explicit test image bindings, preserving strict assertions. Leave fixture directories as the Operator requested; use the explicit test-only retention runner where needed. Continue independent source/code work while atomic directory publication remains denied; do not replace publication with an unsafe partial write or bypass the permission boundary. Preserve earlier cache/network/socket and cleanup evidence as historical. Do not weaken tests, fabricate Run receipts or treat host checks or an image build as functional completion.
-
-## Current environment observation
-
-After the Operator restarted Docker and disabled sandboxing, the current session successfully connected to Docker Engine 29.8.2 with exit code 0. Earlier permission-denied and daemon-unreachable observations remain historical; their exact causes are not retroactively asserted. The declared host-test interpreter remains available, and current Unit driver/phase verification passed 20/20. This clears current socket access, not all functional release proof. Actual source publication, full Docker/MCP acceptance and complete runtime installation are still being verified; keep this Concern active until those environment-sensitive gates run.

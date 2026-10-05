@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 19
-updated_at: "2026-10-05 23:35:01 +0000"
+version: 18
+updated_at: "2026-10-05 22:19:19 +0000"
 relations: {}
 ---
 # Summary
@@ -166,12 +166,6 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
-
-### First working release cut
-
-The Operator directed cutting or postponing work to reach a first working release. Keep the required Unit, candidate-image/canary, Docker/MCP, Full Gate and Journal proofs. Postpone automatic prior-image retirement, expanded crash/restart recovery testing, the broad all-sixteen audit and additional edge-case expansion. Retain N as rollback and preserve the existing later cleanup/recovery capabilities. A first-release caller may stop after verified promotion; an unexecuted retirement Step is deferred, not retired or completed. The deferred work and full Epic closure remain unfinished.
-
-Newest local evidence: 7874fc864 saves the private Candidate E2E gate and byte-backed golden tests. Its complete module passed 11/11 after retained failed/malformed/empty JUnit was fixed; narrow D582#10 review accepted that final repair. Unit partition/driver/admission tests subsequently passed 20/20, and the Full Gate's seven focused tests passed. Consumer/source-admission integration remains under verification. Docker now connects from this session to Engine 29.8.2; the earlier denied/unavailable socket observations below are historical. Read-only first-N preparation finds a conflict-free current source assessment but a stale canonical compiled tree: 77 missing, five extra and 958 changed output carriers. No current N, project-local Skill, real candidate image, installation, promotion or image removal is claimed by this local evidence.
 
 The latest continuation saves the bootstrap proof implementation in b790a3fd0 after independent compiler/bootstrap source acceptance and a combined 50-case run (32.933 seconds). P1732-P1738 are Done for this local slice; P1739 and parent P1714 remain Active for actual compilation/image/install/Skill/Journal proof. The fresh direct Docker CLI probe still returns socket permission denied; no image or runtime publication is claimed.
 
