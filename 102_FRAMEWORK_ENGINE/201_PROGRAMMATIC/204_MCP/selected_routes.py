@@ -22,8 +22,6 @@ ORIGINAL_SELECTED_ROUTE_NAMES = (
 )
 QUERY_ROUTE_NAMES = ("find_and_fetch_artifacts", "find_and_fetch_journal_events")
 SELECTED_ROUTE_NAMES = (*ORIGINAL_SELECTED_ROUTE_NAMES, *QUERY_ROUTE_NAMES)
-# Preparatory file-level admission only: public registration still advertises
-# SELECTED_ROUTE_NAMES until native Release providers are separately admitted.
 _OPTIONAL_RELEASE_ROUTE_NAME = "release_version"
 _DIGEST = re.compile(r"^[0-9a-f]{64}$")
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$")
@@ -735,7 +733,13 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
 
 
 def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdapter:
-    """Additive registration retaining the stable server, helpers, and reload gateway."""
+    """Register only source-admitted routes, retaining the stable MCP gateway.
+
+    The fifteen established route names remain the public fallback.  Release is
+    registered only when the canonical binding projection loads successfully as
+    its exact D572-admitted additive successor.  A missing, stale, or malformed
+    projection therefore cannot expose an unadmitted Release entry point.
+    """
     from mcp.types import ToolAnnotations
 
     adapter = SelectedRouteAdapter(root, strict_manifest=False)
@@ -743,7 +747,20 @@ def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdap
     query_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
     observation_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 
-    for route_name in SELECTED_ROUTE_NAMES:
+    try:
+        manifest = load_selected_manifest(root)
+        admitted_names = tuple(
+            entry.get("route") for entry in manifest.get("routes", [])
+            if isinstance(entry, Mapping)
+        )
+    except (OSError, ValueError, SelectedRouteError):
+        admitted_names = SELECTED_ROUTE_NAMES
+    if admitted_names == (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+        public_route_names = admitted_names
+    else:
+        public_route_names = SELECTED_ROUTE_NAMES
+
+    for route_name in public_route_names:
         def add_route(route: str) -> None:
             @server.tool(name=route, structured_output=True,
                          annotations=query_annotations if route in QUERY_ROUTE_NAMES else selected_annotations)
