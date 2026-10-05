@@ -1,0 +1,53 @@
+---
+subjects:
+  governs: "Artifact"
+  depends_on:
+    - "Artifact/Authority"
+    - "Artifact/Applicability"
+    - "Artifact/Currentness"
+    - "Artifact/Revision"
+    - "Projection"
+    - "Provenance"
+    - "Atom/Content Role: Implementation"
+    - "Atom/Content Role: Evaluation"
+    - "Property"
+    - "Atom/Claim"
+    - "Atom/Content Role: Requirement"
+    - "Atom/Content Role: Method"
+    - "Atom/Content Role: Delivery"
+    - "Atom/Content Role: Operations"
+version: 5
+updated_at: "2026-10-02 23:35:16 +0400"
+relations: {child_of: [CA-M-001]}
+atom_id: "CA-R-1502"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
+projection:
+  source_carrier_path: ../../../000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1502-CORE_META_MODEL-CORE--keep-authority-applicability-and-currentness-distinct.md
+  source_atom_id: CA-R-1502
+  source_atom_revision: 5
+  source_sha256: 8c54eace3e0a0cf12594572dd0b3fd3011f9c04b7224f0f74db4e47edcf95c96
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+---
+# Keep Authority, Applicability, and Currentness distinct
+
+## Scope
+
+an Artifact's Authority, Applicability, and Currentness Properties.
+
+## Claim
+
+an Artifact's Authority, Applicability, **and** Currentness **must** remain distinct Properties under CA-R-1499, CA-R-1500, **and** CA-R-1501.
+
+- an authoritative Artifact **may** be inapplicable **to** a given context.
+- an applicable historical Revision **may** no longer be current.
+- a current Projection **may** accurately report state **without** possessing semantic authority.
+
+## Details
+
+acceptance, provenance, Implementation, evidence, **and** Evaluation do **not** silently establish **any** of these Properties. precedence **and** conflict resolution select among **otherwise** authoritative **and** applicable Claims; they do **not** merge these Properties. the owning Requirement, Method, Evaluation, Delivery, **and** Operations Atoms govern how these Properties are resolved **and** reported through derived views.

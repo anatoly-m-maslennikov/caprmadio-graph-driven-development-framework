@@ -33,4 +33,6 @@ Only P1697's retirement decision and later Release provider integration. Candida
 
 ## Decision
 
+P1704's first source review REJECTS D573@1 at94% because completed verification can be failed or partial and same-candidate successful terminal records were not explicit. P1705 repairs only that ambiguity before source admission or removal implementation. This does not change the chosen authoritative-settings boundary or authorize any image effect.
+
 Options are to infer that promotion ends retention, require an explicit approved condition, or silently invent a registry. Choose the explicit-condition boundary at88% confidence: observe exact completed promotion and container/reference evidence; retain the image with a truthful pending outcome when approved retention release is absent or unknown. Preserve historical selector evidence rather than delete it to manufacture proof. Implement the safe reader/refusal path now and retain the bounded source/provider binding as required remaining work. Do not ask the Operator or perform an actual image operation.

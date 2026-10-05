@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime
-import json
 import hashlib
+import json
 import re
+import subprocess
 import sys
 from collections.abc import Callable, Mapping
 from pathlib import Path
@@ -26,6 +27,7 @@ from atom_operations import (
     demote_atom_to_draft,
     draft_revision_lineage,
     frontmatter_scalar,
+    migrate_atom_identity_revision,
     move_atom_revision,
     prepare_create_atom_revision,
     prepare_draft_promotion,
@@ -38,12 +40,13 @@ from atom_operations import (
     resolve_selector,
     safe_path,
     scan_atoms,
+    split_frontmatter,
     write_atom_revision,
 )
 
 
 ATOM_ID = re.compile(r"^CA-[A-Z]+-[0-9]{3,}$")
-INACTIVE_LIFECYCLE_SEGMENTS = frozenset({"archive", "drafts", "done", "solved", "canceled", "cancelled"})
+INACTIVE_LIFECYCLE_SEGMENTS = frozenset({"archive", "drafts", "done", "solved", "resolved", "canceled", "cancelled"})
 
 
 class IntentError(RuntimeError):
@@ -256,6 +259,105 @@ def _resolve_descriptor(root: Path, value: object, *, name: str, active: bool = 
     if active and atom.lifecycle != "active":
         raise LifecycleError("active-carrier-required", f"{name} must resolve one active carrier")
     return atom
+
+
+def _resolve_legacy_descriptor(root: Path, value: object, proof_value: object, *, mapped_identity: str | None = None) -> Atom:
+    """Read one explicitly sealed historical carrier, never a lookup fallback.
+
+    Only Update accepts this migration input.  The assigned filename identity
+    must already exist in the exact committed bytes supplied by the caller;
+    this cannot assign an identity to a draft or repair a colliding identity.
+    An explicit mapping may encode an assigned pre-current-format identity;
+    it never renumbers an already canonical assigned identity.
+    """
+    descriptor = _mapping(value, "target")
+    _exact_fields(descriptor, _DESCRIPTOR_FIELDS, "target")
+    proof = _mapping(proof_value, "legacy_identity_proof")
+    _exact_fields(proof, frozenset({"atom_id", "commit", "path", "digest"}), "legacy_identity_proof")
+    if (not isinstance(proof["commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", proof["commit"])
+            or not isinstance(proof["digest"], str) or not re.fullmatch(r"[0-9a-f]{64}", proof["digest"])
+            or proof["path"] != descriptor["path"] or proof["atom_id"] != descriptor["atom_id"]):
+        raise LifecycleError("legacy-proof-invalid", "historical proof must bind the exact target identity, path and bytes")
+    try:
+        path = safe_path(root, descriptor["path"], must_exist=True)
+        try:
+            atom_from_path(root, path)
+        except AtomToolError as error:
+            if error.code != "atom-frontmatter-id-required":
+                raise
+        else:
+            raise LifecycleError("legacy-proof-inapplicable", "target already carries an explicit identity")
+        raw = path.read_bytes()
+        frontmatter, content = split_frontmatter(raw.decode("utf-8"))
+        relative = path.relative_to(control_root(root))
+        if any(part.casefold() in INACTIVE_LIFECYCLE_SEGMENTS | {"archived", "resolved"} for part in relative.parts):
+            raise LifecycleError("legacy-proof-inapplicable", "migration requires a current carrier, not a draft or history")
+        matches = re.findall(r"(?:^|-)(CA-[CAPRMEDO]-[0-9]+)(?=-|$)", path.stem)
+        old_id = str(proof["atom_id"])
+        if mapped_identity is None:
+            identity_matches = matches == [old_id]
+        else:
+            identity_matches = (not matches and not ATOM_ID.fullmatch(old_id)
+                                and re.fullmatch(r"[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+-[0-9]+", old_id) is not None
+                                and path.stem.partition("--")[0].startswith(old_id + "-"))
+        if not identity_matches or hashlib.sha256(raw).hexdigest() != proof["digest"]:
+            raise LifecycleError("legacy-proof-invalid", "historical assigned identity or present bytes differ")
+        committed = subprocess.run(
+            ["git", "-c", f"safe.directory={root}", "-C", str(root), "show", f"{proof['commit']}:{proof['path']}"],
+            capture_output=True, check=False,
+        )
+        ancestor = subprocess.run(
+            ["git", "-c", f"safe.directory={root}", "-C", str(root), "merge-base", "--is-ancestor", proof["commit"], "HEAD"],
+            capture_output=True, check=False,
+        )
+        if committed.returncode != 0 or ancestor.returncode not in {0, 1}:
+            raise LifecycleError("legacy-history-unavailable", "cannot read the explicitly scoped repository history")
+        if ancestor.returncode != 0 or committed.stdout != raw:
+            raise LifecycleError("legacy-proof-invalid", "exact assigned carrier is not backed by the current Git history")
+        role = next(part for part in reversed(relative.parts[:-1]) if re.fullmatch(r"0[1-9]_[a-z0-9_]+", part))
+        roles = {"C": "01_concern", "A": "02_analysis", "P": "03_plan", "R": "04_requirement",
+                 "M": "05_method", "E": "06_evaluation", "D": "07_delivery", "O": "09_operations"}
+        identity_letter = (mapped_identity or old_id).split("-")[1]
+        if role != roles.get(identity_letter):
+            raise LifecycleError("legacy-proof-invalid", "assigned identity differs from the carrier Content Role")
+        old_status = frontmatter_scalar(frontmatter, "status")
+        if old_status is not None and old_status.casefold() != "active":
+            raise LifecycleError("legacy-proof-inapplicable", "migration cannot activate a draft or inactive Atom")
+        role_values = {"C": "Concern", "A": "Analysis", "P": "Plan", "R": "Requirement", "M": "Method",
+                       "E": "Evaluation", "D": "Delivery", "O": "Operations"}
+        old_role = frontmatter_scalar(frontmatter, "content_role")
+        if old_role is not None and old_role != role_values[identity_letter]:
+            raise LifecycleError("legacy-proof-invalid", "migration cannot replace an explicitly different Content Role")
+        atom = Atom(path, path.relative_to(root).as_posix(), path.name, str(proof["atom_id"]),
+                    "active", role, frontmatter, content)
+        observed = carrier_descriptor(root, atom)
+        if any(descriptor[field] != observed[field] for field in _DESCRIPTOR_FIELDS):
+            raise LifecycleError("stale-carrier", "legacy target no longer matches its complete sealed descriptor")
+        for candidate in control_root(root).rglob(f"*{atom.atom_id}*.md"):
+            if candidate == path or any(part.casefold() in INACTIVE_LIFECYCLE_SEGMENTS | {"archived", "resolved"}
+                                        for part in candidate.relative_to(control_root(root)).parts):
+                continue
+            try:
+                other = atom_from_path(root, candidate)
+            except AtomToolError as error:
+                same_legacy_identity = (candidate.stem.partition("--")[0].startswith(old_id + "-")
+                                        if mapped_identity is not None else
+                                        re.findall(r"(?:^|-)(CA-[CAPRMEDO]-[0-9]+)(?=-|$)", candidate.stem) == [atom.atom_id])
+                if error.code == "atom-frontmatter-id-required" and same_legacy_identity:
+                    raise LifecycleError("active-atom-id-ambiguous", "legacy identity has another unnormalized owner") from error
+            else:
+                if other.atom_id == atom.atom_id:
+                    raise LifecycleError("active-atom-id-ambiguous", "legacy identity already has another current owner")
+        return atom
+    except AtomToolError as error:
+        raise _translate(error) from error
+
+
+def _legacy_summary(content: str) -> str:
+    headings = re.findall(r"(?m)^# (.+?)\s*$", content)
+    if len(headings) != 1 or headings[0] == "Summary":
+        raise LifecycleError("legacy-summary-ambiguous", "legacy migration requires one exact first-H1 Summary")
+    return headings[0]
 
 
 def _summary(content: str) -> str:
@@ -671,21 +773,45 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
 
     root = root.resolve()
     request = _mapping(parameters, "parameters")
-    allowed = frozenset({"target", "proposed", "change_class", "successors"})
+    allowed = frozenset({"target", "proposed", "change_class", "successors", "legacy_identity_proof", "legacy_identity_mapping"})
     unknown = sorted(request.keys() - allowed)
     if unknown or not {"target", "proposed", "change_class"}.issubset(request):
         raise LifecycleError("update-parameters-invalid", "update requires target, complete proposed carrier, and change_class only")
-    target = _resolve_descriptor(root, request["target"], name="target", active=False)
+    legacy = "legacy_identity_proof" in request
+    mapping = None
+    if "legacy_identity_mapping" in request:
+        if not legacy:
+            raise LifecycleError("identity-mapping-invalid", "explicit legacy mapping requires an exact historical proof")
+        mapping = _mapping(request["legacy_identity_mapping"], "legacy_identity_mapping")
+        _exact_fields(mapping, frozenset({"legacy_atom_id", "atom_id", "destination"}), "legacy_identity_mapping")
+        if (not isinstance(mapping["atom_id"], str) or re.fullmatch(r"CA-[CAPRMEDO]-[0-9]{3,}", mapping["atom_id"]) is None
+                or mapping["legacy_atom_id"] != _mapping(request["target"], "target").get("atom_id")
+                or not isinstance(mapping["destination"], str)):
+            raise LifecycleError("identity-mapping-invalid", "mapping must bind one exact legacy identity to a canonical identity and destination")
+    target = (_resolve_legacy_descriptor(root, request["target"], request["legacy_identity_proof"],
+                                        mapped_identity=mapping["atom_id"] if mapping else None)
+              if legacy else _resolve_descriptor(root, request["target"], name="target", active=False))
     prior = carrier_descriptor(root, target)
     proposed = _proposal(request["proposed"])
     change_class = request["change_class"]
     if change_class not in _UPDATE_CLASSES:
         raise LifecycleError("change-class-unadmitted", "update change_class is not identity-preserving")
-    if frontmatter_scalar(proposed["frontmatter"], "atom_id") != target.atom_id:
+    expected_identity = mapping["atom_id"] if mapping else target.atom_id
+    if frontmatter_scalar(proposed["frontmatter"], "atom_id") != expected_identity:
         raise LifecycleError("atom-identity-changed", "same-identity update must retain the current atom_id")
-    if frontmatter_scalar(proposed["frontmatter"], "status") != frontmatter_scalar(target.frontmatter, "status"):
+    if legacy:
+        expected_role = {"C": "Concern", "A": "Analysis", "P": "Plan", "R": "Requirement", "M": "Method",
+                         "E": "Evaluation", "D": "Delivery", "O": "Operations"}[expected_identity.split("-")[1]]
+        if frontmatter_scalar(proposed["frontmatter"], "content_role") != expected_role:
+            raise LifecycleError("atom-identity-changed", "legacy migration must retain the assigned Content Role")
+    old_status = frontmatter_scalar(target.frontmatter, "status")
+    new_status = frontmatter_scalar(proposed["frontmatter"], "status")
+    if new_status != old_status and not (legacy and old_status is None and new_status == "Active"):
         raise LifecycleError("status-change-requires-change-status", "Update cannot carry a status transition")
-    if _summary(proposed["content"]) != _summary(target.content):
+    prior_summary = _legacy_summary(target.content) if legacy else _summary(target.content)
+    if _summary(proposed["content"]) != prior_summary:
+        if mapping:
+            raise LifecycleError("legacy-summary-changed", "identity encoding migration must preserve the exact Summary")
         proposed_successors = _proposed_successors(root, request.get("successors"), target)
         return {
             "operation": "update",
@@ -695,7 +821,21 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             "effects": [_effect("unchanged", carrier=prior, reason="summary-change-requires-separate-replace")],
             "history": {"prior": prior, "preserved": True},
         }
-    if proposed["frontmatter"] == target.frontmatter and proposed["content"] == target.content:
+    if mapping:
+        try:
+            destination, _, destination_id = prepare_create_atom_revision(root, mapping["destination"], proposed["frontmatter"])
+        except AtomToolError as error:
+            raise _translate(error) from error
+        if destination.parent != target.path.parent or destination_id != expected_identity:
+            raise LifecycleError("identity-mapping-invalid", "canonical destination must preserve the source scope and Content Role")
+        if destination.exists():
+            raise LifecycleError("destination-collision", "canonical destination already exists")
+        if any(atom.atom_id == expected_identity for atom in scan_atoms(root)):
+            raise LifecycleError("atom-id-collision", "canonical identity was already used")
+        for candidate in control_root(root).rglob("*.md"):
+            if re.search(rf"(?:^|-){re.escape(expected_identity)}(?=-|@|\.)", candidate.name):
+                raise LifecycleError("atom-id-collision", "canonical identity was already used by a historical or unnormalized carrier")
+    if proposed["frontmatter"] == target.frontmatter and proposed["content"] == target.content and not mapping:
         return {"operation": "update", "outcome": "no-op", "observed": prior,
                 "effects": [_effect("unchanged", carrier=prior, reason="equivalent-carrier")], "history": {"prior": prior, "preserved": True}}
     if not _execute_allowed(execute=execute, authorized=authorized):
@@ -722,15 +862,18 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             history_ref = reserve_history_entry(root)
             frontmatter = replace_draft_revision_lineage(frontmatter, {"history_entry_ref": history_ref})
             draft_history = (history_ref, parent, parent_entry.get("direct_predecessor"))
-        if change_class == "semantic_revision":
+        if change_class == "semantic_revision" or legacy:
             prior_revision = preserve_atom_revision(root, target)
-        write_atom_revision(target, frontmatter, proposed["content"])
-        observed_atom = atom_from_path(root, target.path)
-        if draft_history is not None:
-            history_ref, parent, predecessor = draft_history
-            append_draft_entry(root, observed_atom.relative, reference=history_ref,
-                               origin={"kind": "draft_update"}, parent_history_entry_ref=parent,
-                               direct_predecessor=predecessor)
+        if mapping:
+            observed_atom = migrate_atom_identity_revision(root, target, mapping["destination"], frontmatter, proposed["content"])
+        else:
+            write_atom_revision(target, frontmatter, proposed["content"])
+            observed_atom = atom_from_path(root, target.path)
+            if draft_history is not None:
+                history_ref, parent, predecessor = draft_history
+                append_draft_entry(root, observed_atom.relative, reference=history_ref,
+                                   origin={"kind": "draft_update"}, parent_history_entry_ref=parent,
+                                   direct_predecessor=predecessor)
     except BaseException as error:
         if prior_revision is not None:
             prior_revision.path.unlink(missing_ok=True)
@@ -741,8 +884,14 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     history: dict[str, Any] = {"prior": prior, "revision_class": change_class}
     if prior_revision is not None:
         history["prior_revision"] = carrier_descriptor(root, prior_revision)
+    if mapping:
+        history["identity_mapping"] = dict(mapping)
+    effects = [_effect("changed", carrier=observed)]
+    if mapping and prior_revision is not None:
+        effects.extend([_effect("changed", carrier=carrier_descriptor(root, prior_revision)),
+                        {"state": "changed", "carrier": prior, "operation": "relocated_to_canonical_encoding"}])
     return {"operation": "update", "outcome": "applied", "observed": observed,
-            "effects": [_effect("changed", carrier=observed)],
+            "effects": effects,
             "history": history}
 
 

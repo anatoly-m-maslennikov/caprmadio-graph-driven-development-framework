@@ -1,0 +1,49 @@
+---
+atom_id: CA-O-149
+content_role: Operations
+type: Step
+current_scope_unit: CORE_META_MODEL
+claim_target_scope_unit: CORE_META_MODEL
+local_tier: Standard
+author: Anatoly Maslennikov
+status: Active
+subjects:
+  governs: "Source Reconciliation Decision Step"
+  depends_on:
+    - "Step"
+    - "Action"
+    - "Source Reconciliation"
+    - "Step/Agentic Execution Context"
+    - "Workflow Run"
+    - "Step Run"
+version: 2
+updated_at: "2026-10-04 17:42:12 +0000"
+relations:
+  relates_to:
+    - CA-O-010
+    - CA-O-007
+    - CA-R-1509
+    - CA-R-1511
+    - CA-R-1527
+global_tier: 11
+projection:
+  source_carrier_path: ../../../000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/SOURCE_RECONCILIATION/CA-O-149-CORE_META_MODEL-STEP--obtain-the-reconciliation-source-correction-decision.md
+  source_atom_id: CA-O-149
+  source_atom_revision: 2
+  source_sha256: 48f9245598122d2caaa3341720fb69f732771cf456375aefdba3a971b839c103
+  original_relations_sha256: 07439921cb32775a07a69bc62f82b516a5aa7a6902bb51502fc1321f8643212d
+---
+# Summary
+
+Obtain the reconciliation source correction decision
+
+## Operation
+
+Source Reconciliation Decision Step **means** the node **in** Workflow `CA-O-010` invoking **`=1`** Action, `CA-O-007`.
+
+- bind the exact proposal, conflicts, frontier, **and** required approval context from CA-O-148's proposal result, the retained assessment/selection results, **and** admitted Workflow Run approval inputs. retain the exact proposal, decision **and** source-frontier bindings supplied for this invocation, **when** applicable, rather than independently selecting **or** inferring them.
+- for an invocation whose actual bound Action is Agentic, bind **`=1`** Integrated **or** Isolated context under `CA-R-1527-CORE_META_MODEL-GENERAL-REQUIREMENT--define-agentic-step-execution-context` from the admitted invocation's supplied `agentic_execution_context` runtime parameter **before** dispatch. missing, ambiguous **or** unsupported values, **or** unavailable required context/capability, return a blocked Agentic invocation; do **not** default **or** silently substitute. retain the selected context with the Step Run. this does **not** grant additional authority. a Programmatic invocation does **not** acquire an Agent context.
+- retain exact Action/Step Revisions, input/source bindings, actual effects **and** returned results for the Step Run. pass the Action's unchanged result **and** payload **to** the Workflow **without** copying **or** redefining its behavior.
+- remain within the Workflow's applicable approval, currentness, confidence, accepted revisit/recovery allowance **and** escalation guards. this Step does **not** authorize an extra retry, correction, publication, **or** decision.
+
+## Details

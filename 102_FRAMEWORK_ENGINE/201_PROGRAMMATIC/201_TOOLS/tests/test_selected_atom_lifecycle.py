@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import hashlib
+import copy
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -23,7 +25,7 @@ from lifecycle_intents import (  # noqa: E402
     replace_atom_action,
     update_atom_action,
 )
-from atom_operations import ToolError  # noqa: E402
+from atom_operations import Atom, ToolError, atom_from_path, split_frontmatter  # noqa: E402
 
 
 class SelectedAtomLifecycleTest(unittest.TestCase):
@@ -193,6 +195,167 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         )
         self.assertEqual(noop["outcome"], "no-op")
         self.assertEqual(self.target.read_bytes(), before)
+
+    def _legacy_update(self, *, legacy_status: str | None = None) -> tuple[dict[str, object], bytes]:
+        original = self.target.read_text(encoding="utf-8").replace("atom_id: CA-R-100\n", "").replace(
+            "status: Active\n", ""
+        ).replace("# Summary\n\nStable summary", "# Stable summary")
+        if legacy_status is not None:
+            original = original.replace("version: 1\n", f"status: {legacy_status}\nversion: 1\n")
+        self.target.write_text(original, encoding="utf-8")
+        for args in (("init",), ("add", "--", self.target.relative_to(self.root).as_posix()),
+                     ("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+                      "-c", "commit.gpgSign=false", "-c", "core.hooksPath=/dev/null", "commit", "-m", "legacy carrier")):
+            subprocess.run(["git", "-C", str(self.root), *args], capture_output=True, check=True)
+        commit = subprocess.run(["git", "-C", str(self.root), "rev-parse", "HEAD"],
+                                capture_output=True, check=True, text=True).stdout.strip()
+        fm, content = split_frontmatter(original)
+        atom = Atom(self.target, self.target.relative_to(self.root).as_posix(), self.target.name,
+                    "CA-R-100", "active", "04_requirement", fm, content)
+        target = carrier_descriptor(self.root, atom)
+        proposed = {"frontmatter": fm + "\natom_id: CA-R-100\nstatus: Active",
+                    "content": content.replace("# Stable summary", "# Summary\n\nStable summary", 1)}
+        return {"target": target, "proposed": proposed, "change_class": "carrier_only",
+                "legacy_identity_proof": {"atom_id": "CA-R-100", "commit": commit,
+                                          "path": atom.relative, "digest": target["digest"]}}, original.encode()
+
+    def test_explicit_historical_migration_is_preview_only_until_authorized_and_preserves_bytes(self) -> None:
+        parameters, before = self._legacy_update()
+        with self.assertRaisesRegex(ToolError, "declare atom_id"):
+            atom_from_path(self.root, self.target)
+        without_proof = {k: v for k, v in parameters.items() if k != "legacy_identity_proof"}
+        with self.assertRaisesRegex(LifecycleError, "atom-frontmatter-id-required"):
+            update_atom_action(self.root, without_proof, execute=True, authorized=True)
+        preview = update_atom_action(self.root, parameters)
+        self.assertEqual(preview["outcome"], "preview")
+        self.assertEqual(self.target.read_bytes(), before)
+        self.assertFalse((self.requirements / "archive").exists())
+        with self.assertRaisesRegex(LifecycleError, "authorization-required"):
+            update_atom_action(self.root, parameters, execute=True)
+        result = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(result["observed"]["atom_id"], "CA-R-100")
+        self.assertEqual(result["observed"]["version"], 1)
+        self.assertEqual(atom_from_path(self.root, self.target).atom_id, "CA-R-100")
+        self.assertEqual((self.root / result["history"]["prior_revision"]["path"]).read_bytes(), before)
+
+    def test_historical_migration_rejects_forged_stale_or_nonhistorical_identity(self) -> None:
+        parameters, before = self._legacy_update()
+        for key, value in (("commit", "0" * 40), ("digest", "0" * 64), ("atom_id", "CA-R-999"),
+                           ("path", "../outside.md")):
+            invalid = copy.deepcopy(parameters)
+            invalid["legacy_identity_proof"][key] = value
+            with self.assertRaisesRegex(LifecycleError, "legacy-proof-invalid|legacy-history-unavailable"):
+                update_atom_action(self.root, invalid, execute=True, authorized=True)
+            self.assertEqual(self.target.read_bytes(), before)
+        self.target.write_bytes(before + b"\nchanged\n")
+        with self.assertRaisesRegex(LifecycleError, "legacy-proof-invalid"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+
+    def test_historical_migration_does_not_choose_between_duplicate_owners(self) -> None:
+        parameters, before = self._legacy_update()
+        duplicate = self._atom("CA-R-100", "duplicate", "Distinct claim")
+        with self.assertRaisesRegex(LifecycleError, "active-atom-id-ambiguous"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(self.target.read_bytes(), before)
+        duplicate.write_text(duplicate.read_text().replace("atom_id: CA-R-100\n", ""))
+        with self.assertRaisesRegex(LifecycleError, "active-atom-id-ambiguous"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(self.target.read_bytes(), before)
+
+    def test_historical_migration_cannot_promote_a_draft(self) -> None:
+        parameters, before = self._legacy_update(legacy_status="draft")
+        with self.assertRaisesRegex(LifecycleError, "legacy-proof-inapplicable"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(self.target.read_bytes(), before)
+
+    def _mapped_delivery(self) -> tuple[dict[str, object], Path, Path, bytes]:
+        role = self.requirements.parent / "07_delivery"
+        role.mkdir()
+        old_id = "CAPRMEDIO-FRAMEWORK-ENGINE-DELV-005"
+        source = role / (old_id + "-GRAPH_UI-DELIVERY--stable-delivery.md")
+        original = b"---\nversion: 8\nrelations: {}\n---\n# Stable delivery\n\nDeliver the browser locally.\n"
+        source.write_bytes(original)
+        for args in (("init",), ("add", "--", source.relative_to(self.root).as_posix()),
+                     ("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+                      "-c", "commit.gpgSign=false", "-c", "core.hooksPath=/dev/null", "commit", "-m", "legacy delivery")):
+            subprocess.run(["git", "-C", str(self.root), *args], capture_output=True, check=True)
+        commit = subprocess.run(["git", "-C", str(self.root), "rev-parse", "HEAD"],
+                                capture_output=True, check=True, text=True).stdout.strip()
+        fm, body = split_frontmatter(original.decode())
+        old = Atom(source, source.relative_to(self.root).as_posix(), source.name, old_id,
+                   "active", "07_delivery", fm, body)
+        target = carrier_descriptor(self.root, old)
+        destination = role / "CA-D-560-GRAPH_UI--stable-delivery.md"
+        return {"target": target,
+                "proposed": {"frontmatter": fm + "\natom_id: CA-D-560\ncontent_role: Delivery\nstatus: Active",
+                             "content": "# Summary\n\nStable delivery\n\n## Claim\n\nDeliver the browser locally.\n"},
+                "change_class": "carrier_only",
+                "legacy_identity_proof": {"atom_id": old_id, "commit": commit, "path": old.relative, "digest": target["digest"]},
+                "legacy_identity_mapping": {"legacy_atom_id": old_id, "atom_id": "CA-D-560",
+                                            "destination": destination.relative_to(self.root).as_posix()}}, source, destination, original
+
+    def test_approved_legacy_identity_encoding_preserves_exact_history_and_explicit_mapping(self) -> None:
+        parameters, source, destination, before = self._mapped_delivery()
+        preview = update_atom_action(self.root, parameters)
+        self.assertEqual(preview["outcome"], "preview")
+        self.assertEqual(source.read_bytes(), before)
+        self.assertFalse(destination.exists())
+        with self.assertRaisesRegex(LifecycleError, "authorization-required"):
+            update_atom_action(self.root, parameters, execute=True)
+        result = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(result["observed"]["atom_id"], "CA-D-560")
+        self.assertEqual(result["observed"]["version"], 8)
+        self.assertFalse(source.exists())
+        self.assertEqual(atom_from_path(self.root, destination).atom_id, "CA-D-560")
+        self.assertEqual(result["history"]["identity_mapping"], parameters["legacy_identity_mapping"])
+        self.assertEqual((self.root / result["history"]["prior_revision"]["path"]).read_bytes(), before)
+
+    def test_identity_mapping_rejects_missing_proof_scope_change_summary_change_and_reserved_ids(self) -> None:
+        parameters, source, destination, before = self._mapped_delivery()
+        invalid = copy.deepcopy(parameters)
+        del invalid["legacy_identity_proof"]
+        with self.assertRaisesRegex(LifecycleError, "identity-mapping-invalid"):
+            update_atom_action(self.root, invalid, execute=True, authorized=True)
+        invalid = copy.deepcopy(parameters)
+        invalid["legacy_identity_mapping"]["destination"] = (self.requirements / destination.name).relative_to(self.root).as_posix()
+        with self.assertRaisesRegex(LifecycleError, "identity-mapping-invalid"):
+            update_atom_action(self.root, invalid, execute=True, authorized=True)
+        invalid = copy.deepcopy(parameters)
+        invalid["proposed"]["content"] = invalid["proposed"]["content"].replace("Stable delivery", "Changed summary")
+        with self.assertRaisesRegex(LifecycleError, "legacy-summary-changed"):
+            update_atom_action(self.root, invalid, execute=True, authorized=True)
+        archive = source.parent / "archive"
+        archive.mkdir()
+        (archive / "CA-D-560--reserved@1.md").write_text("legacy reserved ID", encoding="utf-8")
+        with self.assertRaisesRegex(LifecycleError, "atom-id-collision"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(source.read_bytes(), before)
+        self.assertFalse(destination.exists())
+
+    def test_identity_mapping_cannot_renumber_a_current_ca_identity(self) -> None:
+        parameters, before = self._legacy_update()
+        parameters["legacy_identity_mapping"] = {"legacy_atom_id": "CA-R-100", "atom_id": "CA-R-999",
+                                                  "destination": (self.requirements / "CA-R-999--changed.md").relative_to(self.root).as_posix()}
+        parameters["proposed"]["frontmatter"] = parameters["proposed"]["frontmatter"].replace("CA-R-100", "CA-R-999")
+        with self.assertRaisesRegex(LifecycleError, "legacy-proof-invalid"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(self.target.read_bytes(), before)
+
+    def test_identity_encoding_migration_rolls_back_when_source_removal_fails(self) -> None:
+        parameters, source, destination, before = self._mapped_delivery()
+        original_unlink = Path.unlink
+
+        def refuse_source(path: Path, *args: object, **kwargs: object) -> None:
+            if path == source:
+                raise PermissionError("fixture source-removal failure")
+            original_unlink(path, *args, **kwargs)
+
+        with patch.object(Path, "unlink", refuse_source):
+            with self.assertRaisesRegex(PermissionError, "source-removal failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(source.read_bytes(), before)
+        self.assertFalse(destination.exists())
+        self.assertFalse((source.parent / "archive" / (source.stem + "@8.md")).exists())
 
     def test_replace_publishes_supplied_successors_then_archives_one_predecessor(self) -> None:
         first = self._carrier("CA-R-105", "first-replacement", "First replacement")

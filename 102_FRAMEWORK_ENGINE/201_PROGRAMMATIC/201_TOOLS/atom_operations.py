@@ -9,7 +9,7 @@ import os
 import re
 import sys
 import tomllib
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -137,6 +137,8 @@ def _lifecycle(path: Path, control: Path) -> str:
         return "draft"
     if "done" in parts:
         return "done"
+    if "resolved" in parts:
+        return "resolved"
     if "canceled" in parts or "cancelled" in parts:
         return "canceled"
     return "active"
@@ -208,7 +210,7 @@ def resolve_selector(root: Path, selector: str, atoms: Sequence[Atom] | None = N
     matches = [atom for atom in pool if selector == atom.relative or normalized == atom.filename
                or normalized == Path(atom.filename).stem or selector == atom.atom_id]
     if re.fullmatch(r"CA-[CAPRMEDO]-[0-9]+", selector):
-        for lifecycle in ("active", "done", "canceled", "archived"):
+        for lifecycle in ("active", "resolved", "done", "canceled", "archived"):
             current_matches = [atom for atom in matches if atom.lifecycle == lifecycle]
             if current_matches:
                 matches = current_matches
@@ -470,6 +472,48 @@ def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: 
     return atom_from_path(root, target)
 
 
+def migrate_atom_identity_revision(root: Path, atom: Atom, relative_path: str, frontmatter: str, content: str) -> Atom:
+    """Persist one separately proven legacy-to-canonical identity encoding.
+
+    Admission and the old-to-new mapping belong to the sealed lifecycle caller,
+    not lookup. Preserve the source scope/role location and roll back both paths
+    if publication or removal fails. The caller preserves prior bytes first.
+    """
+
+    root = root.resolve()
+    target, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    if atom.atom_id is None or atom_id is None or atom_id == atom.atom_id:
+        raise ToolError("identity-mapping-invalid", "migration requires distinct explicitly bound legacy and canonical encodings")
+    if target.parent != atom.path.parent:
+        raise ToolError("identity-mapping-invalid", "identity migration cannot change the source scope or Content Role location")
+    if target.exists():
+        raise ToolError("destination-collision", f"Atom destination already exists: {target.relative_to(root)}")
+    # Include prior revisions and unnormalized owners: canonical IDs are never
+    # reusable merely because an old/current carrier is not normally parseable.
+    for candidate in control_root(root).rglob("*.md"):
+        match = ATOM_ID.search(candidate.name)
+        if match is not None and match.group(1) == atom_id:
+            raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
+        try:
+            candidate_frontmatter, _ = split_frontmatter(candidate.read_text(encoding="utf-8"))
+            if frontmatter_scalar(candidate_frontmatter, "atom_id") == atom_id:
+                raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
+        except (UnicodeDecodeError, OSError):
+            continue
+        except ToolError as error:
+            if error.code == "atom-id-collision":
+                raise
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, render(normalized, content))
+        observed = atom_from_path(root, target)
+        atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return observed
+
+
 def preserve_atom_revision(root: Path, atom: Atom, *, allow_nonactive: bool = False) -> Atom:
     """Copy one prior semantic revision to its native role-local history path."""
 
@@ -487,6 +531,11 @@ def preserve_atom_revision(root: Path, atom: Atom, *, allow_nonactive: bool = Fa
     if target.exists():
         raise ToolError("destination-collision", f"history destination already exists: {target.relative_to(root)}")
     _atomic_write(target, atom.path.read_bytes())
+    if frontmatter_scalar(atom.frontmatter, "atom_id") is None:
+        # Explicit legacy Update admission has already proven this identity.
+        # Keep its original historical bytes, without granting lookup fallback.
+        return replace(atom, path=target, relative=target.relative_to(root).as_posix(),
+                       filename=target.name, lifecycle="archived")
     return atom_from_path(root, target)
 
 
@@ -1084,7 +1133,7 @@ def parser(tool_id: str) -> argparse.ArgumentParser:
         run.add_argument("--query", action="append")
         run.add_argument("--atom", action="append")
         run.add_argument("--under")
-        run.add_argument("--lifecycle", choices=("all", "active", "draft", "archived", "done", "canceled"), default="all")
+        run.add_argument("--lifecycle", choices=("all", "active", "draft", "archived", "done", "resolved", "canceled"), default="all")
         run.add_argument("--limit", type=int)
         run.add_argument("--view", choices=("metadata", "content", "both"), default="metadata")
     elif tool_id == "ATOM_READ":

@@ -1,0 +1,47 @@
+---
+atom_id: CA-R-1620
+content_role: Requirement
+current_scope_unit: PROJECT_CONFIGURATION
+claim_target_scope_unit: PROJECT_CONFIGURATION
+local_tier: Standard
+author: Anatoly Maslennikov
+status: Active
+subjects:
+  governs: "Realization Graph"
+  depends_on:
+    - "Entity"
+    - "Projection"
+    - "Relation"
+version: 4
+updated_at: "2026-10-03 01:09:05 +0400"
+relations:
+  relates_to:
+    - CA-R-1246
+    - CA-R-1494
+    - CA-R-1616
+    - CA-R-1746
+global_tier: 11
+projection:
+  source_carrier_path: ../../../000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1620-PROJECT_CONFIGURATION--define-the-realization-graph-dependency-view.md
+  source_atom_id: CA-R-1620
+  source_atom_revision: 4
+  source_sha256: a8e1ea75be414bcda4eebe917b6f22c89455d5784cef43b162757fbc1de2635c
+  original_relations_sha256: eae00a96c16cb4ab498859fce5ef1d2cf94e6e5d896519f44ef27f2cdb0c59c3
+---
+# Summary
+
+Define the Realization Graph dependency view
+
+## Scope
+
+optional dependency views of Realization Graphs.
+
+## Claim
+
+the dependency view of a Realization Graph **means** an optional derived view of the selected declarations, resources, internal dependency targets, external dependency targets, **and** admitted typed Relations among them.
+
+## Details
+
+- its specification identifies the selected population, Relation Types, source boundary, **and** limits of dependency traversal; recursive reachability does **not** establish complete coverage by itself.
+- the view **must** derive from the same source-backed graph facts **without** another independently maintained dependency authority. cycles are represented **when** evidenced; their validity is checked against applicable Claims rather than assumed from the view name.
+- this view does **not** require a second universal view.

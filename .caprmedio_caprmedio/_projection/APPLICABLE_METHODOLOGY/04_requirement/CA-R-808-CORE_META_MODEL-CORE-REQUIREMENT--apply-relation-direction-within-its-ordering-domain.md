@@ -1,0 +1,36 @@
+---
+subjects:
+  governs: "relation-model"
+  depends_on:
+    - "atom-boundary"
+version: 18
+updated_at: "2026-10-02 20:52:00 +0400"
+relations: {}
+atom_id: "CA-R-808"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
+projection:
+  source_carrier_path: ../../../000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-808-CORE_META_MODEL-CORE-REQUIREMENT--apply-relation-direction-within-its-ordering-domain.md
+  source_atom_id: CA-R-808
+  source_atom_revision: 18
+  source_sha256: 497adbeca50b7b5dfa93a0b32bb75048640c3b7ee40c185c1562f96e0308c14f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+---
+# Summary
+
+Apply relation direction within its ordering domain
+
+## Scope
+
+declared relations.
+
+## Claim
+
+**every** declared relation **must** satisfy the target position **and** ordering domain registered for its relation family. Normative-authority relations **must** use the global-tier **and** authority hierarchy, temporal relations **must** use lifecycle succession, realization relations **must** use realization order, dependency relations **must** use dependency order, **and** **every** other admitted domain **must** use its own registered order. a universal upstream **or** downstream rule **must not** be inferred across different ordering domains, **and** an inverse-derived view **must not** create another declared edge.
+
+## Details

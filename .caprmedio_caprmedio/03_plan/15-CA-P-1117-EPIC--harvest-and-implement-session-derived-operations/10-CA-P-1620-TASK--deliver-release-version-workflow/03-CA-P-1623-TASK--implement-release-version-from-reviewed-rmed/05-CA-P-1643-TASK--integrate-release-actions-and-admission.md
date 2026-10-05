@@ -15,7 +15,7 @@ subjects:
   governs: "Integrate Release actions and admission"
   depends_on: [Workflow, Action, Tool, Manifest, Methodology, Implementation, Skill, Evaluation, Journal]
 version: 2
-updated_at: "2026-10-05 05:46:32 +0000"
+updated_at: "2026-10-05 07:48:02 +0000"
 relations:
   is_decomposition_of: [CA-P-1623]
   blocks: [CA-P-1644]
@@ -39,3 +39,9 @@ Current source inputs are the exact independently accepted D572@3 pin record, in
 ## Definition of Done
 
 Save exact bounded output and test/remaining-coverage evidence. Pure preparation, staging or source review never establishes release promotion, complete P1623, P1624 or Epic closure.
+
+### Current bounded implementation frontier
+
+P1686-P1689/P1691-P1693/P1698/P1700-P1706 and current P1709 produce accepted source delivery, suite-before-staging, complete inventory/image-input sealing, actual compiler/package, retained image evidence, observed disposable promotion/recovery, strict Tool boundary and all ten private phase compositions. P1691/P1697 are still Active because conditional exact retirement is being completed by P1707. P1708 now integrates the accepted private adapter with the existing shared Session; public registration, durable restart/recording recovery and actual full Release/MCP/image proof remain required.
+
+Current source frontier is D572@4 SHA751e845e1aaeb3e013fc4cffab46bdb68ad986933dccd83407a9556d81a1c840, binding current P1622@1 SHA156be9e18f231c3d0eee6fa7789d309d573b78b93aeae70c0d6fa8f2b20ac7b1 and accepted D573@2. P1709 accepts the21 RMED/38 unique pin amendment98% with15 focused admission passes; existing public fifteen bindings and D527 remain unchanged. Source/admission/mock/disposable results do not establish actual runtime/image completion. This composite remains Active until every required implementation and review remainder closes.
