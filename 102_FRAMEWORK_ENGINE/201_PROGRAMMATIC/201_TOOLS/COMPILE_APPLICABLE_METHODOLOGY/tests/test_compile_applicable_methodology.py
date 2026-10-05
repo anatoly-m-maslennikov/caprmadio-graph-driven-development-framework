@@ -180,7 +180,7 @@ class CompilerTest(unittest.TestCase):
         return structure
 
     def test_declared_source_place_drives_configured_projection_regeneration(self) -> None:
-        output = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+        output = ".caprmedio_caprmedio/custom_framework/APPLICABLE_METHODOLOGY"
         source = f"{output}/000_APPLICABLE_MTHD_sources"
         self.declare_places(source, output)
         moved_source = self.temp / source
@@ -191,7 +191,7 @@ class CompilerTest(unittest.TestCase):
         before = original.read_bytes()
 
         code, report = self.invoke()
-        projected = self.temp / module.OUTPUT_RELATIVE / "05_method" / original.name
+        projected = self.temp / output / "05_method" / original.name
         self.assertEqual(0, code)
         self.assertEqual(str(projected.relative_to(self.temp)), report["output_plan"][0]["output_path"])
         applied_code, applied = self.invoke("--apply")
@@ -206,6 +206,11 @@ class CompilerTest(unittest.TestCase):
         original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
         for source, output, expected in (
             ("../outside", "projection", "source-unit-place-invalid"),
+            (module.SOURCE_RELATIVE.as_posix(), "../outside", "output-unit-place-invalid"),
+            (module.SOURCE_RELATIVE.as_posix(), "/outside", "output-unit-place-invalid"),
+            (module.SOURCE_RELATIVE.as_posix(), ".", "output-unit-place-invalid"),
+            (module.SOURCE_RELATIVE.as_posix(), module.SOURCE_RELATIVE.as_posix(), "source-output-overlap"),
+            (module.SOURCE_RELATIVE.as_posix(), f"{module.SOURCE_RELATIVE}/generated", "source-output-overlap"),
         ):
             with self.subTest(source=source, output=output):
                 self.declare_places(source, output)
@@ -227,15 +232,129 @@ class CompilerTest(unittest.TestCase):
         self.assertEqual("source-frontier-changed", raised.exception.code)
         self.assertFalse((self.temp / "other_projection").exists())
 
-    def test_structure_delivery_alias_does_not_override_configured_projection_target(self) -> None:
+    def test_changed_control_root_blocks_staging_at_original_places(self) -> None:
+        self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        places = module.methodology_paths(self.temp)
+        _, candidates, snapshot = module.compile_report(self.temp, places)
+        (self.temp / module.SETTINGS_PATH).write_text(
+            '[paths]\ncontrol_root = ".caprmedio_other_project"\n'
+        )
+
+        with self.assertRaises(module.CompileError) as raised:
+            module.stage_outputs(self.temp, candidates, snapshot, places)
+
+        self.assertEqual("source-frontier-changed", raised.exception.code)
+        self.assertFalse((self.temp / places.output / "05_method").exists())
+        self.assertFalse((self.temp / ".caprmedio_other_project").exists())
+
+    def test_structure_delivery_alias_to_sources_is_rejected(self) -> None:
         self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001--one.md", carrier("CA-R-001"))
         (self.temp / "source_alias").symlink_to(self.source, target_is_directory=True)
         self.declare_places(module.SOURCE_RELATIVE.as_posix(), "source_alias")
 
         code, report = self.invoke("--apply")
 
-        self.assertEqual(0, code)
-        self.assertTrue((self.temp / module.OUTPUT_RELATIVE / "04_requirement").is_dir())
+        self.assertEqual(2, code)
+        self.assertEqual("source-output-overlap", report["diagnostics"][0]["code"])
+        self.assertFalse((self.temp / module.OUTPUT_RELATIVE / "04_requirement").exists())
+
+    def test_default_places_keep_framework_projection_and_sources_together(self) -> None:
+        (self.temp / module.STRUCTURE_RELATIVE).unlink()
+
+        places = module.methodology_paths(self.temp)
+
+        output = Path(".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY")
+        self.assertEqual(output, places.output)
+        self.assertEqual(output / "000_APPLICABLE_MTHD_sources", places.source)
+
+    def test_legacy_structure_without_delivery_binding_uses_framework_location(self) -> None:
+        structure = self.temp / module.STRUCTURE_RELATIVE
+        structure.write_text(
+            '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+            f'authority_path = {json.dumps(module.SOURCE_RELATIVE.as_posix())}\n'
+        )
+
+        places = module.methodology_paths(self.temp)
+
+        self.assertEqual(
+            Path(".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"),
+            places.output,
+        )
+
+    def test_invalid_declared_delivery_type_is_not_silently_defaulted(self) -> None:
+        structure = self.temp / module.STRUCTURE_RELATIVE
+        for invalid in ('""', "false", "[]"):
+            with self.subTest(delivery=invalid):
+                structure.write_text(
+                    '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+                    f'authority_path = {json.dumps(module.SOURCE_RELATIVE.as_posix())}\n'
+                    f'delivery_path = {invalid}\n'
+                )
+                code, report = self.invoke()
+                self.assertEqual(2, code)
+                self.assertEqual("output-unit-place-invalid", report["diagnostics"][0]["code"])
+
+    def test_source_within_replaceable_output_role_is_rejected(self) -> None:
+        self.declare_places("projection/04_requirement/sources", "projection")
+
+        with self.assertRaises(module.CompileError) as raised:
+            module.methodology_paths(self.temp)
+
+        self.assertEqual("source-output-overlap", raised.exception.code)
+
+    def test_output_alias_outside_project_is_rejected(self) -> None:
+        (self.temp / "output_alias").symlink_to(self.temp.parent, target_is_directory=True)
+        self.declare_places(module.SOURCE_RELATIVE.as_posix(), "output_alias")
+        code, report = self.invoke("--apply")
+
+        self.assertEqual(2, code)
+        self.assertEqual("output-unit-place-invalid", report["diagnostics"][0]["code"])
+
+    def test_configured_control_root_uses_its_own_structure_binding(self) -> None:
+        control = Path(".caprmedio_another_project")
+        output = control / "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+        source = output / "000_APPLICABLE_MTHD_sources"
+        (self.temp / module.SETTINGS_PATH).write_text(f'[paths]\ncontrol_root = "{control}"\n')
+        structure = self.temp / control / "project_structure.toml"
+        structure.parent.mkdir(parents=True)
+        structure.write_text(
+            '[[scope_units]]\nscope_unit_name = "METHODOLOGY_SOURCES"\n'
+            f'authority_path = {json.dumps(source.as_posix())}\n'
+            f'delivery_path = {json.dumps(output.as_posix())}\n'
+        )
+        shutil.copytree(self.source, self.temp / source)
+
+        places = module.methodology_paths(self.temp)
+        snapshot = module.source_state_snapshot(self.temp, places)
+        bindings = module.governed_bindings(self.temp, places)
+
+        self.assertEqual(source, places.source)
+        self.assertEqual(output, places.output)
+        self.assertEqual(module.sha256_bytes(structure.read_bytes()), places.structure_sha256)
+        self.assertIn((control / "project_structure.toml").as_posix(), snapshot)
+        self.assertNotIn(module.STRUCTURE_RELATIVE.as_posix(), snapshot)
+        self.assertEqual(places.structure_sha256, bindings["project_structure_sha256"])
+        self.assertEqual(output.as_posix(), bindings["projection_target"])
+
+    def test_explicit_release_child_places_remain_independent_of_canonical_target(self) -> None:
+        original = self.write("001_CORE_META_MODEL", "05_method", "CA-M-001--one.md", carrier("CA-M-001"))
+        canonical = module.methodology_paths(self.temp)
+        child_output = canonical.output / "_release_materialized/selected-candidate"
+        places = module.MethodologyPaths(
+            source=canonical.source, output=child_output,
+            structure_sha256=canonical.structure_sha256, control_root=canonical.control_root,
+        )
+
+        report, selected, snapshot = module.compile_report(self.temp, places)
+        staging = module.stage_outputs(self.temp, selected, snapshot, places)
+        module.replace_outputs_atomically(self.temp, staging, places)
+
+        projected = self.temp / child_output / "05_method" / original.name
+        self.assertTrue(report["can_apply"])
+        self.assertEqual(projected.relative_to(self.temp).as_posix(), report["output_plan"][0]["output_path"])
+        self.assertIn(b"projection:", projected.read_bytes())
+        self.assertEqual(carrier("CA-M-001"), original.read_bytes())
+        self.assertFalse((self.temp / canonical.output / "05_method").exists())
 
     def test_duplicate_identity_blocks_apply_without_exact_approval(self) -> None:
         self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001-A--one.md", carrier("CA-R-001"))

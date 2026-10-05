@@ -12,18 +12,24 @@ from unittest.mock import patch
 MCP = Path(__file__).resolve().parents[1]
 ROOT = MCP.parents[2]
 ORCHESTRATOR = MCP.parent / "203_APPS" / "WORKFLOW_ORCHESTRATOR"
+TOOLS_TESTS = MCP.parent / "201_TOOLS" / "tests"
 TEST_TEMP_ROOT = ROOT / ".caprmedio_tmp" / "tests" / Path(__file__).stem
 TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 sys.path.insert(0, str(MCP))
+sys.path.insert(0, str(TOOLS_TESTS))
 
 from selected_routes import (  # noqa: E402
+    ORIGINAL_SELECTED_ROUTE_NAMES,
+    QUERY_ROUTE_NAMES,
     SELECTED_ROUTE_NAMES,
+    SelectedRouteError,
     SelectedRouteAdapter,
     canonical_digest,
     load_selected_manifest,
     selected_manifest_contract,
     selected_manifest_ref,
 )
+import test_model_driven_status_lifecycle as status_goldens  # noqa: E402
 
 
 class FakeRunSupport:
@@ -95,18 +101,30 @@ class SelectedRoutesMCPTest(unittest.TestCase):
         # below deliberately exercise the same immutable snapshot instead of
         # re-reading every source graph once per route.
         cls._verified_manifest = load_selected_manifest(ROOT)
+        status_goldens.ModelDrivenStatusLifecycleTest.setUpClass()
 
     def setUp(self) -> None:
         self.manifest = copy.deepcopy(self._verified_manifest)
+        self.status_fixture = status_goldens.ModelDrivenStatusLifecycleTest()
+        self.status_fixture.setUp()
+        self.addCleanup(self.status_fixture.tearDown)
+        self.status_target = self.status_fixture.atom("Requirement", "Active")
         self.support = FakeRunSupport()
         self.loader = patch("selected_routes.load_selected_manifest", return_value=self.manifest)
         self.loader.start()
         self.addCleanup(self.loader.stop)
-        self.adapter = SelectedRouteAdapter(ROOT, service=self.support)
+        # Status preflight must inspect a real disposable Atom and its copied
+        # source-bound model/Structure authority.  Other selected routes still
+        # use the same manifest snapshot and fake shared support.
+        self.adapter = SelectedRouteAdapter(self.status_fixture.root, service=self.support)
 
     def request(self, route: str, *, mode: str = "preview") -> dict:
-        parameters = {"route_input": route}
-        refs = ["target:fixture"]
+        if route == "change_atom_status":
+            parameters = self.status_fixture.request(self.status_target, "Archived")
+            refs = [parameters["target"]["path"]]
+        else:
+            parameters = {"route_input": route}
+            refs = ["target:fixture"]
         effects = []
         request = {
             "operation_route": route,
@@ -174,7 +192,24 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                                   "parent_requested_run_id": step_run_id})
         return requested
 
-    def test_current_physical_manifest_freezes_all_thirteen_routes_through_queue_consumer(self) -> None:
+    def _copy_status_bindings(self, project: Path) -> dict:
+        """Copy the real disposable Atom, model sources, and Project Structure."""
+        for source in self.status_fixture.sources.values():
+            relative = source.relative_to(self.status_fixture.root)
+            destination = project / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        structure = self.status_fixture.root / status_goldens.CONTROL / "project_structure.toml"
+        structure_destination = project / status_goldens.CONTROL / "project_structure.toml"
+        structure_destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(structure, structure_destination)
+        target = self.status_target.relative_to(self.status_fixture.root)
+        target_destination = project / target
+        target_destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(self.status_target, target_destination)
+        return self.status_fixture.request(self.status_target, "Archived")
+
+    def test_current_physical_manifest_freezes_the_original_thirteen_routes_through_queue_consumer(self) -> None:
         """The MCP source fixture must be sufficient for the independent queue.
 
         This copies only the immutable manifest and its pinned sources into a
@@ -194,6 +229,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 'journal_root = ".caprmedio_caprmedio/_journal"\n',
                 encoding="utf-8",
             )
+            status_parameters = self._copy_status_bindings(project)
             pins = {self.manifest["manifest_ref"], self.manifest["source_freshness"]["selected_source_registry_ref"]}
             for route in self.manifest["routes"]:
                 pins.add(route["workflow"]["source_path"])
@@ -207,17 +243,31 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 shutil.copyfile(source, destination)
 
             queue = SelectedExecution(project, handlers={})
-            for ordinal, route in enumerate(self.manifest["routes"], start=1):
+            original_routes = [route for route in self.manifest["routes"]
+                               if route["route"] in ORIGINAL_SELECTED_ROUTE_NAMES]
+            self.assertEqual(13, len(original_routes))
+            for ordinal, route in enumerate(original_routes, start=1):
                 run_id = f"freeze{ordinal:02d}"
+                parameters = (copy.deepcopy(status_parameters)
+                              if route["route"] == "change_atom_status" else {})
+                target_frontier = ([parameters["target"]["path"]]
+                                   if route["route"] == "change_atom_status" else ["fixture/input"])
                 execution = {
                     "mode": "execute", "request_id": f"request-{run_id}",
-                    "operation_route": route["route"], "parameters": {},
-                    "target_frontier": ["fixture/input"], "effects": [],
+                    "operation_route": route["route"], "parameters": parameters,
+                    "target_frontier": target_frontier, "effects": [],
                     "definition_manifest": {"manifest_ref": self.manifest["manifest_ref"],
                                             "manifest_digest": self.manifest["canonical_manifest_sha256"]},
                     "source_freshness": copy.deepcopy(self.manifest["source_freshness"]),
                     "initiative": {"initiative_id": "fixture", "instruction_summary": "freeze"},
                 }
+                if route["route"] == "change_atom_status":
+                    preview = SelectedRouteAdapter(project).invoke(
+                        route["route"], self.request(route["route"]),
+                    )
+                    self.assertEqual("preview", preview["disposition"], preview)
+                    execution["proposal_receipt"] = preview["proposal_receipt"]
+                    execution["proposal_receipt_digest"] = preview["proposal_receipt_digest"]
                 graph = queue._validate_graph(execution)
                 execution["requested_runs"] = self._queue_requested_runs(graph, run_id)
                 frozen = queue.freeze({"operation": "enqueue_selected", "run_id": run_id,
@@ -225,15 +275,17 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertEqual(route["route"], frozen["graph"]["route"])
                 self.assertEqual(graph["entry_step"], frozen["graph"]["entry_step"])
 
-    def test_manifest_is_full_closed_thirteen_route_projection_with_fresh_pins(self) -> None:
+    def test_manifest_is_full_closed_fifteen_route_projection_with_fresh_pins(self) -> None:
         contract = selected_manifest_contract(ROOT)
         self.assertEqual(self.manifest["manifest_ref"], contract["manifest_ref"])
         self.assertEqual(list(SELECTED_ROUTE_NAMES), contract["route_names"])
         self.assertTrue(contract["canonical_digest"]["self_field_omitted_from_digest"])
+        self.assertEqual(["route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions"],
+                         contract["query_source_admission_fields"])
         self.assertEqual(["from", "condition", "to"], contract["on_result_fields"])
         self.assertEqual("complete", contract["on_result_terminal_target"])
         self.assertEqual(list(SELECTED_ROUTE_NAMES), [entry["route"] for entry in self.manifest["routes"]])
-        self.assertEqual(13, len(self.manifest["routes"]))
+        self.assertEqual(15, len(self.manifest["routes"]))
         self.assertEqual(self.manifest["canonical_manifest_sha256"], canonical_digest(
             {key: value for key, value in self.manifest.items()
              if key not in {"canonical_manifest_sha256", "manifest_ref"}}))
@@ -253,6 +305,18 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertTrue((ROOT / pin["source_path"]).is_file())
 
         routes = {entry["route"]: entry for entry in self.manifest["routes"]}
+        admissions = self.manifest["query_source_admissions"]
+        self.assertEqual(list(QUERY_ROUTE_NAMES), [entry["route"] for entry in admissions])
+        self.assertEqual(["CA-P-1618", "CA-P-1535"], [entry["acceptance_frontier"]["atom_id"] for entry in admissions])
+        self.assertNotIn("CA-P-1543", {pin["atom_id"] for entry in admissions
+                                        for pin in [entry["acceptance_frontier"], entry["workflow"],
+                                                    *[item["step"] for item in entry["ordered_steps"]],
+                                                    *[item["action"] for item in entry["ordered_steps"]]]})
+        for admission in admissions:
+            route = routes[admission["route"]]
+            self.assertFalse(route["mutation_capable"])
+            for field in ("workflow", "ordered_steps", "ordered_actions"):
+                self.assertEqual(admission[field], route[field])
         for route in ("create_atom", "replace_atom", "change_atom_status"):
             self.assertEqual([], routes[route]["on_result"])
         self.assertEqual(
@@ -272,13 +336,72 @@ class SelectedRoutesMCPTest(unittest.TestCase):
              for edge in routes["build_applicable_methodology"]["on_result"]],
         )
 
+    def test_manifest_rejects_missing_or_third_query_source_admission(self) -> None:
+        """The two accepted frontier records are closed manifest evidence."""
+        with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True) as temporary:
+            project = Path(temporary)
+            (project / ".git").mkdir()
+            control = project / ".caprmedio_caprmedio"
+            control.mkdir()
+            (control / "caprmedio_project_settings.toml").write_text(
+                '[paths]\ncontrol_root = ".caprmedio_caprmedio"\n'
+                'journal_root = ".caprmedio_caprmedio/_journal"\n', encoding="utf-8",
+            )
+            pins = {self.manifest["manifest_ref"], self.manifest["source_freshness"]["selected_source_registry_ref"]}
+            for route in self.manifest["routes"]:
+                pins.add(route["workflow"]["source_path"])
+                pins.update(item["step"]["source_path"] for item in route["ordered_steps"])
+                pins.update(item["action"]["source_path"] for item in route["ordered_steps"])
+                pins.update(item["source_path"] for item in route["native_action_calls"])
+            for admission in self.manifest["query_source_admissions"]:
+                pins.add(admission["acceptance_frontier"]["source_path"])
+            for relative in pins:
+                source = ROOT / relative
+                destination = project / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, destination)
+
+            old_frontier = {
+                "atom_id": "CA-P-1532", "version": 2,
+                "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md",
+                "digest": "b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432",
+            }
+            old_receipt = project / old_frontier["source_path"]
+            old_receipt.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / old_frontier["source_path"], old_receipt)
+
+            for mutation in ("missing", "third", "old-artifact-frontier"):
+                with self.subTest(mutation=mutation):
+                    candidate = {key: copy.deepcopy(value) for key, value in self.manifest.items()
+                                 if key not in {"manifest_ref", "canonical_manifest_sha256"}}
+                    if mutation == "missing":
+                        candidate["query_source_admissions"] = candidate["query_source_admissions"][:1]
+                    elif mutation == "third":
+                        candidate["query_source_admissions"].append(
+                            copy.deepcopy(candidate["query_source_admissions"][0])
+                        )
+                    else:
+                        admission = candidate["query_source_admissions"][0]
+                        admission["acceptance_frontier"] = old_frontier
+                        self.assertEqual("CA-O-158", admission["workflow"]["atom_id"])
+                        self.assertEqual(4, admission["workflow"]["version"])
+                        self.assertEqual(candidate["routes"][13]["workflow"], admission["workflow"])
+                    candidate["canonical_manifest_sha256"] = canonical_digest(candidate)
+                    (project / self.manifest["manifest_ref"]).write_text(
+                        __import__("json").dumps(candidate), encoding="utf-8",
+                    )
+                    expected = ("differs from the accepted source frontier"
+                                if mutation == "old-artifact-frontier" else "exactly two routes")
+                    with self.assertRaisesRegex(SelectedRouteError, expected):
+                        load_selected_manifest(project)
+
     def test_every_selected_route_forwards_one_mutation_free_preview(self) -> None:
         for route in SELECTED_ROUTE_NAMES:
             result = self.adapter.invoke(route, self.request(route))
             self.assertEqual("prepared", result["outcome"])
             self.assertEqual(route, self.support.calls[-1]["operation_route"])
             self.assertEqual("preview", self.support.calls[-1]["mode"])
-        self.assertEqual(13, len(self.support.calls))
+        self.assertEqual(15, len(self.support.calls))
 
     def test_default_adapter_uses_shared_preview_support_without_an_executor(self) -> None:
         result = SelectedRouteAdapter(ROOT).invoke("create_atom", self.request("create_atom"))

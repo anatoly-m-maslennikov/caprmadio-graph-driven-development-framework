@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import time
 from collections.abc import Callable, Mapping
 from typing import Any
@@ -14,6 +15,13 @@ from typing import Any
 
 class RevertChangesError(ValueError):
     """Raised for a malformed public request rather than an admitted denial."""
+
+
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_CAPABILITY_BINDING_FIELDS = {
+    "capability_id", "parameters", "target", "permission_evidence", "evidence_refs",
+}
+_CAPABILITY_PERMISSION_FIELDS = {"capability_id", "granted", "evidence_ref", "evidence_hash"}
 
 
 class RecordingPendingError(OSError):
@@ -56,11 +64,13 @@ class RevertChangesService:
     }
 
     def __init__(self, observe: Callable[[str], str], apply_effect: Callable[[dict[str, Any]], Mapping[str, Any]], run_tracker: Any,
-                 revalidate: Callable[[Mapping[str, Any]], list[str]] | None = None):
+                 revalidate: Callable[[Mapping[str, Any]], list[str]] | None = None,
+                 capability_validator: Callable[[Mapping[str, Any]], list[str]] | None = None):
         self.observe = observe
         self.apply_effect = apply_effect
         self.run_tracker = run_tracker
         self.revalidate = revalidate or (lambda _request: [])
+        self.capability_validator = capability_validator or (lambda _request: [])
 
     def handle(self, request: Mapping[str, Any]) -> dict[str, Any]:
         if not isinstance(request, Mapping):
@@ -87,9 +97,17 @@ class RevertChangesService:
         bindings = self._validate_request(request)
         if bindings:
             return self._blocked(bindings)
+        try:
+            admitted_target_hashes = {target: self.observe(target) for target in request["targets"]}
+        except Exception as exc:
+            return self._blocked([f"currentness_unresolved:{exc}"])
+        stale_targets = [f"current_hash:{target}" for target, observed in admitted_target_hashes.items()
+                         if observed != request["current_hashes"].get(target)]
+        if stale_targets:
+            return self._blocked(stale_targets)
         manifest = {
             "manifest_id": _manifest_id(request), "request": request,
-            "admitted_target_hashes": {target: self.observe(target) for target in request["targets"]},
+            "admitted_target_hashes": admitted_target_hashes,
             "admitted_at": int(time.time()),
         }
         return {"outcome": "admitted", "manifest_id": manifest["manifest_id"], "approved_reversal_manifest": manifest,
@@ -135,6 +153,18 @@ class RevertChangesService:
                 account["effects"][index]["error"] = str(exc)
                 outcome = "failed" if account["applied_effect_count"] == 0 else "partial_failure"
                 return self._terminal(outcome, manifest_id, request, account, start_receipt)
+            try:
+                observed_result_hash = self.observe(effect["target_id"])
+            except Exception as exc:
+                account["effects"][index]["status"] = "uncertain"
+                account["effects"][index]["error"] = f"completed capability result observation unresolved: {exc}"
+                account["effects"][index]["receipt"] = dict(receipt)
+                return self._terminal("partial_failure", manifest_id, request, account, start_receipt)
+            if observed_result_hash != effect["expected_result_hash"]:
+                account["effects"][index]["status"] = "uncertain"
+                account["effects"][index]["error"] = "completed capability did not establish expected_result_hash"
+                account["effects"][index]["receipt"] = dict(receipt)
+                return self._terminal("partial_failure", manifest_id, request, account, start_receipt)
             account["effects"][index]["status"] = "completed"
             account["effects"][index]["receipt"] = dict(receipt)
             account["applied_effect_count"] += 1
@@ -195,16 +225,68 @@ class RevertChangesService:
         elif decision.get("approved_effect_ids") != ids: errors.append("effect_order")
         if not isinstance(permission, Mapping) or permission.get("granted") is not True: errors.append("executor_permission")
         for effect in effects:
-            if not isinstance(effect, Mapping) or not {"target_id", "expected_current_hash", "expected_result_hash", "expected_before", "expected_after", "before_evidence", "after_evidence"} <= set(effect):
+            required_effect = {
+                "effect_id", "target_id", "expected_current_hash", "expected_result_hash", "expected_before",
+                "expected_after", "before_evidence", "after_evidence", "capability_binding",
+            }
+            if not isinstance(effect, Mapping) or not required_effect <= set(effect):
                 errors.append("effect_binding")
                 continue
+            effect_id = effect.get("effect_id")
+            if not isinstance(effect_id, str) or not effect_id:
+                errors.append("effect_id")
+                continue
+            if not isinstance(effect.get("target_id"), str) or not effect["target_id"]:
+                errors.append(f"target:{effect_id}")
+            if not all(isinstance(effect.get(field), str) and effect[field] for field in ("expected_before", "expected_after", "before_evidence", "after_evidence")):
+                errors.append(f"effect_evidence:{effect_id}")
+            if not all(isinstance(effect.get(field), str) and _SHA256.fullmatch(effect[field]) for field in ("expected_current_hash", "expected_result_hash")):
+                errors.append(f"effect_hash:{effect_id}")
+            errors.extend(self._capability_binding_errors(effect))
             if effect["target_id"] not in request.get("targets", []): errors.append(f"target:{effect['effect_id']}")
             supplied_current = request.get("current_hashes", {}).get(effect["target_id"])
             if supplied_current not in {effect["expected_current_hash"], effect["expected_result_hash"]}:
                 errors.append(f"current_hash:{effect['effect_id']}")
         if not request.get("selected_change_refs"): errors.append("selected_change_refs")
         if not request.get("history_reference_evidence"): errors.append("history_reference_evidence")
+        try:
+            capability_errors = self.capability_validator(request)
+        except Exception as exc:
+            errors.append(f"capability_validation_unresolved:{exc}")
+        else:
+            if not isinstance(capability_errors, list) or not all(isinstance(item, str) for item in capability_errors):
+                errors.append("capability_validation_result")
+            else:
+                errors.extend(capability_errors)
         return errors
+
+    @staticmethod
+    def _capability_binding_errors(effect: Mapping[str, Any]) -> list[str]:
+        effect_id = str(effect.get("effect_id", "unknown"))
+        binding = effect.get("capability_binding")
+        if not isinstance(binding, Mapping) or set(binding) != _CAPABILITY_BINDING_FIELDS:
+            return [f"capability_binding:{effect_id}"]
+        capability_id = binding.get("capability_id")
+        if not isinstance(capability_id, str) or not capability_id:
+            return [f"capability_id:{effect_id}"]
+        if not isinstance(binding.get("parameters"), Mapping) or not isinstance(binding.get("target"), Mapping):
+            return [f"capability_packet:{effect_id}"]
+        permission = binding.get("permission_evidence")
+        if not isinstance(permission, Mapping) or set(permission) != _CAPABILITY_PERMISSION_FIELDS:
+            return [f"capability_permission:{effect_id}"]
+        if permission.get("capability_id") != capability_id or permission.get("granted") is not True:
+            return [f"capability_permission:{effect_id}"]
+        if not isinstance(permission.get("evidence_ref"), str) or not permission["evidence_ref"]:
+            return [f"capability_permission:{effect_id}"]
+        evidence_hash = permission.get("evidence_hash")
+        if not isinstance(evidence_hash, str) or not _SHA256.fullmatch(evidence_hash):
+            return [f"capability_permission:{effect_id}"]
+        evidence_refs = binding.get("evidence_refs")
+        if not isinstance(evidence_refs, list) or not evidence_refs or any(not isinstance(item, str) or not item for item in evidence_refs):
+            return [f"capability_evidence:{effect_id}"]
+        if effect["before_evidence"] not in evidence_refs or effect["after_evidence"] not in evidence_refs:
+            return [f"capability_evidence:{effect_id}"]
+        return []
 
     def _currentness_mismatches(self, request: Mapping[str, Any], manifest: Mapping[str, Any]) -> list[str]:
         observed = manifest.get("admitted_target_hashes", {})

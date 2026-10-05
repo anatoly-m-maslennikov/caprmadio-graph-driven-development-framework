@@ -12,7 +12,12 @@ from unittest.mock import patch
 
 APP = Path(__file__).resolve().parents[1]
 REPOSITORY = APP.parents[3]
-sys.path.insert(0, str(APP))
+PROMPTS = REPOSITORY / "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW"
+RELEASE_VERSION = REPOSITORY / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION"
+MCP = REPOSITORY / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP"
+for location in (APP, PROMPTS, RELEASE_VERSION, MCP):
+    if str(location) not in sys.path:
+        sys.path.insert(0, str(location))
 
 from selected_execution import (  # noqa: E402
     SelectedExecution,
@@ -22,6 +27,8 @@ from selected_execution import (  # noqa: E402
     manifest_relative_path,
     make_revert_action_handler,
 )
+from release_actions import PHASES  # noqa: E402
+from selected_routes import SELECTED_ROUTE_NAMES  # noqa: E402
 
 
 def digest(value: object) -> str:
@@ -404,7 +411,7 @@ class SelectedExecutionTests(unittest.TestCase):
         self.assertEqual(result["disposition"], "recording_pending")
         self.assertEqual(result["outcome"], "interrupted_pending")
 
-    def test_current_d547_manifest_verifies_all_thirteen_routes(self) -> None:
+    def test_current_d547_manifest_verifies_all_admitted_routes(self) -> None:
         """Exercise the physical producer schema, not the legacy mock shape."""
         manifest_path = REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -425,12 +432,16 @@ class SelectedExecutionTests(unittest.TestCase):
                 self.fail(f"{route['route']} D547 binding was refused: {error}")
             else:
                 accepted.add(graph["route"])
-        self.assertEqual(len(accepted), 13)
+        self.assertEqual(
+            [route["route"] for route in manifest["routes"]],
+            [*SELECTED_ROUTE_NAMES, "release_version"],
+        )
+        self.assertEqual(len(accepted), 16)
         self.assertEqual(accepted, {route["route"] for route in manifest["routes"]})
         self.assertIn("run_implementation_workflow", accepted)
         self.assertIn("build_applicable_methodology", accepted)
 
-    def test_current_d547_all_thirteen_routes_pass_prequeue_freeze_validation(self) -> None:
+    def test_current_d547_all_admitted_routes_pass_prequeue_freeze_validation(self) -> None:
         manifest_path = REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         frozen_routes: set[str] = set()
@@ -440,17 +451,25 @@ class SelectedExecutionTests(unittest.TestCase):
             frozen_routes.add(frozen["graph"]["route"])
         self.assertEqual(frozen_routes, {route["route"] for route in manifest["routes"]})
 
-    def test_current_d547_actions_have_builtin_context_scoped_handlers(self) -> None:
+    def test_current_d547_separates_generic_and_private_release_phase_handlers(self) -> None:
         manifest_path = REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json"
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        bound_actions = {
+        self.assertEqual([route["route"] for route in manifest["routes"]], [*SELECTED_ROUTE_NAMES, "release_version"])
+        generic_actions = {
             entry["action"]["atom_id"]
-            for route in manifest["routes"]
+            for route in manifest["routes"][:-1]
             for entry in route["ordered_steps"]
         }
         builtin = SelectedExecution(REPOSITORY).handlers
-        self.assertFalse(bound_actions - set(builtin))
+        self.assertFalse(generic_actions - set(builtin))
         self.assertIn("CA-O-131", builtin)
+        release = manifest["routes"][-1]
+        pairs = [
+            (entry["step"]["atom_id"], entry["action"]["atom_id"])
+            for entry in release["ordered_steps"]
+        ]
+        self.assertEqual(release["route"], "release_version")
+        self.assertEqual(pairs, [phase[:2] for phase in PHASES])
 
     def test_current_d547_update_graph_uses_only_actual_bound_nodes(self) -> None:
         selected, request = self.current_manifest_request("update_atom", "current-update")
@@ -475,9 +494,13 @@ class SelectedExecutionTests(unittest.TestCase):
         import implementation_actions
 
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016")
-        method_paths = [row["path"] for row in implementation_actions.current_source_bindings()
+        sources = implementation_actions.current_source_bindings(REPOSITORY)
+        method_paths = [row["path"] for row in sources
                         if row["atom_id"].startswith("CA-M-")]
-        projection = implementation_actions.prepare_method_projection(method_paths)
+        projection = implementation_actions.prepare_method_projection(method_paths, REPOSITORY)
+        workspace = self.root / "implementation-workspace"
+        workspace.mkdir()
+        workspace = workspace.resolve()
         calls: list[dict[str, object]] = []
         evaluation_calls = 0
 
@@ -503,8 +526,16 @@ class SelectedExecutionTests(unittest.TestCase):
             return {"result": results[step], "outputs": outputs, "evidence": [f"evidence:{step}"]}
 
         base = {
-            "source_bindings": implementation_actions.current_source_bindings(),
-            "permissions": {"allowed": True}, "method_projection": projection,
+            "selected_project": {
+                "kind": "selected_project",
+                "source_root": ".caprmedio_caprmedio",
+                "source_references": sources,
+            },
+            "source_bindings": sources,
+            "permissions": {"allowed": True, "implementation_workspace": {
+                "kind": "disposable_workspace", "path": str(workspace), "allow_write": True,
+            }},
+            "workspace": str(workspace), "method_projection": projection,
             "requirements_delivery": ["R/D"], "evaluations": ["E"],
             "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
             "golden_e2e": True, "baseline_command": "test", "retry": {"consumed": 0, "limit": 1},

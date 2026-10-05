@@ -11,6 +11,7 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import tempfile
@@ -26,6 +27,55 @@ ActionHandler = Callable[[dict[str, Any]], Mapping[str, Any]]
 
 class SelectedExecutionError(RuntimeError):
     """A selected request cannot safely progress through the queue."""
+
+
+class LifecycleAdmissionError(SelectedExecutionError):
+    """A source-derived lifecycle refusal before queue or Run admission."""
+
+    def __init__(self, code: str, message: str) -> None:
+        self.code = code
+        self.message = message
+        super().__init__(message)
+
+    def record(self) -> dict[str, str]:
+        return {"code": self.code, "message": self.message}
+
+
+def preflight_selected_lifecycle(root: Path, route: object, parameters: object) -> dict[str, Any] | None:
+    """Admit a status request from its authoritative model before a Run exists.
+
+    The native handler repeats this same source observation immediately before
+    its effect.  This early check is intentionally only an admission gate: it
+    does not retain caller-controlled model data or create Run/Journal state.
+    """
+    if route != "change_atom_status":
+        return None
+    import sys
+
+    tools_root = str(Path(__file__).resolve().parents[2] / "201_TOOLS")
+    if tools_root not in sys.path:
+        sys.path.insert(0, tools_root)
+    try:
+        import lifecycle_intents
+    except ImportError as error:
+        raise SelectedExecutionError("source-derived lifecycle admission is unavailable") from error
+    try:
+        preflight = lifecycle_intents.preflight_atom_lifecycle(
+            Path(root), "change_status", parameters,
+        )
+    except lifecycle_intents.LifecycleError as error:
+        raise LifecycleAdmissionError(error.code, str(error)) from error
+    # This source-derived, serializable seal is retained only by the preview
+    # observation and frozen queue request. It excludes the live Atom object
+    # and accepts no caller-authored status model.
+    return {
+        "operation": preflight["operation"],
+        "prior": dict(preflight["prior"]),
+        "requested_status": preflight["requested_status"],
+        "current_status": preflight["current_status"],
+        "status_model": dict(preflight["status_model"]),
+        "archive": preflight["archive"],
+    }
 
 
 def manifest_relative_path(root: Path) -> str:
@@ -246,8 +296,18 @@ class SelectedExecution:
                     "failed": "failed", "partial": "partial", "canceled": "cancelled",
                     "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
                 }.get(native_outcome, "interrupted_pending")
+                effects = result.get("effects")
+                changed_effects = [
+                    effect for effect in effects
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(effects, list) else []
+                effect_refs = paths(changed_effects)
+                history = result.get("history")
+                prior_revision = history.get("prior_revision") if isinstance(history, Mapping) else None
+                if isinstance(prior_revision, Mapping) and isinstance(prior_revision.get("path"), str):
+                    effect_refs = sorted({*effect_refs, prior_revision["path"]})
                 return {"result": result_label, "terminal_outcome": terminal_outcome,
-                        "effect_refs": paths(result.get("effects")), "native_result": result}
+                        "effect_refs": effect_refs, "native_result": result}
 
             def assess_update_identity(context: dict[str, Any]) -> dict[str, Any]:
                 """CA-O-067 is a read-only assessment; O145 owns its edge."""
@@ -345,7 +405,10 @@ class SelectedExecution:
             }
             for action_id, handler in implementation_actions.ACTION_HANDLERS.items():
                 def implementation(context: dict[str, Any], handler: Any = handler) -> dict[str, Any]:
-                    result = handler(context["parameters"], agent=self.implementation_agent)
+                    result = handler(
+                        context["parameters"], agent=self.implementation_agent,
+                        selected_project_root=self.root,
+                    )
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("implementation Action returned an invalid queue envelope")
                     label = implementation_results.get(result["result"], result["result"])
@@ -373,7 +436,37 @@ class SelectedExecution:
                     outcome = result["outcome"]
                     step_id = context["step_definition_id"]
                     output: dict[str, Any] = {"result": outcome, "effect_refs": [], "native_result": result}
-                    if outcome in {"blocked", "pending_recording"}:
+                    if (step_id == "CA-O-157" and context["action_definition_id"] == "CA-O-009"
+                            and outcome == "pending_recording" and result.get("apply_status") == "APPLIED"):
+                        publication = result.get("publication")
+                        frontier = result.get("source_frontier_digest")
+                        planned = publication.get("output_plan") if isinstance(publication, Mapping) else None
+                        output_digest = publication.get("output_digest") if isinstance(publication, Mapping) else None
+                        if (not isinstance(frontier, str) or not frontier or not isinstance(output_digest, str)
+                                or not output_digest or not isinstance(planned, list)):
+                            output.update(result="blocked", terminal_outcome="interrupted_pending")
+                        else:
+                            paths = sorted({
+                                item["output_path"] for item in planned
+                                if isinstance(item, Mapping) and isinstance(item.get("output_path"), str)
+                            })
+                            if len(paths) != len(planned):
+                                output.update(result="blocked", terminal_outcome="interrupted_pending")
+                            else:
+                                output.update(
+                                    result="publication recording required",
+                                    # The graph remains interim until its completed Action receipt is
+                                    # persisted below; this requests that receipt's terminal outcome.
+                                    terminal_outcome="completed",
+                                    effect_refs=paths,
+                                    compiler_publication_recording={
+                                        "on_recorded_result": "completed publication from the still-valid final frontier",
+                                        "source_frontier_digest": frontier,
+                                        "output_digest": output_digest,
+                                        "output_paths": paths,
+                                    },
+                                )
+                    elif outcome in {"blocked", "pending_recording"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     elif step_id == "CA-O-152" and outcome == "assessed":
                         output["result"] = "complete exact selection"
@@ -399,12 +492,24 @@ class SelectedExecution:
                 available[action_id] = compiler
         except ImportError:
             pass
+        try:
+            import query_actions
+
+            available.update(query_actions.ACTION_HANDLERS)
+        except ImportError:
+            pass
         return available
 
     def run_directory(self, run_id: str) -> Path:
         if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
             raise SelectedExecutionError("invalid selected Run ID")
-        return self.root / ".caprmedio_install/workflow_orchestrator/runs" / run_id
+        folder = self.root / ".caprmedio_install/workflow_orchestrator/runs" / run_id
+        cursor = self.root
+        for part in folder.relative_to(self.root).parts:
+            cursor = cursor / part
+            if cursor.is_symlink() or (cursor.exists() and not cursor.is_dir()):
+                raise SelectedExecutionError("selected Run directory contains an unsafe carrier")
+        return folder
 
     def _safe_path(self, relative: str) -> Path:
         if not isinstance(relative, str) or not relative:
@@ -432,12 +537,19 @@ class SelectedExecution:
         with tempfile.NamedTemporaryFile(dir=path.parent, prefix=f".{path.name}.", delete=False) as temporary:
             temporary.write(canonical_json(value))
             temporary.flush()
-            __import__("os").fsync(temporary.fileno())
+            os.fsync(temporary.fileno())
             temporary_path = Path(temporary.name)
         temporary_path.replace(path)
+        directory = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
 
     @staticmethod
     def _read(path: Path) -> dict[str, Any]:
+        if path.is_symlink():
+            raise SelectedExecutionError("saved selected execution evidence cannot be a symlink")
         try:
             value = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError) as error:
@@ -593,12 +705,13 @@ class SelectedExecution:
         entry_step: str | None = None
         if "ordered_steps" in route:
             validated_steps, entry_step = self._d547_steps(route)
-            return {
+            graph = {
                 "route": route_name, "workflow": validated_workflow,
                 "steps": validated_steps, "entry_step": entry_step,
                 "native_action_calls": validated_native_calls,
                 "manifest_ref": manifest_ref, "manifest_digest": manifest_digest,
             }
+            return graph
         if not isinstance(steps, list) or not steps:
             raise SelectedExecutionError("selected Workflow must bind ordered Steps")
         validated_steps: list[dict[str, Any]] = []
@@ -627,7 +740,7 @@ class SelectedExecution:
             if len(step["on_result"]) != len(transitions):
                 raise SelectedExecutionError("selected On Result transition is invalid")
             validated_steps.append(step)
-        return {
+        graph = {
             "route": route_name,
             "workflow": validated_workflow,
             "steps": validated_steps,
@@ -636,6 +749,62 @@ class SelectedExecution:
             "manifest_ref": manifest_ref,
             "manifest_digest": manifest_digest,
         }
+        return graph
+
+    @staticmethod
+    def _validate_query_admission(graph: Mapping[str, Any], execution: Mapping[str, Any]) -> None:
+        """Keep native query input rejection ahead of selected-Run dispatch."""
+        if graph.get("route") not in {"find_and_fetch_artifacts", "find_and_fetch_journal_events"}:
+            return
+        steps = graph.get("steps")
+        if not isinstance(steps, list) or len(steps) != 1 or not isinstance(steps[0], Mapping):
+            raise SelectedExecutionError("query Workflow must bind exactly one Step")
+        step = steps[0]
+        actions = step.get("actions")
+        if not isinstance(actions, list) or len(actions) != 1 or not isinstance(actions[0], Mapping):
+            raise SelectedExecutionError("query Step must bind exactly one Action")
+        try:
+            import query_actions
+        except ImportError as error:
+            raise SelectedExecutionError("query request adapter is unavailable") from error
+        try:
+            query_actions.validate_query_parameters({
+                "route": graph["route"],
+                "workflow_definition_id": graph["workflow"]["atom_id"],
+                "step_definition_id": step["atom_id"],
+                "action_definition_id": actions[0]["atom_id"],
+                "parameters": execution.get("parameters"),
+            })
+        except query_actions.QueryActionError as error:
+            raise SelectedExecutionError("query request is not admitted") from error
+
+    def _validate_lifecycle_admission(
+        self, graph: Mapping[str, Any], execution: Mapping[str, Any], *,
+        expected_admission: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any] | None:
+        """Run source-derived status admission at each pre-Run queue boundary."""
+        current = preflight_selected_lifecycle(
+            self.root, graph.get("route"), execution.get("parameters"),
+        )
+        if current is None:
+            return None
+        expected = expected_admission
+        if expected is None:
+            receipt = execution.get("proposal_receipt")
+            freshness = receipt.get("source_freshness") if isinstance(receipt, Mapping) else None
+            observed = freshness.get("observed") if isinstance(freshness, Mapping) else None
+            expected = observed.get("lifecycle_admission") if isinstance(observed, Mapping) else None
+        if not isinstance(expected, Mapping):
+            raise LifecycleAdmissionError(
+                "status-preview-admission-missing",
+                "status execution requires the source-derived preview admission",
+            )
+        if canonical_json(dict(expected)) != canonical_json(current):
+            raise LifecycleAdmissionError(
+                "status-model-stale",
+                "authoritative status-model source changed after lifecycle admission",
+            )
+        return current
 
     @staticmethod
     def _support_definition(binding: Mapping[str, Any]) -> dict[str, Any]:
@@ -773,6 +942,12 @@ class SelectedExecution:
 
     def freeze(self, request: Mapping[str, Any]) -> dict[str, Any]:
         frozen = self._validated_freeze(request)
+        self._validate_query_admission(frozen["graph"], frozen["request"]["execution"])
+        lifecycle_admission = self._validate_lifecycle_admission(
+            frozen["graph"], frozen["request"]["execution"],
+        )
+        if lifecycle_admission is not None:
+            frozen["lifecycle_admission"] = lifecycle_admission
         run_id = frozen["request"]["run_id"]
         path = self.run_directory(run_id) / "selected_request.json"
         if path.exists():
@@ -841,7 +1016,27 @@ class SelectedExecution:
         merged["prior_results"] = list(prior_results)
         return merged
 
-    def _execute_graph(self, frozen: Mapping[str, Any], session: Any) -> dict[str, Any]:
+    @staticmethod
+    def _finish_selected_run(session: Any, requested_id: str, run_id: str, *,
+                             recovery: bool = False, **result: Any) -> Mapping[str, Any]:
+        """Reuse canonical finals, or record recovery without a second start."""
+        if not recovery:
+            return session.finish_run(run_id, **result)
+        terminal = session.terminal.get(requested_id)
+        if terminal is not None:
+            expected = {"run_id": run_id, "disposition": "terminal", **result}
+            if any(terminal.get(key) != value for key, value in expected.items()):
+                raise SelectedExecutionError("retained Run terminal differs from recovered graph evidence")
+            return dict(terminal)
+        if requested_id in session.interrupted:
+            if result.get("outcome") == "interrupted_pending":
+                # Retain the original uncertainty; do not invent another
+                # interruption or pretend a failed recovery attempt is final.
+                return dict(session.interrupted[requested_id])
+            return session.recover_run(run_id, **result)
+        return session.finish_run(run_id, **result)
+
+    def _execute_graph(self, frozen: Mapping[str, Any], session: Any, *, recovery: bool = False) -> dict[str, Any]:
         graph = frozen["graph"]
         request = frozen["request"]
         run_id = request["run_id"]
@@ -851,11 +1046,14 @@ class SelectedExecution:
             graph, self._declared_run_visit_limits(request["execution"]),
         )
         visit_counts: dict[str, int] = {}
+        restored_actions = set(getattr(session, "actual", {})) if recovery else set()
         next_step = graph["entry_step"]
+        journal_preparation = self._prepare_journal_query_before_run(graph, request["execution"])
         workflow_actual = session.start_run(run_id)
         workflow_run_id = workflow_actual["run_id"]
         results: list[dict[str, Any]] = []
         implementation_prior_results: list[dict[str, Any]] = []
+        structural_prior_results: list[dict[str, Any]] = []
         while next_step:
             step = steps.get(next_step)
             if step is None:
@@ -882,6 +1080,7 @@ class SelectedExecution:
                 if graph["workflow"]["atom_id"] == "CA-O-016":
                     parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
                 context = {
+                    "project_root": self.root,
                     "workflow_run_id": workflow_run_id,
                     "step_run_id": step_run_id,
                     "action_run_id": action_run_id,
@@ -901,9 +1100,30 @@ class SelectedExecution:
                     "session": session,
                     "requested_action_run_id": requested_action_id,
                 }
+                if graph.get("route") == "release_version":
+                    checkpoint_path = self.run_directory(run_id) / "release_action_run.json"
+                    context["checkpoint_writer"] = lambda payload: self._write(checkpoint_path, payload)
+                    context["checkpoint_reader"] = lambda: (
+                        self._read(checkpoint_path) if checkpoint_path.exists() else None
+                    )
+                    def read_progress(requested_id: str) -> dict[str, Any]:
+                        allowed = {row.get("requested_run_id") for row in
+                                   request["execution"].get("requested_runs", []) if row.get("kind") == "action"}
+                        if requested_id not in (allowed or {requested_action_id}):
+                            raise SelectedExecutionError("Release progress reader is outside the frozen Action set")
+                        return self._read(self.run_directory(run_id) / f"{requested_id}.json")
+                    context["checkpoint_progress_reader"] = read_progress
+                    context["restored_action"] = requested_action_id in restored_actions
+                if action["atom_id"] == "CA-O-162":
+                    context["journal_preparation"] = journal_preparation
+                if graph["workflow"]["atom_id"] == "CA-O-015":
+                    # This is executor-retained state only; structural Actions
+                    # never admit caller-provided prior-result assertions.
+                    context["structural_prior_results"] = list(structural_prior_results)
                 output = handler(context)
                 if not isinstance(output, Mapping) or not isinstance(output.get("result"), str):
                     raise SelectedExecutionError("native Action handler returned no declared result")
+                output = dict(output)
                 result_map = action.get("result_map", {})
                 if not isinstance(result_map, Mapping):
                     raise SelectedExecutionError("selected Action result map is invalid")
@@ -914,12 +1134,97 @@ class SelectedExecution:
                 if not isinstance(effect_refs, list) or any(not isinstance(item, str) for item in effect_refs):
                     raise SelectedExecutionError("native Action handler returned invalid effect references")
                 progress_path = self.run_directory(run_id) / f"{requested_action_id}.json"
-                self._write(progress_path, {"result": final_result, "action_run_id": action_run_id,
-                                            "native_result": output.get("native_result")})
+                progress = {"result": final_result, "action_run_id": action_run_id,
+                            "effect_refs": effect_refs,
+                            "native_result": output.get("native_result"),
+                            "compiler_publication_recording": output.get("compiler_publication_recording")}
+                if output.get("shared_action_recording") is not None:
+                    progress["shared_action_recording"] = output["shared_action_recording"]
+                self._write(progress_path, progress)
+                terminal_receipt: Mapping[str, Any] | None = None
                 if output.get("action_terminal_recorded") is not True:
-                    session.finish_run(action_run_id, outcome="completed",
-                                       result_ref=progress_path.relative_to(self.root).as_posix(),
-                                       effect_refs=effect_refs)
+                    action_outcome = output.get("terminal_outcome", "completed")
+                    if action_outcome not in {"completed", "no_op", "failed", "cancelled", "partial", "interrupted_pending"}:
+                        raise SelectedExecutionError("native Action handler returned an invalid terminal outcome")
+                    terminal_receipt = self._finish_selected_run(
+                        session, requested_action_id, action_run_id, recovery=recovery, outcome=action_outcome,
+                        result_ref=progress_path.relative_to(self.root).as_posix(),
+                        effect_refs=effect_refs,
+                    )
+                checkpoint_receipt = output.get("record_shared_receipt")
+                if checkpoint_receipt is not None:
+                    if graph.get("route") != "release_version" or not callable(checkpoint_receipt):
+                        raise SelectedExecutionError("private shared-recording callback is outside Release")
+                    checkpoint_receipt(terminal_receipt, list(session.pending), list(session.receipts))
+                recording = output.get("compiler_publication_recording")
+                if recording is not None:
+                    if not isinstance(recording, Mapping):
+                        raise SelectedExecutionError("compiler publication recording handoff is invalid")
+                    if (terminal_receipt is not None and terminal_receipt.get("disposition") == "terminal"
+                            and terminal_receipt.get("outcome") == "completed"):
+                        completed = recording.get("on_recorded_result")
+                        if not isinstance(completed, str):
+                            raise SelectedExecutionError("compiler publication recording handoff is incomplete")
+                        final_result = result_map.get(completed, completed)
+                        # The Tool's raw pending_recording result remains intact,
+                        # while this derived carrier can now reflect the sealed
+                        # shared Action receipt that admitted the graph edge.
+                        progress["result"] = final_result
+                        self._write(progress_path, progress)
+                    else:
+                        # The native effect is already applied, but without the
+                        # shared Action receipt it cannot take the published
+                        # On Result edge.  The durable dispatch result prevents
+                        # re-entering this Action while recording is pending.
+                        output["terminal_outcome"] = "interrupted_pending"
+                release_recording = output.get("shared_action_recording")
+                if release_recording is not None:
+                    if graph.get("route") != "release_version" or step["atom_id"] != "CA-O-179":
+                        raise SelectedExecutionError("Release recording handoff is outside its final selected Step")
+                    if not isinstance(release_recording, Mapping):
+                        raise SelectedExecutionError("Release recording handoff is invalid")
+                    completed = release_recording.get("on_recorded_result")
+                    edges = step.get("on_result", [])
+                    if (len(edges) != 1 or completed != edges[0].get("result")
+                            or edges[0].get("terminal") != "completed"):
+                        raise SelectedExecutionError("Release recording handoff differs from the frozen completion edge")
+                    if (isinstance(terminal_receipt, Mapping)
+                            and terminal_receipt.get("disposition") == "terminal"
+                            and terminal_receipt.get("outcome") == "completed"
+                            and terminal_receipt.get("run_id") == action_run_id
+                            and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
+                            and terminal_receipt.get("effect_refs") == effect_refs):
+                        final_result = completed
+                        progress["result"] = final_result
+                        self._write(progress_path, progress)
+                    else:
+                        final_result = "recording_pending"
+                        output["terminal_outcome"] = "interrupted_pending"
+                elif (graph.get("route") == "release_version"
+                        and isinstance(terminal_receipt, Mapping)
+                        and terminal_receipt.get("disposition") != "terminal"):
+                    # A saved effect result is not authority for the next phase
+                    # until the sole shared recorder has its exact terminal fact.
+                    final_result = "recording_pending"
+                    output["terminal_outcome"] = "interrupted_pending"
+                if (graph["workflow"]["atom_id"] == "CA-O-015"
+                        and isinstance(terminal_receipt, Mapping)
+                        and terminal_receipt.get("disposition") == "terminal"
+                        and terminal_receipt.get("outcome") == "completed"
+                        and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
+                        and terminal_receipt.get("effect_refs") == effect_refs):
+                    structural_prior_results.append({
+                        "workflow_run_id": workflow_run_id,
+                        "workflow_definition_id": graph["workflow"]["atom_id"],
+                        "step_run_id": step_run_id,
+                        "step_definition_id": step["atom_id"],
+                        "action_run_id": action_run_id,
+                        "action_definition_id": action["atom_id"],
+                        "result": final_result,
+                        "result_ref": progress_path.relative_to(self.root).as_posix(),
+                        "native_result": output.get("native_result"),
+                        "completed_receipt": dict(terminal_receipt),
+                    })
                 step_effect_refs.extend(effect_refs)
                 results.append({"step_run_id": step_run_id, "action_run_id": action_run_id,
                                 "step_definition_id": step["atom_id"],
@@ -954,15 +1259,15 @@ class SelectedExecution:
                 self._write(result_path, output)
                 result_ref = result_path.relative_to(self.root).as_posix()
                 effect_refs = sorted({reference for row in results for reference in row["effect_refs"]})
-                session.finish_run(step_run_id, outcome=terminal, result_ref=result_ref,
-                                   effect_refs=step_effect_refs)
-                session.finish_run(workflow_run_id, outcome=terminal, result_ref=result_ref,
-                                   effect_refs=effect_refs)
+                self._finish_selected_run(session, requested_step_id, step_run_id, recovery=recovery,
+                                          outcome=terminal, result_ref=result_ref, effect_refs=step_effect_refs)
+                self._finish_selected_run(session, run_id, workflow_run_id, recovery=recovery,
+                                          outcome=terminal, result_ref=result_ref, effect_refs=effect_refs)
                 return {**output, "result_ref": result_ref, "effect_refs": effect_refs}
             step_result_path = self.run_directory(run_id) / f"{requested_step_id}.json"
             self._write(step_result_path, {"result": final_result, "step_run_id": step_run_id,
                                             "action_results": results})
-            session.finish_run(step_run_id, outcome="completed",
+            self._finish_selected_run(session, requested_step_id, step_run_id, recovery=recovery, outcome="completed",
                                result_ref=step_result_path.relative_to(self.root).as_posix(),
                                effect_refs=step_effect_refs)
             next_step = transition["next"]
@@ -970,7 +1275,39 @@ class SelectedExecution:
                 raise SelectedExecutionError("selected transition target is invalid")
         raise SelectedExecutionError("selected Workflow has no terminal result")
 
-    def _shared_dispatch(self, frozen: Mapping[str, Any]) -> dict[str, Any]:
+    def _prepare_journal_query_before_run(
+        self, graph: Mapping[str, Any], execution: Mapping[str, Any],
+    ) -> Any | None:
+        """Seal CA-O-163's source after generic admission but before Run evidence."""
+        if graph.get("route") != "find_and_fetch_journal_events":
+            return None
+        try:
+            import query_actions
+        except ImportError as error:
+            raise SelectedExecutionError("Journal query adapter is unavailable") from error
+        steps = graph.get("steps")
+        if not isinstance(steps, list) or len(steps) != 1 or not isinstance(steps[0], Mapping):
+            raise SelectedExecutionError("Journal query route must retain exactly one source Step")
+        step = steps[0]
+        actions = step.get("actions")
+        if step.get("atom_id") != "CA-O-163" or not isinstance(actions, list) or len(actions) != 1:
+            raise SelectedExecutionError("Journal query route must retain CA-O-163 and one Action")
+        action = actions[0]
+        if not isinstance(action, Mapping) or action.get("atom_id") != "CA-O-162":
+            raise SelectedExecutionError("Journal query route must retain CA-O-162")
+        context = {
+            "route": graph["route"],
+            "workflow_definition_id": graph["workflow"]["atom_id"],
+            "step_definition_id": step["atom_id"],
+            "action_definition_id": action["atom_id"],
+            "parameters": execution.get("parameters"),
+        }
+        try:
+            return query_actions.prepare_journal_query(self.root, context)
+        except query_actions.QueryActionError as error:
+            raise SelectedExecutionError(str(error)) from error
+
+    def _shared_tracker(self, frozen: Mapping[str, Any]) -> Any:
         """Late import keeps APPS importable while the shared service is replaced."""
         import sys
         tools_root = str(Path(__file__).resolve().parents[2] / "201_TOOLS")
@@ -978,17 +1315,249 @@ class SelectedExecution:
             sys.path.insert(0, tools_root)
         from workflow_run_support import RunTracker  # owned by P1510
 
-        execution = dict(frozen["request"]["execution"])
-
         def observe(request: dict[str, Any]) -> dict[str, Any]:
             graph = self._revalidate(frozen)
-            return {"selected": request.get("operation_route") == graph["route"], "current": True,
+            lifecycle_admission = preflight_selected_lifecycle(
+                self.root, graph.get("route"), request.get("parameters"),
+            )
+            lifecycle_current = (
+                lifecycle_admission is None
+                or canonical_json(lifecycle_admission) == canonical_json(frozen.get("lifecycle_admission"))
+            )
+            return {"selected": request.get("operation_route") == graph["route"], "current": lifecycle_current,
                     "observed": {"manifest_ref": graph["manifest_ref"],
-                                 "manifest_digest": graph["manifest_digest"]}}
+                                 "manifest_digest": graph["manifest_digest"],
+                                 **({"lifecycle_admission": lifecycle_admission}
+                                    if lifecycle_admission is not None else {})}}
 
-        tracker = RunTracker(self.root, source_observer=observe,
-                             executor=lambda _request, session: self._execute_graph(frozen, session))
-        return tracker.run_selected_operation(execution)
+        return RunTracker(self.root, source_observer=observe,
+                          executor=lambda _request, session: self._execute_graph(frozen, session))
+
+    def _shared_dispatch(self, frozen: Mapping[str, Any]) -> dict[str, Any]:
+        return self._shared_tracker(frozen).run_selected_operation(dict(frozen["request"]["execution"]))
+
+    def recover_release(self, frozen: Mapping[str, Any]) -> dict[str, Any]:
+        """Explicitly reconcile one accepted Release; never redispatch intent.
+
+        This private-runtime capability is not registration of a public MCP
+        route.  The canonical dispatch and Journal, not progress or checkpoint
+        assertions, establish which actual Runs are already in existence.
+        """
+        import sys
+        tools_root = Path(__file__).resolve().parents[2] / "201_TOOLS"
+        for location in (tools_root, tools_root / "RELEASE_VERSION"):
+            if str(location) not in sys.path:
+                sys.path.insert(0, str(location))
+        import work_journal
+        from release_checkpoint import dump_release_checkpoint, extract_pending_recordings, load_release_checkpoint
+        from selected_run_recovery import read_selected_run_evidence, validate_selected_run_events
+        from workflow_run_support import RunExecutionSession, _canonical_digest, _proposal, _validate_common
+
+        request = frozen.get("request") if isinstance(frozen, Mapping) else None
+        if not isinstance(request, Mapping) or not isinstance(request.get("run_id"), str):
+            raise SelectedExecutionError("saved Release request is invalid")
+        run_id = request["run_id"]
+        graph = self._revalidate(frozen)
+        if graph.get("route") != "release_version":
+            raise SelectedExecutionError("selected recovery is admitted only for Release Version")
+        execution = _validate_common(request["execution"])
+        tracker = self._shared_tracker(frozen)
+        observation = tracker._observe(execution)
+        if not observation["selected"] or not observation["current"]:
+            raise SelectedExecutionError("Release recovery source admission is not current")
+        proposal = _proposal(execution, observation)
+        tracker._validate_execute(execution, proposal, _canonical_digest(proposal))
+        folder = self.run_directory(run_id)
+
+        with work_journal._event_lock(self.root, f"selected-release-recovery:{execution['request_id']}"):
+            evidence = read_selected_run_evidence(self.root, execution)
+            checkpoint = self._read(folder / "release_action_run.json")
+            private_run, recordings = load_release_checkpoint(
+                checkpoint, expected_request=execution["parameters"], expected_workflow_run_id=run_id,
+            )
+            if private_run.in_progress is not None:
+                raise SelectedExecutionError("Release has an unresolved in-progress effect; recovery cannot replay it")
+            pending_packets = extract_pending_recordings(checkpoint)
+            pending_ids = [packet["event_id"] for packet in pending_packets.values()]
+            accepted_path = folder / "accepted.json"
+            if accepted_path.exists():
+                previous = self._read(accepted_path).get("result")
+                if not isinstance(previous, Mapping):
+                    raise SelectedExecutionError("saved dispatch result is invalid")
+                retained = previous.get("pending_event_ids", [])
+                if not isinstance(retained, list) or any(not isinstance(item, str) or not item for item in retained):
+                    raise SelectedExecutionError("saved pending event identities are invalid")
+                pending_ids.extend(retained)
+            pending_ids = list(dict.fromkeys(pending_ids))
+            canonical_events = [item["event"] for item in evidence["events"]]
+            canonical_by_id = {event["event_id"]: event for event in canonical_events}
+            initial_session = RunExecutionSession.restore(tracker, execution, evidence["events"])
+            pending_events: list[dict[str, Any]] = []
+            for event_id in pending_ids:
+                event = canonical_by_id.get(event_id)
+                already_recorded = event is not None
+                if not already_recorded:
+                    retained, event, _append_context, _path = work_journal._read_pending_event(self.root, event_id)
+                    if (retained["result_ref"] != event["result_ref"]
+                            or retained["effect_refs"] != event["effect_refs"]):
+                        raise SelectedExecutionError("pending recording references differ from its sealed original event")
+                matching = [(index, packet) for index, packet in pending_packets.items() if packet["event_id"] == event_id]
+                if matching and matching[0][1]["event_outcome"] != event["outcome"]:
+                    raise SelectedExecutionError("pending checkpoint outcome differs from its original sealed event")
+                if matching:
+                    phase_context = private_run.contexts.get(matching[0][0])
+                    actual = event.get("run", {})
+                    if (phase_context is None or actual.get("kind") != "action"
+                            or actual.get("run_id") != phase_context.action_run_id
+                            or actual.get("parent_run_id") != phase_context.step_run_id
+                            or actual.get("definition", {}).get("atom_id") != phase_context.action_atom_id):
+                        raise SelectedExecutionError("pending event differs from its exact checkpoint phase occurrence")
+                self._validate_release_pending_progress(folder, initial_session, event)
+                if not already_recorded:
+                    pending_events.append(event)
+            # Validate the entire recovered lifecycle before the first append;
+            # arbitrary IDs in a progress carrier cannot admit foreign events.
+            validate_selected_run_events(execution, canonical_events + pending_events)
+            for event in pending_events:
+                work_journal.recover_pending_event(self.root, event["event_id"])
+            evidence = read_selected_run_evidence(self.root, execution)
+            session = RunExecutionSession.restore(tracker, execution, evidence["events"])
+            workflow = session.actual.get(run_id)
+            if not isinstance(workflow, Mapping):
+                raise SelectedExecutionError("Release recovery has no canonical Workflow start")
+            terminal = session.terminal.get(run_id)
+            if terminal is not None:
+                self._validate_release_saved_result(folder, workflow["run_id"], terminal)
+                if terminal.get("outcome") == "completed":
+                    exact_recordings = self._validate_release_complete_frontier(frozen, session, private_run)
+                    self._write(folder / "release_action_run.json", dump_release_checkpoint(
+                        private_run, shared_recordings=exact_recordings, pending_recordings={},
+                    ))
+            elif run_id not in session.interrupted:
+                raise SelectedExecutionError("Release has no canonical interruption; a live or uncertain Run cannot be resumed")
+            else:
+                # Source/permission seals are reopened after recording recovery
+                # and before any previously unstarted phase is admitted.
+                self._revalidate(frozen)
+                current = tracker._observe(execution)
+                current_proposal = _proposal(execution, current)
+                if not current["selected"] or not current["current"]:
+                    raise SelectedExecutionError("Release recovery admission changed before continuation")
+                tracker._validate_execute(execution, current_proposal, _canonical_digest(current_proposal))
+                self._execute_graph(frozen, session, recovery=True)
+            result = tracker._session_result(execution, proposal, session)
+            # Only canonical final Workflow evidence may replace the prior
+            # pending dispatch result.  Intent is retained for every other case.
+            final = session.terminal.get(run_id)
+            if (not session.pending and isinstance(final, Mapping)
+                    and final.get("disposition") == "terminal"):
+                if final.get("outcome") == "completed":
+                    latest = self._read(folder / "release_action_run.json")
+                    final_run, _final_recordings = load_release_checkpoint(
+                        latest, expected_request=execution["parameters"], expected_workflow_run_id=run_id,
+                    )
+                    exact = self._validate_release_complete_frontier(frozen, session, final_run)
+                    self._write(folder / "release_action_run.json", dump_release_checkpoint(
+                        final_run, shared_recordings=exact, pending_recordings={},
+                    ))
+                self._write(accepted_path, {"result": result})
+                (folder / "dispatch-intent.json").unlink(missing_ok=True)
+            return result
+
+    def _validate_release_pending_progress(self, folder: Path, session: Any,
+                                           event: Mapping[str, Any]) -> None:
+        """Bind pending original terminal bytes to the saved graph observation."""
+        if event.get("event") == "started":
+            return  # Full request/lineage binding is checked by reconstruction.
+        actual = event.get("run")
+        if not isinstance(actual, Mapping):
+            raise SelectedExecutionError("pending Release event has no Run")
+        if actual.get("kind") == "action":
+            candidates = [(requested_id, record) for requested_id, record in session.actual.items()
+                          if record.get("run_id") == actual.get("run_id") and record == actual]
+            if len(candidates) != 1:
+                raise SelectedExecutionError("pending Release Action occurrence is ambiguous")
+            progress_path = folder / f"{candidates[0][0]}.json"
+            progress = self._read(progress_path)
+            expected_ref = progress_path.relative_to(self.root).as_posix()
+            if (event.get("result_ref") != expected_ref or progress.get("action_run_id") != actual.get("run_id")
+                    or progress.get("effect_refs") != event.get("effect_refs")):
+                raise SelectedExecutionError("pending Release Action does not match its saved observation")
+        else:
+            result_ref = event.get("result_ref")
+            if result_ref is not None:
+                path = self._safe_path(result_ref)
+                if path.parent != folder:
+                    raise SelectedExecutionError("pending Release parent result is outside its Run")
+                self._read(path)
+
+    def _validate_release_complete_frontier(self, frozen: Mapping[str, Any], session: Any,
+                                            private_run: Any) -> dict[int, dict[str, Any]]:
+        """A completed Workflow requires every exact phase, not a final flag."""
+        from release_actions import PHASES
+        graph = frozen["graph"]
+        steps = graph["steps"]
+        if (len(steps) != len(PHASES) or set(private_run.contexts) != set(range(len(PHASES)))
+                or set(private_run.results) != set(range(len(PHASES)))):
+            raise SelectedExecutionError("completed Release lacks its complete ten-phase typed frontier")
+        # Native retirement intentionally remains pending: its sole shared
+        # completed receipt, not mutation of the native result, closes phase 10.
+        retirement = private_run.results[len(PHASES) - 1]
+        shared_retired = (retirement.outcome == "pending" and retirement.effect_outcome == "retired"
+                          and isinstance(retirement.shared_action_recording, Mapping))
+        expected_frontier = len(PHASES) - 1 if shared_retired else len(PHASES)
+        if (private_run.next_phase != expected_frontier or private_run.in_progress is not None
+                or (private_run.stopped and not shared_retired)):
+            raise SelectedExecutionError("completed Release has an unfinished or uncertain phase frontier")
+        exact: dict[int, dict[str, Any]] = {}
+        requested_workflow = frozen["request"]["run_id"]
+        workflow = session.actual[requested_workflow]
+        for index, step in enumerate(steps):
+            context = private_run.contexts[index]
+            result = private_run.results[index]
+            requested_step = self._requested_step_id(requested_workflow, index + 1, 1)
+            requested_action = f"{requested_step}:action:1"
+            actual_step = session.actual.get(requested_step, {})
+            actual_action = session.actual.get(requested_action, {})
+            terminal = session.terminal.get(requested_action, {})
+            step_terminal = session.terminal.get(requested_step, {})
+            expected_pair = PHASES[index][:2]
+            if (len(step["actions"]) != 1 or (step["atom_id"], step["actions"][0]["atom_id"]) != expected_pair
+                    or context.workflow_run_id != workflow["run_id"]
+                    or context.step_run_id != actual_step.get("run_id")
+                    or context.action_run_id != actual_action.get("run_id")
+                    or (context.step_atom_id, context.action_atom_id) != expected_pair
+                    or actual_action.get("parent_run_id") != actual_step.get("run_id")
+                    or actual_step.get("parent_run_id") != workflow["run_id"]
+                    or (result.outcome != "completed" and not (index == len(PHASES) - 1 and shared_retired))
+                    or step_terminal.get("disposition") != "terminal" or step_terminal.get("outcome") != "completed"):
+                raise SelectedExecutionError("completed Release has a missing or mismatched phase occurrence")
+            progress_path = self.run_directory(requested_workflow) / f"{requested_action}.json"
+            progress = self._read(progress_path)
+            receipt = terminal.get("event_receipt")
+            edges = step["on_result"]
+            effects = list(result.effect_evidence_refs)
+            if (len(edges) != 1 or progress.get("result") != edges[0].get("result")
+                    or progress.get("action_run_id") != context.action_run_id or progress.get("effect_refs") != effects
+                    or terminal.get("disposition") != "terminal" or terminal.get("outcome") != "completed"
+                    or terminal.get("run_id") != context.action_run_id
+                    or terminal.get("result_ref") != progress_path.relative_to(self.root).as_posix()
+                    or terminal.get("effect_refs") != effects or not isinstance(receipt, Mapping)
+                    or receipt.get("event_id") != terminal.get("event_id")
+                    or receipt not in session.receipts):
+                raise SelectedExecutionError("completed Release phase lacks exact canonical receipt and progress proof")
+            exact[index] = {"terminal_outcome": "completed", "receipt_refs": (receipt["event_id"],)}
+        return exact
+
+    def _validate_release_saved_result(self, folder: Path, run_id: str, terminal: Mapping[str, Any]) -> None:
+        path = folder / "graph_result.json"
+        value = self._read(path)
+        effects = sorted({ref for row in value.get("step_results", []) for ref in row.get("effect_refs", [])})
+        if (terminal.get("disposition") != "terminal" or value.get("workflow_run_id") != run_id
+                or terminal.get("outcome") != value.get("outcome")
+                or terminal.get("result_ref") != path.relative_to(self.root).as_posix()
+                or terminal.get("effect_refs") != effects):
+            raise SelectedExecutionError("canonical Release final differs from its saved graph result")
 
     def dispatch(self, frozen: Mapping[str, Any], *, run_support: Callable[[Path, dict[str, Any], Callable[[Any], dict[str, Any]]], Mapping[str, Any]] | None = None) -> dict[str, Any]:
         request = frozen.get("request") if isinstance(frozen, Mapping) else None
@@ -1003,7 +1572,19 @@ class SelectedExecution:
         if intent.exists():
             return {"disposition": "recording_pending", "outcome": "interrupted_pending",
                     "workflow_run_id": run_id, "reason": "uncertain selected dispatch intent retained; no replay"}
-        self._revalidate(frozen)
+        graph = self._revalidate(frozen)
+        self._validate_query_admission(graph, request["execution"])
+        try:
+            self._validate_lifecycle_admission(
+                graph, request["execution"],
+                expected_admission=frozen.get("lifecycle_admission"),
+            )
+        except LifecycleAdmissionError as error:
+            return {
+                "disposition": "blocked", "outcome": "blocked", "workflow_run_id": run_id,
+                "effect_refs": [], "lifecycle_error": error.record(),
+                "diagnostics": [str(error)],
+            }
         self._write(intent, {"run_id": run_id, "state": "dispatching", "graph": frozen["graph"]})
         try:
             if run_support is None:

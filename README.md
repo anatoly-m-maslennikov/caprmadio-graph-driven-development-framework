@@ -8,21 +8,24 @@ If it can be built, CAPRMEDIO should help anyone build it if they are willing to
 
 In practice, it should make AI-assisted development reliable from the first idea to production without losing meaning, traceability, or learning.
 
+Even a fully AI-generated project should be understandable, controllable and **not slop**.
+
 ## What CAPRMEDIO is
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
 
 ## Why CAPRMEDIO works this way
 
-Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
+Prompts/Skills, MCP, Apps and execution Tools form the harness →\
 the project's meaning must not depend on them →\
 an explicit ontology/base model defines the core: concepts, relations and constraints.
 
 ### Ontology (methodology)
 
-Sessions are ephemeral →\
-we need a stable source of truth →\
-specification.
+The project is made of implemented decisions—yours and AI Agents' →\
+But sessions are ephemeral →\
+We need a **stable source of truth** →\
+It's the specification.
 
 Spec grows →\
 we need smaller units →\
@@ -39,11 +42,11 @@ Subjects link Atoms to Entities through `GOVERNS` and `DEPENDS_ON`.
 
 Different tasks need different views →\
 derive them from one authoritative source →\
-load only the context needed without duplicating authority.
+**load only the context needed without duplicating authority.**
 
 Natural-language phrases can be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
-explicit, checkable Claims.
+**explicit, checkable Claims.**
 
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
@@ -53,7 +56,7 @@ Operations for repeatable actions and workflows.
 
 Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
-trace results back to the specification.
+**trace results back to the specification.**
 
 Work changes the project →\
 Journal records changes and execution →\
@@ -61,19 +64,30 @@ observed outcomes create the next Concerns.
 
 ### Harness (engine)
 
-Files in folders are clear and inspectable →\
-they currently hold authority →\
-rescanning can become expensive →\
-a derived graph database index supports queries and views →\
-database state lives in `.caprmedio_runtime/`. Database authority could be a future migration.
+Ontology is big and complex →\
+operating a project with the framework should be simple →\
+harness, Tools and Prompts should show this complexity only when needed →\
+ontology and engine are the "backend"; Skills and Prompts are the "frontend".
 
-Deterministic work →\
-programmatic Tools →\
-less repeated model reasoning and token use.
+Skills vary a lot →\
+different people prefer different Skills →\
+the framework harness should support third-party Skills as a **replaceable frontend/interface**.
+
+Repeated model reasoning costs time and tokens →\
+every repeatable task that can be done deterministically should run programmatically →\
+**Tools save time and tokens.**
+
+Work that cannot be done deterministically →\
+LLM reasoning →\
+repeatable actions need reusable Prompts/Skills.
+
+Repeatable sequences of actions using Tools and Prompts/Skills →\
+Workflows define their steps and control flow.
 
 We cannot put everything into one prompt →\
-Tools retrieve context and assemble Prompts →\
-Workflow Orchestrator coordinates the steps.
+the built-in entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
+Tools retrieve the needed context and assemble Prompts/Skills →\
+MCP delivers them and exposes Tool and Workflow execution.
 
 Wide-context reasoning →\
 main session.
@@ -82,18 +96,24 @@ Narrow, repeatable work →\
 bounded execution contexts and structured results.
 
 Long actions should not block sessions →\
-background orchestration →\
+Workflow Orchestrator coordinates the steps in the background →\
 durable state, reconnectable runs, approvals and recovery.
 
-Agents need a consistent interface →\
-MCP exposes capabilities →\
-Skills guide their use.
+Files in folders are clear and inspectable →\
+they currently hold authority →\
+rescanning can become expensive →\
+a derived graph database index supports queries and views. Database authority could be a future migration.
 
-AI performs delegated work →\
-the Operator retains authority →\
-Evaluations check Claims and results.
+## Main framework architecture
 
-### Content roles and artifact forms
+### Node types
+
+- **Scope Unit:** one area of project responsibility, declared in the project structure.
+- **Atom:** one Claim in one scope, with a content role. Atoms belong to Scope Units; project-wide goals are the exception.
+- **Journal:** records of changes, execution and observed outcomes.
+- **Projection:** a derived, non-authoritative view of existing sources.
+
+### Content roles
 
 - **C — Concern:** problems, bugs, questions and opportunities.
 - **A — Analysis:** analysis reports and rationale.
@@ -105,13 +125,100 @@ Evaluations check Claims and results.
 - **I — Implementation:** code, tests, configuration and CI/CD pipelines implementing all RMED.
 - **O — Operations:** actions and workflows with steps to operate the project.
 
-Content roles and Atom/Journal/Projection forms are separate classifications. Both follow MECE (complete, non-overlapping categories within their scope) and DRY (no independently maintained duplicate authority).
+Each Atom content role has **Types**. Each Type has its own structure, properties, authoring rules and checks. For example, O has Action, Step, Workflow and Actor.
 
-CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
+Content roles describe purpose. Atom, Journal and Projection describe form.
 
-[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
+- **MECE:** cover the defined scope without overlap.
+- **DRY:** keep one source of meaning, not independent copies.
 
-Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
+**One coherent source of truth:** Atoms record Claims; actual Implementation shows what is built.
+
+### Scope units
+
+A Scope Unit groups Atoms for one part of the project, such as an app, feature or tool. Inside it, Atoms are organized by content role: Concerns, Plans, Requirements, Methods, and so on.
+
+[project_structure.toml](.caprmedio_caprmedio/project_structure.toml) defines Scope Units, their parents and their authority/Delivery paths. Folders follow this file.
+
+**Scope Unit levels** show nesting depth. The Project is level `0`. Each child is one level deeper: `1`, `2`, `3`, and so on.
+
+**Scope Units can be ordered or unordered:**
+
+- **Ordered:** has a `local_order` among ordered Scope Units with the same parent.
+- **Unordered:** has no `local_order`. The Project itself is Unordered.
+
+Order does not create dependencies. State dependencies separately. Folder numbers are for navigation; they do not set `local_order`.
+
+### Fractal structure
+
+Scope Units can fold one inside another. P Atoms can split into smaller P Atoms: epics, sub-epics, tasks and subtasks.
+
+**As many layers as needed. The same framework rules at every layer.** The structure must not contain cycles.
+
+### Atom tiers
+
+**Local tiers** show an Atom's authority inside its Scope Unit:
+
+- **Principle:** project principles.
+- **Core:** basic definitions and boundaries.
+- **General:** reusable rules.
+- **Standard:** work and implementation details.
+
+From higher to lower authority:
+
+- Project: Principle, Core, Standard.
+- Other Scope Units: Core, General, Standard.
+
+**Global tiers** give Atoms one authority number across the project. The number comes from the scope and Local Tier. Within the scope where a Claim applies, a lower number means higher authority.
+
+Project goals have Global Tier `-1` and no Local Tier. **Tiers are not work priority or folder depth.**
+
+### Ownership and claim scope
+
+- **Internal:** the project defines the meaning.
+- **External:** an outside source defines or imposes the meaning. The project records the source and how it applies.
+- **Relational:** a Claim targets another Scope Unit, or the Atom is not inside a Scope Unit.
+
+Internal/external say **who defines the meaning**. Relational says **where the Claim applies**.
+
+### Relations
+
+**Direct relations** link artifacts. Examples:
+
+- `child_of`: a parent Requirement.
+- `method_for`, `evaluation_for`, `delivery_for`: RMED support for a Requirement.
+- `derived_from`: the sources used.
+
+**Subjects** link Atoms to Entities:
+
+- `GOVERNS`: what the Claim governs.
+- `DEPENDS_ON`: what the Claim needs but does not govern.
+
+Subjects are links, not nodes.
+
+Scope Units + typed relations + Subjects →\
+**fetch the right part of the spec or other CAPRMEDIO content mechanically, or almost mechanically.**
+
+### Main projections
+
+There can be a lot of Atoms →\
+they can be compiled into one Projection →\
+**it is still a derived artifact, not a source of truth** →\
+for example: one prompt for how to write code, built from all M Atoms that apply to the Scope Unit.
+
+- **Entity Graph:** Entities and their relations, based on Subjects.
+- **Terms Graph:** terms and their allowed typed relations.
+- **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
+- **Applicable Methodology:** the rules that apply to the selected scope.
+- **Requirement Lineage Map:** Requirements traced back to their Principles.
+
+**Different views, one source.** Rebuild Projections from their sources.
+
+Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journals in `_journal/` and Projections in `_projection/`. Applicable Methodology, graph views and derived Journal views are Projections.
+
+### Extension and configuration
+
+**The framework is expandable and configurable.** You can add Types, Workflows, Tools and authoring rules. Put reusable additions in Extensions. Settings choose what to use and with which parameters. Framework rules still apply.
 
 ## Current boundaries
 

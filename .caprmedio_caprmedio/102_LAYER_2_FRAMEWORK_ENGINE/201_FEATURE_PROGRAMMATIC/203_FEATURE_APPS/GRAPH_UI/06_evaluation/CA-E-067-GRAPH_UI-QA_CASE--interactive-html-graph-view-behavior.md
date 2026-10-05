@@ -2,8 +2,8 @@
 subjects:
   governs: "evaluation"
   depends_on: []
-version: 14
-updated_at: 2026-09-23 04:25:00 +0400
+version: 15
+updated_at: "2026-10-05 00:10:14 +0000"
 llm_session_ids:
   - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
@@ -13,8 +13,24 @@ relations:
     - CA-M-153
   derived_from:
     - CA-A-057
+atom_id: CA-E-067
+content_role: Evaluation
+status: Active
+current_scope_unit: GRAPH_UI
+claim_target_scope_unit: GRAPH_UI
+local_tier: Standard
+global_tier: 14
+type: QA Case
 ---
-# Interactive HTML graph view behavior
+# Summary
+
+Interactive HTML graph view behavior
+
+## Scope
+
+GRAPH_UI contribution represented by this existing legacy Atom.
+
+## Claim
 
 ## Claim checked
 
@@ -22,11 +38,11 @@ the single generated MRT renders current active Requirement Subject **and** line
 
 ## Test case
 
-1. Create current `stg_requirements_subjects.md` **and** `stg_requirements_lineage_sections.md` files **in** multiple active structural-unit roots, materialize the MRT, **and** require exactly one `.caprmedio/mrt_atoms.html` with embedded JavaScript **and** presentation assets **and** no sibling script, stylesheet, data, index, view, **or** per-Atom HTML files.
+1. Create current `stg_requirements_subjects.md` **and** `stg_requirements_lineage_sections.md` at registered destinations beneath `.caprmedio_caprmedio/_projection/` for multiple selected declared Scope Units, materialize the MRT, **and** require exactly one `.caprmedio_caprmedio/_projection/mrt_atoms.html` with embedded JavaScript **and** presentation assets **and** no sibling script, stylesheet, data, index, view, **or** per-Atom HTML files.
 2. Require the MRT source-lineage manifest **to** name **every** consumed STG file **and** **every** underlying active Atom with canonical path **and** digest; require the Subject **and** lineage-section views **to** match the STG structure while node text, body, frontmatter, **and** live digest match the actual Atom.
 3. Change registered project scope paths **and** require the structural-unit filter tree **and** discovered STG set **to** change **without** code modification; exercise tier, structural-unit, **and** Requirement-subtype filters **and** require no inactive Requirement **to** become visible.
 4. Toggle RMED orphans **and** prove filtering never recomputes orphan status **or** invents an orphan merely because its neighbor is hidden.
-5. **in** `short` mode, require `<scope>-<number> <Summary>` from the exact Atom H1, body **without** frontmatter **in** a panel above the node on first click, **and** complete raw Atom source including frontmatter on second click.
+5. **in** `short` mode, require `<Atom ID> <Summary>` from the exact authored Summary value in the governed Atom carrier format, body **without** frontmatter **in** a panel above the node on first click, **and** complete raw Atom source including frontmatter on second click.
 6. **in** `detailed` mode, require the same label plus the actual full body **without** frontmatter above the node **and** complete raw Atom source including frontmatter on one click.
 7. Change one STG file **and** one Atom independently **after** MRT generation; require the embedded JavaScript **to** retrieve the current sources **and** visibly distinguish stale STG, stale MRT, **and** changed-Atom digest states.
 8. Preserve filter **and** focused-node state **in** the URL, keep **every** identity linked **to** its canonical Atom path, **and** prove deleting `mrt_atoms.html` changes no Atom, STG Projection, Journal, `GRAPH_SERVER`, Tool, **or** MCP capability.

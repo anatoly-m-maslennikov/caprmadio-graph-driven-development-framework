@@ -8,9 +8,13 @@ from pathlib import Path
 import subprocess
 import tempfile
 
+try:
+    from .image_reference import IMAGE, image_reference
+except ImportError:  # direct execution: docker/ is the import root
+    from image_reference import IMAGE, image_reference
+
 DIRECTORY = Path(__file__).resolve().parent
 SOURCE_ROOT = DIRECTORY.parents[4]
-IMAGE = "caprmedio-runtime:local"
 
 
 class Runtime:
@@ -23,7 +27,7 @@ class Runtime:
         environment = dict(
             os.environ,
             CAPRMEDIO_PROJECT_ROOT=str(self.root),
-            CAPRMEDIO_IMAGE=IMAGE,
+            CAPRMEDIO_IMAGE=image_reference(os.environ),
         )
         environment.pop("CAPRMEDIO_CODEX_AUTH_FILE", None)
         if not self.mock and self.auth_file:

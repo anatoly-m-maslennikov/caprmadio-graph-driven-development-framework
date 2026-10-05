@@ -11,8 +11,8 @@ status: Active
 subjects:
   governs: "Step"
   depends_on: ["Action", "Step Run", "Workflow Run", "Step/Agentic Execution Context"]
-version: 2
-updated_at: "2026-10-04 17:12:08 +0000"
+version: 3
+updated_at: "2026-10-05 01:39:17 +0000"
 relations:
   relates_to: [CA-O-128, CA-O-145, CA-R-1509, CA-R-1511, CA-R-1527]
 ---
@@ -26,7 +26,7 @@ This Step invokes exactly CA-O-128, apply authorized Atom lifecycle changes, as 
 
 ### Input and parameter binding
 
-Bind request kind, exactly one Create target or one existing current target/predecessor, its complete frozen Carrier/proposal or status/replacement mapping, current models/authority, permissions/effect admission, effect/recovery/Journal capabilities and check expectations from the exact admitted Workflow request and revalidated current evidence. For Replace preserve the complete accepted set of >=1 successors for that one predecessor. An ambiguous or multi-target/predecessor request returns invalid before invoking O128; separate requests require separate admitted Workflow Runs. Archive shortcut normalization remains subject to O128's actual status-model guard.
+Bind request kind, exactly one Create target or one existing current target/predecessor, its complete frozen Carrier/proposal or status/replacement mapping, current models/authority, permissions/effect admission, effect/recovery/Journal capabilities and check expectations from the exact admitted Workflow request and revalidated current evidence. For Change Status, bind actual target Content Role, optional Type, exact applicable model source/revision (including R1874 for Operations and R1875 for Analysis), current and requested status, transition result and the most-specific Delivery destination rule. Bind a declared Role/Type override only when it exists; otherwise bind the role model. A missing/ambiguous/unsupported model, forbidden transition, collision, or archive request without model-defined archival status returns its truthful unchanged outcome before O128. For Replace preserve the complete accepted set of >=1 successors for that one predecessor. An ambiguous or multi-target/predecessor request returns invalid before invoking O128; separate requests require separate admitted Workflow Runs. Archive shortcut normalization remains subject to O128's actual status-model guard.
 
 For Update, bind the exact identity-preserving assessment and target/proposal/evidence from the latest completed O145 Step Run in this Workflow whose O067 binding matches the current proposal; do not accept an arbitrary historical pass. For other kinds no Update assessment is fabricated. Bind prior effect/receipt evidence and actual Run/parent references from retained execution state, not guessed success.
 

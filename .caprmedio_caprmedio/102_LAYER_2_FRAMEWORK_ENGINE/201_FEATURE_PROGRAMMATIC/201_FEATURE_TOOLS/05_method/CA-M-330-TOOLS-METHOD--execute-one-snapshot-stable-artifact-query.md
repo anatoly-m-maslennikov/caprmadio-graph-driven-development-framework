@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 01:20:00 +0400"
+version: 3
+updated_at: "2026-10-05 04:58:25 +0400"
 subjects:
   governs: FIND_AND_FETCH_ARTIFACTS
   depends_on: [Tool, Artifact, Markdown, Journal]
@@ -31,12 +31,14 @@ evaluate and paginate only that retained snapshot in canonical identity order.
 
 ## Details
 
-Reuse the existing safe Markdown/frontmatter parser and shared RUN_SUPPORT/Work
-Journal library. Validate the full snapshot before accepting a result; preserve
-per-carrier diagnostics and reject ambiguity or incomplete reads. Apply
+Reuse the existing safe Markdown/frontmatter parser. Validate the full snapshot
+before accepting a result; preserve per-carrier diagnostics and reject ambiguity
+or incomplete reads. Apply
 CA-R-1850 without delegation to SQL, code, or eval; retain distinct
 frontmatter/section namespaces and generic identity policy. Fetch bodies only
 after matching identity and explicit selected request. Bind cursors to retained
 digest and exact retained members; continuation cannot enumerate again. Enforce
 resolved budgets and return measured coverage. No helper writes carriers,
-Projections, Runs, or Journal Events on its own.
+Projections, Runs, or Journal Events on its own. An actual admitted selected
+Action/Workflow uses CA-D-527 through CA-D-529 for shared Run and Journal
+recording.

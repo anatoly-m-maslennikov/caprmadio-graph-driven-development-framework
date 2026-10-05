@@ -54,12 +54,14 @@ class JournalQueryGoldenTest(unittest.TestCase):
         return path
 
     def test_e575_typed_pointer_filtering_missing_vs_null_and_rejections(self):
-        self.write_events(
+        path = self.write_events(
             "events.ndjson",
             {"event_id": "E-2", "optional": None, "nested": {"a/b": [False, {"~key": 2}]}, "flag": True},
             {"event_id": "E-1", "nested": {"a/b": [True, {"~key": 1}]}, "flag": 1},
+            {"event_id": "E-3", "phase": None, "flag": False},
         )
         snapshot = capture_snapshot(self.root)
+        before = path.read_bytes()
         matched = query(snapshot, {"filter": '"event:/optional" = null'})
         self.assertEqual(matched["results"], ["E-2"])
         nested = query(snapshot, {"filter": '"event:/nested/a~1b/1/~0key" = 2'})
@@ -74,10 +76,22 @@ class JournalQueryGoldenTest(unittest.TestCase):
             ["E-2"],
         )
         self.assertEqual(query(snapshot, {"filter": '"event:/flag" = true'})["results"], ["E-2"])
+        self.assertEqual(query(snapshot, {"filter": '"event:/flag" != true'})["results"], ["E-1", "E-3"])
+        self.assertEqual(query(snapshot, {"filter": '"event:/flag" IN (true, 1)'})["results"], ["E-1", "E-2"])
+        self.assertEqual(
+            query(snapshot, {"filter": '"event:/flag" = true AND "event:/optional" = null'})["results"],
+            ["E-2"],
+        )
+        self.assertEqual(
+            query(snapshot, {"filter": '"event:/flag" = true OR "event:/phase" = null'})["results"],
+            ["E-2", "E-3"],
+        )
+        self.assertEqual(query(snapshot, {"filter": 'NOT ("event:/flag" = true)'})["results"], ["E-1", "E-3"])
         for expression in ('"event:flag" = 1', '"event:/bad~2key" = 1', '"event:/flag.value" = 1', '"event:/flag" = __import__("os")'):
             outcome = query(snapshot, {"filter": expression})
             self.assertEqual(outcome["status"], "invalid")
             self.assertEqual(outcome["results"], [])
+        self.assertEqual(path.read_bytes(), before)
 
     def test_e576_default_selected_and_full_fetches(self):
         self.write_events("events.ndjson", {"event_id": "E-1", "name": "one", "nullable": None})
@@ -231,19 +245,25 @@ class JournalQueryGoldenTest(unittest.TestCase):
                 capture_snapshot(self.root, limits={"timeout_seconds": 1})
         snapshot = capture_snapshot(self.root)
         cases = (
-            ({"limits": {"max_request_bytes": 1}}, "request-limit-exceeded", "max_request_bytes", 1),
-            ({"filter": 'NOT NOT "event:/value" = 1', "limits": {"max_grammar_depth": 1}}, "grammar-depth-limit-exceeded", "max_grammar_depth", 2),
-            ({"filter": '"event:/value" = 1', "limits": {"max_filter_tokens": 1}}, "filter-token-limit-exceeded", "max_filter_tokens", 2),
-            ({"filter": '"event:/value" IN (1, 2)', "limits": {"max_in_members": 1}}, "in-members-limit-exceeded", "max_in_members", 2),
-            ({"mode": "fields", "select": ["event:/value", "event:/missing"], "limits": {"max_selected_fields": 1}}, "selected-fields-limit-exceeded", "max_selected_fields", 2),
-            ({"limit": 2, "limits": {"max_page_size": 1}}, "page-limit-exceeded", "max_page_size", 2),
+            ({"limits": {"max_request_bytes": 1}}, "request-limit-exceeded", "max_request_bytes", 1, "invalid"),
+            ({"filter": 'NOT NOT "event:/value" = 1', "limits": {"max_grammar_depth": 1}}, "grammar-depth-limit-exceeded", "max_grammar_depth", 2, "incomplete"),
+            ({"filter": '"event:/value" = 1', "limits": {"max_filter_tokens": 1}}, "filter-token-limit-exceeded", "max_filter_tokens", 2, "incomplete"),
+            ({"filter": '"event:/value" IN (1, 2)', "limits": {"max_in_members": 1}}, "in-members-limit-exceeded", "max_in_members", 2, "incomplete"),
+            ({"mode": "fields", "select": ["event:/value", "event:/missing"], "limits": {"max_selected_fields": 1}}, "selected-fields-limit-exceeded", "max_selected_fields", 2, "invalid"),
+            ({"limit": 2, "limits": {"max_page_size": 1}}, "page-limit-exceeded", "max_page_size", 2, "invalid"),
         )
-        for request, code, limit_name, minimum_consumed in cases:
+        for request, code, limit_name, minimum_consumed, status in cases:
             with self.subTest(code=code):
                 outcome = query(snapshot, request)
                 self.assertEqual(outcome["findings"][0]["code"], code)
+                self.assertEqual(outcome["status"], status)
+                self.assertEqual(
+                    outcome["coverage"], {"scanned": 0, "matched": 0, "returned": 0, "complete": False},
+                )
+                self.assertEqual(outcome["results"], [])
                 self.assertTrue(all("configured" in value and "consumed" in value for value in outcome["limits"].values()))
                 self.assertGreaterEqual(outcome["limits"][limit_name]["consumed"], minimum_consumed)
+                self.assertTrue(outcome["limits"][limit_name]["exhausted"])
 
     def test_parser_consumption_is_the_shared_parser_observation(self):
         self.write_events("events.ndjson", {"event_id": "E-1", "value": [[1], [2]]})
@@ -274,6 +294,27 @@ class JournalQueryGoldenTest(unittest.TestCase):
             bounded["limits"]["max_grammar_depth"]["consumed"],
             rejected_statistics["grammar_depth"],
         )
+
+    def test_rejected_selector_admission_retains_successful_parser_consumption(self):
+        self.write_events("events.ndjson", {"event_id": "E-1", "details": {"api_key": "do-not-leak"}})
+        snapshot = capture_snapshot(self.root)
+        cases = (
+            ('"event:bad" = 1', "invalid-event-selector"),
+            ('"event:/details" = {}', "protected-selector"),
+        )
+        for expression, code in cases:
+            with self.subTest(code=code):
+                _, statistics = parse_filter_with_stats(
+                    expression,
+                    max_depth=16,
+                    max_tokens=128,
+                    max_in_members=16,
+                )
+                outcome = query(snapshot, {"filter": expression})
+                self.assertEqual(outcome["findings"][0]["code"], code)
+                self.assertEqual(outcome["limits"]["max_filter_tokens"]["consumed"], statistics["tokens"])
+                self.assertEqual(outcome["limits"]["max_grammar_depth"]["consumed"], statistics["grammar_depth"])
+                self.assertEqual(outcome["limits"]["max_in_members"]["consumed"], statistics["in_members"])
 
     def test_limit_provenance_survives_snapshot_and_request_override(self):
         self.write_events("events.ndjson", {"event_id": "E-1"})

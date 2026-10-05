@@ -9,7 +9,7 @@ import os
 import re
 import sys
 import tomllib
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -84,6 +84,19 @@ def control_root(root: Path) -> Path:
     return (root / candidate).resolve()
 
 
+def project_identity_prefix(root: Path) -> str:
+    """Read the authoritative Project-owned Atom prefix from Project Settings."""
+
+    try:
+        settings = tomllib.loads((root.resolve() / SETTINGS_PATH).read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError) as error:
+        raise ToolError("project-settings-unavailable", "cannot read Project Settings identity") from error
+    prefix = settings.get("artifacts", {}).get("identity", {}).get("project_prefix")
+    if not isinstance(prefix, str) or re.fullmatch(r"[A-Za-z0-9]+", prefix) is None:
+        raise ToolError("project-settings-invalid", "artifacts.identity.project_prefix is invalid")
+    return prefix
+
+
 def safe_path(root: Path, value: str, *, must_exist: bool = False) -> Path:
     root = root.resolve()
     if not value or "\x00" in value:
@@ -118,12 +131,14 @@ def _role_directory(path: Path, control: Path) -> str | None:
 
 def _lifecycle(path: Path, control: Path) -> str:
     parts = {part.lower() for part in path.relative_to(control).parts}
-    if "archive" in parts:
+    if "archive" in parts or "archived" in parts:
         return "archived"
-    if "drafts" in parts:
+    if "draft" in parts or "drafts" in parts:
         return "draft"
     if "done" in parts:
         return "done"
+    if "resolved" in parts:
+        return "resolved"
     if "canceled" in parts or "cancelled" in parts:
         return "canceled"
     return "active"
@@ -195,7 +210,7 @@ def resolve_selector(root: Path, selector: str, atoms: Sequence[Atom] | None = N
     matches = [atom for atom in pool if selector == atom.relative or normalized == atom.filename
                or normalized == Path(atom.filename).stem or selector == atom.atom_id]
     if re.fullmatch(r"CA-[CAPRMEDO]-[0-9]+", selector):
-        for lifecycle in ("active", "done", "canceled", "archived"):
+        for lifecycle in ("active", "resolved", "done", "canceled", "archived"):
             current_matches = [atom for atom in matches if atom.lifecycle == lifecycle]
             if current_matches:
                 matches = current_matches
@@ -327,6 +342,37 @@ def replace_frontmatter_scalar(frontmatter: str, name: str, value: str) -> str:
     return (frontmatter + "\n" if frontmatter else "") + replacement
 
 
+def remove_frontmatter_scalar(frontmatter: str, name: str) -> str:
+    """Remove one top-level scalar without changing unrelated carrier bytes."""
+
+    expression = re.compile(rf"(?m)^{re.escape(name)}:\s*.*?(?:\n|$)")
+    matches = list(expression.finditer(frontmatter))
+    if len(matches) > 1:
+        raise ToolError("atom-frontmatter-invalid", f"Atom has duplicate {name} values")
+    return expression.sub("", frontmatter, count=1).rstrip("\n")
+
+
+def draft_revision_lineage(frontmatter: str) -> dict[str, Any] | None:
+    """Read the one serialized Draft provenance map without treating it as identity."""
+
+    raw = frontmatter_scalar(frontmatter, "revision_lineage")
+    if raw is None:
+        return None
+    try:
+        value = json.loads(raw)
+    except json.JSONDecodeError as error:
+        raise ToolError("draft-lineage-invalid", "revision_lineage must be one JSON-compatible YAML map") from error
+    if not isinstance(value, dict):
+        raise ToolError("draft-lineage-invalid", "revision_lineage must be one map")
+    return value
+
+
+def replace_draft_revision_lineage(frontmatter: str, lineage: Mapping[str, Any]) -> str:
+    """Serialize the source-governed Draft lineage map as one YAML map value."""
+
+    return replace_frontmatter_scalar(frontmatter, "revision_lineage", json.dumps(dict(lineage), sort_keys=True))
+
+
 def atom_version(atom: Atom) -> int:
     """Return the current carried Version without manufacturing a default."""
 
@@ -389,8 +435,21 @@ def create_atom_revision(root: Path, relative_path: str, frontmatter: str, conte
     if atom_id and any(atom.atom_id == atom_id for atom in scan_atoms(root)):
         raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
     prepared = _revision(normalized, creating=True)
+    history_ref = None
+    if _lifecycle(path, control_root(root)) == "draft":
+        # Local import avoids the retained-history module importing this writer.
+        from draft_history import append_draft_entry, reserve_history_entry
+        history_ref = reserve_history_entry(root)
+        prepared = replace_draft_revision_lineage(prepared, {"history_entry_ref": history_ref})
     _atomic_write(path, render(prepared, content))
-    return atom_from_path(root, path)
+    created = atom_from_path(root, path)
+    if history_ref is not None:
+        try:
+            append_draft_entry(root, created.relative, reference=history_ref, origin={"kind": "never_identified"})
+        except BaseException:
+            path.unlink(missing_ok=True)
+            raise
+    return created
 
 
 def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: str, content: str) -> Atom:
@@ -413,12 +472,56 @@ def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: 
     return atom_from_path(root, target)
 
 
-def preserve_atom_revision(root: Path, atom: Atom) -> Atom:
+def migrate_atom_identity_revision(root: Path, atom: Atom, relative_path: str, frontmatter: str, content: str) -> Atom:
+    """Persist one separately proven legacy-to-canonical identity encoding.
+
+    Admission and the old-to-new mapping belong to the sealed lifecycle caller,
+    not lookup. Preserve the source scope/role location and roll back both paths
+    if publication or removal fails. The caller preserves prior bytes first.
+    """
+
+    root = root.resolve()
+    target, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    if atom.atom_id is None or atom_id is None or atom_id == atom.atom_id:
+        raise ToolError("identity-mapping-invalid", "migration requires distinct explicitly bound legacy and canonical encodings")
+    if target.parent != atom.path.parent:
+        raise ToolError("identity-mapping-invalid", "identity migration cannot change the source scope or Content Role location")
+    if target.exists():
+        raise ToolError("destination-collision", f"Atom destination already exists: {target.relative_to(root)}")
+    # Include prior revisions and unnormalized owners: canonical IDs are never
+    # reusable merely because an old/current carrier is not normally parseable.
+    for candidate in control_root(root).rglob("*.md"):
+        match = ATOM_ID.search(candidate.name)
+        if match is not None and match.group(1) == atom_id:
+            raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
+        try:
+            candidate_frontmatter, _ = split_frontmatter(candidate.read_text(encoding="utf-8"))
+            if frontmatter_scalar(candidate_frontmatter, "atom_id") == atom_id:
+                raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
+        except (UnicodeDecodeError, OSError):
+            continue
+        except ToolError as error:
+            if error.code == "atom-id-collision":
+                raise
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, render(normalized, content))
+        observed = atom_from_path(root, target)
+        atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return observed
+
+
+def preserve_atom_revision(root: Path, atom: Atom, *, allow_nonactive: bool = False) -> Atom:
     """Copy one prior semantic revision to its native role-local history path."""
 
     root = root.resolve()
     control = control_root(root)
-    if atom.lifecycle != "active" or atom.atom_id is None:
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", f"only identified current Atoms can preserve history: {atom.relative}")
+    if not allow_nonactive and atom.lifecycle != "active":
         raise ToolError("atom-not-active", f"only active Atoms with stable identity can preserve history: {atom.relative}")
     role_name = _role_directory(atom.path, control)
     if role_name is None:
@@ -428,6 +531,11 @@ def preserve_atom_revision(root: Path, atom: Atom) -> Atom:
     if target.exists():
         raise ToolError("destination-collision", f"history destination already exists: {target.relative_to(root)}")
     _atomic_write(target, atom.path.read_bytes())
+    if frontmatter_scalar(atom.frontmatter, "atom_id") is None:
+        # Explicit legacy Update admission has already proven this identity.
+        # Keep its original historical bytes, without granting lookup fallback.
+        return replace(atom, path=target, relative=target.relative_to(root).as_posix(),
+                       filename=target.name, lifecycle="archived")
     return atom_from_path(root, target)
 
 
@@ -436,13 +544,13 @@ def archive_atom_revision(root: Path, atom: Atom, frontmatter: str, content: str
 
     root = root.resolve()
     control = control_root(root)
-    if atom.lifecycle != "active" or atom.atom_id is None:
-        raise ToolError("atom-not-active", f"only active Atoms with stable identity can be archived: {atom.relative}")
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", f"only identified current Atoms can be archived: {atom.relative}")
     role_name = _role_directory(atom.path, control)
     if role_name is None:
         raise ToolError("archive-location-missing", f"Atom has no content-role archive location: {atom.relative}")
     role = next(parent for parent in atom.path.parents if parent.name == role_name)
-    target = role / "archive" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}"
+    target = role / "archived" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}"
     target = target.resolve()
     if target.exists():
         raise ToolError("destination-collision", f"archive destination already exists: {target.relative_to(root)}")
@@ -450,6 +558,74 @@ def archive_atom_revision(root: Path, atom: Atom, frontmatter: str, content: str
     try:
         _atomic_write(target, render(frontmatter, content))
         atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
+
+
+def demote_atom_to_draft(root: Path, atom: Atom, frontmatter: str, content: str) -> Atom:
+    """Move one identified current revision to its same-role unassigned Draft carrier."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", "only one identified current Atom can become Draft")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", f"Atom has no content-role location: {atom.relative}")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    draft_name = re.sub(r"^([A-Za-z0-9]+-[A-Z]+)-[0-9]+(?:--|-)", r"\1--", atom.filename, count=1)
+    if draft_name == atom.filename:
+        raise ToolError("draft-filename-invalid", "identified filename cannot be converted to the admitted Draft form")
+    target = (role / "draft" / draft_name).resolve()
+    if target.exists():
+        raise ToolError("destination-collision", f"draft destination already exists: {target.relative_to(root)}")
+    normalized = remove_frontmatter_scalar(_normalize_frontmatter(frontmatter), "atom_id")
+    if frontmatter_scalar(normalized, "atom_id") is not None:
+        raise ToolError("draft-has-stable-id", "Draft carrier cannot retain atom_id")
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, render(normalized, content))
+        atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
+
+
+def prepare_draft_promotion(root: Path, atom: Atom, atom_id: str, frontmatter: str, content: str) -> tuple[Path, str, bytes]:
+    """Derive exact identified output bytes without consuming the Draft carrier."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle != "draft" or atom.atom_id is not None:
+        raise ToolError("draft-promotion-invalid", "only an ID-free Draft carrier can be promoted")
+    match = re.fullmatch(r"([A-Za-z0-9]+-[A-Z]+)--(.+)", atom.filename)
+    identity = re.fullmatch(r"([A-Za-z0-9]+-[A-Z]+)-(\d+)", atom_id)
+    if match is None or identity is None or match.group(1) != identity.group(1):
+        raise ToolError("draft-promotion-invalid", "Draft filename and assigned identity do not share one role prefix")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", "Draft has no content-role location")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    target = (role / f"{identity.group(1)}-{identity.group(2)}-{match.group(2)}").resolve()
+    if target.exists() or any(candidate.atom_id == atom_id and candidate.lifecycle != "archived" for candidate in scan_atoms(root)):
+        raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
+    normalized = replace_frontmatter_scalar(remove_frontmatter_scalar(_normalize_frontmatter(frontmatter), "revision_lineage"), "atom_id", atom_id)
+    return target, normalized, render(normalized, content)
+
+
+def promote_draft_atom(root: Path, atom: Atom, atom_id: str, frontmatter: str, content: str, *, consume_draft: bool = True) -> Atom:
+    """Write identified output; callers may retain Draft until history finalization."""
+
+    root = root.resolve()
+    target, normalized, output = prepare_draft_promotion(root, atom, atom_id, frontmatter, content)
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, output)
+        if consume_draft:
+            atom.path.unlink()
     except BaseException:
         _restore(snapshots)
         raise
@@ -957,7 +1133,7 @@ def parser(tool_id: str) -> argparse.ArgumentParser:
         run.add_argument("--query", action="append")
         run.add_argument("--atom", action="append")
         run.add_argument("--under")
-        run.add_argument("--lifecycle", choices=("all", "active", "draft", "archived", "done", "canceled"), default="all")
+        run.add_argument("--lifecycle", choices=("all", "active", "draft", "archived", "done", "resolved", "canceled"), default="all")
         run.add_argument("--limit", type=int)
         run.add_argument("--view", choices=("metadata", "content", "both"), default="metadata")
     elif tool_id == "ATOM_READ":

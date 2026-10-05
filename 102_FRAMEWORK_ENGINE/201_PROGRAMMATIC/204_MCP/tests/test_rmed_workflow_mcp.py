@@ -1,7 +1,9 @@
 """Real stdio protocol with mock Atoms; no live review or Agent dispatch."""
 from pathlib import Path
+import shutil
 import sys
 import tempfile
+import tomllib
 import unittest
 
 from mcp import Client, StdioServerParameters
@@ -11,7 +13,7 @@ SERVER = ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py'
 MCP = SERVER.parent
 sys.path.insert(0, str(MCP))
 
-from selected_routes import SELECTED_ROUTE_NAMES  # noqa: E402
+from selected_routes import QUERY_ROUTE_NAMES, SELECTED_ROUTE_NAMES  # noqa: E402
 
 
 # CA-D-548's eight stable helpers plus its gateway controls remain required.
@@ -22,13 +24,14 @@ D548_REQUIRED_TOOLS = frozenset({
     'reload_mcp_implementation', 'get_mcp_reload_status',
 })
 
-# CA-D-547 v4 is the reviewed admission boundary.  This independently fixed
+# CA-D-547 v5 is the reviewed admission boundary.  This independently fixed
 # tuple prevents the registration registry from making its own test pass.
 D547_ADMITTED_SELECTED_ROUTES = (
     'create_atom', 'update_atom', 'replace_atom', 'change_atom_status',
     'create_scope_unit', 'rename_scope_unit', 'move_scope_unit', 'remove_scope_unit',
     'run_implementation_workflow', 'revert_changes', 'build_entities_graph',
     'build_terms_graph', 'build_applicable_methodology',
+    'find_and_fetch_artifacts', 'find_and_fetch_journal_events',
 )
 D547_SELECTED_CONTROL_TOOLS = frozenset({
     'get_selected_workflow_run', 'get_selected_action_run',
@@ -51,6 +54,41 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         (self.root / 'atom.md').write_text('mock original atom')
         (self.root / 'rules.md').write_text('mock applicable criteria')
 
+    def _copy_active_query_bindings(self):
+        """Seed this disposable Project from current D-carriers, not a fake exposure list."""
+        delivery = ROOT / '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery'
+        bindings = {}
+        for source in delivery.glob('*.md'):
+            for block in source.read_text(encoding='utf-8').split('```toml')[1:]:
+                binding = tomllib.loads(block.split('```', 1)[0]).get('tool_binding')
+                if isinstance(binding, dict) and binding.get('mcp_name') in QUERY_ROUTE_NAMES:
+                    bindings[binding['mcp_name']] = (source, binding)
+        self.assertEqual(set(QUERY_ROUTE_NAMES), set(bindings))
+        for source, binding in bindings.values():
+            carrier = self.root / source.relative_to(ROOT)
+            carrier.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, carrier)
+            entrypoint = ROOT / binding['entrypoint']
+            self.assertTrue(entrypoint.is_file())
+            destination = self.root / binding['entrypoint']
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(entrypoint, destination)
+
+    async def test_real_server_discovery_marks_registered_query_bindings_mcp_available(self):
+        self._copy_active_query_bindings()
+        params = StdioServerParameters(command=sys.executable,
+            args=[str(SERVER), '--project-root', str(self.root)])
+        async with Client(params, cache=None) as client:
+            registered = {tool.name: tool for tool in (await client.list_tools()).tools}
+            self.assertTrue(set(QUERY_ROUTE_NAMES) <= set(registered))
+            self.assertTrue(all(registered[name].annotations.read_only_hint for name in QUERY_ROUTE_NAMES))
+            discovered = await client.call_tool('discover_tools', {'request': {
+                'query': 'find_and_fetch', 'availability': 'mcp'}})
+            self.assertFalse(discovered.is_error, str(discovered))
+            matches = discovered.structured_content['matches']
+            self.assertEqual(set(QUERY_ROUTE_NAMES), {row['mcp_name'] for row in matches})
+            self.assertTrue(all(row['availability'] == 'mcp' for row in matches))
+
     async def test_stdio_gather_check_fix_report(self):
         params = StdioServerParameters(command=sys.executable,
             args=[str(SERVER), '--project-root', str(self.root)])
@@ -61,6 +99,8 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(D548_REQUIRED_TOOLS <= actual_tool_names)
             self.assertTrue(set(D547_ADMITTED_SELECTED_ROUTES) <= actual_tool_names)
             self.assertTrue(D547_SELECTED_CONTROL_TOOLS <= actual_tool_names)
+            self.assertTrue(next(tool for tool in tools.tools if tool.name == 'find_and_fetch_artifacts').annotations.read_only_hint)
+            self.assertTrue(next(tool for tool in tools.tools if tool.name == 'find_and_fetch_journal_events').annotations.read_only_hint)
             self.assertEqual(
                 D548_REQUIRED_TOOLS | set(SELECTED_ROUTE_NAMES) | D547_SELECTED_CONTROL_TOOLS,
                 actual_tool_names,

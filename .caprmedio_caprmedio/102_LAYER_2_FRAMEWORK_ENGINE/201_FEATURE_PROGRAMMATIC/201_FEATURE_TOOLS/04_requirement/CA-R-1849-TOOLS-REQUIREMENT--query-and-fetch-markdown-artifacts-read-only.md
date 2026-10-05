@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 01:20:00 +0400"
+version: 3
+updated_at: "2026-10-05 04:58:25 +0400"
 subjects:
   governs: FIND_AND_FETCH_ARTIFACTS
   depends_on: [Tool, Workflow, Action, Artifact, Markdown, Journal]
@@ -43,7 +43,7 @@ The Tool must use CA-R-1850 and CA-O-159's namespaces, RFC 6901 addressing,
 JSON literals, collision, null/missing, identity uniqueness, single retained
 snapshot ownership, coverage, cursor, and configurable budget rules exactly. It rejects malformed
 or incomplete source input and invalid filters without an accepted partial
-result. Its actual execution consumes the existing RUN_SUPPORT and Work Journal
-library of CA-D-527, CA-D-528, and CA-D-529; it creates no local Run/Journal
-format, and its query execution record cannot alter or enlarge the captured
-source snapshot.
+result. The pure native Tool creates no Run or Journal format. An actual
+admitted selected Action/Workflow uses the existing RUN_SUPPORT and Work
+Journal library of CA-D-527, CA-D-528, and CA-D-529; its query execution record
+cannot alter or enlarge the captured source snapshot.

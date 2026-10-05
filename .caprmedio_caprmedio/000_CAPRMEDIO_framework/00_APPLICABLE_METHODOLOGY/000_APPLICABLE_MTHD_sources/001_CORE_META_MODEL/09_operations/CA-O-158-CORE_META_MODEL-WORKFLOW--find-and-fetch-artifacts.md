@@ -8,8 +8,8 @@ global_tier: 11
 status: "Active"
 author: "Anatoly Maslennikov"
 type: "Workflow"
-version: 2
-updated_at: "2026-10-05 01:20:00 +0400"
+version: 4
+updated_at: "2026-10-05 05:14:43 +0400"
 subjects:
   governs: "Find and Fetch Artifacts"
   depends_on: [Workflow, Step, Action, Artifact, Markdown, Journal, Tool]
@@ -50,8 +50,8 @@ CA-O-038's body-free generic helper.
 
 ## Details
 
-The implementation contract is CA-R-1849, CA-R-1850, CA-M-330, CA-E-569, and
-CA-D-551, all version 2 in
+The implementation contract is CA-R-1849@3, CA-R-1850@2, CA-M-330@3,
+CA-E-569@2, and CA-D-551@4 in
 `102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/`.
 The delivered Tool and golden test paths are respectively
 `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/FIND_AND_FETCH_ARTIFACTS/`
@@ -59,8 +59,9 @@ and
 `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/FIND_AND_FETCH_ARTIFACTS/tests/test_find_and_fetch_artifacts.py`.
 
 An actual admitted execution uses the shared RUN_SUPPORT and Work Journal
-defined by CA-D-527 through CA-D-529; preview creates no Run. Any actual Run
-is recorded only after the source snapshot is sealed, and its Journal evidence
-is outside that snapshot and cannot enlarge its result set. Journal failure is
-reported by the shared contract and never converted into a fictitious Run or
-receipt.
+defined by CA-D-527 through CA-D-529; preview creates no Run and shared Run
+recording starts at admitted execution. CA-O-159 captures and seals the retained
+Artifact snapshot; subsequent continuations and results bind that snapshot.
+Run Journal evidence is outside the Artifact result source and cannot enlarge
+the selected snapshot. Failures record the truthful actual Run and never become
+a fictitious Run or receipt.

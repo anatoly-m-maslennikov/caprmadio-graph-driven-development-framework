@@ -10,8 +10,8 @@ status: Active
 subjects:
   governs: "Workflow Operations/Atom Lifecycle/Dispatch Interface"
   depends_on: ["Tool", "Authorization", "Atom"]
-version: 2
-updated_at: "2026-10-04 23:01:23 +0400"
+version: 3
+updated_at: "2026-10-04 23:50:09 +0000"
 relations:
   delivery_for: [CA-R-1825, CA-R-1827]
 ---
@@ -21,7 +21,7 @@ Deliver sealed lifecycle dispatch interface
 
 ## Scope
 
-The future Project-local MCP entrypoint contract; no executable carrier is supplied by this specification.
+The Project-local MCP entrypoint contract. This specification defines the interface, not an executable Carrier.
 
 ## Claim
 
@@ -32,3 +32,5 @@ The entrypoint returns CA-R-1828 only as the route-specific payload of CA-D-527'
 ## Details
 
 For an authorized Archive, the model-admitted status transition proceeds even when it newly breaks Relations. Diagnostics enumerate every newly broken Relation and active referrer and expose only a separate repair handoff; the entrypoint never silently repairs, retargets, or suppresses the transition.
+
+For an explicitly authorized Update of an already assigned legacy Atom whose frontmatter lacks Atom ID, the typed parameters may include `legacy_identity_proof = {atom_id, commit, path, digest}`. The complete target descriptor seals the actual prior bytes and values. The full committed carrier at that exact path in the current repository history must be byte-identical to the present carrier, carry the same assigned ID in its filename and Content Role location, and have no competing current owner. This is lossless identity serialization, not draft promotion, fresh assignment, collision-winner selection, or an automatic lookup fallback. The proposed carrier must retain that Atom ID, Content Role, and exact Summary value; a missing legacy Active field may only be serialized explicitly as Active. Preserve the entire original carrier as historical evidence, including when the semantic Version is retained, and retain its exact descriptor and proof in the shared Run records. Stale or forged proof, inactive or projected carriers, changed identity or Summary, and ambiguous ownership fail closed or use the separately authorized replacement handoff. Ordinary lookup and Update remain strict.

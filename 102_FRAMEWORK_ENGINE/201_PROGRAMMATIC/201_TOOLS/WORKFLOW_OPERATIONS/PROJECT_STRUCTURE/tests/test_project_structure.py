@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import importlib.util
 import json
@@ -87,6 +88,40 @@ class ProjectStructureActions(unittest.TestCase):
         }
         result.update(values)
         return result
+
+    def completed_o143_handoff(
+        self, context: dict[str, object], applied: dict[str, object], *, result_ref: str = "results/o143.json",
+    ) -> dict[str, object]:
+        """Model the executor's retained O140--O143 Action records."""
+        workflow_run_id = str(context["workflow_run_id"])
+        native = applied["native_result"]
+        effects = applied["effect_refs"]
+        retained: list[dict[str, object]] = []
+        for step_id, action_id, result in (
+            ("CA-O-140", "CA-O-012", "proposal ready"),
+            ("CA-O-141", "CA-O-005", "checks complete"),
+            ("CA-O-142", "CA-O-013", "authorization valid"),
+            ("CA-O-143", "CA-O-014", "cutover completed"),
+        ):
+            action_run_id = str(context["action_run_id"]) if step_id == "CA-O-143" else f"{workflow_run_id}:{step_id}"
+            path = result_ref if step_id == "CA-O-143" else f"results/{step_id}.json"
+            result_path = self.root / path
+            result_path.parent.mkdir(parents=True, exist_ok=True)
+            result_path.write_text(json.dumps({
+                "result": result, "action_run_id": action_run_id,
+                "native_result": native if step_id == "CA-O-143" else {"operation": "Rename"},
+            }, sort_keys=True), encoding="utf-8")
+            retained.append({
+                "workflow_run_id": workflow_run_id, "workflow_definition_id": "CA-O-015",
+                "step_definition_id": step_id, "action_definition_id": action_id,
+                "action_run_id": action_run_id, "result": result, "result_ref": path,
+                "completed_receipt": {
+                    "run_id": action_run_id, "disposition": "terminal", "outcome": "completed",
+                    "result_ref": path, "effect_refs": effects if step_id == "CA-O-143" else [],
+                },
+                "native_result": native if step_id == "CA-O-143" else {"operation": "Rename"},
+            })
+        return {"structural_prior_results": retained}
 
     def test_create_reports_inherited_mode_and_missing_goal_gap_without_inventing_goal(self) -> None:
         result = project_structure.create_scope_unit(
@@ -236,6 +271,84 @@ class ProjectStructureActions(unittest.TestCase):
         applied = handlers["CA-O-014"]({**context, "sealed_outer_admission": True})
         self.assertEqual("completed", applied["result"])
         self.assertIn("CHILD", self.toml.read_text(encoding="utf-8"))
+
+    def test_queue_reassesses_only_the_exact_post_cutover_structure_result(self) -> None:
+        """O144 accepts its own observed structural effect, never an arbitrary drift."""
+        handlers = project_structure.queue_action_handlers(self.root)
+
+        def apply_and_assess(route: str, parameters: dict[str, object]) -> dict[str, object]:
+            context: dict[str, object] = {
+                "workflow_definition_id": "CA-O-015", "route": route,
+                "parameters": parameters, "sealed_outer_admission": True,
+                "workflow_run_id": "structural-queue-test", "action_run_id": f"{route}:o143",
+            }
+            self.assertEqual("accepted", handlers["CA-O-005"](context)["result"])
+            applied = handlers["CA-O-014"](context)
+            self.assertEqual("completed", applied["result"])
+            return handlers["CA-O-005"]({
+                **context, **self.completed_o143_handoff(context, applied),
+                "step_definition_id": "CA-O-144", "action_run_id": f"{route}:o144",
+            })
+
+        created = apply_and_assess(
+            "create_scope_unit",
+            self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+        )
+        self.assertEqual("accepted", created["result"])
+        moved = apply_and_assess(
+            "move_scope_unit",
+            self.parameters(
+                "Move", target_name="CHILD", declaration=declaration("CHILD", parent="PROJECT", level=1),
+                goal_coverage_disposition={"state": "present", "parent": "PROJECT"},
+            ),
+        )
+        self.assertEqual("accepted", moved["result"])
+        removed = apply_and_assess("remove_scope_unit", self.parameters("Remove", target_name="CHILD"))
+        self.assertEqual("accepted", removed["result"])
+
+    def test_rename_frontier_stays_literal_and_binds_completed_post_image(self) -> None:
+        """O144 accepts only the exact retained O143 result, never a claimed post-image."""
+        handlers = project_structure.queue_action_handlers(self.root)
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root, self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+            )["state"],
+        )
+        self.reference.write_text("CHILD\n", encoding="utf-8")
+        parameters = self.parameters(
+            "Rename", target_name="CHILD", declaration=declaration("RENAMED", parent="PARENT", level=2),
+            reference_frontier=[{
+                "path": "references.md", "expected_sha256": digest(self.reference),
+                "replacements": [{"old": "CHILD", "new": "RENAMED"}],
+            }],
+        )
+        original = copy.deepcopy(parameters)
+        context: dict[str, object] = {
+            "workflow_definition_id": "CA-O-015", "route": "rename_scope_unit",
+            "parameters": parameters, "sealed_outer_admission": True,
+            "workflow_run_id": "rename-queue-test", "action_run_id": "rename:o143",
+        }
+        self.assertEqual("selected", handlers["CA-O-004"](context)["result"])
+        self.assertEqual(original, parameters)
+        applied = handlers["CA-O-014"](context)
+        self.assertEqual("completed", applied["result"])
+        self.assertEqual([".caprmedio_caprmedio/project_structure.toml", "references.md"], applied["effect_refs"])
+        self.assertEqual("RENAMED\n", self.reference.read_text(encoding="utf-8"))
+        self.assertEqual(original, parameters)
+        final_context = {**context, "step_definition_id": "CA-O-144", "action_run_id": "rename:o144"}
+        missing = handlers["CA-O-005"](final_context)
+        self.assertEqual("blocked", missing["result"])
+        handoff = self.completed_o143_handoff(context, applied)
+        unsafe = copy.deepcopy(handoff)
+        unsafe["structural_prior_results"][-1]["result_ref"] = "../unsafe-result.json"
+        unsafe["structural_prior_results"][-1]["completed_receipt"]["result_ref"] = "../unsafe-result.json"
+        self.assertEqual("blocked", handlers["CA-O-005"]({**final_context, **unsafe})["result"])
+        final = handlers["CA-O-005"]({**final_context, **handoff})
+        self.assertEqual("accepted", final["result"])
+        self.reference.write_text("tampered\n", encoding="utf-8")
+        mismatch = handlers["CA-O-005"]({**final_context, **handoff})
+        self.assertEqual("blocked", mismatch["result"])
 
 
 class ProjectStructureSharedServiceIntegration(unittest.TestCase):

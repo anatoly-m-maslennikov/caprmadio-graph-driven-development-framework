@@ -168,6 +168,13 @@ class AtomOperationsTest(unittest.TestCase):
         )
         self.assertEqual(found["count"], 1)
 
+    def test_resolved_concern_is_not_an_active_atom(self) -> None:
+        path = self.root / ".caprmedio_caprmedio/01_concern/resolved/CA-C-347--resolved-problem.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("---\natom_id: CA-C-347\ncontent_role: Concern\nstatus: resolved\nversion: 1\n---\n# Summary\n\nResolved problem\n")
+        self.assertEqual(operations.resolve_selector(self.root, "CA-C-347").lifecycle, "resolved")
+        self.assertNotIn("CA-C-347", [atom.atom_id for atom in operations.scan_atoms(self.root, lifecycle="active")])
+
     def test_read_views_are_selective_and_bulk(self) -> None:
         content = operations.run_read(self.root, argparse.Namespace(atom=["CA-R-343"], view="content"))
         self.assertEqual(set(content["atoms"][0]), {"content"})

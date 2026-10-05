@@ -1,0 +1,53 @@
+---
+atom_id: CA-O-089
+content_role: Operations
+type: Action
+current_scope_unit: CORE_META_MODEL
+claim_target_scope_unit: CORE_META_MODEL
+local_tier: Standard
+author: Anatoly Maslennikov
+status: Active
+subjects:
+  governs: "Implementation Failure Diagnosis"
+  depends_on:
+    - "Action"
+    - "Atom/Content Role: Evaluation"
+    - "Atom/Content Role: Implementation"
+    - "Atom/Content Role: Method"
+    - "Atom/Content Role: Plan/Type: Plan"
+    - "AI Agent"
+    - "Operator"
+    - "Spec"
+version: 3
+updated_at: "2026-10-04 16:53:23 +0000"
+relations:
+  relates_to:
+    - CA-O-020
+    - CA-O-021
+    - CA-O-024
+    - CA-R-1559
+    - CA-R-1591
+global_tier: 11
+projection:
+  source_carrier_path: ../../../000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-089-CORE_META_MODEL-ACTION--diagnose-implementation-test-failures.md
+  source_atom_id: CA-O-089
+  source_atom_revision: 3
+  source_sha256: 793f388c9972f222cb468c7fc01811391ba9e2c36003b59c6450e03c6d067486
+  original_relations_sha256: 2c7563002a8140c179818cba02a5dbc75b861e40205e525f40337e0a0ef96f18
+---
+# Summary
+
+Diagnose implementation test failures
+
+## Operation
+
+Implementation Failure Diagnosis **means** the Agentic Action that explains failed implementation checks **before** choosing a recovery route.
+
+- inputs: the selected P/Plan item, actual failure output, failing candidate, prepared tests, execution phase, current R/E/D **and** Method bindings, complete relevant inputs, **and** applicable confidence/permission gates.
+- inspect the failing assertion, expected behavior, code path, test setup, **and** reproducibility. a failing test alone does **not** prove an implementation defect **or** a missing Method.
+- return `expected_initial_failure` **only** **when** a correct prepared test exposes selected behavior **not** implemented yet; retain that test's initial failure evidence. this is normal test-first progress, **not** a failed repair retry **or** a reason **to** invent a corrective Method.
+- return `implementation_defect` for incorrect production code **or** `test_implementation_defect` for incorrect executable test code, with evidence, affected work, **and** proposed correction. **every** admitted repair still passes through retry control.
+- return `authority_change_required` for incorrect, missing, **or** conflicting governing expected behavior; return `environment_blocker` for unavailable execution prerequisites outside the admitted correction; return `unresolved` **when** evidence **or** confidence is insufficient.
+- do **not** modify code, governing Atoms, Status, **or** test expectations. report failures honestly; do **not** relabel an unexplained failure as expected merely **to** proceed.
+
+## Details

@@ -693,6 +693,10 @@ def query(snapshot: Mapping[str, Any], request: Mapping[str, Any] | None = None)
                     max_tokens=limits["max_filter_tokens"],
                     max_in_members=limits["max_in_members"],
                 )
+                # Selector admission is local policy after a successful shared
+                # parse.  Preserve that parser's actual consumption if this
+                # tool subsequently rejects the selector.
+                _record_filter_statistics(evidence, filter_statistics)
                 filter_selectors = {
                     selector: _admit_selector(selector, mode=mode, records=records)
                     for selector in collect_selectors(tree)
@@ -712,7 +716,6 @@ def query(snapshot: Mapping[str, Any], request: Mapping[str, Any] | None = None)
                 else:
                     code = "invalid-filter"
                 raise JournalQueryError(code) from error
-            _record_filter_statistics(evidence, filter_statistics)
         limit = request.get("limit", limits["max_page_size"])
         if type(limit) is not int or limit <= 0:
             raise JournalQueryError("invalid-page-limit")

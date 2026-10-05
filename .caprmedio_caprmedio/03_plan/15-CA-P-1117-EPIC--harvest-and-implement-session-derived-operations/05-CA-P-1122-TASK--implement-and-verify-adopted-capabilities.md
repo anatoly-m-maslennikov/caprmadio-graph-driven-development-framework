@@ -16,12 +16,13 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 2
-updated_at: "2026-10-04 15:51:44 +0000"
+version: 3
+updated_at: "2026-10-05 03:11:41 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
   blocks:
+    - CA-P-1655
     - CA-P-1166
     - CA-P-1123
     - CA-P-1141

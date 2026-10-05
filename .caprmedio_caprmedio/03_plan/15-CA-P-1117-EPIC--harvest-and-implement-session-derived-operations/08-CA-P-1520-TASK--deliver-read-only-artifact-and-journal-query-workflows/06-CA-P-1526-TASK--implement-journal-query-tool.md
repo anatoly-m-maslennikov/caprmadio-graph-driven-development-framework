@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Events Journal query Tool implementation"
   depends_on: [Implementation, Workflow, Action, Tool, Evaluation, Journal]
-version: 4
-updated_at: "2026-10-04 21:37:54 +0000"
+version: 5
+updated_at: "2026-10-04 22:46:18 +0000"
 relations:
   is_decomposition_of: [CA-P-1520]
   blocks: [CA-P-1527]
@@ -37,3 +37,7 @@ P1533 rejected the absent-field conflict. P1534 repair and current P1535 accepta
 ### Definition of Done
 
 The owned Tool and golden tests pass against accepted source pins with truthful remainder; host proof is not MCP or image proof.
+
+## Result
+
+Done for the bounded native Tool contract. P1545@3 repairs opaque server-retained snapshot trust and selector diagnostics; P1548 supplies actual sole-parser consumption. Independent P1547@3 accepts Journal pure core against P1535, including all 14 passing Docker tests. Configured canonical root and retained member prefixes are revalidated; later appends and own execution events cannot enlarge a captured result. Handles are process-local and unknown after restart, not silently recaptured. Actual shared Run, standalone Action, queue/MCP and fresh-image gates remain P1527/P1528.

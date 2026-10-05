@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime
+import hashlib
 import json
 import re
+import subprocess
 import sys
 from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
+from authoritative_status_models import StatusModelError, resolve_status_model
 from atom_operations import (
     Atom,
     ToolError as AtomToolError,
@@ -18,23 +21,32 @@ from atom_operations import (
     atom_digest,
     atom_from_path,
     atom_version,
+    canonical_json,
     control_root,
     create_atom_revision,
+    demote_atom_to_draft,
+    draft_revision_lineage,
     frontmatter_scalar,
+    migrate_atom_identity_revision,
     move_atom_revision,
     prepare_create_atom_revision,
+    prepare_draft_promotion,
     preserve_atom_revision,
+    project_identity_prefix,
+    promote_draft_atom,
+    replace_draft_revision_lineage,
     replace_frontmatter_scalar,
     resolve_repository,
     resolve_selector,
     safe_path,
     scan_atoms,
+    split_frontmatter,
     write_atom_revision,
 )
 
 
 ATOM_ID = re.compile(r"^CA-[A-Z]+-[0-9]{3,}$")
-INACTIVE_LIFECYCLE_SEGMENTS = frozenset({"archive", "drafts", "done", "solved", "canceled", "cancelled"})
+INACTIVE_LIFECYCLE_SEGMENTS = frozenset({"archive", "drafts", "done", "solved", "resolved", "canceled", "cancelled"})
 
 
 class IntentError(RuntimeError):
@@ -213,8 +225,6 @@ def carrier_descriptor(root: Path, selector: str | Atom) -> dict[str, Any]:
     root = root.resolve()
     try:
         atom = selector if isinstance(selector, Atom) else resolve_selector(root, selector)
-        if atom.atom_id is None:
-            raise LifecycleError("stable-atom-id-required", "lifecycle actions require a stable Atom identity")
         return {
             "atom_id": atom.atom_id,
             "path": atom.relative,
@@ -249,6 +259,105 @@ def _resolve_descriptor(root: Path, value: object, *, name: str, active: bool = 
     if active and atom.lifecycle != "active":
         raise LifecycleError("active-carrier-required", f"{name} must resolve one active carrier")
     return atom
+
+
+def _resolve_legacy_descriptor(root: Path, value: object, proof_value: object, *, mapped_identity: str | None = None) -> Atom:
+    """Read one explicitly sealed historical carrier, never a lookup fallback.
+
+    Only Update accepts this migration input.  The assigned filename identity
+    must already exist in the exact committed bytes supplied by the caller;
+    this cannot assign an identity to a draft or repair a colliding identity.
+    An explicit mapping may encode an assigned pre-current-format identity;
+    it never renumbers an already canonical assigned identity.
+    """
+    descriptor = _mapping(value, "target")
+    _exact_fields(descriptor, _DESCRIPTOR_FIELDS, "target")
+    proof = _mapping(proof_value, "legacy_identity_proof")
+    _exact_fields(proof, frozenset({"atom_id", "commit", "path", "digest"}), "legacy_identity_proof")
+    if (not isinstance(proof["commit"], str) or not re.fullmatch(r"[0-9a-f]{40}", proof["commit"])
+            or not isinstance(proof["digest"], str) or not re.fullmatch(r"[0-9a-f]{64}", proof["digest"])
+            or proof["path"] != descriptor["path"] or proof["atom_id"] != descriptor["atom_id"]):
+        raise LifecycleError("legacy-proof-invalid", "historical proof must bind the exact target identity, path and bytes")
+    try:
+        path = safe_path(root, descriptor["path"], must_exist=True)
+        try:
+            atom_from_path(root, path)
+        except AtomToolError as error:
+            if error.code != "atom-frontmatter-id-required":
+                raise
+        else:
+            raise LifecycleError("legacy-proof-inapplicable", "target already carries an explicit identity")
+        raw = path.read_bytes()
+        frontmatter, content = split_frontmatter(raw.decode("utf-8"))
+        relative = path.relative_to(control_root(root))
+        if any(part.casefold() in INACTIVE_LIFECYCLE_SEGMENTS | {"archived", "resolved"} for part in relative.parts):
+            raise LifecycleError("legacy-proof-inapplicable", "migration requires a current carrier, not a draft or history")
+        matches = re.findall(r"(?:^|-)(CA-[CAPRMEDO]-[0-9]+)(?=-|$)", path.stem)
+        old_id = str(proof["atom_id"])
+        if mapped_identity is None:
+            identity_matches = matches == [old_id]
+        else:
+            identity_matches = (not matches and not ATOM_ID.fullmatch(old_id)
+                                and re.fullmatch(r"[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+-[0-9]+", old_id) is not None
+                                and path.stem.partition("--")[0].startswith(old_id + "-"))
+        if not identity_matches or hashlib.sha256(raw).hexdigest() != proof["digest"]:
+            raise LifecycleError("legacy-proof-invalid", "historical assigned identity or present bytes differ")
+        committed = subprocess.run(
+            ["git", "-c", f"safe.directory={root}", "-C", str(root), "show", f"{proof['commit']}:{proof['path']}"],
+            capture_output=True, check=False,
+        )
+        ancestor = subprocess.run(
+            ["git", "-c", f"safe.directory={root}", "-C", str(root), "merge-base", "--is-ancestor", proof["commit"], "HEAD"],
+            capture_output=True, check=False,
+        )
+        if committed.returncode != 0 or ancestor.returncode not in {0, 1}:
+            raise LifecycleError("legacy-history-unavailable", "cannot read the explicitly scoped repository history")
+        if ancestor.returncode != 0 or committed.stdout != raw:
+            raise LifecycleError("legacy-proof-invalid", "exact assigned carrier is not backed by the current Git history")
+        role = next(part for part in reversed(relative.parts[:-1]) if re.fullmatch(r"0[1-9]_[a-z0-9_]+", part))
+        roles = {"C": "01_concern", "A": "02_analysis", "P": "03_plan", "R": "04_requirement",
+                 "M": "05_method", "E": "06_evaluation", "D": "07_delivery", "O": "09_operations"}
+        identity_letter = (mapped_identity or old_id).split("-")[1]
+        if role != roles.get(identity_letter):
+            raise LifecycleError("legacy-proof-invalid", "assigned identity differs from the carrier Content Role")
+        old_status = frontmatter_scalar(frontmatter, "status")
+        if old_status is not None and old_status.casefold() != "active":
+            raise LifecycleError("legacy-proof-inapplicable", "migration cannot activate a draft or inactive Atom")
+        role_values = {"C": "Concern", "A": "Analysis", "P": "Plan", "R": "Requirement", "M": "Method",
+                       "E": "Evaluation", "D": "Delivery", "O": "Operations"}
+        old_role = frontmatter_scalar(frontmatter, "content_role")
+        if old_role is not None and old_role != role_values[identity_letter]:
+            raise LifecycleError("legacy-proof-invalid", "migration cannot replace an explicitly different Content Role")
+        atom = Atom(path, path.relative_to(root).as_posix(), path.name, str(proof["atom_id"]),
+                    "active", role, frontmatter, content)
+        observed = carrier_descriptor(root, atom)
+        if any(descriptor[field] != observed[field] for field in _DESCRIPTOR_FIELDS):
+            raise LifecycleError("stale-carrier", "legacy target no longer matches its complete sealed descriptor")
+        for candidate in control_root(root).rglob(f"*{atom.atom_id}*.md"):
+            if candidate == path or any(part.casefold() in INACTIVE_LIFECYCLE_SEGMENTS | {"archived", "resolved"}
+                                        for part in candidate.relative_to(control_root(root)).parts):
+                continue
+            try:
+                other = atom_from_path(root, candidate)
+            except AtomToolError as error:
+                same_legacy_identity = (candidate.stem.partition("--")[0].startswith(old_id + "-")
+                                        if mapped_identity is not None else
+                                        re.findall(r"(?:^|-)(CA-[CAPRMEDO]-[0-9]+)(?=-|$)", candidate.stem) == [atom.atom_id])
+                if error.code == "atom-frontmatter-id-required" and same_legacy_identity:
+                    raise LifecycleError("active-atom-id-ambiguous", "legacy identity has another unnormalized owner") from error
+            else:
+                if other.atom_id == atom.atom_id:
+                    raise LifecycleError("active-atom-id-ambiguous", "legacy identity already has another current owner")
+        return atom
+    except AtomToolError as error:
+        raise _translate(error) from error
+
+
+def _legacy_summary(content: str) -> str:
+    headings = re.findall(r"(?m)^# (.+?)\s*$", content)
+    if len(headings) != 1 or headings[0] == "Summary":
+        raise LifecycleError("legacy-summary-ambiguous", "legacy migration requires one exact first-H1 Summary")
+    return headings[0]
 
 
 def _summary(content: str) -> str:
@@ -335,6 +444,14 @@ def _status_destination(root: Path, atom: Atom, status: str) -> str:
     except (ValueError, StopIteration) as error:
         raise LifecycleError("status-location-missing", "target has no content-role status location") from error
     role = control.joinpath(*relative.parts[:index + 1])
+    if frontmatter_scalar(atom.frontmatter, "content_role") == "Plan":
+        local = atom.path.parent
+        if local.name in {"001_backlog", "done", "canceled", "archived"}:
+            local = local.parent
+        folders = {"Active": None, "Backlog": "001_backlog", "Done": "done", "Canceled": "canceled"}
+        if status in folders:
+            target = local / folders[status] / atom.filename if folders[status] else local / atom.filename
+            return target.relative_to(root).as_posix()
     if status == "Active":
         target = role / atom.filename
     else:
@@ -391,6 +508,202 @@ def _status_model(value: object, atom: Atom, requested_status: str) -> dict[str,
         "statuses": list(statuses),
         "transitions": {str(key): list(item) for key, item in transitions.items()},
         "archive_status": archive_status,
+    }
+
+
+def preflight_atom_lifecycle(root: Path, operation: str, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    """Purely observe one model-governed status operation before any effect."""
+    root = root.resolve()
+    request = _mapping(parameters, "parameters")
+    if operation != "change_status":
+        raise LifecycleError("operation-unadmitted", "preflight supports change_status only")
+    allowed = frozenset({"target", "status"})
+    if set(request) - allowed or not {"target", "status"}.issubset(request):
+        raise LifecycleError("carrier-fields-invalid", "parameters must carry target and status only")
+    requested = request["status"]
+    if not isinstance(requested, str) or not requested:
+        raise LifecycleError("status-invalid", "status must be a non-empty source-admitted value")
+    target = _resolve_descriptor(root, request["target"], name="target", active=False)
+    prior = carrier_descriptor(root, target)
+    role = frontmatter_scalar(target.frontmatter, "content_role")
+    atom_type = frontmatter_scalar(target.frontmatter, "type")
+    if role is None:
+        raise LifecycleError("status-model-unqualified", "target lacks a carried Content Role")
+    try:
+        model = resolve_status_model(root, {"content_role": role, "type": atom_type}, requested)
+    except StatusModelError as error:
+        raise LifecycleError(error.code, str(error)) from error
+    current = frontmatter_scalar(target.frontmatter, "status")
+    if current is None or current not in model["statuses"]:
+        raise LifecycleError("status-current-unadmitted", "target current status is not admitted by the current source model")
+    archive = requested == "Archived"
+    return {"operation": operation, "target": target, "prior": prior, "requested_status": requested,
+            "current_status": current, "status_model": model, "archive": archive}
+
+
+def _draft_promotion_head(root: Path, target: Atom) -> tuple[dict[str, str], dict[str, Any]]:
+    """Resolve the sole trusted, still-live retained Draft head."""
+    from draft_history import DraftHistoryError, validate_current_draft_head
+
+    lineage = draft_revision_lineage(target.frontmatter)
+    if not isinstance(lineage, Mapping) or set(lineage) != {"history_entry_ref"}:
+        raise LifecycleError("draft-lineage-missing", "Draft has no authoritative revision_lineage")
+    try:
+        head = dict(lineage["history_entry_ref"])
+        entry = validate_current_draft_head(root, target.relative, head)
+    except (DraftHistoryError, KeyError, TypeError) as error:
+        raise LifecycleError("draft-lineage-invalid", "Draft has no current trusted retained-history head") from error
+    return head, entry
+
+
+def _draft_promotion_identity(root: Path, target: Atom, *, head_entry: Mapping[str, Any] | None = None) -> str:
+    """Allocate only after recovery has found no sealed transition for this head."""
+    if head_entry is None:
+        _, head_entry = _draft_promotion_head(root, target)
+    role = frontmatter_scalar(target.frontmatter, "content_role")
+    predecessor = head_entry.get("direct_predecessor")
+    if predecessor is None:
+        if not role:
+            raise LifecycleError("draft-lineage-invalid", "Draft lacks Content Role")
+        prefix, letter = project_identity_prefix(root), role[0].upper()
+        used = [int(match.group(1)) for atom in scan_atoms(root) if atom.atom_id
+                for match in [re.fullmatch(rf"{prefix}-{letter}-(\d+)", atom.atom_id)] if match]
+        return f"{prefix}-{letter}-{max(used, default=0) + 1}"
+    if _summary(target.content) != predecessor.get("summary") or frontmatter_scalar(target.frontmatter, "content_role") != predecessor.get("content_role"):
+        raise LifecycleError("draft-lineage-stale", "Draft direct predecessor no longer proves identity continuity")
+    return str(predecessor["atom_id"])
+
+
+def _pending_request_digest(parameters: Mapping[str, Any]) -> str:
+    """Match the public pending-reservation request seal without caller evidence."""
+    try:
+        return hashlib.sha256(canonical_json(dict(parameters)).encode("utf-8")).hexdigest()
+    except (TypeError, ValueError) as error:
+        raise LifecycleError("request-invalid", "Draft promotion request is not canonical JSON") from error
+
+
+def _pending_promotion_result(
+    root: Path,
+    parameters: Mapping[str, Any],
+    *,
+    prior: Mapping[str, Any],
+    draft_path: str,
+    head: Mapping[str, Any],
+    status_model: Mapping[str, Any],
+    prior_status: str,
+    live_draft: Atom | None,
+) -> tuple[Atom | None, dict[str, Any] | None]:
+    """Recover an exact sealed promotion before identity or output preparation.
+
+    ``None, None`` means that this head has no reservation, so the caller may
+    begin one fresh transition.  A sealed request is always recovered or
+    refused here; its planned ID is never compared to a newly allocated ID.
+    """
+    from draft_promotion_pending import (
+        PendingPromotionError,
+        lookup_pending_promotion,
+        match_promotion_successor,
+        recover_pending_promotion,
+    )
+
+    try:
+        sealed = lookup_pending_promotion(root, draft_path=draft_path, head=head)
+        if sealed is None:
+            return None, None
+        reservation = sealed["reservation"]
+        if reservation["request_digest"] != _pending_request_digest(parameters):
+            raise LifecycleError("promotion-request-conflict", "pending Draft promotion belongs to a different sealed request")
+        recovered = recover_pending_promotion(root, draft_path=draft_path, head=head)
+        if recovered is None or recovered["disposition"] != "finalized":
+            return None, {
+                "operation": "change_status",
+                "outcome": "pending",
+                "prior_status": prior_status,
+                "observed": dict(prior),
+                "status_model": dict(status_model),
+                "effects": [_effect("unchanged", carrier=prior, reason="pending-promotion-recovery")],
+                "pending_promotion": recovered if recovered is not None else sealed,
+            }
+        reservation = recovered["reservation"]
+        output = safe_path(root, reservation["output"]["path"], must_exist=True)
+        observed = atom_from_path(root, output)
+        if (observed.atom_id != reservation["planned_atom_id"]
+                or atom_digest(observed) != reservation["output"]["digest"]):
+            raise LifecycleError("promotion-output-conflict", "finalized Draft promotion output no longer matches its sealed reservation")
+        successor = match_promotion_successor(
+            root, head=head, output_path=reservation["output"]["path"], output_digest=reservation["output"]["digest"],
+        )
+        if successor != recovered["successor"]:
+            raise LifecycleError("promotion-history-conflict", "finalized Draft promotion successor does not match its sealed output")
+        if live_draft is not None:
+            live_draft.path.unlink(missing_ok=True)
+        return observed, None
+    except PendingPromotionError as error:
+        raise LifecycleError(error.code, str(error)) from error
+
+
+def _missing_draft_promotion_retry(root: Path, parameters: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Recover a terminal retry from retained history, never runtime files or caller identity maps."""
+    request = _mapping(parameters, "parameters")
+    if set(request) != {"target", "status"}:
+        return None
+    descriptor = _mapping(request["target"], "target")
+    _exact_fields(descriptor, _DESCRIPTOR_FIELDS, "target")
+    if descriptor["atom_id"] is not None or descriptor["lifecycle"] != "draft" or not isinstance(descriptor["path"], str):
+        return None
+    try:
+        carrier_path = safe_path(root, descriptor["path"], must_exist=False)
+    except AtomToolError as error:
+        raise _translate(error) from error
+    if carrier_path.exists():
+        return None
+    requested = request["status"]
+    if not isinstance(requested, str) or not requested:
+        raise LifecycleError("status-invalid", "status must be a non-empty source-admitted value")
+    try:
+        model = resolve_status_model(root, {"content_role": descriptor["content_role"], "type": descriptor["type"]}, requested)
+    except StatusModelError as error:
+        raise LifecycleError(error.code, str(error)) from error
+    if descriptor["status"] not in model["statuses"]:
+        raise LifecycleError("status-current-unadmitted", "target current status is not admitted by the current source model")
+    if requested == descriptor["status"]:
+        raise LifecycleError("draft-promotion-retry-missing", "the missing Draft has no terminal promotion retry")
+
+    from draft_history import DraftHistoryError, history_entry_ref, load_history_entry
+
+    history_directory = control_root(root) / "archive" / "_draft_history"
+    if not history_directory.exists() or history_directory.is_symlink() or not history_directory.is_dir():
+        raise LifecycleError("draft-promotion-retry-missing", "the missing Draft has no trusted retained-history head")
+    expected_output = {"path": descriptor["path"], "digest": descriptor["digest"]}
+    matches: list[dict[str, str]] = []
+    try:
+        for path in sorted(history_directory.glob("*.json")):
+            reference = history_entry_ref(root, path.stem, path.relative_to(root).as_posix())
+            entry = load_history_entry(root, reference)
+            if entry.get("draft_output") == expected_output and entry.get("origin", {}).get("kind") in {
+                "never_identified", "demoted_identified", "draft_update",
+            }:
+                matches.append(dict(reference))
+    except (DraftHistoryError, OSError, ValueError) as error:
+        raise LifecycleError("draft-lineage-invalid", "missing Draft retained history cannot be trusted") from error
+    if len(matches) != 1:
+        raise LifecycleError("draft-promotion-retry-missing", "the missing Draft does not resolve one trusted retained-history head")
+    observed, pending = _pending_promotion_result(
+        root, parameters, prior=descriptor, draft_path=descriptor["path"], head=matches[0],
+        status_model=model, prior_status=descriptor["status"], live_draft=None,
+    )
+    if pending is not None:
+        return pending
+    if observed is None:
+        raise LifecycleError("draft-promotion-retry-missing", "the missing Draft has no sealed terminal promotion")
+    return {
+        "operation": "change_status",
+        "outcome": "applied",
+        "prior_status": descriptor["status"],
+        "observed": carrier_descriptor(root, observed),
+        "status_model": model,
+        "effects": [_effect("unchanged", carrier=carrier_descriptor(root, observed), reason="terminal-promotion-retry")],
+        "broken_references": [],
     }
 
 
@@ -460,21 +773,45 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
 
     root = root.resolve()
     request = _mapping(parameters, "parameters")
-    allowed = frozenset({"target", "proposed", "change_class", "successors"})
+    allowed = frozenset({"target", "proposed", "change_class", "successors", "legacy_identity_proof", "legacy_identity_mapping"})
     unknown = sorted(request.keys() - allowed)
     if unknown or not {"target", "proposed", "change_class"}.issubset(request):
         raise LifecycleError("update-parameters-invalid", "update requires target, complete proposed carrier, and change_class only")
-    target = _resolve_descriptor(root, request["target"], name="target")
+    legacy = "legacy_identity_proof" in request
+    mapping = None
+    if "legacy_identity_mapping" in request:
+        if not legacy:
+            raise LifecycleError("identity-mapping-invalid", "explicit legacy mapping requires an exact historical proof")
+        mapping = _mapping(request["legacy_identity_mapping"], "legacy_identity_mapping")
+        _exact_fields(mapping, frozenset({"legacy_atom_id", "atom_id", "destination"}), "legacy_identity_mapping")
+        if (not isinstance(mapping["atom_id"], str) or re.fullmatch(r"CA-[CAPRMEDO]-[0-9]{3,}", mapping["atom_id"]) is None
+                or mapping["legacy_atom_id"] != _mapping(request["target"], "target").get("atom_id")
+                or not isinstance(mapping["destination"], str)):
+            raise LifecycleError("identity-mapping-invalid", "mapping must bind one exact legacy identity to a canonical identity and destination")
+    target = (_resolve_legacy_descriptor(root, request["target"], request["legacy_identity_proof"],
+                                        mapped_identity=mapping["atom_id"] if mapping else None)
+              if legacy else _resolve_descriptor(root, request["target"], name="target", active=False))
     prior = carrier_descriptor(root, target)
     proposed = _proposal(request["proposed"])
     change_class = request["change_class"]
     if change_class not in _UPDATE_CLASSES:
         raise LifecycleError("change-class-unadmitted", "update change_class is not identity-preserving")
-    if frontmatter_scalar(proposed["frontmatter"], "atom_id") != target.atom_id:
+    expected_identity = mapping["atom_id"] if mapping else target.atom_id
+    if frontmatter_scalar(proposed["frontmatter"], "atom_id") != expected_identity:
         raise LifecycleError("atom-identity-changed", "same-identity update must retain the current atom_id")
-    if frontmatter_scalar(proposed["frontmatter"], "status") != frontmatter_scalar(target.frontmatter, "status"):
+    if legacy:
+        expected_role = {"C": "Concern", "A": "Analysis", "P": "Plan", "R": "Requirement", "M": "Method",
+                         "E": "Evaluation", "D": "Delivery", "O": "Operations"}[expected_identity.split("-")[1]]
+        if frontmatter_scalar(proposed["frontmatter"], "content_role") != expected_role:
+            raise LifecycleError("atom-identity-changed", "legacy migration must retain the assigned Content Role")
+    old_status = frontmatter_scalar(target.frontmatter, "status")
+    new_status = frontmatter_scalar(proposed["frontmatter"], "status")
+    if new_status != old_status and not (legacy and old_status is None and new_status == "Active"):
         raise LifecycleError("status-change-requires-change-status", "Update cannot carry a status transition")
-    if _summary(proposed["content"]) != _summary(target.content):
+    prior_summary = _legacy_summary(target.content) if legacy else _summary(target.content)
+    if _summary(proposed["content"]) != prior_summary:
+        if mapping:
+            raise LifecycleError("legacy-summary-changed", "identity encoding migration must preserve the exact Summary")
         proposed_successors = _proposed_successors(root, request.get("successors"), target)
         return {
             "operation": "update",
@@ -484,7 +821,21 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             "effects": [_effect("unchanged", carrier=prior, reason="summary-change-requires-separate-replace")],
             "history": {"prior": prior, "preserved": True},
         }
-    if proposed["frontmatter"] == target.frontmatter and proposed["content"] == target.content:
+    if mapping:
+        try:
+            destination, _, destination_id = prepare_create_atom_revision(root, mapping["destination"], proposed["frontmatter"])
+        except AtomToolError as error:
+            raise _translate(error) from error
+        if destination.parent != target.path.parent or destination_id != expected_identity:
+            raise LifecycleError("identity-mapping-invalid", "canonical destination must preserve the source scope and Content Role")
+        if destination.exists():
+            raise LifecycleError("destination-collision", "canonical destination already exists")
+        if any(atom.atom_id == expected_identity for atom in scan_atoms(root)):
+            raise LifecycleError("atom-id-collision", "canonical identity was already used")
+        for candidate in control_root(root).rglob("*.md"):
+            if re.search(rf"(?:^|-){re.escape(expected_identity)}(?=-|@|\.)", candidate.name):
+                raise LifecycleError("atom-id-collision", "canonical identity was already used by a historical or unnormalized carrier")
+    if proposed["frontmatter"] == target.frontmatter and proposed["content"] == target.content and not mapping:
         return {"operation": "update", "outcome": "no-op", "observed": prior,
                 "effects": [_effect("unchanged", carrier=prior, reason="equivalent-carrier")], "history": {"prior": prior, "preserved": True}}
     if not _execute_allowed(execute=execute, authorized=authorized):
@@ -494,10 +845,35 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     prior_revision: Atom | None = None
     try:
         frontmatter = _refresh_frontmatter(proposed["frontmatter"], version=next_version)
-        if change_class == "semantic_revision":
+        draft_history: tuple[dict[str, str], dict[str, Any], dict[str, Any] | None] | None = None
+        if target.lifecycle == "draft":
+            from draft_history import DraftHistoryError, append_draft_entry, reserve_history_entry, validate_current_draft_head
+
+            prior_lineage = draft_revision_lineage(target.frontmatter)
+            if not isinstance(prior_lineage, Mapping) or set(prior_lineage) != {"history_entry_ref"}:
+                raise LifecycleError("draft-lineage-invalid", "Draft Update requires one retained-history head")
+            parent = dict(prior_lineage["history_entry_ref"])
+            try:
+                # Validate this exact current carrier before reserving a child:
+                # an otherwise-valid entry for another Draft is never a parent.
+                parent_entry = validate_current_draft_head(root, target.relative, parent)
+            except DraftHistoryError as error:
+                raise LifecycleError("draft-lineage-invalid", "Draft Update requires its own current retained-history head") from error
+            history_ref = reserve_history_entry(root)
+            frontmatter = replace_draft_revision_lineage(frontmatter, {"history_entry_ref": history_ref})
+            draft_history = (history_ref, parent, parent_entry.get("direct_predecessor"))
+        if change_class == "semantic_revision" or legacy:
             prior_revision = preserve_atom_revision(root, target)
-        write_atom_revision(target, frontmatter, proposed["content"])
-        observed_atom = atom_from_path(root, target.path)
+        if mapping:
+            observed_atom = migrate_atom_identity_revision(root, target, mapping["destination"], frontmatter, proposed["content"])
+        else:
+            write_atom_revision(target, frontmatter, proposed["content"])
+            observed_atom = atom_from_path(root, target.path)
+            if draft_history is not None:
+                history_ref, parent, predecessor = draft_history
+                append_draft_entry(root, observed_atom.relative, reference=history_ref,
+                                   origin={"kind": "draft_update"}, parent_history_entry_ref=parent,
+                                   direct_predecessor=predecessor)
     except BaseException as error:
         if prior_revision is not None:
             prior_revision.path.unlink(missing_ok=True)
@@ -508,43 +884,125 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     history: dict[str, Any] = {"prior": prior, "revision_class": change_class}
     if prior_revision is not None:
         history["prior_revision"] = carrier_descriptor(root, prior_revision)
+    if mapping:
+        history["identity_mapping"] = dict(mapping)
+    effects = [_effect("changed", carrier=observed)]
+    if mapping and prior_revision is not None:
+        effects.extend([_effect("changed", carrier=carrier_descriptor(root, prior_revision)),
+                        {"state": "changed", "carrier": prior, "operation": "relocated_to_canonical_encoding"}])
     return {"operation": "update", "outcome": "applied", "observed": observed,
-            "effects": [_effect("changed", carrier=observed)],
+            "effects": effects,
             "history": history}
 
 
 def change_status_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bool = False, authorized: bool = False) -> dict[str, Any]:
-    """Apply one qualified status transition; Archive is its model-defined shortcut."""
+    """Apply one source-model-derived status change; callers cannot supply a model."""
 
     root = root.resolve()
-    request = _mapping(parameters, "parameters")
-    _exact_fields(request, frozenset({"target", "status", "status_model"}), "parameters")
-    if not isinstance(request["status"], str) or not request["status"]:
-        raise LifecycleError("status-invalid", "status must be a non-empty admitted model value")
-    target = _resolve_descriptor(root, request["target"], name="target")
-    prior = carrier_descriptor(root, target)
-    model = _status_model(request["status_model"], target, request["status"])
-    current_status = frontmatter_scalar(target.frontmatter, "status")
-    assert current_status is not None
-    archive = request["status"] == model["archive_status"]
-    diagnostics = _broken_references(root, target) if archive else []
-    if request["status"] == current_status:
+    missing_retry = _missing_draft_promotion_retry(root, parameters)
+    if missing_retry is not None:
+        return missing_retry
+    preflight = preflight_atom_lifecycle(root, "change_status", parameters)
+    target, prior = preflight["target"], preflight["prior"]
+    requested, current_status = preflight["requested_status"], preflight["current_status"]
+    model, archive = preflight["status_model"], preflight["archive"]
+    if requested == current_status:
         return {"operation": "change_status", "outcome": "no-op", "prior_status": current_status,
-                "observed": prior, "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
-                "effects": [_effect("unchanged", carrier=prior, reason="status-already-current")], "broken_references": diagnostics}
+                "observed": prior, "status_model": model,
+                "effects": [_effect("unchanged", carrier=prior, reason="status-already-current")], "broken_references": []}
+    promotion_head = _draft_promotion_head(root, target) if target.atom_id is None else None
+    # An ID-free Draft may have a sealed pending promotion.  Its request/head
+    # binding must refuse or recover before archive diagnostics dereference an
+    # identity that deliberately does not exist yet.
+    diagnostics = _broken_references(root, target) if archive and target.atom_id is not None else []
     if not _execute_allowed(execute=execute, authorized=authorized):
         return {"operation": "change_status", "outcome": "preview", "prior_status": current_status, "observed": prior,
-                "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
+                "status_model": model,
                 "effects": [_effect("unchanged", carrier=prior, reason="preview")], "broken_references": diagnostics}
+    refreshed = preflight_atom_lifecycle(root, "change_status", parameters)
+    if refreshed["status_model"] != model:
+        raise LifecycleError("status-model-stale", "authoritative status-model source changed after preflight")
+    prior_revision: Atom | None = None
     try:
-        frontmatter = replace_frontmatter_scalar(target.frontmatter, "status", request["status"])
+        frontmatter = replace_frontmatter_scalar(target.frontmatter, "status", requested)
         frontmatter = _refresh_frontmatter(frontmatter)
-        observed_atom = (
-            archive_atom_revision(root, target, frontmatter, target.content)
-            if archive
-            else move_atom_revision(root, target, _status_destination(root, target, request["status"]), frontmatter, target.content)
-        )
+        if requested.casefold() == "draft":
+            from draft_history import append_draft_entry, reserve_history_entry
+
+            prior_revision = preserve_atom_revision(root, target, allow_nonactive=True)
+            prior_seal = carrier_descriptor(root, prior_revision)
+            predecessor = {"atom_id": target.atom_id, "version": atom_version(target),
+                           "content_role": frontmatter_scalar(target.frontmatter, "content_role"),
+                           "summary": _summary(target.content), "digest": atom_digest(target),
+                           "immutable_locator": {"history_revision": atom_version(target), "path": prior_seal["path"]}}
+            history_ref = reserve_history_entry(root)
+            frontmatter = replace_draft_revision_lineage(frontmatter, {"history_entry_ref": history_ref})
+            observed_atom = demote_atom_to_draft(root, target, frontmatter, target.content)
+            append_draft_entry(root, observed_atom.relative, reference=history_ref,
+                               origin={"kind": "demoted_identified"}, direct_predecessor=predecessor)
+        elif promotion_head is not None:
+            from draft_promotion_pending import PendingPromotionError, finalize_pending_promotion, reserve_pending_promotion
+
+            head, head_entry = promotion_head
+            recovered_atom, pending = _pending_promotion_result(
+                root, parameters, prior=prior, draft_path=target.relative, head=head,
+                status_model=model, prior_status=current_status, live_draft=target,
+            )
+            if pending is not None:
+                return pending
+            if recovered_atom is not None:
+                observed_atom = recovered_atom
+            else:
+                # No pending reservation exists for this trusted head.  This is
+                # the one path permitted to select an identity and prepare bytes.
+                promotion_identity = _draft_promotion_identity(root, target, head_entry=head_entry)
+                destination, _, output_bytes = prepare_draft_promotion(root, target, promotion_identity, frontmatter, target.content)
+                try:
+                    reservation_result = reserve_pending_promotion(
+                        root, draft_path=target.relative, head=head, request=dict(parameters), planned_atom_id=promotion_identity,
+                        output_path=destination.relative_to(root).as_posix(), output_digest=hashlib.sha256(output_bytes).hexdigest(),
+                    )
+                except PendingPromotionError as error:
+                    raise LifecycleError(error.code, str(error)) from error
+                if reservation_result["disposition"] == "finalized":
+                    recovered_atom, pending = _pending_promotion_result(
+                        root, parameters, prior=prior, draft_path=target.relative, head=head,
+                        status_model=model, prior_status=current_status, live_draft=target,
+                    )
+                    if pending is not None:
+                        return pending
+                    if recovered_atom is None:
+                        raise LifecycleError("promotion-history-conflict", "finalized pending promotion did not resolve its output")
+                    observed_atom = recovered_atom
+                else:
+                    observed_atom = promote_draft_atom(root, target, promotion_identity, frontmatter, target.content, consume_draft=False)
+                    try:
+                        finalization = finalize_pending_promotion(root, reservation_result["reservation"])
+                    except PendingPromotionError as error:
+                        raise LifecycleError(error.code, str(error)) from error
+                    if finalization["disposition"] != "finalized":
+                        return {"operation": "change_status", "outcome": "pending", "prior_status": current_status,
+                                "observed": carrier_descriptor(root, observed_atom), "status_model": model,
+                                "effects": [_effect("changed", carrier=carrier_descriptor(root, observed_atom))],
+                                "pending_promotion": finalization}
+                    recovered_atom, pending = _pending_promotion_result(
+                        root, parameters, prior=prior, draft_path=target.relative, head=head,
+                        status_model=model, prior_status=current_status, live_draft=target,
+                    )
+                    if pending is not None:
+                        return pending
+                    if recovered_atom is None:
+                        raise LifecycleError("promotion-history-conflict", "finalized promotion did not resolve its output")
+                    observed_atom = recovered_atom
+        else:
+            observed_atom = (
+                archive_atom_revision(root, target, frontmatter, target.content)
+                if archive
+                else move_atom_revision(root, target, _status_destination(root, target, requested), frontmatter, target.content)
+            )
     except AtomToolError as error:
+        if prior_revision is not None:
+            prior_revision.path.unlink(missing_ok=True)
         raise _translate(error) from error
     observed = carrier_descriptor(root, observed_atom)
     result: dict[str, Any] = {
@@ -552,13 +1010,16 @@ def change_status_atom_action(root: Path, parameters: Mapping[str, Any], *, exec
         "outcome": "applied",
         "prior_status": current_status,
         "observed": observed,
-        "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
+        "status_model": model,
         "effects": [_effect("changed", carrier=observed)],
         "broken_references": diagnostics,
     }
     if archive:
         result["repair_handoff"] = {"operation": "repair_relations", "broken_references": diagnostics,
                                     "automatic_repair": False}
+    if requested.casefold() == "draft":
+        assert prior_revision is not None
+        result["history"] = {"prior": prior, "prior_revision": carrier_descriptor(root, prior_revision)}
     return result
 
 

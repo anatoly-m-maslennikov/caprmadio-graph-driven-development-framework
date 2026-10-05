@@ -25,12 +25,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from artifact_metadata import SETTINGS_PATH, atom_identifier
 
 
-SOURCE_RELATIVE = Path(
-    ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/"
-    "000_APPLICABLE_MTHD_sources"
-)
 DEFAULT_CONTROL_ROOT = SETTINGS_PATH.parent
-OUTPUT_RELATIVE = DEFAULT_CONTROL_ROOT / "_projection/APPLICABLE_METHODOLOGY"
+FRAMEWORK_APPLICABLE_RELATIVE = Path("000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY")
+OUTPUT_RELATIVE = DEFAULT_CONTROL_ROOT / FRAMEWORK_APPLICABLE_RELATIVE
+SOURCE_RELATIVE = OUTPUT_RELATIVE / "000_APPLICABLE_MTHD_sources"
 APPROVAL_RELATIVE = SOURCE_RELATIVE / "003_PROJECT_CONFIGURATION/applicable_methodology_conflict_approvals.toml"
 STRUCTURE_RELATIVE = SETTINGS_PATH.parent / "project_structure.toml"
 LAYERS = (
@@ -101,12 +99,17 @@ def configured_control_root(root: Path) -> Path:
 
 
 def methodology_paths(root: Path) -> MethodologyPaths:
-    """Resolve framework sources and the configured control-root Projection target."""
+    """Resolve source and delivery places from the configured Project Structure.
+
+    Applicable Methodology is the Projection-location exception: its default
+    lives in the Project's Framework folder, not the general ``_projection``
+    directory.  An explicit source-unit delivery binding remains authoritative.
+    """
     control = configured_control_root(root)
-    output = control / "_projection/APPLICABLE_METHODOLOGY"
-    structure = root / STRUCTURE_RELATIVE
+    output = control / FRAMEWORK_APPLICABLE_RELATIVE
+    structure = root / control / "project_structure.toml"
     if not structure.exists():
-        return MethodologyPaths(output=output, control_root=control)
+        return MethodologyPaths(source=output / "000_APPLICABLE_MTHD_sources", output=output, control_root=control)
     try:
         raw = structure.read_bytes()
         data = tomllib.loads(raw.decode("utf-8"))
@@ -125,11 +128,22 @@ def methodology_paths(root: Path) -> MethodologyPaths:
     source = Path(value)
     if source.is_absolute() or ".." in source.parts or source == Path("."):
         raise CompileError("source-unit-place-invalid", "Methodology source place must be repository-relative", property="authority_path")
+    output_value = units[0].get("delivery_path", output.as_posix())
+    if not isinstance(output_value, str) or not output_value:
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place must be a non-empty repository-relative path", property="delivery_path")
+    output = Path(output_value)
+    if output.is_absolute() or ".." in output.parts or output == Path("."):
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place must be repository-relative", property="delivery_path")
     source_place = (root / source).resolve()
     output_place = (root / output).resolve()
     if not source_place.is_relative_to(root.resolve()):
         raise CompileError("source-unit-place-invalid", "Methodology source place resolves outside the Project", property="authority_path")
-    if output_place.is_relative_to(source_place):
+    if not output_place.is_relative_to(root.resolve()):
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place resolves outside the Project", property="delivery_path")
+    if output_place.is_relative_to(source_place) or any(
+        source_place.is_relative_to((output_place / role_directory).resolve())
+        for _, role_directory in ROLES
+    ):
         raise CompileError("source-output-overlap", "Generated output cannot replace the authoritative source place")
     return MethodologyPaths(source, output, sha256_bytes(raw), control)
 
@@ -284,9 +298,12 @@ def source_state_snapshot(root: Path, places: MethodologyPaths | None = None) ->
     for path in sorted(source_root.rglob("*")):
         if path.is_file() and not path.is_symlink():
             snapshot[repo_relative(root, path)] = sha256_bytes(path.read_bytes())
-    structure = root / STRUCTURE_RELATIVE
+    structure = root / places.control_root / "project_structure.toml"
     if structure.is_file() and not structure.is_symlink():
-        snapshot[STRUCTURE_RELATIVE.as_posix()] = sha256_bytes(structure.read_bytes())
+        snapshot[repo_relative(root, structure)] = sha256_bytes(structure.read_bytes())
+    project_settings = root / SETTINGS_PATH
+    if project_settings.is_file() and not project_settings.is_symlink():
+        snapshot[SETTINGS_PATH.as_posix()] = sha256_bytes(project_settings.read_bytes())
     return snapshot
 
 
@@ -299,9 +316,9 @@ def source_snapshot_is_current(root: Path, snapshot: dict[str, str], places: Met
 
 def governed_bindings(root: Path, places: MethodologyPaths | None = None) -> dict[str, str]:
     places = places or methodology_paths(root)
-    structure = root / STRUCTURE_RELATIVE
+    structure = root / places.control_root / "project_structure.toml"
     if not structure.is_file() or structure.is_symlink():
-        raise CompileError("project-structure-missing", "Project Structure is required for governed bindings", path=STRUCTURE_RELATIVE.as_posix())
+        raise CompileError("project-structure-missing", "Project Structure is required for governed bindings", path=repo_relative(root, structure))
     _, settings = framework_settings(root, places)
     configuration_root = root / places.source / "003_PROJECT_CONFIGURATION"
     configuration_records = {
@@ -1019,10 +1036,13 @@ def validate_request(request: Mapping[str, object]) -> tuple[Path, MethodologyPa
         failed = request.get("failed_publication_ref")
         if not isinstance(failed, str) or not failed:
             raise request_error("request-recovery-evidence-missing", "Recovery requires an existing failed-publication reference")
+    receipt_refs = request.get("run_receipt_refs", [])
+    if not isinstance(receipt_refs, list) or any(not isinstance(reference, Mapping) for reference in receipt_refs):
+        raise request_error("request-run-receipt-references-invalid", "Shared Run receipt references must be a list of reference objects")
     return root, places, str(operation)
 
 
-def journal_record(root: Path, reference: str, digest: str, places: MethodologyPaths | None = None) -> dict[str, object]:
+def journal_record(root: Path, reference: str, digest: str | None, places: MethodologyPaths | None = None) -> dict[str, object]:
     """Resolve a canonical immutable Journal record by path#event-id reference."""
     path_text, marker, event_id = reference.partition("#")
     if not marker or not event_id:
@@ -1040,10 +1060,34 @@ def journal_record(root: Path, reference: str, digest: str, places: MethodologyP
         except json.JSONDecodeError:
             continue
         if isinstance(record, dict) and record.get("event_id") == event_id:
-            if record.get("event_digest") != digest:
+            if digest is not None and record.get("event_digest") != digest:
                 raise request_error("decision-journal-digest-mismatch", "Canonical Journal record digest differs from decision reference", reference=reference)
             return record
     raise request_error("decision-journal-record-missing", "Canonical Journal record is not present", reference=reference)
+
+
+def failed_publication_evidence(root: Path, reference: str, digest: str, places: MethodologyPaths) -> dict[str, object]:
+    """Require an existing canonical failed-publication event before retrying.
+
+    The compiler only reads the shared Journal reference.  It does not create a
+    replacement event, receipt, or Run when an earlier publication failed.
+    """
+    record = journal_record(root, reference, None, places)
+    details = record.get("details")
+    if not isinstance(details, Mapping):
+        raise request_error("recovery-journal-incomplete", "Failed-publication evidence lacks bound details", reference=reference)
+    if details.get("source_frontier_digest") != digest:
+        raise request_error("recovery-source-frontier-stale", "Failed-publication evidence names a different source frontier", reference=reference)
+    event = record.get("event")
+    outcome = record.get("outcome")
+    if event not in {"failed", "interrupted"} and outcome not in {"failed", "partial", "uncertain", "interrupted_pending"}:
+        raise request_error("recovery-publication-not-failed", "Recovery evidence is not a failed or uncertain publication", reference=reference)
+    return {
+        "failed_publication_ref": reference,
+        "event_id": record.get("event_id"),
+        "event_digest": record.get("event_digest"),
+        "source_frontier_digest": digest,
+    }
 
 
 def journal_decisions(root: Path, decision_refs: object, conflicts: list[dict[str, object]], digest: str, places: MethodologyPaths | None = None) -> tuple[list[Approval], list[dict[str, object]]]:
@@ -1079,7 +1123,14 @@ def journal_decisions(root: Path, decision_refs: object, conflicts: list[dict[st
         if details.get("conflict_id") != conflict_id or not isinstance(selected, str) or not isinstance(operator, str) or not operator:
             raise request_error("decision-journal-incomplete", "Canonical Journal decision is not exactly bound to the assessed frontier", reference=path)
         approvals.append(Approval(conflict_id, digest, selected, operator, path))
-        evidence.append({"conflict_id": conflict_id, "operator": operator, "journal_record_ref": path, "journal_record_digest": record_digest, "source_frontier_digest": digest})
+        evidence.append({
+            "conflict_id": conflict_id,
+            "operator": operator,
+            "selected_source_carrier_path": selected,
+            "journal_record_ref": path,
+            "journal_record_digest": record_digest,
+            "source_frontier_digest": digest,
+        })
     return approvals, evidence
 
 
@@ -1094,11 +1145,17 @@ def run_request(request: Mapping[str, object]) -> dict[str, object]:
     provide source/output locations, source edits, selection results, or event
     payloads.  Shared run support supplies any receipt references unchanged.
     """
+    prior = "not_started"
     try:
         root, places, operation = validate_request(request)
+        prior = publication_state(root, places)
         report, candidates, snapshot = compile_report(root, places)
         digest = str(report["source_frontier_digest"])
         approvals, decision_evidence = journal_decisions(root, request.get("decision_refs"), list(report["conflicts"]), digest, places)
+        recovery_evidence = (
+            failed_publication_evidence(root, str(request["failed_publication_ref"]), digest, places)
+            if operation == "recover_publication" else None
+        )
         selected, decision_statuses, unresolved = resolve_conflicts(candidates, list(report["conflicts"]), approvals, digest)
         blocking = [item for item in report["diagnostics"] if item.get("code") != "source-excluded"]
         if unresolved:
@@ -1113,9 +1170,12 @@ def run_request(request: Mapping[str, object]) -> dict[str, object]:
             "proposals": [item["proposed_resolution"] for item in report["conflicts"]],
             "decision_provenance": decision_evidence,
             "decision_statuses": decision_statuses,
-            "evidence_refs": {"governed_bindings": governed_bindings(root, places)},
-            "run_receipt_refs": request.get("run_receipt_refs", []),
-            "publication": {"prior_output_state": publication_state(root, places)},
+            "evidence_refs": {
+                "governed_bindings": governed_bindings(root, places),
+                **({"failed_publication": recovery_evidence} if recovery_evidence is not None else {}),
+            },
+            "run_receipt_refs": list(request.get("run_receipt_refs", [])),
+            "publication": {"prior_output_state": prior},
             # Compatibility observables retained for callers of the original CLI.
             "authority": "non_authoritative_dry_run",
             "eligible_candidate_count": len(candidates),
@@ -1144,27 +1204,19 @@ def run_request(request: Mapping[str, object]) -> dict[str, object]:
         if not source_snapshot_is_current(root, snapshot, places):
             raise CompileError("source-frontier-changed", "Source frontier changed during output replacement")
         result["publication"] = {
-            "prior_output_state": publication_state(root, places),
+            "prior_output_state": prior,
             "transaction_id": sha256_bytes(canonical_json({"source_frontier_digest": digest, "output": places.output.as_posix()})),
             "output_digest": generated_tree_digest(root, places),
             "output_plan": output_plan(selected),
         }
-        refs = request.get("run_receipt_refs", [])
-        if not refs:
-            result.update(outcome="pending_recording", apply_status="APPLIED", generated_tree_digest=result["publication"]["output_digest"], publishable=True)
-        else:
-            result.update(outcome="published", apply_status="APPLIED", generated_tree_digest=result["publication"]["output_digest"], publishable=True)
+        # Run support owns the canonical action/publication receipt.  Retain
+        # supplied shared references as context, but never turn a caller's
+        # reference-shaped data into a completed Journal publication here.
+        result.update(outcome="pending_recording", apply_status="APPLIED", generated_tree_digest=result["publication"]["output_digest"], publishable=True)
         return result
     except CompileError as error:
-        root_value = request.get("project_root") if isinstance(request, Mapping) else None
-        prior = "not_started"
-        if isinstance(root_value, str):
-            try:
-                root = Path(root_value).resolve()
-                if root.is_dir():
-                    prior = "preserved" if (root / methodology_paths(root).output).exists() else "not_started"
-            except CompileError:
-                pass
+        if error.code == "atomic-replacement-uncertain":
+            prior = "uncertain"
         return {
             "schema": SCHEMA, "outcome": "blocked", "publishable": False,
             "blocking_findings": [error.record()], "publication": {"prior_output_state": prior},
@@ -1191,11 +1243,35 @@ def obtain_decision_action(request: Mapping[str, object]) -> dict[str, object]:
 
 
 def apply_corrections_action(request: Mapping[str, object]) -> dict[str, object]:
-    return {"schema": SCHEMA, "outcome": "reassess_required", "source_edit_supported": False, "blocking_findings": [{"code": "source-corrections-external"}]}
+    result = run_request({**request, "operation": "dry_run"})
+    handoff = {
+        "kind": "source_owner_correction_request",
+        "source_edit_supported": False,
+        "required_follow_up_actions": ["CA-O-004", "CA-O-005"],
+    }
+    if result.get("outcome") == "blocked":
+        return {**result, "source_edit_supported": False, "correction_request_or_receipt": handoff}
+    return {
+        **result,
+        "outcome": "reassess_required",
+        "source_edit_supported": False,
+        "correction_request_or_receipt": handoff,
+        "reselection_required": True,
+        "reassessment_required": True,
+    }
 
 
 def publish_action(request: Mapping[str, object]) -> dict[str, object]:
-    return run_request({**request, "operation": "apply"})
+    result = run_request({**request, "operation": "apply"})
+    return {
+        **result,
+        "action_handoff": {
+            "workflow_id": WORKFLOW_ID,
+            "action_id": "CA-O-009",
+            "operation": "apply",
+            "run_receipt_behavior": "shared_passthrough_pending_canonical_recording",
+        },
+    }
 
 
 ACTION_ADAPTERS = {

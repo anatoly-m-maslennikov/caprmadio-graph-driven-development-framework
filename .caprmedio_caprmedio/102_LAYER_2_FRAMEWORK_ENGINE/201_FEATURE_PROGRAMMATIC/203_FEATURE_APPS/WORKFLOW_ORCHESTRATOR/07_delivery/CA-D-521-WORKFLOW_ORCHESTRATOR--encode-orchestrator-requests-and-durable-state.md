@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 14
 status: Active
 author: Anatoly Maslennikov
-version: 3
-updated_at: "2026-10-04 18:53:53 +0000"
+version: 6
+updated_at: "2026-10-05 08:12:00 +0400"
 subjects:
   governs: "Workflow Run/Carrier"
   depends_on: [Workflow, Action, Atom, Operator, Journal, Implementation, Tool]
@@ -20,7 +20,7 @@ Encode orchestrator requests and durable state
 
 ## Scope
 
-WORKFLOW_ORCHESTRATOR's existing local execution capability and the thirteen selected Workflow routes of CA-P-1117.
+WORKFLOW_ORCHESTRATOR's existing local execution capability and the fifteen currently manifested selected Workflow routes: the original thirteen of CA-P-1117 plus the two accepted read-only query routes of CA-P-1520, with one source-admitted Release Version successor route.
 
 ## Claim
 
@@ -33,7 +33,7 @@ WORKFLOW_ORCHESTRATOR **must** use the following request **and** persistence Car
 - persistent local DBOS SQLite file: .caprmedio_install/workflow_orchestrator/dbos.sqlite. this operational checkpoint store is **not** ephemeral runtime state **or** a second Atom authority.
 - request, dispatch intent, admitted output **and** staged edit evidence: .caprmedio_install/workflow_orchestrator/runs/<run_id>/. relative paths reject traversal, symlinks **and** secret Carriers.
 - confirmed Workflow, Step and Action events use the one existing Project Events Journal. The selected routes use CA-D-527/528/529's shared selected-Run contract and schema-v5 events; existing Base Revise v4 Journal support remains admitted. Full selected reports use `tmp/<Workflow Summary>/<run_id>.md` and safe result/effect references; Base Revise retains its existing report path.
-- the additional strictly tagged `enqueue_selected` request carries `run_id` and `execution` containing CA-D-527's strict `execute` request. Its requested Workflow Run identity must match `run_id`. Only the thirteen reviewed route registrations and their exact source Workflow/Step/Action revisions are admitted. Its definition/currentness, sealed Initiative and explicit current Operator authorization are validated before queue dispatch, then revalidated at dispatch; queued acknowledgment is not execution or Journal completion.
+- the additional strictly tagged `enqueue_selected` request carries `run_id` and `execution` containing CA-D-527's strict `execute` request. Its requested Workflow Run identity must match `run_id`. Its one canonical `definition_manifest` currently admits exactly fifteen routes: the original thirteen retain CA-A-1142@2 as their unchanged registry authority; `find_and_fetch_artifacts` and `find_and_fetch_journal_events` are admitted only through that same manifest's explicit `query_source_admissions`, pinned to accepted CA-P-1618@1 and CA-P-1535@2. CA-P-1543@2 is the external MCP source-review gate, not a query-source admission pin. A successor canonical-manifest revision may admit `release_version` as its sixteenth route only with D572's complete accepted CA-P-1622@1 Release source frontier, exact O164–O179 pins, and an explicit current route-bound Operator authorization. This admission creates no second registry, executor, Agent contract or effect schema. Its definition/currentness, sealed Initiative and explicit current route-bound Operator authorization are validated before queue dispatch, then revalidated at dispatch. The two query routes have no mutation authority and retain the tagged request, shared selected-Run recording and canonical-manifest currentness checks. Before a Journal query records its own Run or Action start evidence, its adapter has captured CA-O-163's sealed canonical Journal byte-prefix; queued or worker-side recording cannot enter or enlarge that source frontier. Queued acknowledgment is not execution or Journal completion. This source-only contract amendment neither publishes a runtime route nor accepts query execution.
 - the existing DBOS worker persists the exact frozen selected request, source bindings, dispatch intent, accepted result and report references under the same Run directory. Selected dispatch invokes the admitted Workflow graph and real Step/Action adapters through the shared Run library, not a second independent Workflow policy. An uncertain post-intent dispatch ends with retained recovery evidence, never automatic effect replay.
 - CLI supports `enqueue`, `enqueue_selected`, `status`, `worker` and `start-worker`. `start-worker` explicitly launches a detached local worker; MCP exposes `workflow_orchestrator` for these admitted enqueue variants and status, and does not start workers implicitly. Status/result observation after client disconnect uses actual durable scheduler and result state and returns the selected Workflow identity, Run/report/Journal references and truthful pending/failure disposition. Existing Base Revise clients remain compatible.
 - Agent output carries report_json, candidate_content **and** confidence; queued requests bind the selected sources, rules, Workflow definition, prompts **and** implementation fingerprint.

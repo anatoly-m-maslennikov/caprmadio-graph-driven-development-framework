@@ -46,6 +46,19 @@ class EnqueueSelected(Strict):
         return self
 
 
+class RecoverSelectedRelease(Strict):
+    """One sealed request identity for an already-admitted Release Run."""
+    operation: Literal['recover_selected_release'] = 'recover_selected_release'
+    run_id: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$')
+    request_identity: str = Field(pattern=r'^[0-9a-f]{64}$')
+
+
+class RecoverSelectedReleaseStatus(Strict):
+    operation: Literal['recover_selected_release_status'] = 'recover_selected_release_status'
+    run_id: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$')
+    recovery_transport_handle: str = Field(pattern=r'^[0-9a-f]{32}$')
+
+
 class Status(Strict):
     operation: Literal['status'] = 'status'
     run_id: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$')

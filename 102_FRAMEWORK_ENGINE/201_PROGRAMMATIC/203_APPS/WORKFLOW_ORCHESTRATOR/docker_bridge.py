@@ -6,7 +6,20 @@ from pathlib import Path
 import re
 import subprocess
 
+from docker.image_reference import IMAGE, image_reference
+
 MARKER = ".caprmedio_install/workflow_orchestrator/docker/transport.json"
+
+
+def _environment(root, environment=None):
+    """Retain an explicit runtime image instead of silently reverting to a tag."""
+    source = os.environ if environment is None else environment
+    return dict(
+        source,
+        CAPRMEDIO_PROJECT_ROOT=str(root),
+        CAPRMEDIO_ENGINE_SOURCE_ROOT=str(Path(__file__).resolve().parents[4]),
+        CAPRMEDIO_IMAGE=image_reference(source),
+    )
 
 
 def invoke(root, request):
@@ -40,12 +53,7 @@ def invoke(root, request):
         "/project",
         request["operation"],
     ]
-    environment = dict(
-        os.environ,
-        CAPRMEDIO_PROJECT_ROOT=str(root),
-        CAPRMEDIO_ENGINE_SOURCE_ROOT=str(Path(__file__).resolve().parents[4]),
-        CAPRMEDIO_IMAGE="caprmedio-runtime:local",
-    )
+    environment = _environment(root)
     try:
         result = subprocess.run(
             command,

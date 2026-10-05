@@ -32,31 +32,104 @@ RESULTS = {
     "CA-O-099": {"repaired", "authority_change_required", "blocked"},
 }
 ACTION_HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {}
+SELECTED_PROJECT_SOURCE_ROOT = ".caprmedio_caprmedio"
+_BINDING_FIELDS = frozenset({"atom_id", "version", "path", "sha256"})
+_SELECTED_PROJECT_FIELDS = frozenset({"kind", "source_root", "source_references"})
 
 
-def current_source_bindings() -> list[dict[str, Any]]:
-    """Read the reviewed prompt-authority frontier used by every invocation."""
-    rows = json.loads((HERE / "source_bindings.json").read_text(encoding="utf-8"))["sources"]
+def _trusted_project_root(selected_project_root: str | Path | None) -> Path:
+    """Return a root supplied by the graph owner, never by a packet field."""
+    if selected_project_root is None:
+        return ROOT.resolve(strict=True)
+    root = Path(selected_project_root)
+    if not root.is_absolute() or root.is_symlink() or not root.is_dir():
+        raise ValueError("trusted selected Project root must be an absolute, non-symlink directory")
+    return root.resolve(strict=True)
+
+
+def _safe_source_path(value: object) -> Path:
+    if not isinstance(value, str) or not value:
+        raise ValueError("selected Project source path is missing")
+    path = Path(value)
+    source_root = Path(SELECTED_PROJECT_SOURCE_ROOT)
+    if path.is_absolute() or ".." in path.parts:
+        raise ValueError("selected Project source path must be safe and relative")
+    try:
+        path.relative_to(source_root)
+    except ValueError as error:
+        raise ValueError("selected Project source path escapes its source root") from error
+    return path
+
+
+def _read_bound_source(root: Path, path: object) -> bytes:
+    relative = _safe_source_path(path)
+    candidate = root / relative
+    try:
+        resolved = candidate.resolve(strict=True)
+    except OSError as error:
+        raise ValueError(f"selected Project source is missing: {relative}") from error
+    if candidate.is_symlink() or resolved != candidate or not resolved.is_relative_to(root) or not resolved.is_file():
+        raise ValueError(f"selected Project source is outside its frozen root: {relative}")
+    return resolved.read_bytes()
+
+
+def _reviewed_binding_rows() -> list[dict[str, Any]]:
+    payload = json.loads((HERE / "source_bindings.json").read_text(encoding="utf-8"))
+    rows = payload.get("sources") if isinstance(payload, Mapping) else None
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("reviewed source bindings are missing")
+    seen_ids: set[str] = set()
+    seen_paths: set[str] = set()
+    checked: list[dict[str, Any]] = []
     for row in rows:
-        raw = (ROOT / row["path"]).read_bytes()
+        if not isinstance(row, Mapping) or set(row) != _BINDING_FIELDS:
+            raise ValueError("reviewed source binding has an invalid shape")
+        atom_id, version, path, digest = row["atom_id"], row["version"], row["path"], row["sha256"]
+        if (not isinstance(atom_id, str) or not isinstance(version, int) or version < 1 or
+                not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest)):
+            raise ValueError("reviewed source binding has an invalid identity")
+        _safe_source_path(path)
+        if atom_id in seen_ids or path in seen_paths:
+            raise ValueError("reviewed source binding is duplicated")
+        seen_ids.add(atom_id)
+        seen_paths.add(path)
+        checked.append(dict(row))
+    return checked
+
+
+def current_source_bindings(selected_project_root: str | Path | None = None) -> list[dict[str, Any]]:
+    """Read the reviewed prompt-authority frontier used by every invocation."""
+    root = _trusted_project_root(selected_project_root)
+    rows = _reviewed_binding_rows()
+    for row in rows:
+        raw = _read_bound_source(root, row["path"])
         version = re.search(r'^version: ?["\']?(\d+)', raw.decode("utf-8"), re.M)
         if not version or hashlib.sha256(raw).hexdigest() != row["sha256"] or int(version[1]) != row["version"]:
             raise ValueError(f"stale reviewed source binding: {row['atom_id']}")
     return rows
 
 
-def prepare_method_projection(method_paths: list[str | Path]) -> dict[str, Any]:
+def prepare_method_projection(method_paths: list[str | Path],
+                              selected_project_root: str | Path | None = None) -> dict[str, Any]:
     """Build a verified, full-content active-M input distinct from selected R/D/E."""
+    root = _trusted_project_root(selected_project_root)
+    selected_project = selected_project_root is not None
     entries = []
     for supplied in (Path(p) for p in method_paths):
-        path = supplied if supplied.is_absolute() else ROOT / supplied
-        raw = path.read_bytes()
+        if selected_project:
+            if supplied.is_absolute():
+                raise ValueError("selected Project Method path must be relative")
+            raw = _read_bound_source(root, supplied.as_posix())
+            path = root / supplied
+        else:
+            path = supplied if supplied.is_absolute() else root / supplied
+            raw = path.read_bytes()
         text = raw.decode("utf-8")
         atom = re.search(r'^atom_id: ?["\']?([^"\'\n]+)', text, re.M)
         version = re.search(r'^version: ?["\']?(\d+)', text, re.M)
         if not atom or not version or "content_role: \"Method\"" not in text and "content_role: Method" not in text or not re.search(r'^status: ?["\']?Active', text, re.M):
             raise ValueError(f"not a current active Method: {supplied}")
-        relative = path.resolve().relative_to(ROOT).as_posix()
+        relative = path.resolve().relative_to(root).as_posix()
         entries.append((atom[1], int(version[1]), relative, raw, text))
     entries.sort(key=lambda entry: (entry[0], entry[1]))
     rows = [{"atom_id": atom, "version": version, "path": relative,
@@ -68,7 +141,8 @@ def prepare_method_projection(method_paths: list[str | Path]) -> dict[str, Any]:
     return {"content": "\n\n".join(parts), "sources": rows}
 
 
-def compile_active_methods(packet: Mapping[str, Any]) -> Mapping[str, Any]:
+def compile_active_methods(packet: Mapping[str, Any],
+                           selected_project_root: str | Path | None = None) -> Mapping[str, Any]:
     """Return the supplied verified M projection without mixing it with RED."""
     projection = packet.get("method_projection")
     if not isinstance(projection, Mapping) or not projection.get("content") or not isinstance(projection.get("sources"), list):
@@ -78,8 +152,13 @@ def compile_active_methods(packet: Mapping[str, Any]) -> Mapping[str, Any]:
     if not isinstance(packet.get("evaluations"), (list, tuple)):
         raise ValueError("missing separate E checks")
     try:
-        expected = prepare_method_projection([row["path"] for row in projection["sources"]])
-    except (KeyError, OSError, ValueError) as error:
+        if selected_project_root is None:
+            expected_paths = [row["path"] for row in projection["sources"]]
+        else:
+            expected_paths = [row["path"] for row in current_source_bindings(selected_project_root)
+                              if row["atom_id"].startswith("CA-M-")]
+        expected = prepare_method_projection(expected_paths, selected_project_root)
+    except (KeyError, OSError, UnicodeDecodeError, ValueError) as error:
         raise ValueError(f"invalid active-M projection: {error}") from error
     if projection != expected:
         raise ValueError("active-M projection content, source, digest, or currentness mismatch")
@@ -101,18 +180,70 @@ def _envelope(step: str, result: str, packet: Mapping[str, Any], **extra: Any) -
     }
 
 
-def _validate(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None) -> str | None:
+def _validate_selected_project(packet: Mapping[str, Any], selected_project_root: str | Path) -> None:
+    binding = packet.get("selected_project")
+    if not isinstance(binding, Mapping) or set(binding) != _SELECTED_PROJECT_FIELDS:
+        raise ValueError("selected Project binding is missing or malformed")
+    if binding.get("kind") != "selected_project" or binding.get("source_root") != SELECTED_PROJECT_SOURCE_ROOT:
+        raise ValueError("selected Project binding has an invalid authority root")
+    source_references = binding.get("source_references")
+    if not isinstance(source_references, list):
+        raise ValueError("selected Project source references are missing")
+    root = _trusted_project_root(selected_project_root)
+    expected = current_source_bindings(root)
+    if source_references != expected:
+        raise ValueError("selected Project source references are stale or mismatched")
+    _validate_workspace_capability(packet, root)
+
+
+def _overlaps(left: Path, right: Path) -> bool:
+    return left == right or left.is_relative_to(right) or right.is_relative_to(left)
+
+
+def _validate_workspace_capability(packet: Mapping[str, Any], selected_project_root: Path) -> None:
+    workspace = packet.get("workspace")
+    if not isinstance(workspace, str) or not workspace:
+        raise ValueError("selected Project workspace is missing")
+    path = Path(workspace)
+    if not path.is_absolute() or path.is_symlink() or not path.is_dir():
+        raise ValueError("selected Project workspace must be an absolute non-symlink directory")
+    try:
+        resolved = path.resolve(strict=True)
+    except OSError as error:
+        raise ValueError("selected Project workspace is not readable") from error
+    if resolved != path:
+        raise ValueError("selected Project workspace must be an absolute non-symlink directory")
+    source_root = selected_project_root / SELECTED_PROJECT_SOURCE_ROOT
+    protected_locations = (source_root, selected_project_root / ".git")
+    if selected_project_root.is_relative_to(resolved) or any(_overlaps(resolved, protected)
+                                                               for protected in protected_locations):
+        raise ValueError("selected Project workspace overlaps protected Project authority")
+    permissions = packet.get("permissions")
+    capability = permissions.get("implementation_workspace") if isinstance(permissions, Mapping) else None
+    expected = {"kind": "disposable_workspace", "path": workspace, "allow_write": True}
+    if capability != expected:
+        raise ValueError("selected Project workspace capability is missing or mismatched")
+
+
+def _validate(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None,
+              selected_project_root: str | Path | None = None) -> str | None:
     _, context = ACTION_BY_STEP[step]
     if packet.get("context") != context:
         return "supplied Step context is missing or mismatched"
     try:
-        bindings_current = packet.get("source_bindings") == current_source_bindings()
-    except (KeyError, OSError, ValueError):
+        if selected_project_root is None:
+            if "selected_project" in packet:
+                return "selected invocation needs a trusted selected Project root"
+        else:
+            _validate_selected_project(packet, selected_project_root)
+        bindings_current = packet.get("source_bindings") == current_source_bindings(selected_project_root)
+    except (KeyError, OSError, UnicodeDecodeError, ValueError, TypeError):
         bindings_current = False
-    if not bindings_current or not packet.get("permissions", {}).get("allowed"):
+    permissions = packet.get("permissions")
+    if not bindings_current or not isinstance(permissions, Mapping) or not permissions.get("allowed"):
         return "current source bindings or permission are missing"
     try:
-        compile_active_methods(packet)
+        compile_active_methods(packet, selected_project_root)
     except ValueError as error:
         return str(error)
     if context == "Isolated":
@@ -146,11 +277,12 @@ def _performed_success(step: str, response: Mapping[str, Any]) -> bool:
 
 
 def implement_selected_queue(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None = None,
-                             implement_run_support: Any = None) -> dict[str, Any]:
+                             implement_run_support: Any = None, *,
+                             selected_project_root: str | Path | None = None) -> dict[str, Any]:
     """Invoke one current Action; no MCP server or successor dispatch is needed."""
     if step not in ACTION_BY_STEP:
         raise ValueError(f"unknown current implementation Step: {step}")
-    blocker = _validate(step, packet, agent)
+    blocker = _validate(step, packet, agent, selected_project_root)
     if blocker:
         return _blocked(step, blocker, packet)
     prompt = (HERE / f"{step}.prompt.md").read_text(encoding="utf-8")
@@ -169,7 +301,8 @@ def implement_selected_queue(step: str, packet: Mapping[str, Any], agent: Callab
 
 
 def _handler(step: str) -> Callable[..., dict[str, Any]]:
-    return lambda packet, agent=None, implement_run_support=None: implement_selected_queue(step, packet, agent, implement_run_support)
+    return lambda packet, agent=None, implement_run_support=None, selected_project_root=None: implement_selected_queue(
+        step, packet, agent, implement_run_support, selected_project_root=selected_project_root)
 
 
 for _step, _action in ACTION_BY_STEP.items():

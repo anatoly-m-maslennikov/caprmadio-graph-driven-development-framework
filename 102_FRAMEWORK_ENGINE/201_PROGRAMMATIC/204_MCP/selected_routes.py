@@ -14,18 +14,91 @@ from typing import Any, Callable, Mapping
 DEFAULT_CONTROL_ROOT = Path(".caprmedio_caprmedio")
 MANIFEST_FILENAME = "selected_workflow_bindings.json"
 PROJECT_SETTINGS_REF = DEFAULT_CONTROL_ROOT / "caprmedio_project_settings.toml"
-SELECTED_ROUTE_NAMES = (
+ORIGINAL_SELECTED_ROUTE_NAMES = (
     "create_atom", "update_atom", "replace_atom", "change_atom_status",
     "create_scope_unit", "rename_scope_unit", "move_scope_unit", "remove_scope_unit",
     "run_implementation_workflow", "revert_changes", "build_entities_graph",
     "build_terms_graph", "build_applicable_methodology",
 )
+QUERY_ROUTE_NAMES = ("find_and_fetch_artifacts", "find_and_fetch_journal_events")
+SELECTED_ROUTE_NAMES = (*ORIGINAL_SELECTED_ROUTE_NAMES, *QUERY_ROUTE_NAMES)
+_OPTIONAL_RELEASE_ROUTE_NAME = "release_version"
 _DIGEST = re.compile(r"^[0-9a-f]{64}$")
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$")
 _FRESHNESS_FIELDS = {
     "selected_source_registry_ref", "selected_source_registry_version",
     "selected_source_registry_digest", "selected_binding_ref", "selected_binding_digest",
 }
+_ORIGINAL_SELECTED_SOURCE_REGISTRY_REF = (
+    ".caprmedio_caprmedio/02_analysis/"
+    "CA-A-1142-ANALYSIS_RPRT--prepare-the-selected-source-to-rmed-handoff.md"
+)
+_ORIGINAL_SELECTED_SOURCE_REGISTRY_VERSION = 2
+_QUERY_SOURCE_ADMISSION_FIELDS = {
+    "route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions",
+}
+_QUERY_SOURCE_ADMISSION_SPECS = (
+    {
+        "route": "find_and_fetch_artifacts",
+        "acceptance_frontier": {
+            "atom_id": "CA-P-1618", "version": 1,
+            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/29-CA-P-1618-TASK--accept-current-artifact-query-source-frontier.md",
+            "digest": "bdf10c928c10c102dc489c8e3e526ffe73e8a33d492f4dabc8b5d0129c453b1f",
+        },
+        "workflow": {
+            "atom_id": "CA-O-158", "version": 4,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-158-CORE_META_MODEL-WORKFLOW--find-and-fetch-artifacts.md",
+            "digest": "d7fdaebdd1d0c6ca7dac9aced25552c487336f2a51f18c0f03ef65d16ff4618a",
+        },
+        "ordered_steps": [{
+            "step": {
+                "atom_id": "CA-O-160", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-160-CORE_META_MODEL-STEP--run-the-artifact-query-and-fetch.md",
+                "digest": "a743a84fd24db32123ac8162e7a2178e6d83b1b727cbe54477b6020914537384",
+            },
+            "action": {
+                "atom_id": "CA-O-159", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-159-CORE_META_MODEL-ACTION--query-and-fetch-artifacts.md",
+                "digest": "3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08",
+            },
+        }],
+        "ordered_actions": [{
+            "atom_id": "CA-O-159", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-159-CORE_META_MODEL-ACTION--query-and-fetch-artifacts.md",
+            "digest": "3fd33badbff039e58c1c0b31dfbf3608c37a58d779a1b3ebc14d7bb5ee27dc08",
+        }],
+    },
+    {
+        "route": "find_and_fetch_journal_events",
+        "acceptance_frontier": {
+            "atom_id": "CA-P-1535", "version": 2,
+            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/15-CA-P-1535-TASK--accept-final-journal-query-source.md",
+            "digest": "6246b46d2961d795e29eeb224f01b14979434d4ad24cf3f4913c490268cf52dc",
+        },
+        "workflow": {
+            "atom_id": "CA-O-161", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-161-CORE_META_MODEL-WORKFLOW--find-and-fetch-journal-events.md",
+            "digest": "362b9d3848a796a14e7374cfa0bf0b561c4f2035b7b2bf87bd9b56fc97a6724d",
+        },
+        "ordered_steps": [{
+            "step": {
+                "atom_id": "CA-O-163", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/FIND_AND_FETCH_JOURNAL_EVENTS/CA-O-163-CORE_META_MODEL-STEP--query-the-stable-journal-event-snapshot.md",
+                "digest": "8d0238a1614f5888f2aa486038d271cc58db1d3f0d7014dece0baa53004a489c",
+            },
+            "action": {
+                "atom_id": "CA-O-162", "version": 2,
+                "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-162-CORE_META_MODEL-ACTION--query-journal-events.md",
+                "digest": "71301ecf9531c70adeba03d6cf7f39761a237a081cee43eb0f9f7ce40e12f9fe",
+            },
+        }],
+        "ordered_actions": [{
+            "atom_id": "CA-O-162", "version": 2,
+            "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-162-CORE_META_MODEL-ACTION--query-journal-events.md",
+            "digest": "71301ecf9531c70adeba03d6cf7f39761a237a081cee43eb0f9f7ce40e12f9fe",
+        }],
+    },
+)
 
 
 class SelectedRouteError(ValueError):
@@ -95,8 +168,9 @@ def selected_manifest_contract(root: str | Path | None = None) -> dict[str, Any]
             "self_field": "canonical_manifest_sha256",
             "self_field_omitted_from_digest": True,
         },
-        "outer_fields": ["schema_version", "source_freshness", "routes", "canonical_manifest_sha256"],
+        "outer_fields": ["schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"],
         "source_freshness_fields": sorted(_FRESHNESS_FIELDS),
+        "query_source_admission_fields": ["route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions"],
         "route_fields": [
             "route", "workflow", "ordered_steps", "ordered_actions", "native_action_calls",
             "entry_step", "on_result", "mutation_capable",
@@ -153,12 +227,14 @@ def _definition_sequence(route: Mapping[str, Any]) -> list[dict[str, Any]]:
     return [route["workflow"], *[item["step"] for item in route["ordered_steps"]], *route["ordered_actions"]]
 
 
-def _validate_route(root: Path, entry: Any) -> dict[str, Any]:
+def _validate_route(
+    root: Path, entry: Any, *, allowed_routes: tuple[str, ...] = SELECTED_ROUTE_NAMES,
+) -> dict[str, Any]:
     required = {"route", "workflow", "ordered_steps", "ordered_actions", "native_action_calls",
                 "entry_step", "on_result", "mutation_capable"}
     if not isinstance(entry, Mapping) or set(entry) != required:
         raise SelectedRouteError("route binding has an incomplete or unknown schema")
-    if entry["route"] not in SELECTED_ROUTE_NAMES or not isinstance(entry["entry_step"], str):
+    if entry["route"] not in allowed_routes or not isinstance(entry["entry_step"], str):
         raise SelectedRouteError("route binding has an unsupported route or entry step")
     if not isinstance(entry["mutation_capable"], bool) or not isinstance(entry["ordered_steps"], list) or not entry["ordered_steps"]:
         raise SelectedRouteError("route binding has no ordered step graph")
@@ -192,16 +268,75 @@ def _validate_route(root: Path, entry: Any) -> dict[str, Any]:
     return result
 
 
+def _validate_query_source_admissions(
+    root: Path, admissions: Any, routes: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Validate the two admission-frontier proofs without creating a registry."""
+    if not isinstance(admissions, list) or len(admissions) != len(_QUERY_SOURCE_ADMISSION_SPECS):
+        raise SelectedRouteError("selected query-source admissions must contain exactly two routes")
+    by_route = {entry["route"]: entry for entry in routes}
+    validated: list[dict[str, Any]] = []
+    for value, expected in zip(admissions, _QUERY_SOURCE_ADMISSION_SPECS, strict=True):
+        if not isinstance(value, Mapping) or set(value) != _QUERY_SOURCE_ADMISSION_FIELDS:
+            raise SelectedRouteError("query-source admission has an incomplete or unknown schema")
+        if value.get("route") != expected["route"]:
+            raise SelectedRouteError("query-source admission route order or identity differs")
+        route = by_route.get(value["route"])
+        if route is None or route["route"] not in QUERY_ROUTE_NAMES or route["mutation_capable"]:
+            raise SelectedRouteError("query-source admission does not bind one read-only selected route")
+        if not isinstance(value.get("ordered_steps"), list) or not isinstance(value.get("ordered_actions"), list):
+            raise SelectedRouteError("query-source admission definitions are malformed")
+        admission = {
+            "route": value["route"],
+            "acceptance_frontier": _validate_pin(root, value["acceptance_frontier"]),
+            "workflow": _validate_pin(root, value["workflow"]),
+            "ordered_steps": [],
+            "ordered_actions": [],
+        }
+        for item in value["ordered_steps"]:
+            if not isinstance(item, Mapping) or set(item) != {"step", "action"}:
+                raise SelectedRouteError("query-source admission Step binding is malformed")
+            admission["ordered_steps"].append({
+                "step": _validate_pin(root, item["step"]),
+                "action": _validate_pin(root, item["action"]),
+            })
+        admission["ordered_actions"] = [_validate_pin(root, item) for item in value["ordered_actions"]]
+        if admission != expected:
+            raise SelectedRouteError("query-source admission differs from the accepted source frontier")
+        for key in ("workflow", "ordered_steps", "ordered_actions"):
+            if admission[key] != route[key]:
+                raise SelectedRouteError("query-source admission definitions differ from the selected route")
+        validated.append(admission)
+    return validated
+
+
+def _unique_manifest_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject duplicate JSON members before the parser silently collapses them."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise SelectedRouteError(f"selected workflow binding manifest has duplicate JSON member: {key}")
+        result[key] = value
+    return result
+
+
 def load_selected_manifest(root: str | Path) -> dict[str, Any]:
-    """Load the immutable projection and verify its self digest and live source pins."""
+    """Verify the current15 or source-admitted additive16 file, without dispatch.
+
+    Optional Release evidence belongs only to this canonical file. It does not
+    alter D527 request bindings or the public fifteen-route registration set.
+    """
     project_root = Path(root).resolve(strict=True)
     manifest_ref = selected_manifest_ref(project_root)
     try:
-        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"))
+        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"),
+                              object_pairs_hook=_unique_manifest_object)
     except (OSError, json.JSONDecodeError) as error:
         raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
-    required = {"schema_version", "source_freshness", "routes", "canonical_manifest_sha256"}
-    if not isinstance(manifest, Mapping) or set(manifest) != required or manifest["schema_version"] != 1:
+    required = {"schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"}
+    if (not isinstance(manifest, Mapping) or not required <= set(manifest)
+            or set(manifest) - required - {"release_source_admissions"}
+            or manifest["schema_version"] != 1):
         raise SelectedRouteError("selected workflow binding manifest schema is invalid")
     if not isinstance(manifest["canonical_manifest_sha256"], str) or not _DIGEST.fullmatch(manifest["canonical_manifest_sha256"]):
         raise SelectedRouteError("selected workflow binding manifest digest is invalid")
@@ -215,19 +350,35 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
         raise SelectedRouteError("selected workflow binding manifest source freshness is incomplete")
     if not _DIGEST.fullmatch(freshness["selected_source_registry_digest"]) or not _DIGEST.fullmatch(freshness["selected_binding_digest"]):
         raise SelectedRouteError("selected workflow binding manifest freshness digest is invalid")
+    if (freshness["selected_source_registry_ref"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_REF
+            or freshness["selected_source_registry_version"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_VERSION):
+        raise SelectedRouteError("selected workflow binding manifest does not retain the CA-A-1142 registry authority")
     registry = _safe_path(project_root, freshness["selected_source_registry_ref"])
     if not registry.is_file() or hashlib.sha256(registry.read_bytes()).hexdigest() != freshness["selected_source_registry_digest"]:
         raise SelectedRouteError("selected source registry pin is stale")
     routes = manifest["routes"]
-    if not isinstance(routes, list) or len(routes) != len(SELECTED_ROUTE_NAMES):
-        raise SelectedRouteError("selected workflow binding manifest does not contain thirteen routes")
-    validated = [_validate_route(project_root, entry) for entry in routes]
-    if tuple(entry["route"] for entry in validated) != SELECTED_ROUTE_NAMES or len({entry["route"] for entry in validated}) != 13:
+    if not isinstance(routes, list) or len(routes) not in {len(SELECTED_ROUTE_NAMES), len(SELECTED_ROUTE_NAMES) + 1}:
+        raise SelectedRouteError("selected workflow binding manifest must contain fifteen routes or their additive Release successor")
+    expected_names = (SELECTED_ROUTE_NAMES if len(routes) == len(SELECTED_ROUTE_NAMES)
+                      else (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME))
+    validated = [_validate_route(project_root, entry, allowed_routes=expected_names) for entry in routes]
+    if tuple(entry["route"] for entry in validated) != expected_names or len({entry["route"] for entry in validated}) != len(expected_names):
         raise SelectedRouteError("selected workflow route registry is incomplete or duplicate")
+    admissions = _validate_query_source_admissions(project_root, manifest["query_source_admissions"], validated)
     if canonical_digest(validated) != freshness["selected_binding_digest"]:
         raise SelectedRouteError("selected workflow route binding digest differs")
-    return {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness), "routes": validated,
-            "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
+    from release_source_admission import ReleaseSourceAdmissionError, validate_release_source_admissions
+
+    try:
+        release_admissions = validate_release_source_admissions(project_root, {**manifest, "routes": validated})
+    except ReleaseSourceAdmissionError as error:
+        raise SelectedRouteError(str(error)) from error
+    result = {"manifest_ref": manifest_ref, "schema_version": 1, "source_freshness": dict(freshness),
+              "query_source_admissions": admissions, "routes": validated,
+              "canonical_manifest_sha256": manifest["canonical_manifest_sha256"]}
+    if release_admissions:
+        result["release_source_admissions"] = release_admissions
+    return result
 
 
 def _find_shadow_manifest_fields(
@@ -309,11 +460,22 @@ class _QueueBackedSelectedSupport:
                 current = dict(request.get("definition_manifest", {})) == {
                     "manifest_ref": manifest["manifest_ref"], "manifest_digest": manifest["canonical_manifest_sha256"]
                 } and dict(request.get("source_freshness", {})) == manifest["source_freshness"]
-            except (SelectedRouteError, TypeError, ValueError):
-                selected, current = False, False
+                lifecycle_admission = None
+                if request.get("operation_route") == "change_atom_status":
+                    app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+                    if str(app) not in sys.path:
+                        sys.path.insert(0, str(app))
+                    selected_execution = importlib.import_module("selected_execution")
+                    lifecycle_admission = selected_execution.preflight_selected_lifecycle(
+                        self.root, "change_atom_status", request.get("parameters"),
+                    )
+            except (ImportError, SelectedRouteError, TypeError, ValueError, RuntimeError):
+                selected, current, lifecycle_admission = False, False, None
             return {"selected": selected, "current": current, "observed": {
                 "manifest_ref": request.get("definition_manifest", {}).get("manifest_ref") if isinstance(request.get("definition_manifest"), Mapping) else None,
                 "manifest_digest": request.get("definition_manifest", {}).get("manifest_digest") if isinstance(request.get("definition_manifest"), Mapping) else None,
+                **({"lifecycle_admission": lifecycle_admission}
+                   if lifecycle_admission is not None else {}),
             }}
 
         def never_execute(_request: dict[str, Any], _session: Any) -> Mapping[str, Any]:
@@ -363,8 +525,16 @@ class _QueueBackedSelectedSupport:
             return {"disposition": "blocked", "outcome": "blocked", "diagnostics": [f"selected Run observation unavailable: {error}"]}
 
     def get_selected_action_run(self, request: dict[str, Any]) -> dict[str, Any]:
-        return {"action_run_id": request["action_run_id"], "disposition": "blocked", "outcome": "implementation_gap",
-                "diagnostics": ["shared action-Run observation is not yet published by the queue service"]}
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            manifest = load_selected_manifest(self.root)
+            observer = importlib.import_module("selected_action_observation")
+            return observer.observe_selected_action(self.root, request["action_run_id"], manifest)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"action_run_id": request["action_run_id"], "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Action observation is unavailable: {error}"]}
 
     def recover_selected_run_recording(self, request: dict[str, Any]) -> dict[str, Any]:
         try:
@@ -372,8 +542,68 @@ class _QueueBackedSelectedSupport:
         except (ImportError, ValueError, RuntimeError, OSError) as error:
             return {"disposition": "blocked", "outcome": "blocked", "diagnostics": [f"shared recording recovery failed: {error}"]}
 
+    def recover_selected_release(self, request: dict[str, Any]) -> dict[str, Any]:
+        """Forward a closed recovery carrier to the orchestrator transport."""
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            return importlib.import_module("orchestrator").run(self.root, request)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"run_id": request.get("run_id"), "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Release recovery transport is unavailable: {error}"]}
+
+    def recover_selected_release_status(self, request: dict[str, Any]) -> dict[str, Any]:
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            return importlib.import_module("orchestrator").run(self.root, request)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"run_id": request.get("run_id"), "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Release recovery observation is unavailable: {error}"]}
+
 
 class SelectedRouteAdapter(_SelectedRouteAdapterBase):
+
+    def _preflight_lifecycle(self, request: Mapping[str, Any]) -> dict[str, Any] | None:
+        """Reject one source-invalid status request before shared preview admission."""
+        if request.get("operation_route") != "change_atom_status":
+            return None
+        app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+        if str(app) not in sys.path:
+            sys.path.insert(0, str(app))
+        try:
+            selected_execution = importlib.import_module("selected_execution")
+        except (ImportError, AttributeError, TypeError, ValueError, RuntimeError) as error:
+            return self._result(request, "blocked", "blocked", f"source-derived lifecycle admission unavailable: {error}")
+        try:
+            current = selected_execution.preflight_selected_lifecycle(
+                self.root, "change_atom_status", request.get("parameters"),
+            )
+            if request.get("mode") == "execute":
+                receipt = request.get("proposal_receipt")
+                freshness = receipt.get("source_freshness") if isinstance(receipt, Mapping) else None
+                observed = freshness.get("observed") if isinstance(freshness, Mapping) else None
+                expected = observed.get("lifecycle_admission") if isinstance(observed, Mapping) else None
+                if not isinstance(expected, Mapping):
+                    raise selected_execution.LifecycleAdmissionError(
+                        "status-preview-admission-missing",
+                        "status execution requires the source-derived preview admission",
+                    )
+                if canonical_digest(dict(expected)) != canonical_digest(current):
+                    raise selected_execution.LifecycleAdmissionError(
+                        "status-model-stale",
+                        "authoritative status-model source changed after lifecycle admission",
+                    )
+        except selected_execution.LifecycleAdmissionError as error:
+            result = self._result(request, "blocked", "blocked", str(error))
+            result["effect_refs"] = []
+            result["lifecycle_error"] = error.record()
+            return result
+        except (AttributeError, TypeError, ValueError, RuntimeError) as error:
+            return self._result(request, "blocked", "blocked", f"source-derived lifecycle admission unavailable: {error}")
+        return None
 
     def _validate_request(self, route: str, request: Any) -> dict[str, Any]:
         if not isinstance(request, Mapping):
@@ -481,6 +711,9 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
             blocked = self._validate_execute(normalized)
             if blocked:
                 return self._result(normalized, "blocked", "blocked", blocked)
+        lifecycle_refusal = self._preflight_lifecycle(normalized)
+        if lifecycle_refusal is not None:
+            return lifecycle_refusal
         support = self._support()
         if support is None:
             return {"request_id": normalized["request_id"], "disposition": "blocked", "outcome": "implementation_gap",
@@ -519,18 +752,84 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
         except (TypeError, ValueError, RuntimeError) as error:
             return self._result(request, "blocked", "blocked", f"shared support rejected recording recovery: {error}")
 
+    def recover_release(self, request: Any) -> dict[str, Any]:
+        required = {"operation", "run_id", "request_identity"}
+        if (not isinstance(request, Mapping) or set(request) != required
+                or request.get("operation") != "recover_selected_release"
+                or not isinstance(request.get("run_id"), str) or not _REQUEST_ID.fullmatch(request["run_id"])
+                or not isinstance(request.get("request_identity"), str) or not _DIGEST.fullmatch(request["request_identity"])):
+            return self._result(request, "rejected", "rejected", "Release recovery requires only operation, existing run_id, and sealed request_identity")
+        try:
+            manifest = load_selected_manifest(self.root)
+            routes = tuple(entry.get("route") for entry in manifest.get("routes", []) if isinstance(entry, Mapping))
+        except (OSError, ValueError, SelectedRouteError) as error:
+            return self._result(request, "blocked", "blocked", f"Release recovery admission is unavailable: {error}")
+        if routes != (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+            return self._result(request, "blocked", "blocked", "Release recovery requires the admitted additive Release manifest")
+        support = self._support()
+        if support is None or not hasattr(support, "recover_selected_release"):
+            return self._result(request, "blocked", "implementation_gap", "selected Release recovery transport is unavailable")
+        try:
+            return support.recover_selected_release(dict(request))
+        except (TypeError, ValueError, RuntimeError, OSError) as error:
+            return self._result(request, "blocked", "blocked", f"selected Release recovery rejected request: {error}")
+
+    def recover_release_status(self, request: Any) -> dict[str, Any]:
+        required = {"operation", "run_id", "recovery_transport_handle"}
+        if (not isinstance(request, Mapping) or set(request) != required
+                or request.get("operation") != "recover_selected_release_status"
+                or not isinstance(request.get("run_id"), str) or not _REQUEST_ID.fullmatch(request["run_id"])
+                or not isinstance(request.get("recovery_transport_handle"), str)
+                or not re.fullmatch(r"[0-9a-f]{32}", request["recovery_transport_handle"])):
+            return self._result(request, "rejected", "rejected", "Release recovery observation requires only operation, existing run_id, and returned transport handle")
+        try:
+            manifest = load_selected_manifest(self.root)
+            routes = tuple(entry.get("route") for entry in manifest.get("routes", []) if isinstance(entry, Mapping))
+        except (OSError, ValueError, SelectedRouteError) as error:
+            return self._result(request, "blocked", "blocked", f"Release recovery admission is unavailable: {error}")
+        if routes != (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+            return self._result(request, "blocked", "blocked", "Release recovery requires the admitted additive Release manifest")
+        support = self._support()
+        if support is None or not hasattr(support, "recover_selected_release_status"):
+            return self._result(request, "blocked", "implementation_gap", "selected Release recovery observation is unavailable")
+        try:
+            return support.recover_selected_release_status(dict(request))
+        except (TypeError, ValueError, RuntimeError, OSError) as error:
+            return self._result(request, "blocked", "blocked", f"selected Release recovery observation rejected request: {error}")
+
 
 def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdapter:
-    """Additive registration retaining the stable server, helpers, and reload gateway."""
+    """Register only source-admitted routes, retaining the stable MCP gateway.
+
+    The fifteen established route names remain the public fallback.  Release is
+    registered only when the canonical binding projection loads successfully as
+    its exact D572-admitted additive successor.  A missing, stale, or malformed
+    projection therefore cannot expose an unadmitted Release entry point.
+    """
     from mcp.types import ToolAnnotations
 
     adapter = SelectedRouteAdapter(root, strict_manifest=False)
     selected_annotations = ToolAnnotations(read_only_hint=False, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
+    query_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
     observation_annotations = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
 
-    for route_name in SELECTED_ROUTE_NAMES:
+    try:
+        manifest = load_selected_manifest(root)
+        admitted_names = tuple(
+            entry.get("route") for entry in manifest.get("routes", [])
+            if isinstance(entry, Mapping)
+        )
+    except (OSError, ValueError, SelectedRouteError):
+        admitted_names = SELECTED_ROUTE_NAMES
+    if admitted_names == (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+        public_route_names = admitted_names
+    else:
+        public_route_names = SELECTED_ROUTE_NAMES
+
+    for route_name in public_route_names:
         def add_route(route: str) -> None:
-            @server.tool(name=route, structured_output=True, annotations=selected_annotations)
+            @server.tool(name=route, structured_output=True,
+                         annotations=query_annotations if route in QUERY_ROUTE_NAMES else selected_annotations)
             def selected_route(request: dict[str, Any]) -> dict[str, Any]:
                 """Preview by default; execute requires exact sealed Operator authorization and never starts a worker."""
                 return adapter.invoke(route, request)
@@ -550,5 +849,16 @@ def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdap
     def recover_selected_run_recording(request: dict[str, Any]) -> dict[str, Any]:
         """Retry one pending shared event append; never replay an Action or Workflow."""
         return adapter.recover_recording(request)
+
+    if public_route_names == (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+        @server.tool(name="recover_selected_release", structured_output=True, annotations=selected_annotations)
+        def recover_selected_release(request: dict[str, Any]) -> dict[str, Any]:
+            """Recover only one existing frozen admitted Release Run."""
+            return adapter.recover_release(request)
+
+        @server.tool(name="recover_selected_release_status", structured_output=True, annotations=observation_annotations)
+        def recover_selected_release_status(request: dict[str, Any]) -> dict[str, Any]:
+            """Read one returned Release recovery scheduler handle without dispatch."""
+            return adapter.recover_release_status(request)
 
     return adapter
