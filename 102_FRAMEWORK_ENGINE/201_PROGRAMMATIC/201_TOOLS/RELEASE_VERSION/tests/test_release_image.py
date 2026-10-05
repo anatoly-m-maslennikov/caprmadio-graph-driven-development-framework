@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import sys
 import unittest
-from dataclasses import replace
+from dataclasses import asdict, replace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -19,7 +19,9 @@ from release_contract import ReleaseContractError
 from release_image import (
     DockerCommandResult, build_candidate_image, verify_candidate_image, retire_prior_image,
     verify_bound_image_evidence,
+    read_image_execution_artifacts, DockerSubprocessExecutor,
 )
+from release_contract import canonical_json
 from release_suite import execute_bound_release_suite
 import test_release_suite as suite_test
 
@@ -87,6 +89,31 @@ class ReleaseImageTests(unittest.TestCase):
 
     def build(self):
         return build_candidate_image(self.candidate, self.compilation, self.suite, executor=self.docker)
+
+    def recorded_command_fixtures(self):
+        """Production-shaped receipts from mocked CLI outputs, never live proof."""
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=self.docker.run):
+            executor = DockerSubprocessExecutor()
+            build = build_candidate_image(self.candidate, self.compilation, self.suite, executor=executor)
+            evidence = verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=executor)
+        self.assertEqual(evidence.outcome, "verified")
+        return build, evidence
+
+    def reseal_receipt(self, evidence):
+        """Deliberately rewrite all outer hashes to test semantic forgery checks."""
+        import release_image
+        receipt = canonical_json(asdict(replace(evidence, receipt_sha256=None)))
+        (self.root / evidence.evidence_root / "receipt.json").write_bytes(receipt)
+        return replace(evidence, receipt_sha256=release_image._digest(receipt))
+
+    def rewrite_commands(self, evidence, transform):
+        import release_image
+        path = self.root / evidence.evidence_root / "commands.json"
+        commands = json.loads(path.read_bytes())
+        transform(commands)
+        payload = canonical_json(commands)
+        path.write_bytes(payload)
+        return self.reseal_receipt(replace(evidence, commands_sha256=release_image._digest(payload)))
 
     def test_golden_exact_private_context_complete_package_immutable_build_and_canary(self):
         selector = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
@@ -210,6 +237,99 @@ class ReleaseImageTests(unittest.TestCase):
             retire_prior_image(self.candidate, prior_image_digest=IMAGE_ID, executor=self.docker)
         self.assertEqual(caught.exception.code, "release-image-promotion-producer-missing")
         self.assertEqual(self.docker.calls, [])
+
+    def test_artifact_reader_before_and_after_selector_change_without_old_n_replay(self):
+        build, evidence = self.recorded_command_fixtures()
+        expected = self.root / evidence.evidence_root
+        self.assertEqual(verify_bound_image_evidence(self.candidate, self.compilation, self.suite, build, evidence), expected)
+        before = len(self.docker.calls)
+        (self.root / ".caprmedio_runtime/framework/current.toml").write_text('release = "N+1"\n')
+        self.assertEqual(read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence), expected)
+        with self.assertRaises(ReleaseContractError):
+            verify_bound_image_evidence(self.candidate, self.compilation, self.suite, build, evidence)
+        self.assertEqual(len(self.docker.calls), before)
+
+    def test_artifact_reader_rejects_test_double_and_caller_evidence_flags(self):
+        build = self.build()
+        evidence = verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, {"outcome": "verified"})
+
+    def test_artifact_reader_rejects_tampered_suite_output_after_selection(self):
+        build, evidence = self.recorded_command_fixtures()
+        (self.root / ".caprmedio_runtime/framework/current.toml").write_text('release = "N+1"\n')
+        (self.root / self.suite.evidence_root / "stdout.bin").write_bytes(b"tampered")
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_wrong_build_command(self):
+        build, evidence = self.recorded_command_fixtures()
+        build = self.rewrite_commands(build, lambda commands: commands[0]["argv"].__setitem__(-1, "/unsealed-context"))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_mutable_canary_image(self):
+        build, evidence = self.recorded_command_fixtures()
+        evidence = self.rewrite_commands(evidence, lambda commands: commands[1]["argv"].__setitem__(-2, "mutable:latest"))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_forged_canary_success(self):
+        import release_image
+        build, evidence = self.recorded_command_fixtures()
+        path = self.root / evidence.evidence_root / "command-1.stdout"
+        report = json.loads(path.read_bytes())
+        report["verified_files"] = 1
+        payload = canonical_json(report)
+        path.write_bytes(payload)
+        evidence = self.rewrite_commands(evidence, lambda commands: commands[1].__setitem__("stdout_sha256", release_image._digest(payload)))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_changed_fixed_canary(self):
+        import release_image
+        build, evidence = self.recorded_command_fixtures()
+        context = self.root / build.context_root
+        (context / "canary.py").write_text("print('caller-authored success')")
+        build = self.reseal_receipt(replace(build, context_sha256=release_image._tree(context)))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_unbound_suite_report(self):
+        import release_image
+        build, evidence = self.recorded_command_fixtures()
+        report_path = self.root / self.suite.evidence_root / "coverage.xml"
+        payload = report_path.read_bytes().replace(b'caprmedio.covered_source', b'caller.success')
+        report_path.write_bytes(payload)
+        suite = self.reseal_receipt(replace(self.suite, report_sha256=release_image._digest(payload)))
+        build = self.reseal_receipt(replace(build, suite_receipt_sha256=suite.receipt_sha256))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, suite, build, evidence)
+
+    def test_artifact_reader_rejects_forged_typed_authority_after_selection(self):
+        build, evidence = self.recorded_command_fixtures()
+        (self.root / ".caprmedio_runtime/framework/current.toml").write_text('release = "N+1"\n')
+        authority = self.candidate.authority.model_copy(update={"executing_release": "other"})
+        candidate = replace(self.candidate, authority=authority)
+        compilation = self.compilation.model_copy(update={"authority": authority})
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(candidate, compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_rejects_rehashed_wrong_build_inspection(self):
+        import release_image
+        build, evidence = self.recorded_command_fixtures()
+        path = self.root / build.evidence_root / "command-1.stdout"
+        payload = canonical_json([{"Id": "sha256:" + "b" * 64, "Config": {"Labels": self.docker.labels}}])
+        path.write_bytes(payload)
+        build = self.rewrite_commands(build, lambda commands: commands[1].__setitem__("stdout_sha256", release_image._digest(payload)))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+        with self.assertRaises(ReleaseContractError):
+            read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
 
 
 if __name__ == "__main__":

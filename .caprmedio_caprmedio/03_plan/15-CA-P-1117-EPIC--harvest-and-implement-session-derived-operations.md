@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 14
-updated_at: "2026-10-05 05:46:32 +0000"
+updated_at: "2026-10-05 06:56:45 +0000"
 relations: {}
 ---
 # Summary
@@ -166,6 +166,10 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+Current autonomous continuation supersedes the snapshots below: P1690 repaired atomic history consumption and missing-Draft recovery; P1683/P1684/P1690 are Done after independent acceptance at97%. P1694 finishes head-first native promotion retry with eight promotion and fourteen status cases passing; independent P1638 still rejects Draft Update accepting an unrelated retained head, and P1699 now owns that pre-write repair. P1685 and its native integration parents remain Active until that current finding is fixed and reviewed.
+
+Release preparatory implementation now includes full source delivery, bound full-suite execution, shared persistent source inventory, exact image-input sealing, image build/canary evidence, additive source admission and loader validation. P1698 adds selector-independent retained image-artifact verification with twenty-five mock-image cases passing. P1693 is integrating that reader into observed Framework/Skill promotion and recovery; P1697 exact prior-image retirement follows it. Native Release entrypoint/providers, sixteenth public registration and real full-suite/new-image/MCP/queue Release proof remain required. Local tests and mock image evidence are not full Release acceptance. C447/C449 boundaries remain unchanged.
 
 Latest verified frontier supersedes the older snapshots below. The Operator requires autonomous completion: choose the best authorized in-scope option, record uncertainty in C/Question, and continue without waiting; genuine permission/evidence boundaries still cannot be bypassed. Source-derived qualified status resolution and the eight shared source-driven cases are accepted. D446@7 binds same-Atom demotion by removing its own identifier. P1638 rejected two Draft-origin substitutions not covered by earlier passing cases. P1675/P1676/P1681 complete independently accepted D568@5/D570@4/D569@5 target-bound history and non-consuming pending finalization. P1683/P1684's thirteen focused passes were followed by independent REJECT at98%: concurrent finalizers duplicated consumption and terminal recovery failed after Draft removal. Those two Tasks are reopened; C462/P1690 own the bounded repair. P1685's Create/Update/demotion wiring is partial until supported pending lookup and exact native retry are complete. P1637/P1662/P1677 remain Active. C459 records the chosen design, C460 the original native gap. P1647 remains Done for independent shared-status scope; current W01-W04 pins are rebound, other routes unchanged.
 

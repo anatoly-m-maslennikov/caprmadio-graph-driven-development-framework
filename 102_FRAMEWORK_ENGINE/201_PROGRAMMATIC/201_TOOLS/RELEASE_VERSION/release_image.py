@@ -18,10 +18,14 @@ from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Literal, Protocol
 
-from release_contract import IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, ReleaseContractError, ValidatedCandidate, canonical_json
-from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation, _file
+from release_contract import (IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, CandidateSnapshotManifest,
+                              ReleaseContractError, SealedAuthority, ValidatedCandidate, canonical_json)
+from release_handoff import (COMPILER_ENTRYPOINT_RELATIVE, CURRENT_SELECTOR_RELATIVE,
+                             DERIVED_SOURCE_COPY_RELATIVE, MATERIALIZED_RELATIVE,
+                             SealedCandidateCompilation, _file)
 from release_packaging import RUNTIME_ROOT, _complete_rows, _render_manifest, _verify_release
-from release_suite import SuiteGateEvidence, _safe_path, verify_bound_suite_evidence
+from release_suite import (EVIDENCE_ROOT as SUITE_ROOT, SUPPORTED_RUNNER, SuiteGateEvidence,
+                           _observe_report, _safe_path, verify_bound_suite_evidence)
 
 
 IMAGE_ID = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -324,13 +328,14 @@ def build_candidate_image(candidate: ValidatedCandidate, compilation: SealedCand
     return _record(attempt, evidence)
 
 
-def _verify_build(root, candidate, compilation, suite, build):
+def _verify_build_artifacts(root, candidate, compilation, suite, build):
     if not isinstance(build, ImageBuildEvidence) or build.outcome != "built" or not build.receipt_sha256 or not IMAGE_ID.fullmatch(build.candidate_image_digest or ""):
         raise ReleaseContractError("release-image-build-untrusted", "verification requires a recorded immutable build")
     if build.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256 or build.suite_receipt_sha256 != suite.receipt_sha256:
         raise ReleaseContractError("release-image-build-mismatch", "build belongs to another candidate or suite")
     prefix = f"{IMAGE_ROOT}/{candidate.manifest.sha256}/build/"
-    if not build.evidence_root.startswith(prefix) or "/" in build.evidence_root.removeprefix(prefix) or build.context_root != f"{build.evidence_root}/context":
+    if (not build.evidence_root.startswith(prefix) or not build.evidence_root.removeprefix(prefix).startswith("attempt-")
+        or "/" in build.evidence_root.removeprefix(prefix) or build.context_root != f"{build.evidence_root}/context"):
         raise ReleaseContractError("release-image-build-path-invalid", "build carrier is outside the fixed attempt root")
     attempt = _safe_path(root, build.evidence_root)
     receipt = _file(root, f"{build.evidence_root}/receipt.json").read_bytes()
@@ -339,14 +344,36 @@ def _verify_build(root, candidate, compilation, suite, build):
     commands = _file(root, f"{build.evidence_root}/commands.json").read_bytes()
     if _digest(commands) != build.commands_sha256:
         raise ReleaseContractError("release-image-build-untrusted", "build command evidence changed")
-    for index, command in enumerate(json.loads(commands)):
+    parsed = json.loads(commands)
+    context = _safe_path(root, build.context_root)
+    expected_build = ["docker", "build", "--iidfile", str(attempt / "image.id"),
+                      "--label", f"{CANDIDATE_LABEL}={candidate.manifest.sha256}",
+                      "--label", f"{CONTEXT_LABEL}={build.context_sha256}",
+                      "--file", str(context / "Dockerfile"), str(context)]
+    if (not isinstance(parsed, list) or len(parsed) != 2
+        or parsed[0].get("argv") != expected_build
+        or parsed[1].get("argv") != ["docker", "image", "inspect", build.candidate_image_digest]
+        or any(type(command.get("exit_code")) is not int or command["exit_code"] != 0 or command.get("timed_out") is not False for command in parsed)):
+        raise ReleaseContractError("release-image-build-untrusted", "build did not execute the exact private-context build and immutable inspection")
+    if _file(root, f"{build.evidence_root}/image.id").read_text().strip() != build.candidate_image_digest:
+        raise ReleaseContractError("release-image-build-untrusted", "retained build image identity changed")
+    for index, command in enumerate(parsed):
         for stream in ("stdout", "stderr"):
             if _digest(_file(root, f"{build.evidence_root}/command-{index}.{stream}").read_bytes()) != command[f"{stream}_sha256"]:
                 raise ReleaseContractError("release-image-build-untrusted", "build captured output changed")
-    context = _safe_path(root, build.context_root)
     if _tree(context) != build.context_sha256:
         raise ReleaseContractError("release-image-context-stale", "private build context no longer matches")
-    identity, rows, _selector = _complete_rows(root, compilation)
+    inspected = json.loads(_file(root, f"{build.evidence_root}/command-1.stdout").read_bytes())
+    try:
+        labels = inspected[0]["Config"]["Labels"]
+        valid_inspect = (len(inspected) == 1 and inspected[0]["Id"] == build.candidate_image_digest
+                         and labels.get(CANDIDATE_LABEL) == candidate.manifest.sha256
+                         and labels.get(CONTEXT_LABEL) == build.context_sha256)
+    except (TypeError, KeyError, IndexError, AttributeError):
+        valid_inspect = False
+    if not valid_inspect:
+        raise ReleaseContractError("release-image-build-untrusted", "retained build inspection differs from the exact immutable image")
+    identity, rows = compilation.candidate_snapshot_manifest_sha256, list(compilation.package_rows)
     manifest = _render_manifest(identity, rows)
     if build.package_manifest_sha256 != _digest(manifest.encode()):
         raise ReleaseContractError("release-image-build-untrusted", "build package identity differs from the complete current package")
@@ -383,6 +410,65 @@ def _verify_build(root, candidate, compilation, suite, build):
         or {path.relative_to(context).as_posix() for path in context.rglob("*") if path.is_file()} != expected_paths):
         raise ReleaseContractError("release-image-context-stale", "private context or fixed canary producer changed")
     return attempt
+
+
+def _verify_build(root, candidate, compilation, suite, build):
+    _complete_rows(root, compilation)
+    return _verify_build_artifacts(root, candidate, compilation, suite, build)
+
+
+def _read_suite_artifacts(root, candidate, compilation, suite):
+    """Observe the original execution artifacts without consulting a selector."""
+    if not isinstance(suite, SuiteGateEvidence) or not suite.passed:
+        raise ReleaseContractError("release-image-suite-untrusted", "image artifacts require a successful recorded suite")
+    environment = candidate.manifest.full_suite_environment
+    prefix = f"{SUITE_ROOT}/{candidate.manifest.sha256}/"
+    suffix = suite.evidence_root.removeprefix(prefix)
+    if (suite.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
+        or suite.runner != environment.runner or suite.runner != SUPPORTED_RUNNER
+        or suite.command != tuple(environment.command) or suite.working_directory != environment.working_directory
+        or type(suite.exit_code) is not int or suite.exit_code != 0
+        or not suite.evidence_root.startswith(prefix) or not suffix.startswith("attempt-") or "/" in suffix):
+        raise ReleaseContractError("release-image-suite-untrusted", "suite artifacts differ from the exact sealed invocation")
+    attempt = _safe_path(root, suite.evidence_root)
+    for name, expected in (("receipt.json", suite.receipt_sha256), ("stdout.bin", suite.stdout_sha256),
+                           ("stderr.bin", suite.stderr_sha256), ("coverage.xml", suite.report_sha256)):
+        payload = _file(root, f"{suite.evidence_root}/{name}").read_bytes()
+        if _digest(payload) != expected or (name == "receipt.json" and payload != canonical_json(asdict(replace(suite, receipt_sha256=None)))):
+            raise ReleaseContractError("release-image-suite-untrusted", "original suite receipt or captured output changed")
+    tests, coverage, reason = _observe_report(attempt / "coverage.xml", compilation)
+    if reason or tests != suite.executed_tests or coverage != suite.coverage:
+        raise ReleaseContractError("release-image-suite-untrusted", "original suite report no longer establishes complete successful coverage")
+
+
+def _artifact_inputs(candidate, compilation):
+    if not isinstance(candidate, ValidatedCandidate) or not isinstance(compilation, SealedCandidateCompilation):
+        raise ReleaseContractError("release-image-handoff-untrusted", "artifact reader requires internal typed candidate and compilation")
+    try:
+        manifest = CandidateSnapshotManifest.model_validate(candidate.manifest.model_dump(mode="json", by_alias=True))
+        authority = SealedAuthority.model_validate(candidate.authority.model_dump(mode="json"))
+        sealed = SealedCandidateCompilation.model_validate(compilation.model_dump(mode="json"))
+    except (ValueError, AttributeError) as error:
+        raise ReleaseContractError("release-image-handoff-untrusted", "artifact inputs fail canonical typed validation") from error
+    if (authority != sealed.authority or authority.expected_candidate_snapshot_manifest_sha256 != manifest.sha256
+        or any(getattr(authority, field) != getattr(manifest, field) for field in (
+            "executing_release", "candidate_release", "canonical_source_snapshot_digest", "project_structure_digest",
+            "framework_settings_digest", "source_frontier_digest", "nested_source_recursive_sha256_before"))
+        or sealed.candidate_snapshot_manifest_sha256 != manifest.sha256
+        or sealed.expected_derived_source_copy_sha256 != manifest.expected_derived_source_copy_sha256
+        or sealed.actual_derived_source_copy_sha256 != manifest.expected_derived_source_copy_sha256
+        or sealed.expected_compiled_output_sha256 != manifest.expected_compiled_output_sha256
+        or sealed.actual_compiled_output_sha256 != manifest.expected_compiled_output_sha256
+        or sealed.compiler_frontier_digest != manifest.source_frontier_digest
+        or sealed.compiler_entrypoint.path != COMPILER_ENTRYPOINT_RELATIVE
+        or sealed.source_copy_root != DERIVED_SOURCE_COPY_RELATIVE
+        or sealed.child_materialization_root != f"{MATERIALIZED_RELATIVE}/{manifest.sha256}"
+        or list(sealed.package_rows) != sorted(sealed.package_rows, key=lambda row: (row.destination_path, row.source_path, row.sha256))):
+        raise ReleaseContractError("release-image-handoff-untrusted", "artifact inputs identify mismatching sealed candidate facts")
+    root = Path(candidate.project_root).resolve()
+    if not root.is_dir():
+        raise ReleaseContractError("release-image-project-missing", "artifact Project root is missing")
+    return root
 
 
 def verify_candidate_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
@@ -445,18 +531,41 @@ def verify_bound_image_evidence(candidate: ValidatedCandidate, compilation: Seal
     A test double cannot create promotion evidence. This reader has no Docker
     effect and requires current sealed N before the separate promotion effect.
     """
-    root = _bound(candidate, compilation, suite)
-    _verify_build(root, candidate, compilation, suite, build)
+    _bound(candidate, compilation, suite)
+    return read_image_execution_artifacts(candidate, compilation, suite, build, evidence)
+
+
+def read_image_execution_artifacts(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                                   suite: SuiteGateEvidence, build: ImageBuildEvidence,
+                                   evidence: ImageVerificationEvidence) -> Path:
+    """Read exact original execution artifacts independently of active selection.
+
+    This is not effect admission, current source/package proof, or promotion
+    authority. After selection changes, the promotion consumer must separately
+    validate its admitted intent, current source/package, selector and Skill.
+    This reader has no selector override flag, Docker effect or promotion import.
+    """
+    root = _artifact_inputs(candidate, compilation)
+    if not isinstance(build, ImageBuildEvidence):
+        raise ReleaseContractError("release-image-build-untrusted", "image artifacts require typed recorded build evidence")
     if (not isinstance(evidence, ImageVerificationEvidence) or evidence.outcome != "verified"
         or build.execution_kind != "docker-subprocess" or evidence.execution_kind != "docker-subprocess"
         or not evidence.receipt_sha256):
         raise ReleaseContractError("release-image-evidence-untrusted", "promotion requires recorded actual Docker execution, never a test double")
+    _read_suite_artifacts(root, candidate, compilation, suite)
+    try:
+        _verify_build_artifacts(root, candidate, compilation, suite, build)
+    except (ValueError, TypeError, KeyError, AttributeError, IndexError, OSError) as error:
+        if isinstance(error, ReleaseContractError):
+            raise
+        raise ReleaseContractError("release-image-build-untrusted", "retained build artifacts are malformed or missing") from error
     if (evidence.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
         or evidence.build_receipt_sha256 != build.receipt_sha256
         or evidence.candidate_image_digest != build.candidate_image_digest):
         raise ReleaseContractError("release-image-evidence-mismatch", "image verification belongs to a different bound build")
     prefix = f"{IMAGE_ROOT}/{candidate.manifest.sha256}/verify/"
-    if not evidence.evidence_root.startswith(prefix) or "/" in evidence.evidence_root.removeprefix(prefix):
+    if (not evidence.evidence_root.startswith(prefix) or not evidence.evidence_root.removeprefix(prefix).startswith("attempt-")
+        or "/" in evidence.evidence_root.removeprefix(prefix)):
         raise ReleaseContractError("release-image-evidence-path-invalid", "verification carrier is outside the fixed attempt root")
     attempt = _safe_path(root, evidence.evidence_root)
     receipt = _file(root, f"{evidence.evidence_root}/receipt.json").read_bytes()
@@ -471,7 +580,7 @@ def verify_bound_image_evidence(candidate: ValidatedCandidate, compilation: Seal
                     "--entrypoint", "python", build.candidate_image_digest, "/opt/caprmedio-release-canary.py"]
     if (len(commands) != 2 or commands[0]["argv"] != ["docker", "image", "inspect", build.candidate_image_digest]
         or commands[1]["argv"] != expected_run
-        or any(command["exit_code"] != 0 or command["timed_out"] for command in commands)):
+        or any(type(command["exit_code"]) is not int or command["exit_code"] != 0 or command["timed_out"] is not False for command in commands)):
         raise ReleaseContractError("release-image-evidence-untrusted", "verification did not execute the exact immutable-ID canary")
     captured = []
     for index, command in enumerate(commands):
@@ -515,4 +624,5 @@ def retire_prior_image(candidate: ValidatedCandidate, *, prior_image_digest: str
 
 
 __all__ = ["DockerCommandResult", "DockerExecutor", "DockerSubprocessExecutor", "ImageBuildEvidence",
-           "ImageVerificationEvidence", "build_candidate_image", "verify_candidate_image", "verify_bound_image_evidence", "retire_prior_image"]
+           "ImageVerificationEvidence", "build_candidate_image", "verify_candidate_image", "verify_bound_image_evidence",
+           "read_image_execution_artifacts", "retire_prior_image"]
