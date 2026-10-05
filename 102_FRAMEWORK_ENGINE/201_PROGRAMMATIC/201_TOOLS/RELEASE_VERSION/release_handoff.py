@@ -188,6 +188,8 @@ def _observed_inventory(root: Path) -> tuple[list[SourceInventoryRow], Candidate
 def build_validated_candidate(
     project_root: Path | str,
     request: CandidateBuildRequest | Mapping[str, Any],
+    *,
+    observed_source_frontier_digest: str | None = None,
 ) -> ValidatedCandidate:
     """Observe local N/currentness and construct one pre-compiler candidate.v2."""
 
@@ -202,6 +204,7 @@ def build_validated_candidate(
     rows, image = _observed_inventory(root)
     image = image.model_copy(update={"candidate_image_reference": intent.candidate_image_reference})
     snapshot_digest = tree_sha256(root, source_root)
+    frontier_digest = observed_source_frontier_digest or snapshot_digest
     manifest = encode_candidate_manifest(
         {
             "executing_release": executing_release,
@@ -210,7 +213,7 @@ def build_validated_candidate(
             "canonical_source_snapshot_digest": snapshot_digest,
             "project_structure_digest": _sha256_bytes(structure.read_bytes()),
             "framework_settings_digest": _sha256_bytes(settings.read_bytes()),
-            "source_frontier_digest": snapshot_digest,
+            "source_frontier_digest": frontier_digest,
             "nested_source_recursive_sha256_before": snapshot_digest,
             "expected_derived_source_copy_sha256": intent.expected_derived_source_copy_sha256,
             "expected_compiled_output_sha256": intent.expected_compiled_output_sha256,
@@ -226,7 +229,7 @@ def build_validated_candidate(
         canonical_source_snapshot_digest=snapshot_digest,
         project_structure_digest=_sha256_bytes(structure.read_bytes()),
         framework_settings_digest=_sha256_bytes(settings.read_bytes()),
-        source_frontier_digest=snapshot_digest,
+        source_frontier_digest=frontier_digest,
         nested_source_recursive_sha256_before=snapshot_digest,
         expected_candidate_snapshot_manifest_sha256=manifest.sha256,
     )
@@ -236,7 +239,11 @@ def build_validated_candidate(
 def _revalidate(candidate: ValidatedCandidate) -> ValidatedCandidate:
     if not isinstance(candidate, ValidatedCandidate):
         raise _error("release-candidate-untrusted", "pre-compiler handoff must be a locally validated candidate")
-    observed = build_validated_candidate(candidate.project_root, candidate.intent)
+    observed = build_validated_candidate(
+        candidate.project_root,
+        candidate.intent,
+        observed_source_frontier_digest=candidate.authority.source_frontier_digest,
+    )
     if observed.authority != candidate.authority or observed.manifest != candidate.manifest:
         raise _error("release-currentness-stale", "locally observed selection or sealed candidate inputs changed")
     if candidate.manifest.sha256 != candidate_snapshot_manifest_sha256(candidate.manifest):
@@ -407,9 +414,6 @@ def seal_candidate_compilation(
     if actual_output != candidate.manifest.expected_compiled_output_sha256:
         raise _error("release-compiler-output-mismatch", "compiler output does not match the sealed expectation")
     compiler = _file(root, COMPILER_ENTRYPOINT_RELATIVE, code="release-compiler-entrypoint-missing")
-    frontier = tree_sha256(root, _directory(root, CANONICAL_SOURCE_RELATIVE))
-    if frontier != candidate.authority.source_frontier_digest:
-        raise _error("release-currentness-stale", "compiler frontier changed after candidate sealing")
     observed_entrypoint = CompilerEntrypoint(path=COMPILER_ENTRYPOINT_RELATIVE, sha256=_sha256_bytes(compiler.read_bytes()))
     if not isinstance(compiler_evidence, CompilerSuccessEvidence):
         raise _error("release-compiler-evidence-untrusted", "compiler success evidence must be a typed internal result")
@@ -419,7 +423,7 @@ def seal_candidate_compilation(
         raise _error("release-compiler-evidence-mismatch", "compiler evidence identifies a different candidate")
     if compiler_evidence.compiler_entrypoint != observed_entrypoint:
         raise _error("release-compiler-evidence-mismatch", "compiler evidence does not match the locally observed compiler")
-    if compiler_evidence.compiler_frontier_digest != frontier:
+    if compiler_evidence.compiler_frontier_digest != candidate.authority.source_frontier_digest:
         raise _error("release-compiler-evidence-mismatch", "compiler evidence has a stale frontier")
     if compiler_evidence.child_materialization_root != _relative(root, materialized, label="materialization root"):
         raise _error("release-compiler-evidence-mismatch", "compiler evidence names a different materialization root")
@@ -432,7 +436,7 @@ def seal_candidate_compilation(
         expected_derived_source_copy_sha256=candidate.manifest.expected_derived_source_copy_sha256,
         actual_derived_source_copy_sha256=actual_copy,
         compiler_entrypoint=observed_entrypoint,
-        compiler_frontier_digest=frontier,
+        compiler_frontier_digest=candidate.authority.source_frontier_digest,
         expected_compiled_output_sha256=candidate.manifest.expected_compiled_output_sha256,
         actual_compiled_output_sha256=actual_output,
         child_materialization_root=_relative(root, materialized, label="materialization root"),
