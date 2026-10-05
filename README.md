@@ -72,17 +72,15 @@ repeatable actions need reusable Prompts/Skills.
 Repeatable sequences of actions using Tools and Prompts/Skills →\
 Workflows define their steps and control flow.
 
-Agents need one entry point →\
-the single entry Skill, `ca`, connects them to MCP →\
-MCP delivers all other Prompts/Skills and exposes Tool and Workflow execution.
-
 Files in folders are clear and inspectable →\
 they currently hold authority →\
 rescanning can become expensive →\
 a derived graph database index supports queries and views. Database authority could be a future migration.
 
 We cannot put everything into one prompt →\
-Tools retrieve context and assemble Prompts.
+the single entry Skill, `ca`, connects agents to MCP →\
+Tools retrieve the needed context and assemble Prompts/Skills →\
+MCP delivers them and exposes Tool and Workflow execution.
 
 Wide-context reasoning →\
 main session.
