@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Build status model golden corpus"
   depends_on: [Atom, Content Role, Status, Carrier, Tool, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 02:36:46 +0000"
+updated_at: "2026-10-05 02:47:17 +0000"
 relations:
   is_decomposition_of: [CA-P-1615]
   blocks: [CA-P-1637]
@@ -38,3 +38,6 @@ Inputs: accepted CA-P-1633 source packet and current saved lifecycle inputs; cur
 
 Good fixtures pass and deliberate errors report correct refusal. Focused development-worker results are distinct from immutable-image proof.
 
+## Result
+
+The golden corpus first exposed specialized-model selection and configured-source defects; those were repaired in the separately owned helper. Final test SHA-256 68505e4ac15a0694eee069d39886571290d58f743ac69a685ea21fcc8f638407. Eleven focused tests passed in the existing development worker, covering all role domains, Type precedence/fallback, casing/pins/forgery, configured roots, duplicate YAML, positive integer versions, definition roles and duplicate body domains. Development-worker evidence only, not new image proof.
