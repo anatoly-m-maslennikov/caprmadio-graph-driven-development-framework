@@ -25,11 +25,13 @@ from framework_initialization import (  # noqa: E402
     initialize_framework_runtime,
     plan_initial_framework_installation,
 )
-from release_image import DockerCommandResult  # noqa: E402
+from release_image import DockerCommandResult, DockerSubprocessExecutor  # noqa: E402
+from bootstrap_image import produce_initial_framework_image  # noqa: E402
 from release_contract import ReleaseContractError  # noqa: E402
 from release_promotion import _prove_prior_skill  # noqa: E402
 from release_suite import _active_n_state, _bootstrap_source_context_is_valid  # noqa: E402
 from release_suite_execution import _inspect_bound_n_image, _selector_binding  # noqa: E402
+from framework_compiler_currentness_fixture import ConfiguredCompilerFixture  # noqa: E402
 
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -53,8 +55,25 @@ class _ImageFixture:
             SOURCE_CONTEXT_IMAGE_LABEL: source_context_sha256,
         }
 
-    def run(self, _argv, *, cwd, timeout_seconds):
+    def run(self, argv, *, cwd, timeout_seconds):
         del cwd, timeout_seconds
+        if argv[1] == "build":
+            self.labels = {}
+            for index, value in enumerate(argv):
+                if value == "--label":
+                    key, label = argv[index + 1].split("=", 1)
+                    self.labels[key] = label
+            Path(argv[argv.index("--iidfile") + 1]).write_text(IMAGE_ID + "\n", encoding="utf-8")
+            self.canary = json.loads((Path(argv[-1]) / "bootstrap-canary.json").read_bytes())
+            return DockerCommandResult(0, b"build\n", b"")
+        if argv[1] == "run":
+            return DockerCommandResult(0, json.dumps({
+                "schema": "caprmedio.bootstrap_image_canary.v1",
+                "manifest_sha256": self.canary["manifest_sha256"],
+                "source_context_sha256": self.canary["source_context_sha256"],
+                "verified_files": len(self.canary["package_rows"]),
+                "mcp_tools": ["get_mcp_reload_status"],
+            }).encode(), b"")
         return DockerCommandResult(0, json.dumps([{"Id": IMAGE_ID, "Config": {
             "Labels": self.labels, "Env": ["PATH=/usr/bin:/bin"],
         }}]).encode(), b"")
@@ -62,7 +81,8 @@ class _ImageFixture:
 
 class BootstrapReleaseCompatibilityTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.root = Path(tempfile.mkdtemp(prefix="bootstrap-n-")).resolve()
+        self.compiler_fixture = ConfiguredCompilerFixture.create()
+        self.root = self.compiler_fixture.root
         for relative, payload in {
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py": b"tool\n",
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py": b"app\n",
@@ -70,10 +90,11 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
             "102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md": b"prompt\n",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md": b"# ca\n",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml": b"name: ca\n",
-            (".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-             "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/source.md"): b"source\n",
-            (".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-             "04_requirement/compiled.md"): b"compiled\n",
+            "pyproject.toml": b"[project]\nname = 'bootstrap-fixture'\nversion = '0'\n",
+            "uv.lock": b"version = 1\n",
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile": (
+                RELEASE_ROOT.parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile"
+            ).read_bytes(),
         }.items():
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -82,6 +103,7 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
     def _initialize(self):
         plan = plan_initial_framework_installation(self.root)
         image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        executor = DockerSubprocessExecutor()
         real_replace = os.replace
 
         def retained_fixture_replace(source, target):
@@ -90,14 +112,14 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
                 return None
             return real_replace(source, target)
 
-        with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
-            result = initialize_framework_runtime(
-                self.root,
-                journal=_Journal(),
-                requested_run_id="bootstrap-action",
-                image_digest=IMAGE_ID,
-                image_executor=image,
-            )
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=image.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+            self.assertEqual("docker-subprocess", evidence.execution_kind)
+            with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
+                result = initialize_framework_runtime(
+                    self.root, journal=_Journal(), requested_run_id="bootstrap-action",
+                    image_digest=IMAGE_ID, image_executor=executor,
+                )
         self.assertEqual(result["state"], "installed")
         return plan, result
 
