@@ -15,7 +15,7 @@ subjects:
   governs: "Prove query MCP selected results and diagnostics"
   depends_on: [Workflow, Action, Implementation, Evaluation, Journal]
 version: 2
-updated_at: "2026-10-05 00:37:00 +0000"
+updated_at: "2026-10-05 00:52:31 +0000"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1519]
@@ -41,5 +41,7 @@ The host driver could not start: the repository virtual environment contains no 
 Saved test_selected_query_mcp_e2e.py, SHA256 5ff655f344c3bc79ee0ad517a5ba4ff86c97c91ed86f92868f228a090f2c4f33. It reuses the actual shared recorder and fresh MCP client and supplies four opt-in cases for W14/W15 selected fields, hierarchical headings, filters, stable pagination, snapshots and separate refusal diagnostics. No manual Journal or Run facts are inserted. Development-worker discovery passed one carrier check and intentionally skipped four actual-image cases. No runtime started; C449 still prevents functional execution, so this Task remains Active.
 
 ## Definition of Done
+
+P1606 rejected the earlier source proof because source and recorder snapshots omitted Projections. P1608 repaired that blind spot and received independent source-only acceptance: current candidate SHA256 6475546d81cc4817f0d5bc356d038f22ab142594b4eb83ac9e56f938e6246663, 22529 bytes, 3 focused source tests passed and 4 image methods remain unrun. This supersedes the prepared 5ff655 candidate; the Task remains Active under C449.
 
 The assigned current immutable-image cases have exact passing functional evidence, or remain unfinished with their precise protected blocker.

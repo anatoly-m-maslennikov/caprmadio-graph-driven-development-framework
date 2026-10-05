@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import asyncio
 from copy import deepcopy
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -23,6 +24,43 @@ import test_selected_workflows_docker_e2e as strict  # noqa: E402
 from selected_workflows_docker_fixture import FixtureLease, GoldenCase, GoldenProject  # noqa: E402
 
 EXPECTED_IMAGE = "sha256:057792974dc2d81f84f99dee5535a44d5ee30513b03f6154381d99aa0bd558cd"
+
+
+def _projection_fingerprint(root: Path) -> dict[str, str]:
+    """Include the canonical Projection root, directories and every file byte.
+
+    An absent root differs from an empty root. Journal/Run recording lives
+    outside this boundary and remains governed by the existing recorder checks.
+    """
+    projection = root / ".caprmedio_caprmedio/_projection"
+    if projection.parent.is_symlink():
+        raise AssertionError("query Projection control root may not be a symbolic link")
+    if projection.is_symlink():
+        raise AssertionError("query Projection boundary may not be a symbolic link")
+    if not projection.exists():
+        return {}
+    if not projection.is_dir():
+        raise AssertionError("query Projection boundary must be a directory")
+    fingerprint = {".": "directory"}
+    for path in sorted(projection.rglob("*")):
+        if path.is_symlink():
+            raise AssertionError("query Projection boundary contains a symbolic link")
+        relative = path.relative_to(projection).as_posix()
+        if any(part == ".env" or part.startswith(".env.") or part.endswith(".env")
+               for part in path.relative_to(projection).parts):
+            raise AssertionError("unexpected environment file in query Projection boundary")
+        if path.is_dir():
+            fingerprint[relative] = "directory"
+        elif path.is_file():
+            fingerprint[relative] = "file:" + hashlib.sha256(path.read_bytes()).hexdigest()
+        else:
+            raise AssertionError("query Projection boundary contains a non-regular member")
+    return fingerprint
+
+
+def _assert_projection_unchanged(root: Path, before: dict[str, str]) -> None:
+    if before != _projection_fingerprint(root):
+        raise AssertionError("query must not create, delete or change canonical Project _projection")
 
 
 class QueryProject(GoldenProject):
@@ -57,6 +95,66 @@ class QueryFixtureCarrierTests(unittest.TestCase):
             self.assertEqual("/project", fixture.execution_project_root)
             with self.assertRaises(AssertionError):
                 fixture.native_query_parameters("find_and_fetch_artifacts")
+
+    def test_projection_guard_detects_creation_deletion_and_content_change(self) -> None:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            projection = root / ".caprmedio_caprmedio/_projection"
+            absent = _projection_fingerprint(root)
+            projection.mkdir(parents=True)
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, absent)
+            empty = _projection_fingerprint(root)
+            empty_child = projection / "empty"
+            empty_child.mkdir()
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, empty)
+            member = projection / "selected_workflow_bindings.json"
+            member.write_text('{"revision":1}', encoding="utf-8")
+            first = _projection_fingerprint(root)
+            _assert_projection_unchanged(root, first)
+            member.write_text('{"revision":2}', encoding="utf-8")
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, first)
+            changed = _projection_fingerprint(root)
+            member.unlink()
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, changed)
+            directories = _projection_fingerprint(root)
+            empty_child.rmdir()
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, directories)
+            empty_root = _projection_fingerprint(root)
+            projection.rmdir()
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                _assert_projection_unchanged(root, empty_root)
+
+
+class QueryProjectionBoundarySourceTests(unittest.IsolatedAsyncioTestCase):
+    """Mock the transport only; exercise the real preview Projection guard."""
+
+    async def test_preview_rejects_silent_projection_write_even_when_other_snapshots_match(self) -> None:
+        from types import SimpleNamespace
+
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            (root / ".caprmedio_caprmedio/_journal").mkdir(parents=True)
+            projection = root / ".caprmedio_caprmedio/_projection"
+            projection.mkdir()
+            harness_case = SelectedQueryMcpEndToEnd("test_w14_fields_headings_closed_filter_and_retained_pagination")
+            harness_case.fixture = SimpleNamespace(
+                root=root, case=GoldenCase("W14", "find_and_fetch_artifacts"),
+                request=lambda **_: {"parameters": {"query_request": {}}}, snapshot=lambda: {})
+            harness_case.runtime = object()
+
+            async def silent_projection_write(*_: Any) -> dict[str, Any]:
+                (projection / "unrequested.json").write_text('{"published":true}', encoding="utf-8")
+                return {"disposition": "preview", "proposal_receipt": {}, "proposal_receipt_digest": "sealed"}
+
+            harness_case.harness = SimpleNamespace(
+                _recording_snapshot=lambda _: {}, _call=silent_projection_write)
+            with self.assertRaisesRegex(AssertionError, "canonical Project _projection"):
+                await harness_case._preview("projection-write-source-check")
 
 
 @unittest.skipUnless(
@@ -104,6 +202,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         assert runtime is not None
         request = fixture.request(request_id=request_id)
         before = fixture.snapshot()
+        projections = _projection_fingerprint(fixture.root)
         records = self.harness._recording_snapshot(fixture.root)
         self.assertTrue((fixture.root / ".caprmedio_caprmedio/_journal").is_dir())
         preview = await self.harness._call(runtime, fixture.root, fixture.case.route, request)
@@ -113,6 +212,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(before, fixture.snapshot(), "query preview must not mutate sources")
         self.assertEqual(records, self.harness._recording_snapshot(fixture.root),
                          "query preview must not create or change any Journal/Run record")
+        _assert_projection_unchanged(fixture.root, projections)
         return request, preview
 
     def _sealed_execution(self, request_id: str, request: dict[str, Any],
@@ -129,6 +229,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         fixture, runtime = self.fixture, self.runtime
         assert runtime is not None
         fixture.query_request = deepcopy(query)
+        projections = _projection_fingerprint(fixture.root)
         request, preview = await self._preview(request_id)
         execute = self._sealed_execution(request_id, request, preview)
         before = fixture.snapshot()
@@ -154,6 +255,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(facts, "an invoked native refusal must retain actual Run evidence")
             self.assertTrue(any(event.get("event") in {"failed", "interrupted"} for event in facts), facts)
         self.assertEqual(before, fixture.snapshot(), "native queries must have no source effects")
+        _assert_projection_unchanged(fixture.root, projections)
         self.assertEqual([], [effect for row in rows for effect in row["effect_refs"]])
         native = self.harness._action_progress(fixture.root, request_id, rows[0]["action_run_id"])["native_result"]
         self.assertIsInstance(native, dict, native)
@@ -226,6 +328,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([], secret["results"])
         self.assertIn("secret-shaped selector", secret["findings"][0]["code"])
         self.fixture.query_request = {"mutation": {"write": "forbidden"}}
+        projections = _projection_fingerprint(self.fixture.root)
         request, preview = await self._preview("query-w14-mutation")
         execute = self._sealed_execution("query-w14-mutation", request, preview)
         before = self.harness._recording_snapshot(self.fixture.root)
@@ -235,6 +338,7 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
                 "operation": "enqueue_selected", "run_id": "query-w14-mutation", "execution": execute})
         self.assertEqual(before, self.harness._recording_snapshot(self.fixture.root),
                          "unsupported mutation must be refused before any Run record")
+        _assert_projection_unchanged(self.fixture.root, projections)
         query = {"filter": '"fm:/atom_id" IN ("CA-R-100", "CA-R-101")', "limit": 1}
         retained = await self._execute(query, "query-w14-retained-prerequisite")
         altered = deepcopy(retained["snapshot"])
