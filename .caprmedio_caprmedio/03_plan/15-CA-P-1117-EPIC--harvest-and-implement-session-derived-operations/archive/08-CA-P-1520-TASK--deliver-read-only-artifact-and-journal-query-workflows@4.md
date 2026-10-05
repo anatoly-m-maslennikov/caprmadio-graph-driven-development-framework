@@ -14,11 +14,11 @@ status: Active
 subjects:
   governs: "Read-only Artifact and Events Journal query Workflow delivery"
   depends_on: [Operations, Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 5
-updated_at: "2026-10-05 03:11:41 +0000"
+version: 4
+updated_at: "2026-10-04 22:00:35 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
-  blocks: [CA-P-1124, CA-P-1655]
+  blocks: [CA-P-1124]
 ---
 # Summary
 

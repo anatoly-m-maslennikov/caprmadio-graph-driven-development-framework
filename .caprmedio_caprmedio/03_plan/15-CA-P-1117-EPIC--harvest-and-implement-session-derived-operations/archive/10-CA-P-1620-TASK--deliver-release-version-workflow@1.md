@@ -14,11 +14,11 @@ status: Active
 subjects:
   governs: "Deliver Release Version Workflow"
   depends_on: [Workflow, Action, Tool, Methodology, Implementation, Projection, Skill, Journal]
-version: 2
-updated_at: "2026-10-05 03:11:41 +0000"
+version: 1
+updated_at: "2026-10-05 02:09:37 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
-  blocks: [CA-P-1123, CA-P-1124, CA-P-1655]
+  blocks: [CA-P-1123, CA-P-1124]
 ---
 # Summary
 

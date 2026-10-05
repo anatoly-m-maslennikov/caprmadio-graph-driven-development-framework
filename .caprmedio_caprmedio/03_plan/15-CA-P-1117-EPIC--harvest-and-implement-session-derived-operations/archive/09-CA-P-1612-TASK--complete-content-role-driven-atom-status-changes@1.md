@@ -15,11 +15,11 @@ status: Active
 subjects:
   governs: "Complete Content Role driven Atom status changes"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]
-version: 2
-updated_at: "2026-10-05 03:11:41 +0000"
+version: 1
+updated_at: "2026-10-05 01:04:37 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
-  blocks: [CA-P-1519, CA-P-1123, CA-P-1124, CA-P-1655]
+  blocks: [CA-P-1519, CA-P-1123, CA-P-1124]
 ---
 # Summary
 
