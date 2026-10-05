@@ -39,7 +39,7 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
         source_goldens.ReleaseSourceAdmissionTest.setUpClass()
 
     def setUp(self) -> None:
-        # Reuse actual D572 plus all37 copied pins; add the actual unchanged15
+        # Reuse actual D572 plus all39 copied pins; add the actual unchanged15
         # manifest through its strict existing source-copy fixture helper.
         self.fixture = source_goldens.ReleaseSourceAdmissionTest()
         self.fixture.setUp()
@@ -159,7 +159,7 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
             load_selected_manifest(self.root)
         pin = self.record["rmed_frontier"][-1]
         source = self.root / pin["source_path"]
-        source.write_bytes(source.read_bytes() + b"\nDeliberately stale D571.\n")
+        source.write_bytes(source.read_bytes() + b"\nDeliberately stale D574.\n")
         self.refusal(self.successor())
 
     def test_raw_duplicate_members_reject_before_json_collapse_at_every_depth(self) -> None:

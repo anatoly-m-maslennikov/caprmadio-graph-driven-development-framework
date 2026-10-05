@@ -18,7 +18,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "fb3e91bb5bee075c6394ac9a490b8599cd5cc8a9a86e7893f52e483556847b22"
+AUTHORITY_SHA = "f310863886274866401a52a0611660de2be8f05c1ab61bc7591da53752e1e969"
 sys.path.insert(0, str(MCP))
 
 from release_source_admission import (  # noqa: E402
@@ -27,8 +27,8 @@ from release_source_admission import (  # noqa: E402
 
 
 def reference_record(text: str) -> dict[str, object]:
-    """Independent golden extraction from actual accepted Markdown, not 37 constants."""
-    acceptance = re.search(r"CA-P-1622@1 at `([^`]+)`, SHA-256 `([0-9a-f]{64})`", text)
+    """Independent golden extraction from actual accepted Markdown, not static cardinalities."""
+    acceptance = re.search(r"CA-P-1622@([1-9][0-9]*) at `([^`]+)`, SHA-256 `([0-9a-f]{64})`", text)
     assert acceptance is not None
     tables = []
     current = []
@@ -53,8 +53,8 @@ def reference_record(text: str) -> dict[str, object]:
 
     steps = [{"step": occurrence(row[1]), "action": occurrence(row[2])} for row in tables[1][2:]]
     return {"route": "release_version",
-            "acceptance_frontier": {"atom_id": "CA-P-1622", "version": 1,
-                                    "source_path": acceptance[1], "digest": acceptance[2]},
+            "acceptance_frontier": {"atom_id": "CA-P-1622", "version": int(acceptance[1]),
+                                    "source_path": acceptance[2], "digest": acceptance[3]},
             "workflow": row_pin(tables[0][2]), "ordered_steps": steps,
             "ordered_actions": [copy.deepcopy(row["action"]) for row in steps],
             "rmed_frontier": [row_pin(row) for row in tables[2][2:]]}
@@ -72,13 +72,13 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@3 is not the accepted source pin")
+            raise AssertionError("current D572@5 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
 
     def setUp(self) -> None:
         temporary = REPOSITORY / ".caprmedio_tmp/tests/release-source-admission"
         temporary.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=temporary, ignore_cleanup_errors=True)
+        self.temporary = tempfile.TemporaryDirectory(dir=temporary)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         for relative in {AUTHORITY_REF, *[pin["source_path"] for pin in all_pins(self.expected)]}:
@@ -110,13 +110,15 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         before = self.snapshot()
         record = derive_release_source_admission(self.root)
         self.assertEqual(self.expected, record)
-        self.assertEqual(37, len({pin["source_path"] for pin in all_pins(record)}))
+        self.assertEqual(39, len({pin["source_path"] for pin in all_pins(record)}))
         self.assertEqual(10, len(record["ordered_steps"]))
         self.assertEqual(["CA-O-165", "CA-O-165", "CA-O-166", "CA-O-166", "CA-O-168",
                           "CA-O-167", "CA-O-168", "CA-O-168", "CA-O-169", "CA-O-169"],
                          [pin["atom_id"] for pin in record["ordered_actions"]])
-        self.assertEqual(20, len(record["rmed_frontier"]))
+        self.assertEqual(22, len(record["rmed_frontier"]))
         self.assertEqual(2, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-571"))
+        self.assertEqual(2, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-573"))
+        self.assertEqual(1, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-574"))
         self.assertNotIn("CA-D-565", {pin["atom_id"] for pin in record["rmed_frontier"]})
         self.assertNotIn("CA-D-572", {pin["atom_id"] for pin in all_pins(record)})
         self.assertEqual(before, self.snapshot())
