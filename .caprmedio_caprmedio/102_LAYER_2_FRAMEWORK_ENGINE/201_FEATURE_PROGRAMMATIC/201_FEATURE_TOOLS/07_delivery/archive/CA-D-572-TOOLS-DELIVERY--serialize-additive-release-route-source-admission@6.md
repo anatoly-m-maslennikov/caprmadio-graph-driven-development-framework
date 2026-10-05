@@ -4,10 +4,10 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 7
-updated_at: "2026-10-05 16:25:00 +0000"
+version: 6
+updated_at: "2026-10-05 13:59:15 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -24,13 +24,13 @@ The one Release Version source-admission record which a successor canonical sele
 
 ## Claim
 
-A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@4 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/done/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `7cd6a839a190add10108bdd5e58700aeae7a89316aa721b2b5340bda865a2739`, the exact current O164–O179 pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
+A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@3 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/done/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `c0bca7b52f424415175da8e672bd66d083c7509ac9699b93def86cd6d306ba16`, the exact current O164–O179 pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
 
 ## Details
 
 `release_source_admissions` is an optional top-level array in the loaded canonical `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` manifest file. It is never a member of D527's request `definition_manifest`, which remains exactly the existing two fields `manifest_ref` and `manifest_digest`. The current fifteen-route manifest omits this array. A successor which contains `release_version` **must** contain it with cardinality exactly one; a manifest without that route **must not** carry a Release admission. No unknown member of that admission array or its record is accepted. Its one record has exactly `route`, `acceptance_frontier`, `workflow`, `ordered_steps`, `ordered_actions`, `rmed_frontier`, `mutation_capable`, and `native_action_calls`; `route` is exactly `release_version`.
 
-Every `acceptance_frontier`, `workflow`, `step`, `action`, and `rmed_frontier` member is the existing canonical manifest pin object with exactly `atom_id`, positive integer `version`, safe Project-relative `source_path`, and lowercase 64-hex `digest`. `acceptance_frontier` is exactly CA-P-1622@4 above. `workflow` is exactly:
+Every `acceptance_frontier`, `workflow`, `step`, `action`, and `rmed_frontier` member is the existing canonical manifest pin object with exactly `atom_id`, positive integer `version`, safe Project-relative `source_path`, and lowercase 64-hex `digest`. `acceptance_frontier` is exactly CA-P-1622@3 above. `workflow` is exactly:
 
 | Atom | Version | Source path | SHA-256 |
 | --- | --- | --- | --- |
@@ -77,7 +77,7 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-E-574 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-574-TOOLS-QA_CASE--verify-release-failure-rollback-and-safe-image-retirement.md` | `584e910e69dd3c8ef3c44ad9d694adaca3e533c1fd6407acbbb02ba171e2bb82` |
 | CA-D-560 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-560-TOOLS-DELIVERY--bind-release-version-tool-request-and-result-boundary.md` | `df88a519c1676f621e0fbfca66b9ebc63a84a6f0732625f5e652df161df08c10` |
 | CA-D-561 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-561-TOOLS-DELIVERY--bind-release-source-compilation-and-package-carriers.md` | `a2198ba1a3d038100ad8f5ef6fd774a50fa2249906a4340656e9871880d56e7d` |
-| CA-D-562 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-562-TOOLS-DELIVERY--bind-full-framework-runtime-installation-boundary.md` | `d6509c48567ec4627616597950d892fb6fba5f287f86dbff2e828b1578f5190b` |
+| CA-D-562 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-562-TOOLS-DELIVERY--bind-full-framework-runtime-installation-boundary.md` | `a765027c1e7096b6ed52687968918178763c6846121579b0b16907e29d6fb1ff` |
 | CA-D-563 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-563-TOOLS-DELIVERY--bind-project-local-ca-skill-without-hooks.md` | `f73a38dd7b634d654a7044f20c96240a0d1f850c4a71e4eef18f98d074cdbb3d` |
 | CA-D-564 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-564-TOOLS-DELIVERY--bind-candidate-image-and-safe-retirement-evidence.md` | `ca6d734334c258fc0e1493b4161cc184762649be6b6ba33fdbc2958ec79ce2b4` |
 | CA-D-566 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-566-TOOLS-DELIVERY--encode-sealed-candidate-snapshot-manifest.md` | `825ae839bb6a151b7f4a45fbb01ae6fb2491d0f8bf68204ca2a21f2f34657a7d` |

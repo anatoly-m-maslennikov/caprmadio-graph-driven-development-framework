@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Done
+status: Archived
 subjects:
   governs: "Review Release Version source and admission"
   depends_on: [Workflow, Action, Tool, Methodology, Implementation, Projection, Skill, Journal]
-version: 4
-updated_at: "2026-10-05 16:25:00 +0000"
+version: 3
+updated_at: "2026-10-05 13:57:45 +0000"
 relations:
   is_decomposition_of: [CA-P-1620]
   blocks: [CA-P-1623]
@@ -86,9 +86,3 @@ This amendment supersedes only the cited O pins and adds CA-D-574 to the accepte
 /root/release_graph_admission verified the corrected source record and manifest admission with 20 passing focused tests using the declared host test driver and retained fixtures. The independent acceptance is a static source review, not another runtime test. Root closes this source-review Task and refreshes the accepted Plan path/digest, D572 digest and implementation pin together; the same 20 tests must pass against those refreshed bytes before the source update is committed.
 
 This verdict admits the additive source/serialization implementation target only. Canonical manifest publication, dispatch, installation, image operations, actual Release execution and canonical Journal evidence remain separate required gates under P1623/P1624 and the current Epic. This Task does not claim those gates passed.
-
-### Accepted selected-runtime image binding
-
-/root/epic_remaining_coverage independently accepted CA-D-562@2 at 96% confidence in a bounded source-only review. Its SHA-256 is `d6509c48567ec4627616597950d892fb6fba5f287f86dbff2e828b1578f5190b`. Normal selector publication carries `candidate_image_context_sha256` from the already verified `ImageBuildEvidence.context_sha256`; suite admission checks the frozen selected-N selector and exact candidate/context image labels. Bootstrap retains its separate exact package-manifest and source-context proof. No duplicate evidence ledger is introduced.
-
-This amendment supersedes only the historical CA-D-562@1 pin above. The 39 unique source pins and 22 RMED entries retain their existing cardinalities, with CA-D-562 updated to Version 2. It does not claim implementation tests, Docker access, installation, actual suite execution, manifest publication or Journal recovery passed. Root refreshes the D572 source record and parser pin together; the focused source/manifest checks remain a required integration gate against those saved bytes.

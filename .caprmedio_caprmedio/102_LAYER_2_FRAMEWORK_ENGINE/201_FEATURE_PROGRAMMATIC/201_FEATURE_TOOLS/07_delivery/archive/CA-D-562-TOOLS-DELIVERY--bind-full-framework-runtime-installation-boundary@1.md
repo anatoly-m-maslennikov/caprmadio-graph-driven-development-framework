@@ -4,10 +4,10 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 16:20:23 +0000"
+version: 1
+updated_at: "2026-10-05 06:21:05 +0400"
 subjects:
   governs: "Tool/RELEASE_VERSION/Runtime package carrier"
   depends_on: [Tool, Runtime, Manifest, Methodology, Installation]
@@ -29,5 +29,3 @@ Release Version **must** stage and retain N/N+1 complete Framework packages at `
 ## Details
 
 The existing installer interfaces are `describe`, `status`, dry-run `run`, and explicit `run --apply`; their Tools-only paths remain a separate package. This Delivery defines the required full-Framework carrier contract for implementation and review; it does not claim that the new package or selector is already implemented or promoted.
-
-For the normal Release Version selector, `candidate_image_digest` **must** name the verified immutable image, and `candidate_image_context_sha256` **must** contain the exact `ImageBuildEvidence.context_sha256` already verified for that image at selector publication. The selected package and image remain bound to the same candidate manifest SHA-256. Before using selected N to execute a candidate suite, admission **must** verify the frozen selected-N selector and inspect that exact image; its candidate and context labels **must** equal the selector bindings. A syntactically valid context digest or image label alone is not evidence of that binding. The first-runtime bootstrap selector retains its separately declared exact package-manifest and source-context proof; it does not weaken this normal-selector contract.
