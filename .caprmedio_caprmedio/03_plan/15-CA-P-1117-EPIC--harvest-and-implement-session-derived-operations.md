@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 9
-updated_at: "2026-10-04 22:52:48 +0000"
+version: 11
+updated_at: "2026-10-05 00:32:00 +0000"
 relations: {}
 ---
 # Summary
@@ -134,11 +134,15 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 ### Current execution frontier
 
-Latest verified frontier supersedes the older snapshots below. P1547 accepts both native query Tools and the sole parser after repaired adversarial snapshots and truthful consumption diagnostics; P1525/P1526 are Done for native Tool scope. P1543 accepts the fifteen-route MCP source, and P1552 accepts D521@5's exact two-frontier admission. P1562 extends the sole canonical manifest and adapter; P1563 connects native queries to actual shared Run execution and pre-own-event capture. Neither route registration nor core tests count as runtime/image proof.
+Latest verified frontier supersedes the older snapshots below. P1589 now accepts all fifteen selected native contracts in the development worker: the strict W01-W08/W11-W15 suite passed, W09 passed 3/3 and W10 passed 2/2. The proofs include actual native effects, frozen inputs, graph/progress consistency and per-Run shared Journal lineage. W09 is explicitly mock-not-live-llm. Native success is not immutable-image, MCP or queue-process acceptance.
 
-P1540/P1541's repeated visit identities and deduplicated definition bindings now pass actual shared-recording tests and are saved in a16344eab. P1553/P1554 add native Revert and independent Implementation transport; P1560 wires explicit selected startup. P1555/P1557/P1561 provide real native golden inputs for W09-W13, with Implementation's executable mock explicitly distinguished from a live Agent call. P1558 accepts native compiler conflict/recovery proof; P1559 connects publication to actual shared Action recording, including truthful pending/no replay on recording failure. Fresh fifteen-route queue/MCP/image evidence remains required.
+P1566's rejected Revert candidate is retained separately from the accepted P1574/P1581 repair and P1584 actual native route proof; C446 is resolved. P1567 caches stable approved carriers, supplies a valid pre-Run Journal directory and uses explicit container-visible paths before preview. P1576/P1586 bind structural cutover to actual sealed predecessor receipts. P1592 finalizes W13 derived progress only after actual recording; the raw native pending_recording result remains truthful. P1588 accepts P1591's trusted-root workspace overlap guard. P1597 accepts explicit bounded Docker mock injection without widening mounts or changing the live default. No old harvest resumes.
 
-Carrier cutover is partial, not complete: 102 registered historical view Projections moved in 615b49250 with 55,288,394 byte-identical predecessor bytes, and P1556 saves the durable map. The first Applicable Methodology role-directory move was denied EPERM. C443/P1549 retain that blocked remainder; no retry, alternative move, rebasing or rollback occurred. All 963 original source links remain valid and the distinct legacy Engine manifest remains untouched. The earlier 337-file Journal byte-preserving cutover remains verified. Independent ready implementation continues while denied work remains unfinished.
+P1547 accepts both native query Tools and the sole parser after repaired adversarial snapshots and truthful consumption diagnostics; P1525/P1526 are Done for native Tool scope. P1543 accepts the fifteen-route MCP source, and P1552 accepts D521@5's exact two-frontier admission. Neither source registration nor core tests count as runtime/image proof.
+
+P1596 built fresh immutable image sha256:057792974dc2d81f84f99dee5535a44d5ee30513b03f6154381d99aa0bd558cd from unchanged Engine context 811cfd014de92cc407cb1ae825d4054a30eb7407274d26b8098ae149bceed063. P1593's harness retains the verified MCP 2.3 API, fresh connections, exact structured output and strict W01-W15/J01-J08 gates. The image build is not functional proof. P1600-W01-W05, P1601-W06-W10, P1602-W11-W15 and P1603 safety cases remain unexecuted: the host test environment is unusable and declared dependency provisioning hit filesystem rename EPERM. C449 preserves this new blocker; no permission bypass or stale-worker substitution occurred. P1604's query-specific actual-MCP remainder remains Active. P1594/P1595/P1598/P1599 record focused native, filter and consumer coverage without closing P1527/P1528/P1529.
+
+Carrier cutover is partial, not complete: 102 registered historical view Projections moved in 615b49250 with 55,288,394 byte-identical predecessor bytes, and P1556 saves the durable map. The first Applicable Methodology role-directory move was denied EPERM. Project C447/P1549 retain that blocked remainder; C443 is now the separate PROGRAMMATIC legacy-consumer issue. No retry, alternative move, rebasing or rollback occurred. All 963 original source links remain valid and the distinct legacy Engine manifest remains untouched. The earlier 337-file Journal byte-preserving cutover remains verified. Independent ready implementation continues while denied work remains unfinished.
 
 The following paragraphs are retained historical frontier snapshots, not current completion assertions.
 
