@@ -72,11 +72,6 @@ repeatable actions need reusable Prompts/Skills.
 Repeatable sequences of actions using Tools and Prompts/Skills →\
 Workflows define their steps and control flow.
 
-Files in folders are clear and inspectable →\
-they currently hold authority →\
-rescanning can become expensive →\
-a derived graph database index supports queries and views. Database authority could be a future migration.
-
 We cannot put everything into one prompt →\
 the single entry Skill, `ca`, connects agents to MCP →\
 Tools retrieve the needed context and assemble Prompts/Skills →\
@@ -91,6 +86,11 @@ bounded execution contexts and structured results.
 Long actions should not block sessions →\
 Workflow Orchestrator coordinates the steps in the background →\
 durable state, reconnectable runs, approvals and recovery.
+
+Files in folders are clear and inspectable →\
+they currently hold authority →\
+rescanning can become expensive →\
+a derived graph database index supports queries and views. Database authority could be a future migration.
 
 ### Content roles and artifact forms
 
