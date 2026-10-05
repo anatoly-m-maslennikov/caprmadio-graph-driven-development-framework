@@ -67,6 +67,9 @@ Concerns, Analysis and Plans for understanding and planning →\
 Implementation for code, tests and configuration →\
 Operations for repeatable actions and workflows.
 
+Repeatable sequences of actions →\
+O defines Workflows, their steps and control flow.
+
 Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
 **trace results back to the specification.**
@@ -94,8 +97,8 @@ Work that cannot be done deterministically →\
 LLM reasoning →\
 repeatable actions need reusable Prompts/Skills.
 
-Repeatable sequences of actions using Tools and Prompts/Skills →\
-Workflows define their steps and control flow.
+Workflows are defined in O →\
+the harness implements and runs them using Tools and Prompts/Skills.
 
 We cannot put everything into one prompt →\
 the built-in entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
