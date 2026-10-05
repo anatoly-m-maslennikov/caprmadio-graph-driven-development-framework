@@ -130,6 +130,44 @@ def _prior_image(selector: bytes) -> str | None:
     return next(iter(values)) if len(values) == 1 and IMAGE_ID.fullmatch(next(iter(values))) else None
 
 
+def _bootstrap_prior_manifest_is_exact(prior_selector: dict, manifest_bytes: bytes,
+                                       executing_release: str) -> bool:
+    """Recognize only the first-install selector/package identity pair.
+
+    A regular N package binds ``candidate_snapshot_manifest_sha256`` to N.
+    The separate first-install Action predates that workflow: its package is
+    addressed by the SHA-256 of the actual manifest bytes, while the same
+    manifest field binds its sealed source-context digest.  Accept that
+    distinct shape only when the selector itself repeats the actual manifest
+    address and the retained package proves it byte-for-byte.
+    """
+    expected_root = f"{RUNTIME_ROOT.as_posix()}/releases/{executing_release}"
+    expected = {
+        "schema_version": 1,
+        "manifest_sha256": executing_release,
+        "release": executing_release,
+        "selected_release_root": expected_root,
+        "framework_engine_root": expected_root + "/FRAMEWORK_ENGINE",
+        "methodology_root": expected_root + "/METHODOLOGY",
+    }
+    return (
+        set(prior_selector) == {*expected, "image_digest"}
+        and type(prior_selector.get("schema_version")) is int
+        and all(prior_selector.get(key) == value for key, value in expected.items())
+        and isinstance(prior_selector.get("image_digest"), str)
+        and IMAGE_ID.fullmatch(prior_selector["image_digest"]) is not None
+        and _digest(manifest_bytes) == executing_release
+    )
+
+
+def _bootstrap_source_context_is_valid(value: object) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
 def _prove_prior_skill(root: Path, candidate: ValidatedCandidate, prior_selector: bytes, skill: Path) -> list[dict]:
     actual = _skill_records(root, skill)
     parsed = tomllib.loads(prior_selector.decode())
@@ -139,11 +177,18 @@ def _prove_prior_skill(root: Path, candidate: ValidatedCandidate, prior_selector
         raise ReleaseContractError("release-promotion-skill-ownership-unknown", "prior selector has no exact retained package")
     try:
         package = _safe_path(root, expected_root)
-        manifest = _file(root, f"{expected_root}/manifest.toml").read_text()
+        manifest_bytes = _file(root, f"{expected_root}/manifest.toml").read_bytes()
+        manifest = manifest_bytes.decode("utf-8")
         data = tomllib.loads(manifest)
+        bootstrap_prior = _bootstrap_prior_manifest_is_exact(
+            parsed, manifest_bytes, candidate.authority.executing_release
+        )
         if (set(data) != {"schema_version", "candidate_snapshot_manifest_sha256", "package", "files"}
                 or data["schema_version"] != 2 or data["package"] != "caprmedio-framework"
-                or data["candidate_snapshot_manifest_sha256"] != candidate.authority.executing_release):
+                or (data["candidate_snapshot_manifest_sha256"] != candidate.authority.executing_release
+                    and not (bootstrap_prior and _bootstrap_source_context_is_valid(
+                        data["candidate_snapshot_manifest_sha256"]
+                    )))):
             raise ValueError("retained prior manifest is not selected N")
         rows = [PackageRow.model_validate({"resource": row["resource"], "source_path": row["source_path"],
                 "destination_path": row["destination"], "sha256": row["sha256"], "mode": row["mode"]}) for row in data["files"]]
@@ -154,7 +199,11 @@ def _prove_prior_skill(root: Path, candidate: ValidatedCandidate, prior_selector
                 or any(not any(row.source_path.startswith(prefix) for row in rows if row.resource == "FRAMEWORK_ENGINE")
                        for prefix in REQUIRED_ENGINE_SOURCE_PREFIXES)):
             raise ValueError("retained prior package is incomplete")
-        _verify_release(package, _render_manifest(candidate.authority.executing_release, rows), rows)
+        _verify_release(
+            package,
+            manifest if bootstrap_prior else _render_manifest(candidate.authority.executing_release, rows),
+            rows,
+        )
         expected = _skill_records(root, package / "SKILLS/ca")
         if actual != expected:
             raise ValueError("public Skill differs from retained N")
