@@ -44,7 +44,7 @@ class ReleaseCompilationTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve(strict=True)
         self.control = self.root / ".caprmedio_caprmedio"
         self.source = self.root / CANONICAL_SOURCE_RELATIVE
         for layer in ("001_CORE_META_MODEL", "003_PROJECT_CONFIGURATION"):

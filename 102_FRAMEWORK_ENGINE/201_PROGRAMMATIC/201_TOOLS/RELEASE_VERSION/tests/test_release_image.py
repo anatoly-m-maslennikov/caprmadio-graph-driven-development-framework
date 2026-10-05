@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 import sys
 import unittest
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, replace
 from pathlib import Path
 from unittest.mock import patch
@@ -23,6 +25,7 @@ from release_image import (
 )
 from release_contract import canonical_json
 from release_suite import execute_bound_release_suite
+from release_handoff import FRAMEWORK_SETTINGS_RELATIVE
 import test_release_suite as suite_test
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -83,12 +86,25 @@ class FakeRetirementDocker:
         self.fail = None
         self.forge_image = None
         self.after = None
+        self.removed = False
+        self.timeout = None
 
     def run(self, argv, *, cwd, timeout_seconds):
         self.calls.append(tuple(argv))
         if argv[:3] == ("docker", "image", "inspect"):
-            operation = "image"
-            output = json.dumps([{"Id": self.forge_image or argv[3]}]).encode()
+            operation = "absence" if self.removed else "image"
+            if self.removed:
+                output = b"[]\n"
+            else:
+                output = json.dumps([{"Id": self.forge_image or argv[3]}]).encode()
+        elif argv[:3] == ("docker", "image", "rm"):
+            operation = "remove"
+            if self.fail != operation:
+                self.removed = True
+            output = ("Deleted: " + argv[3] + "\n").encode()
+        elif argv[:3] == ("docker", "image", "ls"):
+            operation = "images"
+            output = (IMAGE_ID + "\n" + ("" if self.removed else PRIOR_IMAGE_ID + "\n")).encode()
         elif argv[:3] == ("docker", "container", "ls"):
             operation = "list"
             output = "".join(item["Id"] + "\n" for item in self.containers).encode()
@@ -99,11 +115,18 @@ class FakeRetirementDocker:
             raise AssertionError("unexpected effect: " + str(argv))
         if self.after:
             self.after(operation)
-        return DockerCommandResult(17 if self.fail == operation else 0, output, b"fixture output\n")
+        exit_code = 1 if operation == "absence" else 0
+        stderr = ("Error response from daemon: No such image: " + argv[3] + "\n").encode() if operation == "absence" else b"fixture output\n"
+        if self.fail == operation:
+            exit_code, stderr = 17, b"permission denied\n"
+        return DockerCommandResult(exit_code, output, stderr, self.timeout == operation)
 
 
 class ReleaseImageTests(unittest.TestCase):
     def setUp(self):
+        self.setup_candidate()
+
+    def setup_candidate(self, settings=None):
         self.fixture = suite_test.ReleaseSuiteTests("run")
         self.fixture.setUp()
         self.addCleanup(self.fixture.doCleanups)
@@ -112,6 +135,8 @@ class ReleaseImageTests(unittest.TestCase):
         self.fixture.fixture.write("uv.lock", b"version = 1\n")
         self.fixture.fixture.write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile",
                                    b"FROM scratch\nCOPY pyproject.toml uv.lock ./\nCOPY 102_FRAMEWORK_ENGINE ./102_FRAMEWORK_ENGINE\n")
+        if settings is not None:
+            self.fixture.fixture.write(FRAMEWORK_SETTINGS_RELATIVE, settings)
         self.candidate, self.compilation = self.fixture.bound()
         self.suite = execute_bound_release_suite(self.candidate, self.compilation)
         self.assertTrue(self.suite.passed)
@@ -262,8 +287,11 @@ class ReleaseImageTests(unittest.TestCase):
         self.assertEqual(sum(call[1] == "build" for call in self.docker.calls), 1)
         self.assertTrue((self.root / result.context_root).is_dir())
 
-    def retirement_inputs(self, prior_image=PRIOR_IMAGE_ID):
+    def retirement_inputs(self, prior_image=PRIOR_IMAGE_ID, settings=None):
         from release_promotion import promote_bound_release
+        if settings is not None:
+            self.fixture.doCleanups()
+            self.setup_candidate(settings)
         selector = self.root / ".caprmedio_runtime/framework/current.toml"
         selector.write_text('release = "N"\n' + (f'candidate_image_digest = "{prior_image}"\n' if prior_image else ""))
         build, verification = self.recorded_command_fixtures()
@@ -271,6 +299,165 @@ class ReleaseImageTests(unittest.TestCase):
         promotion = promote_bound_release(*args)
         self.assertEqual(promotion.outcome, "promoted")
         return args + (promotion,)
+
+    def retention_settings(self, condition="until_verified_promotion", images=()):
+        return ('[release_version.rollback_retention]\ncondition = ' + json.dumps(condition)
+                + '\nrequired_image_digests = ' + json.dumps(list(images)) + '\n').encode()
+
+    def test_retirement_golden_exact_removal_and_absence_only_after_sealed_until_policy(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        selector = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
+        prior = (self.root / args[-1].retained_prior_selector_ref).read_bytes()
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "retired")
+        self.assertTrue(result.prior_image_absent)
+        self.assertEqual(result.required_rollback_refs, ())
+        self.assertEqual(result.retention_condition, "until_verified_promotion")
+        self.assertEqual([call for call in docker.calls if call[:3] == ("docker", "image", "rm")],
+                         [("docker", "image", "rm", PRIOR_IMAGE_ID)])
+        self.assertNotIn("--force", [part for call in docker.calls for part in call])
+        self.assertNotIn("prune", [part for call in docker.calls for part in call])
+        self.assertEqual((self.root / ".caprmedio_runtime/framework/current.toml").read_bytes(), selector)
+        self.assertEqual((self.root / args[-1].retained_prior_selector_ref).read_bytes(), prior)
+        self.assertTrue((self.root / result.removal_intent_ref).is_file())
+
+    def test_retirement_retain_prior_and_explicit_required_image_reference_never_remove(self):
+        for settings in (self.retention_settings("retain_prior"), self.retention_settings(images=(PRIOR_IMAGE_ID,))):
+            with self.subTest(settings=settings):
+                args = self.retirement_inputs(settings=settings)
+                docker = FakeRetirementDocker()
+                result = retire_prior_image(*args, executor=docker)
+                self.assertEqual(result.outcome, "retained")
+                self.assertTrue(result.required_rollback_refs)
+                self.assertFalse(docker.removed)
+
+    def test_retirement_malformed_closed_policy_members_remain_pending(self):
+        for settings in (self.retention_settings("unknown"), self.retention_settings(images=("mutable:tag",)),
+                         self.retention_settings(images=(PRIOR_IMAGE_ID, PRIOR_IMAGE_ID)),
+                         self.retention_settings() + b'caller_success = true\n',
+                         b'[release_version.rollback_retention]\ncondition = "until_verified_promotion"\n',
+                         b'[release_version.rollback_retention]\ncondition = "until_verified_promotion"\nrequired_image_digests = "none"\n'):
+            with self.subTest(settings=settings):
+                args = self.retirement_inputs(settings=settings)
+                docker = FakeRetirementDocker()
+                result = retire_prior_image(*args, executor=docker)
+                self.assertEqual(result.outcome, "pending")
+                self.assertIsNone(result.required_rollback_refs)
+                self.assertFalse(docker.removed)
+
+    def test_retirement_required_other_image_does_not_make_saved_selector_required(self):
+        args = self.retirement_inputs(settings=self.retention_settings(images=(IMAGE_ID,)))
+        docker = FakeRetirementDocker()
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "retired")
+        self.assertIn(args[-1].retained_prior_selector_ref, result.observed_rollback_refs)
+        self.assertEqual(result.required_rollback_refs, ())
+
+    def test_retirement_used_container_under_until_policy_never_removes(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker(({"Id": CONTAINER_ID, "Image": PRIOR_IMAGE_ID, "State": {"Status": "exited"}},))
+        self.assertEqual(retire_prior_image(*args, executor=docker).outcome, "retained")
+        self.assertFalse(docker.removed)
+
+    def test_retirement_remove_failure_is_truthful_and_cannot_implicitly_retry(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        docker.fail = "remove"
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "failed")
+        docker.fail = None
+        again = retire_prior_image(*args, executor=docker)
+        self.assertEqual(again.outcome, "pending")
+        self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
+
+    def test_retirement_timeout_uncertain_effect_is_not_replayed(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        docker.timeout = "remove"
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "effect_uncertain")
+        docker.removed = False
+        docker.timeout = None
+        self.assertEqual(retire_prior_image(*args, executor=docker).outcome, "pending")
+        self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
+
+    def test_retirement_absence_permission_failure_is_not_retired(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        docker.fail = "absence"
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "effect_uncertain")
+        self.assertIsNone(result.prior_image_absent)
+
+    def test_retirement_image_still_exists_after_successful_rm_is_uncertain(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        docker.after = lambda operation: setattr(docker, "removed", False) if operation == "remove" else None
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "effect_uncertain")
+        self.assertFalse(result.prior_image_absent)
+
+    def test_retirement_selector_race_before_rm_prevents_removal(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        docker.after = lambda operation: (self.root / ".caprmedio_runtime/framework/current.toml").write_text('release = "other"\n') if operation == "list" else None
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "stale")
+        self.assertFalse(docker.removed)
+
+    def test_retirement_stale_settings_before_or_during_observation_remain_pending(self):
+        for during in (False, True):
+            with self.subTest(during=during):
+                args = self.retirement_inputs(settings=self.retention_settings())
+                docker = FakeRetirementDocker()
+                def change(operation):
+                    if operation == "list":
+                        (self.root / FRAMEWORK_SETTINGS_RELATIVE).write_bytes(self.retention_settings("retain_prior"))
+                if during:
+                    docker.after = change
+                else:
+                    change("list")
+                result = retire_prior_image(*args, executor=docker)
+                self.assertEqual(result.outcome, "pending")
+                self.assertIsNone(result.required_rollback_refs)
+                self.assertFalse(docker.removed)
+
+    def test_retirement_never_removes_selected_candidate_even_when_prior_identity_matches(self):
+        args = self.retirement_inputs(prior_image=IMAGE_ID, settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(docker.calls, [])
+
+    def test_retirement_recording_failure_after_removal_retains_intent_and_blocks_replay(self):
+        import release_image
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        real_write = release_image._write
+        def fail_receipt(path, payload, mode=0o644):
+            if path.name == "receipt.json":
+                raise OSError("deliberate post-removal receipt failure")
+            return real_write(path, payload, mode)
+        with patch.object(release_image, "_write", side_effect=fail_receipt):
+            result = retire_prior_image(*args, executor=docker)
+        self.assertEqual(result.outcome, "recording_uncertain")
+        self.assertTrue(result.prior_image_absent)
+        self.assertTrue((self.root / result.removal_intent_ref).is_file())
+        docker.removed = False
+        self.assertEqual(retire_prior_image(*args, executor=docker).outcome, "pending")
+        self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
+
+    def test_retirement_concurrent_admission_has_only_one_exact_removal_effect(self):
+        args = self.retirement_inputs(settings=self.retention_settings())
+        docker = FakeRetirementDocker()
+        rendezvous = threading.Barrier(2)
+        docker.after = lambda operation: rendezvous.wait(timeout=10) if operation == "list" else None
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures = [pool.submit(retire_prior_image, *args, executor=docker) for _ in range(2)]
+            results = [future.result(timeout=20) for future in futures]
+        self.assertEqual(sorted(result.outcome for result in results), ["pending", "retired"])
+        self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
 
     def test_retirement_golden_observes_exact_image_all_containers_and_retained_rollback_selector(self):
         args = self.retirement_inputs()

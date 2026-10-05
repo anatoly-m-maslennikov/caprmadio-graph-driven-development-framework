@@ -9,12 +9,12 @@ import sys
 from typing import Annotated
 
 from pydantic import Field, TypeAdapter
-from contracts import Enqueue, EnqueueSelected, Status
-from backend import enqueue, enqueue_selected, status, worker
+from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
+from backend import enqueue, enqueue_selected, recover_selected_release, recover_selected_release_status, status, worker
 from engine import Coordinator
 from runtime_config import control_directory, docker_runtime
 
-Request = Annotated[Enqueue | EnqueueSelected | Status, Field(discriminator='operation')]
+Request = Annotated[Enqueue | EnqueueSelected | RecoverSelectedRelease | RecoverSelectedReleaseStatus | Status, Field(discriminator='operation')]
 ADAPTER = TypeAdapter(Request)
 
 
@@ -28,6 +28,10 @@ def run(root, request):
         return enqueue(root, request)
     if isinstance(request, EnqueueSelected):
         return enqueue_selected(root, request)
+    if isinstance(request, RecoverSelectedRelease):
+        return recover_selected_release(root, request)
+    if isinstance(request, RecoverSelectedReleaseStatus):
+        return recover_selected_release_status(root, request)
     return status(root, request)
 
 
@@ -35,7 +39,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--project-root', required=True, type=Path)
     parser.add_argument('--input', default='-')
-    parser.add_argument('operation', choices=['worker', 'start-worker', 'enqueue', 'enqueue_selected', 'status'])
+    parser.add_argument('operation', choices=['worker', 'start-worker', 'enqueue', 'enqueue_selected', 'recover_selected_release', 'recover_selected_release_status', 'status'])
     args = parser.parse_args()
     if args.operation in ('worker', 'start-worker'):
         engine = Coordinator(args.project_root, None)

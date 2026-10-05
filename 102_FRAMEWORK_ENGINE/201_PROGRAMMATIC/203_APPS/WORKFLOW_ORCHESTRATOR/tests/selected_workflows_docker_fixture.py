@@ -6,6 +6,7 @@ points a Docker worker at this repository's authority or an existing Run.
 """
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 import hashlib
 import json
@@ -620,6 +621,18 @@ class GoldenProject:
             raise GoldenCorpusError("selected workflow manifest does not contain a route list")
         actual_routes = tuple(item.get("route") for item in manifest["routes"] if isinstance(item, dict))
         expected_routes = MANIFEST_ROUTE_NAMES
+        if actual_routes == (*expected_routes, "release_version"):
+            # The live projection has admitted its one additive Release row.
+            # Selected-workflow goldens deliberately retain their historical
+            # fifteen-route baseline, reconstructed with fresh digests rather
+            # than borrowing mutable live carrier bytes.
+            manifest = copy.deepcopy(manifest)
+            manifest["routes"] = manifest["routes"][:-1]
+            manifest.pop("release_source_admissions", None)
+            manifest["source_freshness"]["selected_binding_digest"] = digest(manifest["routes"])
+            unsigned = {key: value for key, value in manifest.items() if key != "canonical_manifest_sha256"}
+            manifest["canonical_manifest_sha256"] = digest(unsigned)
+            actual_routes = tuple(item.get("route") for item in manifest["routes"] if isinstance(item, dict))
         if actual_routes != expected_routes:
             raise GoldenCorpusError("selected workflow manifest is not the exact closed fifteen-route portfolio")
         freshness = manifest.get("source_freshness")
@@ -663,9 +676,7 @@ class GoldenProject:
                     self._copy_pinned(relative, pin.get("digest"))
                     copied.add(relative)
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source_manifest, self.manifest_path)
-        if file_digest(self.manifest_path) != file_digest(source_manifest):
-            raise GoldenCorpusError("manifest copy did not preserve canonical bytes")
+        self.manifest_path.write_bytes(canonical_json(manifest) + b"\n")
         return manifest
 
     def _copy_pinned(self, relative: Path, expected_digest: object) -> None:

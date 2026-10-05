@@ -542,6 +542,27 @@ class _QueueBackedSelectedSupport:
         except (ImportError, ValueError, RuntimeError, OSError) as error:
             return {"disposition": "blocked", "outcome": "blocked", "diagnostics": [f"shared recording recovery failed: {error}"]}
 
+    def recover_selected_release(self, request: dict[str, Any]) -> dict[str, Any]:
+        """Forward a closed recovery carrier to the orchestrator transport."""
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            return importlib.import_module("orchestrator").run(self.root, request)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"run_id": request.get("run_id"), "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Release recovery transport is unavailable: {error}"]}
+
+    def recover_selected_release_status(self, request: dict[str, Any]) -> dict[str, Any]:
+        try:
+            app = Path(__file__).resolve().parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR"
+            if str(app) not in sys.path:
+                sys.path.insert(0, str(app))
+            return importlib.import_module("orchestrator").run(self.root, request)
+        except (ImportError, ValueError, RuntimeError, OSError) as error:
+            return {"run_id": request.get("run_id"), "disposition": "blocked", "outcome": "blocked",
+                    "diagnostics": [f"selected Release recovery observation is unavailable: {error}"]}
+
 
 class SelectedRouteAdapter(_SelectedRouteAdapterBase):
 
@@ -731,6 +752,51 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
         except (TypeError, ValueError, RuntimeError) as error:
             return self._result(request, "blocked", "blocked", f"shared support rejected recording recovery: {error}")
 
+    def recover_release(self, request: Any) -> dict[str, Any]:
+        required = {"operation", "run_id", "request_identity"}
+        if (not isinstance(request, Mapping) or set(request) != required
+                or request.get("operation") != "recover_selected_release"
+                or not isinstance(request.get("run_id"), str) or not _REQUEST_ID.fullmatch(request["run_id"])
+                or not isinstance(request.get("request_identity"), str) or not _DIGEST.fullmatch(request["request_identity"])):
+            return self._result(request, "rejected", "rejected", "Release recovery requires only operation, existing run_id, and sealed request_identity")
+        try:
+            manifest = load_selected_manifest(self.root)
+            routes = tuple(entry.get("route") for entry in manifest.get("routes", []) if isinstance(entry, Mapping))
+        except (OSError, ValueError, SelectedRouteError) as error:
+            return self._result(request, "blocked", "blocked", f"Release recovery admission is unavailable: {error}")
+        if routes != (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+            return self._result(request, "blocked", "blocked", "Release recovery requires the admitted additive Release manifest")
+        support = self._support()
+        if support is None or not hasattr(support, "recover_selected_release"):
+            return self._result(request, "blocked", "implementation_gap", "selected Release recovery transport is unavailable")
+        try:
+            return support.recover_selected_release(dict(request))
+        except (TypeError, ValueError, RuntimeError, OSError) as error:
+            return self._result(request, "blocked", "blocked", f"selected Release recovery rejected request: {error}")
+
+    def recover_release_status(self, request: Any) -> dict[str, Any]:
+        required = {"operation", "run_id", "recovery_transport_handle"}
+        if (not isinstance(request, Mapping) or set(request) != required
+                or request.get("operation") != "recover_selected_release_status"
+                or not isinstance(request.get("run_id"), str) or not _REQUEST_ID.fullmatch(request["run_id"])
+                or not isinstance(request.get("recovery_transport_handle"), str)
+                or not re.fullmatch(r"[0-9a-f]{32}", request["recovery_transport_handle"])):
+            return self._result(request, "rejected", "rejected", "Release recovery observation requires only operation, existing run_id, and returned transport handle")
+        try:
+            manifest = load_selected_manifest(self.root)
+            routes = tuple(entry.get("route") for entry in manifest.get("routes", []) if isinstance(entry, Mapping))
+        except (OSError, ValueError, SelectedRouteError) as error:
+            return self._result(request, "blocked", "blocked", f"Release recovery admission is unavailable: {error}")
+        if routes != (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+            return self._result(request, "blocked", "blocked", "Release recovery requires the admitted additive Release manifest")
+        support = self._support()
+        if support is None or not hasattr(support, "recover_selected_release_status"):
+            return self._result(request, "blocked", "implementation_gap", "selected Release recovery observation is unavailable")
+        try:
+            return support.recover_selected_release_status(dict(request))
+        except (TypeError, ValueError, RuntimeError, OSError) as error:
+            return self._result(request, "blocked", "blocked", f"selected Release recovery observation rejected request: {error}")
+
 
 def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdapter:
     """Register only source-admitted routes, retaining the stable MCP gateway.
@@ -783,5 +849,16 @@ def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdap
     def recover_selected_run_recording(request: dict[str, Any]) -> dict[str, Any]:
         """Retry one pending shared event append; never replay an Action or Workflow."""
         return adapter.recover_recording(request)
+
+    if public_route_names == (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME):
+        @server.tool(name="recover_selected_release", structured_output=True, annotations=selected_annotations)
+        def recover_selected_release(request: dict[str, Any]) -> dict[str, Any]:
+            """Recover only one existing frozen admitted Release Run."""
+            return adapter.recover_release(request)
+
+        @server.tool(name="recover_selected_release_status", structured_output=True, annotations=observation_annotations)
+        def recover_selected_release_status(request: dict[str, Any]) -> dict[str, Any]:
+            """Read one returned Release recovery scheduler handle without dispatch."""
+            return adapter.recover_release_status(request)
 
     return adapter

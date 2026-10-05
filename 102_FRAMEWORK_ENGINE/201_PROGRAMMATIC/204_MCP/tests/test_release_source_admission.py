@@ -28,6 +28,7 @@ from release_source_admission import (  # noqa: E402
     ReleaseSourceAdmissionError, derive_release_graph_admission, derive_release_route_graph, derive_release_source_admission,
     validate_release_source_admissions,
 )
+from selected_routes import canonical_digest  # noqa: E402
 
 
 def reference_record(text: str) -> dict[str, object]:
@@ -219,6 +220,12 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
 
     def test_actual_fifteen_route_manifest_needs_no_release_authority(self) -> None:
         actual = json.loads((REPOSITORY / ".caprmedio_caprmedio/_projection/selected_workflow_bindings.json").read_text())
+        self.assertEqual(16, len(actual["routes"]))
+        actual["routes"] = actual["routes"][:-1]
+        actual.pop("release_source_admissions")
+        actual["source_freshness"]["selected_binding_digest"] = canonical_digest(actual["routes"])
+        unsigned = {key: value for key, value in actual.items() if key != "canonical_manifest_sha256"}
+        actual["canonical_manifest_sha256"] = canonical_digest(unsigned)
         self.assertEqual(15, len(actual["routes"]))
         self.assertNotIn("release_source_admissions", actual)
         (self.root / AUTHORITY_REF).unlink()

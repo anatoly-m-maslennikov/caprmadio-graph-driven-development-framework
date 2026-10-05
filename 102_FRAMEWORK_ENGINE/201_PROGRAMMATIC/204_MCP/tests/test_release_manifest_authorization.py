@@ -14,8 +14,10 @@ from unittest.mock import patch
 
 MCP = Path(__file__).resolve().parents[1]
 REPOSITORY = MCP.parents[2]
-if str(MCP) not in sys.path:
-    sys.path.insert(0, str(MCP))
+APP_TESTS = MCP.parent / "203_APPS/WORKFLOW_ORCHESTRATOR/tests"
+for location in (MCP, APP_TESTS):
+    if str(location) not in sys.path:
+        sys.path.insert(0, str(location))
 
 from release_manifest_authorization import (  # noqa: E402
     PublicationAuthorizationContext,
@@ -29,6 +31,7 @@ from release_manifest_lifecycle import ReleaseManifestLifecycle  # noqa: E402
 from release_manifest_publisher import _candidate, plan_release_manifest_publish  # noqa: E402
 from release_source_admission import AUTHORITY_REF, derive_release_graph_admission  # noqa: E402
 from selected_routes import selected_manifest_ref  # noqa: E402
+from selected_workflows_docker_fixture import GoldenCase, GoldenProject  # noqa: E402
 
 
 def _paths(value: object) -> set[str]:
@@ -49,18 +52,19 @@ class ReleaseManifestAuthorizationTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix="context-", dir=temporary, ignore_cleanup_errors=True)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        raw = json.loads((REPOSITORY / selected_manifest_ref(REPOSITORY)).read_text(encoding="utf-8"))
+        raw = GoldenProject(REPOSITORY, self.root, GoldenCase("W04", "change_atom_status"))._copy_reviewed_manifest()
         _, admission = derive_release_graph_admission(REPOSITORY)
         manifest_ref = selected_manifest_ref(REPOSITORY)
         source_registry_ref = raw["source_freshness"]["selected_source_registry_ref"]
         operators_registry_ref = ".caprmedio_caprmedio/operators_registry.toml"
         project_settings_ref = ".caprmedio_caprmedio/caprmedio_project_settings.toml"
-        for relative in _paths(raw) | _paths(admission) | {
+        for relative in _paths(admission) | {
             AUTHORITY_REF, manifest_ref, source_registry_ref, operators_registry_ref, project_settings_ref,
         }:
             source, target = REPOSITORY / relative, self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
+            if not target.exists():
+                shutil.copyfile(source, target)
         self.path = self.root / manifest_ref
         self.before = self.path.read_bytes()
         self.plan = plan_release_manifest_publish(self.root)
@@ -212,10 +216,7 @@ class ReleaseManifestAuthorizationTest(unittest.TestCase):
         authority.write_bytes(authority.read_bytes() + b"\nsource changed\n")
         self.assert_refused(context)
         self.assertEqual(self.before, self.path.read_bytes())
-        self.assertEqual(
-            hashlib.sha256((REPOSITORY / selected_manifest_ref(REPOSITORY)).read_bytes()).hexdigest(),
-            hashlib.sha256(self.before).hexdigest(),
-        )
+        self.assertEqual(self.plan["observed_input_sha256"], hashlib.sha256(self.before).hexdigest())
 
 
 if __name__ == "__main__":

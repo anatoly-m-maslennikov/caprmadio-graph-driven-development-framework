@@ -27,7 +27,9 @@ from framework_initialization import (  # noqa: E402
 )
 from release_image import DockerCommandResult  # noqa: E402
 from release_contract import ReleaseContractError  # noqa: E402
-from release_promotion import _bootstrap_source_context_is_valid, _prove_prior_skill  # noqa: E402
+from release_promotion import _prove_prior_skill  # noqa: E402
+from release_suite import _active_n_state, _bootstrap_source_context_is_valid  # noqa: E402
+from release_suite_execution import _inspect_bound_n_image, _selector_binding  # noqa: E402
 
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -53,7 +55,9 @@ class _ImageFixture:
 
     def run(self, _argv, *, cwd, timeout_seconds):
         del cwd, timeout_seconds
-        return DockerCommandResult(0, json.dumps([{"Id": IMAGE_ID, "Config": {"Labels": self.labels}}]).encode(), b"")
+        return DockerCommandResult(0, json.dumps([{"Id": IMAGE_ID, "Config": {
+            "Labels": self.labels, "Env": ["PATH=/usr/bin:/bin"],
+        }}]).encode(), b"")
 
 
 class BootstrapReleaseCompatibilityTests(unittest.TestCase):
@@ -160,6 +164,20 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
         for replacement in ("0", "false", '"' + "A" * 64 + '"'):
             self._assert_rejected_source_context(plan, selector, replacement)
         self.assertFalse(_bootstrap_source_context_is_valid(None))
+
+    def test_actual_bootstrap_n_binds_its_exact_framework_image_labels(self) -> None:
+        plan, _installed = self._initialize()
+        candidate = SimpleNamespace(authority=SimpleNamespace(executing_release=plan.release))
+        image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+
+        _active_n_state(self.root, candidate)
+        selected = _selector_binding(self.root, candidate)
+        verified = _inspect_bound_n_image(image, self.root, selected)
+
+        self.assertTrue(verified.bootstrap)
+        self.assertEqual(verified.executing_release, plan.release)
+        self.assertEqual(verified.source_context_sha256, plan.source_context_sha256)
+        self.assertEqual(verified.image_path, "/usr/bin:/bin")
 
 
 if __name__ == "__main__":

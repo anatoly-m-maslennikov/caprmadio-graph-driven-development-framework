@@ -3,8 +3,8 @@
 The executor is an internal dependency, not a Tool request member. Fake executor
 results prove command construction only. Actual image proof requires the Docker
 executor and successful immutable-ID inspection and executable canary output.
-Retirement observes the separate promotion producer and retains the image
-until the sealed Framework Instance Settings retention condition is bound.
+Retirement observes the separate promotion producer and consumes only the
+closed, digest-bound Framework Instance Settings retention condition.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ from typing import Literal, Protocol
 from release_contract import (IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, CandidateSnapshotManifest,
                               ReleaseContractError, SealedAuthority, ValidatedCandidate, canonical_json)
 from release_handoff import (COMPILER_ENTRYPOINT_RELATIVE, CURRENT_SELECTOR_RELATIVE,
-                             DERIVED_SOURCE_COPY_RELATIVE, MATERIALIZED_RELATIVE,
+                             DERIVED_SOURCE_COPY_RELATIVE, FRAMEWORK_SETTINGS_RELATIVE, MATERIALIZED_RELATIVE,
                              SealedCandidateCompilation, _file)
 from release_packaging import RUNTIME_ROOT, _complete_rows, _render_manifest, _verify_release
 from release_suite import (EVIDENCE_ROOT as SUITE_ROOT, SUPPORTED_RUNNER, SuiteGateEvidence,
@@ -96,7 +96,7 @@ class ImageVerificationEvidence:
 @dataclass(frozen=True)
 class ImageRetirementEvidence:
     candidate_snapshot_manifest_sha256: str
-    outcome: Literal["retained", "pending", "stale", "recording_uncertain"]
+    outcome: Literal["retired", "retained", "pending", "failed", "stale", "effect_uncertain", "recording_uncertain"]
     reason: str
     candidate_image_digest: str
     prior_image_digest: str | None
@@ -104,6 +104,11 @@ class ImageRetirementEvidence:
     retaining_container_refs: tuple[str, ...] | None
     observed_rollback_refs: tuple[str, ...] | None
     required_rollback_refs: tuple[str, ...] | None
+    retention_condition: Literal["retain_prior", "until_verified_promotion"] | None
+    framework_settings_digest: str
+    removal_intent_ref: str | None
+    removal_exit_code: int | None
+    prior_image_absent: bool | None
     evidence_root: str
     commands_sha256: str
     execution_kind: Literal["docker-subprocess", "test-double"]
@@ -634,8 +639,8 @@ def _observed_rollback_references(root: Path, prior_image: str) -> tuple[str, ..
     """Read retained selector references without asserting required retention.
 
     Historical presence neither proves required retention nor approved expiry.
-    The approved condition must classify these observations through already
-    sealed Framework Instance Settings; that binding is not implemented here.
+    D573's approved settings condition and exact required-image list classify
+    required retention; these historical observations never do so by themselves.
     """
     from release_promotion import PROMOTION_ROOT
 
@@ -692,36 +697,106 @@ def _retaining_containers(executor, prior_image, root, attempt, records, timeout
         raise ReleaseContractError("release-image-containers-unknown", "container inspections have incomplete immutable image bindings") from error
 
 
+def _retention_settings(root, candidate, prior_image):
+    """D573 closed policy from exact locally reopened authoritative bytes."""
+    payload = _file(root, FRAMEWORK_SETTINGS_RELATIVE).read_bytes()
+    if _digest(payload) != candidate.manifest.framework_settings_digest:
+        raise ReleaseContractError("release-image-retention-stale", "authoritative Framework Settings no longer match the sealed digest")
+    try:
+        document = tomllib.loads(payload.decode("utf-8"))
+        parent = document.get("release_version")
+        table = parent.get("rollback_retention") if isinstance(parent, dict) else None
+        if not isinstance(table, dict) or set(table) != {"condition", "required_image_digests"}:
+            raise ValueError("absent or non-closed retention table")
+        condition, images = table["condition"], table["required_image_digests"]
+        if (condition not in ("retain_prior", "until_verified_promotion") or not isinstance(condition, str)
+            or not isinstance(images, list) or any(not isinstance(image, str) or not IMAGE_ID.fullmatch(image) for image in images)
+            or len(images) != len(set(images))):
+            raise ValueError("unknown or malformed retention condition")
+    except (ValueError, UnicodeDecodeError, TypeError) as error:
+        raise ReleaseContractError("release-image-retention-unknown", "approved rollback-retention condition is absent, unknown or malformed") from error
+    refs = tuple(f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.required_image_digests[{index}]"
+                 for index, image in enumerate(images) if image == prior_image)
+    if condition == "retain_prior":
+        refs = (f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.condition", *refs)
+    return condition, tuple(images), refs
+
+
+def _prove_prior_absence(executor, prior_image, root, attempt, records, timeout):
+    """Exact inspect plus successful full immutable inventory; never infer 404."""
+    result = _command(executor, ("docker", "image", "inspect", prior_image), root, attempt, records, timeout)
+    if result.timed_out:
+        return None
+    try:
+        inspected = json.loads(result.stdout)
+    except (ValueError, TypeError):
+        return None
+    if result.exit_code == 0:
+        return False if (isinstance(inspected, list) and len(inspected) == 1
+                         and isinstance(inspected[0], dict) and inspected[0].get("Id") == prior_image) else None
+    errors = {(f"Error response from daemon: No such image: {prior_image}").encode(),
+              (f"Error: No such image: {prior_image}").encode()}
+    if type(result.exit_code) is not int or result.exit_code != 1 or inspected != [] or result.stderr.strip() not in errors:
+        return None
+    inventory = _command(executor, ("docker", "image", "ls", "--all", "--quiet", "--no-trunc"), root, attempt, records, timeout)
+    if inventory.timed_out or type(inventory.exit_code) is not int or inventory.exit_code != 0:
+        return None
+    try:
+        images = inventory.stdout.decode("ascii").splitlines()
+    except UnicodeDecodeError:
+        return None
+    if any(not IMAGE_ID.fullmatch(image) for image in images):
+        return None
+    return prior_image not in images
+
+
 def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
                        suite: SuiteGateEvidence, build: ImageBuildEvidence,
                        verification: ImageVerificationEvidence, promotion, *, executor: DockerExecutor,
                        timeout_seconds: float = 120) -> ImageRetirementEvidence:
-    """Observe exact prior-image retirement safety after verified promotion.
+    """Retire only exact prior identity under D573's sealed settings condition.
 
     There are no caller image overrides or retention-success flags. The exact
     identity comes from the promotion's observed retained N selector. Missing,
     mismatched or unavailable proof yields pending; container use yields retained.
-    O169 requires an approved rollback-retention condition. Until that condition
-    is bound to the already sealed Framework Instance Settings, required rollback
-    references remain unknown (None), even if historical selectors are observed.
-    No image removal is admitted by this frontier. A future exact removal must
-    consume the condition producer and use only ``docker image rm <prior-id>``.
+    Historical selectors are retained evidence, not required retention. An atomic
+    durable removal intent precedes the one non-forced CLI effect; an existing
+    intent blocks implicit retry, including uncertain effects/recording. Success
+    requires exact post-removal absence and still-current promotion/settings.
     """
-    from release_promotion import verify_bound_promotion_evidence
+    from release_promotion import PromotionEvidence, verify_bound_promotion_evidence
 
     if isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float)) or not 0 < timeout_seconds <= 120:
         raise ReleaseContractError("release-image-timeout-invalid", "retirement timeout must be within (0, 120]")
-    root = verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+    admission_error = None
+    try:
+        root = verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+    except ReleaseContractError as error:
+        if not isinstance(promotion, PromotionEvidence) or "stale" not in error.code:
+            raise
+        root = _artifact_inputs(candidate, compilation)
+        admission_error = error
     frozen = _freeze(root)
     attempt = _attempt(root, candidate.manifest.sha256, "retire")
     prior_image = promotion.prior_image_digest
-    records, containers, rollback = [], None, None
+    records, containers, rollback, required = [], None, None, None
+    condition = removal_ref = removal_exit = absent = None
+    removal_attempted = False
     outcome, reason = "pending", "exact prior image is unknown; no alternate image is inferred"
     try:
+        if admission_error is not None:
+            raise admission_error
         if prior_image is not None:
             if not IMAGE_ID.fullmatch(prior_image) or prior_image == promotion.candidate_image_digest:
                 raise ReleaseContractError("release-image-prior-unknown", "prior identity is invalid or still selected as N+1")
             rollback = _observed_rollback_references(root, prior_image)
+            policy_error = None
+            try:
+                condition, required_images, required = _retention_settings(root, candidate, prior_image)
+            except ReleaseContractError as error:
+                if "stale" in error.code:
+                    raise
+                policy_error = error
             result = _command(executor, ("docker", "image", "inspect", prior_image), root, attempt, records, timeout_seconds)
             if result.timed_out or type(result.exit_code) is not int or result.exit_code != 0:
                 reason = "exact prior image is missing, unavailable or permission-denied; retained without another target"
@@ -737,16 +812,64 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
                     containers = _retaining_containers(executor, prior_image, root, attempt, records, timeout_seconds)
                     if containers:
                         outcome, reason = "retained", "exact prior image is retained by an observed running or stopped container"
+                    elif required:
+                        outcome, reason = "retained", "sealed approved rollback-retention condition requires the exact prior image"
+                    elif policy_error is not None:
+                        reason = str(policy_error)
                     else:
-                        # Observed selectors alone cannot classify required use:
-                        # the sealed settings retention binding is still absent.
-                        reason = "approved rollback-retention condition is unavailable; required references are unknown and removal remains pending"
+                        if _retention_settings(root, candidate, prior_image) != (condition, required_images, required):
+                            raise ReleaseContractError("release-image-retention-stale", "retention settings changed before removal")
+                        verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+                        if _freeze(root) != frozen:
+                            raise ReleaseContractError("release-image-retirement-stale", "promotion or retention changed before removal")
+                        claim = attempt.parent / f"removal-{prior_image.removeprefix('sha256:')}.json"
+                        removal_ref = claim.relative_to(root).as_posix()
+                        intent = canonical_json({"schema": "caprmedio.release_version.image_removal_intent.v1",
+                            "candidate_snapshot_manifest_sha256": candidate.manifest.sha256, "prior_image_digest": prior_image,
+                            "candidate_image_digest": promotion.candidate_image_digest, "promotion_receipt_sha256": promotion.receipt_sha256,
+                            "suite_receipt_sha256": suite.receipt_sha256, "build_receipt_sha256": build.receipt_sha256,
+                            "verification_receipt_sha256": verification.receipt_sha256,
+                            "framework_settings_digest": candidate.manifest.framework_settings_digest,
+                            "condition": condition, "required_image_digests": required_images,
+                            "attempt": attempt.relative_to(root).as_posix(), "argv": ["docker", "image", "rm", prior_image]})
+                        try:
+                            _write(claim, intent)
+                        except FileExistsError:
+                            reason = "exact prior image already has a removal intent; reconciliation is required without effect replay"
+                        else:
+                            descriptor = os.open(claim.parent, os.O_RDONLY)
+                            try:
+                                os.fsync(descriptor)
+                            finally:
+                                os.close(descriptor)
+                            removal_attempted = True
+                            removal = _command(executor, ("docker", "image", "rm", prior_image), root, attempt, records, timeout_seconds)
+                            removal_exit = removal.exit_code
+                            if removal.timed_out:
+                                outcome, reason = "effect_uncertain", "removal CLI timed out; its effect must not be replayed"
+                            else:
+                                absent = _prove_prior_absence(executor, prior_image, root, attempt, records, timeout_seconds)
+                                if type(removal.exit_code) is int and removal.exit_code == 0 and absent is True:
+                                    outcome, reason = "retired", "exact prior image removal and immutable absence observed"
+                                elif type(removal.exit_code) is int and removal.exit_code != 0 and absent is False:
+                                    outcome, reason = "failed", "non-forced exact removal failed and the prior image remains"
+                                else:
+                                    outcome, reason = "effect_uncertain", "removal effect or exact prior-image absence is unproven"
         verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
         if _freeze(root) != frozen:
             raise ReleaseContractError("release-image-retirement-stale", "selected N+1 or public Skill changed during retirement observation")
+        if condition is not None and _retention_settings(root, candidate, prior_image) != (condition, required_images, required):
+            raise ReleaseContractError("release-image-retention-stale", "retention settings changed during retirement")
     except (ValueError, OSError, RuntimeError) as error:
         code = getattr(error, "code", "")
-        outcome = "stale" if any(part in code for part in ("stale", "currentness", "selection")) else "pending"
+        if isinstance(error, OSError):
+            outcome = "recording_uncertain"
+        elif removal_attempted:
+            outcome = "effect_uncertain"
+        else:
+            outcome = "pending" if admission_error is not None or code == "release-image-retention-stale" else ("stale" if any(part in code for part in ("stale", "currentness", "selection")) else "pending")
+        if code == "release-image-retention-stale" or admission_error is not None:
+            condition = required = None
         reason = f"retirement safety is unproven: {code or type(error).__name__}"
     commands = canonical_json(records)
     try:
@@ -754,7 +877,8 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
     except OSError:
         outcome, reason = "recording_uncertain", "retirement observation recording is uncertain"
     evidence = ImageRetirementEvidence(candidate.manifest.sha256, outcome, reason, promotion.candidate_image_digest,
-               prior_image, promotion.receipt_sha256, containers, rollback, None, attempt.relative_to(root).as_posix(),
+               prior_image, promotion.receipt_sha256, containers, rollback, required, condition,
+               candidate.manifest.framework_settings_digest, removal_ref, removal_exit, absent, attempt.relative_to(root).as_posix(),
                _digest(commands), "docker-subprocess" if type(executor) is DockerSubprocessExecutor else "test-double")
     return _record(attempt, evidence)
 

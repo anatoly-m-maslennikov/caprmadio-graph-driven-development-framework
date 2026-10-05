@@ -518,9 +518,255 @@ class RunExecutionSession:
         )
         self.actual: dict[str, dict[str, Any]] = {}
         self.terminal: dict[str, dict[str, Any]] = {}
+        self.interrupted: dict[str, dict[str, Any]] = {}
         self.observed_effects: dict[str, dict[str, Any]] = {}
         self.receipts: list[dict[str, Any]] = []
         self.pending: list[str] = []
+
+    @classmethod
+    def restore(
+        cls,
+        tracker: "LazyRunTracker",
+        request: Mapping[str, Any],
+        evidence: Iterable[Mapping[str, Any]],
+    ) -> "RunExecutionSession":
+        """Rebuild a Session from sealed, already-recorded Journal evidence.
+
+        This is deliberately a state reconstruction boundary: it neither
+        appends Journal data nor invokes an executor.  Callers must therefore
+        decide explicitly whether a restored non-terminal Run needs an
+        Operator-directed recovery path; this method never turns uncertainty
+        into a replay.
+        """
+        parsed = _validate_common(request)
+        if parsed["mode"] != "execute":
+            raise SelectedRunError("invalid-recovery", "only an execute request can restore selected Run evidence")
+        session = cls(tracker, parsed)
+        expected_receipt = {
+            "event_id", "action_id", "event_digest", "carrier", "line",
+            "previous_carrier_digest", "appended_carrier_digest",
+        }
+        sealed_items: list[tuple[dict[str, Any], dict[str, Any]]] = []
+        seen_event_ids: set[str] = set()
+        for item in evidence:
+            if not isinstance(item, Mapping) or set(item) != {"event", "receipt"}:
+                raise SelectedRunError("invalid-recovery", "recovery evidence must contain exactly event and receipt")
+            try:
+                event = work_journal.validate_sealed_event(item["event"])
+            except work_journal.WorkJournalError as error:
+                raise SelectedRunError("invalid-recovery", f"invalid sealed Journal event: {error}") from error
+            receipt = item["receipt"]
+            if not isinstance(receipt, Mapping) or set(receipt) != expected_receipt:
+                raise SelectedRunError("invalid-recovery", "recovery receipt has invalid fields")
+            if (
+                receipt["event_id"] != event["event_id"]
+                or receipt["action_id"] != event["action_id"]
+                or receipt["event_digest"] != event["event_digest"]
+            ):
+                raise SelectedRunError("invalid-recovery", "recovery receipt does not bind its sealed event")
+            if (
+                not isinstance(receipt["carrier"], str)
+                or not receipt["carrier"]
+                or Path(receipt["carrier"]).is_absolute()
+                or ".." in Path(receipt["carrier"]).parts
+                or type(receipt["line"]) is not int
+                or receipt["line"] < 1
+                or any(not isinstance(receipt[key], str) or len(receipt[key]) != 64 for key in (
+                    "event_digest", "previous_carrier_digest", "appended_carrier_digest",
+                ))
+            ):
+                raise SelectedRunError("invalid-recovery", "recovery receipt has invalid carrier evidence")
+            if event["event_id"] in seen_event_ids:
+                raise SelectedRunError("duplicate-recovery-evidence", "one Journal event appears more than once")
+            seen_event_ids.add(event["event_id"])
+            if event["schema_version"] != 5 or event["kind"] != "workflow_execution":
+                raise SelectedRunError("invalid-recovery", "recovery accepts only schema-v5 workflow execution evidence")
+            if event["action_id"] != parsed["assigned_action_id"] or event["llm_session"]["uuid"] != parsed["request_id"]:
+                raise SelectedRunError("recovery-request-mismatch", "Journal evidence belongs to a different selected request")
+            if event["initiative"] != parsed["initiative"]:
+                raise SelectedRunError("recovery-request-mismatch", "Journal evidence has different initiative binding")
+            expected_input_ref = parsed["initiative"].get("initiative_ref", "selected-run-input")
+            if (
+                event["llm_session"]["app"] != "run-support"
+                or event["structural_scope"] != "TOOLS"
+                or event["input_ref"] != expected_input_ref
+            ):
+                raise SelectedRunError("recovery-request-mismatch", "Journal evidence has different selected Run source bindings")
+            if event["event"] not in {"started", "completed", "failed", "abandoned", "interrupted", "recovered"}:
+                raise SelectedRunError("invalid-recovery", "recovery accepts only canonical started or terminal Run evidence")
+            sealed_items.append((dict(event), dict(receipt)))
+
+        starts = [(event, receipt) for event, receipt in sealed_items if event["event"] == "started"]
+        nonstarts = [(event, receipt) for event, receipt in sealed_items if event["event"] != "started"]
+        start_by_run_id: dict[str, tuple[dict[str, Any], dict[str, Any]]] = {}
+        for event, receipt in starts:
+            run_id = event["run"]["run_id"]
+            if run_id in start_by_run_id:
+                raise SelectedRunError("duplicate-recovery-evidence", "one actual Run has multiple start events")
+            start_by_run_id[run_id] = (event, receipt)
+
+        assigned: dict[str, str] = {}
+        unassigned = set(session.requested)
+        while len(assigned) < len(starts):
+            progress = False
+            for event, _ in starts:
+                run = event["run"]
+                actual_id = run["run_id"]
+                if actual_id in assigned:
+                    continue
+                candidates: list[str] = []
+                for requested_id in unassigned:
+                    requested = session.requested[requested_id]
+                    if run["kind"] != requested["kind"] or run["definition"] != requested["definition"]:
+                        continue
+                    parent_requested = requested.get("parent_requested_run_id")
+                    predecessor_requested = requested.get("predecessor_requested_run_id")
+                    if ("parent_run_id" in run) != (parent_requested is not None):
+                        continue
+                    if ("predecessor_run_id" in run) != (predecessor_requested is not None):
+                        continue
+                    if parent_requested is not None:
+                        parent_actual = assigned.get(run["parent_run_id"])
+                        if parent_actual != parent_requested:
+                            continue
+                    if predecessor_requested is not None:
+                        predecessor_actual = assigned.get(run["predecessor_run_id"])
+                        if predecessor_actual != predecessor_requested:
+                            continue
+                    candidates.append(requested_id)
+                if len(candidates) > 1:
+                    raise SelectedRunError("ambiguous-recovery-evidence", "Journal evidence cannot identify one requested Run")
+                if len(candidates) == 1:
+                    requested_id = candidates[0]
+                    assigned[actual_id] = requested_id
+                    unassigned.remove(requested_id)
+                    progress = True
+            if not progress:
+                unresolved = [event["run"]["run_id"] for event, _ in starts if event["run"]["run_id"] not in assigned]
+                if unresolved:
+                    raise SelectedRunError("invalid-recovery-lineage", "Journal starts do not match declared requested Run lineage")
+                break
+
+        for actual_id, requested_id in assigned.items():
+            event, receipt = start_by_run_id[actual_id]
+            run = dict(event["run"])
+            if "successor_run_ids" in run:
+                raise SelectedRunError("invalid-recovery-lineage", "selected Run recovery does not admit derived successor evidence")
+            expected_bindings = session._bindings_for(run)
+            if event["definition_bindings"] != expected_bindings:
+                raise SelectedRunError("recovery-definition-mismatch", "Journal start has mismatched definition bindings")
+            session.actual[requested_id] = run
+
+        # Preserve Journal order.  Separating interruptions from finals first
+        # would make a later ``interrupted`` fact appear to precede an earlier
+        # ``recovered`` fact, inventing a legal recovery history.  One Run may
+        # therefore move only through this small state machine:
+        #
+        #   unseen -> running -> interrupted -> terminal
+        #                              ^
+        #                    recovered/interrupted_pending
+        #
+        # A recovered pending observation is deliberately still resumable.  A
+        # recovered final observation is immutable like every other terminal
+        # fact.  The state machine also prevents a second started event from
+        # being mistaken for a restart of the same actual Run.
+        lifecycle: dict[str, str] = {requested_id: "unseen" for requested_id in session.requested}
+        expected_terminal_events = {
+            "completed": {"completed", "no_op"},
+            "failed": {"failed", "partial"},
+            "abandoned": {"cancelled"},
+        }
+
+        def _record_interruption(
+            requested_id: str,
+            event: Mapping[str, Any],
+            receipt: Mapping[str, Any],
+            *,
+            recovered: bool,
+        ) -> None:
+            session.interrupted[requested_id] = {
+                "event_id": event["event_id"],
+                "event_receipt": dict(receipt),
+                "run_id": event["run"]["run_id"],
+                "disposition": "interrupted",
+                "outcome": "interrupted_pending",
+                "result_ref": event["result_ref"],
+                "effect_refs": list(event["effect_refs"]),
+                "report_ref": event["report_ref"],
+                "recovered": recovered,
+            }
+
+        for event, receipt in sealed_items:
+            run = event["run"]
+            actual_id = run["run_id"]
+            requested_id = assigned.get(actual_id)
+            if requested_id is None:
+                raise SelectedRunError("invalid-recovery-lineage", "Run evidence has no matching start evidence")
+            if run != session.actual[requested_id]:
+                raise SelectedRunError("recovery-run-mismatch", "Run evidence changes the started Run identity")
+            if event["definition_bindings"] != session._bindings_for(run):
+                raise SelectedRunError("recovery-definition-mismatch", "Journal Run evidence has mismatched definition bindings")
+
+            event_name = event["event"]
+            state = lifecycle[requested_id]
+            if event_name == "started":
+                if state != "unseen":
+                    raise SelectedRunError("duplicate-recovery-evidence", "one actual Run has multiple start events")
+                parent_requested = session.requested[requested_id].get("parent_requested_run_id")
+                predecessor_requested = session.requested[requested_id].get("predecessor_requested_run_id")
+                for dependency in (parent_requested, predecessor_requested):
+                    if dependency is not None and lifecycle[dependency] == "unseen":
+                        raise SelectedRunError("invalid-recovery-lineage", "Run evidence starts a child before its declared lineage")
+                lifecycle[requested_id] = "running"
+                continue
+
+            if state == "unseen":
+                raise SelectedRunError("invalid-recovery-order", "Run terminal evidence occurs before its start evidence")
+            if state == "terminal":
+                raise SelectedRunError("duplicate-terminal", "an actual Run already has terminal evidence")
+
+            if event_name == "interrupted":
+                if state != "running":
+                    raise SelectedRunError("invalid-recovery-order", "interruption must follow a running Run")
+                if event["outcome"] != "interrupted_pending":
+                    raise SelectedRunError("invalid-recovery", "interruption evidence must retain interrupted_pending outcome")
+                _record_interruption(requested_id, event, receipt, recovered=False)
+                lifecycle[requested_id] = "interrupted"
+                continue
+
+            if event_name == "recovered":
+                if state != "interrupted":
+                    raise SelectedRunError("invalid-recovery-order", "recovered evidence requires a prior interruption")
+                outcome = event["outcome"]
+                if outcome == "interrupted_pending":
+                    _record_interruption(requested_id, event, receipt, recovered=True)
+                    continue
+                if outcome not in {"completed", "no_op", "failed", "cancelled", "partial"}:
+                    raise SelectedRunError("invalid-recovery", "recovered evidence has an unsupported outcome")
+            else:
+                if state != "running":
+                    raise SelectedRunError("recovery-required", "an interrupted Run requires recovered final evidence")
+                outcome = event["outcome"]
+                if outcome not in expected_terminal_events[event_name]:
+                    raise SelectedRunError("invalid-recovery", "terminal evidence has an unsupported event/outcome mapping")
+
+            session.terminal[requested_id] = {
+                "event_id": event["event_id"],
+                "event_receipt": dict(receipt),
+                "run_id": actual_id,
+                "disposition": "terminal",
+                "outcome": outcome,
+                "result_ref": event["result_ref"],
+                "effect_refs": list(event["effect_refs"]),
+                "report_ref": event["report_ref"],
+            }
+            # ``interrupted`` holds only the unresolved, resumable state.  The
+            # immutable recovered final remains available through receipts and
+            # terminal state, but cannot make a completed Run look resumable.
+            session.interrupted.pop(requested_id, None)
+            lifecycle[requested_id] = "terminal"
+        session.receipts = [receipt for _, receipt in sealed_items]
+        return session
 
     def start_run(self, requested_run_id: str, *, run_id: str | None = None) -> dict[str, Any]:
         """Record one actual invocation, preserving a requested Workflow ID."""
@@ -568,6 +814,8 @@ class RunExecutionSession:
         requested_id, record = self._actual_by_id(run_id)
         if requested_id in self.terminal:
             raise SelectedRunError("duplicate-terminal", "an actual Run already has terminal evidence")
+        if requested_id in self.interrupted:
+            raise SelectedRunError("recovery-required", "an interrupted Run requires Release recovery evidence")
         observed = self.observed_effects.get(requested_id)
         if observed is not None and (result_ref != observed["result_ref"] or effect_refs != observed["effect_refs"]):
             raise SelectedRunError("effect-observation-mismatch", "terminal evidence must retain previously observed effects")
@@ -588,18 +836,114 @@ class RunExecutionSession:
         event_name = {"completed": "completed", "no_op": "completed", "failed": "failed", "partial": "failed", "cancelled": "abandoned", "interrupted_pending": "interrupted"}[outcome]
         event = self.tracker._lazy_journal_event(self.request, record, event_name, outcome, result_ref, effect_refs, report_ref, self._bindings_for(record))
         try:
-            self.receipts.append(self.tracker._append_one(event, result_ref, effect_refs))
-            result = {"run_id": run_id, "disposition": "terminal", "outcome": outcome, "result_ref": result_ref, "effect_refs": list(effect_refs), "report_ref": report_ref}
+            receipt = self.tracker._append_one(event, result_ref, effect_refs)
+            self.receipts.append(receipt)
+            result = {"event_id": event["event_id"], "event_receipt": dict(receipt), "run_id": run_id, "disposition": "terminal", "outcome": outcome, "result_ref": result_ref, "effect_refs": list(effect_refs), "report_ref": report_ref}
         except OSError as error:
             self.pending.append(str(event["event_id"]))
             result = {"run_id": run_id, "disposition": "recording_pending", "outcome": outcome, "result_ref": result_ref, "effect_refs": list(effect_refs), "report_ref": report_ref, "recording_blocker": str(error)}
-        self.terminal[requested_id] = result
+        if outcome == "interrupted_pending":
+            if result["disposition"] == "terminal":
+                result["disposition"] = "interrupted"
+                self.interrupted[requested_id] = result
+        else:
+            self.terminal[requested_id] = result
+        return dict(result)
+
+    def recover_run(
+        self,
+        run_id: str,
+        *,
+        outcome: str,
+        result_ref: str | None,
+        effect_refs: list[str],
+        report_ref: str | None = None,
+    ) -> dict[str, Any]:
+        """Record one Release-only recovery observation after interruption.
+
+        This is not an executor and cannot replay an effect.  It records only
+        sealed ``recovered`` evidence for an already-started, canonically
+        interrupted Run.  A recovered ``interrupted_pending`` observation
+        remains resumable; every other recovered outcome is final and cannot
+        be replaced.
+        """
+        if self.request["operation_route"] != "release_version":
+            raise SelectedRunError("recovery-not-supported", "only release_version admits selected Run recovery")
+        requested_id, record = self._actual_by_id(run_id)
+        if requested_id in self.terminal:
+            raise SelectedRunError("duplicate-terminal", "an actual Run already has terminal evidence")
+        if requested_id not in self.interrupted:
+            raise SelectedRunError("recovery-prerequisite-missing", "recovery requires prior canonical interruption evidence")
+        if outcome not in OUTCOMES:
+            raise SelectedRunError("invalid-outcome", "recovery outcome is invalid")
+        if outcome != "interrupted_pending":
+            result_ref = _safe_ref(result_ref, "result_ref")
+        elif result_ref is not None:
+            result_ref = _safe_ref(result_ref, "result_ref")
+        if not isinstance(effect_refs, list) or len(set(effect_refs)) != len(effect_refs):
+            raise SelectedRunError("invalid-outcome", "effect_refs must be unique")
+        for effect_ref in effect_refs:
+            _safe_ref(effect_ref, "effect_ref")
+        if outcome == "no_op" and effect_refs:
+            raise SelectedRunError("invalid-outcome", "no_op cannot invent an effect reference")
+        if report_ref is not None:
+            report_ref = _safe_ref(report_ref, "report_ref")
+        event = self.tracker._lazy_journal_event(
+            self.request,
+            record,
+            "recovered",
+            outcome,
+            result_ref,
+            effect_refs,
+            report_ref,
+            self._bindings_for(record),
+        )
+        try:
+            receipt = self.tracker._append_one(event, result_ref, effect_refs)
+            self.receipts.append(receipt)
+            result = {
+                "event_id": event["event_id"],
+                "event_receipt": dict(receipt),
+                "run_id": run_id,
+                "disposition": "terminal",
+                "outcome": outcome,
+                "result_ref": result_ref,
+                "effect_refs": list(effect_refs),
+                "report_ref": report_ref,
+            }
+        except OSError as error:
+            self.pending.append(str(event["event_id"]))
+            result = {
+                "event_id": event["event_id"],
+                "run_id": run_id,
+                "disposition": "recording_pending",
+                "outcome": outcome,
+                "result_ref": result_ref,
+                "effect_refs": list(effect_refs),
+                "report_ref": report_ref,
+                "recording_blocker": str(error),
+            }
+        if outcome == "interrupted_pending" and result["disposition"] == "terminal":
+            self.interrupted[requested_id] = {
+                **result,
+                "disposition": "interrupted",
+                "recovered": True,
+            }
+            result["disposition"] = "interrupted"
+        else:
+            # A failed Journal append remains a recording-only retry: keeping
+            # the attempted event as locally terminal prevents creation of a
+            # competing recovered event.  ``recover(event_id)`` is the only
+            # admitted way to append those exact already-sealed bytes.
+            self.terminal[requested_id] = result
+            if result["disposition"] == "terminal":
+                self.interrupted.pop(requested_id, None)
         return dict(result)
 
     def note_effects(self, run_id: str, *, result_ref: str, effect_refs: list[str]) -> None:
         """Retain known effects so an interrupted executor cannot erase them."""
         requested_id, _ = self._actual_by_id(run_id)
-        if requested_id in self.terminal or requested_id in self.observed_effects:
+        if requested_id in self.terminal or requested_id in self.interrupted or requested_id in self.observed_effects:
             raise SelectedRunError("invalid-effect-observation", "effects may be observed once before terminal evidence")
         result_ref = _safe_ref(result_ref, "result_ref")
         if not isinstance(effect_refs, list) or not effect_refs or len(set(effect_refs)) != len(effect_refs):
@@ -619,7 +963,7 @@ class RunExecutionSession:
     def interrupt_open_runs(self) -> None:
         """Retain uncertainty after an executor exception without declaring completion."""
         for requested_id, record in list(self.actual.items()):
-            if requested_id not in self.terminal:
+            if requested_id not in self.terminal and requested_id not in self.interrupted:
                 observed = self.observed_effects.get(requested_id)
                 if observed is None:
                     self.finish_run(record["run_id"], outcome="interrupted_pending", result_ref=None, effect_refs=[])
@@ -737,9 +1081,14 @@ class LazyRunTracker(RunTracker):
 
     def _session_result(self, request: Mapping[str, Any], proposal: Mapping[str, Any], session: RunExecutionSession, *, execution_error: str | None = None) -> dict[str, Any]:
         terminal = list(session.terminal.values())
+        interrupted = list(session.interrupted.values())
+        # ``terminal_runs`` is the established public run-result field.  Keep
+        # its complete observed lifecycle surface for callers while using the
+        # separate in-memory ``terminal`` map only for final facts.
+        reported_runs = [*terminal, *interrupted]
         if session.pending or any(item["disposition"] == "recording_pending" for item in terminal):
             disposition = "recording_pending"
-        elif any(item["outcome"] == "interrupted_pending" for item in terminal):
+        elif interrupted:
             disposition = "started"
         else:
             disposition = "terminal"
@@ -749,9 +1098,12 @@ class LazyRunTracker(RunTracker):
             "source_freshness": proposal["source_freshness"],
             "retry_disposition": "retry-recording-only" if disposition == "recording_pending" else "none",
             "run_ids": [record["run_id"] for record in session.actual.values()],
-            "terminal_runs": terminal,
+            "terminal_runs": reported_runs,
             "event_receipts": list(session.receipts),
         }
+        if interrupted:
+            result["interrupted_runs"] = interrupted
+            result["retry_disposition"] = "inspect-or-recover-only"
         if session.pending:
             result["pending_event_ids"] = list(session.pending)
         if execution_error is not None:

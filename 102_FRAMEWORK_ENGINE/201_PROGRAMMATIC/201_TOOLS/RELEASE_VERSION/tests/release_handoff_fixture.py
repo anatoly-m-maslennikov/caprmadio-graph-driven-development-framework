@@ -78,6 +78,7 @@ class ReleaseFixture:
     """Actual local source bytes, observed modes and prior selection fixtures."""
 
     def __init__(self, root: Path) -> None:
+        root = root.resolve(strict=True)
         self.root = root
         inventory = (
             ("FRAMEWORK_ENGINE", "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py", "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py", 0o755),

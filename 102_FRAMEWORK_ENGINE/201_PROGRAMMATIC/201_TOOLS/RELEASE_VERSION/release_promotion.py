@@ -28,7 +28,10 @@ from release_image import (
 )
 from release_inventory import persistent_regular_files, refuse_secret_path
 from release_packaging import RUNTIME_ROOT, _read_row, _render_manifest, _verify_release
-from release_suite import SuiteGateEvidence, _safe_path
+from release_suite import (
+    SuiteGateEvidence, _bootstrap_prior_manifest_is_exact,
+    _bootstrap_source_context_is_valid, _safe_path,
+)
 
 
 PROMOTION_ROOT = ".caprmedio_runtime/release_promotion"
@@ -114,12 +117,15 @@ def _inputs(candidate, compilation, suite, build, verification) -> str:
           "build": asdict(build), "verification": asdict(verification)}))
 
 
-def _selector(candidate, image: str) -> bytes:
+def _selector(candidate, image: str, context_sha256: str) -> bytes:
+    if IMAGE_ID.fullmatch(image) is None or not _bootstrap_source_context_is_valid(context_sha256):
+        raise ReleaseContractError("release-promotion-input-untrusted", "promotion requires a verified immutable image context")
     package = f"{RUNTIME_ROOT.as_posix()}/releases/{candidate.manifest.sha256}"
     members = {"candidate_snapshot_manifest_sha256": candidate.manifest.sha256,
                "release": candidate.manifest.sha256, "candidate_release": candidate.manifest.candidate_release,
                "selected_release_root": package, "framework_engine_root": package + "/FRAMEWORK_ENGINE",
-               "methodology_root": package + "/METHODOLOGY", "candidate_image_digest": image}
+               "methodology_root": package + "/METHODOLOGY", "candidate_image_digest": image,
+               "candidate_image_context_sha256": context_sha256}
     return ("schema_version = 1\n" + "".join(f"{key} = {json.dumps(value)}\n" for key, value in members.items())).encode()
 
 
@@ -128,44 +134,6 @@ def _prior_image(selector: bytes) -> str | None:
     values = {mapping[key] for mapping in (parsed, parsed.get("selection", {})) if isinstance(mapping, dict)
               for key in ("candidate_image_digest", "image_digest") if isinstance(mapping.get(key), str)}
     return next(iter(values)) if len(values) == 1 and IMAGE_ID.fullmatch(next(iter(values))) else None
-
-
-def _bootstrap_prior_manifest_is_exact(prior_selector: dict, manifest_bytes: bytes,
-                                       executing_release: str) -> bool:
-    """Recognize only the first-install selector/package identity pair.
-
-    A regular N package binds ``candidate_snapshot_manifest_sha256`` to N.
-    The separate first-install Action predates that workflow: its package is
-    addressed by the SHA-256 of the actual manifest bytes, while the same
-    manifest field binds its sealed source-context digest.  Accept that
-    distinct shape only when the selector itself repeats the actual manifest
-    address and the retained package proves it byte-for-byte.
-    """
-    expected_root = f"{RUNTIME_ROOT.as_posix()}/releases/{executing_release}"
-    expected = {
-        "schema_version": 1,
-        "manifest_sha256": executing_release,
-        "release": executing_release,
-        "selected_release_root": expected_root,
-        "framework_engine_root": expected_root + "/FRAMEWORK_ENGINE",
-        "methodology_root": expected_root + "/METHODOLOGY",
-    }
-    return (
-        set(prior_selector) == {*expected, "image_digest"}
-        and type(prior_selector.get("schema_version")) is int
-        and all(prior_selector.get(key) == value for key, value in expected.items())
-        and isinstance(prior_selector.get("image_digest"), str)
-        and IMAGE_ID.fullmatch(prior_selector["image_digest"]) is not None
-        and _digest(manifest_bytes) == executing_release
-    )
-
-
-def _bootstrap_source_context_is_valid(value: object) -> bool:
-    return (
-        isinstance(value, str)
-        and len(value) == 64
-        and all(character in "0123456789abcdef" for character in value)
-    )
 
 
 def _prove_prior_skill(root: Path, candidate: ValidatedCandidate, prior_selector: bytes, skill: Path) -> list[dict]:
@@ -293,7 +261,9 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
         intent = {"schema": INTENT_SCHEMA, "inputs_sha256": input_sha,
                   "candidate_snapshot_manifest_sha256": candidate.manifest.sha256,
                   "prior_release": candidate.authority.executing_release, "prior_selector_sha256": _digest(prior),
-                  "candidate_selector_sha256": _digest(_selector(candidate, verification.candidate_image_digest)),
+                  "candidate_selector_sha256": _digest(_selector(
+                      candidate, verification.candidate_image_digest, build.context_sha256
+                  )),
                   "candidate_image_digest": verification.candidate_image_digest, "prior_image_digest": _prior_image(prior),
                   "selected_release_root": package_relative, "prior_skill": old_skill, "candidate_skill": planned,
                   "gate_artifacts": _gate_artifacts(root, suite, build, verification)}
@@ -301,7 +271,9 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
         staging = Path(tempfile.mkdtemp(prefix=".admission-", dir=parent))
         try:
             _write(staging / "prior-selector.toml", prior)
-            _write(staging / "candidate-selector.toml", _selector(candidate, verification.candidate_image_digest))
+            _write(staging / "candidate-selector.toml", _selector(
+                candidate, verification.candidate_image_digest, build.context_sha256
+            ))
             shutil.copytree(package / "SKILLS/ca", staging / "candidate-skill", copy_function=shutil.copy2)
             if _skill_records(root, staging / "candidate-skill") != planned:
                 raise ReleaseContractError("release-promotion-skill-stale", "private staged Skill differs from admitted package")
@@ -319,7 +291,7 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
     outcome, reason = "pending", "promotion effects remain incomplete"
     try:
         prior = _file(root, f"{relative}/prior-selector.toml").read_bytes()
-        planned_selector = _selector(candidate, verification.candidate_image_digest)
+        planned_selector = _selector(candidate, verification.candidate_image_digest, build.context_sha256)
         if (_digest(prior) != intent["prior_selector_sha256"]
                 or _digest(planned_selector) != intent["candidate_selector_sha256"]):
             raise ReleaseContractError("release-promotion-intent-untrusted", "retained selection bytes changed")
@@ -416,7 +388,9 @@ def verify_bound_promotion_evidence(candidate, compilation, suite, build, verifi
         raise ReleaseContractError("release-promotion-evidence-stale", "promotion receipt does not identify its retained prior Skill")
     prior = _file(root, evidence.retained_prior_selector_ref).read_bytes()
     if (_digest(prior) != intent["prior_selector_sha256"] or _prior_image(prior) != evidence.prior_image_digest
-            or _file(root, CURRENT_SELECTOR_RELATIVE).read_bytes() != _selector(candidate, evidence.candidate_image_digest)
+            or _file(root, CURRENT_SELECTOR_RELATIVE).read_bytes() != _selector(
+                candidate, evidence.candidate_image_digest, build.context_sha256
+            )
             or _skill_records(root, root / PROJECT_SKILL_TARGET) != intent["candidate_skill"]):
         raise ReleaseContractError("release-promotion-evidence-stale", "recorded promotion or retained prior identity is no longer observed")
     return root

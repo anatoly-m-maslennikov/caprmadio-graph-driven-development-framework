@@ -80,7 +80,7 @@ class ReleaseManifestAdmissionTest(unittest.TestCase):
         self.assertNotIn("release_source_admissions", loaded)
         self.assertEqual(self.base["source_freshness"], loaded["source_freshness"])
         self.assertEqual(self.base["query_source_admissions"], loaded["query_source_admissions"])
-        self.assertEqual((REPOSITORY / self.path.relative_to(self.root)).read_bytes(), self.path.read_bytes())
+        self.assertEqual(self.base, json.loads(self.path.read_text(encoding="utf-8")))
         self.assertEqual(before, self.fixture.snapshot())
 
     def test_actual_source_bound_successor_sixteen_loads_without_changing_first_fifteen_or_registration(self) -> None:
