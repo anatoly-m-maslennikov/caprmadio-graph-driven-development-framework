@@ -59,9 +59,11 @@ Natural-language phrases can be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
 **explicit, checkable Claims.**
 
+The spec is about different things →\
+Requirements, Methods, Evaluations and Delivery (RMED).
+
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
-Requirements, Methods, Evaluations and Delivery (RMED) for specification →\
 Implementation for code, tests and configuration →\
 Operations for repeatable actions and workflows.
 
