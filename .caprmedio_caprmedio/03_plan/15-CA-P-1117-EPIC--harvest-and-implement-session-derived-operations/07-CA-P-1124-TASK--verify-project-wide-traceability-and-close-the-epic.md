@@ -17,7 +17,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 6
-updated_at: "2026-10-05 03:11:41 +0000"
+updated_at: "2026-10-05 13:59:15 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -39,6 +39,8 @@ This is a composite task, not a fifteen-minute executable leaf. Its initial chil
 Before marking this task Done, verify full-stage coverage and update the next dependent task(s) from actual results. A blocked child remains unfinished, has a C/Problem, and does not authorize bypassing this parent's gate.
 
 ## Details
+
+Final coverage verification and Epic closure are temporarily deferred by the Operator's direction to skip queue item #5 for now. This Task remains unfinished; its acceptance requirements are retained and no closure is claimed. The implementation and required runtime tests continue separately.
 
 ### Sixteenth Workflow closure mapping
 

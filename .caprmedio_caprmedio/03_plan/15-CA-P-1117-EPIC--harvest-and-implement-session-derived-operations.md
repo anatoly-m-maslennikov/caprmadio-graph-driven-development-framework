@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 15
-updated_at: "2026-10-05 13:27:20 +0000"
+updated_at: "2026-10-05 13:59:15 +0000"
 relations: {}
 ---
 # Summary
@@ -166,6 +166,8 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
+
+The Operator temporarily deferred queue item #5: the final all-sixteen-Workflow code-versus-RMED/O review, coverage audit and Epic closure. CA-P-1655 and CA-P-1124 remain unfinished and are not being executed now. Continue the source-admission, manifest-publication, recovery integration, first-runtime installation and actual runtime-test work; their necessary local checks remain in scope. This deferral is neither a waiver of final acceptance nor permission to mark the Epic Done.
 
 The 2026-10-05 continuation below supersedes older frontier snapshots. Root integration passes 66 typed recovery/provider tests and 56 first-install, canonical Journal, compatibility, isolated-fixture-safety and source-admission tests. These are focused/mocked or retained-fixture proofs, not a real Docker Release. The first-install package now uses canonical compiled Methodology role folders, rejects unsafe Skill ancestry, serializes competing requests, and retains exact pending Journal recovery without replay. Its N-to-N+1 reader seam is under strict source review.
 

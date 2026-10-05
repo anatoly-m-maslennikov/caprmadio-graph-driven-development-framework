@@ -15,7 +15,7 @@ subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
 version: 1
-updated_at: "2026-10-05 03:11:41 +0000"
+updated_at: "2026-10-05 13:59:15 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -29,6 +29,8 @@ Review implemented code against RMED and Operations
 Review the code delivered by this Epic against its current applicable active RMED and O Atoms before Epic closure.
 
 ## Details
+
+Execution is temporarily deferred by the Operator's direction to skip queue item #5 for now. This Task remains unfinished; it is not waived or reported Done. Resume only when the Operator restores the final review to the execution queue.
 
 - Run after CA-P-1122, CA-P-1123, CA-P-1520, CA-P-1612 and CA-P-1620 finish their required implementation and verification.
 - Bind the exact code revision and working-tree state, governing Atom revisions and digests, accepted source reviews and declared scope. Cover all sixteen selected Workflows, their Actions, and the shared Tools, prompts, MCP, orchestrator, Journal and release/runtime paths they use; exclude unrelated harvested capabilities.
