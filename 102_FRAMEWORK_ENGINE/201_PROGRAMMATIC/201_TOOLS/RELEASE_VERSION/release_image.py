@@ -3,7 +3,8 @@
 The executor is an internal dependency, not a Tool request member. Fake executor
 results prove command construction only. Actual image proof requires the Docker
 executor and successful immutable-ID inspection and executable canary output.
-Retirement remains refused until the separate promotion producer exists.
+Retirement observes the separate promotion producer and retains the image
+until the sealed Framework Instance Settings retention condition is bound.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ import os
 import re
 import subprocess
 import tempfile
+import tomllib
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Literal, Protocol
@@ -51,7 +53,7 @@ class DockerSubprocessExecutor:
     """Existing Docker CLI only; no shell, provisioning or socket workaround."""
 
     def run(self, argv: tuple[str, ...], *, cwd: Path, timeout_seconds: float) -> DockerCommandResult:
-        if not argv or argv[0] != "docker" or argv[1] not in {"build", "image", "run"}:
+        if not argv or argv[0] != "docker" or argv[1] not in {"build", "image", "run", "container"}:
             raise ReleaseContractError("release-image-command-invalid", "unsupported internal Docker operation")
         try:
             result = subprocess.run(argv, cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True,
@@ -85,6 +87,23 @@ class ImageVerificationEvidence:
     reason: str
     candidate_image_digest: str
     build_receipt_sha256: str
+    evidence_root: str
+    commands_sha256: str
+    execution_kind: Literal["docker-subprocess", "test-double"]
+    receipt_sha256: str | None = None
+
+
+@dataclass(frozen=True)
+class ImageRetirementEvidence:
+    candidate_snapshot_manifest_sha256: str
+    outcome: Literal["retained", "pending", "stale", "recording_uncertain"]
+    reason: str
+    candidate_image_digest: str
+    prior_image_digest: str | None
+    promotion_receipt_sha256: str
+    retaining_container_refs: tuple[str, ...] | None
+    observed_rollback_refs: tuple[str, ...] | None
+    required_rollback_refs: tuple[str, ...] | None
     evidence_root: str
     commands_sha256: str
     execution_kind: Literal["docker-subprocess", "test-double"]
@@ -611,18 +630,135 @@ def read_image_execution_artifacts(candidate: ValidatedCandidate, compilation: S
     return attempt
 
 
-def retire_prior_image(candidate: ValidatedCandidate, *, prior_image_digest: str, executor: DockerExecutor):
-    """Refuse retirement until an actual matching promotion producer is available.
+def _observed_rollback_references(root: Path, prior_image: str) -> tuple[str, ...]:
+    """Read retained selector references without asserting required retention.
 
-    No accepted caller flag, mutable tag, selector presence or fake typed receipt
-    establishes promotion. A future implementation must consume the promotion
-    producer, observe all containers and required rollback references, then issue
-    only ``docker image rm <exact-prior-id>`` without force or broad pruning.
+    Historical presence neither proves required retention nor approved expiry.
+    The approved condition must classify these observations through already
+    sealed Framework Instance Settings; that binding is not implemented here.
     """
-    raise ReleaseContractError("release-image-promotion-producer-missing",
-                               "actual same-candidate verified promotion and prior-image/rollback authority are not implemented")
+    from release_promotion import PROMOTION_ROOT
+
+    paths = [CURRENT_SELECTOR_RELATIVE]
+    parent = _safe_path(root, PROMOTION_ROOT)
+    for directory in sorted(parent.iterdir()):
+        if directory.is_symlink() or not directory.is_dir():
+            raise ReleaseContractError("release-image-rollback-unknown", "promotion retention scope contains an unsafe carrier")
+        selector = directory / "prior-selector.toml"
+        if selector.is_symlink() or not selector.is_file():
+            raise ReleaseContractError("release-image-rollback-unknown", "promotion retention scope has an unobserved prior selector")
+        paths.append(selector.relative_to(root).as_posix())
+    references = []
+    for relative in paths:
+        try:
+            parsed = tomllib.loads(_file(root, relative).read_text())
+            images = {mapping[key] for mapping in (parsed, parsed.get("selection", {})) if isinstance(mapping, dict)
+                      for key in ("candidate_image_digest", "image_digest") if isinstance(mapping.get(key), str)}
+        except (OSError, ValueError) as error:
+            raise ReleaseContractError("release-image-rollback-unknown", "rollback selector evidence cannot be safely observed") from error
+        if prior_image in images:
+            references.append(relative)
+    return tuple(sorted(references))
+
+
+def _retaining_containers(executor, prior_image, root, attempt, records, timeout) -> tuple[str, ...]:
+    """Observe every stopped/running container, matching immutable Image only."""
+    result = _command(executor, ("docker", "container", "ls", "--all", "--quiet", "--no-trunc"),
+                      root, attempt, records, timeout)
+    if result.timed_out or type(result.exit_code) is not int or result.exit_code != 0:
+        raise ReleaseContractError("release-image-containers-unknown", "all-container listing is unavailable or incomplete")
+    try:
+        identifiers = result.stdout.decode("ascii").splitlines()
+    except UnicodeDecodeError as error:
+        raise ReleaseContractError("release-image-containers-unknown", "container listing has unsupported identifiers") from error
+    if (len(identifiers) != len(set(identifiers)) or len(identifiers) > 10000
+        or any(re.fullmatch(r"[0-9a-f]{64}", value) is None for value in identifiers)):
+        raise ReleaseContractError("release-image-containers-unknown", "container listing has unsafe or partial identifiers")
+    if not identifiers:
+        return ()
+    result = _command(executor, ("docker", "container", "inspect", *sorted(identifiers)),
+                      root, attempt, records, timeout)
+    if result.timed_out or type(result.exit_code) is not int or result.exit_code != 0:
+        raise ReleaseContractError("release-image-containers-unknown", "some listed containers could not be inspected")
+    try:
+        inspected = json.loads(result.stdout)
+        if (not isinstance(inspected, list) or len(inspected) != len(identifiers)
+            or {item["Id"] for item in inspected} != set(identifiers)
+            or any(not IMAGE_ID.fullmatch(item["Image"]) or not isinstance(item["State"]["Status"], str)
+                   or not item["State"]["Status"] for item in inspected)):
+            raise ValueError("partial container inspection")
+        return tuple(sorted(item["Id"] for item in inspected if item["Image"] == prior_image))
+    except (ValueError, TypeError, KeyError, AttributeError) as error:
+        raise ReleaseContractError("release-image-containers-unknown", "container inspections have incomplete immutable image bindings") from error
+
+
+def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                       suite: SuiteGateEvidence, build: ImageBuildEvidence,
+                       verification: ImageVerificationEvidence, promotion, *, executor: DockerExecutor,
+                       timeout_seconds: float = 120) -> ImageRetirementEvidence:
+    """Observe exact prior-image retirement safety after verified promotion.
+
+    There are no caller image overrides or retention-success flags. The exact
+    identity comes from the promotion's observed retained N selector. Missing,
+    mismatched or unavailable proof yields pending; container use yields retained.
+    O169 requires an approved rollback-retention condition. Until that condition
+    is bound to the already sealed Framework Instance Settings, required rollback
+    references remain unknown (None), even if historical selectors are observed.
+    No image removal is admitted by this frontier. A future exact removal must
+    consume the condition producer and use only ``docker image rm <prior-id>``.
+    """
+    from release_promotion import verify_bound_promotion_evidence
+
+    if isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float)) or not 0 < timeout_seconds <= 120:
+        raise ReleaseContractError("release-image-timeout-invalid", "retirement timeout must be within (0, 120]")
+    root = verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+    frozen = _freeze(root)
+    attempt = _attempt(root, candidate.manifest.sha256, "retire")
+    prior_image = promotion.prior_image_digest
+    records, containers, rollback = [], None, None
+    outcome, reason = "pending", "exact prior image is unknown; no alternate image is inferred"
+    try:
+        if prior_image is not None:
+            if not IMAGE_ID.fullmatch(prior_image) or prior_image == promotion.candidate_image_digest:
+                raise ReleaseContractError("release-image-prior-unknown", "prior identity is invalid or still selected as N+1")
+            rollback = _observed_rollback_references(root, prior_image)
+            result = _command(executor, ("docker", "image", "inspect", prior_image), root, attempt, records, timeout_seconds)
+            if result.timed_out or type(result.exit_code) is not int or result.exit_code != 0:
+                reason = "exact prior image is missing, unavailable or permission-denied; retained without another target"
+            else:
+                try:
+                    inspected = json.loads(result.stdout)
+                    matches = isinstance(inspected, list) and len(inspected) == 1 and inspected[0]["Id"] == prior_image
+                except (ValueError, TypeError, KeyError, IndexError):
+                    matches = False
+                if not matches:
+                    reason = "image inspection does not prove the exact prior immutable identity"
+                else:
+                    containers = _retaining_containers(executor, prior_image, root, attempt, records, timeout_seconds)
+                    if containers:
+                        outcome, reason = "retained", "exact prior image is retained by an observed running or stopped container"
+                    else:
+                        # Observed selectors alone cannot classify required use:
+                        # the sealed settings retention binding is still absent.
+                        reason = "approved rollback-retention condition is unavailable; required references are unknown and removal remains pending"
+        verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+        if _freeze(root) != frozen:
+            raise ReleaseContractError("release-image-retirement-stale", "selected N+1 or public Skill changed during retirement observation")
+    except (ValueError, OSError, RuntimeError) as error:
+        code = getattr(error, "code", "")
+        outcome = "stale" if any(part in code for part in ("stale", "currentness", "selection")) else "pending"
+        reason = f"retirement safety is unproven: {code or type(error).__name__}"
+    commands = canonical_json(records)
+    try:
+        _write(attempt / "commands.json", commands)
+    except OSError:
+        outcome, reason = "recording_uncertain", "retirement observation recording is uncertain"
+    evidence = ImageRetirementEvidence(candidate.manifest.sha256, outcome, reason, promotion.candidate_image_digest,
+               prior_image, promotion.receipt_sha256, containers, rollback, None, attempt.relative_to(root).as_posix(),
+               _digest(commands), "docker-subprocess" if type(executor) is DockerSubprocessExecutor else "test-double")
+    return _record(attempt, evidence)
 
 
 __all__ = ["DockerCommandResult", "DockerExecutor", "DockerSubprocessExecutor", "ImageBuildEvidence",
-           "ImageVerificationEvidence", "build_candidate_image", "verify_candidate_image", "verify_bound_image_evidence",
+           "ImageVerificationEvidence", "ImageRetirementEvidence", "build_candidate_image", "verify_candidate_image", "verify_bound_image_evidence",
            "read_image_execution_artifacts", "retire_prior_image"]

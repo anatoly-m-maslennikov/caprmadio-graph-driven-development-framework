@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Implement sealed Release Version contract"
   depends_on: [Workflow, Action, Tool, Manifest, Methodology, Implementation, Skill, Evaluation, Journal]
 version: 1
-updated_at: "2026-10-05 02:43:50 +0000"
+updated_at: "2026-10-05 04:15:01 +0000"
 relations:
   is_decomposition_of: [CA-P-1623]
   blocks: [CA-P-1643]
@@ -38,3 +38,6 @@ Inputs are P1622 accepted source/RMED pins: O164–179@1, R1876–1880@1, M331�
 
 Save exact bounded output and test/remaining-coverage evidence. Pure preparation, staging or source review never establishes release promotion, complete P1623, P1624 or Epic closure.
 
+## Result
+
+The initial raw-mapping prototype was rejected and repaired through P1648/P1649/P1656/P1657. Current committed release_contract.py SHA-256 6dc7f9502f264368fd8e83c167bceaf4a59ec36fe69b101b6d08e4e19f2cc423 and release_handoff.py 17c66c4ead4989d5908cd6642cf667b0e3347c39572b8d3716b03447f57f4647 implement canonical D566 candidate.v2 plus locally observed typed D567 authority/copy/compiler/package boundaries. P1657 independently verified the repaired boundary in 27 focused cases. This closes the pure contract output, not actual compilation, Release execution or runtime promotion.

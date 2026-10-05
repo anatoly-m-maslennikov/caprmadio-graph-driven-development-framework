@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Bind native Release Tool boundary"
   depends_on: [Tool, Manifest, Action, Evaluation]
 version: 1
-updated_at: "2026-10-05 06:58:29 +0000"
+updated_at: "2026-10-05 07:12:01 +0000"
 relations:
   is_decomposition_of: [CA-P-1643]
   blocks: [CA-P-1644]
@@ -35,3 +35,7 @@ Own only RELEASE_VERSION/release_version.py and tests/test_release_version.py. R
 ## Definition of Done
 
 The exact request/result and effect-free prepare/refusal cases pass with source/code/test hashes. The selected-Action provider and recording recovery remain explicit required integration, not a completed Release claim.
+
+### Current bounded completion
+
+release_version.py a611d97a5a32c1ce03c9a0bb30746c7d935e48d63760eba24dc52476490c7564 and tests5c5d67b4fd5ac3abdd9dad7707abbeb0c057ded00bbee923f8bf456d5cdd55e6 pass4 focused methods. The exact closed D560 request rebuilds local candidate inventory/currentness, rejects unknown phase/path/Journal and stale local bindings, and returns exactly the twelve required result fields. Prepare preserves all Project bytes. Apply and recording recovery without the private selected provider context return blocked without effects/replay. This accepted boundary is not a working Release phase/provider or recording-recovery implementation.
