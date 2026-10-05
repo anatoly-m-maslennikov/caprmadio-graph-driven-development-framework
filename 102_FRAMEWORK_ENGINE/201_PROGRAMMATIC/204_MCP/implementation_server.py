@@ -16,7 +16,7 @@ sys.path.insert(0, str(TOOLS.parent / 'VALIDATE_ATOMS'))
 from capability_discovery.service import Service, Query, Context, Observation, Watch  # noqa: E402
 sys.path.insert(0, str(TOOLS.parent.parent / '203_APPS/WORKFLOW_ORCHESTRATOR'))
 from orchestrator import Request as OrchestratorRequest, run as orchestrate  # noqa: E402
-from selected_routes import register_selected_routes  # noqa: E402
+from selected_routes import QUERY_ROUTE_NAMES, register_selected_routes  # noqa: E402
 
 
 def register_orchestrator(server, root):
@@ -34,7 +34,8 @@ def create_server(root):
     root = Path(root).resolve(strict=True)
     discovery = Service(root, exposed=('discover_tools', 'discover_operations',
         'get_execution_context', 'get_execution_status', 'resume_execution_context',
-        'watch_execution', 'rmed_atoms_base_revise', 'workflow_orchestrator'))
+        'watch_execution', 'rmed_atoms_base_revise', 'workflow_orchestrator',
+        *QUERY_ROUTE_NAMES))
     server = MCPServer('CAPRMEDIO', version='0.1.0', instructions=
         'Discovery and read-only Run observation; Operator-authorized, caller-coordinated '
         'gather/check/fix. workflow_orchestrator enqueues explicitly authorized Runs '
