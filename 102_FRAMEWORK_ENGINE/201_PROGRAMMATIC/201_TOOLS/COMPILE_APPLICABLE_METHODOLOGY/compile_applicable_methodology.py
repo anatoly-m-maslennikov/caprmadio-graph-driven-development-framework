@@ -25,12 +25,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from artifact_metadata import SETTINGS_PATH, atom_identifier
 
 
-SOURCE_RELATIVE = Path(
-    ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/"
-    "000_APPLICABLE_MTHD_sources"
-)
 DEFAULT_CONTROL_ROOT = SETTINGS_PATH.parent
-OUTPUT_RELATIVE = DEFAULT_CONTROL_ROOT / "_projection/APPLICABLE_METHODOLOGY"
+FRAMEWORK_APPLICABLE_RELATIVE = Path("000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY")
+OUTPUT_RELATIVE = DEFAULT_CONTROL_ROOT / FRAMEWORK_APPLICABLE_RELATIVE
+SOURCE_RELATIVE = OUTPUT_RELATIVE / "000_APPLICABLE_MTHD_sources"
 APPROVAL_RELATIVE = SOURCE_RELATIVE / "003_PROJECT_CONFIGURATION/applicable_methodology_conflict_approvals.toml"
 STRUCTURE_RELATIVE = SETTINGS_PATH.parent / "project_structure.toml"
 LAYERS = (
@@ -101,12 +99,17 @@ def configured_control_root(root: Path) -> Path:
 
 
 def methodology_paths(root: Path) -> MethodologyPaths:
-    """Resolve framework sources and the configured control-root Projection target."""
+    """Resolve source and delivery places from the configured Project Structure.
+
+    Applicable Methodology is the Projection-location exception: its default
+    lives in the Project's Framework folder, not the general ``_projection``
+    directory.  An explicit source-unit delivery binding remains authoritative.
+    """
     control = configured_control_root(root)
-    output = control / "_projection/APPLICABLE_METHODOLOGY"
-    structure = root / STRUCTURE_RELATIVE
+    output = control / FRAMEWORK_APPLICABLE_RELATIVE
+    structure = root / control / "project_structure.toml"
     if not structure.exists():
-        return MethodologyPaths(output=output, control_root=control)
+        return MethodologyPaths(source=output / "000_APPLICABLE_MTHD_sources", output=output, control_root=control)
     try:
         raw = structure.read_bytes()
         data = tomllib.loads(raw.decode("utf-8"))
@@ -125,11 +128,22 @@ def methodology_paths(root: Path) -> MethodologyPaths:
     source = Path(value)
     if source.is_absolute() or ".." in source.parts or source == Path("."):
         raise CompileError("source-unit-place-invalid", "Methodology source place must be repository-relative", property="authority_path")
+    output_value = units[0].get("delivery_path", output.as_posix())
+    if not isinstance(output_value, str) or not output_value:
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place must be a non-empty repository-relative path", property="delivery_path")
+    output = Path(output_value)
+    if output.is_absolute() or ".." in output.parts or output == Path("."):
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place must be repository-relative", property="delivery_path")
     source_place = (root / source).resolve()
     output_place = (root / output).resolve()
     if not source_place.is_relative_to(root.resolve()):
         raise CompileError("source-unit-place-invalid", "Methodology source place resolves outside the Project", property="authority_path")
-    if output_place.is_relative_to(source_place):
+    if not output_place.is_relative_to(root.resolve()):
+        raise CompileError("output-unit-place-invalid", "Methodology delivery place resolves outside the Project", property="delivery_path")
+    if output_place.is_relative_to(source_place) or any(
+        source_place.is_relative_to((output_place / role_directory).resolve())
+        for _, role_directory in ROLES
+    ):
         raise CompileError("source-output-overlap", "Generated output cannot replace the authoritative source place")
     return MethodologyPaths(source, output, sha256_bytes(raw), control)
 
@@ -284,9 +298,12 @@ def source_state_snapshot(root: Path, places: MethodologyPaths | None = None) ->
     for path in sorted(source_root.rglob("*")):
         if path.is_file() and not path.is_symlink():
             snapshot[repo_relative(root, path)] = sha256_bytes(path.read_bytes())
-    structure = root / STRUCTURE_RELATIVE
+    structure = root / places.control_root / "project_structure.toml"
     if structure.is_file() and not structure.is_symlink():
-        snapshot[STRUCTURE_RELATIVE.as_posix()] = sha256_bytes(structure.read_bytes())
+        snapshot[repo_relative(root, structure)] = sha256_bytes(structure.read_bytes())
+    project_settings = root / SETTINGS_PATH
+    if project_settings.is_file() and not project_settings.is_symlink():
+        snapshot[SETTINGS_PATH.as_posix()] = sha256_bytes(project_settings.read_bytes())
     return snapshot
 
 
@@ -299,9 +316,9 @@ def source_snapshot_is_current(root: Path, snapshot: dict[str, str], places: Met
 
 def governed_bindings(root: Path, places: MethodologyPaths | None = None) -> dict[str, str]:
     places = places or methodology_paths(root)
-    structure = root / STRUCTURE_RELATIVE
+    structure = root / places.control_root / "project_structure.toml"
     if not structure.is_file() or structure.is_symlink():
-        raise CompileError("project-structure-missing", "Project Structure is required for governed bindings", path=STRUCTURE_RELATIVE.as_posix())
+        raise CompileError("project-structure-missing", "Project Structure is required for governed bindings", path=repo_relative(root, structure))
     _, settings = framework_settings(root, places)
     configuration_root = root / places.source / "003_PROJECT_CONFIGURATION"
     configuration_records = {

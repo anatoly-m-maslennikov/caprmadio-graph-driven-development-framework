@@ -99,7 +99,7 @@ structural_level = 2
 local_order = 1
 navigational_order_number = 1
 authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources"
-delivery_path = ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]
@@ -111,7 +111,7 @@ structural_level = 3
 local_order = 1
 navigational_order_number = 1
 authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL"
-delivery_path = ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]
@@ -123,7 +123,7 @@ structural_level = 3
 local_order = 2
 navigational_order_number = 2
 authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/002_INSTALLED_EXTENSIONS"
-delivery_path = ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]
@@ -135,7 +135,7 @@ structural_level = 3
 local_order = 3
 navigational_order_number = 3
 authority_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION"
-delivery_path = ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]
@@ -147,7 +147,7 @@ structural_level = 2
 local_order = 2
 navigational_order_number = 2
 authority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY/202_SUPERLAYER_2_APPLICABLE_METHODOLOGY"
-delivery_path = ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
+delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]

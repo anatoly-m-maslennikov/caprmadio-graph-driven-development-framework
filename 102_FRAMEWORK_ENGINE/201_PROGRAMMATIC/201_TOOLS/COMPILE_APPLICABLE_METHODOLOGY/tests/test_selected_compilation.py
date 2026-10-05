@@ -87,7 +87,8 @@ class SelectedCompilationTest(unittest.TestCase):
         output = self.root / compiler.methodology_paths(self.root).output
         return {
             path.relative_to(output).as_posix(): path.read_bytes()
-            for path in sorted(output.rglob("*"))
+            for _, directory in compiler.ROLES
+            for path in sorted((output / directory).rglob("*"))
             if path.is_file()
         }
 
@@ -107,7 +108,7 @@ class SelectedCompilationTest(unittest.TestCase):
         self.assertEqual("pending_recording", applied["outcome"])
         self.assertEqual(before, {path: path.read_bytes() for path in before})
         output = self.root / compiler.methodology_paths(self.root).output / "04_requirement" / core.name
-        self.assertEqual(self.control / "_projection/APPLICABLE_METHODOLOGY/04_requirement" / core.name, output)
+        self.assertEqual(self.control / "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/04_requirement" / core.name, output)
         rendered = output.read_bytes()
         self.assertIn(b"  source_atom_id: CA-R-001", rendered)
         self.assertIn(b"  original_relations_sha256:", rendered)
@@ -118,7 +119,7 @@ class SelectedCompilationTest(unittest.TestCase):
             '[paths]\ncontrol_root = ".caprmedio_test_control"\n'
         )
         places = compiler.methodology_paths(self.root)
-        self.assertEqual(Path(".caprmedio_test_control/_projection/APPLICABLE_METHODOLOGY"), places.output)
+        self.assertEqual(Path(".caprmedio_test_control/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"), places.output)
         journal = self.root / ".caprmedio_test_control/_journal/decisions.ndjson"
         journal.parent.mkdir(parents=True)
         journal.write_text(json.dumps({"event_id": "decision-1", "event_digest": "digest-1"}) + "\n")
