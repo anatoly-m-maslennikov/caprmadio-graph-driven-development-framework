@@ -20,9 +20,10 @@ an explicit ontology/base model defines the core: concepts, relations and constr
 
 ### Ontology (methodology)
 
-Sessions are ephemeral →\
+The project puts decisions into practice—yours and AI Agents' →\
+but sessions are ephemeral →\
 we need a **stable source of truth** →\
-specification.
+the specification.
 
 Spec grows →\
 we need smaller units →\
