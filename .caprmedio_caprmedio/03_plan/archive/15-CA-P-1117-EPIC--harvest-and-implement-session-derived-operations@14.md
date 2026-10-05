@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 15
-updated_at: "2026-10-05 09:45:00 +0000"
+version: 14
+updated_at: "2026-10-05 07:48:02 +0000"
 relations: {}
 ---
 # Summary
@@ -97,7 +97,7 @@ Every Workflow Run and every Action Run must be journaled, including standalone 
 
 Use the authoritative Events Journal as the single event source; Artifact Change Log and Process Execution Log are derived views, not independently maintained competing Journals. Journal failures must be reported truthfully; an unpersisted event or Run is never claimed journaled or complete. Functional verification must prove both Workflow-level and Action-level records, failure paths, lineage, and reconstructable results.
 
-Canonical Journal carriers use the single Project-local `.caprmedio_<project name>/_journal/` root. Canonical persisted Projection carriers use `.caprmedio_<project name>/_projection/` by default, including graphs and derived log views. Applicable Methodology is the Operator-selected exception: retain its canonical Atom Projection role folders at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/`, beside the unchanged `000_APPLICABLE_MTHD_sources/` source folder. Its previously proposed move into `_projection/APPLICABLE_METHODOLOGY/` is withdrawn. The extra untracked copy is not another canonical authority and remains untouched pending scoped reconciliation. Release Version also delivers source/compiled package copies at the Operator-selected release/runtime destinations; these remain bound derived deliveries, not competing authoring or Journal authority. Runtime locks, receipts, pending recording and disposable stages remain ephemeral runtime state. Preserve historical event bytes and sealed recovery context during relocation; do not create duplicate canonical Journal or Projection authority.
+Canonical Journal carriers use the single Project-local `.caprmedio_<project name>/_journal/` root. Canonical persisted Projection carriers use the single `.caprmedio_<project name>/_projection/` root, including the graphs, Applicable Methodology and derived log views. For this Project the bindings are `.caprmedio_caprmedio/_journal/` and `.caprmedio_caprmedio/_projection/`. Release Version also delivers source/compiled package copies at the Operator-selected release/runtime destinations; these remain bound derived deliveries, not competing authoring or Journal authority. Methodology source authority stays under `000_CAPRMEDIO_framework/`; runtime locks, receipts, pending recording and disposable stages remain ephemeral runtime state. Preserve historical event bytes and sealed recovery context during relocation; do not create duplicate canonical Journal or Projection authority.
 
 ### Projection behavior
 
@@ -166,14 +166,6 @@ The original six composite stages retain the original thirteen-Workflow executio
 ## Details
 
 ### Current execution frontier
-
-The latest am-default probes permit Docker inventory and temporary-file removal, but deny temporary-directory removal. The Operator directed leaving the empty probe untouched. C449 remains Active for fixture cleanup; no tests are weakened or relabelled passing. Ten independent subagents now continue bounded Release implementation and source/code reviews in parallel. P1712's three fixture-root changes pass independent static review without weakening production checks or cleanup; runtime verification remains pending.
-
-The latest Operator input retains Applicable Methodology at its original framework location. D550@3, D326@15 and the five Project Structure delivery bindings now express that exception; compiler path support and all40 focused compiler/selected/expansion tests pass, saved in 2cebdbabd. Project Settings join the freshness snapshot; explicit Release child output is preserved. C447's denied move is withdrawn rather than executed or bypassed. Historical migration evidence remains unchanged, and legacy-manifest accounting remains separate.
-
-Docker API access and the declared host dependency environment now work. C449@3 records the current remaining filesystem blocker: Release fixture directory cleanup raises EPERM. P1710 saves sixteen focused provider tests, with three pure boundary cases passing; the fixture-based run is not a pass. P1712 corrects macOS /tmp versus /private/tmp normalization and adds a root-equality regression; static checks pass, but fixture verification is still blocked. Capacity interruption C468 is cleared by a normal subagent return, not by a model override. All source/mock, private-provider and static review results remain distinct from fresh-image, shared Journal, durable restart and actual sixteenth-route acceptance.
-
-P1711 independently accepts the pinned exact-image-retirement delta at96% with no blocking code finding. Its review does not rerun or relabel previous mock tests. Durable same-intent recording reconciliation, current host regressions, real image proof and complete Release dispatch remain unfinished. The deleted057792 image is not usable evidence; P1600-P1604 require a newly bound immutable image before execution.
 
 Current checkpoint supersedes every earlier snapshot: the autonomous rule is in force, with chosen uncertainties recorded as C466/C467 rather than Operator questions. P1699 independently accepts the Draft Update repair98%; P1685/P1677/P1662/P1637 and current P1638 development review are Done, and C460 is resolved. Exact owned staged native code passes23 cases without including external legacy-migration changes. P1698, P1693 and P1700 complete retained image verification, actual disposable selector/Skill promotion recovery and the strict effect-free Tool boundary; they do not prove a real Release.
 
