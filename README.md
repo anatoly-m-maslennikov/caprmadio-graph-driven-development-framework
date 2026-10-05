@@ -21,7 +21,7 @@ an explicit ontology/base model defines the core: concepts, relations and constr
 ### Ontology (methodology)
 
 Sessions are ephemeral →\
-we need a stable source of truth →\
+we need a **stable source of truth** →\
 specification.
 
 Spec grows →\
@@ -39,11 +39,11 @@ Subjects link Atoms to Entities through `GOVERNS` and `DEPENDS_ON`.
 
 Different tasks need different views →\
 derive them from one authoritative source →\
-load only the context needed without duplicating authority.
+**load only the context needed without duplicating authority.**
 
 Natural-language phrases can be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
-explicit, checkable Claims.
+**explicit, checkable Claims.**
 
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
@@ -53,7 +53,7 @@ Operations for repeatable actions and workflows.
 
 Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
-trace results back to the specification.
+**trace results back to the specification.**
 
 Work changes the project →\
 Journal records changes and execution →\
@@ -63,7 +63,7 @@ observed outcomes create the next Concerns.
 
 Repeated model reasoning costs time and tokens →\
 every repeatable task that can be done deterministically should run programmatically →\
-Tools.
+**Tools save time and tokens.**
 
 Work that cannot be done deterministically →\
 LLM reasoning →\
@@ -92,7 +92,16 @@ they currently hold authority →\
 rescanning can become expensive →\
 a derived graph database index supports queries and views. Database authority could be a future migration.
 
-### Content roles and artifact forms
+## Main architecture
+
+### Node types
+
+- **Scope Unit:** a declared boundary of project responsibility, with its place in the project hierarchy.
+- **Atom:** one scoped Claim with a content role. Atoms belong to Scope Units; project-wide goals are the exception.
+- **Journal:** records of changes, execution and observed outcomes.
+- **Projection:** a derived, non-authoritative view of existing sources.
+
+### Content roles
 
 - **C — Concern:** problems, bugs, questions and opportunities.
 - **A — Analysis:** analysis reports and rationale.
@@ -109,6 +118,24 @@ Content roles and Atom/Journal/Projection forms are separate classifications. Bo
 CAPRMEDIO keeps one coherent source of truth: Atoms express governed Claims; actual Implementation is what is built. Journals preserve change and execution history; Projections are derived, non-authoritative views.
 
 [project_structure.toml](.caprmedio_caprmedio/project_structure.toml) is authoritative for Scope Units, hierarchy and path bindings; folders materialize those bindings, not structural authority.
+
+### Relations
+
+- **Direct relations** connect identified artifacts: `child_of` for Requirement lineage, `method_for`, `evaluation_for` and `delivery_for` for RMED traceability, and `derived_from` for source provenance.
+- **Subjects** link an Atom to an Entity: `GOVERNS` identifies what its Claim governs; `DEPENDS_ON` identifies what it needs without governing it. A Subject is a relation, not another node.
+
+Scope Units + typed relations + Subjects →\
+**fetch the relevant slice of the specification—or the wider CAPRMEDIO set—mechanically or almost mechanically.**
+
+### Main projections
+
+- **Entity Graph:** Entities and their relationships, derived from Atom Subjects.
+- **Terms Graph:** vocabulary and its admitted typed relations.
+- **Project Scope Unit Graph and Sources view:** declared hierarchy and authority/Delivery bindings.
+- **Applicable Methodology:** the resolved methodology applicable to the selected scope.
+- **Requirement Lineage Map:** Requirements traced to their governing Principles.
+
+**Different views, one authority:** Projections can be regenerated without maintaining competing copies of project meaning.
 
 Each Project has its own `.caprmedio_<project_name>/` folder. All persistent Journals belong in its `_journal/` directory; all persistent Projections belong in its `_projection/` directory, including Applicable Methodology, graph views and derived Journal views. These are the single storage roots for those artifact forms, separate from authoritative sources and ephemeral runtime state.
 
