@@ -72,7 +72,7 @@ Implementation for code, tests and configuration →\
 Operations for repeatable actions and workflows.
 
 Repeatable sequences of actions →\
-O defines Workflows, their steps and control flow.
+Operations define Workflows, their steps and control flow.
 
 Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
@@ -101,7 +101,7 @@ Work that cannot be done deterministically →\
 LLM reasoning →\
 repeatable actions need reusable Prompts/Skills.
 
-Workflows are defined in O →\
+Workflows are defined in Operations →\
 the harness implements and runs them using Tools and Prompts/Skills.
 
 We cannot put everything into one prompt →\
