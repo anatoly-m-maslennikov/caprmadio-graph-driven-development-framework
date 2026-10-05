@@ -87,9 +87,8 @@ class FakeImageInspectionExecutor:
 
 class FrameworkInitializationJournalTests(unittest.TestCase):
     def setUp(self) -> None:
-        fixture_parent = REPOSITORY_ROOT / ".caprmedio_tmp/framework-initialization-journal-tests"
-        fixture_parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="framework-initialization-journal-", dir=fixture_parent))
+        self.root = Path(tempfile.mkdtemp(prefix="framework-initialization-journal-")).resolve()
+        (self.root / ".git").mkdir()
         self._write(
             ".caprmedio_caprmedio/caprmedio_project_settings.toml",
             b"[paths]\ncontrol_root = '.caprmedio_caprmedio'\n"

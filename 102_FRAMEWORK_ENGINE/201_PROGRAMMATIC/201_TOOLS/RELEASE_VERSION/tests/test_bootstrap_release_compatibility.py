@@ -62,9 +62,7 @@ class _ImageFixture:
 
 class BootstrapReleaseCompatibilityTests(unittest.TestCase):
     def setUp(self) -> None:
-        parent = RELEASE_ROOT.parents[3] / ".caprmedio_tmp" / "bootstrap-release-compatibility"
-        parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="bootstrap-n-", dir=parent))
+        self.root = Path(tempfile.mkdtemp(prefix="bootstrap-n-")).resolve()
         for relative, payload in {
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py": b"tool\n",
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py": b"app\n",

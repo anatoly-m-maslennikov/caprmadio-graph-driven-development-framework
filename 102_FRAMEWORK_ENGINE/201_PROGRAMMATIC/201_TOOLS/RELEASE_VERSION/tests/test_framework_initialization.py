@@ -126,9 +126,7 @@ class BoundaryChangedSession(RecordingSession):
 
 class FrameworkInitializationTests(unittest.TestCase):
     def setUp(self) -> None:
-        fixture_parent = RELEASE_ROOT.parents[3] / ".caprmedio_tmp" / "framework-initialization-tests"
-        fixture_parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="caprmedio-framework-initialization-", dir=fixture_parent))
+        self.root = Path(tempfile.mkdtemp(prefix="caprmedio-framework-initialization-")).resolve()
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py", b"tool\n")
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py", b"app\n")
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py", b"server\n")

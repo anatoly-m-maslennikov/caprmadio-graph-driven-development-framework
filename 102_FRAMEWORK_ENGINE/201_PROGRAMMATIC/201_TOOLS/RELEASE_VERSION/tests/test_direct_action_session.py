@@ -69,9 +69,8 @@ class _ExclusiveFixtureLock(AbstractContextManager[None]):
 
 class DirectActionSessionTests(unittest.TestCase):
     def setUp(self) -> None:
-        parent = REPOSITORY_ROOT / ".caprmedio_tmp/direct-action-session-tests"
-        parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="direct-action-", dir=parent))
+        self.root = Path(tempfile.mkdtemp(prefix="direct-action-")).resolve()
+        (self.root / ".git").mkdir()
         self._write(
             ".caprmedio_caprmedio/caprmedio_project_settings.toml",
             b"[paths]\ncontrol_root = '.caprmedio_caprmedio'\njournal_root = '.caprmedio_caprmedio/_journal'\nruntime_root = '.caprmedio_runtime'\n",
