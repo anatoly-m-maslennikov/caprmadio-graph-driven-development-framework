@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release selected Framework Version"
   depends_on: [Workflow, Step, Action, Operator, Version, Methodology, Implementation, Skill, Test, Docker Image, Journal]
-version: 3
-updated_at: 2026-10-05 15:29:23 +0400
+version: 2
+updated_at: 2026-10-05 08:12:00 +0400
 relations:
   relates_to: [CA-O-011, CA-O-025, CA-O-165, CA-O-166, CA-O-167, CA-O-168, CA-O-169, CA-R-1525, CA-R-1720]
 ---
@@ -60,4 +60,4 @@ The selected boundary binds one current N, one distinct candidate N+1, their exa
 
 ## Details
 
-CA-O-164 uses only its listed Step Atoms; it does not invoke another Workflow as a Step or invoke itself to prove a candidate. CA-O-011 remains the canonical Applicable Methodology compilation authority for declared Methodology Sources. The separately pinned candidate snapshot uses its reviewed Tool boundary to materialize only the sealed child under `_release_materialized/<candidateSnapshotManifest.sha256>/`; it neither produces nor replaces the canonical Applicable Methodology at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/`, which remains source-bound, and neither authority is silently rewritten. CA-O-025 remains release readiness and is not substituted for this boundary. Every Workflow, Step and Action Run retains the exact definition revisions, inputs, parent lineage, start/terminal outcome, results, effects and one canonical durable Work Journal record under CA-R-1525 and CA-R-1720. Preview, rejection and a missing recording receipt never manufacture a Run or release success. This source graph grants no implementation, installation, container, source mutation, image-removal, hook, credential, Git, publication or retry authority.
+CA-O-164 uses only its listed Step Atoms; it does not invoke another Workflow as a Step or invoke itself to prove a candidate. CA-O-011 remains the canonical Applicable Methodology compilation authority for declared Methodology Sources. The separately pinned candidate snapshot uses its reviewed Tool boundary to materialize only the sealed child under `_release_materialized/<candidateSnapshotManifest.sha256>/`; it neither produces nor replaces the canonical `_projection/APPLICABLE_METHODOLOGY`, which remains source-bound, and neither authority is silently rewritten. CA-O-025 remains release readiness and is not substituted for this boundary. Every Workflow, Step and Action Run retains the exact definition revisions, inputs, parent lineage, start/terminal outcome, results, effects and one canonical durable Work Journal record under CA-R-1525 and CA-R-1720. Preview, rejection and a missing recording receipt never manufacture a Run or release success. This source graph grants no implementation, installation, container, source mutation, image-removal, hook, credential, Git, publication or retry authority.

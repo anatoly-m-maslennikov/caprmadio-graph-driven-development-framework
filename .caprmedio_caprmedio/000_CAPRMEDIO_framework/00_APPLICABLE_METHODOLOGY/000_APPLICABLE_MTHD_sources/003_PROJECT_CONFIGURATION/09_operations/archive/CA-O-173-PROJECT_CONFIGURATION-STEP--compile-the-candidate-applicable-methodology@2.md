@@ -10,8 +10,8 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release Version/Step: compile candidate Methodology"
   depends_on: [Workflow, Step, Action, Applicable Methodology, Compiler, Delivery, Journal]
-version: 3
-updated_at: 2026-10-05 15:29:23 +0400
+version: 2
+updated_at: 2026-10-05 08:12:00 +0400
 relations:
   part_of: [CA-O-164]
   invokes: [CA-O-166]
@@ -22,7 +22,7 @@ Compile the candidate Applicable Methodology
 
 ## Step
 
-This Step invokes CA-O-166 once with phase `compile`, binding only the complete delivered source manifest from CA-O-172 and the reviewed selected-snapshot compiler Tool boundary. Its candidate output is only the sealed child materialization under `_release_materialized/<candidateSnapshotManifest.sha256>/`; the canonical Applicable Methodology at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/` remains source-bound and is not this Step's output. A later derived runtime Methodology delivery is not compiler output authority.
+This Step invokes CA-O-166 once with phase `compile`, binding only the complete delivered source manifest from CA-O-172 and the reviewed selected-snapshot compiler Tool boundary. Its candidate output is only the sealed child materialization under `_release_materialized/<candidateSnapshotManifest.sha256>/`; the canonical `_projection/APPLICABLE_METHODOLOGY` remains source-bound and is not this Step's output. A later derived runtime Methodology delivery is not compiler output authority.
 
 ## Details
 

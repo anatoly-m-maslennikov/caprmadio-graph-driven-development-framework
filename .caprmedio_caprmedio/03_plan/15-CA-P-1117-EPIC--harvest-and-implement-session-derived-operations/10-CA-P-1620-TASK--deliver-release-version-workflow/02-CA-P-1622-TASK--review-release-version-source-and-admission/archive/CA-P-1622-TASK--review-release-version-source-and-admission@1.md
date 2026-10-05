@@ -14,8 +14,8 @@ status: Done
 subjects:
   governs: "Review Release Version source and admission"
   depends_on: [Workflow, Action, Tool, Methodology, Implementation, Projection, Skill, Journal]
-version: 2
-updated_at: "2026-10-05 15:29:23 +0400"
+version: 1
+updated_at: "2026-10-05 02:44:52 +0000"
 relations:
   is_decomposition_of: [CA-P-1620]
   blocks: [CA-P-1623]
@@ -63,18 +63,3 @@ Save exact source IDs/Versions/paths/hashes and independent verdict. Only accept
 ### Current attributed amendment
 
 P1704 independently accepted CA-D-573@2, SHA-256 `5db7045ec34fbd9aea129d63262f6fce1ac5a6bff2b147af90a9fad6e560adad`, at 99% confidence as a source-only review of the approved Release rollback-retention serialization. This amendment attributes that accepted D573 revision to the current Release admission frontier only; it does not repeat or broaden this P1622 review, claim implementation or image evidence, or admit dispatch. The rejected D573@1 remains historical review evidence.
-
-### Current source-only correction
-
-An independent review accepts CA-O-164@3, CA-O-166@3, CA-O-173@3, and CA-D-574@1 at 98% confidence as a source-only correction to the current Release admission frontier.
-
-| Source | Version | SHA-256 |
-| --- | --- | --- |
-| CA-O-164 | 3 | 3f0fa17f96e96a14888ccc131943bb5e743b05447a2f67f8a238541e6541df0d |
-| CA-O-166 | 3 | 553a2dac5f8413242f119f02a88ff0e1915902ffb7a6d3326c9a1e831aa6ee91 |
-| CA-O-173 | 3 | f5209614e245abcd3f1b38ab60c2b23f3f92f3b6f7682af8b9302f028cf255b8 |
-| CA-D-574 | 1 | d1162607c515afe184ba2488d6030acc93b522331b3a819c520792db39e28012 |
-
-The O source corrections retain the candidate `_release_materialized/<candidateSnapshotManifest.sha256>/` child and align canonical Applicable Methodology references with `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/`. CA-D-574 defines the private typed checkpoint Carrier for Release recovery and references the canonical Work Journal; it is not another Journal.
-
-This amendment supersedes only the cited O pins and adds CA-D-574 to the accepted RMED frontier. It does not admit a manifest change, dispatch, implementation, fixture result, image operation, Journal Run, or runtime recovery proof.

@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 3, "source_path": AUTHORITY_REF,
-    "digest": "fb3e91bb5bee075c6394ac9a490b8599cd5cc8a9a86e7893f52e483556847b22",
+    "atom_id": "CA-D-572", "version": 5, "source_path": AUTHORITY_REF,
+    "digest": "f310863886274866401a52a0611660de2be8f05c1ab61bc7591da53752e1e969",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
@@ -155,7 +155,7 @@ def _occurrence_pin(value: str) -> dict[str, Any]:
 
 
 def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
-    """Derive the one accepted record from pinned actual D572@3, read-only.
+    """Derive the one accepted record from pinned actual D572@5, read-only.
 
     Only this defining authority is read here. The validator separately observes
     all unique referenced pins on each admission; no source-currentness cache is
@@ -163,20 +163,20 @@ def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
     """
     root = _project_root(project_root)
     text = _read_pin(root, AUTHORITY_PIN).decode("utf-8")
-    matches = re.findall(r"CA-P-1622@1 at `([^`]+)`, SHA-256 `([0-9a-f]{64})`", text)
+    matches = re.findall(r"CA-P-1622@([1-9][0-9]*) at `([^`]+)`, SHA-256 `([0-9a-f]{64})`", text)
     if len(matches) != 1:
         _reject("D572 must state exactly one accepted frontier", code="release-authority-invalid")
     tables = _tables(text)
-    if len(tables[0]) != 3 or len(tables[1]) != 12 or len(tables[2]) != 22:
-        _reject("D572 must define one Workflow, ten occurrences and twenty RMED pins", code="release-authority-invalid")
+    if len(tables[0]) != 3 or len(tables[1]) != 12 or len(tables[2]) < 3:
+        _reject("D572 must define one Workflow, ten occurrences and a nonempty RMED frontier", code="release-authority-invalid")
     steps = []
     for ordinal, row in enumerate(tables[1][2:], 1):
         if len(row) != 3 or row[0] != str(ordinal):
             _reject("D572 Step occurrence order is invalid", code="release-authority-invalid")
         steps.append({"step": _occurrence_pin(row[1]), "action": _occurrence_pin(row[2])})
     return {"route": "release_version",
-            "acceptance_frontier": _pin_shape({"atom_id": "CA-P-1622", "version": 1,
-                                               "source_path": matches[0][0], "digest": matches[0][1]}),
+            "acceptance_frontier": _pin_shape({"atom_id": "CA-P-1622", "version": int(matches[0][0]),
+                                               "source_path": matches[0][1], "digest": matches[0][2]}),
             "workflow": _table_pin(tables[0][2]), "ordered_steps": steps,
             "ordered_actions": [copy.deepcopy(row["action"]) for row in steps],
             "rmed_frontier": [_table_pin(row) for row in tables[2][2:]]}
@@ -187,9 +187,11 @@ def _record_shape(record: Any) -> dict[str, Any]:
         _reject("Release admission has unknown, absent or unsupported fields")
     _pin_shape(record["acceptance_frontier"])
     _pin_shape(record["workflow"])
-    for field, count in (("ordered_steps", 10), ("ordered_actions", 10), ("rmed_frontier", 20)):
+    for field, count in (("ordered_steps", 10), ("ordered_actions", 10)):
         if not isinstance(record[field], list) or len(record[field]) != count:
             _reject(f"Release admission {field} must contain exactly {count} ordered entries")
+    if not isinstance(record["rmed_frontier"], list) or not record["rmed_frontier"]:
+        _reject("Release admission rmed_frontier must contain the D572-defined ordered entries")
     for item in record["ordered_steps"]:
         if not isinstance(item, Mapping) or set(item) != {"step", "action"}:
             _reject("Release Step occurrence must have exactly step and action")
@@ -239,9 +241,9 @@ def validate_release_source_admissions(project_root: str | Path, manifest: Mappi
     pins = [expected["acceptance_frontier"], expected["workflow"],
             *[pin for row in expected["ordered_steps"] for pin in (row["step"], row["action"])],
             *expected["ordered_actions"], *expected["rmed_frontier"]]
-    unique = {pin["source_path"]: pin for pin in pins}
-    if len(unique) != 37:
-        _reject("accepted Release frontier is incomplete", code="release-authority-invalid")
-    for pin in unique.values():
+    # This is the current D572 table's unique coverage, not a separately
+    # maintained cardinality. Equality above keeps every occurrence and pin
+    # exact; the mapping only avoids rereading intentionally repeated Actions.
+    for pin in {pin["source_path"]: pin for pin in pins}.values():
         _read_pin(root, pin)
     return [expected]
