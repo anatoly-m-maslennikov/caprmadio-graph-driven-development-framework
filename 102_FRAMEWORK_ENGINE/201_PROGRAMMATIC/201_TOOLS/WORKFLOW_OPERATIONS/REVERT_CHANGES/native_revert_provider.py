@@ -11,8 +11,11 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Mapping
+import os
 from pathlib import Path, PurePosixPath
+import stat
 import sys
+import time
 from typing import Any
 
 
@@ -24,6 +27,8 @@ for _path in (TOOLS_ROOT, STRUCTURE_ROOT):
 
 import lifecycle_intents  # noqa: E402
 import project_structure  # noqa: E402
+from atom_operations import split_frontmatter, frontmatter_scalar, ToolError as AtomToolError  # noqa: E402
+from work_journal import canonical_json_bytes  # noqa: E402
 from revert_changes import RevertChangesError, RevertChangesService  # noqa: E402
 
 
@@ -45,6 +50,11 @@ NATIVE_REVERT_PROVIDER_CONTEXT_SCHEMA = {
 _CONTEXT_FIELDS = frozenset({"project_root", "approved_reversal_request"})
 _BINDING_FIELDS = frozenset({"capability_id", "parameters", "target", "permission_evidence", "evidence_refs"})
 _SUPPORTED = frozenset(NATIVE_REVERT_PROVIDER_CONTEXT_SCHEMA["supported_capability_ids"])
+_MAX_EVIDENCE_BYTES = 1024 * 1024
+_MAX_EVIDENCE_REFERENCES = 128
+_MAX_TOTAL_EVIDENCE_BYTES = 8 * 1024 * 1024
+
+NATIVE_REVERT_EVIDENCE_SOURCE_REMAINDERS: tuple[str, ...] = ()
 
 
 class NativeRevertProviderError(ValueError):
@@ -80,6 +90,111 @@ def _safe_member(root: Path, raw: object) -> Path:
     except ValueError as error:
         raise NativeRevertProviderError("RMED remainder: structural recovery path escapes the selected Project") from error
     return path
+
+
+class _EvidenceReader:
+    """Read only bounded, non-secret Project members, with no symlink traversal."""
+
+    def __init__(self, root: Path) -> None:
+        self.root = root
+        self.control = lifecycle_intents.control_root(root).relative_to(root)
+        self.total = 0
+        self.cache: dict[str, bytes] = {}
+        self.journal_snapshot: Mapping[str, Any] | None = None
+        self.deadline = time.monotonic() + 10
+
+    def read(self, reference: object) -> bytes:
+        if time.monotonic() > self.deadline:
+            raise NativeRevertProviderError("evidence observation timeout")
+        if isinstance(reference, str) and reference.startswith("event:"):
+            return self._event(reference)
+        if not isinstance(reference, str) or not reference or any(c in reference for c in (":", "\\", "\x00")):
+            raise NativeRevertProviderError("unsupported evidence reference")
+        relative = PurePosixPath(reference)
+        if not relative.parts or relative.is_absolute() or ".." in relative.parts or relative.as_posix() != reference:
+            raise NativeRevertProviderError("unsafe evidence reference")
+        if relative.parts[:len(self.control.parts)] != self.control.parts:
+            raise NativeRevertProviderError("evidence reference is outside the configured authority/evidence root")
+        if any(part == ".git" or part == ".env" or part.startswith(".env.") or part.endswith(".env")
+               or any(term in part.lower().replace("-", "_")
+                      for term in ("secret", "password", "credential", "private_key", "api_key", "id_rsa", "id_ed25519"))
+               for part in relative.parts):
+            raise NativeRevertProviderError("protected evidence reference")
+        if reference in self.cache:
+            return self.cache[reference]
+        if len(self.cache) >= _MAX_EVIDENCE_REFERENCES:
+            raise NativeRevertProviderError("evidence reference limit exceeded")
+        descriptors: list[int] = []
+        try:
+            parent = os.open(self.root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            descriptors.append(parent)
+            for part in relative.parts[:-1]:
+                parent = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+                descriptors.append(parent)
+            descriptor = os.open(relative.parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+            descriptors.append(descriptor)
+            observed = os.fstat(descriptor)
+            if not stat.S_ISREG(observed.st_mode) or observed.st_size > _MAX_EVIDENCE_BYTES:
+                raise NativeRevertProviderError("evidence member is non-regular or exceeds its byte limit")
+            with os.fdopen(os.dup(descriptor), "rb") as stream:
+                content = stream.read(_MAX_EVIDENCE_BYTES + 1)
+            self.total += len(content)
+            if len(content) > _MAX_EVIDENCE_BYTES or self.total > _MAX_TOTAL_EVIDENCE_BYTES:
+                raise NativeRevertProviderError("evidence byte limit exceeded")
+        except OSError as error:
+            raise NativeRevertProviderError("evidence member is missing, unsafe, or unreadable") from error
+        finally:
+            for descriptor in reversed(descriptors):
+                os.close(descriptor)
+        self.cache[reference] = content
+        return content
+
+    def _event(self, reference: str) -> bytes:
+        """Resolve Event identities through the one canonical read-only reader."""
+        if reference in self.cache:
+            return self.cache[reference]
+        event_id = reference[len("event:"):]
+        if not event_id or len(event_id) > 256 or len(self.cache) >= _MAX_EVIDENCE_REFERENCES:
+            raise NativeRevertProviderError("unsupported or excessive Event reference")
+        query_root = TOOLS_ROOT / "FIND_AND_FETCH_JOURNAL_EVENTS"
+        if str(query_root) not in sys.path:
+            sys.path.insert(0, str(query_root))
+        from find_and_fetch_journal_events import JournalQueryError, capture_snapshot, query
+
+        try:
+            if self.journal_snapshot is None:
+                self.journal_snapshot = capture_snapshot(self.root, limits={
+                    "max_snapshot_members": _MAX_EVIDENCE_REFERENCES,
+                    "max_file_bytes": _MAX_EVIDENCE_BYTES,
+                    "max_total_read_bytes": max(1, _MAX_TOTAL_EVIDENCE_BYTES - self.total),
+                    "timeout_seconds": 10,
+                })
+                self.total += self.journal_snapshot["prefix_bytes"]
+            result = query(self.journal_snapshot, {
+                "mode": "full_events", "filter": '"event:/event_id" = ' + json.dumps(event_id), "limit": 2,
+                "limits": {"max_total_read_bytes": max(1, _MAX_TOTAL_EVIDENCE_BYTES - self.total)},
+            })
+        except JournalQueryError as error:
+            raise NativeRevertProviderError("canonical Event evidence is unavailable: " + error.code) from error
+        rows = result.get("results")
+        self.total += result.get("limits", {}).get("max_total_read_bytes", {}).get("consumed", 0)
+        if result.get("status") != "complete" or not isinstance(rows, list) or len(rows) != 1:
+            raise NativeRevertProviderError("canonical Event evidence is missing or unresolved")
+        content = canonical_json_bytes(rows[0]["event"])
+        self.total += len(content)
+        if len(content) > _MAX_EVIDENCE_BYTES or self.total > _MAX_TOTAL_EVIDENCE_BYTES:
+            raise NativeRevertProviderError("Event evidence byte limit exceeded")
+        self.cache[reference] = content
+        return content
+
+
+def _unique_json_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate evidence JSON member")
+        result[key] = value
+    return result
 
 
 class NativeRevertProvider:
@@ -132,11 +247,13 @@ class NativeRevertProvider:
         return cls(context)
 
     def validate_request(self, request: Mapping[str, Any]) -> list[str]:
-        """Reject any request that is not the queue's exact approved packet."""
+        """Validate the frozen packet and re-observe its representable evidence."""
         try:
-            return [] if _canonical(request) == _canonical(self.approved_request) else ["approved_reversal_request"]
+            if _canonical(request) != _canonical(self.approved_request):
+                return ["approved_reversal_request"]
         except NativeRevertProviderError:
             return ["approved_reversal_request"]
+        return self._current_evidence_mismatches()
 
     def revalidate(self, request: Mapping[str, Any]) -> list[str]:
         """Recheck source-bound approval/permission/evidence before each effect.
@@ -146,6 +263,129 @@ class NativeRevertProvider:
         purposefully has no recovery or inference branch.
         """
         return self.validate_request(request)
+
+    def _current_evidence_mismatches(self) -> list[str]:
+        errors: list[str] = []
+        request = self.approved_request
+        try:
+            reader = _EvidenceReader(self.root)
+        except (OSError, ValueError, AtomToolError) as error:
+            return [f"evidence_root:{error}"]
+        pins: dict[str, str] = {}
+
+        def pin(value: object, name: str, extra: frozenset[str] = frozenset()) -> bytes | None:
+            if not isinstance(value, Mapping) or set(value) != {"evidence_ref", "evidence_hash", *extra}:
+                errors.append(f"{name}:evidence_pin")
+                return None
+            reference, expected = value.get("evidence_ref"), value.get("evidence_hash")
+            if not isinstance(reference, str) or not isinstance(expected, str) or len(expected) != 64 or any(c not in "0123456789abcdef" for c in expected):
+                errors.append(f"{name}:evidence_pin")
+                return None
+            if reference in pins and pins[reference] != expected:
+                errors.append(f"{name}:conflicting_pin")
+                return None
+            pins[reference] = expected
+            try:
+                content = reader.read(reference)
+            except NativeRevertProviderError as error:
+                errors.append(f"{name}:evidence:{error}")
+                return None
+            if hashlib.sha256(content).hexdigest() != expected:
+                errors.append(f"{name}:evidence_hash")
+            return content
+
+        def collection(name: str, expected_refs: object) -> list[Mapping[str, Any]]:
+            values = request.get(name)
+            if not isinstance(values, list) or not values or len(values) > _MAX_EVIDENCE_REFERENCES:
+                errors.append(f"{name}:evidence_pins")
+                return []
+            for index, value in enumerate(values):
+                pin(value, f"{name}:{index}")
+            references = [value.get("evidence_ref") if isinstance(value, Mapping) else None for value in values]
+            if references != expected_refs:
+                errors.append(f"{name}:reference_alignment")
+            return values
+
+        collection("selected_change", request.get("selected_change_refs"))
+        collection("history_record", request.get("history_reference_evidence"))
+        collection("before_record", [effect.get("before_evidence") for effect in self._effect_by_id.values()])
+        collection("after_record", [effect.get("after_evidence") for effect in self._effect_by_id.values()])
+        references = request.get("affected_reference_hashes")
+        affected = request.get("affected_reference")
+        if not isinstance(references, Mapping) or not references or not isinstance(affected, list) or not affected or len(affected) > _MAX_EVIDENCE_REFERENCES:
+            errors.append("affected_reference:evidence_pins")
+        else:
+            for index, value in enumerate(affected):
+                pin(value, f"affected_reference:{index}")
+            observed = {value.get("evidence_ref"): value.get("evidence_hash") for value in affected if isinstance(value, Mapping) and isinstance(value.get("evidence_ref"), str)}
+            if len(observed) != len(affected) or observed != references:
+                errors.append("affected_reference:hash_alignment")
+
+        governing = request.get("governing_definition")
+        content = pin(governing, "governing_definition", frozenset({"atom_id", "revision"}))
+        if isinstance(governing, Mapping):
+            if governing.get("evidence_hash") != request.get("governing_definition_hash"):
+                errors.append("governing_definition:hash_alignment")
+            if content is not None:
+                try:
+                    frontmatter, _ = split_frontmatter(content.decode("utf-8"))
+                    reference = governing.get("evidence_ref", "")
+                    current_atom = lifecycle_intents.atom_from_path(self.root, self.root / reference)
+                    selected_atom = lifecycle_intents.resolve_selector(self.root, governing.get("atom_id"))
+                    if (governing.get("atom_id") != "CA-O-131" or frontmatter_scalar(frontmatter, "atom_id") != governing.get("atom_id")
+                            or type(governing.get("revision")) is not int or governing["revision"] < 1
+                            or frontmatter_scalar(frontmatter, "version") != str(governing["revision"])
+                            or frontmatter_scalar(frontmatter, "status") != "Active"
+                            or current_atom.lifecycle != "active" or selected_atom.path != current_atom.path
+                            or any(part in {"_projection", "archive", "drafts", "done", "canceled"} for part in PurePosixPath(reference).parts)):
+                        errors.append("governing_definition:identity_revision_currentness")
+                except (UnicodeDecodeError, AtomToolError, TypeError, OSError):
+                    errors.append("governing_definition:identity_revision_currentness")
+
+        for name in ("operator_decision", "executor_permission"):
+            value = request.get(name)
+            if not isinstance(value, Mapping):
+                errors.append(f"{name}:evidence_pin")
+                continue
+            expected_fields = {key: item for key, item in value.items() if key not in {"evidence_ref", "evidence_hash"}}
+            content = pin(value, name, frozenset(expected_fields))
+            if content is None:
+                continue
+            try:
+                observed = json.loads(content, object_pairs_hook=_unique_json_object)
+                if not isinstance(observed, Mapping) or any(observed.get(key) != item for key, item in expected_fields.items()):
+                    errors.append(f"{name}:record_binding")
+                if name == "operator_decision" and (not isinstance(observed, Mapping) or observed.get("status") != "approved"
+                        or observed.get("approved_effect_ids") != list(self._effect_by_id)
+                        or _canonical(observed.get("ordered_effects")) != _canonical(request["ordered_effects"])):
+                    errors.append("operator_decision:approval_revoked_or_effect_order")
+                if name == "executor_permission":
+                    capability = observed.get("capability") if isinstance(observed, Mapping) else None
+                    supported = {effect["capability_binding"]["capability_id"] for effect in self._effect_by_id.values()}
+                    if (not isinstance(observed, Mapping) or observed.get("granted") is not True
+                            or not isinstance(capability, str) or (capability != "governed-reversal" and supported != {capability})):
+                        errors.append("executor_permission:revoked_or_unsupported")
+            except (UnicodeDecodeError, ValueError):
+                errors.append(f"{name}:record_json")
+
+        for effect_id, effect in self._effect_by_id.items():
+            permission = effect["capability_binding"]["permission_evidence"]
+            try:
+                content = reader.read(permission["evidence_ref"])
+                if hashlib.sha256(content).hexdigest() != permission["evidence_hash"]:
+                    errors.append(f"capability_permission_hash:{effect_id}")
+                observed = json.loads(content, object_pairs_hook=_unique_json_object)
+                if not isinstance(observed, Mapping) or observed.get("capability_id") != permission["capability_id"]:
+                    errors.append(f"capability_permission_identity:{effect_id}")
+                if not isinstance(observed, Mapping) or observed.get("granted") is not True:
+                    errors.append(f"capability_permission_revoked:{effect_id}")
+            except (NativeRevertProviderError, UnicodeDecodeError, ValueError) as error:
+                errors.append(f"capability_permission_evidence:{effect_id}:{error}")
+        for effect_id, effect in self._effect_by_id.items():
+            for reference in effect["capability_binding"]["evidence_refs"]:
+                if reference not in pins:
+                    errors.append(f"effect_evidence:{effect_id}:unbound_reference")
+        return errors
 
     def observe(self, target_id: str) -> str:
         """Return the exact capability-specific current-state hash for one target."""
@@ -169,6 +409,9 @@ class NativeRevertProvider:
 
     def apply_effect(self, effect: dict[str, Any]) -> Mapping[str, Any]:
         """Invoke only the exact previously bound lifecycle/structure capability."""
+        current_errors = self.revalidate(self.approved_request)
+        if current_errors:
+            raise NativeRevertProviderError("current evidence is not admitted: " + ", ".join(current_errors))
         effect_id = effect.get("effect_id")
         registered = self._effect_by_id.get(effect_id) if isinstance(effect_id, str) else None
         if registered is None or _canonical(effect) != _canonical(registered):
@@ -287,6 +530,7 @@ def make_native_revert_service(context: Mapping[str, Any]) -> RevertChangesServi
 
 __all__ = [
     "NATIVE_REVERT_PROVIDER_CONTEXT_SCHEMA",
+    "NATIVE_REVERT_EVIDENCE_SOURCE_REMAINDERS",
     "NativeRevertProvider",
     "NativeRevertProviderError",
     "make_native_revert_service",

@@ -112,23 +112,40 @@ class SelectedNativeProvidersTests(unittest.TestCase):
             "path": path.relative_to(self.root).as_posix(), "sha256": hashlib.sha256(before.encode()).hexdigest()}]})
         return revert_fixture.NativeRevertProviderTests._request(effect, effect["expected_current_hash"]), path, before
 
-    def admit(self, request):
+    def legacy_manifest(self, request):
+        """Model a retained pre-repair packet; current admission must reject it."""
+        service = make_native_revert_service({"project_root": str(self.root), "approved_reversal_request": request})
+        admitted = service.admit(request)
+        self.assertEqual("blocked", admitted["outcome"])
+        return {"manifest_id": "reversal-" + revert_fixture.canonical_digest(request)[:24],
+                "request": request, "admitted_target_hashes": request["current_hashes"]}
+
+    def test_registered_synthetic_structural_revert_is_blocked_without_effect(self):
+        request, path, before = self.structural_request()
+        prior = path.read_bytes()
+        frozen = self.freeze("revert_changes", {"approved_reversal_manifest": self.legacy_manifest(request)})
+        result, session = self.registered_dispatch(frozen)
+        self.assertEqual("interrupted_pending", result["outcome"])
+        self.assertEqual(prior, path.read_bytes())
+        self.assertEqual(3, len(session.started))
+        self.assertEqual(3, len(session.finished))
+        self.assertEqual("blocked", result["step_results"][0]["result"])
+
+    def test_registered_current_structural_revert_performs_exact_effect_once(self):
+        request, path, before = self.structural_request()
+        request = revert_fixture.bind_actual_evidence(self.root, request)
         service = make_native_revert_service({"project_root": str(self.root), "approved_reversal_request": request})
         admitted = service.admit(request)
         self.assertEqual("admitted", admitted["outcome"])
-        return admitted["approved_reversal_manifest"]
-
-    def test_registered_structural_revert_performs_exact_effect_and_one_action_terminal(self):
-        request, path, before = self.structural_request()
-        frozen = self.freeze("revert_changes", {"approved_reversal_manifest": self.admit(request)})
+        frozen = self.freeze("revert_changes", {"approved_reversal_manifest": admitted["approved_reversal_manifest"]})
         result, session = self.registered_dispatch(frozen)
         self.assertEqual("completed", result["outcome"])
-        self.assertEqual(before, path.read_text(encoding="utf-8"))
+        self.assertEqual("reverted", result["step_results"][0]["result"])
+        self.assertEqual(before, path.read_text())
         self.assertEqual(3, len(session.started))
         self.assertEqual(3, len(session.finished))
-        self.assertEqual("reverted", result["step_results"][0]["result"])
 
-    def test_registered_lifecycle_revert_preserves_revision_and_summary(self):
+    def test_registered_synthetic_lifecycle_revert_is_blocked_without_effect(self):
         helper = revert_fixture.NativeRevertProviderTests()
         target_path = self.project._authority_dir / "CA-R-100--target.md"
         with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as forecast_raw:
@@ -154,12 +171,12 @@ class SelectedNativeProvidersTests(unittest.TestCase):
                               "target": target, "proposed": helper._proposal(target_path), "change_class": "semantic_revision"},
                               target, before="before:lifecycle", after="after:lifecycle")}
                 request = helper._request(effect, effect["expected_current_hash"])
-                frozen = self.freeze("revert_changes", {"approved_reversal_manifest": self.admit(request)})
+                frozen = self.freeze("revert_changes", {"approved_reversal_manifest": self.legacy_manifest(request)})
                 result, session = self.registered_dispatch(frozen)
-        self.assertEqual("completed", result["outcome"])
-        self.assertIn("Semantic reversal detail.", target_path.read_text())
+        self.assertEqual("interrupted_pending", result["outcome"])
+        self.assertNotIn("Semantic reversal detail.", target_path.read_text())
         self.assertIn("Stable summary", target_path.read_text())
-        self.assertTrue(list(target_path.parent.rglob("CA-R-100--target@1.md")))
+        self.assertFalse(list(target_path.parent.rglob("CA-R-100--target@1.md")))
         self.assertEqual(3, len(session.finished))
 
     def test_unsupported_and_denied_revert_are_truthful_without_effects(self):
