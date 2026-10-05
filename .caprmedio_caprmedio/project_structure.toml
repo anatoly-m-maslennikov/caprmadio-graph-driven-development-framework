@@ -87,7 +87,7 @@ structural_level = 1
 local_order = 1
 navigational_order_number = 1
 authority_path = ".caprmedio_caprmedio/101_LAYER_1_FRAMEWORK_METHODOLOGY"
-delivery_path = "101_FRAMEWORK_METHODOLOGY"
+delivery_path = "101_LAYER_1_FRAMEWORK_METHODOLOGY"
 authority_mode = "strict"
 
 [[scope_units]]
