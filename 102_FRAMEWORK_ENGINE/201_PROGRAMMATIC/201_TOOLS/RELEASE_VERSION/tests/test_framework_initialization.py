@@ -244,6 +244,51 @@ class FrameworkInitializationTests(unittest.TestCase):
             initialization._compiled_methodology_files(retired_root)
         self.assertEqual(raised.exception.code, "initial-methodology-compiled-obsolete")
 
+    def test_ignores_an_empty_legacy_compiled_role_sibling(self) -> None:
+        """Empty retained role directories do not make the whole inventory empty."""
+        legacy_role = self.root / (
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/09_ops"
+        )
+        legacy_role.mkdir()
+
+        files = initialization._compiled_methodology_files(self.root)
+
+        self.assertEqual(
+            files,
+            [
+                self.root / (
+                    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+                    "04_requirement/compiled.md"
+                )
+            ],
+        )
+
+    def test_refuses_when_all_compiled_role_directories_are_empty(self) -> None:
+        empty_root = Path(
+            tempfile.mkdtemp(prefix="caprmedio-framework-empty-compiled-", dir=self.root.parent)
+        )
+        compiled_root = empty_root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+        (compiled_root / "04_requirement").mkdir(parents=True)
+        (compiled_root / "09_ops").mkdir()
+
+        with self.assertRaises(FrameworkInitializationError) as raised:
+            initialization._compiled_methodology_files(empty_root)
+
+        self.assertEqual(raised.exception.code, "initial-methodology-compiled-missing")
+
+    def test_refuses_a_symlinked_compiled_role_sibling(self) -> None:
+        safe_target = self.root / "retained-compiled-role"
+        safe_target.mkdir()
+        legacy_role = self.root / (
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/09_ops"
+        )
+        legacy_role.symlink_to(safe_target, target_is_directory=True)
+
+        with self.assertRaises(FrameworkInitializationError) as raised:
+            initialization._compiled_methodology_files(self.root)
+
+        self.assertEqual(raised.exception.code, "initial-methodology-compiled-invalid")
+
     def test_preserves_direct_action_recovery_refusal_without_any_publication(self) -> None:
         self.session = RecoveryRequiredSession()
         plan = plan_initial_framework_installation(self.root)

@@ -272,7 +272,15 @@ def _compiled_methodology_files(root: Path) -> list[Path]:
                 "initial-methodology-compiled-invalid",
                 f"canonical compiled Methodology carrier is not a role folder: {relative}",
             )
-        files.extend(_regular_files(root, Path(relative), code="initial-methodology-compiled-missing"))
+        # Retained empty role folders have no package carriers.  They must not
+        # turn an otherwise complete compiled Methodology inventory into a
+        # missing one; the aggregate refusal below still protects a wholly
+        # empty compiled tree.  Inventory validation remains strict for every
+        # actual descendant (including secret-shaped paths and symlinks).
+        try:
+            files.extend(persistent_regular_files(root, child))
+        except ReleaseInventoryError as error:
+            raise FrameworkInitializationError(error.code, str(error)) from error
     if files:
         return files
     if _obsolete_compiled_copy_exists(root):
