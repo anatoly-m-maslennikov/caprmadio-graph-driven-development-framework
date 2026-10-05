@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 18
-updated_at: "2026-10-05 22:19:19 +0000"
+version: 17
+updated_at: "2026-10-05 21:24:12 +0000"
 relations: {}
 ---
 # Summary
@@ -169,7 +169,7 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 The latest continuation saves the bootstrap proof implementation in b790a3fd0 after independent compiler/bootstrap source acceptance and a combined 50-case run (32.933 seconds). P1732-P1738 are Done for this local slice; P1739 and parent P1714 remain Active for actual compilation/image/install/Skill/Journal proof. The fresh direct Docker CLI probe still returns socket permission denied; no image or runtime publication is claimed.
 
-The Operator approved the separate bounded host E2E executor. Its RMED, private-driver grammar and configurable defaults are accepted in c450b1b45; C476@2 records approval and unfinished implementation. P1740 with children P1741-P1749 owns the bounded executor, sealed Harness bindings, phase map, consumer/admission integration and independent local acceptance; P1744/P1745 are now decomposed further into P1750-P1754. Existing Suite RMED phase amendments are accepted in 7d14bebd9. P1743 is Done and C477 resolved; the independently accepted Operations graph and original full predecessor archives are saved in 1c159f18d. Root saved the bounded proof/task frontier in ebacdd1ee and the context/Driver/Harness/phase-map code in 5e0dfee93 after independent source acceptance. Root's actual verification passed 24 combined context/Driver/phase-map cases, five Runtime image-binding cases and two actual MCP transport cases. C479/C480 are resolved for strict context admission and duplicate testcase refusal. The private gate's capability/settings/predecessor repairs have bounded static acceptance but still need expanded golden behavior and explicit D582#10 Harness metadata; C478 remains Active. Canonical Methodology is still stale and Docker access remains denied even after the Operator recreated its socket. Actual full-suite execution, source-frontier rebind, first-runtime installation and promotion remain mandatory. These newest facts supersede older development snapshots below, not their actual historical events.
+The Operator approved the separate bounded host E2E executor. Its RMED, private-driver grammar and configurable defaults are accepted in c450b1b45; C476@2 records approval and unfinished implementation. P1740 with children P1741-P1749 owns the bounded test-first executor, sealed Harness bindings, phase map, consumer/admission integration and independent local acceptance. Existing Suite RMED phase amendments are independently accepted in 7d14bebd9. P1743 is Done and C477 resolved after independent final source/carrier acceptance: O185/O186 replace renamed Steps, O169 requires the exact passing aggregate, and eight original HEAD carriers match their full predecessor archives. The private E2E implementation remains unaccepted: host capability receipt binding, actual controller admission, configurable limits and spawned MCP image propagation require repairs and behavioral golden proof. Actual full-suite execution, source-frontier rebind, first-runtime installation and promotion remain mandatory. These newest facts supersede older development snapshots below, not their actual historical events.
 
 The Operator temporarily deferred queue item #5: the final all-sixteen-Workflow code-versus-RMED/O review, coverage audit and Epic closure. CA-P-1655 and CA-P-1124 remain unfinished and are not being executed now. Continue the source-admission, manifest-publication, recovery integration, first-runtime installation and actual runtime-test work; their necessary local checks remain in scope. This deferral is neither a waiver of final acceptance nor permission to mark the Epic Done.
 

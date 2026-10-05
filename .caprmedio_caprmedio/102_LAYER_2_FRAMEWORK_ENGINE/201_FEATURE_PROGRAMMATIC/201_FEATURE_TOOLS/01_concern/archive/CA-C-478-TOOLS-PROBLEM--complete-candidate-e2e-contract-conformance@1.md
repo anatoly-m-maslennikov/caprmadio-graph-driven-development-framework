@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 22:18:24 +0000"
+version: 1
+updated_at: "2026-10-05 21:58:42 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Candidate E2E contract conformance"
   depends_on: [Tool, Release Version, Candidate Manifest, Docker Image, Test Suite, JUnit Report, Journal]
@@ -37,7 +37,3 @@ P1744 and P1745 acceptance, Full Gate aggregation, current source admission and 
 ## Disposition
 
 Finish the bounded P1750-P1754 decomposition, prove configured limits and receipt tamper/refusal cases using golden inputs, and obtain independent local acceptance. Keep real Docker, complete-suite and installed-runtime evidence unfinished until actually executed. No test-double or static-only result is Release acceptance.
-
-## Current verification
-
-The synthetic presealed fixture now passes the established suite/image byte readers and rejects receipt/source mutation. The incorrect comparison of the image reader's retained attempt path with the Project root is repaired. Six settings-backed caps and the capability/settings receipt bindings pass bounded static review; expanded gate behavior remains under test. Context and Driver repairs C479/C480 are resolved with real tests and saved in 5e0dfee93. Root confirmed 24 combined context/Driver/phase-map cases, five Runtime binding cases and two actual MCP stdio transport cases passing. D582#10 still requires explicit Harness source hashes, wall-clock timestamps and retained output/JUnit path bindings; that metadata repair is in progress. C478 remains Active pending the complete private-gate behavioral result and final acceptance.
