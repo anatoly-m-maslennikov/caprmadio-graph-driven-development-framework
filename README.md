@@ -73,7 +73,7 @@ Repeatable sequences of actions using Tools and Prompts/Skills →\
 Workflows define their steps and control flow.
 
 We cannot put everything into one prompt →\
-the single entry Skill, `ca`, connects agents to MCP →\
+the single entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
 Tools retrieve the needed context and assemble Prompts/Skills →\
 MCP delivers them and exposes Tool and Workflow execution.
 
