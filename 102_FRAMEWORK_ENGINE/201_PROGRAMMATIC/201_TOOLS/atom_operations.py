@@ -118,9 +118,9 @@ def _role_directory(path: Path, control: Path) -> str | None:
 
 def _lifecycle(path: Path, control: Path) -> str:
     parts = {part.lower() for part in path.relative_to(control).parts}
-    if "archive" in parts:
+    if "archive" in parts or "archived" in parts:
         return "archived"
-    if "drafts" in parts:
+    if "draft" in parts or "drafts" in parts:
         return "draft"
     if "done" in parts:
         return "done"
@@ -327,6 +327,16 @@ def replace_frontmatter_scalar(frontmatter: str, name: str, value: str) -> str:
     return (frontmatter + "\n" if frontmatter else "") + replacement
 
 
+def remove_frontmatter_scalar(frontmatter: str, name: str) -> str:
+    """Remove one top-level scalar without changing unrelated carrier bytes."""
+
+    expression = re.compile(rf"(?m)^{re.escape(name)}:\s*.*?(?:\n|$)")
+    matches = list(expression.finditer(frontmatter))
+    if len(matches) > 1:
+        raise ToolError("atom-frontmatter-invalid", f"Atom has duplicate {name} values")
+    return expression.sub("", frontmatter, count=1).rstrip("\n")
+
+
 def atom_version(atom: Atom) -> int:
     """Return the current carried Version without manufacturing a default."""
 
@@ -413,12 +423,14 @@ def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: 
     return atom_from_path(root, target)
 
 
-def preserve_atom_revision(root: Path, atom: Atom) -> Atom:
+def preserve_atom_revision(root: Path, atom: Atom, *, allow_nonactive: bool = False) -> Atom:
     """Copy one prior semantic revision to its native role-local history path."""
 
     root = root.resolve()
     control = control_root(root)
-    if atom.lifecycle != "active" or atom.atom_id is None:
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", f"only identified current Atoms can preserve history: {atom.relative}")
+    if not allow_nonactive and atom.lifecycle != "active":
         raise ToolError("atom-not-active", f"only active Atoms with stable identity can preserve history: {atom.relative}")
     role_name = _role_directory(atom.path, control)
     if role_name is None:
@@ -436,19 +448,49 @@ def archive_atom_revision(root: Path, atom: Atom, frontmatter: str, content: str
 
     root = root.resolve()
     control = control_root(root)
-    if atom.lifecycle != "active" or atom.atom_id is None:
-        raise ToolError("atom-not-active", f"only active Atoms with stable identity can be archived: {atom.relative}")
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", f"only identified current Atoms can be archived: {atom.relative}")
     role_name = _role_directory(atom.path, control)
     if role_name is None:
         raise ToolError("archive-location-missing", f"Atom has no content-role archive location: {atom.relative}")
     role = next(parent for parent in atom.path.parents if parent.name == role_name)
-    target = role / "archive" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}"
+    target = role / "archived" / f"{atom.path.stem}@{atom_version(atom)}{atom.path.suffix}"
     target = target.resolve()
     if target.exists():
         raise ToolError("destination-collision", f"archive destination already exists: {target.relative_to(root)}")
     snapshots = {atom.path: atom.path.read_bytes(), target: None}
     try:
         _atomic_write(target, render(frontmatter, content))
+        atom.path.unlink()
+    except BaseException:
+        _restore(snapshots)
+        raise
+    return atom_from_path(root, target)
+
+
+def demote_atom_to_draft(root: Path, atom: Atom, frontmatter: str, content: str) -> Atom:
+    """Move one identified current revision to its same-role unassigned Draft carrier."""
+
+    root = root.resolve()
+    control = control_root(root)
+    if atom.lifecycle in {"archived", "draft"} or atom.atom_id is None:
+        raise ToolError("atom-not-current", "only one identified current Atom can become Draft")
+    role_name = _role_directory(atom.path, control)
+    if role_name is None:
+        raise ToolError("archive-location-missing", f"Atom has no content-role location: {atom.relative}")
+    role = next(parent for parent in atom.path.parents if parent.name == role_name)
+    draft_name = re.sub(r"^([A-Za-z0-9]+-[A-Z]+)-[0-9]+(?:--|-)", r"\1--", atom.filename, count=1)
+    if draft_name == atom.filename:
+        raise ToolError("draft-filename-invalid", "identified filename cannot be converted to the admitted Draft form")
+    target = (role / "draft" / draft_name).resolve()
+    if target.exists():
+        raise ToolError("destination-collision", f"draft destination already exists: {target.relative_to(root)}")
+    normalized = remove_frontmatter_scalar(_normalize_frontmatter(frontmatter), "atom_id")
+    if frontmatter_scalar(normalized, "atom_id") is not None:
+        raise ToolError("draft-has-stable-id", "Draft carrier cannot retain atom_id")
+    snapshots = {atom.path: atom.path.read_bytes(), target: None}
+    try:
+        _atomic_write(target, render(normalized, content))
         atom.path.unlink()
     except BaseException:
         _restore(snapshots)

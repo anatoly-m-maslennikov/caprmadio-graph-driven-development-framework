@@ -11,6 +11,7 @@ from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
+from authoritative_status_models import StatusModelError, resolve_status_model
 from atom_operations import (
     Atom,
     ToolError as AtomToolError,
@@ -20,6 +21,7 @@ from atom_operations import (
     atom_version,
     control_root,
     create_atom_revision,
+    demote_atom_to_draft,
     frontmatter_scalar,
     move_atom_revision,
     prepare_create_atom_revision,
@@ -213,8 +215,6 @@ def carrier_descriptor(root: Path, selector: str | Atom) -> dict[str, Any]:
     root = root.resolve()
     try:
         atom = selector if isinstance(selector, Atom) else resolve_selector(root, selector)
-        if atom.atom_id is None:
-            raise LifecycleError("stable-atom-id-required", "lifecycle actions require a stable Atom identity")
         return {
             "atom_id": atom.atom_id,
             "path": atom.relative,
@@ -335,6 +335,14 @@ def _status_destination(root: Path, atom: Atom, status: str) -> str:
     except (ValueError, StopIteration) as error:
         raise LifecycleError("status-location-missing", "target has no content-role status location") from error
     role = control.joinpath(*relative.parts[:index + 1])
+    if frontmatter_scalar(atom.frontmatter, "content_role") == "Plan":
+        local = atom.path.parent
+        if local.name in {"001_backlog", "done", "canceled", "archived"}:
+            local = local.parent
+        folders = {"Active": None, "Backlog": "001_backlog", "Done": "done", "Canceled": "canceled"}
+        if status in folders:
+            target = local / folders[status] / atom.filename if folders[status] else local / atom.filename
+            return target.relative_to(root).as_posix()
     if status == "Active":
         target = role / atom.filename
     else:
@@ -392,6 +400,34 @@ def _status_model(value: object, atom: Atom, requested_status: str) -> dict[str,
         "transitions": {str(key): list(item) for key, item in transitions.items()},
         "archive_status": archive_status,
     }
+
+
+def preflight_atom_lifecycle(root: Path, operation: str, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    """Purely observe one model-governed status operation before any effect."""
+    root = root.resolve()
+    request = _mapping(parameters, "parameters")
+    if operation != "change_status":
+        raise LifecycleError("operation-unadmitted", "preflight supports change_status only")
+    _exact_fields(request, frozenset({"target", "status"}), "parameters")
+    requested = request["status"]
+    if not isinstance(requested, str) or not requested:
+        raise LifecycleError("status-invalid", "status must be a non-empty source-admitted value")
+    target = _resolve_descriptor(root, request["target"], name="target", active=False)
+    prior = carrier_descriptor(root, target)
+    role = frontmatter_scalar(target.frontmatter, "content_role")
+    atom_type = frontmatter_scalar(target.frontmatter, "type")
+    if role is None:
+        raise LifecycleError("status-model-unqualified", "target lacks a carried Content Role")
+    try:
+        model = resolve_status_model(root, {"content_role": role, "type": atom_type}, requested)
+    except StatusModelError as error:
+        raise LifecycleError(error.code, str(error)) from error
+    current = frontmatter_scalar(target.frontmatter, "status")
+    if current is None or current not in model["statuses"]:
+        raise LifecycleError("status-current-unadmitted", "target current status is not admitted by the current source model")
+    archive = requested == "Archived"
+    return {"operation": operation, "target": target, "prior": prior, "requested_status": requested,
+            "current_status": current, "status_model": model, "archive": archive}
 
 
 def _broken_references(root: Path, atom: Atom) -> list[dict[str, Any]]:
@@ -514,37 +550,43 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
 
 
 def change_status_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bool = False, authorized: bool = False) -> dict[str, Any]:
-    """Apply one qualified status transition; Archive is its model-defined shortcut."""
+    """Apply one source-model-derived status change; callers cannot supply a model."""
 
     root = root.resolve()
-    request = _mapping(parameters, "parameters")
-    _exact_fields(request, frozenset({"target", "status", "status_model"}), "parameters")
-    if not isinstance(request["status"], str) or not request["status"]:
-        raise LifecycleError("status-invalid", "status must be a non-empty admitted model value")
-    target = _resolve_descriptor(root, request["target"], name="target")
-    prior = carrier_descriptor(root, target)
-    model = _status_model(request["status_model"], target, request["status"])
-    current_status = frontmatter_scalar(target.frontmatter, "status")
-    assert current_status is not None
-    archive = request["status"] == model["archive_status"]
-    diagnostics = _broken_references(root, target) if archive else []
-    if request["status"] == current_status:
+    preflight = preflight_atom_lifecycle(root, "change_status", parameters)
+    target, prior = preflight["target"], preflight["prior"]
+    requested, current_status = preflight["requested_status"], preflight["current_status"]
+    model, archive = preflight["status_model"], preflight["archive"]
+    if requested == current_status:
         return {"operation": "change_status", "outcome": "no-op", "prior_status": current_status,
-                "observed": prior, "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
-                "effects": [_effect("unchanged", carrier=prior, reason="status-already-current")], "broken_references": diagnostics}
+                "observed": prior, "status_model": model,
+                "effects": [_effect("unchanged", carrier=prior, reason="status-already-current")], "broken_references": []}
+    if target.atom_id is None:
+        raise LifecycleError("draft-promotion-identity-unavailable", "leaving Draft requires separately admitted identity assignment")
+    diagnostics = _broken_references(root, target) if archive else []
     if not _execute_allowed(execute=execute, authorized=authorized):
         return {"operation": "change_status", "outcome": "preview", "prior_status": current_status, "observed": prior,
-                "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
+                "status_model": model,
                 "effects": [_effect("unchanged", carrier=prior, reason="preview")], "broken_references": diagnostics}
+    refreshed = preflight_atom_lifecycle(root, "change_status", parameters)
+    if refreshed["status_model"] != model:
+        raise LifecycleError("status-model-stale", "authoritative status-model source changed after preflight")
+    prior_revision: Atom | None = None
     try:
-        frontmatter = replace_frontmatter_scalar(target.frontmatter, "status", request["status"])
+        frontmatter = replace_frontmatter_scalar(target.frontmatter, "status", requested)
         frontmatter = _refresh_frontmatter(frontmatter)
-        observed_atom = (
-            archive_atom_revision(root, target, frontmatter, target.content)
-            if archive
-            else move_atom_revision(root, target, _status_destination(root, target, request["status"]), frontmatter, target.content)
-        )
+        if requested.casefold() == "draft":
+            prior_revision = preserve_atom_revision(root, target, allow_nonactive=True)
+            observed_atom = demote_atom_to_draft(root, target, frontmatter, target.content)
+        else:
+            observed_atom = (
+                archive_atom_revision(root, target, frontmatter, target.content)
+                if archive
+                else move_atom_revision(root, target, _status_destination(root, target, requested), frontmatter, target.content)
+            )
     except AtomToolError as error:
+        if prior_revision is not None:
+            prior_revision.path.unlink(missing_ok=True)
         raise _translate(error) from error
     observed = carrier_descriptor(root, observed_atom)
     result: dict[str, Any] = {
@@ -552,13 +594,16 @@ def change_status_atom_action(root: Path, parameters: Mapping[str, Any], *, exec
         "outcome": "applied",
         "prior_status": current_status,
         "observed": observed,
-        "status_model": {key: model[key] for key in ("model_ref", "model_revision", "content_role", "type")},
+        "status_model": model,
         "effects": [_effect("changed", carrier=observed)],
         "broken_references": diagnostics,
     }
     if archive:
         result["repair_handoff"] = {"operation": "repair_relations", "broken_references": diagnostics,
                                     "automatic_repair": False}
+    if requested.casefold() == "draft":
+        assert prior_revision is not None
+        result["history"] = {"prior": prior, "prior_revision": carrier_descriptor(root, prior_revision)}
     return result
 
 
