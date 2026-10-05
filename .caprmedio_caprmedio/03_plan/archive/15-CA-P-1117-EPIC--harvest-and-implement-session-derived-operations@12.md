@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 13
-updated_at: "2026-10-05 02:12:19 +0000"
+version: 12
+updated_at: "2026-10-05 01:12:35 +0000"
 relations: {}
 ---
 # Summary
@@ -31,7 +31,7 @@ Deliver the Operator-selected minimal Workflow set below: authoritative methodol
 
 ### Current Operator-selected scope
 
-The Operator selected these sixteen Workflows:
+The Operator selected these fifteen Workflows:
 
 1. Create Atom.
 2. Update Atom.
@@ -48,7 +48,6 @@ The Operator selected these sixteen Workflows:
 13. Build Applicable Methodology.
 14. Find and Fetch Artifacts (Markdown carriers).
 15. Find and Fetch Journal Events.
-16. Release Version, including project-local ca Skill installation without hooks.
 
 The three Projection Workflows support rebuilding from current authoritative sources. A generic Rebuild Projections entrypoint may route to them; it is not an additional independent deliverable.
 
@@ -64,7 +63,7 @@ The two query Workflows are read-only:
 
 ### Change Atom Status coverage
 
-The existing selected Change Atom Status Workflow applies to any Atom and every declared Content Role, using the current applicable status whitelist and defined folder mapping. It is not an Archive-only capability and adds no separate Workflow.
+The existing selected Change Atom Status Workflow applies to any Atom and every declared Content Role, using the current applicable status whitelist and defined folder mapping. It is not an Archive-only capability and is not a new sixteenth Workflow.
 
 - Input: an Atom reference and the requested Status. Include Draft carriers according to the current identity rules.
 - Resolve the applicable Status model for the Atom's actual Content Role and specialized Type, when present, from existing authoritative methodology. Use its admitted statuses and defined Carrier folders; caller-supplied values do not create new Status authority.
@@ -74,30 +73,13 @@ The existing selected Change Atom Status Workflow applies to any Atom and every 
 
 CA-P-1612 owns the bounded gap-closing decomposition below. Reuse CA-O-127/129/128 and the current generic status Action; extend source resolution and proof where needed rather than authoring another Workflow, Tool or independent status registry.
 
-### Release Version
-
-The Operator selected this additional release path:
-
-1. Bind the selected next Version, exact source revision and release notes.
-2. Deliver a full Methodology source copy to root `101_LAYER_1_FRAMEWORK_METHODOLOGY/sources`.
-3. Compile Applicable Methodology from those sources. Bind the compiled package delivery and the Methodology consumed under `.caprmedio_caprmedio/000_CAPRMEDIO_framework` to the same accepted source and Version. Preserve the upstream authoring sources; installed copies do not independently redefine authority.
-4. Run the full declared test suite and retain its result. Failed or incomplete required gates prevent release promotion.
-5. Install the full declared Framework package into `.caprmedio_runtime`, including Methodology, Engine, Tools, applications, MCP, Skills and their required packaged resources; it is not only an Engine installation.
-6. Install the project-local `ca` Skill without hooks, using the reviewed project-local client target. Preserve unrelated Skills, settings, authoring sources and Journals.
-7. Rebuild the Docker image for the selected Version, then verify the actual installed package, MCP and new image. Source/mock tests and image build alone do not prove this gate.
-8. Only after successful verification, retire the exact prior image when no container or required rollback reference needs it. No broad pruning or forced image removal.
-
-The first working vertical cut establishes a frozen Version N that builds and tests N+1. A release Run binds the executing N implementation and Methodology separately from the candidate N+1 sources/package. Changes being built do not silently redefine the running Workflow. Promote the candidate only after its required gates pass; retain N as the working runtime and rollback point until then.
-
-CA-P-1620 owns source-first authoring/review, test-first implementation and actual-release verification. Existing fifteen-route admission and evidence remain valid only for their bound fifteen-route scope; the sixteenth capability needs separately accepted additive admission before dispatch. This Plan does not execute a release or delete an image.
-
 ### Run journaling
 
 Every Workflow Run and every Action Run must be journaled, including standalone Actions, nested invocation lineage, failed or canceled Runs, and successful no-op outcomes. Retain the Run identifiers, governing definition, parent Run/Step references where applicable, input references, start, terminal outcome, results, and actual change/evidence references. Do not put secrets in the Journal.
 
 Use the authoritative Events Journal as the single event source; Artifact Change Log and Process Execution Log are derived views, not independently maintained competing Journals. Journal failures must be reported truthfully; an unpersisted event or Run is never claimed journaled or complete. Functional verification must prove both Workflow-level and Action-level records, failure paths, lineage, and reconstructable results.
 
-Canonical Journal carriers use the single Project-local `.caprmedio_<project name>/_journal/` root. Canonical persisted Projection carriers use the single `.caprmedio_<project name>/_projection/` root, including the graphs, Applicable Methodology and derived log views. For this Project the bindings are `.caprmedio_caprmedio/_journal/` and `.caprmedio_caprmedio/_projection/`. Release Version also delivers source/compiled package copies at the Operator-selected release/runtime destinations; these remain bound derived deliveries, not competing authoring or Journal authority. Methodology source authority stays under `000_CAPRMEDIO_framework/`; runtime locks, receipts, pending recording and disposable stages remain ephemeral runtime state. Preserve historical event bytes and sealed recovery context during relocation; do not create duplicate canonical Journal or Projection authority.
+Canonical Journal carriers use the single Project-local `.caprmedio_<project name>/_journal/` root. Persisted Projection carriers use the single `.caprmedio_<project name>/_projection/` root, including the graphs, Applicable Methodology and derived log views. For this Project the bindings are `.caprmedio_caprmedio/_journal/` and `.caprmedio_caprmedio/_projection/`. Methodology source authority stays under `000_CAPRMEDIO_framework/`; runtime locks, receipts, pending recording and disposable stages remain ephemeral runtime state. Preserve historical event bytes and sealed recovery context during relocation; do not create duplicate canonical Journal or Projection locations.
 
 ### Projection behavior
 
@@ -108,7 +90,7 @@ Canonical Journal carriers use the single Project-local `.caprmedio_<project nam
 
 ### Scope amendment and retained history
 
-This explicit Operator scope replaces the former requirement to implement every adopted harvest capability and container-test every unrelated existing Tool. Required Docker coverage now includes all sixteen selected Workflows and the Actions, Tools, prompts, MCP paths and runtime infrastructure they actually use, including reused implementations. It is not satisfied by an image build alone.
+This explicit Operator scope replaces the former requirement to implement every adopted harvest capability and container-test every unrelated existing Tool. Required Docker coverage now includes all fifteen selected Workflows and the Actions, Tools, prompts, MCP paths and runtime infrastructure they actually use, including reused implementations. It is not satisfied by an image build alone.
 
 Keep the completed harvest, reconciliation, five additional authored Actions, layout repairs and their evidence. They remain available history and reusable sources; they do not create extra delivery obligations. No further harvest or broad reconciliation campaign is required. Existing child Plans must be rebound to this scope before execution; historical or unrelated leaves remain truthfully classified and are excluded from the required decomposition, not reported Done.
 
@@ -136,7 +118,7 @@ CA-P-1118 and its unfinished harvest descendants are canceled, not Done. CA-P-11
 
 ### Composite task sequence
 
-Authoring disposition: the earlier Plan files retain their independent reviews. Newly added or amended branches require their own saved pre-execution review; creation alone does not prove review or execution. The Operator explicitly authorizes mechanical Git commits for this Epic without the save Tool; if Git cannot commit, skip that commit, retain the unfinished save disposition, and continue independent ready work. CA-C-292 remains an active save-Tool defect, but repairing it is not a prerequisite for this authorized Git path. Record actual commit results without claiming Tool-generated Journal provenance. The stricter body-layout disposition for source conflict CA-C-290 is nonblocking for this Epic's preparation.
+Authoring disposition: the Plan files have been created and independently reviewed. The Operator explicitly authorizes mechanical Git commits for this Epic without the save Tool; if Git cannot commit, skip that commit, retain the unfinished save disposition, and continue independent ready work. CA-C-292 remains an active save-Tool defect, but repairing it is not a prerequisite for this authorized Git path. Record actual commit results without claiming Tool-generated Journal provenance. The stricter body-layout disposition for source conflict CA-C-290 is nonblocking for this Epic's preparation.
 
 - CA-P-1118: Canceled harvest stage; retained completed evidence supplies the following stage.
 - CA-P-1119: Bind, author or reuse, and independently review the original thirteen selected source Workflows and their required Actions.
@@ -144,10 +126,9 @@ Authoring disposition: the earlier Plan files retain their independent reviews. 
 - CA-P-1121: Specify and independently review only the PROMPTS capabilities required by these Workflows.
 - CA-P-1122: Implement and functionally verify the selected capabilities from reviewed RMED.
 - CA-P-1123: Verify all selected execution paths in Docker, including MCP and reused dependencies.
-- CA-P-1124: Verify the sixteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
+- CA-P-1124: Verify the fifteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
 - CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
 - CA-P-1612: Complete the existing Change Atom Status capability for every Content Role using current status/folder authority, then prove the resolved model and execution behavior independently.
-- CA-P-1620: Deliver Release Version from independently reviewed source/RMED, including complete Methodology/runtime-package/project-Skill installation and actual new-image verification before exact old-image retirement.
 
 The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
 
@@ -166,11 +147,11 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 ### Current execution frontier
 
-Latest verified frontier supersedes the older snapshots below. The Operator reaffirmed universal Atom status changes; CA-P-1612 adds source-resolution and all-role verification Tasks within existing W04. Current W04 proof uses a caller-supplied Requirement fixture and does not prove authoritative whitelist/folder resolution for all roles. The Operator approved Operations Draft/Active/Archived and Analysis Draft/Done/Archived; independently reviewed R1874/R1875 are saved in bb43d3fb7. The qualified lifecycle resolver packet was independently rejected on two source gaps. R1825@3/E545@2 repair gap 2 and CA-P-1630 independently accepts that bounded repair; archive-history folder authority remains unresolved, so full packet acceptance and implementation remain gated. Release Version is the sixteenth selected capability, with independently accepted planning Tasks P1620-P1624 and the frozen N-to-N+1 promotion boundary. Bounded P1627/P1628 author source Operations and Tool RMED in parallel while P1629 binds existing interfaces; the complete packet still requires P1622 source acceptance. No release installation or image deletion is yet performed.
+Latest verified frontier supersedes the older snapshots below. The Operator reaffirmed universal Atom status changes; CA-P-1612 adds explicit source-resolution and all-role verification Tasks without increasing the fifteen-Workflow set. Current W04 proof uses a caller-supplied Requirement fixture and does not prove that the current methodology's complete whitelist and folder mappings are resolved for all roles.
 
 P1605 diagnosed a stale live discovery generation and absent query discovery bindings; P1607/P1609 repaired explicit bindings and registry-derived availability. Live reload changed generation from 1be08a172092c071a5412fb0958dba3a2cacf353276618cb644a2a4ed350c04f to 677e2f34b80b3f6aa3637dcedea7cd0b8af05b633666fdfe2ec632c5d0d727b6. Actual MCP discovery now returns both query Tools as MCP-available, 49 diagnostics and no projected CA-O-159/162 ambiguity. Client schema refresh remains unconfirmed; this is not fresh-image execution. P1608's independent source acceptance repairs the query test's Projection-write blind spot. Subsequent Engine changes are not included in P1596's earlier immutable image.
 
-P1610 corrected native Artifact query/shared Run authority; P1611 rejected its inherited snapshot-before-Run statement. P1617 repaired O158@4 and independent P1618 accepted the current exact eight-source frontier in 88405e40e. Independently accepted P1619 rebound W14 to P1618@1/O158@4 in 4d1b6d254, preserving the other fourteen routes, W15 admission and registry. Eight focused development-worker tests passed in 14.8 seconds, including rejection of rehashed old P1532 with current O158. This is source/development admission, not immutable-image, queue or client-schema acceptance; C449/P1604 retain those separate gates. The earlier native fifteen-route acceptance remains historical evidence for its bound bytes, not a current revised-source dispatch claim. Live discovery is resolved separately as C450.
+P1610 subsequently corrected native Artifact query/shared Run authority in R1849@3/M330@3/D551@4/O158@3. Independent P1611 review is completed but REJECTED admission: O158 retains a snapshot-before-Run statement contrary to current Artifact execution. C451 owns that source-order correction and fresh acceptance/rebind remainder; old P1532/O158@2 pins are retained and cannot attest the revised source. The earlier native fifteen-route acceptance remains historical evidence for its bound bytes, not a current revised-source dispatch claim. Live discovery is resolved separately as C450.
 
  P1589 now accepts all fifteen selected native contracts in the development worker: the strict W01-W08/W11-W15 suite passed, W09 passed 3/3 and W10 passed 2/2. The proofs include actual native effects, frozen inputs, graph/progress consistency and per-Run shared Journal lineage. W09 is explicitly mock-not-live-llm. Native success is not immutable-image, MCP or queue-process acceptance.
 
@@ -194,4 +175,4 @@ P1510–P1519 bind the test-first implementation packets. P1536 completed Implem
 
 ### Definition of Done
 
-This Epic is not Done until all sixteen selected Workflows have reviewed source definitions, correctly located RMED, implementations and passing functional Docker/MCP evidence for their required execution paths; every Workflow Run and Action Run in the acceptance scenarios has truthful Journal evidence; all three main Projections have passing source-traceability and rebuild evidence; and every required composite/leaf, repair or review is Done with blocking findings resolved. The coverage matrix must identify actual source, implementation, image, Run, Action and result evidence for every selected Workflow, not infer coverage from file presence or a successful image build. The two query Workflows additionally require source-snapshot-stable, read-only query proof, default-ID and selected-fetch proof, invalid-filter/coverage/pagination proof, and a no-credentials/secrets proof. Release Version additionally requires full source copy, accepted compilation, complete runtime package, project-local ca Skill without hooks, full-suite and actual new-image/installation verification, safe exact old-image retirement, and the frozen N-to-N+1 promotion boundary. Preserve required history and source/Projection/Journal/Git provenance under the approved save exception. Operator-excluded harvest work, unrelated additional capability delivery and legacy administrative closure are not required completion and are never falsely reported Done. A skipped commit requires an explicit disposition; nonblocking Concerns retain justified dispositions.
+This Epic is not Done until all fifteen selected Workflows have reviewed source definitions, correctly located RMED, implementations and passing functional Docker/MCP evidence for their required execution paths; every Workflow Run and Action Run in the acceptance scenarios has truthful Journal evidence; all three main Projections have passing source-traceability and rebuild evidence; and every required composite/leaf, repair or review is Done with blocking findings resolved. The coverage matrix must identify actual source, implementation, image, Run, Action and result evidence for every selected Workflow, not infer coverage from file presence or a successful image build. The two query Workflows additionally require source-snapshot-stable, read-only query proof, default-ID and selected-fetch proof, invalid-filter/coverage/pagination proof, and a no-credentials/secrets proof. Preserve required history and source/Projection/Journal/Git provenance under the approved save exception. Operator-excluded harvest work, additional capability delivery and legacy administrative closure are not required completion and are never falsely reported Done. A skipped commit requires an explicit disposition; nonblocking Concerns retain justified dispositions.
