@@ -66,6 +66,10 @@ Evaluations — QA rules and test-case specifications →\
 Delivery — where and how to deliver results →\
 together, RMED.
 
+Describing an outcome does not prove it was achieved →\
+Evaluations define checks →\
+actual runs provide evidence.
+
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
 Implementation for code, tests and configuration →\
@@ -78,9 +82,15 @@ Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
 **trace results back to the specification.**
 
-Work changes the project →\
-Journal records changes and execution →\
-observed outcomes create the next Concerns.
+A typical iteration starts with a Concern →\
+Analysis →\
+Plan →\
+RMED →\
+Implementation →\
+checked outcomes →\
+next Concern.
+
+Journals record changes and execution. Not every change needs every stage.
 
 ### Harness (engine)
 
@@ -193,6 +203,10 @@ From higher to lower authority:
 
 Project goals have Global Tier `-1` and no Local Tier. **Tiers are not work priority or folder depth.**
 
+Agents act within delegated authority →\
+they can analyze conflicts and propose resolutions →\
+only the Operator can resolve conflicts between active Project Principles.
+
 ### Ownership and claim scope
 
 - **Internal:** the project defines the meaning.
@@ -226,7 +240,8 @@ they can be compiled into one Projection →\
 **it is still a derived artifact, not a source of truth** →\
 for example: one prompt for how to write code, built from all M Atoms that apply to the Scope Unit.
 
-- **Entity Graph:** Entities and their relations, based on Subjects.
+- **Atom Subjects Graph:** Atoms linked to Entities through `GOVERNS` and `DEPENDS_ON`.
+- **Entities Graph:** Entities linked to other Entities through allowed relations.
 - **Terms Graph:** terms and their allowed typed relations.
 - **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
 - **Applicable Methodology:** the rules that apply to the selected scope.
@@ -248,6 +263,8 @@ Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journal
 ## Status
 
 The current framework version is declared in [version.toml](version.toml). The framework foundation is under active development; this is not yet a complete production toolchain.
+
+License: [Apache 2.0](LICENSE).
 
 ## Version History
 
