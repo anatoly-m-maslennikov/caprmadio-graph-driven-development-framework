@@ -6,7 +6,7 @@
 
 - [The Goal](#the-goal)
 - [What CAPRMEDIO is](#what-caprmedio-is)
-- [Why CAPRMEDIO works this way](#why-caprmedio-works-this-way)
+- [Why CAPRMEDIO works this way (chains-of-thoughts)](#why-caprmedio-works-this-way-chains-of-thoughts)
 - [Main framework architecture](#main-framework-architecture)
 - [Current boundaries](#current-boundaries)
 - [Status](#status)
@@ -25,7 +25,7 @@ Even a fully AI-generated project should be understandable, controllable and **n
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
 
-## Why CAPRMEDIO works this way
+## Why CAPRMEDIO works this way (chains-of-thoughts)
 
 Prompts/Skills, MCP, Apps and execution Tools form the harness →\
 the project's meaning must not depend on them →\
