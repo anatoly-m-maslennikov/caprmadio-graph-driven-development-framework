@@ -60,7 +60,11 @@ shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to wri
 **explicit, checkable Claims.**
 
 The spec is about different things →\
-Requirements, Methods, Evaluations and Delivery (RMED).
+Requirements — required outcomes →\
+Methods — how code should be written →\
+Evaluations — QA rules and test-case specifications →\
+Delivery — where and how to deliver results →\
+together, RMED.
 
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
