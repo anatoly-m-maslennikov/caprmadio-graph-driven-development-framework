@@ -14,7 +14,7 @@ CAPRMEDIO stores project knowledge as small artifacts connected by typed links. 
 
 ## Why CAPRMEDIO works this way
 
-Prompts, Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
+Prompts/Skills, MCP, Apps and execution Tools form the harness (frontend and toolset) →\
 the project's meaning must not depend on them →\
 an explicit ontology/base model defines the core: concepts, relations and constraints.
 
@@ -67,16 +67,14 @@ Tools.
 
 Work that cannot be done deterministically →\
 LLM reasoning →\
-repeatable actions need reusable Prompts.
+repeatable actions need reusable Prompts/Skills.
 
-Agents need instructions for using Tools and Prompts →\
-Skills package that guidance.
-
-Agents need a consistent interface →\
-MCP exposes Tools and reusable guidance.
-
-Repeatable sequences of actions using Tools and Skills/Prompts →\
+Repeatable sequences of actions using Tools and Prompts/Skills →\
 Workflows define their steps and control flow.
+
+Agents need one entry point →\
+the single entry Skill, `ca`, connects them to MCP →\
+MCP delivers all other Prompts/Skills and exposes Tool and Workflow execution.
 
 Files in folders are clear and inspectable →\
 they currently hold authority →\
