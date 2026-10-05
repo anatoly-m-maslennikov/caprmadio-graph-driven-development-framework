@@ -70,6 +70,10 @@ Repeated model reasoning costs time and tokens →\
 every repeatable task that can be done deterministically should run programmatically →\
 Tools.
 
+Work that cannot be done deterministically →\
+LLM reasoning →\
+repeatable actions need reusable Prompts.
+
 We cannot put everything into one prompt →\
 Tools retrieve context and assemble Prompts.
 
