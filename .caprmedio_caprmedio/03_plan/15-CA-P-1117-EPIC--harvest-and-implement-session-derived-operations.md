@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 12
-updated_at: "2026-10-05 01:04:37 +0000"
+updated_at: "2026-10-05 01:12:35 +0000"
 relations: {}
 ---
 # Summary
@@ -150,6 +150,8 @@ The original six composite stages retain the original thirteen-Workflow executio
 Latest verified frontier supersedes the older snapshots below. The Operator reaffirmed universal Atom status changes; CA-P-1612 adds explicit source-resolution and all-role verification Tasks without increasing the fifteen-Workflow set. Current W04 proof uses a caller-supplied Requirement fixture and does not prove that the current methodology's complete whitelist and folder mappings are resolved for all roles.
 
 P1605 diagnosed a stale live discovery generation and absent query discovery bindings; P1607/P1609 repaired explicit bindings and registry-derived availability. Live reload changed generation from 1be08a172092c071a5412fb0958dba3a2cacf353276618cb644a2a4ed350c04f to 677e2f34b80b3f6aa3637dcedea7cd0b8af05b633666fdfe2ec632c5d0d727b6. Actual MCP discovery now returns both query Tools as MCP-available, 49 diagnostics and no projected CA-O-159/162 ambiguity. Client schema refresh remains unconfirmed; this is not fresh-image execution. P1608's independent source acceptance repairs the query test's Projection-write blind spot. Subsequent Engine changes are not included in P1596's earlier immutable image.
+
+P1610 subsequently corrected native Artifact query/shared Run authority in R1849@3/M330@3/D551@4/O158@3. Independent P1611 review is completed but REJECTED admission: O158 retains a snapshot-before-Run statement contrary to current Artifact execution. C451 owns that source-order correction and fresh acceptance/rebind remainder; old P1532/O158@2 pins are retained and cannot attest the revised source. The earlier native fifteen-route acceptance remains historical evidence for its bound bytes, not a current revised-source dispatch claim. Live discovery is resolved separately as C450.
 
  P1589 now accepts all fifteen selected native contracts in the development worker: the strict W01-W08/W11-W15 suite passed, W09 passed 3/3 and W10 passed 2/2. The proofs include actual native effects, frozen inputs, graph/progress consistency and per-Run shared Journal lineage. W09 is explicitly mock-not-live-llm. Native success is not immutable-image, MCP or queue-process acceptance.
 
