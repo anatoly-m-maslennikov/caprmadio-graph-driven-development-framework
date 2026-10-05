@@ -40,14 +40,14 @@ _QUERY_SOURCE_ADMISSION_SPECS = (
     {
         "route": "find_and_fetch_artifacts",
         "acceptance_frontier": {
-            "atom_id": "CA-P-1532", "version": 2,
-            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md",
-            "digest": "b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432",
+            "atom_id": "CA-P-1618", "version": 1,
+            "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/29-CA-P-1618-TASK--accept-current-artifact-query-source-frontier.md",
+            "digest": "bdf10c928c10c102dc489c8e3e526ffe73e8a33d492f4dabc8b5d0129c453b1f",
         },
         "workflow": {
-            "atom_id": "CA-O-158", "version": 2,
+            "atom_id": "CA-O-158", "version": 4,
             "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-158-CORE_META_MODEL-WORKFLOW--find-and-fetch-artifacts.md",
-            "digest": "2424aa7475d2e7f98006040dc0d5826702e641190c6535a834869c1fe5a7e536",
+            "digest": "d7fdaebdd1d0c6ca7dac9aced25552c487336f2a51f18c0f03ef65d16ff4618a",
         },
         "ordered_steps": [{
             "step": {

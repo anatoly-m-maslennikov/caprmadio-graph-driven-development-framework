@@ -263,7 +263,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
         routes = {entry["route"]: entry for entry in self.manifest["routes"]}
         admissions = self.manifest["query_source_admissions"]
         self.assertEqual(list(QUERY_ROUTE_NAMES), [entry["route"] for entry in admissions])
-        self.assertEqual(["CA-P-1532", "CA-P-1535"], [entry["acceptance_frontier"]["atom_id"] for entry in admissions])
+        self.assertEqual(["CA-P-1618", "CA-P-1535"], [entry["acceptance_frontier"]["atom_id"] for entry in admissions])
         self.assertNotIn("CA-P-1543", {pin["atom_id"] for entry in admissions
                                         for pin in [entry["acceptance_frontier"], entry["workflow"],
                                                     *[item["step"] for item in entry["ordered_steps"]],
@@ -317,21 +317,38 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, destination)
 
-            for mutation in ("missing", "third"):
+            old_frontier = {
+                "atom_id": "CA-P-1532", "version": 2,
+                "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md",
+                "digest": "b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432",
+            }
+            old_receipt = project / old_frontier["source_path"]
+            old_receipt.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / old_frontier["source_path"], old_receipt)
+
+            for mutation in ("missing", "third", "old-artifact-frontier"):
                 with self.subTest(mutation=mutation):
                     candidate = {key: copy.deepcopy(value) for key, value in self.manifest.items()
                                  if key not in {"manifest_ref", "canonical_manifest_sha256"}}
                     if mutation == "missing":
                         candidate["query_source_admissions"] = candidate["query_source_admissions"][:1]
-                    else:
+                    elif mutation == "third":
                         candidate["query_source_admissions"].append(
                             copy.deepcopy(candidate["query_source_admissions"][0])
                         )
+                    else:
+                        admission = candidate["query_source_admissions"][0]
+                        admission["acceptance_frontier"] = old_frontier
+                        self.assertEqual("CA-O-158", admission["workflow"]["atom_id"])
+                        self.assertEqual(4, admission["workflow"]["version"])
+                        self.assertEqual(candidate["routes"][13]["workflow"], admission["workflow"])
                     candidate["canonical_manifest_sha256"] = canonical_digest(candidate)
                     (project / self.manifest["manifest_ref"]).write_text(
                         __import__("json").dumps(candidate), encoding="utf-8",
                     )
-                    with self.assertRaises(SelectedRouteError):
+                    expected = ("differs from the accepted source frontier"
+                                if mutation == "old-artifact-frontier" else "exactly two routes")
+                    with self.assertRaisesRegex(SelectedRouteError, expected):
                         load_selected_manifest(project)
 
     def test_every_selected_route_forwards_one_mutation_free_preview(self) -> None:
