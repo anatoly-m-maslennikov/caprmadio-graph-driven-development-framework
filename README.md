@@ -188,6 +188,11 @@ Scope Units + typed relations + Subjects →\
 
 ### Main projections
 
+There can be a lot of Atoms →\
+they can be compiled into one Projection →\
+**it is still a derived artifact, not a source of truth** →\
+for example: one prompt for how to write code, built from all M Atoms that apply to the Scope Unit.
+
 - **Entity Graph:** Entities and their relations, based on Subjects.
 - **Terms Graph:** terms and their allowed typed relations.
 - **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
