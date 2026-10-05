@@ -34,7 +34,11 @@ ROUTE_CASES = (
     ("W11", "build_entities_graph"),
     ("W12", "build_terms_graph"),
     ("W13", "build_applicable_methodology"),
+    ("W14", "find_and_fetch_artifacts"),
+    ("W15", "find_and_fetch_journal_events"),
 )
+MANIFEST_ROUTE_NAMES = tuple(route for _, route in ROUTE_CASES)
+QUERY_SOURCE_ADMISSION_ROUTE_NAMES = MANIFEST_ROUTE_NAMES[-2:]
 JOURNAL_CASES = tuple(f"J{number:02d}" for number in range(1, 9))
 
 
@@ -72,6 +76,15 @@ def _pin_paths(route: Mapping[str, Any]) -> Iterable[Mapping[str, Any]]:
     yield from route["native_action_calls"]
 
 
+def _admission_pin_paths(admission: Mapping[str, Any]) -> Iterable[Mapping[str, Any]]:
+    yield admission["acceptance_frontier"]
+    yield admission["workflow"]
+    for item in admission["ordered_steps"]:
+        yield item["step"]
+        yield item["action"]
+    yield from admission["ordered_actions"]
+
+
 @dataclass(frozen=True)
 class GoldenCase:
     case_id: str
@@ -105,15 +118,27 @@ class FixtureLease:
 class GoldenProject:
     """One fresh, source-pinned Project per Docker/MCP case."""
 
-    def __init__(self, source_root: Path, root: Path, case: GoldenCase) -> None:
+    def __init__(self, source_root: Path, root: Path, case: GoldenCase,
+                 *, execution_project_root: str | None = None) -> None:
         self.source_root = Path(source_root).resolve(strict=True)
         self.root = Path(root).resolve(strict=True)
         self.case = case
+        if execution_project_root is not None and (not execution_project_root.startswith("/") or execution_project_root.rstrip("/") == ""):
+            raise GoldenCorpusError("execution_project_root must be an absolute container-visible path")
+        self.execution_project_root = execution_project_root.rstrip("/") if execution_project_root else None
         self.manifest: dict[str, Any] | None = None
+        self._cached_revert_parameters: dict[str, Any] | None = None
+        self._cached_compiler_parameters: dict[str, Any] | None = None
+        self._cached_compiler_frontier_digest: str | None = None
 
     @property
     def manifest_path(self) -> Path:
         return self.root / MANIFEST_REF
+
+    def _execution_path(self, host_path: Path) -> str:
+        """Render one known fixture path for its mounted execution Project."""
+        relative = host_path.resolve(strict=True).relative_to(self.root).as_posix()
+        return (f"{self.execution_project_root}/{relative}" if self.execution_project_root else str(host_path))
 
     def prepare(self) -> dict[str, Any]:
         """Create the only Project a harness may mutate, then freeze its pins."""
@@ -131,9 +156,16 @@ class GoldenProject:
             '[[operators]]\nname = "golden-operator"\nrole = "project owner"\n',
             encoding="utf-8",
         )
+        # A valid, empty canonical Journal is an observable query frontier;
+        # it is not a fabricated Run receipt.
+        (self.root / ".caprmedio_caprmedio/_journal").mkdir(parents=True, exist_ok=True)
         self._write_native_authority()
         self._write_graph_authority()
         self._write_compiler_authority()
+        # W09 source carriers and its writable sandbox are part of the
+        # disposable Project's initial state, not a preview-time mutation.
+        if self.case.case_id == "W09":
+            self.native_implementation_parameters()
         (self.root / "fixture/authority").mkdir(parents=True, exist_ok=True)
         (self.root / self.case.authority_path).write_text(
             json.dumps({"case": self.case.case_id, "route": self.case.route, "state": "before"}),
@@ -276,7 +308,15 @@ class GoldenProject:
         extension.mkdir(parents=True, exist_ok=True)
         (extension / "CA-M-302--extension.md").write_text(carrier("CA-M-302"), encoding="utf-8")
         (source / "003_PROJECT_CONFIGURATION/07_delivery/CA-D-303--project.md").write_text(carrier("CA-D-303"), encoding="utf-8")
-        (source / "001_CORE_META_MODEL/caprmedio_framework_default_settings.toml").write_text("", encoding="utf-8")
+        # W15 must inherit the authoritative bounded-query settings rather
+        # than an empty local fallback.  This is a source copy into the
+        # disposable Project, never a new defaults policy.
+        defaults_relative = (
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml"
+        )
+        shutil.copy2(self.source_root / defaults_relative,
+                     source / "001_CORE_META_MODEL/caprmedio_framework_default_settings.toml")
         (source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text(
             '[extensions.example]\nenabled = true\nrevision = "v2"\n', encoding="utf-8"
         )
@@ -291,7 +331,8 @@ class GoldenProject:
                 'delivery_path = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"\n'
             )
 
-    def native_compiler_parameters(self, operation: str = "dry_run", *, expected_source_frontier_digest: str | None = None) -> dict[str, Any]:
+    def native_compiler_parameters(self, operation: str = "dry_run", *, expected_source_frontier_digest: str | None = None,
+                                   execution_project_root: str | None = None) -> dict[str, Any]:
         """Actual CA-O-011 request; it deliberately has no fabricated receipt."""
         import sys
         compiler_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "COMPILE_APPLICABLE_METHODOLOGY"
@@ -299,7 +340,7 @@ class GoldenProject:
             sys.path.insert(0, str(compiler_root))
         import compile_applicable_methodology
         request: dict[str, Any] = {
-            "operation": operation, "project_root": self.root.as_posix(),
+            "operation": operation, "project_root": execution_project_root or self.root.as_posix(),
             "governed_bindings": compile_applicable_methodology.governed_bindings(
                 self.root, compile_applicable_methodology.methodology_paths(self.root)
             ),
@@ -317,20 +358,143 @@ class GoldenProject:
         if str(implementation_root) not in sys.path:
             sys.path.insert(0, str(implementation_root))
         import implementation_actions
-        bindings = implementation_actions.current_source_bindings()
+        # Copy exactly the reviewed, bounded carrier frontier into the fresh
+        # Project.  The handler then re-observes it from that Project rather
+        # than borrowing this repository's prompt authority.
+        for row in implementation_actions._reviewed_binding_rows():
+            relative = _safe_relative(row["path"], name="implementation source binding")
+            source, target = self.source_root / relative, self.root / relative
+            if not source.is_file():
+                raise GoldenCorpusError(f"implementation source is unavailable: {relative}")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, target)
+        bindings = implementation_actions.current_source_bindings(self.root)
         methods = [row["path"] for row in bindings if str(row["atom_id"]).startswith("CA-M-")]
+        workspace = self.root / "fixture/disposable-workspace"
+        workspace.mkdir(parents=True, exist_ok=True)
         base = {
-            "source_bindings": bindings, "permissions": {"allowed": True},
-            "method_projection": implementation_actions.prepare_method_projection(methods),
+            "context": "Isolated",
+            "selected_project": {"kind": "selected_project", "source_root": ".caprmedio_caprmedio",
+                                 "source_references": bindings},
+            "source_bindings": bindings,
+            "permissions": {"allowed": True, "implementation_workspace": {
+                "kind": "disposable_workspace", "path": self._execution_path(workspace), "allow_write": True}},
+            "workspace": self._execution_path(workspace),
+            "method_projection": implementation_actions.prepare_method_projection(methods, self.root),
             "requirements_delivery": ["CA-R-1843", "CA-D-544"], "evaluations": ["CA-E-563"],
             "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
             "golden_e2e": ["disposable executable assertion"], "baseline_command": "python fixture_assertion.py",
             "retry": {"consumed": 0, "limit": 1}, "retained_state": {"transport": "mock-not-live-llm"},
         }
-        return {"base_packet": base, "run_visit_limits": {"CA-O-094": 2}, "step_packets": {
+        return {"base_packet": base, "run_visit_limits": {"CA-O-091": 4, "CA-O-094": 2}, "step_packets": {
             step: {"context": context, "step_marker": step}
             for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
         }}
+
+    def native_query_parameters(self, route: str) -> dict[str, Any]:
+        """Closed P1563 query input shapes; both selected queries are read-only."""
+        if route == "find_and_fetch_artifacts":
+            return {"query_request": {"limit": 1}}
+        if route == "find_and_fetch_journal_events":
+            return {"query_request": {"limit": 1}}
+        raise GoldenCorpusError("query parameters require a selected query route")
+
+    def native_revert_parameters(self) -> dict[str, Any]:
+        """Return the admitted CA-O-131 structural-recovery carrier for W10.
+
+        The partial structural state and every approval record exist only in
+        this disposable Project.  Pins are hashes of their actual bytes, so a
+        stale approval cannot be made valid by a marker or forecast string.
+        """
+        if self._cached_revert_parameters is not None:
+            return self._cached_revert_parameters
+        import sys
+        revert_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "WORKFLOW_OPERATIONS" / "REVERT_CHANGES"
+        structure_root = revert_root.parent / "PROJECT_STRUCTURE"
+        for location in (revert_root, structure_root):
+            if str(location) not in sys.path:
+                sys.path.insert(0, str(location))
+        from native_revert_provider import make_native_revert_service
+        from work_journal import canonical_json_bytes
+
+        def record(name: str, value: object) -> dict[str, str]:
+            evidence = self.root / ".caprmedio_caprmedio/evidence"
+            evidence.mkdir(parents=True, exist_ok=True)
+            path = evidence / name
+            path.write_bytes(canonical_json_bytes(value))
+            return {"evidence_ref": path.relative_to(self.root).as_posix(),
+                    "evidence_hash": file_digest(path)}
+
+        before = "schema_version = 1\n"
+        after = before + "\n# admitted partial cutover\n"
+        structural = self.root / ".caprmedio_caprmedio/rollback-structure.toml"
+        structural.write_text(after, encoding="utf-8")
+        relative = structural.relative_to(self.root).as_posix()
+        boundary = {"authorized_boundary": "golden-exact-cutover", "references": [], "toml": {
+            "path": relative, "before_text": before,
+            "before_sha256": hashlib.sha256(before.encode()).hexdigest(),
+            "after_sha256": hashlib.sha256(after.encode()).hexdigest(),
+        }}
+        current = digest({"members": [{"path": relative, "sha256": hashlib.sha256(after.encode()).hexdigest()}]})
+        restored = digest({"members": [{"path": relative, "sha256": hashlib.sha256(before.encode()).hexdigest()}]})
+        effect: dict[str, Any] = {
+            "effect_id": "golden-structure-rollback", "target_id": "structure:golden-exact-cutover",
+            "expected_before": "recorded partial cutover", "expected_after": "recorded pre-cutover",
+            "expected_current_hash": current, "expected_result_hash": restored,
+            "before_evidence": "before:golden-structure", "after_evidence": "after:golden-structure",
+            "capability_binding": {
+                "capability_id": "structure.rollback_scope_unit_change",
+                "parameters": {"recovery_boundary": boundary}, "target": {"recovery_boundary": boundary},
+                "permission_evidence": {"capability_id": "structure.rollback_scope_unit_change", "granted": True,
+                                        "evidence_ref": "", "evidence_hash": ""},
+                "evidence_refs": [],
+            },
+        }
+        request: dict[str, Any] = {
+            "selected_change_refs": [], "targets": [effect["target_id"]], "affected_reference_hashes": {},
+            "governing_definition_hash": "", "operator_decision": {
+                "decision_id": "golden-approved-rollback", "approved_effect_ids": [effect["effect_id"]], "status": "approved"},
+            "cancellation_boundary": {"after_effect_ids": [effect["effect_id"]]},
+            "executor_permission": {"capability": "governed-reversal", "granted": True},
+            "durable_evidence_location": "journal://golden-disposable", "ordered_effects": [effect],
+            "expected_result": {"state": "reverted"}, "history_reference_evidence": [],
+            "current_hashes": {effect["target_id"]: current},
+        }
+        selected = record("selected-change.json", {"accepted": True, "selected_effect_ids": [effect["effect_id"]]})
+        history = record("preserved.json", {"history": "retained", "references": "preserved"})
+        before_pin = record("rollback-before.json", {"state": effect["expected_before"]})
+        after_pin = record("rollback-after.json", {"state": effect["expected_after"]})
+        permission = record("rollback-permission.json", {"capability_id": "structure.rollback_scope_unit_change", "granted": True})
+        request.update(selected_change=[selected], selected_change_refs=[selected["evidence_ref"]],
+                       history_record=[history], history_reference_evidence=[history["evidence_ref"]],
+                       affected_reference=[history], affected_reference_hashes={history["evidence_ref"]: history["evidence_hash"]},
+                       before_record=[before_pin], after_record=[after_pin])
+        effect.update(before_evidence=before_pin["evidence_ref"], after_evidence=after_pin["evidence_ref"])
+        effect["capability_binding"].update(permission_evidence={"capability_id": "structure.rollback_scope_unit_change", "granted": True, **permission},
+                                              evidence_refs=[before_pin["evidence_ref"], after_pin["evidence_ref"], history["evidence_ref"]])
+        for name in ("operator_decision", "executor_permission"):
+            value = dict(request[name])
+            observed = {**value, "ordered_effects": request["ordered_effects"]} if name == "operator_decision" else value
+            request[name] = {**value, **record(f"{name}.json", observed)}
+        definition = (
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/"
+            "CA-O-131-CORE_META_MODEL-ACTION--apply-an-approved-reversal.md"
+        )
+        source = self.source_root / definition
+        target = self.root / definition
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+        definition_pin = file_digest(target)
+        request.update(governing_definition={"atom_id": "CA-O-131", "revision": 2,
+                                              "evidence_ref": definition, "evidence_hash": definition_pin},
+                       governing_definition_hash=definition_pin)
+        service = make_native_revert_service({"project_root": str(self.root), "approved_reversal_request": request})
+        admitted = service.admit(request)
+        if admitted.get("outcome") != "admitted":
+            raise GoldenCorpusError(f"W10 current evidence was not admitted: {admitted}")
+        self._cached_revert_parameters = {"approved_reversal_manifest": admitted["approved_reversal_manifest"]}
+        return self._cached_revert_parameters
 
     def _carrier(self, atom_id: str, slug: str, summary: str) -> dict[str, str]:
         return {
@@ -354,8 +518,29 @@ class GoldenProject:
         route = self.case.route
         if route == "run_implementation_workflow":
             return self.native_implementation_parameters()
+        if route == "revert_changes":
+            return self.native_revert_parameters()
+        if route in {"find_and_fetch_artifacts", "find_and_fetch_journal_events"}:
+            return self.native_query_parameters(route)
         if route == "build_applicable_methodology":
-            return self.native_compiler_parameters()
+            import sys
+            compiler_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "COMPILE_APPLICABLE_METHODOLOGY"
+            if str(compiler_root) not in sys.path:
+                sys.path.insert(0, str(compiler_root))
+            import compile_applicable_methodology
+            assessed = compile_applicable_methodology.run_request(self.native_compiler_parameters())
+            if assessed.get("outcome") != "assessed":
+                raise GoldenCorpusError(f"W13 source assessment was not accepted: {assessed}")
+            frontier = assessed["source_frontier_digest"]
+            if frontier != self._cached_compiler_frontier_digest:
+                self._cached_compiler_frontier_digest = frontier
+                self._cached_compiler_parameters = self.native_compiler_parameters(
+                    "apply", expected_source_frontier_digest=frontier,
+                    execution_project_root=self.execution_project_root,
+                )
+            if self._cached_compiler_parameters is None:
+                raise GoldenCorpusError("W13 assessment did not produce an apply carrier")
+            return self._cached_compiler_parameters
         if route == "build_entities_graph":
             return self.native_graph_parameters("entities")
         if route == "build_terms_graph":
@@ -434,15 +619,39 @@ class GoldenProject:
         if not isinstance(manifest, dict) or not isinstance(manifest.get("routes"), list):
             raise GoldenCorpusError("selected workflow manifest does not contain a route list")
         actual_routes = tuple(item.get("route") for item in manifest["routes"] if isinstance(item, dict))
-        expected_routes = tuple(route for _, route in ROUTE_CASES)
+        expected_routes = MANIFEST_ROUTE_NAMES
         if actual_routes != expected_routes:
-            raise GoldenCorpusError("selected workflow manifest is not the exact W01--W13 route portfolio")
+            raise GoldenCorpusError("selected workflow manifest is not the exact closed fifteen-route portfolio")
         freshness = manifest.get("source_freshness")
         if not isinstance(freshness, dict):
             raise GoldenCorpusError("selected workflow manifest omits source freshness")
         registry = _safe_relative(freshness.get("selected_source_registry_ref"), name="source registry")
         self._copy_pinned(registry, freshness.get("selected_source_registry_digest"))
         copied: set[Path] = {registry}
+        admissions = manifest.get("query_source_admissions")
+        if not isinstance(admissions, list) or len(admissions) != len(QUERY_SOURCE_ADMISSION_ROUTE_NAMES):
+            raise GoldenCorpusError("selected workflow manifest omits the two query-source admissions")
+        admission_routes = tuple(item.get("route") for item in admissions if isinstance(item, Mapping))
+        if admission_routes != QUERY_SOURCE_ADMISSION_ROUTE_NAMES:
+            raise GoldenCorpusError("selected workflow query-source admissions are incomplete or out of order")
+        routes_by_name = {item.get("route"): item for item in manifest["routes"] if isinstance(item, Mapping)}
+        for admission in admissions:
+            if not isinstance(admission, Mapping) or set(admission) != {
+                    "route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions"}:
+                raise GoldenCorpusError("selected workflow query-source admission is malformed")
+            route = routes_by_name.get(admission["route"])
+            if not isinstance(route, Mapping) or route.get("mutation_capable") is not False:
+                raise GoldenCorpusError("selected workflow query-source admission is not read-only")
+            for field in ("workflow", "ordered_steps", "ordered_actions"):
+                if admission[field] != route.get(field):
+                    raise GoldenCorpusError("query-source admission does not match its selected route")
+            for pin in _admission_pin_paths(admission):
+                if not isinstance(pin, Mapping):
+                    raise GoldenCorpusError("selected workflow query-source pin is malformed")
+                relative = _safe_relative(pin.get("source_path"), name="query-source pin")
+                if relative not in copied:
+                    self._copy_pinned(relative, pin.get("digest"))
+                    copied.add(relative)
         for route in manifest["routes"]:
             if not isinstance(route, Mapping):
                 raise GoldenCorpusError("selected workflow route is malformed")
@@ -485,10 +694,8 @@ class GoldenProject:
         if self.manifest is None:
             raise GoldenCorpusError("prepare the golden Project before creating a request")
         route = self.case.route
-        # W09--W13 remain the reviewed legacy corpus until their own packets.
-        # W01--W08 use precisely the native Action payloads above.
         parameters = self.native_parameters() if self.case.case_id in {
-            "W01", "W02", "W03", "W04", "W05", "W06", "W07", "W08", "W09", "W11", "W12", "W13"
+            "W01", "W02", "W03", "W04", "W05", "W06", "W07", "W08", "W09", "W10", "W11", "W12", "W13", "W14", "W15"
         } else {
             "fixture_schema": "selected-workflows-docker-golden/v1", "case_id": self.case.case_id,
             "route": route, "authority_path": self.case.authority_path,
@@ -499,15 +706,17 @@ class GoldenProject:
                 if self.case.case_id in {"W11", "W12"}
                 else [".caprmedio_caprmedio/project_structure.toml"] if self.case.case_id in {"W05", "W06", "W07", "W08"}
                 else [str(parameters.get("target", parameters.get("predecessor", parameters.get("carrier", {}))).get("path", self.case.authority_path))])
-        effects = [{"type": route, "target": refs[0]}]
+        effects: list[dict[str, Any]] = [] if self.case.case_id in {"W14", "W15"} else [{"type": route, "target": refs[0]}]
         request: dict[str, Any] = {
             "operation_route": route,
             "mode": mode,
             "request_id": request_id,
             "parameters": parameters,
             "parameters_digest": digest(parameters),
-            "target_frontier": {"refs": refs, "target_frontier_digest": digest(refs)},
-            "effects": {"descriptors": effects, "effects_digest": digest(effects)},
+            "target_frontier": refs,
+            "target_frontier_digest": digest(refs),
+            "effects": effects,
+            "effects_digest": digest(effects),
             "definition_manifest": {
                 "manifest_ref": MANIFEST_REF,
                 "manifest_digest": self.manifest["canonical_manifest_sha256"],
@@ -516,8 +725,7 @@ class GoldenProject:
             "initiative": {
                 "initiative_id": f"golden-{self.case.case_id}",
                 "instruction_summary": f"Disposable golden {self.case.case_id}",
-                "reference": "fixture/initiative.json",
-                "sealed": True,
+                "initiative_ref": "fixture/initiative.json",
             },
         }
         if mode == "execute":
@@ -525,24 +733,41 @@ class GoldenProject:
                 proposal_receipt=receipt,
                 proposal_receipt_digest=receipt_digest,
                 assigned_action_id=f"golden-{self.case.case_id}-action",
-                requested_run_ids={
-                    "workflow_run_id": request_id,
-                    "action_run_ids": [f"{request_id}:action"],
-                },
+                requested_runs=self._requested_runs(request_id),
             )
             request["operator_authorization"] = {
-                "reference": "fixture/operator-authorization.json",
-                "sealed": True,
+                "authorization_ref": "fixture/operator-authorization.json",
+                "authorization_freshness": {"state": "current", "digest": "0" * 64},
                 "request_id": request_id,
                 "operation_route": route,
                 "proposal_receipt_digest": receipt_digest,
                 "parameters_digest": request["parameters_digest"],
-                "target_frontier_digest": request["target_frontier"]["target_frontier_digest"],
-                "effects_digest": request["effects"]["effects_digest"],
+                "target_frontier_digest": request["target_frontier_digest"],
+                "effects_digest": request["effects_digest"],
                 "definition_manifest": request["definition_manifest"],
                 "source_freshness": request["source_freshness"],
             }
         return request
+
+    def _requested_runs(self, run_id: str) -> list[dict[str, Any]]:
+        """Use the shared interpreter to derive exact requested identities."""
+        if self.manifest is None:
+            raise GoldenCorpusError("prepare the golden Project before declaring requested Runs")
+        import sys
+        app = Path(__file__).resolve().parents[1]
+        if str(app) not in sys.path:
+            sys.path.insert(0, str(app))
+        from selected_execution import SelectedExecution
+        execution = {
+            "mode": "execute",
+            "operation_route": self.case.route,
+            "definition_manifest": {"manifest_ref": MANIFEST_REF,
+                                    "manifest_digest": self.manifest["canonical_manifest_sha256"]},
+            "source_freshness": self.manifest["source_freshness"],
+        }
+        graph = SelectedExecution(self.root)._validate_graph(execution)
+        limits = self.native_parameters().get("run_visit_limits") if isinstance(self.native_parameters(), Mapping) else None
+        return SelectedExecution.build_requested_runs(graph, run_id, limits)
 
     def corrupt_one_bound_source(self) -> Path:
         """Create a deliberate currentness conflict after all clean hashes are saved."""
