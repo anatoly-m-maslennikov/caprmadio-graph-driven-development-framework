@@ -430,7 +430,7 @@ class SelectedExecution:
                         if structural_handler is not None:
                             return dict(structural_handler(context))
                         return {"result": "blocked", "terminal_outcome": "interrupted_pending", "effect_refs": []}
-                    result = handler(context["parameters"])
+                    result = handler(self._compiler_parameters_for_executor(context))
                     if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
                         raise SelectedExecutionError("compiler Action returned an invalid result")
                     outcome = result["outcome"]
@@ -499,6 +499,28 @@ class SelectedExecution:
         except ImportError:
             pass
         return available
+
+    def _compiler_parameters_for_executor(self, context: Mapping[str, Any]) -> dict[str, Any]:
+        """Bind the compiler's path reference to this Action executor only.
+
+        The frozen request describes the host Project when the Action is
+        admitted.  A Docker worker sees that same Project at ``/project``.
+        Preserve every frozen value other than the execution-local path, and
+        refuse a missing or substituted executor root rather than letting an
+        Action select an arbitrary filesystem root.
+        """
+        parameters = context.get("parameters")
+        if not isinstance(parameters, Mapping):
+            raise SelectedExecutionError("compiler Action frozen parameters are invalid")
+        frozen_root = parameters.get("project_root")
+        if not isinstance(frozen_root, str) or not frozen_root:
+            raise SelectedExecutionError("compiler Action frozen Project root is invalid")
+        executor_root = context.get("project_root")
+        if not isinstance(executor_root, Path) or executor_root != self.root:
+            raise SelectedExecutionError("compiler Action execution Project root is invalid")
+        request = dict(parameters)
+        request["project_root"] = executor_root.as_posix()
+        return request
 
     def run_directory(self, run_id: str) -> Path:
         if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
