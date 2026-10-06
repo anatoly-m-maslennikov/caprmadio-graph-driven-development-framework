@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 10:52:36 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 11:21:41 +0000"
 subjects:
   governs: "Git-backed Release binding baseline reconciliation"
   depends_on: [Manifest, Git, Journal, Operator, MCP, Evaluation]
@@ -38,6 +38,10 @@ record the Operator-approved, exact current Git-backed binding observation throu
 - preserve a sealed observation for recording-only retry. actual observation and later actual refresh are distinct recorded effects; neither proves full release acceptance.
 
 ## Definition of Done
+
+### Observed result
+
+source and implementation were independently accepted; seven reconciliation cases plus five refresh and sixteen lifecycle cases pass. the approved observation was appended once at 2026-10-06T15:20:21+04:00 as `release-manifest-reconciliation:99232777f00d64d09e48155c3aefd1fe3b35c94678a16dd64d99a9b5c6daef59`, recovered carrier revision 3. it witnesses Git HEAD `7a15f736b5def924716978f102516c099eabbe2c`, blob `9ccfab16d4d79ac67e15ea886f10fc440f82a888`, exact existing raw digest `e58209ebdfa598e7ed30b87abeac43606ab3fec35238c99870ea1a01a5a62946`, and the original revision-2 predecessor. historical Journal prefixes, Manifest bytes and installed N's selector stayed unchanged. no observation recording is pending. CA-P-1780 then completed the separately authorized actual refresh.
 
 source and implementation have independent acceptance and focused fixture proof; the actual observed state is appended exactly once with verified Git/current/predecessor evidence and no unresolved pending recording; old Journal bytes, the Manifest and installed N are unchanged. CA-P-1780 then owns the fresh authorized admission refresh.
 

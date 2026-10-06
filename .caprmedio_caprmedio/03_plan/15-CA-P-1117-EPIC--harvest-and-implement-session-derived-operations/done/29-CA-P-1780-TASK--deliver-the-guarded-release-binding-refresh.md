@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 10:46:48 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 11:21:41 +0000"
 subjects:
   governs: "Guarded Release binding refresh delivery"
   depends_on: [Manifest, Delivery, Evaluation, Journal, Operator, MCP]
@@ -41,7 +41,7 @@ deliver and use the Operator-approved, source-first guarded refresh of the exist
 
 ### Observed frontier
 
-source v3 and code/regression proofs are independently accepted at 6b9ae7a5c/d24eb8d89. the first actual attempt used the exact read-only plan and registered Operator context, then returned blocked before any write or pending intent because the latest canonical Journal carrier event differs from the exact Git-backed input bytes. CA-C-497 owns that pre-existing history gap. no refresh, N9 dispatch or promotion is claimed. keep this Task Active.
+source v3 and code/regression proofs are independently accepted at 6b9ae7a5c/d24eb8d89. the first attempt stopped before writing because of a pre-existing Journal history gap. after CA-P-1781's approved recovered state v3, the actual guarded refresh completed at 2026-10-06T15:21:02+04:00 and was recorded once as `release-manifest:57af554ee877ac760ed9ec157b191cfd4dda085927de0a35b8fb20fd659b11e8`, carrier revision 4, linked to that state. strict loading admits all sixteen routes with canonical digest `19757c9cb6e5977f5193e5b2fcf5fccee0efabb923a7fee7f99bac43d820bc98` and raw digest `8a34d012baf806e536b754d42396f260cf97e0bdd93854780ef87ff4acf18403`. historical Journal prefixes and installed N's selector are unchanged; no publication is pending. no N9 dispatch or promotion is claimed by this Task.
 
 the amended source contract and implementation have independent acceptance; focused initial and refresh regression suites pass; the actual canonical binding is refreshed and strictly reopened; its Journal record is verified with no pending publication; installed N remains unchanged. this Task does not claim the complete Release gate or Epic closure.
 

@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 21
-updated_at: "2026-10-06 10:46:48 +0000"
+version: 22
+updated_at: "2026-10-06 11:21:41 +0000"
 relations: {}
 ---
 # Summary
@@ -55,7 +55,7 @@ The bounded N8 source repairs are saved: module-owned executable scratch, gitles
 
 ### Current Operator-selected scope
 
-CA-P-1780's source/code refresh capability is independently accepted and committed at 6b9ae7a5c/d24eb8d89. its first actual authorized publication was blocked before any Manifest write or pending intent: later Git rebinding changes are not present in the canonical carrier Journal history. CA-C-496's capability decision is resolved; CA-C-497 records the separate history-reconciliation decision. installed N and the binding are unchanged, and N9 has not been dispatched. no stale-history guard is bypassed.
+CA-P-1780 and CA-P-1781 are Done. the first refresh correctly stopped before writing because later Git-backed binding changes had no generic carrier event. the separately approved observer, independently reviewed and committed at `7a15f736b`, records the exact current state once as recovered revision 3 at 2026-10-06T15:20:21+04:00. the later actual guarded refresh is completed revision 4 at 2026-10-06T15:21:02+04:00, explicitly linked to that observation. strict admission accepts all sixteen routes with canonical digest `19757c9cb6e5977f5193e5b2fcf5fccee0efabb923a7fee7f99bac43d820bc98`; no binding event is pending. historical Journal prefixes and installed N are unchanged. C496/C497 are resolved; no stale-history guard was bypassed. fresh N9 dispatch and all remaining Release gates are still required and not yet claimed.
 
 the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 

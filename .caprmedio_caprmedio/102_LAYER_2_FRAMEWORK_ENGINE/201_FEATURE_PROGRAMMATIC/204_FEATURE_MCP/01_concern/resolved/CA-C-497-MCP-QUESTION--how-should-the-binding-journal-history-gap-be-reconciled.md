@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: MCP
 local_tier: Standard
 global_tier: 11
-status: Active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-06 10:55:42 +0000"
+version: 2
+updated_at: "2026-10-06 11:21:41 +0000"
 subjects:
   governs: "Release binding Journal history reconciliation"
   depends_on: [Operator, Manifest, Journal, Git, Source Carrier, MCP]
@@ -37,4 +37,4 @@ the canonical selected-workflow binding and its existing carrier history only. d
 
 ## Details
 
-the Operator approved source-first reconciliation and continuation. R1893/M349/E592/D587 define a separate exact Git-backed observation and have independent source acceptance. the existing recovered-state schema has no top-level `previous_result_event`; D587 fixes an exact nested predecessor witness instead of fabricating a historical change. CA-P-1781 owns implementation and actual proof; keep release dispatch paused until its observation and CA-P-1780's refresh are durably verified.
+the Operator approved source-first reconciliation and continuation. R1893/M349/E592/D587 and implementation commit `7a15f736b` have independent acceptance with 28 focused reconciliation/refresh/lifecycle passes. the existing recovered-state schema preserves an exact nested predecessor witness rather than fabricating a historical change. actual observation `release-manifest-reconciliation:99232777f00d64d09e48155c3aefd1fe3b35c94678a16dd64d99a9b5c6daef59` records current state v3; actual refresh `release-manifest:57af554ee877ac760ed9ec157b191cfd4dda085927de0a35b8fb20fd659b11e8` records the linked change v4. both are verified once, no binding event is pending, and ordinary strict admission accepts all sixteen routes. historical Journal bytes and installed N are preserved. CA-P-1781 and CA-P-1780 are Done; this resolves the history gap, not the remaining full Release gate.
