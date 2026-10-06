@@ -8,7 +8,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 10:46:48 +0000"
+updated_at: "2026-10-06 10:55:42 +0000"
 subjects:
   governs: "Release binding Journal history reconciliation"
   depends_on: [Operator, Manifest, Journal, Git, Source Carrier, MCP]
