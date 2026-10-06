@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 19:02:03 +0000"
 subjects:
   governs: "Repair N12 image gate fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier]
@@ -38,3 +38,9 @@ repair confirmed image-gate fixture or implementation defects against current RM
 
 the observed failures are explained and fixed against current authority; focused regression suites pass and independent review accepts the bounded change. actual full Release acceptance remains with the parent Plan.
 
+## Result
+
+- the fixture now reflects the sealed rollback retention condition: `retain_prior` yields a retained prior image and the exact settings condition reference.
+- exact immutable-image identity, all-container inspection, rollback selector and command/receipt assertions remain intact.
+- the two final regression cases passed in 77.339 seconds with exit 0; independent read-only review accepts the bounded patch.
+- the complete N13 Unit gate and later actual Release gates remain required under the parent Plan; the uncaptured long local module run is not claimed passing.

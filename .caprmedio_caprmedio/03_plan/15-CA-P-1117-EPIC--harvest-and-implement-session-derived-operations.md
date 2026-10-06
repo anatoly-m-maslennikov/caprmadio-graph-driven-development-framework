@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 27
-updated_at: "2026-10-06 18:24:00 +0000"
+updated_at: "2026-10-06 19:02:03 +0000"
 relations: {}
 ---
 # Summary
@@ -57,7 +57,7 @@ the N11 predecessor mismatch has an accepted source-first repair. R1878/M332/E57
 
 fresh N12 `release-epic-resume-20261006-N12` completed delivery and compilation and ran the complete closed Unit suite: 1,987 testcase outcomes, 26 failures, 23 errors and zero skipped in 2909.715539457997 seconds. the later currentness guard correctly interrupted the Run after final-review source changes. all 22 actual Run Events are retained (11 starts, 8 completions, 3 interruptions), with no pending recording or implied later gate. no package/image/canary/E2E/Full Gate/promotion/retirement followed. P1801 decomposes the 49 observed fixture failures into five bounded lanes; their focused acceptance does not replace a fresh integration gate.
 
-the prepared-new replacement source contract is accepted as R1041 v8 and O128 v4. its exact registered eight-occurrence lifecycle pin refresh was actually published as binding revision 8; the subsequent normal Release-admission refresh publishes revision 9, canonical digest `e26598708056b90f9bea85148a02b98bab51a74d66b987f1232ad1cb18eb77aa`, with all sixteen route identities/topology unchanged and exact Journal receipts. D572 v14 binds D567 v4 and D580 v5. strict source loading accepts the current projection. live Release Version context is current; separate Create/Update context errors are under bounded diagnosis, not claimed healthy. use a fresh N13 only after remaining focused repair lanes are accepted; do not replay N12 or change installed N before all mandatory gates pass.
+the prepared-new replacement source contract is accepted as R1041 v8 and O128 v4. its exact registered eight-occurrence lifecycle pin refresh was actually published as binding revision 8; the subsequent normal Release-admission refresh publishes revision 9, canonical digest `e26598708056b90f9bea85148a02b98bab51a74d66b987f1232ad1cb18eb77aa`, with all sixteen route identities/topology unchanged and exact Journal receipts. D572 v14 binds D567 v4 and D580 v5. strict source loading accepts the current projection. all sixteen exact route contexts are now live, complete and current. shared Action context exposes its admitted routes without choosing one implicitly. historical N12 observation returns its actual interruption and all 22 receipts without re-admitting effects. all five N12 fixture lanes have accepted bounded repairs; the final two image-policy regressions pass (2 tests, 77.339 seconds, exit 0). focused acceptance is not a complete Release gate. prepare a fresh N13 from these committed sources; do not replay N12 or change installed N before all mandatory gates pass.
 
 ### Current Operator-selected scope
 

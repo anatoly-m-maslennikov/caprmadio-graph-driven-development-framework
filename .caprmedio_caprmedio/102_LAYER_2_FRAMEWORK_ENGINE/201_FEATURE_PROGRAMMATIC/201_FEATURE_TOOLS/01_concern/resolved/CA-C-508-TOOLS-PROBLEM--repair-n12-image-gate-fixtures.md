@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 19:02:03 +0000"
 subjects:
   governs: "Repair N12 image gate fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal]
@@ -37,5 +37,4 @@ repair confirmed image-gate fixture or implementation defects against current RM
 
 ## Result
 
-root-cause investigation and bounded repair are in progress. retain the full frozen report and historical Events.
-
+the fixtures now follow the sealed rollback retention policy without weakening image or container identity checks. the final two regressions passed in 77.339 seconds with exit 0 and independent review accepted the patch. the focused repair is complete; complete Unit and actual Release acceptance remain pending under CA-P-1801. retain the frozen N12 report and historical Events.

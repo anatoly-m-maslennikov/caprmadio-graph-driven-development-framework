@@ -479,11 +479,15 @@ class ReleaseImageTests(unittest.TestCase):
         args = self.retirement_inputs()
         docker = FakeRetirementDocker()
         result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(result.prior_image_digest, PRIOR_IMAGE_ID)
         self.assertEqual(result.retaining_container_refs, ())
         self.assertIn(args[-1].retained_prior_selector_ref, result.observed_rollback_refs)
-        self.assertIsNone(result.required_rollback_refs)
+        self.assertEqual(result.retention_condition, "retain_prior")
+        self.assertEqual(
+            result.required_rollback_refs,
+            (f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.condition",),
+        )
         self.assertEqual(docker.calls, [("docker", "image", "inspect", PRIOR_IMAGE_ID),
                                        ("docker", "container", "ls", "--all", "--quiet", "--no-trunc")])
         self.assertEqual(result.execution_kind, "test-double")
@@ -580,7 +584,7 @@ class ReleaseImageTests(unittest.TestCase):
         docker = FakeRetirementDocker(({"Id": CONTAINER_ID, "Image": IMAGE_ID,
                                         "Config": {"Image": "prior:mutable-tag"}, "State": {"Status": "exited"}},))
         result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(result.retaining_container_refs, ())
         self.assertIn(("docker", "container", "inspect", CONTAINER_ID), docker.calls)
 
