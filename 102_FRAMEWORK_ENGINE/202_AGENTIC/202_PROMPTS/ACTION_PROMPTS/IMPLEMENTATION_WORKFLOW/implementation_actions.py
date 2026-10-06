@@ -211,8 +211,10 @@ def _validate_workspace_capability(packet: Mapping[str, Any], selected_project_r
         resolved = path.resolve(strict=True)
     except OSError as error:
         raise ValueError("selected Project workspace is not readable") from error
-    if resolved != path:
-        raise ValueError("selected Project workspace must be an absolute non-symlink directory")
+    # A lexical absolute path may legitimately cross a platform-owned ancestor
+    # alias (for example macOS /var -> /private/var).  The workspace leaf
+    # itself was rejected above when it is a symlink; use its canonical path
+    # only for the authority-overlap checks below.
     source_root = selected_project_root / SELECTED_PROJECT_SOURCE_ROOT
     protected_locations = (source_root, selected_project_root / ".git")
     if selected_project_root.is_relative_to(resolved) or any(_overlaps(resolved, protected)

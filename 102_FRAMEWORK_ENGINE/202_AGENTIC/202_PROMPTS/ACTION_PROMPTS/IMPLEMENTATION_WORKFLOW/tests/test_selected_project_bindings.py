@@ -147,6 +147,41 @@ class SelectedProjectBindings(unittest.TestCase):
             self.assertEqual(actual["result"], "blocked")
             self.assertEqual(launches, [])
 
+    def test_workspace_allows_ancestor_alias_but_rejects_workspace_leaf_symlink(self):
+        actions = load_actions()
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory)
+            physical_parent = parent / "physical-parent"
+            physical_parent.mkdir()
+            project = self.project_with_reviewed_sources(actions, physical_parent)
+            alias = parent / "ancestor-alias"
+            alias.symlink_to(physical_parent, target_is_directory=True)
+            workspace = alias / "disposable-workspace"
+            workspace.mkdir()
+            packet = self.packet(actions, project)
+            packet["workspace"] = str(workspace)
+            packet["permissions"]["implementation_workspace"]["path"] = str(workspace)
+            launched = []
+
+            def agent(_prompt, supplied):
+                launched.append(supplied)
+                return {"result": "implemented", "outputs": {"candidate": "mock", "changed_paths": ["x.py"]},
+                        "evidence": ["mock-performed"]}
+
+            actual = actions.implement_selected_queue(
+                "CA-O-093", packet, agent, selected_project_root=project)
+            self.assertEqual(actual["result"], "implemented")
+            self.assertEqual(launched, [packet])
+
+            leaf_alias = parent / "workspace-leaf-alias"
+            leaf_alias.symlink_to(workspace, target_is_directory=True)
+            packet["workspace"] = str(leaf_alias)
+            packet["permissions"]["implementation_workspace"]["path"] = str(leaf_alias)
+            blocked = actions.implement_selected_queue(
+                "CA-O-093", packet, agent, selected_project_root=project)
+            self.assertEqual(blocked["result"], "blocked")
+            self.assertEqual(len(launched), 1)
+
     def test_selected_packet_cannot_fall_back_to_code_root_without_trusted_root(self):
         actions = load_actions()
         packet = {
