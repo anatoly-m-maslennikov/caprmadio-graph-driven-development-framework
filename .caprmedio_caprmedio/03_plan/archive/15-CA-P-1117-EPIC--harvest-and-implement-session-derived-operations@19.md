@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 20
-updated_at: "2026-10-06 00:20:24 +0000"
+version: 19
+updated_at: "2026-10-05 23:35:01 +0000"
 relations: {}
 ---
 # Summary
@@ -28,16 +28,6 @@ Harvest and implement session-derived operations
 ## Objective
 
 Deliver the Operator-selected minimal Workflow set below: authoritative methodology Operations, reviewed PROGRAMMATIC/PROMPTS RMED, working implementations, and functional Docker/MCP execution. Reuse existing Actions, Tools, prompts and runtime infrastructure where they meet the selected behavior.
-
-### First working runtime — current frontier
-
-Canonical methodology Workflow `release-methodology-first-cut-20261006-01` actually compiled 1,035 selected source Atoms with no source conflicts, completed its canonical Journal receipts, and passed currentness verification. The verified gate integration and derived output are saved at `394c7916e`; later bounded startup/cached-result corrections are saved separately.
-
-The actual initial runtime N is installed and independently accepted: package/selector SHA `6f2e3a615a4f4d6da0f16831800f9e4b7ff84f89b89faeefc359f51711d28c57`, immutable image `sha256:79899cfe59fb36c8da5ce1c12ea52c529a61738e51100b3d3e8488c52496d54e`, all 15,135 packaged files with exact bytes/modes/pathset, and the two-file hook-free project-local `ca` Skill. Actual build/inspect/canary all exited 0; the canary verified 28 MCP Tools. O180 Run `first-framework-runtime-20261006-03` has canonical started/completed facts and verified receipts. P1739 and its first-install composite P1714 are Done; C449 is resolved.
-
-P1747-P1749's bounded code integration is independently accepted and Done. Its source/mock test passes remain distinct from real Release acceptance. Complete N-to-N+1 Unit, image/canary, three-harness Candidate E2E, Full Gate and recorded promotion remain the next required vertical cut. Keep installed N immutable as the working baseline and rollback point; no N+1 dispatch, promotion or old-image removal is claimed here.
-
-For this first working release, keep the already agreed cuts: broad all-sixteen final audit/administrative closure, HTTP MCP, extra edge-case/restart expansion, and automatic old-image retirement are deferred. Existing later APIs and rollback data remain available; an unexecuted/deferred O179 is never reported completed. Every executed Workflow/Action still requires its actual Journal evidence. These deferrals do not close the overall Epic, which remains Active.
 
 ### Current Operator-selected scope
 
