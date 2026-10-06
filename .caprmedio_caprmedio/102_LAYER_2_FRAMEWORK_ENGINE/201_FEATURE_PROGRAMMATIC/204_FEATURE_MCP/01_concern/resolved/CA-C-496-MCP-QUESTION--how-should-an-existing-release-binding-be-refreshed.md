@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: MCP
 local_tier: Standard
 global_tier: 11
-status: Active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 06:38:52 +0000"
+updated_at: "2026-10-06 10:46:48 +0000"
 subjects:
   governs: "Release Binding Refresh"
   depends_on: [Operator, Manifest, Source Carrier, Release Version, Journal, MCP]
@@ -35,4 +35,4 @@ Fresh source-bound Release dispatch and later changes to Release authority. Hist
 
 ## Details
 
-The Operator has been asked about private publisher use. Clarification is required because the currently implemented publisher supports initial publication only. Code repairs and diagnostics can finish independently; no refresh or Release dispatch is authorized by this Concern itself.
+the Operator approved the guarded capability. R1882/M339/E582/D576 v3 were independently accepted and saved at 6b9ae7a5c; the implementation and regression proofs were independently accepted and saved at d24eb8d89. this question is answered, not proof of actual publication. the first actual attempt was blocked before any write by the separate pre-existing Journal-history gap recorded in CA-C-497. CA-P-1780 remains Active until its actual publication and Journal proof succeed.

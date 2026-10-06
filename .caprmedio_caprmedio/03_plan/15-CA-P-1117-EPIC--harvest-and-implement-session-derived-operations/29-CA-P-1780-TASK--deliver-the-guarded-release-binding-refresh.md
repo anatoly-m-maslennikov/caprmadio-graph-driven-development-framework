@@ -12,7 +12,7 @@ assignee: AI Agent
 autonomous_confidence_threshold: 90
 status: Active
 version: 1
-updated_at: "2026-10-06 10:19:18 +0000"
+updated_at: "2026-10-06 10:46:48 +0000"
 subjects:
   governs: "Guarded Release binding refresh delivery"
   depends_on: [Manifest, Delivery, Evaluation, Journal, Operator, MCP]
@@ -38,6 +38,10 @@ deliver and use the Operator-approved, source-first guarded refresh of the exist
 - only after accepted refresh, resume the remaining Epic gates using a fresh source-bound Release Run through MCP. N5–N8 remain immutable historical evidence.
 
 ## Definition of Done
+
+### Observed frontier
+
+source v3 and code/regression proofs are independently accepted at 6b9ae7a5c/d24eb8d89. the first actual attempt used the exact read-only plan and registered Operator context, then returned blocked before any write or pending intent because the latest canonical Journal carrier event differs from the exact Git-backed input bytes. CA-C-497 owns that pre-existing history gap. no refresh, N9 dispatch or promotion is claimed. keep this Task Active.
 
 the amended source contract and implementation have independent acceptance; focused initial and refresh regression suites pass; the actual canonical binding is refreshed and strictly reopened; its Journal record is verified with no pending publication; installed N remains unchanged. this Task does not claim the complete Release gate or Epic closure.
 
