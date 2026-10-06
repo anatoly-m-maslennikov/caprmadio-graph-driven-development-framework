@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 21
-updated_at: "2026-10-06 06:24:05 +0000"
+updated_at: "2026-10-06 06:49:26 +0000"
 relations: {}
 ---
 # Summary
@@ -50,6 +50,8 @@ P1775-P1778's lifecycle, structural and Implementation packet source repairs are
 Fresh N7 completed delivery and compilation, then stopped before Unit execution because Finder metadata changed the raw retained bootstrap proof-context digest. P1779/C495 repair this reader mismatch without changing N or proof bytes; thirteen focused tests and actual retained-N reopening pass. N7's interruption is recorded with no pending events. Retain N5/N6/N7 and use a fresh source-bound candidate for remaining gates; no promotion or retirement is claimed.
 
 Fresh N8 completed delivery and compilation and actually ran the sealed Unit container. Its gate failed after 548.054 seconds: JUnit reports 554 observed testcases, 14 failures and 206 errors, including module-discovery/reporting errors after the one-GiB temporary filesystem filled. Its failed evidence remains at `.caprmedio_runtime/release_suite/f735f40bdc34d8f01404c9621a6bebfed890d492324117bebb5a7faf3a2206e1/attempt-4_7b454u/`. The Workflow stopped at the Unit gate, interruption is recorded, and no pending recordings remain. Scheduler success is not release success. Independent fixture repairs, gitless Project boundaries and module-scoped executable scratch are under verification for a fresh N9; no image construction, promotion or retirement resulted from N8. Preserve N8 without replay and installed N unchanged.
+
+The bounded N8 source repairs are saved: module-owned executable scratch, gitless Project-root recognition, current graph-settings lookup, exact Tool private-reader dependencies, and settings-bound Project Structure in the sealed reference context. Independent review accepts the closure repairs; thirteen reference-context cases, forty-six related release cases and fourteen source-admission cases pass locally. These checks are not a new complete release gate. Fresh dispatch is blocked by CA-C-496: the canonical sixteen-route binding retains predecessor source pins, while the private publisher only admits initial fifteen-to-sixteen publication. Do not reset the binding or hand-edit it to bypass admission. A guarded, source-first refresh capability and its authorization must be settled before a fresh Release preview. Installed N's selector and image are reopened unchanged; N9 has not been dispatched.
 
 ### Current Operator-selected scope
 
