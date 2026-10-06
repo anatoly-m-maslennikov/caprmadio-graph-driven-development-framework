@@ -358,8 +358,8 @@ class InstalledNSuiteDockerExecutor:
         argv = (
             "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
             "--security-opt=no-new-privileges", "--pids-limit=128",
-            "--tmpfs", f"/tmp:rw,nosuid,nodev,size={_SANDBOX_TMPFS_SIZE},mode=1777",
-            "--tmpfs", f"{SANDBOX_WORKSPACE_PATH / _EXECUTOR_SCRATCH_RELATIVE}:rw,nosuid,nodev,size={_SANDBOX_TMPFS_SIZE},mode=1777",
+            "--tmpfs", f"/tmp:rw,nosuid,nodev,exec,size={_SANDBOX_TMPFS_SIZE},mode=1777",
+            "--tmpfs", f"{SANDBOX_WORKSPACE_PATH / _EXECUTOR_SCRATCH_RELATIVE}:rw,nosuid,nodev,exec,size={_SANDBOX_TMPFS_SIZE},mode=1777",
             "--label", f"{_SUITE_LABEL}={self.candidate_snapshot_manifest_sha256}",
             "--label", f"{_ATTEMPT_LABEL}={attempt_name}",
             "--cidfile", str(cidfile),

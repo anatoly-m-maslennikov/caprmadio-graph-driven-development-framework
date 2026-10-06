@@ -457,21 +457,25 @@ class ObservedCase:
 def _run_module(inputs: BoundInputs, module_path: str, results_root: Path) -> tuple[list[ObservedCase], list[str]]:
     carrier = _project_path(inputs.root, module_path, label="test module")
     result_path = results_root / (_sha256(module_path.encode("utf-8")) + ".json")
-    environment = {
-        "PATH": os.environ.get("PATH", os.defpath),
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "TMPDIR": str(_CHILD_SCRATCH),
-        "TEMP": str(_CHILD_SCRATCH),
-        "TMP": str(_CHILD_SCRATCH),
-    }
-    child = subprocess.run(
-        (sys.executable, "-c", _CHILD_HARNESS, str(carrier.parent), carrier.name, str(result_path)),
-        cwd=inputs.root,
-        env=environment,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    # Each child owns a fresh disposable leaf. Retained synthetic fixture
+    # releases must not exhaust a later module's fixed scratch filesystem.
+    scratch = _prepare_child_scratch()
+    with tempfile.TemporaryDirectory(prefix="module-", dir=scratch) as module_scratch:
+        environment = {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "TMPDIR": module_scratch,
+            "TEMP": module_scratch,
+            "TMP": module_scratch,
+        }
+        child = subprocess.run(
+            (sys.executable, "-c", _CHILD_HARNESS, str(carrier.parent), carrier.name, str(result_path)),
+            cwd=inputs.root,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
     if child.returncode != 0 or result_path.is_symlink() or not result_path.is_file():
         detail = (child.stderr or child.stdout or "child test discovery failed").strip()
         return [], [f"{module_path}: {detail[:2000]}"]

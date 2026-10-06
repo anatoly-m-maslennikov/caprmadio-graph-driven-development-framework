@@ -176,8 +176,8 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertIn(f"type=bind,src={self.workspace},dst=/workspace,readonly", argv)
         self.assertIn(f"type=bind,src={self.output},dst=/output", argv)
         self.assertFalse(any(item.startswith(f"type=bind,src={self.root},dst=") for item in argv))
-        self.assertIn("/tmp:rw,nosuid,nodev,size=1g,mode=1777", argv)
-        self.assertIn("/workspace/.caprmedio_tmp:rw,nosuid,nodev,size=1g,mode=1777", argv)
+        self.assertIn("/tmp:rw,nosuid,nodev,exec,size=1g,mode=1777", argv)
+        self.assertIn("/workspace/.caprmedio_tmp:rw,nosuid,nodev,exec,size=1g,mode=1777", argv)
         scratch = self.workspace / ".caprmedio_tmp"
         self.assertTrue(scratch.is_dir())
         self.assertEqual(list(scratch.iterdir()), [])

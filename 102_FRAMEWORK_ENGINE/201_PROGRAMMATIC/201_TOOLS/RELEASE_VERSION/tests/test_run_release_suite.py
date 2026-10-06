@@ -515,6 +515,13 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
 
         def capture(command, **kwargs):
             observed_environment.update(kwargs["env"])
+            scratch = Path(kwargs["env"]["TMPDIR"])
+            retained_fixture = scratch / "synthetic-release"
+            retained_fixture.mkdir()
+            (retained_fixture / "manifest.toml").write_text("# retained fixture\n")
+            retained_fixture.chmod(0o555)
+            # Cleaning the owned leaf must not follow a link to evidence.
+            (scratch / "outside-evidence").symlink_to(results_root, target_is_directory=True)
             result_path = Path(command[-1])
             result_path.write_bytes(_canonical_json({"loader_errors": [], "cases": []}))
             return subprocess.CompletedProcess(command, 0, "", "")
@@ -524,9 +531,13 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
                 _cases, errors = suite_driver._run_module(inputs, module, results_root)
 
         self.assertEqual(errors, [f"{module}: discovery returned no test cases"])
-        self.assertEqual(observed_environment["TMPDIR"], str(suite_driver._CHILD_SCRATCH))
-        self.assertEqual(observed_environment["TEMP"], str(suite_driver._CHILD_SCRATCH))
-        self.assertEqual(observed_environment["TMP"], str(suite_driver._CHILD_SCRATCH))
+        child_scratch = Path(observed_environment["TMPDIR"])
+        self.assertEqual(child_scratch.parent, suite_driver._CHILD_SCRATCH)
+        self.assertTrue(child_scratch.name.startswith("module-"))
+        self.assertEqual(observed_environment["TEMP"], str(child_scratch))
+        self.assertEqual(observed_environment["TMP"], str(child_scratch))
+        self.assertFalse(child_scratch.exists())
+        self.assertTrue(any(results_root.iterdir()))
 
     def test_execute_bound_uses_fixed_driver_scratch_not_report_parent(self) -> None:
         scratch = self.scratch / "fixed-child-scratch"
