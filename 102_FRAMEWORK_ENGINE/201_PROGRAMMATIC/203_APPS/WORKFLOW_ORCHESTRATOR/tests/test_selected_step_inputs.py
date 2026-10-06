@@ -122,7 +122,8 @@ class SelectedStepInputsTest(unittest.TestCase):
             terminals = {row["run_id"]: row for row in pending["terminal_runs"]}
 
             self.assertEqual("recording_pending", pending["disposition"], pending)
-            self.assertEqual("retry-recording-only", pending["retry_disposition"])
+            self.assertTrue(pending["interrupted_runs"], pending)
+            self.assertEqual("inspect-or-recover-only", pending["retry_disposition"])
             self.assertEqual(pending, retry)
             self.assertEqual("recording_pending", terminals[rows["CA-O-143"]["action_run_id"]]["disposition"])
             self.assertEqual("completed", terminals[rows["CA-O-143"]["action_run_id"]]["outcome"])
