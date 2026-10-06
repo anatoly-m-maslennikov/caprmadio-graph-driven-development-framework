@@ -410,14 +410,15 @@ class SelectedExecution:
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("graph projection Action returned an invalid queue envelope")
                     label = result["result"]
-                    output = dict(result)
+                    native_result = result.get("graph_result", result)
+                    output = {**result, "native_result": native_result}
                     if label == "built":
                         output["terminal_outcome"] = "completed"
                     elif label == "no_op":
                         output["terminal_outcome"] = "no_op"
                     elif label == "failed":
                         output["terminal_outcome"] = "failed"
-                    elif label in {"blocked", "pending_recording"}:
+                    elif label in {"blocked", "pending_recording", "stale", "incomplete", "conflicting"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     return output
                 available[action_id] = graph_projection
@@ -1166,6 +1167,7 @@ class SelectedExecution:
             step_run_id = actual_step["run_id"]
             final_result: str | None = None
             step_effect_refs: list[str] = []
+            terminal_recording_pending = False
             for action_ordinal, action in enumerate(step["actions"], start=1):
                 requested_action_id = f"{requested_step_id}:action:{action_ordinal}"
                 actual_action = session.start_run(requested_action_id)
@@ -1272,6 +1274,10 @@ class SelectedExecution:
                     if graph.get("route") != "release_version" or not callable(checkpoint_receipt):
                         raise SelectedExecutionError("private shared-recording callback is outside Release")
                     checkpoint_receipt(terminal_receipt, list(session.pending), list(session.receipts))
+                terminal_recording_pending = (
+                    isinstance(terminal_receipt, Mapping)
+                    and terminal_receipt.get("disposition") == "recording_pending"
+                )
                 recording = output.get("compiler_publication_recording")
                 if recording is not None:
                     if not isinstance(recording, Mapping):
@@ -1324,8 +1330,7 @@ class SelectedExecution:
                     final_result = "recording_pending"
                     output["terminal_outcome"] = "interrupted_pending"
                 elif (graph.get("route") in {"build_entities_graph", "build_terms_graph"}
-                        and (not isinstance(terminal_receipt, Mapping)
-                             or terminal_receipt.get("disposition") != "terminal")):
+                        and terminal_recording_pending):
                     # The projection has already been materialized, and must
                     # remain available for Journal recovery.  It is not,
                     # however, a completed selected Action until the shared
@@ -1386,13 +1391,21 @@ class SelectedExecution:
                         "evidence": native.get("evidence", []) if isinstance(native, Mapping) else [],
                         "retained_state": native.get("retained_state", {}) if isinstance(native, Mapping) else {},
                     })
-            try:
-                transition = self._transition(step, final_result or "")
-            except SelectedExecutionError:
-                terminal_outcome = output.get("terminal_outcome")
-                if not isinstance(terminal_outcome, str):
-                    raise
-                transition = {"terminal": terminal_outcome}
+                if terminal_recording_pending:
+                    # The effect and its pending Action receipt are retained,
+                    # but an unrecorded terminal fact cannot authorize either
+                    # another Action or an On Result transition.
+                    break
+            if terminal_recording_pending:
+                transition = {"terminal": "interrupted_pending"}
+            else:
+                try:
+                    transition = self._transition(step, final_result or "")
+                except SelectedExecutionError:
+                    terminal_outcome = output.get("terminal_outcome")
+                    if not isinstance(terminal_outcome, str):
+                        raise
+                    transition = {"terminal": terminal_outcome}
             if "terminal" in transition:
                 terminal = transition["terminal"]
                 if not isinstance(terminal, str):
