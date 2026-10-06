@@ -24,6 +24,7 @@ QUERY_ROUTE_NAMES = ("find_and_fetch_artifacts", "find_and_fetch_journal_events"
 SELECTED_ROUTE_NAMES = (*ORIGINAL_SELECTED_ROUTE_NAMES, *QUERY_ROUTE_NAMES)
 _OPTIONAL_RELEASE_ROUTE_NAME = "release_version"
 _DIGEST = re.compile(r"^[0-9a-f]{64}$")
+_ATOM_ID = re.compile(r"^CA-[A-Z]+-[0-9]+$")
 _REQUEST_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$")
 _FRESHNESS_FIELDS = {
     "selected_source_registry_ref", "selected_source_registry_version",
@@ -318,6 +319,198 @@ def _unique_manifest_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
             raise SelectedRouteError(f"selected workflow binding manifest has duplicate JSON member: {key}")
         result[key] = value
     return result
+
+
+_RELEASE_ADMISSION_FIELDS = frozenset({
+    "route", "acceptance_frontier", "workflow", "ordered_steps",
+    "ordered_actions", "rmed_frontier", "mutation_capable", "native_action_calls",
+})
+_RELEASE_PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
+
+
+def _refresh_pin_shape(value: Any) -> dict[str, Any]:
+    """Validate one stale Release pin without reopening its historical carrier."""
+    if not isinstance(value, Mapping) or set(value) != _RELEASE_PIN_FIELDS:
+        raise SelectedRouteError("Release refresh pin has an incomplete or unknown schema")
+    atom_id, version, source_path, digest = (
+        value["atom_id"], value["version"], value["source_path"], value["digest"]
+    )
+    if not isinstance(atom_id, str) or _ATOM_ID.fullmatch(atom_id) is None:
+        raise SelectedRouteError("Release refresh pin has an invalid Atom identity")
+    if type(version) is not int or version < 1:
+        raise SelectedRouteError("Release refresh pin version must be a positive integer")
+    if not isinstance(source_path, str) or not source_path or "\\" in source_path or ":" in source_path:
+        raise SelectedRouteError("Release refresh pin path is unsafe")
+    path = Path(source_path)
+    if path.is_absolute() or str(path) != source_path or any(part in {".", ".."} for part in path.parts):
+        raise SelectedRouteError("Release refresh pin path is unsafe")
+    if not isinstance(digest, str) or _DIGEST.fullmatch(digest) is None:
+        raise SelectedRouteError("Release refresh pin digest must be lowercase SHA-256")
+    return {
+        "atom_id": atom_id, "version": version,
+        "source_path": source_path, "digest": digest,
+    }
+
+
+def _refresh_admission_shape(value: Any) -> dict[str, Any]:
+    """Validate the closed D572 admission shape while retaining stale pin bytes."""
+    if not isinstance(value, Mapping) or set(value) != _RELEASE_ADMISSION_FIELDS:
+        raise SelectedRouteError("Release refresh admission has an incomplete or unknown schema")
+    if value["route"] != _OPTIONAL_RELEASE_ROUTE_NAME:
+        raise SelectedRouteError("Release refresh admission is not release_version")
+    if type(value["mutation_capable"]) is not bool or value["native_action_calls"] != []:
+        raise SelectedRouteError("Release refresh admission typed metadata is invalid")
+    steps = value["ordered_steps"]
+    actions = value["ordered_actions"]
+    rmed = value["rmed_frontier"]
+    if not isinstance(steps, list) or len(steps) != 12:
+        raise SelectedRouteError("Release refresh admission must contain twelve ordered Steps")
+    if not isinstance(actions, list) or len(actions) != 12:
+        raise SelectedRouteError("Release refresh admission must contain twelve ordered Actions")
+    if not isinstance(rmed, list) or not rmed:
+        raise SelectedRouteError("Release refresh admission RMED frontier is empty")
+    validated_steps: list[dict[str, dict[str, Any]]] = []
+    for item in steps:
+        if not isinstance(item, Mapping) or set(item) != {"step", "action"}:
+            raise SelectedRouteError("Release refresh admission Step occurrence is malformed")
+        validated_steps.append({
+            "step": _refresh_pin_shape(item["step"]),
+            "action": _refresh_pin_shape(item["action"]),
+        })
+    return {
+        "route": _OPTIONAL_RELEASE_ROUTE_NAME,
+        "acceptance_frontier": _refresh_pin_shape(value["acceptance_frontier"]),
+        "workflow": _refresh_pin_shape(value["workflow"]),
+        "ordered_steps": validated_steps,
+        "ordered_actions": [_refresh_pin_shape(item) for item in actions],
+        "rmed_frontier": [_refresh_pin_shape(item) for item in rmed],
+        "mutation_capable": value["mutation_capable"],
+        "native_action_calls": [],
+    }
+
+
+def _compare_refresh_pin(old: Mapping[str, Any], current: Mapping[str, Any], label: str) -> bool:
+    """Compare a legal pin site, permitting only its actual version/digest drift."""
+    if old["atom_id"] != current["atom_id"] or old["source_path"] != current["source_path"]:
+        raise SelectedRouteError(f"Release refresh pin identity differs at {label}")
+    return old["version"] != current["version"] or old["digest"] != current["digest"]
+
+
+def _compare_refresh_admission(old: Mapping[str, Any], current: Mapping[str, Any]) -> None:
+    """Require identical schema/occurrences/roles and observe at least one legal drift."""
+    if old["route"] != current["route"] or old["mutation_capable"] != current["mutation_capable"]:
+        raise SelectedRouteError("Release refresh admission roles differ from current D572")
+    if old["native_action_calls"] != current["native_action_calls"]:
+        raise SelectedRouteError("Release refresh admission native Action roles differ from current D572")
+    drift = _compare_refresh_pin(old["acceptance_frontier"], current["acceptance_frontier"], "acceptance_frontier")
+    drift |= _compare_refresh_pin(old["workflow"], current["workflow"], "workflow")
+    if len(old["ordered_steps"]) != len(current["ordered_steps"]):
+        raise SelectedRouteError("Release refresh Step occurrence count differs from current D572")
+    for ordinal, (old_item, current_item) in enumerate(zip(old["ordered_steps"], current["ordered_steps"], strict=True), 1):
+        drift |= _compare_refresh_pin(old_item["step"], current_item["step"], f"ordered_steps[{ordinal}].step")
+        drift |= _compare_refresh_pin(old_item["action"], current_item["action"], f"ordered_steps[{ordinal}].action")
+    if len(old["ordered_actions"]) != len(current["ordered_actions"]):
+        raise SelectedRouteError("Release refresh Action occurrence count differs from current D572")
+    for ordinal, (old_pin, current_pin) in enumerate(zip(old["ordered_actions"], current["ordered_actions"], strict=True), 1):
+        drift |= _compare_refresh_pin(old_pin, current_pin, f"ordered_actions[{ordinal}]")
+    if len(old["rmed_frontier"]) != len(current["rmed_frontier"]):
+        raise SelectedRouteError("Release refresh RMED frontier occurrence count differs from current D572")
+    for ordinal, (old_pin, current_pin) in enumerate(zip(old["rmed_frontier"], current["rmed_frontier"], strict=True), 1):
+        drift |= _compare_refresh_pin(old_pin, current_pin, f"rmed_frontier[{ordinal}]")
+    if not drift:
+        raise SelectedRouteError("Release manifest has no admission drift to refresh")
+
+
+def load_release_manifest_refresh_base(root: str | Path) -> dict[str, Any]:
+    """Validate one stale, schema-valid sixteen-route manifest for refresh.
+
+    This is a private publisher input boundary.  It accepts no route or schema
+    drift: only the version/digest values of the explicit D572 pin sites in the
+    stale Release admission may differ from the current source-derived record.
+    Historical stale carriers are never reopened; the publisher replaces the
+    retained admission with the current record after this read-only check.
+    """
+    project_root = Path(root).resolve(strict=True)
+    manifest_ref = selected_manifest_ref(project_root)
+    manifest_candidate = project_root / manifest_ref
+    probe = manifest_candidate
+    while probe == project_root or project_root in probe.parents:
+        if probe.is_symlink():
+            raise SelectedRouteError("Release refresh manifest path must not contain symlinks")
+        if probe == project_root:
+            break
+        probe = probe.parent
+    manifest_path = _manifest_path(project_root)
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"),
+                              object_pairs_hook=_unique_manifest_object)
+    except (OSError, json.JSONDecodeError) as error:
+        raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
+    required = {
+        "schema_version", "source_freshness", "query_source_admissions", "routes",
+        "canonical_manifest_sha256", "release_source_admissions",
+    }
+    if (not isinstance(manifest, Mapping) or set(manifest) != required
+            or type(manifest["schema_version"]) is not int or manifest["schema_version"] != 1):
+        raise SelectedRouteError("Release refresh requires the exact sixteen-route manifest schema")
+    digest = manifest["canonical_manifest_sha256"]
+    if not isinstance(digest, str) or not _DIGEST.fullmatch(digest):
+        raise SelectedRouteError("selected workflow binding manifest digest is invalid")
+    without_self = {key: value for key, value in manifest.items() if key != "canonical_manifest_sha256"}
+    if canonical_digest(without_self) != digest:
+        raise SelectedRouteError("selected workflow binding manifest canonical digest differs")
+    freshness = manifest["source_freshness"]
+    if not isinstance(freshness, Mapping) or set(freshness) != _FRESHNESS_FIELDS:
+        raise SelectedRouteError("selected workflow binding manifest source freshness is invalid")
+    if (not all(isinstance(freshness[key], str) and freshness[key]
+                for key in _FRESHNESS_FIELDS - {"selected_source_registry_version"})
+            or type(freshness["selected_source_registry_version"]) is not int
+            or freshness["selected_source_registry_version"] < 1):
+        raise SelectedRouteError("selected workflow binding manifest source freshness is incomplete")
+    if (not _DIGEST.fullmatch(freshness["selected_source_registry_digest"])
+            or not _DIGEST.fullmatch(freshness["selected_binding_digest"])):
+        raise SelectedRouteError("selected workflow binding manifest freshness digest is invalid")
+    if (freshness["selected_source_registry_ref"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_REF
+            or freshness["selected_source_registry_version"] != _ORIGINAL_SELECTED_SOURCE_REGISTRY_VERSION):
+        raise SelectedRouteError("selected workflow binding manifest does not retain the CA-A-1142 registry authority")
+    if freshness["selected_binding_ref"] != f"{manifest_ref}#/routes":
+        raise SelectedRouteError("selected workflow binding manifest does not retain its binding reference")
+    registry = _safe_path(project_root, freshness["selected_source_registry_ref"])
+    if not registry.is_file() or hashlib.sha256(registry.read_bytes()).hexdigest() != freshness["selected_source_registry_digest"]:
+        raise SelectedRouteError("selected source registry pin is stale")
+    routes = manifest["routes"]
+    expected_names = (*SELECTED_ROUTE_NAMES, _OPTIONAL_RELEASE_ROUTE_NAME)
+    if not isinstance(routes, list) or len(routes) != len(expected_names):
+        raise SelectedRouteError("Release refresh requires exactly sixteen routes")
+    validated = [_validate_route(project_root, entry, allowed_routes=expected_names) for entry in routes]
+    if (tuple(entry["route"] for entry in validated) != expected_names
+            or len({entry["route"] for entry in validated}) != len(expected_names)):
+        raise SelectedRouteError("Release refresh route registry is incomplete, duplicate, or out of order")
+    admissions = _validate_query_source_admissions(project_root, manifest["query_source_admissions"], validated)
+    if canonical_digest(validated) != freshness["selected_binding_digest"]:
+        raise SelectedRouteError("selected workflow route binding digest differs")
+    from release_source_admission import derive_release_graph_admission
+
+    try:
+        current_route, current_admission = derive_release_graph_admission(project_root)
+    except (OSError, TypeError, ValueError) as error:
+        raise SelectedRouteError(f"current Release source admission is unavailable: {error}") from error
+    if validated[-1] != current_route:
+        raise SelectedRouteError("Release route differs from the current D572-derived route")
+    if not isinstance(manifest["release_source_admissions"], list) or len(manifest["release_source_admissions"]) != 1:
+        raise SelectedRouteError("Release refresh requires exactly one source admission")
+    stale_admission = _refresh_admission_shape(manifest["release_source_admissions"][0])
+    current_admission = _refresh_admission_shape(current_admission)
+    _compare_refresh_admission(stale_admission, current_admission)
+    return {
+        "manifest_ref": manifest_ref,
+        "schema_version": 1,
+        "source_freshness": dict(freshness),
+        "query_source_admissions": admissions,
+        "routes": validated,
+        "canonical_manifest_sha256": digest,
+        "release_source_admissions": [stale_admission],
+    }
 
 
 def load_selected_manifest(root: str | Path) -> dict[str, Any]:
