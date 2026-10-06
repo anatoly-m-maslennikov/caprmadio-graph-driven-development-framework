@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 12:08:00 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 12:23:48 +0000"
 subjects:
   governs: "retained E2E Docker identity fixture and image acceptance premises"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal]
@@ -36,4 +36,4 @@ repair retained E2E Docker identity fixture and image acceptance premises withou
 
 ## Definition of Done
 
-mock host executable discovery only; source/package/Skill/JUnit/currentness remain real; retained and image modules pass.
+the two-file fixture delta is independently accepted and committed at 50ef09c37. retained-E2E tests pass 2/2; the full mocked image Unit module passes 53/53 in 862.154 seconds. only host executable discovery is mocked, while exact N/package/Skill/source/JUnit/currentness validation and negative tampering cases remain real. the disposable fixture reuses the exact D580 control closure, without folder discovery or a public runtime change. this is local fixture proof, not actual candidate image or Docker E2E acceptance.
