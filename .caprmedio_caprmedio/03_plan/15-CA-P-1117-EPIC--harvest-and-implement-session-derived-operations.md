@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 27
-updated_at: "2026-10-06 20:51:00 +0000"
+updated_at: "2026-10-06 21:37:39 +0000"
 relations: {}
 ---
 # Summary
@@ -66,6 +66,8 @@ CA-P-1809 owns six bounded N13 failure groups. the graph, historical-status, pen
 all six CA-P-1809 repair children now have bounded independent acceptance and are Done. the full reference-context module passed 18 tests; actual sealed/gitless selected-refresh reconstruction passed six cases; final D572 source admission passed fourteen cases. the historical refresh fixture preserves the exact retained D572@13 reader bytes rather than rewriting its controls. the reloaded Release host is ready at PID 54871, with no pending or queued historical Run to recover. installed N remains unchanged. fresh N14 still must independently pass the complete Unit gate and every later mandatory Release gate before the parent repairs or Epic can close.
 
 fresh N14 `release-epic-resume-20261006-N14` delivered sources and compiled, then its disposable Unit container was deliberately stopped after parallel final review proved a shared retained-fixture setup gap. the exact source-bound container was inspected before stop; no other container was targeted. its actual receipt records exit 137 after 104.1833622080012 seconds, no JUnit report and zero validated-report tests: incomplete, not a pass or proof that no tests ran. all 22 actual Run Events are recorded with no pending recording. installed N is unchanged; no package/image/E2E/promotion/retirement followed. preserve N14 without replay. CA-P-1815 is reopened for the shared five-source fixture closure; CA-C-516 records the bounded early-stop choice under this Epic's autonomy. fresh N15 requires accepted shared-fixture regressions and independently current source sealing before every unchanged mandatory gate.
+
+the shared five-source fixture repair is independently accepted and committed at dfc76e4f0. CA-P-1815 is Done again: reference-context 19/19, selected-refresh 6/6, retained E2E fixtures 2/2, E2E context 13/13, full-gate fixtures 7/7 and complete E2E-gate fixtures 11/11 pass with actual terminal results. installed N and the current sixteen-route source binding remain unchanged; the occupied methodology copy still passes current D567 predecessor verification and the Release host has no pending or queued Run. prepare and admit fresh N15 through the exact MCP preview/seal; focused fixture acceptance does not waive any Unit, package, image, canary, Candidate E2E, aggregate, promotion or conditional prior-image disposition gate.
 
 ### Current Operator-selected scope
 

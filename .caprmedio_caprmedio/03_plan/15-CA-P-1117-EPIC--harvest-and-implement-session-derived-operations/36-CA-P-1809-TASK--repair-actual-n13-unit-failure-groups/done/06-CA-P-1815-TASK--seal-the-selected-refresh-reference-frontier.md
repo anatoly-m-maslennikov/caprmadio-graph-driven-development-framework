@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 20:51:00 +0000"
+updated_at: "2026-10-06 21:37:39 +0000"
 subjects:
   governs: "Seal the selected refresh reference frontier"
   depends_on: [Implementation, Evaluation, Source Carrier, Workflow, Action, Journal]
@@ -45,3 +45,5 @@ this is bounded source/fixture acceptance only; actual complete Release acceptan
 ## Reopened fixture integration
 
 parallel final review found that full_suite_golden/control_fixture.py copies Prompt bindings but omits the D580 v7 selected-refresh authority leaves. retained E2E fixture materialization therefore fails before execution. the production context and its focused tests remain accepted; this Task is reopened until the shared retained-fixture closure preserves the same exact five declared sources and its dependent setup regressions pass. N14 was deliberately interrupted early rather than treating this known incompatible setup as a new complete test gate.
+
+the shared fixture repair is accepted and saved at dfc76e4f0. it derives only D580's five fixed paths, copies their exact bytes and modes, and revalidates their identities, Active status and digests through the production parser. independent review accepts it without weakening authority or expanding discovery. reference-context tests passed 19/19, selected-refresh tests passed 6/6, and image/suite/promotion setup checks passed. independent retained E2E fixture tests passed 2/2 in 19.050 seconds; E2E-context tests passed 13/13 in 0.100 seconds; full-gate fixture tests passed 7/7 in 240.244 seconds. root retained the actual terminal result for the complete E2E-gate fixture module: 11/11 in 101.806 seconds, exit 0. these are bounded fixture regressions, not fresh Candidate Docker/MCP acceptance; CA-P-1809 still requires the unchanged full Release gate.
