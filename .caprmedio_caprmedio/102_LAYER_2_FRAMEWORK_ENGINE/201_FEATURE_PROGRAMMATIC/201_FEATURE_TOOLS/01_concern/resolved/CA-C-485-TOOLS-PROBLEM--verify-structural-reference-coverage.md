@@ -8,7 +8,7 @@ global_tier: 11
 status: resolved
 author: Anatoly Maslennikov
 version: 2
-updated_at: "2026-10-06 05:32:30 +0000"
+updated_at: "2026-10-06 05:30:29 +0000"
 subjects:
   governs: "Verify structural reference coverage"
   depends_on: [Tool, Implementation, Evaluation, Workflow Run, Journal]
