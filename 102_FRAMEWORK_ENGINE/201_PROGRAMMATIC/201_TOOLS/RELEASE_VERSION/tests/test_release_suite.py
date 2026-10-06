@@ -177,9 +177,10 @@ if mode == "fail":
 class FixtureSandboxExecutor:
     """Test-only local stand-in for the production isolated executor.
 
-    It rewrites fixture-root argv paths into the disposable workspace.  This
-    proves that attempts to mutate a selector, retained N, or public Skill
-    reach only the workspace; production never installs this executor.
+    It rewrites fixture-root argv paths into the disposable workspace and
+    makes that source tree read-only for the child process, matching the
+    production ``/workspace:ro`` mount.  Output remains a separate writable
+    carrier; production never installs this executor.
     """
 
     def __init__(self, root: Path):
@@ -188,6 +189,25 @@ class FixtureSandboxExecutor:
         self.mode = "success"
         self.literal = "$HOME;$(should-stay-literal)"
         self.start_error = False
+
+    @staticmethod
+    def _freeze_workspace(workspace: Path) -> list[tuple[Path, int]]:
+        """Remove child write permission without leaving retained evidence unusable."""
+
+        paths = [workspace, *sorted(workspace.rglob("*"), key=lambda path: len(path.parts))]
+        original_modes: list[tuple[Path, int]] = []
+        for path in paths:
+            if path.is_symlink():
+                continue
+            mode = path.stat().st_mode & 0o777
+            original_modes.append((path, mode))
+            path.chmod(mode & ~0o222)
+        return original_modes
+
+    @staticmethod
+    def _thaw_workspace(original_modes: list[tuple[Path, int]]) -> None:
+        for path, mode in reversed(original_modes):
+            path.chmod(mode)
 
     def run(self, command, *, workspace, output_root, working_directory, environment, timeout_seconds):
         self.last_environment = dict(environment)
@@ -213,35 +233,39 @@ class FixtureSandboxExecutor:
             rewritten[0] = sys.executable
             rewritten.extend((self.mode, self.literal))
         stdout_path, stderr_path = output_root / "fixture.stdout", output_root / "fixture.stderr"
-        with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
-            process = subprocess.Popen(
-                tuple(rewritten),
-                cwd=workspace / working_directory,
-                env=local_environment,
-                stdin=subprocess.DEVNULL,
-                stdout=stdout,
-                stderr=stderr,
-                shell=False,
-                start_new_session=True,
-            )
-            try:
-                exit_code = process.wait(timeout=timeout_seconds)
-                left_descendants = False
+        original_modes = self._freeze_workspace(workspace)
+        try:
+            with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
+                process = subprocess.Popen(
+                    tuple(rewritten),
+                    cwd=workspace / working_directory,
+                    env=local_environment,
+                    stdin=subprocess.DEVNULL,
+                    stdout=stdout,
+                    stderr=stderr,
+                    shell=False,
+                    start_new_session=True,
+                )
                 try:
-                    os.killpg(process.pid, 0)
-                except ProcessLookupError:
-                    pass
-                else:
-                    os.killpg(process.pid, signal.SIGKILL)
-                    left_descendants = True
-                timed_out = False
-            except subprocess.TimeoutExpired:
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                exit_code = process.wait()
-                left_descendants, timed_out = False, True
+                    exit_code = process.wait(timeout=timeout_seconds)
+                    left_descendants = False
+                    try:
+                        os.killpg(process.pid, 0)
+                    except ProcessLookupError:
+                        pass
+                    else:
+                        os.killpg(process.pid, signal.SIGKILL)
+                        left_descendants = True
+                    timed_out = False
+                except subprocess.TimeoutExpired:
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    exit_code = process.wait()
+                    left_descendants, timed_out = False, True
+        finally:
+            self._thaw_workspace(original_modes)
         return SuiteExecutionResult(exit_code, stdout_path.read_bytes(), stderr_path.read_bytes(), timed_out, left_descendants)
 
 
@@ -653,8 +677,9 @@ class ReleaseSuiteTests(unittest.TestCase):
                     before_settings = settings.read_bytes()
                     self.assertFalse(journal.exists())
                     result = fixture.execute_suite(candidate, compilation)
-                    self.assertEqual(result.outcome, "passed")
-                    self.assertTrue(result.passed)
+                    self.assertEqual(result.outcome, "failed")
+                    self.assertNotEqual(result.exit_code, 0)
+                    self.assertFalse(result.passed)
                     self.assertIsNotNone(result.receipt_sha256)
                     workspace = fixture.root / result.evidence_root / "workspace"
                     self.assertFalse((workspace / ".caprmedio_runtime/framework/current.toml").exists())
@@ -718,7 +743,16 @@ class ReleaseSuiteTests(unittest.TestCase):
 
     def test_recording_failure_after_actual_success_never_passes(self) -> None:
         candidate, compilation = self.bound()
-        with patch("release_suite._durable_bytes", side_effect=OSError("deliberate receipt failure")):
+        from release_suite import _durable_bytes
+
+        def fail_receipt_only(path, payload):
+            if Path(path).name == "receipt.json":
+                raise OSError("deliberate receipt failure")
+            return _durable_bytes(path, payload)
+
+        # Context is now durably recorded before process execution.  This
+        # fixture targets the intended post-success receipt failure only.
+        with patch("release_suite._durable_bytes", side_effect=fail_receipt_only):
             result = self.execute_suite(candidate, compilation)
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(result.executed_tests, self.canonical_testcase_count())

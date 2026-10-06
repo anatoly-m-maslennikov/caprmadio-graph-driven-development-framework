@@ -812,6 +812,7 @@ def execute_bound_release_suite(
     stdout_sha = stderr_sha = report_sha = receipt_sha = None
     context: ReleaseSuiteReferenceContext | None = None
     evidence: SuiteGateEvidence | None = None
+    selected_executor: SuiteSandboxExecutor | None = None
     try:
         selected_executor = executor if executor is not None else _DEFAULT_EXECUTOR
         if selected_executor is None:
@@ -897,12 +898,17 @@ def execute_bound_release_suite(
                 raise ReleaseContractError("release-currentness-stale", "executing N selector, runtime package or project-local ca Skill changed during suite")
             if _safe_path(root, environment.working_directory) != cwd:
                 raise ReleaseContractError("release-currentness-stale", "suite working directory changed")
-            if context is None:
-                raise ReleaseContractError("release-suite-reference-context-invalid", "reference context is absent")
-            revalidate_context(
-                root, context,
-                _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
-            )
+            # An absent approved executor is a durable incomplete outcome, not
+            # a stale post-execution result: no suite process or context
+            # capture was attempted.  Once an executor is selected, retain
+            # the full context/currentness revalidation fail-closed boundary.
+            if selected_executor is not None:
+                if context is None:
+                    raise ReleaseContractError("release-suite-reference-context-invalid", "reference context is absent")
+                revalidate_context(
+                    root, context,
+                    _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
+                )
         except (ReleaseContractError, ReleasePackagingError, OSError, ValueError) as error:
             outcome, reason = "stale", f"post-suite bindings no longer validate: {getattr(error, 'code', type(error).__name__)}"
         evidence = SuiteGateEvidence(candidate.manifest.sha256, outcome, reason, environment.runner,
