@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 14122)
+Total output lines: 284
+
 ---
 atom_id: CA-P-1117
 content_role: Plan
@@ -17,8 +20,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 25
-updated_at: "2026-10-06 14:40:22 +0000"
+version: 24
+updated_at: "2026-10-06 14:14:10 +0000"
 relations: {}
 ---
 # Summary
@@ -60,8 +63,6 @@ CA-P-1780 and CA-P-1781 are Done. the first refresh correctly stopped before wri
 fresh N9 `release-epic-resume-20261006-N9` was then actually dispatched through MCP under the refreshed sixteen-route admission. source delivery and compilation completed. its complete Unit gate failed with exit 1 after 816.0929900840056 seconds: 1,925 reported testcases, 16 failures, 57 errors and zero skipped. terminal interrupted Action/Step/Workflow receipts are recorded, with no pending event; the saved recording-pending execution-stop checkpoint is not a current recording gap. no candidate image, promotion or retirement occurred. CA-P-1782's nine independent source/fixture repair lanes and CA-C-498 now own this bounded frontier. complete local acceptance, refresh the exact source pins through the approved guarded path, and use a fresh N10; do not replay failed N9. installed N stays immutable.
 
 fresh N10 `release-epic-resume-20261006-N10` followed accepted local N9 repairs and the recorded guarded revision-5 binding refresh. delivery and compilation completed, but the Unit executor reached its code-only 900-second deadline after 934.4613934169975 seconds. no complete JUnit report was returned; receipt executed_tests=0 is a validated-report count, not evidence that no tests ran. terminal interrupted Run receipts are recorded. CA-P-1792 and CA-C-499 own a finite, source-sealed Unit-budget repair: canonical default 3600 seconds, Framework Instance override, hard maximum 7200 seconds, and no reduction of tests or later gates. seven distinct source, implementation, review, preparation and closure lanes are assigned. installed N remains unchanged; preserve N10 without replay and admit a fresh N11 only after source/code acceptance.
-
-fresh N11 `release-epic-resume-20261006-N11` was MCP-enqueued after independently accepted source/code repairs, 147 passing focused tests and recorded guarded binding revision 6. it stopped at Step 3 with release-copy-predecessor-mismatch before delivery, compilation or Unit execution. all fourteen actual Run records are sealed, with no pending Journal recording; installed N remains unchanged. CA-P-1793/CA-C-500 own independent code, actual-tree, authority and fixture diagnosis. preserve N11 without replay, retain unproven delivery files, and admit a fresh N12 only after safe predecessor ownership is accepted. the longer Unit budget is implemented but not yet proved sufficient by a complete fresh gate.
 
 the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 
@@ -179,31 +180,7 @@ Authoring disposition: the earlier Plan files retain their independent reviews. 
 - CA-P-1122: Implement and functionally verify the selected capabilities from reviewed RMED.
 - CA-P-1123: Verify all selected execution paths in Docker, including MCP and reused dependencies.
 - CA-P-1124: Verify the sixteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
-- CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
-- CA-P-1612: Complete the existing Change Atom Status capability for every Content Role using current status/folder authority, then prove the resolved model and execution behavior independently.
-- CA-P-1620: Deliver Release Version from independently reviewed source/RMED, including complete Methodology/runtime-package/project-Skill installation and actual new-image verification before exact old-image retirement.
-- CA-P-1655: Final code review against the current applicable RMED and Operations, covering all sixteen selected Workflows and their used implementation paths; this review blocks CA-P-1124 and Epic closure.
-
-The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
-
-### Execution controls
-
-- Each task/subtask has exactly one Plan Markdown file. A composite owns its same-stem directory of child files; the Epic's folder has its mandatory same-stem governing file beside it.
-- Each executable leaf has one assigned AI Agent and a work estimate of <=15 minutes. Before execution bind exact input evidence, governing revisions, target files, required result, functional verification and any decision disposition. If the estimate exceeds fifteen minutes, decompose further before execution; never silently expand a leaf.
-- After every completed task/subtask, review actual results and current authority, then update every affected next dependent Plan before it executes. Add BLOCKS edges for new remainder/repair/re-review leaves; navigation order is not a dependency. A composite cannot be Done until all required child/remainder work is Done.
-- Complete this Epic autonomously through its required implementation, verification and final review. When uncertain, check the active Operator Goal, Project Principles and current authority, choose the best authorized in-scope option, and create a C/Question recording the uncertainty, considered options, selected choice and reason. Continue without waiting for an Operator answer; uncertainty alone is not a reason to stop or leave required work unfinished. Inherit the 90% confidence threshold for recording uncertainty, not as a request-to-pause gate. Actual permission, runtime, evidence or authority blockers still postpone only the affected work and never justify a bypass or false completion.
-- Every issue encountered becomes one appropriately typed Concern at its narrowest owning Scope Unit: Problem for blockers/failures, Question for unresolved choices, Conflict for incompatible governing claims. The Concern owns concern_about to the directly affected task/entity and records evidence, impact and disposition. Do not substitute ephemeral chat notes for C atoms.
-- On permission/runtime/evidence blockers, create a C/Problem, retain truthful unfinished task state and frontier, postpone the task and execute another independent ready task. Do not bypass its BLOCKS prerequisites, permission denial, or missing authority.
-- Prefer functional, integration, E2E and canary verification. Use unit tests only where they add necessary isolated proof; do not couple acceptance to implementation structure.
-- Preserve unrelated changes. Use mechanical Git commits for this Epic's changes under the Operator's explicit exception; do not invoke COMMIT_CHANGE_SET or make its repair a prerequisite. If Git cannot commit, skip that commit and retain a truthful save frontier. Retain required execution Journal evidence and append-only history; do not fabricate save-Tool receipts.
-
-## Details
-
-### Current execution frontier
-
-### Restored execution frontier
-
-The latest Operator instruction supersedes the first-cut deferrals below. Resume the existing P1620 release chain, P1616 all-role status proof, P1527-P1529 query proof, P1713/P1716 recovery, and P1655 then P1124 final closure. Exact prior-image retirement remains conditional on successful promotion and absence of container/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
+- CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/s…1122 tokens truncated…tainer/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
 
 The N5 gate and current audit repairs are tracked in P1755-P1772 with C483-C490 at their owning Scope Units. Root owns Git, runtime publication, Docker image changes and actual MCP dispatch. Independent workers have exclusive code/test scopes. Test doubles, source checks and protocol fixtures remain clearly distinct from actual release/runtime proof.
 
