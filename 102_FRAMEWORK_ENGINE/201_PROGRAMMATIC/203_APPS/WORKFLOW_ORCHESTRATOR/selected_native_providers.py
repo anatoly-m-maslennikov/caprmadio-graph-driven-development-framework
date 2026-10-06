@@ -544,7 +544,7 @@ class SelectedNativeProviders:
                 progress_reader = context.get("checkpoint_progress_reader")
                 if not self._restored_completed_result_is_proven(
                     session, index=index, run=private_run, shared_recordings=shared_recordings,
-                    requested_action=requested_action, action_run_id=action_run_id,
+                    requested_action=requested_action, action_run_id=action["run_id"],
                     expected_result=expected_result, progress_reader=progress_reader,
                     allowed_private_outcomes=frozenset({"pending"}) if cached_retirement else frozenset({"completed"}),
                 ):

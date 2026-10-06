@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 8
 status: Active
 author: Anatoly Maslennikov
-version: 6
-updated_at: "2026-10-06 00:05:51 +0000"
+version: 5
+updated_at: "2026-10-05 23:35:01 +0000"
 subjects:
   governs: "Host Docker MCP test environment"
   depends_on: [Implementation, Evaluation, Workflow, MCP]
@@ -21,7 +21,7 @@ Restore declared host Docker MCP test environment
 
 ## Concern
 
-The current host dependencies, Docker API and canonical methodology publication are available, but real initial-runtime acceptance has exposed package startup defects. Initial installation remains unverified until the fixed complete-package and MCP canary passes.
+The declared host test dependencies are available, but the current session again denies Docker API access and atomic directory publication. These execution restrictions leave host Release regression, real installation and fresh immutable-image acceptance incomplete.
 
 ## Evidences
 
@@ -46,19 +46,12 @@ The current host dependencies, Docker API and canonical methodology publication 
 
 ## Blast radius
 
-P1600–P1604, P1528 and whole-image closure remain unfinished. Dependency provisioning, current Docker access and canonical methodology publication are verified. The current first-install canary failure blocks initial runtime acceptance; source/mock gate passes are not relabelled immutable-image, queue or all-Workflow proof. Both failed build attempts retain their actual evidence without publishing a runtime or Skill.
+P1600–P1604, P1528, current host Release regression acceptance and whole-image closure remain unfinished. Dependency provisioning is cleared; the latest current-session socket retry is denied. Earlier successful Docker inventory remains historical evidence, not present access. Passing host transport and fixture checks are not relabelled immutable-image, queue or all-Workflow proof. Existing containers and protected source carriers were not changed by this retry.
 
 ## Disposition
 
-Use `.caprmedio_runtime/host-tests/bin/python` for the declared host driver. Repair the installed-layout startup, bind a fresh source-current package plan and immutable image, and pass its fixed real complete-package/MCP canary before the journaled first installation. Leave fixture directories as the Operator requested. Preserve earlier cache/network/socket and cleanup evidence as historical. Keep complete Release test gates separate from the successful build or initial installation; preserve strict assertions and actual Run evidence.
+Use .caprmedio_runtime/host-tests/bin/python for the declared host driver. Bind a new source-current immutable acceptance image and update only the stale explicit test image bindings, preserving strict assertions. Leave fixture directories as the Operator requested; use the explicit test-only retention runner where needed. Continue independent source/code work while atomic directory publication remains denied; do not replace publication with an unsafe partial write or bypass the permission boundary. Preserve earlier cache/network/socket and cleanup evidence as historical. Do not weaken tests, fabricate Run receipts or treat host checks or an image build as functional completion.
 
 ## Current environment observation
 
 After the Operator restarted Docker and disabled sandboxing, the current session successfully connected to Docker Engine 29.8.2 with exit code 0. Earlier permission-denied and daemon-unreachable observations remain historical; their exact causes are not retroactively asserted. The declared host-test interpreter remains available, and current Unit driver/phase verification passed 20/20. This clears current socket access, not all functional release proof. Actual source publication, full Docker/MCP acceptance and complete runtime installation are still being verified; keep this Concern active until those environment-sensitive gates run.
-
-## Current first-release acceptance
-
-- Canonical methodology Workflow `release-methodology-first-cut-20261006-01` actually completed and recorded its terminal receipts; currentness verification passed for 1,035 selected source Atoms, with no source conflicts. Commit `394c7916e` saves the verified gate integration, compiled output and actual Journal evidence.
-- Bootstrap attempt `attempt-7zzecq1r` built immutable image `sha256:6adf7da271f6f7264b7a16d4a00efd8c76311b51a48df73254f3aa81dd3a54a9`, then its real canary failed when the non-root runtime could not read root-owned owner-only archived source files. Commit `6372cfa5d` preserves source modes while assigning packaged files to the runtime user; all 12 focused bootstrap tests pass.
-- Attempt `attempt-cbufqc4p` built immutable image `sha256:3775500f653b2004af0e3d76538653f37827a5c3b6af7c69c43184194bd18ab8`. The real file check passed, but MCP startup failed with `ModuleNotFoundError: workflow_evidence` from the relocated RMED Base Revise Tool. Its hardcoded Engine-root resolution is being repaired; retained stdout/stderr and command receipts remain under `.caprmedio_runtime/framework/bootstrap-image-evidence`.
-- Both failures occurred before installation. Neither failed image is acceptance evidence; no current selector or project Skill was published. Docker access is not the current blocker. Retain prior N-to-N+1, complete-suite and all-Workflow acceptance as separate unfinished Tasks.

@@ -281,6 +281,47 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.assertEqual(handler(self.context(1))["result"], "blocked")
         self.assertEqual(self.execute.call_count, 1)
 
+    def test_restored_cached_result_uses_validated_action_identity_and_canonical_proof(self):
+        context = self.context()
+        requested_action = context["requested_action_run_id"]
+        action_run_id = context["action_run_id"]
+        terminal = self.session.finish_run(action_run_id, outcome="completed",
+                                           result_ref="fixture-receipt.json", effect_refs=[])
+        retained = SimpleNamespace(
+            frozen_parameters_sha256="2" * 64,
+            contexts={0: release_actions.SelectedReleaseActionContext(
+                str(self.root), context["workflow_run_id"], context["step_run_id"], action_run_id,
+                context["workflow_run_id"], context["step_run_id"], "CA-O-170", "CA-O-165", "2" * 64,
+            )},
+            results={0: self.execute.return_value},
+            in_progress=None,
+        )
+        recordings = {0: {"terminal_outcome": "completed",
+                          "receipt_refs": (terminal["event_receipt"]["event_id"],)}}
+        context.update({
+            "restored_action": True,
+            "checkpoint_reader": lambda: {"schema": "fixture-release-checkpoint"},
+            "checkpoint_progress_reader": lambda requested: {
+                "action_run_id": self.session.actual[requested]["run_id"],
+                "result": "phase_0", "effect_refs": [],
+            },
+        })
+        events_before = list(self.tracker.events)
+        with patch("release_checkpoint.load_release_checkpoint", return_value=(retained, recordings)), \
+             patch("release_checkpoint.extract_pending_recordings", return_value={}), \
+             patch.object(SelectedNativeProviders, "_restored_completed_result_is_proven",
+                          wraps=SelectedNativeProviders._restored_completed_result_is_proven) as proof:
+            result = self.providers().handlers["CA-O-165"](context)
+        self.assertEqual(result["result"], "phase_0", result)
+        self.assertEqual(result["terminal_outcome"], "completed")
+        self.assertTrue(result["action_terminal_recorded"])
+        self.assertEqual(proof.call_args.kwargs["requested_action"], requested_action)
+        self.assertEqual(proof.call_args.kwargs["action_run_id"], action_run_id)
+        self.assertNotIn("record_shared_receipt", result)
+        self.assertEqual(self.tracker.events, events_before)
+        self.begin.assert_not_called()
+        self.execute.assert_called_once()
+
     def test_phase_pending_stops_graph_before_next_phase(self):
         self.execute.return_value = PhaseResult(outcome="pending")
         result = self.providers()._execute_graph(self.frozen, self.session)
