@@ -127,7 +127,11 @@ class SelectedStepInputsTest(unittest.TestCase):
             self.assertEqual(pending, retry)
             self.assertEqual("recording_pending", terminals[rows["CA-O-143"]["action_run_id"]]["disposition"])
             self.assertEqual("completed", terminals[rows["CA-O-143"]["action_run_id"]]["outcome"])
-            self.assertEqual("blocked", rows["CA-O-144"]["result"])
+            self.assertEqual(
+                ["CA-O-139", "CA-O-140", "CA-O-141", "CA-O-142", "CA-O-143"],
+                [row["step_definition_id"] for row in graph["step_results"]],
+            )
+            self.assertNotIn("CA-O-144", rows)
             self.assertEqual(bytes_after_effect, structure.read_bytes())
         finally:
             lease.cleanup()

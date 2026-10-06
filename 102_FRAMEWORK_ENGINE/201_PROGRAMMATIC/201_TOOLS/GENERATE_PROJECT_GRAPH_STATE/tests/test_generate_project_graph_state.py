@@ -364,23 +364,54 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
             self.fixture_scope_units()
         )
         source_atoms = generate_project_graph_state.active_source_atoms()
-        # The disposable Unit workspace is deliberately source-sealed and has
-        # no Git administration data.  The installed-release reader remains
-        # Git-rooted in production, so inject only its already-known Project
-        # boundary here rather than materialising a fake checkout.
+        # The sealed Unit workspace deliberately has no live installed-tools
+        # selector.  Materialize the smallest schema-valid installed package
+        # in this already gitless disposable Project, then reopen it through
+        # the verified reader rather than depending on host runtime state.
+        import framework_installation
+
+        tools_runtime = self.root / ".caprmedio_runtime" / "tools"
+        tools = tools_runtime / "releases" / "pending" / "TOOLS"
+        installed = tools / "GENERATE_PROJECT_GRAPH_STATE" / "generate_project_graph_state.py"
+        installed.parent.mkdir(parents=True)
+        installed.write_bytes(generate_project_graph_state.CANONICAL_GENERATOR.read_bytes())
+        installed.chmod(generate_project_graph_state.CANONICAL_GENERATOR.stat().st_mode & 0o777)
+        for relative in (
+            "INSTALL_TOOLS/install_tools.py",
+            "COMMIT_TRIGGER/commit_trigger.py",
+            "START_BACKGROUND_SERVICES/start_background_services.py",
+        ):
+            carrier = tools / relative
+            carrier.parent.mkdir(parents=True, exist_ok=True)
+            carrier.write_text("# sealed fixture carrier\n", encoding="utf-8")
+        row = {
+            "path": "TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py",
+            "sha256": generate_project_graph_state.sha(installed),
+            "mode": installed.stat().st_mode & 0o777,
+        }
+        release = framework_installation.digest(
+            {
+                "schema_version": framework_installation.SCHEMA_VERSION,
+                "package": framework_installation.PACKAGE,
+                "files": [row],
+            }
+        )
+        release_root = tools_runtime / "releases" / release
+        release_root.mkdir()
+        tools.rename(release_root / "TOOLS")
+        (tools_runtime / "current.toml").write_text(
+            framework_installation._render_current_manifest(release), encoding="utf-8"
+        )
+        (release_root / "manifest.toml").write_text(
+            framework_installation._render_release_manifest(release, [row]), encoding="utf-8"
+        )
         with mock.patch(
             "framework_installation.resolve_repository",
-            return_value=generate_project_graph_state.ROOT,
+            return_value=self.root,
         ):
-            installation = generate_project_graph_state.installation_status(
-                generate_project_graph_state.ROOT
-            )
-        installed = (
-            generate_project_graph_state.ROOT
-            / str(installation["package_root"])
-            / "GENERATE_PROJECT_GRAPH_STATE"
-            / "generate_project_graph_state.py"
-        )
+            installation = generate_project_graph_state.installation_status(self.root)
+        self.assertTrue(installation["verified"])
+        installed = self.root / str(installation["package_root"]) / "GENERATE_PROJECT_GRAPH_STATE" / "generate_project_graph_state.py"
         self.assertTrue(installed.is_file())
         source_payload = generate_project_graph_state.project_scope_unit_graph(
             generate_project_graph_state.source_updated_at(bindings, source_atoms),
@@ -406,7 +437,10 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
             'canonical_generator = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/GENERATE_PROJECT_GRAPH_STATE/generate_project_graph_state.py"',
             installed_payload,
         )
-        self.assertIn('executed_generator = ".caprmedio_runtime/tools/releases/', installed_payload)
+        self.assertIn(
+            f'executed_generator = "{generate_project_graph_state.project_relative(installed)}"',
+            installed_payload,
+        )
 
     def test_identical_scope_frontier_serializes_identically(self) -> None:
         self.mkdir("101_LAYER_1_ROOT")

@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 20:24:00 +0000"
+updated_at: "2026-10-06 20:31:00 +0000"
 subjects:
   governs: "Align unsealed Step recording fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier, Workflow, Action, Journal]
@@ -35,3 +35,9 @@ test_selected_step_inputs.py; an unrecorded terminal cannot permit cutover, fina
 ## Definition of Done
 
 the confirmed defect is explained and repaired against current authority; source-equivalent focused regressions have a captured terminal result and independent review accepts the bounded change. actual full Release acceptance remains with the parent Plan.
+
+## Acceptance evidence
+
+independent acceptance passed the selected-step and historical host-isolation modules together: 8 tests, 5.975 seconds, exit 0, using host-tests Python. unsealed O143 recording stops at its exact emitted prefix; O144 is absent, not falsely completed or dispatched.
+
+this is bounded fixture acceptance only; the complete fresh Release gate remains with CA-P-1809 and CA-P-1117.

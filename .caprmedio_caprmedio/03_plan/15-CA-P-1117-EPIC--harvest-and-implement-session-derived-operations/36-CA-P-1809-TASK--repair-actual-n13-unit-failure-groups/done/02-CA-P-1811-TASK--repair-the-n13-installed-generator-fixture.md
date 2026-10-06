@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 20:24:00 +0000"
+updated_at: "2026-10-06 20:31:00 +0000"
 subjects:
   governs: "Repair the N13 installed generator fixture"
   depends_on: [Implementation, Evaluation, Source Carrier, Workflow, Action, Journal]
@@ -35,3 +35,9 @@ test_generate_project_graph_state.py; no product graph-semantic change is author
 ## Definition of Done
 
 the confirmed defect is explained and repaired against current authority; source-equivalent focused regressions have a captured terminal result and independent review accepts the bounded change. actual full Release acceptance remains with the parent Plan.
+
+## Acceptance evidence
+
+independent acceptance passed the full graph fixture module: 14 tests, 25.947 seconds, exit 0, using host-tests Python. the fixture builds a schema-valid verified installed package and preserves canonical output independence from the actual executed Carrier.
+
+this is bounded fixture acceptance only; the complete fresh Release gate remains with CA-P-1809 and CA-P-1117.
