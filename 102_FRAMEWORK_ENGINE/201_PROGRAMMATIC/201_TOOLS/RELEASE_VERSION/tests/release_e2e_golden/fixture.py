@@ -61,6 +61,7 @@ from release_suite import (  # noqa: E402
     verify_bound_suite_evidence,
 )
 from release_suite_reference_context import capture_context  # noqa: E402
+from release_suite_limits import resolve_unit_deadline  # noqa: E402
 from release_test_phases import derive_test_phase_map_from_rows  # noqa: E402
 from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
 
@@ -327,6 +328,7 @@ def _seed_suite(root: Path, candidate: ValidatedCandidate, compilation: SealedCa
     report = _coverage_report(root, candidate, compilation, context, phase_map.sha256)
     executed_tests = len(list(ET.fromstring(report).iter("testcase")))
     _write_new(attempt / "context.json", _context_receipt(context))
+    _write_new(attempt / "unit-deadline.json", resolve_unit_deadline(context).snapshot)
     _write_new(attempt / "stdout.bin", stdout)
     _write_new(attempt / "stderr.bin", stderr)
     _write_new(attempt / "coverage.xml", report)
