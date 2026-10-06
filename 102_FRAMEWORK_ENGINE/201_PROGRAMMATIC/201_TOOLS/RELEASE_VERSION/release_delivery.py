@@ -24,7 +24,7 @@ from release_handoff import (
     tree_sha256,
     validate_source_copy,
 )
-from release_inventory import ReleaseInventoryError, persistent_regular_files
+from release_inventory import _is_ephemeral_file, ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 from release_packaging import (
     MANIFEST_NAME,
     RUNTIME_ROOT,
@@ -65,6 +65,18 @@ def _snapshot(folder: Path) -> dict[str, tuple[bool, int, bytes]]:
         relative = path.relative_to(folder).as_posix()
         if path.is_symlink() or not (path.is_file() or path.is_dir()):
             raise ReleaseDeliveryError("release-copy-path-unsafe", f"unsafe source or delivery carrier: {relative}")
+        try:
+            # Check every component before a metadata exclusion: a secret
+            # name remains forbidden even when its regular-file suffix is
+            # otherwise ephemeral (for example ``.env.pyc``).
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise ReleaseDeliveryError("release-copy-path-unsafe", "secret-shaped source or delivery carrier is not admitted") from error
+        # Persistent source-copy identity deliberately excludes Finder
+        # metadata and bytecode.  Unsafe carriers were refused above; retain
+        # every directory and every non-ephemeral regular file exactly.
+        if path.is_file() and _is_ephemeral_file(path.name):
+            continue
         records[relative] = (path.is_dir(), path.stat().st_mode & 0o777, b"" if path.is_dir() else path.read_bytes())
     return records
 

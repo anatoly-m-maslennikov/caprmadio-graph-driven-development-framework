@@ -88,6 +88,31 @@ class ReleasePackagingTests(unittest.TestCase):
             stage_framework_package(self.fixture.root, handoff)
         self.assertEqual(raised.exception.code, "release-collision")
 
+    def test_retained_ephemeral_metadata_is_accepted_but_secret_shaped_bytecode_refuses(self) -> None:
+        handoff = self._sealed_compilation()
+        first = stage_framework_package(self.fixture.root, handoff)
+        release = self.fixture.root / first["release_root"]
+        metadata = release / ".DS_Store"
+        metadata.write_bytes(b"finder metadata\n")
+
+        second = stage_framework_package(self.fixture.root, handoff)
+
+        self.assertFalse(second["staged"])
+        self.assertTrue(second["verified"])
+        self.assertEqual(metadata.read_bytes(), b"finder metadata\n")
+        secret = release / ".env.pyc"
+        secret.write_bytes(b"secret-shaped bytecode\n")
+        release_before = {path.relative_to(release).as_posix(): path.read_bytes()
+                          for path in release.rglob("*") if path.is_file()}
+        with self.assertRaises(ReleasePackagingError) as raised:
+            stage_framework_package(self.fixture.root, handoff)
+        self.assertEqual(raised.exception.code, "release-collision")
+        self.assertEqual(
+            {path.relative_to(release).as_posix(): path.read_bytes()
+             for path in release.rglob("*") if path.is_file()},
+            release_before,
+        )
+
     def test_rereads_current_bytes_and_modes_before_copy(self) -> None:
         for mutation in ("bytes", "mode"):
             with self.subTest(mutation=mutation):

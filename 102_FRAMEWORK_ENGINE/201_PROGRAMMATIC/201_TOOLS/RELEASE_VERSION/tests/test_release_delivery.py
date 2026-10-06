@@ -139,6 +139,47 @@ class ReleaseDeliveryTests(unittest.TestCase):
         for path, payload in before.items():
             self.assertEqual((self.root / path).read_bytes(), payload)
 
+    def test_current_delivery_with_different_ephemeral_metadata_is_a_noop(self) -> None:
+        preflight, candidate = self.fixture.build()
+        first = deliver_release_sources(candidate)
+        inode = self.target.stat().st_ino
+        source_metadata = self.fixture.source / ".DS_Store"
+        delivery_metadata = self.target / ".DS_Store"
+        source_metadata.write_bytes(b"canonical finder metadata\n")
+        delivery_metadata.write_bytes(b"delivery finder metadata\n")
+
+        second = deliver_release_sources(candidate)
+
+        self.assertEqual(second, first)
+        self.assertEqual(self.target.stat().st_ino, inode)
+        self.assertEqual(source_metadata.read_bytes(), b"canonical finder metadata\n")
+        self.assertEqual(delivery_metadata.read_bytes(), b"delivery finder metadata\n")
+        self.assertEqual(list(self.target.parent.glob(".release-sources-*")), [])
+
+    def test_secret_shaped_ephemeral_source_or_delivery_carrier_refuses_without_mutation(self) -> None:
+        _preflight, candidate = self.fixture.build()
+        source_secret = self.fixture.source / ".env.pyc"
+        source_secret.write_bytes(b"source secret-shaped bytecode\n")
+        with self.assertRaises(ReleaseDeliveryError) as source_refusal:
+            release_delivery._snapshot(self.fixture.source)
+        self.assertEqual(source_refusal.exception.code, "release-copy-path-unsafe")
+        self.assertEqual(source_secret.read_bytes(), b"source secret-shaped bytecode\n")
+        self.assertFalse(self.target.exists())
+
+        source_secret.unlink()
+        delivered = deliver_release_sources(candidate)
+        target_secret = self.target / ".env.pyc"
+        target_secret.write_bytes(b"delivery secret-shaped bytecode\n")
+        target_before = records(self.target)
+        inode = self.target.stat().st_ino
+        with self.assertRaises(ReleaseDeliveryError) as delivery_refusal:
+            deliver_release_sources(candidate)
+        self.assertEqual(delivery_refusal.exception.code, "release-copy-path-unsafe")
+        self.assertEqual(records(self.target), target_before)
+        self.assertEqual(self.target.stat().st_ino, inode)
+        self.assertEqual(target_secret.read_bytes(), b"delivery secret-shaped bytecode\n")
+        self.assertTrue(delivered.actual_derived_source_copy_sha256)
+
     def test_owned_executing_package_replacement_retains_n_and_prior_derived_tree(self) -> None:
         preflight, candidate, prior, release, retained = self.owned_predecessor()
         # The stager has no byte rows for empty folders. Keep even an extra
@@ -159,8 +200,19 @@ class ReleaseDeliveryTests(unittest.TestCase):
 
     def test_bootstrap_executing_package_replacement_accepts_only_exact_selector_bound_shape(self) -> None:
         preflight, candidate, _prior, release, retained = self.bootstrap_owned_predecessor()
-        # macOS metadata was never part of the persistent release inventory.
+        # Ephemeral macOS metadata is excluded by every persistent inventory,
+        # including retained-package verification.  It is not deleted or
+        # otherwise changed while proving the bootstrap predecessor.
         (self.target / ".DS_Store").write_bytes(b"transient finder metadata\n")
+        metadata_paths = (
+            release / ".DS_Store",
+            release / "METHODOLOGY/.DS_Store",
+            release / "METHODOLOGY/sources/.DS_Store",
+            release / "METHODOLOGY/sources/001_CORE_META_MODEL/.DS_Store",
+        )
+        for path in metadata_paths:
+            path.write_bytes(b"transient finder metadata\n")
+        retained = records(release)
         selector = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
 
         delivered = deliver_release_sources(candidate)

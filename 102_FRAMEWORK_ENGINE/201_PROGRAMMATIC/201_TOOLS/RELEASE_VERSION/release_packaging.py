@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Iterable
 
 from release_contract import IMAGE_DOCKERFILE, REQUIRED_ENGINE_SOURCE_PREFIXES
-from release_inventory import ReleaseInventoryError, persistent_regular_files, refuse_secret_path
+from release_inventory import _is_ephemeral_file, ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 from release_handoff import (
     CANONICAL_SOURCE_RELATIVE,
     COMPILER_ENTRYPOINT_RELATIVE,
@@ -300,7 +300,16 @@ def _verify_release(release_root: Path, manifest: str, rows: Iterable[PackageRow
         relative = carrier.relative_to(release_root).as_posix()
         if carrier.is_symlink() or (not carrier.is_dir() and not carrier.is_file()):
             raise ReleasePackagingError("release-collision", f"existing release contains unsafe carrier: {relative}")
-        if carrier.is_file():
+        try:
+            # A secret-shaped name cannot be admitted merely because it also
+            # has an otherwise ephemeral suffix such as ``.env.pyc``.
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise ReleasePackagingError("release-collision", "existing release contains a secret-shaped carrier") from error
+        # Match source/delivery inventory: Finder metadata and bytecode are
+        # not persistent release members.  Still reject every symlink and
+        # every other unsealed regular file below.
+        if carrier.is_file() and not _is_ephemeral_file(carrier.name):
             actual_paths.add(relative)
     if actual_paths != expected_paths:
         raise ReleasePackagingError("release-collision", f"existing release inventory differs: {release_root.name}")
