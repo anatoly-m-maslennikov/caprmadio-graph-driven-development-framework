@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-06 04:44:20 +0000"
+version: 2
+updated_at: "2026-10-06 05:34:38 +0000"
 subjects:
   governs: "Lifecycle admission gaps"
   depends_on: [Atom, Implementation, Evaluation, Status, Journal]
@@ -34,3 +34,7 @@ The selected lifecycle Workflows, their preserved identity/history and final CA-
 ## Disposition
 
 CA-P-1775 owns test-first implementation and independent acceptance. Current source contracts remain authoritative; do not amend them to excuse code defects or count source tests as Docker proof.
+
+## Resolution
+
+CA-P-1775 and CA-P-1778 close the source defects with 31 focused regressions and independent acceptance. Actual selected lifecycle execution remains a separate release gate.

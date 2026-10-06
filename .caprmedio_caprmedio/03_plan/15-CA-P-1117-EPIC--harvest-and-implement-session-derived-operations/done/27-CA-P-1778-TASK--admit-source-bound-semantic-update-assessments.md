@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 05:20:14 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 05:34:38 +0000"
 subjects:
   governs: "Source-bound semantic Update assessment admission"
   depends_on: [Implementation, Analysis, Atom, Evaluation, Permission]
@@ -44,3 +44,7 @@ Source-first authority, source-bound valid semantic Update and fail-closed regre
 ## Pre-execution review
 
 The existing unresolved outcome is safe, but cannot by itself establish the requested semantic Update capability. The Operator authorized best-option decisions with a retained Question. CA-C-494 records the chosen saved-report interface; assessment evidence is not approval.
+
+## Results
+
+Tool-local R1892/M348/E591/D585 were authored before implementation. The optional completed Analysis Report is bound to target/proposal/change-authority and lineage evidence; O145 verifies and seals it, and O129 reopens it before effects. Accepted semantic Update, absent/unbound evidence and tampering refusal have regression coverage. Independent review accepted the interface and separate authorization boundary. Actual Docker acceptance remains required in the release gate.
