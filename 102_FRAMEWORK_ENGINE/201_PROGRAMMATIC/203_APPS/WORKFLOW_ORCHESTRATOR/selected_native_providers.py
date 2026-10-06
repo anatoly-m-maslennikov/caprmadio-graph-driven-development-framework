@@ -313,16 +313,30 @@ class SelectedNativeProviders:
         admitted = load_selected_manifest(self.root)
         selected = SelectedExecution(self.root)
         current_graph = selected._revalidate(frozen)
+        admissions = admitted.get("release_source_admissions")
+        workflow_pin = None
+        if (isinstance(admissions, list) and len(admissions) == 1
+                and isinstance(admissions[0], Mapping)
+                and admissions[0].get("route") == "release_version"):
+            workflow_pin = admissions[0].get("workflow")
+        admitted_workflow = None
+        if (isinstance(workflow_pin, Mapping)
+                and set(workflow_pin) == {"atom_id", "version", "source_path", "digest"}):
+            # Source admission pins use the canonical carrier field names;
+            # SelectedExecution retains the same pin in normalized graph form.
+            admitted_workflow = {
+                "atom_id": workflow_pin["atom_id"], "kind": "workflow",
+                "version": workflow_pin["version"], "path": workflow_pin["source_path"],
+                "sha256": workflow_pin["digest"],
+            }
         if (not isinstance(parameters, Mapping) or not isinstance(graph, Mapping)
                 or frozen["request"].get("operation") != "enqueue_selected"
                 or execution.get("mode") != "execute"
                 or graph.get("route") != "release_version"
+                or not isinstance(graph.get("workflow"), Mapping)
                 or graph.get("workflow", {}).get("atom_id") != "CA-O-164"
-                # The admitted source is the current O164@5 graph.  This is
-                # deliberately an equality to the source admission, rather
-                # than a retired provider contract.
-                or graph["workflow"].get("version") != 5
-                or not admitted.get("release_source_admissions")
+                or admitted_workflow is None
+                or canonical_json(graph["workflow"]) != canonical_json(admitted_workflow)
                 or execution.get("definition_manifest") != {"manifest_ref": admitted["manifest_ref"],
                     "manifest_digest": admitted["canonical_manifest_sha256"]}
                 or canonical_json(current_graph) != canonical_json(graph)):
@@ -492,7 +506,7 @@ class SelectedNativeProviders:
                         or (item.step_atom_id, item.action_atom_id) != pairs[saved_index]
                         for saved_index, item in restored.contexts.items()
                     ):
-                        return self._blocked("Release checkpoint contexts differ from the exact current source-5 graph")
+                        return self._blocked("Release checkpoint contexts differ from the exact current source-admitted graph")
                     private_run = restored
                     shared_recordings = dict(restored_recordings)
                     try:

@@ -80,7 +80,7 @@ class ReleaseSourceBindingTests(unittest.TestCase):
         )
         text = source.read_text(encoding="utf-8")
         self.assertIn("atom_id: CA-O-164", text)
-        self.assertIn("version: 5", text)
+        self.assertIn("version: 6", text)
         source_pairs = tuple(re.findall(
             r"^\| (CA-O-\d+) \| (CA-O-\d+) \| ([a-z0-9_]+) \|$", text, flags=re.MULTILINE,
         ))
@@ -96,7 +96,7 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
         self.parameters = {"project_root": str(self.root), "operation": "apply", "fixture": True}
-        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 5),
+        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 6),
                       "entry_step": "CA-O-170", "steps": []}
         for index, (step, action, _phase) in enumerate(release_actions.PHASES):
             edge = {"result": f"phase_{index}"}
@@ -104,7 +104,12 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
                         if index < len(release_actions.PHASES) - 1 else {"terminal": "completed"})
             self.graph["steps"].append({**self.binding(step, "step"),
                                         "actions": [self.binding(action, "action")], "on_result": [edge]})
-        self.admitted = {"release_source_admissions": [{"fixture": True}], "manifest_ref": "manifest.json",
+        workflow = self.graph["workflow"]
+        self.admitted = {"release_source_admissions": [{
+                            "route": "release_version",
+                            "workflow": {"atom_id": workflow["atom_id"], "version": workflow["version"],
+                                         "source_path": workflow["path"], "digest": workflow["sha256"]},
+                         }], "manifest_ref": "manifest.json",
                          "canonical_manifest_sha256": "1" * 64}
         execution = {"mode": "execute", "request_id": "fixture-request", "operation_route": "release_version",
                      "workflow_run_id": "fixture-workflow", "parameters": self.parameters,
@@ -203,6 +208,58 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         admission = self.begin.call_args.kwargs["image_executor"]
         self.assertIsInstance(admission, release_actions.AdmittedImageExecutor)
         self.assertIsInstance(admission.executor, DockerSubprocessExecutor)
+
+    def test_current_source_admitted_workflow_six_reaches_private_phase(self):
+        self.assertEqual(self.graph["workflow"]["version"], 6)
+        selected = self.providers()
+        selected.handlers["CA-O-165"](self.context())
+        self.begin.assert_called_once()
+        self.execute.assert_called_once()
+        self.assertEqual(self.execute.call_args.kwargs["context"].workflow_version, 6)
+
+    def test_noncurrent_workflow_pin_refuses_before_private_checkpoint_or_effects(self):
+        for change in ({"version": 5}, {"version": 99}, {"version": "6"}, {"version": True},
+                       {"path": "definitions/stale.md"}, {"sha256": "3" * 64}):
+            with self.subTest(change=change):
+                graph = copy.deepcopy(self.graph)
+                graph["workflow"].update(change)
+                frozen = {**self.frozen, "graph": graph}
+                # A current-graph double returning the changed graph proves
+                # this provider also checks the source-admission pin itself.
+                with patch.object(SelectedExecution, "_revalidate", return_value=graph), \
+                     self.assertRaises(SelectedExecutionError):
+                    SelectedNativeProviders(self.root).execution(frozen)
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+        self.assertEqual(self.direct_checkpoints, [])
+        self.assertEqual(self.session.actual, {})
+
+    def test_current_graph_revalidation_still_requires_full_frozen_equality(self):
+        current = copy.deepcopy(self.graph)
+        current["steps"][0]["on_result"][0]["result"] = "changed_source_result"
+        with patch.object(SelectedExecution, "_revalidate", return_value=current), \
+             self.assertRaises(SelectedExecutionError):
+            self.providers()
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+
+    def test_source_admission_requires_one_closed_workflow_pin(self):
+        admission = self.admitted["release_source_admissions"][0]
+        missing_digest = copy.deepcopy(admission)
+        missing_digest["workflow"].pop("digest")
+        extra_member = copy.deepcopy(admission)
+        extra_member["workflow"]["caller_version"] = 6
+        wrong_route = {**admission, "route": "caller_release"}
+        for admissions in ([admission, admission], [missing_digest], [extra_member], [wrong_route]):
+            with self.subTest(admissions=admissions):
+                self.admitted["release_source_admissions"] = admissions
+                with self.assertRaises(SelectedExecutionError):
+                    self.providers()
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
 
     def test_complete_current_phase_graph_uses_one_private_run_and_shared_session(self):
         selected = self.providers()
@@ -321,6 +378,28 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.assertEqual(self.tracker.events, events_before)
         self.begin.assert_not_called()
         self.execute.assert_called_once()
+
+    def test_restored_checkpoint_revision_is_not_rebound_to_current_source(self):
+        context = self.context()
+        context["checkpoint_reader"] = lambda: {"schema": "fixture-release-checkpoint"}
+        for version in (5, 99, "6", True):
+            with self.subTest(version=version):
+                saved = release_actions.SelectedReleaseActionContext(
+                    str(self.root), context["workflow_run_id"], context["step_run_id"], context["action_run_id"],
+                    context["workflow_run_id"], context["step_run_id"], "CA-O-170", "CA-O-165", "2" * 64,
+                    workflow_version=version,
+                )
+                retained = SimpleNamespace(contexts={0: saved}, results={}, in_progress=None)
+                with patch("release_checkpoint.load_release_checkpoint", return_value=(retained, {})):
+                    result = self.providers().handlers["CA-O-165"](context)
+                self.assertEqual(result["terminal_outcome"], "interrupted_pending")
+                self.assertIn("exact current source-admitted graph", result["native_result"]["blockers"][0])
+                self.assertEqual(saved.workflow_version, version)
+                self.assertFalse(hasattr(retained, "checkpoint_callback"))
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+        self.assertEqual(self.direct_checkpoints, [])
 
     def test_phase_pending_stops_graph_before_next_phase(self):
         self.execute.return_value = PhaseResult(outcome="pending")
