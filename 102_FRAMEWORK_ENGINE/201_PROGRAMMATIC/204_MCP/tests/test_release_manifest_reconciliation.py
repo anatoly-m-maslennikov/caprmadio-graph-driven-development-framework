@@ -212,6 +212,7 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
                 self.root, execute=True, authorization=authorization,
             )
             self.assertEqual("observed", result["disposition"])
+            self.assertEqual("execute", result["mode"])
             self.assertEqual(gap_bytes, self.path.read_bytes())
             records = self.records()
             self.assertEqual(history_before, records[:-1])
@@ -240,6 +241,7 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
                 self.root, execute=True, authorization=authorization,
             )
             self.assertEqual("already_recorded", repeated["disposition"])
+            self.assertEqual("execute", repeated["mode"])
             self.assertEqual(journal_after_first, self.records())
             self.assertEqual(original["event_id"], repeated["event_id"])
             self.assertEqual(original["occurred_at"], self.records()[-1]["occurred_at"])
@@ -252,6 +254,7 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
                 self.root, execute=True, authorization=self._authorize(plan),
             )
             self.assertEqual("observed", result["disposition"])
+            self.assertEqual("execute", result["mode"])
             self.assertEqual(gap_bytes, self.path.read_bytes())
             self.assertIn(unrelated["event_id"], [event["event_id"] for event in self.records()])
             self.assertEqual(3, self.records()[-1]["result"]["version"])
@@ -270,6 +273,7 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
                 self.root, execute=True, authorization=authorization,
             )
             self.assertEqual("blocked", result["disposition"])
+            self.assertEqual("execute", result["mode"])
             self.assertEqual(gap_bytes, self.path.read_bytes())
             self.assertEqual(before, self.records())
 
@@ -339,6 +343,7 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
                         self.root, execute=True, authorization=authorization,
                     )
                 self.assertEqual("blocked", result["disposition"])
+                self.assertEqual("execute", result["mode"])
                 if label != "history":
                     self.assertEqual(before, self.records())
 
@@ -378,8 +383,9 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
             ):
                 failed = reconcile_release_manifest_history(
                     self.root, execute=True, authorization=self._authorize(plan),
-                )
+            )
             self.assertEqual("recording_required", failed["disposition"])
+            self.assertEqual("execute", failed["mode"])
             pending = self._pending_ids()
             self.assertEqual(1, len(pending))
             self.assertEqual(gap_bytes, self.path.read_bytes())
@@ -396,8 +402,9 @@ class ReleaseManifestReconciliationTest(unittest.TestCase):
             ):
                 retried = recover_release_manifest_reconciliation(
                     self.root, pending[0], recovery_context,
-                )
+            )
             self.assertEqual("recovered", retried["disposition"])
+            self.assertEqual("recover", retried["mode"])
             observed = self.records()[-1]
             self.assertEqual(3, observed["result"]["version"])
             self.assertEqual([], self._pending_ids())

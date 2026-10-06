@@ -791,7 +791,10 @@ def _pending_diagnostic(plan: Mapping[str, Any], event: Mapping[str, Any]) -> st
 
 
 def _blocked(plan: Mapping[str, Any], message: str) -> dict[str, Any]:
-    return {"mode": "execute", "disposition": "blocked", "reconciliation_requirement": message, **dict(plan)}
+    return {
+        **dict(plan), "mode": "execute", "disposition": "blocked",
+        "reconciliation_requirement": message,
+    }
 
 
 def _facts_match_plan(facts: Mapping[str, Any], plan: Mapping[str, Any]) -> bool:
@@ -881,12 +884,12 @@ def reconcile_release_manifest_history(
                         receipt = work_journal.recover_pending_event(root, pending[0])
                     except (OSError, RuntimeError, TypeError, ValueError, work_journal.WorkJournalError) as error:
                         return {
-                            "mode": "execute", "disposition": "recording_required",
-                            "pending_event_id": pending[0], "recording_requirement": str(error), **plan,
+                            **plan, "mode": "execute", "disposition": "recording_required",
+                            "pending_event_id": pending[0], "recording_requirement": str(error),
                         }
                 result = {
-                    "mode": "execute", "disposition": "already_recorded",
-                    "event_id": latest["event"]["event_id"], **plan,
+                    **plan, "mode": "execute", "disposition": "already_recorded",
+                    "event_id": latest["event"]["event_id"],
                 }
                 if receipt:
                     result["recording_ref"] = "journal:" + str(receipt["event_id"])
@@ -902,19 +905,20 @@ def reconcile_release_manifest_history(
                         receipt = work_journal.recover_pending_event(root, pending[0])
                     except (OSError, RuntimeError, TypeError, ValueError, work_journal.WorkJournalError) as error:
                         return {
-                            "mode": "execute", "disposition": "recording_required",
-                            "pending_event_id": pending[0], "recording_requirement": str(error), **plan,
+                            **plan, "mode": "execute", "disposition": "recording_required",
+                            "pending_event_id": pending[0], "recording_requirement": str(error),
                         }
                 result = {
-                    "mode": "execute", "disposition": "already_recorded",
-                    "event_id": latest["event"]["event_id"], **plan,
+                    **plan, "mode": "execute", "disposition": "already_recorded",
+                    "event_id": latest["event"]["event_id"],
                 }
                 if receipt:
                     result["recording_ref"] = "journal:" + str(receipt["event_id"])
                 return result
             if pending is not None:
                 return {
-                    "mode": "execute", "disposition": "recording_required", "pending_event_id": pending[0], **plan,
+                    **plan, "mode": "execute", "disposition": "recording_required",
+                    "pending_event_id": pending[0],
                 }
             event = _build_observation_event(root, plan, authorization)
             _validate_observation_event(event, plan)
@@ -945,13 +949,13 @@ def reconcile_release_manifest_history(
                 _pending_path(root, str(event["event_id"])).unlink(missing_ok=True)
             except (OSError, RuntimeError, TypeError, ValueError, work_journal.WorkJournalError) as error:
                 return {
-                    "mode": "execute", "disposition": "recording_required",
+                    **plan, "mode": "execute", "disposition": "recording_required",
                     "pending_event_id": event["event_id"],
-                    "recording_requirement": str(error), **plan,
+                    "recording_requirement": str(error),
                 }
             return {
-                "mode": "execute", "disposition": "observed", "event_id": event["event_id"],
-                "recording_ref": "journal:" + str(receipt["event_id"]), **plan,
+                **plan, "mode": "execute", "disposition": "observed", "event_id": event["event_id"],
+                "recording_ref": "journal:" + str(receipt["event_id"]),
             }
     except ReleaseManifestReconciliationError as error:
         return _blocked(plan, str(error))
@@ -1001,12 +1005,12 @@ def recover_release_manifest_reconciliation(
                 receipt = work_journal.recover_pending_event(root, pending_event_id)
             except (OSError, RuntimeError, TypeError, ValueError, work_journal.WorkJournalError) as error:
                 return {
-                    "mode": "recover", "disposition": "recording_required",
-                    "pending_event_id": pending_event_id, "recording_requirement": str(error), **plan,
+                    **plan, "mode": "recover", "disposition": "recording_required",
+                    "pending_event_id": pending_event_id, "recording_requirement": str(error),
                 }
             return {
-                "mode": "recover", "disposition": "recovered", "event_id": pending_event_id,
-                "recording_ref": "journal:" + str(receipt["event_id"]), **plan,
+                **plan, "mode": "recover", "disposition": "recovered", "event_id": pending_event_id,
+                "recording_ref": "journal:" + str(receipt["event_id"]),
             }
     except ReleaseManifestReconciliationError as error:
         return _blocked(plan, str(error))
