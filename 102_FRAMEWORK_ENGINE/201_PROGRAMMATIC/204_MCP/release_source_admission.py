@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 12, "source_path": AUTHORITY_REF,
-    "digest": "294e34cdbc074438b30492a5fc57e5e90dae82ea8f03ab4822af19704b033de0",
+    "atom_id": "CA-D-572", "version": 13, "source_path": AUTHORITY_REF,
+    "digest": "72712694ba4d40069ac03e6d2513b04b15bd1d2970e26108e2ae152c5da54d69",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
@@ -227,7 +227,7 @@ def derive_release_private_carriers(project_root: str | Path) -> list[dict[str, 
 
 
 def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
-    """Derive the one accepted record from pinned actual D572@11, read-only.
+    """Derive the one accepted record from pinned actual D572@13, read-only.
 
     This reads the defining authority and its private implementation carriers.
     The validator separately observes all unique Atom pins on each admission;

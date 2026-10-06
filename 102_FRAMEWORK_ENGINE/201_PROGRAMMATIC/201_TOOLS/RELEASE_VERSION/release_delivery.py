@@ -33,6 +33,7 @@ from release_packaging import (
     _render_manifest,
     _verify_release,
 )
+from release_predecessor import verify_recorded_source_predecessor
 from release_suite import _bootstrap_prior_manifest_is_exact
 
 
@@ -186,6 +187,18 @@ def _prove_predecessor(root: Path, candidate: ValidatedCandidate, destination: P
     # including these directories, rather than deleting an unproven carrier.
 
 
+def _prove_owned_predecessor(root: Path, candidate: ValidatedCandidate, destination: Path) -> None:
+    """Accept either the retained N package or the one recorded old delivery."""
+
+    try:
+        _prove_predecessor(root, candidate, destination)
+    except ReleaseDeliveryError as error:
+        if error.code != "release-copy-predecessor-mismatch":
+            raise
+        if not verify_recorded_source_predecessor(root, candidate.authority.executing_release, destination):
+            raise error
+
+
 def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
     """Copy fixed canonical source bytes/modes and return actual D567 proof.
 
@@ -203,7 +216,7 @@ def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
         actual = _snapshot(destination)
         if actual == records:
             return validate_source_copy(_admit(current))
-        _prove_predecessor(root, current, destination)
+        _prove_owned_predecessor(root, current, destination)
     parent = destination.parent
     if not parent.exists():
         parent.mkdir()
@@ -218,7 +231,7 @@ def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
             raise ReleaseDeliveryError("release-currentness-stale", "canonical source tree changed during delivery")
         _safe_path(root, DERIVED_SOURCE_COPY_RELATIVE)
         if existing:
-            _prove_predecessor(root, current, destination)
+            _prove_owned_predecessor(root, current, destination)
             predecessor = Path(tempfile.mkdtemp(prefix=".release-sources-prior-", dir=parent))
             predecessor.rmdir()  # Only the just-created empty reservation.
             destination.rename(predecessor)

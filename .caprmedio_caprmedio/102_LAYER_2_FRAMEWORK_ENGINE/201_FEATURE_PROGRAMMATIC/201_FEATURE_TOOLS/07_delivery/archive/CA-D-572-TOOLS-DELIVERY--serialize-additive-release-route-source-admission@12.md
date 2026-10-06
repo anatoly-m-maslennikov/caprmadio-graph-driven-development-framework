@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 13
-updated_at: "2026-10-06 16:32:18 +0000"
+version: 12
+updated_at: "2026-10-06 14:20:17 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -67,14 +67,14 @@ This one unique delivery-level object is part of the one Release admission recor
 | --- | --- | --- | --- |
 | CA-R-1876 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1876-TOOLS-REQUIREMENT--seal-release-version-request-and-candidate-boundary.md` | `f1240a46da3456d44fc3f7691fde0b050a67ed146b1b0bca2b8bfc697195d820` |
 | CA-R-1877 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1877-TOOLS-REQUIREMENT--require-complete-framework-release-manifest.md` | `6779176be413d3c0f69f85b890941ce4ee0c1b313bcec2edacbeb005e452dad5` |
-| CA-R-1878 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1878-TOOLS-REQUIREMENT--preserve-authoritative-sources-and-derived-release-boundaries.md` | `d0106053087f96b3dba73917e57a6977132ef6b40fe02de6c1b2ebf486f9f563` |
+| CA-R-1878 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1878-TOOLS-REQUIREMENT--preserve-authoritative-sources-and-derived-release-boundaries.md` | `cd452283befce49a220323a5d93413fe71ceb46ced75be4ef25f5eced5de6366` |
 | CA-R-1879 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1879-TOOLS-REQUIREMENT--freeze-executing-release-and-pin-candidate-currentness.md` | `cc5c6a4da157ad1b41c3487fb358d11aed9ad54163a5a17d1266b22dc19d8c93` |
 | CA-R-1880 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1880-TOOLS-REQUIREMENT--preserve-prior-release-and-truthful-failure-recording.md` | `205eff8b642596cabc4ca645226a904a2da67ba9673b35a2dfcb820f62092816` |
 | CA-R-1886 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1886-TOOLS-REQUIREMENT--run-every-declared-release-suite-test-truthfully.md` | `aa99c4c200f05c4b6765569e17ee93e54fc5d7f4e7bed22a56989e717ad67f58` |
 | CA-R-1887 | 4 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1887-TOOLS-REQUIREMENT--seal-the-private-reference-context-for-a-release-suite.md` | `a69f99bf1aa154203683158830a0d3e4e5ffd5b377ea4d756c9a683ba6dfe8f4` |
 | CA-R-1890 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1890-TOOLS-REQUIREMENT--gate-candidate-release-with-closed-unit-and-source-pinned-e2e-evidence.md` | `e126408a28a96a4b928281593c0b54828a8259825627972757436fcfdd9612cd` |
 | CA-M-331 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-331-TOOLS-METHOD--construct-sealed-release-version-candidate-manifest.md` | `f21d14db580cdab298247d40e0ea11bb226e3ff92109c691c9543b86d71fe54d` |
-| CA-M-332 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-332-TOOLS-METHOD--derive-complete-release-delivery-plan.md` | `88500268687e6b2c2a5736f0d767d071a085e9d612df83e9cabdd6588793fbfa` |
+| CA-M-332 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-332-TOOLS-METHOD--derive-complete-release-delivery-plan.md` | `d4e7d56e164dda4b0203ec163d661dbbb3ba0cff479840ada2e6a751eb512a82` |
 | CA-M-333 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-333-TOOLS-METHOD--derive-release-gate-and-retirement-decision.md` | `bae178535465a791c34220e4469ecb7465974207b5a541ded90ca7ac2c5fb62c` |
 | CA-M-343 | 4 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-343-TOOLS-METHOD--discover-run-and-attest-the-declared-release-suite.md` | `2925b59a15bdacb57625d6492069022546290a6d9e8012cc67306a9329c3c089` |
 | CA-M-344 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-344-TOOLS-METHOD--construct-and-revalidate-one-private-release-suite-reference-context.md` | `56726378b47596bbbc82e6948ccc3e71d9906fa8c89c6f3079d167fa4b18b977` |
@@ -82,7 +82,7 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-E-571 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-571-TOOLS-QA_CASE--verify-sealed-release-input-and-manifest-boundaries.md` | `a7b1ba81dba2fe1727f39eae83e143b33db5a54b5db1c32efcc52b201068a9cb` |
 | CA-E-572 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-572-TOOLS-QA_CASE--verify-complete-framework-package-and-full-suite-gate.md` | `0add9d0b18c8695dc49f01bae84ece6bf07c0639af3e305fb8fc3aa652d705bf` |
 | CA-E-573 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-573-TOOLS-QA_CASE--verify-installed-runtime-skill-and-candidate-image-evidence.md` | `f1036775a73e99f14fed4416b017cf938555382ba73d39b0f7ff255d1137c357` |
-| CA-E-574 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-574-TOOLS-QA_CASE--verify-release-failure-rollback-and-safe-image-retirement.md` | `ec6642908b38aa0d56472b177bde20aadd0c3c0ee68b72f654a582f9fd89b3b0` |
+| CA-E-574 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-574-TOOLS-QA_CASE--verify-release-failure-rollback-and-safe-image-retirement.md` | `584e910e69dd3c8ef3c44ad9d694adaca3e533c1fd6407acbbb02ba171e2bb82` |
 | CA-E-586 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-586-TOOLS-QA_CASE--verify-complete-and-source-bound-release-suite-evidence.md` | `4be567eff47d0bda089091722bd8008c81b94765445fa1ed6ff10205bea0b7dd` |
 | CA-E-587 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-587-TOOLS-QA_CASE--verify-sealed-release-suite-reference-context-and-currentness.md` | `5d5bb6c6f87428b7dd3b7168a23777e084951292998b4a2149d1ba6be140e7d6` |
 | CA-E-589 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-589-TOOLS-QA_CASE--verify-source-pinned-candidate-e2e-and-full-gate-aggregation.md` | `06529f4175781d62fddb61f0fd03a2726b305a978c4fc252a2399ccd2702fe3a` |
@@ -92,7 +92,7 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-D-563 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-563-TOOLS-DELIVERY--bind-project-local-ca-skill-without-hooks.md` | `f73a38dd7b634d654a7044f20c96240a0d1f850c4a71e4eef18f98d074cdbb3d` |
 | CA-D-564 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-564-TOOLS-DELIVERY--bind-candidate-image-and-safe-retirement-evidence.md` | `6c4acbf3cb4ff8293d9d386b809bcebbc3704adc1061720baeaf9966c9f51993` |
 | CA-D-566 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-566-TOOLS-DELIVERY--encode-sealed-candidate-snapshot-manifest.md` | `825ae839bb6a151b7f4a45fbb01ae6fb2491d0f8bf68204ca2a21f2f34657a7d` |
-| CA-D-567 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md` | `e5bc56c0940b53699e9c25bb883ac42b24755fc0c1b65411ccc088c83dd76094` |
+| CA-D-567 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md` | `1b99cb85186a1899d72eb07cc3c6ef6589613dd4c732e6dc387d7b76524329b8` |
 | CA-D-571 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-571-TOOLS-DELIVERY--encode-deterministic-release-child-manifest.md` | `24dc030c0a95dc21c72a4b054c1eae088a004550bed0efd75265c2ad95fc753c` |
 | CA-D-573 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-573-TOOLS-DELIVERY--serialize-approved-release-rollback-retention.md` | `5db7045ec34fbd9aea129d63262f6fce1ac5a6bff2b147af90a9fad6e560adad` |
 | CA-D-574 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-574-TOOLS-DELIVERY--serialize-typed-release-recovery-checkpoints.md` | `d1162607c515afe184ba2488d6030acc93b522331b3a819c520792db39e28012` |
@@ -121,10 +121,6 @@ The record is additive source-admission serialization only. It preserves the ori
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_full_gate.py",
     "sha256": "98a72f9f1d79440b7392c5f4465b4344ca00447cb6bfd19a5eef3114f1ce57a9"
-  },
-  {
-    "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_predecessor.py",
-    "sha256": "d79989e78e866b8ca98e8c06ce3a6521fcf595febe94822bf05e8db09db21317"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_limits.py",
@@ -157,4 +153,4 @@ The record is additive source-admission serialization only. It preserves the ori
 ]
 ```
 
-These source-path-sorted private byte pins explicitly admit the CA-D-582 executor, sealed context adapter, Driver, fixed grammar, three Harnesses, phase assignment, Full Gate reader and existing private reference-context and finite Unit deadline control and current predecessor-proof reader carriers before source-binding admission or Workflow dispatch. They are defining D572 source evidence only and add no member to the closed Release admission record, canonical manifest, request, route, public Tool or selector. They contain no D572, admission-reader, canonical-manifest, runtime, receipt or output hash. The accepted reader reopens every declared regular source file and rejects missing, symlinked, altered, duplicate, unsafe or cyclic carriers before admission. These pins grant no execution authority and do not replace the sealed candidate/package inventory: later candidate execution must still bind and reopen those same actual source bytes under its existing currentness guards.
+These source-path-sorted private byte pins explicitly admit the CA-D-582 executor, sealed context adapter, Driver, fixed grammar, three Harnesses, phase assignment, Full Gate reader and existing private reference-context and finite Unit deadline control carriers before source-binding admission or Workflow dispatch. They are defining D572 source evidence only and add no member to the closed Release admission record, canonical manifest, request, route, public Tool or selector. They contain no D572, admission-reader, canonical-manifest, runtime, receipt or output hash. The accepted reader reopens every declared regular source file and rejects missing, symlinked, altered, duplicate, unsafe or cyclic carriers before admission. These pins grant no execution authority and do not replace the sealed candidate/package inventory: later candidate execution must still bind and reopen those same actual source bytes under its existing currentness guards.
