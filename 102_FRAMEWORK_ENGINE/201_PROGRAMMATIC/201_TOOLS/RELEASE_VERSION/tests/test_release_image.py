@@ -301,7 +301,7 @@ class ReleaseImageTests(unittest.TestCase):
 
     def retirement_inputs(self, prior_image=PRIOR_IMAGE_ID, settings=None):
         from release_promotion import promote_bound_release
-        from test_release_promotion import recorded_gate_fixtures
+        from test_release_promotion import recorded_gate_fixtures, recorded_host_patches
         if settings is not None:
             self.fixture.doCleanups()
             self.setup_candidate(settings)
@@ -310,8 +310,9 @@ class ReleaseImageTests(unittest.TestCase):
         self.suite = self.fixture.execute_suite(self.candidate, self.compilation)
         build, verification = self.recorded_command_fixtures()
         args = (self.candidate, self.compilation, self.suite, build, verification)
-        self.retirement_gates = recorded_gate_fixtures(*args)
-        promotion = promote_bound_release(*args, **self.retirement_gates)
+        with recorded_host_patches():
+            self.retirement_gates = recorded_gate_fixtures(*args)
+            promotion = promote_bound_release(*args, **self.retirement_gates)
         self.assertEqual(promotion.outcome, "promoted")
         return args + (promotion,)
 
