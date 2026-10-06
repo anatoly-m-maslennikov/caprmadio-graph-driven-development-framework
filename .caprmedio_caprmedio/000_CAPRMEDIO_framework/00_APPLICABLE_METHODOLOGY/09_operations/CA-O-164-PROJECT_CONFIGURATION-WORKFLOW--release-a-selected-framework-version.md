@@ -10,15 +10,15 @@ author: Anatoly Maslennikov
 subjects:
   governs: "Release selected Framework Version"
   depends_on: [Workflow, Step, Action, Operator, Version, Methodology, Implementation, Skill, Test, Docker Image, Journal]
-version: 5
-updated_at: "2026-10-05 21:41:23 +0000"
+version: 6
+updated_at: "2026-10-06 02:13:39 +0000"
 relations:
   relates_to: [CA-O-011, CA-O-025, CA-O-165, CA-O-166, CA-O-167, CA-O-168, CA-O-169, CA-O-181, CA-O-183, CA-R-1525, CA-R-1720]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-164-PROJECT_CONFIGURATION-WORKFLOW--release-a-selected-framework-version.md
   source_atom_id: CA-O-164
-  source_atom_revision: 5
-  source_sha256: 36c859a4444e66ba167936adf94598e0f1f7a44c1e2ea845b5acdf021d804faf
+  source_atom_revision: 6
+  source_sha256: 37d1f5a6847a93275a79583354fb4b62471e757b416ea074d3a493aa87de6c0d
   original_relations_sha256: 7fec5db60d8196884f528e767f1dd4d74f10d365f99073def66c411ad6f11c41
 ---
 # Summary
@@ -65,9 +65,9 @@ The selected boundary binds one current N, one distinct candidate N+1, their exa
 | CA-O-182 host-capable Candidate E2E passed | CA-O-184 |
 | CA-O-184 complete bound Full Gate aggregate passed | CA-O-178 |
 | CA-O-178 complete N+1 runtime and project-local Skill promotion | CA-O-179 |
-| CA-O-179 complete exact unused N-image retirement | complete |
+| CA-O-179 complete exact prior N-image disposition | complete |
 | any missing, stale, unauthorized, failed, partial, recording-blocked, unsafe, or unmatched result | stop with its actual evidence; do not promote, retire, retry, or recurse implicitly |
 
 ## Details
 
-CA-O-164 uses only its listed Step Atoms; it does not invoke another Workflow as a Step or invoke itself to prove a candidate. CA-O-011 remains the canonical Applicable Methodology compilation authority for declared Methodology Sources. The separately pinned candidate snapshot uses its reviewed Tool boundary to materialize only the sealed child under `_release_materialized/<candidateSnapshotManifest.sha256>/`; it neither produces nor replaces the canonical Applicable Methodology at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/`, which remains source-bound, and neither authority is silently rewritten. CA-O-025 remains release readiness and is not substituted for this boundary. Every Workflow, Step and Action Run retains the exact definition revisions, inputs, parent lineage, start/terminal outcome, results, effects and one canonical durable Work Journal record under CA-R-1525 and CA-R-1720. Preview, rejection and a missing recording receipt never manufacture a Run or release success. This source graph grants no implementation, installation, container, source mutation, image-removal, hook, credential, Git, publication or retry authority.
+CA-O-164 uses only its listed Step Atoms; it does not invoke another Workflow as a Step or invoke itself to prove a candidate. CA-O-011 remains the canonical Applicable Methodology compilation authority for declared Methodology Sources. The separately pinned candidate snapshot uses its reviewed Tool boundary to materialize only the sealed child under `_release_materialized/<candidateSnapshotManifest.sha256>/`; it neither produces nor replaces the canonical Applicable Methodology at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/`, which remains source-bound, and neither authority is silently rewritten. CA-O-025 remains release readiness and is not substituted for this boundary. The final completion label is `exact prior N-image disposition`. Under a sealed `retain_prior` condition, it is complete only with an actual Docker-subprocess, SHA-256-valid retention receipt bound to the exact sealed condition reference and settings digest, that observes the exact required prior image, has `retaining_container_refs == ()`, and has no removal fields; retained is not labeled retired. A used, unavailable, unverified, mismatched or non-exact prior image remains partial with its actual evidence. Actual retirement remains pending until its separate exact removal effect has a canonical Journal record. Every Workflow, Step and Action Run retains the exact definition revisions, inputs, parent lineage, start/terminal outcome, results, effects and one canonical durable Work Journal record under CA-R-1525 and CA-R-1720. Preview, rejection and a missing recording receipt never manufacture a Run or release success. This source graph grants no implementation, installation, container, source mutation, image-removal, hook, credential, Git, publication or retry authority.
