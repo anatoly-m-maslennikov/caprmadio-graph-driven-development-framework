@@ -1,0 +1,41 @@
+---
+cce_version: cce_1
+cce_form: definition
+subjects:
+  governs: "Projection/Type: Implementation Overview"
+  depends_on:
+    - "Projection"
+    - "Atom"
+    - "Artifact/Revision"
+    - "Implementation Binding"
+    - "Journal"
+    - "Implementation"
+    - "Verification"
+project_graph_state:
+  artifacts:
+    enabled_types:
+      - implementation_record
+version: 21
+updated_at: 2026-09-15 05:51:38
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+  - codex:01a01cb6-4ee4-7553-b68d-0823dda35094
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+relations:
+  relates_to:
+    - CAPRMEDIO-GOV-REQU-313
+    - CAPRMEDIO-META-REQU-105
+---
+# Register the Implementation Overview Projection
+
+Implementation Overview **means** the internal Type value under Projection that presents current realization, coverage, source-to-target bindings, relevant provenance, **and** unresolved gaps derived from its declared source frontier.
+
+the Projection declares the exact normative Atom, native-target, provenance, **and** **any** registered implementation-lineage frontier it represents. its Implementation Bindings derive from the shared Project Journal under CAPRMEDIO-META-REQU-105. regeneration replaces its rendered content **without** converting it into an Atom **or** granting it authority over the Journal, native project, normative specification, Operations evidence, **or** Verification. historical implementation event records remain **in** the Journal; this Projection presents the current view **without** replacing those records.
+
+its storage **and** retention policy is configured separately. a generated runtime copy **may** be disposable; a committed current view **may** be reviewable history. the two storage choices do **not** change the Projection's semantic role.
+
+## Rationale
+
+the predecessor incorrectly bundled Change Plan **and** Implementation Record under one Implementation-role Projection rule. the split preserves the record while routing Change Plan **to** the new Plan Atom family.
+
+the historical name Implementation Record **in** this rationale referred **to** the current-state Projection now named Implementation Overview; the name change distinguishes that view from the implementation event records retained **in** the Journal.

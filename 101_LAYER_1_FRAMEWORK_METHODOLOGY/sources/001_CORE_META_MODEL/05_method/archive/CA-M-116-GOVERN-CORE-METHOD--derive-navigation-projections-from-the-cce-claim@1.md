@@ -1,0 +1,13 @@
+---
+atom_id: CA-M-116
+cce_version: cce_1
+cce_form: method
+version: 1
+updated_at: 2026-08-22 08:09:26
+relations:
+  child_of:
+    - CA-M-115
+---
+# Derive navigation Projections from the CCE Claim
+
+TO project an accepted Atom Claim, the Generator MUST derive its concise human-readable Summary, filename Summary slug, H1, and requested Translations without adding authoritative meaning.

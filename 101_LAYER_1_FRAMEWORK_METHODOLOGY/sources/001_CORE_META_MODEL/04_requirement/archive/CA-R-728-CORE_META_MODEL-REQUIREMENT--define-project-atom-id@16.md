@@ -1,0 +1,21 @@
+---
+subjects:
+  governs:
+    continuant:
+      - Project Atom ID
+  depends_on:
+    continuant:
+      - artifact-model
+      - Artifact/Identity
+atom_id: CA-R-728
+cce_version: cce_1
+cce_form: definition
+version: 16
+updated_at: "2026-09-10 20:53:37 +0400"
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations: {}
+---
+# Define Project Atom ID
+
+Project Atom ID **means** the immutable identity of one accepted Project-owned Atom.

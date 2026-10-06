@@ -1,0 +1,13 @@
+---
+subjects:
+  governs: "Applicable Methodology Retrieval"
+  depends_on:
+    - "Applicable Methodology"
+    - "Atom/Subjects"
+version: 13
+updated_at: "2026-09-18 14:16:20 +0000"
+relations: {}
+---
+# Retrieve Applicable Methodology Mechanically
+
+**to** retrieve Applicable Methodology for one Subject **or** Workflow query, the Retriever **must** derive GOVERNS **and** DEPENDS_ON indexes on demand from projected Atom Subjects, select matching GOVERNS paths, add DEPENDS_ON authority **only** through transitive prerequisite closure, retain Applicable Methodology membership order, make no inference, **and** return no Atom **if** no matching GOVERNS path exists.

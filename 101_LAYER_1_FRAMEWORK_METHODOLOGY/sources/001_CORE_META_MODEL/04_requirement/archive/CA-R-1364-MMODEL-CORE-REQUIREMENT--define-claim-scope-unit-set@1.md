@@ -1,0 +1,22 @@
+---
+atom_id: CA-R-1364
+cce_version: cce_1
+cce_form: definition
+subjects:
+  governs:
+    continuant:
+      - Atom/Claim Scope/Scope Unit Set
+  depends_on:
+    continuant:
+      - Atom/Claim Scope
+      - Scope Unit
+      - Scope Expression
+version: 1
+updated_at: 2026-09-02 00:35:23 +0400
+relations:
+  child_of:
+    - CA-R-921
+---
+# Define Claim Scope Unit Set
+
+a Claim Scope Unit Set **means** the canonical set of Scope Units that contain the Entities selected by one Claim Scope.

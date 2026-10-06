@@ -1,0 +1,22 @@
+---
+subjects:
+  governs: "Atom/Carrier"
+  depends_on:
+    - "Atom/Content Role"
+    - "Priority"
+    - "Atom/Content Role: Plan/Type: Plan"
+version: 7
+updated_at: "2026-09-22 14:41:44 +0000"
+relations: {}
+atom_id: "CA-D-386"
+content_role: "Delivery"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Standard"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Delivery"
+---
+# Serialize Concern Priority
+
+a Concern Atom Carrier **must** serialize **`=1`** selected Priority as `priority` with the lowercase value `high`, `medium`, **or** `low`. **every** non-Concern Content Role Atom Carrier **must** omit `priority`; virtual `highest` **must not** be stored.

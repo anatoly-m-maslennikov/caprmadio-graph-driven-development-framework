@@ -1,0 +1,21 @@
+---
+atom_id: CAPRMEDIO-GOV-REQU-760
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs:
+    continuant:
+      - artifact-catalog
+version: 12
+updated_at: "2026-09-10 06:29:38 +0400"
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  child_of:
+    - CAPRMEDIO-META-REQU-100
+    - CAPRMEDIO-META-REQU-740--separate-content-role-from-artifact-type
+    - CAPRMEDIO-META-REQU-742--permit-one-internal-default-type-per-content-role
+---
+# Derive default external Type names
+
+**when** an external Type name is derived from an internal Type, the derivation uses `external_<internal_type_name>`. **when** the internal Type is the Content role's default, the derived name uses that registered default Type. A separately registered explicit external Type name is non-default **and** does **not** modify this derivation rule.

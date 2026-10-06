@@ -1,0 +1,21 @@
+---
+subjects:
+  governs: "Evidence For Relation"
+  depends_on:
+    - "atom-boundary"
+    - "relation-model"
+version: 14
+updated_at: "2026-09-10 04:16:18 +0400"
+relations: {}
+atom_id: "CA-R-1021"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+type: "Requirement"
+---
+# Register evidence_for relation
+
+`evidence_for` **must** be registered as a direct relation owned by an Evidence carrier **and** directed **to** one Evaluation **or** Implementation carrier that the Evidence supports.

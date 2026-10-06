@@ -26,6 +26,11 @@ __pycache__/
 /.caprmedio_tmp/
 /.caprmedio_install/workflow_orchestrator/
 /.caprmedio_install/mcp_hot_reload/
+
+# Retain local release candidates and rollback sources outside version control.
+/.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/_release_materialized/
+/101_LAYER_1_FRAMEWORK_METHODOLOGY/.release-sources-prior-*/
+
 .env
 .env.*
 !.env.example

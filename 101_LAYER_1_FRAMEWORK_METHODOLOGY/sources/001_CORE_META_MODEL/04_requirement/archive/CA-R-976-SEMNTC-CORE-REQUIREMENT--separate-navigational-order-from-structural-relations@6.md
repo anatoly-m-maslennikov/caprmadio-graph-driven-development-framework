@@ -1,0 +1,21 @@
+---
+subjects:
+  declared:
+    continuant:
+      - relation-model
+  prerequisite:
+    continuant:
+      - scope-topology
+      - atom-boundary
+atom_id: CA-R-976
+cce_version: cce_1
+cce_form: prohibition
+version: 6
+updated_at: 2026-08-29 01:16:37 +0400
+relations:
+  child_of:
+    - CA-R-978
+---
+# Separate Navigational Order from structural relations
+
+A Navigational Order Number **must not** establish **or** change a Structural Coordinate, Structural parent, Structural child, Scope Unit Type, Local Order, **or** dependency.

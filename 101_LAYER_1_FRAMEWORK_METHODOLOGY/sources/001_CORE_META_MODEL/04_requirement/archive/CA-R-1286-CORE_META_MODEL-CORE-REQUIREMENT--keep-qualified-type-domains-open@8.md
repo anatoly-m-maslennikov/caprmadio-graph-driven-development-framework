@@ -1,0 +1,18 @@
+---
+atom_id: CA-R-1286
+cce_version: cce_1
+cce_form: permission
+subjects:
+  governs: "Type"
+  depends_on:
+    - "Extension"
+    - "Project Configuration"
+version: 8
+updated_at: "2026-09-11 23:47:49 +0400"
+relations: {}
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Keep Qualified Type Domains Open
+
+an Extension **or** Project Configuration **may** add Type values under one exact qualified Type Subject **without** creating another Type Property.

@@ -1,0 +1,18 @@
+---
+atom_id: CA-R-1225
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  governs:
+    continuant:
+      - Applicable Methodology/Sources/Local Configuration/Installed Extension Selection
+  depends_on:
+    continuant:
+      - Applicable Methodology/Sources/Installed Extensions/Catalog
+version: 2
+updated_at: "2026-09-09 21:56:59 +0400"
+relations: {}
+---
+# Exclude Installed Extensions from Current Compilation
+
+the Local Configuration **must** select **`=0`** Installed Extensions for Applicable Methodology compilation.

@@ -1,0 +1,57 @@
+# CAPRMEDIO reusable Framework Instance Settings defaults.
+# Parameter definitions and allowed values are governed by source Atoms.
+# Resolution: explicit Project instance parameter, otherwise this default.
+# Project identity and target-specific selections belong to Project/instance settings.
+
+[confidence]
+# Integer percentages, from 0 through 100.
+necessary_information_threshold_percent = 95
+semantic_resolution_threshold_percent = 95
+
+[authority_modes]
+default = "casual"
+
+[interaction]
+reporting_mode = "silent"
+
+[artifacts]
+creation_strictness = "medium"
+
+[implementation]
+# Additional fix-and-evaluate rounds after the initial failed Evaluation.
+retry_limit = 3
+
+[atom_validation]
+# Per-invocation validation budgets. Explicit instance/request values may override.
+max_candidates = 10000
+max_file_bytes = 8388608
+max_total_read_bytes = 268435456
+timeout_seconds = 60
+max_findings = 10000
+
+[query]
+# Reusable bounded-query defaults; explicit instance/request values may override.
+max_request_bytes = 65536
+max_grammar_depth = 32
+max_filter_tokens = 1024
+max_in_members = 256
+max_selected_fields = 128
+max_page_size = 100
+max_snapshot_members = 10000
+max_file_bytes = 8388608
+max_total_read_bytes = 268435456
+timeout_seconds = 60
+max_findings = 10000
+
+[rmed_review]
+# Reserve this share of each worker's effective context capacity.
+# Operator/instance values may override; model capacity comes from runtime evidence.
+context_headroom_fraction = 0.30
+
+[release_e2e]
+inspect_timeout_seconds = 60
+harness_timeout_seconds = 900
+cleanup_timeout_seconds = 60
+max_stdout_bytes = 8388608
+max_stderr_bytes = 8388608
+max_junit_bytes = 8388608

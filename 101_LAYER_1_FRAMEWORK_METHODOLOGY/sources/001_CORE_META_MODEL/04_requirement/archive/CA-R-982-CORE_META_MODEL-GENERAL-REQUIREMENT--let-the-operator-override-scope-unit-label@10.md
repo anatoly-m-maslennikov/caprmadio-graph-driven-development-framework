@@ -1,0 +1,20 @@
+---
+subjects:
+  governs: "Scope Unit/Label"
+  depends_on:
+    - "Operator"
+    - "Scope Unit/Type"
+atom_id: CA-R-982
+cce_version: cce_1
+cce_form: permission
+version: 10
+updated_at: "2026-09-16 23:48:40 +0000"
+relations:
+  child_of:
+    - CA-R-972
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Let the Operator Override Scope Unit Label
+
+the Operator **may** replace the default Label independently for **every** Scope Unit **without** changing its Type.

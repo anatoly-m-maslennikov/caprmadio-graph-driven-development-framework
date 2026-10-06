@@ -1,0 +1,45 @@
+---
+atom_id: CA-E-246
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  declared:
+    continuant:
+      - subject
+      - atom-boundary
+    occurrent:
+      - evaluation
+version: 2
+updated_at: 2026-08-23 14:53:58
+relations:
+  evaluation_for:
+    - CA-R-1013
+    - CA-R-1014
+    - CA-R-1084
+    - CA-R-1085
+    - CA-R-1086
+    - CA-R-1087
+    - CA-R-1088
+    - CA-R-1089
+    - CA-R-1090
+    - CA-M-125
+    - CA-M-126
+    - CA-R-1015
+---
+# Validate Atom Subjects
+
+## Claim checked
+
+Every active or draft Atom declares queryable Subjects with exactly one Claim Role and one Claim Participant Temporal Form without using those Subjects as Scope coordinates or independent vocabulary authority.
+
+## Test case
+
+Create Atoms covering all four Claim-Role and Temporal-Form combinations, a missing subjects property, an empty branch, an unknown axis key, a duplicate Subject reference, an invalid Subject reference, a legacy flat subjects sequence, a legacy subject_scopes property, and a Subject Projection that changes a Subject classification or adds an undeclared Subject.
+
+## Acceptance criteria
+
+Every valid Atom passes. Every invalid Atom fails. The Subject Projection contains exactly the distinct Subjects declared by the selected Atoms under their source Claim Roles and Claim Participant Temporal Forms.
+
+## Failure disposition
+
+Record a Concern naming each affected Atom and Subject.

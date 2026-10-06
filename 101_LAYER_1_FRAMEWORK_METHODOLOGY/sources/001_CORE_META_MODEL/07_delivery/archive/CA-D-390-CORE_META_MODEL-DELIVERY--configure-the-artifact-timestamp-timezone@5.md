@@ -1,0 +1,21 @@
+---
+cce_version: cce_1
+cce_form: serialization
+subjects:
+  governs: "Framework Instance Settings/Artifact Timestamp Timezone"
+  depends_on:
+    - "Framework Instance Settings"
+    - "Artifact/Revision"
+    - "Carrier"
+version: 5
+updated_at: "2026-09-11 22:30:02 +0400"
+relations:
+  child_of:
+    - "CA-D-311"
+    - "CA-R-1402"
+llm_session_ids:
+  - codex:01a02650-eff7-7453-8c37-0699b36773c6
+---
+# Configure the Artifact timestamp timezone
+
+the Framework Instance Settings Artifact **may** set `[artifact_timestamps].timezone` **to** `local`, `UTC`, **or** an IANA timezone name, with `local` as the default; **every** emitted `updated_at` value uses `YYYY-MM-DD HH:MM:SS`, **and** the setting supplies its timezone interpretation.

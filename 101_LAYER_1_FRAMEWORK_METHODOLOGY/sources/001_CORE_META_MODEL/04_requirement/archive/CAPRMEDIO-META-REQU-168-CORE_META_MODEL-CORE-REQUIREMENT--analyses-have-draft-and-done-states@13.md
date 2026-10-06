@@ -1,0 +1,11 @@
+---
+subjects:
+  governs: "lifecycle-traceability"
+  depends_on: []
+version: 13
+updated_at: "2026-09-10 04:26:29 +0400"
+relations: {}
+---
+# Analyses have draft and done states
+
+an admitted Analysis is draft while its bounded inquiry **or** interpretation product remains unfinished **and** done **when** that product is complete. a done Analysis remains a factual record of its completed reasoning rather than current normative authority; archival preserves one that is obsolete, invalidated, duplicated, **or** absorbed.
