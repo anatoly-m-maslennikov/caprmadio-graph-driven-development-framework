@@ -117,6 +117,40 @@ class ServiceTests(unittest.TestCase):
         self.assertTrue(context['context_complete'])
         self.assertEqual('release_version', context['input_schema']['properties']['operation_route']['const'])
 
+    def test_admitted_selected_routes_keep_route_and_workflow_context_exact(self):
+        control = self.root / '.caprmedio_caprmedio'
+        for identity, role in (('CA-O-127', 'Workflow'), ('CA-O-130', 'Workflow'), ('CA-O-128', 'Action')):
+            (control / f'{identity}.md').write_text(
+                f'---\natom_id: {identity}\nstatus: Active\ncontent_role: Operations\ntype: {role}\n---\n'
+                f'# Summary\n{identity}\n'
+            )
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {'selected_binding_digest': 'b' * 64},
+            'routes': [
+                {'route': 'create_atom', 'workflow': {'atom_id': 'CA-O-127'},
+                 'ordered_actions': [{'atom_id': 'CA-O-128'}]},
+                {'route': 'update_atom', 'workflow': {'atom_id': 'CA-O-130'},
+                 'ordered_actions': [{'atom_id': 'CA-O-128'}]},
+            ],
+        }
+        self.service.exposed.update(('create_atom', 'update_atom'))
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            route = self.service.context(type('Request', (), {'id': 'create_atom'})())
+            workflow = self.service.context(type('Request', (), {'id': 'CA-O-127'})())
+            action = self.service.context(type('Request', (), {'id': 'CA-O-128'})())
+
+        for context in (route, workflow, action):
+            self.assertTrue(context['context_complete'])
+            self.assertEqual('a' * 64, context['definition']['definition_manifest']['manifest_digest'])
+        self.assertEqual(['create_atom'], route['definition']['tools'])
+        self.assertEqual('create_atom', route['input_schema']['properties']['operation_route']['const'])
+        self.assertEqual(['create_atom'], workflow['definition']['tools'])
+        self.assertEqual('create_atom', workflow['input_schema']['properties']['operation_route']['const'])
+        self.assertEqual(['create_atom', 'update_atom'], action['definition']['tools'])
+        self.assertIsNone(action['input_schema'])
+
     def test_unadmitted_release_route_is_not_synthesized(self):
         manifest = {
             'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
@@ -126,6 +160,40 @@ class ServiceTests(unittest.TestCase):
         self.service.exposed.add('release_version')
         with patch('selected_routes.load_selected_manifest', return_value=manifest):
             self.assertEqual([], self.service.discover(Query(query='release_version'))['matches'])
+
+    def test_generic_selected_route_is_not_synthesized_when_unexposed_or_stale(self):
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {'selected_binding_digest': 'b' * 64},
+            'routes': [{'route': 'create_atom', 'workflow': {'atom_id': 'CA-O-127'},
+                        'ordered_actions': [{'atom_id': 'CA-O-128'}]}],
+        }
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            self.assertEqual([], self.service.discover(Query(query='create_atom'))['matches'])
+        self.service.exposed.add('create_atom')
+        with patch('selected_routes.load_selected_manifest', side_effect=ValueError('source pin is stale')):
+            self.assertEqual([], self.service.discover(Query(query='create_atom'))['matches'])
+
+    def test_source_only_action_is_not_upgraded_to_an_admitted_selected_route(self):
+        control = self.root / '.caprmedio_caprmedio'
+        (control / 'action.md').write_text(
+            '---\natom_id: CA-O-128\nstatus: Active\ncontent_role: Operations\ntype: Action\n---\n'
+            '# Summary\nSource-only Action\n'
+        )
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {'selected_binding_digest': 'b' * 64},
+            'routes': [{'route': 'create_atom', 'workflow': {'atom_id': 'CA-O-127'},
+                        'ordered_actions': [{'atom_id': 'CA-O-999'}]}],
+        }
+        self.service.exposed.add('create_atom')
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            context = self.service.context(type('Request', (), {'id': 'CA-O-128'})())
+
+        self.assertNotIn('tools', context['definition'])
+        self.assertIsNone(context['input_schema'])
 
     def test_stale_release_manifest_is_not_synthesized_even_when_exposed(self):
         self.service.exposed.add('release_version')

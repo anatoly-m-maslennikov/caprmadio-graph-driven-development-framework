@@ -105,7 +105,7 @@ class Service:
         executable.  Importing and loading the existing manifest is therefore
         the sole admission path here as well.
         """
-        if "release_version" not in self.exposed:
+        if not self.exposed:
             return []
         try:
             from selected_routes import load_selected_manifest
@@ -113,35 +113,32 @@ class Service:
         except (ImportError, OSError, ValueError):
             return []
 
-        # Release is the one selected route without a declarative tool binding.
-        # It must not be advertised from an ordinary fifteen-route projection.
-        release = next((entry for entry in manifest["routes"]
-                        if entry.get("route") == "release_version"), None)
-        if not isinstance(release, dict):
-            return []
-        workflow = release.get("workflow")
-        actions = release.get("ordered_actions")
-        if not isinstance(workflow, dict) or not isinstance(actions, list):
-            return []
-        workflow_id = workflow.get("atom_id")
-        action_ids = [item.get("atom_id") for item in actions if isinstance(item, dict)]
-        if (not isinstance(workflow_id, str) or not action_ids
-                or not all(isinstance(identity, str) for identity in action_ids)):
-            return []
-        return [{
-            "name": "release_version", "mcp_name": "release_version",
-            "availability": "mcp", "source_atom": workflow_id,
-            "workflow_ids": [workflow_id], "action_ids": action_ids,
-            "selected_route": True, "definition_manifest": {
-                "manifest_ref": manifest["manifest_ref"],
-                "manifest_digest": manifest["canonical_manifest_sha256"],
-            },
-            "source_freshness": manifest["source_freshness"],
-            "summary": "Release the admitted selected Framework Version route.",
-        }]
+        rows = []
+        for entry in manifest.get("routes", []):
+            if not isinstance(entry, dict):
+                continue
+            route = entry.get("route")
+            workflow = entry.get("workflow")
+            actions = entry.get("ordered_actions")
+            if route not in self.exposed or not isinstance(workflow, dict) or not isinstance(actions, list):
+                continue
+            workflow_id = workflow.get("atom_id")
+            action_ids = [item.get("atom_id") for item in actions if isinstance(item, dict)]
+            if (not isinstance(route, str) or not isinstance(workflow_id, str) or not action_ids
+                    or not all(isinstance(identity, str) for identity in action_ids)):
+                continue
+            rows.append({
+                "name": route, "mcp_name": route, "availability": "mcp", "source_atom": workflow_id,
+                "workflow_ids": [workflow_id], "action_ids": action_ids, "selected_route": True,
+                "definition_manifest": {"manifest_ref": manifest["manifest_ref"],
+                                        "manifest_digest": manifest["canonical_manifest_sha256"]},
+                "source_freshness": manifest["source_freshness"],
+                "summary": f"Selected route admitted by the current binding manifest: {route}.",
+            })
+        return rows
 
     @staticmethod
-    def _selected_route_input_schema():
+    def _selected_route_input_schema(route: str):
         """Compact contract for the generic selected-route MCP request object."""
         digest = {"type": "string", "pattern": "^[0-9a-f]{64}$"}
         return {
@@ -151,7 +148,7 @@ class Service:
                          "target_frontier", "target_frontier_digest", "effects", "effects_digest",
                          "definition_manifest", "source_freshness", "initiative"],
             "properties": {
-                "operation_route": {"const": "release_version"},
+                "operation_route": {"const": route},
                 "mode": {"enum": ["preview", "execute"], "default": "preview"},
                 "request_id": {"type": "string"}, "parameters": {"type": "object"},
                 "parameters_digest": digest, "target_frontier": {"type": "array", "minItems": 1},
@@ -264,15 +261,18 @@ class Service:
             if len(matches) != 1:
                 raise ValueError('Unknown or ambiguous capability')
             row = matches[0]
-        selected = next((item for item in tools if item.get("selected_route")
-                         and (request.id == item["name"] or request.id == item["source_atom"])), None)
-        if selected is not None:
+        selected = [item for item in tools if item.get("selected_route") and request.id in {
+            item["name"], item["source_atom"], *item["action_ids"]
+        }]
+        if selected:
             definition = dict(row)
-            definition.update({"availability": "mcp", "tools": [selected["name"]],
-                               "definition_manifest": selected["definition_manifest"],
-                               "source_freshness": selected["source_freshness"]})
+            routes = sorted(item["name"] for item in selected)
+            definition.update({"availability": "mcp", "tools": routes,
+                               "definition_manifest": selected[0]["definition_manifest"],
+                               "source_freshness": selected[0]["source_freshness"]})
             return {"definition": definition, "related_definitions": [],
-                    "input_schema": self._selected_route_input_schema(),
+                    "input_schema": (self._selected_route_input_schema(routes[0])
+                                     if len(routes) == 1 else None),
                     "context_complete": True, "coverage_issues": issues}
         identities = set(row.get('action_ids', []) + row.get('workflow_ids', []))
         if 'source_atom' in row:

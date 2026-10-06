@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: GET_EXECUTION_CONTEXT
 local_tier: Standard
 global_tier: 14
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 18:28:00 +0000"
+updated_at: "2026-10-06 18:38:40 +0000"
 subjects:
   governs: "Tool/GET_EXECUTION_CONTEXT"
   depends_on: [Tool, Workflow, Action, Source Carrier, Projection, Operator]
@@ -37,4 +37,4 @@ apply existing R1804, R1805 and R1806: expose every currently validated and regi
 
 ## Result
 
-the bounded implementation and independent regression review are pending under P1807. installed N and historical evidence remain unchanged.
+the discovery suite passes 16 cases and the isolated MCP suite passes 4 cases; independent review accepts the manifest-validated exposed-route catalog and schema behavior. after an explicit hot reload, all sixteen route-name contexts, Workflow CA-O-136 and shared Action CA-O-128 return complete current bindings. O128 discloses all four lifecycle routes with no arbitrarily selected input schema. no Action or Workflow was executed by these read-only checks.
