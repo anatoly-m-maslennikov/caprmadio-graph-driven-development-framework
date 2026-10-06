@@ -75,9 +75,11 @@ class Generation:
         self.stop.set()
         try:
             await asyncio.wait_for(asyncio.shield(self.task), 5)
-        except TimeoutError:
+        except (TimeoutError, asyncio.CancelledError):
             self.task.cancel()
             await asyncio.gather(self.task, return_exceptions=True)
+            if asyncio.current_task().cancelling():
+                raise
 
 
 class Gateway:
@@ -97,11 +99,11 @@ class Gateway:
         return digest([(str(p), hashlib.sha256(p.read_bytes()).hexdigest()) for p in sorted(files)])
 
     async def prepare(self, fingerprint):
-        namespace = os.environ.get('CAPRMEDIO_RUNTIME_NAMESPACE')
+        environment = self.child_environment()
         generation = Generation(StdioServerParameters(command=sys.executable,
             args=['-B', '-X', f'pycache_prefix={self.storage / "bytecode" / fingerprint}',
                   str(self.implementation), '--project-root', str(self.root)],
-            env={'CAPRMEDIO_RUNTIME_NAMESPACE': namespace} if namespace else None), fingerprint)
+            env=environment), fingerprint)
         try:
             await asyncio.wait_for(asyncio.shield(generation.ready), 20)
             names = [t.name for t in generation.tools]
@@ -121,6 +123,13 @@ class Gateway:
         generation.registry = digest([t.model_dump(mode='json', by_alias=True) for t in generation.tools])
         self.generations.append(generation)
         return generation
+
+    @staticmethod
+    def child_environment():
+        """Pass only runtime essentials; transport credentials never reach tools."""
+        allowed = {'PATH', 'TMPDIR', 'TEMP', 'TMP', 'LANG', 'TZ', 'CAPRMEDIO_RUNTIME_NAMESPACE'}
+        return {key: value for key, value in os.environ.items()
+                if key in allowed or key.startswith('LC_')}
 
     def status(self):
         return {'active_generation': self.active.fingerprint if self.active else None,
@@ -224,7 +233,28 @@ class Gateway:
                 await generation.close()
 
     async def serve(self):
-        self.active = await self.prepare(self.fingerprint())
+        await self.initialize()
+        try:
+            async with stdio_server() as streams:
+                await self.build_server().run(*streams, self.server.create_initialization_options(
+                    notification_options=NotificationOptions(tools_changed=True)))
+        finally:
+            await self.close()
+
+    async def initialize(self):
+        if self.active is None:
+            self.active = await self.prepare(self.fingerprint())
+
+    async def close(self):
+        closing = [asyncio.create_task(generation.close()) for generation in self.generations]
+        if not closing:
+            return
+        done, pending = await asyncio.wait(closing, timeout=6)
+        for task in pending:
+            task.cancel()
+        await asyncio.gather(*done, *pending, return_exceptions=True)
+
+    def build_server(self):
 
         async def list_tools(context, params):
             return types.ListToolsResult(tools=[CONTROL, STATUS, *self.active.tools])
@@ -232,10 +262,4 @@ class Gateway:
         server = Server('CAPRMEDIO', version='0.2.0', on_list_tools=list_tools,
                         on_call_tool=self.call)
         self.server = server
-        try:
-            async with stdio_server() as streams:
-                await server.run(*streams, server.create_initialization_options(
-                    notification_options=NotificationOptions(tools_changed=True)))
-        finally:
-            for generation in self.generations:
-                await generation.close()
+        return server

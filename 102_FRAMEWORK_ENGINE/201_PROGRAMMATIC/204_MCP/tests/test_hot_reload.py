@@ -8,6 +8,8 @@ from mcp import Client, StdioServerParameters
 
 APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[2]
+sys.path.insert(0, str(APP))
+from hot_reload import Gateway, Generation  # noqa: E402
 
 
 class HotReload(unittest.IsolatedAsyncioTestCase):
@@ -164,3 +166,14 @@ class HotReload(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(response.is_error)
             self.assertEqual(response.structured_content['outcome'], 'uncertain')
             self.assertEqual((self.root / 'calls').read_text(), 'called\n')
+
+    async def test_aggregate_shutdown_cancels_a_generation_after_its_five_second_drain(self):
+        generation = Generation.__new__(Generation)
+        generation.stop = asyncio.Event()
+        generation.task = asyncio.create_task(asyncio.sleep(60))
+        gateway = Gateway(self.root, self.source)
+        gateway.generations = [generation]
+        started = asyncio.get_running_loop().time()
+        await gateway.close()
+        self.assertLess(asyncio.get_running_loop().time() - started, 6)
+        self.assertTrue(generation.task.done())

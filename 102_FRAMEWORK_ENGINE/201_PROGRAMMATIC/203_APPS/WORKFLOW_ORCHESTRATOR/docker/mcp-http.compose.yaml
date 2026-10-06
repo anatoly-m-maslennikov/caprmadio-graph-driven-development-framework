@@ -1,0 +1,35 @@
+services:
+  mcp-http:
+    image: ${CAPRMEDIO_IMAGE:-caprmedio-runtime:local}
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: "no"
+    stop_grace_period: 30s
+    tmpfs: ["/tmp:rw,nosuid,nodev,size=256m"]
+    pids_limit: 256
+    mem_limit: 1g
+    cpus: 2
+    command: [mcp-http]
+    environment:
+      CAPRMEDIO_RUNTIME_NAMESPACE: docker
+      CAPRMEDIO_MCP_HTTP_SECRET_TOKEN: ${CAPRMEDIO_MCP_HTTP_SECRET_TOKEN:?Set an explicit HTTP MCP token}
+    volumes:
+      - type: bind
+        source: ${CAPRMEDIO_PROJECT_ROOT}
+        target: /project
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${CAPRMEDIO_PROJECT_ROOT}/.git
+        target: /project/.git
+        read_only: true
+        bind: {create_host_path: false}
+    networks: [runtime]
+    ports:
+      - "127.0.0.1:${CAPRMEDIO_MCP_HTTP_PORT:?Set an explicit HTTP MCP port}:8092"
+    healthcheck:
+      test: [CMD-SHELL, 'test -n "$$CAPRMEDIO_MCP_HTTP_SECRET_TOKEN" && python -c "from urllib.request import Request, urlopen; import os; urlopen(Request(\"http://127.0.0.1:8092/health\", headers={\"Authorization\": \"Bearer \" + os.environ[\"CAPRMEDIO_MCP_HTTP_SECRET_TOKEN\"]}), timeout=3)"']
+      interval: 2s
+      timeout: 5s
+      retries: 20

@@ -39,7 +39,7 @@ class Runtime:
             )
         return environment
 
-    def command(self, *arguments, authentication=False):
+    def command(self, *arguments, authentication=False, http=False):
         command = [
             "docker",
             "compose",
@@ -54,11 +54,13 @@ class Runtime:
             command += ["-f", str(DIRECTORY / "mock.compose.yaml")]
         elif authentication:
             command += ["-f", str(DIRECTORY / "auth.compose.yaml")]
+        if http:
+            command += ["-f", str(DIRECTORY / "mcp-http.compose.yaml")]
         return command + list(arguments)
 
-    def call(self, *arguments, authentication=False, capture=True, timeout=60):
+    def call(self, *arguments, authentication=False, http=False, capture=True, timeout=60):
         result = subprocess.run(
-            self.command(*arguments, authentication=authentication),
+            self.command(*arguments, authentication=authentication, http=http),
             env=self.environment(),
             text=True,
             capture_output=capture,
@@ -85,7 +87,7 @@ class Runtime:
         ]
         subprocess.run(command, check=True)
 
-    def prepare(self):
+    def prepare(self, *, require_auth=True):
         for relative in (".caprmedio_caprmedio", ".git"):
             if (self.root / relative).is_symlink():
                 raise ValueError("Runtime mounts must not be symlinks")
@@ -96,7 +98,7 @@ class Runtime:
             if path.is_symlink():
                 raise ValueError("Runtime mounts must not be symlinks")
             path.mkdir(exist_ok=True)
-        if not self.mock and not self.auth_file:
+        if require_auth and not self.mock and not self.auth_file:
             raise ValueError("Pass --auth-file explicitly; credentials are not guessed")
         directory = self.root / ".caprmedio_install"
         for name in ("workflow_orchestrator", "docker"):
@@ -149,6 +151,41 @@ class Runtime:
         services = [json.loads(line) for line in raw.splitlines() if line.strip()]
         return {"runtime": "docker", "project_name": self.project, "services": services}
 
+    def _http_port(self):
+        value = os.environ.get("CAPRMEDIO_MCP_HTTP_PORT", "")
+        try:
+            port = int(value)
+        except ValueError as error:
+            raise ValueError("Set CAPRMEDIO_MCP_HTTP_PORT to an integer in 1..65535") from error
+        if not 1 <= port <= 65535:
+            raise ValueError("Set CAPRMEDIO_MCP_HTTP_PORT to an integer in 1..65535")
+        if not os.environ.get("CAPRMEDIO_MCP_HTTP_SECRET_TOKEN"):
+            raise ValueError("Set CAPRMEDIO_MCP_HTTP_SECRET_TOKEN explicitly")
+        return port
+
+    def mcp_http_start(self):
+        self.prepare(require_auth=False)
+        port = self._http_port()
+        self.call("up", "-d", "--wait", "--wait-timeout", "60", "--force-recreate", "mcp-http",
+                  http=True, timeout=90)
+        return {"runtime": "docker", "service": "mcp-http", "outcome": "ready",
+                "url": f"http://127.0.0.1:{port}/mcp"}
+
+    def mcp_http_stop(self):
+        self.call("stop", "mcp-http", http=True, timeout=60)
+        return {"runtime": "docker", "service": "mcp-http", "outcome": "stopped"}
+
+    def mcp_http_status(self):
+        raw = self.call("ps", "--all", "--format", "json", http=True)
+        services = [json.loads(line) for line in raw.splitlines() if line.strip()]
+        result = {"runtime": "docker", "service": "mcp-http", "project_name": self.project,
+                  "services": services}
+        try:
+            result["url"] = f"http://127.0.0.1:{self._http_port()}/mcp"
+        except ValueError:
+            result["url"] = None
+        return result
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -157,7 +194,8 @@ def main():
     parser.add_argument("--image", help=argparse.SUPPRESS)
     parser.add_argument("--mock", action="store_true")
     parser.add_argument(
-        "operation", choices=["build", "start", "stop", "restart", "status", "logs", "mcp"]
+        "operation", choices=["build", "start", "stop", "restart", "status", "logs", "mcp",
+                              "mcp-http-start", "mcp-http-stop", "mcp-http-status"]
     )
     args = parser.parse_args()
     runtime = Runtime(args.project_root, mock=args.mock, auth_file=args.auth_file, image=args.image)
@@ -173,6 +211,12 @@ def main():
         print(json.dumps(runtime.status()))
     elif args.operation == "logs":
         runtime.call("logs", "--tail", "100", capture=False)
+    elif args.operation == "mcp-http-start":
+        print(json.dumps(runtime.mcp_http_start()))
+    elif args.operation == "mcp-http-stop":
+        print(json.dumps(runtime.mcp_http_stop()))
+    elif args.operation == "mcp-http-status":
+        print(json.dumps(runtime.mcp_http_status()))
     else:
         os.execvpe(
             "docker",
