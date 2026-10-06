@@ -87,8 +87,9 @@ class DockerImplementationTransportBoundaryTests(unittest.TestCase):
         self.assertEqual("requirement_ready", self.call("CA-O-091")["result"])
         implemented = self.call("CA-O-093")
         self.assertEqual("implemented", implemented["result"], implemented)
+        self.assertEqual([CANDIDATE], implemented["outputs"]["changed_paths"])
         self.assertEqual(hashlib.sha256((self.workspace / CANDIDATE).read_bytes()).hexdigest(),
-                         implemented["outputs"]["changed_paths"][0]["after_sha256"])
+                         implemented["evidence"][-1]["candidate"]["after_sha256"])
         self.assertEqual("evaluation_runnable", self.call("CA-O-091")["result"])
         passed = self.call("CA-O-094")
         self.assertEqual("passed", passed["result"], passed)
