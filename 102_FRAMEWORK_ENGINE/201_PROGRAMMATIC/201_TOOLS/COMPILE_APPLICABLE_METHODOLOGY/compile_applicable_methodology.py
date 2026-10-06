@@ -1200,9 +1200,52 @@ def run_request(request: Mapping[str, object]) -> dict[str, object]:
             return result
         validate_existing_output_ownership(root / places.output)
         staging = stage_outputs(root, selected, snapshot, places)
+        # Stage validation is not a publication lock.  Recheck immediately at
+        # the effect boundary so a source change detected before replacement
+        # preserves the prior output.  A separate check below reports the
+        # residual race with external writers truthfully after an effect.
+        if not source_snapshot_is_current(root, snapshot, places):
+            shutil.rmtree(staging, ignore_errors=True)
+            raise CompileError(
+                "source-frontier-changed",
+                "Source frontier changed after staging and before output replacement",
+                phase="before-publication",
+                effect_state="none",
+            )
         replace_outputs_atomically(root, staging, places)
         if not source_snapshot_is_current(root, snapshot, places):
-            raise CompileError("source-frontier-changed", "Source frontier changed during output replacement")
+            publication = {
+                "prior_output_state": prior,
+                "transaction_id": sha256_bytes(canonical_json({"source_frontier_digest": digest, "output": places.output.as_posix()})),
+                "output_plan": output_plan(selected),
+                # ``replace_outputs_atomically`` completed, but source
+                # freshness was lost after the boundary check.  This is not a
+                # completed publication: an external writer can still race a
+                # process-local check, so recovery must reassess the observed
+                # output rather than assuming an all-or-nothing transaction.
+                "effect_state": "output_replacement_completed",
+                "freshness_state": "source_frontier_changed_after_prepublication_check",
+            }
+            try:
+                publication["output_digest"] = generated_tree_digest(root, places)
+            except CompileError as observation_error:
+                publication["output_observation_error"] = observation_error.record()
+            result.update(
+                outcome="publication_recovery_required",
+                apply_status="EFFECT_APPLIED_STALE",
+                publishable=False,
+                can_apply=False,
+                blocking_findings=[
+                    CompileError(
+                        "source-frontier-changed-after-output-replacement",
+                        "Source frontier changed after output replacement; publication recovery is required",
+                        phase="after-publication-boundary-check",
+                        effect_state="output_replacement_completed",
+                    ).record()
+                ],
+                publication=publication,
+            )
+            return result
         result["publication"] = {
             "prior_output_state": prior,
             "transaction_id": sha256_bytes(canonical_json({"source_frontier_digest": digest, "output": places.output.as_posix()})),

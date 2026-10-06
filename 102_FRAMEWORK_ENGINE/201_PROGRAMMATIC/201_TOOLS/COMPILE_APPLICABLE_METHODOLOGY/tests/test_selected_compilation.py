@@ -262,6 +262,74 @@ class SelectedCompilationTest(unittest.TestCase):
         self.assertEqual(reselection["source_frontier_digest"], reassessment["source_frontier_digest"])
         self.assertEqual("assessed", reassessment["outcome"])
 
+    def test_source_change_after_staging_preserves_prior_output_before_publication(self) -> None:
+        source = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
+        (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
+        initial = compiler.run_request(self.request())
+        self.assertEqual(
+            "pending_recording",
+            compiler.run_request(self.request("apply", expected_source_frontier_digest=initial["source_frontier_digest"]))["outcome"],
+        )
+        before = self.output_bytes()
+        assessed = compiler.run_request(self.request())
+        real_stage = compiler.stage_outputs
+        real_replace = compiler.replace_outputs_atomically
+        staged: list[Path] = []
+
+        def stage_then_change_source(*args: object, **kwargs: object) -> Path:
+            staging = real_stage(*args, **kwargs)
+            staged.append(staging)
+            source.write_bytes(carrier("CA-R-001", version=2))
+            return staging
+
+        with mock.patch.object(compiler, "stage_outputs", side_effect=stage_then_change_source), mock.patch.object(
+            compiler, "replace_outputs_atomically", wraps=real_replace
+        ) as replace_outputs:
+            result = compiler.run_request(self.request(
+                "apply", expected_source_frontier_digest=assessed["source_frontier_digest"]
+            ))
+
+        self.assertEqual("blocked", result["outcome"])
+        self.assertEqual("BLOCKED", result["apply_status"])
+        self.assertEqual("source-frontier-changed", result["blocking_findings"][0]["code"])
+        self.assertEqual("before-publication", result["blocking_findings"][0]["details"]["phase"])
+        self.assertEqual("preserved", result["publication"]["prior_output_state"])
+        self.assertFalse(replace_outputs.called)
+        self.assertEqual(before, self.output_bytes())
+        self.assertTrue(staged)
+        self.assertTrue(all(not path.exists() for path in staged))
+
+    def test_source_change_after_output_replacement_requires_recovery_without_success_claim(self) -> None:
+        source = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
+        (self.source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text("")
+        initial = compiler.run_request(self.request())
+        self.assertEqual(
+            "pending_recording",
+            compiler.run_request(self.request("apply", expected_source_frontier_digest=initial["source_frontier_digest"]))["outcome"],
+        )
+        before = self.output_bytes()
+        source.write_bytes(carrier("CA-R-001", version=2))
+        assessed = compiler.run_request(self.request())
+        real_replace = compiler.replace_outputs_atomically
+
+        def replace_then_change_source(*args: object, **kwargs: object) -> None:
+            real_replace(*args, **kwargs)
+            source.write_bytes(carrier("CA-R-001", version=3))
+
+        with mock.patch.object(compiler, "replace_outputs_atomically", side_effect=replace_then_change_source):
+            result = compiler.run_request(self.request(
+                "apply", expected_source_frontier_digest=assessed["source_frontier_digest"]
+            ))
+
+        self.assertEqual("publication_recovery_required", result["outcome"])
+        self.assertEqual("EFFECT_APPLIED_STALE", result["apply_status"])
+        self.assertFalse(result["publishable"])
+        self.assertEqual("source-frontier-changed-after-output-replacement", result["blocking_findings"][0]["code"])
+        self.assertEqual("output_replacement_completed", result["publication"]["effect_state"])
+        self.assertEqual("source_frontier_changed_after_prepublication_check", result["publication"]["freshness_state"])
+        self.assertIn("output_digest", result["publication"])
+        self.assertNotEqual(before, self.output_bytes())
+
     def test_publication_failure_and_uncertainty_report_no_success_receipt(self) -> None:
         requirement = self.write("001_CORE_META_MODEL/04_requirement/CA-R-001--core.md", carrier("CA-R-001"))
         method = self.write("001_CORE_META_MODEL/05_method/CA-M-001--core.md", carrier("CA-M-001"))
