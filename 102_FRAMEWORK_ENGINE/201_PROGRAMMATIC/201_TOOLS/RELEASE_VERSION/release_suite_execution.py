@@ -43,6 +43,8 @@ _MAX_TIMEOUT_SECONDS = 900
 _INSPECT_TIMEOUT_SECONDS = 30
 _CLEANUP_TIMEOUT_SECONDS = 30
 _CONTAINER_ID = re.compile(r"^[0-9a-f]{64}$")
+_SANDBOX_TMPFS_SIZE = "1g"
+_EXECUTOR_SCRATCH_RELATIVE = Path(".caprmedio_tmp")
 _SUITE_LABEL = "org.caprmedio.release-suite"
 _ATTEMPT_LABEL = "org.caprmedio.release-suite-attempt"
 _EXPECTED_ENVIRONMENT_KEYS = frozenset({
@@ -212,6 +214,32 @@ def _attempt_mounts(root: Path, candidate_sha: str, workspace: Path, output_root
     return attempt.name
 
 
+def _prepare_executor_scratch(workspace: Path) -> Path:
+    """Reserve the sole ignored scratch mountpoint in a disposable workspace.
+
+    Docker requires a target below a read-only bind to exist before it can be
+    overmounted with tmpfs.  This creates only the fixed, empty ignored leaf;
+    it never makes the source mount generally writable or accepts a caller
+    selected scratch path.
+    """
+
+    scratch = workspace / _EXECUTOR_SCRATCH_RELATIVE
+    try:
+        if scratch.exists() or scratch.is_symlink():
+            if scratch.is_symlink() or not scratch.is_dir():
+                raise ValueError("scratch mountpoint is not a directory")
+            if any(scratch.iterdir()):
+                raise ValueError("scratch mountpoint is not empty")
+        else:
+            scratch.mkdir(mode=0o700)
+    except (OSError, ValueError) as error:
+        raise ReleaseContractError(
+            "release-suite-executor-scratch-unsafe",
+            "suite workspace scratch mountpoint is unsafe",
+        ) from error
+    return scratch
+
+
 def _cleanup_timed_out_container(
     docker: DockerExecutor,
     root: Path,
@@ -321,6 +349,7 @@ class InstalledNSuiteDockerExecutor:
     ) -> SuiteExecutionResult:
         self._validate_invocation(command, workspace, output_root, working_directory, environment, timeout_seconds)
         attempt_name = _attempt_mounts(self.root, self.candidate_snapshot_manifest_sha256, workspace, output_root)
+        _prepare_executor_scratch(workspace)
         cidfile = output_root / "container.cid"
         if cidfile.exists() or cidfile.is_symlink():
             raise ReleaseContractError("release-suite-executor-output-unsafe", "suite output already has a container identity carrier")
@@ -329,7 +358,8 @@ class InstalledNSuiteDockerExecutor:
         argv = (
             "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
             "--security-opt=no-new-privileges", "--pids-limit=128",
-            "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+            "--tmpfs", f"/tmp:rw,nosuid,nodev,size={_SANDBOX_TMPFS_SIZE},mode=1777",
+            "--tmpfs", f"{SANDBOX_WORKSPACE_PATH / _EXECUTOR_SCRATCH_RELATIVE}:rw,nosuid,nodev,size={_SANDBOX_TMPFS_SIZE},mode=1777",
             "--label", f"{_SUITE_LABEL}={self.candidate_snapshot_manifest_sha256}",
             "--label", f"{_ATTEMPT_LABEL}={attempt_name}",
             "--cidfile", str(cidfile),

@@ -176,6 +176,11 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertIn(f"type=bind,src={self.workspace},dst=/workspace,readonly", argv)
         self.assertIn(f"type=bind,src={self.output},dst=/output", argv)
         self.assertFalse(any(item.startswith(f"type=bind,src={self.root},dst=") for item in argv))
+        self.assertIn("/tmp:rw,nosuid,nodev,size=1g,mode=1777", argv)
+        self.assertIn("/workspace/.caprmedio_tmp:rw,nosuid,nodev,size=1g,mode=1777", argv)
+        scratch = self.workspace / ".caprmedio_tmp"
+        self.assertTrue(scratch.is_dir())
+        self.assertEqual(list(scratch.iterdir()), [])
         self.assertNotIn("/var/run/docker.sock", argv)
         self.assertIn("PATH=/opt/caprmedio/bin:/usr/bin", argv)
         self.assertIn(f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}=/workspace/{SOURCE_BINDINGS_RELATIVE}", argv)
@@ -229,6 +234,31 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
                               working_directory="tests", environment=self.environment(), timeout_seconds=120)
         self.assertEqual(linked.exception.code, "release-suite-executor-mount-unsafe")
         self.assertEqual(self.docker.calls, [])
+
+    def test_nonempty_or_symlinked_scratch_refuses_before_docker_run(self) -> None:
+        from release_contract import ReleaseContractError
+
+        scratch = self.workspace / ".caprmedio_tmp"
+        scratch.mkdir()
+        (scratch / "unexpected").write_text("not scratch", encoding="utf-8")
+        with self.assertRaises(ReleaseContractError) as nonempty:
+            self.executor.run(("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                              working_directory="tests", environment=self.environment(), timeout_seconds=120)
+        self.assertEqual(nonempty.exception.code, "release-suite-executor-scratch-unsafe")
+        self.assertEqual([call[0][:2] for call in self.docker.calls], [("docker", "image")])
+
+        self.docker.calls.clear()
+
+        (scratch / "unexpected").unlink()
+        scratch.rmdir()
+        target = self.root / "outside-scratch"
+        target.mkdir()
+        scratch.symlink_to(target, target_is_directory=True)
+        with self.assertRaises(ReleaseContractError) as linked:
+            self.executor.run(("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                              working_directory="tests", environment=self.environment(), timeout_seconds=120)
+        self.assertEqual(linked.exception.code, "release-suite-executor-scratch-unsafe")
+        self.assertEqual([call[0][:2] for call in self.docker.calls], [("docker", "image")])
 
     def test_timeout_never_becomes_a_successful_process_result(self) -> None:
         self.docker.run_result = DockerCommandResult(None, b"", b"timeout", timed_out=True)

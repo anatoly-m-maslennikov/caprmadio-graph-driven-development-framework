@@ -9,6 +9,7 @@ import unittest
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = RELEASE_ROOT.parents[3]
 for directory in (RELEASE_ROOT, Path(__file__).resolve().parent):
     if str(directory) not in sys.path:
         sys.path.insert(0, str(directory))
@@ -22,7 +23,7 @@ from release_handoff import CURRENT_SELECTOR_RELATIVE
 class RetainedE2EArtifactTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        retained = RELEASE_ROOT / ".caprmedio_tmp/tests/release-e2e-retained"
+        retained = PROJECT_ROOT / ".caprmedio_tmp/tests/release-e2e-retained"
         retained.mkdir(parents=True, exist_ok=True)
         cls.fixture = materialize(Path(tempfile.mkdtemp(prefix="golden-", dir=retained)))
         cls.evidence = cls._seed_e2e(cls.fixture)

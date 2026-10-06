@@ -15,6 +15,7 @@ from unittest.mock import patch
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = RELEASE_ROOT.parents[3]
 TEST_ROOT = Path(__file__).resolve().parent
 for directory in (RELEASE_ROOT, TEST_ROOT):
     if str(directory) not in sys.path:
@@ -93,7 +94,7 @@ class GoldenDocker:
 
 class BootstrapImageTests(unittest.TestCase):
     def setUp(self) -> None:
-        retained = RELEASE_ROOT / ".caprmedio_tmp/tests/bootstrap-image"
+        retained = PROJECT_ROOT / ".caprmedio_tmp/tests/bootstrap-image"
         retained.mkdir(parents=True, exist_ok=True)
         self.root = Path(tempfile.mkdtemp(prefix="bootstrap-image-", dir=retained))
         materialize(self.root)

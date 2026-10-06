@@ -17,6 +17,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = RELEASE_ROOT.parents[3]
 TEST_ROOT = Path(__file__).resolve().parent
 for directory in (RELEASE_ROOT, TEST_ROOT):
     if str(directory) not in sys.path:
@@ -75,7 +76,7 @@ class _RecordingExecutor:
 
 class ReleaseE2EGateContractTests(unittest.TestCase):
     def _fixture(self):
-        retained = RELEASE_ROOT / ".caprmedio_tmp/tests/release-e2e"
+        retained = PROJECT_ROOT / ".caprmedio_tmp/tests/release-e2e"
         retained.mkdir(parents=True, exist_ok=True)
         fixture = materialize(Path(tempfile.mkdtemp(prefix="golden-", dir=retained)))
         fixture.verify_receipts()

@@ -471,6 +471,92 @@ class ReleaseSuiteGoldenTests(unittest.TestCase):
             }
             self.assertIn(expected_module, source_paths)
 
+    def test_flat_module_imports_are_isolated_by_the_sealed_module_parent(self) -> None:
+        self.setUp()
+        for parent, marker, class_name in (("401_A", "first", "FlatImportFirstTests"), ("402_B", "second", "FlatImportSecondTests")):
+            directory = self.project_root / ENGINE_ROOT / parent
+            directory.mkdir(parents=True)
+            (directory / "helper.py").write_text(f"MARKER = {marker!r}\n", encoding="utf-8")
+            (directory / "test_flat_import.py").write_text(
+                "import unittest\nimport helper\n\n"
+                f"class {class_name}(unittest.TestCase):\n"
+                f"    def test_marker(self):\n        self.assertEqual(helper.MARKER, {marker!r})\n",
+                encoding="utf-8",
+            )
+
+        result, report_path = self._run()
+
+        self.assertEqual(result.returncode, 0, msg=f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}")
+        cases = self._junit_cases(report_path)
+        self.assertEqual(sum(map(len, cases.values())), 9)
+        self.assertIn("test_flat_import.FlatImportFirstTests.test_marker", cases)
+        self.assertIn("test_flat_import.FlatImportSecondTests.test_marker", cases)
+
+    def test_child_scratch_is_fixed_and_not_inherited_from_the_caller(self) -> None:
+        inputs = suite_driver.BoundInputs(
+            root=self.project_root,
+            compiled_root=f"{ENGINE_ROOT}/299_COMPILED_CANDIDATE",
+            candidate_manifest_sha256=CANDIDATE_DIGEST,
+            report_path=self.output_root / "coverage.xml",
+            envelope_sha256="c" * 64,
+            rows={},
+            reference_rows=(),
+            control_context_digest="d" * 64,
+            phase_map=ReleaseTestPhaseMap((), "e" * 64, (), ()),
+            probes=suite_driver.ModuleProbeRules("rules.json", "f" * 64, {}),
+        )
+        module = f"{ENGINE_ROOT}/201_PROGRAMMATIC/201_TOOLS/test_tools.py"
+        carrier = self.project_root / module
+        carrier.parent.mkdir(parents=True, exist_ok=True)
+        carrier.write_text("# sealed test carrier\n", encoding="utf-8")
+        results_root = self.output_root / "results"
+        results_root.mkdir()
+        observed_environment: dict[str, str] = {}
+
+        def capture(command, **kwargs):
+            observed_environment.update(kwargs["env"])
+            result_path = Path(command[-1])
+            result_path.write_bytes(_canonical_json({"loader_errors": [], "cases": []}))
+            return subprocess.CompletedProcess(command, 0, "", "")
+
+        with mock.patch.dict(os.environ, {"TMPDIR": "/caller/tmp", "TEMP": "/caller/temp", "TMP": "/caller/TMP"}):
+            with mock.patch.object(suite_driver.subprocess, "run", side_effect=capture):
+                _cases, errors = suite_driver._run_module(inputs, module, results_root)
+
+        self.assertEqual(errors, [f"{module}: discovery returned no test cases"])
+        self.assertEqual(observed_environment["TMPDIR"], str(suite_driver._CHILD_SCRATCH))
+        self.assertEqual(observed_environment["TEMP"], str(suite_driver._CHILD_SCRATCH))
+        self.assertEqual(observed_environment["TMP"], str(suite_driver._CHILD_SCRATCH))
+
+    def test_execute_bound_uses_fixed_driver_scratch_not_report_parent(self) -> None:
+        scratch = self.scratch / "fixed-child-scratch"
+        scratch.mkdir()
+        module = f"{ENGINE_ROOT}/201_PROGRAMMATIC/201_TOOLS/test_tools.py"
+        inputs = suite_driver.BoundInputs(
+            root=self.project_root,
+            compiled_root=f"{ENGINE_ROOT}/299_COMPILED_CANDIDATE",
+            candidate_manifest_sha256=CANDIDATE_DIGEST,
+            report_path=self.output_root / "coverage.xml",
+            envelope_sha256="c" * 64,
+            rows={},
+            reference_rows=(),
+            control_context_digest="d" * 64,
+            phase_map=ReleaseTestPhaseMap(((module, "e" * 64, "unit"),), "e" * 64, (module,), ()),
+            probes=suite_driver.ModuleProbeRules("rules.json", "f" * 64, {}),
+        )
+        captured: list[Path] = []
+
+        def capture(_inputs, _module_path, results_root):
+            captured.append(results_root)
+            return [], []
+
+        with mock.patch.object(suite_driver, "_prepare_child_scratch", return_value=scratch):
+            with mock.patch.object(suite_driver, "_run_module", side_effect=capture):
+                suite_driver._execute_bound(inputs)
+
+        self.assertTrue(scratch.is_dir())
+        self.assertTrue(all(path.is_relative_to(scratch) for path in captured))
+
     def test_load_tests_repeating_one_testcase_id_cannot_collapse_to_a_passing_gate(self) -> None:
         duplicate = self.project_root / f"{ENGINE_ROOT}/401_A/test_repeated.py"
         duplicate.parent.mkdir(parents=True)
