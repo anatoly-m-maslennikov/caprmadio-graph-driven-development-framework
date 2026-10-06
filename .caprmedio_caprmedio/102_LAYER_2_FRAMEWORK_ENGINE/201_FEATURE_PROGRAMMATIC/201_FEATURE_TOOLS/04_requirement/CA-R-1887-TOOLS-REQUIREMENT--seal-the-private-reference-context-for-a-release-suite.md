@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 4
-updated_at: "2026-10-06 14:06:45 +0000"
+updated_at: "2026-10-06 14:19:34 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Sealed suite reference context"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest]
@@ -34,4 +34,4 @@ The Suite Owner also binds the existing trusted internal candidate manifest SHA-
 
 The Prompt frontiers contain only their exact binding carriers and explicitly declared, current Atom pins. Identical shared pins are represented once; conflicting pins are rejected. This does not include arbitrary Project folders or obsolete Plan carriers merely because a historical test mentioned them.
 
-The closure also contains exactly these two source carriers for the private Unit execution budget: the canonical default at `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml` and the Framework Instance settings at `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml`. They remain ordinary `reference_rows`, deduplicated when already admitted, with no new context field. The Suite Owner resolves `[release_suite].unit_timeout_seconds` from the instance table when present, otherwise from the canonical default; a missing canonical carrier, malformed value, stale byte, mode change, or non-finite, non-positive, boolean, or over-`7200` value is non-passing.
+The closure also contains exactly these two source carriers for the private Unit execution budget: the canonical default at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml` and the Framework Instance settings at `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml`. They remain ordinary `reference_rows`, deduplicated when already admitted, with no new context field. The Suite Owner resolves `[release_suite].unit_timeout_seconds` from the instance table when present, otherwise from the canonical default; a missing canonical carrier, malformed value, stale byte, mode change, or non-finite, non-positive, boolean, or over-`7200` value is non-passing.

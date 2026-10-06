@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 4
-updated_at: "2026-10-06 14:06:45 +0000"
+updated_at: "2026-10-06 14:19:34 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Private suite reference-context encoding"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest]
@@ -57,4 +57,4 @@ The Suite Owner retains this object only as internal sealed suite evidence, veri
 
 ### Unit deadline source carriers
 
-The closed `reference_rows` set also includes exactly these two explicit settings carriers, without changing the context JSON member set: `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml` and `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml`. The Suite Owner reads only their captured bytes and resolves `[release_suite].unit_timeout_seconds` by instance-over-default fallback. The value is finite, non-boolean, positive, and at most `7200` seconds. The rows are source fingerprints for the private deadline snapshot, not a new public context member; missing or changed carriers fail closed.
+The closed `reference_rows` set also includes exactly these two explicit settings carriers, without changing the context JSON member set: `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml` and `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml`. The Suite Owner reads only their captured bytes and resolves `[release_suite].unit_timeout_seconds` by instance-over-default fallback. The value is finite, non-boolean, positive, and at most `7200` seconds. The rows are source fingerprints for the private deadline snapshot, not a new public context member; missing or changed carriers fail closed.

@@ -22,6 +22,16 @@ from release_source_admission import (
 from selected_routes import PROJECT_SETTINGS_REF, canonical_digest, canonical_json, selected_manifest_ref
 
 
+_UNIT_DEADLINE_SETTINGS = (
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/"
+    "caprmedio_framework_default_settings.toml",
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/"
+    "caprmedio_framework_settings.toml",
+)
+
+
 def _pins(value: object) -> dict[str, str]:
     result: dict[str, str] = {}
     if isinstance(value, dict):
@@ -80,6 +90,7 @@ def copy_control_closure(repository: Path, root: Path) -> None:
         ".caprmedio_caprmedio/operators_registry.toml",
         settings_relative,
         project_structure_relative,
+        *_UNIT_DEADLINE_SETTINGS,
     }
     for relative in sorted(required):
         source = _retained_source(repository, relative, pins.get(relative))

@@ -19,6 +19,7 @@ from pathlib import Path
 from release_contract import ReleaseContractError, ValidatedCandidate
 from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation
 from release_image import CANDIDATE_LABEL, CONTEXT_LABEL, DockerExecutor, IMAGE_ID
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS
 from bootstrap_image import BootstrapImageError, read_retained_initial_framework_image
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
@@ -39,7 +40,6 @@ from release_suite import (
 
 
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
-_MAX_TIMEOUT_SECONDS = 900
 _INSPECT_TIMEOUT_SECONDS = 30
 _CLEANUP_TIMEOUT_SECONDS = 30
 _CONTAINER_ID = re.compile(r"^[0-9a-f]{64}$")
@@ -306,7 +306,7 @@ class InstalledNSuiteDockerExecutor:
         _attempt_mounts(self.root, self.candidate_snapshot_manifest_sha256, workspace, output_root)
         if command != self.sealed_command or working_directory != self.sealed_working_directory:
             raise ReleaseContractError("release-suite-executor-binding-mismatch", "suite command or working directory differs from sealed selection")
-        if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= _MAX_TIMEOUT_SECONDS:
+        if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= MAX_UNIT_TIMEOUT_SECONDS:
             raise ReleaseContractError("release-suite-executor-timeout-invalid", "suite timeout is outside the governed bound")
         bindings_sha256 = environment.get(SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE)
         if not isinstance(bindings_sha256, str) or _SHA256.fullmatch(bindings_sha256) is None:

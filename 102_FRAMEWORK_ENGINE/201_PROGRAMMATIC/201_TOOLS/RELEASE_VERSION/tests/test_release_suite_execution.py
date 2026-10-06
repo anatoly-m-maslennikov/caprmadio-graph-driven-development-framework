@@ -30,6 +30,7 @@ from release_suite_execution import (
     InstalledNSuiteDockerExecutor,
     SelectedNImageBinding,
 )
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS
 
 
 IMAGE = "sha256:" + "a" * 64
@@ -204,6 +205,28 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertEqual(argv[argv.index("--entrypoint") + 1], "python")
         self.assertEqual(argv[-3:], (IMAGE, "-m", "pytest"))
         self.assertNotIn("/image-start", argv)
+
+    def test_shared_maximum_deadline_is_forwarded_to_the_isolated_container(self) -> None:
+        result = self.executor.run(
+            ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+            working_directory="tests", environment=self.environment(),
+            timeout_seconds=MAX_UNIT_TIMEOUT_SECONDS,
+        )
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(MAX_UNIT_TIMEOUT_SECONDS, self.docker.calls[-1][2])
+
+    def test_deadline_above_the_shared_maximum_is_rejected_before_docker(self) -> None:
+        from release_contract import ReleaseContractError
+
+        with self.assertRaises(ReleaseContractError) as rejected:
+            self.executor.run(
+                ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                working_directory="tests", environment=self.environment(),
+                timeout_seconds=MAX_UNIT_TIMEOUT_SECONDS + 1,
+            )
+        self.assertEqual(rejected.exception.code, "release-suite-executor-timeout-invalid")
+        self.assertEqual([], self.docker.calls)
 
     def test_mount_escape_and_environment_override_refuse_before_docker_run(self) -> None:
         from release_contract import ReleaseContractError

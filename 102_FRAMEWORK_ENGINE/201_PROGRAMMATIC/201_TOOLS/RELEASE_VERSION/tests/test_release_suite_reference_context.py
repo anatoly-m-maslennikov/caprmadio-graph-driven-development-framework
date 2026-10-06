@@ -40,8 +40,19 @@ from release_suite_reference_context import (  # noqa: E402
     validate_reference_rows,
     validate_schema2_context,
 )
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS, resolve_unit_deadline  # noqa: E402
 from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_manifest, selected_manifest_ref  # noqa: E402
 from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
+
+
+_UNIT_DEADLINE_SETTINGS = frozenset({
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/"
+    "caprmedio_framework_default_settings.toml",
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/"
+    "caprmedio_framework_settings.toml",
+})
 
 
 def _source_paths(value: object) -> set[str]:
@@ -124,6 +135,57 @@ class PromptBindingFrontierTests(unittest.TestCase):
         )
         with self.assertRaises(ReleaseSuiteReferenceContextError):
             reference_context._prompt_binding_frontier(d580, captured)
+
+
+class UnitDeadlineTests(unittest.TestCase):
+    def context(self, *, default: bytes, instance: bytes) -> ReleaseSuiteReferenceContext:
+        return ReleaseSuiteReferenceContext(
+            root="/fixture",
+            trusted_binding_values=(
+                ("candidate_snapshot_manifest_sha256", "a" * 64),
+                ("compiled_candidate_root", "compiled"),
+                ("selected_n_identity", "n"),
+                ("selected_n_image_context", "sha256:" + "b" * 64),
+            ),
+            reference_rows=(), control_context_digest="c" * 64,
+            _verified_bytes=tuple(zip(sorted(_UNIT_DEADLINE_SETTINGS), (default, instance))),
+        )
+
+    def test_resolves_captured_default_or_instance_and_binds_canonical_snapshot(self) -> None:
+        default = b"[release_suite]\nunit_timeout_seconds = 3600\n"
+        instance = b"[rmed_review]\ncontext_headroom_fraction = 0.10\n"
+        frozen = resolve_unit_deadline(self.context(default=default, instance=instance))
+        self.assertEqual(3600.0, frozen.timeout_seconds)
+        self.assertEqual(3600.0, frozen.configured_timeout_seconds)
+        self.assertEqual(float(MAX_UNIT_TIMEOUT_SECONDS), frozen.maximum_timeout_seconds)
+        snapshot = json.loads(frozen.snapshot)
+        self.assertEqual(3600.0, snapshot["configured_unit_timeout_seconds"])
+        self.assertEqual(3600.0, snapshot["effective_unit_timeout_seconds"])
+        self.assertEqual(hashlib.sha256(frozen.snapshot).hexdigest(), frozen.snapshot_sha256)
+        empty_instance = resolve_unit_deadline(self.context(
+            default=default, instance=b"[release_suite]\n",
+        ))
+        self.assertEqual(3600.0, empty_instance.timeout_seconds)
+
+        overridden = resolve_unit_deadline(self.context(
+            default=default, instance=b"[release_suite]\nunit_timeout_seconds = 5400\n",
+        ), fixture_timeout_seconds=120)
+        self.assertEqual(5400.0, overridden.configured_timeout_seconds)
+        self.assertEqual(120.0, overridden.timeout_seconds)
+
+    def test_refuses_malformed_or_widening_deadline_controls(self) -> None:
+        default = b"[release_suite]\nunit_timeout_seconds = 3600\n"
+        for instance in (
+            b"[release_suite]\nunit_timeout_seconds = true\n",
+            b"[release_suite]\nunit_timeout_seconds = 7201\n",
+            b"[release_suite]\nunit_timeout_seconds = 999999999999999999999999999999999999999999999999999999999999999999999999999999\n",
+            b"[release_suite]\nunit_timeout_seconds = 3600\nextra = 1\n",
+        ):
+            with self.subTest(instance=instance):
+                with self.assertRaises(Exception):
+                    resolve_unit_deadline(self.context(default=default, instance=instance))
+        with self.assertRaises(Exception):
+            resolve_unit_deadline(self.context(default=default, instance=b""), fixture_timeout_seconds=3601)
 
 
 class ReleaseSuiteReferenceContextTests(unittest.TestCase):
@@ -237,6 +299,7 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         }.issubset(paths))
         self.assertTrue(_source_paths(derive_release_source_admission(self.root)).issubset(paths))
         self.assertTrue(_source_paths(derive_release_private_carriers(self.root)).issubset(paths))
+        self.assertTrue(_UNIT_DEADLINE_SETTINGS.issubset(paths))
         for relative in (
             "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json",

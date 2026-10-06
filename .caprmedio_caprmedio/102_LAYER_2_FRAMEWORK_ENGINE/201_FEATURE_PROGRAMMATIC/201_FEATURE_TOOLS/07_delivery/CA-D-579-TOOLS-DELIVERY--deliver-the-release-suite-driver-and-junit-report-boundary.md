@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 6
-updated_at: "2026-10-06 14:06:45 +0000"
+updated_at: "2026-10-06 14:19:34 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite driver carrier"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, JUnit Report, Runtime, MCP, Workflow, Source Carrier, Compiled Candidate]
@@ -86,8 +86,8 @@ source_bindings = "/workspace/.caprmedio_release/source_bindings.json"
 report = "/output/coverage.xml"
 
 [unit_deadline]
-default_settings_source = "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml"
-instance_settings_source = "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml"
+default_settings_source = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml"
+instance_settings_source = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml"
 table = "release_suite"
 key = "unit_timeout_seconds"
 default_seconds = 3600

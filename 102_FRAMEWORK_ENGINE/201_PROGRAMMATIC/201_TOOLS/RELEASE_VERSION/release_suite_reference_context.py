@@ -42,6 +42,14 @@ _D580_REFERENCE = (
     "201_FEATURE_TOOLS/07_delivery/"
     "CA-D-580-TOOLS-DELIVERY--encode-the-private-release-suite-reference-context.md"
 )
+_UNIT_DEADLINE_SETTINGS = (
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/"
+    "caprmedio_framework_default_settings.toml",
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/"
+    "caprmedio_framework_settings.toml",
+)
 _BINDING_FIELDS = frozenset({
     "candidate_snapshot_manifest_sha256", "compiled_candidate_root",
     "selected_n_identity", "selected_n_image_context",
@@ -352,6 +360,7 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         project_structure_ref,
         authority_ref,
         _D580_REFERENCE,
+        *_UNIT_DEADLINE_SETTINGS,
     ]
     _paths_from_source_paths(manifest, candidates)
     freshness = manifest.get("source_freshness") if isinstance(manifest, Mapping) else None
@@ -454,6 +463,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         *_pin_paths(admission),
         *(row["source_path"] for row in private_carriers),
         *prompt_paths,
+        *_UNIT_DEADLINE_SETTINGS,
     ]
     # The selected manifest has already source-validated every route/admission
     # pin.  Capture their source paths too, while naturally deduplicating a
