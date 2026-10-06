@@ -35,6 +35,7 @@ from selected_workflows_docker_fixture import (  # noqa: E402
     FixtureLease,
     JOURNAL_CASES,
     ROUTE_CASES,
+    STATUS_DOMAINS,
 )
 
 try:
@@ -156,6 +157,37 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 return observed
             await asyncio.sleep(0.25)
         self.fail(f"selected Workflow did not reach a truthful terminal state: {observed}")
+
+    async def _execute_status_case(
+        self, runtime: Runtime, root: Path, fixture: GoldenProject, path: Path,
+        status: str, request_id: str,
+    ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+        """Exercise W04 through preview, selected enqueue, and reconnect status."""
+        preview = await self._call(
+            runtime, root, fixture.case.route,
+            fixture.request_for_status(path, status, request_id=request_id),
+        )
+        self.assertEqual("preview", preview.get("disposition"), preview)
+        execute = fixture.request_for_status(
+            path, status, request_id=request_id, mode="execute",
+            receipt=preview["proposal_receipt"], receipt_digest=preview["proposal_receipt_digest"],
+        )
+        admitted = await self._call(
+            runtime, root, "workflow_orchestrator",
+            {"operation": "enqueue_selected", "run_id": request_id, "execution": execute},
+        )
+        self.assertIn(admitted.get("outcome"), {"queued", "admitted", "started", "running", "pending", "completed"}, admitted)
+        terminal = await self._terminal_status(runtime, root, request_id)
+        self.assertEqual("terminal", terminal.get("disposition"), terminal)
+        self.assertEqual("completed", terminal.get("outcome"), terminal)
+        selected = terminal.get("selected_result")
+        self.assertIsInstance(selected, dict, terminal)
+        graph = self._graph_result(root, request_id)
+        rows = self._assert_graph_path_and_native_results(root, fixture, request_id, graph)
+        self._assert_shared_run_journal(root, request_id, self._route_binding(fixture), selected, graph)
+        native = self._action_progress(root, request_id, rows[-1]["action_run_id"]).get("native_result")
+        self.assertIsInstance(native, dict, native)
+        return native, graph, selected
 
     @staticmethod
     def _read_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -521,6 +553,68 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     rows = self._assert_graph_path_and_native_results(root, fixture, request_id, graph)
                     self._assert_shared_run_journal(root, request_id, self._route_binding(fixture), selected, graph)
                     self._assert_route_specific_effects(root, fixture, execute, before, rows)
+                except GoldenCorpusError as error:
+                    self.fail(str(error))
+                finally:
+                    if launched:
+                        await self._stop(runtime)
+                    temporary.cleanup()
+
+    async def test_w04_all_current_roles_and_admitted_statuses(self) -> None:
+        """CA-P-1616: exercise every source-admitted W04 status through Docker/MCP."""
+        for role, _letter, _folder, source_id, statuses in STATUS_DOMAINS:
+            with self.subTest(role=role):
+                temporary, root, fixture = self._new_fixture(GoldenCase("W04", "change_atom_status"))
+                runtime = self._runtime(root)
+                launched = False
+                try:
+                    fixture.prepare()
+                    launched = True
+                    await self._start(runtime)
+                    final_observed: Path | None = None
+                    final_status: str | None = None
+                    for offset, changed in enumerate(statuses):
+                        current = next(value for value in statuses
+                                       if value != changed and value.casefold() != "draft")
+                        path = fixture.status_atom(role, current, number=8000 + offset)
+                        native, _graph, _selected = await self._execute_status_case(
+                            runtime, root, fixture, path, changed,
+                            f"p1616-{role.lower()}-{changed.casefold()}-change",
+                        )
+                        self.assertEqual("applied", native.get("outcome"), native)
+                        model = native["status_model"]
+                        self.assertEqual(list(statuses), model["statuses"], native)
+                        model_pin = model["model_sources"][0]
+                        self.assertEqual(source_id, model_pin["atom_id"], native)
+                        self.assertEqual(
+                            hashlib.sha256((root / model_pin["path"]).read_bytes()).hexdigest(),
+                            model_pin["sha256"], native,
+                        )
+                        observed = root / native["observed"]["path"]
+                        self.assertTrue(observed.is_file(), native)
+                        self.assertEqual(changed, native["observed"]["status"], native)
+                        if role == "Requirement" and changed == "Draft":
+                            self.assertIsNone(native["observed"]["atom_id"], native)
+                            self.assertNotIn("atom_id:", observed.read_text(encoding="utf-8"), native)
+                            self.assertIn("history", native, native)
+                        final_observed, final_status = observed, changed
+
+                    assert final_observed is not None and final_status is not None
+                    noop, _graph, _selected = await self._execute_status_case(
+                        runtime, root, fixture, final_observed, final_status, f"p1616-{role.lower()}-noop",
+                    )
+                    self.assertEqual("no-op", noop.get("outcome"), noop)
+                    self.assertTrue(all(effect.get("state") == "unchanged" for effect in noop.get("effects", [])), noop)
+
+                    before = fixture.snapshot()
+                    with self.assertRaisesRegex(AssertionError, "status-unadmitted"):
+                        await self._call(
+                            runtime, root, fixture.case.route,
+                            fixture.request_for_status(
+                                final_observed, "NotAdmitted", request_id=f"p1616-{role.lower()}-rejected",
+                            ),
+                        )
+                    self.assertEqual(before, fixture.snapshot(), "rejected W04 request changed authority")
                 except GoldenCorpusError as error:
                     self.fail(str(error))
                 finally:

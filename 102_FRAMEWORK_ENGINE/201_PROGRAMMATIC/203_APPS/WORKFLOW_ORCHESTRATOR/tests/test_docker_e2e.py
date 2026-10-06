@@ -28,6 +28,10 @@ RELEASE_ROOT = ROOT / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_V
 sys.path.insert(0, str(RELEASE_ROOT))
 from runtime import Runtime  # noqa: E402
 from release_e2e_context import load_release_e2e_context  # noqa: E402
+from release_recovery_docker_fixture import (  # noqa: E402
+    RUN_ID as RELEASE_RECOVERY_RUN_ID,
+    ReleaseRecoveryDockerFixture,
+)
 
 try:
     E2E_CONTEXT = load_release_e2e_context(os.environ)
@@ -142,6 +146,44 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             result = await client.call_tool("workflow_orchestrator", {"request": request})
             self.assertFalse(result.is_error, str(result))
             return result.structured_content
+
+    async def local_mcp_client_request(self, client, tool, request):
+        result = await client.call_tool(tool, {"request": request})
+        self.assertFalse(result.is_error, str(result))
+        self.assertIsInstance(result.structured_content, dict, result)
+        return result.structured_content
+
+    async def local_mcp_request(self, parameters, tool, request):
+        """Use the real local MCP implementation for the release-host bridge."""
+        async with Client(parameters) as client:
+            return await self.local_mcp_client_request(client, tool, request)
+
+    async def wait_for_release_result(self, fixture, predicate):
+        deadline = time.monotonic() + 90
+        observed = None
+        while time.monotonic() < deadline:
+            observed = fixture.selected_result()
+            if observed is not None and predicate(observed):
+                return observed
+            await asyncio.sleep(0.25)
+        self.fail(f"Release host did not reach the required state: {observed}")
+
+    async def wait_for_recovered_release_event(self, fixture, event_id):
+        """Wait for the original sealed terminal only, not later graph work."""
+        deadline = time.monotonic() + 90
+        observed = []
+        while time.monotonic() < deadline:
+            observed = [
+                row for row in fixture.journal_events()
+                if row.get("event_id") == event_id
+            ]
+            if len(observed) == 1 and event_id not in fixture.pending_event_ids():
+                return observed[0]
+            await asyncio.sleep(0.25)
+        self.fail(
+            "Release host did not record the original recovered terminal exactly once: "
+            f"events={observed} pending={fixture.pending_event_ids()}"
+        )
 
     async def terminal(self, run_id):
         deadline = time.monotonic() + 75
@@ -269,6 +311,108 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             ):
                 response = await raw.get(f"http://127.0.0.1:{port}/health", headers=headers)
                 self.assertEqual(expected, response.status_code)
+
+    async def test_release_host_recovers_one_real_effect_recording_without_replay(self):
+        """P1713/P1716: queue/MCP recovery appends only a real pending terminal.
+
+        The existing Docker runtime remains the Base Revise fixture.  Release
+        uses its separately selected fixed host interpreter and private DBOS
+        namespace because a Docker MCP process cannot directly own that host
+        queue.  The fixture injects one local-only writer OSError after source
+        delivery has produced an actual effect reference; it never fabricates
+        a pending Journal carrier.
+        """
+        fixture = ReleaseRecoveryDockerFixture.create(E2E_CONTEXT.scratch_root)
+        try:
+            fixture.start_worker(fault=True)
+            preview = await self.local_mcp_request(
+                fixture.mcp_parameters(fault=True), "release_version", fixture.preview_request(),
+            )
+            self.assertEqual("preview", preview.get("disposition"), preview)
+            admitted = await self.local_mcp_request(
+                fixture.mcp_parameters(fault=True), "release_version", fixture.execute_request(preview),
+            )
+            self.assertEqual(RELEASE_RECOVERY_RUN_ID, admitted.get("workflow_run_id"), admitted)
+            self.assertTrue(
+                (fixture.root / ".caprmedio_install/workflow_orchestrator/release-host/transport.json").is_file()
+            )
+            selected = await self.wait_for_release_result(
+                fixture,
+                lambda result: result.get("disposition") == "recording_pending",
+            )
+            pending_ids = selected.get("pending_event_ids", [])
+            self.assertEqual(1, len(pending_ids), selected)
+            pending_files = fixture.pending_events()
+            self.assertEqual(1, len(pending_files), pending_files)
+            sealed = json.loads(pending_files[0].read_text(encoding="utf-8"))
+            self.assertEqual(pending_ids[0], sealed["event_id"])
+            event = json.loads(sealed["event_bytes"])
+            self.assertEqual("completed", event["event"])
+            self.assertEqual("action", event["run"]["kind"])
+            self.assertTrue(event["effect_refs"], event)
+            effect = fixture.root / event["effect_refs"][0].split("#", 1)[0]
+            self.assertTrue(effect.exists(), event)
+            effect_digest = fixture.content_digest(effect)
+            before_events = fixture.journal_events()
+            self.assertFalse(any(row["event_id"] == event["event_id"] for row in before_events), before_events)
+
+            fixture.stop_worker()
+            fixture.start_worker(fault=False)
+            # Current source is mandatory for recovery.  A one-byte scoped
+            # mutation must be refused while retaining the real pending event;
+            # restoring the exact bytes below permits the same frozen run.
+            workflow_source = fixture.release_workflow_source()
+            original_workflow = workflow_source.read_bytes()
+            # Keep one MCP gateway alive across the mutation.  A new gateway
+            # correctly refuses stale bindings at startup; this instead tests
+            # the independent host-side recovery admission.
+            async with Client(fixture.mcp_parameters()) as recovery_client:
+                workflow_source.write_bytes(original_workflow + b"\n# fixture stale guard\n")
+                stale = await self.local_mcp_client_request(
+                    recovery_client, "recover_selected_release", {
+                        "operation": "recover_selected_release",
+                        "run_id": RELEASE_RECOVERY_RUN_ID,
+                        "request_identity": fixture.request_identity(),
+                    },
+                )
+                self.assertEqual("blocked", stale.get("disposition"), stale)
+                self.assertIn("stale", " ".join(stale.get("diagnostics", [])).lower(), stale)
+                self.assertIn(event["event_id"], fixture.pending_event_ids())
+                workflow_source.write_bytes(original_workflow)
+
+                recovered = await self.local_mcp_client_request(
+                    recovery_client, "recover_selected_release", {
+                        "operation": "recover_selected_release",
+                        "run_id": RELEASE_RECOVERY_RUN_ID,
+                        "request_identity": fixture.request_identity(),
+                    },
+                )
+                self.assertEqual(RELEASE_RECOVERY_RUN_ID, recovered.get("workflow_run_id"), recovered)
+            recovered_event = await self.wait_for_recovered_release_event(fixture, event["event_id"])
+            after_events = fixture.journal_events()
+            recovered_events = [row for row in after_events if row["event_id"] == event["event_id"]]
+            self.assertEqual(1, len(recovered_events), after_events)
+            self.assertEqual(event, recovered_event)
+            self.assertEqual(event, recovered_events[0])
+            self.assertNotIn(event["event_id"], fixture.pending_event_ids())
+            self.assertEqual(
+                effect_digest, fixture.content_digest(effect),
+                "recovery replayed or mutated the delivered source effect",
+            )
+
+            binding = fixture.root / ".caprmedio_install/workflow_orchestrator/release-host/bindings" / f"{RELEASE_RECOVERY_RUN_ID}.json"
+            binding.write_text(json.dumps({"tampered": True}), encoding="utf-8")
+            refused = await self.local_mcp_request(
+                fixture.mcp_parameters(), "recover_selected_release", {
+                    "operation": "recover_selected_release",
+                    "run_id": RELEASE_RECOVERY_RUN_ID,
+                    "request_identity": fixture.request_identity(),
+                },
+            )
+            self.assertEqual("blocked", refused.get("disposition"), refused)
+            self.assertIn("binding", " ".join(refused.get("diagnostics", [])), refused)
+        finally:
+            fixture.cleanup()
 
     @staticmethod
     def restore_http_environment(previous):
