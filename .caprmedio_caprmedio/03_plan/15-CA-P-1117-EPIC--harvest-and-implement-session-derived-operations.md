@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 21
-updated_at: "2026-10-06 06:52:15 +0000"
+updated_at: "2026-10-06 10:19:18 +0000"
 relations: {}
 ---
 # Summary
@@ -54,6 +54,8 @@ Fresh N8 completed delivery and compilation and actually ran the sealed Unit con
 The bounded N8 source repairs are saved: module-owned executable scratch, gitless Project-root recognition, current graph-settings lookup, exact Tool private-reader dependencies, and settings-bound Project Structure in the sealed reference context. Independent review accepts the closure repairs; thirteen reference-context cases, forty-six related release cases, fourteen source-admission cases, seventeen promotion cases and fifty-three image cases pass locally. The promotion/image Unit fixtures retain real byte/mode currentness checks and mock command execution only. These checks are not a new complete release gate. Fresh dispatch is blocked by CA-C-496: the canonical sixteen-route binding retains predecessor source pins, while the private publisher only admits initial fifteen-to-sixteen publication. Do not reset the binding or hand-edit it to bypass admission. A guarded, source-first refresh capability and its authorization must be settled before a fresh Release preview. Installed N's selector and image are reopened unchanged; N9 has not been dispatched.
 
 ### Current Operator-selected scope
+
+the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 
 The Operator selected these sixteen Workflows:
 

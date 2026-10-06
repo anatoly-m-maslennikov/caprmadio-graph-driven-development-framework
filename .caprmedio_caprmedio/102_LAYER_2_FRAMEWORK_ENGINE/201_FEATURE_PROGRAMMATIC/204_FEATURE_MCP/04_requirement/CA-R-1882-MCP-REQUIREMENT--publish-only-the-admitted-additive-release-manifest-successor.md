@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 14:12:04 +0000"
+version: 3
+updated_at: "2026-10-06 10:15:24 +0000"
 subjects:
   governs: "MCP/selected Release manifest publisher"
   depends_on: [MCP, Projection, Manifest, Workflow, Step, Action, Operator, Run, Journal]
@@ -20,18 +20,18 @@ Publish only the admitted additive Release manifest successor
 
 ## Scope
 
-The Project-local MCP capability that derives one selected-workflow manifest successor from the current canonical fifteen-route Projection.
+the Project-local MCP capability that initially publishes the admitted additive Release manifest and narrowly refreshes that same sixteen-route Projection after accepted Release source-pin changes.
 
 ## Claim
 
-MCP **must** provide a plan-first publisher that admits explicit authorized execution only to transform the current canonical fifteen-route selected-workflow manifest into its exact sixteen-route successor by appending `release_version` and D572's one Release source-admission record while preserving every existing route, the selected-source freshness fields and binding reference, and every query-source admission.
+MCP **must** provide plan-first, Operator-authorized publication of the exact admitted additive Release manifest through **only** the initial fifteen-to-sixteen operation **or** a guarded refresh of its stale Release admission, preserving the existing routes, query admissions and selected-source registry authority.
 
 ## Details
 
-The publisher loads only `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` through the existing loader. It requires exactly fifteen existing route rows and no `release_version` row. It derives the one new row and the one `release_source_admissions` record solely through the current source-owned D572 admission and its accepted frontier, including the complete current O164 Workflow, ordered Step/Action occurrences, and Release RMED frontier. It neither repairs nor independently admits a source or maintains copied admission pins.
-
-Planning is the default and writes nothing. An explicit execute requires exact current Operator authorization and unchanged input bindings. It recomputes the existing binding and canonical manifest digests, publishes only the exact successor, and proves the published bytes by reopening them through the existing loader. The publisher does not dispatch O164, create a Release Version Run, queue work, build or retire an image, install a runtime, or claim full-release acceptance.
-
-The publisher is non-dispatching source-projection support, not another Workflow or Run. Explicit execution uses the trusted MCP-owned lifecycle context and existing generic canonical Journal event support declared by the current Method and Delivery. The publisher does not create a parallel executor, Run writer, or Journal writer. If publication is observed but recording is unavailable, it retains the sealed evidence and returns the actual partial state and recording requirement rather than a completed result.
-
-The compiled Methodology source is the canonical `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/` carrier. The obsolete `.caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY` carrier is not admitted as a source or output.
+1. initial publication requires the current canonical fifteen-route Manifest with no Release admission. it appends `release_version` and its current D572-defined admission, preserving the existing fifteen rows and query admissions.
+2. refresh requires the canonical sixteen-route Manifest with the same current Release route and **=1** stale, schema-valid Release admission. all non-Release routes, query admissions, registry authority, binding reference and existing digests **must** validate. within the old Release admission, **only** Version and digest at legal definition-pin positions may differ from the current admission; Atom identities, source paths, fields, roles and ordered occurrences **must** match. a changed route or source identity requires separate admission, not this refresh.
+3. refresh replaces **only** the Release admission with the current source-owned D572 value and recomputes the derived digests. it does not append or remove any route. a current admission with no drift is refused **before** effects.
+4. normal discovery, dispatch and Manifest loading remain strict. the narrowly named refresh-input validator admits no dispatch and exposes no caller-selected loose mode.
+5. planning writes nothing. execution requires a trusted, operation-specific Operator context sealed to the Project root, exact observed input bytes, current source frontier and exact candidate bytes. initial and refresh grants cannot substitute for each other.
+6. the existing lifecycle adapter seals a pending intent, holds the canonical carrier lock through the final freshness check and atomic replacement, strictly reopens the output and finalizes the existing Journal event. recovery records **only** matching already-published candidate bytes; it never replays a replacement.
+7. this private source-projection capability does not execute the Release Workflow or change installed runtime N. actual Release dispatch remains through MCP with its full gates. the canonical Applicable Methodology location remains unchanged.

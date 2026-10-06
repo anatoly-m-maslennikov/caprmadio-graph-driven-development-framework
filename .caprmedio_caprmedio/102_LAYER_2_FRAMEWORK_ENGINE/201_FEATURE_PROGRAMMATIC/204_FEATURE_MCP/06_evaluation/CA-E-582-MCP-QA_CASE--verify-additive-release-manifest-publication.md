@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 18:02:02 +0400"
+version: 3
+updated_at: "2026-10-06 10:15:24 +0000"
 subjects:
   governs: "MCP/additive Release manifest publication"
   depends_on: [MCP, Projection, Manifest, Workflow, Step, Action, Operator, Run, Journal]
@@ -21,15 +21,18 @@ Verify additive Release manifest publication
 
 ## Scope
 
-Functional proof of the publisher's plan, exact successor, readback, and non-dispatch boundaries.
+functional proof of initial additive Release publication, guarded refresh, exact readback and non-dispatch boundaries.
 
 ## Claim
 
-Every publisher realization **must** prove that plan mode has no effect and trusted execution publishes only the exact verified fifteen-to-sixteen route successor with truthful, resumable canonical Journal evidence.
+all publisher realizations **must** prove that planning is effect-free and operation-specific trusted execution publishes **only** the exact admitted initial successor or narrow Release-admission refresh with truthful, recoverable canonical Journal evidence.
 
 ## Details
 
-1. Using a functional fixture with a current canonical fifteen-route manifest and the source-owned current D572 admission, verify plan mode performs no write, creates no Run or Journal event, and returns the proposed addition and digest evidence. Verify execute preserves all fifteen route rows and `query_source_admissions`; preserves the selected-source freshness fields and binding reference while recomputing only its selected-binding digest; adds exactly one `release_version` row and one Release admission; recomputes the canonical manifest digest; and passes exact published-byte readback through the existing loader.
-2. Reject a missing, malformed, stale, noncanonical, non-fifteen-route, or already-sixteen-route input; an altered existing row, source-freshness value, query admission, current admission frontier, digest, or authorization; and any source or output reference to the obsolete Applicable Methodology projection. Reject an unregistered Operator, a grant bound to another root/input bytes/frontier/candidate digest, and every caller-supplied authorization boolean, callback, or lifecycle record. Each rejection leaves the canonical manifest unchanged and does not dispatch O164, create a Release Version Run, queue work, build or retire an image, install a runtime, or claim full-release acceptance.
-3. Verify the adapter seals the complete pending publication intent before replacement. Verify its normal Journal record is existing `completed` `governed_project_change` evidence with the exact target path, digest, and prior-event link; where no prior terminal evidence exists, verify the required recovered `governed_project_state` observation. Verify `result.version` advances the Journal carrier history only, while the Projection remains versionless and records only its completed-rebuild `updated_at`.
-4. Inject failures before replacement, after replacement before readback, and after verified readback before Journal finalization. Confirm the first leaves the canonical file unchanged. For every later restart, confirm exact candidate bytes finalize only the sealed original Journal event without another replacement; nonmatching bytes remain ambiguous and never replay the mutation. Confirm the publisher never writes a Journal directly and never creates a second executor, Workflow Run, or lifecycle ledger. This is planned functional proof, not runtime or full-release acceptance.
+1. retain the existing initial fifteen-to-sixteen golden cases and refusal cases. verify that unchanged historical plans and sealed intents retain their original normalization and recovery identity.
+2. start refresh fixtures from a genuinely admitted sixteen-route Manifest, then advance an accepted source pin. the ordinary loader **must** reject its stale admission; refresh planning **must** write nothing; authorized refresh **must** preserve all sixteen route rows, query admissions and registry values, replace **only** the Release admission and derived digests, and pass strict output readback.
+3. refuse current/no-drift input, fifteen-route input to refresh, sixteen-route input to initial publication, malformed pins, changed Atom identity/source path/ordered occurrence, duplicate JSON members, bad canonical or binding digest, symlink carriers, stale non-Release routes, query-admission drift and registry drift **before** replacement.
+4. refuse forged or unregistered Actor contexts and grants for another operation, root, raw input, source frontier or candidate. verify both directions of initial/refresh grant separation.
+5. inject source and Manifest drift before authorization, before intent sealing and after intent sealing. verify no unapproved replacement and truthful pending evidence once sealed. require the same carrier lock through final freshness checks and replacement.
+6. inject post-write readback and recording failures. recover matching candidate bytes to the same original event exactly once with atomic replacement patched to fail if called. refuse tampered candidate or changed sources and retain the sealed evidence. verify prior-state and successor Journal linkage without another ledger or Run.
+7. prove that neither operation dispatches Release, starts a worker, builds an image, changes installed N or claims full-release acceptance. these functional fixtures are not a substitute for the actual complete Release gates.
