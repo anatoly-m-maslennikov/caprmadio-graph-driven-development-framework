@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import hashlib
 import shutil
 import sys
+import tomllib
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -18,8 +20,9 @@ for path in (RELEASE_ROOT, TEST_ROOT):
 from release_compilation import build_preflight_validated_candidate, render_release_candidate  # noqa: E402
 from release_contract import ReleaseContractError  # noqa: E402
 from release_delivery import ReleaseDeliveryError, deliver_release_sources  # noqa: E402
-from release_handoff import DERIVED_SOURCE_COPY_RELATIVE, SealedSourceCopy, build_validated_candidate  # noqa: E402
+from release_handoff import DERIVED_SOURCE_COPY_RELATIVE, PackageRow, SealedSourceCopy, build_validated_candidate  # noqa: E402
 from release_packaging import stage_framework_package  # noqa: E402
+from bootstrap_image import _source_context  # noqa: E402
 import test_release_compilation as compilation_test  # noqa: E402
 import release_delivery  # noqa: E402
 
@@ -61,6 +64,58 @@ class ReleaseDeliveryTests(unittest.TestCase):
         )
         return next_preflight, next_candidate, before, release_root, retained_before
 
+    def bootstrap_owned_predecessor(self):
+        """Materialize the installed first-N selector/package shape exactly."""
+
+        preflight, initial = self.fixture.build()
+        deliver_release_sources(initial)
+        staged = stage_framework_package(self.root, render_release_candidate(initial, preflight))
+        original = self.root / staged["release_root"]
+        manifest = tomllib.loads((original / "manifest.toml").read_text(encoding="utf-8"))
+        rows = tuple(PackageRow.model_validate({
+            "resource": row["resource"],
+            "source_path": row["source_path"],
+            "destination_path": row["destination"],
+            "sha256": row["sha256"],
+            "mode": row["mode"],
+        }) for row in manifest["files"])
+        source_context = _source_context(rows)
+        bootstrap_manifest = (original / "manifest.toml").read_bytes().replace(
+            f'candidate_snapshot_manifest_sha256 = "{initial.manifest.sha256}"'.encode(),
+            f'candidate_snapshot_manifest_sha256 = "{source_context}"'.encode(),
+        )
+        bootstrap_release = hashlib.sha256(bootstrap_manifest).hexdigest()
+        bootstrap = original.parent / bootstrap_release
+        shutil.copytree(original, bootstrap)
+        (bootstrap / "manifest.toml").write_bytes(bootstrap_manifest)
+        self.assertEqual(hashlib.sha256(bootstrap_manifest).hexdigest(), bootstrap_release)
+        self.assertEqual(
+            tomllib.loads(bootstrap_manifest.decode())["candidate_snapshot_manifest_sha256"],
+            source_context,
+        )
+        selected_root = f".caprmedio_runtime/framework/releases/{bootstrap_release}"
+        self.fixture.write(
+            ".caprmedio_runtime/framework/current.toml",
+            (
+                "schema_version = 1\n"
+                f'manifest_sha256 = "{bootstrap_release}"\n'
+                f'release = "{bootstrap_release}"\n'
+                f'selected_release_root = "{selected_root}"\n'
+                f'framework_engine_root = "{selected_root}/FRAMEWORK_ENGINE"\n'
+                f'methodology_root = "{selected_root}/METHODOLOGY"\n'
+                f'image_digest = "sha256:{"a" * 64}"\n'
+            ).encode(),
+        )
+        self.assertNotEqual(source_context, bootstrap_release)
+        prior = records(self.target)
+        self.fixture.core.write_bytes(compilation_test.carrier("CA-R-001", version=2))
+        next_preflight, next_candidate = build_preflight_validated_candidate(
+            self.root, candidate_release="N+2",
+            full_suite_environment={"runner": "fixture", "command": ["python", "-m", "unittest"], "working_directory": "."},
+            candidate_image_reference="fixture:N+2",
+        )
+        return next_preflight, next_candidate, prior, bootstrap, records(bootstrap)
+
     def test_a_full_delivery_modes_empty_directories_idempotence_and_actual_pipeline(self) -> None:
         before = self.fixture.snapshot()
         source_before = records(self.fixture.source)
@@ -101,6 +156,62 @@ class ReleaseDeliveryTests(unittest.TestCase):
         self.assertEqual((self.root / ".caprmedio_runtime/framework/current.toml").read_bytes(), selector)
         stage_framework_package(self.root, render_release_candidate(candidate, preflight))
         self.assertEqual(records(release), retained)
+
+    def test_bootstrap_executing_package_replacement_accepts_only_exact_selector_bound_shape(self) -> None:
+        preflight, candidate, _prior, release, retained = self.bootstrap_owned_predecessor()
+        # macOS metadata was never part of the persistent release inventory.
+        (self.target / ".DS_Store").write_bytes(b"transient finder metadata\n")
+        selector = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
+
+        delivered = deliver_release_sources(candidate)
+
+        self.assertEqual(records(self.target), records(self.fixture.source))
+        self.assertEqual(records(release), retained)
+        self.assertEqual((self.root / ".caprmedio_runtime/framework/current.toml").read_bytes(), selector)
+        self.assertEqual(delivered.actual_derived_source_copy_sha256, preflight.expected_derived_source_copy_sha256)
+
+    def test_bootstrap_predecessor_refuses_corrupt_incomplete_extra_and_mismatched_carriers(self) -> None:
+        _preflight, candidate, _prior, release, _retained = self.bootstrap_owned_predecessor()
+        package_file = release / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py"
+        payload, mode = package_file.read_bytes(), package_file.stat().st_mode & 0o777
+        selector = self.root / ".caprmedio_runtime/framework/current.toml"
+        selector_bytes = selector.read_bytes()
+        for mutation in ("corrupt", "incomplete", "extra", "mismatched", "selector"):
+            with self.subTest(mutation=mutation):
+                extra = None
+                if mutation == "corrupt":
+                    package_file.write_bytes(b"tampered retained bytes\n")
+                elif mutation == "incomplete":
+                    package_file.unlink()
+                elif mutation == "extra":
+                    extra = release / "FRAMEWORK_ENGINE/extra-retained.py"
+                    extra.write_bytes(b"unowned package member\n")
+                else:
+                    if mutation == "mismatched":
+                        extra = self.target / "unowned/predecessor.md"
+                        extra.parent.mkdir()
+                        extra.write_bytes(b"unowned delivery member\n")
+                    else:
+                        selector.write_bytes(selector_bytes + b'unexpected = "selector member"\n')
+                release_before = records(release)
+                target_before = records(self.target)
+                try:
+                    with self.assertRaises(ReleaseDeliveryError) as refused:
+                        deliver_release_sources(candidate)
+                    expected = "release-copy-predecessor-mismatch" if mutation == "mismatched" else "release-copy-ownership-unproven"
+                    self.assertEqual(refused.exception.code, expected)
+                    self.assertEqual(records(release), release_before)
+                    self.assertEqual(records(self.target), target_before)
+                finally:
+                    if mutation in {"corrupt", "incomplete"}:
+                        package_file.write_bytes(payload)
+                        package_file.chmod(mode)
+                    elif mutation == "selector":
+                        selector.write_bytes(selector_bytes)
+                    elif extra is not None:
+                        extra.unlink()
+                        if mutation == "mismatched":
+                            extra.parent.rmdir()
 
     def test_untrusted_and_stale_candidates_refuse_before_delivery(self) -> None:
         _preflight, candidate = self.fixture.build()
