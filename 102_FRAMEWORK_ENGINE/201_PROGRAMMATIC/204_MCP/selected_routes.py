@@ -825,6 +825,7 @@ def register_selected_routes(server: Any, root: str | Path) -> SelectedRouteAdap
         public_route_names = admitted_names
     else:
         public_route_names = SELECTED_ROUTE_NAMES
+    adapter.public_route_names = frozenset(public_route_names)
 
     for route_name in public_route_names:
         def add_route(route: str) -> None:

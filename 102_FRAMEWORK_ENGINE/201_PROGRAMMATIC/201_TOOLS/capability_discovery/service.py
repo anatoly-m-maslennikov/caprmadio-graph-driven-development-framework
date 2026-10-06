@@ -96,6 +96,78 @@ class Service:
             raise ValueError('Invalid Project control root')
         return resolved
 
+    def _admitted_selected_route_tools(self):
+        """Return synthetic discovery rows for source-admitted selected routes only.
+
+        Selected routes intentionally have no Atom ``tool_binding``: their public
+        MCP names are registered from the fail-closed canonical manifest.  Keep
+        that distinction in discovery rather than treating a source carrier as
+        executable.  Importing and loading the existing manifest is therefore
+        the sole admission path here as well.
+        """
+        if "release_version" not in self.exposed:
+            return []
+        try:
+            from selected_routes import load_selected_manifest
+            manifest = load_selected_manifest(self.root)
+        except (ImportError, OSError, ValueError):
+            return []
+
+        # Release is the one selected route without a declarative tool binding.
+        # It must not be advertised from an ordinary fifteen-route projection.
+        release = next((entry for entry in manifest["routes"]
+                        if entry.get("route") == "release_version"), None)
+        if not isinstance(release, dict):
+            return []
+        workflow = release.get("workflow")
+        actions = release.get("ordered_actions")
+        if not isinstance(workflow, dict) or not isinstance(actions, list):
+            return []
+        workflow_id = workflow.get("atom_id")
+        action_ids = [item.get("atom_id") for item in actions if isinstance(item, dict)]
+        if (not isinstance(workflow_id, str) or not action_ids
+                or not all(isinstance(identity, str) for identity in action_ids)):
+            return []
+        return [{
+            "name": "release_version", "mcp_name": "release_version",
+            "availability": "mcp", "source_atom": workflow_id,
+            "workflow_ids": [workflow_id], "action_ids": action_ids,
+            "selected_route": True, "definition_manifest": {
+                "manifest_ref": manifest["manifest_ref"],
+                "manifest_digest": manifest["canonical_manifest_sha256"],
+            },
+            "source_freshness": manifest["source_freshness"],
+            "summary": "Release the admitted selected Framework Version route.",
+        }]
+
+    @staticmethod
+    def _selected_route_input_schema():
+        """Compact contract for the generic selected-route MCP request object."""
+        digest = {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        return {
+            "type": "object",
+            "additionalProperties": False,
+            "required": ["operation_route", "request_id", "parameters", "parameters_digest",
+                         "target_frontier", "target_frontier_digest", "effects", "effects_digest",
+                         "definition_manifest", "source_freshness", "initiative"],
+            "properties": {
+                "operation_route": {"const": "release_version"},
+                "mode": {"enum": ["preview", "execute"], "default": "preview"},
+                "request_id": {"type": "string"}, "parameters": {"type": "object"},
+                "parameters_digest": digest, "target_frontier": {"type": "array", "minItems": 1},
+                "target_frontier_digest": digest, "effects": {"type": "array"},
+                "effects_digest": digest, "definition_manifest": {"type": "object"},
+                "source_freshness": {"type": "object"}, "initiative": {"type": "object"},
+                "lineage": {"type": "array"}, "expected_definition_revisions": {"type": "array"},
+                "proposal_receipt": {"type": "object"}, "proposal_receipt_digest": digest,
+                "assigned_action_id": {"type": "string"}, "requested_runs": {"type": "array", "minItems": 1},
+                "operator_authorization": {"type": "object"},
+            },
+            "allOf": [{"if": {"properties": {"mode": {"const": "execute"}}, "required": ["mode"]},
+                       "then": {"required": ["proposal_receipt", "proposal_receipt_digest",
+                                             "assigned_action_id", "requested_runs", "operator_authorization"]}}],
+        }
+
     def catalog(self):
         control = self._control_root()
         atoms, tools, issues = {}, [], []
@@ -150,6 +222,7 @@ class Service:
         for tool in tools:
             counts[tool['name']] = counts.get(tool['name'], 0) + 1
         tools = [tool for tool in tools if tool['source_atom'] in valid and counts[tool['name']] == 1]
+        tools.extend(self._admitted_selected_route_tools())
         return valid, tools, issues
 
     def discover(self, request, operations=False):
@@ -191,6 +264,16 @@ class Service:
             if len(matches) != 1:
                 raise ValueError('Unknown or ambiguous capability')
             row = matches[0]
+        selected = next((item for item in tools if item.get("selected_route")
+                         and (request.id == item["name"] or request.id == item["source_atom"])), None)
+        if selected is not None:
+            definition = dict(row)
+            definition.update({"availability": "mcp", "tools": [selected["name"]],
+                               "definition_manifest": selected["definition_manifest"],
+                               "source_freshness": selected["source_freshness"]})
+            return {"definition": definition, "related_definitions": [],
+                    "input_schema": self._selected_route_input_schema(),
+                    "context_complete": True, "coverage_issues": issues}
         identities = set(row.get('action_ids', []) + row.get('workflow_ids', []))
         if 'source_atom' in row:
             identities.add(row['source_atom'])

@@ -85,7 +85,8 @@ def create_server(root):
         """Wait for saved Run changes and confirmed Journal events using a cursor."""
         return await discovery.watch(request)
 
-    register_selected_routes(server, root)
+    selected_routes = register_selected_routes(server, root)
+    discovery.exposed.update(selected_routes.public_route_names)
     return server
 
 

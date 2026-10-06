@@ -9,7 +9,9 @@ import unittest
 TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
 sys.path.insert(0, str(TOOLS / 'VALIDATE_ATOMS'))
+sys.path.insert(0, str(TOOLS.parent / '204_MCP'))
 from capability_discovery.service import Service, Query, Observation, Watch
+from unittest.mock import patch
 
 
 class ServiceTests(unittest.TestCase):
@@ -87,6 +89,59 @@ class ServiceTests(unittest.TestCase):
         self.assertEqual(self.service.discover(Query())['matches'][0]['availability'], 'source')
         (control / 'duplicate.md').write_text(text)
         self.assertEqual(self.service.discover(Query())['matches'], [])
+
+    def test_admitted_release_route_is_discoverable_and_has_compact_context(self):
+        control = self.root / '.caprmedio_caprmedio'
+        operation = control / 'release.md'
+        operation.write_text(
+            '---\natom_id: CA-O-164\nstatus: Active\ncontent_role: Operations\ntype: Workflow\n---\n'
+            '# Summary\nRelease selected Framework Version\n'
+        )
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {'selected_binding_digest': 'b' * 64},
+            'routes': [{'route': 'release_version', 'workflow': {'atom_id': 'CA-O-164'},
+                        'ordered_actions': [{'atom_id': 'CA-O-165'}]}],
+        }
+        self.service.exposed.add('release_version')
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            tools = self.service.discover(Query(query='release_version'))
+            operations = self.service.discover(Query(query='CA-O-164'), operations=True)
+            context = self.service.context(type('Request', (), {'id': 'CA-O-164'})())
+
+        self.assertEqual(['release_version'], [row['name'] for row in tools['matches']])
+        self.assertEqual('mcp', operations['matches'][0]['availability'])
+        self.assertEqual(['release_version'], operations['matches'][0]['tools'])
+        self.assertEqual([], context['related_definitions'])
+        self.assertTrue(context['context_complete'])
+        self.assertEqual('release_version', context['input_schema']['properties']['operation_route']['const'])
+
+    def test_unadmitted_release_route_is_not_synthesized(self):
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {}, 'routes': [],
+        }
+        self.service.exposed.add('release_version')
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            self.assertEqual([], self.service.discover(Query(query='release_version'))['matches'])
+
+    def test_stale_release_manifest_is_not_synthesized_even_when_exposed(self):
+        self.service.exposed.add('release_version')
+        with patch('selected_routes.load_selected_manifest', side_effect=ValueError('source pin is stale')):
+            self.assertEqual([], self.service.discover(Query(query='release_version'))['matches'])
+
+    def test_admitted_release_route_is_not_advertised_when_unexposed(self):
+        manifest = {
+            'manifest_ref': '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json',
+            'canonical_manifest_sha256': 'a' * 64,
+            'source_freshness': {'selected_binding_digest': 'b' * 64},
+            'routes': [{'route': 'release_version', 'workflow': {'atom_id': 'CA-O-164'},
+                        'ordered_actions': [{'atom_id': 'CA-O-165'}]}],
+        }
+        with patch('selected_routes.load_selected_manifest', return_value=manifest):
+            self.assertEqual([], self.service.discover(Query(query='release_version'))['matches'])
 
     def test_unknown_properties_rejected(self):
         with self.assertRaises(ValueError):
