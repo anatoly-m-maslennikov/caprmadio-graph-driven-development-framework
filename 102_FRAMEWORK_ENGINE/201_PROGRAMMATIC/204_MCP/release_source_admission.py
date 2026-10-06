@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 9, "source_path": AUTHORITY_REF,
-    "digest": "22d018ec4e9e00663f8698f8ec480d3bbb11e53401aa67552c3bc3257f9171bd",
+    "atom_id": "CA-D-572", "version": 10, "source_path": AUTHORITY_REF,
+    "digest": "8d59dc3147484c24954eeac8d5305bba5f622bced2ac909986071c9c23d73380",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
@@ -33,7 +33,7 @@ _RELEASE_STOP_RESULT = "any missing, stale, unauthorized, failed, partial, recor
 _RELEASE_STOP_OUTCOME = "stop with its actual evidence; do not promote, retire, retry, or recurse implicitly"
 _GENERIC_STOP_CONTRACT = (
     "The record serializes no catch-all transition, outcome, or execution policy: "
-    "CA-O-164@5 and the generic executor retain the existing catch-all stop behavior."
+    "CA-O-164@6 and the generic executor retain the existing catch-all stop behavior."
 )
 
 
@@ -227,7 +227,7 @@ def derive_release_private_carriers(project_root: str | Path) -> list[dict[str, 
 
 
 def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
-    """Derive the one accepted record from pinned actual D572@9, read-only.
+    """Derive the one accepted record from pinned actual D572@10, read-only.
 
     This reads the defining authority and its private implementation carriers.
     The validator separately observes all unique Atom pins on each admission;

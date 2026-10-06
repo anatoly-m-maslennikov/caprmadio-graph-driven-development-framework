@@ -275,7 +275,7 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertEqual(route["route"], frozen["graph"]["route"])
                 self.assertEqual(graph["entry_step"], frozen["graph"]["entry_step"])
 
-    def test_manifest_is_full_closed_fifteen_route_projection_with_fresh_pins(self) -> None:
+    def test_manifest_is_closed_selected_prefix_with_optional_source_admitted_release(self) -> None:
         contract = selected_manifest_contract(ROOT)
         self.assertEqual(self.manifest["manifest_ref"], contract["manifest_ref"])
         self.assertEqual(list(SELECTED_ROUTE_NAMES), contract["route_names"])
@@ -284,8 +284,12 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                          contract["query_source_admission_fields"])
         self.assertEqual(["from", "condition", "to"], contract["on_result_fields"])
         self.assertEqual("complete", contract["on_result_terminal_target"])
-        self.assertEqual(list(SELECTED_ROUTE_NAMES), [entry["route"] for entry in self.manifest["routes"]])
-        self.assertEqual(15, len(self.manifest["routes"]))
+        route_names = [entry["route"] for entry in self.manifest["routes"]]
+        self.assertIn(
+            route_names,
+            [list(SELECTED_ROUTE_NAMES), [*SELECTED_ROUTE_NAMES, "release_version"]],
+        )
+        self.assertEqual(list(SELECTED_ROUTE_NAMES), route_names[:len(SELECTED_ROUTE_NAMES)])
         self.assertEqual(self.manifest["canonical_manifest_sha256"], canonical_digest(
             {key: value for key, value in self.manifest.items()
              if key not in {"canonical_manifest_sha256", "manifest_ref"}}))
@@ -305,6 +309,21 @@ class SelectedRoutesMCPTest(unittest.TestCase):
                 self.assertTrue((ROOT / pin["source_path"]).is_file())
 
         routes = {entry["route"]: entry for entry in self.manifest["routes"]}
+        if route_names[-1:] == ["release_version"]:
+            release = routes["release_version"]
+            self.assertTrue(release["mutation_capable"])
+            self.assertEqual("CA-O-164", release["workflow"]["atom_id"])
+            self.assertEqual("CA-O-170", release["entry_step"])
+            self.assertEqual(12, len(release["ordered_steps"]))
+            self.assertEqual(1, len(self.manifest["release_source_admissions"]))
+            release_admission = self.manifest["release_source_admissions"][0]
+            self.assertEqual("release_version", release_admission["route"])
+            self.assertEqual("CA-P-1622", release_admission["acceptance_frontier"]["atom_id"])
+            for field in ("workflow", "ordered_steps", "ordered_actions", "native_action_calls", "mutation_capable"):
+                self.assertEqual(release[field], release_admission[field])
+        else:
+            self.assertNotIn("release_version", routes)
+            self.assertNotIn("release_source_admissions", self.manifest)
         admissions = self.manifest["query_source_admissions"]
         self.assertEqual(list(QUERY_ROUTE_NAMES), [entry["route"] for entry in admissions])
         self.assertEqual(["CA-P-1618", "CA-P-1535"], [entry["acceptance_frontier"]["atom_id"] for entry in admissions])
