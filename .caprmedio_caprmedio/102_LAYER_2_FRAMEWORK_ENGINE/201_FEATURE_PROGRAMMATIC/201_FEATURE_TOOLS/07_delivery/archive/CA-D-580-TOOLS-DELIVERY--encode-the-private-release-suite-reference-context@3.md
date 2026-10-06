@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 4
-updated_at: "2026-10-06 14:06:45 +0000"
+version: 3
+updated_at: "2026-10-06 11:53:59 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Private suite reference-context encoding"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest]
@@ -54,7 +54,3 @@ The Suite Owner **must** encode the reference context as canonical JSON containi
 Include each exact binding carrier and every member of its existing `sources` array. A source pin has exactly `atom_id`, positive integer `version`, safe Project-relative `path` and lowercase SHA-256 `sha256`; validate those values against the current active Atom. Keep each binding's existing schema-1 package metadata unchanged. Duplicate declarations within one binding and conflicting shared pins are invalid; identical shared pins across the closed frontiers are unioned once. The resulting carriers are ordinary `reference_rows`, not a new context field, public request, inventory field or Journal schema. Obsolete Plan carriers and folder-wide discovery are not members of this frontier.
 
 The Suite Owner retains this object only as internal sealed suite evidence, verifies it before copy and after execution, and supplies its digest to the schema-2 suite envelope defined by CA-D-579. It creates no new public Tool, Workflow, Action, Run, or Journal schema.
-
-### Unit deadline source carriers
-
-The closed `reference_rows` set also includes exactly these two explicit settings carriers, without changing the context JSON member set: `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml` and `000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml`. The Suite Owner reads only their captured bytes and resolves `[release_suite].unit_timeout_seconds` by instance-over-default fallback. The value is finite, non-boolean, positive, and at most `7200` seconds. The rows are source fingerprints for the private deadline snapshot, not a new public context member; missing or changed carriers fail closed.

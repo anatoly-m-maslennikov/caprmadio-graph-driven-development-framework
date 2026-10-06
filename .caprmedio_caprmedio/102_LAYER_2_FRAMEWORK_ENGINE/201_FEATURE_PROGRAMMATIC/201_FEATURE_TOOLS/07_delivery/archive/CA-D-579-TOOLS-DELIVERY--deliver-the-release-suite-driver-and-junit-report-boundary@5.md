@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 6
-updated_at: "2026-10-06 14:06:45 +0000"
+version: 5
+updated_at: "2026-10-06 06:19:47 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite driver carrier"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, JUnit Report, Runtime, MCP, Workflow, Source Carrier, Compiled Candidate]
@@ -84,21 +84,7 @@ absent_flag = false
 project_root = "/workspace"
 source_bindings = "/workspace/.caprmedio_release/source_bindings.json"
 report = "/output/coverage.xml"
-
-[unit_deadline]
-default_settings_source = "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml"
-instance_settings_source = "000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml"
-table = "release_suite"
-key = "unit_timeout_seconds"
-default_seconds = 3600
-maximum_seconds = 7200
-validation = "finite numeric, not bool, >0 and <=7200"
-fallback = "instance key absent -> canonical default"
-snapshot = ".caprmedio_runtime/release_suite/<candidate_manifest_sha256>/attempt-*/unit-deadline.json"
-snapshot_fields = ["schema_version", "default_source_path", "default_source_sha256", "instance_source_path", "instance_source_sha256", "control_context_digest", "configured_unit_timeout_seconds", "effective_unit_timeout_seconds"]
 ```
-
-The Suite Owner resolves the deadline only from the two captured, byte-and-mode-verified settings rows. `[release_suite].unit_timeout_seconds` in the Framework Instance carrier overrides the canonical `3600`-second default; an absent instance table/key falls back to that default. The resolved configured value must be finite, non-boolean, positive, and no greater than `7200` seconds. A private fixture `timeout_seconds` may only shorten that configured budget; production supplies no timeout override. Before execution, the owner writes one canonical private `unit-deadline.json` under the retained attempt directory with the exact `snapshot_fields` above; its source SHA-256 values and `control_context_digest` bind it to the existing context. The post-run context revalidation must match before this snapshot and after execution. The snapshot is diagnostic/private evidence and adds no public receipt field, schema-2 field, CLI argument, environment variable, manifest member, or MCP request option. Invalid or timed-out deadline execution is non-passing and retains N.
 
 The executor provides **only** the two fixed temporary mounts above as executable disposable scratch. The sealed source workspace remains read-only, the Unit container has no network or Docker socket, and `/output` retains the test evidence. The driver creates a fresh owned scratch leaf for **every** test module, supplies that leaf through `TMPDIR`, `TEMP`, and `TMP`, and removes **only** that leaf after the child has returned. Child result JSON remains outside that leaf until its evidence is parsed. Cleanup failure or exhaustion is a non-passing execution failure, not a skipped test or permission to write elsewhere. This lifetime prevents retained disposable fixtures from accumulating across modules; it does not delete host fixtures, installed N, source carriers, or durable Release evidence.
 

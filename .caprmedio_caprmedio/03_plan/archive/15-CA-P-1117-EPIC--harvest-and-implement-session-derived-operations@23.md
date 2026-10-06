@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 13910)
+Total output lines: 282
+
 ---
 atom_id: CA-P-1117
 content_role: Plan
@@ -11,14 +14,14 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 24
-updated_at: "2026-10-06 14:14:10 +0000"
+version: 23
+updated_at: "2026-10-06 12:08:00 +0000"
 relations: {}
 ---
 # Summary
@@ -58,8 +61,6 @@ The bounded N8 source repairs are saved: module-owned executable scratch, gitles
 CA-P-1780 and CA-P-1781 are Done. the first refresh correctly stopped before writing because later Git-backed binding changes had no generic carrier event. the separately approved observer, independently reviewed and committed at `7a15f736b`, records the exact current state once as recovered revision 3 at 2026-10-06T15:20:21+04:00. the later actual guarded refresh is completed revision 4 at 2026-10-06T15:21:02+04:00, explicitly linked to that observation. strict admission accepts all sixteen routes with canonical digest `19757c9cb6e5977f5193e5b2fcf5fccee0efabb923a7fee7f99bac43d820bc98`; no binding event is pending. historical Journal prefixes and installed N are unchanged. C496/C497 are resolved; no stale-history guard was bypassed. fresh N9 dispatch and all remaining Release gates are still required and not yet claimed.
 
 fresh N9 `release-epic-resume-20261006-N9` was then actually dispatched through MCP under the refreshed sixteen-route admission. source delivery and compilation completed. its complete Unit gate failed with exit 1 after 816.0929900840056 seconds: 1,925 reported testcases, 16 failures, 57 errors and zero skipped. terminal interrupted Action/Step/Workflow receipts are recorded, with no pending event; the saved recording-pending execution-stop checkpoint is not a current recording gap. no candidate image, promotion or retirement occurred. CA-P-1782's nine independent source/fixture repair lanes and CA-C-498 now own this bounded frontier. complete local acceptance, refresh the exact source pins through the approved guarded path, and use a fresh N10; do not replay failed N9. installed N stays immutable.
-
-fresh N10 `release-epic-resume-20261006-N10` followed accepted local N9 repairs and the recorded guarded revision-5 binding refresh. delivery and compilation completed, but the Unit executor reached its code-only 900-second deadline after 934.4613934169975 seconds. no complete JUnit report was returned; receipt executed_tests=0 is a validated-report count, not evidence that no tests ran. terminal interrupted Run receipts are recorded. CA-P-1792 and CA-C-499 own a finite, source-sealed Unit-budget repair: canonical default 3600 seconds, Framework Instance override, hard maximum 7200 seconds, and no reduction of tests or later gates. seven distinct source, implementation, review, preparation and closure lanes are assigned. installed N remains unchanged; preserve N10 without replay and admit a fresh N11 only after source/code acceptance.
 
 the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 
@@ -182,26 +183,7 @@ Authoring disposition: the earlier Plan files retain their independent reviews. 
 - CA-P-1620: Deliver Release Version from independently reviewed source/RMED, including complete Methodology/runtime-package/project-Skill installation and actual new-image verification before exact old-image retirement.
 - CA-P-1655: Final code review against the current applicable RMED and Operations, covering all sixteen selected Workflows and their used implementation paths; this review blocks CA-P-1124 and Epic closure.
 
-The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
-
-### Execution controls
-
-- Each task/subtask has exactly one Plan Markdown file. A composite owns its same-stem directory of child files; the Epic's folder has its mandatory same-stem governing file beside it.
-- Each executable leaf has one assigned AI Agent and a work estimate of <=15 minutes. Before execution bind exact input evidence, governing revisions, target files, required result, functional verification and any decision disposition. If the estimate exceeds fifteen minutes, decompose further before execution; never silently expand a leaf.
-- After every completed task/subtask, review actual results and current authority, then update every affected next dependent Plan before it executes. Add BLOCKS edges for new remainder/repair/re-review leaves; navigation order is not a dependency. A composite cannot be Done until all required child/remainder work is Done.
-- Complete this Epic autonomously through its required implementation, verification and final review. When uncertain, check the active Operator Goal, Project Principles and current authority, choose the best authorized in-scope option, and create a C/Question recording the uncertainty, considered options, selected choice and reason. Continue without waiting for an Operator answer; uncertainty alone is not a reason to stop or leave required work unfinished. Inherit the 90% confidence threshold for recording uncertainty, not as a request-to-pause gate. Actual permission, runtime, evidence or authority blockers still postpone only the affected work and never justify a bypass or false completion.
-- Every issue encountered becomes one appropriately typed Concern at its narrowest owning Scope Unit: Problem for blockers/failures, Question for unresolved choices, Conflict for incompatible governing claims. The Concern owns concern_about to the directly affected task/entity and records evidence, impact and disposition. Do not substitute ephemeral chat notes for C atoms.
-- On permission/runtime/evidence blockers, create a C/Problem, retain truthful unfinished task state and frontier, postpone the task and execute another independent ready task. Do not bypass its BLOCKS prerequisites, permission denial, or missing authority.
-- Prefer functional, integration, E2E and canary verification. Use unit tests only where they add necessary isolated proof; do not couple acceptance to implementation structure.
-- Preserve unrelated changes. Use mechanical Git commits for this Epic's changes under the Operator's explicit exception; do not invoke COMMIT_CHANGE_SET or make its repair a prerequisite. If Git cannot commit, skip that commit and retain a truthful save frontier. Retain required execution Journal evidence and append-only history; do not fabricate save-Tool receipts.
-
-## Details
-
-### Current execution frontier
-
-### Restored execution frontier
-
-The latest Operator instruction supersedes the first-cut deferrals below. Resume the existing P1620 release chain, P1616 all-role status proof, P1527-P1529 query proof, P1713/P1716 recovery, and P1655 then P1124 final closure. Exact prior-image retirement remains conditional on successful promotion and absence of container/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
+The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for …910 tokens truncated…tainer/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
 
 The N5 gate and current audit repairs are tracked in P1755-P1772 with C483-C490 at their owning Scope Units. Root owns Git, runtime publication, Docker image changes and actual MCP dispatch. Independent workers have exclusive code/test scopes. Test doubles, source checks and protocol fixtures remain clearly distinct from actual release/runtime proof.
 
