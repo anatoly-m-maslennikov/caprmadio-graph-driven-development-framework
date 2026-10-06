@@ -10,6 +10,35 @@ from declared_subject_evidence import validate_declared_subject_evidence  # noqa
 from review_evidence import ReviewContext, _validate_resolved_mention  # noqa: E402
 
 
+# CA-P-032 is a historical principle fixture.  Its live carrier is no longer
+# part of the sealed source closure, so this regression owns the exact legacy
+# bytes it exercises instead of reopening a deleted repository path.
+LEGACY_P032_BYTES = b'''---
+atom_id: "CA-P-032"
+cce_version: "cce_1"
+cce_form: "classification"
+subjects:
+  governs:
+    continuant:
+      - "Actor/Type"
+  depends_on:
+    continuant:
+      - "Actor"
+      - "Type"
+      - "Operator"
+      - "AI Agent"
+version: 5
+updated_at: "2026-09-05 03:48:00 +0400"
+relations:
+  child_of:
+    - "ANATOLY-MASLENNIKOV-DEFINES_GOAL_FOR-CAPRMEDIO--create-and-evolve-a-working-caprmedio-framework"
+---
+# Distinguish human Operators from AI Agents
+
+**every** Actor that performs **or** authorizes a governed action **must** have **`=1`** Type **in** (Operator, AI Agent).
+'''
+
+
 def source(entity, excerpt, *, status="Active", role="Requirement", depends_on=None,
            title="Define an Atom Revision"):
     declared = [entity] if depends_on is None else depends_on
@@ -144,8 +173,7 @@ class DeclaredSubjectEvidenceTests(unittest.TestCase):
         self.assertTrue(validate_declared_subject_evidence(item, {'FIXTURE-R-1312@1': raw}))
 
     def test_legacy_principle_needs_context_admission_and_candidate_applicability(self):
-        raw_principle = (Path(__file__).resolve().parents[6] / ".caprmedio_caprmedio/03_plan/"
-                         "CA-P-032-PRINCIPLE-ACTION_POLICY--distinguish-human-operators-from-ai-agents.md").read_text()
+        raw_principle = LEGACY_P032_BYTES.decode("utf-8")
         candidate_raw = source("Atom", "Every Atom is reviewed.")
         other_raw = source("Atom", "Every other Atom is reviewed.")
         candidate_binding = {"atom_id": "TEST-R-1", "version": 1,

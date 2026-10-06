@@ -62,9 +62,9 @@ class InstalledLayoutImport(unittest.TestCase):
 
 class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
-        tmp = ROOT / '.caprmedio_tmp/tests/workflow-mcp'
-        tmp.mkdir(parents=True, exist_ok=True)
-        self.temp = tempfile.TemporaryDirectory(dir=tmp, ignore_cleanup_errors=True)
+        # The sealed Unit mounts the repository read-only; the runner supplies
+        # a writable per-module TMPDIR for disposable protocol fixtures.
+        self.temp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / '.git').mkdir()
