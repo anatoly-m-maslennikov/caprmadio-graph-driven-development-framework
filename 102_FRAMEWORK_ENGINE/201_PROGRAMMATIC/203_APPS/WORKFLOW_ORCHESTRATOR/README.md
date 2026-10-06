@@ -25,6 +25,31 @@ The detached worker does not depend on the MCP or main session process lifetime.
 Stop the particular PID returned by startup with SIGTERM. The foreground worker
 also handles Ctrl-C. This is a trusted local service, not a multi-user RPC boundary.
 
+## Release host worker
+
+The isolated Docker worker deliberately has no host Docker client or socket.
+For a source-admitted `release_version` selected Run that needs the host Release
+gates, start the distinct host worker explicitly:
+
+```sh
+.caprmedio_runtime/host-tests/bin/python 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/orchestrator.py --project-root "$PWD" start-release-worker
+```
+
+`start-release-worker` creates no Workflow Run. It starts only the dedicated
+`release-host` DBOS application and publishes
+`.caprmedio_install/workflow_orchestrator/release-host/transport.json`.
+The host bridge requires that marker, its separate database, and matching
+`worker.ready`; until all are present, selected Release admission fails closed.
+It uses its own lock, log, queue, and per-Run immutable binding under
+`.caprmedio_install/workflow_orchestrator/release-host/`; it neither imports nor
+consumes native or Docker queue entries.
+
+Only `enqueue_selected` requests whose sealed route is `release_version` can
+select this transport. A bound Release Run's status and recovery remain on that
+transport; a prior native or Docker Run is never adopted. Missing readiness or
+binding does not fall back to either existing executor. The fixed host subprocess
+sets its namespace only for itself and does not change the MCP process environment.
+
 ## Enqueue through MCP
 
 Restart the MCP connection after updating the server. `workflow_orchestrator`
