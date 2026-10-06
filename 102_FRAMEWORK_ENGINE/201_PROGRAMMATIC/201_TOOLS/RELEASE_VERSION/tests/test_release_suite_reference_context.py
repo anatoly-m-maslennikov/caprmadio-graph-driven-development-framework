@@ -90,13 +90,20 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
     def capture(self) -> ReleaseSuiteReferenceContext:
         return capture_context(self.root, self.bindings)
 
+    def project_structure_ref(self) -> str:
+        return reference_context._project_structure_ref(
+            (self.root / PROJECT_SETTINGS_REF).read_bytes()
+        )
+
     def admitted_control_roots(self) -> dict[str, str]:
         """The D580/E587 roots plus one actually admitted transitive pin."""
         manifest = load_selected_manifest(self.root)
+        project_structure_ref = self.project_structure_ref()
         roots = {
             "selected_manifest": self.manifest_ref,
             "operators_registry": ".caprmedio_caprmedio/operators_registry.toml",
             "project_settings": PROJECT_SETTINGS_REF.as_posix(),
+            "project_structure": project_structure_ref,
             "source_registry": manifest["source_freshness"]["selected_source_registry_ref"],
             "d572_carrier": AUTHORITY_REF,
         }
@@ -144,6 +151,7 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
             self.manifest_ref,
             ".caprmedio_caprmedio/operators_registry.toml",
             PROJECT_SETTINGS_REF.as_posix(),
+            self.project_structure_ref(),
             AUTHORITY_REF,
         }.issubset(paths))
         self.assertTrue(_source_paths(derive_release_source_admission(self.root)).issubset(paths))
@@ -170,6 +178,24 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         for row in context.reference_rows:
             self.assertEqual((workspace / row.source_path).read_bytes(), (self.root / row.source_path).read_bytes())
             self.assertEqual((workspace / row.source_path).stat().st_mode & 0o777, row.mode)
+        structure = self.project_structure_ref()
+        self.assertEqual((workspace / structure).read_bytes(), (self.root / structure).read_bytes())
+        self.assertEqual(
+            (workspace / structure).stat().st_mode & 0o777,
+            (self.root / structure).stat().st_mode & 0o777,
+        )
+
+    def test_capture_refuses_missing_project_structure_before_execution(self) -> None:
+        structure = self.root / self.project_structure_ref()
+        original = structure.read_bytes()
+        mode = structure.stat().st_mode & 0o777
+        structure.unlink()
+        try:
+            with self.assertRaises(ReleaseSuiteReferenceContextError):
+                self.capture()
+        finally:
+            structure.write_bytes(original)
+            structure.chmod(mode)
 
     def test_revalidation_refuses_mutated_transitive_pin_before_or_after_execution(self) -> None:
         context = self.capture()

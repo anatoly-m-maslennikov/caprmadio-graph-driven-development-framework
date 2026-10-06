@@ -20,7 +20,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "be00475f51e1a42f5474712ce5487706c93eeb5eac489a27916494c93d7918b9"
+AUTHORITY_SHA = "b264e266898fda49cfbde6d9b26215b6f2c33856723ca034b0ccf541b56e887c"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402

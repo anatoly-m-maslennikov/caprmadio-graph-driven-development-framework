@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import shutil
 
+from release_suite_reference_context import _project_structure_ref
 from release_source_admission import (
     AUTHORITY_PIN,
     derive_release_graph_admission,
@@ -72,9 +73,13 @@ def copy_control_closure(repository: Path, root: Path) -> None:
     pins[AUTHORITY_PIN["source_path"]] = AUTHORITY_PIN["digest"]
     freshness = manifest["source_freshness"]
     pins[freshness["selected_source_registry_ref"]] = freshness["selected_source_registry_digest"]
+    settings_relative = PROJECT_SETTINGS_REF.as_posix()
+    settings_source = _retained_source(repository, settings_relative, pins.get(settings_relative))
+    project_structure_relative = _project_structure_ref(settings_source.read_bytes())
     required = set(pins) | {
         ".caprmedio_caprmedio/operators_registry.toml",
-        PROJECT_SETTINGS_REF.as_posix(),
+        settings_relative,
+        project_structure_relative,
     }
     for relative in sorted(required):
         source = _retained_source(repository, relative, pins.get(relative))

@@ -216,10 +216,17 @@ def _control_root_from_settings(raw: bytes) -> PurePosixPath:
     return _safe_relative(configured) if configured is not None else PurePosixPath(".caprmedio_caprmedio")
 
 
+def _project_structure_ref(settings_raw: bytes) -> str:
+    """Resolve only the explicit Project Structure carrier named by settings."""
+    return (_control_root_from_settings(settings_raw) / "project_structure.toml").as_posix()
+
+
 def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], tuple[str, ...]]:
     """Capture every prospective reader carrier before any delegated parser runs."""
     settings_ref = PROJECT_SETTINGS_REF.as_posix()
     settings_raw, settings_mode = _read_regular(root, settings_ref)
+    project_structure_ref = _project_structure_ref(settings_raw)
+    project_structure_raw, project_structure_mode = _read_regular(root, project_structure_ref)
     manifest_ref = (_control_root_from_settings(settings_raw) / "_projection" / "selected_workflow_bindings.json").as_posix()
     manifest_raw, manifest_mode = _read_regular(root, manifest_ref)
     authority_ref = str(AUTHORITY_PIN["source_path"])
@@ -228,7 +235,13 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         manifest = json.loads(manifest_raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ReleaseSuiteReferenceContextError("selected manifest is unavailable for reference preflight") from error
-    candidates: list[str] = [manifest_ref, _OPERATORS_REGISTRY.as_posix(), settings_ref, authority_ref]
+    candidates: list[str] = [
+        manifest_ref,
+        _OPERATORS_REGISTRY.as_posix(),
+        settings_ref,
+        project_structure_ref,
+        authority_ref,
+    ]
     _paths_from_source_paths(manifest, candidates)
     freshness = manifest.get("source_freshness") if isinstance(manifest, Mapping) else None
     if isinstance(freshness, Mapping) and "selected_source_registry_ref" in freshness:
@@ -254,6 +267,7 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         _forbid_non_control_path(candidate)
     captured = {
         settings_ref: (settings_raw, settings_mode),
+        project_structure_ref: (project_structure_raw, project_structure_mode),
         manifest_ref: (manifest_raw, manifest_mode),
         authority_ref: (authority_raw, authority_mode),
     }
@@ -294,6 +308,8 @@ def _reader_snapshot(root: Path):
 
 def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     """Derive only against the immutable reader snapshot, never mutable Project bytes."""
+    settings_raw, _settings_mode = _read_regular(snapshot_root, PROJECT_SETTINGS_REF.as_posix())
+    project_structure_ref = _project_structure_ref(settings_raw)
     manifest = load_selected_manifest(snapshot_root)
     manifest_ref = selected_manifest_ref(snapshot_root)
     admission = derive_release_source_admission(snapshot_root)
@@ -306,6 +322,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         manifest_ref,
         _OPERATORS_REGISTRY.as_posix(),
         PROJECT_SETTINGS_REF.as_posix(),
+        project_structure_ref,
         str(source_registry),
         str(AUTHORITY_PIN["source_path"]),
         *_pin_paths(admission),

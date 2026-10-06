@@ -4,10 +4,10 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-06 06:30:13 +0000"
+version: 1
+updated_at: "2026-10-05 18:54:35 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Private suite reference-context encoding"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest]
@@ -42,6 +42,7 @@ The Suite Owner **must** encode the reference context as canonical JSON containi
 }
 ```
 
-`reference_rows` are source-path sorted with no duplicate path. `control_context_digest` is the SHA-256 of canonical JSON over exactly the schema version, trusted binding values, and ordered rows, excluding itself. The closure includes the exact `project_structure.toml` carrier beneath the control root declared by Project Settings. The closure begins only at the named roots in CA-R-1887 and expands only through the selected-manifest source registry and CA-D-572 pin declarations. It contains no caller fields, credentials, secrets, runtime carriers, Journal files, output files, symlinks, directories, or arbitrary transitive discovery.
+`reference_rows` are source-path sorted with no duplicate path. `control_context_digest` is the SHA-256 of canonical JSON over exactly the schema version, trusted binding values, and ordered rows, excluding itself. The closure begins only at the named roots in CA-R-1887 and expands only through the selected-manifest source registry and CA-D-572 pin declarations. It contains no caller fields, credentials, secrets, runtime carriers, Journal files, output files, symlinks, directories, or arbitrary transitive discovery.
 
 The Suite Owner retains this object only as internal sealed suite evidence, verifies it before copy and after execution, and supplies its digest to the schema-2 suite envelope defined by CA-D-579. It creates no new public Tool, Workflow, Action, Run, or Journal schema.
+

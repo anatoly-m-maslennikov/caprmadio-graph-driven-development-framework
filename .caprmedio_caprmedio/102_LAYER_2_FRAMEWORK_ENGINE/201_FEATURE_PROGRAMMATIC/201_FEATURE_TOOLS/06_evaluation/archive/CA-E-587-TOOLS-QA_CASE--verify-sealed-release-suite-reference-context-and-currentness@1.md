@@ -5,10 +5,10 @@ type: QA Case
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-06 06:30:13 +0000"
+version: 1
+updated_at: "2026-10-05 18:54:35 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Sealed suite reference-context QA"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest, JUnit Report]
@@ -29,6 +29,7 @@ The QA case **must** prove that the Suite Owner passes only with one exact, allo
 
 ## Details
 
-Verify a positive closure containing selected-workflow bindings, Operator registry, Project settings, Project Structure, resolved source-registry reference, CA-D-572, its transitive pins, and the selected-manifest source-path closure. Assert typed source-path ordering, exact byte SHA-256 and mode verification, canonical `control_context_digest`, workspace copy preservation, and its inclusion in actual suite evidence and the schema-2 envelope.
+Verify a positive closure containing selected-workflow bindings, Operator registry, Project settings, resolved source-registry reference, CA-D-572, its transitive pins, and the selected-manifest source-path closure. Assert typed source-path ordering, exact byte SHA-256 and mode verification, canonical `control_context_digest`, workspace copy preservation, and its inclusion in actual suite evidence and the schema-2 envelope.
 
 Independently reject an empty, duplicate, unknown, caller-added, runtime, Journal, secret-shaped, absolute, escaping, symlinked, non-regular, unreadable, wrong-mode, stale-digest, or stale-source-registry row. Mutate each allowed root and a transitive D572 pin between capture and execution, and again between execution and rederivation; neither case may pass or replay. Reject candidate SHA, compiled-root, selected-N, or image-context mismatch. Verify no arbitrary caller file reaches the workspace, no control carrier is written, and failure retains N and truthful non-passing evidence.
+
