@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import shutil
 import sys
 import tempfile
@@ -382,12 +383,20 @@ class SelectedRoutesMCPTest(unittest.TestCase):
 
             old_frontier = {
                 "atom_id": "CA-P-1532", "version": 2,
-                "source_path": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/12-CA-P-1532-TASK--independently-accept-repaired-artifact-query-source.md",
-                "digest": "b1474e81cafa4f55d2b3bd92f930293c8ff65d5bf6abd2cefb21efd605f8d432",
+                "source_path": ".caprmedio_caprmedio/fixtures/malformed-artifact-frontier.md",
+                "digest": "",
             }
             old_receipt = project / old_frontier["source_path"]
             old_receipt.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / old_frontier["source_path"], old_receipt)
+            malformed_frontier = (
+                b"---\n"
+                b"atom_id: CA-P-1532\n"
+                b"version: 2\n"
+                b"---\n"
+                b"malformed disposable query-frontier fixture\n"
+            )
+            old_receipt.write_bytes(malformed_frontier)
+            old_frontier["digest"] = hashlib.sha256(malformed_frontier).hexdigest()
 
             for mutation in ("missing", "third", "old-artifact-frontier"):
                 with self.subTest(mutation=mutation):
