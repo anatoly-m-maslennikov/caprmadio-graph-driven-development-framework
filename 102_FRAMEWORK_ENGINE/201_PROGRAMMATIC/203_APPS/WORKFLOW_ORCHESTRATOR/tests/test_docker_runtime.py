@@ -105,7 +105,11 @@ class RuntimeTests(unittest.TestCase):
             self.assertEqual(len(mounts), 2)
             self.assertFalse(any(volume["target"].startswith("/workspace") for volume in mounts))
         ignored = (APP / "docker/Dockerfile.dockerignore").read_text()
-        for value in ("**/.env", "**/.env.*", "**/*.env", "**/auth.json"):
+        for value in (
+            "**/.env", "**/.env.*", "**/*.env", "**/auth.json",
+            "**/.caprmedio_tmp", "**/.caprmedio_install",
+            "**/.caprmedio_runtime", "**/tmp",
+        ):
             self.assertIn(value, ignored)
 
     def test_failed_start_does_not_select_docker_transport(self):
