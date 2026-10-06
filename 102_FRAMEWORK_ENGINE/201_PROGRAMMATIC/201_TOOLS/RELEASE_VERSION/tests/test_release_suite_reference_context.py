@@ -218,7 +218,6 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         self.root = Path(tempfile.mkdtemp(prefix="release-suite-reference-", dir=temporary_root))
         copy_control_closure(REPOSITORY, self.root)
         self.copy_prompt_binding_frontier()
-        self.copy_selected_source_refresh_frontier()
         self.manifest_ref = selected_manifest_ref(REPOSITORY)
         self.bindings = {
             "candidate_snapshot_manifest_sha256": "a" * 64,
@@ -244,16 +243,6 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
                 target_atom.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source_atom, target_atom)
                 target_atom.chmod(source_atom.stat().st_mode & 0o777)
-
-    def copy_selected_source_refresh_frontier(self) -> None:
-        """Fixture only: copy D580's exact selected-source authority leaves."""
-        d580 = (REPOSITORY / reference_context._D580_REFERENCE).read_bytes()
-        for relative in reference_context._selected_source_refresh_frontier(d580, {}):
-            source = REPOSITORY / relative
-            target = self.root / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, target)
-            target.chmod(source.stat().st_mode & 0o777)
 
     def capture(self) -> ReleaseSuiteReferenceContext:
         return capture_context(self.root, self.bindings)
@@ -352,6 +341,19 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         }
         self.assertEqual(hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest(),
                          context.control_context_digest)
+
+    def test_control_fixture_copies_selected_source_refresh_authority_frontier(self) -> None:
+        d580 = (REPOSITORY / reference_context._D580_REFERENCE).read_bytes()
+        paths = reference_context._selected_source_refresh_frontier(d580, {})
+        captured = {
+            path: ((self.root / path).read_bytes(), (self.root / path).stat().st_mode & 0o777)
+            for path in paths
+        }
+        self.assertEqual(paths, reference_context._selected_source_refresh_frontier(
+            (self.root / reference_context._D580_REFERENCE).read_bytes(), captured,
+        ))
+        for path in paths:
+            self.assertEqual((REPOSITORY / path).read_bytes(), (self.root / path).read_bytes())
 
     def test_copy_preserves_only_captured_bytes_at_identical_relative_paths(self) -> None:
         context = self.capture()

@@ -12,7 +12,11 @@ import json
 from pathlib import Path
 import shutil
 
-from release_suite_reference_context import _project_structure_ref, _prompt_binding_rows
+from release_suite_reference_context import (
+    _project_structure_ref,
+    _prompt_binding_rows,
+    _selected_source_refresh_frontier,
+)
 from release_source_admission import (
     AUTHORITY_PIN,
     derive_release_graph_admission,
@@ -116,6 +120,22 @@ def copy_control_closure(repository: Path, root: Path) -> None:
             atom_target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(atom_source, atom_target)
             atom_target.chmod(atom_source.stat().st_mode & 0o777)
+
+    # D580 separately declares five exact selected-source refresh authority
+    # leaves.  They are not Prompt bindings, so copy and revalidate them as
+    # their own closed frontier rather than discovering an MCP directory.
+    refresh_paths = _selected_source_refresh_frontier((root / d580_relative).read_bytes(), {})
+    for relative in refresh_paths:
+        source = _retained_source(repository, relative, None)
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        target.chmod(source.stat().st_mode & 0o777)
+    refresh_captured = {
+        relative: ((root / relative).read_bytes(), (root / relative).stat().st_mode & 0o777)
+        for relative in refresh_paths
+    }
+    _selected_source_refresh_frontier((root / d580_relative).read_bytes(), refresh_captured)
 
     # Implementation carriers have D572 byte declarations, not Atom pins.
     # Preserve their actual modes and independently check the copied bytes.
