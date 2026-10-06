@@ -1188,6 +1188,12 @@ def cli(tool_id: str) -> int:
     kind = "finder" if tool_id in {"ATOM_SEARCH", "ATOM_READ"} else "doer"
     mode = "describe" if args.command == "describe" else "apply" if getattr(args, "apply", False) else "read-only" if kind == "finder" else "dry-run"
     try:
+        if (args.command == "run" and getattr(args, "apply", False)
+                and tool_id in {"ATOM_CREATE", "ATOM_UPDATE"}):
+            raise ToolError(
+                "standalone-apply-not-admitted",
+                f"{tool_id} --apply requires authorized project-local MCP delegation with a sealed Initiative action envelope",
+            )
         root = resolve_repository(args.repository)
         if args.command == "describe":
             operation = describe(tool_id)

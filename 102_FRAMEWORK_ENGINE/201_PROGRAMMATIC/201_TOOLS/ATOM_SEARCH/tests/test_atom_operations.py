@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,8 +11,6 @@ from pathlib import Path
 
 TEST_TEMP_ROOT = Path.cwd() / ".caprmedio_tmp" / "tests" / Path(__file__).stem
 TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
-
-import sys
 
 TOOLS = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(TOOLS))
@@ -71,6 +71,21 @@ class AtomOperationsTest(unittest.TestCase):
         path = self.root / "input.json"
         path.write_text(json.dumps(payload), encoding="utf-8")
         return str(path)
+
+    def _wrapper_result(self, tool: str, payload: dict, *, apply: bool) -> subprocess.CompletedProcess[str]:
+        input_path = self._input(payload)
+        wrapper = TOOLS / tool / f"{tool.lower()}.py"
+        command = [sys.executable, str(wrapper), "--repository", str(self.root), "run", "--input", input_path]
+        if apply:
+            command.append("--apply")
+        return subprocess.run(command, text=True, capture_output=True, check=False)
+
+    def _snapshot(self) -> dict[str, bytes]:
+        return {
+            path.relative_to(self.root).as_posix(): path.read_bytes()
+            for path in self.root.rglob("*")
+            if path.is_file()
+        }
 
     def test_resolves_id_filename_stem_and_path(self) -> None:
         selectors = ["CA-R-343", self.first.name, self.first.stem, self.first.relative_to(self.root).as_posix()]
@@ -198,6 +213,42 @@ class AtomOperationsTest(unittest.TestCase):
         operations.run_create(self.root, argparse.Namespace(input=self._input(payload), apply=True))
         self.assertTrue(all(path.exists() for path in paths))
         self.assertIn("version: 1", paths[0].read_text(encoding="utf-8"))
+
+    def test_canonical_create_and_update_wrappers_refuse_standalone_apply_but_preview(self) -> None:
+        create_path = self.requirements / "CA-R-344-FRAMEWORK_METHODOLOGY-REQUIREMENT--cli-create.md"
+        create_payload = {"atoms": [{
+            "path": create_path.relative_to(self.root).as_posix(),
+            "frontmatter": "subjects:\n  governs:\n    continuant:\n      - Test",
+            "content": "# CLI create\n",
+        }]}
+        update_payload = {"atoms": [{"selector": "CA-R-343", "content": "# CLI update\n"}]}
+
+        for tool, payload in (
+            ("ATOM_CREATE", create_payload),
+            ("ATOM_UPDATE", update_payload),
+        ):
+            with self.subTest(tool=tool, mode="apply"):
+                self._input(payload)
+                before = self._snapshot()
+                refused = self._wrapper_result(tool, payload, apply=True)
+                self.assertEqual(2, refused.returncode, refused.stderr + refused.stdout)
+                envelope = json.loads(refused.stdout)
+                self.assertFalse(envelope["ok"])
+                self.assertEqual("standalone-apply-not-admitted", envelope["diagnostics"][0]["code"])
+                self.assertEqual(before, self._snapshot())
+                self.assertFalse(create_path.exists())
+
+            with self.subTest(tool=tool, mode="preview"):
+                self._input(payload)
+                before = self._snapshot()
+                preview = self._wrapper_result(tool, payload, apply=False)
+                self.assertEqual(0, preview.returncode, preview.stderr)
+                envelope = json.loads(preview.stdout)
+                self.assertTrue(envelope["ok"])
+                self.assertEqual("dry-run", envelope["mode"])
+                self.assertEqual(1, envelope["result"]["count"])
+                self.assertEqual(before, self._snapshot())
+                self.assertFalse(create_path.exists())
 
     def test_create_collision_preflights_whole_bulk(self) -> None:
         new_path = self.requirements / "CA-R-344-FRAMEWORK_METHODOLOGY-REQUIREMENT--new.md"
