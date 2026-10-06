@@ -7,7 +7,7 @@ global_tier: 14
 status: Active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 01:01:23 +0000"
+updated_at: "2026-10-06 01:15:11 +0000"
 subjects:
   governs: "Release Version/Host Executor/Transport Binding"
   depends_on: [Release Version, Workflow Run, Operator, Queue, DBOS, Source, Implementation]
@@ -25,11 +25,11 @@ transport selection for source-admitted Release Version Runs in WORKFLOW_ORCHEST
 
 ## Claim
 
-the Host Executor **must** bind **every** admitted Release Run **to** its exact frozen request **and** isolated host transport before scheduling it.
+the Host Executor **must** bind **every** admitted Release Run **to** its exact frozen request **and** isolated host transport **before** scheduling it.
 
 ## Details
 
-- validate the existing selected-route seals **and** current Source bindings before accepting a new Run.
+- validate the existing selected-route seals **and** current Source bindings **before** accepting a new Run.
 - use the dedicated host Queue **and** worker; verify the frozen Release route again at worker dispatch.
 - pass the fixed host namespace **to** the executor subprocess. do **not** change the MCP process's shared environment **to** select a transport.
 - observation **and** recovery use the Run's retained transport binding. a Run bound **to** another executor is **not** adopted.
