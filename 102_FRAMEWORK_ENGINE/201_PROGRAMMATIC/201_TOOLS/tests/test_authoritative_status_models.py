@@ -113,6 +113,10 @@ class AuthoritativeStatusModelsTest(unittest.TestCase):
         self._source("CA-R-9203", "Operations", ["Draft", "Proposed", "Archived"], atom_type="Action", revision=2)
         with self.assertRaisesRegex(StatusModelError, "ambiguous"):
             self._resolve("Operations", "Proposed", "Action")
+        self._source("CA-R-9204", "Requirement", ["Draft", "Active", "Archived"])
+        self._source("CA-R-9205", "Requirement", ["Draft", "Active", "Archived"], revision=2)
+        with self.assertRaisesRegex(StatusModelError, "ambiguous"):
+            self._resolve("Requirement", "Active")
 
     def test_missing_and_unsupported_domains_refuse_without_a_caller_default(self) -> None:
         with self.assertRaisesRegex(StatusModelError, "no current status model"):
