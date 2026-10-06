@@ -19,3 +19,10 @@ reporting_mode = "silent"
 [rmed_review]
 # Operator-selected context threshold: use up to 90%, reserve 10% for handoff.
 context_headroom_fraction = 0.10
+
+[release_version.rollback_retention]
+# Preserve the verified first N image as the rollback point for this release.
+condition = "retain_prior"
+required_image_digests = [
+  "sha256:79899cfe59fb36c8da5ce1c12ea52c529a61738e51100b3d3e8488c52496d54e"
+]
