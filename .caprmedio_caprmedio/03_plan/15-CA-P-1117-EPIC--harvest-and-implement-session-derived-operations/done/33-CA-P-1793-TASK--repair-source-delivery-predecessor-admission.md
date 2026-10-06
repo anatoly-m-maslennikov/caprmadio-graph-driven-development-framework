@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 14:40:22 +0000"
+updated_at: "2026-10-06 17:32:19 +0000"
 subjects:
   governs: "Release source delivery predecessor repair"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal, Workflow Run]
@@ -39,3 +39,9 @@ restore safe source-delivery admission for a fresh Release using exact independe
 ## Definition of Done
 
 the exact mismatch is explained; source and any code correction are independently accepted; ownership, tamper and no-effect regressions pass; a fresh Release completes source delivery with actual recorded evidence.
+
+## Result
+
+the registered predecessor reader and source contract are independently accepted. 103 distinct focused tests pass, including exact ownership, tamper and no-effect refusals. actual N12 Step 3 completed source delivery; the new delivered tree is `504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c`. its retained predecessor at `101_LAYER_1_FRAMEWORK_METHODOLOGY/.release-sources-prior-w0rqbxah` matches the N10 tree `7ff204b0618234550599ce41b617a03d9c6b785469e122fb5746adf948a8a605`.
+
+the independent actual-tree review confirms the old N10 Action/checkpoint hashes, historical Journal prefix and installed N remain unchanged. this completes source-delivery admission only; current Unit and every later Release gate remain unfinished.
