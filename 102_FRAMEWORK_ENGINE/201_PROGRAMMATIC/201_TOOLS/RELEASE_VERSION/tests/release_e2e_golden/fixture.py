@@ -48,12 +48,6 @@ from release_image import (  # noqa: E402
     verify_bound_image_evidence,
 )
 from release_packaging import RUNTIME_ROOT, _render_manifest  # noqa: E402
-from release_source_admission import (  # noqa: E402
-    AUTHORITY_REF,
-    derive_release_graph_admission,
-    derive_release_private_carriers,
-    derive_release_source_admission,
-)
 from release_suite import (  # noqa: E402
     COMPILED_PROBE_TEST_MODULE,
     EVIDENCE_ROOT,
@@ -68,7 +62,7 @@ from release_suite import (  # noqa: E402
 )
 from release_suite_reference_context import capture_context  # noqa: E402
 from release_test_phases import derive_test_phase_map_from_rows  # noqa: E402
-from selected_routes import PROJECT_SETTINGS_REF, canonical_digest, load_selected_manifest, selected_manifest_ref  # noqa: E402
+from full_suite_golden.control_fixture import copy_control_closure  # noqa: E402
 
 
 _PAYLOAD = json.loads((Path(__file__).with_name("payloads.json")).read_bytes())
@@ -150,42 +144,6 @@ def _copy_exact(root: Path, relative: str, source: Path | None = None) -> None:
     _write_new(target, payload, mode)
 
 
-def _source_paths(value: object) -> set[str]:
-    if isinstance(value, dict):
-        result = {value["source_path"]} if isinstance(value.get("source_path"), str) else set()
-        for child in value.values():
-            result |= _source_paths(child)
-        return result
-    if isinstance(value, list):
-        result: set[str] = set()
-        for child in value:
-            result |= _source_paths(child)
-        return result
-    return set()
-
-
-def _pin_digests(value: object) -> dict[str, str]:
-    """Collect the exact retained bytes named by a source-pin envelope."""
-
-    found: dict[str, str] = {}
-    if isinstance(value, dict):
-        path, digest = value.get("source_path"), value.get("digest")
-        if isinstance(path, str) and isinstance(digest, str) and len(digest) == 64:
-            found[path] = digest
-        for child in value.values():
-            for child_path, child_digest in _pin_digests(child).items():
-                prior = found.setdefault(child_path, child_digest)
-                if prior != child_digest:
-                    raise RuntimeError(f"fixture source pin disagrees for {child_path}")
-    elif isinstance(value, list):
-        for child in value:
-            for child_path, child_digest in _pin_digests(child).items():
-                prior = found.setdefault(child_path, child_digest)
-                if prior != child_digest:
-                    raise RuntimeError(f"fixture source pin disagrees for {child_path}")
-    return found
-
-
 def _retained_source(relative: str, expected_digest: str | None) -> Path:
     """Choose current bytes, or an already-retained predecessor archive by hash."""
 
@@ -203,43 +161,14 @@ def _retained_source(relative: str, expected_digest: str | None) -> Path:
 def _copy_canonical_and_control_closure(root: Path) -> None:
     """Copy current source/controls before preflight, preserving their modes."""
 
-    manifest_ref = selected_manifest_ref(REPOSITORY_ROOT)
-    raw_manifest = json.loads((REPOSITORY_ROOT / manifest_ref).read_bytes())
-    # Keep the live selector untouched.  This fresh private fixture retains
-    # other routes but derives its Release route from the admitted sources.
-    raw_manifest["routes"] = [route for route in raw_manifest["routes"] if route["route"] != "release_version"]
-    raw_manifest.pop("release_source_admissions", None)
-    admission = derive_release_source_admission(REPOSITORY_ROOT)
-    private_carriers = derive_release_private_carriers(REPOSITORY_ROOT)
-    pins = _pin_digests(raw_manifest)
-    for relative, digest in _pin_digests(admission).items():
-        existing = pins.setdefault(relative, digest)
-        if existing != digest:
-            raise RuntimeError(f"fixture source pin disagrees for {relative}")
-    for row in private_carriers:
-        relative, digest = row["source_path"], row["sha256"]
-        existing = pins.setdefault(relative, digest)
-        if existing != digest:
-            raise RuntimeError(f"fixture private source pin disagrees for {relative}")
-    required = _source_paths(raw_manifest) | _source_paths(admission) | _source_paths(private_carriers) | {
-        ".caprmedio_caprmedio/operators_registry.toml",
-        PROJECT_SETTINGS_REF.as_posix(),
-        raw_manifest["source_freshness"]["selected_source_registry_ref"],
-        AUTHORITY_REF,
-        ".caprmedio_caprmedio/project_structure.toml",
+    # Reuse the bounded full-suite closure: it retains D580's exactly declared
+    # two Prompt binding carriers and each carrier's explicit source pins.
+    copy_control_closure(REPOSITORY_ROOT, root)
+    for relative in (
         f"{CANONICAL_SOURCE_RELATIVE}/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
         f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
-    }
-    for relative in sorted(required):
-        _copy_exact(root, relative, _retained_source(relative, pins.get(relative)))
-    route, copied_admission = derive_release_graph_admission(root)
-    raw_manifest["routes"].append(route)
-    raw_manifest["release_source_admissions"] = [copied_admission]
-    raw_manifest["source_freshness"]["selected_binding_digest"] = canonical_digest(raw_manifest["routes"])
-    raw_manifest["canonical_manifest_sha256"] = canonical_digest({
-        key: value for key, value in raw_manifest.items() if key != "canonical_manifest_sha256"
-    })
-    _write_new(root / manifest_ref, canonical_json(raw_manifest), (REPOSITORY_ROOT / manifest_ref).stat().st_mode & 0o777)
+    ):
+        _copy_exact(root, relative, _retained_source(relative, None))
     # The compiler governs three structural layers even where this tiny
     # fixture intentionally carries no installed-extension source atom.
     for layer in ("001_CORE_META_MODEL", "002_INSTALLED_EXTENSIONS", "003_PROJECT_CONFIGURATION"):

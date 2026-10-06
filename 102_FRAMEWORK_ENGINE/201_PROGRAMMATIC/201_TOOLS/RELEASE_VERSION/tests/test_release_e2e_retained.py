@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +27,50 @@ class RetainedE2EArtifactTests(unittest.TestCase):
         retained = PROJECT_ROOT / ".caprmedio_tmp/tests/release-e2e-retained"
         retained.mkdir(parents=True, exist_ok=True)
         cls.fixture = materialize(Path(tempfile.mkdtemp(prefix="golden-", dir=retained)))
-        cls.evidence = cls._seed_e2e(cls.fixture)
+        # Unit-only host boundary: retained-reader validation still reopens the
+        # real N/package/Skill/source carriers, but must not discover or invoke
+        # a host Docker executable in the socket-free Unit container.
+        cls._mock_docker = cls.fixture.root / ".caprmedio_tmp/mock-docker"
+        cls._mock_docker.parent.mkdir(parents=True, exist_ok=True)
+        cls._mock_docker.write_bytes(b"#!/bin/false\n# MOCK DATA ONLY: never executed by this Unit fixture\n")
+        cls._mock_docker.chmod(0o755)
+        cls._host_boundary = patch.object(
+            gate.HostE2EExecutor, "freeze_capability", side_effect=cls._unit_capability,
+        )
+        cls._host_boundary.start()
+        try:
+            cls.evidence = cls._seed_e2e(cls.fixture)
+        except BaseException:
+            cls._host_boundary.stop()
+            raise
+
+    @staticmethod
+    def _unit_capability(root: Path, candidate) -> gate.FrozenHostE2ECapability:
+        n_state = gate._active_n_state(root, candidate)
+        n_root = root / gate.RUNTIME_ROOT / "releases" / candidate.authority.executing_release
+        controller = gate._regular(n_root, gate._N_DRIVER_RELATIVE, label="fixture N host controller")
+        python = Path(sys.executable).resolve()
+        docker = root / ".caprmedio_tmp/mock-docker"
+        if docker.is_symlink() or not docker.is_file():
+            raise gate.ReleaseContractError("release-e2e-host-executable-missing", "fixture Docker carrier changed")
+
+        def identity(role: str, path: Path) -> gate.ExecutableIdentity:
+            return gate.ExecutableIdentity(role, str(path), gate._digest(path.read_bytes()))
+
+        return gate.FrozenHostE2ECapability(
+            *n_state,
+            identity("n_host_controller", controller),
+            identity("python", python),
+            identity("driver", controller),
+            identity("docker", docker),
+            str(docker.parent),
+        )
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        boundary = getattr(cls, "_host_boundary", None)
+        if boundary is not None:
+            boundary.stop()
 
     @staticmethod
     def _seed_e2e(fixture):
