@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -22,12 +23,10 @@ class ImageOverrideTests(unittest.TestCase):
         self.assertEqual(
             IMMUTABLE_IMAGE, runtime.image_reference({"CAPRMEDIO_IMAGE": IMMUTABLE_IMAGE})
         )
-        instance = runtime.Runtime.__new__(runtime.Runtime)
-        instance.root = Path("/project")
-        instance.mock = True
-        instance.auth_file = None
-        with patch.dict(runtime.os.environ, {"CAPRMEDIO_IMAGE": IMMUTABLE_IMAGE}):
-            self.assertEqual(IMMUTABLE_IMAGE, instance.environment()["CAPRMEDIO_IMAGE"])
+        with tempfile.TemporaryDirectory() as directory:
+            instance = runtime.Runtime(Path(directory), mock=True, image=IMMUTABLE_IMAGE)
+            with patch.dict(runtime.os.environ, {"CAPRMEDIO_IMAGE": "sha256:" + "b" * 64}):
+                self.assertEqual(IMMUTABLE_IMAGE, instance.environment()["CAPRMEDIO_IMAGE"])
 
     def test_runtime_empty_override_uses_safe_development_fallback(self):
         self.assertEqual(runtime.IMAGE, runtime.image_reference({"CAPRMEDIO_IMAGE": ""}))

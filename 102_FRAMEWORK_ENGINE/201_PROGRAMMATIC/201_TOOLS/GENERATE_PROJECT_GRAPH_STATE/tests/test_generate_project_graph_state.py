@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -43,10 +44,11 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True)
         self.root = Path(self.temporary.name) / "repository"
         self.control = self.root / ".caprmedio_caprmedio"
-        self.control.mkdir(parents=True)
+        self.root.mkdir(parents=True)
+        subprocess.run(["git", "-C", str(self.root), "init", "-q"], check=True)
+        self.control.mkdir()
         # Project-graph output writes must resolve this fixture itself, rather
         # than a checkout enclosing the test temporary directory.
-        (self.root / ".git").mkdir()
         self.modes = {"default": "casual"}
         self.project_settings = self.root / generate_project_graph_state.SETTINGS_PATH
         self.project_settings.write_text(

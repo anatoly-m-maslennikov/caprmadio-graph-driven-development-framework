@@ -4,6 +4,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -36,12 +37,10 @@ class QueryImageIdentityTests(unittest.TestCase):
                     query._required_query_image({"CAPRMEDIO_DOCKER_QUERY_IMAGE": value})
 
     def test_selected_identity_propagates_to_runtime_environment(self) -> None:
-        runtime = query.strict.Runtime.__new__(query.strict.Runtime)
-        runtime.root = Path("/project")
-        runtime.mock = True
-        runtime.auth_file = None
-        with patch.dict(os.environ, {"CAPRMEDIO_IMAGE": IMAGE}, clear=False):
-            self.assertEqual(IMAGE, runtime.environment()["CAPRMEDIO_IMAGE"])
+        with tempfile.TemporaryDirectory() as directory:
+            runtime = query.strict.Runtime(Path(directory), mock=True, image=IMAGE)
+            with patch.dict(os.environ, {"CAPRMEDIO_IMAGE": "sha256:" + "c" * 64}, clear=False):
+                self.assertEqual(IMAGE, runtime.environment()["CAPRMEDIO_IMAGE"])
 
 
 if __name__ == "__main__":
