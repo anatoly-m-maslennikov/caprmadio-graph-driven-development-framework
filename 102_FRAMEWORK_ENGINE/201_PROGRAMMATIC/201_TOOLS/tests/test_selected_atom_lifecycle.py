@@ -521,6 +521,65 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertIn("@1", archived.name)
         self.assertIn("status: Archived", archived.read_text(encoding="utf-8"))
 
+    def test_replace_requires_prepared_new_successors_and_archives_only_after_all_are_active(self) -> None:
+        first = self._carrier("CA-R-105", "first-replacement", "First replacement")
+        second = self._carrier("CA-R-106", "second-replacement", "Second replacement")
+        original_archive = __import__("lifecycle_intents").archive_atom_revision
+
+        def verify_active_before_archive(root: Path, atom: object, frontmatter: str, content: str) -> object:
+            for successor in (first, second):
+                candidate = root / successor["path"]
+                self.assertTrue(candidate.exists())
+                self.assertIn("status: Active", candidate.read_text(encoding="utf-8"))
+            return original_archive(root, atom, frontmatter, content)
+
+        with patch("lifecycle_intents.archive_atom_revision", side_effect=verify_active_before_archive):
+            result = replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [first, second], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+        self.assertEqual("applied", result["outcome"])
+        self.assertEqual(["CA-R-105", "CA-R-106"], [row["atom_id"] for row in result["successors"]])
+
+    def test_replace_rejects_preexisting_successor_without_archiving_predecessor(self) -> None:
+        successor = self._carrier("CA-R-105", "already-present", "Already present")
+        create_atom_action(self.root, {"carrier": successor}, execute=True, authorized=True)
+        before = self.target.read_bytes()
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [successor], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+        self.assertEqual(before, self.target.read_bytes())
+
+    def test_replace_rejects_preexisting_successor_id_at_unused_destination(self) -> None:
+        existing = self._carrier("CA-R-105", "already-present", "Already present")
+        create_atom_action(self.root, {"carrier": existing}, execute=True, authorized=True)
+        replacement = self._carrier("CA-R-105", "new-destination", "Different destination")
+        before_predecessor = self.target.read_bytes()
+        before_existing = (self.root / existing["path"]).read_bytes()
+        new_destination = self.root / replacement["path"]
+
+        with self.assertRaisesRegex(LifecycleError, "atom-id-collision"):
+            replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [replacement], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+
+        self.assertEqual(before_predecessor, self.target.read_bytes())
+        self.assertEqual(before_existing, (self.root / existing["path"]).read_bytes())
+        self.assertFalse(new_destination.exists())
+        self.assertFalse((self.target.parent / "archive" / "CA-R-100--target@1.md").exists())
+
     def test_replace_rejects_caller_model_that_contradicts_current_authority(self) -> None:
         successor = self._carrier("CA-R-105", "forged-model", "Replacement summary")
         forged = self._model()

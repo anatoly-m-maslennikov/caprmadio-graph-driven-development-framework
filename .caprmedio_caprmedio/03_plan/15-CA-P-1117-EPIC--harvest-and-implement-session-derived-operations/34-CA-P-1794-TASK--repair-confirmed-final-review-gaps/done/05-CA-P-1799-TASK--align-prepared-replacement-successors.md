@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 17:21:04 +0000"
+updated_at: "2026-10-06 18:38:40 +0000"
 subjects:
   governs: "Align prepared replacement successors"
   depends_on: [Implementation, Evaluation, Action, Journal]
@@ -37,3 +37,6 @@ clarify source authority to admit only the sealed complete prepared-new successo
 
 the two contrary authority carriers are revised with exact old versions retained, current pins are refreshed normally and the replacement regression matches the clarified contract.
 
+## Result
+
+R1041 v8 and O128 v4 retain exact predecessor bytes and admit only complete sealed prepared-new successor sets. the actual registered pin refresh is recorded. the replacement suite passes 22 cases, explicitly proving all successors Active before archival, exact destination-collision refusal and distinct used-ID/unused-destination atom-id-collision refusal without effects. independent review accepts this packet; no release success is implied.
