@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -20,7 +21,8 @@ from unittest.mock import patch
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = RELEASE_ROOT.parents[3]
 MCP_ROOT = REPOSITORY / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP"
-for path in (RELEASE_ROOT, MCP_ROOT):
+TEST_ROOT = Path(__file__).resolve().parent
+for path in (RELEASE_ROOT, MCP_ROOT, TEST_ROOT):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
 
@@ -67,6 +69,63 @@ def _replace_first_source_path(value: object) -> bool:
     return False
 
 
+def _prompt_source(atom_id: str, version: int, *, status: str = "Active") -> bytes:
+    return (
+        f'---\natom_id: "{atom_id}"\nversion: {version}\nstatus: "{status}"\n---\n'.encode("utf-8")
+    )
+
+
+def _prompt_frontier_carrier(rows: list[tuple[str, bytes]]) -> tuple[bytes, dict[str, tuple[bytes, int]]]:
+    bindings: list[tuple[str, bytes]] = []
+    captured: dict[str, tuple[bytes, int]] = {}
+    atom_ids: dict[str, str] = {}
+    for index, (path, source) in enumerate(rows, 1):
+        digest = hashlib.sha256(source).hexdigest()
+        atom_id = atom_ids.setdefault(path, f"CA-R-{index}")
+        binding_path = f"102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/P{index}/source_bindings.json"
+        binding = json.dumps({"schema_version": 1, "sources": [{
+            "atom_id": atom_id, "version": 1, "path": path, "sha256": digest,
+        }]}, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        bindings.append((binding_path, binding))
+        captured[binding_path] = (binding, 0o644)
+        captured[path] = (source, 0o644)
+    d580 = (
+        b"### Prompt binding frontier\n\n"
+        b"| Package | Binding carrier | SHA-256 |\n"
+        b"| --- | --- | --- |\n"
+        + b"| IMPLEMENTATION_WORKFLOW | `" + bindings[0][0].encode() + b"` | `" + hashlib.sha256(bindings[0][1]).hexdigest().encode() + b"` |\n"
+        + b"| RMED_ATOM_REVIEW | `" + bindings[1][0].encode() + b"` | `" + hashlib.sha256(bindings[1][1]).hexdigest().encode() + b"` |\n"
+    )
+    return d580, captured
+
+
+class PromptBindingFrontierTests(unittest.TestCase):
+    def test_accepts_active_exact_pins_and_unions_identical_shared_source_once(self) -> None:
+        shared = ".caprmedio_caprmedio/04_requirement/CA-R-1-CORE--shared.md"
+        d580, captured = _prompt_frontier_carrier([(shared, _prompt_source("CA-R-1", 1)), (shared, _prompt_source("CA-R-1", 1))])
+        paths = reference_context._prompt_binding_frontier(d580, captured)
+        self.assertEqual(paths.count(shared), 1)
+        self.assertEqual(len(paths), 3)
+
+    def test_refuses_inactive_or_conflicting_shared_pin(self) -> None:
+        source = ".caprmedio_caprmedio/04_requirement/CA-R-1-CORE--shared.md"
+        d580, captured = _prompt_frontier_carrier([(source, _prompt_source("CA-R-1", 1, status="Archived")), (source, _prompt_source("CA-R-1", 1, status="Archived"))])
+        with self.assertRaises(ReleaseSuiteReferenceContextError):
+            reference_context._prompt_binding_frontier(d580, captured)
+        d580, captured = _prompt_frontier_carrier([(source, _prompt_source("CA-R-1", 1)), (source, _prompt_source("CA-R-1", 1))])
+        second = sorted(path for path in captured if path.endswith("source_bindings.json"))[1]
+        binding = json.loads(captured[second][0])
+        binding["sources"][0]["sha256"] = "0" * 64
+        changed = json.dumps(binding, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        captured[second] = (changed, 0o644)
+        d580 = d580.replace(
+            hashlib.sha256(json.dumps({"schema_version": 1, "sources": [{"atom_id": "CA-R-1", "version": 1, "path": source, "sha256": hashlib.sha256(_prompt_source("CA-R-1", 1)).hexdigest()}]}, sort_keys=True, separators=(",", ":")).encode()).hexdigest().encode(),
+            hashlib.sha256(changed).hexdigest().encode(), 1,
+        )
+        with self.assertRaises(ReleaseSuiteReferenceContextError):
+            reference_context._prompt_binding_frontier(d580, captured)
+
+
 class ReleaseSuiteReferenceContextTests(unittest.TestCase):
     """Capture derives a current closure and never trusts a supplied one."""
 
@@ -79,6 +138,7 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         # outcome.
         self.root = Path(tempfile.mkdtemp(prefix="release-suite-reference-", dir=temporary_root))
         copy_control_closure(REPOSITORY, self.root)
+        self.copy_prompt_binding_frontier()
         self.manifest_ref = selected_manifest_ref(REPOSITORY)
         self.bindings = {
             "candidate_snapshot_manifest_sha256": "a" * 64,
@@ -86,6 +146,24 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
             "selected_n_identity": "selected-N-fixture",
             "selected_n_image_context": "sha256:" + "b" * 64,
         }
+
+    def copy_prompt_binding_frontier(self) -> None:
+        """Fixture only: copy D580's already-authorized exact binding leaves."""
+        for relative in (
+            "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json",
+            "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json",
+        ):
+            source = REPOSITORY / relative
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+            target.chmod(source.stat().st_mode & 0o777)
+            for pin in json.loads(source.read_text(encoding="utf-8"))["sources"]:
+                source_atom = REPOSITORY / pin["path"]
+                target_atom = self.root / pin["path"]
+                target_atom.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source_atom, target_atom)
+                target_atom.chmod(source_atom.stat().st_mode & 0o777)
 
     def capture(self) -> ReleaseSuiteReferenceContext:
         return capture_context(self.root, self.bindings)
@@ -112,7 +190,10 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
             path for path in sorted(_source_paths(derive_release_source_admission(self.root)))
             if path not in excluded
         )
-        return {**roots, "transitive_pin": transitive}
+        prompt_binding = "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json"
+        prompt_source = json.loads((self.root / prompt_binding).read_text(encoding="utf-8"))["sources"][0]["path"]
+        return {**roots, "transitive_pin": transitive, "prompt_binding": prompt_binding,
+                "prompt_source": prompt_source}
 
     def assert_mutation_blocks_rederivation(self, *, phase: str, copy_before_mutation: bool) -> None:
         context = self.capture()
@@ -156,6 +237,13 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         }.issubset(paths))
         self.assertTrue(_source_paths(derive_release_source_admission(self.root)).issubset(paths))
         self.assertTrue(_source_paths(derive_release_private_carriers(self.root)).issubset(paths))
+        for relative in (
+            "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json",
+            "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json",
+        ):
+            binding = json.loads((self.root / relative).read_text(encoding="utf-8"))
+            self.assertIn(relative, paths)
+            self.assertTrue({pin["path"] for pin in binding["sources"]}.issubset(paths))
         for row in context.reference_rows:
             source = self.root / row.source_path
             self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(), row.sha256)

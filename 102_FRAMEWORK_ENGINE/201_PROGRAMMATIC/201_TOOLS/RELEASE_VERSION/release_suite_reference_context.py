@@ -37,12 +37,18 @@ from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_
 
 
 _OPERATORS_REGISTRY = PurePosixPath(".caprmedio_caprmedio/operators_registry.toml")
+_D580_REFERENCE = (
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
+    "201_FEATURE_TOOLS/07_delivery/"
+    "CA-D-580-TOOLS-DELIVERY--encode-the-private-release-suite-reference-context.md"
+)
 _BINDING_FIELDS = frozenset({
     "candidate_snapshot_manifest_sha256", "compiled_candidate_root",
     "selected_n_identity", "selected_n_image_context",
 })
 _SHA256 = re.compile(r"[0-9a-f]{64}")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,255}")
+_ATOM_ID = re.compile(r"CA-[A-Z]+-[0-9]+")
 
 
 class ReleaseSuiteReferenceContextError(ValueError):
@@ -221,6 +227,110 @@ def _project_structure_ref(settings_raw: bytes) -> str:
     return (_control_root_from_settings(settings_raw) / "project_structure.toml").as_posix()
 
 
+def _atom_identity(raw: bytes, relative: str) -> tuple[str, int, str]:
+    """Read the closed active-Atom identity required by D580 prompt pins."""
+    try:
+        lines = raw.decode("utf-8").splitlines()
+        if not lines or lines[0] != "---":
+            raise ValueError("frontmatter is absent")
+        end = lines.index("---", 1)
+        values: dict[str, str] = {}
+        for field in ("atom_id", "version", "status"):
+            matches = [line.split(":", 1)[1].strip() for line in lines[1:end]
+                       if line.startswith(f"{field}:")]
+            if len(matches) != 1:
+                raise ValueError(f"{field} is absent or duplicated")
+            value = matches[0]
+            if value.startswith('"'):
+                value = json.loads(value)
+            elif value.startswith("'") and value.endswith("'"):
+                value = value[1:-1]
+            if not isinstance(value, str):
+                raise ValueError(f"{field} is not textual")
+            values[field] = value
+        if _ATOM_ID.fullmatch(values["atom_id"]) is None or re.fullmatch(r"[1-9][0-9]*", values["version"]) is None:
+            raise ValueError("identity or version is invalid")
+        return values["atom_id"], int(values["version"]), values["status"]
+    except (UnicodeDecodeError, ValueError, TypeError, IndexError, json.JSONDecodeError) as error:
+        raise ReleaseSuiteReferenceContextError(
+            f"Prompt binding source identity is invalid: {relative}"
+        ) from error
+
+
+def _prompt_binding_rows(d580_raw: bytes) -> tuple[tuple[str, str], ...]:
+    """Parse D580's closed table before reading the declared binding files."""
+    try:
+        text = d580_raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ReleaseSuiteReferenceContextError("D580 is unavailable for Prompt binding frontier") from error
+    match = re.search(
+        r"^### Prompt binding frontier\n\n"
+        r"\| Package \| Binding carrier \| SHA-256 \|\n"
+        r"\| --- \| --- \| --- \|\n"
+        r"\| IMPLEMENTATION_WORKFLOW \| `([^`]+)` \| `([0-9a-f]{64})` \|\n"
+        r"\| RMED_ATOM_REVIEW \| `([^`]+)` \| `([0-9a-f]{64})` \|$",
+        text, re.MULTILINE,
+    )
+    if match is None:
+        _fail("D580 Prompt binding frontier is absent or malformed")
+    binding_rows = tuple((match.group(index), match.group(index + 1)) for index in (1, 3))
+    if len({path for path, _digest in binding_rows}) != len(binding_rows):
+        _fail("D580 Prompt binding frontier duplicates a binding carrier")
+    for binding_path, _digest in binding_rows:
+        _forbid_non_control_path(binding_path)
+    return binding_rows
+
+
+def _prompt_binding_frontier(d580_raw: bytes, captured: Mapping[str, tuple[bytes, int]]) -> tuple[str, ...]:
+    """Derive D580's two exact binding carriers and their sealed active pins."""
+    binding_rows = _prompt_binding_rows(d580_raw)
+    paths: dict[str, tuple[str, int, str]] = {}
+    for binding_path, expected_digest in binding_rows:
+        captured_binding = captured.get(binding_path)
+        if captured_binding is None:
+            _fail("D580 Prompt binding carrier was not descriptor-captured")
+        binding_raw, _mode = captured_binding
+        if hashlib.sha256(binding_raw).hexdigest() != expected_digest:
+            _fail("D580 Prompt binding carrier is stale")
+        try:
+            binding = json.loads(binding_raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ReleaseSuiteReferenceContextError("D580 Prompt binding carrier is invalid JSON") from error
+        if not isinstance(binding, Mapping) or binding.get("schema_version") != 1 or not isinstance(binding.get("sources"), list):
+            _fail("D580 Prompt binding carrier has an invalid schema")
+        local_paths: set[str] = set()
+        for pin in binding["sources"]:
+            if not isinstance(pin, Mapping) or set(pin) != {"atom_id", "version", "path", "sha256"}:
+                _fail("D580 Prompt source pin has an invalid schema")
+            atom_id, version, source_path, digest = (
+                pin["atom_id"], pin["version"], pin["path"], pin["sha256"]
+            )
+            if (not isinstance(atom_id, str) or _ATOM_ID.fullmatch(atom_id) is None
+                    or type(version) is not int or version < 1
+                    or not isinstance(digest, str) or _SHA256.fullmatch(digest) is None):
+                _fail("D580 Prompt source pin has an invalid identity")
+            source_path = _forbid_non_control_path(source_path).as_posix()
+            if source_path in local_paths:
+                _fail("D580 Prompt binding carrier duplicates a source pin")
+            local_paths.add(source_path)
+            source = captured.get(source_path)
+            observed = (atom_id, version, digest)
+            prior = paths.setdefault(source_path, observed)
+            if prior != observed:
+                _fail("D580 Prompt frontiers conflict on a shared source pin")
+            # The first pass supplies the paths to descriptor preflight.  The
+            # second pass below must see the captured bytes and validates them.
+            if source is None:
+                continue
+            source_raw, _source_mode = source
+            actual_id, actual_version, status = _atom_identity(source_raw, source_path)
+            if (hashlib.sha256(source_raw).hexdigest() != digest
+                    or (actual_id, actual_version) != (atom_id, version)
+                    or status != "Active"):
+                _fail("D580 Prompt source pin is stale or inactive")
+    return tuple(sorted({*(path for path, _digest in binding_rows), *paths}))
+
+
 def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], tuple[str, ...]]:
     """Capture every prospective reader carrier before any delegated parser runs."""
     settings_ref = PROJECT_SETTINGS_REF.as_posix()
@@ -241,6 +351,7 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         settings_ref,
         project_structure_ref,
         authority_ref,
+        _D580_REFERENCE,
     ]
     _paths_from_source_paths(manifest, candidates)
     freshness = manifest.get("source_freshness") if isinstance(manifest, Mapping) else None
@@ -274,6 +385,17 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
     for candidate in sorted(set(candidates)):
         if candidate not in captured:
             captured[candidate] = _read_regular(root, candidate)
+    prompt_rows = _prompt_binding_rows(captured[_D580_REFERENCE][0])
+    for candidate, _digest in prompt_rows:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
+    prompt_bindings = _prompt_binding_frontier(captured[_D580_REFERENCE][0], captured)
+    for candidate in prompt_bindings:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
+    # Recheck only after the entire two-stage frontier has been captured: no
+    # later parser may resolve a new root-backed prompt path.
+    _prompt_binding_frontier(captured[_D580_REFERENCE][0], captured)
     return captured, tuple(sorted(captured))
 
 
@@ -318,6 +440,10 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     source_registry = freshness["selected_source_registry_ref"]
     _safe_relative(source_registry)
     _assert_unique_rmed_pins(admission)
+    snapshot_captured, _snapshot_paths = _preflight_reader_paths(snapshot_root)
+    prompt_paths = _prompt_binding_frontier(
+        snapshot_captured[_D580_REFERENCE][0], snapshot_captured,
+    )
     candidates = [
         manifest_ref,
         _OPERATORS_REGISTRY.as_posix(),
@@ -327,6 +453,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         str(AUTHORITY_PIN["source_path"]),
         *_pin_paths(admission),
         *(row["source_path"] for row in private_carriers),
+        *prompt_paths,
     ]
     # The selected manifest has already source-validated every route/admission
     # pin.  Capture their source paths too, while naturally deduplicating a

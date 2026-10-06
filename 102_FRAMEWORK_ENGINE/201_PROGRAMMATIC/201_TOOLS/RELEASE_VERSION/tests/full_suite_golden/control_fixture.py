@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import shutil
 
-from release_suite_reference_context import _project_structure_ref
+from release_suite_reference_context import _project_structure_ref, _prompt_binding_rows
 from release_source_admission import (
     AUTHORITY_PIN,
     derive_release_graph_admission,
@@ -87,6 +87,24 @@ def copy_control_closure(repository: Path, root: Path) -> None:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         target.chmod(source.stat().st_mode & 0o777)
+
+    # D580 declares a closed Prompt binding frontier.  Copy only its two
+    # binding carriers and their exact pinned active Atom files; no directory
+    # discovery or legacy Plan material is admitted into the retained fixture.
+    d580_relative = next(path for path in pins if "/CA-D-580-" in path)
+    for binding_relative, binding_digest in _prompt_binding_rows((root / d580_relative).read_bytes()):
+        binding_source = _retained_source(repository, binding_relative, binding_digest)
+        binding_target = root / binding_relative
+        binding_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(binding_source, binding_target)
+        binding_target.chmod(binding_source.stat().st_mode & 0o777)
+        binding = json.loads(binding_target.read_bytes())
+        for pin in binding["sources"]:
+            atom_source = _retained_source(repository, pin["path"], pin["sha256"])
+            atom_target = root / pin["path"]
+            atom_target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(atom_source, atom_target)
+            atom_target.chmod(atom_source.stat().st_mode & 0o777)
 
     # Implementation carriers have D572 byte declarations, not Atom pins.
     # Preserve their actual modes and independently check the copied bytes.
