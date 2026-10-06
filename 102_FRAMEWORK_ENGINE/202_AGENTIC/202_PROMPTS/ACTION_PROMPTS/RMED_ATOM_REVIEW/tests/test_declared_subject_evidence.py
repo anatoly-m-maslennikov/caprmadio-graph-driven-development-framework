@@ -116,14 +116,14 @@ class DeclaredSubjectEvidenceTests(unittest.TestCase):
     def test_real_r1720_and_m113_admit_without_full_path_spelling(self):
         root = Path(__file__).resolve().parents[6]
         sources = (
-            ("Work Journal/Event", "CA-R-1720@17",
+            ("Work Journal/Event", "CA-R-1720@18",
              root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1720-CORE_META_MODEL-CORE-REQUIREMENT--use-one-project-journal-for-governed-provenance.md",
-             "**every** Project **must** use **`=1`** authoritative Journal for **all** governed events, including Artifact changes, Workflow Runs, Step Runs, **and** Action executions, **and** Implementation events. this Project-wide Journal is its Work Journal. **every** admitted event record **must** retain **`=1`** canonical Event identity **and** be recorded **only** once as historical authority; another log **or** view references that record instead of independently recording the same historical fact. distinct events **in** the same execution remain distinct records."),
+             "**every** Project **must** use **`=1`** authoritative Work Journal for **all** CAPRMEDIO-governed provenance events, including Artifact changes, Workflow Runs, Step Runs, Action executions, **and** Implementation lifecycle events. **every** admitted event record **must** retain **`=1`** canonical Event identity **and** be recorded **only** once as historical authority; another log **or** view references that record instead of independently recording the same historical fact. distinct events **in** the same execution remain distinct records."),
             ("Author", "CA-M-113@17",
-             root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-METHOD--write-claims-in-caprmedio-controlled-english.md",
+             root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL--write-claims-in-caprmedio-controlled-english.md",
              "**to** write one Claim **in** CAPRMEDIO Controlled English, the Author **must** satisfy **all** of the following:"),
             ("CCE", "CA-M-113@17",
-             root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL-METHOD--write-claims-in-caprmedio-controlled-english.md",
+             root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL--write-claims-in-caprmedio-controlled-english.md",
              "use the controlled English subset of the identified CCE version."),
         )
         for entity, authority, path, excerpt in sources:
@@ -192,9 +192,9 @@ class DeclaredSubjectEvidenceTests(unittest.TestCase):
     def test_real_d446_r1078_and_r1412_sources_admit_declared_parents(self):
         root = Path(__file__).resolve().parents[6]
         cases = (
-            ("Atom/Identity", "CA-D-446@6", root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-446-CORE_META_MODEL-CORE-DELIVERY--give-every-non-draft-atom-revision-one-identifier.md", "**every** non-Draft Atom Revision **must** have **`=1`** Identifier composed from its Atom Identity **and** Version."),
+            ("Atom/Identity", "CA-D-446@7", root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-446-CORE_META_MODEL-CORE--give-every-non-draft-atom-revision-one-identifier.md", "**every** non-Draft Atom Revision **must** have **`=1`** Identifier composed from its Atom Identity **and** Version."),
             ("Atom/Revision", "CA-R-1078@15", root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1078-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-one-author.md", "**every** Atom Revision **must** have **`=1`** Author."),
-            ("Atom/Revision", "CA-R-1412@9", root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1412-CORE_META_MODEL-CORE-REQUIREMENT--give-every-atom-revision-one-status.md", "**every** Atom Revision **must** have **`=1`** Status."),
+            ("Atom/Revision", "CA-R-1412@9", root / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1412-CORE_META_MODEL-CORE--give-every-atom-revision-one-status.md", "**every** Atom Revision **must** have **`=1`** Status."),
         )
         for entity, authority, path, excerpt in cases:
             with self.subTest(authority=authority):

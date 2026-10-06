@@ -307,14 +307,14 @@ class AllowedValueEvidenceTests(unittest.TestCase):
                 validate_allowed_value_evidence(
                     mention(evidence=proof()), {AUTHORITY: source(body)}, self.targets)
 
-    def test_real_r1526_agentic_named_value_bullet_is_admitted(self):
+    def test_historical_r1526_agentic_named_value_bullet_is_admitted(self):
         root = Path(__file__).resolve().parents[6]
         path = root / (
             ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
             "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/"
-            "CA-R-1526-CORE_META_MODEL-GENERAL-REQUIREMENT--define-action-execution-kind.md"
+            "archive/CA-R-1526-CORE_META_MODEL-GENERAL-REQUIREMENT--define-action-execution-kind@3.md"
         )
-        authority = "CA-R-1526@4"
+        authority = "CA-R-1526@3"
         self.assertTrue(validate_allowed_value_evidence(
             execution_mention(authority=authority), {authority: path.read_text()},
             {authority: EXECUTION_PROPERTY}))
@@ -514,9 +514,11 @@ class AllowedValueEvidenceTests(unittest.TestCase):
         path = root / (
             ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
             "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/"
-            "CA-D-316-CORE_META_MODEL-GENERAL-DELIVERY--classify-carriers-by-ownership.md"
+            "CA-D-316-CORE_META_MODEL-GENERAL--classify-carriers-by-ownership.md"
         )
         raw = path.read_text()
+        claim_with_extra = raw.replace(
+            OWNERSHIP_EXCERPT, OWNERSHIP_EXCERPT + "\nExtra context.")
         targets = {OWNERSHIP_AUTHORITY: OWNERSHIP_PROPERTY}
         for value in OWNERSHIP_VALUES:
             with self.subTest(value=value):
@@ -527,7 +529,7 @@ class AllowedValueEvidenceTests(unittest.TestCase):
             (ownership_mention("Framework-Owned", entity="Framework-Owned Carrier"), raw, targets),
             (ownership_mention("Framework-Owned", property_path="Artifact/Ownership Class"), raw, targets),
             (ownership_mention("External-Owned"), raw, targets),
-            (ownership_mention("Framework-Owned"), raw + "\nExtra context.\n", targets),
+            (ownership_mention("Framework-Owned"), claim_with_extra, targets),
             (ownership_mention(
                 "Framework-Owned",
                 excerpt=OWNERSHIP_EXCERPT.replace("internal CAPRMEDIO ", ""),

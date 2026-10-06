@@ -54,13 +54,13 @@ class CandidateDefinitionEvidenceTests(unittest.TestCase):
         validate_candidate(raw, mention("Primary Entity", quote), atom_id="CA-R-1191", version=13)
 
     def test_real_d414_positive_classification_defines_its_own_target(self):
-        path = ROOT / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-414-CORE_META_MODEL-CORE-DELIVERY--classify-carrier-as-a-primary-entity.md"
+        path = ROOT / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-414-CORE_META_MODEL-CORE--classify-carrier-as-a-primary-entity.md"
         raw = path.read_text()
         quote = "the Term Carrier **must** be **NARROWER_THAN** Primary Entity."
         validate_candidate(raw, mention("Carrier", quote, kind="classification"), atom_id="CA-D-414", version=14)
 
     def test_negative_delivery_constraint_does_not_self_define_d352_target(self):
-        path = ROOT / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-352-CORE_META_MODEL-CORE-DELIVERY--keep-status-subdirectories-outside-the-directory-carrier-type.md"
+        path = ROOT / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-352-CORE_META_MODEL-CORE--keep-status-subdirectories-outside-the-directory-carrier-type.md"
         raw = path.read_text()
         quote = "a Status subdirectory used for Artifact Carrier placement **must not** be a Directory Carrier."
         with self.assertRaisesRegex(ValueError, "positive classification"):

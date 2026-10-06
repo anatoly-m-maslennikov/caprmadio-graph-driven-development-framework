@@ -8,7 +8,7 @@ import unittest
 import yaml
 
 HERE = Path(__file__).resolve().parents[1]
-ROOT = HERE.parents[4]
+ROOT = Path(__file__).resolve().parents[6]
 AUTHORITY = ROOT / '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS'
 ROLES = {'CA-R-1801': 'Requirement', 'CA-R-1802': 'Requirement', 'CA-R-1803': 'Requirement',
          'CA-M-317': 'Method', 'CA-E-524': 'Evaluation',

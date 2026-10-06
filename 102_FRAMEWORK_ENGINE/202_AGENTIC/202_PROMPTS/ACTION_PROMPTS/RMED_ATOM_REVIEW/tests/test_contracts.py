@@ -13,7 +13,7 @@ import yaml
 from test_split_evaluation import context, contract, gap, merge_evaluations, part
 
 HERE = Path(__file__).resolve().parents[1]
-ROOT = HERE.parents[4]
+ROOT = Path(__file__).resolve().parents[6]
 CORE = ROOT / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL"
 CHECKS = {"properties", "scope", "claim", "details", "cce", "summary"}
 EVALUATORS = {"evaluate_cce", "evaluate_properties", "evaluate_coherence"}
@@ -140,7 +140,7 @@ class PromptContracts(unittest.TestCase):
         for phrase in ("before and after", "Below-threshold", "do not edit", "incomplete", "prerequisite"):
             self.assertIn(phrase.casefold(), evaluation.casefold())
         repair = " ".join(self.prompts["CA-O-110"].split())
-        for phrase in ("Summary change may require replacement", "Formatting-only",
+        for phrase in ("Summary change requires replacement authority", "Formatting-only",
                        "governing checks to force a pass", "missing permission", "fixed_not_rechecked"):
             self.assertIn(phrase, repair)
 

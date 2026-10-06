@@ -127,7 +127,8 @@ def _validate_gaps(part: dict[str, Any], checks: list[dict[str, Any]], context: 
         raise ValueError("coverage gaps and blocked checks disagree")
 
 
-def validate_part(part: dict[str, Any], *, context: ReviewContext) -> None:
+def validate_part(part: dict[str, Any], *, context: ReviewContext,
+                  allow_layout_gaps: bool = False) -> None:
     """Reject missing, contradictory, or unsupported structured conclusions."""
     checks = _part_checks(part)
     if part['contract_version'] != context.report_contract:
@@ -160,12 +161,13 @@ def validate_part(part: dict[str, Any], *, context: ReviewContext) -> None:
         for check in part['checks']:
             if check['id'] == 'cce':
                 validate_operator_coverage(check, source_text, context.operator_precheck)
-    validate_boundaries(part, source_text)
+    validate_boundaries(part, source_text, allow_layout_gaps=allow_layout_gaps)
     if part.get("result") != _result(checks):
         raise ValueError("overall result contradicts checklist")
 
 
-def merge_evaluations(parts: list[dict[str, Any]], *, context: ReviewContext) -> dict[str, Any]:
+def merge_evaluations(parts: list[dict[str, Any]], *, context: ReviewContext,
+                      allow_layout_gaps: bool = False) -> dict[str, Any]:
     """Return one report evaluation, retaining each part and every blocker.
 
     The caller must compare bindings to actual current bytes before and after
@@ -175,7 +177,7 @@ def merge_evaluations(parts: list[dict[str, Any]], *, context: ReviewContext) ->
     if len(parts) != len(groups):
         raise ValueError("one result from every evaluator is required")
     for part in parts:
-        validate_part(part, context=context)
+        validate_part(part, context=context, allow_layout_gaps=allow_layout_gaps)
     if {part["evaluator"] for part in parts} != set(groups):
         raise ValueError("missing or repeated evaluator")
     first = parts[0]
@@ -198,7 +200,8 @@ def merge_evaluations(parts: list[dict[str, Any]], *, context: ReviewContext) ->
     return deepcopy(result)
 
 
-def summarize_evaluations(evaluations: list[dict[str, Any]], *, context: ReviewContext) -> dict[str, Any]:
+def summarize_evaluations(evaluations: list[dict[str, Any]], *, context: ReviewContext,
+                          allow_layout_gaps: bool = False) -> dict[str, Any]:
     """Summarize validated records, not truth; reviewers must confirm findings.
 
     A blocked check can contain known defects. Count them separately from gaps
@@ -219,7 +222,8 @@ def summarize_evaluations(evaluations: list[dict[str, Any]], *, context: ReviewC
     for evaluation in evaluations:
         if not isinstance(evaluation, dict) or not isinstance(evaluation.get("parts"), list):
             raise ValueError("summary requires merged evaluation records")
-        merged = merge_evaluations(evaluation["parts"], context=context)
+        merged = merge_evaluations(evaluation["parts"], context=context,
+                                   allow_layout_gaps=allow_layout_gaps)
         if any(evaluation.get(key) != value for key, value in merged.items()):
             raise ValueError("merged evaluation contradicts its raw parts")
         path = merged["source"]["path"]

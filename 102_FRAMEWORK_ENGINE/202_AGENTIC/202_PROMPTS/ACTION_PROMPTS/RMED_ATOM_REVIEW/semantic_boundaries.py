@@ -29,12 +29,14 @@ def unavailable_sections(source: str) -> dict[str, list[str]]:
             if any(headings[name] != 1 for name in names)}
 
 
-def validate_boundaries(part: dict[str, Any], source: str) -> None:
+def validate_boundaries(part: dict[str, Any], source: str, *, allow_layout_gaps: bool = False) -> None:
     """No semantic success/failure without its unambiguous local input slots."""
     if part['evaluator'] != 'coherence':
         return
     if part.get('contract_version') == 6 and part.get('review_profile') == 'atom_local':
-        if any(gap.get('kind') == 'layout_dependency' for gap in part['coverage_gaps']):
+        layout_gaps = [gap for gap in part['coverage_gaps']
+                       if isinstance(gap, dict) and gap.get('kind') == 'layout_dependency']
+        if layout_gaps and not allow_layout_gaps:
             raise ValueError('layout alone cannot block local content review; describe the actual ambiguity or missing evidence')
         return
     missing = unavailable_sections(source)

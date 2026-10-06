@@ -8,6 +8,10 @@ from test_split_evaluation import context, contract, part, source, RULE_TEXT, SO
 from context_builder import prepare_context, lookup, prose, rebuild_baseline
 
 
+TMPDIR = Path(__file__).resolve().parents[6] / '.caprmedio_tmp/epic-resume-prompts'
+TMPDIR.mkdir(parents=True, exist_ok=True)
+
+
 class ContextPreparation(unittest.TestCase):
     def test_manifest_baseline_uses_bound_text_not_previous_convenience_copy(self):
         canonical = source('rule.md', 'MOCK-R-002', RULE_TEXT)
@@ -69,7 +73,7 @@ class ContextPreparation(unittest.TestCase):
         self.assertEqual(records[0]['admission'], 'retrieval_candidate_not_definition_proof')
 
     def test_missing_and_available_resources_are_distinct(self):
-        with tempfile.TemporaryDirectory(dir=Path.cwd(), ignore_cleanup_errors=True) as folder:
+        with tempfile.TemporaryDirectory(dir=TMPDIR, ignore_cleanup_errors=True) as folder:
             root = Path(folder)
             (root / 'structure.toml').write_text('[[scope_units]]\nscope_unit_name="PROJECT"\n')
             p = {'confidence_threshold': .99, 'sources': [source('a.md', 'A', RULE_TEXT)]}
@@ -80,7 +84,7 @@ class ContextPreparation(unittest.TestCase):
             self.assertEqual(out['resources']['project_structure']['data']['scope_units'][0]['scope_unit_name'], 'PROJECT')
 
     def test_rejects_projection_as_structure(self):
-        with tempfile.TemporaryDirectory(dir=Path.cwd(), ignore_cleanup_errors=True) as folder:
+        with tempfile.TemporaryDirectory(dir=TMPDIR, ignore_cleanup_errors=True) as folder:
             root = Path(folder)
             (root / 'old.toml').write_text('[projection]\ngenerator="old"\n')
             out = prepare_context({'confidence_threshold': .99, 'sources': [source('a.md', 'A', RULE_TEXT)]},
@@ -94,7 +98,7 @@ class ContextPreparation(unittest.TestCase):
         self.assertEqual(packet['preflight']['principles']['state'], 'missing')
 
     def test_no_secret_or_escape_reads(self):
-        with tempfile.TemporaryDirectory(dir=Path.cwd(), ignore_cleanup_errors=True) as folder:
+        with tempfile.TemporaryDirectory(dir=TMPDIR, ignore_cleanup_errors=True) as folder:
             packet = {'confidence_threshold': .99, 'sources': [source('a.md', 'A', RULE_TEXT)]}
             for path in ('../secret.toml', '.env', '.env.local', '/tmp/other.toml'):
                 with self.subTest(path=path), self.assertRaises(ValueError):
