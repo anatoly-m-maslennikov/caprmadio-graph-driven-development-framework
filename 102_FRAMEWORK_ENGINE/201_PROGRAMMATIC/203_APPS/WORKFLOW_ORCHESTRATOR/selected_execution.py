@@ -522,6 +522,43 @@ class SelectedExecution:
         request["project_root"] = executor_root.as_posix()
         return request
 
+    @staticmethod
+    def _graph_parameters_with_actual_recording(
+        parameters: object,
+        session: Any,
+        *,
+        workflow_run_id: str,
+        step_run_id: str,
+        action_run_id: str,
+    ) -> object:
+        """Replace caller recording claims with this Action's real start receipt.
+
+        Graph publication occurs after the shared session has recorded the
+        actual Action start and before it can append the terminal fact.  The
+        injected object is intentionally execution-local rather than part of
+        the sealed caller parameter JSON, so an arbitrary ``receipt_refs``
+        array cannot satisfy the graph Tool's recording gate.
+        """
+
+        if not isinstance(parameters, Mapping):
+            return parameters
+        receipts = getattr(session, "receipts", None)
+        if not isinstance(receipts, list) or not receipts or not isinstance(receipts[-1], Mapping):
+            return parameters
+        try:
+            import generate_entity_graph
+        except ImportError:
+            return parameters
+        try:
+            recording = generate_entity_graph.actual_run_recording_context(
+                workflow_run_id, step_run_id, action_run_id, receipts[-1]
+            )
+        except generate_entity_graph.EntityGraphError:
+            # Leave the caller shape intact.  The graph Tool then reports its
+            # stable recording-context blocker without an effect.
+            return parameters
+        return {**parameters, "run_recording_context": recording}
+
     def run_directory(self, run_id: str) -> Path:
         if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
             raise SelectedExecutionError("invalid selected Run ID")
@@ -1101,6 +1138,14 @@ class SelectedExecution:
                 parameters = request["execution"].get("parameters")
                 if graph["workflow"]["atom_id"] == "CA-O-016":
                     parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
+                if graph.get("route") in {"build_entities_graph", "build_terms_graph"}:
+                    parameters = self._graph_parameters_with_actual_recording(
+                        parameters,
+                        session,
+                        workflow_run_id=workflow_run_id,
+                        step_run_id=step_run_id,
+                        action_run_id=action_run_id,
+                    )
                 context = {
                     "project_root": self.root,
                     "workflow_run_id": workflow_run_id,
@@ -1229,6 +1274,18 @@ class SelectedExecution:
                     # until the sole shared recorder has its exact terminal fact.
                     final_result = "recording_pending"
                     output["terminal_outcome"] = "interrupted_pending"
+                elif (graph.get("route") in {"build_entities_graph", "build_terms_graph"}
+                        and (not isinstance(terminal_receipt, Mapping)
+                             or terminal_receipt.get("disposition") != "terminal")):
+                    # The projection has already been materialized, and must
+                    # remain available for Journal recovery.  It is not,
+                    # however, a completed selected Action until the shared
+                    # recorder has durably appended its terminal fact.  Do
+                    # not replay the generator to manufacture that evidence.
+                    final_result = "recording_pending"
+                    output["terminal_outcome"] = "interrupted_pending"
+                    progress["result"] = final_result
+                    self._write(progress_path, progress)
                 if (graph["workflow"]["atom_id"] == "CA-O-015"
                         and isinstance(terminal_receipt, Mapping)
                         and terminal_receipt.get("disposition") == "terminal"

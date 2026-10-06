@@ -321,6 +321,23 @@ class GoldenProject:
         (source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text(
             '[extensions.example]\nenabled = true\nrevision = "v2"\n', encoding="utf-8"
         )
+        # W04 resolves its Requirement status domain from the Project's
+        # declared METHODOLOGY_SOURCES authority, not a caller-supplied model.
+        # Copy the current carrier byte-for-byte into the disposable Project
+        # so preview/freeze/currentness checks exercise the same boundary.
+        status_model_relative = Path(
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/"
+            "CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md"
+        )
+        status_model_source = self.source_root / status_model_relative
+        status_model_target = self.root / status_model_relative
+        if not status_model_source.is_file():
+            raise GoldenCorpusError("current Requirement status-model source is unavailable")
+        status_model_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(status_model_source, status_model_target)
+        if status_model_target.read_bytes() != status_model_source.read_bytes():
+            raise GoldenCorpusError("fixture copy changed current Requirement status-model source")
         structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
         with structure.open("a", encoding="utf-8") as handle:
             handle.write(
@@ -558,7 +575,11 @@ class GoldenProject:
             return {"predecessor": target, "successors": [self._carrier("CA-R-103", "replacement", "Replacement summary")],
                     "status_model": self._status_model()}
         if route == "change_atom_status":
-            return {"target": target, "status": "Reviewed", "status_model": self._status_model()}
+            # W04's real Action resolves the current source-owned Requirement
+            # model itself.  CA-R-1309 admits Draft, Active, and Archived;
+            # fixture-only Reviewed/status_model claims must not bypass that
+            # admission boundary.
+            return {"target": target, "status": "Archived"}
         structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
         base: dict[str, Any] = {
             "expected_toml_revision": file_digest(structure), "reference_frontier": [],

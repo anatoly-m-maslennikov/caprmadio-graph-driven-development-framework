@@ -13,6 +13,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from typing import Any, Mapping
 
 
@@ -294,6 +295,53 @@ class SelectedNativeRoutesTest(unittest.TestCase):
                     self._assert_route_effect(project, runner, request_id, before, rows)
                 finally:
                     lease.cleanup()
+
+    def test_graph_effect_is_retained_when_its_action_terminal_recording_is_pending(self) -> None:
+        """W11 shares the W11/W12 recorder boundary without replaying an effect."""
+        lease, project = self._fixture("W11", "build_entities_graph")
+        try:
+            tools_root = APP.parents[1] / "201_TOOLS"
+            if str(tools_root) not in sys.path:
+                sys.path.insert(0, str(tools_root))
+            import work_journal
+
+            request_id = "selected-native-w11-terminal-pending"
+            adapter = SelectedRouteAdapter(project.root)
+            preview = adapter.invoke("build_entities_graph", project.request(request_id=request_id))
+            execute = project.request(
+                request_id=request_id,
+                mode="execute",
+                receipt=preview["proposal_receipt"],
+                receipt_digest=preview["proposal_receipt_digest"],
+            )
+            runner = SelectedExecution(project.root)
+            frozen = runner.freeze({
+                "operation": "enqueue_selected", "run_id": request_id, "execution": execute,
+            })
+            append = work_journal.append_sealed_events
+
+            def fail_only_action_terminal(*args: object, **kwargs: object) -> object:
+                events = args[1]
+                assert isinstance(events, list) and len(events) == 1
+                event = events[0]
+                if event["run"]["kind"] == "action" and event["event"] != "started":
+                    raise OSError("fixture Action terminal Journal failure")
+                return append(*args, **kwargs)
+
+            with patch.object(work_journal, "append_sealed_events", side_effect=fail_only_action_terminal):
+                pending = runner.dispatch(frozen)
+
+            self.assertEqual("recording_pending", pending.get("disposition"), pending)
+            graph = self._read_json(runner.run_directory(request_id) / "graph_result.json", "selected graph result")
+            self.assertEqual("interrupted_pending", graph.get("outcome"), graph)
+            row = graph["step_results"][0]
+            self.assertEqual("recording_pending", row.get("result"), row)
+            self.assertTrue(row.get("effect_refs"), row)
+            for effect in row["effect_refs"]:
+                self._source_bytes(project.root, effect, "retained graph effect")
+            self.assertEqual(pending, runner.dispatch(frozen), "pending effect must not be replayed")
+        finally:
+            lease.cleanup()
 
 
 if __name__ == "__main__":

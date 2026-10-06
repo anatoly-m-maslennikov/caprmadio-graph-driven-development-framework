@@ -34,6 +34,7 @@ PERSISTED_CONTROL_NON_SOURCE_DIRECTORY_NAMES = {
 CANONICAL_SUBJECT_KINDS = {"governs": "GOVERNS", "depends_on": "DEPENDS_ON"}
 LEGACY_SUBJECT_KINDS = {"declared": "GOVERNS", "prerequisite": "DEPENDS_ON"}
 TEMPORAL_FORMS = {"continuant": "CONTINUANT", "occurrent": "OCCURRENT"}
+_SECRET_SHAPED = re.compile(r"(?:secret|password|token|credential|api[_-]?key)", re.I)
 
 
 class EntityGraphError(RuntimeError):
@@ -50,6 +51,64 @@ class EntityGraphError(RuntimeError):
         if self.details:
             record["details"] = self.details
         return record
+
+
+@dataclass(frozen=True)
+class ActualRunRecordingContext:
+    """An execution-local proof that this Action has a recorded start.
+
+    This is intentionally not a JSON request shape.  The selected executor
+    creates it only after the shared Run session has durably recorded the
+    actual Action start; caller-supplied receipt strings cannot impersonate it.
+    Terminal evidence is recorded after the projection effect by the same
+    shared session.
+    """
+
+    workflow_run_id: str
+    step_run_id: str
+    action_run_id: str
+    start_event_receipt: Mapping[str, object]
+
+
+def actual_run_recording_context(
+    workflow_run_id: str,
+    step_run_id: str,
+    action_run_id: str,
+    start_event_receipt: Mapping[str, object],
+) -> ActualRunRecordingContext:
+    """Build the executor-only graph recording capability.
+
+    Kept as a small constructor so the executor and focused tests share the
+    exact structural validation without accepting a caller JSON substitute.
+    """
+
+    if not all(isinstance(value, str) and value for value in (workflow_run_id, step_run_id, action_run_id)):
+        raise EntityGraphError("recording-context-invalid", "Actual Run recording context is incomplete")
+    if not isinstance(start_event_receipt, Mapping):
+        raise EntityGraphError("recording-context-invalid", "Actual Action start receipt is unavailable")
+    required = {
+        "event_id", "action_id", "event_digest", "carrier", "line",
+        "previous_carrier_digest", "appended_carrier_digest",
+    }
+    if set(start_event_receipt) != required:
+        raise EntityGraphError("recording-context-invalid", "Actual Action start receipt is invalid")
+    if (
+        not isinstance(start_event_receipt["event_id"], str)
+        or not isinstance(start_event_receipt["action_id"], str)
+        or not isinstance(start_event_receipt["carrier"], str)
+        or type(start_event_receipt["line"]) is not int
+        or start_event_receipt["line"] < 1
+        or any(not isinstance(start_event_receipt[key], str) for key in (
+            "event_digest", "previous_carrier_digest", "appended_carrier_digest",
+        ))
+    ):
+        raise EntityGraphError("recording-context-invalid", "Actual Action start receipt is invalid")
+    return ActualRunRecordingContext(
+        workflow_run_id=workflow_run_id,
+        step_run_id=step_run_id,
+        action_run_id=action_run_id,
+        start_event_receipt=dict(start_event_receipt),
+    )
 
 
 @dataclass(frozen=True)
@@ -1202,6 +1261,15 @@ def _frontmatter_properties(carrier: AtomCarrier) -> dict[str, object]:
         if key in {"atom_id", "subjects", "relations"}:
             continue
         value = scalar_value(raw)
+        # Properties are copied into the derived Entities Graph.  Reject a
+        # secret-shaped name or scalar before building any serializable graph
+        # shape, and never include the raw name/value in a diagnostic.
+        if _SECRET_SHAPED.search(key) or _SECRET_SHAPED.search(value):
+            raise EntityGraphError(
+                "secret-shaped-property",
+                "Selected source contains a secret-shaped Property that cannot be projected.",
+                carrier_path=carrier.carrier_path,
+            )
         if value:
             properties[key] = value
     properties["atom_revision"] = carrier.version
@@ -1461,17 +1529,17 @@ def build_graph(repository: Path, request: Mapping[str, object]) -> dict[str, ob
         selection = _mapping(request["selection"], "selection")
         configuration = _mapping(request["representation_configuration"], "representation_configuration")
         permission = _mapping(request["capability_permission_evidence"], "capability_permission_evidence")
-        recording = _mapping(request["run_recording_context"], "run_recording_context")
+        recording = request["run_recording_context"]
         display_selection = request.get("display_selection")
         if display_selection is not None:
             display_selection = dict(_mapping(display_selection, "display_selection"))
         if set(permission) != {"authorized"} or not isinstance(permission["authorized"], bool):
             raise EntityGraphError("permission-evidence-invalid", "Permission evidence must contain only authorized:boolean")
-        if set(recording) != {"state", "receipt_refs"} or recording["state"] not in {"confirmed", "pending", "blocked"}:
-            raise EntityGraphError("recording-context-invalid", "Recording context must bind state and receipt_refs")
-        receipt_refs = recording["receipt_refs"]
-        if not isinstance(receipt_refs, list) or any(not isinstance(item, str) or not item for item in receipt_refs):
-            raise EntityGraphError("recording-context-invalid", "recording receipt_refs must be a string array")
+        if not isinstance(recording, ActualRunRecordingContext):
+            raise EntityGraphError(
+                "recording-context-untrusted",
+                "Graph publication requires the actual selected Action start recording context.",
+            )
         folder, actual_frontier, frontier_diagnostics = _validate_frontier(repository, frontier)
         if frontier_diagnostics:
             result = _strict_error_result(graph_kind, EntityGraphError("source-frontier-stale", "Admitted source frontier is stale"))
@@ -1482,6 +1550,11 @@ def build_graph(repository: Path, request: Mapping[str, object]) -> dict[str, ob
             return result
         carriers, discovery_diagnostics = discover_atoms(repository, folder)
         selected_carriers, scope_unit_names = _selected_carriers(carriers, selection)
+        # Validate every serializable source Property before constructing either
+        # graph representation.  Terms Graph does not currently expose these
+        # values, but a shared fail-closed boundary prevents future drift.
+        for carrier in selected_carriers:
+            _frontmatter_properties(carrier)
         relations: list[SubjectRelation] = []
         diagnostics: list[dict[str, object]] = list(discovery_diagnostics)
         for carrier in selected_carriers:
@@ -1648,7 +1721,10 @@ def build_graph(repository: Path, request: Mapping[str, object]) -> dict[str, ob
         final_frontier = source_frontier_for(repository, folder)
         current = canonical_json(final_frontier) == canonical_json(frontier)
         authorized = bool(permission["authorized"])
-        recording_confirmed = recording["state"] == "confirmed" and bool(receipt_refs)
+        # The shared session has already durably recorded this Action's start.
+        # Its terminal fact necessarily follows effect publication and remains
+        # the executor's responsibility, avoiding a circular pre-effect gate.
+        recording_confirmed = True
         destination: Path
         persistence_valid = True
         if "output_destination" in request:
@@ -1689,7 +1765,7 @@ def build_graph(repository: Path, request: Mapping[str, object]) -> dict[str, ob
             "diagnostics": diagnostics,
             "non_authoritative": True,
             "output_effects": {"state": "none", "paths": []},
-            "run_receipt_refs": list(receipt_refs),
+            "run_receipt_refs": [str(recording.start_event_receipt["event_id"])],
         }
         if outcome != "built":
             return result
