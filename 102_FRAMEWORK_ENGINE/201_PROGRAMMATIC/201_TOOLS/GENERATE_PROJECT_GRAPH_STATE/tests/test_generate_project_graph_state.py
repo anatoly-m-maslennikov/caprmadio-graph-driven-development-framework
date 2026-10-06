@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -45,7 +44,6 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         self.root = Path(self.temporary.name) / "repository"
         self.control = self.root / ".caprmedio_caprmedio"
         self.root.mkdir(parents=True)
-        subprocess.run(["git", "-C", str(self.root), "init", "-q"], check=True)
         self.control.mkdir()
         # Project-graph output writes must resolve this fixture itself, rather
         # than a checkout enclosing the test temporary directory.
@@ -366,9 +364,17 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
             self.fixture_scope_units()
         )
         source_atoms = generate_project_graph_state.active_source_atoms()
-        installation = generate_project_graph_state.installation_status(
-            generate_project_graph_state.ROOT
-        )
+        # The disposable Unit workspace is deliberately source-sealed and has
+        # no Git administration data.  The installed-release reader remains
+        # Git-rooted in production, so inject only its already-known Project
+        # boundary here rather than materialising a fake checkout.
+        with mock.patch(
+            "framework_installation.resolve_repository",
+            return_value=generate_project_graph_state.ROOT,
+        ):
+            installation = generate_project_graph_state.installation_status(
+                generate_project_graph_state.ROOT
+            )
         installed = (
             generate_project_graph_state.ROOT
             / str(installation["package_root"])

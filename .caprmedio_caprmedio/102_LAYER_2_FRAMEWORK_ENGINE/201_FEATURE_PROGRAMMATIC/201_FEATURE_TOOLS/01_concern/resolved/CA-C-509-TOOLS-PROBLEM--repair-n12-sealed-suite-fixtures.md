@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 18:24:00 +0000"
 subjects:
   governs: "Repair N12 sealed suite fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal]
@@ -37,5 +37,4 @@ repair source-sealed graph-state and suite fixtures without adding Git metadata 
 
 ## Result
 
-root-cause investigation and bounded repair are in progress. retain the full frozen report and historical Events.
-
+the sealed graph fixture passes 14 tests without synthetic Git metadata; the specific sealed-workspace mutation test passes in 58.093 seconds and asserts that no .git exists. independent review accepts both test-only changes. no whole-suite or actual release pass is inferred. retain the frozen N12 report and historical Events.

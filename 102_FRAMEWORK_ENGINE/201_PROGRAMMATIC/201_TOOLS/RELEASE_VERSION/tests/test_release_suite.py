@@ -823,6 +823,7 @@ class ReleaseSuiteTests(unittest.TestCase):
                     self.assertFalse(result.passed)
                     self.assertIsNotNone(result.receipt_sha256)
                     workspace = fixture.root / result.evidence_root / "workspace"
+                    self.assertFalse((workspace / ".git").exists())
                     self.assertFalse((workspace / ".caprmedio_runtime/framework/current.toml").exists())
                     self.assertFalse((workspace / ".caprmedio_runtime/framework/releases/N").exists())
                     self.assertFalse((workspace / ".agents/skills/ca").exists())
