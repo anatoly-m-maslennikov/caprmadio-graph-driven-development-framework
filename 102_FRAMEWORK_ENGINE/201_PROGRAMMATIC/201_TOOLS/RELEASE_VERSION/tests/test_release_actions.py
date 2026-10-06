@@ -23,7 +23,7 @@ for path in (RELEASE_ROOT, TEST_ROOT):
 
 from release_actions import (
     PHASES, AdmittedImageExecutor, SelectedReleaseActionContext,
-    ReleaseActionRun, _invoke, _retirement_recording_handoff, begin_release_action_run, execute_release_action,
+    ReleaseActionRun, ReleasePhaseResult, _invoke, _retirement_recording_handoff, begin_release_action_run, execute_release_action,
 )
 from release_compilation import build_preflight_validated_candidate
 from release_contract import ReleaseContractError
@@ -33,6 +33,9 @@ from release_image import (
 )
 from release_packaging import stage_framework_package
 from release_full_gate import FullGateEvidence
+from release_e2e_gate import CandidateE2EGateEvidence
+from release_promotion import PromotionEvidence
+from release_handoff import FRAMEWORK_SETTINGS_RELATIVE
 import test_release_image as image_test
 import test_release_suite as suite_test
 
@@ -138,7 +141,7 @@ class ReleaseActionsTests(unittest.TestCase):
         step, action, _phase = PHASES[index]
         value = SelectedReleaseActionContext(str(self.root), self.run_id, f"fixture-step-{index}", f"fixture-action-{index}",
                                             self.run_id, f"fixture-step-{index}", step, action,
-                                            self.run.frozen_parameters_sha256, workflow_version=5)
+                                            self.run.frozen_parameters_sha256, workflow_version=6)
         return replace(value, **changes)
 
     def execute(self, index, request=None, context=None):
@@ -241,7 +244,7 @@ class ReleaseActionsTests(unittest.TestCase):
             "docker-subprocess", "f" * 64,
         )
         self.assertEqual(_retirement_recording_handoff(retired), {
-            "on_recorded_result": "complete exact unused N-image retirement",
+            "on_recorded_result": "complete exact prior N-image disposition",
             "candidate_snapshot_manifest_sha256": self.candidate.manifest.sha256,
             "prior_image_digest": "sha256:" + "c" * 64,
             "retirement_receipt_ref": "tmp/release-retirement/receipt.json",
@@ -391,7 +394,7 @@ class RetirementRecordingHandoffTests(unittest.TestCase):
 
     def test_retirement_recording_handoff_is_closed_and_bound_to_retired_evidence(self):
         self.assertEqual(_retirement_recording_handoff(self.evidence("retired")), {
-            "on_recorded_result": "complete exact unused N-image retirement",
+            "on_recorded_result": "complete exact prior N-image disposition",
             "candidate_snapshot_manifest_sha256": self.CANDIDATE,
             "prior_image_digest": "sha256:" + "c" * 64,
             "retirement_receipt_ref": "tmp/release-retirement/receipt.json",
@@ -410,7 +413,7 @@ class CheckpointCallbackTests(unittest.TestCase):
         )
         self.context = SelectedReleaseActionContext(
             "/fixture", "workflow", "step", "action", "workflow", "step",
-            "CA-O-170", "CA-O-165", "f" * 64, workflow_version=5,
+            "CA-O-170", "CA-O-165", "f" * 64, workflow_version=6,
         )
 
     def execute(self, run, invoke):
@@ -552,6 +555,202 @@ class FullGateDispatchTests(unittest.TestCase):
                 _invoke("promote", self.run)
         verify.assert_called_once()
         promote.assert_not_called()
+
+    def retirement_frontier(self):
+        """Synthetic completed prefix; no Tool, Docker, Journal or file effect."""
+        candidate = self.run.candidate
+        self.run.full_gate = self.full_gate
+        self.run.e2e = CandidateE2EGateEvidence(
+            candidate.manifest.sha256, self.full_gate.candidate_image_digest,
+            self.full_gate.phase_map_sha256, "0" * 64, "passed", "synthetic E2E dispatch receipt",
+            (), "tmp/e2e", self.full_gate.e2e_receipt_sha256,
+            None, None, None, None, "host-subprocess",
+        )
+        self.run.promotion = PromotionEvidence(
+            candidate.manifest.sha256, "promoted", "synthetic promotion dispatch receipt",
+            self.full_gate.candidate_image_digest, "sha256:" + "c" * 64,
+            candidate.authority.executing_release, "tmp/package", "tmp/package/FRAMEWORK_ENGINE",
+            "tmp/package/METHODOLOGY", ".agents/skills/ca", "a" * 64, "tmp/promotion",
+            "tmp/prior-selector.toml", "tmp/prior-skill", "e" * 64,
+        )
+        self.docker = image_test.FakeRetirementDocker()
+        self.run.image_executor = AdmittedImageExecutor(
+            self.run.project_root, self.run.workflow_run_id, self.docker,
+        )
+        for index, (step, action, phase) in enumerate(PHASES):
+            context = SelectedReleaseActionContext(
+                self.run.project_root, self.run.workflow_run_id, f"step-{index}", f"action-{index}",
+                self.run.workflow_run_id, f"step-{index}", step, action,
+                self.run.frozen_parameters_sha256, workflow_version=6,
+            )
+            if phase == "retire":
+                self.run.next_phase = index
+                return context
+            self.run.contexts[index] = context
+            self.run.results[index] = ReleasePhaseResult(
+                self.run.workflow_run_id, context.step_run_id, context.action_run_id,
+                step, action, phase, "completed", "synthetic prior dispatch result",
+                candidate.manifest.sha256, (), (), tuple(self.run.request.run_receipt_refs),
+            )
+        self.fail("retirement phase is absent")
+
+    def retirement_observation(self, outcome="retained", **changes):
+        retained = outcome == "retained"
+        return replace(ImageRetirementEvidence(
+            self.run.candidate.manifest.sha256, outcome, "synthetic exact prior-image disposition",
+            self.run.promotion.candidate_image_digest, self.run.promotion.prior_image_digest,
+            self.run.promotion.receipt_sha256, (), ("tmp/prior-selector.toml",),
+            (f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.condition",) if retained else (),
+            "retain_prior" if retained else "until_verified_promotion",
+            self.run.candidate.manifest.framework_settings_digest,
+            None if retained else "tmp/removal-intent.json", None if retained else 0,
+            None if retained else True, "tmp/retirement", "0" * 64, "docker-subprocess", "f" * 64,
+        ), **changes)
+
+    def test_retained_dispatch_completes_with_exact_run_gates_and_no_removal_handoff(self):
+        context = self.retirement_frontier()
+        observation = self.retirement_observation()
+        with patch("release_full_gate.verify_bound_full_gate_evidence") as verify, \
+             patch("release_actions.retire_prior_image", autospec=True, return_value=observation) as retire:
+            result = execute_release_action(self.run.request, context=context, run=self.run)
+        self.assertEqual(result.outcome, "completed", result.reason)
+        self.assertEqual(result.effect_outcome, "retained")
+        self.assertIs(result.output, observation)
+        self.assertIsNone(result.shared_action_recording)
+        self.assertEqual(result.effect_evidence_refs, ("tmp/retirement/receipt.json",))
+        self.assertEqual(self.run.next_phase, len(PHASES))
+        self.assertFalse(self.run.stopped)
+        verify.assert_called_once_with(self.run.candidate, self.run.compilation, self.run.suite,
+            self.run.build, self.run.verification, self.run.e2e, self.run.full_gate)
+        retire.assert_called_once_with(self.run.candidate, self.run.compilation, self.run.suite,
+            self.run.build, self.run.verification, self.run.promotion,
+            e2e=self.run.e2e, full_gate=self.run.full_gate, executor=self.docker)
+        self.assertEqual(self.docker.calls, [])
+
+    def test_actual_retired_dispatch_stays_pending_for_shared_recording(self):
+        context = self.retirement_frontier()
+        observation = self.retirement_observation("retired")
+        with patch("release_full_gate.verify_bound_full_gate_evidence"), \
+             patch("release_actions.retire_prior_image", autospec=True, return_value=observation):
+            result = execute_release_action(self.run.request, context=context, run=self.run)
+        self.assertEqual(result.outcome, "pending", result.reason)
+        self.assertEqual(result.effect_outcome, "retired")
+        self.assertEqual(result.shared_action_recording, _retirement_recording_handoff(observation))
+        self.assertEqual(self.run.next_phase, len(PHASES) - 1)
+        self.assertTrue(self.run.stopped)
+        self.assertEqual(self.docker.calls, [])
+
+    def test_missing_failed_or_cross_candidate_gates_block_retirement_dispatch(self):
+        for field, kind in (("e2e", "missing"), ("e2e", "failed"), ("e2e", "cross_candidate"),
+                            ("full_gate", "missing"), ("full_gate", "failed"), ("full_gate", "cross_candidate"),
+                            ("full_gate", "untyped")):
+            with self.subTest(field=field, kind=kind):
+                self.setUp()
+                context = self.retirement_frontier()
+                evidence = getattr(self.run, field)
+                if kind == "missing":
+                    evidence = None
+                elif kind == "failed":
+                    evidence = replace(evidence, outcome="failed")
+                elif kind == "cross_candidate":
+                    evidence = replace(evidence, candidate_snapshot_manifest_sha256="f" * 64)
+                else:
+                    evidence = SimpleNamespace(candidate_snapshot_manifest_sha256=self.run.candidate.manifest.sha256,
+                                               passed=True)
+                setattr(self.run, field, evidence)
+                with patch("release_full_gate.verify_bound_full_gate_evidence"), \
+                     patch("release_actions.retire_prior_image", autospec=True) as retire:
+                    result = execute_release_action(self.run.request, context=context, run=self.run)
+                self.assertEqual(result.outcome, "blocked", result.reason)
+                retire.assert_not_called()
+                self.assertEqual(self.docker.calls, [])
+
+    def test_stale_aggregate_blocks_retirement_before_producer_call(self):
+        context = self.retirement_frontier()
+        with patch("release_full_gate.verify_bound_full_gate_evidence",
+                   side_effect=ReleaseContractError("release-full-gate-evidence-untrusted", "receipt changed")), \
+             patch("release_actions.retire_prior_image", autospec=True) as retire:
+            result = execute_release_action(self.run.request, context=context, run=self.run)
+        self.assertEqual(result.outcome, "blocked", result.reason)
+        retire.assert_not_called()
+        self.assertEqual(self.docker.calls, [])
+
+    def test_unrecorded_or_test_double_retention_cannot_complete_dispatch(self):
+        for changes in ({"receipt_sha256": None}, {"receipt_sha256": "not-a-sha256"},
+                        {"execution_kind": "test-double"}):
+            with self.subTest(changes=changes):
+                self.setUp()
+                context = self.retirement_frontier()
+                observation = self.retirement_observation(**changes)
+                with patch("release_full_gate.verify_bound_full_gate_evidence"), \
+                     patch("release_actions.retire_prior_image", autospec=True, return_value=observation):
+                    result = execute_release_action(self.run.request, context=context, run=self.run)
+                self.assertEqual(result.outcome, "pending", result.reason)
+                self.assertIsNone(result.shared_action_recording)
+                self.assertTrue(self.run.stopped)
+                self.assertEqual(self.docker.calls, [])
+
+    def test_only_sealed_policy_retention_without_container_use_can_complete_dispatch(self):
+        policy = f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention"
+        cases = (
+            {"retaining_container_refs": ("c" * 64,)},
+            {"retaining_container_refs": None},
+            {"retention_condition": "until_verified_promotion"},
+            {"retention_condition": None},
+            {"required_rollback_refs": ()},
+            {"required_rollback_refs": None},
+            {"required_rollback_refs": (policy + ".required_image_digests[0]",)},
+            {"required_rollback_refs": ("caller-policy:retain_prior",)},
+            {"framework_settings_digest": "f" * 64},
+            {"removal_intent_ref": "tmp/removal-intent.json"},
+            {"removal_exit_code": 0},
+            {"prior_image_absent": True},
+        )
+        for changes in cases:
+            with self.subTest(changes=changes):
+                self.setUp()
+                context = self.retirement_frontier()
+                observation = self.retirement_observation(**changes)
+                with patch("release_full_gate.verify_bound_full_gate_evidence"), \
+                     patch("release_actions.retire_prior_image", autospec=True, return_value=observation):
+                    result = execute_release_action(self.run.request, context=context, run=self.run)
+                self.assertEqual(result.outcome, "pending", result.reason)
+                self.assertIsNone(result.shared_action_recording)
+                self.assertEqual(self.run.next_phase, len(PHASES) - 1)
+                self.assertTrue(self.run.stopped)
+                self.assertEqual(self.docker.calls, [])
+
+    def test_unavailable_or_unverified_disposition_cannot_complete_dispatch(self):
+        for outcome in ("pending", "failed", "stale", "effect_uncertain", "recording_uncertain"):
+            with self.subTest(outcome=outcome):
+                self.setUp()
+                context = self.retirement_frontier()
+                observation = replace(self.retirement_observation(), outcome=outcome,
+                                      reason="synthetic unavailable or unverified proof")
+                with patch("release_full_gate.verify_bound_full_gate_evidence"), \
+                     patch("release_actions.retire_prior_image", autospec=True, return_value=observation):
+                    result = execute_release_action(self.run.request, context=context, run=self.run)
+                self.assertEqual(result.outcome, "pending", result.reason)
+                self.assertIsNone(result.shared_action_recording)
+                self.assertTrue(self.run.stopped)
+                self.assertEqual(self.docker.calls, [])
+
+    def test_frozen_v5_context_is_not_rebound_or_executed_by_current_v6_dispatch(self):
+        context = replace(self.retirement_frontier(), workflow_version=5)
+        before_contexts = dict(self.run.contexts)
+        before_results = dict(self.run.results)
+        with patch("release_actions._checkpoint") as checkpoint, \
+             patch("release_actions.retire_prior_image", autospec=True) as retire:
+            with self.assertRaises(ReleaseContractError) as caught:
+                execute_release_action(self.run.request, context=context, run=self.run)
+        self.assertEqual(caught.exception.code, "release-action-frozen-binding-mismatch")
+        self.assertEqual(context.workflow_version, 5)
+        self.assertEqual(self.run.contexts, before_contexts)
+        self.assertEqual(self.run.results, before_results)
+        self.assertFalse(self.run.stopped)
+        checkpoint.assert_not_called()
+        retire.assert_not_called()
+        self.assertEqual(self.docker.calls, [])
 
 
 if __name__ == "__main__":

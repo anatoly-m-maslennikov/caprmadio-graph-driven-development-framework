@@ -1,4 +1,4 @@
-"""Private O164@5 phase composition behind the shared Session recorder.
+"""Private O164@6 phase composition behind the shared Session recorder.
 
 Phases are selected only by private Step/Action identity. The adapter retains
 typed observations and requires the shared durable checkpoint callback before
@@ -24,7 +24,7 @@ from release_e2e_gate import (
     run_candidate_e2e_gate,
     verify_bound_candidate_e2e_evidence,
 )
-from release_handoff import SealedCandidateCompilation, SealedSourceCopy, _revalidate
+from release_handoff import FRAMEWORK_SETTINGS_RELATIVE, SealedCandidateCompilation, SealedSourceCopy, _revalidate
 from release_image import (
     DockerExecutor, ImageBuildEvidence, ImageVerificationEvidence, ImageRetirementEvidence,
     build_candidate_image, verify_candidate_image, retire_prior_image,
@@ -68,7 +68,7 @@ class SelectedReleaseActionContext:
     action_atom_id: str
     frozen_parameters_sha256: str
     workflow_atom_id: str = "CA-O-164"
-    workflow_version: int = 5
+    workflow_version: int = 6
 
 
 @dataclass(frozen=True)
@@ -181,7 +181,7 @@ def begin_release_action_run(request: ReleaseVersionRequest | Mapping[str, Any],
 def _selection(request, context, run):
     if not isinstance(run, ReleaseActionRun) or not isinstance(context, SelectedReleaseActionContext):
         raise ReleaseContractError("release-action-context-untrusted", "dispatch requires retained private Run and selected context")
-    if (context.workflow_atom_id != "CA-O-164" or type(context.workflow_version) is not int or context.workflow_version != 5
+    if (context.workflow_atom_id != "CA-O-164" or type(context.workflow_version) is not int or context.workflow_version != 6
             or context.workflow_run_id != run.workflow_run_id or context.parent_workflow_run_id != run.workflow_run_id
             or context.parent_step_run_id != context.step_run_id
             or context.project_root != run.project_root or str(Path(request.project_root).resolve(strict=True)) != run.project_root
@@ -194,7 +194,7 @@ def _selection(request, context, run):
             raise ReleaseContractError("release-action-context-invalid", "selected Run identities must be bounded")
     matches = [index for index, pair in enumerate(PHASES) if pair[:2] == (context.step_atom_id, context.action_atom_id)]
     if len(matches) != 1:
-        raise ReleaseContractError("release-action-phase-unselected", "Step/Action pair is outside O164@5")
+        raise ReleaseContractError("release-action-phase-unselected", "Step/Action pair is outside O164@6")
     index = matches[0]
     if index in run.contexts and run.contexts[index] != context:
         raise ReleaseContractError("release-action-identity-mismatch", "selected occurrence identity changed")
@@ -263,7 +263,7 @@ def _retirement_recording_handoff(retired: ImageRetirementEvidence) -> dict[str,
             "retired image evidence cannot be handed to shared Action recording",
         )
     return {
-        "on_recorded_result": "complete exact unused N-image retirement",
+        "on_recorded_result": "complete exact prior N-image disposition",
         "candidate_snapshot_manifest_sha256": retired.candidate_snapshot_manifest_sha256,
         "prior_image_digest": retired.prior_image_digest,
         "retirement_receipt_ref": f"{retired.evidence_root}/receipt.json",
@@ -441,15 +441,16 @@ def _invoke(phase, run):
         ), full_gate
     if run.full_gate is None or not getattr(run.full_gate, "passed", False):
         raise ReleaseContractError("release-action-prerequisite-missing", "passing aggregate full-gate evidence is unavailable")
-    if phase == "promote":
+    if phase in {"promote", "retire"}:
         from release_full_gate import FullGateEvidence, verify_bound_full_gate_evidence
 
         if not isinstance(run.full_gate, FullGateEvidence):
-            raise ReleaseContractError("release-action-result-untrusted", "promotion requires typed full-gate evidence")
+            raise ReleaseContractError("release-action-result-untrusted", "promotion and retirement require typed full-gate evidence")
         verify_bound_full_gate_evidence(
             candidate, run.compilation, run.suite, run.build, run.verification,
             run.e2e, run.full_gate,
         )
+    if phase == "promote":
         promoted = promote_bound_release(
             candidate,
             run.compilation,
@@ -468,7 +469,8 @@ def _invoke(phase, run):
         if run.promotion is None or run.promotion.outcome != "promoted" or not run.promotion.receipt_sha256:
             raise ReleaseContractError("release-action-prerequisite-missing", "recorded observed promotion is unavailable")
         retired = retire_prior_image(candidate, run.compilation, run.suite, run.build, run.verification,
-                                     run.promotion, executor=_executor(run))
+                                     run.promotion, e2e=run.e2e, full_gate=run.full_gate,
+                                     executor=_executor(run))
         if not isinstance(retired, ImageRetirementEvidence):
             raise ReleaseContractError("release-action-result-untrusted", "retirement observation is not typed")
         _bound(retired, candidate)
@@ -477,7 +479,22 @@ def _invoke(phase, run):
         recording = _retirement_recording_handoff(retired)
         if retired.outcome == "retired":
             reason = "exact prior image retired; shared durable Action recording is pending"
-        return ("pending", reason,
+        retained_complete = (
+            retired.outcome == "retained" and retired.execution_kind == "docker-subprocess"
+            and isinstance(retired.receipt_sha256, str) and SHA256.fullmatch(retired.receipt_sha256) is not None
+            and retired.retention_condition == "retain_prior"
+            and retired.framework_settings_digest == candidate.manifest.framework_settings_digest
+            and isinstance(retired.required_rollback_refs, tuple)
+            and f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.condition" in retired.required_rollback_refs
+            and retired.retaining_container_refs == ()
+            and retired.removal_intent_ref is None and retired.removal_exit_code is None
+            and retired.prior_image_absent is None
+        )
+        # Only sealed policy retention of an unused image completes safely.
+        # Container-held or unverified images remain non-complete. Retention
+        # adds no removal fact or retired-effect handoff; the shared Session
+        # still records the canonical terminal receipt after this observation.
+        return ("completed" if retained_complete else "pending", reason,
                 (f"{retired.evidence_root}/receipt.json",) if retired.receipt_sha256 else (),
                 retired, retired.outcome, recording)
     raise ReleaseContractError("release-action-phase-unselected", "unknown selected phase")
