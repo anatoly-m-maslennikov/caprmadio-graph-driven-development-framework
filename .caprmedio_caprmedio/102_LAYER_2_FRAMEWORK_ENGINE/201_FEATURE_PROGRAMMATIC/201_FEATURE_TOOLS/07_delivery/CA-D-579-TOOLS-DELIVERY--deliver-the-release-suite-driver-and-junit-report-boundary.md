@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 4
-updated_at: "2026-10-06 00:55:29 +0400"
+updated_at: "2026-10-06 00:17:58 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite driver carrier"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, JUnit Report, Runtime, MCP, Workflow, Source Carrier, Compiled Candidate]
@@ -52,7 +52,7 @@ forbidden = ["test_selector", "test_path", "report_path_override", "source_bindi
 temporary_directory = "/tmp"
 python_bytecode = "disabled"
 
-[source_bindings]
+[source_bindings_contract]
 path = "/workspace/.caprmedio_release/source_bindings.json"
 producer = "RELEASE_VERSION suite owner"
 source = "sealed compilation.package_rows"
