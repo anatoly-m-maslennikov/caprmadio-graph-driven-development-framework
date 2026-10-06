@@ -317,6 +317,27 @@ class PromptContracts(unittest.TestCase):
                                             'evidence': ['prepared']})
         self.assertEqual(prepared['result'], 'blocked')
 
+    def test_preparation_requires_current_evaluation_authority_before_dispatch(self):
+        actions = self.actions()
+        for case, evaluations in (
+            ('missing', []),
+            ('stale', [{**self.packet(actions)['evaluations'][0], 'sha256': '0' * 64}]),
+            ('wrong-role', actions.prepare_input_bindings(['CA-R-1843'])),
+        ):
+            with self.subTest(case=case):
+                packet = self.packet(actions, 'Integrated')
+                packet['evaluations'] = evaluations
+                launched = []
+
+                actual = actions.implement_selected_queue(
+                    'CA-O-091', packet,
+                    lambda *_: launched.append('launched') or {
+                        'result': 'evaluation_ready', 'outputs': {}, 'evidence': ['invented-ready'],
+                    })
+
+                self.assertEqual(actual['result'], 'blocked')
+                self.assertEqual(launched, [])
+
     def test_retry_admission_requires_effective_source_and_confidence_gate(self):
         actions = self.actions()
         packet = self.packet(actions, 'Integrated')
