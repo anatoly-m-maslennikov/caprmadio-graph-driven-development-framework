@@ -73,6 +73,9 @@ class GenerateEntityGraphTests(unittest.TestCase):
         self.root = Path(self.temporary.name) / "repository"
         self.selected = self.root / "selected"
         self.selected.mkdir(parents=True)
+        # CLI rendering uses project_runtime.atomic_tempfile; keep this fixture
+        # independent of an enclosing checkout.
+        (self.root / ".git").mkdir()
 
     def tearDown(self) -> None:
         self.temporary.cleanup()

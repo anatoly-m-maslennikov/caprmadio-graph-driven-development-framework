@@ -583,6 +583,9 @@ class ReplacementPayloadTest(unittest.TestCase):
     def test_repeated_replacement_append_is_idempotent(self) -> None:
         with tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True) as directory:
             root = Path(directory)
+            # append_sealed_events uses the shared atomic-write boundary; make this
+            # standalone fixture a Project without depending on its caller's Git root.
+            (root / ".git").mkdir()
             control = root / ".caprmedio_caprmedio"
             control.mkdir()
             (control / "caprmedio_project_settings.toml").write_text(

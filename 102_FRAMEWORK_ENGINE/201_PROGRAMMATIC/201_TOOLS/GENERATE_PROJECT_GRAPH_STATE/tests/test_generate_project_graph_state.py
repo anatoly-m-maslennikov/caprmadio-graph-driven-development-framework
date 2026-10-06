@@ -44,6 +44,9 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         self.root = Path(self.temporary.name) / "repository"
         self.control = self.root / ".caprmedio_caprmedio"
         self.control.mkdir(parents=True)
+        # Project-graph output writes must resolve this fixture itself, rather
+        # than a checkout enclosing the test temporary directory.
+        (self.root / ".git").mkdir()
         self.modes = {"default": "casual"}
         self.project_settings = self.root / generate_project_graph_state.SETTINGS_PATH
         self.project_settings.write_text(
@@ -64,12 +67,15 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         path.mkdir(parents=True)
         return path
 
-    def test_live_topology_has_exactly_the_current_typed_scope_units(self) -> None:
-        rows = generate_project_graph_state.scope_units(
-            generate_project_graph_state.CONTROL,
-            generate_project_graph_state.ROOT,
-            generate_project_graph_state.configuration()["authority_modes"],
-        )
+    def fixture_scope_units(self) -> list[dict[str, object]]:
+        self.mkdir("101_LAYER_1_FRAMEWORK")
+        self.mkdir("101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC")
+        self.mkdir("101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS")
+        self.mkdir("102_LAYER_2_OPERATIONS")
+        return generate_project_graph_state.scope_units(self.control, self.root, self.modes)
+
+    def test_fixture_topology_derives_typed_scope_unit_structure(self) -> None:
+        rows = self.fixture_scope_units()
         parent_by_node = {row["node_id"]: row["structural_parent"] for row in rows}
         levels_by_node = {row["node_id"]: row["structural_level"] for row in rows}
         navigational_orders_by_node = {
@@ -77,45 +83,28 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         }
         self.assertEqual(
             [
-                "101_LAYER_1_FRAMEWORK_METHODOLOGY",
-                "102_LAYER_2_FRAMEWORK_ENGINE",
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC",
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS",
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS",
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/204_FEATURE_MCP",
-                "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC",
-                "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS",
-                "103_LAYER_3_OPERATOR_DOCUMENTATION",
-                "104_LAYER_4_CORE_EXTENSIONS",
-                "105_LAYER_5_RELEASES",
-                "110_FEATURE_COMMUNITY_EXTENSIONS",
-                "110_FEATURE_FIELD",
+                "101_LAYER_1_FRAMEWORK",
+                "101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC",
+                "101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS",
+                "102_LAYER_2_OPERATIONS",
             ],
             [row["node_id"] for row in rows],
         )
-        self.assertEqual("caprmedio", parent_by_node["102_LAYER_2_FRAMEWORK_ENGINE"])
+        self.assertEqual("fixture_project", parent_by_node["101_LAYER_1_FRAMEWORK"])
         self.assertEqual(
-            "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC",
-            parent_by_node["102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS"],
+            "101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC",
+            parent_by_node["101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS"],
         )
-        self.assertEqual(
-            "102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC",
-            parent_by_node["102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/205_FEATURE_SKILLS"],
-        )
-        self.assertEqual(1, levels_by_node["101_LAYER_1_FRAMEWORK_METHODOLOGY"])
-        self.assertEqual(2, levels_by_node["102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC"])
+        self.assertEqual(1, levels_by_node["101_LAYER_1_FRAMEWORK"])
+        self.assertEqual(2, levels_by_node["101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC"])
         self.assertEqual(
             3,
-            levels_by_node[
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS"
-            ],
+            levels_by_node["101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS"],
         )
-        self.assertEqual(10, navigational_orders_by_node["110_FEATURE_COMMUNITY_EXTENSIONS"])
+        self.assertEqual(2, navigational_orders_by_node["102_LAYER_2_OPERATIONS"])
         self.assertEqual(
             1,
-            navigational_orders_by_node[
-                "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS"
-            ],
+            navigational_orders_by_node["101_LAYER_1_FRAMEWORK/201_FEATURE_PROGRAMMATIC/301_FEATURE_TOOLS"],
         )
         self.assertNotIn("CA-Epic", "\n".join(row["node_id"] for row in rows))
         required_fields = {
@@ -134,8 +123,8 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         self.assertTrue(all(row["project_boundary_position"] == "PROJECT" for row in rows))
         self.assertEqual("Ordered", rows[0]["scope_unit_type"])
         self.assertEqual("LAYER", rows[0]["scope_unit_label"])
-        self.assertEqual("UNORDERED", rows[1]["child_composition"])
-        self.assertEqual("NONE", rows[0]["child_composition"])
+        self.assertEqual("UNORDERED", rows[0]["child_composition"])
+        self.assertEqual("NONE", rows[2]["child_composition"])
 
     def test_nearest_typed_scope_unit_is_parent_even_across_an_epic_directory(self) -> None:
         self.mkdir("101_LAYER_1_ROOT")
@@ -204,11 +193,7 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         modes = config["authority_modes"]
         assert isinstance(modes, dict)
         rows = generate_project_graph_state.bind_scope_unit_structure(
-            generate_project_graph_state.scope_units(
-                generate_project_graph_state.CONTROL,
-                generate_project_graph_state.ROOT,
-                modes,
-            )
+            self.fixture_scope_units()
         )
         source_atoms = generate_project_graph_state.active_source_atoms()
         payload = generate_project_graph_state.project_scope_unit_graph(
@@ -224,7 +209,7 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         self.assertIn('key = "caprmedio"', payload)
         self.assertIn('name = "caprmedio"', payload)
         self.assertIn(
-            'carrier = ".caprmedio_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml"',
+            'carrier = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml"',
             payload,
         )
         self.assertNotIn("002_FRAMEWORK_ENGINE", payload)
@@ -306,11 +291,7 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         modes = config["authority_modes"]
         assert isinstance(modes, dict)
         rows = generate_project_graph_state.bind_scope_unit_structure(
-            generate_project_graph_state.scope_units(
-                generate_project_graph_state.CONTROL,
-                generate_project_graph_state.ROOT,
-                modes,
-            )
+            self.fixture_scope_units()
         )
         source_atoms = generate_project_graph_state.active_source_atoms()
         payload = generate_project_graph_state.project_scope_unit_graph_sources(
@@ -338,7 +319,7 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         )
         self.assertTrue(projection["executed_generator"])
         self.assertTrue(projection["executed_generator_sha256"])
-        self.assertEqual(13, len(rows))
+        self.assertEqual(4, len(rows))
         self.assertGreater(len(source_atoms), 0)
         self.assertEqual(
             {atom["atom_id"] for atom in source_atoms},
@@ -380,11 +361,7 @@ class GenerateProjectGraphStateTests(unittest.TestCase):
         modes = config["authority_modes"]
         assert isinstance(modes, dict)
         rows = generate_project_graph_state.bind_scope_unit_structure(
-            generate_project_graph_state.scope_units(
-                generate_project_graph_state.CONTROL,
-                generate_project_graph_state.ROOT,
-                modes,
-            )
+            self.fixture_scope_units()
         )
         source_atoms = generate_project_graph_state.active_source_atoms()
         installation = generate_project_graph_state.installation_status(

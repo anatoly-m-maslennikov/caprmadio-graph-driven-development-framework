@@ -93,6 +93,8 @@ class SelectedGraphTests(unittest.TestCase):
         self.projection_root = f"{self.control_root}/_projection"
         self.selected = self.root / "selected"
         self.selected.mkdir(parents=True)
+        # Published graph projections use project_runtime.atomic_tempfile.
+        (self.root / ".git").mkdir()
         settings = self.root / self.control_root / "caprmedio_project_settings.toml"
         settings.parent.mkdir(parents=True)
         settings.write_text(

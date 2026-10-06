@@ -18,7 +18,12 @@ class TemporaryBoundaryError(RuntimeError):
 
 
 def repository_root(reference: Path | str) -> Path:
-    """Resolve the nearest Git repository containing ``reference``."""
+    """Resolve the nearest checkout or self-contained CAPRMEDIO Project.
+
+    Installed and sealed Projects need not contain Git administration data.
+    Their two authoritative control carriers identify the same boundary.
+    A lone folder name or runtime/scratch directory is not a Project marker.
+    """
 
     candidate = Path(reference).expanduser().resolve()
     if not candidate.is_dir():
@@ -26,6 +31,12 @@ def repository_root(reference: Path | str) -> Path:
     for root in (candidate, *candidate.parents):
         if (root / ".git").exists():
             return root
+        for control in root.glob(".caprmedio_*"):
+            if control.is_symlink() or not control.is_dir():
+                continue
+            markers = (control / "caprmedio_project_settings.toml", control / "project_structure.toml")
+            if all(path.is_file() and not path.is_symlink() for path in markers):
+                return root
     raise TemporaryBoundaryError(f"cannot resolve Project root from {candidate}")
 
 

@@ -14,15 +14,17 @@ import tomllib
 
 
 SCRIPT = Path(__file__).resolve()
-ROOT = next(parent for parent in SCRIPT.parents if (parent / ".git").exists())
-CONTROL = ROOT / ".caprmedio_caprmedio"
 TOOLS_ROOT = SCRIPT.parents[1]
 if str(TOOLS_ROOT) not in sys.path:
     sys.path.insert(0, str(TOOLS_ROOT))
 
 from framework_installation import InstallationError, installation_status  # noqa: E402
 from artifact_metadata import SETTINGS_PATH, atom_identifier, project_identity  # noqa: E402
-from project_runtime import atomic_tempfile  # noqa: E402
+from project_runtime import atomic_tempfile, repository_root  # noqa: E402
+
+
+ROOT = repository_root(SCRIPT)
+CONTROL = ROOT / ".caprmedio_caprmedio"
 
 
 OUTPUT = CONTROL / "_projection" / "project_scope_unit_graph.projection.toml"
@@ -33,8 +35,8 @@ CANONICAL_GENERATOR_CARRIER = Path(
 )
 CANONICAL_GENERATOR = ROOT / CANONICAL_GENERATOR_CARRIER
 CONFIG = (
-    ROOT
-    / ".caprmedio_framework"
+    CONTROL
+    / "000_CAPRMEDIO_framework"
     / "00_APPLICABLE_METHODOLOGY"
     / "000_APPLICABLE_MTHD_sources"
     / "003_PROJECT_CONFIGURATION"
