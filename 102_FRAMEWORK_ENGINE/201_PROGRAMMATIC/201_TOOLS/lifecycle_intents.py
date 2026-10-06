@@ -748,9 +748,14 @@ def create_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     try:
         destination, _, _ = prepare_create_atom_revision(root, carrier["path"], carrier["frontmatter"])
         if destination.exists():
-            existing = atom_from_path(root, destination)
-            return {"operation": "create", "outcome": "duplicate", "requested": carrier,
-                    "effects": [_effect("unchanged", carrier=carrier_descriptor(root, existing), reason="destination-already-exists")]}
+            # A pathname alone does not prove that this is a replay of the
+            # sealed Create request.  The route does not carry authenticated
+            # prior-success evidence, so an occupied destination must remain a
+            # conflict rather than being terminalized as a harmless no-op.
+            raise LifecycleError(
+                "destination-collision",
+                "Create destination is already occupied; no authenticated replay proof is available",
+            )
     except AtomToolError as error:
         raise _translate(error) from error
     if not _execute_allowed(execute=execute, authorized=authorized):
@@ -759,9 +764,6 @@ def create_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     try:
         created = create_atom_revision(root, carrier["path"], carrier["frontmatter"], carrier["content"])
     except AtomToolError as error:
-        if error.code in {"destination-collision", "atom-id-collision"}:
-            return {"operation": "create", "outcome": "duplicate", "requested": carrier,
-                    "effects": [_effect("unchanged", carrier=carrier, reason=error.code)]}
         raise _translate(error) from error
     observed = carrier_descriptor(root, created)
     return {"operation": "create", "outcome": "applied", "requested": carrier, "observed": observed,

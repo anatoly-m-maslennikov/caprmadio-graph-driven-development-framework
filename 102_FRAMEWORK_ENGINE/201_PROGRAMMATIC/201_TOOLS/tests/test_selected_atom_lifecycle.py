@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import copy
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -15,7 +16,15 @@ TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 import sys
 
 TOOLS = Path(__file__).resolve().parents[1]
+REPOSITORY = TOOLS.parents[2]
 sys.path.insert(0, str(TOOLS))
+
+REQUIREMENT_STATUS_AUTHORITY = (
+    REPOSITORY
+    / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+    / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
+    / "CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md"
+)
 
 from lifecycle_intents import (  # noqa: E402
     LifecycleError,
@@ -40,6 +49,9 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         (self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml").write_text(
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n", encoding="utf-8"
         )
+        status_authority = self.root / REQUIREMENT_STATUS_AUTHORITY.relative_to(REPOSITORY)
+        status_authority.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(REQUIREMENT_STATUS_AUTHORITY, status_authority)
         self.target = self._atom("CA-R-100", "target", "Stable summary")
         self.successor_one = self._atom("CA-R-101", "first-successor", "First successor")
         self.successor_two = self._atom("CA-R-102", "second-successor", "Second successor")
@@ -108,7 +120,7 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             "content": content.replace(current_summary, summary, 1) + body_suffix,
         }
 
-    def test_authorized_create_uses_a_complete_carrier_and_duplicate_is_no_effect(self) -> None:
+    def test_authorized_create_uses_a_complete_carrier_and_rejects_occupied_destination(self) -> None:
         path = self.requirements / "CA-R-103--created.md"
         carrier = self._carrier("CA-R-103", "created", "Created summary")
 
@@ -118,8 +130,8 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertEqual(result["effects"][0]["state"], "changed")
         self.assertEqual(carrier_descriptor(self.root, "CA-R-103")["version"], 1)
         before = path.read_bytes()
-        duplicate = create_atom_action(self.root, {"carrier": carrier}, execute=True, authorized=True)
-        self.assertEqual(duplicate["outcome"], "duplicate")
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            create_atom_action(self.root, {"carrier": carrier}, execute=True, authorized=True)
         self.assertEqual(path.read_bytes(), before)
 
         missing_identity = dict(carrier)
@@ -382,7 +394,7 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertIn("@1", archived.name)
         self.assertIn("status: Archived", archived.read_text(encoding="utf-8"))
 
-    def test_model_specific_status_noop_and_archive_relation_diagnostics(self) -> None:
+    def test_source_model_status_noop_and_archive_relation_diagnostics(self) -> None:
         self.target.write_text(
             self.target.read_text(encoding="utf-8").replace("relations: {}", "relations:\n  depends_on: [CA-R-101]"),
             encoding="utf-8",
@@ -390,36 +402,17 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self._atom("CA-R-104", "inbound", "Inbound", relations="relations:\n  depends_on: [CA-R-100]")
         self.assertNotIn("type:", self.target.read_text(encoding="utf-8"))
 
-        reviewed = change_status_atom_action(
-            self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Reviewed", "status_model": self._model()},
-            execute=True,
-            authorized=True,
-        )
-        self.assertEqual(reviewed["observed"]["status"], "Reviewed")
-        reviewed_path = self.root / reviewed["observed"]["path"]
-        self.assertEqual(reviewed_path.parent.name, "reviewed")
-        self.assertFalse(self.target.exists())
         noop = change_status_atom_action(
             self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Reviewed", "status_model": self._model()},
+            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Active"},
             execute=True,
             authorized=True,
         )
         self.assertEqual(noop["outcome"], "no-op")
 
-        promoted = change_status_atom_action(
-            self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Active", "status_model": self._model()},
-            execute=True,
-            authorized=True,
-        )
-        self.assertEqual(promoted["observed"]["status"], "Active")
-        self.assertTrue(self.target.exists())
-
         archived = change_status_atom_action(
             self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Archived", "status_model": self._model()},
+            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Archived"},
             execute=True,
             authorized=True,
         )
@@ -478,10 +471,10 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
                 execute=True,
                 authorized=True,
             )
-        with self.assertRaisesRegex(LifecycleError, "one-target-required"):
+        with self.assertRaisesRegex(LifecycleError, "mapping-required"):
             change_status_atom_action(
                 self.root,
-                {"target": [carrier_descriptor(self.root, "CA-R-100")], "status": "Reviewed", "status_model": self._model()},
+                {"target": [carrier_descriptor(self.root, "CA-R-100")], "status": "Archived"},
                 execute=True,
                 authorized=True,
             )
