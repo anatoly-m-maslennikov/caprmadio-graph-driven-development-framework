@@ -12,13 +12,13 @@ assignee: AI Agent
 autonomous_confidence_threshold: 90
 status: Active
 version: 1
-updated_at: "2026-10-06 18:28:00 +0000"
+updated_at: "2026-10-06 18:42:00 +0000"
 subjects:
   governs: "Final implementation review repair"
   depends_on: [Implementation, Evaluation, Workflow Run, Journal, Action]
 relations:
   is_decomposition_of: [CA-P-1117]
-  relates_to: [CA-P-1655, CA-P-1795, CA-P-1796, CA-P-1797, CA-P-1798, CA-P-1799, CA-P-1800, CA-P-1807]
+  relates_to: [CA-P-1655, CA-P-1795, CA-P-1796, CA-P-1797, CA-P-1798, CA-P-1799, CA-P-1800, CA-P-1807, CA-P-1808]
 ---
 # Summary
 
