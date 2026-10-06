@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+version: 2
+updated_at: "2026-10-06 05:32:30 +0000"
 subjects:
   governs: "Verify structural reference coverage"
   depends_on: [Tool, Implementation, Evaluation, Workflow Run, Journal]
@@ -40,3 +40,7 @@ The affected selected Workflow, full release gate and CA-P-1655 final acceptance
 Resolve actual declared references and Goal state before mutation; do not force Goal existence. Block incomplete coverage rather than silently leaving broken references.
 
 CA-P-1759 owns the bounded repair. Keep this Problem active until its regression and independent acceptance establish the repair.
+
+## Resolution
+
+CA-P-1776 closes the additional admission gaps. Twenty-two focused Project Structure tests pass; an independent read-only review accepts current candidate validation, observed Goal/Carrier evidence, Move reference/parent coverage and secret refusal before recovery serialization. This resolves the source defect; actual selected Workflow execution and final release acceptance remain separately required.

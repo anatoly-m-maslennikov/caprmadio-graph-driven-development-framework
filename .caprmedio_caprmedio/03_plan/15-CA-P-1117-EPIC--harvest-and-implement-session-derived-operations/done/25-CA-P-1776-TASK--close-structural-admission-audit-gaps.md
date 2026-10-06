@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 04:44:20 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 05:29:30 +0000"
 subjects:
   governs: "Structural admission audit repair"
   depends_on: [Implementation, Evaluation, Scope Unit, Goal, Carrier]
@@ -44,3 +44,7 @@ Focused regressions pass and independent review accepts the four confirmed bound
 ## Pre-execution review
 
 The restored audit found additional admission gaps beyond the accepted mechanical reference repair. DRY, preservation of valuable information and Operator authority support observed source-bound evidence, not caller assertions. CA-C-485 retains the structural Problem.
+
+## Results
+
+The resulting tree is validated before acceptance; active Requirement/Goal sources and declared Carrier observations establish coverage; Move binds incoming Atom references and both parent Goal frontiers; canonical secret paths are refused before reading and secret content is refused before recovery serialization. Twenty-two focused structural regressions and two native route fixtures passed. Independent acceptance covers these bounded source repairs only. Actual Docker execution and final Epic acceptance remain separate required gates.

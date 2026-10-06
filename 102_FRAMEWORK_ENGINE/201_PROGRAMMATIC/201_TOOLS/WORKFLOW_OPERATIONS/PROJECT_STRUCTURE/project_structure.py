@@ -54,6 +54,14 @@ DECLARATION_FIELDS = (
 REQUIRED_DECLARATION_FIELDS = set(DECLARATION_FIELDS) - {"local_order", "authority_mode"}
 NAME = re.compile(r"^[A-Z0-9]+(?:_[A-Z0-9]+)*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
+SECRET_CARRIER_DIRECTORIES = frozenset({".vault", "credentials", "secrets", "vault"})
+SECRET_CREDENTIAL_FILE_NAMES = frozenset({
+    "credentials", "credentials.json", "credentials.toml", "credentials.yaml", "credentials.yml",
+    "vault.json", "vault.toml", "vault.yaml", "vault.yml",
+})
+SECRET_CONTENT = re.compile(
+    r"(?im)^\s*[A-Za-z0-9_.-]*(?:secret|password|token|credential|api[_-]?key)[A-Za-z0-9_.-]*\s*[:=]"
+)
 
 
 class StructuralConflict(ValueError):
@@ -457,10 +465,12 @@ def _reference_changes(
         path = entry["path"]
         if not path.is_file() or path.is_symlink():
             raise StructuralConflict(f"reference frontier path is not a regular file: {entry['relative_path']}")
+        _reject_secret_reference_path(entry["relative_path"])
         try:
             before = path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError) as error:
             raise StructuralConflict(f"reference frontier path cannot be read: {entry['relative_path']}") from error
+        _reject_secret_reference_content(entry["relative_path"], before)
         if _digest_text(before) != entry["expected_sha256"]:
             raise StructuralConflict(f"stale reference frontier: {entry['relative_path']}")
         after = before
@@ -480,6 +490,23 @@ def _reference_changes(
         if after != before:
             changes.append(SourceChange(path, entry["relative_path"], before, after))
     return changes
+
+
+def _reject_secret_reference_path(relative_path: str) -> None:
+    """Reject known secret carriers before their bytes enter this boundary."""
+    parts = PurePosixPath(relative_path).parts
+    name = PurePosixPath(relative_path).name.casefold()
+    env_shaped = name == ".env" or name.startswith(".env.") or name.endswith(".env")
+    explicit_carrier = any(part.casefold() in SECRET_CARRIER_DIRECTORIES for part in parts[:-1])
+    credential_file = name in SECRET_CREDENTIAL_FILE_NAMES
+    if env_shaped or explicit_carrier or credential_file:
+        raise StructuralConflict(f"reference frontier cannot include secret-shaped carrier: {relative_path}")
+
+
+def _reject_secret_reference_content(relative_path: str, source: str) -> None:
+    """Reject content that would make a recoverable snapshot secret-bearing."""
+    if SECRET_CONTENT.search(source):
+        raise StructuralConflict(f"reference frontier cannot include secret-shaped carrier: {relative_path}")
 
 
 def _frontmatter_scalar_line_replacement(
@@ -546,7 +573,7 @@ def _required_atom_scope_repairs(
     for source-derived coverage.
     """
     operation = parameters["operation"]
-    if operation not in {"Rename", "Remove"}:
+    if operation not in {"Rename", "Move", "Remove"}:
         return []
     previous = str(parameters["target_name"])
     resulting = str(parameters["declaration"]["scope_unit_name"]) if operation == "Rename" else None
@@ -585,6 +612,19 @@ def _validate_authoritative_scope_coverage(
         raise StructuralConflict(
             "active Atom scope references require a separately authorized exact disposition before Remove: " + affected
         )
+    if parameters["operation"] == "Move":
+        by_path = {entry["relative_path"]: entry for entry in parameters["reference_frontier"]}
+        missing = sorted({reference.relative_path for reference in required if reference.relative_path not in by_path})
+        rewritten = sorted({reference.relative_path for reference in required
+                            if reference.relative_path in by_path and by_path[reference.relative_path]["replacements"]})
+        if missing or rewritten:
+            detail = []
+            if missing:
+                detail.append("unselected " + ", ".join(missing))
+            if rewritten:
+                detail.append("non-mechanical rewrites " + ", ".join(rewritten))
+            raise StructuralConflict("Move incoming Atom references require exact source pins: " + "; ".join(detail))
+        return required
     by_path = {entry["relative_path"]: entry for entry in parameters["reference_frontier"]}
     missing: list[str] = []
     by_path_required: dict[str, list[AtomScopeReference]] = {}
@@ -609,6 +649,55 @@ def _validate_authoritative_scope_coverage(
             "authoritative Atom scope references are not covered by reference_frontier: " + ", ".join(missing)
         )
     return required
+
+
+def _active_goal_sources(root: Path, scope_units: Iterable[str]) -> list[str]:
+    """Return active Goal sources mechanically bound to the named Scope Units."""
+    selected = {scope_unit for scope_unit in scope_units if scope_unit}
+    if not selected:
+        return []
+    goals: list[str] = []
+    for relative_path, frontmatter in _active_authoritative_atom_frontmatters(root):
+        try:
+            atom_type = frontmatter_scalar(frontmatter, "type")
+            content_role = frontmatter_scalar(frontmatter, "content_role")
+            if (not isinstance(atom_type, str) or atom_type.casefold() != "goal"
+                    or not isinstance(content_role, str) or content_role.casefold() != "requirement"):
+                continue
+            references = {
+                value for value in (
+                    frontmatter_scalar(frontmatter, "current_scope_unit"),
+                    frontmatter_scalar(frontmatter, "claim_target_scope_unit"),
+                ) if isinstance(value, str)
+            }
+            if selected & references:
+                goals.append(relative_path)
+        except AtomToolError as error:
+            raise StructuralConflict(f"authoritative Goal coverage cannot be read: {relative_path}") from error
+    return goals
+
+
+def _validate_move_parent_goal_pins(
+    root: Path, before: list[dict[str, Any]], normalised: Mapping[str, Any], target_row: Mapping[str, Any] | None,
+) -> None:
+    """A reparenting cannot silently detach parent-owned active Goal sources."""
+    if normalised["operation"] != "Move" or target_row is None:
+        return
+    prior = next((row for row in before if row["scope_unit_name"] == normalised["target_name"]), None)
+    if prior is None:
+        return
+    parents = {str(prior["parent"]), str(target_row["parent"])}
+    goals = _active_goal_sources(root, parents)
+    frontier = {entry["relative_path"]: entry for entry in normalised["reference_frontier"]}
+    missing = sorted(set(goals) - set(frontier))
+    rewritten = sorted(path for path in goals if path in frontier and frontier[path]["replacements"])
+    if missing or rewritten:
+        detail = []
+        if missing:
+            detail.append("unselected " + ", ".join(missing))
+        if rewritten:
+            detail.append("non-mechanical rewrites " + ", ".join(rewritten))
+        raise StructuralConflict("Move parent-owned active Goals require exact source pins: " + "; ".join(detail))
 
 
 def _atomic_write(path: Path, content: str) -> None:
@@ -642,6 +731,7 @@ def _result(
     repaired_references: list[str] | None = None,
     recovery_boundary: Mapping[str, Any] | None = None,
     unapplied_effects: list[dict[str, str]] | None = None,
+    observed_coverage: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if state not in STATES:
         raise AssertionError(f"unsupported structural state: {state}")
@@ -668,11 +758,168 @@ def _result(
         "unapplied_effects": unapplied_effects or [],
         "validation_errors": errors or [],
         "recovery_disposition": dict(parameters.get("recovery_disposition", {})) if parameters else {},
+        "observed_coverage": dict(observed_coverage or {
+            "active_direct_parent_goals": [], "declared_carriers": [],
+        }),
         "evidence_references": [],
     }
     if recovery_boundary is not None:
         payload["recovery_boundary"] = dict(recovery_boundary)
     return payload
+
+
+def _resulting_structure(
+    before: list[dict[str, Any]], normalised: Mapping[str, Any],
+) -> tuple[list[dict[str, Any]], str | None, dict[str, Any] | None]:
+    """Construct one route's full post-image before any source mutation."""
+    operation = str(normalised["operation"])
+    after = [dict(row) for row in before]
+    target_name: str | None = normalised.get("target_name")
+    target_row: dict[str, Any] | None = None
+    if operation == "Create":
+        target_row = dict(normalised["declaration"])
+        target_name = target_row["scope_unit_name"]
+        matches = [row for row in before if row["scope_unit_name"] == target_name]
+        if matches:
+            if matches[0] != target_row:
+                raise StructuralConflict("Create target already exists with a different declaration")
+            target_row = dict(matches[0])
+        else:
+            after.append(target_row)
+    elif operation in {"Rename", "Move"}:
+        target_name = str(normalised["target_name"])
+        matches = [index for index, row in enumerate(before) if row["scope_unit_name"] == target_name]
+        target_row = dict(normalised["declaration"])
+        if not matches:
+            existing = next((row for row in before if row["scope_unit_name"] == target_row["scope_unit_name"]), None)
+            if existing != target_row:
+                raise StructuralConflict("Rename or Move predecessor is absent and target declaration is not already current")
+            target_name = target_row["scope_unit_name"]
+        else:
+            if operation == "Rename" and target_row["scope_unit_name"] == target_name:
+                raise StructuralConflict("Rename requires a different resulting scope_unit_name")
+            if operation == "Move" and target_row["scope_unit_name"] != target_name:
+                raise StructuralConflict("Move must retain the Scope Unit identity")
+            after[matches[0]] = target_row
+            if operation == "Rename":
+                for descendant in after:
+                    if descendant["parent"] == target_name:
+                        descendant["parent"] = target_row["scope_unit_name"]
+        target_name = target_row["scope_unit_name"]
+    else:
+        target_name = str(normalised["target_name"])
+        matches = [row for row in before if row["scope_unit_name"] == target_name]
+        if matches:
+            descendants = [row["scope_unit_name"] for row in before if row["parent"] == target_name]
+            if descendants:
+                raise StructuralConflict("Remove cannot recursively delete descendants: " + ", ".join(descendants))
+            after = [row for row in after if row["scope_unit_name"] != target_name]
+    return after, target_name, target_row
+
+
+def _validate_goal_disposition(
+    root: Path, before: list[dict[str, Any]], normalised: Mapping[str, Any], target_row: Mapping[str, Any] | None,
+) -> list[str]:
+    """Bind present/missing Goal coverage to active source observations, not caller assertion."""
+    operation = normalised["operation"]
+    if operation not in {"Create", "Move"}:
+        return []
+    assert target_row is not None
+    goal = normalised["goal_coverage_disposition"]
+    parent = str(target_row["parent"])
+    if goal["parent"] != parent:
+        raise StructuralConflict("Goal coverage disposition must identify the direct resulting parent")
+    if goal["state"] == "blocking":
+        raise StructuralConflict("direct-parent Goal coverage remains blocking")
+    active_goals = _active_goal_sources(root, {parent})
+    if goal["state"] == "present" and not active_goals:
+        raise StructuralConflict("direct-parent Goal coverage is absent in authoritative active Atoms")
+    if goal["state"] == "missing" and active_goals:
+        raise StructuralConflict("direct-parent Goal coverage contradicts authoritative active Atoms")
+    return active_goals
+
+
+def _validate_present_goal_pins(normalised: Mapping[str, Any], active_goals: Iterable[str]) -> None:
+    """Bind observed present direct-parent Goals to sealed, digest-checked sources."""
+    if normalised["operation"] not in {"Create", "Move"}:
+        return
+    if normalised["goal_coverage_disposition"]["state"] != "present":
+        return
+    required = set(active_goals)
+    frontier = {entry["relative_path"]: entry for entry in normalised["reference_frontier"]}
+    missing = sorted(required - set(frontier))
+    rewritten = sorted(path for path in required if path in frontier and frontier[path]["replacements"])
+    if missing or rewritten:
+        detail = []
+        if missing:
+            detail.append("unselected " + ", ".join(missing))
+        if rewritten:
+            detail.append("non-mechanical rewrites " + ", ".join(rewritten))
+        raise StructuralConflict("present direct-parent Goal coverage requires exact source pins: " + "; ".join(detail))
+
+
+def _declared_carrier_observations(
+    root: Path,
+    before: list[dict[str, Any]],
+    after: list[dict[str, Any]],
+    normalised: Mapping[str, Any],
+    target_row: Mapping[str, Any] | None,
+) -> list[dict[str, str]]:
+    """Record actual carrier state for changed declarations without inferring a move."""
+    operation = str(normalised["operation"])
+    prior_name = normalised.get("target_name")
+    affected: list[Mapping[str, Any]] = []
+    prior = next((row for row in before if row["scope_unit_name"] == prior_name), None)
+    if prior is not None:
+        affected.append(prior)
+    if target_row is not None:
+        affected.append(target_row)
+    if operation == "Rename" and isinstance(prior_name, str) and target_row is not None:
+        resulting_name = str(target_row["scope_unit_name"])
+        affected.extend(row for row in before if row["parent"] == prior_name)
+        affected.extend(row for row in after if row["parent"] == resulting_name)
+    paths = {
+        str(row[field])
+        for row in affected
+        for field in ("authority_path", "delivery_path")
+    }
+    observations: list[dict[str, str]] = []
+    for relative_path in sorted(paths):
+        path = _relative_path(root, relative_path, "declared carrier")
+        if path.is_symlink():
+            state = "symlink"
+        elif path.is_file():
+            state = "file"
+        elif path.is_dir():
+            state = "directory"
+        else:
+            state = "missing"
+        observations.append({"path": relative_path, "state": state})
+    return observations
+
+
+def _observed_coverage(
+    root: Path,
+    before: list[dict[str, Any]],
+    after: list[dict[str, Any]],
+    normalised: Mapping[str, Any],
+    target_row: Mapping[str, Any] | None,
+    direct_parent_goals: Iterable[str],
+) -> dict[str, Any]:
+    """Return source-derived Goal and declared-carrier facts for the result."""
+    parent_goals = sorted(set(direct_parent_goals))
+    if not parent_goals:
+        parent_row = target_row
+        if parent_row is None:
+            parent_row = next(
+                (row for row in before if row["scope_unit_name"] == normalised.get("target_name")), None,
+            )
+        if parent_row is not None:
+            parent_goals = _active_goal_sources(root, {str(parent_row["parent"])})
+    return {
+        "active_direct_parent_goals": parent_goals,
+        "declared_carriers": _declared_carrier_observations(root, before, after, normalised, target_row),
+    }
 
 
 def apply_scope_unit_action(
@@ -701,63 +948,18 @@ def apply_scope_unit_action(
                 state="stale", operation=operation, pre_revision=pre_revision, post_revision=pre_revision,
                 parameters=normalised, errors=["authoritative Project Structure revision changed"],
             )
-        after = [dict(row) for row in before]
-        target_name: str | None = normalised.get("target_name")
-        target_row: dict[str, Any] | None = None
-        if operation == "Create":
-            target_row = dict(normalised["declaration"])
-            target_name = target_row["scope_unit_name"]
-            matches = [row for row in before if row["scope_unit_name"] == target_name]
-            if matches:
-                if matches[0] != target_row:
-                    raise StructuralConflict("Create target already exists with a different declaration")
-                target_row = dict(matches[0])
-            else:
-                after.append(target_row)
-        elif operation in {"Rename", "Move"}:
-            target_name = normalised["target_name"]
-            matches = [index for index, row in enumerate(before) if row["scope_unit_name"] == target_name]
-            target_row = dict(normalised["declaration"])
-            if not matches:
-                existing = next((row for row in before if row["scope_unit_name"] == target_row["scope_unit_name"]), None)
-                if existing != target_row:
-                    raise StructuralConflict("Rename or Move predecessor is absent and target declaration is not already current")
-                target_name = target_row["scope_unit_name"]
-            else:
-                if operation == "Rename" and target_row["scope_unit_name"] == target_name:
-                    raise StructuralConflict("Rename requires a different resulting scope_unit_name")
-                if operation == "Move" and target_row["scope_unit_name"] != target_name:
-                    raise StructuralConflict("Move must retain the Scope Unit identity")
-                after[matches[0]] = target_row
-                if operation == "Rename":
-                    for descendant in after:
-                        if descendant["parent"] == target_name:
-                            descendant["parent"] = target_row["scope_unit_name"]
-            target_name = target_row["scope_unit_name"]
-        else:  # Remove
-            target_name = normalised["target_name"]
-            matches = [row for row in before if row["scope_unit_name"] == target_name]
-            if matches:
-                descendants = [row["scope_unit_name"] for row in before if row["parent"] == target_name]
-                if descendants:
-                    raise StructuralConflict("Remove cannot recursively delete descendants: " + ", ".join(descendants))
-                after = [row for row in after if row["scope_unit_name"] != target_name]
-        if operation in {"Create", "Move"}:
-            goal = normalised["goal_coverage_disposition"]
-            expected_parent = str(target_row["parent"])
-            if goal["parent"] != expected_parent:
-                raise StructuralConflict("Goal coverage disposition must identify the direct resulting parent")
-            if goal["state"] == "blocking":
-                return _result(
-                    state="conflict", operation=operation, pre_revision=pre_revision, post_revision=pre_revision,
-                    target_name=target_name, parameters=normalised,
-                    errors=["direct-parent Goal coverage remains blocking"],
-                )
-        mechanical_repairs = _validate_authoritative_scope_coverage(root, before, normalised)
+        after, target_name, target_row = _resulting_structure(before, normalised)
         effective_modes = _validate_tree(after, root)
+        direct_parent_goals = _validate_goal_disposition(root, before, normalised, target_row)
+        _validate_present_goal_pins(normalised, direct_parent_goals)
+        _validate_move_parent_goal_pins(root, before, normalised, target_row)
+        mechanical_repairs = _validate_authoritative_scope_coverage(root, before, normalised)
         if target_row is not None:
             target_row = dict(target_row)
             target_row["effective_authority_mode"] = effective_modes[str(target_row["scope_unit_name"])]
+        observed_coverage = _observed_coverage(
+            root, before, after, normalised, target_row, direct_parent_goals,
+        )
         reference_changes = _reference_changes(
             root, normalised["reference_frontier"], mechanical_repairs=mechanical_repairs,
         )
@@ -768,6 +970,7 @@ def apply_scope_unit_action(
             return _result(
                 state="no_op", operation=operation, pre_revision=pre_revision, post_revision=pre_revision,
                 target_name=target_name, resulting=target_row, parameters=normalised,
+                observed_coverage=observed_coverage,
             )
         applied: list[SourceChange] = []
         try:
@@ -792,6 +995,7 @@ def apply_scope_unit_action(
                 repaired_references=[change.relative_path for change in applied if change.path != structure_path],
                 recovery_boundary=recovery,
                 unapplied_effects=[_effect(change) for change in changes if change not in applied],
+                observed_coverage=observed_coverage,
             )
         post = _digest_text(structure_path.read_text(encoding="utf-8"))
         return _result(
@@ -799,6 +1003,7 @@ def apply_scope_unit_action(
             target_name=target_name, resulting=target_row, parameters=normalised,
             actual_effects=[_effect(change) for change in applied],
             repaired_references=[change.relative_path for change in reference_changes],
+            observed_coverage=observed_coverage,
         )
     except StructuralConflict as error:
         post = None
@@ -1087,7 +1292,18 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
                     "result": "stale", "effect_refs": [],
                     "native_result": {"state": "stale", "pre_toml_revision": observed},
                 }
-            _validate_authoritative_scope_coverage(root, rows, normalised)
+            after, _, target_row = _resulting_structure(rows, normalised)
+            _validate_tree(after, root)
+            direct_parent_goals = _validate_goal_disposition(root, rows, normalised, target_row)
+            _validate_present_goal_pins(normalised, direct_parent_goals)
+            _validate_move_parent_goal_pins(root, rows, normalised, target_row)
+            # This private candidate fact is source-derived and is emitted by
+            # O012/O005; it never replaces the sealed literal parameters.
+            normalised["_observed_coverage"] = _observed_coverage(
+                root, rows, after, normalised, target_row, direct_parent_goals,
+            )
+            mechanical_repairs = _validate_authoritative_scope_coverage(root, rows, normalised)
+            _reference_changes(root, normalised["reference_frontier"], mechanical_repairs=mechanical_repairs)
             return normalised, None
         except StructuralConflict as error:
             return None, {
@@ -1112,7 +1328,13 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
         normalised, failure = candidate(context)
         if failure is not None:
             return failure
-        return {"result": "prepared", "effect_refs": [], "native_result": {"operation": normalised["operation"]}}
+        return {
+            "result": "prepared", "effect_refs": [],
+            "native_result": {
+                "operation": normalised["operation"],
+                "observed_coverage": normalised.get("_observed_coverage", {}),
+            },
+        }
 
     def assess(context: Mapping[str, Any]) -> dict[str, Any]:
         normalised, failure = candidate(
@@ -1120,7 +1342,13 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
         )
         if failure is not None:
             return failure
-        return {"result": "accepted", "effect_refs": [], "native_result": {"operation": normalised["operation"]}}
+        return {
+            "result": "accepted", "effect_refs": [],
+            "native_result": {
+                "operation": normalised["operation"],
+                "observed_coverage": normalised.get("_observed_coverage", {}),
+            },
+        }
 
     def authorize(context: Mapping[str, Any]) -> dict[str, Any]:
         normalised, failure = candidate(context)
