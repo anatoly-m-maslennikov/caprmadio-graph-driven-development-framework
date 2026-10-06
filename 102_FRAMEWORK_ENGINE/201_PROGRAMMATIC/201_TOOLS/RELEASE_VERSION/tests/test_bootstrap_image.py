@@ -156,6 +156,10 @@ class BootstrapImageTests(unittest.TestCase):
         copied_dockerfile = context / pinned_dockerfile.relative_to(self.root)
         self.assertEqual(pinned_dockerfile.read_bytes(), copied_dockerfile.read_bytes())
         self.assertIn(b"COPY 102_FRAMEWORK_ENGINE ./102_FRAMEWORK_ENGINE", copied_dockerfile.read_bytes())
+        self.assertIn(
+            b"COPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework",
+            (context / "Dockerfile").read_bytes(),
+        )
         self.assertFalse((self.root / ".caprmedio_runtime/framework/current.toml").exists())
         self.assertFalse((self.root / ".caprmedio_runtime/framework/releases").exists())
         self.assertFalse((self.root / ".agents/skills/ca").exists())

@@ -237,7 +237,7 @@ def _context(plan: object, attempt: Path) -> tuple[Path, str]:
     for relative, payload, mode in _input_rows(root):
         _write_or_verify(context / relative, payload, mode)
     dockerfile = (context / IMAGE_DOCKERFILE).read_bytes()
-    _write(context / "Dockerfile", dockerfile + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY bootstrap-canary.py /opt/caprmedio-bootstrap-canary.py\nCOPY bootstrap-canary.json /opt/caprmedio-bootstrap-canary.json\n")
+    _write(context / "Dockerfile", dockerfile + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY bootstrap-canary.py /opt/caprmedio-bootstrap-canary.py\nCOPY bootstrap-canary.json /opt/caprmedio-bootstrap-canary.json\n")
     _write(context / "bootstrap-canary.py", _canary())
     _write(context / "bootstrap-canary.json", canonical_json({
         "manifest_sha256": manifest_sha256,
