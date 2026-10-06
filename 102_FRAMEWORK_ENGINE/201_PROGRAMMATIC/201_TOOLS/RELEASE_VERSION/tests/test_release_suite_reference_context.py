@@ -136,6 +136,23 @@ class PromptBindingFrontierTests(unittest.TestCase):
         with self.assertRaises(ReleaseSuiteReferenceContextError):
             reference_context._prompt_binding_frontier(d580, captured)
 
+    def test_selected_source_refresh_frontier_requires_exact_active_rows(self) -> None:
+        d580_path = REPOSITORY / reference_context._D580_REFERENCE
+        d580 = d580_path.read_bytes()
+        paths = reference_context._selected_source_refresh_frontier(d580, {})
+        self.assertEqual(5, len(paths))
+        self.assertEqual(paths, tuple(sorted(paths)))
+        captured = {
+            path: ((REPOSITORY / path).read_bytes(), (REPOSITORY / path).stat().st_mode & 0o777)
+            for path in paths
+        }
+        self.assertEqual(paths, reference_context._selected_source_refresh_frontier(d580, captured))
+        tampered = dict(captured)
+        target = paths[-1]
+        tampered[target] = (captured[target][0] + b"\nchanged\n", captured[target][1])
+        with self.assertRaises(ReleaseSuiteReferenceContextError):
+            reference_context._selected_source_refresh_frontier(d580, tampered)
+
 
 class UnitDeadlineTests(unittest.TestCase):
     def context(self, *, default: bytes, instance: bytes) -> ReleaseSuiteReferenceContext:
@@ -201,6 +218,7 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         self.root = Path(tempfile.mkdtemp(prefix="release-suite-reference-", dir=temporary_root))
         copy_control_closure(REPOSITORY, self.root)
         self.copy_prompt_binding_frontier()
+        self.copy_selected_source_refresh_frontier()
         self.manifest_ref = selected_manifest_ref(REPOSITORY)
         self.bindings = {
             "candidate_snapshot_manifest_sha256": "a" * 64,
@@ -226,6 +244,16 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
                 target_atom.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source_atom, target_atom)
                 target_atom.chmod(source_atom.stat().st_mode & 0o777)
+
+    def copy_selected_source_refresh_frontier(self) -> None:
+        """Fixture only: copy D580's exact selected-source authority leaves."""
+        d580 = (REPOSITORY / reference_context._D580_REFERENCE).read_bytes()
+        for relative in reference_context._selected_source_refresh_frontier(d580, {}):
+            source = REPOSITORY / relative
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
+            target.chmod(source.stat().st_mode & 0o777)
 
     def capture(self) -> ReleaseSuiteReferenceContext:
         return capture_context(self.root, self.bindings)
@@ -300,6 +328,10 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         self.assertTrue(_source_paths(derive_release_source_admission(self.root)).issubset(paths))
         self.assertTrue(_source_paths(derive_release_private_carriers(self.root)).issubset(paths))
         self.assertTrue(_UNIT_DEADLINE_SETTINGS.issubset(paths))
+        refresh_authorities = reference_context._selected_source_refresh_frontier(
+            (self.root / reference_context._D580_REFERENCE).read_bytes(), {},
+        )
+        self.assertTrue(set(refresh_authorities).issubset(paths))
         for relative in (
             "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json",

@@ -57,6 +57,9 @@ _BINDING_FIELDS = frozenset({
 _SHA256 = re.compile(r"[0-9a-f]{64}")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,255}")
 _ATOM_ID = re.compile(r"CA-[A-Z]+-[0-9]+")
+_SELECTED_SOURCE_REFRESH_IDS = (
+    "CA-R-1041", "CA-R-1894", "CA-M-350", "CA-E-593", "CA-D-588",
+)
 
 
 class ReleaseSuiteReferenceContextError(ValueError):
@@ -339,6 +342,54 @@ def _prompt_binding_frontier(d580_raw: bytes, captured: Mapping[str, tuple[bytes
     return tuple(sorted({*(path for path, _digest in binding_rows), *paths}))
 
 
+def _selected_source_refresh_frontier(
+    d580_raw: bytes, captured: Mapping[str, tuple[bytes, int]],
+) -> tuple[str, ...]:
+    """Derive D580's five exact selected-source refresh authority pins."""
+    try:
+        text = d580_raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ReleaseSuiteReferenceContextError(
+            "D580 is unavailable for selected-source refresh authority frontier"
+        ) from error
+    match = re.search(
+        r"^### Selected-source refresh authority frontier\n\n"
+        r".*?\n\n"
+        r"\| Atom ID \| Version \| Source path \| SHA-256 \| Mode \|\n"
+        r"\| --- \| --- \| --- \| --- \| --- \|\n"
+        r"((?:\| `CA-[A-Z]+-[0-9]+` \| [1-9][0-9]* \| `[^`]+` \| `[0-9a-f]{64}` \| `0[0-7]{3}` \|\n){5})",
+        text, re.MULTILINE,
+    )
+    if match is None:
+        _fail("D580 selected-source refresh authority frontier is absent or malformed")
+    rows = re.findall(
+        r"^\| `([^`]+)` \| ([1-9][0-9]*) \| `([^`]+)` \| `([0-9a-f]{64})` \| `(0[0-7]{3})` \|$",
+        match.group(1), re.MULTILINE,
+    )
+    if tuple(atom_id for atom_id, _version, _path, _digest, _mode in rows) != _SELECTED_SOURCE_REFRESH_IDS:
+        _fail("D580 selected-source refresh authority frontier has unexpected Atom identities")
+    paths: dict[str, tuple[str, int, str, int]] = {}
+    for atom_id, version_text, raw_path, digest, mode_text in rows:
+        path = _forbid_non_control_path(raw_path).as_posix()
+        expected = (atom_id, int(version_text), digest, int(mode_text, 8))
+        if path in paths:
+            _fail("D580 selected-source refresh authority frontier duplicates a source pin")
+        paths[path] = expected
+    if tuple(paths) != tuple(sorted(paths)):
+        _fail("D580 selected-source refresh authority frontier is not source-path sorted")
+    for path, (atom_id, version, digest, mode) in paths.items():
+        source = captured.get(path)
+        if source is None:
+            continue
+        source_raw, source_mode = source
+        actual_id, actual_version, status = _atom_identity(source_raw, path)
+        if (hashlib.sha256(source_raw).hexdigest() != digest
+                or (actual_id, actual_version) != (atom_id, version)
+                or status != "Active" or source_mode != mode):
+            _fail("D580 selected-source refresh authority pin is stale or inactive")
+    return tuple(paths)
+
+
 def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], tuple[str, ...]]:
     """Capture every prospective reader carrier before any delegated parser runs."""
     settings_ref = PROJECT_SETTINGS_REF.as_posix()
@@ -402,9 +453,14 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
     for candidate in prompt_bindings:
         if candidate not in captured:
             captured[candidate] = _read_regular(root, candidate)
+    refresh_authorities = _selected_source_refresh_frontier(captured[_D580_REFERENCE][0], captured)
+    for candidate in refresh_authorities:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
     # Recheck only after the entire two-stage frontier has been captured: no
     # later parser may resolve a new root-backed prompt path.
     _prompt_binding_frontier(captured[_D580_REFERENCE][0], captured)
+    _selected_source_refresh_frontier(captured[_D580_REFERENCE][0], captured)
     return captured, tuple(sorted(captured))
 
 
@@ -453,6 +509,9 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     prompt_paths = _prompt_binding_frontier(
         snapshot_captured[_D580_REFERENCE][0], snapshot_captured,
     )
+    refresh_authority_paths = _selected_source_refresh_frontier(
+        snapshot_captured[_D580_REFERENCE][0], snapshot_captured,
+    )
     candidates = [
         manifest_ref,
         _OPERATORS_REGISTRY.as_posix(),
@@ -463,6 +522,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         *_pin_paths(admission),
         *(row["source_path"] for row in private_carriers),
         *prompt_paths,
+        *refresh_authority_paths,
         *_UNIT_DEADLINE_SETTINGS,
     ]
     # The selected manifest has already source-validated every route/admission

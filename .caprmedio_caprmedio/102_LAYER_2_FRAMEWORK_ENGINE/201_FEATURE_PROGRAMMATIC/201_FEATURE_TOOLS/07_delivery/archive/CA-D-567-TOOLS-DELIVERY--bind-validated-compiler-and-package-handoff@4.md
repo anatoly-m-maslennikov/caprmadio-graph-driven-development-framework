@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 5
-updated_at: "2026-10-06 20:26:51 +0000"
+version: 4
+updated_at: "2026-10-06 18:13:10 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Validated compiler and package handoff"
   depends_on: [Tool, Manifest, Digest, Methodology, Projection, Installation, Runtime]
@@ -40,31 +40,31 @@ The handoff is an internal validation boundary, not a claim of compiler, package
 
 ### Current predecessor trust registrations
 
-Under the existing CA-P-1117 autonomy envelope, Release Version may admit historical source-delivery evidence prospectively through this source-authoritative private carrier. It is a current admission, not retroactive sealing and not proof that mutable bytes were unchanged at the historical run time. The following fenced object is the one locally verified N13 registration, retained as current evidence:
+Under the existing CA-P-1117 autonomy envelope, Release Version may admit historical source-delivery evidence prospectively through this source-authoritative private carrier. It is a current admission, not retroactive sealing and not proof that mutable bytes were unchanged at the historical run time. The following fenced object is the one locally verified N12 registration, retained as current evidence:
 
 ```json
 {
   "schema_version": 1,
   "registrations": [
     {
-      "action_result_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N13/release-epic-resume-20261006-N13:step:3:action:1.json",
-      "action_result_sha256": "c987d48feaa14ae96359d2dfc48a881bab3235171f80e1220983d0a89555c681",
-      "actual_derived_source_copy_sha256": "006b9a62f9369dfa716cc14c16f652fab81075ad6b97aaf9c49b904db427b207",
-      "authorization_ref": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations.md",
+      "registration_id": "current-n12-source-copy-20261006",
       "basis": "current admission of historical delivery evidence",
-      "candidate_snapshot_manifest_sha256": "1945f7bf7b02b8550c04a39b57d6e39ead4a4ea3a45b317f4580a7d0bf3713f3",
-      "checkpoint_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N13/release_action_run.json",
-      "checkpoint_sha256": "2e6de8f08a25c9859c987688b934eb961ae2c5f08969c9880d50195db6d915f2",
-      "effect_ref": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources#sha256=006b9a62f9369dfa716cc14c16f652fab81075ad6b97aaf9c49b904db427b207",
-      "event_digest": "df1285a2c385c8203b09ef98a72620a6db674ab121e7c1655a6aec65d62426b4",
-      "event_id": "event-86d57f70-db81-4884-b98f-540d082b9a09",
-      "executing_release": "6f2e3a615a4f4d6da0f16831800f9e4b7ff84f89b89faeefc359f51711d28c57",
-      "expected_derived_source_copy_sha256": "006b9a62f9369dfa716cc14c16f652fab81075ad6b97aaf9c49b904db427b207",
+      "authorization_ref": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations.md",
+      "registered_at": "2026-10-06T18:13:10Z",
       "journal_path": ".caprmedio_caprmedio/_journal/run-support-2026-10-06-part-3.ndjson",
-      "persistent_inventory_sha256": "d55b798c51811e02acfdfe4f3f82e00109e978ec55eca21da47244d6ee4dc6f8",
-      "registered_at": "2026-10-06T20:26:51Z",
-      "registration_id": "current-n13-source-copy-20261006",
-      "source_copy_root": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources"
+      "event_id": "event-fdaa486d-9925-47b2-b69d-ba74015b90a1",
+      "event_digest": "5a4f288da612fcb8fc112b58b830e8eea4ffe53f5841703656c9cf06278ccf44",
+      "effect_ref": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources#sha256=504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
+      "action_result_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N12/release-epic-resume-20261006-N12:step:3:action:1.json",
+      "action_result_sha256": "64566043138f19c5be83bff71f1b5015008433eeb96f16cf81b73f3e6f46e1f7",
+      "checkpoint_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N12/release_action_run.json",
+      "checkpoint_sha256": "73ef648a2f2c4d24d464c53e9726a718acbcac7a8901802023adea50bc639b48",
+      "candidate_snapshot_manifest_sha256": "72616b32ea0d9349ee82c407e9600f9bf0726ef17b38db47edbed8bca2f1fdc4",
+      "executing_release": "6f2e3a615a4f4d6da0f16831800f9e4b7ff84f89b89faeefc359f51711d28c57",
+      "source_copy_root": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources",
+      "expected_derived_source_copy_sha256": "504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
+      "actual_derived_source_copy_sha256": "504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
+      "persistent_inventory_sha256": "9c3d17d9b2f28ff9ff4071fda3b867c9fd06b2915e82a0c22e50b0f654cb5506"
     }
   ]
 }
