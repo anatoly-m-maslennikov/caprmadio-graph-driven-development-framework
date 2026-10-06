@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 27
-updated_at: "2026-10-06 21:37:39 +0000"
+updated_at: "2026-10-06 23:10:43 +0000"
 relations: {}
 ---
 # Summary
@@ -68,6 +68,10 @@ all six CA-P-1809 repair children now have bounded independent acceptance and ar
 fresh N14 `release-epic-resume-20261006-N14` delivered sources and compiled, then its disposable Unit container was deliberately stopped after parallel final review proved a shared retained-fixture setup gap. the exact source-bound container was inspected before stop; no other container was targeted. its actual receipt records exit 137 after 104.1833622080012 seconds, no JUnit report and zero validated-report tests: incomplete, not a pass or proof that no tests ran. all 22 actual Run Events are recorded with no pending recording. installed N is unchanged; no package/image/E2E/promotion/retirement followed. preserve N14 without replay. CA-P-1815 is reopened for the shared five-source fixture closure; CA-C-516 records the bounded early-stop choice under this Epic's autonomy. fresh N15 requires accepted shared-fixture regressions and independently current source sealing before every unchanged mandatory gate.
 
 the shared five-source fixture repair is independently accepted and committed at dfc76e4f0. CA-P-1815 is Done again: reference-context 19/19, selected-refresh 6/6, retained E2E fixtures 2/2, E2E context 13/13, full-gate fixtures 7/7 and complete E2E-gate fixtures 11/11 pass with actual terminal results. installed N and the current sixteen-route source binding remain unchanged; the occupied methodology copy still passes current D567 predecessor verification and the Release host has no pending or queued Run. prepare and admit fresh N15 through the exact MCP preview/seal; focused fixture acceptance does not waive any Unit, package, image, canary, Candidate E2E, aggregate, promotion or conditional prior-image disposition gate.
+
+fresh N15 was actually admitted through MCP after independent exact-seal review, with 25 requested Runs and snapshot `3bfdd04e1b9901c97a6af49c59e01731c456ea5313816db657457e94bd35a9f7`. source delivery and compilation completed. the host then disappeared while the Unit effect was in progress. its container later exited and retained a child JUnit report: 2,011 cases, 1,986 successes, 24 failures, one error and no skipped cases. no terminal Unit receipt or captured exit code exists; DBOS remains PENDING, the checkpoint retains in_progress, and there is no pending recording to retry. this is unresolved execution evidence, not a Release pass or a complete terminal Unit outcome. preserve N15 without replay and installed N unchanged.
+
+CA-C-517 records the Operator's explicit approval to implement a guarded interrupted/unknown disposition for N15, preserving history and all no-replay/pass gates. independent lanes prepared the exact memory-boundary and host-independent deadline repairs, identified three MCP failures as thread-creation failures before their assertions, and captured the full child report with hashes. CA-P-1810 is reopened for the residual image-fixture resource boundary. current source-first packets are M343@5/D579@7/E586@4 and new R1895/M351/E594/D589 for the guarded resolver; authoring is not independent acceptance or implementation. root retains canonical integration, Git, binding publication and actual MCP effects. no restart, unknown terminal fact, promotion or retirement is claimed by these prepared packets.
 
 ### Current Operator-selected scope
 
