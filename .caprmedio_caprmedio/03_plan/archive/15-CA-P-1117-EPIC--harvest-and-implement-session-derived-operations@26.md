@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 27
-updated_at: "2026-10-06 18:24:00 +0000"
+version: 26
+updated_at: "2026-10-06 16:37:11 +0000"
 relations: {}
 ---
 # Summary
@@ -53,11 +53,7 @@ Fresh N8 completed delivery and compilation and actually ran the sealed Unit con
 
 The bounded N8 source repairs are saved: module-owned executable scratch, gitless Project-root recognition, current graph-settings lookup, exact Tool private-reader dependencies, and settings-bound Project Structure in the sealed reference context. Independent review accepts the closure repairs; thirteen reference-context cases, forty-six related release cases, fourteen source-admission cases, seventeen promotion cases and fifty-three image cases pass locally. The promotion/image Unit fixtures retain real byte/mode currentness checks and mock command execution only. These checks are not a new complete release gate. Fresh dispatch is blocked by CA-C-496: the canonical sixteen-route binding retains predecessor source pins, while the private publisher only admits initial fifteen-to-sixteen publication. Do not reset the binding or hand-edit it to bypass admission. A guarded, source-first refresh capability and its authorization must be settled before a fresh Release preview. Installed N's selector and image are reopened unchanged; N9 has not been dispatched.
 
-the N11 predecessor mismatch has an accepted source-first repair. R1878/M332/E574 establish predecessor-only source-copy evidence; D567 prospectively binds the exact currently verified historical Action/checkpoint, same-N lineage and complete mode-aware inventory. this is current evidence admission, not historical sealing, old authorization reuse or replay. the original N10 admission is retained in D567@3; current D567 v4 binds N12. P1793 is Done and C500 resolved after N12 actually delivered and compiled its sources. installed N and historical Events remain unchanged.
-
-fresh N12 `release-epic-resume-20261006-N12` completed delivery and compilation and ran the complete closed Unit suite: 1,987 testcase outcomes, 26 failures, 23 errors and zero skipped in 2909.715539457997 seconds. the later currentness guard correctly interrupted the Run after final-review source changes. all 22 actual Run Events are retained (11 starts, 8 completions, 3 interruptions), with no pending recording or implied later gate. no package/image/canary/E2E/Full Gate/promotion/retirement followed. P1801 decomposes the 49 observed fixture failures into five bounded lanes; their focused acceptance does not replace a fresh integration gate.
-
-the prepared-new replacement source contract is accepted as R1041 v8 and O128 v4. its exact registered eight-occurrence lifecycle pin refresh was actually published as binding revision 8; the subsequent normal Release-admission refresh publishes revision 9, canonical digest `e26598708056b90f9bea85148a02b98bab51a74d66b987f1232ad1cb18eb77aa`, with all sixteen route identities/topology unchanged and exact Journal receipts. D572 v14 binds D567 v4 and D580 v5. strict source loading accepts the current projection. live Release Version context is current; separate Create/Update context errors are under bounded diagnosis, not claimed healthy. use a fresh N13 only after remaining focused repair lanes are accepted; do not replay N12 or change installed N before all mandatory gates pass.
+the N11 predecessor mismatch is now explained and the source-first repair has independent acceptance. R1878/M332/E574/D567 are v3: the existing N10 Event authenticates its exact delivered tree, while D567 prospectively admits the currently observed Action/checkpoint bytes, same-N lineage and complete mode-aware inventory. this is current evidence admission, not historical sealing, old authorization reuse or replay. installed N and historical Events remain unchanged. the private reader, genuine disposable fixture and effect-free malformed, tamper, authorization, mode and unsafe-path cases are implemented; 24 delivery, 14 source-admission and 65 guarded binding tests pass. D572 v13 closes the four updated authority pins and twelve private implementation carriers. CA-P-1793/CA-C-500 remain Active until a fresh Run actually completes delivery. fresh N12 and the complete Unit, image/canary, three-harness E2E, Full Gate and recorded promotion remain required; no new release result is claimed.
 
 ### Current Operator-selected scope
 
