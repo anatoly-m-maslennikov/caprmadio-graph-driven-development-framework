@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 21
-updated_at: "2026-10-06 03:53:17 +0000"
+version: 20
+updated_at: "2026-10-06 00:20:24 +0000"
 relations: {}
 ---
 # Summary
@@ -37,11 +37,7 @@ The actual initial runtime N is installed and independently accepted: package/se
 
 P1747-P1749's bounded code integration is independently accepted and Done. Its source/mock test passes remain distinct from real Release acceptance. Complete N-to-N+1 Unit, image/canary, three-harness Candidate E2E, Full Gate and recorded promotion remain the next required vertical cut. Keep installed N immutable as the working baseline and rollback point; no N+1 dispatch, promotion or old-image removal is claimed here.
 
-The Operator now restores all previously postponed required work: the all-sixteen final code/coverage audit, localhost HTTP MCP alongside stdio, expanded restart/recovery cases, and conditional exact prior-image retirement. Canceled harvesting and explicitly excluded legacy administration remain excluded. Every executed Workflow/Action still requires actual Journal evidence. Installed N remains the working baseline until a candidate passes all required gates.
-
-Release Run `release-first-cut-20261006-N5` stopped at the closed Unit gate: 1,636 testcase outcomes, 874 passing, 701 errors and 61 failures. The dominant failure was fixture scratch inside a read-only candidate workspace. Its interruption is already recorded and its checkpoint has no pending events; do not replay it or use recording recovery to imply release success. After the bounded harness and confirmed product repairs, admit a fresh Run with fresh sources. No N+1 package, image, promotion or retirement resulted from N5.
-
-P1755-P1764 bind the current bounded repairs and restored HTTP/restart proof. P1765-P1772 carry the independently bounded suite/HTTP assignments. Their local acceptance does not substitute for the existing release, status, query and final-audit execution gates. The final review identified occupied Create conflicts, incomplete structural-change coverage, graph secret/recording boundaries, compiler publication freshness and workspace ancestor aliases as defects to repair before closure.
+For this first working release, keep the already agreed cuts: broad all-sixteen final audit/administrative closure, HTTP MCP, extra edge-case/restart expansion, and automatic old-image retirement are deferred. Existing later APIs and rollback data remain available; an unexecuted/deferred O179 is never reported completed. Every executed Workflow/Action still requires its actual Journal evidence. These deferrals do not close the overall Epic, which remains Active.
 
 ### Current Operator-selected scope
 
@@ -181,13 +177,7 @@ The original six composite stages retain the original thirteen-Workflow executio
 
 ### Current execution frontier
 
-### Restored execution frontier
-
-The latest Operator instruction supersedes the first-cut deferrals below. Resume the existing P1620 release chain, P1616 all-role status proof, P1527-P1529 query proof, P1713/P1716 recovery, and P1655 then P1124 final closure. Exact prior-image retirement remains conditional on successful promotion and absence of container/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
-
-The N5 gate and current audit repairs are tracked in P1755-P1772 with C483-C490 at their owning Scope Units. Root owns Git, runtime publication, Docker image changes and actual MCP dispatch. Independent workers have exclusive code/test scopes. Test doubles, source checks and protocol fixtures remain clearly distinct from actual release/runtime proof.
-
-### Historical first-cut snapshots — superseded by the restored frontier
+### First working release cut
 
 The Operator directed cutting or postponing work to reach a first working release. Keep the required Unit, candidate-image/canary, Docker/MCP, Full Gate and Journal proofs. Postpone automatic prior-image retirement, expanded crash/restart recovery testing, the broad all-sixteen audit and additional edge-case expansion. Retain N as rollback and preserve the existing later cleanup/recovery capabilities. A first-release caller may stop after verified promotion; an unexecuted retirement Step is deferred, not retired or completed. The deferred work and full Epic closure remain unfinished.
 
@@ -197,7 +187,7 @@ The latest continuation saves the bootstrap proof implementation in b790a3fd0 af
 
 The Operator approved the separate bounded host E2E executor. Its RMED, private-driver grammar and configurable defaults are accepted in c450b1b45; C476@2 records approval and unfinished implementation. P1740 with children P1741-P1749 owns the bounded executor, sealed Harness bindings, phase map, consumer/admission integration and independent local acceptance; P1744/P1745 are now decomposed further into P1750-P1754. Existing Suite RMED phase amendments are accepted in 7d14bebd9. P1743 is Done and C477 resolved; the independently accepted Operations graph and original full predecessor archives are saved in 1c159f18d. Root saved the bounded proof/task frontier in ebacdd1ee and the context/Driver/Harness/phase-map code in 5e0dfee93 after independent source acceptance. Root's actual verification passed 24 combined context/Driver/phase-map cases, five Runtime image-binding cases and two actual MCP transport cases. C479/C480 are resolved for strict context admission and duplicate testcase refusal. The private gate's capability/settings/predecessor repairs have bounded static acceptance but still need expanded golden behavior and explicit D582#10 Harness metadata; C478 remains Active. Canonical Methodology is still stale and Docker access remains denied even after the Operator recreated its socket. Actual full-suite execution, source-frontier rebind, first-runtime installation and promotion remain mandatory. These newest facts supersede older development snapshots below, not their actual historical events.
 
-Historical disposition: the Operator temporarily deferred queue item #5, the final all-sixteen-Workflow code-versus-RMED/O review, coverage audit and Epic closure. The latest continuation restores that work. CA-P-1655 and CA-P-1124 remain unfinished until their actual gates pass.
+The Operator temporarily deferred queue item #5: the final all-sixteen-Workflow code-versus-RMED/O review, coverage audit and Epic closure. CA-P-1655 and CA-P-1124 remain unfinished and are not being executed now. Continue the source-admission, manifest-publication, recovery integration, first-runtime installation and actual runtime-test work; their necessary local checks remain in scope. This deferral is neither a waiver of final acceptance nor permission to mark the Epic Done.
 
 The latest 2026-10-05 continuation supersedes the older snapshots below. P1715 is Done: c1a4749e2 actually published and independently observed the source-admitted sixteen-route successor, with completed canonical Event journal:release-manifest:81cf4fac9b9087e14d451502fa1be473c664eea1f7f4b74e1032ba1b084449a7. Physical Carrier SHA-256 is 1eabfd2f1a0df45ae0df2ff4b2221ebe557ef1f520a990ef6d10f542259d6723; the canonical digest is 48a03709ba64113b007893bf92886be447a57be1ce5b324056c8f18eab7854e7. Durable recovery, source admission and immutable-suite executor development are saved in 88e6546d8. Earlier focused recovery/provider and source-admission results are not actual Docker Release acceptance.
 
