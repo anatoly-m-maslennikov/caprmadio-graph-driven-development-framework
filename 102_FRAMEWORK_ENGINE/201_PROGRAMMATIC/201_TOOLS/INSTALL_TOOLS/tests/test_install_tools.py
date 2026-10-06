@@ -67,6 +67,11 @@ class InstallToolsTests(unittest.TestCase):
             self.canonical,
             ignore=shutil.ignore_patterns("tests", "__pycache__", "*.pyc", ".DS_Store"),
         )
+        private_reader_source = TOOLS_SOURCE.parent / "204_MCP"
+        private_reader_target = self.canonical.parent / "204_MCP"
+        private_reader_target.mkdir()
+        for name in ("release_source_admission.py", "selected_routes.py"):
+            shutil.copy2(private_reader_source / name, private_reader_target / name)
 
     def tearDown(self) -> None:
         if self.previous_codex_home is None:
@@ -172,6 +177,28 @@ class InstallToolsTests(unittest.TestCase):
             )
         self.assertEqual([], list((self.repository / ".caprmedio_runtime").rglob("__pycache__")))
         self.assertEqual([], list((self.repository / ".caprmedio_runtime").rglob("*.pyc")))
+
+    def test_release_private_reader_closure_has_exact_sorted_inventory_rows(self) -> None:
+        result = install_tools.install(self.repository, apply=True)
+        rows, release = install_tools.source_inventory(self.repository)
+        self.assertEqual(result["release"], release)
+        self.assertEqual(sorted(row["path"] for row in rows), [row["path"] for row in rows])
+        release_root = self.repository / ".caprmedio_runtime/tools/releases" / release
+        for relative in ("204_MCP/release_source_admission.py", "204_MCP/selected_routes.py"):
+            source = self.canonical.parent / relative
+            installed = release_root / relative
+            self.assertEqual(source.read_bytes(), installed.read_bytes())
+            self.assertEqual(source.stat().st_mode & 0o777, installed.stat().st_mode & 0o777)
+        (self.canonical.parent / "204_MCP/selected_routes.py").unlink()
+        with self.assertRaisesRegex(install_tools.InstallationError, "canonical private reader source is missing"):
+            install_tools.source_inventory(self.repository)
+
+    def test_release_private_reader_symlink_is_refused(self) -> None:
+        dependency = self.canonical.parent / "204_MCP/selected_routes.py"
+        dependency.unlink()
+        dependency.symlink_to("release_source_admission.py")
+        with self.assertRaisesRegex(install_tools.InstallationError, "canonical private reader source is missing"):
+            install_tools.source_inventory(self.repository)
 
     def test_apply_without_hooks_installs_tools_and_preserves_host_hook_state(self) -> None:
         custom = self.repository / "custom-hooks"

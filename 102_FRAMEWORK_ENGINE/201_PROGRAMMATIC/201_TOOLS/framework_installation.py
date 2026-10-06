@@ -36,6 +36,12 @@ TOOLS_DIRECTORY = "TOOLS"
 INSTALL_ENTRYPOINT = "TOOLS/INSTALL_TOOLS/install_tools.py"
 TRIGGER_ENTRYPOINT = "TOOLS/COMMIT_TRIGGER/commit_trigger.py"
 SERVICE_ENTRYPOINT = "TOOLS/START_BACKGROUND_SERVICES/start_background_services.py"
+RELEASE_REFERENCE_CONTEXT = "RELEASE_VERSION/release_suite_reference_context.py"
+PRIVATE_READER_DIRECTORY = "204_MCP"
+PRIVATE_READER_FILES = (
+    "release_source_admission.py",
+    "selected_routes.py",
+)
 REQUIRED_FILES = (
     "framework_installation.py",
     "project_runtime.py",
@@ -153,8 +159,33 @@ def source_inventory(repository: Path | str, *, source_root: Path | None = None)
                 "mode": path.stat().st_mode & 0o777,
             }
         )
+    if RELEASE_REFERENCE_CONTEXT in available:
+        private_root = canonical.parent / PRIVATE_READER_DIRECTORY
+        if not private_root.is_dir() or private_root.is_symlink():
+            raise InstallationError("canonical-source-incomplete", "canonical private reader source is missing")
+        for name in PRIVATE_READER_FILES:
+            path = private_root / name
+            if not path.is_file() or path.is_symlink():
+                raise InstallationError("canonical-source-incomplete", f"canonical private reader source is missing: {name}")
+            rows.append(
+                {
+                    "path": f"{PRIVATE_READER_DIRECTORY}/{name}",
+                    "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                    "mode": path.stat().st_mode & 0o777,
+                }
+            )
+    rows.sort(key=lambda row: str(row["path"]))
     release = digest({"schema_version": SCHEMA_VERSION, "package": PACKAGE, "files": rows})
     return rows, release
+
+
+def _inventory_source(canonical: Path, relative: Path) -> Path:
+    """Map one verified inventory row back to its canonical source carrier."""
+    if relative.parts[:1] == (TOOLS_DIRECTORY,):
+        return canonical / relative.relative_to(TOOLS_DIRECTORY)
+    if relative.parts[:1] == (PRIVATE_READER_DIRECTORY,) and relative.name in PRIVATE_READER_FILES and len(relative.parts) == 2:
+        return canonical.parent / relative
+    raise InstallationError("install-manifest-invalid", f"release inventory path is unsupported: {relative.as_posix()}")
 
 
 def _render_release_manifest(release: str, rows: Sequence[Mapping[str, Any]]) -> str:
@@ -301,7 +332,12 @@ def install_release(
     try:
         for row in rows:
             relative = Path(str(row["path"]))
-            source = canonical / relative.relative_to(TOOLS_DIRECTORY)
+            source = _inventory_source(canonical, relative)
+            if not source.is_file() or source.is_symlink():
+                raise InstallationError("canonical-source-incomplete", f"canonical release source is unavailable: {relative.as_posix()}")
+            if (hashlib.sha256(source.read_bytes()).hexdigest() != row["sha256"]
+                    or source.stat().st_mode & 0o777 != row["mode"]):
+                raise InstallationError("canonical-source-drift", f"canonical release source changed: {relative.as_posix()}")
             target = staging / relative
             if not target.parent.is_dir():
                 target.parent.mkdir(parents=True, exist_ok=True)
@@ -316,6 +352,9 @@ def install_release(
                         copied.stderr.decode("utf-8", "replace").strip() or f"cannot copy release file: {relative}",
                     )
             target.chmod(int(row["mode"]))
+            if (hashlib.sha256(target.read_bytes()).hexdigest() != row["sha256"]
+                    or target.stat().st_mode & 0o777 != row["mode"]):
+                raise InstallationError("release-copy-failed", f"copied release file differs: {relative.as_posix()}")
         _atomic_write(staging / RELEASE_MANIFEST, _render_release_manifest(release, rows), mode=0o644)
         if release_root.exists():
             expected_manifest = _render_release_manifest(release, rows)
