@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 5
-updated_at: "2026-10-06 18:13:10 +0000"
+version: 4
+updated_at: "2026-10-06 14:19:34 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Private suite reference-context encoding"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Project Structure, Operator, Workflow, Action, Source Carrier, Digest]
@@ -49,7 +49,7 @@ The Suite Owner **must** encode the reference context as canonical JSON containi
 | Package | Binding carrier | SHA-256 |
 | --- | --- | --- |
 | IMPLEMENTATION_WORKFLOW | `102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/IMPLEMENTATION_WORKFLOW/source_bindings.json` | `9c79de6ac6f022c3d4361d460729b3c9c7af0e8473aa972181dc844a93a0a4a3` |
-| RMED_ATOM_REVIEW | `102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json` | `6da38387e1d8633e1901bb06e649d27550f4fe656220c7bdb91648aea3c04dc2` |
+| RMED_ATOM_REVIEW | `102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW/source_bindings.json` | `457acb8641cc0f06655694e3a079bd4c26c1bc9eb9dd778afc024b18220ae055` |
 
 Include each exact binding carrier and every member of its existing `sources` array. A source pin has exactly `atom_id`, positive integer `version`, safe Project-relative `path` and lowercase SHA-256 `sha256`; validate those values against the current active Atom. Keep each binding's existing schema-1 package metadata unchanged. Duplicate declarations within one binding and conflicting shared pins are invalid; identical shared pins across the closed frontiers are unioned once. The resulting carriers are ordinary `reference_rows`, not a new context field, public request, inventory field or Journal schema. Obsolete Plan carriers and folder-wide discovery are not members of this frontier.
 

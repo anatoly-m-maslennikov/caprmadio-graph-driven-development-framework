@@ -589,7 +589,7 @@
   "settings": [
     {
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
-      "sha256": "702ecd4f808ae57fcf26eb0e1fd1dac1b9bbfbbc54587a437fac6456c250b71e"
+      "sha256": "f8fda1107671ad6c3fd02653ada4f16ffe01ce0a3f57b4a732d7eac39d4e3851"
     },
     {
       "path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",

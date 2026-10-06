@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 4
-updated_at: "2026-10-06 18:13:10 +0000"
+version: 3
+updated_at: "2026-10-06 16:20:28 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Validated compiler and package handoff"
   depends_on: [Tool, Manifest, Digest, Methodology, Projection, Installation, Runtime]
@@ -40,31 +40,31 @@ The handoff is an internal validation boundary, not a claim of compiler, package
 
 ### Current predecessor trust registrations
 
-Under the existing CA-P-1117 autonomy envelope, Release Version may admit historical source-delivery evidence prospectively through this source-authoritative private carrier. It is a current admission, not retroactive sealing and not proof that mutable bytes were unchanged at the historical run time. The following fenced object is the one locally verified N12 registration, retained as current evidence:
+Under the existing CA-P-1117 autonomy envelope, Release Version may admit historical source-delivery evidence prospectively through this source-authoritative private carrier. It is a current admission, not retroactive sealing and not proof that mutable bytes were unchanged at the historical run time. The following fenced object is the one evidence-worker-supplied N10 registration, retained as current evidence:
 
 ```json
 {
   "schema_version": 1,
   "registrations": [
     {
-      "registration_id": "current-n12-source-copy-20261006",
+      "registration_id": "current-n10-source-copy-20261006",
       "basis": "current admission of historical delivery evidence",
       "authorization_ref": ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations.md",
-      "registered_at": "2026-10-06T18:13:10Z",
-      "journal_path": ".caprmedio_caprmedio/_journal/run-support-2026-10-06-part-3.ndjson",
-      "event_id": "event-fdaa486d-9925-47b2-b69d-ba74015b90a1",
-      "event_digest": "5a4f288da612fcb8fc112b58b830e8eea4ffe53f5841703656c9cf06278ccf44",
-      "effect_ref": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources#sha256=504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
-      "action_result_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N12/release-epic-resume-20261006-N12:step:3:action:1.json",
-      "action_result_sha256": "64566043138f19c5be83bff71f1b5015008433eeb96f16cf81b73f3e6f46e1f7",
-      "checkpoint_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N12/release_action_run.json",
-      "checkpoint_sha256": "73ef648a2f2c4d24d464c53e9726a718acbcac7a8901802023adea50bc639b48",
-      "candidate_snapshot_manifest_sha256": "72616b32ea0d9349ee82c407e9600f9bf0726ef17b38db47edbed8bca2f1fdc4",
+      "registered_at": "2026-10-06T16:17:21Z",
+      "journal_path": ".caprmedio_caprmedio/_journal/run-support-2026-10-06-part-2.ndjson",
+      "event_id": "event-d9ab374a-0e60-418a-b3f8-f9331c4ca37b",
+      "event_digest": "d29c6d18638cdbd9ec0f2090cb9fd58ce2c1d8bd61c1afd53d490e8cb7a43d58",
+      "effect_ref": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources#sha256=7ff204b0618234550599ce41b617a03d9c6b785469e122fb5746adf948a8a605",
+      "action_result_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N10/release-epic-resume-20261006-N10:step:3:action:1.json",
+      "action_result_sha256": "ee9fbf519c6c471bc1dc20c713bda4956cb204c9c52bbc18d02d7c120275763e",
+      "checkpoint_path": ".caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N10/release_action_run.json",
+      "checkpoint_sha256": "136b023b4cba1246f2b2f37e433a01daa26e862369acafb5b77c4da15c58cb36",
+      "candidate_snapshot_manifest_sha256": "a89572dd37ebe6bca38ee85b8f4bf2532c51ed5f5d9994e2088e5f44d6b4bfc6",
       "executing_release": "6f2e3a615a4f4d6da0f16831800f9e4b7ff84f89b89faeefc359f51711d28c57",
       "source_copy_root": "101_LAYER_1_FRAMEWORK_METHODOLOGY/sources",
-      "expected_derived_source_copy_sha256": "504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
-      "actual_derived_source_copy_sha256": "504136b891165dcaef4dbc393e2c3af596e1fab6ea4d35b02584aedab4f0ed3c",
-      "persistent_inventory_sha256": "9c3d17d9b2f28ff9ff4071fda3b867c9fd06b2915e82a0c22e50b0f654cb5506"
+      "expected_derived_source_copy_sha256": "7ff204b0618234550599ce41b617a03d9c6b785469e122fb5746adf948a8a605",
+      "actual_derived_source_copy_sha256": "7ff204b0618234550599ce41b617a03d9c6b785469e122fb5746adf948a8a605",
+      "persistent_inventory_sha256": "c2d18bd6fff9908223f44f6e77c93ba7c1e03c857c72ec4fcfdf73d18e75ae6c"
     }
   ]
 }

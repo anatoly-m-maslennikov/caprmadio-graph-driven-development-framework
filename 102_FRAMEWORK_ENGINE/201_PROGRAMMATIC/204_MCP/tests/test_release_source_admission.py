@@ -20,7 +20,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "72712694ba4d40069ac03e6d2513b04b15bd1d2970e26108e2ae152c5da54d69"
+AUTHORITY_SHA = "8d99f7982f39f81b90887f6326924e5d5d3e3dcf3a7ad77f25d03314dc4505ba"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402
@@ -80,7 +80,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@13 is not the accepted source pin")
+            raise AssertionError("current D572@14 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
         cls.private_carriers = json.loads(re.search(
             r"^## Private implementation carriers\n+```json\n(.*?)\n```$",
