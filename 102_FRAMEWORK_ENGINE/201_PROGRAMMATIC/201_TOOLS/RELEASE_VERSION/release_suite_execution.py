@@ -19,6 +19,7 @@ from pathlib import Path
 from release_contract import ReleaseContractError, ValidatedCandidate
 from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation
 from release_image import CANDIDATE_LABEL, CONTEXT_LABEL, DockerExecutor, IMAGE_ID
+from bootstrap_image import BootstrapImageError, read_retained_initial_framework_image
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
@@ -120,6 +121,23 @@ def _inspect_bound_n_image(docker: DockerExecutor, root: Path,
                            binding: SelectedNImageBinding) -> SelectedNImageBinding:
     """Verify the immutable selected-N labels and its sole image PATH."""
 
+    if binding.bootstrap:
+        try:
+            retained = read_retained_initial_framework_image(
+                root, binding.executing_release, binding.image_digest,
+            )
+        except BootstrapImageError as error:
+            raise ReleaseContractError(
+                "release-suite-executor-n-unproven",
+                "executing N bootstrap image has no authentic retained proof",
+            ) from error
+        if (retained.manifest_sha256 != binding.executing_release
+                or retained.source_context_sha256 != binding.source_context_sha256
+                or retained.image_digest != binding.image_digest):
+            raise ReleaseContractError(
+                "release-suite-executor-n-unproven",
+                "executing N bootstrap proof does not bind the selected image",
+            )
     observed = docker.run(("docker", "image", "inspect", binding.image_digest), cwd=root, timeout_seconds=_INSPECT_TIMEOUT_SECONDS)
     if observed.timed_out:
         raise ReleaseContractError("release-suite-executor-n-unproven", "executing N image inspection timed out")
@@ -141,9 +159,21 @@ def _inspect_bound_n_image(docker: DockerExecutor, root: Path,
             or not isinstance(environment, list)
         ):
             raise ValueError("image does not prove selected N manifest/context labels")
-        if len(environment) != 1 or not isinstance(environment[0], str) or not environment[0].startswith("PATH="):
-            raise ValueError("image has undeclared environment members")
-        path = environment[0].removeprefix("PATH=")
+        if binding.bootstrap:
+            environment_values: dict[str, str] = {}
+            for item in environment:
+                if not isinstance(item, str) or "=" not in item:
+                    raise ValueError("bootstrap image environment is malformed")
+                name, value = item.split("=", 1)
+                if (not name or name in environment_values or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name)
+                        or "\x00" in value or "\n" in value or "\r" in value):
+                    raise ValueError("bootstrap image environment is unsafe")
+                environment_values[name] = value
+            path = environment_values.get("PATH")
+        else:
+            if len(environment) != 1 or not isinstance(environment[0], str) or not environment[0].startswith("PATH="):
+                raise ValueError("image has undeclared environment members")
+            path = environment[0].removeprefix("PATH=")
         if not path or "\x00" in path or "\n" in path or "\r" in path:
             raise ValueError("image PATH is unsafe")
         return replace(binding, image_path=path)

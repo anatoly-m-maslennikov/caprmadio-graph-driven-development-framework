@@ -22,8 +22,11 @@ from pathlib import Path, PurePosixPath
 from typing import Literal, Protocol
 
 from release_contract import IMAGE_DOCKERFILE, ReleaseContractError, canonical_json
+from release_contract import REQUIRED_ENGINE_SOURCE_PREFIXES
+from release_handoff import PackageRow
 from release_image import DockerCommandResult, DockerExecutor, DockerSubprocessExecutor, IMAGE_ID
 from release_inventory import ReleaseInventoryError, refuse_secret_path
+from release_packaging import REQUIRED_SKILL_FILES, RUNTIME_ROOT, ReleasePackagingError, _render_manifest, _verify_release
 
 
 BOOTSTRAP_IMAGE_RELATIVE = Path(".caprmedio_runtime/framework/bootstrap-image-evidence")
@@ -480,6 +483,13 @@ def produce_initial_framework_image(plan: object, *, executor: DockerExecutor,
 
 def _load_evidence(plan: object, image_digest: str) -> tuple[Path, BootstrapImageEvidence]:
     root, _rows, manifest_sha256, source_context_sha256, _bytes = _plan(plan)
+    return _load_evidence_for_identity(root, manifest_sha256, source_context_sha256, image_digest)
+
+
+def _load_evidence_for_identity(root: Path, manifest_sha256: str, source_context_sha256: str,
+                                image_digest: str) -> tuple[Path, BootstrapImageEvidence]:
+    """Read the canonical proof addressed by an already verified package."""
+
     proof = _proof_key(root, manifest_sha256, image_digest)
     if proof.is_symlink() or not proof.is_dir():
         raise _error("bootstrap-image-proof-missing", "canonical bootstrap image proof is absent")
@@ -509,7 +519,7 @@ def _load_evidence(plan: object, image_digest: str) -> tuple[Path, BootstrapImag
     return proof, evidence
 
 
-def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> None:
+def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> list[dict[str, object]]:
     commands = proof / "commands.json"
     if commands.is_symlink() or not commands.is_file() or _digest(commands.read_bytes()) != evidence.commands_sha256:
         raise _error("bootstrap-image-proof-invalid", "canonical bootstrap command receipt changed")
@@ -533,6 +543,10 @@ def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> 
     if any(type(record["started_at_ns"]) is not int or type(record["finished_at_ns"]) is not int
            or record["started_at_ns"] > record["finished_at_ns"] for record in records):
         raise _error("bootstrap-image-proof-invalid", "canonical bootstrap command times are invalid")
+    if any(type(record["exit_code"]) is not int or record["exit_code"] != 0
+           or type(record["timed_out"]) is not bool or record["timed_out"]
+           for record in records):
+        raise _error("bootstrap-image-proof-invalid", "canonical bootstrap command receipt is not successful")
     build, inspect, canary = (record["argv"] for record in records)
     expected_labels = {
         f"{PACKAGE_IMAGE_LABEL}={evidence.manifest_sha256}",
@@ -552,6 +566,141 @@ def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> 
                        "/opt/caprmedio-bootstrap-canary.py"]
     if canary != expected_canary:
         raise _error("bootstrap-image-proof-invalid", "retained MCP canary argv is not bound to the immutable ID")
+    return records
+
+
+def _retained_initial_package(root: Path, executing_release: str) -> tuple[Path, tuple[PackageRow, ...], bytes, str]:
+    """Read a first-N package without consulting the subsequently edited host source."""
+
+    if not isinstance(executing_release, str) or _SHA256.fullmatch(executing_release) is None:
+        raise _error("bootstrap-image-package-invalid", "retained bootstrap release identity is invalid")
+    package_relative = f"{RUNTIME_ROOT.as_posix()}/releases/{executing_release}"
+    manifest_path = _safe_file(root, f"{package_relative}/manifest.toml", code="bootstrap-image-package-missing")
+    try:
+        manifest_bytes = manifest_path.read_bytes()
+        manifest_text = manifest_bytes.decode("utf-8")
+        manifest = tomllib.loads(manifest_text)
+        if (
+            _digest(manifest_bytes) != executing_release
+            or set(manifest) != {"schema_version", "candidate_snapshot_manifest_sha256", "package", "files"}
+            or manifest["schema_version"] != 2
+            or manifest["package"] != "caprmedio-framework"
+            or not isinstance(manifest["candidate_snapshot_manifest_sha256"], str)
+            or _SHA256.fullmatch(manifest["candidate_snapshot_manifest_sha256"]) is None
+            or not isinstance(manifest["files"], list)
+        ):
+            raise ValueError("retained bootstrap manifest is invalid")
+        rows = tuple(PackageRow.model_validate({
+            "resource": row["resource"],
+            "source_path": row["source_path"],
+            "destination_path": row["destination"],
+            "sha256": row["sha256"],
+            "mode": row["mode"],
+        }) for row in manifest["files"])
+        source_context_sha256 = manifest["candidate_snapshot_manifest_sha256"]
+        expected_context = _digest(canonical_json([
+            (row.source_path, row.sha256, row.mode)
+            for row in sorted(rows, key=lambda item: item.source_path)
+        ]))
+        destinations = {row.destination_path for row in rows}
+        resources = {row.resource for row in rows}
+        if (
+            not rows
+            or list(rows) != sorted(rows, key=lambda item: (item.destination_path, item.source_path, item.sha256))
+            or len(destinations) != len(rows)
+            or expected_context != source_context_sha256
+            or resources != {"FRAMEWORK_ENGINE", "METHODOLOGY", "SKILL"}
+            or not any(row.destination_path.startswith("METHODOLOGY/sources/") for row in rows)
+            or not any(row.destination_path.startswith("METHODOLOGY/compiled/") for row in rows)
+            or not REQUIRED_SKILL_FILES <= destinations
+            or any(
+                not any(row.source_path.startswith(prefix) for row in rows if row.resource == "FRAMEWORK_ENGINE")
+                for prefix in REQUIRED_ENGINE_SOURCE_PREFIXES
+            )
+        ):
+            raise ValueError("retained bootstrap package is incomplete")
+        package = root / package_relative
+        _verify_release(package, _render_manifest(source_context_sha256, rows), rows)
+    except (KeyError, OSError, TypeError, ValueError, tomllib.TOMLDecodeError, ReleasePackagingError) as error:
+        raise _error("bootstrap-image-package-invalid", "retained bootstrap package is not exact") from error
+    return package, rows, manifest_bytes, source_context_sha256
+
+
+def _verify_retained_package_context(proof: Path, manifest_bytes: bytes, rows: tuple[PackageRow, ...]) -> None:
+    """Tie the retained build context and canary input to the retained package bytes."""
+
+    package = proof / "context" / "PACKAGE"
+    try:
+        if package.is_symlink() or not package.is_dir() or (package / "manifest.toml").read_bytes() != manifest_bytes:
+            raise ValueError("retained package context does not match the package manifest")
+        expected = {"manifest.toml", *(row.destination_path for row in rows)}
+        actual = {
+            item.relative_to(package).as_posix()
+            for item in package.rglob("*")
+            if item.is_file()
+        }
+        if actual != expected:
+            raise ValueError("retained package context inventory differs")
+        for row in rows:
+            _read_exact(package, row.destination_path, row.sha256, row.mode, code="bootstrap-image-proof-invalid")
+        canary = proof / "context" / "bootstrap-canary.json"
+        expected_canary = canonical_json({
+            "manifest_sha256": _digest(manifest_bytes),
+            "source_context_sha256": _source_context(rows),
+            "package_rows": [
+                {"resource": row.resource, "source_path": row.source_path,
+                 "destination": row.destination_path, "sha256": row.sha256, "mode": row.mode}
+                for row in rows
+            ],
+        })
+        if canary.is_symlink() or not canary.is_file() or canary.read_bytes() != expected_canary:
+            raise ValueError("retained canary input differs from the package")
+        program = proof / "context" / "bootstrap-canary.py"
+        if program.is_symlink() or not program.is_file() or program.read_bytes() != _canary():
+            raise ValueError("retained canary program differs from the fixed probe")
+    except (OSError, ValueError, BootstrapImageError) as error:
+        raise _error("bootstrap-image-proof-invalid", "retained bootstrap package context is invalid") from error
+
+
+def _source_context(rows: tuple[PackageRow, ...]) -> str:
+    return _digest(canonical_json([
+        (row.source_path, row.sha256, row.mode)
+        for row in sorted(rows, key=lambda item: item.source_path)
+    ]))
+
+
+def read_retained_initial_framework_image(project_root: Path | str, executing_release: str,
+                                          image_digest: str) -> BootstrapImageEvidence:
+    """Authenticate a first-N image from retained package/proof bytes only.
+
+    This is deliberately a reader, not an initializer revalidation: a later
+    N+1 source frontier is expected to differ from the first installed N.
+    """
+
+    try:
+        root = Path(project_root).resolve(strict=True)
+    except (OSError, TypeError, ValueError) as error:
+        raise _error("bootstrap-image-package-invalid", "Project root is unavailable") from error
+    if root.is_symlink() or not root.is_dir():
+        raise _error("bootstrap-image-package-invalid", "Project root is unsafe")
+    package, rows, manifest_bytes, source_context_sha256 = _retained_initial_package(root, executing_release)
+    del package
+    proof, evidence = _load_evidence_for_identity(root, executing_release, source_context_sha256, image_digest)
+    if evidence.execution_kind != "docker-subprocess":
+        raise _error("bootstrap-image-proof-invalid", "retained bootstrap proof was not produced by DockerSubprocessExecutor")
+    records = _verify_retained_commands(proof, evidence)
+    if _tree_digest(proof / "context") != evidence.context_sha256:
+        raise _error("bootstrap-image-proof-invalid", "canonical bootstrap proof bytes changed")
+    _verify_retained_package_context(proof, manifest_bytes, rows)
+    try:
+        report = json.loads((proof / records[2]["stdout_path"]).read_bytes().decode("utf-8"))
+    except (OSError, UnicodeDecodeError, TypeError, ValueError) as error:
+        raise _error("bootstrap-image-proof-invalid", "retained bootstrap canary report is invalid") from error
+    if not _canary_valid(report, manifest_sha256=executing_release,
+                         source_context_sha256=source_context_sha256,
+                         row_count=len(rows), image_digest=image_digest, actual_executor=True):
+        raise _error("bootstrap-image-proof-invalid", "retained bootstrap canary report is not bound to the package")
+    return evidence
 
 
 def revalidate_initial_framework_image(plan: object, image_digest: str, *, executor: DockerExecutor) -> BootstrapImageEvidence:
@@ -571,5 +720,5 @@ def revalidate_initial_framework_image(plan: object, image_digest: str, *, execu
 
 __all__ = [
     "BOOTSTRAP_IMAGE_RELATIVE", "BootstrapImageError", "BootstrapImageEvidence",
-    "produce_initial_framework_image", "revalidate_initial_framework_image",
+    "produce_initial_framework_image", "read_retained_initial_framework_image", "revalidate_initial_framework_image",
 ]

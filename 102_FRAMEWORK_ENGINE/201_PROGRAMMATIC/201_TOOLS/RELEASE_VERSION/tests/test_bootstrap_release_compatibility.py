@@ -26,7 +26,7 @@ from framework_initialization import (  # noqa: E402
     plan_initial_framework_installation,
 )
 from release_image import DockerCommandResult, DockerSubprocessExecutor  # noqa: E402
-from bootstrap_image import produce_initial_framework_image  # noqa: E402
+from bootstrap_image import BootstrapImageError, produce_initial_framework_image, read_retained_initial_framework_image  # noqa: E402
 from release_contract import ReleaseContractError  # noqa: E402
 from release_promotion import _prove_prior_skill  # noqa: E402
 from release_suite import _active_n_state, _bootstrap_source_context_is_valid  # noqa: E402
@@ -54,6 +54,14 @@ class _ImageFixture:
             PACKAGE_IMAGE_LABEL: manifest_sha256,
             SOURCE_CONTEXT_IMAGE_LABEL: source_context_sha256,
         }
+        self.environment = [
+            "PATH=/usr/bin:/bin",
+            "PYTHON_VERSION=3.14.7",
+            "PYTHON_SHA256=" + "b" * 64,
+            "UV_PROJECT_ENVIRONMENT=/opt/venv",
+            "UV_CACHE_DIR=/tmp/uv-cache",
+            "PYTHONDONTWRITEBYTECODE=1",
+        ]
 
     def run(self, argv, *, cwd, timeout_seconds):
         del cwd, timeout_seconds
@@ -75,7 +83,7 @@ class _ImageFixture:
                 "mcp_tools": ["get_mcp_reload_status"],
             }).encode(), b"")
         return DockerCommandResult(0, json.dumps([{"Id": IMAGE_ID, "Config": {
-            "Labels": self.labels, "Env": ["PATH=/usr/bin:/bin"],
+            "Labels": self.labels, "Env": self.environment,
         }}]).encode(), b"")
 
 
@@ -125,6 +133,15 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
 
     def _selector_bytes(self, values: dict) -> bytes:
         return "".join(f'{key} = {json.dumps(value)}\n' for key, value in values.items()).encode("utf-8")
+
+    def _stage_retained_package(self, plan) -> None:
+        package = self.root / ".caprmedio_runtime/framework/releases" / plan.release
+        for row in plan.rows:
+            target = package / row.destination_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((self.root / row.source_path).read_bytes())
+            target.chmod(row.mode)
+        (package / "manifest.toml").write_bytes(plan.manifest_bytes)
 
     def _assert_rejected_source_context(self, plan, selector: bytes, replacement: str) -> None:
         original = self.root / ".caprmedio_runtime/framework/releases" / plan.release / "manifest.toml"
@@ -198,6 +215,66 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
         self.assertEqual(verified.executing_release, plan.release)
         self.assertEqual(verified.source_context_sha256, plan.source_context_sha256)
         self.assertEqual(verified.image_path, "/usr/bin:/bin")
+
+        image.labels[PACKAGE_IMAGE_LABEL] = "0" * 64
+        with self.assertRaises(ReleaseContractError) as raised:
+            _inspect_bound_n_image(image, self.root, selected)
+        self.assertEqual(raised.exception.code, "release-suite-executor-n-unproven")
+
+    def test_retained_bootstrap_reader_uses_old_package_not_later_source_and_refuses_package_mismatch(self) -> None:
+        plan, _installed = self._initialize()
+        image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        source = self.root / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py"
+        source.write_bytes(b"later N+1 source frontier\n")
+
+        evidence = read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+
+        self.assertEqual(evidence.manifest_sha256, plan.release)
+        self.assertEqual(evidence.source_context_sha256, plan.source_context_sha256)
+        selected = _selector_binding(self.root, SimpleNamespace(
+            authority=SimpleNamespace(executing_release=plan.release),
+            manifest=SimpleNamespace(candidate_release="N+1"),
+        ))
+        self.assertEqual(_inspect_bound_n_image(image, self.root, selected).image_path, "/usr/bin:/bin")
+
+        retained = self.root / ".caprmedio_runtime/framework/releases" / plan.release
+        package_file = retained / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py"
+        package_file.write_bytes(b"forged retained package bytes\n")
+        with self.assertRaises(BootstrapImageError) as raised:
+            read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+        self.assertEqual(raised.exception.code, "bootstrap-image-package-invalid")
+
+    def test_retained_bootstrap_reader_refuses_a_valid_shaped_test_double_proof(self) -> None:
+        plan = plan_initial_framework_installation(self.root)
+        image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        evidence = produce_initial_framework_image(plan, executor=image)
+        self.assertEqual(evidence.outcome, "verified")
+        self.assertEqual(evidence.execution_kind, "test-double")
+        self._stage_retained_package(plan)
+        selector = {
+            "schema_version": 1,
+            "manifest_sha256": plan.release,
+            "release": plan.release,
+            "selected_release_root": f".caprmedio_runtime/framework/releases/{plan.release}",
+            "framework_engine_root": f".caprmedio_runtime/framework/releases/{plan.release}/FRAMEWORK_ENGINE",
+            "methodology_root": f".caprmedio_runtime/framework/releases/{plan.release}/METHODOLOGY",
+            "image_digest": IMAGE_ID,
+        }
+        current = self.root / ".caprmedio_runtime/framework/current.toml"
+        current.parent.mkdir(parents=True, exist_ok=True)
+        current.write_bytes(self._selector_bytes(selector))
+
+        with self.assertRaises(BootstrapImageError) as reader:
+            read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+        self.assertEqual(reader.exception.code, "bootstrap-image-proof-invalid")
+
+        selected = _selector_binding(self.root, SimpleNamespace(
+            authority=SimpleNamespace(executing_release=plan.release),
+            manifest=SimpleNamespace(candidate_release="N+1"),
+        ))
+        with self.assertRaises(ReleaseContractError) as suite:
+            _inspect_bound_n_image(image, self.root, selected)
+        self.assertEqual(suite.exception.code, "release-suite-executor-n-unproven")
 
 
 if __name__ == "__main__":
