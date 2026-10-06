@@ -65,7 +65,7 @@ class SelectedNativeProvidersTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.project = GoldenProject(REPOSITORY, self.root, GoldenCase("W10", "revert_changes"))
         self.manifest = self.project.prepare()
 
@@ -76,7 +76,8 @@ class SelectedNativeProvidersTests(unittest.TestCase):
                                              "manifest_digest": self.manifest["canonical_manifest_sha256"]}}
         selected = SelectedExecution(self.root)
         graph = selected._validate_graph(execution)
-        execution["requested_runs"] = build_requested_runs(graph, run_id)
+        execution["requested_runs"] = build_requested_runs(
+            graph, run_id, parameters.get("run_visit_limits"))
         return selected.freeze({"operation": "enqueue_selected", "run_id": run_id, "execution": execution})
 
     def registered_dispatch(self, frozen, *, agent=None):
@@ -194,9 +195,9 @@ class SelectedNativeProvidersTests(unittest.TestCase):
                 self.assertEqual("blocked", result["step_results"][0]["result"])
 
     def test_registered_implementation_agent_executes_disposable_code_and_assertion(self):
-        import implementation_actions
-        workspace = self.root / "disposable-workspace"
-        workspace.mkdir()
+        parameters = self.project.native_implementation_parameters()
+        base = parameters["base_packet"]
+        workspace = Path(base["workspace"])
         script = self.root / "mock_cli.py"
         script.write_text(textwrap.dedent('''
             import json, subprocess, sys
@@ -221,15 +222,7 @@ class SelectedNativeProvidersTests(unittest.TestCase):
             result = {'CA-O-091': 'evaluation_ready', 'CA-O-092': 'prepared', 'CA-O-093': 'implemented', 'CA-O-094': 'passed'}[step]
             output.write_text(json.dumps({'result': result, 'outputs': outputs, 'evidence': [{'step': step}], 'blockers': []}))
         '''), encoding="utf-8")
-        bindings = implementation_actions.current_source_bindings()
-        projection = implementation_actions.prepare_method_projection([row["path"] for row in bindings if row["atom_id"].startswith("CA-M-")])
-        base = {"workspace": str(workspace), "source_bindings": bindings, "permissions": {"allowed": True,
-                "implementation_workspace": {"kind": "disposable_workspace", "path": str(workspace), "allow_write": True}},
-                "method_projection": projection, "requirements_delivery": ["R/D"], "evaluations": ["E"],
-                "plan_item": {"estimated_minutes": 1}, "handoff_complete": True, "golden_e2e": True,
-                "baseline_command": "assertion.py", "agent_timeout_seconds": 5}
-        parameters = {"base_packet": base, "step_packets": {step: {"context": context, "step_marker": step}
-                      for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()}}
+        base.update(golden_e2e=True, baseline_command="assertion.py", agent_timeout_seconds=5)
         frozen = self.freeze("run_implementation_workflow", parameters)
         result, session = self.registered_dispatch(frozen, agent=ImplementationAgent([sys.executable, str(script)]))
         self.assertEqual("completed", result["outcome"])
