@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-06 14:47:41 +0000"
+version: 1
+updated_at: "2026-10-05 06:58:19 +0400"
 subjects:
   governs: "Tool/RELEASE_VERSION/Validated compiler and package handoff"
   depends_on: [Tool, Manifest, Digest, Methodology, Projection, Installation, Runtime]
@@ -25,8 +25,6 @@ The internal trusted handoff from a validated sealed candidate and successful co
 ## Claim
 
 Release Version **must** admit package staging only from one typed internal `SealedCandidateCompilation`, constructed from locally observed current selections, authority bytes, source inventory, and successful compiler output after the D566 manifest checksum and every sealed binding validate; it **must not** trust caller-provided gates, raw authority mappings, package rows, source permissions, or success evidence.
-
-The completed `SealedSourceCopy` handoff is also the predecessor-only source-copy proof when a later phase fails, blocks, or remains unpromoted. Its fixed source-copy target is exactly `101_LAYER_1_FRAMEWORK_METHODOLOGY/sources`; the proof must bind the old frozen candidate manifest, expected and actual old copy SHA-256 values, the same executing N, and a complete old-tree inventory of safe fixed-path files, bytes/SHA-256 values, and modes. The proof is usable only after the canonical Journal record and the exact Action/Run and CA-D-574 sealed checkpoint/proof are authenticated; arbitrary retained JSON, a missing/unrecorded proof, unknown member, tampered bytes, unsafe path, mode drift, or identity/wrong-N mismatch is a strict block. This predecessor proof does not authorize a new candidate, reuse old output, or replay old authorization. A new candidate independently revalidates its current source/settings/frontier/authority and performs the normal fresh copy, requiring its new actual copy SHA-256 to equal its new expected value; old and new source/frontier/settings digests are not required to match.
 
 ## Details
 
