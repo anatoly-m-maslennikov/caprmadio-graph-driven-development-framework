@@ -17,8 +17,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 22
-updated_at: "2026-10-06 11:21:41 +0000"
+version: 23
+updated_at: "2026-10-06 12:08:00 +0000"
 relations: {}
 ---
 # Summary
@@ -56,6 +56,8 @@ The bounded N8 source repairs are saved: module-owned executable scratch, gitles
 ### Current Operator-selected scope
 
 CA-P-1780 and CA-P-1781 are Done. the first refresh correctly stopped before writing because later Git-backed binding changes had no generic carrier event. the separately approved observer, independently reviewed and committed at `7a15f736b`, records the exact current state once as recovered revision 3 at 2026-10-06T15:20:21+04:00. the later actual guarded refresh is completed revision 4 at 2026-10-06T15:21:02+04:00, explicitly linked to that observation. strict admission accepts all sixteen routes with canonical digest `19757c9cb6e5977f5193e5b2fcf5fccee0efabb923a7fee7f99bac43d820bc98`; no binding event is pending. historical Journal prefixes and installed N are unchanged. C496/C497 are resolved; no stale-history guard was bypassed. fresh N9 dispatch and all remaining Release gates are still required and not yet claimed.
+
+fresh N9 `release-epic-resume-20261006-N9` was then actually dispatched through MCP under the refreshed sixteen-route admission. source delivery and compilation completed. its complete Unit gate failed with exit 1 after 816.0929900840056 seconds: 1,925 reported testcases, 16 failures, 57 errors and zero skipped. terminal interrupted Action/Step/Workflow receipts are recorded, with no pending event; the saved recording-pending execution-stop checkpoint is not a current recording gap. no candidate image, promotion or retirement occurred. CA-P-1782's nine independent source/fixture repair lanes and CA-C-498 now own this bounded frontier. complete local acceptance, refresh the exact source pins through the approved guarded path, and use a fresh N10; do not replay failed N9. installed N stays immutable.
 
 the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 
