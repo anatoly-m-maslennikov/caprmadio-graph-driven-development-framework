@@ -19,6 +19,9 @@ import tempfile
 import tomllib
 from typing import Any, Callable, Iterable, Mapping
 
+from atom_operations import ToolError as AtomToolError
+from atom_operations import frontmatter_scalar
+
 
 CONTROL_ROOT = ".caprmedio_caprmedio"
 STRUCTURE_RELATIVE_PATH = f"{CONTROL_ROOT}/project_structure.toml"
@@ -73,6 +76,16 @@ class SourceChange:
     @property
     def after_sha256(self) -> str:
         return _digest_text(self.after)
+
+
+@dataclass(frozen=True)
+class AtomScopeReference:
+    """One declared Scope Unit field that a bounded rename must repair."""
+
+    relative_path: str
+    field: str
+    old: str
+    new: str | None
 
 
 def _digest_text(value: str) -> str:
@@ -416,7 +429,29 @@ def _normalise_recovery(value: object) -> dict[str, Any]:
     return dict(item)
 
 
-def _reference_changes(root: Path, references: list[dict[str, Any]]) -> list[SourceChange]:
+def _replace_frontmatter_line(source: str, old: str, new: str, relative_path: str) -> str:
+    """Repair exactly one declared frontmatter line, never an identical body line."""
+    if not source.startswith("---\n"):
+        raise StructuralConflict(f"authoritative Atom source is not frontmatter-delimited: {relative_path}")
+    boundary = source.find("\n---\n", 4)
+    if boundary < 0:
+        raise StructuralConflict(f"authoritative Atom source frontmatter is malformed: {relative_path}")
+    frontmatter = source[4:boundary]
+    if frontmatter.count(old) != 1:
+        raise StructuralConflict(
+            f"authoritative Atom replacement must match exactly once in frontmatter: {relative_path}: {old!r}"
+        )
+    return source[:4] + frontmatter.replace(old, new, 1) + source[boundary:]
+
+
+def _reference_changes(
+    root: Path, references: list[dict[str, Any]], *, mechanical_repairs: Iterable[AtomScopeReference] = (),
+) -> list[SourceChange]:
+    scoped = {
+        (reference.relative_path, reference.old, reference.new)
+        for reference in mechanical_repairs
+        if reference.new is not None
+    }
     changes: list[SourceChange] = []
     for entry in references:
         path = entry["path"]
@@ -430,6 +465,12 @@ def _reference_changes(root: Path, references: list[dict[str, Any]]) -> list[Sou
             raise StructuralConflict(f"stale reference frontier: {entry['relative_path']}")
         after = before
         for replacement in entry["replacements"]:
+            key = (entry["relative_path"], replacement["old"], replacement["new"])
+            if key in scoped:
+                after = _replace_frontmatter_line(
+                    after, replacement["old"], replacement["new"], entry["relative_path"],
+                )
+                continue
             occurrences = after.count(replacement["old"])
             if occurrences != 1:
                 raise StructuralConflict(
@@ -439,6 +480,135 @@ def _reference_changes(root: Path, references: list[dict[str, Any]]) -> list[Sou
         if after != before:
             changes.append(SourceChange(path, entry["relative_path"], before, after))
     return changes
+
+
+def _frontmatter_scalar_line_replacement(
+    frontmatter: str, *, field: str, new_value: str, relative_path: str,
+) -> tuple[str, str]:
+    """Return one exact scalar-line repair without touching an Atom's body."""
+    expression = re.compile(
+        rf"(?m)^(?P<prefix>{re.escape(field)}:[ \t]*)(?P<value>.*?)(?P<suffix>[ \t]*)$"
+    )
+    matches = list(expression.finditer(frontmatter))
+    if len(matches) != 1:
+        raise StructuralConflict(
+            f"cannot derive an exact {field} repair from authoritative Atom: {relative_path}"
+        )
+    match = matches[0]
+    raw = match.group("value").strip()
+    if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in {"'", '"'}:
+        rendered = raw[0] + new_value + raw[-1]
+    else:
+        rendered = new_value
+    return match.group(0), match.group("prefix") + rendered + match.group("suffix")
+
+
+def _active_authoritative_atom_frontmatters(root: Path) -> list[tuple[str, str]]:
+    """Select current Atom sources without treating projections or prose as authority."""
+    control = root / CONTROL_ROOT
+    result: list[tuple[str, str]] = []
+    for path in sorted(control.rglob("*.md"), key=lambda candidate: candidate.as_posix()):
+        relative = path.relative_to(root).as_posix()
+        parts = path.relative_to(control).parts
+        if path.is_symlink() or "_projection" in parts:
+            continue
+        try:
+            source = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as error:
+            raise StructuralConflict(f"authoritative Atom frontier cannot read: {relative}") from error
+        if not source.startswith("---\n"):
+            continue
+        boundary = source.find("\n---\n", 4)
+        if boundary < 0:
+            raise StructuralConflict(f"authoritative Atom frontier is malformed: {relative}")
+        frontmatter = source[4:boundary]
+        try:
+            atom_id = frontmatter_scalar(frontmatter, "atom_id")
+            status = frontmatter_scalar(frontmatter, "status")
+        except AtomToolError as error:
+            raise StructuralConflict(f"authoritative Atom frontier is malformed: {relative}") from error
+        if atom_id is None or not isinstance(status, str) or status.casefold() != "active":
+            continue
+        if re.search(r"(?m)^projection:\s*(?:$|\{)", frontmatter):
+            continue
+        result.append((relative, frontmatter))
+    return result
+
+
+def _required_atom_scope_repairs(
+    root: Path, rows: list[dict[str, Any]], parameters: Mapping[str, Any],
+) -> list[AtomScopeReference]:
+    """Derive the current active Atom frontier for an identity rename.
+
+    Only the two declared Scope Unit frontmatter fields are mechanical
+    references.  Prose mentions, projections, inactive carriers, and a
+    caller's preservation/Goal assertions are deliberately not substitutes
+    for source-derived coverage.
+    """
+    operation = parameters["operation"]
+    if operation not in {"Rename", "Remove"}:
+        return []
+    previous = str(parameters["target_name"])
+    resulting = str(parameters["declaration"]["scope_unit_name"]) if operation == "Rename" else None
+    if (operation == "Rename" and previous == resulting) or not any(row["scope_unit_name"] == previous for row in rows):
+        return []
+    required: list[AtomScopeReference] = []
+    for relative_path, frontmatter in _active_authoritative_atom_frontmatters(root):
+        try:
+            for field in ("current_scope_unit", "claim_target_scope_unit"):
+                if frontmatter_scalar(frontmatter, field) != previous:
+                    continue
+                if resulting is None:
+                    old = _frontmatter_scalar_line_replacement(
+                        frontmatter, field=field, new_value=previous, relative_path=relative_path,
+                    )[0]
+                    new = None
+                else:
+                    old, new = _frontmatter_scalar_line_replacement(
+                        frontmatter, field=field, new_value=resulting, relative_path=relative_path,
+                    )
+                required.append(AtomScopeReference(relative_path, field, old, new))
+        except AtomToolError as error:
+            raise StructuralConflict(
+                f"authoritative Atom scope reference cannot be read: {relative_path}"
+            ) from error
+    return required
+
+
+def _validate_authoritative_scope_coverage(
+    root: Path, rows: list[dict[str, Any]], parameters: Mapping[str, Any],
+) -> list[AtomScopeReference]:
+    """Require every active declared Scope Unit reference in a rename frontier."""
+    required = _required_atom_scope_repairs(root, rows, parameters)
+    if parameters["operation"] == "Remove" and required:
+        affected = ", ".join(f"{reference.relative_path}:{reference.field}" for reference in required)
+        raise StructuralConflict(
+            "active Atom scope references require a separately authorized exact disposition before Remove: " + affected
+        )
+    by_path = {entry["relative_path"]: entry for entry in parameters["reference_frontier"]}
+    missing: list[str] = []
+    by_path_required: dict[str, list[AtomScopeReference]] = {}
+    for reference in required:
+        by_path_required.setdefault(reference.relative_path, []).append(reference)
+    for relative_path, references in by_path_required.items():
+        entry = by_path.get(relative_path)
+        actual = {
+            (pair["old"], pair["new"])
+            for pair in (entry["replacements"] if entry is not None else [])
+        }
+        expected = {(reference.old, reference.new) for reference in references}
+        for reference in references:
+            if (reference.old, reference.new) not in actual:
+                missing.append(f"{reference.relative_path}:{reference.field}")
+        if actual - expected:
+            raise StructuralConflict(
+                f"authoritative Atom reference frontier includes non-mechanical replacements: {relative_path}"
+            )
+    if missing:
+        raise StructuralConflict(
+            "authoritative Atom scope references are not covered by reference_frontier: " + ", ".join(missing)
+        )
+    return required
 
 
 def _atomic_write(path: Path, content: str) -> None:
@@ -559,6 +729,10 @@ def apply_scope_unit_action(
                 if operation == "Move" and target_row["scope_unit_name"] != target_name:
                     raise StructuralConflict("Move must retain the Scope Unit identity")
                 after[matches[0]] = target_row
+                if operation == "Rename":
+                    for descendant in after:
+                        if descendant["parent"] == target_name:
+                            descendant["parent"] = target_row["scope_unit_name"]
             target_name = target_row["scope_unit_name"]
         else:  # Remove
             target_name = normalised["target_name"]
@@ -579,11 +753,14 @@ def apply_scope_unit_action(
                     target_name=target_name, parameters=normalised,
                     errors=["direct-parent Goal coverage remains blocking"],
                 )
+        mechanical_repairs = _validate_authoritative_scope_coverage(root, before, normalised)
         effective_modes = _validate_tree(after, root)
         if target_row is not None:
             target_row = dict(target_row)
             target_row["effective_authority_mode"] = effective_modes[str(target_row["scope_unit_name"])]
-        reference_changes = _reference_changes(root, normalised["reference_frontier"])
+        reference_changes = _reference_changes(
+            root, normalised["reference_frontier"], mechanical_repairs=mechanical_repairs,
+        )
         rendered = _render_resulting_source(source, before, after)
         toml_change = SourceChange(structure_path, STRUCTURE_RELATIVE_PATH, source, rendered)
         changes = ([toml_change] if toml_change.before != toml_change.after else []) + reference_changes
@@ -910,6 +1087,7 @@ def queue_action_handlers(repository: Path | str) -> dict[str, Callable[[Mapping
                     "result": "stale", "effect_refs": [],
                     "native_result": {"state": "stale", "pre_toml_revision": observed},
                 }
+            _validate_authoritative_scope_coverage(root, rows, normalised)
             return normalised, None
         except StructuralConflict as error:
             return None, {
