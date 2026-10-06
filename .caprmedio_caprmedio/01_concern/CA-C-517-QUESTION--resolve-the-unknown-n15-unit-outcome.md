@@ -8,7 +8,7 @@ global_tier: 2
 status: active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 23:08:51 +0000"
+updated_at: "2026-10-06 23:10:43 +0000"
 subjects:
   governs: "Unknown N15 Unit outcome"
   depends_on: [Operator, Workflow Run, Action Run, Evaluation, Journal, Docker Image, Implementation]
@@ -36,6 +36,6 @@ how should the exact N15 Unit Action Run be closed when its host disappears befo
 
 only the exact N15 unresolved Action/Step/Workflow and their truthful terminal disposition. installed N, historical Events, other containers and all Release gates remain unchanged.
 
-## Decision required
+## Operator decision
 
-the Operator is asked to authorize a narrowly admitted operation that records N15 as interrupted/unknown, preserves all existing evidence, refuses competing terminal receipts and repeats, and performs no Unit replay, promotion or retirement. a new capability requires source-first RMED and independent acceptance before execution. no such operation or terminal fact has been created. independent source/test repairs may continue while this decision remains pending.
+the Operator explicitly approved: "Yes—record unknown and continue". authorize a narrowly admitted operation that records N15 as interrupted/unknown, preserves all existing evidence, refuses competing terminal receipts and repeats, and performs no Unit replay, promotion or retirement. this capability requires source-first RMED and independent acceptance before execution. no terminal fact has yet been created. keep this Question active until its authorized disposition is implemented and recorded; independent source/test repairs continue.
