@@ -435,6 +435,12 @@ def _context_value(context: SelectedReleaseActionContext) -> dict[str, Any]:
     return _dump_dataclass(context, SelectedReleaseActionContext, "context")
 
 
+# Checkpoints preserve the selected Workflow definition recorded when the Run
+# began.  Retain the immediately preceding O164 revision for status/recovery,
+# but reject an unknown revision rather than silently rebinding it.
+_SUPPORTED_RELEASE_WORKFLOW_VERSIONS = frozenset({5, 6})
+
+
 def _load_context(value: Any, index: int, *, root: str, workflow_run_id: str, fingerprint: str) -> SelectedReleaseActionContext:
     context = _load_dataclass(value, SelectedReleaseActionContext, "context")
     if (
@@ -445,7 +451,7 @@ def _load_context(value: Any, index: int, *, root: str, workflow_run_id: str, fi
         or context.frozen_parameters_sha256 != fingerprint
         or context.workflow_atom_id != "CA-O-164"
         or type(context.workflow_version) is not int
-        or context.workflow_version != 5
+        or context.workflow_version not in _SUPPORTED_RELEASE_WORKFLOW_VERSIONS
     ):
         raise _error("release-checkpoint-binding-mismatch", "context does not belong to the frozen selected Run")
     for name, identity in (("step_run_id", context.step_run_id), ("action_run_id", context.action_run_id)):

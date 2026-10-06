@@ -170,7 +170,7 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.run = ReleaseActionRun(PROJECT_ROOT, "workflow-1", _fingerprint(self.request), self.request)
         self.context = SelectedReleaseActionContext(
             PROJECT_ROOT, "workflow-1", "step-0", "action-0", "workflow-1", "step-0",
-            *PHASES[0][:2], self.run.frozen_parameters_sha256,
+            *PHASES[0][:2], self.run.frozen_parameters_sha256, workflow_version=6,
         )
         self.run.candidate = self.candidate
         self.run.preflight = _preflight(self.candidate)
@@ -181,7 +181,7 @@ class ReleaseCheckpointTests(unittest.TestCase):
         )
         self.run.next_phase = 1
 
-    def test_closed_canonical_round_trip_restores_typed_state_without_executor(self) -> None:
+    def test_closed_canonical_round_trip_preserves_legacy_workflow_five_without_executor(self) -> None:
         # The codec preserves the definition revision recorded by the selected
         # provider; it does not silently downgrade a newer frozen Workflow.
         self.context = SelectedReleaseActionContext(
@@ -206,8 +206,27 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.assertEqual(restored.preflight, self.run.preflight)
         self.assertEqual(restored.contexts, self.run.contexts)
         self.assertEqual(restored.results, self.run.results)
+        self.assertEqual(restored.contexts[0].workflow_version, 5)
 
         self.assertEqual(encode_release_action_checkpoint(restored), encoded)
+
+    def test_closed_canonical_round_trip_preserves_fresh_workflow_six(self) -> None:
+        encoded = encode_release_action_checkpoint(self.run)
+
+        restored = restore_release_action_checkpoint(encoded)
+
+        self.assertEqual(restored.contexts, self.run.contexts)
+        self.assertEqual(restored.contexts[0].workflow_version, 6)
+
+    def test_rejects_unknown_frozen_workflow_revision(self) -> None:
+        payload = json.loads(encode_release_action_checkpoint(self.run))
+        payload["contexts"][0]["context"]["workflow_version"] = 7
+        payload["sha256"] = release_action_checkpoint_sha256(payload)
+
+        with self.assertRaises(ReleaseContractError):
+            restore_release_action_checkpoint(
+                json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+            )
 
     def test_round_trip_preserves_all_retained_preflight_and_evidence_types(self) -> None:
         compilation = _compilation(self.candidate)
