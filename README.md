@@ -92,6 +92,21 @@ next Concern.
 
 Journals record changes and execution. Not every change needs every stage.
 
+Using the same system for projects and methodology is simpler →\
+both use Atoms, content roles and relations →\
+the same Tools and Prompts can work with both →\
+**the framework is built with the framework.**
+
+The framework must describe itself →\
+the [meta-model](.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL) uses Atoms to describe Atoms and other framework concepts →\
+this creates recursion and needs a starting point →\
+bootstrap seeds provided the first definitions; those seeds are now retired.
+
+Different projects need different rules →\
+Extensions and local configuration are also sets of Atoms →\
+they add capabilities or override rules where the Core allows it →\
+**expand and configure the framework using the same system.**
+
 ### Harness (engine)
 
 Ontology is big and complex →\
