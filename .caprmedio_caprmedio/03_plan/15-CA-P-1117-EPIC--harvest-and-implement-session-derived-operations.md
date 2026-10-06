@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 21
-updated_at: "2026-10-06 05:55:36 +0000"
+updated_at: "2026-10-06 06:24:05 +0000"
 relations: {}
 ---
 # Summary
@@ -48,6 +48,8 @@ Fresh Run `release-epic-resume-20261006-N6` stopped before the test gate with `r
 P1775-P1778's lifecycle, structural and Implementation packet source repairs are independently accepted and locally Done. Real disposable Release-host/MCP recovery retained one actual delivery terminal after a writer fault, rejected stale source/tampered binding recovery, and recorded the original event once without replay. These local proofs do not establish full Docker release acceptance.
 
 Fresh N7 completed delivery and compilation, then stopped before Unit execution because Finder metadata changed the raw retained bootstrap proof-context digest. P1779/C495 repair this reader mismatch without changing N or proof bytes; thirteen focused tests and actual retained-N reopening pass. N7's interruption is recorded with no pending events. Retain N5/N6/N7 and use a fresh source-bound candidate for remaining gates; no promotion or retirement is claimed.
+
+Fresh N8 completed delivery and compilation and actually ran the sealed Unit container. Its gate failed after 548.054 seconds: JUnit reports 554 observed testcases, 14 failures and 206 errors, including module-discovery/reporting errors after the one-GiB temporary filesystem filled. Its failed evidence remains at `.caprmedio_runtime/release_suite/f735f40bdc34d8f01404c9621a6bebfed890d492324117bebb5a7faf3a2206e1/attempt-4_7b454u/`. The Workflow stopped at the Unit gate, interruption is recorded, and no pending recordings remain. Scheduler success is not release success. Independent fixture repairs, gitless Project boundaries and module-scoped executable scratch are under verification for a fresh N9; no image construction, promotion or retirement resulted from N8. Preserve N8 without replay and installed N unchanged.
 
 ### Current Operator-selected scope
 
