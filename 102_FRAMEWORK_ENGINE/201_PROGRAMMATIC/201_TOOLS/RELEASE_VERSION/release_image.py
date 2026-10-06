@@ -310,7 +310,7 @@ def _context(root, candidate, compilation, attempt):
     pinned = (context / IMAGE_DOCKERFILE).read_bytes()
     if _digest(pinned) != candidate.manifest.candidate_image.dockerfile_sha256:
         raise ReleaseContractError("release-image-dockerfile-stale", "pinned Dockerfile digest differs")
-    _write(context / "Dockerfile", pinned + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n")
+    _write(context / "Dockerfile", pinned + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n")
     _write(context / "canary.py", CANARY.encode())
     package_rows = [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
                      "sha256": row.sha256, "mode": row.mode} for row in rows]
@@ -440,7 +440,7 @@ def _verify_build_artifacts(root, candidate, compilation, suite, build):
     spec = {"candidate_snapshot_manifest_sha256": identity, "package_manifest_sha256": _digest(manifest.encode()),
             "package_rows": [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
                               "sha256": row.sha256, "mode": row.mode} for row in rows], "engine_rows": engine_rows}
-    dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
+    dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
     if ((context / "canary.py").read_bytes() != CANARY.encode()
         or (context / "canary.json").read_bytes() != canonical_json(spec)
         or (context / "Dockerfile").read_bytes() != dockerfile

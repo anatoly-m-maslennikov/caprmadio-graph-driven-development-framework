@@ -193,7 +193,7 @@ class ReleaseImageTests(unittest.TestCase):
         self.assertTrue((context / "PACKAGE/METHODOLOGY/compiled").is_dir())
         self.assertTrue((context / "PACKAGE/SKILLS/ca/agents/openai.yaml").is_file())
         self.assertTrue((context / "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md").is_file())
-        self.assertIn(b"COPY PACKAGE /opt/caprmedio-framework", (context / "Dockerfile").read_bytes())
+        self.assertIn(b"COPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework", (context / "Dockerfile").read_bytes())
         self.assertNotIn("--tag", self.docker.calls[0])
         verified = verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
         self.assertEqual(verified.outcome, "verified")
