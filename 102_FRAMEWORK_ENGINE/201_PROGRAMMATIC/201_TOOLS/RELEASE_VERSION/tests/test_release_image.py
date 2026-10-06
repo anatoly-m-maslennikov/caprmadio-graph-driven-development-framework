@@ -127,10 +127,17 @@ class ReleaseImageTests(unittest.TestCase):
     def setUp(self):
         self.setup_candidate()
 
+    def cleanup_candidate(self):
+        fixture = getattr(self, "fixture", None)
+        if fixture is not None:
+            fixture.doCleanups()
+            self.fixture = None
+
     def setup_candidate(self, settings=None):
+        self.cleanup_candidate()
         self.fixture = suite_test.ReleaseSuiteTests("run")
         self.fixture.setUp()
-        self.addCleanup(self.fixture.doCleanups)
+        self.addCleanup(self.cleanup_candidate)
         self.root = self.fixture.root
         self.fixture.fixture.write("pyproject.toml", b"[project]\nname = 'fixture'\nversion = '0.0.0'\n")
         self.fixture.fixture.write("uv.lock", b"version = 1\n")
@@ -151,7 +158,13 @@ class ReleaseImageTests(unittest.TestCase):
                       for row in self.compilation.package_rows]
         (prior / "manifest.toml").write_text(_render_manifest("N", prior_rows))
         self.suite = self.fixture.execute_suite(self.candidate, self.compilation)
-        self.assertTrue(self.suite.passed)
+        self.assertTrue(
+            self.suite.passed,
+            msg=("sealed fixture suite did not pass: "
+                 f"outcome={self.suite.outcome!r}, reason={self.suite.reason!r}, "
+                 f"exit_code={self.suite.exit_code!r}, executed_tests={self.suite.executed_tests!r}, "
+                 f"evidence_root={self.suite.evidence_root!r}"),
+        )
         self.docker = FakeDocker()
 
     def build(self):
@@ -303,7 +316,6 @@ class ReleaseImageTests(unittest.TestCase):
         from release_promotion import promote_bound_release
         from test_release_promotion import recorded_gate_fixtures, recorded_host_patches
         if settings is not None:
-            self.fixture.doCleanups()
             self.setup_candidate(settings)
         selector = self.root / ".caprmedio_runtime/framework/current.toml"
         selector.write_text('release = "N"\n' + (f'candidate_image_digest = "{prior_image}"\n' if prior_image else ""))

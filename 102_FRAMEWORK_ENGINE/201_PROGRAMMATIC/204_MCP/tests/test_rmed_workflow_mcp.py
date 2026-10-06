@@ -1,13 +1,16 @@
 """Real stdio protocol with mock Atoms; no live review or Agent dispatch."""
+from contextlib import asynccontextmanager
+import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 import unittest
 
 from mcp import Client, StdioServerParameters
+from mcp.client.stdio import stdio_client
 
 ROOT = Path(__file__).resolve().parents[4]
 SERVER = ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py'
@@ -80,32 +83,65 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         (self.root / 'atom.md').write_text('mock original atom')
         (self.root / 'rules.md').write_text('mock applicable criteria')
 
-    def _copy_active_query_bindings(self):
-        """Seed this disposable Project from current D-carriers, not a fake exposure list."""
-        delivery = ROOT / '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery'
-        bindings = {}
-        for source in delivery.glob('*.md'):
-            for block in source.read_text(encoding='utf-8').split('```toml')[1:]:
-                binding = tomllib.loads(block.split('```', 1)[0]).get('tool_binding')
-                if isinstance(binding, dict) and binding.get('mcp_name') in QUERY_ROUTE_NAMES:
-                    bindings[binding['mcp_name']] = (source, binding)
-        self.assertEqual(set(QUERY_ROUTE_NAMES), set(bindings))
-        for source, binding in bindings.values():
-            carrier = self.root / source.relative_to(ROOT)
-            carrier.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, carrier)
-            entrypoint = ROOT / binding['entrypoint']
-            self.assertTrue(entrypoint.is_file())
-            destination = self.root / binding['entrypoint']
+    def _copy_declared_selected_manifest(self):
+        """Seed the disposable Project from the sealed manifest and its declared pins."""
+        manifest_ref = '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json'
+        manifest_source = ROOT / manifest_ref
+        manifest = json.loads(manifest_source.read_text(encoding='utf-8'))
+        references = {manifest_ref, manifest['source_freshness']['selected_source_registry_ref']}
+
+        def collect(value):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    if key == 'source_path':
+                        references.add(child)
+                    collect(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect(child)
+
+        collect(manifest)
+        authority_ref = (
+            '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/'
+            '201_FEATURE_TOOLS/07_delivery/'
+            'CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md'
+        )
+        authority = (ROOT / authority_ref).read_text(encoding='utf-8')
+        private = re.search(r'^## Private implementation carriers\n+```json\n(.*?)\n```$',
+                            authority, re.MULTILINE | re.DOTALL)
+        self.assertIsNotNone(private, 'D572 private implementation carriers are absent')
+        references.add(authority_ref)
+        references.update(item['source_path'] for item in json.loads(private.group(1)))
+
+        for relative in references:
+            source = ROOT / relative
+            self.assertTrue(source.is_file(), f'declared selected source is unavailable: {relative}')
+            destination = self.root / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(entrypoint, destination)
+            shutil.copyfile(source, destination)
+
+    def _server_parameters(self):
+        return StdioServerParameters(command=sys.executable,
+            args=[str(SERVER), '--project-root', str(self.root)])
+
+    @asynccontextmanager
+    async def _server_client(self, *, cache=None):
+        """Attach bounded server stderr to an otherwise opaque startup failure."""
+        with tempfile.TemporaryFile(mode='w+', encoding='utf-8') as stderr:
+            try:
+                async with Client(stdio_client(self._server_parameters(), errlog=stderr), cache=cache,
+                                  read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+                    yield client
+            except BaseException as error:
+                stderr.seek(0)
+                detail = stderr.read()[-4096:]
+                if detail:
+                    raise AssertionError(f'MCP stdio startup failed; stderr follows:\n{detail}') from error
+                raise
 
     async def test_real_server_discovery_marks_registered_query_bindings_mcp_available(self):
-        self._copy_active_query_bindings()
-        params = StdioServerParameters(command=sys.executable,
-            args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params, cache=None,
-                          read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+        self._copy_declared_selected_manifest()
+        async with self._server_client(cache=None) as client:
             registered = {tool.name: tool for tool in (await client.list_tools()).tools}
             self.assertTrue(set(QUERY_ROUTE_NAMES) <= set(registered))
             self.assertTrue(all(registered[name].annotations.read_only_hint for name in QUERY_ROUTE_NAMES))
@@ -117,9 +153,7 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(all(row['availability'] == 'mcp' for row in matches))
 
     async def test_stdio_gather_check_fix_report(self):
-        params = StdioServerParameters(command=sys.executable,
-            args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params, read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+        async with self._server_client() as client:
             tools = await client.list_tools()
             actual_tool_names = {tool.name for tool in tools.tools}
             self.assertEqual(D547_ADMITTED_SELECTED_ROUTES, SELECTED_ROUTE_NAMES)
@@ -192,9 +226,7 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(replay.structured_content['notifications'], [])
 
     async def test_protocol_rejects_unknown_fields_and_path_escape(self):
-        async with Client(StdioServerParameters(command=sys.executable,
-                args=[str(SERVER), '--project-root', str(self.root)]),
-                read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+        async with self._server_client() as client:
             for request in ({'operation': 'describe', 'surprise': True},
                             {'operation': 'status', 'run_id': '../escape'}):
                 result = await client.call_tool('rmed_atoms_base_revise', {'request': request})
