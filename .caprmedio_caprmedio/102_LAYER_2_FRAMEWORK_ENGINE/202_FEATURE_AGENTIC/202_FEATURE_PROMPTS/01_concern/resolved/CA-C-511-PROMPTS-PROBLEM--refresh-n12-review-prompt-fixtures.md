@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: PROMPTS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 18:24:00 +0000"
 subjects:
   governs: "Refresh N12 review prompt fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal]
@@ -37,5 +37,4 @@ refresh the exact prompt settings pin and correct the sealed authority fixture, 
 
 ## Result
 
-root-cause investigation and bounded repair are in progress. retain the full frozen report and historical Events.
-
+the capability-authority suite passes 6 tests and the RMED prompt contracts pass 17 tests. the exact current default-settings SHA is bound by the prompt manifest and D580 v5, without an unavailable legacy Project-file assertion. independent review preserves substantive Operator authorization and no-forcing checks. retain the frozen N12 report and historical Events.

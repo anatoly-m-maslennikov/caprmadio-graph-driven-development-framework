@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 18:24:00 +0000"
 subjects:
   governs: "Refresh N12 review prompt fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier]
@@ -38,3 +38,6 @@ refresh the exact prompt settings pin and correct the sealed authority fixture, 
 
 the observed failures are explained and fixed against current authority; focused regression suites pass and independent review accepts the bounded change. actual full Release acceptance remains with the parent Plan.
 
+## Result
+
+the capability-authority suite passes 6 tests and the RMED prompt contracts pass 17 tests. the exact current default-settings SHA is bound by the prompt manifest and D580 v5, without an unavailable legacy Project-file assertion. independent review preserves substantive Operator authorization and no-forcing checks.
