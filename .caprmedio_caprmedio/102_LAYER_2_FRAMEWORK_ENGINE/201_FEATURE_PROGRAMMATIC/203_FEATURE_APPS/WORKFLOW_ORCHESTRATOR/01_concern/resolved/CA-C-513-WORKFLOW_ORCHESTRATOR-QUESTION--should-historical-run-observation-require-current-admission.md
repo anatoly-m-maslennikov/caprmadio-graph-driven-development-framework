@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: WORKFLOW_ORCHESTRATOR
 local_tier: Standard
 global_tier: 14
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 18:42:00 +0000"
+updated_at: "2026-10-06 18:56:40 +0000"
 subjects:
   governs: "Workflow Run/Observation"
   depends_on: [Workflow Run, Action Run, Journal, Source Carrier, Projection, Operator]
@@ -37,4 +37,4 @@ under existing R1807, distinguish authenticated historical observation from perm
 
 ## Result
 
-the bounded observer repair and independent tests are pending under P1808. no status success or new release result is claimed.
+the 15-case Release-host backend suite passes, and independent review accepts the private observation/effect split. status and recovery-status preserve exact frozen identity, retained transport/availability checks and pre-client tamper/foreign refusals; actual dispatch and recovery retain strict current-source validation. after the explicit restart of the identified idle Release-host worker, live MCP reads historical N12 with its eight completed and three interrupted terminal Runs and 22 durable receipts. scheduler SUCCESS remains distinct from the actual interrupted-pending work outcome; no replay, effect or release success is inferred.

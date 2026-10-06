@@ -227,8 +227,14 @@ def _release_request_identity(execution):
     return _canonical_digest(execution)
 
 
-def _release_host_frozen(root, run_id, *, expected_identity=None, require_available=True):
-    """Recheck the host-only route and retained transport before DBOS access."""
+def _release_host_frozen(root, run_id, *, expected_identity=None, require_available=True,
+                         require_current=True):
+    """Validate one retained host Run before DBOS access.
+
+    Effects must still re-admit the frozen request against current source.
+    Observation instead authenticates the saved request and its retained host
+    binding, so a later legitimate source refresh cannot erase history.
+    """
     selected = SelectedExecution(root)
     frozen = selected.load(run_id)
     request = frozen.get('request') if isinstance(frozen, dict) else None
@@ -241,9 +247,10 @@ def _release_host_frozen(root, run_id, *, expected_identity=None, require_availa
     request_identity = _release_request_identity(execution)
     if expected_identity is not None and request_identity != expected_identity:
         raise RuntimeError('Release host request identity does not match the frozen Release request')
-    # This is the second route check at dispatch/observation time.  It also
-    # proves that the saved graph remains the current exact source binding.
-    selected._revalidate(frozen)
+    if require_current:
+        # Effects need a second route check immediately before dispatch or
+        # recovery so stale source cannot be replayed.
+        selected._revalidate(frozen)
     _validate_release_host_binding(
         root, run_id, _release_host_frozen_request_digest(frozen),
         require_available=require_available,
@@ -352,7 +359,7 @@ def recover_selected_release_status(root, request):
     request = RecoverSelectedReleaseStatus.model_validate(request)
     scheduler = _scheduler_identity()
     if release_host_runtime():
-        _frozen, identity = _release_host_frozen(root, request.run_id)
+        _frozen, identity = _release_host_frozen(root, request.run_id, require_current=False)
     else:
         frozen = SelectedExecution(root).load(request.run_id)
         saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
@@ -381,7 +388,9 @@ def status(root, request):
     if release_host_runtime():
         # A host status read must not adopt a native/Docker selected Run or
         # reach the host DBOS database before its retained binding is proven.
-        _release_host_frozen(root, request.run_id)
+        # It observes a saved Run rather than re-admitting an effect, so a
+        # legitimate later source refresh does not make saved evidence opaque.
+        _release_host_frozen(root, request.run_id, require_current=False)
     transport = client(root)
     try:
         handle = transport.retrieve_workflow(request.run_id)

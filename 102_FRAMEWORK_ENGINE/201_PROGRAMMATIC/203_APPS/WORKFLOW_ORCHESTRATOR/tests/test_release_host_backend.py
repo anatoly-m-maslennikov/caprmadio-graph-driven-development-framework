@@ -256,6 +256,87 @@ class ReleaseHostBackendTests(unittest.TestCase):
                 backend.status(".", {"operation": "status", "run_id": RUN_ID})
         client.assert_not_called()
 
+    def test_host_status_observes_saved_result_after_source_refresh(self):
+        frozen = _release_frozen()
+        selected = mock.Mock()
+        bridge = mock.Mock()
+        bridge.request_digest.return_value = BINDING_DIGEST
+        queue_status = type("Status", (), {"status": "SUCCESS"})()
+        handle = mock.Mock()
+        handle.get_status.return_value = queue_status
+        handle.get_result.return_value = {"saved": "scheduler result"}
+        transport = mock.Mock()
+        transport.retrieve_workflow.return_value = handle
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            run_directory = root / "selected" / RUN_ID
+            run_directory.mkdir(parents=True)
+            (run_directory / "selected_request.json").write_text(json.dumps(frozen), encoding="utf-8")
+            (run_directory / "accepted.json").write_text(
+                json.dumps({"result": {"outcome": "completed", "disposition": "completed"}}),
+                encoding="utf-8",
+            )
+            selected.load.return_value = frozen
+            selected.run_directory.return_value = run_directory
+            selected._read.side_effect = lambda path: json.loads(Path(path).read_text(encoding="utf-8"))
+            selected._revalidate.side_effect = RuntimeError("source stale after saved Run")
+            with self.host_environment(), \
+                    mock.patch.object(backend, "SelectedExecution", return_value=selected), \
+                    mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
+                    mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
+                    mock.patch.object(backend, "client", return_value=transport):
+                result = backend.status(root, {"operation": "status", "run_id": RUN_ID})
+        self.assertEqual({"saved": "scheduler result"}, result["result"])
+        self.assertEqual("completed", result["outcome"])
+        selected._revalidate.assert_not_called()
+        bridge.binding.assert_called_once_with(root, run_id=RUN_ID, frozen_request_digest=BINDING_DIGEST)
+        bridge.availability.assert_called_once_with(root)
+
+    def test_host_status_still_rejects_tampered_or_foreign_binding_before_client_access(self):
+        for reason in ("tampered binding", "foreign binding"):
+            with self.subTest(reason=reason):
+                selected = mock.Mock()
+                selected.load.return_value = _release_frozen()
+                bridge = mock.Mock()
+                bridge.request_digest.return_value = BINDING_DIGEST
+                bridge.binding.side_effect = RuntimeError(reason)
+                with self.host_environment(), \
+                        mock.patch.object(backend, "SelectedExecution", return_value=selected), \
+                        mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
+                        mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
+                        mock.patch.object(backend, "client") as client:
+                    with self.assertRaisesRegex(RuntimeError, reason):
+                        backend.status(".", {"operation": "status", "run_id": RUN_ID})
+                selected._revalidate.assert_not_called()
+                client.assert_not_called()
+
+    def test_host_dispatch_and_recovery_still_refuse_stale_source_before_effects(self):
+        selected = mock.Mock()
+        selected.load.return_value = _release_frozen()
+        selected._revalidate.side_effect = RuntimeError("source stale")
+        dbos = _DBOS()
+        provider = mock.Mock()
+        engine = type("Engine", (), {"root": Path(".")})()
+        bridge = mock.Mock()
+        bridge.request_digest.return_value = BINDING_DIGEST
+        with self.host_environment(), \
+                mock.patch.object(backend, "SelectedExecution", return_value=selected), \
+                mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
+                mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
+                mock.patch.object(backend, "client") as client:
+            backend.register_release_host_execution(dbos, engine, selected_providers=provider)
+            with self.assertRaisesRegex(RuntimeError, "source stale"):
+                dbos.workflows[backend.RELEASE_HOST_SELECTED_WORKFLOW](RUN_ID)
+            with self.assertRaisesRegex(RuntimeError, "source stale"):
+                backend.recover_selected_release(".", {
+                    "operation": "recover_selected_release",
+                    "run_id": RUN_ID,
+                    "request_identity": IDENTITY,
+                })
+        self.assertEqual(2, selected._revalidate.call_count)
+        provider.dispatch.assert_not_called()
+        client.assert_not_called()
+
     def test_host_recovery_rechecks_the_retained_binding_before_client_access(self):
         with self.host_environment(), \
                 mock.patch.object(backend, "_release_host_frozen", side_effect=RuntimeError("foreign binding")), \
@@ -268,17 +349,58 @@ class ReleaseHostBackendTests(unittest.TestCase):
                 })
         client.assert_not_called()
 
-    def test_host_recovery_status_rechecks_the_retained_binding_before_client_access(self):
+    def test_host_recovery_status_rejects_foreign_or_tampered_binding_before_client_access(self):
+        for reason in ("foreign binding", "tampered binding"):
+            with self.subTest(reason=reason):
+                with self.host_environment(), \
+                        mock.patch.object(backend, "_release_host_frozen", side_effect=RuntimeError(reason)), \
+                        mock.patch.object(backend, "client") as client:
+                    with self.assertRaisesRegex(RuntimeError, reason):
+                        backend.recover_selected_release_status(".", {
+                            "operation": "recover_selected_release_status",
+                            "run_id": RUN_ID,
+                            "recovery_transport_handle": "c" * 32,
+                        })
+                client.assert_not_called()
+
+    def test_host_recovery_status_observes_valid_saved_binding_after_source_refresh(self):
+        selected = mock.Mock()
+        selected.load.return_value = _release_frozen()
+        selected._revalidate.side_effect = RuntimeError("source stale after saved Run")
+        bridge = mock.Mock()
+        bridge.request_digest.return_value = BINDING_DIGEST
+        queue_status = type("Status", (), {
+            "name": backend.RELEASE_HOST_RECOVERY_WORKFLOW,
+            "queue_name": backend.RELEASE_HOST_QUEUE,
+            "input": {"args": (RUN_ID, IDENTITY), "kwargs": {}},
+            "status": "SUCCESS",
+        })()
+        handle = mock.Mock()
+        handle.get_status.return_value = queue_status
+        handle.get_result.return_value = {"saved": "recovery transport result"}
+        transport = mock.Mock()
+        transport.retrieve_workflow.return_value = handle
+        canonical = {"workflow_run_id": RUN_ID, "outcome": "completed", "selected_result": {}}
         with self.host_environment(), \
-                mock.patch.object(backend, "_release_host_frozen", side_effect=RuntimeError("foreign binding")), \
-                mock.patch.object(backend, "client") as client:
-            with self.assertRaisesRegex(RuntimeError, "foreign binding"):
-                backend.recover_selected_release_status(".", {
-                    "operation": "recover_selected_release_status",
-                    "run_id": RUN_ID,
-                    "recovery_transport_handle": "c" * 32,
-                })
-        client.assert_not_called()
+                mock.patch.object(backend, "SelectedExecution", return_value=selected), \
+                mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
+                mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
+                mock.patch.object(backend, "client", return_value=transport), \
+                mock.patch.object(backend, "status", return_value=canonical) as observed:
+            result = backend.recover_selected_release_status(".", {
+                "operation": "recover_selected_release_status",
+                "run_id": RUN_ID,
+                "recovery_transport_handle": "c" * 32,
+            })
+        self.assertEqual(canonical, result["canonical_run"])
+        self.assertEqual(
+            {"scheduler_status": "SUCCESS", "result": {"saved": "recovery transport result"}},
+            result["recovery_transport_status"],
+        )
+        selected._revalidate.assert_not_called()
+        bridge.binding.assert_called_once_with(".", run_id=RUN_ID, frozen_request_digest=BINDING_DIGEST)
+        bridge.availability.assert_called_once_with(".")
+        observed.assert_called_once_with(".", mock.ANY)
 
     def test_host_worker_registers_only_release_workflows_and_revalidates_at_dispatch(self):
         dbos = _DBOS()

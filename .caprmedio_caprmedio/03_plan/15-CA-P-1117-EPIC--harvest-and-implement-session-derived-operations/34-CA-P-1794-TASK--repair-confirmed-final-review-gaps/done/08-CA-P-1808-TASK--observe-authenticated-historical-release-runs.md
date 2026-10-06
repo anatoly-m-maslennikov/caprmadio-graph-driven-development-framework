@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 18:42:00 +0000"
+updated_at: "2026-10-06 18:56:40 +0000"
 subjects:
   governs: "Historical Release Run observation"
   depends_on: [Workflow Run, Action Run, Journal, Source Carrier]
@@ -37,3 +37,7 @@ repair the read-only Release-host observer so a current-source change does not p
 ## Definition of Done
 
 focused tests prove truthful historical observation after source drift, pre-client refusal of foreign or tampered bindings and unchanged strict dispatch/recovery guards; independent review accepts the change and the live N12 observer returns its actual recorded state.
+
+## Result
+
+the 15-case Release-host backend suite passes, and independent review accepts the private observation/effect split. status and recovery-status preserve exact frozen identity, retained transport/availability checks and pre-client tamper/foreign refusals; actual dispatch and recovery retain strict current-source validation. after the explicit restart of the identified idle Release-host worker, live MCP reads historical N12 with its eight completed and three interrupted terminal Runs and 22 durable receipts. scheduler SUCCESS remains distinct from the actual interrupted-pending work outcome; no replay, effect or release success is inferred.
