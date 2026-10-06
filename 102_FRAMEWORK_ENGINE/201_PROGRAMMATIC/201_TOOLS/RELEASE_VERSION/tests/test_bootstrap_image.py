@@ -258,6 +258,41 @@ class BootstrapImageTests(unittest.TestCase):
         self.assertEqual(reopened.image_digest, evidence.image_digest)
         self.assertEqual(before + [("docker", "image", "inspect", IMAGE_ID)], self.docker.calls)
 
+    def test_retained_context_ephemeral_metadata_is_ignored_but_secret_or_extra_files_refuse(self) -> None:
+        evidence = self.produce()
+        proof = self.root / evidence.evidence_root
+        context = proof / "context"
+        package = context / "PACKAGE"
+        metadata = (
+            context / ".DS_Store",
+            package / ".DS_Store",
+            package / "METHODOLOGY/.DS_Store",
+        )
+        for path in metadata:
+            path.write_bytes(b"finder metadata\n")
+        before = list(self.docker.calls)
+        self.assertEqual("verified", revalidate_initial_framework_image(self.plan, IMAGE_ID, executor=self.docker).outcome)
+        self.assertEqual(before + [("docker", "image", "inspect", IMAGE_ID)], self.docker.calls)
+        bootstrap_image._verify_retained_package_context(proof, self.plan.manifest_bytes, tuple(self.plan.rows))
+        self.assertEqual([b"finder metadata\n"] * len(metadata), [path.read_bytes() for path in metadata])
+
+        for name in (".env.pyc", "unowned.txt"):
+            with self.subTest(name=name):
+                extra = package / name
+                extra.write_bytes(b"unsealed retained context member\n")
+                before_files = {path.relative_to(package).as_posix(): path.read_bytes()
+                                for path in package.rglob("*") if path.is_file()}
+                try:
+                    with self.assertRaises(BootstrapImageError):
+                        bootstrap_image._verify_retained_package_context(proof, self.plan.manifest_bytes, tuple(self.plan.rows))
+                    self.assertEqual(
+                        {path.relative_to(package).as_posix(): path.read_bytes()
+                         for path in package.rglob("*") if path.is_file()},
+                        before_files,
+                    )
+                finally:
+                    extra.unlink()
+
     def test_canary_output_must_bind_package_source_context_and_complete_mcp_proof(self) -> None:
         for forged in (
             {"manifest_sha256": "b" * 64},

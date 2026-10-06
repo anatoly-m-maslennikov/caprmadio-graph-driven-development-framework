@@ -25,7 +25,7 @@ from release_contract import IMAGE_DOCKERFILE, ReleaseContractError, canonical_j
 from release_contract import REQUIRED_ENGINE_SOURCE_PREFIXES
 from release_handoff import PackageRow
 from release_image import DockerCommandResult, DockerExecutor, DockerSubprocessExecutor, IMAGE_ID
-from release_inventory import ReleaseInventoryError, refuse_secret_path
+from release_inventory import _is_ephemeral_file, ReleaseInventoryError, refuse_secret_path
 from release_packaging import REQUIRED_SKILL_FILES, RUNTIME_ROOT, ReleasePackagingError, _render_manifest, _verify_release
 
 
@@ -183,7 +183,14 @@ def _tree_digest(root: Path) -> str:
     for path in sorted(root.rglob("*")):
         if path.is_symlink() or not (path.is_file() or path.is_dir()):
             raise _error("bootstrap-image-context-invalid", "private image context contains an unsafe carrier")
-        if path.is_file():
+        relative = path.relative_to(root)
+        try:
+            # Do not let a secret-shaped name bypass rejection merely because
+            # it also has an ephemeral suffix (for example ``.env.pyc``).
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise _error("bootstrap-image-context-invalid", "private image context contains a secret-shaped carrier") from error
+        if path.is_file() and not _is_ephemeral_file(path.name):
             records.append((path.relative_to(root).as_posix(), _digest(path.read_bytes()), path.stat().st_mode & 0o777))
     return _digest(canonical_json(records))
 
@@ -634,11 +641,17 @@ def _verify_retained_package_context(proof: Path, manifest_bytes: bytes, rows: t
         if package.is_symlink() or not package.is_dir() or (package / "manifest.toml").read_bytes() != manifest_bytes:
             raise ValueError("retained package context does not match the package manifest")
         expected = {"manifest.toml", *(row.destination_path for row in rows)}
-        actual = {
-            item.relative_to(package).as_posix()
-            for item in package.rglob("*")
-            if item.is_file()
-        }
+        actual: set[str] = set()
+        for item in sorted(package.rglob("*")):
+            relative = item.relative_to(package)
+            if item.is_symlink() or not (item.is_file() or item.is_dir()):
+                raise ValueError("retained package context contains an unsafe carrier")
+            try:
+                refuse_secret_path(relative)
+            except ReleaseInventoryError as error:
+                raise ValueError("retained package context contains a secret-shaped carrier") from error
+            if item.is_file() and not _is_ephemeral_file(item.name):
+                actual.add(relative.as_posix())
         if actual != expected:
             raise ValueError("retained package context inventory differs")
         for row in rows:
