@@ -102,7 +102,9 @@ class ImplementationMockAgent:
                 if not test or candidate:
                     raise ValueError("mock implementation requires prepared tests and no existing candidate")
                 _create(workspace / CANDIDATE, CANDIDATE_TEXT)
-                outputs.update(candidate=CANDIDATE, changed_paths=[_observed(workspace / CANDIDATE)])
+                outputs.update(candidate=packet.get("candidate", CANDIDATE),
+                               phase=packet.get("phase"),
+                               changed_paths=[CANDIDATE])
                 evidence.append({"transport": TRANSPORT, "candidate": _observed(workspace / CANDIDATE)})
                 result = "implemented"
             else:
@@ -111,7 +113,10 @@ class ImplementationMockAgent:
                 check = _check(workspace)
                 evidence.append(check)
                 outputs.update(commands=[check["command"]], checks=[check],
-                               candidate=_observed(workspace / CANDIDATE), test=_observed(workspace / TEST))
+                               candidate=packet.get("candidate", CANDIDATE), test=_observed(workspace / TEST),
+                               coverage={"complete": check["returncode"] == 0,
+                                         "checked": list(packet.get("coverage", {}).get("required", []))
+                                         if isinstance(packet.get("coverage"), Mapping) else []})
                 result = "passed" if check["returncode"] == 0 else "failed"
             return {"result": result, "outputs": outputs, "evidence": evidence,
                     "blockers": [] if result != "blocked" else ["mock assertion did not pass"]}

@@ -64,8 +64,12 @@ class SelectedImplementationRevertGoldenInputsTest(unittest.TestCase):
             self.assertNotEqual(0, subprocess.run(command, cwd=implementation.parent, capture_output=True, text=True).returncode)
             def mock_transport(_prompt: str, _packet: dict) -> dict:
                 implementation.write_text("def ready(): return True\n", encoding="utf-8")
-                return {"result": "implemented", "outputs": {"candidate": "mock-transport", "changed_paths": ["fixture/implementation.py"]}, "evidence": [{"transport": "mock-not-live-llm"}]}
-            result = implementation_actions.implement_selected_queue("CA-O-093", packet, mock_transport)
+                return {"result": "implemented", "outputs": {"candidate": packet["candidate"],
+                                                                     "phase": packet["phase"],
+                                                                     "changed_paths": ["fixture/implementation.py"]},
+                        "evidence": [{"transport": "mock-not-live-llm"}]}
+            result = implementation_actions.implement_selected_queue("CA-O-093", packet, mock_transport,
+                                                                      selected_project_root=fixture.root)
             self.assertEqual("implemented", result["result"], result)
             self.assertEqual(0, subprocess.run(command, cwd=implementation.parent, capture_output=True, text=True).returncode)
             self.assertEqual("mock-not-live-llm", parameters["base_packet"]["retained_state"]["transport"])
@@ -77,17 +81,45 @@ class SelectedImplementationRevertGoldenInputsTest(unittest.TestCase):
             target_path = fixture.root / ".caprmedio_caprmedio/04_requirement/CA-R-100--target.md"
             target = lifecycle_intents.carrier_descriptor(fixture.root, "CA-R-100")
             text = target_path.read_text(encoding="utf-8"); frontmatter, content = text[4:].split("\n---\n", 1)
-            parameters = {"target": target, "proposed": {"frontmatter": frontmatter, "content": content + "\nReverted detail.\n"}, "change_class": "semantic_revision"}
+            proposed = {"frontmatter": frontmatter, "content": content + "\nReverted detail.\n"}
+            parameters = {"target": target, "proposed": proposed, "change_class": "semantic_revision",
+                          "semantic_assessment_report": fixture._semantic_assessment_report(target, proposed)}
             # Forecast establishes the exact native post-effect descriptor; no inverse is invented.
             forecast = fixture.root / "forecast"; forecast.mkdir(); (forecast / ".git").mkdir();
             import shutil; shutil.copytree(fixture.root / ".caprmedio_caprmedio", forecast / ".caprmedio_caprmedio")
             forecast_target = lifecycle_intents.carrier_descriptor(forecast, "CA-R-100")
             with mock.patch.object(lifecycle_intents, "datetime", FrozenDatetime):
                 predicted = lifecycle_intents.update_atom_action(forecast, {**parameters, "target": forecast_target}, execute=True, authorized=True)
-            before, after = "before:fixture", "after:fixture"
-            effect = {"effect_id": "lifecycle-update", "target_id": "atom:CA-R-100", "expected_before": "active version 1", "expected_after": "active version 2", "expected_current_hash": digest(target), "expected_result_hash": digest(predicted["observed"]), "before_evidence": before, "after_evidence": after,
-                "capability_binding": {"capability_id": "lifecycle.update_atom", "parameters": parameters, "target": target, "permission_evidence": {"capability_id": "lifecycle.update_atom", "granted": True, "evidence_ref": "permission:fixture", "evidence_hash": "c" * 64}, "evidence_refs": [before, after, "history:preserved", "references:preserved"]}}
-            request = {"selected_change_refs": ["event:accepted"], "targets": ["atom:CA-R-100"], "affected_reference_hashes": {"reference:preserved": "a" * 64}, "governing_definition_hash": "b" * 64, "operator_decision": {"decision_id": "approved", "approved_effect_ids": ["lifecycle-update"], "status": "approved"}, "cancellation_boundary": {"after_effect_ids": ["lifecycle-update"]}, "executor_permission": {"capability": "governed-reversal", "granted": True}, "durable_evidence_location": "journal://fixture", "ordered_effects": [effect], "expected_result": {"state": "reverted"}, "history_reference_evidence": ["history:preserved", "references:preserved"], "current_hashes": {"atom:CA-R-100": digest(target)}}
+            self.assertEqual("applied", predicted["outcome"], predicted)
+
+            evidence_root = fixture.root / ".caprmedio_caprmedio/evidence"
+            evidence_root.mkdir(parents=True, exist_ok=True)
+
+            def record(name: str, value: object) -> dict[str, str]:
+                path = evidence_root / name
+                path.write_bytes(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
+                return {"evidence_ref": path.relative_to(fixture.root).as_posix(),
+                        "evidence_hash": hashlib.sha256(path.read_bytes()).hexdigest()}
+
+            selected = record("selected-change.json", {"accepted": True, "selected_effect_ids": ["lifecycle-update"]})
+            history = record("preserved.json", {"history": "retained", "references": "preserved"})
+            before = record("lifecycle-before.json", {"state": "active version 1"})
+            after = record("lifecycle-after.json", {"state": "active version 2"})
+            permission = record("lifecycle-permission.json", {"capability_id": "lifecycle.update_atom", "granted": True})
+            effect = {"effect_id": "lifecycle-update", "target_id": "atom:CA-R-100", "expected_before": "active version 1", "expected_after": "active version 2", "expected_current_hash": digest(target), "expected_result_hash": digest(predicted["observed"]), "before_evidence": before["evidence_ref"], "after_evidence": after["evidence_ref"],
+                "capability_binding": {"capability_id": "lifecycle.update_atom", "parameters": parameters, "target": target, "permission_evidence": {"capability_id": "lifecycle.update_atom", "granted": True, **permission}, "evidence_refs": [before["evidence_ref"], after["evidence_ref"], history["evidence_ref"]]}}
+            request = {"selected_change_refs": [selected["evidence_ref"]], "targets": ["atom:CA-R-100"], "affected_reference_hashes": {history["evidence_ref"]: history["evidence_hash"]}, "governing_definition_hash": "", "operator_decision": {"decision_id": "approved", "approved_effect_ids": ["lifecycle-update"], "status": "approved"}, "cancellation_boundary": {"after_effect_ids": ["lifecycle-update"]}, "executor_permission": {"capability": "governed-reversal", "granted": True}, "durable_evidence_location": "journal://fixture", "ordered_effects": [effect], "expected_result": {"state": "reverted"}, "history_reference_evidence": [history["evidence_ref"]], "current_hashes": {"atom:CA-R-100": digest(target)}, "selected_change": [selected], "history_record": [history], "affected_reference": [history], "before_record": [before], "after_record": [after]}
+            definition = ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-131-CORE_META_MODEL-ACTION--apply-an-approved-reversal.md"
+            definition_target = fixture.root / definition
+            definition_target.parent.mkdir(parents=True, exist_ok=True)
+            definition_target.write_bytes((ROOT / definition).read_bytes())
+            definition_pin = hashlib.sha256(definition_target.read_bytes()).hexdigest()
+            request["governing_definition"] = {"atom_id": "CA-O-131", "revision": 2, "evidence_ref": definition, "evidence_hash": definition_pin}
+            request["governing_definition_hash"] = definition_pin
+            operator = request["operator_decision"]
+            request["operator_decision"] = {**operator, **record("operator_decision.json", {**operator, "ordered_effects": request["ordered_effects"]})}
+            executor = request["executor_permission"]
+            request["executor_permission"] = {**executor, **record("executor_permission.json", executor)}
             service = make_native_revert_service({"project_root": str(fixture.root), "approved_reversal_request": request})
             stale = json.loads(json.dumps(request)); stale["current_hashes"]["atom:CA-R-100"] = "0" * 64
             self.assertEqual("blocked", service.handle({"operation": "admit", "reversal_request": stale})["outcome"])
@@ -95,6 +127,7 @@ class SelectedImplementationRevertGoldenInputsTest(unittest.TestCase):
             with self.assertRaises(NativeRevertProviderError):
                 make_native_revert_service({"project_root": str(fixture.root), "approved_reversal_request": unsupported})
             admitted = service.handle({"operation": "admit", "reversal_request": request})
+            self.assertEqual("admitted", admitted["outcome"], admitted)
             with mock.patch.object(lifecycle_intents, "datetime", FrozenDatetime):
                 result = service.execute_with_session(admitted["approved_reversal_manifest"], Session(), "w10-action")
             self.assertEqual("reverted", result["outcome"]); self.assertIn("Reverted detail.", target_path.read_text(encoding="utf-8"))

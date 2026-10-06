@@ -41,6 +41,17 @@ ROUTE_CASES = (
 MANIFEST_ROUTE_NAMES = tuple(route for _, route in ROUTE_CASES)
 QUERY_SOURCE_ADMISSION_ROUTE_NAMES = MANIFEST_ROUTE_NAMES[-2:]
 JOURNAL_CASES = tuple(f"J{number:02d}" for number in range(1, 9))
+STATUS_DOMAINS = (
+    ("Requirement", "R", "04_requirement", "CA-R-1309", ("Draft", "Active", "Archived")),
+    ("Method", "M", "05_method", "CA-R-1397", ("Draft", "Active", "Archived")),
+    ("Evaluation", "E", "06_evaluation", "CA-R-1398", ("Draft", "Active", "Archived")),
+    ("Delivery", "D", "07_delivery", "CA-R-1399", ("Draft", "Active", "Archived")),
+    ("Plan", "P", "03_plan", "CA-R-1539", ("Active", "Backlog", "Done", "Canceled", "Archived")),
+    ("Concern", "C", "01_concern", "CA-R-1608", ("draft", "active", "resolved", "canceled")),
+    ("Operations", "O", "09_operations", "CA-R-1874", ("Draft", "Active", "Archived")),
+    ("Analysis", "A", "02_analysis", "CA-R-1875", ("Draft", "Done", "Archived")),
+)
+SEMANTIC_ASSESSMENT_AUTHORITIES = ("CA-R-1432", "CA-R-1464")
 
 
 class GoldenCorpusError(RuntimeError):
@@ -128,6 +139,8 @@ class GoldenProject:
             raise GoldenCorpusError("execution_project_root must be an absolute container-visible path")
         self.execution_project_root = execution_project_root.rstrip("/") if execution_project_root else None
         self.manifest: dict[str, Any] | None = None
+        self._status_parameters: dict[str, Any] | None = None
+        self._semantic_update_parameters: dict[str, Any] | None = None
         self._cached_revert_parameters: dict[str, Any] | None = None
         self._cached_compiler_parameters: dict[str, Any] | None = None
         self._cached_compiler_frontier_digest: str | None = None
@@ -163,6 +176,15 @@ class GoldenProject:
         self._write_native_authority()
         self._write_graph_authority()
         self._write_compiler_authority()
+        if self.case.route == "update_atom":
+            target = self._descriptor("CA-R-100")
+            path = self.root / target["path"]
+            frontmatter, content = path.read_text(encoding="utf-8")[4:].split("\n---\n", 1)
+            proposed = {"frontmatter": frontmatter, "content": content + "\nClarified fixture acceptance detail.\n"}
+            self._semantic_update_parameters = {
+                "target": target, "proposed": proposed, "change_class": "semantic_revision",
+                "semantic_assessment_report": self._semantic_assessment_report(target, proposed),
+            }
         # W09 source carriers and its writable sandbox are part of the
         # disposable Project's initial state, not a preview-time mutation.
         if self.case.case_id == "W09":
@@ -187,18 +209,14 @@ class GoldenProject:
         # Atom discovery uses the registered content-role directory convention.
         return self.root / ".caprmedio_caprmedio/04_requirement"
 
-    @staticmethod
-    def _status_model() -> dict[str, Any]:
-        """The registered Requirement status model carried by W03/W04."""
-        return {
-            "model_ref": "fixture://requirement-statuses",
-            "model_revision": "1",
-            "content_role": "Requirement",
-            "statuses": ["Active", "Reviewed", "Archived"],
-            "transitions": {"Active": ["Reviewed", "Archived"],
-                            "Reviewed": ["Active", "Archived"]},
-            "archive_status": "Archived",
-        }
+    def _status_model(self) -> dict[str, Any]:
+        """Resolve W03's required archive model from copied current authority."""
+        import sys
+        tools_root = Path(__file__).resolve().parents[3] / "201_TOOLS"
+        if str(tools_root) not in sys.path:
+            sys.path.insert(0, str(tools_root))
+        from authoritative_status_models import resolve_status_model
+        return resolve_status_model(self.root, self._descriptor("CA-R-100"), "Archived")
 
     def _write_atom(self, atom_id: str, slug: str, summary: str) -> Path:
         path = self._authority_dir / f"{atom_id}--{slug}.md"
@@ -321,23 +339,32 @@ class GoldenProject:
         (source / "003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml").write_text(
             '[extensions.example]\nenabled = true\nrevision = "v2"\n', encoding="utf-8"
         )
-        # W04 resolves its Requirement status domain from the Project's
-        # declared METHODOLOGY_SOURCES authority, not a caller-supplied model.
-        # Copy the current carrier byte-for-byte into the disposable Project
-        # so preview/freeze/currentness checks exercise the same boundary.
-        status_model_relative = Path(
-            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/"
-            "CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md"
-        )
-        status_model_source = self.source_root / status_model_relative
-        status_model_target = self.root / status_model_relative
-        if not status_model_source.is_file():
-            raise GoldenCorpusError("current Requirement status-model source is unavailable")
-        status_model_target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(status_model_source, status_model_target)
-        if status_model_target.read_bytes() != status_model_source.read_bytes():
-            raise GoldenCorpusError("fixture copy changed current Requirement status-model source")
+        # W04 resolves its status domains from the Project's declared
+        # METHODOLOGY_SOURCES authority, not caller-supplied models.  Keep an
+        # exact copy of every current role authority available for the
+        # all-role Docker proof; normal W04 still requests Requirement only.
+        for _role, _letter, _directory, atom_id, _statuses in STATUS_DOMAINS:
+            matches = [path for path in (self.source_root / self.compiler_source_dir.relative_to(self.root)).rglob(
+                f"{atom_id}-*.md") if "archive" not in path.parts]
+            if len(matches) != 1:
+                raise GoldenCorpusError(f"current {atom_id} status-model source is unavailable or ambiguous")
+            source_model = matches[0]
+            target_model = self.root / source_model.relative_to(self.source_root)
+            target_model.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_model, target_model)
+            if target_model.read_bytes() != source_model.read_bytes():
+                raise GoldenCorpusError(f"fixture copy changed current {atom_id} status-model source")
+        for atom_id in SEMANTIC_ASSESSMENT_AUTHORITIES:
+            matches = [path for path in (self.source_root / self.compiler_source_dir.relative_to(self.root)).rglob(
+                f"{atom_id}-*.md") if "archive" not in path.parts]
+            if len(matches) != 1:
+                raise GoldenCorpusError(f"current {atom_id} semantic-assessment source is unavailable or ambiguous")
+            source_authority = matches[0]
+            target_authority = self.root / source_authority.relative_to(self.source_root)
+            target_authority.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_authority, target_authority)
+            if target_authority.read_bytes() != source_authority.read_bytes():
+                raise GoldenCorpusError(f"fixture copy changed current {atom_id} semantic-assessment source")
         structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
         with structure.open("a", encoding="utf-8") as handle:
             handle.write(
@@ -388,8 +415,13 @@ class GoldenProject:
             shutil.copy2(source, target)
         bindings = implementation_actions.current_source_bindings(self.root)
         methods = [row["path"] for row in bindings if str(row["atom_id"]).startswith("CA-M-")]
+        requirements = implementation_actions.prepare_input_bindings(["CA-R-1843"], self.root)
+        delivery = implementation_actions.prepare_input_bindings(["CA-D-544"], self.root)
+        evaluations = implementation_actions.prepare_input_bindings(["CA-E-563"], self.root)
         workspace = self.root / "fixture/disposable-workspace"
         workspace.mkdir(parents=True, exist_ok=True)
+        candidate = "fixture-candidate"
+        phase = "implementation"
         base = {
             "context": "Isolated",
             "selected_project": {"kind": "selected_project", "source_root": ".caprmedio_caprmedio",
@@ -399,10 +431,28 @@ class GoldenProject:
                 "kind": "disposable_workspace", "path": self._execution_path(workspace), "allow_write": True}},
             "workspace": self._execution_path(workspace),
             "method_projection": implementation_actions.prepare_method_projection(methods, self.root),
-            "requirements_delivery": ["CA-R-1843", "CA-D-544"], "evaluations": ["CA-E-563"],
-            "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
-            "golden_e2e": ["disposable executable assertion"], "baseline_command": "python fixture_assertion.py",
-            "retry": {"consumed": 0, "limit": 1}, "retained_state": {"transport": "mock-not-live-llm"},
+            "requirements": requirements, "delivery": delivery, "evaluations": evaluations,
+            "red": {"expectation": "the disposable candidate passes its golden assertion",
+                    "fixtures": ["fixture/disposable-workspace/test_caprmedio_mock_candidate.py"],
+                    "commands": ["python -I -B fixture/disposable-workspace/test_caprmedio_mock_candidate.py"],
+                    "scope": "selected implementation item"},
+            "plan_item": {"plan_id": "golden-W09-plan", "item_id": "golden-W09-implementation",
+                          "dod": ["candidate and golden check are retained"], "owned_paths": ["."],
+                          "estimated_minutes": 1},
+            "owned_paths": ["."], "candidate": candidate, "phase": phase,
+            "handoff_complete": True,
+            "golden_e2e": ["disposable executable assertion"],
+            "baseline_command": "python -I -B fixture/disposable-workspace/test_caprmedio_mock_candidate.py",
+            "confidence": {"observed": 1.0, "effective": 0.9,
+                            "source": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+                                     "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml"},
+            "retry": {"consumed": 0, "effective_limit": 1,
+                      "source": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+                               "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
+                      "remaining_failure": True, "admitted": True},
+            "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False,
+                         "candidate": candidate, "phase": phase},
+            "retained_state": {"transport": "mock-not-live-llm"},
         }
         return {"base_packet": base, "run_visit_limits": {"CA-O-091": 4, "CA-O-094": 2}, "step_packets": {
             step: {"context": context, "step_marker": step}
@@ -531,6 +581,69 @@ class GoldenProject:
         from lifecycle_intents import carrier_descriptor
         return carrier_descriptor(self.root, atom_id)
 
+    def _semantic_assessment_report(self, target: Mapping[str, Any], proposed: Mapping[str, str]) -> dict[str, str]:
+        """Write one bound Done Analysis Report for W02's semantic-revision path."""
+        source = self.compiler_source_dir / "001_CORE_META_MODEL/04_requirement"
+        report = self.root / ".caprmedio_caprmedio/fixture/02_analysis/done/CA-A-400--update-assessment.md"
+        report.parent.mkdir(parents=True, exist_ok=True)
+        def pin(path: Path) -> dict[str, str]:
+            return {"path": path.relative_to(self.root).as_posix(), "digest": file_digest(path)}
+        evidence = {
+            "target": {"atom_id": target["atom_id"], "path": target["path"], "digest": target["digest"]},
+            "proposal": {"frontmatter_digest": hashlib.sha256(proposed["frontmatter"].encode()).hexdigest(),
+                         "content_digest": hashlib.sha256(proposed["content"].encode()).hexdigest()},
+            "authorityPins": {"r1432": pin(source / next(path.name for path in source.glob("CA-R-1432-*.md"))),
+                              "r1464": pin(source / next(path.name for path in source.glob("CA-R-1464-*.md")))},
+            "admittedChangeClass": "semantic_revision", "primaryClaimIdentityPreserved": True,
+            "declaredDelta": "Clarify fixture acceptance detail without changing its primary Claim.",
+            "lineageEvidencePins": [{"path": target["path"], "digest": target["digest"]}],
+        }
+        report.write_text(
+            "---\natom_id: CA-A-400\ncontent_role: Analysis\ntype: Analysis Report\nstatus: Done\nversion: 1\n"
+            "updated_at: 2026-10-06 00:00:00 +0000\nrelations: {}\n---\n# Summary\n\nW02 semantic assessment\n"
+            "\n## Results\n\n### Update assessment evidence\n\n```json\n"
+            + json.dumps(evidence, sort_keys=True, separators=(",", ":")) + "\n```\n", encoding="utf-8",
+        )
+        return pin(report)
+
+    def status_atom(self, role: str, status: str, *, number: int = 8000,
+                    draft: bool = False) -> Path:
+        """Write one disposable carrier whose model remains source-derived."""
+        try:
+            _, letter, directory, _source_id, statuses = next(row for row in STATUS_DOMAINS if row[0] == role)
+        except StopIteration as error:
+            raise GoldenCorpusError(f"unknown status-proof role: {role}") from error
+        if status not in statuses:
+            raise GoldenCorpusError(f"status {status!r} is not admitted for {role}")
+        folder = self.root / ".caprmedio_caprmedio" / "fixture" / directory
+        if status in {"Draft", "draft"}:
+            folder /= "draft"
+        elif role == "Plan" and status == "Backlog":
+            folder /= "001_backlog"
+        elif status != "Active":
+            folder /= status.casefold()
+        folder.mkdir(parents=True, exist_ok=True)
+        name = f"CA-{letter}--docker-status.md" if draft else f"CA-{letter}-{number}--docker-status.md"
+        identity = "" if draft else f"atom_id: CA-{letter}-{number}\n"
+        path = folder / name
+        path.write_text(
+            f"---\n{identity}content_role: {role}\nstatus: {status}\nversion: 3\n"
+            "updated_at: 2026-10-06 00:00:00 +0000\nrelations: {}\n---\n"
+            "# Summary\n\nDocker status proof carrier\n\n## Details\n\nWhole body must survive.\n",
+            encoding="utf-8",
+        )
+        return path
+
+    def request_for_status(self, path: Path, status: str, *, request_id: str,
+                           mode: str = "preview", receipt: object | None = None,
+                           receipt_digest: object | None = None) -> dict[str, Any]:
+        """Build one ordinary W04 request with an exact disposable target."""
+        self._status_parameters = {"target": self._descriptor(path.relative_to(self.root).as_posix()), "status": status}
+        try:
+            return self.request(request_id=request_id, mode=mode, receipt=receipt, receipt_digest=receipt_digest)
+        finally:
+            self._status_parameters = None
+
     def native_parameters(self) -> dict[str, Any]:
         """Return one source-valid native Action payload for W01--W08 only."""
         route = self.case.route
@@ -567,14 +680,15 @@ class GoldenProject:
         if route == "create_atom":
             return {"carrier": self._carrier("CA-R-102", "created", "Created summary")}
         if route == "update_atom":
-            path = self.root / target["path"]
-            frontmatter, content = path.read_text(encoding="utf-8")[4:].split("\n---\n", 1)
-            return {"target": target, "proposed": {"frontmatter": frontmatter,
-                    "content": content + "\nCarrier-only fixture detail.\n"}, "change_class": "carrier_only"}
+            if self._semantic_update_parameters is None:
+                raise GoldenCorpusError("W02 semantic assessment carrier was not prepared")
+            return copy.deepcopy(self._semantic_update_parameters)
         if route == "replace_atom":
             return {"predecessor": target, "successors": [self._carrier("CA-R-103", "replacement", "Replacement summary")],
                     "status_model": self._status_model()}
         if route == "change_atom_status":
+            if self._status_parameters is not None:
+                return copy.deepcopy(self._status_parameters)
             # W04's real Action resolves the current source-owned Requirement
             # model itself.  CA-R-1309 admits Draft, Active, and Archived;
             # fixture-only Reviewed/status_model claims must not bypass that
@@ -583,7 +697,10 @@ class GoldenProject:
         structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
         base: dict[str, Any] = {
             "expected_toml_revision": file_digest(structure), "reference_frontier": [],
-            "goal_coverage_disposition": {"state": "present", "parent": "PARENT"},
+            "goal_coverage_disposition": {
+                "state": "missing", "parent": "PARENT", "gap_ref": "GOAL-GAP-1",
+                "authorized_disposition": "report-only",
+            },
             "preservation_disposition": {"preserved": ["fixture/reference.txt"]},
             "recovery_disposition": {"authorized": True, "boundary": "toml-and-listed-references"},
         }
@@ -602,7 +719,10 @@ class GoldenProject:
                                             "replacements": [{"old": "CHILD", "new": "RENAMED"}]}]}
         if route == "move_scope_unit":
             return {**base, "operation": "Move", "target_name": "CHILD", "declaration": declaration("CHILD", "DEST", 2),
-                    "goal_coverage_disposition": {"state": "present", "parent": "DEST"}}
+                    "goal_coverage_disposition": {
+                        "state": "missing", "parent": "DEST", "gap_ref": "GOAL-GAP-1",
+                        "authorized_disposition": "report-only",
+                    }}
         if route == "remove_scope_unit":
             return {**base, "operation": "Remove", "target_name": "CHILD"}
         raise GoldenCorpusError(f"native golden parameters are not separately bound for {route}")

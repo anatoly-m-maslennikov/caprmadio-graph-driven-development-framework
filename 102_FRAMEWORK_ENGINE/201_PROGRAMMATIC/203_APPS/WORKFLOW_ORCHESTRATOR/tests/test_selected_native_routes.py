@@ -293,6 +293,25 @@ class SelectedNativeRoutesTest(unittest.TestCase):
                     self.assertEqual("terminal", result.get("disposition"), {"result": result, "graph": graph})
                     self._assert_shared_lineage(project.root, request_id, route, result, graph)
                     self._assert_route_effect(project, runner, request_id, before, rows)
+                    if case_id == "W02":
+                        self.assertEqual(["CA-O-145", "CA-O-129"], [row["step_definition_id"] for row in rows])
+                        assessment = self._read_json(
+                            runner.run_directory(request_id) / f"{rows[0]['action_run_id']}.json",
+                            "O145 assessment progress",
+                        )["native_result"].get("assessment")
+                        self.assertIsInstance(assessment, dict)
+                        self.assertRegex(assessment.get("request_digest", ""), r"^[0-9a-f]{64}$")
+                        self.assertEqual("semantic_revision", assessment.get("admitted_change_class"))
+                        comparison = assessment.get("comparison")
+                        self.assertIsInstance(comparison, dict)
+                        self.assertEqual("CA-R-100", comparison.get("target", {}).get("atom_id"))
+                        self.assertTrue(comparison.get("report", {}).get("digest"))
+                        self.assertTrue(comparison.get("primary_claim_identity_preserved"))
+                        applied = self._read_json(
+                            runner.run_directory(request_id) / f"{rows[1]['action_run_id']}.json",
+                            "O129 update progress",
+                        )["native_result"]
+                        self.assertEqual(assessment, applied.get("assessment"))
                 finally:
                     lease.cleanup()
 

@@ -197,6 +197,35 @@ def scan_atoms(root: Path, *, under: str | None = None, lifecycle: str = "all") 
     return sorted(atoms, key=lambda atom: atom.relative)
 
 
+def atom_id_has_preserved_history_evidence(root: Path, atom_id: str) -> bool:
+    """Return whether any retained carrier reserves ``atom_id``.
+
+    This is deliberately more conservative than ``scan_atoms``.  A malformed
+    or otherwise unparsable retained Markdown file cannot establish Atom
+    properties, but a matching historical identity is enough to make reuse
+    unsafe.  Callers must block rather than treating parse failure as evidence
+    that allocation is free.
+    """
+
+    root = root.resolve()
+    control = control_root(root)
+    for candidate in control.rglob("*.md"):
+        if candidate.is_symlink():
+            continue
+        match = ATOM_ID.search(candidate.name)
+        if match is not None and match.group(1) == atom_id:
+            return True
+        try:
+            frontmatter, _ = split_frontmatter(candidate.read_text(encoding="utf-8"))
+            if frontmatter_scalar(frontmatter, "atom_id") == atom_id:
+                return True
+        except (OSError, UnicodeDecodeError, ToolError):
+            # The file cannot be trusted as an Atom, but its filename has
+            # already been checked above.  Do not infer any further property.
+            continue
+    return False
+
+
 def resolve_selector(root: Path, selector: str, atoms: Sequence[Atom] | None = None) -> Atom:
     root = root.resolve()
     if "/" in selector or (selector.endswith(".md") and Path(selector).is_absolute()):
@@ -432,8 +461,8 @@ def create_atom_revision(root: Path, relative_path: str, frontmatter: str, conte
     path, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
     if path.exists():
         raise ToolError("destination-collision", f"Atom destination already exists: {path.relative_to(root)}")
-    if atom_id and any(atom.atom_id == atom_id for atom in scan_atoms(root)):
-        raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
+    if atom_id and atom_id_has_preserved_history_evidence(root, atom_id):
+        raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
     prepared = _revision(normalized, creating=True)
     history_ref = None
     if _lifecycle(path, control_root(root)) == "draft":

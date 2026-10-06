@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 04:50:00 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 05:43:54 +0000"
 subjects:
   governs: "Implementation Workflow packet admission"
   depends_on: [Implementation, Evaluation, Workflow, Plan, Permission]
@@ -44,3 +44,7 @@ The source-governed packet boundary has regression coverage and independently ac
 ## Pre-execution review
 
 The restored two-route audit found shallow list/response checks where current authority requires source-bound packet and coverage evidence. DRY and truthful acceptance favor one owning validator, with incomplete work reported instead of accepted. CA-C-493 retains the finding.
+
+## Results
+
+The shared validator checks current R/D/E and full active-M bindings, Plan/DoD/owned paths, candidate/phase, confidence, retry and coverage before dispatch. Retry uses the separately retained sealed outer authorization, not an approval boolean. Implemented/repaired results must match the admitted candidate and phase. Twenty-six prompt/selected-project, twenty O016, twelve W09/native/Revert integration and one wrapper tests passed. Independent review accepted the repaired boundaries and independently passed 19 prompt, 20 O016 and seven native-provider cases. Actual Docker/queue/Journal proof remains separately required.

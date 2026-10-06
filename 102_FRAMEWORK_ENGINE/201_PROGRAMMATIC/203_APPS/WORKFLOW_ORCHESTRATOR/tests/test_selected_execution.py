@@ -495,6 +495,26 @@ class SelectedExecutionTests(unittest.TestCase):
 
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016")
         sources = implementation_actions.current_source_bindings(REPOSITORY)
+        execution = request["execution"]
+        assert isinstance(execution, dict)
+        execution["request_id"] = "current-o016"
+        execution["initiative"] = {
+            "initiative_id": "implementation-o016",
+            "instruction_summary": "current implementation fixture",
+            "initiative_ref": execution["definition_manifest"]["manifest_ref"],
+        }
+        execution["operator_authorization"] = {
+            "authorization_ref": "authorizations/current-o016.json",
+            "authorization_freshness": {
+                "state": "current", "digest": execution["definition_manifest"]["manifest_digest"]},
+            "request_id": "current-o016", "operation_route": "run_implementation_workflow",
+            "proposal_receipt_digest": "b" * 64,
+            "parameters_digest": "c" * 64,
+            "target_frontier_digest": "d" * 64,
+            "effects_digest": "e" * 64,
+            "definition_manifest": execution["definition_manifest"],
+            "source_freshness": execution["source_freshness"],
+        }
         method_paths = [row["path"] for row in sources
                         if row["atom_id"].startswith("CA-M-")]
         projection = implementation_actions.prepare_method_projection(method_paths, REPOSITORY)
@@ -510,16 +530,26 @@ class SelectedExecutionTests(unittest.TestCase):
             step = packet["step_marker"]
             outputs: dict[str, object] = {}
             if step == "CA-O-092":
-                outputs = {"golden_e2e": True, "commands": ["test"], "expected_outcomes": ["pass"]}
+                outputs = {"golden_e2e": ["test"], "commands": ["test"], "expected_outcomes": ["pass"]}
             elif step == "CA-O-093":
-                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"]}
+                outputs = {"candidate": "fixture", "phase": packet["phase"], "changed_paths": ["fixture.py"]}
             elif step == "CA-O-094":
                 evaluation_calls += 1
                 if evaluation_calls == 1:
-                    return {"result": "failed", "outputs": {}, "evidence": ["failure"]}
-                outputs = {"commands": ["test"], "checks": [{"returncode": 0}]}
+                    return {"result": "failed", "outputs": {"commands": ["test"],
+                                                                  "checks": [{"returncode": 1}]},
+                            "evidence": ["failure"]}
+                outputs = {"candidate": "fixture", "commands": ["test"],
+                           "checks": [{"returncode": 0}],
+                           "coverage": {"complete": True, "checked": ["CA-E-563"]}}
+            elif step == "CA-O-095":
+                outputs = {"cause": "fixture assertion failed"}
+            elif step == "CA-O-096":
+                outputs = {"decision": "retry admitted", "limit_provenance": "fixture settings", "consumed": 0}
             elif step == "CA-O-099":
-                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"], "recheck_commands": ["test"]}
+                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"],
+                           "phase": packet["phase"], "recheck_commands": ["test"], "issue_evidence": ["failure"],
+                           "regression_evidence": ["recheck"]}
             results = {"CA-O-091": "evaluation_ready", "CA-O-092": "prepared", "CA-O-093": "implemented",
                        "CA-O-094": "passed", "CA-O-095": "implementation_defect", "CA-O-096": "retry_permitted",
                        "CA-O-099": "repaired"}
@@ -534,14 +564,32 @@ class SelectedExecutionTests(unittest.TestCase):
             "source_bindings": sources,
             "permissions": {"allowed": True, "implementation_workspace": {
                 "kind": "disposable_workspace", "path": str(workspace), "allow_write": True,
-            }},
+            }, "retry": {"authorization_ref": execution["operator_authorization"]["authorization_ref"],
+                         "source_ref": ".caprmedio_caprmedio/caprmedio_project_settings.toml",
+                         "task_ref": execution["workflow_run_id"],
+                         "epic_ref": execution["definition_manifest"]["manifest_ref"]}},
             "workspace": str(workspace), "method_projection": projection,
-            "requirements_delivery": ["R/D"], "evaluations": ["E"],
-            "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
-            "golden_e2e": True, "baseline_command": "test", "retry": {"consumed": 0, "limit": 1},
+            "requirements": implementation_actions.prepare_input_bindings(["CA-R-1843"], REPOSITORY),
+            "delivery": implementation_actions.prepare_input_bindings(["CA-D-544"], REPOSITORY),
+            "evaluations": implementation_actions.prepare_input_bindings(["CA-E-563"], REPOSITORY),
+            "red": {"expectation": "fixture assertion passes", "fixtures": ["fixture.py"],
+                    "commands": ["test"], "scope": "selected implementation item"},
+            "plan_item": {"plan_id": "current-o016-plan", "item_id": "current-o016-item",
+                          "dod": ["implementation checks pass"], "owned_paths": ["."],
+                          "estimated_minutes": 1}, "owned_paths": ["."],
+            "candidate": "fixture", "phase": "implementation", "handoff_complete": True,
+            "golden_e2e": ["test"], "baseline_command": "test",
+            "confidence": {"observed": 1.0, "effective": 0.9,
+                            "source": ".caprmedio_caprmedio/caprmedio_project_settings.toml"},
+            "retry": {"consumed": 0, "effective_limit": 1,
+                      "source": ".caprmedio_caprmedio/caprmedio_project_settings.toml",
+                      "remaining_failure": True, "admitted": True},
+            "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False,
+                         "candidate": "fixture", "phase": "implementation"},
+            "operator_authorization": execution["operator_authorization"],
             "retained_state": {"run": "fixture"},
         }
-        request["execution"]["parameters"] = {
+        execution["parameters"] = {
             "base_packet": base,
             "run_visit_limits": {"CA-O-094": 2},
             "step_packets": {
@@ -550,8 +598,8 @@ class SelectedExecutionTests(unittest.TestCase):
             },
         }
         runner = SelectedExecution(REPOSITORY, implementation_agent=agent)
-        graph = selected._validate_graph(request["execution"])
-        request["execution"]["requested_runs"] = build_requested_runs(
+        graph = selected._validate_graph(execution)
+        execution["requested_runs"] = build_requested_runs(
             graph, "current-o016", {"CA-O-094": 2},
         )
         frozen = {"request": request, "graph": graph}

@@ -410,6 +410,217 @@ def _proposal(value: object) -> dict[str, str]:
     return {"frontmatter": proposed["frontmatter"], "content": proposed["content"]}
 
 
+def _is_lossless_carrier_normalization(target: Atom, proposed: Mapping[str, str]) -> bool:
+    """Prove the only local carrier-only normalization safe without O067 evidence.
+
+    A caller's class is not evidence that a changed Markdown body preserves the
+    governed Claim or properties.  The Engine can independently establish one
+    deliberately narrow case: surplus terminal line feeds.  They are outside
+    the parsed frontmatter, Summary, Claim, and properties and have no rendered
+    Markdown meaning.  Broader whitespace rewrites are intentionally excluded:
+    for example, trailing spaces can be a Markdown hard line break.
+    """
+
+    return (
+        proposed["frontmatter"] == target.frontmatter
+        and proposed["content"].rstrip("\n") == target.content.rstrip("\n")
+    )
+
+
+def _comparison_digest(value: str) -> str:
+    return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def _claim_comparison_value(content: str) -> tuple[str, str]:
+    """Return the governed Claim, or the whole carrier when no Claim heading exists.
+
+    A whole-carrier fingerprint remains a stronger equality proof for the
+    mechanical-normalization path; it does not infer that a substantive
+    unstructured body change is semantically safe.
+    """
+
+    match = re.search(r"(?ms)^## Claim\s*$\n(?P<claim>.*?)(?=^## |\Z)", content)
+    if match is not None:
+        return "claim-section", match.group("claim").rstrip("\n")
+    return "whole-carrier", content.rstrip("\n")
+
+
+def _mechanical_update_evidence(target: Atom, prior: Mapping[str, Any], proposed: Mapping[str, str], *,
+                                admitted_change_class: str, exact_carrier: bool) -> dict[str, Any]:
+    """Retain O067's actual target/proposal comparison for a proven safe class."""
+
+    proposed_summary = _summary(proposed["content"])
+    claim_kind, target_claim = _claim_comparison_value(target.content)
+    proposed_claim_kind, proposed_claim = _claim_comparison_value(proposed["content"])
+    return {
+        "admitted_change_class": admitted_change_class,
+        "comparison": {
+            "target": {"atom_id": target.atom_id, "path": target.relative, "digest": prior["digest"]},
+            "proposal": {
+                "frontmatter_digest": _comparison_digest(proposed["frontmatter"]),
+                "content_digest": _comparison_digest(proposed["content"]),
+            },
+            "summary": {"target": _comparison_digest(_summary(target.content)),
+                        "proposed": _comparison_digest(proposed_summary), "equal": True},
+            "properties": {"target": _comparison_digest(target.frontmatter),
+                           "proposed": _comparison_digest(proposed["frontmatter"]), "equal": True},
+            "claim": {"target": _comparison_digest(target_claim), "proposed": _comparison_digest(proposed_claim),
+                      "kind": claim_kind if claim_kind == proposed_claim_kind else "mismatch", "equal": True},
+            "carrier_normalization": "exact-carrier" if exact_carrier else "terminal-newline-only",
+        },
+    }
+
+
+def update_assessment_seal(parameters: Mapping[str, Any], evidence: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Bind O145's admitted class and actual comparison to one exact Update input."""
+
+    request = _mapping(parameters, "parameters")
+    required = {"target", "proposed", "change_class"}
+    if not required.issubset(request):
+        raise LifecycleError("update-parameters-invalid", "assessment requires one complete Update request")
+    seal: dict[str, Any] = {"request_digest": hashlib.sha256(canonical_json(request).encode("utf-8")).hexdigest()}
+    if evidence is None:
+        return seal
+    comparison = _mapping(evidence, "assessment_evidence")
+    _exact_fields(comparison, frozenset({"admitted_change_class", "comparison"}), "assessment_evidence")
+    if comparison["admitted_change_class"] not in {*_UPDATE_CLASSES, "no-op"} or not isinstance(comparison["comparison"], Mapping):
+        raise LifecycleError("assessment-invalid", "Update assessment does not contain one locally admitted class")
+    seal.update(comparison)
+    return seal
+
+
+def _validate_update_assessment(parameters: Mapping[str, Any], assessment: Mapping[str, Any],
+                                expected_evidence: Mapping[str, Any]) -> None:
+    """Refuse an O145 result not sealed to this target, proposal, and class evidence."""
+
+    if not isinstance(assessment.get("request_digest"), str):
+        raise LifecycleError("assessment-invalid", "Update assessment seal is incomplete")
+    expected = update_assessment_seal(parameters, expected_evidence)
+    if dict(assessment) != expected:
+        raise LifecycleError("reassessment-required", "Update target, proposal, class, or comparison evidence differs from completed O145 assessment")
+
+
+def _pinned_project_file(root: Path, value: object, name: str, *, atom_id: str | None = None) -> tuple[Path, dict[str, str]]:
+    """Read one exact project-relative evidence pin without following a caller path."""
+
+    pin = _mapping(value, name)
+    _exact_fields(pin, frozenset({"path", "digest"}), name)
+    relative, digest = pin["path"], pin["digest"]
+    if (not isinstance(relative, str) or not isinstance(digest, str)
+            or re.fullmatch(r"[0-9a-f]{64}", digest) is None):
+        raise LifecycleError("assessment-evidence-invalid", f"{name} must have canonical path and SHA-256 digest")
+    candidate = Path(relative)
+    if candidate.is_absolute() or not candidate.parts or ".." in candidate.parts or candidate.as_posix() != relative:
+        raise LifecycleError("assessment-evidence-invalid", f"{name} path is unsafe")
+    path = (root / candidate).resolve()
+    try:
+        path.relative_to(root)
+        raw = path.read_bytes()
+    except (OSError, ValueError) as error:
+        raise LifecycleError("assessment-evidence-invalid", f"{name} is unavailable") from error
+    if hashlib.sha256(raw).hexdigest() != digest:
+        raise LifecycleError("assessment-evidence-invalid", f"{name} is stale")
+    if atom_id is not None:
+        try:
+            frontmatter, _ = split_frontmatter(raw.decode("utf-8"))
+        except (UnicodeDecodeError, AtomToolError) as error:
+            raise LifecycleError("assessment-evidence-invalid", f"{name} is not an Atom carrier") from error
+        if frontmatter_scalar(frontmatter, "atom_id") != atom_id:
+            raise LifecycleError("assessment-evidence-invalid", f"{name} has wrong authority identity")
+    return path, {"path": relative, "digest": digest}
+
+
+def _assessment_json(content: str) -> dict[str, Any]:
+    """Read the one canonical external evidence block without interpreting prose."""
+
+    results = re.search(r"(?ms)^## Results\s*$\n(?P<body>.*?)(?=^## |\Z)", content)
+    if results is None:
+        raise LifecycleError("assessment-evidence-invalid", "Analysis Report lacks Results")
+    headings = list(re.finditer(r"(?m)^### Update assessment evidence\s*$", results.group("body")))
+    if len(headings) != 1:
+        raise LifecycleError("assessment-evidence-invalid", "Analysis Report must have one Update assessment evidence section")
+    body = results.group("body")[headings[0].end():]
+    body = re.split(r"(?m)^### |^## ", body, maxsplit=1)[0]
+    fenced = re.fullmatch(r"\s*```json\n(?P<json>.*?)\n```\s*", body, re.DOTALL)
+    if fenced is None:
+        raise LifecycleError("assessment-evidence-invalid", "Update assessment evidence must be one JSON block")
+
+    def no_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        output: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in output:
+                raise LifecycleError("assessment-evidence-invalid", "Update assessment evidence has duplicate JSON keys")
+            output[key] = value
+        return output
+
+    try:
+        evidence = json.loads(fenced.group("json"), object_pairs_hook=no_duplicates)
+    except (json.JSONDecodeError, LifecycleError) as error:
+        if isinstance(error, LifecycleError):
+            raise
+        raise LifecycleError("assessment-evidence-invalid", "Update assessment evidence JSON is invalid") from error
+    if not isinstance(evidence, dict):
+        raise LifecycleError("assessment-evidence-invalid", "Update assessment evidence must be an object")
+    return evidence
+
+
+def _semantic_assessment_evidence(root: Path, target: Atom, prior: Mapping[str, Any],
+                                  proposed: Mapping[str, str], reference: object) -> dict[str, Any]:
+    """Verify a completed Analysis Report; it is evidence, never authorization."""
+
+    report_path, report_pin = _pinned_project_file(root, reference, "semantic_assessment_report")
+    try:
+        report = atom_from_path(root, report_path)
+        if (frontmatter_scalar(report.frontmatter, "content_role") != "Analysis"
+                or frontmatter_scalar(report.frontmatter, "type") != "Analysis Report"
+                or frontmatter_scalar(report.frontmatter, "status") != "Done"):
+            raise LifecycleError("assessment-evidence-invalid", "assessment report is not a Done Analysis Report")
+        resolve_status_model(root, report, "Done")
+    except (AtomToolError, StatusModelError) as error:
+        raise LifecycleError("assessment-evidence-invalid", "assessment report lacks current Analysis authority") from error
+    evidence = _assessment_json(report.content)
+    _exact_fields(evidence, frozenset({
+        "target", "proposal", "authorityPins", "admittedChangeClass", "primaryClaimIdentityPreserved",
+        "declaredDelta", "lineageEvidencePins",
+    }), "Update assessment evidence")
+    target_pin = _mapping(evidence["target"], "Update assessment target")
+    _exact_fields(target_pin, frozenset({"atom_id", "path", "digest"}), "Update assessment target")
+    if target_pin != {"atom_id": target.atom_id, "path": target.relative, "digest": prior["digest"]}:
+        raise LifecycleError("assessment-evidence-invalid", "assessment target differs from current Update target")
+    proposal_pin = _mapping(evidence["proposal"], "Update assessment proposal")
+    _exact_fields(proposal_pin, frozenset({"frontmatter_digest", "content_digest"}), "Update assessment proposal")
+    if proposal_pin != {"frontmatter_digest": _comparison_digest(proposed["frontmatter"]),
+                        "content_digest": _comparison_digest(proposed["content"])}:
+        raise LifecycleError("assessment-evidence-invalid", "assessment proposal differs from current Update proposal")
+    authority = _mapping(evidence["authorityPins"], "Update assessment authorityPins")
+    _exact_fields(authority, frozenset({"r1432", "r1464"}), "Update assessment authorityPins")
+    _, r1432 = _pinned_project_file(root, authority["r1432"], "CA-R-1432 authority", atom_id="CA-R-1432")
+    _, r1464 = _pinned_project_file(root, authority["r1464"], "CA-R-1464 authority", atom_id="CA-R-1464")
+    admitted = evidence["admittedChangeClass"]
+    if admitted not in {"equivalent_refinement", "semantic_revision", "replacement"}:
+        raise LifecycleError("assessment-evidence-invalid", "assessment change class is not substantive")
+    if evidence["primaryClaimIdentityPreserved"] is not True:
+        raise LifecycleError("assessment-evidence-invalid", "assessment does not establish primary Claim identity")
+    if not isinstance(evidence["declaredDelta"], str) or not evidence["declaredDelta"].strip():
+        raise LifecycleError("assessment-evidence-invalid", "assessment declared delta is absent")
+    if not isinstance(evidence["lineageEvidencePins"], list) or not evidence["lineageEvidencePins"]:
+        raise LifecycleError("assessment-evidence-invalid", "assessment lineage review is incomplete")
+    lineage = [_pinned_project_file(root, item, f"lineageEvidencePins[{index}]")[1]
+               for index, item in enumerate(evidence["lineageEvidencePins"])]
+    return {
+        "admitted_change_class": admitted,
+        "comparison": {
+            "target": target_pin,
+            "proposal": proposal_pin,
+            "report": {**report_pin, "atom_id": report.atom_id},
+            "authority_pins": {"r1432": r1432, "r1464": r1464},
+            "primary_claim_identity_preserved": True,
+            "declared_delta": evidence["declaredDelta"],
+            "lineage_evidence_pins": lineage,
+        },
+    }
+
+
 def _proposed_successors(root: Path, value: object, predecessor: Atom) -> list[dict[str, str]]:
     """Validate future successor carriers without requiring present carriers."""
 
@@ -770,12 +981,14 @@ def create_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             "effects": [_effect("changed", carrier=observed)], "history": {"prior": None}}
 
 
-def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bool = False, authorized: bool = False) -> dict[str, Any]:
+def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bool = False, authorized: bool = False,
+                       assessment: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Apply one assessed identity-preserving Update or return a terminal handoff."""
 
     root = root.resolve()
     request = _mapping(parameters, "parameters")
-    allowed = frozenset({"target", "proposed", "change_class", "successors", "legacy_identity_proof", "legacy_identity_mapping"})
+    allowed = frozenset({"target", "proposed", "change_class", "successors", "legacy_identity_proof", "legacy_identity_mapping",
+                         "semantic_assessment_report"})
     unknown = sorted(request.keys() - allowed)
     if unknown or not {"target", "proposed", "change_class"}.issubset(request):
         raise LifecycleError("update-parameters-invalid", "update requires target, complete proposed carrier, and change_class only")
@@ -838,11 +1051,65 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             if re.search(rf"(?:^|-){re.escape(expected_identity)}(?=-|@|\.)", candidate.name):
                 raise LifecycleError("atom-id-collision", "canonical identity was already used by a historical or unnormalized carrier")
     if proposed["frontmatter"] == target.frontmatter and proposed["content"] == target.content and not mapping:
+        admitted_evidence = _mechanical_update_evidence(
+            target, prior, proposed, admitted_change_class="no-op", exact_carrier=True,
+        )
+        if assessment is not None:
+            _validate_update_assessment(request, assessment, admitted_evidence)
+        assessment_evidence = {"assessment": dict(assessment)} if assessment is not None else {}
         return {"operation": "update", "outcome": "no-op", "observed": prior,
-                "effects": [_effect("unchanged", carrier=prior, reason="equivalent-carrier")], "history": {"prior": prior, "preserved": True}}
+                "assessment_evidence": admitted_evidence,
+                "effects": [_effect("unchanged", carrier=prior, reason="equivalent-carrier")], "history": {"prior": prior, "preserved": True},
+                **assessment_evidence}
+    mechanical = not legacy and change_class == "carrier_only" and _is_lossless_carrier_normalization(target, proposed)
+    admitted_evidence: dict[str, Any] | None = None
+    if mechanical:
+        admitted_evidence = _mechanical_update_evidence(
+            target, prior, proposed, admitted_change_class="carrier_only", exact_carrier=False,
+        )
+    elif not legacy:
+        report = request.get("semantic_assessment_report")
+        try:
+            admitted_evidence = _semantic_assessment_evidence(root, target, prior, proposed, report)
+        except LifecycleError as error:
+            assessment_evidence = {"assessment": dict(assessment)} if assessment is not None else {}
+            return {
+                "operation": "update", "outcome": "unresolved", "observed": prior,
+                "classification": {
+                    "requested": change_class, "reason": "semantic-assessment-unverified",
+                    "required": "current bound Analysis Report evidence with declared delta and completed lineage-impact review",
+                    "diagnostic": error.code,
+                },
+                "effects": [_effect("unchanged", carrier=prior, reason="semantic-assessment-unverified")],
+                "history": {"prior": prior, "preserved": True}, **assessment_evidence,
+            }
+        admitted = admitted_evidence["admitted_change_class"]
+        if admitted == "replacement":
+            proposed_successors = _proposed_successors(root, request.get("successors"), target)
+            return {
+                "operation": "update", "outcome": "replace_handoff", "predecessor": prior,
+                "replace_handoff": {"predecessor": prior, "successors": proposed_successors},
+                "effects": [_effect("unchanged", carrier=prior, reason="assessment-requires-replace")],
+                "history": {"prior": prior, "preserved": True}, "assessment_evidence": admitted_evidence,
+            }
+        if admitted != change_class:
+            return {
+                "operation": "update", "outcome": "unresolved", "observed": prior,
+                "classification": {"requested": change_class, "admitted": admitted,
+                                   "reason": "semantic-assessment-class-mismatch"},
+                "effects": [_effect("unchanged", carrier=prior, reason="semantic-assessment-class-mismatch")],
+                "history": {"prior": prior, "preserved": True},
+            }
+    if assessment is not None:
+        if admitted_evidence is None:
+            raise LifecycleError("assessment-invalid", "legacy Update cannot consume a current O145 mechanical assessment")
+        _validate_update_assessment(request, assessment, admitted_evidence)
+    assessment_evidence = {"assessment": dict(assessment)} if assessment is not None else {}
     if not _execute_allowed(execute=execute, authorized=authorized):
         return {"operation": "update", "outcome": "preview", "observed": prior,
-                "effects": [_effect("unchanged", carrier=prior, reason="preview")], "history": {"prior": prior}}
+                "assessment_evidence": admitted_evidence,
+                "effects": [_effect("unchanged", carrier=prior, reason="preview")], "history": {"prior": prior},
+                **assessment_evidence}
     next_version = atom_version(target) + 1 if change_class == "semantic_revision" else atom_version(target)
     prior_revision: Atom | None = None
     try:
@@ -894,7 +1161,8 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
                         {"state": "changed", "carrier": prior, "operation": "relocated_to_canonical_encoding"}])
     return {"operation": "update", "outcome": "applied", "observed": observed,
             "effects": effects,
-            "history": history}
+            "history": history,
+            **assessment_evidence}
 
 
 def change_status_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bool = False, authorized: bool = False) -> dict[str, Any]:
@@ -1045,13 +1313,13 @@ def replace_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: b
     except AtomToolError as error:
         raise _translate(error) from error
     supplied_model = _mapping(request["status_model"], "status_model")
-    supplied_archive_status = supplied_model.get("archive_status")
-    if not isinstance(supplied_archive_status, str) or not supplied_archive_status:
-        raise LifecycleError("archive-status-unavailable", "qualified status model does not define an Archive shortcut")
-    model = _status_model(supplied_model, predecessor, supplied_archive_status)
-    archive_status = model["archive_status"]
-    if archive_status is None:
-        raise LifecycleError("archive-status-unavailable", "qualified status model does not define an Archive shortcut")
+    try:
+        model = resolve_status_model(root, predecessor, "Archived")
+    except StatusModelError as error:
+        raise LifecycleError("archive-status-unavailable", "qualified current status model has no Archived value") from error
+    if supplied_model != model:
+        raise LifecycleError("model-forged", "Replace status model differs from authoritative current sources")
+    archive_status = "Archived"
     if not _execute_allowed(execute=execute, authorized=authorized):
         return {"operation": "replace", "outcome": "preview", "predecessor": prior, "successors": successors,
                 "effects": [_effect("unchanged", carrier=prior, reason="preview")], "history": {"predecessor": prior}}

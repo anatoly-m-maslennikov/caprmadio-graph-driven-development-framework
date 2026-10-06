@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-06 04:50:00 +0000"
+version: 2
+updated_at: "2026-10-06 05:43:54 +0000"
 subjects:
   governs: "Implementation input and result evidence"
   depends_on: [Implementation, Evaluation, Workflow, Plan, Permission]
@@ -34,3 +34,7 @@ The selected Implementation Workflow and final CA-P-1117 acceptance.
 ## Disposition
 
 CA-P-1777 owns one source-governed validator and focused tests. Source cardinalities and effective settings remain authoritative. No source/mock result substitutes for actual queue, Docker or Journal completion.
+
+## Resolution
+
+CA-P-1777 closes the source defect with full input/coverage validation, retained retry authorization and exact performed candidate/phase evidence. Focused regressions and independent acceptance pass. Actual runtime proof remains a separate release gate.

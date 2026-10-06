@@ -60,6 +60,25 @@ class CreateAtomConflictTests(unittest.TestCase):
 
         self.assertEqual(before, self.destination.read_bytes())
 
+    def test_malformed_preserved_history_reserves_identity_without_inferring_an_atom(self) -> None:
+        history = self.destination.parent / "archive" / "CA-R-902--retained@1.md"
+        history.parent.mkdir()
+        history.write_bytes(b"retained but malformed historical bytes")
+        destination = self.destination.with_name("CA-R-902--new.md")
+        request = {
+            "carrier": {
+                "path": destination.relative_to(self.root).as_posix(),
+                "frontmatter": "atom_id: CA-R-902\ncontent_role: Requirement\nstatus: Active",
+                "content": "# Summary\n\nNew carrier\n",
+            }
+        }
+
+        with self.assertRaisesRegex(LifecycleError, "atom-id-collision"):
+            create_atom_action(self.root, request, execute=True, authorized=True)
+
+        self.assertEqual(b"retained but malformed historical bytes", history.read_bytes())
+        self.assertFalse(destination.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -70,7 +70,8 @@ class SelectedGoldenInputsTest(unittest.TestCase):
                     request = fixture.request(request_id=f"golden-{case_id.lower()}")
                     self.assertNotIn("fixture_schema", request["parameters"])
                     self.assertEqual(fixture.native_parameters(), request["parameters"])
-                    frontier = request["target_frontier"]["refs"]
+                    frontier = request["target_frontier"]
+                    self.assertIsInstance(frontier, list)
                     self.assertEqual(1, len(frontier))
                     target = fixture.root / frontier[0]
                     # Create's target is deliberately absent before its native
@@ -94,11 +95,14 @@ class SelectedGoldenInputsTest(unittest.TestCase):
                     if route == "create_atom":
                         self.assertTrue((fixture.root / result["observed"]["path"]).is_file())
                     elif route == "update_atom":
-                        self.assertIn("Carrier-only fixture detail", (fixture.root / result["observed"]["path"]).read_text(encoding="utf-8"))
+                        self.assertIn("Clarified fixture acceptance detail.",
+                                      (fixture.root / result["observed"]["path"]).read_text(encoding="utf-8"))
+                        self.assertEqual(2, result["observed"]["version"])
                     elif route == "replace_atom":
                         self.assertTrue((fixture.root / result["successors"][0]["path"]).is_file())
                     elif route == "change_atom_status":
-                        self.assertIn("/reviewed/", result["observed"]["path"])
+                        self.assertIn("/archived/", result["observed"]["path"])
+                        self.assertEqual("Archived", result["observed"]["status"])
                     elif route == "rename_scope_unit":
                         self.assertEqual("RENAMED\n", (fixture.root / "fixture/reference.txt").read_text(encoding="utf-8"))
                     else:

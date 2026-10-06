@@ -284,11 +284,42 @@ class SelectedExecution:
                 "change_atom_status": lifecycle_intents.change_status_atom_action,
             }
 
+            def admitted_update_assessment(context: Mapping[str, Any]) -> dict[str, Any] | None:
+                """Return the one completed O145 seal for this frozen Update input."""
+                prior_results = context.get("lifecycle_prior_results")
+                if not isinstance(prior_results, list):
+                    return None
+                expected_digest = lifecycle_intents.update_assessment_seal(context["parameters"])["request_digest"]
+                matches: list[dict[str, Any]] = []
+                for prior in prior_results:
+                    if not isinstance(prior, Mapping):
+                        continue
+                    native = prior.get("native_result")
+                    receipt = prior.get("completed_receipt")
+                    if (prior.get("step_definition_id") != "CA-O-145"
+                            or prior.get("action_definition_id") != "CA-O-067"
+                            or prior.get("result") != "identity-preserving"
+                            or not isinstance(native, Mapping)
+                            or not isinstance(receipt, Mapping)
+                            or receipt.get("disposition") != "terminal"
+                            or receipt.get("outcome") != "completed"):
+                        continue
+                    assessment = native.get("assessment")
+                    if isinstance(assessment, Mapping) and assessment.get("request_digest") == expected_digest:
+                        matches.append(dict(assessment))
+                return matches[0] if len(matches) == 1 else None
+
             def atom_lifecycle(context: dict[str, Any]) -> dict[str, Any]:
                 action = lifecycle.get(context["route"])
                 if action is None:
                     return {"result": "blocked", "effect_refs": []}
-                result = action(self.root, context["parameters"], execute=True, authorized=True)
+                call: dict[str, Any] = {"execute": True, "authorized": True}
+                if context["route"] == "update_atom":
+                    assessment = admitted_update_assessment(context)
+                    if assessment is None:
+                        return {"result": "reassessment-required", "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                    call["assessment"] = assessment
+                result = action(self.root, context["parameters"], **call)
                 native_outcome = result.get("outcome")
                 result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome)
                 terminal_outcome = {
@@ -319,6 +350,11 @@ class SelectedExecution:
                     return {"result": "replacement-required", "terminal_outcome": "interrupted_pending",
                             "effect_refs": [], "native_result": result}
                 if native_outcome in {"preview", "no-op"}:
+                    evidence = result.get("assessment_evidence")
+                    if not isinstance(evidence, Mapping):
+                        return {"result": "unresolved", "terminal_outcome": "interrupted_pending",
+                                "effect_refs": [], "native_result": result}
+                    result["assessment"] = lifecycle_intents.update_assessment_seal(context["parameters"], evidence)
                     return {"result": "identity-preserving", "effect_refs": [], "native_result": result}
                 return {"result": str(native_outcome or "blocked"), "terminal_outcome": "interrupted_pending",
                         "effect_refs": [], "native_result": result}
@@ -408,6 +444,7 @@ class SelectedExecution:
                     result = handler(
                         context["parameters"], agent=self.implementation_agent,
                         selected_project_root=self.root,
+                        trusted_execution_authorization=context.get("trusted_execution_authorization"),
                     )
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("implementation Action returned an invalid queue envelope")
@@ -1113,6 +1150,7 @@ class SelectedExecution:
         results: list[dict[str, Any]] = []
         implementation_prior_results: list[dict[str, Any]] = []
         structural_prior_results: list[dict[str, Any]] = []
+        lifecycle_prior_results: list[dict[str, Any]] = []
         while next_step:
             step = steps.get(next_step)
             if step is None:
@@ -1136,8 +1174,16 @@ class SelectedExecution:
                 if handler is None:
                     raise SelectedExecutionError(f"no native handler registered for Action {action['atom_id']}")
                 parameters = request["execution"].get("parameters")
+                trusted_execution_authorization: Mapping[str, Any] | None = None
                 if graph["workflow"]["atom_id"] == "CA-O-016":
                     parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
+                    # Carry the already-sealed execution authorization into the
+                    # selected Step packet; retry admission must bind to this
+                    # retained evidence rather than a caller-supplied boolean.
+                    execution_authorization = request["execution"].get("operator_authorization")
+                    if isinstance(execution_authorization, Mapping):
+                        trusted_execution_authorization = execution_authorization
+                        parameters = {**parameters, "operator_authorization": dict(execution_authorization)}
                 if graph.get("route") in {"build_entities_graph", "build_terms_graph"}:
                     parameters = self._graph_parameters_with_actual_recording(
                         parameters,
@@ -1160,6 +1206,7 @@ class SelectedExecution:
                     "step_definition_id": step["atom_id"],
                     "action_definition_id": action["atom_id"],
                     "parameters": parameters,
+                    "trusted_execution_authorization": trusted_execution_authorization,
                     "target_frontier": request["execution"].get("target_frontier"),
                     "effects": request["execution"].get("effects"),
                     "initiative": request["execution"].get("initiative"),
@@ -1187,6 +1234,8 @@ class SelectedExecution:
                     # This is executor-retained state only; structural Actions
                     # never admit caller-provided prior-result assertions.
                     context["structural_prior_results"] = list(structural_prior_results)
+                if graph["workflow"]["atom_id"] == "CA-O-127":
+                    context["lifecycle_prior_results"] = list(lifecycle_prior_results)
                 output = handler(context)
                 if not isinstance(output, Mapping) or not isinstance(output.get("result"), str):
                     raise SelectedExecutionError("native Action handler returned no declared result")
@@ -1293,6 +1342,24 @@ class SelectedExecution:
                         and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
                         and terminal_receipt.get("effect_refs") == effect_refs):
                     structural_prior_results.append({
+                        "workflow_run_id": workflow_run_id,
+                        "workflow_definition_id": graph["workflow"]["atom_id"],
+                        "step_run_id": step_run_id,
+                        "step_definition_id": step["atom_id"],
+                        "action_run_id": action_run_id,
+                        "action_definition_id": action["atom_id"],
+                        "result": final_result,
+                        "result_ref": progress_path.relative_to(self.root).as_posix(),
+                        "native_result": output.get("native_result"),
+                        "completed_receipt": dict(terminal_receipt),
+                    })
+                if (graph["workflow"]["atom_id"] == "CA-O-127"
+                        and isinstance(terminal_receipt, Mapping)
+                        and terminal_receipt.get("disposition") == "terminal"
+                        and terminal_receipt.get("outcome") == "completed"
+                        and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
+                        and terminal_receipt.get("effect_refs") == effect_refs):
+                    lifecycle_prior_results.append({
                         "workflow_run_id": workflow_run_id,
                         "workflow_definition_id": graph["workflow"]["atom_id"],
                         "step_run_id": step_run_id,

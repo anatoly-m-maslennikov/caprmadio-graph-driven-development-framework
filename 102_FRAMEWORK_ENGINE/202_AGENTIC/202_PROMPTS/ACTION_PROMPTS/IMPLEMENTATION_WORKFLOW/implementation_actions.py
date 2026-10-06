@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, Callable, Mapping
@@ -35,6 +36,17 @@ ACTION_HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {}
 SELECTED_PROJECT_SOURCE_ROOT = ".caprmedio_caprmedio"
 _BINDING_FIELDS = frozenset({"atom_id", "version", "path", "sha256"})
 _SELECTED_PROJECT_FIELDS = frozenset({"kind", "source_root", "source_references"})
+_INPUT_BINDING_FIELDS = _BINDING_FIELDS | {"content"}
+_E_REQUIRED_STEPS = frozenset({"CA-O-092", "CA-O-094"})
+_RED_REQUIRED_STEPS = frozenset({"CA-O-092", "CA-O-093", "CA-O-094", "CA-O-095", "CA-O-096", "CA-O-099"})
+_WORK_BOUNDARY_STEPS = frozenset({"CA-O-092", "CA-O-093", "CA-O-094", "CA-O-095", "CA-O-099"})
+_IDENTITY_KEYS = ("id", "identity", "name", "ref", "candidate_id", "phase_id")
+_AUTHORIZATION_FIELDS = frozenset({
+    "authorization_ref", "authorization_freshness", "request_id", "operation_route",
+    "proposal_receipt_digest", "parameters_digest", "target_frontier_digest", "effects_digest",
+    "definition_manifest", "source_freshness",
+})
+_DIGEST = re.compile(r"[0-9a-f]{64}")
 
 
 def _trusted_project_root(selected_project_root: str | Path | None) -> Path:
@@ -109,6 +121,25 @@ def current_source_bindings(selected_project_root: str | Path | None = None) -> 
     return rows
 
 
+def prepare_input_bindings(atom_ids: list[str],
+                           selected_project_root: str | Path | None = None) -> list[dict[str, Any]]:
+    """Build complete invocation bindings for selected R/D/E source Atoms."""
+    root = _trusted_project_root(selected_project_root)
+    current = {row["atom_id"]: row for row in current_source_bindings(selected_project_root)}
+    result: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for atom_id in atom_ids:
+        if not isinstance(atom_id, str) or atom_id in seen:
+            raise ValueError("invocation source Atoms must have unique identities")
+        row = current.get(atom_id)
+        if row is None:
+            raise ValueError(f"invocation source Atom is not current: {atom_id}")
+        raw = _read_bound_source(root, row["path"])
+        result.append({**row, "content": raw.decode("utf-8")})
+        seen.add(atom_id)
+    return result
+
+
 def prepare_method_projection(method_paths: list[str | Path],
                               selected_project_root: str | Path | None = None) -> dict[str, Any]:
     """Build a verified, full-content active-M input distinct from selected R/D/E."""
@@ -147,22 +178,249 @@ def compile_active_methods(packet: Mapping[str, Any],
     projection = packet.get("method_projection")
     if not isinstance(projection, Mapping) or not projection.get("content") or not isinstance(projection.get("sources"), list):
         raise ValueError("missing verified active-M projection")
-    if not isinstance(packet.get("requirements_delivery"), (list, tuple)):
-        raise ValueError("missing selected R/D targets")
-    if not isinstance(packet.get("evaluations"), (list, tuple)):
-        raise ValueError("missing separate E checks")
     try:
-        if selected_project_root is None:
-            expected_paths = [row["path"] for row in projection["sources"]]
-        else:
-            expected_paths = [row["path"] for row in current_source_bindings(selected_project_root)
-                              if row["atom_id"].startswith("CA-M-")]
+        expected_paths = [row["path"] for row in current_source_bindings(selected_project_root)
+                          if row["atom_id"].startswith("CA-M-")]
         expected = prepare_method_projection(expected_paths, selected_project_root)
     except (KeyError, OSError, UnicodeDecodeError, ValueError) as error:
         raise ValueError(f"invalid active-M projection: {error}") from error
     if projection != expected:
         raise ValueError("active-M projection content, source, digest, or currentness mismatch")
     return expected
+
+
+def _nonempty(value: object) -> bool:
+    if isinstance(value, str):
+        return bool(value.strip())
+    if isinstance(value, Mapping):
+        return bool(value)
+    if isinstance(value, (list, tuple, set)):
+        return bool(value)
+    return value is not None
+
+
+def _number(value: object, label: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        raise ValueError(f"{label} must be a finite number")
+    return float(value)
+
+
+def _first(mapping: Mapping[str, Any], *keys: str) -> object:
+    for key in keys:
+        if key in mapping:
+            return mapping[key]
+    return None
+
+
+def _identity_token(value: object) -> object:
+    if isinstance(value, Mapping):
+        return _first(value, *_IDENTITY_KEYS)
+    return value
+
+
+def _validate_input_bindings(value: object, role: str, current: Mapping[str, Mapping[str, Any]],
+                             root: Path, *, required: bool) -> None:
+    if value is None:
+        if required:
+            raise ValueError(f"selected {role} input bindings are missing")
+        return
+    if not isinstance(value, list):
+        raise ValueError(f"selected {role} input bindings must be a list")
+    if required and not value:
+        raise ValueError(f"selected {role} input bindings are required")
+    seen: set[str] = set()
+    for reference in value:
+        if not isinstance(reference, Mapping) or set(reference) != _INPUT_BINDING_FIELDS:
+            raise ValueError(f"selected {role} input binding must include full content and source identity")
+        atom_id = reference.get("atom_id")
+        if not isinstance(atom_id, str) or atom_id in seen or not atom_id.startswith(f"CA-{role}-"):
+            raise ValueError(f"selected {role} input binding has an invalid or duplicate identity")
+        expected = current.get(atom_id)
+        if expected is None or any(reference.get(field) != expected[field] for field in _BINDING_FIELDS):
+            raise ValueError(f"selected {role} input binding is stale or not in the reviewed frontier")
+        content = reference.get("content")
+        if not isinstance(content, str) or not content:
+            raise ValueError(f"selected {role} input binding content is missing")
+        raw = _read_bound_source(root, expected["path"])
+        if content != raw.decode("utf-8") or hashlib.sha256(raw).hexdigest() != reference["sha256"]:
+            raise ValueError(f"selected {role} input binding content is stale")
+        seen.add(atom_id)
+
+
+def _validate_red(packet: Mapping[str, Any], step: str) -> None:
+    if step not in _RED_REQUIRED_STEPS:
+        return
+    red = packet.get("red")
+    if not isinstance(red, Mapping):
+        raise ValueError("complete RED input is missing")
+    expectation = _first(red, "expectation", "expected", "assertion")
+    fixtures = _first(red, "fixtures", "inputs", "test_inputs")
+    commands = _first(red, "commands", "reproduction", "reproducer")
+    if not _nonempty(expectation):
+        raise ValueError("RED expectation is missing")
+    if not isinstance(fixtures, (list, tuple)) or not fixtures:
+        raise ValueError("RED fixtures are missing")
+    if not isinstance(commands, (list, tuple)) or not commands:
+        raise ValueError("RED reproduction commands are missing")
+
+
+def _validate_plan_and_scope(packet: Mapping[str, Any], step: str) -> None:
+    plan_item = packet.get("plan_item")
+    if not isinstance(plan_item, Mapping):
+        raise ValueError("selected P/Plan item is missing")
+    item_id = _first(plan_item, "item_id", "id", "plan_item_id")
+    dod = _first(plan_item, "dod", "definition_of_done")
+    if not _nonempty(item_id) or not _nonempty(dod):
+        raise ValueError("selected P/Plan item and Definition of Done are incomplete")
+    if isinstance(dod, (list, tuple)) and not all(_nonempty(item) for item in dod):
+        raise ValueError("selected Definition of Done contains an empty condition")
+    estimated = plan_item.get("estimated_minutes")
+    if isinstance(estimated, bool) or not isinstance(estimated, (int, float)) or estimated <= 0:
+        raise ValueError("selected P/Plan item estimate is missing or invalid")
+    if step in _WORK_BOUNDARY_STEPS:
+        owned_paths = packet.get("owned_paths", plan_item.get("owned_paths"))
+        if not isinstance(owned_paths, (list, tuple)) or not owned_paths or not all(
+                isinstance(path, str) and path.strip() for path in owned_paths):
+            raise ValueError("owned implementation boundary is missing")
+    candidate = packet.get("candidate")
+    phase = packet.get("phase")
+    if not _nonempty(candidate) or not _nonempty(phase):
+        raise ValueError("current candidate and execution phase are missing")
+    if isinstance(candidate, Mapping) and not _nonempty(_first(candidate, *_IDENTITY_KEYS)):
+        raise ValueError("current candidate identity is missing")
+    if isinstance(phase, Mapping) and not _nonempty(_first(phase, *_IDENTITY_KEYS)):
+        raise ValueError("execution phase identity is missing")
+
+
+def _validate_confidence(packet: Mapping[str, Any]) -> None:
+    confidence = packet.get("confidence")
+    if not isinstance(confidence, Mapping):
+        raise ValueError("effective confidence binding is missing")
+    effective = _first(confidence, "effective", "threshold", "effective_threshold")
+    observed = _first(confidence, "observed", "value", "confidence")
+    source = _first(confidence, "source", "source_ref", "provenance")
+    effective_value = _number(effective, "effective confidence")
+    observed_value = _number(observed, "observed confidence")
+    if not _nonempty(source):
+        raise ValueError("effective confidence source is missing")
+    if observed_value < effective_value:
+        raise ValueError("observed confidence is below the effective threshold")
+
+
+def _validate_authorization(packet: Mapping[str, Any]) -> Mapping[str, Any]:
+    """Require the existing sealed execution authorization, never a caller boolean."""
+    authorization = packet.get("operator_authorization")
+    if not isinstance(authorization, Mapping) or set(authorization) != _AUTHORIZATION_FIELDS:
+        raise ValueError("current Operator authorization evidence is missing or incomplete")
+    if not _nonempty(authorization.get("authorization_ref")):
+        raise ValueError("current Operator authorization reference is missing")
+    freshness = authorization.get("authorization_freshness")
+    if (not isinstance(freshness, Mapping) or set(freshness) != {"state", "digest"}
+            or freshness.get("state") != "current"
+            or not isinstance(freshness.get("digest"), str)
+            or not _DIGEST.fullmatch(freshness["digest"])):
+        raise ValueError("current Operator authorization freshness is invalid")
+    for field in ("request_id", "operation_route", "proposal_receipt_digest", "parameters_digest",
+                  "target_frontier_digest", "effects_digest"):
+        value = authorization.get(field)
+        if field.endswith("_digest"):
+            if not isinstance(value, str) or not _DIGEST.fullmatch(value):
+                raise ValueError(f"current Operator authorization {field} is invalid")
+        elif not _nonempty(value):
+            raise ValueError(f"current Operator authorization {field} is missing")
+    manifest = authorization.get("definition_manifest")
+    if (not isinstance(manifest, Mapping) or not _nonempty(manifest.get("manifest_ref"))
+            or not isinstance(manifest.get("manifest_digest"), str)
+            or not _DIGEST.fullmatch(manifest["manifest_digest"])):
+        raise ValueError("current Operator authorization definition binding is invalid")
+    if not isinstance(authorization.get("source_freshness"), Mapping) or not authorization["source_freshness"]:
+        raise ValueError("current Operator authorization source freshness is missing")
+    return authorization
+
+
+def _validate_retry(packet: Mapping[str, Any], step: str,
+                    trusted_execution_authorization: Mapping[str, Any] | None = None) -> None:
+    retry = packet.get("retry")
+    if not isinstance(retry, Mapping):
+        raise ValueError("effective retry setting is missing")
+    consumed = retry.get("consumed")
+    limit = _first(retry, "effective_limit", "limit")
+    source = _first(retry, "source", "source_ref", "provenance")
+    if isinstance(consumed, bool) or not isinstance(consumed, int) or consumed < 0:
+        raise ValueError("retained retry consumption is missing or invalid")
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit < 0:
+        raise ValueError("effective retry limit is missing or invalid")
+    if not _nonempty(source):
+        raise ValueError("effective retry source is missing")
+    if step == "CA-O-096":
+        if retry.get("remaining_failure") is not True:
+            raise ValueError("remaining implementation failure is not admitted")
+        if consumed >= limit:
+            raise ValueError("retry allowance is exhausted")
+        permissions = packet.get("permissions")
+        retry_permission = permissions.get("retry") if isinstance(permissions, Mapping) else None
+        authorization = _validate_authorization(packet)
+        if trusted_execution_authorization is None:
+            raise ValueError("retry requires retained selected-execution authorization evidence")
+        trusted_packet = {"operator_authorization": trusted_execution_authorization}
+        trusted = _validate_authorization(trusted_packet)
+        if dict(authorization) != dict(trusted):
+            raise ValueError("retry authorization differs from retained selected-execution evidence")
+        if (not isinstance(retry_permission, Mapping)
+                or not _nonempty(_first(retry_permission, "source", "source_ref", "provenance"))
+                or retry_permission.get("authorization_ref") != authorization["authorization_ref"]):
+            raise ValueError("retry permission is not bound to current Operator authorization")
+    if step == "CA-O-099" and retry.get("admitted") is not True:
+        raise ValueError("repair retry has not been admitted")
+
+
+def _validate_coverage(packet: Mapping[str, Any], step: str) -> None:
+    if step != "CA-O-094":
+        return
+    coverage = packet.get("coverage")
+    if not isinstance(coverage, Mapping):
+        raise ValueError("implementation Evaluation coverage is missing")
+    required = coverage.get("required")
+    if not isinstance(required, (list, tuple)) or not required or not all(_nonempty(item) for item in required):
+        raise ValueError("required Evaluation coverage is missing")
+    if "candidate" in coverage and coverage["candidate"] != packet.get("candidate"):
+        raise ValueError("coverage is bound to a different candidate")
+    if "phase" in coverage and coverage["phase"] != packet.get("phase"):
+        raise ValueError("coverage is bound to a different phase")
+
+
+def _path_is_owned(path_value: object, packet: Mapping[str, Any]) -> bool:
+    if not isinstance(path_value, str) or not path_value or ".." in Path(path_value).parts:
+        return False
+    owned = packet.get("owned_paths", packet.get("plan_item", {}).get("owned_paths", []))
+    if not isinstance(owned, (list, tuple)):
+        return False
+    path = Path(path_value)
+    workspace_value = packet.get("workspace")
+    workspace = Path(workspace_value) if isinstance(workspace_value, str) and workspace_value else None
+    if path.is_absolute():
+        if workspace is not None:
+            try:
+                path.resolve(strict=False).relative_to(workspace.resolve(strict=False))
+                return True
+            except ValueError:
+                return any(Path(item).is_absolute() and path.resolve(strict=False).is_relative_to(
+                    Path(item).resolve(strict=False)) for item in owned if isinstance(item, str))
+        return any(item == "." for item in owned)
+    return any(item == "." or path == Path(item) or path.is_relative_to(Path(item))
+               for item in owned if isinstance(item, str) and not Path(item).is_absolute())
+
+
+def _observed_change_path(value: object) -> object:
+    """Extract a path from an observed change record without trusting its digest."""
+    return value.get("path") if isinstance(value, Mapping) else value
+
+
+def _identity_matches(observed: object, admitted: object) -> bool:
+    """Compare the admitted candidate/phase identity, not arbitrary output labels."""
+    if not _nonempty(observed) or not _nonempty(admitted):
+        return False
+    return _identity_token(observed) == _identity_token(admitted)
 
 
 def _blocked(step: str, reason: str, packet: Mapping[str, Any]) -> dict[str, Any]:
@@ -227,9 +485,19 @@ def _validate_workspace_capability(packet: Mapping[str, Any], selected_project_r
         raise ValueError("selected Project workspace capability is missing or mismatched")
 
 
-def _validate(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None,
-              selected_project_root: str | Path | None = None) -> str | None:
+def validate_packet(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None,
+                    selected_project_root: str | Path | None = None,
+                    trusted_execution_authorization: Mapping[str, Any] | None = None) -> str | None:
+    """Admit one complete current Step packet before Agent dispatch.
+
+    This is the single implementation-packet validator.  The selected
+    executor supplies the frozen Step packet and this adapter owns the
+    source/input, scope, gate, and cardinality checks before invoking an
+    Agent; no caller assertion is treated as a substitute for them.
+    """
     _, context = ACTION_BY_STEP[step]
+    if not isinstance(packet, Mapping):
+        return "implementation Step packet must be a mapping"
     if packet.get("context") != context:
         return "supplied Step context is missing or mismatched"
     try:
@@ -242,56 +510,120 @@ def _validate(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | 
     except (KeyError, OSError, UnicodeDecodeError, ValueError, TypeError):
         bindings_current = False
     permissions = packet.get("permissions")
-    if not bindings_current or not isinstance(permissions, Mapping) or not permissions.get("allowed"):
+    if (not bindings_current or not isinstance(permissions, Mapping)
+            or permissions.get("allowed") is not True):
         return "current source bindings or permission are missing"
     try:
         compile_active_methods(packet, selected_project_root)
+        current = {row["atom_id"]: row for row in current_source_bindings(selected_project_root)}
+        root = _trusted_project_root(selected_project_root)
+        requirements = packet.get("requirements")
+        legacy_requirements = packet.get("requirements_delivery")
+        if requirements is not None and legacy_requirements is not None:
+            raise ValueError("conflicting R input aliases are present")
+        if requirements is None:
+            requirements = legacy_requirements
+        delivery = packet.get("delivery")
+        if delivery is not None and legacy_requirements is not None:
+            raise ValueError("conflicting R/D input aliases are present")
+        if delivery is None and isinstance(requirements, list):
+            requirements, delivery = ([row for row in requirements
+                                       if isinstance(row, Mapping) and str(row.get("atom_id", "")).startswith("CA-R-")],
+                                      [row for row in requirements
+                                       if isinstance(row, Mapping) and str(row.get("atom_id", "")).startswith("CA-D-")])
+        _validate_input_bindings(requirements, "R", current, root, required=True)
+        _validate_input_bindings(delivery, "D", current, root, required=False)
+        _validate_input_bindings(packet.get("evaluations"), "E", current, root,
+                                 required=step in _E_REQUIRED_STEPS)
+        _validate_red(packet, step)
+        _validate_plan_and_scope(packet, step)
+        _validate_confidence(packet)
+        _validate_retry(packet, step, trusted_execution_authorization)
+        _validate_coverage(packet, step)
     except ValueError as error:
         return str(error)
     if context == "Isolated":
         item = packet.get("plan_item", {})
         if agent is None or not packet.get("handoff_complete") or item.get("estimated_minutes", 15) >= 15:
             return "isolated dispatch needs an Agent, complete handoff, and P subtask below fifteen minutes"
-    if step == "CA-O-092" and (not packet.get("golden_e2e") or not packet.get("baseline_command")):
+    if step in {"CA-O-092", "CA-O-093", "CA-O-094"} and (
+            not isinstance(packet.get("golden_e2e"), (list, tuple)) or not packet.get("golden_e2e")
+            or not _nonempty(packet.get("baseline_command"))):
         return "golden E2E cases and runnable baseline are required before implementation"
-    if step == "CA-O-096":
-        retry = packet.get("retry", {})
-        if retry.get("consumed", 0) >= retry.get("limit", 0):
-            return "retry allowance is exhausted"
     return None
 
 
-def _performed_success(step: str, response: Mapping[str, Any]) -> bool:
+def _performed_success(step: str, packet: Mapping[str, Any], response: Mapping[str, Any]) -> bool:
     result, outputs, evidence = response.get("result"), response.get("outputs"), response.get("evidence")
     if not isinstance(outputs, Mapping) or not isinstance(evidence, list) or not evidence:
         return False
     if result == "prepared":
-        return bool(outputs.get("golden_e2e") and outputs.get("commands") and outputs.get("expected_outcomes"))
+        return (isinstance(outputs.get("golden_e2e"), (list, tuple)) and bool(outputs.get("golden_e2e"))
+                and isinstance(outputs.get("commands"), (list, tuple)) and bool(outputs.get("commands"))
+                and isinstance(outputs.get("expected_outcomes"), (list, tuple))
+                and bool(outputs.get("expected_outcomes")))
     if result == "implemented":
-        return bool(outputs.get("candidate") and outputs.get("changed_paths"))
+        changed_paths = outputs.get("changed_paths")
+        return (_identity_matches(outputs.get("candidate"), packet.get("candidate"))
+                and _identity_matches(outputs.get("phase"), packet.get("phase"))
+                and isinstance(changed_paths, (list, tuple))
+                and bool(changed_paths)
+                and all(_path_is_owned(_observed_change_path(path), packet) for path in changed_paths))
     if result == "passed":
         checks = outputs.get("checks")
-        return bool(outputs.get("commands") and isinstance(checks, list) and checks and
-                    all(isinstance(check, Mapping) and check.get("returncode") == 0 for check in checks))
+        coverage = outputs.get("coverage")
+        required = packet.get("coverage", {}).get("required", [])
+        checked = coverage.get("checked") if isinstance(coverage, Mapping) else None
+        return (isinstance(outputs.get("commands"), (list, tuple)) and bool(outputs.get("commands"))
+                and _identity_token(outputs.get("candidate")) == _identity_token(packet.get("candidate"))
+                and isinstance(checks, list) and checks
+                and all(isinstance(check, Mapping) and check.get("returncode") == 0 for check in checks)
+                and isinstance(coverage, Mapping) and coverage.get("complete") is True
+                and isinstance(checked, (list, tuple))
+                and set(required).issubset(set(checked)))
+    if result == "failed":
+        checks = outputs.get("checks")
+        return (isinstance(outputs.get("commands"), (list, tuple)) and bool(outputs.get("commands"))
+                and isinstance(checks, list) and checks
+                and any(isinstance(check, Mapping) and check.get("returncode") != 0 for check in checks))
     if result == "repaired":
-        return bool(outputs.get("candidate") and outputs.get("changed_paths") and outputs.get("recheck_commands"))
+        changed_paths = outputs.get("changed_paths")
+        return (_identity_matches(outputs.get("candidate"), packet.get("candidate"))
+                and _identity_matches(outputs.get("phase"), packet.get("phase"))
+                and isinstance(changed_paths, (list, tuple))
+                and bool(changed_paths)
+                and all(_path_is_owned(_observed_change_path(path), packet) for path in changed_paths)
+                and isinstance(outputs.get("recheck_commands"), (list, tuple))
+                and bool(outputs.get("recheck_commands"))
+                and isinstance(outputs.get("issue_evidence"), list)
+                and isinstance(outputs.get("regression_evidence"), list))
+    if result in {"implementation_defect", "test_implementation_defect", "expected_initial_failure",
+                  "authority_change_required", "environment_blocker", "unresolved"}:
+        return _nonempty(outputs.get("cause") or outputs.get("diagnosis") or outputs.get("reason"))
+    if result in {"retry_permitted", "retry_blocked"}:
+        retry = packet.get("retry", {})
+        return (_nonempty(outputs.get("decision"))
+                and _nonempty(outputs.get("limit_provenance"))
+                and outputs.get("consumed") == retry.get("consumed"))
     return True
 
 
 def implement_selected_queue(step: str, packet: Mapping[str, Any], agent: Callable[..., Any] | None = None,
                              implement_run_support: Any = None, *,
-                             selected_project_root: str | Path | None = None) -> dict[str, Any]:
+                             selected_project_root: str | Path | None = None,
+                             trusted_execution_authorization: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Invoke one current Action; no MCP server or successor dispatch is needed."""
     if step not in ACTION_BY_STEP:
         raise ValueError(f"unknown current implementation Step: {step}")
-    blocker = _validate(step, packet, agent, selected_project_root)
+    blocker = validate_packet(step, packet, agent, selected_project_root,
+                              trusted_execution_authorization)
     if blocker:
         return _blocked(step, blocker, packet)
     prompt = (HERE / f"{step}.prompt.md").read_text(encoding="utf-8")
     response = agent(prompt, packet) if agent is not None else {}
     if not isinstance(response, Mapping) or response.get("result") not in RESULTS[step]:
         return _blocked(step, "Agent returned no admitted result", packet)
-    if not _performed_success(step, response):
+    if not _performed_success(step, packet, response):
         return _blocked(step, "Agent result lacks required performed-work outputs or evidence", packet)
     result = _envelope(step, str(response["result"]), packet,
                        outputs=response.get("outputs", {}),
@@ -303,8 +635,10 @@ def implement_selected_queue(step: str, packet: Mapping[str, Any], agent: Callab
 
 
 def _handler(step: str) -> Callable[..., dict[str, Any]]:
-    return lambda packet, agent=None, implement_run_support=None, selected_project_root=None: implement_selected_queue(
-        step, packet, agent, implement_run_support, selected_project_root=selected_project_root)
+    return lambda packet, agent=None, implement_run_support=None, selected_project_root=None, \
+        trusted_execution_authorization=None: implement_selected_queue(
+            step, packet, agent, implement_run_support, selected_project_root=selected_project_root,
+            trusted_execution_authorization=trusted_execution_authorization)
 
 
 for _step, _action in ACTION_BY_STEP.items():
