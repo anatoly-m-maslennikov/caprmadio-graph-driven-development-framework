@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 27
-updated_at: "2026-10-06 20:40:00 +0000"
+updated_at: "2026-10-06 20:51:00 +0000"
 relations: {}
 ---
 # Summary
@@ -64,6 +64,8 @@ fresh N13 `release-epic-resume-20261006-N13` completed source delivery and compi
 CA-P-1809 owns six bounded N13 failure groups. the graph, historical-status, pending-recording, image-helper and sealed MCP fixture repairs have independent focused acceptance; sealed reference-context integration remains in progress. the exact-image image-fixture chain passed ten cases, but its causal contribution to N13's full-module failures remains unproven until the next full gate. D567 v5 prospectively authenticates the occupied N13 source copy without reusing its authorization. D580 v7 admits the five exact selected-refresh authority/dependency sources, including R1041, in the sealed Unit reference closure; D572 v16 pins the repaired reader. the actual guarded binding refresh was recorded with canonical digest `202e94a68aebcab765be6508e3ef00d38426e2164282bc7eef754c4ca5e34386`, preserving all sixteen routes. CA-P-1816 retains per-route actual Candidate E2E evidence before disposable fixture cleanup; no real captures yet exist. admit a fresh N14 only after accepted repairs, fresh source/currentness checks and Worker reload.
 
 all six CA-P-1809 repair children now have bounded independent acceptance and are Done. the full reference-context module passed 18 tests; actual sealed/gitless selected-refresh reconstruction passed six cases; final D572 source admission passed fourteen cases. the historical refresh fixture preserves the exact retained D572@13 reader bytes rather than rewriting its controls. the reloaded Release host is ready at PID 54871, with no pending or queued historical Run to recover. installed N remains unchanged. fresh N14 still must independently pass the complete Unit gate and every later mandatory Release gate before the parent repairs or Epic can close.
+
+fresh N14 `release-epic-resume-20261006-N14` delivered sources and compiled, then its disposable Unit container was deliberately stopped after parallel final review proved a shared retained-fixture setup gap. the exact source-bound container was inspected before stop; no other container was targeted. its actual receipt records exit 137 after 104.1833622080012 seconds, no JUnit report and zero validated-report tests: incomplete, not a pass or proof that no tests ran. all 22 actual Run Events are recorded with no pending recording. installed N is unchanged; no package/image/E2E/promotion/retirement followed. preserve N14 without replay. CA-P-1815 is reopened for the shared five-source fixture closure; CA-C-516 records the bounded early-stop choice under this Epic's autonomy. fresh N15 requires accepted shared-fixture regressions and independently current source sealing before every unchanged mandatory gate.
 
 ### Current Operator-selected scope
 
