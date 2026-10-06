@@ -8,12 +8,17 @@ import asyncio
 import json
 import os
 from pathlib import Path
+import secrets
+import socket
 import sys
 import tempfile
 import time
 import unittest
 
 from mcp import Client, StdioServerParameters
+import httpx2
+from mcp.client.session import ClientSession
+from mcp.client.streamable_http import streamable_http_client
 
 APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[3]
@@ -65,14 +70,37 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         )
         (control / "rules.md").write_text("mock local rules")
         self.runtime = Runtime(self.root, mock=True, image=E2E_CONTEXT.candidate_image_digest)
-        self.started = False
+        self.started = self.http_started = False
 
     async def asyncTearDown(self):
+        if self.http_started:
+            await asyncio.to_thread(self.runtime.mcp_http_stop)
         if self.started:
             # Only this randomly named fixture's containers/volume are removed.
             # Real runtime stop deliberately preserves its authentication volume.
             await asyncio.to_thread(self.runtime.call, "down", "--volumes", timeout=60)
         self.temporary.cleanup()
+
+    def http_environment(self):
+        token = secrets.token_urlsafe(32)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+            probe.bind(("127.0.0.1", 0))
+            port = probe.getsockname()[1]
+        return token, port
+
+    async def http_session(self, url, token):
+        client = httpx2.AsyncClient(headers={"Authorization": f"Bearer {token}"})
+        transport = streamable_http_client(url, http_client=client)
+        streams = await transport.__aenter__()
+        session = ClientSession(*streams)
+        await session.__aenter__()
+        await session.initialize()
+        return client, transport, session
+
+    async def close_http_session(self, client, transport, session):
+        await session.__aexit__(None, None, None)
+        await transport.__aexit__(None, None, None)
+        await client.aclose()
 
     async def start(self):
         self.started = True  # clean up partially started fixtures too
@@ -206,6 +234,49 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result["outcome"], "interrupted", result)
         self.assertEqual(await self.agent_calls(), 1)
         self.assertIn("SLOW_MOCK", self.atom.read_text())
+
+    async def test_authenticated_http_mcp_isolated_from_worker_and_agent(self):
+        token, port = self.http_environment()
+        previous = {key: os.environ.get(key) for key in
+                    ("CAPRMEDIO_MCP_HTTP_SECRET_TOKEN", "CAPRMEDIO_MCP_HTTP_PORT")}
+        os.environ["CAPRMEDIO_MCP_HTTP_SECRET_TOKEN"] = token
+        os.environ["CAPRMEDIO_MCP_HTTP_PORT"] = str(port)
+        self.addCleanup(self.restore_http_environment, previous)
+        self.http_started = True
+        started = await asyncio.to_thread(self.runtime.mcp_http_start)
+        self.assertEqual(f"http://127.0.0.1:{port}/mcp", started["url"])
+        status = await asyncio.to_thread(self.runtime.mcp_http_status)
+        services = {row.get("Service") for row in status["services"]}
+        self.assertEqual({"mcp-http"}, services)
+        url = started["url"]
+        client, transport, session = await self.http_session(url, token)
+        try:
+            names = {tool.name for tool in (await session.list_tools()).tools}
+            self.assertIn("get_mcp_reload_status", names)
+            result = await session.call_tool("get_mcp_reload_status", {"request": {}})
+            self.assertFalse(result.is_error, result)
+        finally:
+            await self.close_http_session(client, transport, session)
+        async with httpx2.AsyncClient() as raw:
+            health = await raw.get(f"http://127.0.0.1:{port}/health",
+                                   headers={"Authorization": f"Bearer {token}"})
+            self.assertEqual(200, health.status_code)
+            for headers, expected in (
+                ({}, 401),
+                ({"Authorization": "Bearer wrong"}, 401),
+                ({"Authorization": f"Bearer {token}", "Host": "attacker.invalid"}, 421),
+                ({"Authorization": f"Bearer {token}", "Origin": "https://attacker.invalid"}, 403),
+            ):
+                response = await raw.get(f"http://127.0.0.1:{port}/health", headers=headers)
+                self.assertEqual(expected, response.status_code)
+
+    @staticmethod
+    def restore_http_environment(previous):
+        for key, value in previous.items():
+            if value is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = value
 
 
 if __name__ == "__main__":

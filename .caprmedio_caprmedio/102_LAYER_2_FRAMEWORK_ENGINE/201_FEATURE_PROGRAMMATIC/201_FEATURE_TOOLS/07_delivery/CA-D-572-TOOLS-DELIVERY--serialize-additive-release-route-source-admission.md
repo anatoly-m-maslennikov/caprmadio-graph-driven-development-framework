@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 10
-updated_at: "2026-10-06 02:20:04 +0000"
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -136,7 +136,7 @@ The record is additive source-admission serialization only. It preserves the ori
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py",
-    "sha256": "e598697c3a0966e523625eec0ec54445372ea69ff6e333a7edb68e0279739b1d"
+    "sha256": "9fec2a4356610b17ad3f9d6b90736d0a63d0258448ba672468430e01f965ae18"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_query_mcp_e2e.py",
