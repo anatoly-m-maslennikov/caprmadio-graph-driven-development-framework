@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Implementation workspace canonicalization"
   depends_on: [Implementation, Workflow, Action, Carrier]
@@ -39,3 +39,7 @@ The two blocked W09 fixtures and native route proof pass; a leaf-symlink workspa
 ## Pre-execution review
 
 Root accepts canonicalizing an admitted absolute workspace, not weakening its authority boundary. Actual Docker/queue proof remains a separate gate.
+
+## Recorded verification
+
+cb4bba3e2 retains canonical ancestor admission and mock transport agreement. Twenty-nine focused W09/native cases pass; leaf-symlink and protected-overlap refusal remain. Actual Docker/MCP queue proof is separate.

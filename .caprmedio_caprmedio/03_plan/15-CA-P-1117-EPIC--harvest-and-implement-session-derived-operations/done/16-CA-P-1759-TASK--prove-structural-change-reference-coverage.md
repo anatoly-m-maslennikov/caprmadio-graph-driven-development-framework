@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Prove structural change reference coverage"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -41,3 +41,7 @@ An unlisted affected declared reference blocks mutation; complete covered propos
 ## Pre-execution review
 
 Root accepts this bounded repair/restoration against Operator authority, DRY, preservation of valuable information and the latest continuation. Keep installed N intact and distinguish local tests from required actual runtime gates.
+
+## Recorded verification
+
+06396a228 retains authoritative scope-field coverage, exact frontmatter-only rename repair, lowercase active selection and Remove refusal with active references. Fifteen tests pass; the independent review's Remove blocker was repaired. No semantic body rewriting or inferred rehome is allowed.

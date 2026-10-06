@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Repair the closed Release suite harness"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -41,3 +41,7 @@ Focused regressions pass; scratch is writable only in bounded tmpfs; immutable s
 ## Pre-execution review
 
 Root accepts this bounded repair/restoration against Operator authority, DRY, preservation of valuable information and the latest continuation. Keep installed N intact and distinguish local tests from required actual runtime gates.
+
+## Recorded verification
+
+Local harness repair accepted: 27 executor/driver cases, 26 complete suite-wrapper cases, five binding and twelve neighboring phase cases, and all 32 assigned bootstrap/E2E/full-gate fixture cases passed. The actual Docker scratch smoke preserved read-only source and ephemeral tmpfs. Commits 782afb531, 8b8d74bb5 and 6e4b3acc2 retain the changes. This is not the actual complete candidate Unit gate.

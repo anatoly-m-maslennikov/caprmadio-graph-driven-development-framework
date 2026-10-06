@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Verify Release recovery across cold processes"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -41,3 +41,7 @@ Cold synthetic pre-effect/post-effect/completed/N5-shaped cases pass using actua
 ## Pre-execution review
 
 Root accepts this bounded repair/restoration against Operator authority, DRY, preservation of valuable information and the latest continuation. Keep installed N intact and distinguish local tests from required actual runtime gates.
+
+## Recorded verification
+
+75c90cd56 retains four cold-process tests using actual codecs and pending Journal recovery; the combined recovery slice passed 41 cases. Typed synthetic evidence is not actual Release/Docker proof. N5 was untouched and is not a recording-only recovery candidate.

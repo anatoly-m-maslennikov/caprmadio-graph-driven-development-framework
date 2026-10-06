@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Protect graph Projection secrets and Run evidence"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -41,3 +41,7 @@ Secret values never appear in output/errors; forged receipt claims cannot establ
 ## Pre-execution review
 
 Root accepts this bounded repair/restoration against Operator authority, DRY, preservation of valuable information and the latest continuation. Keep installed N intact and distinguish local tests from required actual runtime gates.
+
+## Recorded verification
+
+0e0b22864 retains secret refusal and actual Action-start recording capability injection. Thirteen graph/golden tests, all fifteen native routes, pending-terminal/no-replay cases and eight shared-status fixture checks pass. Live queue/MCP/image proof remains required by the existing Tasks.

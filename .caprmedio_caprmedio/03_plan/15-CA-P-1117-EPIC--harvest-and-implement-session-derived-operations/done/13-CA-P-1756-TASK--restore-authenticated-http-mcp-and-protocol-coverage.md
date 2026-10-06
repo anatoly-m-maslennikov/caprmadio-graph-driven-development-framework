@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Restore authenticated HTTP MCP and protocol coverage"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -41,3 +41,7 @@ Independent security review accepts; host SDK tests prove discovery/calls/reload
 ## Pre-execution review
 
 Root accepts this bounded repair/restoration against Operator authority, DRY, preservation of valuable information and the latest continuation. Keep installed N intact and distinguish local tests from required actual runtime gates.
+
+## Recorded verification
+
+Independent HTTP security acceptance and root's complete 18-case HTTP/stdio/runtime command pass are retained in e63cb5457. SDK session/reload/drain/auth/health/cancellation boundaries are accepted. P1757 remains Active for actual candidate Docker execution.

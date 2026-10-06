@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Implement the opt-in HTTP gateway"
   depends_on: [Implementation, Evaluation, Workflow, Action, Journal]
@@ -41,3 +41,7 @@ The optional adapter and lifecycle honor R1884/1885 M341/342 D578; unchanged std
 ## Pre-execution review
 
 Root accepts this exclusive bounded assignment as the minimal current parent repair. Preserve installed N and truthful observed effects.
+
+## Recorded verification
+
+e63cb5457; the accepted optional adapter and lifecycle preserve stdio default and explicit HTTP configuration. Root's full 18-case transport/runtime suite passed.

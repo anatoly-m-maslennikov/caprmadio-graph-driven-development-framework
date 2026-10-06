@@ -1,20 +1,20 @@
 ---
-atom_id: CA-P-1767
+atom_id: CA-P-1769
 content_role: Plan
 type: Plan
 label: Task
-work_sequence_number: 3
+work_sequence_number: 5
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+status: Done
+version: 2
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
-  governs: "Repair candidate E2E binding fixtures"
+  governs: "Move release fixtures to admitted scratch"
   depends_on: [Implementation, Evaluation, Workflow, Action, Journal]
 relations:
   is_decomposition_of: [CA-P-1755]
@@ -22,22 +22,26 @@ relations:
 ---
 # Summary
 
-Repair candidate E2E binding fixtures
+Move release fixtures to admitted scratch
 
 ## Objective
 
-Repair candidate E2E binding fixtures under the parent's exact source contract.
+Move release fixtures to admitted scratch under the parent's exact source contract.
 
 ## Details
 
-release_fixture_repair exclusively owns RELEASE_VERSION/tests/test_release_suite_bindings_handoff.py.
+suite_scratch_executor exclusively owns tests/test_bootstrap_image.py, test_release_e2e_retained.py, test_release_e2e_gate.py and test_release_full_gate.py.
 
 Estimated execution slice <=15 minutes. Preserve other workers' changes. Root alone owns index, commits and actual shared runtime effects. Tests and disposable smoke evidence are not release promotion.
 
 ## Definition of Done
 
-The exact three source-pinned harness fixtures and neighboring phase cases pass without weakening production admission.
+The four complete fixture modules pass under the fixed Project scratch convention; no extra mounts or exclusions are added.
 
 ## Pre-execution review
 
 Root accepts this exclusive bounded assignment as the minimal current parent repair. Preserve installed N and truthful observed effects.
+
+## Recorded verification
+
+8b8d74bb5; all 32 assigned fixture cases passed (12 bootstrap, 2 retained E2E, 11 E2E gate, 7 Full Gate). No extra source-write mounts were added.
