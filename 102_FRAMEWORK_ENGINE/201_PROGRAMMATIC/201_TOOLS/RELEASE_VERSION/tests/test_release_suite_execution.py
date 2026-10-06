@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import sys
 import tempfile
@@ -35,6 +36,15 @@ IMAGE = "sha256:" + "a" * 64
 SHA = "b" * 64
 CONTEXT = "c" * 64
 CONTAINER = "d" * 64
+
+
+class GovernedSuiteBindingsTests(unittest.TestCase):
+    def test_actual_module_rules_carrier_is_exact_canonical_json(self) -> None:
+        # Read the governed carrier itself, not the canonical fixture below.
+        # A single trailing newline is valid JSON but is not an admitted
+        # sealed module-rules byte sequence.
+        payload = (RELEASE_ROOT / "release_suite_bindings.json").read_bytes()
+        self.assertEqual(payload, canonical_json(json.loads(payload)))
 
 
 class FakeDocker:
