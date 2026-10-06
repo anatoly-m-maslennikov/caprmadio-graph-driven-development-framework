@@ -38,6 +38,8 @@ from selected_routes import load_selected_manifest, selected_manifest_ref  # noq
 REPOSITORY = MCP.parents[2]
 GOLDEN_INPUT = MCP / "tests/selected_source_refresh_golden/input_manifest.v7.json"
 GOLDEN_CONTROLS = MCP / "tests/selected_source_refresh_golden/historical_controls.json"
+GOLDEN_D572_READER = MCP / "tests/selected_source_refresh_golden/release_suite_reference_context.d572v13.py"
+_HISTORICAL_READER_REF = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_reference_context.py"
 
 
 class RegisteredSelectedSourceRefreshTest(unittest.TestCase):
@@ -158,6 +160,11 @@ class RegisteredSourceRefreshE2ETest(unittest.TestCase):
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(contents, encoding="utf-8")
+        historical_reader = GOLDEN_D572_READER.read_bytes()
+        self.assertEqual("554c2fd2a0fd3578433861c4f25089be1d0b743de986cca2993da5bdc11feafc", hashlib.sha256(historical_reader).hexdigest())
+        reader_target = self.root / _HISTORICAL_READER_REF
+        reader_target.parent.mkdir(parents=True, exist_ok=True)
+        reader_target.write_bytes(historical_reader)
         historical_authority = {
             "atom_id": "CA-D-572", "version": 13,
             "source_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md",
