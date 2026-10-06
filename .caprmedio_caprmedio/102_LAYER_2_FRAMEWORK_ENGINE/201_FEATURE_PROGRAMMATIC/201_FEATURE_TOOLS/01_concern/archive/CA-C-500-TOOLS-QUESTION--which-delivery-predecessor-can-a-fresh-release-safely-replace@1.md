@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-06 16:14:51 +0000"
+version: 1
+updated_at: "2026-10-06 14:40:22 +0000"
 subjects:
   governs: "Release source delivery predecessor ownership"
   depends_on: [Source Carrier, Implementation, Workflow Run, Journal, Evaluation]
@@ -38,9 +38,3 @@ only source-delivery predecessor admission and its retained evidence. preserve u
 
 choose the smallest evidence-backed repair under the Operator's autonomous best-option authorization. retain this Question until ownership is independently accepted and a fresh Release passes delivery. do not replay N11 or bypass the mismatch guard.
 
-### Selected repair
-
-- the canonical N10 Event already binds the fixed delivered tree digest. it does not seal the raw Action result or checkpoint bytes, or establish their executing-N lineage.
-- register those exact currently observed bytes and bindings prospectively in reviewed D567 authority under the Epic's autonomous best-option instruction. call this current admission of historical delivery evidence; do not assert historical sealing.
-- the registration permits **only** retention and replacement of the exact occupied copy during a separately authorized fresh Release. **all** current pins, file and directory modes, safe topology and executing-N bindings must match on every read.
-- preserve historical Events and interrupted Runs. this Question remains Active until independent acceptance and actual fresh source delivery.
