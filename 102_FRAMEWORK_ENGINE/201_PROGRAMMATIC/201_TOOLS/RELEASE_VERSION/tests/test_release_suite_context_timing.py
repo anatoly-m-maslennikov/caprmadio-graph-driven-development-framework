@@ -22,6 +22,8 @@ if str(RELEASE_ROOT) not in sys.path:
     sys.path.insert(0, str(RELEASE_ROOT))
 
 import release_suite  # noqa: E402
+from release_handoff import PackageRow  # noqa: E402
+from release_test_phases import CANDIDATE_E2E_MODULES  # noqa: E402
 from release_suite_reference_context import ReleaseSuiteReferenceContextError  # noqa: E402
 
 
@@ -66,7 +68,23 @@ class ReleaseSuiteContextTimingTests(unittest.TestCase):
             ),
             authority=SimpleNamespace(executing_release="selected-n"),
         )
-        self.compilation = SimpleNamespace(child_materialization_root="compiled-candidate")
+        unit_path = (
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/"
+            "RELEASE_VERSION/tests/test_release_suite_context_timing.py"
+        )
+        self.compilation = SimpleNamespace(
+            child_materialization_root="compiled-candidate",
+            package_rows=[
+                PackageRow(
+                    resource="FRAMEWORK_ENGINE",
+                    source_path=source_path,
+                    destination_path=source_path.removeprefix("102_"),
+                    sha256="0" * 64,
+                    mode=0o644,
+                )
+                for source_path in (unit_path, *CANDIDATE_E2E_MODULES)
+            ],
+        )
         self.context = SimpleNamespace(
             trusted_binding_values=(
                 ("candidate_snapshot_manifest_sha256", "a" * 64),

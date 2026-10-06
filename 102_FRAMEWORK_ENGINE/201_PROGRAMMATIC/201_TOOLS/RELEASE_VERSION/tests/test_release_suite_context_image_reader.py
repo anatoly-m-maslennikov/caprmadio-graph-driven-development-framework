@@ -51,6 +51,7 @@ class RetainedSuiteContextImageReaderTests(unittest.TestCase):
         }
         self.context = {**preimage, "control_context_digest": _sha256(canonical_json(preimage))}
         self.candidate = SimpleNamespace(
+            project_root=str(self.root),
             manifest=SimpleNamespace(
                 sha256=self.candidate_digest,
                 full_suite_environment=SimpleNamespace(
@@ -85,7 +86,11 @@ class RetainedSuiteContextImageReaderTests(unittest.TestCase):
         (self.attempt / "receipt.json").write_bytes(receipt)
 
     def test_accepts_exact_retained_context_without_current_selection(self) -> None:
-        self.assertIsNone(_read_suite_artifacts(self.root, self.candidate, self.compilation, self.suite))
+        retained = _read_suite_artifacts(self.root, self.candidate, self.compilation, self.suite)
+
+        self.assertEqual(retained.root, str(self.root))
+        self.assertEqual(retained.trusted_binding_values, tuple(sorted(self.context_bindings.items())))
+        self.assertEqual(retained.control_context_digest, self.context["control_context_digest"])
 
     def test_rejects_changed_retained_context_digest(self) -> None:
         self.context["control_context_digest"] = "0" * 64
