@@ -54,6 +54,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-519-CORE_META_MODEL-QA_CASE--check-delegated-test-first-implementation-and-method-learning.md
+  source_atom_id: CA-E-519
+  source_atom_revision: 6
+  source_sha256: 86cc0beb50d1b06fc7fa58eff2ce90525cb299cd33cfaa125a7b70b5a5665c53
+  original_relations_sha256: f43677645d2ff56c603c3982cbf1aa01657d4b6612d66cbcf94ac476a799eadd
 ---
 # Summary
 

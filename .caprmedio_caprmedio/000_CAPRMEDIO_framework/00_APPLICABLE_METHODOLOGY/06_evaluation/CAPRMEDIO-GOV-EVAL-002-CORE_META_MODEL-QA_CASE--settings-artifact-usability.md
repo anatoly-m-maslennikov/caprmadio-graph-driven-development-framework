@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-002-CORE_META_MODEL-QA_CASE--settings-artifact-usability.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-002
+  source_atom_revision: 21
+  source_sha256: 7e8309975d3e47a7bd4e1ab527e3ceeb29ef4fef0ac6c6bb1cc46c6ec70e3de4
+  original_relations_sha256: 3dfd518c3330ae94fcc8dd981299feea6bbeed261b4bb583a2ca981d3b03d929
 ---
 # Summary
 

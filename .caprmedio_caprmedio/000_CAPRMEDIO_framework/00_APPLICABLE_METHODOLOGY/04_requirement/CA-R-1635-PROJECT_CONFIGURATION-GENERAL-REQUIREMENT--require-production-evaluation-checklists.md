@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1635-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--require-production-evaluation-checklists.md
+  source_atom_id: CA-R-1635
+  source_atom_revision: 27
+  source_sha256: 305cc5cfc9d0d1d9780737e12cc7745d84948374669c157ee08244e0027318b5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

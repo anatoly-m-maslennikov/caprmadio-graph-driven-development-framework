@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-485-CORE_META_MODEL-DELIVERY--carry-defaulted-atom-values-without-copying-inherited-overrides.md
+  source_atom_id: CA-D-485
+  source_atom_revision: 4
+  source_sha256: a157243342e5e161ea6afb7c36928cff0b892f5a65a449adc8656214668b7718
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1695-CORE_META_MODEL-REQUIREMENT--preserve-implementation-traceability-in-the-shared-project-journal.md
+  source_atom_id: CA-R-1695
+  source_atom_revision: 19
+  source_sha256: 38202a4427b887b5827f76a19d067783f93e5b47d686e28336db604fbf159c5e
+  original_relations_sha256: 830908b23d84a3a303303619975907f9aebe6f50499cd71d882d014336f089e7
 ---
 # Summary
 

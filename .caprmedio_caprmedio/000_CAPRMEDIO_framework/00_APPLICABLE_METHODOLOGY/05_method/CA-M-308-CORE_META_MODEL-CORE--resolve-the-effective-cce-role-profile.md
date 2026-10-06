@@ -28,6 +28,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-308-CORE_META_MODEL-CORE--resolve-the-effective-cce-role-profile.md
+  source_atom_id: CA-M-308
+  source_atom_revision: 4
+  source_sha256: c0f47bd447cde321bc74e49045b16c8bfcdaac54709d5dd2c362f218d93aa0f0
+  original_relations_sha256: ecf15d66e52790b11397217f00000f28e01dedab7a7136802d07e978204bdbb7
 ---
 # Summary
 

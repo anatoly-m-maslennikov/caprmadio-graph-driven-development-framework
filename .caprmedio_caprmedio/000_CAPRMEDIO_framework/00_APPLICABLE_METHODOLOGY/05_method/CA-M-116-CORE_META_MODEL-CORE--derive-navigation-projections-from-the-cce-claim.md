@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-116-CORE_META_MODEL-CORE--derive-navigation-projections-from-the-cce-claim.md
+  source_atom_id: CA-M-116
+  source_atom_revision: 14
+  source_sha256: e0eff5e7fcfbe3a2384f00b3a195829e49136e5ecbda2a929e5cc6ff83d4a22d
+  original_relations_sha256: 9bf67064015f173c315f553cfdea41bbcb9767069ed6dd9a11f2fb394a1a9d88
 ---
 # Summary
 

@@ -13,7 +13,7 @@ subjects:
     - "Operator"
     - "AI Agent"
 version: 5
-updated_at: "2026-09-17 05:05:28 +0000"
+updated_at: "2026-10-04 15:11:59 +0000"
 relations:
   child_of:
     - CA-M-115
@@ -29,8 +29,16 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-053-CORE_META_MODEL-ACTION--migrate-atoms-to-a-current-cce-version.md
+  source_atom_id: CA-O-053
+  source_atom_revision: 5
+  source_sha256: 0a6fb268305299de993722f2f3984e8edae990938e3c76c02f29baf29bb1fc82
+  original_relations_sha256: e96ce022b6ca9ebedf6f1896049d977e7cbcf98c15a6cf9d8a6fdd4fb67b6a60
 ---
-# Migrate Atoms to a current CCE version
+# Summary
+
+Migrate Atoms to a current CCE version
+
+## Operation
 
 Migrate Atom CCE Representation **means** the reusable Action that converts **`=1`** Atom's representation **to** the current CCE version while preserving its Claim, identity, **and** lifecycle. repeat this Action one Atom at a time for a selected set.
 
@@ -40,3 +48,5 @@ Migrate Atom CCE Representation **means** the reusable Action that converts **`=
 4. resolve the effective Confidence Threshold for the migration according **to** CA-M-271. **if** semantic confidence is below that value, **then** request Operator disposition **before** continuing.
 
 an Operator **or** AI Agent **may** perform this Action within its existing authority. the conversion **must not** silently split **or** merge Claims, replace an Atom's identity, **or** change its Summary; those effects require the separately governed replacement boundary under CA-R-1432. preserving identity does **not** prohibit a required Revision.
+
+## Details

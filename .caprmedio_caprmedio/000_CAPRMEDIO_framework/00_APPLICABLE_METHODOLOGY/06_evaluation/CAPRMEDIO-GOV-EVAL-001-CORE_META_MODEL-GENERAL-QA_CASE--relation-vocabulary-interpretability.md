@@ -16,6 +16,10 @@ type: "QA Case"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-001-CORE_META_MODEL-GENERAL-QA_CASE--relation-vocabulary-interpretability.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-001
+  source_atom_revision: 20
+  source_sha256: 693e0262b0b4a373fc99d5504b99809e9a25781331bf1b89388c516ba9fbcf6d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 7, "source_path": AUTHORITY_REF,
-    "digest": "9194c50a832d7aead39e63ee0106a05b13d995c3f1faea54591acbcc5d15400a",
+    "atom_id": "CA-D-572", "version": 10, "source_path": AUTHORITY_REF,
+    "digest": "8d59dc3147484c24954eeac8d5305bba5f622bced2ac909986071c9c23d73380",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
@@ -33,7 +33,7 @@ _RELEASE_STOP_RESULT = "any missing, stale, unauthorized, failed, partial, recor
 _RELEASE_STOP_OUTCOME = "stop with its actual evidence; do not promote, retire, retry, or recurse implicitly"
 _GENERIC_STOP_CONTRACT = (
     "The record serializes no catch-all transition, outcome, or execution policy: "
-    "CA-O-164@3 and the generic executor retain the existing catch-all stop behavior."
+    "CA-O-164@6 and the generic executor retain the existing catch-all stop behavior."
 )
 
 
@@ -105,7 +105,7 @@ def _metadata(raw: bytes) -> tuple[str, int]:
         raise ReleaseSourceAdmissionError("release-source-identity-invalid", "source identity/version frontmatter is invalid") from error
 
 
-def _read_pin(root: Path, value: Any) -> bytes:
+def _read_pin(root: Path, value: Any, *, atom_source: bool = True) -> bytes:
     pin = _pin_shape(value)
     relative = PurePosixPath(pin["source_path"])
     cursor = root
@@ -123,7 +123,7 @@ def _read_pin(root: Path, value: Any) -> bytes:
         _reject(f"source exceeds the bounded read: {relative}", code="release-source-unavailable")
     if hashlib.sha256(raw).hexdigest() != pin["digest"]:
         _reject(f"source pin is stale: {relative}", code="release-source-pin-stale")
-    if _metadata(raw) != (pin["atom_id"], pin["version"]):
+    if atom_source and _metadata(raw) != (pin["atom_id"], pin["version"]):
         _reject(f"source identity/version differs: {relative}", code="release-source-identity-invalid")
     return raw
 
@@ -185,12 +185,54 @@ def _route_serialization_metadata(text: str) -> dict[str, Any]:
     return metadata
 
 
-def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
-    """Derive the one accepted record from pinned actual D572@6, read-only.
+def _private_carriers(text: str) -> list[dict[str, str]]:
+    """D572-only source-byte pins; these add no manifest or request fields."""
+    matches = re.findall(r"^## Private implementation carriers\n+```json\n(.*?)\n```$",
+                         text, re.MULTILINE | re.DOTALL)
+    if len(matches) != 1:
+        _reject("D572 must declare exactly one private implementation carrier block",
+                code="release-authority-invalid")
+    try:
+        rows = json.loads(matches[0])
+    except json.JSONDecodeError as error:
+        raise ReleaseSourceAdmissionError("release-authority-invalid", "D572 private carriers are not JSON") from error
+    if not isinstance(rows, list) or not rows:
+        _reject("D572 private carriers must be a nonempty ordered source-pin list", code="release-authority-invalid")
+    paths = []
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"source_path", "sha256"}:
+            _reject("D572 private carrier fields are not closed", code="release-authority-invalid")
+        _pin_shape({**AUTHORITY_PIN, "source_path": row["source_path"], "digest": row["sha256"]})
+        if (not row["source_path"].startswith("102_FRAMEWORK_ENGINE/")
+                or row["source_path"] in {
+                    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/release_source_admission.py",
+                    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/selected_routes.py"}):
+            _reject("D572 private carrier creates an authority cycle or leaves the implementation boundary",
+                    code="release-authority-invalid")
+        paths.append(row["source_path"])
+    if paths != sorted(set(paths)):
+        _reject("D572 private carrier paths must be unique and source-path sorted", code="release-authority-invalid")
+    return rows
 
-    Only this defining authority is read here. The validator separately observes
-    all unique referenced pins on each admission; no source-currentness cache is
-    used. Returned records share no mutable dictionaries with another call.
+
+def derive_release_private_carriers(project_root: str | Path) -> list[dict[str, str]]:
+    """Reopen the D572-only carrier declarations without changing admission serialization."""
+    root = _project_root(project_root)
+    text = _read_pin(root, AUTHORITY_PIN).decode("utf-8")
+    rows = _private_carriers(text)
+    for row in rows:
+        _read_pin(root, {**AUTHORITY_PIN, "source_path": row["source_path"], "digest": row["sha256"]},
+                  atom_source=False)
+    return copy.deepcopy(rows)
+
+
+def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
+    """Derive the one accepted record from pinned actual D572@10, read-only.
+
+    This reads the defining authority and its private implementation carriers.
+    The validator separately observes all unique Atom pins on each admission;
+    no source-currentness cache is used. Returned records share no mutable
+    dictionaries with another call.
     """
     root = _project_root(project_root)
     text = _read_pin(root, AUTHORITY_PIN).decode("utf-8")
@@ -198,8 +240,9 @@ def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:
     if len(matches) != 1:
         _reject("D572 must state exactly one accepted frontier", code="release-authority-invalid")
     tables = _tables(text)
-    if len(tables[0]) != 3 or len(tables[1]) != 12 or len(tables[2]) < 3:
-        _reject("D572 must define one Workflow, ten occurrences and a nonempty RMED frontier", code="release-authority-invalid")
+    if len(tables[0]) != 3 or len(tables[1]) != 14 or len(tables[2]) < 3:
+        _reject("D572 must define one Workflow, twelve occurrences and a nonempty RMED frontier", code="release-authority-invalid")
+    derive_release_private_carriers(root)
     steps = []
     for ordinal, row in enumerate(tables[1][2:], 1):
         if len(row) != 3 or row[0] != str(ordinal):
@@ -266,7 +309,7 @@ def _release_workflow_graph(raw: bytes, admission: Mapping[str, Any]) -> dict[st
 def derive_release_route_graph(project_root: str | Path) -> dict[str, Any]:
     """Derive the exact Release route graph for a future manifest publisher.
 
-    D572 pins O164 and its ten Step/Action occurrences; this helper reads that
+    D572 pins O164 and its twelve Step/Action occurrences; this helper reads that
     pinned Workflow source and returns the remaining route fields which a
     publisher must serialize unchanged.  It has no manifest or registry side
     effects.
@@ -300,7 +343,7 @@ def _record_shape(record: Any) -> dict[str, Any]:
     _pin_shape(record["workflow"])
     if type(record["mutation_capable"]) is not bool or record["native_action_calls"] != []:
         _reject("Release admission typed route metadata is invalid")
-    for field, count in (("ordered_steps", 10), ("ordered_actions", 10)):
+    for field, count in (("ordered_steps", 12), ("ordered_actions", 12)):
         if not isinstance(record[field], list) or len(record[field]) != count:
             _reject(f"Release admission {field} must contain exactly {count} ordered entries")
     if not isinstance(record["rmed_frontier"], list) or not record["rmed_frontier"]:

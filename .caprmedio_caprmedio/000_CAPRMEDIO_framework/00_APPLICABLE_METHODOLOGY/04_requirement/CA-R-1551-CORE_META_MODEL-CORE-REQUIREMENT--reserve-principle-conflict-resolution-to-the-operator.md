@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1551-CORE_META_MODEL-CORE-REQUIREMENT--reserve-principle-conflict-resolution-to-the-operator.md
+  source_atom_id: CA-R-1551
+  source_atom_revision: 4
+  source_sha256: 791f505d8bfa5af63b43e5f08d6543a67cd8a34b3558b6c215a767a208d1f025
+  original_relations_sha256: aa9d7d21c52e869f2a5593baf11368dd2fc11f56d7c6be53eda3c1cd0436618c
 ---
 # Summary
 

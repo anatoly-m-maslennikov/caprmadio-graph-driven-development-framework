@@ -30,7 +30,7 @@ subjects:
     - "Operator"
     - "Journal"
 version: 5
-updated_at: "2026-09-24 14:07:30 +0000"
+updated_at: "2026-10-04 15:16:04 +0000"
 relations:
   relates_to:
     - CA-R-1598
@@ -48,12 +48,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/ATOM_CARRIER_VALIDATION/CA-O-087-CORE_META_MODEL-ACTION--check-atoms.md
+  source_atom_id: CA-O-087
+  source_atom_revision: 5
+  source_sha256: 1bdd5fcbaf5d179f73ec050921251c06206d5f525c75b95cfaadb451c8b0462d
+  original_relations_sha256: 2dc986c40a8906cb9501be88b2d0cee5617d887bd2450c8e21e2652ae24615d2
 ---
 # Summary
 
 Check Atoms
 
-## Claim
+## Operation
 
 Check Atoms **means** the Programmatic Action that checks a selected Atom set against applicable machine-checkable authority **and** returns findings **without** changing the Atoms.
 
@@ -95,3 +99,5 @@ Check Atoms **means** the Programmatic Action that checks a selected Atom set ag
 
 - resolve each selected limit from request override, instance setting, **or** Default Settings, retaining its source. invalid **or** missing effective limits stop execution before candidate validation.
 - budget inventory enumeration, candidate/authority/reference reads, currentness rechecks, elapsed monotonic time, **and** result accumulation. stop before the next operation would exceed its bound; return incomplete with retained findings **and** explicit unassessed work. permissions **and** host ceilings remain independent gates.
+
+## Details

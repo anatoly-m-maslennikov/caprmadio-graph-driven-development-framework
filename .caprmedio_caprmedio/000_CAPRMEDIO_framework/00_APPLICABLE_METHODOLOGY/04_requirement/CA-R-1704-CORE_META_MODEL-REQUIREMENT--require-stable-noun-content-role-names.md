@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1704-CORE_META_MODEL-REQUIREMENT--require-stable-noun-content-role-names.md
+  source_atom_id: CA-R-1704
+  source_atom_revision: 19
+  source_sha256: 28d8f8caecfc0b2b187de676216f8caeacb70164b1b16fdd2cc4da31751a75a8
+  original_relations_sha256: 82f92bfeb352f33301bec5e49444e9f184ed3e4d887a957bb5628badf27ab365
 ---
 # Summary
 

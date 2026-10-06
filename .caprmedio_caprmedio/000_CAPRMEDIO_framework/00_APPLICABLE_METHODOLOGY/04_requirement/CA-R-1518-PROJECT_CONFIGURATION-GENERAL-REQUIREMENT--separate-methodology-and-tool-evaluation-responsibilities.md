@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1518-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--separate-methodology-and-tool-evaluation-responsibilities.md
+  source_atom_id: CA-R-1518
+  source_atom_revision: 6
+  source_sha256: 46f41ff287483bf65c3316c11b8b53e09caba44826d8676300efd295b41aa8a0
+  original_relations_sha256: 90e68e44340b61b6cc4a017eb658d1ca7eff430492d717ab9ebe442dda294a0b
 ---
 # Summary
 

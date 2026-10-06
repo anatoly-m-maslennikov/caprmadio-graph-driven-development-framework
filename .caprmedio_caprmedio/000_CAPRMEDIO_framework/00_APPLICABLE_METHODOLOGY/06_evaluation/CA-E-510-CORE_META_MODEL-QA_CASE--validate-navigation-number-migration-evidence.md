@@ -33,6 +33,10 @@ relations: {"evaluation_for": ["CA-O-078", "CA-R-1483", "CA-R-976", "CA-R-981", 
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-510-CORE_META_MODEL-QA_CASE--validate-navigation-number-migration-evidence.md
+  source_atom_id: CA-E-510
+  source_atom_revision: 3
+  source_sha256: cf67a8ebbae8c48c1233dd42c5d5a75aad3672fbacd5323e90d881a33a0a1108
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

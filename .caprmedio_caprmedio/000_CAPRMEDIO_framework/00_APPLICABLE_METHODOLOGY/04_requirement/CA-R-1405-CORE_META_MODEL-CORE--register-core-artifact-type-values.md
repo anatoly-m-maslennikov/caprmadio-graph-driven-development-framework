@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1405-CORE_META_MODEL-CORE--register-core-artifact-type-values.md
+  source_atom_id: CA-R-1405
+  source_atom_revision: 11
+  source_sha256: c406d504a72b1d8e2d31a13a5d2d3edbbf48374c7a417aa6f2665e261ba2e2ad
+  original_relations_sha256: 1ae5980a235d791d7cd7ae33b5104dad771aa420068dadd4db8a52a3b6313c32
 ---
 # Summary
 

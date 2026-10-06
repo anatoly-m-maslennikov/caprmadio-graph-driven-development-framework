@@ -29,6 +29,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-462-CORE_META_MODEL-EVALUATION_APPROACH--validate-atom-replacement-event-evidence.md
+  source_atom_id: CA-E-462
+  source_atom_revision: 12
+  source_sha256: e1b8a1f6f8c8a64966578f24f74f153ffc6f7bffd60ae9b252a3ff8bbd701dcb
+  original_relations_sha256: 08e3ba1b02b72ebd56719baa1c003348b431b4bd58722cfd3ed9eccfe064ba4c
 ---
 # Summary
 

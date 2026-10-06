@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1511-CORE_META_MODEL-CORE--define-step-run.md
+  source_atom_id: CA-R-1511
+  source_atom_revision: 5
+  source_sha256: 62a47b27c84cbf9228d0e3419fa6163163ab40aa82a7b568024ad728cad19e49
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Define Step Run

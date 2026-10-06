@@ -29,6 +29,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-513-CORE_META_MODEL-QA_CASE--validate-the-atom-carrier-validation-workflow-definition.md
+  source_atom_id: CA-E-513
+  source_atom_revision: 4
+  source_sha256: 47e76173ba795804a5e43e741dbdbd98fef65836dc5911d0ae8ccc7734b2d234
+  original_relations_sha256: 91a4a2fe7a294276f2535d8e32319a5bc8c8b12b3ddcfd793eb4bdb6a9f79774
 ---
 # Summary
 

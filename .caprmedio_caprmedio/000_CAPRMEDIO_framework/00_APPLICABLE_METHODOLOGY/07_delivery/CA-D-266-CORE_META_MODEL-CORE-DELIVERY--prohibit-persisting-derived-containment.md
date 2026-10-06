@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-266-CORE_META_MODEL-CORE-DELIVERY--prohibit-persisting-derived-containment.md
+  source_atom_id: CA-D-266
+  source_atom_revision: 13
+  source_sha256: e8786ab9d629bf73b7d5a6679cfecbf72921ed04ab8c888d8f4e4d85b7fe8d36
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

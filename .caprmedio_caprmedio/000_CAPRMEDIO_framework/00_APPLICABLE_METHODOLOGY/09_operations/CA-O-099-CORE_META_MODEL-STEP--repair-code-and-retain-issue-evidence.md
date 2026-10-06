@@ -18,7 +18,7 @@ subjects:
     - "Workflow Run"
     - "Step Run"
 version: 2
-updated_at: "2026-09-24 17:18:07 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-021
@@ -27,12 +27,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/IMPLEMENTATION_WORKFLOW/CA-O-099-CORE_META_MODEL-STEP--repair-code-and-retain-issue-evidence.md
+  source_atom_id: CA-O-099
+  source_atom_revision: 2
+  source_sha256: cb41a0ac54a473f106cfd02efcdfc6b75f5d592eecdc7f5c3c3906aceb925617
+  original_relations_sha256: 1ea5c7fc0c690b75607075f32f2d9552decfced01b385e0f28a6205f30651f72
 ---
 # Summary
 
 Repair code and retain issue evidence
 
-## Claim
+## Operation
 
 Implementation Repair Step **means** the Workflow node invoking **=1** Action, CA-O-021, **in** Isolated context under CA-R-1527.
 
@@ -41,3 +45,5 @@ Implementation Repair Step **means** the Workflow node invoking **=1** Action, C
 - retain exact Action/Step Revisions, source bindings, actual effects, **and** returned results. pass the Action's result **to** the Workflow **without** independently copying its behavior.
 
 reuse the assigned subagent for the selected P work across its test, implementation, diagnosis, **and** repair invocations **when** available. replacement requires the complete retained input/evidence handoff **and** fresh admission; do **not** rely on unrecorded conversational memory.
+
+## Details

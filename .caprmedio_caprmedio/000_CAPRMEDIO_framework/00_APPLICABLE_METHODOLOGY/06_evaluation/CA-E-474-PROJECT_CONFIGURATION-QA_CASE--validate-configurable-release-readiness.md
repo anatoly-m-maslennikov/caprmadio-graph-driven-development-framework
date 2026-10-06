@@ -34,6 +34,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-474-PROJECT_CONFIGURATION-QA_CASE--validate-configurable-release-readiness.md
+  source_atom_id: CA-E-474
+  source_atom_revision: 8
+  source_sha256: d7de5f5ed4ab2dd0cf086301ff8c2148af784cc18c6878a4f276f9dce0dcf64a
+  original_relations_sha256: 99cf98b64e756f61438cbfe7e6076af2d74f3201d3c8cfb205ed7bb595421c97
 ---
 # Summary
 

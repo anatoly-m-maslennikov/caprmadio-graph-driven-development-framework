@@ -23,6 +23,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-496-CORE_META_MODEL-QA_CASE--validate-nested-tool-call-evidence.md
+  source_atom_id: CA-E-496
+  source_atom_revision: 4
+  source_sha256: 7122717a9d94a903bd4268393ebf9dacfac2da9450b55cbf6a800fb7ec311b31
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

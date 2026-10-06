@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1698-CORE_META_MODEL-CORE-REQUIREMENT--evolve-authority-through-governed-history.md
+  source_atom_id: CA-R-1698
+  source_atom_revision: 19
+  source_sha256: e86def1c7eb4756b25db0704305f57188a922b2c61cd5aeca609adbb54110420
+  original_relations_sha256: 9da06fe1d152df734a24ec976e552621ac13711a4194ebc67093231ba453b6a5
 ---
 # Summary
 

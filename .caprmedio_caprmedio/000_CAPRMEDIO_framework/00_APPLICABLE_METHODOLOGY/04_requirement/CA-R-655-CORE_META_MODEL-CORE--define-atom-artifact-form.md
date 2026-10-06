@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-655-CORE_META_MODEL-CORE--define-atom-artifact-form.md
+  source_atom_id: CA-R-655
+  source_atom_revision: 23
+  source_sha256: 28258bfdc5515abe6efa40fe8ab1951cc70a226f58daaa6ced7466036bbca29d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Define Atom Artifact Form

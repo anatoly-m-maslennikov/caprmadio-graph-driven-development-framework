@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1744-CORE_META_MODEL-CORE--keep-project-specific-substrates-out-of-the-reusable-core.md
+  source_atom_id: CA-R-1744
+  source_atom_revision: 18
+  source_sha256: c2cb562f47e808b7d605862665c6275ae575906e6d5d2cc851c53e37aec6c502
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1732-CORE_META_MODEL-GENERAL--target-the-narrowest-capable-improvement-owner.md
+  source_atom_id: CA-R-1732
+  source_atom_revision: 15
+  source_sha256: e893f6113346e1d2b02e763798c79d72d2a70a4a8d937d66c0833ead546dde98
+  original_relations_sha256: cc574452ed88a64f4d7903b9548c080c3011d218baaf8df9f4cda2928c0b8892
 ---
 # Summary
 

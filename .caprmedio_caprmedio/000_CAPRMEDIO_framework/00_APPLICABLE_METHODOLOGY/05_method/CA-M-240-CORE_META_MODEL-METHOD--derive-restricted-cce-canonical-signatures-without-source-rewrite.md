@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-240-CORE_META_MODEL-METHOD--derive-restricted-cce-canonical-signatures-without-source-rewrite.md
+  source_atom_id: CA-M-240
+  source_atom_revision: 9
+  source_sha256: 03b8fab73bd3a910adeac50371d62fea8a5833836671fb9e3d502ff0062e654c
+  original_relations_sha256: 8560a14f5d40024180f49119ad6216bc8babc0722610186fff08e9b20d081299
 ---
 # Summary
 

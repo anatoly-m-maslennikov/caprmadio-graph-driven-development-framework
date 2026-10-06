@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-298-CORE_META_MODEL--serialize-local-order-only-for-ordered-scope-unit-directories.md
+  source_atom_id: CA-D-298
+  source_atom_revision: 11
+  source_sha256: e6a82c6093fb40894c8d4bbf710547c92c12ff60c904de1e35544c4fd3574661
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

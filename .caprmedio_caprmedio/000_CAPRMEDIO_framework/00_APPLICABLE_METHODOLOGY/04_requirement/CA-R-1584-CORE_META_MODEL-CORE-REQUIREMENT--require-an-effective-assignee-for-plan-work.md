@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1584-CORE_META_MODEL-CORE-REQUIREMENT--require-an-effective-assignee-for-plan-work.md
+  source_atom_id: CA-R-1584
+  source_atom_revision: 4
+  source_sha256: a5dad13bff8fe49c856ac453c70543b38c7ae2a6a5413e11b073c4a186bee422
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-408-CORE_META_MODEL--reuse-framework-parameter-fields-in-default-settings.md
+  source_atom_id: CA-D-408
+  source_atom_revision: 7
+  source_sha256: 293af7f9235fd256869da7c667e94c0a37a26ba836bec3b61ed7758f73379fea
+  original_relations_sha256: 152b49bebf85179792750940cb8af3dc599305c49ea15d7a163894030d31f53e
 ---
 # Summary
 

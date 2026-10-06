@@ -14,6 +14,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1627-CORE_META_MODEL-REQUIREMENT--requirement-exclude-secrets-from-caprmedio.md
+  source_atom_id: CA-R-1627
+  source_atom_revision: 18
+  source_sha256: 7a4452c2e826101eab3d3e19b9b7d672897606ad6f20850e1d330682749f5194
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

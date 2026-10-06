@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1705-CORE_META_MODEL-GENERAL-REQUIREMENT--requirement-create-rationale-after-its-subject.md
+  source_atom_id: CA-R-1705
+  source_atom_revision: 18
+  source_sha256: 0b83acc59a1102d643ad914a5ebbc18a179a5eb459b175293d17031f98a21b1c
+  original_relations_sha256: 440b16315f804a6255275938e2bfad39c15f120d4d7dd37c0254d25a5a1c8b43
 ---
 # Summary
 

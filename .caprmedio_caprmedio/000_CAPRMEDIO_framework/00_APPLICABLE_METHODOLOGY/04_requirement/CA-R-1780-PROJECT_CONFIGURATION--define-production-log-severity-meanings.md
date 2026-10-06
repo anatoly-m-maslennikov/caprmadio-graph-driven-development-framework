@@ -15,6 +15,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1780-PROJECT_CONFIGURATION--define-production-log-severity-meanings.md
+  source_atom_id: CA-R-1780
+  source_atom_revision: 1
+  source_sha256: cdb9934a8b63b9b945a7bc8e72b3928c7510d644267575b1ea0984179364dd8a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

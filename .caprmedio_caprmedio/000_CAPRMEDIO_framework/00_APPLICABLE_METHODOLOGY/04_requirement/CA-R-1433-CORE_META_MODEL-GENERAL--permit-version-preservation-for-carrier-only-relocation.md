@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1433-CORE_META_MODEL-GENERAL--permit-version-preservation-for-carrier-only-relocation.md
+  source_atom_id: CA-R-1433
+  source_atom_revision: 8
+  source_sha256: 3f1e882b6db4992af8e7a16f00656ca01767d8a53365f15cd6111a0380b50b29
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

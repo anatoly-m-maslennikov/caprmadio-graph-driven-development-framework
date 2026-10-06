@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-837-CORE_META_MODEL-REQUIREMENT--derive-artifact-scope-inclusion.md
+  source_atom_id: CA-R-837
+  source_atom_revision: 19
+  source_sha256: 0ed1f59adf640da9a6b058fe0a12aaa04411c294ec7cb706cc41ceb7d93559f4
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

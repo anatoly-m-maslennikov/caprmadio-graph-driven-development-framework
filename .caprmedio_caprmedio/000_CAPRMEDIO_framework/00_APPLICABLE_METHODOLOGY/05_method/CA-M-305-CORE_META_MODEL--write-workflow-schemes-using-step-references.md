@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-305-CORE_META_MODEL--write-workflow-schemes-using-step-references.md
+  source_atom_id: CA-M-305
+  source_atom_revision: 4
+  source_sha256: 7bfa882f4b769654eaba1c267fe179ff83019fd6fd76a022fc12065a93fdd4e5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

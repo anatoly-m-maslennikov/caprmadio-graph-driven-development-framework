@@ -26,6 +26,10 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-023-CORE_META_MODEL-ACTION--select-an-alternative-under-active-priorities.md
+  source_atom_id: CA-O-023
+  source_atom_revision: 5
+  source_sha256: 0e5d328151a63a0fffa4d247f7149924460323bcf670a58c6de8629f7d92b403
+  original_relations_sha256: 047cd938435fe8ff2d4107ef1a67b8ae794bce6978dda89e63efeacb3951c6b3
 ---
 # Select an alternative under active priorities
 

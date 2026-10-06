@@ -6,7 +6,7 @@
 
 - [The Goal](#the-goal)
 - [What CAPRMEDIO is](#what-caprmedio-is)
-- [Why CAPRMEDIO works this way](#why-caprmedio-works-this-way)
+- [Why CAPRMEDIO works this way (chains-of-thoughts)](#why-caprmedio-works-this-way-chains-of-thoughts)
 - [Main framework architecture](#main-framework-architecture)
 - [Current boundaries](#current-boundaries)
 - [Status](#status)
@@ -25,7 +25,7 @@ Even a fully AI-generated project should be understandable, controllable and **n
 
 CAPRMEDIO stores project knowledge as small artifacts connected by typed links. Humans and AI use this graph to understand the project, make changes, check consistency, and generate useful views.
 
-## Why CAPRMEDIO works this way
+## Why CAPRMEDIO works this way (chains-of-thoughts)
 
 Prompts/Skills, MCP, Apps and execution Tools form the harness →\
 the project's meaning must not depend on them →\
@@ -59,19 +59,53 @@ Natural-language phrases can be ambiguous →\
 shared vocabulary + CAPRMEDIO Controlled English (CCE), a constrained way to write Claims →\
 **explicit, checkable Claims.**
 
+The spec is about different things →\
+Requirements — required outcomes →\
+Methods — how code should be written →\
+Evaluations — QA rules and test-case specifications →\
+Delivery — where and how to deliver results →\
+together, RMED.
+
+Describing an outcome does not prove it was achieved →\
+Evaluations define checks →\
+actual runs provide evidence.
+
 We need more than spec →\
 Concerns, Analysis and Plans for understanding and planning →\
-Requirements, Methods, Evaluations and Delivery (RMED) for specification →\
 Implementation for code, tests and configuration →\
 Operations for repeatable actions and workflows.
+
+Repeatable sequences of actions →\
+Operations define Workflows, their steps and control flow.
 
 Implementation, tests and views rely on Claims →\
 record the exact source Claim identities and revisions →\
 **trace results back to the specification.**
 
-Work changes the project →\
-Journal records changes and execution →\
-observed outcomes create the next Concerns.
+A typical iteration starts with a Concern →\
+Analysis →\
+Plan →\
+RMED →\
+Implementation →\
+checked outcomes →\
+next Concern.
+
+Journals record changes and execution. Not every change needs every stage.
+
+Using the same system for projects and methodology is simpler →\
+both use Atoms, content roles and relations →\
+the same Tools and Prompts can work with both →\
+**the framework is built with the framework.**
+
+The framework must describe itself →\
+the [meta-model](.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL) uses Atoms to describe Atoms and other framework concepts →\
+this creates recursion and needs a starting point →\
+bootstrap seeds provided the first definitions; those seeds are now retired.
+
+Different projects need different rules →\
+Extensions and local configuration are also sets of Atoms →\
+they add capabilities or override rules where the Core allows it →\
+**expand and configure the framework using the same system.**
 
 ### Harness (engine)
 
@@ -92,8 +126,8 @@ Work that cannot be done deterministically →\
 LLM reasoning →\
 repeatable actions need reusable Prompts/Skills.
 
-Repeatable sequences of actions using Tools and Prompts/Skills →\
-Workflows define their steps and control flow.
+Workflows are defined in Operations →\
+the harness implements and runs them using Tools and Prompts/Skills.
 
 We cannot put everything into one prompt →\
 the built-in entry Skill, [ca](102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md), connects agents to MCP →\
@@ -184,6 +218,10 @@ From higher to lower authority:
 
 Project goals have Global Tier `-1` and no Local Tier. **Tiers are not work priority or folder depth.**
 
+Agents act within delegated authority →\
+they can analyze conflicts and propose resolutions →\
+only the Operator can resolve conflicts between active Project Principles.
+
 ### Ownership and claim scope
 
 - **Internal:** the project defines the meaning.
@@ -217,7 +255,8 @@ they can be compiled into one Projection →\
 **it is still a derived artifact, not a source of truth** →\
 for example: one prompt for how to write code, built from all M Atoms that apply to the Scope Unit.
 
-- **Entity Graph:** Entities and their relations, based on Subjects.
+- **Atom Subjects Graph:** Atoms linked to Entities through `GOVERNS` and `DEPENDS_ON`.
+- **Entities Graph:** Entities linked to other Entities through allowed relations.
 - **Terms Graph:** terms and their allowed typed relations.
 - **Project Scope Unit Graph and Sources view:** Scope Units, their parents and authority/Delivery paths.
 - **Applicable Methodology:** the rules that apply to the selected scope.
@@ -239,6 +278,8 @@ Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journal
 ## Status
 
 The current framework version is declared in [version.toml](version.toml). The framework foundation is under active development; this is not yet a complete production toolchain.
+
+License: [Apache 2.0](LICENSE).
 
 ## Version History
 

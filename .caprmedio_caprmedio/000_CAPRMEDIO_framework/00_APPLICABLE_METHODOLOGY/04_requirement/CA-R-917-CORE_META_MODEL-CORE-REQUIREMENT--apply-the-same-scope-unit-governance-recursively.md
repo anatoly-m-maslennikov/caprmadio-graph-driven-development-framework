@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-917-CORE_META_MODEL-CORE-REQUIREMENT--apply-the-same-scope-unit-governance-recursively.md
+  source_atom_id: CA-R-917
+  source_atom_revision: 17
+  source_sha256: 07fd52c63b8cf47016fe78c322013592a8e42e8867f862513f8737241ef98c4a
+  original_relations_sha256: 6b80419ef321cb6645a87b25b97ff86d302f645a5af90d5905db0dbeab7a7ae8
 ---
 # Summary
 Apply the same Scope Unit governance recursively

@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1361-CORE_META_MODEL--define-canonical-scope-signature.md
+  source_atom_id: CA-R-1361
+  source_atom_revision: 13
+  source_sha256: 7e5fce4d3eeafe4bc4cab3f4fcd972c5e3a94b5ba86fc96f3d0285d7737a977f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

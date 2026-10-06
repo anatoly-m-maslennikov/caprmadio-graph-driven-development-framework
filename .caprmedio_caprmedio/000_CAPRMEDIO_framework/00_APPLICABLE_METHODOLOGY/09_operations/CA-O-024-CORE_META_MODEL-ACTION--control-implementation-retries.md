@@ -21,7 +21,7 @@ subjects:
     - "Atom/Content Role: Evaluation"
     - "Atom/Content Role: Implementation"
 version: 11
-updated_at: "2026-09-24 01:39:33 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-R-1559
@@ -30,12 +30,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-024-CORE_META_MODEL-ACTION--control-implementation-retries.md
+  source_atom_id: CA-O-024
+  source_atom_revision: 11
+  source_sha256: 19bb9cbe0e7fdeb7ecd60dca272d3d23a6908c0b0c56f2454024ed7125898e58
+  original_relations_sha256: e654698fd3f567fe0db1e47fe0385ac5ad43f81f7b191e5cabf60899e1938eb4
 ---
 # Summary
 
 Control implementation retries
 
-## Claim
+## Operation
 
 Implementation Retry Control **means** the Agentic Action that determines whether the next fix-and-evaluate retry **may** start within the current Implementation Workflow Run's retry allowance **and** governing permissions. repair **and** re-evaluation remain Actions **in** the Implementation Workflow under CA-O-016.
 
@@ -52,3 +56,5 @@ Implementation Retry Control **means** the Agentic Action that determines whethe
 - the initial failed Evaluation consumes **`=0`** retries.
 - count **`=1`** retry **when** a permitted fix-and-evaluate round starts, **not** merely **when** its permission is checked. repeated gate checks **must not** double-count that round.
 - retain the consumed count throughout the current Workflow Run; another Step Run does **not** begin a new retry budget. a changed failure set **or** an automatic next loop **must not** silently reset the budget.
+
+## Details

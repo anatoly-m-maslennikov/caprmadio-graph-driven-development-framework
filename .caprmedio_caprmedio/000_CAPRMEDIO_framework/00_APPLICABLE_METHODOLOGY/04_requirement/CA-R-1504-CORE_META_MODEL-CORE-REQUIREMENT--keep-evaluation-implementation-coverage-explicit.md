@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1504-CORE_META_MODEL-CORE-REQUIREMENT--keep-evaluation-implementation-coverage-explicit.md
+  source_atom_id: CA-R-1504
+  source_atom_revision: 5
+  source_sha256: 036ff4c6b8e0ef57df3b74a1f009dd5ed0850c613e1ab2919d3d66aee2b3337f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

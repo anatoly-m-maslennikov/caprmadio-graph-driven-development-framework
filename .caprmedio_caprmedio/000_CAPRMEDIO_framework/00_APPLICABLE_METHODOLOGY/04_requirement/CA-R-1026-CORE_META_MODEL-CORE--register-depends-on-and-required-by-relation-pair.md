@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1026-CORE_META_MODEL-CORE--register-depends-on-and-required-by-relation-pair.md
+  source_atom_id: CA-R-1026
+  source_atom_revision: 16
+  source_sha256: e2e76fb76c3e5d47d8e9df3e56e48c6ca3381d006c1b70233b3ee5f0bdfd1cd7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

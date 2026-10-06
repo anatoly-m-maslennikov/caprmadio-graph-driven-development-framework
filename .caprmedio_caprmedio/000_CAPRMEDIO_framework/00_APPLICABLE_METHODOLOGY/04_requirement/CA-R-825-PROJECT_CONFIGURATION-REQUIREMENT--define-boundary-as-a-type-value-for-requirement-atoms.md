@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-825-PROJECT_CONFIGURATION-REQUIREMENT--define-boundary-as-a-type-value-for-requirement-atoms.md
+  source_atom_id: CA-R-825
+  source_atom_revision: 20
+  source_sha256: ba454f1699398f7a69fdc3712a97798458baed68bdc34097f78f60983f991852
+  original_relations_sha256: 6f481d25a0096125bfd59afcf8d696e9849941d33e5c0d3d396207652630fa58
 ---
 # Summary
 

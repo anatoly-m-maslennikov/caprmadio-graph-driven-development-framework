@@ -19,17 +19,22 @@ from pathlib import Path
 from release_contract import ReleaseContractError, ValidatedCandidate
 from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation
 from release_image import CANDIDATE_LABEL, CONTEXT_LABEL, DockerExecutor, IMAGE_ID
+from bootstrap_image import BootstrapImageError, read_retained_initial_framework_image
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     PROJECT_ROOT_ENVIRONMENT_VARIABLE,
     REPORT_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_RELATIVE,
+    SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE,
     SANDBOX_OUTPUT_PATH,
     SANDBOX_WORKSPACE_PATH,
     SuiteExecutionResult,
     _active_n_state,
     _bootstrap_prior_manifest_is_exact,
     _bootstrap_source_context_is_valid,
+    require_declared_suite_command,
 )
 
 
@@ -46,6 +51,8 @@ _EXPECTED_ENVIRONMENT_KEYS = frozenset({
     REPORT_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE,
 })
 _BOOTSTRAP_PACKAGE_LABEL = "org.caprmedio.framework.package_manifest_sha256"
 _BOOTSTRAP_CONTEXT_LABEL = "org.caprmedio.framework.source_context_sha256"
@@ -114,6 +121,23 @@ def _inspect_bound_n_image(docker: DockerExecutor, root: Path,
                            binding: SelectedNImageBinding) -> SelectedNImageBinding:
     """Verify the immutable selected-N labels and its sole image PATH."""
 
+    if binding.bootstrap:
+        try:
+            retained = read_retained_initial_framework_image(
+                root, binding.executing_release, binding.image_digest,
+            )
+        except BootstrapImageError as error:
+            raise ReleaseContractError(
+                "release-suite-executor-n-unproven",
+                "executing N bootstrap image has no authentic retained proof",
+            ) from error
+        if (retained.manifest_sha256 != binding.executing_release
+                or retained.source_context_sha256 != binding.source_context_sha256
+                or retained.image_digest != binding.image_digest):
+            raise ReleaseContractError(
+                "release-suite-executor-n-unproven",
+                "executing N bootstrap proof does not bind the selected image",
+            )
     observed = docker.run(("docker", "image", "inspect", binding.image_digest), cwd=root, timeout_seconds=_INSPECT_TIMEOUT_SECONDS)
     if observed.timed_out:
         raise ReleaseContractError("release-suite-executor-n-unproven", "executing N image inspection timed out")
@@ -135,9 +159,21 @@ def _inspect_bound_n_image(docker: DockerExecutor, root: Path,
             or not isinstance(environment, list)
         ):
             raise ValueError("image does not prove selected N manifest/context labels")
-        if len(environment) != 1 or not isinstance(environment[0], str) or not environment[0].startswith("PATH="):
-            raise ValueError("image has undeclared environment members")
-        path = environment[0].removeprefix("PATH=")
+        if binding.bootstrap:
+            environment_values: dict[str, str] = {}
+            for item in environment:
+                if not isinstance(item, str) or "=" not in item:
+                    raise ValueError("bootstrap image environment is malformed")
+                name, value = item.split("=", 1)
+                if (not name or name in environment_values or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", name)
+                        or "\x00" in value or "\n" in value or "\r" in value):
+                    raise ValueError("bootstrap image environment is unsafe")
+                environment_values[name] = value
+            path = environment_values.get("PATH")
+        else:
+            if len(environment) != 1 or not isinstance(environment[0], str) or not environment[0].startswith("PATH="):
+                raise ValueError("image has undeclared environment members")
+            path = environment[0].removeprefix("PATH=")
         if not path or "\x00" in path or "\n" in path or "\r" in path:
             raise ValueError("image PATH is unsafe")
         return replace(binding, image_path=path)
@@ -244,12 +280,17 @@ class InstalledNSuiteDockerExecutor:
             raise ReleaseContractError("release-suite-executor-binding-mismatch", "suite command or working directory differs from sealed selection")
         if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= _MAX_TIMEOUT_SECONDS:
             raise ReleaseContractError("release-suite-executor-timeout-invalid", "suite timeout is outside the governed bound")
+        bindings_sha256 = environment.get(SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE)
+        if not isinstance(bindings_sha256, str) or _SHA256.fullmatch(bindings_sha256) is None:
+            raise ReleaseContractError("release-suite-executor-environment-untrusted", "suite source-bindings digest is invalid")
         expected = {
             "PATH": self.image_path,
             PROJECT_ROOT_ENVIRONMENT_VARIABLE: str(SANDBOX_WORKSPACE_PATH),
             REPORT_ENVIRONMENT_VARIABLE: str(SANDBOX_OUTPUT_PATH / "coverage.xml"),
             COMPILED_ROOT_ENVIRONMENT_VARIABLE: self.compiled_root,
             CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE: self.candidate_snapshot_manifest_sha256,
+            SOURCE_BINDINGS_ENVIRONMENT_VARIABLE: str(SANDBOX_WORKSPACE_PATH / SOURCE_BINDINGS_RELATIVE),
+            SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE: bindings_sha256,
         }
         if set(environment) != _EXPECTED_ENVIRONMENT_KEYS or environment != expected:
             raise ReleaseContractError("release-suite-executor-environment-untrusted", "suite environment differs from fixed sandbox values")
@@ -305,6 +346,8 @@ class InstalledNSuiteDockerExecutor:
             "--env", f"{REPORT_ENVIRONMENT_VARIABLE}={environment[REPORT_ENVIRONMENT_VARIABLE]}",
             "--env", f"{COMPILED_ROOT_ENVIRONMENT_VARIABLE}={environment[COMPILED_ROOT_ENVIRONMENT_VARIABLE]}",
             "--env", f"{CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE}={environment[CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE]}",
+            "--env", f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_ENVIRONMENT_VARIABLE]}",
+            "--env", f"{SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE]}",
             self.image_digest,
             *command[1:],
         )
@@ -352,6 +395,7 @@ def installed_n_suite_executor(
     if binding.image_path is None:
         raise ReleaseContractError("release-suite-executor-n-unproven", "executing N image PATH is absent")
     environment = candidate.manifest.full_suite_environment
+    require_declared_suite_command(environment)
     return InstalledNSuiteDockerExecutor(
         root=root,
         docker=docker,

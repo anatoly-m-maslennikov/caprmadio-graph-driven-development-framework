@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-291-CORE_META_MODEL-DELIVERY--serialize-the-current-scope-unit-in-atom-filenames.md
+  source_atom_id: CA-D-291
+  source_atom_revision: 15
+  source_sha256: 9a2855535ac2f6c7a35661ad558d97694f53feaadaba91ba890a20a7be04b9bd
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

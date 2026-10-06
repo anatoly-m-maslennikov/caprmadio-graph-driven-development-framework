@@ -26,6 +26,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-470-CORE_META_MODEL-EVALUATION_APPROACH--distinguish-project-structure-declarations-from-observations.md
+  source_atom_id: CA-E-470
+  source_atom_revision: 6
+  source_sha256: 6cd2ed50a7948a526743f51046bbca330cac1edcb2490a960cc753a10c58d717
+  original_relations_sha256: f08ba948cc2ba7f8eea17bcf97b9637ebce595a5ae98937f17144c65700649be
 ---
 # Summary
 

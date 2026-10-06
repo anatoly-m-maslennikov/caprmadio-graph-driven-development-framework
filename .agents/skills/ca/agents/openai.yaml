@@ -1,0 +1,11 @@
+interface:
+  display_name: "CA"
+  short_description: "Thin CAPRMEDIO entry through Project MCP"
+  default_prompt: "Use $ca to carry out my request through the connected Project's CAPRMEDIO MCP."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "caprmedio"
+      description: "Project-bound CAPRMEDIO discovery, instructions and execution"
+      transport: "stdio"

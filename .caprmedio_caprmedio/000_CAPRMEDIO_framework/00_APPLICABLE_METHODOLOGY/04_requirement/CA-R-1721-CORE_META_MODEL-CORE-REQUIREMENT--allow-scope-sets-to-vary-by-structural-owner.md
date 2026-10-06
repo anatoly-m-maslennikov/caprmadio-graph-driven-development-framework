@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1721-CORE_META_MODEL-CORE-REQUIREMENT--allow-scope-sets-to-vary-by-structural-owner.md
+  source_atom_id: CA-R-1721
+  source_atom_revision: 20
+  source_sha256: d3b24b9f205216d06ac75e8b731f72f58ddf4dfb641f31fb2760bf1e91fe3fb9
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

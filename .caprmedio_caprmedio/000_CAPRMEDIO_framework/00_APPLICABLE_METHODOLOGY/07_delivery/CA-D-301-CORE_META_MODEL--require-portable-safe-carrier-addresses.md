@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-301-CORE_META_MODEL--require-portable-safe-carrier-addresses.md
+  source_atom_id: CA-D-301
+  source_atom_revision: 15
+  source_sha256: 40fa41c8ff9abdd81a39689a3b95284a2240cf567113bbf794fa874b8e61a691
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

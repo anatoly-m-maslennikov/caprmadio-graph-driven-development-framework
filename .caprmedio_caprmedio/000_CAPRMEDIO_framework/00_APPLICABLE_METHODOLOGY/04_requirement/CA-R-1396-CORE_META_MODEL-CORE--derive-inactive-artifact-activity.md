@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1396-CORE_META_MODEL-CORE--derive-inactive-artifact-activity.md
+  source_atom_id: CA-R-1396
+  source_atom_revision: 10
+  source_sha256: 683c9054bbab9d98fa980f496267f7195fc7158487a8c59944203b12970c8f3c
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

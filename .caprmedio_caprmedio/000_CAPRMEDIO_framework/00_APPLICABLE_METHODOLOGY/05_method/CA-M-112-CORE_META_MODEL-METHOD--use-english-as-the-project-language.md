@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-112-CORE_META_MODEL-METHOD--use-english-as-the-project-language.md
+  source_atom_id: CA-M-112
+  source_atom_revision: 14
+  source_sha256: 86b21d1fd3d11fae92d60f901cd1026201711d3a7801a16350c5049efc41e595
+  original_relations_sha256: dee91ff0bd11e8e4029262c3cfcda140a13b164f1f8a35802bf54fe8b3401362
 ---
 # Summary
 Use English as the Project language

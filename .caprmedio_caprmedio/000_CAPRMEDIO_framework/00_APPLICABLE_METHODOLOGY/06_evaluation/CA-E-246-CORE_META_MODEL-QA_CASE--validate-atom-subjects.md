@@ -56,6 +56,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-246-CORE_META_MODEL-QA_CASE--validate-atom-subjects.md
+  source_atom_id: CA-E-246
+  source_atom_revision: 25
+  source_sha256: 6d5e65915b857be8e399aee9b32364dde2caa56ec6757bd8e69282b4ffee0098
+  original_relations_sha256: 68d28ba08fb50df96dd32a7900690a5c93ecc09bd54c537d4754d46ad67a5446
 ---
 # Summary
 

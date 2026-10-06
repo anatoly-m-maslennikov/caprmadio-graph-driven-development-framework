@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1733-CORE_META_MODEL--separate-extension-ownership-from-application-bindings.md
+  source_atom_id: CA-R-1733
+  source_atom_revision: 17
+  source_sha256: a26768fbd323012ded3622c8921cf3d9c013bc42fdd51d07e4f304b0447526ed
+  original_relations_sha256: 5536d80246aa6685803605f13b8201a406b184979e50ecb0896e3c62158c2792
 ---
 # Summary
 

@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1519-CORE_META_MODEL-GENERAL-REQUIREMENT--require-conforming-workflow-execution.md
+  source_atom_id: CA-R-1519
+  source_atom_revision: 5
+  source_sha256: 28d2e6bdb5dd7cd178190ce2e73944839a69f5cbd1455b88c5f527df251ea4a8
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

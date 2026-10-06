@@ -25,6 +25,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1615-PROJECT_CONFIGURATION--define-pre-runtime-resolved-relation-derivation.md
+  source_atom_id: CA-R-1615
+  source_atom_revision: 4
+  source_sha256: e082015ac31ec8f0e8f037a94b786ba387a9e6cf75dd71afa5f408701c0858f2
+  original_relations_sha256: c1dfb708a2f30ab92ebb881edc995bbd3978d95e01ee61809f07aa5710d72562
 ---
 # Summary
 

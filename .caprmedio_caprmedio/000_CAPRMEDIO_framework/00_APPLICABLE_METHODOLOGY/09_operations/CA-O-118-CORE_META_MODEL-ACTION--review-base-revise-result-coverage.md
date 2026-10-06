@@ -3,12 +3,13 @@ atom_id: CA-O-118
 content_role: Operations
 type: Action
 current_scope_unit: CORE_META_MODEL
+claim_target_scope_unit: CORE_META_MODEL
 local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-04 01:12:38 +0400"
+updated_at: "2026-10-04 15:15:46 +0000"
 subjects:
   governs: "RMED Atom Review Workflow/coverage/Action: 118"
   depends_on: [Workflow, Step, Action, Atom, Operator, Journal]
@@ -16,6 +17,10 @@ relations:
   relates_to: [CA-O-104]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-118-CORE_META_MODEL-ACTION--review-base-revise-result-coverage.md
+  source_atom_id: CA-O-118
+  source_atom_revision: 1
+  source_sha256: 13101b6fa0d46755f25dcbf2c81cb31e8f945be1a0a932dabd36c0b77274ad26
+  original_relations_sha256: 0e0a2445b2c035e0671f11f830da82891997aa34348962a7fd52c6d1de7ad708
 ---
 # Summary
 

@@ -30,6 +30,10 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-026-PROJECT_CONFIGURATION-ACTION--refresh-required-release-projections.md
+  source_atom_id: CA-O-026
+  source_atom_revision: 5
+  source_sha256: ea86b010ef15a3c978f1a367ff64830d1ec871ac60ee115a066c3591d2518816
+  original_relations_sha256: c35a65796bde8249029cdd377a11e0c7f0657bada6e8dda47f1820226cc12b02
 ---
 # Refresh required release Projections
 

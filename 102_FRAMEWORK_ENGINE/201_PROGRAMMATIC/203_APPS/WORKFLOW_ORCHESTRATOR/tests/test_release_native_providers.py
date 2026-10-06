@@ -8,6 +8,7 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass
 from pathlib import Path
+import re
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -27,6 +28,22 @@ from release_image import DockerSubprocessExecutor
 from selected_execution import SelectedExecution, SelectedExecutionError, build_requested_runs
 from selected_native_providers import SelectedNativeProviders
 from workflow_run_support import RunExecutionSession
+
+
+CURRENT_RELEASE_PHASES = (
+    ("CA-O-170", "CA-O-165", "freeze"),
+    ("CA-O-171", "CA-O-165", "validate"),
+    ("CA-O-172", "CA-O-166", "deliver_sources"),
+    ("CA-O-173", "CA-O-166", "compile"),
+    ("CA-O-185", "CA-O-168", "closed_unit_gate"),
+    ("CA-O-175", "CA-O-167", "stage_candidate"),
+    ("CA-O-176", "CA-O-168", "candidate_image_build"),
+    ("CA-O-186", "CA-O-168", "candidate_image_canary"),
+    ("CA-O-182", "CA-O-181", "host_candidate_e2e"),
+    ("CA-O-184", "CA-O-183", "aggregate_full_gate"),
+    ("CA-O-178", "CA-O-169", "promote"),
+    ("CA-O-179", "CA-O-169", "retire"),
+)
 
 
 @dataclass(frozen=True)
@@ -63,23 +80,36 @@ class ReleaseSourceBindingTests(unittest.TestCase):
         )
         text = source.read_text(encoding="utf-8")
         self.assertIn("atom_id: CA-O-164", text)
-        self.assertIn("version: 3", text)
+        self.assertIn("version: 6", text)
+        source_pairs = tuple(re.findall(
+            r"^\| (CA-O-\d+) \| (CA-O-\d+) \| ([a-z0-9_]+) \|$", text, flags=re.MULTILINE,
+        ))
+        self.assertEqual(CURRENT_RELEASE_PHASES, source_pairs)
+
+    def test_private_provider_phase_contract_matches_current_o164_graph(self):
+        self.assertEqual(CURRENT_RELEASE_PHASES, release_actions.PHASES)
 
 
 class ReleaseNativeProvidersTests(unittest.TestCase):
     def setUp(self):
-        self.temporary = tempfile.TemporaryDirectory()
+        self.temporary = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name).resolve()
         self.parameters = {"project_root": str(self.root), "operation": "apply", "fixture": True}
-        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 3),
+        self.graph = {"route": "release_version", "workflow": self.binding("CA-O-164", "workflow", 6),
                       "entry_step": "CA-O-170", "steps": []}
         for index, (step, action, _phase) in enumerate(release_actions.PHASES):
             edge = {"result": f"phase_{index}"}
-            edge.update({"next": release_actions.PHASES[index + 1][0]} if index < 9 else {"terminal": "completed"})
+            edge.update({"next": release_actions.PHASES[index + 1][0]}
+                        if index < len(release_actions.PHASES) - 1 else {"terminal": "completed"})
             self.graph["steps"].append({**self.binding(step, "step"),
                                         "actions": [self.binding(action, "action")], "on_result": [edge]})
-        self.admitted = {"release_source_admissions": [{"fixture": True}], "manifest_ref": "manifest.json",
+        workflow = self.graph["workflow"]
+        self.admitted = {"release_source_admissions": [{
+                            "route": "release_version",
+                            "workflow": {"atom_id": workflow["atom_id"], "version": workflow["version"],
+                                         "source_path": workflow["path"], "digest": workflow["sha256"]},
+                         }], "manifest_ref": "manifest.json",
                          "canonical_manifest_sha256": "1" * 64}
         execution = {"mode": "execute", "request_id": "fixture-request", "operation_route": "release_version",
                      "workflow_run_id": "fixture-workflow", "parameters": self.parameters,
@@ -179,18 +209,70 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.assertIsInstance(admission, release_actions.AdmittedImageExecutor)
         self.assertIsInstance(admission.executor, DockerSubprocessExecutor)
 
-    def test_complete_ten_phase_graph_uses_one_private_run_and_shared_session(self):
+    def test_current_source_admitted_workflow_six_reaches_private_phase(self):
+        self.assertEqual(self.graph["workflow"]["version"], 6)
+        selected = self.providers()
+        selected.handlers["CA-O-165"](self.context())
+        self.begin.assert_called_once()
+        self.execute.assert_called_once()
+        self.assertEqual(self.execute.call_args.kwargs["context"].workflow_version, 6)
+
+    def test_noncurrent_workflow_pin_refuses_before_private_checkpoint_or_effects(self):
+        for change in ({"version": 5}, {"version": 99}, {"version": "6"}, {"version": True},
+                       {"path": "definitions/stale.md"}, {"sha256": "3" * 64}):
+            with self.subTest(change=change):
+                graph = copy.deepcopy(self.graph)
+                graph["workflow"].update(change)
+                frozen = {**self.frozen, "graph": graph}
+                # A current-graph double returning the changed graph proves
+                # this provider also checks the source-admission pin itself.
+                with patch.object(SelectedExecution, "_revalidate", return_value=graph), \
+                     self.assertRaises(SelectedExecutionError):
+                    SelectedNativeProviders(self.root).execution(frozen)
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+        self.assertEqual(self.direct_checkpoints, [])
+        self.assertEqual(self.session.actual, {})
+
+    def test_current_graph_revalidation_still_requires_full_frozen_equality(self):
+        current = copy.deepcopy(self.graph)
+        current["steps"][0]["on_result"][0]["result"] = "changed_source_result"
+        with patch.object(SelectedExecution, "_revalidate", return_value=current), \
+             self.assertRaises(SelectedExecutionError):
+            self.providers()
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+
+    def test_source_admission_requires_one_closed_workflow_pin(self):
+        admission = self.admitted["release_source_admissions"][0]
+        missing_digest = copy.deepcopy(admission)
+        missing_digest["workflow"].pop("digest")
+        extra_member = copy.deepcopy(admission)
+        extra_member["workflow"]["caller_version"] = 6
+        wrong_route = {**admission, "route": "caller_release"}
+        for admissions in ([admission, admission], [missing_digest], [extra_member], [wrong_route]):
+            with self.subTest(admissions=admissions):
+                self.admitted["release_source_admissions"] = admissions
+                with self.assertRaises(SelectedExecutionError):
+                    self.providers()
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+
+    def test_complete_current_phase_graph_uses_one_private_run_and_shared_session(self):
         selected = self.providers()
         result = selected._execute_graph(self.frozen, self.session)
         self.assertEqual(result["outcome"], "completed")
         self.assertEqual(self.begin.call_count, 1)
-        self.assertEqual(self.execute.call_count, 10)
-        self.assertEqual(len(self.session.actual), 21)
-        self.assertEqual(len(self.session.terminal), 21)
-        self.assertEqual(len(self.tracker.events), 42)
+        self.assertEqual(self.execute.call_count, len(release_actions.PHASES))
+        self.assertEqual(len(self.session.actual), 1 + 2 * len(release_actions.PHASES))
+        self.assertEqual(len(self.session.terminal), 1 + 2 * len(release_actions.PHASES))
+        self.assertEqual(len(self.tracker.events), 2 * (1 + 2 * len(release_actions.PHASES)))
         self.assertEqual(len(self.private_runs), 1)
         self.assertTrue(callable(self.private_runs[0].checkpoint_callback))
-        self.assertEqual(self.dump_checkpoint.call_count, 10)
+        self.assertEqual(self.dump_checkpoint.call_count, len(release_actions.PHASES))
         typed = [call.kwargs["context"] for call in self.execute.call_args_list]
         self.assertEqual([(item.step_atom_id, item.action_atom_id) for item in typed],
                          [phase[:2] for phase in release_actions.PHASES])
@@ -255,6 +337,69 @@ class ReleaseNativeProvidersTests(unittest.TestCase):
         self.tracker.pending = False
         self.assertEqual(handler(self.context(1))["result"], "blocked")
         self.assertEqual(self.execute.call_count, 1)
+
+    def test_restored_cached_result_uses_validated_action_identity_and_canonical_proof(self):
+        context = self.context()
+        requested_action = context["requested_action_run_id"]
+        action_run_id = context["action_run_id"]
+        terminal = self.session.finish_run(action_run_id, outcome="completed",
+                                           result_ref="fixture-receipt.json", effect_refs=[])
+        retained = SimpleNamespace(
+            frozen_parameters_sha256="2" * 64,
+            contexts={0: release_actions.SelectedReleaseActionContext(
+                str(self.root), context["workflow_run_id"], context["step_run_id"], action_run_id,
+                context["workflow_run_id"], context["step_run_id"], "CA-O-170", "CA-O-165", "2" * 64,
+            )},
+            results={0: self.execute.return_value},
+            in_progress=None,
+        )
+        recordings = {0: {"terminal_outcome": "completed",
+                          "receipt_refs": (terminal["event_receipt"]["event_id"],)}}
+        context.update({
+            "restored_action": True,
+            "checkpoint_reader": lambda: {"schema": "fixture-release-checkpoint"},
+            "checkpoint_progress_reader": lambda requested: {
+                "action_run_id": self.session.actual[requested]["run_id"],
+                "result": "phase_0", "effect_refs": [],
+            },
+        })
+        events_before = list(self.tracker.events)
+        with patch("release_checkpoint.load_release_checkpoint", return_value=(retained, recordings)), \
+             patch("release_checkpoint.extract_pending_recordings", return_value={}), \
+             patch.object(SelectedNativeProviders, "_restored_completed_result_is_proven",
+                          wraps=SelectedNativeProviders._restored_completed_result_is_proven) as proof:
+            result = self.providers().handlers["CA-O-165"](context)
+        self.assertEqual(result["result"], "phase_0", result)
+        self.assertEqual(result["terminal_outcome"], "completed")
+        self.assertTrue(result["action_terminal_recorded"])
+        self.assertEqual(proof.call_args.kwargs["requested_action"], requested_action)
+        self.assertEqual(proof.call_args.kwargs["action_run_id"], action_run_id)
+        self.assertNotIn("record_shared_receipt", result)
+        self.assertEqual(self.tracker.events, events_before)
+        self.begin.assert_not_called()
+        self.execute.assert_called_once()
+
+    def test_restored_checkpoint_revision_is_not_rebound_to_current_source(self):
+        context = self.context()
+        context["checkpoint_reader"] = lambda: {"schema": "fixture-release-checkpoint"}
+        for version in (5, 99, "6", True):
+            with self.subTest(version=version):
+                saved = release_actions.SelectedReleaseActionContext(
+                    str(self.root), context["workflow_run_id"], context["step_run_id"], context["action_run_id"],
+                    context["workflow_run_id"], context["step_run_id"], "CA-O-170", "CA-O-165", "2" * 64,
+                    workflow_version=version,
+                )
+                retained = SimpleNamespace(contexts={0: saved}, results={}, in_progress=None)
+                with patch("release_checkpoint.load_release_checkpoint", return_value=(retained, {})):
+                    result = self.providers().handlers["CA-O-165"](context)
+                self.assertEqual(result["terminal_outcome"], "interrupted_pending")
+                self.assertIn("exact current source-admitted graph", result["native_result"]["blockers"][0])
+                self.assertEqual(saved.workflow_version, version)
+                self.assertFalse(hasattr(retained, "checkpoint_callback"))
+        self.begin.assert_not_called()
+        self.execute.assert_not_called()
+        self.dump_checkpoint.assert_not_called()
+        self.assertEqual(self.direct_checkpoints, [])
 
     def test_phase_pending_stops_graph_before_next_phase(self):
         self.execute.return_value = PhaseResult(outcome="pending")

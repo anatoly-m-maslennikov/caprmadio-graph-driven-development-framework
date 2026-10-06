@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-299-CORE_META_MODEL--distinguish-scope-unit-names-from-ordinary-english.md
+  source_atom_id: CA-M-299
+  source_atom_revision: 4
+  source_sha256: bd094829b8aaf2e5bc69ea104346c8c7578a46002c1746ae7b1f22f1263dd9ba
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

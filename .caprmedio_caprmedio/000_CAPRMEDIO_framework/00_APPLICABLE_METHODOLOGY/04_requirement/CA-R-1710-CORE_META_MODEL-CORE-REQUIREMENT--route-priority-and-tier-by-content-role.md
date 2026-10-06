@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1710-CORE_META_MODEL-CORE-REQUIREMENT--route-priority-and-tier-by-content-role.md
+  source_atom_id: CA-R-1710
+  source_atom_revision: 18
+  source_sha256: e9938f530a5723c689f8a51dc2a1f6b24540cdcb30be1dd4997d4da2eadc40ed
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

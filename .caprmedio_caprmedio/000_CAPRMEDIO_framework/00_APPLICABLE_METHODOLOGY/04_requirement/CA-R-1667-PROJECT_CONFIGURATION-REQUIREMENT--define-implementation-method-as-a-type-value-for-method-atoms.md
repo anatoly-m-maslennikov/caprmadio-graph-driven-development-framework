@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1667-PROJECT_CONFIGURATION-REQUIREMENT--define-implementation-method-as-a-type-value-for-method-atoms.md
+  source_atom_id: CA-R-1667
+  source_atom_revision: 21
+  source_sha256: 1dee9737b5cd1436b6b05bc7b6aba591ad2d675027aece2649fadaf48370acad
+  original_relations_sha256: fa2ed1b51c93aa6a0246c06ab257fec71c84abb802d4cd52416bad20300e11ae
 ---
 # Summary
 

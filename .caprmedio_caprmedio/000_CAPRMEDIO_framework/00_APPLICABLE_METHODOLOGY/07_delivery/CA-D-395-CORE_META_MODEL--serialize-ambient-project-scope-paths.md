@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-395-CORE_META_MODEL--serialize-ambient-project-scope-paths.md
+  source_atom_id: CA-D-395
+  source_atom_revision: 7
+  source_sha256: 5cf5520dd77ab46b3375ce89b0965f3b0748ebc5b2913966522374c65bb04481
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

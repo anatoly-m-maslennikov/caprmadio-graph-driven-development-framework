@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-916-CORE_META_MODEL-CORE-REQUIREMENT--restrict-ordered-demands-to-earlier-producers.md
+  source_atom_id: CA-R-916
+  source_atom_revision: 19
+  source_sha256: a7ef3ef10ead4008fc64a493d5c1cef3b9d26fed16947eb0b9613b9824845a9b
+  original_relations_sha256: 986ab56d61737841b77ed4fc4f1a391a0c8ad370d896e576cf2be7bdd2bdf459
 ---
 # Summary
 Restrict ordered Demands to earlier Producers

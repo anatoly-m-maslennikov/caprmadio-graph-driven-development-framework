@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1734-CORE_META_MODEL-CORE--preserve-self-improvement-stage-meanings.md
+  source_atom_id: CA-R-1734
+  source_atom_revision: 15
+  source_sha256: ae7f786e37b84a2be7bc0857cbe4071920f43709e8c540248643cad77615c16a
+  original_relations_sha256: acf7f548adf758ab0dd97fa1ea7f4f26750b8b5b3262a10979eafc5a31a745d1
 ---
 # Summary
 

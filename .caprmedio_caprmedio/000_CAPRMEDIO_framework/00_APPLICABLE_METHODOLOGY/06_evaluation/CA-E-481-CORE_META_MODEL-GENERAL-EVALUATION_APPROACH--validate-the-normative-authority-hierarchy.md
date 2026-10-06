@@ -19,6 +19,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-481-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-the-normative-authority-hierarchy.md
+  source_atom_id: CA-E-481
+  source_atom_revision: 5
+  source_sha256: b1a06f071e884ebc30afade384f08d25f228f4730ff705def5b7a60f98cfdd71
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

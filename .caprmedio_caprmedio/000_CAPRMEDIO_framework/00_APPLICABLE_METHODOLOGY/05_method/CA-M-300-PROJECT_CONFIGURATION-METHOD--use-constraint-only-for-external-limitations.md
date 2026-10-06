@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/05_method/CA-M-300-PROJECT_CONFIGURATION-METHOD--use-constraint-only-for-external-limitations.md
+  source_atom_id: CA-M-300
+  source_atom_revision: 5
+  source_sha256: 075eaea69c97d76f97da70a03161ed683220f5fb22698ac50308ea20286b662e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Use Constraint only for external limitations

@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1642-PROJECT_CONFIGURATION--register-generated-data-stages.md
+  source_atom_id: CA-R-1642
+  source_atom_revision: 20
+  source_sha256: 0da1ada98921a43f7be3bb45792340b32d331022c8e595a19820c288a7b02291
+  original_relations_sha256: 080cb6f24a7609727534ac841ce386ea45ed2b79d336841326c46d4f28302a52
 ---
 # Summary
 

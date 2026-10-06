@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-471-CORE_META_MODEL--serialize-explicit-plan-blocking.md
+  source_atom_id: CA-D-471
+  source_atom_revision: 5
+  source_sha256: bc4762a7fe3c01b9f8750c31bc98c1e3acba0c4fc4b78b53ff27aebddb9230a3
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

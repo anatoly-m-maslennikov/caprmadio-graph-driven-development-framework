@@ -23,7 +23,7 @@ subjects:
     - "Atom/Revision/Author"
     - "Local Tier"
 version: 9
-updated_at: "2026-10-04 03:57:26 +0400"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-R-1559
@@ -33,12 +33,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-021-CORE_META_MODEL-ACTION--repair-nonconforming-implementation.md
+  source_atom_id: CA-O-021
+  source_atom_revision: 9
+  source_sha256: 841858a2234e54f51952a94724756e1af967249f7baa37623ce27eb4834f2121
+  original_relations_sha256: 85b3fa441ff283c248bb5de5680f9ffa0fa644b2825d092607c8ca13e09066d6
 ---
 # Summary
 
 Repair nonconforming Implementation
 
-## Claim
+## Operation
 
 Implementation Repair **means** the Agentic Action that repairs a diagnosed code defect within the admitted work boundary **and** retry allowance, preserving the issue **and** verification evidence.
 
@@ -49,3 +53,5 @@ Implementation Repair **means** the Agentic Action that repairs a diagnosed code
 - return `repaired` with the changed candidate, failure evidence, diagnosis, actual correction, tests, expected outcomes, **and** replay commands for re-evaluation. passing targeted checks do **not** replace any other check retained **in** the admitted Evaluation portfolio.
 - do **not** create, update, **or** promote corrective M Atoms **in** this Action. retain evidence for the separate Method-learning Workflow; learning is **not** a condition for accepting a verified implementation fix.
 - return `authority_change_required` **if** a governing RMED change is necessary, for disposition under CA-R-1559 **before** changing that authority. authorized baseline changes require renewed preparation; do **not** reset retry accounting.
+
+## Details

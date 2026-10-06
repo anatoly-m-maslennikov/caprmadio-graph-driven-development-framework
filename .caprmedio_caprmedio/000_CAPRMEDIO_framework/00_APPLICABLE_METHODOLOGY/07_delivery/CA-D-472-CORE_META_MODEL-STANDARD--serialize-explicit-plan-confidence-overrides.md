@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-472-CORE_META_MODEL-STANDARD--serialize-explicit-plan-confidence-overrides.md
+  source_atom_id: CA-D-472
+  source_atom_revision: 5
+  source_sha256: ccda5b5fdacef80965b8eaaee28e6a5a44ff6f10c89111bb8748a2d4bba2be90
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

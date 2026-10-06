@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-135-CORE_META_MODEL-METHOD--exclude-generated-only-implementation-edges.md
+  source_atom_id: CA-M-135
+  source_atom_revision: 18
+  source_sha256: 21d7a124cdb31b41665fefbda11604ede8cadeb635c0c3873511bab303969420
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

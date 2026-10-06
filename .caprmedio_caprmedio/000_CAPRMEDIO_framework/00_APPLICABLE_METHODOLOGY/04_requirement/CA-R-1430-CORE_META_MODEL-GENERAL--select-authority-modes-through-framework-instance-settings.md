@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1430-CORE_META_MODEL-GENERAL--select-authority-modes-through-framework-instance-settings.md
+  source_atom_id: CA-R-1430
+  source_atom_revision: 8
+  source_sha256: ec9d8b3f6d6aa35d43101e4d7d6d405413778d4bc05d15cce92975ae6356d263
+  original_relations_sha256: be5cc3030b7779b3445d3df040c85d6952a487441c36cfe1927e563974c04f18
 ---
 # Summary
 

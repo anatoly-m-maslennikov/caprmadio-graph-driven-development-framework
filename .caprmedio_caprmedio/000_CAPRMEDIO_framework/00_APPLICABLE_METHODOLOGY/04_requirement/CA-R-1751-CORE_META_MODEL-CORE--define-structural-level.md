@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1751-CORE_META_MODEL-CORE--define-structural-level.md
+  source_atom_id: CA-R-1751
+  source_atom_revision: 21
+  source_sha256: c78f988c6d40b7c09c7b3d59903a8be65faa6fa556f8fb03952151d2b45803af
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

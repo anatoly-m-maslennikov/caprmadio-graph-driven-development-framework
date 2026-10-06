@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1633-CORE_META_MODEL-GENERAL-REQUIREMENT--record-one-lineage-impact-analysis-per-changed-atom-revision.md
+  source_atom_id: CA-R-1633
+  source_atom_revision: 20
+  source_sha256: bd6d8f8d72e05f3a90e490e1d0d3804f2843a8fc7a42b3bec6b4f1944366cfdd
+  original_relations_sha256: c7fa64331151a0cf79b662ca47c7f4718bd3cf68c09cb3f68cd810e2a706fd05
 ---
 # Summary
 

@@ -24,6 +24,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-498-CORE_META_MODEL-QA_CASE--validate-specification-change-and-implementation-classification.md
+  source_atom_id: CA-E-498
+  source_atom_revision: 5
+  source_sha256: dcef550f7b655a5c5d55a8ecdd3a078df436974278faebd86f6bdde97f29a8a5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Validate Specification, Change, and Implementation classification

@@ -22,6 +22,10 @@ relations:
     - CA-D-302
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-498-PROJECT_CONFIGURATION--use-full-scope-unit-names-in-filenames.md
+  source_atom_id: CA-D-498
+  source_atom_revision: 1
+  source_sha256: bcd795b427e1196adc5391aa977b4b9cff4d6675b709d3968f7444a6854c5c2c
+  original_relations_sha256: 430b5dc20812e94dcf9edd830e665f29a60094d174c4487d9d9fc645ff9b5025
 ---
 # Summary
 

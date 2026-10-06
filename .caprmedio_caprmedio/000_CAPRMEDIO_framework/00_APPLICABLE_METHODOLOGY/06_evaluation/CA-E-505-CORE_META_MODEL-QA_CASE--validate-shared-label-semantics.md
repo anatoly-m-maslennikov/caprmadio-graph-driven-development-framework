@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-505-CORE_META_MODEL-QA_CASE--validate-shared-label-semantics.md
+  source_atom_id: CA-E-505
+  source_atom_revision: 4
+  source_sha256: 5a56c2db2c4da5c46555b35f04e9c2a529592cabd2dd02cc0049d1fb16ce8488
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

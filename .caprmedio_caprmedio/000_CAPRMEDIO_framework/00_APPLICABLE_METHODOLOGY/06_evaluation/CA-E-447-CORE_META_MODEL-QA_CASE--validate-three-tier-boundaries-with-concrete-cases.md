@@ -57,6 +57,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-447-CORE_META_MODEL-QA_CASE--validate-three-tier-boundaries-with-concrete-cases.md
+  source_atom_id: CA-E-447
+  source_atom_revision: 17
+  source_sha256: 8ac530bfc9c0f9340f74e038e40f0f3f711603e83b8857f77fd6f4bdfec3572e
+  original_relations_sha256: 750009cdd71d55152ef6dc9022e65be3f1f61c0ecc62f1416916dd4df0746233
 ---
 # Summary
 

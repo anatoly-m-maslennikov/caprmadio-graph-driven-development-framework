@@ -30,6 +30,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-521-CORE_META_MODEL-QA_CASE--verify-updated-at-refresh-and-semantic-versioning.md
+  source_atom_id: CA-E-521
+  source_atom_revision: 1
+  source_sha256: 70f17039419cd20eee9a38c3d106b9d75b7bf4b563b732b3632b9c5115f601a0
+  original_relations_sha256: 3613760d9aa45673b33f65d52a06059c99c261f4ec76cefd5d7a9c847840020d
 ---
 # Summary
 

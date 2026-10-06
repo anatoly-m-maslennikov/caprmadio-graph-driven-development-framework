@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-232-CORE_META_MODEL-CORE--derive-atom-subjects-graph-from-current-atom-subjects.md
+  source_atom_id: CA-M-232
+  source_atom_revision: 12
+  source_sha256: 01e1f3355f52762beabcc19fe30746a536c12f79015f581d00b6ff765a202cd7
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

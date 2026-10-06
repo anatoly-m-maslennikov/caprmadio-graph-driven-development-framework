@@ -20,6 +20,10 @@ subjects:
 relations: {"relates_to":["CA-D-496","CA-E-520"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-106-CORE_META_MODEL-ACTION--evaluate-rmed-atoms-one-by-one.md
+  source_atom_id: CA-O-106
+  source_atom_revision: 8
+  source_sha256: 28a8db9853d189bd07a2f65e5b8aa68171366e0b6dcb552151eda55302ba25c0
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

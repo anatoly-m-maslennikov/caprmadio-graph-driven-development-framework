@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-313-CORE_META_MODEL-METHOD--write-delivery-claims-with-the-delivery-cce-profile.md
+  source_atom_id: CA-M-313
+  source_atom_revision: 5
+  source_sha256: 570884157745cc3016065c683188b6b80ad0376bba2f76948c279562edc0f947
+  original_relations_sha256: df4e705715370cdf548abfbeba9ae0eed904bc3f2977ebc87988f011e0ad7418
 ---
 # Summary
 

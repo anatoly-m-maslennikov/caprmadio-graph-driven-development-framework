@@ -18,7 +18,7 @@ subjects:
     - "Atom/Content Role: Requirement"
     - "Atom/Content Role: Implementation"
 version: 6
-updated_at: "2026-10-04 03:57:26 +0400"
+updated_at: "2026-10-04 15:15:47 +0000"
 relations:
   relates_to:
     - CA-O-017
@@ -26,12 +26,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-018-CORE_META_MODEL-ACTION--implement-evaluations.md
+  source_atom_id: CA-O-018
+  source_atom_revision: 6
+  source_sha256: ee6a141167ae2a8d9b387f3a92633a02d64b91c7539b901b876a8391e2555f6c
+  original_relations_sha256: 95f6c99d1efc99d7004ab8a8f29dde5c29b2e88c3e0dc4ba5902eff79acf5b23
 ---
 # Summary
 
 Implement Evaluations
 
-## Claim
+## Operation
 
 Evaluation Implementation **means** the Agentic Action that prepares **or** reuses the tests for selected implementation work **before** its required behavior is implemented.
 
@@ -42,3 +46,5 @@ Evaluation Implementation **means** the Agentic Action that prepares **or** reus
 - return `prepared` **or** `blocked`. preparing tests is **not** a passing test result; missing behavior **may** cause an expected initial failure, which still requires diagnosis before feature implementation.
 
 - honor the selection procedure established by applicable Methods **and** the acceptance, priority, **and** disposition rules established by applicable Evaluation authority. prepare the complete admitted portfolio at its selected observable boundaries; no test scope has default priority. preserve issue-driven targeted checks as complementary evidence **without** creating Method Atoms.
+
+## Details

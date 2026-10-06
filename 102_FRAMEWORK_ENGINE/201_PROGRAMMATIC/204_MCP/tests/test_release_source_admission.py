@@ -20,12 +20,12 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "9194c50a832d7aead39e63ee0106a05b13d995c3f1faea54591acbcc5d15400a"
+AUTHORITY_SHA = "8d59dc3147484c24954eeac8d5305bba5f622bced2ac909986071c9c23d73380"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402
 from release_source_admission import (  # noqa: E402
-    ReleaseSourceAdmissionError, derive_release_graph_admission, derive_release_route_graph, derive_release_source_admission,
+    ReleaseSourceAdmissionError, derive_release_graph_admission, derive_release_private_carriers, derive_release_route_graph, derive_release_source_admission,
     validate_release_source_admissions,
 )
 from selected_routes import canonical_digest  # noqa: E402
@@ -80,8 +80,12 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@6 is not the accepted source pin")
+            raise AssertionError("current D572@10 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
+        cls.private_carriers = json.loads(re.search(
+            r"^## Private implementation carriers\n+```json\n(.*?)\n```$",
+            actual.decode("utf-8"), re.MULTILINE | re.DOTALL,
+        )[1])
 
     def setUp(self) -> None:
         temporary = REPOSITORY / ".caprmedio_tmp/tests/release-source-admission"
@@ -89,7 +93,8 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(dir=temporary)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
-        for relative in {AUTHORITY_REF, *[pin["source_path"] for pin in all_pins(self.expected)]}:
+        for relative in {AUTHORITY_REF, *[pin["source_path"] for pin in all_pins(self.expected)],
+                         *[row["source_path"] for row in self.private_carriers]}:
             source = REPOSITORY / relative
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -155,14 +160,22 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         before = self.snapshot()
         record = derive_release_source_admission(self.root)
         self.assertEqual(self.expected, record)
-        self.assertEqual(39, len({pin["source_path"] for pin in all_pins(record)}))
-        self.assertEqual(10, len(record["ordered_steps"]))
+        self.assertEqual(55, len({pin["source_path"] for pin in all_pins(record)}))
+        self.assertEqual(12, len(record["ordered_steps"]))
+        self.assertEqual(6, record["workflow"]["version"])
+        self.assertEqual(4, record["acceptance_frontier"]["version"])
+        self.assertEqual(["CA-O-170", "CA-O-171", "CA-O-172", "CA-O-173", "CA-O-185", "CA-O-175",
+                          "CA-O-176", "CA-O-186", "CA-O-182", "CA-O-184", "CA-O-178", "CA-O-179"],
+                         [row["step"]["atom_id"] for row in record["ordered_steps"]])
         self.assertIs(True, record["mutation_capable"])
         self.assertEqual([], record["native_action_calls"])
         self.assertEqual(["CA-O-165", "CA-O-165", "CA-O-166", "CA-O-166", "CA-O-168",
-                          "CA-O-167", "CA-O-168", "CA-O-168", "CA-O-169", "CA-O-169"],
+                          "CA-O-167", "CA-O-168", "CA-O-168", "CA-O-181", "CA-O-183", "CA-O-169", "CA-O-169"],
                          [pin["atom_id"] for pin in record["ordered_actions"]])
-        self.assertEqual(22, len(record["rmed_frontier"]))
+        self.assertEqual(34, len(record["rmed_frontier"]))
+        self.assertTrue({"CA-R-1886", "CA-M-343", "CA-E-586", "CA-D-579", "CA-D-580",
+                         "CA-R-1890", "CA-M-346", "CA-E-589", "CA-D-582"}.issubset(
+                             {pin["atom_id"] for pin in record["rmed_frontier"]}))
         self.assertEqual(2, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-571"))
         self.assertEqual(2, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-573"))
         self.assertEqual(1, next(pin["version"] for pin in record["rmed_frontier"] if pin["atom_id"] == "CA-D-574"))
@@ -178,6 +191,52 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         self.assertEqual(original_manifest, self.manifest)
         self.assertEqual(before, self.snapshot())
 
+    def test_private_carriers_reopen_without_extending_the_public_record(self) -> None:
+        before = self.snapshot()
+        self.assertEqual(self.private_carriers, derive_release_private_carriers(self.root))
+        self.assertEqual(10, len(self.private_carriers))
+        self.assertEqual(sorted({row["source_path"] for row in self.private_carriers}),
+                         [row["source_path"] for row in self.private_carriers])
+        self.assertEqual({"route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions",
+                          "rmed_frontier", "mutation_capable", "native_action_calls"}, set(self.record))
+        for row in self.private_carriers:
+            with self.subTest(source_path=row["source_path"]):
+                path = self.root / row["source_path"]
+                raw = path.read_bytes()
+                path.write_bytes(raw + b"\nchanged private carrier\n")
+                self.refused(self.manifest)
+                path.write_bytes(raw)
+        path = self.root / self.private_carriers[0]["source_path"]
+        raw = path.read_bytes()
+        path.unlink()
+        self.refused(self.manifest)
+        path.symlink_to(REPOSITORY / self.private_carriers[0]["source_path"])
+        self.refused(self.manifest)
+        path.unlink()
+        path.write_bytes(raw)
+        self.assertEqual(before, self.snapshot())
+
+    def test_trusted_fixture_rejects_open_or_cyclic_private_carrier_declarations(self) -> None:
+        authority = self.root / AUTHORITY_REF
+        original = authority.read_bytes()
+        block = re.compile(r"(## Private implementation carriers\n+```json\n)(.*?)(\n```)", re.DOTALL)
+        variants = (
+            [], self.private_carriers[::-1], [self.private_carriers[0], *self.private_carriers],
+            [{**self.private_carriers[0], "caller_approval": True}],
+            [{"source_path": "../escape.py", "sha256": "a" * 64}],
+            [{"source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/release_source_admission.py",
+              "sha256": "a" * 64}],
+        )
+        for rows in variants:
+            with self.subTest(rows=rows):
+                altered = block.sub(lambda match: match[1] + json.dumps(rows) + match[3],
+                                    original.decode("utf-8")).encode("utf-8")
+                authority.write_bytes(altered)
+                pin = {**admission_module.AUTHORITY_PIN, "digest": hashlib.sha256(altered).hexdigest()}
+                with patch.object(admission_module, "AUTHORITY_PIN", pin):
+                    self.refused(self.manifest)
+        authority.write_bytes(original)
+
     def test_actual_workflow_derives_the_closed_route_graph(self) -> None:
         route, admission = derive_release_graph_admission(self.root)
         self.assertEqual(self.record, admission)
@@ -188,7 +247,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         self.assertEqual("CA-O-170", self.graph["entry_step"])
         self.assertEqual([], self.graph["native_action_calls"])
         self.assertIs(True, self.graph["mutation_capable"])
-        self.assertEqual(10, len(self.graph["on_result"]))
+        self.assertEqual(12, len(self.graph["on_result"]))
         self.assertEqual([row["step"]["atom_id"] for row in self.record["ordered_steps"]],
                          [edge["from"] for edge in self.graph["on_result"]])
         self.assertEqual("complete", self.graph["on_result"][-1]["to"])

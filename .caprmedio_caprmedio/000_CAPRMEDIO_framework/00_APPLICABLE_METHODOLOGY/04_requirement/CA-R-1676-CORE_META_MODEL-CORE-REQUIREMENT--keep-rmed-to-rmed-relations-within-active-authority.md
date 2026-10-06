@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1676-CORE_META_MODEL-CORE-REQUIREMENT--keep-rmed-to-rmed-relations-within-active-authority.md
+  source_atom_id: CA-R-1676
+  source_atom_revision: 20
+  source_sha256: c08978c43d93b0d8b0a04f10a9f2087d51ab1432431336ae169ab6e98e5cb275
+  original_relations_sha256: fe61d145e2f5d262fb51b9ad7918a9f53aec7113df1dcdbd7cd1717f12d807c7
 ---
 # Summary
 

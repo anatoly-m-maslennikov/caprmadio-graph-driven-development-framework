@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1443-CORE_META_MODEL-CORE--restrict-principle-to-project-scope.md
+  source_atom_id: CA-R-1443
+  source_atom_revision: 9
+  source_sha256: 4ca3ce81b7b1e9b292158b48def0af9d4b0c9215036e46dbf9098d438410fa36
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

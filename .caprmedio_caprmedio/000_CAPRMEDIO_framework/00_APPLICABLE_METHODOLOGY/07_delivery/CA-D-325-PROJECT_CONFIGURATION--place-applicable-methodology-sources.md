@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-325-PROJECT_CONFIGURATION--place-applicable-methodology-sources.md
+  source_atom_id: CA-D-325
+  source_atom_revision: 13
+  source_sha256: 468305ac1345e6c60d801ff82d6ce32d87199fd332c0ecc0128c90cde6ecb572
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

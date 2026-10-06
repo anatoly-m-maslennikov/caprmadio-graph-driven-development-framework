@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1665-PROJECT_CONFIGURATION-REQUIREMENT--register-type-values-for-delivery-atoms.md
+  source_atom_id: CA-R-1665
+  source_atom_revision: 21
+  source_sha256: 6281cf6e830f81f1dcc472a51903f4721e81aa69948a29a660c106db2c5e9f77
+  original_relations_sha256: b89d3dda96c6d1aabe3172420cd0a102ac12befd4244aa13be47b1a556386fed
 ---
 # Summary
 

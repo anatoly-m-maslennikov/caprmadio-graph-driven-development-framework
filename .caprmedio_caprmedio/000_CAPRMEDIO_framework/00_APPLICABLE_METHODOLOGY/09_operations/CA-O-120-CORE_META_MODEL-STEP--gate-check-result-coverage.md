@@ -16,6 +16,10 @@ relations:
   relates_to: [CA-O-104, CA-O-118]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/RMED_ATOM_REVIEW/CA-O-120-CORE_META_MODEL-STEP--gate-check-result-coverage.md
+  source_atom_id: CA-O-120
+  source_atom_revision: 1
+  source_sha256: f89bc7ec47a3fed5e52daf011167e6244693f3cb5df47b11943fabcbcd3a4a40
+  original_relations_sha256: bf71386ada6c23487fc05e9498120de59784b00f41060c7bbc43ad9070f682e0
 ---
 # Summary
 

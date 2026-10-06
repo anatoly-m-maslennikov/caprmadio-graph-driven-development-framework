@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-286-CORE_META_MODEL--serialize-goal-type-as-defines-goal-for.md
+  source_atom_id: CA-D-286
+  source_atom_revision: 14
+  source_sha256: 112ac3bcecc7b5d47269a0c0e6ce2db5997cd51b71333c2a89687a871673998a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -25,10 +25,12 @@ from typing import Any, Mapping, Protocol
 
 from release_contract import PROJECT_SKILL_TARGET, ReleaseContractError, canonical_json
 from release_handoff import CURRENT_SELECTOR_RELATIVE, PackageRow as ReleasePackageRow
-from release_image import DockerCommandResult, DockerExecutor, IMAGE_ID
+from release_image import DockerExecutor, DockerSubprocessExecutor, IMAGE_ID
 from release_inventory import ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 from release_packaging import (MANIFEST_NAME, RUNTIME_ROOT, ReleasePackagingError, _render_manifest,
                                _verify_release)
+from framework_compiler_currentness import CanonicalCompilerCurrentness, verify_canonical_compiler_currentness as _verify_canonical_compiler_currentness
+from bootstrap_image import BootstrapImageError, revalidate_initial_framework_image
 
 
 RELEASES_RELATIVE = RUNTIME_ROOT / "releases"
@@ -121,10 +123,20 @@ class InitializationPlan:
     source_context_sha256: str
     manifest_bytes: bytes
     manifest_sha256: str
+    compiler_currentness: CanonicalCompilerCurrentness
 
 
 def _digest(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
+
+
+def verify_canonical_compiler_currentness(project_root: Path | str) -> CanonicalCompilerCurrentness:
+    """Reopen the read-only compiled-Methodology proof at the bootstrap boundary."""
+
+    try:
+        return _verify_canonical_compiler_currentness(project_root)
+    except ReleaseContractError as error:
+        raise FrameworkInitializationError(error.code, str(error)) from error
 
 
 def _root(project_root: Path | str) -> Path:
@@ -237,7 +249,17 @@ def _obsolete_compiled_copy_exists(root: Path) -> bool:
         raise FrameworkInitializationError(error.code, str(error)) from error
 
 
-def _compiled_methodology_files(root: Path) -> list[Path]:
+def _proof_directory(root: Path, value: str, *, label: str) -> Path:
+    relative = Path(value)
+    if relative.is_absolute() or any(part in {"", ".", ".."} for part in relative.parts):
+        raise FrameworkInitializationError("initial-methodology-proof-invalid", f"sealed {label} is unsafe")
+    path = root / relative
+    if path.is_symlink() or not path.is_dir():
+        raise FrameworkInitializationError("initial-methodology-proof-invalid", f"sealed {label} is unavailable")
+    return path
+
+
+def _compiled_methodology_files(root: Path, currentness: CanonicalCompilerCurrentness) -> list[Path]:
     """Read only canonical compiled role folders, never the embedded sources.
 
     Applicable Methodology has one canonical directory.  Its
@@ -246,26 +268,26 @@ def _compiled_methodology_files(root: Path) -> list[Path]:
     package inventory.
     """
 
-    compiled_root = root / METHODOLOGY_COMPILED_RELATIVE
-    if compiled_root.is_symlink() or not compiled_root.is_dir():
-        if _obsolete_compiled_copy_exists(root):
+    compiled_root = _proof_directory(root, currentness.compiled_root, label="compiled Methodology root")
+    source_root = _proof_directory(root, currentness.source_root, label="Methodology source root")
+    role_names = {name for _, name in (("REQUIREMENT", "04_requirement"), ("METHOD", "05_method"),
+                                       ("EVALUATION", "06_evaluation"), ("DELIVERY", "07_delivery"),
+                                       ("OPERATIONS", "09_operations"))}
+    allowed_children = set(role_names) | {".DS_Store"}
+    if source_root.parent == compiled_root:
+        allowed_children.add(source_root.name)
+    for child in compiled_root.iterdir():
+        if child.name in allowed_children:
+            continue
+        if child.is_symlink() or child.is_file() or (child.is_dir() and any(child.iterdir())):
             raise FrameworkInitializationError(
-                "initial-methodology-compiled-obsolete",
-                "only the retired standalone Applicable Methodology copy is available",
+                "initial-methodology-compiled-unknown",
+                f"compiled Methodology has an unproven nonempty sibling: {_relative(root, child, label='compiled Methodology sibling')}",
             )
-        raise FrameworkInitializationError(
-            "initial-methodology-compiled-missing",
-            "canonical compiled Applicable Methodology directory is absent",
-        )
 
     files: list[Path] = []
-    for child in sorted(compiled_root.iterdir(), key=lambda path: path.name):
-        if child.name == METHODOLOGY_SOURCES_RELATIVE.name:
-            # This directory is intentionally inventoried once through its
-            # canonical source root above.
-            continue
-        if child.name == ".DS_Store":
-            continue
+    for role_name in sorted(role_names):
+        child = compiled_root / role_name
         relative = _relative(root, child, label="compiled Methodology role folder")
         if child.is_symlink() or not child.is_dir():
             raise FrameworkInitializationError(
@@ -294,10 +316,17 @@ def _compiled_methodology_files(root: Path) -> list[Path]:
     )
 
 
-def _package_rows(root: Path) -> tuple[PackageRow, ...]:
+def _package_rows(root: Path, currentness: CanonicalCompilerCurrentness) -> tuple[PackageRow, ...]:
     engine_files = _regular_files(root, ENGINE_RELATIVE, code="initial-engine-missing")
-    source_files = _regular_files(root, METHODOLOGY_SOURCES_RELATIVE, code="initial-methodology-sources-missing")
-    compiled_files = _compiled_methodology_files(root)
+    source_root = _proof_directory(root, currentness.source_root, label="Methodology source root")
+    try:
+        source_files = persistent_regular_files(root, source_root)
+    except ReleaseInventoryError as error:
+        raise FrameworkInitializationError(error.code, str(error)) from error
+    if not source_files:
+        raise FrameworkInitializationError("initial-methodology-sources-missing", "configured Methodology source root is empty")
+    compiled_files = _compiled_methodology_files(root, currentness)
+    compiled_root = _proof_directory(root, currentness.compiled_root, label="compiled Methodology root")
     skill_files = _regular_files(root, SKILL_SOURCE_RELATIVE, code="initial-skill-source-missing")
     _assert_hook_free(root / SKILL_SOURCE_RELATIVE, skill_files)
 
@@ -309,10 +338,10 @@ def _package_rows(root: Path) -> tuple[PackageRow, ...]:
         rows.append(PackageRow("FRAMEWORK_ENGINE", relative.as_posix(), f"FRAMEWORK_ENGINE/{path.relative_to(root / ENGINE_RELATIVE).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
     for path in source_files:
         relative = path.relative_to(root)
-        rows.append(PackageRow("METHODOLOGY", relative.as_posix(), f"METHODOLOGY/sources/{path.relative_to(root / METHODOLOGY_SOURCES_RELATIVE).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
+        rows.append(PackageRow("METHODOLOGY", relative.as_posix(), f"METHODOLOGY/sources/{path.relative_to(source_root).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
     for path in compiled_files:
         relative = path.relative_to(root)
-        rows.append(PackageRow("METHODOLOGY", relative.as_posix(), f"METHODOLOGY/compiled/{path.relative_to(root / METHODOLOGY_COMPILED_RELATIVE).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
+        rows.append(PackageRow("METHODOLOGY", relative.as_posix(), f"METHODOLOGY/compiled/{path.relative_to(compiled_root).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
     for path in skill_files:
         relative = path.relative_to(root)
         rows.append(PackageRow("SKILL", relative.as_posix(), f"SKILLS/ca/{path.relative_to(root / SKILL_SOURCE_RELATIVE).as_posix()}", _digest(path.read_bytes()), path.stat().st_mode & 0o777))
@@ -380,11 +409,24 @@ def _manifest(rows: tuple[PackageRow, ...]) -> tuple[bytes, str, str]:
 def _plan_sources(root: Path) -> InitializationPlan:
     """Read and seal source bytes without inspecting runtime publication state."""
 
-    rows = _package_rows(root)
+    compiler_currentness = _compiler_currentness(root)
+    rows = _package_rows(root, compiler_currentness)
     manifest_bytes, manifest_sha256, source_context_sha256 = _manifest(rows)
     # The content-addressed package directory is addressed by the actual
     # manifest bytes, not by a separately named release or a caller value.
-    return InitializationPlan(root, rows, manifest_sha256, source_context_sha256, manifest_bytes, manifest_sha256)
+    return InitializationPlan(root, rows, manifest_sha256, source_context_sha256, manifest_bytes, manifest_sha256, compiler_currentness)
+
+
+def _compiler_currentness(root: Path) -> CanonicalCompilerCurrentness:
+    return verify_canonical_compiler_currentness(root)
+
+
+def _verify_source_plan_current(plan: InitializationPlan) -> None:
+    currentness = _compiler_currentness(plan.root)
+    if _package_rows(plan.root, currentness) != plan.rows:
+        raise FrameworkInitializationError("initial-source-stale", "source changed after sealed package planning")
+    if currentness != plan.compiler_currentness:
+        raise FrameworkInitializationError("initial-compiler-source-stale", "canonical compiled Methodology changed after package planning")
 
 
 def plan_initial_framework_installation(project_root: Path | str) -> InitializationPlan:
@@ -402,24 +444,28 @@ def _validate_image_digest(image_digest: str) -> None:
 
 def _verify_image(executor: DockerExecutor, root: Path, image_digest: str, plan: InitializationPlan) -> None:
     _validate_image_digest(image_digest)
+    # The retained proof establishes the original build origin.  Its fresh
+    # immutable-image inspection must have the same trusted origin; accepting
+    # an arbitrary protocol implementation here would let a caller fabricate
+    # current image availability after the retained proof was created.
+    if type(executor) is not DockerSubprocessExecutor:
+        raise FrameworkInitializationError(
+            "initial-image-executor-untrusted",
+            "first installation requires DockerSubprocessExecutor for fresh image inspection",
+        )
     try:
-        observed = executor.run(("docker", "image", "inspect", image_digest), cwd=root, timeout_seconds=60)
-    except OSError as error:
-        raise FrameworkInitializationError("initial-image-unavailable", "initial image inspection failed") from error
-    if not isinstance(observed, DockerCommandResult) or observed.timed_out or observed.exit_code != 0:
-        raise FrameworkInitializationError("initial-image-unavailable", "initial image inspection is unavailable")
-    try:
-        payload = json.loads(observed.stdout)
-        inspected = payload[0]
-        labels = inspected["Config"]["Labels"]
-    except (IndexError, KeyError, TypeError, ValueError) as error:
-        raise FrameworkInitializationError("image-package-binding-invalid", "image inspection has no sealed package binding") from error
-    if len(payload) != 1 or inspected.get("Id") != image_digest or not isinstance(labels, Mapping):
-        raise FrameworkInitializationError("image-package-binding-invalid", "image identity differs from the requested immutable digest")
-    if labels.get(PACKAGE_IMAGE_LABEL) != plan.manifest_sha256:
-        raise FrameworkInitializationError("image-package-binding-invalid", "image does not bind the exact initial package manifest")
-    if labels.get(SOURCE_CONTEXT_IMAGE_LABEL) != plan.source_context_sha256:
-        raise FrameworkInitializationError("image-source-context-binding-invalid", "image does not bind the sealed initial source context")
+        evidence = revalidate_initial_framework_image(plan, image_digest, executor=executor)
+    except BootstrapImageError as error:
+        raise FrameworkInitializationError(error.code, str(error)) from error
+    if (evidence.outcome != "verified"
+            or evidence.execution_kind != "docker-subprocess"
+            or evidence.image_digest != image_digest
+            or evidence.manifest_sha256 != plan.manifest_sha256
+            or evidence.source_context_sha256 != plan.source_context_sha256):
+        raise FrameworkInitializationError(
+            "initial-image-proof-not-actual",
+            "first installation requires retained docker-subprocess bootstrap-image evidence",
+        )
 
 
 def _atomic_file(path: Path, payload: bytes) -> None:
@@ -708,19 +754,24 @@ def initialize_framework_runtime(
     run_id = _journal_start(journal, requested_run_id, plan, image_digest)
     try:
         _assert_empty_boundary(root)
+        _verify_source_plan_current(plan)
         _verify_image(image_executor, root, image_digest, plan)
+        # The compiler proof seals the exact compiled Methodology carriers in
+        # the package.  Reopen it immediately before the first publication,
+        # rather than treating the earlier read-only plan as current.
+        _verify_source_plan_current(plan)
         package = _stage_package(plan)
         _verify_package(plan, package)
         # Source bytes must remain exactly the planned source frontier before
         # any active selector or public Skill is published.
-        if _package_rows(root) != plan.rows:
-            raise FrameworkInitializationError("initial-source-stale", "source changed after sealed package staging")
+        _verify_source_plan_current(plan)
         _publish_skill(plan, package)
         skill_published = True
         # The public Skill must be complete before the selector makes this
         # package active.  The selector is deliberately the final activation
         # point; separate directory publications are not one transaction.
         try:
+            _verify_source_plan_current(plan)
             _atomic_file(root / SELECTOR_RELATIVE, _selector(plan, image_digest))
         except OSError as error:
             raise FrameworkInitializationError(
@@ -807,6 +858,8 @@ __all__ = [
     "DirectActionJournal",
     "PACKAGE_IMAGE_LABEL",
     "SOURCE_CONTEXT_IMAGE_LABEL",
+    "CanonicalCompilerCurrentness",
+    "verify_canonical_compiler_currentness",
     "initialize_framework_runtime",
     "plan_initial_framework_installation",
 ]

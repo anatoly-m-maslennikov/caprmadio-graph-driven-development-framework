@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1567-CORE_META_MODEL-GENERAL-REQUIREMENT--keep-change-and-implementation-collections-at-standard.md
+  source_atom_id: CA-R-1567
+  source_atom_revision: 5
+  source_sha256: 54e7d5529fae55e8ce0e815ee4587ec9aca562911937e89f2ca089bebbadbeac
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

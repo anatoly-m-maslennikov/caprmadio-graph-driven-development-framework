@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1317-CORE_META_MODEL-REQUIREMENT--fail-closed-on-unresolved-methodology-conflicts.md
+  source_atom_id: CA-R-1317
+  source_atom_revision: 11
+  source_sha256: a0432e87f6bee925c4e4762ee11fafd03e77a8a85e5056da691221fc11fa37ae
+  original_relations_sha256: 56595bb1f3f9fe9f5b758e4de0a03aa828cc25314d286bc50f06905262bd2204
 ---
 # Summary
 

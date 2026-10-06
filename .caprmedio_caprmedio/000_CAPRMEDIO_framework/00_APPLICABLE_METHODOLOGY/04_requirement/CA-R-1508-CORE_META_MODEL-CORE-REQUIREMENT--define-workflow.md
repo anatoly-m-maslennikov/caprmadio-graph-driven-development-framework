@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1508-CORE_META_MODEL-CORE-REQUIREMENT--define-workflow.md
+  source_atom_id: CA-R-1508
+  source_atom_revision: 7
+  source_sha256: ed2727d3a4457544c2aea4aea3f4364ca5fbe650e830eeb316fc4a0f41b4b4c5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

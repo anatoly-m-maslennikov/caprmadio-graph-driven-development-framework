@@ -29,6 +29,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1559-CORE_META_MODEL-GENERAL-REQUIREMENT--gate-governing-atom-changes-during-implementation.md
+  source_atom_id: CA-R-1559
+  source_atom_revision: 5
+  source_sha256: 6b93c0d6ecdc0820018f9debc4f0b24b1d8f2e6794dc741c9f1c66b58c6952cd
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

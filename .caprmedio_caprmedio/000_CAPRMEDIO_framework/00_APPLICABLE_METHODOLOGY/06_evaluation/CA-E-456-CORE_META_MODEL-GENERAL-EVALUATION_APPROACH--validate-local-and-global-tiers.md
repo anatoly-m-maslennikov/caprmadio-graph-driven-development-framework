@@ -21,6 +21,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-456-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-local-and-global-tiers.md
+  source_atom_id: CA-E-456
+  source_atom_revision: 15
+  source_sha256: c197512cc1108d601ba10da70e1c9f068a088c69a47c8f2e860aa50adaf0fb24
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

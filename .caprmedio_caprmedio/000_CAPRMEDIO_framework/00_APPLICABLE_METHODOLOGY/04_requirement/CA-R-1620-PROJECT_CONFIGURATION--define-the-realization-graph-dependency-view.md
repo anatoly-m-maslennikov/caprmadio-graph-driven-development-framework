@@ -23,6 +23,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1620-PROJECT_CONFIGURATION--define-the-realization-graph-dependency-view.md
+  source_atom_id: CA-R-1620
+  source_atom_revision: 4
+  source_sha256: a8e1ea75be414bcda4eebe917b6f22c89455d5784cef43b162757fbc1de2635c
+  original_relations_sha256: eae00a96c16cb4ab498859fce5ef1d2cf94e6e5d896519f44ef27f2cdb0c59c3
 ---
 # Summary
 

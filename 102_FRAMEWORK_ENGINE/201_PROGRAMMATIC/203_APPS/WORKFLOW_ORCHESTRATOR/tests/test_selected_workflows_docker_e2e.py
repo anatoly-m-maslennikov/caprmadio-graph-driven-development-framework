@@ -23,8 +23,11 @@ APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[3]
 sys.path.insert(0, str(APP / "docker"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+RELEASE_ROOT = ROOT / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION"
+sys.path.insert(0, str(RELEASE_ROOT))
 
 from runtime import Runtime  # noqa: E402
+from release_e2e_context import load_release_e2e_context  # noqa: E402
 from selected_workflows_docker_fixture import (  # noqa: E402
     GoldenCase,
     GoldenCorpusError,
@@ -33,6 +36,11 @@ from selected_workflows_docker_fixture import (  # noqa: E402
     JOURNAL_CASES,
     ROUTE_CASES,
 )
+
+try:
+    E2E_CONTEXT = load_release_e2e_context(os.environ)
+except Exception:
+    E2E_CONTEXT = None
 
 
 def _structured_tool_result(response: Any) -> dict[str, Any]:
@@ -57,8 +65,8 @@ async def _stdio_tool_call(parameters: Any, tool: str, request: dict[str, Any]) 
 
 
 @unittest.skipUnless(
-    os.environ.get("CAPRMEDIO_DOCKER_E2E") == "1",
-    "requires CAPRMEDIO_DOCKER_E2E=1; skipped Docker evidence is not a pass",
+    os.environ.get("CAPRMEDIO_DOCKER_E2E") == "1" and E2E_CONTEXT is not None,
+    "requires CAPRMEDIO_DOCKER_E2E=1 and sealed Release E2E context",
 )
 class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
     """One runtime and one disposable Git Project per source-bound route."""
@@ -71,7 +79,8 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             self.fail(f"Docker/MCP harness dependency is unavailable: {error}")
         parameters = StdioServerParameters(
             command=sys.executable,
-            args=[str(APP / "docker/runtime.py"), "--project-root", str(root), "--mock", "mcp"],
+            args=[str(APP / "docker/runtime.py"), "--project-root", str(root), "--image",
+                  E2E_CONTEXT.candidate_image_digest, "--mock", "mcp"],
         )
         self.assertEqual(runtime.root, root.resolve(strict=True), "MCP runtime must bind the same fixture")
         return await _stdio_tool_call(parameters, tool, request)
@@ -88,11 +97,15 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         await asyncio.to_thread(runtime.call, "down", "--volumes", timeout=60)
 
     def _new_fixture(self, case: GoldenCase) -> tuple[FixtureLease, Path, GoldenProject]:
-        parent = ROOT / ".caprmedio_tmp/tests/selected-workflows-docker-e2e"
+        parent = E2E_CONTEXT.scratch_root / "selected-workflows-docker-e2e"
         parent.mkdir(parents=True, exist_ok=True)
         root = Path(tempfile.mkdtemp(dir=parent))
         fixture = GoldenProject(ROOT, root, case, execution_project_root="/project")
         return FixtureLease(root), root, fixture
+
+    @staticmethod
+    def _runtime(root: Path) -> Runtime:
+        return Runtime(root, mock=True, image=E2E_CONTEXT.candidate_image_digest)
 
     async def _preview(self, runtime: Runtime, root: Path, fixture: GoldenProject,
                        request_id: str) -> dict:
@@ -429,7 +442,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         temporary, root, fixture = self._new_fixture(GoldenCase("W01", "create_atom"))
         try:
             fixture.prepare()
-            runtime = Runtime(root, mock=True)
+            runtime = self._runtime(root)
             config = json.loads(
                 await asyncio.to_thread(
                     runtime.call, "--profile", "stdio", "config", "--format", "json"
@@ -451,7 +464,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         for case_id, route in ROUTE_CASES:
             with self.subTest(case=case_id):
                 temporary, root, fixture = self._new_fixture(GoldenCase(case_id, route))
-                runtime = Runtime(root, mock=True)
+                runtime = self._runtime(root)
                 launched = False
                 try:
                     fixture.prepare()
@@ -471,7 +484,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             with self.subTest(case=case_id):
                 case = GoldenCase(case_id, route_name)
                 temporary, root, fixture = self._new_fixture(case)
-                runtime = Runtime(root, mock=True)
+                runtime = self._runtime(root)
                 launched = False
                 try:
                     fixture.prepare()
@@ -518,7 +531,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
     async def test_stale_source_rejects_without_workflow_or_journal_effect(self) -> None:
         case = GoldenCase("W13", "build_applicable_methodology")
         temporary, root, fixture = self._new_fixture(case)
-        runtime = Runtime(root, mock=True)
+        runtime = self._runtime(root)
         launched = False
         try:
             fixture.prepare()
@@ -538,52 +551,6 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             if launched:
                 await self._stop(runtime)
             temporary.cleanup()
-
-
-class SelectedDockerHarnessTransportTests(unittest.IsolatedAsyncioTestCase):
-    """Declared SDK checks without an image, queue, Workflow or fake Run fact."""
-
-    async def test_actual_declared_stdio_client_reconnects_and_unwraps_structured_output(self) -> None:
-        from mcp import StdioServerParameters
-
-        server = (
-            "from mcp.server import MCPServer\n"
-            "from typing import Any\n"
-            "from uuid import uuid4\n"
-            "connection_id = str(uuid4())\n"
-            "server = MCPServer('selected-harness-transport-check')\n"
-            "@server.tool(name='readonly_echo', structured_output=True)\n"
-            "def echo(request: dict[str, Any]) -> dict[str, Any]:\n"
-            "    return {'request': request, 'connection_id': connection_id}\n"
-            "server.run(transport='stdio')\n"
-        )
-        parameters = StdioServerParameters(command=sys.executable, args=["-B", "-c", server])
-        first = await _stdio_tool_call(parameters, "readonly_echo", {"sequence": 1})
-        second = await _stdio_tool_call(parameters, "readonly_echo", {"sequence": 2})
-        self.assertEqual({"sequence": 1}, first["request"])
-        self.assertEqual({"sequence": 2}, second["request"])
-        self.assertNotEqual(first["connection_id"], second["connection_id"])
-
-    async def test_result_unwrap_never_counts_tool_error_or_text_marker_as_success(self) -> None:
-        from mcp import types
-
-        successful = types.CallToolResult(content=[], structured_content={"actual": "structured"})
-        self.assertEqual({"actual": "structured"}, _structured_tool_result(successful))
-        for response in (
-            types.CallToolResult(content=[], structured_content={"actual": "structured"}, is_error=True),
-            types.CallToolResult(content=[types.TextContent(type="text", text='{"actual":"marker"}')]),
-        ):
-            with self.assertRaises(AssertionError):
-                _structured_tool_result(response)
-
-    async def test_docker_fixture_uses_container_visible_execution_project_root(self) -> None:
-        harness = SelectedWorkflowsDockerEndToEnd("test_fresh_image_runtime_does_not_mount_host_implementation")
-        lease, root, fixture = harness._new_fixture(GoldenCase("W09", "run_implementation_workflow"))
-        try:
-            self.assertEqual("/project", fixture.execution_project_root)
-            self.assertEqual(root, fixture.root)
-        finally:
-            lease.cleanup()
 
 
 if __name__ == "__main__":

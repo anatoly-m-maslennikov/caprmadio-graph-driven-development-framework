@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-307-CORE_META_MODEL-CORE--define-content-role-specific-cce-profiles.md
+  source_atom_id: CA-M-307
+  source_atom_revision: 4
+  source_sha256: 158b7e802ce470f95564bcc9a32644c4f501d4c14c5b278b0573c3e7b3f56b77
+  original_relations_sha256: fb4c104d35e37869fbf8b19cb0bd3c8a6570a6d5fe162522111716414fe5c801
 ---
 # Summary
 

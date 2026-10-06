@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1629-CORE_META_MODEL-REQUIREMENT--effective-priority-conflict-selection.md
+  source_atom_id: CA-R-1629
+  source_atom_revision: 22
+  source_sha256: 7104d89f8b8d86133f9e88283a553e1b5ef0f16669858a5530e65ade72e211cd
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

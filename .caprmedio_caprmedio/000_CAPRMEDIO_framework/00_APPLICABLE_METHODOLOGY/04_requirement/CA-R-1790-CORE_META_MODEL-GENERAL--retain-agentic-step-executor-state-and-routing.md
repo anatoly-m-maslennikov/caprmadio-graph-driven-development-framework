@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1790-CORE_META_MODEL-GENERAL--retain-agentic-step-executor-state-and-routing.md
+  source_atom_id: CA-R-1790
+  source_atom_revision: 1
+  source_sha256: 43822a4b596c2ec78e8825f586a9f9d45ba5b381ddbda1d83483300ea73201b8
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

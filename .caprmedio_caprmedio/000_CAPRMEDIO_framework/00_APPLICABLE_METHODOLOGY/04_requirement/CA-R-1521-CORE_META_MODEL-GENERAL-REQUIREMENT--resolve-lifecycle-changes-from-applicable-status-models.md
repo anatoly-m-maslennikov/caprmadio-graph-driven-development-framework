@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1521-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-lifecycle-changes-from-applicable-status-models.md
+  source_atom_id: CA-R-1521
+  source_atom_revision: 4
+  source_sha256: 68e37f2d0c8e75cdf5caf5bb9304ffac9f7e8f58fdc06c89c2debe69c8cb966c
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

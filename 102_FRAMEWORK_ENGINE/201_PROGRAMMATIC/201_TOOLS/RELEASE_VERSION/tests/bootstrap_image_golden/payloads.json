@@ -1,0 +1,13 @@
+{
+  "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py": "tool\n",
+  "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py": "app\n",
+  "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py": "server\n",
+  "102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md": "prompt\n",
+  "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md": "# ca\n",
+  "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml": "name: ca\n",
+  ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/source.md": "source\n",
+  ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/04_requirement/compiled.md": "compiled\n",
+  "pyproject.toml": "[project]\nname = 'bootstrap-golden'\nversion = '0.0.0'\n",
+  "uv.lock": "version = 1\n",
+  "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile": "FROM scratch\nCOPY pyproject.toml uv.lock ./\nCOPY 102_FRAMEWORK_ENGINE ./102_FRAMEWORK_ENGINE\nCOPY PACKAGE /opt/caprmedio-framework\n"
+}

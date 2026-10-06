@@ -18,6 +18,10 @@ type: "Delivery"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-307-CORE_META_MODEL-DELIVERY--prohibit-persistent-applicable-methodology-subject-indexes.md
+  source_atom_id: CA-D-307
+  source_atom_revision: 11
+  source_sha256: 84f1e41ffe1d1bd5e17fffbbdd51c0de63ea8be0769f2182bc7a06e43488e144
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

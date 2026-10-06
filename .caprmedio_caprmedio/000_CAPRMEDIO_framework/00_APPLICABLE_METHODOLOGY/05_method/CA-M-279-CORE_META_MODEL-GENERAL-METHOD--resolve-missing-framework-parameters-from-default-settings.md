@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-279-CORE_META_MODEL-GENERAL-METHOD--resolve-missing-framework-parameters-from-default-settings.md
+  source_atom_id: CA-M-279
+  source_atom_revision: 8
+  source_sha256: a7168156a9c28bb73462090e158d8d7ece430a8db561dbe0ceadfd7873d170b3
+  original_relations_sha256: cddde851356103178bde399ce5d8445877ace80e10c9a74c6f296891f8818c2d
 ---
 # Summary
 Resolve missing framework parameters from Default Settings

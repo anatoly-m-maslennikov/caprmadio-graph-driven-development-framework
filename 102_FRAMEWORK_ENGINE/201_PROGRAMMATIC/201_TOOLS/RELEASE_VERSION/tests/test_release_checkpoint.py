@@ -11,6 +11,7 @@ import copy
 import json
 import sys
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 
@@ -36,8 +37,11 @@ from release_checkpoint import (  # noqa: E402
     restore_release_action_checkpoint,
 )
 from release_compilation import ReleaseCompilationPreflight  # noqa: E402
+from release_e2e_gate import CandidateE2EGateEvidence, HarnessReceipt  # noqa: E402
+from release_full_gate import FullGateEvidence  # noqa: E402
 from release_contract import (  # noqa: E402
     CandidateBuildRequest,
+    ReleaseContractError,
     SealedAuthority,
     ValidatedCandidate,
     encode_candidate_manifest,
@@ -166,7 +170,7 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.run = ReleaseActionRun(PROJECT_ROOT, "workflow-1", _fingerprint(self.request), self.request)
         self.context = SelectedReleaseActionContext(
             PROJECT_ROOT, "workflow-1", "step-0", "action-0", "workflow-1", "step-0",
-            *PHASES[0][:2], self.run.frozen_parameters_sha256,
+            *PHASES[0][:2], self.run.frozen_parameters_sha256, workflow_version=6,
         )
         self.run.candidate = self.candidate
         self.run.preflight = _preflight(self.candidate)
@@ -177,12 +181,12 @@ class ReleaseCheckpointTests(unittest.TestCase):
         )
         self.run.next_phase = 1
 
-    def test_closed_canonical_round_trip_restores_typed_state_without_executor(self) -> None:
+    def test_closed_canonical_round_trip_preserves_legacy_workflow_five_without_executor(self) -> None:
         # The codec preserves the definition revision recorded by the selected
         # provider; it does not silently downgrade a newer frozen Workflow.
         self.context = SelectedReleaseActionContext(
             PROJECT_ROOT, "workflow-1", "step-0", "action-0", "workflow-1", "step-0",
-            *PHASES[0][:2], self.run.frozen_parameters_sha256, workflow_version=3,
+            *PHASES[0][:2], self.run.frozen_parameters_sha256, workflow_version=5,
         )
         self.run.contexts[0] = self.context
         self.run.results[0] = ReleasePhaseResult(
@@ -202,7 +206,27 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.assertEqual(restored.preflight, self.run.preflight)
         self.assertEqual(restored.contexts, self.run.contexts)
         self.assertEqual(restored.results, self.run.results)
+        self.assertEqual(restored.contexts[0].workflow_version, 5)
+
         self.assertEqual(encode_release_action_checkpoint(restored), encoded)
+
+    def test_closed_canonical_round_trip_preserves_fresh_workflow_six(self) -> None:
+        encoded = encode_release_action_checkpoint(self.run)
+
+        restored = restore_release_action_checkpoint(encoded)
+
+        self.assertEqual(restored.contexts, self.run.contexts)
+        self.assertEqual(restored.contexts[0].workflow_version, 6)
+
+    def test_rejects_unknown_frozen_workflow_revision(self) -> None:
+        payload = json.loads(encode_release_action_checkpoint(self.run))
+        payload["contexts"][0]["context"]["workflow_version"] = 7
+        payload["sha256"] = release_action_checkpoint_sha256(payload)
+
+        with self.assertRaises(ReleaseContractError):
+            restore_release_action_checkpoint(
+                json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+            )
 
     def test_round_trip_preserves_all_retained_preflight_and_evidence_types(self) -> None:
         compilation = _compilation(self.candidate)
@@ -227,6 +251,7 @@ class ReleaseCheckpointTests(unittest.TestCase):
             executing_skill_sha256=_digest("f"),
             receipt_sha256=_digest("0"),
             elapsed_seconds=1.0,
+            phase_map_sha256=_digest("d"),
         )
         self.run.package = {"staged": True, "verified": True, "candidate_snapshot_manifest_sha256": self.candidate.manifest.sha256,
                             "release_root": ".caprmedio_runtime/framework/releases/" + self.candidate.manifest.sha256, "file_count": 5}
@@ -238,6 +263,22 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.run.verification = ImageVerificationEvidence(
             self.candidate.manifest.sha256, "verified", "image verified", self.run.build.candidate_image_digest,
             self.run.build.receipt_sha256, "tmp/image-verify", _digest("6"), "docker-subprocess", _digest("7"),
+        )
+        harness = HarnessReceipt(
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/tests/test_release_e2e_host.py",
+            _digest("8"), ("python", "run_release_e2e.py"), "2026-10-06T00:00:00Z", "2026-10-06T00:00:01Z",
+            0, False, "tmp/e2e/stdout.txt", _digest("9"), "tmp/e2e/stderr.txt", _digest("a"),
+            "tmp/e2e/junit.xml", _digest("b"), 1, 1.0, "passed",
+        )
+        self.run.e2e = CandidateE2EGateEvidence(
+            self.candidate.manifest.sha256, self.run.build.candidate_image_digest, self.run.suite.phase_map_sha256,
+            _digest("c"), "passed", "host E2E passed", (harness,), "tmp/e2e", _digest("d"),
+            "tmp/e2e/settings.json", _digest("e"), "tmp/e2e/capability.json", _digest("f"), "host-subprocess",
+        )
+        self.run.full_gate = FullGateEvidence(
+            self.candidate.manifest.sha256, self.run.build.candidate_image_digest, self.run.suite.phase_map_sha256,
+            self.run.suite.receipt_sha256, self.run.build.receipt_sha256, self.run.verification.receipt_sha256,
+            self.run.e2e.receipt_sha256, "passed", "full gate passed", "tmp/full-gate", _digest("0"), 4,
         )
         self.run.promotion = PromotionEvidence(
             self.candidate.manifest.sha256, "promoted", "candidate promoted", self.run.build.candidate_image_digest,
@@ -261,8 +302,10 @@ class ReleaseCheckpointTests(unittest.TestCase):
             5: self.run.package,
             6: self.run.build,
             7: self.run.verification,
-            8: self.run.promotion,
-            9: self.run.retirement,
+            8: self.run.e2e,
+            9: self.run.full_gate,
+            10: self.run.promotion,
+            11: self.run.retirement,
         }
         self.run.contexts = {
             index: SelectedReleaseActionContext(
@@ -274,12 +317,12 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.run.results = {
             index: ReleasePhaseResult(
                 "workflow-1", f"step-{index}", f"action-{index}", *PHASES[index],
-                "completed" if index < 9 else "pending", "observed", self.candidate.manifest.sha256,
+                "completed" if index < 11 else "pending", "observed", self.candidate.manifest.sha256,
                 (), (), ("journal-event-1",), output=outputs[index],
             )
             for index in range(len(PHASES))
         }
-        self.run.next_phase = 9
+        self.run.next_phase = 11
         self.run.stopped = True
         encoded = encode_release_action_checkpoint(self.run)
         restored = restore_release_action_checkpoint(encoded)
@@ -289,9 +332,28 @@ class ReleaseCheckpointTests(unittest.TestCase):
         self.assertEqual(restored.package, self.run.package)
         self.assertIsInstance(restored.build, ImageBuildEvidence)
         self.assertIsInstance(restored.verification, ImageVerificationEvidence)
+        self.assertIsInstance(restored.e2e, CandidateE2EGateEvidence)
+        self.assertIsInstance(restored.e2e.harness_receipts[0], HarnessReceipt)
+        self.assertIsInstance(restored.e2e.harness_receipts[0].argv, tuple)
+        self.assertIsInstance(restored.full_gate, FullGateEvidence)
+        self.assertEqual(restored.suite.phase_map_sha256, self.run.suite.phase_map_sha256)
         self.assertIsInstance(restored.promotion, PromotionEvidence)
         self.assertIsInstance(restored.retirement, ImageRetirementEvidence)
         self.assertEqual(restored.results, self.run.results)
+
+        # A resealed envelope cannot add caller-selected fields to the new
+        # nested evidence types or promote from a failed aggregate.
+        payload = json.loads(encoded)
+        for state_name in ("e2e", "full_gate"):
+            changed = copy.deepcopy(payload)
+            changed["state"][state_name]["value"]["caller_override"] = True
+            changed["sha256"] = release_action_checkpoint_sha256(changed)
+            with self.subTest(state=state_name), self.assertRaises(ReleaseContractError):
+                restore_release_action_checkpoint(json.dumps(changed, sort_keys=True, separators=(",", ":")).encode())
+        self.run.full_gate = replace(self.run.full_gate, outcome="failed")
+        self.run.results[9] = replace(self.run.results[9], output=self.run.full_gate)
+        with self.assertRaises(ReleaseContractError):
+            encode_release_action_checkpoint(self.run)
 
     def test_rejects_unknown_member_digest_root_and_phase_continuity_forgeries(self) -> None:
         payload = json.loads(encode_release_action_checkpoint(self.run))

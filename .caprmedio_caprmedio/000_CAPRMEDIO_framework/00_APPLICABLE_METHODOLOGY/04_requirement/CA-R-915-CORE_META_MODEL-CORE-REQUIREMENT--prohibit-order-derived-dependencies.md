@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-915-CORE_META_MODEL-CORE-REQUIREMENT--prohibit-order-derived-dependencies.md
+  source_atom_id: CA-R-915
+  source_atom_revision: 17
+  source_sha256: 0b1c42d56318cc187ee18574919131d4d8d151ac6806074edcde63f1a5406a0c
+  original_relations_sha256: 6f7d788a56b310c6a670268a37403be61a9ce286f37209823884838df0b22393
 ---
 # Summary
 Prohibit order-derived dependencies

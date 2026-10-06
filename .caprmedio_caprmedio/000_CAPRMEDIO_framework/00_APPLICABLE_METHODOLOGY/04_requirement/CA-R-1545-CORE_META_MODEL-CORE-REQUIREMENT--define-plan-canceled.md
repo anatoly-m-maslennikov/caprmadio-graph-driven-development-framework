@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1545-CORE_META_MODEL-CORE-REQUIREMENT--define-plan-canceled.md
+  source_atom_id: CA-R-1545
+  source_atom_revision: 4
+  source_sha256: 65cf9da39d6e426da65ebb4f4dd8d9a945d8e9ce7e09e13115a84ae6f339985a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1213-CORE_META_MODEL-CORE-REQUIREMENT--define-applicable-methodology-as-a-compiled-projection.md
+  source_atom_id: CA-R-1213
+  source_atom_revision: 17
+  source_sha256: 6962d60e15445e82bf78866bec337e389b5e1b1cad5a9d830dcf3feb6ec7c7c2
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

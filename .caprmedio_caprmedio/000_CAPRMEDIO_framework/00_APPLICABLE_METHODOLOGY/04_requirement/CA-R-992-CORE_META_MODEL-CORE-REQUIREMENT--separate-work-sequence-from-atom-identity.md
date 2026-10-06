@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-992-CORE_META_MODEL-CORE-REQUIREMENT--separate-work-sequence-from-atom-identity.md
+  source_atom_id: CA-R-992
+  source_atom_revision: 17
+  source_sha256: 78ffc3aeea41c075bcd73658d78721eb73d15ee573d903e2ff1288c6ad4813f5
+  original_relations_sha256: aa51d8e42d53a100df1392442067f7045857cbee742b70522b372c837dd031c3
 ---
 # Summary
 

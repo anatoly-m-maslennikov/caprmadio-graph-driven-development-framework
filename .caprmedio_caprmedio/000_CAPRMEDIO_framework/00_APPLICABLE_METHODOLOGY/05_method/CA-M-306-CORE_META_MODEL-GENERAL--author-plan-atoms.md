@@ -29,6 +29,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-306-CORE_META_MODEL-GENERAL--author-plan-atoms.md
+  source_atom_id: CA-M-306
+  source_atom_revision: 7
+  source_sha256: b20340474959f2b3e19417b6d7de7398e62bd6d556c341edec7d3ae64011092d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

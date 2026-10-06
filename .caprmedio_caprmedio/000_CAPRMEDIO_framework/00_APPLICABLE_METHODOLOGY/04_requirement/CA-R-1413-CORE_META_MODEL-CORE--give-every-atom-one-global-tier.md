@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1413-CORE_META_MODEL-CORE--give-every-atom-one-global-tier.md
+  source_atom_id: CA-R-1413
+  source_atom_revision: 9
+  source_sha256: c01f6b3d150d05cee045da6ab202fc38787a088bb9accbec934392917b89a241
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

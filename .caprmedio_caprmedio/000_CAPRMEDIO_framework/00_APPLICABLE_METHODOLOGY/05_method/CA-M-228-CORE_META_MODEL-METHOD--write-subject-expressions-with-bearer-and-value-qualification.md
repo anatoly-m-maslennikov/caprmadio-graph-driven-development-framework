@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-228-CORE_META_MODEL-METHOD--write-subject-expressions-with-bearer-and-value-qualification.md
+  source_atom_id: CA-M-228
+  source_atom_revision: 14
+  source_sha256: f5a2152648b95c04af56c49118f43ac64ee46dd8183b23913cb64f335d6f26df
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

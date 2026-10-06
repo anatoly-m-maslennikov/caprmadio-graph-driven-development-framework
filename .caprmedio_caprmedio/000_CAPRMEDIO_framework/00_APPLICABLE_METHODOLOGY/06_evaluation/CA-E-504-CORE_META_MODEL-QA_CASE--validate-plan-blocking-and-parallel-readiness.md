@@ -21,6 +21,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-504-CORE_META_MODEL-QA_CASE--validate-plan-blocking-and-parallel-readiness.md
+  source_atom_id: CA-E-504
+  source_atom_revision: 5
+  source_sha256: c2f9b7d5ffcaea593698480c7c8ad7d4d4d2b90fb0395e9a09680f468f115894
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

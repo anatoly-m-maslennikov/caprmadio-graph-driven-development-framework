@@ -25,6 +25,10 @@ subjects:
 relations: {"relates_to":["CA-D-340","CA-O-108","CA-O-109","CA-O-110","CA-R-1643","CA-R-1720"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-104-CORE_META_MODEL-WORKFLOW--review-and-repair-a-bounded-rmed-atom-batch.md
+  source_atom_id: CA-O-104
+  source_atom_revision: 9
+  source_sha256: 44f09c0cc44ff08b03200c21e88d8e7f36ab0d3b10b037b17d0b22a20badea79
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

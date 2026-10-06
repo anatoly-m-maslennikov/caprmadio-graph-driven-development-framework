@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1778-CORE_META_MODEL-REQUIREMENT--name-the-framework-caprmedio.md
+  source_atom_id: CA-R-1778
+  source_atom_revision: 14
+  source_sha256: 14510696fa4c9f9ceb509ec4e7f6db44ae794cbcb074c5a59aef75fb5c0f7a0c
+  original_relations_sha256: 29922fb616c9a70c6651b487109636e20ef2b8567eecb72f7b1b62af3d782e93
 ---
 # Summary
 

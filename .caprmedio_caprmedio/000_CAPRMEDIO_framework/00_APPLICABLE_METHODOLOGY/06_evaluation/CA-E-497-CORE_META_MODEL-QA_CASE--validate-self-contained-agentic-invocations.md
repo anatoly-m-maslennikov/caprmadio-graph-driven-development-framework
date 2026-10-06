@@ -22,6 +22,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-497-CORE_META_MODEL-QA_CASE--validate-self-contained-agentic-invocations.md
+  source_atom_id: CA-E-497
+  source_atom_revision: 4
+  source_sha256: 17de1ecc22b82359e2ebf18c4a3c447de634dd1fd169a79b2a36b059c6da5a60
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

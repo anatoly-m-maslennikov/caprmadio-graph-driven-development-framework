@@ -201,10 +201,12 @@ class SelectedCompilerRecordingTest(unittest.TestCase):
         return runner, {"operation": "enqueue_selected", "run_id": run_id, "execution": execution}
 
     def _projection_bytes(self) -> dict[str, bytes]:
+        """Return generated members, excluding co-located authoritative sources."""
         output = self.root / compiler.methodology_paths(self.root).output
         return {
             path.relative_to(output).as_posix(): path.read_bytes()
-            for path in sorted(output.rglob("*"))
+            for _, role_directory in compiler.ROLES
+            for path in sorted((output / role_directory).rglob("*"))
             if path.is_file()
         }
 
@@ -286,7 +288,7 @@ class SelectedCompilerRecordingTest(unittest.TestCase):
             retry = runner.dispatch(frozen)
 
         self.assertEqual("recording_pending", pending["disposition"])
-        self.assertEqual("retry-recording-only", pending["retry_disposition"])
+        self.assertEqual("inspect-or-recover-only", pending["retry_disposition"])
         self.assertTrue(pending["pending_event_ids"])
         self.assertEqual(pending, retry)
         self.assertEqual(1, calls)

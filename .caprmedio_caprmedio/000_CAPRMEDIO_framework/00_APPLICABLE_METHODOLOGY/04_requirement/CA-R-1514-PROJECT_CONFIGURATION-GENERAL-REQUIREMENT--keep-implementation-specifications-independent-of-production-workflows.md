@@ -25,6 +25,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1514-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--keep-implementation-specifications-independent-of-production-workflows.md
+  source_atom_id: CA-R-1514
+  source_atom_revision: 6
+  source_sha256: 646b8cfdbbcbcc375949e29fec3f1f14b8f3d7c799189a08ecc6ea813e88c90e
+  original_relations_sha256: b26d22fba6d0e749fd369eb743ab42be1d6771a9c8f6a8da5fc4468e06048925
 ---
 # Summary
 

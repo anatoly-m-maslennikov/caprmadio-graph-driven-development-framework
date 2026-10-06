@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-392-CORE_META_MODEL--register-obsolete-project-names.md
+  source_atom_id: CA-D-392
+  source_atom_revision: 8
+  source_sha256: dfc6540a2654237153dbf7a660589ea4fa69e08124fc65ece65cf39df4d21150
+  original_relations_sha256: 5411c48e314874dae72d61833b5dd597b25ac3a746bb13d14b671ab0808665d2
 ---
 # Summary
 

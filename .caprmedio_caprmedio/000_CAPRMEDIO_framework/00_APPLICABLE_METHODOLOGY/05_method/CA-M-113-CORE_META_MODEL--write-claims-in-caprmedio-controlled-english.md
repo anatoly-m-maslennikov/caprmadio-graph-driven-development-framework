@@ -30,6 +30,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-113-CORE_META_MODEL--write-claims-in-caprmedio-controlled-english.md
+  source_atom_id: CA-M-113
+  source_atom_revision: 17
+  source_sha256: 81a512b270a42421edf5a5a3f576b334581e8b407b8acd1d4f7d3370f3f54e77
+  original_relations_sha256: 1aedbaa25b502bd6d097474e4f004e2f4fd8a026d5d1021207106edaf3bbb4b0
 ---
 # Summary
 

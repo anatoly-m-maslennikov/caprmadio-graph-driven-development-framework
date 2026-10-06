@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1645-PROJECT_CONFIGURATION-CORE-REQUIREMENT--define-self-hosted-governance-origins.md
+  source_atom_id: CA-R-1645
+  source_atom_revision: 21
+  source_sha256: d30360299aee4ce0444394f6f957ff28d9916f6ac0084adf9bd41dccf3ae3146
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

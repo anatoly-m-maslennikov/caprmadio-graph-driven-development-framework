@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-253-CORE_META_MODEL-CORE-DELIVERY--place-applicable-methodology-and-its-sources.md
+  source_atom_id: CA-D-253
+  source_atom_revision: 12
+  source_sha256: 6c7aa690c203c38d7443fa1385f3d2e600651060e6ff083d8e5c9a33bef1e5f6
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

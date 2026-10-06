@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-274-CORE_META_MODEL-DELIVERY--serialize-explicit-atom-revision-author.md
+  source_atom_id: CA-D-274
+  source_atom_revision: 17
+  source_sha256: db4a0f0b1952dfd28ddabce2cfb3db1f3c53618fbc1d1b33ddfc5259a32d7d54
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

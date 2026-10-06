@@ -11,6 +11,7 @@ import tempfile
 import tomllib
 from pathlib import Path
 
+from bootstrap_image import BootstrapImageError, _retained_initial_package
 from release_contract import ReleaseContractError, ValidatedCandidate
 from release_handoff import (
     CANONICAL_SOURCE_RELATIVE,
@@ -23,6 +24,7 @@ from release_handoff import (
     tree_sha256,
     validate_source_copy,
 )
+from release_inventory import ReleaseInventoryError, persistent_regular_files
 from release_packaging import (
     MANIFEST_NAME,
     RUNTIME_ROOT,
@@ -31,6 +33,7 @@ from release_packaging import (
     _render_manifest,
     _verify_release,
 )
+from release_suite import _bootstrap_prior_manifest_is_exact
 
 
 class ReleaseDeliveryError(ReleaseContractError):
@@ -83,6 +86,18 @@ def _write_snapshot(folder: Path, records: dict[str, tuple[bool, int, bytes]]) -
             (folder / relative).chmod(mode)
 
 
+def _persistent_file_snapshot(root: Path, folder: Path) -> dict[str, tuple[int, bytes]]:
+    """Read persisted predecessor bytes/modes using the sealed inventory rules."""
+
+    try:
+        return {
+            path.relative_to(folder).as_posix(): (path.stat().st_mode & 0o777, path.read_bytes())
+            for path in persistent_regular_files(root, folder)
+        }
+    except ReleaseInventoryError as error:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor inventory is unsafe") from error
+
+
 def _admit(candidate: ValidatedCandidate) -> ValidatedCandidate:
     if not isinstance(candidate, ValidatedCandidate):
         raise ReleaseDeliveryError("release-candidate-untrusted", "delivery requires a typed locally validated candidate")
@@ -103,22 +118,37 @@ def _prove_predecessor(root: Path, candidate: ValidatedCandidate, destination: P
     relative = (RUNTIME_ROOT / "releases" / executing).as_posix()
     retained = _safe_path(root, relative)
     manifest_path = _safe_path(root, f"{relative}/{MANIFEST_NAME}")
+    selector_path = _safe_path(root, CURRENT_SELECTOR_RELATIVE)
     try:
-        if not manifest_path.is_file():
+        if not manifest_path.is_file() or not selector_path.is_file():
             raise ValueError("retained executing package manifest is absent")
-        text = manifest_path.read_text(encoding="utf-8")
+        manifest_bytes = manifest_path.read_bytes()
+        text = manifest_bytes.decode("utf-8")
         manifest = tomllib.loads(text)
-        if set(manifest) != {"schema_version", "candidate_snapshot_manifest_sha256", "package", "files"}:
-            raise ValueError("retained package manifest has unexpected members")
-        identity = _candidate_sha256(manifest["candidate_snapshot_manifest_sha256"])
-        if manifest["schema_version"] != 2 or manifest["package"] != "caprmedio-framework" or identity != executing:
-            raise ValueError("retained package does not identify executing N")
-        rows = []
-        for row in manifest["files"]:
-            if set(row) != {"resource", "source_path", "destination", "sha256", "mode"}:
-                raise ValueError("retained package row has unexpected members")
-            rows.append(PackageRow.model_validate({**{key: value for key, value in row.items() if key != "destination"},
-                                                  "destination_path": row["destination"]}))
+        selector = tomllib.loads(selector_path.read_text(encoding="utf-8"))
+        bootstrap = (
+            isinstance(selector, dict)
+            and _bootstrap_prior_manifest_is_exact(selector, manifest_bytes, executing)
+        )
+        if bootstrap:
+            # First-install N identifies its release by the exact manifest
+            # digest and its rows by the immutable source-context digest.
+            # Reuse the canonical retained-package reader; the selector
+            # binding above keeps this exception closed to that bootstrap N.
+            retained, bootstrap_rows, _manifest, identity = _retained_initial_package(root, executing)
+            rows = list(bootstrap_rows)
+        else:
+            if set(manifest) != {"schema_version", "candidate_snapshot_manifest_sha256", "package", "files"}:
+                raise ValueError("retained package manifest has unexpected members")
+            identity = _candidate_sha256(manifest["candidate_snapshot_manifest_sha256"])
+            if manifest["schema_version"] != 2 or manifest["package"] != "caprmedio-framework" or identity != executing:
+                raise ValueError("retained package does not identify executing N")
+            rows = []
+            for row in manifest["files"]:
+                if set(row) != {"resource", "source_path", "destination", "sha256", "mode"}:
+                    raise ValueError("retained package row has unexpected members")
+                rows.append(PackageRow.model_validate({**{key: value for key, value in row.items() if key != "destination"},
+                                                      "destination_path": row["destination"]}))
         if len({row.destination_path for row in rows}) != len(rows):
             raise ValueError("retained package destinations collide")
         if not {"FRAMEWORK_ENGINE", "METHODOLOGY", "SKILL"} <= {row.resource for row in rows}:
@@ -127,7 +157,7 @@ def _prove_predecessor(root: Path, candidate: ValidatedCandidate, destination: P
             raise ValueError("retained executing package lacks required Skill files")
         if rows != sorted(rows, key=lambda row: (row.destination_path, row.source_path, row.sha256)):
             raise ValueError("retained package rows are not ordered")
-        _verify_release(retained, _render_manifest(identity, rows), rows)
+        _verify_release(retained, text if bootstrap else _render_manifest(identity, rows), rows)
         source_rows = [row for row in rows if row.destination_path.startswith("METHODOLOGY/sources/")]
         if not source_rows:
             raise ValueError("retained package lacks Methodology sources")
@@ -135,12 +165,10 @@ def _prove_predecessor(root: Path, candidate: ValidatedCandidate, destination: P
             suffix = row.destination_path.removeprefix("METHODOLOGY/sources/")
             if row.resource != "METHODOLOGY" or row.source_path != f"{CANONICAL_SOURCE_RELATIVE}/{suffix}":
                 raise ValueError("retained source row does not bind canonical Methodology")
-        predecessor = _snapshot(retained / "METHODOLOGY/sources")
-    except (OSError, UnicodeDecodeError, ValueError, KeyError, TypeError, ReleasePackagingError) as error:
+        predecessor = _persistent_file_snapshot(root, retained / "METHODOLOGY/sources")
+    except (BootstrapImageError, OSError, UnicodeDecodeError, ValueError, KeyError, TypeError, ReleasePackagingError) as error:
         raise ReleaseDeliveryError("release-copy-ownership-unproven", "cannot prove complete retained executing-N ownership") from error
-    actual_files = {path: record for path, record in _snapshot(destination).items() if not record[0]}
-    predecessor_files = {path: record for path, record in predecessor.items() if not record[0]}
-    if actual_files != predecessor_files:
+    if _persistent_file_snapshot(root, destination) != predecessor:
         raise ReleaseDeliveryError("release-copy-predecessor-mismatch", "existing delivery is partial, changed, or contains unowned files")
     # Empty directories have no package byte rows. Retain the whole old tree,
     # including these directories, rather than deleting an unproven carrier.

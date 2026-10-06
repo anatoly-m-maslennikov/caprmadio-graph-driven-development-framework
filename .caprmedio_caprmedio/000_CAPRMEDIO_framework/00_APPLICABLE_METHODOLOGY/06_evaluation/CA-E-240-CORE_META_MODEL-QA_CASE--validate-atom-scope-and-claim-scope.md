@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-240-CORE_META_MODEL-QA_CASE--validate-atom-scope-and-claim-scope.md
+  source_atom_id: CA-E-240
+  source_atom_revision: 30
+  source_sha256: 861e6591dc33e2ab0a687609748251cd15767fc853defa0fce98fe4e78235498
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

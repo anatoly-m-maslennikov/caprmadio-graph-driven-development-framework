@@ -20,6 +20,10 @@ subjects:
 relations: {"relates_to":["CA-E-520"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-496-CORE_META_MODEL--store-one-review-report-per-source-atom.md
+  source_atom_id: CA-D-496
+  source_atom_revision: 7
+  source_sha256: 29708a515544e1acb402420264e5160c722dc386e435d84f4a821843b7d587ae
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

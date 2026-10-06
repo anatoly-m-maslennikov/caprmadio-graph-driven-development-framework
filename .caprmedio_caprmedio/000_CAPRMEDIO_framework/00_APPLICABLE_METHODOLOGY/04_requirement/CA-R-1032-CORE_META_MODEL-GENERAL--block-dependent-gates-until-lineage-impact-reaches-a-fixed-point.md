@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1032-CORE_META_MODEL-GENERAL--block-dependent-gates-until-lineage-impact-reaches-a-fixed-point.md
+  source_atom_id: CA-R-1032
+  source_atom_revision: 13
+  source_sha256: 8742999580bb9848be893a931be36c86ee72676567989fba1c9630dee4a8211f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

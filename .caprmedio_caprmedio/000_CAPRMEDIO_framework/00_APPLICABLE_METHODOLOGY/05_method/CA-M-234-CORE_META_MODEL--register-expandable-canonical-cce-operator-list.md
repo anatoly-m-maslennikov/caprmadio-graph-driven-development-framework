@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-234-CORE_META_MODEL--register-expandable-canonical-cce-operator-list.md
+  source_atom_id: CA-M-234
+  source_atom_revision: 12
+  source_sha256: 76e25a9c4bc88ecf5d9e44f7379ed4ba421e3248ae80583efef48ac2e43ad2c5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

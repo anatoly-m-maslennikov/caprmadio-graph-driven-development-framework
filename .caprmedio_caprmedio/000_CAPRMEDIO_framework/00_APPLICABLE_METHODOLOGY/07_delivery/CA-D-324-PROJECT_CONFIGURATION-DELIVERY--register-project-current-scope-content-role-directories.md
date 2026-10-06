@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-324-PROJECT_CONFIGURATION-DELIVERY--register-project-current-scope-content-role-directories.md
+  source_atom_id: CA-D-324
+  source_atom_revision: 12
+  source_sha256: 2c3ac3c7a0b8165c61bc24b51c27102ee68061fec1e26537118cddb5f1b0c97d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1429-CORE_META_MODEL-CORE--separate-settings-boundaries-from-field-specifications.md
+  source_atom_id: CA-R-1429
+  source_atom_revision: 10
+  source_sha256: ba0e34e5057a5acb5f3c1a875214a373b167a860ed3ac0b6d708a3c657fdd7ed
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

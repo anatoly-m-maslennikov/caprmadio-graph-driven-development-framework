@@ -24,6 +24,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1619-PROJECT_CONFIGURATION-REQUIREMENT--define-source-declared-relation-derivation.md
+  source_atom_id: CA-R-1619
+  source_atom_revision: 4
+  source_sha256: ffb1569bf13c6dd0f71ffe2242f2a939cfe7d26533a4d5630f51617bb00ee812
+  original_relations_sha256: 9498a3bf925a4c9ab02a1ce984d38e81a4cea3f350b87deeacc61ca5f1581a30
 ---
 # Summary
 

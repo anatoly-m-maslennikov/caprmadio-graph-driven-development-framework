@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1503-CORE_META_MODEL-CORE-REQUIREMENT--keep-evaluation-atoms-mechanism-neutral.md
+  source_atom_id: CA-R-1503
+  source_atom_revision: 4
+  source_sha256: 43b778daccde29fa3f98dee0441bb99013cf976f85b3064b29e995583ec83df2
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1702-CORE_META_MODEL-CORE-REQUIREMENT--preserve-content-role-boundaries-through-caprmedio-loop.md
+  source_atom_id: CA-R-1702
+  source_atom_revision: 26
+  source_sha256: 54db65547f750b8b31f107016f2eefa10ea27d44e36bd95e9abe0a4fe9bf3c96
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

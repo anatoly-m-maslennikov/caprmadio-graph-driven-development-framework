@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1742-CORE_META_MODEL-GENERAL-REQUIREMENT--realize-recurrence-evaluation-through-implementation.md
+  source_atom_id: CA-R-1742
+  source_atom_revision: 15
+  source_sha256: a7837eafe661acce1a99770598d3ac4c9b12979e796c8ed0099230ac4724c552
+  original_relations_sha256: 7066acfa017a3811c0ac4f91520279247a51ed6be6d38bc3114f958d8d331931
 ---
 # Summary
 

@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-964-CORE_META_MODEL-CORE-REQUIREMENT--define-unit-as-scope-unit-shorthand.md
+  source_atom_id: CA-R-964
+  source_atom_revision: 14
+  source_sha256: e6e4df66b66aea2a5c71699793ba3b517fa5e974b9910184b29d2049982e11dc
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

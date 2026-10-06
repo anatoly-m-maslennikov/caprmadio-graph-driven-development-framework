@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-794-CORE_META_MODEL-GENERAL-REQUIREMENT--classify-evaluation-policy-and-concrete-cases.md
+  source_atom_id: CA-R-794
+  source_atom_revision: 21
+  source_sha256: a78ad09925b32e53216f765f65a3be93d2cfec4c57ce776d8b77594b98cd1bce
+  original_relations_sha256: c11a8aad3724c0967aba50ccffd9a3172479e1e3a37de81a3ee57bdbb106fbb5
 ---
 # Summary
 

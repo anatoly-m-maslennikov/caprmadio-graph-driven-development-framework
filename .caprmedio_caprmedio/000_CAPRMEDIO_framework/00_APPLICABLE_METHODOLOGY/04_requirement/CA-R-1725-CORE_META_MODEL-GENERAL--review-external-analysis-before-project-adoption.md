@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1725-CORE_META_MODEL-GENERAL--review-external-analysis-before-project-adoption.md
+  source_atom_id: CA-R-1725
+  source_atom_revision: 16
+  source_sha256: b08bd6d3a0943a477c88845212db648b45468b0126908450b51f790557cfafbd
+  original_relations_sha256: 3e6175a8a6f6a019476716f2c8ff6bdaecb4c97955e84b5475f3d9b2144458ff
 ---
 # Summary
 

@@ -27,6 +27,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-315-CORE_META_MODEL-CORE--validate-claims-against-effective-cce-role-profiles.md
+  source_atom_id: CA-M-315
+  source_atom_revision: 4
+  source_sha256: e086c85c7b1a25ed6ebe7930e854b1f57fbeec09814e7f372789bb0fe51f8c90
+  original_relations_sha256: a3f4be1eee60e8cccf53ca13d0dff034d656869874fe1fcbe26266fd5711294e
 ---
 # Summary
 

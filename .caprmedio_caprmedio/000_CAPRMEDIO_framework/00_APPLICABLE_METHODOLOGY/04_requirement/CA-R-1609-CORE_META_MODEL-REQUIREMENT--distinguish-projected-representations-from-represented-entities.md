@@ -23,6 +23,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1609-CORE_META_MODEL-REQUIREMENT--distinguish-projected-representations-from-represented-entities.md
+  source_atom_id: CA-R-1609
+  source_atom_revision: 4
+  source_sha256: 70e09266435f444236b0bb9769bd0103dd9a046b431902290a2a877dc6c173e8
+  original_relations_sha256: 9530390b47050763ac35ad602a83916c10c7411ed485e78f67196c63606fcd2a
 ---
 # Summary
 

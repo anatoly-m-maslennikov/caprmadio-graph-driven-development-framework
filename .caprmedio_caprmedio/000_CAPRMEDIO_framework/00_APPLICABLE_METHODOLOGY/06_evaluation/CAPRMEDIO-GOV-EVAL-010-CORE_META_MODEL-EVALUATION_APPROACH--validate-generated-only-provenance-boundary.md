@@ -22,6 +22,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CAPRMEDIO-GOV-EVAL-010-CORE_META_MODEL-EVALUATION_APPROACH--validate-generated-only-provenance-boundary.md
+  source_atom_id: CAPRMEDIO-GOV-EVAL-010
+  source_atom_revision: 17
+  source_sha256: 994b91d17ef0089ff49d3bc8d07776830d0ab3803ebcef5fbbbdfee9343219b6
+  original_relations_sha256: 5c9a4949804f5766c1d28c00f18c57177f447286d4f477f6d0d8cad8ab4acfb7
 ---
 # Summary
 

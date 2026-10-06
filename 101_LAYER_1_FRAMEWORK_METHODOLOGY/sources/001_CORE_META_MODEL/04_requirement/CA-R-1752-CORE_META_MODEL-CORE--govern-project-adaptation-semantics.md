@@ -1,0 +1,31 @@
+---
+subjects:
+  governs: "extension-model"
+  depends_on: []
+version: 19
+updated_at: "2026-10-03 02:55:28 +0400"
+relations:
+  child_of:
+    - CAPRMEDIO-REQU-686-CORE-REQUIREMENT--separate-core-extension-and-project-configuration-authority
+atom_id: "CA-R-1752"
+content_role: "Requirement"
+current_scope_unit: "CORE_META_MODEL"
+claim_target_scope_unit: "CORE_META_MODEL"
+local_tier: "Core"
+status: "Active"
+author: "Anatoly Maslennikov"
+global_tier: 9
+---
+# Summary
+
+Govern Project Adaptation semantics
+
+## Scope
+
+Project Adaptations that adapt Canonical Framework or Extension authority.
+
+## Claim
+
+a Project Adaptation is project-owned PRMEDO authority that adds, specializes, narrows, **or** prohibits capabilities for one Project **without** modifying the Canonical Framework **or** Extension authority it adapts.
+
+## Details

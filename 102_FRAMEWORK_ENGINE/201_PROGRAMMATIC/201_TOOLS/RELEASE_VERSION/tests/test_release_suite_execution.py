@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import sys
 import tempfile
@@ -15,11 +16,15 @@ if str(RELEASE_ROOT) not in sys.path:
     sys.path.insert(0, str(RELEASE_ROOT))
 
 from release_image import DockerCommandResult
+from release_contract import canonical_json
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
     PROJECT_ROOT_ENVIRONMENT_VARIABLE,
     REPORT_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_ENVIRONMENT_VARIABLE,
+    SOURCE_BINDINGS_RELATIVE,
+    SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE,
 )
 from release_suite_execution import (
     InstalledNSuiteDockerExecutor,
@@ -31,6 +36,15 @@ IMAGE = "sha256:" + "a" * 64
 SHA = "b" * 64
 CONTEXT = "c" * 64
 CONTAINER = "d" * 64
+
+
+class GovernedSuiteBindingsTests(unittest.TestCase):
+    def test_actual_module_rules_carrier_is_exact_canonical_json(self) -> None:
+        # Read the governed carrier itself, not the canonical fixture below.
+        # A single trailing newline is valid JSON but is not an admitted
+        # sealed module-rules byte sequence.
+        payload = (RELEASE_ROOT / "release_suite_bindings.json").read_bytes()
+        self.assertEqual(payload, canonical_json(json.loads(payload)))
 
 
 class FakeDocker:
@@ -74,6 +88,33 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.workspace.mkdir(parents=True)
         self.output.mkdir()
         (self.workspace / "tests").mkdir()
+        rules_relative = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_bindings.json"
+        test_relative = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_fixture.py"
+        rules = canonical_json({"module_probes": [], "schema_version": 1})
+        test_source = b"import unittest\n"
+        for relative, payload in ((rules_relative, rules), (test_relative, test_source)):
+            path = self.workspace / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(payload)
+        rule_sha256 = hashlib.sha256(rules).hexdigest()
+        test_sha256 = hashlib.sha256(test_source).hexdigest()
+        bindings = canonical_json({
+            "schema_version": 1,
+            "candidate_snapshot_manifest_sha256": SHA,
+            "mapping_rules": {"source_path": rules_relative, "sha256": rule_sha256},
+            "package_rows": [
+                {"resource": "FRAMEWORK_ENGINE", "source_path": rules_relative,
+                 "destination_path": "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_bindings.json",
+                 "sha256": rule_sha256, "mode": 0o644},
+                {"resource": "FRAMEWORK_ENGINE", "source_path": test_relative,
+                 "destination_path": "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_fixture.py",
+                 "sha256": test_sha256, "mode": 0o644},
+            ],
+        })
+        bindings_path = self.workspace / SOURCE_BINDINGS_RELATIVE
+        bindings_path.parent.mkdir(parents=True, exist_ok=True)
+        bindings_path.write_bytes(bindings)
+        self.bindings_sha256 = hashlib.sha256(bindings).hexdigest()
         selected_root = self.root / ".caprmedio_runtime/framework/releases/N"
         selected_root.mkdir(parents=True)
         (selected_root / "manifest.toml").write_text("schema_version = 1\n", encoding="utf-8")
@@ -116,6 +157,8 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
             REPORT_ENVIRONMENT_VARIABLE: "/output/coverage.xml",
             COMPILED_ROOT_ENVIRONMENT_VARIABLE: "compiled/candidate",
             CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE: SHA,
+            SOURCE_BINDINGS_ENVIRONMENT_VARIABLE: "/workspace/" + SOURCE_BINDINGS_RELATIVE,
+            SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE: self.bindings_sha256,
         }
 
     def test_exact_command_uses_only_workspace_output_and_fixed_sandbox_controls(self) -> None:
@@ -135,6 +178,8 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertFalse(any(item.startswith(f"type=bind,src={self.root},dst=") for item in argv))
         self.assertNotIn("/var/run/docker.sock", argv)
         self.assertIn("PATH=/opt/caprmedio/bin:/usr/bin", argv)
+        self.assertIn(f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}=/workspace/{SOURCE_BINDINGS_RELATIVE}", argv)
+        self.assertIn(f"{SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE}={self.bindings_sha256}", argv)
         self.assertIn("--cidfile", argv)
         self.assertIn("org.caprmedio.release-suite=" + SHA, argv)
         self.assertEqual(argv[argv.index("--entrypoint") + 1], "python")

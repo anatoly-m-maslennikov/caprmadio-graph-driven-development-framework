@@ -25,6 +25,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-463-CORE_META_MODEL-QA_CASE--validate-summary-identity-preservation.md
+  source_atom_id: CA-E-463
+  source_atom_revision: 6
+  source_sha256: bdd5debf5618eaf409623f1273f0163f326098011d22c5a475b721c3a2c7e7df
+  original_relations_sha256: cb1c9046795a805c03cc62c2e84c370df72f8b2950359a6d813833a2908bbf03
 ---
 # Summary
 

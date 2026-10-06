@@ -29,6 +29,10 @@ subjects:
 relations: {"evaluation_for":["CA-D-269","CA-D-478","CA-D-479","CA-D-495","CA-M-113","CA-M-125","CA-R-1269","CA-R-1270","CA-R-1271","CA-R-1273","CA-R-1465","CA-R-1624","CA-R-1799"]}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-520-CORE_META_MODEL-EVALUATION_APPROACH--check-rmed-atom-coherence.md
+  source_atom_id: CA-E-520
+  source_atom_revision: 5
+  source_sha256: 9e3cdee5027c3e24cb91e1ce9fe009dc281b499a49a45aaacea38f3ff59fcada
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

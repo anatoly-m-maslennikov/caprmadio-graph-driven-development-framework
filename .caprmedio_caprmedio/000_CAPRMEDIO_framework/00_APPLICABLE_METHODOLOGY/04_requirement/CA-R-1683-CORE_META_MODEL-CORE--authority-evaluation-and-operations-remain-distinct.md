@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1683-CORE_META_MODEL-CORE--authority-evaluation-and-operations-remain-distinct.md
+  source_atom_id: CA-R-1683
+  source_atom_revision: 24
+  source_sha256: fd3e0cd68962ecb4e461e4bb35ff28054bc7cd5af28395bd6ef3ad6760453a9b
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

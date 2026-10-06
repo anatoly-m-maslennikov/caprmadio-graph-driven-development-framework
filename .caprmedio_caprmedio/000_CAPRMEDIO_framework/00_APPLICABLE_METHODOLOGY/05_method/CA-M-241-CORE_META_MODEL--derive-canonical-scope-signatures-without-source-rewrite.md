@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-241-CORE_META_MODEL--derive-canonical-scope-signatures-without-source-rewrite.md
+  source_atom_id: CA-M-241
+  source_atom_revision: 9
+  source_sha256: 97f0b470a85ecdd81c279fea0008177f6fefabb5669030c94ca6e65ee15f2efc
+  original_relations_sha256: 6fc59a347195a35964bdd70772c15ed7cb8cb9aec1c3a511387f263fc6569134
 ---
 # Summary
 

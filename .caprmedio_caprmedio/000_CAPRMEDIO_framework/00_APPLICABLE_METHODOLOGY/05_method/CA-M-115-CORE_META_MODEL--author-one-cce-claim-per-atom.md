@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-115-CORE_META_MODEL--author-one-cce-claim-per-atom.md
+  source_atom_id: CA-M-115
+  source_atom_revision: 23
+  source_sha256: caf1459a6cce687b0e981e258783ed8efa417f289b6034623ddec7c6f6645dcc
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

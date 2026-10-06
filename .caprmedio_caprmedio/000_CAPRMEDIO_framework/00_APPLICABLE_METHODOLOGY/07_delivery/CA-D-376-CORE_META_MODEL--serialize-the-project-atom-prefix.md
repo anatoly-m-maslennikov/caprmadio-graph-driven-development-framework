@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-376-CORE_META_MODEL--serialize-the-project-atom-prefix.md
+  source_atom_id: CA-D-376
+  source_atom_revision: 8
+  source_sha256: a8a1e395a50127fcc7ab120f2d4ca0d33c1176f35793cbaf218b6643bfdba46b
+  original_relations_sha256: 60d285f0b5eadc5cfe0417918004395017eb1104d02fc3179cd56cf1f1493577
 ---
 # Summary
 

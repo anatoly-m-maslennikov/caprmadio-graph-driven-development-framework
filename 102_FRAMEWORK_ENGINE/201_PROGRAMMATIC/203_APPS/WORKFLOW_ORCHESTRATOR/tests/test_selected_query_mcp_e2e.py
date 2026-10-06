@@ -176,8 +176,8 @@ class QueryProjectionBoundarySourceTests(unittest.IsolatedAsyncioTestCase):
 
 
 @unittest.skipUnless(
-    os.environ.get("CAPRMEDIO_DOCKER_QUERY_E2E") == "1",
-    "requires host declared dependencies and CAPRMEDIO_DOCKER_QUERY_E2E=1; unrun image evidence",
+    os.environ.get("CAPRMEDIO_DOCKER_QUERY_E2E") == "1" and strict.E2E_CONTEXT is not None,
+    "requires CAPRMEDIO_DOCKER_QUERY_E2E=1 and sealed Release E2E context",
 )
 class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
     """Happy queries and deliberate refusals have separate test methods."""
@@ -188,16 +188,16 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.runtime: strict.Runtime | None = None
         self.lease: FixtureLease | None = None
         self.launched = False
-        self.query_image = _required_query_image(os.environ)
+        self.context = strict.E2E_CONTEXT
+        assert self.context is not None
+        self.query_image = self.context.candidate_image_digest
         observed = await asyncio.to_thread(
-            subprocess.run, ["docker", "image", "inspect", "caprmedio-runtime:local", "--format", "{{.Id}}"],
+            subprocess.run, ["docker", "image", "inspect", "--format", "{{.Id}}", self.query_image],
             capture_output=True, text=True, timeout=20, check=False,
         )
         self.assertEqual(0, observed.returncode, "the admitted image must already exist")
         self.assertEqual(self.query_image, observed.stdout.strip(),
                          "query proof must bind the requested exact fresh image")
-        self._previous_runtime_image = os.environ.get("CAPRMEDIO_IMAGE", _MISSING)
-        os.environ["CAPRMEDIO_IMAGE"] = self.query_image
 
     async def asyncTearDown(self) -> None:
         try:
@@ -206,20 +206,17 @@ class SelectedQueryMcpEndToEnd(unittest.IsolatedAsyncioTestCase):
             if self.lease is not None:
                 self.lease.cleanup()
         finally:
-            if self._previous_runtime_image is _MISSING:
-                os.environ.pop("CAPRMEDIO_IMAGE", None)
-            else:
-                os.environ["CAPRMEDIO_IMAGE"] = self._previous_runtime_image
+            pass
 
     async def _start_fixture(self, case_id: str, route: str) -> QueryProject:
-        parent = strict.ROOT / ".caprmedio_tmp/tests/selected-query-mcp-e2e"
+        parent = self.context.scratch_root / "selected-query-mcp-e2e"
         parent.mkdir(parents=True, exist_ok=True)
         root = Path(tempfile.mkdtemp(dir=parent))
         self.lease = FixtureLease(root)
         self.fixture = QueryProject(strict.ROOT, root, GoldenCase(case_id, route),
                                     execution_project_root="/project")
         self.fixture.prepare()
-        self.runtime = strict.Runtime(root, mock=True)
+        self.runtime = strict.Runtime(root, mock=True, image=self.query_image)
         self.assertEqual(self.query_image, self.runtime.environment()["CAPRMEDIO_IMAGE"],
                          "query Runtime must receive the requested immutable image identity")
         self.launched = True

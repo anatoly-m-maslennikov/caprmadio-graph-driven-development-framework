@@ -28,6 +28,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-448-CORE_META_MODEL-EVALUATION_APPROACH--validate-accidental-atom-id-reuse-repair.md
+  source_atom_id: CA-E-448
+  source_atom_revision: 9
+  source_sha256: 1504f5ef8fda49372abf4f637712bc84e8a77dfb93cca49089ffcddb46412ace
+  original_relations_sha256: bac80633f7ceae4c33d069bb745b62b44460833c47bbcf9f7f698fad1015abce
 ---
 # Summary
 

@@ -19,7 +19,7 @@ subjects:
     - "Operator"
     - "Spec"
 version: 3
-updated_at: "2026-09-24 01:39:33 +0000"
+updated_at: "2026-10-04 16:53:23 +0000"
 relations:
   relates_to:
     - CA-O-020
@@ -30,12 +30,16 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-089-CORE_META_MODEL-ACTION--diagnose-implementation-test-failures.md
+  source_atom_id: CA-O-089
+  source_atom_revision: 3
+  source_sha256: 793f388c9972f222cb468c7fc01811391ba9e2c36003b59c6450e03c6d067486
+  original_relations_sha256: 2c7563002a8140c179818cba02a5dbc75b861e40205e525f40337e0a0ef96f18
 ---
 # Summary
 
 Diagnose implementation test failures
 
-## Claim
+## Operation
 
 Implementation Failure Diagnosis **means** the Agentic Action that explains failed implementation checks **before** choosing a recovery route.
 
@@ -45,3 +49,5 @@ Implementation Failure Diagnosis **means** the Agentic Action that explains fail
 - return `implementation_defect` for incorrect production code **or** `test_implementation_defect` for incorrect executable test code, with evidence, affected work, **and** proposed correction. **every** admitted repair still passes through retry control.
 - return `authority_change_required` for incorrect, missing, **or** conflicting governing expected behavior; return `environment_blocker` for unavailable execution prerequisites outside the admitted correction; return `unresolved` **when** evidence **or** confidence is insufficient.
 - do **not** modify code, governing Atoms, Status, **or** test expectations. report failures honestly; do **not** relabel an unexplained failure as expected merely **to** proceed.
+
+## Details

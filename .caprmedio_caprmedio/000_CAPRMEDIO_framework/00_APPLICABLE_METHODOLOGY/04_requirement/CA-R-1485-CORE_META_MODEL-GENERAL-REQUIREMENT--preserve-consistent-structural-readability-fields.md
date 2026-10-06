@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1485-CORE_META_MODEL-GENERAL-REQUIREMENT--preserve-consistent-structural-readability-fields.md
+  source_atom_id: CA-R-1485
+  source_atom_revision: 5
+  source_sha256: e58b909c4ef55a69b3426e23e936c0fd4bc2d63f17714e206581e8a3e22b1e4c
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

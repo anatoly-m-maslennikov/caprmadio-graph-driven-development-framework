@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-924-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-relational-atom-classifications.md
+  source_atom_id: CA-R-924
+  source_atom_revision: 20
+  source_sha256: aa5a683e5c2b49cd8e56ef1cde4c6561c853e7f8a617c9a624709ee227400b11
+  original_relations_sha256: 8c48d07682f7742193d2b400e5432116c42c0465013e1dadd3b1b1dfc4e3d146
 ---
 # Summary
 Register Core Relational Atom Classifications

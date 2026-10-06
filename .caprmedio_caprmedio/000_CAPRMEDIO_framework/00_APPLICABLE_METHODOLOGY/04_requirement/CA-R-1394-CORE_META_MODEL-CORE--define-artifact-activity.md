@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1394-CORE_META_MODEL-CORE--define-artifact-activity.md
+  source_atom_id: CA-R-1394
+  source_atom_revision: 10
+  source_sha256: 528cdcbdcdfbb450b6b263b2c7cf3f7debfd56d225a553cb9553223c7569253b
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Define Artifact Activity

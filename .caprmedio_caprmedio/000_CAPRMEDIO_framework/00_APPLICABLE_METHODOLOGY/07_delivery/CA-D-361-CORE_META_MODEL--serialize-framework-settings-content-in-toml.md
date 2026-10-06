@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-361-CORE_META_MODEL--serialize-framework-settings-content-in-toml.md
+  source_atom_id: CA-D-361
+  source_atom_revision: 10
+  source_sha256: 08f48988f709e47417ae7d3c01c33c4bd9cfc64066e7d6996133a465afc51d68
+  original_relations_sha256: c721615c7983c0a76470a5c52c89f21a22517496a3a90da9fb26001e4e66f71f
 ---
 # Summary
 

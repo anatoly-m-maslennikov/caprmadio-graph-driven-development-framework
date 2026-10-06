@@ -25,11 +25,13 @@ from framework_initialization import (  # noqa: E402
     initialize_framework_runtime,
     plan_initial_framework_installation,
 )
-from release_image import DockerCommandResult  # noqa: E402
+from release_image import DockerCommandResult, DockerSubprocessExecutor  # noqa: E402
+from bootstrap_image import BootstrapImageError, produce_initial_framework_image, read_retained_initial_framework_image  # noqa: E402
 from release_contract import ReleaseContractError  # noqa: E402
 from release_promotion import _prove_prior_skill  # noqa: E402
 from release_suite import _active_n_state, _bootstrap_source_context_is_valid  # noqa: E402
 from release_suite_execution import _inspect_bound_n_image, _selector_binding  # noqa: E402
+from framework_compiler_currentness_fixture import ConfiguredCompilerFixture  # noqa: E402
 
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -52,19 +54,43 @@ class _ImageFixture:
             PACKAGE_IMAGE_LABEL: manifest_sha256,
             SOURCE_CONTEXT_IMAGE_LABEL: source_context_sha256,
         }
+        self.environment = [
+            "PATH=/usr/bin:/bin",
+            "PYTHON_VERSION=3.14.7",
+            "PYTHON_SHA256=" + "b" * 64,
+            "UV_PROJECT_ENVIRONMENT=/opt/venv",
+            "UV_CACHE_DIR=/tmp/uv-cache",
+            "PYTHONDONTWRITEBYTECODE=1",
+        ]
 
-    def run(self, _argv, *, cwd, timeout_seconds):
+    def run(self, argv, *, cwd, timeout_seconds):
         del cwd, timeout_seconds
+        if argv[1] == "build":
+            self.labels = {}
+            for index, value in enumerate(argv):
+                if value == "--label":
+                    key, label = argv[index + 1].split("=", 1)
+                    self.labels[key] = label
+            Path(argv[argv.index("--iidfile") + 1]).write_text(IMAGE_ID + "\n", encoding="utf-8")
+            self.canary = json.loads((Path(argv[-1]) / "bootstrap-canary.json").read_bytes())
+            return DockerCommandResult(0, b"build\n", b"")
+        if argv[1] == "run":
+            return DockerCommandResult(0, json.dumps({
+                "schema": "caprmedio.bootstrap_image_canary.v1",
+                "manifest_sha256": self.canary["manifest_sha256"],
+                "source_context_sha256": self.canary["source_context_sha256"],
+                "verified_files": len(self.canary["package_rows"]),
+                "mcp_tools": ["get_mcp_reload_status"],
+            }).encode(), b"")
         return DockerCommandResult(0, json.dumps([{"Id": IMAGE_ID, "Config": {
-            "Labels": self.labels, "Env": ["PATH=/usr/bin:/bin"],
+            "Labels": self.labels, "Env": self.environment,
         }}]).encode(), b"")
 
 
 class BootstrapReleaseCompatibilityTests(unittest.TestCase):
     def setUp(self) -> None:
-        parent = RELEASE_ROOT.parents[3] / ".caprmedio_tmp" / "bootstrap-release-compatibility"
-        parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="bootstrap-n-", dir=parent))
+        self.compiler_fixture = ConfiguredCompilerFixture.create()
+        self.root = self.compiler_fixture.root
         for relative, payload in {
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py": b"tool\n",
             "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py": b"app\n",
@@ -72,10 +98,11 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
             "102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md": b"prompt\n",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md": b"# ca\n",
             "102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml": b"name: ca\n",
-            (".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-             "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/source.md"): b"source\n",
-            (".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-             "04_requirement/compiled.md"): b"compiled\n",
+            "pyproject.toml": b"[project]\nname = 'bootstrap-fixture'\nversion = '0'\n",
+            "uv.lock": b"version = 1\n",
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile": (
+                RELEASE_ROOT.parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile"
+            ).read_bytes(),
         }.items():
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -84,6 +111,7 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
     def _initialize(self):
         plan = plan_initial_framework_installation(self.root)
         image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        executor = DockerSubprocessExecutor()
         real_replace = os.replace
 
         def retained_fixture_replace(source, target):
@@ -92,19 +120,28 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
                 return None
             return real_replace(source, target)
 
-        with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
-            result = initialize_framework_runtime(
-                self.root,
-                journal=_Journal(),
-                requested_run_id="bootstrap-action",
-                image_digest=IMAGE_ID,
-                image_executor=image,
-            )
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=image.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+            self.assertEqual("docker-subprocess", evidence.execution_kind)
+            with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
+                result = initialize_framework_runtime(
+                    self.root, journal=_Journal(), requested_run_id="bootstrap-action",
+                    image_digest=IMAGE_ID, image_executor=executor,
+                )
         self.assertEqual(result["state"], "installed")
         return plan, result
 
     def _selector_bytes(self, values: dict) -> bytes:
         return "".join(f'{key} = {json.dumps(value)}\n' for key, value in values.items()).encode("utf-8")
+
+    def _stage_retained_package(self, plan) -> None:
+        package = self.root / ".caprmedio_runtime/framework/releases" / plan.release
+        for row in plan.rows:
+            target = package / row.destination_path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((self.root / row.source_path).read_bytes())
+            target.chmod(row.mode)
+        (package / "manifest.toml").write_bytes(plan.manifest_bytes)
 
     def _assert_rejected_source_context(self, plan, selector: bytes, replacement: str) -> None:
         original = self.root / ".caprmedio_runtime/framework/releases" / plan.release / "manifest.toml"
@@ -178,6 +215,66 @@ class BootstrapReleaseCompatibilityTests(unittest.TestCase):
         self.assertEqual(verified.executing_release, plan.release)
         self.assertEqual(verified.source_context_sha256, plan.source_context_sha256)
         self.assertEqual(verified.image_path, "/usr/bin:/bin")
+
+        image.labels[PACKAGE_IMAGE_LABEL] = "0" * 64
+        with self.assertRaises(ReleaseContractError) as raised:
+            _inspect_bound_n_image(image, self.root, selected)
+        self.assertEqual(raised.exception.code, "release-suite-executor-n-unproven")
+
+    def test_retained_bootstrap_reader_uses_old_package_not_later_source_and_refuses_package_mismatch(self) -> None:
+        plan, _installed = self._initialize()
+        image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        source = self.root / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py"
+        source.write_bytes(b"later N+1 source frontier\n")
+
+        evidence = read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+
+        self.assertEqual(evidence.manifest_sha256, plan.release)
+        self.assertEqual(evidence.source_context_sha256, plan.source_context_sha256)
+        selected = _selector_binding(self.root, SimpleNamespace(
+            authority=SimpleNamespace(executing_release=plan.release),
+            manifest=SimpleNamespace(candidate_release="N+1"),
+        ))
+        self.assertEqual(_inspect_bound_n_image(image, self.root, selected).image_path, "/usr/bin:/bin")
+
+        retained = self.root / ".caprmedio_runtime/framework/releases" / plan.release
+        package_file = retained / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py"
+        package_file.write_bytes(b"forged retained package bytes\n")
+        with self.assertRaises(BootstrapImageError) as raised:
+            read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+        self.assertEqual(raised.exception.code, "bootstrap-image-package-invalid")
+
+    def test_retained_bootstrap_reader_refuses_a_valid_shaped_test_double_proof(self) -> None:
+        plan = plan_initial_framework_installation(self.root)
+        image = _ImageFixture(plan.manifest_sha256, plan.source_context_sha256)
+        evidence = produce_initial_framework_image(plan, executor=image)
+        self.assertEqual(evidence.outcome, "verified")
+        self.assertEqual(evidence.execution_kind, "test-double")
+        self._stage_retained_package(plan)
+        selector = {
+            "schema_version": 1,
+            "manifest_sha256": plan.release,
+            "release": plan.release,
+            "selected_release_root": f".caprmedio_runtime/framework/releases/{plan.release}",
+            "framework_engine_root": f".caprmedio_runtime/framework/releases/{plan.release}/FRAMEWORK_ENGINE",
+            "methodology_root": f".caprmedio_runtime/framework/releases/{plan.release}/METHODOLOGY",
+            "image_digest": IMAGE_ID,
+        }
+        current = self.root / ".caprmedio_runtime/framework/current.toml"
+        current.parent.mkdir(parents=True, exist_ok=True)
+        current.write_bytes(self._selector_bytes(selector))
+
+        with self.assertRaises(BootstrapImageError) as reader:
+            read_retained_initial_framework_image(self.root, plan.release, IMAGE_ID)
+        self.assertEqual(reader.exception.code, "bootstrap-image-proof-invalid")
+
+        selected = _selector_binding(self.root, SimpleNamespace(
+            authority=SimpleNamespace(executing_release=plan.release),
+            manifest=SimpleNamespace(candidate_release="N+1"),
+        ))
+        with self.assertRaises(ReleaseContractError) as suite:
+            _inspect_bound_n_image(image, self.root, selected)
+        self.assertEqual(suite.exception.code, "release-suite-executor-n-unproven")
 
 
 if __name__ == "__main__":

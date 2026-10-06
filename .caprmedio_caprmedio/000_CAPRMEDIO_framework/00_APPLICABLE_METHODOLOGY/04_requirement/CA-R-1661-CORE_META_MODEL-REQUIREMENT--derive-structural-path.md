@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1661-CORE_META_MODEL-REQUIREMENT--derive-structural-path.md
+  source_atom_id: CA-R-1661
+  source_atom_revision: 17
+  source_sha256: 250e0b3b4d5d2bead9ad7525244f626eb085336af369af7087e5ff7278ca05f6
+  original_relations_sha256: 0c8204693b78ebbad9005b3004a55f0fd762c80d2a65cfd95b29e063a4ffa425
 ---
 # Summary
 

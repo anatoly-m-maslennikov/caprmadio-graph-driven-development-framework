@@ -41,6 +41,7 @@ from release_handoff import (
     SealedCandidateCompilation,
     SealedSourceCopy,
 )
+from release_e2e_gate import CandidateE2EGateEvidence, HarnessReceipt
 from release_image import ImageBuildEvidence, ImageRetirementEvidence, ImageVerificationEvidence
 from release_promotion import PromotionEvidence
 from release_suite import SuiteGateEvidence
@@ -57,25 +58,50 @@ _TAGGED_TYPES = {
     "package": dict,
     "build": ImageBuildEvidence,
     "verification": ImageVerificationEvidence,
+    "e2e": CandidateE2EGateEvidence,
     "promotion": PromotionEvidence,
     "retirement": ImageRetirementEvidence,
 }
-_STATE_NAMES = tuple(_TAGGED_TYPES)
+_STATE_NAMES = (
+    "candidate", "preflight", "source_copy", "compilation", "suite", "package", "build",
+    "verification", "e2e", "full_gate", "promotion", "retirement",
+)
 _PHASE_STATE = {
     "freeze": "candidate",
     "validate": "candidate",
     "deliver_sources": "source_copy",
     "compile": "compilation",
-    "run_tests": "suite",
+    "closed_unit_gate": "suite",
     "stage_candidate": "package",
-    "build_image": "build",
-    "prove_candidate": "verification",
+    "candidate_image_build": "build",
+    "candidate_image_canary": "verification",
+    "host_candidate_e2e": "e2e",
+    "aggregate_full_gate": "full_gate",
     "promote": "promotion",
     "retire": "retirement",
 }
 _SHA256_HEX = frozenset("0123456789abcdef")
 _PENDING_EVENT_OUTCOMES = frozenset({"completed", "no_op", "failed", "cancelled", "partial", "interrupted_pending"})
 _T = TypeVar("_T")
+
+
+def _full_gate_type() -> type[Any]:
+    """Resolve the independently owned aggregate model only when needed.
+
+    Earlier Release phases do not need the aggregate implementation.  The
+    codec nevertheless refuses any full-gate state unless its producer's
+    concrete model is present and exact.
+    """
+
+    from release_full_gate import FullGateEvidence
+
+    return FullGateEvidence
+
+
+def _tagged_type(name: str) -> type[Any]:
+    if name == "full_gate":
+        return _full_gate_type()
+    return _TAGGED_TYPES[name]
 
 
 def _error(code: str, message: str) -> ReleaseContractError:
@@ -298,7 +324,7 @@ def _load_preflight(value: Any, candidate: ValidatedCandidate) -> ReleaseCompila
 
 
 def _tag(name: str, value: Any) -> dict[str, Any]:
-    if name not in _TAGGED_TYPES:
+    if name not in _STATE_NAMES:
         raise _error("release-checkpoint-invalid", "checkpoint has an unknown state tag")
     if name == "candidate":
         payload = _candidate_value(value)
@@ -317,7 +343,7 @@ def _tag(name: str, value: Any) -> dict[str, Any]:
     elif name == "package":
         payload = _package_value(value)
     else:
-        payload = _dump_dataclass(value, _TAGGED_TYPES[name], name)
+        payload = _dump_dataclass(value, _tagged_type(name), name)
     return {"tag": name, "value": payload}
 
 
@@ -337,10 +363,30 @@ def _package_value(value: Any) -> dict[str, Any]:
     }
 
 
+def _load_e2e(value: Any) -> CandidateE2EGateEvidence:
+    """Restore nested host-E2E receipts as their closed dataclass types."""
+
+    required = {item.name for item in fields(CandidateE2EGateEvidence)}
+    payload = _mapping(value, required, "e2e")
+    rows = payload["harness_receipts"]
+    if not isinstance(rows, list):
+        raise _error("release-checkpoint-invalid", "e2e.harness_receipts must be a list")
+    restored_rows = tuple(
+        _load_dataclass(row, HarnessReceipt, "e2e.harness_receipt", tuple_fields=frozenset({"argv"}))
+        for row in rows
+    )
+    restored = dict(payload)
+    restored["harness_receipts"] = restored_rows
+    try:
+        return CandidateE2EGateEvidence(**restored)
+    except (TypeError, ValueError) as error:
+        raise _error("release-checkpoint-invalid", "e2e cannot construct typed state") from error
+
+
 def _load_tag(value: Any, candidate: ValidatedCandidate | None, root: str) -> tuple[str, Any]:
     tagged = _mapping(value, {"tag", "value"}, "tagged state")
     name = _text(tagged["tag"], "tagged state.tag")
-    if name not in _TAGGED_TYPES:
+    if name not in _STATE_NAMES:
         raise _error("release-checkpoint-invalid", "checkpoint names an unsupported typed state")
     if name == "candidate":
         return name, _load_candidate(tagged["value"], root)
@@ -369,12 +415,15 @@ def _load_tag(value: Any, candidate: ValidatedCandidate | None, root: str) -> tu
         if package["candidate_snapshot_manifest_sha256"] != candidate.manifest.sha256:
             raise _error("release-checkpoint-binding-mismatch", "package is not exactly candidate-bound")
         return name, package
-    cls = _TAGGED_TYPES[name]
+    cls = _tagged_type(name)
     tuples = {
         "suite": frozenset({"command", "coverage"}),
         "retirement": frozenset({"retaining_container_refs", "observed_rollback_refs", "required_rollback_refs"}),
     }.get(name, frozenset())
-    restored = _load_dataclass(tagged["value"], cls, name, tuple_fields=tuples)
+    if name == "e2e":
+        restored = _load_e2e(tagged["value"])
+    else:
+        restored = _load_dataclass(tagged["value"], cls, name, tuple_fields=tuples)
     if getattr(restored, "candidate_snapshot_manifest_sha256", None) != candidate.manifest.sha256:
         raise _error("release-checkpoint-binding-mismatch", f"{name} is not exactly candidate-bound")
     return name, restored
@@ -384,6 +433,12 @@ def _context_value(context: SelectedReleaseActionContext) -> dict[str, Any]:
     if type(context) is not SelectedReleaseActionContext:
         raise _error("release-checkpoint-invalid", "context is not selected typed state")
     return _dump_dataclass(context, SelectedReleaseActionContext, "context")
+
+
+# Checkpoints preserve the selected Workflow definition recorded when the Run
+# began.  Retain the immediately preceding O164 revision for status/recovery,
+# but reject an unknown revision rather than silently rebinding it.
+_SUPPORTED_RELEASE_WORKFLOW_VERSIONS = frozenset({5, 6})
 
 
 def _load_context(value: Any, index: int, *, root: str, workflow_run_id: str, fingerprint: str) -> SelectedReleaseActionContext:
@@ -396,7 +451,7 @@ def _load_context(value: Any, index: int, *, root: str, workflow_run_id: str, fi
         or context.frozen_parameters_sha256 != fingerprint
         or context.workflow_atom_id != "CA-O-164"
         or type(context.workflow_version) is not int
-        or context.workflow_version != 3
+        or context.workflow_version not in _SUPPORTED_RELEASE_WORKFLOW_VERSIONS
     ):
         raise _error("release-checkpoint-binding-mismatch", "context does not belong to the frozen selected Run")
     for name, identity in (("step_run_id", context.step_run_id), ("action_run_id", context.action_run_id)):
@@ -423,6 +478,8 @@ def _result_value(result: ReleasePhaseResult) -> dict[str, Any]:
         payload["output"] = None
         return payload
     matching = [name for name, cls in _TAGGED_TYPES.items() if type(output) is cls]
+    if not matching and type(output) is _full_gate_type():
+        matching = ["full_gate"]
     if len(matching) != 1:
         raise _error("release-checkpoint-invalid", "phase result output is not an admitted typed Release observation")
     payload["output"] = _tag(matching[0], output)
@@ -548,20 +605,40 @@ def _validate_state_dependencies(state: dict[str, Any], candidate: ValidatedCand
     package = state["package"]
     build = state["build"]
     verification = state["verification"]
+    e2e = state["e2e"]
+    full_gate = state["full_gate"]
     promotion = state["promotion"]
     retirement = state["retirement"]
-    if source_copy is None and any(value is not None for value in (compilation, suite, package, build, verification, promotion, retirement)):
+    if source_copy is None and any(value is not None for value in (compilation, suite, package, build, verification, e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "post-delivery evidence lacks the retained source copy")
-    if compilation is None and any(value is not None for value in (suite, package, build, verification, promotion, retirement)):
+    if compilation is None and any(value is not None for value in (suite, package, build, verification, e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "post-compilation evidence lacks compilation")
-    if suite is None and any(value is not None for value in (package, build, verification, promotion, retirement)):
+    if suite is None and any(value is not None for value in (package, build, verification, e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "post-suite evidence lacks suite evidence")
-    if package is None and any(value is not None for value in (build, verification, promotion, retirement)):
+    if package is None and any(value is not None for value in (build, verification, e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "image evidence lacks candidate package staging")
-    if build is None and any(value is not None for value in (verification, promotion, retirement)):
+    if build is None and any(value is not None for value in (verification, e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "later evidence lacks image build evidence")
-    if verification is None and any(value is not None for value in (promotion, retirement)):
+    if verification is None and any(value is not None for value in (e2e, full_gate, promotion, retirement)):
         raise _error("release-checkpoint-phase-mismatch", "later evidence lacks candidate verification")
+    if e2e is None and any(value is not None for value in (full_gate, promotion, retirement)):
+        raise _error("release-checkpoint-phase-mismatch", "later evidence lacks host candidate E2E evidence")
+    if full_gate is None and any(value is not None for value in (promotion, retirement)):
+        raise _error("release-checkpoint-phase-mismatch", "later evidence lacks aggregate full-gate evidence")
+    if promotion is not None and (not e2e.passed or not full_gate.passed):
+        raise _error("release-checkpoint-phase-mismatch", "promotion lacks passing host E2E and aggregate evidence")
+    if full_gate is not None and (
+        full_gate.phase_map_sha256 != suite.phase_map_sha256
+        or full_gate.phase_map_sha256 != e2e.phase_map_sha256
+        or full_gate.candidate_image_digest != build.candidate_image_digest
+        or full_gate.candidate_image_digest != verification.candidate_image_digest
+        or full_gate.candidate_image_digest != e2e.candidate_image_digest
+        or full_gate.suite_receipt_sha256 != suite.receipt_sha256
+        or full_gate.build_receipt_sha256 != build.receipt_sha256
+        or full_gate.image_receipt_sha256 != verification.receipt_sha256
+        or full_gate.e2e_receipt_sha256 != e2e.receipt_sha256
+    ):
+        raise _error("release-checkpoint-binding-mismatch", "aggregate differs from its exact retained predecessor receipts")
     if promotion is None and retirement is not None:
         raise _error("release-checkpoint-phase-mismatch", "retirement evidence lacks promotion evidence")
 

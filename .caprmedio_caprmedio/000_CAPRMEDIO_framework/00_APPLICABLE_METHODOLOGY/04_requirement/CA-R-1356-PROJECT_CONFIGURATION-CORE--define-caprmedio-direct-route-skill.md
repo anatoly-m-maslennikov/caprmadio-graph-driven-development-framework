@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1356-PROJECT_CONFIGURATION-CORE--define-caprmedio-direct-route-skill.md
+  source_atom_id: CA-R-1356
+  source_atom_revision: 10
+  source_sha256: e91722a3f138a150f5be256b2950032e1b62c35ec07287b5e5777ca45a3326da
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

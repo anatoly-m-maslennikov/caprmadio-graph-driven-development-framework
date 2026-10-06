@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CAPRMEDIO-R-793-PROJECT_CONFIGURATION--define-evaluation-approach-as-a-type-value-for-evaluation-atoms.md
+  source_atom_id: CAPRMEDIO-R-793
+  source_atom_revision: 22
+  source_sha256: 9d651d176ac1f0553bbd6f16bea9632249365dc54a43f5f361f5621bf2458c52
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

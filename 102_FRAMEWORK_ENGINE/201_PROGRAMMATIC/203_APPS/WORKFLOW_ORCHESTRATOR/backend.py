@@ -8,9 +8,10 @@ import uuid
 from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
 from agent import CodexAgent
 from engine import Coordinator, execute_phase, runtime_fingerprint
-from runtime_config import control_directory, docker_runtime, implementation_mock_runtime
+from runtime_config import (control_directory, docker_runtime, implementation_mock_runtime,
+                            release_host_runtime)
 from remote_agent import RemoteAgent
-from selected_execution import SelectedExecution
+from selected_execution import SelectedExecution, canonical_json
 from selected_native_providers import SelectedNativeProviders
 
 APPLICATION = 'caprmedio-orchestrator'
@@ -19,6 +20,126 @@ WORKFLOW = 'rmed-atoms-base-revise-independent'
 APP_VERSION = 'base-revise-v5-selected-v1-docker-project-mount'
 SELECTED_WORKFLOW = 'selected-workflow-execution'
 RECOVERY_WORKFLOW = 'selected-release-recovery'
+
+# This identity is intentionally unrelated to the native or Docker scheduler.
+# The control directory is selected in ``runtime_config``; retaining separate
+# DBOS identities here also prevents an already-persisted ordinary workflow
+# from being picked up by the explicitly started Release host worker.
+RELEASE_HOST_APPLICATION = 'caprmedio-release-host'
+RELEASE_HOST_QUEUE = 'release-host'
+RELEASE_HOST_APP_VERSION = 'release-host-v1-selected-v1'
+RELEASE_HOST_SELECTED_WORKFLOW = 'release-host-selected-workflow-execution'
+RELEASE_HOST_RECOVERY_WORKFLOW = 'release-host-selected-release-recovery'
+
+
+def _scheduler_identity():
+    if release_host_runtime():
+        return {
+            'application': RELEASE_HOST_APPLICATION,
+            'queue': RELEASE_HOST_QUEUE,
+            'app_version': RELEASE_HOST_APP_VERSION,
+            'selected_workflow': RELEASE_HOST_SELECTED_WORKFLOW,
+            'recovery_workflow': RELEASE_HOST_RECOVERY_WORKFLOW,
+        }
+    return {
+        'application': APPLICATION,
+        'queue': QUEUE,
+        'app_version': APP_VERSION,
+        'selected_workflow': SELECTED_WORKFLOW,
+        'recovery_workflow': RECOVERY_WORKFLOW,
+    }
+
+
+def _release_host_bridge():
+    """Load the Release-host binding boundary only in its explicit namespace.
+
+    Its small API is deliberately split: validation is read-only, while claim
+    publishes the per-Run binding only after the selected request is frozen.
+    Both receive the canonical request digest, never caller-authored transport
+    state.
+    """
+    import release_host_bridge
+    return release_host_bridge
+
+
+def _release_host_frozen_request_digest(frozen):
+    """Digest the exact frozen outer request retained by the transport carrier."""
+    request = frozen.get('request') if isinstance(frozen, dict) else None
+    if not isinstance(request, dict):
+        raise RuntimeError('Release host Run lacks an exact frozen request')
+    return _release_host_bridge().request_digest(request)
+
+
+def _validate_release_host_admission(root, frozen, frozen_request_digest):
+    """Read-only preflight: source/route was checked by SelectedExecution."""
+    bridge = _release_host_bridge()
+    bridge.availability(root)
+    # Calculate the exact persisted carrier identity before its first write.
+    # The equality check prevents an accidental caller-controlled digest from
+    # being used for the retained host binding.
+    if bridge.request_digest(frozen['request']) != frozen_request_digest:
+        raise RuntimeError('Release host frozen request digest is inconsistent')
+    return bridge.transport(root)
+
+
+def _claim_release_host_binding(root, frozen, frozen_request_digest):
+    request = frozen.get('request') if isinstance(frozen, dict) else None
+    run_id = request.get('run_id') if isinstance(request, dict) else None
+    if not isinstance(run_id, str):
+        raise RuntimeError('Release host Run lacks a valid frozen identity')
+    return _release_host_bridge().retain_binding(
+        root, run_id=run_id, frozen_request_digest=frozen_request_digest,
+    )
+
+
+def _validate_release_host_binding(root, run_id, frozen_request_digest, *, require_available=True):
+    bridge = _release_host_bridge()
+    # Check the retained host choice first.  A shared selected carrier with no
+    # such choice is foreign and must be refused without even consulting the
+    # host scheduler state.
+    binding = bridge.binding(root, run_id=run_id, frozen_request_digest=frozen_request_digest)
+    if require_available:
+        bridge.availability(root)
+    else:
+        # Worker dispatch occurs before its own ready marker is published, so
+        # it validates the explicit transport marker and exact Run binding
+        # without racing that readiness publication.
+        bridge.transport(root)
+    return binding
+
+
+def _preflight_release_host_run_ownership(root, run_id, selected):
+    """Prove a shared selected Run is already owned by this host scheduler.
+
+    ``SelectedExecution`` intentionally keeps canonical Run evidence in one
+    shared store.  A matching selected request therefore cannot identify its
+    executor.  Existing shared state is admitted only after its exact host
+    binding and the host DBOS workflow both prove prior host ownership.
+    """
+    path = selected.run_directory(run_id) / 'selected_request.json'
+    if not path.exists() and not path.is_symlink():
+        return None
+    if not path.is_file() or path.is_symlink():
+        raise RuntimeError('Release host shared selected Run carrier is invalid')
+    frozen = selected.load(run_id)
+    request = frozen.get('request') if isinstance(frozen, dict) else None
+    if not isinstance(request, dict) or request.get('run_id') != run_id:
+        raise RuntimeError('Release host shared selected Run carrier has a foreign identity')
+    _validate_release_host_binding(root, run_id, _release_host_frozen_request_digest(frozen))
+    transport = client(root)
+    try:
+        handle = transport.retrieve_workflow(run_id)
+        queue_status = handle.get_status()
+        workflow_input = getattr(queue_status, 'input', None)
+        if (getattr(queue_status, 'name', None) != RELEASE_HOST_SELECTED_WORKFLOW
+                or getattr(queue_status, 'queue_name', None) != RELEASE_HOST_QUEUE
+                or not isinstance(workflow_input, dict)
+                or tuple(workflow_input.get('args', ())) != (run_id,)
+                or workflow_input.get('kwargs') != {}):
+            raise RuntimeError('Release host binding lacks exact host scheduler provenance')
+    finally:
+        transport.destroy()
+    return frozen
 
 
 def database(root):
@@ -33,12 +154,14 @@ def client(root):
     path, url = database(root)
     if not path.is_file():
         raise RuntimeError('Start the explicit worker once to initialize its DBOS database')
-    return DBOSClient(system_database_url=url, application_name=APPLICATION,
+    return DBOSClient(system_database_url=url, application_name=_scheduler_identity()['application'],
                       retry_connection_errors=False)
 
 
 def enqueue(root, request):
     request = Enqueue.model_validate(request)
+    if release_host_runtime():
+        raise RuntimeError('Release host accepts only source-admitted Release selected requests')
     engine = Coordinator(root, None)
     # Admission is protected against simultaneous clients claiming one ID.
     with engine.store._lock(request.run_id):
@@ -56,13 +179,35 @@ def enqueue_selected(root, request):
     """Freeze a source-bound request before its explicit DBOS queue admission."""
     request = EnqueueSelected.model_validate(request)
     selected = SelectedExecution(root)
+    scheduler = _scheduler_identity()
+    if release_host_runtime():
+        existing = _preflight_release_host_run_ownership(root, request.run_id, selected)
+        # Validate all immutable request and source bindings before creating a
+        # selected-run carrier.  In particular, a foreign route is never
+        # frozen into the host namespace merely to obtain a scheduler status.
+        frozen = selected._validated_freeze(request.model_dump())
+        if frozen['graph'].get('route') != 'release_version':
+            raise RuntimeError('Release host accepts only the exact frozen Release route')
+        if existing is not None and canonical_json(existing) != canonical_json(frozen):
+            raise RuntimeError('Release host Run ID already binds a different selected request')
+        frozen_request_digest = _release_host_frozen_request_digest(frozen)
+        _validate_release_host_admission(root, frozen, frozen_request_digest)
+        frozen = selected.freeze(request.model_dump())
+        # Freeze repeats validation, then the binding carries that exact frozen
+        # outer request digest before any scheduler admission.
+        if _release_host_frozen_request_digest(frozen) != frozen_request_digest:
+            raise RuntimeError('Release host frozen request changed before transport binding')
+        _claim_release_host_binding(root, frozen, frozen_request_digest)
+    else:
+        frozen = None
     # The selected coordinator owns a separate durable request carrier so it
     # cannot reinterpret Base Revise request.json state.
-    frozen = selected.freeze(request.model_dump())
+    if frozen is None:
+        frozen = selected.freeze(request.model_dump())
     transport = client(root)
     try:
-        transport.enqueue({'queue_name': QUEUE, 'workflow_name': SELECTED_WORKFLOW,
-                           'workflow_id': request.run_id, 'app_version': APP_VERSION}, request.run_id)
+        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
+                           'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
     finally:
         transport.destroy()
     response = status(root, Status(run_id=request.run_id))
@@ -82,31 +227,64 @@ def _release_request_identity(execution):
     return _canonical_digest(execution)
 
 
+def _release_host_frozen(root, run_id, *, expected_identity=None, require_available=True):
+    """Recheck the host-only route and retained transport before DBOS access."""
+    selected = SelectedExecution(root)
+    frozen = selected.load(run_id)
+    request = frozen.get('request') if isinstance(frozen, dict) else None
+    execution = request.get('execution') if isinstance(request, dict) else None
+    graph = frozen.get('graph') if isinstance(frozen, dict) else None
+    if (not isinstance(execution, dict) or request.get('run_id') != run_id
+            or not isinstance(graph, dict) or graph.get('route') != 'release_version'
+            or execution.get('operation_route') != 'release_version'):
+        raise RuntimeError('Release host Run is not an exact frozen Release request')
+    request_identity = _release_request_identity(execution)
+    if expected_identity is not None and request_identity != expected_identity:
+        raise RuntimeError('Release host request identity does not match the frozen Release request')
+    # This is the second route check at dispatch/observation time.  It also
+    # proves that the saved graph remains the current exact source binding.
+    selected._revalidate(frozen)
+    _validate_release_host_binding(
+        root, run_id, _release_host_frozen_request_digest(frozen),
+        require_available=require_available,
+    )
+    return frozen, request_identity
+
+
 def recover_selected_release(root, request):
     """Queue one sealed Release recovery without creating another canonical Run."""
     request = RecoverSelectedRelease.model_validate(request)
-    selected = SelectedExecution(root)
-    frozen = selected.load(request.run_id)
-    saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
-    if (not isinstance(saved, dict) or saved.get('run_id') != request.run_id
-            or not isinstance(saved.get('execution'), dict)
-            or saved['execution'].get('operation_route') != 'release_version'):
-        raise RuntimeError('recovery is admitted only for an existing frozen Release Version Run')
-    identity = _release_request_identity(saved['execution'])
-    if identity != request.request_identity:
-        raise RuntimeError('recovery request identity does not match the frozen Release request')
+    scheduler = _scheduler_identity()
+    if release_host_runtime():
+        _frozen, identity = _release_host_frozen(
+            root, request.run_id, expected_identity=request.request_identity,
+        )
+    else:
+        selected = SelectedExecution(root)
+        frozen = selected.load(request.run_id)
+        saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
+        if (not isinstance(saved, dict) or saved.get('run_id') != request.run_id
+                or not isinstance(saved.get('execution'), dict)
+                or saved['execution'].get('operation_route') != 'release_version'):
+            raise RuntimeError('recovery is admitted only for an existing frozen Release Version Run')
+        identity = _release_request_identity(saved['execution'])
+        if identity != request.request_identity:
+            raise RuntimeError('recovery request identity does not match the frozen Release request')
     # DBOS caches a completed workflow by its control identity.  This is an
     # explicit new delivery attempt, so it needs a fresh scheduler handle;
     # the canonical Run and sealed frozen request identity stay unchanged.
     transport_id = uuid.uuid4().hex
     transport = client(root)
     try:
-        transport.enqueue({'queue_name': QUEUE, 'workflow_name': RECOVERY_WORKFLOW,
-                           'workflow_id': transport_id, 'app_version': APP_VERSION},
+        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['recovery_workflow'],
+                           'workflow_id': transport_id, 'app_version': scheduler['app_version']},
                           request.run_id, identity)
         # Observe the new scheduler identity, never the prior selected Run's
         # cached DBOS workflow result.
-        recovery_transport_status = _observe_recovery_transport(transport, transport_id, request.run_id, identity)
+        recovery_transport_status = _observe_recovery_transport(
+            transport, transport_id, request.run_id, identity,
+            workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
+        )
     finally:
         transport.destroy()
     canonical_state = status(root, Status(run_id=request.run_id))
@@ -130,12 +308,13 @@ def recover_selected_release(root, request):
     return response
 
 
-def _observe_recovery_transport(transport, transport_id, run_id, request_identity):
+def _observe_recovery_transport(transport, transport_id, run_id, request_identity, *,
+                                workflow_name=RECOVERY_WORKFLOW, queue_name=QUEUE):
     handle = transport.retrieve_workflow(transport_id)
     queue_status = handle.get_status()
     workflow_input = getattr(queue_status, 'input', None)
-    if (getattr(queue_status, 'name', None) != RECOVERY_WORKFLOW
-            or getattr(queue_status, 'queue_name', None) != QUEUE
+    if (getattr(queue_status, 'name', None) != workflow_name
+            or getattr(queue_status, 'queue_name', None) != queue_name
             or not isinstance(workflow_input, dict)
             or tuple(workflow_input.get('args', ())) != (run_id, request_identity)
             or workflow_input.get('kwargs') != {}):
@@ -171,15 +350,22 @@ def _canonical_recovery_observation(canonical_state):
 
 def recover_selected_release_status(root, request):
     request = RecoverSelectedReleaseStatus.model_validate(request)
-    frozen = SelectedExecution(root).load(request.run_id)
-    saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
-    execution = saved.get('execution') if isinstance(saved, dict) else None
-    if not isinstance(execution, dict) or execution.get('operation_route') != 'release_version':
-        raise RuntimeError('recovery status is admitted only for an existing frozen Release Version Run')
-    identity = _release_request_identity(execution)
+    scheduler = _scheduler_identity()
+    if release_host_runtime():
+        _frozen, identity = _release_host_frozen(root, request.run_id)
+    else:
+        frozen = SelectedExecution(root).load(request.run_id)
+        saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
+        execution = saved.get('execution') if isinstance(saved, dict) else None
+        if not isinstance(execution, dict) or execution.get('operation_route') != 'release_version':
+            raise RuntimeError('recovery status is admitted only for an existing frozen Release Version Run')
+        identity = _release_request_identity(execution)
     transport = client(root)
     try:
-        transport_status = _observe_recovery_transport(transport, request.recovery_transport_handle, request.run_id, identity)
+        transport_status = _observe_recovery_transport(
+            transport, request.recovery_transport_handle, request.run_id, identity,
+            workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
+        )
     finally:
         transport.destroy()
     canonical_state = status(root, Status(run_id=request.run_id))
@@ -192,6 +378,10 @@ def recover_selected_release_status(root, request):
 
 def status(root, request):
     request = Status.model_validate(request)
+    if release_host_runtime():
+        # A host status read must not adopt a native/Docker selected Run or
+        # reach the host DBOS database before its retained binding is proven.
+        _release_host_frozen(root, request.run_id)
     transport = client(root)
     try:
         handle = transport.retrieve_workflow(request.run_id)
@@ -242,6 +432,8 @@ def status(root, request):
 
 def register_execution(DBOS, engine, *, selected_providers=None):
     """Register one admitted recipe with durable phase checkpoints."""
+    if release_host_runtime():
+        return register_release_host_execution(DBOS, engine, selected_providers=selected_providers)
     selected_providers = selected_providers or SelectedNativeProviders(engine.root)
     @DBOS.step(name='base-revise-gather')
     def gather(run_id):
@@ -280,6 +472,36 @@ def register_execution(DBOS, engine, *, selected_providers=None):
         return selected_providers.recover_release(run_id, request_identity)
 
 
+def register_release_host_execution(DBOS, engine, *, selected_providers=None):
+    """Register only the two Release workflows in the host scheduler.
+
+    Route and host-binding validation happens inside the DBOS step immediately
+    before provider dispatch, so an injected DBOS payload cannot bypass the
+    admission-time validation performed by ``enqueue_selected``.
+    """
+    selected_providers = selected_providers or SelectedNativeProviders(engine.root)
+
+    @DBOS.step(name='release-host-selected-workflow-dispatch')
+    def selected_dispatch(run_id):
+        _release_host_frozen(engine.root, run_id, require_available=False)
+        return selected_providers.dispatch(run_id)
+
+    @DBOS.step(name='release-host-selected-release-recovery')
+    def recover_selected_release(run_id, request_identity):
+        _release_host_frozen(
+            engine.root, run_id, expected_identity=request_identity, require_available=False,
+        )
+        return selected_providers.recover_release(run_id, request_identity)
+
+    @DBOS.workflow(name=RELEASE_HOST_SELECTED_WORKFLOW)
+    def execute_selected(run_id):
+        return selected_dispatch(run_id)
+
+    @DBOS.workflow(name=RELEASE_HOST_RECOVERY_WORKFLOW)
+    def recover_selected_release_workflow(run_id, request_identity):
+        return recover_selected_release(run_id, request_identity)
+
+
 def execute_plan(engine, run_id, gather, check, fix, finish, coverage):
     try:
         gathered = gather(run_id)
@@ -306,11 +528,13 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
         from implementation_mock_agent import ImplementationMockAgent
         implementation_agent = ImplementationMockAgent(root)
     _, url = database(root)
-    engine = Coordinator(root, agent or (RemoteAgent() if docker_runtime() else CodexAgent()))
+    default_agent = None if release_host_runtime() else (RemoteAgent() if docker_runtime() else CodexAgent())
+    engine = Coordinator(root, agent or default_agent)
     stop = threading.Event()
-    DBOS(config={'name': APPLICATION, 'system_database_url': url,
+    scheduler = _scheduler_identity()
+    DBOS(config={'name': scheduler['application'], 'system_database_url': url,
                  'run_admin_server': False, 'enable_otlp': False,
-                 'application_version': APP_VERSION, 'max_executor_threads': 2})
+                 'application_version': scheduler['app_version'], 'max_executor_threads': 2})
     register_execution(DBOS, engine, selected_providers=SelectedNativeProviders(
         root, implementation_agent=implementation_agent))
 
@@ -319,12 +543,12 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
         signal.signal(number, lambda *_: stop.set())
     try:
         DBOS.launch()
-        DBOS.register_queue(QUEUE, global_concurrency=1, worker_concurrency=1,
+        DBOS.register_queue(scheduler['queue'], global_concurrency=1, worker_concurrency=1,
                             polling_interval_sec=0.2)
         if ready_file:
             engine.save(Path(ready_file), {'state': 'ready',
                 'pid': __import__('os').getpid(),
-                'application_version': APP_VERSION,
+                'application_version': scheduler['app_version'],
                 'runtime_fingerprint': runtime_fingerprint(root)})
         stop.wait()
     finally:

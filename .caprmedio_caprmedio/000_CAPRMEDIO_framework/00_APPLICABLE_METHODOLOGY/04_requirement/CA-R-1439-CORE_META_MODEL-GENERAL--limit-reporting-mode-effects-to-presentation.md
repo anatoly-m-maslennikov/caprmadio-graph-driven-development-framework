@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1439-CORE_META_MODEL-GENERAL--limit-reporting-mode-effects-to-presentation.md
+  source_atom_id: CA-R-1439
+  source_atom_revision: 7
+  source_sha256: 6b571579605b408a7565cbdff0d7efece5834f0a1dce12dc223a5d7d72e28eab
+  original_relations_sha256: 8494575e55dd422fd6bffa5531159afb4ff410aa058d7a00fb9605bd0fa3ff0b
 ---
 # Summary
 

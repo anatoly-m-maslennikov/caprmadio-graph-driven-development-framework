@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1701-CORE_META_MODEL-CORE-REQUIREMENT--keep-classification-axes-distinct-without-multiplying-types.md
+  source_atom_id: CA-R-1701
+  source_atom_revision: 20
+  source_sha256: 9c0f1a9c302767d4ea9fb8d94ef79e62adddfffd47722be468098a4a70c43fdc
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

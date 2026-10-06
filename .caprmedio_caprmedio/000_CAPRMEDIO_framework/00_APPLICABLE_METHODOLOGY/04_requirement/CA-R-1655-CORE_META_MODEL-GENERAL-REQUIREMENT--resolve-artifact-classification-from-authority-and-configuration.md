@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1655-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-artifact-classification-from-authority-and-configuration.md
+  source_atom_id: CA-R-1655
+  source_atom_revision: 25
+  source_sha256: b7760e3c573ae634cdf1a68ae8dbd290cc7d54f66cb8d04fb2eab16fba6b4da1
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Resolve Artifact Classification from Authority and Configuration
 

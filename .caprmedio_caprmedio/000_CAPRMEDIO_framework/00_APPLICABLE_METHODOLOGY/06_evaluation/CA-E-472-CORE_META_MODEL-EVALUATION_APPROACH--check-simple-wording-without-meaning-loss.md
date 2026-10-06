@@ -23,6 +23,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-472-CORE_META_MODEL-EVALUATION_APPROACH--check-simple-wording-without-meaning-loss.md
+  source_atom_id: CA-E-472
+  source_atom_revision: 7
+  source_sha256: 15207503763120dcf43aeaeb8254e0572303f516330312654ccc22ad6d342707
+  original_relations_sha256: ccb03e34d5bbafefb098233b0471b4098c19f040a0d2e15825b6bcb20d5f949f
 ---
 # Summary
 

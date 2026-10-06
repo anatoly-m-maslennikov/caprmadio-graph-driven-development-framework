@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-982-CORE_META_MODEL-GENERAL-REQUIREMENT--let-the-operator-override-scope-unit-label.md
+  source_atom_id: CA-R-982
+  source_atom_revision: 15
+  source_sha256: ba5aa246c7280faf167d648c59b28f2fd639d0066900d4f75c0c38dfb3d20c2f
+  original_relations_sha256: ab511b4c40a9a7855cf5a5afc557e88ecc2a5cf85f7ac01ce80b93150b247e03
 ---
 # Summary
 

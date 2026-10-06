@@ -29,6 +29,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-501-CORE_META_MODEL-QA_CASE--validate-common-plan-authoring.md
+  source_atom_id: CA-E-501
+  source_atom_revision: 7
+  source_sha256: 0715e8a52b36dccb8510e3e2dc0d43f395384413521b9071191d749ebccf7df5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

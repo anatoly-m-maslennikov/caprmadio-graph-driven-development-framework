@@ -1,0 +1,28 @@
+---
+atom_id: CA-M-119
+subjects:
+  governs:
+    occurrent:
+      - "CCE migration"
+  depends_on:
+    continuant:
+      - "Atom"
+      - "Atom/Claim"
+      - "Atom/Revision"
+      - "Projection"
+      - "CCE"
+      - "Confidence Threshold"
+      - "Operator"
+      - "AI Agent"
+cce_version: cce_1
+cce_form: method
+version: 9
+updated_at: "2026-09-09 02:24:28 +0400"
+relations:
+  child_of:
+    - CA-M-115
+    - CA-R-380
+---
+# Migrate Atoms to a current CCE version
+
+**to** migrate Atoms **to** a current CCE version, the Operator **or** AI Agent **must** convert one Atom at a time, preserve its lifecycle **and** identity, validate its one Claim **and** derived Projections, **and** request Operator disposition **when** semantic confidence is below the effective Confidence Threshold resolved for that migration according **to** CA-M-271.

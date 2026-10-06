@@ -26,6 +26,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-450-CORE_META_MODEL-EVALUATION_APPROACH--validate-framework-parameter-fallback.md
+  source_atom_id: CA-E-450
+  source_atom_revision: 8
+  source_sha256: b0e3b69ee1f90356ad48bbac35c6e881b63b0d84c8ff2a0297ab55340e2fa8df
+  original_relations_sha256: 409cd0ddae186a760d023362a08732d9e508a42cadb874a1215ae50444cbc9a7
 ---
 # Summary
 Validate framework parameter fallback

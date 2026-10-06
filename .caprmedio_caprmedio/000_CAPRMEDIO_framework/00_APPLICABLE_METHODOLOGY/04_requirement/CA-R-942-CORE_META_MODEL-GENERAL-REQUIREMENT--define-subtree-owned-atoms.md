@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-942-CORE_META_MODEL-GENERAL-REQUIREMENT--define-subtree-owned-atoms.md
+  source_atom_id: CA-R-942
+  source_atom_revision: 17
+  source_sha256: 1ea239d8081696dc25b5b96a8140cf6f9b276377f412f04eaedf43018b7271bb
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Define Subtree-owned Atoms

@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1558-CORE_META_MODEL-CORE-REQUIREMENT--route-questions-and-ideas-through-exploration-mode.md
+  source_atom_id: CA-R-1558
+  source_atom_revision: 4
+  source_sha256: 02bea1389941c57c23c59c0b144f57eb546c6bdb455fcdb8299c0d230632eaa5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

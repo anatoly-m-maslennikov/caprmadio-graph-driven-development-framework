@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-933-CORE_META_MODEL-CORE-REQUIREMENT--restrict-demand-to-one-depended-on-result.md
+  source_atom_id: CA-R-933
+  source_atom_revision: 17
+  source_sha256: b8ff8d839c71d80663b115bfee0521c969aa106846668f8de2cf83839d1c644f
+  original_relations_sha256: 986ab56d61737841b77ed4fc4f1a391a0c8ad370d896e576cf2be7bdd2bdf459
 ---
 # Summary
 Restrict Demand to one depended-on result

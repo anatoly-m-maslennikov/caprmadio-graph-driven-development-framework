@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1634-CORE_META_MODEL-GENERAL--register-catalog-map-and-hub-as-type-values-under-projection.md
+  source_atom_id: CA-R-1634
+  source_atom_revision: 26
+  source_sha256: bd9a77fd4ccf72bcd78441f710af014c613bca8a53aab8d22f16e3d132f338f8
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

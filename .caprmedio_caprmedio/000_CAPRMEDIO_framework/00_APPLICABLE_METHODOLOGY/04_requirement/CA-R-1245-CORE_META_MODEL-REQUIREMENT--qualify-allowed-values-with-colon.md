@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1245-CORE_META_MODEL-REQUIREMENT--qualify-allowed-values-with-colon.md
+  source_atom_id: CA-R-1245
+  source_atom_revision: 13
+  source_sha256: fbfb35fcfff4feadfe7ec62e599e502a65eb0007108fe7947ca555d71abb0e54
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

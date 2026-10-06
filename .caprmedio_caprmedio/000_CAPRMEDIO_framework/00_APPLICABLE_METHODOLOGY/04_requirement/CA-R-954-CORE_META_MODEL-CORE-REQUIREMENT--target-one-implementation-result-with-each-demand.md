@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-954-CORE_META_MODEL-CORE-REQUIREMENT--target-one-implementation-result-with-each-demand.md
+  source_atom_id: CA-R-954
+  source_atom_revision: 16
+  source_sha256: 97a867d7d3a9383fb1b4209f38edc5ffbec3a30acd021d1bc0bd37b11afc8a28
+  original_relations_sha256: 5463f7bebc49570104b47556da8a5785c8b62028d2d02be2df820f960444ce29
 ---
 # Summary
 Target one Implementation result with each Demand

@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-323-PROJECT_CONFIGURATION-DELIVERY--register-caprmedio-project-authority-directories.md
+  source_atom_id: CA-D-323
+  source_atom_revision: 8
+  source_sha256: 1fa3bf7bd808f55c7137f4981f4bf3cdfe891f2ad0d3153fbbf89ee5ed1063e4
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

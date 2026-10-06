@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1350-CORE_META_MODEL-GENERAL-REQUIREMENT--resolve-the-most-specific-type-domain.md
+  source_atom_id: CA-R-1350
+  source_atom_revision: 9
+  source_sha256: 01baf367ccb82f1c07a3602df016c63d51c2fb91e4ffafc77af69045188bf474
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

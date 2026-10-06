@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1718-CORE_META_MODEL-CORE-REQUIREMENT--preserve-strict-semantic-distinctions.md
+  source_atom_id: CA-R-1718
+  source_atom_revision: 23
+  source_sha256: 8c1f01707e9351c60b463546ba29910910ee35fbe1f03cccdfc99324c4e979f1
+  original_relations_sha256: 263aad3361052e8e3afa632ce6b0cf00039d22d3ca5192b3d43af3b6eb9e5cdc
 ---
 # Summary
 

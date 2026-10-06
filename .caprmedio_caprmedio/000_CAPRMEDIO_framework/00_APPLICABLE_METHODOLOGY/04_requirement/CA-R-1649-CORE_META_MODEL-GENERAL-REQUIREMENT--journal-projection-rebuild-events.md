@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1649-CORE_META_MODEL-GENERAL-REQUIREMENT--journal-projection-rebuild-events.md
+  source_atom_id: CA-R-1649
+  source_atom_revision: 19
+  source_sha256: e955bf3d0d5506d326d761c8372d0c9d1b1a9c0c73c3475adb5891a1e812542b
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-960-CORE_META_MODEL-CORE-REQUIREMENT--define-child-composition.md
+  source_atom_id: CA-R-960
+  source_atom_revision: 14
+  source_sha256: 1bddbc1216d1cb84426d380f7f10858abe191b7d6b6edb273386e23e1e83a0c6
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-399-PROJECT_CONFIGURATION--serialize-requirement-type-tokens.md
+  source_atom_id: CA-D-399
+  source_atom_revision: 9
+  source_sha256: 1f356dc9e8620886115f5e857dd5a9e518681787a9020942d01eeb51aa410b20
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

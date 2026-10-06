@@ -25,6 +25,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-403-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--report-exact-claim-value-set-consolidation-candidates.md
+  source_atom_id: CA-E-403
+  source_atom_revision: 12
+  source_sha256: 3aa9a341876eee5a153e923a4a7d4fadc400d69b2925ff11a7c25c278fa444c9
+  original_relations_sha256: 520fb5ded33b8149da4371614ad71a1b5b9bfed9da1d8e54cedf4ae9c0eacd52
 ---
 # Summary
 

@@ -18,6 +18,10 @@ subjects:
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-506-CORE_META_MODEL-CORE--give-every-non-ephemeral-entity-a-carrier.md
+  source_atom_id: CA-D-506
+  source_atom_revision: 1
+  source_sha256: 8f1102676b3b04ec408c17a6a6995858030bd9b0df609cf9feb9f96fb829fae9
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-230-CORE_META_MODEL-METHOD--define-registered-cce-operators-through-cce-methods.md
+  source_atom_id: CA-M-230
+  source_atom_revision: 12
+  source_sha256: b232fd54b2e93341c7227621683ab58cdf5abeabbece3a13c543a44fe4773519
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

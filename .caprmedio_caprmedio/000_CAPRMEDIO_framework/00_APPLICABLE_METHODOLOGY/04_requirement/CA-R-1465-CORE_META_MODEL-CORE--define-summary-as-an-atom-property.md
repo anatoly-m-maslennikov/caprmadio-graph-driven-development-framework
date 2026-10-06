@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1465-CORE_META_MODEL-CORE--define-summary-as-an-atom-property.md
+  source_atom_id: CA-R-1465
+  source_atom_revision: 8
+  source_sha256: 36b83d020dbfbeccde12bee2f5d83e2c8d42f7469072b5f2e95e3f17b08a260a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

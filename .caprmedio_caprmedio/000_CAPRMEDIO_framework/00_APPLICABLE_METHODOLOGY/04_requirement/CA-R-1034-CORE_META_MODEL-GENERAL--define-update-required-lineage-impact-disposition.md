@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1034-CORE_META_MODEL-GENERAL--define-update-required-lineage-impact-disposition.md
+  source_atom_id: CA-R-1034
+  source_atom_revision: 13
+  source_sha256: 09171e0521b5f71e42b76644e5f208789d24b43502706f084a664934acd957fa
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ relations:
   relates_to: [CA-R-1809, CA-D-517]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-117-PROJECT_CONFIGURATION-ACTION--watch-execution.md
+  source_atom_id: CA-O-117
+  source_atom_revision: 1
+  source_sha256: 191ac3dafa96c103f8901dd8b2e4f7ffc4a435fcd6b27d071e28c7f21a28aac3
+  original_relations_sha256: 63883dea412b083bcba96aa4c656c03f32da1f6070efd71c1e59b51c125e9fa4
 ---
 # Summary
 

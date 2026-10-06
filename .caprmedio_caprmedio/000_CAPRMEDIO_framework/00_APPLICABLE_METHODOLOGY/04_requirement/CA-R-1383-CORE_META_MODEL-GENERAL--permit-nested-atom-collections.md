@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1383-CORE_META_MODEL-GENERAL--permit-nested-atom-collections.md
+  source_atom_id: CA-R-1383
+  source_atom_revision: 10
+  source_sha256: 9fdeedaf5800006559b213fb3f5f472e1bf549db37de04382d186e992bcfab6d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1468-CORE_META_MODEL--define-process-log-projection.md
+  source_atom_id: CA-R-1468
+  source_atom_revision: 6
+  source_sha256: 91312f138e6492934f089b0c2ed62f3d8f24d079215ee8dc8d57d4121d222ab6
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1792-CORE_META_MODEL-GENERAL--preserve-terminal-workflow-handoff-approval-boundaries.md
+  source_atom_id: CA-R-1792
+  source_atom_revision: 1
+  source_sha256: 95d53e72f4b4f7e0542d39003b818ccf48645a2c5e98b43accd889c6fa113180
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

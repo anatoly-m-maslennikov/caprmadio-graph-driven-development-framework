@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1359-CORE_META_MODEL--define-claim-value-set.md
+  source_atom_id: CA-R-1359
+  source_atom_revision: 9
+  source_sha256: 26bc473af5b1108bfa751991a56c236437fedc84a0a0cb7e588db0b4eadc0c7c
+  original_relations_sha256: 996c38138f0d740a10abf989aca106cdb625bece78fb86564be33d4c8432969d
 ---
 # Summary
 

@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1260-CORE_META_MODEL-CORE-REQUIREMENT--define-is-borne-by.md
+  source_atom_id: CA-R-1260
+  source_atom_revision: 12
+  source_sha256: 39b5302722a7073f516390c3960fc3953e9e17accb0b127c3a2fac094d4b4436
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

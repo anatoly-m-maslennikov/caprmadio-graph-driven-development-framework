@@ -16,6 +16,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1785-PROJECT_CONFIGURATION--make-required-production-record-loss-observable.md
+  source_atom_id: CA-R-1785
+  source_atom_revision: 1
+  source_sha256: 1ada835c2181b6efee24daa46e8cea0e1c20792cd935e401bd9c0985db4aa89d
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

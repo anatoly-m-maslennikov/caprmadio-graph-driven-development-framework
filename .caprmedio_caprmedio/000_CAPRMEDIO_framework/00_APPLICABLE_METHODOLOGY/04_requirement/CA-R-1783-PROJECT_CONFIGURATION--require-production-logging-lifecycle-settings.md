@@ -15,6 +15,10 @@ updated_at: "2026-09-28 15:12:22 +0400"
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1783-PROJECT_CONFIGURATION--require-production-logging-lifecycle-settings.md
+  source_atom_id: CA-R-1783
+  source_atom_revision: 1
+  source_sha256: e6eb6f67a13123c5d3e7b3fc15699aa00653597f154d7db9424f820cfd1b1bb1
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1717-CORE_META_MODEL-CORE-REQUIREMENT--keep-data-stages-orthogonal-to-artifact-semantics.md
+  source_atom_id: CA-R-1717
+  source_atom_revision: 17
+  source_sha256: 88967d4e454da2e93e3f2e1594af83056f1c65d837859075a1767b124e0e3639
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

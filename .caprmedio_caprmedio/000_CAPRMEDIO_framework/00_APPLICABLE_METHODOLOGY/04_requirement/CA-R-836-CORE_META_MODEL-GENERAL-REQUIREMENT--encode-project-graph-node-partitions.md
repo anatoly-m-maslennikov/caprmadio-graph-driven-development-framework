@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-836-CORE_META_MODEL-GENERAL-REQUIREMENT--encode-project-graph-node-partitions.md
+  source_atom_id: CA-R-836
+  source_atom_revision: 16
+  source_sha256: 4cf8a0db9a87b23f6315ded79a33e8a4c746e205f012ed37e70b02da4d05faae
+  original_relations_sha256: 4ed3b58e7782f7823940ffd5344ce09aa90541e3c48e227e7f7b8c768af35893
 ---
 # Summary
 

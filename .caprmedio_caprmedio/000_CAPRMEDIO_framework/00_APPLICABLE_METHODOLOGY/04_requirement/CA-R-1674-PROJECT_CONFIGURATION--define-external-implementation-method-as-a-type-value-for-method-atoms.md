@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1674-PROJECT_CONFIGURATION--define-external-implementation-method-as-a-type-value-for-method-atoms.md
+  source_atom_id: CA-R-1674
+  source_atom_revision: 20
+  source_sha256: b62549531afe4eff423109fa45fb8f203031268dbe1509fda162f24484b608c3
+  original_relations_sha256: cafc818e3384926ee617aaadbed4b894374cce2549353a0038cd6acb82777caf
 ---
 # Summary
 

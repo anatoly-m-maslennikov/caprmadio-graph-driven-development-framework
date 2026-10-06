@@ -24,6 +24,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1614-PROJECT_CONFIGURATION-REQUIREMENT--define-inferred-possible-relation-derivation.md
+  source_atom_id: CA-R-1614
+  source_atom_revision: 4
+  source_sha256: 21954dd6fdb6fabf5d77b478bdbdb1700d4bef45c57facc49e72c4009e120fab
+  original_relations_sha256: 9498a3bf925a4c9ab02a1ce984d38e81a4cea3f350b87deeacc61ca5f1581a30
 ---
 # Summary
 

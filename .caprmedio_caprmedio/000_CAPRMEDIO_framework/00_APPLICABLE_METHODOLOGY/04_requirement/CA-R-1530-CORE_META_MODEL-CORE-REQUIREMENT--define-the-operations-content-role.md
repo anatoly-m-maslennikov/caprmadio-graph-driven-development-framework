@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1530-CORE_META_MODEL-CORE-REQUIREMENT--define-the-operations-content-role.md
+  source_atom_id: CA-R-1530
+  source_atom_revision: 6
+  source_sha256: 8e6280d4acbbab76d70b936a69803d95d0d6e855845003d1e92e5d71470e328f
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

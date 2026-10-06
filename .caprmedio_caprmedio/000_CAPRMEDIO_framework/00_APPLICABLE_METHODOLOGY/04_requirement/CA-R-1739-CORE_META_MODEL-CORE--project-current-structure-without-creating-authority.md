@@ -20,6 +20,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1739-CORE_META_MODEL-CORE--project-current-structure-without-creating-authority.md
+  source_atom_id: CA-R-1739
+  source_atom_revision: 21
+  source_sha256: b02a96fca3ce3b568401cfd16bc6995fb127f5be5017a8b1f5f3679e8be41383
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

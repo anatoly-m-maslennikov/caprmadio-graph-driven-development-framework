@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1680-CORE_META_MODEL--requirement-bound-recursive-self-hosting.md
+  source_atom_id: CA-R-1680
+  source_atom_revision: 19
+  source_sha256: c3dbfd40a5eddfbb83545b24d75808972ff10506424dd39a194ddcfd0c18ba77
+  original_relations_sha256: bf8d0ca2c6595c51dacac4e3afc7ed7a5098ba621b5d3196bb182ddc8eb89e66
 ---
 # Summary
 

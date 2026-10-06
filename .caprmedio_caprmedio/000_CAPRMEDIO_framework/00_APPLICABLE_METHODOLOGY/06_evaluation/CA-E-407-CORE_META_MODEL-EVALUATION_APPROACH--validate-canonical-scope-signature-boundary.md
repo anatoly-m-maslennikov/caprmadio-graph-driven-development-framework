@@ -22,6 +22,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-407-CORE_META_MODEL-EVALUATION_APPROACH--validate-canonical-scope-signature-boundary.md
+  source_atom_id: CA-E-407
+  source_atom_revision: 10
+  source_sha256: ef78590cf46f4f2679aa38bd0dd034bf97e6816adfb0c6e1030b5a0ff82ce65b
+  original_relations_sha256: 9f42961de2ab19ebbf0721ed15ec0f854c9df12d1ec58d3936ae5b5e57ad4922
 ---
 # Summary
 

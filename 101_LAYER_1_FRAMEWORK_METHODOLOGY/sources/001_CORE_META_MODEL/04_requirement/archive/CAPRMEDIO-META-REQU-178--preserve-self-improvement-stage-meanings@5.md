@@ -1,0 +1,19 @@
+---
+cce_version: cce_1
+cce_form: obligation
+subjects:
+  declared:
+    occurrent:
+      - continuous-improvement
+tier: core
+version: 5
+updated_at: 2026-08-29 01:16:37 +0400
+llm_session_ids:
+  - codex:019f591f-04f6-70f2-8de7-828b7cccc69d
+relations:
+  child_of:
+    - CAPRMEDIO-REQU-047--separate-self-improvement-stages
+---
+# Preserve self-improvement stage meanings
+
+**every** governed self-improvement stage **must** retain the canonical Content-role meaning of the artifact that represents it **without** absorbing the meaning of an earlier **or** later stage.

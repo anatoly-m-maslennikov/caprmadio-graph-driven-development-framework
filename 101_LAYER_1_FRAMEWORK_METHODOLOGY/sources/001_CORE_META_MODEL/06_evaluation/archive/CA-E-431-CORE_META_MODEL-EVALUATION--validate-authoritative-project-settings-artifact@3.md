@@ -1,0 +1,29 @@
+---
+atom_id: CA-E-431
+cce_version: cce_1
+cce_form: evaluation
+subjects:
+  governs:
+    occurrent:
+      - Project Settings Validation
+  depends_on:
+    continuant:
+      - Project Settings
+      - Project Settings/Authoritative Carrier
+      - Project Settings/Revision Binding
+version: 3
+updated_at: "2026-09-10 02:19:47 +0400"
+relations:
+  evaluation_for:
+    - CAPRMEDIO-META-REQU-619
+    - CA-R-1429
+    - CA-D-318
+    - CA-D-362
+    - CA-D-363
+    - CA-D-364
+    - CA-D-365
+    - CA-D-366
+---
+# Validate Authoritative Project Settings Artifact
+
+the Evaluation **must** reject Project Settings **if** it is treated as an Atom **or** Projection, has an Atom ID **or** Atom Content Role, is not available independently of Project Atoms **and** Implementation, violates its registered Project-root placement **or** filename, has other than **`=1`** authoritative TOML Carrier, contains Framework Instance choices **or** independently editable Project Structure, violates its Core content boundary, applicable General settings specifications, **or** applicable Standard field specifications, **or** lacks an exact current Revision, SHA-256 Digest, **and** governed-commit Work Journal receipt.

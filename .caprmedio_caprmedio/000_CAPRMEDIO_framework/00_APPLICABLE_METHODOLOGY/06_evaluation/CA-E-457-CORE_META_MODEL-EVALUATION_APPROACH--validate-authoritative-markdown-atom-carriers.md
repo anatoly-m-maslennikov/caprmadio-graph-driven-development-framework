@@ -24,6 +24,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-457-CORE_META_MODEL-EVALUATION_APPROACH--validate-authoritative-markdown-atom-carriers.md
+  source_atom_id: CA-E-457
+  source_atom_revision: 15
+  source_sha256: 6b15aa7babab0ec60edbcb3d494e0efe2186773454a83f03b830933f73b87130
+  original_relations_sha256: 985229bd73135cc5ecf9deb9dcaf2077cf135f25209490f45e32f0ff0573db57
 ---
 # Summary
 

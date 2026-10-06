@@ -26,6 +26,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-502-CORE_META_MODEL-QA_CASE--validate-plan-carrier-identity-and-placement.md
+  source_atom_id: CA-E-502
+  source_atom_revision: 5
+  source_sha256: 0da834a92da258996ea4f261c4b13710c31d59c263b187940646635ba25e9fad
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 Validate Plan Carrier identity **and** placement

@@ -23,6 +23,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-239-CORE_META_MODEL--derive-dependency-order-from-explicit-edges.md
+  source_atom_id: CA-M-239
+  source_atom_revision: 11
+  source_sha256: 287f47cd2fcf0ed1b4090a376b3924a6aa3e45838d837fbcea306b8e46a81ad6
+  original_relations_sha256: 6caffda397ba31ac9d7c64190643f433aa17c7879565aa7ba74ffaca9b33bc94
 ---
 # Summary
 

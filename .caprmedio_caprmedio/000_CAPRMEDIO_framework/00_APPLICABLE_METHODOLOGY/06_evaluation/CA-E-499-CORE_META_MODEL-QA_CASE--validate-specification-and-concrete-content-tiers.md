@@ -26,6 +26,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-499-CORE_META_MODEL-QA_CASE--validate-specification-and-concrete-content-tiers.md
+  source_atom_id: CA-E-499
+  source_atom_revision: 7
+  source_sha256: d1e5fed55a099d470da7c7e766ae0b1bec5a6b83c1707c3a648aa26e00802043
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

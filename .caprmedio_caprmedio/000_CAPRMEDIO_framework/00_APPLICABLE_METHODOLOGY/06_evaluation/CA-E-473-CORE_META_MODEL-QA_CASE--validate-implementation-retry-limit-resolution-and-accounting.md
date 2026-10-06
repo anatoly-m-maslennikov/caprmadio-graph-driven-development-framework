@@ -28,6 +28,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-473-CORE_META_MODEL-QA_CASE--validate-implementation-retry-limit-resolution-and-accounting.md
+  source_atom_id: CA-E-473
+  source_atom_revision: 10
+  source_sha256: 0e7ea664a2466237d9a42a983e36805316c23066c6cf74b9d612b3fc8a56d605
+  original_relations_sha256: 7f41ee48533e1558206583e38b2cb3eb618df5c1924ef6b685abd6f58ed17040
 ---
 # Summary
 

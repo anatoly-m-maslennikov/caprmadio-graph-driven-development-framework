@@ -32,7 +32,10 @@ from framework_initialization import (  # noqa: E402
 import framework_initialization as initialization  # noqa: E402
 from release_handoff import _selector_release  # noqa: E402
 from release_image import DockerCommandResult  # noqa: E402
+from release_image import DockerSubprocessExecutor  # noqa: E402
+from bootstrap_image import produce_initial_framework_image  # noqa: E402
 from release_packaging import _current_release, _verify_release  # noqa: E402
+from framework_compiler_currentness_fixture import ConfiguredCompilerFixture  # noqa: E402
 
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -79,15 +82,27 @@ class InspectingDocker:
     ) -> None:
         self.manifest_sha256 = manifest_sha256
         self.source_context_sha256 = source_context_sha256
+        self.built_labels: dict[str, str] = {}
         self.exit_code = exit_code
         self.calls: list[tuple[str, ...]] = []
 
     def run(self, argv, *, cwd: Path, timeout_seconds: float) -> DockerCommandResult:
         self.calls.append(tuple(argv))
+        if argv[1] == "build":
+            for index, value in enumerate(argv):
+                if value == "--label":
+                    key, label = argv[index + 1].split("=", 1)
+                    self.built_labels[key] = label
+            Path(argv[argv.index("--iidfile") + 1]).write_text(IMAGE_ID + "\n", encoding="utf-8")
+            self.canary = json.loads((Path(argv[-1]) / "bootstrap-canary.json").read_bytes())
+            return DockerCommandResult(self.exit_code, b"build\n", b"")
+        if argv[1] == "run":
+            payload = {"schema": "caprmedio.bootstrap_image_canary.v1", "manifest_sha256": self.canary["manifest_sha256"], "source_context_sha256": self.canary["source_context_sha256"], "verified_files": len(self.canary["package_rows"]), "mcp_tools": ["get_mcp_reload_status"]}
+            return DockerCommandResult(self.exit_code, json.dumps(payload).encode(), b"")
         assert argv[:3] == ("docker", "image", "inspect")
         labels = {
-            PACKAGE_IMAGE_LABEL: self.manifest_sha256,
-            SOURCE_CONTEXT_IMAGE_LABEL: self.source_context_sha256,
+            PACKAGE_IMAGE_LABEL: self.manifest_sha256 or self.built_labels[PACKAGE_IMAGE_LABEL],
+            SOURCE_CONTEXT_IMAGE_LABEL: self.source_context_sha256 or self.built_labels[SOURCE_CONTEXT_IMAGE_LABEL],
         }
         payload = json.dumps([{"Id": IMAGE_ID, "Config": {"Labels": labels}}]).encode()
         return DockerCommandResult(self.exit_code, payload, b"")
@@ -126,24 +141,19 @@ class BoundaryChangedSession(RecordingSession):
 
 class FrameworkInitializationTests(unittest.TestCase):
     def setUp(self) -> None:
-        fixture_parent = RELEASE_ROOT.parents[3] / ".caprmedio_tmp" / "framework-initialization-tests"
-        fixture_parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="caprmedio-framework-initialization-", dir=fixture_parent))
+        self.compiler_fixture = ConfiguredCompilerFixture.create()
+        self.root = self.compiler_fixture.root
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py", b"tool\n")
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/app.py", b"app\n")
         self._write("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py", b"server\n")
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md", b"prompt\n")
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md", b"# ca\n")
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml", b"name: ca\n")
+        self._write("pyproject.toml", b"[project]\nname = 'bootstrap-fixture'\nversion = '0'\n")
+        self._write("uv.lock", b"version = 1\n")
         self._write(
-            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/source.md",
-            b"source\n",
-        )
-        self._write(
-            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-            "04_requirement/compiled.md",
-            b"compiled\n",
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile",
+            (RELEASE_ROOT.parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile").read_bytes(),
         )
         self.session = RecordingSession()
 
@@ -154,34 +164,41 @@ class FrameworkInitializationTests(unittest.TestCase):
         return target
 
     def _initialize(self, docker: InspectingDocker, *, emulate_directory_rename: bool = False):
+        plan = plan_initial_framework_installation(self.root)
+        executor = DockerSubprocessExecutor()
+
         def invoke():
             return initialize_framework_runtime(
                 self.root,
                 journal=self.session,
                 requested_run_id="bootstrap-action",
                 image_digest=IMAGE_ID,
-                image_executor=docker,
+                image_executor=executor,
             )
 
-        if not emulate_directory_rename:
-            return invoke()
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=docker.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+            self.assertEqual(evidence.execution_kind, "docker-subprocess")
+            if evidence.outcome != "verified":
+                return invoke()
+            if not emulate_directory_rename:
+                return invoke()
+            real_replace = os.replace
 
-        real_replace = os.replace
+            def retained_fixture_replace(source, target):
+                source_path = Path(source)
+                target_path = Path(target)
+                if source_path.is_dir():
+                    # The managed macOS host denies the production atomic
+                    # directory rename even in retained fixtures.  Simulate only
+                    # that OS primitive in this fixture; source staging remains
+                    # inspectable and production still calls os.replace directly.
+                    shutil.copytree(source_path, target_path, dirs_exist_ok=True)
+                    return None
+                return real_replace(source, target)
 
-        def retained_fixture_replace(source, target):
-            source_path = Path(source)
-            target_path = Path(target)
-            if source_path.is_dir():
-                # The managed macOS host denies the production atomic
-                # directory rename even in retained fixtures.  Simulate only
-                # that OS primitive in this fixture; source staging remains
-                # inspectable and production still calls os.replace directly.
-                shutil.copytree(source_path, target_path, dirs_exist_ok=True)
-                return None
-            return real_replace(source, target)
-
-        with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
-            return invoke()
+            with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
+                return invoke()
 
     def test_initializes_complete_content_addressed_package_selector_skill_and_canonical_terminal(self) -> None:
         plan = plan_initial_framework_installation(self.root)
@@ -199,8 +216,8 @@ class FrameworkInitializationTests(unittest.TestCase):
         self.assertEqual(result["state"], "installed")
         self.assertTrue((package / "manifest.toml").is_file())
         self.assertTrue((package / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py").is_file())
-        self.assertTrue((package / "METHODOLOGY/sources/001_CORE_META_MODEL/source.md").is_file())
-        self.assertTrue((package / "METHODOLOGY/compiled/04_requirement/compiled.md").is_file())
+        self.assertTrue((package / "METHODOLOGY/sources/001_CORE_META_MODEL/04_requirement/CA-R-001--foundation.md").is_file())
+        self.assertTrue((package / "METHODOLOGY/compiled/04_requirement/CA-R-001--foundation.md").is_file())
         self.assertFalse((package / "METHODOLOGY/compiled/000_APPLICABLE_MTHD_sources").exists())
         self.assertTrue((package / "SKILLS/ca/SKILL.md").is_file())
         self.assertEqual((public_skill / "SKILL.md").read_bytes(), (package / "SKILLS/ca/SKILL.md").read_bytes())
@@ -241,8 +258,10 @@ class FrameworkInitializationTests(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(b"retired\n")
         with self.assertRaises(FrameworkInitializationError) as raised:
-            initialization._compiled_methodology_files(retired_root)
-        self.assertEqual(raised.exception.code, "initial-methodology-compiled-obsolete")
+            initialization._compiled_methodology_files(
+                retired_root, plan_initial_framework_installation(self.root).compiler_currentness,
+            )
+        self.assertEqual(raised.exception.code, "initial-methodology-proof-invalid")
 
     def test_ignores_an_empty_legacy_compiled_role_sibling(self) -> None:
         """Empty retained role directories do not make the whole inventory empty."""
@@ -251,16 +270,16 @@ class FrameworkInitializationTests(unittest.TestCase):
         )
         legacy_role.mkdir()
 
-        files = initialization._compiled_methodology_files(self.root)
+        files = initialization._compiled_methodology_files(
+            self.root, plan_initial_framework_installation(self.root).compiler_currentness,
+        )
 
-        self.assertEqual(
+        self.assertIn(
+            self.root / (
+                ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+                "04_requirement/CA-R-001--foundation.md"
+            ),
             files,
-            [
-                self.root / (
-                    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-                    "04_requirement/compiled.md"
-                )
-            ],
         )
 
     def test_refuses_when_all_compiled_role_directories_are_empty(self) -> None:
@@ -272,9 +291,11 @@ class FrameworkInitializationTests(unittest.TestCase):
         (compiled_root / "09_ops").mkdir()
 
         with self.assertRaises(FrameworkInitializationError) as raised:
-            initialization._compiled_methodology_files(empty_root)
+            initialization._compiled_methodology_files(
+                empty_root, plan_initial_framework_installation(self.root).compiler_currentness,
+            )
 
-        self.assertEqual(raised.exception.code, "initial-methodology-compiled-missing")
+        self.assertEqual(raised.exception.code, "initial-methodology-proof-invalid")
 
     def test_refuses_a_symlinked_compiled_role_sibling(self) -> None:
         safe_target = self.root / "retained-compiled-role"
@@ -285,9 +306,11 @@ class FrameworkInitializationTests(unittest.TestCase):
         legacy_role.symlink_to(safe_target, target_is_directory=True)
 
         with self.assertRaises(FrameworkInitializationError) as raised:
-            initialization._compiled_methodology_files(self.root)
+            initialization._compiled_methodology_files(
+                self.root, plan_initial_framework_installation(self.root).compiler_currentness,
+            )
 
-        self.assertEqual(raised.exception.code, "initial-methodology-compiled-invalid")
+        self.assertEqual(raised.exception.code, "initial-methodology-compiled-unknown")
 
     def test_preserves_direct_action_recovery_refusal_without_any_publication(self) -> None:
         self.session = RecoveryRequiredSession()
@@ -302,6 +325,31 @@ class FrameworkInitializationTests(unittest.TestCase):
         self.assertEqual(raised.exception.code, "direct-action-recovery-required")
         self.assertFalse((self.root / ".caprmedio_runtime/framework/current.toml").exists())
         self.assertFalse((self.root / ".caprmedio_runtime/framework/releases").exists())
+        self.assertFalse((self.root / ".agents/skills/ca").exists())
+
+    def test_refuses_a_caller_controlled_fresh_inspector_before_any_publication(self) -> None:
+        """A retained trusted proof cannot be reopened through a supplied fake host."""
+        plan = plan_initial_framework_installation(self.root)
+        trusted = InspectingDocker(
+            manifest_sha256=plan.manifest_sha256,
+            source_context_sha256=plan.source_context_sha256,
+        )
+        executor = DockerSubprocessExecutor()
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=trusted.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+        self.assertEqual("docker-subprocess", evidence.execution_kind)
+        caller_controlled = InspectingDocker(
+            manifest_sha256=plan.manifest_sha256,
+            source_context_sha256=plan.source_context_sha256,
+        )
+        result = initialize_framework_runtime(
+            self.root, journal=self.session, requested_run_id="bootstrap-action",
+            image_digest=IMAGE_ID, image_executor=caller_controlled,
+        )
+        self.assertEqual("blocked", result["state"])
+        self.assertEqual("initial-image-executor-untrusted", result["reason"])
+        self.assertEqual([], caller_controlled.calls)
+        self.assertFalse((self.root / ".caprmedio_runtime/framework/current.toml").exists())
         self.assertFalse((self.root / ".agents/skills/ca").exists())
 
     def test_rechecks_the_empty_boundary_after_started_evidence_before_any_effect(self) -> None:
@@ -364,7 +412,7 @@ class FrameworkInitializationTests(unittest.TestCase):
         docker = InspectingDocker(manifest_sha256="0" * 64, source_context_sha256=plan.source_context_sha256)
         result = self._initialize(docker)
         self.assertEqual(result["state"], "blocked")
-        self.assertEqual(result["reason"], "image-package-binding-invalid")
+        self.assertEqual(result["reason"], "bootstrap-image-proof-missing")
         self.assertFalse((self.root / ".caprmedio_runtime/framework/current.toml").exists())
         self.assertFalse((self.root / ".caprmedio_runtime/framework/releases").exists())
         self.assertFalse((self.root / ".agents/skills/ca").exists())
@@ -376,7 +424,7 @@ class FrameworkInitializationTests(unittest.TestCase):
             InspectingDocker(manifest_sha256=plan.manifest_sha256, source_context_sha256="0" * 64)
         )
         self.assertEqual(result["state"], "blocked")
-        self.assertEqual(result["reason"], "image-source-context-binding-invalid")
+        self.assertEqual(result["reason"], "bootstrap-image-proof-missing")
         self.assertFalse((self.root / ".caprmedio_runtime/framework/current.toml").exists())
         self.assertFalse((self.root / ".agents/skills/ca").exists())
 

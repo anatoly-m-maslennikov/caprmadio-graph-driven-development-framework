@@ -26,6 +26,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1363-CORE_META_MODEL-CORE--define-atom-governed-subject.md
+  source_atom_id: CA-R-1363
+  source_atom_revision: 12
+  source_sha256: f897ce81ed4e0d630006ed7f0f382a082204b82bde93664e394d7e31abbf0b12
+  original_relations_sha256: cf083fc6909c16047a4a2a96c9a50e03f91fdb6be24a2277a01fa5beff61e7ca
 ---
 # Summary
 

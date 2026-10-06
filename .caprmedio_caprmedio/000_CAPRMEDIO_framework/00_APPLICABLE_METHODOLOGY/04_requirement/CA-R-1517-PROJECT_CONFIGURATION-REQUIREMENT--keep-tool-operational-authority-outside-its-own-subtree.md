@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1517-PROJECT_CONFIGURATION-REQUIREMENT--keep-tool-operational-authority-outside-its-own-subtree.md
+  source_atom_id: CA-R-1517
+  source_atom_revision: 4
+  source_sha256: d51414bd0d71f56f624bca023b9f041210d38fde1347a2ff71e70c866c4162ad
+  original_relations_sha256: dc06e30c7536414ebcf7defa6e912070a4e0aa496901d7bc1d1f3ab023d518d4
 ---
 # Summary
 

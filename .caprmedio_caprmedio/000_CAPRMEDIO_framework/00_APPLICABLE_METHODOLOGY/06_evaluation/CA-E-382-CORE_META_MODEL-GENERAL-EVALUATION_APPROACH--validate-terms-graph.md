@@ -42,6 +42,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-382-CORE_META_MODEL-GENERAL-EVALUATION_APPROACH--validate-terms-graph.md
+  source_atom_id: CA-E-382
+  source_atom_revision: 21
+  source_sha256: 605b14d1ec40fb708c294bdd01fca7c0b46c56cc8ec5cf3ef463a8575487d840
+  original_relations_sha256: c15fab4d4bed61578be628db073128611966a77960e483af8f8f19de14957ef8
 ---
 # Summary
 

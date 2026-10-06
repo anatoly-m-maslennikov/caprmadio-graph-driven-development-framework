@@ -21,6 +21,10 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-062-PROJECT_CONFIGURATION-ACTION--retire-legacy-structural-projections-after-consumer-cutover.md
+  source_atom_id: CA-O-062
+  source_atom_revision: 6
+  source_sha256: 4002457d5a433c43ce1315daf9c3dea36948b0a62f967f4bc15009f6977c25e2
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Retire legacy structural Projections after consumer cutover
 

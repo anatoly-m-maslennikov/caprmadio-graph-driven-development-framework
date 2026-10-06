@@ -26,6 +26,10 @@ type: "Evaluation Approach"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-464-CORE_META_MODEL-EVALUATION_APPROACH--validate-journal-independence-from-git.md
+  source_atom_id: CA-E-464
+  source_atom_revision: 7
+  source_sha256: 9e5f9364ff97bc669460335b8fb93cc23dbc5e7c438edffd4f8699d3f86c4ead
+  original_relations_sha256: 0774b6ba3127da6adf5552674549654cd435db450e0b5fe4feb531497eae50d8
 ---
 # Summary
 

@@ -14,3 +14,7 @@
 **/venv
 **/node_modules
 **/.DS_Store
+**/.caprmedio_tmp
+**/.caprmedio_install
+**/.caprmedio_runtime
+**/tmp

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-309-CORE_META_MODEL-CORE--bind-materialized-representations-to-regeneration-sources.md
+  source_atom_id: CA-D-309
+  source_atom_revision: 12
+  source_sha256: 08d9a70a3f6edc6ad973af0c23f47639b9fa1e299a258e068a0cf12aa18f59ee
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

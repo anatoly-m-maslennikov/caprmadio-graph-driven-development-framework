@@ -31,6 +31,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-477-CORE_META_MODEL-QA_CASE--validate-gap-free-rmedo-conflict-resolution.md
+  source_atom_id: CA-E-477
+  source_atom_revision: 5
+  source_sha256: 5393c69f1cbb00a0d5c4366c5ca848a334d782ae251c7c98096ce5adcff9b232
+  original_relations_sha256: c89c4833648d15ecb2dff81226c071a52a398c71a6cb1dfdb244369ed98cc694
 ---
 # Summary
 

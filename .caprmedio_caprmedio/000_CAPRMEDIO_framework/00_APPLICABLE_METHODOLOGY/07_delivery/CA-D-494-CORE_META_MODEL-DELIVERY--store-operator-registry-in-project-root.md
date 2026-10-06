@@ -20,6 +20,10 @@ relations:
     - CA-D-274
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-494-CORE_META_MODEL-DELIVERY--store-operator-registry-in-project-root.md
+  source_atom_id: CA-D-494
+  source_atom_revision: 2
+  source_sha256: 9da2650279e0efee42812c499286dc8b0f63fe8922c3aaa41e14ae441b6004d6
+  original_relations_sha256: a65eca1addd76091855e72e01ea52ce14489f7951301cdf17bf615f34767c318
 ---
 # Summary
 

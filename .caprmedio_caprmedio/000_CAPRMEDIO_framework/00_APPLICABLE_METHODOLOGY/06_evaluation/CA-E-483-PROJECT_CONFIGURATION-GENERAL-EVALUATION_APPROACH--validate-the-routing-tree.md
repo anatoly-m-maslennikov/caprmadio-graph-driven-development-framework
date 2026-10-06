@@ -16,6 +16,10 @@ type: "Evaluation Approach"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/06_evaluation/CA-E-483-PROJECT_CONFIGURATION-GENERAL-EVALUATION_APPROACH--validate-the-routing-tree.md
+  source_atom_id: CA-E-483
+  source_atom_revision: 6
+  source_sha256: aacc1f70871357084c8594e2b06d4ebcf85a26fc4e1ecfe87fcb5bc108ae8d6e
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

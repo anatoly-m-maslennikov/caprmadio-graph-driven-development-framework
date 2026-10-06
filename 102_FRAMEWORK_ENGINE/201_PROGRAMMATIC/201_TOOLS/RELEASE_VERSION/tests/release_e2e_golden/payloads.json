@@ -1,0 +1,18 @@
+{
+  "fixture_kind": "MOCK DATA ONLY: presealed golden fixture; no Docker, publish, Git, or cleanup occurred",
+  "candidate_image_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "candidate_snapshot_manifest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "candidate_release": "N+1",
+  "selected_n_image_context": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "unit_module": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/tests/test_release_compilation.py",
+  "harnesses": [
+    "test_docker_e2e.py",
+    "test_selected_workflows_docker_e2e.py",
+    "test_selected_query_mcp_e2e.py"
+  ],
+  "harness_paths": [
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_workflows_docker_e2e.py",
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_query_mcp_e2e.py"
+  ]
+}

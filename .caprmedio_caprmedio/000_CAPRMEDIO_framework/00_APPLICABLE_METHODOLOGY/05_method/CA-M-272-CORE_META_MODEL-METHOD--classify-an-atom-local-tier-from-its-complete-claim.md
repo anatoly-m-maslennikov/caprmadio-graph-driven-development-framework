@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-272-CORE_META_MODEL-METHOD--classify-an-atom-local-tier-from-its-complete-claim.md
+  source_atom_id: CA-M-272
+  source_atom_revision: 12
+  source_sha256: 1aaf2686d62ef1346ad2cb06d69e9208d19e4a2e872ee5496df91ac70352a8bc
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

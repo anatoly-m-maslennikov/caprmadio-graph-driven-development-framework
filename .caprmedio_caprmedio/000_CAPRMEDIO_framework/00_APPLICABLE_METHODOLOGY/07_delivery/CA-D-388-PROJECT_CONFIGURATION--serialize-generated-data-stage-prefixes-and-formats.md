@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-388-PROJECT_CONFIGURATION--serialize-generated-data-stage-prefixes-and-formats.md
+  source_atom_id: CA-D-388
+  source_atom_revision: 8
+  source_sha256: dfa9f38febc8d3040f7e4328e256a15d2b134036929111189b8cf2d97f8ff76c
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

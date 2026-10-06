@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1256-CORE_META_MODEL-CORE-REQUIREMENT--classify-relational-atom-as-an-atom.md
+  source_atom_id: CA-R-1256
+  source_atom_revision: 11
+  source_sha256: 390f52f06501c8af6e74bf258b88220f366d07c13c998582367ec73c44c505f5
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

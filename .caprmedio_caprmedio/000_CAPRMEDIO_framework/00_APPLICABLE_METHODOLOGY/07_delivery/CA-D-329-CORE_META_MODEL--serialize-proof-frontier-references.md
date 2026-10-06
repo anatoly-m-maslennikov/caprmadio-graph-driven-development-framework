@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-329-CORE_META_MODEL--serialize-proof-frontier-references.md
+  source_atom_id: CA-D-329
+  source_atom_revision: 12
+  source_sha256: 965f664d842c8633f356944fdb9b3fd899da2e5aff2fa2999ac72581677345ca
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

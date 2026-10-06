@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-829-CORE_META_MODEL-CORE-REQUIREMENT--keep-same-tier-requirements-as-authority-peers.md
+  source_atom_id: CA-R-829
+  source_atom_revision: 19
+  source_sha256: b1b74722a316049da93f0ba921415047952a8e77998227eefe5cc135f6d4ac7f
+  original_relations_sha256: 07f6e3d027be08403c799496e2424657e39a1fcf21e24dde360096a3420105aa
 ---
 # Summary
 

@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1536-CORE_META_MODEL-GENERAL-REQUIREMENT--restrict-direct-plan-decomposition.md
+  source_atom_id: CA-R-1536
+  source_atom_revision: 5
+  source_sha256: c7804dc0ef3ba6b3a1439203182b33aa21e83d84d82e7a1c84cc5da37590044a
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

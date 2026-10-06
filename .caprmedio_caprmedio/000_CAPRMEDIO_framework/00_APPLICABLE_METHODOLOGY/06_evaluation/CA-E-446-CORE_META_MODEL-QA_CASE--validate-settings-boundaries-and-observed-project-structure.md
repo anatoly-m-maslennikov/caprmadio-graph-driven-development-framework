@@ -39,6 +39,10 @@ type: "QA Case"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/06_evaluation/CA-E-446-CORE_META_MODEL-QA_CASE--validate-settings-boundaries-and-observed-project-structure.md
+  source_atom_id: CA-E-446
+  source_atom_revision: 12
+  source_sha256: f5e70780f96e2dcd733fe4895b80c17fca06893d87f62db6f41fa21949cd147c
+  original_relations_sha256: 5b513e54cd74d69f9ff194112df4589c8ccd5efc50c0275bc0be2f0582063614
 ---
 # Summary
 

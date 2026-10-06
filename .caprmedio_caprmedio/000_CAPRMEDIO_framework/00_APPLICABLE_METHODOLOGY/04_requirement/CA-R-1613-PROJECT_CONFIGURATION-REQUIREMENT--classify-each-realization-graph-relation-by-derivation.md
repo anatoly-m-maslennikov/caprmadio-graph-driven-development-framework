@@ -24,6 +24,10 @@ relations:
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1613-PROJECT_CONFIGURATION-REQUIREMENT--classify-each-realization-graph-relation-by-derivation.md
+  source_atom_id: CA-R-1613
+  source_atom_revision: 4
+  source_sha256: 47b0fc650b5ad10e315e762a3101c3306f0ec74a19f3ab1509d692d91f5ed206
+  original_relations_sha256: 9498a3bf925a4c9ab02a1ce984d38e81a4cea3f350b87deeacc61ca5f1581a30
 ---
 # Summary
 

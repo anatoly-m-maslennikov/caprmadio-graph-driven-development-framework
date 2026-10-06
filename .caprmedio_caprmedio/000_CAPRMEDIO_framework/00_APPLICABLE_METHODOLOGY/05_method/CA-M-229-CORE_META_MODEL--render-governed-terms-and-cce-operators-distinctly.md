@@ -24,6 +24,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/05_method/CA-M-229-CORE_META_MODEL--render-governed-terms-and-cce-operators-distinctly.md
+  source_atom_id: CA-M-229
+  source_atom_revision: 12
+  source_sha256: 5c2a07ec7999cffffc142edcb4569622e74eda19f2b2f01ac1121a20c9891c84
+  original_relations_sha256: 1688c39b708a59bcad7890b4c32f25bce023d273ed253b9cb7eff3c5e5ab7c49
 ---
 # Summary
 

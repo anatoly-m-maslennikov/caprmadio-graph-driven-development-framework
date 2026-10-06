@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1483-CORE_META_MODEL-CORE--define-authoritative-project-structure.md
+  source_atom_id: CA-R-1483
+  source_atom_revision: 5
+  source_sha256: 9b18eb93b626c0520d5dc6fb93a0e3e4c4be4adf123bda002fb025a4f48ffce4
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -40,7 +40,9 @@ from framework_initialization import (  # noqa: E402
     initialize_framework_runtime,
     plan_initial_framework_installation,
 )
-from release_image import DockerCommandResult  # noqa: E402
+from release_image import DockerCommandResult, DockerSubprocessExecutor  # noqa: E402
+from bootstrap_image import produce_initial_framework_image  # noqa: E402
+from framework_compiler_currentness_fixture import ConfiguredCompilerFixture  # noqa: E402
 
 
 IMAGE_ID = "sha256:" + "a" * 64
@@ -61,7 +63,7 @@ REPOSITORY_ROOT = _repository_root()
 
 
 class FakeImageInspectionExecutor:
-    """Image-inspection-only host driver; it never invokes Docker."""
+    """Retained Docker protocol fixture; subprocess identity is patched at the boundary."""
 
     def __init__(self, *, manifest_sha256: str, source_context_sha256: str) -> None:
         self.manifest_sha256 = manifest_sha256
@@ -71,8 +73,25 @@ class FakeImageInspectionExecutor:
     def run(self, argv, *, cwd: Path, timeout_seconds: float) -> DockerCommandResult:
         del cwd, timeout_seconds
         self.calls.append(tuple(argv))
+        if argv[1] == "build":
+            self.labels = {}
+            for index, value in enumerate(argv):
+                if value == "--label":
+                    key, label = argv[index + 1].split("=", 1)
+                    self.labels[key] = label
+            Path(argv[argv.index("--iidfile") + 1]).write_text(IMAGE_ID + "\n", encoding="utf-8")
+            self.canary = json.loads((Path(argv[-1]) / "bootstrap-canary.json").read_bytes())
+            return DockerCommandResult(0, b"build\n", b"")
+        if argv[1] == "run":
+            return DockerCommandResult(0, json.dumps({
+                "schema": "caprmedio.bootstrap_image_canary.v1",
+                "manifest_sha256": self.canary["manifest_sha256"],
+                "source_context_sha256": self.canary["source_context_sha256"],
+                "verified_files": len(self.canary["package_rows"]),
+                "mcp_tools": ["get_mcp_reload_status"],
+            }).encode("utf-8"), b"")
         if tuple(argv[:3]) != ("docker", "image", "inspect"):
-            raise AssertionError("initializer requested an image effect instead of immutable inspection")
+            raise AssertionError("unexpected Docker protocol command")
         payload = json.dumps([{
             "Id": IMAGE_ID,
             "Config": {
@@ -87,9 +106,9 @@ class FakeImageInspectionExecutor:
 
 class FrameworkInitializationJournalTests(unittest.TestCase):
     def setUp(self) -> None:
-        fixture_parent = REPOSITORY_ROOT / ".caprmedio_tmp/framework-initialization-journal-tests"
-        fixture_parent.mkdir(parents=True, exist_ok=True)
-        self.root = Path(tempfile.mkdtemp(prefix="framework-initialization-journal-", dir=fixture_parent))
+        self.compiler_fixture = ConfiguredCompilerFixture.create()
+        self.root = self.compiler_fixture.root
+        (self.root / ".git").mkdir()
         self._write(
             ".caprmedio_caprmedio/caprmedio_project_settings.toml",
             b"[paths]\ncontrol_root = '.caprmedio_caprmedio'\n"
@@ -102,15 +121,11 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/201_PROMPTS/prompt.md", b"prompt\n")
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/SKILL.md", b"# ca\n")
         self._write("102_FRAMEWORK_ENGINE/202_AGENTIC/205_SKILLS/ca/agents/openai.yaml", b"name: ca\n")
+        self._write("pyproject.toml", b"[project]\nname = 'bootstrap-fixture'\nversion = '0'\n")
+        self._write("uv.lock", b"version = 1\n")
         self._write(
-            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/source.md",
-            b"source\n",
-        )
-        self._write(
-            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
-            "04_requirement/compiled.md",
-            b"compiled\n",
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile",
+            (RELEASE_ROOT.parents[1] / "203_APPS/WORKFLOW_ORCHESTRATOR/docker/Dockerfile").read_bytes(),
         )
         source = REPOSITORY_ROOT / ACTION_ATOM_RELATIVE
         target = self.root / ACTION_ATOM_RELATIVE
@@ -120,6 +135,9 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
             REPOSITORY_ROOT / ".caprmedio_caprmedio/operators_registry.toml",
             self.root / ".caprmedio_caprmedio/operators_registry.toml",
         )
+        # The Journal settings are part of the compiler's current input view;
+        # rebuild the retained canonical projection after adding them.
+        self.compiler_fixture.materialize_current_projection()
 
     def _write(self, relative: str, payload: bytes) -> Path:
         target = self.root / relative
@@ -153,6 +171,7 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
             manifest_sha256=plan.manifest_sha256,
             source_context_sha256=plan.source_context_sha256,
         )
+        executor = DockerSubprocessExecutor()
         real_replace = os.replace
 
         def retained_fixture_replace(source: str | bytes | os.PathLike[str] | os.PathLike[bytes],
@@ -167,14 +186,15 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
                 return
             real_replace(source, target)
 
-        with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
-            value = initialize_framework_runtime(
-                self.root,
-                journal=session,
-                requested_run_id=requested_run_id,
-                image_digest=IMAGE_ID,
-                image_executor=inspector,
-            )
+        executor = DockerSubprocessExecutor()
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=inspector.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+            self.assertEqual("docker-subprocess", evidence.execution_kind)
+            with patch("framework_initialization.os.replace", side_effect=retained_fixture_replace):
+                value = initialize_framework_runtime(
+                    self.root, journal=session, requested_run_id=requested_run_id,
+                    image_digest=IMAGE_ID, image_executor=executor,
+                )
         return value, inspector
 
     def test_initialization_records_one_real_direct_action_with_exact_effects(self) -> None:
@@ -182,7 +202,7 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
         result, inspector = self._initialize(session)
 
         self.assertEqual("installed", result["state"])
-        self.assertEqual([("docker", "image", "inspect", IMAGE_ID)], inspector.calls)
+        self.assertEqual(["build", "image", "run", "image"], [call[1] for call in inspector.calls])
         events = self._events()
         self.assertEqual(["started", "completed"], [event["event"] for event in events])
         started, terminal = events
@@ -223,7 +243,7 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
             )
 
         self.assertEqual("direct-action-already-terminal", raised.exception.code)
-        self.assertEqual(1, len(inspector.calls))
+        self.assertEqual(4, len(inspector.calls))
         self.assertEqual(["started", "completed"], [event["event"] for event in self._events()])
         self.assertEqual(first["release_root"], ".caprmedio_runtime/framework/releases/" + first["manifest_sha256"])
 
@@ -234,6 +254,7 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
             manifest_sha256=plan.manifest_sha256,
             source_context_sha256=plan.source_context_sha256,
         )
+        executor = DockerSubprocessExecutor()
         original_append = work_journal.append_sealed_events
         append_calls = 0
         real_replace = os.replace
@@ -253,17 +274,17 @@ class FrameworkInitializationJournalTests(unittest.TestCase):
                 return None
             return real_replace(source, target)
 
-        with (
-            patch("framework_initialization.os.replace", side_effect=retained_fixture_replace),
-            patch.object(work_journal, "append_sealed_events", side_effect=fail_terminal_append),
-        ):
-            result = initialize_framework_runtime(
-                self.root,
-                journal=session,
-                requested_run_id="initialize-framework-pending",
-                image_digest=IMAGE_ID,
-                image_executor=inspector,
-            )
+        with patch.object(DockerSubprocessExecutor, "run", side_effect=inspector.run):
+            evidence = produce_initial_framework_image(plan, executor=executor)
+            self.assertEqual("docker-subprocess", evidence.execution_kind)
+            with (
+                patch("framework_initialization.os.replace", side_effect=retained_fixture_replace),
+                patch.object(work_journal, "append_sealed_events", side_effect=fail_terminal_append),
+            ):
+                result = initialize_framework_runtime(
+                    self.root, journal=session, requested_run_id="initialize-framework-pending",
+                    image_digest=IMAGE_ID, image_executor=executor,
+                )
 
         self.assertEqual("recording_pending", result["state"])
         self.assertEqual("initial-journal-terminal-unavailable", result["reason"])

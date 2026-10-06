@@ -16,6 +16,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1257-CORE_META_MODEL-CORE-REQUIREMENT--classify-scope-unit-as-a-structural-entity.md
+  source_atom_id: CA-R-1257
+  source_atom_revision: 12
+  source_sha256: 86441dc5ed7ff582c64326f3da78061da35f73bd11f91a02db707f17c01de0ee
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

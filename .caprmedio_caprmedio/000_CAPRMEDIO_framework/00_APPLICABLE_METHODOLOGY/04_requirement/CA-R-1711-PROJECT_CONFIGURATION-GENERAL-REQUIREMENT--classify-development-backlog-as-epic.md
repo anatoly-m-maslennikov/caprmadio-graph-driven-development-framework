@@ -17,6 +17,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/04_requirement/CA-R-1711-PROJECT_CONFIGURATION-GENERAL-REQUIREMENT--classify-development-backlog-as-epic.md
+  source_atom_id: CA-R-1711
+  source_atom_revision: 20
+  source_sha256: 7853d3aabd859e56590d1192edddf628de6212128b90af02372e7e91f92b02ec
+  original_relations_sha256: 3f97079dbf044da763edfd22b9bbffb98e7077abb1078bfdacf7954e6fc26cf3
 ---
 # Summary
 

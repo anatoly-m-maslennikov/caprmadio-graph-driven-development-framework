@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1630-CORE_META_MODEL-REQUIREMENT--gate-atomic-admission-and-promotion.md
+  source_atom_id: CA-R-1630
+  source_atom_revision: 26
+  source_sha256: 98377265ae66b7bbf53def7f98fa0024ef1ee875c0b1bddb9958760e34750a2b
+  original_relations_sha256: 80b2f5265b62c0afd0761c4128afd064ed11e545823c5d03cd99765f9d07b0cd
 ---
 # Summary
 

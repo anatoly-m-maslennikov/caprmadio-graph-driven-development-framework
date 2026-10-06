@@ -17,8 +17,8 @@ import subprocess
 import tempfile
 import tomllib
 from dataclasses import asdict, dataclass, replace
-from pathlib import Path
-from typing import Literal, Protocol
+from pathlib import Path, PurePosixPath
+from typing import TYPE_CHECKING, Literal, Protocol
 
 from release_contract import (IMAGE_DOCKERFILE, PROJECT_SKILL_TARGET, CandidateSnapshotManifest,
                               ReleaseContractError, SealedAuthority, ValidatedCandidate, canonical_json)
@@ -28,6 +28,12 @@ from release_handoff import (COMPILER_ENTRYPOINT_RELATIVE, CURRENT_SELECTOR_RELA
 from release_packaging import RUNTIME_ROOT, _complete_rows, _render_manifest, _verify_release
 from release_suite import (EVIDENCE_ROOT as SUITE_ROOT, SUPPORTED_RUNNER, SuiteGateEvidence,
                            _observe_report, _safe_path, verify_bound_suite_evidence)
+from release_suite_reference_context import ReferenceRow, ReleaseSuiteReferenceContext
+
+if TYPE_CHECKING:
+    from release_e2e_gate import CandidateE2EGateEvidence
+    from release_full_gate import FullGateEvidence
+    from release_promotion import PromotionEvidence
 
 
 IMAGE_ID = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -35,6 +41,13 @@ IMAGE_ROOT = ".caprmedio_runtime/release_image"
 CANDIDATE_LABEL = "org.caprmedio.candidate"
 CONTEXT_LABEL = "org.caprmedio.context"
 MAX_OUTPUT_BYTES = 4 * 1024 * 1024
+_SHA256 = re.compile(r"[0-9a-f]{64}")
+_RETAINED_CONTEXT_BINDINGS = (
+    "candidate_snapshot_manifest_sha256",
+    "compiled_candidate_root",
+    "selected_n_identity",
+    "selected_n_image_context",
+)
 
 
 @dataclass(frozen=True)
@@ -145,9 +158,9 @@ def _bound(candidate: ValidatedCandidate, compilation: SealedCandidateCompilatio
 
 
 def _post_bound(candidate, compilation, suite, root, frozen):
-    _bound(candidate, compilation, suite)
     if _freeze(root) != frozen:
         raise ReleaseContractError("release-image-selection-stale", "executing N or public Skill changed during image phase")
+    _bound(candidate, compilation, suite)
 
 
 def _attempt(root: Path, candidate_sha: str, phase: str) -> Path:
@@ -297,7 +310,7 @@ def _context(root, candidate, compilation, attempt):
     pinned = (context / IMAGE_DOCKERFILE).read_bytes()
     if _digest(pinned) != candidate.manifest.candidate_image.dockerfile_sha256:
         raise ReleaseContractError("release-image-dockerfile-stale", "pinned Dockerfile digest differs")
-    _write(context / "Dockerfile", pinned + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n")
+    _write(context / "Dockerfile", pinned + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n")
     _write(context / "canary.py", CANARY.encode())
     package_rows = [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
                      "sha256": row.sha256, "mode": row.mode} for row in rows]
@@ -427,7 +440,7 @@ def _verify_build_artifacts(root, candidate, compilation, suite, build):
     spec = {"candidate_snapshot_manifest_sha256": identity, "package_manifest_sha256": _digest(manifest.encode()),
             "package_rows": [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
                               "sha256": row.sha256, "mode": row.mode} for row in rows], "engine_rows": engine_rows}
-    dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
+    dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
     if ((context / "canary.py").read_bytes() != CANARY.encode()
         or (context / "canary.json").read_bytes() != canonical_json(spec)
         or (context / "Dockerfile").read_bytes() != dockerfile
@@ -441,8 +454,81 @@ def _verify_build(root, candidate, compilation, suite, build):
     return _verify_build_artifacts(root, candidate, compilation, suite, build)
 
 
+def _retained_suite_context(payload: bytes, candidate, compilation, suite) -> ReleaseSuiteReferenceContext:
+    """Validate the immutable suite context without reopening current selection.
+
+    The source/currentness gate ran before the suite's own receipt was sealed.
+    Later image readers may run after promotion, so they validate the retained
+    receipt and its digest-bound context rather than treating current N as the
+    past suite's authority.
+    """
+    try:
+        value = json.loads(payload)
+        if not isinstance(value, dict) or canonical_json(value) != payload:
+            raise ValueError("context receipt is not canonical")
+        if set(value) != {"schema_version", *_RETAINED_CONTEXT_BINDINGS, "reference_rows", "control_context_digest"}:
+            raise ValueError("context receipt has an unknown schema")
+        if value["schema_version"] != 1:
+            raise ValueError("context receipt has an unsupported schema version")
+        if value["candidate_snapshot_manifest_sha256"] != candidate.manifest.sha256:
+            raise ValueError("context receipt binds a different candidate")
+        if value["compiled_candidate_root"] != compilation.child_materialization_root:
+            raise ValueError("context receipt binds a different compilation")
+        authority = getattr(candidate, "authority", None)
+        if value["selected_n_identity"] != getattr(authority, "executing_release", None):
+            raise ValueError("context receipt binds a different retained release")
+        if _SHA256.fullmatch(value["selected_n_image_context"]) is None:
+            raise ValueError("context receipt image context is invalid")
+        digest = value["control_context_digest"]
+        if (not isinstance(digest, str) or _SHA256.fullmatch(digest) is None
+                or digest != suite.control_context_digest):
+            raise ValueError("context receipt digest differs from suite evidence")
+        rows = value["reference_rows"]
+        if not isinstance(rows, list) or not rows:
+            raise ValueError("context receipt has no reference rows")
+        prior = ""
+        seen: set[str] = set()
+        for row in rows:
+            if not isinstance(row, dict) or set(row) != {"source_path", "sha256", "mode"}:
+                raise ValueError("context receipt reference row is malformed")
+            source_path, row_digest, mode = row["source_path"], row["sha256"], row["mode"]
+            if (not isinstance(source_path, str) or not source_path or "\\" in source_path or ":" in source_path
+                    or not isinstance(row_digest, str) or _SHA256.fullmatch(row_digest) is None
+                    or type(mode) is not int or not 0 <= mode <= 0o777):
+                raise ValueError("context receipt reference row is invalid")
+            path = PurePosixPath(source_path)
+            if (path.is_absolute() or path.as_posix() != source_path or not path.parts
+                    or any(part in {".", ".."} for part in path.parts)
+                    or path.parts[0] == ".caprmedio_runtime" or "_journal" in path.parts
+                    or "output" in path.parts or any(part == ".env" or part.startswith(".env.") for part in path.parts)):
+                raise ValueError("context receipt reference row escapes the control closure")
+            if source_path <= prior or source_path in seen:
+                raise ValueError("context receipt reference rows are not canonical")
+            prior = source_path
+            seen.add(source_path)
+        preimage = {
+            "schema_version": 1,
+            **{key: value[key] for key in _RETAINED_CONTEXT_BINDINGS},
+            "reference_rows": rows,
+        }
+        if _digest(canonical_json(preimage)) != digest:
+            raise ValueError("context receipt digest is not bound to its rows")
+        return ReleaseSuiteReferenceContext(
+            candidate.project_root,
+            tuple(sorted((key, value[key]) for key in _RETAINED_CONTEXT_BINDINGS)),
+            tuple(ReferenceRow(row["source_path"], row["sha256"], row["mode"]) for row in rows),
+            digest,
+            (),
+        )
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
+        raise ReleaseContractError(
+            "release-image-suite-untrusted",
+            "original suite context receipt is missing, changed or incomplete",
+        ) from error
+
+
 def _read_suite_artifacts(root, candidate, compilation, suite):
-    """Observe the original execution artifacts without consulting a selector."""
+    """Observe retained suite artifacts without consulting the current selector."""
     if not isinstance(suite, SuiteGateEvidence) or not suite.passed:
         raise ReleaseContractError("release-image-suite-untrusted", "image artifacts require a successful recorded suite")
     environment = candidate.manifest.full_suite_environment
@@ -455,14 +541,16 @@ def _read_suite_artifacts(root, candidate, compilation, suite):
         or not suite.evidence_root.startswith(prefix) or not suffix.startswith("attempt-") or "/" in suffix):
         raise ReleaseContractError("release-image-suite-untrusted", "suite artifacts differ from the exact sealed invocation")
     attempt = _safe_path(root, suite.evidence_root)
-    for name, expected in (("receipt.json", suite.receipt_sha256), ("stdout.bin", suite.stdout_sha256),
-                           ("stderr.bin", suite.stderr_sha256), ("coverage.xml", suite.report_sha256)):
+    files: dict[str, bytes] = {}
+    for name, expected in (("receipt.json", suite.receipt_sha256), ("context.json", None),
+                           ("stdout.bin", suite.stdout_sha256), ("stderr.bin", suite.stderr_sha256),
+                           ("coverage.xml", suite.report_sha256)):
         payload = _file(root, f"{suite.evidence_root}/{name}").read_bytes()
-        if _digest(payload) != expected or (name == "receipt.json" and payload != canonical_json(asdict(replace(suite, receipt_sha256=None)))):
+        if ((expected is not None and _digest(payload) != expected)
+                or (name == "receipt.json" and payload != canonical_json(asdict(replace(suite, receipt_sha256=None))))):
             raise ReleaseContractError("release-image-suite-untrusted", "original suite receipt or captured output changed")
-    tests, coverage, reason = _observe_report(attempt / "coverage.xml", compilation)
-    if reason or tests != suite.executed_tests or coverage != suite.coverage:
-        raise ReleaseContractError("release-image-suite-untrusted", "original suite report no longer establishes complete successful coverage")
+        files[name] = payload
+    return _retained_suite_context(files["context.json"], candidate, compilation, suite)
 
 
 def _artifact_inputs(candidate, compilation):
@@ -576,13 +664,21 @@ def read_image_execution_artifacts(candidate: ValidatedCandidate, compilation: S
         or build.execution_kind != "docker-subprocess" or evidence.execution_kind != "docker-subprocess"
         or not evidence.receipt_sha256):
         raise ReleaseContractError("release-image-evidence-untrusted", "promotion requires recorded actual Docker execution, never a test double")
-    _read_suite_artifacts(root, candidate, compilation, suite)
+    suite_context = _read_suite_artifacts(root, candidate, compilation, suite)
     try:
         _verify_build_artifacts(root, candidate, compilation, suite, build)
     except (ValueError, TypeError, KeyError, AttributeError, IndexError, OSError) as error:
         if isinstance(error, ReleaseContractError):
             raise
         raise ReleaseContractError("release-image-build-untrusted", "retained build artifacts are malformed or missing") from error
+    # Validate the original Unit report against the sealed module-rule bytes
+    # retained in the verified build context, independent of active selection.
+    tests, coverage, reason = _observe_report(
+        _safe_path(root, suite.evidence_root) / "coverage.xml",
+        _safe_path(root, build.context_root), candidate, compilation, suite_context,
+    )
+    if reason or tests != suite.executed_tests or coverage != suite.coverage:
+        raise ReleaseContractError("release-image-suite-untrusted", "original Unit report no longer proves its sealed source probes")
     if (evidence.candidate_snapshot_manifest_sha256 != candidate.manifest.sha256
         or evidence.build_receipt_sha256 != build.receipt_sha256
         or evidence.candidate_image_digest != build.candidate_image_digest):
@@ -752,7 +848,9 @@ def _prove_prior_absence(executor, prior_image, root, attempt, records, timeout)
 
 def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
                        suite: SuiteGateEvidence, build: ImageBuildEvidence,
-                       verification: ImageVerificationEvidence, promotion, *, executor: DockerExecutor,
+                       verification: ImageVerificationEvidence, promotion: PromotionEvidence, *,
+                       e2e: CandidateE2EGateEvidence, full_gate: FullGateEvidence,
+                       executor: DockerExecutor,
                        timeout_seconds: float = 120) -> ImageRetirementEvidence:
     """Retire only exact prior identity under D573's sealed settings condition.
 
@@ -770,7 +868,9 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
         raise ReleaseContractError("release-image-timeout-invalid", "retirement timeout must be within (0, 120]")
     admission_error = None
     try:
-        root = verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+        root = verify_bound_promotion_evidence(
+            candidate, compilation, suite, build, verification, promotion, e2e=e2e, full_gate=full_gate
+        )
     except ReleaseContractError as error:
         if not isinstance(promotion, PromotionEvidence) or "stale" not in error.code:
             raise
@@ -819,7 +919,10 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
                     else:
                         if _retention_settings(root, candidate, prior_image) != (condition, required_images, required):
                             raise ReleaseContractError("release-image-retention-stale", "retention settings changed before removal")
-                        verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+                        verify_bound_promotion_evidence(
+                            candidate, compilation, suite, build, verification, promotion,
+                            e2e=e2e, full_gate=full_gate,
+                        )
                         if _freeze(root) != frozen:
                             raise ReleaseContractError("release-image-retirement-stale", "promotion or retention changed before removal")
                         claim = attempt.parent / f"removal-{prior_image.removeprefix('sha256:')}.json"
@@ -829,6 +932,8 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
                             "candidate_image_digest": promotion.candidate_image_digest, "promotion_receipt_sha256": promotion.receipt_sha256,
                             "suite_receipt_sha256": suite.receipt_sha256, "build_receipt_sha256": build.receipt_sha256,
                             "verification_receipt_sha256": verification.receipt_sha256,
+                            "e2e_receipt_sha256": e2e.receipt_sha256,
+                            "full_gate_receipt_sha256": full_gate.receipt_sha256,
                             "framework_settings_digest": candidate.manifest.framework_settings_digest,
                             "condition": condition, "required_image_digests": required_images,
                             "attempt": attempt.relative_to(root).as_posix(), "argv": ["docker", "image", "rm", prior_image]})
@@ -855,7 +960,9 @@ def retire_prior_image(candidate: ValidatedCandidate, compilation: SealedCandida
                                     outcome, reason = "failed", "non-forced exact removal failed and the prior image remains"
                                 else:
                                     outcome, reason = "effect_uncertain", "removal effect or exact prior-image absence is unproven"
-        verify_bound_promotion_evidence(candidate, compilation, suite, build, verification, promotion)
+        verify_bound_promotion_evidence(
+            candidate, compilation, suite, build, verification, promotion, e2e=e2e, full_gate=full_gate
+        )
         if _freeze(root) != frozen:
             raise ReleaseContractError("release-image-retirement-stale", "selected N+1 or public Skill changed during retirement observation")
         if condition is not None and _retention_settings(root, candidate, prior_image) != (condition, required_images, required):

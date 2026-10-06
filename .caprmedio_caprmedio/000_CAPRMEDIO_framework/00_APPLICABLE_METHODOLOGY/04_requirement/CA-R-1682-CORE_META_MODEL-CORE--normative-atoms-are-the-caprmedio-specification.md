@@ -22,6 +22,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1682-CORE_META_MODEL-CORE--normative-atoms-are-the-caprmedio-specification.md
+  source_atom_id: CA-R-1682
+  source_atom_revision: 23
+  source_sha256: 09c755053e3394dd39922835ff4480ae7869235f354e69a788b3f8073d76aa2f
+  original_relations_sha256: 2f95e55e3d0a844c858c40eeab601ef29e88bfb9f5c8b9fd17a85ccd2af662a7
 ---
 # Summary
 

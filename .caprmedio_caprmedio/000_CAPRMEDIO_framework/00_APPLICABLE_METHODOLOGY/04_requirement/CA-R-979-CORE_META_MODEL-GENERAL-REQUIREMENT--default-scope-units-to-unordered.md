@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 10
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-979-CORE_META_MODEL-GENERAL-REQUIREMENT--default-scope-units-to-unordered.md
+  source_atom_id: CA-R-979
+  source_atom_revision: 16
+  source_sha256: 3f17b0012af73d9f8720916da5ca304fd846474e4f17754d0b957bfa79ca8ec1
+  original_relations_sha256: c54729b05f92992762a001f7173803c1757d25c6f598efc052f71d7d56b0f312
 ---
 # Summary
 

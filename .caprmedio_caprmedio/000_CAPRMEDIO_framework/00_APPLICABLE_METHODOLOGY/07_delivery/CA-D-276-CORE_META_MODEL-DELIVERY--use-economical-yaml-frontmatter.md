@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-276-CORE_META_MODEL-DELIVERY--use-economical-yaml-frontmatter.md
+  source_atom_id: CA-D-276
+  source_atom_revision: 15
+  source_sha256: ea6013f935f9b465d4a6ea5afd80a20a44dbc4ab50db2d031f325510f4881b06
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

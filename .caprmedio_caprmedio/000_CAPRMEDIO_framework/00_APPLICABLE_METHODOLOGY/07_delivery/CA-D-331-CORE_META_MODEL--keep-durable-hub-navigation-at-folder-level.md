@@ -15,6 +15,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-331-CORE_META_MODEL--keep-durable-hub-navigation-at-folder-level.md
+  source_atom_id: CA-D-331
+  source_atom_revision: 11
+  source_sha256: 4164a0e480deed49d8bb569559941e8b7822bac09c8a88cf02205982c532e6a2
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

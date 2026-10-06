@@ -14,7 +14,7 @@ subjects:
     - "Operator"
     - "Autonomous Confidence Threshold"
 version: 6
-updated_at: "2026-09-16 22:42:50 +0000"
+updated_at: "2026-10-04 15:07:08 +0000"
 relations: {}
 atom_id: "CA-O-006"
 content_role: "Operations"
@@ -27,8 +27,16 @@ type: "Action"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/CA-O-006-CORE_META_MODEL-ACTION--propose-source-corrections.md
+  source_atom_id: CA-O-006
+  source_atom_revision: 6
+  source_sha256: c4481d4af8744e326568a4fc3c84ce91d0974605851d7dc589dee8ed31eda677
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
-# Propose source corrections
+# Summary
+
+Propose source corrections
+
+## Operation
 
 Propose Source Corrections **means** the reusable Action that prepares an explicit correction for an identified conflict **in** one exact selected source frontier.
 
@@ -40,3 +48,5 @@ Propose Source Corrections **means** the reusable Action that prepares an explic
 6. return the proposal **and** its authorization needs. **if** no sufficiently supported gap-free correction fits the applicable authority **and** confidence constraints, report the exact uncertainty for Operator escalation.
 
 a proposal does **not** authorize **or** perform the change. no duplicate authority **must** be created merely **to** make archival possible.
+
+## Details

@@ -26,6 +26,8 @@ from release_image import (
     IMAGE_ID, ImageBuildEvidence, ImageVerificationEvidence,
     read_image_execution_artifacts, verify_bound_image_evidence,
 )
+from release_e2e_gate import CandidateE2EGateEvidence
+from release_full_gate import FullGateEvidence, verify_bound_full_gate_evidence
 from release_inventory import persistent_regular_files, refuse_secret_path
 from release_packaging import RUNTIME_ROOT, _read_row, _render_manifest, _verify_release
 from release_suite import (
@@ -106,15 +108,18 @@ def _skill_records(root: Path, folder: Path) -> list[dict]:
     return rows
 
 
-def _inputs(candidate, compilation, suite, build, verification) -> str:
+def _inputs(candidate, compilation, suite, build, verification, e2e, full_gate) -> str:
     if (not isinstance(candidate, ValidatedCandidate) or not isinstance(compilation, SealedCandidateCompilation)
             or not isinstance(suite, SuiteGateEvidence) or not isinstance(build, ImageBuildEvidence)
-            or not isinstance(verification, ImageVerificationEvidence)):
+            or not isinstance(verification, ImageVerificationEvidence)
+            or not isinstance(e2e, CandidateE2EGateEvidence)
+            or not isinstance(full_gate, FullGateEvidence)):
         raise ReleaseContractError("release-promotion-input-untrusted", "promotion requires typed internal gate evidence")
     return _digest(canonical_json({"candidate": candidate.manifest.model_dump(mode="json", by_alias=True),
           "authority": candidate.authority.model_dump(mode="json"), "intent": candidate.intent.model_dump(mode="json"),
           "compilation": compilation.model_dump(mode="json"), "suite": asdict(suite),
-          "build": asdict(build), "verification": asdict(verification)}))
+          "build": asdict(build), "verification": asdict(verification),
+          "e2e": asdict(e2e), "full_gate": asdict(full_gate)}))
 
 
 def _selector(candidate, image: str, context_sha256: str) -> bytes:
@@ -180,8 +185,9 @@ def _prove_prior_skill(root: Path, candidate: ValidatedCandidate, prior_selector
     return actual
 
 
-def _gate_artifacts(root, suite, build, verification):
-    return {item.evidence_root: _records(root, root / item.evidence_root) for item in (suite, build, verification)}
+def _gate_artifacts(root, suite, build, verification, e2e, full_gate):
+    return {item.evidence_root: _records(root, root / item.evidence_root)
+            for item in (suite, build, verification, e2e, full_gate)}
 
 
 def _pending(root: Path, directory: Path, input_sha: str) -> tuple[dict, str]:
@@ -195,7 +201,7 @@ def _pending(root: Path, directory: Path, input_sha: str) -> tuple[dict, str]:
     return intent, checksum
 
 
-def _resume_currentness(root, candidate, compilation, suite, build, verification, intent):
+def _resume_currentness(root, candidate, compilation, suite, build, verification, e2e, full_gate, intent):
     # Observe current source bytes without pretending the selector still names N.
     observed = build_validated_candidate(root, candidate.intent,
                                         observed_source_frontier_digest=candidate.authority.source_frontier_digest)
@@ -213,7 +219,8 @@ def _resume_currentness(root, candidate, compilation, suite, build, verification
         _read_row(root, row)
     package = _safe_path(root, intent["selected_release_root"])
     _verify_release(package, _render_manifest(candidate.manifest.sha256, compilation.package_rows), compilation.package_rows)
-    if _gate_artifacts(root, suite, build, verification) != intent["gate_artifacts"]:
+    verify_bound_full_gate_evidence(candidate, compilation, suite, build, verification, e2e, full_gate)
+    if _gate_artifacts(root, suite, build, verification, e2e, full_gate) != intent["gate_artifacts"]:
         raise ReleaseContractError("release-promotion-gates-stale", "original admitted suite or image artifacts changed")
     if _skill_records(root, package / "SKILLS/ca") != intent["candidate_skill"]:
         raise ReleaseContractError("release-promotion-skill-stale", "planned complete Skill changed")
@@ -236,9 +243,13 @@ def _publish_skill(staged: Path, target: Path) -> None:
 
 def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
                           suite: SuiteGateEvidence, build: ImageBuildEvidence,
-                          verification: ImageVerificationEvidence) -> PromotionEvidence:
+                          verification: ImageVerificationEvidence, *, e2e: CandidateE2EGateEvidence,
+                          full_gate: FullGateEvidence) -> PromotionEvidence:
     """Admit once, retain N, then publish selector and exact project Skill."""
-    input_sha = _inputs(candidate, compilation, suite, build, verification)
+    # Typed evidence and the exact input digest are checked before a retry can
+    # reopen its admitted intent. Its gates are reopened below before effects;
+    # a stale original artifact remains an observed pending recovery.
+    input_sha = _inputs(candidate, compilation, suite, build, verification, e2e, full_gate)
     root = Path(candidate.project_root)
     relative = f"{PROMOTION_ROOT}/{candidate.manifest.sha256}"
     directory = root / relative
@@ -248,6 +259,8 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
         _safe_path(root, relative)
         intent, checksum = _pending(root, directory, input_sha)
     else:
+        # Image/Unit evidence alone can never create a promotable intent.
+        verify_bound_full_gate_evidence(candidate, compilation, suite, build, verification, e2e, full_gate)
         verify_bound_image_evidence(candidate, compilation, suite, build, verification)
         prior = _file(root, CURRENT_SELECTOR_RELATIVE).read_bytes()
         # Refuse unsafe ancestors even when the public target is absent.
@@ -266,7 +279,11 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
                   )),
                   "candidate_image_digest": verification.candidate_image_digest, "prior_image_digest": _prior_image(prior),
                   "selected_release_root": package_relative, "prior_skill": old_skill, "candidate_skill": planned,
-                  "gate_artifacts": _gate_artifacts(root, suite, build, verification)}
+                  "e2e_receipt_sha256": e2e.receipt_sha256,
+                  "e2e_evidence_root": e2e.evidence_root,
+                  "full_gate_receipt_sha256": full_gate.receipt_sha256,
+                  "full_gate_evidence_root": full_gate.evidence_root,
+                  "gate_artifacts": _gate_artifacts(root, suite, build, verification, e2e, full_gate)}
         parent = _safe_path(root, PROMOTION_ROOT, create=True)
         staging = Path(tempfile.mkdtemp(prefix=".admission-", dir=parent))
         try:
@@ -298,7 +315,7 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
         active = _file(root, CURRENT_SELECTOR_RELATIVE).read_bytes()
         if active not in (prior, planned_selector):
             raise ReleaseContractError("release-promotion-selection-stale", "selector is neither the exact prior nor admitted candidate")
-        _resume_currentness(root, candidate, compilation, suite, build, verification, intent)
+        _resume_currentness(root, candidate, compilation, suite, build, verification, e2e, full_gate, intent)
         backup = directory / "prior-skill"
         if target.exists() or target.is_symlink():
             active_skill = _skill_records(root, target)
@@ -311,7 +328,7 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
         if active == prior:
             if active_skill != intent["prior_skill"] or backup.exists():
                 raise ReleaseContractError("release-promotion-selection-stale", "prior selection no longer has its exact Skill")
-            verify_bound_image_evidence(candidate, compilation, suite, build, verification)
+            verify_bound_full_gate_evidence(candidate, compilation, suite, build, verification, e2e, full_gate)
             _publish_selector(directory / "candidate-selector.toml", selector)
         if active_skill != intent["candidate_skill"]:
             if active_skill is not None:
@@ -327,7 +344,7 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
             if _skill_records(root, staged_skill) != intent["candidate_skill"]:
                 raise ReleaseContractError("release-promotion-skill-stale", "staged candidate Skill changed")
             _publish_skill(staged_skill, target)
-        _resume_currentness(root, candidate, compilation, suite, build, verification, intent)
+        _resume_currentness(root, candidate, compilation, suite, build, verification, e2e, full_gate, intent)
         if (_file(root, CURRENT_SELECTOR_RELATIVE).read_bytes() != planned_selector
                 or _skill_records(root, target) != intent["candidate_skill"]):
             raise ReleaseContractError("release-promotion-observation-incomplete", "candidate selector or public Skill is not observed")
@@ -352,9 +369,11 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
 
 
 def verify_bound_promotion_evidence(candidate, compilation, suite, build, verification,
-                                    evidence: PromotionEvidence) -> Path:
+                                    evidence: PromotionEvidence, *, e2e: CandidateE2EGateEvidence,
+                                    full_gate: FullGateEvidence) -> Path:
     """Reopen exact observed promotion for later, independently gated retirement."""
-    input_sha = _inputs(candidate, compilation, suite, build, verification)
+    verify_bound_full_gate_evidence(candidate, compilation, suite, build, verification, e2e, full_gate)
+    input_sha = _inputs(candidate, compilation, suite, build, verification, e2e, full_gate)
     if not isinstance(evidence, PromotionEvidence) or evidence.outcome != "promoted" or not evidence.receipt_sha256:
         raise ReleaseContractError("release-promotion-evidence-untrusted", "retirement requires a recorded observed promotion")
     if build.execution_kind != "docker-subprocess" or verification.execution_kind != "docker-subprocess":
@@ -372,13 +391,17 @@ def verify_bound_promotion_evidence(candidate, compilation, suite, build, verifi
             or evidence.framework_engine_root != intent["selected_release_root"] + "/FRAMEWORK_ENGINE"
             or evidence.methodology_root != intent["selected_release_root"] + "/METHODOLOGY"
             or evidence.skill_target != PROJECT_SKILL_TARGET
-            or evidence.retained_prior_selector_ref != directory.relative_to(root).as_posix() + "/prior-selector.toml"):
+            or evidence.retained_prior_selector_ref != directory.relative_to(root).as_posix() + "/prior-selector.toml"
+            or intent.get("e2e_receipt_sha256") != e2e.receipt_sha256
+            or intent.get("e2e_evidence_root") != e2e.evidence_root
+            or intent.get("full_gate_receipt_sha256") != full_gate.receipt_sha256
+            or intent.get("full_gate_evidence_root") != full_gate.evidence_root):
         raise ReleaseContractError("release-promotion-evidence-untrusted", "promotion receipt is outside the exact admitted observation")
     receipt = _file(root, f"{evidence.evidence_root}/receipt.json").read_bytes()
     if (_digest(receipt) != evidence.receipt_sha256
             or receipt != canonical_json(asdict(replace(evidence, receipt_sha256=None)))):
         raise ReleaseContractError("release-promotion-evidence-untrusted", "promotion receipt is changed or caller-forged")
-    _resume_currentness(root, candidate, compilation, suite, build, verification, intent)
+    _resume_currentness(root, candidate, compilation, suite, build, verification, e2e, full_gate, intent)
     backup = directory / "prior-skill"
     if evidence.retained_prior_skill_ref is not None:
         if (evidence.retained_prior_skill_ref != backup.relative_to(root).as_posix()

@@ -1,6 +1,7 @@
 """Real stdio protocol with mock Atoms; no live review or Agent dispatch."""
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import tomllib
@@ -37,6 +38,26 @@ D547_SELECTED_CONTROL_TOOLS = frozenset({
     'get_selected_workflow_run', 'get_selected_action_run',
     'recover_selected_run_recording',
 })
+
+
+class InstalledLayoutImport(unittest.TestCase):
+    def test_implementation_imports_from_framework_engine_layout(self):
+        """The release copies the Engine without the source-tree numeric prefix."""
+        with tempfile.TemporaryDirectory() as temporary:
+            installed = Path(temporary) / 'opt/caprmedio-framework/FRAMEWORK_ENGINE'
+            shutil.copytree(ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC',
+                            installed / '201_PROGRAMMATIC',
+                            ignore=shutil.ignore_patterns('__pycache__', '.caprmedio_tmp'))
+            shutil.copytree(ROOT / '102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW',
+                            installed / '202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW',
+                            ignore=shutil.ignore_patterns('__pycache__', '.mypy_cache'))
+            implementation = installed / '201_PROGRAMMATIC/204_MCP/implementation_server.py'
+            result = subprocess.run([sys.executable, '-B', '-c',
+                                     'import runpy, sys; sys.path.insert(0, ' +
+                                     repr(str(implementation.parent)) +
+                                     '); runpy.run_path(' + repr(str(implementation)) + ')'],
+                                    capture_output=True, text=True)
+            self.assertEqual(0, result.returncode, result.stderr)
 
 
 class MCPWorkflow(unittest.IsolatedAsyncioTestCase):

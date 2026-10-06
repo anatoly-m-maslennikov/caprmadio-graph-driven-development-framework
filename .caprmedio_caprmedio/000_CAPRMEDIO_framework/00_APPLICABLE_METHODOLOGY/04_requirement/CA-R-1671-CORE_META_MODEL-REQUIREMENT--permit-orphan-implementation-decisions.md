@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1671-CORE_META_MODEL-REQUIREMENT--permit-orphan-implementation-decisions.md
+  source_atom_id: CA-R-1671
+  source_atom_revision: 16
+  source_sha256: 021856089fca024124250c3bd2519f3037b7d993d9719db07d026af9c5cfb5d1
+  original_relations_sha256: fce039eb6fcf49a774bafbc3997d585ccfddedd08c2eb207f8d2ec7578da9892
 ---
 # Summary
 

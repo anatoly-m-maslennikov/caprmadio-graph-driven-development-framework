@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-365-CORE_META_MODEL--bind-project-settings-revisions-to-journal-receipts.md
+  source_atom_id: CA-D-365
+  source_atom_revision: 11
+  source_sha256: 24f13ae1d0de4a16bf7be7ff932b36e67f1fd4888c6b2048f9646796c39f11eb
+  original_relations_sha256: 1362486b734d90918b1d2949ab26e315125674e562b6b82d60abc7b3350f9e84
 ---
 # Summary
 

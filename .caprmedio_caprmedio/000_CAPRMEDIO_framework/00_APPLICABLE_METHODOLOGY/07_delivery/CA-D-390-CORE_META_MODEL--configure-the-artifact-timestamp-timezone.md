@@ -21,6 +21,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-390-CORE_META_MODEL--configure-the-artifact-timestamp-timezone.md
+  source_atom_id: CA-D-390
+  source_atom_revision: 8
+  source_sha256: 3042bb9e7056b85e8b0b248e83869f8145260da9813ca31101963e923bf4c67e
+  original_relations_sha256: ad300b03e304b312918653de943d5511c34469376b727407e31a64564f30817e
 ---
 # Summary
 

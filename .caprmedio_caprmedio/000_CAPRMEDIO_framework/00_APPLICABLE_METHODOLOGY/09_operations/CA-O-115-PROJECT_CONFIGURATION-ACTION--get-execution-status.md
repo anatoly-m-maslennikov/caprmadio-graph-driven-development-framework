@@ -24,6 +24,10 @@ relations:
   relates_to: [CA-R-1807, CA-D-515]
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/09_operations/CA-O-115-PROJECT_CONFIGURATION-ACTION--get-execution-status.md
+  source_atom_id: CA-O-115
+  source_atom_revision: 1
+  source_sha256: 92240b8e3fa910ce3f170b15b2b82f33590908b31fdd922a06fc34c0c2eee809
+  original_relations_sha256: e2df6568698de8ec902fa9593a1d99ff29deda96a92726bf82b9e84251d47c5c
 ---
 # Summary
 

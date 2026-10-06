@@ -19,6 +19,10 @@ author: "Anatoly Maslennikov"
 global_tier: 9
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1466-CORE_META_MODEL-CORE--keep-git-integration-in-an-extension.md
+  source_atom_id: CA-R-1466
+  source_atom_revision: 5
+  source_sha256: 6c2a5bbdab877fc8e87f62ef81ba06c00a8baab497c5e145db0e94b711f6a8a8
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 

@@ -18,6 +18,10 @@ author: "Anatoly Maslennikov"
 global_tier: 11
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1038-CORE_META_MODEL--permit-multiple-child-rows-in-one-lineage-impact-analysis.md
+  source_atom_id: CA-R-1038
+  source_atom_revision: 14
+  source_sha256: 0712ffaa62550c0feed6ccbaa322f9e6193180e0e2020e8869dba28df6614d1a
+  original_relations_sha256: 1224d2227a57da4b7ae58f052d9180c91883387e243c0477c4a82b65684a086d
 ---
 # Summary
 

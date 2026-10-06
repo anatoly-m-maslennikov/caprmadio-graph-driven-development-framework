@@ -18,6 +18,10 @@ subjects:
 relations: {}
 projection:
   source_carrier_path: ../000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-507-CORE_META_MODEL-CORE--separate-entity-identity-from-carrier-format.md
+  source_atom_id: CA-D-507
+  source_atom_revision: 1
+  source_sha256: f972031598deeda63106bb92875fde04f7a34c27916d4a717a481286f1fb2a88
+  original_relations_sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 ---
 # Summary
 
