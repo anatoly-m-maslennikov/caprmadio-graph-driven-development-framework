@@ -18,7 +18,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 21
-updated_at: "2026-10-06 03:53:17 +0000"
+updated_at: "2026-10-06 04:35:30 +0000"
 relations: {}
 ---
 # Summary
@@ -42,6 +42,8 @@ The Operator now restores all previously postponed required work: the all-sixtee
 Release Run `release-first-cut-20261006-N5` stopped at the closed Unit gate: 1,636 testcase outcomes, 874 passing, 701 errors and 61 failures. The dominant failure was fixture scratch inside a read-only candidate workspace. Its interruption is already recorded and its checkpoint has no pending events; do not replay it or use recording recovery to imply release success. After the bounded harness and confirmed product repairs, admit a fresh Run with fresh sources. No N+1 package, image, promotion or retirement resulted from N5.
 
 P1755-P1764 bind the current bounded repairs and restored HTTP/restart proof. P1765-P1772 carry the independently bounded suite/HTTP assignments. Their local acceptance does not substitute for the existing release, status, query and final-audit execution gates. The final review identified occupied Create conflicts, incomplete structural-change coverage, graph secret/recording boundaries, compiler publication freshness and workspace ancestor aliases as defects to repair before closure.
+
+Fresh Run `release-epic-resume-20261006-N6` stopped before the test gate with `release-copy-ownership-unproven`. Its interruption is recorded and no pending events remain. P1774/C491 own diagnosis and bounded repair; no delivery, image or promotion is claimed. P1773 owns exact admitted Harness pin maintenance. After accepted repairs, use another fresh source-bound Run; retain N6 as evidence without replay.
 
 ### Current Operator-selected scope
 

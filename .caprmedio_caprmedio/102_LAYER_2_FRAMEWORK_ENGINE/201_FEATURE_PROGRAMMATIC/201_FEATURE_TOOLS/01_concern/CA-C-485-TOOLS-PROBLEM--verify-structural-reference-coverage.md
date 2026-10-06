@@ -31,6 +31,8 @@ Source/mock results do not establish actual release completion.
 
 ## Blast radius
 
+The restored audit additionally found resulting-tree validation delayed until apply, caller-asserted Goal/Carrier coverage, absent Move reparenting coverage and secret-content recovery serialization. CA-P-1776 owns these bounded repairs against O012/O005/O014. Existing narrower reference-repair evidence does not close those new findings.
+
 The affected selected Workflow, full release gate and CA-P-1655 final acceptance.
 
 ## Disposition
