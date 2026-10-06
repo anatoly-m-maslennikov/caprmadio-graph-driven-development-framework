@@ -6,8 +6,8 @@ from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
 
-ROOT = Path(__file__).resolve().parents[4]
-PROMPTS = ROOT / '102_FRAMEWORK_ENGINE/202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW'
+ENGINE = Path(__file__).resolve().parents[3]
+PROMPTS = ENGINE / '202_AGENTIC/202_PROMPTS/ACTION_PROMPTS/RMED_ATOM_REVIEW'
 sys.path.insert(0, str(PROMPTS))
 from workflow_evidence import RunEvidence  # noqa: E402 - repository path bootstrap
 from workflow_progress import CHECKS, report_progress  # noqa: E402

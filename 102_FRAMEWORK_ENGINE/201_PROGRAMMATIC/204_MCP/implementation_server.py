@@ -8,13 +8,14 @@ from mcp.server import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
 
-TOOLS = Path(__file__).resolve().parents[1] / '201_TOOLS/RMED_ATOMS_BASE_REVISE'
+TOOLS_ROOT = Path(__file__).resolve().parents[1] / '201_TOOLS'
+TOOLS = TOOLS_ROOT / 'RMED_ATOMS_BASE_REVISE'
+sys.path.insert(0, str(TOOLS_ROOT))
+sys.path.insert(0, str(TOOLS_ROOT / 'VALIDATE_ATOMS'))
 sys.path.insert(0, str(TOOLS))
 from rmed_atoms_base_revise import Request, run  # noqa: E402 - repository path bootstrap
-sys.path.insert(0, str(TOOLS.parent))
-sys.path.insert(0, str(TOOLS.parent / 'VALIDATE_ATOMS'))
 from capability_discovery.service import Service, Query, Context, Observation, Watch  # noqa: E402
-sys.path.insert(0, str(TOOLS.parent.parent / '203_APPS/WORKFLOW_ORCHESTRATOR'))
+sys.path.insert(0, str(TOOLS_ROOT.parent / '203_APPS/WORKFLOW_ORCHESTRATOR'))
 from orchestrator import Request as OrchestratorRequest, run as orchestrate  # noqa: E402
 from selected_routes import QUERY_ROUTE_NAMES, register_selected_routes  # noqa: E402
 
