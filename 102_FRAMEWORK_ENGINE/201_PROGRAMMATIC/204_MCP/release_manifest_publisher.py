@@ -115,12 +115,28 @@ def _refresh_admission_structure_matches(old: Any, current: Any) -> bool:
 def _refresh_candidate(
     project_root: Path, *, require_drift: bool = True,
 ) -> tuple[dict[str, Any], dict[str, Any], bytes, Path, dict[str, Any]]:
-    """Construct the guarded sixteen-route admission-only refresh candidate."""
+    """Construct the one guarded sixteen-route refresh candidate.
+
+    D588 is deliberately not a second refresh protocol: its one closed raw
+    historical input is admitted only when the normal stale-Release-admission
+    reader refuses it.  Both successors then use the identical opaque context,
+    intent, write, readback, recording and recovery boundaries below.
+    """
     try:
         from selected_routes import load_release_manifest_refresh_base
         current = load_release_manifest_refresh_base(project_root)
-    except (ImportError, OSError, TypeError, ValueError, RuntimeError) as error:
-        raise ReleaseManifestPublishError(f"refresh input manifest is unavailable: {error}") from error
+    except (ImportError, OSError, TypeError, ValueError, RuntimeError) as normal_error:
+        try:
+            from selected_source_refresh import derive_registered_source_refresh
+            current, candidate, payload, path = derive_registered_source_refresh(project_root)
+        except (ImportError, OSError, TypeError, ValueError, RuntimeError) as registered_error:
+            raise ReleaseManifestPublishError(
+                f"refresh input manifest is unavailable: {normal_error}"
+            ) from registered_error
+        admissions = candidate.get("release_source_admissions") if isinstance(candidate, Mapping) else None
+        if not isinstance(admissions, list) or len(admissions) != 1 or not isinstance(admissions[0], Mapping):
+            raise ReleaseManifestPublishError("registered refresh candidate has no current Release admission")
+        return current, candidate, payload, path, copy.deepcopy(dict(admissions[0]))
     if not isinstance(current, Mapping):
         raise ReleaseManifestPublishError("refresh input manifest returned an invalid contract")
     current = copy.deepcopy(dict(current))

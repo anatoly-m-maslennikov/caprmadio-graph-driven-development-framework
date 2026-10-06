@@ -59,7 +59,26 @@ class ReleaseManifestRefreshTest(unittest.TestCase):
         self.fixture.setUp()
         self.addCleanup(self.fixture.doCleanups)
         self.root = self.fixture.root
-        GoldenProject(REPOSITORY, self.root, GoldenCase("W04", "change_atom_status"))._copy_reviewed_manifest()
+        project = GoldenProject(REPOSITORY, self.root, GoldenCase("W04", "change_atom_status"))
+        original_copy_pinned = project._copy_pinned
+        old_action = Path(
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/"
+            "CA-O-128-CORE_META_MODEL-ACTION--apply-authorized-atom-lifecycle-changes.md"
+        )
+        archive = old_action.parent / "archive" / (old_action.stem + "@3.md")
+
+        def copy_historical_pin(relative: Path, expected_digest: object) -> None:
+            if relative == old_action and expected_digest == "b5d052e97bae6ada98849380199e5c67cbf090900beb33ca202f7872d56301e8":
+                source = REPOSITORY / archive
+                target = self.root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                return
+            original_copy_pinned(relative, expected_digest)
+
+        project._copy_pinned = copy_historical_pin
+        project._copy_reviewed_manifest()
         for relative in (
             Path(".caprmedio_caprmedio/operators_registry.toml"),
             Path(".caprmedio_caprmedio/caprmedio_project_settings.toml"),
@@ -175,7 +194,7 @@ class ReleaseManifestRefreshTest(unittest.TestCase):
 
             result = refresh_release_manifest(self.root, execute=True, authorization=self._authorize(plan))
             loaded = load_selected_manifest(self.root)
-            self.assertEqual("published", result["disposition"])
+            self.assertEqual("published", result["disposition"], result)
             self.assertEqual("refresh", result["publication_operation"])
             self.assertEqual(self.initial["routes"], loaded["routes"])
             self.assertEqual(self.initial["query_source_admissions"], loaded["query_source_admissions"])
@@ -184,6 +203,27 @@ class ReleaseManifestRefreshTest(unittest.TestCase):
             self.assertEqual(current_route, loaded["routes"][-1])
             self.assertEqual([current_admission], loaded["release_source_admissions"])
             self.assertNotEqual(self.initial["release_source_admissions"], loaded["release_source_admissions"])
+
+    def test_closed_registered_source_successor_uses_the_same_trusted_refresh_lifecycle(self) -> None:
+        """D588 falls through the existing refresh boundary; it adds no lifecycle."""
+        with self.advanced_admission() as (_, current_admission):
+            candidate = copy.deepcopy(self.initial)
+            candidate.pop("manifest_ref")
+            candidate["release_source_admissions"] = [copy.deepcopy(current_admission)]
+            candidate.pop("canonical_manifest_sha256")
+            candidate["canonical_manifest_sha256"] = canonical_digest(candidate)
+            payload = json.dumps(candidate, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8") + b"\n"
+            derived = (copy.deepcopy(self.initial), candidate, payload, self.path)
+            with patch(
+                "selected_routes.load_release_manifest_refresh_base",
+                side_effect=SelectedRouteError("registered historical source input"),
+            ), patch("selected_source_refresh.derive_registered_source_refresh", return_value=derived), self._git_evidence():
+                plan = plan_release_manifest_refresh(self.root)
+                self.assertEqual(self.initial_bytes, self.path.read_bytes())
+                result = refresh_release_manifest(self.root, execute=True, authorization=self._authorize(plan))
+            self.assertEqual("published", result["disposition"], result)
+            self.assertEqual(payload, self.path.read_bytes())
+            self.assertEqual([current_admission], load_selected_manifest(self.root)["release_source_admissions"])
 
     def test_current_or_forged_or_wrong_operation_refresh_refuses_before_effects(self) -> None:
         with self.assertRaises(ReleaseManifestPublishError):

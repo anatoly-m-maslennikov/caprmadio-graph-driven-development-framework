@@ -513,19 +513,10 @@ def load_release_manifest_refresh_base(root: str | Path) -> dict[str, Any]:
     }
 
 
-def load_selected_manifest(root: str | Path) -> dict[str, Any]:
-    """Verify the current15 or source-admitted additive16 file, without dispatch.
-
-    Optional Release evidence belongs only to this canonical file. It does not
-    alter D527 request bindings or the public fifteen-route registration set.
-    """
+def validate_selected_manifest_document(root: str | Path, manifest: Any) -> dict[str, Any]:
+    """Validate one in-memory selected binding document without touching its carrier."""
     project_root = Path(root).resolve(strict=True)
     manifest_ref = selected_manifest_ref(project_root)
-    try:
-        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"),
-                              object_pairs_hook=_unique_manifest_object)
-    except (OSError, json.JSONDecodeError) as error:
-        raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
     required = {"schema_version", "source_freshness", "query_source_admissions", "routes", "canonical_manifest_sha256"}
     if (not isinstance(manifest, Mapping) or not required <= set(manifest)
             or set(manifest) - required - {"release_source_admissions"}
@@ -572,6 +563,21 @@ def load_selected_manifest(root: str | Path) -> dict[str, Any]:
     if release_admissions:
         result["release_source_admissions"] = release_admissions
     return result
+
+
+def load_selected_manifest(root: str | Path) -> dict[str, Any]:
+    """Verify the current15 or source-admitted additive16 file, without dispatch.
+
+    Optional Release evidence belongs only to this canonical file. It does not
+    alter D527 request bindings or the public fifteen-route registration set.
+    """
+    project_root = Path(root).resolve(strict=True)
+    try:
+        manifest = json.loads(_manifest_path(project_root).read_text(encoding="utf-8"),
+                              object_pairs_hook=_unique_manifest_object)
+    except (OSError, json.JSONDecodeError) as error:
+        raise SelectedRouteError("selected workflow binding manifest is unreadable") from error
+    return validate_selected_manifest_document(project_root, manifest)
 
 
 def _find_shadow_manifest_fields(
