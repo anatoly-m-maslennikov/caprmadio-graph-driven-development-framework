@@ -5,10 +5,10 @@ type: Problem
 current_scope_unit: PROGRAMMATIC
 local_tier: Standard
 global_tier: 8
-status: active
+status: resolved
 author: Anatoly Maslennikov
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 18:24:00 +0000"
 subjects:
   governs: "Repair N12 selected Run fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier, Journal]
@@ -37,5 +37,4 @@ repair confirmed selected-run/MCP fixture or code mismatches while preserving ex
 
 ## Result
 
-root-cause investigation and bounded repair are in progress. retain the full frozen report and historical Events.
-
+the selected-execution suite passes 20 tests and the isolated MCP suite passes 4 tests. the fixtures copy exact bound sources into disposable Projects, allow bounded gateway cold start and correctly stop before a next Step while terminal recording is pending. independent review accepts the changes; actual all-route release proof remains separate. retain the frozen N12 report and historical Events.

@@ -495,6 +495,14 @@ class SelectedExecutionTests(unittest.TestCase):
 
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016")
         sources = implementation_actions.current_source_bindings(REPOSITORY)
+        # The fixture executes against its disposable Project.  Preserve the
+        # exact current source pins there so prompt validation remains real
+        # while no handler can write into the source checkout.
+        for binding in sources:
+            source = REPOSITORY / binding["path"]
+            destination = self.root / binding["path"]
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(source.read_bytes())
         execution = request["execution"]
         assert isinstance(execution, dict)
         execution["request_id"] = "current-o016"
@@ -597,7 +605,9 @@ class SelectedExecutionTests(unittest.TestCase):
                 for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
             },
         }
-        runner = SelectedExecution(REPOSITORY, implementation_agent=agent)
+        # This is an executable fixture: writes from the implementation run
+        # belong in its disposable Project, never in the source checkout.
+        runner = SelectedExecution(self.root, implementation_agent=agent)
         graph = selected._validate_graph(execution)
         execution["requested_runs"] = build_requested_runs(
             graph, "current-o016", {"CA-O-094": 2},
@@ -772,12 +782,14 @@ class SelectedExecutionTests(unittest.TestCase):
             pending = runner.dispatch(frozen)
 
         self.assertEqual(pending["disposition"], "recording_pending")
-        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
+        # A missing terminal receipt for step 1 cannot authorize its On Result
+        # transition, so step 2 must not be dispatched before recovery.
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1"])
         for event_id in pending["pending_event_ids"]:
             work_journal.recover_pending_event(self.root, event_id)
         recovered = runner.dispatch(frozen)
         self.assertEqual(recovered, pending)
-        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1"])
 
     def test_revert_adapter_uses_the_existing_lazy_action_run(self) -> None:
         frozen = self.executor({}).freeze(self.request())

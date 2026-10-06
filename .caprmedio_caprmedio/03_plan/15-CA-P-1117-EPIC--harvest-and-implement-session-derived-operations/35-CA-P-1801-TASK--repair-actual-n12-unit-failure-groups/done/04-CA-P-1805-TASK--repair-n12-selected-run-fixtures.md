@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-06 17:46:21 +0000"
+updated_at: "2026-10-06 18:24:00 +0000"
 subjects:
   governs: "Repair N12 selected Run fixtures"
   depends_on: [Implementation, Evaluation, Source Carrier]
@@ -38,3 +38,6 @@ repair confirmed selected-run/MCP fixture or code mismatches while preserving ex
 
 the observed failures are explained and fixed against current authority; focused regression suites pass and independent review accepts the bounded change. actual full Release acceptance remains with the parent Plan.
 
+## Result
+
+the selected-execution suite passes 20 tests and the isolated MCP suite passes 4 tests. the fixtures copy exact bound sources into disposable Projects, allow bounded gateway cold start and correctly stop before a next Step while terminal recording is pending. independent review accepts the changes; actual all-route release proof remains separate.

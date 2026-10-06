@@ -39,6 +39,11 @@ D547_SELECTED_CONTROL_TOOLS = frozenset({
     'recover_selected_run_recording',
 })
 
+# The stable gateway first boots an isolated implementation generation.  The
+# source tree is intentionally cold in sealed Unit runs, so allow that bounded
+# startup before the MCP client's first protocol probe expires.
+GATEWAY_STARTUP_TIMEOUT_SECONDS = 30
+
 
 class InstalledLayoutImport(unittest.TestCase):
     def test_implementation_imports_from_framework_engine_layout(self):
@@ -99,7 +104,8 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         self._copy_active_query_bindings()
         params = StdioServerParameters(command=sys.executable,
             args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params, cache=None) as client:
+        async with Client(params, cache=None,
+                          read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
             registered = {tool.name: tool for tool in (await client.list_tools()).tools}
             self.assertTrue(set(QUERY_ROUTE_NAMES) <= set(registered))
             self.assertTrue(all(registered[name].annotations.read_only_hint for name in QUERY_ROUTE_NAMES))
@@ -113,7 +119,7 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
     async def test_stdio_gather_check_fix_report(self):
         params = StdioServerParameters(command=sys.executable,
             args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params) as client:
+        async with Client(params, read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
             tools = await client.list_tools()
             actual_tool_names = {tool.name for tool in tools.tools}
             self.assertEqual(D547_ADMITTED_SELECTED_ROUTES, SELECTED_ROUTE_NAMES)
@@ -187,7 +193,8 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
 
     async def test_protocol_rejects_unknown_fields_and_path_escape(self):
         async with Client(StdioServerParameters(command=sys.executable,
-                args=[str(SERVER), '--project-root', str(self.root)])) as client:
+                args=[str(SERVER), '--project-root', str(self.root)]),
+                read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
             for request in ({'operation': 'describe', 'surprise': True},
                             {'operation': 'status', 'run_id': '../escape'}):
                 result = await client.call_tool('rmed_atoms_base_revise', {'request': request})
