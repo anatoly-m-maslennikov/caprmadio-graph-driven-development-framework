@@ -4,9 +4,9 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 24
+version: 23
 updated_at: "2026-10-07 20:42:24 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
@@ -217,7 +217,7 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py",
-    "sha256": "8c1418db3eb21a2ec4795e98f1d0a3b56e33b1101b4d8ecd451659526a5ac4d2"
+    "sha256": "a43359c6b3984c85d8399c5aa371120572a8f3b6fc492f8aad8af66b16e6dbda"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_query_mcp_e2e.py",
@@ -231,3 +231,4 @@ This separate private control-authority block governs only the explicitly approv
 ```
 
 These source-path-sorted private byte pins explicitly admit the CA-D-582 executor, sealed context adapter, Driver, fixed grammar, three Harnesses, phase assignment, Full Gate reader, private reference-context and Unit deadline execution carriers, current predecessor-proof reader, and the Operator-approved unknown-effect resolver and existing recovery transport before source-binding admission or Workflow dispatch. They are defining D572 source evidence only and add no member to the closed Release admission record, canonical manifest, request, route, public Tool or selector. They contain no D572, admission-reader, canonical-manifest, runtime, receipt or output hash. The accepted reader reopens every declared regular source file and rejects missing, symlinked, altered, duplicate, unsafe or cyclic carriers before admission. These pins grant no execution authority and do not replace the sealed candidate/package inventory: later candidate execution must still bind and reopen those same actual source bytes under its existing currentness guards.
+

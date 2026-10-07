@@ -85,20 +85,75 @@ def _copy_interpreter(root: Path) -> Path:
     return destination
 
 
-def _fault_sitecustomize(directory: Path) -> None:
-    """Inject one fixture-only OSError at the real shared-writer boundary.
+_FAULT_ENVIRONMENT = "CAPRMEDIO_TEST_RELEASE_RECORDING_FAULT"
+_POST_EFFECT_FAULT = "effect-action-once"
+_BEFORE_EFFECT_ADMISSION_FAULT = "before-effect-admission-block"
+_DURABLE_IN_PROGRESS_FAULT = "durable-in-progress-block"
+_FAULTS = frozenset({_POST_EFFECT_FAULT, _BEFORE_EFFECT_ADMISSION_FAULT, _DURABLE_IN_PROGRESS_FAULT})
+_FAULT_MARKERS = {
+    _BEFORE_EFFECT_ADMISSION_FAULT: "before-effect-admission.ready",
+    _DURABLE_IN_PROGRESS_FAULT: "durable-in-progress.ready",
+}
 
-    The patch never fabricates a pending event.  The production shared writer
-    sees the OSError and is solely responsible for retaining the exact sealed
-    pending carrier.  It is constrained to an effect-bearing Action terminal,
-    so all Workflow/Step/Action start records and the two effect-free Release
-    observations are still written by the unmodified writer.
+
+def _fault_sitecustomize(directory: Path) -> None:
+    """Install bounded fixture-only faults at real Release execution boundaries.
+
+    ``effect-action-once`` preserves the existing real shared-writer OSError:
+    it never fabricates a pending event.  The two barrier faults only stop the
+    disposable worker: one is before the private Release Action body and the
+    other is immediately after its actual durable in-progress checkpoint.
+    Neither barrier manufactures a canonical event or permits continuation.
     """
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "sitecustomize.py").write_text(
         """import os
+import pathlib
+import time
 
-if os.environ.get("CAPRMEDIO_TEST_RELEASE_RECORDING_FAULT") == "effect-action-once":
+fault = os.environ.get("CAPRMEDIO_TEST_RELEASE_RECORDING_FAULT")
+root = pathlib.Path(os.environ.get("CAPRMEDIO_TEST_RELEASE_FAULT_ROOT", ""))
+
+def _marker(name):
+    if not root.is_dir():
+        raise RuntimeError("fixture fault root is unavailable")
+    path = root / name
+    path.write_text("ready\\n", encoding="ascii")
+    # The test terminates this disposable worker.  A return would admit a real
+    # effect, so expiry is a deterministic test-only refusal instead.
+    time.sleep(60)
+    raise RuntimeError("fixture fault barrier was not terminated")
+
+if fault == "before-effect-admission-block":
+    # The selected provider imports this callable by value, so wrap its live
+    # dispatch binding rather than only release_actions.execute_release_action.
+    import selected_native_providers
+    _real_execute = selected_native_providers.execute_release_action
+    _fired = False
+
+    def _before_admission(*args, **kwargs):
+        global _fired
+        if not _fired:
+            _fired = True
+            _marker("before-effect-admission.ready")
+        return _real_execute(*args, **kwargs)
+
+    selected_native_providers.execute_release_action = _before_admission
+elif fault == "durable-in-progress-block":
+    import release_actions
+    _real_checkpoint = release_actions._checkpoint
+    _fired = False
+
+    def _after_durable_checkpoint(run, *, index, context, result=None):
+        global _fired
+        value = _real_checkpoint(run, index=index, context=context, result=result)
+        if not _fired and result is None and release_actions.PHASES[index][2] == "deliver_sources":
+            _fired = True
+            _marker("durable-in-progress.ready")
+        return value
+
+    release_actions._checkpoint = _after_durable_checkpoint
+elif fault == "effect-action-once":
     import work_journal
 
     _real_append = work_journal.append_sealed_events
@@ -229,7 +284,7 @@ class ReleaseRecoveryDockerFixture:
         if os.environ.get("CAPRMEDIO_KEEP_DOCKER_FIXTURES") != "1":
             shutil.rmtree(self.root, ignore_errors=True)
 
-    def environment(self, *, fault: bool = False) -> dict[str, str]:
+    def environment(self, *, fault: str | bool | None = None) -> dict[str, str]:
         environment = dict(os.environ)
         environment.pop("CAPRMEDIO_RUNTIME_NAMESPACE", None)
         environment.pop("CAPRMEDIO_AGENT_MODE", None)
@@ -237,13 +292,20 @@ class ReleaseRecoveryDockerFixture:
         environment["PYTHONPATH"] = os.pathsep.join(
             part for part in (str(self.fault_import_root), str(TOOLS_ROOT), existing) if part
         )
-        if fault:
-            environment["CAPRMEDIO_TEST_RELEASE_RECORDING_FAULT"] = "effect-action-once"
-        else:
-            environment.pop("CAPRMEDIO_TEST_RELEASE_RECORDING_FAULT", None)
+        if fault is True:  # preserve the existing live post-effect test call shape
+            fault = _POST_EFFECT_FAULT
+        elif fault is False:
+            fault = None
+        if fault is not None and fault not in _FAULTS:
+            raise ReleaseRecoveryFixtureError(f"unsupported fixture fault: {fault}")
+        environment.pop(_FAULT_ENVIRONMENT, None)
+        environment.pop("CAPRMEDIO_TEST_RELEASE_FAULT_ROOT", None)
+        if fault is not None:
+            environment[_FAULT_ENVIRONMENT] = fault
+            environment["CAPRMEDIO_TEST_RELEASE_FAULT_ROOT"] = str(self.fault_import_root)
         return environment
 
-    def mcp_parameters(self, *, fault: bool = False):
+    def mcp_parameters(self, *, fault: str | bool | None = None):
         from mcp import StdioServerParameters
 
         return StdioServerParameters(
@@ -253,8 +315,12 @@ class ReleaseRecoveryDockerFixture:
             cwd=self.root,
         )
 
-    def start_worker(self, *, fault: bool) -> None:
+    def start_worker(self, *, fault: str | bool | None = None) -> None:
         self.stop_worker()
+        if isinstance(fault, str) and fault in _FAULT_MARKERS:
+            marker = self.fault_marker(fault)
+            if marker.exists() or marker.is_symlink():
+                marker.unlink()
         command = [str(self.interpreter), str(APP / "orchestrator.py"), "--project-root", str(self.root), "release-worker"]
         directory = self.root / ".caprmedio_install/workflow_orchestrator/release-host"
         directory.mkdir(parents=True, exist_ok=True)
@@ -272,6 +338,23 @@ class ReleaseRecoveryDockerFixture:
         finally:
             log.close()
         self.wait_ready()
+
+    def fault_marker(self, fault: str) -> Path:
+        """Return the private marker for a blocking fixture fault only."""
+        if fault not in _FAULT_MARKERS:
+            raise ReleaseRecoveryFixtureError(f"fixture fault has no barrier marker: {fault}")
+        return self.fault_import_root / _FAULT_MARKERS[fault]
+
+    def wait_for_fault_marker(self, fault: str) -> Path:
+        marker = self.fault_marker(fault)
+        deadline = time.monotonic() + _READY_TIMEOUT_SECONDS
+        while time.monotonic() < deadline:
+            if self.worker is not None and self.worker.poll() is not None:
+                raise ReleaseRecoveryFixtureError(self._worker_failure("release host stopped before fixture fault barrier"))
+            if marker.is_file() and not marker.is_symlink() and marker.read_bytes() == b"ready\n":
+                return marker
+            time.sleep(0.1)
+        raise ReleaseRecoveryFixtureError(self._worker_failure("release host did not reach fixture fault barrier"))
 
     def wait_ready(self) -> dict[str, Any]:
         ready = self.root / release_host_bridge.READY

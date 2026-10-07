@@ -28,6 +28,7 @@ RELEASE_ROOT = ROOT / "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_V
 sys.path.insert(0, str(RELEASE_ROOT))
 from runtime import Runtime  # noqa: E402
 from release_e2e_context import load_release_e2e_context  # noqa: E402
+from release_handoff import DERIVED_SOURCE_COPY_RELATIVE  # noqa: E402
 from release_recovery_docker_fixture import (  # noqa: E402
     RUN_ID as RELEASE_RECOVERY_RUN_ID,
     ReleaseRecoveryDockerFixture,
@@ -185,6 +186,62 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             f"events={observed} pending={fixture.pending_event_ids()}"
         )
 
+    async def wait_for_recovery_terminal(self, fixture, run_id, recovery):
+        """Observe the fresh recovery transport, never the original Run handle."""
+        handle = recovery.get("recovery_transport_handle")
+        self.assertIsInstance(handle, str, recovery)
+        self.assertRegex(handle, r"^[0-9a-f]{32}$")
+        deadline = time.monotonic() + 90
+        observed = None
+        while time.monotonic() < deadline:
+            observed = await self.local_mcp_request(
+                fixture.mcp_parameters(), "recover_selected_release_status", {
+                    "operation": "recover_selected_release_status",
+                    "run_id": run_id,
+                    "recovery_transport_handle": handle,
+                },
+            )
+            self.assertEqual(run_id, observed.get("workflow_run_id"), observed)
+            self.assertEqual(handle, observed.get("recovery_transport_handle"), observed)
+            status = observed.get("recovery_transport_status", {}).get("scheduler_status")
+            if status in {"SUCCESS", "ERROR", "CANCELLED"}:
+                return observed
+            await asyncio.sleep(0.25)
+        self.fail(f"Release recovery transport did not settle: {observed}")
+
+    @staticmethod
+    def release_identity(request):
+        """Keep the real predeclared Workflow and delivery Action identities visible."""
+        requested = request["requested_runs"]
+        workflow = next(row for row in requested if row["kind"] == "workflow")
+        delivery = next(row for row in requested if row["requested_run_id"] ==
+                        f"{RELEASE_RECOVERY_RUN_ID}:step:3:action:1")
+        delivery_step = next(row for row in requested if row["requested_run_id"] ==
+                             f"{RELEASE_RECOVERY_RUN_ID}:step:3")
+        if workflow["requested_run_id"] != RELEASE_RECOVERY_RUN_ID:
+            raise AssertionError(f"unexpected Release Workflow identity: {workflow}")
+        if workflow["definition"]["atom_id"] != "CA-O-164":
+            raise AssertionError(f"unexpected Release Workflow definition: {workflow}")
+        if delivery["kind"] != "action" or delivery["definition"]["atom_id"] != "CA-O-166":
+            raise AssertionError(f"unexpected source-delivery Action identity: {delivery}")
+        if delivery.get("parent_requested_run_id") != f"{RELEASE_RECOVERY_RUN_ID}:step:3":
+            raise AssertionError(f"unexpected source-delivery Action parent: {delivery}")
+        if delivery_step["kind"] != "step" or delivery_step["definition"]["atom_id"] != "CA-O-172":
+            raise AssertionError(f"unexpected source-delivery Step identity: {delivery_step}")
+        return workflow["requested_run_id"], delivery["requested_run_id"]
+
+    @staticmethod
+    def source_delivery_events(events, action_run_id):
+        """Find only the planned CA-O-172/CA-O-166 delivery Action occurrence."""
+        step_run_id = action_run_id.rsplit(":action:", 1)[0]
+        return [
+            event for event in events
+            if event.get("run", {}).get("kind") == "action"
+            and event["run"].get("definition", {}).get("atom_id") == "CA-O-166"
+            and event["run"].get("run_id") == action_run_id
+            and event["run"].get("parent_run_id") == step_run_id
+        ]
+
     async def terminal(self, run_id):
         deadline = time.monotonic() + 75
         result = {}
@@ -329,10 +386,12 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 fixture.mcp_parameters(fault=True), "release_version", fixture.preview_request(),
             )
             self.assertEqual("preview", preview.get("disposition"), preview)
+            request = fixture.execute_request(preview)
+            workflow_run_id, delivery_action_run_id = self.release_identity(request)
             admitted = await self.local_mcp_request(
-                fixture.mcp_parameters(fault=True), "release_version", fixture.execute_request(preview),
+                fixture.mcp_parameters(fault=True), "release_version", request,
             )
-            self.assertEqual(RELEASE_RECOVERY_RUN_ID, admitted.get("workflow_run_id"), admitted)
+            self.assertEqual(workflow_run_id, admitted.get("workflow_run_id"), admitted)
             self.assertTrue(
                 (fixture.root / ".caprmedio_install/workflow_orchestrator/release-host/transport.json").is_file()
             )
@@ -349,6 +408,9 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             event = json.loads(sealed["event_bytes"])
             self.assertEqual("completed", event["event"])
             self.assertEqual("action", event["run"]["kind"])
+            self.assertEqual(delivery_action_run_id, event["run"]["run_id"])
+            self.assertEqual(f"{workflow_run_id}:step:3", event["run"]["parent_run_id"])
+            self.assertEqual("CA-O-166", event["run"]["definition"]["atom_id"])
             self.assertTrue(event["effect_refs"], event)
             effect = fixture.root / event["effect_refs"][0].split("#", 1)[0]
             self.assertTrue(effect.exists(), event)
@@ -400,6 +462,27 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 "recovery replayed or mutated the delivered source effect",
             )
 
+            fixture.stop_worker()
+            fixture.start_worker(fault=False)
+            # A terminal retry remains bound to the original frozen Run.  The
+            # current route may return its retained terminal/pending result,
+            # but it must never create another effect or Journal terminal.
+            terminal_retry = await self.local_mcp_request(
+                fixture.mcp_parameters(), "release_version", request,
+            )
+            self.assertEqual(RELEASE_RECOVERY_RUN_ID, terminal_retry.get("workflow_run_id"), terminal_retry)
+            self.assertEqual(effect_digest, fixture.content_digest(effect))
+            after_retry_events = self.source_delivery_events(
+                fixture.journal_events(), delivery_action_run_id,
+            )
+            started = [row for row in after_retry_events if row.get("event") == "started"]
+            non_start = [row for row in after_retry_events if row.get("event") != "started"]
+            self.assertEqual(
+                1, len(started),
+                after_retry_events,
+            )
+            self.assertEqual([event], non_start, after_retry_events)
+
             binding = fixture.root / ".caprmedio_install/workflow_orchestrator/release-host/bindings" / f"{RELEASE_RECOVERY_RUN_ID}.json"
             binding.write_text(json.dumps({"tampered": True}), encoding="utf-8")
             refused = await self.local_mcp_request(
@@ -411,6 +494,117 @@ class DockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             )
             self.assertEqual("blocked", refused.get("disposition"), refused)
             self.assertIn("binding", " ".join(refused.get("diagnostics", [])), refused)
+        finally:
+            fixture.cleanup()
+
+    async def test_release_host_restart_before_effect_keeps_the_real_run_unreplayed(self):
+        """P1713: an admitted but not-entered delivery Action has no replay proof."""
+        fixture = ReleaseRecoveryDockerFixture.create(E2E_CONTEXT.scratch_root)
+        try:
+            fixture.start_worker(fault="before-effect-admission-block")
+            preview = await self.local_mcp_request(
+                fixture.mcp_parameters(fault="before-effect-admission-block"),
+                "release_version", fixture.preview_request(),
+            )
+            request = fixture.execute_request(preview)
+            workflow_run_id, delivery_action_run_id = self.release_identity(request)
+            delivery_root = fixture.root / DERIVED_SOURCE_COPY_RELATIVE
+            self.assertEqual(
+                request["parameters"]["expected_executing_release"],
+                request["parameters"]["candidateSnapshotManifest"]["executing_release"],
+            )
+            self.assertFalse(delivery_root.exists())
+            admitted = await self.local_mcp_request(
+                fixture.mcp_parameters(fault="before-effect-admission-block"), "release_version", request,
+            )
+            self.assertEqual(workflow_run_id, admitted.get("workflow_run_id"), admitted)
+            self.assertTrue(fixture.wait_for_fault_marker("before-effect-admission-block").is_file())
+            frozen_identity = fixture.request_identity()
+            self.assertRegex(frozen_identity, r"^[0-9a-f]{64}$")
+            before_recovery_events = self.source_delivery_events(
+                fixture.journal_events(), delivery_action_run_id,
+            )
+            self.assertEqual(1, len([event for event in before_recovery_events
+                                     if event.get("event") == "started"]), before_recovery_events)
+            self.assertEqual([], [event for event in before_recovery_events
+                                  if event.get("event") != "started"], before_recovery_events)
+            self.assertFalse(delivery_root.exists())
+
+            fixture.stop_worker()
+            fixture.start_worker(fault=False)
+            recovered = await self.local_mcp_request(
+                fixture.mcp_parameters(), "recover_selected_release", {
+                    "operation": "recover_selected_release", "run_id": workflow_run_id,
+                    "request_identity": frozen_identity,
+                },
+            )
+            self.assertEqual(workflow_run_id, recovered.get("workflow_run_id"), recovered)
+            transport = await self.wait_for_recovery_terminal(fixture, workflow_run_id, recovered)
+            self.assertEqual("SUCCESS", transport["recovery_transport_status"]["scheduler_status"], transport)
+            self.assertFalse(
+                (fixture.root / ".caprmedio_install/workflow_orchestrator/runs" /
+                 workflow_run_id / "accepted.json").exists()
+            )
+            action_events = self.source_delivery_events(
+                fixture.journal_events(), delivery_action_run_id,
+            )
+            started = [event for event in action_events if event.get("event") == "started"]
+            non_start = [event for event in action_events if event.get("event") != "started"]
+            self.assertEqual(1, len(started), action_events)
+            self.assertEqual(1, len(non_start), action_events)
+            self.assertEqual("interrupted_pending", non_start[0].get("outcome"), non_start)
+            self.assertEqual([], non_start[0].get("effect_refs"), non_start)
+            self.assertFalse(delivery_root.exists())
+        finally:
+            fixture.cleanup()
+
+    async def test_release_host_restart_with_durable_in_progress_effect_refuses_replay(self):
+        """P1713/P1716: a durable unknown delivery effect stays blocked after restart."""
+        fixture = ReleaseRecoveryDockerFixture.create(E2E_CONTEXT.scratch_root)
+        try:
+            fixture.start_worker(fault="durable-in-progress-block")
+            preview = await self.local_mcp_request(
+                fixture.mcp_parameters(fault="durable-in-progress-block"),
+                "release_version", fixture.preview_request(),
+            )
+            request = fixture.execute_request(preview)
+            workflow_run_id, delivery_action_run_id = self.release_identity(request)
+            delivery_root = fixture.root / DERIVED_SOURCE_COPY_RELATIVE
+            self.assertFalse(delivery_root.exists())
+            admitted = await self.local_mcp_request(
+                fixture.mcp_parameters(fault="durable-in-progress-block"), "release_version", request,
+            )
+            self.assertEqual(workflow_run_id, admitted.get("workflow_run_id"), admitted)
+            self.assertTrue(fixture.wait_for_fault_marker("durable-in-progress-block").is_file())
+            frozen_identity = fixture.request_identity()
+            self.assertRegex(frozen_identity, r"^[0-9a-f]{64}$")
+            self.assertFalse(delivery_root.exists())
+
+            fixture.stop_worker()
+            fixture.start_worker(fault=False)
+            recovered = await self.local_mcp_request(
+                fixture.mcp_parameters(), "recover_selected_release", {
+                    "operation": "recover_selected_release", "run_id": workflow_run_id,
+                    "request_identity": frozen_identity,
+                },
+            )
+            self.assertEqual(workflow_run_id, recovered.get("workflow_run_id"), recovered)
+            transport = await self.wait_for_recovery_terminal(fixture, workflow_run_id, recovered)
+            self.assertEqual("ERROR", transport["recovery_transport_status"]["scheduler_status"], transport)
+            self.assertFalse(
+                (fixture.root / ".caprmedio_install/workflow_orchestrator/runs" /
+                 workflow_run_id / "accepted.json").exists()
+            )
+            action_events = self.source_delivery_events(
+                fixture.journal_events(), delivery_action_run_id,
+            )
+            self.assertEqual(1, len([event for event in action_events if event.get("event") == "started"]),
+                             action_events)
+            self.assertTrue(all(event.get("effect_refs") == [] for event in action_events), action_events)
+            self.assertEqual([], [event for event in action_events if event.get("event") != "started"],
+                             action_events)
+            self.assertFalse(delivery_root.exists())
+            self.assertEqual([], fixture.pending_event_ids())
         finally:
             fixture.cleanup()
 
