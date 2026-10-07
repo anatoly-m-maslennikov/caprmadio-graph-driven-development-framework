@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 27
-updated_at: "2026-10-07 23:41:28 +0000"
+version: 26
+updated_at: "2026-10-07 22:33:18 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -74,7 +74,7 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-R-1887 | 4 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1887-TOOLS-REQUIREMENT--seal-the-private-reference-context-for-a-release-suite.md` | `a69f99bf1aa154203683158830a0d3e4e5ffd5b377ea4d756c9a683ba6dfe8f4` |
 | CA-R-1890 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/04_requirement/CA-R-1890-TOOLS-REQUIREMENT--gate-candidate-release-with-closed-unit-and-source-pinned-e2e-evidence.md` | `e126408a28a96a4b928281593c0b54828a8259825627972757436fcfdd9612cd` |
 | CA-M-331 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-331-TOOLS-METHOD--construct-sealed-release-version-candidate-manifest.md` | `f21d14db580cdab298247d40e0ea11bb226e3ff92109c691c9543b86d71fe54d` |
-| CA-M-332 | 4 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-332-TOOLS-METHOD--derive-complete-release-delivery-plan.md` | `076e3056a63d0293fa7b5e5601f698048313e2251a5c9f54a85bd2d86d1cf012` |
+| CA-M-332 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-332-TOOLS-METHOD--derive-complete-release-delivery-plan.md` | `88500268687e6b2c2a5736f0d767d071a085e9d612df83e9cabdd6588793fbfa` |
 | CA-M-333 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-333-TOOLS-METHOD--derive-release-gate-and-retirement-decision.md` | `bae178535465a791c34220e4469ecb7465974207b5a541ded90ca7ac2c5fb62c` |
 | CA-M-343 | 5 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-343-TOOLS-METHOD--discover-run-and-attest-the-declared-release-suite.md` | `c30ae2b5cc0d97732d4bb06763ad424a50fafa023f55d0c0e9c3aa6bd406fbe4` |
 | CA-M-344 | 3 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-344-TOOLS-METHOD--construct-and-revalidate-one-private-release-suite-reference-context.md` | `56726378b47596bbbc82e6948ccc3e71d9906fa8c89c6f3079d167fa4b18b977` |
@@ -92,7 +92,7 @@ This one unique delivery-level object is part of the one Release admission recor
 | CA-D-563 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-563-TOOLS-DELIVERY--bind-project-local-ca-skill-without-hooks.md` | `f73a38dd7b634d654a7044f20c96240a0d1f850c4a71e4eef18f98d074cdbb3d` |
 | CA-D-564 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-564-TOOLS-DELIVERY--bind-candidate-image-and-safe-retirement-evidence.md` | `6c4acbf3cb4ff8293d9d386b809bcebbc3704adc1061720baeaf9966c9f51993` |
 | CA-D-566 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-566-TOOLS-DELIVERY--encode-sealed-candidate-snapshot-manifest.md` | `825ae839bb6a151b7f4a45fbb01ae6fb2491d0f8bf68204ca2a21f2f34657a7d` |
-| CA-D-567 | 6 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md` | `ba8e1101cc1a5a5b7d798057d2d6eab23b51d95b6c45016ca76e0900ba3bccef` |
+| CA-D-567 | 5 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md` | `fc999e4be3641818fb02c9f0b2209e103756aa690a63278813d22b3549c27447` |
 | CA-D-571 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-571-TOOLS-DELIVERY--encode-deterministic-release-child-manifest.md` | `24dc030c0a95dc21c72a4b054c1eae088a004550bed0efd75265c2ad95fc753c` |
 | CA-D-573 | 2 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-573-TOOLS-DELIVERY--serialize-approved-release-rollback-retention.md` | `5db7045ec34fbd9aea129d63262f6fce1ac5a6bff2b147af90a9fad6e560adad` |
 | CA-D-574 | 1 | `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-574-TOOLS-DELIVERY--serialize-typed-release-recovery-checkpoints.md` | `d1162607c515afe184ba2488d6030acc93b522331b3a819c520792db39e28012` |

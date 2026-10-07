@@ -4,10 +4,10 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 6
-updated_at: "2026-10-07 23:37:51 +0000"
+version: 5
+updated_at: "2026-10-06 20:26:51 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Validated compiler and package handoff"
   depends_on: [Tool, Manifest, Digest, Methodology, Projection, Installation, Runtime]
@@ -37,10 +37,6 @@ Before compiler or package staging, the internal handoff records the safe derive
 Each derived `package_row` has `resource`, safe repository-relative `source_path`, safe package-relative `destination_path`, actual `sha256` from the locally read source bytes, and `mode` from that source file's observed `stat().st_mode & 0o777`. The package adapter re-reads each source immediately before copy and requires both digest and observed mode to match the handoff; it never accepts a caller permission override. The rows must cover the complete D562 Framework package and D563 `ca` payload, remain uniquely destination-bound, and preserve N while staging retained N+1.
 
 The handoff is an internal validation boundary, not a claim of compiler, package, installation, image, promotion, retirement, or Journal success. It preserves D561's canonical authority and nested source subtree byte-for-byte: source-to-derived copy never becomes an authority switch, source-ancestor replacement, or permitted mutation.
-
-### Private predecessor-retention carriers
-
-Prospective source-copy replacement reserves a private sibling directory under the fixed source-copy target's parent, with basename `.release-sources-prior-<internally generated suffix>`. The absent `sources` child inside that reservation carries the complete authenticated predecessor after its atomic move. Preserve the wrapper even when empty; it is a reservation, not a completed predecessor. Existing flat historical backup carriers remain retained unchanged. Failure recovery references include every existing reserved wrapper, predecessor child, candidate staging and fixed target. The fixed public `source_copy_root`, source-copy handoff, N13 registration, inventory codec and Journal schemas remain unchanged. These private carriers grant no replay or success authority.
 
 ### Current predecessor trust registrations
 
