@@ -83,7 +83,7 @@ class InstalledLayoutImport(unittest.TestCase):
 
     def test_implementation_imports_from_framework_engine_layout(self):
         """The release copies the Engine without the source-tree numeric prefix."""
-        with tempfile.TemporaryDirectory() as temporary:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temporary:
             installed = Path(temporary) / 'opt/caprmedio-framework/FRAMEWORK_ENGINE'
             shutil.copytree(ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC',
                             installed / '201_PROGRAMMATIC',
@@ -168,12 +168,17 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
                 # gateway's initial child-generation preparation is separately
                 # bounded at twenty seconds, so give this cold-start-only probe
                 # the existing bounded test startup allowance.
-                with patch('mcp.client.session.DISCOVER_TIMEOUT_SECONDS',
-                           GATEWAY_STARTUP_TIMEOUT_SECONDS):
+                with (patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}),
+                      patch('mcp.client.session.DISCOVER_TIMEOUT_SECONDS',
+                            GATEWAY_STARTUP_TIMEOUT_SECONDS)):
                     async with Client(stdio_client(self._server_parameters(), errlog=stderr), cache=cache,
                                       read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
                         yield client
             except BaseException as error:
+                # The complete suite must retain safe phase evidence on a
+                # startup failure, even when ordinary successful runs are quiet.
+                with patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}):
+                    _forward_startup_telemetry(stderr)
                 stderr.seek(0)
                 detail = stderr.read()[-4096:]
                 if detail:
@@ -194,6 +199,25 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             matches = discovered.structured_content['matches']
             self.assertEqual(set(QUERY_ROUTE_NAMES), {row['mcp_name'] for row in matches})
             self.assertTrue(all(row['availability'] == 'mcp' for row in matches))
+
+    async def test_startup_failure_retains_safe_timing_without_global_opt_in(self):
+        valid = 'caprmedio_mcp_startup phase=child_handshake outcome=failed elapsed_ms=20000'
+
+        def captured_transport(parameters, *, errlog):
+            self.assertEqual(parameters.env['CAPRMEDIO_STARTUP_TELEMETRY'], '1')
+            errlog.write(valid + '\nUNTRUSTED_DIAGNOSTIC_CONTENT\n')
+            errlog.flush()
+            return object()
+
+        forwarded = io.StringIO()
+        with (patch.dict(os.environ, {}, clear=False), redirect_stderr(forwarded),
+              patch(__name__ + '.stdio_client', captured_transport),
+              patch(__name__ + '.Client', side_effect=RuntimeError('mock readiness failure'))):
+            os.environ.pop('CAPRMEDIO_STARTUP_TELEMETRY', None)
+            with self.assertRaises(AssertionError):
+                async with self._server_client():
+                    self.fail('failed startup cannot yield a client')
+        self.assertEqual(forwarded.getvalue(), valid + '\n')
 
     async def test_stdio_gather_check_fix_report(self):
         async with self._server_client() as client:
