@@ -33,7 +33,7 @@ for _location in (_TOOLS_ROOT, _RELEASE_TOOLS, _MCP_ROOT):
 import work_journal  # noqa: E402
 from release_checkpoint import derive_unknown_effect_terminal_checkpoint, load_release_checkpoint  # noqa: E402
 from selected_execution import SelectedExecution, SelectedExecutionError, canonical_json  # noqa: E402
-from selected_run_recovery import read_selected_run_evidence  # noqa: E402
+import selected_run_recovery as _selected_run_recovery  # noqa: E402
 from workflow_run_support import LazyRunTracker, RunExecutionSession, _canonical_digest, _validate_common  # noqa: E402
 
 
@@ -279,6 +279,84 @@ def _historical_tracker(root: Path) -> LazyRunTracker:
     )
 
 
+def _read_exact_n15_evidence(root: Path, execution: Mapping[str, Any]) -> dict[str, Any]:
+    """Read only N15's exact UUID-and-action Journal intersection.
+
+    Normal selected-Run recovery deliberately treats a match on either field
+    as a collision, because most selected Action identities are unique.  The
+    frozen Release history instead reuses CA-O-165 across different Release
+    runs.  This narrow reader leaves that generic guard untouched: it ignores
+    another Run's action-only events, but fails closed if the frozen N15 UUID
+    appears with any other Action identity.  All accepted events still pass
+    the existing dispatch, bounded-carrier, sealed-event, receipt, and later
+    ``RunExecutionSession.restore`` validation.
+    """
+
+    parsed = _validate_common(execution)
+    dispatch = _selected_run_recovery.inspect_selected_run_dispatch(root, parsed)
+    try:
+        journal_root = root / work_journal.configured_journal_root(root)
+        parts = _selected_run_recovery._journal_parts(root, journal_root)
+    except (OSError, RuntimeError) as error:
+        raise _Blocked("configured N15 Journal root is unavailable") from error
+    records_seen = 0
+    bytes_read = 0
+    evidence: list[dict[str, Any]] = []
+    for path in parts:
+        try:
+            raw = path.read_bytes()
+        except OSError as error:
+            raise _Blocked(f"canonical N15 Journal carrier is unreadable: {path.name}") from error
+        if len(raw) > _selected_run_recovery.MAX_JOURNAL_CARRIER_BYTES:
+            raise _Blocked("canonical N15 Journal carrier exceeds the read limit")
+        bytes_read += len(raw)
+        if bytes_read > _selected_run_recovery.MAX_JOURNAL_BYTES:
+            raise _Blocked("N15 Journal scan exceeds the total byte read limit")
+        if raw and not raw.endswith(b"\n"):
+            raise _Blocked(f"canonical N15 Journal carrier lacks terminal newline: {path.name}")
+        lines = raw.splitlines(keepends=True)
+        for line_number, line in enumerate(lines, start=1):
+            if records_seen >= _selected_run_recovery.MAX_JOURNAL_EVENTS:
+                raise _Blocked("N15 Journal event scan exceeds the configured limit")
+            try:
+                event = json.loads(line)
+            except json.JSONDecodeError as error:
+                raise _Blocked(f"invalid JSON in canonical N15 Journal carrier {path.name}:{line_number}") from error
+            if not isinstance(event, dict):
+                raise _Blocked(f"non-object N15 Journal event in {path.name}:{line_number}")
+            records_seen += 1
+            session = event.get("llm_session")
+            request_matches = isinstance(session, Mapping) and session.get("uuid") == parsed["request_id"]
+            action_matches = event.get("action_id") == parsed["assigned_action_id"]
+            if request_matches and not action_matches:
+                raise _Blocked("N15 Journal evidence has a UUID-only identity match")
+            if not request_matches:
+                # CA-O-165 is intentionally shared among historical Release
+                # runs.  An action-only match cannot identify N15.
+                continue
+            if event.get("schema_version") != 5 or event.get("kind") != "workflow_execution":
+                raise _Blocked("N15 identity occurs in non-canonical workflow evidence")
+            try:
+                sealed = work_journal.validate_sealed_event(event)
+            except work_journal.WorkJournalError as error:
+                raise _Blocked("N15 Journal event is not canonically sealed") from error
+            previous = b"".join(lines[: line_number - 1])
+            appended = b"".join(lines[:line_number])
+            evidence.append({
+                "event": sealed,
+                "receipt": {
+                    "event_id": sealed["event_id"],
+                    "action_id": sealed["action_id"],
+                    "event_digest": sealed["event_digest"],
+                    "carrier": path.relative_to(root).as_posix(),
+                    "line": line_number,
+                    "previous_carrier_digest": hashlib.sha256(previous).hexdigest(),
+                    "appended_carrier_digest": hashlib.sha256(appended).hexdigest(),
+                },
+            })
+    return {"dispatch": dispatch, "events": evidence}
+
+
 def _interruption_prefix(session: RunExecutionSession, *, terminal_checkpoint_ref: str, resolution_ref: str) -> list[str]:
     """Return the only resumable prefix of the three N15 interruption facts."""
 
@@ -383,7 +461,7 @@ def _load_admitted_state(root: Path, request: Mapping[str, str]) -> _ResolutionS
             expected_workflow_run_id=_RUN_ID,
         )
         terminal_checkpoint = derive_unknown_effect_terminal_checkpoint(checkpoint)
-        evidence = read_selected_run_evidence(root, execution)
+        evidence = _read_exact_n15_evidence(root, execution)
         session = RunExecutionSession.restore(_historical_tracker(root), execution, evidence["events"])
     except Exception as error:
         raise _Blocked("historical N15 checkpoint or Journal evidence is not admitted") from error

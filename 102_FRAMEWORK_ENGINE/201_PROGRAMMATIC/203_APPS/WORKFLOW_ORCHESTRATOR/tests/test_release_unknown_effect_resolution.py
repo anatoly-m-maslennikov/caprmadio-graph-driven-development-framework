@@ -231,5 +231,36 @@ class ReleaseUnknownEffectResolutionTests(unittest.TestCase):
                 cancel.assert_not_called()
                 write.assert_not_called()
 
+    def test_exact_n15_reader_requires_both_uuid_and_shared_action_identity(self) -> None:
+        request = {"request_id": RUN_ID, "assigned_action_id": "CA-O-165"}
+
+        def reader_for(event: dict[str, object]) -> tuple[dict[str, object], mock.Mock]:
+            with self._temporary_root() as temporary:
+                root = Path(temporary)
+                carrier = root / "journal.ndjson"
+                carrier.write_text(json.dumps(event) + "\n")
+                with mock.patch.object(resolver, "_validate_common", return_value=request), \
+                     mock.patch.object(resolver._selected_run_recovery, "inspect_selected_run_dispatch", return_value={"state": "accepted"}), \
+                     mock.patch.object(resolver.work_journal, "configured_journal_root", return_value=Path(".journal")), \
+                     mock.patch.object(resolver._selected_run_recovery, "_journal_parts", return_value=[carrier]), \
+                     mock.patch.object(resolver.work_journal, "validate_sealed_event", side_effect=lambda value: value) as seal:
+                    result = resolver._read_exact_n15_evidence(root, request)
+            return result, seal
+
+        exact = {"schema_version": 5, "kind": "workflow_execution", "event_id": "n15-event",
+                 "event_digest": "a" * 64, "action_id": "CA-O-165", "llm_session": {"uuid": RUN_ID}}
+        result, seal = reader_for(exact)
+        self.assertEqual([exact], [item["event"] for item in result["events"]])
+        seal.assert_called_once_with(exact)
+
+        unrelated = {**exact, "event_id": "other-release", "llm_session": {"uuid": "other-release"}}
+        result, seal = reader_for(unrelated)
+        self.assertEqual([], result["events"])
+        seal.assert_not_called()
+
+        wrong_action = {**exact, "event_id": "wrong-action", "action_id": "CA-O-999"}
+        with self.assertRaisesRegex(resolver._Blocked, "UUID-only identity match"):
+            reader_for(wrong_action)
+
 if __name__ == "__main__":
     unittest.main()
