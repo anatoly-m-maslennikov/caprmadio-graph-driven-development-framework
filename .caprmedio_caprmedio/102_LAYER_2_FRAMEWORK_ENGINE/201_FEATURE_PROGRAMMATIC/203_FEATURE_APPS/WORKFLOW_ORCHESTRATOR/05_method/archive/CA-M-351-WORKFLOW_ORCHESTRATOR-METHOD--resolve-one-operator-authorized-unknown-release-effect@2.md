@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 14
 status: Active
 author: Anatoly Maslennikov
-version: 3
-updated_at: "2026-10-07 04:17:42 +0400"
+version: 2
+updated_at: "2026-10-07 03:38:00 +0400"
 subjects:
   governs: "Operator-authorized unknown Release effect resolution"
   depends_on: [Release Version, Workflow Run, Step Run, Action Run, Operator, Permission, Journal, Source, Queue, DBOS]
@@ -34,6 +34,5 @@ resolve an unknown Release effect by validating the frozen occurrence and C517-b
 3. refuse before any write if a pending original event, typed Unit result, canonical terminal receipt, prior resolution, changed checkpoint, changed binding or competing decision exists.
 4. under the existing canonical per-Run/Journal lock, append exactly the existing `interrupted` Action, Step and Workflow facts for the existing occurrence. Their resolution kind/reason says the Unit terminal outcome is unknown; none supplies a pass/fail or fabricates an original Unit receipt.
 5. persist one authoritative companion resolution record with literal `schema: release_unknown_effect_resolution_v1`, literal `resolution_kind: unknown_effect`, and exact keys `schema`, `resolution_kind`, `run_id`, `workflow_run_id`, `step_run_id`, `action_run_id`, `old_checkpoint_sha256`, `authorization_ref`, `authorization_sha256`, `approved_authority_pins`, `event_refs` and `unknown_reason`. `approved_authority_pins` has exactly four ordered D572-shape pins `[CA-R-1895, CA-M-351, CA-E-594, CA-D-589]`; `event_refs` has exactly three ordered canonical refs `[Action, Step, Workflow]`. It binds the original checkpoint and approved authority pins, not a caller-provided Unit result. Persist the matching terminal checkpoint as stopped at phase 4 with no in-progress effect and preserve all predecessor facts byte-for-byte.
-6. invoke only the fixed host-isolated one-shot existing recovery CLI for this exact known host-loss control variant. It runs without a live worker-ready carrier and must not start a worker, call `DBOS.launch`, replay/dispatch the original Workflow, or execute any effect. Ordinary recovery retains its existing readiness checks.
-7. return only one of these closed response variants: `resolved` or `already_resolved`, each with exactly `operation`, `run_id`, `disposition`, `resolution_ref`, `event_refs` and `unknown_reason`; or `blocked`, with exactly `operation`, `run_id`, `disposition` and `blocked_reason`. A repeated identical request returns the original resolution reference and event refs only.
-8. do not call Docker, the Unit runner, a generic selected dispatcher, a DBOS replay, promotion, retirement or any later Release phase. Pending append/crash recovery remains limited to original sealed event bytes and must not require old-checkpoint modification to manufacture proof. Do not use raw SQLite history mutation; DBOS is used only through its legitimate API for transport/observation.
+6. return only one of these closed response variants: `resolved` or `already_resolved`, each with exactly `operation`, `run_id`, `disposition`, `resolution_ref`, `event_refs` and `unknown_reason`; or `blocked`, with exactly `operation`, `run_id`, `disposition` and `blocked_reason`. A repeated identical request returns the original resolution reference and event refs only.
+7. do not call Docker, the Unit runner, a generic selected dispatcher, a DBOS replay, promotion, retirement or any later Release phase. Pending append/crash recovery remains limited to original sealed event bytes and must not require old-checkpoint modification to manufacture proof. Do not use raw SQLite history mutation; DBOS is used only through its legitimate API for transport/observation.

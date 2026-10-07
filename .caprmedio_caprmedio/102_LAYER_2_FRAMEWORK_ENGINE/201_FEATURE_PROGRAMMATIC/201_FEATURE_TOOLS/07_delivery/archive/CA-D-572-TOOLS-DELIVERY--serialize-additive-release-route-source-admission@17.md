@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 18
-updated_at: "2026-10-07 00:25:00 +0000"
+version: 17
+updated_at: "2026-10-07 00:10:03 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -114,21 +114,21 @@ The record is additive source-admission serialization only. It preserves the ori
   },
   {
     "atom_id": "CA-M-351",
-    "version": 3,
+    "version": 2,
     "source_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/WORKFLOW_ORCHESTRATOR/05_method/CA-M-351-WORKFLOW_ORCHESTRATOR-METHOD--resolve-one-operator-authorized-unknown-release-effect.md",
-    "digest": "e888f807fd5df7060793873e28e8d8d37feead832e343e25e0d8d1fae564de28"
+    "digest": "feff0754c5b8b60f785f895a3bf2a1c44f295ba13649761d4d22f43cec64307c"
   },
   {
     "atom_id": "CA-E-594",
-    "version": 3,
+    "version": 2,
     "source_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/WORKFLOW_ORCHESTRATOR/06_evaluation/CA-E-594-WORKFLOW_ORCHESTRATOR-QA_CASE--verify-operator-authorized-unknown-release-effect-resolution.md",
-    "digest": "e43c187295341c14feff42efbe732ec7646cb201f20c5496a3eb0e257cfd72cc"
+    "digest": "f9093ede605ffeb6b0d19a391889ecfe0f6c246937bef27607936f4358fe9546"
   },
   {
     "atom_id": "CA-D-589",
-    "version": 3,
+    "version": 2,
     "source_path": ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/203_FEATURE_APPS/WORKFLOW_ORCHESTRATOR/07_delivery/CA-D-589-WORKFLOW_ORCHESTRATOR-DELIVERY--carry-operator-authorized-unknown-release-effect-resolution.md",
-    "digest": "cd151c85055e50346a01137c9964bf28db5fe78a2b01584484fd8de31a2a38cb"
+    "digest": "3dea977cfea3f4c065a5ae7bf7ffad3fd64fdae4e06d32f0380b6d19af4a45b4"
   }
 ]
 ```
@@ -197,7 +197,7 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/release_host_bridge.py",
-    "sha256": "1e75d3eb88e6ee27ab167fee59eae8e7882298b25fda1ac147e34779a35f61ec"
+    "sha256": "55f16d7a7f7486be336d1c4419a93e7fb3d9b35434be162bbd44ebe3fe5e17dd"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/release_unknown_effect_resolution.py",

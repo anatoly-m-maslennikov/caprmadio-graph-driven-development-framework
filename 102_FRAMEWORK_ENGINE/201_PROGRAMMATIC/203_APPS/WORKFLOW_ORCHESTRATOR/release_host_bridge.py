@@ -250,12 +250,26 @@ def _operation(request: Mapping[str, object]) -> tuple[str, str]:
     return operation, _validate_run_id(run_id)
 
 
+def _is_unknown_effect_resolution(request: Mapping[str, object]) -> bool:
+    """Accept only the one closed N15 control carrier before one-shot CLI use."""
+    try:
+        from contracts import ResolveReleaseUnknownEffect
+        ResolveReleaseUnknownEffect.model_validate(request)
+    except (ImportError, TypeError, ValueError):
+        return False
+    return True
+
+
 def invoke(root: str | Path, request: Mapping[str, object], *, timeout: int = 60) -> dict[str, object]:
     """Call the fixed local release-host client; no alternate transport is tried."""
     if not isinstance(request, Mapping):
         raise ValueError("Release host request must be a mapping")
     operation, run_id = _operation(request)
-    if operation == "enqueue_selected":
+    unknown_effect_resolution = operation == "resolve_release_unknown_effect"
+    if unknown_effect_resolution:
+        if not _is_unknown_effect_resolution(request):
+            raise ValueError("unknown-effect resolution requires its exact six-key carrier")
+    elif operation == "enqueue_selected":
         execution = request.get("execution")
         if not isinstance(execution, Mapping) or execution.get("operation_route") != "release_version":
             raise ValueError("Release host admits only selected Release Version requests")
@@ -264,7 +278,12 @@ def invoke(root: str | Path, request: Mapping[str, object], *, timeout: int = 60
         raise ValueError("Release host operation is not supported")
     else:
         binding(root, run_id=run_id)
-    availability(root)
+    # The exceptional resolution is a fixed, host-isolated one-shot CLI.  It
+    # does not launch or depend on a worker, which could otherwise pick up the
+    # retained pending N15 workflow.  All ordinary Release transport remains
+    # binding- and readiness-checked above.
+    if not unknown_effect_resolution:
+        availability(root)
     command = [str(fixed_interpreter(root)), str(Path(__file__).with_name("orchestrator.py").resolve()),
                "--project-root", str(_root(root)), operation]
     try:
