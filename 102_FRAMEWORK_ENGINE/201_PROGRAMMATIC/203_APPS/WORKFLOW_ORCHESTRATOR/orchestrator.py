@@ -3,6 +3,7 @@ import argparse
 import fcntl
 import json
 import os
+import secrets
 from pathlib import Path
 import subprocess
 import sys
@@ -12,8 +13,9 @@ from pydantic import Field, TypeAdapter
 from contracts import (Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus,
                        ResolveReleaseUnknownEffect, Status)
 from backend import (enqueue, enqueue_selected, recover_selected_release,
-                     recover_selected_release_status, resolve_release_unknown_effect, status, worker)
-from engine import Coordinator
+                     recover_selected_release_status, resolve_release_unknown_effect, status, worker,
+                     RELEASE_HOST_APP_VERSION)
+from engine import Coordinator, runtime_fingerprint
 from release_host_bridge import (directory as release_host_directory, fixed_interpreter,
                                  has_binding as release_host_has_binding, invoke as invoke_release_host,
                                  publish_transport, subprocess_environment)
@@ -98,12 +100,28 @@ def _foreground_worker(root, *, release_host):
     with lock.open('a') as handle:
         fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
         (directory / 'worker.ready').unlink(missing_ok=True)
-        engine.save(directory / 'worker.json', {'pid': os.getpid(), 'state': 'starting'})
+        identity = {'pid': os.getpid(), 'state': 'starting'}
+        if release_host:
+            identity.update(start_token=secrets.token_hex(32),
+                            application_version=RELEASE_HOST_APP_VERSION,
+                            runtime_fingerprint=runtime_fingerprint(engine.root))
+        engine.save(directory / 'worker.json', identity)
+        shutdown_incomplete = False
         try:
-            worker(engine.root, ready_file=directory / 'worker.ready')
+            if release_host:
+                from release_host_health import HealthShutdownIncomplete
+                try:
+                    worker(engine.root, ready_file=directory / 'worker.ready',
+                           release_start_token=identity['start_token'])
+                except HealthShutdownIncomplete:
+                    shutdown_incomplete = True
+                    raise
+            else:
+                worker(engine.root, ready_file=directory / 'worker.ready')
         finally:
-            (directory / 'worker.ready').unlink(missing_ok=True)
-            engine.save(directory / 'worker.json', {'pid': os.getpid(), 'state': 'stopped'})
+            if not shutdown_incomplete:
+                (directory / 'worker.ready').unlink(missing_ok=True)
+                engine.save(directory / 'worker.json', {**identity, 'state': 'stopped'})
 
 
 def main():

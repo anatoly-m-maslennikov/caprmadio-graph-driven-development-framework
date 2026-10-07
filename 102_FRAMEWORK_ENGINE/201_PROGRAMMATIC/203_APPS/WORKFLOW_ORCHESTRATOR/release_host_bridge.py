@@ -196,14 +196,6 @@ def subprocess_environment(root: str | Path, environment: Mapping[str, str] | No
     return value
 
 
-def _worker_is_alive(pid: int) -> bool:
-    try:
-        os.kill(pid, 0)
-    except (OSError, ValueError):
-        return False
-    return True
-
-
 def _runtime_fingerprint(root: Path) -> str:
     from engine import runtime_fingerprint
     return runtime_fingerprint(root)
@@ -214,31 +206,68 @@ def _application_version() -> str:
     return RELEASE_HOST_APP_VERSION
 
 
-def availability(root: str | Path) -> dict[str, object]:
-    """Require independently persisted routing, DB and ready-worker evidence."""
-    root_path = _root(root)
-    transport(root_path)
-    ready = _read_json(root_path / READY, "Release host worker is not ready")
-    fingerprint = ready.get("runtime_fingerprint")
-    if (set(ready) != {"application_version", "pid", "runtime_fingerprint", "state"}
-            or ready.get("state") != "ready" or type(ready.get("pid")) is not int
-            or ready["pid"] <= 0 or not isinstance(ready.get("application_version"), str)
+def _ready_identity(value: Mapping[str, object]) -> dict[str, object]:
+    """Validate the closed identity shared by ready state and health reply."""
+    token = value.get("start_token")
+    fingerprint = value.get("runtime_fingerprint")
+    if (set(value) != {"application_version", "pid", "runtime_fingerprint", "start_token", "state"}
+            or value.get("state") != "ready" or type(value.get("pid")) is not int
+            or value["pid"] <= 0 or not isinstance(token, str)
+            or _DIGEST.fullmatch(token) is None
+            or not isinstance(value.get("application_version"), str)
             or not isinstance(fingerprint, str) or _DIGEST.fullmatch(fingerprint) is None
-            or ready["application_version"] != _application_version()):
+            or value["application_version"] != _application_version()):
         raise ReleaseHostUnavailable("Release host worker readiness is invalid")
-    state = _read_json(root_path / DIRECTORY / "worker.json", "Release host worker state is unavailable")
-    if state != {"pid": ready["pid"], "state": "starting"} or not _worker_is_alive(ready["pid"]):
-        raise ReleaseHostUnavailable("Release host worker readiness is invalid")
+    return {key: value[key] for key in (
+        "application_version", "pid", "runtime_fingerprint", "start_token", "state",
+    )}
+
+
+def _current_database(root: Path) -> Path:
+    database = root / DATABASE
+    if database.is_symlink() or not database.is_file():
+        raise ReleaseHostUnavailable("Release host scheduler database is unavailable")
+    return database
+
+
+def _current_fingerprint(root: Path, identity: Mapping[str, object]) -> None:
     try:
-        if fingerprint != _runtime_fingerprint(root_path):
+        if identity["runtime_fingerprint"] != _runtime_fingerprint(root):
             raise ReleaseHostUnavailable("Release host worker runtime fingerprint is stale")
     except ReleaseHostUnavailable:
         raise
     except (OSError, RuntimeError, ValueError) as error:
         raise ReleaseHostUnavailable("Release host worker runtime fingerprint is unavailable") from error
-    database = root_path / DATABASE
-    if database.is_symlink() or not database.is_file():
-        raise ReleaseHostUnavailable("Release host scheduler database is unavailable")
+
+
+def availability(root: str | Path) -> dict[str, object]:
+    """Require independently persisted routing, DB and ready-worker evidence."""
+    root_path = _root(root)
+    transport(root_path)
+    ready_path = root_path / READY
+    state_path = root_path / DIRECTORY / "worker.json"
+    ready = _ready_identity(_read_json(ready_path, "Release host worker is not ready"))
+    state = _read_json(state_path, "Release host worker state is unavailable")
+    if state != ready:
+        raise ReleaseHostUnavailable("Release host worker readiness is invalid")
+    _current_fingerprint(root_path, ready)
+    _current_database(root_path)
+    try:
+        from release_host_health import HealthError, probe_worker
+    except (ImportError, AttributeError) as error:
+        raise ReleaseHostUnavailable("Release host health exchange is unavailable") from error
+    try:
+        probe_worker(root_path, ready)
+    except HealthError as error:
+        raise ReleaseHostUnavailable("Release host worker readiness is invalid") from error
+    # A valid reply only attests to the exact identity it observed.  Re-read
+    # both control carriers before admitting the child so a replaced ready
+    # file cannot borrow that reply.
+    if (_ready_identity(_read_json(ready_path, "Release host worker is not ready")) != ready
+            or _read_json(state_path, "Release host worker state is unavailable") != ready):
+        raise ReleaseHostUnavailable("Release host worker readiness changed during health exchange")
+    _current_fingerprint(root_path, ready)
+    _current_database(root_path)
     return {"marker": transport(root_path), "ready": ready}
 
 

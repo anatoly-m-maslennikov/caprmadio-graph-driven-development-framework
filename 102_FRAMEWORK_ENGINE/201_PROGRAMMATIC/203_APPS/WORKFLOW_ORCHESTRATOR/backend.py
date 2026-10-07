@@ -566,7 +566,8 @@ def execute_plan(engine, run_id, gather, check, fix, finish, coverage):
             return {'workflow_run_id': run_id, 'outcome': 'interrupted', 'reason': str(error)}
 
 
-def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
+def worker(root, *, agent=None, ready_file=None, implementation_agent=None,
+           release_start_token=None):
     """Explicitly started foreground process; no implicit daemon or hook installation."""
     from dbos import DBOS
     root = Path(root).resolve(strict=True)
@@ -587,17 +588,38 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
     previous = {number: signal.getsignal(number) for number in (signal.SIGINT, signal.SIGTERM)}
     for number in previous:
         signal.signal(number, lambda *_: stop.set())
+    health_listener = None
     try:
         DBOS.launch()
         DBOS.register_queue(scheduler['queue'], global_concurrency=1, worker_concurrency=1,
                             polling_interval_sec=0.2)
         if ready_file:
-            engine.save(Path(ready_file), {'state': 'ready',
+            identity = {'state': 'ready',
                 'pid': __import__('os').getpid(),
                 'application_version': scheduler['app_version'],
-                'runtime_fingerprint': runtime_fingerprint(root)})
+                'runtime_fingerprint': runtime_fingerprint(root)}
+            if release_host_runtime():
+                from release_host_health import start_listener
+                identity['start_token'] = release_start_token
+                health_listener = start_listener(root, identity)
+                engine.save(Path(ready_file).with_name('worker.json'), identity)
+            engine.save(Path(ready_file), identity)
         stop.wait()
     finally:
-        DBOS.destroy()
-        for number, handler in previous.items():
-            signal.signal(number, handler)
+        shutdown_incomplete = None
+        try:
+            if health_listener is not None:
+                from release_host_health import HealthShutdownIncomplete
+                try:
+                    health_listener.close()
+                except HealthShutdownIncomplete as error:
+                    shutdown_incomplete = error
+        finally:
+            try:
+                if shutdown_incomplete is None:
+                    DBOS.destroy()
+            finally:
+                for number, handler in previous.items():
+                    signal.signal(number, handler)
+                if shutdown_incomplete is not None:
+                    raise shutdown_incomplete
