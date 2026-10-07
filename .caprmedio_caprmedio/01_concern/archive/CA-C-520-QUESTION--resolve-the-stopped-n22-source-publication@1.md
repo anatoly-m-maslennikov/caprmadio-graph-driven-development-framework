@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-07 23:52:40 +0000"
+version: 1
+updated_at: "2026-10-07 23:23:25 +0000"
 subjects:
   governs: "Release Version/Source publication recovery"
   depends_on: [Workflow Run, Action Run, Methodology, Journal, Framework Package, Operator]
@@ -33,13 +33,6 @@ How should the stopped N22 source publication be resolved without replaying unce
 ## Selected approach
 
 Retain the original N22 result, sealed request, staging trees and canonical interrupted history. Do not replay N22, promote its candidate or waive gates. Resolve the source-publication failure under its existing ownership and atomic-publication contract before admitting any fresh release; do not infer an unavailable OS error or relabel the interrupted effect as passed. The complete status response is saved at `.caprmedio_tmp/epic-resume-release/N22/selected-status-result.json`.
-
-## Subsequent evidence
-
-- P1827 completed the prospective retained-wrapper/absent-child refinement under M332@4 and D567@6. Thirty delivery fixtures passed in isolated Linux, including actual atomic publication and rollback; D572@27 passed fourteen source-admission checks and its exact binding refresh was journaled. This removes unnecessary empty-reservation deletion, not the required atomic moves.
-- A fresh host fixture attempt observed actual `PermissionError: [Errno 1] Operation not permitted` at staging-to-`sources` directory rename before the new replacement assertion. This confirms a current host atomic-directory publication restriction; it does not supply the absent original N22 errno. No host permission bypass or incremental-publication fallback was used.
-- Docker is accessible and the selected immutable baseline image remains present. The separate image/initialization Linux diagnostic failed at fixture setup because the engine-only snapshot omitted `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json`; those seventy-nine cases remain non-passing until exact source-admitted fixture inputs are supplied.
-- MCP was reloaded after the successful binding refresh, and CA-O-164 is currently bound to `release_version`. N22 still reports canonical interrupted-pending Action, Step and Workflow outcomes. No fresh N23 is queued and no Unit, E2E, Full Gate or promotion is inferred from the focused fixture results.
 
 ## Blast radius
 
