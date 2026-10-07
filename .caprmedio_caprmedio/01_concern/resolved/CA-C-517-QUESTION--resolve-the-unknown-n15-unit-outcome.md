@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
-status: active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-06 23:10:43 +0000"
+version: 2
+updated_at: "2026-10-07 00:30:45 +0000"
 subjects:
   governs: "Unknown N15 Unit outcome"
   depends_on: [Operator, Workflow Run, Action Run, Evaluation, Journal, Docker Image, Implementation]
@@ -38,4 +38,11 @@ only the exact N15 unresolved Action/Step/Workflow and their truthful terminal d
 
 ## Operator decision
 
-the Operator explicitly approved: "Yes—record unknown and continue". authorize a narrowly admitted operation that records N15 as interrupted/unknown, preserves all existing evidence, refuses competing terminal receipts and repeats, and performs no Unit replay, promotion or retirement. this capability requires source-first RMED and independent acceptance before execution. no terminal fact has yet been created. keep this Question active until its authorized disposition is implemented and recorded; independent source/test repairs continue.
+the Operator explicitly approved: "Yes—record unknown and continue". the reviewed source-admitted recovery recorded Action, Step and Workflow interruption facts through MCP, with unknown Unit outcome and no replay, promotion or retirement. the scheduler is CANCELLED. the original checkpoint SHA remains unchanged; the separate stopped companion preserves predecessor results. an identical repeat returned already_resolved with the same three Event references.
+
+## Resolution
+
+- resolution carrier: `.caprmedio_install/workflow_orchestrator/runs/release-epic-resume-20261006-N15/release_unknown_effect_resolution.json`.
+- Journal: `run-support-2026-10-07-part-1.ndjson`, lines 1–3.
+- Event references: `event-36c4cff6-9480-47d7-81a3-33c0f7f1198d`, `event-8cdfbda7-44ab-4f31-a943-cefffd79aff3`, `event-4865a151-f54d-44db-9bba-c5b6a0a7250e`.
+- N15 is interrupted/unknown, not a passing Release. a fresh successor remains subject to every mandatory gate.
