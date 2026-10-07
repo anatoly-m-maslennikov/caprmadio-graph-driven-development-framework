@@ -257,7 +257,11 @@ def _pending_original_event(root: Path, execution: Mapping[str, Any]) -> bool:
         raise _Blocked("pending Journal carrier is unsafe")
     request_id, action_id = execution.get("request_id"), execution.get("assigned_action_id")
     for carrier in pending.iterdir():
-        if carrier.is_symlink() or not carrier.is_file() or carrier.suffix != ".json":
+        if carrier.is_symlink() or not carrier.is_file():
+            raise _Blocked("pending Journal carrier is unsafe")
+        if carrier.name == ".DS_Store":
+            continue
+        if carrier.suffix != ".json":
             raise _Blocked("pending Journal carrier is unsafe")
         try:
             payload = json.loads(carrier.read_text(encoding="utf-8"))

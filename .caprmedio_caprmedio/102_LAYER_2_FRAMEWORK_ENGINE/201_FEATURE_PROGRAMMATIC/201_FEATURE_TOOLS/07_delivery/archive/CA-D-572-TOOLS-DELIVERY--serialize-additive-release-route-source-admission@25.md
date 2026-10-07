@@ -4,9 +4,9 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 26
+version: 25
 updated_at: "2026-10-07 22:33:18 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
@@ -165,7 +165,7 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_execution.py",
-    "sha256": "70970bfcffd25f96be320aa5395e2708cf4785f440d18123ba7419a58386b1f5"
+    "sha256": "0e5ea3af35ffb6c9782cdec83ccdb119cd5d40f96fb7a4dac99437306042a682"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_limits.py",
@@ -201,15 +201,15 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/release_host_health.py",
-    "sha256": "03ae017d83accdb7d247bc70c3e4c5121e393e3572eeafc97357923299774a72"
+    "sha256": "6390dd4ca221601280fb32f267d97c539a8bd545952a169c53dd4c7a24ced522"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/release_host_shutdown.py",
-    "sha256": "9bdd31f73339c6c3c0a58f9a39fcddf9c53fe5ba79cad3e6c6cf462874e76ac5"
+    "sha256": "5372a981342ff6edddc1350c1321b88dd2aeb4ffd9400480b38e7eea1f5869b5"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/release_unknown_effect_resolution.py",
-    "sha256": "cdb6f4ae0ed97afd8fc6125bbe98c939c60c66b4713bdcdf601febd0289aa97b"
+    "sha256": "a6b5a6de143a6822db63006263bf64ebaa9796060b28b27e6e4bdf4c73581917"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/selected_native_providers.py",

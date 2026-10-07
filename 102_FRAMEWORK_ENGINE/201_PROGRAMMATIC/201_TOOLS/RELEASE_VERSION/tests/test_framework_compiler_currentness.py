@@ -85,6 +85,16 @@ class FrameworkCompilerCurrentnessTests(unittest.TestCase):
         with self.subTest(case="extra"):
             self.assert_rejected("initial-compiler-output-pathset-mismatch")
 
+    def test_ignores_ds_store_in_source_and_compiled_output(self) -> None:
+        original_digest = verify_canonical_compiler_currentness(self.fixture.root).output_tree_digest
+        (self.fixture.source / "001_CORE_META_MODEL/.DS_Store").write_bytes(b"finder metadata")
+        (self.fixture.source / "003_PROJECT_CONFIGURATION/.DS_Store").write_bytes(b"finder metadata")
+        (self.fixture.output / "04_requirement/.DS_Store").write_bytes(b"finder metadata")
+
+        proof = verify_canonical_compiler_currentness(self.fixture.root)
+
+        self.assertEqual(original_digest, proof.output_tree_digest)
+
     def test_refuses_compiled_symlink(self) -> None:
         carrier = self.fixture.output_carrier("04_requirement", "CA-R-001--foundation.md")
         carrier.unlink()

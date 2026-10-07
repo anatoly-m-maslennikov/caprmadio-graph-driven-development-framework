@@ -82,7 +82,7 @@ def _write(path: Path, payload: bytes, mode: int = 0o644) -> None:
 
 def _sync_skill(folder: Path) -> None:
     for path in folder.rglob("*"):
-        if path.is_file():
+        if path.name != ".DS_Store" and path.is_file():
             with path.open("rb") as stream:
                 os.fsync(stream.fileno())
     for path in sorted((item for item in folder.rglob("*") if item.is_dir()),

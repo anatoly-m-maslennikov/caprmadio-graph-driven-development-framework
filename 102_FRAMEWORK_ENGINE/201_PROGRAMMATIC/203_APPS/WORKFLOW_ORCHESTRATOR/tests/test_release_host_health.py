@@ -94,6 +94,16 @@ class ReleaseHostHealthTests(unittest.TestCase):
         with self.assertRaises(HealthError):
             probe_worker(self.root, self.identity)
 
+    def test_regular_ds_store_is_ignored_but_other_wrong_named_carriers_fail_closed(self) -> None:
+        requests, _ = self.health_paths()
+        (requests / ".DS_Store").write_bytes(b"finder metadata")
+
+        self.assertEqual({}, health._message_files(requests))
+
+        (requests / "not-a-nonce.json").write_text("{}", encoding="utf-8")
+        with self.assertRaisesRegex(HealthError, "carrier is unsafe"):
+            health._message_files(requests)
+
     def test_listener_close_stops_and_joins_before_carrier_removal(self) -> None:
         handle = self.listener()
         handle.close()

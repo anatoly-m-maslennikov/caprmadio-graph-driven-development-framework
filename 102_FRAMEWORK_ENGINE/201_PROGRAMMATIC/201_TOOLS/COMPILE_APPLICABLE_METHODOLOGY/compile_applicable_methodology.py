@@ -296,6 +296,8 @@ def source_state_snapshot(root: Path, places: MethodologyPaths | None = None) ->
         raise CompileError("source-root-missing", "Applicable Methodology source root is missing", path=places.source.as_posix())
     snapshot: dict[str, str] = {}
     for path in sorted(source_root.rglob("*")):
+        if path.name == ".DS_Store" and path.is_file() and not path.is_symlink():
+            continue
         if path.is_file() and not path.is_symlink():
             snapshot[repo_relative(root, path)] = sha256_bytes(path.read_bytes())
     structure = root / places.control_root / "project_structure.toml"
@@ -324,7 +326,7 @@ def governed_bindings(root: Path, places: MethodologyPaths | None = None) -> dic
     configuration_records = {
         repo_relative(root, path): sha256_bytes(path.read_bytes())
         for path in sorted(configuration_root.rglob("*"))
-        if path.is_file() and not path.is_symlink()
+        if path.name != ".DS_Store" and path.is_file() and not path.is_symlink()
     }
     return {
         "project_structure_sha256": sha256_bytes(structure.read_bytes()),
@@ -855,6 +857,8 @@ def validate_existing_output_ownership(output_root: Path) -> None:
         if not target.is_dir() or target.is_symlink():
             raise CompileError("output-role-not-owned", "Generated output role path is not a replaceable directory", path=target.as_posix())
         for path in target.rglob("*"):
+            if path.name == ".DS_Store" and path.is_file() and not path.is_symlink():
+                continue
             if path.is_dir() and not path.is_symlink():
                 continue
             if not path.is_file() or path.is_symlink() or path.suffix != ".md":
@@ -949,6 +953,8 @@ def generated_tree_digest(root: Path, places: MethodologyPaths | None = None) ->
         if not role_root.is_dir():
             raise CompileError("generated-role-missing", "Generated RMEDO role directory is missing", role_directory=role_directory)
         for path in sorted(role_root.rglob("*")):
+            if path.name == ".DS_Store" and path.is_file() and not path.is_symlink():
+                continue
             if path.is_file():
                 records.append(
                     {

@@ -465,5 +465,64 @@ class PromotionPublicationLockTests(unittest.TestCase):
             pass
 
 
+class SkillSyncMetadataHelperTests(unittest.TestCase):
+    """Only sync/record helpers on temporary files; never publishes a Skill."""
+
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory(prefix="skill-sync-metadata-")
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.folder = self.root / "ca"
+        self.folder.mkdir()
+        self.files = [self.folder / "SKILL.md", self.folder / "agents/openai.yaml"]
+        self.files[1].parent.mkdir()
+        for path, payload, mode in ((self.files[0], b"sealed Skill\n", 0o644),
+                                    (self.files[1], b"sealed agent configuration\n", 0o600)):
+            path.write_bytes(payload)
+            path.chmod(mode)
+
+    def test_unreadable_ds_store_is_not_opened_or_synced_and_real_files_keep_modes(self) -> None:
+        expected = _release_promotion._skill_records(self.root, self.folder)
+        metadata = [self.folder / ".DS_Store", self.folder / "agents/.DS_Store"]
+        for path in metadata:
+            path.write_bytes(b"Finder metadata\n")
+        opened = []
+        real_open = Path.open
+
+        def guarded_open(path, *args, **kwargs):
+            if path.name == ".DS_Store":
+                raise PermissionError("metadata is unreadable")
+            opened.append(path)
+            return real_open(path, *args, **kwargs)
+
+        with (patch.object(Path, "open", autospec=True, side_effect=guarded_open),
+              patch.object(_release_promotion.os, "fsync") as fsync,
+              patch.object(_release_promotion, "_sync") as sync_directory):
+            _release_promotion._sync_skill(self.folder)
+        self.assertEqual(set(self.files), set(opened))
+        self.assertEqual(2, fsync.call_count)
+        self.assertEqual([self.folder / "agents", self.folder],
+                         [call.args[0] for call in sync_directory.call_args_list])
+        self.assertEqual(expected, _release_promotion._skill_records(self.root, self.folder))
+        self.assertEqual([b"Finder metadata\n"] * len(metadata), [path.read_bytes() for path in metadata])
+
+    def test_unreadable_real_skill_file_is_still_a_sync_failure(self) -> None:
+        real_open = Path.open
+
+        def guarded_open(path, *args, **kwargs):
+            if path == self.files[0]:
+                raise PermissionError("real Skill file is unreadable")
+            return real_open(path, *args, **kwargs)
+
+        with patch.object(Path, "open", autospec=True, side_effect=guarded_open):
+            with self.assertRaises(PermissionError):
+                _release_promotion._sync_skill(self.folder)
+
+    def test_real_skill_fsync_failure_is_still_propagated(self) -> None:
+        with patch.object(_release_promotion.os, "fsync", side_effect=OSError("real file sync failed")):
+            with self.assertRaises(OSError):
+                _release_promotion._sync_skill(self.folder)
+
+
 if __name__ == "__main__":
     unittest.main()

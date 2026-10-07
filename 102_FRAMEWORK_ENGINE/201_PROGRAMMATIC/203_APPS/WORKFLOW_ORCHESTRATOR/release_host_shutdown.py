@@ -137,6 +137,8 @@ def _messages(directory):
         for entry in entries:
             match = _NAME.fullmatch(entry.name)
             status = entry.stat(follow_symlinks=False)
+            if entry.name == '.DS_Store' and stat.S_ISREG(status.st_mode):
+                continue
             if match is None or not stat.S_ISREG(status.st_mode) or status.st_size > 4096:
                 raise ShutdownError('shutdown request directory unsafe')
             messages[match[1]] = Path(entry.path)

@@ -17,6 +17,7 @@ for directory in (RELEASE_ROOT, Path(__file__).resolve().parent):
         sys.path.insert(0, str(directory))
 
 import test_bootstrap_image as initial_fixture  # noqa: E402
+import bootstrap_image  # noqa: E402
 from bootstrap_image import (  # noqa: E402
     BootstrapImageError,
     produce_initial_framework_image,
@@ -43,7 +44,9 @@ class RetainedBootstrapImageTests(unittest.TestCase):
         old_docker = initial_fixture.GoldenDocker()
         # This exercises production receipt parsing with recorded subprocess
         # responses. No Docker socket, daemon, container or image is accessed.
-        with patch.object(DockerSubprocessExecutor, "run", side_effect=old_docker.run):
+        legacy_argv = bootstrap_image._canary_argv(OLD_IMAGE)[:-2] + ("/opt/caprmedio-bootstrap-canary.py",)
+        with (patch.object(DockerSubprocessExecutor, "run", side_effect=old_docker.run),
+              patch.object(bootstrap_image, "_canary_argv", return_value=legacy_argv)):
             self.original = produce_initial_framework_image(self.plan, executor=self.executor)
         self.assertEqual("verified", self.original.outcome)
         package = self.root / ".caprmedio_runtime/framework/releases" / self.plan.release
@@ -60,6 +63,23 @@ class RetainedBootstrapImageTests(unittest.TestCase):
             return produce_retained_framework_image(
                 self.root, self.plan.release, OLD_IMAGE, executor=self.executor,
             )
+
+    def test_exact_legacy_probe_and_commands_reopen_without_context_changes(self):
+        proof = self.root / self.original.proof_root
+        before = self.persistent_proof_snapshot(proof)
+        records = json.loads((proof / "commands.json").read_bytes())
+        self.assertEqual("/opt/caprmedio-bootstrap-canary.py", records[-1]["argv"][-1])
+        self.assertEqual(bootstrap_image._canary(), (proof / "context/bootstrap-canary.py").read_bytes())
+        self.assertEqual(self.original, read_retained_initial_framework_image(self.root, self.plan.release, OLD_IMAGE))
+        self.assertEqual(before, self.persistent_proof_snapshot(proof))
+
+    def test_historical_known_programs_reopen_after_current_probe_helpers_change(self):
+        result = self.produce()
+        self.assertEqual("verified", result.outcome)
+        with (patch.object(bootstrap_image, "_canary", return_value=b"changed current legacy helper\n"),
+              patch.object(bootstrap_image, "_metadata_canary", return_value=b"changed current metadata helper\n")):
+            self.assertEqual(self.original, read_retained_initial_framework_image(self.root, self.plan.release, OLD_IMAGE))
+            self.assertEqual(result, read_retained_initial_framework_image(self.root, self.plan.release, NEW_IMAGE))
 
     @staticmethod
     def persistent_proof_snapshot(proof):
@@ -93,8 +113,10 @@ class RetainedBootstrapImageTests(unittest.TestCase):
 
         self.assertEqual("verified", result.outcome)
         self.assertEqual(NEW_IMAGE, result.image_digest)
+        self.assertEqual(bootstrap_image._canary_argv(NEW_IMAGE), self.docker.calls[-1])
         self.assertEqual(self.original.context_sha256, result.context_sha256)
         copied = self.root / result.context_root
+        self.assertEqual(bootstrap_image._canary(), (copied / "bootstrap-canary.py").read_bytes())
         self.assertFalse((copied / "PACKAGE/.DS_Store").exists())
         self.assertFalse((copied / "__pycache__/fixture.pyc").exists())
         self.assertEqual(frozen, {path.relative_to(original_context).as_posix(): (path.read_bytes(), path.stat().st_mode & 0o777)

@@ -290,7 +290,8 @@ def _prepare_executor_scratch(workspace: Path) -> Path:
         if scratch.exists() or scratch.is_symlink():
             if scratch.is_symlink() or not scratch.is_dir():
                 raise ValueError("scratch mountpoint is not a directory")
-            if any(scratch.iterdir()):
+            if any(path.name != ".DS_Store" or path.is_symlink() or not path.is_file()
+                   for path in scratch.iterdir()):
                 raise ValueError("scratch mountpoint is not empty")
         else:
             scratch.mkdir(mode=0o700)

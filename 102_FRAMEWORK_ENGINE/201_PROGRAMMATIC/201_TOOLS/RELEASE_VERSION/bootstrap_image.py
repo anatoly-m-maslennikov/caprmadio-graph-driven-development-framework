@@ -36,6 +36,9 @@ _DEPENDENCY_INPUTS = (IMAGE_DOCKERFILE, "pyproject.toml", "uv.lock")
 _ENGINE_COPY = b"COPY 102_FRAMEWORK_ENGINE ./102_FRAMEWORK_ENGINE"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _MAX_OUTPUT_BYTES = 4 * 1024 * 1024
+# Historical admission identities must not depend on the current helper body.
+_LEGACY_CANARY_SHA256 = "40ac5ae85db43860e0882e46d327bb63b816c50978a4ff5b14e4f90d1268ff99"
+_METADATA_CANARY_SHA256 = "d7640a614a8f090d61707cea9ecfdbf2d62ea91230a8cf698143be296527b018"
 
 
 class BootstrapImageError(ReleaseContractError):
@@ -235,6 +238,25 @@ def _assert_plan_current(plan: object) -> None:
 def _canary() -> bytes:
     """Fixed complete-package and MCP readiness canary; no host credentials."""
     return b'''import asyncio, hashlib, json, sys, tomllib\nfrom pathlib import Path\nfrom mcp import Client, StdioServerParameters\ndef digest(v): return hashlib.sha256(v).hexdigest()\nbase = Path('/opt/caprmedio-framework')\nspec = json.loads(Path('/opt/caprmedio-bootstrap-canary.json').read_bytes())\nmanifest_bytes = (base / 'manifest.toml').read_bytes()\nassert digest(manifest_bytes) == spec['manifest_sha256']\nmanifest = tomllib.loads(manifest_bytes.decode())\nassert manifest['candidate_snapshot_manifest_sha256'] == spec['source_context_sha256']\nassert manifest['files'] == spec['package_rows']\nexpected = {'manifest.toml'} | {row['destination'] for row in spec['package_rows']}\nassert {p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()} == expected\nfor row in spec['package_rows']:\n p = base / row['destination']; assert p.is_file() and not p.is_symlink()\n assert digest(p.read_bytes()) == row['sha256'] and p.stat().st_mode & 511 == row['mode']\nasync def probe():\n project = Path('/tmp/bootstrap-canary-project'); project.mkdir()\n source = project / '.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources'\n source.parent.mkdir(parents=True); (source.parent / '003_PROJECT_CONFIGURATION').mkdir()\n for row in spec['package_rows']:\n  if row['destination'].startswith('METHODOLOGY/sources/'):\n   out = source / row['destination'].removeprefix('METHODOLOGY/sources/'); out.parent.mkdir(parents=True, exist_ok=True); out.write_bytes((base / row['destination']).read_bytes())\n params = StdioServerParameters(command=sys.executable, args=['/opt/caprmedio-framework/FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py', '--project-root', str(project)])\n async with Client(params, cache=None) as client:\n  page = await client.list_tools(); names = [tool.name for tool in page.tools]\n  while page.next_cursor:\n   page = await client.list_tools(cursor=page.next_cursor); names.extend(tool.name for tool in page.tools)\n  result = await client.call_tool('get_mcp_reload_status', {'request': {}})\n  assert names and len(names) == len(set(names)) and not result.is_error\n  return sorted(names)\nnames = asyncio.run(asyncio.wait_for(probe(), 60))\nprint(json.dumps({'schema':'caprmedio.bootstrap_image_canary.v1','manifest_sha256':spec['manifest_sha256'],'source_context_sha256':spec['source_context_sha256'],'verified_files':len(spec['package_rows']),'mcp_tools':names}, sort_keys=True))\n'''
+
+
+def _metadata_canary() -> bytes:
+    """Ignore only Finder metadata while preserving the historical probe bytes."""
+    program = _canary()
+    inventory = b"if p.is_file()} == expected\n"
+    if program.count(inventory) != 1:
+        raise _error("bootstrap-image-canary-invalid", "fixed legacy inventory check is unavailable")
+    metadata_program = program.replace(inventory, b"if p.is_file() and p.name != '.DS_Store'} == expected\n", 1)
+    if _digest(metadata_program) != _METADATA_CANARY_SHA256:
+        raise _error("bootstrap-image-canary-invalid", "metadata-aware probe differs from its fixed admitted program")
+    return metadata_program
+
+
+def _canary_argv(image_digest: str) -> tuple[str, ...]:
+    """Run only the fixed metadata-aware probe; no caller-provided code."""
+    return ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+            "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+            "--entrypoint", "python", image_digest, "-c", _metadata_canary().decode("utf-8"))
 
 
 def _context(plan: object, attempt: Path) -> tuple[Path, str]:
@@ -464,9 +486,7 @@ def produce_initial_framework_image(plan: object, *, executor: DockerExecutor,
             candidate = (attempt / "image.id").read_text().strip() if (attempt / "image.id").is_file() else ""
             if IMAGE_ID.fullmatch(candidate) and _inspect(executor, candidate, plan, root, attempt, records, timeout_seconds):
                 image = candidate
-                canary = _command(executor, "canary", ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
-                    "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
-                    "--entrypoint", "python", candidate, "/opt/caprmedio-bootstrap-canary.py"), root, attempt, records, 120)
+                canary = _command(executor, "canary", _canary_argv(candidate), root, attempt, records, 120)
                 if canary.timed_out:
                     outcome, reason = "effect_uncertain", "bootstrap image canary timed out"
                 elif canary.exit_code != 0:
@@ -582,7 +602,14 @@ def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> 
                        "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs",
                        "/tmp:rw,nosuid,nodev,size=128m", "--entrypoint", "python", evidence.image_digest,
                        "/opt/caprmedio-bootstrap-canary.py"]
-    if canary != expected_canary:
+    known_metadata_canary = False
+    if (isinstance(canary, list) and len(canary) == len(expected_canary) + 1
+            and canary[:-1] == expected_canary[:-1] + ["-c"] and isinstance(canary[-1], str)):
+        try:
+            known_metadata_canary = _digest(canary[-1].encode("utf-8")) == _METADATA_CANARY_SHA256
+        except UnicodeEncodeError:
+            pass
+    if canary != expected_canary and not known_metadata_canary:
         raise _error("bootstrap-image-proof-invalid", "retained MCP canary argv is not bound to the immutable ID")
     return records
 
@@ -680,7 +707,7 @@ def _verify_retained_package_context(proof: Path, manifest_bytes: bytes, rows: t
         if canary.is_symlink() or not canary.is_file() or canary.read_bytes() != expected_canary:
             raise ValueError("retained canary input differs from the package")
         program = proof / "context" / "bootstrap-canary.py"
-        if program.is_symlink() or not program.is_file() or program.read_bytes() != _canary():
+        if program.is_symlink() or not program.is_file() or _digest(program.read_bytes()) != _LEGACY_CANARY_SHA256:
             raise ValueError("retained canary program differs from the fixed probe")
     except (OSError, ValueError, BootstrapImageError) as error:
         raise _error("bootstrap-image-proof-invalid", "retained bootstrap package context is invalid") from error
@@ -795,9 +822,7 @@ def produce_retained_framework_image(project_root: Path | str, executing_release
             candidate = iidfile.read_text().strip() if iidfile.is_file() and not iidfile.is_symlink() else ""
             if IMAGE_ID.fullmatch(candidate) and _inspect(executor, candidate, plan, root, attempt, records, timeout_seconds):
                 image = candidate
-                canary = _command(executor, "canary", ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
-                    "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
-                    "--entrypoint", "python", candidate, "/opt/caprmedio-bootstrap-canary.py"), root, attempt, records, 120)
+                canary = _command(executor, "canary", _canary_argv(candidate), root, attempt, records, 120)
                 if canary.timed_out:
                     outcome, reason = "effect_uncertain", "retained-package image canary timed out"
                 elif canary.exit_code != 0:

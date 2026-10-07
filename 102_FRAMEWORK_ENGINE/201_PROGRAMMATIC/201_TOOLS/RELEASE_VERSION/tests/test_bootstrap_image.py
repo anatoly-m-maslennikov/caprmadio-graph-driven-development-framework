@@ -10,6 +10,7 @@ import sys
 import tempfile
 import tomllib
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -135,6 +136,10 @@ class BootstrapImageTests(unittest.TestCase):
         self.assertEqual(evidence.outcome, "verified")
         self.assertEqual(evidence.manifest_sha256, self.plan.manifest_sha256)
         self.assertEqual(evidence.source_context_sha256, self.plan.source_context_sha256)
+        self.assertEqual(bootstrap_image._canary_argv(IMAGE_ID), self.docker.calls[-1])
+        self.assertEqual(("-c", bootstrap_image._metadata_canary().decode("utf-8")), self.docker.calls[-1][-2:])
+        self.assertEqual(bootstrap_image._canary(),
+                         (self.root / evidence.context_root / "bootstrap-canary.py").read_bytes())
         self.assertEqual(
             self.docker.labels,
             {
@@ -214,10 +219,52 @@ class BootstrapImageTests(unittest.TestCase):
         build, inspect, canary = [record["argv"] for record in records]
         self.assertIn(IMAGE_ID, inspect)
         self.assertIn(IMAGE_ID, canary)
+        self.assertEqual(list(bootstrap_image._canary_argv(IMAGE_ID)), canary)
         self.assertEqual({
             f"{PACKAGE_IMAGE_LABEL}={self.plan.manifest_sha256}",
             f"{SOURCE_CONTEXT_IMAGE_LABEL}={self.plan.source_context_sha256}",
         }, {build[index + 1] for index, item in enumerate(build) if item == "--label"})
+
+    def test_retained_commands_refuse_arbitrary_or_weakened_inline_canary(self) -> None:
+        evidence = self.produce()
+        proof = self.root / evidence.proof_root
+        commands = proof / "commands.json"
+        original = commands.read_bytes()
+        records = json.loads(original)
+        for program in ("print('untrusted probe')\n",
+                        bootstrap_image._metadata_canary().decode("utf-8") + "print('extra code')\n",
+                        bootstrap_image._metadata_canary().decode("utf-8").replace("p.name != '.DS_Store'", "True")):
+            with self.subTest(program=program[:30]):
+                records[-1]["argv"][-1] = program
+                changed = canonical_json(records)
+                commands.write_bytes(changed)
+                try:
+                    with self.assertRaisesRegex(BootstrapImageError, "canary argv"):
+                        bootstrap_image._verify_retained_commands(
+                            proof, replace(evidence, commands_sha256=hashlib.sha256(changed).hexdigest()),
+                        )
+                finally:
+                    commands.write_bytes(original)
+
+    def test_retained_commands_refuse_inexact_inline_canary_security_vector(self) -> None:
+        evidence = self.produce()
+        proof = self.root / evidence.proof_root
+        commands = proof / "commands.json"
+        original = commands.read_bytes()
+        for index, value in ((3, "--network=bridge"), (4, "--read-write"),
+                             (12, "sha256:" + "b" * 64), (13, "-m")):
+            with self.subTest(index=index):
+                records = json.loads(original)
+                records[-1]["argv"][index] = value
+                changed = canonical_json(records)
+                commands.write_bytes(changed)
+                try:
+                    with self.assertRaisesRegex(BootstrapImageError, "canary argv"):
+                        bootstrap_image._verify_retained_commands(
+                            proof, replace(evidence, commands_sha256=hashlib.sha256(changed).hexdigest()),
+                        )
+                finally:
+                    commands.write_bytes(original)
 
     def test_canary_image_id_mismatch_and_missing_engine_copy_input_are_nonpassing(self) -> None:
         docker = GoldenDocker()

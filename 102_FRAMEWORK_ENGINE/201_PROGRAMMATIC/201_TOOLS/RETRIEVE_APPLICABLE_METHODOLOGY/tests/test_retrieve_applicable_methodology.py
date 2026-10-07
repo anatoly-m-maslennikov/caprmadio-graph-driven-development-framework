@@ -9,6 +9,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 
@@ -196,6 +197,58 @@ class RetrieverTest(unittest.TestCase):
         code, report = self.invoke("--subject", "Base")
         self.assertEqual(code, 2)
         self.assertEqual(report["diagnostics"][0]["code"], "projection-source-mismatch")
+
+    def test_role_root_ds_store_is_ignored_without_changing_retrieval_or_bytes(self) -> None:
+        self.add("04_requirement", "CA-R-001--base.md", source_carrier("CA-R-001", ("continuant", "Base")))
+        expected_code, expected_report = self.invoke("--subject", "Base")
+        metadata = self.applicable / "04_requirement/.DS_Store"
+        payload = b"Finder metadata must remain untouched"
+        metadata.write_bytes(payload)
+
+        code, report = self.invoke("--subject", "Base")
+
+        self.assertEqual(expected_code, code)
+        self.assertEqual(expected_report, report)
+        self.assertEqual(payload, metadata.read_bytes())
+
+    def test_role_root_ds_store_directory_or_symlink_still_fails_closed(self) -> None:
+        role_root = self.applicable / "04_requirement"
+        metadata = role_root / ".DS_Store"
+        real_iterdir = Path.iterdir
+        real_is_file = Path.is_file
+        real_is_symlink = Path.is_symlink
+        for kind in ("directory", "symlink"):
+            with self.subTest(kind=kind):
+                # macOS may deny removal of a directory literally named
+                # .DS_Store. Simulate only the role-root entry type while
+                # retaining real Path values for diagnostic rendering.
+                def iterdir(path: Path):
+                    entries = list(real_iterdir(path))
+                    return iter(entries + [metadata] if path == role_root else entries)
+
+                def is_file(path: Path) -> bool:
+                    return kind == "symlink" if path == metadata else real_is_file(path)
+
+                def is_symlink(path: Path) -> bool:
+                    return kind == "symlink" if path == metadata else real_is_symlink(path)
+
+                with mock.patch.object(Path, "iterdir", iterdir), \
+                        mock.patch.object(Path, "is_file", is_file), \
+                        mock.patch.object(Path, "is_symlink", is_symlink):
+                    code, report = self.invoke("--subject", "Base")
+
+                self.assertEqual(2, code)
+                self.assertEqual("role-root-non-carrier", report["diagnostics"][0]["code"])
+
+    def test_role_root_non_carrier_entry_still_fails_closed(self) -> None:
+        invalid = self.applicable / "04_requirement/unexpected.txt"
+        invalid.write_text("not a projected carrier", encoding="utf-8")
+
+        code, report = self.invoke("--subject", "Base")
+
+        self.assertEqual(2, code)
+        self.assertEqual("role-root-non-carrier", report["diagnostics"][0]["code"])
+        self.assertIn("unexpected.txt", report["diagnostics"][0]["details"]["paths"][0])
 
     def test_compiler_projection_metadata_does_not_change_source_payload(self) -> None:
         data = source_carrier("CA-R-001", ("continuant", "Base"))

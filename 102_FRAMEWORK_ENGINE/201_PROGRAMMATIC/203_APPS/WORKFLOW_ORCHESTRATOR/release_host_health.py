@@ -172,6 +172,8 @@ def _message_files(directory: Path) -> dict[str, Path]:
             raise _CarrierChanged from error
         except OSError as error:
             raise HealthError("Release host health carrier is inaccessible") from error
+        if entry.name == ".DS_Store" and stat.S_ISREG(status.st_mode):
+            continue
         if (match is None or stat.S_ISLNK(status.st_mode)
                 or not stat.S_ISREG(status.st_mode)):
             raise HealthError("Release host health carrier is unsafe")

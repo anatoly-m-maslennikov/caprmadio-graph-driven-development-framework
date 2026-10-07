@@ -149,6 +149,17 @@ class ReleaseHostShutdownTests(unittest.TestCase):
         with self.assertRaises(shutdown.ShutdownError):
             shutdown._messages(requests)
 
+    def test_regular_ds_store_is_ignored_but_other_wrong_named_carriers_fail_closed(self) -> None:
+        requests = self.root / ".caprmedio_install/workflow_orchestrator/release-host/shutdown/requests"
+        requests.mkdir(parents=True)
+        (requests / ".DS_Store").write_bytes(b"finder metadata")
+
+        self.assertEqual({}, shutdown._messages(requests))
+
+        (requests / "not-a-nonce.json").write_text("{}", encoding="utf-8")
+        with self.assertRaisesRegex(shutdown.ShutdownError, "directory unsafe"):
+            shutdown._messages(requests)
+
     def test_incomplete_listener_join_keeps_stopping_marker_without_stopped_receipt(self) -> None:
         host = self.root / ".caprmedio_install/workflow_orchestrator/release-host"
         channel = host / "shutdown"

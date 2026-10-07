@@ -116,6 +116,29 @@ class ReleaseUnknownEffectResolutionTests(unittest.TestCase):
             self.assertEqual({"operation", "run_id", "disposition", "blocked_reason"}, set(result))
             self.assertFalse(list(root.rglob("*.ndjson")))
 
+    def test_pending_regular_ds_store_is_ignored_without_reading_unsafe_carriers_still_fail(self) -> None:
+        with self._temporary_root() as temporary:
+            root = Path(temporary)
+            pending = root / ".runtime/state/work_journal/pending"
+            pending.mkdir(parents=True)
+            metadata = pending / ".DS_Store"
+            metadata.write_bytes(b"finder metadata")
+            original_read_text = Path.read_text
+
+            def guarded_read_text(path: Path, *args: object, **kwargs: object) -> str:
+                if path == metadata:
+                    raise AssertionError("Finder metadata must not be read")
+                return original_read_text(path, *args, **kwargs)
+
+            with mock.patch.object(resolver.work_journal, "configured_runtime_root", return_value=Path(".runtime")), \
+                 mock.patch.object(Path, "read_text", guarded_read_text):
+                self.assertFalse(resolver._pending_original_event(root, {"request_id": RUN_ID, "assigned_action_id": "CA-O-165"}))
+
+            (pending / "not-a-pending-record.txt").write_text("{}", encoding="utf-8")
+            with mock.patch.object(resolver.work_journal, "configured_runtime_root", return_value=Path(".runtime")):
+                with self.assertRaisesRegex(resolver._Blocked, "pending Journal carrier is unsafe"):
+                    resolver._pending_original_event(root, {"request_id": RUN_ID, "assigned_action_id": "CA-O-165"})
+
     def _state(self, root: Path, session: mock.Mock) -> object:
         return SimpleNamespace(
             root=root,

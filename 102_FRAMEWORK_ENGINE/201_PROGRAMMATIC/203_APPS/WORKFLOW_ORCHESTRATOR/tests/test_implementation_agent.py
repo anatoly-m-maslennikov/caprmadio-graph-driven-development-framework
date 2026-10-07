@@ -7,12 +7,13 @@ import sys
 import tempfile
 import textwrap
 import unittest
+from unittest import mock
 
 
 APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP))
 
-from implementation_agent import ImplementationAgent  # noqa: E402
+from implementation_agent import ImplementationAgent, _snapshot  # noqa: E402
 
 
 class ImplementationAgentTests(unittest.TestCase):
@@ -79,6 +80,26 @@ class ImplementationAgentTests(unittest.TestCase):
         self.assertEqual(result["blockers"], [])
         self.assertEqual(result["evidence"][-1]["sandbox"], "read-only")
         self.assertFalse(list(self.workspace.iterdir()))
+
+    def test_snapshot_ignores_regular_ds_store_before_byte_limits_or_reads(self) -> None:
+        tracked = self.workspace / "implementation.py"
+        tracked.write_text("ready = True\n", encoding="utf-8")
+        metadata = self.workspace / ".DS_Store"
+        metadata.write_bytes(b"finder metadata" * 100_000)
+        original_read_bytes = Path.read_bytes
+
+        def guarded_read_bytes(path: Path) -> bytes:
+            if path == metadata:
+                raise AssertionError("Finder metadata must not be read")
+            return original_read_bytes(path)
+
+        with mock.patch.object(Path, "read_bytes", guarded_read_bytes):
+            snapshot = _snapshot(self.workspace)
+
+        self.assertEqual(
+            {"implementation.py": hashlib.sha256(tracked.read_bytes()).hexdigest()},
+            snapshot,
+        )
 
     def test_golden_executable_performs_disposable_code_and_test_work_with_observed_hash(self) -> None:
         self.write_fake(

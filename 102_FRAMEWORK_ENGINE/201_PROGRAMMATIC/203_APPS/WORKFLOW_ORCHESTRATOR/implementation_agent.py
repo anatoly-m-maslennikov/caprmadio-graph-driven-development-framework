@@ -238,6 +238,8 @@ def _snapshot(workspace: Path) -> dict[str, str]:
             raise ValueError("Implementation Agent workspace may not contain symbolic links")
         if not path.is_file():
             continue
+        if path.name == ".DS_Store":
+            continue
         relative = path.relative_to(workspace).as_posix()
         if relative.startswith(".git/"):
             continue

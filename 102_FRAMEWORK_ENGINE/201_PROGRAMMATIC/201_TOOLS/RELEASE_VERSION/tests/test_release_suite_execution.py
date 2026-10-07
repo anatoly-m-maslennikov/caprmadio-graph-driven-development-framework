@@ -11,6 +11,7 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,7 @@ if str(RELEASE_ROOT) not in sys.path:
 
 from release_image import DockerCommandResult
 from release_contract import canonical_json
+from release_contract import ReleaseContractError
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
@@ -31,6 +33,7 @@ from release_suite import (
 from release_suite_execution import (
     InstalledNSuiteDockerExecutor,
     SelectedNImageBinding,
+    _prepare_executor_scratch,
 )
 from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS
 
@@ -465,6 +468,69 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertEqual(image.exception.code, "release-suite-executor-n-unproven")
         self.assertEqual(len(self.docker.calls), 1)
         self.assertEqual(self.docker.calls[0][0][:3], ("docker", "image", "inspect"))
+
+
+class ScratchMetadataHelperTests(unittest.TestCase):
+    """Only disposable scratch preparation; no executor or Docker invocation."""
+
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory(prefix="suite-scratch-metadata-")
+        self.addCleanup(temporary.cleanup)
+        self.workspace = Path(temporary.name)
+        self.scratch = self.workspace / ".caprmedio_tmp"
+
+    def test_new_scratch_remains_fixed_empty_private_leaf(self) -> None:
+        self.assertEqual(self.scratch, _prepare_executor_scratch(self.workspace))
+        self.assertEqual([], list(self.scratch.iterdir()))
+        self.assertEqual(0o700, self.scratch.stat().st_mode & 0o777)
+
+    def test_ds_store_only_scratch_is_accepted_without_opening_or_mutating_metadata(self) -> None:
+        self.scratch.mkdir(mode=0o700)
+        metadata = self.scratch / ".DS_Store"
+        metadata.write_bytes(b"Finder metadata\n")
+        metadata.chmod(0o000)
+        with patch.object(Path, "open", side_effect=PermissionError("metadata must not be read")):
+            self.assertEqual(self.scratch, _prepare_executor_scratch(self.workspace))
+        self.assertEqual(0o000, metadata.stat().st_mode & 0o777)
+        metadata.chmod(0o600)
+        self.assertEqual(b"Finder metadata\n", metadata.read_bytes())
+
+    def test_real_scratch_state_and_metadata_lookalikes_are_still_rejected(self) -> None:
+        self.scratch.mkdir()
+        (self.scratch / ".DS_Store").write_bytes(b"metadata\n")
+        for name in ("unexpected", ".DS_Store.bak"):
+            with self.subTest(name=name):
+                real_file = self.scratch / name
+                real_file.write_bytes(b"not metadata\n")
+                try:
+                    with self.assertRaises(ReleaseContractError) as refusal:
+                        _prepare_executor_scratch(self.workspace)
+                    self.assertEqual("release-suite-executor-scratch-unsafe", refusal.exception.code)
+                    self.assertEqual(b"not metadata\n", real_file.read_bytes())
+                finally:
+                    real_file.unlink()
+
+    def test_lowercase_name_is_not_exact_metadata(self) -> None:
+        # Do not create .DS_Store first: on case-insensitive hosts a lowercase
+        # spelling would alias that existing file rather than be a lookalike.
+        self.scratch.mkdir()
+        (self.scratch / ".ds_store").write_bytes(b"not exact Finder metadata\n")
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+
+    def test_metadata_named_directory_or_symlink_is_not_empty_scratch(self) -> None:
+        self.scratch.mkdir()
+        metadata = self.scratch / ".DS_Store"
+        metadata.mkdir()
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+        metadata.rmdir()
+        target = self.workspace / "real-state"
+        target.write_bytes(b"real state\n")
+        metadata.symlink_to(target)
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+        self.assertEqual(b"real state\n", target.read_bytes())
 
 
 if __name__ == "__main__":
