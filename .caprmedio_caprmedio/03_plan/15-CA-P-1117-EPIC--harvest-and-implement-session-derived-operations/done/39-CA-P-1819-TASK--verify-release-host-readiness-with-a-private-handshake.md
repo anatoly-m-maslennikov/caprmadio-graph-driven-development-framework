@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 2
-updated_at: "2026-10-07 11:12:58 +0000"
+status: Done
+version: 3
+updated_at: "2026-10-07 12:27:46 +0000"
 subjects:
   governs: "verify Release host readiness with a private handshake"
   depends_on: [Workflow Run, Implementation, Evaluation, Operator]
@@ -42,7 +42,7 @@ implement and verify the accepted private nonce handshake so ordinary Release ho
 - 21 focused health/bridge/lifecycle tests and 18 source-admission tests pass. independent review accepted the final nonblocking read and shutdown ordering.
 - MCP hot reload succeeded; the current Release Version context is complete and the public binding manifest remains unchanged.
 - installed runtime selector SHA remains `23c17beeab33e1a281c68bfbd492d6ea27b6e5e36c275744c7cb56bdc98c9fdc`.
-- actual replacement-host handshake remains pending. this session's Docker socket access is denied; launch the explicit Release host from the Operator's Terminal, then verify its fresh nonce response before release dispatch.
+- the Operator launched the replacement host from Terminal. actual availability passed with PID 37158 and current runtime fingerprint `8628650133b8ea344c914f241e03e6f903f197c4d92122f2b50ffe013a53a213`, after a fresh nonce response and metadata revalidation. no process-signal readiness bypass was used.
 - seven broader legacy host-test errors came from denied temporary-directory cleanup. retain those fixtures as directed; do not report those tests as passed or alter production cleanup.
 
 ## Definition of Done
