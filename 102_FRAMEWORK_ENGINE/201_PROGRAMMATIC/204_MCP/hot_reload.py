@@ -47,6 +47,9 @@ def result(value, error=False):
                                 structured_content=value, is_error=error)
 
 
+GENERATION_READY_TIMEOUT_SECONDS = 20
+
+
 class Generation:
     def __init__(self, params, fingerprint):
         self.params, self.fingerprint = params, fingerprint
@@ -58,7 +61,12 @@ class Generation:
 
     async def run(self):
         try:
-            async with Client(self.params, cache=None) as client:
+            # This is a known local implementation subprocess.  Its cold
+            # import can exceed the client's fixed ten-second auto-discover
+            # probe, whereas the gateway already owns a bounded readiness
+            # deadline.  Negotiate the stable legacy handshake directly.
+            async with Client(self.params, cache=None, mode='legacy',
+                              read_timeout_seconds=GENERATION_READY_TIMEOUT_SECONDS) as client:
                 self.client = client
                 page = await client.list_tools()
                 self.tools = list(page.tools)
@@ -105,7 +113,8 @@ class Gateway:
                   str(self.implementation), '--project-root', str(self.root)],
             env=environment), fingerprint)
         try:
-            await asyncio.wait_for(asyncio.shield(generation.ready), 20)
+            await asyncio.wait_for(asyncio.shield(generation.ready),
+                                   GENERATION_READY_TIMEOUT_SECONDS)
             names = [t.name for t in generation.tools]
             if len(set(names)) != len(names) or {CONTROL.name, STATUS.name}.intersection(names):
                 raise ValueError('Duplicate or reserved Tool name')

@@ -3,13 +3,15 @@ import asyncio
 from pathlib import Path
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 from mcp import Client, StdioServerParameters
 
 APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[2]
 sys.path.insert(0, str(APP))
-from hot_reload import Gateway, Generation  # noqa: E402
+from hot_reload import Gateway, Generation, GENERATION_READY_TIMEOUT_SECONDS  # noqa: E402
 
 
 class HotReload(unittest.IsolatedAsyncioTestCase):
@@ -136,6 +138,49 @@ class HotReload(unittest.IsolatedAsyncioTestCase):
                                             {'request': {'operation': 'reload'}})
             self.assertTrue(invalid.is_error)
             self.assertFalse((self.root / '.caprmedio_install/mcp_hot_reload').exists())
+
+    async def test_cold_generation_bootstraps_before_the_legacy_deadline(self):
+        """The gateway must not spend the child startup budget on auto-discovery."""
+        self.source.write_text(
+            'import time\n'
+            'time.sleep(11)\n'
+            'from mcp.server import MCPServer\n'
+            'server=MCPServer("slow")\n'
+            '@server.tool(name="echo", structured_output=True)\n'
+            'def echo() -> dict[str,str]:\n'
+            '    return {"version":"slow"}\n'
+            'server.run(transport="stdio")\n')
+        async with Client(self.params(), cache=None, mode='legacy',
+                          read_timeout_seconds=GENERATION_READY_TIMEOUT_SECONDS) as client:
+            self.assertEqual((await client.call_tool('echo')).structured_content['version'], 'slow')
+
+    async def test_generation_uses_the_bounded_legacy_bootstrap(self):
+        observed = {}
+
+        class BootstrapClient:
+            def __init__(self, params, **kwargs):
+                observed['params'] = params
+                observed.update(kwargs)
+
+            async def __aenter__(self):
+                return self
+
+            async def __aexit__(self, exc_type, exc_value, traceback):
+                return None
+
+            async def list_tools(self, cursor=None):
+                return SimpleNamespace(tools=[], next_cursor=None)
+
+        with patch('hot_reload.Client', BootstrapClient):
+            generation = Generation(params='local-child', fingerprint='test')
+            await generation.ready
+            generation.stop.set()
+            await generation.task
+
+        self.assertEqual(observed, {
+            'params': 'local-child', 'cache': None, 'mode': 'legacy',
+            'read_timeout_seconds': GENERATION_READY_TIMEOUT_SECONDS,
+        })
 
     async def test_generation_retains_only_explicit_runtime_namespace(self):
         self.source.write_text(
