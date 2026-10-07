@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import bootstrap_image as _bootstrap_image
 from bootstrap_image import (
     BootstrapImageError,
     BootstrapImageEvidence,
@@ -84,6 +85,33 @@ class _Terminalization:
 
 def _digest(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
+
+
+def _stable_effect_refs(values: list[str]) -> list[str]:
+    """Keep effect evidence ordered, unique, and safe for Journal v5."""
+    normalized: list[str] = []
+    for value in values:
+        if not isinstance(value, str) or not value:
+            raise _error("framework-image-restoration-effects-invalid", "effect evidence reference is invalid")
+        if value not in normalized:
+            normalized.append(value)
+    return normalized
+
+
+def _package_context_records(records: list[list[object]]) -> list[list[object]]:
+    """Compare the retained package context without inventing manifest mode proof.
+
+    The package manifest's bytes are authenticated by its digest, but the
+    bootstrap proof intentionally records the copied manifest at its context
+    creation mode.  Every other file and all directory modes remain exact.
+    """
+    normalized: list[list[object]] = []
+    for record in records:
+        if len(record) == 4 and record[:2] == ["file", "manifest.toml"]:
+            normalized.append(record[:3])
+        else:
+            normalized.append(record)
+    return normalized
 
 
 def _direct_action_types() -> tuple[type[Any], type[Exception]]:
@@ -535,6 +563,7 @@ def _pending_event_id_from_session(journal: DirectActionJournal, *, run_id: str,
 
 def _terminalize(journal: DirectActionJournal, run_id: str, *, outcome: str, result_ref: str,
                  effect_refs: list[str]) -> _Terminalization:
+    effect_refs = _stable_effect_refs(effect_refs)
     try:
         journal.record_effects(run_id, result_ref=result_ref, effect_refs=effect_refs)
         terminal = journal.finish_action(run_id, outcome=outcome, result_ref=result_ref, effect_refs=effect_refs)
@@ -710,6 +739,59 @@ def _result_roots(root: Path, result_ref: str, *, code: str) -> tuple[Path, Path
     return intent_root, result_root
 
 
+def _terminal_effect_refs_for_result(root: Path, result_root: Path, result: Mapping[str, Any], *, code: str) -> list[str]:
+    """Derive only the producer's exact terminal effect set from a result."""
+    raw = result.get("effect_refs")
+    if not isinstance(raw, list) or any(not isinstance(value, str) or not value for value in raw):
+        raise _error(code, "restoration result effect references are invalid")
+    refs = [str(value) for value in raw]
+    state = result.get("state")
+    publication = result.get("publication")
+    if state == "no_op":
+        # Older no-op result bytes named the selector despite no selector
+        # effect; Journal v5 correctly records the normalized empty set.
+        if refs in ([], [CURRENT_SELECTOR_RELATIVE]):
+            return []
+        raise _error(code, "no-op result has unsupported effect evidence")
+    if state == "partial":
+        attempt = result.get("attempt_evidence_root")
+        if attempt is None:
+            if publication == "unpublished" and refs == []:
+                return []
+            raise _error(code, "partial result has unsupported effect evidence")
+        if not isinstance(attempt, str) or publication not in {"unpublished", "unchanged", "replaced", "uncertain"}:
+            raise _error(code, "partial result has unsupported effect evidence")
+        expected = [attempt]
+        if publication == "replaced":
+            expected.append(CURRENT_SELECTOR_RELATIVE)
+        if refs != expected:
+            raise _error(code, "partial result has unsupported effect evidence")
+        return expected
+    if state != "restored":
+        raise _error(code, "restoration result has unsupported terminal state")
+    attempt = result.get("attempt_evidence_root")
+    canonical = result.get("canonical_proof_root")
+    if not isinstance(attempt, str) or not isinstance(canonical, str) or publication not in {"unchanged", "replaced"}:
+        raise _error(code, "restored result has unsupported effect evidence")
+    expected_tail = [CURRENT_SELECTOR_RELATIVE]
+    if publication == "replaced":
+        expected_tail.append(_relative(root, result_root / "replacement-selector.toml"))
+    expected = _stable_effect_refs([attempt, canonical, *expected_tail])
+    if refs == expected:
+        return expected
+    if attempt != canonical:
+        raise _error(code, "restored result has unsupported effect evidence")
+    # One old producer shape retained the canonical proof alias twice.  The
+    # historical test-double path can have inserted that same alias once more;
+    # both remain one exact proof alias and no unrelated reference is admitted.
+    proof_prefix = refs[:-len(expected_tail)]
+    if (len(proof_prefix) not in {2, 3}
+            or any(value != attempt for value in proof_prefix)
+            or refs[-len(expected_tail):] != expected_tail):
+        raise _error(code, "restored result has unsupported duplicate effect evidence")
+    return expected
+
+
 def _owned_result_event(root: Path, event: Mapping[str, Any], *, code: str) -> tuple[Path, Path, dict[str, str], dict[str, Any]]:
     """Bind one sealed Journal terminal to its immutable restoration result."""
     result_ref = event.get("result_ref")
@@ -731,7 +813,7 @@ def _owned_result_event(root: Path, event: Mapping[str, Any], *, code: str) -> t
         "no_op": ("completed", "no_op"),
         "partial": ("failed", "partial"),
     }
-    effect_refs = result.get("effect_refs")
+    effect_refs = _terminal_effect_refs_for_result(root, result_root, result, code=code)
     if (
         intent_root.name != intent_sha256
         or result.get("intent_sha256") != intent_sha256
@@ -739,7 +821,6 @@ def _owned_result_event(root: Path, event: Mapping[str, Any], *, code: str) -> t
         or not isinstance(result.get("requested_run_id"), str)
         or result.get("state") not in states
         or (event.get("event"), event.get("outcome")) != states[result["state"]]
-        or not isinstance(effect_refs, list)
         or event.get("effect_refs") != ([] if result.get("state") == "no_op" else [*effect_refs, result_ref])
     ):
         raise _error(code, "terminal event does not bind the exact retained restoration result")
@@ -937,6 +1018,280 @@ def recover_framework_image_journal(
     }
 
 
+def _observe_retained_result_image(executor: DockerSubprocessExecutor, root: Path, *, image_digest: str,
+                                   manifest_sha256: str, source_context_sha256: str) -> None:
+    """Reinspect a retained result's selected image without building or running it."""
+    try:
+        observed = executor.run(("docker", "image", "inspect", image_digest), cwd=root, timeout_seconds=60)
+    except OSError as error:
+        raise _error("framework-image-restoration-terminal-image-unavailable", "Docker image inspection is unavailable") from error
+    if (not isinstance(observed, DockerCommandResult) or not isinstance(observed.stdout, bytes)
+            or not isinstance(observed.stderr, bytes) or len(observed.stdout) > _MAX_DOCKER_OUTPUT_BYTES
+            or len(observed.stderr) > _MAX_DOCKER_OUTPUT_BYTES or observed.timed_out or observed.exit_code != 0):
+        raise _error("framework-image-restoration-terminal-image-invalid", "selected image could not be freshly authenticated")
+    try:
+        values = json.loads(observed.stdout)
+        image = values[0]
+        labels = image["Config"]["Labels"]
+        valid = (
+            len(values) == 1
+            and image.get("Id") == image_digest
+            and isinstance(labels, dict)
+            and labels.get(PACKAGE_IMAGE_LABEL) == manifest_sha256
+            and labels.get(SOURCE_CONTEXT_IMAGE_LABEL) == source_context_sha256
+        )
+    except (IndexError, KeyError, TypeError, ValueError):
+        valid = False
+    if not valid:
+        raise _error("framework-image-restoration-terminal-image-invalid", "selected image differs from retained proof bindings")
+
+
+def _authenticate_result_attempt(root: Path, result: Mapping[str, Any], proof: BootstrapImageEvidence) -> None:
+    """Authenticate the result's attempt reference before it becomes an effect ref."""
+    attempt_ref = result.get("attempt_evidence_root")
+    if not isinstance(attempt_ref, str) or not attempt_ref:
+        raise _error("framework-image-restoration-terminal-proof-invalid", "successful result has no retained attempt evidence")
+    if attempt_ref == proof.evidence_root:
+        if (
+            result.get("attempt_commands_sha256") != proof.commands_sha256
+            or result.get("attempt_receipt_sha256") != proof.receipt_sha256
+            or result.get("attempt_execution_kind") != "docker-subprocess"
+        ):
+            raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt fields differ from canonical proof")
+        return
+    relative = Path(attempt_ref)
+    proof_parent = Path(proof.evidence_root).parent
+    if (
+        relative.is_absolute() or ".." in relative.parts or relative.as_posix() != attempt_ref
+        or tuple(relative.parts[:-1]) != proof_parent.parts or not relative.name.startswith("attempt-")
+    ):
+        raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt reference is not retained bootstrap evidence")
+    attempt = root / relative
+    cursor = root
+    for part in relative.parts:
+        cursor = cursor / part
+        if cursor.is_symlink() or not cursor.is_dir():
+            raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt evidence path is unsafe")
+    evidence_path = attempt / "evidence.toml"
+    if evidence_path.is_symlink() or not evidence_path.is_file():
+        raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt evidence is absent")
+    try:
+        payload = evidence_path.read_bytes()
+        parsed = tomllib.loads(payload.decode("utf-8"))
+        expected = {
+            "schema_version", "manifest_sha256", "source_context_sha256", "outcome", "reason", "image_digest",
+            "context_sha256", "evidence_root", "commands_sha256", "execution_kind", "started_at", "finished_at",
+            "bootstrap_proof_key", "proof_root", "context_root",
+        }
+        if set(parsed) != expected or parsed.get("schema_version") != 1:
+            raise ValueError("attempt evidence schema")
+        evidence = BootstrapImageEvidence(**{key: parsed[key] for key in expected if key != "schema_version"})
+        if payload != _bootstrap_image._toml(evidence):
+            raise ValueError("attempt evidence canonical bytes")
+        receipt_sha256 = _digest(payload)
+        _bootstrap_image._verify_retained_commands(attempt, evidence)
+        context = attempt / "context"
+        if _bootstrap_image._tree_digest(context) != evidence.context_sha256:
+            raise ValueError("attempt context digest")
+    except (OSError, UnicodeDecodeError, ValueError, tomllib.TOMLDecodeError, BootstrapImageError) as error:
+        raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt evidence is not authentic") from error
+    if (
+        evidence.outcome != "verified"
+        or evidence.execution_kind != "docker-subprocess"
+        or evidence.manifest_sha256 != proof.manifest_sha256
+        or evidence.source_context_sha256 != proof.source_context_sha256
+        or evidence.image_digest != proof.image_digest
+        or evidence.context_sha256 != proof.context_sha256
+        or evidence.evidence_root != attempt_ref
+        or evidence.bootstrap_proof_key != proof.bootstrap_proof_key
+        or evidence.proof_root != proof.proof_root
+        or evidence.context_root != proof.context_root
+        or result.get("attempt_commands_sha256") != evidence.commands_sha256
+        or result.get("attempt_receipt_sha256") != receipt_sha256
+        or result.get("attempt_execution_kind") != evidence.execution_kind
+    ):
+        raise _error("framework-image-restoration-terminal-proof-invalid", "successful result attempt evidence does not bind the canonical proof")
+
+
+def _retained_result_for_terminal(root: Path, result_ref: str,
+                                  executor: DockerSubprocessExecutor) -> tuple[Path, Path, dict[str, str], dict[str, Any], list[str]]:
+    """Authenticate an already-observed successful result for Journal-only repair."""
+    intent_root, result_root = _result_roots(root, result_ref, code="framework-image-restoration-terminal-invalid")
+    result = _existing_result(root, result_root)
+    if result is None:
+        raise _error("framework-image-restoration-terminal-invalid", "retained restoration result is absent")
+    intent_path = intent_root / "intent.json"
+    if intent_path.is_symlink() or not intent_path.is_file():
+        raise _error("framework-image-restoration-terminal-invalid", "retained restoration intent is absent")
+    intent = _intent_from_bytes(intent_path.read_bytes())
+    intent_sha256 = _digest(canonical_json(intent))
+    requested_run_id = result.get("requested_run_id")
+    run_id = result.get("run_id")
+    observed_image_digest = result.get("observed_image_digest")
+    observed_selector_sha256 = result.get("observed_selector_sha256")
+    if (
+        intent_root.name != intent_sha256
+        or result.get("intent_sha256") != intent_sha256
+        or result.get("state") != "restored"
+        or not isinstance(requested_run_id, str)
+        or not isinstance(run_id, str)
+        or not isinstance(observed_image_digest, str)
+        or IMAGE_ID.fullmatch(observed_image_digest) is None
+        or not isinstance(observed_selector_sha256, str)
+        or _SHA256.fullmatch(observed_selector_sha256) is None
+        or result.get("old_image_digest") != intent["old_image_digest"]
+        or result.get("prior_selector_sha256") != intent["selected_selector_sha256"]
+    ):
+        raise _error("framework-image-restoration-terminal-invalid", "retained restoration result is not a closed successful Action result")
+    prior_selector_path = intent_root / "prior-selector.toml"
+    if prior_selector_path.is_symlink() or not prior_selector_path.is_file():
+        raise _error("framework-image-restoration-terminal-invalid", "sealed prior selector is absent")
+    prior_selector = prior_selector_path.read_bytes()
+    prior = _closed_bootstrap_selector(prior_selector)
+    if (
+        _digest(prior_selector) != intent["selected_selector_sha256"]
+        or prior["release"] != intent["manifest_sha256"]
+        or prior["image_digest"] != intent["old_image_digest"]
+    ):
+        raise _error("framework-image-restoration-terminal-invalid", "sealed prior selector does not bind the closed restoration intent")
+    try:
+        old_proof = read_retained_initial_framework_image(
+            root, intent["manifest_sha256"], intent["old_image_digest"],
+        )
+    except BootstrapImageError as error:
+        raise _error(error.code, str(error)) from error
+    if (
+        old_proof.manifest_sha256 != intent["manifest_sha256"]
+        or old_proof.source_context_sha256 != intent["source_context_sha256"]
+        or old_proof.receipt_sha256 != intent["retained_proof_receipt_sha256"]
+        or old_proof.context_sha256 != intent["retained_context_sha256"]
+    ):
+        raise _error("framework-image-restoration-terminal-proof-invalid", "sealed original proof no longer binds the closed restoration intent")
+    selector = _regular_file(root, Path(CURRENT_SELECTOR_RELATIVE), code="framework-image-restoration-selector-missing").read_bytes()
+    selector_sha256 = _digest(selector)
+    parsed = _closed_bootstrap_selector(selector)
+    if (selector_sha256 != observed_selector_sha256
+            or parsed["release"] != intent["manifest_sha256"]
+            or parsed["image_digest"] != observed_image_digest):
+        raise _error("framework-image-restoration-terminal-input-stale", "current selector differs from the retained successful result")
+    if observed_image_digest == intent["old_image_digest"]:
+        expected_selector = prior_selector
+    else:
+        old_image = intent["old_image_digest"].encode("ascii")
+        if prior_selector.count(old_image) != 1:
+            raise _error("framework-image-restoration-terminal-invalid", "sealed prior selector has no exact image binding")
+        expected_selector = prior_selector.replace(old_image, observed_image_digest.encode("ascii"), 1)
+    if selector != expected_selector:
+        raise _error("framework-image-restoration-terminal-input-stale", "current selector is not the exact sealed image-only replacement")
+    publication = result.get("publication")
+    expected_publication = "unchanged" if observed_selector_sha256 == intent["selected_selector_sha256"] else "replaced"
+    if publication != expected_publication:
+        raise _error("framework-image-restoration-terminal-invalid", "retained restoration publication result is inconsistent")
+    package = root / ".caprmedio_runtime/framework/releases" / intent["manifest_sha256"]
+    package_skill = package / "SKILLS/ca"
+    package_records, _package_digest = _inventory(package, code="framework-image-restoration-terminal-package-invalid")
+    package_skill_records, _package_skill_digest = _inventory(
+        package_skill, code="framework-image-restoration-terminal-package-invalid"
+    )
+    public_skill_records, _public_skill_digest = _inventory(
+        root / PROJECT_SKILL_TARGET, code="framework-image-restoration-terminal-skill-invalid"
+    )
+    try:
+        proof = read_retained_initial_framework_image(root, intent["manifest_sha256"], observed_image_digest)
+    except BootstrapImageError as error:
+        raise _error(error.code, str(error)) from error
+    if (
+        proof.outcome != "verified"
+        or proof.execution_kind != "docker-subprocess"
+        or proof.manifest_sha256 != intent["manifest_sha256"]
+        or proof.source_context_sha256 != intent["source_context_sha256"]
+        or proof.image_digest != observed_image_digest
+        or proof.receipt_sha256 is None
+        or result.get("canonical_proof_key") != proof.bootstrap_proof_key
+        or result.get("canonical_proof_root") != proof.proof_root
+        or result.get("canonical_context_root") != proof.context_root
+        or result.get("canonical_proof_receipt_sha256") != proof.receipt_sha256
+    ):
+        raise _error("framework-image-restoration-terminal-proof-invalid", "retained successful result proof is not current and authentic")
+    proof_package_records, _proof_package_digest = _inventory(
+        root / proof.context_root / "PACKAGE", code="framework-image-restoration-terminal-proof-invalid"
+    )
+    proof_skill_records, _proof_skill_digest = _inventory(
+        root / proof.context_root / "PACKAGE/SKILLS/ca", code="framework-image-restoration-terminal-proof-invalid"
+    )
+    if _package_context_records(package_records) != _package_context_records(proof_package_records):
+        raise _error("framework-image-restoration-terminal-package-stale", "selected retained package differs from authenticated proof context")
+    if package_skill_records != proof_skill_records or public_skill_records != proof_skill_records:
+        raise _error("framework-image-restoration-terminal-skill-stale", "public ca Skill differs from authenticated retained proof context")
+    if publication == "replaced":
+        replacement = _regular_file(
+            root, Path(_relative(root, result_root / "replacement-selector.toml")),
+            code="framework-image-restoration-terminal-invalid",
+        ).read_bytes()
+        if replacement != selector:
+            raise _error("framework-image-restoration-terminal-input-stale", "retained replacement selector differs from current selection")
+    _authenticate_result_attempt(root, result, proof)
+    effect_refs = _terminal_effect_refs_for_result(
+        root, result_root, result, code="framework-image-restoration-terminal-invalid",
+    )
+    _observe_retained_result_image(
+        executor, root, image_digest=observed_image_digest,
+        manifest_sha256=intent["manifest_sha256"], source_context_sha256=intent["source_context_sha256"],
+    )
+    return intent_root, result_root, intent, result, effect_refs
+
+
+def recover_framework_image_terminal(
+    project_root: Path | str,
+    *,
+    journal: DirectActionJournal,
+    result_ref: str,
+    image_executor: DockerExecutor,
+) -> dict[str, Any]:
+    """Record one already-observed successful restoration; never rebuild or publish.
+
+    The result's bytes and original started Run are immutable.  This recovery
+    only authenticates present state, reopens that exact started Run through
+    the direct-Action Session, and writes its one missing terminal event.
+    """
+    try:
+        root = _root(project_root)
+        executor = _validate_executor(image_executor)
+        with selector_publication_lock(root):
+            _intent_root, result_root, intent, result, effect_refs = _retained_result_for_terminal(
+                root, result_ref, executor,
+            )
+            DirectActionSession, DirectActionJournalError = _direct_action_types()
+            if not isinstance(journal, DirectActionSession):
+                return {"state": "recovery_required", "reason": "framework-image-restoration-recovery-session-required"}
+            reopen = getattr(journal, "reopen_restoration_for_recording", None)
+            if not callable(reopen):
+                return {"state": "recovery_required", "reason": "framework-image-restoration-recovery-admission-unavailable"}
+            try:
+                reopened = reopen(requested_run_id=result["requested_run_id"], intent=intent)
+            except DirectActionJournalError as error:
+                return {"state": "recovery_required", "reason": error.code}
+            run_id = reopened.get("run_id") if isinstance(reopened, Mapping) else None
+            if (not isinstance(run_id, str) or run_id != result["run_id"]
+                    or reopened.get("disposition") != "recording_only"):
+                return {"state": "recovery_required", "reason": "framework-image-restoration-recovery-unconfirmed"}
+            terminal = _terminalize(
+                journal, run_id, outcome="completed", result_ref=_result_ref(root, result_root),
+                effect_refs=effect_refs,
+            )
+            if not _terminal_confirmed(terminal, "completed"):
+                return _pending_reply(result_root, terminal, result_ref=_result_ref(root, result_root), run_id=run_id)
+            return {
+                "state": "restored",
+                "result_ref": _result_ref(root, result_root),
+                "run_id": run_id,
+                "terminal": dict(terminal.terminal),
+                "recording_recovered": True,
+            }
+    except (FrameworkImageRestorationError, SelectorPublicationLockError) as error:
+        return {"state": "recovery_required", "reason": getattr(error, "code", "framework-image-restoration-publication-lock-unavailable")}
+
+
 def restore_framework_image(
     project_root: Path | str,
     *,
@@ -1112,7 +1467,7 @@ def restore_framework_image(
 
     observed_selector = replacement
     publication = "unchanged" if replacement == frozen.selector else "replaced"
-    effect_refs = [evidence.evidence_root, applicable.evidence_root, CURRENT_SELECTOR_RELATIVE]
+    effect_refs = _stable_effect_refs([evidence.evidence_root, applicable.evidence_root, CURRENT_SELECTOR_RELATIVE])
     if replacement != frozen.selector:
         effect_refs.append(_relative(root, result_root / "replacement-selector.toml"))
     payload = restoration_payload(
@@ -1146,6 +1501,7 @@ def _main(argv: list[str] | None = None) -> int:
     parser.add_argument("--author", default="anatoly-m")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--recover-pending-event")
+    parser.add_argument("--record-retained-result")
     parser.add_argument("--retry-of-terminal-event")
     args = parser.parse_args(argv)
     if not args.execute:
@@ -1156,7 +1512,8 @@ def _main(argv: list[str] | None = None) -> int:
     if args.recover_pending_event is not None:
         if not all((args.operator, args.authorization_ref)):
             parser.error("--execute --recover-pending-event requires --operator and --authorization-ref")
-        if any((args.requested_run_id, args.expected_selector_sha256, args.retry_of_terminal_event)):
+        if any((args.requested_run_id, args.expected_selector_sha256, args.retry_of_terminal_event,
+                args.record_retained_result)):
             parser.error("--recover-pending-event is recovery-only and cannot include restoration execution inputs")
         root = _root(args.project_root)
         with DirectActionSession(
@@ -1169,6 +1526,23 @@ def _main(argv: list[str] | None = None) -> int:
             )
         print(json.dumps(result, sort_keys=True))
         return 0 if result.get("state") == "recovered" else 1
+    if args.record_retained_result is not None:
+        if not all((args.operator, args.authorization_ref)):
+            parser.error("--execute --record-retained-result requires --operator and --authorization-ref")
+        if any((args.requested_run_id, args.expected_selector_sha256, args.retry_of_terminal_event)):
+            parser.error("--record-retained-result is terminal-recording-only and cannot include restoration execution inputs")
+        root = _root(args.project_root)
+        with DirectActionSession(
+            root, author=args.author,
+            operator_authorization={"operator": args.operator, "authorization_ref": args.authorization_ref},
+            action_id=RESTORATION_ACTION_ID,
+        ) as journal:
+            result = recover_framework_image_terminal(
+                root, journal=journal, result_ref=args.record_retained_result,
+                image_executor=DockerSubprocessExecutor(),
+            )
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result.get("state") == "restored" else 1
     if not all((args.requested_run_id, args.operator, args.authorization_ref, args.expected_selector_sha256)):
         parser.error("--execute requires --run, --operator, --authorization-ref, and --expected-selector-sha256")
 
@@ -1193,5 +1567,5 @@ if __name__ == "__main__":
 
 __all__ = [
     "FrameworkImageRestorationError", "RESTORATION_ACTION_ID",
-    "recover_framework_image_journal", "restore_framework_image",
+    "recover_framework_image_journal", "recover_framework_image_terminal", "restore_framework_image",
 ]

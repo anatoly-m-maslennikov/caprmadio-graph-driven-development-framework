@@ -5,9 +5,9 @@ type: QA Case
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 3
+version: 2
 updated_at: "2026-10-07 22:52:33 +0000"
 subjects:
   governs: "Tool/FRAMEWORK_IMAGE_RESTORATION/Restoration acceptance"
@@ -38,5 +38,3 @@ Failure cases cover missing authorization, wrong selector shape or package ident
 Concurrency checks prove restoration and normal promotion acquire the same new selector publication lock, a competing holder refuses publication, and optimistic exact selector/package/Skill revalidation rejects changed input. The existing empty-state initialization lock is not treated as that shared lock. Crash checks cover successful build without complete proof, complete proof before selection, selection replacement before result/terminal recording, and denied atomic publication. Each reports observed partial or uncertain state and retains recovery evidence without automatic rollback or another build.
 
 Run checks reject duplicate active invocation and a changed frozen intent under the same requested Run ID, preserve completed/failed/unknown historical receipts, retain the started Run or original pending recording for uncertain outcomes without inventing a terminal result, and recover only an exact pending canonical event without replaying effects. A separately authorized fresh Run may retry a known canonical partial result only with the exact prior terminal reference, unchanged eight-field intent and no prior publication. Its separate result must leave the original result/event bytes intact; an absent authorization, changed intent, uncertain effect, unresolved started Run, pending recording or prior successful publication must not admit redispatch. Regression checks retain first-install empty-state refusal, normal promotion gates, selector/proof schemas and the exact three candidate E2E harness set. Mechanical and test-double cases are reported separately from required actual Docker acceptance.
-
-Recording checks use a real direct Session for both same- and different-image cases. When fresh attempt and canonical proof share a path, the resulting canonical effect references are unique and include the unchanged result carrier. A fault before terminal sealing retains the original started Run and immutable restored result. A later explicitly selected recording-only recovery independently verifies actual selected image/proof/package/Skill evidence and records exactly one terminal for that original Run, without any build, canary, selector write or new started Event. Missing/tampered proof, changed selector, unknown effects, wrong source/authorization/intent, an existing pending Event or a terminal Run refuse recovery. Fixture observations remain separate from actual Docker proof.

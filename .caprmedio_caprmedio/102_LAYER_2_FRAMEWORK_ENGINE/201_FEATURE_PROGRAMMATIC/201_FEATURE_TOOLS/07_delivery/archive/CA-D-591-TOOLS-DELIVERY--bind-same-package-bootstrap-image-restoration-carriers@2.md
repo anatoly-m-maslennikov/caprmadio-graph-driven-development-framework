@@ -4,9 +4,9 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 3
+version: 2
 updated_at: "2026-10-07 22:52:33 +0000"
 subjects:
   governs: "Tool/FRAMEWORK_IMAGE_RESTORATION/Intent and proof carriers"
@@ -37,5 +37,3 @@ The disposable build context and canonical image proof retain CA-D-575's existin
 For a different observed image digest, the replacement selector has exactly CA-D-575's existing bootstrap fields and retains every frozen value except image_digest. For the original observed digest, all exact selector bytes remain unchanged. Both branches use one new fixed Project-wide selector lock shared with normal promotion plus an immediate exact frozen-input recheck; they do not reuse the distinct first-install lock as a substitute.
 
 The actual result binds the frozen intent and Action Run, outcome and reason, observed image digest and applicable canonical proof key/receipt when available, fresh attempt references, prior and observed selector hashes, publication state, and retained effect references. Its closed outcomes are restored, no_op, blocked, partial, effect_uncertain, recording_pending and recovery_required. Both successful build branches are restored, including reproduction of the original image digest; no_op requires the exact image already available and freshly verified before building. An unavailable observation is absent or null, never an expected value presented as actual proof. The canonical Journal retains only its existing completed, no_op, failed, cancelled and partial outcomes: restored requires an observed canonical completed terminal, and no_op uses its existing no_op outcome when an Action was started. Uncertainty retains the started Run or original pending canonical recording without inventing a terminal outcome. The existing result/effect references record actual digests without new Journal fields. A terminal recording failure retains the actual selected or unselected state and any original pending event for exact recording recovery; no carrier authorizes replay or rewrites a historical receipt.
-
-Effect references are safe Project-relative paths, unique in first-occurrence order. Different evidence origins may name the same physical proof path; they retain their distinct proof fields without duplicating the canonical Event's carrier reference. The recording-only API is recover_framework_image_terminal(project_root, *, journal, result_ref, image_executor), invoked explicitly with --execute --record-retained-result <owned result_ref>. It accepts only the internally owned immutable restored result whose original started Run, current selector, package/Skill and actual canonical image proof are independently verified. It appends only the original Run's terminal and returns that actual terminal with the original result_ref; it neither changes the raw result nor adds a Run, Event schema or effect. A retained pre-fix result with repeated identical proof-path references is read unchanged; only its canonical terminal reference list is normalized. Existing terminal or pending evidence, changed input, unavailable proof or uncertain effects refuse this recording-only path.

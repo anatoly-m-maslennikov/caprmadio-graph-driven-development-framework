@@ -4,9 +4,9 @@ content_role: Method
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 3
+version: 2
 updated_at: "2026-10-07 22:52:33 +0000"
 subjects:
   governs: "Tool/FRAMEWORK_IMAGE_RESTORATION/Retained-context construction"
@@ -36,7 +36,5 @@ FRAMEWORK_IMAGE_RESTORATION **must** construct its restoration image from the au
 6. Retain fresh actual build/inspect/canary attempt observations in the private restoration evidence. If the observed immutable image digest equals the original digest, reopen and preserve the existing canonical proof at the unchanged CA-D-575 key; do not overwrite it with the new attempt. Otherwise retain a new canonical bootstrap proof at the CA-D-575 location derived from the unchanged package-manifest SHA-256 and actual different image digest. Reopen the applicable canonical proof with the unchanged retained-package reader and freshly inspect the exact observed image. Preserve the original proof and all uncertain or failed attempts.
 7. Acquire the new fixed Project-wide selector publication lock also acquired by normal promotion. Reopen the exact frozen selector, package, public Skill, applicable canonical proof and fresh attempt; refuse any drift. For a different image digest, stage a selector of the same closed bootstrap shape with only image_digest changed, then atomically replace the selection. For the original digest, keep the exact selector bytes unchanged. Reopen the resulting exact selection and verified image binding in either case. The distinct first-install lock alone does not provide this mutual exclusion.
 8. Retain the actual CA-D-591 result and record its image/proof/selector effects through the sole canonical Work Journal. Both successful build branches return restored and record canonical completed evidence; only an exact image already available and freshly verified before building qualifies for no_op. Completion requires the reopened selection, applicable authentic canonical proof, fresh attempt and canonical terminal receipt to agree. An effect or recording failure reports its actual state; it triggers no implicit rebuild, rollback, deletion, promotion or retry.
-
-9. If the unchanged owned result proves restoration completed but terminal validation failed before an Event was sealed, use recording-only recovery. Reopen the exact original canonical started Run under its exclusive invocation lock and original source/authorization/intent binding; reject any terminal or pending Event. Independently verify the immutable retained result, current selected selector, authentic canonical image proof, persistent package/public Skill and fresh exact-image inspection. Observe validated effect references in stable first-occurrence order, coalescing identical path strings, then append and reopen only that Run's canonical terminal. Preserve the raw result and historical Events. Recovery performs no image build, canary, selector publication or new Action start. An uncertain effect or changed evidence does not qualify.
 
 The Method does not recompile Methodology, reconstruct a package from current sources, overwrite a retained package or Skill, add selector/proof schema fields, create a selected route, or substitute a later Release Run's acceptance for restoration evidence.

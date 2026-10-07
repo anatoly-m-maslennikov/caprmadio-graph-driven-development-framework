@@ -34,6 +34,7 @@ from bootstrap_image import (  # noqa: E402
 )
 from framework_image_restoration import (  # noqa: E402
     recover_framework_image_journal,
+    recover_framework_image_terminal,
     restore_framework_image,
 )
 from framework_initialization import (  # noqa: E402
@@ -44,6 +45,7 @@ from framework_initialization import (  # noqa: E402
 )
 from framework_compiler_currentness import CanonicalCompilerCurrentness  # noqa: E402
 import framework_initialization as initialization  # noqa: E402
+import framework_image_restoration as restoration  # noqa: E402
 from release_image import DockerCommandResult, DockerSubprocessExecutor  # noqa: E402
 from selector_publication_lock import (  # noqa: E402
     SelectorPublicationLockError,
@@ -269,6 +271,128 @@ class FrameworkImageRestorationTests(unittest.TestCase):
         self.assertTrue(any(call[:2] == ("docker", "run") for call in self.docker.calls))
         restoration = self.root / ".caprmedio_runtime/framework_image_restoration"
         self.assertTrue(any(path.is_file() for path in restoration.rglob("result.json")))
+
+    def test_real_session_different_image_terminal_has_unique_effect_references(self):
+        with self.restoration_session() as session:
+            restored = self.restore_with(session, requested_run_id="restore-different-real-session")
+        self.assertEqual("restored", restored["state"], restored)
+        self.assertEqual("terminal", restored["terminal"]["disposition"])
+        self.assertEqual(NEW_IMAGE, restored["image_digest"])
+        direct_action = __import__("direct_action_session")
+        event, _receipt = direct_action._reopen_event(self.root, restored["terminal"]["event_id"])
+        self.assertEqual("completed", event["event"])
+        self.assertEqual(len(event["effect_refs"]), len(set(event["effect_refs"])))
+        self.assertIn(restored["result_ref"], event["effect_refs"])
+        self.assertEqual(self.selector_before.replace(OLD_IMAGE.encode(), NEW_IMAGE.encode()), self.selector.read_bytes())
+
+    def test_reopened_session_records_historical_duplicate_result_without_replaying_effects(self):
+        """A fixture-only legacy alias may be terminalized, but never replayed.
+
+        The patched normalizer models the pre-repair raw result shape.  Its
+        Docker transcript is still fixture data, not evidence of a live run.
+        """
+        def historical_duplicate(values):
+            # Before the repair, the producer passed its two canonical aliases
+            # through unchanged.  Do not forge a novel duplicate shape.
+            return list(values)
+
+        with patch.object(restoration, "_stable_effect_refs", side_effect=historical_duplicate):
+            with self.restoration_session() as original_session:
+                pending = self.restore_with(
+                    original_session,
+                    requested_run_id="restore-historical-duplicate",
+                )
+        self.assertEqual("recording_pending", pending["state"], pending)
+        self.assertEqual("direct-action-invalid-effects", pending["reason"])
+        self.assertIsNone(pending["terminal"])
+
+        result_path = self.root / pending["result_ref"]
+        original_result_bytes = result_path.read_bytes()
+        original_result = json.loads(original_result_bytes)
+        self.assertEqual("restored", original_result["state"])
+        self.assertEqual(
+            original_result["attempt_evidence_root"],
+            original_result["canonical_proof_root"],
+        )
+        command_history = (
+            self.root / original_result["attempt_evidence_root"] / "commands.json"
+        )
+        command_history_bytes = command_history.read_bytes()
+        selector_after_effect = self.selector.read_bytes()
+        calls_before_recovery = list(self.docker.calls)
+        direct_action = __import__("direct_action_session")
+        original_started_id = f"{pending['run_id']}:started"
+        original_started, original_started_receipt = direct_action._reopen_event(
+            self.root, original_started_id,
+        )
+
+        with self.restoration_session() as recovery_session:
+            with patch.object(DockerSubprocessExecutor, "run", side_effect=self.docker.run):
+                recovered = recover_framework_image_terminal(
+                    self.root,
+                    journal=recovery_session,
+                    result_ref=pending["result_ref"],
+                    image_executor=DockerSubprocessExecutor(),
+                )
+
+        self.assertEqual("restored", recovered["state"], recovered)
+        self.assertTrue(recovered["recording_recovered"])
+        self.assertEqual(pending["run_id"], recovered["run_id"])
+        self.assertEqual(pending["result_ref"], recovered["result_ref"])
+        self.assertEqual(original_result_bytes, result_path.read_bytes())
+        self.assertEqual(command_history_bytes, command_history.read_bytes())
+        self.assertEqual(selector_after_effect, self.selector.read_bytes())
+        self.assertEqual(
+            (original_started, original_started_receipt),
+            direct_action._reopen_event(self.root, original_started_id),
+        )
+        recovery_calls = self.docker.calls[len(calls_before_recovery):]
+        self.assertFalse(any("build" in call for call in recovery_calls))
+        self.assertFalse(any(call[:2] == ("docker", "run") for call in recovery_calls))
+
+        event, _receipt = direct_action._reopen_event(self.root, recovered["terminal"]["event_id"])
+        self.assertEqual("completed", event["event"])
+        self.assertEqual(len(event["effect_refs"]), len(set(event["effect_refs"])))
+        self.assertEqual(pending["run_id"], event["run"]["run_id"])
+
+    def test_recovery_refuses_fixture_forged_unique_effect_set_without_new_journal_events(self):
+        """A unique list is insufficient: the successful result shape is exact."""
+        def historical_duplicate(values):
+            return list(values)
+
+        with patch.object(restoration, "_stable_effect_refs", side_effect=historical_duplicate):
+            with self.restoration_session() as original_session:
+                pending = self.restore_with(
+                    original_session,
+                    requested_run_id="restore-forged-unique-effects",
+                )
+        self.assertEqual("recording_pending", pending["state"], pending)
+        result_path = self.root / pending["result_ref"]
+        forged = json.loads(result_path.read_bytes())
+        forged["effect_refs"] = list(dict.fromkeys(
+            ref for ref in forged["effect_refs"]
+            if ref != ".caprmedio_runtime/framework/current.toml"
+        ))
+        self.assertEqual(len(forged["effect_refs"]), len(set(forged["effect_refs"])))
+        # Fixture-only forged legacy carrier; no real retained result is edited.
+        result_path.write_text(json.dumps(forged, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+        journal_root = self.root / ".caprmedio_caprmedio/_journal"
+        journal_before = self._inventory(journal_root)
+        calls_before = list(self.docker.calls)
+
+        with self.restoration_session() as recovery_session:
+            with patch.object(DockerSubprocessExecutor, "run", side_effect=self.docker.run):
+                refused = recover_framework_image_terminal(
+                    self.root,
+                    journal=recovery_session,
+                    result_ref=pending["result_ref"],
+                    image_executor=DockerSubprocessExecutor(),
+                )
+
+        self.assertEqual("recovery_required", refused["state"], refused)
+        self.assertEqual("framework-image-restoration-terminal-invalid", refused["reason"])
+        self.assertEqual(journal_before, self._inventory(journal_root))
+        self.assertEqual(calls_before, self.docker.calls)
 
     def test_available_old_image_is_no_op_before_any_build(self):
         self.docker.replacement = OLD_IMAGE

@@ -229,6 +229,145 @@ class DirectActionSessionTests(unittest.TestCase):
             self.session.close()
             self.assertEqual(set(), held)
 
+    def test_restoration_recording_reopens_original_start_without_append_and_finishes_once(self) -> None:
+        original = self._restoration_session()
+        started = original.begin_action(action_id=RESTORATION_ACTION_ID,
+                                        requested_run_id="restore-recording", intent=RESTORATION_INTENT)
+        original.close()
+        resumed = self._restoration_session()
+        with patch.object(resumed, "begin_action", side_effect=AssertionError("recording cannot start an Action")), \
+                patch.object(work_journal, "append_sealed_events") as append:
+            reopened = resumed.reopen_restoration_for_recording("restore-recording", RESTORATION_INTENT)
+        append.assert_not_called()
+        self.assertEqual("recording_only", reopened["disposition"])
+        self.assertEqual(started["run_id"], reopened["run_id"])
+        self.assertEqual(started["event_receipt"], reopened["event_receipt"])
+        self.assertEqual(original.actual[started["run_id"]], resumed.actual[started["run_id"]])
+        self.assertEqual(["started"], [event["event"] for event in self._events()])
+        result_ref = "tmp/restoration/result.json"
+        effects = [".caprmedio_runtime/framework/current.toml", "tmp/restoration/proof.json"]
+        resumed.record_effects(started["run_id"], result_ref=result_ref, effect_refs=effects)
+        terminal = resumed.finish_action(started["run_id"], outcome="completed",
+                                          result_ref=result_ref, effect_refs=effects)
+        self.assertEqual("terminal", terminal["disposition"])
+        with self.assertRaises(DirectActionJournalError):
+            resumed.finish_action(started["run_id"], outcome="completed",
+                                  result_ref=result_ref, effect_refs=effects)
+        inspector = self._restoration_session()
+        with self.assertRaises(DirectActionJournalError) as terminal_exists:
+            inspector.reopen_restoration_for_recording("restore-recording", RESTORATION_INTENT)
+        self.assertEqual("direct-action-already-terminal", terminal_exists.exception.code)
+        self.assertEqual(["started", "completed"], [event["event"] for event in self._events()])
+
+    def test_restoration_recording_refuses_wrong_run_intent_authorization_and_current_source(self) -> None:
+        original = self._restoration_session()
+        original.begin_action(action_id=RESTORATION_ACTION_ID,
+                              requested_run_id="restore-recording-identity", intent=RESTORATION_INTENT)
+        original.close()
+        for requested, intent, authorization, expected in (
+            ("not-the-original-run", RESTORATION_INTENT, AUTHORIZATION, "direct-action-recording-unavailable"),
+            ("restore-recording-identity", dict(RESTORATION_INTENT, retained_context_sha256="0" * 64),
+             AUTHORIZATION, "direct-action-intent-conflict"),
+            ("restore-recording-identity", RESTORATION_INTENT,
+             dict(AUTHORIZATION, authorization_ref="tmp/operator-authorizations/different.md"),
+             "direct-action-intent-conflict"),
+        ):
+            with self.subTest(expected=expected, requested=requested):
+                resumed = DirectActionSession(self.root, author="anatoly-m", operator_authorization=authorization,
+                                               action_id=RESTORATION_ACTION_ID)
+                with resumed, patch.object(work_journal, "append_sealed_events") as append:
+                    with self.assertRaises(DirectActionJournalError) as refused:
+                        resumed.reopen_restoration_for_recording(requested, intent)
+                self.assertEqual(expected, refused.exception.code)
+                self.assertEqual({}, resumed.actual)
+                append.assert_not_called()
+        source = self.root / RESTORATION_ATOM_RELATIVE
+        source.write_bytes(b"changed O187 source cannot authorize recording reopen")
+        resumed = self._restoration_session()
+        with self.assertRaises(DirectActionJournalError) as stale:
+            resumed.reopen_restoration_for_recording("restore-recording-identity", RESTORATION_INTENT)
+        self.assertEqual("direct-action-source-stale", stale.exception.code)
+        self.assertEqual(["started"], [event["event"] for event in self._events()])
+
+    def test_restoration_recording_refuses_unresolved_pending_start_or_terminal(self) -> None:
+        for phase in ("start", "terminal"):
+            with self.subTest(phase=phase):
+                requested = "restore-recording-pending-" + phase
+                original = self._restoration_session()
+                result_ref = "tmp/restoration/result.json"
+                effects = [".caprmedio_runtime/framework/current.toml"]
+                if phase == "start":
+                    with patch.object(work_journal, "append_sealed_events", side_effect=OSError("fixture append denied")):
+                        with self.assertRaises(DirectActionJournalError):
+                            original.begin_action(action_id=RESTORATION_ACTION_ID,
+                                                  requested_run_id=requested, intent=RESTORATION_INTENT)
+                else:
+                    started = original.begin_action(action_id=RESTORATION_ACTION_ID,
+                                                    requested_run_id=requested, intent=RESTORATION_INTENT)
+                    original.record_effects(started["run_id"], result_ref=result_ref, effect_refs=effects)
+                    with patch.object(work_journal, "append_sealed_events", side_effect=OSError("fixture append denied")):
+                        with self.assertRaises(DirectActionJournalError):
+                            original.finish_action(started["run_id"], outcome="completed",
+                                                   result_ref=result_ref, effect_refs=effects)
+                original.close()
+                pending_id = next(iter(original.pending))
+                pending_before = work_journal._pending_path(self.root, pending_id).read_bytes()
+                resumed = self._restoration_session()
+                with patch.object(work_journal, "append_sealed_events") as append:
+                    with self.assertRaises(DirectActionJournalError) as pending:
+                        resumed.reopen_restoration_for_recording(requested, RESTORATION_INTENT)
+                self.assertEqual("direct-action-recording-pending", pending.exception.code)
+                self.assertEqual({}, resumed.actual)
+                self.assertEqual(pending_before, work_journal._pending_path(self.root, pending_id).read_bytes())
+                append.assert_not_called()
+
+    def test_restoration_recording_is_exclusive_revalidates_authorization_and_cannot_widen_o180(self) -> None:
+        with self.assertRaises(DirectActionJournalError) as unadmitted:
+            self.session.reopen_restoration_for_recording("bootstrap-recording", INTENT)
+        self.assertEqual("direct-action-unadmitted", unadmitted.exception.code)
+        held: set[str] = set()
+        with patch.object(work_journal, "_event_lock",
+                          side_effect=lambda root, key: _ExclusiveFixtureLock(held, key)):
+            original = self._restoration_session()
+            original.begin_action(action_id=RESTORATION_ACTION_ID,
+                                  requested_run_id="restore-recording-lock", intent=RESTORATION_INTENT)
+            competing = self._restoration_session()
+            with self.assertRaises(DirectActionJournalError) as busy:
+                competing.reopen_restoration_for_recording("restore-recording-lock", RESTORATION_INTENT)
+            self.assertEqual("direct-action-lock-unavailable", busy.exception.code)
+            original.close()
+            resumed = self._restoration_session()
+            resumed.reopen_restoration_for_recording("restore-recording-lock", RESTORATION_INTENT)
+            self.assertEqual(2, len(held))
+            with self.assertRaises(DirectActionJournalError):
+                competing.reopen_restoration_for_recording("restore-recording-lock", RESTORATION_INTENT)
+            resumed.close()
+            self.assertEqual(set(), held)
+        authorization_changed = self._restoration_session()
+        self._write(".caprmedio_caprmedio/operators_registry.toml", b"operators = []\n")
+        with self.assertRaises(DirectActionJournalError) as authorization:
+            authorization_changed.reopen_restoration_for_recording("restore-recording-lock", RESTORATION_INTENT)
+        self.assertEqual("direct-action-authorization-required", authorization.exception.code)
+        self.assertEqual(["started"], [event["event"] for event in self._events()])
+
+    def test_restoration_recording_refuses_malformed_original_pending_without_replacing_it(self) -> None:
+        original = self._restoration_session()
+        started = original.begin_action(action_id=RESTORATION_ACTION_ID,
+                                        requested_run_id="restore-recording-malformed", intent=RESTORATION_INTENT)
+        original.close()
+        pending = work_journal._pending_path(self.root, started["run_id"] + ":terminal:unknown")
+        pending.parent.mkdir(parents=True, exist_ok=True)
+        pending.write_bytes(b"{}")
+        resumed = self._restoration_session()
+        with patch.object(work_journal, "append_sealed_events") as append:
+            with self.assertRaises(DirectActionJournalError) as invalid:
+                resumed.reopen_restoration_for_recording("restore-recording-malformed", RESTORATION_INTENT)
+        self.assertEqual("direct-action-pending-invalid", invalid.exception.code)
+        self.assertEqual(b"{}", pending.read_bytes())
+        self.assertEqual({}, resumed.actual)
+        self.assertEqual(["started"], [event["event"] for event in self._events()])
+        append.assert_not_called()
+
     def test_starts_one_deterministic_direct_action_and_reopens_before_effects(self) -> None:
         started = self.session.begin_action(
             action_id=INITIALIZATION_ACTION_ID,

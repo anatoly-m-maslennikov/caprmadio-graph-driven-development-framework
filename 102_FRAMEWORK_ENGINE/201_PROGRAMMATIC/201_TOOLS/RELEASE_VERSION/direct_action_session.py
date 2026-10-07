@@ -9,9 +9,10 @@ effect is eligible to run.
 The module owns no private Action ledger.  It uses the existing Work Journal's
 sealed events, receipt de-duplication, append contexts, and pending-event
 recovery.  Therefore an interrupted process cannot silently replay an unknown
-installation effect: it may only recover the exact original pending Journal
-event, and a previously started direct Action requires a new deliberate
-recovery decision outside this session.
+installation effect: it may recover the exact original pending Journal event.
+Only CA-O-187 additionally admits an explicitly requested recording-only reopen
+of an original started Run; the caller must independently observe the retained
+actual restoration effects before using the unchanged terminal writer.
 """
 
 from __future__ import annotations
@@ -420,6 +421,59 @@ class DirectActionSession:
             self._release_invocation_lock()
             raise
 
+    def reopen_restoration_for_recording(
+        self,
+        requested_run_id: str,
+        intent: Mapping[str, Any],
+    ) -> Mapping[str, Any]:
+        """Own the original O-187 Run solely to record independently proven effects.
+
+        This appends no event and never starts or dispatches an Action. The
+        coordinator must validate its retained result, proof, image, selector,
+        and public Skill before observing effects and calling ``finish_action``.
+        Any sealed pending event instead requires exact-byte pending recovery.
+        O-180 and source-evolved historical Runs are not admitted by this method.
+        """
+        if self._closed:
+            raise DirectActionJournalError("direct-action-invocation-closed", "direct Action session is closed")
+        if self.action_id != RESTORATION_ACTION_ID:
+            raise DirectActionJournalError("direct-action-unadmitted", "recording-only reopen is admitted only for O-187 restoration")
+        if not isinstance(requested_run_id, str) or _RUN_ID.fullmatch(requested_run_id) is None:
+            raise DirectActionJournalError("direct-action-invalid-run", "requested_run_id has invalid syntax")
+        normalized_intent = _intent(intent, RESTORATION_ACTION_ID)
+        binding = _source_binding(self.root, RESTORATION_ACTION_ID)
+        # Constructor admission is not a lease on subsequently removed
+        # Operator authority. Reopen the current registry before owning a Run.
+        _authorization(self.root, self.authorization)
+        identity = self._run_identity(requested_run_id, binding)
+        run_id = f"direct-action:{identity}"
+        if run_id in self.actual:
+            raise DirectActionJournalError("direct-action-invocation-active", "this direct Action invocation is already active in this session")
+        self._acquire_invocation_lock(requested_run_id, binding)
+        try:
+            self._refuse_restoration_pending(run_id)
+            started_id = f"{run_id}:started"
+            reopened = _reopen_event(self.root, started_id)
+            if reopened is None:
+                raise DirectActionJournalError("direct-action-recording-unavailable", "the original canonical started restoration Run is unavailable")
+            event, receipt = reopened
+            self._validate_started(event, requested_run_id, normalized_intent, binding, run_id)
+            if self._existing_terminal(identity, requested_run_id, normalized_intent, binding, run_id) is not None:
+                raise DirectActionJournalError("direct-action-already-terminal", "this direct Action already has canonical terminal evidence")
+            self.actual[run_id] = {
+                "requested_run_id": requested_run_id,
+                "intent": normalized_intent,
+                "binding": binding,
+                "event_id": started_id,
+                "event_receipt": dict(receipt),
+            }
+            self.receipts.append(dict(receipt))
+            return {"run_id": run_id, "disposition": "recording_only", "event_id": started_id,
+                    "event_receipt": dict(receipt)}
+        except BaseException:
+            self._release_invocation_lock()
+            raise
+
     def record_effects(self, run_id: str, *, result_ref: str, effect_refs: list[str]) -> None:
         """Keep observed actual effects until the sole terminal writer records them."""
         self._require_open_run(run_id)
@@ -767,6 +821,33 @@ class DirectActionSession:
                 return None
             raise DirectActionJournalError("direct-action-pending-invalid", str(error)) from error
         return event
+
+    def _refuse_restoration_pending(self, run_id: str) -> None:
+        """Refuse every original-Run pending carrier without recovering or replacing it."""
+        try:
+            relative = work_journal.configured_runtime_root(self.root) / "state/work_journal/pending"
+            _safe_ref(relative.as_posix(), "pending Journal root")
+            directory = self.root
+            for part in relative.parts:
+                directory /= part
+                if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
+                    raise DirectActionJournalError("direct-action-pending-invalid", "pending Journal root has an unsafe ancestor")
+            if not directory.exists():
+                return
+            for carrier in sorted(directory.iterdir()):
+                if not carrier.name.startswith(run_id + ":"):
+                    continue
+                if carrier.is_symlink() or not carrier.is_file() or carrier.suffix != ".json":
+                    raise DirectActionJournalError("direct-action-pending-invalid", "original Run pending carrier is unsafe")
+                event = self._pending_event(carrier.stem)
+                event_run = event.get("run") if event is not None else None
+                if not isinstance(event_run, Mapping) or event_run.get("run_id") != run_id:
+                    raise DirectActionJournalError("direct-action-pending-invalid", "original Run pending carrier does not retain its event identity")
+                raise DirectActionJournalError("direct-action-recording-pending", "original Run has pending Journal evidence; recover only its exact sealed event")
+        except (OSError, RuntimeError, work_journal.WorkJournalError) as error:
+            if isinstance(error, DirectActionJournalError):
+                raise
+            raise DirectActionJournalError("direct-action-pending-invalid", "cannot safely inspect original Run pending evidence") from error
 
     def _validate_started(
         self,
