@@ -814,6 +814,12 @@ def _owned_result_event(root: Path, event: Mapping[str, Any], *, code: str) -> t
         "partial": ("failed", "partial"),
     }
     effect_refs = _terminal_effect_refs_for_result(root, result_root, result, code=code)
+    event_effect_refs = event.get("effect_refs")
+    expected_event_effect_refs = ([] if result.get("state") == "no_op" else [*effect_refs, result_ref])
+    if result.get("state") == "restored":
+        effect_refs_match = event_effect_refs in (effect_refs, [*effect_refs, result_ref])
+    else:
+        effect_refs_match = event_effect_refs == expected_event_effect_refs
     if (
         intent_root.name != intent_sha256
         or result.get("intent_sha256") != intent_sha256
@@ -821,7 +827,7 @@ def _owned_result_event(root: Path, event: Mapping[str, Any], *, code: str) -> t
         or not isinstance(result.get("requested_run_id"), str)
         or result.get("state") not in states
         or (event.get("event"), event.get("outcome")) != states[result["state"]]
-        or event.get("effect_refs") != ([] if result.get("state") == "no_op" else [*effect_refs, result_ref])
+        or not effect_refs_match
     ):
         raise _error(code, "terminal event does not bind the exact retained restoration result")
     if result_root != intent_root:

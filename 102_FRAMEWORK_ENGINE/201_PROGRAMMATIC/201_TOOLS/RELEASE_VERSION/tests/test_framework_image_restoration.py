@@ -354,6 +354,12 @@ class FrameworkImageRestorationTests(unittest.TestCase):
         self.assertEqual("completed", event["event"])
         self.assertEqual(len(event["effect_refs"]), len(set(event["effect_refs"])))
         self.assertEqual(pending["run_id"], event["run"]["run_id"])
+        _intent_root, reopened_result_root, _intent, reopened_result, reopened_event, _receipt = (
+            restoration._owned_canonical_terminal(self.root, recovered["terminal"]["event_id"])
+        )
+        self.assertEqual(result_path.parent, reopened_result_root)
+        self.assertEqual(json.loads(original_result_bytes), reopened_result)
+        self.assertEqual(event, reopened_event)
 
     def test_recovery_refuses_fixture_forged_unique_effect_set_without_new_journal_events(self):
         """A unique list is insufficient: the successful result shape is exact."""

@@ -5,7 +5,7 @@ type: Question
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
-status: Active
+status: Archived
 author: Anatoly Maslennikov
 version: 1
 updated_at: "2026-10-07 22:52:33 +0000"
