@@ -10,15 +10,15 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 2
+status: Archived
+version: 1
 updated_at: "2026-10-07 21:47:06 +0000"
 subjects:
   governs: "Integrate the closed restoration Journal and selector lock"
   depends_on: [Action, Tool, Framework Package, Docker Image, Journal, Operator]
 relations:
   is_decomposition_of: [CA-P-1820]
-  blocks: [CA-P-1623]
+  blocks: [CA-P-1826]
 ---
 # Summary
 
@@ -37,7 +37,3 @@ Work estimate: <=15 minutes; add a necessary remainder before expanding beyond t
 ## Definition of Done
 
 Source-pinned O187 intent/events, deterministic identity, no-replay and exact pending-record recovery tests pass. Existing O180 and promotion regressions pass; shared locking refuses concurrent publication without changing required gates.
-
-## Current dependency
-
-The closed Journal and publication-lock implementations are independently accepted, with fifteen direct-Action tests, twenty unchanged initialization tests and two public promotion-lock tests passing. Full original promotion and directory-replacement tests remain required before the fresh Release. Their isolated executor needs the selected immutable N image, so they run after CA-P-1826 restores it. This Task therefore blocks CA-P-1623, not the image repair which supplies that test prerequisite. No Release gate or existing regression is removed.

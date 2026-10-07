@@ -10,12 +10,14 @@ import hashlib
 import json
 import shutil
 import sys
+import tempfile
 import tomllib
 import unittest
 import xml.etree.ElementTree as ET
 from contextlib import contextmanager
 from dataclasses import replace
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +40,8 @@ from release_compilation import build_preflight_validated_candidate, render_rele
 from release_handoff import CURRENT_SELECTOR_RELATIVE, PackageRow
 from release_packaging import RUNTIME_ROOT, _render_manifest, stage_framework_package
 from release_promotion import promote_bound_release, verify_bound_promotion_evidence
+import release_promotion as _release_promotion
+from selector_publication_lock import SelectorPublicationLockError, selector_publication_lock
 import test_release_image as image_test
 
 
@@ -416,6 +420,49 @@ class ReleasePromotionTests(unittest.TestCase):
             self.promote()
         self.assertEqual(self.selector.read_bytes(), prior)
         self.assertEqual(list(outside.iterdir()), [])
+
+
+class PromotionPublicationLockTests(unittest.TestCase):
+    """Public promotion ABI lock ownership; gate behavior remains in the corpus above."""
+
+    def setUp(self):
+        self.root = Path(tempfile.mkdtemp(prefix="promotion-publication-lock-")).resolve()
+        self.candidate = SimpleNamespace(project_root=str(self.root))
+        self.selector = self.root / CURRENT_SELECTOR_RELATIVE
+        self.selector.parent.mkdir(parents=True)
+        self.selector.write_bytes(b"retained selector bytes")
+        self.args = (self.candidate, None, None, None, None)
+        self.gates = {"e2e": None, "full_gate": None}
+
+    def test_promotion_refuses_shared_lock_held_by_restoration_before_body(self):
+        prior = self.selector.read_bytes()
+        with selector_publication_lock(self.root, timeout_seconds=0):
+            with patch.object(_release_promotion, "selector_publication_lock",
+                              side_effect=lambda root: selector_publication_lock(root, timeout_seconds=0)):
+                with patch.object(_release_promotion, "_promote_bound_release_locked") as body:
+                    with self.assertRaises(SelectorPublicationLockError) as busy:
+                        promote_bound_release(*self.args, **self.gates)
+                    self.assertEqual("selector-publication-lock-busy", busy.exception.code)
+                    body.assert_not_called()
+        self.assertEqual(prior, self.selector.read_bytes())
+
+    def test_public_promotion_owns_same_lock_until_body_observation_returns(self):
+        observed = object()
+
+        def body(*args, **gates):
+            self.assertEqual(self.args, args)
+            self.assertEqual(self.gates, gates)
+            # The body encompasses the existing prior/intent reads, effects,
+            # and receipt observation. Restoration uses this identical helper.
+            with self.assertRaises(SelectorPublicationLockError):
+                with selector_publication_lock(self.root, timeout_seconds=0):
+                    self.fail("restoration crossed live promotion ownership")
+            return observed
+
+        with patch.object(_release_promotion, "_promote_bound_release_locked", side_effect=body):
+            self.assertIs(observed, promote_bound_release(*self.args, **self.gates))
+        with selector_publication_lock(self.root, timeout_seconds=0):
+            pass
 
 
 if __name__ == "__main__":

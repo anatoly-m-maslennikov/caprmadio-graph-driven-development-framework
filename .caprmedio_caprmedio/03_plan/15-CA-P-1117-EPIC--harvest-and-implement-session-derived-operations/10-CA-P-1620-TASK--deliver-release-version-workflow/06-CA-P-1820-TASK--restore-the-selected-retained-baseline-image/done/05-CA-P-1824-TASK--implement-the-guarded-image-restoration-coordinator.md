@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 version: 1
-updated_at: "2026-10-07 21:05:19 +0000"
+updated_at: "2026-10-07 21:47:06 +0000"
 subjects:
   governs: "Implement the guarded image restoration coordinator"
   depends_on: [Action, Tool, Framework Package, Docker Image, Journal, Operator]
@@ -38,3 +38,6 @@ Work estimate: <=15 minutes; add a necessary remainder before expanding beyond t
 
 Coordinator success/refusal/partial/unknown/recording tests pass with accepted source and ABI. Package/Skill stay unchanged, same-ID results retain the selector/proof, and all actual effects are represented truthfully.
 
+## Result
+
+Independent review accepted code ea443b39a36c2504a12089d7a9778cd82e385a14c73a3a5d76007e19fffd7a0f after exact pending-event recovery was implemented. Thirteen coordinator tests pass, with the real executor type patched only at its command boundary; actual Docker execution remains CA-P-1826.

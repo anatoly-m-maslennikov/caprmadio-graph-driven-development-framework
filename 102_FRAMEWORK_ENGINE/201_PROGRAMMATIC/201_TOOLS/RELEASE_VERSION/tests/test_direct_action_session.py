@@ -29,6 +29,8 @@ from direct_action_session import (  # noqa: E402
     DirectActionJournalError,
     DirectActionSession,
     INITIALIZATION_ACTION_ID,
+    RESTORATION_ACTION_ID,
+    RESTORATION_ATOM_RELATIVE,
 )
 
 
@@ -47,6 +49,16 @@ INTENT = {
     "manifest_sha256": "a" * 64,
     "source_context_sha256": "b" * 64,
     "image_digest": "sha256:" + "c" * 64,
+}
+RESTORATION_INTENT = {
+    "action_id": RESTORATION_ACTION_ID,
+    "kind": "retained_selected_framework_image_restoration",
+    "manifest_sha256": "a" * 64,
+    "source_context_sha256": "b" * 64,
+    "selected_selector_sha256": "d" * 64,
+    "old_image_digest": "sha256:" + "c" * 64,
+    "retained_proof_receipt_sha256": "e" * 64,
+    "retained_context_sha256": "f" * 64,
 }
 
 
@@ -102,6 +114,120 @@ class DirectActionSessionTests(unittest.TestCase):
         for path in sorted(journal.glob("*.ndjson")):
             events.extend(__import__("json").loads(line) for line in path.read_text(encoding="utf-8").splitlines())
         return events
+
+    def _restoration_session(self) -> DirectActionSession:
+        target = self.root / RESTORATION_ATOM_RELATIVE
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if not target.exists():
+            shutil.copyfile(REPOSITORY_ROOT / RESTORATION_ATOM_RELATIVE, target)
+        session = DirectActionSession(
+            self.root, author="anatoly-m", operator_authorization=AUTHORIZATION,
+            action_id=RESTORATION_ACTION_ID,
+            now=lambda: dt.datetime(2026, 10, 5, 18, 0, tzinfo=dt.UTC),
+        )
+        self.addCleanup(session.close)
+        return session
+
+    def test_restoration_records_exact_o187_start_and_observed_terminal(self) -> None:
+        session = self._restoration_session()
+        started = session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                       requested_run_id="restore-001", intent=RESTORATION_INTENT)
+        event = self._events()[0]
+        self.assertEqual(RESTORATION_ACTION_ID, event["action_id"])
+        self.assertEqual("CA-O-187", event["run"]["definition"]["atom_id"])
+        self.assertEqual(RESTORATION_ATOM_RELATIVE.as_posix(), event["run"]["definition"]["path"])
+        self.assertEqual("CA-O-187", event["initiative"]["initiative_id"])
+        self.assertEqual(RESTORATION_INTENT, session.actual[started["run_id"]]["intent"])
+        result_ref = "tmp/restoration/result.json"
+        effects = [".caprmedio_runtime/framework/current.toml"]
+        session.record_effects(started["run_id"], result_ref=result_ref, effect_refs=effects)
+        terminal = session.finish_action(started["run_id"], outcome="completed",
+                                         result_ref=result_ref, effect_refs=effects)
+        self.assertEqual("terminal", terminal["disposition"])
+        self.assertEqual(["started", "completed"], [event["event"] for event in self._events()])
+        self.assertEqual(effects, self._events()[-1]["effect_refs"])
+
+    def test_restoration_intent_and_session_dispatch_are_closed(self) -> None:
+        with self.assertRaises(DirectActionJournalError) as invalid:
+            DirectActionSession(self.root, author="anatoly-m", operator_authorization=AUTHORIZATION,
+                                action_id="caller-supplied-action")
+        self.assertEqual("direct-action-unadmitted", invalid.exception.code)
+        session = self._restoration_session()
+        for intent in (dict(RESTORATION_INTENT, context_path="tmp/caller"),
+                       {key: value for key, value in RESTORATION_INTENT.items() if key != "retained_context_sha256"},
+                       dict(RESTORATION_INTENT, old_image_digest="image:tag")):
+            with self.subTest(intent=intent), self.assertRaises(DirectActionJournalError):
+                session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                     requested_run_id="restore-invalid", intent=intent)
+        with self.assertRaises(DirectActionJournalError):
+            self.session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                      requested_run_id="restore-default-session", intent=RESTORATION_INTENT)
+        self.assertEqual([], self._events())
+
+    def test_restoration_unknown_start_never_replays_or_invents_terminal(self) -> None:
+        session = self._restoration_session()
+        started = session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                       requested_run_id="restore-unknown", intent=RESTORATION_INTENT)
+        session.record_effects(started["run_id"], result_ref="tmp/restoration/result.json", effect_refs=[])
+        with self.assertRaises(DirectActionJournalError) as uncertain:
+            session.finish_action(started["run_id"], outcome="effect_uncertain",
+                                  result_ref="tmp/restoration/result.json", effect_refs=[])
+        self.assertEqual("direct-action-invalid-outcome", uncertain.exception.code)
+        session.close()
+        resumed = self._restoration_session()
+        with self.assertRaises(DirectActionJournalError) as retry:
+            resumed.begin_action(action_id=RESTORATION_ACTION_ID,
+                                 requested_run_id="restore-unknown", intent=RESTORATION_INTENT)
+        self.assertEqual("direct-action-recovery-required", retry.exception.code)
+        changed = dict(RESTORATION_INTENT, selected_selector_sha256="0" * 64)
+        with self.assertRaises(DirectActionJournalError) as conflict:
+            resumed.begin_action(action_id=RESTORATION_ACTION_ID,
+                                 requested_run_id="restore-unknown", intent=changed)
+        self.assertEqual("direct-action-intent-conflict", conflict.exception.code)
+        self.assertEqual(["started"], [event["event"] for event in self._events()])
+
+    def test_restoration_pending_recording_is_exact_and_recovers_after_source_change(self) -> None:
+        session = self._restoration_session()
+        started = session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                       requested_run_id="restore-pending", intent=RESTORATION_INTENT)
+        result_ref = "tmp/restoration/result.json"
+        effects = [".caprmedio_runtime/framework/current.toml"]
+        session.record_effects(started["run_id"], result_ref=result_ref, effect_refs=effects)
+        with patch.object(work_journal, "append_sealed_events", side_effect=OSError("fixture append denied")):
+            with self.assertRaises(DirectActionJournalError) as pending:
+                session.finish_action(started["run_id"], outcome="completed",
+                                      result_ref=result_ref, effect_refs=effects)
+        self.assertEqual("direct-action-recording-pending", pending.exception.code)
+        pending_id = next(iter(session.pending))
+        with self.assertRaises(DirectActionJournalError):
+            self.session.recover_pending(pending_id)
+        (self.root / RESTORATION_ATOM_RELATIVE).write_bytes(b"O187 changed after observation")
+        fresh = self._restoration_session()
+        with self.assertRaises(DirectActionJournalError) as stale:
+            fresh.begin_action(action_id=RESTORATION_ACTION_ID,
+                               requested_run_id="restore-new", intent=RESTORATION_INTENT)
+        self.assertEqual("direct-action-source-stale", stale.exception.code)
+        receipt = fresh.recover_pending(pending_id)
+        self.assertEqual(pending_id, receipt["event_id"])
+        self.assertEqual(["started", "completed"], [event["event"] for event in self._events()])
+
+    def test_restoration_boundary_is_distinct_from_initialization_and_exclusive(self) -> None:
+        held: set[str] = set()
+        with patch.object(work_journal, "_event_lock",
+                          side_effect=lambda root, key: _ExclusiveFixtureLock(held, key)):
+            self.session.begin_action(action_id=INITIALIZATION_ACTION_ID,
+                                      requested_run_id="bootstrap-owned", intent=INTENT)
+            session = self._restoration_session()
+            session.begin_action(action_id=RESTORATION_ACTION_ID,
+                                  requested_run_id="restore-owned", intent=RESTORATION_INTENT)
+            competing = self._restoration_session()
+            with self.assertRaises(DirectActionJournalError) as busy:
+                competing.begin_action(action_id=RESTORATION_ACTION_ID,
+                                        requested_run_id="restore-other", intent=RESTORATION_INTENT)
+            self.assertEqual("direct-action-lock-unavailable", busy.exception.code)
+            session.close()
+            self.session.close()
+            self.assertEqual(set(), held)
 
     def test_starts_one_deterministic_direct_action_and_reopens_before_effects(self) -> None:
         started = self.session.begin_action(

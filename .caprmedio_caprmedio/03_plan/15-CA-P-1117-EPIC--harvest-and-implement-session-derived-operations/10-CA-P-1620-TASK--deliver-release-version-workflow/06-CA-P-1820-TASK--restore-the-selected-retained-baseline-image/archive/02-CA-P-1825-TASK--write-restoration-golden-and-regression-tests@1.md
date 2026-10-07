@@ -1,32 +1,32 @@
 ---
-atom_id: CA-P-1822
+atom_id: CA-P-1825
 content_role: Plan
 type: Plan
 label: Task
-work_sequence_number: 3
+work_sequence_number: 2
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 version: 1
-updated_at: "2026-10-07 21:05:19 +0000"
+updated_at: "2026-10-07 21:19:22 +0000"
 subjects:
-  governs: "Implement the retained-context image producer"
+  governs: "Write restoration golden and regression tests"
   depends_on: [Action, Tool, Framework Package, Docker Image, Journal, Operator]
 relations:
   is_decomposition_of: [CA-P-1820]
-  blocks: [CA-P-1826]
+  blocks: [CA-P-1822, CA-P-1823, CA-P-1824]
 ---
 # Summary
 
-Implement the retained-context image producer
+Write restoration golden and regression tests
 
 ## Objective
 
-Implement the producer that copies only authenticated persistent retained context and captures actual build, immutable-ID inspect and fixed canary evidence. Reuse existing bootstrap proof shapes and preserve old proof for exact same-ID results.
+Create real-byte retained-N golden fixtures and tests for the accepted restoration ABI before implementation; observe expected initial failures, then retain complete success/refusal/partial/recovery and existing-boundary regression coverage.
 
 ## Details
 
@@ -36,5 +36,5 @@ Work estimate: <=15 minutes; add a necessary remainder before expanding beyond t
 
 ## Definition of Done
 
-Accepted producer tests prove filtered byte/mode currentness, truthful outcomes and canonical proof handling for both ID branches; no live-source input, fake digest or historical-proof overwrite is introduced.
+Tests cover unchanged package/Skill, same and different image IDs, filtered context, tamper/drift/shared-lock cases, timeout/partial/recording recovery and O180 preservation. Initial missing-implementation failure is retained; final focused tests pass without claiming real Docker proof.
 

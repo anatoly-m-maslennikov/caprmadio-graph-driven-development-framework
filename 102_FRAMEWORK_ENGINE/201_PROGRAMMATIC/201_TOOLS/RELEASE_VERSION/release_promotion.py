@@ -29,6 +29,7 @@ from release_image import (
 from release_e2e_gate import CandidateE2EGateEvidence
 from release_full_gate import FullGateEvidence, verify_bound_full_gate_evidence
 from release_inventory import persistent_regular_files, refuse_secret_path
+from selector_publication_lock import selector_publication_lock
 from release_packaging import RUNTIME_ROOT, _read_row, _render_manifest, _verify_release
 from release_suite import (
     SuiteGateEvidence, _bootstrap_prior_manifest_is_exact,
@@ -246,6 +247,16 @@ def promote_bound_release(candidate: ValidatedCandidate, compilation: SealedCand
                           verification: ImageVerificationEvidence, *, e2e: CandidateE2EGateEvidence,
                           full_gate: FullGateEvidence) -> PromotionEvidence:
     """Admit once, retain N, then publish selector and exact project Skill."""
+    with selector_publication_lock(candidate.project_root):
+        return _promote_bound_release_locked(candidate, compilation, suite, build, verification,
+                                             e2e=e2e, full_gate=full_gate)
+
+
+def _promote_bound_release_locked(candidate: ValidatedCandidate, compilation: SealedCandidateCompilation,
+                                 suite: SuiteGateEvidence, build: ImageBuildEvidence,
+                                 verification: ImageVerificationEvidence, *, e2e: CandidateE2EGateEvidence,
+                                 full_gate: FullGateEvidence) -> PromotionEvidence:
+    """The existing promotion sequence runs under the sole selector lock."""
     # Typed evidence and the exact input digest are checked before a retry can
     # reopen its admitted intent. Its gates are reopened below before effects;
     # a stale original artifact remains an observed pending recovery.
