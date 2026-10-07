@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from mcp import Client, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -129,9 +130,16 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         """Attach bounded server stderr to an otherwise opaque startup failure."""
         with tempfile.TemporaryFile(mode='w+', encoding='utf-8') as stderr:
             try:
-                async with Client(stdio_client(self._server_parameters(), errlog=stderr), cache=cache,
-                                  read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
-                    yield client
+                # ClientSession.send_discover deliberately uses its own ten-second
+                # probe constant, rather than Client.read_timeout_seconds.  The
+                # gateway's initial child-generation preparation is separately
+                # bounded at twenty seconds, so give this cold-start-only probe
+                # the existing bounded test startup allowance.
+                with patch('mcp.client.session.DISCOVER_TIMEOUT_SECONDS',
+                           GATEWAY_STARTUP_TIMEOUT_SECONDS):
+                    async with Client(stdio_client(self._server_parameters(), errlog=stderr), cache=cache,
+                                      read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+                        yield client
             except BaseException as error:
                 stderr.seek(0)
                 detail = stderr.read()[-4096:]
