@@ -386,6 +386,143 @@ class ReleaseDeliveryTests(unittest.TestCase):
         self.assertEqual(delivery_metadata.read_bytes(), b"delivery finder metadata\n")
         self.assertEqual(list(self.target.parent.glob(".release-sources-*")), [])
 
+    def test_predecessor_reservation_refuses_prepopulated_backup_child(self) -> None:
+        """Mocked reservation setup only; it does not exercise publication."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        wrapper = parent / ".release-sources-prior-private-fixture"
+        wrapper.mkdir()
+        (wrapper / destination.name).mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            with self.assertRaises(ReleaseDeliveryError) as collision:
+                release_delivery._bind_reservation_identity(
+                    release_delivery._reserve_predecessor(parent, destination)
+                )
+        self.assertEqual("release-copy-collision", collision.exception.code)
+        self.assertTrue((wrapper / destination.name).is_dir())
+
+    def test_predecessor_reservation_retains_empty_private_wrapper(self) -> None:
+        """Reservation allocation leaves its wrapper intact and child absent."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        wrapper = parent / ".release-sources-prior-private-fixture"
+        wrapper.mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            reservation = release_delivery._reserve_predecessor(parent, destination)
+        self.assertEqual(wrapper, reservation.wrapper)
+        self.assertTrue(reservation.wrapper.is_dir())
+        self.assertFalse(reservation.backup.exists())
+
+    def test_predecessor_reservation_refuses_symlink_or_substituted_wrapper(self) -> None:
+        """Mocked reservation identities never authorize a substituted wrapper."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        outside = self.root / "fixture-reservation-outside"
+        outside.mkdir()
+        symlink_wrapper = parent / ".release-sources-prior-private-link"
+        symlink_wrapper.symlink_to(outside, target_is_directory=True)
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(symlink_wrapper)):
+            with self.assertRaises(ReleaseDeliveryError) as unsafe_link:
+                release_delivery._bind_reservation_identity(
+                    release_delivery._reserve_predecessor(parent, destination)
+                )
+        self.assertEqual("release-copy-path-unsafe", unsafe_link.exception.code)
+
+        wrapper = parent / ".release-sources-prior-private-owned"
+        wrapper.mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            reservation = release_delivery._reserve_predecessor(parent, destination)
+        release_delivery._bind_reservation_identity(reservation)
+        actual_identity = release_delivery._nofollow_directory_identity
+        # Boundary mock: model replacement after reservation without invoking
+        # host directory cleanup, which is unavailable in this fixture host.
+        with patch(
+            "release_delivery._nofollow_directory_identity",
+            side_effect=lambda path, *, label: (0, 0) if path == wrapper else actual_identity(path, label=label),
+        ):
+            with self.assertRaises(ReleaseDeliveryError) as unsafe_substitution:
+                release_delivery._validate_reservation(reservation, require_absent_backup=True)
+        self.assertEqual("release-copy-path-unsafe", unsafe_substitution.exception.code)
+
+    def test_predecessor_reservation_refuses_substituted_rollback_child(self) -> None:
+        """Only the inode-recorded old-tree child may be used for rollback."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        wrapper = parent / ".release-sources-prior-private-owned"
+        wrapper.mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            reservation = release_delivery._reserve_predecessor(parent, destination)
+        release_delivery._bind_reservation_identity(reservation)
+        reservation.backup.mkdir()
+        backup_identity = release_delivery._nofollow_directory_identity(
+            reservation.backup, label="fixture backup",
+        )
+        release_delivery._record_predecessor_backup(reservation, backup_identity)
+        actual_identity = release_delivery._nofollow_directory_identity
+        # Boundary mock: a different backup inode is refused before rollback.
+        with patch(
+            "release_delivery._nofollow_directory_identity",
+            side_effect=lambda path, *, label: (0, 0) if path == reservation.backup else actual_identity(path, label=label),
+        ):
+            with self.assertRaises(ReleaseDeliveryError) as unsafe_child:
+                release_delivery._validate_reservation(reservation, require_owned_backup=True)
+        self.assertEqual("release-copy-path-unsafe", unsafe_child.exception.code)
+
+    def test_unbound_reservation_survives_binding_refusal_for_recovery(self) -> None:
+        """A fixture-only identity race retains the just-created wrapper."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        wrapper = parent / ".release-sources-prior-private-owned"
+        wrapper.mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            reservation = release_delivery._reserve_predecessor(parent, destination)
+        actual_identity = release_delivery._nofollow_directory_identity
+        wrapper_calls = 0
+
+        def swapped_after_binding(path, *, label):
+            nonlocal wrapper_calls
+            if path == wrapper:
+                wrapper_calls += 1
+                if wrapper_calls == 2:
+                    return (0, 0)
+            return actual_identity(path, label=label)
+
+        with patch("release_delivery._nofollow_directory_identity", side_effect=swapped_after_binding):
+            with self.assertRaises(ReleaseDeliveryError) as unsafe:
+                release_delivery._bind_reservation_identity(reservation)
+        self.assertEqual("release-copy-path-unsafe", unsafe.exception.code)
+        self.assertTrue(reservation.wrapper.is_dir())
+        self.assertFalse(reservation.backup.exists())
+
+    def test_record_predecessor_backup_refuses_child_swapped_before_identity_capture(self) -> None:
+        """A child observed after the move must retain the pre-move inode."""
+        parent = self.root / "fixture-reservation-parent"
+        parent.mkdir()
+        destination = parent / "sources"
+        wrapper = parent / ".release-sources-prior-private-owned"
+        wrapper.mkdir()
+        with patch("release_delivery.tempfile.mkdtemp", return_value=str(wrapper)):
+            reservation = release_delivery._reserve_predecessor(parent, destination)
+        release_delivery._bind_reservation_identity(reservation)
+        reservation.backup.mkdir()
+        expected_identity = release_delivery._nofollow_directory_identity(
+            reservation.backup, label="fixture original predecessor",
+        )
+        actual_identity = release_delivery._nofollow_directory_identity
+        with patch(
+            "release_delivery._nofollow_directory_identity",
+            side_effect=lambda path, *, label: (0, 0) if path == reservation.backup else actual_identity(path, label=label),
+        ):
+            with self.assertRaises(ReleaseDeliveryError) as unsafe:
+                release_delivery._record_predecessor_backup(reservation, expected_identity)
+        self.assertEqual("release-copy-path-unsafe", unsafe.exception.code)
+        self.assertIsNone(reservation.backup_identity)
+
     def test_secret_shaped_ephemeral_source_or_delivery_carrier_refuses_without_mutation(self) -> None:
         _preflight, candidate = self.fixture.build()
         source_secret = self.fixture.source / ".env.pyc"
@@ -417,12 +554,16 @@ class ReleaseDeliveryTests(unittest.TestCase):
         (self.target / "unknown-empty").mkdir()
         prior = records(self.target)
         selector = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
-        delivered = deliver_release_sources(candidate)
+        # The predecessor reservation is retained as the backup wrapper; its
+        # old tree must move into ``sources`` without deleting the wrapper.
+        with patch("release_delivery.Path.rmdir", side_effect=AssertionError("reservation cleanup is forbidden")) as removed:
+            delivered = deliver_release_sources(candidate)
+        removed.assert_not_called()
         self.assertEqual(records(self.target), records(self.fixture.source))
         self.assertEqual(records(release), retained)
         backups = list(self.target.parent.glob(".release-sources-prior-*"))
         self.assertEqual(len(backups), 1)
-        self.assertEqual(records(backups[0]), prior)
+        self.assertEqual(records(backups[0] / "sources"), prior)
         self.assertEqual(delivered.actual_derived_source_copy_sha256, preflight.expected_derived_source_copy_sha256)
         self.assertEqual((self.root / ".caprmedio_runtime/framework/current.toml").read_bytes(), selector)
         stage_framework_package(self.root, render_release_candidate(candidate, preflight))
@@ -625,7 +766,7 @@ class ReleaseDeliveryTests(unittest.TestCase):
         self.assertEqual(len(backups), 2)
         new_backups = set(backups) - set(backups_before)
         self.assertEqual(len(new_backups), 1)
-        self.assertEqual(records(new_backups.pop()), target_before)
+        self.assertEqual(records(new_backups.pop() / "sources"), target_before)
 
     def test_completed_codec_and_journal_without_d567_registration_refuse_before_effect(self) -> None:
         """A valid historical carrier becomes usable only through D567 v3."""
@@ -900,17 +1041,27 @@ class ReleaseDeliveryTests(unittest.TestCase):
 
     def test_owned_publication_failure_restores_predecessor_and_reports_candidate_staging(self) -> None:
         _preflight, candidate, prior, release, retained = self.owned_predecessor()
+        selector_before = (self.root / ".caprmedio_runtime/framework/current.toml").read_bytes()
         original_rename = Path.rename
         def refuse_publication(path, target):
             if path.name.startswith(f".release-sources-{candidate.manifest.sha256[:12]}-"):
                 raise OSError("injected fixture publication failure")
             return original_rename(path, target)
-        with patch("release_delivery.Path.rename", autospec=True, side_effect=refuse_publication):
+        with (
+            patch("release_delivery.Path.rmdir", side_effect=AssertionError("reservation cleanup is forbidden")) as removed,
+            patch("release_delivery.Path.rename", autospec=True, side_effect=refuse_publication),
+        ):
             with self.assertRaises(ReleaseDeliveryError) as failed:
                 deliver_release_sources(candidate)
+        removed.assert_not_called()
         self.assertEqual(failed.exception.code, "release-copy-failed")
         self.assertEqual(records(self.target), prior)
         self.assertEqual(records(release), retained)
+        self.assertEqual((self.root / ".caprmedio_runtime/framework/current.toml").read_bytes(), selector_before)
+        reservations = list(self.target.parent.glob(".release-sources-prior-*"))
+        self.assertEqual(len(reservations), 1)
+        self.assertFalse((reservations[0] / "sources").exists())
+        self.assertIn(reservations[0].relative_to(self.root).as_posix(), failed.exception.recovery_paths)
         self.assertTrue(any(path.startswith("101_LAYER_1_FRAMEWORK_METHODOLOGY/.release-sources-")
                             for path in failed.exception.recovery_paths))
 
