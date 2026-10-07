@@ -43,6 +43,7 @@ from release_suite import (  # noqa: E402
     SUITE_DRIVER_RELATIVE,
     SUITE_DRIVER_WORKING_DIRECTORY,
     SuiteExecutionResult,
+    _active_n_state,
     _refuse_secret_relative,
     _suite_process_environment,
     execute_bound_release_suite,
@@ -512,6 +513,24 @@ class ReleaseSuiteTests(unittest.TestCase):
                 self.execute_suite(candidate, compilation)
             process.assert_not_called()
         self.assertFalse((package / "SKILLS/ca/SKILL.md").exists())
+
+    def test_active_n_ignores_finder_metadata_but_not_real_skill_files(self) -> None:
+        candidate, compilation = self.bound(stage_package=False)
+        before = _active_n_state(self.root, candidate)
+        package_metadata = self.root / ".caprmedio_runtime/framework/releases/N/.DS_Store"
+        skill_metadata = self.root / ".agents/skills/ca/.DS_Store"
+        package_metadata.write_bytes(b"finder package metadata")
+        skill_metadata.write_bytes(b"finder skill metadata")
+
+        self.assertEqual(_active_n_state(self.root, candidate), before)
+        self.assertTrue(self.execute_suite(candidate, compilation).passed)
+
+        extra = self.root / ".agents/skills/ca/retained-real-file.txt"
+        extra.write_bytes(b"real retained state")
+        with patch("release_suite.subprocess.Popen") as process:
+            with self.assertRaises(ReleaseContractError):
+                self.execute_suite(candidate, compilation)
+            process.assert_not_called()
 
     def test_candidate_package_symlink_refuses_even_when_target_is_absent(self) -> None:
         candidate, compilation = self.bound(stage_package=False)

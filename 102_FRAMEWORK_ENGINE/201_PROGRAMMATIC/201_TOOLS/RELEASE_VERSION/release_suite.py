@@ -286,6 +286,10 @@ def _active_skill_records(root: Path, relative: str) -> tuple[dict[str, tuple[st
     directories: set[str] = set()
     for carrier in sorted(folder.rglob("*")):
         local = carrier.relative_to(folder).as_posix()
+        # Finder metadata is not an installed Skill member.  Check a symlink
+        # first: its basename never makes an unsafe carrier admissible.
+        if carrier.name == ".DS_Store" and not carrier.is_symlink() and carrier.is_file():
+            continue
         _refuse_secret_relative(Path(relative) / local)
         if carrier.is_symlink() or not (carrier.is_dir() or carrier.is_file()):
             raise ReleaseContractError("release-active-n-invalid", f"active Skill contains an unsafe carrier: {local}")

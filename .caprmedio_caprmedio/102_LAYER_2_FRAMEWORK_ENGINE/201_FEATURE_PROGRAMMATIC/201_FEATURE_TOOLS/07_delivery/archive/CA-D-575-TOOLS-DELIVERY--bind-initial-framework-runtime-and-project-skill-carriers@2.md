@@ -4,9 +4,9 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 3
+version: 2
 updated_at: "2026-10-07 22:43:16 +0000"
 subjects:
   governs: "Tool/FRAMEWORK_INITIALIZATION/Runtime and Skill carriers"
@@ -42,9 +42,7 @@ Its context contains only the sealed package, the existing fixed `IMAGE_DOCKERFI
 
 ### Selector and Journal intent
 
-The initializer internally reopens the derived retained proof and re-inspects the image before an installation effect; it does not rerun producer effects. Finder metadata is excluded under CA-R-1898. An existing empty public Skill directory retains the ordinary atomic replacement path. For a verified metadata-only directory, retain its exact directory and metadata bytes at the internally derived private sibling `.agents/skills/.ca-retained-metadata-<private suffix>/ca` before the same whole-Skill atomic publication; a changed target containing real Skill state refuses displacement. No member-by-member public Skill publication is admitted. A failed replacement retains the sealed staging and any retained-metadata sibling as actual effect references, exposes no partial Skill as completed, and does not select the package. These private recovery carriers are not another authority or Journal.
-
-The selector identifies the manifest digest, selected release root, Framework Engine root, Methodology root, and immutable image ID. The canonical started-Run input remains `requested_run_id`, package-manifest SHA-256, sealed source-context SHA-256, and immutable image digest. A `requested_run_id` cannot start a changed intent: a changed binding permits only existing-Run inspection or recovery and creates neither another started evidence entry nor a second source ledger. The manifest's sealed source-context SHA-256 is the SHA-256 of canonical UTF-8 rows `(source_path, sha256, mode)`, ordered by `source_path`, for every inventoried package source. It is the sole activation carrier and is written only after a complete Skill publication; separate-directory writes are not treated as one atomic transaction. Package and Skill contents are regular, project-contained carriers with their manifest digests; no secret-shaped carrier, hook, global configuration, permanent bootstrap setting, source mutation, second registry, caller-selected build input, or image tag is delivered. The Action writes its actual installation started and terminal evidence only through the canonical Work Journal; runtime carriers and private image evidence do not become a second Journal.
+The initializer internally reopens the derived retained proof and re-inspects the image before an installation effect; it does not rerun producer effects. The selector identifies the manifest digest, selected release root, Framework Engine root, Methodology root, and immutable image ID. The canonical started-Run input remains `requested_run_id`, package-manifest SHA-256, sealed source-context SHA-256, and immutable image digest. A `requested_run_id` cannot start a changed intent: a changed binding permits only existing-Run inspection or recovery and creates neither another started evidence entry nor a second source ledger. The manifest's sealed source-context SHA-256 is the SHA-256 of canonical UTF-8 rows `(source_path, sha256, mode)`, ordered by `source_path`, for every inventoried package source. It is the sole activation carrier and is written only after a complete Skill publication; separate-directory writes are not treated as one atomic transaction. Package and Skill contents are regular, project-contained carriers with their manifest digests; no secret-shaped carrier, hook, global configuration, permanent bootstrap setting, source mutation, second registry, caller-selected build input, or image tag is delivered. The Action writes its actual installation started and terminal evidence only through the canonical Work Journal; runtime carriers and private image evidence do not become a second Journal.
 
 ### Bootstrap-to-N+1 compatibility
 

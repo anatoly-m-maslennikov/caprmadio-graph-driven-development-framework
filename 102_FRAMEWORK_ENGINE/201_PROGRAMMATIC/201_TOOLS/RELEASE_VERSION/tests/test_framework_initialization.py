@@ -312,6 +312,21 @@ class FrameworkInitializationTests(unittest.TestCase):
 
         self.assertEqual(raised.exception.code, "initial-methodology-compiled-unknown")
 
+    def test_refuses_a_symlinked_finder_metadata_compiled_sibling(self) -> None:
+        safe_target = self.root / "retained-finder-metadata-target"
+        safe_target.mkdir()
+        metadata = self.root / (
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/.DS_Store"
+        )
+        metadata.symlink_to(safe_target, target_is_directory=True)
+
+        with self.assertRaises(FrameworkInitializationError) as raised:
+            initialization._compiled_methodology_files(
+                self.root, plan_initial_framework_installation(self.root).compiler_currentness,
+            )
+
+        self.assertEqual(raised.exception.code, "initial-methodology-compiled-unknown")
+
     def test_preserves_direct_action_recovery_refusal_without_any_publication(self) -> None:
         self.session = RecoveryRequiredSession()
         plan = plan_initial_framework_installation(self.root)
@@ -390,6 +405,69 @@ class FrameworkInitializationTests(unittest.TestCase):
         )
         self.assertEqual(result["state"], "installed")
         self.assertTrue((self.root / ".agents/skills/ca/SKILL.md").is_file())
+
+    def test_ignores_metadata_only_boundaries_and_retained_package_metadata(self) -> None:
+        releases_metadata = self._write(
+            ".caprmedio_runtime/framework/releases/.DS_Store", b"finder releases metadata"
+        )
+        skill_metadata = self._write(
+            ".agents/skills/ca/.DS_Store", b"finder skill metadata"
+        )
+        plan = plan_initial_framework_installation(self.root)
+        result = self._initialize(
+            InspectingDocker(
+                manifest_sha256=plan.manifest_sha256,
+                source_context_sha256=plan.source_context_sha256,
+            ),
+            emulate_directory_rename=True,
+        )
+
+        package = self.root / result["release_root"]
+        package_metadata = package / ".DS_Store"
+        package_metadata.write_bytes(b"finder package metadata")
+        initialization._verify_package(plan, package)
+        metadata_backups = list(
+            (self.root / ".agents/skills").glob(".ca-retained-metadata-*/ca/.DS_Store")
+        )
+        self.assertEqual(result["state"], "installed")
+        self.assertEqual(releases_metadata.read_bytes(), b"finder releases metadata")
+        self.assertEqual(len(metadata_backups), 1)
+        self.assertEqual(metadata_backups[0].read_bytes(), skill_metadata.read_bytes())
+        self.assertTrue((self.root / ".agents/skills/ca/SKILL.md").is_file())
+
+    def test_metadata_skill_publication_failure_leaves_no_partial_public_skill(self) -> None:
+        plan = plan_initial_framework_installation(self.root)
+        package = self.root / "sealed-package"
+        source = package / "SKILLS/ca"
+        self._write("sealed-package/SKILLS/ca/SKILL.md", b"# sealed ca\n")
+        self._write("sealed-package/SKILLS/ca/agents/openai.yaml", b"name: sealed-ca\n")
+        target = self._write(".agents/skills/ca/.DS_Store", b"finder skill metadata").parent
+        real_replace = os.replace
+
+        def move_metadata_then_fail_publication(source_path, target_path):
+            source_path = Path(source_path)
+            target_path = Path(target_path)
+            if source_path == target:
+                shutil.copytree(source_path, target_path)
+                (source_path / ".DS_Store").unlink()
+                source_path.rmdir()
+                return None
+            if source_path.name.startswith(".ca-initial-") and target_path == target:
+                raise PermissionError("simulated final atomic publication failure")
+            return real_replace(source_path, target_path)
+
+        with patch("framework_initialization.os.replace", side_effect=move_metadata_then_fail_publication):
+            with self.assertRaises(FrameworkInitializationError) as raised:
+                initialization._publish_skill(plan, package)
+
+        self.assertEqual(raised.exception.code, "initial-skill-publication-failed")
+        self.assertFalse((target / "SKILL.md").exists())
+        backups = list((self.root / ".agents/skills").glob(".ca-retained-metadata-*/ca/.DS_Store"))
+        self.assertEqual(len(backups), 1)
+        self.assertEqual(backups[0].read_bytes(), b"finder skill metadata")
+        self.assertEqual(len(raised.exception.effect_refs), 2)
+        staging = self.root / raised.exception.effect_refs[0]
+        self.assertEqual((staging / "SKILL.md").read_bytes(), b"# sealed ca\n")
 
     def test_refuses_existing_project_local_ca_without_overwriting_it(self) -> None:
         skill = self._write(".agents/skills/ca/SKILL.md", b"existing project skill\n")

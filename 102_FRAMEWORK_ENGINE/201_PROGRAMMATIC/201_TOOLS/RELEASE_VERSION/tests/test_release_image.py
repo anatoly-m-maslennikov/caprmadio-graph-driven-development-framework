@@ -265,6 +265,23 @@ class ReleaseImageTests(unittest.TestCase):
         with self.assertRaises(ReleaseContractError):
             verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
 
+    def test_ds_store_is_ignored_but_real_private_context_files_are_refused(self):
+        import release_image
+
+        build = self.build()
+        context = self.root / build.context_root
+        original = release_image._tree(context)
+        (context / ".DS_Store").write_bytes(b"Finder metadata\n")
+        (context / "PACKAGE/.DS_Store").write_bytes(b"nested Finder metadata\n")
+        self.assertEqual(original, release_image._tree(context))
+        verified = verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
+        self.assertEqual("verified", verified.outcome)
+
+        (context / "unexpected.txt").write_bytes(b"not a Finder artifact\n")
+        self.assertNotEqual(original, release_image._tree(context))
+        with self.assertRaises(ReleaseContractError):
+            verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
+
     def test_failed_canary_never_passes(self):
         build = self.build()
         self.docker.fail = "run"
@@ -623,6 +640,15 @@ class ReleaseImageTests(unittest.TestCase):
             FRAMEWORK_SETTINGS_RELATIVE + "#release_version.rollback_retention.condition",
         ))
 
+    def test_retirement_ignores_regular_ds_store_in_promotion_retention_root(self):
+        args = self.retirement_inputs()
+        self.fixture.fixture.write(".caprmedio_runtime/release_promotion/.DS_Store", b"Finder metadata\n")
+        docker = FakeRetirementDocker()
+        result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
+        self.assertEqual(result.outcome, "retained")
+        self.assertIn(args[-1].retained_prior_selector_ref, result.observed_rollback_refs)
+        self.assertNotIn("rm", [word for command in docker.calls for word in command])
+
     def test_retirement_unknown_rollback_scope_is_pending_before_docker(self):
         args = self.retirement_inputs()
         self.fixture.fixture.write(".caprmedio_runtime/release_promotion/unknown/prior-selector.toml", b"unsupported TOML {\n")
@@ -724,6 +750,44 @@ class ReleaseImageTests(unittest.TestCase):
         evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
         with self.assertRaises(ReleaseContractError):
             read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_accepts_fixed_legacy_canary_proof(self):
+        import release_image
+
+        build, evidence = self.recorded_command_fixtures()
+        context = self.root / build.context_root
+        metadata_inventory = "if p.is_file() and p.name != '.DS_Store'"
+        self.assertEqual(2, release_image.CANARY.count(metadata_inventory))
+        legacy = release_image.CANARY.replace(metadata_inventory, "if p.is_file()")
+        self.assertEqual(release_image._LEGACY_CANARY_SHA256, release_image._digest(legacy.encode()))
+        (context / "canary.py").write_text(legacy)
+
+        build = replace(build, context_sha256=release_image._tree(context))
+        commands_path = self.root / build.evidence_root / "commands.json"
+        commands = json.loads(commands_path.read_bytes())
+        commands[0]["argv"][commands[0]["argv"].index(
+            f"{release_image.CONTEXT_LABEL}={self.docker.labels[release_image.CONTEXT_LABEL]}"
+        )] = (
+            f"{release_image.CONTEXT_LABEL}={build.context_sha256}"
+        )
+        commands_payload = canonical_json(commands)
+        commands_path.write_bytes(commands_payload)
+        build = self.reseal_receipt(replace(build, commands_sha256=release_image._digest(commands_payload)))
+
+        inspection_path = self.root / build.evidence_root / "command-1.stdout"
+        inspection = json.loads(inspection_path.read_bytes())
+        inspection[0]["Config"]["Labels"][release_image.CONTEXT_LABEL] = build.context_sha256
+        inspection_payload = canonical_json(inspection)
+        inspection_path.write_bytes(inspection_payload)
+        commands = json.loads(commands_path.read_bytes())
+        commands[1]["stdout_sha256"] = release_image._digest(inspection_payload)
+        commands_payload = canonical_json(commands)
+        commands_path.write_bytes(commands_payload)
+        build = self.reseal_receipt(replace(build, commands_sha256=release_image._digest(commands_payload)))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+
+        self.assertEqual(self.root / evidence.evidence_root,
+                         read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence))
 
     def test_artifact_reader_rejects_rehashed_unbound_suite_report(self):
         import release_image

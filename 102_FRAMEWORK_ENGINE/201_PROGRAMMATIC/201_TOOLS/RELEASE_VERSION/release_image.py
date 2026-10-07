@@ -132,11 +132,22 @@ def _digest(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+_LEGACY_CANARY_SHA256 = "6609490fb9bc20425f996a59bc603382d5111a8c9e4afcf04ebcde4cc2c3e06b"
+_METADATA_CANARY_SHA256 = "10c229e542850592beaa597fcb105efc2a7cf905154b3c782840932a28b716b6"
+
+
+def _ignored_metadata(path: Path) -> bool:
+    """Ignore only ordinary Finder metadata; never exempt a link or special node."""
+    return path.name == ".DS_Store" and not path.is_symlink() and path.is_file()
+
+
 def _tree(root: Path) -> str:
     records = []
     if root.is_symlink() or not root.is_dir():
         raise ReleaseContractError("release-image-context-unsafe", "image context root is unsafe")
     for path in sorted(root.rglob("*")):
+        if _ignored_metadata(path):
+            continue
         if path.is_symlink() or not (path.is_dir() or path.is_file()):
             raise ReleaseContractError("release-image-context-unsafe", "image context contains an unsafe carrier")
         if path.is_file():
@@ -239,7 +250,7 @@ assert manifest['candidate_snapshot_manifest_sha256'] == spec['candidate_snapsho
 rows = spec['package_rows']
 assert manifest['files'] == rows
 expected = {'manifest.toml'} | {row['destination'] for row in rows}
-assert {p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()} == expected
+assert {p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file() and p.name != '.DS_Store'} == expected
 for row in rows:
     p = base / row['destination']
     assert p.is_file() and not p.is_symlink()
@@ -249,7 +260,7 @@ for row in spec['engine_rows']:
     assert p.is_file() and not p.is_symlink()
     assert digest(p.read_bytes()) == row['sha256'] and p.stat().st_mode & 511 == row['mode']
 engine = Path('/workspace/102_FRAMEWORK_ENGINE')
-assert {p.relative_to(Path('/workspace')).as_posix() for p in engine.rglob('*') if p.is_file()} == {row['path'] for row in spec['engine_rows']}
+assert {p.relative_to(Path('/workspace')).as_posix() for p in engine.rglob('*') if p.is_file() and p.name != '.DS_Store'} == {row['path'] for row in spec['engine_rows']}
 project = Path('/tmp/release-canary-project')
 project.mkdir()
 source = project / '.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources'
@@ -271,6 +282,14 @@ async def probe():
 names = asyncio.run(asyncio.wait_for(probe(), 60))
 print(json.dumps({'schema': 'caprmedio.release_version.image_canary.v1', 'candidate_snapshot_manifest_sha256': spec['candidate_snapshot_manifest_sha256'], 'package_manifest_sha256': digest(manifest_bytes), 'verified_files': len(rows), 'mcp_tools': names}, sort_keys=True))
 '''
+
+
+def _known_canary(payload: bytes) -> bool:
+    """Accept only the retained pre-metadata probe or the current fixed probe."""
+    return type(payload) is bytes and _digest(payload) in {
+        _LEGACY_CANARY_SHA256,
+        _METADATA_CANARY_SHA256,
+    }
 
 
 def _context(root, candidate, compilation, attempt):
@@ -441,10 +460,11 @@ def _verify_build_artifacts(root, candidate, compilation, suite, build):
             "package_rows": [{"resource": row.resource, "source_path": row.source_path, "destination": row.destination_path,
                               "sha256": row.sha256, "mode": row.mode} for row in rows], "engine_rows": engine_rows}
     dockerfile = (context / IMAGE_DOCKERFILE).read_bytes() + b"\nCOPY --chown=${RUNTIME_UID}:${RUNTIME_GID} PACKAGE /opt/caprmedio-framework\nCOPY canary.py /opt/caprmedio-release-canary.py\nCOPY canary.json /opt/caprmedio-release-canary.json\n"
-    if ((context / "canary.py").read_bytes() != CANARY.encode()
+    if (not _known_canary((context / "canary.py").read_bytes())
         or (context / "canary.json").read_bytes() != canonical_json(spec)
         or (context / "Dockerfile").read_bytes() != dockerfile
-        or {path.relative_to(context).as_posix() for path in context.rglob("*") if path.is_file()} != expected_paths):
+        or {path.relative_to(context).as_posix() for path in context.rglob("*")
+            if path.is_file() and not _ignored_metadata(path)} != expected_paths):
         raise ReleaseContractError("release-image-context-stale", "private context or fixed canary producer changed")
     return attempt
 
@@ -743,6 +763,8 @@ def _observed_rollback_references(root: Path, prior_image: str) -> tuple[str, ..
     paths = [CURRENT_SELECTOR_RELATIVE]
     parent = _safe_path(root, PROMOTION_ROOT)
     for directory in sorted(parent.iterdir()):
+        if _ignored_metadata(directory):
+            continue
         if directory.is_symlink() or not directory.is_dir():
             raise ReleaseContractError("release-image-rollback-unknown", "promotion retention scope contains an unsafe carrier")
         selector = directory / "prior-selector.toml"
