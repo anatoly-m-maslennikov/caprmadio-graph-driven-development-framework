@@ -342,6 +342,49 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(canonical_json(payload).encode("utf-8")).hexdigest(),
                          context.control_context_digest)
 
+    def test_resolver_authority_exact_pins_are_captured_with_authenticated_bytes_and_modes(self) -> None:
+        pins = release_source_admission.derive_unknown_effect_resolver_authority(self.root)
+        self.assertEqual([pin['atom_id'] for pin in pins],
+                         ['CA-R-1895', 'CA-M-351', 'CA-E-594', 'CA-D-589'])
+        context = self.capture()
+        rows = {row.source_path: row for row in context.reference_rows}
+        for pin in pins:
+            row = rows[pin['source_path']]
+            self.assertEqual(pin['digest'], row.sha256)
+            self.assertEqual((self.root / pin['source_path']).stat().st_mode & 0o777, row.mode)
+        destination = self.root / 'resolver-reference-copy'
+        destination.mkdir()
+        copy_verified_bytes(context, destination)
+        for pin in pins:
+            self.assertEqual((self.root / pin['source_path']).read_bytes(),
+                             (destination / pin['source_path']).read_bytes())
+
+    def test_resolver_authority_missing_stale_or_changed_mode_fails_closed(self) -> None:
+        pin = release_source_admission.derive_unknown_effect_resolver_authority(self.root)[1]
+        path = self.root / pin['source_path']
+        original = path.read_bytes()
+        mode = path.stat().st_mode & 0o777
+        path.unlink()
+        with self.assertRaises(ReleaseSuiteReferenceContextError):
+            self.capture()
+        path.write_bytes(original + b'\nchanged resolver authority\n')
+        path.chmod(mode)
+        with self.assertRaisesRegex(ReleaseSuiteReferenceContextError, 'stale'):
+            self.capture()
+        path.write_bytes(original)
+        context = self.capture()
+        path.chmod(mode ^ 0o100)
+        with self.assertRaises(ReleaseSuiteReferenceContextError):
+            revalidate_context(self.root, context, self.bindings)
+
+    def test_resolver_declaration_rejects_arbitrary_extra_or_reordered_pins(self) -> None:
+        pins = release_source_admission.derive_unknown_effect_resolver_authority(self.root)
+        for invalid in (pins + [pins[0]], list(reversed(pins)),
+                        [{**pins[0], 'source_path': '.env'}, *pins[1:]]):
+            text = '## Unknown-effect resolver authority\n\n```json\n' + json.dumps(invalid) + '\n```'
+            with self.assertRaises(ReleaseSuiteReferenceContextError):
+                reference_context._resolver_authority_pins(text)
+
     def test_control_fixture_copies_selected_source_refresh_authority_frontier(self) -> None:
         d580 = (REPOSITORY / reference_context._D580_REFERENCE).read_bytes()
         paths = reference_context._selected_source_refresh_frontier(d580, {})

@@ -30,8 +30,10 @@ from release_source_admission import (  # noqa: E402
     AUTHORITY_PIN,
     ReleaseSourceAdmissionError,
     _private_carriers,
+    _pin_shape,
     derive_release_private_carriers,
     derive_release_source_admission,
+    derive_unknown_effect_resolver_authority,
 )
 from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_manifest, selected_manifest_ref  # noqa: E402
 
@@ -390,6 +392,28 @@ def _selected_source_refresh_frontier(
     return tuple(paths)
 
 
+def _resolver_authority_pins(authority_text: str) -> list[dict[str, Any]]:
+    """Discover only the closed D572 declaration from captured authority bytes."""
+    blocks = re.findall(
+        r"^## Unknown-effect resolver authority\n+\x60\x60\x60json\n(.*?)\n\x60\x60\x60$",
+        authority_text, re.MULTILINE | re.DOTALL,
+    )
+    if len(blocks) != 1:
+        _fail("D572 unknown-effect resolver declaration is not unique")
+    try:
+        rows = json.loads(blocks[0])
+        if not isinstance(rows, list) or len(rows) != 4:
+            _fail("D572 unknown-effect resolver declaration must contain four pins")
+        pins = [_pin_shape(row) for row in rows]
+    except (json.JSONDecodeError, ReleaseSourceAdmissionError) as error:
+        raise ReleaseSuiteReferenceContextError("D572 unknown-effect resolver pins are invalid") from error
+    if tuple(pin["atom_id"] for pin in pins) != ("CA-R-1895", "CA-M-351", "CA-E-594", "CA-D-589"):
+        _fail("D572 unknown-effect resolver identities or order differ")
+    for pin in pins:
+        _forbid_non_control_path(pin["source_path"])
+    return pins
+
+
 def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], tuple[str, ...]]:
     """Capture every prospective reader carrier before any delegated parser runs."""
     settings_ref = PROJECT_SETTINGS_REF.as_posix()
@@ -431,6 +455,8 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
     except ReleaseSourceAdmissionError as error:
         raise ReleaseSuiteReferenceContextError("D572 private carrier declaration is invalid") from error
     candidates.extend(row["source_path"] for row in private_carriers)
+    resolver_pins = _resolver_authority_pins(authority_text)
+    candidates.extend(pin["source_path"] for pin in resolver_pins)
     for value in re.findall(r"`([^`]+)`", authority_text):
         if value.startswith(".caprmedio_"):
             candidates.append(value)
@@ -445,6 +471,12 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
     for candidate in sorted(set(candidates)):
         if candidate not in captured:
             captured[candidate] = _read_regular(root, candidate)
+    for pin in resolver_pins:
+        raw, _mode = captured[pin["source_path"]]
+        identity = _atom_identity(raw, pin["source_path"])
+        if (hashlib.sha256(raw).hexdigest() != pin["digest"]
+                or identity != (pin["atom_id"], pin["version"], "Active")):
+            _fail("D572 unknown-effect resolver source pin is stale")
     prompt_rows = _prompt_binding_rows(captured[_D580_REFERENCE][0])
     for candidate, _digest in prompt_rows:
         if candidate not in captured:
@@ -501,6 +533,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     manifest_ref = selected_manifest_ref(snapshot_root)
     admission = derive_release_source_admission(snapshot_root)
     private_carriers = derive_release_private_carriers(snapshot_root)
+    resolver_pins = derive_unknown_effect_resolver_authority(snapshot_root)
     freshness = manifest["source_freshness"]
     source_registry = freshness["selected_source_registry_ref"]
     _safe_relative(source_registry)
@@ -521,6 +554,7 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
         str(AUTHORITY_PIN["source_path"]),
         *_pin_paths(admission),
         *(row["source_path"] for row in private_carriers),
+        *(pin["source_path"] for pin in resolver_pins),
         *prompt_paths,
         *refresh_authority_paths,
         *_UNIT_DEADLINE_SETTINGS,

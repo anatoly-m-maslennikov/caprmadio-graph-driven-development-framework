@@ -15,6 +15,7 @@ import shutil
 from release_suite_reference_context import (
     _project_structure_ref,
     _prompt_binding_rows,
+    _resolver_authority_pins,
     _selected_source_refresh_frontier,
 )
 from release_source_admission import (
@@ -22,6 +23,7 @@ from release_source_admission import (
     derive_release_graph_admission,
     derive_release_private_carriers,
     derive_release_source_admission,
+    derive_unknown_effect_resolver_authority,
 )
 from selected_routes import PROJECT_SETTINGS_REF, canonical_digest, canonical_json, selected_manifest_ref
 
@@ -147,6 +149,23 @@ def copy_control_closure(repository: Path, root: Path) -> None:
         target.chmod(source.stat().st_mode & 0o777)
         if hashlib.sha256(target.read_bytes()).hexdigest() != row["sha256"]:
             raise RuntimeError(f"golden private carrier changed: {row['source_path']}")
+
+    # The separate four-pin resolver authority is a closed D572 declaration,
+    # not a Release route or arbitrary application source directory.
+    authority = root / AUTHORITY_PIN["source_path"]
+    if hashlib.sha256(authority.read_bytes()).hexdigest() != AUTHORITY_PIN["digest"]:
+        raise RuntimeError("golden resolver authority carrier changed")
+    resolver_pins = _resolver_authority_pins(authority.read_text(encoding="utf-8"))
+    for pin in resolver_pins:
+        source = _retained_source(repository, pin["source_path"], pin["digest"])
+        target = root / pin["source_path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        target.chmod(source.stat().st_mode & 0o777)
+        if hashlib.sha256(target.read_bytes()).hexdigest() != pin["digest"]:
+            raise RuntimeError(f"golden resolver source changed: {pin['source_path']}")
+    if derive_unknown_effect_resolver_authority(root) != resolver_pins:
+        raise RuntimeError("golden resolver authority differs from captured D572")
 
     route, copied_admission = derive_release_graph_admission(root)
     manifest["routes"].append(route)
