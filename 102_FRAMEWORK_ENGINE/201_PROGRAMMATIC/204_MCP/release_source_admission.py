@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 22, "source_path": AUTHORITY_REF,
-    "digest": "bd243008315b3c1190aa2364a8fd8dd6b862d682784e9b0aa8112de8caaaf6df",
+    "atom_id": "CA-D-572", "version": 23, "source_path": AUTHORITY_REF,
+    "digest": "5c3bd8d8adc7be15ed51e2f22e8ee4fa5ad496784d206a380da15e41a5be223f",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",

@@ -20,7 +20,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "bd243008315b3c1190aa2364a8fd8dd6b862d682784e9b0aa8112de8caaaf6df"
+AUTHORITY_SHA = "5c3bd8d8adc7be15ed51e2f22e8ee4fa5ad496784d206a380da15e41a5be223f"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402
@@ -80,7 +80,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@22 is not the accepted source pin")
+            raise AssertionError("current D572@23 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
         cls.private_carriers = json.loads(re.search(
             r"^## Private implementation carriers\n+```json\n(.*?)\n```$",
@@ -194,7 +194,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
     def test_private_carriers_reopen_without_extending_the_public_record(self) -> None:
         before = self.snapshot()
         self.assertEqual(self.private_carriers, derive_release_private_carriers(self.root))
-        self.assertEqual(21, len(self.private_carriers))
+        self.assertEqual(22, len(self.private_carriers))
         self.assertEqual(sorted({row["source_path"] for row in self.private_carriers}),
                          [row["source_path"] for row in self.private_carriers])
         self.assertEqual({"route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions",
