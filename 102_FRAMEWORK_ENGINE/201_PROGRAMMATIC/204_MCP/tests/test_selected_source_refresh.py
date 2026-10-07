@@ -40,6 +40,30 @@ GOLDEN_INPUT = MCP / "tests/selected_source_refresh_golden/input_manifest.v7.jso
 GOLDEN_CONTROLS = MCP / "tests/selected_source_refresh_golden/historical_controls.json"
 GOLDEN_D572_READER = MCP / "tests/selected_source_refresh_golden/release_suite_reference_context.d572v13.py"
 _HISTORICAL_READER_REF = "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/release_suite_reference_context.py"
+_M343_REF = (
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
+    "201_FEATURE_TOOLS/05_method/"
+    "CA-M-343-TOOLS-METHOD--discover-run-and-attest-the-declared-release-suite.md"
+)
+_O128_REF = (
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/"
+    "CA-O-128-CORE_META_MODEL-ACTION--apply-authorized-atom-lifecycle-changes.md"
+)
+_FROZEN_CARRIERS = {
+    _M343_REF: ("ca_m_343_v4.md", "2925b59a15bdacb57625d6492069022546290a6d9e8012cc67306a9329c3c089"),
+    _O128_REF: ("ca_o_128_v4.md", "ea36b940a171676977507d366daca9400825e8685018d9c201c15fc5b97eea1c"),
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/09_operations/archive/"
+    "CA-O-128-CORE_META_MODEL-ACTION--apply-authorized-atom-lifecycle-changes@3.md":
+        ("ca_o_128_v3.md", "b5d052e97bae6ada98849380199e5c67cbf090900beb33ca202f7872d56301e8"),
+}
+_FROZEN_D572_CARRIERS = {
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-586-TOOLS-QA_CASE--verify-complete-and-source-bound-release-suite-evidence.md": ("ca_e_586_v3.md", "4be567eff47d0bda089091722bd8008c81b94765445fa1ed6ff10205bea0b7dd"),
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md": ("ca_d_567_v3.md", "e5bc56c0940b53699e9c25bb883ac42b24755fc0c1b65411ccc088c83dd76094"),
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-579-TOOLS-DELIVERY--deliver-the-release-suite-driver-and-junit-report-boundary.md": ("ca_d_579_v6.md", "9f52377504f5a1beaa0668ddea62bdad532f3da3e506b8b41f402235591ccadd"),
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-580-TOOLS-DELIVERY--encode-the-private-release-suite-reference-context.md": ("ca_d_580_v4.md", "30221b0d820e1f06022ee74ef2dda270bc4813da847c122f8d4dd64546973e95"),
+}
 
 
 class RegisteredSelectedSourceRefreshTest(unittest.TestCase):
@@ -143,7 +167,7 @@ class RegisteredSourceRefreshE2ETest(unittest.TestCase):
         return found
 
     def setUp(self) -> None:
-        self.temporary = tempfile.TemporaryDirectory()
+        self.temporary = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         (self.root / ".git").mkdir()
@@ -195,8 +219,22 @@ class RegisteredSourceRefreshE2ETest(unittest.TestCase):
         private_block = re.search(r"(?ms)^## Private implementation carriers\n+```json\n(.*?)\n```$", authority_text)
         self.assertIsNotNone(private_block)
         paths.update(row["source_path"] for row in json.loads(private_block.group(1)))
+        paths.difference_update(_FROZEN_CARRIERS | _FROZEN_D572_CARRIERS)
         for relative in paths:
             self._copy(relative)
+        for relative, (fixture_name, digest) in _FROZEN_CARRIERS.items():
+            source = GOLDEN_INPUT.parent / fixture_name
+            raw = source.read_bytes()
+            self.assertEqual(digest, hashlib.sha256(raw).hexdigest(), source)
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
+        for relative, (fixture_name, digest) in _FROZEN_D572_CARRIERS.items():
+            raw = (GOLDEN_INPUT.parent / fixture_name).read_bytes()
+            self.assertEqual(digest, hashlib.sha256(raw).hexdigest())
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(raw)
 
     def _copy(self, relative: str) -> None:
         source = REPOSITORY / relative
