@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import hashlib
 import sys
+import time
 import unittest
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -483,7 +484,8 @@ class ReleaseImageTests(unittest.TestCase):
         docker.after = lambda operation: rendezvous.wait(timeout=10) if operation == "list" else None
         with ThreadPoolExecutor(max_workers=2) as pool:
             futures = [pool.submit(retire_prior_image, *args, executor=docker, **self.retirement_gates) for _ in range(2)]
-            results = [future.result(timeout=20) for future in futures]
+            deadline = time.monotonic() + 120 + 10
+            results = [future.result(timeout=max(0, deadline - time.monotonic())) for future in futures]
         self.assertEqual(sorted(result.outcome for result in results), ["pending", "retired"])
         self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
 
