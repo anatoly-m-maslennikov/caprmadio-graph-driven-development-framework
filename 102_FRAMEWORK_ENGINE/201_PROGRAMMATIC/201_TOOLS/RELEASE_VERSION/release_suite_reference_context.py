@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import shutil
 import stat
 import sys
 import tempfile
@@ -510,10 +511,8 @@ def _write_snapshot_file(root: Path, relative: str, payload: bytes, mode: int) -
 def _reader_snapshot(root: Path):
     """Stage one immutable descriptor-captured reader root for existing parsers."""
     captured, paths = _preflight_reader_paths(root)
-    # Retain this private 0700 disposable snapshot.  Suite evidence must not
-    # become a false failure merely because a copied read-only fixture cannot
-    # be removed on the host; callers receive no cleanup or retention control.
     snapshot = Path(tempfile.mkdtemp(prefix="caprmedio-release-suite-context-")).resolve(strict=True)
+    identity = snapshot.stat()
     try:
         snapshot.chmod(0o700)
         for relative in paths:
@@ -521,8 +520,18 @@ def _reader_snapshot(root: Path):
             _write_snapshot_file(snapshot, relative, payload, mode)
         yield snapshot, captured
     finally:
-        # Deliberately retained for truthful diagnosis; never retry deletion.
-        pass
+        # Delete only this invocation's private snapshot through the
+        # descriptor-based, symlink-resistant remover.  A denied cleanup
+        # retains the fixture without changing valid captured evidence.
+        try:
+            current = snapshot.lstat()
+            if (shutil.rmtree.avoids_symlink_attacks
+                    and stat.S_ISDIR(current.st_mode)
+                    and stat.S_IMODE(current.st_mode) == 0o700
+                    and (current.st_dev, current.st_ino) == (identity.st_dev, identity.st_ino)):
+                shutil.rmtree(snapshot)
+        except (PermissionError, FileNotFoundError):
+            pass
 
 
 def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:

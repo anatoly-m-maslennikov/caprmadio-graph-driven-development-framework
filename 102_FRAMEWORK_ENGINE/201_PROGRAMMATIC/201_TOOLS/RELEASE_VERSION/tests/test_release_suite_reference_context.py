@@ -568,5 +568,61 @@ class ReleaseSuiteReferenceContextTests(unittest.TestCase):
         self.assertIs(release_source_admission.Path, admission_path_type)
 
 
+class ReaderSnapshotCleanupTests(unittest.TestCase):
+    def test_disposable_snapshot_cleanup_targets_only_exact_reader_snapshot(self) -> None:
+        captured = {'.caprmedio_caprmedio/control.json': (b'captured evidence', 0o600)}
+        removed = []
+        def successful_cleanup(path):
+            removed.append(path)
+        successful_cleanup.avoids_symlink_attacks = True
+        with patch.object(reference_context, '_preflight_reader_paths',
+                          return_value=(captured, tuple(captured))), \
+                patch.object(reference_context.shutil, 'rmtree', successful_cleanup):
+            with reference_context._reader_snapshot(REPOSITORY) as (snapshot, verified):
+                self.assertEqual(verified, captured)
+                self.assertEqual(removed, [])
+        self.assertEqual(removed, [snapshot])
+        self.assertEqual(verified, captured)
+
+    def test_disposable_snapshot_removed_after_reader_with_readonly_file(self) -> None:
+        captured = {'.caprmedio_caprmedio/control.json': (b'captured evidence', 0o444)}
+        remover = shutil.rmtree
+        denied = []
+        def observe_cleanup(path):
+            try:
+                return remover(path)
+            except PermissionError as error:
+                denied.append(error)
+                raise
+        observe_cleanup.avoids_symlink_attacks = remover.avoids_symlink_attacks
+        with patch.object(reference_context, '_preflight_reader_paths',
+                          return_value=(captured, tuple(captured))), \
+                patch.object(reference_context.shutil, 'rmtree', observe_cleanup):
+            with reference_context._reader_snapshot(REPOSITORY) as (snapshot, verified):
+                self.assertEqual(snapshot.stat().st_mode & 0o777, 0o700)
+                self.assertEqual((snapshot / next(iter(captured))).stat().st_mode & 0o777, 0o444)
+                self.assertEqual(verified, captured)
+        if snapshot.exists():
+            self.assertTrue(denied, 'snapshot retained without observed permission denial')
+            self.skipTest('host profile denied deletion of the read-only snapshot; retained without retry')
+        self.assertFalse(snapshot.exists())
+        self.assertEqual(verified, captured)
+
+    def test_permission_denied_cleanup_retains_exact_snapshot_and_captured_evidence(self) -> None:
+        captured = {'.caprmedio_caprmedio/control.json': (b'captured evidence', 0o444)}
+        def denied(path):
+            raise PermissionError('profile denied fixture cleanup')
+        denied.avoids_symlink_attacks = True
+        with patch.object(reference_context, '_preflight_reader_paths',
+                          return_value=(captured, tuple(captured))), \
+                patch.object(reference_context.shutil, 'rmtree', denied):
+            with reference_context._reader_snapshot(REPOSITORY) as (snapshot, verified):
+                pass
+        self.assertTrue(snapshot.is_dir())
+        self.assertEqual((snapshot / next(iter(captured))).read_bytes(), b'captured evidence')
+        self.assertEqual(verified, captured)
+        # Leave the denied snapshot as requested; no cleanup retry.
+
+
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
