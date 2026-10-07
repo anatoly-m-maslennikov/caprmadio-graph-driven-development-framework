@@ -634,7 +634,7 @@ class ReleaseImageTests(unittest.TestCase):
     def test_retirement_missing_approved_retention_condition_never_becomes_removal(self):
         # Seal an absent policy into the fixture itself.  Observed historical
         # selectors are not policy authority and must not be used as a proxy.
-        args = self.retirement_inputs(settings=b"")
+        args = self.retirement_inputs(settings=b"# retention policy intentionally absent\n")
         docker = FakeRetirementDocker()
         result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
         self.assertEqual(result.outcome, "pending")
