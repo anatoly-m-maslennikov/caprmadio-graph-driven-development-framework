@@ -159,6 +159,25 @@ def client(root):
                       retry_connection_errors=False)
 
 
+def _release_host_has_pending_work(root):
+    """Observe every nonterminal host-queue workflow through DBOSClient only."""
+    transport = client(root)
+    try:
+        rows = transport.list_workflows(
+            status=['PENDING', 'ENQUEUED'], application_name=RELEASE_HOST_APPLICATION,
+            queue_name=RELEASE_HOST_QUEUE, limit=1, load_input=False, load_output=False,
+        )
+    finally:
+        transport.destroy()
+    return bool(rows)
+
+
+def _release_host_admission_fence(root):
+    """Use the shutdown-owned fence only in the isolated release-host namespace."""
+    from release_host_shutdown import admission_fence
+    return admission_fence(root)
+
+
 def enqueue(root, request):
     request = Enqueue.model_validate(request)
     if release_host_runtime():
@@ -205,12 +224,22 @@ def enqueue_selected(root, request):
     # cannot reinterpret Base Revise request.json state.
     if frozen is None:
         frozen = selected.freeze(request.model_dump())
-    transport = client(root)
-    try:
-        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
-                           'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
-    finally:
-        transport.destroy()
+    if release_host_runtime():
+        with _release_host_admission_fence(root) as require_dispatch_open:
+            require_dispatch_open()
+            transport = client(root)
+            try:
+                transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
+                                   'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
+            finally:
+                transport.destroy()
+    else:
+        transport = client(root)
+        try:
+            transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
+                               'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
+        finally:
+            transport.destroy()
     response = status(root, Status(run_id=request.run_id))
     response.update({'workflow_id': frozen['graph']['workflow']['atom_id'],
                      'selected_route': frozen['graph']['route'],
@@ -282,19 +311,26 @@ def recover_selected_release(root, request):
     # explicit new delivery attempt, so it needs a fresh scheduler handle;
     # the canonical Run and sealed frozen request identity stay unchanged.
     transport_id = uuid.uuid4().hex
-    transport = client(root)
-    try:
-        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['recovery_workflow'],
-                           'workflow_id': transport_id, 'app_version': scheduler['app_version']},
-                          request.run_id, identity)
-        # Observe the new scheduler identity, never the prior selected Run's
-        # cached DBOS workflow result.
-        recovery_transport_status = _observe_recovery_transport(
-            transport, transport_id, request.run_id, identity,
-            workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
-        )
-    finally:
-        transport.destroy()
+    def enqueue_recovery():
+        transport = client(root)
+        try:
+            transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['recovery_workflow'],
+                               'workflow_id': transport_id, 'app_version': scheduler['app_version']},
+                              request.run_id, identity)
+            # Observe the new scheduler identity, never the prior selected Run's
+            # cached DBOS workflow result.
+            return _observe_recovery_transport(
+                transport, transport_id, request.run_id, identity,
+                workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
+            )
+        finally:
+            transport.destroy()
+    if release_host_runtime():
+        with _release_host_admission_fence(root) as require_dispatch_open:
+            require_dispatch_open()
+            recovery_transport_status = enqueue_recovery()
+    else:
+        recovery_transport_status = enqueue_recovery()
     canonical_state = status(root, Status(run_id=request.run_id))
     journal_refs, pending_reason = _canonical_recovery_observation(canonical_state)
     response = {'operation': request.operation, 'workflow_run_id': request.run_id,
@@ -588,7 +624,7 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None,
     previous = {number: signal.getsignal(number) for number in (signal.SIGINT, signal.SIGTERM)}
     for number in previous:
         signal.signal(number, lambda *_: stop.set())
-    health_listener = None
+    health_listener = shutdown_listener = None
     try:
         DBOS.launch()
         DBOS.register_queue(scheduler['queue'], global_concurrency=1, worker_concurrency=1,
@@ -602,17 +638,26 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None,
                 from release_host_health import start_listener
                 identity['start_token'] = release_start_token
                 health_listener = start_listener(root, identity)
+                from release_host_shutdown import start_listener as start_shutdown_listener
+                shutdown_listener = start_shutdown_listener(
+                    root, identity, has_work=lambda: _release_host_has_pending_work(root),
+                    request_stop=stop.set,
+                )
                 engine.save(Path(ready_file).with_name('worker.json'), identity)
             engine.save(Path(ready_file), identity)
         stop.wait()
     finally:
         shutdown_incomplete = None
         try:
-            if health_listener is not None:
-                from release_host_health import HealthShutdownIncomplete
+            for listener in (shutdown_listener, health_listener):
+                if listener is None:
+                    continue
                 try:
-                    health_listener.close()
-                except HealthShutdownIncomplete as error:
+                    listener.close()
+                # A listener that cannot prove its join leaves shutdown
+                # incomplete; DBOS must remain intact and the foreground
+                # wrapper must retain stopping/unknown rather than stopped.
+                except Exception as error:
                     shutdown_incomplete = error
         finally:
             try:

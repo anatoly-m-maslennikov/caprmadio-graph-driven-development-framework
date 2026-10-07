@@ -106,7 +106,7 @@ def _foreground_worker(root, *, release_host):
                             application_version=RELEASE_HOST_APP_VERSION,
                             runtime_fingerprint=runtime_fingerprint(engine.root))
         engine.save(directory / 'worker.json', identity)
-        shutdown_incomplete = False
+        completed = shutdown_incomplete = False
         try:
             if release_host:
                 from release_host_health import HealthShutdownIncomplete
@@ -118,8 +118,12 @@ def _foreground_worker(root, *, release_host):
                     raise
             else:
                 worker(engine.root, ready_file=directory / 'worker.ready')
+            completed = True
         finally:
-            if not shutdown_incomplete:
+            # Only an orderly worker return proves that its private listeners
+            # joined and DBOS teardown completed.  A failed join retains the
+            # worker's stopping/unknown state instead of manufacturing stopped.
+            if completed and not shutdown_incomplete:
                 (directory / 'worker.ready').unlink(missing_ok=True)
                 engine.save(directory / 'worker.json', {**identity, 'state': 'stopped'})
 
@@ -131,7 +135,7 @@ def main():
     parser.add_argument('operation', choices=['worker', 'start-worker', 'release-worker',
                         'start-release-worker', 'enqueue', 'enqueue_selected',
                         'recover_selected_release', 'resolve_release_unknown_effect',
-                        'recover_selected_release_status', 'status'])
+                        'recover_selected_release_status', 'status', 'stop-release-worker'])
     args = parser.parse_args()
     if args.operation in ('worker', 'start-worker', 'release-worker', 'start-release-worker'):
         release = args.operation in ('release-worker', 'start-release-worker')
@@ -139,6 +143,22 @@ def main():
             print(json.dumps(_start_worker(args.project_root, release_host=release)))
         else:
             _foreground_worker(args.project_root, release_host=release)
+    elif args.operation == 'stop-release-worker':
+        from release_host_shutdown import ShutdownError, stop_worker
+        try:
+            response = stop_worker(args.project_root, timeout=30)
+            disposition = response['disposition']
+        except ShutdownError:
+            response = {'operation': 'stop-release-worker', 'nonce': secrets.token_hex(32),
+                        'disposition': 'pending'}
+            disposition = 'pending'
+        exit_code = {'stopped': 0, 'busy': 2, 'pending': 3, 'unsupported': 4}[disposition]
+        # A proved stop is the exact final receipt.  Refusals remain closed
+        # local CLI output and never disclose a target identity or carrier.
+        print(json.dumps(response if disposition == 'stopped' else {
+            key: response[key] for key in ('operation', 'nonce', 'disposition')
+        }, default=str))
+        sys.exit(exit_code)
     else:
         raw = sys.stdin.read() if args.input == '-' else Path(args.input).read_text()
         request = json.loads(raw)

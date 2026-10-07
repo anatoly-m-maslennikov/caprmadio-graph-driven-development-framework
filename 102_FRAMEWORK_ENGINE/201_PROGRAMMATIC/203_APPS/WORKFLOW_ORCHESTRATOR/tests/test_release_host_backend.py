@@ -1,9 +1,12 @@
 """Deterministic boundary tests for the Release-only host scheduler."""
+import contextlib
+import io
 import json
 import os
 from pathlib import Path
 import sys
 import tempfile
+import types
 import unittest
 from unittest import mock
 
@@ -12,6 +15,7 @@ APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP))
 
 import backend  # noqa: E402
+import orchestrator  # noqa: E402
 from runtime_config import control_directory, docker_runtime, release_host_runtime  # noqa: E402
 
 
@@ -67,6 +71,11 @@ class ReleaseHostBackendTests(unittest.TestCase):
     def host_environment(self):
         return mock.patch.dict(os.environ, {"CAPRMEDIO_RUNTIME_NAMESPACE": "release-host"})
 
+    @staticmethod
+    def open_shutdown_fence(_root):
+        """Existing scheduler fixtures do not model a live host control tree."""
+        return contextlib.nullcontext(lambda: None)
+
     def test_runtime_uses_the_exact_isolated_release_host_directory(self):
         with self.host_environment():
             self.assertTrue(release_host_runtime())
@@ -75,6 +84,70 @@ class ReleaseHostBackendTests(unittest.TestCase):
                 ".caprmedio_install/workflow_orchestrator/release-host",
                 control_directory(),
             )
+
+    def test_host_busy_probe_is_conservative_and_scoped_to_all_release_versions(self):
+        transport = mock.Mock()
+        transport.list_workflows.return_value = [object()]
+        with self.host_environment(), mock.patch.object(backend, "client", return_value=transport):
+            self.assertTrue(backend._release_host_has_pending_work("."))
+        transport.list_workflows.assert_called_once_with(
+            status=["PENDING", "ENQUEUED"], application_name=backend.RELEASE_HOST_APPLICATION,
+            queue_name=backend.RELEASE_HOST_QUEUE, limit=1, load_input=False, load_output=False,
+        )
+        transport.destroy.assert_called_once_with()
+
+    def test_real_shutdown_fence_allows_open_dispatch_and_refuses_matching_stopping_worker(self):
+        identity = {
+            "pid": 12345, "start_token": "a" * 64,
+            "application_version": backend.RELEASE_HOST_APP_VERSION,
+            "runtime_fingerprint": "b" * 64, "state": "ready",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            host = root / ".caprmedio_install/workflow_orchestrator/release-host"
+            host.mkdir(parents=True)
+            for name in ("worker.ready", "worker.json"):
+                (host / name).write_text(json.dumps(identity), encoding="utf-8")
+            with backend._release_host_admission_fence(root) as require_dispatch_open:
+                require_dispatch_open()
+            stopping = host / "shutdown/stopping.json"
+            stopping.write_text(json.dumps({"nonce": "c" * 64, **identity, "state": "stopping"}), encoding="utf-8")
+            with backend._release_host_admission_fence(root) as require_dispatch_open:
+                with self.assertRaisesRegex(RuntimeError, "dispatch closed"):
+                    require_dispatch_open()
+
+    def test_stop_cli_preserves_proved_final_receipt_and_exit_zero(self):
+        receipt = {
+            "operation": "stop-release-worker", "nonce": "a" * 64, "pid": 12345,
+            "start_token": "b" * 64, "application_version": backend.RELEASE_HOST_APP_VERSION,
+            "runtime_fingerprint": "c" * 64, "state": "stopped", "disposition": "stopped",
+            "lock_released": True,
+        }
+        shutdown = types.SimpleNamespace(ShutdownError=RuntimeError, stop_worker=lambda *_args, **_kwargs: receipt)
+        output = io.StringIO()
+        with mock.patch.dict(sys.modules, {"release_host_shutdown": shutdown}), \
+                mock.patch.object(sys, "argv", ["orchestrator.py", "--project-root", ".", "stop-release-worker"]), \
+                contextlib.redirect_stdout(output), self.assertRaises(SystemExit) as exited:
+            orchestrator.main()
+        self.assertEqual(0, exited.exception.code)
+        self.assertEqual(receipt, json.loads(output.getvalue()))
+
+    def test_stop_cli_shutdown_error_returns_only_closed_pending_carrier(self):
+        class ShutdownError(RuntimeError):
+            pass
+        shutdown = types.SimpleNamespace(
+            ShutdownError=ShutdownError,
+            stop_worker=mock.Mock(side_effect=ShutdownError("unavailable")),
+        )
+        output = io.StringIO()
+        with mock.patch.dict(sys.modules, {"release_host_shutdown": shutdown}), \
+                mock.patch.object(orchestrator.secrets, "token_hex", return_value="d" * 64), \
+                mock.patch.object(sys, "argv", ["orchestrator.py", "--project-root", ".", "stop-release-worker"]), \
+                contextlib.redirect_stdout(output), self.assertRaises(SystemExit) as exited:
+            orchestrator.main()
+        self.assertEqual(3, exited.exception.code)
+        self.assertEqual({"operation": "stop-release-worker", "nonce": "d" * 64, "disposition": "pending"},
+                         json.loads(output.getvalue()))
 
     def test_host_rejects_base_revise_before_a_coordinator_or_scheduler_write(self):
         request = {
@@ -178,6 +251,7 @@ class ReleaseHostBackendTests(unittest.TestCase):
                     mock.patch.object(backend, "SelectedExecution", return_value=selected), \
                     mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
                     mock.patch.object(backend, "client", return_value=transport), \
+                    mock.patch.object(backend, "_release_host_admission_fence", side_effect=self.open_shutdown_fence), \
                     mock.patch.object(backend, "status", return_value={"outcome": "queued"}):
                 result = backend.enqueue_selected(root, request)
         self.assertEqual("queued", result["disposition"])
@@ -233,6 +307,7 @@ class ReleaseHostBackendTests(unittest.TestCase):
                     mock.patch.object(backend, "_release_host_bridge", return_value=bridge), \
                     mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
                     mock.patch.object(backend, "client", return_value=transport), \
+                    mock.patch.object(backend, "_release_host_admission_fence", side_effect=self.open_shutdown_fence), \
                     mock.patch.object(backend, "status", return_value={"outcome": "queued"}):
                 result = backend.enqueue_selected(".", request)
         bridge.availability.assert_called_once_with(".")

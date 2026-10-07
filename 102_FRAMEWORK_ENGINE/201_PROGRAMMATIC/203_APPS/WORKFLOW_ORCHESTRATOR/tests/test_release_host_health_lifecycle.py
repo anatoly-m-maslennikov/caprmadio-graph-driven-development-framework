@@ -81,7 +81,14 @@ class ReleaseHostHealthLifecycleTests(unittest.TestCase):
                 health_module.start_listener = lambda root, identity: listener(
                     root, identity, events, health_module,
                 )
-                with patch.dict(sys.modules, {"release_host_health": health_module}):
+                shutdown_module = types.ModuleType("release_host_shutdown")
+                shutdown_handle = MagicMock()
+                shutdown_handle.close.side_effect = lambda: events.append(("shutdown-listener", "close"))
+                shutdown_module.start_listener = lambda _root, _identity, **_kwargs: (
+                    events.append(("shutdown-listener", "start")) or shutdown_handle
+                )
+                with patch.dict(sys.modules, {"release_host_health": health_module,
+                                              "release_host_shutdown": shutdown_module}):
                     backend.worker(self.root, ready_file=self.ready,
                                    release_start_token="a" * 64 if release_host else None)
         return events, saved, dbos
@@ -97,11 +104,17 @@ class ReleaseHostHealthLifecycleTests(unittest.TestCase):
 
         worker_events, saved, dbos = self._run_worker(release_host=True, listener=listener)
         self.assertLess(worker_events.index(("dbos", "queue")), worker_events.index(("listener", "start")))
+        self.assertLess(worker_events.index(("listener", "start")),
+                        worker_events.index(("shutdown-listener", "start")))
+        self.assertLess(worker_events.index(("shutdown-listener", "start")),
+                        worker_events.index(("save", "worker.json")))
         self.assertEqual(["worker.json", "worker.ready"], [path.name for path, _ in saved])
         self.assertEqual(saved[0][1], saved[1][1])
         self.assertEqual({"pid", "start_token", "application_version", "runtime_fingerprint", "state"},
                          set(saved[0][1]))
         self.assertEqual("ready", saved[0][1]["state"])
+        self.assertLess(worker_events.index(("shutdown-listener", "close")),
+                        worker_events.index(("listener", "close")))
         self.assertLess(worker_events.index(("listener", "close")), worker_events.index(("dbos", "destroy")))
         dbos.destroy.assert_called_once_with()
 
