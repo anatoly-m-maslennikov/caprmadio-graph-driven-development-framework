@@ -22,7 +22,7 @@ from query_filter import QueryFilterError, parse_filter_with_stats  # noqa: E402
 
 class JournalQueryGoldenTest(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory()
+        self.temp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.root = Path(self.temp.name)
         self.control = self.root / ".caprmedio_fixture"
         journal = self.control / "_journal"
@@ -57,7 +57,7 @@ class JournalQueryGoldenTest(unittest.TestCase):
         path = self.write_events(
             "events.ndjson",
             {"event_id": "E-2", "optional": None, "nested": {"a/b": [False, {"~key": 2}]}, "flag": True},
-            {"event_id": "E-1", "nested": {"a/b": [True, {"~key": 1}]}, "flag": 1},
+            {"event_id": "E-1", "nested": {"a/b": [True, {"~key": 1}]}, "a.b": "literal", "flag": 1},
             {"event_id": "E-3", "phase": None, "flag": False},
         )
         snapshot = capture_snapshot(self.root)
@@ -76,6 +76,9 @@ class JournalQueryGoldenTest(unittest.TestCase):
             ["E-2"],
         )
         self.assertEqual(query(snapshot, {"filter": '"event:/flag" = true'})["results"], ["E-2"])
+        self.assertEqual(query(snapshot, {"filter": '"event:/a.b" = "literal"'})["results"], ["E-1"])
+        literal = query(snapshot, {"mode": "fields", "select": ["event:/a.b"]})
+        self.assertEqual(literal["results"][0]["event:/a.b"], "literal")
         self.assertEqual(query(snapshot, {"filter": '"event:/flag" != true'})["results"], ["E-1", "E-3"])
         self.assertEqual(query(snapshot, {"filter": '"event:/flag" IN (true, 1)'})["results"], ["E-1", "E-2"])
         self.assertEqual(
@@ -87,7 +90,7 @@ class JournalQueryGoldenTest(unittest.TestCase):
             ["E-2", "E-3"],
         )
         self.assertEqual(query(snapshot, {"filter": 'NOT ("event:/flag" = true)'})["results"], ["E-1", "E-3"])
-        for expression in ('"event:flag" = 1', '"event:/bad~2key" = 1', '"event:/flag.value" = 1', '"event:/flag" = __import__("os")'):
+        for expression in ('"event:flag" = 1', '"event:a.b" = "literal"', '"event:/bad~2key" = 1', '"event:/flag" = __import__("os")'):
             outcome = query(snapshot, {"filter": expression})
             self.assertEqual(outcome["status"], "invalid")
             self.assertEqual(outcome["results"], [])
@@ -296,11 +299,12 @@ class JournalQueryGoldenTest(unittest.TestCase):
         )
 
     def test_rejected_selector_admission_retains_successful_parser_consumption(self):
-        self.write_events("events.ndjson", {"event_id": "E-1", "details": {"api_key": "do-not-leak"}})
+        self.write_events("events.ndjson", {"event_id": "E-1", "details": {"api_key": "do-not-leak"}, "api.key": "do-not-leak"})
         snapshot = capture_snapshot(self.root)
         cases = (
             ('"event:bad" = 1', "invalid-event-selector"),
             ('"event:/details" = {}', "protected-selector"),
+            ('"event:/api.key" = "do-not-leak"', "protected-selector"),
         )
         for expression, code in cases:
             with self.subTest(code=code):
@@ -315,6 +319,8 @@ class JournalQueryGoldenTest(unittest.TestCase):
                 self.assertEqual(outcome["limits"]["max_filter_tokens"]["consumed"], statistics["tokens"])
                 self.assertEqual(outcome["limits"]["max_grammar_depth"]["consumed"], statistics["grammar_depth"])
                 self.assertEqual(outcome["limits"]["max_in_members"]["consumed"], statistics["in_members"])
+        fetched = query(snapshot, {"mode": "fields", "select": ["event:/api.key"]})
+        self.assertEqual(fetched["findings"][0]["code"], "protected-selector")
 
     def test_limit_provenance_survives_snapshot_and_request_override(self):
         self.write_events("events.ndjson", {"event_id": "E-1"})
