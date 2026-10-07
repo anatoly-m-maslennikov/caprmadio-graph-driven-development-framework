@@ -45,9 +45,9 @@ ACTION_ATOM_RELATIVE = Path(
 # claims to implement.
 ACTION_ATOM_SHA256 = "327f9e9722ed4346251172e36b42e0ad5a322de62ec13ecce21c52f89790a073"
 RESTORATION_ATOM_ID = "CA-O-187"
-RESTORATION_ATOM_VERSION = 1
+RESTORATION_ATOM_VERSION = 2
 RESTORATION_ATOM_RELATIVE = ACTION_ATOM_RELATIVE.parent / "CA-O-187-PROJECT_CONFIGURATION-ACTION--restore-the-selected-missing-bootstrap-image.md"
-RESTORATION_ATOM_SHA256 = "6003dbfc90d138597cf73033a330cbfea828c2cfa93a4ef2e929452a1caaf017"
+RESTORATION_ATOM_SHA256 = "6e0320a7026f37c6e0e4199051d47a4c597cdbe22bb5fb1bfb7b0626258852c1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$")
 _OUTCOMES = frozenset({"completed", "no_op", "failed", "cancelled", "partial"})

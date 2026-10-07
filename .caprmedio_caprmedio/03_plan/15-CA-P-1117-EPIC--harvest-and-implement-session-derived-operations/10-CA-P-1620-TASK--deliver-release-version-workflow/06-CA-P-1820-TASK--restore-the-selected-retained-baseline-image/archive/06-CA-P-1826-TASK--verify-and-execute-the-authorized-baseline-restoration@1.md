@@ -10,8 +10,8 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 2
+status: Archived
+version: 1
 updated_at: "2026-10-07 22:34:53 +0000"
 subjects:
   governs: "Verify and execute the authorized baseline restoration"
@@ -28,8 +28,6 @@ Verify and execute the authorized baseline restoration
 Independently review the assembled code against the accepted RMED/O, refresh necessary source admission, then execute the single Operator-authorized native restoration and verify its actual image/proof/selector/Journal result.
 
 ## Details
-
-The original actual restoration ended partial because its package canary counted Finder metadata. Its exact Run, result, build/inspect observations and failed terminal remain unchanged. C518 records the Operator's explicit instruction that `.DS_Store` fail nothing, then continue. Apply CA-R-1898, review and test the metadata fix, then execute a separately authorized fresh Run referencing that known partial terminal through CA-D-591; do not replay the original Run.
 
 The Operator explicitly approved rebuilding the missing selected image from verified retained N and registering its verified image digest. Preserve N's package, Version, public ca Skill, original proof and historical Journal. N21 remains unknown and is not replayed. No release gate is waived. Root owns Git, source admission and serialized runtime effects; independent workers own their assigned source scopes.
 

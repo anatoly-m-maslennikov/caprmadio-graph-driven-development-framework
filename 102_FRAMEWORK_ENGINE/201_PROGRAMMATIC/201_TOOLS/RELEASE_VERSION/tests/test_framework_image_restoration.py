@@ -60,6 +60,7 @@ O187 = (
     "003_PROJECT_CONFIGURATION/09_operations/"
     "CA-O-187-PROJECT_CONFIGURATION-ACTION--restore-the-selected-missing-bootstrap-image.md"
 )
+O187_SHA256 = "6e0320a7026f37c6e0e4199051d47a4c597cdbe22bb5fb1bfb7b0626258852c1"
 
 
 class RecordingJournal:
@@ -157,6 +158,7 @@ class FrameworkImageRestorationTests(unittest.TestCase):
             self.root / ".caprmedio_caprmedio/operators_registry.toml",
         )
         source = PROJECT_ROOT / ".caprmedio_caprmedio" / O187
+        self.assertEqual(O187_SHA256, hashlib.sha256(source.read_bytes()).hexdigest())
         target = self.root / ".caprmedio_caprmedio" / O187
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
@@ -220,15 +222,27 @@ class FrameworkImageRestorationTests(unittest.TestCase):
     def restore(self):
         return self.restore_with(self.journal)
 
-    def restore_with(self, journal):
+    def restore_with(self, journal, *, requested_run_id="restore-fixture", retry_of_terminal_event_id=None):
         # Preserve the real executor type gate.  Only its process boundary is
         # patched, so this remains fixture evidence rather than live proof.
         with patch.object(DockerSubprocessExecutor, "run", side_effect=self.docker.run):
             return restore_framework_image(
-                self.root, journal=journal, requested_run_id="restore-fixture",
+                self.root, journal=journal, requested_run_id=requested_run_id,
                 expected_selector_sha256=hashlib.sha256(self.selector_before).hexdigest(),
                 image_executor=DockerSubprocessExecutor(),
+                retry_of_terminal_event_id=retry_of_terminal_event_id,
             )
+
+    def restoration_session(self):
+        return DirectActionSession(
+            self.root,
+            author="anatoly-m",
+            operator_authorization={
+                "operator": "Anatoly Maslennikov",
+                "authorization_ref": "tmp/operator-authorizations/restoration.md",
+            },
+            action_id="FRAMEWORK_IMAGE_RESTORATION",
+        )
 
     def test_same_image_id_restores_without_rewriting_selector_package_skill_or_original_proof(self):
         self.docker.replacement = OLD_IMAGE
@@ -276,6 +290,80 @@ class FrameworkImageRestorationTests(unittest.TestCase):
         self.assertEqual(b"fixture finder metadata\n", metadata.read_bytes())
         self.assertEqual(0o600, metadata.stat().st_mode & 0o777)
         self.assertEqual(self.package_before, self._inventory(self.root / ".caprmedio_runtime/framework/releases" / self.plan.release))
+
+    def test_ds_store_in_retained_package_and_public_skill_is_ignored_and_preserved(self):
+        package_metadata = self.root / ".caprmedio_runtime/framework/releases" / self.plan.release / ".DS_Store"
+        skill_metadata = self.root / ".agents/skills/ca/.DS_Store"
+        for path in (package_metadata, skill_metadata):
+            path.write_bytes(b"fixture finder metadata\n")
+            path.chmod(0o600)
+        self.docker.replacement = OLD_IMAGE
+        result = self.restore()
+        self.assertEqual("restored", result["state"], result)
+        for path in (package_metadata, skill_metadata):
+            self.assertEqual(b"fixture finder metadata\n", path.read_bytes())
+            self.assertEqual(0o600, path.stat().st_mode & 0o777)
+
+    def test_retained_real_file_change_refuses_before_build(self):
+        package = self.root / ".caprmedio_runtime/framework/releases" / self.plan.release
+        changed = package / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tool.py"
+        changed.write_bytes(b"retained package mutation\n")
+        before = list(self.docker.calls)
+        result = self.restore()
+        self.assertEqual("blocked", result["state"])
+        self.assertEqual(before, self.docker.calls)
+
+    def test_explicit_fresh_run_retries_one_canonical_unpublished_partial_without_rewriting_original_result(self):
+        self.docker.replacement = OLD_IMAGE
+        self.docker.fail = "canary"
+        with self.restoration_session() as first:
+            partial = self.restore_with(first, requested_run_id="restore-partial-fixture")
+        self.assertEqual("partial", partial["state"], partial)
+        terminal_event_id = partial["terminal"]["event_id"]
+        original_result = self.root / partial["result_ref"]
+        original_bytes = original_result.read_bytes()
+
+        before = list(self.docker.calls)
+        with self.restoration_session() as same_original_run:
+            original_replay = self.restore_with(
+                same_original_run,
+                requested_run_id="restore-partial-fixture",
+            )
+        self.assertEqual("recovery_required", original_replay["state"])
+        self.assertEqual(before, self.docker.calls)
+
+        self.docker.fail = None
+        self.docker.old_inspections = 0
+        with self.restoration_session() as retried:
+            restored = self.restore_with(
+                retried,
+                requested_run_id="restore-retry-fixture",
+                retry_of_terminal_event_id=terminal_event_id,
+            )
+        self.assertEqual("restored", restored["state"], restored)
+        self.assertEqual(original_bytes, original_result.read_bytes())
+        intent_root = original_result.parent
+        retry_root = intent_root / "attempts" / hashlib.sha256(b"restore-retry-fixture").hexdigest()
+        self.assertTrue((retry_root / "retry.json").is_file())
+        self.assertTrue((retry_root / "result.json").is_file())
+
+        before = list(self.docker.calls)
+        with self.restoration_session() as same_run:
+            denied = self.restore_with(
+                same_run,
+                requested_run_id="restore-partial-fixture",
+                retry_of_terminal_event_id=terminal_event_id,
+            )
+        self.assertEqual("blocked", denied["state"])
+        self.assertEqual(before, self.docker.calls)
+        with self.restoration_session() as after_success:
+            success_replay = self.restore_with(
+                after_success,
+                requested_run_id="restore-after-success-fixture",
+                retry_of_terminal_event_id=restored["terminal"]["event_id"],
+            )
+        self.assertEqual("blocked", success_replay["state"])
+        self.assertEqual(before, self.docker.calls)
 
     def test_proof_tamper_refuses_before_build(self):
         evidence = read_retained_initial_framework_image(self.root, self.plan.release, OLD_IMAGE)
@@ -384,6 +472,14 @@ class FrameworkImageRestorationTests(unittest.TestCase):
         self.assertEqual("recording_pending", pending["state"])
         event_id = pending["pending_event_id"]
         before = list(self.docker.calls)
+        with self.restoration_session() as retry_pending:
+            denied = self.restore_with(
+                retry_pending,
+                requested_run_id="restore-pending-retry-fixture",
+                retry_of_terminal_event_id=event_id,
+            )
+        self.assertEqual("blocked", denied["state"])
+        self.assertEqual(before, self.docker.calls)
         recovered = recover_framework_image_journal(self.root, journal=session, pending_event_id=event_id)
         self.assertEqual("recovered", recovered["state"])
         self.assertEqual(event_id, recovered["pending_event_id"])

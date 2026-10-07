@@ -5,10 +5,10 @@ type: Question
 current_scope_unit: caprmedio
 local_tier: Standard
 global_tier: 2
-status: Active
+status: resolved
 author: Anatoly Maslennikov
-version: 1
-updated_at: "2026-10-07 22:02:41 +0000"
+version: 2
+updated_at: "2026-10-07 22:25:26 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Retained-package Image Restoration"
   depends_on: [Operator, Framework Package, Docker Image, Carrier, Journal, Action]
@@ -34,4 +34,10 @@ May the approved restoration use a sealed, metadata-filtered Docker context tran
 
 ## Blast radius
 
-The missing selected image still prevents the fresh Release Unit gate and later release gates. A bounded retry requires reviewed transport/attempt authority and tests first. No change to N's package, original proof, public ca Skill, exact canary meaning, release gate coverage or historical Journal is proposed.
+The missing selected image still prevents the fresh Release Unit gate and later release gates. No change to N's persistent package, original proof, public ca Skill, real-file canary checks, release gate coverage or historical Journal is authorized.
+
+## Decision
+
+The Operator answered: `.DS_Store files should not fail anything. fix it, then continue`.
+
+Use metadata-independent validation under CA-R-1898, including the fixed complete-package canary. The earlier sealed-transport proposal is not selected: metadata may exist without failing checks. Preserve the original partial attempt and its exact terminal event, then admit one explicitly authorized fresh Run referencing that known partial terminal; do not replay the original Run or any uncertain effect.
