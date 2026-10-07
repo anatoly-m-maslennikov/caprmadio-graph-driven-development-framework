@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import errno
 import json
 import os
 import signal
@@ -901,6 +902,24 @@ class ReleaseSuiteTests(unittest.TestCase):
         self.assertEqual(result.outcome, "recording_uncertain")
         self.assertFalse(result.passed)
         self.assertIsNone(result.receipt_sha256)
+
+    def test_recording_enospc_retains_only_errno_and_never_passes(self) -> None:
+        candidate, compilation = self.bound()
+        from release_suite import _durable_bytes
+
+        def fail_receipt_only(path, payload):
+            if Path(path).name == "receipt.json":
+                raise OSError(errno.ENOSPC, "sensitive host path must not be retained", "/private/host/path")
+            return _durable_bytes(path, payload)
+
+        with patch("release_suite._durable_bytes", side_effect=fail_receipt_only):
+            result = self.execute_suite(candidate, compilation)
+
+        self.assertEqual(result.outcome, "recording_uncertain")
+        self.assertFalse(result.passed)
+        self.assertIn("OSError[errno=28]", result.reason)
+        self.assertNotIn("sensitive host path", result.reason)
+        self.assertNotIn("/private/host/path", result.reason)
 
 
 if __name__ == "__main__":

@@ -960,7 +960,10 @@ def execute_bound_release_suite(
             os.close(directory_descriptor)
         receipt_sha = _digest(receipt)
     except (OSError, ValueError, KeyError) as error:
-        outcome, reason = "recording_uncertain", f"suite evidence could not be durably recorded: {type(error).__name__}"
+        detail = type(error).__name__
+        if isinstance(error, OSError) and type(error.errno) is int:
+            detail += f"[errno={error.errno}]"
+        outcome, reason = "recording_uncertain", f"suite evidence could not be durably recorded: {detail}"
     if evidence is not None:
         return replace(evidence, outcome=outcome, reason=reason, receipt_sha256=receipt_sha)
     return SuiteGateEvidence(candidate.manifest.sha256, outcome, reason, environment.runner,
