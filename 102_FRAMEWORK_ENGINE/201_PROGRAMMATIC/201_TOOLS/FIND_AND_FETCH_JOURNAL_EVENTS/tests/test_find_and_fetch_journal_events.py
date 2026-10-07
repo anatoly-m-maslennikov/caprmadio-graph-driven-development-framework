@@ -158,6 +158,43 @@ class JournalQueryGoldenTest(unittest.TestCase):
             self.assertNotIn("never-return", json.dumps(outcome))
         self.assertEqual(path.read_bytes(), before)
 
+    def test_e579_additional_normalized_sensitive_names_are_redacted_with_parser_accounting(self):
+        for name in (
+            "access_token",
+            "refresh_token",
+            "session_cookie",
+            "signing_key",
+            "connection_string",
+        ):
+            with self.subTest(name=name):
+                sentinel = f"never-return-{name}"
+                self.write_events("events.ndjson", {"event_id": "E-1", "details": {name: sentinel}})
+                snapshot = capture_snapshot(self.root)
+                expression = f'"event:/details/{name}" = "{sentinel}"'
+                _, statistics = parse_filter_with_stats(
+                    expression,
+                    max_depth=16,
+                    max_tokens=128,
+                    max_in_members=16,
+                )
+                filtered = None
+                for request, code in (
+                    ({"mode": "fields", "select": [f"event:/details/{name}"]}, "protected-selector"),
+                    ({"mode": "full_events"}, "protected-full-event"),
+                    ({"filter": expression}, "protected-selector"),
+                ):
+                    outcome = query(snapshot, request)
+                    self.assertEqual(outcome["status"], "invalid")
+                    self.assertEqual(outcome["findings"][0]["code"], code)
+                    self.assertNotIn(sentinel, json.dumps(outcome))
+                    if "filter" in request:
+                        filtered = outcome
+                self.assertIsNotNone(filtered)
+                assert filtered is not None
+                self.assertEqual(filtered["limits"]["max_filter_tokens"]["consumed"], statistics["tokens"])
+                self.assertEqual(filtered["limits"]["max_grammar_depth"]["consumed"], statistics["grammar_depth"])
+                self.assertEqual(filtered["limits"]["max_in_members"]["consumed"], statistics["in_members"])
+
     def test_e580_query_does_not_create_a_run_or_its_own_event(self):
         path = self.write_events("events.ndjson", {"event_id": "E-before"})
         snapshot = capture_snapshot(self.root)

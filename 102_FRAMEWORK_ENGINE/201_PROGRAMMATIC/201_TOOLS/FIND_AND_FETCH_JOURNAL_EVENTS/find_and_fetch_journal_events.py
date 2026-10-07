@@ -79,13 +79,18 @@ _SENSITIVE_NAMES = frozenset(
     {
         "api_key",
         "apikey",
+        "access_token",
         "authorization",
+        "connection_string",
         "credential",
         "credentials",
         "password",
         "private_key",
+        "refresh_token",
         "secret",
         "secrets",
+        "session_cookie",
+        "signing_key",
         "token",
     }
 )
