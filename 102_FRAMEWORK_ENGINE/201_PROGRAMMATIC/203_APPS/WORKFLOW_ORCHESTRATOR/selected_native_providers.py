@@ -710,3 +710,8 @@ class SelectedNativeProviders:
                 or _canonical_digest(execution) != request_identity):
             raise SelectedExecutionError("Release recovery request does not match the frozen Release request")
         return self.execution(frozen).recover_release(frozen)
+
+    def resolve_release_unknown_effect(self, request: Mapping[str, Any]) -> dict[str, Any]:
+        """Enter only the dedicated N15 native resolver; never dispatch Release."""
+        from release_unknown_effect_resolution import resolve_release_unknown_effect
+        return resolve_release_unknown_effect(self.root, request)

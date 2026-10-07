@@ -53,6 +53,16 @@ class RecoverSelectedRelease(Strict):
     request_identity: str = Field(pattern=r'^[0-9a-f]{64}$')
 
 
+class ResolveReleaseUnknownEffect(Strict):
+    """One closed, Operator-authorized resolution of the named N15 effect."""
+    operation: Literal['resolve_release_unknown_effect'] = 'resolve_release_unknown_effect'
+    run_id: Literal['release-epic-resume-20261006-N15'] = 'release-epic-resume-20261006-N15'
+    request_identity: Literal['5228bc2214ef3868794ae48f12c435c266587fd856fcefdd4598612b3ba80ec4'] = '5228bc2214ef3868794ae48f12c435c266587fd856fcefdd4598612b3ba80ec4'
+    authorization_ref: Literal['.caprmedio_caprmedio/01_concern/CA-C-517-QUESTION--resolve-the-unknown-n15-unit-outcome.md'] = '.caprmedio_caprmedio/01_concern/CA-C-517-QUESTION--resolve-the-unknown-n15-unit-outcome.md'
+    authorization_sha256: Literal['1d3d7c3c1d10827362952d684193fe844e634d18dfa5098a32f54af4863974d4'] = '1d3d7c3c1d10827362952d684193fe844e634d18dfa5098a32f54af4863974d4'
+    expected_checkpoint_sha256: Literal['71d93f97c0f07b84e94d49d5bd18a4ab83d86e3e52d00e39368ce881153a4344'] = '71d93f97c0f07b84e94d49d5bd18a4ab83d86e3e52d00e39368ce881153a4344'
+
+
 class RecoverSelectedReleaseStatus(Strict):
     operation: Literal['recover_selected_release_status'] = 'recover_selected_release_status'
     run_id: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$')

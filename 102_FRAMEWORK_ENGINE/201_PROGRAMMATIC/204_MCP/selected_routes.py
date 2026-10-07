@@ -952,12 +952,24 @@ class SelectedRouteAdapter(_SelectedRouteAdapterBase):
             return self._result(request, "blocked", "blocked", f"shared support rejected recording recovery: {error}")
 
     def recover_release(self, request: Any) -> dict[str, Any]:
-        required = {"operation", "run_id", "request_identity"}
-        if (not isinstance(request, Mapping) or set(request) != required
-                or request.get("operation") != "recover_selected_release"
-                or not isinstance(request.get("run_id"), str) or not _REQUEST_ID.fullmatch(request["run_id"])
-                or not isinstance(request.get("request_identity"), str) or not _DIGEST.fullmatch(request["request_identity"])):
-            return self._result(request, "rejected", "rejected", "Release recovery requires only operation, existing run_id, and sealed request_identity")
+        recovery_keys = {"operation", "run_id", "request_identity"}
+        resolution_keys = {
+            "operation", "run_id", "request_identity", "authorization_ref",
+            "authorization_sha256", "expected_checkpoint_sha256",
+        }
+        ordinary = (isinstance(request, Mapping) and set(request) == recovery_keys
+                    and request.get("operation") == "recover_selected_release"
+                    and isinstance(request.get("run_id"), str) and _REQUEST_ID.fullmatch(request["run_id"])
+                    and isinstance(request.get("request_identity"), str) and _DIGEST.fullmatch(request["request_identity"]))
+        resolution = (isinstance(request, Mapping) and set(request) == resolution_keys
+                      and request.get("operation") == "resolve_release_unknown_effect"
+                      and request.get("run_id") == "release-epic-resume-20261006-N15"
+                      and isinstance(request.get("request_identity"), str) and _DIGEST.fullmatch(request["request_identity"])
+                      and isinstance(request.get("authorization_ref"), str) and request["authorization_ref"]
+                      and isinstance(request.get("authorization_sha256"), str) and _DIGEST.fullmatch(request["authorization_sha256"])
+                      and isinstance(request.get("expected_checkpoint_sha256"), str) and _DIGEST.fullmatch(request["expected_checkpoint_sha256"]))
+        if not ordinary and not resolution:
+            return self._result(request, "rejected", "rejected", "Release recovery requires its exact ordinary or unknown-effect carrier")
         try:
             manifest = load_selected_manifest(self.root)
             routes = tuple(entry.get("route") for entry in manifest.get("routes", []) if isinstance(entry, Mapping))

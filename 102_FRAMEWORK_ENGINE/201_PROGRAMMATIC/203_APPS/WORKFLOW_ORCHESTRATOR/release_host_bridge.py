@@ -259,7 +259,8 @@ def invoke(root: str | Path, request: Mapping[str, object], *, timeout: int = 60
         execution = request.get("execution")
         if not isinstance(execution, Mapping) or execution.get("operation_route") != "release_version":
             raise ValueError("Release host admits only selected Release Version requests")
-    elif operation not in {"status", "recover_selected_release", "recover_selected_release_status"}:
+    elif operation not in {"status", "recover_selected_release", "resolve_release_unknown_effect",
+                           "recover_selected_release_status"}:
         raise ValueError("Release host operation is not supported")
     else:
         binding(root, run_id=run_id)

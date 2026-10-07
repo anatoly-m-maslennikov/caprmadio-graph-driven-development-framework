@@ -5,7 +5,8 @@ import signal
 import threading
 import uuid
 
-from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
+from contracts import (Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus,
+                       ResolveReleaseUnknownEffect, Status)
 from agent import CodexAgent
 from engine import Coordinator, execute_phase, runtime_fingerprint
 from runtime_config import (control_directory, docker_runtime, implementation_mock_runtime,
@@ -313,6 +314,42 @@ def recover_selected_release(root, request):
     }.get(recovery_transport_status['scheduler_status'], 'transport_terminal')
     response['blocked_or_pending_reason'] = pending_reason
     return response
+
+
+def resolve_release_unknown_effect(root, request):
+    """Close the sole admitted unknown Release effect through the native guard.
+
+    The native boundary owns all carrier/Journaling checks and its private
+    cancellation callback.  This adapter proves the guard before entering the
+    helper; the helper then repeats it under the per-Run Journal lock before
+    it calls the legitimate DBOS cancellation boundary and writes history.
+    """
+    request = ResolveReleaseUnknownEffect.model_validate(request)
+    from release_unknown_effect_resolution import resolve_release_unknown_effect as resolve
+    sealed = request.model_dump()
+    preflight = resolve.preflight(Path(root), sealed)
+    if isinstance(preflight, dict):
+        return preflight
+    return resolve(Path(root), sealed)
+
+
+def cancel_release_unknown_effect_scheduler(root, request):
+    """Cancel only the preflighted N15 DBOS workflow and confirm its status.
+
+    This function is private to the native unknown-effect resolver.  It never
+    reads or writes DBOS storage directly and is called only after that helper
+    has validated its historical carriers and current authority under lock.
+    """
+    request = ResolveReleaseUnknownEffect.model_validate(request)
+    transport = client(root)
+    try:
+        transport.cancel_workflow(request.run_id)
+        queue_status = transport.retrieve_workflow(request.run_id).get_status()
+        if getattr(queue_status, 'status', None) != 'CANCELLED':
+            raise RuntimeError('old N15 scheduler workflow did not report CANCELLED')
+        return {'workflow_run_id': request.run_id, 'scheduler_status': 'CANCELLED'}
+    finally:
+        transport.destroy()
 
 
 def _observe_recovery_transport(transport, transport_id, run_id, request_identity, *,

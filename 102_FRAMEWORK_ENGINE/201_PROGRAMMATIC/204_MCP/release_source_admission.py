@@ -19,8 +19,8 @@ AUTHORITY_REF = (
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
 AUTHORITY_PIN = {
-    "atom_id": "CA-D-572", "version": 16, "source_path": AUTHORITY_REF,
-    "digest": "d981f65be16e3595c7d3e7a969c115d2a942074aafb573659e3b84ccb58b76f3",
+    "atom_id": "CA-D-572", "version": 17, "source_path": AUTHORITY_REF,
+    "digest": "f10a92cd0b0290ad7f58b032f259d3de875360d580b4cfb1926df77318f28f6e",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",
@@ -224,6 +224,37 @@ def derive_release_private_carriers(project_root: str | Path) -> list[dict[str, 
         _read_pin(root, {**AUTHORITY_PIN, "source_path": row["source_path"], "digest": row["sha256"]},
                   atom_source=False)
     return copy.deepcopy(rows)
+
+
+def derive_unknown_effect_resolver_authority(project_root: str | Path) -> list[dict[str, Any]]:
+    """Read the separate closed recovery-control pins; never extend Release admission."""
+    root = _project_root(project_root)
+    text = _read_pin(root, AUTHORITY_PIN).decode("utf-8")
+    matches = re.findall(
+        r"^## Unknown-effect resolver authority\n+\x60\x60\x60json\n(.*?)\n\x60\x60\x60$",
+        text, re.MULTILINE | re.DOTALL,
+    )
+    if len(matches) != 1:
+        _reject("D572 must carry exactly one unknown-effect resolver authority block",
+                code="release-resolver-authority-invalid")
+    try:
+        rows = json.loads(matches[0])
+    except json.JSONDecodeError as error:
+        raise ReleaseSourceAdmissionError(
+            "release-resolver-authority-invalid", "resolver authority is not closed JSON"
+        ) from error
+    ids = ("CA-R-1895", "CA-M-351", "CA-E-594", "CA-D-589")
+    if not isinstance(rows, list) or len(rows) != len(ids):
+        _reject("resolver authority must contain exactly four ordered pins",
+                code="release-resolver-authority-invalid")
+    pins = [_pin_shape(row) for row in rows]
+    if tuple(pin["atom_id"] for pin in pins) != ids:
+        _reject("resolver authority identities or order differ",
+                code="release-resolver-authority-invalid")
+    derive_release_private_carriers(root)
+    for pin in pins:
+        _read_pin(root, pin)
+    return copy.deepcopy(pins)
 
 
 def derive_release_source_admission(project_root: str | Path) -> dict[str, Any]:

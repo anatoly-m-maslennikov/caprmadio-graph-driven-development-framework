@@ -9,15 +9,17 @@ import sys
 from typing import Annotated
 
 from pydantic import Field, TypeAdapter
-from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
-from backend import enqueue, enqueue_selected, recover_selected_release, recover_selected_release_status, status, worker
+from contracts import (Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus,
+                       ResolveReleaseUnknownEffect, Status)
+from backend import (enqueue, enqueue_selected, recover_selected_release,
+                     recover_selected_release_status, resolve_release_unknown_effect, status, worker)
 from engine import Coordinator
 from release_host_bridge import (directory as release_host_directory, fixed_interpreter,
                                  has_binding as release_host_has_binding, invoke as invoke_release_host,
                                  publish_transport, subprocess_environment)
 from runtime_config import control_directory, docker_runtime, release_host_runtime
 
-Request = Annotated[Enqueue | EnqueueSelected | RecoverSelectedRelease | RecoverSelectedReleaseStatus | Status, Field(discriminator='operation')]
+Request = Annotated[Enqueue | EnqueueSelected | RecoverSelectedRelease | ResolveReleaseUnknownEffect | RecoverSelectedReleaseStatus | Status, Field(discriminator='operation')]
 ADAPTER = TypeAdapter(Request)
 
 
@@ -30,7 +32,8 @@ def run(root, request):
         if (isinstance(request, EnqueueSelected)
                 and request.execution.get('operation_route') == 'release_version'):
             return invoke_release_host(root, request.model_dump())
-        if (isinstance(request, (RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status))
+        if (isinstance(request, (RecoverSelectedRelease, ResolveReleaseUnknownEffect,
+                                 RecoverSelectedReleaseStatus, Status))
                 and release_host_has_binding(root, request.run_id)):
             return invoke_release_host(root, request.model_dump())
     if not docker_runtime() and not release_host_runtime():
@@ -43,6 +46,8 @@ def run(root, request):
         return enqueue_selected(root, request)
     if isinstance(request, RecoverSelectedRelease):
         return recover_selected_release(root, request)
+    if isinstance(request, ResolveReleaseUnknownEffect):
+        return resolve_release_unknown_effect(root, request)
     if isinstance(request, RecoverSelectedReleaseStatus):
         return recover_selected_release_status(root, request)
     return status(root, request)
@@ -107,7 +112,8 @@ def main():
     parser.add_argument('--input', default='-')
     parser.add_argument('operation', choices=['worker', 'start-worker', 'release-worker',
                         'start-release-worker', 'enqueue', 'enqueue_selected',
-                        'recover_selected_release', 'recover_selected_release_status', 'status'])
+                        'recover_selected_release', 'resolve_release_unknown_effect',
+                        'recover_selected_release_status', 'status'])
     args = parser.parse_args()
     if args.operation in ('worker', 'start-worker', 'release-worker', 'start-release-worker'):
         release = args.operation in ('release-worker', 'start-release-worker')
