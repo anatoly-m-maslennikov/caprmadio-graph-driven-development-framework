@@ -51,7 +51,10 @@ class ReleaseUnknownEffectResolutionTests(unittest.TestCase):
     """The resolver may terminalize history once, but never perform an effect."""
 
     def _temporary_root(self) -> tempfile.TemporaryDirectory[str]:
-        return tempfile.TemporaryDirectory(prefix="n15-unknown-effect-", dir="/private/tmp", ignore_cleanup_errors=True)
+        temp_parent = Path(tempfile.gettempdir()).resolve()
+        return tempfile.TemporaryDirectory(
+            prefix="n15-unknown-effect-", dir=temp_parent, ignore_cleanup_errors=True,
+        )
 
     def test_six_key_variant_is_closed_before_any_carrier_or_effect_access(self) -> None:
         """Missing, extra, or ordinary-recovery-shaped requests are blocked."""
