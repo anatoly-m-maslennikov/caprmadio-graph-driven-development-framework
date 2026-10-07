@@ -615,9 +615,11 @@ class ReleaseImageTests(unittest.TestCase):
         extra = ".caprmedio_runtime/release_promotion/other-retained/prior-selector.toml"
         self.fixture.fixture.write(extra, f'image_digest = "{PRIOR_IMAGE_ID}"\n'.encode())
         result = retire_prior_image(*args, executor=FakeRetirementDocker(), **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(set(result.observed_rollback_refs), {extra, args[-1].retained_prior_selector_ref})
-        self.assertIsNone(result.required_rollback_refs)
+        self.assertEqual(result.required_rollback_refs, (
+            FRAMEWORK_SETTINGS_RELATIVE + "#release_version.rollback_retention.condition",
+        ))
 
     def test_retirement_unknown_rollback_scope_is_pending_before_docker(self):
         args = self.retirement_inputs()
@@ -628,11 +630,11 @@ class ReleaseImageTests(unittest.TestCase):
         self.assertEqual(docker.calls, [])
 
     def test_retirement_missing_approved_retention_condition_never_becomes_removal(self):
-        args = self.retirement_inputs()
+        # Seal an absent policy into the fixture itself.  Observed historical
+        # selectors are not policy authority and must not be used as a proxy.
+        args = self.retirement_inputs(settings=b"")
         docker = FakeRetirementDocker()
-        # Empty observed references alone cannot manufacture an approved condition.
-        with patch("release_image._observed_rollback_references", return_value=()):
-            result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
+        result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
         self.assertEqual(result.outcome, "pending")
         self.assertIn("approved rollback-retention condition", result.reason)
         self.assertNotIn("rm", [word for command in docker.calls for word in command])
