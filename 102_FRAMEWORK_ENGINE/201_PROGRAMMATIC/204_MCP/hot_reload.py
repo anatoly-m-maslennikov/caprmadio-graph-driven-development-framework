@@ -48,6 +48,24 @@ def result(value, error=False):
 
 
 GENERATION_READY_TIMEOUT_SECONDS = 20
+_STARTUP_TELEMETRY_ENV = 'CAPRMEDIO_STARTUP_TELEMETRY'
+_STARTUP_PHASES = frozenset({
+    'initial_fingerprint', 'reload_fingerprint', 'fingerprint_verify',
+    'child_handshake', 'list_tools', 'generation_ready', 'schema_validation',
+})
+
+
+def _startup_telemetry_enabled():
+    """Keep bounded startup timing diagnostics opt-in and transport-safe."""
+    return os.environ.get(_STARTUP_TELEMETRY_ENV) == '1'
+
+
+def _startup_timing(enabled, phase, started, outcome='completed'):
+    """Emit fixed phase timing only; never put diagnostic data on MCP stdout."""
+    if enabled and phase in _STARTUP_PHASES:
+        elapsed_ms = max(0, round((time.monotonic() - started) * 1000))
+        print(f'caprmedio_mcp_startup phase={phase} outcome={outcome} elapsed_ms={elapsed_ms}',
+              file=sys.stderr, flush=True)
 
 
 class Generation:
@@ -57,9 +75,12 @@ class Generation:
         self.retired_at = None
         self.stop = asyncio.Event()
         self.ready = asyncio.get_running_loop().create_future()
+        self.startup_telemetry = _startup_telemetry_enabled()
         self.task = asyncio.create_task(self.run())
 
     async def run(self):
+        phase = 'child_handshake'
+        started = time.monotonic()
         try:
             # This is a known local implementation subprocess.  Its cold
             # import can exceed the client's fixed ten-second auto-discover
@@ -67,16 +88,20 @@ class Generation:
             # deadline.  Negotiate the stable legacy handshake directly.
             async with Client(self.params, cache=None, mode='legacy',
                               read_timeout_seconds=GENERATION_READY_TIMEOUT_SECONDS) as client:
+                _startup_timing(self.startup_telemetry, phase, started)
                 self.client = client
+                phase, started = 'list_tools', time.monotonic()
                 page = await client.list_tools()
                 self.tools = list(page.tools)
                 while page.next_cursor:
                     page = await client.list_tools(cursor=page.next_cursor)
                     self.tools.extend(page.tools)
+                _startup_timing(self.startup_telemetry, phase, started)
                 self.ready.set_result(None)
                 await self.stop.wait()
         except BaseException as error:
             if not self.ready.done():
+                _startup_timing(self.startup_telemetry, phase, started, 'failed')
                 self.ready.set_exception(error)
 
     async def close(self):
@@ -98,6 +123,16 @@ class Gateway:
         self.reload_lock, self.receipts = asyncio.Lock(), {}
         self.storage = self.root / '.caprmedio_install/mcp_hot_reload'
 
+    def _fingerprint_with_timing(self, phase):
+        started = time.monotonic()
+        try:
+            value = self.fingerprint()
+        except BaseException:
+            _startup_timing(_startup_telemetry_enabled(), phase, started, 'failed')
+            raise
+        _startup_timing(_startup_telemetry_enabled(), phase, started)
+        return value
+
     def fingerprint(self):
         files = [self.implementation]
         if self.implementation.name == 'implementation_server.py':
@@ -112,9 +147,13 @@ class Gateway:
             args=['-B', '-X', f'pycache_prefix={self.storage / "bytecode" / fingerprint}',
                   str(self.implementation), '--project-root', str(self.root)],
             env=environment), fingerprint)
+        phase = 'generation_ready'
+        started = time.monotonic()
         try:
             await asyncio.wait_for(asyncio.shield(generation.ready),
                                    GENERATION_READY_TIMEOUT_SECONDS)
+            _startup_timing(_startup_telemetry_enabled(), phase, started)
+            phase, started = 'schema_validation', time.monotonic()
             names = [t.name for t in generation.tools]
             if len(set(names)) != len(names) or {CONTROL.name, STATUS.name}.intersection(names):
                 raise ValueError('Duplicate or reserved Tool name')
@@ -124,9 +163,13 @@ class Gateway:
                 Draft202012Validator.check_schema(tool.input_schema)
                 if tool.output_schema is not None:
                     Draft202012Validator.check_schema(tool.output_schema)
-            if self.fingerprint() != fingerprint:
+            _startup_timing(_startup_telemetry_enabled(), phase, started)
+            phase, started = 'fingerprint_verify', time.monotonic()
+            if self._fingerprint_with_timing('fingerprint_verify') != fingerprint:
                 raise ValueError('Implementation changed during preparation')
         except BaseException:
+            if phase != 'fingerprint_verify':
+                _startup_timing(_startup_telemetry_enabled(), phase, started, 'failed')
             await generation.close()
             raise
         generation.registry = digest([t.model_dump(mode='json', by_alias=True) for t in generation.tools])
@@ -198,7 +241,7 @@ class Gateway:
                      'notification_status': 'unsupported', 'client_refresh_status': 'unconfirmed',
                      'diagnostics': [], 'outcome': 'unchanged'}
             try:
-                fingerprint = self.fingerprint()
+                fingerprint = self._fingerprint_with_timing('reload_fingerprint')
                 if fingerprint != old.fingerprint:
                     await self.publish(old, fingerprint, context, value)
             except Exception as error:
@@ -252,7 +295,7 @@ class Gateway:
 
     async def initialize(self):
         if self.active is None:
-            self.active = await self.prepare(self.fingerprint())
+            self.active = await self.prepare(self._fingerprint_with_timing('initial_fingerprint'))
 
     async def close(self):
         closing = [asyncio.create_task(generation.close()) for generation in self.generations]

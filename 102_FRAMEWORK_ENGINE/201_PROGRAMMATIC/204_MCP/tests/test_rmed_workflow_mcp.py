@@ -1,6 +1,8 @@
 """Real stdio protocol with mock Atoms; no live review or Agent dispatch."""
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, redirect_stderr
+import io
 import json
+import os
 from pathlib import Path
 import re
 import shutil
@@ -47,9 +49,38 @@ D547_SELECTED_CONTROL_TOOLS = frozenset({
 # source tree is intentionally cold in sealed Unit runs, so allow that bounded
 # startup before the MCP client's first protocol probe expires.
 GATEWAY_STARTUP_TIMEOUT_SECONDS = 30
+_STARTUP_TELEMETRY_LINE = re.compile(
+    r'^caprmedio_mcp_startup phase=(?:initial_fingerprint|reload_fingerprint|fingerprint_verify|'
+    r'child_handshake|list_tools|generation_ready|schema_validation) '
+    r'outcome=(?:completed|failed) elapsed_ms=[0-9]+$')
+
+
+def _forward_startup_telemetry(stderr):
+    """Expose only accepted opt-in timing records after a successful client run."""
+    if os.environ.get('CAPRMEDIO_STARTUP_TELEMETRY') != '1':
+        return
+    stderr.seek(0)
+    for line in stderr.read().splitlines():
+        if _STARTUP_TELEMETRY_LINE.fullmatch(line):
+            print(line, file=sys.stderr, flush=True)
 
 
 class InstalledLayoutImport(unittest.TestCase):
+    def test_startup_telemetry_forwarding_is_opt_in_and_filters_untrusted_stderr(self):
+        valid = 'caprmedio_mcp_startup phase=list_tools outcome=completed elapsed_ms=17'
+        captured = io.StringIO(f'{valid}\n/secret/path --project-root source-content\n')
+        forwarded = io.StringIO()
+        with patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}), redirect_stderr(forwarded):
+            _forward_startup_telemetry(captured)
+        self.assertEqual(forwarded.getvalue(), valid + '\n')
+
+        captured = io.StringIO(valid + '\n')
+        forwarded = io.StringIO()
+        with patch.dict(os.environ, {}, clear=False), redirect_stderr(forwarded):
+            os.environ.pop('CAPRMEDIO_STARTUP_TELEMETRY', None)
+            _forward_startup_telemetry(captured)
+        self.assertEqual(forwarded.getvalue(), '')
+
     def test_implementation_imports_from_framework_engine_layout(self):
         """The release copies the Engine without the source-tree numeric prefix."""
         with tempfile.TemporaryDirectory() as temporary:
@@ -122,8 +153,10 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             shutil.copyfile(source, destination)
 
     def _server_parameters(self):
+        telemetry = ({'CAPRMEDIO_STARTUP_TELEMETRY': '1'}
+                     if os.environ.get('CAPRMEDIO_STARTUP_TELEMETRY') == '1' else None)
         return StdioServerParameters(command=sys.executable,
-            args=[str(SERVER), '--project-root', str(self.root)])
+            args=[str(SERVER), '--project-root', str(self.root)], env=telemetry)
 
     @asynccontextmanager
     async def _server_client(self, *, cache=None):
@@ -146,6 +179,8 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
                 if detail:
                     raise AssertionError(f'MCP stdio startup failed; stderr follows:\n{detail}') from error
                 raise
+            else:
+                _forward_startup_telemetry(stderr)
 
     async def test_real_server_discovery_marks_registered_query_bindings_mcp_available(self):
         self._copy_declared_selected_manifest()
