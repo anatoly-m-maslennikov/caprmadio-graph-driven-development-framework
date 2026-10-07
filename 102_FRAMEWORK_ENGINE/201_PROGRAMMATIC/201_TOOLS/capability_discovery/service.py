@@ -169,16 +169,22 @@ class Service:
         control = self._control_root()
         atoms, tools, issues = {}, [], []
         started, total = time.monotonic(), 0
-        candidates = (path for path in control.rglob('*.md') if not
-                      any(part.lower() in ('archive', 'archived', 'draft', 'done', 'resolved', 'canceled', 'cancelled', '_journal', '_projection')
-                          for part in path.relative_to(control).parts))
+        def current_source(path):
+            relative = path.relative_to(control).parts
+            if control.name in relative or '_release_materialized' in relative:
+                return False
+            if any(part.lower() in ('archive', 'archived', 'draft', 'done', 'resolved', 'canceled', 'cancelled', '_journal', '_projection')
+                   for part in relative):
+                return False
+            return ('00_APPLICABLE_METHODOLOGY' not in relative
+                    or '000_APPLICABLE_MTHD_sources' in relative)
+        # M318/D520 omit delivered copies before counting source candidates;
+        # canonical methodology sources still participate in duplicate checks.
+        candidates = (path for path in control.rglob('*.md') if current_source(path))
         for number, path in enumerate(candidates):
             if number >= 10000 or time.monotonic() - started > 60:
                 issues.append('incomplete: catalog limit reached')
                 break
-            relative = path.relative_to(control).parts
-            if '00_APPLICABLE_METHODOLOGY' in relative and '000_APPLICABLE_MTHD_sources' not in relative:
-                continue
             try:
                 raw = self.read(path)
                 total += len(raw)

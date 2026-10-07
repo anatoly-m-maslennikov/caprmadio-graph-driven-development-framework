@@ -48,6 +48,40 @@ class ServiceTests(unittest.TestCase):
 
         self.assertEqual(['CA-O-visible'], [row['id'] for row in result['matches']])
 
+    def test_derived_copies_do_not_consume_source_candidate_budget(self):
+        control = (self.root / '.caprmedio_caprmedio').resolve()
+        methodology = control / '000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY'
+        canonical = methodology / '000_APPLICABLE_MTHD_sources/active.md'
+        canonical.parent.mkdir(parents=True)
+        canonical.write_text('---\natom_id: CA-O-999\nstatus: Active\ncontent_role: Operations\n---\n# Summary\nCanonical\n')
+        derived = [methodology / '_release_materialized' / f'snapshot-{index}' / 'copy.md'
+                   for index in range(10001)]
+        with patch.object(Path, 'rglob', return_value=iter([*derived, canonical])):
+            atoms, _tools, issues = self.service.catalog()
+        self.assertEqual(['CA-O-999'], list(atoms))
+        self.assertNotIn('incomplete: catalog limit reached', issues)
+
+    def test_nested_control_copy_is_omitted_without_hiding_canonical_source(self):
+        control = self.root / '.caprmedio_caprmedio'
+        canonical = control / '000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/active.md'
+        nested = control / '000_CAPRMEDIO_framework/.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/active.md'
+        text = '---\natom_id: CA-O-999\nstatus: Active\ncontent_role: Operations\n---\n# Summary\nCanonical\n'
+        for path in (canonical, nested):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text)
+        atoms, _tools, issues = self.service.catalog()
+        self.assertEqual(str(canonical.relative_to(self.root)), atoms['CA-O-999']['source_path'])
+        self.assertNotIn('ambiguous Atom ID: CA-O-999', issues)
+
+    def test_true_authoritative_duplicate_remains_explicit(self):
+        control = self.root / '.caprmedio_caprmedio'
+        text = '---\natom_id: CA-O-999\nstatus: Active\ncontent_role: Operations\n---\n# Summary\nCanonical\n'
+        for name in ('one.md', 'two.md'):
+            (control / name).write_text(text)
+        atoms, _tools, issues = self.service.catalog()
+        self.assertNotIn('CA-O-999', atoms)
+        self.assertIn('ambiguous Atom ID: CA-O-999', issues)
+
     def test_traversal_rejected(self):
         with self.assertRaises(ValueError):
             self.service.status(Observation(run_id='../outside'))
