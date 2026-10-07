@@ -68,11 +68,10 @@ class SelectedNSuiteDocker(image_test.FakeDocker):
             # can execute the fixed guard.  This test double has no canary
             # specification for that separate, effect-free preflight.
             entrypoint = argv.index("--entrypoint")
-            if ("--mount" in argv or argv[entrypoint + 2] != "sha256:" + "a" * 64
-                    or argv[entrypoint + 3] != "-c"):
-                raise AssertionError(argv)
-            self.calls.append(argv)
-            return DockerCommandResult(0, b"", b"", False)
+            if ("--mount" not in argv and argv[entrypoint + 2] == "sha256:" + "a" * 64
+                    and argv[entrypoint + 3] == "-c"):
+                self.calls.append(argv)
+                return DockerCommandResult(0, b"", b"", False)
         if argv[:2] == ("docker", "run") and "--read-only" in argv and "--mount" in argv:
             self.calls.append(argv)
             image_index = argv.index("sha256:" + "a" * 64)
@@ -141,8 +140,24 @@ class SelectedNSuiteDockerContractTests(unittest.TestCase):
                 "-c", _DEADLINE_GUARD, "17.5", "--", *suite_test.SUITE_DRIVER_COMMAND,
             )
             result = docker.run(wrapped, cwd=root, timeout_seconds=17.5)
+            # The later image canary has no cidfile too, but it is not the
+            # installed-N Python capability preflight and must reach the base
+            # image-canary mock.
+            docker.spec = {
+                "candidate_snapshot_manifest_sha256": "candidate",
+                "package_manifest_sha256": "package",
+                "package_rows": [],
+            }
+            canary = (
+                "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+                "--security-opt=no-new-privileges", "--pids-limit=128",
+                "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+                "--entrypoint", "python", image, "/opt/caprmedio-release-canary.py",
+            )
+            canary_result = docker.run(canary, cwd=root, timeout_seconds=120)
 
         self.assertEqual(result.exit_code, 0)
+        self.assertEqual(json.loads(canary_result.stdout)["candidate_snapshot_manifest_sha256"], "candidate")
         command, observed_workspace, observed_output, working_directory, environment, timeout = executor.call
         self.assertEqual(command, (
             sys.executable, "-c", _DEADLINE_GUARD, "17.5", "--",
@@ -151,7 +166,7 @@ class SelectedNSuiteDockerContractTests(unittest.TestCase):
         ))
         self.assertEqual((observed_workspace, observed_output, working_directory, environment, timeout),
                          (workspace, output, ".", {}, 17.5))
-        self.assertEqual(docker.calls, [preflight, wrapped])
+        self.assertEqual(docker.calls, [preflight, wrapped, canary])
 
 
 class ReleaseActionsTests(unittest.TestCase):
@@ -296,7 +311,8 @@ class ReleaseActionsTests(unittest.TestCase):
             for index in range(6, 8):
                 results.append(self.execute(index))
         self.assertEqual([result.phase for result in results], [pair[2] for pair in PHASES[:8]])
-        self.assertTrue(all(result.outcome == "completed" for result in results))
+        outcomes = tuple((result.phase, result.outcome, result.reason) for result in results)
+        self.assertTrue(all(result.outcome == "completed" for result in results), outcomes)
         self.assertIsNotNone(self.run.verification)
         self.assertFalse(self.run.stopped)
         self.assertFalse(any("rm" in command or "prune" in command for command in self.docker.calls))
