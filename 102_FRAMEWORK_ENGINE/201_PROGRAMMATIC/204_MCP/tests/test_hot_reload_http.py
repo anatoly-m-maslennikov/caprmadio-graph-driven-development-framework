@@ -1,9 +1,11 @@
 """HTTP transport and access-boundary tests for the existing reload gateway."""
 import asyncio
+import os
 from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import httpx2
 from mcp.client.session import ClientSession
@@ -12,7 +14,7 @@ from starlette.testclient import TestClient
 
 APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP))
-from http_server import create_app  # noqa: E402
+from http_server import BearerGuard, TOKEN_ENV, create_app, token_from_environment  # noqa: E402
 
 
 class HTTPGatewayTests(unittest.TestCase):
@@ -41,6 +43,22 @@ class HTTPGatewayTests(unittest.TestCase):
         self.assertEqual(200, self.client.get('/health', headers=self.headers()).status_code)
         self.client.app.gateway.active = None
         self.assertEqual(503, self.client.get('/health', headers=self.headers()).status_code)
+
+    def test_empty_missing_and_nonstring_tokens_fail_closed_before_gateway_construction(self):
+        for token in ("", None, 7):
+            with self.subTest(token_type=type(token).__name__):
+                with self.assertRaises(ValueError):
+                    BearerGuard(object(), token)
+        with patch.dict(os.environ, {TOKEN_ENV: ""}, clear=False):
+            with self.assertRaises(ValueError):
+                token_from_environment()
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaises(ValueError):
+                token_from_environment()
+        with patch("http_server.Gateway") as gateway:
+            with self.assertRaises(ValueError):
+                create_app(self.root, token="", implementation=self.source)
+        gateway.assert_not_called()
 
     def test_hostile_host_is_rejected_before_initialize(self):
         response = self.client.post('/mcp', headers=self.headers(host='attacker.invalid'), json={})

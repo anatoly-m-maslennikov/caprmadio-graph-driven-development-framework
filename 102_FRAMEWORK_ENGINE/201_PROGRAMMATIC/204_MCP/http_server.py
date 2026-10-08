@@ -25,18 +25,21 @@ SECURITY = TransportSecuritySettings(
 )
 
 
-def token_from_environment():
-    token = os.environ.get(TOKEN_ENV)
-    if not token:
+def _require_token(token):
+    if not isinstance(token, str) or not token:
         raise ValueError("HTTP MCP token is not configured")
     return token
+
+
+def token_from_environment():
+    return _require_token(os.environ.get(TOKEN_ENV))
 
 
 class BearerGuard:
     """Apply transport authentication before the MCP ASGI application."""
     def __init__(self, app, token):
         self.app = app
-        self.token_digest = hashlib.sha256(token.encode()).digest()
+        self.token_digest = hashlib.sha256(_require_token(token).encode()).digest()
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
@@ -73,8 +76,9 @@ async def health(request, gateway):
 
 
 def create_app(root, token=None, implementation=None):
-    gateway = Gateway(root, implementation=implementation)
     token = token if token is not None else token_from_environment()
+    token = _require_token(token)
+    gateway = Gateway(root, implementation=implementation)
     server = gateway.build_server()
     async def readiness(request):
         return await health(request, gateway)
