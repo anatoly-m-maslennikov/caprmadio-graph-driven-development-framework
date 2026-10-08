@@ -638,12 +638,30 @@ def validate_sealed_event(event: Mapping[str, Any]) -> dict[str, Any]:
         if "action_type" in value or "previous_result_event" in value or "sources" in value:
             raise WorkJournalError("invalid-event", "governed_file_state must not carry change fields")
         evidence = value.get("recovery_evidence")
-        if not isinstance(evidence, dict) or set(evidence) != {"git", "carrier"}:
-            raise WorkJournalError("invalid-event", "recovered state requires git and carrier evidence")
-        if not isinstance(evidence["git"], dict) or not evidence["git"]:
-            raise WorkJournalError("invalid-event", "recovery git evidence must be non-empty")
-        if not isinstance(evidence["carrier"], dict) or not evidence["carrier"]:
-            raise WorkJournalError("invalid-event", "recovery carrier evidence must be non-empty")
+        if not isinstance(evidence, dict):
+            raise WorkJournalError("invalid-event", "recovered state requires recovery evidence")
+        if schema_version == 3 and subject_kind == "file" and set(evidence) == {"carrier"}:
+            carrier = evidence["carrier"]
+            if not isinstance(carrier, dict) or set(carrier) != {"path", "sha256", "observed_at", "observer_run_id"}:
+                raise WorkJournalError("invalid-event", "carrier-only recovery evidence has invalid fields")
+            if carrier["path"] != value["result"].get("path"):
+                raise WorkJournalError("invalid-event", "carrier-only recovery path must match result")
+            _require_sha256(carrier["sha256"], "recovery_evidence.carrier.sha256")
+            if carrier["sha256"] != value["result"].get("sha256"):
+                raise WorkJournalError("invalid-event", "carrier-only recovery digest must match result")
+            _validate_occurred_at(carrier["observed_at"])
+            if carrier["observed_at"] != value["occurred_at"]:
+                raise WorkJournalError("invalid-event", "carrier-only recovery time must match event")
+            _require_string(carrier, "observer_run_id")
+        else:
+            if schema_version == 3 and set(evidence) == {"carrier"}:
+                raise WorkJournalError("invalid-event", "carrier-only recovery evidence is limited to files")
+            if set(evidence) != {"git", "carrier"}:
+                raise WorkJournalError("invalid-event", "recovered state requires git and carrier evidence")
+            if not isinstance(evidence["git"], dict) or not evidence["git"]:
+                raise WorkJournalError("invalid-event", "recovery git evidence must be non-empty")
+            if not isinstance(evidence["carrier"], dict) or not evidence["carrier"]:
+                raise WorkJournalError("invalid-event", "recovery carrier evidence must be non-empty")
     actual_digest = value.get("event_digest")
     _require_sha256(actual_digest, "event_digest")
     if actual_digest != event_digest(value):
