@@ -281,14 +281,26 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 expected_run_ids.append(child_run_id)
                 expected_definitions[child_run_id] = replacements[0]
                 expected_parent[child_run_id] = action_run_id
+            if route.get("route") == "create_atom" and action_id == "CA-O-128":
+                creations = [
+                    item for item in route.get("native_action_calls", [])
+                    if isinstance(item, Mapping) and item.get("atom_id") == "CA-O-032"
+                ]
+                self.assertEqual(1, len(creations), route)
+                child_run_id = f"{action_run_id}:nested:CA-O-032"
+                expected_run_ids.append(child_run_id)
+                expected_definitions[child_run_id] = creations[0]
+                expected_parent[child_run_id] = action_run_id
 
         # J01: the retained selected result must be a clean terminal receipt,
         # not the outer DBOS acknowledgement returned by enqueue_selected.
         self.assertEqual("terminal", selected.get("disposition"), selected)
-        self.assertEqual("completed", selected.get("outcome"), selected)
-        self.assertEqual(expected_run_ids, selected.get("run_ids"), selected)
         terminals = selected.get("terminal_runs")
         self.assertIsInstance(terminals, list, selected)
+        workflow_terminals = [row for row in terminals if row.get("run_id") == request_id]
+        self.assertEqual(1, len(workflow_terminals), terminals)
+        self.assertEqual("completed", workflow_terminals[0].get("outcome"), workflow_terminals[0])
+        self.assertEqual(expected_run_ids, selected.get("run_ids"), selected)
         self.assertEqual(len(expected_run_ids), len(terminals), terminals)
         terminal_by_run_id = {row.get("run_id"): row for row in terminals}
         self.assertEqual(set(expected_run_ids), set(terminal_by_run_id), terminals)
@@ -674,6 +686,61 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             if launched:
                 await self._stop(runtime)
             temporary.cleanup()
+
+
+class SelectedWorkflowJournalHarnessTest(unittest.TestCase):
+    """Non-Docker regression for the W01 child-Run evidence contract."""
+
+    _events = staticmethod(SelectedWorkflowsDockerEndToEnd._events)
+    _safe_existing_ref = staticmethod(SelectedWorkflowsDockerEndToEnd._safe_existing_ref)
+
+    def test_create_atom_requires_the_source_bound_o032_child_run(self) -> None:
+        request_id = "w01-harness"
+        step_run_id = f"{request_id}:step:1"
+        action_run_id = f"{step_run_id}:action:1"
+        child_run_id = f"{action_run_id}:nested:CA-O-032"
+        pins = {
+            "workflow": {"atom_id": "CA-O-127", "version": 1, "source_path": "definitions/workflow.md", "digest": "a" * 64},
+            "step": {"atom_id": "CA-O-129", "version": 1, "source_path": "definitions/step.md", "digest": "b" * 64},
+            "action": {"atom_id": "CA-O-128", "version": 1, "source_path": "definitions/action.md", "digest": "c" * 64},
+            "creation": {"atom_id": "CA-O-032", "version": 1, "source_path": "definitions/creation.md", "digest": "d" * 64},
+        }
+        route = {
+            "route": "create_atom", "workflow": pins["workflow"],
+            "ordered_steps": [{"step": pins["step"], "action": pins["action"]}],
+            "native_action_calls": [pins["creation"]],
+        }
+        graph = {"step_results": [{"step_run_id": step_run_id, "action_run_id": action_run_id,
+                                   "step_definition_id": "CA-O-129", "action_definition_id": "CA-O-128"}]}
+        run_pins = {
+            request_id: pins["workflow"], step_run_id: pins["step"], action_run_id: pins["action"],
+            child_run_id: {"atom_id": "CA-O-032", "version": 1, "source_path": "definitions/creation.md", "digest": "d" * 64},
+        }
+        parents = {request_id: None, step_run_id: request_id, action_run_id: step_run_id, child_run_id: action_run_id}
+        with tempfile.TemporaryDirectory(dir=Path.cwd() / ".caprmedio_tmp", ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            journal = root / ".caprmedio_caprmedio/_journal"
+            journal.mkdir(parents=True)
+            events = []
+            terminals = []
+            for run_id, pin in run_pins.items():
+                for event_name, outcome in (("started", None), ("completed", "completed")):
+                    run = {"run_id": run_id, "definition": {"atom_id": pin["atom_id"], "version": pin["version"],
+                                                               "path": pin["source_path"], "digest": pin["digest"]}}
+                    if parents[run_id] is not None:
+                        run["parent_run_id"] = parents[run_id]
+                    events.append({"schema_version": 5, "kind": "workflow_execution", "event_id": f"{run_id}-{event_name}",
+                                   "event": event_name, "outcome": outcome, "llm_session": {"uuid": request_id}, "run": run})
+                result_ref = f"evidence/{run_id}.json"
+                result = root / result_ref
+                result.parent.mkdir(parents=True, exist_ok=True)
+                result.write_text("{}", encoding="utf-8")
+                terminals.append({"run_id": run_id, "disposition": "terminal", "outcome": "completed",
+                                  "result_ref": result_ref, "effect_refs": []})
+            (journal / "runs.ndjson").write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+            selected = {"disposition": "terminal", "run_ids": list(run_pins), "terminal_runs": terminals}
+
+            SelectedWorkflowsDockerEndToEnd._assert_shared_run_journal(self, root, request_id, route, selected, graph)
 
 
 if __name__ == "__main__":
