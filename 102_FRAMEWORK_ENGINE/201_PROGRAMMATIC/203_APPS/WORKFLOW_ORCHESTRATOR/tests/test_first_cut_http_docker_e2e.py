@@ -48,6 +48,18 @@ class FirstCutE2EContext:
     candidate_image_digest: str
 
 
+@dataclass
+class _HttpSessionMetadata:
+    """Observe the real response header without introspecting SDK internals."""
+
+    session_id: str | None = None
+
+    async def capture_response(self, response) -> None:
+        value = response.headers.get("Mcp-Session-Id")
+        if value:
+            self.session_id = value
+
+
 def _narrow_context(environ: Mapping[str, str]) -> FirstCutE2EContext:
     """Validate the explicit, disposable context without changing Release grammar."""
     image = environ.get("CAPRMEDIO_FIRST_CUT_HTTP_IMAGE")
@@ -215,6 +227,70 @@ class FirstCutCorpusTests(unittest.TestCase):
             run_cases()
         self.assertEqual(["W01"], starts)
 
+    async def _mock_sdk_http_session(self, *, session_header: bool) -> None:
+        import httpx2
+        # Import before replacing the constructor; exercise the real SDK's
+        # two-stream context-manager contract without opening a host socket.
+        from mcp.client.streamable_http import streamable_http_client  # noqa: F401
+
+        requests = []
+        session_id = "server-issued-session"
+
+        def respond(request):
+            requests.append(request)
+            if request.method == "DELETE":
+                return httpx2.Response(200)
+            if request.method == "GET":
+                return httpx2.Response(405)
+            message = json.loads(request.content)
+            if "id" not in message:
+                return httpx2.Response(202)
+            if message["method"] == "initialize":
+                result = {
+                    "protocolVersion": message["params"]["protocolVersion"],
+                    "capabilities": {},
+                    "serverInfo": {"name": "session-fixture", "version": "1"},
+                }
+            else:
+                self.assertEqual("tools/list", message["method"])
+                result = {"tools": []}
+            headers = {"Mcp-Session-Id": session_id} if session_header else {}
+            return httpx2.Response(
+                200, headers=headers,
+                json={"jsonrpc": "2.0", "id": message["id"], "result": result},
+            )
+
+        client_type = httpx2.AsyncClient
+
+        def make_client(**kwargs):
+            return client_type(transport=httpx2.MockTransport(respond), **kwargs)
+
+        harness = FirstCutHttpDockerEndToEnd("test_six_workflows_over_authenticated_http_mcp")
+        with mock.patch.object(httpx2, "AsyncClient", side_effect=make_client):
+            async with harness._http_session("http://127.0.0.1:18092/mcp", "synthetic-token") as (session, metadata):
+                self.assertEqual(session_id, metadata.session_id)
+                self.assertEqual([], (await session.list_tools()).tools)
+        self.assertTrue(any(request.method == "DELETE" for request in requests))
+        self.assertTrue(any(request.headers.get("Mcp-Session-Id") == session_id for request in requests))
+
+    def test_real_sdk_context_captures_server_session_header(self) -> None:
+        asyncio.run(self._mock_sdk_http_session(session_header=True))
+
+    def test_initialized_http_session_without_id_refuses(self) -> None:
+        def leaves(error):
+            if isinstance(error, BaseExceptionGroup):
+                return [leaf for child in error.exceptions for leaf in leaves(child)]
+            return [error]
+
+        with self.assertRaises(BaseException) as caught:
+            asyncio.run(self._mock_sdk_http_session(session_header=False))
+        failures = leaves(caught.exception)
+        self.assertTrue(any(
+            isinstance(error, FirstCutHttpSecurityError)
+            and "session identifier" in str(error)
+            for error in failures
+        ), failures)
+
     def test_failed_http_start_still_runs_http_stop_cleanup(self) -> None:
         calls = []
         start_failure = RuntimeError("HTTP startup failed after compose created a service")
@@ -376,22 +452,28 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         return token, port
 
     @staticmethod
-    def _http_client(token: str):
+    def _http_client(token: str, *, response_hook=None):
         import httpx2
 
         # The admitted endpoint is explicit loopback. Never send its bearer
         # through a process-wide HTTP/SOCKS proxy inherited from the host.
-        return httpx2.AsyncClient(headers={"Authorization": f"Bearer {token}"}, trust_env=False)
+        return httpx2.AsyncClient(
+            headers={"Authorization": f"Bearer {token}"}, trust_env=False,
+            event_hooks={"response": [] if response_hook is None else [response_hook]},
+        )
 
     @asynccontextmanager
     async def _http_session(self, url: str, token: str):
         from mcp.client.session import ClientSession
         from mcp.client.streamable_http import streamable_http_client
 
-        client = self._http_client(token)
+        metadata = _HttpSessionMetadata()
+        client = self._http_client(token, response_hook=metadata.capture_response)
         transport = streamable_http_client(url, http_client=client)
-        async with _entered_http_session(client, transport, ClientSession) as session:
-            yield session
+        async with _entered_http_session(client, transport, ClientSession) as (session, _transport):
+            if not metadata.session_id:
+                raise FirstCutHttpSecurityError("initialized HTTP session identifier is unavailable")
+            yield session, metadata
 
     async def _http_terminal_status(self, session, run_id: str) -> dict:
         deadline = asyncio.get_running_loop().time() + 75
