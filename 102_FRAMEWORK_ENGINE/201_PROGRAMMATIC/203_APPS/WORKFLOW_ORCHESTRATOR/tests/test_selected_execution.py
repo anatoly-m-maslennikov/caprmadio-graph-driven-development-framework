@@ -531,12 +531,24 @@ class SelectedExecutionTests(unittest.TestCase):
         workspace = workspace.resolve()
         calls: list[dict[str, object]] = []
         evaluation_calls = 0
+        entry_calls = 0
 
         def agent(_prompt: str, packet: dict[str, object]) -> dict[str, object]:
-            nonlocal evaluation_calls
+            nonlocal entry_calls, evaluation_calls
             calls.append(packet)
             step = packet["step_marker"]
             outputs: dict[str, object] = {}
+            if step == "CA-O-091":
+                entry_calls += 1
+                entry_results = (
+                    "evaluation_ready", "requirement_ready", "evaluation_runnable",
+                    "evaluation_runnable", "complete",
+                )
+                try:
+                    result = entry_results[entry_calls - 1]
+                except IndexError as error:
+                    raise AssertionError("fixture exceeded its declared CA-O-091 visits") from error
+                return {"result": result, "outputs": outputs, "evidence": [f"evidence:{step}"]}
             if step == "CA-O-092":
                 outputs = {"golden_e2e": ["test"], "commands": ["test"], "expected_outcomes": ["pass"]}
             elif step == "CA-O-093":
@@ -599,7 +611,7 @@ class SelectedExecutionTests(unittest.TestCase):
         }
         execution["parameters"] = {
             "base_packet": base,
-            "run_visit_limits": {"CA-O-094": 2},
+            "run_visit_limits": {"CA-O-091": 5, "CA-O-094": 2},
             "step_packets": {
                 step: {"context": context, "step_marker": step}
                 for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
@@ -610,7 +622,7 @@ class SelectedExecutionTests(unittest.TestCase):
         runner = SelectedExecution(self.root, implementation_agent=agent)
         graph = selected._validate_graph(execution)
         execution["requested_runs"] = build_requested_runs(
-            graph, "current-o016", {"CA-O-094": 2},
+            graph, "current-o016", {"CA-O-091": 5, "CA-O-094": 2},
         )
         frozen = {"request": request, "graph": graph}
 
@@ -633,11 +645,13 @@ class SelectedExecutionTests(unittest.TestCase):
 
         self.assertEqual(result["outcome"], "completed")
         self.assertEqual([packet["step_marker"] for packet in calls],
-                         ["CA-O-091", "CA-O-092", "CA-O-093", "CA-O-094", "CA-O-095", "CA-O-096", "CA-O-099", "CA-O-094"])
+                         ["CA-O-091", "CA-O-092", "CA-O-091", "CA-O-093", "CA-O-091", "CA-O-094",
+                          "CA-O-095", "CA-O-096", "CA-O-099", "CA-O-091", "CA-O-094", "CA-O-091"])
         self.assertEqual([packet["context"] for packet in calls],
-                         ["Integrated", "Isolated", "Isolated", "Integrated", "Isolated", "Integrated", "Isolated", "Integrated"])
+                         ["Integrated", "Isolated", "Integrated", "Isolated", "Integrated", "Integrated",
+                          "Isolated", "Integrated", "Isolated", "Integrated", "Integrated", "Integrated"])
         self.assertEqual(calls[1]["prior_results"][0]["step_definition_id"], "CA-O-091")
-        self.assertEqual(calls[4]["prior_results"][-1]["result"], "checks fail")
+        self.assertEqual(calls[6]["prior_results"][-1]["result"], "failed")
 
     def test_o016_rejects_missing_or_mismatched_step_packet(self) -> None:
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016-missing")

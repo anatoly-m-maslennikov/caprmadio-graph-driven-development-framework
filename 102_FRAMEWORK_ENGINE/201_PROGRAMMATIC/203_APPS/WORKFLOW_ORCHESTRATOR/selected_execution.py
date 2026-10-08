@@ -433,13 +433,6 @@ class SelectedExecution:
         available["CA-O-131"] = revert_not_configured
         try:
             import implementation_actions
-            implementation_results = {
-                "evaluation_ready": "evaluation ready", "prepared": "tests prepared",
-                "implemented": "implementation delivered", "passed": "checks pass",
-                "failed": "checks fail", "retry_permitted": "retry admitted",
-                "repaired": "repair completed", "implementation_defect": "repair admission",
-                "test_implementation_defect": "repair admission",
-            }
             for action_id, handler in implementation_actions.ACTION_HANDLERS.items():
                 def implementation(context: dict[str, Any], handler: Any = handler) -> dict[str, Any]:
                     result = handler(
@@ -449,7 +442,10 @@ class SelectedExecution:
                     )
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("implementation Action returned an invalid queue envelope")
-                    label = implementation_results.get(result["result"], result["result"])
+                    # Result labels are the source Workflow's edge conditions.
+                    # A stale projection cannot translate them into a second,
+                    # competing result vocabulary.
+                    label = result["result"]
                     output: dict[str, Any] = {"result": label, "effect_refs": [], "native_result": result}
                     if label in {"blocked", "retry_blocked", "unresolved", "authority_change_required", "environment_blocker"}:
                         output["terminal_outcome"] = "interrupted_pending"
@@ -504,6 +500,26 @@ class SelectedExecution:
                                         "output_paths": paths,
                                     },
                                 )
+                    elif (step_id == "CA-O-157" and context["action_definition_id"] == "CA-O-009"
+                          and outcome == "publication_recovery_required"
+                          and result.get("apply_status") == "EFFECT_APPLIED_STALE"):
+                        publication = result.get("publication")
+                        planned = publication.get("output_plan") if isinstance(publication, Mapping) else None
+                        effect_state = publication.get("effect_state") if isinstance(publication, Mapping) else None
+                        refs = self._publication_output_paths(planned)
+                        # The compiler reports this only after replacement.  Its
+                        # top-level plan must exactly be the observed
+                        # publication plan; otherwise an arbitrary result
+                        # carrier cannot claim already-applied effects.
+                        if (effect_state != "output_replacement_completed"
+                                or result.get("output_plan") != planned or refs is None):
+                            output["terminal_outcome"] = "interrupted_pending"
+                        else:
+                            # Preserve the compiler's raw recovery-required
+                            # result while terminalizing the known performed,
+                            # incomplete effect.  No graph successor is
+                            # inferred from this receipt.
+                            output.update(terminal_outcome="partial", effect_refs=refs)
                     elif outcome in {"blocked", "pending_recording"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     elif step_id == "CA-O-152" and outcome == "assessed":
@@ -559,6 +575,34 @@ class SelectedExecution:
         request = dict(parameters)
         request["project_root"] = executor_root.as_posix()
         return request
+
+    @staticmethod
+    def _publication_output_paths(plan: object) -> list[str] | None:
+        """Return the exact, safe output references in a compiler plan.
+
+        These are receipt references, not a fresh filesystem observation: the
+        compiler's stale-frontier outcome is specifically the evidence that
+        replacement happened before currentness was lost.
+        """
+        if not isinstance(plan, list):
+            return None
+        paths: list[str] = []
+        for item in plan:
+            if not isinstance(item, Mapping):
+                return None
+            output_path = item.get("output_path")
+            if (not isinstance(output_path, str) or not output_path
+                    or "\\x00" in output_path or "\\" in output_path):
+                return None
+            candidate = Path(output_path)
+            if candidate.is_absolute() or candidate == Path(".") or ".." in candidate.parts:
+                return None
+            if candidate.as_posix() != output_path:
+                return None
+            paths.append(output_path)
+        if len(paths) != len(set(paths)):
+            return None
+        return sorted(paths)
 
     @staticmethod
     def _graph_parameters_with_actual_recording(
@@ -720,10 +764,12 @@ class SelectedExecution:
         return normalized
 
     def _d547_steps(self, route: Mapping[str, Any]) -> tuple[list[dict[str, Any]], str]:
-        """Translate the immutable D547 edge list without adding a route policy.
+        """Translate source-bound D547 edges without adding a route policy.
 
-        The manifest represents each source Step/Action pair once and represents
-        only actual ``On Result`` edges.  A missing edge is intentionally *not*
+        A current source Workflow graph table wins over its serialized manifest
+        projection.  That keeps labels and branches bound to the admitted
+        source bytes, while manifests without this table retain their existing
+        D547 representation.  A missing edge is intentionally *not*
         interpreted as a successor: a native adapter must return a truthful
         ``terminal_outcome`` for that source result.
         """
@@ -731,22 +777,6 @@ class SelectedExecution:
         entry = route.get("entry_step")
         if not isinstance(ordered, list) or not ordered or not isinstance(entry, str):
             raise SelectedExecutionError("D547 selected Workflow must bind ordered Steps and entry_step")
-        transitions: dict[str, list[dict[str, Any]]] = {}
-        raw_edges = route.get("on_result")
-        if not isinstance(raw_edges, list):
-            raise SelectedExecutionError("D547 selected Workflow On Result bindings are invalid")
-        for raw in raw_edges:
-            if not isinstance(raw, Mapping) or set(raw) != {"from", "condition", "to"}:
-                raise SelectedExecutionError("D547 selected On Result binding is invalid")
-            source, condition, target = raw["from"], raw["condition"], raw["to"]
-            if not all(isinstance(value, str) and value for value in (source, condition, target)):
-                raise SelectedExecutionError("D547 selected On Result binding has an invalid endpoint")
-            transition = {"result": condition}
-            if target == "complete":
-                transition["terminal"] = "completed"
-            else:
-                transition["next"] = target
-            transitions.setdefault(source, []).append(transition)
         normalized: list[dict[str, Any]] = []
         seen_steps: set[str] = set()
         for raw in ordered:
@@ -758,8 +788,38 @@ class SelectedExecution:
                 raise SelectedExecutionError("D547 selected Workflow has duplicate Step bindings")
             seen_steps.add(step["atom_id"])
             step["actions"] = [action]
-            step["on_result"] = transitions.get(step["atom_id"], [])
             normalized.append(step)
+        source_edges = self._source_bound_d547_edges(route, seen_steps)
+        raw_edges = source_edges if source_edges is not None else route.get("on_result")
+        if not isinstance(raw_edges, list):
+            raise SelectedExecutionError("D547 selected Workflow On Result bindings are invalid")
+        transitions: dict[str, list[dict[str, Any]]] = {}
+        pairs: set[tuple[str, str]] = set()
+        for raw in raw_edges:
+            if not isinstance(raw, Mapping) or set(raw) != {"from", "condition", "to"}:
+                raise SelectedExecutionError("D547 selected On Result binding is invalid")
+            source, condition, target = raw["from"], raw["condition"], raw["to"]
+            if not all(isinstance(value, str) and value for value in (source, condition, target)):
+                raise SelectedExecutionError("D547 selected On Result binding has an invalid endpoint")
+            if (source, condition) in pairs:
+                raise SelectedExecutionError("D547 selected Workflow has duplicate On Result conditions")
+            pairs.add((source, condition))
+            transition = {"result": condition}
+            if source_edges is not None:
+                terminal = {"completed": "completed", "blocked": "interrupted_pending"}.get(target)
+                if terminal is not None:
+                    transition["terminal"] = terminal
+                elif target in seen_steps:
+                    transition["next"] = target
+                else:
+                    raise SelectedExecutionError("D547 source Workflow has an undeclared terminal result")
+            elif target == "complete":
+                transition["terminal"] = "completed"
+            else:
+                transition["next"] = target
+            transitions.setdefault(source, []).append(transition)
+        for step in normalized:
+            step["on_result"] = transitions.get(step["atom_id"], [])
         if entry not in seen_steps:
             raise SelectedExecutionError("D547 selected Workflow entry_step is not bound")
         for source, values in transitions.items():
@@ -770,6 +830,51 @@ class SelectedExecution:
                 if target is not None and target not in seen_steps:
                     raise SelectedExecutionError("D547 On Result target is not a bound Step")
         return normalized, entry
+
+    def _source_bound_d547_edges(
+        self, route: Mapping[str, Any], bound_steps: set[str],
+    ) -> list[dict[str, str]] | None:
+        """Read the admitted Workflow's canonical On Result table when present."""
+        binding = route.get("workflow")
+        if not isinstance(binding, Mapping):
+            raise SelectedExecutionError("D547 selected Workflow binding is invalid")
+        workflow = self._definition(binding, expected_kind="workflow")
+        # W09 has an admitted canonical table whose newer graph deliberately
+        # supersedes the stale serialized projection.  Other selected routes
+        # keep their own existing manifest interpretation.
+        if workflow["atom_id"] != "CA-O-016":
+            return None
+        source = self._safe_path(str(workflow["path"]))
+        raw = source.read_bytes()
+        if _sha256(raw) != workflow["sha256"]:
+            raise SelectedExecutionError("Workflow definition changed while reading source graph")
+        try:
+            lines = raw.decode("utf-8").splitlines()
+        except UnicodeDecodeError as error:
+            raise SelectedExecutionError("Workflow definition is not UTF-8") from error
+        header = "| From Step | Result condition | Next Step **or** terminal result |"
+        indexes = [index for index, line in enumerate(lines) if line.strip() == header]
+        if not indexes:
+            return None
+        separator = re.compile(r"\|\s*:?-{3,}:?\s*\|\s*:?-{3,}:?\s*\|\s*:?-{3,}:?\s*\|")
+        if (len(indexes) != 1 or indexes[0] + 1 >= len(lines)
+                or separator.fullmatch(lines[indexes[0] + 1].strip()) is None):
+            raise SelectedExecutionError("D547 source Workflow On Result table is invalid")
+        edges: list[dict[str, str]] = []
+        for line in lines[indexes[0] + 2:]:
+            stripped = line.strip()
+            if not stripped.startswith("|"):
+                break
+            cells = [value.strip() for value in stripped.strip("|").split("|")]
+            if len(cells) != 3 or not all(cells):
+                raise SelectedExecutionError("D547 source Workflow On Result row is invalid")
+            source_step, condition, target = cells
+            if source_step not in bound_steps:
+                raise SelectedExecutionError("D547 source Workflow On Result source is not a bound Step")
+            edges.append({"from": source_step, "condition": condition, "to": target})
+        if not edges:
+            raise SelectedExecutionError("D547 source Workflow On Result table has no edges")
+        return edges
 
     def _validate_graph(self, execution: Mapping[str, Any]) -> dict[str, Any]:
         if _contains_secret(execution):
@@ -1111,6 +1216,33 @@ class SelectedExecution:
             raise SelectedExecutionError(f"implementation packet retained_state is invalid for Step {step_id}")
         merged["retained_state"] = {**retained, **step_retained, "prior_results": list(prior_results)}
         merged["prior_results"] = list(prior_results)
+        retry = merged.get("retry")
+        if isinstance(retry, Mapping):
+            consumed = retry.get("consumed")
+            if isinstance(consumed, int) and not isinstance(consumed, bool) and consumed >= 0:
+                # CA-O-024 counts when a permitted repair-and-evaluation round
+                # starts, not when CA-O-096 is merely checked.  A completed
+                # source-bound CA-O-099 repair retains a started round; at
+                # CA-O-099 itself, its immediately preceding admitted O096
+                # decision begins the next round.  Re-deriving from the
+                # frozen base and exact prior results makes repeated gate
+                # checks idempotent.
+                completed_rounds = sum(
+                    1 for prior in prior_results
+                    if prior.get("step_definition_id") == "CA-O-099"
+                    and prior.get("action_definition_id") == "CA-O-021"
+                    and prior.get("result") == "repaired"
+                )
+                admitted_rounds = sum(
+                    1 for prior in prior_results
+                    if prior.get("step_definition_id") == "CA-O-096"
+                    and prior.get("action_definition_id") == "CA-O-024"
+                    and prior.get("result") == "retry_permitted"
+                )
+                rounds_started = completed_rounds
+                if step_id == "CA-O-099" and admitted_rounds > completed_rounds:
+                    rounds_started += 1
+                merged["retry"] = {**retry, "consumed": consumed + rounds_started}
         return merged
 
     @staticmethod

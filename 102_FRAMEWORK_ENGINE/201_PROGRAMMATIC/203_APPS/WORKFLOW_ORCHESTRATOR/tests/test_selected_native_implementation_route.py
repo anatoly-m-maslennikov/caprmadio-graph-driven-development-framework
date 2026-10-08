@@ -135,8 +135,10 @@ class SelectedNativeImplementationRouteTest(unittest.TestCase):
             rows = graph["step_results"]
             self.assertEqual("completed", graph["outcome"])
             self.assertEqual(
-                [("CA-O-091", "evaluation ready"), ("CA-O-092", "tests prepared"),
-                 ("CA-O-093", "implementation delivered"), ("CA-O-094", "checks pass")],
+                [("CA-O-091", "evaluation_ready"), ("CA-O-092", "prepared"),
+                 ("CA-O-091", "requirement_ready"), ("CA-O-093", "implemented"),
+                 ("CA-O-091", "evaluation_runnable"), ("CA-O-094", "passed"),
+                 ("CA-O-091", "complete")],
                 [(row["step_definition_id"], row["result"]) for row in rows],
             )
             progress = {row["action_definition_id"]: self._json(run_dir / f"{row['action_run_id']}.json") for row in rows}
