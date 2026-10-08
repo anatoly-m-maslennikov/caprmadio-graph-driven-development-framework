@@ -108,6 +108,7 @@ class ProposedReferenceInventoryTest(unittest.TestCase):
         candidate_path = "authority/CA-P-ROOT--root/CA-P-PARENT--parent/child.md"
         candidate = {
             "content_role": "Plan",
+            "status": "Active",
             "relations": {"is_decomposition_of": ["CA-P-PARENT"]},
         }
 
@@ -127,6 +128,7 @@ class ProposedReferenceInventoryTest(unittest.TestCase):
         )
         candidate = {
             "content_role": "Plan",
+            "status": "Active",
             "relations": {"is_decomposition_of": ["CA-P-PARENT"]},
         }
 
@@ -135,6 +137,31 @@ class ProposedReferenceInventoryTest(unittest.TestCase):
                 self.root, self.structure, ["CA-P-PARENT"],
                 candidate_metadata=candidate,
                 candidate_path="untrusted/CA-P-PARENT--parent/child.md",
+            )
+
+    def test_nested_done_plan_uses_only_the_source_admitted_status_folder(self) -> None:
+        self._carrier("authority/CA-P-PARENT--parent.md", "CA-P-PARENT", role="Plan")
+        candidate = {
+            "content_role": "Plan",
+            "status": "Done",
+            "relations": {"is_decomposition_of": ["CA-P-PARENT"]},
+        }
+        admitted = {"Done": "done"}
+
+        result = inventory_proposed_references(
+            self.root, self.structure, ["CA-P-PARENT"],
+            candidate_metadata=candidate,
+            candidate_path="authority/CA-P-PARENT--parent/done/child.md",
+            admitted_plan_status_folders=admitted,
+        )
+
+        self.assertEqual(["CA-P-PARENT"], [item.atom_id for item in result.plan_parent_closure])
+        with self.assertRaisesRegex(ProposedReferenceError, "authenticated Markdown parent carrier"):
+            inventory_proposed_references(
+                self.root, self.structure, ["CA-P-PARENT"],
+                candidate_metadata=candidate,
+                candidate_path="authority/CA-P-PARENT--parent/wrong/child.md",
+                admitted_plan_status_folders=admitted,
             )
 
     def test_nested_plan_cycle_wrong_parent_path_and_changed_frontier_fail_closed(self) -> None:

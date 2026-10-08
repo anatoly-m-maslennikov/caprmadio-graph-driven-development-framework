@@ -124,6 +124,32 @@ def _parent_id(metadata: Mapping[str, Any]) -> str | None:
     return parents[0] if parents else None
 
 
+def _plan_container(
+    parent_path: Path,
+    child_status: object,
+    admitted_plan_status_folders: Mapping[str, str] | None,
+) -> Path:
+    """Return the source-admitted local container for a child Plan status."""
+    if not isinstance(child_status, str):
+        raise ProposedReferenceError("nested Plan status is malformed")
+    container = parent_path.with_suffix("")
+    if child_status == "Active":
+        return container
+    if admitted_plan_status_folders is None:
+        raise ProposedReferenceError("nested Plan status-folder authority is unavailable")
+    folder = admitted_plan_status_folders.get(child_status)
+    folder_path = Path(folder) if isinstance(folder, str) else None
+    if (
+        folder_path is None
+        or not folder
+        or folder_path.is_absolute()
+        or len(folder_path.parts) != 1
+        or folder_path.parts[0] in {".", ".."}
+    ):
+        raise ProposedReferenceError("nested Plan status-folder authority is invalid")
+    return container / folder_path
+
+
 def inventory_proposed_references(
     root: Path,
     project_structure: Mapping[str, Any],
@@ -131,6 +157,7 @@ def inventory_proposed_references(
     *,
     candidate_metadata: Mapping[str, Any] | None = None,
     candidate_path: str | Path | None = None,
+    admitted_plan_status_folders: Mapping[str, str] | None = None,
 ) -> ProposedReferenceInventory:
     """Return exact current facts for named targets and a nested Plan parent chain.
 
@@ -138,9 +165,12 @@ def inventory_proposed_references(
     an active, non-archive carrier found exactly once in Project Structure's
     authority frontier.  If ``candidate_metadata`` is a Plan with a parent,
     ``candidate_path`` is required and each child is checked to reside below the
-    *actual authenticated parent carrier* (its filename stem); atom IDs never
-    come from filenames.  A changed frontier, unsafe file, duplicate, missing
-    or inactive named target raises ``ProposedReferenceError``.
+    *actual authenticated parent carrier*.  A non-Active child Plan additionally
+    requires its container folder from ``admitted_plan_status_folders``; callers
+    must derive that finite mapping from validated CA-D-461 source evidence.
+    Atom IDs never come from filenames.  A changed frontier, unsafe file,
+    duplicate, missing or inactive named target raises
+    ``ProposedReferenceError``.
     """
     root = root.resolve()
     ids = tuple(direct_atom_ids)
@@ -181,6 +211,7 @@ def inventory_proposed_references(
                 if candidate_path is None:
                     raise ProposedReferenceError("nested Plan requires its actual carrier path")
                 child_path = _relative(root, candidate_path)
+                child_status = candidate_metadata.get("status")
                 seen: set[str] = set()
                 while parent is not None:
                     if parent in seen:
@@ -208,9 +239,12 @@ def inventory_proposed_references(
                 # a genuine cycle cannot be hidden by an incidental bad layout.
                 for item in closure:
                     parent_path = root / item.path
-                    if child_path.parent != parent_path.with_suffix(""):
+                    if child_path.parent != _plan_container(
+                        parent_path, child_status, admitted_plan_status_folders,
+                    ):
                         raise ProposedReferenceError("nested Plan path does not use the authenticated Markdown parent carrier")
                     child_path = parent_path
+                    child_status = item.status
     current = reader.currentness()
     if current.get("state") != "unchanged":
         raise ProposedReferenceError("authoritative target frontier changed during inventory")
