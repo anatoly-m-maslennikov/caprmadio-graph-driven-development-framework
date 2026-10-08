@@ -56,6 +56,43 @@ def _structured_tool_result(response: Any) -> dict[str, Any]:
     return value
 
 
+def _normalized_source_result(value: object) -> str:
+    """Compare the executor's underscore labels with source-table wording."""
+    if not isinstance(value, str) or not value:
+        raise AssertionError(f"source result condition is invalid: {value!r}")
+    return value.replace(" ", "_")
+
+
+def _w09_admitted_source_edges(root: Path, route: Mapping[str, Any]) -> list[dict[str, str]]:
+    """Read the exact pinned O016 table that supersedes its stale projection."""
+    workflow = route.get("workflow")
+    if not isinstance(workflow, Mapping):
+        raise AssertionError("W09 has no pinned Workflow binding")
+    path, digest = workflow.get("source_path"), workflow.get("digest")
+    if not isinstance(path, str) or not isinstance(digest, str):
+        raise AssertionError("W09 Workflow binding is incomplete")
+    source = root / path
+    raw = source.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != digest:
+        raise AssertionError("W09 Workflow definition changed after admission")
+    lines = raw.decode("utf-8").splitlines()
+    header = "| From Step | Result condition | Next Step **or** terminal result |"
+    indexes = [index for index, line in enumerate(lines) if line.strip() == header]
+    if len(indexes) != 1 or indexes[0] + 1 >= len(lines):
+        raise AssertionError("W09 admitted Workflow table is unavailable")
+    edges: list[dict[str, str]] = []
+    for line in lines[indexes[0] + 2:]:
+        if not line.strip().startswith("|"):
+            break
+        cells = [value.strip() for value in line.strip().strip("|").split("|")]
+        if len(cells) != 3 or not all(cells):
+            raise AssertionError("W09 admitted Workflow table is invalid")
+        edges.append({"from": cells[0], "condition": cells[1], "to": cells[2]})
+    if not edges:
+        raise AssertionError("W09 admitted Workflow table has no edges")
+    return edges
+
+
 async def _stdio_tool_call(parameters: Any, tool: str, request: dict[str, Any]) -> dict[str, Any]:
     """One uncached MCP 2.3 stdio connection and handshake for one Tool call."""
     from mcp import Client
@@ -380,6 +417,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertIsInstance(rows, list, graph)
         self.assertTrue(rows, graph)
         steps = {item["step"]["atom_id"]: item for item in route["ordered_steps"]}
+        source_edges = _w09_admitted_source_edges(root, route) if route.get("route") == "run_implementation_workflow" else None
         self.assertEqual(route["entry_step"], rows[0].get("step_definition_id"), rows)
         for index, row in enumerate(rows):
             self.assertIsInstance(row, dict, row)
@@ -406,18 +444,31 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 self._safe_existing_ref(root, effect, label="native Action effect")
             if index:
                 previous = rows[index - 1]
-                admissible = {
-                    transition["to"] for transition in route["on_result"]
+                transitions = source_edges if source_edges is not None else route["on_result"]
+                admissible = [
+                    transition for transition in transitions
                     if transition["from"] == previous["step_definition_id"]
-                    and transition["condition"] == previous["result"]
-                }
-                self.assertIn(step_id, admissible, {"previous": previous, "current": row, "route": route})
+                    and _normalized_source_result(transition["condition"])
+                    == _normalized_source_result(previous["result"])
+                ]
+                self.assertEqual(1, len(admissible), {"previous": previous, "current": row, "route": route})
+                self.assertEqual(step_id, admissible[0]["to"], {"previous": previous, "current": row, "route": route})
 
             progress = self._action_progress(root, request_id, row["action_run_id"])
             self.assertEqual(row["action_run_id"], progress.get("action_run_id"), progress)
             self.assertEqual(row["result"], progress.get("result"), progress)
             if fixture.case.case_id not in {"W11", "W12"}:
                 self.assertIsInstance(progress.get("native_result"), dict, progress)
+        if source_edges is not None:
+            final = rows[-1]
+            completion = [
+                transition for transition in source_edges
+                if transition["from"] == final["step_definition_id"]
+                and _normalized_source_result(transition["condition"])
+                == _normalized_source_result(final["result"])
+            ]
+            self.assertEqual(1, len(completion), {"final": final, "source_edges": source_edges})
+            self.assertEqual("completed", completion[0]["to"], {"final": final, "completion": completion})
         return rows
 
     def _assert_route_specific_effects(
@@ -741,6 +792,31 @@ class SelectedWorkflowJournalHarnessTest(unittest.TestCase):
             selected = {"disposition": "terminal", "run_ids": list(run_pins), "terminal_runs": terminals}
 
             SelectedWorkflowsDockerEndToEnd._assert_shared_run_journal(self, root, request_id, route, selected, graph)
+
+    def test_w09_source_conditions_normalize_labels_and_reach_completion(self) -> None:
+        with tempfile.TemporaryDirectory(dir=Path.cwd() / ".caprmedio_tmp", ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            source = root / "definitions/workflow.md"
+            source.parent.mkdir(parents=True)
+            source.write_text(
+                "| From Step | Result condition | Next Step **or** terminal result |\n"
+                "|---|---|---|\n"
+                "| CA-O-091 | evaluation ready | CA-O-092 |\n"
+                "| CA-O-091 | complete | completed |\n",
+                encoding="utf-8",
+            )
+            route = {"workflow": {"source_path": "definitions/workflow.md",
+                                    "digest": hashlib.sha256(source.read_bytes()).hexdigest()}}
+            edges = _w09_admitted_source_edges(root, route)
+            successor = [edge for edge in edges if edge["from"] == "CA-O-091"
+                         and _normalized_source_result(edge["condition"])
+                         == _normalized_source_result("evaluation_ready")]
+            completion = [edge for edge in edges if edge["from"] == "CA-O-091"
+                          and _normalized_source_result(edge["condition"])
+                          == _normalized_source_result("complete")]
+
+            self.assertEqual(["CA-O-092"], [edge["to"] for edge in successor])
+            self.assertEqual(["completed"], [edge["to"] for edge in completion])
 
 
 if __name__ == "__main__":
