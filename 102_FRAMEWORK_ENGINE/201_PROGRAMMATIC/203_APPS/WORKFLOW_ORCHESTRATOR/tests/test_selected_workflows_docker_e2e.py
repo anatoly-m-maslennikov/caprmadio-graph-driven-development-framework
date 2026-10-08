@@ -238,6 +238,17 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertIsInstance(native, dict, native)
         return native, graph, selected
 
+    def _assert_status_admission_blocked(self, result: Mapping[str, Any]) -> None:
+        """Require the source-declared refusal carrier, not an MCP exception."""
+        self.assertEqual("blocked", result.get("disposition"), result)
+        self.assertEqual("blocked", result.get("outcome"), result)
+        self.assertEqual([], result.get("effect_refs"), result)
+        lifecycle_error = result.get("lifecycle_error")
+        self.assertIsInstance(lifecycle_error, Mapping, result)
+        self.assertEqual("status-unadmitted", lifecycle_error.get("code"), result)
+        self.assertNotIn("proposal_receipt", result)
+        self.assertNotIn("proposal_receipt_digest", result)
+
     @staticmethod
     def _read_json(path: Path, *, label: str) -> dict[str, Any]:
         try:
@@ -707,14 +718,19 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     self.assertTrue(all(effect.get("state") == "unchanged" for effect in noop.get("effects", [])), noop)
 
                     before = fixture.snapshot()
-                    with self.assertRaisesRegex(AssertionError, "status-unadmitted"):
-                        await self._call(
-                            runtime, root, fixture.case.route,
-                            fixture.request_for_status(
-                                final_observed, "NotAdmitted", request_id=f"p1616-{role.lower()}-rejected",
-                            ),
-                        )
+                    records_before = self._recording_snapshot(root)
+                    rejected = await self._call(
+                        runtime, root, fixture.case.route,
+                        fixture.request_for_status(
+                            final_observed, "NotAdmitted", request_id=f"p1616-{role.lower()}-rejected",
+                        ),
+                    )
+                    self._assert_status_admission_blocked(rejected)
                     self.assertEqual(before, fixture.snapshot(), "rejected W04 request changed authority")
+                    self.assertEqual(
+                        records_before, self._recording_snapshot(root),
+                        "rejected W04 request wrote Journal or Run records",
+                    )
                 except GoldenCorpusError as error:
                     self.fail(str(error))
                 finally:

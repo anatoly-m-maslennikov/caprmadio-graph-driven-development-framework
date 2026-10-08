@@ -115,6 +115,18 @@ class SelectedW04TerminalOutcomeAssertions(unittest.TestCase):
             "change_atom_status", "CA-O-029", expected_outcome="no_op", include_native_child=False,
         )
 
+    def test_status_admission_refusal_is_blocked_not_preview(self) -> None:
+        blocked = {
+            "disposition": "blocked",
+            "outcome": "blocked",
+            "effect_refs": [],
+            "lifecycle_error": {"code": "status-unadmitted", "message": "source model refused status"},
+        }
+        SelectedWorkflowsDockerEndToEnd._assert_status_admission_blocked(self, blocked)
+        preview = {**blocked, "disposition": "preview", "proposal_receipt": "forged"}
+        with self.assertRaises(AssertionError):
+            SelectedWorkflowsDockerEndToEnd._assert_status_admission_blocked(self, preview)
+
     def test_noop_probe_rejects_completed_terminal(self) -> None:
         harness = SelectedWorkflowsDockerEndToEnd(methodName="runTest")
         calls = iter((
