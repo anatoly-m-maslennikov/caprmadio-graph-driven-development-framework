@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 8
-updated_at: "2026-10-08 13:58:30 +0000"
+version: 7
+updated_at: "2026-10-08 11:29:09 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -85,14 +85,6 @@ the rebuilt unselected development image is `sha256:f8bcb97088e62728c6e48fca703e
 the current selected binding initially refused admission because two private source-carrier pins in D572 lagged the accepted Engine. Commit `5fab36806` updates only those pins, preserves D572@28, and advances its exact reader pin to D572@29. Fourteen focused admission tests passed. The serialized public binding has no admission drift, so no Manifest rewrite, Journal reconciliation or Release was performed. An actual advertised MCP reload restored current discovery and complete Change Atom Status context. P1615's closure preview was admitted without changing that Plan or dispatching a Run.
 
 the fresh unselected development image is `sha256:75759a40209b4f2ab9adae212d1f3d8f771bb252a986bcdd5d24dead90bb9cb9`, labelled with exact Engine commit `5fab36806`. The Terminal proof script now selects this image and a fresh retained report directory. The preceding accepted stdio and Status receipts remain exact historical evidence; this pin-only correction is not a new functional HTTP receipt. Installed N is unchanged.
-
-### Fresh authenticated HTTP proof and host harness correction
-
-the Operator's fresh Terminal report `http-5fab36806-terminal-DybImct0/full.log`, SHA-256 `5241c9078bea8affc3382c80112126379142c01e7c18fc611fabeeb39136841c`, ran 12 tests in 102.336 seconds. Each of the six cases completed authenticated MCP initialization and Tool listing, then failed before Workflow dispatch because the host harness incorrectly accessed `session_id` on the SDK's async context manager. This supersedes the original connection-level failure as the current observed proof defect; neither receipt establishes six-Workflow HTTP acceptance.
-
-Commit `9dea0a672` corrects only that host harness. It observes the actual server-issued `Mcp-Session-Id` response header through an awaited HTTP response hook and returns typed session metadata; missing or empty identifiers refuse before yielding. The existing cleanup stack, authentication, disabled proxies, denied-continuation and token-rotation checks remain unchanged. The real installed SDK with a mock HTTP transport reproduced the original AttributeError before the repair and passed afterward. Thirteen corpus tests and six security tests passed; the actual Docker opt-in test was skipped, not passed. The independent read-only review accepted host-harness SHA-256 `0c17f2bb27c9692b5bcde6302799de25d3790bfed9bccd1bacafddcaa0d23a15`.
-
-the candidate image remains exactly `sha256:75759a40209b4f2ab9adae212d1f3d8f771bb252a986bcdd5d24dead90bb9cb9`. No runtime implementation, D572 private pin, selected binding or installed N changed. The corrected host harness has separately recorded provenance and differs from the historical test copy baked into that image; no aggregate byte-identity claim is made. The same Terminal script is ready to collect a fresh retained actual HTTP receipt using this repaired host harness.
 
 ### Remaining acceptance blocker
 
