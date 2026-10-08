@@ -11,8 +11,8 @@ author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
 status: Active
-version: 1
-updated_at: "2026-10-06 03:53:17 +0000"
+version: 2
+updated_at: "2026-10-08 04:07:03 +0400"
 subjects:
   governs: "Prove the localhost HTTP MCP Docker path"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -26,17 +26,17 @@ Prove the localhost HTTP MCP Docker path
 
 ## Objective
 
-Verify the opt-in HTTP service in an actual isolated candidate container with an explicit loopback port and ephemeral test token.
+Verify the opt-in HTTP MCP service in an actual isolated candidate container with an explicit loopback port and ephemeral test token. This is required FIRST CUT evidence alongside the six scoped Workflows, existing stdio MCP/orchestrator compatibility, and shared journaling.
 
 ## Details
 
-Root owns actual Docker effects; current accepted HTTP packet and P1756 gate execution. Disposable project and explicit runtime environment only; no Codex Agent start or host socket mount.
+Root owns actual Docker effects; current accepted HTTP packet and P1756 gate execution. Use a disposable project and explicit runtime environment only; no Codex Agent start, host socket mount, baked secret, or undeclared host implementation mount. Preserve permissions, secret isolation, currentness, identity, status-model and Journal-evidence checks.
 
 Estimated bounded slice: <=15 minutes. Workers share the checkout, preserve other edits and do not stage or commit. Root owns integration and Git. Preparation does not prove runtime execution.
 
 ## Definition of Done
 
-Actual authenticated initialize/list/call, health and lifecycle tests pass on localhost; invalid credentials/Host/Origin fail before tools; stdio stays usable; retain bounded evidence.
+Actual authenticated initialize/list/call, health and lifecycle tests pass on localhost; invalid credentials, Host and Origin fail before tools; stdio stays usable; and startup/shutdown lifecycle evidence is retained. This must prove HTTP in Docker, not only host or build behavior. It does not claim all-sixteen/full-release coverage, N+1 promotion, automatic Release Version/prior-image retirement, or completion of deferred Scope Unit mutations, Revert, graph builders, or standalone advanced Artifact/Journal queries.
 
 ## Pre-execution review
 

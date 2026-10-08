@@ -16,8 +16,8 @@ subjects:
   depends_on:
     - "Operations"
     - "Implementation"
-version: 3
-updated_at: "2026-10-05 03:11:41 +0000"
+version: 4
+updated_at: "2026-10-08 04:07:03 +0400"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -33,15 +33,15 @@ Implement and verify adopted capabilities
 
 ## Objective
 
-Implement the thirteen selected Workflows and their required Steps, Actions, Tools and prompts from reviewed source Operations and RMED. Reuse existing orchestrator/MCP interfaces and implementations rather than rebuilding working behavior.
+Implement and verify the first usable cut: Create Atom, Update Atom, Replace Atom, Change Atom Status, the Implementation Workflow, and Build Applicable Methodology. Deliver these through the existing orchestrator and stdio MCP with shared Workflow/Action Journal evidence. Reuse reviewed current Operations, Methods and implementations; do not claim a new source of authority.
 
-Use the reviewed Implementation Workflow: compile applicable active Methods, bind Requirements/Delivery and Evaluations, build E2E/golden mock tests first, implement, then run the selected tests and diagnose failures. Preserve Operator-selected repair/rebuild choices and current retry/permission/confidence controls; a separate generalized learning campaign is not required here.
+Use the reviewed Implementation Workflow: compile applicable active Methods, bind Requirements/Delivery and Evaluations, build E2E/golden mock tests first, implement, then run the selected tests and diagnose failures. Preserve permissions, secrets, currentness, identity, status-model and Journal-evidence checks, including failure and no-op cases.
 
-Functional scenarios must exercise Create/Update/Replace/Change Status Atom, all four Scope Unit operations, approved Revert, all three Projection builds, and the Implementation Workflow itself. Prove Workflow-level and every Action-level Journal records, their lineage and terminal results; include failure and no-op cases. Validation, Relation checks, approval and journaling stay inside these execution paths.
+Scope Unit mutations, Revert, graph builders, standalone advanced Artifact/Journal query delivery, and automatic Release Version or prior-image retirement are deferred from this FIRST CUT. Their existing code, history and status remain preserved; this Plan does not delete them or represent them as done. Existing formal RMED Release gates also remain unchanged: this is neither an N+1 promotion nor a full-release claim.
 
 ### Work decomposition
 
-This is a composite task, not a fifteen-minute executable leaf. Its initial child files partition the work; add more <=15-minute one-file subtasks for remaining evidence, capability slices, reviews or failures. Roll-up effort depends on the frozen inventory. Inherit CA-P-1117 execution controls and its autonomous-confidence threshold; do not copy or override inherited values.
+This is a composite task, not a fifteen-minute executable leaf. Its child files partition the six workflow paths, orchestrator/stdio MCP compatibility, shared journaling, and the actual loopback Docker HTTP MCP proof owned by CA-P-1757. Inherit CA-P-1117 execution controls and its autonomous-confidence threshold; do not copy or override inherited values.
 
 Before marking this task Done, verify full-stage coverage and update the next dependent task(s) from actual results. A blocked child remains unfinished, has a C/Problem, and does not authorize bypassing this parent's gate.
 
@@ -49,4 +49,4 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ### Definition of Done
 
-This Plan is not Done if any of the thirteen selected Workflows or required support paths is unimplemented, lacks reviewed governing sources, fails functional scenarios or Journal completeness, or has undisposed independent implementation findings. Required leaves must be Done; other harvested capabilities are not implementation obligations.
+This Plan is not Done unless all six named Workflow paths have current governing sources and passing functional coverage; stdio MCP/orchestrator compatibility and shared Workflow/Action Journal lineage and terminal evidence are preserved; and CA-P-1757 supplies actual authenticated loopback Docker HTTP MCP proof. Required failure/no-op, permission, secret, currentness, identity and status-model checks must remain fail-closed. Deferred capabilities and unchanged formal Release gates are not FIRST CUT completion criteria.

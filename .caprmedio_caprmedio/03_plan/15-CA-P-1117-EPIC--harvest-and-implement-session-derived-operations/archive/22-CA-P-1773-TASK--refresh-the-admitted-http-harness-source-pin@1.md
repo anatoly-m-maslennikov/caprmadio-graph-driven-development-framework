@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 2
-updated_at: "2026-10-08 00:06:48 +0000"
+status: Archived
+version: 1
+updated_at: "2026-10-06 04:12:31 +0000"
 subjects:
   governs: "Release Harness source-pin refresh"
   depends_on: [Delivery, Evaluation, Implementation, Manifest]
@@ -39,7 +39,3 @@ The private pins reopen successfully, the unchanged sixteen-route manifest remai
 ## Pre-execution review
 
 Root selects this necessary mechanical pin refresh under the accepted E584/E585 HTTP proof, DRY and current source authority. Actual Docker verification remains P1757.
-
-## Approved first-cut disposition
-
-Release-specific source-pin acceptance is deferred to a later milestone. This Plan remains Active, and its exact-pin, source-currentness and no-historical-Run-rebinding boundaries remain in force. Docker HTTP MCP transport is retained in the approved first cut and is not deferred; an existing dependency actually required to prove that retained HTTP transport may be reused without treating this deferred Release-specific acceptance as complete or dispatching a Release refresh.

@@ -14,8 +14,8 @@ status: Active
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 2
-updated_at: "2026-10-06 03:53:17 +0000"
+version: 3
+updated_at: "2026-10-08 00:11:25 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -26,19 +26,14 @@ Review implemented code against RMED and Operations
 
 ## Objective
 
-Review the code delivered by this Epic against its current applicable active RMED and O Atoms before Epic closure.
+Review the approved first usable capability cut against its current applicable RMED and O Atoms. The required review covers only that cut, not formal N+1 release acceptance or the former all-sixteen-Workflow review.
 
 ## Details
 
-The Operator has restored the final review to the execution queue. It remains sequenced after the required implementation/runtime gates below. Current bounded code audits guide defect repairs, but do not count as final closure of this Task.
+The approved review frontier is exactly six Workflows: Create Atom, Update Atom, Replace Atom, Change Atom Status, Implementation, and Build Applicable Methodology. Review their actually used RMED/O, code, stdio MCP, orchestrator and Journal paths, including success, no-op and relevant failure records. The functional boundary also includes Docker HTTP MCP authentication, initialize/list/call/health/lifecycle and invalid credential, Host and Origin refusal.
 
-- Run after CA-P-1122, CA-P-1123, CA-P-1520, CA-P-1612 and CA-P-1620 finish their required implementation and verification.
-- Bind the exact code revision and working-tree state, governing Atom revisions and digests, accepted source reviews and declared scope. Cover all sixteen selected Workflows, their Actions, and the shared Tools, prompts, MCP, orchestrator, Journal and release/runtime paths they use; exclude unrelated harvested capabilities.
-- Compare required results (R), applicable implementation techniques (M), checks and tests (E), interfaces and Carriers (D), and the actual Workflow/Action behavior (O) with the saved code. Identify missing, conflicting, unsupported or extra behavior, rather than treating test counts or source presence as alignment.
-- Record every reviewed path, its governing Atoms, evidence and disposition in a coverage matrix. Keep unreviewed or inaccessible code explicitly incomplete.
-- Save the full report and a retained result/reference here. Create bounded repair Tasks for confirmed blocking gaps, then review the repaired paths; do not silently amend authority to match code.
-- This is a final composite review, not an unbounded leaf. Before execution, partition the frozen code/authority scope into independent <=15-minute review Tasks, with one subagent per Task. Existing permission and runtime blockers remain in force.
+The retained review records the exact source/code frontier and governing Atom identities for this cut. It does not assert a formal full N+1 release, all-sixteen-Workflow coverage, or closure of Automated Release, Scope mutations, Revert, graphs, standalone query branches or additional recovery hardening. Those remain deferred work, not accepted behavior.
 
 ## Definition of Done
 
-The full declared code scope has explicit review coverage against current RMED and O, the report and exact frontier are saved, and blocking findings are fixed and accepted or have an explicit Operator-approved disposition. A partial review, passing tests alone, stale evidence or an unresolved blocker cannot count as Done. CA-P-1124 must consume this result before closing the Epic.
+This Plan may be Done only after the six-Workflow frontier has explicit RMED/O-to-code coverage, functional stdio MCP/orchestrator/Journal evidence, and Docker HTTP MCP protocol/authentication evidence with truthful success, no-op and failure dispositions. This scope amendment does not establish that evidence; deferred branches and any formal release/Epic closure remain outside it.

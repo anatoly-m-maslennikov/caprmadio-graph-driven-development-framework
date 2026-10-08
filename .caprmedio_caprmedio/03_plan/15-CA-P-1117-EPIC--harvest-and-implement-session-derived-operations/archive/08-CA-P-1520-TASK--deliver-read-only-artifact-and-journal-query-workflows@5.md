@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Archived
 subjects:
   governs: "Read-only Artifact and Events Journal query Workflow delivery"
   depends_on: [Operations, Implementation, Workflow, Action, Tool, MCP, Journal]
-version: 6
-updated_at: "2026-10-08 00:06:48 +0000"
+version: 5
+updated_at: "2026-10-05 03:11:41 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124, CA-P-1655]
@@ -47,7 +47,3 @@ Both source/RMED packets, independent reviews, Tools, route integration, fresh-i
 ## Source-review repair frontier
 
 The current source gates are ACCEPTED P1532 and P1535. Completed REJECTED P1522/P1524/P1533 are retained history, not admission. Root reran 15 Artifact/shared-parser and 8 Journal tests successfully; P1544 coverage review remains pending, so Tool completion is not yet inferred. Actual shared Run/MCP behavior, source capture before own execution Events, fresh-image proof and closure remain separate required work. Exactly one CA-R-1850 filter authority and one shared parser are reused.
-
-## Approved first-cut disposition
-
-The first cut retains the six Workflow vertical slice for Atom CRUD/status, Implementation and Applicable Methodology, together with stdio/orchestration/journaling and Docker HTTP MCP transport. This standalone read-only query branch is deferred to a later milestone. It remains Active: no query source, Tool, route, image, Run or closure gate is marked Done, waived or inferred from the retained first cut. Existing lifecycle/runtime current-source binding maintenance may remain a supporting first-cut need; it does not reopen this query branch.

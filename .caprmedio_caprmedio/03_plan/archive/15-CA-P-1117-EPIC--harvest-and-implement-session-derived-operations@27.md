@@ -11,14 +11,14 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 28
-updated_at: "2026-10-08 00:07:29 +0000"
+version: 27
+updated_at: "2026-10-06 23:10:43 +0000"
 relations: {}
 ---
 # Summary
@@ -27,34 +27,9 @@ Harvest and implement session-derived operations
 
 ## Objective
 
-Deliver the first usable CAPRMEDIO cut selected by the Operator on 2026-10-08: the six retained Workflows below, with working stdio MCP, orchestration, shared Run journaling and HTTP MCP served from a Docker container. Reuse existing Actions, Tools, prompts, runtime infrastructure and reviewed RMED/O; finish only the implementation and acceptance needed for that cut.
+Deliver the Operator-selected minimal Workflow set below: authoritative methodology Operations, reviewed PROGRAMMATIC/PROMPTS RMED, working implementations, and functional Docker/MCP execution. Reuse existing Actions, Tools, prompts and runtime infrastructure where they meet the selected behavior.
 
-### First-cut scope — current authority
-
-The Operator's 2026-10-08 amendment supersedes earlier all-sixteen delivery, restored-optional-work and comprehensive release/audit obligations in this Epic. Older progress paragraphs below are retained evidence, not the current queue.
-
-Required Workflows:
-
-1. Create Atom.
-2. Update Atom.
-3. Replace Atom.
-4. Change Atom Status, including Archive through the same generic status capability.
-5. Implementation Workflow.
-6. Build Applicable Methodology.
-
-Required supporting capabilities:
-
-- existing stdio MCP and the orchestrator;
-- truthful shared Workflow/Action Run journaling; and
-- HTTP MCP served from a Docker container, bound to localhost, with current authenticated initialize/list/call, health and lifecycle checks, invalid credentials/Host/Origin refusal and continued stdio compatibility.
-
-Deferred delivery and extra acceptance: all Scope Unit mutation Workflows, Revert Changes automation, Entities/Terms Graph builders, standalone advanced Artifact/Journal query delivery, automated Release Version/upgrades, conditional prior-image retirement, extra recovery hardening and comprehensive sixteen-Workflow auditing. Preserve their existing sources, implementations, tests, task states and historical evidence. They remain later-milestone work; do not delete them, report them Done or use their unfinished delivery/audit tasks as first-cut blockers.
-
-Only necessary supporting code is included even if reused from a deferred branch. Its correctness, permission, secret, identity, currentness, preservation and Journal boundaries remain required. Do not hide a defect in a retained execution path by calling its owning tool optional.
-
-This first cut is not a claim of a complete automated N-to-N+1 release or promotion. Preserve installed N and its rollback proof. Existing normative Unit/E2E/Full Gate/promotion requirements still govern any actual formal Release or selected-runtime replacement; this scope amendment neither dispatches that deferred Workflow nor edits or bypasses its RMED. Required first-cut functional/container/HTTP acceptance remains real and source-bound.
-
-### Retained working-runtime and release history
+### First working runtime — current frontier
 
 Canonical methodology Workflow `release-methodology-first-cut-20261006-01` actually compiled 1,035 selected source Atoms with no source conflicts, completed its canonical Journal receipts, and passed currentness verification. The verified gate integration and derived output are saved at `394c7916e`; later bounded startup/cached-result corrections are saved separately.
 
@@ -98,7 +73,7 @@ fresh N15 was actually admitted through MCP after independent exact-seal review,
 
 CA-C-517 records the Operator's explicit approval to implement a guarded interrupted/unknown disposition for N15, preserving history and all no-replay/pass gates. independent lanes prepared the exact memory-boundary and host-independent deadline repairs, identified three MCP failures as thread-creation failures before their assertions, and captured the full child report with hashes. CA-P-1810 is reopened for the residual image-fixture resource boundary. current source-first packets are M343@5/D579@7/E586@4 and new R1895/M351/E594/D589 for the guarded resolver; authoring is not independent acceptance or implementation. root retains canonical integration, Git, binding publication and actual MCP effects. no restart, unknown terminal fact, promotion or retirement is claimed by these prepared packets.
 
-### Retained earlier scope and release history
+### Current Operator-selected scope
 
 CA-P-1780 and CA-P-1781 are Done. the first refresh correctly stopped before writing because later Git-backed binding changes had no generic carrier event. the separately approved observer, independently reviewed and committed at `7a15f736b`, records the exact current state once as recovered revision 3 at 2026-10-06T15:20:21+04:00. the later actual guarded refresh is completed revision 4 at 2026-10-06T15:21:02+04:00, explicitly linked to that observation. strict admission accepts all sixteen routes with canonical digest `19757c9cb6e5977f5193e5b2fcf5fccee0efabb923a7fee7f99bac43d820bc98`; no binding event is pending. historical Journal prefixes and installed N are unchanged. C496/C497 are resolved; no stale-history guard was bypassed. fresh N9 dispatch and all remaining Release gates are still required and not yet claimed.
 
@@ -110,7 +85,7 @@ fresh N11 `release-epic-resume-20261006-N11` was MCP-enqueued after independentl
 
 the Operator approved CA-P-1780's guarded binding refresh: update R1882/M339/E582/D576 first, independently review and implement the narrow private capability, then publish its exact source-derived refresh with canonical Journal evidence. preserve the fifteen non-Release routes, current Release route, query admissions and registry authority. installed N and historical Runs remain unchanged. fresh Release dispatch still uses MCP and all required gates.
 
-The former sixteen-Workflow scope is retained below as a reference. Current required membership is only the six Workflows and supporting Docker HTTP capability listed above; the others are deferred:
+The Operator selected these sixteen Workflows:
 
 1. Create Atom.
 2. Update Atom.
@@ -129,11 +104,11 @@ The former sixteen-Workflow scope is retained below as a reference. Current requ
 15. Find and Fetch Journal Events.
 16. Release Version, including project-local ca Skill installation without hooks.
 
-Build Applicable Methodology is the only required Projection Workflow in this first cut. The two graph builders remain reusable deferred implementations. A generic Rebuild Projections entrypoint is not an additional first-cut deliverable.
+The three Projection Workflows support rebuilding from current authoritative sources. A generic Rebuild Projections entrypoint may route to them; it is not an additional independent deliverable.
 
-Validation, Relation checks, approval gates and journaling remain required supporting behavior where used by the retained Workflows, not additional standalone Workflows. Preserve the current identity rule: an Update requiring a Summary change hands off to Replace. Change Status resolves the applicable current status model rather than hardcoding one Content Role. The retained Implementation and Applicable Methodology paths preserve their existing permission, source/currentness, conflict/approval and evidence boundaries. Deferred structural-change and Revert contracts remain unchanged for later use.
+Validation, Relation checks, approval gates, and journaling are required supporting behavior inside these Workflows and their Actions, not additional standalone Workflows. Preserve the current identity rule: an Update that requires a Summary change hands off to Replace; it does not silently update the existing Atom's Summary. Change Status resolves the applicable current status model instead of hardcoding one Content Role's statuses. Scope Unit changes use the authoritative Project Structure and preserve or explicitly report affected references. Revert preserves required history and performs only the approved reversal.
 
-The two deferred query Workflows retain their read-only contracts for a later milestone:
+The two query Workflows are read-only:
 
 - Artifact queries filter any Markdown frontmatter property and any heading/section property, including `#`, `##`, and deeper headings. Return Artifact IDs by default; fetch only caller-selected properties/sections, such as Claims, when requested.
 - Journal queries filter canonical Event fields. Return Event IDs by default; fetch only caller-selected fields or full Events when requested.
@@ -153,9 +128,9 @@ The existing selected Change Atom Status Workflow applies to any Atom and every 
 
 CA-P-1612 owns the bounded gap-closing decomposition below. Reuse CA-O-127/129/128 and the current generic status Action; extend source resolution and proof where needed rather than authoring another Workflow, Tool or independent status registry.
 
-### Deferred Release Version
+### Release Version
 
-The earlier approved automatic release path remains retained for a later milestone, not required first-cut delivery:
+The Operator selected this additional release path:
 
 1. Bind the selected next Version, exact source revision and release notes.
 2. Deliver a full Methodology source copy to root `101_LAYER_1_FRAMEWORK_METHODOLOGY/sources`.
@@ -168,7 +143,7 @@ The earlier approved automatic release path remains retained for a later milesto
 
 The first working vertical cut establishes a frozen Version N that builds and tests N+1. A release Run binds the executing N implementation and Methodology separately from the candidate N+1 sources/package. Changes being built do not silently redefine the running Workflow. Promote the candidate only after its required gates pass; retain N as the working runtime and rollback point until then.
 
-CA-P-1620 retains ownership of deferred source-first release authoring/review, implementation and actual-release verification. Its full gates remain unchanged whenever that Workflow is selected. Existing runtime bindings and exact source maintenance may still support retained MCP capabilities without executing Release Version. This first-cut Plan does not execute a release, retire an image or claim all sixteen routes verified.
+CA-P-1620 owns source-first authoring/review, test-first implementation and actual-release verification. The admitted sixteen-route successor is published and observed; earlier fifteen-route evidence remains historical proof of its bound predecessor only. Dispatch still requires fresh exact source admission and the actual runtime gates. This Plan does not itself execute a release or delete an image.
 
 ### Run journaling
 
@@ -180,14 +155,14 @@ Canonical Journal carriers use the single Project-local `.caprmedio_<project nam
 
 ### Projection behavior
 
-- Deferred: Build Entities Graph from current authoritative Entity declarations and properties, retaining source traceability.
-- Deferred: Build Terms Graph from current authoritative Term declarations and their own Relation Types, retaining source traceability.
+- Build Entities Graph from current authoritative Entity declarations and properties, including the declared Project Structure where applicable; retain source traceability.
+- Build Terms Graph from current authoritative Term declarations and their own Relation Types; retain source traceability.
 - Build Applicable Methodology from the selected Core Meta-Model, installed Extensions, and Project Configuration. Preserve original Atom relations, detect conflicts, and require Operator approval before source corrections.
 - All three outputs are derived Projections, not new sources of truth. Rebuilding them does not silently rewrite source authority. Report incomplete coverage, source conflicts, and stale or inaccessible inputs rather than claiming a complete Projection.
 
 ### Scope amendment and retained history
 
-The latest explicit Operator scope replaces the former all-sixteen delivery and comprehensive container/audit closure requirement. Required functional and Docker coverage now includes the six retained Workflows, the supporting paths they actually use and the actual localhost HTTP MCP container path. Image construction alone is insufficient. Deferred branches remain unfinished later-milestone work and do not block this first-cut closure.
+This explicit Operator scope replaces the former requirement to implement every adopted harvest capability and container-test every unrelated existing Tool. Required Docker coverage now includes all sixteen selected Workflows and the Actions, Tools, prompts, MCP paths and runtime infrastructure they actually use, including reused implementations. It is not satisfied by an image build alone.
 
 Keep the completed harvest, reconciliation, five additional authored Actions, layout repairs and their evidence. They remain available history and reusable sources; they do not create extra delivery obligations. No further harvest or broad reconciliation campaign is required. Existing child Plans must be rebound to this scope before execution; historical or unrelated leaves remain truthfully classified and are excluded from the required decomposition, not reported Done.
 
@@ -223,14 +198,13 @@ Authoring disposition: the earlier Plan files retain their independent reviews. 
 - CA-P-1121: Specify and independently review only the PROMPTS capabilities required by these Workflows.
 - CA-P-1122: Implement and functionally verify the selected capabilities from reviewed RMED.
 - CA-P-1123: Verify all selected execution paths in Docker, including MCP and reused dependencies.
-- CA-P-1124: Verify the six-Workflow and Docker HTTP coverage matrix, actual Run Journal evidence and scoped traceability, then close the first cut.
-- CA-P-1520: Deferred standalone query delivery and its remaining acceptance; preserve existing implementation and evidence.
+- CA-P-1124: Verify the sixteen-Workflow coverage matrix, Run Journal evidence and traceability, then close the Epic.
+- CA-P-1520: Deliver the two additional read-only query Workflows: source O/RMED authoring and independent reviews, test-first Tool implementation, discovery/MCP/orchestrator/shared-Journal integration, fresh-image E2E, and independent closure review.
 - CA-P-1612: Complete the existing Change Atom Status capability for every Content Role using current status/folder authority, then prove the resolved model and execution behavior independently.
-- CA-P-1620: Deferred automated Release Version, upgrade and prior-image disposition. Keep its formal release requirements unchanged; bounded runtime source-binding maintenance may remain a prerequisite for retained MCP use.
-- CA-P-1757: Required actual localhost HTTP MCP Docker proof with existing authenticated transport and stdio compatibility.
-- CA-P-1655: Final code/RMED/O review only for the six retained Workflows and their used supporting paths, including Docker HTTP; this scoped review blocks CA-P-1124 and first-cut closure.
+- CA-P-1620: Deliver Release Version from independently reviewed source/RMED, including complete Methodology/runtime-package/project-Skill installation and actual new-image verification before exact old-image retirement.
+- CA-P-1655: Final code review against the current applicable RMED and Operations, covering all sixteen selected Workflows and their used implementation paths; this review blocks CA-P-1124 and Epic closure.
 
-The existing composites retain completed history but their current required membership is rebound to the first cut. Classify unfinished descendants explicitly as required supporting work or deferred later-milestone work before closure; retain their truthful statuses rather than marking excluded work Done. Query, graph, structural mutation, Revert and automated release acceptance are not required merely because old child Plans remain under the Epic. Create only necessary bounded leaves and reuse accepted implementations and evidence; preparation and file presence do not prove completion.
+The original six composite stages retain the original thirteen-Workflow execution branch; CA-P-1520 is a separately governed required composite for the two additions. Existing bounded preflights bind work to their selected Workflows, not to an open-ended harvest inventory. Create only necessary <=15-minute authoring, review, implementation or verification leaves; preparation does not count as implementing a Workflow. The two new source packets are saved but their initial reviews rejected them. Repairs and current independent acceptance, rather than file presence or completed rejected reviews, gate dependent implementation.
 
 ### Execution controls
 
@@ -245,9 +219,9 @@ The existing composites retain completed history but their current required memb
 
 ## Details
 
-### Retained pre-amendment execution frontier
+### Current execution frontier
 
-### Retained earlier restored execution frontier
+### Restored execution frontier
 
 The latest Operator instruction supersedes the first-cut deferrals below. Resume the existing P1620 release chain, P1616 all-role status proof, P1527-P1529 query proof, P1713/P1716 recovery, and P1655 then P1124 final closure. Exact prior-image retirement remains conditional on successful promotion and absence of container/rollback references; retain a required image with a truthful disposition, never force-delete it. Each restored lane uses the existing accepted source contract; no new harvest or broad methodology review is authorized.
 
@@ -327,12 +301,6 @@ P1510–P1519 bind the test-first implementation packets. P1536 completed Implem
 
 ### Definition of Done
 
-CA-P-1655 completes the scoped final code-versus-RMED/O review for the six retained Workflows and their used support paths, including Docker HTTP. Resolve blocking findings in those paths before CA-P-1124 closes the first cut.
+CA-P-1655 must finish the final code-versus-RMED/O review with explicit coverage, saved evidence and resolved blocking findings before CA-P-1124 closes this Epic. Passing tests alone do not replace that comparison.
 
-Each retained Workflow has current reviewed definitions, located RMED/O and a working implementation with actual functional Docker/MCP evidence for its required behavior. Retained acceptance verifies truthful Workflow/Action Journal records and results, identity/history preservation, current generic status handling and applicable permission/secret/currentness boundaries. Build Applicable Methodology has source traceability, conflict/approval handling and actual rebuild/currentness evidence.
-
-HTTP MCP actually runs inside a Docker container on localhost. Authenticated initialize/list/call, health and lifecycle checks pass; invalid credentials/Host/Origin are refused and stdio remains usable. The coverage matrix identifies actual source, implementation, container/image, Run, Action and result evidence instead of inferring success from files, build output or scheduler status.
-
-Only the required retained/supporting child work must be Done. Every unfinished descendant is explicitly classified as retained required work or deferred work; deferred capabilities are preserved and remain unfinished for a later milestone. No all-sixteen coverage, graph/query/Revert/structural mutation delivery, automatic upgrade, old-image retirement, extra recovery hardening or comprehensive optional-code audit is claimed or required for this first cut.
-
-Installed N, historical Runs, source/Projection/Journal provenance and unrelated changes remain preserved. No formal N-to-N+1 release or selected-runtime promotion is inferred; any such effect still requires its unchanged normative gates. Use the approved mechanical Git exception; a skipped commit has an explicit disposition, and nonblocking Concerns retain justified dispositions.
+This Epic is not Done until all sixteen selected Workflows have reviewed source definitions, correctly located RMED, implementations and passing functional Docker/MCP evidence for their required execution paths; every Workflow Run and Action Run in the acceptance scenarios has truthful Journal evidence; all three main Projections have passing source-traceability and rebuild evidence; and every required composite/leaf, repair or review is Done with blocking findings resolved. The coverage matrix must identify actual source, implementation, image, Run, Action and result evidence for every selected Workflow, not infer coverage from file presence or a successful image build. The two query Workflows additionally require source-snapshot-stable, read-only query proof, default-ID and selected-fetch proof, invalid-filter/coverage/pagination proof, and a no-credentials/secrets proof. Release Version additionally requires full source copy, accepted compilation, complete runtime package, project-local ca Skill without hooks, full-suite and actual new-image/installation verification, safe exact old-image retirement, and the frozen N-to-N+1 promotion boundary. Preserve required history and source/Projection/Journal/Git provenance under the approved save exception. Operator-excluded harvest work, unrelated additional capability delivery and legacy administrative closure are not required completion and are never falsely reported Done. A skipped commit requires an explicit disposition; nonblocking Concerns retain justified dispositions.

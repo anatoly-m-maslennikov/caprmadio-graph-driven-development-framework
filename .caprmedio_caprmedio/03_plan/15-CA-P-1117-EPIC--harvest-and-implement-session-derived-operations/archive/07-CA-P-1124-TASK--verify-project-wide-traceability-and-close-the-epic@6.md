@@ -10,14 +10,14 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Archived
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 7
-updated_at: "2026-10-08 00:11:25 +0000"
+version: 6
+updated_at: "2026-10-05 13:59:15 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -28,7 +28,7 @@ Verify project-wide traceability and close the epic
 
 ## Objective
 
-Verify the approved first usable capability cut: Create Atom, Update Atom, Replace Atom, Change Atom Status, Implementation and Build Applicable Methodology. Its required traceability runs from the actual used RMED/O and source code through stdio MCP/orchestrator/Workflow-Action Journal behavior and Docker HTTP MCP protocol behavior.
+Verify an exact sixteen-Workflow coverage matrix under current CA-P-1117v14 and CA-P-1620v1 from current source Operations through reviewed RMED, implementation, Docker/MCP execution, Workflow/Action Run Journal records, and results before closing CA-P-1117. Check all three Projection builds and source traceability, approved Revert, identity-preserving Update versus Replace, applicable status models, Scope Unit changes, and the two read-only query Workflows. For query coverage, prove current Events Journal is the only Journal source, arbitrary frontmatter/heading properties and requested statuses are not silently excluded, boolean filter grammar is unambiguous and non-evaluating, default ID and optional selected fetch behavior is correct, malformed-carrier/missing-ID/duplicate-heading-or-property/incomplete-read diagnostics prevent false completeness, and a query neither returns credentials/secrets nor creates mutation authority or fictitious Runs.
 
 Retain historical harvest and additional authored work with their truthful dispositions. CA-P-1118 and CA-P-1131's excluded legacy closure are not required completion; CA-C-410 remains an unresolved but nonblocking historical placement defect for this amended scope. Do not call these Done or claim their failures fixed. A finding that affects an actual selected execution path still blocks that path.
 
@@ -40,13 +40,11 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ## Details
 
-This revision narrows the closure scope to the approved first cut; it records no completed acceptance or closure. CA-P-1655v3 remains an Active bounded code-versus-RMED/O review. Once the retained requirements and actual evidence pass, this Task may close the amended CA-P-1117 without claiming its deferred capabilities complete. Required functional evidence covers success, no-op and relevant failure Journal dispositions; Docker HTTP MCP authentication, initialize/list/call/health/lifecycle; invalid credential, Host and Origin refusal; and preserved stdio compatibility.
+Final coverage verification and Epic closure are temporarily deferred by the Operator's direction to skip queue item #5 for now. This Task remains unfinished; its acceptance requirements are retained and no closure is claimed. The implementation and required runtime tests continue separately.
 
-Automated Release, Scope mutations, Revert, graph work, standalone query branches and additional recovery hardening are deferred. They are not claimed complete, do not become covered through this closure, and retain their own future acceptance work.
+### Sixteenth Workflow closure mapping
 
-### Deferred full-release and sixteen-Workflow mapping
-
-When the deferred full-release milestone is selected, its matrix must add Release Version without relabeling earlier route evidence. Map executing N and candidate N+1 separately to exact source/Version, accepted O/RMED and additive route admission, implementation, release notes, package manifest/digests, copied-source and compiled/runtime delivery destinations, full-suite results, project-local ca Skill target, image/container references, rollback/retirement state, actual Workflow/Action Run IDs and canonical Journal/report evidence. This is not required first-cut acceptance.
+The final matrix must add Release Version without relabeling the earlier fifteen-route evidence. Map the executing N and candidate N+1 separately to exact source/Version, accepted O/RMED and additive route admission, implementation, release notes, package manifest/digests, copied-source and compiled/runtime delivery destinations, full-suite results, project-local ca Skill target, current image/container references, rollback/retirement state, actual Workflow/Action Run IDs and canonical Journal/report evidence.
 
 Verify the full Methodology source copy at root `101_LAYER_1_FRAMEWORK_METHODOLOGY/sources`, accepted compilation from those pinned sources and consistent runtime-consumed Methodology under `.caprmedio_caprmedio/000_CAPRMEDIO_framework`. Source review must reconcile the existing Structure delivery binding and settle exact compiled layout before effects. Verify the full declared Framework package under `.caprmedio_runtime`, including Methodology, Engine, Tools, applications, MCP, Skills and required resources, rather than an Engine-only delivery. Installed source/package copies remain derived; upstream authoring sources and the single canonical Journal/Projection authority remain intact.
 
@@ -64,6 +62,6 @@ Exact committed P1124v4 predecessor from `0ca6fcf2b9a4d44a96e3661d0a389dc9a700ef
 
 ### Definition of Done
 
-CA-P-1655v3 is the required review gate for this six-Workflow frontier. This Plan may be Done only after its source/code/RMED/O, stdio MCP/orchestrator/Journal, and Docker HTTP MCP evidence is recorded with honest success, no-op and failure dispositions; this scope-only amendment establishes none of that evidence.
+CA-P-1655 is a required final review gate: consume its current code-versus-RMED/O report, exact source/code frontier and blocking-finding dispositions before closure. A pending, partial or rejected review prevents this Plan and the Epic from being Done.
 
-This does not claim formal N+1 release, all-sixteen-Workflow coverage, or completion of any deferred branch. The retained full-release, query, Revert, graph, Scope-mutation and recovery requirements above remain future acceptance requirements and cannot be inferred complete from this first usable cut.
+This Plan is not Done until all required stages/leaves are Done and every one of the sixteen selected Workflows has exact reviewed-source, RMED, implementation, image, Run/Action Journal and passing result evidence. Projections must remain derived, all required supporting paths covered and blocking findings resolved. The two query Workflows require P1529's independent closure review in addition to their source, Tool, discovery/MCP/orchestrator/shared-Journal, and fresh-image evidence. Release Version also requires exact full-source/compilation/package/Skill-no-hooks/full-suite/current-image/rollback/safe-retirement evidence, frozen executing N versus candidate N+1 and independently accepted additive admission; C447/C449 remain required unresolved gates rather than historical successes. Excluded harvest/capability/administrative work stays truthfully classified with justified nonblocking dispositions; it is not inferred complete.

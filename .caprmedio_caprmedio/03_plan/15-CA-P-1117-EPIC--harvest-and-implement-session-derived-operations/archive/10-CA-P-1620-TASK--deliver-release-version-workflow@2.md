@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Deliver Release Version Workflow"
   depends_on: [Workflow, Action, Tool, Methodology, Implementation, Projection, Skill, Journal]
-version: 3
-updated_at: "2026-10-08 00:06:48 +0000"
+version: 2
+updated_at: "2026-10-05 03:11:41 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1123, CA-P-1124, CA-P-1655]
@@ -47,7 +47,3 @@ All four required children and their bounded remainders are Done; independently 
 ## Planning review
 
 /root/review_combined_query_tools independently ACCEPTED the P1620–P1624 planning packet after the premature global-review assertion was corrected. This is Plan-only progression: no release source, Tool, installation, current image or retirement is accepted by that verdict. The source-authoring stage is decomposed into bounded O, RMED and existing-interface binding children; all three gate the complete-packet source review P1622. The executing N remains frozen while candidate N+1 is built and tested separately.
-
-## Approved first-cut disposition
-
-Automated Release execution, promotion and exact old-image retirement are deferred to a later milestone. This Plan remains Active; its formal RMED release gates, installed N baseline, interrupted-Run evidence, source/currentness and safety checks, and truthful Journal requirements remain in force and are neither waived nor relabeled complete. Existing lifecycle/runtime current-source binding maintenance may support the retained first cut, but it does not authorize an automated Release, a new image claim, promotion or retirement.
