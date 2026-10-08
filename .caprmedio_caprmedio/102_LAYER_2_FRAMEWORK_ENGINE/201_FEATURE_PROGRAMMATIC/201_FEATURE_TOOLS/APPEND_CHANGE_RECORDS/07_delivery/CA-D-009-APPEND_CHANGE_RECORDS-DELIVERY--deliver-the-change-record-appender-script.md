@@ -10,8 +10,8 @@ subjects:
     - "Artifact/Carrier"
     - "Project"
     - "Applicable Methodology"
-version: 16
-updated_at: "2026-09-16 21:24:29 +0000"
+version: 17
+updated_at: "2026-10-08 02:28:30 +0000"
 relations:
   relates_to:
     - CA-R-1491
@@ -31,3 +31,16 @@ APPEND_CHANGE_RECORDS **must** be delivered through the canonical source script 
 - restrict admission checks **to** the event representation **and** storage-integrity boundary of CA-R-1491 **and** CA-D-340. the shared library **must not** apply Atom-ID grammar, filename conventions, lifecycle rules, folder-placement rules, **or** relation-validity checks as append gates.
 - preserve recorded Project values **without** renaming **or** repairing them. accepted event storage does **not** certify the recorded Project state.
 - keep mutable lease **and** append state under `.caprmedio_runtime`. the shared implementation remains a library, **not** an additional executable Tool.
+
+## Carrier-only recovered baseline
+
+schema-version-3 `recovered` `governed_project_state` file records **may** encode observed present state through `recovery_evidence` with **=1** `carrier` object:
+
+- `path`: the recorded result path;
+- `sha256`: the recorded result digest;
+- `observed_at`: the record's timezone-qualified Occurred At; **and**
+- `observer_run_id`: the actual observing Run identifier.
+
+this closed Carrier-only representation establishes present state **only**. the Author **and** Occurred At identify its recorder **and** observation, **not** an unobserved historical creator **or** creation time. historical Actor, time, intent, Scope, **and** outcome remain unproven unless separately evidenced.
+
+retain accepted schema-version-3 `git` **and** `carrier` recovery evidence **and** schema-version-2 read compatibility. Git corroboration is optional for this Carrier-only representation. a recovered record carries **none** of `action_type`, `sources`, **or** `previous_result_event`; a subsequent non-ADD change links **to** the confirmed baseline through `previous_result_event`. admission verifies this representation **and** recording integrity, **not** current Project grammar.

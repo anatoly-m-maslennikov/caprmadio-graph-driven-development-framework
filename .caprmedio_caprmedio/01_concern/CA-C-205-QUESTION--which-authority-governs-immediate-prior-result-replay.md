@@ -7,8 +7,8 @@ subjects:
     - "Evaluation"
     - "Relation"
 priority: medium
-version: 2
-updated_at: "2026-09-17 22:54:32 +0000"
+version: 3
+updated_at: "2026-10-08 02:28:30 +0000"
 llm_session_ids:
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
 relations: {}
@@ -48,3 +48,15 @@ do **not** mechanically rename event types, silently authorize new v2 writes, re
 - `CA-E-200@13`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/06_evaluation/CA-E-200-APPEND_CHANGE_RECORDS-QA_CASE--recover-the-first-prior-result-without-invention.md`; SHA-256 `3af5d253c4cdf72c864e19f68cd2639d2bb333c3c6cb95afcec45f4a134e6ba3`.
 - `CA-D-009@16`: `.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/APPEND_CHANGE_RECORDS/07_delivery/CA-D-009-APPEND_CHANGE_RECORDS-DELIVERY--deliver-the-change-record-appender-script.md`; SHA-256 `f4d75b42176081e6568749153636600ce53bed60be8b6f9c9c9345c0360dd8b1`.
 - `CAPRMEDIO-GOV-REQU-340@13`: `.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CAPRMEDIO-GOV-REQU-340-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention.md`; SHA-256 `24f392364f1a5f94da587c95a70fcaa76fd7deb90b8154faf4058419cc24361e`.
+
+## Retained lifecycle baseline decision
+
+for the first-cut Update Atom **and** Change Atom Status paths, use a separate schema-version-3 `recovered` `governed_project_state` file baseline **when** no exact prior recorded result exists **and** the actual present Carrier is sufficiently evidenced. `CA-R-1644-CORE_META_MODEL-CORE-REQUIREMENT--recover-work-journal-coverage-without-invention` admits observed Carrier state; `CA-E-464-CORE_META_MODEL-EVALUATION_APPROACH--validate-journal-independence-from-git` rejects mandatory Git dependence. `CA-D-009-APPEND_CHANGE_RECORDS-DELIVERY--deliver-the-change-record-appender-script` Revision 17 encodes the closed Carrier-only evidence variant.
+
+- record the actual observer, observation time, path, **and** digest, **not** fabricated historical facts.
+- confirm baseline recording **before** the mutation. unconfirmed recording blocks effects.
+- link the observed non-ADD change **to** its confirmed prior event. unconfirmed post-effect recording retains the actual effects **and** remains partial; retry recording **only**, **not** the mutation.
+- a no-op introduces **none** of a fictitious baseline **or** change record; retain ordinary Run evidence.
+- preserve all historical event bytes **and** Replace Atom's exact current-state predecessor check.
+
+this disposition addresses the retained lifecycle producer **only**. the broader legacy Evaluation replay-link question remains open, **and** the implementation **and** composition test receipts remain required before closure.
