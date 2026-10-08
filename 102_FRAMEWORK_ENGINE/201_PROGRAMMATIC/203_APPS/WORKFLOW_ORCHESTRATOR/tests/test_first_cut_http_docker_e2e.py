@@ -7,6 +7,7 @@ evidence for the bounded cut, not a Release/promotion or all-route suite.
 from __future__ import annotations
 
 import asyncio
+from contextlib import AsyncExitStack, asynccontextmanager
 import json
 import os
 from dataclasses import dataclass
@@ -77,9 +78,36 @@ async def _attempt_cleanup(first_failure: BaseException | None, action) -> BaseE
     """Run one teardown action without hiding an earlier failure."""
     try:
         await action()
+    except asyncio.CancelledError:
+        raise
     except BaseException as error:
         return error if first_failure is None else first_failure
     return first_failure
+
+
+@asynccontextmanager
+async def _entered_http_session(client, transport, session_factory):
+    """Enter all HTTP contexts atomically, including failed initialization."""
+    async with AsyncExitStack() as stack:
+        stack.push_async_callback(client.aclose)
+        streams = await stack.enter_async_context(transport)
+        session = session_factory(*streams)
+        await stack.enter_async_context(session)
+        await session.initialize()
+        yield session
+
+
+def _raise_terminal_cancellation(failure: BaseException | None) -> None:
+    """Do not let unittest subtests turn cancellation into another case."""
+    if isinstance(failure, asyncio.CancelledError):
+        raise failure
+
+
+async def _cleanup_attempted_http_start(first_failure: BaseException | None, attempted: bool, stop) -> BaseException | None:
+    """Stop a service that Compose may have created before reporting startup failure."""
+    if not attempted:
+        return first_failure
+    return await _attempt_cleanup(first_failure, stop)
 
 
 class FirstCutCorpusTests(unittest.TestCase):
@@ -132,7 +160,116 @@ class FirstCutCorpusTests(unittest.TestCase):
         self.assertIsInstance(failure, RuntimeError)
         self.assertEqual("first cleanup failure", str(failure))
 
+    def test_failed_http_initialization_unwinds_all_entered_contexts(self) -> None:
+        events = []
+
+        class Client:
+            async def aclose(self) -> None:
+                events.append("client-close")
+
+        class Transport:
+            async def __aenter__(self):
+                events.append("transport-enter")
+                return ("read", "write", "meta")
+
+            async def __aexit__(self, *_unused) -> None:
+                events.append("transport-exit")
+
+        class Session:
+            async def __aenter__(self):
+                events.append("session-enter")
+                return self
+
+            async def __aexit__(self, *_unused) -> None:
+                events.append("session-exit")
+
+            async def initialize(self) -> None:
+                events.append("initialize")
+                raise ConnectionError("initialize failed")
+
+        async def attempt() -> None:
+            with self.assertRaisesRegex(ConnectionError, "initialize failed"):
+                async with _entered_http_session(Client(), Transport(), lambda *_streams: Session()):
+                    self.fail("failed initialization must not yield a session")
+
+        asyncio.run(attempt())
+        self.assertEqual(
+            ["transport-enter", "session-enter", "initialize", "session-exit", "transport-exit", "client-close"],
+            events,
+        )
+
+    def test_cancellation_terminalizes_before_a_second_case_starts(self) -> None:
+        starts = []
+
+        def run_cases() -> None:
+            for case in ("W01", "W02"):
+                starts.append(case)
+                _raise_terminal_cancellation(asyncio.CancelledError() if case == "W01" else None)
+
+        with self.assertRaises(asyncio.CancelledError):
+            run_cases()
+        self.assertEqual(["W01"], starts)
+
+    def test_failed_http_start_still_runs_http_stop_cleanup(self) -> None:
+        calls = []
+        start_failure = RuntimeError("HTTP startup failed after compose created a service")
+
+        async def stop() -> None:
+            calls.append("stop")
+
+        failure = asyncio.run(_cleanup_attempted_http_start(start_failure, True, stop))
+        self.assertEqual(["stop"], calls)
+        self.assertIs(failure, start_failure)
+
+    def test_cleanup_waits_for_http_startup_task_before_stopping(self) -> None:
+        events = []
+
+        class Runtime:
+            def mcp_http_stop(self):
+                events.append("http-stop")
+                return {"outcome": "stopped"}
+
+            def mcp_http_status(self):
+                events.append("http-status")
+                return {"services": [{"Service": "mcp-http", "State": "exited"}]}
+
+        class Temporary:
+            def cleanup(self) -> None:
+                events.append("fixture-cleanup")
+
+        class Assertions:
+            async def _stop(self, _runtime) -> None:
+                events.append("runtime-stop")
+
+        async def startup() -> None:
+            events.append("http-startup")
+            await asyncio.sleep(0)
+            events.append("http-startup-complete")
+
+        async def check() -> None:
+            harness = FirstCutHttpDockerEndToEnd("test_six_workflows_over_authenticated_http_mcp")
+            harness._assertions = Assertions()
+            startup_task = asyncio.create_task(startup())
+            failure = await harness._cleanup_case(
+                None,
+                runtime=Runtime(),
+                temporary=Temporary(),
+                startup_task=None,
+                http_start_attempted=True,
+                http_startup_task=startup_task,
+                token="synthetic-token",
+            )
+            self.assertIsNone(failure)
+
+        asyncio.run(check())
+        self.assertLess(events.index("http-startup-complete"), events.index("http-stop"), events)
+
     def test_loopback_client_ignores_inherited_socks_proxy(self) -> None:
+        try:
+            import httpx2  # noqa: F401
+        except ModuleNotFoundError:
+            self.skipTest("optional HTTP E2E client dependency is unavailable")
+
         async def check_client() -> None:
             with mock.patch.dict(os.environ, {"ALL_PROXY": "socks5://127.0.0.1:9"}):
                 client = FirstCutHttpDockerEndToEnd._http_client("synthetic-token")
@@ -201,23 +338,15 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         # through a process-wide HTTP/SOCKS proxy inherited from the host.
         return httpx2.AsyncClient(headers={"Authorization": f"Bearer {token}"}, trust_env=False)
 
+    @asynccontextmanager
     async def _http_session(self, url: str, token: str):
         from mcp.client.session import ClientSession
         from mcp.client.streamable_http import streamable_http_client
 
         client = self._http_client(token)
         transport = streamable_http_client(url, http_client=client)
-        streams = await transport.__aenter__()
-        session = ClientSession(*streams)
-        await session.__aenter__()
-        await session.initialize()
-        return client, transport, session
-
-    @staticmethod
-    async def _close_http_session(client, transport, session) -> None:
-        await session.__aexit__(None, None, None)
-        await transport.__aexit__(None, None, None)
-        await client.aclose()
+        async with _entered_http_session(client, transport, ClientSession) as session:
+            yield session
 
     async def _http_terminal_status(self, session, run_id: str) -> dict:
         deadline = asyncio.get_running_loop().time() + 75
@@ -257,18 +386,21 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         *,
         runtime,
         temporary,
-        worker_started: bool,
-        http_started: bool,
-        client,
-        transport,
-        session,
+        startup_task,
+        http_start_attempted: bool,
+        http_startup_task,
         token: str | None,
     ) -> BaseException | None:
         """Always close HTTP, stop services, and clean fixtures in that order."""
         failure = first_failure
 
-        async def close_session() -> None:
-            await self._close_http_session(client, transport, session)
+        async def settle_startup() -> None:
+            if startup_task is not None:
+                await asyncio.shield(startup_task)
+
+        async def settle_http_startup() -> None:
+            if http_startup_task is not None:
+                await asyncio.shield(http_startup_task)
 
         async def stop_http() -> None:
             stopped = await asyncio.to_thread(runtime.mcp_http_stop)
@@ -278,41 +410,43 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 stopped_status, token, expected_states={"stopped", "exited"}, expected_health=None,
             )
 
-        async def stop_worker() -> None:
+        async def stop_runtime() -> None:
             await self._assertions._stop(runtime)
 
         async def clean_fixture() -> None:
             temporary.cleanup()
 
         try:
-            if session is not None:
-                failure = await _attempt_cleanup(failure, close_session)
+            failure = await _attempt_cleanup(failure, settle_startup)
         finally:
             try:
-                if http_started:
-                    failure = await _attempt_cleanup(failure, stop_http)
+                failure = await _attempt_cleanup(failure, settle_http_startup)
             finally:
                 try:
-                    if worker_started:
-                        failure = await _attempt_cleanup(failure, stop_worker)
+                    failure = await _cleanup_attempted_http_start(failure, http_start_attempted, stop_http)
                 finally:
-                    failure = await _attempt_cleanup(failure, clean_fixture)
+                    try:
+                        if startup_task is not None:
+                            failure = await _attempt_cleanup(failure, stop_runtime)
+                    finally:
+                        failure = await _attempt_cleanup(failure, clean_fixture)
         return failure
 
     async def test_six_workflows_over_authenticated_http_mcp(self) -> None:
+        terminal_cancellation = None
         for case_id, route in FIRST_CUT_CASES:
             with self.subTest(case=case_id):
                 temporary, root, fixture = self._assertions._new_fixture(selected_harness.GoldenCase(case_id, route))
                 runtime = self._assertions._runtime(root)
-                worker_started = False
-                http_started = False
-                client = transport = session = None
+                startup_task = None
+                http_start_attempted = False
+                http_startup_task = None
                 token = None
                 failure = None
                 try:
                     fixture.prepare()
-                    worker_started = True
-                    await self._assertions._start(runtime)
+                    startup_task = asyncio.create_task(self._assertions._start(runtime))
+                    await asyncio.shield(startup_task)
                     if case_id == "W01":
                         stdio_context = await self._assertions._call(
                             runtime, root, "get_execution_context", {"id": "create_atom"},
@@ -324,56 +458,59 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     token, port = self._http_environment()
                     os.environ["CAPRMEDIO_MCP_HTTP_SECRET_TOKEN"] = token
                     os.environ["CAPRMEDIO_MCP_HTTP_PORT"] = str(port)
-                    started = await asyncio.to_thread(runtime.mcp_http_start)
-                    http_started = True
+                    http_start_attempted = True
+                    http_startup_task = asyncio.create_task(asyncio.to_thread(runtime.mcp_http_start))
+                    started = await asyncio.shield(http_startup_task)
                     self.assertEqual(f"http://127.0.0.1:{port}/mcp", started["url"])
                     running_status = await asyncio.to_thread(runtime.mcp_http_status)
                     self._assert_http_lifecycle_status(
                         running_status, token, expected_states={"running"}, expected_health="healthy",
                     )
-                    client, transport, session = await self._http_session(started["url"], token)
-                    names = {tool.name for tool in (await session.list_tools()).tools}
-                    self.assertIn(route, names)
-                    self.assertIn("workflow_orchestrator", names)
-                    await asyncio.to_thread(
-                        probe_first_cut_http_security,
-                        started["url"],
-                        token,
-                        list_tools=lambda _url, _token: names,
-                        recording_boundary=lambda: self._assertions._recording_snapshot(root),
-                    )
-                    request_id = f"first-cut-http-{case_id.lower()}"
-                    before = fixture.snapshot()
-                    preview = selected_harness._structured_tool_result(await session.call_tool(
-                        route, {"request": fixture.request(request_id=request_id)},
-                    ))
-                    self.assertEqual("preview", preview.get("disposition"), preview)
-                    self.assertEqual(before, fixture.snapshot(), "HTTP preview changed authority")
-                    execute = fixture.request(
-                        request_id=request_id, mode="execute",
-                        receipt=preview["proposal_receipt"],
-                        receipt_digest=preview["proposal_receipt_digest"],
-                    )
-                    admitted = selected_harness._structured_tool_result(await session.call_tool(
-                        "workflow_orchestrator",
-                        {"request": {"operation": "enqueue_selected", "run_id": request_id,
-                                     "execution": execute}},
-                    ))
-                    self.assertIn(admitted.get("outcome"),
-                                  {"queued", "admitted", "started", "running", "pending", "completed"}, admitted)
-                    terminal = await self._http_terminal_status(session, request_id)
-                    self.assertEqual("terminal", terminal.get("disposition"), terminal)
-                    self.assertEqual("completed", terminal.get("outcome"), terminal)
-                    selected = terminal.get("selected_result")
-                    self.assertIsInstance(selected, dict, terminal)
-                    graph = self._assertions._graph_result(root, request_id)
-                    rows = self._assertions._assert_graph_path_and_native_results(root, fixture, request_id, graph)
-                    self._assertions._assert_shared_run_journal(
-                        root, request_id, self._assertions._route_binding(fixture), selected, graph,
-                    )
-                    self._assertions._assert_route_specific_effects(root, fixture, execute, before, rows)
+                    async with self._http_session(started["url"], token) as session:
+                        names = {tool.name for tool in (await session.list_tools()).tools}
+                        self.assertIn(route, names)
+                        self.assertIn("workflow_orchestrator", names)
+                        await asyncio.to_thread(
+                            probe_first_cut_http_security,
+                            started["url"],
+                            token,
+                            list_tools=lambda _url, _token: names,
+                            recording_boundary=lambda: self._assertions._recording_snapshot(root),
+                        )
+                        request_id = f"first-cut-http-{case_id.lower()}"
+                        before = fixture.snapshot()
+                        preview = selected_harness._structured_tool_result(await session.call_tool(
+                            route, {"request": fixture.request(request_id=request_id)},
+                        ))
+                        self.assertEqual("preview", preview.get("disposition"), preview)
+                        self.assertEqual(before, fixture.snapshot(), "HTTP preview changed authority")
+                        execute = fixture.request(
+                            request_id=request_id, mode="execute",
+                            receipt=preview["proposal_receipt"],
+                            receipt_digest=preview["proposal_receipt_digest"],
+                        )
+                        admitted = selected_harness._structured_tool_result(await session.call_tool(
+                            "workflow_orchestrator",
+                            {"request": {"operation": "enqueue_selected", "run_id": request_id,
+                                         "execution": execute}},
+                        ))
+                        self.assertIn(admitted.get("outcome"),
+                                      {"queued", "admitted", "started", "running", "pending", "completed"}, admitted)
+                        terminal = await self._http_terminal_status(session, request_id)
+                        self.assertEqual("terminal", terminal.get("disposition"), terminal)
+                        self.assertEqual("completed", terminal.get("outcome"), terminal)
+                        selected = terminal.get("selected_result")
+                        self.assertIsInstance(selected, dict, terminal)
+                        graph = self._assertions._graph_result(root, request_id)
+                        rows = self._assertions._assert_graph_path_and_native_results(root, fixture, request_id, graph)
+                        self._assertions._assert_shared_run_journal(
+                            root, request_id, self._assertions._route_binding(fixture), selected, graph,
+                        )
+                        self._assertions._assert_route_specific_effects(root, fixture, execute, before, rows)
                 except (selected_harness.GoldenCorpusError, FirstCutHttpSecurityError) as error:
                     failure = AssertionError(str(error))
+                except asyncio.CancelledError as error:
+                    failure = error
                 except BaseException as error:
                     failure = error
                 finally:
@@ -381,15 +518,17 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                         failure,
                         runtime=runtime,
                         temporary=temporary,
-                        worker_started=worker_started,
-                        http_started=http_started,
-                        client=client,
-                        transport=transport,
-                        session=session,
+                        startup_task=startup_task,
+                        http_start_attempted=http_start_attempted,
+                        http_startup_task=http_startup_task,
                         token=token,
                     )
                 if failure is not None:
-                    raise failure
+                    if isinstance(failure, asyncio.CancelledError):
+                        terminal_cancellation = failure
+                    else:
+                        raise failure
+            _raise_terminal_cancellation(terminal_cancellation)
 
 
 if __name__ == "__main__":
