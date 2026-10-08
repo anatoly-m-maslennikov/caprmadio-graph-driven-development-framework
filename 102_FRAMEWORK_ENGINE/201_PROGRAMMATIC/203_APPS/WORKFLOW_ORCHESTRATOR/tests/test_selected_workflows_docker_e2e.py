@@ -317,25 +317,21 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             expected_definitions[action_run_id] = binding["action"]
             expected_parent[step_run_id] = request_id
             expected_parent[action_run_id] = step_run_id
-            if route.get("route") == "replace_atom" and action_id == "CA-O-128":
-                replacements = [
+            native_child_by_route = {
+                "create_atom": "CA-O-032",
+                "update_atom": "CA-O-030",
+                "replace_atom": "CA-O-051",
+            }
+            child_atom_id = native_child_by_route.get(route.get("route"))
+            if expected_outcome == "completed" and action_id == "CA-O-128" and child_atom_id is not None:
+                children = [
                     item for item in route.get("native_action_calls", [])
-                    if isinstance(item, Mapping) and item.get("atom_id") == "CA-O-051"
+                    if isinstance(item, Mapping) and item.get("atom_id") == child_atom_id
                 ]
-                self.assertEqual(1, len(replacements), route)
-                child_run_id = f"{action_run_id}:nested:CA-O-051"
+                self.assertEqual(1, len(children), route)
+                child_run_id = f"{action_run_id}:nested:{child_atom_id}"
                 expected_run_ids.append(child_run_id)
-                expected_definitions[child_run_id] = replacements[0]
-                expected_parent[child_run_id] = action_run_id
-            if route.get("route") == "create_atom" and action_id == "CA-O-128":
-                creations = [
-                    item for item in route.get("native_action_calls", [])
-                    if isinstance(item, Mapping) and item.get("atom_id") == "CA-O-032"
-                ]
-                self.assertEqual(1, len(creations), route)
-                child_run_id = f"{action_run_id}:nested:CA-O-032"
-                expected_run_ids.append(child_run_id)
-                expected_definitions[child_run_id] = creations[0]
+                expected_definitions[child_run_id] = children[0]
                 expected_parent[child_run_id] = action_run_id
 
         # J01: the retained selected result must be a clean terminal receipt,
