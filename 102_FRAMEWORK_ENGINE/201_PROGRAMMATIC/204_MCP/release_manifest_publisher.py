@@ -93,10 +93,119 @@ def _plan(project_root: Path) -> tuple[dict[str, Any], bytes, Path]:
     }, observed, path
 
 
+def _refresh_admission_structure_matches(old: Any, current: Any) -> bool:
+    """Compare one stale admission while allowing only pin revision changes."""
+    if isinstance(old, Mapping) and isinstance(current, Mapping):
+        if set(old) != set(current):
+            return False
+        is_pin = set(old) == {"atom_id", "version", "source_path", "digest"}
+        for key in old:
+            if is_pin and key in {"version", "digest"}:
+                continue
+            if not _refresh_admission_structure_matches(old[key], current[key]):
+                return False
+        return True
+    if isinstance(old, list) and isinstance(current, list):
+        return len(old) == len(current) and all(
+            _refresh_admission_structure_matches(left, right) for left, right in zip(old, current, strict=True)
+        )
+    return type(old) is type(current) and old == current
+
+
+def _refresh_candidate(
+    project_root: Path, *, require_drift: bool = True,
+) -> tuple[dict[str, Any], dict[str, Any], bytes, Path, dict[str, Any]]:
+    """Construct the one guarded sixteen-route refresh candidate.
+
+    D588 is deliberately not a second refresh protocol: its one closed raw
+    historical input is admitted only when the normal stale-Release-admission
+    reader refuses it.  Both successors then use the identical opaque context,
+    intent, write, readback, recording and recovery boundaries below.
+    """
+    try:
+        from selected_routes import load_release_manifest_refresh_base
+        current = load_release_manifest_refresh_base(project_root)
+    except (ImportError, OSError, TypeError, ValueError, RuntimeError) as normal_error:
+        try:
+            from selected_source_refresh import derive_registered_source_refresh
+            current, candidate, payload, path = derive_registered_source_refresh(project_root)
+        except (ImportError, OSError, TypeError, ValueError, RuntimeError):
+            try:
+                from selected_source_relocation import derive_registered_source_relocation
+                current, candidate, payload, path = derive_registered_source_relocation(project_root)
+            except (ImportError, OSError, TypeError, ValueError, RuntimeError) as relocation_error:
+                raise ReleaseManifestPublishError(
+                    f"refresh input manifest is unavailable: {normal_error}"
+                ) from relocation_error
+        admissions = candidate.get("release_source_admissions") if isinstance(candidate, Mapping) else None
+        if not isinstance(admissions, list) or len(admissions) != 1 or not isinstance(admissions[0], Mapping):
+            raise ReleaseManifestPublishError("registered refresh candidate has no current Release admission")
+        return current, candidate, payload, path, copy.deepcopy(dict(admissions[0]))
+    if not isinstance(current, Mapping):
+        raise ReleaseManifestPublishError("refresh input manifest returned an invalid contract")
+    current = copy.deepcopy(dict(current))
+    expected_names = [*SELECTED_ROUTE_NAMES, "release_version"]
+    routes = current.get("routes")
+    if (not isinstance(routes, list)
+            or [row.get("route") for row in routes if isinstance(row, Mapping)] != expected_names
+            or len(routes) != len(expected_names)):
+        raise ReleaseManifestPublishError("refresh requires the exact admitted sixteen-route manifest")
+    admissions = current.get("release_source_admissions")
+    if not isinstance(admissions, list) or len(admissions) != 1 or not isinstance(admissions[0], Mapping):
+        raise ReleaseManifestPublishError("refresh requires exactly one existing Release admission")
+    release_route = routes[-1]
+    old_admission = admissions[0]
+    route, admission = _derive(project_root)
+    if release_route != route:
+        raise ReleaseManifestPublishError("refresh cannot replace the current Release route")
+    if not _refresh_admission_structure_matches(old_admission, admission):
+        raise ReleaseManifestPublishError("refresh Release admission identities or structure differ from current D572")
+    if require_drift and old_admission == admission:
+        raise ReleaseManifestPublishError("refresh requires stale Release admission input")
+    candidate = copy.deepcopy(current)
+    candidate.pop("manifest_ref", None)
+    candidate["release_source_admissions"] = [copy.deepcopy(admission)]
+    candidate["source_freshness"]["selected_binding_digest"] = canonical_digest(candidate["routes"])
+    candidate.pop("canonical_manifest_sha256", None)
+    candidate["canonical_manifest_sha256"] = canonical_digest(candidate)
+    path = project_root / selected_manifest_ref(project_root)
+    payload = (canonical_json(candidate) + "\n").encode("utf-8")
+    return current, candidate, payload, path, admission
+
+
+def _refresh_parts(
+    project_root: Path, *, require_drift: bool = True,
+) -> tuple[dict[str, Any], bytes, dict[str, Any], bytes, Path, dict[str, Any], dict[str, Any]]:
+    current, candidate, payload, path, admission = _refresh_candidate(project_root, require_drift=require_drift)
+    try:
+        observed = path.read_bytes()
+    except OSError as error:
+        raise ReleaseManifestPublishError("current selected manifest bytes are unavailable") from error
+    plan = {
+        "publication_operation": "refresh",
+        "manifest_ref": path.relative_to(project_root).as_posix(),
+        "observed_input_sha256": hashlib.sha256(observed).hexdigest(),
+        "current_route_names": [row["route"] for row in current["routes"]],
+        "candidate_route_names": [row["route"] for row in candidate["routes"]],
+        "candidate_canonical_manifest_sha256": candidate["canonical_manifest_sha256"],
+        "added_route": "release_version",
+        "added_admission_route": "release_version",
+        "candidate_byte_count": len(payload),
+    }
+    return plan, observed, current, payload, path, admission, candidate
+
+
 def plan_release_manifest_publish(project_root: str | Path) -> dict[str, Any]:
     """Return a non-writing plan for the one additive Release projection."""
     root = _root(project_root)
     plan, _, _ = _plan(root)
+    return {"mode": "plan", **plan}
+
+
+def plan_release_manifest_refresh(project_root: str | Path) -> dict[str, Any]:
+    """Return a non-writing plan for one stale Release-admission refresh."""
+    root = _root(project_root)
+    plan, _, _, _, _, _, _ = _refresh_parts(root)
     return {"mode": "plan", **plan}
 
 
@@ -208,6 +317,91 @@ def publish_release_manifest(
     return {**evidence, "disposition": "published", "recording_ref": receipt["recording_ref"]}
 
 
+def refresh_release_manifest(
+    project_root: str | Path, *, execute: bool = False, authorization: Any = None,
+) -> dict[str, Any]:
+    """Plan by default; refresh only the stale Release admission when authorized."""
+    if type(execute) is not bool:
+        raise ReleaseManifestPublishError("execute must be a boolean")
+    root = _root(project_root)
+    plan, observed, current, payload, path, _, candidate = _refresh_parts(root)
+    if not execute:
+        return {"mode": "plan", **plan}
+    try:
+        from release_manifest_authorization import PublicationAuthorizationContext, validate_refresh_context
+        from release_manifest_lifecycle import ReleaseManifestLifecycle
+    except ImportError as error:
+        raise ReleaseManifestPublishError("trusted Release manifest lifecycle is unavailable") from error
+    if not isinstance(authorization, PublicationAuthorizationContext):
+        raise ReleaseManifestPublishError("execute requires a trusted host-created refresh context")
+    try:
+        sealed_plan = {"mode": "plan", **plan}
+        context = validate_refresh_context(authorization, root, sealed_plan)
+        lifecycle = ReleaseManifestLifecycle(root, context)
+        if lifecycle.authorize_release_manifest_publication(plan, context) is not True:
+            raise ReleaseManifestPublishError("trusted refresh context was refused")
+    except (TypeError, ValueError) as error:
+        raise ReleaseManifestPublishError(f"trusted refresh context is invalid: {error}") from error
+    if path.read_bytes() != observed:
+        raise ReleaseManifestPublishError("selected manifest input changed after refresh authorization")
+    current_after_plan, candidate_after_plan, payload_after_plan, _, _ = _refresh_candidate(root)
+    if (current_after_plan != current
+            or candidate_after_plan != candidate or payload_after_plan != payload):
+        raise ReleaseManifestPublishError("source-derived refresh successor changed after authorization")
+    try:
+        with lifecycle.release_manifest_publication_lock(plan):
+            pending_event_id = lifecycle.prepare_release_manifest_publication(plan, payload)
+            if not isinstance(pending_event_id, str) or not pending_event_id:
+                raise ReleaseManifestPublishError("trusted lifecycle did not seal a refresh intent")
+            validate_refresh_context(context, root, sealed_plan, manifest_state="input")
+            if path.read_bytes() != observed:
+                raise ReleaseManifestPublishError("selected manifest input changed after refresh intent sealing")
+            current_final, candidate_final, payload_final, _, _ = _refresh_candidate(root)
+            if (current_final != current_after_plan
+                    or candidate_final != candidate
+                    or payload_final != payload):
+                raise ReleaseManifestPublishError("source-derived refresh successor changed after intent sealing")
+            _atomic_write(path, payload)
+    except (OSError, RuntimeError, ValueError, TypeError) as error:
+        pending_event_id = locals().get("pending_event_id")
+        result = {"mode": "execute", "published": False,
+                  "disposition": "pending_publication" if isinstance(pending_event_id, str) and pending_event_id else "blocked",
+                  "publication_requirement": str(error), **plan}
+        if isinstance(pending_event_id, str) and pending_event_id:
+            result["pending_event_id"] = pending_event_id
+        return result
+    try:
+        published = path.read_bytes()
+        if published != payload:
+            raise ReleaseManifestPublishError("refreshed manifest bytes differ from the sealed candidate")
+        loaded = load_selected_manifest(root)
+    except (OSError, ValueError, SelectedRouteError) as error:
+        return {"mode": "execute", "published": True, "disposition": "readback_required",
+                "pending_event_id": pending_event_id, "readback_requirement": str(error), **plan}
+    names = [row["route"] for row in loaded["routes"]]
+    if names != [*SELECTED_ROUTE_NAMES, "release_version"]:
+        return {"mode": "execute", "published": True, "disposition": "readback_required",
+                "pending_event_id": pending_event_id,
+                "readback_requirement": "refreshed manifest does not retain the exact sixteen-route projection", **plan}
+    try:
+        validate_refresh_context(context, root, sealed_plan, manifest_state="candidate")
+    except (TypeError, ValueError) as error:
+        return {"mode": "execute", "published": True, "disposition": "readback_required",
+                "pending_event_id": pending_event_id, "readback_requirement": str(error), **plan}
+    evidence = {"mode": "execute", "published": True, "published_route_names": names, **plan}
+    try:
+        receipt = lifecycle.record_release_manifest_publication(dict(evidence))
+    except (OSError, RuntimeError, TypeError, ValueError) as error:
+        return {**evidence, "disposition": "recording_required", "pending_event_id": pending_event_id,
+                "recording_requirement": str(error)}
+    if (not isinstance(receipt, Mapping) or set(receipt) != {"recording_ref", "candidate_canonical_manifest_sha256"}
+            or not isinstance(receipt["recording_ref"], str) or not receipt["recording_ref"]
+            or receipt["candidate_canonical_manifest_sha256"] != plan["candidate_canonical_manifest_sha256"]):
+        return {**evidence, "disposition": "recording_required", "pending_event_id": pending_event_id,
+                "recording_requirement": "trusted internal lifecycle recording is incomplete"}
+    return {**evidence, "disposition": "published", "recording_ref": receipt["recording_ref"]}
+
+
 def recover_release_manifest_publish(
     project_root: str | Path, *, pending_event_id: str, authorization: Any,
 ) -> dict[str, Any]:
@@ -232,5 +426,6 @@ def recover_release_manifest_publish(
 
 __all__ = [
     "ReleaseManifestPublishError", "plan_release_manifest_publish", "publish_release_manifest",
+    "plan_release_manifest_refresh", "refresh_release_manifest",
     "recover_release_manifest_publish",
 ]

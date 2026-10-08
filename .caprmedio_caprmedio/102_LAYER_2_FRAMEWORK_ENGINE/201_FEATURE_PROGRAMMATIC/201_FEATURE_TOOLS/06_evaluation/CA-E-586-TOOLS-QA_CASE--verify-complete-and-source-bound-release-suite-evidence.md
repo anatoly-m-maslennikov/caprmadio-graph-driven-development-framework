@@ -7,8 +7,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-06 00:55:29 +0400"
+version: 4
+updated_at: "2026-10-06 23:22:17 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Full suite runner QA"
   depends_on: [Tool, Release Version, Candidate Manifest, Test Suite, Test Case, Source Carrier, Compiled Candidate, JUnit Report, Writable Output]
@@ -21,12 +21,16 @@ Verify complete and source-bound Release suite evidence
 
 ## Scope
 
-The Release Version closed Unit driver, its phase-derived declared-case discovery, and its sealed JUnit evidence boundary.
+The Release Version closed Unit driver, its phase-derived declared-case discovery, sealed JUnit evidence boundary, two fixed temporary mounts, and source-owned deadline containment.
 
 ## Claim
 
-The QA case **must** prove that the closed Unit Gate passes only after every phase-assigned `unit` in-tree Framework test case executes once with valid immutable-envelope source-read evidence for all required groups and a compiled-candidate carrier, and rejects incomplete, fabricated, or non-passing evidence. It must also prove that this Unit result alone cannot be credited as the Full Gate.
+The QA case **must** prove that the Unit Gate passes only after every phase-assigned Unit test executes once with valid immutable-envelope source evidence, normal terminal receipt, JUnit evidence, and currentness revalidation; it must reject capacity, timeout, host-loss, incomplete, fabricated, or non-passing evidence.
 
 ## Details
 
-Exercise an isolated fixture suite with valid bindings for Methodology, Tools, Apps, MCP, Agentic, Skill, and a compiled-candidate carrier. Verify that every sealed `102_FRAMEWORK_ENGINE/**/test_*.py` module receives exactly one sealed phase assignment: the three paths named by CA-R-1890 are `candidate_e2e` and every other path is `unit`. Verify every `unit` module is discovered in a fresh process, one Unit JUnit row per discovered case, the exact Unit test-ID set, one immutable-envelope SHA-256 property per case, and exact byte-and-digest source-probe records resolving to sealed package rows. Independently verify that a focused subset, omitted or duplicated phase assignment, duplicate test ID, a candidate-E2E module represented as a Unit skip, absent or altered envelope, unmapped or unreadable source, altered digest, absent compiled-candidate evidence, failure, error, skip, invalid report location, read-only-workspace write, or unresolved test-ID/import collision cannot produce a passing Unit Gate. Verify the fixed closed Unit CLI and schema-2 control-context digest remain unchanged, and that a passing Unit report authorizes candidate-image construction only; its result cannot authorize promotion without the actual source-pinned, candidate-image-bound E2E evidence and Full Gate aggregation verified by CA-E-589. Equal module basenames are permitted when fresh child processes discover and execute both Unit modules with distinct test IDs and correct source bindings; name equality alone is not an import collision. The test harness may retain its disposable output fixture after execution; that retention is not source or runtime mutation.
+Use isolated fixtures to prove complete exact phase assignment, fresh discovery, exact Unit-ID/JUnit-ID equality, envelope/probe integrity, source digest enforcement, compiled-candidate evidence, and refusal of omissions, duplicates, skips, errors, failures, mutable/read-only boundary violations, invalid reports, or caller selection. A passing Unit remains only an image-build prerequisite, never a Full Gate or promotion authority.
+
+Assert the executor produces exactly the existing two disposable tmpfs mounts, `/tmp` and `/workspace/.caprmedio_tmp`, each `rw,nosuid,nodev,exec,size=2g,mode=1777`; no third mount, writable source workspace, socket, network, privilege, host path, resource increase, deadline increase, or changed output boundary is admitted. Exercise finite captured deadline validation and the private snapshot without adding any public field.
+
+Use unit mocks to prove the exact executor argv is `--entrypoint <inspected/admitted installed-N python> IMAGE -c CONSTANT_GUARD <canonical-decimal-captured-seconds> -- <exact sealed child argv>`; preflight the image Python `-c` capability before launch; reject unsupported invocation before launch; and never admit a shell or caller field. Prove `reserve = min(1.0, deadline / 2)`, TERM at `start + deadline - reserve`, KILL at hard expiry, and reaping of the owned child. Prove a child exit observed before TERM forwards normally, but TERM latches timeout: a child that handles TERM and exits zero still yields `124` after reaping. No termination step extends the captured deadline. Assert all guard failures are non-passing. Within existing approved E2E coverage, when Docker is available, sever only the host CLI observer of an over-budget disposable container and verify the daemon container terminates by that captured deadline; capability absence is a non-passing environment blocker, not a new harness or gate. Neither `--rm`, absent container, nor missing receipt may be credited as a Unit pass.

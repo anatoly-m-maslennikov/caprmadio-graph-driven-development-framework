@@ -30,6 +30,8 @@ __pycache__/
 # Retain local release candidates and rollback sources outside version control.
 /.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/_release_materialized/
 /101_LAYER_1_FRAMEWORK_METHODOLOGY/.release-sources-prior-*/
+/101_LAYER_1_FRAMEWORK_METHODOLOGY/.release-sources-*/
+/102_FRAMEWORK_ENGINE/.caprmedio_tmp/
 
 .env
 .env.*

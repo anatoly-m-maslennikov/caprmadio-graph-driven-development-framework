@@ -22,7 +22,13 @@ if str(RELEASE_ROOT) not in sys.path:
     sys.path.insert(0, str(RELEASE_ROOT))
 
 import release_suite  # noqa: E402
-from release_suite_reference_context import ReleaseSuiteReferenceContextError  # noqa: E402
+from release_handoff import PackageRow  # noqa: E402
+from release_test_phases import CANDIDATE_E2E_MODULES  # noqa: E402
+from release_suite_reference_context import (  # noqa: E402
+    ReleaseSuiteReferenceContext,
+    ReleaseSuiteReferenceContextError,
+    _UNIT_DEADLINE_SETTINGS,
+)
 
 
 class _RecordingExecutor:
@@ -66,8 +72,29 @@ class ReleaseSuiteContextTimingTests(unittest.TestCase):
             ),
             authority=SimpleNamespace(executing_release="selected-n"),
         )
-        self.compilation = SimpleNamespace(child_materialization_root="compiled-candidate")
-        self.context = SimpleNamespace(
+        unit_path = (
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/"
+            "RELEASE_VERSION/tests/test_release_suite_context_timing.py"
+        )
+        self.compilation = SimpleNamespace(
+            child_materialization_root="compiled-candidate",
+            package_rows=[
+                PackageRow(
+                    resource="FRAMEWORK_ENGINE",
+                    source_path=source_path,
+                    destination_path=source_path.removeprefix("102_"),
+                    sha256="0" * 64,
+                    mode=0o644,
+                )
+                for source_path in (unit_path, *CANDIDATE_E2E_MODULES)
+            ],
+        )
+        # The owner resolves the Unit deadline from the bytes captured by its
+        # typed private context, before it materializes the workspace.  Keep
+        # that admission premise real while the surrounding seams model the
+        # two mutation timings under test.
+        self.context = ReleaseSuiteReferenceContext(
+            root=str(self.root),
             trusted_binding_values=(
                 ("candidate_snapshot_manifest_sha256", "a" * 64),
                 ("compiled_candidate_root", "compiled-candidate"),
@@ -76,6 +103,13 @@ class ReleaseSuiteContextTimingTests(unittest.TestCase):
             ),
             reference_rows=(),
             control_context_digest="c" * 64,
+            _verified_bytes=tuple(zip(
+                sorted(_UNIT_DEADLINE_SETTINGS),
+                (
+                    b"[release_suite]\nunit_timeout_seconds = 3600\n",
+                    b"[rmed_review]\ncontext_headroom_fraction = 0.10\n",
+                ),
+            )),
         )
         self.active_n = ("d" * 64, "e" * 64, "f" * 64)
 

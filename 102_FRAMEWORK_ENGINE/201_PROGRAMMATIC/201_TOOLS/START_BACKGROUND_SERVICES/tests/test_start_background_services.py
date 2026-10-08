@@ -39,6 +39,11 @@ class StartBackgroundServicesTests(unittest.TestCase):
             self.canonical,
             ignore=shutil.ignore_patterns("tests", "__pycache__", "*.pyc", ".DS_Store"),
         )
+        private_reader_source = TOOLS_SOURCE.parent / "204_MCP"
+        private_reader_target = self.canonical.parent / "204_MCP"
+        private_reader_target.mkdir()
+        for filename in ("release_source_admission.py", "selected_routes.py"):
+            shutil.copy2(private_reader_source / filename, private_reader_target / filename)
         self.pids: list[int] = []
 
     def tearDown(self) -> None:

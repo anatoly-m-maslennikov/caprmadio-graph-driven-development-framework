@@ -897,6 +897,74 @@ def dump_release_checkpoint(
     ).decode("utf-8"))
 
 
+def derive_unknown_effect_terminal_checkpoint(payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Derive, but never replace, N15's stopped unknown-effect frontier.
+
+    The original checkpoint is historical evidence for the host-loss boundary.
+    This narrowly scoped codec operation restores that evidence, proves the
+    one admitted pre-effect frontier, and emits a *separate* terminal
+    checkpoint.  It has no Journal, provider, Docker, or filesystem effect.
+
+    Its caller is responsible for retaining the original checkpoint bytes and
+    choosing the governed companion carrier for the returned payload.
+    """
+
+    if not isinstance(payload, Mapping):
+        raise _error("release-checkpoint-invalid", "unknown-effect resolution requires one checkpoint envelope")
+    run, shared_recordings, pending_recordings = _restore_release_action_checkpoint(canonical_json(dict(payload)))
+    context = run.in_progress
+    if (
+        run.workflow_run_id != "release-epic-resume-20261006-N15"
+        or run.next_phase != 4
+        or run.stopped is not False
+        or context is None
+        or set(run.contexts) != {0, 1, 2, 3, 4}
+        or set(run.results) != {0, 1, 2, 3}
+        or any(run.results[index].outcome != "completed" for index in range(4))
+        or set(shared_recordings) != {0, 1, 2, 3}
+        or pending_recordings
+    ):
+        raise _error("release-checkpoint-unknown-effect-mismatch", "checkpoint is not the admitted N15 unknown-effect frontier")
+    if any(
+        record.get("terminal_outcome") != "completed"
+        or not isinstance(record.get("receipt_refs"), tuple)
+        or len(record["receipt_refs"]) != 1
+        for record in shared_recordings.values()
+    ):
+        raise _error("release-checkpoint-unknown-effect-mismatch", "checkpoint predecessor receipts are not exact completed records")
+    step, action, phase = PHASES[4]
+    if (
+        context != run.contexts[4]
+        or context.workflow_run_id != run.workflow_run_id
+        or context.step_run_id != "release-epic-resume-20261006-N15:step:5"
+        or context.action_run_id != "release-epic-resume-20261006-N15:step:5:action:1"
+        or (context.step_atom_id, context.action_atom_id, phase) != (step, action, "closed_unit_gate")
+        or run.candidate is None
+    ):
+        raise _error("release-checkpoint-unknown-effect-mismatch", "checkpoint has a different N15 in-progress occurrence")
+
+    run.results[4] = ReleasePhaseResult(
+        workflow_run_id=context.workflow_run_id,
+        step_run_id=context.step_run_id,
+        action_run_id=context.action_run_id,
+        step_atom_id=step,
+        action_atom_id=action,
+        phase=phase,
+        outcome="effect_uncertain",
+        reason="unknown_effect",
+        candidate_snapshot_manifest_sha256=run.candidate.manifest.sha256,
+        attempted_effects=(),
+        effect_evidence_refs=(),
+        declared_run_receipt_refs=(),
+    )
+    run.in_progress = None
+    run.stopped = True
+    # The terminal companion must retain the same completed predecessor
+    # receipts.  The original carrier remains untouched; this copy only adds
+    # the stopped phase-four uncertainty result.
+    return dump_release_checkpoint(run, shared_recordings=shared_recordings, pending_recordings={})
+
+
 def _restore_release_action_checkpoint(
     checkpoint: bytes | str, *, image_executor: AdmittedImageExecutor | None = None,
 ) -> tuple[ReleaseActionRun, dict[int, dict[str, Any]], dict[int, dict[str, str]]]:
@@ -1033,6 +1101,7 @@ def extract_pending_recordings(payload: Mapping[str, Any]) -> Mapping[int, Mappi
 
 __all__ = [
     "RELEASE_ACTION_CHECKPOINT_SCHEMA",
+    "derive_unknown_effect_terminal_checkpoint",
     "release_action_checkpoint_sha256",
     "dump_release_checkpoint",
     "encode_release_action_checkpoint",

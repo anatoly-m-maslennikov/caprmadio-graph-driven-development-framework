@@ -280,7 +280,11 @@ def discover(root: Path) -> list[Carrier]:
         role_root = applicable / role
         if not role_root.is_dir():
             raise RetrievalError("role-root-missing", "Applicable Methodology role root is missing", role=role)
-        unexpected = [path for path in role_root.iterdir() if not path.is_file() or path.suffix != ".md" or path.is_symlink()]
+        unexpected = [
+            path for path in role_root.iterdir()
+            if not (path.name == ".DS_Store" and path.is_file() and not path.is_symlink())
+            and (not path.is_file() or path.suffix != ".md" or path.is_symlink())
+        ]
         if unexpected:
             raise RetrievalError(
                 "role-root-non-carrier",

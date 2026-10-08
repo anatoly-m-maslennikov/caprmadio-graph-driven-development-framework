@@ -184,6 +184,49 @@ def _normalize_plan(value: Any, root: Path) -> dict[str, Any]:
     }
 
 
+def _normalize_refresh_plan(value: Any, root: Path) -> dict[str, Any]:
+    if not isinstance(value, Mapping):
+        _reject("publication-plan-invalid", "refresh plan must be an object")
+    fields = set(value)
+    allowed = {"mode", "publication_operation", *_PLAN_FIELDS}
+    if fields - allowed or not ({"publication_operation", *_PLAN_FIELDS} <= fields):
+        _reject("publication-plan-invalid", "refresh plan has unsupported or missing fields")
+    if value.get("mode", "plan") != "plan" or value["publication_operation"] != "refresh":
+        _reject("publication-plan-invalid", "refresh plan operation must be refresh")
+    manifest_ref = value["manifest_ref"]
+    if not isinstance(manifest_ref, str) or manifest_ref != selected_manifest_ref(root):
+        _reject("publication-plan-invalid", "refresh plan has a different manifest carrier")
+    expected_names = [*SELECTED_ROUTE_NAMES, "release_version"]
+    current, candidate = value["current_route_names"], value["candidate_route_names"]
+    if (not isinstance(current, list) or current != expected_names
+            or not isinstance(candidate, list) or candidate != expected_names):
+        _reject("publication-plan-invalid", "refresh plan must retain the exact sixteen-route sequence")
+    if value["added_route"] != "release_version" or value["added_admission_route"] != "release_version":
+        _reject("publication-plan-invalid", "refresh plan does not identify the Release row")
+    size = value["candidate_byte_count"]
+    if type(size) is not int or size <= 0:
+        _reject("publication-plan-invalid", "refresh candidate byte count must be positive")
+    return {
+        "publication_operation": "refresh",
+        "manifest_ref": manifest_ref,
+        "observed_input_sha256": _sha256(value["observed_input_sha256"], "observed_input_sha256"),
+        "current_route_names": tuple(current),
+        "candidate_route_names": tuple(candidate),
+        "candidate_canonical_manifest_sha256": _sha256(
+            value["candidate_canonical_manifest_sha256"], "candidate_canonical_manifest_sha256"
+        ),
+        "added_route": "release_version",
+        "added_admission_route": "release_version",
+        "candidate_byte_count": size,
+    }
+
+
+def _normalize_any_plan(value: Any, root: Path) -> dict[str, Any]:
+    if isinstance(value, Mapping) and value.get("publication_operation") == "refresh":
+        return _normalize_refresh_plan(value, root)
+    return _normalize_plan(value, root)
+
+
 def _derive_prepublication(root: Path) -> tuple[dict[str, Any], bytes, bytes, Path, dict[str, Any]]:
     try:
         current = load_selected_manifest(root)
@@ -219,6 +262,21 @@ def _derive_prepublication(root: Path) -> tuple[dict[str, Any], bytes, bytes, Pa
         "candidate_byte_count": len(payload),
     }
     return _normalize_plan(plan, root), observed, payload, manifest, admission
+
+
+def _derive_refresh_parts(
+    root: Path, *, require_drift: bool = True,
+) -> tuple[dict[str, Any], bytes, dict[str, Any], bytes, Path, dict[str, Any], dict[str, Any]]:
+    """Reuse the publisher's one refresh derivation without a second schema."""
+    try:
+        from release_manifest_publisher import _refresh_parts
+        parts = _refresh_parts(root, require_drift=require_drift)
+    except (ImportError, OSError, RuntimeError, TypeError, ValueError) as error:
+        raise ReleaseManifestAuthorizationError(
+            "publication-input-unavailable", "current refresh input is unavailable"
+        ) from error
+    plan, observed, current, payload, path, admission, candidate = parts
+    return _normalize_refresh_plan(plan, root), observed, current, payload, path, admission, candidate
 
 
 def _source_frontier_digest(admission: Mapping[str, Any]) -> str:
@@ -337,6 +395,33 @@ def authorize_operator_publication(
     )
 
 
+def authorize_operator_refresh(
+    project_root: str | Path,
+    plan: Mapping[str, Any],
+    *,
+    operator_name: str,
+    journal_author: str,
+    llm_session: Mapping[str, str],
+    authorization_ref: str,
+) -> PublicationAuthorizationContext:
+    """Issue one trusted-host-only capability for the exact refresh plan."""
+    root = _root(project_root)
+    supplied = _normalize_refresh_plan(plan, root)
+    expected, observed, _, payload, _, admission, _ = _derive_refresh_parts(root)
+    if supplied != expected:
+        _reject("publication-plan-stale", "refresh plan differs from the current source-derived successor")
+    if hashlib.sha256(observed).hexdigest() != supplied["observed_input_sha256"]:
+        _reject("publication-input-stale", "selected manifest bytes differ from the supplied refresh plan")
+    operator = _operator_row(root, operator_name)
+    author, session = _journal_context(operator, journal_author, llm_session)
+    return _issue(
+        root, supplied, candidate_payload=payload, source_frontier_digest=_source_frontier_digest(admission),
+        operator_name=operator_name, journal_author=author, llm_session=session,
+        authorization_ref=_safe_ref(authorization_ref, "authorization_ref"),
+        purpose="refresh", pending_event_id=None,
+    )
+
+
 def _pending_recovery_evidence(
     root: Path, pending_event_id: object,
 ) -> tuple[dict[str, Any], bytes, dict[str, Any], Mapping[str, Any]]:
@@ -357,7 +442,7 @@ def _pending_recovery_evidence(
         raise ReleaseManifestAuthorizationError(
             "publication-recovery-invalid", "sealed Release publication evidence is unavailable or invalid"
         ) from error
-    plan = _normalize_plan(intent["plan"], root)
+    plan = _normalize_any_plan(intent["plan"], root)
     result = event.get("result")
     if (
         event.get("action_id") != ACTION_ID
@@ -502,6 +587,85 @@ def validate_publication_context(
     return context
 
 
+def validate_refresh_context(
+    context: PublicationAuthorizationContext,
+    project_root: str | Path,
+    plan: Mapping[str, Any],
+    *,
+    manifest_state: str = "input",
+) -> PublicationAuthorizationContext:
+    """Freshly validate an issued operation-specific refresh context."""
+    root = _root(project_root)
+    snapshot = _snapshot(context)
+    supplied = _normalize_refresh_plan(plan, root)
+    (
+        stored_root, stored_plan_items, payload_sha, frontier_sha, operator_name, journal_author,
+        session, _, purpose, pending_event_id,
+    ) = snapshot
+    if root.as_posix() != stored_root:
+        _reject("publication-context-stale", "refresh context belongs to another Project root")
+    if supplied != dict(stored_plan_items):
+        _reject("publication-context-stale", "refresh plan differs from the issued context")
+    operator = _operator_row(root, operator_name)
+    _journal_context(operator, journal_author, {"app": session[0], "uuid": session[1]})
+    try:
+        current_route, admission = derive_release_graph_admission(root)
+    except (OSError, ValueError, TypeError, ReleaseSourceAdmissionError) as error:
+        raise ReleaseManifestAuthorizationError(
+            "publication-source-stale", "Release source admission is not current"
+        ) from error
+    if _source_frontier_digest(admission) != frontier_sha:
+        _reject("publication-source-stale", "Release source frontier differs from the issued refresh context")
+    relative = PurePosixPath(supplied["manifest_ref"])
+    current_bytes = _read_regular(root, relative, label="selected manifest carrier")
+    if manifest_state == "input":
+        if purpose != "refresh":
+            _reject("publication-recovery-finalization-only", "non-refresh authority cannot authorize a refresh write")
+        expected, observed, _, payload, _, _, _ = _derive_refresh_parts(root)
+        if expected != supplied or observed != current_bytes:
+            _reject("publication-input-stale", "selected manifest input differs from the issued refresh plan")
+        if hashlib.sha256(current_bytes).hexdigest() != supplied["observed_input_sha256"]:
+            _reject("publication-input-stale", "selected manifest digest differs from the refresh plan")
+        if hashlib.sha256(payload).hexdigest() != payload_sha:
+            _reject("publication-context-stale", "refresh candidate serialization differs from the issued context")
+    elif manifest_state == "candidate":
+        if hashlib.sha256(current_bytes).hexdigest() != payload_sha:
+            _reject("publication-candidate-stale", "published manifest bytes differ from the sealed refresh candidate")
+        try:
+            loaded = load_selected_manifest(root)
+        except (OSError, ValueError, SelectedRouteError) as error:
+            raise ReleaseManifestAuthorizationError(
+                "publication-candidate-stale", "published manifest is not current"
+            ) from error
+        expected_names = [*SELECTED_ROUTE_NAMES, "release_version"]
+        if ([row.get("route") for row in loaded.get("routes", [])] != expected_names
+                or loaded.get("canonical_manifest_sha256") != supplied["candidate_canonical_manifest_sha256"]):
+            _reject("publication-candidate-stale", "published manifest is not the issued refresh successor")
+        if loaded["routes"][-1] != current_route or loaded.get("release_source_admissions") != [admission]:
+            _reject("publication-candidate-stale", "published Release admission is not source-derived")
+        expected_candidate = copy.deepcopy(loaded)
+        expected_candidate.pop("manifest_ref", None)
+        expected_candidate["release_source_admissions"] = [copy.deepcopy(admission)]
+        expected_candidate["source_freshness"]["selected_binding_digest"] = canonical_digest(expected_candidate["routes"])
+        expected_candidate.pop("canonical_manifest_sha256", None)
+        expected_candidate["canonical_manifest_sha256"] = canonical_digest(expected_candidate)
+        expected_payload = (canonical_json(expected_candidate) + "\n").encode("utf-8")
+        if (expected_candidate["canonical_manifest_sha256"] != supplied["candidate_canonical_manifest_sha256"]
+                or hashlib.sha256(expected_payload).hexdigest() != payload_sha
+                or expected_payload != current_bytes):
+            _reject("publication-candidate-stale", "published manifest differs from the issued refresh candidate")
+        if purpose == "recovery":
+            evidence_plan, evidence_payload, evidence_event, _ = _pending_recovery_evidence(root, pending_event_id)
+            if evidence_plan != supplied or evidence_payload != current_bytes:
+                _reject("publication-recovery-ambiguous", "sealed recovery evidence differs from the refresh context")
+            _validate_recovery_actor(evidence_event, journal_author=journal_author, session=session)
+        elif purpose != "refresh":
+            _reject("publication-context-forged", "refresh context has an unsupported authority purpose")
+    else:
+        _reject("publication-context-invalid", "manifest_state must be input or candidate")
+    return context
+
+
 def validate_candidate_payload(
     context: PublicationAuthorizationContext,
     project_root: str | Path,
@@ -519,11 +683,31 @@ def validate_candidate_payload(
         _reject("publication-payload-stale", "candidate payload differs from the sealed publication context")
 
 
+def validate_refresh_candidate_payload(
+    context: PublicationAuthorizationContext,
+    project_root: str | Path,
+    plan: Mapping[str, Any],
+    payload: bytes,
+) -> None:
+    """Confirm one refresh payload without exposing a sealed digest."""
+    if type(payload) is not bytes or not payload:
+        _reject("publication-payload-invalid", "refresh candidate payload must be non-empty bytes")
+    validate_refresh_context(context, project_root, plan, manifest_state="input")
+    snapshot = _snapshot(context)
+    if snapshot[8] != "refresh":
+        _reject("publication-recovery-finalization-only", "non-refresh authority cannot validate a refresh payload")
+    if hashlib.sha256(payload).hexdigest() != snapshot[2]:
+        _reject("publication-payload-stale", "candidate payload differs from the sealed refresh context")
+
+
 __all__ = [
     "PublicationAuthorizationContext",
     "ReleaseManifestAuthorizationError",
     "authorize_operator_publication",
+    "authorize_operator_refresh",
     "authorize_operator_publication_recovery",
     "validate_candidate_payload",
+    "validate_refresh_candidate_payload",
     "validate_publication_context",
+    "validate_refresh_context",
 ]

@@ -188,8 +188,10 @@ def admit_layout_recoding(evaluation: dict[str, Any], proposal: dict[str, Any], 
     if (original_context.report_contract not in (5, 6)
             or output_context.report_contract != original_context.report_contract):
         raise ValueError('layout repair admission requires matching report contracts 5 or 6')
-    summarize_evaluations([evaluation], context=original_context)
-    summarize_evaluations([final_evaluation], context=output_context)
+    summarize_evaluations([evaluation], context=original_context,
+                          allow_layout_gaps=original_context.report_contract == 6)
+    summarize_evaluations([final_evaluation], context=output_context,
+                          allow_layout_gaps=output_context.report_contract == 6)
     if (proposal.get('source') != evaluation['source']
             or proposal.get('context_sha256') != original_context.sha256):
         raise ValueError('proposal does not bind original source and evaluation')

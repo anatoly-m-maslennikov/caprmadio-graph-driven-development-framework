@@ -26,6 +26,7 @@ from release_suite import (  # noqa: E402
     _trusted_context_bindings,
     require_declared_suite_command,
 )
+from release_test_phases import CANDIDATE_E2E_MODULES  # noqa: E402
 
 
 class ReleaseSuiteBindingsHandoffTests(unittest.TestCase):
@@ -44,6 +45,7 @@ class ReleaseSuiteBindingsHandoffTests(unittest.TestCase):
             self.probe_source: b"VALUE = 1\n",
             self.compiled_source: b"compiled\n",
         }
+        payloads.update({source: b"import unittest\n" for source in CANDIDATE_E2E_MODULES})
         for relative, payload in payloads.items():
             path = self.root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -67,7 +69,7 @@ class ReleaseSuiteBindingsHandoffTests(unittest.TestCase):
                 sha256=hashlib.sha256((self.root / relative).read_bytes()).hexdigest(),
                 mode=0o644,
             )
-            for relative in (self.probe_source, self.rule_source, self.test_source)
+            for relative in (self.probe_source, self.rule_source, self.test_source, *CANDIDATE_E2E_MODULES)
         ]
         self.rows = engine_rows + [PackageRow(
             resource="METHODOLOGY",

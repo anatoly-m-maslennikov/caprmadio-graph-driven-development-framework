@@ -1,13 +1,19 @@
 """Real stdio protocol with mock Atoms; no live review or Agent dispatch."""
+from contextlib import asynccontextmanager, redirect_stderr
+import io
+import json
+import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 import unittest
+from unittest.mock import patch
 
 from mcp import Client, StdioServerParameters
+from mcp.client.stdio import stdio_client
 
 ROOT = Path(__file__).resolve().parents[4]
 SERVER = ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py'
@@ -39,11 +45,45 @@ D547_SELECTED_CONTROL_TOOLS = frozenset({
     'recover_selected_run_recording',
 })
 
+# The stable gateway first boots an isolated implementation generation.  The
+# source tree is intentionally cold in sealed Unit runs, so allow that bounded
+# startup before the MCP client's first protocol probe expires.
+GATEWAY_STARTUP_TIMEOUT_SECONDS = 30
+_STARTUP_TELEMETRY_LINE = re.compile(
+    r'^caprmedio_mcp_startup phase=(?:initial_fingerprint|reload_fingerprint|fingerprint_verify|'
+    r'child_handshake|list_tools|generation_ready|schema_validation) '
+    r'outcome=(?:completed|failed) elapsed_ms=[0-9]+$')
+
+
+def _forward_startup_telemetry(stderr):
+    """Expose only accepted opt-in timing records after a successful client run."""
+    if os.environ.get('CAPRMEDIO_STARTUP_TELEMETRY') != '1':
+        return
+    stderr.seek(0)
+    for line in stderr.read().splitlines():
+        if _STARTUP_TELEMETRY_LINE.fullmatch(line):
+            print(line, file=sys.stderr, flush=True)
+
 
 class InstalledLayoutImport(unittest.TestCase):
+    def test_startup_telemetry_forwarding_is_opt_in_and_filters_untrusted_stderr(self):
+        valid = 'caprmedio_mcp_startup phase=list_tools outcome=completed elapsed_ms=17'
+        captured = io.StringIO(f'{valid}\n/secret/path --project-root source-content\n')
+        forwarded = io.StringIO()
+        with patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}), redirect_stderr(forwarded):
+            _forward_startup_telemetry(captured)
+        self.assertEqual(forwarded.getvalue(), valid + '\n')
+
+        captured = io.StringIO(valid + '\n')
+        forwarded = io.StringIO()
+        with patch.dict(os.environ, {}, clear=False), redirect_stderr(forwarded):
+            os.environ.pop('CAPRMEDIO_STARTUP_TELEMETRY', None)
+            _forward_startup_telemetry(captured)
+        self.assertEqual(forwarded.getvalue(), '')
+
     def test_implementation_imports_from_framework_engine_layout(self):
         """The release copies the Engine without the source-tree numeric prefix."""
-        with tempfile.TemporaryDirectory() as temporary:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temporary:
             installed = Path(temporary) / 'opt/caprmedio-framework/FRAMEWORK_ENGINE'
             shutil.copytree(ROOT / '102_FRAMEWORK_ENGINE/201_PROGRAMMATIC',
                             installed / '201_PROGRAMMATIC',
@@ -62,9 +102,9 @@ class InstalledLayoutImport(unittest.TestCase):
 
 class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
-        tmp = ROOT / '.caprmedio_tmp/tests/workflow-mcp'
-        tmp.mkdir(parents=True, exist_ok=True)
-        self.temp = tempfile.TemporaryDirectory(dir=tmp, ignore_cleanup_errors=True)
+        # The sealed Unit mounts the repository read-only; the runner supplies
+        # a writable per-module TMPDIR for disposable protocol fixtures.
+        self.temp = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / '.git').mkdir()
@@ -75,31 +115,81 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
         (self.root / 'atom.md').write_text('mock original atom')
         (self.root / 'rules.md').write_text('mock applicable criteria')
 
-    def _copy_active_query_bindings(self):
-        """Seed this disposable Project from current D-carriers, not a fake exposure list."""
-        delivery = ROOT / '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery'
-        bindings = {}
-        for source in delivery.glob('*.md'):
-            for block in source.read_text(encoding='utf-8').split('```toml')[1:]:
-                binding = tomllib.loads(block.split('```', 1)[0]).get('tool_binding')
-                if isinstance(binding, dict) and binding.get('mcp_name') in QUERY_ROUTE_NAMES:
-                    bindings[binding['mcp_name']] = (source, binding)
-        self.assertEqual(set(QUERY_ROUTE_NAMES), set(bindings))
-        for source, binding in bindings.values():
-            carrier = self.root / source.relative_to(ROOT)
-            carrier.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, carrier)
-            entrypoint = ROOT / binding['entrypoint']
-            self.assertTrue(entrypoint.is_file())
-            destination = self.root / binding['entrypoint']
+    def _copy_declared_selected_manifest(self):
+        """Seed the disposable Project from the sealed manifest and its declared pins."""
+        manifest_ref = '.caprmedio_caprmedio/_projection/selected_workflow_bindings.json'
+        manifest_source = ROOT / manifest_ref
+        manifest = json.loads(manifest_source.read_text(encoding='utf-8'))
+        references = {manifest_ref, manifest['source_freshness']['selected_source_registry_ref']}
+
+        def collect(value):
+            if isinstance(value, dict):
+                for key, child in value.items():
+                    if key == 'source_path':
+                        references.add(child)
+                    collect(child)
+            elif isinstance(value, list):
+                for child in value:
+                    collect(child)
+
+        collect(manifest)
+        authority_ref = (
+            '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/'
+            '201_FEATURE_TOOLS/07_delivery/'
+            'CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md'
+        )
+        authority = (ROOT / authority_ref).read_text(encoding='utf-8')
+        private = re.search(r'^## Private implementation carriers\n+```json\n(.*?)\n```$',
+                            authority, re.MULTILINE | re.DOTALL)
+        self.assertIsNotNone(private, 'D572 private implementation carriers are absent')
+        references.add(authority_ref)
+        references.update(item['source_path'] for item in json.loads(private.group(1)))
+
+        for relative in references:
+            source = ROOT / relative
+            self.assertTrue(source.is_file(), f'declared selected source is unavailable: {relative}')
+            destination = self.root / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(entrypoint, destination)
+            shutil.copyfile(source, destination)
+
+    def _server_parameters(self):
+        telemetry = ({'CAPRMEDIO_STARTUP_TELEMETRY': '1'}
+                     if os.environ.get('CAPRMEDIO_STARTUP_TELEMETRY') == '1' else None)
+        return StdioServerParameters(command=sys.executable,
+            args=[str(SERVER), '--project-root', str(self.root)], env=telemetry)
+
+    @asynccontextmanager
+    async def _server_client(self, *, cache=None):
+        """Attach bounded server stderr to an otherwise opaque startup failure."""
+        with tempfile.TemporaryFile(mode='w+', encoding='utf-8') as stderr:
+            try:
+                # ClientSession.send_discover deliberately uses its own ten-second
+                # probe constant, rather than Client.read_timeout_seconds.  The
+                # gateway's initial child-generation preparation is separately
+                # bounded at twenty seconds, so give this cold-start-only probe
+                # the existing bounded test startup allowance.
+                with (patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}),
+                      patch('mcp.client.session.DISCOVER_TIMEOUT_SECONDS',
+                            GATEWAY_STARTUP_TIMEOUT_SECONDS)):
+                    async with Client(stdio_client(self._server_parameters(), errlog=stderr), cache=cache,
+                                      read_timeout_seconds=GATEWAY_STARTUP_TIMEOUT_SECONDS) as client:
+                        yield client
+            except BaseException as error:
+                # The complete suite must retain safe phase evidence on a
+                # startup failure, even when ordinary successful runs are quiet.
+                with patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}):
+                    _forward_startup_telemetry(stderr)
+                stderr.seek(0)
+                detail = stderr.read()[-4096:]
+                if detail:
+                    raise AssertionError(f'MCP stdio startup failed; stderr follows:\n{detail}') from error
+                raise
+            else:
+                _forward_startup_telemetry(stderr)
 
     async def test_real_server_discovery_marks_registered_query_bindings_mcp_available(self):
-        self._copy_active_query_bindings()
-        params = StdioServerParameters(command=sys.executable,
-            args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params, cache=None) as client:
+        self._copy_declared_selected_manifest()
+        async with self._server_client(cache=None) as client:
             registered = {tool.name: tool for tool in (await client.list_tools()).tools}
             self.assertTrue(set(QUERY_ROUTE_NAMES) <= set(registered))
             self.assertTrue(all(registered[name].annotations.read_only_hint for name in QUERY_ROUTE_NAMES))
@@ -110,10 +200,27 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(set(QUERY_ROUTE_NAMES), {row['mcp_name'] for row in matches})
             self.assertTrue(all(row['availability'] == 'mcp' for row in matches))
 
+    async def test_startup_failure_retains_safe_timing_without_global_opt_in(self):
+        valid = 'caprmedio_mcp_startup phase=child_handshake outcome=failed elapsed_ms=20000'
+
+        def captured_transport(parameters, *, errlog):
+            self.assertEqual(parameters.env['CAPRMEDIO_STARTUP_TELEMETRY'], '1')
+            errlog.write(valid + '\nUNTRUSTED_DIAGNOSTIC_CONTENT\n')
+            errlog.flush()
+            return object()
+
+        forwarded = io.StringIO()
+        with (patch.dict(os.environ, {}, clear=False), redirect_stderr(forwarded),
+              patch(__name__ + '.stdio_client', captured_transport),
+              patch(__name__ + '.Client', side_effect=RuntimeError('mock readiness failure'))):
+            os.environ.pop('CAPRMEDIO_STARTUP_TELEMETRY', None)
+            with self.assertRaises(AssertionError):
+                async with self._server_client():
+                    self.fail('failed startup cannot yield a client')
+        self.assertEqual(forwarded.getvalue(), valid + '\n')
+
     async def test_stdio_gather_check_fix_report(self):
-        params = StdioServerParameters(command=sys.executable,
-            args=[str(SERVER), '--project-root', str(self.root)])
-        async with Client(params) as client:
+        async with self._server_client() as client:
             tools = await client.list_tools()
             actual_tool_names = {tool.name for tool in tools.tools}
             self.assertEqual(D547_ADMITTED_SELECTED_ROUTES, SELECTED_ROUTE_NAMES)
@@ -186,8 +293,7 @@ class MCPWorkflow(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(replay.structured_content['notifications'], [])
 
     async def test_protocol_rejects_unknown_fields_and_path_escape(self):
-        async with Client(StdioServerParameters(command=sys.executable,
-                args=[str(SERVER), '--project-root', str(self.root)])) as client:
+        async with self._server_client() as client:
             for request in ({'operation': 'describe', 'surprise': True},
                             {'operation': 'status', 'run_id': '../escape'}):
                 result = await client.call_tool('rmed_atoms_base_revise', {'request': request})

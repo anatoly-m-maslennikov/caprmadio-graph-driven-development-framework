@@ -354,7 +354,17 @@ class ModelDrivenStatusLifecycleTest(unittest.TestCase):
         unchanged[legacy] = legacy.read_bytes()
         result = self.execute(self.request(path, "Archived"))
         self.assertEqual("applied", result["outcome"])
-        self.assertEqual({"inbound", "outgoing"}, {item["direction"] for item in result["broken_references"]})
+        self.assertEqual(
+            [
+                {"direction": "outgoing", "relation_owner": "CA-R-8000",
+                 "referenced_atom_id": "CA-R-8001", "reason": "target-status-becomes-inactive",
+                 "active_referrer": True},
+                {"direction": "inbound", "relation_owner": "CA-R-8002",
+                 "referenced_atom_id": "CA-R-8000", "reason": "target-status-becomes-inactive",
+                 "active_referrer": True},
+            ],
+            result["broken_references"],
+        )
         self.assertFalse(result["repair_handoff"]["automatic_repair"])
         for candidate, raw in unchanged.items():
             self.assertEqual(raw, candidate.read_bytes())

@@ -19,6 +19,7 @@ from pathlib import Path
 from release_contract import ReleaseContractError, ValidatedCandidate
 from release_handoff import CURRENT_SELECTOR_RELATIVE, SealedCandidateCompilation
 from release_image import CANDIDATE_LABEL, CONTEXT_LABEL, DockerExecutor, IMAGE_ID
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS
 from bootstrap_image import BootstrapImageError, read_retained_initial_framework_image
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
@@ -39,12 +40,75 @@ from release_suite import (
 
 
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
-_MAX_TIMEOUT_SECONDS = 900
 _INSPECT_TIMEOUT_SECONDS = 30
 _CLEANUP_TIMEOUT_SECONDS = 30
 _CONTAINER_ID = re.compile(r"^[0-9a-f]{64}$")
+_SANDBOX_TMPFS_SIZE = "2g"
+_EXECUTOR_SCRATCH_RELATIVE = Path(".caprmedio_tmp")
 _SUITE_LABEL = "org.caprmedio.release-suite"
 _ATTEMPT_LABEL = "org.caprmedio.release-suite-attempt"
+_PYTHON_CAPABILITY_GUARD = "import sys; raise SystemExit(0 if sys.version_info >= (3, 8) else 1)"
+# This is deliberately an executor-owned program, not a shell fragment or a
+# caller-provided command.  PID 1 is responsible for the hard deadline even
+# if the host-side Docker CLI disappears before it can observe the outcome.
+_DEADLINE_GUARD = r'''import math
+import os
+import signal
+import subprocess
+import sys
+import time
+
+try:
+    deadline = float(sys.argv[1])
+    command = sys.argv[3:]
+    if (not math.isfinite(deadline) or deadline <= 0 or deadline > 7200
+            or sys.argv[2] != "--" or not command):
+        raise ValueError
+except (IndexError, ValueError):
+    raise SystemExit(125)
+
+try:
+    child = subprocess.Popen(command, start_new_session=True)
+except OSError:
+    raise SystemExit(125)
+
+started = time.monotonic()
+reserve = min(1.0, deadline / 2)
+term_at = started + deadline - reserve
+hard_at = started + deadline
+while True:
+    status = child.poll()
+    if status is not None:
+        raise SystemExit(status)
+    now = time.monotonic()
+    if now >= term_at:
+        break
+    time.sleep(min(0.05, term_at - now))
+
+# Once TERM is issued, timeout is latched even if a cooperative child returns
+# zero before hard expiry.
+try:
+    os.killpg(child.pid, signal.SIGTERM)
+except ProcessLookupError:
+    pass
+except OSError:
+    raise SystemExit(125)
+
+while child.poll() is None and time.monotonic() < hard_at:
+    time.sleep(min(0.05, hard_at - time.monotonic()))
+if child.poll() is None:
+    try:
+        os.killpg(child.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    except OSError:
+        raise SystemExit(125)
+try:
+    child.wait()
+except OSError:
+    raise SystemExit(125)
+raise SystemExit(124)
+'''
 _EXPECTED_ENVIRONMENT_KEYS = frozenset({
     "PATH",
     PROJECT_ROOT_ENVIRONMENT_VARIABLE,
@@ -212,6 +276,53 @@ def _attempt_mounts(root: Path, candidate_sha: str, workspace: Path, output_root
     return attempt.name
 
 
+def _prepare_executor_scratch(workspace: Path) -> Path:
+    """Reserve the sole ignored scratch mountpoint in a disposable workspace.
+
+    Docker requires a target below a read-only bind to exist before it can be
+    overmounted with tmpfs.  This creates only the fixed, empty ignored leaf;
+    it never makes the source mount generally writable or accepts a caller
+    selected scratch path.
+    """
+
+    scratch = workspace / _EXECUTOR_SCRATCH_RELATIVE
+    try:
+        if scratch.exists() or scratch.is_symlink():
+            if scratch.is_symlink() or not scratch.is_dir():
+                raise ValueError("scratch mountpoint is not a directory")
+            if any(path.name != ".DS_Store" or path.is_symlink() or not path.is_file()
+                   for path in scratch.iterdir()):
+                raise ValueError("scratch mountpoint is not empty")
+        else:
+            scratch.mkdir(mode=0o700)
+    except (OSError, ValueError) as error:
+        raise ReleaseContractError(
+            "release-suite-executor-scratch-unsafe",
+            "suite workspace scratch mountpoint is unsafe",
+        ) from error
+    return scratch
+
+
+def _preflight_installed_python(docker: DockerExecutor, root: Path, image: str, python: str) -> None:
+    """Prove the admitted image Python can execute the fixed guard form."""
+
+    observed = docker.run(
+        (
+            "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+            "--security-opt=no-new-privileges", "--pids-limit=128",
+            "--tmpfs", f"/tmp:rw,nosuid,nodev,exec,size={_SANDBOX_TMPFS_SIZE},mode=1777",
+            "--entrypoint", python, image, "-c", _PYTHON_CAPABILITY_GUARD,
+        ),
+        cwd=root,
+        timeout_seconds=_INSPECT_TIMEOUT_SECONDS,
+    )
+    if observed.timed_out or observed.exit_code != 0:
+        raise ReleaseContractError(
+            "release-suite-executor-python-unproven",
+            "installed N Python cannot execute the fixed deadline guard",
+        )
+
+
 def _cleanup_timed_out_container(
     docker: DockerExecutor,
     root: Path,
@@ -278,7 +389,7 @@ class InstalledNSuiteDockerExecutor:
         _attempt_mounts(self.root, self.candidate_snapshot_manifest_sha256, workspace, output_root)
         if command != self.sealed_command or working_directory != self.sealed_working_directory:
             raise ReleaseContractError("release-suite-executor-binding-mismatch", "suite command or working directory differs from sealed selection")
-        if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= _MAX_TIMEOUT_SECONDS:
+        if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= MAX_UNIT_TIMEOUT_SECONDS:
             raise ReleaseContractError("release-suite-executor-timeout-invalid", "suite timeout is outside the governed bound")
         bindings_sha256 = environment.get(SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE)
         if not isinstance(bindings_sha256, str) or _SHA256.fullmatch(bindings_sha256) is None:
@@ -321,25 +432,27 @@ class InstalledNSuiteDockerExecutor:
     ) -> SuiteExecutionResult:
         self._validate_invocation(command, workspace, output_root, working_directory, environment, timeout_seconds)
         attempt_name = _attempt_mounts(self.root, self.candidate_snapshot_manifest_sha256, workspace, output_root)
+        _prepare_executor_scratch(workspace)
         cidfile = output_root / "container.cid"
         if cidfile.exists() or cidfile.is_symlink():
             raise ReleaseContractError("release-suite-executor-output-unsafe", "suite output already has a container identity carrier")
+        _preflight_installed_python(self.docker, self.root, self.image_digest, command[0])
         working = str(SANDBOX_WORKSPACE_PATH if working_directory == "."
                       else SANDBOX_WORKSPACE_PATH / working_directory)
         argv = (
             "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
             "--security-opt=no-new-privileges", "--pids-limit=128",
-            "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+            "--tmpfs", f"/tmp:rw,nosuid,nodev,exec,size={_SANDBOX_TMPFS_SIZE},mode=1777",
+            "--tmpfs", f"{SANDBOX_WORKSPACE_PATH / _EXECUTOR_SCRATCH_RELATIVE}:rw,nosuid,nodev,exec,size={_SANDBOX_TMPFS_SIZE},mode=1777",
             "--label", f"{_SUITE_LABEL}={self.candidate_snapshot_manifest_sha256}",
             "--label", f"{_ATTEMPT_LABEL}={attempt_name}",
             "--cidfile", str(cidfile),
             "--mount", f"type=bind,src={workspace},dst={SANDBOX_WORKSPACE_PATH},readonly",
             "--mount", f"type=bind,src={output_root},dst={SANDBOX_OUTPUT_PATH}",
             "--workdir", working,
-            # Do not allow an installed image's application ENTRYPOINT to run
-            # before the sealed suite command. Docker receives the sealed
-            # executable only as its explicit entrypoint and its remaining
-            # sealed argv as command arguments.
+            # The inspected image Python is PID 1.  It receives only the
+            # executor-owned guard, captured deadline and equality-checked
+            # sealed argv; the guard never invokes a shell.
             "--entrypoint", command[0],
             "--env", f"PATH={environment['PATH']}",
             "--env", f"{PROJECT_ROOT_ENVIRONMENT_VARIABLE}={environment[PROJECT_ROOT_ENVIRONMENT_VARIABLE]}",
@@ -349,7 +462,7 @@ class InstalledNSuiteDockerExecutor:
             "--env", f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_ENVIRONMENT_VARIABLE]}",
             "--env", f"{SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE}={environment[SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE]}",
             self.image_digest,
-            *command[1:],
+            "-c", _DEADLINE_GUARD, str(timeout_seconds), "--", *command,
         )
         observed = self.docker.run(argv, cwd=self.root, timeout_seconds=timeout_seconds)
         # A missing exit status is equally non-terminal: the Docker CLI may

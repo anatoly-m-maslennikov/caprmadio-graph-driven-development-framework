@@ -206,6 +206,15 @@ class LocalReview(unittest.TestCase):
             reason='The text supplies two incompatible applicability boundaries.')
         contract.validate_part(report, context=context6())
 
+    def test_unknown_layout_repair_marker_cannot_bypass_local_boundary(self):
+        report = part6('coherence')
+        report['checks'][0]['status'] = 'blocked'
+        report.update(result='blocked', repair_disposition='layout_recoding', coverage_gaps=[{
+            'check_id': 'scope', 'kind': 'layout_dependency',
+            'reason': 'Scope heading is absent.'}])
+        with self.assertRaisesRegex(ValueError, 'layout alone'):
+            contract.validate_part(report, context=context6())
+
 
 if __name__ == '__main__':
     unittest.main()

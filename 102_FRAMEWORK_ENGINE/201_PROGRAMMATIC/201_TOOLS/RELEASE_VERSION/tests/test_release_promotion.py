@@ -10,11 +10,14 @@ import hashlib
 import json
 import shutil
 import sys
+import tempfile
 import tomllib
 import unittest
 import xml.etree.ElementTree as ET
+from contextlib import contextmanager
 from dataclasses import replace
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
@@ -24,21 +27,88 @@ for path in (RELEASE_ROOT, TEST_ROOT):
         sys.path.insert(0, str(path))
 
 from release_contract import ReleaseContractError
-from release_e2e_gate import E2EExecutionResult, HostE2EExecutor, run_candidate_e2e_gate
+import release_e2e_gate as _release_e2e_gate
+from release_e2e_gate import (
+    E2EExecutionResult,
+    ExecutableIdentity,
+    FrozenHostE2ECapability,
+    HostE2EExecutor,
+    run_candidate_e2e_gate,
+)
 from release_full_gate import aggregate_bound_release_gates
 from release_compilation import build_preflight_validated_candidate, render_release_candidate
 from release_handoff import CURRENT_SELECTOR_RELATIVE, PackageRow
-from release_packaging import _render_manifest, stage_framework_package
+from release_packaging import RUNTIME_ROOT, _render_manifest, stage_framework_package
 from release_promotion import promote_bound_release, verify_bound_promotion_evidence
+import release_promotion as _release_promotion
+from selector_publication_lock import SelectorPublicationLockError, selector_publication_lock
 import test_release_image as image_test
+
+
+_RECORDED_HOST_CAPABILITIES: dict[str, FrozenHostE2ECapability] = {}
+_REAL_FREEZE_CAPABILITY = HostE2EExecutor.freeze_capability
+
+
+def _recorded_host_capability(candidate, suite) -> FrozenHostE2ECapability:
+    """Build a schema-valid host capability for command-only Unit fixtures.
+
+    The Docker carrier is a disposable executable-shaped file under the
+    candidate fixture and is never invoked.  This keeps receipt readers on
+    the production capability schema without making Unit evidence claim live
+    Docker or Candidate E2E proof.
+    """
+    python = Path(sys.executable).resolve()
+    n_driver = (
+        Path(candidate.project_root) / RUNTIME_ROOT / "releases" / candidate.authority.executing_release
+        / "FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/run_release_e2e.py"
+    )
+    docker = Path(candidate.project_root) / ".caprmedio_tmp/mock-docker"
+    docker.parent.mkdir(parents=True, exist_ok=True)
+    docker.write_bytes(b"#!/bin/false\n# MOCK DATA ONLY: never executed by this Unit fixture\n")
+    docker.chmod(0o755)
+
+    def identity(role, path):
+        return ExecutableIdentity(role, str(path), hashlib.sha256(path.read_bytes()).hexdigest())
+
+    return FrozenHostE2ECapability(
+        suite.executing_selector_sha256,
+        suite.executing_release_package_sha256,
+        suite.executing_skill_sha256,
+        identity("n_host_controller", n_driver),
+        identity("python", python),
+        identity("driver", n_driver),
+        identity("docker", docker),
+        str(docker.parent),
+    )
+
+
+def _recorded_freeze(root, candidate):
+    capability = _RECORDED_HOST_CAPABILITIES.get(str(Path(root).resolve()))
+    if capability is None:
+        return _REAL_FREEZE_CAPABILITY(root, candidate)
+    # Keep the production freeze/reopen checks for N, Python and the N driver;
+    # only select the disposable fixture Docker carrier in this Unit process.
+    with patch.object(_release_e2e_gate, "_DOCKER_CANDIDATES", (capability.docker.path,)):
+        return _REAL_FREEZE_CAPABILITY(root, candidate)
+
+
+@contextmanager
+def recorded_host_patches():
+    """Bind the Unit-only capability seam for all later receipt reopenings."""
+    with patch.object(HostE2EExecutor, "freeze_capability", side_effect=_recorded_freeze):
+        yield
 
 
 def recorded_gate_fixtures(candidate, compilation, suite, build, verification):
     """Retain mocked host command reports while reopening all receipt bytes.
 
-    Executable identities are frozen from the exact retained N package. Only
-    host command execution is replaced; this fixture is never live E2E proof.
+    The capability has the production schema but uses a disposable, never
+    executed Docker carrier. Only host command execution is replaced; this
+    fixture is never live Docker or Candidate E2E proof.
     """
+    capability = _recorded_host_capability(candidate, suite)
+    _RECORDED_HOST_CAPABILITIES[str(Path(candidate.project_root).resolve())] = capability
+
     def command(argv, *, cwd, environment, timeout_seconds):
         if argv[:3] == ("docker", "image", "inspect"):
             return E2EExecutionResult(0, (verification.candidate_image_digest + "\n").encode(), b"")
@@ -48,7 +118,7 @@ def recorded_gate_fixtures(candidate, compilation, suite, build, verification):
         Path(argv[argv.index("--junit") + 1]).write_bytes(ET.tostring(report))
         return E2EExecutionResult(0, b"MOCK DATA ONLY: E2E report\n", b"")
 
-    with patch.object(HostE2EExecutor, "run", side_effect=command):
+    with recorded_host_patches(), patch.object(HostE2EExecutor, "run", side_effect=command):
         e2e = run_candidate_e2e_gate(candidate, compilation, suite, verification,
                                      image_build=build, executor=HostE2EExecutor())
     if not e2e.passed:
@@ -69,6 +139,9 @@ class ReleasePromotionTests(unittest.TestCase):
         # CLI execution is mocked by this fixture producer, never live Docker.
         self.build, self.verification = self.fixture.recorded_command_fixtures()
         self.args = (self.candidate, self.compilation, self.suite, self.build, self.verification)
+        self._host_patches = recorded_host_patches()
+        self._host_patches.__enter__()
+        self.addCleanup(self._host_patches.__exit__, None, None, None)
         self.gates = recorded_gate_fixtures(*self.args)
         self.selector = self.root / CURRENT_SELECTOR_RELATIVE
         self.public = self.root / ".agents/skills/ca"
@@ -78,6 +151,13 @@ class ReleasePromotionTests(unittest.TestCase):
         # Admission and artifact readers run normally on recorded mocked CLI
         # data; only fixture construction above replaces Docker execution.
         return promote_bound_release(*self.args, **self.gates)
+
+    def test_recorded_host_revalidation_refuses_mutated_mock_docker_carrier(self):
+        capability = _RECORDED_HOST_CAPABILITIES[str(self.root.resolve())]
+        Path(capability.docker.path).write_bytes(b"#!/bin/false\n# MUTATED MOCK DATA\n")
+        with self.assertRaises(ReleaseContractError) as raised:
+            HostE2EExecutor.revalidate_capability(self.root, self.candidate, capability)
+        self.assertEqual(raised.exception.code, "release-currentness-stale")
 
     def test_golden_actual_selector_complete_skill_no_hooks_and_exact_retry(self):
         prior = self.selector.read_bytes()
@@ -340,6 +420,108 @@ class ReleasePromotionTests(unittest.TestCase):
             self.promote()
         self.assertEqual(self.selector.read_bytes(), prior)
         self.assertEqual(list(outside.iterdir()), [])
+
+
+class PromotionPublicationLockTests(unittest.TestCase):
+    """Public promotion ABI lock ownership; gate behavior remains in the corpus above."""
+
+    def setUp(self):
+        self.root = Path(tempfile.mkdtemp(prefix="promotion-publication-lock-")).resolve()
+        self.candidate = SimpleNamespace(project_root=str(self.root))
+        self.selector = self.root / CURRENT_SELECTOR_RELATIVE
+        self.selector.parent.mkdir(parents=True)
+        self.selector.write_bytes(b"retained selector bytes")
+        self.args = (self.candidate, None, None, None, None)
+        self.gates = {"e2e": None, "full_gate": None}
+
+    def test_promotion_refuses_shared_lock_held_by_restoration_before_body(self):
+        prior = self.selector.read_bytes()
+        with selector_publication_lock(self.root, timeout_seconds=0):
+            with patch.object(_release_promotion, "selector_publication_lock",
+                              side_effect=lambda root: selector_publication_lock(root, timeout_seconds=0)):
+                with patch.object(_release_promotion, "_promote_bound_release_locked") as body:
+                    with self.assertRaises(SelectorPublicationLockError) as busy:
+                        promote_bound_release(*self.args, **self.gates)
+                    self.assertEqual("selector-publication-lock-busy", busy.exception.code)
+                    body.assert_not_called()
+        self.assertEqual(prior, self.selector.read_bytes())
+
+    def test_public_promotion_owns_same_lock_until_body_observation_returns(self):
+        observed = object()
+
+        def body(*args, **gates):
+            self.assertEqual(self.args, args)
+            self.assertEqual(self.gates, gates)
+            # The body encompasses the existing prior/intent reads, effects,
+            # and receipt observation. Restoration uses this identical helper.
+            with self.assertRaises(SelectorPublicationLockError):
+                with selector_publication_lock(self.root, timeout_seconds=0):
+                    self.fail("restoration crossed live promotion ownership")
+            return observed
+
+        with patch.object(_release_promotion, "_promote_bound_release_locked", side_effect=body):
+            self.assertIs(observed, promote_bound_release(*self.args, **self.gates))
+        with selector_publication_lock(self.root, timeout_seconds=0):
+            pass
+
+
+class SkillSyncMetadataHelperTests(unittest.TestCase):
+    """Only sync/record helpers on temporary files; never publishes a Skill."""
+
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory(prefix="skill-sync-metadata-")
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.folder = self.root / "ca"
+        self.folder.mkdir()
+        self.files = [self.folder / "SKILL.md", self.folder / "agents/openai.yaml"]
+        self.files[1].parent.mkdir()
+        for path, payload, mode in ((self.files[0], b"sealed Skill\n", 0o644),
+                                    (self.files[1], b"sealed agent configuration\n", 0o600)):
+            path.write_bytes(payload)
+            path.chmod(mode)
+
+    def test_unreadable_ds_store_is_not_opened_or_synced_and_real_files_keep_modes(self) -> None:
+        expected = _release_promotion._skill_records(self.root, self.folder)
+        metadata = [self.folder / ".DS_Store", self.folder / "agents/.DS_Store"]
+        for path in metadata:
+            path.write_bytes(b"Finder metadata\n")
+        opened = []
+        real_open = Path.open
+
+        def guarded_open(path, *args, **kwargs):
+            if path.name == ".DS_Store":
+                raise PermissionError("metadata is unreadable")
+            opened.append(path)
+            return real_open(path, *args, **kwargs)
+
+        with (patch.object(Path, "open", autospec=True, side_effect=guarded_open),
+              patch.object(_release_promotion.os, "fsync") as fsync,
+              patch.object(_release_promotion, "_sync") as sync_directory):
+            _release_promotion._sync_skill(self.folder)
+        self.assertEqual(set(self.files), set(opened))
+        self.assertEqual(2, fsync.call_count)
+        self.assertEqual([self.folder / "agents", self.folder],
+                         [call.args[0] for call in sync_directory.call_args_list])
+        self.assertEqual(expected, _release_promotion._skill_records(self.root, self.folder))
+        self.assertEqual([b"Finder metadata\n"] * len(metadata), [path.read_bytes() for path in metadata])
+
+    def test_unreadable_real_skill_file_is_still_a_sync_failure(self) -> None:
+        real_open = Path.open
+
+        def guarded_open(path, *args, **kwargs):
+            if path == self.files[0]:
+                raise PermissionError("real Skill file is unreadable")
+            return real_open(path, *args, **kwargs)
+
+        with patch.object(Path, "open", autospec=True, side_effect=guarded_open):
+            with self.assertRaises(PermissionError):
+                _release_promotion._sync_skill(self.folder)
+
+    def test_real_skill_fsync_failure_is_still_propagated(self) -> None:
+        with patch.object(_release_promotion.os, "fsync", side_effect=OSError("real file sync failed")):
+            with self.assertRaises(OSError):
+                _release_promotion._sync_skill(self.folder)
 
 
 if __name__ == "__main__":

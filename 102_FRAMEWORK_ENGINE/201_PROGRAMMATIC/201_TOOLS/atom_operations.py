@@ -15,6 +15,12 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from project_runtime import atomic_tempfile
+from VALIDATE_ATOMS.validate_atoms_workers.proposed_carrier import (
+    ProposedCarrierError,
+    source_context_from_project,
+    validate_proposed_carrier,
+)
+from VALIDATE_ATOMS.validate_atoms_workers.parsing import CarrierError, parse_carrier
 
 SCHEMA_VERSION = 1
 SETTINGS_PATH = Path(".caprmedio_caprmedio/caprmedio_project_settings.toml")
@@ -197,6 +203,35 @@ def scan_atoms(root: Path, *, under: str | None = None, lifecycle: str = "all") 
     return sorted(atoms, key=lambda atom: atom.relative)
 
 
+def atom_id_has_preserved_history_evidence(root: Path, atom_id: str) -> bool:
+    """Return whether any retained carrier reserves ``atom_id``.
+
+    This is deliberately more conservative than ``scan_atoms``.  A malformed
+    or otherwise unparsable retained Markdown file cannot establish Atom
+    properties, but a matching historical identity is enough to make reuse
+    unsafe.  Callers must block rather than treating parse failure as evidence
+    that allocation is free.
+    """
+
+    root = root.resolve()
+    control = control_root(root)
+    for candidate in control.rglob("*.md"):
+        if candidate.is_symlink():
+            continue
+        match = ATOM_ID.search(candidate.name)
+        if match is not None and match.group(1) == atom_id:
+            return True
+        try:
+            frontmatter, _ = split_frontmatter(candidate.read_text(encoding="utf-8"))
+            if frontmatter_scalar(frontmatter, "atom_id") == atom_id:
+                return True
+        except (OSError, UnicodeDecodeError, ToolError):
+            # The file cannot be trusted as an Atom, but its filename has
+            # already been checked above.  Do not infer any further property.
+            continue
+    return False
+
+
 def resolve_selector(root: Path, selector: str, atoms: Sequence[Atom] | None = None) -> Atom:
     root = root.resolve()
     if "/" in selector or (selector.endswith(".md") and Path(selector).is_absolute()):
@@ -288,9 +323,9 @@ def _revision(frontmatter: str, *, creating: bool) -> str:
         lines.append(line)
     else:
         lines[index] = line
-    stamp = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S")
+    stamp = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %z")
     index = next((i for i, line in enumerate(lines) if line.startswith("updated_at:")), None)
-    line = f"updated_at: {stamp}"
+    line = f'updated_at: "{stamp}"'
     if index is None:
         lines.append(line)
     else:
@@ -394,7 +429,20 @@ def write_atom_revision(atom: Atom, frontmatter: str, content: str) -> None:
     _atomic_write(atom.path, render(frontmatter, content))
 
 
-def prepare_create_atom_revision(root: Path, relative_path: str, frontmatter: str) -> tuple[Path, str, str | None]:
+def _validate_complete_carrier(root: Path, path: Path, frontmatter: str, content: str, *, creating: bool) -> None:
+    try:
+        parsed = parse_carrier(("---\n" + frontmatter + "\n---\n" + content).encode("utf-8"), Path("proposed.md"))
+        validate_proposed_carrier(
+            parsed.metadata, parsed.body, source_context_from_project(root), path.relative_to(control_root(root)),
+            allow_existing_relations=not creating,
+        )
+    except (CarrierError, ProposedCarrierError, UnicodeError) as error:
+        raise ToolError("complete-carrier-invalid", "new Atom carrier is incomplete, invalid, or unresolved") from error
+
+
+def prepare_create_atom_revision(
+    root: Path, relative_path: str, frontmatter: str, content: str | None = None, *, creating: bool = True
+) -> tuple[Path, str, str | None]:
     """Validate the explicit identity and destination of one new full carrier.
 
     The lifecycle adapter calls this before authorization and before any effect.
@@ -422,19 +470,27 @@ def prepare_create_atom_revision(root: Path, relative_path: str, frontmatter: st
         raise ToolError("atom-frontmatter-id-required", "non-draft Atom frontmatter must declare atom_id")
     if atom_id is not None and declared != atom_id:
         raise ToolError("atom-frontmatter-id-mismatch", "frontmatter atom_id must equal the filename Atom ID")
-    return path, normalized, atom_id
+    # Legacy lifecycle previews currently pass only the frontmatter.  They keep
+    # their existing identity/destination preflight until their owner supplies
+    # the already-carried body to this shared boundary.
+    if content is None:
+        return path, normalized, atom_id
+    if not isinstance(content, str):
+        raise ToolError("complete-carrier-required", "new Atom carrier content is required before preparation")
+    prepared = _revision(normalized, creating=creating) if creating else normalized
+    _validate_complete_carrier(root, path, prepared, content, creating=creating)
+    return path, prepared, atom_id
 
 
 def create_atom_revision(root: Path, relative_path: str, frontmatter: str, content: str) -> Atom:
     """Create one validated, complete Markdown Atom carrier atomically."""
 
     root = root.resolve()
-    path, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    path, prepared, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter, content)
     if path.exists():
         raise ToolError("destination-collision", f"Atom destination already exists: {path.relative_to(root)}")
-    if atom_id and any(atom.atom_id == atom_id for atom in scan_atoms(root)):
-        raise ToolError("atom-id-collision", f"Atom ID already exists: {atom_id}")
-    prepared = _revision(normalized, creating=True)
+    if atom_id and atom_id_has_preserved_history_evidence(root, atom_id):
+        raise ToolError("atom-id-collision", f"Atom ID was already used: {atom_id}")
     history_ref = None
     if _lifecycle(path, control_root(root)) == "draft":
         # Local import avoids the retained-history module importing this writer.
@@ -456,7 +512,9 @@ def move_atom_revision(root: Path, atom: Atom, relative_path: str, frontmatter: 
     """Atomically relocate one current carrier while retaining its identity."""
 
     root = root.resolve()
-    target, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    target, normalized, atom_id = prepare_create_atom_revision(
+        root, relative_path, frontmatter, content, creating=False
+    )
     if atom.atom_id is None or atom_id != atom.atom_id:
         raise ToolError("atom-frontmatter-id-mismatch", "moved carrier must retain the current Atom ID")
     if target != atom.path and target.exists():
@@ -481,7 +539,9 @@ def migrate_atom_identity_revision(root: Path, atom: Atom, relative_path: str, f
     """
 
     root = root.resolve()
-    target, normalized, atom_id = prepare_create_atom_revision(root, relative_path, frontmatter)
+    target, normalized, atom_id = prepare_create_atom_revision(
+        root, relative_path, frontmatter, content, creating=False
+    )
     if atom.atom_id is None or atom_id is None or atom_id == atom.atom_id:
         raise ToolError("identity-mapping-invalid", "migration requires distinct explicitly bound legacy and canonical encodings")
     if target.parent != atom.path.parent:
@@ -1159,6 +1219,12 @@ def cli(tool_id: str) -> int:
     kind = "finder" if tool_id in {"ATOM_SEARCH", "ATOM_READ"} else "doer"
     mode = "describe" if args.command == "describe" else "apply" if getattr(args, "apply", False) else "read-only" if kind == "finder" else "dry-run"
     try:
+        if (args.command == "run" and getattr(args, "apply", False)
+                and tool_id in {"ATOM_CREATE", "ATOM_UPDATE"}):
+            raise ToolError(
+                "standalone-apply-not-admitted",
+                f"{tool_id} --apply requires authorized project-local MCP delegation with a sealed Initiative action envelope",
+            )
         root = resolve_repository(args.repository)
         if args.command == "describe":
             operation = describe(tool_id)

@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import json
 import sys
+import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -36,6 +37,7 @@ from release_full_gate import FullGateEvidence
 from release_e2e_gate import CandidateE2EGateEvidence
 from release_promotion import PromotionEvidence
 from release_handoff import FRAMEWORK_SETTINGS_RELATIVE
+from release_suite_execution import _DEADLINE_GUARD, _PYTHON_CAPABILITY_GUARD
 import test_release_image as image_test
 import test_release_suite as suite_test
 
@@ -61,10 +63,30 @@ class SelectedNSuiteDocker(image_test.FakeDocker):
                 CONTEXT_LABEL: self.source_context_sha256,
             }, "Env": ["PATH=/usr/bin:/bin"]}}]
             return DockerCommandResult(0, json.dumps(payload).encode(), b"", False)
+        if argv[:2] == ("docker", "run") and "--cidfile" not in argv:
+            # The installed-N executor first proves that its inspected Python
+            # can execute the fixed guard.  This test double has no canary
+            # specification for that separate, effect-free preflight.
+            entrypoint = argv.index("--entrypoint")
+            if ("--mount" not in argv and argv[entrypoint + 2] == "sha256:" + "a" * 64
+                    and argv[entrypoint + 3] == "-c"):
+                self.calls.append(argv)
+                return DockerCommandResult(0, b"", b"", False)
         if argv[:2] == ("docker", "run") and "--read-only" in argv and "--mount" in argv:
             self.calls.append(argv)
             image_index = argv.index("sha256:" + "a" * 64)
             command = (argv[argv.index("--entrypoint") + 1], *argv[image_index + 1:])
+            # The real container executes the trusted watchdog as its
+            # entrypoint.  Translate both image-Python occurrences to the
+            # fixture interpreter, while retaining the watchdog envelope and
+            # its sealed child argv for the subprocess exercise below.
+            if (len(command) >= 7 and command[1] == "-c" and command[4] == "--"
+                    and tuple(command[5:]) == suite_test.SUITE_DRIVER_COMMAND):
+                command = (
+                    sys.executable, *command[1:5], sys.executable,
+                    *command[6:], self.suite_executor.mode,
+                    self.suite_executor.literal,
+                )
             mounts = [argv[index + 1] for index, value in enumerate(argv) if value == "--mount"]
             workspace = Path(next(value.split("src=", 1)[1].split(",", 1)[0] for value in mounts if "dst=/workspace" in value))
             output = Path(next(value.split("src=", 1)[1].split(",", 1)[0] for value in mounts if "dst=/output" in value))
@@ -80,6 +102,71 @@ class SelectedNSuiteDocker(image_test.FakeDocker):
             )
             return DockerCommandResult(result.exit_code, result.stdout, result.stderr, result.timed_out)
         return super().run(argv, cwd=cwd, timeout_seconds=timeout_seconds)
+
+
+class SelectedNSuiteDockerContractTests(unittest.TestCase):
+    def test_preflight_and_deadline_wrapper_preserve_the_fixed_child_argv(self):
+        """Exercise only the fixture Docker boundary, not release source-copy phases."""
+
+        class CapturingExecutor:
+            mode = "success"
+            literal = "$HOME;$(should-stay-literal)"
+
+            def run(self, command, *, workspace, output_root, working_directory, environment, timeout_seconds):
+                self.call = (command, workspace, output_root, working_directory, environment, timeout_seconds)
+                return SimpleNamespace(exit_code=0, stdout=b"suite", stderr=b"", timed_out=False)
+
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as temporary:
+            root = Path(temporary)
+            workspace, output = root / "workspace", root / "output"
+            workspace.mkdir()
+            output.mkdir()
+            executor = CapturingExecutor()
+            docker = SelectedNSuiteDocker(root, executor)
+            image = "sha256:" + "a" * 64
+            preflight = (
+                "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+                "--security-opt=no-new-privileges", "--pids-limit=128",
+                "--tmpfs", "/tmp:rw,nosuid,nodev,exec,size=2g,mode=1777",
+                "--entrypoint", "python", image, "-c", _PYTHON_CAPABILITY_GUARD,
+            )
+            self.assertEqual(docker.run(preflight, cwd=root, timeout_seconds=30).exit_code, 0)
+            wrapped = (
+                "docker", "run", "--rm", "--read-only",
+                "--mount", f"type=bind,src={workspace},dst=/workspace,readonly",
+                "--mount", f"type=bind,src={output},dst=/output",
+                "--cidfile", str(output / "container.cid"),
+                "--workdir", "/workspace", "--entrypoint", "python", image,
+                "-c", _DEADLINE_GUARD, "17.5", "--", *suite_test.SUITE_DRIVER_COMMAND,
+            )
+            result = docker.run(wrapped, cwd=root, timeout_seconds=17.5)
+            # The later image canary has no cidfile too, but it is not the
+            # installed-N Python capability preflight and must reach the base
+            # image-canary mock.
+            docker.spec = {
+                "candidate_snapshot_manifest_sha256": "candidate",
+                "package_manifest_sha256": "package",
+                "package_rows": [],
+            }
+            canary = (
+                "docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+                "--security-opt=no-new-privileges", "--pids-limit=128",
+                "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+                "--entrypoint", "python", image, "/opt/caprmedio-release-canary.py",
+            )
+            canary_result = docker.run(canary, cwd=root, timeout_seconds=120)
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(json.loads(canary_result.stdout)["candidate_snapshot_manifest_sha256"], "candidate")
+        command, observed_workspace, observed_output, working_directory, environment, timeout = executor.call
+        self.assertEqual(command, (
+            sys.executable, "-c", _DEADLINE_GUARD, "17.5", "--",
+            sys.executable, suite_test.SUITE_DRIVER_COMMAND[1],
+            executor.mode, executor.literal,
+        ))
+        self.assertEqual((observed_workspace, observed_output, working_directory, environment, timeout),
+                         (workspace, output, ".", {}, 17.5))
+        self.assertEqual(docker.calls, [preflight, wrapped, canary])
 
 
 class ReleaseActionsTests(unittest.TestCase):
@@ -224,7 +311,8 @@ class ReleaseActionsTests(unittest.TestCase):
             for index in range(6, 8):
                 results.append(self.execute(index))
         self.assertEqual([result.phase for result in results], [pair[2] for pair in PHASES[:8]])
-        self.assertTrue(all(result.outcome == "completed" for result in results))
+        outcomes = tuple((result.phase, result.outcome, result.reason) for result in results)
+        self.assertTrue(all(result.outcome == "completed" for result in results), outcomes)
         self.assertIsNotNone(self.run.verification)
         self.assertFalse(self.run.stopped)
         self.assertFalse(any("rm" in command or "prune" in command for command in self.docker.calls))

@@ -26,7 +26,9 @@ from release_manifest_authorization import (  # noqa: E402
     PublicationAuthorizationContext,
     ReleaseManifestAuthorizationError,
     validate_candidate_payload,
+    validate_refresh_candidate_payload,
     validate_publication_context,
+    validate_refresh_context,
 )
 from selected_routes import SELECTED_ROUTE_NAMES, SelectedRouteError, load_selected_manifest  # noqa: E402
 
@@ -97,8 +99,44 @@ def _normalized_plan(plan: Mapping[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _normalized_refresh_plan(plan: Mapping[str, Any]) -> dict[str, Any]:
+    required = {
+        "publication_operation", "manifest_ref", "observed_input_sha256", "current_route_names",
+        "candidate_route_names", "candidate_canonical_manifest_sha256", "added_route",
+        "added_admission_route", "candidate_byte_count",
+    }
+    if (
+        not isinstance(plan, Mapping)
+        or not required <= set(plan)
+        or set(plan) - required - {"mode"}
+        or plan.get("publication_operation") != "refresh"
+        or ("mode" in plan and plan["mode"] != "plan")
+    ):
+        raise ReleaseManifestLifecycleError("refresh plan has missing or unsupported fields")
+    result = {key: plan[key] for key in required}
+    result["manifest_ref"] = _safe_ref(result["manifest_ref"], "refresh plan.manifest_ref")
+    result["observed_input_sha256"] = _digest(result["observed_input_sha256"], "refresh plan.observed_input_sha256")
+    result["candidate_canonical_manifest_sha256"] = _digest(
+        result["candidate_canonical_manifest_sha256"], "refresh plan.candidate_canonical_manifest_sha256"
+    )
+    expected_names = [*SELECTED_ROUTE_NAMES, "release_version"]
+    if result["current_route_names"] != expected_names or result["candidate_route_names"] != expected_names:
+        raise ReleaseManifestLifecycleError("refresh plan does not retain the exact sixteen-route projection")
+    if result["added_route"] != "release_version" or result["added_admission_route"] != "release_version":
+        raise ReleaseManifestLifecycleError("refresh plan does not identify the Release row")
+    if type(result["candidate_byte_count"]) is not int or result["candidate_byte_count"] < 1:
+        raise ReleaseManifestLifecycleError("refresh plan has invalid candidate byte count")
+    return result
+
+
+def _normalized_any_plan(plan: Mapping[str, Any]) -> dict[str, Any]:
+    if isinstance(plan, Mapping) and plan.get("publication_operation") == "refresh":
+        return _normalized_refresh_plan(plan)
+    return _normalized_plan(plan)
+
+
 def _intent_base(plan: Mapping[str, Any], context: PublicationAuthorizationContext) -> dict[str, Any]:
-    normalized = _normalized_plan(plan)
+    normalized = _normalized_any_plan(plan)
     return {
         "plan": normalized,
         "source_frontier_digest": _digest(context.source_frontier_digest, "context.source_frontier_digest"),
@@ -129,7 +167,7 @@ def _read_intent(value: Mapping[str, Any]) -> dict[str, Any]:
     }:
         raise ReleaseManifestLifecycleError("pending publication intent has unsupported fields")
     return {
-        "plan": _normalized_plan(decoded["plan"]),
+        "plan": _normalized_any_plan(decoded["plan"]),
         "source_frontier_digest": _digest(decoded["source_frontier_digest"], "pending.source_frontier_digest"),
         "authority_digest": _digest(decoded["authority_digest"], "pending.authority_digest"),
         "candidate_payload_sha256": _digest(
@@ -161,8 +199,10 @@ class ReleaseManifestLifecycle:
         if authorization is not self.context:
             return False
         try:
-            validate_publication_context(self.context, self.root, dict(plan))
-        except (ReleaseManifestAuthorizationError, OSError, TypeError, ValueError):
+            normalized = _normalized_any_plan(plan)
+            validator = validate_refresh_context if "publication_operation" in normalized else validate_publication_context
+            validator(self.context, self.root, dict(normalized))
+        except (ReleaseManifestAuthorizationError, ReleaseManifestLifecycleError, OSError, TypeError, ValueError):
             return False
         return True
 
@@ -174,7 +214,7 @@ class ReleaseManifestLifecycle:
         held.  It may span prepare, final freshness checks, and the publisher's
         atomic replacement without creating a second lock or state carrier.
         """
-        manifest_ref = _normalized_plan(plan)["manifest_ref"]
+        manifest_ref = _normalized_any_plan(plan)["manifest_ref"]
         lock_id = "release-manifest-carrier:" + manifest_ref
         if self._held_carrier_lock is not None:
             raise ReleaseManifestLifecycleError("a Release manifest publication lock is already held")
@@ -276,7 +316,9 @@ class ReleaseManifestLifecycle:
             "manifest_ref", "observed_input_sha256", "current_route_names", "candidate_route_names",
             "candidate_canonical_manifest_sha256", "added_route", "added_admission_route", "candidate_byte_count",
         ) if key in result}
-        return _normalized_plan(plan)
+        if "publication_operation" in result:
+            plan["publication_operation"] = result["publication_operation"]
+        return _normalized_any_plan(plan)
 
     def recover_release_manifest_publication(self, event_id: str) -> dict[str, Any]:
         """Recover only exact pending evidence; never replay a manifest replacement."""
@@ -294,8 +336,10 @@ class ReleaseManifestLifecycle:
 
     def _validate_context(self, plan: Mapping[str, Any], *, manifest_state: str = "input") -> None:
         try:
-            validated = validate_publication_context(
-                self.context, self.root, dict(_normalized_plan(plan)), manifest_state=manifest_state,
+            normalized = _normalized_any_plan(plan)
+            validator = validate_refresh_context if "publication_operation" in normalized else validate_publication_context
+            validated = validator(
+                self.context, self.root, dict(normalized), manifest_state=manifest_state,
             )
         except (ReleaseManifestAuthorizationError, OSError, TypeError, ValueError) as error:
             if manifest_state == "candidate":
@@ -309,7 +353,7 @@ class ReleaseManifestLifecycle:
     def _validate_payload(self, plan: Mapping[str, Any], payload: bytes) -> None:
         if not isinstance(payload, bytes) or not payload:
             raise ReleaseManifestLifecycleError("candidate publication payload must be non-empty bytes")
-        if len(payload) != _normalized_plan(plan)["candidate_byte_count"]:
+        if len(payload) != _normalized_any_plan(plan)["candidate_byte_count"]:
             raise ReleaseManifestLifecycleError("candidate publication payload has a different byte count from the plan")
         try:
             document = json.loads(payload)
@@ -320,7 +364,9 @@ class ReleaseManifestLifecycle:
 
     def _validate_candidate_payload(self, plan: Mapping[str, Any], payload: bytes) -> None:
         try:
-            validate_candidate_payload(self.context, self.root, dict(_normalized_plan(plan)), payload)
+            normalized = _normalized_any_plan(plan)
+            validator = validate_refresh_candidate_payload if "publication_operation" in normalized else validate_candidate_payload
+            validator(self.context, self.root, dict(normalized), payload)
         except (ReleaseManifestAuthorizationError, OSError, TypeError, ValueError) as error:
             raise ReleaseManifestLifecycleError("candidate publication payload is not bound to trusted authority") from error
 

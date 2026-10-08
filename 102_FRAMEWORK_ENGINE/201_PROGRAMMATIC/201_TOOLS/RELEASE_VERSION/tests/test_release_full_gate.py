@@ -16,6 +16,7 @@ import xml.etree.ElementTree as ET
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = RELEASE_ROOT.parents[3]
 TEST_ROOT = Path(__file__).resolve().parent
 for directory in (RELEASE_ROOT, TEST_ROOT):
     if str(directory) not in sys.path:
@@ -41,7 +42,7 @@ class ReleaseFullGateContractTests(unittest.TestCase):
         return hashlib.sha256(payload).hexdigest()
 
     def _fixture(self):
-        retained = RELEASE_ROOT / ".caprmedio_tmp/tests/release-full-gate"
+        retained = PROJECT_ROOT / ".caprmedio_tmp/tests/release-full-gate"
         retained.mkdir(parents=True, exist_ok=True)
         return materialize(Path(tempfile.mkdtemp(prefix="golden-", dir=retained)))
 

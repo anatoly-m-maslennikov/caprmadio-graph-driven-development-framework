@@ -93,6 +93,8 @@ class SelectedGraphTests(unittest.TestCase):
         self.projection_root = f"{self.control_root}/_projection"
         self.selected = self.root / "selected"
         self.selected.mkdir(parents=True)
+        # Published graph projections use project_runtime.atomic_tempfile.
+        (self.root / ".git").mkdir()
         settings = self.root / self.control_root / "caprmedio_project_settings.toml"
         settings.parent.mkdir(parents=True)
         settings.write_text(
@@ -135,16 +137,63 @@ class SelectedGraphTests(unittest.TestCase):
         return path
 
     def request(self, graph_kind: str, **overrides: object) -> dict[str, object]:
+        start_receipt = {
+            "event_id": "test-action-start",
+            "action_id": "test-action",
+            "event_digest": "0" * 64,
+            "carrier": ".caprmedio_selected_graphs/_journal/events.ndjson",
+            "line": 1,
+            "previous_carrier_digest": "0" * 64,
+            "appended_carrier_digest": "1" * 64,
+        }
         request: dict[str, object] = {
             "graph_kind": graph_kind,
             "source_frontier": graph.source_frontier_for(self.root, self.selected),
             "selection": {"atom_ids": ["CA-R-001", "CA-R-002", "CA-R-003", "CA-R-004"]},
             "representation_configuration": {"format": "canonical-json"},
             "capability_permission_evidence": {"authorized": True},
-            "run_recording_context": {"state": "confirmed", "receipt_refs": ["receipt-1"]},
+            "run_recording_context": graph.actual_run_recording_context(
+                "test-workflow-run", "test-step-run", "test-action-run", start_receipt,
+            ),
         }
         request.update(overrides)
         return request
+
+    def test_caller_supplied_recording_claim_cannot_publish(self) -> None:
+        result = graph.build_graph(
+            self.root,
+            self.request(
+                "entities",
+                run_recording_context={"state": "confirmed", "receipt_refs": ["forged-receipt"]},
+            ),
+        )
+
+        self.assertEqual("failed", result["outcome"])
+        self.assertEqual("recording-context-untrusted", result["diagnostics"][0]["code"])
+        self.assertEqual([], result["output_effects"]["paths"])
+        self.assertFalse((self.root / self.projection_root / "entities_graph.json").exists())
+
+    def test_secret_shaped_property_is_rejected_without_value_disclosure(self) -> None:
+        secret = "do-not-disclose-graph-secret"
+        self.write(
+            "CA-R-005.md",
+            current_atom("CA-R-005", governs="Protected Entity").replace(
+                "version: 1\n", f"api_key: {secret}\nversion: 1\n",
+            ),
+        )
+        result = graph.build_graph(
+            self.root,
+            self.request(
+                "entities",
+                selection={"atom_ids": ["CA-R-001", "CA-R-002", "CA-R-003", "CA-R-004", "CA-R-005"]},
+            ),
+        )
+
+        serialized = json.dumps(result, sort_keys=True)
+        self.assertEqual("failed", result["outcome"])
+        self.assertEqual("secret-shaped-property", result["diagnostics"][0]["code"])
+        self.assertNotIn(secret, serialized)
+        self.assertFalse((self.root / self.projection_root / "entities_graph.json").exists())
 
     def test_complete_entities_and_terms_graphs_are_separate_and_traceable(self) -> None:
         entities = graph.build_graph(self.root, self.request("entities"))

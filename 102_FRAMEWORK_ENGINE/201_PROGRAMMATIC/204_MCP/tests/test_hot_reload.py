@@ -1,13 +1,21 @@
 """One real stdio connection across mock implementation generations."""
 import asyncio
+from contextlib import redirect_stderr
+import io
+import os
 from pathlib import Path
+import re
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 from mcp import Client, StdioServerParameters
 
 APP = Path(__file__).resolve().parents[1]
 ROOT = APP.parents[2]
+sys.path.insert(0, str(APP))
+from hot_reload import Gateway, Generation, GENERATION_READY_TIMEOUT_SECONDS  # noqa: E402
 
 
 class HotReload(unittest.IsolatedAsyncioTestCase):
@@ -36,6 +44,25 @@ class HotReload(unittest.IsolatedAsyncioTestCase):
                 'asyncio.run(Gateway(sys.argv[2],sys.argv[3]).serve())')
         return StdioServerParameters(command=sys.executable,
             args=['-B', '-c', code, str(APP), str(self.root), str(self.source)])
+
+    def startup_records(self, stderr):
+        """The cold-start diagnostic is a fixed, safe stderr-only envelope."""
+        lines = [line for line in stderr.getvalue().splitlines() if line]
+        self.assertTrue(lines, 'gateway emitted no startup telemetry to stderr')
+        records = []
+        for line in lines:
+            match = re.fullmatch(
+                r'caprmedio_mcp_startup phase=([a-z_]+) '
+                r'outcome=(completed|failed) elapsed_ms=([0-9]+)', line)
+            self.assertIsNotNone(match, line)
+            phase, outcome, elapsed_ms = match.groups()
+            self.assertIn(phase, {'initial_fingerprint', 'reload_fingerprint', 'fingerprint_verify',
+                                  'child_handshake', 'list_tools', 'generation_ready',
+                                  'schema_validation'})
+            elapsed_ms = int(elapsed_ms)
+            records.append((phase, outcome, elapsed_ms))
+        self.assertEqual(len(records), len({phase for phase, _, _ in records}))
+        return records
 
     async def reload(self, client, request_id):
         return await client.call_tool('reload_mcp_implementation',
@@ -135,6 +162,99 @@ class HotReload(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(invalid.is_error)
             self.assertFalse((self.root / '.caprmedio_install/mcp_hot_reload').exists())
 
+    async def test_cold_generation_bootstraps_before_the_legacy_deadline(self):
+        """The gateway must not spend the child startup budget on auto-discovery."""
+        self.source.write_text(
+            'import time\n'
+            'time.sleep(11)\n'
+            'from mcp.server import MCPServer\n'
+            'server=MCPServer("slow")\n'
+            '@server.tool(name="echo", structured_output=True)\n'
+            'def echo() -> dict[str,str]:\n'
+            '    return {"version":"slow"}\n'
+            'server.run(transport="stdio")\n')
+        async with Client(self.params(), cache=None, mode='legacy',
+                          read_timeout_seconds=GENERATION_READY_TIMEOUT_SECONDS) as client:
+            self.assertEqual((await client.call_tool('echo')).structured_content['version'], 'slow')
+
+    async def test_startup_telemetry_is_opt_in_fixed_and_never_changes_deadline(self):
+        gateway = Gateway(self.root, self.source)
+        stderr = io.StringIO()
+        with patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}), redirect_stderr(stderr):
+            await gateway.initialize()
+        self.addAsyncCleanup(gateway.close)
+
+        records = self.startup_records(stderr)
+        completed = {phase for phase, outcome, _ in records if outcome == 'completed'}
+        self.assertTrue({'initial_fingerprint', 'child_handshake', 'list_tools',
+                         'generation_ready', 'schema_validation', 'fingerprint_verify'} <= completed)
+        self.assertEqual(GENERATION_READY_TIMEOUT_SECONDS, 20)
+        self.assertNotIn(str(self.root), stderr.getvalue())
+        self.assertNotIn(str(self.source), stderr.getvalue())
+
+    async def test_startup_telemetry_is_silent_without_the_opt_in(self):
+        gateway = Gateway(self.root, self.source)
+        stderr = io.StringIO()
+        with patch.dict(os.environ, {}, clear=False), redirect_stderr(stderr):
+            os.environ.pop('CAPRMEDIO_STARTUP_TELEMETRY', None)
+            await gateway.initialize()
+        self.addAsyncCleanup(gateway.close)
+        self.assertEqual(stderr.getvalue(), '')
+
+    async def test_startup_telemetry_reports_a_sanitized_failed_phase(self):
+        secret = 'SENSITIVE_SOURCE_CONTENT_SHALL_NOT_ESCAPE'
+        gateway = Gateway(self.root, self.source)
+        stderr = io.StringIO()
+
+        class FailedGeneration:
+            def __init__(self, *args, **kwargs):
+                self.ready = asyncio.get_running_loop().create_future()
+                self.ready.set_exception(RuntimeError(secret))
+
+            async def close(self):
+                return None
+
+        with (patch.dict(os.environ, {'CAPRMEDIO_STARTUP_TELEMETRY': '1'}),
+              patch('hot_reload.Generation', FailedGeneration), redirect_stderr(stderr)):
+            with self.assertRaisesRegex(RuntimeError, secret):
+                await gateway.initialize()
+
+        records = self.startup_records(stderr)
+        self.assertEqual(records[-1][:2], ('generation_ready', 'failed'))
+        rendered = stderr.getvalue()
+        self.assertNotIn(secret, rendered)
+        self.assertNotIn(str(self.root), rendered)
+        self.assertNotIn(str(self.source), rendered)
+        self.assertNotIn('--project-root', rendered)
+
+    async def test_generation_uses_the_bounded_legacy_bootstrap(self):
+        observed = {}
+
+        class BootstrapClient:
+            def __init__(self, params, **kwargs):
+                observed['params'] = params
+                observed.update(kwargs)
+
+            async def __aenter__(self):
+                return self
+
+            async def __aexit__(self, exc_type, exc_value, traceback):
+                return None
+
+            async def list_tools(self, cursor=None):
+                return SimpleNamespace(tools=[], next_cursor=None)
+
+        with patch('hot_reload.Client', BootstrapClient):
+            generation = Generation(params='local-child', fingerprint='test')
+            await generation.ready
+            generation.stop.set()
+            await generation.task
+
+        self.assertEqual(observed, {
+            'params': 'local-child', 'cache': None, 'mode': 'legacy',
+            'read_timeout_seconds': GENERATION_READY_TIMEOUT_SECONDS,
+        })
+
     async def test_generation_retains_only_explicit_runtime_namespace(self):
         self.source.write_text(
             'import os\nfrom mcp.server import MCPServer\n'
@@ -164,3 +284,14 @@ class HotReload(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(response.is_error)
             self.assertEqual(response.structured_content['outcome'], 'uncertain')
             self.assertEqual((self.root / 'calls').read_text(), 'called\n')
+
+    async def test_aggregate_shutdown_cancels_a_generation_after_its_five_second_drain(self):
+        generation = Generation.__new__(Generation)
+        generation.stop = asyncio.Event()
+        generation.task = asyncio.create_task(asyncio.sleep(60))
+        gateway = Gateway(self.root, self.source)
+        gateway.generations = [generation]
+        started = asyncio.get_running_loop().time()
+        await gateway.close()
+        self.assertLess(asyncio.get_running_loop().time() - started, 6)
+        self.assertTrue(generation.task.done())

@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import shutil
 import stat
 import sys
 import tempfile
@@ -30,19 +31,38 @@ from release_source_admission import (  # noqa: E402
     AUTHORITY_PIN,
     ReleaseSourceAdmissionError,
     _private_carriers,
+    _pin_shape,
     derive_release_private_carriers,
     derive_release_source_admission,
+    derive_unknown_effect_resolver_authority,
 )
 from selected_routes import PROJECT_SETTINGS_REF, canonical_json, load_selected_manifest, selected_manifest_ref  # noqa: E402
 
 
 _OPERATORS_REGISTRY = PurePosixPath(".caprmedio_caprmedio/operators_registry.toml")
+_D580_REFERENCE = (
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
+    "201_FEATURE_TOOLS/07_delivery/"
+    "CA-D-580-TOOLS-DELIVERY--encode-the-private-release-suite-reference-context.md"
+)
+_UNIT_DEADLINE_SETTINGS = (
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/"
+    "caprmedio_framework_default_settings.toml",
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/"
+    "caprmedio_framework_settings.toml",
+)
 _BINDING_FIELDS = frozenset({
     "candidate_snapshot_manifest_sha256", "compiled_candidate_root",
     "selected_n_identity", "selected_n_image_context",
 })
 _SHA256 = re.compile(r"[0-9a-f]{64}")
 _IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:-]{0,255}")
+_ATOM_ID = re.compile(r"CA-[A-Z]+-[0-9]+")
+_SELECTED_SOURCE_REFRESH_IDS = (
+    "CA-R-1041", "CA-R-1894", "CA-M-350", "CA-E-593", "CA-D-588",
+)
 
 
 class ReleaseSuiteReferenceContextError(ValueError):
@@ -216,10 +236,191 @@ def _control_root_from_settings(raw: bytes) -> PurePosixPath:
     return _safe_relative(configured) if configured is not None else PurePosixPath(".caprmedio_caprmedio")
 
 
+def _project_structure_ref(settings_raw: bytes) -> str:
+    """Resolve only the explicit Project Structure carrier named by settings."""
+    return (_control_root_from_settings(settings_raw) / "project_structure.toml").as_posix()
+
+
+def _atom_identity(raw: bytes, relative: str) -> tuple[str, int, str]:
+    """Read the closed active-Atom identity required by D580 prompt pins."""
+    try:
+        lines = raw.decode("utf-8").splitlines()
+        if not lines or lines[0] != "---":
+            raise ValueError("frontmatter is absent")
+        end = lines.index("---", 1)
+        values: dict[str, str] = {}
+        for field in ("atom_id", "version", "status"):
+            matches = [line.split(":", 1)[1].strip() for line in lines[1:end]
+                       if line.startswith(f"{field}:")]
+            if len(matches) != 1:
+                raise ValueError(f"{field} is absent or duplicated")
+            value = matches[0]
+            if value.startswith('"'):
+                value = json.loads(value)
+            elif value.startswith("'") and value.endswith("'"):
+                value = value[1:-1]
+            if not isinstance(value, str):
+                raise ValueError(f"{field} is not textual")
+            values[field] = value
+        if _ATOM_ID.fullmatch(values["atom_id"]) is None or re.fullmatch(r"[1-9][0-9]*", values["version"]) is None:
+            raise ValueError("identity or version is invalid")
+        return values["atom_id"], int(values["version"]), values["status"]
+    except (UnicodeDecodeError, ValueError, TypeError, IndexError, json.JSONDecodeError) as error:
+        raise ReleaseSuiteReferenceContextError(
+            f"Prompt binding source identity is invalid: {relative}"
+        ) from error
+
+
+def _prompt_binding_rows(d580_raw: bytes) -> tuple[tuple[str, str], ...]:
+    """Parse D580's closed table before reading the declared binding files."""
+    try:
+        text = d580_raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ReleaseSuiteReferenceContextError("D580 is unavailable for Prompt binding frontier") from error
+    match = re.search(
+        r"^### Prompt binding frontier\n\n"
+        r"\| Package \| Binding carrier \| SHA-256 \|\n"
+        r"\| --- \| --- \| --- \|\n"
+        r"\| IMPLEMENTATION_WORKFLOW \| `([^`]+)` \| `([0-9a-f]{64})` \|\n"
+        r"\| RMED_ATOM_REVIEW \| `([^`]+)` \| `([0-9a-f]{64})` \|$",
+        text, re.MULTILINE,
+    )
+    if match is None:
+        _fail("D580 Prompt binding frontier is absent or malformed")
+    binding_rows = tuple((match.group(index), match.group(index + 1)) for index in (1, 3))
+    if len({path for path, _digest in binding_rows}) != len(binding_rows):
+        _fail("D580 Prompt binding frontier duplicates a binding carrier")
+    for binding_path, _digest in binding_rows:
+        _forbid_non_control_path(binding_path)
+    return binding_rows
+
+
+def _prompt_binding_frontier(d580_raw: bytes, captured: Mapping[str, tuple[bytes, int]]) -> tuple[str, ...]:
+    """Derive D580's two exact binding carriers and their sealed active pins."""
+    binding_rows = _prompt_binding_rows(d580_raw)
+    paths: dict[str, tuple[str, int, str]] = {}
+    for binding_path, expected_digest in binding_rows:
+        captured_binding = captured.get(binding_path)
+        if captured_binding is None:
+            _fail("D580 Prompt binding carrier was not descriptor-captured")
+        binding_raw, _mode = captured_binding
+        if hashlib.sha256(binding_raw).hexdigest() != expected_digest:
+            _fail("D580 Prompt binding carrier is stale")
+        try:
+            binding = json.loads(binding_raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise ReleaseSuiteReferenceContextError("D580 Prompt binding carrier is invalid JSON") from error
+        if not isinstance(binding, Mapping) or binding.get("schema_version") != 1 or not isinstance(binding.get("sources"), list):
+            _fail("D580 Prompt binding carrier has an invalid schema")
+        local_paths: set[str] = set()
+        for pin in binding["sources"]:
+            if not isinstance(pin, Mapping) or set(pin) != {"atom_id", "version", "path", "sha256"}:
+                _fail("D580 Prompt source pin has an invalid schema")
+            atom_id, version, source_path, digest = (
+                pin["atom_id"], pin["version"], pin["path"], pin["sha256"]
+            )
+            if (not isinstance(atom_id, str) or _ATOM_ID.fullmatch(atom_id) is None
+                    or type(version) is not int or version < 1
+                    or not isinstance(digest, str) or _SHA256.fullmatch(digest) is None):
+                _fail("D580 Prompt source pin has an invalid identity")
+            source_path = _forbid_non_control_path(source_path).as_posix()
+            if source_path in local_paths:
+                _fail("D580 Prompt binding carrier duplicates a source pin")
+            local_paths.add(source_path)
+            source = captured.get(source_path)
+            observed = (atom_id, version, digest)
+            prior = paths.setdefault(source_path, observed)
+            if prior != observed:
+                _fail("D580 Prompt frontiers conflict on a shared source pin")
+            # The first pass supplies the paths to descriptor preflight.  The
+            # second pass below must see the captured bytes and validates them.
+            if source is None:
+                continue
+            source_raw, _source_mode = source
+            actual_id, actual_version, status = _atom_identity(source_raw, source_path)
+            if (hashlib.sha256(source_raw).hexdigest() != digest
+                    or (actual_id, actual_version) != (atom_id, version)
+                    or status != "Active"):
+                _fail("D580 Prompt source pin is stale or inactive")
+    return tuple(sorted({*(path for path, _digest in binding_rows), *paths}))
+
+
+def _selected_source_refresh_frontier(
+    d580_raw: bytes, captured: Mapping[str, tuple[bytes, int]],
+) -> tuple[str, ...]:
+    """Derive D580's five exact selected-source refresh authority pins."""
+    try:
+        text = d580_raw.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ReleaseSuiteReferenceContextError(
+            "D580 is unavailable for selected-source refresh authority frontier"
+        ) from error
+    match = re.search(
+        r"^### Selected-source refresh authority frontier\n\n"
+        r".*?\n\n"
+        r"\| Atom ID \| Version \| Source path \| SHA-256 \| Mode \|\n"
+        r"\| --- \| --- \| --- \| --- \| --- \|\n"
+        r"((?:\| `CA-[A-Z]+-[0-9]+` \| [1-9][0-9]* \| `[^`]+` \| `[0-9a-f]{64}` \| `0[0-7]{3}` \|\n){5})",
+        text, re.MULTILINE,
+    )
+    if match is None:
+        _fail("D580 selected-source refresh authority frontier is absent or malformed")
+    rows = re.findall(
+        r"^\| `([^`]+)` \| ([1-9][0-9]*) \| `([^`]+)` \| `([0-9a-f]{64})` \| `(0[0-7]{3})` \|$",
+        match.group(1), re.MULTILINE,
+    )
+    if tuple(atom_id for atom_id, _version, _path, _digest, _mode in rows) != _SELECTED_SOURCE_REFRESH_IDS:
+        _fail("D580 selected-source refresh authority frontier has unexpected Atom identities")
+    paths: dict[str, tuple[str, int, str, int]] = {}
+    for atom_id, version_text, raw_path, digest, mode_text in rows:
+        path = _forbid_non_control_path(raw_path).as_posix()
+        expected = (atom_id, int(version_text), digest, int(mode_text, 8))
+        if path in paths:
+            _fail("D580 selected-source refresh authority frontier duplicates a source pin")
+        paths[path] = expected
+    if tuple(paths) != tuple(sorted(paths)):
+        _fail("D580 selected-source refresh authority frontier is not source-path sorted")
+    for path, (atom_id, version, digest, mode) in paths.items():
+        source = captured.get(path)
+        if source is None:
+            continue
+        source_raw, source_mode = source
+        actual_id, actual_version, status = _atom_identity(source_raw, path)
+        if (hashlib.sha256(source_raw).hexdigest() != digest
+                or (actual_id, actual_version) != (atom_id, version)
+                or status != "Active" or source_mode != mode):
+            _fail("D580 selected-source refresh authority pin is stale or inactive")
+    return tuple(paths)
+
+
+def _resolver_authority_pins(authority_text: str) -> list[dict[str, Any]]:
+    """Discover only the closed D572 declaration from captured authority bytes."""
+    blocks = re.findall(
+        r"^## Unknown-effect resolver authority\n+\x60\x60\x60json\n(.*?)\n\x60\x60\x60$",
+        authority_text, re.MULTILINE | re.DOTALL,
+    )
+    if len(blocks) != 1:
+        _fail("D572 unknown-effect resolver declaration is not unique")
+    try:
+        rows = json.loads(blocks[0])
+        if not isinstance(rows, list) or len(rows) != 4:
+            _fail("D572 unknown-effect resolver declaration must contain four pins")
+        pins = [_pin_shape(row) for row in rows]
+    except (json.JSONDecodeError, ReleaseSourceAdmissionError) as error:
+        raise ReleaseSuiteReferenceContextError("D572 unknown-effect resolver pins are invalid") from error
+    if tuple(pin["atom_id"] for pin in pins) != ("CA-R-1895", "CA-M-351", "CA-E-594", "CA-D-589"):
+        _fail("D572 unknown-effect resolver identities or order differ")
+    for pin in pins:
+        _forbid_non_control_path(pin["source_path"])
+    return pins
+
+
 def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], tuple[str, ...]]:
     """Capture every prospective reader carrier before any delegated parser runs."""
     settings_ref = PROJECT_SETTINGS_REF.as_posix()
     settings_raw, settings_mode = _read_regular(root, settings_ref)
+    project_structure_ref = _project_structure_ref(settings_raw)
+    project_structure_raw, project_structure_mode = _read_regular(root, project_structure_ref)
     manifest_ref = (_control_root_from_settings(settings_raw) / "_projection" / "selected_workflow_bindings.json").as_posix()
     manifest_raw, manifest_mode = _read_regular(root, manifest_ref)
     authority_ref = str(AUTHORITY_PIN["source_path"])
@@ -228,7 +429,15 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         manifest = json.loads(manifest_raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ReleaseSuiteReferenceContextError("selected manifest is unavailable for reference preflight") from error
-    candidates: list[str] = [manifest_ref, _OPERATORS_REGISTRY.as_posix(), settings_ref, authority_ref]
+    candidates: list[str] = [
+        manifest_ref,
+        _OPERATORS_REGISTRY.as_posix(),
+        settings_ref,
+        project_structure_ref,
+        authority_ref,
+        _D580_REFERENCE,
+        *_UNIT_DEADLINE_SETTINGS,
+    ]
     _paths_from_source_paths(manifest, candidates)
     freshness = manifest.get("source_freshness") if isinstance(manifest, Mapping) else None
     if isinstance(freshness, Mapping) and "selected_source_registry_ref" in freshness:
@@ -247,6 +456,8 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
     except ReleaseSourceAdmissionError as error:
         raise ReleaseSuiteReferenceContextError("D572 private carrier declaration is invalid") from error
     candidates.extend(row["source_path"] for row in private_carriers)
+    resolver_pins = _resolver_authority_pins(authority_text)
+    candidates.extend(pin["source_path"] for pin in resolver_pins)
     for value in re.findall(r"`([^`]+)`", authority_text):
         if value.startswith(".caprmedio_"):
             candidates.append(value)
@@ -254,12 +465,35 @@ def _preflight_reader_paths(root: Path) -> tuple[dict[str, tuple[bytes, int]], t
         _forbid_non_control_path(candidate)
     captured = {
         settings_ref: (settings_raw, settings_mode),
+        project_structure_ref: (project_structure_raw, project_structure_mode),
         manifest_ref: (manifest_raw, manifest_mode),
         authority_ref: (authority_raw, authority_mode),
     }
     for candidate in sorted(set(candidates)):
         if candidate not in captured:
             captured[candidate] = _read_regular(root, candidate)
+    for pin in resolver_pins:
+        raw, _mode = captured[pin["source_path"]]
+        identity = _atom_identity(raw, pin["source_path"])
+        if (hashlib.sha256(raw).hexdigest() != pin["digest"]
+                or identity != (pin["atom_id"], pin["version"], "Active")):
+            _fail("D572 unknown-effect resolver source pin is stale")
+    prompt_rows = _prompt_binding_rows(captured[_D580_REFERENCE][0])
+    for candidate, _digest in prompt_rows:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
+    prompt_bindings = _prompt_binding_frontier(captured[_D580_REFERENCE][0], captured)
+    for candidate in prompt_bindings:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
+    refresh_authorities = _selected_source_refresh_frontier(captured[_D580_REFERENCE][0], captured)
+    for candidate in refresh_authorities:
+        if candidate not in captured:
+            captured[candidate] = _read_regular(root, candidate)
+    # Recheck only after the entire two-stage frontier has been captured: no
+    # later parser may resolve a new root-backed prompt path.
+    _prompt_binding_frontier(captured[_D580_REFERENCE][0], captured)
+    _selected_source_refresh_frontier(captured[_D580_REFERENCE][0], captured)
     return captured, tuple(sorted(captured))
 
 
@@ -277,10 +511,8 @@ def _write_snapshot_file(root: Path, relative: str, payload: bytes, mode: int) -
 def _reader_snapshot(root: Path):
     """Stage one immutable descriptor-captured reader root for existing parsers."""
     captured, paths = _preflight_reader_paths(root)
-    # Retain this private 0700 disposable snapshot.  Suite evidence must not
-    # become a false failure merely because a copied read-only fixture cannot
-    # be removed on the host; callers receive no cleanup or retention control.
     snapshot = Path(tempfile.mkdtemp(prefix="caprmedio-release-suite-context-")).resolve(strict=True)
+    identity = snapshot.stat()
     try:
         snapshot.chmod(0o700)
         for relative in paths:
@@ -288,28 +520,53 @@ def _reader_snapshot(root: Path):
             _write_snapshot_file(snapshot, relative, payload, mode)
         yield snapshot, captured
     finally:
-        # Deliberately retained for truthful diagnosis; never retry deletion.
-        pass
+        # Delete only this invocation's private snapshot through the
+        # descriptor-based, symlink-resistant remover.  A denied cleanup
+        # retains the fixture without changing valid captured evidence.
+        try:
+            current = snapshot.lstat()
+            if (shutil.rmtree.avoids_symlink_attacks
+                    and stat.S_ISDIR(current.st_mode)
+                    and stat.S_IMODE(current.st_mode) == 0o700
+                    and (current.st_dev, current.st_ino) == (identity.st_dev, identity.st_ino)):
+                shutil.rmtree(snapshot)
+        except (PermissionError, FileNotFoundError):
+            pass
 
 
 def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     """Derive only against the immutable reader snapshot, never mutable Project bytes."""
+    settings_raw, _settings_mode = _read_regular(snapshot_root, PROJECT_SETTINGS_REF.as_posix())
+    project_structure_ref = _project_structure_ref(settings_raw)
     manifest = load_selected_manifest(snapshot_root)
     manifest_ref = selected_manifest_ref(snapshot_root)
     admission = derive_release_source_admission(snapshot_root)
     private_carriers = derive_release_private_carriers(snapshot_root)
+    resolver_pins = derive_unknown_effect_resolver_authority(snapshot_root)
     freshness = manifest["source_freshness"]
     source_registry = freshness["selected_source_registry_ref"]
     _safe_relative(source_registry)
     _assert_unique_rmed_pins(admission)
+    snapshot_captured, _snapshot_paths = _preflight_reader_paths(snapshot_root)
+    prompt_paths = _prompt_binding_frontier(
+        snapshot_captured[_D580_REFERENCE][0], snapshot_captured,
+    )
+    refresh_authority_paths = _selected_source_refresh_frontier(
+        snapshot_captured[_D580_REFERENCE][0], snapshot_captured,
+    )
     candidates = [
         manifest_ref,
         _OPERATORS_REGISTRY.as_posix(),
         PROJECT_SETTINGS_REF.as_posix(),
+        project_structure_ref,
         str(source_registry),
         str(AUTHORITY_PIN["source_path"]),
         *_pin_paths(admission),
         *(row["source_path"] for row in private_carriers),
+        *(pin["source_path"] for pin in resolver_pins),
+        *prompt_paths,
+        *refresh_authority_paths,
+        *_UNIT_DEADLINE_SETTINGS,
     ]
     # The selected manifest has already source-validated every route/admission
     # pin.  Capture their source paths too, while naturally deduplicating a
@@ -321,6 +578,14 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     if len(unique) != len(set(unique)) or not unique:
         _fail("reference closure is empty or internally inconsistent")
     return tuple(unique)
+
+
+def control_closure_paths(project_root: str | Path) -> tuple[str, ...]:
+    """Return the exact currently admitted private control-source closure."""
+
+    root = _root(project_root)
+    with _reader_snapshot(root) as (snapshot, _captured):
+        return _closure_paths(snapshot)
 
 
 def _preimage(bindings: tuple[tuple[str, str], ...], rows: tuple[ReferenceRow, ...]) -> dict[str, object]:
@@ -496,5 +761,5 @@ def context_preimage(context: ReleaseSuiteReferenceContext) -> Mapping[str, obje
 
 __all__ = [
     "ReferenceRow", "ReleaseSuiteReferenceContext", "ReleaseSuiteReferenceContextError",
-    "capture_context", "context_preimage", "copy_verified_bytes", "revalidate_context", "validate_reference_rows", "validate_schema2_context",
+    "capture_context", "context_preimage", "control_closure_paths", "copy_verified_bytes", "revalidate_context", "validate_reference_rows", "validate_schema2_context",
 ]

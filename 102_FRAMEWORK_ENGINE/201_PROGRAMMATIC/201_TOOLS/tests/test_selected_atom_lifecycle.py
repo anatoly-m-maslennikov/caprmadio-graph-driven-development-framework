@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import copy
+import json
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -15,7 +17,39 @@ TEST_TEMP_ROOT.mkdir(parents=True, exist_ok=True)
 import sys
 
 TOOLS = Path(__file__).resolve().parents[1]
+REPOSITORY = TOOLS.parents[2]
 sys.path.insert(0, str(TOOLS))
+
+_VALIDATE_WORKERS = TOOLS / "VALIDATE_ATOMS" / "validate_atoms_workers"
+_FIXTURE_SCOPE = "LIFECYCLE_FIXTURE"
+_FIXTURE_RELATIVE_PATH = "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/LIFECYCLE_FIXTURE"
+_FIXTURE_AUTHORITY_PATH = f".caprmedio_caprmedio/{_FIXTURE_RELATIVE_PATH}"
+
+from VALIDATE_ATOMS.validate_atoms_workers import proposed_carrier  # noqa: E402
+
+REQUIREMENT_STATUS_AUTHORITY = (
+    REPOSITORY
+    / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+    / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
+    / "CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md"
+)
+DELIVERY_STATUS_AUTHORITY = (
+    REPOSITORY
+    / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+    / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
+    / "CA-R-1399-CORE_META_MODEL-GENERAL--register-core-delivery-status-values.md"
+)
+SEMANTIC_ASSESSMENT_AUTHORITIES = tuple(
+    REPOSITORY
+    / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+    / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
+    / name
+    for name in (
+        "CA-R-1875-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-analysis-status-values.md",
+        "CA-R-1432-CORE_META_MODEL-GENERAL--classify-admitted-atom-changes-by-semantic-effect.md",
+        "CA-R-1464-CORE_META_MODEL--keep-summary-fixed-for-atom-identity.md",
+    )
+)
 
 from lifecycle_intents import (  # noqa: E402
     LifecycleError,
@@ -24,8 +58,10 @@ from lifecycle_intents import (  # noqa: E402
     create_atom_action,
     replace_atom_action,
     update_atom_action,
+    update_assessment_seal,
 )
 from atom_operations import Atom, ToolError, atom_from_path, split_frontmatter  # noqa: E402
+from authoritative_status_models import resolve_status_model  # noqa: E402
 
 
 class SelectedAtomLifecycleTest(unittest.TestCase):
@@ -35,17 +71,68 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True)
         self.root = Path(self.temporary.name)
         (self.root / ".git").mkdir()
-        self.requirements = self.root / ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/04_requirement"
+        self.requirements = (
+            self.root
+            / ".caprmedio_caprmedio"
+            / _FIXTURE_RELATIVE_PATH
+            / "04_requirement"
+        )
         self.requirements.mkdir(parents=True)
         (self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml").write_text(
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n", encoding="utf-8"
         )
+        self._copy_complete_carrier_authority()
+        for authority in (REQUIREMENT_STATUS_AUTHORITY, DELIVERY_STATUS_AUTHORITY):
+            destination = self.root / authority.relative_to(REPOSITORY)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(authority, destination)
+        for authority in SEMANTIC_ASSESSMENT_AUTHORITIES:
+            destination = self.root / authority.relative_to(REPOSITORY)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(authority, destination)
         self.target = self._atom("CA-R-100", "target", "Stable summary")
         self.successor_one = self._atom("CA-R-101", "first-successor", "First successor")
         self.successor_two = self._atom("CA-R-102", "second-successor", "Second successor")
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
+
+    def _copy_complete_carrier_authority(self) -> None:
+        """Mirror the finite source closure used by proposed-carrier admission."""
+        sources: dict[str, dict[str, object]] = {}
+        for name in (
+            "registry.json", "schema_authority.json", "graph_authority.json",
+            "structure_authority.json", "context_authority.json",
+        ):
+            sources.update(json.loads((_VALIDATE_WORKERS / name).read_text(encoding="utf-8"))["sources"])
+        for atom_id in (*proposed_carrier._REGISTRY_IDS, *proposed_carrier._SUPPORT_IDS):
+            source_path = sources[atom_id]["source_path"]
+            self.assertIsInstance(source_path, str)
+            source = REPOSITORY / source_path
+            destination = self.root / source_path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        for relative in (
+            ".caprmedio_caprmedio/project_structure.toml",
+            ".caprmedio_caprmedio/operators_registry.toml",
+        ):
+            destination = self.root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REPOSITORY / relative, destination)
+        structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
+        structure.write_text(
+            structure.read_text(encoding="utf-8")
+            + "\n[[scope_units]]\n"
+            + f'scope_unit_name = "{_FIXTURE_SCOPE}"\n'
+            + 'parent = "TOOLS"\n'
+            + 'scope_unit_type = "Unordered"\n'
+            + 'scope_unit_label = "TOOL"\n'
+            + "structural_level = 4\n"
+            + "navigational_order_number = 999\n"
+            + f'authority_path = "{_FIXTURE_AUTHORITY_PATH}"\n'
+            + f'delivery_path = "{_FIXTURE_AUTHORITY_PATH}"\n',
+            encoding="utf-8",
+        )
 
     def _atom(
         self,
@@ -64,9 +151,17 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             + f"atom_id: {atom_id}\n"
             + "content_role: Requirement\n"
             + ("type: Requirement\n" if include_type else "")
+            + f"current_scope_unit: {_FIXTURE_SCOPE}\n"
+            + f"claim_target_scope_unit: {_FIXTURE_SCOPE}\n"
+            + "local_tier: Standard\n"
+            + "global_tier: 14\n"
+            + "author: Anatoly Maslennikov\n"
             + f"status: {status}\n"
             + f"version: {version}\n"
-            + "updated_at: 2026-01-01 00:00:00 +0000\n"
+            + "updated_at: \"2026-01-01 00:00:00 +0000\"\n"
+            + "subjects:\n"
+            + "  governs: Atom/Test\n"
+            + "  depends_on: []\n"
             + f"{relations}\n"
             + "---\n"
             + "# Summary\n\n"
@@ -75,27 +170,28 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             + "Fixture scope.\n\n"
             + "## Claim\n\n"
             + "Fixture claim.\n"
+            + "\n## Details\n\n"
+            + "Fixture details.\n"
         )
         path.write_text(payload, encoding="utf-8")
         return path
 
-    @staticmethod
-    def _model() -> dict[str, object]:
-        return {
-            "model_ref": "fixture://requirement-statuses",
-            "model_revision": "7",
-            "content_role": "Requirement",
-            "statuses": ["Active", "Reviewed", "Archived"],
-            "transitions": {"Active": ["Reviewed", "Archived"], "Reviewed": ["Active", "Archived"]},
-            "archive_status": "Archived",
-        }
+    def _model(self) -> dict[str, object]:
+        return resolve_status_model(
+            self.root, carrier_descriptor(self.root, "CA-R-100"), "Archived",
+        )
 
     def _carrier(self, atom_id: str, slug: str, summary: str) -> dict[str, str]:
         path = self.requirements / f"{atom_id}--{slug}.md"
         return {
             "path": path.relative_to(self.root).as_posix(),
-            "frontmatter": f"atom_id: {atom_id}\ncontent_role: Requirement\nstatus: Active",
-            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture.\n",
+            "frontmatter": (
+                f"atom_id: {atom_id}\ncontent_role: Requirement\ncurrent_scope_unit: {_FIXTURE_SCOPE}\n"
+                f"claim_target_scope_unit: {_FIXTURE_SCOPE}\nlocal_tier: Standard\nglobal_tier: 14\n"
+                "author: Anatoly Maslennikov\nstatus: Active\nsubjects:\n"
+                "  governs: Atom/Test\n  depends_on: []\nrelations: {}"
+            ),
+            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture.\n\n## Claim\n\nFixture claim.\n\n## Details\n\nFixture details.\n",
         }
 
     @staticmethod
@@ -108,7 +204,7 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             "content": content.replace(current_summary, summary, 1) + body_suffix,
         }
 
-    def test_authorized_create_uses_a_complete_carrier_and_duplicate_is_no_effect(self) -> None:
+    def test_authorized_create_uses_a_complete_carrier_and_rejects_occupied_destination(self) -> None:
         path = self.requirements / "CA-R-103--created.md"
         carrier = self._carrier("CA-R-103", "created", "Created summary")
 
@@ -118,8 +214,8 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertEqual(result["effects"][0]["state"], "changed")
         self.assertEqual(carrier_descriptor(self.root, "CA-R-103")["version"], 1)
         before = path.read_bytes()
-        duplicate = create_atom_action(self.root, {"carrier": carrier}, execute=True, authorized=True)
-        self.assertEqual(duplicate["outcome"], "duplicate")
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            create_atom_action(self.root, {"carrier": carrier}, execute=True, authorized=True)
         self.assertEqual(path.read_bytes(), before)
 
         missing_identity = dict(carrier)
@@ -154,7 +250,8 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertEqual(self.target.read_bytes(), before)
 
     def test_update_honors_identity_revision_class_and_true_noop(self) -> None:
-        carrier_only = update_atom_action(
+        before = self.target.read_bytes()
+        unproven_carrier_only = update_atom_action(
             self.root,
             {
                 "target": carrier_descriptor(self.root, "CA-R-100"),
@@ -164,9 +261,26 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             execute=True,
             authorized=True,
         )
+        self.assertEqual(unproven_carrier_only["outcome"], "unresolved")
+        self.assertEqual(unproven_carrier_only["classification"]["reason"], "semantic-assessment-unverified")
+        self.assertEqual(self.target.read_bytes(), before)
+
+        lossless = self._proposal(self.target, summary="Stable summary")
+        lossless["content"] += "\n"
+        carrier_only = update_atom_action(
+            self.root,
+            {
+                "target": carrier_descriptor(self.root, "CA-R-100"),
+                "proposed": lossless,
+                "change_class": "carrier_only",
+            },
+            execute=True,
+            authorized=True,
+        )
         self.assertEqual(carrier_only["observed"]["version"], 1)
         self.assertEqual(carrier_only["effects"][0]["state"], "changed")
 
+        before_semantic = self.target.read_bytes()
         semantic = update_atom_action(
             self.root,
             {
@@ -177,10 +291,10 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             execute=True,
             authorized=True,
         )
-        self.assertEqual(semantic["observed"]["version"], 2)
-        prior_revision = self.root / semantic["history"]["prior_revision"]["path"]
-        self.assertTrue(prior_revision.exists())
-        self.assertEqual(semantic["history"]["prior_revision"]["version"], 1)
+        self.assertEqual(semantic["outcome"], "unresolved")
+        self.assertEqual(semantic["classification"]["requested"], "semantic_revision")
+        self.assertIn("lineage-impact review", semantic["classification"]["required"])
+        self.assertEqual(self.target.read_bytes(), before_semantic)
 
         before = self.target.read_bytes()
         noop = update_atom_action(
@@ -195,6 +309,285 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         )
         self.assertEqual(noop["outcome"], "no-op")
         self.assertEqual(self.target.read_bytes(), before)
+
+    def test_update_rejects_unproven_equivalent_refinement(self) -> None:
+        before = self.target.read_bytes()
+        result = update_atom_action(
+            self.root,
+            {
+                "target": carrier_descriptor(self.root, "CA-R-100"),
+                "proposed": self._proposal(self.target, summary="Stable summary", body_suffix="\nUnproven refinement.\n"),
+                "change_class": "equivalent_refinement",
+            },
+            execute=True,
+            authorized=True,
+        )
+
+        self.assertEqual(result["outcome"], "unresolved")
+        self.assertEqual(result["classification"]["requested"], "equivalent_refinement")
+        self.assertEqual(self.target.read_bytes(), before)
+
+    def test_update_rechecks_the_completed_assessment_comparison(self) -> None:
+        proposal = self._proposal(self.target, summary="Stable summary")
+        proposal["content"] += "\n"
+        parameters = {
+            "target": carrier_descriptor(self.root, "CA-R-100"),
+            "proposed": proposal,
+            "change_class": "carrier_only",
+        }
+        preview = update_atom_action(self.root, parameters, execute=False, authorized=True)
+        evidence = preview["assessment_evidence"]
+        assessment = update_assessment_seal(parameters, evidence)
+        tampered = {
+            **assessment,
+            "comparison": {
+                **assessment["comparison"],
+                "target": {**assessment["comparison"]["target"], "digest": "0" * 64},
+            },
+        }
+        before = self.target.read_bytes()
+        with self.assertRaisesRegex(LifecycleError, "reassessment-required"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True, assessment=tampered)
+        self.assertEqual(self.target.read_bytes(), before)
+
+        applied = update_atom_action(self.root, parameters, execute=True, authorized=True, assessment=assessment)
+        self.assertEqual(applied["outcome"], "applied")
+        self.assertEqual(applied["assessment"], assessment)
+
+    def _semantic_assessment_report(self, proposed: dict[str, str], *, change_class: str = "semantic_revision") -> dict[str, str]:
+        authority_root = SEMANTIC_ASSESSMENT_AUTHORITIES[0].parent
+        def pin(path: Path) -> dict[str, str]:
+            return {"path": path.relative_to(self.root).as_posix(), "digest": hashlib.sha256(path.read_bytes()).hexdigest()}
+
+        target = carrier_descriptor(self.root, "CA-R-100")
+        report = self.root / ".caprmedio_caprmedio/02_analysis/done/CA-A-400--semantic-update-assessment.md"
+        report.parent.mkdir(parents=True, exist_ok=True)
+        evidence = {
+            "target": {"atom_id": target["atom_id"], "path": target["path"], "digest": target["digest"]},
+            "proposal": {"frontmatter_digest": hashlib.sha256(proposed["frontmatter"].encode()).hexdigest(),
+                         "content_digest": hashlib.sha256(proposed["content"].encode()).hexdigest()},
+            "authorityPins": {"r1432": pin(self.root / authority_root.relative_to(REPOSITORY) / SEMANTIC_ASSESSMENT_AUTHORITIES[1].name),
+                              "r1464": pin(self.root / authority_root.relative_to(REPOSITORY) / SEMANTIC_ASSESSMENT_AUTHORITIES[2].name)},
+            "admittedChangeClass": change_class,
+            "primaryClaimIdentityPreserved": True,
+            "declaredDelta": "Clarify the same fixture Claim's acceptance detail.",
+            "lineageEvidencePins": [pin(self.target)],
+        }
+        report.write_text(
+            "---\natom_id: CA-A-400\ncontent_role: Analysis\ntype: Analysis Report\nstatus: Done\nversion: 1\n"
+            "updated_at: 2026-10-06 00:00:00 +0000\nrelations: {}\n---\n# Summary\n\nSemantic update assessment\n"
+            "\n## Results\n\n### Update assessment evidence\n\n```json\n"
+            + json.dumps(evidence, sort_keys=True, separators=(",", ":")) + "\n```\n",
+            encoding="utf-8",
+        )
+        return pin(report)
+
+    def test_semantic_update_requires_and_consumes_a_bound_done_analysis_report(self) -> None:
+        proposal = self._proposal(self.target, summary="Stable summary", body_suffix="\nClarified acceptance detail.\n")
+        report = self._semantic_assessment_report(proposal)
+        parameters = {
+            "target": carrier_descriptor(self.root, "CA-R-100"), "proposed": proposal,
+            "change_class": "semantic_revision", "semantic_assessment_report": report,
+        }
+        preview = update_atom_action(self.root, parameters, execute=False, authorized=True)
+        self.assertEqual(preview["outcome"], "preview")
+        evidence = preview["assessment_evidence"]
+        assessment = update_assessment_seal(parameters, evidence)
+        report_path = self.root / report["path"]
+        report_path.write_text(report_path.read_text(encoding="utf-8") + "\ntampered\n", encoding="utf-8")
+        before = self.target.read_bytes()
+        stale = update_atom_action(self.root, parameters, execute=True, authorized=True, assessment=assessment)
+        self.assertEqual(stale["outcome"], "unresolved")
+        self.assertEqual(self.target.read_bytes(), before)
+
+        parameters["semantic_assessment_report"] = self._semantic_assessment_report(proposal)
+        preview = update_atom_action(self.root, parameters, execute=False, authorized=True)
+        assessment = update_assessment_seal(parameters, preview["assessment_evidence"])
+        applied = update_atom_action(self.root, parameters, execute=True, authorized=True, assessment=assessment)
+        self.assertEqual(applied["outcome"], "applied")
+        self.assertEqual(applied["observed"]["version"], 2)
+
+    def _semantic_update_parameters(self) -> dict[str, object]:
+        proposal = self._proposal(self.target, summary="Stable summary", body_suffix="\nClarified acceptance detail.\n")
+        return {"target": carrier_descriptor(self.root, "CA-R-100"), "proposed": proposal,
+                "change_class": "semantic_revision", "semantic_assessment_report": self._semantic_assessment_report(proposal)}
+
+    def _unrelated_history(self) -> Path:
+        history = self.requirements / "archive" / (self.successor_one.stem + "@1.md")
+        history.parent.mkdir(exist_ok=True)
+        history.write_bytes(self.successor_one.read_bytes())
+        return history
+
+    def test_same_id_update_postwrite_parse_failure_restores_current_and_preserves_other_history(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        unrelated = self._unrelated_history()
+        historical = unrelated.read_bytes()
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse):
+            with self.assertRaisesRegex(LifecycleError, "injected-postwrite-parse"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(historical, unrelated.read_bytes())
+        self.assertFalse((unrelated.parent / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_postwrite_current_read_failure_restores_exact_bytes(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        original_descriptor = carrier_descriptor
+        failed = False
+
+        def refuse_postwrite_read(root, selector):
+            nonlocal failed
+            if isinstance(selector, Atom) and selector.path == self.target and self.target.read_bytes() != before and not failed:
+                failed = True
+                raise OSError("injected post-write current read failure")
+            return original_descriptor(root, selector)
+
+        with patch("lifecycle_intents.carrier_descriptor", side_effect=refuse_postwrite_read):
+            with self.assertRaisesRegex(OSError, "post-write current read failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertTrue(failed)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_postwrite_history_read_failure_restores_current(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        original_descriptor = carrier_descriptor
+
+        def refuse_history_read(root, selector):
+            if isinstance(selector, Atom) and selector.path.parent.name == "archive" and self.target.read_bytes() != before:
+                raise OSError("injected post-write history read failure")
+            return original_descriptor(root, selector)
+
+        with patch("lifecycle_intents.carrier_descriptor", side_effect=refuse_history_read):
+            with self.assertRaisesRegex(OSError, "post-write history read failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_unverified_rollback_retains_recoverable_prior_and_original_diagnostic(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        unrelated = self._unrelated_history()
+        historical = unrelated.read_bytes()
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with (patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse),
+              patch("lifecycle_intents._atomic_write", side_effect=PermissionError("rollback denied"), create=True)):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self.assertEqual({"type": "ToolError", "code": "injected-postwrite-parse"}, partial["failure"]["original"])
+        self.assertNotEqual(before, self.target.read_bytes())
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        self.assertEqual(before, prior.read_bytes())
+        self._assert_uncertain_update_references(partial, parameters, prior)
+        self.assertEqual(historical, unrelated.read_bytes())
+
+    def test_same_id_update_preexisting_history_collision_does_not_remove_history(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        prior.parent.mkdir()
+        prior.write_bytes(before)
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before, prior.read_bytes())
+
+    def test_same_id_update_publication_error_after_write_restores_current(self) -> None:
+        import lifecycle_intents
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        before_mode = self.target.stat().st_mode & 0o777
+        real_write = lifecycle_intents.write_atom_revision
+
+        def write_then_fail(*args):
+            real_write(*args)
+            raise OSError("injected post-publication failure")
+
+        with patch("lifecycle_intents.write_atom_revision", side_effect=write_then_fail):
+            with self.assertRaisesRegex(OSError, "post-publication failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before_mode, self.target.stat().st_mode & 0o777)
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_history_cleanup_failure_retains_history_after_current_restoration(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        real_unlink = Path.unlink
+
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        def refuse_history_cleanup(path, *args, **kwargs):
+            if path == prior:
+                self.assertEqual(before, self.target.read_bytes())
+                raise PermissionError("owned history cleanup denied")
+            return real_unlink(path, *args, **kwargs)
+
+        with (patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse),
+              patch.object(Path, "unlink", autospec=True, side_effect=refuse_history_cleanup)):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self._assert_uncertain_update_references(partial, parameters, prior)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before, prior.read_bytes())
+
+    def _assert_uncertain_update_references(self, partial, parameters, prior) -> None:
+        current_ref = self.target.relative_to(self.root).as_posix()
+        history_ref = prior.relative_to(self.root).as_posix()
+        self.assertEqual("update-rollback-uncertain", partial["failure"]["code"])
+        self.assertEqual(parameters["target"], partial["recovery"]["before"])
+        self.assertEqual(current_ref, partial["recovery"]["current"]["path"])
+        self.assertEqual("unknown", partial["recovery"]["current"]["verification"])
+        self.assertFalse(partial["recovery"]["automatic_retry"])
+        self.assertEqual(history_ref, partial["history"]["prior_revision"]["path"])
+        # Match the existing adapter's extraction: only known changed history
+        # is a canonical effect. Unknown current stays in the retained native
+        # packet; it must never be relabeled as a verified changed carrier.
+        changed_refs = {effect["carrier"]["path"] for effect in partial["effects"] if effect["state"] == "changed"}
+        unknown_refs = {effect["carrier"]["path"] for effect in partial["effects"] if effect["state"] == "unknown"}
+        self.assertEqual({history_ref}, changed_refs)
+        self.assertEqual({current_ref}, unknown_refs)
+        retained = json.dumps(partial, sort_keys=True)
+        self.assertIn(current_ref, retained)
+        self.assertIn(history_ref, retained)
+        self.assertIn("injected-postwrite-parse", retained)
+        self.assertNotIn("rollback denied", retained)
+
+    def test_same_id_update_ownership_unverified_history_remains_unknown_and_untouched(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        replacement = b"fixture history altered by another owner\n"
+
+        def alter_history_after_publication(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                prior.write_bytes(replacement)
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with patch("lifecycle_intents.atom_from_path", side_effect=alter_history_after_publication):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self.assertEqual("verify-history-ownership", partial["failure"]["recovery"]["phase"])
+        self.assertEqual("unverified", partial["history"]["prior_revision"]["ownership_verification"])
+        self.assertEqual({"unknown"}, {effect["state"] for effect in partial["effects"]})
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(replacement, prior.read_bytes())
 
     def _legacy_update(self, *, legacy_status: str | None = None) -> tuple[dict[str, object], bytes]:
         original = self.target.read_text(encoding="utf-8").replace("atom_id: CA-R-100\n", "").replace(
@@ -287,8 +680,16 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         target = carrier_descriptor(self.root, old)
         destination = role / "CA-D-560-GRAPH_UI--stable-delivery.md"
         return {"target": target,
-                "proposed": {"frontmatter": fm + "\natom_id: CA-D-560\ncontent_role: Delivery\nstatus: Active",
-                             "content": "# Summary\n\nStable delivery\n\n## Claim\n\nDeliver the browser locally.\n"},
+                "proposed": {"frontmatter": (
+                                fm + "\natom_id: CA-D-560\ncontent_role: Delivery\n"
+                                f"current_scope_unit: {_FIXTURE_SCOPE}\nclaim_target_scope_unit: {_FIXTURE_SCOPE}\n"
+                                "local_tier: Standard\nglobal_tier: 14\n"
+                                "author: Anatoly Maslennikov\nstatus: Active\nsubjects:\n"
+                                "  governs: Atom/Test\n  depends_on: []"
+                             ),
+                             "content": "# Summary\n\nStable delivery\n\n## Scope\n\nFixture scope.\n"
+                                        "\n## Claim\n\nDeliver the browser locally.\n"
+                                        "\n## Details\n\nFixture details.\n"},
                 "change_class": "carrier_only",
                 "legacy_identity_proof": {"atom_id": old_id, "commit": commit, "path": old.relative, "digest": target["digest"]},
                 "legacy_identity_mapping": {"legacy_atom_id": old_id, "atom_id": "CA-D-560",
@@ -382,7 +783,84 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertIn("@1", archived.name)
         self.assertIn("status: Archived", archived.read_text(encoding="utf-8"))
 
-    def test_model_specific_status_noop_and_archive_relation_diagnostics(self) -> None:
+    def test_replace_requires_prepared_new_successors_and_archives_only_after_all_are_active(self) -> None:
+        first = self._carrier("CA-R-105", "first-replacement", "First replacement")
+        second = self._carrier("CA-R-106", "second-replacement", "Second replacement")
+        original_archive = __import__("lifecycle_intents").archive_atom_revision
+
+        def verify_active_before_archive(root: Path, atom: object, frontmatter: str, content: str) -> object:
+            for successor in (first, second):
+                candidate = root / successor["path"]
+                self.assertTrue(candidate.exists())
+                self.assertIn("status: Active", candidate.read_text(encoding="utf-8"))
+            return original_archive(root, atom, frontmatter, content)
+
+        with patch("lifecycle_intents.archive_atom_revision", side_effect=verify_active_before_archive):
+            result = replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [first, second], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+        self.assertEqual("applied", result["outcome"])
+        self.assertEqual(["CA-R-105", "CA-R-106"], [row["atom_id"] for row in result["successors"]])
+
+    def test_replace_rejects_preexisting_successor_without_archiving_predecessor(self) -> None:
+        successor = self._carrier("CA-R-105", "already-present", "Already present")
+        create_atom_action(self.root, {"carrier": successor}, execute=True, authorized=True)
+        before = self.target.read_bytes()
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [successor], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+        self.assertEqual(before, self.target.read_bytes())
+
+    def test_replace_rejects_preexisting_successor_id_at_unused_destination(self) -> None:
+        existing = self._carrier("CA-R-105", "already-present", "Already present")
+        create_atom_action(self.root, {"carrier": existing}, execute=True, authorized=True)
+        replacement = self._carrier("CA-R-105", "new-destination", "Different destination")
+        before_predecessor = self.target.read_bytes()
+        before_existing = (self.root / existing["path"]).read_bytes()
+        new_destination = self.root / replacement["path"]
+
+        with self.assertRaisesRegex(LifecycleError, "atom-id-collision"):
+            replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"),
+                 "successors": [replacement], "status_model": self._model()},
+                execute=True,
+                authorized=True,
+            )
+
+        self.assertEqual(before_predecessor, self.target.read_bytes())
+        self.assertEqual(before_existing, (self.root / existing["path"]).read_bytes())
+        self.assertFalse(new_destination.exists())
+        self.assertFalse((self.target.parent / "archive" / "CA-R-100--target@1.md").exists())
+
+    def test_replace_rejects_caller_model_that_contradicts_current_authority(self) -> None:
+        successor = self._carrier("CA-R-105", "forged-model", "Replacement summary")
+        forged = self._model()
+        forged["statuses"] = ["Active", "Reviewed", "Archived"]
+        before = self.target.read_bytes()
+
+        with self.assertRaisesRegex(LifecycleError, "model-forged"):
+            replace_atom_action(
+                self.root,
+                {"predecessor": carrier_descriptor(self.root, "CA-R-100"), "successors": [successor],
+                 "status_model": forged},
+                execute=True,
+                authorized=True,
+            )
+
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse((self.root / successor["path"]).exists())
+
+    def test_source_model_status_noop_and_archive_relation_diagnostics(self) -> None:
         self.target.write_text(
             self.target.read_text(encoding="utf-8").replace("relations: {}", "relations:\n  depends_on: [CA-R-101]"),
             encoding="utf-8",
@@ -390,36 +868,17 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self._atom("CA-R-104", "inbound", "Inbound", relations="relations:\n  depends_on: [CA-R-100]")
         self.assertNotIn("type:", self.target.read_text(encoding="utf-8"))
 
-        reviewed = change_status_atom_action(
-            self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Reviewed", "status_model": self._model()},
-            execute=True,
-            authorized=True,
-        )
-        self.assertEqual(reviewed["observed"]["status"], "Reviewed")
-        reviewed_path = self.root / reviewed["observed"]["path"]
-        self.assertEqual(reviewed_path.parent.name, "reviewed")
-        self.assertFalse(self.target.exists())
         noop = change_status_atom_action(
             self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Reviewed", "status_model": self._model()},
+            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Active"},
             execute=True,
             authorized=True,
         )
         self.assertEqual(noop["outcome"], "no-op")
 
-        promoted = change_status_atom_action(
-            self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Active", "status_model": self._model()},
-            execute=True,
-            authorized=True,
-        )
-        self.assertEqual(promoted["observed"]["status"], "Active")
-        self.assertTrue(self.target.exists())
-
         archived = change_status_atom_action(
             self.root,
-            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Archived", "status_model": self._model()},
+            {"target": carrier_descriptor(self.root, "CA-R-100"), "status": "Archived"},
             execute=True,
             authorized=True,
         )
@@ -478,10 +937,10 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
                 execute=True,
                 authorized=True,
             )
-        with self.assertRaisesRegex(LifecycleError, "one-target-required"):
+        with self.assertRaisesRegex(LifecycleError, "mapping-required"):
             change_status_atom_action(
                 self.root,
-                {"target": [carrier_descriptor(self.root, "CA-R-100")], "status": "Reviewed", "status_model": self._model()},
+                {"target": [carrier_descriptor(self.root, "CA-R-100")], "status": "Archived"},
                 execute=True,
                 authorized=True,
             )

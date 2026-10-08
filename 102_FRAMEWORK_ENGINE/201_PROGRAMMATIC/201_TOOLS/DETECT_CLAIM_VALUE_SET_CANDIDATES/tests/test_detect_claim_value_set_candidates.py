@@ -103,6 +103,7 @@ class DetectClaimValueSetCandidatesTests(unittest.TestCase):
         report = detector.build_report(
             self.root,
             term_system_projection=self.term_system,
+            repository=self.root.parent,
         )
 
         self.assertEqual("report_only", report["mode"])
@@ -110,7 +111,7 @@ class DetectClaimValueSetCandidatesTests(unittest.TestCase):
         group = report["candidate_groups"][0]
         self.assertEqual(["CA-R-001", "CA-R-002"], group["atom_ids"])
         self.assertEqual(
-            {"scope_unit_carrier": self.root.resolve().as_posix()},
+            {"scope_unit_carrier": "frontier"},
             group["fingerprint"]["atom_scope"],
         )
         self.assertNotIn("current_scope", group["fingerprint"])

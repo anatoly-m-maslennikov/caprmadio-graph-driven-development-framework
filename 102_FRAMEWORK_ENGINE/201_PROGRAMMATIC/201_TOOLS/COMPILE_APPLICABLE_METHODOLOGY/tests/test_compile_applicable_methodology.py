@@ -158,6 +158,36 @@ class CompilerTest(unittest.TestCase):
         self.assertEqual(first_tree, regenerated["generated_tree_digest"])
         self.assertEqual(before, {source: source.read_bytes(), local: local.read_bytes()})
 
+    def test_ignores_ds_store_in_source_snapshot_and_governed_bindings(self) -> None:
+        self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001--one.md", carrier("CA-R-001"))
+        places = module.methodology_paths(self.temp)
+        snapshot = module.source_state_snapshot(self.temp, places)
+        bindings = module.governed_bindings(self.temp, places)
+
+        (self.source / "001_CORE_META_MODEL/.DS_Store").write_bytes(b"finder metadata")
+        (self.source / "003_PROJECT_CONFIGURATION/.DS_Store").write_bytes(b"finder metadata")
+
+        self.assertEqual(snapshot, module.source_state_snapshot(self.temp, places))
+        self.assertTrue(module.source_snapshot_is_current(self.temp, snapshot, places))
+        self.assertEqual(bindings, module.governed_bindings(self.temp, places))
+
+    def test_ignores_ds_store_in_generated_output_but_rejects_real_extra(self) -> None:
+        self.write("001_CORE_META_MODEL", "04_requirement", "CA-R-001--one.md", carrier("CA-R-001"))
+        apply_code, applied = self.invoke("--apply")
+        self.assertEqual(0, apply_code)
+        output = self.temp / module.OUTPUT_RELATIVE / "04_requirement"
+        output_digest = applied["generated_tree_digest"]
+
+        (output / ".DS_Store").write_bytes(b"finder metadata")
+
+        module.validate_existing_output_ownership(self.temp / module.OUTPUT_RELATIVE)
+        self.assertEqual(output_digest, module.generated_tree_digest(self.temp))
+
+        (output / "unowned.txt").write_bytes(b"real extra")
+        with self.assertRaises(module.CompileError) as raised:
+            module.validate_existing_output_ownership(self.temp / module.OUTPUT_RELATIVE)
+        self.assertEqual("output-role-not-owned", raised.exception.code)
+
     def test_source_unit_role_directories_do_not_count_as_source_layers(self) -> None:
         (self.source / "04_requirement").mkdir()
         (self.source / "04_requirement/CA-R-100--define-source-layer-goal.md").write_bytes(carrier("CA-R-100"))

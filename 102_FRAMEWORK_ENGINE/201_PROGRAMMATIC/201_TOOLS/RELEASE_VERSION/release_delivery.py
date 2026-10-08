@@ -7,8 +7,10 @@ An owned predecessor is retained beside the delivery for repair or rollback.
 from __future__ import annotations
 
 import os
+import stat
 import tempfile
 import tomllib
+from dataclasses import dataclass
 from pathlib import Path
 
 from bootstrap_image import BootstrapImageError, _retained_initial_package
@@ -24,7 +26,7 @@ from release_handoff import (
     tree_sha256,
     validate_source_copy,
 )
-from release_inventory import ReleaseInventoryError, persistent_regular_files
+from release_inventory import _is_ephemeral_file, ReleaseInventoryError, persistent_regular_files, refuse_secret_path
 from release_packaging import (
     MANIFEST_NAME,
     RUNTIME_ROOT,
@@ -33,6 +35,7 @@ from release_packaging import (
     _render_manifest,
     _verify_release,
 )
+from release_predecessor import verify_recorded_source_predecessor
 from release_suite import _bootstrap_prior_manifest_is_exact
 
 
@@ -42,6 +45,19 @@ class ReleaseDeliveryError(ReleaseContractError):
     def __init__(self, code: str, message: str, *, recovery_paths: tuple[str, ...] = ()) -> None:
         self.recovery_paths = recovery_paths
         super().__init__(code, message)
+
+
+@dataclass
+class _PredecessorReservation:
+    """A retained private wrapper and its one permitted predecessor child."""
+
+    parent: Path
+    wrapper: Path
+    backup: Path
+    target_name: str
+    parent_identity: tuple[int, int] | None = None
+    wrapper_identity: tuple[int, int] | None = None
+    backup_identity: tuple[int, int] | None = None
 
 
 def _safe_path(root: Path, relative: str) -> Path:
@@ -55,6 +71,90 @@ def _safe_path(root: Path, relative: str) -> Path:
     return cursor
 
 
+def _nofollow_directory_identity(path: Path, *, label: str) -> tuple[int, int]:
+    """Return a directory's nofollow identity, refusing substituted carriers."""
+
+    try:
+        observed = os.stat(path, follow_symlinks=False)
+    except OSError as error:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", f"{label} is unavailable") from error
+    if not stat.S_ISDIR(observed.st_mode):
+        raise ReleaseDeliveryError("release-copy-path-unsafe", f"{label} is not a regular directory")
+    return observed.st_dev, observed.st_ino
+
+
+def _validate_reservation(
+    reservation: _PredecessorReservation,
+    *,
+    require_absent_backup: bool = False,
+    require_owned_backup: bool = False,
+) -> None:
+    """Confirm that a private reservation still names exactly its own child."""
+
+    wrapper = reservation.wrapper
+    backup = reservation.backup
+    if (
+        wrapper.parent != reservation.parent
+        or wrapper != reservation.parent / wrapper.name
+        or not wrapper.name.startswith(".release-sources-prior-private-")
+        or backup.parent != wrapper
+        or backup != wrapper / reservation.target_name
+        or backup.name != reservation.target_name
+    ):
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor reservation path changed")
+    if reservation.parent_identity is None or reservation.wrapper_identity is None:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor reservation was not bound")
+    if _nofollow_directory_identity(reservation.parent, label="predecessor reservation parent") != reservation.parent_identity:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor reservation parent changed")
+    if _nofollow_directory_identity(wrapper, label="predecessor reservation") != reservation.wrapper_identity:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor reservation changed")
+    if require_absent_backup and os.path.lexists(backup):
+        raise ReleaseDeliveryError("release-copy-collision", "predecessor backup child is not absent")
+    if require_owned_backup:
+        if reservation.backup_identity is None:
+            raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor backup was not recorded")
+        if _nofollow_directory_identity(backup, label="predecessor backup") != reservation.backup_identity:
+            raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor backup changed")
+
+
+def _reserve_predecessor(parent: Path, destination: Path) -> _PredecessorReservation:
+    """Reserve a retained wrapper; the old tree may move only into its child."""
+
+    wrapper = Path(tempfile.mkdtemp(prefix=".release-sources-prior-private-", dir=parent))
+    # Return the carrier before any observation can refuse it.  A caller can
+    # then expose this retained wrapper (and any hostile child) for recovery.
+    return _PredecessorReservation(
+        parent=parent,
+        wrapper=wrapper,
+        backup=wrapper / destination.name,
+        target_name=destination.name,
+    )
+
+
+def _bind_reservation_identity(reservation: _PredecessorReservation) -> None:
+    """Bind a returned private wrapper before it can receive the old tree."""
+
+    reservation.parent_identity = _nofollow_directory_identity(
+        reservation.parent, label="predecessor reservation parent",
+    )
+    reservation.wrapper_identity = _nofollow_directory_identity(
+        reservation.wrapper, label="predecessor reservation",
+    )
+    _validate_reservation(reservation, require_absent_backup=True)
+
+
+def _record_predecessor_backup(
+    reservation: _PredecessorReservation,
+    expected_identity: tuple[int, int],
+) -> None:
+    """Record the actual old tree immediately after its atomic move."""
+
+    _validate_reservation(reservation)
+    if _nofollow_directory_identity(reservation.backup, label="predecessor backup") != expected_identity:
+        raise ReleaseDeliveryError("release-copy-path-unsafe", "predecessor backup does not match the proven old tree")
+    reservation.backup_identity = expected_identity
+
+
 def _snapshot(folder: Path) -> dict[str, tuple[bool, int, bytes]]:
     """Read all files, directories, empty directories and observed modes."""
 
@@ -65,6 +165,18 @@ def _snapshot(folder: Path) -> dict[str, tuple[bool, int, bytes]]:
         relative = path.relative_to(folder).as_posix()
         if path.is_symlink() or not (path.is_file() or path.is_dir()):
             raise ReleaseDeliveryError("release-copy-path-unsafe", f"unsafe source or delivery carrier: {relative}")
+        try:
+            # Check every component before a metadata exclusion: a secret
+            # name remains forbidden even when its regular-file suffix is
+            # otherwise ephemeral (for example ``.env.pyc``).
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise ReleaseDeliveryError("release-copy-path-unsafe", "secret-shaped source or delivery carrier is not admitted") from error
+        # Persistent source-copy identity deliberately excludes Finder
+        # metadata and bytecode.  Unsafe carriers were refused above; retain
+        # every directory and every non-ephemeral regular file exactly.
+        if path.is_file() and _is_ephemeral_file(path.name):
+            continue
         records[relative] = (path.is_dir(), path.stat().st_mode & 0o777, b"" if path.is_dir() else path.read_bytes())
     return records
 
@@ -174,6 +286,18 @@ def _prove_predecessor(root: Path, candidate: ValidatedCandidate, destination: P
     # including these directories, rather than deleting an unproven carrier.
 
 
+def _prove_owned_predecessor(root: Path, candidate: ValidatedCandidate, destination: Path) -> None:
+    """Accept either the retained N package or the one recorded old delivery."""
+
+    try:
+        _prove_predecessor(root, candidate, destination)
+    except ReleaseDeliveryError as error:
+        if error.code != "release-copy-predecessor-mismatch":
+            raise
+        if not verify_recorded_source_predecessor(root, candidate.authority.executing_release, destination):
+            raise error
+
+
 def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
     """Copy fixed canonical source bytes/modes and return actual D567 proof.
 
@@ -191,12 +315,12 @@ def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
         actual = _snapshot(destination)
         if actual == records:
             return validate_source_copy(_admit(current))
-        _prove_predecessor(root, current, destination)
+        _prove_owned_predecessor(root, current, destination)
     parent = destination.parent
     if not parent.exists():
         parent.mkdir()
     staging = Path(tempfile.mkdtemp(prefix=f".release-sources-{current.manifest.sha256[:12]}-", dir=parent))
-    predecessor: Path | None = None
+    reservation: _PredecessorReservation | None = None
     try:
         _write_snapshot(staging, records)
         if _snapshot(staging) != records or tree_sha256(root, staging) != current.manifest.expected_derived_source_copy_sha256:
@@ -206,10 +330,18 @@ def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
             raise ReleaseDeliveryError("release-currentness-stale", "canonical source tree changed during delivery")
         _safe_path(root, DERIVED_SOURCE_COPY_RELATIVE)
         if existing:
-            _prove_predecessor(root, current, destination)
-            predecessor = Path(tempfile.mkdtemp(prefix=".release-sources-prior-", dir=parent))
-            predecessor.rmdir()  # Only the just-created empty reservation.
-            destination.rename(predecessor)
+            # Retain the private wrapper for recovery.  Only its still-absent
+            # fixed child may receive the owned old delivery; do not remove
+            # and reuse the wrapper itself as a rename target.
+            reservation = _reserve_predecessor(parent, destination)
+            _bind_reservation_identity(reservation)
+            predecessor_identity = _nofollow_directory_identity(destination, label="owned predecessor")
+            _prove_owned_predecessor(root, current, destination)
+            if _nofollow_directory_identity(destination, label="owned predecessor") != predecessor_identity:
+                raise ReleaseDeliveryError("release-copy-predecessor-mismatch", "owned predecessor changed during delivery")
+            _validate_reservation(reservation, require_absent_backup=True)
+            destination.rename(reservation.backup)
+            _record_predecessor_backup(reservation, predecessor_identity)
         elif os.path.lexists(destination):
             raise ReleaseDeliveryError("release-copy-collision", "delivery target appeared while staging")
         staging.rename(destination)
@@ -218,15 +350,29 @@ def deliver_release_sources(candidate: ValidatedCandidate) -> SealedSourceCopy:
             raise ReleaseDeliveryError("release-copy-digest-mismatch", "completed delivery bytes or modes changed")
         return result
     except Exception as error:
-        # Restore N's derived tree if publication failed before a new target
-        # existed. Never replace a target that another actor created.
-        if predecessor is not None and predecessor.exists() and not os.path.lexists(destination):
+        # Restore N's derived tree only from the exact child that received it
+        # and only while no other target exists.  The empty private wrapper is
+        # retained and is never itself a source-delivery candidate.
+        if (
+            reservation is not None
+            and reservation.backup_identity is not None
+            and not os.path.lexists(destination)
+        ):
             try:
-                predecessor.rename(destination)
-            except OSError:
+                _validate_reservation(reservation, require_owned_backup=True)
+                reservation.backup.rename(destination)
+            except (OSError, ReleaseDeliveryError):
                 pass
-        recovery = tuple(path.relative_to(root).as_posix() for path in (staging, predecessor, destination)
-                         if path is not None and os.path.lexists(path))
+        recovery = tuple(
+            path.relative_to(root).as_posix()
+            for path in (
+                staging,
+                None if reservation is None else reservation.wrapper,
+                None if reservation is None else reservation.backup,
+                destination,
+            )
+            if path is not None and os.path.lexists(path)
+        )
         code = error.code if isinstance(error, ReleaseContractError) else "release-copy-failed"
         raise ReleaseDeliveryError(code, f"source delivery did not complete; retained recovery carriers: {recovery}",
                                    recovery_paths=recovery) from error

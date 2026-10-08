@@ -5,10 +5,13 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +20,7 @@ if str(RELEASE_ROOT) not in sys.path:
 
 from release_image import DockerCommandResult
 from release_contract import canonical_json
+from release_contract import ReleaseContractError
 from release_suite import (
     CANDIDATE_MANIFEST_ENVIRONMENT_VARIABLE,
     COMPILED_ROOT_ENVIRONMENT_VARIABLE,
@@ -29,7 +33,9 @@ from release_suite import (
 from release_suite_execution import (
     InstalledNSuiteDockerExecutor,
     SelectedNImageBinding,
+    _prepare_executor_scratch,
 )
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS
 
 
 IMAGE = "sha256:" + "a" * 64
@@ -53,6 +59,7 @@ class FakeDocker:
         self.inspect_payload = inspect_payload or [{"Id": IMAGE, "Config": {"Labels": {
             "org.caprmedio.candidate": "N", "org.caprmedio.context": CONTEXT,
         }, "Env": ["PATH=/opt/caprmedio/bin:/usr/bin"]}}]
+        self.preflight_result = DockerCommandResult(0, b"", b"")
         self.run_result = run_result or DockerCommandResult(0, b"suite stdout", b"suite stderr")
         self.write_timeout_cid = True
         self.container_payload = [{"Id": CONTAINER, "Config": {"Labels": {
@@ -65,6 +72,8 @@ class FakeDocker:
             import json
             return DockerCommandResult(0, json.dumps(self.inspect_payload).encode(), b"")
         if argv[:2] == ("docker", "run"):
+            if "--cidfile" not in argv:
+                return self.preflight_result
             if (self.run_result.timed_out or self.run_result.exit_code is None) and self.write_timeout_cid:
                 Path(argv[argv.index("--cidfile") + 1]).write_text(CONTAINER, encoding="ascii")
             return self.run_result
@@ -161,6 +170,34 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
             SOURCE_BINDINGS_SHA256_ENVIRONMENT_VARIABLE: self.bindings_sha256,
         }
 
+    def recorded_deadline_guard(self, timeout_seconds: float) -> str:
+        """Read the private guard program from the sealed Docker argv.
+
+        The executor owns this suffix after sealed-command equality has been
+        checked.  These tests deliberately do not introduce a public guard API
+        or a caller-controlled command/deadline carrier.
+        """
+
+        self.executor.run(
+            ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+            working_directory="tests", environment=self.environment(), timeout_seconds=timeout_seconds,
+        )
+        argv = self.docker.calls[-1][0]
+        image_index = argv.index(IMAGE)
+        self.assertEqual(argv[argv.index("--entrypoint") + 1], "python")
+        self.assertEqual(argv[image_index + 1], "-c")
+        guard = argv[image_index + 2]
+        self.assertIsInstance(guard, str)
+        self.assertNotEqual(guard, "")
+        # The only suffix inputs are the captured deadline and the already
+        # equality-checked sealed child argv.  No shell or caller command
+        # grammar is admitted at this boundary.
+        self.assertEqual(argv[image_index + 3], str(timeout_seconds))
+        self.assertEqual(argv[image_index + 4], "--")
+        self.assertEqual(argv[image_index + 5:], ("python", "-m", "pytest"))
+        self.assertNotIn("sh", argv)
+        return guard
+
     def test_exact_command_uses_only_workspace_output_and_fixed_sandbox_controls(self) -> None:
         result = self.executor.run(
             ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
@@ -168,14 +205,33 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         )
 
         self.assertEqual(result.exit_code, 0)
-        # One reinspection verifies the exact selected immutable image and
-        # image-derived PATH immediately before the isolated run.
-        self.assertEqual(len(self.docker.calls), 2)
+        # One reinspection plus fixed installed-Python preflight prove the
+        # exact selected immutable image/PATH before the isolated run.
+        self.assertEqual(len(self.docker.calls), 3)
+        preflight = self.docker.calls[-2][0]
+        self.assertEqual(preflight[:8], ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL", "--security-opt=no-new-privileges", "--pids-limit=128"))
+        self.assertEqual(preflight[preflight.index("--entrypoint") + 1], "python")
+        preflight_image = preflight.index(IMAGE)
+        self.assertEqual(preflight[preflight_image + 1], "-c")
+        self.assertIsInstance(preflight[preflight_image + 2], str)
+        self.assertEqual(preflight[preflight_image + 3:], ())
+        self.assertNotIn("--cidfile", preflight)
+        self.assertNotIn("--mount", preflight)
         argv = self.docker.calls[-1][0]
         self.assertEqual(argv[:8], ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL", "--security-opt=no-new-privileges", "--pids-limit=128"))
         self.assertIn(f"type=bind,src={self.workspace},dst=/workspace,readonly", argv)
         self.assertIn(f"type=bind,src={self.output},dst=/output", argv)
         self.assertFalse(any(item.startswith(f"type=bind,src={self.root},dst=") for item in argv))
+        self.assertEqual(
+            tuple(item for item in argv if item.startswith("/tmp:") or item.startswith("/workspace/.caprmedio_tmp:")),
+            (
+                "/tmp:rw,nosuid,nodev,exec,size=2g,mode=1777",
+                "/workspace/.caprmedio_tmp:rw,nosuid,nodev,exec,size=2g,mode=1777",
+            ),
+        )
+        scratch = self.workspace / ".caprmedio_tmp"
+        self.assertTrue(scratch.is_dir())
+        self.assertEqual(list(scratch.iterdir()), [])
         self.assertNotIn("/var/run/docker.sock", argv)
         self.assertIn("PATH=/opt/caprmedio/bin:/usr/bin", argv)
         self.assertIn(f"{SOURCE_BINDINGS_ENVIRONMENT_VARIABLE}=/workspace/{SOURCE_BINDINGS_RELATIVE}", argv)
@@ -183,8 +239,81 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertIn("--cidfile", argv)
         self.assertIn("org.caprmedio.release-suite=" + SHA, argv)
         self.assertEqual(argv[argv.index("--entrypoint") + 1], "python")
-        self.assertEqual(argv[-3:], (IMAGE, "-m", "pytest"))
+        image_index = argv.index(IMAGE)
+        self.assertEqual(argv[image_index + 1], "-c")
+        self.assertIsInstance(argv[image_index + 2], str)
+        self.assertEqual(argv[image_index + 3], "120")
+        self.assertEqual(argv[image_index + 4], "--")
+        self.assertEqual(argv[image_index + 5:], ("python", "-m", "pytest"))
         self.assertEqual(self.docker.calls[-1][1], self.root)
+
+    def test_inline_installed_n_guard_preserves_normal_child_exit_without_a_shell(self) -> None:
+        guard = self.recorded_deadline_guard(1)
+
+        result = subprocess.run(
+            (sys.executable, "-c", guard, "1", "--", sys.executable, "-c", "raise SystemExit(37)"),
+            stdin=subprocess.DEVNULL, capture_output=True, check=False, timeout=2,
+        )
+
+        self.assertEqual(result.returncode, 37)
+
+    def test_inline_installed_n_guard_terminates_only_its_child_group_by_resolved_deadline(self) -> None:
+        guard = self.recorded_deadline_guard(0.5)
+        marker = self.output / "guard-child.pid"
+        child = (
+            "import os, pathlib, time; "
+            f"pathlib.Path({str(marker)!r}).write_text(str(os.getpid()), encoding='ascii'); "
+            "time.sleep(5)"
+        )
+        started = time.monotonic()
+        result = subprocess.run(
+            (sys.executable, "-c", guard, "0.5", "--", sys.executable, "-c", child),
+            stdin=subprocess.DEVNULL, capture_output=True, check=False, timeout=2,
+        )
+        elapsed = time.monotonic() - started
+
+        self.assertEqual(result.returncode, 124)
+        self.assertTrue(marker.is_file())
+        self.assertIn("start_new_session=True", guard)
+        self.assertIn("killpg", guard)
+        self.assertIn("SIGTERM", guard)
+        self.assertIn("SIGKILL", guard)
+        self.assertIn("wait", guard)
+        # Scheduler observation has a small host allowance; the guard's own
+        # monotonic deadline, TERM/KILL/reap budget must not be extended.
+        self.assertLessEqual(elapsed, 0.75)
+        child_pid = int(marker.read_text(encoding="ascii"))
+        with self.assertRaises(ProcessLookupError):
+            os.kill(child_pid, 0)
+
+    def test_inline_installed_n_guard_timeout_is_124_when_child_exits_zero_on_term(self) -> None:
+        guard = self.recorded_deadline_guard(0.5)
+        term_clean_exit = (
+            "import signal, sys, time; "
+            "signal.signal(signal.SIGTERM, lambda *_: sys.exit(0)); "
+            "time.sleep(5)"
+        )
+
+        result = subprocess.run(
+            (sys.executable, "-c", guard, "0.5", "--", sys.executable, "-c", term_clean_exit),
+            stdin=subprocess.DEVNULL, capture_output=True, check=False, timeout=2,
+        )
+
+        # Deadline expiry is non-passing regardless of a cooperative child's
+        # clean TERM exit; only normal pre-deadline child completion propagates.
+        self.assertEqual(result.returncode, 124)
+
+    def test_guard_timeout_exit_is_nonpassing_suite_result(self) -> None:
+        self.docker.run_result = DockerCommandResult(124, b"", b"deadline expired")
+
+        result = self.executor.run(
+            ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+            working_directory="tests", environment=self.environment(), timeout_seconds=120,
+        )
+
+        self.assertEqual(result.exit_code, 124)
+        self.assertFalse(result.timed_out)
+        self.assertNotEqual(result.exit_code, 0)
 
     def test_nonempty_image_entrypoint_is_overridden_by_the_sealed_command(self) -> None:
         self.docker.inspect_payload[0]["Config"]["Entrypoint"] = ["/image-start"]
@@ -197,8 +326,35 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertEqual(result.exit_code, 0)
         argv = self.docker.calls[-1][0]
         self.assertEqual(argv[argv.index("--entrypoint") + 1], "python")
-        self.assertEqual(argv[-3:], (IMAGE, "-m", "pytest"))
+        image_index = argv.index(IMAGE)
+        self.assertEqual(argv[image_index + 1], "-c")
+        self.assertIsInstance(argv[image_index + 2], str)
+        self.assertEqual(argv[image_index + 3], "120")
+        self.assertEqual(argv[image_index + 4], "--")
+        self.assertEqual(argv[image_index + 5:], ("python", "-m", "pytest"))
         self.assertNotIn("/image-start", argv)
+
+    def test_shared_maximum_deadline_is_forwarded_to_the_isolated_container(self) -> None:
+        result = self.executor.run(
+            ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+            working_directory="tests", environment=self.environment(),
+            timeout_seconds=MAX_UNIT_TIMEOUT_SECONDS,
+        )
+
+        self.assertEqual(result.exit_code, 0)
+        self.assertEqual(MAX_UNIT_TIMEOUT_SECONDS, self.docker.calls[-1][2])
+
+    def test_deadline_above_the_shared_maximum_is_rejected_before_docker(self) -> None:
+        from release_contract import ReleaseContractError
+
+        with self.assertRaises(ReleaseContractError) as rejected:
+            self.executor.run(
+                ("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                working_directory="tests", environment=self.environment(),
+                timeout_seconds=MAX_UNIT_TIMEOUT_SECONDS + 1,
+            )
+        self.assertEqual(rejected.exception.code, "release-suite-executor-timeout-invalid")
+        self.assertEqual([], self.docker.calls)
 
     def test_mount_escape_and_environment_override_refuse_before_docker_run(self) -> None:
         from release_contract import ReleaseContractError
@@ -229,6 +385,31 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
                               working_directory="tests", environment=self.environment(), timeout_seconds=120)
         self.assertEqual(linked.exception.code, "release-suite-executor-mount-unsafe")
         self.assertEqual(self.docker.calls, [])
+
+    def test_nonempty_scratch_refuses_before_docker_run(self) -> None:
+        from release_contract import ReleaseContractError
+
+        scratch = self.workspace / ".caprmedio_tmp"
+        scratch.mkdir()
+        (scratch / "unexpected").write_text("not scratch", encoding="utf-8")
+        with self.assertRaises(ReleaseContractError) as nonempty:
+            self.executor.run(("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                              working_directory="tests", environment=self.environment(), timeout_seconds=120)
+        self.assertEqual(nonempty.exception.code, "release-suite-executor-scratch-unsafe")
+        self.assertEqual([call[0][:2] for call in self.docker.calls], [("docker", "image")])
+
+    def test_symlinked_scratch_refuses_before_docker_run(self) -> None:
+        from release_contract import ReleaseContractError
+
+        scratch = self.workspace / ".caprmedio_tmp"
+        target = self.root / "outside-scratch"
+        target.mkdir()
+        scratch.symlink_to(target, target_is_directory=True)
+        with self.assertRaises(ReleaseContractError) as linked:
+            self.executor.run(("python", "-m", "pytest"), workspace=self.workspace, output_root=self.output,
+                              working_directory="tests", environment=self.environment(), timeout_seconds=120)
+        self.assertEqual(linked.exception.code, "release-suite-executor-scratch-unsafe")
+        self.assertEqual([call[0][:2] for call in self.docker.calls], [("docker", "image")])
 
     def test_timeout_never_becomes_a_successful_process_result(self) -> None:
         self.docker.run_result = DockerCommandResult(None, b"", b"timeout", timed_out=True)
@@ -287,6 +468,69 @@ class InstalledNSuiteDockerExecutorTests(unittest.TestCase):
         self.assertEqual(image.exception.code, "release-suite-executor-n-unproven")
         self.assertEqual(len(self.docker.calls), 1)
         self.assertEqual(self.docker.calls[0][0][:3], ("docker", "image", "inspect"))
+
+
+class ScratchMetadataHelperTests(unittest.TestCase):
+    """Only disposable scratch preparation; no executor or Docker invocation."""
+
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory(prefix="suite-scratch-metadata-")
+        self.addCleanup(temporary.cleanup)
+        self.workspace = Path(temporary.name)
+        self.scratch = self.workspace / ".caprmedio_tmp"
+
+    def test_new_scratch_remains_fixed_empty_private_leaf(self) -> None:
+        self.assertEqual(self.scratch, _prepare_executor_scratch(self.workspace))
+        self.assertEqual([], list(self.scratch.iterdir()))
+        self.assertEqual(0o700, self.scratch.stat().st_mode & 0o777)
+
+    def test_ds_store_only_scratch_is_accepted_without_opening_or_mutating_metadata(self) -> None:
+        self.scratch.mkdir(mode=0o700)
+        metadata = self.scratch / ".DS_Store"
+        metadata.write_bytes(b"Finder metadata\n")
+        metadata.chmod(0o000)
+        with patch.object(Path, "open", side_effect=PermissionError("metadata must not be read")):
+            self.assertEqual(self.scratch, _prepare_executor_scratch(self.workspace))
+        self.assertEqual(0o000, metadata.stat().st_mode & 0o777)
+        metadata.chmod(0o600)
+        self.assertEqual(b"Finder metadata\n", metadata.read_bytes())
+
+    def test_real_scratch_state_and_metadata_lookalikes_are_still_rejected(self) -> None:
+        self.scratch.mkdir()
+        (self.scratch / ".DS_Store").write_bytes(b"metadata\n")
+        for name in ("unexpected", ".DS_Store.bak"):
+            with self.subTest(name=name):
+                real_file = self.scratch / name
+                real_file.write_bytes(b"not metadata\n")
+                try:
+                    with self.assertRaises(ReleaseContractError) as refusal:
+                        _prepare_executor_scratch(self.workspace)
+                    self.assertEqual("release-suite-executor-scratch-unsafe", refusal.exception.code)
+                    self.assertEqual(b"not metadata\n", real_file.read_bytes())
+                finally:
+                    real_file.unlink()
+
+    def test_lowercase_name_is_not_exact_metadata(self) -> None:
+        # Do not create .DS_Store first: on case-insensitive hosts a lowercase
+        # spelling would alias that existing file rather than be a lookalike.
+        self.scratch.mkdir()
+        (self.scratch / ".ds_store").write_bytes(b"not exact Finder metadata\n")
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+
+    def test_metadata_named_directory_or_symlink_is_not_empty_scratch(self) -> None:
+        self.scratch.mkdir()
+        metadata = self.scratch / ".DS_Store"
+        metadata.mkdir()
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+        metadata.rmdir()
+        target = self.workspace / "real-state"
+        target.write_bytes(b"real state\n")
+        metadata.symlink_to(target)
+        with self.assertRaises(ReleaseContractError):
+            _prepare_executor_scratch(self.workspace)
+        self.assertEqual(b"real state\n", target.read_bytes())
 
 
 if __name__ == "__main__":

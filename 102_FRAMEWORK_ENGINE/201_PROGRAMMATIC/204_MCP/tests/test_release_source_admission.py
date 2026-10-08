@@ -20,7 +20,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "8d59dc3147484c24954eeac8d5305bba5f622bced2ac909986071c9c23d73380"
+AUTHORITY_SHA = "871015c692097218f80e100280d7994692cc1ae2543f3f08ee032a2ea46799b5"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402
@@ -74,13 +74,18 @@ def all_pins(record: dict[str, object]) -> list[dict[str, object]]:
             *record["ordered_actions"], *record["rmed_frontier"]]
 
 
+def fixture_source(relative: str) -> Path:
+    """Read the current D572-declared carrier at its canonical location."""
+    return REPOSITORY / relative
+
+
 class ReleaseSourceAdmissionTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         authority = REPOSITORY / AUTHORITY_REF
         actual = authority.read_bytes()
         if hashlib.sha256(actual).hexdigest() != AUTHORITY_SHA:
-            raise AssertionError("current D572@10 is not the accepted source pin")
+            raise AssertionError("current D572@29 is not the accepted source pin")
         cls.expected = reference_record(actual.decode("utf-8"))
         cls.private_carriers = json.loads(re.search(
             r"^## Private implementation carriers\n+```json\n(.*?)\n```$",
@@ -90,12 +95,12 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
     def setUp(self) -> None:
         temporary = REPOSITORY / ".caprmedio_tmp/tests/release-source-admission"
         temporary.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=temporary)
+        self.temporary = tempfile.TemporaryDirectory(dir=temporary, ignore_cleanup_errors=True)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
         for relative in {AUTHORITY_REF, *[pin["source_path"] for pin in all_pins(self.expected)],
                          *[row["source_path"] for row in self.private_carriers]}:
-            source = REPOSITORY / relative
+            source = fixture_source(relative)
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)
@@ -194,7 +199,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
     def test_private_carriers_reopen_without_extending_the_public_record(self) -> None:
         before = self.snapshot()
         self.assertEqual(self.private_carriers, derive_release_private_carriers(self.root))
-        self.assertEqual(10, len(self.private_carriers))
+        self.assertEqual(22, len(self.private_carriers))
         self.assertEqual(sorted({row["source_path"] for row in self.private_carriers}),
                          [row["source_path"] for row in self.private_carriers])
         self.assertEqual({"route", "acceptance_frontier", "workflow", "ordered_steps", "ordered_actions",

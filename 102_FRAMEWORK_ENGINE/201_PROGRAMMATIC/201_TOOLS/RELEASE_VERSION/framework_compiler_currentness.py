@@ -168,6 +168,8 @@ def _actual_output(root: Path, places: object) -> dict[str, bytes]:
         if role_root.is_symlink() or not role_root.is_dir():
             raise _error("initial-compiler-output-missing", "canonical compiled Methodology role directory is missing")
         for path in sorted(role_root.rglob("*")):
+            if path.name == ".DS_Store" and path.is_file() and not path.is_symlink():
+                continue
             if path.is_dir() and not path.is_symlink():
                 continue
             if path.is_symlink() or not path.is_file() or path.suffix != ".md":

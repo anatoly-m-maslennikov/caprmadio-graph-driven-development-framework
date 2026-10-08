@@ -33,7 +33,8 @@ class RunEvidenceTests(unittest.TestCase):
         control = self.root / '.caprmedio_caprmedio'
         control.mkdir()
         (control / 'caprmedio_project_settings.toml').write_text(
-            '[paths]\njournal_root=".caprmedio_caprmedio/work_journal"\n')
+            '[paths]\ncontrol_root=".caprmedio_caprmedio"\n'
+            'journal_root=".caprmedio_caprmedio/_journal"\n')
         (self.root / 'atom.md').write_text('mock atom')
         (self.root / 'rules.md').write_text('mock rules')
         self.store = RunEvidence(self.root)

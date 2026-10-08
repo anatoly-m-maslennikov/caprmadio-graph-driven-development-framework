@@ -79,13 +79,18 @@ _SENSITIVE_NAMES = frozenset(
     {
         "api_key",
         "apikey",
+        "access_token",
         "authorization",
+        "connection_string",
         "credential",
         "credentials",
         "password",
         "private_key",
+        "refresh_token",
         "secret",
         "secrets",
+        "session_cookie",
+        "signing_key",
         "token",
     }
 )
@@ -499,7 +504,7 @@ def _event_pointer(selector: str, *, mode: str) -> str:
 
 
 def _sensitive_name(name: str) -> bool:
-    normal = name.lower().replace("-", "_")
+    normal = name.lower().replace("-", "_").replace(".", "_")
     return normal in _SENSITIVE_NAMES or any(token in normal for token in ("secret", "password", "credential"))
 
 
@@ -523,7 +528,7 @@ def _admit_selector(selector: str, *, mode: str, records: list[Mapping[str, Any]
         decoded = decode_json_pointer(pointer)
     except QueryFilterError as error:  # pragma: no cover - validation precedes this
         raise JournalQueryError("invalid-event-selector") from error
-    if any("." in token or _sensitive_name(token) for token in decoded):
+    if any(_sensitive_name(token) for token in decoded):
         raise JournalQueryError("protected-selector")
     for record in records:
         value = resolve_json_pointer(record["event"], pointer)

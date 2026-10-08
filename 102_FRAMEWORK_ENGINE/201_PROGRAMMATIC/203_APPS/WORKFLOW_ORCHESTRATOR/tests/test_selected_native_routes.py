@@ -13,6 +13,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 from typing import Any, Mapping
 
 
@@ -292,6 +293,237 @@ class SelectedNativeRoutesTest(unittest.TestCase):
                     self.assertEqual("terminal", result.get("disposition"), {"result": result, "graph": graph})
                     self._assert_shared_lineage(project.root, request_id, route, result, graph)
                     self._assert_route_effect(project, runner, request_id, before, rows)
+                    if case_id == "W02":
+                        self.assertEqual(["CA-O-145", "CA-O-129"], [row["step_definition_id"] for row in rows])
+                        assessment = self._read_json(
+                            runner.run_directory(request_id) / f"{rows[0]['action_run_id']}.json",
+                            "O145 assessment progress",
+                        )["native_result"].get("assessment")
+                        self.assertIsInstance(assessment, dict)
+                        self.assertRegex(assessment.get("request_digest", ""), r"^[0-9a-f]{64}$")
+                        self.assertEqual("semantic_revision", assessment.get("admitted_change_class"))
+                        comparison = assessment.get("comparison")
+                        self.assertIsInstance(comparison, dict)
+                        self.assertEqual("CA-R-100", comparison.get("target", {}).get("atom_id"))
+                        self.assertTrue(comparison.get("report", {}).get("digest"))
+                        self.assertTrue(comparison.get("primary_claim_identity_preserved"))
+                        applied = self._read_json(
+                            runner.run_directory(request_id) / f"{rows[1]['action_run_id']}.json",
+                            "O129 update progress",
+                        )["native_result"]
+                        self.assertEqual(assessment, applied.get("assessment"))
+                finally:
+                    lease.cleanup()
+
+    def test_graph_effect_is_retained_when_its_action_terminal_recording_is_pending(self) -> None:
+        """W11 shares the W11/W12 recorder boundary without replaying an effect."""
+        lease, project = self._fixture("W11", "build_entities_graph")
+        try:
+            tools_root = APP.parents[1] / "201_TOOLS"
+            if str(tools_root) not in sys.path:
+                sys.path.insert(0, str(tools_root))
+            import work_journal
+
+            request_id = "selected-native-w11-terminal-pending"
+            adapter = SelectedRouteAdapter(project.root)
+            preview = adapter.invoke("build_entities_graph", project.request(request_id=request_id))
+            execute = project.request(
+                request_id=request_id,
+                mode="execute",
+                receipt=preview["proposal_receipt"],
+                receipt_digest=preview["proposal_receipt_digest"],
+            )
+            runner = SelectedExecution(project.root)
+            frozen = runner.freeze({
+                "operation": "enqueue_selected", "run_id": request_id, "execution": execute,
+            })
+            append = work_journal.append_sealed_events
+
+            def fail_only_action_terminal(*args: object, **kwargs: object) -> object:
+                events = args[1]
+                assert isinstance(events, list) and len(events) == 1
+                event = events[0]
+                if event["run"]["kind"] == "action" and event["event"] != "started":
+                    raise OSError("fixture Action terminal Journal failure")
+                return append(*args, **kwargs)
+
+            with patch.object(work_journal, "append_sealed_events", side_effect=fail_only_action_terminal):
+                pending = runner.dispatch(frozen)
+
+            self.assertEqual("recording_pending", pending.get("disposition"), pending)
+            graph = self._read_json(runner.run_directory(request_id) / "graph_result.json", "selected graph result")
+            self.assertEqual("interrupted_pending", graph.get("outcome"), graph)
+            row = graph["step_results"][0]
+            self.assertEqual("recording_pending", row.get("result"), row)
+            self.assertTrue(row.get("effect_refs"), row)
+            for effect in row["effect_refs"]:
+                self._source_bytes(project.root, effect, "retained graph effect")
+            self.assertEqual(pending, runner.dispatch(frozen), "pending effect must not be replayed")
+        finally:
+            lease.cleanup()
+
+    def test_graph_limitations_terminalize_without_a_completed_action_receipt(self) -> None:
+        """W11/W12 retain native limitations as non-complete run evidence.
+
+        CA-O-133 and CA-O-136 have no successor edge for these source-native
+        results.  The real graph Action adapter must therefore terminalize all
+        three actual Runs rather than letting the generic executor manufacture
+        a completed Action receipt and fall through to its missing-edge error.
+        """
+        graph_tools = APP.parents[1] / "201_TOOLS" / "GENERATE_ENTITY_GRAPH"
+        if str(graph_tools) not in sys.path:
+            sys.path.insert(0, str(graph_tools))
+        import generate_entity_graph
+
+        for case_id, route_name, graph_kind in (
+            ("W11", "build_entities_graph", "entities"),
+            ("W12", "build_terms_graph", "terms"),
+        ):
+            for native_outcome in ("stale", "incomplete", "conflicting"):
+                with self.subTest(route=route_name, native_outcome=native_outcome):
+                    lease, project = self._fixture(case_id, route_name)
+                    try:
+                        request_id = f"selected-native-{case_id.lower()}-{native_outcome}"
+                        adapter = SelectedRouteAdapter(project.root)
+                        preview = adapter.invoke(route_name, project.request(request_id=request_id))
+                        self.assertEqual("preview", preview.get("disposition"), preview)
+                        execute = project.request(
+                            request_id=request_id,
+                            mode="execute",
+                            receipt=preview["proposal_receipt"],
+                            receipt_digest=preview["proposal_receipt_digest"],
+                        )
+                        runner = SelectedExecution(project.root)
+                        frozen = runner.freeze({
+                            "operation": "enqueue_selected", "run_id": request_id, "execution": execute,
+                        })
+
+                        # This is the native Tool result consumed by the real
+                        # W11/W12 Action adapter.  The recorder, Step, and
+                        # Workflow evidence are intentionally not mocked.
+                        native_result = {
+                            "outcome": native_outcome,
+                            "output_effects": {"state": "none", "paths": []},
+                            "diagnostics": [{"code": f"fixture-{native_outcome}"}],
+                            "quality_dispositions": {
+                                "coverage": "fail" if native_outcome == "incomplete" else "pass",
+                                "fidelity": "pass",
+                                "validity": "fail" if native_outcome == "conflicting" else "pass",
+                                "currentness": "fail" if native_outcome == "stale" else "pass",
+                                "permission": "pass",
+                                "persistence": "pass",
+                                "recording": "pass",
+                            },
+                            "source_frontier_evidence": {},
+                            "selection_evidence": {},
+                            "lineage": [],
+                            "non_authoritative": True,
+                            "run_receipt_refs": [],
+                            f"{graph_kind}_graph": {},
+                        }
+                        with patch.object(generate_entity_graph, "build_graph", return_value=native_result):
+                            result = runner.dispatch(frozen)
+
+                        self.assertEqual("started", result.get("disposition"), result)
+                        self.assertEqual("inspect-or-recover-only", result.get("retry_disposition"), result)
+                        self.assertNotIn("execution_error", result)
+                        graph = self._read_json(
+                            runner.run_directory(request_id) / "graph_result.json", "limited graph result",
+                        )
+                        self.assertEqual("interrupted_pending", graph.get("outcome"), graph)
+                        self.assertEqual(1, len(graph.get("step_results", [])), graph)
+                        row = graph["step_results"][0]
+                        self.assertEqual(native_outcome, row.get("result"), row)
+                        self.assertEqual([], row.get("effect_refs"), row)
+                        progress = self._read_json(
+                            runner.run_directory(request_id) / f"{row['action_run_id']}.json",
+                            "limited graph Action progress",
+                        )
+                        self.assertEqual(native_outcome, progress.get("result"), progress)
+                        self.assertEqual(native_outcome, progress.get("native_result", {}).get("outcome"), progress)
+
+                        receipts = result.get("terminal_runs")
+                        self.assertIsInstance(receipts, list, result)
+                        self.assertEqual(3, len(receipts), receipts)
+                        self.assertEqual(
+                            {request_id, row["step_run_id"], row["action_run_id"]},
+                            {receipt.get("run_id") for receipt in receipts},
+                            receipts,
+                        )
+                        for receipt in receipts:
+                            self.assertEqual("interrupted", receipt.get("disposition"), receipt)
+                            self.assertEqual("interrupted_pending", receipt.get("outcome"), receipt)
+                            self.assertEqual([], receipt.get("effect_refs"), receipt)
+                            facts = [
+                                event for event in self._events(project.root, request_id)
+                                if event.get("run", {}).get("run_id") == receipt.get("run_id")
+                            ]
+                            self.assertEqual(["started", "interrupted"], [event.get("event") for event in facts], facts)
+                            self.assertEqual([None, "interrupted_pending"], [event.get("outcome") for event in facts], facts)
+                    finally:
+                        lease.cleanup()
+
+    def test_structure_pre_cutover_recording_failure_stops_before_following_action(self) -> None:
+        """O015 cannot reach its cutover after a predecessor lacks durable terminal evidence."""
+        structural_steps = ("CA-O-139", "CA-O-140", "CA-O-141", "CA-O-142")
+        for failed_ordinal, failed_step in enumerate(structural_steps, start=1):
+            with self.subTest(failed_step=failed_step):
+                lease, project = self._fixture("W05", "create_scope_unit")
+                try:
+                    tools_root = APP.parents[1] / "201_TOOLS"
+                    if str(tools_root) not in sys.path:
+                        sys.path.insert(0, str(tools_root))
+                    import work_journal
+
+                    request_id = f"selected-native-w05-{failed_step.lower()}-recording-pending"
+                    adapter = SelectedRouteAdapter(project.root)
+                    preview = adapter.invoke("create_scope_unit", project.request(request_id=request_id))
+                    execute = project.request(
+                        request_id=request_id,
+                        mode="execute",
+                        receipt=preview["proposal_receipt"],
+                        receipt_digest=preview["proposal_receipt_digest"],
+                    )
+                    runner = SelectedExecution(project.root)
+                    frozen = runner.freeze({
+                        "operation": "enqueue_selected", "run_id": request_id, "execution": execute,
+                    })
+                    before = project.snapshot()
+                    append = work_journal.append_sealed_events
+                    failed_action_id = f"{request_id}:step:{failed_ordinal}:action:1"
+
+                    def fail_one_pre_cutover_action_terminal(*args: object, **kwargs: object) -> object:
+                        events = args[1]
+                        assert isinstance(events, list) and len(events) == 1
+                        event = events[0]
+                        if (
+                            event["run"]["kind"] == "action"
+                            and event["run"]["run_id"] == failed_action_id
+                            and event["event"] != "started"
+                        ):
+                            raise OSError("fixture structural Action terminal Journal failure")
+                        return append(*args, **kwargs)
+
+                    with patch.object(
+                        work_journal, "append_sealed_events", side_effect=fail_one_pre_cutover_action_terminal,
+                    ):
+                        pending = runner.dispatch(frozen)
+
+                    self.assertEqual("recording_pending", pending.get("disposition"), pending)
+                    graph = self._read_json(
+                        runner.run_directory(request_id) / "graph_result.json", "selected graph result",
+                    )
+                    self.assertEqual("interrupted_pending", graph.get("outcome"), graph)
+                    self.assertEqual(
+                        list(structural_steps[:failed_ordinal]),
+                        [row.get("step_definition_id") for row in graph.get("step_results", [])],
+                        graph,
+                    )
+                    self.assertEqual(before, project.snapshot(), "pre-cutover recording failure reached O143")
+                    recovery = runner.dispatch(frozen)
+                    self.assertIn(recovery.get("disposition"), {"recording_pending", "terminal"}, recovery)
+                    self.assertNotIn(recovery.get("outcome"), {"completed", "no_op"}, recovery)
+                    self.assertEqual(before, project.snapshot(), "recording-only retry replayed a structural effect")
                 finally:
                     lease.cleanup()
 

@@ -81,20 +81,27 @@ class OrchestratorTests(unittest.TestCase):
         with self.assertRaisesRegex(Interrupted, 'changed after enqueue'):
             engine.request(self.request.run_id)
 
-    def test_prompt_report_example_uses_the_production_contract(self):
+    def test_prompt_instructions_and_typed_report_use_the_production_contract(self):
         from engine import PROMPTS, validate_report
         prompt = (PROMPTS / 'CA-O-109.prompt.md').read_text()
-        example = json.loads(prompt.split('```json\n', 1)[1].split('```', 1)[0])
+        example = report({
+            'workflow_run_id': 'contract-fixture',
+            'atom_id': 'MOCK-R-1',
+            'source': {'path': 'atom.md'},
+            'criteria_sha256': 'fixture-criteria',
+        })
         validate_report(example)
+        self.assertIn('Results: checked_clean | issues | blocked', prompt)
         self.assertIn('passed | failed | blocked | pending', prompt)
+        self.assertIn('Save one concise report/handoff', prompt)
         example['checks']['claim']['status'] = 'pass'
         with self.assertRaisesRegex(ValueError, 'invalid check result'):
             validate_report(example)
-        gather = (PROMPTS / 'CA-O-108.prompt.md').read_text()
-        self.assertIn('actual Project Operator registry', gather)
-        self.assertIn('Status admission rules', gather)
+        gather = ' '.join((PROMPTS / 'CA-O-108.prompt.md').read_text().split())
+        self.assertIn('actual Operator registry', gather)
+        self.assertIn('applicable Status rules', gather)
         fix = (PROMPTS / 'CA-O-110.prompt.md').read_text()
-        self.assertIn('Findings carry id', fix)
+        self.assertIn('Account for every finding', fix)
 
     def test_local_evidence_in_criteria_is_bound_and_given_to_agent(self):
         control = self.root / '.caprmedio_caprmedio'

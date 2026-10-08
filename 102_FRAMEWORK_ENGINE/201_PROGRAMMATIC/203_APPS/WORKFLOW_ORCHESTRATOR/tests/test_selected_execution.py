@@ -495,6 +495,34 @@ class SelectedExecutionTests(unittest.TestCase):
 
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016")
         sources = implementation_actions.current_source_bindings(REPOSITORY)
+        # The fixture executes against its disposable Project.  Preserve the
+        # exact current source pins there so prompt validation remains real
+        # while no handler can write into the source checkout.
+        for binding in sources:
+            source = REPOSITORY / binding["path"]
+            destination = self.root / binding["path"]
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(source.read_bytes())
+        execution = request["execution"]
+        assert isinstance(execution, dict)
+        execution["request_id"] = "current-o016"
+        execution["initiative"] = {
+            "initiative_id": "implementation-o016",
+            "instruction_summary": "current implementation fixture",
+            "initiative_ref": execution["definition_manifest"]["manifest_ref"],
+        }
+        execution["operator_authorization"] = {
+            "authorization_ref": "authorizations/current-o016.json",
+            "authorization_freshness": {
+                "state": "current", "digest": execution["definition_manifest"]["manifest_digest"]},
+            "request_id": "current-o016", "operation_route": "run_implementation_workflow",
+            "proposal_receipt_digest": "b" * 64,
+            "parameters_digest": "c" * 64,
+            "target_frontier_digest": "d" * 64,
+            "effects_digest": "e" * 64,
+            "definition_manifest": execution["definition_manifest"],
+            "source_freshness": execution["source_freshness"],
+        }
         method_paths = [row["path"] for row in sources
                         if row["atom_id"].startswith("CA-M-")]
         projection = implementation_actions.prepare_method_projection(method_paths, REPOSITORY)
@@ -503,23 +531,45 @@ class SelectedExecutionTests(unittest.TestCase):
         workspace = workspace.resolve()
         calls: list[dict[str, object]] = []
         evaluation_calls = 0
+        entry_calls = 0
 
         def agent(_prompt: str, packet: dict[str, object]) -> dict[str, object]:
-            nonlocal evaluation_calls
+            nonlocal entry_calls, evaluation_calls
             calls.append(packet)
             step = packet["step_marker"]
             outputs: dict[str, object] = {}
+            if step == "CA-O-091":
+                entry_calls += 1
+                entry_results = (
+                    "evaluation_ready", "requirement_ready", "evaluation_runnable",
+                    "evaluation_runnable", "complete",
+                )
+                try:
+                    result = entry_results[entry_calls - 1]
+                except IndexError as error:
+                    raise AssertionError("fixture exceeded its declared CA-O-091 visits") from error
+                return {"result": result, "outputs": outputs, "evidence": [f"evidence:{step}"]}
             if step == "CA-O-092":
-                outputs = {"golden_e2e": True, "commands": ["test"], "expected_outcomes": ["pass"]}
+                outputs = {"golden_e2e": ["test"], "commands": ["test"], "expected_outcomes": ["pass"]}
             elif step == "CA-O-093":
-                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"]}
+                outputs = {"candidate": "fixture", "phase": packet["phase"], "changed_paths": ["fixture.py"]}
             elif step == "CA-O-094":
                 evaluation_calls += 1
                 if evaluation_calls == 1:
-                    return {"result": "failed", "outputs": {}, "evidence": ["failure"]}
-                outputs = {"commands": ["test"], "checks": [{"returncode": 0}]}
+                    return {"result": "failed", "outputs": {"commands": ["test"],
+                                                                  "checks": [{"returncode": 1}]},
+                            "evidence": ["failure"]}
+                outputs = {"candidate": "fixture", "commands": ["test"],
+                           "checks": [{"returncode": 0}],
+                           "coverage": {"complete": True, "checked": ["CA-E-563"]}}
+            elif step == "CA-O-095":
+                outputs = {"cause": "fixture assertion failed"}
+            elif step == "CA-O-096":
+                outputs = {"decision": "retry admitted", "limit_provenance": "fixture settings", "consumed": 0}
             elif step == "CA-O-099":
-                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"], "recheck_commands": ["test"]}
+                outputs = {"candidate": "fixture", "changed_paths": ["fixture.py"],
+                           "phase": packet["phase"], "recheck_commands": ["test"], "issue_evidence": ["failure"],
+                           "regression_evidence": ["recheck"]}
             results = {"CA-O-091": "evaluation_ready", "CA-O-092": "prepared", "CA-O-093": "implemented",
                        "CA-O-094": "passed", "CA-O-095": "implementation_defect", "CA-O-096": "retry_permitted",
                        "CA-O-099": "repaired"}
@@ -534,25 +584,45 @@ class SelectedExecutionTests(unittest.TestCase):
             "source_bindings": sources,
             "permissions": {"allowed": True, "implementation_workspace": {
                 "kind": "disposable_workspace", "path": str(workspace), "allow_write": True,
-            }},
+            }, "retry": {"authorization_ref": execution["operator_authorization"]["authorization_ref"],
+                         "source_ref": ".caprmedio_caprmedio/caprmedio_project_settings.toml",
+                         "task_ref": execution["workflow_run_id"],
+                         "epic_ref": execution["definition_manifest"]["manifest_ref"]}},
             "workspace": str(workspace), "method_projection": projection,
-            "requirements_delivery": ["R/D"], "evaluations": ["E"],
-            "plan_item": {"estimated_minutes": 1}, "handoff_complete": True,
-            "golden_e2e": True, "baseline_command": "test", "retry": {"consumed": 0, "limit": 1},
+            "requirements": implementation_actions.prepare_input_bindings(["CA-R-1843"], REPOSITORY),
+            "delivery": implementation_actions.prepare_input_bindings(["CA-D-544"], REPOSITORY),
+            "evaluations": implementation_actions.prepare_input_bindings(["CA-E-563"], REPOSITORY),
+            "red": {"expectation": "fixture assertion passes", "fixtures": ["fixture.py"],
+                    "commands": ["test"], "scope": "selected implementation item"},
+            "plan_item": {"plan_id": "current-o016-plan", "item_id": "current-o016-item",
+                          "dod": ["implementation checks pass"], "owned_paths": ["."],
+                          "estimated_minutes": 1}, "owned_paths": ["."],
+            "candidate": "fixture", "phase": "implementation", "handoff_complete": True,
+            "golden_e2e": ["test"], "baseline_command": "test",
+            "confidence": {"observed": 1.0, "effective": 0.9,
+                            "source": ".caprmedio_caprmedio/caprmedio_project_settings.toml"},
+            "retry": {"consumed": 0, "effective_limit": 1,
+                      "source": ".caprmedio_caprmedio/caprmedio_project_settings.toml",
+                      "remaining_failure": True, "admitted": True},
+            "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False,
+                         "candidate": "fixture", "phase": "implementation"},
+            "operator_authorization": execution["operator_authorization"],
             "retained_state": {"run": "fixture"},
         }
-        request["execution"]["parameters"] = {
+        execution["parameters"] = {
             "base_packet": base,
-            "run_visit_limits": {"CA-O-094": 2},
+            "run_visit_limits": {"CA-O-091": 5, "CA-O-094": 2},
             "step_packets": {
                 step: {"context": context, "step_marker": step}
                 for step, (_action, context) in implementation_actions.ACTION_BY_STEP.items()
             },
         }
-        runner = SelectedExecution(REPOSITORY, implementation_agent=agent)
-        graph = selected._validate_graph(request["execution"])
-        request["execution"]["requested_runs"] = build_requested_runs(
-            graph, "current-o016", {"CA-O-094": 2},
+        # This is an executable fixture: writes from the implementation run
+        # belong in its disposable Project, never in the source checkout.
+        runner = SelectedExecution(self.root, implementation_agent=agent)
+        graph = selected._validate_graph(execution)
+        execution["requested_runs"] = build_requested_runs(
+            graph, "current-o016", {"CA-O-091": 5, "CA-O-094": 2},
         )
         frozen = {"request": request, "graph": graph}
 
@@ -575,11 +645,13 @@ class SelectedExecutionTests(unittest.TestCase):
 
         self.assertEqual(result["outcome"], "completed")
         self.assertEqual([packet["step_marker"] for packet in calls],
-                         ["CA-O-091", "CA-O-092", "CA-O-093", "CA-O-094", "CA-O-095", "CA-O-096", "CA-O-099", "CA-O-094"])
+                         ["CA-O-091", "CA-O-092", "CA-O-091", "CA-O-093", "CA-O-091", "CA-O-094",
+                          "CA-O-095", "CA-O-096", "CA-O-099", "CA-O-091", "CA-O-094", "CA-O-091"])
         self.assertEqual([packet["context"] for packet in calls],
-                         ["Integrated", "Isolated", "Isolated", "Integrated", "Isolated", "Integrated", "Isolated", "Integrated"])
+                         ["Integrated", "Isolated", "Integrated", "Isolated", "Integrated", "Integrated",
+                          "Isolated", "Integrated", "Isolated", "Integrated", "Integrated", "Integrated"])
         self.assertEqual(calls[1]["prior_results"][0]["step_definition_id"], "CA-O-091")
-        self.assertEqual(calls[4]["prior_results"][-1]["result"], "checks fail")
+        self.assertEqual(calls[6]["prior_results"][-1]["result"], "failed")
 
     def test_o016_rejects_missing_or_mismatched_step_packet(self) -> None:
         selected, request = self.current_manifest_request("run_implementation_workflow", "current-o016-missing")
@@ -724,12 +796,14 @@ class SelectedExecutionTests(unittest.TestCase):
             pending = runner.dispatch(frozen)
 
         self.assertEqual(pending["disposition"], "recording_pending")
-        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
+        # A missing terminal receipt for step 1 cannot authorize its On Result
+        # transition, so step 2 must not be dispatched before recovery.
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1"])
         for event_id in pending["pending_event_ids"]:
             work_journal.recover_pending_event(self.root, event_id)
         recovered = runner.dispatch(frozen)
         self.assertEqual(recovered, pending)
-        self.assertEqual(calls, ["terminal-pending:step:1:action:1", "terminal-pending:step:2:action:1"])
+        self.assertEqual(calls, ["terminal-pending:step:1:action:1"])
 
     def test_revert_adapter_uses_the_existing_lazy_action_run(self) -> None:
         frozen = self.executor({}).freeze(self.request())

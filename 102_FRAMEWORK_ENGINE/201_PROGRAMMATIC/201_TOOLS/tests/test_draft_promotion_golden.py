@@ -210,11 +210,11 @@ class DraftPromotionGoldenTest(unittest.TestCase):
         )
         before = self.fixture.snapshot()
         with self.assertRaisesRegex(LifecycleError, "own current retained-history head"):
-            update_atom_action(self.fixture.root, self._draft_update(draft_a, suffix="\nUnrelated head update.\n"), execute=True, authorized=True)
+            update_atom_action(self.fixture.root, self._draft_update(draft_a, suffix="\n"), execute=True, authorized=True)
         self.assertEqual(before, self.fixture.snapshot())
 
         replayed, first_head = self._fresh_draft(container="update-replayed")
-        update_atom_action(self.fixture.root, self._draft_update(replayed, suffix="\nFirst update.\n"), execute=True, authorized=True)
+        update_atom_action(self.fixture.root, self._draft_update(replayed, suffix="\n"), execute=True, authorized=True)
         current = replayed.read_text(encoding="utf-8")
         front, content = current[4:].split("\n---\n", 1)
         replayed.write_text(
@@ -223,7 +223,7 @@ class DraftPromotionGoldenTest(unittest.TestCase):
         )
         before = self.fixture.snapshot()
         with self.assertRaisesRegex(LifecycleError, "own current retained-history head"):
-            update_atom_action(self.fixture.root, self._draft_update(replayed, suffix="\nReplayed head update.\n"), execute=True, authorized=True)
+            update_atom_action(self.fixture.root, self._draft_update(replayed, suffix="\n"), execute=True, authorized=True)
         self.assertEqual(before, self.fixture.snapshot())
 
 

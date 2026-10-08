@@ -25,7 +25,7 @@ from release_contract import IMAGE_DOCKERFILE, ReleaseContractError, canonical_j
 from release_contract import REQUIRED_ENGINE_SOURCE_PREFIXES
 from release_handoff import PackageRow
 from release_image import DockerCommandResult, DockerExecutor, DockerSubprocessExecutor, IMAGE_ID
-from release_inventory import ReleaseInventoryError, refuse_secret_path
+from release_inventory import _is_ephemeral_file, ReleaseInventoryError, refuse_secret_path
 from release_packaging import REQUIRED_SKILL_FILES, RUNTIME_ROOT, ReleasePackagingError, _render_manifest, _verify_release
 
 
@@ -36,6 +36,9 @@ _DEPENDENCY_INPUTS = (IMAGE_DOCKERFILE, "pyproject.toml", "uv.lock")
 _ENGINE_COPY = b"COPY 102_FRAMEWORK_ENGINE ./102_FRAMEWORK_ENGINE"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _MAX_OUTPUT_BYTES = 4 * 1024 * 1024
+# Historical admission identities must not depend on the current helper body.
+_LEGACY_CANARY_SHA256 = "40ac5ae85db43860e0882e46d327bb63b816c50978a4ff5b14e4f90d1268ff99"
+_METADATA_CANARY_SHA256 = "d7640a614a8f090d61707cea9ecfdbf2d62ea91230a8cf698143be296527b018"
 
 
 class BootstrapImageError(ReleaseContractError):
@@ -66,6 +69,17 @@ class BootstrapImageEvidence:
     def package_manifest_sha256(self) -> str:
         """Compatibility spelling for the initializer's package identity."""
         return self.manifest_sha256
+
+
+@dataclass(frozen=True)
+class _RetainedImagePlan:
+    """Inspection identity derived solely from an authenticated retained package."""
+
+    root: Path
+    rows: tuple[PackageRow, ...]
+    manifest_sha256: str
+    source_context_sha256: str
+    manifest_bytes: bytes
 
 
 def _digest(payload: bytes) -> str:
@@ -183,7 +197,14 @@ def _tree_digest(root: Path) -> str:
     for path in sorted(root.rglob("*")):
         if path.is_symlink() or not (path.is_file() or path.is_dir()):
             raise _error("bootstrap-image-context-invalid", "private image context contains an unsafe carrier")
-        if path.is_file():
+        relative = path.relative_to(root)
+        try:
+            # Do not let a secret-shaped name bypass rejection merely because
+            # it also has an ephemeral suffix (for example ``.env.pyc``).
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise _error("bootstrap-image-context-invalid", "private image context contains a secret-shaped carrier") from error
+        if path.is_file() and not _is_ephemeral_file(path.name):
             records.append((path.relative_to(root).as_posix(), _digest(path.read_bytes()), path.stat().st_mode & 0o777))
     return _digest(canonical_json(records))
 
@@ -217,6 +238,25 @@ def _assert_plan_current(plan: object) -> None:
 def _canary() -> bytes:
     """Fixed complete-package and MCP readiness canary; no host credentials."""
     return b'''import asyncio, hashlib, json, sys, tomllib\nfrom pathlib import Path\nfrom mcp import Client, StdioServerParameters\ndef digest(v): return hashlib.sha256(v).hexdigest()\nbase = Path('/opt/caprmedio-framework')\nspec = json.loads(Path('/opt/caprmedio-bootstrap-canary.json').read_bytes())\nmanifest_bytes = (base / 'manifest.toml').read_bytes()\nassert digest(manifest_bytes) == spec['manifest_sha256']\nmanifest = tomllib.loads(manifest_bytes.decode())\nassert manifest['candidate_snapshot_manifest_sha256'] == spec['source_context_sha256']\nassert manifest['files'] == spec['package_rows']\nexpected = {'manifest.toml'} | {row['destination'] for row in spec['package_rows']}\nassert {p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file()} == expected\nfor row in spec['package_rows']:\n p = base / row['destination']; assert p.is_file() and not p.is_symlink()\n assert digest(p.read_bytes()) == row['sha256'] and p.stat().st_mode & 511 == row['mode']\nasync def probe():\n project = Path('/tmp/bootstrap-canary-project'); project.mkdir()\n source = project / '.caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources'\n source.parent.mkdir(parents=True); (source.parent / '003_PROJECT_CONFIGURATION').mkdir()\n for row in spec['package_rows']:\n  if row['destination'].startswith('METHODOLOGY/sources/'):\n   out = source / row['destination'].removeprefix('METHODOLOGY/sources/'); out.parent.mkdir(parents=True, exist_ok=True); out.write_bytes((base / row['destination']).read_bytes())\n params = StdioServerParameters(command=sys.executable, args=['/opt/caprmedio-framework/FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py', '--project-root', str(project)])\n async with Client(params, cache=None) as client:\n  page = await client.list_tools(); names = [tool.name for tool in page.tools]\n  while page.next_cursor:\n   page = await client.list_tools(cursor=page.next_cursor); names.extend(tool.name for tool in page.tools)\n  result = await client.call_tool('get_mcp_reload_status', {'request': {}})\n  assert names and len(names) == len(set(names)) and not result.is_error\n  return sorted(names)\nnames = asyncio.run(asyncio.wait_for(probe(), 60))\nprint(json.dumps({'schema':'caprmedio.bootstrap_image_canary.v1','manifest_sha256':spec['manifest_sha256'],'source_context_sha256':spec['source_context_sha256'],'verified_files':len(spec['package_rows']),'mcp_tools':names}, sort_keys=True))\n'''
+
+
+def _metadata_canary() -> bytes:
+    """Ignore only Finder metadata while preserving the historical probe bytes."""
+    program = _canary()
+    inventory = b"if p.is_file()} == expected\n"
+    if program.count(inventory) != 1:
+        raise _error("bootstrap-image-canary-invalid", "fixed legacy inventory check is unavailable")
+    metadata_program = program.replace(inventory, b"if p.is_file() and p.name != '.DS_Store'} == expected\n", 1)
+    if _digest(metadata_program) != _METADATA_CANARY_SHA256:
+        raise _error("bootstrap-image-canary-invalid", "metadata-aware probe differs from its fixed admitted program")
+    return metadata_program
+
+
+def _canary_argv(image_digest: str) -> tuple[str, ...]:
+    """Run only the fixed metadata-aware probe; no caller-provided code."""
+    return ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
+            "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
+            "--entrypoint", "python", image_digest, "-c", _metadata_canary().decode("utf-8"))
 
 
 def _context(plan: object, attempt: Path) -> tuple[Path, str]:
@@ -446,9 +486,7 @@ def produce_initial_framework_image(plan: object, *, executor: DockerExecutor,
             candidate = (attempt / "image.id").read_text().strip() if (attempt / "image.id").is_file() else ""
             if IMAGE_ID.fullmatch(candidate) and _inspect(executor, candidate, plan, root, attempt, records, timeout_seconds):
                 image = candidate
-                canary = _command(executor, "canary", ("docker", "run", "--rm", "--network=none", "--read-only", "--cap-drop=ALL",
-                    "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs", "/tmp:rw,nosuid,nodev,size=128m",
-                    "--entrypoint", "python", candidate, "/opt/caprmedio-bootstrap-canary.py"), root, attempt, records, 120)
+                canary = _command(executor, "canary", _canary_argv(candidate), root, attempt, records, 120)
                 if canary.timed_out:
                     outcome, reason = "effect_uncertain", "bootstrap image canary timed out"
                 elif canary.exit_code != 0:
@@ -564,7 +602,14 @@ def _verify_retained_commands(proof: Path, evidence: BootstrapImageEvidence) -> 
                        "--security-opt=no-new-privileges", "--pids-limit=128", "--tmpfs",
                        "/tmp:rw,nosuid,nodev,size=128m", "--entrypoint", "python", evidence.image_digest,
                        "/opt/caprmedio-bootstrap-canary.py"]
-    if canary != expected_canary:
+    known_metadata_canary = False
+    if (isinstance(canary, list) and len(canary) == len(expected_canary) + 1
+            and canary[:-1] == expected_canary[:-1] + ["-c"] and isinstance(canary[-1], str)):
+        try:
+            known_metadata_canary = _digest(canary[-1].encode("utf-8")) == _METADATA_CANARY_SHA256
+        except UnicodeEncodeError:
+            pass
+    if canary != expected_canary and not known_metadata_canary:
         raise _error("bootstrap-image-proof-invalid", "retained MCP canary argv is not bound to the immutable ID")
     return records
 
@@ -634,11 +679,17 @@ def _verify_retained_package_context(proof: Path, manifest_bytes: bytes, rows: t
         if package.is_symlink() or not package.is_dir() or (package / "manifest.toml").read_bytes() != manifest_bytes:
             raise ValueError("retained package context does not match the package manifest")
         expected = {"manifest.toml", *(row.destination_path for row in rows)}
-        actual = {
-            item.relative_to(package).as_posix()
-            for item in package.rglob("*")
-            if item.is_file()
-        }
+        actual: set[str] = set()
+        for item in sorted(package.rglob("*")):
+            relative = item.relative_to(package)
+            if item.is_symlink() or not (item.is_file() or item.is_dir()):
+                raise ValueError("retained package context contains an unsafe carrier")
+            try:
+                refuse_secret_path(relative)
+            except ReleaseInventoryError as error:
+                raise ValueError("retained package context contains a secret-shaped carrier") from error
+            if item.is_file() and not _is_ephemeral_file(item.name):
+                actual.add(relative.as_posix())
         if actual != expected:
             raise ValueError("retained package context inventory differs")
         for row in rows:
@@ -656,7 +707,7 @@ def _verify_retained_package_context(proof: Path, manifest_bytes: bytes, rows: t
         if canary.is_symlink() or not canary.is_file() or canary.read_bytes() != expected_canary:
             raise ValueError("retained canary input differs from the package")
         program = proof / "context" / "bootstrap-canary.py"
-        if program.is_symlink() or not program.is_file() or program.read_bytes() != _canary():
+        if program.is_symlink() or not program.is_file() or _digest(program.read_bytes()) != _LEGACY_CANARY_SHA256:
             raise ValueError("retained canary program differs from the fixed probe")
     except (OSError, ValueError, BootstrapImageError) as error:
         raise _error("bootstrap-image-proof-invalid", "retained bootstrap package context is invalid") from error
@@ -703,6 +754,110 @@ def read_retained_initial_framework_image(project_root: Path | str, executing_re
     return evidence
 
 
+def _copy_retained_context(root: Path, original: BootstrapImageEvidence, attempt: Path,
+                          manifest_bytes: bytes, rows: tuple[PackageRow, ...]) -> Path:
+    """Copy only the original proof's persistent bytes, never current sources."""
+    source = _proof_key(root, original.manifest_sha256, original.image_digest) / "context"
+    if _tree_digest(source) != original.context_sha256:
+        raise _error("bootstrap-image-context-stale", "authenticated retained image context changed")
+    context = attempt / "context"
+    context.mkdir()
+    for path in sorted(source.rglob("*")):
+        relative = path.relative_to(source).as_posix()
+        if path.is_symlink() or not (path.is_file() or path.is_dir()):
+            raise _error("bootstrap-image-context-invalid", "retained context contains an unsafe carrier")
+        try:
+            refuse_secret_path(relative)
+        except ReleaseInventoryError as error:
+            raise _error("bootstrap-image-context-invalid", "retained context contains a secret-shaped carrier") from error
+        if path.is_file() and not _is_ephemeral_file(path.name):
+            mode = path.stat().st_mode & 0o777
+            payload = path.read_bytes()
+            payload = _read_exact(source, relative, _digest(payload), mode, code="bootstrap-image-context-stale")
+            _write(context / relative, payload, mode)
+    if (_tree_digest(source) != original.context_sha256
+            or _tree_digest(context) != original.context_sha256):
+        raise _error("bootstrap-image-context-stale", "filtered retained image context differs from authenticated bytes")
+    _verify_retained_package_context(attempt, manifest_bytes, rows)
+    return context
+
+
+def produce_retained_framework_image(project_root: Path | str, executing_release: str,
+                                     prior_image_digest: str, *, executor: DockerExecutor,
+                                     timeout_seconds: float = 900) -> BootstrapImageEvidence:
+    """Rebuild an authenticated retained bootstrap context without selecting it.
+
+    Same-ID restoration preserves the canonical historical proof. Its return
+    retains fresh attempt receipt fields alongside that proof's canonical
+    address fields; the executor marker always describes the fresh attempt.
+    """
+    if (isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float))
+            or not 0 < timeout_seconds <= 900):
+        raise _error("bootstrap-image-timeout-invalid", "build timeout must be within (0, 900]")
+    original = read_retained_initial_framework_image(project_root, executing_release, prior_image_digest)
+    root = Path(project_root).resolve(strict=True)
+    _package, rows, manifest_bytes, source_context_sha256 = _retained_initial_package(root, executing_release)
+    plan = _RetainedImagePlan(root, rows, executing_release, source_context_sha256, manifest_bytes)
+    parent = root / BOOTSTRAP_IMAGE_RELATIVE
+    started_at = _timestamp()
+    attempt = Path(tempfile.mkdtemp(prefix="attempt-", dir=parent))
+    records: list[dict[str, object]] = []
+    image: str | None = None
+    outcome: Literal["verified", "failed", "incomplete", "stale", "effect_uncertain", "recording_uncertain"] = "incomplete"
+    reason = "immutable retained-package image identity is unverified"
+    try:
+        context = _copy_retained_context(root, original, attempt, manifest_bytes, rows)
+        if read_retained_initial_framework_image(root, executing_release, prior_image_digest) != original:
+            raise _error("bootstrap-image-context-stale", "original retained image proof changed before build")
+        result = _command(executor, "build", ("docker", "build", "--iidfile", str(attempt / "image.id"),
+            "--label", f"{PACKAGE_IMAGE_LABEL}={executing_release}",
+            "--label", f"{SOURCE_CONTEXT_IMAGE_LABEL}={source_context_sha256}",
+            "--file", str(context / "Dockerfile"), str(context)), root, attempt, records, timeout_seconds)
+        if result.timed_out:
+            outcome, reason = "effect_uncertain", "Docker build timed out; its effect must not be replayed"
+        elif result.exit_code != 0:
+            outcome, reason = "failed", "retained-package image build failed"
+        else:
+            iidfile = attempt / "image.id"
+            candidate = iidfile.read_text().strip() if iidfile.is_file() and not iidfile.is_symlink() else ""
+            if IMAGE_ID.fullmatch(candidate) and _inspect(executor, candidate, plan, root, attempt, records, timeout_seconds):
+                image = candidate
+                canary = _command(executor, "canary", _canary_argv(candidate), root, attempt, records, 120)
+                if canary.timed_out:
+                    outcome, reason = "effect_uncertain", "retained-package image canary timed out"
+                elif canary.exit_code != 0:
+                    outcome, reason = "failed", "retained-package image canary failed"
+                elif _canary_valid(json.loads(canary.stdout), manifest_sha256=executing_release,
+                                   source_context_sha256=source_context_sha256, row_count=len(rows),
+                                   image_digest=candidate, actual_executor=type(executor) is DockerSubprocessExecutor):
+                    outcome, reason = "verified", "complete retained package and fixed MCP canary observed"
+        if (_tree_digest(context) != original.context_sha256
+                or read_retained_initial_framework_image(root, executing_release, prior_image_digest) != original):
+            raise _error("bootstrap-image-context-stale", "retained package or context changed during Docker execution")
+    except (OSError, ValueError, RuntimeError, BootstrapImageError) as error:
+        outcome = "stale" if isinstance(error, BootstrapImageError) else "recording_uncertain"
+        reason = str(error)
+    commands = canonical_json(records)
+    try:
+        _write(attempt / "commands.json", commands)
+    except OSError:
+        outcome, reason = "recording_uncertain", "retained-package image command recording is uncertain"
+    same_id = outcome == "verified" and image == prior_image_digest
+    evidence = BootstrapImageEvidence(
+        executing_release, source_context_sha256, outcome, reason, image, original.context_sha256,
+        attempt.relative_to(root).as_posix(), _digest(commands),
+        "docker-subprocess" if type(executor) is DockerSubprocessExecutor else "test-double",
+        started_at, _timestamp(),
+        bootstrap_proof_key=original.bootstrap_proof_key if same_id else "",
+        proof_root=original.proof_root if same_id else "",
+        context_root=original.context_root if same_id else "",
+    )
+    evidence = _record(attempt, evidence)
+    if evidence.outcome == "verified" and not same_id:
+        evidence = _materialize_canonical_proof(root, attempt, evidence)
+    return evidence
+
+
 def revalidate_initial_framework_image(plan: object, image_digest: str, *, executor: DockerExecutor) -> BootstrapImageEvidence:
     """Reopen only the derived proof path, then perform a fresh immutable inspect."""
     _assert_plan_current(plan)
@@ -720,5 +875,6 @@ def revalidate_initial_framework_image(plan: object, image_digest: str, *, execu
 
 __all__ = [
     "BOOTSTRAP_IMAGE_RELATIVE", "BootstrapImageError", "BootstrapImageEvidence",
-    "produce_initial_framework_image", "read_retained_initial_framework_image", "revalidate_initial_framework_image",
+    "produce_initial_framework_image", "produce_retained_framework_image",
+    "read_retained_initial_framework_image", "revalidate_initial_framework_image",
 ]

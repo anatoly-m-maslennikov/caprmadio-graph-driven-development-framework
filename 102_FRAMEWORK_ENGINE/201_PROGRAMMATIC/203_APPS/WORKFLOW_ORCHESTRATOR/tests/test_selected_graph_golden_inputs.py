@@ -38,6 +38,30 @@ class SelectedGraphGoldenInputsTest(unittest.TestCase):
             for path in sorted(fixture.graph_source_dir.glob("*.md"))
         }
 
+    @staticmethod
+    def _native_graph_request(fixture: GoldenProject) -> dict[str, object]:
+        """Direct Tool proof needs the same non-caller recording capability.
+
+        Selected-route execution receives this object from its real shared
+        Action-start recorder; this narrow native-adapter test constructs only
+        the structural capability needed to exercise Tool behavior.
+        """
+
+        request = fixture.native_parameters()
+        request["run_recording_context"] = generate_entity_graph.actual_run_recording_context(
+            "golden-workflow", "golden-step", "golden-action",
+            {
+                "event_id": "golden-action-start",
+                "action_id": "golden-action",
+                "event_digest": "0" * 64,
+                "carrier": ".caprmedio_caprmedio/_journal/golden.ndjson",
+                "line": 1,
+                "previous_carrier_digest": "0" * 64,
+                "appended_carrier_digest": "1" * 64,
+            },
+        )
+        return request
+
     def test_w11_w12_publish_traceable_deterministic_native_projections(self) -> None:
         for case_id, route, adapter, graph_key, output in (
             ("W11", "build_entities_graph", generate_entity_graph.construct_entities_graph_projection,
@@ -49,7 +73,7 @@ class SelectedGraphGoldenInputsTest(unittest.TestCase):
                 lease, fixture = self._fixture(case_id, route)
                 try:
                     before_sources = self._source_bytes(fixture)
-                    request = fixture.native_parameters()
+                    request = self._native_graph_request(fixture)
                     first = adapter(fixture.root, request)
                     projection = fixture.root / ".caprmedio_caprmedio/_projection" / output
                     self.assertEqual("built", first["outcome"], first)
@@ -64,7 +88,7 @@ class SelectedGraphGoldenInputsTest(unittest.TestCase):
                         [row["carrier_path"] for row in first["lineage"]],
                     )
                     first_bytes = projection.read_bytes()
-                    second = adapter(fixture.root, fixture.native_parameters())
+                    second = adapter(fixture.root, self._native_graph_request(fixture))
                     self.assertEqual("no_op", second["outcome"], second)
                     self.assertEqual(first_bytes, projection.read_bytes())
                 finally:
@@ -78,7 +102,7 @@ class SelectedGraphGoldenInputsTest(unittest.TestCase):
             with self.subTest(case=case_id, condition="malformed"):
                 lease, fixture = self._fixture(case_id, route)
                 try:
-                    malformed = fixture.native_parameters()
+                    malformed = self._native_graph_request(fixture)
                     malformed["selection"] = {"atom_ids": "CA-R-201"}
                     result = adapter(fixture.root, malformed)
                     self.assertEqual("failed", result["outcome"], result)
@@ -88,7 +112,7 @@ class SelectedGraphGoldenInputsTest(unittest.TestCase):
             with self.subTest(case=case_id, condition="stale"):
                 lease, fixture = self._fixture(case_id, route)
                 try:
-                    request = fixture.native_parameters()
+                    request = self._native_graph_request(fixture)
                     source = fixture.graph_source_dir / "CA-R-201.md"
                     source.write_text(source.read_text(encoding="utf-8") + "\nChanged after frontier.\n", encoding="utf-8")
                     result = adapter(fixture.root, request)

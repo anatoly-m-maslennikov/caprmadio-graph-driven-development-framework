@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import hashlib
 import sys
+import time
 import unittest
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -127,10 +128,17 @@ class ReleaseImageTests(unittest.TestCase):
     def setUp(self):
         self.setup_candidate()
 
+    def cleanup_candidate(self):
+        fixture = getattr(self, "fixture", None)
+        if fixture is not None:
+            fixture.doCleanups()
+            self.fixture = None
+
     def setup_candidate(self, settings=None):
+        self.cleanup_candidate()
         self.fixture = suite_test.ReleaseSuiteTests("run")
         self.fixture.setUp()
-        self.addCleanup(self.fixture.doCleanups)
+        self.addCleanup(self.cleanup_candidate)
         self.root = self.fixture.root
         self.fixture.fixture.write("pyproject.toml", b"[project]\nname = 'fixture'\nversion = '0.0.0'\n")
         self.fixture.fixture.write("uv.lock", b"version = 1\n")
@@ -151,7 +159,13 @@ class ReleaseImageTests(unittest.TestCase):
                       for row in self.compilation.package_rows]
         (prior / "manifest.toml").write_text(_render_manifest("N", prior_rows))
         self.suite = self.fixture.execute_suite(self.candidate, self.compilation)
-        self.assertTrue(self.suite.passed)
+        self.assertTrue(
+            self.suite.passed,
+            msg=("sealed fixture suite did not pass: "
+                 f"outcome={self.suite.outcome!r}, reason={self.suite.reason!r}, "
+                 f"exit_code={self.suite.exit_code!r}, executed_tests={self.suite.executed_tests!r}, "
+                 f"evidence_root={self.suite.evidence_root!r}"),
+        )
         self.docker = FakeDocker()
 
     def build(self):
@@ -251,6 +265,23 @@ class ReleaseImageTests(unittest.TestCase):
         with self.assertRaises(ReleaseContractError):
             verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
 
+    def test_ds_store_is_ignored_but_real_private_context_files_are_refused(self):
+        import release_image
+
+        build = self.build()
+        context = self.root / build.context_root
+        original = release_image._tree(context)
+        (context / ".DS_Store").write_bytes(b"Finder metadata\n")
+        (context / "PACKAGE/.DS_Store").write_bytes(b"nested Finder metadata\n")
+        self.assertEqual(original, release_image._tree(context))
+        verified = verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
+        self.assertEqual("verified", verified.outcome)
+
+        (context / "unexpected.txt").write_bytes(b"not a Finder artifact\n")
+        self.assertNotEqual(original, release_image._tree(context))
+        with self.assertRaises(ReleaseContractError):
+            verify_candidate_image(self.candidate, self.compilation, self.suite, build, executor=self.docker)
+
     def test_failed_canary_never_passes(self):
         build = self.build()
         self.docker.fail = "run"
@@ -301,17 +332,17 @@ class ReleaseImageTests(unittest.TestCase):
 
     def retirement_inputs(self, prior_image=PRIOR_IMAGE_ID, settings=None):
         from release_promotion import promote_bound_release
-        from test_release_promotion import recorded_gate_fixtures
+        from test_release_promotion import recorded_gate_fixtures, recorded_host_patches
         if settings is not None:
-            self.fixture.doCleanups()
             self.setup_candidate(settings)
         selector = self.root / ".caprmedio_runtime/framework/current.toml"
         selector.write_text('release = "N"\n' + (f'candidate_image_digest = "{prior_image}"\n' if prior_image else ""))
         self.suite = self.fixture.execute_suite(self.candidate, self.compilation)
         build, verification = self.recorded_command_fixtures()
         args = (self.candidate, self.compilation, self.suite, build, verification)
-        self.retirement_gates = recorded_gate_fixtures(*args)
-        promotion = promote_bound_release(*args, **self.retirement_gates)
+        with recorded_host_patches():
+            self.retirement_gates = recorded_gate_fixtures(*args)
+            promotion = promote_bound_release(*args, **self.retirement_gates)
         self.assertEqual(promotion.outcome, "promoted")
         return args + (promotion,)
 
@@ -470,7 +501,8 @@ class ReleaseImageTests(unittest.TestCase):
         docker.after = lambda operation: rendezvous.wait(timeout=10) if operation == "list" else None
         with ThreadPoolExecutor(max_workers=2) as pool:
             futures = [pool.submit(retire_prior_image, *args, executor=docker, **self.retirement_gates) for _ in range(2)]
-            results = [future.result(timeout=20) for future in futures]
+            deadline = time.monotonic() + 120 + 10
+            results = [future.result(timeout=max(0, deadline - time.monotonic())) for future in futures]
         self.assertEqual(sorted(result.outcome for result in results), ["pending", "retired"])
         self.assertEqual(sum(call[:3] == ("docker", "image", "rm") for call in docker.calls), 1)
 
@@ -478,11 +510,15 @@ class ReleaseImageTests(unittest.TestCase):
         args = self.retirement_inputs()
         docker = FakeRetirementDocker()
         result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(result.prior_image_digest, PRIOR_IMAGE_ID)
         self.assertEqual(result.retaining_container_refs, ())
         self.assertIn(args[-1].retained_prior_selector_ref, result.observed_rollback_refs)
-        self.assertIsNone(result.required_rollback_refs)
+        self.assertEqual(result.retention_condition, "retain_prior")
+        self.assertEqual(
+            result.required_rollback_refs,
+            (f"{FRAMEWORK_SETTINGS_RELATIVE}#release_version.rollback_retention.condition",),
+        )
         self.assertEqual(docker.calls, [("docker", "image", "inspect", PRIOR_IMAGE_ID),
                                        ("docker", "container", "ls", "--all", "--quiet", "--no-trunc")])
         self.assertEqual(result.execution_kind, "test-double")
@@ -579,7 +615,7 @@ class ReleaseImageTests(unittest.TestCase):
         docker = FakeRetirementDocker(({"Id": CONTAINER_ID, "Image": IMAGE_ID,
                                         "Config": {"Image": "prior:mutable-tag"}, "State": {"Status": "exited"}},))
         result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(result.retaining_container_refs, ())
         self.assertIn(("docker", "container", "inspect", CONTAINER_ID), docker.calls)
 
@@ -598,9 +634,20 @@ class ReleaseImageTests(unittest.TestCase):
         extra = ".caprmedio_runtime/release_promotion/other-retained/prior-selector.toml"
         self.fixture.fixture.write(extra, f'image_digest = "{PRIOR_IMAGE_ID}"\n'.encode())
         result = retire_prior_image(*args, executor=FakeRetirementDocker(), **self.retirement_gates)
-        self.assertEqual(result.outcome, "pending")
+        self.assertEqual(result.outcome, "retained")
         self.assertEqual(set(result.observed_rollback_refs), {extra, args[-1].retained_prior_selector_ref})
-        self.assertIsNone(result.required_rollback_refs)
+        self.assertEqual(result.required_rollback_refs, (
+            FRAMEWORK_SETTINGS_RELATIVE + "#release_version.rollback_retention.condition",
+        ))
+
+    def test_retirement_ignores_regular_ds_store_in_promotion_retention_root(self):
+        args = self.retirement_inputs()
+        self.fixture.fixture.write(".caprmedio_runtime/release_promotion/.DS_Store", b"Finder metadata\n")
+        docker = FakeRetirementDocker()
+        result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
+        self.assertEqual(result.outcome, "retained")
+        self.assertIn(args[-1].retained_prior_selector_ref, result.observed_rollback_refs)
+        self.assertNotIn("rm", [word for command in docker.calls for word in command])
 
     def test_retirement_unknown_rollback_scope_is_pending_before_docker(self):
         args = self.retirement_inputs()
@@ -611,11 +658,11 @@ class ReleaseImageTests(unittest.TestCase):
         self.assertEqual(docker.calls, [])
 
     def test_retirement_missing_approved_retention_condition_never_becomes_removal(self):
-        args = self.retirement_inputs()
+        # Seal an absent policy into the fixture itself.  Observed historical
+        # selectors are not policy authority and must not be used as a proxy.
+        args = self.retirement_inputs(settings=b"# retention policy intentionally absent\n")
         docker = FakeRetirementDocker()
-        # Empty observed references alone cannot manufacture an approved condition.
-        with patch("release_image._observed_rollback_references", return_value=()):
-            result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
+        result = retire_prior_image(*args, executor=docker, **self.retirement_gates)
         self.assertEqual(result.outcome, "pending")
         self.assertIn("approved rollback-retention condition", result.reason)
         self.assertNotIn("rm", [word for command in docker.calls for word in command])
@@ -703,6 +750,44 @@ class ReleaseImageTests(unittest.TestCase):
         evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
         with self.assertRaises(ReleaseContractError):
             read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence)
+
+    def test_artifact_reader_accepts_fixed_legacy_canary_proof(self):
+        import release_image
+
+        build, evidence = self.recorded_command_fixtures()
+        context = self.root / build.context_root
+        metadata_inventory = "if p.is_file() and p.name != '.DS_Store'"
+        self.assertEqual(2, release_image.CANARY.count(metadata_inventory))
+        legacy = release_image.CANARY.replace(metadata_inventory, "if p.is_file()")
+        self.assertEqual(release_image._LEGACY_CANARY_SHA256, release_image._digest(legacy.encode()))
+        (context / "canary.py").write_text(legacy)
+
+        build = replace(build, context_sha256=release_image._tree(context))
+        commands_path = self.root / build.evidence_root / "commands.json"
+        commands = json.loads(commands_path.read_bytes())
+        commands[0]["argv"][commands[0]["argv"].index(
+            f"{release_image.CONTEXT_LABEL}={self.docker.labels[release_image.CONTEXT_LABEL]}"
+        )] = (
+            f"{release_image.CONTEXT_LABEL}={build.context_sha256}"
+        )
+        commands_payload = canonical_json(commands)
+        commands_path.write_bytes(commands_payload)
+        build = self.reseal_receipt(replace(build, commands_sha256=release_image._digest(commands_payload)))
+
+        inspection_path = self.root / build.evidence_root / "command-1.stdout"
+        inspection = json.loads(inspection_path.read_bytes())
+        inspection[0]["Config"]["Labels"][release_image.CONTEXT_LABEL] = build.context_sha256
+        inspection_payload = canonical_json(inspection)
+        inspection_path.write_bytes(inspection_payload)
+        commands = json.loads(commands_path.read_bytes())
+        commands[1]["stdout_sha256"] = release_image._digest(inspection_payload)
+        commands_payload = canonical_json(commands)
+        commands_path.write_bytes(commands_payload)
+        build = self.reseal_receipt(replace(build, commands_sha256=release_image._digest(commands_payload)))
+        evidence = self.reseal_receipt(replace(evidence, build_receipt_sha256=build.receipt_sha256))
+
+        self.assertEqual(self.root / evidence.evidence_root,
+                         read_image_execution_artifacts(self.candidate, self.compilation, self.suite, build, evidence))
 
     def test_artifact_reader_rejects_rehashed_unbound_suite_report(self):
         import release_image

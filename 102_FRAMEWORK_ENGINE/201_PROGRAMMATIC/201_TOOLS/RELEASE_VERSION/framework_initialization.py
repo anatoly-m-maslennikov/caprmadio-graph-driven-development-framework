@@ -207,6 +207,18 @@ def _regular_files(root: Path, relative: Path, *, code: str) -> list[Path]:
     return files
 
 
+def _is_finder_metadata(path: Path) -> bool:
+    """Whether a regular Finder metadata file is irrelevant to this boundary."""
+
+    return path.name == ".DS_Store" and not path.is_symlink() and path.is_file()
+
+
+def _has_non_metadata_child(folder: Path) -> bool:
+    """Keep Finder metadata out of an otherwise empty direct boundary."""
+
+    return any(not _is_finder_metadata(child) for child in folder.iterdir())
+
+
 def _assert_empty_boundary(root: Path) -> None:
     selector = root / SELECTOR_RELATIVE
     releases = root / RELEASES_RELATIVE
@@ -219,12 +231,12 @@ def _assert_empty_boundary(root: Path) -> None:
     if os.path.lexists(releases):
         if releases.is_symlink() or not releases.is_dir():
             raise FrameworkInitializationError("initial-runtime-not-empty", "Framework releases boundary is not empty")
-        if any(releases.iterdir()):
+        if _has_non_metadata_child(releases):
             raise FrameworkInitializationError("initial-runtime-not-empty", "first installation requires no retained Framework release")
     if os.path.lexists(skill):
         if skill.is_symlink() or not skill.is_dir():
             raise FrameworkInitializationError("initial-skill-not-empty", "project-local ca Skill boundary is not empty")
-        if any(skill.iterdir()):
+        if _has_non_metadata_child(skill):
             raise FrameworkInitializationError("initial-skill-not-empty", "first installation requires no project-local ca Skill")
 
 
@@ -273,10 +285,12 @@ def _compiled_methodology_files(root: Path, currentness: CanonicalCompilerCurren
     role_names = {name for _, name in (("REQUIREMENT", "04_requirement"), ("METHOD", "05_method"),
                                        ("EVALUATION", "06_evaluation"), ("DELIVERY", "07_delivery"),
                                        ("OPERATIONS", "09_operations"))}
-    allowed_children = set(role_names) | {".DS_Store"}
+    allowed_children = set(role_names)
     if source_root.parent == compiled_root:
         allowed_children.add(source_root.name)
     for child in compiled_root.iterdir():
+        if _is_finder_metadata(child):
+            continue
         if child.name in allowed_children:
             continue
         if child.is_symlink() or child.is_file() or (child.is_dir() and any(child.iterdir())):
@@ -580,7 +594,11 @@ def _verify_package(plan: InitializationPlan, folder: Path) -> None:
     except ReleasePackagingError as error:
         raise FrameworkInitializationError("initial-package-invalid", "initial package is not readable by the shared package verifier") from error
     expected = {MANIFEST_NAME, *(row.destination_path for row in plan.rows)}
-    actual = {path.relative_to(folder).as_posix() for path in folder.rglob("*") if path.is_file()}
+    actual = {
+        path.relative_to(folder).as_posix()
+        for path in folder.rglob("*")
+        if path.is_file() and not _is_finder_metadata(path)
+    }
     if actual != expected:
         raise FrameworkInitializationError("initial-package-incomplete", "initial package inventory differs from the sealed plan")
     for row in plan.rows:
@@ -611,34 +629,62 @@ def _publish_skill(plan: InitializationPlan, package: Path) -> Path:
     # filesystem race must not turn `.agents` into an escape route meanwhile.
     parent = _safe_path(root, Path(PROJECT_SKILL_TARGET).parent, create=True)
     target = parent / Path(PROJECT_SKILL_TARGET).name
-    if os.path.lexists(target):
-        if target.is_symlink() or not target.is_dir() or any(target.iterdir()):
+    target_exists = os.path.lexists(target)
+    target_has_metadata = False
+    if target_exists:
+        if target.is_symlink() or not target.is_dir() or _has_non_metadata_child(target):
             raise FrameworkInitializationError("initial-skill-not-empty", "project-local ca Skill changed before publication")
+        target_has_metadata = any(_is_finder_metadata(child) for child in target.iterdir())
+    metadata_backup: Path | None = None
     try:
         staging = Path(tempfile.mkdtemp(prefix=".ca-initial-", dir=parent))
         source = package / "SKILLS/ca"
         for path in sorted(source.rglob("*")):
             relative = path.relative_to(source)
             output = staging / relative
+            if path.is_symlink():
+                raise FrameworkInitializationError("initial-skill-invalid", "sealed Skill has an unsafe carrier")
+            if _is_finder_metadata(path):
+                continue
             if path.is_dir():
                 output.mkdir(exist_ok=True)
-            elif path.is_file() and not path.is_symlink():
+            elif path.is_file():
                 output.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(path, output)
                 output.chmod(path.stat().st_mode & 0o777)
             else:
                 raise FrameworkInitializationError("initial-skill-invalid", "sealed Skill has an unsafe carrier")
-        expected = {path.relative_to(source).as_posix(): path.read_bytes() for path in source.rglob("*") if path.is_file()}
-        actual = {path.relative_to(staging).as_posix(): path.read_bytes() for path in staging.rglob("*") if path.is_file()}
+        expected = {
+            path.relative_to(source).as_posix(): path.read_bytes()
+            for path in source.rglob("*") if path.is_file() and not _is_finder_metadata(path)
+        }
+        actual = {
+            path.relative_to(staging).as_posix(): path.read_bytes()
+            for path in staging.rglob("*") if path.is_file() and not _is_finder_metadata(path)
+        }
         if actual != expected:
             raise FrameworkInitializationError("initial-skill-invalid", "staged project Skill differs from the sealed package")
         try:
+            if target_has_metadata:
+                # A directory containing Finder metadata cannot be atomically
+                # replaced on macOS.  Move the verified metadata-only carrier
+                # into a fresh private sibling first, then retain the original
+                # whole-Skill atomic replacement.  The private directory is
+                # created by mkdtemp, so its child cannot overwrite a raced
+                # sibling; a changed target refuses before it is displaced.
+                if target.is_symlink() or not target.is_dir() or _has_non_metadata_child(target):
+                    raise FrameworkInitializationError("initial-skill-not-empty", "project-local ca Skill changed before publication")
+                metadata_backup = Path(tempfile.mkdtemp(prefix=".ca-retained-metadata-", dir=parent))
+                os.replace(target, metadata_backup / target.name)
             os.replace(staging, target)
         except OSError as error:
+            effect_refs = [_relative(root, staging, label="Skill staging")]
+            if metadata_backup is not None:
+                effect_refs.append(_relative(root, metadata_backup, label="retained Finder metadata"))
             raise FrameworkInitializationError(
                 "initial-skill-publication-failed",
                 "project-local ca Skill publication could not complete",
-                effect_refs=(_relative(root, staging, label="Skill staging"),),
+                effect_refs=tuple(effect_refs),
             ) from error
         directory = os.open(parent, os.O_RDONLY)
         try:
@@ -649,9 +695,11 @@ def _publish_skill(plan: InitializationPlan, package: Path) -> Path:
     except FrameworkInitializationError:
         raise
     except OSError as error:
-        staging_ref = ()
+        staging_ref: tuple[str, ...] = ()
         if "staging" in locals() and staging.exists():
             staging_ref = (_relative(root, staging, label="Skill staging"),)
+        if metadata_backup is not None:
+            staging_ref += (_relative(root, metadata_backup, label="retained Finder metadata"),)
         raise FrameworkInitializationError(
             "initial-skill-publication-failed",
             "project-local ca Skill staging or publication could not complete",

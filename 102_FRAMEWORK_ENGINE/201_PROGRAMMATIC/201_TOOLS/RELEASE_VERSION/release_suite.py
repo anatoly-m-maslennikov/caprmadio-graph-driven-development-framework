@@ -47,6 +47,7 @@ from release_suite_reference_context import (
     ReleaseSuiteReferenceContext, ReleaseSuiteReferenceContextError,
     capture_context, copy_verified_bytes, revalidate_context, validate_schema2_context,
 )
+from release_suite_limits import MAX_UNIT_TIMEOUT_SECONDS, resolve_unit_deadline
 from release_test_phases import ReleaseTestPhaseMap, derive_test_phase_map_from_rows
 
 
@@ -285,6 +286,10 @@ def _active_skill_records(root: Path, relative: str) -> tuple[dict[str, tuple[st
     directories: set[str] = set()
     for carrier in sorted(folder.rglob("*")):
         local = carrier.relative_to(folder).as_posix()
+        # Finder metadata is not an installed Skill member.  Check a symlink
+        # first: its basename never makes an unsafe carrier admissible.
+        if carrier.name == ".DS_Store" and not carrier.is_symlink() and carrier.is_file():
+            continue
         _refuse_secret_relative(Path(relative) / local)
         if carrier.is_symlink() or not (carrier.is_dir() or carrier.is_file()):
             raise ReleaseContractError("release-active-n-invalid", f"active Skill contains an unsafe carrier: {local}")
@@ -771,11 +776,35 @@ def _copy_report_from_output(output_root: Path, destination: Path) -> None:
     _write_capture(destination, report.read_bytes())
 
 
+def _write_unit_deadline(path: Path, deadline: object) -> None:
+    """Retain the exact context-derived limit before isolated execution."""
+
+    snapshot = getattr(deadline, "snapshot", None)
+    snapshot_sha256 = getattr(deadline, "snapshot_sha256", None)
+    if (not isinstance(snapshot, bytes) or not isinstance(snapshot_sha256, str)
+            or _SOURCE_CONTEXT.fullmatch(snapshot_sha256) is None
+            or _digest(snapshot) != snapshot_sha256):
+        raise ReleaseContractError("release-suite-deadline-invalid", "derived Unit deadline snapshot is invalid")
+    _durable_bytes(path, snapshot)
+
+
+def _verify_unit_deadline(path: Path, deadline: object) -> None:
+    """Require the retained derivation to remain exact before a Unit can pass."""
+
+    snapshot = getattr(deadline, "snapshot", None)
+    snapshot_sha256 = getattr(deadline, "snapshot_sha256", None)
+    if (not isinstance(snapshot, bytes) or not isinstance(snapshot_sha256, str)
+            or _SOURCE_CONTEXT.fullmatch(snapshot_sha256) is None
+            or _digest(snapshot) != snapshot_sha256 or path.is_symlink()
+            or not path.is_file() or path.read_bytes() != snapshot):
+        raise ReleaseContractError("release-suite-deadline-stale", "derived Unit deadline evidence changed or is unavailable")
+
+
 def execute_bound_release_suite(
     candidate: ValidatedCandidate,
     compilation: SealedCandidateCompilation,
     *,
-    timeout_seconds: float = 900,
+    timeout_seconds: float | None = None,
     executor: SuiteSandboxExecutor | None = None,
 ) -> SuiteGateEvidence:
     """Run exact sealed argv once through an isolated executor.
@@ -786,8 +815,10 @@ def execute_bound_release_suite(
     Direct host execution is deliberately unavailable: absence of an approved
     sandbox yields durable incomplete evidence rather than a weaker pass.
     """
-    if not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool) or not 0 < timeout_seconds <= 900:
-        raise ReleaseContractError("release-suite-timeout-invalid", "suite timeout must be within (0, 900] seconds")
+    if (timeout_seconds is not None
+            and (not isinstance(timeout_seconds, (int, float)) or isinstance(timeout_seconds, bool)
+                 or not 0 < timeout_seconds <= MAX_UNIT_TIMEOUT_SECONDS)):
+        raise ReleaseContractError("release-suite-timeout-invalid", "fixture timeout must be within the governed Unit maximum")
     root = _validate_bound_inputs(candidate, compilation)
     phase_map = _unit_phase_map(compilation.package_rows)
     environment = candidate.manifest.full_suite_environment
@@ -811,7 +842,9 @@ def execute_bound_release_suite(
     tests, coverage = 0, ()
     stdout_sha = stderr_sha = report_sha = receipt_sha = None
     context: ReleaseSuiteReferenceContext | None = None
+    deadline: object | None = None
     evidence: SuiteGateEvidence | None = None
+    selected_executor: SuiteSandboxExecutor | None = None
     try:
         selected_executor = executor if executor is not None else _DEFAULT_EXECUTOR
         if selected_executor is None:
@@ -823,6 +856,8 @@ def execute_bound_release_suite(
                 root, candidate, compilation, selected_executor, candidate.authority.executing_release,
             )
             _durable_bytes(attempt / "context.json", _context_receipt(context))
+            deadline = resolve_unit_deadline(context, fixture_timeout_seconds=timeout_seconds)
+            _write_unit_deadline(attempt / "unit-deadline.json", deadline)
             source_bindings_sha256 = _materialize_suite_workspace(
                 root, workspace, candidate, compilation, environment.working_directory, context,
             )
@@ -852,7 +887,7 @@ def execute_bound_release_suite(
                     output_root=output_root,
                     working_directory=environment.working_directory,
                     environment=process_environment,
-                    timeout_seconds=timeout_seconds,
+                    timeout_seconds=deadline.timeout_seconds,
                 )
                 if not isinstance(result, SuiteExecutionResult):
                     raise TypeError("suite executor returned an untyped result")
@@ -897,12 +932,20 @@ def execute_bound_release_suite(
                 raise ReleaseContractError("release-currentness-stale", "executing N selector, runtime package or project-local ca Skill changed during suite")
             if _safe_path(root, environment.working_directory) != cwd:
                 raise ReleaseContractError("release-currentness-stale", "suite working directory changed")
-            if context is None:
-                raise ReleaseContractError("release-suite-reference-context-invalid", "reference context is absent")
-            revalidate_context(
-                root, context,
-                _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
-            )
+            # An absent approved executor is a durable incomplete outcome, not
+            # a stale post-execution result: no suite process or context
+            # capture was attempted.  Once an executor is selected, retain
+            # the full context/currentness revalidation fail-closed boundary.
+            if selected_executor is not None:
+                if context is None:
+                    raise ReleaseContractError("release-suite-reference-context-invalid", "reference context is absent")
+                revalidate_context(
+                    root, context,
+                    _trusted_context_bindings(candidate, compilation, selected_executor, candidate.authority.executing_release),
+                )
+                if deadline is None:
+                    raise ReleaseContractError("release-suite-deadline-invalid", "derived Unit deadline is absent")
+                _verify_unit_deadline(attempt / "unit-deadline.json", deadline)
         except (ReleaseContractError, ReleasePackagingError, OSError, ValueError) as error:
             outcome, reason = "stale", f"post-suite bindings no longer validate: {getattr(error, 'code', type(error).__name__)}"
         evidence = SuiteGateEvidence(candidate.manifest.sha256, outcome, reason, environment.runner,
@@ -921,7 +964,10 @@ def execute_bound_release_suite(
             os.close(directory_descriptor)
         receipt_sha = _digest(receipt)
     except (OSError, ValueError, KeyError) as error:
-        outcome, reason = "recording_uncertain", f"suite evidence could not be durably recorded: {type(error).__name__}"
+        detail = type(error).__name__
+        if isinstance(error, OSError) and type(error.errno) is int:
+            detail += f"[errno={error.errno}]"
+        outcome, reason = "recording_uncertain", f"suite evidence could not be durably recorded: {detail}"
     if evidence is not None:
         return replace(evidence, outcome=outcome, reason=reason, receipt_sha256=receipt_sha)
     return SuiteGateEvidence(candidate.manifest.sha256, outcome, reason, environment.runner,
@@ -961,7 +1007,7 @@ def verify_bound_suite_evidence(
     attempt = _safe_path(root, evidence.evidence_root)
     try:
         files = {}
-        for name in ("receipt.json", "context.json", "stdout.bin", "stderr.bin", "coverage.xml"):
+        for name in ("receipt.json", "context.json", "unit-deadline.json", "stdout.bin", "stderr.bin", "coverage.xml"):
             path = attempt / name
             if path.is_symlink() or not path.is_file():
                 raise ValueError("durable suite carrier is missing or unsafe")
@@ -984,6 +1030,7 @@ def verify_bound_suite_evidence(
         if (_context_receipt(context) != files["context.json"]
                 or context.control_context_digest != evidence.control_context_digest):
             raise ValueError("reference context no longer matches the retained receipt")
+        _verify_unit_deadline(attempt / "unit-deadline.json", resolve_unit_deadline(context))
         tests, coverage, reason = _observe_report(attempt / "coverage.xml", root, candidate, compilation, context)
         if reason or tests != evidence.executed_tests or coverage != evidence.coverage:
             raise ValueError("actual suite report no longer establishes complete successful coverage")

@@ -40,14 +40,19 @@ class SelectedCompilerGoldenInputsTest(unittest.TestCase):
 
     @staticmethod
     def _output_bytes(fixture: GoldenProject) -> dict[str, bytes]:
-        output = fixture.root / ".caprmedio_caprmedio/_projection/APPLICABLE_METHODOLOGY"
-        return {path.relative_to(output).as_posix(): path.read_bytes() for path in sorted(output.rglob("*")) if path.is_file()}
+        places = compiler.methodology_paths(fixture.root)
+        output, source = fixture.root / places.output, fixture.root / places.source
+        return {
+            path.relative_to(output).as_posix(): path.read_bytes()
+            for path in sorted(output.rglob("*"))
+            if path.is_file() and not path.is_relative_to(source)
+        }
 
     def test_w13_selects_sourceful_layers_and_publishes_deterministically(self) -> None:
         lease, fixture = self._fixture()
         try:
             before = self._source_bytes(fixture)
-            assessed = compiler.run_request(fixture.native_parameters())
+            assessed = compiler.run_request(fixture.native_compiler_parameters())
             self.assertEqual("assessed", assessed["outcome"], assessed)
             layers = {row["source_layer"] for row in assessed["source_frontier"]}
             self.assertTrue({"CORE_META_MODEL", "INSTALLED_EXTENSIONS", "PROJECT_CONFIGURATION"} <= layers)
@@ -78,7 +83,7 @@ class SelectedCompilerGoldenInputsTest(unittest.TestCase):
     def test_w13_stale_and_unapproved_inputs_preserve_prior_projection(self) -> None:
         lease, fixture = self._fixture()
         try:
-            assessed = compiler.run_request(fixture.native_parameters())
+            assessed = compiler.run_request(fixture.native_compiler_parameters())
             compiler.run_request(fixture.native_compiler_parameters(
                 "apply", expected_source_frontier_digest=assessed["source_frontier_digest"]
             ))

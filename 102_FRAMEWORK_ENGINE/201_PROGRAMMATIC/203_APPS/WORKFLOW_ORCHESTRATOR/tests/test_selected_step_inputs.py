@@ -122,11 +122,16 @@ class SelectedStepInputsTest(unittest.TestCase):
             terminals = {row["run_id"]: row for row in pending["terminal_runs"]}
 
             self.assertEqual("recording_pending", pending["disposition"], pending)
-            self.assertEqual("retry-recording-only", pending["retry_disposition"])
+            self.assertTrue(pending["interrupted_runs"], pending)
+            self.assertEqual("inspect-or-recover-only", pending["retry_disposition"])
             self.assertEqual(pending, retry)
             self.assertEqual("recording_pending", terminals[rows["CA-O-143"]["action_run_id"]]["disposition"])
             self.assertEqual("completed", terminals[rows["CA-O-143"]["action_run_id"]]["outcome"])
-            self.assertEqual("blocked", rows["CA-O-144"]["result"])
+            self.assertEqual(
+                ["CA-O-139", "CA-O-140", "CA-O-141", "CA-O-142", "CA-O-143"],
+                [row["step_definition_id"] for row in graph["step_results"]],
+            )
+            self.assertNotIn("CA-O-144", rows)
             self.assertEqual(bytes_after_effect, structure.read_bytes())
         finally:
             lease.cleanup()
@@ -143,6 +148,7 @@ class SelectedStepInputsTest(unittest.TestCase):
             workspace.mkdir()
             sources = implementation_actions.current_source_bindings(project)
             methods = [row["path"] for row in sources if row["atom_id"].startswith("CA-M-")]
+            candidate = {"id": "candidate-1"}
             packet = {
                 "context": "Isolated",
                 "step_marker": "CA-O-093",
@@ -157,9 +163,23 @@ class SelectedStepInputsTest(unittest.TestCase):
                 }},
                 "workspace": str(workspace),
                 "method_projection": implementation_actions.prepare_method_projection(methods, project),
-                "requirements_delivery": ["CA-R-1843", "CA-D-544"],
-                "evaluations": ["CA-E-563"],
-                "plan_item": {"estimated_minutes": 1},
+                "requirements": implementation_actions.prepare_input_bindings(["CA-R-1843"], project),
+                "delivery": implementation_actions.prepare_input_bindings(["CA-D-544"], project),
+                "evaluations": implementation_actions.prepare_input_bindings(["CA-E-563"], project),
+                "plan_item": {"plan_id": "plan-1", "item_id": "item-1",
+                               "dod": ["implemented and checked"], "owned_paths": ["."],
+                               "estimated_minutes": 1},
+                "red": {"expectation": "ready is true", "fixtures": ["fixture"],
+                        "commands": ["python fixture_test.py"], "scope": "selected item"},
+                "candidate": candidate, "phase": "implementation",
+                "golden_e2e": ["disposable executable assertion"],
+                "baseline_command": "python fixture_test.py",
+                "confidence": {"observed": 1.0, "effective": 0.9, "source": "default-settings"},
+                "retry": {"consumed": 0, "effective_limit": 1,
+                          "source": "CA-M-295:default-settings", "remaining_failure": True,
+                          "admitted": True},
+                "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False,
+                             "candidate": candidate, "phase": "implementation"},
                 "handoff_complete": True,
                 "retained_state": {},
             }
@@ -167,7 +187,9 @@ class SelectedStepInputsTest(unittest.TestCase):
 
             def agent(_prompt: str, supplied: dict[str, object]) -> dict[str, object]:
                 calls.append(supplied)
-                return {"result": "implemented", "outputs": {"candidate": "fixture", "changed_paths": ["x.py"]},
+                return {"result": "implemented", "outputs": {"candidate": supplied["candidate"],
+                                                                    "phase": supplied["phase"],
+                                                                    "changed_paths": ["x.py"]},
                         "evidence": ["performed"]}
 
             runner = SelectedExecution(project, implementation_agent=agent)

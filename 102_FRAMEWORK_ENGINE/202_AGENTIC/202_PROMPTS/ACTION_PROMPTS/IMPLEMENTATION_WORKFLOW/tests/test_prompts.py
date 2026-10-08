@@ -38,12 +38,50 @@ class PromptContracts(unittest.TestCase):
 
     @staticmethod
     def packet(actions, context='Isolated'):
-        method = '.caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/202_FEATURE_PROMPTS/05_method/CA-M-326-PROMPTS--compose-short-current-implementation-step-prompts.md'
+        methods = [row['path'] for row in actions.current_source_bindings()
+                   if row['atom_id'].startswith('CA-M-')]
+        candidate = {'id': 'candidate-1'}
+        phase = 'implementation'
+        authorization = {
+            'authorization_ref': 'authorizations/implementation-fixture.json',
+            'authorization_freshness': {'state': 'current', 'digest': 'a' * 64},
+            'request_id': 'implementation-fixture',
+            'operation_route': 'run_implementation_workflow',
+            'proposal_receipt_digest': 'b' * 64,
+            'parameters_digest': 'c' * 64,
+            'target_frontier_digest': 'd' * 64,
+            'effects_digest': 'e' * 64,
+            'definition_manifest': {'manifest_ref': 'fixture/implementation.json',
+                                    'manifest_digest': 'f' * 64},
+            'source_freshness': {'selected_binding_ref': 'fixture/implementation-bindings.json',
+                                 'selected_binding_digest': '1' * 64},
+        }
         return {
             'context': context, 'source_bindings': actions.current_source_bindings(),
-            'permissions': {'allowed': True}, 'handoff_complete': True,
-            'plan_item': {'estimated_minutes': 14}, 'requirements_delivery': ['R', 'D'],
-            'evaluations': ['E'], 'method_projection': actions.prepare_method_projection([method]),
+            'permissions': {
+                'allowed': True,
+                'retry': {'authorization_ref': authorization['authorization_ref'],
+                          'source_ref': 'CA-M-295:default-settings',
+                          'task_ref': authorization['request_id'],
+                          'epic_ref': authorization['definition_manifest']['manifest_ref']},
+            }, 'operator_authorization': authorization, 'handoff_complete': True,
+            'plan_item': {'plan_id': 'plan-1', 'item_id': 'item-1',
+                          'dod': ['implemented and checked'], 'owned_paths': ['.'],
+                          'estimated_minutes': 14},
+            'requirements': actions.prepare_input_bindings(['CA-R-1843']),
+            'delivery': actions.prepare_input_bindings(['CA-D-544']),
+            'evaluations': actions.prepare_input_bindings(['CA-E-563']),
+            'method_projection': actions.prepare_method_projection(methods),
+            'red': {'expectation': 'ready is true', 'fixtures': ['fixture'],
+                    'commands': ['python fixture_test.py'], 'scope': 'selected item'},
+            'candidate': candidate, 'phase': phase,
+            'golden_e2e': ['disposable executable assertion'],
+            'baseline_command': 'python fixture_test.py',
+            'confidence': {'observed': 1.0, 'effective': 0.9, 'source': 'default-settings'},
+            'retry': {'consumed': 0, 'effective_limit': 1, 'source': 'CA-M-295:default-settings',
+                      'remaining_failure': True, 'admitted': True},
+            'coverage': {'required': ['CA-E-563'], 'checked': [], 'complete': False,
+                         'candidate': candidate, 'phase': phase},
             'retained_state': {'retry': 0}, 'evidence': ['baseline'],
         }
     @classmethod
@@ -147,7 +185,9 @@ class PromptContracts(unittest.TestCase):
         seen = []
         def agent(prompt, supplied):
             seen.append((prompt, supplied))
-            return {'result': 'implemented', 'outputs': {'candidate': 'c1', 'changed_paths': ['a.py']}, 'evidence': ['change']}
+            return {'result': 'implemented',
+                    'outputs': {'candidate': supplied['candidate'], 'phase': supplied['phase'],
+                                'changed_paths': ['a.py']}, 'evidence': ['change']}
         actual = actions.implement_selected_queue('CA-O-093', packet, agent)
         self.assertEqual(actual['result'], 'implemented')
         self.assertEqual(actual['context'], 'Isolated')
@@ -160,8 +200,23 @@ class PromptContracts(unittest.TestCase):
         base = self.packet(actions)
         base.pop('context')
         self.assertEqual(actions.implement_selected_queue('CA-O-092', base, lambda *_: {'result': 'prepared'})['result'], 'blocked')
-        retry = {**base, 'context': 'Integrated', 'retry': {'consumed': 1, 'limit': 1}}
+        retry = {**self.packet(actions, 'Integrated'),
+                 'retry': {'consumed': 1, 'effective_limit': 1,
+                           'source': 'CA-M-295:default-settings', 'remaining_failure': True,
+                           'admitted': True}}
         self.assertEqual(actions.implement_selected_queue('CA-O-096', retry)['result'], 'retry_blocked')
+
+    def test_queue_rejects_conflicting_legacy_r_d_aliases(self):
+        actions = self.actions()
+        packet = self.packet(actions)
+        packet['requirements_delivery'] = list(packet['requirements'])
+        actual = actions.implement_selected_queue(
+            'CA-O-093', packet,
+            lambda *_: {'result': 'implemented',
+                         'outputs': {'candidate': 'c1', 'changed_paths': ['a.py']},
+                         'evidence': ['change']},
+        )
+        self.assertEqual(actual['result'], 'blocked')
 
     def test_queue_rejects_stale_pins_projection_and_label_only_success(self):
         actions = self.actions()
@@ -192,9 +247,16 @@ class PromptContracts(unittest.TestCase):
                     return {'result': 'prepared', 'outputs': {'golden_e2e': ['ready'], 'commands': [command], 'expected_outcomes': ['pass after implementation']}, 'evidence': [retained['initial']]}
                 if step == 'CA-O-093':
                     implementation.write_text('def ready():\n    return True\n', encoding='utf-8')
-                    return {'result': 'implemented', 'outputs': {'candidate': 'golden-v1', 'changed_paths': [str(implementation)]}, 'evidence': [{'changed': str(implementation)}]}
+                    return {'result': 'implemented',
+                            'outputs': {'candidate': _packet['candidate'], 'phase': _packet['phase'],
+                                        'changed_paths': [str(implementation)]},
+                            'evidence': [{'changed': str(implementation)}]}
                 final = subprocess.run(command, cwd=work, capture_output=True, text=True)
-                return {'result': 'passed', 'outputs': {'commands': [command], 'checks': [{'returncode': final.returncode, 'stdout': final.stdout, 'stderr': final.stderr}]}, 'evidence': [{'phase': 'final', 'returncode': final.returncode}]}
+                return {'result': 'passed', 'outputs': {'candidate': {'id': 'candidate-1'},
+                                                        'commands': [command],
+                                                        'checks': [{'returncode': final.returncode, 'stdout': final.stdout, 'stderr': final.stderr}],
+                                                        'coverage': {'complete': True, 'checked': ['CA-E-563']}},
+                        'evidence': [{'phase': 'final', 'returncode': final.returncode}]}
             prepared_packet = self.packet(actions)
             prepared_packet['golden_e2e'], prepared_packet['baseline_command'] = ['ready'], command
             prepared = actions.implement_selected_queue('CA-O-092', prepared_packet, agent)
@@ -203,6 +265,156 @@ class PromptContracts(unittest.TestCase):
             self.assertEqual((prepared['result'], implemented['result'], evaluated['result']), ('prepared', 'implemented', 'passed'))
             self.assertEqual(retained['initial']['returncode'], 1)
             self.assertEqual(evaluated['outputs']['checks'][0]['returncode'], 0)
+
+    def test_packet_admission_requires_complete_red_plan_and_authority_bindings(self):
+        actions = self.actions()
+        for field in ('requirements', 'method_projection', 'plan_item', 'red',
+                      'candidate', 'phase', 'confidence', 'retry'):
+            with self.subTest(field=field):
+                packet = self.packet(actions)
+                packet.pop(field)
+                launched = []
+                actual = actions.implement_selected_queue(
+                    'CA-O-093', packet, lambda *_: launched.append('launched'))
+                self.assertEqual(actual['result'], 'blocked')
+                self.assertEqual(launched, [])
+
+        packet = self.packet(actions)
+        packet['requirements'] = ['CA-R-1843']
+        actual = actions.implement_selected_queue(
+            'CA-O-093', packet, lambda *_: {'result': 'implemented',
+                                            'outputs': {'candidate': packet['candidate'],
+                                                        'changed_paths': ['a.py']},
+                                            'evidence': ['change']})
+        self.assertEqual(actual['result'], 'blocked')
+
+        packet = self.packet(actions)
+        packet['method_projection']['sources'] = packet['method_projection']['sources'][:-1]
+        actual = actions.implement_selected_queue(
+            'CA-O-093', packet, lambda *_: {'result': 'implemented',
+                                            'outputs': {'candidate': packet['candidate'],
+                                                        'changed_paths': ['a.py']},
+                                            'evidence': ['change']})
+        self.assertEqual(actual['result'], 'blocked')
+
+    def test_optional_delivery_and_evaluation_cardinality_is_step_scoped(self):
+        actions = self.actions()
+        packet = self.packet(actions)
+        packet['delivery'] = []
+        packet['evaluations'] = []
+        implemented = actions.implement_selected_queue(
+            'CA-O-093', packet, lambda *_: {'result': 'implemented',
+                                            'outputs': {'candidate': packet['candidate'], 'phase': packet['phase'],
+                                                        'changed_paths': ['a.py']},
+                                            'evidence': ['change']})
+        self.assertEqual(implemented['result'], 'implemented')
+
+        prepared = actions.implement_selected_queue(
+            'CA-O-092', packet, lambda *_: {'result': 'prepared',
+                                            'outputs': {'golden_e2e': ['case'],
+                                                        'commands': ['test'],
+                                                        'expected_outcomes': ['pass']},
+                                            'evidence': ['prepared']})
+        self.assertEqual(prepared['result'], 'blocked')
+
+    def test_preparation_requires_current_evaluation_authority_before_dispatch(self):
+        actions = self.actions()
+        for case, evaluations in (
+            ('missing', []),
+            ('stale', [{**self.packet(actions)['evaluations'][0], 'sha256': '0' * 64}]),
+            ('wrong-role', actions.prepare_input_bindings(['CA-R-1843'])),
+        ):
+            with self.subTest(case=case):
+                packet = self.packet(actions, 'Integrated')
+                packet['evaluations'] = evaluations
+                launched = []
+
+                actual = actions.implement_selected_queue(
+                    'CA-O-091', packet,
+                    lambda *_: launched.append('launched') or {
+                        'result': 'evaluation_ready', 'outputs': {}, 'evidence': ['invented-ready'],
+                    })
+
+                self.assertEqual(actual['result'], 'blocked')
+                self.assertEqual(launched, [])
+
+    def test_retry_admission_requires_effective_source_and_confidence_gate(self):
+        actions = self.actions()
+        packet = self.packet(actions, 'Integrated')
+        packet['remaining_failure'] = True
+        packet['retry'].update(remaining_failure=True, admitted=False)
+        blocked = actions.implement_selected_queue('CA-O-096', packet)
+        self.assertEqual(blocked['result'], 'retry_blocked')
+
+        packet = self.packet(actions, 'Integrated')
+        packet['confidence']['observed'] = 0.5
+        blocked = actions.implement_selected_queue('CA-O-096', packet)
+        self.assertEqual(blocked['result'], 'retry_blocked')
+
+        packet = self.packet(actions, 'Integrated')
+        decision = actions.implement_selected_queue(
+            'CA-O-096', packet,
+            lambda *_: {'result': 'retry_permitted',
+                        'outputs': {'decision': 'retry_permitted',
+                                    'limit_provenance': packet['retry']['source'],
+                                    'consumed': 0},
+                        'evidence': ['retry-gate']},
+            trusted_execution_authorization=packet['operator_authorization'])
+        self.assertEqual(decision['result'], 'retry_permitted')
+
+    def test_retry_rejects_fake_approval_and_unbound_permission(self):
+        actions = self.actions()
+        packet = self.packet(actions, 'Integrated')
+        blocked = actions.implement_selected_queue('CA-O-096', packet)
+        self.assertEqual(blocked['result'], 'retry_blocked')
+
+        packet = self.packet(actions, 'Integrated')
+        packet['operator_retry_approval'] = {'approved': True, 'source': 'operator'}
+        packet['permissions']['retry'] = True
+        blocked = actions.implement_selected_queue('CA-O-096', packet)
+        self.assertEqual(blocked['result'], 'retry_blocked')
+
+        packet = self.packet(actions, 'Integrated')
+        packet['permissions']['retry']['authorization_ref'] = 'authorizations/other.json'
+        blocked = actions.implement_selected_queue('CA-O-096', packet)
+        self.assertEqual(blocked['result'], 'retry_blocked')
+
+    def test_performed_success_rejects_fake_candidate_or_phase_identity(self):
+        actions = self.actions()
+        for field, value in (('candidate', {'id': 'other-candidate'}),
+                             ('phase', 'other-phase')):
+            with self.subTest(field=field):
+                packet = self.packet(actions)
+                response = {'result': 'implemented',
+                            'outputs': {'candidate': packet['candidate'], 'phase': packet['phase'],
+                                        'changed_paths': ['a.py']},
+                            'evidence': ['change']}
+                response['outputs'][field] = value
+                blocked = actions.implement_selected_queue('CA-O-093', packet, lambda *_: response)
+                self.assertEqual(blocked['result'], 'blocked')
+
+    def test_performed_success_is_bound_to_packet_scope_and_coverage(self):
+        actions = self.actions()
+        packet = self.packet(actions, 'Integrated')
+        outside = actions.implement_selected_queue(
+            'CA-O-094', packet,
+            lambda *_: {'result': 'passed',
+                        'outputs': {'candidate': packet['candidate'], 'commands': ['test'],
+                                    'checks': [{'returncode': 0}],
+                                    'coverage': {'complete': True, 'checked': ['CA-E-563']}},
+                        'evidence': ['pass']})
+        self.assertEqual(outside['result'], 'passed')
+
+        packet = self.packet(actions, 'Integrated')
+        packet['coverage']['required'] = ['CA-E-563', 'CA-E-564']
+        incomplete = actions.implement_selected_queue(
+            'CA-O-094', packet,
+            lambda *_: {'result': 'passed',
+                        'outputs': {'candidate': packet['candidate'], 'commands': ['test'],
+                                    'checks': [{'returncode': 0}],
+                                    'coverage': {'complete': True, 'checked': ['CA-E-563']}},
+                        'evidence': ['pass']})
+        self.assertEqual(incomplete['result'], 'blocked')
 
 
 if __name__ == '__main__':

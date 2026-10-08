@@ -3,21 +3,25 @@ import argparse
 import fcntl
 import json
 import os
+import secrets
 from pathlib import Path
 import subprocess
 import sys
 from typing import Annotated
 
 from pydantic import Field, TypeAdapter
-from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
-from backend import enqueue, enqueue_selected, recover_selected_release, recover_selected_release_status, status, worker
-from engine import Coordinator
+from contracts import (Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus,
+                       ResolveReleaseUnknownEffect, Status)
+from backend import (enqueue, enqueue_selected, recover_selected_release,
+                     recover_selected_release_status, resolve_release_unknown_effect, status, worker,
+                     RELEASE_HOST_APP_VERSION)
+from engine import Coordinator, runtime_fingerprint
 from release_host_bridge import (directory as release_host_directory, fixed_interpreter,
                                  has_binding as release_host_has_binding, invoke as invoke_release_host,
                                  publish_transport, subprocess_environment)
 from runtime_config import control_directory, docker_runtime, release_host_runtime
 
-Request = Annotated[Enqueue | EnqueueSelected | RecoverSelectedRelease | RecoverSelectedReleaseStatus | Status, Field(discriminator='operation')]
+Request = Annotated[Enqueue | EnqueueSelected | RecoverSelectedRelease | ResolveReleaseUnknownEffect | RecoverSelectedReleaseStatus | Status, Field(discriminator='operation')]
 ADAPTER = TypeAdapter(Request)
 
 
@@ -30,7 +34,8 @@ def run(root, request):
         if (isinstance(request, EnqueueSelected)
                 and request.execution.get('operation_route') == 'release_version'):
             return invoke_release_host(root, request.model_dump())
-        if (isinstance(request, (RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status))
+        if (isinstance(request, (RecoverSelectedRelease, ResolveReleaseUnknownEffect,
+                                 RecoverSelectedReleaseStatus, Status))
                 and release_host_has_binding(root, request.run_id)):
             return invoke_release_host(root, request.model_dump())
     if not docker_runtime() and not release_host_runtime():
@@ -43,6 +48,8 @@ def run(root, request):
         return enqueue_selected(root, request)
     if isinstance(request, RecoverSelectedRelease):
         return recover_selected_release(root, request)
+    if isinstance(request, ResolveReleaseUnknownEffect):
+        return resolve_release_unknown_effect(root, request)
     if isinstance(request, RecoverSelectedReleaseStatus):
         return recover_selected_release_status(root, request)
     return status(root, request)
@@ -93,12 +100,32 @@ def _foreground_worker(root, *, release_host):
     with lock.open('a') as handle:
         fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
         (directory / 'worker.ready').unlink(missing_ok=True)
-        engine.save(directory / 'worker.json', {'pid': os.getpid(), 'state': 'starting'})
+        identity = {'pid': os.getpid(), 'state': 'starting'}
+        if release_host:
+            identity.update(start_token=secrets.token_hex(32),
+                            application_version=RELEASE_HOST_APP_VERSION,
+                            runtime_fingerprint=runtime_fingerprint(engine.root))
+        engine.save(directory / 'worker.json', identity)
+        completed = shutdown_incomplete = False
         try:
-            worker(engine.root, ready_file=directory / 'worker.ready')
+            if release_host:
+                from release_host_health import HealthShutdownIncomplete
+                try:
+                    worker(engine.root, ready_file=directory / 'worker.ready',
+                           release_start_token=identity['start_token'])
+                except HealthShutdownIncomplete:
+                    shutdown_incomplete = True
+                    raise
+            else:
+                worker(engine.root, ready_file=directory / 'worker.ready')
+            completed = True
         finally:
-            (directory / 'worker.ready').unlink(missing_ok=True)
-            engine.save(directory / 'worker.json', {'pid': os.getpid(), 'state': 'stopped'})
+            # Only an orderly worker return proves that its private listeners
+            # joined and DBOS teardown completed.  A failed join retains the
+            # worker's stopping/unknown state instead of manufacturing stopped.
+            if completed and not shutdown_incomplete:
+                (directory / 'worker.ready').unlink(missing_ok=True)
+                engine.save(directory / 'worker.json', {**identity, 'state': 'stopped'})
 
 
 def main():
@@ -107,7 +134,8 @@ def main():
     parser.add_argument('--input', default='-')
     parser.add_argument('operation', choices=['worker', 'start-worker', 'release-worker',
                         'start-release-worker', 'enqueue', 'enqueue_selected',
-                        'recover_selected_release', 'recover_selected_release_status', 'status'])
+                        'recover_selected_release', 'resolve_release_unknown_effect',
+                        'recover_selected_release_status', 'status', 'stop-release-worker'])
     args = parser.parse_args()
     if args.operation in ('worker', 'start-worker', 'release-worker', 'start-release-worker'):
         release = args.operation in ('release-worker', 'start-release-worker')
@@ -115,6 +143,22 @@ def main():
             print(json.dumps(_start_worker(args.project_root, release_host=release)))
         else:
             _foreground_worker(args.project_root, release_host=release)
+    elif args.operation == 'stop-release-worker':
+        from release_host_shutdown import ShutdownError, stop_worker
+        try:
+            response = stop_worker(args.project_root, timeout=30)
+            disposition = response['disposition']
+        except ShutdownError:
+            response = {'operation': 'stop-release-worker', 'nonce': secrets.token_hex(32),
+                        'disposition': 'pending'}
+            disposition = 'pending'
+        exit_code = {'stopped': 0, 'busy': 2, 'pending': 3, 'unsupported': 4}[disposition]
+        # A proved stop is the exact final receipt.  Refusals remain closed
+        # local CLI output and never disclose a target identity or carrier.
+        print(json.dumps(response if disposition == 'stopped' else {
+            key: response[key] for key in ('operation', 'nonce', 'disposition')
+        }, default=str))
+        sys.exit(exit_code)
     else:
         raw = sys.stdin.read() if args.input == '-' else Path(args.input).read_text()
         request = json.loads(raw)

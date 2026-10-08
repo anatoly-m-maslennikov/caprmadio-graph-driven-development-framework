@@ -35,6 +35,7 @@ from selected_workflows_docker_fixture import (  # noqa: E402
     FixtureLease,
     JOURNAL_CASES,
     ROUTE_CASES,
+    STATUS_DOMAINS,
 )
 
 try:
@@ -53,6 +54,43 @@ def _structured_tool_result(response: Any) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise AssertionError(f"MCP Tool did not return a structured object: {response}")
     return value
+
+
+def _normalized_source_result(value: object) -> str:
+    """Compare the executor's underscore labels with source-table wording."""
+    if not isinstance(value, str) or not value:
+        raise AssertionError(f"source result condition is invalid: {value!r}")
+    return value.replace(" ", "_")
+
+
+def _w09_admitted_source_edges(root: Path, route: Mapping[str, Any]) -> list[dict[str, str]]:
+    """Read the exact pinned O016 table that supersedes its stale projection."""
+    workflow = route.get("workflow")
+    if not isinstance(workflow, Mapping):
+        raise AssertionError("W09 has no pinned Workflow binding")
+    path, digest = workflow.get("source_path"), workflow.get("digest")
+    if not isinstance(path, str) or not isinstance(digest, str):
+        raise AssertionError("W09 Workflow binding is incomplete")
+    source = root / path
+    raw = source.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != digest:
+        raise AssertionError("W09 Workflow definition changed after admission")
+    lines = raw.decode("utf-8").splitlines()
+    header = "| From Step | Result condition | Next Step **or** terminal result |"
+    indexes = [index for index, line in enumerate(lines) if line.strip() == header]
+    if len(indexes) != 1 or indexes[0] + 1 >= len(lines):
+        raise AssertionError("W09 admitted Workflow table is unavailable")
+    edges: list[dict[str, str]] = []
+    for line in lines[indexes[0] + 2:]:
+        if not line.strip().startswith("|"):
+            break
+        cells = [value.strip() for value in line.strip().strip("|").split("|")]
+        if len(cells) != 3 or not all(cells):
+            raise AssertionError("W09 admitted Workflow table is invalid")
+        edges.append({"from": cells[0], "condition": cells[1], "to": cells[2]})
+    if not edges:
+        raise AssertionError("W09 admitted Workflow table has no edges")
+    return edges
 
 
 async def _stdio_tool_call(parameters: Any, tool: str, request: dict[str, Any]) -> dict[str, Any]:
@@ -114,16 +152,21 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         request = fixture.request(request_id=request_id)
         before = fixture.snapshot()
         journal = root / ".caprmedio_caprmedio/_journal"
-        self.assertTrue(journal.is_dir(), "preview requires the valid empty canonical Journal")
+        self.assertTrue(journal.is_dir(), "preview requires the valid canonical Journal")
         records_before = self._recording_snapshot(root)
-        self.assertFalse(list(journal.glob("*.ndjson")), "preview fixture must contain no fabricated Run events")
+        initial_events = self._events(root)
+        if fixture.case.case_id == "W03":
+            self.assertEqual(["golden-w03-predecessor"], [event.get("event_id") for event in initial_events])
+            self.assertTrue(all(event.get("schema_version") != 5 for event in initial_events), initial_events)
+        else:
+            self.assertEqual([], initial_events, "preview fixture must contain no fabricated Run events")
         result = await self._call(runtime, root, fixture.case.route, request)
         self.assertEqual("preview", result.get("disposition"), result)
         self.assertIn("proposal_receipt", result, result)
         self.assertIn("proposal_receipt_digest", result, result)
         self.assertEqual(before, fixture.snapshot(), "a preview must not mutate admitted authority")
         self.assertEqual(records_before, self._recording_snapshot(root), "preview must not write Journal or Run records")
-        self.assertFalse(list(journal.glob("*.ndjson")))
+        self.assertEqual(initial_events, self._events(root), "preview must preserve initial Journal evidence")
         return result
 
     @staticmethod
@@ -156,6 +199,55 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 return observed
             await asyncio.sleep(0.25)
         self.fail(f"selected Workflow did not reach a truthful terminal state: {observed}")
+
+    async def _execute_status_case(
+        self, runtime: Runtime, root: Path, fixture: GoldenProject, path: Path,
+        status: str, request_id: str, *, expected_outcome: str = "completed",
+    ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+        """Exercise W04 through preview, selected enqueue, and reconnect status."""
+        if expected_outcome not in {"completed", "no_op"}:
+            raise AssertionError(f"unsupported W04 expected terminal outcome: {expected_outcome!r}")
+        preview = await self._call(
+            runtime, root, fixture.case.route,
+            fixture.request_for_status(path, status, request_id=request_id),
+        )
+        self.assertEqual("preview", preview.get("disposition"), preview)
+        execute = fixture.request_for_status(
+            path, status, request_id=request_id, mode="execute",
+            receipt=preview["proposal_receipt"], receipt_digest=preview["proposal_receipt_digest"],
+        )
+        admitted = await self._call(
+            runtime, root, "workflow_orchestrator",
+            {"operation": "enqueue_selected", "run_id": request_id, "execution": execute},
+        )
+        self.assertIn(admitted.get("outcome"), {"queued", "admitted", "started", "running", "pending", "completed"}, admitted)
+        terminal = await self._terminal_status(runtime, root, request_id)
+        self.assertEqual("terminal", terminal.get("disposition"), terminal)
+        self.assertEqual(expected_outcome, terminal.get("outcome"), terminal)
+        selected = terminal.get("selected_result")
+        self.assertIsInstance(selected, dict, terminal)
+        graph = self._graph_result(root, request_id)
+        rows = self._assert_graph_path_and_native_results(
+            root, fixture, request_id, graph, expected_outcome=expected_outcome,
+        )
+        self._assert_shared_run_journal(
+            root, request_id, self._route_binding(fixture), selected, graph,
+            expected_outcome=expected_outcome,
+        )
+        native = self._action_progress(root, request_id, rows[-1]["action_run_id"]).get("native_result")
+        self.assertIsInstance(native, dict, native)
+        return native, graph, selected
+
+    def _assert_status_admission_blocked(self, result: Mapping[str, Any]) -> None:
+        """Require the source-declared refusal carrier, not an MCP exception."""
+        self.assertEqual("blocked", result.get("disposition"), result)
+        self.assertEqual("blocked", result.get("outcome"), result)
+        self.assertEqual([], result.get("effect_refs"), result)
+        lifecycle_error = result.get("lifecycle_error")
+        self.assertIsInstance(lifecycle_error, Mapping, result)
+        self.assertEqual("status-unadmitted", lifecycle_error.get("code"), result)
+        self.assertNotIn("proposal_receipt", result)
+        self.assertNotIn("proposal_receipt_digest", result)
 
     @staticmethod
     def _read_json(path: Path, *, label: str) -> dict[str, Any]:
@@ -209,6 +301,8 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         route: Mapping[str, Any],
         selected: Mapping[str, Any],
         graph: Mapping[str, Any],
+        *,
+        expected_outcome: str = "completed",
     ) -> None:
         """Bind J01--J08 to actual per-Run records, never marker presence."""
         rows = graph.get("step_results")
@@ -234,24 +328,43 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             expected_definitions[action_run_id] = binding["action"]
             expected_parent[step_run_id] = request_id
             expected_parent[action_run_id] = step_run_id
+            native_child_by_route = {
+                "create_atom": "CA-O-032",
+                "update_atom": "CA-O-030",
+                "replace_atom": "CA-O-051",
+            }
+            child_atom_id = native_child_by_route.get(route.get("route"))
+            if expected_outcome == "completed" and action_id == "CA-O-128" and child_atom_id is not None:
+                children = [
+                    item for item in route.get("native_action_calls", [])
+                    if isinstance(item, Mapping) and item.get("atom_id") == child_atom_id
+                ]
+                self.assertEqual(1, len(children), route)
+                child_run_id = f"{action_run_id}:nested:{child_atom_id}"
+                expected_run_ids.append(child_run_id)
+                expected_definitions[child_run_id] = children[0]
+                expected_parent[child_run_id] = action_run_id
 
         # J01: the retained selected result must be a clean terminal receipt,
         # not the outer DBOS acknowledgement returned by enqueue_selected.
         self.assertEqual("terminal", selected.get("disposition"), selected)
-        self.assertEqual("completed", selected.get("outcome"), selected)
-        self.assertEqual(expected_run_ids, selected.get("run_ids"), selected)
         terminals = selected.get("terminal_runs")
         self.assertIsInstance(terminals, list, selected)
+        workflow_terminals = [row for row in terminals if row.get("run_id") == request_id]
+        self.assertEqual(1, len(workflow_terminals), terminals)
+        self.assertEqual(expected_outcome, workflow_terminals[0].get("outcome"), workflow_terminals[0])
+        self.assertEqual(expected_run_ids, selected.get("run_ids"), selected)
         self.assertEqual(len(expected_run_ids), len(terminals), terminals)
         terminal_by_run_id = {row.get("run_id"): row for row in terminals}
         self.assertEqual(set(expected_run_ids), set(terminal_by_run_id), terminals)
 
         # J02/J03: every actual Workflow/Step/Action has exactly one start and
-        # one successful terminal fact.  Interrupted/failed facts cannot be a
-        # happy-path substitute.
+        # one clean terminal fact with the requested outcome.
+        # Interrupted/failed facts cannot substitute for it.
         events = [
             event for event in self._events(root)
-            if event.get("llm_session", {}).get("uuid") == request_id
+            if event.get("schema_version") == 5 and event.get("kind") == "workflow_execution"
+            and event.get("llm_session", {}).get("uuid") == request_id
         ]
         self.assertEqual(2 * len(expected_run_ids), len(events), events)
         self.assertEqual(len({event.get("event_id") for event in events}), len(events), events)
@@ -261,7 +374,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             facts = [event for event in events if event.get("run", {}).get("run_id") == run_id]
             self.assertEqual(["started", "completed"], [event.get("event") for event in facts], facts)
             self.assertIsNone(facts[0].get("outcome"), facts[0])
-            self.assertEqual("completed", facts[1].get("outcome"), facts[1])
+            self.assertEqual(expected_outcome, facts[1].get("outcome"), facts[1])
 
             # J04/J05: source-bound definition and parent identities on both
             # facts must match the frozen manifest, not merely a similarly named Run.
@@ -280,12 +393,25 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 else:
                     self.assertEqual(parent, event["run"].get("parent_run_id"), event)
 
+        if route.get("route") == "replace_atom":
+            replacement_events = [
+                event for event in self._events(root)
+                if event.get("schema_version") == 3
+                and event.get("event_id") == f"selected-replacement:{request_id}:step:1:action:1:nested:CA-O-051"
+            ]
+            self.assertEqual(1, len(replacement_events), replacement_events)
+            replacement = replacement_events[0]
+            self.assertEqual("golden-w03-predecessor", replacement.get("previous_result_event"), replacement)
+            self.assertEqual("CA-R-100", replacement.get("predecessor_atom_id"), replacement)
+            self.assertEqual(["CA-R-103"], replacement.get("successor_atom_ids"), replacement)
+            self._safe_existing_ref(root, replacement.get("result", {}).get("path"), label="replacement archive")
+
         # J06/J07/J08: status's terminal records and Journal evidence agree on
         # clean outcome and actual retained result/effect references.
         for run_id in expected_run_ids:
             terminal = terminal_by_run_id[run_id]
             self.assertEqual("terminal", terminal.get("disposition"), terminal)
-            self.assertEqual("completed", terminal.get("outcome"), terminal)
+            self.assertEqual(expected_outcome, terminal.get("outcome"), terminal)
             self._safe_existing_ref(root, terminal.get("result_ref"), label="terminal result")
             effects = terminal.get("effect_refs")
             self.assertIsInstance(effects, list, terminal)
@@ -298,15 +424,18 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         fixture: GoldenProject,
         request_id: str,
         graph: Mapping[str, Any],
+        *,
+        expected_outcome: str = "completed",
     ) -> list[dict[str, Any]]:
         route = self._route_binding(fixture)
-        self.assertEqual("completed", graph.get("outcome"), graph)
+        self.assertEqual(expected_outcome, graph.get("outcome"), graph)
         self.assertEqual(request_id, graph.get("workflow_run_id"), graph)
         self.assertEqual(route["workflow"]["atom_id"], graph.get("workflow_definition_id"), graph)
         rows = graph.get("step_results")
         self.assertIsInstance(rows, list, graph)
         self.assertTrue(rows, graph)
         steps = {item["step"]["atom_id"]: item for item in route["ordered_steps"]}
+        source_edges = _w09_admitted_source_edges(root, route) if route.get("route") == "run_implementation_workflow" else None
         self.assertEqual(route["entry_step"], rows[0].get("step_definition_id"), rows)
         for index, row in enumerate(rows):
             self.assertIsInstance(row, dict, row)
@@ -333,18 +462,31 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 self._safe_existing_ref(root, effect, label="native Action effect")
             if index:
                 previous = rows[index - 1]
-                admissible = {
-                    transition["to"] for transition in route["on_result"]
+                transitions = source_edges if source_edges is not None else route["on_result"]
+                admissible = [
+                    transition for transition in transitions
                     if transition["from"] == previous["step_definition_id"]
-                    and transition["condition"] == previous["result"]
-                }
-                self.assertIn(step_id, admissible, {"previous": previous, "current": row, "route": route})
+                    and _normalized_source_result(transition["condition"])
+                    == _normalized_source_result(previous["result"])
+                ]
+                self.assertEqual(1, len(admissible), {"previous": previous, "current": row, "route": route})
+                self.assertEqual(step_id, admissible[0]["to"], {"previous": previous, "current": row, "route": route})
 
             progress = self._action_progress(root, request_id, row["action_run_id"])
             self.assertEqual(row["action_run_id"], progress.get("action_run_id"), progress)
             self.assertEqual(row["result"], progress.get("result"), progress)
             if fixture.case.case_id not in {"W11", "W12"}:
                 self.assertIsInstance(progress.get("native_result"), dict, progress)
+        if source_edges is not None:
+            final = rows[-1]
+            completion = [
+                transition for transition in source_edges
+                if transition["from"] == final["step_definition_id"]
+                and _normalized_source_result(transition["condition"])
+                == _normalized_source_result(final["result"])
+            ]
+            self.assertEqual(1, len(completion), {"final": final, "source_edges": source_edges})
+            self.assertEqual("completed", completion[0]["to"], {"final": final, "completion": completion})
         return rows
 
     def _assert_route_specific_effects(
@@ -528,6 +670,74 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                         await self._stop(runtime)
                     temporary.cleanup()
 
+    async def test_w04_all_current_roles_and_admitted_statuses(self) -> None:
+        """CA-P-1616: exercise every source-admitted W04 status through Docker/MCP."""
+        for role, _letter, _folder, source_id, statuses in STATUS_DOMAINS:
+            with self.subTest(role=role):
+                temporary, root, fixture = self._new_fixture(GoldenCase("W04", "change_atom_status"))
+                runtime = self._runtime(root)
+                launched = False
+                try:
+                    fixture.prepare()
+                    launched = True
+                    await self._start(runtime)
+                    final_observed: Path | None = None
+                    final_status: str | None = None
+                    for offset, changed in enumerate(statuses):
+                        current = next(value for value in statuses
+                                       if value != changed and value.casefold() != "draft")
+                        path = fixture.status_atom(role, current, number=8000 + offset)
+                        native, _graph, _selected = await self._execute_status_case(
+                            runtime, root, fixture, path, changed,
+                            f"p1616-{role.lower()}-{changed.casefold()}-change",
+                        )
+                        self.assertEqual("applied", native.get("outcome"), native)
+                        model = native["status_model"]
+                        self.assertEqual(list(statuses), model["statuses"], native)
+                        model_pin = model["model_sources"][0]
+                        self.assertEqual(source_id, model_pin["atom_id"], native)
+                        self.assertEqual(
+                            hashlib.sha256((root / model_pin["path"]).read_bytes()).hexdigest(),
+                            model_pin["sha256"], native,
+                        )
+                        observed = root / native["observed"]["path"]
+                        self.assertTrue(observed.is_file(), native)
+                        self.assertEqual(changed, native["observed"]["status"], native)
+                        if role == "Requirement" and changed == "Draft":
+                            self.assertIsNone(native["observed"]["atom_id"], native)
+                            self.assertNotIn("atom_id:", observed.read_text(encoding="utf-8"), native)
+                            self.assertIn("history", native, native)
+                        final_observed, final_status = observed, changed
+
+                    assert final_observed is not None and final_status is not None
+                    noop, _graph, _selected = await self._execute_status_case(
+                        runtime, root, fixture, final_observed, final_status, f"p1616-{role.lower()}-noop",
+                        expected_outcome="no_op",
+                    )
+                    self.assertEqual("no-op", noop.get("outcome"), noop)
+                    self.assertTrue(all(effect.get("state") == "unchanged" for effect in noop.get("effects", [])), noop)
+
+                    before = fixture.snapshot()
+                    records_before = self._recording_snapshot(root)
+                    rejected = await self._call(
+                        runtime, root, fixture.case.route,
+                        fixture.request_for_status(
+                            final_observed, "NotAdmitted", request_id=f"p1616-{role.lower()}-rejected",
+                        ),
+                    )
+                    self._assert_status_admission_blocked(rejected)
+                    self.assertEqual(before, fixture.snapshot(), "rejected W04 request changed authority")
+                    self.assertEqual(
+                        records_before, self._recording_snapshot(root),
+                        "rejected W04 request wrote Journal or Run records",
+                    )
+                except GoldenCorpusError as error:
+                    self.fail(str(error))
+                finally:
+                    if launched:
+                        await self._stop(runtime)
+                    temporary.cleanup()
+
     async def test_stale_source_rejects_without_workflow_or_journal_effect(self) -> None:
         case = GoldenCase("W13", "build_applicable_methodology")
         temporary, root, fixture = self._new_fixture(case)
@@ -551,6 +761,86 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             if launched:
                 await self._stop(runtime)
             temporary.cleanup()
+
+
+class SelectedWorkflowJournalHarnessTest(unittest.TestCase):
+    """Non-Docker regression for the W01 child-Run evidence contract."""
+
+    _events = staticmethod(SelectedWorkflowsDockerEndToEnd._events)
+    _safe_existing_ref = staticmethod(SelectedWorkflowsDockerEndToEnd._safe_existing_ref)
+
+    def test_create_atom_requires_the_source_bound_o032_child_run(self) -> None:
+        request_id = "w01-harness"
+        step_run_id = f"{request_id}:step:1"
+        action_run_id = f"{step_run_id}:action:1"
+        child_run_id = f"{action_run_id}:nested:CA-O-032"
+        pins = {
+            "workflow": {"atom_id": "CA-O-127", "version": 1, "source_path": "definitions/workflow.md", "digest": "a" * 64},
+            "step": {"atom_id": "CA-O-129", "version": 1, "source_path": "definitions/step.md", "digest": "b" * 64},
+            "action": {"atom_id": "CA-O-128", "version": 1, "source_path": "definitions/action.md", "digest": "c" * 64},
+            "creation": {"atom_id": "CA-O-032", "version": 1, "source_path": "definitions/creation.md", "digest": "d" * 64},
+        }
+        route = {
+            "route": "create_atom", "workflow": pins["workflow"],
+            "ordered_steps": [{"step": pins["step"], "action": pins["action"]}],
+            "native_action_calls": [pins["creation"]],
+        }
+        graph = {"step_results": [{"step_run_id": step_run_id, "action_run_id": action_run_id,
+                                   "step_definition_id": "CA-O-129", "action_definition_id": "CA-O-128"}]}
+        run_pins = {
+            request_id: pins["workflow"], step_run_id: pins["step"], action_run_id: pins["action"],
+            child_run_id: {"atom_id": "CA-O-032", "version": 1, "source_path": "definitions/creation.md", "digest": "d" * 64},
+        }
+        parents = {request_id: None, step_run_id: request_id, action_run_id: step_run_id, child_run_id: action_run_id}
+        with tempfile.TemporaryDirectory(dir=Path.cwd() / ".caprmedio_tmp", ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            journal = root / ".caprmedio_caprmedio/_journal"
+            journal.mkdir(parents=True)
+            events = []
+            terminals = []
+            for run_id, pin in run_pins.items():
+                for event_name, outcome in (("started", None), ("completed", "completed")):
+                    run = {"run_id": run_id, "definition": {"atom_id": pin["atom_id"], "version": pin["version"],
+                                                               "path": pin["source_path"], "digest": pin["digest"]}}
+                    if parents[run_id] is not None:
+                        run["parent_run_id"] = parents[run_id]
+                    events.append({"schema_version": 5, "kind": "workflow_execution", "event_id": f"{run_id}-{event_name}",
+                                   "event": event_name, "outcome": outcome, "llm_session": {"uuid": request_id}, "run": run})
+                result_ref = f"evidence/{run_id}.json"
+                result = root / result_ref
+                result.parent.mkdir(parents=True, exist_ok=True)
+                result.write_text("{}", encoding="utf-8")
+                terminals.append({"run_id": run_id, "disposition": "terminal", "outcome": "completed",
+                                  "result_ref": result_ref, "effect_refs": []})
+            (journal / "runs.ndjson").write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+            selected = {"disposition": "terminal", "run_ids": list(run_pins), "terminal_runs": terminals}
+
+            SelectedWorkflowsDockerEndToEnd._assert_shared_run_journal(self, root, request_id, route, selected, graph)
+
+    def test_w09_source_conditions_normalize_labels_and_reach_completion(self) -> None:
+        with tempfile.TemporaryDirectory(dir=Path.cwd() / ".caprmedio_tmp", ignore_cleanup_errors=True) as directory:
+            root = Path(directory)
+            source = root / "definitions/workflow.md"
+            source.parent.mkdir(parents=True)
+            source.write_text(
+                "| From Step | Result condition | Next Step **or** terminal result |\n"
+                "|---|---|---|\n"
+                "| CA-O-091 | evaluation ready | CA-O-092 |\n"
+                "| CA-O-091 | complete | completed |\n",
+                encoding="utf-8",
+            )
+            route = {"workflow": {"source_path": "definitions/workflow.md",
+                                    "digest": hashlib.sha256(source.read_bytes()).hexdigest()}}
+            edges = _w09_admitted_source_edges(root, route)
+            successor = [edge for edge in edges if edge["from"] == "CA-O-091"
+                         and _normalized_source_result(edge["condition"])
+                         == _normalized_source_result("evaluation_ready")]
+            completion = [edge for edge in edges if edge["from"] == "CA-O-091"
+                          and _normalized_source_result(edge["condition"])
+                          == _normalized_source_result("complete")]
+
+            self.assertEqual(["CA-O-092"], [edge["to"] for edge in successor])
+            self.assertEqual(["completed"], [edge["to"] for edge in completion])
 
 
 if __name__ == "__main__":

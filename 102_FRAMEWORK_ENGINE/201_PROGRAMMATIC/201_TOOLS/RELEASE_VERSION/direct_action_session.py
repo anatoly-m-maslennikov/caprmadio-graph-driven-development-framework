@@ -1,17 +1,18 @@
-"""Canonical Journal recording for the explicit first-runtime Action.
+"""Canonical Journal recording for the two explicitly admitted direct Actions.
 
 This deliberately does *not* use the selected-workflow registry, a selected
-route, or :class:`workflow_run_support.RunTracker`.  CA-O-180 is a direct,
-Operator-authorized bootstrap Action.  Its durable invocation intent is the
+route, or :class:`workflow_run_support.RunTracker`.  CA-O-180 and CA-O-187 are
+source-pinned, Operator-authorized direct Actions. Their durable invocation intent is the
 canonical ``started`` Journal event; it is written and reopened before any
 effect is eligible to run.
 
 The module owns no private Action ledger.  It uses the existing Work Journal's
 sealed events, receipt de-duplication, append contexts, and pending-event
 recovery.  Therefore an interrupted process cannot silently replay an unknown
-installation effect: it may only recover the exact original pending Journal
-event, and a previously started direct Action requires a new deliberate
-recovery decision outside this session.
+installation effect: it may recover the exact original pending Journal event.
+Only CA-O-187 additionally admits an explicitly requested recording-only reopen
+of an original started Run; the caller must independently observe the retained
+actual restoration effects before using the unchanged terminal writer.
 """
 
 from __future__ import annotations
@@ -22,6 +23,7 @@ import json
 import re
 import tomllib
 from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +32,7 @@ import work_journal
 
 DIRECT_ACTION_APP = "direct-action-session"
 INITIALIZATION_ACTION_ID = "FRAMEWORK_INITIALIZATION"
+RESTORATION_ACTION_ID = "FRAMEWORK_IMAGE_RESTORATION"
 STRUCTURAL_SCOPE = "PROJECT_CONFIGURATION"
 ACTION_ATOM_ID = "CA-O-180"
 ACTION_ATOM_VERSION = 1
@@ -42,6 +45,10 @@ ACTION_ATOM_RELATIVE = Path(
 # and rebound here rather than silently changing what a direct bootstrap Run
 # claims to implement.
 ACTION_ATOM_SHA256 = "327f9e9722ed4346251172e36b42e0ad5a322de62ec13ecce21c52f89790a073"
+RESTORATION_ATOM_ID = "CA-O-187"
+RESTORATION_ATOM_VERSION = 2
+RESTORATION_ATOM_RELATIVE = ACTION_ATOM_RELATIVE.parent / "CA-O-187-PROJECT_CONFIGURATION-ACTION--restore-the-selected-missing-bootstrap-image.md"
+RESTORATION_ATOM_SHA256 = "6e0320a7026f37c6e0e4199051d47a4c597cdbe22bb5fb1bfb7b0626258852c1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$")
 _OUTCOMES = frozenset({"completed", "no_op", "failed", "cancelled", "partial"})
@@ -53,6 +60,26 @@ class DirectActionJournalError(RuntimeError):
     def __init__(self, code: str, message: str) -> None:
         self.code = code
         super().__init__(f"{code}: {message}")
+
+
+@dataclass(frozen=True)
+class _ActionDescriptor:
+    atom_id: str
+    version: int
+    path: Path
+    digest: str
+    instruction: str
+
+
+def _action_descriptor(action_id: str) -> _ActionDescriptor:
+    """Select only the two reviewed direct Actions; callers supply no pins."""
+    if action_id == INITIALIZATION_ACTION_ID:
+        return _ActionDescriptor(ACTION_ATOM_ID, ACTION_ATOM_VERSION, ACTION_ATOM_RELATIVE,
+                                 ACTION_ATOM_SHA256, "first Framework runtime initialization")
+    if action_id == RESTORATION_ACTION_ID:
+        return _ActionDescriptor(RESTORATION_ATOM_ID, RESTORATION_ATOM_VERSION, RESTORATION_ATOM_RELATIVE,
+                                 RESTORATION_ATOM_SHA256, "retained selected Framework image restoration")
+    raise DirectActionJournalError("direct-action-unadmitted", "direct Action is not one of the two admitted Actions")
 
 
 def _sha256(value: bytes) -> str:
@@ -103,21 +130,23 @@ def _read_regular_relative(root: Path, relative: Path, *, code: str, label: str)
         raise DirectActionJournalError(code, f"{label} is unreadable") from error
 
 
-def _source_binding(root: Path) -> dict[str, Any]:
+def _source_binding(root: Path, action_id: str = INITIALIZATION_ACTION_ID) -> dict[str, Any]:
+    descriptor = _action_descriptor(action_id)
+    name = descriptor.atom_id.removeprefix("CA-")
     payload = _read_regular_relative(
         root,
-        ACTION_ATOM_RELATIVE,
+        descriptor.path,
         code="direct-action-source-stale",
-        label="the exact O-180 source carrier",
+        label=f"the exact {name} source carrier",
     )
-    if _sha256(payload) != ACTION_ATOM_SHA256:
-        raise DirectActionJournalError("direct-action-source-stale", "the exact O-180 source digest is not admitted")
+    if _sha256(payload) != descriptor.digest:
+        raise DirectActionJournalError("direct-action-source-stale", f"the exact {name} source digest is not admitted")
     return {
         "kind": "action",
-        "atom_id": ACTION_ATOM_ID,
-        "version": ACTION_ATOM_VERSION,
-        "path": ACTION_ATOM_RELATIVE.as_posix(),
-        "digest": ACTION_ATOM_SHA256,
+        "atom_id": descriptor.atom_id,
+        "version": descriptor.version,
+        "path": descriptor.path.as_posix(),
+        "digest": descriptor.digest,
     }
 
 
@@ -161,7 +190,24 @@ def _image_digest(value: object) -> str:
     return value
 
 
-def _intent(value: Mapping[str, Any]) -> dict[str, str]:
+def _intent(value: Mapping[str, Any], action_id: str = INITIALIZATION_ACTION_ID) -> dict[str, str]:
+    if action_id == RESTORATION_ACTION_ID:
+        expected = {"action_id", "kind", "manifest_sha256", "source_context_sha256",
+                    "selected_selector_sha256", "old_image_digest", "retained_proof_receipt_sha256",
+                    "retained_context_sha256"}
+        if not isinstance(value, Mapping) or set(value) != expected:
+            raise DirectActionJournalError("direct-action-invalid-intent", "restoration intent has unsupported or missing fields")
+        if value.get("action_id") != RESTORATION_ACTION_ID or value.get("kind") != "retained_selected_framework_image_restoration":
+            raise DirectActionJournalError("direct-action-invalid-intent", "intent does not describe the admitted restoration Action")
+        return {
+            "action_id": RESTORATION_ACTION_ID,
+            "kind": "retained_selected_framework_image_restoration",
+            "old_image_digest": _image_digest(value.get("old_image_digest")),
+            **{field: _digest(value.get(field), f"intent.{field}") for field in
+               ("manifest_sha256", "source_context_sha256", "selected_selector_sha256",
+                "retained_proof_receipt_sha256", "retained_context_sha256")},
+        }
+    _action_descriptor(action_id)
     expected = {"action_id", "kind", "manifest_sha256", "source_context_sha256", "image_digest"}
     if not isinstance(value, Mapping) or set(value) != expected:
         raise DirectActionJournalError("direct-action-invalid-intent", "initialization intent has unsupported or missing fields")
@@ -234,7 +280,7 @@ def _reopen_event(root: Path, event_id: str) -> tuple[dict[str, Any], dict[str, 
 
 
 class DirectActionSession:
-    """One explicitly authorized CA-O-180 invocation backed only by Journal v5.
+    """One explicitly authorized closed direct Action backed only by Journal v5.
 
     ``actual``, ``terminal``, and ``receipts`` are intentionally small
     observable state for the installer.  They are not a durable side ledger;
@@ -247,9 +293,12 @@ class DirectActionSession:
         *,
         author: str,
         operator_authorization: Mapping[str, Any],
+        action_id: str = INITIALIZATION_ACTION_ID,
         timezone: str = "UTC",
         now: Callable[[], dt.datetime] | None = None,
     ) -> None:
+        self.descriptor = _action_descriptor(action_id)
+        self.action_id = action_id
         self.root = _regular_root(project_root)
         try:
             work_journal.validate_partition(author, "2000-01-01", timezone)
@@ -302,12 +351,12 @@ class DirectActionSession:
         """
         if self._closed:
             raise DirectActionJournalError("direct-action-invocation-closed", "direct Action session is closed")
-        if action_id != INITIALIZATION_ACTION_ID:
-            raise DirectActionJournalError("direct-action-unadmitted", "only FRAMEWORK_INITIALIZATION is admitted")
+        if action_id != self.action_id:
+            raise DirectActionJournalError("direct-action-unadmitted", f"only {self.action_id} is admitted by this Session")
         if not isinstance(requested_run_id, str) or _RUN_ID.fullmatch(requested_run_id) is None:
             raise DirectActionJournalError("direct-action-invalid-run", "requested_run_id has invalid syntax")
-        normalized_intent = _intent(intent)
-        binding = _source_binding(self.root)
+        normalized_intent = _intent(intent, self.action_id)
+        binding = _source_binding(self.root, self.action_id)
         identity = self._run_identity(requested_run_id, binding)
         run_id = f"direct-action:{identity}"
         existing = self.actual.get(run_id)
@@ -368,6 +417,59 @@ class DirectActionSession:
             }
             self.receipts.append(dict(receipt))
             return {"run_id": run_id, "disposition": "started", "event_id": started_id, "event_receipt": dict(receipt)}
+        except BaseException:
+            self._release_invocation_lock()
+            raise
+
+    def reopen_restoration_for_recording(
+        self,
+        requested_run_id: str,
+        intent: Mapping[str, Any],
+    ) -> Mapping[str, Any]:
+        """Own the original O-187 Run solely to record independently proven effects.
+
+        This appends no event and never starts or dispatches an Action. The
+        coordinator must validate its retained result, proof, image, selector,
+        and public Skill before observing effects and calling ``finish_action``.
+        Any sealed pending event instead requires exact-byte pending recovery.
+        O-180 and source-evolved historical Runs are not admitted by this method.
+        """
+        if self._closed:
+            raise DirectActionJournalError("direct-action-invocation-closed", "direct Action session is closed")
+        if self.action_id != RESTORATION_ACTION_ID:
+            raise DirectActionJournalError("direct-action-unadmitted", "recording-only reopen is admitted only for O-187 restoration")
+        if not isinstance(requested_run_id, str) or _RUN_ID.fullmatch(requested_run_id) is None:
+            raise DirectActionJournalError("direct-action-invalid-run", "requested_run_id has invalid syntax")
+        normalized_intent = _intent(intent, RESTORATION_ACTION_ID)
+        binding = _source_binding(self.root, RESTORATION_ACTION_ID)
+        # Constructor admission is not a lease on subsequently removed
+        # Operator authority. Reopen the current registry before owning a Run.
+        _authorization(self.root, self.authorization)
+        identity = self._run_identity(requested_run_id, binding)
+        run_id = f"direct-action:{identity}"
+        if run_id in self.actual:
+            raise DirectActionJournalError("direct-action-invocation-active", "this direct Action invocation is already active in this session")
+        self._acquire_invocation_lock(requested_run_id, binding)
+        try:
+            self._refuse_restoration_pending(run_id)
+            started_id = f"{run_id}:started"
+            reopened = _reopen_event(self.root, started_id)
+            if reopened is None:
+                raise DirectActionJournalError("direct-action-recording-unavailable", "the original canonical started restoration Run is unavailable")
+            event, receipt = reopened
+            self._validate_started(event, requested_run_id, normalized_intent, binding, run_id)
+            if self._existing_terminal(identity, requested_run_id, normalized_intent, binding, run_id) is not None:
+                raise DirectActionJournalError("direct-action-already-terminal", "this direct Action already has canonical terminal evidence")
+            self.actual[run_id] = {
+                "requested_run_id": requested_run_id,
+                "intent": normalized_intent,
+                "binding": binding,
+                "event_id": started_id,
+                "event_receipt": dict(receipt),
+            }
+            self.receipts.append(dict(receipt))
+            return {"run_id": run_id, "disposition": "recording_only", "event_id": started_id,
+                    "event_receipt": dict(receipt)}
         except BaseException:
             self._release_invocation_lock()
             raise
@@ -476,7 +578,7 @@ class DirectActionSession:
         if (
             event.get("schema_version") != 5
             or event.get("kind") != "workflow_execution"
-            or event.get("action_id") != INITIALIZATION_ACTION_ID
+            or event.get("action_id") != self.action_id
             or event.get("event") not in {"started", "completed", "failed", "abandoned"}
             or event.get("author") != self.author
             or event.get("llm_session", {}).get("app") != DIRECT_ACTION_APP
@@ -484,15 +586,15 @@ class DirectActionSession:
             or event.get("initiative", {}).get("initiative_ref") != self.authorization["authorization_ref"]
             or event.get("initiative", {}).get("instruction_summary")
             != "Operator " + self.authorization["operator"]
-            + " authorized first Framework runtime initialization; intent SHA-256 "
+            + " authorized " + self.descriptor.instruction + "; intent SHA-256 "
             + event.get("llm_session", {}).get("uuid", "")
             or event.get("run", {}).get("kind") != "action"
             or not isinstance(event.get("run", {}).get("run_id"), str)
             or not event["run"]["run_id"].startswith("direct-action:")
             or not isinstance(binding, Mapping)
             or set(binding) != {"atom_id", "version", "path", "digest"}
-            or binding.get("atom_id") != ACTION_ATOM_ID
-            or binding.get("path") != ACTION_ATOM_RELATIVE.as_posix()
+            or binding.get("atom_id") != self.descriptor.atom_id
+            or binding.get("path") != self.descriptor.path.as_posix()
             or type(binding.get("version")) is not int
             or binding["version"] < 1
             or not isinstance(binding.get("digest"), str)
@@ -502,7 +604,7 @@ class DirectActionSession:
         ):
             raise DirectActionJournalError(
                 "direct-action-pending-invalid",
-                "pending event does not belong to a sealed CA-O-180 direct Action recording",
+                f"pending event does not belong to a sealed {self.descriptor.atom_id} direct Action recording",
             )
         try:
             receipt = work_journal.recover_pending_event(self.root, event_id)
@@ -514,7 +616,7 @@ class DirectActionSession:
     def _run_identity(self, requested_run_id: str, binding: Mapping[str, Any]) -> str:
         return work_journal.canonical_json_digest(
             {
-                "action_id": INITIALIZATION_ACTION_ID,
+                "action_id": self.action_id,
                 "requested_run_id": requested_run_id,
                 "binding": dict(binding),
                 "project_root": str(self.root),
@@ -537,7 +639,7 @@ class DirectActionSession:
         if self._invocation_locks:
             raise DirectActionJournalError("direct-action-invocation-active", "this session already holds a direct Action invocation lock")
         keys = (
-            self._first_initialization_lock_key(),
+            self._boundary_lock_key(),
             "direct-action-invocation:" + self._run_identity(requested_run_id, binding),
         )
         try:
@@ -549,7 +651,7 @@ class DirectActionSession:
             self._release_invocation_lock()
             raise DirectActionJournalError(
                 "direct-action-lock-unavailable",
-                "first-runtime initialization or this requested Action Run is already exclusively owned",
+                "direct Action boundary or this requested Action Run is already exclusively owned",
             ) from error
 
     def _release_invocation_lock(self) -> None:
@@ -565,6 +667,13 @@ class DirectActionSession:
                 "project_root": str(self.root),
                 "structural_scope": STRUCTURAL_SCOPE,
             }
+        )
+
+    def _boundary_lock_key(self) -> str:
+        if self.action_id == INITIALIZATION_ACTION_ID:
+            return self._first_initialization_lock_key()
+        return "direct-action-image-restoration:" + work_journal.canonical_json_digest(
+            {"action_id": self.action_id, "project_root": str(self.root), "structural_scope": STRUCTURAL_SCOPE}
         )
 
     def _event(
@@ -590,16 +699,16 @@ class DirectActionSession:
             "schema_version": 5,
             "kind": "workflow_execution",
             "event_id": event_id,
-            "action_id": INITIALIZATION_ACTION_ID,
+            "action_id": self.action_id,
             "event": event_name,
             "author": self.author,
             "occurred_at": moment.isoformat(timespec="seconds"),
             "llm_session": {"app": DIRECT_ACTION_APP, "uuid": self._intent_identity(intent, binding)},
             "structural_scope": STRUCTURAL_SCOPE,
             "initiative": {
-                "initiative_id": ACTION_ATOM_ID,
+                "initiative_id": self.descriptor.atom_id,
                 "instruction_summary": "Operator " + self.authorization["operator"]
-                + " authorized first Framework runtime initialization; intent SHA-256 "
+                + " authorized " + self.descriptor.instruction + "; intent SHA-256 "
                 + self._intent_identity(intent, binding),
                 "initiative_ref": self.authorization["authorization_ref"],
             },
@@ -713,6 +822,33 @@ class DirectActionSession:
             raise DirectActionJournalError("direct-action-pending-invalid", str(error)) from error
         return event
 
+    def _refuse_restoration_pending(self, run_id: str) -> None:
+        """Refuse every original-Run pending carrier without recovering or replacing it."""
+        try:
+            relative = work_journal.configured_runtime_root(self.root) / "state/work_journal/pending"
+            _safe_ref(relative.as_posix(), "pending Journal root")
+            directory = self.root
+            for part in relative.parts:
+                directory /= part
+                if directory.is_symlink() or (directory.exists() and not directory.is_dir()):
+                    raise DirectActionJournalError("direct-action-pending-invalid", "pending Journal root has an unsafe ancestor")
+            if not directory.exists():
+                return
+            for carrier in sorted(directory.iterdir()):
+                if not carrier.name.startswith(run_id + ":"):
+                    continue
+                if carrier.is_symlink() or not carrier.is_file() or carrier.suffix != ".json":
+                    raise DirectActionJournalError("direct-action-pending-invalid", "original Run pending carrier is unsafe")
+                event = self._pending_event(carrier.stem)
+                event_run = event.get("run") if event is not None else None
+                if not isinstance(event_run, Mapping) or event_run.get("run_id") != run_id:
+                    raise DirectActionJournalError("direct-action-pending-invalid", "original Run pending carrier does not retain its event identity")
+                raise DirectActionJournalError("direct-action-recording-pending", "original Run has pending Journal evidence; recover only its exact sealed event")
+        except (OSError, RuntimeError, work_journal.WorkJournalError) as error:
+            if isinstance(error, DirectActionJournalError):
+                raise
+            raise DirectActionJournalError("direct-action-pending-invalid", "cannot safely inspect original Run pending evidence") from error
+
     def _validate_started(
         self,
         event: Mapping[str, Any],
@@ -763,14 +899,14 @@ class DirectActionSession:
         if (
             event.get("schema_version") != 5
             or event.get("kind") != "workflow_execution"
-            or event.get("action_id") != INITIALIZATION_ACTION_ID
+            or event.get("action_id") != self.action_id
             or event.get("author") != self.author
             or event.get("llm_session") != {"app": DIRECT_ACTION_APP, "uuid": expected_intent_identity}
             or event.get("structural_scope") != STRUCTURAL_SCOPE
             or event.get("initiative") != {
-                "initiative_id": ACTION_ATOM_ID,
+                "initiative_id": self.descriptor.atom_id,
                 "instruction_summary": "Operator " + self.authorization["operator"]
-                + " authorized first Framework runtime initialization; intent SHA-256 "
+                + " authorized " + self.descriptor.instruction + "; intent SHA-256 "
                 + expected_intent_identity,
                 "initiative_ref": self.authorization["authorization_ref"],
             }
@@ -824,4 +960,9 @@ __all__ = [
     "DirectActionJournalError",
     "DirectActionSession",
     "INITIALIZATION_ACTION_ID",
+    "RESTORATION_ACTION_ID",
+    "RESTORATION_ATOM_ID",
+    "RESTORATION_ATOM_RELATIVE",
+    "RESTORATION_ATOM_SHA256",
+    "RESTORATION_ATOM_VERSION",
 ]

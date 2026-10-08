@@ -90,7 +90,7 @@ def fixture(*, role='Requirement', with_type=True, alias=False, contract=5):
                             reason='Heading absent locally.', support=[dict(authority='MOCK-R-002@1',
                             excerpt='Required Summary, Scope, Claim and Details headings.')]))
                     part['result'] = 'failed'
-        return merge_evaluations(parts, context=ctx)
+        return merge_evaluations(parts, context=ctx, allow_layout_gaps=contract == 6)
 
     evaluation, final_evaluation = report(original, context, True), report(final, final_context, False)
     title_end = body.index('\n') + 1
@@ -140,7 +140,8 @@ def rebind(data):
         for part in report['parts']:
             part.update(source=record['binding'], context_sha256=ctx.sha256)
             part['authority_sources'] = [packet['sources'][1]['binding']]
-        data[report_key] = merge_evaluations(report['parts'], context=ctx)
+        data[report_key] = merge_evaluations(report['parts'], context=ctx,
+                                             allow_layout_gaps=ctx.report_contract == 6)
     original_ctx, final_ctx = ReviewContext(data['context']), ReviewContext(data['final_context'])
     data['proposal'].update(source=data['evaluation']['source'], context_sha256=original_ctx.sha256)
     expected = dict(source=data['proposal']['source'], context_sha256=original_ctx.sha256,

@@ -9,6 +9,7 @@ actual Run context.
 from __future__ import annotations
 
 from collections.abc import Callable, Mapping
+import datetime as dt
 import hashlib
 import json
 import os
@@ -17,6 +18,7 @@ import re
 import tempfile
 import tomllib
 from typing import Any
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 MANIFEST_DEFAULT = "_projection/selected_workflow_bindings.json"
@@ -284,11 +286,50 @@ class SelectedExecution:
                 "change_atom_status": lifecycle_intents.change_status_atom_action,
             }
 
+            def admitted_update_assessment(context: Mapping[str, Any]) -> dict[str, Any] | None:
+                """Return the one completed O145 seal for this frozen Update input."""
+                prior_results = context.get("lifecycle_prior_results")
+                if not isinstance(prior_results, list):
+                    return None
+                expected_digest = lifecycle_intents.update_assessment_seal(context["parameters"])["request_digest"]
+                matches: list[dict[str, Any]] = []
+                for prior in prior_results:
+                    if not isinstance(prior, Mapping):
+                        continue
+                    native = prior.get("native_result")
+                    receipt = prior.get("completed_receipt")
+                    if (prior.get("step_definition_id") != "CA-O-145"
+                            or prior.get("action_definition_id") != "CA-O-067"
+                            or prior.get("result") != "identity-preserving"
+                            or not isinstance(native, Mapping)
+                            or not isinstance(receipt, Mapping)
+                            or receipt.get("disposition") != "terminal"
+                            or receipt.get("outcome") != "completed"):
+                        continue
+                    assessment = native.get("assessment")
+                    if isinstance(assessment, Mapping) and assessment.get("request_digest") == expected_digest:
+                        matches.append(dict(assessment))
+                return matches[0] if len(matches) == 1 else None
+
             def atom_lifecycle(context: dict[str, Any]) -> dict[str, Any]:
                 action = lifecycle.get(context["route"])
                 if action is None:
                     return {"result": "blocked", "effect_refs": []}
-                result = action(self.root, context["parameters"], execute=True, authorized=True)
+                call: dict[str, Any] = {"execute": True, "authorized": True}
+                if context["route"] == "update_atom":
+                    assessment = admitted_update_assessment(context)
+                    if assessment is None:
+                        return {"result": "reassessment-required", "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                    call["assessment"] = assessment
+                if context["route"] == "create_atom" and "creation_requested_run_id" in context:
+                    return creation_atom(context, action, call)
+                if context["route"] == "replace_atom":
+                    return replacement_atom(context, action, call)
+                if context["route"] == "update_atom" and "lifecycle_requested_run_id" in context:
+                    return lifecycle_change_atom(context, action, call)
+                if context["route"] == "change_atom_status" and context.get("lifecycle_current_state") is True:
+                    return lifecycle_status_change_atom(context, action, call)
+                result = action(self.root, context["parameters"], **call)
                 native_outcome = result.get("outcome")
                 result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome)
                 terminal_outcome = {
@@ -309,6 +350,609 @@ class SelectedExecution:
                 return {"result": result_label, "terminal_outcome": terminal_outcome,
                         "effect_refs": effect_refs, "native_result": result}
 
+            def creation_atom(
+                context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
+            ) -> dict[str, Any]:
+                """Execute O032 once below O128 and preserve its canonical ADD fact.
+
+                The Action result is the sole source for the result Carrier.
+                Any missing or pending Journal append remains a retained partial
+                observation and never creates a second O032 execution.
+                """
+                session = context.get("session")
+                requested_child = context.get("creation_requested_run_id")
+                binding = context.get("creation_action_binding")
+                writer = context.get("creation_result_writer")
+                if (
+                    session is None or not isinstance(requested_child, str) or not requested_child
+                    or not isinstance(binding, Mapping) or not callable(writer)
+                ):
+                    return {"result": "creation-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                try:
+                    author, local_date, timezone, occurred_at = self._creation_journal_context(session)
+                    structural_scope = self._creation_structural_scope(binding)
+                except SelectedExecutionError:
+                    return {"result": "creation-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+
+                # This child is the source-bound mutation owner.  Its retained
+                # identity is the only valid recovery surface after an effect.
+                if requested_child in getattr(session, "actual", {}):
+                    return {"result": "creation-recovery-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                child_actual = session.start_run(requested_child)
+                child_run_id = child_actual["run_id"]
+                result = action(self.root, context["parameters"], **dict(call))
+                if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
+                    raise SelectedExecutionError("creation Action returned an invalid result")
+                result = dict(result)
+                native_outcome = result["outcome"]
+                changed_effects = [
+                    effect for effect in result.get("effects", [])
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(result.get("effects"), list) else []
+                effect_refs = paths(changed_effects)
+                canonical_event: Mapping[str, Any] | None = None
+                recording: Mapping[str, Any] | None = None
+                recording_error: str | None = None
+                if native_outcome == "applied":
+                    try:
+                        canonical_event = self._creation_canonical_event(
+                            parameters=context.get("parameters"), native_result=result,
+                            creation_binding=binding, creation_action_run_id=child_run_id,
+                            execution_request_id=context.get("execution_request_id"), author=author,
+                            occurred_at=occurred_at, structural_scope=structural_scope,
+                        )
+                    except SelectedExecutionError as error:
+                        recording_error = str(error)
+                try:
+                    payload: dict[str, Any] = {
+                        "creation_action_run_id": child_run_id,
+                        "native_result": result,
+                    }
+                    if canonical_event is not None:
+                        payload["canonical_event"] = dict(canonical_event)
+                    if recording_error is not None:
+                        payload["recording_error"] = recording_error
+                    result_ref = writer(payload)
+                    if not isinstance(result_ref, str) or not result_ref:
+                        raise SelectedExecutionError("creation result writer returned an invalid reference")
+                except Exception:
+                    # No durable actual result exists to support a truthful
+                    # recovery; defer to the shared session interruption path.
+                    raise
+
+                if canonical_event is not None:
+                    try:
+                        import selected_creation_journal
+                        selected_creation_journal.preflight_creation(canonical_event)
+                        append_context = selected_creation_journal.seal_creation_append_context(
+                            self.root, canonical_event, author=author,
+                            local_date=local_date, timezone=timezone,
+                        )
+                        recording = selected_creation_journal.record_selected_creation(
+                            self.root, canonical_event=canonical_event,
+                            append_context=append_context,
+                        )
+                    except Exception as error:
+                        # The carrier was already created.  Record only that
+                        # bounded fact; do not re-dispatch the Create Action.
+                        recording_error = type(error).__name__
+
+                child_outcome = {
+                    "applied": "completed", "no-op": "no_op", "duplicate": "no_op",
+                    "failed": "failed", "partial": "partial", "canceled": "cancelled",
+                    "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
+                }.get(native_outcome, "interrupted_pending")
+                if native_outcome == "applied" and (
+                    recording_error is not None
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    child_outcome = "partial"
+                if effect_refs:
+                    session.note_effects(child_run_id, result_ref=result_ref, effect_refs=effect_refs)
+                child_receipt = self._finish_selected_run(
+                    session, requested_child, child_run_id, outcome=child_outcome,
+                    result_ref=result_ref, effect_refs=effect_refs,
+                )
+                child_recorded = (
+                    isinstance(child_receipt, Mapping)
+                    and child_receipt.get("run_id") == child_run_id
+                    and child_receipt.get("disposition") == "terminal"
+                    and child_receipt.get("outcome") == "completed"
+                    and child_receipt.get("result_ref") == result_ref
+                    and child_receipt.get("effect_refs") == effect_refs
+                )
+                if native_outcome == "applied" and (
+                    not child_recorded
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    return {
+                        "result": "recording-pending", "terminal_outcome": "partial",
+                        "effect_refs": effect_refs, "native_result": result,
+                        "creation_recording": recording,
+                        "creation_child_receipt": child_receipt,
+                    }
+                return {
+                    "result": {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome),
+                    "terminal_outcome": child_outcome,
+                    "effect_refs": effect_refs,
+                    "native_result": result,
+                    "creation_recording": recording,
+                    "creation_child_receipt": child_receipt,
+                }
+
+            def replacement_atom(
+                context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
+            ) -> dict[str, Any]:
+                """Execute O051 once as O128's predeclared source-bound child.
+
+                The predecessor Journal result and the current shared Journal
+                context are verified before the lifecycle Tool is allowed to
+                create a successor or archive the predecessor.  After a real
+                effect, all recording failures retain that fact as partial and
+                never expose a completed edge that could replay it.
+                """
+                session = context.get("session")
+                requested_child = context.get("replacement_requested_run_id")
+                binding = context.get("replacement_action_binding")
+                writer = context.get("replacement_result_writer")
+                if (
+                    session is None or not isinstance(requested_child, str) or not requested_child
+                    or not isinstance(binding, Mapping) or not callable(writer)
+                ):
+                    return {"result": "replacement-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                try:
+                    prior_event_id = self._replacement_prior_result_event(context.get("parameters"))
+                    author, local_date, timezone, occurred_at = self._replacement_journal_context(session)
+                    structural_scope = self._replacement_structural_scope(binding)
+                except SelectedExecutionError:
+                    return {"result": "predecessor-journal-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+
+                # A recovered or retained child is evidence of an earlier
+                # invocation.  This executor cannot manufacture a second O051
+                # effect for that requested identity.
+                if requested_child in getattr(session, "actual", {}):
+                    return {"result": "replacement-recovery-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                try:
+                    child_actual = session.start_run(requested_child)
+                    child_run_id = child_actual["run_id"]
+                    result = action(self.root, context["parameters"], **dict(call))
+                except Exception:
+                    # The shared session's normal interruption handling owns
+                    # unexpected Tool failures.  No parent success or edge is
+                    # fabricated here.
+                    raise
+                if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
+                    raise SelectedExecutionError("replacement Action returned an invalid result")
+                result = dict(result)
+                native_outcome = result["outcome"]
+                changed_effects = [
+                    effect for effect in result.get("effects", [])
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(result.get("effects"), list) else []
+                effect_refs = paths(changed_effects)
+                canonical_event: Mapping[str, Any] | None = None
+                recording: Mapping[str, Any] | None = None
+                recording_error: str | None = None
+                if native_outcome == "applied":
+                    try:
+                        canonical_event = self._replacement_canonical_event(
+                            parameters=context.get("parameters"), native_result=result,
+                            prior_event_id=prior_event_id, replacement_binding=binding,
+                            replacement_action_run_id=child_run_id,
+                            execution_request_id=context.get("execution_request_id"),
+                            author=author, occurred_at=occurred_at,
+                            structural_scope=structural_scope,
+                        )
+                    except SelectedExecutionError as error:
+                        recording_error = str(error)
+                try:
+                    payload: dict[str, Any] = {
+                        "replacement_action_run_id": child_run_id,
+                        "native_result": result,
+                    }
+                    if canonical_event is not None:
+                        payload["canonical_event"] = dict(canonical_event)
+                    if recording_error is not None:
+                        payload["recording_error"] = recording_error
+                    result_ref = writer(payload)
+                    if not isinstance(result_ref, str) or not result_ref:
+                        raise SelectedExecutionError("replacement result writer returned an invalid reference")
+                except Exception:
+                    # There is no durable child result carrier from which to
+                    # retain an honest partial observation; let the shared
+                    # session interrupt the open Runs rather than invent one.
+                    raise
+
+                if canonical_event is not None:
+                    try:
+                        import selected_replacement_journal
+                        import work_journal
+                        append_context = work_journal.seal_append_context(
+                            self.root, canonical_event, author=author,
+                            local_date=local_date, timezone=timezone,
+                        )
+                        selected_replacement_journal.preflight(
+                            self.root, canonical_event, append_context,
+                        )
+                        recording = selected_replacement_journal.record_selected_replacement(
+                            self.root, canonical_event=canonical_event,
+                            append_context=append_context,
+                        )
+                    except Exception as error:
+                        # The effect is already real.  The saved child carrier
+                        # plus its Session effect observation makes this a
+                        # partial recording state, not a success or replay.
+                        recording_error = type(error).__name__
+
+                child_outcome = {
+                    "applied": "completed", "no-op": "no_op", "duplicate": "no_op",
+                    "failed": "failed", "partial": "partial", "canceled": "cancelled",
+                    "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
+                }.get(native_outcome, "interrupted_pending")
+                if native_outcome == "applied" and (
+                    recording_error is not None
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    child_outcome = "partial"
+                if effect_refs:
+                    session.note_effects(child_run_id, result_ref=result_ref, effect_refs=effect_refs)
+                child_receipt = session.finish_run(
+                    child_run_id, outcome=child_outcome, result_ref=result_ref, effect_refs=effect_refs,
+                )
+                child_recorded = (
+                    isinstance(child_receipt, Mapping)
+                    and child_receipt.get("disposition") == "terminal"
+                    and child_receipt.get("outcome") == "completed"
+                )
+                if native_outcome == "applied" and (
+                    not child_recorded
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    return {
+                        "result": "recording-pending", "terminal_outcome": "partial",
+                        "effect_refs": effect_refs, "native_result": result,
+                        "replacement_recording": recording,
+                        "replacement_child_receipt": child_receipt,
+                    }
+                result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome)
+                return {
+                    "result": result_label, "terminal_outcome": child_outcome,
+                    "effect_refs": effect_refs, "native_result": result,
+                    "replacement_recording": recording,
+                    "replacement_child_receipt": child_receipt,
+                }
+
+            def lifecycle_change_atom(
+                context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
+            ) -> dict[str, Any]:
+                """Record W02/W04's observed current-state transition around its native child.
+
+                The source-bound O030/O029 child is deliberately not started until
+                either an exact canonical prior has been reused or the current
+                carrier-only baseline is durably admitted.  A retained pending
+                baseline therefore blocks the native write rather than creating
+                an unlinked current state.
+                """
+                session = context.get("session")
+                requested_child = context.get("lifecycle_requested_run_id")
+                binding = context.get("lifecycle_action_binding")
+                writer = context.get("lifecycle_result_writer")
+                if (
+                    session is None or not isinstance(requested_child, str) or not requested_child
+                    or not isinstance(binding, Mapping) or not callable(writer)
+                ):
+                    return {"result": "lifecycle-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                if requested_child in getattr(session, "actual", {}):
+                    # A retained child Run may only be reconciled through its
+                    # saved Journal evidence; never re-observe parameters or
+                    # invoke the native mutation on its recovery path.
+                    return {"result": "lifecycle-recovery-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+
+                # An idempotent native observation has no actual lifecycle
+                # effect, so it creates neither a carrier baseline nor a change.
+                preview_call = {**dict(call), "execute": False, "authorized": True}
+                preview = action(self.root, context["parameters"], **preview_call)
+                if not isinstance(preview, Mapping) or not isinstance(preview.get("outcome"), str):
+                    raise SelectedExecutionError("lifecycle Action preview returned an invalid result")
+                preview = dict(preview)
+                preview_outcome = preview["outcome"]
+                if preview_outcome in {"no-op", "duplicate"}:
+                    return {"result": "no-op", "terminal_outcome": "no_op", "effect_refs": [],
+                            "native_result": preview}
+                if preview_outcome != "preview":
+                    result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(preview_outcome, preview_outcome)
+                    terminal_outcome = {
+                        "applied": "completed", "no-op": "no_op", "duplicate": "no_op",
+                        "failed": "failed", "partial": "partial", "canceled": "cancelled",
+                        "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
+                    }.get(preview_outcome, "interrupted_pending")
+                    return {"result": result_label, "terminal_outcome": terminal_outcome,
+                            "effect_refs": [], "native_result": preview}
+
+                try:
+                    author, local_date, timezone, occurred_at = self._replacement_journal_context(session)
+                    observer_binding = context.get("action_binding")
+                    observer_run_id = context.get("action_run_id")
+                    if not isinstance(observer_binding, Mapping) or not isinstance(observer_run_id, str) or not observer_run_id:
+                        raise SelectedExecutionError("lifecycle baseline has no actual observing Action Run")
+                    observer_scope = self._bound_action_structural_scope(observer_binding)
+                    structural_scope = self._lifecycle_structural_scope(binding)
+                    before_facts, before_bytes = self._lifecycle_result_facts(preview.get("observed"))
+                    execution_request_id = context.get("execution_request_id")
+                    if not isinstance(execution_request_id, str) or not execution_request_id:
+                        raise SelectedExecutionError("lifecycle request identity is invalid")
+                    import selected_lifecycle_journal
+                    import work_journal
+                    observer_pin = {
+                        "action_id": observer_binding["atom_id"],
+                        "structural_scope": observer_scope,
+                        "occurred_at": occurred_at,
+                        "llm_session": {"app": "run-support", "uuid": execution_request_id},
+                    }
+                    action_pin = {
+                        "action_id": binding["atom_id"],
+                        "structural_scope": structural_scope,
+                        "occurred_at": occurred_at,
+                        "llm_session": {"app": "run-support", "uuid": execution_request_id},
+                    }
+                    # seal_append_context authenticates a fixed Journal partition;
+                    # it does not persist or derive data from this valid seed.
+                    # selected_lifecycle_journal alone creates the baseline/change.
+                    context_seed = self._lifecycle_context_seed(
+                        action_pin=observer_pin, run_id=observer_run_id, before_facts=before_facts,
+                        author=author,
+                    )
+                    append_context = work_journal.seal_append_context(
+                        self.root, context_seed, author=author,
+                        local_date=local_date, timezone=timezone,
+                    )
+                    prepared = selected_lifecycle_journal.prepare_lifecycle_journal(
+                        self.root, before_facts, before_bytes, observer_pin, observer_run_id, append_context,
+                    )
+                    admitted = selected_lifecycle_journal.admit_lifecycle_prior(
+                        self.root, prepared, append_context,
+                    )
+                except Exception:
+                    return {"result": "lifecycle-prior-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                if admitted.get("state") != "admitted":
+                    return {"result": "lifecycle-prior-pending",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": [],
+                            "lifecycle_prior": dict(admitted)}
+
+                # A prior that is waiting for journal recording has no child
+                # actual Run.  Once the child starts, it owns the one possible
+                # mutation and must retain every observed post-effect outcome.
+                child_actual = session.start_run(requested_child)
+                child_run_id = child_actual["run_id"]
+                result = action(self.root, context["parameters"], **dict(call))
+                if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
+                    raise SelectedExecutionError("lifecycle Action returned an invalid result")
+                result = dict(result)
+                native_outcome = result["outcome"]
+                changed_effects = [
+                    effect for effect in result.get("effects", [])
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(result.get("effects"), list) else []
+                effect_refs = paths(changed_effects)
+                history = result.get("history")
+                prior_revision = history.get("prior_revision") if isinstance(history, Mapping) else None
+                if isinstance(prior_revision, Mapping):
+                    try:
+                        verified_history, _history_bytes = self._lifecycle_result_facts(prior_revision)
+                    except SelectedExecutionError:
+                        pass
+                    else:
+                        effect_refs = sorted({*effect_refs, verified_history["path"]})
+                recording: Mapping[str, Any] | None = None
+                recording_error: str | None = None
+                observed_facts: dict[str, Any] | None = None
+                if native_outcome in {"applied", "pending"}:
+                    try:
+                        observed_facts, observed_bytes = self._lifecycle_result_facts(result.get("observed"))
+                        if observed_facts["path"] not in effect_refs:
+                            effect_refs = sorted([*effect_refs, observed_facts["path"]])
+                        recording = selected_lifecycle_journal.record_lifecycle_change(
+                            self.root,
+                            prior=admitted["event"],
+                            after_facts=observed_facts,
+                            current_bytes=observed_bytes,
+                            action_pin=action_pin,
+                            run_id=child_run_id,
+                            context=append_context,
+                            action_type=self._lifecycle_action_type(before_facts, observed_facts),
+                            native_effects={"result": {"state": "present", **observed_facts}},
+                        )
+                    except Exception as error:
+                        recording_error = type(error).__name__
+
+                payload: dict[str, Any] = {
+                    "lifecycle_action_run_id": child_run_id,
+                    "lifecycle_action_binding": dict(binding),
+                    "lifecycle_prior": dict(admitted),
+                    "native_result": result,
+                }
+                if recording is not None:
+                    payload["lifecycle_recording"] = dict(recording)
+                if recording_error is not None:
+                    payload["recording_error"] = recording_error
+                result_ref = writer(payload)
+                if not isinstance(result_ref, str) or not result_ref:
+                    raise SelectedExecutionError("lifecycle result writer returned an invalid reference")
+
+                child_outcome = {
+                    "applied": "completed", "no-op": "no_op", "duplicate": "no_op",
+                    "failed": "failed", "partial": "partial", "canceled": "cancelled",
+                    "pending": "partial", "recording-blocked": "interrupted_pending",
+                    "blocked": "interrupted_pending",
+                }.get(native_outcome, "interrupted_pending")
+                change_admitted = isinstance(recording, Mapping) and recording.get("state") == "admitted"
+                if native_outcome == "applied" and (recording_error is not None or not change_admitted):
+                    child_outcome = "partial"
+                if effect_refs:
+                    session.note_effects(child_run_id, result_ref=result_ref, effect_refs=effect_refs)
+                child_receipt = self._finish_selected_run(
+                    session, requested_child, child_run_id, outcome=child_outcome,
+                    result_ref=result_ref, effect_refs=effect_refs,
+                )
+                child_completed = (
+                    isinstance(child_receipt, Mapping)
+                    and child_receipt.get("run_id") == child_run_id
+                    and child_receipt.get("disposition") == "terminal"
+                    and child_receipt.get("outcome") == "completed"
+                    and child_receipt.get("result_ref") == result_ref
+                    and child_receipt.get("effect_refs") == effect_refs
+                )
+                if native_outcome in {"applied", "pending"} and (
+                    native_outcome != "applied" or not change_admitted or not child_completed
+                ):
+                    return {
+                        "result": "recording-pending", "terminal_outcome": "partial",
+                        "effect_refs": effect_refs, "native_result": result,
+                        "lifecycle_recording": recording,
+                        "lifecycle_child_receipt": child_receipt,
+                    }
+                result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome)
+                return {
+                    "result": result_label, "terminal_outcome": child_outcome,
+                    "effect_refs": effect_refs, "native_result": result,
+                    "lifecycle_recording": recording,
+                    "lifecycle_child_receipt": child_receipt,
+                }
+
+            def lifecycle_status_change_atom(
+                context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
+            ) -> dict[str, Any]:
+                """Retain W04's current state on the actual O128 status Action Run.
+
+                CA-O-029 is an Archive shortcut, not a general status-change
+                owner.  The admitted O128 Action therefore owns both ordinary
+                status effects and their current-state Journal linkage.
+                """
+                if context.get("restored_action") is True:
+                    return {"result": "lifecycle-recovery-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                session = context.get("session")
+                binding = context.get("action_binding")
+                action_run_id = context.get("action_run_id")
+                if session is None or not isinstance(binding, Mapping) or not isinstance(action_run_id, str) or not action_run_id:
+                    return {"result": "lifecycle-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                preview_call = {**dict(call), "execute": False, "authorized": True}
+                preview = action(self.root, context["parameters"], **preview_call)
+                if not isinstance(preview, Mapping) or not isinstance(preview.get("outcome"), str):
+                    raise SelectedExecutionError("status Action preview returned an invalid result")
+                preview = dict(preview)
+                if preview["outcome"] in {"no-op", "duplicate"}:
+                    return {"result": "no-op", "terminal_outcome": "no_op", "effect_refs": [],
+                            "native_result": preview}
+                if preview["outcome"] != "preview":
+                    return {"result": str(preview["outcome"]), "terminal_outcome": "interrupted_pending",
+                            "effect_refs": [], "native_result": preview}
+                try:
+                    author, local_date, timezone, occurred_at = self._replacement_journal_context(session)
+                    structural_scope = self._bound_action_structural_scope(binding)
+                    before_facts, before_bytes = self._lifecycle_result_facts(preview.get("observed"))
+                    execution_request_id = context.get("execution_request_id")
+                    if not isinstance(execution_request_id, str) or not execution_request_id:
+                        raise SelectedExecutionError("status request identity is invalid")
+                    import selected_lifecycle_journal
+                    import work_journal
+                    action_pin = {
+                        "action_id": binding["atom_id"],
+                        "structural_scope": structural_scope,
+                        "occurred_at": occurred_at,
+                        "llm_session": {"app": "run-support", "uuid": execution_request_id},
+                    }
+                    context_seed = self._lifecycle_context_seed(
+                        action_pin=action_pin, run_id=action_run_id, before_facts=before_facts, author=author,
+                    )
+                    append_context = work_journal.seal_append_context(
+                        self.root, context_seed, author=author, local_date=local_date, timezone=timezone,
+                    )
+                    prepared = selected_lifecycle_journal.prepare_lifecycle_journal(
+                        self.root, before_facts, before_bytes, action_pin, action_run_id, append_context,
+                    )
+                    admitted = selected_lifecycle_journal.admit_lifecycle_prior(
+                        self.root, prepared, append_context,
+                    )
+                except Exception:
+                    return {"result": "lifecycle-prior-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                if admitted.get("state") != "admitted":
+                    return {"result": "lifecycle-prior-pending",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": [],
+                            "lifecycle_prior": dict(admitted)}
+                result = action(self.root, context["parameters"], **dict(call))
+                if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
+                    raise SelectedExecutionError("status Action returned an invalid result")
+                result = dict(result)
+                native_outcome = result["outcome"]
+                changed_effects = [
+                    effect for effect in result.get("effects", [])
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(result.get("effects"), list) else []
+                effect_refs = paths(changed_effects)
+                history = result.get("history")
+                prior_revision = history.get("prior_revision") if isinstance(history, Mapping) else None
+                if isinstance(prior_revision, Mapping):
+                    try:
+                        verified_history, _history_bytes = self._lifecycle_result_facts(prior_revision)
+                    except SelectedExecutionError:
+                        pass
+                    else:
+                        effect_refs = sorted({*effect_refs, verified_history["path"]})
+                recording: Mapping[str, Any] | None = None
+                recording_error: str | None = None
+                if native_outcome in {"applied", "pending"}:
+                    try:
+                        observed_facts, observed_bytes = self._lifecycle_result_facts(result.get("observed"))
+                        if observed_facts["path"] not in effect_refs:
+                            effect_refs = sorted([*effect_refs, observed_facts["path"]])
+                        recording = selected_lifecycle_journal.record_lifecycle_change(
+                            self.root,
+                            prior=admitted["event"],
+                            after_facts=observed_facts,
+                            current_bytes=observed_bytes,
+                            action_pin=action_pin,
+                            run_id=action_run_id,
+                            context=append_context,
+                            action_type=self._lifecycle_action_type(before_facts, observed_facts),
+                            native_effects={"result": {"state": "present", **observed_facts}},
+                        )
+                    except Exception as error:
+                        recording_error = type(error).__name__
+                change_admitted = isinstance(recording, Mapping) and recording.get("state") == "admitted"
+                if native_outcome in {"applied", "pending"} and (
+                    native_outcome != "applied" or recording_error is not None or not change_admitted
+                ):
+                    return {
+                        "result": "recording-pending", "terminal_outcome": "partial",
+                        "effect_refs": effect_refs, "native_result": result,
+                        "lifecycle_prior": dict(admitted), "lifecycle_recording": recording,
+                    }
+                result_label = {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome)
+                return {
+                    "result": result_label,
+                    "terminal_outcome": {"applied": "completed", "no-op": "no_op", "duplicate": "no_op"}.get(
+                        native_outcome, "interrupted_pending",
+                    ),
+                    "effect_refs": effect_refs, "native_result": result,
+                    "lifecycle_prior": dict(admitted), "lifecycle_recording": recording,
+                }
+
             def assess_update_identity(context: dict[str, Any]) -> dict[str, Any]:
                 """CA-O-067 is a read-only assessment; O145 owns its edge."""
                 result = lifecycle_intents.update_atom_action(
@@ -319,6 +963,11 @@ class SelectedExecution:
                     return {"result": "replacement-required", "terminal_outcome": "interrupted_pending",
                             "effect_refs": [], "native_result": result}
                 if native_outcome in {"preview", "no-op"}:
+                    evidence = result.get("assessment_evidence")
+                    if not isinstance(evidence, Mapping):
+                        return {"result": "unresolved", "terminal_outcome": "interrupted_pending",
+                                "effect_refs": [], "native_result": result}
+                    result["assessment"] = lifecycle_intents.update_assessment_seal(context["parameters"], evidence)
                     return {"result": "identity-preserving", "effect_refs": [], "native_result": result}
                 return {"result": str(native_outcome or "blocked"), "terminal_outcome": "interrupted_pending",
                         "effect_refs": [], "native_result": result}
@@ -374,14 +1023,15 @@ class SelectedExecution:
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("graph projection Action returned an invalid queue envelope")
                     label = result["result"]
-                    output = dict(result)
+                    native_result = result.get("graph_result", result)
+                    output = {**result, "native_result": native_result}
                     if label == "built":
                         output["terminal_outcome"] = "completed"
                     elif label == "no_op":
                         output["terminal_outcome"] = "no_op"
                     elif label == "failed":
                         output["terminal_outcome"] = "failed"
-                    elif label in {"blocked", "pending_recording"}:
+                    elif label in {"blocked", "pending_recording", "stale", "incomplete", "conflicting"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     return output
                 available[action_id] = graph_projection
@@ -396,22 +1046,19 @@ class SelectedExecution:
         available["CA-O-131"] = revert_not_configured
         try:
             import implementation_actions
-            implementation_results = {
-                "evaluation_ready": "evaluation ready", "prepared": "tests prepared",
-                "implemented": "implementation delivered", "passed": "checks pass",
-                "failed": "checks fail", "retry_permitted": "retry admitted",
-                "repaired": "repair completed", "implementation_defect": "repair admission",
-                "test_implementation_defect": "repair admission",
-            }
             for action_id, handler in implementation_actions.ACTION_HANDLERS.items():
                 def implementation(context: dict[str, Any], handler: Any = handler) -> dict[str, Any]:
                     result = handler(
                         context["parameters"], agent=self.implementation_agent,
                         selected_project_root=self.root,
+                        trusted_execution_authorization=context.get("trusted_execution_authorization"),
                     )
                     if not isinstance(result, Mapping) or not isinstance(result.get("result"), str):
                         raise SelectedExecutionError("implementation Action returned an invalid queue envelope")
-                    label = implementation_results.get(result["result"], result["result"])
+                    # Result labels are the source Workflow's edge conditions.
+                    # A stale projection cannot translate them into a second,
+                    # competing result vocabulary.
+                    label = result["result"]
                     output: dict[str, Any] = {"result": label, "effect_refs": [], "native_result": result}
                     if label in {"blocked", "retry_blocked", "unresolved", "authority_change_required", "environment_blocker"}:
                         output["terminal_outcome"] = "interrupted_pending"
@@ -466,6 +1113,26 @@ class SelectedExecution:
                                         "output_paths": paths,
                                     },
                                 )
+                    elif (step_id == "CA-O-157" and context["action_definition_id"] == "CA-O-009"
+                          and outcome == "publication_recovery_required"
+                          and result.get("apply_status") == "EFFECT_APPLIED_STALE"):
+                        publication = result.get("publication")
+                        planned = publication.get("output_plan") if isinstance(publication, Mapping) else None
+                        effect_state = publication.get("effect_state") if isinstance(publication, Mapping) else None
+                        refs = self._publication_output_paths(planned)
+                        # The compiler reports this only after replacement.  Its
+                        # top-level plan must exactly be the observed
+                        # publication plan; otherwise an arbitrary result
+                        # carrier cannot claim already-applied effects.
+                        if (effect_state != "output_replacement_completed"
+                                or result.get("output_plan") != planned or refs is None):
+                            output["terminal_outcome"] = "interrupted_pending"
+                        else:
+                            # Preserve the compiler's raw recovery-required
+                            # result while terminalizing the known performed,
+                            # incomplete effect.  No graph successor is
+                            # inferred from this receipt.
+                            output.update(terminal_outcome="partial", effect_refs=refs)
                     elif outcome in {"blocked", "pending_recording"}:
                         output["terminal_outcome"] = "interrupted_pending"
                     elif step_id == "CA-O-152" and outcome == "assessed":
@@ -521,6 +1188,71 @@ class SelectedExecution:
         request = dict(parameters)
         request["project_root"] = executor_root.as_posix()
         return request
+
+    @staticmethod
+    def _publication_output_paths(plan: object) -> list[str] | None:
+        """Return the exact, safe output references in a compiler plan.
+
+        These are receipt references, not a fresh filesystem observation: the
+        compiler's stale-frontier outcome is specifically the evidence that
+        replacement happened before currentness was lost.
+        """
+        if not isinstance(plan, list):
+            return None
+        paths: list[str] = []
+        for item in plan:
+            if not isinstance(item, Mapping):
+                return None
+            output_path = item.get("output_path")
+            if (not isinstance(output_path, str) or not output_path
+                    or "\\x00" in output_path or "\\" in output_path):
+                return None
+            candidate = Path(output_path)
+            if candidate.is_absolute() or candidate == Path(".") or ".." in candidate.parts:
+                return None
+            if candidate.as_posix() != output_path:
+                return None
+            paths.append(output_path)
+        if len(paths) != len(set(paths)):
+            return None
+        return sorted(paths)
+
+    @staticmethod
+    def _graph_parameters_with_actual_recording(
+        parameters: object,
+        session: Any,
+        *,
+        workflow_run_id: str,
+        step_run_id: str,
+        action_run_id: str,
+    ) -> object:
+        """Replace caller recording claims with this Action's real start receipt.
+
+        Graph publication occurs after the shared session has recorded the
+        actual Action start and before it can append the terminal fact.  The
+        injected object is intentionally execution-local rather than part of
+        the sealed caller parameter JSON, so an arbitrary ``receipt_refs``
+        array cannot satisfy the graph Tool's recording gate.
+        """
+
+        if not isinstance(parameters, Mapping):
+            return parameters
+        receipts = getattr(session, "receipts", None)
+        if not isinstance(receipts, list) or not receipts or not isinstance(receipts[-1], Mapping):
+            return parameters
+        try:
+            import generate_entity_graph
+        except ImportError:
+            return parameters
+        try:
+            recording = generate_entity_graph.actual_run_recording_context(
+                workflow_run_id, step_run_id, action_run_id, receipts[-1]
+            )
+        except generate_entity_graph.EntityGraphError:
+            # Leave the caller shape intact.  The graph Tool then reports its
+            # stable recording-context blocker without an effect.
+            return parameters
+        return {**parameters, "run_recording_context": recording}
 
     def run_directory(self, run_id: str) -> Path:
         if not isinstance(run_id, str) or not RUN_ID.fullmatch(run_id):
@@ -645,10 +1377,12 @@ class SelectedExecution:
         return normalized
 
     def _d547_steps(self, route: Mapping[str, Any]) -> tuple[list[dict[str, Any]], str]:
-        """Translate the immutable D547 edge list without adding a route policy.
+        """Translate source-bound D547 edges without adding a route policy.
 
-        The manifest represents each source Step/Action pair once and represents
-        only actual ``On Result`` edges.  A missing edge is intentionally *not*
+        A current source Workflow graph table wins over its serialized manifest
+        projection.  That keeps labels and branches bound to the admitted
+        source bytes, while manifests without this table retain their existing
+        D547 representation.  A missing edge is intentionally *not*
         interpreted as a successor: a native adapter must return a truthful
         ``terminal_outcome`` for that source result.
         """
@@ -656,22 +1390,6 @@ class SelectedExecution:
         entry = route.get("entry_step")
         if not isinstance(ordered, list) or not ordered or not isinstance(entry, str):
             raise SelectedExecutionError("D547 selected Workflow must bind ordered Steps and entry_step")
-        transitions: dict[str, list[dict[str, Any]]] = {}
-        raw_edges = route.get("on_result")
-        if not isinstance(raw_edges, list):
-            raise SelectedExecutionError("D547 selected Workflow On Result bindings are invalid")
-        for raw in raw_edges:
-            if not isinstance(raw, Mapping) or set(raw) != {"from", "condition", "to"}:
-                raise SelectedExecutionError("D547 selected On Result binding is invalid")
-            source, condition, target = raw["from"], raw["condition"], raw["to"]
-            if not all(isinstance(value, str) and value for value in (source, condition, target)):
-                raise SelectedExecutionError("D547 selected On Result binding has an invalid endpoint")
-            transition = {"result": condition}
-            if target == "complete":
-                transition["terminal"] = "completed"
-            else:
-                transition["next"] = target
-            transitions.setdefault(source, []).append(transition)
         normalized: list[dict[str, Any]] = []
         seen_steps: set[str] = set()
         for raw in ordered:
@@ -683,8 +1401,38 @@ class SelectedExecution:
                 raise SelectedExecutionError("D547 selected Workflow has duplicate Step bindings")
             seen_steps.add(step["atom_id"])
             step["actions"] = [action]
-            step["on_result"] = transitions.get(step["atom_id"], [])
             normalized.append(step)
+        source_edges = self._source_bound_d547_edges(route, seen_steps)
+        raw_edges = source_edges if source_edges is not None else route.get("on_result")
+        if not isinstance(raw_edges, list):
+            raise SelectedExecutionError("D547 selected Workflow On Result bindings are invalid")
+        transitions: dict[str, list[dict[str, Any]]] = {}
+        pairs: set[tuple[str, str]] = set()
+        for raw in raw_edges:
+            if not isinstance(raw, Mapping) or set(raw) != {"from", "condition", "to"}:
+                raise SelectedExecutionError("D547 selected On Result binding is invalid")
+            source, condition, target = raw["from"], raw["condition"], raw["to"]
+            if not all(isinstance(value, str) and value for value in (source, condition, target)):
+                raise SelectedExecutionError("D547 selected On Result binding has an invalid endpoint")
+            if (source, condition) in pairs:
+                raise SelectedExecutionError("D547 selected Workflow has duplicate On Result conditions")
+            pairs.add((source, condition))
+            transition = {"result": condition}
+            if source_edges is not None:
+                terminal = {"completed": "completed", "blocked": "interrupted_pending"}.get(target)
+                if terminal is not None:
+                    transition["terminal"] = terminal
+                elif target in seen_steps:
+                    transition["next"] = target
+                else:
+                    raise SelectedExecutionError("D547 source Workflow has an undeclared terminal result")
+            elif target == "complete":
+                transition["terminal"] = "completed"
+            else:
+                transition["next"] = target
+            transitions.setdefault(source, []).append(transition)
+        for step in normalized:
+            step["on_result"] = transitions.get(step["atom_id"], [])
         if entry not in seen_steps:
             raise SelectedExecutionError("D547 selected Workflow entry_step is not bound")
         for source, values in transitions.items():
@@ -695,6 +1443,51 @@ class SelectedExecution:
                 if target is not None and target not in seen_steps:
                     raise SelectedExecutionError("D547 On Result target is not a bound Step")
         return normalized, entry
+
+    def _source_bound_d547_edges(
+        self, route: Mapping[str, Any], bound_steps: set[str],
+    ) -> list[dict[str, str]] | None:
+        """Read the admitted Workflow's canonical On Result table when present."""
+        binding = route.get("workflow")
+        if not isinstance(binding, Mapping):
+            raise SelectedExecutionError("D547 selected Workflow binding is invalid")
+        workflow = self._definition(binding, expected_kind="workflow")
+        # W09 has an admitted canonical table whose newer graph deliberately
+        # supersedes the stale serialized projection.  Other selected routes
+        # keep their own existing manifest interpretation.
+        if workflow["atom_id"] != "CA-O-016":
+            return None
+        source = self._safe_path(str(workflow["path"]))
+        raw = source.read_bytes()
+        if _sha256(raw) != workflow["sha256"]:
+            raise SelectedExecutionError("Workflow definition changed while reading source graph")
+        try:
+            lines = raw.decode("utf-8").splitlines()
+        except UnicodeDecodeError as error:
+            raise SelectedExecutionError("Workflow definition is not UTF-8") from error
+        header = "| From Step | Result condition | Next Step **or** terminal result |"
+        indexes = [index for index, line in enumerate(lines) if line.strip() == header]
+        if not indexes:
+            return None
+        separator = re.compile(r"\|\s*:?-{3,}:?\s*\|\s*:?-{3,}:?\s*\|\s*:?-{3,}:?\s*\|")
+        if (len(indexes) != 1 or indexes[0] + 1 >= len(lines)
+                or separator.fullmatch(lines[indexes[0] + 1].strip()) is None):
+            raise SelectedExecutionError("D547 source Workflow On Result table is invalid")
+        edges: list[dict[str, str]] = []
+        for line in lines[indexes[0] + 2:]:
+            stripped = line.strip()
+            if not stripped.startswith("|"):
+                break
+            cells = [value.strip() for value in stripped.strip("|").split("|")]
+            if len(cells) != 3 or not all(cells):
+                raise SelectedExecutionError("D547 source Workflow On Result row is invalid")
+            source_step, condition, target = cells
+            if source_step not in bound_steps:
+                raise SelectedExecutionError("D547 source Workflow On Result source is not a bound Step")
+            edges.append({"from": source_step, "condition": condition, "to": target})
+        if not edges:
+            raise SelectedExecutionError("D547 source Workflow On Result table has no edges")
+        return edges
 
     def _validate_graph(self, execution: Mapping[str, Any]) -> dict[str, Any]:
         if _contains_secret(execution):
@@ -834,6 +1627,78 @@ class SelectedExecution:
         return {"atom_id": binding["atom_id"], "version": binding["version"],
                 "path": binding["path"], "digest": binding["sha256"]}
 
+    @staticmethod
+    def _replacement_child_requested_id(requested_action_run_id: str) -> str:
+        """Name the one source-bound O051 invocation below one O128 visit."""
+        return f"{requested_action_run_id}:nested:CA-O-051"
+
+    @staticmethod
+    def _creation_child_requested_id(requested_action_run_id: str) -> str:
+        """Name the one source-bound O032 invocation below one O128 visit."""
+        return f"{requested_action_run_id}:nested:CA-O-032"
+
+    @staticmethod
+    def _lifecycle_child_requested_id(requested_action_run_id: str, action_id: str) -> str:
+        """Name W02's one source-bound O030 child below the outer O128 Run."""
+        if action_id != "CA-O-030":
+            raise SelectedExecutionError("lifecycle native Action is not admitted")
+        return f"{requested_action_run_id}:nested:{action_id}"
+
+    @staticmethod
+    def _replacement_native_binding(graph: Mapping[str, Any]) -> dict[str, Any]:
+        """Return the sole admitted O051 binding for a W03 graph.
+
+        O128's source names O051 as the effect owner.  The frozen D547 graph is
+        therefore the only authority for this child Action definition; callers
+        cannot supply another definition, version, or source path.
+        """
+        native_calls = graph.get("native_action_calls")
+        if not isinstance(native_calls, list):
+            raise SelectedExecutionError("replacement graph has no native Action bindings")
+        matches = [binding for binding in native_calls
+                   if isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-051"]
+        if len(matches) != 1:
+            raise SelectedExecutionError("replacement graph must bind exactly one CA-O-051 Action")
+        binding = matches[0]
+        required = {"atom_id", "kind", "version", "path", "sha256"}
+        if set(binding) != required or binding.get("kind") != "action":
+            raise SelectedExecutionError("replacement CA-O-051 Action binding is invalid")
+        return dict(binding)
+
+    @staticmethod
+    def _creation_native_binding(graph: Mapping[str, Any]) -> dict[str, Any]:
+        """Return the sole admitted O032 binding for a W01 graph."""
+        native_calls = graph.get("native_action_calls")
+        if not isinstance(native_calls, list):
+            raise SelectedExecutionError("creation graph has no native Action bindings")
+        matches = [binding for binding in native_calls
+                   if isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"]
+        if len(matches) != 1:
+            raise SelectedExecutionError("creation graph must bind exactly one CA-O-032 Action")
+        binding = matches[0]
+        required = {"atom_id", "kind", "version", "path", "sha256"}
+        if set(binding) != required or binding.get("kind") != "action":
+            raise SelectedExecutionError("creation CA-O-032 Action binding is invalid")
+        return dict(binding)
+
+    @staticmethod
+    def _lifecycle_native_binding(graph: Mapping[str, Any], action_id: str) -> dict[str, Any]:
+        """Return W02's one source-admitted O030 mutation Action binding."""
+        if action_id != "CA-O-030":
+            raise SelectedExecutionError("lifecycle native Action is not admitted")
+        native_calls = graph.get("native_action_calls")
+        if not isinstance(native_calls, list):
+            raise SelectedExecutionError("lifecycle graph has no native Action bindings")
+        matches = [binding for binding in native_calls
+                   if isinstance(binding, Mapping) and binding.get("atom_id") == action_id]
+        if len(matches) != 1:
+            raise SelectedExecutionError(f"lifecycle graph must bind exactly one {action_id} Action")
+        binding = matches[0]
+        required = {"atom_id", "kind", "version", "path", "sha256"}
+        if set(binding) != required or binding.get("kind") != "action":
+            raise SelectedExecutionError("lifecycle native Action binding is invalid")
+        return dict(binding)
+
     @classmethod
     def build_requested_runs(
         cls,
@@ -875,12 +1740,57 @@ class SelectedExecution:
                     "parent_requested_run_id": run_id,
                 })
                 for action_ordinal, action in enumerate(actions, start=1):
+                    requested_action_id = f"{requested_step_id}:action:{action_ordinal}"
                     expected.append({
-                        "requested_run_id": f"{requested_step_id}:action:{action_ordinal}",
+                        "requested_run_id": requested_action_id,
                         "kind": "action",
                         "definition": cls._support_definition(action),
                         "parent_requested_run_id": requested_step_id,
                     })
+                    if (graph.get("route") == "replace_atom"
+                            and action.get("atom_id") == "CA-O-128"):
+                        replacement = cls._replacement_native_binding(graph)
+                        expected.append({
+                            "requested_run_id": cls._replacement_child_requested_id(requested_action_id),
+                            "kind": "action",
+                            "definition": cls._support_definition(replacement),
+                            "parent_requested_run_id": requested_action_id,
+                        })
+                    if (
+                        graph.get("route") == "create_atom"
+                        and action.get("atom_id") == "CA-O-128"
+                        and isinstance(graph.get("native_action_calls"), list)
+                        and any(
+                            isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"
+                            for binding in graph["native_action_calls"]
+                        )
+                    ):
+                        creation = cls._creation_native_binding(graph)
+                        expected.append({
+                            "requested_run_id": cls._creation_child_requested_id(requested_action_id),
+                            "kind": "action",
+                            "definition": cls._support_definition(creation),
+                            "parent_requested_run_id": requested_action_id,
+                        })
+                    lifecycle_action = {"update_atom": "CA-O-030"}.get(graph.get("route"))
+                    if (
+                        action.get("atom_id") == "CA-O-128"
+                        and lifecycle_action is not None
+                        and isinstance(graph.get("native_action_calls"), list)
+                        and any(
+                            isinstance(binding, Mapping) and binding.get("atom_id") == lifecycle_action
+                            for binding in graph["native_action_calls"]
+                        )
+                    ):
+                        lifecycle_binding = cls._lifecycle_native_binding(graph, lifecycle_action)
+                        expected.append({
+                            "requested_run_id": cls._lifecycle_child_requested_id(
+                                requested_action_id, lifecycle_action,
+                            ),
+                            "kind": "action",
+                            "definition": cls._support_definition(lifecycle_binding),
+                            "parent_requested_run_id": requested_action_id,
+                        })
         return expected
 
     @staticmethod
@@ -1036,6 +1946,33 @@ class SelectedExecution:
             raise SelectedExecutionError(f"implementation packet retained_state is invalid for Step {step_id}")
         merged["retained_state"] = {**retained, **step_retained, "prior_results": list(prior_results)}
         merged["prior_results"] = list(prior_results)
+        retry = merged.get("retry")
+        if isinstance(retry, Mapping):
+            consumed = retry.get("consumed")
+            if isinstance(consumed, int) and not isinstance(consumed, bool) and consumed >= 0:
+                # CA-O-024 counts when a permitted repair-and-evaluation round
+                # starts, not when CA-O-096 is merely checked.  A completed
+                # source-bound CA-O-099 repair retains a started round; at
+                # CA-O-099 itself, its immediately preceding admitted O096
+                # decision begins the next round.  Re-deriving from the
+                # frozen base and exact prior results makes repeated gate
+                # checks idempotent.
+                completed_rounds = sum(
+                    1 for prior in prior_results
+                    if prior.get("step_definition_id") == "CA-O-099"
+                    and prior.get("action_definition_id") == "CA-O-021"
+                    and prior.get("result") == "repaired"
+                )
+                admitted_rounds = sum(
+                    1 for prior in prior_results
+                    if prior.get("step_definition_id") == "CA-O-096"
+                    and prior.get("action_definition_id") == "CA-O-024"
+                    and prior.get("result") == "retry_permitted"
+                )
+                rounds_started = completed_rounds
+                if step_id == "CA-O-099" and admitted_rounds > completed_rounds:
+                    rounds_started += 1
+                merged["retry"] = {**retry, "consumed": consumed + rounds_started}
         return merged
 
     @staticmethod
@@ -1058,6 +1995,353 @@ class SelectedExecution:
             return session.recover_run(run_id, **result)
         return session.finish_run(run_id, **result)
 
+    def _creation_journal_context(self, session: Any) -> tuple[str, str, str, str]:
+        """Bind W01 provenance to the active shared Journal partition."""
+        return self._replacement_journal_context(session)
+
+    def _creation_structural_scope(self, binding: Mapping[str, Any]) -> str:
+        """Read the scope from the exact admitted O032 Action carrier."""
+        path = binding.get("path")
+        digest = binding.get("sha256")
+        if not isinstance(path, str) or not isinstance(digest, str):
+            raise SelectedExecutionError("creation CA-O-032 Action binding is invalid")
+        source = self._safe_path(path)
+        if _sha256(source.read_bytes()) != digest:
+            raise SelectedExecutionError("creation CA-O-032 Action definition changed after admission")
+        scope = _frontmatter(source).get("current_scope_unit")
+        if not isinstance(scope, str) or not scope:
+            raise SelectedExecutionError("creation CA-O-032 Action has no current scope")
+        return scope
+
+    def _lifecycle_structural_scope(self, binding: Mapping[str, Any]) -> str:
+        """Read W02/W04 scope from the exact source-bound native Action carrier."""
+        action_id = binding.get("atom_id")
+        if action_id not in {"CA-O-029", "CA-O-030"}:
+            raise SelectedExecutionError("lifecycle native Action binding is invalid")
+        return self._bound_action_structural_scope(binding)
+
+    def _bound_action_structural_scope(self, binding: Mapping[str, Any]) -> str:
+        """Read a current Action scope only after rechecking its admitted bytes."""
+        action_id = binding.get("atom_id")
+        path = binding.get("path")
+        digest = binding.get("sha256")
+        if not isinstance(action_id, str) or not action_id or not isinstance(path, str) or not isinstance(digest, str):
+            raise SelectedExecutionError("bound Action binding is invalid")
+        source = self._safe_path(path)
+        if _sha256(source.read_bytes()) != digest:
+            raise SelectedExecutionError("bound Action definition changed after admission")
+        scope = _frontmatter(source).get("current_scope_unit")
+        if not isinstance(scope, str) or not scope:
+            raise SelectedExecutionError("bound Action has no current scope")
+        return scope
+
+    def _lifecycle_result_facts(self, observed: object) -> tuple[dict[str, Any], bytes]:
+        """Bind a native descriptor to current regular-file bytes exactly once."""
+        if not isinstance(observed, Mapping):
+            raise SelectedExecutionError("lifecycle Action did not return an observed carrier")
+        path = observed.get("path")
+        filename = observed.get("filename")
+        version = observed.get("version")
+        digest = observed.get("digest")
+        if (
+            not isinstance(path, str) or not path or Path(path).is_absolute() or ".." in Path(path).parts
+            or not isinstance(filename, str) or not filename or Path(filename).name != filename
+            or type(version) is not int or version < 1
+            or not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+        ):
+            raise SelectedExecutionError("lifecycle Action observed carrier is invalid")
+        candidate = self._safe_path(path)
+        if candidate.is_symlink() or not candidate.is_file():
+            raise SelectedExecutionError("lifecycle Action observed carrier is unsafe")
+        current = candidate.read_bytes()
+        if _sha256(current) != digest:
+            raise SelectedExecutionError("lifecycle Action observed carrier differs from current bytes")
+        return {
+            "filename": filename,
+            "version": version,
+            "path": path,
+            "sha256": digest,
+        }, current
+
+    @staticmethod
+    def _lifecycle_action_type(before: Mapping[str, Any], after: Mapping[str, Any]) -> str:
+        """Represent current-state differences without treating any change as ADD."""
+        if before.get("path") != after.get("path"):
+            return "MOVE+UPDATE"
+        return "UPDATE"
+
+    @staticmethod
+    def _lifecycle_context_seed(
+        *, action_pin: Mapping[str, Any], run_id: str, before_facts: Mapping[str, Any], author: str,
+    ) -> dict[str, Any]:
+        """Build only the validated partition-context input for lifecycle admission.
+
+        The value is never appended.  `seal_append_context` deliberately
+        retains only an immutable author/date/timezone partition; the helper
+        remains the single producer of the recovered baseline or change event.
+        """
+        try:
+            import work_journal
+        except ImportError as error:
+            raise SelectedExecutionError("canonical Work Journal support is unavailable") from error
+        return work_journal.with_event_digest({
+            "schema_version": 3,
+            "event_id": f"lifecycle-context:{run_id}",
+            "action_id": action_pin["action_id"],
+            "event": "recovered",
+            "kind": "governed_project_state",
+            "subject_kind": "file",
+            "author": author,
+            "occurred_at": action_pin["occurred_at"],
+            "llm_session": dict(action_pin["llm_session"]),
+            "structural_scope": action_pin["structural_scope"],
+            "result": {"state": "present", **dict(before_facts)},
+            "recovery_evidence": {
+                "carrier": {
+                    "path": before_facts["path"],
+                    "sha256": before_facts["sha256"],
+                    "observed_at": action_pin["occurred_at"],
+                    "observer_run_id": run_id,
+                }
+            },
+        })
+
+    def _creation_canonical_event(
+        self,
+        *,
+        parameters: object,
+        native_result: Mapping[str, Any],
+        creation_binding: Mapping[str, Any],
+        creation_action_run_id: str,
+        execution_request_id: object,
+        author: str,
+        occurred_at: str,
+        structural_scope: str,
+    ) -> dict[str, Any]:
+        """Build a schema-3 ADD event exclusively from W01's observation."""
+        if not isinstance(parameters, Mapping) or not isinstance(execution_request_id, str) or not execution_request_id:
+            raise SelectedExecutionError("creation request identity is invalid")
+        requested = parameters.get("carrier")
+        observed = native_result.get("observed")
+        native_requested = native_result.get("requested")
+        if (
+            not isinstance(requested, Mapping) or not isinstance(native_requested, Mapping)
+            or not isinstance(observed, Mapping)
+        ):
+            raise SelectedExecutionError("creation did not return complete observed provenance")
+        requested_path = requested.get("path")
+        if (
+            canonical_json(dict(native_requested)) != canonical_json(dict(requested))
+            or observed.get("path") != requested_path
+        ):
+            raise SelectedExecutionError("creation observed carrier differs from its admitted input")
+        result_path = observed.get("path")
+        result_filename = observed.get("filename")
+        result_version = observed.get("version")
+        result_digest = observed.get("digest")
+        if (
+            not isinstance(result_path, str) or not result_path or Path(result_path).is_absolute()
+            or ".." in Path(result_path).parts or not isinstance(result_filename, str) or not result_filename
+            or type(result_version) is not int or result_version < 1
+            or not isinstance(result_digest, str) or re.fullmatch(r"[0-9a-f]{64}", result_digest) is None
+            or not isinstance(creation_action_run_id, str) or not creation_action_run_id
+        ):
+            raise SelectedExecutionError("creation returned an invalid observed carrier")
+        try:
+            import work_journal
+        except ImportError as error:
+            raise SelectedExecutionError("canonical Work Journal support is unavailable") from error
+        event = {
+            "schema_version": 3,
+            "event_id": f"selected-creation:{creation_action_run_id}",
+            "action_id": creation_binding["atom_id"],
+            "event": "completed",
+            "kind": "governed_project_change",
+            "subject_kind": "file",
+            "author": author,
+            "occurred_at": occurred_at,
+            "llm_session": {"app": "run-support", "uuid": execution_request_id},
+            "structural_scope": structural_scope,
+            "action_type": "ADD",
+            "sources": [],
+            "result": {
+                "state": "present",
+                "filename": result_filename,
+                "version": result_version,
+                "path": result_path,
+                "sha256": result_digest,
+            },
+        }
+        return work_journal.with_event_digest(event)
+
+    def _replacement_prior_result_event(self, parameters: object) -> str:
+        """Find the one sealed Journal result for W03's exact predecessor.
+
+        The current lifecycle Tool repeats the carrier descriptor validation at
+        effect time.  This separate Journal check is deliberately earlier: a
+        replacement may not publish a successor or archive a predecessor whose
+        requested historical state has no canonical result event.
+        """
+        if not isinstance(parameters, Mapping):
+            raise SelectedExecutionError("replacement parameters are invalid")
+        predecessor = parameters.get("predecessor")
+        if not isinstance(predecessor, Mapping):
+            raise SelectedExecutionError("replacement predecessor is invalid")
+        path = predecessor.get("path")
+        version = predecessor.get("version")
+        digest = predecessor.get("digest")
+        if (
+            not isinstance(path, str) or not path or Path(path).is_absolute() or ".." in Path(path).parts
+            or type(version) is not int or version < 1
+            or not isinstance(digest, str) or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+        ):
+            raise SelectedExecutionError("replacement predecessor lacks an exact path, version, and digest")
+        try:
+            import work_journal
+            matches: list[str] = []
+            for carrier in work_journal._all_journal_parts(self.root):
+                _bytes, records = work_journal._carrier_records(carrier)
+                for record in records:
+                    event = work_journal.validate_sealed_event(record)
+                    result = event.get("result")
+                    if (
+                        event.get("schema_version") == 3
+                        and event.get("event") == "completed"
+                        and event.get("kind") == "governed_project_change"
+                        and isinstance(result, Mapping)
+                        and result.get("state") == "present"
+                        and result.get("path") == path
+                        and result.get("version") == version
+                        and result.get("sha256") == digest
+                    ):
+                        event_id = event.get("event_id")
+                        if isinstance(event_id, str):
+                            matches.append(event_id)
+        except (OSError, work_journal.WorkJournalError) as error:
+            raise SelectedExecutionError("replacement predecessor Journal evidence is unavailable") from error
+        if len(matches) != 1:
+            raise SelectedExecutionError("replacement predecessor lacks one exact canonical Journal result")
+        return matches[0]
+
+    def _replacement_journal_context(self, session: Any) -> tuple[str, str, str, str]:
+        """Bind W03 provenance to this selected session's active Journal context."""
+        try:
+            import work_journal
+        except ImportError as error:
+            raise SelectedExecutionError("canonical Work Journal support is unavailable") from error
+        tracker = getattr(session, "tracker", None)
+        context = getattr(tracker, "journal_context", None)
+        if not isinstance(context, Mapping):
+            raise SelectedExecutionError("replacement requires the current tracker Journal context")
+        author = context.get("author")
+        timezone = context.get("timezone")
+        if not isinstance(author, str) or not isinstance(timezone, str):
+            raise SelectedExecutionError("replacement tracker Journal context is invalid")
+        try:
+            now = dt.datetime.now(ZoneInfo(timezone))
+            local_date = now.date().isoformat()
+            work_journal.validate_partition(author, local_date, timezone)
+        except (ValueError, ZoneInfoNotFoundError, work_journal.WorkJournalError) as error:
+            raise SelectedExecutionError("replacement tracker Journal context is invalid") from error
+        return author, local_date, timezone, now.isoformat(timespec="seconds")
+
+    def _replacement_structural_scope(self, binding: Mapping[str, Any]) -> str:
+        """Read the scope from the exact admitted O051 carrier, not a caller packet."""
+        path = binding.get("path")
+        digest = binding.get("sha256")
+        if not isinstance(path, str) or not isinstance(digest, str):
+            raise SelectedExecutionError("replacement CA-O-051 Action binding is invalid")
+        source = self._safe_path(path)
+        if _sha256(source.read_bytes()) != digest:
+            raise SelectedExecutionError("replacement CA-O-051 Action definition changed after admission")
+        scope = _frontmatter(source).get("current_scope_unit")
+        if not isinstance(scope, str) or not scope:
+            raise SelectedExecutionError("replacement CA-O-051 Action has no current scope")
+        return scope
+
+    def _replacement_canonical_event(
+        self,
+        *,
+        parameters: object,
+        native_result: Mapping[str, Any],
+        prior_event_id: str,
+        replacement_binding: Mapping[str, Any],
+        replacement_action_run_id: str,
+        execution_request_id: object,
+        author: str,
+        occurred_at: str,
+        structural_scope: str,
+    ) -> dict[str, Any]:
+        """Build only the observed O051 replacement provenance event."""
+        if not isinstance(parameters, Mapping) or not isinstance(execution_request_id, str) or not execution_request_id:
+            raise SelectedExecutionError("replacement request identity is invalid")
+        requested_predecessor = parameters.get("predecessor")
+        history = native_result.get("history")
+        observed = native_result.get("predecessor")
+        successors = native_result.get("successors")
+        if (
+            not isinstance(requested_predecessor, Mapping)
+            or not isinstance(history, Mapping)
+            or not isinstance(history.get("predecessor"), Mapping)
+            or not isinstance(observed, Mapping)
+            or not isinstance(successors, list)
+            or not successors
+        ):
+            raise SelectedExecutionError("replacement did not return complete observed provenance")
+        original = history["predecessor"]
+        for field in ("path", "version", "digest"):
+            if original.get(field) != requested_predecessor.get(field):
+                raise SelectedExecutionError("replacement observed predecessor differs from its admitted input")
+        predecessor_id = original.get("atom_id")
+        successor_ids = [item.get("atom_id") if isinstance(item, Mapping) else None for item in successors]
+        if (
+            not isinstance(predecessor_id, str) or not predecessor_id
+            or any(not isinstance(item, str) or not item for item in successor_ids)
+            or len(successor_ids) != len(set(successor_ids))
+        ):
+            raise SelectedExecutionError("replacement returned invalid successor identities")
+        result_path = observed.get("path")
+        result_filename = observed.get("filename")
+        result_version = observed.get("version")
+        result_digest = observed.get("digest")
+        if (
+            not isinstance(result_path, str) or not result_path or Path(result_path).is_absolute()
+            or ".." in Path(result_path).parts or not isinstance(result_filename, str) or not result_filename
+            or type(result_version) is not int or result_version < 1
+            or not isinstance(result_digest, str) or re.fullmatch(r"[0-9a-f]{64}", result_digest) is None
+            or not isinstance(replacement_action_run_id, str) or not replacement_action_run_id
+        ):
+            raise SelectedExecutionError("replacement returned an invalid archived predecessor")
+        try:
+            import work_journal
+        except ImportError as error:
+            raise SelectedExecutionError("canonical Work Journal support is unavailable") from error
+        event = {
+            "schema_version": 3,
+            "event_id": f"selected-replacement:{replacement_action_run_id}",
+            "action_id": replacement_binding["atom_id"],
+            "event": "completed",
+            "kind": "governed_project_change",
+            "subject_kind": "file",
+            "author": author,
+            "occurred_at": occurred_at,
+            "llm_session": {"app": "run-support", "uuid": execution_request_id},
+            "structural_scope": structural_scope,
+            "action_type": "MOVE+UPDATE",
+            "sources": [],
+            "previous_result_event": prior_event_id,
+            "predecessor_atom_id": predecessor_id,
+            "successor_atom_ids": successor_ids,
+            "result": {
+                "state": "present",
+                "filename": result_filename,
+                "version": result_version,
+                "path": result_path,
+                "sha256": result_digest,
+            },
+        }
+        return work_journal.with_event_digest(event)
+
     def _execute_graph(self, frozen: Mapping[str, Any], session: Any, *, recovery: bool = False) -> dict[str, Any]:
         graph = frozen["graph"]
         request = frozen["request"]
@@ -1076,6 +2360,7 @@ class SelectedExecution:
         results: list[dict[str, Any]] = []
         implementation_prior_results: list[dict[str, Any]] = []
         structural_prior_results: list[dict[str, Any]] = []
+        lifecycle_prior_results: list[dict[str, Any]] = []
         while next_step:
             step = steps.get(next_step)
             if step is None:
@@ -1091,6 +2376,7 @@ class SelectedExecution:
             step_run_id = actual_step["run_id"]
             final_result: str | None = None
             step_effect_refs: list[str] = []
+            terminal_recording_pending = False
             for action_ordinal, action in enumerate(step["actions"], start=1):
                 requested_action_id = f"{requested_step_id}:action:{action_ordinal}"
                 actual_action = session.start_run(requested_action_id)
@@ -1099,8 +2385,24 @@ class SelectedExecution:
                 if handler is None:
                     raise SelectedExecutionError(f"no native handler registered for Action {action['atom_id']}")
                 parameters = request["execution"].get("parameters")
+                trusted_execution_authorization: Mapping[str, Any] | None = None
                 if graph["workflow"]["atom_id"] == "CA-O-016":
                     parameters = self._implementation_packet(parameters, step["atom_id"], implementation_prior_results)
+                    # Carry the already-sealed execution authorization into the
+                    # selected Step packet; retry admission must bind to this
+                    # retained evidence rather than a caller-supplied boolean.
+                    execution_authorization = request["execution"].get("operator_authorization")
+                    if isinstance(execution_authorization, Mapping):
+                        trusted_execution_authorization = execution_authorization
+                        parameters = {**parameters, "operator_authorization": dict(execution_authorization)}
+                if graph.get("route") in {"build_entities_graph", "build_terms_graph"}:
+                    parameters = self._graph_parameters_with_actual_recording(
+                        parameters,
+                        session,
+                        workflow_run_id=workflow_run_id,
+                        step_run_id=step_run_id,
+                        action_run_id=action_run_id,
+                    )
                 context = {
                     "project_root": self.root,
                     "workflow_run_id": workflow_run_id,
@@ -1115,6 +2417,7 @@ class SelectedExecution:
                     "step_definition_id": step["atom_id"],
                     "action_definition_id": action["atom_id"],
                     "parameters": parameters,
+                    "trusted_execution_authorization": trusted_execution_authorization,
                     "target_frontier": request["execution"].get("target_frontier"),
                     "effects": request["execution"].get("effects"),
                     "initiative": request["execution"].get("initiative"),
@@ -1122,6 +2425,89 @@ class SelectedExecution:
                     "session": session,
                     "requested_action_run_id": requested_action_id,
                 }
+                if (
+                    graph.get("route") == "create_atom"
+                    and action.get("atom_id") == "CA-O-128"
+                    and isinstance(graph.get("native_action_calls"), list)
+                    and any(
+                        isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"
+                        for binding in graph["native_action_calls"]
+                    )
+                ):
+                    creation_binding = self._creation_native_binding(graph)
+                    creation_requested_run_id = self._creation_child_requested_id(requested_action_id)
+                    creation_result_path = (
+                        self.run_directory(run_id) / f"{creation_requested_run_id}.json"
+                    )
+
+                    def write_creation_result(payload: Mapping[str, Any], *, _path: Path = creation_result_path) -> str:
+                        if not isinstance(payload, Mapping):
+                            raise SelectedExecutionError("creation result writer requires an evidence mapping")
+                        self._write(_path, dict(payload))
+                        return _path.relative_to(self.root).as_posix()
+
+                    context.update({
+                        "creation_action_binding": creation_binding,
+                        "creation_requested_run_id": creation_requested_run_id,
+                        "creation_result_writer": write_creation_result,
+                        "execution_request_id": request["execution"].get("request_id"),
+                    })
+                lifecycle_action = {"update_atom": "CA-O-030"}.get(graph.get("route"))
+                if (
+                    action.get("atom_id") == "CA-O-128"
+                    and lifecycle_action is not None
+                    and isinstance(graph.get("native_action_calls"), list)
+                    and any(
+                        isinstance(binding, Mapping) and binding.get("atom_id") == lifecycle_action
+                        for binding in graph["native_action_calls"]
+                    )
+                ):
+                    lifecycle_binding = self._lifecycle_native_binding(graph, lifecycle_action)
+                    lifecycle_requested_run_id = self._lifecycle_child_requested_id(
+                        requested_action_id, lifecycle_action,
+                    )
+                    lifecycle_result_path = (
+                        self.run_directory(run_id) / f"{lifecycle_requested_run_id}.json"
+                    )
+
+                    def write_lifecycle_result(payload: Mapping[str, Any], *, _path: Path = lifecycle_result_path) -> str:
+                        if not isinstance(payload, Mapping):
+                            raise SelectedExecutionError("lifecycle result writer requires an evidence mapping")
+                        self._write(_path, dict(payload))
+                        return _path.relative_to(self.root).as_posix()
+
+                    context.update({
+                        "lifecycle_action_binding": lifecycle_binding,
+                        "lifecycle_requested_run_id": lifecycle_requested_run_id,
+                        "lifecycle_result_writer": write_lifecycle_result,
+                        "execution_request_id": request["execution"].get("request_id"),
+                    })
+                if graph.get("route") == "change_atom_status" and action.get("atom_id") == "CA-O-128":
+                    context.update({
+                        "lifecycle_current_state": True,
+                        "execution_request_id": request["execution"].get("request_id"),
+                        "restored_action": requested_action_id in restored_actions,
+                    })
+                if (graph.get("route") == "replace_atom"
+                        and action.get("atom_id") == "CA-O-128"):
+                    replacement_binding = self._replacement_native_binding(graph)
+                    replacement_requested_run_id = self._replacement_child_requested_id(requested_action_id)
+                    replacement_result_path = (
+                        self.run_directory(run_id) / f"{replacement_requested_run_id}.json"
+                    )
+
+                    def write_replacement_result(payload: Mapping[str, Any], *, _path: Path = replacement_result_path) -> str:
+                        if not isinstance(payload, Mapping):
+                            raise SelectedExecutionError("replacement result writer requires an evidence mapping")
+                        self._write(_path, dict(payload))
+                        return _path.relative_to(self.root).as_posix()
+
+                    context.update({
+                        "replacement_action_binding": replacement_binding,
+                        "replacement_requested_run_id": replacement_requested_run_id,
+                        "replacement_result_writer": write_replacement_result,
+                        "execution_request_id": request["execution"].get("request_id"),
+                    })
                 if graph.get("route") == "release_version":
                     checkpoint_path = self.run_directory(run_id) / "release_action_run.json"
                     context["checkpoint_writer"] = lambda payload: self._write(checkpoint_path, payload)
@@ -1142,6 +2528,8 @@ class SelectedExecution:
                     # This is executor-retained state only; structural Actions
                     # never admit caller-provided prior-result assertions.
                     context["structural_prior_results"] = list(structural_prior_results)
+                if graph["workflow"]["atom_id"] == "CA-O-127":
+                    context["lifecycle_prior_results"] = list(lifecycle_prior_results)
                 output = handler(context)
                 if not isinstance(output, Mapping) or not isinstance(output.get("result"), str):
                     raise SelectedExecutionError("native Action handler returned no declared result")
@@ -1160,6 +2548,10 @@ class SelectedExecution:
                             "effect_refs": effect_refs,
                             "native_result": output.get("native_result"),
                             "compiler_publication_recording": output.get("compiler_publication_recording")}
+                if output.get("lifecycle_prior") is not None:
+                    progress["lifecycle_prior"] = output["lifecycle_prior"]
+                if output.get("lifecycle_recording") is not None:
+                    progress["lifecycle_recording"] = output["lifecycle_recording"]
                 if output.get("shared_action_recording") is not None:
                     progress["shared_action_recording"] = output["shared_action_recording"]
                 self._write(progress_path, progress)
@@ -1178,6 +2570,10 @@ class SelectedExecution:
                     if graph.get("route") != "release_version" or not callable(checkpoint_receipt):
                         raise SelectedExecutionError("private shared-recording callback is outside Release")
                     checkpoint_receipt(terminal_receipt, list(session.pending), list(session.receipts))
+                terminal_recording_pending = (
+                    isinstance(terminal_receipt, Mapping)
+                    and terminal_receipt.get("disposition") == "recording_pending"
+                )
                 recording = output.get("compiler_publication_recording")
                 if recording is not None:
                     if not isinstance(recording, Mapping):
@@ -1229,6 +2625,17 @@ class SelectedExecution:
                     # until the sole shared recorder has its exact terminal fact.
                     final_result = "recording_pending"
                     output["terminal_outcome"] = "interrupted_pending"
+                elif (graph.get("route") in {"build_entities_graph", "build_terms_graph"}
+                        and terminal_recording_pending):
+                    # The projection has already been materialized, and must
+                    # remain available for Journal recovery.  It is not,
+                    # however, a completed selected Action until the shared
+                    # recorder has durably appended its terminal fact.  Do
+                    # not replay the generator to manufacture that evidence.
+                    final_result = "recording_pending"
+                    output["terminal_outcome"] = "interrupted_pending"
+                    progress["result"] = final_result
+                    self._write(progress_path, progress)
                 if (graph["workflow"]["atom_id"] == "CA-O-015"
                         and isinstance(terminal_receipt, Mapping)
                         and terminal_receipt.get("disposition") == "terminal"
@@ -1236,6 +2643,24 @@ class SelectedExecution:
                         and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
                         and terminal_receipt.get("effect_refs") == effect_refs):
                     structural_prior_results.append({
+                        "workflow_run_id": workflow_run_id,
+                        "workflow_definition_id": graph["workflow"]["atom_id"],
+                        "step_run_id": step_run_id,
+                        "step_definition_id": step["atom_id"],
+                        "action_run_id": action_run_id,
+                        "action_definition_id": action["atom_id"],
+                        "result": final_result,
+                        "result_ref": progress_path.relative_to(self.root).as_posix(),
+                        "native_result": output.get("native_result"),
+                        "completed_receipt": dict(terminal_receipt),
+                    })
+                if (graph["workflow"]["atom_id"] == "CA-O-127"
+                        and isinstance(terminal_receipt, Mapping)
+                        and terminal_receipt.get("disposition") == "terminal"
+                        and terminal_receipt.get("outcome") == "completed"
+                        and terminal_receipt.get("result_ref") == progress_path.relative_to(self.root).as_posix()
+                        and terminal_receipt.get("effect_refs") == effect_refs):
+                    lifecycle_prior_results.append({
                         "workflow_run_id": workflow_run_id,
                         "workflow_definition_id": graph["workflow"]["atom_id"],
                         "step_run_id": step_run_id,
@@ -1262,13 +2687,21 @@ class SelectedExecution:
                         "evidence": native.get("evidence", []) if isinstance(native, Mapping) else [],
                         "retained_state": native.get("retained_state", {}) if isinstance(native, Mapping) else {},
                     })
-            try:
-                transition = self._transition(step, final_result or "")
-            except SelectedExecutionError:
-                terminal_outcome = output.get("terminal_outcome")
-                if not isinstance(terminal_outcome, str):
-                    raise
-                transition = {"terminal": terminal_outcome}
+                if terminal_recording_pending:
+                    # The effect and its pending Action receipt are retained,
+                    # but an unrecorded terminal fact cannot authorize either
+                    # another Action or an On Result transition.
+                    break
+            if terminal_recording_pending:
+                transition = {"terminal": "interrupted_pending"}
+            else:
+                try:
+                    transition = self._transition(step, final_result or "")
+                except SelectedExecutionError:
+                    terminal_outcome = output.get("terminal_outcome")
+                    if not isinstance(terminal_outcome, str):
+                        raise
+                    transition = {"terminal": terminal_outcome}
             if "terminal" in transition:
                 terminal = transition["terminal"]
                 if not isinstance(terminal, str):

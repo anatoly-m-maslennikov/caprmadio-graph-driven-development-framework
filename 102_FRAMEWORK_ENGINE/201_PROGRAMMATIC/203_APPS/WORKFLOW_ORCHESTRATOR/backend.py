@@ -5,7 +5,8 @@ import signal
 import threading
 import uuid
 
-from contracts import Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus, Status
+from contracts import (Enqueue, EnqueueSelected, RecoverSelectedRelease, RecoverSelectedReleaseStatus,
+                       ResolveReleaseUnknownEffect, Status)
 from agent import CodexAgent
 from engine import Coordinator, execute_phase, runtime_fingerprint
 from runtime_config import (control_directory, docker_runtime, implementation_mock_runtime,
@@ -158,6 +159,25 @@ def client(root):
                       retry_connection_errors=False)
 
 
+def _release_host_has_pending_work(root):
+    """Observe every nonterminal host-queue workflow through DBOSClient only."""
+    transport = client(root)
+    try:
+        rows = transport.list_workflows(
+            status=['PENDING', 'ENQUEUED'], application_name=RELEASE_HOST_APPLICATION,
+            queue_name=RELEASE_HOST_QUEUE, limit=1, load_input=False, load_output=False,
+        )
+    finally:
+        transport.destroy()
+    return bool(rows)
+
+
+def _release_host_admission_fence(root):
+    """Use the shutdown-owned fence only in the isolated release-host namespace."""
+    from release_host_shutdown import admission_fence
+    return admission_fence(root)
+
+
 def enqueue(root, request):
     request = Enqueue.model_validate(request)
     if release_host_runtime():
@@ -204,12 +224,22 @@ def enqueue_selected(root, request):
     # cannot reinterpret Base Revise request.json state.
     if frozen is None:
         frozen = selected.freeze(request.model_dump())
-    transport = client(root)
-    try:
-        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
-                           'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
-    finally:
-        transport.destroy()
+    if release_host_runtime():
+        with _release_host_admission_fence(root) as require_dispatch_open:
+            require_dispatch_open()
+            transport = client(root)
+            try:
+                transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
+                                   'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
+            finally:
+                transport.destroy()
+    else:
+        transport = client(root)
+        try:
+            transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['selected_workflow'],
+                               'workflow_id': request.run_id, 'app_version': scheduler['app_version']}, request.run_id)
+        finally:
+            transport.destroy()
     response = status(root, Status(run_id=request.run_id))
     response.update({'workflow_id': frozen['graph']['workflow']['atom_id'],
                      'selected_route': frozen['graph']['route'],
@@ -227,8 +257,14 @@ def _release_request_identity(execution):
     return _canonical_digest(execution)
 
 
-def _release_host_frozen(root, run_id, *, expected_identity=None, require_available=True):
-    """Recheck the host-only route and retained transport before DBOS access."""
+def _release_host_frozen(root, run_id, *, expected_identity=None, require_available=True,
+                         require_current=True):
+    """Validate one retained host Run before DBOS access.
+
+    Effects must still re-admit the frozen request against current source.
+    Observation instead authenticates the saved request and its retained host
+    binding, so a later legitimate source refresh cannot erase history.
+    """
     selected = SelectedExecution(root)
     frozen = selected.load(run_id)
     request = frozen.get('request') if isinstance(frozen, dict) else None
@@ -241,9 +277,10 @@ def _release_host_frozen(root, run_id, *, expected_identity=None, require_availa
     request_identity = _release_request_identity(execution)
     if expected_identity is not None and request_identity != expected_identity:
         raise RuntimeError('Release host request identity does not match the frozen Release request')
-    # This is the second route check at dispatch/observation time.  It also
-    # proves that the saved graph remains the current exact source binding.
-    selected._revalidate(frozen)
+    if require_current:
+        # Effects need a second route check immediately before dispatch or
+        # recovery so stale source cannot be replayed.
+        selected._revalidate(frozen)
     _validate_release_host_binding(
         root, run_id, _release_host_frozen_request_digest(frozen),
         require_available=require_available,
@@ -274,19 +311,26 @@ def recover_selected_release(root, request):
     # explicit new delivery attempt, so it needs a fresh scheduler handle;
     # the canonical Run and sealed frozen request identity stay unchanged.
     transport_id = uuid.uuid4().hex
-    transport = client(root)
-    try:
-        transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['recovery_workflow'],
-                           'workflow_id': transport_id, 'app_version': scheduler['app_version']},
-                          request.run_id, identity)
-        # Observe the new scheduler identity, never the prior selected Run's
-        # cached DBOS workflow result.
-        recovery_transport_status = _observe_recovery_transport(
-            transport, transport_id, request.run_id, identity,
-            workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
-        )
-    finally:
-        transport.destroy()
+    def enqueue_recovery():
+        transport = client(root)
+        try:
+            transport.enqueue({'queue_name': scheduler['queue'], 'workflow_name': scheduler['recovery_workflow'],
+                               'workflow_id': transport_id, 'app_version': scheduler['app_version']},
+                              request.run_id, identity)
+            # Observe the new scheduler identity, never the prior selected Run's
+            # cached DBOS workflow result.
+            return _observe_recovery_transport(
+                transport, transport_id, request.run_id, identity,
+                workflow_name=scheduler['recovery_workflow'], queue_name=scheduler['queue'],
+            )
+        finally:
+            transport.destroy()
+    if release_host_runtime():
+        with _release_host_admission_fence(root) as require_dispatch_open:
+            require_dispatch_open()
+            recovery_transport_status = enqueue_recovery()
+    else:
+        recovery_transport_status = enqueue_recovery()
     canonical_state = status(root, Status(run_id=request.run_id))
     journal_refs, pending_reason = _canonical_recovery_observation(canonical_state)
     response = {'operation': request.operation, 'workflow_run_id': request.run_id,
@@ -306,6 +350,42 @@ def recover_selected_release(root, request):
     }.get(recovery_transport_status['scheduler_status'], 'transport_terminal')
     response['blocked_or_pending_reason'] = pending_reason
     return response
+
+
+def resolve_release_unknown_effect(root, request):
+    """Close the sole admitted unknown Release effect through the native guard.
+
+    The native boundary owns all carrier/Journaling checks and its private
+    cancellation callback.  This adapter proves the guard before entering the
+    helper; the helper then repeats it under the per-Run Journal lock before
+    it calls the legitimate DBOS cancellation boundary and writes history.
+    """
+    request = ResolveReleaseUnknownEffect.model_validate(request)
+    from release_unknown_effect_resolution import resolve_release_unknown_effect as resolve
+    sealed = request.model_dump()
+    preflight = resolve.preflight(Path(root), sealed)
+    if isinstance(preflight, dict):
+        return preflight
+    return resolve(Path(root), sealed)
+
+
+def cancel_release_unknown_effect_scheduler(root, request):
+    """Cancel only the preflighted N15 DBOS workflow and confirm its status.
+
+    This function is private to the native unknown-effect resolver.  It never
+    reads or writes DBOS storage directly and is called only after that helper
+    has validated its historical carriers and current authority under lock.
+    """
+    request = ResolveReleaseUnknownEffect.model_validate(request)
+    transport = client(root)
+    try:
+        transport.cancel_workflow(request.run_id)
+        queue_status = transport.retrieve_workflow(request.run_id).get_status()
+        if getattr(queue_status, 'status', None) != 'CANCELLED':
+            raise RuntimeError('old N15 scheduler workflow did not report CANCELLED')
+        return {'workflow_run_id': request.run_id, 'scheduler_status': 'CANCELLED'}
+    finally:
+        transport.destroy()
 
 
 def _observe_recovery_transport(transport, transport_id, run_id, request_identity, *,
@@ -348,11 +428,50 @@ def _canonical_recovery_observation(canonical_state):
     return refs, reason if isinstance(reason, str) and reason else None
 
 
+def _selected_public_outcome(frozen, result, run_id):
+    """Read the workflow outcome from canonical selected-Run terminal evidence.
+
+    DBOS ``SUCCESS`` proves only that its scheduler wrapper returned.  It is
+    never authority for a selected Workflow result, and neither is a nested
+    Action terminal.  Older direct result envelopes predate ``terminal_runs``;
+    retain their existing public shape unchanged.
+    """
+    if not isinstance(result, dict):
+        return None, None, "selected result is not a mapping"
+    if "terminal_runs" not in result:
+        return result.get("outcome"), result.get("disposition"), None
+    if result.get("disposition") == "recording_pending":
+        return result.get("outcome"), result.get("disposition"), None
+    terminal_runs = result.get("terminal_runs")
+    request = frozen.get("request") if isinstance(frozen, dict) else None
+    execution = request.get("execution") if isinstance(request, dict) else None
+    requested_runs = execution.get("requested_runs") if isinstance(execution, dict) else None
+    workflow_bindings = [
+        row for row in requested_runs if isinstance(row, dict)
+        and row.get("requested_run_id") == run_id and row.get("kind") == "workflow"
+    ] if isinstance(requested_runs, list) else []
+    if not isinstance(terminal_runs, list) or len(workflow_bindings) != 1:
+        return "failed", result.get("disposition"), "canonical Workflow terminal evidence is missing or ambiguous"
+    candidates = [
+        row for row in terminal_runs if isinstance(row, dict) and row.get("run_id") == run_id
+        and ("kind" not in row or row.get("kind") == "workflow")
+    ]
+    if len(candidates) != 1 or candidates[0].get("disposition") not in {"terminal", "interrupted"}:
+        return "failed", result.get("disposition"), "canonical Workflow terminal evidence is missing or ambiguous"
+    outcome = candidates[0].get("outcome")
+    if not isinstance(outcome, str) or not outcome:
+        return "failed", result.get("disposition"), "canonical Workflow terminal evidence is incomplete"
+    disposition = candidates[0]["disposition"]
+    if disposition == "interrupted" and outcome != "interrupted_pending":
+        return "failed", result.get("disposition"), "canonical Workflow interrupted evidence has an invalid outcome"
+    return outcome, disposition, None
+
+
 def recover_selected_release_status(root, request):
     request = RecoverSelectedReleaseStatus.model_validate(request)
     scheduler = _scheduler_identity()
     if release_host_runtime():
-        _frozen, identity = _release_host_frozen(root, request.run_id)
+        _frozen, identity = _release_host_frozen(root, request.run_id, require_current=False)
     else:
         frozen = SelectedExecution(root).load(request.run_id)
         saved = frozen.get('request', {}) if isinstance(frozen, dict) else {}
@@ -381,7 +500,9 @@ def status(root, request):
     if release_host_runtime():
         # A host status read must not adopt a native/Docker selected Run or
         # reach the host DBOS database before its retained binding is proven.
-        _release_host_frozen(root, request.run_id)
+        # It observes a saved Run rather than re-admitting an effect, so a
+        # legitimate later source refresh does not make saved evidence opaque.
+        _release_host_frozen(root, request.run_id, require_current=False)
     transport = client(root)
     try:
         handle = transport.retrieve_workflow(request.run_id)
@@ -403,8 +524,11 @@ def status(root, request):
         uncertain = selected_directory / 'dispatch_uncertain.json'
         if accepted.is_file():
             result = selected._read(accepted)['result']
-            response.update({'selected_result': result, 'outcome': result.get('outcome'),
-                             'disposition': result.get('disposition')})
+            outcome, disposition, terminal_reason = _selected_public_outcome(frozen, result, request.run_id)
+            response.update({'selected_result': result, 'outcome': outcome,
+                             'disposition': disposition})
+            if terminal_reason is not None:
+                response['reason'] = terminal_reason
         elif uncertain.is_file():
             response.update({'outcome': 'interrupted_pending', 'disposition': 'recording_pending',
                              'reason': selected._read(uncertain).get('reason')})
@@ -520,7 +644,8 @@ def execute_plan(engine, run_id, gather, check, fix, finish, coverage):
             return {'workflow_run_id': run_id, 'outcome': 'interrupted', 'reason': str(error)}
 
 
-def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
+def worker(root, *, agent=None, ready_file=None, implementation_agent=None,
+           release_start_token=None):
     """Explicitly started foreground process; no implicit daemon or hook installation."""
     from dbos import DBOS
     root = Path(root).resolve(strict=True)
@@ -541,17 +666,47 @@ def worker(root, *, agent=None, ready_file=None, implementation_agent=None):
     previous = {number: signal.getsignal(number) for number in (signal.SIGINT, signal.SIGTERM)}
     for number in previous:
         signal.signal(number, lambda *_: stop.set())
+    health_listener = shutdown_listener = None
     try:
         DBOS.launch()
         DBOS.register_queue(scheduler['queue'], global_concurrency=1, worker_concurrency=1,
                             polling_interval_sec=0.2)
         if ready_file:
-            engine.save(Path(ready_file), {'state': 'ready',
+            identity = {'state': 'ready',
                 'pid': __import__('os').getpid(),
                 'application_version': scheduler['app_version'],
-                'runtime_fingerprint': runtime_fingerprint(root)})
+                'runtime_fingerprint': runtime_fingerprint(root)}
+            if release_host_runtime():
+                from release_host_health import start_listener
+                identity['start_token'] = release_start_token
+                health_listener = start_listener(root, identity)
+                from release_host_shutdown import start_listener as start_shutdown_listener
+                shutdown_listener = start_shutdown_listener(
+                    root, identity, has_work=lambda: _release_host_has_pending_work(root),
+                    request_stop=stop.set,
+                )
+                engine.save(Path(ready_file).with_name('worker.json'), identity)
+            engine.save(Path(ready_file), identity)
         stop.wait()
     finally:
-        DBOS.destroy()
-        for number, handler in previous.items():
-            signal.signal(number, handler)
+        shutdown_incomplete = None
+        try:
+            for listener in (shutdown_listener, health_listener):
+                if listener is None:
+                    continue
+                try:
+                    listener.close()
+                # A listener that cannot prove its join leaves shutdown
+                # incomplete; DBOS must remain intact and the foreground
+                # wrapper must retain stopping/unknown rather than stopped.
+                except Exception as error:
+                    shutdown_incomplete = error
+        finally:
+            try:
+                if shutdown_incomplete is None:
+                    DBOS.destroy()
+            finally:
+                for number, handler in previous.items():
+                    signal.signal(number, handler)
+                if shutdown_incomplete is not None:
+                    raise shutdown_incomplete

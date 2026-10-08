@@ -5,9 +5,10 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import types
 import unittest
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 
 APP = Path(__file__).resolve().parents[1]
@@ -31,19 +32,27 @@ class ReleaseHostBridgeTests(unittest.TestCase):
         ready.parent.mkdir(parents=True, exist_ok=True)
         ready.write_text(json.dumps({
             "state": "ready", "pid": 1, "application_version": "release-host-v1",
-            "runtime_fingerprint": "f" * 64,
+            "runtime_fingerprint": "f" * 64, "start_token": "a" * 64,
         }))
         (self.root / bridge.DIRECTORY / "worker.json").write_text(
-            json.dumps({"pid": 1, "state": "starting"})
+            json.dumps({"pid": 1, "start_token": "a" * 64, "application_version": "release-host-v1",
+                        "runtime_fingerprint": "f" * 64, "state": "ready"})
         )
         (self.root / bridge.DATABASE).touch()
-        self.worker_alive = patch("release_host_bridge._worker_is_alive", return_value=True)
+        class HealthError(RuntimeError):
+            pass
+
+        self.probe_worker = MagicMock(return_value=None)
+        health_module = types.ModuleType("release_host_health")
+        health_module.HealthError = HealthError
+        health_module.probe_worker = self.probe_worker
+        self.health_module = patch.dict(sys.modules, {"release_host_health": health_module})
         self.runtime_fingerprint = patch("release_host_bridge._runtime_fingerprint", return_value="f" * 64)
         self.application_version = patch("release_host_bridge._application_version", return_value="release-host-v1")
-        self.worker_alive.start()
+        self.health_module.start()
         self.runtime_fingerprint.start()
         self.application_version.start()
-        self.addCleanup(self.worker_alive.stop)
+        self.addCleanup(self.health_module.stop)
         self.addCleanup(self.runtime_fingerprint.stop)
         self.addCleanup(self.application_version.stop)
 
@@ -80,32 +89,25 @@ class ReleaseHostBridgeTests(unittest.TestCase):
                     path.write_bytes(saved)
                 launched.assert_not_called()
 
-    def test_dead_worker_mismatched_state_or_stale_fingerprint_blocks_before_child_admission(self):
-        self.worker_alive.stop()
-        self.runtime_fingerprint.stop()
-        self.application_version.stop()
+    def test_health_refusal_changed_metadata_or_stale_fingerprint_blocks_before_child_admission(self):
         bridge.retain_binding(self.root, run_id="release-1", frozen_request_digest="a" * 64)
         request = {"operation": "status", "run_id": "release-1"}
-        with patch("release_host_bridge.subprocess.run") as launched, \
-             patch("release_host_bridge._application_version", return_value="release-host-v1"), \
-             patch("release_host_bridge._runtime_fingerprint", return_value="f" * 64), \
-             patch("release_host_bridge._worker_is_alive", return_value=False):
+        health_error = sys.modules["release_host_health"].HealthError
+        self.probe_worker.side_effect = health_error("unreachable")
+        with patch("release_host_bridge.subprocess.run") as launched:
             with self.assertRaisesRegex(bridge.ReleaseHostUnavailable, "readiness is invalid"):
                 bridge.invoke(self.root, request)
         launched.assert_not_called()
+        self.probe_worker.side_effect = None
         worker_state = self.root / bridge.DIRECTORY / "worker.json"
         worker_state.write_text(json.dumps({"pid": 2, "state": "starting"}))
-        with patch("release_host_bridge.subprocess.run") as launched, \
-             patch("release_host_bridge._worker_is_alive", return_value=True), \
-             patch("release_host_bridge._application_version", return_value="release-host-v1"), \
-             patch("release_host_bridge._runtime_fingerprint", return_value="f" * 64):
+        with patch("release_host_bridge.subprocess.run") as launched:
             with self.assertRaisesRegex(bridge.ReleaseHostUnavailable, "readiness is invalid"):
                 bridge.invoke(self.root, request)
         launched.assert_not_called()
-        worker_state.write_text(json.dumps({"pid": 1, "state": "starting"}))
+        ready = json.loads((self.root / bridge.READY).read_text())
+        worker_state.write_text(json.dumps(ready))
         with patch("release_host_bridge.subprocess.run") as launched, \
-             patch("release_host_bridge._worker_is_alive", return_value=True), \
-             patch("release_host_bridge._application_version", return_value="release-host-v1"), \
              patch("release_host_bridge._runtime_fingerprint", return_value="a" * 64):
             with self.assertRaisesRegex(bridge.ReleaseHostUnavailable, "fingerprint is stale"):
                 bridge.invoke(self.root, request)

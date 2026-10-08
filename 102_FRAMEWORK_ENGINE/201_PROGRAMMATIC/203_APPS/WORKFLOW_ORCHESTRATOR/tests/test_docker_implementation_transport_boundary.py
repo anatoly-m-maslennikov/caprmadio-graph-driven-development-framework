@@ -87,8 +87,9 @@ class DockerImplementationTransportBoundaryTests(unittest.TestCase):
         self.assertEqual("requirement_ready", self.call("CA-O-091")["result"])
         implemented = self.call("CA-O-093")
         self.assertEqual("implemented", implemented["result"], implemented)
+        self.assertEqual([CANDIDATE], implemented["outputs"]["changed_paths"])
         self.assertEqual(hashlib.sha256((self.workspace / CANDIDATE).read_bytes()).hexdigest(),
-                         implemented["outputs"]["changed_paths"][0]["after_sha256"])
+                         implemented["evidence"][-1]["candidate"]["after_sha256"])
         self.assertEqual("evaluation_runnable", self.call("CA-O-091")["result"])
         passed = self.call("CA-O-094")
         self.assertEqual("passed", passed["result"], passed)
@@ -101,6 +102,25 @@ class DockerImplementationTransportBoundaryTests(unittest.TestCase):
         self.assertEqual({TEST, CANDIDATE}, {path.name for path in self.workspace.iterdir()})
         for result in (prepared, implemented, passed, completed):
             self.assertEqual(TRANSPORT, result["evidence"][0]["transport"])
+
+    def test_mock_allows_workspace_ancestor_alias_but_refuses_workspace_leaf_symlink(self) -> None:
+        physical_parent = self.root / "physical-parent"
+        physical_parent.mkdir()
+        alias = self.root / "ancestor-alias"
+        alias.symlink_to(physical_parent, target_is_directory=True)
+        workspace = alias / "disposable-workspace"
+        workspace.mkdir()
+        packet = self.packet("CA-O-091")
+        packet["workspace"] = str(workspace)
+        packet["permissions"]["implementation_workspace"]["path"] = str(workspace)
+        prompt = (PROMPTS / "CA-O-091.prompt.md").read_text()
+        self.assertEqual("evaluation_ready", self.agent(prompt, packet)["result"])
+
+        leaf_alias = self.root / "workspace-leaf-alias"
+        leaf_alias.symlink_to(workspace, target_is_directory=True)
+        packet["workspace"] = str(leaf_alias)
+        packet["permissions"]["implementation_workspace"]["path"] = str(leaf_alias)
+        self.assertEqual("blocked", self.agent(prompt, packet)["result"])
 
     def test_denied_missing_or_mismatched_workspace_permission_has_no_effect(self) -> None:
         packets = [self.packet("CA-O-092") for _ in range(5)]

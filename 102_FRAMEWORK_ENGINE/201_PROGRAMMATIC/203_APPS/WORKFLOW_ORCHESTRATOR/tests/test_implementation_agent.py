@@ -7,12 +7,13 @@ import sys
 import tempfile
 import textwrap
 import unittest
+from unittest import mock
 
 
 APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP))
 
-from implementation_agent import ImplementationAgent  # noqa: E402
+from implementation_agent import ImplementationAgent, _snapshot  # noqa: E402
 
 
 class ImplementationAgentTests(unittest.TestCase):
@@ -80,6 +81,26 @@ class ImplementationAgentTests(unittest.TestCase):
         self.assertEqual(result["evidence"][-1]["sandbox"], "read-only")
         self.assertFalse(list(self.workspace.iterdir()))
 
+    def test_snapshot_ignores_regular_ds_store_before_byte_limits_or_reads(self) -> None:
+        tracked = self.workspace / "implementation.py"
+        tracked.write_text("ready = True\n", encoding="utf-8")
+        metadata = self.workspace / ".DS_Store"
+        metadata.write_bytes(b"finder metadata" * 100_000)
+        original_read_bytes = Path.read_bytes
+
+        def guarded_read_bytes(path: Path) -> bytes:
+            if path == metadata:
+                raise AssertionError("Finder metadata must not be read")
+            return original_read_bytes(path)
+
+        with mock.patch.object(Path, "read_bytes", guarded_read_bytes):
+            snapshot = _snapshot(self.workspace)
+
+        self.assertEqual(
+            {"implementation.py": hashlib.sha256(tracked.read_bytes()).hexdigest()},
+            snapshot,
+        )
+
     def test_golden_executable_performs_disposable_code_and_test_work_with_observed_hash(self) -> None:
         self.write_fake(
             """
@@ -137,6 +158,58 @@ class ImplementationAgentTests(unittest.TestCase):
         self.assertEqual(out_of_bounds["result"], "blocked")
         self.assertIn("out-of-bound", out_of_bounds["blockers"][0])
         self.assertTrue(outside.exists())
+
+    def test_invalid_or_missing_output_retains_observed_workspace_changes(self) -> None:
+        cases = (
+            (
+                "malformed",
+                "malformed.py",
+                "output.write_text('{not valid JSON')",
+            ),
+            (
+                "missing",
+                "missing.py",
+                "pass",
+            ),
+        )
+        for label, filename, output_body in cases:
+            with self.subTest(label=label):
+                self.write_fake(
+                    f"""
+                    (workspace / {filename!r}).write_text('implemented = True\\n')
+                    {output_body}
+                    """
+                )
+                result = self.agent()(f"{label} callback", self.packet(write=True))
+
+                self.assertEqual("blocked", result["result"])
+                self.assertEqual("invalid_output", result["evidence"][0]["status"])
+                changes = result["evidence"][0]["observed_changes"]
+                self.assertEqual([filename], [change["path"] for change in changes])
+                self.assertIsNone(changes[0]["before_sha256"])
+                self.assertEqual(
+                    hashlib.sha256((self.workspace / filename).read_bytes()).hexdigest(),
+                    changes[0]["after_sha256"],
+                )
+
+    def test_invalid_output_retains_snapshot_uncertainty(self) -> None:
+        self.write_fake(
+            """
+            (workspace / 'written.py').write_text('implemented = True\\n')
+            (workspace / 'unsafe-link').symlink_to('written.py')
+            output.write_text('{not valid JSON')
+            """
+        )
+
+        result = self.agent()("invalid callback", self.packet(write=True))
+
+        self.assertEqual("blocked", result["result"])
+        self.assertEqual("invalid_output", result["evidence"][0]["status"])
+        self.assertEqual([], result["evidence"][0]["observed_changes"])
+        self.assertTrue(any(
+            "unable to verify workspace boundary after Agent dispatch" in blocker
+            for blocker in result["blockers"]
+        ))
 
     def test_timeout_and_unadmitted_write_never_fabricate_success(self) -> None:
         self.write_fake(

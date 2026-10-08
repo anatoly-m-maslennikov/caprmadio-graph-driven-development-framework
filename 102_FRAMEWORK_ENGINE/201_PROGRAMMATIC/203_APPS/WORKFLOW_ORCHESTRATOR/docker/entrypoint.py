@@ -56,10 +56,13 @@ def main():
     elif mode == "health":
         worker_health()
     else:
-        paths = {"worker": APP / "orchestrator.py", "mcp": APP.parents[1] / "204_MCP/server.py"}
+        paths = {"worker": APP / "orchestrator.py", "mcp": APP.parents[1] / "204_MCP/server.py",
+                 "mcp-http": APP.parents[1] / "204_MCP/server.py"}
         if mode not in paths:
             raise ValueError("Unknown runtime service")
         command = [sys.executable, str(paths[mode]), "--project-root", str(PROJECT_ROOT)]
+        if mode == "mcp-http":
+            command += ["--transport", "streamable-http"]
         if mode == "worker":
             command.append("worker")
         os.execv(sys.executable, command)

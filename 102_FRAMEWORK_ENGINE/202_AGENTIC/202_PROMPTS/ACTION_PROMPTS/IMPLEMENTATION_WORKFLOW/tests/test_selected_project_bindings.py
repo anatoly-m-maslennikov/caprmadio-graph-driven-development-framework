@@ -33,6 +33,7 @@ class SelectedProjectBindings(unittest.TestCase):
         methods = [row["path"] for row in sources if row["atom_id"].startswith("CA-M-")]
         workspace = project / "disposable-workspace"
         workspace.mkdir(exist_ok=True)
+        candidate = {"id": "candidate-1"}
         return {
             "context": "Isolated",
             "selected_project": {
@@ -49,10 +50,24 @@ class SelectedProjectBindings(unittest.TestCase):
             },
             "workspace": str(workspace),
             "handoff_complete": True,
-            "plan_item": {"estimated_minutes": 14},
-            "requirements_delivery": ["R", "D"],
-            "evaluations": ["E"],
+            "plan_item": {"plan_id": "plan-1", "item_id": "item-1",
+                           "dod": ["implemented and checked"], "owned_paths": ["."],
+                           "estimated_minutes": 14},
+            "requirements": actions.prepare_input_bindings(["CA-R-1843"], project),
+            "delivery": actions.prepare_input_bindings(["CA-D-544"], project),
+            "evaluations": actions.prepare_input_bindings(["CA-E-563"], project),
             "method_projection": actions.prepare_method_projection(methods, project),
+            "red": {"expectation": "ready is true", "fixtures": ["fixture"],
+                    "commands": ["python fixture_test.py"], "scope": "selected item"},
+            "candidate": candidate, "phase": "implementation",
+            "golden_e2e": ["disposable executable assertion"],
+            "baseline_command": "python fixture_test.py",
+            "confidence": {"observed": 1.0, "effective": 0.9, "source": "default-settings"},
+            "retry": {"consumed": 0, "effective_limit": 1,
+                      "source": "CA-M-295:default-settings", "remaining_failure": True,
+                      "admitted": True},
+            "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False,
+                         "candidate": candidate, "phase": "implementation"},
             "retained_state": {},
             "evidence": ["baseline"],
         }
@@ -66,7 +81,9 @@ class SelectedProjectBindings(unittest.TestCase):
 
             def agent(_prompt, supplied):
                 launched.append(supplied)
-                return {"result": "implemented", "outputs": {"candidate": "mock", "changed_paths": ["x.py"]},
+                return {"result": "implemented", "outputs": {"candidate": supplied["candidate"],
+                                                                    "phase": supplied["phase"],
+                                                                    "changed_paths": ["x.py"]},
                         "evidence": ["mock-performed"]}
 
             actual = actions.implement_selected_queue(
@@ -74,6 +91,27 @@ class SelectedProjectBindings(unittest.TestCase):
             self.assertNotEqual(project.resolve(), actions.ROOT.resolve())
             self.assertEqual(actual["result"], "implemented")
             self.assertEqual(launched, [packet])
+
+    def test_performed_success_rejects_unbound_candidate_and_phase(self):
+        actions = load_actions()
+        with tempfile.TemporaryDirectory() as directory:
+            project = self.project_with_reviewed_sources(actions, Path(directory))
+            packet = self.packet(actions, project)
+            for field, value in (("candidate", {"id": "unbound-candidate"}),
+                                 ("phase", "unbound-phase")):
+                with self.subTest(field=field):
+                    launched = []
+
+                    def agent(_prompt, supplied):
+                        outputs = {"candidate": supplied["candidate"], "phase": supplied["phase"],
+                                   "changed_paths": ["x.py"]}
+                        outputs[field] = value
+                        return {"result": "implemented", "outputs": outputs, "evidence": ["mock-performed"]}
+
+                    actual = actions.implement_selected_queue(
+                        "CA-O-093", packet, agent, selected_project_root=project)
+                    self.assertEqual(actual["result"], "blocked")
+                    self.assertEqual(launched, [])
 
     def test_stale_sources_incomplete_methods_and_workspace_mismatch_block_before_agent(self):
         actions = load_actions()
@@ -147,18 +185,69 @@ class SelectedProjectBindings(unittest.TestCase):
             self.assertEqual(actual["result"], "blocked")
             self.assertEqual(launches, [])
 
+    def test_workspace_allows_ancestor_alias_but_rejects_workspace_leaf_symlink(self):
+        actions = load_actions()
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory)
+            physical_parent = parent / "physical-parent"
+            physical_parent.mkdir()
+            project = self.project_with_reviewed_sources(actions, physical_parent)
+            alias = parent / "ancestor-alias"
+            alias.symlink_to(physical_parent, target_is_directory=True)
+            workspace = alias / "disposable-workspace"
+            workspace.mkdir()
+            packet = self.packet(actions, project)
+            packet["workspace"] = str(workspace)
+            packet["permissions"]["implementation_workspace"]["path"] = str(workspace)
+            launched = []
+
+            def agent(_prompt, supplied):
+                launched.append(supplied)
+                return {"result": "implemented", "outputs": {"candidate": supplied["candidate"],
+                                                                    "phase": supplied["phase"],
+                                                                    "changed_paths": ["x.py"]},
+                        "evidence": ["mock-performed"]}
+
+            actual = actions.implement_selected_queue(
+                "CA-O-093", packet, agent, selected_project_root=project)
+            self.assertEqual(actual["result"], "implemented")
+            self.assertEqual(launched, [packet])
+
+            leaf_alias = parent / "workspace-leaf-alias"
+            leaf_alias.symlink_to(workspace, target_is_directory=True)
+            packet["workspace"] = str(leaf_alias)
+            packet["permissions"]["implementation_workspace"]["path"] = str(leaf_alias)
+            blocked = actions.implement_selected_queue(
+                "CA-O-093", packet, agent, selected_project_root=project)
+            self.assertEqual(blocked["result"], "blocked")
+            self.assertEqual(len(launched), 1)
+
     def test_selected_packet_cannot_fall_back_to_code_root_without_trusted_root(self):
         actions = load_actions()
         packet = {
             "context": "Isolated", "selected_project": {"untrusted": "packet root"},
             "source_bindings": actions.current_source_bindings(), "permissions": {"allowed": True},
             "handoff_complete": True, "plan_item": {"estimated_minutes": 14},
-            "requirements_delivery": ["R", "D"], "evaluations": ["E"],
+            "requirements": actions.prepare_input_bindings(["CA-R-1843"]),
+            "delivery": actions.prepare_input_bindings(["CA-D-544"]),
+            "evaluations": actions.prepare_input_bindings(["CA-E-563"]),
             "method_projection": actions.prepare_method_projection([
-                ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/202_FEATURE_AGENTIC/"
-                "202_FEATURE_PROMPTS/05_method/CA-M-326-PROMPTS--compose-short-current-"
-                "implementation-step-prompts.md"
+                row["path"] for row in actions.current_source_bindings()
+                if row["atom_id"].startswith("CA-M-")
             ]),
+            "plan_item": {"plan_id": "plan-1", "item_id": "item-1",
+                          "dod": ["implemented and checked"], "owned_paths": ["."],
+                          "estimated_minutes": 14},
+            "red": {"expectation": "ready is true", "fixtures": ["fixture"],
+                    "commands": ["python fixture_test.py"], "scope": "selected item"},
+            "candidate": {"id": "candidate-1"}, "phase": "implementation",
+            "golden_e2e": ["disposable executable assertion"],
+            "baseline_command": "python fixture_test.py",
+            "confidence": {"observed": 1.0, "effective": 0.9, "source": "default-settings"},
+            "retry": {"consumed": 0, "effective_limit": 1,
+                      "source": "CA-M-295:default-settings", "remaining_failure": True,
+                      "admitted": True},
+            "coverage": {"required": ["CA-E-563"], "checked": [], "complete": False},
         }
         launches = []
         actual = actions.implement_selected_queue("CA-O-093", packet, lambda *_: launches.append("launched"))

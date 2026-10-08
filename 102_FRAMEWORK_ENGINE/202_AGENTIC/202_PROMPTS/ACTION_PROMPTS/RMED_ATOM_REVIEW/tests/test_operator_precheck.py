@@ -1,4 +1,8 @@
+from pathlib import Path
+import sys
 import unittest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from operator_precheck import rendering_candidates, validate_operator_coverage, word_inventory
 
 OPS = ['must not', 'must', 'only', 'when', 'and', 'in']

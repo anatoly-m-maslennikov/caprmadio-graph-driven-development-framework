@@ -10,6 +10,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 MODULE = Path(__file__).resolve().parents[1] / "project_structure.py"
@@ -82,7 +83,10 @@ class ProjectStructureActions(unittest.TestCase):
             "operation": operation,
             "expected_toml_revision": digest(self.toml),
             "reference_frontier": [],
-            "goal_coverage_disposition": {"state": "present", "parent": "PARENT"},
+            "goal_coverage_disposition": {
+                "state": "missing", "parent": "PARENT", "gap_ref": "GOAL-GAP-1",
+                "authorized_disposition": "report-only",
+            },
             "preservation_disposition": {"preserved": ["observed-carrier.txt"]},
             "recovery_disposition": {"authorized": True, "boundary": "toml-and-listed-references"},
         }
@@ -143,6 +147,196 @@ class ProjectStructureActions(unittest.TestCase):
         self.assertFalse((self.root / "delivery" / "CHILD").exists())
         self.assertIn("CHILD", self.toml.read_text(encoding="utf-8"))
 
+    def test_candidate_rejects_an_invalid_resulting_tree_before_prepare(self) -> None:
+        handlers = project_structure.queue_action_handlers(self.root)
+        before = self.toml.read_bytes()
+        prepared = handlers["CA-O-012"]({
+            "workflow_definition_id": "CA-O-015", "route": "create_scope_unit",
+            "parameters": self.parameters(
+                "Create",
+                declaration=declaration("BAD", parent="UNKNOWN", level=2),
+                goal_coverage_disposition={
+                    "state": "missing", "parent": "UNKNOWN", "gap_ref": "GOAL-GAP-1",
+                    "authorized_disposition": "report-only",
+                },
+            ),
+        })
+        self.assertEqual("conflict", prepared["result"])
+        self.assertIn("undeclared parent", prepared["native_result"]["validation_errors"][0])
+        self.assertEqual(before, self.toml.read_bytes())
+
+    def test_goal_and_declared_carrier_coverage_are_observed_not_claimed(self) -> None:
+        absent = project_structure.create_scope_unit(
+            self.root,
+            self.parameters(
+                "Create", declaration=declaration("CHILD", parent="PARENT", level=2),
+                goal_coverage_disposition={"state": "present", "parent": "PARENT"},
+            ),
+        )
+        self.assertEqual("conflict", absent["state"])
+        goal = self.root / ".caprmedio_caprmedio" / "03_goal" / "CA-G-001--parent.md"
+        goal.parent.mkdir()
+        goal.write_text(
+            "---\natom_id: CA-G-001\nstatus: ACTIVE\ncontent_role: Requirement\ntype: Goal\n"
+            "current_scope_unit: PARENT\n---\n# Goal\n",
+            encoding="utf-8",
+        )
+        (self.root / "delivery" / "CHILD").mkdir(parents=True)
+        parameters = self.parameters(
+            "Create", declaration=declaration("CHILD", parent="PARENT", level=2),
+            goal_coverage_disposition={"state": "present", "parent": "PARENT"},
+        )
+        unpinned = project_structure.create_scope_unit(self.root, parameters)
+        self.assertEqual("conflict", unpinned["state"])
+        self.assertIn("present direct-parent Goal coverage requires exact source pins", unpinned["validation_errors"][0])
+        parameters["reference_frontier"] = [{
+            "path": goal.relative_to(self.root).as_posix(), "expected_sha256": digest(goal), "replacements": [],
+        }]
+        stale_pin = copy.deepcopy(parameters)
+        stale_pin["reference_frontier"][0]["expected_sha256"] = "0" * 64
+        stale = project_structure.create_scope_unit(self.root, stale_pin)
+        self.assertEqual("conflict", stale["state"])
+        self.assertIn("stale reference frontier", stale["validation_errors"][0])
+        prepared = project_structure.queue_action_handlers(self.root)["CA-O-012"]({
+            "workflow_definition_id": "CA-O-015", "route": "create_scope_unit", "parameters": parameters,
+        })
+        self.assertEqual("prepared", prepared["result"])
+        self.assertEqual(
+            [goal.relative_to(self.root).as_posix()],
+            prepared["native_result"]["observed_coverage"]["active_direct_parent_goals"],
+        )
+        completed = project_structure.create_scope_unit(
+            self.root,
+            parameters,
+        )
+        self.assertEqual("completed", completed["state"])
+        coverage = completed["observed_coverage"]
+        self.assertEqual([goal.relative_to(self.root).as_posix()], coverage["active_direct_parent_goals"])
+        self.assertIn(
+            {"path": "delivery/CHILD", "state": "directory"}, coverage["declared_carriers"],
+        )
+
+    def test_non_requirement_goal_typed_atom_cannot_prove_goal_coverage(self) -> None:
+        invalid_goal = self.root / ".caprmedio_caprmedio" / "03_goal" / "CA-G-000--not-a-requirement.md"
+        invalid_goal.parent.mkdir()
+        invalid_goal.write_text(
+            "---\natom_id: CA-G-000\nstatus: active\ncontent_role: Plan\ntype: Goal\n"
+            "current_scope_unit: PARENT\n---\n# Not a Requirement Goal\n",
+            encoding="utf-8",
+        )
+        refused = project_structure.create_scope_unit(
+            self.root,
+            self.parameters(
+                "Create", declaration=declaration("CHILD", parent="PARENT", level=2),
+                goal_coverage_disposition={"state": "present", "parent": "PARENT"},
+            ),
+        )
+        self.assertEqual("conflict", refused["state"])
+        self.assertIn("Goal coverage is absent", refused["validation_errors"][0])
+
+    def test_move_requires_exact_pins_for_incoming_references_and_parent_goals(self) -> None:
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root, self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+            )["state"],
+        )
+        incoming = self.root / ".caprmedio_caprmedio" / "04_requirement" / "CA-R-001--child.md"
+        incoming.parent.mkdir()
+        incoming.write_text(
+            "---\natom_id: CA-R-001\nstatus: active\ntype: Requirement\n"
+            "current_scope_unit: CHILD\n---\n# Requirement\n", encoding="utf-8",
+        )
+        parent_goal = self.root / ".caprmedio_caprmedio" / "03_goal" / "CA-G-002--parent.md"
+        parent_goal.parent.mkdir()
+        parent_goal.write_text(
+            "---\natom_id: CA-G-002\nstatus: active\ncontent_role: Requirement\ntype: Goal\n"
+            "current_scope_unit: PARENT\n---\n# Parent goal\n", encoding="utf-8",
+        )
+        move = self.parameters(
+            "Move", target_name="CHILD", declaration=declaration("CHILD", parent="PROJECT", level=1),
+            goal_coverage_disposition={
+                "state": "missing", "parent": "PROJECT", "gap_ref": "GOAL-GAP-1",
+                "authorized_disposition": "report-only",
+            },
+        )
+        unpinned = project_structure.move_scope_unit(self.root, move)
+        self.assertEqual("conflict", unpinned["state"])
+        self.assertIn("Move parent-owned active Goals", unpinned["validation_errors"][0])
+        move["reference_frontier"] = [{
+            "path": parent_goal.relative_to(self.root).as_posix(), "expected_sha256": digest(parent_goal),
+            "replacements": [],
+        }]
+        parent_unpinned = project_structure.move_scope_unit(self.root, move)
+        self.assertEqual("conflict", parent_unpinned["state"])
+        self.assertIn("Move incoming Atom references", parent_unpinned["validation_errors"][0])
+        move["reference_frontier"].append({
+            "path": incoming.relative_to(self.root).as_posix(), "expected_sha256": digest(incoming),
+            "replacements": [],
+        })
+        self.assertEqual("completed", project_structure.move_scope_unit(self.root, move)["state"])
+
+    def test_secret_shaped_frontier_never_enters_a_recovery_boundary(self) -> None:
+        before = self.toml.read_bytes()
+        for name, relative, content in (
+            ("PATH_SECRET", ".env", "ordinary=value\n"),
+            ("VAULT_SECRET", "vault/credentials.toml", "ordinary=value\n"),
+            ("CONTENT_SECRET", "carrier.md", "service_token: value\n"),
+        ):
+            with self.subTest(name=name):
+                source = self.root / relative
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_text(content, encoding="utf-8")
+                refused = project_structure.create_scope_unit(
+                    self.root,
+                    self.parameters(
+                        "Create", declaration=declaration(name, parent="PARENT", level=2),
+                        reference_frontier=[{
+                            "path": relative, "expected_sha256": digest(source), "replacements": [],
+                        }],
+                    ),
+                )
+                self.assertEqual("conflict", refused["state"])
+                self.assertIn("secret-shaped carrier", refused["validation_errors"][0])
+                self.assertEqual(before, self.toml.read_bytes())
+
+    def test_secret_path_is_refused_before_source_bytes_are_read(self) -> None:
+        secret = self.root / ".env"
+        secret.write_text("THIS MUST NOT BE READ\n", encoding="utf-8")
+        reference = {
+            "path": secret,
+            "relative_path": ".env",
+            "expected_sha256": digest(secret),
+            "replacements": [],
+        }
+        with patch.object(Path, "read_text", side_effect=AssertionError("secret bytes were read")):
+            with self.assertRaisesRegex(project_structure.StructuralConflict, "secret-shaped carrier"):
+                project_structure._reference_changes(self.root, [reference])
+
+    def test_topic_named_token_atom_is_not_a_secret_carrier(self) -> None:
+        topic = (
+            self.root / ".caprmedio_caprmedio" / "04_requirement"
+            / "CA-R-777--minimize-token-usage.md"
+        )
+        topic.parent.mkdir()
+        topic.write_text(
+            "---\natom_id: CA-R-777\nstatus: Active\ntype: Requirement\n---\n"
+            "# Minimize token usage\n",
+            encoding="utf-8",
+        )
+        completed = project_structure.create_scope_unit(
+            self.root,
+            self.parameters(
+                "Create", declaration=declaration("TOPIC_CHILD", parent="PARENT", level=2),
+                reference_frontier=[{
+                    "path": topic.relative_to(self.root).as_posix(),
+                    "expected_sha256": digest(topic),
+                    "replacements": [],
+                }],
+            ),
+        )
+        self.assertEqual("completed", completed["state"])
+
     def test_rename_move_repair_only_exact_listed_references(self) -> None:
         self.assertEqual(
             "completed",
@@ -171,7 +365,10 @@ class ProjectStructureActions(unittest.TestCase):
                 "Move",
                 target_name="RENAMED",
                 declaration=declaration("RENAMED", parent="PROJECT", level=1),
-                goal_coverage_disposition={"state": "present", "parent": "PROJECT"},
+                goal_coverage_disposition={
+                    "state": "missing", "parent": "PROJECT", "gap_ref": "GOAL-GAP-1",
+                    "authorized_disposition": "report-only",
+                },
                 reference_frontier=[{
                     "path": "references.md", "expected_sha256": digest(self.reference),
                     "replacements": [{"old": "RENAMED", "new": "ROOT"}],
@@ -181,6 +378,130 @@ class ProjectStructureActions(unittest.TestCase):
         self.assertEqual("completed", moved["state"])
         self.assertEqual("ROOT\n", self.reference.read_text(encoding="utf-8"))
         self.assertEqual("PROJECT", moved["resulting_scope_unit"]["parent"])
+
+    def test_rename_requires_exact_frontmatter_repairs_for_active_atom_scope_references(self) -> None:
+        """A caller's claimed Goal/carrier coverage cannot replace source coverage."""
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root, self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+            )["state"],
+        )
+        atom = self.root / ".caprmedio_caprmedio" / "04_requirement" / "archive" / "CA-R-999--test-child-reference.md"
+        atom.parent.mkdir(parents=True)
+        atom.write_text(
+            "---\n"
+            "atom_id: CA-R-999\n"
+            "status: Active\n"
+            "type: Requirement\n"
+            "current_scope_unit: CHILD\n"
+            "claim_target_scope_unit: CHILD\n"
+            "---\n"
+            "# Body\n\n"
+            "current_scope_unit: CHILD\n"
+            "claim_target_scope_unit: CHILD\n",
+            encoding="utf-8",
+        )
+        before_toml = self.toml.read_bytes()
+        parameters = self.parameters(
+            "Rename",
+            target_name="CHILD",
+            declaration=declaration("RENAMED", parent="PARENT", level=2),
+            goal_coverage_disposition={"state": "present", "parent": "PARENT"},
+            preservation_disposition={"preserved": [atom.relative_to(self.root).as_posix()]},
+        )
+
+        handlers = project_structure.queue_action_handlers(self.root)
+        context = {
+            "workflow_definition_id": "CA-O-015", "route": "rename_scope_unit",
+            "parameters": parameters, "sealed_outer_admission": True,
+        }
+        prepared = handlers["CA-O-012"](context)
+        self.assertEqual("conflict", prepared["result"])
+        self.assertIn("authoritative Atom scope references", prepared["native_result"]["validation_errors"][0])
+        refused = handlers["CA-O-014"](context)
+        self.assertEqual("conflict", refused["result"])
+        self.assertEqual(before_toml, self.toml.read_bytes())
+
+        parameters["reference_frontier"] = [{
+            "path": atom.relative_to(self.root).as_posix(), "expected_sha256": digest(atom),
+            "replacements": [
+                {"old": "current_scope_unit: CHILD", "new": "current_scope_unit: RENAMED"},
+                {"old": "claim_target_scope_unit: CHILD", "new": "claim_target_scope_unit: RENAMED"},
+            ],
+        }]
+        semantic_rewrite = copy.deepcopy(parameters)
+        semantic_rewrite["reference_frontier"][0]["replacements"].append({
+            "old": "# Body",
+            "new": "# Rewritten body",
+        })
+        self.assertEqual("conflict", project_structure.rename_scope_unit(self.root, semantic_rewrite)["state"])
+        self.assertEqual(before_toml, self.toml.read_bytes())
+        applied = project_structure.rename_scope_unit(self.root, parameters)
+        self.assertEqual("completed", applied["state"])
+        atom_text = atom.read_text(encoding="utf-8")
+        self.assertIn("current_scope_unit: RENAMED", atom_text)
+        self.assertIn("claim_target_scope_unit: RENAMED", atom_text)
+        self.assertIn("# Body\n\ncurrent_scope_unit: CHILD\nclaim_target_scope_unit: CHILD\n", atom_text)
+
+    def test_remove_refuses_lowercase_active_concern_scope_references_even_under_archive_folder(self) -> None:
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root, self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+            )["state"],
+        )
+        atom = self.root / ".caprmedio_caprmedio" / "01_concern" / "archive" / "CA-C-483--test-remove-reference.md"
+        atom.parent.mkdir(parents=True)
+        atom.write_text(
+            "---\natom_id: CA-C-483\nstatus: active\n"
+            "current_scope_unit: CHILD\nclaim_target_scope_unit: CHILD\n---\n# Atom\n",
+            encoding="utf-8",
+        )
+        before = self.toml.read_bytes()
+        refused = project_structure.remove_scope_unit(
+            self.root,
+            self.parameters(
+                "Remove", target_name="CHILD",
+                preservation_disposition={"preserved": [atom.relative_to(self.root).as_posix()]},
+            ),
+        )
+        self.assertEqual("conflict", refused["state"])
+        self.assertIn("separately authorized exact disposition", refused["validation_errors"][0])
+        self.assertIn("current_scope_unit", refused["validation_errors"][0])
+        self.assertIn("claim_target_scope_unit", refused["validation_errors"][0])
+        self.assertEqual(before, self.toml.read_bytes())
+
+    def test_rename_reparents_declared_descendants_in_the_authoritative_toml(self) -> None:
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root, self.parameters("Create", declaration=declaration("CHILD", parent="PARENT", level=2)),
+            )["state"],
+        )
+        self.assertEqual(
+            "completed",
+            project_structure.create_scope_unit(
+                self.root,
+                self.parameters(
+                    "Create", declaration=declaration("GRANDCHILD", parent="CHILD", level=3),
+                    goal_coverage_disposition={
+                        "state": "missing", "parent": "CHILD", "gap_ref": "GOAL-GAP-1",
+                        "authorized_disposition": "report-only",
+                    },
+                ),
+            )["state"],
+        )
+        renamed = project_structure.rename_scope_unit(
+            self.root,
+            self.parameters(
+                "Rename", target_name="CHILD", declaration=declaration("RENAMED", parent="PARENT", level=2),
+            ),
+        )
+        self.assertEqual("completed", renamed["state"])
+        source, rows = project_structure._parse_structure(self.toml, self.root)
+        self.assertTrue(source)
+        self.assertEqual("RENAMED", next(row for row in rows if row["scope_unit_name"] == "GRANDCHILD")["parent"])
 
     def test_rejects_invalid_tree_and_stale_without_mutation(self) -> None:
         before = self.toml.read_bytes()
@@ -299,7 +620,10 @@ class ProjectStructureActions(unittest.TestCase):
             "move_scope_unit",
             self.parameters(
                 "Move", target_name="CHILD", declaration=declaration("CHILD", parent="PROJECT", level=1),
-                goal_coverage_disposition={"state": "present", "parent": "PROJECT"},
+                goal_coverage_disposition={
+                    "state": "missing", "parent": "PROJECT", "gap_ref": "GOAL-GAP-1",
+                    "authorized_disposition": "report-only",
+                },
             ),
         )
         self.assertEqual("accepted", moved["result"])
@@ -388,7 +712,10 @@ class ProjectStructureSharedServiceIntegration(unittest.TestCase):
             "operation": operation,
             "expected_toml_revision": digest(self.toml),
             "reference_frontier": [],
-            "goal_coverage_disposition": {"state": "present", "parent": "PARENT"},
+            "goal_coverage_disposition": {
+                "state": "missing", "parent": "PARENT", "gap_ref": "GOAL-GAP-1",
+                "authorized_disposition": "report-only",
+            },
             "preservation_disposition": {"preserved": ["observed-carrier.md"]},
             "recovery_disposition": {"authorized": True, "boundary": "toml-and-listed-references"},
         }

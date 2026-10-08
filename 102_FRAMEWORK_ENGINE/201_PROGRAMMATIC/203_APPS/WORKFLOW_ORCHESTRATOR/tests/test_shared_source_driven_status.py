@@ -1,7 +1,9 @@
 """Current-source selected status proof; development-only, not live MCP/image proof.
 
-The canonical manifest is copied unchanged. A stale production pin is a real
-failing gate, never replaced by a fixture-only rehash or a skipped positive case.
+The canonical first-fifteen-route portfolio is copied unchanged. A stale
+production pin is a real failing gate, never replaced by a fixture-only rehash
+or a skipped positive case. Release is intentionally outside this historical
+fixture baseline and has separate proof.
 """
 from __future__ import annotations
 
@@ -27,7 +29,7 @@ for location in (TOOLS / "tests", TOOLS, MCP, APP, Path(__file__).resolve().pare
 import test_model_driven_status_lifecycle as native_goldens  # noqa: E402
 from selected_execution import SelectedExecution, SelectedExecutionError  # noqa: E402
 from selected_routes import SelectedRouteAdapter, SelectedRouteError  # noqa: E402
-from selected_workflows_docker_fixture import GoldenCase, GoldenProject  # noqa: E402
+from selected_workflows_docker_fixture import GoldenCase, GoldenProject, digest  # noqa: E402
 
 
 ROUTE = "change_atom_status"
@@ -181,8 +183,31 @@ class SharedSourceDrivenStatusTest(unittest.TestCase):
     def test_canonical_current_manifest_is_an_unsubstituted_source_gate(self) -> None:
         self.prepare_route()
         SelectedRouteAdapter(self.root)
-        self.assertEqual((REPOSITORY / self.project.manifest_path.relative_to(self.root)).read_bytes(),
-                         self.project.manifest_path.read_bytes())
+        current = json.loads((REPOSITORY / self.project.manifest_path.relative_to(self.root)).read_text())
+        fixture = json.loads(self.project.manifest_path.read_text())
+        current_routes = current["routes"]
+        self.assertEqual(
+            ["create_atom", "update_atom", "replace_atom", "change_atom_status", "create_scope_unit",
+             "rename_scope_unit", "move_scope_unit", "remove_scope_unit", "run_implementation_workflow",
+             "revert_changes", "build_entities_graph", "build_terms_graph", "build_applicable_methodology",
+             "find_and_fetch_artifacts", "find_and_fetch_journal_events", "release_version"],
+            [row["route"] for row in current_routes],
+        )
+        self.assertEqual(current_routes[:15], fixture["routes"])
+        self.assertEqual(current["query_source_admissions"], fixture["query_source_admissions"])
+        self.assertNotIn("release_source_admissions", fixture)
+        self.assertNotIn("release_version", [row["route"] for row in fixture["routes"]])
+        self.assertEqual(
+            {key: value for key, value in current["source_freshness"].items()
+             if key != "selected_binding_digest"},
+            {key: value for key, value in fixture["source_freshness"].items()
+             if key != "selected_binding_digest"},
+        )
+        self.assertEqual(digest(fixture["routes"]), fixture["source_freshness"]["selected_binding_digest"])
+        self.assertEqual(
+            digest({key: value for key, value in fixture.items() if key != "canonical_manifest_sha256"}),
+            fixture["canonical_manifest_sha256"],
+        )
         self.assertEqual([], self.events())
 
     def test_actual_selected_definition_change_refuses_without_preview_or_run(self) -> None:

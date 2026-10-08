@@ -210,19 +210,24 @@ class SelectedNativeProvidersTests(unittest.TestCase):
             assert args[args.index('--sandbox') + 1] == 'workspace-write'
             outputs = {}
             if step == 'CA-O-092':
-                outputs = {'golden_e2e': True, 'commands': ['assertion.py'], 'expected_outcomes': ['pass']}
+                outputs = {'golden_e2e': ['assertion.py'], 'commands': ['assertion.py'], 'expected_outcomes': ['pass']}
             elif step == 'CA-O-093':
                 (workspace / 'implementation.py').write_text('def ready():\\n    return True\\n')
                 (workspace / 'assertion.py').write_text('from implementation import ready\\nassert ready()\\n')
-                outputs = {'candidate': 'actual-code', 'changed_paths': ['implementation.py', 'assertion.py']}
+                outputs = {'candidate': packet.get('candidate', 'actual-code'), 'phase': packet.get('phase'),
+                           'changed_paths': ['implementation.py', 'assertion.py']}
             elif step == 'CA-O-094':
                 check = subprocess.run([sys.executable, '-B', 'assertion.py'], cwd=workspace)
                 assert check.returncode == 0
-                outputs = {'commands': ['assertion.py'], 'checks': [{'returncode': check.returncode}]}
+                outputs = {'candidate': packet.get('candidate', 'actual-code'), 'commands': ['assertion.py'],
+                           'checks': [{'returncode': check.returncode}],
+                           'coverage': {'complete': True, 'checked': packet['coverage']['required']}}
             result = {'CA-O-091': 'evaluation_ready', 'CA-O-092': 'prepared', 'CA-O-093': 'implemented', 'CA-O-094': 'passed'}[step]
             output.write_text(json.dumps({'result': result, 'outputs': outputs, 'evidence': [{'step': step}], 'blockers': []}))
         '''), encoding="utf-8")
-        base.update(golden_e2e=True, baseline_command="assertion.py", agent_timeout_seconds=5)
+        base.update(golden_e2e=["assertion.py"], baseline_command="assertion.py",
+                    candidate="actual-code", agent_timeout_seconds=5)
+        base["coverage"]["candidate"] = "actual-code"
         frozen = self.freeze("run_implementation_workflow", parameters)
         result, session = self.registered_dispatch(frozen, agent=ImplementationAgent([sys.executable, str(script)]))
         self.assertEqual("completed", result["outcome"])

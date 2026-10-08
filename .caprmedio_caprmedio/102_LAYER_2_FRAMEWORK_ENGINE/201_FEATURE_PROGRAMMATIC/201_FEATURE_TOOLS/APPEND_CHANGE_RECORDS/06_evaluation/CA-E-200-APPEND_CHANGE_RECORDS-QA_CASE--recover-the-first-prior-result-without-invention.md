@@ -2,12 +2,12 @@
 subjects:
   governs: "Work Journal/Event/Previous Result Event"
   depends_on: []
-version: 14
-updated_at: "2026-09-12 04:15:38 +0400"
+version: 15
+updated_at: "2026-10-08 02:28:30 +0000"
 relations:
   evaluation_for:
     - CA-R-812
-    - CAPRMEDIO-GOV-REQU-340
+    - CA-R-1644
 llm_session_ids:
   - codex:01a02650-eff7-7453-8c37-0699b36773c6
 ---
@@ -19,11 +19,11 @@ llm_session_ids:
 
 ## Test case
 
-run the first schema-v2 change for one existing subject with matching Git **and** carrier evidence, **then** repeat with contradictory **and** insufficient evidence.
+prepare the first schema-version-3 non-ADD file change for an existing subject with no prior recorded result. prove a separate recovered baseline from matching present Carrier readback **without** Git, **then** with genuine Git corroboration. repeat with contradictory **and** insufficient evidence, an ID-less Draft Carrier, a no-op, **and** unconfirmed append receipts.
 
 ## Acceptance criteria
 
-the supported case appends one `recovered` `governed_file_state` baseline **and** makes the change event reference it through `previous_result_event`; the contradictory **and** insufficient cases append nothing **and** return stable recovery diagnostics; no field is guessed.
+the supported case appends **=1** `recovered` `governed_project_state` baseline **before** effects **and** makes the `completed` `governed_project_change` event reference its confirmed prior through `previous_result_event`. the contradictory **and** insufficient cases do **not** mutate the subject; no historical field is guessed. a no-op creates **none** of a baseline **or** change event. unconfirmed baseline recording blocks effects; unconfirmed post-effect recording retains the real effects as partial **and** permits recording retry **only**. accepted legacy schema-version-2 records remain readable, **not** current write examples.
 
 ## Failure disposition
 

@@ -64,9 +64,12 @@ class ImplementationMockAgent:
             capability = permissions["implementation_workspace"]
             if set(capability) != {"kind", "path", "allow_write"}:
                 raise ValueError("mock workspace capability must be exact")
-            for parent in (Path(packet["workspace"]), *Path(packet["workspace"]).parents):
-                if parent.is_symlink():
-                    raise ValueError("mock workspace may not traverse symbolic links")
+            # ``_workspace`` has already rejected a symlink workspace leaf and
+            # returned its canonical directory.  Ancestor aliases such as
+            # macOS /var -> /private/var are not a caller-controlled escape.
+            # Keep the mock aligned with the selected-route admission guard.
+            if Path(packet["workspace"]).is_symlink():
+                raise ValueError("mock workspace may not be a symbolic link")
             test = _current(workspace / TEST, TEST_TEXT)
             candidate = _current(workspace / CANDIDATE, CANDIDATE_TEXT)
             outputs: dict[str, Any] = {"workspace": str(workspace), "mock_case": "fixed-add-assertion"}
@@ -99,7 +102,9 @@ class ImplementationMockAgent:
                 if not test or candidate:
                     raise ValueError("mock implementation requires prepared tests and no existing candidate")
                 _create(workspace / CANDIDATE, CANDIDATE_TEXT)
-                outputs.update(candidate=CANDIDATE, changed_paths=[_observed(workspace / CANDIDATE)])
+                outputs.update(candidate=packet.get("candidate", CANDIDATE),
+                               phase=packet.get("phase"),
+                               changed_paths=[CANDIDATE])
                 evidence.append({"transport": TRANSPORT, "candidate": _observed(workspace / CANDIDATE)})
                 result = "implemented"
             else:
@@ -108,7 +113,10 @@ class ImplementationMockAgent:
                 check = _check(workspace)
                 evidence.append(check)
                 outputs.update(commands=[check["command"]], checks=[check],
-                               candidate=_observed(workspace / CANDIDATE), test=_observed(workspace / TEST))
+                               candidate=packet.get("candidate", CANDIDATE), test=_observed(workspace / TEST),
+                               coverage={"complete": check["returncode"] == 0,
+                                         "checked": list(packet.get("coverage", {}).get("required", []))
+                                         if isinstance(packet.get("coverage"), Mapping) else []})
                 result = "passed" if check["returncode"] == 0 else "failed"
             return {"result": result, "outputs": outputs, "evidence": evidence,
                     "blockers": [] if result != "blocked" else ["mock assertion did not pass"]}

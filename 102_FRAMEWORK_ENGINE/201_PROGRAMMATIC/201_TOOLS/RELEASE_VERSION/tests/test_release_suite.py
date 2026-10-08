@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import errno
 import json
 import os
 import signal
@@ -42,6 +43,7 @@ from release_suite import (  # noqa: E402
     SUITE_DRIVER_RELATIVE,
     SUITE_DRIVER_WORKING_DIRECTORY,
     SuiteExecutionResult,
+    _active_n_state,
     _refuse_secret_relative,
     _suite_process_environment,
     execute_bound_release_suite,
@@ -177,9 +179,10 @@ if mode == "fail":
 class FixtureSandboxExecutor:
     """Test-only local stand-in for the production isolated executor.
 
-    It rewrites fixture-root argv paths into the disposable workspace.  This
-    proves that attempts to mutate a selector, retained N, or public Skill
-    reach only the workspace; production never installs this executor.
+    It rewrites fixture-root argv paths into the disposable workspace and
+    makes that source tree read-only for the child process, matching the
+    production ``/workspace:ro`` mount.  Output remains a separate writable
+    carrier; production never installs this executor.
     """
 
     def __init__(self, root: Path):
@@ -188,8 +191,29 @@ class FixtureSandboxExecutor:
         self.mode = "success"
         self.literal = "$HOME;$(should-stay-literal)"
         self.start_error = False
+        self.timeout_calls: list[float] = []
+
+    @staticmethod
+    def _freeze_workspace(workspace: Path) -> list[tuple[Path, int]]:
+        """Remove child write permission without leaving retained evidence unusable."""
+
+        paths = [workspace, *sorted(workspace.rglob("*"), key=lambda path: len(path.parts))]
+        original_modes: list[tuple[Path, int]] = []
+        for path in paths:
+            if path.is_symlink():
+                continue
+            mode = path.stat().st_mode & 0o777
+            original_modes.append((path, mode))
+            path.chmod(mode & ~0o222)
+        return original_modes
+
+    @staticmethod
+    def _thaw_workspace(original_modes: list[tuple[Path, int]]) -> None:
+        for path, mode in reversed(original_modes):
+            path.chmod(mode)
 
     def run(self, command, *, workspace, output_root, working_directory, environment, timeout_seconds):
+        self.timeout_calls.append(timeout_seconds)
         self.last_environment = dict(environment)
         rewritten = []
         for value in command:
@@ -213,35 +237,39 @@ class FixtureSandboxExecutor:
             rewritten[0] = sys.executable
             rewritten.extend((self.mode, self.literal))
         stdout_path, stderr_path = output_root / "fixture.stdout", output_root / "fixture.stderr"
-        with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
-            process = subprocess.Popen(
-                tuple(rewritten),
-                cwd=workspace / working_directory,
-                env=local_environment,
-                stdin=subprocess.DEVNULL,
-                stdout=stdout,
-                stderr=stderr,
-                shell=False,
-                start_new_session=True,
-            )
-            try:
-                exit_code = process.wait(timeout=timeout_seconds)
-                left_descendants = False
+        original_modes = self._freeze_workspace(workspace)
+        try:
+            with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
+                process = subprocess.Popen(
+                    tuple(rewritten),
+                    cwd=workspace / working_directory,
+                    env=local_environment,
+                    stdin=subprocess.DEVNULL,
+                    stdout=stdout,
+                    stderr=stderr,
+                    shell=False,
+                    start_new_session=True,
+                )
                 try:
-                    os.killpg(process.pid, 0)
-                except ProcessLookupError:
-                    pass
-                else:
-                    os.killpg(process.pid, signal.SIGKILL)
-                    left_descendants = True
-                timed_out = False
-            except subprocess.TimeoutExpired:
-                try:
-                    os.killpg(process.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                exit_code = process.wait()
-                left_descendants, timed_out = False, True
+                    exit_code = process.wait(timeout=timeout_seconds)
+                    left_descendants = False
+                    try:
+                        os.killpg(process.pid, 0)
+                    except ProcessLookupError:
+                        pass
+                    else:
+                        os.killpg(process.pid, signal.SIGKILL)
+                        left_descendants = True
+                    timed_out = False
+                except subprocess.TimeoutExpired:
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    exit_code = process.wait()
+                    left_descendants, timed_out = False, True
+        finally:
+            self._thaw_workspace(original_modes)
         return SuiteExecutionResult(exit_code, stdout_path.read_bytes(), stderr_path.read_bytes(), timed_out, left_descendants)
 
 
@@ -301,7 +329,7 @@ class ReleaseSuiteTests(unittest.TestCase):
         methodology_control = self.fixture.core.relative_to(self.root).as_posix()
         self.fixture.write(
             f"{CANONICAL_SOURCE_RELATIVE}/001_CORE_META_MODEL/caprmedio_framework_default_settings.toml",
-            ("[release_e2e]\n" + "".join(
+            ("[release_suite]\nunit_timeout_seconds = 3600\n\n[release_e2e]\n" + "".join(
                 f"{name} = {value}\n" for name, value in asdict(DEFAULT_RELEASE_E2E_LIMITS).items()
             )).encode(),
         )
@@ -340,10 +368,24 @@ class ReleaseSuiteTests(unittest.TestCase):
             rules.append(rule)
         self.fixture.write(MODULE_RULES_RELATIVE, canonical_json({"schema_version": 1, "module_probes": rules}))
 
-    def execute_suite(self, candidate, compilation, *, timeout_seconds: float = 900):
-        return execute_bound_release_suite(
-            candidate, compilation, executor=self.executor, timeout_seconds=timeout_seconds,
-        )
+    def execute_suite(self, candidate, compilation, *, timeout_seconds: float | None = None):
+        kwargs = {"executor": self.executor}
+        if timeout_seconds is not None:
+            kwargs["timeout_seconds"] = timeout_seconds
+        return execute_bound_release_suite(candidate, compilation, **kwargs)
+
+    def _default_settings_path(self) -> Path:
+        return self.root / CANONICAL_SOURCE_RELATIVE / "001_CORE_META_MODEL" / "caprmedio_framework_default_settings.toml"
+
+    def _instance_settings_path(self) -> Path:
+        return self.root / CANONICAL_SOURCE_RELATIVE / "003_PROJECT_CONFIGURATION" / "caprmedio_framework_settings.toml"
+
+    @staticmethod
+    def _release_suite_settings(value: object, *, section: bool = True) -> bytes:
+        prefix = "[release_suite]\n" if section else ""
+        if isinstance(value, bytes):
+            return prefix.encode() + value
+        return (prefix + f"unit_timeout_seconds = {value}\n").encode()
 
     def canonical_testcase_count(self) -> int:
         """Read the sealed fixture's actual D579 module-rule carrier."""
@@ -472,6 +514,24 @@ class ReleaseSuiteTests(unittest.TestCase):
             process.assert_not_called()
         self.assertFalse((package / "SKILLS/ca/SKILL.md").exists())
 
+    def test_active_n_ignores_finder_metadata_but_not_real_skill_files(self) -> None:
+        candidate, compilation = self.bound(stage_package=False)
+        before = _active_n_state(self.root, candidate)
+        package_metadata = self.root / ".caprmedio_runtime/framework/releases/N/.DS_Store"
+        skill_metadata = self.root / ".agents/skills/ca/.DS_Store"
+        package_metadata.write_bytes(b"finder package metadata")
+        skill_metadata.write_bytes(b"finder skill metadata")
+
+        self.assertEqual(_active_n_state(self.root, candidate), before)
+        self.assertTrue(self.execute_suite(candidate, compilation).passed)
+
+        extra = self.root / ".agents/skills/ca/retained-real-file.txt"
+        extra.write_bytes(b"real retained state")
+        with patch("release_suite.subprocess.Popen") as process:
+            with self.assertRaises(ReleaseContractError):
+                self.execute_suite(candidate, compilation)
+            process.assert_not_called()
+
     def test_candidate_package_symlink_refuses_even_when_target_is_absent(self) -> None:
         candidate, compilation = self.bound(stage_package=False)
         releases = self.root / ".caprmedio_runtime/framework/releases"
@@ -591,7 +651,132 @@ class ReleaseSuiteTests(unittest.TestCase):
         self.assertEqual(result.outcome, "timed_out")
         self.assertEqual(result.exit_code, -9)
         self.assertFalse(result.passed)
+        self.assertEqual(self.executor.timeout_calls[-1], 0.1)
         self.assertIn(b"actual stdout", (self.root / result.evidence_root / "stdout.bin").read_bytes())
+
+    def test_source_default_deadline_is_finite_and_propagated_to_executor(self) -> None:
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation)
+        self.assertTrue(result.passed)
+        self.assertEqual(self.executor.timeout_calls, [3600])
+
+    def test_instance_deadline_overrides_default_and_is_propagated_exactly(self) -> None:
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+            b"[release_suite]\nunit_timeout_seconds = 4800\n",
+        )
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation)
+        self.assertTrue(result.passed)
+        self.assertEqual(self.executor.timeout_calls, [4800])
+
+    def test_missing_instance_deadline_falls_back_to_source_default(self) -> None:
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+            b"[interaction]\nreporting_mode = 'silent'\n",
+        )
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation)
+        self.assertTrue(result.passed)
+        self.assertEqual(self.executor.timeout_calls, [3600])
+
+    def test_empty_instance_release_suite_table_falls_back_to_source_default(self) -> None:
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+            b"[release_suite]\n",
+        )
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation)
+        self.assertTrue(result.passed)
+        self.assertEqual(self.executor.timeout_calls, [3600])
+
+    def test_invalid_source_deadline_settings_never_pass_or_invoke_executor(self) -> None:
+        invalid = (
+            ("malformed", self._release_suite_settings('"3600"'), "default"),
+            ("bool", self._release_suite_settings("true"), "default"),
+            ("nonfinite", self._release_suite_settings("nan"), "default"),
+            ("huge-integer", self._release_suite_settings("1000000000000000000000000000000"), "default"),
+            ("zero", self._release_suite_settings("0"), "default"),
+            ("negative", self._release_suite_settings("-1"), "default"),
+            ("above-hard-maximum", self._release_suite_settings("7201"), "default"),
+            ("unknown-key", b"[release_suite]\nother_deadline_seconds = 3600\n", "default"),
+            ("missing", b"[interaction]\nreporting_mode = 'silent'\n", "default"),
+            ("instance-invalid-does-not-fallback", self._release_suite_settings("true"), "instance"),
+        )
+        for label, payload, carrier in invalid:
+            with self.subTest(label=label):
+                fixture = ReleaseSuiteTests("run")
+                fixture.setUp()
+                try:
+                    target = fixture._default_settings_path() if carrier == "default" else fixture._instance_settings_path()
+                    target.write_bytes(payload)
+                    candidate, compilation = fixture.bound("success")
+                    result = fixture.execute_suite(candidate, compilation)
+                    self.assertFalse(result.passed)
+                    self.assertEqual(fixture.executor.timeout_calls, [])
+                finally:
+                    fixture.doCleanups()
+
+    def test_stale_instance_deadline_settings_never_pass(self) -> None:
+        candidate, compilation = self.bound("success")
+        self._instance_settings_path().write_bytes(b"[release_suite]\nunit_timeout_seconds = 4800\n")
+        with self.assertRaises(ReleaseContractError) as raised:
+            self.execute_suite(candidate, compilation)
+        self.assertEqual(raised.exception.code, "release-currentness-stale")
+        self.assertEqual(self.executor.timeout_calls, [])
+
+    def test_explicit_fixture_timeout_can_only_shorten_source_deadline(self) -> None:
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+            b"[release_suite]\nunit_timeout_seconds = 4800\n",
+        )
+        candidate, compilation = self.bound("timeout")
+        result = self.execute_suite(candidate, compilation, timeout_seconds=0.1)
+        self.assertEqual(result.outcome, "timed_out")
+        self.assertFalse(result.passed)
+        self.assertEqual(self.executor.timeout_calls, [0.1])
+
+    def test_explicit_fixture_timeout_cannot_lengthen_source_deadline(self) -> None:
+        self.fixture.write(
+            f"{CANONICAL_SOURCE_RELATIVE}/003_PROJECT_CONFIGURATION/caprmedio_framework_settings.toml",
+            b"[release_suite]\nunit_timeout_seconds = 3600\n",
+        )
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation, timeout_seconds=4800)
+        self.assertFalse(result.passed)
+        self.assertNotEqual(result.outcome, "passed")
+        self.assertEqual(self.executor.timeout_calls, [])
+
+    def test_successful_unit_deadline_carrier_tamper_or_removal_refuses_reverification(self) -> None:
+        candidate, compilation = self.bound("success")
+        result = self.execute_suite(candidate, compilation)
+        self.assertTrue(result.passed)
+        deadline_path = self.root / result.evidence_root / "unit-deadline.json"
+        original = deadline_path.read_bytes()
+        for label, replacement in (("tampered", original + b"\n"), ("missing", None)):
+            with self.subTest(label=label):
+                try:
+                    if replacement is None:
+                        deadline_path.unlink()
+                    else:
+                        deadline_path.write_bytes(replacement)
+                    with self.assertRaises(ReleaseContractError) as raised:
+                        verify_bound_suite_evidence(candidate, compilation, result)
+                    self.assertEqual(raised.exception.code, "release-suite-evidence-mismatch")
+                finally:
+                    deadline_path.write_bytes(original)
+
+    def test_unit_deadline_settings_mode_change_refuses_before_executor(self) -> None:
+        candidate, compilation = self.bound("success")
+        settings_path = self._default_settings_path()
+        original_mode = settings_path.stat().st_mode & 0o777
+        try:
+            settings_path.chmod(original_mode ^ 0o100)
+            with self.assertRaises(ReleaseContractError):
+                self.execute_suite(candidate, compilation)
+        finally:
+            settings_path.chmod(original_mode)
+        self.assertEqual(self.executor.timeout_calls, [])
 
     def test_actual_background_descendant_cannot_continue_or_pass(self) -> None:
         candidate, compilation = self.bound("descendant")
@@ -653,10 +838,12 @@ class ReleaseSuiteTests(unittest.TestCase):
                     before_settings = settings.read_bytes()
                     self.assertFalse(journal.exists())
                     result = fixture.execute_suite(candidate, compilation)
-                    self.assertEqual(result.outcome, "passed")
-                    self.assertTrue(result.passed)
+                    self.assertEqual(result.outcome, "failed")
+                    self.assertNotEqual(result.exit_code, 0)
+                    self.assertFalse(result.passed)
                     self.assertIsNotNone(result.receipt_sha256)
                     workspace = fixture.root / result.evidence_root / "workspace"
+                    self.assertFalse((workspace / ".git").exists())
                     self.assertFalse((workspace / ".caprmedio_runtime/framework/current.toml").exists())
                     self.assertFalse((workspace / ".caprmedio_runtime/framework/releases/N").exists())
                     self.assertFalse((workspace / ".agents/skills/ca").exists())
@@ -718,13 +905,40 @@ class ReleaseSuiteTests(unittest.TestCase):
 
     def test_recording_failure_after_actual_success_never_passes(self) -> None:
         candidate, compilation = self.bound()
-        with patch("release_suite._durable_bytes", side_effect=OSError("deliberate receipt failure")):
+        from release_suite import _durable_bytes
+
+        def fail_receipt_only(path, payload):
+            if Path(path).name == "receipt.json":
+                raise OSError("deliberate receipt failure")
+            return _durable_bytes(path, payload)
+
+        # Context is now durably recorded before process execution.  This
+        # fixture targets the intended post-success receipt failure only.
+        with patch("release_suite._durable_bytes", side_effect=fail_receipt_only):
             result = self.execute_suite(candidate, compilation)
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(result.executed_tests, self.canonical_testcase_count())
         self.assertEqual(result.outcome, "recording_uncertain")
         self.assertFalse(result.passed)
         self.assertIsNone(result.receipt_sha256)
+
+    def test_recording_enospc_retains_only_errno_and_never_passes(self) -> None:
+        candidate, compilation = self.bound()
+        from release_suite import _durable_bytes
+
+        def fail_receipt_only(path, payload):
+            if Path(path).name == "receipt.json":
+                raise OSError(errno.ENOSPC, "sensitive host path must not be retained", "/private/host/path")
+            return _durable_bytes(path, payload)
+
+        with patch("release_suite._durable_bytes", side_effect=fail_receipt_only):
+            result = self.execute_suite(candidate, compilation)
+
+        self.assertEqual(result.outcome, "recording_uncertain")
+        self.assertFalse(result.passed)
+        self.assertIn("OSError[errno=28]", result.reason)
+        self.assertNotIn("sensitive host path", result.reason)
+        self.assertNotIn("/private/host/path", result.reason)
 
 
 if __name__ == "__main__":

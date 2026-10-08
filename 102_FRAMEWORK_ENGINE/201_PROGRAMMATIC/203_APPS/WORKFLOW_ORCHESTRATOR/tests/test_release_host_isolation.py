@@ -22,7 +22,6 @@ for location in (APP, APP / "docker"):
 import backend  # noqa: E402
 import orchestrator  # noqa: E402
 import release_host_bridge  # noqa: E402
-from selected_execution import SelectedExecutionError  # noqa: E402
 
 
 RUN_ID = "release-host-isolation-run"
@@ -104,21 +103,51 @@ class ReleaseHostIsolationTests(unittest.TestCase):
                 release_host_bridge.invoke(self.root, {"operation": "status", "run_id": "foreign-run"})
         execute.assert_not_called()
 
-    def test_stale_frozen_source_refuses_host_status_before_client_access(self):
+    def test_historical_frozen_source_status_requires_exact_host_provenance_without_revalidation(self):
         frozen = {
             "request": {"run_id": RUN_ID, "execution": {"operation_route": "release_version"}},
             "graph": {"route": "release_version"},
         }
+        release_host_bridge.retain_binding(
+            self.root,
+            run_id=RUN_ID,
+            frozen_request_digest=release_host_bridge.request_digest(frozen["request"]),
+        )
         selected = mock.Mock()
         selected.load.return_value = frozen
-        selected._revalidate.side_effect = SelectedExecutionError("source pin is stale")
+        selected._revalidate.side_effect = AssertionError("historical observation must not revalidate source")
+        selected.run_directory.return_value = self.root / "no-selected-run-carrier"
+        status = mock.Mock(status="PENDING")
+        handle = mock.Mock()
+        handle.get_status.return_value = status
+        transport = mock.Mock()
+        transport.retrieve_workflow.return_value = handle
         with self.host_environment(), \
                 mock.patch.object(backend, "SelectedExecution", return_value=selected), \
                 mock.patch.object(backend, "_release_request_identity", return_value=IDENTITY), \
-                mock.patch.object(backend, "client") as client:
-            with self.assertRaisesRegex(SelectedExecutionError, "source pin is stale"):
+                mock.patch("release_host_bridge.availability", return_value={"ready": True}), \
+                mock.patch.object(backend, "client", return_value=transport) as client:
+            observed = backend.status(self.root, {"operation": "status", "run_id": RUN_ID})
+            self.assertEqual("PENDING", observed["scheduler_status"])
+            selected._revalidate.assert_not_called()
+            transport.retrieve_workflow.assert_called_once_with(RUN_ID)
+
+            # A saved Run may be observed after a legitimate source refresh,
+            # but its retained binding must still match the exact frozen request.
+            frozen["request"]["execution"]["tampered"] = True
+            with self.assertRaisesRegex(release_host_bridge.ReleaseHostUnavailable, "does not match"):
                 backend.status(self.root, {"operation": "status", "run_id": RUN_ID})
-        client.assert_not_called()
+
+            foreign = {
+                "request": {"run_id": "foreign-run", "execution": {"operation_route": "release_version"}},
+                "graph": {"route": "release_version"},
+            }
+            selected.load.return_value = foreign
+            with self.assertRaisesRegex(release_host_bridge.ReleaseHostUnavailable, "binding is unavailable"):
+                backend.status(self.root, {"operation": "status", "run_id": "foreign-run"})
+
+        client.assert_called_once_with(self.root)
+        transport.destroy.assert_called_once()
 
     def test_explicit_host_start_publishes_only_transport_not_a_run(self):
         interpreter = self.root / release_host_bridge.FIXED_INTERPRETER

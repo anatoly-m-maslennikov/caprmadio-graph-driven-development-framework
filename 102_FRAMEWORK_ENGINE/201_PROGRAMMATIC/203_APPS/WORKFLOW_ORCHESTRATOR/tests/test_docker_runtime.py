@@ -8,6 +8,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import yaml
+
 APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP))
 sys.path.insert(0, str(APP / "docker"))
@@ -80,23 +82,38 @@ class RuntimeTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "Docker runtime is unavailable"):
                     invoke(root, {"operation": "status", "run_id": "test"})
 
-    def test_resolved_compose_enforces_service_boundaries(self):
+    def test_compose_inputs_enforce_service_boundaries_without_a_daemon(self):
         runtime = Runtime(APP.parents[3], mock=True)
-        config = json.loads(runtime.call("--profile", "stdio", "config", "--format", "json"))
-        for service in config["services"].values():
+        arguments = ("--profile", "stdio", "config", "--format", "json")
+        expected_command = runtime.command(*arguments)
+        with patch("runtime.subprocess.run") as execute:
+            execute.return_value.returncode = 0
+            execute.return_value.stdout = ""
+            self.assertEqual("", runtime.call(*arguments))
+        execute.assert_called_once()
+        actual_command = execute.call_args.args[0]
+        self.assertEqual(expected_command, actual_command)
+        self.assertEqual(runtime.environment(), execute.call_args.kwargs["env"])
+
+        # Unit scope must not require an installed Docker daemon.  Parse the
+        # exact Compose inputs here; Docker's fully resolved config is covered
+        # by the opt-in container E2E harness.
+        config = yaml.safe_load((APP / "docker/compose.yaml").read_text())
+        services = config["services"]
+        for service in services.values():
             self.assertTrue(service["read_only"])
             self.assertEqual(service["cap_drop"], ["ALL"])
             self.assertEqual(service["restart"], "no")
             self.assertFalse(service.get("ports"))
             self.assertFalse(service.get("privileged", False))
-        agent = config["services"]["agent"]
+        agent = services["agent"]
         self.assertEqual(set(agent["networks"]), {"runtime"})
-        self.assertTrue(all(volume["type"] == "volume" for volume in agent["volumes"]))
+        self.assertEqual(agent["volumes"], ["agent_auth:/home/caprmedio/.codex"])
         self.assertNotIn("secrets", agent)
         for name in ("worker", "mcp"):
-            mounts = config["services"][name]["volumes"]
+            mounts = services[name]["volumes"]
             project = next(volume for volume in mounts if volume["target"] == "/project")
-            self.assertEqual(project["source"], str(runtime.root))
+            self.assertEqual(project["source"], "${CAPRMEDIO_PROJECT_ROOT}")
             self.assertFalse(project.get("read_only", False))
             self.assertEqual(
                 {volume["target"] for volume in mounts if volume.get("read_only")},

@@ -6,8 +6,8 @@ local_tier: Standard
 global_tier: 11
 status: Active
 author: Anatoly Maslennikov
-version: 2
-updated_at: "2026-10-05 18:02:02 +0400"
+version: 3
+updated_at: "2026-10-06 10:15:24 +0000"
 subjects:
   governs: "MCP/selected Release manifest publication"
   depends_on: [MCP, Projection, Manifest, Workflow, Step, Action, Operator, Run, Journal]
@@ -20,19 +20,18 @@ Derive and publish one additive Release manifest successor
 
 ## Scope
 
-The deterministic plan and authorized publication of the one Release route manifest successor.
+the construction of initial additive Release publication and its guarded, operation-specific source-pin refresh.
 
 ## Claim
 
-The publisher **must** derive and publish the exact admitted sixteen-route successor only through a trusted MCP lifecycle adapter that binds authorization, a closed publication intent, and canonical Journal evidence to the current canonical fifteen-route manifest and current D572 source admission.
+the publisher **must** derive and publish the exact admitted additive Release manifest through the existing trusted lifecycle adapter, binding each initial or refresh attempt to its exact canonical input, current D572 source frontier, candidate bytes and canonical Journal evidence.
 
 ## Details
 
-1. Load `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` through the existing loader. Reject a missing, malformed, stale, noncanonical, or non-fifteen-route input, an existing `release_version` route, or changed selected-source/query-source admissions.
-2. Derive only the current D572-declared `release_version` route and one `release_source_admissions` record through the source-owned admission parser. Reuse its accepted current frontier without copying stale literals, substitution, or inference.
-3. Copy every existing route row and `query_source_admissions` value unchanged. Preserve `source_freshness.selected_source_registry_ref`, `.selected_source_registry_version`, `.selected_source_registry_digest`, and `.selected_binding_ref`; update only `.selected_binding_digest` through the existing binding-digest calculation. Add the derived Release values, then compute the canonical manifest SHA-256 with its self field omitted from that digest computation.
-4. In plan mode, return the input binding, proposed successor digest, exact added values, and no effect. In execute mode, admit only a trusted host-created lifecycle context: it validates the named human Operator against `operators_registry`, and its grant binds the Project root, current manifest bytes, accepted source frontier, and candidate digest. A caller-supplied boolean, callback, or lifecycle record is not authorization.
-5. Before replacement, the adapter seals and stores one closed publication intent through the existing Work Journal pending mechanism. The intent fixes the input and candidate digests, target carrier, human author, source frontier, and the exact Journal event payload; it is not a new Workflow, Run, or ledger.
-6. Write the complete successor to a same-directory temporary regular file, atomically replace only the canonical manifest file, and reopen the exact published bytes through the existing loader. Accept publication only when that loader discovers exactly sixteen routes and the one admitted Release record.
-7. The adapter records the prior state as existing recovered `governed_project_state` evidence when necessary, then records the successor as existing completed `governed_project_change` evidence linked to that prior event. The positive Journal `result.version` is the event-history carrier revision, not an Atom Version or Projection metadata; the projection itself remains versionless and has its completed-rebuild `updated_at`.
-8. On restart or recording failure, inspect the exact target bytes before finalizing the sealed intent. If they match its candidate digest, finalize the exact pending Journal event without repeating the replacement. If they do not match, retain the evidence and report an ambiguous state; never replay an ambiguous mutation. The publisher itself does not write the Journal, dispatch O164, or create a second executor, Run writer, or Journal writer.
+1. choose the explicit operation. initial publication uses the normal strict loader and requires fifteen routes with no Release admission. refresh uses the separate narrow refresh-input validator and requires sixteen current routes plus **=1** stale Release admission. the ordinary loader remains strict.
+2. derive the current Release route and admission solely through D572's source-owned parser. for refresh, require equality of the Release route and equality of the old admission's complete non-Version/non-digest structure. refuse malformed pins, changed identities or paths, changed occurrences, other stale inputs and no-drift attempts.
+3. copy all existing route, query-admission and registry values unchanged. initial publication appends the admitted Release values; refresh replaces **only** its admission. recompute the selected-binding digest and canonical Manifest digest through their existing algorithms.
+4. return a byte-preserving plan by default. a refresh plan carries the explicit `publication_operation: refresh` marker; legacy initial plans retain their existing schema. the trusted host validates the registered human Operator and seals the operation, root, raw input digest, current source frontier and exact candidate serialization. caller booleans or callbacks do not grant authority.
+5. acquire the existing canonical carrier Journal lock; freshly recheck the input and sources; store one closed pending intent; freshly recheck them again **before** same-directory atomic replacement. preserve the operation marker in refresh intents while keeping historical initial intents unchanged.
+6. strictly reopen the complete published bytes through the normal loader, then finalize the existing completed governed-project-change event and its prior-event link. the Journal carrier revision does not give the Projection an independent Version.
+7. **after** a recording failure or restart, reopen the exact pending intent and physical target. matching candidate bytes permit finalizing that same event once without a replacement. nonmatching bytes or changed sources retain pending evidence and a truthful blocked/ambiguous result. recovery never grants pre-write authority.

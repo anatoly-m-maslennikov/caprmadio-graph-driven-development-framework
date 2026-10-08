@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -51,6 +52,7 @@ _REQUIRED_SKILL_DESTINATIONS = frozenset({"SKILLS/ca/SKILL.md", "SKILLS/ca/agent
 _SANDBOX_PROJECT_ROOT = Path("/workspace")
 _SANDBOX_SOURCE_BINDINGS = _SANDBOX_PROJECT_ROOT / ".caprmedio_release/source_bindings.json"
 _SANDBOX_REPORT = Path("/output/coverage.xml")
+_CHILD_SCRATCH = Path("/tmp/caprmedio-release-suite")
 _COMPILED_PROBE_MODULE = (
     "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION/"
     "tests/test_release_compilation.py"
@@ -379,6 +381,10 @@ import sys
 import unittest
 
 module_parent, pattern, result_path = sys.argv[1:]
+# Discovering a flat test module imports its siblings by name.  Each child
+# owns exactly one sealed module, so put that module's parent ahead of the
+# project root before discovery and never inherit a prior child's imports.
+sys.path.insert(0, module_parent)
 
 class RecordingResult(unittest.TestResult):
     def __init__(self):
@@ -451,19 +457,25 @@ class ObservedCase:
 def _run_module(inputs: BoundInputs, module_path: str, results_root: Path) -> tuple[list[ObservedCase], list[str]]:
     carrier = _project_path(inputs.root, module_path, label="test module")
     result_path = results_root / (_sha256(module_path.encode("utf-8")) + ".json")
-    environment = {
-        "PATH": os.environ.get("PATH", os.defpath),
-        "PYTHONDONTWRITEBYTECODE": "1",
-        "TMPDIR": "/tmp",
-    }
-    child = subprocess.run(
-        (sys.executable, "-c", _CHILD_HARNESS, str(carrier.parent), carrier.name, str(result_path)),
-        cwd=inputs.root,
-        env=environment,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    # Each child owns a fresh disposable leaf. Retained synthetic fixture
+    # releases must not exhaust a later module's fixed scratch filesystem.
+    scratch = _prepare_child_scratch()
+    with tempfile.TemporaryDirectory(prefix="module-", dir=scratch) as module_scratch:
+        environment = {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "TMPDIR": module_scratch,
+            "TEMP": module_scratch,
+            "TMP": module_scratch,
+        }
+        child = subprocess.run(
+            (sys.executable, "-c", _CHILD_HARNESS, str(carrier.parent), carrier.name, str(result_path)),
+            cwd=inputs.root,
+            env=environment,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
     if child.returncode != 0 or result_path.is_symlink() or not result_path.is_file():
         detail = (child.stderr or child.stdout or "child test discovery failed").strip()
         return [], [f"{module_path}: {detail[:2000]}"]
@@ -577,10 +589,33 @@ def _write_report(inputs: BoundInputs, cases: list[ObservedCase], module_errors:
     return complete, "; ".join(module_errors)
 
 
+def _prepare_child_scratch() -> Path:
+    """Return the fixed, private parent for all child-process temporaries."""
+
+    try:
+        _CHILD_SCRATCH.mkdir(mode=0o700, parents=False, exist_ok=True)
+    except OSError as error:
+        raise SuiteError("cannot prepare release-suite child scratch") from error
+    try:
+        metadata = _CHILD_SCRATCH.lstat()
+    except OSError as error:
+        raise SuiteError("cannot inspect release-suite child scratch") from error
+    if not stat.S_ISDIR(metadata.st_mode) or stat.S_ISLNK(metadata.st_mode):
+        raise SuiteError("release-suite child scratch is not a regular directory")
+    if metadata.st_uid != os.getuid():
+        raise SuiteError("release-suite child scratch is not driver-owned")
+    try:
+        _CHILD_SCRATCH.chmod(0o700)
+    except OSError as error:
+        raise SuiteError("cannot secure release-suite child scratch") from error
+    return _CHILD_SCRATCH
+
+
 def _execute_bound(inputs: BoundInputs) -> int:
     """Execute one already-validated frame without changing its bindings."""
 
-    temporary = Path(tempfile.mkdtemp(prefix="release-suite-", dir=inputs.report_path.parent))
+    scratch = _prepare_child_scratch()
+    temporary = Path(tempfile.mkdtemp(prefix="run-", dir=scratch))
     cases: list[ObservedCase] = []
     module_errors: list[str] = []
     for module_path in inputs.phase_map.unit_paths:

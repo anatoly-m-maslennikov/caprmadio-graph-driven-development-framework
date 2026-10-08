@@ -12,13 +12,30 @@ import json
 from pathlib import Path
 import shutil
 
+from release_suite_reference_context import (
+    _project_structure_ref,
+    _prompt_binding_rows,
+    _resolver_authority_pins,
+    _selected_source_refresh_frontier,
+)
 from release_source_admission import (
     AUTHORITY_PIN,
     derive_release_graph_admission,
     derive_release_private_carriers,
     derive_release_source_admission,
+    derive_unknown_effect_resolver_authority,
 )
 from selected_routes import PROJECT_SETTINGS_REF, canonical_digest, canonical_json, selected_manifest_ref
+
+
+_UNIT_DEADLINE_SETTINGS = (
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/"
+    "caprmedio_framework_default_settings.toml",
+    ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+    "000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/"
+    "caprmedio_framework_settings.toml",
+)
 
 
 def _pins(value: object) -> dict[str, str]:
@@ -72,9 +89,14 @@ def copy_control_closure(repository: Path, root: Path) -> None:
     pins[AUTHORITY_PIN["source_path"]] = AUTHORITY_PIN["digest"]
     freshness = manifest["source_freshness"]
     pins[freshness["selected_source_registry_ref"]] = freshness["selected_source_registry_digest"]
+    settings_relative = PROJECT_SETTINGS_REF.as_posix()
+    settings_source = _retained_source(repository, settings_relative, pins.get(settings_relative))
+    project_structure_relative = _project_structure_ref(settings_source.read_bytes())
     required = set(pins) | {
         ".caprmedio_caprmedio/operators_registry.toml",
-        PROJECT_SETTINGS_REF.as_posix(),
+        settings_relative,
+        project_structure_relative,
+        *_UNIT_DEADLINE_SETTINGS,
     }
     for relative in sorted(required):
         source = _retained_source(repository, relative, pins.get(relative))
@@ -82,6 +104,40 @@ def copy_control_closure(repository: Path, root: Path) -> None:
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         target.chmod(source.stat().st_mode & 0o777)
+
+    # D580 declares a closed Prompt binding frontier.  Copy only its two
+    # binding carriers and their exact pinned active Atom files; no directory
+    # discovery or legacy Plan material is admitted into the retained fixture.
+    d580_relative = next(path for path in pins if "/CA-D-580-" in path)
+    for binding_relative, binding_digest in _prompt_binding_rows((root / d580_relative).read_bytes()):
+        binding_source = _retained_source(repository, binding_relative, binding_digest)
+        binding_target = root / binding_relative
+        binding_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(binding_source, binding_target)
+        binding_target.chmod(binding_source.stat().st_mode & 0o777)
+        binding = json.loads(binding_target.read_bytes())
+        for pin in binding["sources"]:
+            atom_source = _retained_source(repository, pin["path"], pin["sha256"])
+            atom_target = root / pin["path"]
+            atom_target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(atom_source, atom_target)
+            atom_target.chmod(atom_source.stat().st_mode & 0o777)
+
+    # D580 separately declares five exact selected-source refresh authority
+    # leaves.  They are not Prompt bindings, so copy and revalidate them as
+    # their own closed frontier rather than discovering an MCP directory.
+    refresh_paths = _selected_source_refresh_frontier((root / d580_relative).read_bytes(), {})
+    for relative in refresh_paths:
+        source = _retained_source(repository, relative, None)
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        target.chmod(source.stat().st_mode & 0o777)
+    refresh_captured = {
+        relative: ((root / relative).read_bytes(), (root / relative).stat().st_mode & 0o777)
+        for relative in refresh_paths
+    }
+    _selected_source_refresh_frontier((root / d580_relative).read_bytes(), refresh_captured)
 
     # Implementation carriers have D572 byte declarations, not Atom pins.
     # Preserve their actual modes and independently check the copied bytes.
@@ -93,6 +149,23 @@ def copy_control_closure(repository: Path, root: Path) -> None:
         target.chmod(source.stat().st_mode & 0o777)
         if hashlib.sha256(target.read_bytes()).hexdigest() != row["sha256"]:
             raise RuntimeError(f"golden private carrier changed: {row['source_path']}")
+
+    # The separate four-pin resolver authority is a closed D572 declaration,
+    # not a Release route or arbitrary application source directory.
+    authority = root / AUTHORITY_PIN["source_path"]
+    if hashlib.sha256(authority.read_bytes()).hexdigest() != AUTHORITY_PIN["digest"]:
+        raise RuntimeError("golden resolver authority carrier changed")
+    resolver_pins = _resolver_authority_pins(authority.read_text(encoding="utf-8"))
+    for pin in resolver_pins:
+        source = _retained_source(repository, pin["source_path"], pin["digest"])
+        target = root / pin["source_path"]
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        target.chmod(source.stat().st_mode & 0o777)
+        if hashlib.sha256(target.read_bytes()).hexdigest() != pin["digest"]:
+            raise RuntimeError(f"golden resolver source changed: {pin['source_path']}")
+    if derive_unknown_effect_resolver_authority(root) != resolver_pins:
+        raise RuntimeError("golden resolver authority differs from captured D572")
 
     route, copied_admission = derive_release_graph_admission(root)
     manifest["routes"].append(route)

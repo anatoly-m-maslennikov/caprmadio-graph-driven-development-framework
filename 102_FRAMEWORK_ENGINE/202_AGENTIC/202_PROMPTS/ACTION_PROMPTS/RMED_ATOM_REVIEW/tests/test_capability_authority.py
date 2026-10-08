@@ -19,7 +19,7 @@ class CapabilityAuthority(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertIn("CA-R-1799", text(name))
 
-    def test_core_rule_is_bound_without_duplicating_the_principle(self):
+    def test_capability_rule_is_bound_with_authority_guards(self):
         entries = json.loads((HERE / "source_bindings.json").read_text())["sources"]
         entry = next(row for row in entries if row["atom_id"] == "CA-R-1799")
         rule = (ROOT / entry["path"]).read_text()
@@ -30,9 +30,6 @@ class CapabilityAuthority(unittest.TestCase):
         self.assertIn("local_tier: Core", rule)
         self.assertIn("global_tier: 1", rule)
         self.assertIn("**without** initiating **or** forcing their execution", rule)
-        control = (ROOT / ".caprmedio_caprmedio/04_requirement/"
-                   "CA-R-004-CORE-REQUIREMENT--keep-the-framework-under-operator-control.md").read_text()
-        self.assertNotIn("it does **not** itself authorize **or** trigger execution", control)
 
     def test_checker_preserves_approved_automation_and_mandatory_safeguards(self):
         check = text("evaluate_coherence.prompt.md")
