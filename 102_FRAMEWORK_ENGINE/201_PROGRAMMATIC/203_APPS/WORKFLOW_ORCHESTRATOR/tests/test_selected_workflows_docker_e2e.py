@@ -115,16 +115,21 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         request = fixture.request(request_id=request_id)
         before = fixture.snapshot()
         journal = root / ".caprmedio_caprmedio/_journal"
-        self.assertTrue(journal.is_dir(), "preview requires the valid empty canonical Journal")
+        self.assertTrue(journal.is_dir(), "preview requires the valid canonical Journal")
         records_before = self._recording_snapshot(root)
-        self.assertFalse(list(journal.glob("*.ndjson")), "preview fixture must contain no fabricated Run events")
+        initial_events = self._events(root)
+        if fixture.case.case_id == "W03":
+            self.assertEqual(["golden-w03-predecessor"], [event.get("event_id") for event in initial_events])
+            self.assertTrue(all(event.get("schema_version") != 5 for event in initial_events), initial_events)
+        else:
+            self.assertEqual([], initial_events, "preview fixture must contain no fabricated Run events")
         result = await self._call(runtime, root, fixture.case.route, request)
         self.assertEqual("preview", result.get("disposition"), result)
         self.assertIn("proposal_receipt", result, result)
         self.assertIn("proposal_receipt_digest", result, result)
         self.assertEqual(before, fixture.snapshot(), "a preview must not mutate admitted authority")
         self.assertEqual(records_before, self._recording_snapshot(root), "preview must not write Journal or Run records")
-        self.assertFalse(list(journal.glob("*.ndjson")))
+        self.assertEqual(initial_events, self._events(root), "preview must preserve initial Journal evidence")
         return result
 
     @staticmethod
@@ -266,6 +271,16 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             expected_definitions[action_run_id] = binding["action"]
             expected_parent[step_run_id] = request_id
             expected_parent[action_run_id] = step_run_id
+            if route.get("route") == "replace_atom" and action_id == "CA-O-128":
+                replacements = [
+                    item for item in route.get("native_action_calls", [])
+                    if isinstance(item, Mapping) and item.get("atom_id") == "CA-O-051"
+                ]
+                self.assertEqual(1, len(replacements), route)
+                child_run_id = f"{action_run_id}:nested:CA-O-051"
+                expected_run_ids.append(child_run_id)
+                expected_definitions[child_run_id] = replacements[0]
+                expected_parent[child_run_id] = action_run_id
 
         # J01: the retained selected result must be a clean terminal receipt,
         # not the outer DBOS acknowledgement returned by enqueue_selected.
@@ -283,7 +298,8 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         # happy-path substitute.
         events = [
             event for event in self._events(root)
-            if event.get("llm_session", {}).get("uuid") == request_id
+            if event.get("schema_version") == 5 and event.get("kind") == "workflow_execution"
+            and event.get("llm_session", {}).get("uuid") == request_id
         ]
         self.assertEqual(2 * len(expected_run_ids), len(events), events)
         self.assertEqual(len({event.get("event_id") for event in events}), len(events), events)
@@ -311,6 +327,19 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     self.assertNotIn("parent_run_id", event["run"], event)
                 else:
                     self.assertEqual(parent, event["run"].get("parent_run_id"), event)
+
+        if route.get("route") == "replace_atom":
+            replacement_events = [
+                event for event in self._events(root)
+                if event.get("schema_version") == 3
+                and event.get("event_id") == f"selected-replacement:{request_id}:step:1:action:1:nested:CA-O-051"
+            ]
+            self.assertEqual(1, len(replacement_events), replacement_events)
+            replacement = replacement_events[0]
+            self.assertEqual("golden-w03-predecessor", replacement.get("previous_result_event"), replacement)
+            self.assertEqual("CA-R-100", replacement.get("predecessor_atom_id"), replacement)
+            self.assertEqual(["CA-R-103"], replacement.get("successor_atom_ids"), replacement)
+            self._safe_existing_ref(root, replacement.get("result", {}).get("path"), label="replacement archive")
 
         # J06/J07/J08: status's terminal records and Journal evidence agree on
         # clean outcome and actual retained result/effect references.

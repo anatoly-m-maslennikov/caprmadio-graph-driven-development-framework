@@ -174,6 +174,11 @@ class GoldenProject:
         # it is not a fabricated Run receipt.
         (self.root / ".caprmedio_caprmedio/_journal").mkdir(parents=True, exist_ok=True)
         self._write_native_authority()
+        if self.case.route in {"create_atom", "replace_atom"}:
+            self._write_complete_carrier_project_structure()
+            self._copy_complete_carrier_authority()
+        if self.case.route == "replace_atom":
+            self._seed_w03_predecessor_journal()
         self._write_graph_authority()
         self._write_compiler_authority()
         if self.case.route == "update_atom":
@@ -207,6 +212,8 @@ class GoldenProject:
     @property
     def _authority_dir(self) -> Path:
         # Atom discovery uses the registered content-role directory convention.
+        if self.case.route in {"create_atom", "replace_atom"}:
+            return self.root / ".caprmedio_caprmedio/PARENT/04_requirement"
         return self.root / ".caprmedio_caprmedio/04_requirement"
 
     def _status_model(self) -> dict[str, Any]:
@@ -261,6 +268,103 @@ class GoldenProject:
         )
         (self.root / "fixture/reference.txt").parent.mkdir(parents=True, exist_ok=True)
         (self.root / "fixture/reference.txt").write_text("CHILD\n", encoding="utf-8")
+
+    def _seed_w03_predecessor_journal(self) -> None:
+        """Retain W03's real prior state instead of fabricating an O051 link.
+
+        Replacement consumes one existing predecessor Carrier.  Its golden
+        fixture therefore begins with the one canonical Journal result that
+        binds that exact current path, version, and bytes; it is deliberately
+        not a selected Run receipt and preview must preserve it unchanged.
+        """
+        import sys
+
+        tools_root = Path(__file__).resolve().parents[3] / "201_TOOLS"
+        if str(tools_root) not in sys.path:
+            sys.path.insert(0, str(tools_root))
+        from lifecycle_intents import carrier_descriptor
+        from work_journal import append_sealed_events, with_event_digest
+
+        predecessor = carrier_descriptor(self.root, "CA-R-100")
+        event = with_event_digest({
+            "schema_version": 3,
+            "event_id": "golden-w03-predecessor",
+            "action_id": "fixture-initial-state",
+            "event": "completed",
+            "kind": "governed_project_change",
+            "subject_kind": "file",
+            "author": "golden-operator",
+            "occurred_at": "2026-10-06T00:00:00+00:00",
+            "llm_session": {"app": "golden-fixture", "uuid": "w03-predecessor"},
+            "structural_scope": "CORE_META_MODEL",
+            "action_type": "ADD",
+            "sources": [],
+            "result": {
+                "state": "present",
+                "filename": predecessor["filename"],
+                "version": predecessor["version"],
+                "path": predecessor["path"],
+                "sha256": predecessor["digest"],
+            },
+        })
+        append_sealed_events(
+            self.root, [event], author="golden-operator",
+            local_date="2026-10-06", timezone="UTC",
+        )
+
+    def _copy_complete_carrier_authority(self) -> None:
+        """Copy the validator's finite, current source closure for W01/W03."""
+        import sys
+
+        validate_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "VALIDATE_ATOMS"
+        if str(validate_root) not in sys.path:
+            sys.path.insert(0, str(validate_root))
+        from validate_atoms_workers.proposed_carrier import _REGISTRY_IDS, _SUPPORT_IDS, _entry
+
+        for atom_id in (*_REGISTRY_IDS, *_SUPPORT_IDS):
+            entry = _entry(atom_id)
+            relative = _safe_relative(entry.get("source_path"), name="complete-carrier source")
+            expected = entry.get("sha256")
+            source = self.source_root / relative
+            if not isinstance(expected, str) or not source.is_file() or file_digest(source) != expected:
+                raise GoldenCorpusError(f"complete-carrier source pin is unavailable: {atom_id}")
+            destination = self.root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+            if file_digest(destination) != expected:
+                raise GoldenCorpusError(f"complete-carrier source pin changed: {atom_id}")
+        status_sources = list(self.source_root.glob(
+            ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/"
+            "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1309-*.md"
+        ))
+        if len(status_sources) != 1:
+            raise GoldenCorpusError("complete-carrier Requirement status authority is ambiguous")
+        status_source = status_sources[0]
+        status_destination = self.root / status_source.relative_to(self.source_root)
+        status_destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(status_source, status_destination)
+
+    def _write_complete_carrier_project_structure(self) -> None:
+        """Use a complete self-contained Structure only in W01/W03 fixtures."""
+        (self.root / ".caprmedio_caprmedio/project_structure.toml").write_text(
+            "schema_version = 1\n\n"
+            "[[scope_units]]\n"
+            'scope_unit_name = "PARENT"\nparent = "PROJECT"\n'
+            'scope_unit_type = "Ordered"\nscope_unit_label = "LAYER"\n'
+            "structural_level = 1\nlocal_order = 1\nnavigational_order_number = 0\n"
+            'authority_path = ".caprmedio_caprmedio/PARENT"\ndelivery_path = "delivery/PARENT"\n\n'
+            "[[scope_units]]\n"
+            'scope_unit_name = "CHILD"\nparent = "PARENT"\n'
+            'scope_unit_type = "Unordered"\nscope_unit_label = "FEATURE"\n'
+            "structural_level = 2\nnavigational_order_number = 0\n"
+            'authority_path = ".caprmedio_caprmedio/PARENT/CHILD"\ndelivery_path = "delivery/PARENT/CHILD"\n\n'
+            "[[scope_units]]\n"
+            'scope_unit_name = "DEST"\nparent = "PROJECT"\n'
+            'scope_unit_type = "Unordered"\nscope_unit_label = "LAYER"\n'
+            "structural_level = 1\nnavigational_order_number = 1\n"
+            'authority_path = ".caprmedio_caprmedio/DEST"\ndelivery_path = "delivery/DEST"\n',
+            encoding="utf-8",
+        )
 
     @property
     def graph_source_dir(self) -> Path:
@@ -566,9 +670,17 @@ class GoldenProject:
 
     def _carrier(self, atom_id: str, slug: str, summary: str) -> dict[str, str]:
         return {
-            "path": f".caprmedio_caprmedio/04_requirement/{atom_id}--{slug}.md",
-            "frontmatter": f"atom_id: {atom_id}\ncontent_role: Requirement\nstatus: Active",
-            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture scope.\n",
+            "path": (self._authority_dir / f"{atom_id}--{slug}.md").relative_to(self.root).as_posix(),
+            "frontmatter": (
+                f"atom_id: {atom_id}\ncontent_role: Requirement\ncurrent_scope_unit: PARENT\n"
+                "claim_target_scope_unit: PARENT\nlocal_tier: Standard\nglobal_tier: 12\n"
+                "author: golden-operator\nstatus: Active\nsubjects:\n"
+                "  governs: Atom/Test\n  depends_on: []\nrelations: {}"
+            ),
+            "content": (
+                f"# Summary\n\n{summary}\n\n## Scope\n\nFixture scope.\n\n"
+                "## Claim\n\nFixture claim.\n\n## Details\n\nFixture details.\n"
+            ),
         }
 
     def _descriptor(self, atom_id: str) -> dict[str, Any]:
