@@ -24,6 +24,18 @@ class MCPHTTPRuntimeTests(unittest.TestCase):
         (root / ".git").mkdir()
         return root
 
+    @staticmethod
+    def _published_status(port=8099, *, state="running", health="healthy", publishers=None):
+        if publishers is None:
+            publishers = [{
+                "Protocol": "tcp", "TargetPort": 8092,
+                "PublishedPort": port, "URL": "127.0.0.1",
+            }]
+        return {"services": [{
+            "Service": "mcp-http", "State": state, "Health": health,
+            "Publishers": publishers,
+        }]}
+
     def test_explicit_port_and_token_are_required_without_agent_auth(self):
         runtime = Runtime(self.root())
         with patch.dict(os.environ, {}, clear=True):
@@ -31,11 +43,38 @@ class MCPHTTPRuntimeTests(unittest.TestCase):
                 runtime.mcp_http_start()
         with patch.dict(os.environ, {"CAPRMEDIO_MCP_HTTP_PORT": "8099",
                                      "CAPRMEDIO_MCP_HTTP_SECRET_TOKEN": "token"}, clear=True):
-            with patch.object(runtime, "call", return_value="") as call:
+            with patch.object(runtime, "call", return_value="") as call, \
+                    patch.object(runtime, "mcp_http_status", return_value=self._published_status()):
                 result = runtime.mcp_http_start()
         self.assertEqual("http://127.0.0.1:8099/mcp", result["url"])
         self.assertIn("mcp-http", call.call_args.args)
         self.assertTrue(call.call_args.kwargs["http"])
+
+    def test_start_requires_exact_loopback_publisher_admission(self):
+        cases = {
+            "missing": self._published_status(publishers=[]),
+            "wrong-port": self._published_status(port=8100),
+            "wildcard": self._published_status(publishers=[{
+                "Protocol": "tcp", "TargetPort": 8092,
+                "PublishedPort": 8099, "URL": "0.0.0.0",
+            }]),
+            "nonhealthy": self._published_status(health="starting"),
+            "multiple-publishers": self._published_status(publishers=[
+                {"Protocol": "tcp", "TargetPort": 8092, "PublishedPort": 8099, "URL": "127.0.0.1"},
+                {"Protocol": "tcp", "TargetPort": 8092, "PublishedPort": 8100, "URL": "127.0.0.1"},
+            ]),
+            "multiple-services": {"services": self._published_status()["services"] * 2},
+        }
+        for name, status in cases.items():
+            with self.subTest(name=name), \
+                    patch.dict(os.environ, {"CAPRMEDIO_MCP_HTTP_PORT": "8099",
+                                             "CAPRMEDIO_MCP_HTTP_SECRET_TOKEN": "secret-token"}, clear=True):
+                runtime = Runtime(self.root())
+                with patch.object(runtime, "call", return_value=""), \
+                        patch.object(runtime, "mcp_http_status", return_value=status):
+                    with self.assertRaisesRegex(RuntimeError, "HTTP MCP published listener admission failed") as error:
+                        runtime.mcp_http_start()
+            self.assertNotIn("secret-token", str(error.exception))
 
     def test_overlay_is_loopback_only_and_has_no_agent_or_socket(self):
         text = (APP / "docker/mcp-http.compose.yaml").read_text()

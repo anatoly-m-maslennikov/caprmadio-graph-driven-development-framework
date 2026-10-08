@@ -25,7 +25,7 @@ services:
         target: /project/.git
         read_only: true
         bind: {create_host_path: false}
-    networks: [runtime]
+    networks: [runtime, http_publication]
     ports:
       - "127.0.0.1:${CAPRMEDIO_MCP_HTTP_PORT:?Set an explicit HTTP MCP port}:8092"
     healthcheck:
@@ -33,3 +33,8 @@ services:
       interval: 2s
       timeout: 5s
       retries: 20
+
+networks:
+  http_publication:
+    driver: bridge
+    internal: false

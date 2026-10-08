@@ -163,11 +163,37 @@ class Runtime:
             raise ValueError("Set CAPRMEDIO_MCP_HTTP_SECRET_TOKEN explicitly")
         return port
 
+    @staticmethod
+    def _http_publisher_admitted(status, port):
+        """Require the exact host binding before advertising an HTTP endpoint."""
+        services = status.get("services") if isinstance(status, dict) else None
+        if not isinstance(services, list):
+            return False
+        rows = [row for row in services if isinstance(row, dict) and row.get("Service") == "mcp-http"]
+        if len(rows) != 1:
+            return False
+        row = rows[0]
+        if row.get("State") != "running" or row.get("Health") != "healthy":
+            return False
+        publishers = row.get("Publishers")
+        if not isinstance(publishers, list) or len(publishers) != 1:
+            return False
+        publisher = publishers[0]
+        return (
+            isinstance(publisher, dict)
+            and publisher.get("Protocol") == "tcp"
+            and publisher.get("TargetPort") == 8092
+            and publisher.get("PublishedPort") == port
+            and publisher.get("URL") == "127.0.0.1"
+        )
+
     def mcp_http_start(self):
         self.prepare(require_auth=False)
         port = self._http_port()
         self.call("up", "-d", "--wait", "--wait-timeout", "60", "--force-recreate", "mcp-http",
                   http=True, timeout=90)
+        if not self._http_publisher_admitted(self.mcp_http_status(), port):
+            raise RuntimeError("HTTP MCP published listener admission failed")
         return {"runtime": "docker", "service": "mcp-http", "outcome": "ready",
                 "url": f"http://127.0.0.1:{port}/mcp"}
 
