@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 7
-updated_at: "2026-10-08 11:29:09 +0000"
+version: 6
+updated_at: "2026-10-08 10:44:44 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -80,17 +80,9 @@ a fresh Docker diagnostic independently found a real publication defect: `mcp-ht
 
 the rebuilt unselected development image is `sha256:f8bcb97088e62728c6e48fca703e36fb15a4950196e18fafb0d9b9319dca59a6`, labelled with exact Engine commit `b1c2bd18a`. A real Docker diagnostic now observes the running, healthy HTTP service with `tcp`, target `8092`, published port `18092`, and bind `127.0.0.1`. Its retained receipt is `http-connectivity-ECF9ol9a/diagnostic.log`, SHA-256 `2e8d3fc5432e3e03cad67f1d8f76855e9532b9388ae89afefa8925b5cd1c03d6`. The diagnostic still fails its direct TCP assertion with this session's `PermissionError`, errno `1`; it establishes corrected Docker publication, not MCP protocol or Workflow success. All test services were stopped after the diagnostic.
 
-### Current source admission and proof candidate
-
-the current selected binding initially refused admission because two private source-carrier pins in D572 lagged the accepted Engine. Commit `5fab36806` updates only those pins, preserves D572@28, and advances its exact reader pin to D572@29. Fourteen focused admission tests passed. The serialized public binding has no admission drift, so no Manifest rewrite, Journal reconciliation or Release was performed. An actual advertised MCP reload restored current discovery and complete Change Atom Status context. P1615's closure preview was admitted without changing that Plan or dispatching a Run.
-
-the fresh unselected development image is `sha256:75759a40209b4f2ab9adae212d1f3d8f771bb252a986bcdd5d24dead90bb9cb9`, labelled with exact Engine commit `5fab36806`. The Terminal proof script now selects this image and a fresh retained report directory. The preceding accepted stdio and Status receipts remain exact historical evidence; this pin-only correction is not a new functional HTTP receipt. Installed N is unchanged.
-
 ### Remaining acceptance blocker
 
-actual Docker localhost HTTP proof remains unaccepted: this session's direct host loopback connection is denied by its permission profile. Synthetic authentication / Host / Origin / token-rotation / lifecycle checks and actual Docker port metadata do not substitute for that proof. `.caprmedio_tmp/epic-first-cut-20261008/run-http-proof.sh` targets the current `5fab36806` image above, uses a fresh retained directory and report on each invocation, and is ready for the Operator's Terminal. This Task and Epic closure remain Active until that actual proof is received. Installed N, historical failed receipts and deferred work are preserved.
-
-the independently accepted Status implementation Plans remain eligible for closure, but the Project's Docker worker is not running. Its saved transport marker alone does not prove availability. No closure Run has been queued; the admitted P1615 preview is not execution or completion.
+actual Docker localhost HTTP proof remains unaccepted: this session's direct host loopback connection is denied by its permission profile. Synthetic authentication / Host / Origin / token-rotation / lifecycle checks and actual Docker port metadata do not substitute for that proof. `.caprmedio_tmp/epic-first-cut-20261008/run-http-proof.sh` now targets the repaired `b1c2bd18a` image above, uses a fresh retained directory and report on each invocation, and is ready for the Operator's Terminal. This Task and Epic closure remain Active until that actual proof is received. Installed N, historical failed receipts and deferred work are preserved.
 
 
 ## Definition of Done
