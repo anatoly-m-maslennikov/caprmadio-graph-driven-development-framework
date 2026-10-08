@@ -33,6 +33,7 @@ from release_manifest_publisher import (  # noqa: E402
     recover_release_manifest_publish,
     refresh_release_manifest,
 )
+import selected_routes as selected_routes_module  # noqa: E402
 from selected_routes import load_selected_manifest, selected_manifest_ref  # noqa: E402
 
 REPOSITORY = MCP.parents[2]
@@ -59,10 +60,43 @@ _FROZEN_CARRIERS = {
         ("ca_o_128_v3.md", "b5d052e97bae6ada98849380199e5c67cbf090900beb33ca202f7872d56301e8"),
 }
 _FROZEN_D572_CARRIERS = {
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/05_method/CA-M-332-TOOLS-METHOD--derive-complete-release-delivery-plan.md": ("ca_m_332_v3.md", "88500268687e6b2c2a5736f0d767d071a085e9d612df83e9cabdd6588793fbfa"),
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/06_evaluation/CA-E-586-TOOLS-QA_CASE--verify-complete-and-source-bound-release-suite-evidence.md": ("ca_e_586_v3.md", "4be567eff47d0bda089091722bd8008c81b94765445fa1ed6ff10205bea0b7dd"),
+    ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-562-TOOLS-DELIVERY--bind-full-framework-runtime-installation-boundary.md": ("ca_d_562_v2.md", "d6509c48567ec4627616597950d892fb6fba5f287f86dbff2e828b1578f5190b"),
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-567-TOOLS-DELIVERY--bind-validated-compiler-and-package-handoff.md": ("ca_d_567_v3.md", "e5bc56c0940b53699e9c25bb883ac42b24755fc0c1b65411ccc088c83dd76094"),
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-579-TOOLS-DELIVERY--deliver-the-release-suite-driver-and-junit-report-boundary.md": ("ca_d_579_v6.md", "9f52377504f5a1beaa0668ddea62bdad532f3da3e506b8b41f402235591ccadd"),
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/07_delivery/CA-D-580-TOOLS-DELIVERY--encode-the-private-release-suite-reference-context.md": ("ca_d_580_v4.md", "30221b0d820e1f06022ee74ef2dda270bc4813da847c122f8d4dd64546973e95"),
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_docker_e2e.py": ("test_docker_e2e.d572v13.py", "a43359c6b3984c85d8399c5aa371120572a8f3b6fc492f8aad8af66b16e6dbda"),
+    "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_workflows_docker_e2e.py": ("test_selected_workflows_docker_e2e.d572v13.py", "48abd23bc8401149f17e1e299cf85b6183986f091bfae70274f2204881279f71"),
+}
+_MOVED_FIXTURE_SOURCES = {
+    (
+        ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/"
+        "29-CA-P-1618-TASK--accept-current-artifact-query-source-frontier.md"
+    ): (
+        ".caprmedio_caprmedio/03_plan/done/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/"
+        "29-CA-P-1618-TASK--accept-current-artifact-query-source-frontier.md"
+    ),
+    (
+        ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "10-CA-P-1620-TASK--deliver-release-version-workflow/done/"
+        "02-CA-P-1622-TASK--review-release-version-source-and-admission.md"
+    ): (
+        ".caprmedio_caprmedio/03_plan/done/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "10-CA-P-1620-TASK--deliver-release-version-workflow/done/"
+        "02-CA-P-1622-TASK--review-release-version-source-and-admission.md"
+    ),
+    (
+        ".caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/"
+        "15-CA-P-1535-TASK--accept-final-journal-query-source.md"
+    ): (
+        ".caprmedio_caprmedio/03_plan/done/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/"
+        "08-CA-P-1520-TASK--deliver-read-only-artifact-and-journal-query-workflows/"
+        "15-CA-P-1535-TASK--accept-final-journal-query-source.md"
+    ),
 }
 
 
@@ -176,6 +210,13 @@ class RegisteredSourceRefreshE2ETest(unittest.TestCase):
         self.manifest = json.loads(self.manifest_bytes)
         self.assertEqual("5ca6c9907a4dffbe84319b7d4e391c6242e1969cfea5902845e50f0bd8ae3012", hashlib.sha256(self.manifest_bytes).hexdigest())
         self.assertEqual(16, len(self.manifest["routes"]))
+        # This D588 fixture predates the plan-path relocation.  Its immutable
+        # raw manifest, not the current production frontier, is its authority.
+        query_specs = tuple(copy.deepcopy(self.manifest["query_source_admissions"]))
+        self.assertEqual(2, len(query_specs))
+        query_patch = patch.object(selected_routes_module, "_QUERY_SOURCE_ADMISSION_SPECS", query_specs)
+        query_patch.start()
+        self.addCleanup(query_patch.stop)
         manifest_target = self.root / selected_manifest_ref(REPOSITORY)
         manifest_target.parent.mkdir(parents=True, exist_ok=True)
         manifest_target.write_bytes(self.manifest_bytes)
@@ -237,7 +278,7 @@ class RegisteredSourceRefreshE2ETest(unittest.TestCase):
             target.write_bytes(raw)
 
     def _copy(self, relative: str) -> None:
-        source = REPOSITORY / relative
+        source = REPOSITORY / _MOVED_FIXTURE_SOURCES.get(relative, relative)
         destination = self.root / relative
         if destination.exists():
             return

@@ -1,9 +1,12 @@
-# CAPRMEDIO workflow MCP — first local slice
+# CAPRMEDIO workflow MCP
 
 Exposes caller-coordinated **RMED Atoms Base Revise** through
 `rmed_atoms_base_revise`, plus discovery, context, status/results and notification helpers.
 `workflow_orchestrator` enqueues explicitly authorized independent Runs through
 a separately started DBOS worker and Codex CLI adapter.
+The selected-workflow first cut also admits Create Atom, Update Atom, Replace
+Atom, Change Status Atom, Implementation Workflow, and Build Applicable
+Methodology through the current source-bound route manifest.
 It uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk).
 
 ## Run
@@ -14,18 +17,32 @@ From the repository root, using Python 3.14:
 uv run --group rmed-workflow-mcp python 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/204_MCP/server.py --project-root "$PWD"
 ```
 
-Transport is local **stdio**; there is no listening port or background daemon.
-The MCP host owns the process lifetime. This does not register the server with
-Codex or any other host. The current file-lock implementation supports macOS and
-Linux. The server is bound to one Project root at startup, not a client-supplied
-root on each request. Project Settings must register the shared Journal.
+The default transport is local **stdio**; the MCP host owns that process lifetime.
+This does not register the server with Codex or any other host. The current
+file-lock implementation supports macOS and Linux. The server is bound to one
+Project root at startup, not a client-supplied root on each request. Project
+Settings must register the shared Journal. An explicitly started, authenticated
+localhost HTTP transport is available only through the isolated Docker runtime;
+it is documented in the [Docker runtime README](../203_APPS/WORKFLOW_ORCHESTRATOR/docker/README.md).
 
 For independent execution, also include `--group workflow-orchestrator` in the
 runtime invocation. Start the worker explicitly using its
 [README](../203_APPS/WORKFLOW_ORCHESTRATOR/README.md). The worker's lifetime is
 independent of this stdio adapter. The MCP does not start it implicitly.
 
-## Calls
+## Selected-workflow first cut
+
+The six retained Workflow routes are Create Atom, Update Atom, Replace Atom,
+Change Status Atom, Implementation Workflow, and Build Applicable Methodology.
+Admission remains source-pinned and currentness-checked; it requires the existing
+identity, permission, status-model, and shared-Journal evidence boundaries.
+Public status is derived from the matching recorded Workflow terminal run, not
+from scheduler completion or a nested Action result. W09 Implementation Workflow
+coverage uses a golden mock Agent and does not establish a live-LLM result.
+
+Scope mutations, Revert, graph builders, standalone advanced Artifact/Journal
+queries, and formal Release/promotion remain outside this first cut. A transport,
+manifest route, or completed scheduler call is not execution authority.
 
 ## Hot reload
 

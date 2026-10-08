@@ -129,10 +129,14 @@ def _refresh_candidate(
         try:
             from selected_source_refresh import derive_registered_source_refresh
             current, candidate, payload, path = derive_registered_source_refresh(project_root)
-        except (ImportError, OSError, TypeError, ValueError, RuntimeError) as registered_error:
-            raise ReleaseManifestPublishError(
-                f"refresh input manifest is unavailable: {normal_error}"
-            ) from registered_error
+        except (ImportError, OSError, TypeError, ValueError, RuntimeError):
+            try:
+                from selected_source_relocation import derive_registered_source_relocation
+                current, candidate, payload, path = derive_registered_source_relocation(project_root)
+            except (ImportError, OSError, TypeError, ValueError, RuntimeError) as relocation_error:
+                raise ReleaseManifestPublishError(
+                    f"refresh input manifest is unavailable: {normal_error}"
+                ) from relocation_error
         admissions = candidate.get("release_source_admissions") if isinstance(candidate, Mapping) else None
         if not isinstance(admissions, list) or len(admissions) != 1 or not isinstance(admissions[0], Mapping):
             raise ReleaseManifestPublishError("registered refresh candidate has no current Release admission")

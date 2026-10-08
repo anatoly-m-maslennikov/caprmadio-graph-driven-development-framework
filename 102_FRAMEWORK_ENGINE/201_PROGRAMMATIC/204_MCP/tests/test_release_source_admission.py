@@ -20,7 +20,7 @@ AUTHORITY_REF = (
     ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/"
     "201_FEATURE_TOOLS/07_delivery/CA-D-572-TOOLS-DELIVERY--serialize-additive-release-route-source-admission.md"
 )
-AUTHORITY_SHA = "257a792240d30753739b8238941fa2e931668f242d189f52a23c550d65948659"
+AUTHORITY_SHA = "871015c692097218f80e100280d7994692cc1ae2543f3f08ee032a2ea46799b5"
 sys.path.insert(0, str(MCP))
 
 import release_source_admission as admission_module  # noqa: E402
@@ -74,6 +74,11 @@ def all_pins(record: dict[str, object]) -> list[dict[str, object]]:
             *record["ordered_actions"], *record["rmed_frontier"]]
 
 
+def fixture_source(relative: str) -> Path:
+    """Read the current D572-declared carrier at its canonical location."""
+    return REPOSITORY / relative
+
+
 class ReleaseSourceAdmissionTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -95,7 +100,7 @@ class ReleaseSourceAdmissionTest(unittest.TestCase):
         self.root = Path(self.temporary.name)
         for relative in {AUTHORITY_REF, *[pin["source_path"] for pin in all_pins(self.expected)],
                          *[row["source_path"] for row in self.private_carriers]}:
-            source = REPOSITORY / relative
+            source = fixture_source(relative)
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, target)

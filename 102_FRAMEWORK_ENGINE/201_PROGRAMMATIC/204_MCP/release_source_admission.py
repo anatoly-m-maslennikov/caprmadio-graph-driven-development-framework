@@ -20,7 +20,7 @@ AUTHORITY_REF = (
 )
 AUTHORITY_PIN = {
     "atom_id": "CA-D-572", "version": 29, "source_path": AUTHORITY_REF,
-    "digest": "257a792240d30753739b8238941fa2e931668f242d189f52a23c550d65948659",
+    "digest": "871015c692097218f80e100280d7994692cc1ae2543f3f08ee032a2ea46799b5",
 }
 _PIN_FIELDS = frozenset({"atom_id", "version", "source_path", "digest"})
 _ADMISSION_FIELDS = frozenset({"route", "acceptance_frontier", "workflow", "ordered_steps",

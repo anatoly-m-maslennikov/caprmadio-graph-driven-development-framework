@@ -13,8 +13,10 @@ the executor still restricts edits to the explicitly admitted selection.
 
 The worker alone applies authorized Atom proposals. The Agent has no Project,
 host-home, or Docker-socket mount. It receives the explicit frozen source/rules
-over the private Compose network. No ports are published. Containers run as a
-non-root user with a read-only image and dropped capabilities.
+over the private Compose network. The ordinary worker, stdio MCP, and Agent
+publish no ports. The separately started HTTP MCP publishes only an explicitly
+selected `127.0.0.1` port. Containers run as a non-root user with a read-only
+image and dropped capabilities.
 
 ## Build and test without credentials
 
@@ -81,6 +83,27 @@ mcp
 
 Start the worker/Agent first. The stdio MCP container exists only for that client
 connection. MCP shutdown does not stop the worker or its queue.
+
+## Authenticated localhost HTTP MCP
+
+The Docker runtime can additionally expose Streamable HTTP MCP at a caller-chosen
+loopback port. Supply both values explicitly in the invoking environment; neither
+is read from an `.env` file:
+
+```sh
+CAPRMEDIO_MCP_HTTP_PORT=18092 \
+CAPRMEDIO_MCP_HTTP_SECRET_TOKEN='set-a-secret-outside-the-repository' \
+python3 102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/runtime.py \
+  --project-root "$PWD" mcp-http-start
+```
+
+On success the command returns `http://127.0.0.1:<port>/mcp`. Clients must send
+the configured Bearer token. The listener rejects invalid credentials and
+non-local Host or Origin values. Startup fails closed unless Compose reports one
+healthy `mcp-http` service with the requested loopback TCP publication. Inspect
+or stop that endpoint explicitly with `mcp-http-status` or `mcp-http-stop` using
+the same environment. This HTTP service is independent of the stdio connection;
+starting it neither starts a Workflow nor grants execution authority.
 
 Alternatively, existing native MCP `workflow_orchestrator` calls route to the
 Docker worker after a successful explicit `start` publishes `transport.json`.

@@ -7,7 +7,7 @@ global_tier: 11
 status: Active
 author: Anatoly Maslennikov
 version: 29
-updated_at: "2026-10-08 11:02:39 +0000"
+updated_at: "2026-10-08 17:31:41 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -24,7 +24,7 @@ The one Release Version source-admission record which a successor canonical sele
 
 ## Claim
 
-A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@4 at `.caprmedio_caprmedio/03_plan/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/done/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `7cd6a839a190add10108bdd5e58700aeae7a89316aa721b2b5340bda865a2739`, the exact current O164–O186 twelve-phase pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
+A successor of `.caprmedio_caprmedio/_projection/selected_workflow_bindings.json` **must** admit `release_version` only through the one closed `release_source_admissions` serialization below. It carries CA-P-1622@4 at `.caprmedio_caprmedio/03_plan/done/15-CA-P-1117-EPIC--harvest-and-implement-session-derived-operations/10-CA-P-1620-TASK--deliver-release-version-workflow/done/02-CA-P-1622-TASK--review-release-version-source-and-admission.md`, SHA-256 `7cd6a839a190add10108bdd5e58700aeae7a89316aa721b2b5340bda865a2739`, the exact current O164–O186 twelve-phase pins, and the full accepted Release RMED frontier including CA-D-573@2 and CA-D-574@1.
 
 ## Details
 

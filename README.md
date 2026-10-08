@@ -8,6 +8,7 @@
 - [What CAPRMEDIO is](#what-caprmedio-is)
 - [Why CAPRMEDIO works this way (chains-of-thoughts)](#why-caprmedio-works-this-way-chains-of-thoughts)
 - [Main framework architecture](#main-framework-architecture)
+- [First usable cut](#first-usable-cut)
 - [Current boundaries](#current-boundaries)
 - [Status](#status)
 - [Version History](#version-history)
@@ -104,7 +105,7 @@ bootstrap seeds provided the first definitions; those seeds are now retired.
 
 Different projects need different rules →\
 Extensions and local configuration are also sets of Atoms →\
-they add capabilities or override rules where the Core allows it →\
+they add only Core-permitted capabilities and configuration, without replacing or weakening Core authority →\
 **expand and configure the framework using the same system.**
 
 ### Harness (engine)
@@ -269,6 +270,30 @@ Each Project has a `.caprmedio_<project_name>/` folder. Store persistent Journal
 ### Extension and configuration
 
 **The framework is expandable and configurable.** You can add Types, Workflows, Tools and authoring rules. Put reusable additions in Extensions. Settings choose what to use and with which parameters. Framework rules still apply.
+
+## First usable cut
+
+The current first usable selected-workflow cut is source-bound and deliberately
+small. It supports these six Workflows: Create Atom, Update Atom, Replace Atom,
+Change Status Atom, Implementation Workflow, and Build Applicable Methodology.
+Each admitted Run preserves its identity, source/currentness checks, authorized
+permissions, terminal outcome, and shared-Journal evidence. Status accepts the
+source-admitted model for every supported content role and reports the matching
+canonical Workflow terminal evidence rather than a scheduler or child-Action
+outcome.
+
+The MCP remains available over local stdio. The Docker runtime additionally
+offers an explicitly started, bearer-authenticated Streamable HTTP MCP endpoint
+published only on `127.0.0.1`; see the
+[Docker runtime README](102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/docker/README.md).
+Neither transport starts work or grants authorization by itself.
+
+This cut has golden mock-Agent evidence for the Implementation Workflow (W09),
+not a live-LLM claim. It is not a formal Release or promotion, does not claim
+full sixteen-route coverage, and leaves Scope mutations, Revert, graph builders,
+and standalone advanced Artifact/Journal queries deferred. The installed N
+runtime remains untouched while later Release Version work follows its separate
+candidate-and-promotion gates.
 
 ## Current boundaries
 
