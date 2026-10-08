@@ -4,10 +4,10 @@ content_role: Delivery
 current_scope_unit: TOOLS
 local_tier: Standard
 global_tier: 11
-status: Active
+status: Archived
 author: Anatoly Maslennikov
-version: 29
-updated_at: "2026-10-08 11:02:39 +0000"
+version: 28
+updated_at: "2026-10-07 23:57:09 +0000"
 subjects:
   governs: "Tool/RELEASE_VERSION/Additive selected-route source admission"
   depends_on: [Tool, Workflow, Action, Manifest, Operator, Run, Journal]
@@ -185,7 +185,7 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/backend.py",
-    "sha256": "da59dfede1070d45d5c21ebfb4d19c7a61ed78c871bd3c8fc047c6bf8f288ced"
+    "sha256": "3473c6f85ff1cfa2d6c149f53b93b1e865b3398fd38a0fe68348cfadecfb8af5"
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/contracts.py",
@@ -225,7 +225,7 @@ This separate private control-authority block governs only the explicitly approv
   },
   {
     "source_path": "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/203_APPS/WORKFLOW_ORCHESTRATOR/tests/test_selected_workflows_docker_e2e.py",
-    "sha256": "b3c5f1a47b5a81850d1f9fbbaabcf3a029a12d6c3583cf53f7f249a9971c0c83"
+    "sha256": "48abd23bc8401149f17e1e299cf85b6183986f091bfae70274f2204881279f71"
   }
 ]
 ```
