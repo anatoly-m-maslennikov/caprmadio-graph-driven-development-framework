@@ -43,7 +43,7 @@
     },
     "CA-D-494": {
       "version": 2,
-      "sha256": "2d96cd1193e7d33de6d79e405dfda5c2958fb9d60dc8bead69896d82f0b0b43d",
+      "sha256": "9da2650279e0efee42812c499286dc8b0f63fe8922c3aaa41e14ae441b6004d6",
       "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-494-CORE_META_MODEL-DELIVERY--store-operator-registry-in-project-root.md"
     }
   }

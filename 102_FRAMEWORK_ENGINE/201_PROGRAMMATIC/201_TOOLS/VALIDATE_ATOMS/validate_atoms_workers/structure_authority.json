@@ -8,18 +8,18 @@
     },
     "CA-D-440": {
       "version": 5,
-      "sha256": "01f176dbcdd37691936c568123adffa62f12514c65b7495da82b864cd2ef3e70",
-      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-440-CORE_META_MODEL-CORE-DELIVERY--store-one-authoritative-project-structure-toml.md"
+      "sha256": "589da503b1318f4e7150f1499b7ae6636a364f1b28101f542798f07cdf213569",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-440-CORE_META_MODEL-CORE--store-one-authoritative-project-structure-toml.md"
     },
     "CA-D-441": {
       "version": 5,
-      "sha256": "eccc8d752676aae65ee093d23b0686a8bab510810b3422985c999a3fab1c4f0d",
-      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-441-CORE_META_MODEL-GENERAL-DELIVERY--encode-the-project-structure-document-schema.md"
+      "sha256": "30042a747a31e13c2618a7111a884c5af1ed2175c687645f9eaae9f6d5d10e81",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-441-CORE_META_MODEL-GENERAL--encode-the-project-structure-document-schema.md"
     },
     "CA-D-442": {
       "version": 6,
-      "sha256": "327f217ee5b2ff43d7be8f0052d4c2c87cc46fdc62b55b84e7f36db5752feb52",
-      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-442-CORE_META_MODEL-DELIVERY--encode-scope-unit-declaration-fields.md"
+      "sha256": "caa3df94215a7ae1e3e516c0bf94cae1295c79270f0f521e6f75a1eb51d70a2f",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-442-CORE_META_MODEL--encode-scope-unit-declaration-fields.md"
     },
     "CA-R-1393": {
       "version": 9,
@@ -68,12 +68,12 @@
     },
     "CA-R-1308": {
       "version": 11,
-      "sha256": "917117bb36ae34fe002d11036ffed98e5ca8ce972bf4f5e44d8e5c17105bce04",
+      "sha256": "5c5abe295b1c324229192ed84cc7750733d22c0bebbe5ddca858086a1d2c311b",
       "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1308-CORE_META_MODEL-CORE-REQUIREMENT--resolve-status-domains-from-complete-qualified-paths.md"
     },
     "CA-R-1313": {
       "version": 12,
-      "sha256": "022ec16a40e6e40c9ef2aec74c1d1286d80abc3245d1f8291072d1624b313fbd",
+      "sha256": "8691f06ec8fb80a7b8faff2cb4a4b86a6f041399da572a4b73bfe9097d5dd949",
       "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement/CA-R-1313-CORE_META_MODEL-CORE-REQUIREMENT--keep-qualified-status-domains-open.md"
     },
     "CA-D-282": {
@@ -106,15 +106,20 @@
       "sha256": "37425cb82e6706f9c00c33b28b63f353a62878052f3e488c18c8f519f077fe0b",
       "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-302-CORE_META_MODEL-DELIVERY--serialize-scope-unit-references-as-filename-tokens.md"
     },
+    "CA-D-324": {
+      "version": 12,
+      "sha256": "2c3ac3c7a0b8165c61bc24b51c27102ee68061fec1e26537118cddb5f1b0c97d",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/003_PROJECT_CONFIGURATION/07_delivery/CA-D-324-PROJECT_CONFIGURATION-DELIVERY--register-project-current-scope-content-role-directories.md"
+    },
     "CA-D-466": {
       "version": 4,
-      "sha256": "35cffdc4a9ccff0433f967bf9c6746c5b500f8f60597af480d5155460678d8ed",
-      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-466-CORE_META_MODEL-DELIVERY--place-carriers-by-applicable-status-delivery.md"
+      "sha256": "d3336f3ff4e75dbe2d02729c0442bdc59e102cbf12f73a0e5fd29539eaad6263",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-466-CORE_META_MODEL-STANDARD--place-carriers-by-applicable-status-delivery.md"
     },
     "CA-D-461": {
       "version": 6,
-      "sha256": "2ca5113ac81aaed9d5a15a76fbbf684c9fdb0f5a4468f9e5b12bfa72d2fa7d92",
-      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-461-CORE_META_MODEL-CORE-DELIVERY--place-plan-carriers-by-status.md"
+      "sha256": "e0135ae3093130e3a40f091882d53942f42c83ec5302788a8f4bc718bcf83390",
+      "source_path": ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY/000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/07_delivery/CA-D-461-CORE_META_MODEL-CORE--place-plan-carriers-by-status.md"
     },
     "CA-R-1307": {
       "version": 12,
