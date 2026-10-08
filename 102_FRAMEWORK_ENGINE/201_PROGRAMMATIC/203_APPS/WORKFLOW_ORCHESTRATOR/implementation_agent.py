@@ -138,10 +138,13 @@ class ImplementationAgent:
                     raise ValueError(snapshot_error)
                 return _admit_response(response, changes, write_admitted, sandbox, timeout)
             except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
+                blockers = [str(error)]
+                if snapshot_error and snapshot_error not in blockers:
+                    blockers.append(snapshot_error)
                 return _blocked(
                     "Codex Implementation Agent returned invalid or missing bounded output",
-                    evidence=[_transport_evidence(sandbox, timeout, "invalid_output")],
-                    blockers=[str(error)],
+                    evidence=[_transport_evidence(sandbox, timeout, "invalid_output", changes=changes)],
+                    blockers=blockers,
                 )
 
     def command(

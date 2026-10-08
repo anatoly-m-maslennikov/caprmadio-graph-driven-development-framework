@@ -159,6 +159,58 @@ class ImplementationAgentTests(unittest.TestCase):
         self.assertIn("out-of-bound", out_of_bounds["blockers"][0])
         self.assertTrue(outside.exists())
 
+    def test_invalid_or_missing_output_retains_observed_workspace_changes(self) -> None:
+        cases = (
+            (
+                "malformed",
+                "malformed.py",
+                "output.write_text('{not valid JSON')",
+            ),
+            (
+                "missing",
+                "missing.py",
+                "pass",
+            ),
+        )
+        for label, filename, output_body in cases:
+            with self.subTest(label=label):
+                self.write_fake(
+                    f"""
+                    (workspace / {filename!r}).write_text('implemented = True\\n')
+                    {output_body}
+                    """
+                )
+                result = self.agent()(f"{label} callback", self.packet(write=True))
+
+                self.assertEqual("blocked", result["result"])
+                self.assertEqual("invalid_output", result["evidence"][0]["status"])
+                changes = result["evidence"][0]["observed_changes"]
+                self.assertEqual([filename], [change["path"] for change in changes])
+                self.assertIsNone(changes[0]["before_sha256"])
+                self.assertEqual(
+                    hashlib.sha256((self.workspace / filename).read_bytes()).hexdigest(),
+                    changes[0]["after_sha256"],
+                )
+
+    def test_invalid_output_retains_snapshot_uncertainty(self) -> None:
+        self.write_fake(
+            """
+            (workspace / 'written.py').write_text('implemented = True\\n')
+            (workspace / 'unsafe-link').symlink_to('written.py')
+            output.write_text('{not valid JSON')
+            """
+        )
+
+        result = self.agent()("invalid callback", self.packet(write=True))
+
+        self.assertEqual("blocked", result["result"])
+        self.assertEqual("invalid_output", result["evidence"][0]["status"])
+        self.assertEqual([], result["evidence"][0]["observed_changes"])
+        self.assertTrue(any(
+            "unable to verify workspace boundary after Agent dispatch" in blocker
+            for blocker in result["blockers"]
+        ))
+
     def test_timeout_and_unadmitted_write_never_fabricate_success(self) -> None:
         self.write_fake(
             """
