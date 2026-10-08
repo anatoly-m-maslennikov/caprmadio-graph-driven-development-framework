@@ -20,11 +20,24 @@ TOOLS = Path(__file__).resolve().parents[1]
 REPOSITORY = TOOLS.parents[2]
 sys.path.insert(0, str(TOOLS))
 
+_VALIDATE_WORKERS = TOOLS / "VALIDATE_ATOMS" / "validate_atoms_workers"
+_FIXTURE_SCOPE = "LIFECYCLE_FIXTURE"
+_FIXTURE_RELATIVE_PATH = "102_LAYER_2_FRAMEWORK_ENGINE/201_FEATURE_PROGRAMMATIC/201_FEATURE_TOOLS/LIFECYCLE_FIXTURE"
+_FIXTURE_AUTHORITY_PATH = f".caprmedio_caprmedio/{_FIXTURE_RELATIVE_PATH}"
+
+from VALIDATE_ATOMS.validate_atoms_workers import proposed_carrier  # noqa: E402
+
 REQUIREMENT_STATUS_AUTHORITY = (
     REPOSITORY
     / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
     / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
     / "CA-R-1309-CORE_META_MODEL-GENERAL-REQUIREMENT--register-core-requirement-status-values.md"
+)
+DELIVERY_STATUS_AUTHORITY = (
+    REPOSITORY
+    / ".caprmedio_caprmedio/000_CAPRMEDIO_framework/00_APPLICABLE_METHODOLOGY"
+    / "000_APPLICABLE_MTHD_sources/001_CORE_META_MODEL/04_requirement"
+    / "CA-R-1399-CORE_META_MODEL-GENERAL--register-core-delivery-status-values.md"
 )
 SEMANTIC_ASSESSMENT_AUTHORITIES = tuple(
     REPOSITORY
@@ -58,14 +71,21 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.temporary = tempfile.TemporaryDirectory(dir=TEST_TEMP_ROOT, ignore_cleanup_errors=True)
         self.root = Path(self.temporary.name)
         (self.root / ".git").mkdir()
-        self.requirements = self.root / ".caprmedio_caprmedio/102_LAYER_2_FRAMEWORK_ENGINE/04_requirement"
+        self.requirements = (
+            self.root
+            / ".caprmedio_caprmedio"
+            / _FIXTURE_RELATIVE_PATH
+            / "04_requirement"
+        )
         self.requirements.mkdir(parents=True)
         (self.root / ".caprmedio_caprmedio/caprmedio_project_settings.toml").write_text(
             "[paths]\ncontrol_root = \".caprmedio_caprmedio\"\n", encoding="utf-8"
         )
-        status_authority = self.root / REQUIREMENT_STATUS_AUTHORITY.relative_to(REPOSITORY)
-        status_authority.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(REQUIREMENT_STATUS_AUTHORITY, status_authority)
+        self._copy_complete_carrier_authority()
+        for authority in (REQUIREMENT_STATUS_AUTHORITY, DELIVERY_STATUS_AUTHORITY):
+            destination = self.root / authority.relative_to(REPOSITORY)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(authority, destination)
         for authority in SEMANTIC_ASSESSMENT_AUTHORITIES:
             destination = self.root / authority.relative_to(REPOSITORY)
             destination.parent.mkdir(parents=True, exist_ok=True)
@@ -76,6 +96,43 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
+
+    def _copy_complete_carrier_authority(self) -> None:
+        """Mirror the finite source closure used by proposed-carrier admission."""
+        sources: dict[str, dict[str, object]] = {}
+        for name in (
+            "registry.json", "schema_authority.json", "graph_authority.json",
+            "structure_authority.json", "context_authority.json",
+        ):
+            sources.update(json.loads((_VALIDATE_WORKERS / name).read_text(encoding="utf-8"))["sources"])
+        for atom_id in (*proposed_carrier._REGISTRY_IDS, *proposed_carrier._SUPPORT_IDS):
+            source_path = sources[atom_id]["source_path"]
+            self.assertIsInstance(source_path, str)
+            source = REPOSITORY / source_path
+            destination = self.root / source_path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+        for relative in (
+            ".caprmedio_caprmedio/project_structure.toml",
+            ".caprmedio_caprmedio/operators_registry.toml",
+        ):
+            destination = self.root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(REPOSITORY / relative, destination)
+        structure = self.root / ".caprmedio_caprmedio/project_structure.toml"
+        structure.write_text(
+            structure.read_text(encoding="utf-8")
+            + "\n[[scope_units]]\n"
+            + f'scope_unit_name = "{_FIXTURE_SCOPE}"\n'
+            + 'parent = "TOOLS"\n'
+            + 'scope_unit_type = "Unordered"\n'
+            + 'scope_unit_label = "TOOL"\n'
+            + "structural_level = 4\n"
+            + "navigational_order_number = 999\n"
+            + f'authority_path = "{_FIXTURE_AUTHORITY_PATH}"\n'
+            + f'delivery_path = "{_FIXTURE_AUTHORITY_PATH}"\n',
+            encoding="utf-8",
+        )
 
     def _atom(
         self,
@@ -94,9 +151,17 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             + f"atom_id: {atom_id}\n"
             + "content_role: Requirement\n"
             + ("type: Requirement\n" if include_type else "")
+            + f"current_scope_unit: {_FIXTURE_SCOPE}\n"
+            + f"claim_target_scope_unit: {_FIXTURE_SCOPE}\n"
+            + "local_tier: Standard\n"
+            + "global_tier: 14\n"
+            + "author: Anatoly Maslennikov\n"
             + f"status: {status}\n"
             + f"version: {version}\n"
-            + "updated_at: 2026-01-01 00:00:00 +0000\n"
+            + "updated_at: \"2026-01-01 00:00:00 +0000\"\n"
+            + "subjects:\n"
+            + "  governs: Atom/Test\n"
+            + "  depends_on: []\n"
             + f"{relations}\n"
             + "---\n"
             + "# Summary\n\n"
@@ -105,6 +170,8 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
             + "Fixture scope.\n\n"
             + "## Claim\n\n"
             + "Fixture claim.\n"
+            + "\n## Details\n\n"
+            + "Fixture details.\n"
         )
         path.write_text(payload, encoding="utf-8")
         return path
@@ -118,8 +185,13 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         path = self.requirements / f"{atom_id}--{slug}.md"
         return {
             "path": path.relative_to(self.root).as_posix(),
-            "frontmatter": f"atom_id: {atom_id}\ncontent_role: Requirement\nstatus: Active",
-            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture.\n",
+            "frontmatter": (
+                f"atom_id: {atom_id}\ncontent_role: Requirement\ncurrent_scope_unit: {_FIXTURE_SCOPE}\n"
+                f"claim_target_scope_unit: {_FIXTURE_SCOPE}\nlocal_tier: Standard\nglobal_tier: 14\n"
+                "author: Anatoly Maslennikov\nstatus: Active\nsubjects:\n"
+                "  governs: Atom/Test\n  depends_on: []\nrelations: {}"
+            ),
+            "content": f"# Summary\n\n{summary}\n\n## Scope\n\nFixture.\n\n## Claim\n\nFixture claim.\n\n## Details\n\nFixture details.\n",
         }
 
     @staticmethod
@@ -608,8 +680,16 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         target = carrier_descriptor(self.root, old)
         destination = role / "CA-D-560-GRAPH_UI--stable-delivery.md"
         return {"target": target,
-                "proposed": {"frontmatter": fm + "\natom_id: CA-D-560\ncontent_role: Delivery\nstatus: Active",
-                             "content": "# Summary\n\nStable delivery\n\n## Claim\n\nDeliver the browser locally.\n"},
+                "proposed": {"frontmatter": (
+                                fm + "\natom_id: CA-D-560\ncontent_role: Delivery\n"
+                                f"current_scope_unit: {_FIXTURE_SCOPE}\nclaim_target_scope_unit: {_FIXTURE_SCOPE}\n"
+                                "local_tier: Standard\nglobal_tier: 14\n"
+                                "author: Anatoly Maslennikov\nstatus: Active\nsubjects:\n"
+                                "  governs: Atom/Test\n  depends_on: []"
+                             ),
+                             "content": "# Summary\n\nStable delivery\n\n## Scope\n\nFixture scope.\n"
+                                        "\n## Claim\n\nDeliver the browser locally.\n"
+                                        "\n## Details\n\nFixture details.\n"},
                 "change_class": "carrier_only",
                 "legacy_identity_proof": {"atom_id": old_id, "commit": commit, "path": old.relative, "digest": target["digest"]},
                 "legacy_identity_mapping": {"legacy_atom_id": old_id, "atom_id": "CA-D-560",

@@ -633,7 +633,9 @@ def _proposed_successors(root: Path, value: object, predecessor: Atom) -> list[d
     for index, item in enumerate(value):
         successor = _complete_carrier(item)
         try:
-            destination, _, atom_id = prepare_create_atom_revision(root, successor["path"], successor["frontmatter"])
+            destination, _, atom_id = prepare_create_atom_revision(
+                root, successor["path"], successor["frontmatter"], successor["content"]
+            )
         except AtomToolError as error:
             raise _translate(error) from error
         if atom_id == predecessor.atom_id:
@@ -958,7 +960,9 @@ def create_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
     _exact_fields(request, frozenset({"carrier"}), "parameters")
     carrier = _complete_carrier(request["carrier"])
     try:
-        destination, _, _ = prepare_create_atom_revision(root, carrier["path"], carrier["frontmatter"])
+        destination, _, _ = prepare_create_atom_revision(
+            root, carrier["path"], carrier["frontmatter"], carrier["content"]
+        )
         if destination.exists():
             # A pathname alone does not prove that this is a replay of the
             # sealed Create request.  The route does not carry authenticated
@@ -1385,7 +1389,9 @@ def replace_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: b
     try:
         existing_ids = {atom.atom_id for atom in scan_atoms(root) if atom.atom_id is not None}
         for successor in successors:
-            destination, _, atom_id = prepare_create_atom_revision(root, successor["path"], successor["frontmatter"])
+            destination, _, atom_id = prepare_create_atom_revision(
+                root, successor["path"], successor["frontmatter"], successor["content"]
+            )
             if destination.exists():
                 raise AtomToolError("destination-collision", f"Atom destination already exists: {destination.relative_to(root)}")
             if atom_id is not None and atom_id in existing_ids:
