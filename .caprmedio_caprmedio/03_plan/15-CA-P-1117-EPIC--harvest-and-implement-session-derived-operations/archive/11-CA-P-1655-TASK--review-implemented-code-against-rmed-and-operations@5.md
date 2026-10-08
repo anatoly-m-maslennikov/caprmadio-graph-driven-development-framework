@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 6
-updated_at: "2026-10-08 10:44:44 +0000"
+version: 5
+updated_at: "2026-10-08 03:57:17 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -72,19 +72,12 @@ All receipt filenames above are under `.caprmedio_tmp/epic-first-cut-20261008/`.
 
 The retained canonical Journal/result/effect files live under `stdio-1bfab3e78-retained/selected-workflows-docker-e2e/`. their observed terminal index is `retained-workflow-receipts.json`, SHA-256 `9a3866d6b440584feac03a06460b2e9f4d4395a0389e47dac528ffae2ed4a244`: six actual Workflow terminals (`golden-w01-happy`, `golden-w02-happy`, `golden-w03-happy`, `golden-w04-happy`, `golden-w09-happy`, `golden-w13-happy`) and 18 actual Action terminals, with definition pins, event digests, parent identities and retained result/effect references. these are disposable test Runs, not production Runs. the Implementation case used the explicit golden mock Agent, not a live LLM.
 
-### HTTP Terminal failure and publication repair
-
-the Operator's Terminal proof against `1bfab3e78` ran 12 tests in 128.071 seconds: 11 synthetic guards passed, but all six live Workflow subcases failed during MCP initialization with `httpx2.ConnectError`. No HTTP Workflow execution is accepted. The original failed receipt is `http-six-workflows-1bfab3e78-terminal.log`, SHA-256 `129c9ea0a59d6bfe7ead874304478f56bb85a5c15097498600f978afe998b905`.
-
-a fresh Docker diagnostic independently found a real publication defect: `mcp-http` was running and healthy, but Docker reported an empty publisher URL and published port `0`, despite a requested loopback mapping. Commit `b1c2bd18a` repairs this by attaching only the HTTP service to a dedicated publication bridge; worker, Agent and stdio network attachments are unchanged. D578@2 explicitly records that this non-internal bridge permits HTTP-service outbound traffic. Startup now refuses readiness unless actual Docker metadata proves the exact selected loopback publisher. Authentication, runtime-secret injection, restricted mounts and no-Docker-socket boundaries remain intact. The independent bounded review accepted the correction; 36 focused runtime, network, diagnostic and HTTP harness guards passed, with the actual HTTP E2E opt-in case unrun.
-
-the rebuilt unselected development image is `sha256:f8bcb97088e62728c6e48fca703e36fb15a4950196e18fafb0d9b9319dca59a6`, labelled with exact Engine commit `b1c2bd18a`. A real Docker diagnostic now observes the running, healthy HTTP service with `tcp`, target `8092`, published port `18092`, and bind `127.0.0.1`. Its retained receipt is `http-connectivity-ECF9ol9a/diagnostic.log`, SHA-256 `2e8d3fc5432e3e03cad67f1d8f76855e9532b9388ae89afefa8925b5cd1c03d6`. The diagnostic still fails its direct TCP assertion with this session's `PermissionError`, errno `1`; it establishes corrected Docker publication, not MCP protocol or Workflow success. All test services were stopped after the diagnostic.
-
 ### Remaining acceptance blocker
 
-actual Docker localhost HTTP proof remains unaccepted: this session's direct host loopback connection is denied by its permission profile. Synthetic authentication / Host / Origin / token-rotation / lifecycle checks and actual Docker port metadata do not substitute for that proof. `.caprmedio_tmp/epic-first-cut-20261008/run-http-proof.sh` now targets the repaired `b1c2bd18a` image above, uses a fresh retained directory and report on each invocation, and is ready for the Operator's Terminal. This Task and Epic closure remain Active until that actual proof is received. Installed N, historical failed receipts and deferred work are preserved.
+Actual Docker localhost HTTP proof is still unaccepted: this session's direct host loopback connection is denied by its permission profile. synthetic authentication / Host / Origin / token-rotation / lifecycle checks do not substitute for it. `.caprmedio_tmp/epic-first-cut-20261008/run-http-proof.sh` targets the exact image above, retains its fixture evidence and is ready for the Operator's Terminal. this Task and Epic closure remain Active until that actual proof is received. all test services have been stopped; installed N, historical failed receipts and deferred work are preserved.
 
 
 ## Definition of Done
 
 This Plan may be Done only after the six-Workflow frontier has explicit RMED/O-to-code coverage, functional stdio MCP/orchestrator/Journal evidence, and Docker HTTP MCP protocol/authentication evidence with truthful success, no-op and failure dispositions. This scope amendment does not establish that evidence; deferred branches and any formal release/Epic closure remain outside it.
+
