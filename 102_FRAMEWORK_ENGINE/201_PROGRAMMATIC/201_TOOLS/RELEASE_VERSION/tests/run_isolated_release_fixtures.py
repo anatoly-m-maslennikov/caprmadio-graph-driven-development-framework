@@ -37,13 +37,18 @@ for _path in (TOOLS_ROOT, RELEASE_ROOT):
         sys.path.insert(0, str(_path))
 
 from release_inventory import ReleaseInventoryError, persistent_regular_files, refuse_secret_path  # noqa: E402
+from release_suite_reference_context import (  # noqa: E402
+    ReleaseSuiteReferenceContextError,
+    control_closure_paths,
+)
 
 
 ENGINE_ROOT = Path("102_FRAMEWORK_ENGINE")
 SNAPSHOT_FILE = ".caprmedio_isolated_release_fixture_snapshot.json"
 IMAGE_IDENTIFIER = re.compile(r"^sha256:[0-9a-f]{64}$")
 RELEASE_FIXTURE_WORKDIR = "/workspace/102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/RELEASE_VERSION"
-RETAINED_RUNNER = "../tests/retained_fixture_runner.py"
+FIXTURE_CONTAINER_WORKDIR = "/tmp"
+RETAINED_RUNNER = "/workspace/102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/retained_fixture_runner.py"
 DEPENDENCY_GROUPS = ("rmed-workflow-mcp", "workflow-orchestrator", "validate-atoms")
 DEPENDENCY_MODULES = {
     "pydantic": "pydantic",
@@ -152,9 +157,20 @@ def _collect_records(project: Path) -> tuple[tuple[SnapshotRecord, ...], dict[st
         engine_files = persistent_regular_files(project, engine)
     except ReleaseInventoryError as error:
         raise FixtureIsolationError(f"{error.code}: {error}") from error
-    records = tuple(sorted((_record(project, path) for path in [*inputs, *engine_files]), key=lambda record: record.path))
-    if len({record.path for record in records}) != len(records):
-        raise FixtureIsolationError("snapshot source records are duplicated")
+    try:
+        control_files = [_regular_file(project, Path(path)) for path in control_closure_paths(project)]
+    except ReleaseSuiteReferenceContextError as error:
+        raise FixtureIsolationError(f"release-suite control closure is unavailable: {error}") from error
+    paths_by_relative: dict[str, Path] = {}
+    for path in [*inputs, *engine_files, *control_files]:
+        relative = path.relative_to(project).as_posix()
+        existing = paths_by_relative.setdefault(relative, path)
+        if existing != path:
+            raise FixtureIsolationError(f"snapshot source path is ambiguous: {relative}")
+    records = tuple(sorted(
+        (_record(project, path) for path in paths_by_relative.values()),
+        key=lambda record: record.path,
+    ))
     pyproject = (project / "pyproject.toml").read_bytes()
     return records, _dependency_requirements(pyproject)
 
@@ -309,7 +325,7 @@ def run_isolated_fixtures(image: str, snapshot: SealedFixtureSnapshot, tests: Se
         "--pids-limit", "256", "--memory", "2g", "--cpus", "2",
         "--user", "1000:1000",
         "--mount", f"type=bind,source={snapshot.path},target=/workspace,readonly",
-        "--workdir", RELEASE_FIXTURE_WORKDIR,
+        "--workdir", FIXTURE_CONTAINER_WORKDIR,
         "--env", "HOME=/home/caprmedio",
         "--env", "PYTHONNOUSERSITE=1",
         "--env", "PYTHONDONTWRITEBYTECODE=1",

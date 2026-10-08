@@ -580,6 +580,14 @@ def _closure_paths(snapshot_root: Path) -> tuple[str, ...]:
     return tuple(unique)
 
 
+def control_closure_paths(project_root: str | Path) -> tuple[str, ...]:
+    """Return the exact currently admitted private control-source closure."""
+
+    root = _root(project_root)
+    with _reader_snapshot(root) as (snapshot, _captured):
+        return _closure_paths(snapshot)
+
+
 def _preimage(bindings: tuple[tuple[str, str], ...], rows: tuple[ReferenceRow, ...]) -> dict[str, object]:
     """D580's flat, self-excluding canonical digest preimage."""
     return {
@@ -753,5 +761,5 @@ def context_preimage(context: ReleaseSuiteReferenceContext) -> Mapping[str, obje
 
 __all__ = [
     "ReferenceRow", "ReleaseSuiteReferenceContext", "ReleaseSuiteReferenceContextError",
-    "capture_context", "context_preimage", "copy_verified_bytes", "revalidate_context", "validate_reference_rows", "validate_schema2_context",
+    "capture_context", "context_preimage", "control_closure_paths", "copy_verified_bytes", "revalidate_context", "validate_reference_rows", "validate_schema2_context",
 ]

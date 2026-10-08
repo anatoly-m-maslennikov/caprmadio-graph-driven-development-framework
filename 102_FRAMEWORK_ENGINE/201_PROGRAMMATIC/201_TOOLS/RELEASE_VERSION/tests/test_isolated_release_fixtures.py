@@ -64,7 +64,9 @@ validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
         project = self._project("source")
         parent = self.fixture_root / "snapshots"
         parent.mkdir(exist_ok=True)
-        with patch("run_isolated_release_fixtures.subprocess.run") as docker:
+        with patch("run_isolated_release_fixtures.control_closure_paths", return_value=()), patch(
+            "run_isolated_release_fixtures.subprocess.run"
+        ) as docker:
             snapshot = prepare_snapshot(project, parent)
         docker.assert_not_called()
         return snapshot
@@ -77,6 +79,66 @@ validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
         self.assertIn("102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/fixture.py", records)
         self.assertTrue((Path(snapshot.path) / ".caprmedio_isolated_release_fixture_snapshot.json").is_file())
         self.assertEqual(snapshot.dependency_requirements["jsonschema"], ">=4.23,<5")
+
+    def test_prepare_snapshot_copies_exact_control_closure_rows_and_deduplicates_engine_overlap(self) -> None:
+        """Closure derivation is mocked; byte/mode sealing remains real."""
+        project = self._project("closure")
+        control = project / ".caprmedio_caprmedio/controls/release.toml"
+        control.parent.mkdir(parents=True)
+        control.write_bytes(b"control = 'fixture'\n")
+        control.chmod(0o700)
+        parent = self.fixture_root / "closure-snapshots"
+        parent.mkdir()
+        closure = (
+            "102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/fixture.py",
+            ".caprmedio_caprmedio/controls/release.toml",
+        )
+        with patch(
+            "run_isolated_release_fixtures.control_closure_paths",
+            return_value=closure,
+            create=True,
+        ), patch("run_isolated_release_fixtures.subprocess.run") as docker:
+            snapshot = prepare_snapshot(project, parent)
+        docker.assert_not_called()
+        records = [record for record in snapshot.records if record.path == closure[0]]
+        self.assertEqual(1, len(records))
+        control_record = next(record for record in snapshot.records if record.path == closure[1])
+        self.assertEqual(0o700, control_record.mode)
+        self.assertEqual(__import__("hashlib").sha256(control.read_bytes()).hexdigest(), control_record.sha256)
+        copied = Path(snapshot.path) / closure[1]
+        self.assertEqual(control.read_bytes(), copied.read_bytes())
+        self.assertEqual(0o700, copied.stat().st_mode & 0o777)
+
+    def test_missing_unsafe_or_secret_closure_path_refuses_before_docker_or_secret_read(self) -> None:
+        project = self._project("closure-refusal")
+        parent = self.fixture_root / "closure-refusal-snapshots"
+        parent.mkdir()
+        secret = project / ".caprmedio_caprmedio/.env"
+        original_read = Path.read_bytes
+        read_paths: list[Path] = []
+
+        def guarded_read(path: Path) -> bytes:
+            read_paths.append(path)
+            if path == secret:
+                raise AssertionError("secret closure bytes were read")
+            return original_read(path)
+
+        for closure in (
+            (".caprmedio_caprmedio/missing.toml",),
+            ("../escape.toml",),
+            (".caprmedio_caprmedio/.env",),
+        ):
+            with self.subTest(closure=closure), patch(
+                "run_isolated_release_fixtures.control_closure_paths",
+                return_value=closure,
+                create=True,
+            ), patch.object(Path, "read_bytes", autospec=True, side_effect=guarded_read), patch(
+                "run_isolated_release_fixtures.subprocess.run"
+            ) as docker:
+                with self.assertRaises(FixtureIsolationError):
+                    prepare_snapshot(project, parent)
+            docker.assert_not_called()
+        self.assertNotIn(secret, read_paths)
 
     def test_secret_shaped_engine_file_is_refused_before_its_bytes_are_read(self) -> None:
         project = self._project("secret")
@@ -95,7 +157,9 @@ validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
         with patch(
             "run_isolated_release_fixtures.persistent_regular_files",
             return_value=[secret],
-        ), patch.object(Path, "read_bytes", autospec=True, side_effect=guarded_read):
+        ), patch("run_isolated_release_fixtures.control_closure_paths", return_value=()), patch.object(
+            Path, "read_bytes", autospec=True, side_effect=guarded_read
+        ):
             with self.assertRaises(FixtureIsolationError) as raised:
                 prepare_snapshot(project, parent)
         self.assertIn("release-inventory-secret-refused", str(raised.exception))
@@ -181,6 +245,7 @@ validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
         self.assertIn("--read-only", command)
         self.assertIn("--tmpfs", command)
         self.assertIn("--mount", command)
+        self.assertEqual(1, command.count("--mount"))
         mount = command[command.index("--mount") + 1]
         self.assertEqual(mount, f"type=bind,source={snapshot.path},target=/workspace,readonly")
         self.assertNotIn("docker.sock", " ".join(command))
@@ -190,6 +255,13 @@ validate-atoms = ["pydantic==2.13.5", "PyYAML==6.0.3"]
         self.assertIn("HOME=/home/caprmedio", command)
         self.assertIn("PYTHONNOUSERSITE=1", command)
         self.assertIn("PYTHONDONTWRITEBYTECODE=1", command)
+        self.assertEqual("/tmp", command[command.index("--workdir") + 1])
+        runner = command[command.index(IMAGE) + 1]
+        self.assertEqual(
+            "/workspace/102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/retained_fixture_runner.py",
+            runner,
+        )
+        self.assertTrue((TEST_ROOT.parents[4] / Path(runner).relative_to("/workspace")).is_file())
 
     def test_dependency_module_contract_has_no_undeclared_runtime_probe(self) -> None:
         self.assertEqual(set(DEPENDENCY_MODULES), {"pydantic", "PyYAML", "mcp", "jsonschema", "dbos"})
