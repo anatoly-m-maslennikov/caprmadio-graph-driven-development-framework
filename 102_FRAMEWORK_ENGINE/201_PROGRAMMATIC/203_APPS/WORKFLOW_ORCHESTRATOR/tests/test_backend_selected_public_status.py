@@ -86,6 +86,27 @@ class SelectedPublicStatusTests(unittest.TestCase):
                 })
                 self.assertEqual(("terminal", outcome), (observed["disposition"], observed["outcome"]))
 
+    def test_interrupted_workflow_receipt_wins_over_started_outer_envelope(self):
+        result = {
+            "disposition": "started",
+            "terminal_runs": [
+                _terminal(f"{RUN_ID}:step:1:action:1", "completed"),
+                _terminal(RUN_ID, "interrupted_pending", disposition="interrupted"),
+            ],
+        }
+        observed = self.status(result)
+        self.assertEqual(("interrupted", "interrupted_pending"),
+                         (observed["disposition"], observed["outcome"]))
+        self.assertNotIn("reason", observed)
+
+    def test_interrupted_receipt_cannot_claim_a_completed_workflow(self):
+        observed = self.status({
+            "disposition": "started",
+            "terminal_runs": [_terminal(RUN_ID, "completed", disposition="interrupted")],
+        })
+        self.assertEqual("failed", observed["outcome"])
+        self.assertIn("invalid outcome", observed["reason"])
+
     def test_missing_ambiguous_and_mismatched_workflow_evidence_fails_closed(self):
         cases = {
             "missing": [_terminal(f"{RUN_ID}:step:1:action:1", "completed")],
