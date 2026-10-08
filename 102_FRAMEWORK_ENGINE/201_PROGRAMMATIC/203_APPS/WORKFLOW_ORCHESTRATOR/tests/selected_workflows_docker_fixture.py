@@ -174,7 +174,7 @@ class GoldenProject:
         # it is not a fabricated Run receipt.
         (self.root / ".caprmedio_caprmedio/_journal").mkdir(parents=True, exist_ok=True)
         self._write_native_authority()
-        if self.case.route in {"create_atom", "replace_atom"}:
+        if self.case.route in {"create_atom", "replace_atom", "change_atom_status"}:
             self._write_complete_carrier_project_structure()
             self._copy_complete_carrier_authority()
         if self.case.route == "replace_atom":
@@ -212,7 +212,7 @@ class GoldenProject:
     @property
     def _authority_dir(self) -> Path:
         # Atom discovery uses the registered content-role directory convention.
-        if self.case.route in {"create_atom", "replace_atom"}:
+        if self.case.route in {"create_atom", "replace_atom", "change_atom_status"}:
             return self.root / ".caprmedio_caprmedio/PARENT/04_requirement"
         return self.root / ".caprmedio_caprmedio/04_requirement"
 
@@ -313,7 +313,7 @@ class GoldenProject:
         )
 
     def _copy_complete_carrier_authority(self) -> None:
-        """Copy the validator's finite, current source closure for W01/W03."""
+        """Copy the validator's finite, current source closure for W01/W03/W04."""
         import sys
 
         validate_root = Path(__file__).resolve().parents[3] / "201_TOOLS" / "VALIDATE_ATOMS"
@@ -345,7 +345,7 @@ class GoldenProject:
         shutil.copy2(status_source, status_destination)
 
     def _write_complete_carrier_project_structure(self) -> None:
-        """Use a complete self-contained Structure only in W01/W03 fixtures."""
+        """Use a complete self-contained Structure in W01/W03/W04 fixtures."""
         (self.root / ".caprmedio_caprmedio/project_structure.toml").write_text(
             "schema_version = 1\n\n"
             "[[scope_units]]\n"
@@ -727,7 +727,10 @@ class GoldenProject:
             raise GoldenCorpusError(f"unknown status-proof role: {role}") from error
         if status not in statuses:
             raise GoldenCorpusError(f"status {status!r} is not admitted for {role}")
-        folder = self.root / ".caprmedio_caprmedio" / "fixture" / directory
+        # W04 exercises the ordinary move validator.  Its disposable inputs
+        # therefore have to be addressable beneath the declared PARENT scope,
+        # rather than under an unregistered fixture-only directory.
+        folder = self.root / ".caprmedio_caprmedio" / "PARENT" / directory
         if status in {"Draft", "draft"}:
             folder /= "draft"
         elif role == "Plan" and status == "Backlog":
@@ -738,10 +741,43 @@ class GoldenProject:
         name = f"CA-{letter}--docker-status.md" if draft else f"CA-{letter}-{number}--docker-status.md"
         identity = "" if draft else f"atom_id: CA-{letter}-{number}\n"
         path = folder / name
+        type_by_role = {
+            "Requirement": None,
+            "Method": None,
+            "Evaluation": "Evaluation Approach",
+            "Delivery": None,
+            "Plan": "Plan",
+            "Concern": "Question",
+            "Operations": "Action",
+            "Analysis": "Analysis Report",
+        }
+        sections_by_role = {
+            "Requirement": ("Scope", "Claim", "Details"),
+            "Method": ("Scope", "Claim", "Details"),
+            "Evaluation": ("Scope", "Claim", "Details"),
+            "Delivery": ("Scope", "Claim", "Details"),
+            "Plan": ("Objective", "Details"),
+            "Concern": ("Concern", "Evidences", "Blast radius"),
+            "Operations": ("Operation", "Details"),
+            "Analysis": ("Question", "Scope", "Approach", "Results", "TLDR"),
+        }
+        atom_type = type_by_role[role]
+        type_line = "" if atom_type is None else f"type: {atom_type}\n"
+        sections = "".join(
+            f"## {heading}\n\nFixture {heading.casefold()} value.\n\n"
+            for heading in sections_by_role[role]
+        )
+        if role == "Plan":
+            sections += "### Definition of Done\n\nFixture completion condition.\n"
         path.write_text(
-            f"---\n{identity}content_role: {role}\nstatus: {status}\nversion: 3\n"
-            "updated_at: 2026-10-06 00:00:00 +0000\nrelations: {}\n---\n"
-            "# Summary\n\nDocker status proof carrier\n\n## Details\n\nWhole body must survive.\n",
+            f"---\n{identity}content_role: {role}\n{type_line}"
+            "current_scope_unit: PARENT\nclaim_target_scope_unit: PARENT\n"
+            "local_tier: Standard\nglobal_tier: 5\n"
+            "author: golden-operator\n"
+            f"status: {status}\nsubjects:\n  governs: Atom/Test\n  depends_on: []\n"
+            "version: 3\nupdated_at: '2026-10-06 00:00:00 +0000'\nrelations: {}\n---\n"
+            "# Summary\n\nDocker status proof carrier\n\n"
+            f"{sections}",
             encoding="utf-8",
         )
         return path
