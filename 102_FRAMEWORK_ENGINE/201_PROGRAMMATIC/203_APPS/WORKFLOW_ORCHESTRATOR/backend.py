@@ -428,6 +428,42 @@ def _canonical_recovery_observation(canonical_state):
     return refs, reason if isinstance(reason, str) and reason else None
 
 
+def _selected_public_outcome(frozen, result, run_id):
+    """Read the workflow outcome from canonical selected-Run terminal evidence.
+
+    DBOS ``SUCCESS`` proves only that its scheduler wrapper returned.  It is
+    never authority for a selected Workflow result, and neither is a nested
+    Action terminal.  Older direct result envelopes predate ``terminal_runs``;
+    retain their existing public shape unchanged.
+    """
+    if not isinstance(result, dict):
+        return None, "selected result is not a mapping"
+    if "terminal_runs" not in result:
+        return result.get("outcome"), None
+    if result.get("disposition") == "recording_pending":
+        return result.get("outcome"), None
+    terminal_runs = result.get("terminal_runs")
+    request = frozen.get("request") if isinstance(frozen, dict) else None
+    execution = request.get("execution") if isinstance(request, dict) else None
+    requested_runs = execution.get("requested_runs") if isinstance(execution, dict) else None
+    workflow_bindings = [
+        row for row in requested_runs if isinstance(row, dict)
+        and row.get("requested_run_id") == run_id and row.get("kind") == "workflow"
+    ] if isinstance(requested_runs, list) else []
+    if not isinstance(terminal_runs, list) or len(workflow_bindings) != 1:
+        return "failed", "canonical Workflow terminal evidence is missing or ambiguous"
+    candidates = [
+        row for row in terminal_runs if isinstance(row, dict) and row.get("run_id") == run_id
+        and ("kind" not in row or row.get("kind") == "workflow")
+    ]
+    if len(candidates) != 1 or candidates[0].get("disposition") != "terminal":
+        return "failed", "canonical Workflow terminal evidence is missing or ambiguous"
+    outcome = candidates[0].get("outcome")
+    if not isinstance(outcome, str) or not outcome:
+        return "failed", "canonical Workflow terminal evidence is incomplete"
+    return outcome, None
+
+
 def recover_selected_release_status(root, request):
     request = RecoverSelectedReleaseStatus.model_validate(request)
     scheduler = _scheduler_identity()
@@ -485,8 +521,11 @@ def status(root, request):
         uncertain = selected_directory / 'dispatch_uncertain.json'
         if accepted.is_file():
             result = selected._read(accepted)['result']
-            response.update({'selected_result': result, 'outcome': result.get('outcome'),
+            outcome, terminal_reason = _selected_public_outcome(frozen, result, request.run_id)
+            response.update({'selected_result': result, 'outcome': outcome,
                              'disposition': result.get('disposition')})
+            if terminal_reason is not None:
+                response['reason'] = terminal_reason
         elif uncertain.is_file():
             response.update({'outcome': 'interrupted_pending', 'disposition': 'recording_pending',
                              'reason': selected._read(uncertain).get('reason')})
