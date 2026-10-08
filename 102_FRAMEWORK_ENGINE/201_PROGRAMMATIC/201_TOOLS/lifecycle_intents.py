@@ -16,6 +16,7 @@ from typing import Any
 from authoritative_status_models import StatusModelError, resolve_status_model
 from atom_operations import (
     Atom,
+    _atomic_write,
     ToolError as AtomToolError,
     archive_atom_revision,
     atom_digest,
@@ -1112,6 +1113,12 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
                 **assessment_evidence}
     next_version = atom_version(target) + 1 if change_class == "semantic_revision" else atom_version(target)
     prior_revision: Atom | None = None
+    prior_revision_owner: tuple[int, int] | None = None
+    prior_revision_carrier: dict[str, Any] | None = None
+    before_bytes = target.path.read_bytes() if not mapping else None
+    before_mode = target.path.stat().st_mode & 0o777 if not mapping else None
+    if before_bytes is not None and hashlib.sha256(before_bytes).hexdigest() != prior["digest"]:
+        raise LifecycleError("carrier-stale", "same-ID Update current bytes changed before publication")
     try:
         frontmatter = _refresh_frontmatter(proposed["frontmatter"], version=next_version)
         draft_history: tuple[dict[str, str], dict[str, Any], dict[str, Any] | None] | None = None
@@ -1133,6 +1140,9 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
             draft_history = (history_ref, parent, parent_entry.get("direct_predecessor"))
         if change_class == "semantic_revision" or legacy:
             prior_revision = preserve_atom_revision(root, target)
+            if not mapping:
+                owned = prior_revision.path.lstat()
+                prior_revision_owner = (owned.st_dev, owned.st_ino)
         if mapping:
             observed_atom = migrate_atom_identity_revision(root, target, mapping["destination"], frontmatter, proposed["content"])
         else:
@@ -1143,21 +1153,91 @@ def update_atom_action(root: Path, parameters: Mapping[str, Any], *, execute: bo
                 append_draft_entry(root, observed_atom.relative, reference=history_ref,
                                    origin={"kind": "draft_update"}, parent_history_entry_ref=parent,
                                    direct_predecessor=predecessor)
+            observed = carrier_descriptor(root, observed_atom)
+            if prior_revision is not None:
+                prior_revision_carrier = carrier_descriptor(root, prior_revision)
     except BaseException as error:
-        if prior_revision is not None:
+        if not mapping:
+            # History remains recoverable until the exact same-ID before-state
+            # has been restored and independently reread. Never reconstruct
+            # the old carrier from parsed fields: retain its original bytes.
+            recovery_phase = "restore-current"
+            try:
+                assert before_bytes is not None and before_mode is not None
+                if target.path.is_symlink():
+                    raise OSError("current carrier became a symlink")
+                try:
+                    restore_current = not target.path.is_file() or target.path.read_bytes() != before_bytes
+                except OSError:
+                    restore_current = True
+                if restore_current:
+                    _atomic_write(target.path, before_bytes)
+                if target.path.stat().st_mode & 0o777 != before_mode:
+                    target.path.chmod(before_mode)
+                if target.path.read_bytes() != before_bytes or target.path.stat().st_mode & 0o777 != before_mode:
+                    raise OSError("current before-state could not be verified")
+                if prior_revision is not None:
+                    recovery_phase = "verify-history-ownership"
+                    owned = prior_revision.path.lstat()
+                    if (prior_revision.path.is_symlink() or not prior_revision.path.is_file()
+                            or (owned.st_dev, owned.st_ino) != prior_revision_owner
+                            or prior_revision.path.read_bytes() != before_bytes):
+                        raise OSError("new prior-revision carrier ownership could not be verified")
+                    recovery_phase = "remove-new-history"
+                    prior_revision.path.unlink()
+            except BaseException as recovery_error:
+                # A raised error loses recovery refs at the selected adapter's
+                # generic catch boundary. Retain the exact private native
+                # failure packet instead, without inventing a current seal.
+                current_ref = {"path": target.relative, "verification": "unknown"}
+                retained_history: dict[str, Any] | None = None
+                effects = [_effect("unknown", carrier=current_ref, reason="update-rollback-uncertain")]
+                history = {"prior": prior}
+                if prior_revision is not None:
+                    creation_known = prior_revision_owner is not None
+                    retained_history = {
+                        "path": prior_revision.relative,
+                        "expected_before_digest": prior["digest"],
+                        "creation": "attempt-created" if creation_known else "unverified",
+                        "ownership_verification": ("verified" if recovery_phase == "remove-new-history"
+                                                   else "unverified" if recovery_phase == "verify-history-ownership"
+                                                   else "not-rechecked"),
+                    }
+                    history["prior_revision"] = retained_history
+                    known_effect = creation_known and recovery_phase != "verify-history-ownership"
+                    effects.append(_effect("changed" if known_effect else "unknown", carrier=retained_history,
+                                           reason="retained-new-prior-revision" if known_effect
+                                           else "retained-prior-ownership-unverified"))
+                failure = {
+                    "code": "update-rollback-uncertain",
+                    "original": {"type": type(error).__name__, "code": getattr(error, "code", None)},
+                    "recovery": {"type": type(recovery_error).__name__, "code": getattr(recovery_error, "code", None),
+                                 "phase": recovery_phase},
+                }
+                return {"operation": "update", "outcome": "partial", "failure": failure,
+                        "effects": effects, "history": history,
+                        "recovery": {"before": prior, "current": current_ref, "prior_revision": retained_history,
+                                     "automatic_retry": False},
+                        "unknown_remainder": [{"phase": recovery_phase, "code": "update-rollback-uncertain",
+                                               "current_ref": target.relative,
+                                               "history_ref": prior_revision.relative if prior_revision is not None else None}]}
+        elif prior_revision is not None:
             prior_revision.path.unlink(missing_ok=True)
         if isinstance(error, AtomToolError):
             raise _translate(error) from error
         raise
-    observed = carrier_descriptor(root, observed_atom)
+    if mapping:
+        observed = carrier_descriptor(root, observed_atom)
+        if prior_revision is not None:
+            prior_revision_carrier = carrier_descriptor(root, prior_revision)
     history: dict[str, Any] = {"prior": prior, "revision_class": change_class}
     if prior_revision is not None:
-        history["prior_revision"] = carrier_descriptor(root, prior_revision)
+        history["prior_revision"] = prior_revision_carrier
     if mapping:
         history["identity_mapping"] = dict(mapping)
     effects = [_effect("changed", carrier=observed)]
     if mapping and prior_revision is not None:
-        effects.extend([_effect("changed", carrier=carrier_descriptor(root, prior_revision)),
+        effects.extend([_effect("changed", carrier=prior_revision_carrier),
                         {"state": "changed", "carrier": prior, "operation": "relocated_to_canonical_encoding"}])
     return {"operation": "update", "outcome": "applied", "observed": observed,
             "effects": effects,

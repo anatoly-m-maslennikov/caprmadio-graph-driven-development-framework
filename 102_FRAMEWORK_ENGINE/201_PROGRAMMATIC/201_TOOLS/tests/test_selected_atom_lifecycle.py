@@ -335,6 +335,188 @@ class SelectedAtomLifecycleTest(unittest.TestCase):
         self.assertEqual(applied["outcome"], "applied")
         self.assertEqual(applied["observed"]["version"], 2)
 
+    def _semantic_update_parameters(self) -> dict[str, object]:
+        proposal = self._proposal(self.target, summary="Stable summary", body_suffix="\nClarified acceptance detail.\n")
+        return {"target": carrier_descriptor(self.root, "CA-R-100"), "proposed": proposal,
+                "change_class": "semantic_revision", "semantic_assessment_report": self._semantic_assessment_report(proposal)}
+
+    def _unrelated_history(self) -> Path:
+        history = self.requirements / "archive" / (self.successor_one.stem + "@1.md")
+        history.parent.mkdir(exist_ok=True)
+        history.write_bytes(self.successor_one.read_bytes())
+        return history
+
+    def test_same_id_update_postwrite_parse_failure_restores_current_and_preserves_other_history(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        unrelated = self._unrelated_history()
+        historical = unrelated.read_bytes()
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse):
+            with self.assertRaisesRegex(LifecycleError, "injected-postwrite-parse"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(historical, unrelated.read_bytes())
+        self.assertFalse((unrelated.parent / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_postwrite_current_read_failure_restores_exact_bytes(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        original_descriptor = carrier_descriptor
+        failed = False
+
+        def refuse_postwrite_read(root, selector):
+            nonlocal failed
+            if isinstance(selector, Atom) and selector.path == self.target and self.target.read_bytes() != before and not failed:
+                failed = True
+                raise OSError("injected post-write current read failure")
+            return original_descriptor(root, selector)
+
+        with patch("lifecycle_intents.carrier_descriptor", side_effect=refuse_postwrite_read):
+            with self.assertRaisesRegex(OSError, "post-write current read failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertTrue(failed)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_postwrite_history_read_failure_restores_current(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        original_descriptor = carrier_descriptor
+
+        def refuse_history_read(root, selector):
+            if isinstance(selector, Atom) and selector.path.parent.name == "archive" and self.target.read_bytes() != before:
+                raise OSError("injected post-write history read failure")
+            return original_descriptor(root, selector)
+
+        with patch("lifecycle_intents.carrier_descriptor", side_effect=refuse_history_read):
+            with self.assertRaisesRegex(OSError, "post-write history read failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_unverified_rollback_retains_recoverable_prior_and_original_diagnostic(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        unrelated = self._unrelated_history()
+        historical = unrelated.read_bytes()
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with (patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse),
+              patch("lifecycle_intents._atomic_write", side_effect=PermissionError("rollback denied"), create=True)):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self.assertEqual({"type": "ToolError", "code": "injected-postwrite-parse"}, partial["failure"]["original"])
+        self.assertNotEqual(before, self.target.read_bytes())
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        self.assertEqual(before, prior.read_bytes())
+        self._assert_uncertain_update_references(partial, parameters, prior)
+        self.assertEqual(historical, unrelated.read_bytes())
+
+    def test_same_id_update_preexisting_history_collision_does_not_remove_history(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        prior.parent.mkdir()
+        prior.write_bytes(before)
+        with self.assertRaisesRegex(LifecycleError, "destination-collision"):
+            update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before, prior.read_bytes())
+
+    def test_same_id_update_publication_error_after_write_restores_current(self) -> None:
+        import lifecycle_intents
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        before_mode = self.target.stat().st_mode & 0o777
+        real_write = lifecycle_intents.write_atom_revision
+
+        def write_then_fail(*args):
+            real_write(*args)
+            raise OSError("injected post-publication failure")
+
+        with patch("lifecycle_intents.write_atom_revision", side_effect=write_then_fail):
+            with self.assertRaisesRegex(OSError, "post-publication failure"):
+                update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before_mode, self.target.stat().st_mode & 0o777)
+        self.assertFalse((self.requirements / "archive" / (self.target.stem + "@1.md")).exists())
+
+    def test_same_id_update_history_cleanup_failure_retains_history_after_current_restoration(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        real_unlink = Path.unlink
+
+        def refuse_postwrite_parse(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        def refuse_history_cleanup(path, *args, **kwargs):
+            if path == prior:
+                self.assertEqual(before, self.target.read_bytes())
+                raise PermissionError("owned history cleanup denied")
+            return real_unlink(path, *args, **kwargs)
+
+        with (patch("lifecycle_intents.atom_from_path", side_effect=refuse_postwrite_parse),
+              patch.object(Path, "unlink", autospec=True, side_effect=refuse_history_cleanup)):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self._assert_uncertain_update_references(partial, parameters, prior)
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(before, prior.read_bytes())
+
+    def _assert_uncertain_update_references(self, partial, parameters, prior) -> None:
+        current_ref = self.target.relative_to(self.root).as_posix()
+        history_ref = prior.relative_to(self.root).as_posix()
+        self.assertEqual("update-rollback-uncertain", partial["failure"]["code"])
+        self.assertEqual(parameters["target"], partial["recovery"]["before"])
+        self.assertEqual(current_ref, partial["recovery"]["current"]["path"])
+        self.assertEqual("unknown", partial["recovery"]["current"]["verification"])
+        self.assertFalse(partial["recovery"]["automatic_retry"])
+        self.assertEqual(history_ref, partial["history"]["prior_revision"]["path"])
+        # Match the existing adapter's extraction: only known changed history
+        # is a canonical effect. Unknown current stays in the retained native
+        # packet; it must never be relabeled as a verified changed carrier.
+        changed_refs = {effect["carrier"]["path"] for effect in partial["effects"] if effect["state"] == "changed"}
+        unknown_refs = {effect["carrier"]["path"] for effect in partial["effects"] if effect["state"] == "unknown"}
+        self.assertEqual({history_ref}, changed_refs)
+        self.assertEqual({current_ref}, unknown_refs)
+        retained = json.dumps(partial, sort_keys=True)
+        self.assertIn(current_ref, retained)
+        self.assertIn(history_ref, retained)
+        self.assertIn("injected-postwrite-parse", retained)
+        self.assertNotIn("rollback denied", retained)
+
+    def test_same_id_update_ownership_unverified_history_remains_unknown_and_untouched(self) -> None:
+        parameters = self._semantic_update_parameters()
+        before = self.target.read_bytes()
+        prior = self.requirements / "archive" / (self.target.stem + "@1.md")
+        replacement = b"fixture history altered by another owner\n"
+
+        def alter_history_after_publication(root, path):
+            if path == self.target and self.target.read_bytes() != before:
+                prior.write_bytes(replacement)
+                raise ToolError("injected-postwrite-parse", "post-write parse failed")
+            return atom_from_path(root, path)
+
+        with patch("lifecycle_intents.atom_from_path", side_effect=alter_history_after_publication):
+            partial = update_atom_action(self.root, parameters, execute=True, authorized=True)
+        self.assertEqual("partial", partial["outcome"])
+        self.assertEqual("verify-history-ownership", partial["failure"]["recovery"]["phase"])
+        self.assertEqual("unverified", partial["history"]["prior_revision"]["ownership_verification"])
+        self.assertEqual({"unknown"}, {effect["state"] for effect in partial["effects"]})
+        self.assertEqual(before, self.target.read_bytes())
+        self.assertEqual(replacement, prior.read_bytes())
+
     def _legacy_update(self, *, legacy_status: str | None = None) -> tuple[dict[str, object], bytes]:
         original = self.target.read_text(encoding="utf-8").replace("atom_id: CA-R-100\n", "").replace(
             "status: Active\n", ""
