@@ -15,11 +15,16 @@ from pathlib import Path
 import re
 import secrets
 import socket
+import sys
 import unittest
 from unittest import mock
 from typing import Mapping
 
-from first_cut_http_security import FirstCutHttpSecurityError, probe_first_cut_http_security
+from first_cut_http_security import (
+    FirstCutHttpSecurityError,
+    assert_stale_token_rejected,
+    probe_first_cut_http_security,
+)
 import test_selected_workflows_docker_e2e as selected_harness
 
 
@@ -94,7 +99,7 @@ async def _entered_http_session(client, transport, session_factory):
         session = session_factory(*streams)
         await stack.enter_async_context(session)
         await session.initialize()
-        yield session
+        yield session, transport
 
 
 def _raise_terminal_cancellation(failure: BaseException | None) -> None:
@@ -264,6 +269,46 @@ class FirstCutCorpusTests(unittest.TestCase):
         asyncio.run(check())
         self.assertLess(events.index("http-startup-complete"), events.index("http-stop"), events)
 
+    def test_rotation_restarts_before_stale_session_probe_and_keeps_replacement_secret_private(self) -> None:
+        events = []
+
+        class Runtime:
+            def mcp_http_stop(self):
+                events.append("stop")
+                return {"outcome": "stopped"}
+
+            def mcp_http_status(self):
+                events.append("status")
+                if events.count("status") == 1:
+                    return {"services": [{"Service": "mcp-http", "State": "exited"}]}
+                return {"services": [{"Service": "mcp-http", "State": "running", "Health": "healthy"}]}
+
+            def mcp_http_start(self):
+                events.append("start")
+                return {"url": "http://127.0.0.1:18092/mcp"}
+
+        probes = []
+
+        def stale_probe(url, token, session_id):
+            probes.append((url, token, session_id))
+
+        async def rotate() -> None:
+            harness = FirstCutHttpDockerEndToEnd("test_six_workflows_over_authenticated_http_mcp")
+            with mock.patch.dict(os.environ, {}, clear=False), \
+                    mock.patch.object(sys.modules[__name__].secrets, "token_urlsafe", return_value="token-b"), \
+                    mock.patch.object(sys.modules[__name__], "assert_stale_token_rejected", side_effect=stale_probe):
+                token, task, restarted = await harness._restart_http_with_rotated_token(
+                    Runtime(), port=18092, stale_token="token-a", session_id="session-a",
+                )
+            self.assertTrue(task.done())
+            self.assertEqual("token-b", token)
+            self.assertEqual("http://127.0.0.1:18092/mcp", restarted["url"])
+
+        asyncio.run(rotate())
+        self.assertEqual(["stop", "status", "start", "status"], events)
+        self.assertEqual([("http://127.0.0.1:18092/mcp", "token-a", "session-a")], probes)
+        self.assertNotIn("token-b", json.dumps(events))
+
     def test_loopback_client_ignores_inherited_socks_proxy(self) -> None:
         try:
             import httpx2  # noqa: F401
@@ -359,6 +404,40 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                 return observed
             await asyncio.sleep(0.25)
         self.fail(f"HTTP selected Workflow did not reach a terminal state: {observed}")
+
+    async def _restart_http_with_rotated_token(
+        self,
+        runtime,
+        *,
+        port: int,
+        stale_token: str,
+        session_id: str,
+    ) -> tuple[str, object, dict]:
+        """Explicitly rotate the bearer through service restart, never a live mutation."""
+        stopped = await asyncio.to_thread(runtime.mcp_http_stop)
+        self.assertEqual("stopped", stopped.get("outcome"), stopped)
+        stopped_status = await asyncio.to_thread(runtime.mcp_http_status)
+        self._assert_http_lifecycle_status(
+            stopped_status, stale_token, expected_states={"stopped", "exited"}, expected_health=None,
+        )
+
+        replacement_token = secrets.token_urlsafe(32)
+        os.environ["CAPRMEDIO_MCP_HTTP_SECRET_TOKEN"] = replacement_token
+        os.environ["CAPRMEDIO_MCP_HTTP_PORT"] = str(port)
+        restart_task = asyncio.create_task(asyncio.to_thread(runtime.mcp_http_start))
+        restarted = await asyncio.shield(restart_task)
+        self.assertEqual(f"http://127.0.0.1:{port}/mcp", restarted["url"])
+        running_status = await asyncio.to_thread(runtime.mcp_http_status)
+        self._assert_http_lifecycle_status(
+            running_status, replacement_token, expected_states={"running"}, expected_health="healthy",
+        )
+        await asyncio.to_thread(
+            assert_stale_token_rejected,
+            restarted["url"],
+            stale_token,
+            session_id,
+        )
+        return replacement_token, restart_task, restarted
 
     def _assert_http_lifecycle_status(
         self,
@@ -466,7 +545,7 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     self._assert_http_lifecycle_status(
                         running_status, token, expected_states={"running"}, expected_health="healthy",
                     )
-                    async with self._http_session(started["url"], token) as session:
+                    async with self._http_session(started["url"], token) as (session, transport):
                         names = {tool.name for tool in (await session.list_tools()).tools}
                         self.assertIn(route, names)
                         self.assertIn("workflow_orchestrator", names)
@@ -475,6 +554,7 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                             started["url"],
                             token,
                             list_tools=lambda _url, _token: names,
+                            continuation_session_id=transport.session_id,
                             recording_boundary=lambda: self._assertions._recording_snapshot(root),
                         )
                         request_id = f"first-cut-http-{case_id.lower()}"
@@ -507,6 +587,23 @@ class FirstCutHttpDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                             root, request_id, self._assertions._route_binding(fixture), selected, graph,
                         )
                         self._assertions._assert_route_specific_effects(root, fixture, execute, before, rows)
+                    if case_id == "W01":
+                        self.assertIsInstance(transport.session_id, str)
+                        token, http_startup_task, restarted = await self._restart_http_with_rotated_token(
+                            runtime,
+                            port=port,
+                            stale_token=token,
+                            session_id=transport.session_id,
+                        )
+                        async with self._http_session(restarted["url"], token) as (rotated_session, _transport):
+                            rotated_names = {tool.name for tool in (await rotated_session.list_tools()).tools}
+                            self.assertIn(route, rotated_names)
+                            self.assertIn("workflow_orchestrator", rotated_names)
+                            rotated_status = selected_harness._structured_tool_result(await rotated_session.call_tool(
+                                "workflow_orchestrator", {"request": {"operation": "status", "run_id": request_id}},
+                            ))
+                            self.assertEqual("terminal", rotated_status.get("disposition"), rotated_status)
+                            self.assertEqual("completed", rotated_status.get("outcome"), rotated_status)
                 except (selected_harness.GoldenCorpusError, FirstCutHttpSecurityError) as error:
                     failure = AssertionError(str(error))
                 except asyncio.CancelledError as error:
