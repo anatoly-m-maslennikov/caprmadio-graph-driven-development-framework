@@ -10,14 +10,14 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-08 15:33:32 +0000"
+version: 9
+updated_at: "2026-10-08 15:51:25 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -40,7 +40,7 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ## Details
 
-The approved first-cut frontier is accepted by CA-P-1655@10 and CA-P-1757@4. Current source/code/RMED/O review, native lifecycle/composition/all-role Status checks, six-route Docker/stdio execution, and actual authenticated six-route Docker HTTP execution have passing retained evidence. Canonical Workflow/Action Journal records, non-mutating previews, no-op/failure dispositions, credentials/Host/Origin/session refusal and stdio compatibility are verified within their recorded bounds. W09 uses the explicit golden mock Agent. This Task retains that accepted first-cut evidence, but is not closed while carrier placement remains pending; deferred capabilities and formal Release remain unclaimed.
+The approved first-cut frontier is accepted by CA-P-1655@10 and CA-P-1757@4. Current source/code/RMED/O review, native lifecycle/composition/all-role Status checks, six-route Docker/stdio execution, and actual authenticated six-route Docker HTTP execution have passing retained evidence. Canonical Workflow/Action Journal records, non-mutating previews, no-op/failure dispositions, credentials/Host/Origin/session refusal and stdio compatibility are verified within their recorded bounds. W09 uses the explicit golden mock Agent. The required carrier placement is now verified, so this Task closes that retained first cut without claiming deferred capabilities or formal Release.
 
 Automated Release, Scope mutations, Revert, graph work, standalone query branches and additional recovery hardening are deferred. They are not claimed complete, do not become covered through this closure, and retain their own future acceptance work.
 
@@ -68,6 +68,6 @@ CA-P-1655 is the required review gate for this six-Workflow frontier. This Plan 
 
 This does not claim formal N+1 release, all-sixteen-Workflow coverage, or completion of any deferred branch. The retained full-release, query, Revert, graph, Scope-mutation and recovery requirements above remain future acceptance requirements and cannot be inferred complete from this first usable cut.
 
-### Administrative carrier-placement state
+### Administrative closure
 
-CA-P-1816@2 retains the exact per-route proof collection. After current MCP discovery/context succeeded, the read-only orchestrator queue-status call failed because the Docker worker was unavailable. The Operator explicitly authorized mechanical Git fallback, but the coupled-directory rename was denied by Git; carrier placement is therefore pending and the required parent records remain Active. This authoring operation creates no Workflow/Action Run, Event or production Journal receipt. CA-P-1117@29 lists every unfinished descendant's deferred or excluded disposition; those carrier bytes and statuses are preserved. Installed N and all historical execution/evidence remain unchanged. The accepted source/native/stdout/HTTP matrix is centralized in CA-P-1655@10 rather than copied into a competing authority.
+CA-P-1816@2 retains the exact per-route proof collection. After current MCP discovery/context succeeded, the read-only orchestrator queue-status call failed because the Docker worker was unavailable. The Operator explicitly authorized mechanical Git fallback. The session's coupled-directory rename was denied and its partial file move restored; the Operator then completed the exact bottom-up carrier moves in Terminal. The required records now have verified Done placement and metadata, including this Task. This administrative authoring creates no Workflow/Action Run, Event or production Journal receipt. CA-P-1117@30 lists every unfinished descendant's deferred or excluded disposition; their bytes and statuses are preserved despite the enclosing carrier moves. Installed N and all historical execution/evidence remain unchanged. The accepted source/native/stdout/HTTP matrix is centralized in CA-P-1655@10 rather than copied into a competing authority.

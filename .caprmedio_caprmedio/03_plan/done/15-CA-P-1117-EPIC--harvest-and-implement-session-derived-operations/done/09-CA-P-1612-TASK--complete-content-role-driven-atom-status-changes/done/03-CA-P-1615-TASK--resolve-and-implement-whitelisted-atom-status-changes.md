@@ -11,12 +11,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Resolve and implement whitelisted Atom status changes"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]
 version: 2
-updated_at: "2026-10-08 15:33:32 +0000"
+updated_at: "2026-10-08 15:51:25 +0000"
 relations:
   is_decomposition_of: [CA-P-1612]
   blocks: [CA-P-1616]

@@ -10,14 +10,14 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
 version: 4
-updated_at: "2026-10-08 15:33:32 +0000"
+updated_at: "2026-10-08 15:51:25 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117

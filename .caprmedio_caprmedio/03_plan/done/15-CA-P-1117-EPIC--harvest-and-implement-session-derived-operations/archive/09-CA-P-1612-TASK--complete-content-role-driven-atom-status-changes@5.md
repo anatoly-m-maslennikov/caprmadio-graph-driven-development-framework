@@ -11,7 +11,7 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Complete Content Role driven Atom status changes"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]

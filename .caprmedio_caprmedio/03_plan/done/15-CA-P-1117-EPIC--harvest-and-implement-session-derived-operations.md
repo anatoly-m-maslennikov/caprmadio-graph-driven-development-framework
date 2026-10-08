@@ -11,14 +11,14 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 29
-updated_at: "2026-10-08 15:33:32 +0000"
+version: 30
+updated_at: "2026-10-08 15:51:25 +0000"
 relations: {}
 ---
 # Summary
@@ -325,22 +325,22 @@ The two query source packets are accepted: P1532 accepts the repaired Artifact p
 
 P1510–P1519 bind the test-first implementation packets. P1536 completed Implementation Step-specific input handoff, and P1539 completed native W01–W08 golden inputs with actual disposable-Project adapter effects. P1540's manifest-based repeat visit identities retain one failing real shared-recorder test; P1541 repairs duplicate Workflow definition bindings without weakening the Journal. Implementation Agent startup, governed Revert service startup, compilation approval/correction paths, remaining golden inputs, actual all-route queue/MCP dispatch, and fresh immutable-image execution remain unproven. Original-thirteen implementation continues independently of query source admission. Final coverage and Epic closure require all fifteen Workflows, actual effects and truthful every-Run Journal evidence.
 
-### Accepted first-cut evidence and pending administrative closure
+### Accepted first-cut closure
 
 The approved six-Workflow frontier is complete: Create, Update, Replace, Change Status, Implementation and Build Applicable Methodology. CA-P-1655@10 records the accepted source/code/RMED/O review, native lifecycle/composition and all-role Status proof, six-route Docker/stdio execution and actual authenticated Docker HTTP execution. CA-P-1757@4 records the HTTP boundary; CA-P-1816@2 retains exact actual Run/Journal artifacts and terminal indexes. HTTP passed 14 tests in 118.565 seconds, with six completed Workflow and 18 completed Action terminals. The separate retained stdio index also has six completed Workflow and 18 completed Action terminals. W09 uses the explicit golden mock Agent, not a live LLM.
 
 | Required record | Accepted functional boundary | Administrative Status |
 | --- | --- | --- |
 | CA-P-1511@4, CA-P-1515@2 | Retained native lifecycle and compilation packets, actual integration/image and Journal proof | Done; file-only carriers moved |
-| CA-P-1615@2, CA-P-1612@5 | Source-derived all-role Status behavior, 27 transitions, eight no-ops and eight invalid-status refusals | Active; coupled directory placement blocked |
+| CA-P-1615@2, CA-P-1612@6 | Source-derived all-role Status behavior, 27 transitions, eight no-ops and eight invalid-status refusals | Done; coupled carriers moved |
 | CA-P-1616@1 | Independent all-role Status verification | Done; file-only carrier moved |
 | CA-P-1757@4 | Actual authenticated Docker HTTP protocol/security/lifecycle and stdio compatibility | Done; file-only carrier moved |
-| CA-P-1122@4, CA-P-1123@6 | Required retained implementation and exact-image functional boundaries | Active; coupled directory placement blocked |
+| CA-P-1122@4, CA-P-1123@6 | Required retained implementation and exact-image functional boundaries | Done; coupled carriers moved |
 | CA-P-1655@10 | Independent bounded source-to-code review and recorded complete retained acceptance | Done; file-only carrier moved |
 | CA-P-1816@2 | Actual retained terminal/provenance collection | Done; file-only carrier moved |
-| CA-P-1124@8, CA-P-1117@29 | Accepted first-cut traceability and roll-up evidence | Active; required directory-backed carrier closure pending |
+| CA-P-1124@9, CA-P-1117@30 | Accepted first-cut traceability and roll-up evidence | Done; coupled carriers moved |
 
-The Operator explicitly instructed MCP first, then mechanical Git if it did not work. Current discovery/context was admitted, but the actual read-only orchestrator status call failed with `Docker queue call failed; inspect runtime logs; no native queue fallback`. No closure request was frozen or queued. Git then moved the P1511/P1515 files, but P1615's coupled directory rename failed with `Operation not permitted` after its file moved. That partial file move was restored to its original location and Active Status. The six file-only records listed above now have truthful Done metadata and placement. The six directory-backed records remain Active; no denied directory operation is bypassed. This is partial administrative authoring, not an executed status Workflow: no production Run, Event or Journal receipt is fabricated. The existing test Project Journal receipts remain the actual functional evidence.
+The Operator explicitly instructed MCP first, then mechanical Git if it did not work. Current discovery/context was admitted, but the actual read-only orchestrator status call failed with `Docker queue call failed; inspect runtime logs; no native queue fallback`. No closure request was frozen or queued. Git closed the six file-only records but denied P1615's coupled directory rename after its file moved; that partial move was restored before committing `57ab1da71`. The Operator then ran the exact pinned Terminal handoff. Git records 603 zero-content rename entries for the six coupled pairs and their nested contents. The remaining required records now have verified Done placement and metadata; this Epic closes only the approved first cut. This is administrative authoring, not an executed status Workflow: no production Run, Event or Journal receipt is fabricated. The existing test Project Journal receipts remain the actual functional evidence.
 
 Every remaining unfinished descendant listed below retains its original Status and bytes. These are the remaining broader obligations after the retained slices were accepted, not claims that proven shared support is unimplemented. Original-route/full-image roll-ups and comprehensive optional auditing do not become first-cut requirements through their historical nesting. The one explicitly excluded legacy authoring record remains unfinished but is not reintroduced into the required decomposition.
 
@@ -354,7 +354,7 @@ Every remaining unfinished descendant listed below retains its original Status a
 | Deferred Release Version, full-suite, package/image, recovery and retirement | CA-P-1620, CA-P-1623, CA-P-1643, CA-P-1691, CA-P-1697, CA-P-1707, CA-P-1708, CA-P-1710, CA-P-1712, CA-P-1713, CA-P-1716, CA-P-1717, CA-P-1721, CA-P-1644, CA-P-1624, CA-P-1820, CA-P-1823, CA-P-1828 |
 | Deferred Release source-pin, full Unit/review and additional recovery hardening | CA-P-1773, CA-P-1782, CA-P-1792, CA-P-1794, CA-P-1801, CA-P-1809, CA-P-1810 |
 
-The Operator-selected first cut has accepted functional evidence, but this Epic is not yet closed: the six required directory-backed records above still need permitted coupled carrier moves and final roll-up. Formal Release, all-sixteen coverage, Scope mutations, Revert, standalone queries, graph delivery, additional recovery/full-suite hardening and image retirement remain deferred and unclaimed. Installed N, canonical historical Events, unchanged binding/source authority, unrelated edits and prior failures remain preserved.
+This closes only the Operator-selected first cut. Formal Release, all-sixteen coverage, Scope mutations, Revert, standalone queries, graph delivery, additional recovery/full-suite hardening and image retirement remain deferred and unclaimed. Installed N, canonical historical Events, unchanged binding/source authority, unrelated edits and prior failures remain preserved.
 
 ### Definition of Done
 
