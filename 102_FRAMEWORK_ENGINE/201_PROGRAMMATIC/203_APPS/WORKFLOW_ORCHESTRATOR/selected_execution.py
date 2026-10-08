@@ -321,6 +321,8 @@ class SelectedExecution:
                     if assessment is None:
                         return {"result": "reassessment-required", "terminal_outcome": "interrupted_pending", "effect_refs": []}
                     call["assessment"] = assessment
+                if context["route"] == "create_atom" and "creation_requested_run_id" in context:
+                    return creation_atom(context, action, call)
                 if context["route"] == "replace_atom":
                     return replacement_atom(context, action, call)
                 result = action(self.root, context["parameters"], **call)
@@ -343,6 +345,141 @@ class SelectedExecution:
                     effect_refs = sorted({*effect_refs, prior_revision["path"]})
                 return {"result": result_label, "terminal_outcome": terminal_outcome,
                         "effect_refs": effect_refs, "native_result": result}
+
+            def creation_atom(
+                context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
+            ) -> dict[str, Any]:
+                """Execute O032 once below O128 and preserve its canonical ADD fact.
+
+                The Action result is the sole source for the result Carrier.
+                Any missing or pending Journal append remains a retained partial
+                observation and never creates a second O032 execution.
+                """
+                session = context.get("session")
+                requested_child = context.get("creation_requested_run_id")
+                binding = context.get("creation_action_binding")
+                writer = context.get("creation_result_writer")
+                if (
+                    session is None or not isinstance(requested_child, str) or not requested_child
+                    or not isinstance(binding, Mapping) or not callable(writer)
+                ):
+                    return {"result": "creation-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                try:
+                    author, local_date, timezone, occurred_at = self._creation_journal_context(session)
+                    structural_scope = self._creation_structural_scope(binding)
+                except SelectedExecutionError:
+                    return {"result": "creation-recording-unavailable",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+
+                # This child is the source-bound mutation owner.  Its retained
+                # identity is the only valid recovery surface after an effect.
+                if requested_child in getattr(session, "actual", {}):
+                    return {"result": "creation-recovery-required",
+                            "terminal_outcome": "interrupted_pending", "effect_refs": []}
+                child_actual = session.start_run(requested_child)
+                child_run_id = child_actual["run_id"]
+                result = action(self.root, context["parameters"], **dict(call))
+                if not isinstance(result, Mapping) or not isinstance(result.get("outcome"), str):
+                    raise SelectedExecutionError("creation Action returned an invalid result")
+                result = dict(result)
+                native_outcome = result["outcome"]
+                changed_effects = [
+                    effect for effect in result.get("effects", [])
+                    if isinstance(effect, Mapping) and effect.get("state") == "changed"
+                ] if isinstance(result.get("effects"), list) else []
+                effect_refs = paths(changed_effects)
+                canonical_event: Mapping[str, Any] | None = None
+                recording: Mapping[str, Any] | None = None
+                recording_error: str | None = None
+                if native_outcome == "applied":
+                    try:
+                        canonical_event = self._creation_canonical_event(
+                            parameters=context.get("parameters"), native_result=result,
+                            creation_binding=binding, creation_action_run_id=child_run_id,
+                            execution_request_id=context.get("execution_request_id"), author=author,
+                            occurred_at=occurred_at, structural_scope=structural_scope,
+                        )
+                    except SelectedExecutionError as error:
+                        recording_error = str(error)
+                try:
+                    payload: dict[str, Any] = {
+                        "creation_action_run_id": child_run_id,
+                        "native_result": result,
+                    }
+                    if canonical_event is not None:
+                        payload["canonical_event"] = dict(canonical_event)
+                    if recording_error is not None:
+                        payload["recording_error"] = recording_error
+                    result_ref = writer(payload)
+                    if not isinstance(result_ref, str) or not result_ref:
+                        raise SelectedExecutionError("creation result writer returned an invalid reference")
+                except Exception:
+                    # No durable actual result exists to support a truthful
+                    # recovery; defer to the shared session interruption path.
+                    raise
+
+                if canonical_event is not None:
+                    try:
+                        import selected_creation_journal
+                        selected_creation_journal.preflight_creation(canonical_event)
+                        append_context = selected_creation_journal.seal_creation_append_context(
+                            self.root, canonical_event, author=author,
+                            local_date=local_date, timezone=timezone,
+                        )
+                        recording = selected_creation_journal.record_selected_creation(
+                            self.root, canonical_event=canonical_event,
+                            append_context=append_context,
+                        )
+                    except Exception as error:
+                        # The carrier was already created.  Record only that
+                        # bounded fact; do not re-dispatch the Create Action.
+                        recording_error = type(error).__name__
+
+                child_outcome = {
+                    "applied": "completed", "no-op": "no_op", "duplicate": "no_op",
+                    "failed": "failed", "partial": "partial", "canceled": "cancelled",
+                    "recording-blocked": "interrupted_pending", "blocked": "interrupted_pending",
+                }.get(native_outcome, "interrupted_pending")
+                if native_outcome == "applied" and (
+                    recording_error is not None
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    child_outcome = "partial"
+                if effect_refs:
+                    session.note_effects(child_run_id, result_ref=result_ref, effect_refs=effect_refs)
+                child_receipt = self._finish_selected_run(
+                    session, requested_child, child_run_id, outcome=child_outcome,
+                    result_ref=result_ref, effect_refs=effect_refs,
+                )
+                child_recorded = (
+                    isinstance(child_receipt, Mapping)
+                    and child_receipt.get("run_id") == child_run_id
+                    and child_receipt.get("disposition") == "terminal"
+                    and child_receipt.get("outcome") == "completed"
+                    and child_receipt.get("result_ref") == result_ref
+                    and child_receipt.get("effect_refs") == effect_refs
+                )
+                if native_outcome == "applied" and (
+                    not child_recorded
+                    or not isinstance(recording, Mapping)
+                    or recording.get("state") != "completed"
+                ):
+                    return {
+                        "result": "recording-pending", "terminal_outcome": "partial",
+                        "effect_refs": effect_refs, "native_result": result,
+                        "creation_recording": recording,
+                        "creation_child_receipt": child_receipt,
+                    }
+                return {
+                    "result": {"duplicate": "no-op", "no-op": "no-op"}.get(native_outcome, native_outcome),
+                    "terminal_outcome": child_outcome,
+                    "effect_refs": effect_refs,
+                    "native_result": result,
+                    "creation_recording": recording,
+                    "creation_child_receipt": child_receipt,
+                }
 
             def replacement_atom(
                 context: dict[str, Any], action: Callable[..., Mapping[str, Any]], call: Mapping[str, Any],
@@ -1171,6 +1308,11 @@ class SelectedExecution:
         return f"{requested_action_run_id}:nested:CA-O-051"
 
     @staticmethod
+    def _creation_child_requested_id(requested_action_run_id: str) -> str:
+        """Name the one source-bound O032 invocation below one O128 visit."""
+        return f"{requested_action_run_id}:nested:CA-O-032"
+
+    @staticmethod
     def _replacement_native_binding(graph: Mapping[str, Any]) -> dict[str, Any]:
         """Return the sole admitted O051 binding for a W03 graph.
 
@@ -1189,6 +1331,22 @@ class SelectedExecution:
         required = {"atom_id", "kind", "version", "path", "sha256"}
         if set(binding) != required or binding.get("kind") != "action":
             raise SelectedExecutionError("replacement CA-O-051 Action binding is invalid")
+        return dict(binding)
+
+    @staticmethod
+    def _creation_native_binding(graph: Mapping[str, Any]) -> dict[str, Any]:
+        """Return the sole admitted O032 binding for a W01 graph."""
+        native_calls = graph.get("native_action_calls")
+        if not isinstance(native_calls, list):
+            raise SelectedExecutionError("creation graph has no native Action bindings")
+        matches = [binding for binding in native_calls
+                   if isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"]
+        if len(matches) != 1:
+            raise SelectedExecutionError("creation graph must bind exactly one CA-O-032 Action")
+        binding = matches[0]
+        required = {"atom_id", "kind", "version", "path", "sha256"}
+        if set(binding) != required or binding.get("kind") != "action":
+            raise SelectedExecutionError("creation CA-O-032 Action binding is invalid")
         return dict(binding)
 
     @classmethod
@@ -1246,6 +1404,22 @@ class SelectedExecution:
                             "requested_run_id": cls._replacement_child_requested_id(requested_action_id),
                             "kind": "action",
                             "definition": cls._support_definition(replacement),
+                            "parent_requested_run_id": requested_action_id,
+                        })
+                    if (
+                        graph.get("route") == "create_atom"
+                        and action.get("atom_id") == "CA-O-128"
+                        and isinstance(graph.get("native_action_calls"), list)
+                        and any(
+                            isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"
+                            for binding in graph["native_action_calls"]
+                        )
+                    ):
+                        creation = cls._creation_native_binding(graph)
+                        expected.append({
+                            "requested_run_id": cls._creation_child_requested_id(requested_action_id),
+                            "kind": "action",
+                            "definition": cls._support_definition(creation),
                             "parent_requested_run_id": requested_action_id,
                         })
         return expected
@@ -1451,6 +1625,92 @@ class SelectedExecution:
                 return dict(session.interrupted[requested_id])
             return session.recover_run(run_id, **result)
         return session.finish_run(run_id, **result)
+
+    def _creation_journal_context(self, session: Any) -> tuple[str, str, str, str]:
+        """Bind W01 provenance to the active shared Journal partition."""
+        return self._replacement_journal_context(session)
+
+    def _creation_structural_scope(self, binding: Mapping[str, Any]) -> str:
+        """Read the scope from the exact admitted O032 Action carrier."""
+        path = binding.get("path")
+        digest = binding.get("sha256")
+        if not isinstance(path, str) or not isinstance(digest, str):
+            raise SelectedExecutionError("creation CA-O-032 Action binding is invalid")
+        source = self._safe_path(path)
+        if _sha256(source.read_bytes()) != digest:
+            raise SelectedExecutionError("creation CA-O-032 Action definition changed after admission")
+        scope = _frontmatter(source).get("current_scope_unit")
+        if not isinstance(scope, str) or not scope:
+            raise SelectedExecutionError("creation CA-O-032 Action has no current scope")
+        return scope
+
+    def _creation_canonical_event(
+        self,
+        *,
+        parameters: object,
+        native_result: Mapping[str, Any],
+        creation_binding: Mapping[str, Any],
+        creation_action_run_id: str,
+        execution_request_id: object,
+        author: str,
+        occurred_at: str,
+        structural_scope: str,
+    ) -> dict[str, Any]:
+        """Build a schema-3 ADD event exclusively from W01's observation."""
+        if not isinstance(parameters, Mapping) or not isinstance(execution_request_id, str) or not execution_request_id:
+            raise SelectedExecutionError("creation request identity is invalid")
+        requested = parameters.get("carrier")
+        observed = native_result.get("observed")
+        native_requested = native_result.get("requested")
+        if (
+            not isinstance(requested, Mapping) or not isinstance(native_requested, Mapping)
+            or not isinstance(observed, Mapping)
+        ):
+            raise SelectedExecutionError("creation did not return complete observed provenance")
+        requested_path = requested.get("path")
+        if (
+            canonical_json(dict(native_requested)) != canonical_json(dict(requested))
+            or observed.get("path") != requested_path
+        ):
+            raise SelectedExecutionError("creation observed carrier differs from its admitted input")
+        result_path = observed.get("path")
+        result_filename = observed.get("filename")
+        result_version = observed.get("version")
+        result_digest = observed.get("digest")
+        if (
+            not isinstance(result_path, str) or not result_path or Path(result_path).is_absolute()
+            or ".." in Path(result_path).parts or not isinstance(result_filename, str) or not result_filename
+            or type(result_version) is not int or result_version < 1
+            or not isinstance(result_digest, str) or re.fullmatch(r"[0-9a-f]{64}", result_digest) is None
+            or not isinstance(creation_action_run_id, str) or not creation_action_run_id
+        ):
+            raise SelectedExecutionError("creation returned an invalid observed carrier")
+        try:
+            import work_journal
+        except ImportError as error:
+            raise SelectedExecutionError("canonical Work Journal support is unavailable") from error
+        event = {
+            "schema_version": 3,
+            "event_id": f"selected-creation:{creation_action_run_id}",
+            "action_id": creation_binding["atom_id"],
+            "event": "completed",
+            "kind": "governed_project_change",
+            "subject_kind": "file",
+            "author": author,
+            "occurred_at": occurred_at,
+            "llm_session": {"app": "run-support", "uuid": execution_request_id},
+            "structural_scope": structural_scope,
+            "action_type": "ADD",
+            "sources": [],
+            "result": {
+                "state": "present",
+                "filename": result_filename,
+                "version": result_version,
+                "path": result_path,
+                "sha256": result_digest,
+            },
+        }
+        return work_journal.with_event_digest(event)
 
     def _replacement_prior_result_event(self, parameters: object) -> str:
         """Find the one sealed Journal result for W03's exact predecessor.
@@ -1703,6 +1963,33 @@ class SelectedExecution:
                     "session": session,
                     "requested_action_run_id": requested_action_id,
                 }
+                if (
+                    graph.get("route") == "create_atom"
+                    and action.get("atom_id") == "CA-O-128"
+                    and isinstance(graph.get("native_action_calls"), list)
+                    and any(
+                        isinstance(binding, Mapping) and binding.get("atom_id") == "CA-O-032"
+                        for binding in graph["native_action_calls"]
+                    )
+                ):
+                    creation_binding = self._creation_native_binding(graph)
+                    creation_requested_run_id = self._creation_child_requested_id(requested_action_id)
+                    creation_result_path = (
+                        self.run_directory(run_id) / f"{creation_requested_run_id}.json"
+                    )
+
+                    def write_creation_result(payload: Mapping[str, Any], *, _path: Path = creation_result_path) -> str:
+                        if not isinstance(payload, Mapping):
+                            raise SelectedExecutionError("creation result writer requires an evidence mapping")
+                        self._write(_path, dict(payload))
+                        return _path.relative_to(self.root).as_posix()
+
+                    context.update({
+                        "creation_action_binding": creation_binding,
+                        "creation_requested_run_id": creation_requested_run_id,
+                        "creation_result_writer": write_creation_result,
+                        "execution_request_id": request["execution"].get("request_id"),
+                    })
                 if (graph.get("route") == "replace_atom"
                         and action.get("atom_id") == "CA-O-128"):
                     replacement_binding = self._replacement_native_binding(graph)
