@@ -17,7 +17,7 @@ subjects:
     - "Operations"
     - "Implementation"
 version: 6
-updated_at: "2026-10-08 00:11:25 +0000"
+updated_at: "2026-10-08 15:33:32 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117

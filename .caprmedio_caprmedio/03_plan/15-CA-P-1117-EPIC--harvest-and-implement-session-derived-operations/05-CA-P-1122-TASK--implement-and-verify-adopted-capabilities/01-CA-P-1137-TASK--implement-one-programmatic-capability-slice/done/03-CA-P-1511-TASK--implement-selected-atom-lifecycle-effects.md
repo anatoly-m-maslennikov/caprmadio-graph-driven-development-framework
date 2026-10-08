@@ -10,12 +10,12 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Done
 subjects:
   governs: "Selected Workflow implementation delivery"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
-version: 3
-updated_at: "2026-10-04 23:53:29 +0400"
+version: 4
+updated_at: "2026-10-08 15:33:32 +0000"
 relations:
   is_decomposition_of: [CA-P-1137]
   blocks: [CA-P-1123, CA-P-1164, CA-P-1165, CA-P-1166]
@@ -99,9 +99,14 @@ Changed paths: `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/atom_operations.
 `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/REPLACE_ATOM/replace_atom.py`,
 and `102_FRAMEWORK_ENGINE/201_PROGRAMMATIC/201_TOOLS/tests/test_selected_atom_lifecycle.py`.
 
-This Plan remains Active. The route-local packet is saved and its bounded
-golden cases pass, but it is not itself the source-bound CA-D-527 executor.
+At the 2026-10-04 checkpoint this Plan remained Active. The route-local
+packet was saved and its bounded golden cases passed, but shared execution
+and current-image proof were then pending.
 P1510 must wire these action callables into the shared seal/receipt service;
 its run identities, durable Journal evidence, recording-pending handling,
 retry behavior, post-effect verification/recording fault injection, and the
 cross-route MCP/fresh-image Docker proof remain outside this Plan's ownership.
+
+### Accepted retained-scope closure
+
+the current first-cut lifecycle implementation, rollback/partial and composition evidence is accepted in CA-P-1655@10. W01-W04 also passed actual selected Docker/stdio and authenticated Docker HTTP execution, with native effects and canonical Workflow/Action Journal records. This satisfies this native lifecycle packet's previously pending retained-scope integration. Broader original-route and formal Release obligations remain deferred, not claimed complete. The Operator-authorized administrative Git closure follows a failed read-only MCP queue-status attempt; it dispatches no closure Run or Event.

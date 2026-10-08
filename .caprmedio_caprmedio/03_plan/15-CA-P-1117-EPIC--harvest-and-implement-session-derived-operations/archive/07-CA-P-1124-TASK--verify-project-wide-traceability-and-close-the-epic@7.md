@@ -10,14 +10,14 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Archived
 subjects:
   governs: "Session-derived operational capability delivery"
   depends_on:
     - "Operations"
     - "Implementation"
-version: 8
-updated_at: "2026-10-08 15:33:32 +0000"
+version: 7
+updated_at: "2026-10-08 00:11:25 +0000"
 relations:
   is_decomposition_of:
     - CA-P-1117
@@ -40,7 +40,7 @@ Before marking this task Done, verify full-stage coverage and update the next de
 
 ## Details
 
-The approved first-cut frontier is accepted by CA-P-1655@10 and CA-P-1757@4. Current source/code/RMED/O review, native lifecycle/composition/all-role Status checks, six-route Docker/stdio execution, and actual authenticated six-route Docker HTTP execution have passing retained evidence. Canonical Workflow/Action Journal records, non-mutating previews, no-op/failure dispositions, credentials/Host/Origin/session refusal and stdio compatibility are verified within their recorded bounds. W09 uses the explicit golden mock Agent. This Task retains that accepted first-cut evidence, but is not closed while carrier placement remains pending; deferred capabilities and formal Release remain unclaimed.
+This revision narrows the closure scope to the approved first cut; it records no completed acceptance or closure. CA-P-1655v3 remains an Active bounded code-versus-RMED/O review. Once the retained requirements and actual evidence pass, this Task may close the amended CA-P-1117 without claiming its deferred capabilities complete. Required functional evidence covers success, no-op and relevant failure Journal dispositions; Docker HTTP MCP authentication, initialize/list/call/health/lifecycle; invalid credential, Host and Origin refusal; and preserved stdio compatibility.
 
 Automated Release, Scope mutations, Revert, graph work, standalone query branches and additional recovery hardening are deferred. They are not claimed complete, do not become covered through this closure, and retain their own future acceptance work.
 
@@ -54,20 +54,16 @@ Release closure requires the full declared test-suite results, actual package/in
 
 The release Run freezes executing N's implementation, Methodology and definitions independently of candidate N+1's sources/package. N builds and tests the candidate without changing its own running graph. Promote N+1 only after required gates pass, retaining N as working runtime/rollback until then; do not use recursive release invocation as first-cut proof. After successful verification, exact prior-image retirement must verify no container or required rollback reference still needs it; protected or pending retirement is not reported performed. No force removal or broad pruning.
 
-The earlier fifteen-route evidence remains historical proof with its exact source/image/Run bounds. Current sixteen-route source admission is preserved, but only the six retained routes and used support paths are accepted by this closure. Independent full-release and all-route coverage remains required when that deferred milestone is selected; no additional runtime pass is inferred.
+The existing fifteen-route manifest/admission remains valid for its accepted closed scope until independent additive source/route acceptance. Preserve original fifteen-route evidence with its exact source/image/Run bounds; later source or Engine changes and this sixteenth capability require their own current proof. Independent release source/implementation/functional coverage dispositions must be available before final stage/Epic acceptance; this amendment supplies no runtime pass.
 
-### Preserved historical dispositions and predecessor
+### Preserved blocking dispositions and predecessor
 
-CA-C-447/CA-P-1549's denied relocation and CA-C-449's earlier unavailable test environment remain historical evidence. Broader structural relocation is outside this first cut; Applicable Methodology keeps the Operator-selected existing location. The permitted actual Terminal HTTP proof now satisfies the retained Docker/MCP boundary without any permission bypass. Preserve partial moves, byte proofs, original links and failed receipts. No denied relocation, stale-worker substitution, build-only pass or formal Release completion is authorized.
+CA-C-447/CA-P-1549's denied role-directory relocation and CA-C-449's unavailable host Docker/MCP test environment remain active blockers where required. Preserve completed partial moves, byte proofs, original links and retained failed-environment evidence; no denied retry, alternate relocation, rebasing, environment-permission bypass, stale-worker substitute or build-only completion is authorized. These are distinct from excluded harvest/legacy administrative work and cannot be silently made nonblocking by adding Release Version.
 
-Exact committed P1124v4 predecessor from `0ca6fcf2b9a4d44a96e3661d0a389dc9a700eff7` is preserved byte-for-byte at `archive/07-CA-P-1124-TASK--verify-project-wide-traceability-and-close-the-epic@4.md`. Identity, Summary, decomposition and all existing query/exclusion gates are preserved. That predecessor's historical disposition is preserved; the accepted retained-scope closure below supersedes only this current record.
+Exact committed P1124v4 predecessor from `0ca6fcf2b9a4d44a96e3661d0a389dc9a700eff7` is preserved byte-for-byte at `archive/07-CA-P-1124-TASK--verify-project-wide-traceability-and-close-the-epic@4.md`. Identity, Summary, decomposition and all existing query/exclusion gates are preserved. Status remains Active; root retains Task result recording, independent closure and dependent bindings.
 
 ### Definition of Done
 
-CA-P-1655 is the required review gate for this six-Workflow frontier. This Plan may be Done only after its source/code/RMED/O, stdio MCP/orchestrator/Journal, and Docker HTTP MCP evidence is recorded with honest success, no-op and failure dispositions; this scope-only amendment establishes none of that evidence.
+CA-P-1655v3 is the required review gate for this six-Workflow frontier. This Plan may be Done only after its source/code/RMED/O, stdio MCP/orchestrator/Journal, and Docker HTTP MCP evidence is recorded with honest success, no-op and failure dispositions; this scope-only amendment establishes none of that evidence.
 
 This does not claim formal N+1 release, all-sixteen-Workflow coverage, or completion of any deferred branch. The retained full-release, query, Revert, graph, Scope-mutation and recovery requirements above remain future acceptance requirements and cannot be inferred complete from this first usable cut.
-
-### Administrative carrier-placement state
-
-CA-P-1816@2 retains the exact per-route proof collection. After current MCP discovery/context succeeded, the read-only orchestrator queue-status call failed because the Docker worker was unavailable. The Operator explicitly authorized mechanical Git fallback, but the coupled-directory rename was denied by Git; carrier placement is therefore pending and the required parent records remain Active. This authoring operation creates no Workflow/Action Run, Event or production Journal receipt. CA-P-1117@29 lists every unfinished descendant's deferred or excluded disposition; those carrier bytes and statuses are preserved. Installed N and all historical execution/evidence remain unchanged. The accepted source/native/stdout/HTTP matrix is centralized in CA-P-1655@10 rather than copied into a competing authority.

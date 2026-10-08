@@ -10,7 +10,7 @@ local_tier: Standard
 global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
-status: Active
+status: Archived
 subjects:
   governs: "Selected Workflow implementation delivery"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]

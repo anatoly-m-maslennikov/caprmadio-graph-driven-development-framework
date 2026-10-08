@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 9
-updated_at: "2026-10-08 14:57:41 +0000"
+version: 10
+updated_at: "2026-10-08 15:33:32 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -100,11 +100,11 @@ the Operator's corrected Terminal proof `http-5fab36806-terminal-omm68ywL/full.l
 
 the retained actual fixture artifacts are under `http-5fab36806-terminal-omm68ywL/selected-workflows-docker-e2e/`. The deterministic terminal index `http-workflow-receipts.json`, SHA-256 `adb7d7f0b08be0f58ec97afaebb1a4ae8c0d6d9f4350c8d4c49e282df71b7818`, verifies six completed Workflow terminals and 18 completed Action terminals with source pins, event identities/digests, parent lineage and retained result/effect references. The independent read-only reviewer accepts this actual HTTP boundary. W09 used the explicit golden mock Agent, not a live LLM; these are disposable proof Runs, not production Runs. This is not an all-Status-over-HTTP test, formal Release, promotion or installed-N claim.
 
-### Remaining record closure
+### Administrative record closure
 
-the required actual Docker HTTP proof is now accepted from the Operator's permitted Terminal, not from a permission bypass or a synthetic substitute. Together with the accepted source review, stdio, all-role Status and composition receipts, this satisfies the retained first-cut functional acceptance frontier. Installed N, historical failed receipts and deferred work remain unchanged. This Task and Epic still have Active metadata until their separate record-closure operation is authorized and completed.
+the required actual Docker HTTP proof is now accepted from the Operator's permitted Terminal, not from a permission bypass or a synthetic substitute. Together with the accepted source review, stdio, all-role Status and composition receipts, this satisfies the retained first-cut functional acceptance frontier. Installed N, historical failed receipts and deferred work remain unchanged. The Operator explicitly authorized attempting MCP first, then mechanical Git closure if it failed. This review record is closed administratively from the accepted evidence; the Epic closes only after its retained required records and explicit deferred dispositions are saved.
 
-the Project's Docker worker is not running. Its saved transport marker alone does not prove availability. No closure Run has been queued; the admitted P1615 preview is not execution or completion. The Operator has been asked whether to close the verified records mechanically with Git, explicitly as administrative authoring rather than an MCP Run, or supply authentication input for governed live closure. Neither option is assumed approved by the successful test receipt alone.
+the Project's Docker worker is not running. Current MCP discovery/context succeeded, but the actual read-only orchestrator status call returned `Docker queue call failed; inspect runtime logs; no native queue fallback`. No closure Run was frozen or queued. The admitted P1615 preview is not execution or completion. The Operator's explicit MCP-first/Git-fallback instruction authorizes this administrative source closure; no production status Run, Event or Journal receipt is fabricated.
 
 
 ## Definition of Done

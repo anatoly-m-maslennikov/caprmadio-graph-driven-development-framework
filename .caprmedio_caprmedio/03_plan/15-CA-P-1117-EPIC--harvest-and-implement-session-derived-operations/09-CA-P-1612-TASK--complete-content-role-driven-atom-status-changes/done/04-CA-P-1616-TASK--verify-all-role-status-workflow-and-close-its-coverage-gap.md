@@ -11,12 +11,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Done
 subjects:
   governs: "Verify all role status Workflow and close its coverage gap"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]
 version: 1
-updated_at: "2026-10-05 01:04:37 +0000"
+updated_at: "2026-10-08 15:33:32 +0000"
 relations:
   is_decomposition_of: [CA-P-1612]
   blocks: [CA-P-1519, CA-P-1123, CA-P-1124]

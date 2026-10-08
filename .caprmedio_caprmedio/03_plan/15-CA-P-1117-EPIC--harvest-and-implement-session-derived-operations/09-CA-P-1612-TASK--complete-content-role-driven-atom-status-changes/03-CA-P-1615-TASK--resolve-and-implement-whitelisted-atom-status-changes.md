@@ -16,7 +16,7 @@ subjects:
   governs: "Resolve and implement whitelisted Atom status changes"
   depends_on: [Atom, Content Role, Status, Carrier, Workflow, Action, Tool, Journal]
 version: 2
-updated_at: "2026-10-05 02:37:23 +0000"
+updated_at: "2026-10-08 15:33:32 +0000"
 relations:
   is_decomposition_of: [CA-P-1612]
   blocks: [CA-P-1616]

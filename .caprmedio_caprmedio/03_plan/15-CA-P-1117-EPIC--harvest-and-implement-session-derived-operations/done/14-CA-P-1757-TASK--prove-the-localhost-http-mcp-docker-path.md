@@ -10,9 +10,9 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
-version: 3
-updated_at: "2026-10-08 14:57:41 +0000"
+status: Done
+version: 4
+updated_at: "2026-10-08 15:33:32 +0000"
 subjects:
   governs: "Prove the localhost HTTP MCP Docker path"
   depends_on: [Implementation, Workflow, Action, Evaluation, Journal]
@@ -46,7 +46,7 @@ all six retained Workflows completed over authenticated HTTP with native-effect 
 
 the deterministic `.caprmedio_tmp/epic-first-cut-20261008/http-workflow-receipts.json`, SHA-256 `adb7d7f0b08be0f58ec97afaebb1a4ae8c0d6d9f4350c8d4c49e282df71b7818`, verifies six actual completed Workflow terminals and 18 completed Action terminals, their frozen definitions, event digests, parent lineage and retained result/effect references. W09 uses the explicit golden mock Agent, not a live LLM. The independent read-only acceptance confirms the required first-cut HTTP boundary, not formal Release or installed-runtime promotion. The original failed reports are retained.
 
-functional work is accepted. Active metadata remains until the separate authorized administrative or governed closure occurs; no production closure Run or Journal receipt is invented.
+functional work is accepted. The Operator explicitly authorized Git fallback after MCP failure. Its read-only queue-status call failed because the Docker worker was unavailable, so this record is closed administratively. No production closure Run, Event or Journal receipt is invented; the actual disposable HTTP Run receipts remain the functional evidence.
 
 ## Pre-execution review
 
