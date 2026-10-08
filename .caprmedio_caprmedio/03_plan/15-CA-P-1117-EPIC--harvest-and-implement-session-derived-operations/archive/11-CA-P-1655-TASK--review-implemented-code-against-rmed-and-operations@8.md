@@ -10,12 +10,12 @@ global_tier: 2
 author: Anatoly Maslennikov
 assignee: AI Agent
 autonomous_confidence_threshold: 90
-status: Active
+status: Archived
 subjects:
   governs: "Epic implementation alignment"
   depends_on: [Implementation, Requirement, Method, Evaluation, Delivery, Operations, Workflow, Action, Tool]
-version: 9
-updated_at: "2026-10-08 14:57:41 +0000"
+version: 8
+updated_at: "2026-10-08 13:58:30 +0000"
 relations:
   is_decomposition_of: [CA-P-1117]
   blocks: [CA-P-1124]
@@ -94,17 +94,11 @@ Commit `9dea0a672` corrects only that host harness. It observes the actual serve
 
 the candidate image remains exactly `sha256:75759a40209b4f2ab9adae212d1f3d8f771bb252a986bcdd5d24dead90bb9cb9`. No runtime implementation, D572 private pin, selected binding or installed N changed. The corrected host harness has separately recorded provenance and differs from the historical test copy baked into that image; no aggregate byte-identity claim is made. The same Terminal script is ready to collect a fresh retained actual HTTP receipt using this repaired host harness.
 
-### Accepted actual HTTP functional evidence
+### Remaining acceptance blocker
 
-the Operator's corrected Terminal proof `http-5fab36806-terminal-omm68ywL/full.log` passed all 14 tests in 118.565 seconds, with no skips. Its SHA-256 is `4f157a1e8985d837aa91d10f759735d8600e29753ecdc1d95bdc2b9141da2e1b`. The actual six cases completed authenticated initialize/list/call, non-mutating previews, native effects and shared Workflow/Step/Action Journal checks. Invalid credentials, Host, Origin, denied reload calls and invalid-token session continuation were refused without changing recording state. Healthy loopback startup and stop/status cleanup passed; W01 token rotation rejected the former bearer/session and allowed the replacement session. The same candidate's W01 stdio context check passed, alongside the separate accepted six-route stdio receipts above.
+actual Docker localhost HTTP proof remains unaccepted: this session's direct host loopback connection is denied by its permission profile. Synthetic authentication / Host / Origin / token-rotation / lifecycle checks and actual Docker port metadata do not substitute for that proof. `.caprmedio_tmp/epic-first-cut-20261008/run-http-proof.sh` targets the current `5fab36806` image above, uses a fresh retained directory and report on each invocation, and is ready for the Operator's Terminal. This Task and Epic closure remain Active until that actual proof is received. Installed N, historical failed receipts and deferred work are preserved.
 
-the retained actual fixture artifacts are under `http-5fab36806-terminal-omm68ywL/selected-workflows-docker-e2e/`. The deterministic terminal index `http-workflow-receipts.json`, SHA-256 `adb7d7f0b08be0f58ec97afaebb1a4ae8c0d6d9f4350c8d4c49e282df71b7818`, verifies six completed Workflow terminals and 18 completed Action terminals with source pins, event identities/digests, parent lineage and retained result/effect references. The independent read-only reviewer accepts this actual HTTP boundary. W09 used the explicit golden mock Agent, not a live LLM; these are disposable proof Runs, not production Runs. This is not an all-Status-over-HTTP test, formal Release, promotion or installed-N claim.
-
-### Remaining record closure
-
-the required actual Docker HTTP proof is now accepted from the Operator's permitted Terminal, not from a permission bypass or a synthetic substitute. Together with the accepted source review, stdio, all-role Status and composition receipts, this satisfies the retained first-cut functional acceptance frontier. Installed N, historical failed receipts and deferred work remain unchanged. This Task and Epic still have Active metadata until their separate record-closure operation is authorized and completed.
-
-the Project's Docker worker is not running. Its saved transport marker alone does not prove availability. No closure Run has been queued; the admitted P1615 preview is not execution or completion. The Operator has been asked whether to close the verified records mechanically with Git, explicitly as administrative authoring rather than an MCP Run, or supply authentication input for governed live closure. Neither option is assumed approved by the successful test receipt alone.
+the independently accepted Status implementation Plans remain eligible for closure, but the Project's Docker worker is not running. Its saved transport marker alone does not prove availability. No closure Run has been queued; the admitted P1615 preview is not execution or completion.
 
 
 ## Definition of Done
