@@ -202,9 +202,11 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
 
     async def _execute_status_case(
         self, runtime: Runtime, root: Path, fixture: GoldenProject, path: Path,
-        status: str, request_id: str,
+        status: str, request_id: str, *, expected_outcome: str = "completed",
     ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         """Exercise W04 through preview, selected enqueue, and reconnect status."""
+        if expected_outcome not in {"completed", "no_op"}:
+            raise AssertionError(f"unsupported W04 expected terminal outcome: {expected_outcome!r}")
         preview = await self._call(
             runtime, root, fixture.case.route,
             fixture.request_for_status(path, status, request_id=request_id),
@@ -221,12 +223,17 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertIn(admitted.get("outcome"), {"queued", "admitted", "started", "running", "pending", "completed"}, admitted)
         terminal = await self._terminal_status(runtime, root, request_id)
         self.assertEqual("terminal", terminal.get("disposition"), terminal)
-        self.assertEqual("completed", terminal.get("outcome"), terminal)
+        self.assertEqual(expected_outcome, terminal.get("outcome"), terminal)
         selected = terminal.get("selected_result")
         self.assertIsInstance(selected, dict, terminal)
         graph = self._graph_result(root, request_id)
-        rows = self._assert_graph_path_and_native_results(root, fixture, request_id, graph)
-        self._assert_shared_run_journal(root, request_id, self._route_binding(fixture), selected, graph)
+        rows = self._assert_graph_path_and_native_results(
+            root, fixture, request_id, graph, expected_outcome=expected_outcome,
+        )
+        self._assert_shared_run_journal(
+            root, request_id, self._route_binding(fixture), selected, graph,
+            expected_outcome=expected_outcome,
+        )
         native = self._action_progress(root, request_id, rows[-1]["action_run_id"]).get("native_result")
         self.assertIsInstance(native, dict, native)
         return native, graph, selected
@@ -283,6 +290,8 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         route: Mapping[str, Any],
         selected: Mapping[str, Any],
         graph: Mapping[str, Any],
+        *,
+        expected_outcome: str = "completed",
     ) -> None:
         """Bind J01--J08 to actual per-Run records, never marker presence."""
         rows = graph.get("step_results")
@@ -336,15 +345,15 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         self.assertIsInstance(terminals, list, selected)
         workflow_terminals = [row for row in terminals if row.get("run_id") == request_id]
         self.assertEqual(1, len(workflow_terminals), terminals)
-        self.assertEqual("completed", workflow_terminals[0].get("outcome"), workflow_terminals[0])
+        self.assertEqual(expected_outcome, workflow_terminals[0].get("outcome"), workflow_terminals[0])
         self.assertEqual(expected_run_ids, selected.get("run_ids"), selected)
         self.assertEqual(len(expected_run_ids), len(terminals), terminals)
         terminal_by_run_id = {row.get("run_id"): row for row in terminals}
         self.assertEqual(set(expected_run_ids), set(terminal_by_run_id), terminals)
 
         # J02/J03: every actual Workflow/Step/Action has exactly one start and
-        # one successful terminal fact.  Interrupted/failed facts cannot be a
-        # happy-path substitute.
+        # one clean terminal fact with the requested outcome.
+        # Interrupted/failed facts cannot substitute for it.
         events = [
             event for event in self._events(root)
             if event.get("schema_version") == 5 and event.get("kind") == "workflow_execution"
@@ -358,7 +367,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
             facts = [event for event in events if event.get("run", {}).get("run_id") == run_id]
             self.assertEqual(["started", "completed"], [event.get("event") for event in facts], facts)
             self.assertIsNone(facts[0].get("outcome"), facts[0])
-            self.assertEqual("completed", facts[1].get("outcome"), facts[1])
+            self.assertEqual(expected_outcome, facts[1].get("outcome"), facts[1])
 
             # J04/J05: source-bound definition and parent identities on both
             # facts must match the frozen manifest, not merely a similarly named Run.
@@ -395,7 +404,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         for run_id in expected_run_ids:
             terminal = terminal_by_run_id[run_id]
             self.assertEqual("terminal", terminal.get("disposition"), terminal)
-            self.assertEqual("completed", terminal.get("outcome"), terminal)
+            self.assertEqual(expected_outcome, terminal.get("outcome"), terminal)
             self._safe_existing_ref(root, terminal.get("result_ref"), label="terminal result")
             effects = terminal.get("effect_refs")
             self.assertIsInstance(effects, list, terminal)
@@ -408,9 +417,11 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
         fixture: GoldenProject,
         request_id: str,
         graph: Mapping[str, Any],
+        *,
+        expected_outcome: str = "completed",
     ) -> list[dict[str, Any]]:
         route = self._route_binding(fixture)
-        self.assertEqual("completed", graph.get("outcome"), graph)
+        self.assertEqual(expected_outcome, graph.get("outcome"), graph)
         self.assertEqual(request_id, graph.get("workflow_run_id"), graph)
         self.assertEqual(route["workflow"]["atom_id"], graph.get("workflow_definition_id"), graph)
         rows = graph.get("step_results")
@@ -694,6 +705,7 @@ class SelectedWorkflowsDockerEndToEnd(unittest.IsolatedAsyncioTestCase):
                     assert final_observed is not None and final_status is not None
                     noop, _graph, _selected = await self._execute_status_case(
                         runtime, root, fixture, final_observed, final_status, f"p1616-{role.lower()}-noop",
+                        expected_outcome="no_op",
                     )
                     self.assertEqual("no-op", noop.get("outcome"), noop)
                     self.assertTrue(all(effect.get("state") == "unchanged" for effect in noop.get("effects", [])), noop)
