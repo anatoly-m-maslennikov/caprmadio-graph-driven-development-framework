@@ -666,7 +666,7 @@ def _status_destination(root: Path, atom: Atom, status: str) -> str:
         if status in folders:
             target = local / folders[status] / atom.filename if folders[status] else local / atom.filename
             return target.relative_to(root).as_posix()
-    if status == "Active":
+    if status.casefold() == "active":
         target = role / atom.filename
     else:
         folder = status.casefold()

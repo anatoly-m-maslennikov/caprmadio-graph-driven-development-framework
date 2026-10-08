@@ -74,6 +74,14 @@ class ProposedReferenceInventoryTest(unittest.TestCase):
         self.assertEqual("CA-O-001", target.metadata["atom_id"])
         self.assertEqual((), result.plan_parent_closure)
 
+    def test_direct_target_accepts_canonical_lowercase_active_without_rewriting(self) -> None:
+        self._carrier("authority/lower-active.md", "CA-O-001A", status="active")
+
+        result = inventory_proposed_references(self.root, self.structure, ["CA-O-001A"])
+
+        self.assertEqual("active", result.direct_targets[0].status)
+        self.assertEqual("active", result.direct_targets[0].metadata["status"])
+
     def test_named_nonactive_archive_refuses_instead_of_satisfying_target(self) -> None:
         self._carrier("authority/archive/old.md", "CA-O-002", status="Done")
 

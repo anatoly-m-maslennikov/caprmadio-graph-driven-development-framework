@@ -97,6 +97,48 @@ class SelectedW04FixtureTests(unittest.TestCase):
         self.assertEqual(outcome["outcome"], "applied")
         self.assertEqual(outcome["prior_status"], "Archived")
 
+    def test_resolved_concern_moves_to_lowercase_active_under_parent_scope(self) -> None:
+        fixture = self._fixture()
+        source = fixture.status_atom("Concern", "resolved", number=8200)
+        outcome = change_status_atom_action(
+            fixture.root,
+            {"target": fixture._descriptor(source.relative_to(fixture.root).as_posix()), "status": "active"},
+            execute=True,
+            authorized=True,
+        )
+        self.assertEqual("applied", outcome["outcome"])
+        observed = outcome["observed"]
+        self.assertEqual("active", observed["status"])
+        self.assertEqual(
+            ".caprmedio_caprmedio/PARENT/01_concern/CA-C-8200--docker-status.md",
+            observed["path"],
+        )
+
+    def test_every_source_admitted_status_has_a_native_transition(self) -> None:
+        fixture = self._fixture()
+        number = 8300
+        for role, _letter, _directory, source_id, statuses in STATUS_DOMAINS:
+            for requested in statuses:
+                with self.subTest(role=role, requested_status=requested):
+                    current = next(
+                        status for status in statuses
+                        if status != requested and status.casefold() != "draft"
+                    )
+                    source = fixture.status_atom(role, current, number=number)
+                    number += 1
+                    outcome = change_status_atom_action(
+                        fixture.root,
+                        {"target": fixture._descriptor(source.relative_to(fixture.root).as_posix()), "status": requested},
+                        execute=True,
+                        authorized=True,
+                    )
+                    self.assertEqual("applied", outcome["outcome"])
+                    model = outcome["status_model"]
+                    self.assertEqual(list(statuses), model["statuses"])
+                    self.assertEqual(requested, model["requested_status"])
+                    self.assertEqual(source_id, model["model_sources"][0]["atom_id"])
+                    self.assertEqual(requested, outcome["observed"]["status"])
+
 
 if __name__ == "__main__":
     unittest.main()

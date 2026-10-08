@@ -112,6 +112,11 @@ def _is_archive(path: Path, root: Path) -> bool:
     return any(part.lower() == "archive" for part in path.relative_to(root).parts)
 
 
+def _is_active_status(status: str) -> bool:
+    """Accept the two source-admitted logical Active spellings without rewriting it."""
+    return status in {"Active", "active"}
+
+
 def _parent_id(metadata: Mapping[str, Any]) -> str | None:
     relations = metadata.get("relations", {})
     if not isinstance(relations, Mapping):
@@ -191,7 +196,7 @@ def inventory_proposed_references(
         item = _carrier(reader, root, path)
         if item is None or item.atom_id not in requested:
             continue
-        if _is_archive(path, root) or item.status != "Active":
+        if _is_archive(path, root) or not _is_active_status(item.status):
             inactive.add(item.atom_id)
             continue
         if item.atom_id in active:
@@ -226,7 +231,11 @@ def inventory_proposed_references(
                             item = _carrier(reader, root, path)
                             if item is not None and item.atom_id == parent:
                                 matches.append((path, item))
-                        admitted = [(path, item) for path, item in matches if not _is_archive(path, root) and item.status == "Active"]
+                        admitted = [
+                            (path, item)
+                            for path, item in matches
+                            if not _is_archive(path, root) and _is_active_status(item.status)
+                        ]
                         if len(admitted) != 1:
                             raise ProposedReferenceError("Plan parent is missing, inactive, or ambiguous")
                         active[parent] = admitted[0][1]

@@ -113,6 +113,15 @@ def validate_proposed_carrier(
     selected = tuple(item for item in verified_source_context.authority.obligations if item.code in _CODES)
     if {item.code for item in selected} != _CODES or any(not item.supported for item in selected):
         raise ProposedCarrierError("complete-carrier authority is unsupported or incomplete")
+    try:
+        status_model = resolve_status_model(
+            verified_source_context.root, metadata, metadata.get("status")
+        )
+    except StatusModelError as error:
+        raise ProposedCarrierError("status model is missing, ambiguous, or unadmitted") from error
+    domains = dict(verified_source_context.authority.domains)
+    if metadata.get("content_role") == "Concern":
+        domains["domain.status.concern"] = tuple(status_model["statuses"])
     context = AuthorityContext(
         bindings=verified_source_context.authority.bindings,
         required=len(selected),
@@ -120,7 +129,7 @@ def validate_proposed_carrier(
         unsupported=0,
         gaps=[],
         obligations=selected,
-        domains=verified_source_context.authority.domains,
+        domains=domains,
         unclassified_sources=False,
     )
     relations = metadata.get("relations", {})
@@ -199,17 +208,13 @@ def validate_proposed_carrier(
             adapter(metadata, body, check)
             if check.findings or check.gaps:
                 raise ProposedCarrierError("relation or Plan decomposition admission failed or is unresolved")
-    try:
-        resolve_status_model(verified_source_context.root, metadata, metadata.get("status"))
-    except StatusModelError as error:
-        raise ProposedCarrierError("status model is missing, ambiguous, or unadmitted") from error
     role = metadata.get("content_role")
     status = metadata.get("status")
     names = {part.lower() for part in relative_path.parts[:-1]}
     source = next((row for row in verified_source_context.inputs["sources"] if row["binding"]["atom_id"] == "CA-D-324"), None)
     if source is None or not isinstance(role, str):
         raise ProposedCarrierError("role-directory authority is unavailable")
-    mapping = dict(re.findall(r"- ([A-Za-z]+): `([0-9]{2}_[a-z_]+)/`;", source["text"]))
+    mapping = dict(re.findall(r"- ([A-Za-z]+): `([0-9]{2}_[a-z_]+)/`[;.]", source["text"]))
     expected_role_directory = mapping.get(role)
     if expected_role_directory is None or expected_role_directory not in names:
         raise ProposedCarrierError("carrier path disagrees with its carried content role")
@@ -222,7 +227,10 @@ def validate_proposed_carrier(
     project_relative_path = Path(".caprmedio_caprmedio") / relative_path
     if not project_relative_path.is_relative_to(authority_path):
         raise ProposedCarrierError("carrier path is outside its carried owner authority")
-    expected_status_directory = "" if status == "Active" else status.lower() if isinstance(status, str) else None
+    expected_status_directory = (
+        "" if isinstance(status, str) and status.casefold() == "active"
+        else status.lower() if isinstance(status, str) else None
+    )
     if role == "Plan":
         if plan_source is None:
             raise ProposedCarrierError("Plan placement authority is unavailable")
